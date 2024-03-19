@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm
 
         private static readonly System.Collections.ObjectModel.ReadOnlyDictionary<string, TypeSpecifier> EmptyInferences = new(new Dictionary<string, TypeSpecifier>());
 
-        internal SignatureMatchResult MatchSignature(FunctionDef candidate, Expression[] arguments)
+        internal SignatureMatchResult MatchSignature(FunctionDef candidate, params Expression[] arguments)
         {
             var operands = candidate.operand ?? Array.Empty<OperandDef>();
             var operandTypes = operands.Select(op => op.operandTypeSpecifier).ToArray();
@@ -148,20 +148,22 @@ namespace Hl7.Cql.CqlToElm
             // doing this to make debugging easier
             CoercionResult<Expression>[]? newOperands = null;
             IDictionary<string, TypeSpecifier>? genericInferences = null;
-            var lowestCost = CoercionCost.Incompatible;
+            var lowestCost = (int)CoercionCost.Incompatible;
             // For each argument, try to use it for inference.
             // As we go, keep track of which of those inferences results in the cheapest translation cost.
-            // We are using max cost here instead of total cost.
             for (int i = 0; i < arguments.Length; i++)
             {
-                var inferences = InferGenericArgument(operands[i].operandTypeSpecifier, arguments[i].resultTypeSpecifier);
+                var argumentType = arguments[i].resultTypeSpecifier;
+                var operandType = operands[i].operandTypeSpecifier;
+                var inferences = InferGenericArgument(argumentType, operandType);
                 if (inferences.Count > 0)
                 {
                     var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
-                    var mostExpensiveOperand = (CoercionCost)replaced.Max(operand => (int)operand.Cost);
-                    if (mostExpensiveOperand < lowestCost)
+                    var cost = replaced.Sum(operand => (int)operand.Cost);
+                    //var cost = (CoercionCost)replaced.Max(operand => (int)operand.Cost);
+                    if (cost < lowestCost)
                     {
-                        lowestCost = mostExpensiveOperand;
+                        lowestCost = cost;
                         newOperands = replaced;
                         genericInferences = inferences;
                     }
@@ -185,7 +187,10 @@ namespace Hl7.Cql.CqlToElm
 
         // At present we are not going to consider generics with mulitple type arguments, as those do not exist in any system functions.
         // We'll leave the type as Dictionary for now for future proofing
-        internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier operandType, TypeSpecifier argumentType) {
+        internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier argumentType, TypeSpecifier operandType)
+        {
+            // TODO: This feels very wrong.
+            // But if we allow an argument of List<Integer> to be assigned to T, so many tests fail
             return operandType switch
             {
                 ParameterTypeSpecifier generic
@@ -193,11 +198,11 @@ namespace Hl7.Cql.CqlToElm
                 ListTypeSpecifier opList
                     when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
                 ListTypeSpecifier opList
-                    when argumentType is not ListTypeSpecifier => InferGenericArgument(opList.elementType, argumentType),
+                    when argumentType is not ListTypeSpecifier => InferGenericArgument(argumentType, opList.elementType),
                 IntervalTypeSpecifier opInt
                     when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
                 IntervalTypeSpecifier opInt
-                    when argumentType is not IntervalTypeSpecifier => InferGenericArgument(opInt.pointType, argumentType),
+                    when argumentType is not IntervalTypeSpecifier => InferGenericArgument(argumentType, opInt.pointType),
                 _ => new()
             };
             Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier operandType, TypeSpecifier argumentType) =>
@@ -252,16 +257,16 @@ namespace Hl7.Cql.CqlToElm
         }
 
         /// <summary>
-        /// Picks the function which has the lowest maximum cost in converting its operands to be compatible with the invocation.
+        /// Picks the function which has the lowest total cost in converting its operands to be compatible with the invocation.
         /// </summary>
-        internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, Expression[] arguments)
+        internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
             var matches = overloadedFunction.Functions
                 .Select(function => MatchSignature(function, arguments))
                 .ToArray();
             var byCost = matches
                 .Where(result => result.Compatible)
-                .GroupBy(result => result.MostExpensive)
+                .GroupBy(result => result.TotalCost)
                 .OrderBy(group => group.Key)
                 .ToArray();
             if (byCost.Length > 0)
@@ -273,25 +278,6 @@ namespace Hl7.Cql.CqlToElm
                 }
                 else if (cheapest.Length > 0)
                 {
-                    // This can happen, for example, when adding an Int and a Long.
-                    // There are two ways to convert this function where the most expensive conversion
-                    // is implicit to simple type:
-                    //      * The Integer can be converted to a Long, matching Add(Long,Long)
-                    //      * Both can be converted to Decimals, matching Add(Decimal,Decimal)
-                    // In the event where the maximum cost is the same across multiple overloads,
-                    // see which, if any, has the lowest total cost.
-                    var byTotalCost = cheapest
-                        .GroupBy(result => result.TotalCost)
-                        .OrderBy(group => group.Key)
-                        .ToArray();
-                    if (byTotalCost.Length > 1)
-                    {
-                        var lowestTotalCost = byTotalCost[0].ToArray();
-                        if (lowestTotalCost.Length == 1)
-                        {
-                            return lowestTotalCost[0];
-                        }
-                    }
                     var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
                     // match cql-to-elm reference implementation (Java) error messages
                     var errorSb = new StringBuilder();
@@ -316,6 +302,7 @@ namespace Hl7.Cql.CqlToElm
                 firstMatch.Function.GetUnresolvedOperatorMessage(arguments.Select(t => t.resultTypeSpecifier).ToArray()));
             return result;
         }
+
 
         #endregion
     }

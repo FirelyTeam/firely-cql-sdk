@@ -3,16 +3,19 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace Hl7.Cql.CqlToElm
 {
     internal class ElmFactory
     {
-        public ElmFactory(CoercionProvider coercionProvider)
+        public ElmFactory(CoercionProvider coercionProvider, MessageProvider messaging)
         {
             CoercionProvider = coercionProvider;
+            Messaging = messaging;
         }
         public CoercionProvider CoercionProvider { get; }
+        public MessageProvider Messaging { get; }
 
         public Expression CreateElmNode(FunctionDef function, string? library, Expression[] arguments)
         {
@@ -28,6 +31,7 @@ namespace Hl7.Cql.CqlToElm
                 Expression e when arguments.Length == 0 => e,
                 FunctionRef fr => Populate(function, library, fr, arguments),
                 IndexOf io => Populate(io, arguments),
+                Interval interval => Populate(interval, arguments),
                 LastPositionOf lpo => Populate(lpo, arguments),
                 Message msg => Populate(msg, arguments),
                 NaryExpression ne => Populate(ne, arguments),
@@ -83,8 +87,7 @@ namespace Hl7.Cql.CqlToElm
             var convertCondition = CoercionProvider.Coerce(condition, SystemTypes.BooleanType);
             if (convertCondition.Success)
                 condition = convertCondition.Result;
-            else if (convertCondition.Error is not null)
-                @if.AddError(convertCondition.Error);
+            else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
 
             var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
             var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
@@ -233,6 +236,29 @@ namespace Hl7.Cql.CqlToElm
             indexOf.source = arguments[0];
             indexOf.element = arguments[1];
             return indexOf;
+        }
+        internal Interval Populate(Interval interval, Expression[] arguments)
+        {
+            if (arguments.Length != 4)
+                throw new ArgumentException($"Expected 4 arguments, but got {arguments.Length}.", nameof(arguments));
+            interval.low = arguments[0];
+            interval.high = arguments[1];
+            if (arguments[2] is Literal lowLiteral)
+            {
+                if (!bool.TryParse(lowLiteral.value, out var lc))
+                    throw new ArgumentException($"Expected literal argument at index 2 to be a valid Boolean value.");
+                interval.lowClosed = lc;
+            }
+            else interval.lowClosedExpression = arguments[2];
+            if (arguments[3] is Literal highLiteral)
+            {
+                if (!bool.TryParse(highLiteral.value, out var hc))
+                    throw new ArgumentException($"Expected literal argument at index 3 to be a valid Boolean value.");
+                interval.highClosed = hc;
+            }
+            else interval.highClosedExpression = arguments[2];
+            
+            return interval;
         }
 
         internal IHasSource Populate(IHasSource hasSource, Expression[] arguments)

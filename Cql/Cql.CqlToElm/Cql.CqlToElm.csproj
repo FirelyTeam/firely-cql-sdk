@@ -31,15 +31,27 @@
 		<ProjectReference Include="..\Elm\Elm.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
-		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)"/>
+		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Messages.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Messages.resx</DependentUpon>
+		</Compile>
 		<Compile Update="Visitors/BinaryExpressionVisitor.cs">
 			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
 		</Compile>
 		<Compile Update="Visitors/UnaryExpressionVisitor.cs">
 			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Messages.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 </Project>

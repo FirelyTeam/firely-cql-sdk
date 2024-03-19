@@ -82,10 +82,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static IServiceCollection MakeMinimalServiceCollection() =>
              new ServiceCollection()
-                .AddLogging(b => b.AddDebug().ThrowOn(LogLevel.Error))
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
+                .AddMessaging()
+                .AddLogging(b => b.AddDebug().ThrowOn(LogLevel.Error))
                 .AddTransient<CqlToElmConverter>()
                 .AddTransient<InvocationBuilder>()
                 .AddSingleton<CoercionProvider>()

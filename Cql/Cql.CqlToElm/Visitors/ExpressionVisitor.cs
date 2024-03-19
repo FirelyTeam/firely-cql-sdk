@@ -2,6 +2,7 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -11,34 +12,37 @@ namespace Hl7.Cql.CqlToElm.Visitors
     internal partial class ExpressionVisitor : Visitor<Expression>
     {
         public ExpressionVisitor(IModelProvider provider,
-            IConfiguration configuration,
+            IOptions<CqlToElmOptions> options,
             ConverterContext converterContext,
             LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder,
             CoercionProvider coercionProvider,
-            ElmFactory elmFactory) : base(localIdentifierProvider, invocationBuilder)
+            ElmFactory elmFactory,
+            MessageProvider messageProvider) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
-            Configuration = configuration;
             ConverterContext = converterContext;
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
             CoercionProvider = coercionProvider;
             ElmFactory = elmFactory;
+            Messaging = messageProvider;
+            Options = options.Value;
         }
 
 
         #region Privates
         private IModelProvider ModelProvider { get; }
+        private CqlToElmOptions Options { get; }
         private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
 
-        private IConfiguration Configuration { get; }
         private ConverterContext ConverterContext { get; }
         private LibraryBuilder LibraryBuilder { get; }
         private CoercionProvider CoercionProvider { get; }
         private ElmFactory ElmFactory { get; }
+        private MessageProvider Messaging { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -63,63 +67,55 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expressions = context.expression();
             var low = Visit(expressions[0]);
             var high = Visit(expressions[1]);
-            var lowType = low.resultTypeSpecifier;
-            var highType = high.resultTypeSpecifier;
 
-            TypeSpecifier pointType = SystemTypes.AnyType;
-            if (lowType.IsNumericType() && highType.IsNumericType())
-                pointType = new[] { lowType, highType }.Max(NumericTypeSpecifierComparer.Default)!;
-            else
+            // When enabled, allow Interval<Any> to be created for Interval[null, null].
+            // This is normally disabled.
+            if ((Options.AllowNullIntervals ?? false)
+                && low is Null 
+                && low.resultTypeSpecifier == SystemTypes.AnyType
+                && high is Null
+                && high.resultTypeSpecifier == SystemTypes.AnyType)
             {
-                if ((low is Null || lowType == SystemTypes.AnyType)
-                    && (high is not Null && highType != SystemTypes.AnyType))
-                    pointType = highType;
-                else pointType = lowType;
+                return new Interval { low = low, high = high, lowClosed = lowClosed, highClosed = highClosed }
+                    .WithLocator(context.Locator())
+                    .WithResultType(SystemTypes.AnyType.ToIntervalType());
             }
 
-            var lowCast = CoercionProvider.Coerce(low, pointType);
-            var highCast = CoercionProvider.Coerce(high, pointType);
+            var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Interval, 
+                low, 
+                high, 
+                ElmFactory.Literal(lowClosed), ElmFactory.Literal(highClosed));
 
-            if (!lowCast.Success && lowCast.Error is not null)
-                low.AddError(lowCast.Error ?? $"Could not convert low interval value to {pointType}");
-            else low = lowCast.Result;
-            if (!highCast.Success && highCast.Error is not null)
-                high.AddError(highCast.Error ?? $"Could not convert high interval value to {pointType}");
-            else high = highCast.Result;
-
-            var interval = new Interval
+            if (intervalSelector.Compatible)
             {
-                high = high,
-                low = low,
-                highClosed = highClosed,
-                lowClosed = lowClosed,
-            }
-            .WithLocator(context.Locator())
-            .WithResultType(pointType.ToIntervalType());
-
-            var validate = Option(o => o.ValidateIntervals);
-            if (validate)
-            {
-                if (pointType.IsOrderedType())
+                
+                var interval = InvocationBuilder.Invoke(intervalSelector);
+                // TODO: this should be incorporated in the validation framework
+                // The validation framework is static and can't accept configuration options :(
+                if (Options.ValidateIntervals ?? false)
                 {
-                    if (low is Quantity lowQuantity && high is Quantity highQuantity
-                        && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
+                    if (intervalSelector.Function.resultTypeSpecifier is IntervalTypeSpecifier intervalType)
                     {
-                        interval.AddError($"Intervals of quantities must be of compatible units.");
+                        var pointType = intervalType.pointType;
+                        if (pointType.IsOrderedType())
+                        {
+                            if (low is Quantity lowQuantity && high is Quantity highQuantity
+                                && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
+                            {
+                                interval.AddError($"Intervals of quantities must be of compatible units.");
+                            }
+                        }
                     }
+                    else throw new InvalidOperationException($"Interval selector function's return type is not an interval."); // should only happen if SystemLibrary is broken
                 }
-                else if (low is not Null || high is not Null) // the Interval(null,null) case is handled separately below.
-                {
-                    interval.AddError($"Intervals can only be constructed for orderable types ({string.Join(", ", SystemTypes.OrderedTypes)}). Type {pointType} is not allowed.");
-                }
+                return interval
+                    .WithLocator(context.Locator());
             }
-            var allowNullIntervals = Option(o => o.AllowNullIntervals);
-            if (!allowNullIntervals && low is Null && high is Null)
-            {
-                interval.AddError($"Intervals whose low and high values are null are not allowed.");
-            }
-
-            return interval;
+            else
+                return new Interval()
+                    .AddUnresolvedOperatorError("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier)
+                    .WithLocator(context.Locator())
+                    .WithResultType(low.resultTypeSpecifier.ToIntervalType());
         }
 
         // : ('List' ('<' typeSpecifier '>')?)? '{' (expression (',' expression)*)? '}'
@@ -169,8 +165,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     var result = CoercionProvider.Coerce(ei, elementType);
                     if (result.Success)
                         typedElements[i] = result.Result;
-                    else if (!string.IsNullOrWhiteSpace(result.Error))
-                        typedElements[i] = ei.AddError(result.Error);
+                    else
+                    {
+                        typedElements[i] = ei.AddError($"Expected an expression of type '{elementType}', but found an expression of type '{ei.resultTypeSpecifier}'.");
+                    }
                 }
 
                 return new List
@@ -220,45 +218,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             .AddError(message)
             .WithLocator(locator)
             .WithResultType(SystemTypes.AnyType);
-        }
-
-        public T Option<T>(System.Linq.Expressions.Expression<Func<CqlToElmOptions, T>> propertyExpression)
-            where T : IConvertible
-        {
-            string key;
-            if (propertyExpression.Body is System.Linq.Expressions.MemberExpression me)
-                key = me.Member.Name;
-            else throw new ArgumentException($"Lambda body is not a MemberExpression", nameof(propertyExpression));
-            var value = Configuration[key];
-            if (value is null)
-            {
-                if (me.Member is PropertyInfo property)
-                    return (T)property.GetValue(CqlToElmOptions.Default)!;
-                else if (me.Member is FieldInfo field)
-                    return (T)field.GetValue(CqlToElmOptions.Default)!;
-                else throw new ArgumentException($"Member {key} is neither a field nor a property.", nameof(propertyExpression));
-            }
-            var t = (T)System.Convert.ChangeType(value, typeof(T), System.Globalization.CultureInfo.InvariantCulture);
-            return t;
-        }
-        public T Option<T>(System.Linq.Expressions.Expression<Func<CqlToElmOptions, T?>> propertyExpression)
-            where T : struct, IConvertible
-        {
-            string key;
-            if (propertyExpression.Body is System.Linq.Expressions.MemberExpression me)
-                key = me.Member.Name;
-            else throw new ArgumentException($"Lambda body is not a MemberExpression", nameof(propertyExpression));
-            var value = Configuration[key];
-            if (value is null)
-            {
-                if (me.Member is PropertyInfo property)
-                    return (T)property.GetValue(CqlToElmOptions.Default)!;
-                else if (me.Member is FieldInfo field)
-                    return (T)field.GetValue(CqlToElmOptions.Default)!;
-                else throw new ArgumentException($"Member {key} is neither a field nor a property.", nameof(propertyExpression));
-            }
-            var t = (T)System.Convert.ChangeType(value, typeof(T), System.Globalization.CultureInfo.InvariantCulture);
-            return t;
         }
 
         private Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,

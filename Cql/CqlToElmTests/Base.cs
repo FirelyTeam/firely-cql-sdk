@@ -22,6 +22,9 @@ namespace Hl7.Cql.CqlToElm.Test
         protected static IServiceProvider Services;
 
         internal static ExpressionBuilder ExpressionBuilder;
+        
+        internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
+
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -33,6 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddContext()
                 .AddLocalIdProvider()
                 .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
+                .AddMessaging()
                 .AddLogging(builder => builder
                     .AddConsole()
                     .ThrowOn(LogLevel.Error))

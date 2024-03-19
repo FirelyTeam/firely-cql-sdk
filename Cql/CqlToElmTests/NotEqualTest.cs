@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class NotEqualsTest: Base
+    public class NotEqualTest: Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -1520,5 +1520,22 @@ namespace Hl7.Cql.CqlToElm.Test
             AssertNullResult(equal);
         }
 
+        [TestMethod]
+        public void Tuple_Equal_Tuple_Null_Equals_NotNull()
+        {
+            var lib = createLibraryForExpression("{ x: 1, y: null } = { x: 1, y: 2 }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var eq = Run<bool?>(equal);
+            eq.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Tuple_Equal_Tuple_Null_Equals_Null()
+        {
+            var lib = createLibraryForExpression("{ x: 1, y: null } = { x: 1, y: null }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var eq = Run<bool?>(equal);
+            eq.Should().BeTrue();
+        }
     }
 }
