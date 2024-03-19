@@ -35,7 +35,6 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
-    Hasher ..> TypeManager : injected
     TypeResolver ..> TypeManager : injected
 
     TypeResolver ..> LibraryPackager : injected

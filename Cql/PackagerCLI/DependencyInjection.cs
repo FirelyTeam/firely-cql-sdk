@@ -97,7 +97,6 @@ internal static class DependencyInjection
         services.TryAddSingleton(ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver>(FhirTypeResolver.Default);
         services.TryAddSingleton<TypeConverter>(FhirTypeConverter.Default);
-        services.TryAddSingleton<Hasher>();
         services.TryAddSingleton<TypeManager>();
     }
 
