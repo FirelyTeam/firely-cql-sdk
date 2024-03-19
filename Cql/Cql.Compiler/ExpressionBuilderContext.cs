@@ -31,7 +31,6 @@ namespace Hl7.Cql.Compiler
             ExpressionBuilderSettings settings,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
-            IDictionary<string, string> localLibraryIdentifiers,
             LibraryExpressionBuilderContext libContext,
             elm.Element element)
         {
@@ -41,7 +40,6 @@ namespace Hl7.Cql.Compiler
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
             Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
             _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
-            LocalLibraryIdentifiers = localLibraryIdentifiers ?? throw new ArgumentNullException(nameof(localLibraryIdentifiers));
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -60,7 +58,6 @@ namespace Hl7.Cql.Compiler
             ExpressionBuilderSettings = source.ExpressionBuilderSettings;
             RuntimeContextParameter = source.RuntimeContextParameter;
             Definitions = source.Definitions;
-            LocalLibraryIdentifiers = source.LocalLibraryIdentifiers;
             ImpliedAlias = source.ImpliedAlias;
             Operands = source.Operands;
             Libraries = source.Libraries;
@@ -133,13 +130,6 @@ namespace Hl7.Cql.Compiler
         /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
         /// </summary>
         public OperatorBinding OperatorBinding => _operatorBinding;
-
-        /// <summary>
-        /// Used for mappings such as:
-        ///     include canonical_id version '1.0.0' called alias
-        /// The key is "alias" and the value is "canonical_id.1.0.0"
-        /// </summary>
-        internal readonly IDictionary<string, string> LocalLibraryIdentifiers;
 
         /// <summary>
         /// Parameters for function definitions.

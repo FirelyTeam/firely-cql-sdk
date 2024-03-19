@@ -2270,16 +2270,8 @@ namespace Hl7.Cql.Compiler
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string? libraryName;
-            if (string.IsNullOrWhiteSpace(libraryAlias))
-            {
-                libraryName = ctx.LibraryContext.LibraryKey;
-            }
-            else
-            {
-                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
-                    throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
-            }
+            string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError:false)
+                ?? throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
         }
@@ -2309,17 +2301,8 @@ namespace Hl7.Cql.Compiler
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string? libraryName;
-            if (string.IsNullOrWhiteSpace(libraryAlias))
-            {
-                libraryName = ctx.LibraryContext.LibraryKey;
-            }
-            else
-            {
-                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
-                    throw ctx.NewExpressionBuildingException(
-                        $"Local library {libraryAlias} is not defined; are you missing a using statement?");
-            }
+            string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
+                                  ?? throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
             return new DefinitionCallExpression(definitionsProperty, libraryName, name, ctx.RuntimeContextParameter, funcType);

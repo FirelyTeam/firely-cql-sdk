@@ -55,7 +55,6 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
             _expressionBuilder.Settings,
             LibraryExpressionBuilder.ContextParameter,
             _definitions,
-            _libraryNameAndVersionByAlias,
             this,
             element);
 
@@ -87,8 +86,15 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
         _libraryNameAndVersionByAlias.Add(includeAlias, includeNameAndVersion);
 
-    private string GetIncludeNameAndVersion(string? alias) => 
-        alias == null ? Library.NameAndVersion()! : _libraryNameAndVersionByAlias[alias];
+    public string? GetIncludeNameAndVersion(string? alias, bool throwError = true)
+    {
+        if (alias == null)
+            return Library.NameAndVersion()!;
+        if (throwError)
+            return _libraryNameAndVersionByAlias[alias];
+        _libraryNameAndVersionByAlias.TryGetValue(alias, out string? result);
+        return result;
+    }
 
     #endregion
 
