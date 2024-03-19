@@ -904,7 +904,7 @@ namespace Hl7.Cql.Compiler
                         var parameterName = "@this";
                         var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
                         var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                        var pathMemberType = TypeManager.TypeFor(byColumn, ctx.LibraryContext.Definitions, ctx, true);
+                        var pathMemberType = TypeManager.TypeFor(byColumn, ctx.LibraryContext.Definitions, ctx);
                         if (pathMemberType == null)
                         {
                             throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
@@ -1184,7 +1184,7 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw ctx.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-            var type = TypeManager.TypeFor(valueSetRef, ctx.LibraryContext.Definitions, ctx, true)!;
+            var type = TypeManager.TypeFor(valueSetRef, ctx.LibraryContext.Definitions, ctx)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
 
             if (IsOrImplementsIEnumerableOfT(type))
@@ -1577,7 +1577,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Null(Null @null, ExpressionBuilderContext ctx)
         {
-            var nullType = TypeManager.TypeFor(@null, ctx.LibraryContext.Definitions, ctx, true) ?? typeof(object);
+            var nullType = TypeManager.TypeFor(@null, ctx.LibraryContext.Definitions, ctx) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
@@ -1896,7 +1896,7 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = ctx.GetScopeExpression(op.scope!);
-                var expectedType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx, true) ?? typeof(object);
+                var expectedType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx) ?? typeof(object);
                 var pathMemberInfo = TypeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
                     TypeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -1920,7 +1920,7 @@ namespace Hl7.Cql.Compiler
                 //    return call;
                 //}
                 string message = $"TypeManager failed to resolve type.";
-                var resultType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx, true) ?? throw ctx.NewExpressionBuildingException(message);
+                var resultType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx) ?? throw ctx.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
                     propogate = ChangeType(propogate, resultType, ctx);
@@ -1948,7 +1948,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx, true)!;
+                    var expectedType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx)!;
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }
@@ -1968,7 +1968,7 @@ namespace Hl7.Cql.Compiler
                 var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, path!);
                 if (pathMemberInfo == null)
                 {
-                    Logger.LogWarning(ctx.FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", null));
+                    Logger.LogWarning(ctx.FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
                     var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
                         source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
@@ -2214,7 +2214,7 @@ namespace Hl7.Cql.Compiler
                 if (def != null)
                 {
                     ctx = ctx.Deeper(def);
-                    expressionType = TypeManager.TypeFor(def, ctx.LibraryContext.Definitions, ctx, true);
+                    expressionType = TypeManager.TypeFor(def, ctx.LibraryContext.Definitions, ctx);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }
