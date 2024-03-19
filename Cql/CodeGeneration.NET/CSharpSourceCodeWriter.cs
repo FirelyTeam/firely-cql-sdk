@@ -20,6 +20,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Hl7.Cql.Compiler;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -127,14 +128,15 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         /// <param name="definitions">The lambda expressions to write.</param>
         /// <param name="tupleTypes">Tuple types generated during lambda creation.</param>
-        /// <param name="dependencyGraph">A dependency graph containing dependent libraries.</param>
+        /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
         /// <param name="libraryNameToStream">A function that provides a <see cref="Stream"/> to write the source code given the name of the library being generated.</param>
         /// <param name="closeStream">When <see langword="true"/>, <see cref="Stream"/>s provided by <paramref name="libraryNameToStream"/> will be closed when writing is done.  Default value is <see langword="true"/></param>
         /// <param name="writeFile">A function that determines whether the given library should be generated or not; default is <see langword="null" />.  When <see langword="null" />, all libraries are written.</param>
         /// 
-        public void Write(DefinitionDictionary<LambdaExpression> definitions,
+        public void Write(
+            DefinitionDictionary<LambdaExpression> definitions,
             IEnumerable<Type> tupleTypes,
-            DirectedGraph dependencyGraph,
+            LibrarySet librarySet,
             Func<string, Stream> libraryNameToStream,
             bool closeStream = true,
             Predicate<string>? writeFile = null)
@@ -145,19 +147,20 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             writeTupleTypes(tupleTypes, libraryNameToStream, closeStream);
 
-            writeLibraries(definitions, dependencyGraph, libraryNameToStream, closeStream, writeFile!, libraryNameToClassName);
+            writeLibraries(definitions, librarySet, libraryNameToStream, closeStream, writeFile!, libraryNameToClassName);
         }
 
-        private void writeLibraries(DefinitionDictionary<LambdaExpression> definitions,
-            DirectedGraph dependencyGraph,
+        private void writeLibraries(
+            DefinitionDictionary<LambdaExpression> definitions,
+            LibrarySet librarySet,
             Func<string, Stream> libraryNameToStream,
-            bool closeStream, Predicate<string> writeFile, Func<string?, string?> libraryNameToClassName)
+            bool closeStream, 
+            Predicate<string> writeFile, 
+            Func<string?, string?> libraryNameToClassName)
         {
-            var buildOrder = dependencyGraph.DetermineBuildOrder();
-
-            foreach (var library in buildOrder)
+            foreach (var library in librarySet)
             {
-                string libraryName = library.NodeId;
+                string libraryName = library.NameAndVersion()!;
 
                 if (!writeFile(libraryName))
                     continue;
@@ -185,7 +188,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         indentLevel += 1;
                     }
 
-                    writeClass(definitions, dependencyGraph, libraryNameToClassName, libraryName, writer, indentLevel);
+                    writeClass(definitions, librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
 
                     if (!string.IsNullOrWhiteSpace(Namespace))
                     {
@@ -204,9 +207,10 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private void writeClass(DefinitionDictionary<LambdaExpression> definitions,
-            DirectedGraph dependencyGraph,
+            LibrarySet librarySet,
             Func<string?, string?> libraryNameToClassName,
-            string libraryName, StreamWriter writer,
+            string libraryName, 
+            StreamWriter writer,
             int indentLevel)
         {
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
@@ -249,14 +253,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine(indentLevel, "this.context = context ?? throw new ArgumentNullException(\"context\");");
                     writer.WriteLine();
 
-                    writeDependencies(dependencyGraph, libraryNameToClassName, libraryName, writer, indentLevel);
+                    writeDependencies(librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
                     writer.WriteLine();
                     writeCachedValueNames(definitions, libraryName, writer, indentLevel);
                     indentLevel -= 1;
                 }
                 writer.WriteLine(indentLevel, "}");
 
-                WriteLibraryMembers(writer, dependencyGraph, libraryName, libraryNameToClassName!, indentLevel);
+                WriteLibraryMembers(writer, librarySet, libraryName, libraryNameToClassName!, indentLevel);
                 writeMemoizedInstanceMethods(definitions, libraryName, writer, indentLevel);
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
@@ -294,17 +298,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static void writeDependencies(DirectedGraph dependencyGraph, Func<string?, string?> libraryNameToClassName, string libraryName, StreamWriter writer, int indentLevel)
+        private static void writeDependencies(
+            LibrarySet librarySet, 
+            Func<string?, string?> libraryNameToClassName, 
+            string libraryName, 
+            StreamWriter writer,
+            int indentLevel)
         {
-            var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = dependencyGraph
-                .GetForwardNodeIds(node.NodeId)
-                .Except(new[] { DirectedGraphNode.EndId })
-                .Distinct();
+            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, true);
 
             foreach (var dependentLibrary in requiredLibraries!)
             {
-                var typeName = libraryNameToClassName!(dependentLibrary);
+                var typeName = libraryNameToClassName!(dependentLibrary.NameAndVersion()!);
                 var memberName = typeName;
                 writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
             }
@@ -376,16 +381,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 && overload.Parameters[0].Type == typeof(CqlContext);
 
         private void WriteLibraryMembers(TextWriter writer,
-            DirectedGraph dependencyGraph,
+            LibrarySet librarySet,
             string libraryName,
             Func<string, string> libraryNameToClassName,
             int indent)
         {
-            var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = dependencyGraph
-                .GetForwardNodeIds(node.NodeId)
-                .Except(new[] { DirectedGraphNode.EndId })
-                .Distinct();
+            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, true);
             
             bool atFirst = true;
 
@@ -398,7 +399,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine();
                 }
 
-                var typeName = libraryNameToClassName(dependentLibrary);
+                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion()!);
                 var memberName = typeName;
                 writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
             }

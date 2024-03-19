@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Compiler;
 
@@ -15,10 +16,11 @@ internal static class IBuilderContextExtensions
             currentContext = currentContext.OuterContext;
         }
     }
-    public static ExpressionBuildingException NewExpressionBuildingException(
+
+    public static CqlException NewExpressionBuildingException(
         this IBuilderContext context,
         string? message = null, 
         Exception? innerException = null) =>
-        new(context, message, innerException);
+        new ExpressionBuildingError(context, message).ToException(innerException);
 
 }

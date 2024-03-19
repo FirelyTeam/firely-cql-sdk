@@ -23,25 +23,20 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Hl7.Cql.Compiler.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
         private readonly TypeManager _typeManager;
-        private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
         private readonly CSharpSourceCodeWriter _cSharpSourceCodeWriter;
         private readonly Lazy<Assembly[]> _referencesLazy;
 
         public AssemblyCompiler(
-            LibraryExpressionBuilder libraryExpressionBuilder,
             CSharpSourceCodeWriter cSharpSourceCodeWriter,
             TypeManager typeManager)
         {
             _cSharpSourceCodeWriter = cSharpSourceCodeWriter;
-            _libraryExpressionBuilder = libraryExpressionBuilder;
             _typeManager = typeManager;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
@@ -69,33 +64,11 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         public IDictionary<string, AssemblyData> Compile(
-            IReadOnlyCollection<Library> elmLibraries, 
-            DefinitionDictionary<LambdaExpression> definitions)
-        {
-            foreach (var elmLibrary in elmLibraries)
-            {
-                var packageDefinitions =  _libraryExpressionBuilder.ProcessLibrary(elmLibrary);
-                definitions.Merge(packageDefinitions);
-            }
-
-            var graph = elmLibraries.GetIncludedLibraries();
-            var assemblies = Generate(
-                definitions,
-                _typeManager,
-                graph,
-                _cSharpSourceCodeWriter,
-                _referencesLazy.Value);
-            return assemblies;
-        }
-
-        private static IDictionary<string, AssemblyData> Generate(
-            DefinitionDictionary<LambdaExpression> expressions,
-            TypeManager typeManager,
-            DirectedGraph dependencies,
-            CSharpSourceCodeWriter writer,
-            IEnumerable<Assembly> references)
+            LibrarySet librarySet, 
+            DefinitionDictionary<LambdaExpression>? definitions = null)
         {
             Dictionary<string, Stream> navToLibraryStream = new();
+            definitions ??= new();
 
             Stream getStreamForLibrary(string nav)
             {
@@ -107,28 +80,28 @@ namespace Hl7.Cql.CodeGeneration.NET
                 return stream;
             }
 
-            writer.Write(expressions,
-                typeManager.TupleTypes,
-                dependencies,
+            _cSharpSourceCodeWriter.Write(
+                definitions,
+                _typeManager.TupleTypes,
+                librarySet,
                 getStreamForLibrary,
                 closeStream: false);
 
             var assemblies = new Dictionary<string, AssemblyData>();
             var tupleStreams = navToLibraryStream
                 .Where(kvp => kvp.Key.StartsWith("Tuples" + Path.DirectorySeparatorChar));
-            var tupleAssembly = CompileTuples(tupleStreams, references);
+            var tupleAssembly = CompileTuples(tupleStreams, _referencesLazy.Value);
             var additionalReferences = new[]
             {
                 tupleAssembly
             };
             assemblies.Add("TupleTypes", tupleAssembly);
-            var buildOrder = dependencies.DetermineBuildOrder();
-            foreach (var node in buildOrder)
+            foreach (var library in librarySet)
             {
-                if (!navToLibraryStream.TryGetValue(node.NodeId, out var sourceCodeStream))
-                    throw new InvalidOperationException($"Library {node.NodeId} doesn't exist in the source code dictionary.");
+                if (!navToLibraryStream.TryGetValue(library.NameAndVersion()!, out var sourceCodeStream))
+                    throw new InvalidOperationException($"Library {library.NameAndVersion()!} doesn't exist in the source code dictionary.");
 
-                CompileNode(sourceCodeStream, assemblies, dependencies, node, references, additionalReferences);
+                CompileNode(sourceCodeStream, assemblies, librarySet, library, _referencesLazy.Value, additionalReferences);
             }
             return assemblies;
         }
@@ -199,8 +172,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static void CompileNode(
             Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
-            DirectedGraph graph,
-            DirectedGraphNode node,
+            LibrarySet librarySet,
+            Library library,
             IEnumerable<Assembly> assemblyReferences,
             IEnumerable<AssemblyData>? dependencyAssemblies)
         {
@@ -215,22 +188,22 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }
-            foreach (var forwardNodeId in graph.GetForwardNodeIds(node.NodeId))
+            foreach (var libraryDependency in librarySet.GetLibraryDependencies(library.NameAndVersion()!))
             {
-                if (assemblies.TryGetValue(forwardNodeId, out var referencedDll))
+                if (assemblies.TryGetValue(libraryDependency.NameAndVersion()!, out var referencedDll))
                 {
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
                 }
             }
             if (dependencyAssemblies != null)
             {
-                foreach (var dependency in dependencyAssemblies)
+                foreach (var assemblyDependency in dependencyAssemblies)
                 {
-                    metadataReferences.Add(MetadataReference.CreateFromImage(dependency.Binary));
+                    metadataReferences.Add(MetadataReference.CreateFromImage(assemblyDependency.Binary));
                 }
             }
             var asmInfo = new StringBuilder();
-            var parts = node.NodeId.Split('-');
+            var parts = library.NameAndVersion()!.Split('-');
             string name = parts[0];
             string version = string.Empty;
             if (parts.Length > 1)
@@ -238,7 +211,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
-            var compilation = CSharpCompilation.Create($"{node.NodeId}")
+            var compilation = CSharpCompilation.Create($"{library.NameAndVersion()!}")
                 .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
                     optimizationLevel: OptimizationLevel.Release))
                 .WithReferences(metadataReferences)
@@ -267,15 +240,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     sb.AppendLine(diag.ToString());
                 }
-                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {node.NodeId}:{Environment.NewLine}{sb}");
+                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.NameAndVersion()!}:{Environment.NewLine}{sb}");
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
 
                 throw ex;
             }
             var bytes = codeStream.ToArray();
-            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { node.NodeId, sourceCode } });
-            assemblies.Add(node.NodeId, asmData);
+            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.NameAndVersion()!, sourceCode } });
+            assemblies.Add(library.NameAndVersion()!, asmData);
         }
 
 

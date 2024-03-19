@@ -9,6 +9,7 @@ using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
@@ -34,10 +35,9 @@ internal static class DependencyInjection
         services.AddSingleton<IValidateOptions<PackagerOptions>, PackagerOptions.Validator>();
     }
 
-    public static void AddResourcePackager(this IServiceCollection services, IConfiguration config)
+    public static void TryAddResourceWriters(this IServiceCollection services, IConfiguration config)
     {
         TryAddPackagerOptions(services, config);
-        services.TryAddSingleton<ResourcePackager>();
         TryAddConfiguredResourceWriters(services, config);
     }
 
@@ -98,6 +98,25 @@ internal static class DependencyInjection
         services.TryAddSingleton(ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver>(FhirTypeResolver.Default);
         services.TryAddSingleton<TypeConverter>(FhirTypeConverter.Default);
-        services.TryAddSingleton<TypeManager, TypeManager>();
+        services.TryAddSingleton<TypeManager>();
+    }
+
+    public static void TryAddBuilders(this IServiceCollection services)
+    {
+        services.TryAddSingleton<ResourcePackager, ResourcePackagerInjected>();
+        services.TryAddSingleton<LibraryPackager>();
+        services.TryAddSingleton<ExpressionBuilder>();
+        services.TryAddSingleton<LibraryExpressionBuilder>();
+        services.TryAddSingleton<LibrarySetExpressionBuilder>();
+    }
+}
+
+file class ResourcePackagerInjected : ResourcePackager
+{
+    public ResourcePackagerInjected(
+        LibraryPackager libraryPackager, 
+        ILoggerFactory logFactory,
+        IEnumerable<ResourceWriter> resourceWriters) : base(libraryPackager, logFactory, resourceWriters)
+    {
     }
 }

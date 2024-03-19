@@ -8,13 +8,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Packaging;
+using Hl7.Cql.Compiler;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
+using Microsoft.Extensions.Logging.Abstractions;
+using Hl7.Cql.Packaging;
 
 namespace CoreTests
 {
@@ -27,18 +29,6 @@ namespace CoreTests
                 .Create(logging => logging.AddDebug());
 
         private static LibraryPackagerFactory Factory = new(LoggerFactory);
-
-        private class LambdasFacade
-        {
-            public LambdasFacade()
-            {
-                Lambdas = new DefinitionDictionary<LambdaExpression>();
-            }
-            public LambdaExpression this[string libraryName, string definition] =>
-                Lambdas[$"{libraryName}-1.0.0", definition];
-
-            public DefinitionDictionary<LambdaExpression> Lambdas { get; }
-        }
 
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
@@ -3526,17 +3516,24 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
-            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            
-            var libbld = Factory.LibraryExpressionBuilder;
-            var definitions = libbld.ProcessLibrary(elmPackage);
-
+            var librarySet = new LibrarySet();
+            librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
+            var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
+            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             var writer = Factory.CSharpSourceCodeWriter;
-            var graph = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\libs"));
-
             var dict = new Dictionary<string, MemoryStream>();
-            writer.Write(definitions, Factory.TypeManager.TupleTypes, graph, lib => { var ms = new MemoryStream(); dict[lib] = ms; return ms; });
+
+            writer.Write(
+                definitions, 
+                Factory.TypeManager.TupleTypes,
+                librarySet,
+                lib =>
+                {
+                    var ms = new MemoryStream();
+                    dict[lib] = ms; 
+                    return ms;
+                });
+            Debug.Assert(dict.Any());
         }
 
         [TestMethod]

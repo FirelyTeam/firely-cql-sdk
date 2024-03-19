@@ -19,15 +19,14 @@ classDiagram
     FhirResourceWriter --> ResourceWriter : inherits
 
     %% Injected Dependencies
-    LibraryExpressionBuilder ..> AssemblyCompiler : injected
     CSharpSourceCodeWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected
 
     TypeManager ..> ExpressionBuilder : injected
 
-    IEnumerable_ResourceWriter_ ..> PackagerCliProgram : injected 
-    LibraryPackager ..> PackagerCliProgram : injected 
+    ResourcePackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
+    
 
     TypeConverter ..> CqlOperatorsBinding : injected         
     TypeResolver ..> CqlOperatorsBinding : injected    
@@ -38,13 +37,19 @@ classDiagram
 
     TypeResolver ..> LibraryPackager : injected
     AssemblyCompiler ..> LibraryPackager : injected
-    LibraryExpressionBuilder ..> LibraryPackager : injected 
+    LibrarySetExpressionBuilder ..> LibraryPackager : injected
     
     TypeResolver ..> CSharpSourceCodeWriter : injected
 
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
     OperatorBinding ..> LibraryExpressionBuilder : injected
 
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
+
     %% Rest
     ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
+
+    %% Obsolete
+    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
+    LibraryPackager ..> ResourcePackager : injected
 ```

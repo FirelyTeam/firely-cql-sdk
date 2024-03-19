@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using Hl7.Cql.Compiler.Infrastructure;
 using elm = Hl7.Cql.Elm;
 
 
@@ -66,8 +65,10 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
                 assemblyName = "Tuples";
+
             if (string.IsNullOrWhiteSpace(tupleTypeNamespace))
                 tupleTypeNamespace = "Tuples";
+
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
             TupleTypeList = new List<Type>();

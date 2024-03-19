@@ -107,12 +107,10 @@ public class Program
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         services.AddPackagerServices(context.Configuration);
-        services.AddResourcePackager(context.Configuration);
+        services.TryAddResourceWriters(context.Configuration);
         services.TryAddTypeServices();
         services.TryAddCompilationServices();
-        services.TryAddSingleton<LibraryPackager>();
-        services.TryAddSingleton<ExpressionBuilder>();
-        services.TryAddSingleton<LibraryExpressionBuilder>();
+        services.TryAddBuilders();
         services.TryAddSingleton<OptionsConsoleDumper>();
     }
 

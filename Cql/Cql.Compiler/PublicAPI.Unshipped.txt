@@ -1,1 +1,10 @@
 ﻿#nullable enable
+Hl7.Cql.Compiler.LibrarySet
+Hl7.Cql.Compiler.LibrarySet.Count.get -> int
+Hl7.Cql.Compiler.LibrarySet.GetEnumerator() -> System.Collections.Generic.IEnumerator<Hl7.Cql.Elm.Library!>!
+Hl7.Cql.Compiler.LibrarySet.GetLibrary(string! key, bool throwError = true) -> Hl7.Cql.Elm.Library?
+Hl7.Cql.Compiler.LibrarySet.GetLibraryDependencies(string! key, bool throwError = true) -> System.Collections.Generic.IReadOnlySet<Hl7.Cql.Elm.Library!>!
+Hl7.Cql.Compiler.LibrarySet.LibrarySet(string! name = "") -> void
+Hl7.Cql.Compiler.LibrarySet.LoadLibraries(System.Collections.Generic.IReadOnlyCollection<System.IO.FileInfo!>! files) -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Elm.Library!>!
+Hl7.Cql.Compiler.LibrarySet.LoadLibraryAndDependencies(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version = "") -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Elm.Library!>!
+Hl7.Cql.Compiler.LibrarySet.Name.get -> string!

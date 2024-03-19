@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Exceptions;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
@@ -35,7 +36,7 @@ partial class ExpressionBuilderContext : IBuilderContext
             {
                 return Inner.Bind(@operator, runtimeContext, parameters);
             }
-            catch (ExpressionBuildingException)
+            catch (CqlException<ExpressionBuildingError>)
             {
                 throw;
             }

@@ -885,7 +885,7 @@ namespace Hl7.Cql.Compiler
                     ctxStack.Push(ctx);
                     ctx = ctx.Deeper(by);
 
-                    ListSortDirection order = ExtensionMethods.ListSortOrder(by.direction);
+                    ListSortDirection order = by.direction.ListSortOrder();
                     if (by is ByExpression byExpression)
                     {
                         var parameterName = "@this";
@@ -2139,7 +2139,7 @@ namespace Hl7.Cql.Compiler
             throw ctx.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
         }
 
-        private Type? DetermineFhirHelpersReturnType(FunctionRef op)
+        private Type? DetermineFhirHelpersReturnType(FunctionRef op) // TODO: Remove hack (in another PR)
         {
             // cql-to-elm does not handle FHIRHelpers conversion function refs appropriately; they are missing resultTypeSpecifiers
             return op.name switch

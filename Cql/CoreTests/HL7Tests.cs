@@ -59,9 +59,9 @@ namespace CoreTests
                 LambdasByTestName.Lambdas.Merge(definitions);
             }
 
-            var buildOrder = new DirectedGraph();
-            MergeAllCqlInto(hl7TestDirectory, buildOrder);
-            MergeAllCqlInto(new DirectoryInfo(@"Input\ELM\Libs"), buildOrder);
+            var librarySet = new LibrarySet();
+            librarySet.LoadLibraries(hl7TestDirectory.GetFiles("*.json", SearchOption.TopDirectoryOnly));
+            librarySet.LoadLibraries(new DirectoryInfo(@"Input\ELM\Libs").GetFiles("*.json", SearchOption.TopDirectoryOnly));
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
             Context = FhirCqlContext.WithDataSource(delegates: allDelegates);
@@ -73,20 +73,5 @@ namespace CoreTests
         }
 
         internal static CqlContext Context;
-
-
-        private static void MergeAllCqlInto(DirectoryInfo libsDirectory, DirectedGraph buildOrder)
-        {
-            foreach (var lib in libsDirectory.GetFiles().GroupBy(f => Path.GetFileNameWithoutExtension(f.Name)))
-            {
-                var elm = lib.SingleOrDefault(f => f.Extension == ".json");
-                if (elm != null)
-                {
-                    var package = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-                    var includes = package.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
-                    includes.MergeInto(buildOrder);
-                }
-            }
-        }
     }
 }
