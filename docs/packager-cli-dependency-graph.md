@@ -32,7 +32,30 @@ classDiagram
        get_Library() Library
        get_LibrarySetContext() LibrarySetExpressionBuilderContext
        get_Definitions() ExpressionDefinitionDictionary
-       get_AllowUnresolvedExternals bool => _expressionBuilderSettings.AllowUnresolvedExternals
+       get_AllowUnresolvedExternals() bool => _expressionBuilderSettings.AllowUnresolvedExternals
+    }
+
+    class ExpressionBuilder {
+        get_TypeManager() TypeManager
+        get_Settings() ExpressionBuilderSettings
+    }
+    
+
+    class ExpressionBuilderContext {
+        _element : Element
+        _outerContext : ExpressionBuilderContext
+        _scopes : Dictionary~String,Tuple_Expression_Element_~
+
+        get_LibraryContext() LibraryExpressionBuilderContext
+        get_ExpressionMutators() List~IExpressionMutator~
+        get_CustomImplementation() Dicionary~String, Func_ParameterExpressionArray_LambdaExpression~
+        get_ExpressionBuilderSettings() ExpressionBuilderSettings
+        get_RuntimeContextParameter() ParameterExpression
+        get_ImpliedAlias() String?
+        private set_ImpliedAlias(String)
+        get_Operands() Dictionary~String,ParameterExpression~
+        get_Libraries() Dictionary~String,ExpressionDefinitionDictionary~
+
     }
 
     LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilderContext : creates and processes
@@ -41,6 +64,10 @@ classDiagram
 
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
+
+    ExpressionBuilderContext ..> LibraryExpressionBuilderContext : owner context
+    ExpressionBuilderContext ..> ExpressionBuilderContext : owner context
+    LibraryExpressionBuilderContext ..> LibrarySetExpressionBuilderContext : owner context
 ```
 
 ## Service Dependencies (excl Logger and Options)

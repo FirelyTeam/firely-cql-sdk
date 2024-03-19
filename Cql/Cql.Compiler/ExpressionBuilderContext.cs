@@ -125,7 +125,7 @@ namespace Hl7.Cql.Compiler
         internal IDictionary<string, ParameterExpression> Operands { get; }
 
         private IDictionary<string, ExpressionDefinitionDictionary> Libraries { get; }
-
+        
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
         /// this value is the implied alias name that should qualify it, e.g. from DRR-E 2022:
