@@ -1,8 +1,10 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics;
+using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
+[DebuggerDisplay("{DebuggerView}")]
 internal class LibrarySetExpressionBuilderContext : IBuilderContext
 {
     private readonly LibrarySet _librarySet;
@@ -26,5 +28,6 @@ internal class LibrarySetExpressionBuilderContext : IBuilderContext
 
     public void MergeDefinitions(DefinitionDictionary<LambdaExpression> definitions) => 
         _definitions.Merge(definitions);
-        
+
+    public string DebuggerView => this.GetDebuggerView();
 }

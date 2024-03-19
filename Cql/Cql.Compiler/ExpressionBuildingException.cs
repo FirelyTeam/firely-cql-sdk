@@ -25,12 +25,7 @@ internal readonly record struct ExpressionBuildingError : ICqlError
         var message = Context is null
             ? Message
             : $$"""
-                {{Message}}
-                    Expression Path:{{string.Concat(
-                        from context in Context.SelfAndAncestorContexts().Reverse()
-                        select $@"
-    * {context.ContextInfo}"
-                    )}}
+                {{Message}}{{Context.GetExpressionPath()}}
                 """;
         return message;
     }

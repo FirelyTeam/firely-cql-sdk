@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
@@ -13,6 +14,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
+[DebuggerDisplay("{DebuggerView}")]
 internal class LibraryExpressionBuilderContext : IBuilderContext
 {
     private readonly ExpressionBuilder _expressionBuilder;
@@ -173,5 +175,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     private class ByLibraryNameAndNameDictionary<TValue> : Dictionary<LibraryNameAndName, TValue>
     {
     }
+
+    public string DebuggerView => this.GetDebuggerView();
 }
 
