@@ -240,13 +240,10 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         return libraries;
     }
 
-    private int GetEdgesCount()
-    {
-        RecalculateStateIfNecessary();
-        return this
+    private int GetEdgesCount() =>
+        this
             .GetEdges(lib => GetLibraryDependencies(lib.NameAndVersion(false)))
             .Count();
-    }
 
     internal string MermaidDiagram => this.BuildMermaidFlowChart(
         getNextItems: lib => GetLibraryDependencies(lib.NameAndVersion(false)),
