@@ -12,7 +12,7 @@ namespace CoreTests
         [TestMethod]
         public void DefinitionDictionary_BestMatch()
         {
-            var dd = new DefinitionDictionary<string>();
+            var dd = new StringDefinitionDictionary();
             var score1 = dd.Score(new[] { typeof(Claim) }, new[] { typeof(Claim) });
             Assert.AreEqual(0, score1); // exact match
             var score2 = dd.Score(new[] { typeof(Claim) }, new[] { typeof(DomainResource) });
@@ -31,7 +31,7 @@ namespace CoreTests
         [TestMethod]
         public void DefinitionDictionary_BestMatch_Ambiguous()
         {
-            var dd = new DefinitionDictionary<string>();
+            var dd = new StringDefinitionDictionary();
             var score1 = dd.Score(new[] { typeof(Claim), typeof(Claim) }, new[] { typeof(Claim), typeof(DomainResource) });
             Assert.AreEqual(1, score1); // exact match
             var score2 = dd.Score(new[] { typeof(Claim), typeof(Claim) }, new[] { typeof(DomainResource), typeof(Claim) });
@@ -48,7 +48,7 @@ namespace CoreTests
         [TestMethod]
         public void DefinitionDictionary_Add_Overloads()
         {
-            var dd = new DefinitionDictionary<string>();
+            var dd = new StringDefinitionDictionary();
             const string lib = nameof(lib);
             const string def = nameof(def);
 
@@ -71,7 +71,7 @@ namespace CoreTests
         [TestMethod]
         public void DefinitionDictionary_TryGetValue_BestMatch()
         {
-            var dd = new DefinitionDictionary<string>();
+            var dd = new StringDefinitionDictionary();
             const string lib = nameof(lib);
             const string def = nameof(def);
 

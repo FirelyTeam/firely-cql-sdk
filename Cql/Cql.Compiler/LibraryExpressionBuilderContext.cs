@@ -17,23 +17,22 @@ namespace Hl7.Cql.Compiler;
 [DebuggerDisplay("{DebuggerView}")]
 internal class LibraryExpressionBuilderContext : IBuilderContext
 {
-    private readonly ExpressionBuilder _expressionBuilder;
+    private readonly ExpressionBuilderSettings _expressionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
-    private readonly Library _library;
     public LibrarySetExpressionBuilderContext? LibrarySetContext { get; }
 
     public LibraryExpressionBuilderContext(
         Library library,
-        ExpressionBuilder expressionBuilder,
+        ExpressionBuilderSettings expressionBuilderSettings,
         OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> definitions,
+        ExpressionDefinitionDictionary definitions,
         LibrarySetExpressionBuilderContext? libsCtx = null)
     {
 
-        _expressionBuilder = expressionBuilder;
+        _expressionBuilderSettings = expressionBuilderSettings;
         _operatorBinding = operatorBinding;
         Definitions = definitions;
-        _library = library;
+        Library = library;
         LibrarySetContext = libsCtx;
         _libraryNameAndVersionByAlias = new();
         _codesByName = new();
@@ -42,24 +41,24 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         BuildUrlByCodeSystemRef();
     }
 
-    public Elm.Library Library => _library;
+    public Elm.Library Library { get; }
 
-    public string LibraryKey => _library.NameAndVersion()!;
+    public string LibraryKey => Library.NameAndVersion()!;
 
-    public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
+    public bool AllowUnresolvedExternals => _expressionBuilderSettings.AllowUnresolvedExternals;
 
     public ExpressionBuilderContext NewExpressionBuilderContext(
         Elm.Element element) =>
         new ExpressionBuilderContext(
             _operatorBinding,
-            _expressionBuilder.Settings,
+            _expressionBuilderSettings,
             LibraryExpressionBuilder.ContextParameter,
             this,
             element);
 
     #region Definitions
 
-    public DefinitionDictionary<LambdaExpression> Definitions { get; }
+    public ExpressionDefinitionDictionary Definitions { get; }
 
     public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
         Definitions.AddTag(LibraryKey, definition, signature, name, values);
@@ -88,7 +87,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     public string? GetIncludeNameAndVersion(string? alias, bool throwError = true)
     {
         if (alias == null)
-            return Library.NameAndVersion()!;
+            return LibraryKey;
         if (throwError)
             return _libraryNameAndVersionByAlias[alias];
         _libraryNameAndVersionByAlias.TryGetValue(alias, out string? result);
@@ -142,7 +141,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     {
         if (LibrarySetContext != null)
         {
-            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(Library.NameAndVersion()!))
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
             {
                 AddCodeSystemRefs(libraryDependency);
             }

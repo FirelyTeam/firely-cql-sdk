@@ -6,8 +6,8 @@ Hl7.Cql.Runtime.ContextEventArgs.ContextEventArgs(object? state = null) -> void
 Hl7.Cql.Runtime.ContextEventArgs.State.get -> object?
 Hl7.Cql.Runtime.CqlContext
 Hl7.Cql.Runtime.CqlContext.ContextEvent -> System.EventHandler<Hl7.Cql.Runtime.ContextEventArgs!>?
-Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null) -> void
-Hl7.Cql.Runtime.CqlContext.Definitions.get -> Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>!
+Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.Runtime.DelegateDefinitionDictionary? delegates = null) -> void
+Hl7.Cql.Runtime.CqlContext.Definitions.get -> Hl7.Cql.Runtime.DelegateDefinitionDictionary!
 Hl7.Cql.Runtime.CqlContext.MessageReceived -> System.EventHandler<Hl7.Cql.Operators.MessageEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
@@ -31,6 +31,12 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinitionsForLibrary(string? libr
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetTags(string! library, string! definition, System.Type![]! signature, out System.Linq.ILookup<string!, string!>? tags) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, out T? expression) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, System.Type![]! signature, out T? expression) -> bool
+Hl7.Cql.Runtime.DelegateDefinitionDictionary
+Hl7.Cql.Runtime.DelegateDefinitionDictionary.DelegateDefinitionDictionary() -> void
+Hl7.Cql.Runtime.ExpressionDefinitionDictionary
+Hl7.Cql.Runtime.ExpressionDefinitionDictionary.ExpressionDefinitionDictionary() -> void
+Hl7.Cql.Runtime.StringDefinitionDictionary
+Hl7.Cql.Runtime.StringDefinitionDictionary.StringDefinitionDictionary() -> void
 override Hl7.Cql.Runtime.BaseTypeResolver.GetListElementType(System.Type! type, bool throw = false) -> System.Type?
 override Hl7.Cql.Runtime.BaseTypeResolver.ImplementsGenericInterface(System.Type! type, System.Type! genericInterfaceTypeDefinition) -> bool
 override Hl7.Cql.Runtime.BaseTypeResolver.ResolveType(string! typeSpecifier) -> System.Type?

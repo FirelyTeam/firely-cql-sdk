@@ -17,21 +17,21 @@ namespace Hl7.Cql.Compiler
 
     /// <summary>
     /// This is a custom expression representing the invocation of a definition using
-    /// a lookup on a <see cref="DefinitionDictionary{T}"/>.
+    /// a lookup on a <see cref="ExpressionDefinitionDictionary"/>.
     /// </summary>
     /// <remarks>The expression reduces to a lookup on a
-    /// <see cref="DefinitionDictionary{Delegate}"/> expression by item, plus the invocation
+    /// <see cref="ExpressionDefinitionDictionary"/> expression by item, plus the invocation
     /// of the delegate, if found.</remarks>.
     internal class DefinitionCallExpression : Expression
     {
         private static readonly PropertyInfo itemProperty =
-            typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string) })!;
+            typeof(ExpressionDefinitionDictionary).GetProperty("Item", new[] { typeof(string), typeof(string) })!;
 
         public DefinitionCallExpression(Expression definitions,
             string libraryName, string definitionName, Expression cqlContextParameter, Type definitionType)
         {
-            if (definitions.Type != typeof(DefinitionDictionary<Delegate>))
-                throw new ArgumentException($"Argument should be of type {nameof(DefinitionDictionary<Delegate>)}",
+            if (definitions.Type != typeof(ExpressionDefinitionDictionary))
+                throw new ArgumentException($"Argument should be of type {nameof(ExpressionDefinitionDictionary)}",
                     nameof(definitions));
 
             if (!definitionType.IsAssignableTo(typeof(MulticastDelegate)))

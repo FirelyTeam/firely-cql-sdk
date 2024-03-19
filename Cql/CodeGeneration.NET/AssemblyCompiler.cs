@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -65,7 +64,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public IDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet, 
-            DefinitionDictionary<LambdaExpression>? definitions = null)
+            ExpressionDefinitionDictionary? definitions = null)
         {
             Dictionary<string, Stream> navToLibraryStream = new();
             definitions ??= new();

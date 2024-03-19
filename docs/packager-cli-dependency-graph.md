@@ -1,10 +1,53 @@
 # PackagerCLI
 
+## ExpressionBuilders and Contexts
+```mermaid
+classDiagram
+    direction TD
+
+    class LibrarySetExpressionBuilder {
+       _libraryExpressionBuilder : LibraryExpressionBuilder
+    }
+
+    class LibrarySetExpressionBuilderContext {
+       get_LibrarySet() LibrarySet
+       get_AllDefinitions() ExpressionDefinitionDictionary
+    }
+
+    class LibraryExpressionBuilder {
+       _expressionBuilder : ExpressionBuilder
+       _operatorBinding : OperatorBinding
+       _typeManager : TypeManager
+    }
+
+    class LibraryExpressionBuilderContext {
+       _expressionBuilderSettings : ExpressionBuilderSettings
+       _operatorBinding : OperatorBinding
+       _libraryNameAndVersionByAlias : Dictionary~String,String~
+       _codesByName : Dictionary~string,CqlCode~
+       _codesByCodeSystemName : Dictionary~string,List_CqlCode_~
+       _codeSystemIdsByCodeSystemRefs : ByLibraryNameAndNameDictionary~String~
+
+       get_LibraryKey() string => Library.NameAndVersion()!
+       get_Library() Library
+       get_LibrarySetContext() LibrarySetExpressionBuilderContext
+       get_Definitions() ExpressionDefinitionDictionary
+       get_AllowUnresolvedExternals bool => _expressionBuilderSettings.AllowUnresolvedExternals
+    }
+
+    LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilderContext : creates and processes
+    LibraryExpressionBuilder ..> LibraryExpressionBuilderContext : creates
+    ExpressionBuilder ..> ExpressionBuilderContext : creates
+
+    ExpressionBuilder ..> LibraryExpressionBuilder : injected
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
+```
+
 ## Service Dependencies (excl Logger and Options)
 
 ```mermaid
 classDiagram
-    direction RL
+    direction LR
 
     class TypeManager {
         get_TypeResolver() TypeResolver

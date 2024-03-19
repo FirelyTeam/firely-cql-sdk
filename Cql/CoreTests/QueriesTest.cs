@@ -6,11 +6,9 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace CoreTests
 {
@@ -28,7 +26,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            DefinitionDictionary<LambdaExpression> definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            ExpressionDefinitionDictionary definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
@@ -41,8 +39,8 @@ namespace CoreTests
             AggregatesDefinitions = definitions.CompileAll();
         }
 
-        private static DefinitionDictionary<Delegate> QueriesDefinitions;
-        private static DefinitionDictionary<Delegate> AggregatesDefinitions;
+        private static DelegateDefinitionDictionary QueriesDefinitions;
+        private static DelegateDefinitionDictionary AggregatesDefinitions;
 
         private const string QueriesLibrary = "QueriesTest-1.0.0";
         private const string AggregatesLibrary = "Aggregates-1.0.0";

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
@@ -8,26 +7,26 @@ namespace Hl7.Cql.Compiler;
 internal class LibrarySetExpressionBuilderContext : IBuilderContext
 {
     private readonly LibrarySet _librarySet;
-    private readonly DefinitionDictionary<LambdaExpression> _definitions;
+    public ExpressionDefinitionDictionary AllDefinitions { get; }
+    private readonly BuilderContextInfo _contextInfo;
 
     public LibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions)
+        ExpressionDefinitionDictionary definitions)
     {
         _librarySet = librarySet;
-        _definitions = definitions;
-        OuterContext = null;
-        ContextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
+        AllDefinitions = definitions;
+        _contextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
-    public IBuilderContext? OuterContext { get; }
+    IBuilderContext? IBuilderContext.OuterContext => null;
 
-    public BuilderContextInfo ContextInfo { get; }
+    BuilderContextInfo IBuilderContext.ContextInfo => _contextInfo;
 
     public LibrarySet LibrarySet => _librarySet;
 
-    public void MergeDefinitions(DefinitionDictionary<LambdaExpression> definitions) => 
-        _definitions.Merge(definitions);
+    public void MergeDefinitions(ExpressionDefinitionDictionary definitions) => 
+        AllDefinitions.Merge(definitions);
 
     public string DebuggerView => this.GetDebuggerView();
 }

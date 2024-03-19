@@ -34,12 +34,12 @@ namespace CoreTests
         {
             public LambdasFacade()
             {
-                Lambdas = new DefinitionDictionary<LambdaExpression>();
+                Lambdas = new ExpressionDefinitionDictionary();
             }
             public LambdaExpression this[string libraryName, string definition] =>
                 Lambdas[$"{libraryName}-1.0.0", definition];
 
-            public DefinitionDictionary<LambdaExpression> Lambdas { get; }
+            public ExpressionDefinitionDictionary Lambdas { get; }
         }
 
         [ClassInitialize]
