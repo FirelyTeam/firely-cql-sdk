@@ -30,7 +30,6 @@ namespace Hl7.Cql.Compiler
             OperatorBinding operatorBinding, 
             ExpressionBuilderSettings settings,
             ParameterExpression contextParameter,
-            DefinitionDictionary<LambdaExpression> definitions,
             LibraryExpressionBuilderContext libContext,
             elm.Element element)
         {
@@ -38,7 +37,6 @@ namespace Hl7.Cql.Compiler
             _outerContext = null;
             ExpressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
-            Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
             _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
@@ -57,7 +55,6 @@ namespace Hl7.Cql.Compiler
             _outerContext = source._outerContext;
             ExpressionBuilderSettings = source.ExpressionBuilderSettings;
             RuntimeContextParameter = source.RuntimeContextParameter;
-            Definitions = source.Definitions;
             ImpliedAlias = source.ImpliedAlias;
             Operands = source.Operands;
             Libraries = source.Libraries;
@@ -122,7 +119,7 @@ namespace Hl7.Cql.Compiler
         public ParameterExpression RuntimeContextParameter { get; }
 
 
-        internal DefinitionDictionary<LambdaExpression> Definitions { get; }
+        // internal DefinitionDictionary<LambdaExpression> Definitions { get; }
 
         private readonly OperatorBindingRethrowDecorator _operatorBinding;
 

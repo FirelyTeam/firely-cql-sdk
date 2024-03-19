@@ -904,7 +904,7 @@ namespace Hl7.Cql.Compiler
                         var parameterName = "@this";
                         var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
                         var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                        var pathMemberType = TypeFor(byColumn, ctx);
+                        var pathMemberType = TypeManager.TypeFor(byColumn, ctx.LibraryContext.Definitions, ctx, true);
                         if (pathMemberType == null)
                         {
                             throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
@@ -1184,7 +1184,7 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw ctx.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-            var type = TypeFor(valueSetRef, ctx, throwIfNotFound: true)!;
+            var type = TypeManager.TypeFor(valueSetRef, ctx.LibraryContext.Definitions, ctx, true)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
 
             if (IsOrImplementsIEnumerableOfT(type))
@@ -1577,7 +1577,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Null(Null @null, ExpressionBuilderContext ctx)
         {
-            var nullType = TypeFor(@null, ctx) ?? typeof(object);
+            var nullType = TypeManager.TypeFor(@null, ctx.LibraryContext.Definitions, ctx, true) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
@@ -1896,7 +1896,7 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = ctx.GetScopeExpression(op.scope!);
-                var expectedType = TypeFor(op, ctx) ?? typeof(object);
+                var expectedType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx, true) ?? typeof(object);
                 var pathMemberInfo = TypeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
                     TypeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -1920,7 +1920,7 @@ namespace Hl7.Cql.Compiler
                 //    return call;
                 //}
                 string message = $"TypeManager failed to resolve type.";
-                var resultType = TypeFor(op, ctx) ?? throw ctx.NewExpressionBuildingException(message);
+                var resultType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx, true) ?? throw ctx.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
                     propogate = ChangeType(propogate, resultType, ctx);
@@ -1948,7 +1948,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = TypeFor(op, ctx, throwIfNotFound: true)!;
+                    var expectedType = TypeManager.TypeFor(op, ctx.LibraryContext.Definitions, ctx, true)!;
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }
@@ -2214,7 +2214,7 @@ namespace Hl7.Cql.Compiler
                 if (def != null)
                 {
                     ctx = ctx.Deeper(def);
-                    expressionType = TypeFor(def, ctx);
+                    expressionType = TypeManager.TypeFor(def, ctx.LibraryContext.Definitions, ctx, true);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }
@@ -2228,7 +2228,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ParameterRef(ParameterRef op, ExpressionBuilderContext ctx)
         {
-            if (ctx.Definitions.TryGetValue(ctx.LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
+            if (ctx.LibraryContext.Definitions.TryGetValue(ctx.LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
             {
                 var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda, ctx);
                 return invoke;

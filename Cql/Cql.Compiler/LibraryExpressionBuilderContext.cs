@@ -32,7 +32,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
         _expressionBuilder = expressionBuilder;
         _operatorBinding = operatorBinding;
-        _definitions = definitions;
+        Definitions = definitions;
         _library = library;
         LibrarySetContext = libsCtx;
         _libraryNameAndVersionByAlias = new();
@@ -54,28 +54,27 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
             _operatorBinding,
             _expressionBuilder.Settings,
             LibraryExpressionBuilder.ContextParameter,
-            _definitions,
             this,
             element);
 
     #region Definitions
 
-    private readonly DefinitionDictionary<LambdaExpression> _definitions;
+    public DefinitionDictionary<LambdaExpression> Definitions { get; }
 
     public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
-        _definitions.AddTag(LibraryKey, definition, signature, name, values);
+        Definitions.AddTag(LibraryKey, definition, signature, name, values);
 
     public void AddDefinition(string definition, LambdaExpression expression) =>
-        _definitions.Add(LibraryKey, definition, expression);
+        Definitions.Add(LibraryKey, definition, expression);
 
     public void AddDefinition(string definition, Type[] signature, LambdaExpression expression) =>
-        _definitions.Add(LibraryKey, definition, signature, expression);
+        Definitions.Add(LibraryKey, definition, signature, expression);
 
     public bool ContainsDefinition(string definition, Type[] signature) =>
-        _definitions.ContainsKey(LibraryKey, definition, signature);
+        Definitions.ContainsKey(LibraryKey, definition, signature);
 
     public bool ContainsDefinition(string definition) =>
-        _definitions.ContainsKey(LibraryKey, definition);
+        Definitions.ContainsKey(LibraryKey, definition);
 
     #endregion
 

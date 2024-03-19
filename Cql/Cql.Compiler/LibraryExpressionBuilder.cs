@@ -270,7 +270,7 @@ internal class LibraryExpressionBuilder
             {
                 if (ctx.LibraryContext.AllowUnresolvedExternals)
                 {
-                    var returnType = _typeManager.TypeFor(expressionDef, ctx)!;
+                    var returnType = _typeManager.TypeFor(expressionDef, ctx.LibraryContext.Definitions, ctx)!;
                     var paramTypes = new[] { typeof(CqlContext) }
                         .Concat(functionParameterTypes)
                         .ToArray();
