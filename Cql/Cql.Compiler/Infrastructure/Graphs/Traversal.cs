@@ -42,9 +42,17 @@ internal static class Traversal
         Func<T, IEnumerable<T>> getNextItems)
     {
         HashSet<T> unvisited = new(allItems);
+        switch (unvisited.Count)
+        {
+            case 0:
+                return Enumerable.Empty<T>();
+            case 1:
+                return EnumerateSingle(unvisited.First());
+        }
+
         HashSet<T> visited = new();
         Queue<T> results = new();
-        TraversalCallbacks<T> callbacks2 =
+        TraversalCallbacks<T> traversalCallbacks =
             new(
                 Enter: t =>
                 {
@@ -63,12 +71,17 @@ internal static class Traversal
 
         while (unvisited.Count > 0)
         {
-            foreach (var _ in DepthFirst(unvisited.First(), getNextItems, callbacks2))
+            foreach (var _ in DepthFirst(unvisited.First(), getNextItems, traversalCallbacks))
             {
                 // We have to enumerate, even though the resulting item is not used.
             }
         }
 
         return results;
+    }
+
+    private static IEnumerable<T> EnumerateSingle<T>(T first)
+    {
+        yield return first;
     }
 }
