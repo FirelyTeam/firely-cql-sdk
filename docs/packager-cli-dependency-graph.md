@@ -4,7 +4,7 @@
 
 ```mermaid
 classDiagram
-    direction LR
+    direction RL
 
     class TypeManager {
         get_TypeResolver() TypeResolver

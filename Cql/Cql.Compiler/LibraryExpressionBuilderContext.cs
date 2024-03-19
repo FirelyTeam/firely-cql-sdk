@@ -18,7 +18,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     private readonly ExpressionBuilder _expressionBuilder;
     private readonly OperatorBinding _operatorBinding;
     private readonly Library _library;
-    private readonly LibrarySetExpressionBuilderContext? _libsCtx;
+    public LibrarySetExpressionBuilderContext? LibrarySetContext { get; }
 
     public LibraryExpressionBuilderContext(
         Library library,
@@ -32,7 +32,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         _operatorBinding = operatorBinding;
         _definitions = definitions;
         _library = library;
-        _libsCtx = libsCtx;
+        LibrarySetContext = libsCtx;
         _libraryNameAndVersionByAlias = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
@@ -133,9 +133,9 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     private void BuildUrlByCodeSystemRef()
     {
-        if (_libsCtx != null)
+        if (LibrarySetContext != null)
         {
-            foreach (var libraryDependency in _libsCtx.LibrarySet.GetLibraryDependencies(Library.NameAndVersion()!))
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(Library.NameAndVersion()!))
             {
                 AddCodeSystemRefs(libraryDependency);
             }
@@ -163,7 +163,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     #endregion
 
-    IBuilderContext? IBuilderContext.OuterContext => _libsCtx;
+    IBuilderContext? IBuilderContext.OuterContext => LibrarySetContext;
 
     BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(Library);
 

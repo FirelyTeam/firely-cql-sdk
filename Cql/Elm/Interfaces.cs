@@ -70,7 +70,6 @@ partial class VersionedIdentifier : IGetNameAndVersion
 
 #endregion
 
-
 #region LibraryName
 
 internal interface IGetLibraryName
@@ -98,7 +97,6 @@ partial class ByColumn : IGetPath { }
 partial class Property : IGetPath { }
 
 #endregion
-
 
 #region Name
 

@@ -52,18 +52,6 @@ namespace Hl7.Cql.Graph
             AddEdgeImpl(edge.FromNode?.NodeId, edge.ToNode);
         }
 
-        public void AddEdge((string? FromId, string? ToId) edge)
-        {
-            if ((edge.ToId ?? DirectedGraphNode.EndId) is DirectedGraphNode.EndId)
-                AddEdgeImpl(edge.FromId, null);
-            else
-            {
-                if (!_nodesByNodeId.TryGetValue(edge.ToId!, out var toNode))
-                    throw new KeyNotFoundException($"No node by ID '{edge.ToId}' exists in this graph.");
-                AddEdgeImpl(edge.FromId, toNode);
-            }
-        }
-
         public IEnumerable<string> GetForwardNodeIds(string nodeId)
         {
             if (nodeId == DirectedGraphNode.EndId)
@@ -155,36 +143,9 @@ namespace Hl7.Cql.Graph
             }
         }
 
-        public void AddEndNode()
-        {
-            AddNode(_endNode);
-        }
-
         public void AddStartNode()
         {
             AddNode(_startNode);
-        }
-
-        public void MergeInto(
-            DirectedGraph into,
-            Func<(string FromNodeId, string ToNodeId), (string FromNodeId, string ToNodeId)>? replaceMergeEdge = null
-            )
-        {
-            foreach (var node in Nodes)
-            {
-                if (!into.Nodes.ContainsKey(node.Key))
-                    into.AddNode(node.Value);
-            }
-
-            replaceMergeEdge ??= edge => edge;
-            foreach ( (string nodeId, HashSet<DirectedGraphNode> forwardNodes) in _forwardNodesByNodeId)
-            {
-                foreach (var forwardNode in forwardNodes)
-                {
-                    var edge = replaceMergeEdge((nodeId, forwardNode.NodeId));
-                    into.AddEdge((edge.FromNodeId, edge.ToNodeId));
-                }
-            }
         }
 
         #region Debugging
