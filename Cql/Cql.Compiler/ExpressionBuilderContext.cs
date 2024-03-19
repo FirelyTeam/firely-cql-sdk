@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
             _outerContext = null;
             ExpressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
-            _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
+            OperatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -50,7 +50,7 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilderContext(
             ExpressionBuilderContext source)
         {
-            _operatorBinding = source._operatorBinding;
+            OperatorBinding = source.OperatorBinding;
             _element = source._element;
             _outerContext = source._outerContext;
             ExpressionBuilderSettings = source.ExpressionBuilderSettings;
@@ -70,7 +70,7 @@ namespace Hl7.Cql.Compiler
         {
             Debug.Assert(element != this._element);
             _outerContext = outer;
-            _operatorBinding = new OperatorBindingRethrowDecorator(this, outer._operatorBinding.Inner);
+            OperatorBinding = new OperatorBindingRethrowDecorator(this, ((OperatorBindingRethrowDecorator)outer.OperatorBinding).Inner);
             _element = element;
         }
 
@@ -104,10 +104,6 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         private IList<IExpressionMutator> ExpressionMutators { get; }
 
-        // /// <summary>
-        // /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
-        // /// </summary>
-        // public ExpressionBuilder Builder { get; }
         private ExpressionBuilderSettings ExpressionBuilderSettings { get; }
 
         /// <summary>
@@ -118,15 +114,10 @@ namespace Hl7.Cql.Compiler
         /// </remarks>
         public ParameterExpression RuntimeContextParameter { get; }
 
-
-        // internal DefinitionDictionary<LambdaExpression> Definitions { get; }
-
-        private readonly OperatorBindingRethrowDecorator _operatorBinding;
-
         /// <summary>
         /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
         /// </summary>
-        public OperatorBinding OperatorBinding => _operatorBinding;
+        public OperatorBinding OperatorBinding { get; }
 
         /// <summary>
         /// Parameters for function definitions.
