@@ -3,7 +3,6 @@
 
 
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Fhir.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +14,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Elm;
 
-[DebuggerDisplay("Library ({GetNameAndVersion(false)})")]
+[DebuggerDisplay("Library ({NameAndVersion(false)})")]
 public partial class Library
 {
     public const string JsonMimeType = "application/elm+json";
