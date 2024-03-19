@@ -3,8 +3,7 @@
 namespace Hl7.Cql.Packaging;
 
 /// <summary>Arguments for the <see cref="ResourcePackager.Package(ResourcePackageArgs)"/> method.</summary>
-[Obsolete]
-internal record ResourcePackageArgs
+public record ResourcePackageArgs
 {
     /// <summary>Creates an instance of this type to be passed on for the <see cref="ResourcePackager.Package(ResourcePackageArgs)"/> method.</summary>
     /// <param name="elmDir">Directory to find the ELM files</param>

@@ -24,10 +24,8 @@ classDiagram
 
     TypeManager ..> ExpressionBuilder : injected
 
-    IEnumerable_ResourceWriter_ ..> PackagerCliProgram : injected 
-    LibraryPackager ..> PackagerCliProgram : injected 
+    ResourcePackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
-    LibraryLoader ..> PackagerCliProgram : used by 
     
 
     TypeConverter ..> CqlOperatorsBinding : injected         
@@ -52,5 +50,6 @@ classDiagram
     ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
 
     %% Obsolete
-    IEnumerable_ResourceWriter_ ..> ResourcePackager_Obsolete_ : injected 
+    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
+    LibraryPackager ..> ResourcePackager : injected
 ```

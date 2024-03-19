@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging
@@ -8,21 +9,25 @@ namespace Hl7.Cql.Packaging
     /// <summary>
     /// Encapsulates packaging of resources and outputting them using the specified resource writers
     /// </summary>
-    [Obsolete]
-    internal class ResourcePackager
+    [UsedImplicitly]
+    public class ResourcePackager
     {
-        private readonly ILoggerFactory logFactory;
-        private readonly ResourceWriter[] resourceWriters;
+        private readonly LibraryPackager _libraryPackager;
+        private readonly ILoggerFactory _logFactory;
+        private readonly ResourceWriter[] _resourceWriters;
 
         /// <summary>
         /// Instantiates a new Resource Packager
         /// </summary>
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
-        public ResourcePackager(ILoggerFactory logFactory, params ResourceWriter[] resourceWriters)
+        public ResourcePackager(
+            ILoggerFactory logFactory, 
+            params ResourceWriter[] resourceWriters)
         {
-            this.logFactory = logFactory;
-            this.resourceWriters = resourceWriters;
+            _libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
+            _logFactory = logFactory;
+            _resourceWriters = resourceWriters;
         }
 
         /// <summary>
@@ -32,11 +37,16 @@ namespace Hl7.Cql.Packaging
         ///     With hosted services, IEnumerable resourceWriters required registering
         ///     multiple service implementations on the same service type.
         /// </remarks>
+        /// <param name="libraryPackager">The library packager</param>
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
-        public ResourcePackager(ILoggerFactory logFactory, IEnumerable<ResourceWriter> resourceWriters) {
-            this.logFactory = logFactory;
-            this.resourceWriters = resourceWriters as ResourceWriter[] ?? resourceWriters.ToArray();
+        internal ResourcePackager(
+            LibraryPackager libraryPackager,
+            ILoggerFactory logFactory,
+            IEnumerable<ResourceWriter> resourceWriters) {
+            _libraryPackager = libraryPackager;
+            _logFactory = logFactory;
+            _resourceWriters = resourceWriters as ResourceWriter[] ?? resourceWriters.ToArray();
         }
 
         /// <summary>
@@ -66,18 +76,35 @@ namespace Hl7.Cql.Packaging
             Action<IEnumerable<Resource>>? afterPackageMutator, 
             string? resourceCanonicalRootUrl)
         {
-            if (resourceWriters.Length == 0) 
+            if (_resourceWriters.Length == 0) 
                 return; //Skip since no writers provided
 
-            LibraryPackager libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
-            LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
+            HashSet<Resource> resourcesWritten = new();
+            LibraryPackager libraryPackager = new LibraryPackagerFactory(_logFactory).LibraryPackager;
+            LibraryPackageCallbacks callbacks = new(
+                buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl),
+                onLibraryResourceCreated: library =>
+                {
+                    foreach (var resourceWriter in _resourceWriters)
+                    {
+                        afterPackageMutator?.Invoke(new [] {library});
+                        resourceWriter.WriteResource(library);
+                        resourcesWritten.Add(library);
+                    }
+                });
+
             LibrarySet librarySet = new(elmDir.FullName);
             librarySet.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
-            IEnumerable<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks);
-            afterPackageMutator?.Invoke(resources);
-            foreach (var resourceWriter in resourceWriters)
+            List<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks).ToList();
+            
+            var remainingResources = resources.Except(resourcesWritten).ToList();
+            afterPackageMutator?.Invoke(remainingResources);
+            if (remainingResources.Any())
             {
-                resourceWriter.WriteResources(resources);
+                foreach (var resourceWriter in _resourceWriters)
+                {
+                    resourceWriter.WriteResources(remainingResources);
+                }
             }
         }
     }

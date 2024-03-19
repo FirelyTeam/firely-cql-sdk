@@ -9,6 +9,7 @@ using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
@@ -102,9 +103,20 @@ internal static class DependencyInjection
 
     public static void TryAddBuilders(this IServiceCollection services)
     {
+        services.TryAddSingleton<ResourcePackager, ResourcePackagerInjected>();
         services.TryAddSingleton<LibraryPackager>();
         services.TryAddSingleton<ExpressionBuilder>();
         services.TryAddSingleton<LibraryExpressionBuilder>();
         services.TryAddSingleton<LibrarySetExpressionBuilder>();
+    }
+}
+
+file class ResourcePackagerInjected : ResourcePackager
+{
+    public ResourcePackagerInjected(
+        LibraryPackager libraryPackager, 
+        ILoggerFactory logFactory,
+        IEnumerable<ResourceWriter> resourceWriters) : base(libraryPackager, logFactory, resourceWriters)
+    {
     }
 }

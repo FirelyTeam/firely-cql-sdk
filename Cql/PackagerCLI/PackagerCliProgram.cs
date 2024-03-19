@@ -1,9 +1,4 @@
-﻿using System.Linq.Expressions;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.ResourceWriters;
-using Hl7.Cql.Runtime;
-using Hl7.Fhir.Model;
+﻿using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -13,22 +8,19 @@ internal class PackagerCliProgram
 {
     private readonly OptionsConsoleDumper _optionsConsoleDumper;
     private readonly PackagerOptions _packagerOptions;
-    private readonly ResourceWriter[] _resourceWriters;
     private readonly ILogger<PackagerCliProgram> _logger;
-    private readonly LibraryPackager _libraryPackager;
+    private readonly ResourcePackager _resourcePackager;
 
     public PackagerCliProgram(
         ILogger<PackagerCliProgram> logger,
         IOptions<PackagerOptions> packageArgsOptions,
-        IEnumerable<ResourceWriter> resourceWriters,
-        LibraryPackager libraryPackager, 
-        OptionsConsoleDumper optionsConsoleDumper)
+        OptionsConsoleDumper optionsConsoleDumper, 
+        ResourcePackager resourcePackager)
     {
         _logger = logger;
-        _libraryPackager = libraryPackager;
         _optionsConsoleDumper = optionsConsoleDumper;
+        _resourcePackager = resourcePackager;
         _packagerOptions = packageArgsOptions.Value;
-        _resourceWriters = resourceWriters.ToArray();
     }
 
     public int Run()
@@ -48,42 +40,8 @@ internal class PackagerCliProgram
     private int RunCore()
     {
         _optionsConsoleDumper.DumpToConsole();
-
-        if (_resourceWriters.Length == 0) return 0; //Skip since no writers provided
-
         var opt = _packagerOptions;
-
-        LibrarySet librarySet = new(opt.ElmDirectory.FullName);
-        librarySet.LoadLibraries(opt.ElmDirectory.GetFiles("*.json"));
-        // DefinitionDictionary<LambdaExpression> definitions = _librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-        // var librariesByNameAndVersion = LibraryLoader.LoadLibraries(opt.ElmDirectory!);
-        // var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);
-
-        HashSet<Resource> resourcesWritten = new();
-        var resources = _libraryPackager.PackageResources(
-            opt.ElmDirectory!,
-            opt.CqlDirectory!,
-            librarySet,
-            new (
-                buildUrlFromResource: resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
-                onLibraryResourceCreated: library =>
-                {
-                    foreach (var resourceWriter in _resourceWriters)
-                    {
-                        resourceWriter.WriteResource(library);
-                        resourcesWritten.Add(library);
-                    }
-                }))!;
-        
-        var remainingResources = resources.Except(resourcesWritten).ToList();
-        if (remainingResources.Any())
-        {
-            foreach (var resourceWriter in _resourceWriters)
-            {
-                resourceWriter.WriteResources(remainingResources);
-            }
-        }
-
+        _resourcePackager.Package(opt.ElmDirectory, opt.CqlDirectory);
         return 0;
     }
 }
