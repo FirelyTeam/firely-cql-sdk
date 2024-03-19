@@ -41,6 +41,7 @@ classDiagram
     
     TypeResolver ..> CSharpSourceCodeWriter : injected
 
+    TypeManager ..> LibraryExpressionBuilder : injected
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
     OperatorBinding ..> LibraryExpressionBuilder : injected
 

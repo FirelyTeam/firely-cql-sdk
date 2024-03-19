@@ -52,7 +52,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         Elm.Element element) =>
         new ExpressionBuilderContext(
             _operatorBinding,
-            _expressionBuilder,
+            _expressionBuilder.Settings,
             LibraryExpressionBuilder.ContextParameter,
             _definitions,
             _libraryNameAndVersionByAlias,

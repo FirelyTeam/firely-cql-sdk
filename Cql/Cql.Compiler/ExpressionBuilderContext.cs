@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
     {
         internal ExpressionBuilderContext(
             OperatorBinding operatorBinding, 
-            ExpressionBuilder builder,
+            ExpressionBuilderSettings settings,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers,
@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
         {
             _element = element;
             _outerContext = null;
-            Builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            ExpressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
             Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
             _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
@@ -57,7 +57,7 @@ namespace Hl7.Cql.Compiler
             _operatorBinding = source._operatorBinding;
             _element = source._element;
             _outerContext = source._outerContext;
-            Builder = source.Builder;
+            ExpressionBuilderSettings = source.ExpressionBuilderSettings;
             RuntimeContextParameter = source.RuntimeContextParameter;
             Definitions = source.Definitions;
             LocalLibraryIdentifiers = source.LocalLibraryIdentifiers;
@@ -110,10 +110,11 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         private IList<IExpressionMutator> ExpressionMutators { get; }
 
-        /// <summary>
-        /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
-        /// </summary>
-        public ExpressionBuilder Builder { get; }
+        // /// <summary>
+        // /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
+        // /// </summary>
+        // public ExpressionBuilder Builder { get; }
+        private ExpressionBuilderSettings ExpressionBuilderSettings { get; }
 
         /// <summary>
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
@@ -226,7 +227,7 @@ namespace Hl7.Cql.Compiler
         internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
             var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
-            if (Builder.Settings.AllowScopeRedefinition)
+            if (ExpressionBuilderSettings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
                 {

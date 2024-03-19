@@ -15,7 +15,7 @@ internal class LibraryExpressionBuilderFactory : ExpressionBuilderFactory
 
     public LibraryExpressionBuilderFactory(ILoggerFactory loggerFactory, int cacheSize = 0) : base(loggerFactory, cacheSize)
     {
-        _libraryExpressionsBuilder = Deferred(() => new LibraryExpressionBuilder(Logger<LibraryExpressionBuilder>(), ExpressionBuilder, CqlOperatorsBinding));
+        _libraryExpressionsBuilder = Deferred(() => new LibraryExpressionBuilder(Logger<LibraryExpressionBuilder>(), ExpressionBuilder, CqlOperatorsBinding, TypeManager));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);

@@ -21,15 +21,18 @@ internal class LibraryExpressionBuilder
     private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilder _expressionBuilder;
     private readonly OperatorBinding _operatorBinding;
+    private readonly TypeManager _typeManager;
 
     public LibraryExpressionBuilder(
         ILogger<LibraryExpressionBuilder> logger,
         ExpressionBuilder expressionBuilder, 
-        OperatorBinding operatorBinding)
+        OperatorBinding operatorBinding,
+        TypeManager typeManager)
     {
         _logger = logger;
         _expressionBuilder = expressionBuilder;
         _operatorBinding = operatorBinding;
+        _typeManager = typeManager;
     }
 
     public LibraryExpressionBuilderContext CreateContext(
@@ -240,7 +243,7 @@ internal class LibraryExpressionBuilder
             {
                 if (operand.operandTypeSpecifier != null)
                 {
-                    var operandType = ctx.Builder.TypeFor(operand.operandTypeSpecifier, ctx)!;
+                    var operandType = _typeManager.TypeFor(operand.operandTypeSpecifier, ctx)!;
                     var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
                     var parameter = Expression.Parameter(operandType, opName);
                     ctx.Operands.Add(operand.name!, parameter);
@@ -267,7 +270,7 @@ internal class LibraryExpressionBuilder
             {
                 if (ctx.LibraryContext.AllowUnresolvedExternals)
                 {
-                    var returnType = ctx.Builder.TypeFor(expressionDef, ctx)!;
+                    var returnType = _typeManager.TypeFor(expressionDef, ctx)!;
                     var paramTypes = new[] { typeof(CqlContext) }
                         .Concat(functionParameterTypes)
                         .ToArray();
@@ -281,7 +284,7 @@ internal class LibraryExpressionBuilder
         }
 
         //ctx = ctx.Deeper(expressionDef);
-        var bodyExpression = ctx.Builder.TranslateExpression(expressionDef.expression, ctx);
+        var bodyExpression = _expressionBuilder.TranslateExpression(expressionDef.expression, ctx);
         var lambda = Expression.Lambda(bodyExpression, parameters);
         if (function?.operand != null &&
             ctx.LibraryContext.ContainsDefinition(expressionDef.name, functionParameterTypes))
@@ -334,7 +337,7 @@ internal class LibraryExpressionBuilder
 
         Expression? defaultValue = null;
         if (parameter.@default != null)
-            defaultValue = Expression.TypeAs(ctx.Builder.TranslateExpression(parameter.@default, ctx), typeof(object));
+            defaultValue = Expression.TypeAs(_expressionBuilder.TranslateExpression(parameter.@default, ctx), typeof(object));
         else defaultValue = Expression.Constant(null, typeof(object));
 
         var resolveParam = Expression.Call(
@@ -345,7 +348,7 @@ internal class LibraryExpressionBuilder
             defaultValue
         );
 
-        var parameterType = ctx.Builder.TypeFor(parameter.parameterTypeSpecifier, ctx);
+        var parameterType = _typeManager.TypeFor(parameter.parameterTypeSpecifier, ctx);
         var cast = Expression.Convert(resolveParam, parameterType);
         // e.g. (bundle, context) => context.Parameters["Measurement Period"]
         var lambda = Expression.Lambda(cast, ContextParameter);
