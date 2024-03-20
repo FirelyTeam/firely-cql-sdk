@@ -109,12 +109,12 @@ namespace Hl7.Cql.Compiler
                 case ExpressionDef { expression: not null } def:
                 {
                     ctx = ctx.Deeper(def.expression);
-                    var type = TypeFor(def.expression, definitions, ctx, false);
+                    var type = TypeFor(def.expression, definitions, ctx, throwIfNotFound: false);
                     if (type == null)
                     {
                         if (def.expression is SingletonFrom singleton)
                         {
-                            type = TypeFor(singleton, definitions, ctx, false);
+                            type = TypeFor(singleton, definitions, ctx, throwIfNotFound: false);
                             if (type == null)
                             {
                                 if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
