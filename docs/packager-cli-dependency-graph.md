@@ -10,6 +10,8 @@ classDiagram
     }
 
     class LibrarySetExpressionBuilderContext {
+       _allDefinitions : ExpressionDefinitionDictionary
+
        get_LibrarySet() LibrarySet
        get_AllDefinitions() ExpressionDefinitionDictionary
     }
