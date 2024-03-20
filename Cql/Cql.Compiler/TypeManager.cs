@@ -12,10 +12,8 @@ using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
-using Hl7.Cql.Runtime;
 using elm = Hl7.Cql.Elm;
 
 
@@ -82,7 +80,6 @@ namespace Hl7.Cql.Compiler
 
         internal Type? TypeFor(
             Element element,
-            DefinitionDictionary<LambdaExpression> definitions,
             ExpressionBuilderContext ctx,
             bool throwIfNotFound = true)
         {
@@ -98,7 +95,7 @@ namespace Hl7.Cql.Compiler
                 case ExpressionRef expressionRef:
                 {
                     var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
-                    if (!definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                    if (!ctx.LibraryContext.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
                     var returnType = definition!.ReturnType;
@@ -109,12 +106,12 @@ namespace Hl7.Cql.Compiler
                 case ExpressionDef { expression: not null } def:
                 {
                     ctx = ctx.Deeper(def.expression);
-                    var type = TypeFor(def.expression, definitions, ctx, throwIfNotFound: false);
+                    var type = TypeFor(def.expression, ctx, throwIfNotFound: false);
                     if (type == null)
                     {
                         if (def.expression is SingletonFrom singleton)
                         {
-                            type = TypeFor(singleton, definitions, ctx, throwIfNotFound: false);
+                            type = TypeFor(singleton, ctx, throwIfNotFound: false);
                             if (type == null)
                             {
                                 if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
@@ -135,10 +132,7 @@ namespace Hl7.Cql.Compiler
                 {
                     Type? sourceType = null;
                     if (propertyExpression.source != null)
-                    {
-                        ExpressionBuilderContext ctx1 = ctx.Deeper(propertyExpression.source);
-                        sourceType = TypeFor(propertyExpression.source!, definitions, ctx1);
-                    }
+                        sourceType = TypeFor(propertyExpression.source!, ctx.Deeper(propertyExpression.source));
                     else if (propertyExpression.scope != null)
                     {
                         var scope = ctx.GetScope(propertyExpression.scope);
