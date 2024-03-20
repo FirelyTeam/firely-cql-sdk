@@ -26,7 +26,7 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.2.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
-		<PackageReference Include="coverlet.collector" Version="6.0.1" />
+		<PackageReference Include="coverlet.collector" Version="6.0.2" />
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 
