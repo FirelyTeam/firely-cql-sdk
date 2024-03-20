@@ -1,4 +1,5 @@
-﻿using Hl7.Fhir.Model;
+﻿using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -29,7 +30,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="options">the resource writer options</param>
         /// <param name="logger">logger</param>
         public CSharpResourceWriter(
-            IOptions<CSharpResourceWriterOptions> options, 
+            IOptions<CSharpCodeWriterOptions> options, 
             ILogger<CSharpResourceWriter> logger)
         {
             var opt = options.Value;

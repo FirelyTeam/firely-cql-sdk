@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging;
 
@@ -12,12 +13,17 @@ namespace Hl7.Cql.Packaging;
 internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
 {
     private readonly Lazy<CSharpLibrarySetToStreamsWriter> _cSharpSourceCodeWriter;
+    private readonly Lazy<CSharpStreamToFileWriter?> _cSharpStreamToFileWriter;
     private readonly Lazy<AssemblyCompiler> _assemblyCompiler;
     private readonly Lazy<LibraryPackager> _libraryPackager;
 
-    public LibraryPackagerFactory(ILoggerFactory loggerFactory, int cacheSize = 0) : base(loggerFactory, cacheSize)
+    public LibraryPackagerFactory(ILoggerFactory loggerFactory, int cacheSize = 0, string? csharpOutDirectory = null) : base(loggerFactory, cacheSize)
     {
-        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
+        _cSharpStreamToFileWriter = Deferred(() =>
+            csharpOutDirectory is { } dir
+                ? new CSharpStreamToFileWriter(Options(new CSharpCodeWriterOptions() { OutDirectory = new DirectoryInfo(dir) })) 
+                : null);
+        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver, CSharpStreamToFileWriter));
         _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager));
         _libraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler, LibrarySetExpressionBuilder));
 
@@ -25,9 +31,13 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
 
         ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
+
+        IOptions<T> Options<T>(T options) where T : class => Microsoft.Extensions.Options.Options.Create<T>(options);
     }
 
     public CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => _cSharpSourceCodeWriter.Value;
+
+    public CSharpStreamToFileWriter? CSharpStreamToFileWriter => _cSharpStreamToFileWriter.Value;
 
     public AssemblyCompiler AssemblyCompiler => _assemblyCompiler.Value;
 

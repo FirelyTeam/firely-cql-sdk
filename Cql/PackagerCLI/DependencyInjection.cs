@@ -56,8 +56,8 @@ internal static class DependencyInjection
         FhirResourceWriterOptions fhirResourceWriterOptions = new();
         FhirResourceWriterOptions.BindConfig(fhirResourceWriterOptions, config);
 
-        CSharpResourceWriterOptions cSharpResourceWriterOptions = new();
-        CSharpResourceWriterOptions.BindConfig(cSharpResourceWriterOptions, config);
+        CSharpCodeWriterOptions cSharpCodeWriterOptions = new();
+        CSharpCodeWriterOptions.BindConfig(cSharpCodeWriterOptions, config);
 
         List<ServiceDescriptor> resourceWritersServiceDescriptors = new(2);
 
@@ -70,12 +70,12 @@ internal static class DependencyInjection
                 .ValidateOnStart();
         }
 
-        if (cSharpResourceWriterOptions.OutDirectory is {} csharpDir)
+        if (cSharpCodeWriterOptions.OutDirectory is {} csharpDir)
         {
             services.AddSingleton<CSharpStreamToFileWriter>();
             services
-                .AddOptions<CSharpResourceWriterOptions>()
-                .Configure<IConfiguration>(CSharpResourceWriterOptions.BindConfig)
+                .AddOptions<CSharpCodeWriterOptions>()
+                .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
                 .ValidateOnStart();
         }
 
@@ -115,8 +115,7 @@ file class ResourcePackagerInjected : ResourcePackager
 {
     public ResourcePackagerInjected(LibraryPackager libraryPackager,
         ILoggerFactory logFactory,
-        IEnumerable<ResourceWriter> resourceWriters, 
-        CSharpStreamToFileWriter? cSharpStreamToFileWriter = null) : base(libraryPackager, logFactory, resourceWriters, cSharpStreamToFileWriter)
+        IEnumerable<ResourceWriter> resourceWriters) : base(libraryPackager, logFactory, resourceWriters)
     {
     }
 }

@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
 
-namespace Hl7.Cql.Packaging.ResourceWriters;
+namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
 /// Represents the options for the CSharpResourceWriter.
 /// </summary>
-public class CSharpResourceWriterOptions
+public class CSharpCodeWriterOptions
 
 {
     /// <summary>
@@ -25,7 +26,7 @@ public class CSharpResourceWriterOptions
     /// </summary>
     /// <param name="opt">The CSharpResourceWriterOptions object to bind the configuration values to.</param>
     /// <param name="config">The IConfiguration object containing the configuration values.</param>
-    public static void BindConfig(CSharpResourceWriterOptions opt, IConfiguration config)
+    public static void BindConfig(CSharpCodeWriterOptions opt, IConfiguration config)
     {
         var section = config.GetSection(ConfigSection);
         section.Bind(opt);

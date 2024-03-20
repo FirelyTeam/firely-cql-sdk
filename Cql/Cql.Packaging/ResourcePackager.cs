@@ -15,7 +15,6 @@ namespace Hl7.Cql.Packaging
         private readonly LibraryPackager _libraryPackager;
         private readonly ILoggerFactory _logFactory;
         private readonly ResourceWriter[] _resourceWriters;
-        private readonly CSharpStreamToFileWriter? _cSharpStreamToFileWriter;
 
         /// <summary>
         /// Instantiates a new Resource Packager
@@ -27,7 +26,6 @@ namespace Hl7.Cql.Packaging
         {
             _libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
             _logFactory = logFactory;
-            _cSharpStreamToFileWriter = null;
             _resourceWriters = resourceWriters;
         }
 
@@ -41,15 +39,12 @@ namespace Hl7.Cql.Packaging
         /// <param name="libraryPackager">The library packager</param>
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
-        /// <param name="cSharpStreamToFileWriter">CSharp source code writer</param>
         internal ResourcePackager(
             LibraryPackager libraryPackager,
             ILoggerFactory logFactory,
-            IEnumerable<ResourceWriter> resourceWriters,
-            CSharpStreamToFileWriter? cSharpStreamToFileWriter = null) {
+            IEnumerable<ResourceWriter> resourceWriters) {
             _libraryPackager = libraryPackager;
             _logFactory = logFactory;
-            _cSharpStreamToFileWriter = cSharpStreamToFileWriter;
             _resourceWriters = resourceWriters as ResourceWriter[] ?? resourceWriters.ToArray();
         }
 
@@ -80,13 +75,12 @@ namespace Hl7.Cql.Packaging
             Action<IEnumerable<Resource>>? afterPackageMutator, 
             string? resourceCanonicalRootUrl)
         {
-            if (_resourceWriters.Length == 0 && _cSharpStreamToFileWriter is null) 
+            if (_resourceWriters.Length == 0) 
                 return; //Skip since no writers provided
 
             LibraryPackager libraryPackager = new LibraryPackagerFactory(_logFactory).LibraryPackager;
             LibraryPackageCallbacks callbacks = new(
-                buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl),
-                onBeforeCompileStream: _cSharpStreamToFileWriter is  {} writer ? tuple => writer.WriteToFile(tuple.name, tuple.stream) : null);
+                buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
 
             LibrarySet librarySet = new(elmDir.FullName);
             librarySet.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));

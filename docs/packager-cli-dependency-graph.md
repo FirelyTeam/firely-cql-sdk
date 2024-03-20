@@ -1,5 +1,60 @@
 # PackagerCLI
 
+## Service Dependencies (excl Logger and Options)
+
+```mermaid
+classDiagram
+    direction LR
+
+    class TypeManager {
+        get_TypeResolver() TypeResolver
+        get_TupleTypes() IEnumerable~Type~
+    }
+
+    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
+
+    %% Inheritance  
+    CqlOperatorsBinding --> OperatorBinding : inherits
+    FhirResourceWriter --> ResourceWriter : inherits
+
+    %% Injected Dependencies
+    CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
+    TypeManager ..> AssemblyCompiler : injected
+
+    TypeManager ..> ExpressionBuilder : injected
+
+    ResourcePackager ..> PackagerCliProgram : injected 
+    OptionsConsoleDumper ..> PackagerCliProgram : injected 
+    
+
+    TypeConverter ..> CqlOperatorsBinding : injected         
+    TypeResolver ..> CqlOperatorsBinding : injected    
+
+    ModelInspector ..> TypeConverter : injected  
+
+    TypeResolver ..> TypeManager : injected
+
+    TypeResolver ..> LibraryPackager : injected
+    AssemblyCompiler ..> LibraryPackager : injected
+    LibrarySetExpressionBuilder ..> LibraryPackager : injected
+    
+    TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
+    CSharpStreamToFileWriter ..> CSharpLibrarySetToStreamsWriter : injected
+
+    TypeManager ..> LibraryExpressionBuilder : injected
+    ExpressionBuilder ..> LibraryExpressionBuilder : injected
+    OperatorBinding ..> LibraryExpressionBuilder : injected
+
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
+
+    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
+    LibraryPackager ..> ResourcePackager : injected
+
+    %% Rest
+    ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
+
+```
+
 ## ExpressionBuilders and Contexts
 ```mermaid
 classDiagram
@@ -74,59 +129,4 @@ classDiagram
     ExpressionBuilderContext ..> LibraryExpressionBuilderContext : owner context
     ExpressionBuilderContext ..> ExpressionBuilderContext : owner context
     LibraryExpressionBuilderContext ..> LibrarySetExpressionBuilderContext : owner context
-```
-
-## Service Dependencies (excl Logger and Options)
-
-```mermaid
-classDiagram
-    direction LR
-
-    class TypeManager {
-        get_TypeResolver() TypeResolver
-        get_TupleTypes() IEnumerable~Type~
-    }
-
-    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
-
-    %% Inheritance  
-    CqlOperatorsBinding --> OperatorBinding : inherits
-    FhirResourceWriter --> ResourceWriter : inherits
-
-    %% Injected Dependencies
-    CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
-    TypeManager ..> AssemblyCompiler : injected
-
-    TypeManager ..> ExpressionBuilder : injected
-
-    ResourcePackager ..> PackagerCliProgram : injected 
-    OptionsConsoleDumper ..> PackagerCliProgram : injected 
-    
-
-    TypeConverter ..> CqlOperatorsBinding : injected         
-    TypeResolver ..> CqlOperatorsBinding : injected    
-
-    ModelInspector ..> TypeConverter : injected  
-
-    TypeResolver ..> TypeManager : injected
-
-    TypeResolver ..> LibraryPackager : injected
-    AssemblyCompiler ..> LibraryPackager : injected
-    LibrarySetExpressionBuilder ..> LibraryPackager : injected
-    
-    TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
-
-    TypeManager ..> LibraryExpressionBuilder : injected
-    ExpressionBuilder ..> LibraryExpressionBuilder : injected
-    OperatorBinding ..> LibraryExpressionBuilder : injected
-
-    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
-
-    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
-    LibraryPackager ..> ResourcePackager : injected
-    CSharpStreamToFileWriter ..> ResourcePackager : injected
-
-    %% Rest
-    ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
-
 ```
