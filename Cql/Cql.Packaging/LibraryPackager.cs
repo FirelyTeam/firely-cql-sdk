@@ -70,7 +70,6 @@ internal class LibraryPackager
                     ContentType = "application/octet-stream",
                     Data = asmData.Binary,
                 };
-                callbacks.NotifyResourceCreated(tuplesBinary!);
                 resources.Add(tuplesBinary);
 
                 foreach (var sourceKvp in asmData.SourceCode)
@@ -82,7 +81,6 @@ internal class LibraryPackager
                         ContentType = "text/plain",
                         Data = tuplesSourceBytes,
                     };
-                    callbacks.NotifyResourceCreated(tuplesCSharpBinary!);
                     resources.Add(tuplesCSharpBinary);
                 }
             }
@@ -112,7 +110,6 @@ internal class LibraryPackager
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
                 var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, typeCrosswalk, library);
-                callbacks.NotifyResourceCreated(fhirLibrary);
                 librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
                 resources.Add(fhirLibrary);
             }
