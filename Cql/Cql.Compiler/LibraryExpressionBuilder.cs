@@ -77,11 +77,10 @@ internal class LibraryExpressionBuilder
         if (library.codes is { Length: > 0 } codeDefs)
         {
             HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
-            //Dictionary<string, string> codeSystemUrls = library.codeSystems?.ToDictionary(cs => cs.name, cs => cs.id) ?? new();
 
             foreach (var codeDef in codeDefs)
             {
-                ProcessCodeDef(codeDef, libCtx.NewExpressionBuilderContext(codeDef), foundCodeNameCodeSystemUrls/*, codeSystemUrls*/);
+                ProcessCodeDef(codeDef, libCtx.NewExpressionBuilderContext(codeDef), foundCodeNameCodeSystemUrls);
             }
         }
 
@@ -193,9 +192,7 @@ internal class LibraryExpressionBuilder
     private void ProcessCodeDef(
         CodeDef codeDef,
         ExpressionBuilderContext ctx,
-        ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet
-        //IReadOnlyDictionary<string, string> codeSystemUrls
-        )
+        ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet)
     {
         if (codeDef.codeSystem == null)
             throw ctx.NewExpressionBuildingException("Code definition has a null codeSystem node.", null);

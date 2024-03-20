@@ -42,7 +42,7 @@ classDiagram
     }
 
     class ExpressionBuilder {
-        get_TypeManager() TypeManager
+        _typeManager : TypeManager
         get_Settings() ExpressionBuilderSettings
     }
     
