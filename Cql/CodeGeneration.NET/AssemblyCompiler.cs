@@ -29,14 +29,14 @@ namespace Hl7.Cql.CodeGeneration.NET
     internal class AssemblyCompiler
     {
         private readonly TypeManager _typeManager;
-        private readonly CSharpSourceCodeWriter _cSharpSourceCodeWriter;
+        private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
         private readonly Lazy<Assembly[]> _referencesLazy;
 
         public AssemblyCompiler(
-            CSharpSourceCodeWriter cSharpSourceCodeWriter,
+            CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter,
             TypeManager typeManager)
         {
-            _cSharpSourceCodeWriter = cSharpSourceCodeWriter;
+            _cSharpLibrarySetToStreamsWriter = cSharpLibrarySetToStreamsWriter;
             _typeManager = typeManager;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
@@ -69,7 +69,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             AssemblyCompilerCallbacks? callbacks = null)
         {
             callbacks ??= new();
-            IEnumerable<(string name, Stream stream)> streamsByName = _cSharpSourceCodeWriter.Write(definitions, _typeManager.TupleTypes, librarySet);
+            IEnumerable<(string name, Stream stream)> streamsByName = _cSharpLibrarySetToStreamsWriter.Write(definitions, _typeManager.TupleTypes, librarySet);
             return CompileSourceCodeStreams(librarySet, streamsByName, callbacks);
         }
 

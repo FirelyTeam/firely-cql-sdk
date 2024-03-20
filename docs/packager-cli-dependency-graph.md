@@ -91,11 +91,10 @@ classDiagram
 
     %% Inheritance  
     CqlOperatorsBinding --> OperatorBinding : inherits
-    CSharpResourceWriter --> ResourceWriter : inherits
     FhirResourceWriter --> ResourceWriter : inherits
 
     %% Injected Dependencies
-    CSharpSourceCodeWriter ..> AssemblyCompiler : injected
+    CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected
 
     TypeManager ..> ExpressionBuilder : injected
@@ -115,7 +114,7 @@ classDiagram
     AssemblyCompiler ..> LibraryPackager : injected
     LibrarySetExpressionBuilder ..> LibraryPackager : injected
     
-    TypeResolver ..> CSharpSourceCodeWriter : injected
+    TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
     TypeManager ..> LibraryExpressionBuilder : injected
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
@@ -123,10 +122,11 @@ classDiagram
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
+    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
+    LibraryPackager ..> ResourcePackager : injected
+    CSharpStreamToFileWriter ..> ResourcePackager : injected
+
     %% Rest
     ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
 
-    %% Obsolete
-    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
-    LibraryPackager ..> ResourcePackager : injected
 ```

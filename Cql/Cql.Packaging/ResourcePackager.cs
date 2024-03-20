@@ -3,7 +3,6 @@ using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging
 {
@@ -15,8 +14,8 @@ namespace Hl7.Cql.Packaging
     {
         private readonly LibraryPackager _libraryPackager;
         private readonly ILoggerFactory _logFactory;
-        private readonly CSharpResourceWriterOptions _csharpResourceWriterOptions;
         private readonly ResourceWriter[] _resourceWriters;
+        private readonly CSharpStreamToFileWriter? _cSharpStreamToFileWriter;
 
         /// <summary>
         /// Instantiates a new Resource Packager
@@ -24,13 +23,12 @@ namespace Hl7.Cql.Packaging
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
         public ResourcePackager(
-            ILoggerFactory logFactory, 
-            params ResourceWriter[] resourceWriters)
+            ILoggerFactory logFactory, params ResourceWriter[] resourceWriters)
         {
             _libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
             _logFactory = logFactory;
+            _cSharpStreamToFileWriter = null;
             _resourceWriters = resourceWriters;
-            _csharpResourceWriterOptions = new();
         }
 
         /// <summary>
@@ -43,15 +41,15 @@ namespace Hl7.Cql.Packaging
         /// <param name="libraryPackager">The library packager</param>
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
-        /// <param name="csharpResourceWriterOptions">CSharp resource writer</param>
+        /// <param name="cSharpStreamToFileWriter">CSharp source code writer</param>
         internal ResourcePackager(
             LibraryPackager libraryPackager,
             ILoggerFactory logFactory,
             IEnumerable<ResourceWriter> resourceWriters,
-            IOptions<CSharpResourceWriterOptions> csharpResourceWriterOptions) {
+            CSharpStreamToFileWriter? cSharpStreamToFileWriter = null) {
             _libraryPackager = libraryPackager;
             _logFactory = logFactory;
-            _csharpResourceWriterOptions = csharpResourceWriterOptions.Value;
+            _cSharpStreamToFileWriter = cSharpStreamToFileWriter;
             _resourceWriters = resourceWriters as ResourceWriter[] ?? resourceWriters.ToArray();
         }
 
@@ -82,46 +80,20 @@ namespace Hl7.Cql.Packaging
             Action<IEnumerable<Resource>>? afterPackageMutator, 
             string? resourceCanonicalRootUrl)
         {
-            if (_resourceWriters.Length == 0) 
+            if (_resourceWriters.Length == 0 && _cSharpStreamToFileWriter is null) 
                 return; //Skip since no writers provided
 
-            HashSet<Resource> resourcesWritten = new();
             LibraryPackager libraryPackager = new LibraryPackagerFactory(_logFactory).LibraryPackager;
             LibraryPackageCallbacks callbacks = new(
                 buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl),
-                onBeforeCompileStream: tuple =>
-                {
-                    if (_csharpResourceWriterOptions.OutDirectory is { } dir)
-                    {
-                        var file = new FileInfo($"{Path.Combine(dir.FullName, tuple.name)}.cs");
-                        file.Directory!.Create();
-                        using var streamOut = file.OpenWrite();
-                        tuple.stream.Position = 0L;
-                        tuple.stream.CopyTo(streamOut);
-                    }
-                },
-                onResourceCreated: library =>
-                {
-                    foreach (var resourceWriter in _resourceWriters)
-                    {
-                        afterPackageMutator?.Invoke(new [] {library});
-                        resourceWriter.WriteResource(library);
-                        resourcesWritten.Add(library);
-                    }
-                });
+                onBeforeCompileStream: _cSharpStreamToFileWriter is  {} writer ? tuple => writer.WriteToFile(tuple.name, tuple.stream) : null);
 
             LibrarySet librarySet = new(elmDir.FullName);
             librarySet.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
             List<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks).ToList();
-            
-            var remainingResources = resources.Except(resourcesWritten).ToList();
-            afterPackageMutator?.Invoke(remainingResources);
-            if (remainingResources.Any())
+            foreach (var resourceWriter in _resourceWriters)
             {
-                foreach (var resourceWriter in _resourceWriters)
-                {
-                    resourceWriter.WriteResources(remainingResources);
-                }
+                resourceWriter.WriteResources(resources);
             }
         }
     }

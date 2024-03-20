@@ -11,14 +11,14 @@ namespace Hl7.Cql.Packaging;
 /// </summary>
 internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
 {
-    private readonly Lazy<CSharpSourceCodeWriter> _cSharpSourceCodeWriter;
+    private readonly Lazy<CSharpLibrarySetToStreamsWriter> _cSharpSourceCodeWriter;
     private readonly Lazy<AssemblyCompiler> _assemblyCompiler;
     private readonly Lazy<LibraryPackager> _libraryPackager;
 
     public LibraryPackagerFactory(ILoggerFactory loggerFactory, int cacheSize = 0) : base(loggerFactory, cacheSize)
     {
-        _cSharpSourceCodeWriter = Deferred(() => new CSharpSourceCodeWriter(Logger<CSharpSourceCodeWriter>(), FhirTypeResolver));
-        _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpSourceCodeWriter, TypeManager));
+        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
+        _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager));
         _libraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler, LibrarySetExpressionBuilder));
 
 
@@ -27,7 +27,7 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
         ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
     }
 
-    public CSharpSourceCodeWriter CSharpSourceCodeWriter => _cSharpSourceCodeWriter.Value;
+    public CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => _cSharpSourceCodeWriter.Value;
 
     public AssemblyCompiler AssemblyCompiler => _assemblyCompiler.Value;
 

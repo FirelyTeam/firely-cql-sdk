@@ -72,7 +72,7 @@ internal static class DependencyInjection
 
         if (cSharpResourceWriterOptions.OutDirectory is {} csharpDir)
         {
-            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
+            services.AddSingleton<CSharpStreamToFileWriter>();
             services
                 .AddOptions<CSharpResourceWriterOptions>()
                 .Configure<IConfiguration>(CSharpResourceWriterOptions.BindConfig)
@@ -89,7 +89,7 @@ internal static class DependencyInjection
     public static void TryAddCompilationServices(this IServiceCollection services)
     {
         services.TryAddSingleton<OperatorBinding, CqlOperatorsBinding>();
-        services.TryAddSingleton<CSharpSourceCodeWriter>();
+        services.TryAddSingleton<CSharpLibrarySetToStreamsWriter>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
 
@@ -116,7 +116,7 @@ file class ResourcePackagerInjected : ResourcePackager
     public ResourcePackagerInjected(LibraryPackager libraryPackager,
         ILoggerFactory logFactory,
         IEnumerable<ResourceWriter> resourceWriters, 
-        IOptions<CSharpResourceWriterOptions> csharpResourceWriterOptions) : base(libraryPackager, logFactory, resourceWriters.Where(rw => rw is not CSharpResourceWriter), csharpResourceWriterOptions)
+        CSharpStreamToFileWriter? cSharpStreamToFileWriter = null) : base(libraryPackager, logFactory, resourceWriters, cSharpStreamToFileWriter)
     {
     }
 }

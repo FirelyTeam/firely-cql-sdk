@@ -3520,7 +3520,7 @@ namespace CoreTests
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
-            var writer = Factory.CSharpSourceCodeWriter;
+            var writer = Factory.CSharpLibrarySetToStreamsWriter;
             var items = writer.Write(
                 definitions, 
                 Factory.TypeManager.TupleTypes,
