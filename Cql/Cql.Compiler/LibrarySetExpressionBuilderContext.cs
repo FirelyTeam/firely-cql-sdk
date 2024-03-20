@@ -7,15 +7,15 @@ namespace Hl7.Cql.Compiler;
 internal class LibrarySetExpressionBuilderContext : IBuilderContext
 {
     private readonly LibrarySet _librarySet;
-    public ExpressionDefinitionDictionary AllDefinitions { get; }
     private readonly BuilderContextInfo _contextInfo;
+    private readonly ExpressionDefinitionDictionary _allDefinitions;
 
     public LibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
         ExpressionDefinitionDictionary definitions)
     {
         _librarySet = librarySet;
-        AllDefinitions = definitions;
+        _allDefinitions = definitions;
         _contextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
@@ -26,7 +26,7 @@ internal class LibrarySetExpressionBuilderContext : IBuilderContext
     public LibrarySet LibrarySet => _librarySet;
 
     public void MergeDefinitions(ExpressionDefinitionDictionary definitions) => 
-        AllDefinitions.Merge(definitions);
+        _allDefinitions.Merge(definitions);
 
     public string DebuggerView => this.GetDebuggerView();
 }
