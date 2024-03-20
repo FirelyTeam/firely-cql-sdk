@@ -60,7 +60,7 @@ internal class LibraryPackager
 
         var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
 
-        foreach (var (name, asmData) in _assemblyCompiler.Compile(librarySet, definitions, assemblyCompilerCallbacks))
+        foreach (var (name, asmData) in _assemblyCompiler.Compile(librarySet, definitions))
         {
             if (name is "TupleTypes")
             {
@@ -118,6 +118,11 @@ internal class LibraryPackager
             }
         }
 
+        exceptionDispatchInfo?.Throw();
+
+        callbacks.OnAfterPackageMutate(resources);
+
+
         foreach (var library in librarySet)
         {
             var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
@@ -170,8 +175,6 @@ internal class LibraryPackager
                 }
             }
         }
-
-        exceptionDispatchInfo?.Throw();
         return resources;
     }
 
