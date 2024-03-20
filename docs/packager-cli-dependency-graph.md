@@ -16,6 +16,7 @@ classDiagram
     %% Inheritance  
     CqlOperatorsBinding --> OperatorBinding : inherits
     FhirResourceWriter --> ResourceWriter : inherits
+    WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
 
     %% Injected Dependencies
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
@@ -39,7 +40,7 @@ classDiagram
     LibrarySetExpressionBuilder ..> LibraryPackager : injected
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
-    CSharpStreamToFileWriter ..> CSharpLibrarySetToStreamsWriter : injected
+    CSharpCodeStreamPostProcessor ..> CSharpLibrarySetToStreamsWriter : injected\n(optional)
 
     TypeManager ..> LibraryExpressionBuilder : injected
     ExpressionBuilder ..> LibraryExpressionBuilder : injected

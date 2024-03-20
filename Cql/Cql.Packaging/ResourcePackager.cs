@@ -80,6 +80,7 @@ namespace Hl7.Cql.Packaging
 
             LibraryPackager libraryPackager = new LibraryPackagerFactory(_logFactory).LibraryPackager;
             LibraryPackageCallbacks callbacks = new(
+                afterPackageMutator: afterPackageMutator,
                 buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
 
             LibrarySet librarySet = new(elmDir.FullName);

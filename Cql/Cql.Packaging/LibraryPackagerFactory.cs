@@ -13,17 +13,17 @@ namespace Hl7.Cql.Packaging;
 internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
 {
     private readonly Lazy<CSharpLibrarySetToStreamsWriter> _cSharpSourceCodeWriter;
-    private readonly Lazy<CSharpStreamToFileWriter?> _cSharpStreamToFileWriter;
+    private readonly Lazy<CSharpCodeStreamPostProcessor?> _cSharpCodeStreamPostProcessor;
     private readonly Lazy<AssemblyCompiler> _assemblyCompiler;
     private readonly Lazy<LibraryPackager> _libraryPackager;
 
     public LibraryPackagerFactory(ILoggerFactory loggerFactory, int cacheSize = 0, string? csharpOutDirectory = null) : base(loggerFactory, cacheSize)
     {
-        _cSharpStreamToFileWriter = Deferred(() =>
+        _cSharpCodeStreamPostProcessor = Deferred<CSharpCodeStreamPostProcessor?>(() =>
             csharpOutDirectory is { } dir
-                ? new CSharpStreamToFileWriter(Options(new CSharpCodeWriterOptions() { OutDirectory = new DirectoryInfo(dir) })) 
+                ? new WriteToFileCSharpCodeStreamPostProcessor(Options(new CSharpCodeWriterOptions() { OutDirectory = new DirectoryInfo(dir) })) 
                 : null);
-        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver, CSharpStreamToFileWriter));
+        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver, CSharpCodeStreamPostProcessor));
         _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager));
         _libraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler, LibrarySetExpressionBuilder));
 
@@ -37,7 +37,7 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
 
     public CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => _cSharpSourceCodeWriter.Value;
 
-    public CSharpStreamToFileWriter? CSharpStreamToFileWriter => _cSharpStreamToFileWriter.Value;
+    public CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => _cSharpCodeStreamPostProcessor.Value;
 
     public AssemblyCompiler AssemblyCompiler => _assemblyCompiler.Value;
 

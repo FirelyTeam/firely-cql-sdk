@@ -58,7 +58,6 @@ internal class LibraryPackager
             exceptionDispatchInfo = ExceptionDispatchInfo.Capture(e);
         }
 
-        var assemblyCompilerCallbacks = new AssemblyCompilerCallbacks(onBeforeCompileStream:t => callbacks.OnBeforeCompileStream(t.name, t.stream, t.isTuple));
         var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
 
         foreach (var (name, asmData) in _assemblyCompiler.Compile(librarySet, definitions, assemblyCompilerCallbacks))

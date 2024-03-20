@@ -72,7 +72,7 @@ internal static class DependencyInjection
 
         if (cSharpCodeWriterOptions.OutDirectory is {} csharpDir)
         {
-            services.AddSingleton<CSharpStreamToFileWriter>();
+            services.AddSingleton<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor>();
             services
                 .AddOptions<CSharpCodeWriterOptions>()
                 .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)

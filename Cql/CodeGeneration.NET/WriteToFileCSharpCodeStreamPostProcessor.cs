@@ -4,16 +4,16 @@ using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging;
 
-internal class CSharpStreamToFileWriter
+internal class WriteToFileCSharpCodeStreamPostProcessor : CSharpCodeStreamPostProcessor
 {
     private readonly CSharpCodeWriterOptions _csharpCodeWriterOptions;
 
-    public CSharpStreamToFileWriter(IOptions<CSharpCodeWriterOptions> csharpCodeWriterOptions)
+    public WriteToFileCSharpCodeStreamPostProcessor(IOptions<CSharpCodeWriterOptions> csharpCodeWriterOptions)
     {
         _csharpCodeWriterOptions = csharpCodeWriterOptions.Value;
     }
 
-    public void WriteToFile(string name, Stream stream)
+    public override void ProcessStream(string name, Stream stream)
     {
         var file = new FileInfo($"{Path.Combine(_csharpCodeWriterOptions.OutDirectory!.FullName, name)}.cs");
         file.Directory!.Create();

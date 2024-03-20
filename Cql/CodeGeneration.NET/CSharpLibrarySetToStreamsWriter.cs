@@ -30,21 +30,21 @@ namespace Hl7.Cql.CodeGeneration.NET
     internal class CSharpLibrarySetToStreamsWriter
     {
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
-        private readonly CSharpStreamToFileWriter? _cSharpStreamToFileWriter;
+        private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
         /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
-        /// <param name="cSharpStreamToFileWriter">CSharp source code writer</param>
+        /// <param name="cSharpCodeStreamPostProcessor">CSharp source code writer</param>
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
             TypeResolver typeResolver,
-            CSharpStreamToFileWriter? cSharpStreamToFileWriter)
+            CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor)
         {
             _logger = logger;
-            _cSharpStreamToFileWriter = cSharpStreamToFileWriter;
+            _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -146,14 +146,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 foreach (var tuple in WriteTupleTypes(tupleTypes, callbacks))
                 {
                     streamsToDispose.Add(tuple.stream);
-                    _cSharpStreamToFileWriter?.WriteToFile(tuple.name, tuple.stream);
+                    _cSharpCodeStreamPostProcessor?.ProcessStream(tuple.name, tuple.stream);
                     yield return tuple;
                 }
 
                 foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks))
                 {
                     streamsToDispose.Add(tuple.stream);
-                    _cSharpStreamToFileWriter?.WriteToFile(tuple.name, tuple.stream);
+                    _cSharpCodeStreamPostProcessor?.ProcessStream(tuple.name, tuple.stream);
                     yield return tuple;
                 }
             }

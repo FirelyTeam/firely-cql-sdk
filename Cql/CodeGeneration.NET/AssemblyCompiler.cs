@@ -65,18 +65,15 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public IEnumerable<(string name, AssemblyData asmData)> Compile(
             LibrarySet librarySet, 
-            DefinitionDictionary<LambdaExpression> definitions,
-            AssemblyCompilerCallbacks? callbacks = null)
+            DefinitionDictionary<LambdaExpression> definitions)
         {
-            callbacks ??= new();
             IEnumerable<(string name, Stream stream)> streamsByName = _cSharpLibrarySetToStreamsWriter.Write(definitions, _typeManager.TupleTypes, librarySet);
-            return CompileSourceCodeStreams(librarySet, streamsByName, callbacks);
+            return CompileSourceCodeStreams(librarySet, streamsByName);
         }
 
         private IEnumerable<(string name, AssemblyData asmData)> CompileSourceCodeStreams(
             LibrarySet librarySet,
-            IEnumerable<(string name, Stream stream)> streamsByLibraryName,
-            AssemblyCompilerCallbacks callbacks)
+            IEnumerable<(string name, Stream stream)> streamsByLibraryName)
         {
             var assemblies = new Dictionary<string, AssemblyData>();
             List<(string name, Stream sream)> tupleStreams = new List<(string name, Stream sream)>();
@@ -90,7 +87,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                     if (!isScanningTuples)
                         throw new ExpectedTuplesBeforeLibrariesError().ToException();
                     tupleStreams.Add((name, stream));
-                    callbacks.OnBeforeCompileStream(name, stream, true);
                 }
                 else
                 {
@@ -101,8 +97,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                         dependencyAssemblies = new[] { tuple.asmData };
                         yield return tuple;
                     }
-
-                    callbacks.OnBeforeCompileStream(name, stream, false);
                     var library = librarySet.GetLibrary(name)!;
                     yield return CompileLibrary(stream, assemblies, librarySet, library, _referencesLazy.Value, dependencyAssemblies);
                 }
