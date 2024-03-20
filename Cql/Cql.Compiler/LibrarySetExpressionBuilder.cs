@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Runtime;
+﻿using System.Linq.Expressions;
+using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
@@ -16,14 +17,14 @@ internal class LibrarySetExpressionBuilder
         _libraryExpressionBuilder = libraryExpressionBuilder;
     }
 
-    public LibrarySetExpressionBuilderContext CreateContext(
+    private LibrarySetExpressionBuilderContext CreateContext(
         LibrarySet librarySet,
-        ExpressionDefinitionDictionary definitions) =>
+        DefinitionDictionary<LambdaExpression> definitions) =>
         new LibrarySetExpressionBuilderContext(librarySet, definitions);
 
-    public ExpressionDefinitionDictionary ProcessLibrarySet(
+    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
-        ExpressionDefinitionDictionary? definitions = null)
+        DefinitionDictionary<LambdaExpression>? definitions = null)
 
     {
         definitions ??= new();

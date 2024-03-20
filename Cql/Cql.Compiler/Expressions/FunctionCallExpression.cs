@@ -19,22 +19,22 @@ namespace Hl7.Cql.Compiler
 
     /// <summary>
     /// This is a custom expression representing the invocation of a function using
-    /// a lookup on a <see cref="ExpressionDefinitionDictionary"/>.
+    /// a lookup on a <see cref="DefinitionDictionary{LambdaExpression}"/>.
     /// </summary>
     /// <remarks>The expression reduces to a lookup on a
-    /// <see cref="ExpressionDefinitionDictionary"/> expression by item, plus the invocation
+    /// <see cref="DefinitionDictionary{LambdaExpression}"/> expression by item, plus the invocation
     /// of the delegate, if found.</remarks>.
     internal class FunctionCallExpression : Expression
     {
         private static readonly PropertyInfo itemProperty =
-            typeof(ExpressionDefinitionDictionary)
+            typeof(DefinitionDictionary<LambdaExpression>)
             .GetProperty("Item", new[] { typeof(string), typeof(string), typeof(Type[]) })!;
 
         public FunctionCallExpression(Expression definitions,
             string libraryName, string functionName, IReadOnlyCollection<Expression> arguments, Type functionType)
         {
-            if (definitions.Type != typeof(ExpressionDefinitionDictionary))
-                throw new ArgumentException($"Argument should be of type {nameof(ExpressionDefinitionDictionary)}",
+            if (definitions.Type != typeof(DefinitionDictionary<LambdaExpression>))
+                throw new ArgumentException($"Argument should be of type {nameof(DefinitionDictionary<LambdaExpression>)}",
                     nameof(definitions));
 
             if (!functionType.IsAssignableTo(typeof(MulticastDelegate)))

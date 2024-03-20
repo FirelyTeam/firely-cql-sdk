@@ -7,19 +7,23 @@ classDiagram
 
     class LibrarySetExpressionBuilder {
        _libraryExpressionBuilder : LibraryExpressionBuilder
+
+       ProcessLibrarySet(LibrarySet, DefinitionDictionary<LambdaExpression>) DefinitionDictionary<LambdaExpression>
     }
 
     class LibrarySetExpressionBuilderContext {
-       _allDefinitions : ExpressionDefinitionDictionary
+       _allDefinitions : DefinitionDictionary<LambdaExpression>
 
-       get_LibrarySet() LibrarySet
-       get_AllDefinitions() ExpressionDefinitionDictionary
+       get LibrarySet() LibrarySet
+       get AllDefinitions() DefinitionDictionary<LambdaExpression>
     }
 
     class LibraryExpressionBuilder {
        _expressionBuilder : ExpressionBuilder
        _operatorBinding : OperatorBinding
        _typeManager : TypeManager
+
+       ProcessLibrary(Library, LibrarySetExpressionBuilderContext, DefinitionDictionary<LambdaExpression>) LibraryExpressionBuilderContext
     }
 
     class LibraryExpressionBuilderContext {
@@ -30,11 +34,11 @@ classDiagram
        _codesByCodeSystemName : Dictionary~string,List_CqlCode_~
        _codeSystemIdsByCodeSystemRefs : ByLibraryNameAndNameDictionary~String~
 
-       get_LibraryKey() string => Library.NameAndVersion()!
-       get_Library() Library
-       get_LibrarySetContext() LibrarySetExpressionBuilderContext
-       get_Definitions() ExpressionDefinitionDictionary
-       get_AllowUnresolvedExternals() bool => _expressionBuilderSettings.AllowUnresolvedExternals
+       get LibraryKey() string => Library.NameAndVersion()!
+       get Library() Library
+       get LibrarySetContext() LibrarySetExpressionBuilderContext
+       get Definitions() DefinitionDictionary<LambdaExpression>
+       get AllowUnresolvedExternals() bool => _expressionBuilderSettings.AllowUnresolvedExternals
     }
 
     class ExpressionBuilder {
@@ -48,15 +52,15 @@ classDiagram
         _outerContext : ExpressionBuilderContext
         _scopes : Dictionary~String,Tuple_Expression_Element_~
 
-        get_LibraryContext() LibraryExpressionBuilderContext
-        get_ExpressionMutators() List~IExpressionMutator~
-        get_CustomImplementation() Dicionary~String, Func_ParameterExpressionArray_LambdaExpression~
-        get_ExpressionBuilderSettings() ExpressionBuilderSettings
-        get_RuntimeContextParameter() ParameterExpression
-        get_ImpliedAlias() String?
-        private set_ImpliedAlias(String)
-        get_Operands() Dictionary~String,ParameterExpression~
-        get_Libraries() Dictionary~String,ExpressionDefinitionDictionary~
+        get LibraryContext() LibraryExpressionBuilderContext
+        get ExpressionMutators() List~IExpressionMutator~
+        get CustomImplementation() Dicionary~String, Func_ParameterExpressionArray_LambdaExpression~
+        get ExpressionBuilderSettings() ExpressionBuilderSettings
+        get RuntimeContextParameter() ParameterExpression
+        get ImpliedAlias() String?
+        private set ImpliedAlias(String)
+        get Operands() Dictionary~String,ParameterExpression~
+        get Libraries() Dictionary~String,DefinitionDictionary<LambdaExpression>~
 
     }
 

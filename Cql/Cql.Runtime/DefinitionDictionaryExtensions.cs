@@ -15,24 +15,24 @@ using System.Runtime.CompilerServices;
 namespace Hl7.Cql.Runtime
 {
     /// <summary>
-    /// Adds extension methods to <see cref="ExpressionDefinitionDictionary"/> for specific types.
+    /// Adds extension methods to <see cref="DefinitionDictionary{LambdaExpression}"/> for specific types.
     /// </summary>
     internal static class DefinitionDictionaryExtensions
     {
 
         /// <summary>
-        /// Compiles a <see cref="ExpressionDefinitionDictionary"/> to a <see cref="ExpressionDefinitionDictionary"/>.
+        /// Compiles a <see cref="DefinitionDictionary{LambdaExpression}"/> to a <see cref="DefinitionDictionary{LambdaExpression}"/>.
         /// This is accomplished by calling <see cref="LambdaExpression.Compile()"/>.
         /// </summary>
         /// <param name="expressions">The expressions to compile.</param>
         /// <param name="visitors">Expression visitors to apply before compiling, or <see langword="null"/>.</param>
         /// <param name="debug">The debug info generator to use, or <see langword="null"/>.</param>
         /// <returns></returns>
-        public static DelegateDefinitionDictionary CompileAll(this ExpressionDefinitionDictionary expressions,
+        public static DefinitionDictionary<Delegate> CompileAll(this DefinitionDictionary<LambdaExpression> expressions,
             IList<ExpressionVisitor>? visitors = null,
             DebugInfoGenerator? debug = null)
         {
-            var delegates = new DelegateDefinitionDictionary();
+            var delegates = new DefinitionDictionary<Delegate>();
             foreach (var library in expressions.Libraries)
             {
                 foreach (var kvp in expressions.DefinitionsForLibrary(library))
@@ -65,7 +65,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="rtx">The runtime context to use for the execution.</param>
         /// <param name="parameters">The definition's parameters, excluding <paramref name="rtx"/>.</param>
         /// <returns></returns>
-        public static T? Invoke<T>(this DelegateDefinitionDictionary delegates, string libraryName, string define, CqlContext rtx, params object[] parameters)
+        public static T? Invoke<T>(this DefinitionDictionary<Delegate> delegates, string libraryName, string define, CqlContext rtx, params object[] parameters)
         {
             var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
             var @delegate = delegates[libraryName, define, parameterTypes];

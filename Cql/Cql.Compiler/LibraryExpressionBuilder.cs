@@ -35,16 +35,16 @@ internal class LibraryExpressionBuilder
         _typeManager = typeManager;
     }
 
-    public LibraryExpressionBuilderContext CreateContext(
+    private LibraryExpressionBuilderContext CreateContext(
         Library library,
         LibrarySetExpressionBuilderContext? libsCtx,
-        ExpressionDefinitionDictionary definitions) =>
+        DefinitionDictionary<LambdaExpression> definitions) =>
         new(library, _expressionBuilder.Settings, _operatorBinding, definitions, libsCtx);
 
-    public ExpressionDefinitionDictionary ProcessLibrary(
+    public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
         LibrarySetExpressionBuilderContext? libsCtx = null,
-        ExpressionDefinitionDictionary? definitions = null)
+        DefinitionDictionary<LambdaExpression>? definitions = null)
 
     {
         definitions ??= new();

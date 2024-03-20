@@ -23,7 +23,7 @@ namespace Hl7.Cql.Fhir
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
-            DelegateDefinitionDictionary? delegates = null,
+            DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null) =>
             new CqlContext(
                 new FhirModelBindingSetup(dataSource, valueSets, now, options).Operators,
@@ -37,7 +37,7 @@ namespace Hl7.Cql.Fhir
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
-            DelegateDefinitionDictionary? delegates = null,
+            DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null)
         {
             IDataSource source = bundle is not null ?
@@ -54,7 +54,7 @@ namespace Hl7.Cql.Fhir
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
-            DelegateDefinitionDictionary? delegates = null,
+            DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null)
         {
             return createContext(source, parameters, valueSets, now, delegates, options);

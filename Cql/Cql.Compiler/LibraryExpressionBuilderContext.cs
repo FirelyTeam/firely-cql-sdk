@@ -25,7 +25,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         Library library,
         ExpressionBuilderSettings expressionBuilderSettings,
         OperatorBinding operatorBinding,
-        ExpressionDefinitionDictionary definitions,
+        DefinitionDictionary<LambdaExpression> definitions,
         LibrarySetExpressionBuilderContext? libsCtx = null)
     {
 
@@ -58,7 +58,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     #region Definitions
 
-    public ExpressionDefinitionDictionary Definitions { get; }
+    public DefinitionDictionary<LambdaExpression> Definitions { get; }
 
     #endregion
 

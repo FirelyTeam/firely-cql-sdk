@@ -134,7 +134,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <param name="writeFile">A function that determines whether the given library should be generated or not; default is <see langword="null" />.  When <see langword="null" />, all libraries are written.</param>
         /// 
         public void Write(
-            ExpressionDefinitionDictionary definitions,
+            DefinitionDictionary<LambdaExpression> definitions,
             IEnumerable<Type> tupleTypes,
             LibrarySet librarySet,
             Func<string, Stream> libraryNameToStream,
@@ -151,7 +151,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private void writeLibraries(
-            ExpressionDefinitionDictionary definitions,
+            DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
             Func<string, Stream> libraryNameToStream,
             bool closeStream, 
@@ -206,7 +206,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void writeClass(ExpressionDefinitionDictionary definitions,
+        private void writeClass(DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
             Func<string?, string?> libraryNameToClassName,
             string libraryName, 
@@ -267,7 +267,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void writeMemoizedInstanceMethods(ExpressionDefinitionDictionary definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeMemoizedInstanceMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
@@ -280,7 +280,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void writeCachedValueNames(ExpressionDefinitionDictionary definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeCachedValueNames(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
@@ -315,7 +315,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void writeCachedValues(ExpressionDefinitionDictionary definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeCachedValues(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             writer.WriteLine(indentLevel, "#region Cached values");
             writer.WriteLine();

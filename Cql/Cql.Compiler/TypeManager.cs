@@ -12,6 +12,7 @@ using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
 using Hl7.Cql.Runtime;
@@ -81,7 +82,7 @@ namespace Hl7.Cql.Compiler
 
         internal Type? TypeFor(
             Element element,
-            ExpressionDefinitionDictionary definitions,
+            DefinitionDictionary<LambdaExpression> definitions,
             ExpressionBuilderContext ctx,
             bool throwIfNotFound = true)
         {

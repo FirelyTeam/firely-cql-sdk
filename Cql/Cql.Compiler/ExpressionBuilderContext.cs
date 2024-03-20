@@ -40,7 +40,7 @@ namespace Hl7.Cql.Compiler
             OperatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
-            Libraries = new Dictionary<string, ExpressionDefinitionDictionary>();
+            Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
             _scopes = new Dictionary<string, (Expression, elm.Element)>();
             LibraryContext = libContext;
             ExpressionMutators = new List<IExpressionMutator>();
@@ -124,7 +124,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal IDictionary<string, ParameterExpression> Operands { get; }
 
-        private IDictionary<string, ExpressionDefinitionDictionary> Libraries { get; }
+        private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; }
         
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,

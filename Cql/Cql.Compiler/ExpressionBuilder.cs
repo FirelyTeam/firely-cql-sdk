@@ -80,10 +80,10 @@ namespace Hl7.Cql.Compiler
             Elm.Library library,
             Elm.Expression expression,
             OperatorBinding operatorBinding,
-            ExpressionDefinitionDictionary? lambdas = null)
+            DefinitionDictionary<LambdaExpression>? lambdas = null)
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
-            lambdas ??= new ExpressionDefinitionDictionary();
+            lambdas ??= new DefinitionDictionary<LambdaExpression>();
             var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(library, Settings, operatorBinding, lambdas);
             var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression);
             var translated = TranslateExpression(expression, ctx);
