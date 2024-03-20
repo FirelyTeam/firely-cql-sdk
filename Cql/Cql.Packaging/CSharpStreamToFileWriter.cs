@@ -17,7 +17,7 @@ internal class CSharpStreamToFileWriter
         var file = new FileInfo($"{Path.Combine(_csharpResourceWriterOptions.OutDirectory!.FullName, name)}.cs");
         file.Directory!.Create();
         using var streamOut = file.OpenWrite();
-        stream.Position = 0L;
+        stream.Seek(0, SeekOrigin.Begin);
         stream.CopyTo(streamOut);
     }
 }

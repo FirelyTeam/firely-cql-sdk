@@ -210,6 +210,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     indentLevel -= 1;
                 }
 
+                writer.Flush();
                 yield return (libraryName, stream);
             }
         }
