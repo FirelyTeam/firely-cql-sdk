@@ -4,7 +4,7 @@
 
 ```mermaid
 classDiagram
-    direction LR
+    direction BT
 
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
