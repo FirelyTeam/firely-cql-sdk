@@ -104,6 +104,7 @@ internal static class DependencyInjection
     public static void TryAddBuilders(this IServiceCollection services)
     {
         services.TryAddSingleton<ResourcePackager, ResourcePackagerInjected>();
+        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
         services.TryAddSingleton<LibraryPackager>();
         services.TryAddSingleton<ExpressionBuilder>();
         services.TryAddSingleton<LibraryExpressionBuilder>();

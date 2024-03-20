@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Runtime.Loader;
 using System.Text;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -21,14 +20,14 @@ internal class LibraryPackager
 {
     private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
     private readonly AssemblyCompiler _assemblyCompiler;
-    private readonly TypeResolver _typeResolver;
+    private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper;
 
     public LibraryPackager(
-        TypeResolver typeResolver,
+        CqlTypeToFhirTypeMapper cqlTypeToFhirTypeMapper,
         AssemblyCompiler assemblyCompiler, 
         LibrarySetExpressionBuilder librarySetExpressionBuilder)
     {
-        _typeResolver = typeResolver;
+        _cqlTypeToFhirTypeMapper = cqlTypeToFhirTypeMapper;
         _assemblyCompiler = assemblyCompiler;
         _librarySetExpressionBuilder = librarySetExpressionBuilder;
     }
@@ -57,8 +56,6 @@ internal class LibraryPackager
             librarySet = librarySetReplacement;
             exceptionDispatchInfo = ExceptionDispatchInfo.Capture(e);
         }
-
-        var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
 
         foreach (var (name, asmData) in _assemblyCompiler.Compile(librarySet, definitions))
         {
@@ -109,7 +106,7 @@ internal class LibraryPackager
                 if (library.NameAndVersion() is null)
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, typeCrosswalk, library);
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, _cqlTypeToFhirTypeMapper, library);
                 librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
                 resources.Add(fhirLibrary);
             }

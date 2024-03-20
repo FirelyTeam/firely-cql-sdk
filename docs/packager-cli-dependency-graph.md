@@ -6,19 +6,33 @@
 classDiagram
     direction LR
 
+    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
+
     class TypeManager {
         get_TypeResolver() TypeResolver
         get_TupleTypes() IEnumerable~Type~
     }
 
-    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
+    subgraph Generating_CSharp_From_LibrarySet_AndDefinitions
+        class CSharpLibrarySetToStreamsWriter {
+        }
+
+        class CSharpCodeStreamPostProcessor {
+        }
+
+        class WriteToFileCSharpCodeStreamPostProcessor {
+        }
+    end
+
 
     %% Inheritance  
+    
     CqlOperatorsBinding --> OperatorBinding : inherits
     FhirResourceWriter --> ResourceWriter : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
 
     %% Injected Dependencies
+
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected
 
@@ -27,9 +41,9 @@ classDiagram
     ResourcePackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
     
-
-    TypeConverter ..> CqlOperatorsBinding : injected         
-    TypeResolver ..> CqlOperatorsBinding : injected    
+       
+    TypeResolver ..> CqlOperatorsBinding : injected
+    TypeConverter ..> CqlOperatorsBinding : injected
 
     ModelInspector ..> TypeConverter : injected  
 
@@ -39,8 +53,8 @@ classDiagram
     AssemblyCompiler ..> LibraryPackager : injected
     LibrarySetExpressionBuilder ..> LibraryPackager : injected
     
-    TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
     CSharpCodeStreamPostProcessor ..> CSharpLibrarySetToStreamsWriter : injected\n(optional)
+    TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
     TypeManager ..> LibraryExpressionBuilder : injected
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
