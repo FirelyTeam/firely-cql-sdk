@@ -110,21 +110,11 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
             libraries[t.index] = library;
         });
 
-        AddLibraries(libraries);
-        return libraries;
-    }
-
-    /// <summary>
-    /// Adds the specified libraries to the LibrarySet.
-    /// </summary>
-    /// <param name="libraries">The libraries to add.</param>
-    public void AddLibraries(IEnumerable<Library> libraries)
-    {
         foreach (var library in libraries)
         {
             try
             {
-                _libraryInfosByKey.Add(library.NameAndVersion()!, (library, new()));
+                _libraryInfosByKey.Add(library.NameAndVersion()!, (library, new ()));
             }
             catch (ArgumentNullException)
             {
@@ -138,6 +128,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         }
 
         _librariesNotCalculatedYet.AddRange(libraries);
+
+        return libraries;
     }
 
     private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) GetCalculatedState()

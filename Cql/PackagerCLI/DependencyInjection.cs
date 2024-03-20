@@ -113,10 +113,10 @@ internal static class DependencyInjection
 
 file class ResourcePackagerInjected : ResourcePackager
 {
-    public ResourcePackagerInjected(LibraryPackager libraryPackager,
+    public ResourcePackagerInjected(
+        LibraryPackager libraryPackager, 
         ILoggerFactory logFactory,
-        IEnumerable<ResourceWriter> resourceWriters, 
-        IOptions<CSharpResourceWriterOptions> csharpResourceWriterOptions) : base(libraryPackager, logFactory, resourceWriters.Where(rw => rw is not CSharpResourceWriter), csharpResourceWriterOptions)
+        IEnumerable<ResourceWriter> resourceWriters) : base(libraryPackager, logFactory, resourceWriters)
     {
     }
 }

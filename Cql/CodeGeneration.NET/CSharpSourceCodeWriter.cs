@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Graph;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -20,6 +21,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -127,57 +129,41 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <param name="definitions">The lambda expressions to write.</param>
         /// <param name="tupleTypes">Tuple types generated during lambda creation.</param>
         /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
-        /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
-        public IEnumerable<(string name, Stream stream)> Write(
+        /// <param name="libraryNameToStream">A function that provides a <see cref="Stream"/> to write the source code given the name of the library being generated.</param>
+        /// <param name="closeStream">When <see langword="true"/>, <see cref="Stream"/>s provided by <paramref name="libraryNameToStream"/> will be closed when writing is done.  Default value is <see langword="true"/></param>
+        /// <param name="writeFile">A function that determines whether the given library should be generated or not; default is <see langword="null" />.  When <see langword="null" />, all libraries are written.</param>
+        /// 
+        public void Write(
             DefinitionDictionary<LambdaExpression> definitions,
-            IReadOnlyCollection<Type> tupleTypes,
+            IEnumerable<Type> tupleTypes,
             LibrarySet librarySet,
-            CSharpSourceCodeWriterCallbacks? callbacks = default)
+            Func<string, Stream> libraryNameToStream,
+            bool closeStream = true,
+            Predicate<string>? writeFile = null)
         {
-            List<Stream> streamsToDispose = new();
-            callbacks ??= new();
-            try
-            {
-                foreach (var tuple in WriteTupleTypes(tupleTypes, callbacks))
-                {
-                    streamsToDispose.Add(tuple.stream);
-                    yield return tuple;
-                }
+            var libraryNameToClassName = VariableNameGenerator.NormalizeIdentifier;
+            bool defaultWriteFile(string nodeId) => true;
+            writeFile ??= defaultWriteFile;
 
-                foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks))
-                {
-                    streamsToDispose.Add(tuple.stream);
-                    yield return tuple;
-                }
-            }
-            finally
-            {
-                foreach (var stream in streamsToDispose)
-                {
-                    stream.Dispose();
-                }
-            }
+            writeTupleTypes(tupleTypes, libraryNameToStream, closeStream);
+
+            writeLibraries(definitions, librarySet, libraryNameToStream, closeStream, writeFile!, libraryNameToClassName);
         }
 
-        private IEnumerable<(string name, Stream stream)> WriteLibraries(
+        private void writeLibraries(
             DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
-            CSharpSourceCodeWriterCallbacks callbacks)
+            Func<string, Stream> libraryNameToStream,
+            bool closeStream, 
+            Predicate<string> writeFile, 
+            Func<string?, string?> libraryNameToClassName)
         {
-            if (!librarySet.Any())
-            {
-                _logger.LogInformation($"No libraries detected; skipping.");
-                yield break;
-            }
-
             foreach (var library in librarySet)
             {
                 string libraryName = library.NameAndVersion()!;
-                if (!callbacks.ShouldWriteLibrary(libraryName))
-                {
-                    _logger.LogInformation($"Skipping library {libraryName} as per callback.");
+
+                if (!writeFile(libraryName))
                     continue;
-                }
 
                 if (!definitions.Libraries.Contains(libraryName))
                 {
@@ -185,38 +171,44 @@ namespace Hl7.Cql.CodeGeneration.NET
                     continue;
                 }
 
-                var stream = callbacks.GetStreamForLibraryName(libraryName);
-                if (stream == null!)
-                    continue;
+                var stream = libraryNameToStream(libraryName);
 
-                using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
-                int indentLevel = 0;
-                WriteUsings(writer);
-
-                // Namespace
-                if (!string.IsNullOrWhiteSpace(Namespace))
+                try
                 {
-                    writer.WriteLine(indentLevel, $"namespace {Namespace}");
-                    writer.WriteLine(indentLevel, "{");
-                    writer.WriteLine();
-                    indentLevel += 1;
+                    using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
+                    int indentLevel = 0;
+                    WriteUsings(writer);
+
+                    // Namespace
+                    if (!string.IsNullOrWhiteSpace(Namespace))
+                    {
+                        writer.WriteLine(indentLevel, $"namespace {Namespace}");
+                        writer.WriteLine(indentLevel, "{");
+                        writer.WriteLine();
+                        indentLevel += 1;
+                    }
+
+                    writeClass(definitions, librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
+
+                    if (!string.IsNullOrWhiteSpace(Namespace))
+                    {
+                        writer.WriteLine(indentLevel, "}");
+                        indentLevel -= 1;
+                    }
                 }
-
-                WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, writer, indentLevel);
-
-                if (!string.IsNullOrWhiteSpace(Namespace))
+                finally
                 {
-                    writer.WriteLine(indentLevel, "}");
-                    indentLevel -= 1;
+                    if (closeStream && stream != null)
+                    {
+                        stream.Close();
+                    }
                 }
-
-                yield return (libraryName, stream);
             }
         }
 
-        private void WriteClass(DefinitionDictionary<LambdaExpression> definitions,
+        private void writeClass(DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
-            Func<string, string?> libraryNameToClassName,
+            Func<string?, string?> libraryNameToClassName,
             string libraryName, 
             StreamWriter writer,
             int indentLevel)
@@ -250,7 +242,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 writer.WriteLine(indentLevel, $"{AccessModifierString(_contextAccessModifier)} CqlContext context;");
                 writer.WriteLine();
-                WriteCachedValues(definitions, libraryName, writer, indentLevel);
+                writeCachedValues(definitions, libraryName, writer, indentLevel);
 
                 // Write constructor
                 writer.WriteLine(indentLevel, $"public {className}(CqlContext context)");
@@ -261,21 +253,21 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine(indentLevel, "this.context = context ?? throw new ArgumentNullException(\"context\");");
                     writer.WriteLine();
 
-                    WriteDependencies(librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
+                    writeDependencies(librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
                     writer.WriteLine();
-                    WriteCachedValueNames(definitions, libraryName, writer, indentLevel);
+                    writeCachedValueNames(definitions, libraryName, writer, indentLevel);
                     indentLevel -= 1;
                 }
                 writer.WriteLine(indentLevel, "}");
 
                 WriteLibraryMembers(writer, librarySet, libraryName, libraryNameToClassName!, indentLevel);
-                WriteMemoizedInstanceMethods(definitions, libraryName, writer, indentLevel);
+                writeMemoizedInstanceMethods(definitions, libraryName, writer, indentLevel);
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
             }
         }
 
-        private void WriteMemoizedInstanceMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeMemoizedInstanceMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
@@ -288,13 +280,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteCachedValueNames(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeCachedValueNames(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
                 foreach (var overload in kvp.Value)
                 {
-                    if (IsDefinition(overload.Item2))
+                    if (isDefinition(overload.Item2))
                     {
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
@@ -306,9 +298,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static void WriteDependencies(
+        private static void writeDependencies(
             LibrarySet librarySet, 
-            Func<string, string?> libraryNameToClassName, 
+            Func<string?, string?> libraryNameToClassName, 
             string libraryName, 
             StreamWriter writer,
             int indentLevel)
@@ -323,7 +315,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeCachedValues(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             writer.WriteLine(indentLevel, "#region Cached values");
             writer.WriteLine();
@@ -332,7 +324,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 foreach (var overload in kvp.Value)
                 {
-                    if (IsDefinition(overload.T))
+                    if (isDefinition(overload.T))
                     {
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
@@ -345,43 +337,46 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, "#endregion");
         }
 
-        private IEnumerable<(string name, Stream stream)> WriteTupleTypes(
-            IReadOnlyCollection<Type> tupleTypes,
-            CSharpSourceCodeWriterCallbacks callbacks)
+        private void writeTupleTypes(IEnumerable<Type> tupleTypes, Func<string, Stream> libraryNameToStream, bool closeStream)
         {
-            if (!tupleTypes.Any())
+            if (tupleTypes.Any())
+            {
+                foreach (var tupleType in tupleTypes!)
+                {
+                    if (tupleType == null)
+                        continue;
+                    var tupleTypeStream = libraryNameToStream(Path.Combine(tupleType.Namespace!, tupleType.Name));
+                    try
+                    {
+                        var writer = new StreamWriter(tupleTypeStream);
+                        WriteUsings(writer);
+                        var indentLevel = 0;
+                        writer.WriteLine();
+                        writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
+                        writer.WriteLine(indentLevel, "{");
+                        indentLevel += 1;
+                        WriteTupleType(writer, indentLevel, tupleType);
+                        indentLevel -= 1;
+                        writer.WriteLine(indentLevel, "}");
+                        writer.Flush();
+                    }
+                    finally
+                    {
+                        if (closeStream && tupleTypeStream != null)
+                        {
+                            tupleTypeStream.Close();
+                            tupleTypeStream = null;
+                        }
+                    }
+                }
+            }
+            else
             {
                 _logger.LogInformation($"No tuple types detected; skipping.");
-                yield break;
-            }
-
-            foreach (var tupleType in tupleTypes!)
-            {
-                if (tupleType == null!)
-                    continue;
-
-                var tupleLibraryName = Path.Combine(tupleType.Namespace!, tupleType.Name);
-                var stream = callbacks.GetStreamForLibraryName(tupleLibraryName);
-                if (stream == null!)
-                    continue;
-
-                using var writer = new StreamWriter(stream, leaveOpen: true);
-                WriteUsings(writer);
-                var indentLevel = 0;
-                writer.WriteLine();
-                writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
-                writer.WriteLine(indentLevel, "{");
-                indentLevel += 1;
-                WriteTupleType(writer, indentLevel, tupleType);
-                indentLevel -= 1;
-                writer.WriteLine(indentLevel, "}");
-                writer.Flush();
-
-                yield return (tupleLibraryName, stream);
             }
         }
 
-        private static bool IsDefinition(LambdaExpression overload) =>
+        private static bool isDefinition(LambdaExpression overload) =>
             overload.Parameters.Count == 1
                 && overload.Parameters[0].Type == typeof(CqlContext);
 
@@ -431,7 +426,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             ILookup<string, string>? tags)
         {
             var methodName = VariableNameGenerator.NormalizeIdentifier(cqlName);
-            var isDef = IsDefinition(overload);
+            var isDef = isDefinition(overload);
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
@@ -564,6 +559,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             AccessModifier.ProtectedInternal => "protected internal",
             _ => throw new ArgumentException("Invalid access modifier", nameof(modifier)),
         };
+
+
     }
 }
 

@@ -512,18 +512,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.TypeAs:
                     {
                         var operand = ConvertExpression(indent, strippedUnary.Operand, false);
+
                         var typeName = PrettyTypeName(strippedUnary.Type);
                         var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
                             $"{leadingIndentString}{Parenthesize($"{operand} as {typeName}")}" :
                             $"{leadingIndentString}{Parenthesize($"({typeName}){operand}")}";
                         return code;
                     }
-                // case ExpressionType.Throw:
-                // {
-                //     var operand = ConvertExpression(indent, strippedUnary.Operand, false);
-                //     var typeName = PrettyTypeName(strippedUnary.Type);
-                //     return $"{leadingIndentString}{Parenthesize($"({typeName})(NULL ?? throw {operand})")}";
-                // }
                 default:
                     throw new NotSupportedException($"Don't know how to convert unary operator {strippedUnary.NodeType} into C#.");
             }

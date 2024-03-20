@@ -3,7 +3,6 @@ using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging
 {
@@ -15,7 +14,6 @@ namespace Hl7.Cql.Packaging
     {
         private readonly LibraryPackager _libraryPackager;
         private readonly ILoggerFactory _logFactory;
-        private readonly CSharpResourceWriterOptions _csharpResourceWriterOptions;
         private readonly ResourceWriter[] _resourceWriters;
 
         /// <summary>
@@ -30,7 +28,6 @@ namespace Hl7.Cql.Packaging
             _libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
             _logFactory = logFactory;
             _resourceWriters = resourceWriters;
-            _csharpResourceWriterOptions = new();
         }
 
         /// <summary>
@@ -43,15 +40,12 @@ namespace Hl7.Cql.Packaging
         /// <param name="libraryPackager">The library packager</param>
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
-        /// <param name="csharpResourceWriterOptions">CSharp resource writer</param>
         internal ResourcePackager(
             LibraryPackager libraryPackager,
             ILoggerFactory logFactory,
-            IEnumerable<ResourceWriter> resourceWriters,
-            IOptions<CSharpResourceWriterOptions> csharpResourceWriterOptions) {
+            IEnumerable<ResourceWriter> resourceWriters) {
             _libraryPackager = libraryPackager;
             _logFactory = logFactory;
-            _csharpResourceWriterOptions = csharpResourceWriterOptions.Value;
             _resourceWriters = resourceWriters as ResourceWriter[] ?? resourceWriters.ToArray();
         }
 
@@ -89,18 +83,7 @@ namespace Hl7.Cql.Packaging
             LibraryPackager libraryPackager = new LibraryPackagerFactory(_logFactory).LibraryPackager;
             LibraryPackageCallbacks callbacks = new(
                 buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl),
-                onBeforeCompileStream: tuple =>
-                {
-                    if (_csharpResourceWriterOptions.OutDirectory is { } dir)
-                    {
-                        var file = new FileInfo($"{Path.Combine(dir.FullName, tuple.name)}.cs");
-                        file.Directory!.Create();
-                        using var streamOut = file.OpenWrite();
-                        tuple.stream.Position = 0L;
-                        tuple.stream.CopyTo(streamOut);
-                    }
-                },
-                onResourceCreated: library =>
+                onLibraryResourceCreated: library =>
                 {
                     foreach (var resourceWriter in _resourceWriters)
                     {

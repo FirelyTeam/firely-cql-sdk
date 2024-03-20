@@ -3521,11 +3521,19 @@ namespace CoreTests
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             var writer = Factory.CSharpSourceCodeWriter;
-            var items = writer.Write(
+            var dict = new Dictionary<string, MemoryStream>();
+
+            writer.Write(
                 definitions, 
                 Factory.TypeManager.TupleTypes,
-                librarySet);
-            Debug.Assert(items.Count() > 0); // Do not replace with Any
+                librarySet,
+                lib =>
+                {
+                    var ms = new MemoryStream();
+                    dict[lib] = ms; 
+                    return ms;
+                });
+            Debug.Assert(dict.Any());
         }
 
         [TestMethod]

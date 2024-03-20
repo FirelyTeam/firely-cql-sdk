@@ -43,7 +43,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
         /// </summary>
-        public IReadOnlyCollection<Type> TupleTypes => TupleTypeList;
+        public IEnumerable<Type> TupleTypes => TupleTypeList;
 
         private readonly List<Type> TupleTypeList;
 
