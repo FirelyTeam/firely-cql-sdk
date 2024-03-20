@@ -60,21 +60,6 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     public ExpressionDefinitionDictionary Definitions { get; }
 
-    public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
-        Definitions.AddTag(LibraryKey, definition, signature, name, values);
-
-    public void AddDefinition(string definition, LambdaExpression expression) =>
-        Definitions.Add(LibraryKey, definition, expression);
-
-    public void AddDefinition(string definition, Type[] signature, LambdaExpression expression) =>
-        Definitions.Add(LibraryKey, definition, signature, expression);
-
-    public bool ContainsDefinition(string definition, Type[] signature) =>
-        Definitions.ContainsKey(LibraryKey, definition, signature);
-
-    public bool ContainsDefinition(string definition) =>
-        Definitions.ContainsKey(LibraryKey, definition);
-
     #endregion
 
     #region Local Library Identifiers

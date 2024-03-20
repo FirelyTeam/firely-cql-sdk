@@ -137,7 +137,7 @@ internal class LibraryExpressionBuilder
             var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
             var contextParameter = ContextParameter;
             var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-            ctx.LibraryContext.AddDefinition(codeSystem.name, lambda);
+            ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, codeSystem.name, lambda);
         }
         else
         {
@@ -145,7 +145,7 @@ internal class LibraryExpressionBuilder
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
             var contextParameter = ContextParameter;
             var lambda = Expression.Lambda(newArray, contextParameter);
-            ctx.LibraryContext.AddDefinition(codeSystem.name, lambda);
+            ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, codeSystem.name, lambda);
         }
     }
 
@@ -159,7 +159,7 @@ internal class LibraryExpressionBuilder
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
             var contextParameter = ContextParameter;
             var lambda = Expression.Lambda(newArray, contextParameter);
-            ctx.LibraryContext.AddDefinition(conceptDef.name, lambda);
+            ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, conceptDef.name, lambda);
         }
         else
         {
@@ -186,7 +186,7 @@ internal class LibraryExpressionBuilder
             var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
             var contextParameter = ContextParameter;
             var lambda = Expression.Lambda(newConcept, contextParameter);
-            ctx.LibraryContext.AddDefinition(conceptDef.name, lambda);
+            ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, conceptDef.name, lambda);
         }
     }
 
@@ -219,7 +219,7 @@ internal class LibraryExpressionBuilder
         );
         var contextParameter = ContextParameter;
         var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-        ctx.LibraryContext.AddDefinition(codeDef.name!, lambda);
+        ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, codeDef.name!, lambda);
     }
 
     private void ProcessExpressionDef(
@@ -262,7 +262,7 @@ internal class LibraryExpressionBuilder
             if (ctx.TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
             {
                 var customLambda = factory(parameters);
-                ctx.LibraryContext.AddDefinition(expressionDef.name, functionParameterTypes, customLambda);
+                ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, expressionDef.name, functionParameterTypes, customLambda);
                 return;
             }
 
@@ -275,7 +275,7 @@ internal class LibraryExpressionBuilder
                         .Concat(functionParameterTypes)
                         .ToArray();
                     var notImplemented = NotImplemented(ctx, expressionKey, paramTypes, returnType);
-                    ctx.LibraryContext.AddDefinition(expressionDef.name, paramTypes, notImplemented);
+                    ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, expressionDef.name, paramTypes, notImplemented);
                     return;
                 }
 
@@ -287,7 +287,7 @@ internal class LibraryExpressionBuilder
         var bodyExpression = _expressionBuilder.TranslateExpression(expressionDef.expression, ctx);
         var lambda = Expression.Lambda(bodyExpression, parameters);
         if (function?.operand != null &&
-            ctx.LibraryContext.ContainsDefinition(expressionDef.name, functionParameterTypes))
+            ctx.LibraryContext.Definitions.ContainsKey(ctx.LibraryContext.LibraryKey, expressionDef.name, functionParameterTypes))
         {
             var ops = function.operand
                 .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
@@ -305,12 +305,12 @@ internal class LibraryExpressionBuilder
                 foreach (var tag in tags)
                 {
                     string[] values = new[] { tag.value ?? "" };
-                    ctx.LibraryContext.AddDefinitionTag(expressionDef.name, functionParameterTypes, tag.name, values);
+                    ctx.LibraryContext.Definitions.AddTag(ctx.LibraryContext.LibraryKey, expressionDef.name, functionParameterTypes, tag.name, values);
                 }
             }
 
             Type[] signature = functionParameterTypes ?? Array.Empty<Type>();
-            ctx.LibraryContext.AddDefinition(expressionDef.name, signature, lambda);
+            ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, expressionDef.name, signature, lambda);
         }
     }
 
@@ -332,7 +332,7 @@ internal class LibraryExpressionBuilder
         ParameterDef parameter,
         ExpressionBuilderContext ctx)
     {
-        if (ctx.LibraryContext.ContainsDefinition(parameter.name!))
+        if (ctx.LibraryContext.Definitions.ContainsKey(ctx.LibraryContext.LibraryKey, parameter.name!))
             throw ctx.NewExpressionBuildingException($"There is already a definition named {parameter.name}", null);
 
         Expression? defaultValue = null;
@@ -352,7 +352,7 @@ internal class LibraryExpressionBuilder
         var cast = Expression.Convert(resolveParam, parameterType);
         // e.g. (bundle, context) => context.Parameters["Measurement Period"]
         var lambda = Expression.Lambda(cast, ContextParameter);
-        ctx.LibraryContext.AddDefinition(parameter.name!, lambda);
+        ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, parameter.name!, lambda);
     }
 
     private void ProcessValueSetDef(
@@ -363,7 +363,7 @@ internal class LibraryExpressionBuilder
             Expression.Constant(valueSetDef.version, typeof(string)));
         var contextParameter = ContextParameter;
         var lambda = Expression.Lambda(@new, contextParameter);
-        ctx.LibraryContext.AddDefinition(valueSetDef.name!, lambda);
+        ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, valueSetDef.name!, lambda);
     }
 
     private static LambdaExpression NotImplemented(
