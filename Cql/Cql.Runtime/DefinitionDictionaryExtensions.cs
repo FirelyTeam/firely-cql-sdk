@@ -15,13 +15,13 @@ using System.Runtime.CompilerServices;
 namespace Hl7.Cql.Runtime
 {
     /// <summary>
-    /// Adds extension methods to <see cref="DefinitionDictionary{LambdaExpression}"/> for specific types.
+    /// Adds extension methods to <see cref="DefinitionDictionary{T}"/> for specific types.
     /// </summary>
     internal static class DefinitionDictionaryExtensions
     {
 
         /// <summary>
-        /// Compiles a <see cref="DefinitionDictionary{LambdaExpression}"/> to a <see cref="DefinitionDictionary{LambdaExpression}"/>.
+        /// Compiles a <see cref="DefinitionDictionary{LambdaExpression}"/> to a <see cref="DefinitionDictionary{Delegate}"/>.
         /// This is accomplished by calling <see cref="LambdaExpression.Compile()"/>.
         /// </summary>
         /// <param name="expressions">The expressions to compile.</param>
