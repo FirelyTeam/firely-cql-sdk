@@ -78,14 +78,13 @@ namespace Hl7.Cql.Packaging
             if (_resourceWriters.Length == 0) 
                 return; //Skip since no writers provided
 
-            LibraryPackager libraryPackager = new LibraryPackagerFactory(_logFactory).LibraryPackager;
             LibraryPackageCallbacks callbacks = new(
                 afterPackageMutator: afterPackageMutator,
                 buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
 
             LibrarySet librarySet = new(elmDir.FullName);
             librarySet.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
-            List<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks).ToList();
+            List<Resource> resources = _libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks).ToList();
             foreach (var resourceWriter in _resourceWriters)
             {
                 resourceWriter.WriteResources(resources);
