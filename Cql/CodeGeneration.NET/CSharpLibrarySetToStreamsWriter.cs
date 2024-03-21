@@ -464,7 +464,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
                 var privateMethodName = PrivateMethodNameFor(methodName!);
 
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, overload, privateMethodName, "private");
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(0, overload, privateMethodName, "private");
                 writer.Write(func);
                 writer.WriteLine();
                 writer.WriteLine($"[CqlDeclaration(\"{cqlName}\")]");
@@ -492,14 +492,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     Expression.Parameter(lazyType, cachedValueName),
                     lazyType.GetMember("Value").Single()));
 
-                func = expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, valueFunc, methodName!, "public");
+                func = expressionConverter.ConvertTopLevelFunctionDefinition(0, valueFunc, methodName!, "public");
                 writer.Write(func);
             }
             else
             {
                 writer.WriteLine($"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, tags);
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, overload, methodName!, "public");
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(0, overload, methodName!, "public");
                 writer.Write(func);
             }
         }
