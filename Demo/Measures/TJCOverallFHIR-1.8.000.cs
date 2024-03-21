@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 public class TJCOverallFHIR_1_8_000
 {
 
-
+    
     internal CqlContext context;
-
+    
     #region Cached values
-
+    
     internal Lazy<CqlValueSet> __Comfort_Measures;
     internal Lazy<CqlValueSet> __Discharge_To_Acute_Care_Facility;
     internal Lazy<CqlValueSet> __Discharged_to_Health_Care_Facility_for_Hospice_Care;
@@ -44,15 +44,15 @@ public class TJCOverallFHIR_1_8_000
     internal Lazy<IEnumerable<object>> __Intervention_Comfort_Measures;
     internal Lazy<IEnumerable<Encounter>> __Comfort_Measures_during_Hospitalization;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Comfort_Measures_during_Hospitalization;
-
+    
     #endregion
     public TJCOverallFHIR_1_8_000(CqlContext context)
     {
         this.context = context ?? throw new ArgumentNullException("context");
-
+        
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
-
+        
         __Comfort_Measures = new Lazy<CqlValueSet>(this.Comfort_Measures_Value);
         __Discharge_To_Acute_Care_Facility = new Lazy<CqlValueSet>(this.Discharge_To_Acute_Care_Facility_Value);
         __Discharged_to_Health_Care_Facility_for_Hospice_Care = new Lazy<CqlValueSet>(this.Discharged_to_Health_Care_Facility_for_Hospice_Care_Value);
@@ -80,124 +80,124 @@ public class TJCOverallFHIR_1_8_000
         __Encounter_with_Comfort_Measures_during_Hospitalization = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Comfort_Measures_during_Hospitalization_Value);
     }
     #region Dependencies
-
+    
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
-
+    
     #endregion
-
-	private CqlValueSet Comfort_Measures_Value() => 
+    
+    	private CqlValueSet Comfort_Measures_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", null);
 
     [CqlDeclaration("Comfort Measures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45")]
-	public CqlValueSet Comfort_Measures() => 
+    	public CqlValueSet Comfort_Measures() => 
 		__Comfort_Measures.Value;
 
-	private CqlValueSet Discharge_To_Acute_Care_Facility_Value() => 
+    	private CqlValueSet Discharge_To_Acute_Care_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
-	public CqlValueSet Discharge_To_Acute_Care_Facility() => 
+    	public CqlValueSet Discharge_To_Acute_Care_Facility() => 
 		__Discharge_To_Acute_Care_Facility.Value;
 
-	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
+    	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => 
+    	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => 
 		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
-	private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
+    	private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-	public CqlValueSet Discharged_to_Home_for_Hospice_Care() => 
+    	public CqlValueSet Discharged_to_Home_for_Hospice_Care() => 
 		__Discharged_to_Home_for_Hospice_Care.Value;
 
-	private CqlValueSet Emergency_Department_Visit_Value() => 
+    	private CqlValueSet Emergency_Department_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public CqlValueSet Emergency_Department_Visit() => 
+    	public CqlValueSet Emergency_Department_Visit() => 
 		__Emergency_Department_Visit.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+    	private CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+    	public CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Hemorrhagic_Stroke_Value() => 
+    	private CqlValueSet Hemorrhagic_Stroke_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212", null);
 
     [CqlDeclaration("Hemorrhagic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212")]
-	public CqlValueSet Hemorrhagic_Stroke() => 
+    	public CqlValueSet Hemorrhagic_Stroke() => 
 		__Hemorrhagic_Stroke.Value;
 
-	private CqlValueSet Ischemic_Stroke_Value() => 
+    	private CqlValueSet Ischemic_Stroke_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", null);
 
     [CqlDeclaration("Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247")]
-	public CqlValueSet Ischemic_Stroke() => 
+    	public CqlValueSet Ischemic_Stroke() => 
 		__Ischemic_Stroke.Value;
 
-	private CqlValueSet Left_Against_Medical_Advice_Value() => 
+    	private CqlValueSet Left_Against_Medical_Advice_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
 
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
-	public CqlValueSet Left_Against_Medical_Advice() => 
+    	public CqlValueSet Left_Against_Medical_Advice() => 
 		__Left_Against_Medical_Advice.Value;
 
-	private CqlValueSet Non_Elective_Inpatient_Value() => 
+    	private CqlValueSet Non_Elective_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", null);
 
     [CqlDeclaration("Non-Elective Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424")]
-	public CqlValueSet Non_Elective_Inpatient() => 
+    	public CqlValueSet Non_Elective_Inpatient() => 
 		__Non_Elective_Inpatient.Value;
 
-	private CqlValueSet Observation_Services_Value() => 
+    	private CqlValueSet Observation_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services() => 
+    	public CqlValueSet Observation_Services() => 
 		__Observation_Services.Value;
 
-	private CqlValueSet Patient_Expired_Value() => 
+    	private CqlValueSet Patient_Expired_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-	public CqlValueSet Patient_Expired() => 
+    	public CqlValueSet Patient_Expired() => 
 		__Patient_Expired.Value;
 
-	private CqlValueSet Ticagrelor_Therapy_Value() => 
+    	private CqlValueSet Ticagrelor_Therapy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.39", null);
 
     [CqlDeclaration("Ticagrelor Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.39")]
-	public CqlValueSet Ticagrelor_Therapy() => 
+    	public CqlValueSet Ticagrelor_Therapy() => 
 		__Ticagrelor_Therapy.Value;
 
-	private CqlCode Birth_date_Value() => 
+    	private CqlCode Birth_date_Value() => 
 		new CqlCode("21112-8", "http://loinc.org", null, null);
 
     [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
+    	public CqlCode Birth_date() => 
 		__Birth_date.Value;
 
-	private CqlCode[] LOINC_Value()
+    	private CqlCode[] LOINC_Value()
 	{
 		var a_ = new CqlCode[]
 		{
@@ -208,10 +208,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+    	public CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+    	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.Operators.ConvertIntegerToDecimal(default);
 		var b_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
@@ -223,10 +223,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+    	public CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+    	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
 		var b_ = context.Operators.SingleOrNull<Patient>(a_);
@@ -235,10 +235,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+    	public Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_Value()
+    	private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_Value()
 	{
 		var a_ = this.Non_Elective_Inpatient();
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
@@ -260,10 +260,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Non Elective Inpatient Encounter")]
-	public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter() => 
+    	public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter() => 
 		__Non_Elective_Inpatient_Encounter.Value;
 
-	private IEnumerable<Encounter> All_Stroke_Encounter_Value()
+    	private IEnumerable<Encounter> All_Stroke_Encounter_Value()
 	{
 		var a_ = this.Non_Elective_Inpatient_Encounter();
 		bool? b_(Encounter NonElectiveEncounter)
@@ -285,10 +285,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("All Stroke Encounter")]
-	public IEnumerable<Encounter> All_Stroke_Encounter() => 
+    	public IEnumerable<Encounter> All_Stroke_Encounter() => 
 		__All_Stroke_Encounter.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age_Value()
+    	private IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age_Value()
 	{
 		var a_ = this.All_Stroke_Encounter();
 		IEnumerable<Encounter> b_(Encounter AllStrokeEncounter)
@@ -318,10 +318,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Encounter with Principal Diagnosis and Age")]
-	public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age() => 
+    	public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age() => 
 		__Encounter_with_Principal_Diagnosis_and_Age.Value;
 
-	private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Value()
+    	private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Value()
 	{
 		var a_ = this.Encounter_with_Principal_Diagnosis_and_Age();
 		bool? b_(Encounter EncounterWithAge)
@@ -339,10 +339,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Ischemic Stroke Encounter")]
-	public IEnumerable<Encounter> Ischemic_Stroke_Encounter() => 
+    	public IEnumerable<Encounter> Ischemic_Stroke_Encounter() => 
 		__Ischemic_Stroke_Encounter.Value;
 
-	private IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition_Value()
+    	private IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition_Value()
 	{
 		var a_ = this.Ischemic_Stroke_Encounter();
 		bool? b_(Encounter IschemicStrokeEncounter)
@@ -371,10 +371,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Ischemic Stroke Encounters with Discharge Disposition")]
-	public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition() => 
+    	public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition() => 
 		__Ischemic_Stroke_Encounters_with_Discharge_Disposition.Value;
 
-	private IEnumerable<object> Intervention_Comfort_Measures_Value()
+    	private IEnumerable<object> Intervention_Comfort_Measures_Value()
 	{
 		var a_ = this.Comfort_Measures();
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
@@ -406,10 +406,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Intervention Comfort Measures")]
-	public IEnumerable<object> Intervention_Comfort_Measures() => 
+    	public IEnumerable<object> Intervention_Comfort_Measures() => 
 		__Intervention_Comfort_Measures.Value;
 
-	private IEnumerable<Encounter> Comfort_Measures_during_Hospitalization_Value()
+    	private IEnumerable<Encounter> Comfort_Measures_during_Hospitalization_Value()
 	{
 		var a_ = this.Ischemic_Stroke_Encounter();
 		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
@@ -438,10 +438,10 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Comfort Measures during Hospitalization")]
-	public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization() => 
+    	public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization() => 
 		__Comfort_Measures_during_Hospitalization.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_Value()
+    	private IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_Value()
 	{
 		var a_ = this.Ischemic_Stroke_Encounter();
 		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
@@ -472,11 +472,11 @@ public class TJCOverallFHIR_1_8_000
 	}
 
     [CqlDeclaration("Encounter with Comfort Measures during Hospitalization")]
-	public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization() => 
+    	public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization() => 
 		__Encounter_with_Comfort_Measures_during_Hospitalization.Value;
 
     [CqlDeclaration("CalendarDayOfOrDayAfter")]
-	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
+    	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
 	{
 		var a_ = context.Operators.DateFrom(StartValue);
 		var b_ = context.Operators.Quantity(1m, "day");

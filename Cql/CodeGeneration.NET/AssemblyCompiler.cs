@@ -67,8 +67,22 @@ namespace Hl7.Cql.CodeGeneration.NET
             LibrarySet librarySet, 
             DefinitionDictionary<LambdaExpression> definitions)
         {
-            IEnumerable<(string name, Stream stream)> streamsByName = _cSharpLibrarySetToStreamsWriter.Write(definitions, _typeManager.TupleTypes, librarySet);
-            return CompileSourceCodeStreams(librarySet, streamsByName);
+            var callbacks = new CSharpSourceCodeWriterCallbacks(closeStreamsAfterEnumeration:false);
+            var streamsByName = _cSharpLibrarySetToStreamsWriter
+                .Write(definitions, _typeManager.TupleTypes, librarySet, callbacks)
+                .ToList(); // Allow all code streams to be processed (and written out to file), before compiling them
+
+            try
+            {
+                foreach (var compileSourceCodeStream in CompileSourceCodeStreams(librarySet, streamsByName))
+                {
+                    yield return compileSourceCodeStream;
+                }
+            }
+            finally
+            {
+                foreach (var (_, stream) in streamsByName) stream.Dispose();
+            }
         }
 
         private IEnumerable<(string name, AssemblyData asmData)> CompileSourceCodeStreams(

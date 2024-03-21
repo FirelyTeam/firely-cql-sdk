@@ -14,31 +14,31 @@ using Task = Hl7.Fhir.Model.Task;
 public class NCQAStatus_1_0_0
 {
 
-
+    
     internal CqlContext context;
-
+    
     #region Cached values
-
+    
     internal Lazy<Patient> __Patient;
-
+    
     #endregion
     public NCQAStatus_1_0_0(CqlContext context)
     {
         this.context = context ?? throw new ArgumentNullException("context");
-
+        
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
         NCQATerminology_1_0_0 = new NCQATerminology_1_0_0(context);
-
+        
         __Patient = new Lazy<Patient>(this.Patient_Value);
     }
     #region Dependencies
-
+    
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
     public NCQATerminology_1_0_0 NCQATerminology_1_0_0 { get; }
-
+    
     #endregion
-
-	private Patient Patient_Value()
+    
+    	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
 		var b_ = context.Operators.SingleOrNull<Patient>(a_);
@@ -47,11 +47,11 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+    	public Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("Active Allergy")]
-	public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
+    	public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
 	{
 		bool? a_(AllergyIntolerance A)
 		{
@@ -68,7 +68,7 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Active Condition")]
-	public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
+    	public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
 	{
 		bool? a_(Condition C)
 		{
@@ -85,7 +85,7 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Finished Encounter")]
-	public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
+    	public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
 	{
 		bool? a_(Encounter E)
 		{
@@ -100,7 +100,7 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Completed Immunization")]
-	public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
+    	public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
 	{
 		bool? a_(Immunization I)
 		{
@@ -115,7 +115,7 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Dispensed Medication")]
-	public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
+    	public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
 	{
 		bool? a_(MedicationDispense M)
 		{
@@ -130,7 +130,7 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Active Medication")]
-	public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
+    	public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
 	{
 		bool? a_(MedicationRequest M)
 		{
@@ -149,7 +149,7 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Completed Procedure")]
-	public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
+    	public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
@@ -164,7 +164,7 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Completed or Ongoing Procedure")]
-	public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
+    	public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{

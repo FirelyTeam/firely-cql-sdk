@@ -2012,6 +2012,7 @@ namespace Hl7.Cql.Compiler
             var operands = op.operand
                 .Select(operand => TranslateExpression(operand, ctx))
                 .ToArray();
+
             var operandTypes = operands
                 .Select(op => op.Type);
 

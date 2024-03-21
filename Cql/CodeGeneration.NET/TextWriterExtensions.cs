@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -15,21 +14,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal static class TextWriterExtensions
     {
-        public const int SpacesPerIndentLevel = 4;
-
-        public static void WriteLine(this TextWriter writer, int indent, string text)
-        {
-            for (int i = 0; i < indent * SpacesPerIndentLevel; i++)
-                writer.Write(' ');
-            writer.WriteLine(text);
-        }
-        public static void Write(this TextWriter writer, int indent, string text)
-        {
-            for (int i = 0; i < indent * SpacesPerIndentLevel; i++)
-                writer.Write(' ');
-            writer.Write(text);
-        }
-
         private static string IndentString(int indent) => new string(Enumerable.Repeat('\t', indent).ToArray());
 
         public static void AppendLine(this StringBuilder sb, int indent, string text)

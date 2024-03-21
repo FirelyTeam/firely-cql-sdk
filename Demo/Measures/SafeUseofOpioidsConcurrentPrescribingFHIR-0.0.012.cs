@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 {
 
-
+    
     internal CqlContext context;
-
+    
     #region Cached values
-
+    
     internal Lazy<CqlValueSet> __All_Primary_and_Secondary_Cancer;
     internal Lazy<CqlValueSet> __Discharge_To_Acute_Care_Facility;
     internal Lazy<CqlValueSet> __Encounter_Inpatient;
@@ -40,16 +40,16 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
     internal Lazy<IEnumerable<Encounter>> __Denominator_Exclusion;
-
+    
     #endregion
     public SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012(CqlContext context)
     {
         this.context = context ?? throw new ArgumentNullException("context");
-
+        
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
         SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
-
+        
         __All_Primary_and_Secondary_Cancer = new Lazy<CqlValueSet>(this.All_Primary_and_Secondary_Cancer_Value);
         __Discharge_To_Acute_Care_Facility = new Lazy<CqlValueSet>(this.Discharge_To_Acute_Care_Facility_Value);
         __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
@@ -73,85 +73,85 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         __Denominator_Exclusion = new Lazy<IEnumerable<Encounter>>(this.Denominator_Exclusion_Value);
     }
     #region Dependencies
-
+    
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
     public SupplementalDataElementsFHIR4_2_0_000 SupplementalDataElementsFHIR4_2_0_000 { get; }
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
-
+    
     #endregion
-
-	private CqlValueSet All_Primary_and_Secondary_Cancer_Value() => 
+    
+    	private CqlValueSet All_Primary_and_Secondary_Cancer_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.161", null);
 
     [CqlDeclaration("All Primary and Secondary Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.161")]
-	public CqlValueSet All_Primary_and_Secondary_Cancer() => 
+    	public CqlValueSet All_Primary_and_Secondary_Cancer() => 
 		__All_Primary_and_Secondary_Cancer.Value;
 
-	private CqlValueSet Discharge_To_Acute_Care_Facility_Value() => 
+    	private CqlValueSet Discharge_To_Acute_Care_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
-	public CqlValueSet Discharge_To_Acute_Care_Facility() => 
+    	public CqlValueSet Discharge_To_Acute_Care_Facility() => 
 		__Discharge_To_Acute_Care_Facility.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+    	private CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+    	public CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Hospice_Care_Referral_or_Admission_Value() => 
+    	private CqlValueSet Hospice_Care_Referral_or_Admission_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.365", null);
 
     [CqlDeclaration("Hospice Care Referral or Admission")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.365")]
-	public CqlValueSet Hospice_Care_Referral_or_Admission() => 
+    	public CqlValueSet Hospice_Care_Referral_or_Admission() => 
 		__Hospice_Care_Referral_or_Admission.Value;
 
-	private CqlValueSet Palliative_or_Hospice_Care_Value() => 
+    	private CqlValueSet Palliative_or_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", null);
 
     [CqlDeclaration("Palliative or Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579")]
-	public CqlValueSet Palliative_or_Hospice_Care() => 
+    	public CqlValueSet Palliative_or_Hospice_Care() => 
 		__Palliative_or_Hospice_Care.Value;
 
-	private CqlValueSet Patient_Expired_Value() => 
+    	private CqlValueSet Patient_Expired_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-	public CqlValueSet Patient_Expired() => 
+    	public CqlValueSet Patient_Expired() => 
 		__Patient_Expired.Value;
 
-	private CqlValueSet Schedule_II_and_III_Opioid_Medications_Value() => 
+    	private CqlValueSet Schedule_II_and_III_Opioid_Medications_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.165", null);
 
     [CqlDeclaration("Schedule II & III Opioid Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.165")]
-	public CqlValueSet Schedule_II_and_III_Opioid_Medications() => 
+    	public CqlValueSet Schedule_II_and_III_Opioid_Medications() => 
 		__Schedule_II_and_III_Opioid_Medications.Value;
 
-	private CqlValueSet Schedule_IV_Benzodiazepines_Value() => 
+    	private CqlValueSet Schedule_IV_Benzodiazepines_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1125.1", null);
 
     [CqlDeclaration("Schedule IV Benzodiazepines")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1125.1")]
-	public CqlValueSet Schedule_IV_Benzodiazepines() => 
+    	public CqlValueSet Schedule_IV_Benzodiazepines() => 
 		__Schedule_IV_Benzodiazepines.Value;
 
-	private CqlCode Birth_date_Value() => 
+    	private CqlCode Birth_date_Value() => 
 		new CqlCode("21112-8", "http://loinc.org", null, null);
 
     [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
+    	public CqlCode Birth_date() => 
 		__Birth_date.Value;
 
-	private CqlCode[] LOINC_Value()
+    	private CqlCode[] LOINC_Value()
 	{
 		var a_ = new CqlCode[]
 		{
@@ -162,10 +162,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+    	public CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+    	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("SafeUseofOpioidsConcurrentPrescribingFHIR-0.0.012", "Measurement Period", null);
 
@@ -173,10 +173,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+    	public CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+    	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
 		var b_ = context.Operators.SingleOrNull<Patient>(a_);
@@ -185,10 +185,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+    	public Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18_Value()
+    	private IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18_Value()
 	{
 		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Inpatient_Encounter();
 		bool? b_(Encounter EncounterInpatient)
@@ -212,10 +212,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("Inpatient Encounter with Age Greater than or Equal to 18")]
-	public IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18() => 
+    	public IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18() => 
 		__Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18.Value;
 
-	private IEnumerable<Encounter> Initial_Population_Value()
+    	private IEnumerable<Encounter> Initial_Population_Value()
 	{
 		var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
 		IEnumerable<Encounter> b_(Encounter InpatientEncounter)
@@ -273,10 +273,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population() => 
+    	public IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Encounter> Denominator_Value()
+    	private IEnumerable<Encounter> Denominator_Value()
 	{
 		var a_ = this.Initial_Population();
 
@@ -284,10 +284,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("Denominator")]
-	public IEnumerable<Encounter> Denominator() => 
+    	public IEnumerable<Encounter> Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Coding> SDE_Ethnicity_Value()
+    	private IEnumerable<Coding> SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 
@@ -295,10 +295,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public IEnumerable<Coding> SDE_Ethnicity() => 
+    	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+    	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -306,10 +306,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+    	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private IEnumerable<Coding> SDE_Race_Value()
+    	private IEnumerable<Coding> SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 
@@ -317,10 +317,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("SDE Race")]
-	public IEnumerable<Coding> SDE_Race() => 
+    	public IEnumerable<Coding> SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+    	private CqlCode SDE_Sex_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 
@@ -328,10 +328,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+    	public CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Encounter> Numerator_Value()
+    	private IEnumerable<Encounter> Numerator_Value()
 	{
 		var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
 		bool? b_(Encounter InpatientEncounter)
@@ -402,10 +402,10 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("Numerator")]
-	public IEnumerable<Encounter> Numerator() => 
+    	public IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private IEnumerable<Encounter> Denominator_Exclusion_Value()
+    	private IEnumerable<Encounter> Denominator_Exclusion_Value()
 	{
 		var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
 		bool? b_(Encounter InpatientEncounter)
@@ -480,7 +480,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("Denominator Exclusion")]
-	public IEnumerable<Encounter> Denominator_Exclusion() => 
+    	public IEnumerable<Encounter> Denominator_Exclusion() => 
 		__Denominator_Exclusion.Value;
 
 }

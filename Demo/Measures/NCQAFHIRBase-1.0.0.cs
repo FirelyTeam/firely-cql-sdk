@@ -14,29 +14,29 @@ using Task = Hl7.Fhir.Model.Task;
 public class NCQAFHIRBase_1_0_0
 {
 
-
+    
     internal CqlContext context;
-
+    
     #region Cached values
-
+    
     internal Lazy<Patient> __Patient;
-
+    
     #endregion
     public NCQAFHIRBase_1_0_0(CqlContext context)
     {
         this.context = context ?? throw new ArgumentNullException("context");
-
+        
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
-
+        
         __Patient = new Lazy<Patient>(this.Patient_Value);
     }
     #region Dependencies
-
+    
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
-
+    
     #endregion
-
-	private Patient Patient_Value()
+    
+    	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
 		var b_ = context.Operators.SingleOrNull<Patient>(a_);
@@ -45,11 +45,11 @@ public class NCQAFHIRBase_1_0_0
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+    	public Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("Normalize Onset")]
-	public CqlInterval<CqlDateTime> Normalize_Onset(object onset)
+    	public CqlInterval<CqlDateTime> Normalize_Onset(object onset)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -243,7 +243,7 @@ public class NCQAFHIRBase_1_0_0
 	}
 
     [CqlDeclaration("Normalize Abatement")]
-	public CqlInterval<CqlDateTime> Normalize_Abatement(object abatement)
+    	public CqlInterval<CqlDateTime> Normalize_Abatement(object abatement)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -437,7 +437,7 @@ public class NCQAFHIRBase_1_0_0
 	}
 
     [CqlDeclaration("Prevalence Period")]
-	public CqlInterval<CqlDateTime> Prevalence_Period(Condition condition)
+    	public CqlInterval<CqlDateTime> Prevalence_Period(Condition condition)
 	{
 		var a_ = this.Normalize_Onset(condition?.Onset);
 		var b_ = context.Operators.Start(a_);
@@ -449,7 +449,7 @@ public class NCQAFHIRBase_1_0_0
 	}
 
     [CqlDeclaration("Normalize Interval")]
-	public CqlInterval<CqlDateTime> Normalize_Interval(object choice)
+    	public CqlInterval<CqlDateTime> Normalize_Interval(object choice)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -583,7 +583,7 @@ public class NCQAFHIRBase_1_0_0
 	}
 
     [CqlDeclaration("GetId")]
-	public string GetId(string uri)
+    	public string GetId(string uri)
 	{
 		string a_()
 		{
@@ -604,11 +604,11 @@ public class NCQAFHIRBase_1_0_0
 	}
 
     [CqlDeclaration("VS Cast Function")]
-	public IEnumerable<CqlCode> VS_Cast_Function(IEnumerable<CqlCode> VSet) => 
+    	public IEnumerable<CqlCode> VS_Cast_Function(IEnumerable<CqlCode> VSet) => 
 		VSet;
 
     [CqlDeclaration("First Dates per 31 Day Periods")]
-	public Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT First_Dates_per_31_Day_Periods(IEnumerable<CqlDate> DateList)
+    	public Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT First_Dates_per_31_Day_Periods(IEnumerable<CqlDate> DateList)
 	{
 		CqlDate a_(CqlDate d) => 
 			d;
