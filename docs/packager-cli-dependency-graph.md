@@ -49,8 +49,8 @@ classDiagram
 
     TypeResolver ..> TypeManager : injected
 
-    TypeResolver ..> LibraryPackager : injected
     AssemblyCompiler ..> LibraryPackager : injected
+    TypeResolver ..> LibraryPackager : injected
     LibrarySetExpressionBuilder ..> LibraryPackager : injected
     
     CSharpCodeStreamPostProcessor ..> CSharpLibrarySetToStreamsWriter : injected\n(optional)
