@@ -199,7 +199,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (stream == null!)
                     continue;
 
-                using var writer = new CodeWriter(new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true));
+                using var writer = new StreamCodeWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                 WriteUsings(writer);
 
                 // Namespace
@@ -372,7 +372,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (stream == null!)
                     continue;
 
-                using var writer = new CodeWriter(new StreamWriter(stream, leaveOpen: true));
+                using var writer = new StreamCodeWriter(stream, leaveOpen: true);
                 WriteUsings(writer);
                 writer.WriteLine();
                 writer.WriteLine($"namespace {tupleType.Namespace}");
@@ -492,16 +492,18 @@ namespace Hl7.Cql.CodeGeneration.NET
                     Expression.Parameter(lazyType, cachedValueName),
                     lazyType.GetMember("Value").Single()));
 
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, valueFunc, methodName!, "public"));
+                func = expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, valueFunc, methodName!, "public");
+                writer.Write(func);
             }
             else
             {
-                long pos = writer.Position;
+                int pos = writer.Position;
                 try
                 {
                     writer.WriteLine($"[CqlDeclaration(\"{cqlName}\")]");
                     WriteTags(writer, tags);
-                    writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, overload, methodName!, "public"));
+                    var func = expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, overload, methodName!, "public");
+                    writer.Write(func);
                 }
                 catch (Exception e)
                 {

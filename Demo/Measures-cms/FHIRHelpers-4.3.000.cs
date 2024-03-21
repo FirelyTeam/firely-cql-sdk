@@ -31,275 +31,275 @@ public class FHIRHelpers_4_3_000
     [CqlTag("description", "Converts the given [Period](https://hl7.org/fhir/datatypes.html#Period) value to a CQL DateTime Interval")]
     [CqlTag("comment", "If the start value of the given period is unspecified, the starting boundary of the resulting interval will be open (meaning the start of the interval is unknown, as opposed to interpreted as the beginning of time).")]
     	public CqlInterval<CqlDateTime> ToInterval(Period period)
-	{
-		CqlInterval<CqlDateTime> a_()
-		{
-			if ((period is null))
-			{
-				CqlInterval<CqlDateTime> b_ = null;
-
-				return (b_ as CqlInterval<CqlDateTime>);
-			}
-			else if ((period?.StartElement is null))
-			{
-				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
-				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var e_ = context.Operators.Interval(c_, d_, false, true);
-
-				return e_;
-			}
-			else
-			{
-				var f_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
-				var g_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var h_ = context.Operators.Interval(f_, g_, true, true);
-
-				return h_;
-			};
-		};
-
-		return a_();
-	}
+{
+    		CqlInterval<CqlDateTime> a_()
+{
+        if ((period is null))
+            {
+            				CqlInterval<CqlDateTime> b_ = null;
+            
+                return (b_ as CqlInterval<CqlDateTime>);
+            }
+            else if ((period?.StartElement is null))
+            {
+            				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
+            				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
+            				var e_ = context.Operators.Interval(c_, d_, false, true);
+            
+                return e_;
+            }
+            else
+            {
+            				var f_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
+            				var g_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
+            				var h_ = context.Operators.Interval(f_, g_, true, true);
+            
+                return h_;
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToInterval")]
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Interval of Quantity.")]
     [CqlTag("comment", "If the given quantity has a comparator, it is used to construct an interval based on the value of the comparator. If the comparator is less than, the resulting interval will start with a null closed boundary and end with an open boundary on the quantity. If the comparator is less than or equal, the resulting interval will start with a null closed boundary and end with a closed boundary on the quantity. If the comparator is greater or equal, the resulting interval will start with a closed boundary on the quantity and end with a closed null boundary. If the comparator is greatter than, the resulting interval will start with an open boundary on the quantity and end with a closed null boundary. If no comparator is specified, the resulting interval will start and end with a closed boundary on the quantity.")]
     	public CqlInterval<CqlQuantity> ToInterval(Quantity quantity)
-	{
-		CqlInterval<CqlQuantity> a_()
-		{
-			if ((quantity is null))
-			{
-				CqlInterval<CqlQuantity> b_ = null;
-
-				return (b_ as CqlInterval<CqlQuantity>);
-			}
-			else
-			{
-				CqlInterval<CqlQuantity> c_()
-				{
-					if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, "<") ?? false))
-					{
-						var d_ = this.ToQuantityIgnoringComparator(quantity);
-						var e_ = context.Operators.Interval(null, d_, true, false);
-
-						return e_;
-					}
-					else if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, "<=") ?? false))
-					{
-						var f_ = this.ToQuantityIgnoringComparator(quantity);
-						var g_ = context.Operators.Interval(null, f_, true, true);
-
-						return g_;
-					}
-					else if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, ">=") ?? false))
-					{
-						var h_ = this.ToQuantityIgnoringComparator(quantity);
-						var i_ = context.Operators.Interval(h_, null, true, true);
-
-						return i_;
-					}
-					else if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, ">") ?? false))
-					{
-						var j_ = this.ToQuantityIgnoringComparator(quantity);
-						var k_ = context.Operators.Interval(j_, null, false, true);
-
-						return k_;
-					}
-					else
-					{
-						var l_ = this.ToQuantity(quantity);
-						var n_ = context.Operators.Interval(l_, l_, true, true);
-
-						return n_;
-					};
-				};
-
-				return c_();
-			};
-		};
-
-		return a_();
-	}
+{
+    		CqlInterval<CqlQuantity> a_()
+{
+        if ((quantity is null))
+            {
+            				CqlInterval<CqlQuantity> b_ = null;
+            
+                return (b_ as CqlInterval<CqlQuantity>);
+            }
+            else
+            {
+            				CqlInterval<CqlQuantity> c_()
+{
+                if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, "<") ?? false))
+                    {
+                    						var d_ = this.ToQuantityIgnoringComparator(quantity);
+                    						var e_ = context.Operators.Interval(null, d_, true, false);
+                    
+                        return e_;
+                    }
+                    else if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, "<=") ?? false))
+                    {
+                    						var f_ = this.ToQuantityIgnoringComparator(quantity);
+                    						var g_ = context.Operators.Interval(null, f_, true, true);
+                    
+                        return g_;
+                    }
+                    else if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, ">=") ?? false))
+                    {
+                    						var h_ = this.ToQuantityIgnoringComparator(quantity);
+                    						var i_ = context.Operators.Interval(h_, null, true, true);
+                    
+                        return i_;
+                    }
+                    else if ((context.Operators.EnumEqualsString(quantity?.ComparatorElement?.Value, ">") ?? false))
+                    {
+                    						var j_ = this.ToQuantityIgnoringComparator(quantity);
+                    						var k_ = context.Operators.Interval(j_, null, false, true);
+                    
+                        return k_;
+                    }
+                    else
+                    {
+                    						var l_ = this.ToQuantity(quantity);
+                    						var n_ = context.Operators.Interval(l_, l_, true, true);
+                    
+                        return n_;
+                    };
+                };
+            
+                return c_();
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToInterval")]
     [CqlTag("description", "Converts the given FHIR [Range](https://hl7.org/fhir/datatypes.html#Range) value to a CQL Interval of Quantity")]
     	public CqlInterval<CqlQuantity> ToInterval(Range range)
-	{
-		CqlInterval<CqlQuantity> a_()
-		{
-			if ((range is null))
-			{
-				CqlInterval<CqlQuantity> b_ = null;
-
-				return (b_ as CqlInterval<CqlQuantity>);
-			}
-			else
-			{
-				var c_ = this.ToQuantity(range?.Low);
-				var d_ = this.ToQuantity(range?.High);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
-
-				return e_;
-			};
-		};
-
-		return a_();
-	}
+{
+    		CqlInterval<CqlQuantity> a_()
+{
+        if ((range is null))
+            {
+            				CqlInterval<CqlQuantity> b_ = null;
+            
+                return (b_ as CqlInterval<CqlQuantity>);
+            }
+            else
+            {
+            				var c_ = this.ToQuantity(range?.Low);
+            				var d_ = this.ToQuantity(range?.High);
+            				var e_ = context.Operators.Interval(c_, d_, true, true);
+            
+                return e_;
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToCalendarUnit")]
     [CqlTag("description", "Converts a UCUM definite duration unit to a CQL calendar duration unit using conversions specified in the [quantities](https://cql.hl7.org/02-authorsguide.html#quantities) topic of the CQL specification.")]
     [CqlTag("comment", "Note that for durations above days (or weeks), the conversion is understood to be approximate")]
     	public string ToCalendarUnit(string unit)
-	{
-		string a_()
-		{
-			if ((context.Operators.Equal(unit, "ms") ?? false))
-			{
-				return "millisecond";
-			}
-			else if ((context.Operators.Equal(unit, "s") ?? false))
-			{
-				return "second";
-			}
-			else if ((context.Operators.Equal(unit, "min") ?? false))
-			{
-				return "minute";
-			}
-			else if ((context.Operators.Equal(unit, "h") ?? false))
-			{
-				return "hour";
-			}
-			else if ((context.Operators.Equal(unit, "d") ?? false))
-			{
-				return "day";
-			}
-			else if ((context.Operators.Equal(unit, "wk") ?? false))
-			{
-				return "week";
-			}
-			else if ((context.Operators.Equal(unit, "mo") ?? false))
-			{
-				return "month";
-			}
-			else if ((context.Operators.Equal(unit, "a") ?? false))
-			{
-				return "year";
-			}
-			else
-			{
-				return unit;
-			};
-		};
-
-		return a_();
-	}
+{
+    		string a_()
+{
+        if ((context.Operators.Equal(unit, "ms") ?? false))
+            {
+                return "millisecond";
+            }
+            else if ((context.Operators.Equal(unit, "s") ?? false))
+            {
+                return "second";
+            }
+            else if ((context.Operators.Equal(unit, "min") ?? false))
+            {
+                return "minute";
+            }
+            else if ((context.Operators.Equal(unit, "h") ?? false))
+            {
+                return "hour";
+            }
+            else if ((context.Operators.Equal(unit, "d") ?? false))
+            {
+                return "day";
+            }
+            else if ((context.Operators.Equal(unit, "wk") ?? false))
+            {
+                return "week";
+            }
+            else if ((context.Operators.Equal(unit, "mo") ?? false))
+            {
+                return "month";
+            }
+            else if ((context.Operators.Equal(unit, "a") ?? false))
+            {
+                return "year";
+            }
+            else
+            {
+                return unit;
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToQuantity")]
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Quantity")]
     [CqlTag("comment", "If the given quantity has a comparator specified, a runtime error is raised. If the given quantity has a system other than UCUM (i.e. `http://unitsofmeasure.org`) or CQL calendar units (i.e. `http://hl7.org/fhirpath/CodeSystem/calendar-units`) an error is raised. For UCUM to calendar units, the `ToCalendarUnit` function is used.")]
     [CqlTag("seealso", "ToCalendarUnit")]
     	public CqlQuantity ToQuantity(Quantity quantity)
-	{
-		CqlQuantity a_()
-		{
-			if ((quantity is null))
-			{
-				return null;
-			}
-			else if ((quantity?.ValueElement is null))
-			{
-				return null;
-			}
-			else if ((context.Operators.Not((bool?)(quantity?.ComparatorElement is null)) ?? false))
-			{
-				var b_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
-
-				return (b_ as CqlQuantity);
-			}
-			else if ((context.Operators.Or(context.Operators.Or((bool?)(quantity?.SystemElement is null), context.Operators.Equal(quantity?.SystemElement?.Value, "http://unitsofmeasure.org")), context.Operators.Equal(quantity?.SystemElement?.Value, "http://hl7.org/fhirpath/CodeSystem/calendar-units")) ?? false))
-			{
-				var c_ = this.ToCalendarUnit(((quantity?.CodeElement?.Value ?? quantity?.UnitElement?.Value) ?? "1"));
-
-				return new CqlQuantity(quantity?.ValueElement?.Value, c_);
-			}
-			else
-			{
-				var d_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
-				var e_ = context.Operators.Concatenate((d_ ?? ""), " (");
-				var f_ = context.Operators.Concatenate((e_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
-				var g_ = context.Operators.Concatenate((f_ ?? ""), "|");
-				var h_ = context.Operators.Concatenate((g_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
-				var i_ = context.Operators.Concatenate((h_ ?? ""), ")");
-				var j_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", i_);
-
-				return (j_ as CqlQuantity);
-			};
-		};
-
-		return a_();
-	}
+{
+    		CqlQuantity a_()
+{
+        if ((quantity is null))
+            {
+                return null;
+            }
+            else if ((quantity?.ValueElement is null))
+            {
+                return null;
+            }
+            else if ((context.Operators.Not((bool?)(quantity?.ComparatorElement is null)) ?? false))
+            {
+            				var b_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
+            
+                return (b_ as CqlQuantity);
+            }
+            else if ((context.Operators.Or(context.Operators.Or((bool?)(quantity?.SystemElement is null), context.Operators.Equal(quantity?.SystemElement?.Value, "http://unitsofmeasure.org")), context.Operators.Equal(quantity?.SystemElement?.Value, "http://hl7.org/fhirpath/CodeSystem/calendar-units")) ?? false))
+            {
+            				var c_ = this.ToCalendarUnit(((quantity?.CodeElement?.Value ?? quantity?.UnitElement?.Value) ?? "1"));
+            
+                return new CqlQuantity(quantity?.ValueElement?.Value, c_);
+            }
+            else
+            {
+            				var d_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
+            				var e_ = context.Operators.Concatenate((d_ ?? ""), " (");
+            				var f_ = context.Operators.Concatenate((e_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
+            				var g_ = context.Operators.Concatenate((f_ ?? ""), "|");
+            				var h_ = context.Operators.Concatenate((g_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
+            				var i_ = context.Operators.Concatenate((h_ ?? ""), ")");
+            				var j_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", i_);
+            
+                return (j_ as CqlQuantity);
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToQuantityIgnoringComparator")]
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Quantity, ignoring the comparator element. This function should only be used when an application is justified in ignoring the comparator value (i.e. the context is looking for boundary).")]
     [CqlTag("comment", "If the given quantity has a system other than UCUM (i.e. `http://unitsofmeasure.org`) or CQL calendar units (i.e. `http://hl7.org/fhirpath/CodeSystem/calendar-units`) an error is raised. For UCUM to calendar units, the `ToCalendarUnit` function is used.")]
     [CqlTag("seealso", "ToCalendarUnit")]
     	public CqlQuantity ToQuantityIgnoringComparator(Quantity quantity)
-	{
-		CqlQuantity a_()
-		{
-			if ((quantity is null))
-			{
-				return null;
-			}
-			else if ((quantity?.ValueElement is null))
-			{
-				return null;
-			}
-			else if ((context.Operators.Or(context.Operators.Or((bool?)(quantity?.SystemElement is null), context.Operators.Equal(quantity?.SystemElement?.Value, "http://unitsofmeasure.org")), context.Operators.Equal(quantity?.SystemElement?.Value, "http://hl7.org/fhirpath/CodeSystem/calendar-units")) ?? false))
-			{
-				var b_ = this.ToCalendarUnit(((quantity?.CodeElement?.Value ?? quantity?.UnitElement?.Value) ?? "1"));
-
-				return new CqlQuantity(quantity?.ValueElement?.Value, b_);
-			}
-			else
-			{
-				var c_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
-				var d_ = context.Operators.Concatenate((c_ ?? ""), " (");
-				var e_ = context.Operators.Concatenate((d_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
-				var f_ = context.Operators.Concatenate((e_ ?? ""), "|");
-				var g_ = context.Operators.Concatenate((f_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
-				var h_ = context.Operators.Concatenate((g_ ?? ""), ")");
-				var i_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", h_);
-
-				return (i_ as CqlQuantity);
-			};
-		};
-
-		return a_();
-	}
+{
+    		CqlQuantity a_()
+{
+        if ((quantity is null))
+            {
+                return null;
+            }
+            else if ((quantity?.ValueElement is null))
+            {
+                return null;
+            }
+            else if ((context.Operators.Or(context.Operators.Or((bool?)(quantity?.SystemElement is null), context.Operators.Equal(quantity?.SystemElement?.Value, "http://unitsofmeasure.org")), context.Operators.Equal(quantity?.SystemElement?.Value, "http://hl7.org/fhirpath/CodeSystem/calendar-units")) ?? false))
+            {
+            				var b_ = this.ToCalendarUnit(((quantity?.CodeElement?.Value ?? quantity?.UnitElement?.Value) ?? "1"));
+            
+                return new CqlQuantity(quantity?.ValueElement?.Value, b_);
+            }
+            else
+            {
+            				var c_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
+            				var d_ = context.Operators.Concatenate((c_ ?? ""), " (");
+            				var e_ = context.Operators.Concatenate((d_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
+            				var f_ = context.Operators.Concatenate((e_ ?? ""), "|");
+            				var g_ = context.Operators.Concatenate((f_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
+            				var h_ = context.Operators.Concatenate((g_ ?? ""), ")");
+            				var i_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", h_);
+            
+                return (i_ as CqlQuantity);
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToRatio")]
     [CqlTag("description", "Converts the given FHIR [Ratio](https://hl7.org/fhir/datatypes.html#Ratio) value to a CQL Ratio.")]
     	public CqlRatio ToRatio(Ratio ratio)
-	{
-		CqlRatio a_()
-		{
-			if ((ratio is null))
-			{
-				return null;
-			}
-			else
-			{
-				var b_ = this.ToQuantity(ratio?.Numerator);
-				var c_ = this.ToQuantity(ratio?.Denominator);
-
-				return new CqlRatio(b_, c_);
-			};
-		};
-
-		return a_();
-	}
+{
+    		CqlRatio a_()
+{
+        if ((ratio is null))
+            {
+                return null;
+            }
+            else
+            {
+            				var b_ = this.ToQuantity(ratio?.Numerator);
+            				var c_ = this.ToQuantity(ratio?.Denominator);
+            
+                return new CqlRatio(b_, c_);
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToCode")]
     [CqlTag("description", "Converts the given FHIR [Coding](https://hl7.org/fhir/datatypes.html#Coding) value to a CQL Code.")]
@@ -311,564 +311,568 @@ public class FHIRHelpers_4_3_000
     [CqlDeclaration("ToConcept")]
     [CqlTag("description", "Converts the given FHIR [CodeableConcept](https://hl7.org/fhir/datatypes.html#CodeableConcept) value to a CQL Concept.")]
     	public CqlConcept ToConcept(CodeableConcept concept)
-	{
-		CqlConcept a_()
-		{
-			if ((concept is null))
-			{
-				return null;
-			}
-			else
-			{
-				CqlCode b_(Coding C)
-				{
-					var d_ = this.ToCode(C);
-
-					return d_;
-				};
-				var c_ = context.Operators.SelectOrNull<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
-
-				return new CqlConcept(c_, concept?.TextElement?.Value);
-			};
-		};
-
-		return a_();
-	}
+{
+    		CqlConcept a_()
+{
+        if ((concept is null))
+            {
+                return null;
+            }
+            else
+            {
+            				CqlCode b_(Coding C)
+{
+                					var d_ = this.ToCode(C);
+                
+                    return d_;
+                };
+            				var c_ = context.Operators.SelectOrNull<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
+            
+                return new CqlConcept(c_, concept?.TextElement?.Value);
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("ToValueSet")]
     [CqlTag("description", "Converts the given value (assumed to be a URI) to a CQL [ValueSet](https://cql.hl7.org/09-b-cqlreference.html#valueset)")]
     	public CqlValueSet ToValueSet(string uri)
-	{
-		CqlValueSet a_()
-		{
-			if ((uri is null))
-			{
-				return null;
-			}
-			else
-			{
-				var b_ = new CqlValueSet
+{
+    		CqlValueSet a_()
+{
+        if ((uri is null))
+            {
+                return null;
+            }
+            else
+            {
+            				var b_ = new CqlValueSet
 				{
 					id = uri,
 				};
-
-				return b_;
-			};
-		};
-
-		return a_();
-	}
+            
+                return b_;
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("reference")]
     [CqlTag("description", "Constructs a FHIR [Reference](https://hl7.org/fhir/datatypes.html#Reference) from the given reference (assumed to be a FHIR resource URL)")]
     	public ResourceReference reference(string reference)
-	{
-		ResourceReference a_()
-		{
-			if ((reference is null))
-			{
-				return null;
-			}
-			else
-			{
-				var b_ = new FhirString
+{
+    		ResourceReference a_()
+{
+        if ((reference is null))
+            {
+                return null;
+            }
+            else
+            {
+            				var b_ = new FhirString
 				{
 					Value = reference,
 				};
-				var c_ = new ResourceReference
+            				var c_ = new ResourceReference
 				{
 					ReferenceElement = b_,
 				};
-
-				return c_;
-			};
-		};
-
-		return a_();
-	}
+            
+                return c_;
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("reference")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("ToValue")]
     [CqlTag("description", "Converts the given value to a CQL value using the appropriate accessor or conversion function.")]
     [CqlTag("comment", "TODO: document conversion")]
     	public object ToValue(object value)
-	{
-		object a_()
-		{
-			if (value is Base64Binary)
-			{
-				var b_ = context.Operators.Convert<string>((value as Base64Binary)?.Value);
-
-				return (b_ as object);
-			}
-			else if (value is FhirBoolean)
-			{
-				return (value as FhirBoolean)?.Value;
-			}
-			else if (value is Canonical)
-			{
-				return ((value as Canonical)?.Value as object);
-			}
-			else if (value is Code)
-			{
-				return ((value as Code)?.Value as object);
-			}
-			else if (value is Date)
-			{
-				var c_ = context.Operators.ConvertStringToDate((value as Date)?.Value);
-
-				return (c_ as object);
-			}
-			else if (value is FhirDateTime)
-			{
-				var d_ = context.Operators.Convert<CqlDateTime>((value as FhirDateTime));
-
-				return (d_ as object);
-			}
-			else if (value is FhirDecimal)
-			{
-				return (value as FhirDecimal)?.Value;
-			}
-			else if (value is Id)
-			{
-				return ((value as Id)?.Value as object);
-			}
-			else if (value is Instant)
-			{
-				var e_ = context.Operators.Convert<CqlDateTime>((value as Instant)?.Value);
-
-				return (e_ as object);
-			}
-			else if (value is Integer)
-			{
-				return (value as Integer)?.Value;
-			}
-			else if (value is Markdown)
-			{
-				return ((value as Markdown)?.Value as object);
-			}
-			else if (value is Oid)
-			{
-				return ((value as Oid)?.Value as object);
-			}
-			else if (value is Integer)
-			{
-				return (value as Integer)?.Value;
-			}
-			else if (value is FhirString)
-			{
-				return ((value as FhirString)?.Value as object);
-			}
-			else if (value is Time)
-			{
-				var f_ = context.Operators.ConvertStringToTime((value as Time)?.Value);
-
-				return (f_ as object);
-			}
-			else if (value is Integer)
-			{
-				return (value as Integer)?.Value;
-			}
-			else if (value is FhirUri)
-			{
-				return ((value as FhirUri)?.Value as object);
-			}
-			else if (value is FhirUrl)
-			{
-				return ((value as FhirUrl)?.Value as object);
-			}
-			else if (value is Uuid)
-			{
-				return ((value as Uuid)?.Value as object);
-			}
-			else if (value is Age)
-			{
-				var g_ = this.ToQuantity((value as Age));
-
-				return (g_ as object);
-			}
-			else if (value is CodeableConcept)
-			{
-				var h_ = this.ToConcept((value as CodeableConcept));
-
-				return (h_ as object);
-			}
-			else if (value is Coding)
-			{
-				var i_ = this.ToCode((value as Coding));
-
-				return (i_ as object);
-			}
-			else if (value is Count)
-			{
-				var j_ = this.ToQuantity((value as Count));
-
-				return (j_ as object);
-			}
-			else if (value is Distance)
-			{
-				var k_ = this.ToQuantity((value as Distance));
-
-				return (k_ as object);
-			}
-			else if (value is Duration)
-			{
-				var l_ = this.ToQuantity((value as Duration));
-
-				return (l_ as object);
-			}
-			else if (value is Quantity)
-			{
-				var m_ = this.ToQuantity((value as Quantity));
-
-				return (m_ as object);
-			}
-			else if (value is Range)
-			{
-				var n_ = this.ToInterval((value as Range));
-
-				return (n_ as object);
-			}
-			else if (value is Period)
-			{
-				var o_ = this.ToInterval((value as Period));
-
-				return (o_ as object);
-			}
-			else if (value is Ratio)
-			{
-				var p_ = this.ToRatio((value as Ratio));
-
-				return (p_ as object);
-			}
-			else
-			{
-				return (value as object);
-			};
-		};
-
-		return a_();
-	}
+{
+    		object a_()
+{
+        if (value is Base64Binary)
+            {
+            				var b_ = context.Operators.Convert<string>((value as Base64Binary)?.Value);
+            
+                return (b_ as object);
+            }
+            else if (value is FhirBoolean)
+            {
+                return (value as FhirBoolean)?.Value;
+            }
+            else if (value is Canonical)
+            {
+                return ((value as Canonical)?.Value as object);
+            }
+            else if (value is Code)
+            {
+                return ((value as Code)?.Value as object);
+            }
+            else if (value is Date)
+            {
+            				var c_ = context.Operators.ConvertStringToDate((value as Date)?.Value);
+            
+                return (c_ as object);
+            }
+            else if (value is FhirDateTime)
+            {
+            				var d_ = context.Operators.Convert<CqlDateTime>((value as FhirDateTime));
+            
+                return (d_ as object);
+            }
+            else if (value is FhirDecimal)
+            {
+                return (value as FhirDecimal)?.Value;
+            }
+            else if (value is Id)
+            {
+                return ((value as Id)?.Value as object);
+            }
+            else if (value is Instant)
+            {
+            				var e_ = context.Operators.Convert<CqlDateTime>((value as Instant)?.Value);
+            
+                return (e_ as object);
+            }
+            else if (value is Integer)
+            {
+                return (value as Integer)?.Value;
+            }
+            else if (value is Markdown)
+            {
+                return ((value as Markdown)?.Value as object);
+            }
+            else if (value is Oid)
+            {
+                return ((value as Oid)?.Value as object);
+            }
+            else if (value is Integer)
+            {
+                return (value as Integer)?.Value;
+            }
+            else if (value is FhirString)
+            {
+                return ((value as FhirString)?.Value as object);
+            }
+            else if (value is Time)
+            {
+            				var f_ = context.Operators.ConvertStringToTime((value as Time)?.Value);
+            
+                return (f_ as object);
+            }
+            else if (value is Integer)
+            {
+                return (value as Integer)?.Value;
+            }
+            else if (value is FhirUri)
+            {
+                return ((value as FhirUri)?.Value as object);
+            }
+            else if (value is FhirUrl)
+            {
+                return ((value as FhirUrl)?.Value as object);
+            }
+            else if (value is Uuid)
+            {
+                return ((value as Uuid)?.Value as object);
+            }
+            else if (value is Age)
+            {
+            				var g_ = this.ToQuantity((value as Age));
+            
+                return (g_ as object);
+            }
+            else if (value is CodeableConcept)
+            {
+            				var h_ = this.ToConcept((value as CodeableConcept));
+            
+                return (h_ as object);
+            }
+            else if (value is Coding)
+            {
+            				var i_ = this.ToCode((value as Coding));
+            
+                return (i_ as object);
+            }
+            else if (value is Count)
+            {
+            				var j_ = this.ToQuantity((value as Count));
+            
+                return (j_ as object);
+            }
+            else if (value is Distance)
+            {
+            				var k_ = this.ToQuantity((value as Distance));
+            
+                return (k_ as object);
+            }
+            else if (value is Duration)
+            {
+            				var l_ = this.ToQuantity((value as Duration));
+            
+                return (l_ as object);
+            }
+            else if (value is Quantity)
+            {
+            				var m_ = this.ToQuantity((value as Quantity));
+            
+                return (m_ as object);
+            }
+            else if (value is Range)
+            {
+            				var n_ = this.ToInterval((value as Range));
+            
+                return (n_ as object);
+            }
+            else if (value is Period)
+            {
+            				var o_ = this.ToInterval((value as Period));
+            
+                return (o_ as object);
+            }
+            else if (value is Ratio)
+            {
+            				var p_ = this.ToRatio((value as Ratio));
+            
+                return (p_ as object);
+            }
+            else
+            {
+                return (value as object);
+            };
+        };
+    
+        return a_();
+    }
 
     [CqlDeclaration("resolve")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("resolve")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("extension")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("extension")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("modifierExtension")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("modifierExtension")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("hasValue")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("getValue")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("ofType")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("is")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("as")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("elementDefinition")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingInd("slice")]
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
+    [CqlDeclaration("slice")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("checkModifiers")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("checkModifiers")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("checkModifiers")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("checkModifiers")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("conformsTo")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("memberOf")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("memberOf")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("memberOf")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("subsumes")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("subsumes")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("subsumedBy")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("subsumedBy")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("htmlChecks")]
     // Exception during code generation:
     System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 528
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 530
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 42
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 552
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 41
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBinaryExpression(Int32 indent, String leadingIndentString, BinaryExpression binary) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 550
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 40
    at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertBlockExpression(Int32 indent, BlockExpression block) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 116
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 50
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 430
-   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 464
-   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 508
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 51
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertLambdaExpression(Int32 indent, String leadingIndentString, LambdaExpression lambda, Boolean functionMode) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 432
+   at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertTopLevelFunctionDefinition(Int32 indent, LambdaExpression function, String name, String specifiers) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 466
+   at Hl7.Cql.CodeGeneration.NET.CSharpLibrarySetToStreamsWriter.WriteMemoizedInstanceMethod(String libraryName, CodeWriter writer, String cqlName, LambdaExpression overload, ILookup`2 tags) in C:\Dev\FirelyTeam\firely-cql-sdk\version_1.1 - fhirhelpers\Cql\CodeGeneration.NET\CSharpLibrarySetToStreamsWriter.cs:line 504
     [CqlDeclaration("ToString")]
     	public Account.AccountStatus? ToString(Code<Account.AccountStatus> value) => 
 		value?.Value;
@@ -1723,11 +1727,11 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToString")]
     	public string ToString(Base64Binary value)
-	{
-		var a_ = context.Operators.Convert<string>(value?.Value);
-
-		return a_;
-	}
+{
+    		var a_ = context.Operators.Convert<string>(value?.Value);
+    
+        return a_;
+    }
 
     [CqlDeclaration("ToString")]
     	public string ToString(FhirString value) => 
@@ -1747,27 +1751,27 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToDate")]
     	public CqlDate ToDate(Date value)
-	{
-		var a_ = context.Operators.ConvertStringToDate(value?.Value);
-
-		return a_;
-	}
+{
+    		var a_ = context.Operators.ConvertStringToDate(value?.Value);
+    
+        return a_;
+    }
 
     [CqlDeclaration("ToDateTime")]
     	public CqlDateTime ToDateTime(FhirDateTime value)
-	{
-		var a_ = context.Operators.Convert<CqlDateTime>(value);
-
-		return a_;
-	}
+{
+    		var a_ = context.Operators.Convert<CqlDateTime>(value);
+    
+        return a_;
+    }
 
     [CqlDeclaration("ToDateTime")]
     	public CqlDateTime ToDateTime(Instant value)
-	{
-		var a_ = context.Operators.Convert<CqlDateTime>(value?.Value);
-
-		return a_;
-	}
+{
+    		var a_ = context.Operators.Convert<CqlDateTime>(value?.Value);
+    
+        return a_;
+    }
 
     [CqlDeclaration("ToDecimal")]
     	public decimal? ToDecimal(FhirDecimal value) => 
@@ -1779,32 +1783,10 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToTime")]
     	public CqlTime ToTime(Time value)
-	{
-		var a_ = context.Operators.ConvertStringToTime(value?.Value);
-
-		return a_;
-	}
-
-}
-ue?.Value);
-
-		return a_;
-	}
-
-    [CqlDeclaration("ToDecimal")]
-	public decimal? ToDecimal(FhirDecimal value) => 
-		value?.Value;
-
-    [CqlDeclaration("ToInteger")]
-	public int? ToInteger(Integer value) => 
-		value?.Value;
-
-    [CqlDeclaration("ToTime")]
-	public CqlTime ToTime(Time value)
-	{
-		var a_ = context.Operators.ConvertStringToTime(value?.Value);
-
-		return a_;
-	}
+{
+    		var a_ = context.Operators.ConvertStringToTime(value?.Value);
+    
+        return a_;
+    }
 
 }
