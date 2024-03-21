@@ -179,13 +179,6 @@ public class AdultOutpatientEncounters_4_8_000
 		__Qualifying_Encounters.Value;
 
 }
-, v_);
-    
-        return w_;
-    }
 
-    [CqlDeclaration("Qualifying Encounters")]
-    	public IEnumerable<Encounter> Qualifying_Encounters() => 
-		__Qualifying_Encounters.Value;
 
-}
+BLAAAAH

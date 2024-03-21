@@ -17,8 +17,11 @@ internal class WriteToFileCSharpCodeStreamPostProcessor : CSharpCodeStreamPostPr
     {
         var file = new FileInfo($"{Path.Combine(_csharpCodeWriterOptions.OutDirectory!.FullName, name)}.cs");
         file.Directory!.Create();
-        using var streamOut = file.OpenWrite();
         stream.Seek(0, SeekOrigin.Begin);
+
+        using var streamOut = file.OpenWrite();
+        streamOut.SetLength(0); // Clears out previous contents
         stream.CopyTo(streamOut);
+        streamOut.Flush();
     }
 }
