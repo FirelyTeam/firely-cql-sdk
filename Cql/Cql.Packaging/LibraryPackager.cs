@@ -106,7 +106,7 @@ internal class LibraryPackager
                 if (library.NameAndVersion() is null)
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, _cqlTypeToFhirTypeMapper, library);
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, _cqlTypeToFhirTypeMapper, library, callbacks);
                 librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
                 resources.Add(fhirLibrary);
             }
@@ -172,12 +172,12 @@ internal class LibraryPackager
         return resources;
     }
 
-    private static Library CreateLibraryResource(
-        FileInfo elmFile,
+    private static Library CreateLibraryResource(FileInfo elmFile,
         FileInfo? cqlFile,
         AssemblyData assembly,
         CqlTypeToFhirTypeMapper typeCrosswalk,
-        Elm.Library? elmLibrary = null)
+        Elm.Library? elmLibrary = null, 
+        LibraryPackageCallbacks callbacks = default)
     {
         if (!elmFile.Exists)
             throw new ArgumentException($"Couldn't find library {elmFile.FullName}", nameof(elmFile));
@@ -276,6 +276,7 @@ internal class LibraryPackager
                 library.Content.Add(sourceAttachment);
             }
         }
+        library.Url = callbacks.BuildUrlFromResource(library);
         return library;
     }
 

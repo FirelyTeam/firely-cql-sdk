@@ -76,7 +76,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<(string name, Stream stream)> streamsByLibraryName)
         {
             var assemblies = new Dictionary<string, AssemblyData>();
-            List<(string name, Stream sream)> tupleStreams = new List<(string name, Stream sream)>();
+            List<(string name, Stream stream)> tupleStreams = new List<(string name, Stream stream)>();
             AssemblyData[] dependencyAssemblies = Array.Empty<AssemblyData>();
             bool isScanningTuples = true;
             foreach (var (name, stream) in streamsByLibraryName)
@@ -103,7 +103,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static (string name, AssemblyData asmData) CompileTuples(IEnumerable<(string name, Stream sream)> tupleStreams,
+        private static (string name, AssemblyData asmData) CompileTuples(
+            IEnumerable<(string name, Stream stream)> tupleStreams,
             Dictionary<string, AssemblyData> assemblies,
             IEnumerable<Assembly> assemblyReferences)
         {
@@ -121,7 +122,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var sources = new Dictionary<string, string>();
             foreach (var kvp in tupleStreams)
             {
-                var sourceCodeStream = kvp.sream;
+                var sourceCodeStream = kvp.stream;
                 sourceCodeStream.Flush();
                 sourceCodeStream.Seek(0, SeekOrigin.Begin);
                 var reader = new StreamReader(sourceCodeStream);
