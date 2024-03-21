@@ -36,7 +36,7 @@ public class FHIRHelpers_4_0_001
 
 		return b_;
 	}
-    
+
     [CqlDeclaration("Patient")]
     	public Patient Patient() => 
 		__Patient.Value;

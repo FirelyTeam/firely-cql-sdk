@@ -29,32 +29,39 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
         {
-            var leadingIndentString = leadingIndent ? IndentString(indent) : string.Empty;
-
-            return expression switch
+            try
             {
-                ConstantExpression constant => convertConstantExpression(constant.Type, constant.Value, leadingIndentString),
-                NewExpression @new => convertNewExpression(leadingIndentString, @new),
-                MethodCallExpression call => convertMethodCallExpression(indent, leadingIndentString, call),
-                LambdaExpression lambda => convertLambdaExpression(indent, leadingIndentString, lambda),
-                BinaryExpression binary => convertBinaryExpression(indent, leadingIndentString, binary),
-                UnaryExpression unary => convertUnaryExpression(indent, leadingIndentString, unary),
-                NewArrayExpression newArray => convertNewArrayExpression(indent, leadingIndentString, newArray),
-                MemberExpression me => convertMemberExpression(leadingIndentString, me),
-                MemberInitExpression memberInit => convertMemberInitExpression(indent, leadingIndentString, memberInit),
-                ConditionalExpression ce => convertConditionalExpression(indent, leadingIndentString, ce),
-                TypeBinaryExpression typeBinary => convertTypeBinaryExpression(indent, typeBinary),
-                ParameterExpression pe => convertParameterExpression(leadingIndentString, pe),
-                DefaultExpression de => convertDefaultExpression(leadingIndentString, de),
-                NullConditionalMemberExpression nullp => convertNullConditionalMemberExpression(leadingIndentString, nullp),
-                BlockExpression block => convertBlockExpression(indent, block),
-                InvocationExpression invocation => convertInvocationExpression(leadingIndentString, invocation),
-                CaseWhenThenExpression cwt => convertCaseWhenThenExpression(indent, cwt),
-                FunctionCallExpression fce => convertFunctionCallExpression(indent, leadingIndentString, fce),
-                DefinitionCallExpression dce => convertDefinitionCallExpression(indent, leadingIndentString, dce),
-                ElmAsExpression ea => ConvertExpression(indent, ea.Reduce(), leadingIndent),
-                _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
-            };
+                var leadingIndentString = leadingIndent ? IndentString(indent) : string.Empty;
+
+                return expression switch
+                {
+                    ConstantExpression constant => convertConstantExpression(constant.Type, constant.Value, leadingIndentString),
+                    NewExpression @new => convertNewExpression(leadingIndentString, @new),
+                    MethodCallExpression call => convertMethodCallExpression(indent, leadingIndentString, call),
+                    LambdaExpression lambda => convertLambdaExpression(indent, leadingIndentString, lambda),
+                    BinaryExpression binary => convertBinaryExpression(indent, leadingIndentString, binary),
+                    UnaryExpression unary => convertUnaryExpression(indent, leadingIndentString, unary),
+                    NewArrayExpression newArray => convertNewArrayExpression(indent, leadingIndentString, newArray),
+                    MemberExpression me => convertMemberExpression(leadingIndentString, me),
+                    MemberInitExpression memberInit => convertMemberInitExpression(indent, leadingIndentString, memberInit),
+                    ConditionalExpression ce => convertConditionalExpression(indent, leadingIndentString, ce),
+                    TypeBinaryExpression typeBinary => convertTypeBinaryExpression(indent, typeBinary),
+                    ParameterExpression pe => convertParameterExpression(leadingIndentString, pe),
+                    DefaultExpression de => convertDefaultExpression(leadingIndentString, de),
+                    NullConditionalMemberExpression nullp => convertNullConditionalMemberExpression(leadingIndentString, nullp),
+                    BlockExpression block => convertBlockExpression(indent, block),
+                    InvocationExpression invocation => convertInvocationExpression(leadingIndentString, invocation),
+                    CaseWhenThenExpression cwt => convertCaseWhenThenExpression(indent, cwt),
+                    FunctionCallExpression fce => convertFunctionCallExpression(indent, leadingIndentString, fce),
+                    DefinitionCallExpression dce => convertDefinitionCallExpression(indent, leadingIndentString, dce),
+                    ElmAsExpression ea => ConvertExpression(indent, ea.Reduce(), leadingIndent),
+                    _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
+                };
+            }
+            catch (Exception e)
+            {
+                return $"((Func<dynamic>)(() => throw new NotImplementedException()))() /* Generator Error: {e} */";
+            }
         }
 
         private static readonly ObjectIDGenerator gen = new();

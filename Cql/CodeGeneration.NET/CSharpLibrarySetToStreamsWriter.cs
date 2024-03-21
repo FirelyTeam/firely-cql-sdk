@@ -497,22 +497,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else
             {
-                int pos = writer.Position;
-                try
-                {
-                    writer.WriteLine($"[CqlDeclaration(\"{cqlName}\")]");
-                    WriteTags(writer, tags);
-                    var func = expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, overload, methodName!, "public");
-                    writer.Write(func);
-                }
-                catch (Exception e)
-                {
-                    writer.TruncateToLength(pos);
-                    writer.Write($"// Exception during code generation:");
-                    writer.WriteLine();
-                    writer.Write(e.ToString());
-                    //throw;
-                }
+                writer.WriteLine($"[CqlDeclaration(\"{cqlName}\")]");
+                WriteTags(writer, tags);
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(writer.Indent, overload, methodName!, "public");
+                writer.Write(func);
             }
         }
 

@@ -25,9 +25,9 @@ internal class CodeWriter : IndentedTextWriter
             _ => throw new NotSupportedException("Writer must either be a StreamWriter with a seekable and writable BaseStream, or a StringWriter."),
         };
 
-    public int Position => _util.Position;
+    public int Position => _util.GetPosition(this);
 
-    public void TruncateToLength(int length) => _util.TruncateToLength(length);
+    public void TruncateToLength(int length) => _util.TruncateToLength(this, length);
 
     public void WithIndent(Action action)
     {
@@ -54,7 +54,7 @@ internal class CodeWriter : IndentedTextWriter
 
     protected override void OutputTabs()
     {
-        if (Indent > 0 && _util.Position == 0)
+        if (Indent > 0 && _util.GetPosition(this) == 0)
         {
             __tabsPendingField.SetValue(this, true);
         }
@@ -63,19 +63,29 @@ internal class CodeWriter : IndentedTextWriter
 
     private interface IUtility
     {
-        int Position { get; }
-        void TruncateToLength(int length);
+        int GetPosition(CodeWriter owner);
+        void TruncateToLength(CodeWriter owner, int length);
         string WriteToString(CodeWriter owner);
     }
 
     private readonly record struct StreamUtility(Stream BaseStream) : IUtility
     {
-        public int Position => (int)BaseStream.Position;
-        public void TruncateToLength(int length) => BaseStream.SetLength(length);
+        public int GetPosition(CodeWriter owner)
+        {
+            owner.Flush();
+            return (int)BaseStream.Position;
+        }
+
+        public void TruncateToLength(CodeWriter owner, int length)
+        {
+            owner.Flush();
+            BaseStream.SetLength(length);
+        }
+
         public string WriteToString(CodeWriter owner)
         {
             owner.Flush();
-            if (Position == 0) 
+            if (GetPosition(owner) == 0) 
                 return "";
 
             BaseStream.Seek(0, SeekOrigin.Begin);
@@ -86,12 +96,22 @@ internal class CodeWriter : IndentedTextWriter
 
     private readonly record struct StringBuilderUtility(StringBuilder BaseStringBuilder) : IUtility
     {
-        public int Position => BaseStringBuilder.Length;
-        public void TruncateToLength(int length) => BaseStringBuilder.Remove(length, BaseStringBuilder.Length - length);
+        public int GetPosition(CodeWriter owner)
+        {
+            owner.Flush();
+            return BaseStringBuilder.Length;
+        }
+
+        public void TruncateToLength(CodeWriter owner, int length)
+        {
+            owner.Flush();
+            BaseStringBuilder.Remove(length, BaseStringBuilder.Length - length);
+        }
+
         public string WriteToString(CodeWriter owner)
         {
             owner.Flush();
-            if (Position == 0) 
+            if (GetPosition(owner) == 0) 
                 return "";
 
             return BaseStringBuilder.ToString();
