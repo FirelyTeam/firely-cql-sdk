@@ -53,7 +53,7 @@ internal class LibraryExpressionBuilder
         return definitions;
     }
 
-    public void ProcessLibrary(LibraryExpressionBuilderContext libCtx)
+    private void ProcessLibrary(LibraryExpressionBuilderContext libCtx)
     {
         var library = libCtx.Library;
         _logger.LogInformation("Building expressions for '{library}'", libCtx.LibraryKey);
