@@ -273,6 +273,8 @@ internal class LibraryExpressionBuilder
                         .ToArray();
                     var notImplemented = NotImplemented(ctx, expressionKey, paramTypes, returnType);
                     ctx.LibraryContext.Definitions.Add(ctx.LibraryContext.LibraryKey, expressionDef.name, paramTypes, notImplemented);
+                    _logger.LogWarning(ctx.FormatMessage($"Function '{expressionDef.name}' is declared external, but it was not defined in the expression scope. " +
+                                                         "A stub has been created that throws a NotImplemented exception."), expressionDef);
                     return;
                 }
 
