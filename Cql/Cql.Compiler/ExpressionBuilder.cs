@@ -1077,8 +1077,20 @@ namespace Hl7.Cql.Compiler
                 {
                     @else = HandleNullable(@else, then.Type);
                 }
+
                 if (then.Type != @else.Type)
-                    throw ctx.NewExpressionBuildingException($"The If expression at {@if.locator} produces two branches with different types.");
+                {
+                    // In fact, this is allowed, but since this would be handled using type "object" at runtime
+                    // (since the CLR does not support discriminated unions), we will throw an exception here.
+                    // We could also optimize by first trying whether the arguments are convertible to each other,
+                    // since that would catch quite a few cases (mostly the if .... then X else List<X> cases),
+                    // which are common.
+                     throw ctx.NewExpressionBuildingException(
+                        $"The If expression at {@if.locator} produces two branches with different types.");
+                    // then = Expression.Convert(then, typeof(object));
+                    // @else = Expression.Convert(@else, typeof(object));
+                }
+
                 var ifThenElse = Expression.Condition(condition, then, @else);
 
                 return ifThenElse;
