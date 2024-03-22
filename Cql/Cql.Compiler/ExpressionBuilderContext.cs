@@ -251,12 +251,12 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ExpressionBuilderContext Deeper(
+        internal ExpressionBuilderContext Push(
             elm.Element element)
         {
             if (element == _element)
             {
-                Debug.WriteLine("Unnecessary call to Deeper, since the current context already points to the element.");
+                Debug.WriteLine($"Unnecessary call to {nameof(Push)}, since the current context already points to the element.");
                 return this;
             }
 

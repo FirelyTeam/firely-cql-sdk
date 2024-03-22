@@ -25,8 +25,8 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
             csharpOutDirectory is { } dir
                 ? new WriteToFileCSharpCodeStreamPostProcessor(Options(new CSharpCodeWriterOptions() { OutDirectory = new DirectoryInfo(dir) })) 
                 : null);
-        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver, CSharpCodeStreamPostProcessor));
-        _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager));
+        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
+        _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor));
         _libraryPackager = Deferred(() => new LibraryPackager(CqlTypeToFhirTypeMapper, AssemblyCompiler, LibrarySetExpressionBuilder));
 
 

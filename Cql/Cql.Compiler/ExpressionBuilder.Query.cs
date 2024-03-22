@@ -67,7 +67,7 @@ internal partial class ExpressionBuilder
         {
             foreach (var relationship in query.relationship)
             {
-                ctx = ctx.Deeper(relationship);
+                ctx = ctx.Push(relationship);
 
                 var selectManyLambda = WithToSelectManyBody(rootScopeParameter, relationship, ctx);
 
@@ -97,7 +97,7 @@ internal partial class ExpressionBuilder
 
         if (query.where != null)
         {
-            ctx = ctx.Deeper(query.where);
+            ctx = ctx.Push(query.where);
             
             var whereBody = TranslateExpression(query.where, ctx);
             var whereLambda = Expression.Lambda(whereBody, rootScopeParameter);
@@ -109,7 +109,7 @@ internal partial class ExpressionBuilder
 
         if (query.@return != null)
         {
-            ctx = ctx.Deeper(query.@return);
+            ctx = ctx.Push(query.@return);
 
             var selectBody = TranslateExpression(query.@return.expression!, ctx);
             var selectLambda = Expression.Lambda(selectBody, rootScopeParameter);
@@ -121,7 +121,7 @@ internal partial class ExpressionBuilder
 
         if (query.aggregate != null)
         {
-            ctx = ctx.Deeper(query.aggregate);
+            ctx = ctx.Push(query.aggregate);
 
             var resultAlias = query.aggregate.identifier!;
             Type? resultType = null;
@@ -155,11 +155,11 @@ internal partial class ExpressionBuilder
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByDirection))]
         if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)
         {
-            ctx = ctx.Deeper(query.sort);
+            ctx = ctx.Push(query.sort);
 
             foreach (var by in query.sort.by)
             {
-                ctx = ctx.Deeper(by);
+                ctx = ctx.Push(by);
 
                 ListSortDirection order = ExtensionMethods.ListSortOrder(by.direction);
                 if (by is ByExpression byExpression)

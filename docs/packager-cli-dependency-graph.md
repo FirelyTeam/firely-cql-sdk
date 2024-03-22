@@ -33,6 +33,7 @@ classDiagram
 
     %% Injected Dependencies
 
+    CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected
 
@@ -40,8 +41,7 @@ classDiagram
 
     ResourcePackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
-    
-       
+      
     TypeResolver ..> CqlOperatorsBinding : injected
     TypeConverter ..> CqlOperatorsBinding : injected
 
@@ -53,7 +53,6 @@ classDiagram
     TypeResolver ..> LibraryPackager : injected
     LibrarySetExpressionBuilder ..> LibraryPackager : injected
     
-    CSharpCodeStreamPostProcessor ..> CSharpLibrarySetToStreamsWriter : injected\n(optional)
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
     TypeManager ..> LibraryExpressionBuilder : injected
