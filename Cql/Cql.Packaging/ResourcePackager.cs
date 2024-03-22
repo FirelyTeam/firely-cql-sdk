@@ -47,8 +47,8 @@ internal class ResourcePackager
         DirectoryInfo cqlDirectory,
         string? resourceCanonicalRootUrl = null)
     {
-        // 1. LOAD ELM FILES
         //
+        // 1. LOAD ELM FILES
         //
 
         LibrarySet librarySet;
@@ -62,9 +62,10 @@ internal class ResourcePackager
             throw new ResourcePackagerErrors(LoadElmFilesException: e).ToException();
         }
 
+        //
         // 2. BUILD EXPRESSIONS
-        // Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
-        // while we try to continue building the rest of the artifacts up until the point of failure.
+        //      Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
+        //      while we try to continue building the rest of the artifacts up until the point of failure.
 
         var librariesByNameAndVersion = new Dictionary<string, Library>();
         var definitions = new DefinitionDictionary<LambdaExpression>();
@@ -81,8 +82,8 @@ internal class ResourcePackager
             expressionBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
         }
 
-        // 3. GENERATE C# ASSEMBLIES 
         //
+        // 3. GENERATE C# ASSEMBLIES 
         //
 
         IDictionary<string, AssemblyData> assembliesByLibraryName;
@@ -97,134 +98,18 @@ internal class ResourcePackager
                 AssemblyCompilingException:e).ToException();
         }
 
-        // 4. GENERATE FHIR RESOURCES
         //
+        // 4. GENERATE FHIR RESOURCES
         //
 
         try
         {
-            var resources = new List<Resource>();
-
-            void OnResourceCreated(Resource resource)
-            {
-                _fhirResourcePostProcessor?.ProcessResource(resource);
-                resources!.Add(resource);
-            }
-
-            var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
-
-            foreach (var (name, asmData) in assembliesByLibraryName)
-            {
-                if (name is "TupleTypes")
-                {
-                    var tuplesBinary = new Binary
-                    {
-                        Id = "TupleTypes-Binary",
-                        ContentType = "application/octet-stream",
-                        Data = asmData.Binary,
-                    };
-                    OnResourceCreated(tuplesBinary);
-
-                    foreach (var sourceKvp in asmData.SourceCode)
-                    {
-                        var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
-                        var tuplesCSharpBinary = new Binary
-                        {
-                            Id = sourceKvp.Key.Replace("_", "-"),
-                            ContentType = "text/plain",
-                            Data = tuplesSourceBytes,
-                        };
-                        OnResourceCreated(tuplesCSharpBinary);
-                    }
-                }
-                else
-                {
-                    var library = librarySet.GetLibrary(name)!;
-                    var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
-                    if (!elmFile.Exists)
-                        elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
-                            $"{library.identifier?.id ?? string.Empty}.json"));
-
-                    if (!elmFile.Exists)
-                        throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
-
-                    var cqlFiles =
-                        cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
-                    if (cqlFiles.Length == 0)
-                    {
-                        cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
-                        if (cqlFiles.Length == 0)
-                            throw new InvalidOperationException($"{library.identifier!.id}.cql");
-                    }
-
-                    if (cqlFiles.Length > 1)
-                        throw new InvalidOperationException($"More than 1 CQL file found.");
-
-                    var cqlFile = cqlFiles[0];
-                    if (library.NameAndVersion() is null)
-                        throw new InvalidOperationException("Library NameAndVersion should not be null.");
-
-                    var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, typeCrosswalk, library);
-                    librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
-                    OnResourceCreated(fhirLibrary);
-                }
-            }
-
-            foreach (var library in librarySet)
-            {
-                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
-                foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
-                {
-                    if (def.annotation == null)
-                        continue;
-
-                    var tags = new List<Tag>();
-                    foreach (var a in def.annotation.OfType<Annotation>())
-                    {
-                        if (a.t == null)
-                            continue;
-
-                        foreach (var t in a.t)
-                        {
-                            if (t != null)
-                                tags.Add(t);
-                        }
-                    }
-
-                    var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
-                    var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
-                    if (measureAnnotation != null
-                        && !string.IsNullOrWhiteSpace(measureAnnotation.value)
-                        && yearAnnotation != null
-                        && !string.IsNullOrWhiteSpace(yearAnnotation.value)
-                        && int.TryParse(yearAnnotation.value, out var measureYear))
-                    {
-                        var measure = new Measure();
-                        measure.Name = measureAnnotation.value;
-                        measure.Id = library.identifier?.id!;
-                        measure.Version = library.identifier?.version!;
-                        measure.Status = PublicationStatus.Active;
-                        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
-                            .ToString();
-                        measure.EffectivePeriod = new Period
-                        {
-                            Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
-                            End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
-                        };
-                        measure.Group = new List<Measure.GroupComponent>();
-                        measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
-                        if (library.NameAndVersion() is null)
-                            throw new InvalidOperationException("Library NameAndVersion should not be null.");
-
-                        if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure))
-                            throw new InvalidOperationException(
-                                $"We didn't create a measure for library {libForMeasure}");
-
-                        measure.Library = new List<string> { libForMeasure!.Url };
-                        OnResourceCreated(measure);
-                    }
-                }
-            }
+            var resources = BuildResources(
+                elmDirectory,
+                cqlDirectory, 
+                resourceCanonicalRootUrl, 
+                librarySet,
+                assembliesByLibraryName, librariesByNameAndVersion);
 
             if (expressionBuildingExceptionInfo is not null)
             {
@@ -245,6 +130,140 @@ internal class ResourcePackager
                 LoadElmFilesException: expressionBuildingExceptionInfo?.SourceException,
                 ResourceBuildingException: e).ToException();
         }
+    }
+
+    private List<Resource> BuildResources(
+        DirectoryInfo elmDirectory,
+        DirectoryInfo cqlDirectory,
+        string? resourceCanonicalRootUrl,
+        LibrarySet librarySet,
+        IDictionary<string, AssemblyData> assembliesByLibraryName,
+        IDictionary<string, Library> librariesByNameAndVersion)
+    {
+        var resources = new List<Resource>();
+
+        void OnResourceCreated(Resource resource)
+        {
+            _fhirResourcePostProcessor?.ProcessResource(resource);
+            resources!.Add(resource);
+        }
+
+        var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
+
+        foreach (var (name, asmData) in assembliesByLibraryName)
+        {
+            if (name is "TupleTypes")
+            {
+                var tuplesBinary = new Binary
+                {
+                    Id = "TupleTypes-Binary",
+                    ContentType = "application/octet-stream",
+                    Data = asmData.Binary,
+                };
+                OnResourceCreated(tuplesBinary);
+
+                foreach (var sourceKvp in asmData.SourceCode)
+                {
+                    var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
+                    var tuplesCSharpBinary = new Binary
+                    {
+                        Id = sourceKvp.Key.Replace("_", "-"),
+                        ContentType = "text/plain",
+                        Data = tuplesSourceBytes,
+                    };
+                    OnResourceCreated(tuplesCSharpBinary);
+                }
+            }
+            else
+            {
+                var library = librarySet.GetLibrary(name)!;
+                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+                if (!elmFile.Exists)
+                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
+                        $"{library.identifier?.id ?? string.Empty}.json"));
+
+                if (!elmFile.Exists)
+                    throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
+
+                var cqlFiles =
+                    cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+                if (cqlFiles.Length == 0)
+                {
+                    cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
+                    if (cqlFiles.Length == 0)
+                        throw new InvalidOperationException($"{library.identifier!.id}.cql");
+                }
+
+                if (cqlFiles.Length > 1)
+                    throw new InvalidOperationException($"More than 1 CQL file found.");
+
+                var cqlFile = cqlFiles[0];
+                if (library.NameAndVersion() is null)
+                    throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, typeCrosswalk, library);
+                librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
+                OnResourceCreated(fhirLibrary);
+            }
+        }
+
+        foreach (var library in librarySet)
+        {
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+            foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
+            {
+                if (def.annotation == null)
+                    continue;
+
+                var tags = new List<Tag>();
+                foreach (var a in def.annotation.OfType<Annotation>())
+                {
+                    if (a.t == null)
+                        continue;
+
+                    foreach (var t in a.t)
+                    {
+                        if (t != null)
+                            tags.Add(t);
+                    }
+                }
+
+                var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
+                var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
+                if (measureAnnotation != null
+                    && !string.IsNullOrWhiteSpace(measureAnnotation.value)
+                    && yearAnnotation != null
+                    && !string.IsNullOrWhiteSpace(yearAnnotation.value)
+                    && int.TryParse(yearAnnotation.value, out var measureYear))
+                {
+                    var measure = new Measure();
+                    measure.Name = measureAnnotation.value;
+                    measure.Id = library.identifier?.id!;
+                    measure.Version = library.identifier?.version!;
+                    measure.Status = PublicationStatus.Active;
+                    measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
+                        .ToString();
+                    measure.EffectivePeriod = new Period
+                    {
+                        Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
+                        End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
+                    };
+                    measure.Group = new List<Measure.GroupComponent>();
+                    measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
+                    if (library.NameAndVersion() is null)
+                        throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+                    if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure))
+                        throw new InvalidOperationException(
+                            $"We didn't create a measure for library {libForMeasure}");
+
+                    measure.Library = new List<string> { libForMeasure!.Url };
+                    OnResourceCreated(measure);
+                }
+            }
+        }
+
+        return resources;
     }
 
     private static Library CreateLibraryResource(
