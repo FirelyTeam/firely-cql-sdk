@@ -388,17 +388,8 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("reference")]
-	public ResourceReference reference(Resource resource1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-		return a_;
-	}
+	public ResourceReference reference(Resource resource1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.reference is not implemented."));
 
     [CqlDeclaration("ToValue")]
     [CqlTag("description", "Converts the given value to a CQL value using the appropriate accessor or conversion function.")]
@@ -563,368 +554,108 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("resolve")]
-	public Resource resolve(string @string1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public Resource resolve(string @string1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
     [CqlDeclaration("resolve")]
-	public Resource resolve(ResourceReference resourcereference1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public Resource resolve(ResourceReference resourcereference1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
     [CqlDeclaration("extension")]
-	public IEnumerable<Extension> extension(Element element1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public IEnumerable<Extension> extension(Element element1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
     [CqlDeclaration("extension")]
-	public IEnumerable<Extension> extension(DomainResource domainresource1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public IEnumerable<Extension> extension(DomainResource domainresource1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
     [CqlDeclaration("modifierExtension")]
-	public IEnumerable<Extension> modifierExtension(BackboneElement backboneelement1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public IEnumerable<Extension> modifierExtension(BackboneElement backboneelement1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
     [CqlDeclaration("modifierExtension")]
-	public IEnumerable<Extension> modifierExtension(DomainResource domainresource1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public IEnumerable<Extension> modifierExtension(DomainResource domainresource1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
     [CqlDeclaration("hasValue")]
-	public bool? hasValue(Element element1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? hasValue(Element element1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.hasValue is not implemented."));
 
     [CqlDeclaration("getValue")]
-	public object getValue(Element element1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public object getValue(Element element1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.getValue is not implemented."));
 
     [CqlDeclaration("ofType")]
-	public IEnumerable<object> ofType(string @string1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public IEnumerable<object> ofType(string @string1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.ofType is not implemented."));
 
     [CqlDeclaration("is")]
-	public bool? @is(string @string1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? @is(string @string1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.is is not implemented."));
 
     [CqlDeclaration("as")]
-	public object @as(string @string1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public object @as(string @string1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.as is not implemented."));
 
     [CqlDeclaration("elementDefinition")]
-	public ElementDefinition elementDefinition(Element element1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public ElementDefinition elementDefinition(Element element1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.elementDefinition is not implemented."));
 
     [CqlDeclaration("slice")]
-	public IEnumerable<Element> slice(Element element1, string @string2, string @string3)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public IEnumerable<Element> slice(Element element1, string @string2, string @string3) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.slice is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Resource checkModifiers(Resource resource1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public Resource checkModifiers(Resource resource1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Resource checkModifiers(Resource resource1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public Resource checkModifiers(Resource resource1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Element checkModifiers(Element element1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public Element checkModifiers(Element element1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Element checkModifiers(Element element1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public Element checkModifiers(Element element1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("conformsTo")]
-	public bool? conformsTo(Resource resource1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? conformsTo(Resource resource1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.conformsTo is not implemented."));
 
     [CqlDeclaration("memberOf")]
-	public bool? memberOf(Code code1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? memberOf(Code code1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
     [CqlDeclaration("memberOf")]
-	public bool? memberOf(Coding coding1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? memberOf(Coding coding1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
     [CqlDeclaration("memberOf")]
-	public bool? memberOf(CodeableConcept codeableconcept1, string @string2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? memberOf(CodeableConcept codeableconcept1, string @string2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
     [CqlDeclaration("subsumes")]
-	public bool? subsumes(Coding coding1, Coding coding2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? subsumes(Coding coding1, Coding coding2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
     [CqlDeclaration("subsumes")]
-	public bool? subsumes(CodeableConcept codeableconcept1, CodeableConcept codeableconcept2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? subsumes(CodeableConcept codeableconcept1, CodeableConcept codeableconcept2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
     [CqlDeclaration("subsumedBy")]
-	public bool? subsumedBy(Coding coding1, Coding coding2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? subsumedBy(Coding coding1, Coding coding2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
     [CqlDeclaration("subsumedBy")]
-	public bool? subsumedBy(CodeableConcept codeableconcept1, CodeableConcept codeableconcept2)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? subsumedBy(CodeableConcept codeableconcept1, CodeableConcept codeableconcept2) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
     [CqlDeclaration("htmlChecks")]
-	public bool? htmlChecks(Element element1)
-	{
-		var a_ = ((Func<dynamic>)(() => throw new NotImplementedException()))()
-/* Generator Error:
-    System.NotSupportedException: Don't know how to convert unary operator Throw into C#.
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.convertUnaryExpression(Int32 indent, String leadingIndentString, UnaryExpression unary) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 547
-       at Hl7.Cql.CodeGeneration.NET.ExpressionConverter.ConvertExpression(Int32 indent, Expression expression, Boolean leadingIndent) in C:\Dev\FirelyTeam\firely-cql-sdk\develop-2.0\Cql\CodeGeneration.NET\ExpressionConverter.cs:line 43
- 
-*/;
-
-		return a_;
-	}
+	public bool? htmlChecks(Element element1) => 
+		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.htmlChecks is not implemented."));
 
     [CqlDeclaration("ToString")]
 	public Account.AccountStatus? ToString(Code<Account.AccountStatus> value) => 
