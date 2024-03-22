@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
@@ -3521,10 +3522,21 @@ namespace CoreTests
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             var writer = Factory.CSharpLibrarySetToStreamsWriter;
-            var items = writer.ProcessDefinitions(
+            bool isDone = false;
+            writer.ProcessDefinitions(
                 definitions,
-                librarySet, Factory.TypeManager.TupleTypes);
-            Debug.Assert(items.Count() > 0); // Do not replace with Any
+                librarySet, 
+                Factory.TypeManager.TupleTypes,
+                callbacks:new(onAfterStep: step =>
+                {
+                    switch (step)
+                    {
+                        case CSharpSourceCodeStep.OnDone:
+                            isDone = true;
+                            break;
+                    }
+                }));
+            Assert.IsTrue(isDone); 
         }
 
         [TestMethod]
