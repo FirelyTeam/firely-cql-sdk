@@ -13,7 +13,10 @@ classDiagram
         get_TupleTypes() IEnumerable~Type~
     }
 
-    subgraph Generating_CSharp_From_LibrarySet_AndDefinitions
+    namespace CSharpCode_Generate_And_Compile {
+        class AssemblyCompiler {
+        }
+
         class CSharpLibrarySetToStreamsWriter {
         }
 
@@ -22,13 +25,53 @@ classDiagram
 
         class WriteToFileCSharpCodeStreamPostProcessor {
         }
-    end
+    }
 
+    namespace Expression_Building {
+        class ExpressionBuilder {
+        }
+
+        class LibraryExpressionBuilder {
+        }
+
+        class LibrarySetExpressionBuilder {
+        }
+
+        class OperatorBinding {
+        }
+
+        class CqlOperatorsBinding {
+        }
+
+        class TypeConverter {
+        }
+
+        class ModelInspector {
+        }
+    }
+
+    namespace Fhir_Resource_Building {
+        class ResourcePackager {
+        }
+
+        class FhirResourcePostProcessor {
+        }
+
+        class WriteToFileFhirResourcePostProcessor {
+        }
+    }
+
+    namespace Application {
+        class PackagerCliProgram {
+        }
+
+        class OptionsConsoleDumper {
+        }
+    }
 
     %% Inheritance  
     
     CqlOperatorsBinding --> OperatorBinding : inherits
-    FhirResourceWriter --> ResourceWriter : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
@@ -57,9 +100,9 @@ classDiagram
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
+    OperatorBinding ..> LibraryExpressionBuilder : injected
     TypeManager ..> LibraryExpressionBuilder : injected
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
-    OperatorBinding ..> LibraryExpressionBuilder : injected
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 ```
