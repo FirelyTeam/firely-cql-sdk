@@ -139,11 +139,8 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal string? ImpliedAlias { get; private set; }
 
-        internal static string? NormalizeIdentifier(string? identifier)
+        internal static string NormalizeIdentifier(string identifier)
         {
-            if (identifier == null)
-                return null;
-
             identifier = identifier.Replace(" ", "_");
             identifier = identifier.Replace("-", "_");
             identifier = identifier.Replace(".", "_");
@@ -199,6 +196,9 @@ namespace Hl7.Cql.Compiler
         internal bool HasScope(string elmAlias) => _scopes.ContainsKey(elmAlias);
 
 
+        internal ExpressionBuilderContext WithScope(string alias, Expression expr, elm.Element element) => 
+            WithScopes(KeyValuePair.Create(alias, (expr, element)));
+
         /// <summary>
         /// Creates a copy with the scopes provided.
         /// </summary>
@@ -251,18 +251,20 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ExpressionBuilderContext Deeper(
+        internal ExpressionBuilderContext Push(
             elm.Element element)
         {
             if (element == _element)
             {
-                Debug.WriteLine("Unnecessary call to Deeper, since the current context already points to the element.");
+                Debug.WriteLine($"Unnecessary call to {nameof(Push)}, since the current context already points to the element.");
                 return this;
             }
 
             return new ExpressionBuilderContext(this, element);
         }
 
+        internal ExpressionBuilderContext Pop() => _outerContext ?? throw new InvalidOperationException("Cannot pop the root context.");
+        
         public Expression? Mutate(elm.Element op, Expression? expression)
         {
             foreach (var visitor in ExpressionMutators)
