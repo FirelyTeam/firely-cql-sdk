@@ -3,6 +3,10 @@ using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
+using Hl7.Cql.CodeGeneration.NET;
+using System.IO;
+using System.Xml.Linq;
+using Hl7.Cql.Packaging.PostProcessors;
 
 namespace Hl7.Cql.Packaging.ResourceWriters
 {

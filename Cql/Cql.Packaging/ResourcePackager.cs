@@ -9,25 +9,9 @@ namespace Hl7.Cql.Packaging
     /// <summary>
     /// Encapsulates packaging of resources and outputting them using the specified resource writers
     /// </summary>
-    [UsedImplicitly]
-    public class ResourcePackager
+    internal class ResourcePackager
     {
         private readonly LibraryPackager _libraryPackager;
-        private readonly ILoggerFactory _logFactory;
-        private readonly ResourceWriter[] _resourceWriters;
-
-        /// <summary>
-        /// Instantiates a new Resource Packager
-        /// </summary>
-        /// <param name="logFactory">logger factory</param>
-        /// <param name="resourceWriters">set of writers to output the resources using</param>
-        public ResourcePackager(
-            ILoggerFactory logFactory, params ResourceWriter[] resourceWriters)
-        {
-            _libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
-            _logFactory = logFactory;
-            _resourceWriters = resourceWriters;
-        }
 
         /// <summary>
         /// Instantiates a new Resource Packager.
@@ -37,15 +21,9 @@ namespace Hl7.Cql.Packaging
         ///     multiple service implementations on the same service type.
         /// </remarks>
         /// <param name="libraryPackager">The library packager</param>
-        /// <param name="logFactory">logger factory</param>
-        /// <param name="resourceWriters">set of writers to output the resources using</param>
-        internal ResourcePackager(
-            LibraryPackager libraryPackager,
-            ILoggerFactory logFactory,
-            IEnumerable<ResourceWriter> resourceWriters) {
+        public ResourcePackager(
+            LibraryPackager libraryPackager) {
             _libraryPackager = libraryPackager;
-            _logFactory = logFactory;
-            _resourceWriters = resourceWriters as ResourceWriter[] ?? resourceWriters.ToArray();
         }
 
         /// <summary>
@@ -58,37 +36,29 @@ namespace Hl7.Cql.Packaging
         public void Package(
             DirectoryInfo elmDir,
             DirectoryInfo cqlDir, 
-            Action<IEnumerable<Resource>>? afterPackageMutator = null, 
+            Action<Resource>? afterPackageMutator = null, 
             int? cacheSize = null) =>
-            PackageCore(elmDir, cqlDir, afterPackageMutator, null);
+            PackageCore(elmDir, cqlDir, null, afterPackageMutator);
 
         /// <summary>
         /// Package the resources in the given ELM and CQL directories and output them using the writers provided in the constructor 
         /// </summary>
         /// <param name="args">A</param>
         public void Package(ResourcePackageArgs args) =>
-            PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl);
+            PackageCore(args.ElmDir, args.CqlDir, args.ResourceCanonicalRootUrl, args.AfterPackageMutator);
 
         private void PackageCore(
             DirectoryInfo elmDir,
-            DirectoryInfo cqlDir, 
-            Action<IEnumerable<Resource>>? afterPackageMutator, 
-            string? resourceCanonicalRootUrl)
+            DirectoryInfo cqlDir,
+            string? resourceCanonicalRootUrl,
+            Action<Resource>? afterPackageMutator)
         {
-            if (_resourceWriters.Length == 0) 
-                return; //Skip since no writers provided
-
-            LibraryPackageCallbacks callbacks = new(
-                afterPackageMutator: afterPackageMutator,
-                buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
-
             LibrarySet librarySet = new(elmDir.FullName);
             librarySet.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
-            List<Resource> resources = _libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks).ToList();
-            foreach (var resourceWriter in _resourceWriters)
-            {
-                resourceWriter.WriteResources(resources);
-            }
+            _libraryPackager.PackageResources(elmDir, cqlDir, librarySet,
+                new(
+                    afterPackageMutator: afterPackageMutator,
+                    buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl)));
         }
     }
 }

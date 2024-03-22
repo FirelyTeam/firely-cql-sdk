@@ -4,7 +4,7 @@ using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.ResourceWriters;
+using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

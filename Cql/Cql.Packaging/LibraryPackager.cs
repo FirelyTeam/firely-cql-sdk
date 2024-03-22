@@ -10,6 +10,7 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
+using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using JetBrains.Annotations;
@@ -27,18 +28,21 @@ internal class LibraryPackager
     private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
     private readonly AssemblyCompiler _assemblyCompiler;
     private readonly TypeResolver _typeResolver;
+    private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor;
 
     public LibraryPackager(
         TypeResolver typeResolver,
         AssemblyCompiler assemblyCompiler,
-        LibrarySetExpressionBuilder librarySetExpressionBuilder)
+        LibrarySetExpressionBuilder librarySetExpressionBuilder, 
+        FhirResourcePostProcessor? fhirResourcePostProcessor)
     {
         _typeResolver = typeResolver;
         _assemblyCompiler = assemblyCompiler;
         _librarySetExpressionBuilder = librarySetExpressionBuilder;
+        _fhirResourcePostProcessor = fhirResourcePostProcessor;
     }
 
-    internal IEnumerable<Resource> PackageResources(
+    internal IReadOnlyCollection<Resource> PackageResources(
         DirectoryInfo elmDirectory,
         DirectoryInfo cqlDirectory,
         LibrarySet librarySet,
@@ -48,6 +52,14 @@ internal class LibraryPackager
         // while we try to continue building the rest of the artifacts up until the point of failure.
 
         var resources = new List<Resource>();
+
+        void OnResourceCreated(Resource resource)
+        {
+            callbacks.MutateResource(resource);
+            _fhirResourcePostProcessor?.ProcessResource(resource);
+            resources!.Add(resource);
+        }
+
         var librariesByNameAndVersion = new Dictionary<string, Library>();
         var definitions = new DefinitionDictionary<LambdaExpression>();
         ExceptionDispatchInfo? expressionBuildingExceptionInfo = null;
@@ -79,7 +91,7 @@ internal class LibraryPackager
                         ContentType = "application/octet-stream",
                         Data = asmData.Binary,
                     };
-                    resources.Add(tuplesBinary);
+                    OnResourceCreated(tuplesBinary);
 
                     foreach (var sourceKvp in asmData.SourceCode)
                     {
@@ -90,7 +102,7 @@ internal class LibraryPackager
                             ContentType = "text/plain",
                             Data = tuplesSourceBytes,
                         };
-                        resources.Add(tuplesCSharpBinary);
+                        OnResourceCreated(tuplesCSharpBinary);
                     }
                 }
                 else
@@ -120,7 +132,7 @@ internal class LibraryPackager
 
                     var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, typeCrosswalk, library);
                     librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
-                    resources.Add(fhirLibrary);
+                    OnResourceCreated(fhirLibrary);
                 }
             }
 
@@ -172,7 +184,7 @@ internal class LibraryPackager
                             throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
 
                         measure.Library = new List<string> { libForMeasure!.Url };
-                        resources.Add(measure);
+                        OnResourceCreated(measure);
                     }
                 }
             }

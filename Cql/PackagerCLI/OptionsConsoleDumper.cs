@@ -1,8 +1,8 @@
-﻿using Hl7.Cql.Packaging.ResourceWriters;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using Hl7.Cql.CodeGeneration.NET;
 using static System.Console;
+using Hl7.Cql.Packaging.PostProcessors;
 
 namespace Hl7.Cql.Packager;
 

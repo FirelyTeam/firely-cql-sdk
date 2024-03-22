@@ -13,7 +13,7 @@ public record ResourcePackageArgs
     public ResourcePackageArgs(
         DirectoryInfo elmDir, 
         DirectoryInfo cqlDir,
-        Action<IEnumerable<Resource>>? afterPackageMutator = null,
+        Action<Resource>? afterPackageMutator = null,
         string? resourceCanonicalRootUrl = null)
     {
         ElmDir = elmDir;
@@ -31,7 +31,7 @@ public record ResourcePackageArgs
     /// <summary>
     /// Optional mutator for the resources prior to writing.
     /// </summary>
-    public Action<IEnumerable<Resource>>? AfterPackageMutator { get; init; }
+    public Action<Resource>? AfterPackageMutator { get; init; }
 
     /// <summary>
     /// Root part of the resource canonical; otherwise just a '#'.

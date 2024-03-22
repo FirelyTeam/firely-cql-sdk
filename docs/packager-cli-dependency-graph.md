@@ -30,6 +30,7 @@ classDiagram
     CqlOperatorsBinding --> OperatorBinding : inherits
     FhirResourceWriter --> ResourceWriter : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
+    WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
     %% Injected Dependencies
 
@@ -52,6 +53,7 @@ classDiagram
     AssemblyCompiler ..> LibraryPackager : injected
     TypeResolver ..> LibraryPackager : injected
     LibrarySetExpressionBuilder ..> LibraryPackager : injected
+    FhirResourcePostProcessor ..> LibraryPackager : injected\n(optional) 
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
@@ -61,7 +63,6 @@ classDiagram
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
-    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
     LibraryPackager ..> ResourcePackager : injected
 
     %% Rest

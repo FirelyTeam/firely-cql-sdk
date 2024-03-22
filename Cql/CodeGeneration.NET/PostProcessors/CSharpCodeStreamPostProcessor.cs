@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Hl7.Cql.Packaging;
+namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
 internal abstract class CSharpCodeStreamPostProcessor
 {

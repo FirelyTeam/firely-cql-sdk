@@ -1,9 +1,11 @@
 ﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
@@ -59,29 +61,22 @@ internal static class DependencyInjection
         CSharpCodeWriterOptions cSharpCodeWriterOptions = new();
         CSharpCodeWriterOptions.BindConfig(cSharpCodeWriterOptions, config);
 
-        List<ServiceDescriptor> resourceWritersServiceDescriptors = new(2);
-
-        if (fhirResourceWriterOptions.OutDirectory is {})
+        if (fhirResourceWriterOptions.OutDirectory is not null)
         {
-            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, FhirResourceWriter>());
+            services.AddSingleton<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor>();
             services
                 .AddOptions<FhirResourceWriterOptions>()
                 .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
                 .ValidateOnStart();
         }
 
-        if (cSharpCodeWriterOptions.OutDirectory is {} csharpDir)
+        if (cSharpCodeWriterOptions.OutDirectory is not null)
         {
             services.AddSingleton<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor>();
             services
                 .AddOptions<CSharpCodeWriterOptions>()
                 .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
                 .ValidateOnStart();
-        }
-
-        if (resourceWritersServiceDescriptors.Count > 0)
-        {
-            services.TryAddEnumerable(resourceWritersServiceDescriptors);
         }
     }
 
@@ -103,20 +98,11 @@ internal static class DependencyInjection
 
     public static void TryAddBuilders(this IServiceCollection services)
     {
-        services.TryAddSingleton<ResourcePackager, ResourcePackagerInjected>();
+        services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
         services.TryAddSingleton<LibraryPackager>();
         services.TryAddSingleton<ExpressionBuilder>();
         services.TryAddSingleton<LibraryExpressionBuilder>();
         services.TryAddSingleton<LibrarySetExpressionBuilder>();
-    }
-}
-
-file class ResourcePackagerInjected : ResourcePackager
-{
-    public ResourcePackagerInjected(LibraryPackager libraryPackager,
-        ILoggerFactory logFactory,
-        IEnumerable<ResourceWriter> resourceWriters) : base(libraryPackager, logFactory, resourceWriters)
-    {
     }
 }

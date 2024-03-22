@@ -8,6 +8,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;

@@ -6,25 +6,19 @@ namespace Hl7.Cql.Packaging;
 internal readonly record struct LibraryPackageCallbacks
 {
     public LibraryPackageCallbacks(
-        Func<Resource, string>? buildUrlFromResource = null,
-        Action<(string name, Stream stream, bool isTyple)>? onBeforeCompileStream = null,
-        Action<IEnumerable<Resource>>? afterPackageMutator = null)
+        Action<Resource>? afterPackageMutator = null,
+        Func<Resource, string>? buildUrlFromResource = null)
     {
-        _onBeforeCompileStream = onBeforeCompileStream;
         _afterPackageMutator = afterPackageMutator;
         _buildUrlFromResource = buildUrlFromResource;
     }
 
+    private readonly Action<Resource>? _afterPackageMutator;
     private readonly Func<Resource, string>? _buildUrlFromResource;
-    private readonly Action<(string name, Stream stream, bool isTyple)>? _onBeforeCompileStream;
-    private readonly Action<IEnumerable<Resource>>? _afterPackageMutator;
 
     public string BuildUrlFromResource(Resource resource) => 
         _buildUrlFromResource?.Invoke(resource) ?? "#";
 
-    public void OnBeforeCompileStream(string name, Stream stream, bool isTuple) =>
-        _onBeforeCompileStream?.Invoke((name, stream, isTuple));
-
-    public void OnAfterPackageMutate(IEnumerable<Resource> resources) =>
-        _afterPackageMutator?.Invoke(resources);
+    public void MutateResource(Resource resource) =>
+        _afterPackageMutator?.Invoke(resource);
 }
