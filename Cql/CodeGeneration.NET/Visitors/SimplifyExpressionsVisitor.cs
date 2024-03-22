@@ -129,14 +129,15 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitUnary(UnaryExpression node)
         {
-            // Don't simplify simple converts.
-            if (node.NodeType is ExpressionType.Convert or ExpressionType.TypeAs)
+            return node.NodeType switch
             {
-                return base.VisitUnary(node);
-            }
-            else
-                return simplify(base.VisitUnary(node));
-
+                // Don't simplify simple converts.
+                ExpressionType.Convert or ExpressionType.TypeAs => base.VisitUnary(node),
+                
+                // Don't simplify throw expressions
+                ExpressionType.Throw => base.VisitUnary(node),
+                _ => simplify(base.VisitUnary(node))
+            };
         }
 
         protected override Expression VisitBinary(BinaryExpression node)
