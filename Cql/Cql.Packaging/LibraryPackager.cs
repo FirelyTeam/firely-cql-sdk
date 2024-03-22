@@ -1,7 +1,10 @@
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Runtime.Loader;
 using System.Text;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -12,6 +15,9 @@ using Hl7.Fhir.Model;
 using JetBrains.Annotations;
 using Library = Hl7.Fhir.Model.Library;
 using Microsoft.Extensions.Logging;
+using static System.FormattableString;
+using Annotation = Hl7.Cql.Elm.Annotation;
+using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 
 namespace Hl7.Cql.Packaging;
 
@@ -20,14 +26,14 @@ internal class LibraryPackager
 {
     private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
     private readonly AssemblyCompiler _assemblyCompiler;
-    private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper;
+    private readonly TypeResolver _typeResolver;
 
     public LibraryPackager(
-        CqlTypeToFhirTypeMapper cqlTypeToFhirTypeMapper,
-        AssemblyCompiler assemblyCompiler, 
+        TypeResolver typeResolver,
+        AssemblyCompiler assemblyCompiler,
         LibrarySetExpressionBuilder librarySetExpressionBuilder)
     {
-        _cqlTypeToFhirTypeMapper = cqlTypeToFhirTypeMapper;
+        _typeResolver = typeResolver;
         _assemblyCompiler = assemblyCompiler;
         _librarySetExpressionBuilder = librarySetExpressionBuilder;
     }
@@ -44,7 +50,8 @@ internal class LibraryPackager
         var resources = new List<Resource>();
         var librariesByNameAndVersion = new Dictionary<string, Library>();
         var definitions = new DefinitionDictionary<LambdaExpression>();
-        ExceptionDispatchInfo? exceptionDispatchInfo = null;
+        ExceptionDispatchInfo? expressionBuildingExceptionInfo = null;
+        ExceptionDispatchInfo? resourceBuildingExceptionInfo = null;
         try
         {
             _librarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
@@ -54,130 +61,143 @@ internal class LibraryPackager
             var librarySetReplacement = new LibrarySet();
             librarySetReplacement.AddLibraries(definitions.Libraries.Select(lib => librarySet.GetLibrary(lib, true)!));
             librarySet = librarySetReplacement;
-            exceptionDispatchInfo = ExceptionDispatchInfo.Capture(e);
+            expressionBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
         }
 
-        foreach (var (name, asmData) in _assemblyCompiler.Compile(librarySet, definitions))
+        try
         {
-            if (name is "TupleTypes")
-            {
-                var tuplesBinary = new Binary
-                {
-                    Id = "TupleTypes-Binary",
-                    ContentType = "application/octet-stream",
-                    Data = asmData.Binary,
-                };
-                resources.Add(tuplesBinary);
+            var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
+            var assemblyDatas = _assemblyCompiler.Compile(librarySet, definitions);
 
-                foreach (var sourceKvp in asmData.SourceCode)
+            foreach (var (name, asmData) in assemblyDatas)
+            {
+                if (name is "TupleTypes")
                 {
-                    var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
-                    var tuplesCSharpBinary = new Binary
+                    var tuplesBinary = new Binary
                     {
-                        Id = sourceKvp.Key.Replace("_", "-"),
-                        ContentType = "text/plain",
-                        Data = tuplesSourceBytes,
+                        Id = "TupleTypes-Binary",
+                        ContentType = "application/octet-stream",
+                        Data = asmData.Binary,
                     };
-                    resources.Add(tuplesCSharpBinary);
-                }
-            }
-            else
-            {
-                var library = librarySet.GetLibrary(name)!;
-                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
-                if (!elmFile.Exists)
-                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
+                    resources.Add(tuplesBinary);
 
-                if (!elmFile.Exists)
-                    throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
-
-                var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
-                if (cqlFiles.Length == 0)
-                {
-                    cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
-                    if (cqlFiles.Length == 0)
-                        throw new InvalidOperationException($"{library.identifier!.id}.cql");
-                }
-
-                if (cqlFiles.Length > 1)
-                    throw new InvalidOperationException($"More than 1 CQL file found.");
-
-                var cqlFile = cqlFiles[0];
-                if (library.NameAndVersion() is null)
-                    throw new InvalidOperationException("Library NameAndVersion should not be null.");
-
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, _cqlTypeToFhirTypeMapper, library, callbacks);
-                librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
-                resources.Add(fhirLibrary);
-            }
-        }
-
-        exceptionDispatchInfo?.Throw();
-
-        callbacks.OnAfterPackageMutate(resources);
-
-
-        foreach (var library in librarySet)
-        {
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
-            foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
-            {
-                if (def.annotation == null)
-                    continue;
-
-                var tags = new List<Tag>();
-                foreach (var a in def.annotation.OfType<Elm.Annotation>())
-                {
-                    if (a.t == null)
-                        continue;
-
-                    foreach (var t in a.t)
+                    foreach (var sourceKvp in asmData.SourceCode)
                     {
-                        if (t != null)
-                            tags.Add(t);
+                        var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
+                        var tuplesCSharpBinary = new Binary
+                        {
+                            Id = sourceKvp.Key.Replace("_", "-"),
+                            ContentType = "text/plain",
+                            Data = tuplesSourceBytes,
+                        };
+                        resources.Add(tuplesCSharpBinary);
                     }
                 }
-                var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
-                var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
-                if (measureAnnotation != null
-                    && !string.IsNullOrWhiteSpace(measureAnnotation.value)
-                    && yearAnnotation != null
-                    && !string.IsNullOrWhiteSpace(yearAnnotation.value)
-                    && int.TryParse(yearAnnotation.value, out var measureYear))
+                else
                 {
-                    var measure = new Measure();
-                    measure.Name = measureAnnotation.value;
-                    measure.Id = library.identifier?.id!;
-                    measure.Version = library.identifier?.version!;
-                    measure.Status = PublicationStatus.Active;
-                    measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond).ToString();
-                    measure.EffectivePeriod = new Period
+                    var library = librarySet.GetLibrary(name)!;
+                    var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+                    if (!elmFile.Exists)
+                        elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
+
+                    if (!elmFile.Exists)
+                        throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
+
+                    var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+                    if (cqlFiles.Length == 0)
                     {
-                        Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
-                        End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
-                    };
-                    measure.Group = new List<Measure.GroupComponent>();
-                    measure.Url = callbacks.BuildUrlFromResource(measure);
+                        cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
+                        if (cqlFiles.Length == 0)
+                            throw new InvalidOperationException($"{library.identifier!.id}.cql");
+                    }
+
+                    if (cqlFiles.Length > 1)
+                        throw new InvalidOperationException($"More than 1 CQL file found.");
+
+                    var cqlFile = cqlFiles[0];
                     if (library.NameAndVersion() is null)
                         throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-                    if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure) || libForMeasure is null)
-                        throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
+                    var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, typeCrosswalk, library);
+                    librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
+                    resources.Add(fhirLibrary);
+                }
+            }
 
-                    measure.Library = new List<string> { libForMeasure!.Url };
-                    resources.Add(measure);
+            foreach (var library in librarySet)
+            {
+                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+                foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
+                {
+                    if (def.annotation == null)
+                        continue;
+
+                    var tags = new List<Tag>();
+                    foreach (var a in def.annotation.OfType<Annotation>())
+                    {
+                        if (a.t == null)
+                            continue;
+
+                        foreach (var t in a.t)
+                        {
+                            if (t != null)
+                                tags.Add(t);
+                        }
+                    }
+                    var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
+                    var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
+                    if (measureAnnotation != null
+                        && !string.IsNullOrWhiteSpace(measureAnnotation.value)
+                        && yearAnnotation != null
+                        && !string.IsNullOrWhiteSpace(yearAnnotation.value)
+                        && int.TryParse(yearAnnotation.value, out var measureYear))
+                    {
+                        var measure = new Measure();
+                        measure.Name = measureAnnotation.value;
+                        measure.Id = library.identifier?.id!;
+                        measure.Version = library.identifier?.version!;
+                        measure.Status = PublicationStatus.Active;
+                        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond).ToString();
+                        measure.EffectivePeriod = new Period
+                        {
+                            Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
+                            End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
+                        };
+                        measure.Group = new List<Measure.GroupComponent>();
+                        measure.Url = callbacks.BuildUrlFromResource(measure);
+                        if (library.NameAndVersion() is null)
+                            throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+                        if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure) || libForMeasure is null)
+                            throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
+
+                        measure.Library = new List<string> { libForMeasure!.Url };
+                        resources.Add(measure);
+                    }
                 }
             }
         }
+        catch (Exception e)
+        {
+            resourceBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
+        }
+
+        if (expressionBuildingExceptionInfo is { } || resourceBuildingExceptionInfo is { })
+        {
+            throw new LibraryPackagerErrors(
+                expressionBuildingExceptionInfo?.SourceException, 
+                resourceBuildingExceptionInfo?.SourceException).ToException();
+        }
+
         return resources;
     }
 
-    private static Library CreateLibraryResource(FileInfo elmFile,
+    private static Library CreateLibraryResource(
+        FileInfo elmFile,
         FileInfo? cqlFile,
         AssemblyData assembly,
         CqlTypeToFhirTypeMapper typeCrosswalk,
-        Elm.Library? elmLibrary = null, 
-        LibraryPackageCallbacks callbacks = default)
+        Elm.Library? elmLibrary = null)
     {
         if (!elmFile.Exists)
             throw new ArgumentException($"Couldn't find library {elmFile.FullName}", nameof(elmFile));
@@ -276,7 +296,6 @@ internal class LibraryPackager
                 library.Content.Add(sourceAttachment);
             }
         }
-        library.Url = callbacks.BuildUrlFromResource(library);
         return library;
     }
 
@@ -378,8 +397,8 @@ internal class LibraryPackager
 
     [UsedImplicitly]
     public static AssemblyLoadContext LoadResources(
-        DirectoryInfo dir, 
-        string lib, 
+        DirectoryInfo dir,
+        string lib,
         string version)
     {
         var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
@@ -445,4 +464,28 @@ internal class LibraryPackager
     }
 
     #endregion 
+}
+
+internal readonly record struct LibraryPackagerErrors(
+    Exception? ExpressionBuildingException,
+    Exception? ResourceBuildingException) : ICqlError
+{
+    public string GetMessage()
+    {
+        StringBuilder sb = new();
+        int i = 1;
+        sb.AppendLine("The following exceptions occurred during Library Packaging:");
+        if (ExpressionBuildingException is { } e1)
+        {
+            sb.AppendLine(Invariant($"{i++}. ExpressionBuildingException"));
+            sb.Append(e1);
+        }
+        if (ResourceBuildingException is { } e2)
+        {
+            if (sb.Length > 0) sb.AppendLine().AppendLine();
+            sb.AppendLine(Invariant($"{i++}. ResourceBuildingException"));
+            sb.Append(e2);
+        }
+        return sb.ToString();
+    }
 }

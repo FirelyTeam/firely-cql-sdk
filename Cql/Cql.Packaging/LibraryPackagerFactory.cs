@@ -27,7 +27,7 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
                 : null);
         _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
         _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor));
-        _libraryPackager = Deferred(() => new LibraryPackager(CqlTypeToFhirTypeMapper, AssemblyCompiler, LibrarySetExpressionBuilder));
+        _libraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler, LibrarySetExpressionBuilder));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
