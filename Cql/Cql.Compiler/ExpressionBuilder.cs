@@ -90,7 +90,7 @@ namespace Hl7.Cql.Compiler
 
         internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
         {
-            ctx = ctx.Deeper(op);
+            ctx = ctx.Push(op);
             Expression? expression;
             switch (op)
             {
@@ -687,7 +687,7 @@ namespace Hl7.Cql.Compiler
                 path = ire.name,
                 scope = ctx.ImpliedAlias!,
             };
-            ctx = ctx.Deeper(pe);
+            ctx = ctx.Push(pe);
             var prop = Property(pe, ctx);
             return prop;
         }
@@ -1617,7 +1617,7 @@ namespace Hl7.Cql.Compiler
                 var def = ctx.LibraryContext.Library.statements?.SingleOrDefault(d => d.name == expressionRef.name);
                 if (def != null)
                 {
-                    ctx = ctx.Deeper(def);
+                    ctx = ctx.Push(def);
                     expressionType = _typeManager.TypeFor(def, ctx);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");

@@ -105,7 +105,7 @@ namespace Hl7.Cql.Compiler
 
                 case ExpressionDef { expression: not null } def:
                 {
-                    ctx = ctx.Deeper(def.expression);
+                    ctx = ctx.Push(def.expression);
                     var type = TypeFor(def.expression, ctx, throwIfNotFound: false);
                     if (type == null)
                     {
@@ -132,7 +132,7 @@ namespace Hl7.Cql.Compiler
                 {
                     Type? sourceType = null;
                     if (propertyExpression.source != null)
-                        sourceType = TypeFor(propertyExpression.source!, ctx.Deeper(propertyExpression.source));
+                        sourceType = TypeFor(propertyExpression.source!, ctx.Push(propertyExpression.source));
                     else if (propertyExpression.scope != null)
                     {
                         var scope = ctx.GetScope(propertyExpression.scope);
