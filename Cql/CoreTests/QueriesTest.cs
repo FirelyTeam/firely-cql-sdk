@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Fhir;
+﻿using System;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -6,7 +7,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,7 +37,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage, definitions);
+            Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage, definitions: definitions);
             AggregatesDefinitions = definitions.CompileAll();
         }
 

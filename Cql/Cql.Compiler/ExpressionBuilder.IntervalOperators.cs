@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
             var operand = TranslateExpression(e.operand![0]!, ctx);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
-                var elementType = TypeManager.Resolver.GetListElementType(operand.Type, @throw: true)!;
+                var elementType = _typeManager.Resolver.GetListElementType(operand.Type, @throw: true)!;
                 if (IsInterval(elementType, out var pointType))
                 {
                     var precision = Expression.Constant(null, typeof(string));
@@ -43,7 +43,7 @@ namespace Hl7.Cql.Compiler
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var elementType = TypeManager.Resolver.GetListElementType(left.Type, @throw: true)!;
+                var elementType = _typeManager.Resolver.GetListElementType(left.Type, @throw: true)!;
                 if (elementType != right.Type)
                 {
                     if (elementType.IsAssignableFrom(right.Type))
@@ -138,10 +138,10 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                    var rightElementType = _typeManager.Resolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw ctx.NewExpressionBuildingException();
                     return ctx.OperatorBinding.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, left, right);
@@ -176,10 +176,10 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                    var rightElementType = _typeManager.Resolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw ctx.NewExpressionBuildingException();
                     return ctx.OperatorBinding.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, right, left);
@@ -359,10 +359,10 @@ namespace Hl7.Cql.Compiler
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
+                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
                     return ctx.OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
                 }
                 else
@@ -388,10 +388,10 @@ namespace Hl7.Cql.Compiler
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
+                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw ctx.NewExpressionBuildingException();
                     return ctx.OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, right, left);
@@ -427,10 +427,10 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
+                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw ctx.NewExpressionBuildingException();
                     return ctx.OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
@@ -482,10 +482,10 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
+                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw ctx.NewExpressionBuildingException();
                     return ctx.OperatorBinding.Bind(CqlOperator.ListUnion, ctx.RuntimeContextParameter, left, right);

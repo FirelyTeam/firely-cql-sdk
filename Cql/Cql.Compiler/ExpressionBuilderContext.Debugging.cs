@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Exceptions;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
+[DebuggerDisplay("{DebuggerView}")]
 partial class ExpressionBuilderContext : IBuilderContext
 {
     private readonly Elm.Element _element;
@@ -35,7 +38,7 @@ partial class ExpressionBuilderContext : IBuilderContext
             {
                 return Inner.Bind(@operator, runtimeContext, parameters);
             }
-            catch (ExpressionBuildingException)
+            catch (CqlException<ExpressionBuildingError>)
             {
                 throw;
             }
@@ -54,4 +57,6 @@ partial class ExpressionBuilderContext : IBuilderContext
             ? $"{LibraryContext.LibraryKey}: {message}"
             : $"{LibraryContext.LibraryKey} line {locator}: {message}";
     }
+
+    public string DebuggerView => this.GetDebuggerView();
 }

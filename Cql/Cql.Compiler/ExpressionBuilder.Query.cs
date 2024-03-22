@@ -35,16 +35,19 @@ internal partial class ExpressionBuilder
             throw ctx.NewExpressionBuildingException("Query sources must have an expression");
 
         var source = TranslateExpression(querySource.expression, ctx);
-
+        
+        var promotedSource = false;
         // promote single objects into enumerables so where works
         if (!IsOrImplementsIEnumerableOfT(source.Type))
         {
             var arrayInit = Expression.NewArrayInit(source.Type, source);
             source = arrayInit;
+            promotedSource = true;
         }
+       
         var @return = source;
 
-        Type elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
+        Type elementType = _typeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
 
         var rootScopeParameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias);
         var rootScopeParameter = Expression.Parameter(elementType, rootScopeParameterName);
@@ -124,11 +127,11 @@ internal partial class ExpressionBuilder
             Type? resultType = null;
             if (query.aggregate.resultTypeSpecifier != null)
             {
-                resultType = TypeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx);
+                resultType = _typeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx);
             }
             else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
             {
-                resultType = TypeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
+                resultType = _typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
             }
 
             if (resultType is null)
@@ -162,7 +165,7 @@ internal partial class ExpressionBuilder
                 if (by is ByExpression byExpression)
                 {
                     var parameterName = "@this";
-                    var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
+                    var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
                     var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
                     var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
                     var sortMemberExpression = TranslateExpression(byExpression.expression, subContext);
@@ -175,9 +178,9 @@ internal partial class ExpressionBuilder
                 else if (by is ByColumn byColumn)
                 {
                     var parameterName = "@this";
-                    var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
+                    var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
                     var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    var pathMemberType = TypeFor(byColumn, ctx);
+                    var pathMemberType = _typeManager.TypeFor(byColumn, ctx);
                     if (pathMemberType == null)
                     {
                         throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
@@ -202,13 +205,13 @@ internal partial class ExpressionBuilder
             ctx = ctx.Pop();
         }
 
-        // Auto-demotion
-        if (query.resultTypeSpecifier is not elm.ListTypeSpecifier)
+        // Because we promoted the source to a list, we now have to demote the result again.
+        if (promotedSource)
         {
             var callSingle = ctx.OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
             @return = callSingle;
         }
-
+        
         return @return;
     }
     protected Expression MultiSourceQuery(Query query, ExpressionBuilderContext ctx)
@@ -228,9 +231,9 @@ internal partial class ExpressionBuilder
                 };
             }).ToArray(),
         };
-        var multiSourceTupleType = TypeManager.TupleTypeFor(tupleSpecifier, ctx, (type) =>
+        var multiSourceTupleType = _typeManager.TupleTypeFor(tupleSpecifier, ctx, (type) =>
             IsOrImplementsIEnumerableOfT(type)
-                ? TypeManager.Resolver.GetListElementType(type, true)!
+                ? _typeManager.Resolver.GetListElementType(type, true)!
                 : throw new NotSupportedException("Query sources must be lists."));
         var crossJoinedSource = CrossJoin(query.source!, multiSourceTupleType, ctx);
         var source = crossJoinedSource;
@@ -275,7 +278,7 @@ internal partial class ExpressionBuilder
             }
         }
 
-        var elementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
+        var elementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
         if (query.where != null)
         {
             var parameterName = TypeNameToIdentifier(elementType, ctx);
@@ -337,11 +340,11 @@ internal partial class ExpressionBuilder
                 Type? resultType = null;
                 if (query.aggregate.resultTypeSpecifier != null)
                 {
-                    resultType = TypeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx);
+                    resultType = _typeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx);
                 }
                 else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
                 {
-                    resultType = TypeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
+                    resultType = _typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
                 }
 
                 if (resultType is null)
@@ -419,7 +422,7 @@ internal partial class ExpressionBuilder
 
         if (isSingle)
         {
-            var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type);
+            var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
             var callSingle = ctx.OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
             @return = callSingle;
         }
@@ -458,7 +461,7 @@ internal partial class ExpressionBuilder
             var newArray = Expression.NewArrayInit(source.Type, source);
             source = newArray;
         }
-        var sourceElementType = TypeManager.Resolver.GetListElementType(source.Type)!;
+        var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
 
         var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var whereContext = ctx.WithScope(with.alias!, whereLambdaParameter, with);
@@ -518,7 +521,7 @@ internal partial class ExpressionBuilder
         var selectManyContext = ctx.WithScopes(scopes);
 
         var source = TranslateExpression(with.expression, selectManyContext);
-        var sourceElementType = TypeManager.Resolver.GetListElementType(source.Type)!;
+        var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
 
         var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var whereContext = selectManyContext.WithScope(with.alias!, whereLambdaParameter, with);

@@ -1,13 +1,11 @@
-using System.Collections.Concurrent;
 using System.Linq.Expressions;
+using System.Runtime.ExceptionServices;
 using System.Runtime.Loader;
 using System.Text;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
@@ -20,97 +18,108 @@ namespace Hl7.Cql.Packaging;
 #pragma warning disable CS1591
 internal class LibraryPackager
 {
+    private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
     private readonly AssemblyCompiler _assemblyCompiler;
-    private readonly ILogger<LibraryPackager> _logger;
-    private readonly TypeResolver _typeResolver;
-    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
+    private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper;
 
     public LibraryPackager(
-        ILogger<LibraryPackager> logger,
-        TypeResolver typeResolver,
-        AssemblyCompiler assemblyCompiler,
-        LibraryExpressionBuilder libraryExpressionBuilder)
+        CqlTypeToFhirTypeMapper cqlTypeToFhirTypeMapper,
+        AssemblyCompiler assemblyCompiler, 
+        LibrarySetExpressionBuilder librarySetExpressionBuilder)
     {
-        _logger = logger;
-        _typeResolver = typeResolver;
+        _cqlTypeToFhirTypeMapper = cqlTypeToFhirTypeMapper;
         _assemblyCompiler = assemblyCompiler;
-        _libraryExpressionBuilder = libraryExpressionBuilder;
+        _librarySetExpressionBuilder = librarySetExpressionBuilder;
     }
 
     internal IEnumerable<Resource> PackageResources(
         DirectoryInfo elmDirectory,
         DirectoryInfo cqlDirectory,
-        DirectedGraph packageGraph,
+        LibrarySet librarySet,
         LibraryPackageCallbacks callbacks = default)
     {
         // Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
         // while we try to continue building the rest of the artifacts up until the point of failure.
 
-        List<Elm.Library> elmLibraries = GetSortedElmLibraries(packageGraph).ToList();
-
         var resources = new List<Resource>();
         var librariesByNameAndVersion = new Dictionary<string, Library>();
-
-        var assemblies = _assemblyCompiler.Compile(elmLibraries, new DefinitionDictionary<LambdaExpression>());
-        var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
-
-
-        var tupleAssembly = assemblies["TupleTypes"];
-        var tuplesBinary = new Binary
+        var definitions = new DefinitionDictionary<LambdaExpression>();
+        ExceptionDispatchInfo? exceptionDispatchInfo = null;
+        try
         {
-            Id = "TupleTypes-Binary",
-            ContentType = "application/octet-stream",
-            Data = tupleAssembly.Binary,
-        };
-        resources.Add(tuplesBinary);
-
-        foreach (var sourceKvp in tupleAssembly.SourceCode)
+            _librarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
+        }
+        catch (Exception e)
         {
-            var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
-            var tuplesCSharp = new Binary
-            {
-                Id = sourceKvp.Key.Replace("_", "-"),
-                ContentType = "text/plain",
-                Data = tuplesSourceBytes,
-            };
-            resources.Add(tuplesCSharp);
+            var librarySetReplacement = new LibrarySet();
+            librarySetReplacement.AddLibraries(definitions.Libraries.Select(lib => librarySet.GetLibrary(lib, true)!));
+            librarySet = librarySetReplacement;
+            exceptionDispatchInfo = ExceptionDispatchInfo.Capture(e);
         }
 
-        foreach (var library in elmLibraries)
+        foreach (var (name, asmData) in _assemblyCompiler.Compile(librarySet, definitions))
         {
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
-            if (!elmFile.Exists)
-                elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
-
-            if (!elmFile.Exists)
-                throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion}");
-
-            var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion}.cql", SearchOption.AllDirectories);
-            if (cqlFiles.Length == 0)
+            if (name is "TupleTypes")
             {
-                cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
-                if (cqlFiles.Length == 0)
-                    throw new InvalidOperationException($"{library.identifier!.id}.cql");
+                var tuplesBinary = new Binary
+                {
+                    Id = "TupleTypes-Binary",
+                    ContentType = "application/octet-stream",
+                    Data = asmData.Binary,
+                };
+                resources.Add(tuplesBinary);
+
+                foreach (var sourceKvp in asmData.SourceCode)
+                {
+                    var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
+                    var tuplesCSharpBinary = new Binary
+                    {
+                        Id = sourceKvp.Key.Replace("_", "-"),
+                        ContentType = "text/plain",
+                        Data = tuplesSourceBytes,
+                    };
+                    resources.Add(tuplesCSharpBinary);
+                }
             }
+            else
+            {
+                var library = librarySet.GetLibrary(name)!;
+                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+                if (!elmFile.Exists)
+                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
 
-            if (cqlFiles.Length > 1)
-                throw new InvalidOperationException($"More than 1 CQL file found.");
+                if (!elmFile.Exists)
+                    throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
 
-            var cqlFile = cqlFiles[0];
-            if (library.NameAndVersion is null)
-                throw new InvalidOperationException("Library NameAndVersion should not be null.");
+                var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+                if (cqlFiles.Length == 0)
+                {
+                    cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
+                    if (cqlFiles.Length == 0)
+                        throw new InvalidOperationException($"{library.identifier!.id}.cql");
+                }
 
-            if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
-                throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
+                if (cqlFiles.Length > 1)
+                    throw new InvalidOperationException($"More than 1 CQL file found.");
 
-            var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, callbacks);
-            librariesByNameAndVersion.Add(library.NameAndVersion, fhirLibrary);
-            resources.Add(fhirLibrary);
+                var cqlFile = cqlFiles[0];
+                if (library.NameAndVersion() is null)
+                    throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, _cqlTypeToFhirTypeMapper, library, callbacks);
+                librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
+                resources.Add(fhirLibrary);
+            }
         }
 
-        foreach (var library in elmLibraries)
+        exceptionDispatchInfo?.Throw();
+
+        callbacks.OnAfterPackageMutate(resources);
+
+
+        foreach (var library in librarySet)
         {
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
             foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
             {
                 if (def.annotation == null)
@@ -149,10 +158,10 @@ internal class LibraryPackager
                     };
                     measure.Group = new List<Measure.GroupComponent>();
                     measure.Url = callbacks.BuildUrlFromResource(measure);
-                    if (library.NameAndVersion is null)
+                    if (library.NameAndVersion() is null)
                         throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-                    if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
+                    if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure) || libForMeasure is null)
                         throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
 
                     measure.Library = new List<string> { libForMeasure!.Url };
@@ -160,23 +169,14 @@ internal class LibraryPackager
                 }
             }
         }
-
         return resources;
     }
 
-    private IEnumerable<Elm.Library> GetSortedElmLibraries(DirectedGraph packageGraph) =>
-        packageGraph
-            .TopologicalSort()
-            .Select(node => node.Properties?[Elm.Library.LibraryNodeProperty])
-            .OfType<Elm.Library>()
-            .ToArray();
-
-    private static Library CreateLibraryResource(
-        FileInfo elmFile,
+    private static Library CreateLibraryResource(FileInfo elmFile,
         FileInfo? cqlFile,
         AssemblyData assembly,
         CqlTypeToFhirTypeMapper typeCrosswalk,
-        Elm.Library? elmLibrary = null,
+        Elm.Library? elmLibrary = null, 
         LibraryPackageCallbacks callbacks = default)
     {
         if (!elmFile.Exists)
@@ -192,14 +192,14 @@ internal class LibraryPackager
         var bytes = File.ReadAllBytes(elmFile.FullName);
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary.NameAndVersion}+elm",
+            ElementId = $"{elmLibrary.NameAndVersion()}+elm",
             ContentType = Elm.Library.JsonMimeType,
             Data = bytes,
         };
         var library = new Library();
         library.Content.Add(attachment);
         library.Type = LogicLibraryCodeableConcept;
-        string libraryId = $"{elmLibrary!.NameAndVersion}";
+        string libraryId = $"{elmLibrary!.NameAndVersion()}";
         library.Id = libraryId!;
         library.Version = elmLibrary!.identifier?.version!;
         library.Name = elmLibrary!.identifier?.id!;
@@ -246,7 +246,7 @@ internal class LibraryPackager
 
             var cqlAttachment = new Attachment
             {
-                ElementId = $"{elmLibrary!.NameAndVersion}+cql",
+                ElementId = $"{elmLibrary!.NameAndVersion()}+cql",
                 ContentType = "text/cql",
                 Data = cqlBytes,
             };
@@ -258,7 +258,7 @@ internal class LibraryPackager
             var assemblyBytes = assembly.Binary;
             var assemblyAttachment = new Attachment
             {
-                ElementId = $"{elmLibrary!.NameAndVersion}+dll",
+                ElementId = $"{elmLibrary!.NameAndVersion()}+dll",
                 ContentType = "application/octet-stream",
                 Data = assemblyBytes,
             };
@@ -276,9 +276,7 @@ internal class LibraryPackager
                 library.Content.Add(sourceAttachment);
             }
         }
-
         library.Url = callbacks.BuildUrlFromResource(library);
-        callbacks.NotifyLibraryResourceCreated(library);
         return library;
     }
 
@@ -370,23 +368,19 @@ internal class LibraryPackager
     #region Static Utiltities
 
     [UsedImplicitly]
-    public static IDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
+    [Obsolete("Use LibrarySet.LoadLibraries instead.")]
+    public static IReadOnlyDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
     {
-        var dict = new ConcurrentDictionary<string, Elm.Library>();
-        var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
-        Parallel.ForEach(files, file =>
-        {
-            var library = Elm.Library.LoadFromJson(file);
-            if (library?.NameAndVersion != null)
-            {
-                dict.TryAdd(library.NameAndVersion, library);
-            }
-        });
-        return dict;
+        LibrarySet ls = new(elmDir.FullName);
+        ls.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
+        return ls.AsReadOnlyDictionary;
     }
 
     [UsedImplicitly]
-    public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
+    public static AssemblyLoadContext LoadResources(
+        DirectoryInfo dir, 
+        string lib, 
+        string version)
     {
         var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
         using var fs = libFile.OpenRead();
@@ -408,13 +402,12 @@ internal class LibraryPackager
     }
 
     [UsedImplicitly]
-#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-    public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-      string lib,
-      string version,
-      LogLevel logLevel = LogLevel.Error,
-      int cacheSize = 0)
+    public static AssemblyLoadContext LoadElm(
+        DirectoryInfo elmDirectory,
+        string lib,
+        string version,
+        LogLevel logLevel = LogLevel.Error,
+        int cacheSize = 0)
     {
         var logFactory = LoggerFactory
                       .Create(logging =>
@@ -425,7 +418,6 @@ internal class LibraryPackager
                               console.LogToStandardErrorThreshold = LogLevel.Error;
                           });
                       });
-
         return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
     }
 
@@ -437,25 +429,15 @@ internal class LibraryPackager
         ILoggerFactory logFactory,
         int cacheSize)
     {
-        var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
-        if (!elmFile.Exists)
-            elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
-        if (!elmFile.Exists)
-            throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
-        var library = Elm.Library.LoadFromJson(elmFile)
-            ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
-        var dependencies = library
-            .GetIncludedLibraries(elmDirectory)
-            .Packages()
-            .ToArray();
-
-        LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory);
-        var assemblyData = factory.AssemblyCompiler.Compile(dependencies, new DefinitionDictionary<LambdaExpression>());
-
+        LibrarySet librarySet = new();
+        librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
+        LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory, cacheSize);
+        var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+        var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
         var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        foreach (var kvp in assemblyData)
+        foreach (var (_, asmData) in assemblyData)
         {
-            var assemblyBytes = kvp.Value.Binary;
+            var assemblyBytes = asmData.Binary;
             using var ms = new MemoryStream(assemblyBytes);
             asmContext.LoadFromStream(ms);
         }

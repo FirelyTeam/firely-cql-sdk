@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler
 
     /// <summary>
     /// This is a custom expression representing the invocation of a definition using
-    /// a lookup on a <see cref="DefinitionDictionary{T}"/>.
+    /// a lookup on a <see cref="DefinitionDictionary{Delegate}"/>.
     /// </summary>
     /// <remarks>The expression reduces to a lookup on a
     /// <see cref="DefinitionDictionary{Delegate}"/> expression by item, plus the invocation

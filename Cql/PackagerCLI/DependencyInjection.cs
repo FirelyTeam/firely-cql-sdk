@@ -9,6 +9,7 @@ using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
@@ -34,10 +35,9 @@ internal static class DependencyInjection
         services.AddSingleton<IValidateOptions<PackagerOptions>, PackagerOptions.Validator>();
     }
 
-    public static void AddResourcePackager(this IServiceCollection services, IConfiguration config)
+    public static void TryAddResourceWriters(this IServiceCollection services, IConfiguration config)
     {
         TryAddPackagerOptions(services, config);
-        services.TryAddSingleton<ResourcePackager>();
         TryAddConfiguredResourceWriters(services, config);
     }
 
@@ -56,8 +56,8 @@ internal static class DependencyInjection
         FhirResourceWriterOptions fhirResourceWriterOptions = new();
         FhirResourceWriterOptions.BindConfig(fhirResourceWriterOptions, config);
 
-        CSharpResourceWriterOptions cSharpResourceWriterOptions = new();
-        CSharpResourceWriterOptions.BindConfig(cSharpResourceWriterOptions, config);
+        CSharpCodeWriterOptions cSharpCodeWriterOptions = new();
+        CSharpCodeWriterOptions.BindConfig(cSharpCodeWriterOptions, config);
 
         List<ServiceDescriptor> resourceWritersServiceDescriptors = new(2);
 
@@ -70,12 +70,12 @@ internal static class DependencyInjection
                 .ValidateOnStart();
         }
 
-        if (cSharpResourceWriterOptions.OutDirectory is {} csharpDir)
+        if (cSharpCodeWriterOptions.OutDirectory is {} csharpDir)
         {
-            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
+            services.AddSingleton<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor>();
             services
-                .AddOptions<CSharpResourceWriterOptions>()
-                .Configure<IConfiguration>(CSharpResourceWriterOptions.BindConfig)
+                .AddOptions<CSharpCodeWriterOptions>()
+                .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
                 .ValidateOnStart();
         }
 
@@ -89,7 +89,7 @@ internal static class DependencyInjection
     public static void TryAddCompilationServices(this IServiceCollection services)
     {
         services.TryAddSingleton<OperatorBinding, CqlOperatorsBinding>();
-        services.TryAddSingleton<CSharpSourceCodeWriter>();
+        services.TryAddSingleton<CSharpLibrarySetToStreamsWriter>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
 
@@ -98,6 +98,25 @@ internal static class DependencyInjection
         services.TryAddSingleton(ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver>(FhirTypeResolver.Default);
         services.TryAddSingleton<TypeConverter>(FhirTypeConverter.Default);
-        services.TryAddSingleton<TypeManager, TypeManager>();
+        services.TryAddSingleton<TypeManager>();
+    }
+
+    public static void TryAddBuilders(this IServiceCollection services)
+    {
+        services.TryAddSingleton<ResourcePackager, ResourcePackagerInjected>();
+        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
+        services.TryAddSingleton<LibraryPackager>();
+        services.TryAddSingleton<ExpressionBuilder>();
+        services.TryAddSingleton<LibraryExpressionBuilder>();
+        services.TryAddSingleton<LibrarySetExpressionBuilder>();
+    }
+}
+
+file class ResourcePackagerInjected : ResourcePackager
+{
+    public ResourcePackagerInjected(LibraryPackager libraryPackager,
+        ILoggerFactory logFactory,
+        IEnumerable<ResourceWriter> resourceWriters) : base(libraryPackager, logFactory, resourceWriters)
+    {
     }
 }

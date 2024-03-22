@@ -28,20 +28,16 @@ namespace Hl7.Cql.Compiler
     {
         internal ExpressionBuilderContext(
             OperatorBinding operatorBinding, 
-            ExpressionBuilder builder,
+            ExpressionBuilderSettings settings,
             ParameterExpression contextParameter,
-            DefinitionDictionary<LambdaExpression> definitions,
-            IDictionary<string, string> localLibraryIdentifiers,
             LibraryExpressionBuilderContext libContext,
             elm.Element element)
         {
             _element = element;
             _outerContext = null;
-            Builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            ExpressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
-            Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
-            _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
-            LocalLibraryIdentifiers = localLibraryIdentifiers ?? throw new ArgumentNullException(nameof(localLibraryIdentifiers));
+            OperatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -54,13 +50,11 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilderContext(
             ExpressionBuilderContext source)
         {
-            _operatorBinding = source._operatorBinding;
+            OperatorBinding = source.OperatorBinding;
             _element = source._element;
             _outerContext = source._outerContext;
-            Builder = source.Builder;
+            ExpressionBuilderSettings = source.ExpressionBuilderSettings;
             RuntimeContextParameter = source.RuntimeContextParameter;
-            Definitions = source.Definitions;
-            LocalLibraryIdentifiers = source.LocalLibraryIdentifiers;
             ImpliedAlias = source.ImpliedAlias;
             Operands = source.Operands;
             Libraries = source.Libraries;
@@ -76,7 +70,7 @@ namespace Hl7.Cql.Compiler
         {
             Debug.Assert(element != this._element);
             _outerContext = outer;
-            _operatorBinding = new OperatorBindingRethrowDecorator(this, outer._operatorBinding.Inner);
+            OperatorBinding = new OperatorBindingRethrowDecorator(this, ((OperatorBindingRethrowDecorator)outer.OperatorBinding).Inner);
             _element = element;
         }
 
@@ -110,10 +104,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         private IList<IExpressionMutator> ExpressionMutators { get; }
 
-        /// <summary>
-        /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
-        /// </summary>
-        public ExpressionBuilder Builder { get; }
+        private ExpressionBuilderSettings ExpressionBuilderSettings { get; }
 
         /// <summary>
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
@@ -123,22 +114,10 @@ namespace Hl7.Cql.Compiler
         /// </remarks>
         public ParameterExpression RuntimeContextParameter { get; }
 
-
-        internal DefinitionDictionary<LambdaExpression> Definitions { get; }
-
-        private readonly OperatorBindingRethrowDecorator _operatorBinding;
-
         /// <summary>
         /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
         /// </summary>
-        public OperatorBinding OperatorBinding => _operatorBinding;
-
-        /// <summary>
-        /// Used for mappings such as:
-        ///     include canonical_id version '1.0.0' called alias
-        /// The key is "alias" and the value is "canonical_id.1.0.0"
-        /// </summary>
-        internal readonly IDictionary<string, string> LocalLibraryIdentifiers;
+        public OperatorBinding OperatorBinding { get; }
 
         /// <summary>
         /// Parameters for function definitions.
@@ -146,7 +125,7 @@ namespace Hl7.Cql.Compiler
         internal IDictionary<string, ParameterExpression> Operands { get; }
 
         private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; }
-
+        
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
         /// this value is the implied alias name that should qualify it, e.g. from DRR-E 2022:
@@ -226,7 +205,7 @@ namespace Hl7.Cql.Compiler
         internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
             var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
-            if (Builder.Settings.AllowScopeRedefinition)
+            if (ExpressionBuilderSettings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
                 {

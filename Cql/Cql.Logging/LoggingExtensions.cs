@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Logging
@@ -15,11 +16,13 @@ namespace Hl7.Cql.Logging
     /// <summary>
     /// An extension class for adding logging on a <see cref="CqlContext"/>
     /// </summary>
+    [UsedImplicitly]
     public static class LoggingExtensions
     {
         /// <summary>
         /// Adds functionality to a context to direct log messages to the given logger.
         /// </summary>
+        [UsedImplicitly]
         public static CqlContext AddMessageLogging(this CqlContext ctx, ILogger logger)
         {
             ctx.MessageReceived += (sender, args) =>

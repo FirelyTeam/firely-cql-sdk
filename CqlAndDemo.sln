@@ -62,6 +62,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cql", "Cql", "{4B5D75F5-E2F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{B00E560D-AE0C-48E1-9013-57115AF05F41}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures-cms", "Demo\Measures-cms\Measures-cms.csproj", "{B1161915-FFB0-412A-9C65-2F4E046FA9B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -213,6 +215,12 @@ Global
 		{12BB22FD-E576-44A9-AE74-A5A673715870}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
 		{12BB22FD-E576-44A9-AE74-A5A673715870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12BB22FD-E576-44A9-AE74-A5A673715870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.FullDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -244,9 +252,10 @@ Global
 		{D275EAEC-6A14-48B4-A1DF-CC8620DE4EFA} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
 		{12BB22FD-E576-44A9-AE74-A5A673715870} = {7D787B73-D44A-4B65-B83F-4AF4A752F26C}
 		{7D787B73-D44A-4B65-B83F-4AF4A752F26C} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = |build\
+		FileExplorer = |build\|docs\|LibrarySets\
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 	EndGlobalSection
 EndGlobal

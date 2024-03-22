@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
@@ -40,7 +41,7 @@ public class Program
     private static IDictionary<string, string> BuildSwitchMappings()
     {
         const string PackageSection = PackagerOptions.ConfigSection + ":";
-        const string CSharpResourceWriterSection = CSharpResourceWriterOptions.ConfigSection + ":";
+        const string CSharpResourceWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
         return new SortedDictionary<string, string>
@@ -52,7 +53,7 @@ public class Program
             [PackagerOptions.ArgNameForce]                    = PackageSection + nameof(PackagerOptions.Force),
             [PackagerOptions.ArgNameCanonicalRootUrl]         = PackageSection + nameof(PackagerOptions.CanonicalRootUrl),
 
-            [CSharpResourceWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpResourceWriterOptions.OutDirectory),
+            [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
             [FhirResourceWriterOptions.ArgNameOutDirectory]   = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
             // @formatter:on
@@ -107,12 +108,10 @@ public class Program
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         services.AddPackagerServices(context.Configuration);
-        services.AddResourcePackager(context.Configuration);
+        services.TryAddResourceWriters(context.Configuration);
         services.TryAddTypeServices();
         services.TryAddCompilationServices();
-        services.TryAddSingleton<LibraryPackager>();
-        services.TryAddSingleton<ExpressionBuilder>();
-        services.TryAddSingleton<LibraryExpressionBuilder>();
+        services.TryAddBuilders();
         services.TryAddSingleton<OptionsConsoleDumper>();
     }
 

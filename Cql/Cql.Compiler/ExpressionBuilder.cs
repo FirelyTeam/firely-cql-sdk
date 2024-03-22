@@ -37,18 +37,23 @@ namespace Hl7.Cql.Compiler
         // Yeah, hardwired to FHIR 4.0.1 for now.
         private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
 
+        private readonly ILogger<ExpressionBuilder> _logger;
+
+        private readonly TypeManager _typeManager;
+
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced.</param>
+        /// <param name="typeManager">The <see cref="_typeManager"/> used to resolve and create types referenced.</param>
         /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         public ExpressionBuilder(
             TypeManager typeManager,
             ILogger<ExpressionBuilder> logger)
         {
-            TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
-            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _typeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Settings = new ExpressionBuilderSettings();
         }
 
@@ -56,14 +61,6 @@ namespace Hl7.Cql.Compiler
         /// Gets the settings used while building expressions.
         /// </summary>
         public ExpressionBuilderSettings Settings { get; }
-
-        private ILogger<ExpressionBuilder> Logger { get; }
-
-        /// <summary>
-        /// The <see cref="TypeManager"/> used to resolve and create types referenced in <see cref="Library"/>.
-        /// </summary>
-
-        private TypeManager TypeManager { get; }
 
         /// <summary>
         /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
@@ -84,7 +81,7 @@ namespace Hl7.Cql.Compiler
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(library, this, operatorBinding, lambdas);
+            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(library, Settings, operatorBinding, lambdas);
             var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
@@ -629,7 +626,7 @@ namespace Hl7.Cql.Compiler
         {
             var operand = TranslateExpression(unary.operand!, ctx);
             var resultType = unary.resultTypeSpecifier != null
-                ? TypeManager.TypeFor(unary.resultTypeSpecifier, ctx)
+                ? _typeManager.TypeFor(unary.resultTypeSpecifier, ctx)
                 : null;
             var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
             if (resultType != null && resultType != call.Type)
@@ -696,18 +693,18 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected bool IsOrImplementsIEnumerableOfT(Type type) => TypeManager.Resolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
+        protected bool IsOrImplementsIEnumerableOfT(Type type) => _typeManager.Resolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
         protected Expression ValueSetRef(ValueSetRef valueSetRef, ExpressionBuilderContext ctx)
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw ctx.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-            var type = TypeFor(valueSetRef, ctx, throwIfNotFound: true)!;
+            var type = _typeManager.TypeFor(valueSetRef, ctx)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
 
             if (IsOrImplementsIEnumerableOfT(type))
             {
-                var elementType = TypeManager.Resolver.GetListElementType(type);
+                var elementType = _typeManager.Resolver.GetListElementType(type);
                 if (elementType != typeof(CqlCode))
                 {
                     throw ctx.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");
@@ -737,12 +734,12 @@ namespace Hl7.Cql.Compiler
             Type tupleType;
             if (tuple.resultTypeSpecifier is null)
             {
-                tupleType = TypeManager.TupleTypeFor(tuple, ctx);
+                tupleType = _typeManager.TupleTypeFor(tuple, ctx);
             }
             else
             {
                 var tupleTypeSpecifier = (tuple.resultTypeSpecifier as elm.TupleTypeSpecifier) ?? throw ctx.NewExpressionBuildingException($"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
-                tupleType = TypeManager.TupleTypeFor(tupleTypeSpecifier, ctx);
+                tupleType = _typeManager.TupleTypeFor(tupleTypeSpecifier, ctx);
             }
 
             var @new = Expression.New(tupleType);
@@ -771,7 +768,7 @@ namespace Hl7.Cql.Compiler
             if (list.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
             {
 
-                var elementType = TypeManager.TypeFor(listTypeSpecifier.elementType, ctx);
+                var elementType = _typeManager.TypeFor(listTypeSpecifier.elementType, ctx);
                 var elements = list.element?
                     .Select(ele => TranslateExpression(ele, ctx))
                     .ToArray() ?? new Expression[0];
@@ -812,7 +809,7 @@ namespace Hl7.Cql.Compiler
             if (string.IsNullOrWhiteSpace(codeRef.name))
                 throw ctx.NewExpressionBuildingException("The code ref has no name.");
 
-            var type = TypeManager.Resolver.ResolveType(codeRef.resultTypeName.Name) ?? throw ctx.NewExpressionBuildingException($"Unable to resolve type {codeRef.resultTypeName}");
+            var type = _typeManager.Resolver.ResolveType(codeRef.resultTypeName.Name) ?? throw ctx.NewExpressionBuildingException($"Unable to resolve type {codeRef.resultTypeName}");
             return InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.libraryName, type!, ctx);
         }
 
@@ -821,7 +818,7 @@ namespace Hl7.Cql.Compiler
             if (string.IsNullOrWhiteSpace(codeSystemRef.name))
                 throw ctx.NewExpressionBuildingException("The code system ref has no name.");
             
-            var type = TypeManager.Resolver.CodeType.MakeArrayType();
+            var type = _typeManager.Resolver.CodeType.MakeArrayType();
             return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type!, ctx);
         }
         protected Expression ConceptRef(ConceptRef conceptRef, ExpressionBuilderContext ctx)
@@ -829,13 +826,13 @@ namespace Hl7.Cql.Compiler
             if (string.IsNullOrWhiteSpace(conceptRef.name))
                 throw ctx.NewExpressionBuildingException("The concept ref has no name.");
             
-            var type = TypeManager.Resolver.CodeType.MakeArrayType();
+            var type = _typeManager.Resolver.CodeType.MakeArrayType();
             return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type!, ctx);
         }
 
         protected Expression Instance(Instance ine, ExpressionBuilderContext ctx)
         {
-            var instanceType = TypeManager.Resolver.ResolveType(ine.classType.Name!)
+            var instanceType = _typeManager.Resolver.ResolveType(ine.classType.Name!)
                 ?? throw ctx.NewExpressionBuildingException($"Could not resolve type for '{ine.classType.Name!}'");
 
             if (IsEnum(instanceType))
@@ -1011,7 +1008,7 @@ namespace Hl7.Cql.Compiler
                     else if (value.Type.IsGenericType)
                     {
                         string message = $"{value.Type} was expected to be a list type.";
-                        var valueEnumerableElement = TypeManager.Resolver.GetListElementType(value.Type) ?? throw ctx.NewExpressionBuildingException(message);
+                        var valueEnumerableElement = _typeManager.Resolver.GetListElementType(value.Type) ?? throw ctx.NewExpressionBuildingException(message);
                         var memberArrayElement = property.PropertyType.GetElementType()!;
                         if (valueEnumerableElement == memberArrayElement)
                         {
@@ -1035,11 +1032,11 @@ namespace Hl7.Cql.Compiler
                         }
                     }
                 }
-                else if (TypeManager.Resolver.ImplementsGenericInterface(property.PropertyType, typeof(ICollection<>)))
+                else if (_typeManager.Resolver.ImplementsGenericInterface(property.PropertyType, typeof(ICollection<>)))
                 {
                     if (IsOrImplementsIEnumerableOfT(value.Type))
                     {
-                        var elementType = TypeManager.Resolver.GetListElementType(property.PropertyType)!;
+                        var elementType = _typeManager.Resolver.GetListElementType(property.PropertyType)!;
                         var ctor = ConstructorInfos.ListOf(elementType);
                         var newList = Expression.New(ctor, value);
                         return Expression.Bind(memberInfo, newList);
@@ -1061,8 +1058,8 @@ namespace Hl7.Cql.Compiler
                 return true;
             if (IsOrImplementsIEnumerableOfT(from) && IsOrImplementsIEnumerableOfT(to))
             {
-                var fromElement = TypeManager.Resolver.GetListElementType(from, @throw: true)!;
-                var toElement = TypeManager.Resolver.GetListElementType(to, @throw: true)!;
+                var fromElement = _typeManager.Resolver.GetListElementType(from, @throw: true)!;
+                var toElement = _typeManager.Resolver.GetListElementType(to, @throw: true)!;
                 return IsConvertible(fromElement, toElement);
             }
             return false;
@@ -1095,7 +1092,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Null(Null @null, ExpressionBuilderContext ctx)
         {
-            var nullType = TypeFor(@null, ctx) ?? typeof(object);
+            var nullType = _typeManager.TypeFor(@null, ctx) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
@@ -1103,7 +1100,7 @@ namespace Hl7.Cql.Compiler
         protected Expression Literal(Literal lit, ExpressionBuilderContext ctx)
         {
             string message = $"Cannot resolve type for {lit.valueType}";
-            var type = TypeManager.Resolver.ResolveType(lit.valueType.Name!) ?? throw ctx.NewExpressionBuildingException(message);
+            var type = _typeManager.Resolver.ResolveType(lit.valueType.Name!) ?? throw ctx.NewExpressionBuildingException(message);
             var (value, convertedType) = ConvertLiteral(lit, type, ctx);
 
             if (type.IsNullable())
@@ -1223,7 +1220,6 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
-
         private Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
         {
             Type? sourceElementType;
@@ -1236,14 +1232,14 @@ namespace Hl7.Cql.Compiler
                     throw ctx.NewExpressionBuildingException("If a Retrieve lacks a ResultTypeSpecifier it must have a DataType");
                 cqlRetrieveResultType = retrieve.dataType.Name;
 
-                sourceElementType = TypeManager.Resolver.ResolveType(cqlRetrieveResultType);
+                sourceElementType = _typeManager.Resolver.ResolveType(cqlRetrieveResultType);
             }
             else
             {
                 if (retrieve.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
                 {
                     cqlRetrieveResultType = listTypeSpecifier.elementType is elm.NamedTypeSpecifier nts ? nts.name.Name : null;
-                    sourceElementType = TypeManager.TypeFor(listTypeSpecifier.elementType, ctx);
+                    sourceElementType = _typeManager.TypeFor(listTypeSpecifier.elementType, ctx);
                 }
                 else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.").WithContext(ctx);
             }
@@ -1258,7 +1254,7 @@ namespace Hl7.Cql.Compiler
 
             if (hasCodePropertySpecified && !isDefaultCodeProperty)
             {
-                var codePropertyInfo = TypeManager.Resolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
+                var codePropertyInfo = _typeManager.Resolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
                 codeProperty = Expression.Constant(codePropertyInfo, typeof(PropertyInfo));
             }
             else
@@ -1304,12 +1300,12 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = ctx.GetScopeExpression(op.scope!);
-                var expectedType = TypeFor(op, ctx) ?? typeof(object);
-                var pathMemberInfo = TypeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
-                    TypeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
+                var expectedType = _typeManager.TypeFor(op, ctx) ?? typeof(object);
+                var pathMemberInfo = _typeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
+                    _typeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
                 {
-                    Logger.LogWarning(ctx.FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
+                    _logger.LogWarning(ctx.FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
                     var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
                         scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
@@ -1328,7 +1324,7 @@ namespace Hl7.Cql.Compiler
                 //    return call;
                 //}
                 string message = $"TypeManager failed to resolve type.";
-                var resultType = TypeFor(op, ctx) ?? throw ctx.NewExpressionBuildingException(message);
+                var resultType = _typeManager.TypeFor(op, ctx) ?? throw ctx.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
                     propogate = ChangeType(propogate, resultType, ctx);
@@ -1345,7 +1341,7 @@ namespace Hl7.Cql.Compiler
                     for (int i = 0; i < parts.Length; i++)
                     {
                         var pathPart = parts[i];
-                        var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, pathPart!);
+                        var pathMemberInfo = _typeManager.Resolver.GetProperty(source.Type, pathPart!);
                         if (pathMemberInfo != null)
                         {
                             var propertyAccess = PropagateNull(source, pathMemberInfo);
@@ -1356,7 +1352,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = TypeFor(op, ctx, throwIfNotFound: true)!;
+                    var expectedType = _typeManager.TypeFor(op, ctx)!;
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }
@@ -1367,16 +1363,16 @@ namespace Hl7.Cql.Compiler
         protected Expression PropertyHelper(Expression source, string? path, Type expectedType, ExpressionBuilderContext ctx)
         {
             Expression? result = null;
-            if (TypeManager.Resolver.ShouldUseSourceObject(source.Type, path!))
+            if (_typeManager.Resolver.ShouldUseSourceObject(source.Type, path!))
             {
                 result = source;
             }
             else
             {
-                var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, path!);
+                var pathMemberInfo = _typeManager.Resolver.GetProperty(source.Type, path!);
                 if (pathMemberInfo == null)
                 {
-                    Logger.LogWarning(ctx.FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", null));
+                    _logger.LogWarning(ctx.FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
                     var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
                         source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
@@ -1528,12 +1524,12 @@ namespace Hl7.Cql.Compiler
             if (op.resultTypeSpecifier != null)
             {
                 string message = $"Cannot resolve result type {op.resultTypeSpecifier}.";
-                return TypeManager.TypeFor(op.resultTypeSpecifier, ctx) ?? throw ctx.NewExpressionBuildingException(message);
+                return _typeManager.TypeFor(op.resultTypeSpecifier, ctx) ?? throw ctx.NewExpressionBuildingException(message);
             }
             
             if (!string.IsNullOrWhiteSpace(op.resultTypeName?.Name))
             {
-                return TypeManager.Resolver.ResolveType(op.resultTypeName.Name!)
+                return _typeManager.Resolver.ResolveType(op.resultTypeName.Name!)
                     ?? throw ctx.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
             }
             
@@ -1547,21 +1543,21 @@ namespace Hl7.Cql.Compiler
             throw ctx.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
         }
 
-        private Type? DetermineFhirHelpersReturnType(FunctionRef op)
+        private Type? DetermineFhirHelpersReturnType(FunctionRef op) // TODO: Remove hack (in another PR)
         {
             // cql-to-elm does not handle FHIRHelpers conversion function refs appropriately; they are missing resultTypeSpecifiers
             return op.name switch
             {
-                "ToDate" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!,
-                "ToDateTime" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!,
-                "ToQuantity" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!,
-                "ToInteger" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!,
-                "ToBoolean" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!,
-                "ToString" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!,
-                "ToDecimal" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!,
-                "ToRatio" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!,
-                "ToCode" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!,
-                "ToConcept" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!,
+                "ToDate" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!,
+                "ToDateTime" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!,
+                "ToQuantity" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!,
+                "ToInteger" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!,
+                "ToBoolean" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!,
+                "ToString" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!,
+                "ToDecimal" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!,
+                "ToRatio" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!,
+                "ToCode" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!,
+                "ToConcept" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!,
                 "ToValue" => typeof(object),  // choice type
                 "ToInterval" when op is { resultTypeSpecifier: null, resultTypeName: null } => BindToInterval(),
                 _ => null
@@ -1585,16 +1581,16 @@ namespace Hl7.Cql.Compiler
                             
                     if (typeName == "{http://hl7.org/fhir}Period")
                     {
-                        var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
-                        var intervalType = TypeManager.Resolver.IntervalType(pointType!);
+                        var pointType = _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
+                        var intervalType = _typeManager.Resolver.IntervalType(pointType!);
                         {
                             return intervalType;
                         }
                     }
                     else if (typeName == "{http://hl7.org/fhir}Range")
                     {
-                        var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
-                        var intervalType = TypeManager.Resolver.IntervalType(pointType!);
+                        var pointType = _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
+                        var intervalType = _typeManager.Resolver.IntervalType(pointType!);
                         {
                             return intervalType;
                         }
@@ -1610,11 +1606,11 @@ namespace Hl7.Cql.Compiler
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
             {
-                expressionType = TypeManager.TypeFor(expressionRef.resultTypeSpecifier, ctx);
+                expressionType = _typeManager.TypeFor(expressionRef.resultTypeSpecifier, ctx);
             }
             else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
             {
-                expressionType = TypeManager.Resolver.ResolveType(expressionRef.resultTypeName.Name!);
+                expressionType = _typeManager.Resolver.ResolveType(expressionRef.resultTypeName.Name!);
             }
             else
             {
@@ -1622,7 +1618,7 @@ namespace Hl7.Cql.Compiler
                 if (def != null)
                 {
                     ctx = ctx.Deeper(def);
-                    expressionType = TypeFor(def, ctx);
+                    expressionType = _typeManager.TypeFor(def, ctx);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }
@@ -1636,7 +1632,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ParameterRef(ParameterRef op, ExpressionBuilderContext ctx)
         {
-            if (ctx.Definitions.TryGetValue(ctx.LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
+            if (ctx.LibraryContext.Definitions.TryGetValue(ctx.LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
             {
                 var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda, ctx);
                 return invoke;
@@ -1661,7 +1657,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            var member = TypeManager.Resolver.GetProperty(type, name);
+            var member = _typeManager.Resolver.GetProperty(type, name);
             return member;
         }
 
@@ -1678,16 +1674,8 @@ namespace Hl7.Cql.Compiler
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string? libraryName;
-            if (string.IsNullOrWhiteSpace(libraryAlias))
-            {
-                libraryName = ctx.LibraryContext.LibraryKey;
-            }
-            else
-            {
-                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
-                    throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
-            }
+            string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError:false)
+                ?? throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
         }
@@ -1717,17 +1705,8 @@ namespace Hl7.Cql.Compiler
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string? libraryName;
-            if (string.IsNullOrWhiteSpace(libraryAlias))
-            {
-                libraryName = ctx.LibraryContext.LibraryKey;
-            }
-            else
-            {
-                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
-                    throw ctx.NewExpressionBuildingException(
-                        $"Local library {libraryAlias} is not defined; are you missing a using statement?");
-            }
+            string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
+                                  ?? throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
             return new DefinitionCallExpression(definitionsProperty, libraryName, name, ctx.RuntimeContextParameter, funcType);
@@ -1772,10 +1751,10 @@ namespace Hl7.Cql.Compiler
             // they are working only off of the initial selectmany parameters.
             var first = sources[0];
             var firstExpression = TranslateExpression(first.expression!, ctx);
-            var firstElementType = TypeManager.Resolver.GetListElementType(firstExpression.Type)!;
+            var firstElementType = _typeManager.Resolver.GetListElementType(firstExpression.Type)!;
             var second = sources[1];
             var secondExpression = TranslateExpression(second.expression!, ctx);
-            var secondElementType = TypeManager.Resolver.GetListElementType(secondExpression.Type)!;
+            var secondElementType = _typeManager.Resolver.GetListElementType(secondExpression.Type)!;
 
             var firstLambdaParameter = Expression.Parameter(firstElementType, $"_{first.alias}");
             var firstSelectManyParameter = Expression.Lambda(secondExpression, firstLambdaParameter);
@@ -1802,7 +1781,7 @@ namespace Hl7.Cql.Compiler
 
                     var sourceExpression = TranslateExpression(source.expression!, ctx);
                     string message = $"{sourceExpression.Type} was expected to be a list type.";
-                    var sourceElementType = TypeManager.Resolver.GetListElementType(sourceExpression.Type) ?? throw ctx.NewExpressionBuildingException(message);
+                    var sourceElementType = _typeManager.Resolver.GetListElementType(sourceExpression.Type) ?? throw ctx.NewExpressionBuildingException(message);
 
                     var parameterName = string.Join(string.Empty, sources.Take(i).Select(st => st.alias));
                     var parameter = Expression.Parameter(tupleType, $"_{parameterName}");

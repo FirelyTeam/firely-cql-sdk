@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using Hl7.Cql.Compiler.Infrastructure;
 using elm = Hl7.Cql.Elm;
 
 
@@ -44,7 +43,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
         /// </summary>
-        public IEnumerable<Type> TupleTypes => TupleTypeList;
+        public IReadOnlyCollection<Type> TupleTypes => TupleTypeList;
 
         private readonly List<Type> TupleTypeList;
 
@@ -66,8 +65,10 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
                 assemblyName = "Tuples";
+
             if (string.IsNullOrWhiteSpace(tupleTypeNamespace))
                 tupleTypeNamespace = "Tuples";
+
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
             TupleTypeList = new List<Type>();
@@ -94,7 +95,7 @@ namespace Hl7.Cql.Compiler
                 case ExpressionRef expressionRef:
                 {
                     var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
-                    if (!ctx.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                    if (!ctx.LibraryContext.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
                     var returnType = definition!.ReturnType;
@@ -105,12 +106,12 @@ namespace Hl7.Cql.Compiler
                 case ExpressionDef { expression: not null } def:
                 {
                     ctx = ctx.Deeper(def.expression);
-                    var type = TypeFor(def.expression, ctx, false);
+                    var type = TypeFor(def.expression, ctx, throwIfNotFound: false);
                     if (type == null)
                     {
                         if (def.expression is SingletonFrom singleton)
                         {
-                            type = TypeFor(singleton, ctx, false);
+                            type = TypeFor(singleton, ctx, throwIfNotFound: false);
                             if (type == null)
                             {
                                 if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
