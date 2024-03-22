@@ -106,6 +106,11 @@ namespace Hl7.Cql.Fhir
             return type == typeof(FhirDateTime) && propertyName == "value";
         }
 
+        internal override bool RepresentsChoiceType(Type type)
+        {
+            return type == typeof(DataType) || type == typeof(Element);  
+        }
+
         internal override Type? PatientType => Inspector.PatientMapping?.NativeType;
 
         internal override PropertyInfo? PatientBirthDateProperty => typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));

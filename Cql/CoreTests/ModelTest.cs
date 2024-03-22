@@ -90,6 +90,7 @@ namespace CoreTests
             internal override PropertyInfo GetPrimaryCodePath(string typeSpecifier) => throw new NotImplementedException();
 
             internal override bool ShouldUseSourceObject(Type type, string propertyName) => true;
+            internal override bool RepresentsChoiceType(Type type) => false;
         }
     }
 }

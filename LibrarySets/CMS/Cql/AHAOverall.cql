@@ -139,27 +139,27 @@ define fluent function overlapsAfterHeartFailureOutpatientEncounter(Event Choice
             where
               case
                 when Event is Condition then
-                  Event.prevalenceInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.isConfirmedActiveDiagnosis()
+                  (Event as Condition).prevalenceInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
+                    and (Event as Condition).isConfirmedActiveDiagnosis()
                 when Event is Procedure then
-                  Event.performed.toInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.status = 'completed'
+                  (Event as Procedure).performed.toInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
+                    and (Event as Procedure).status = 'completed'
                 when Event is AllergyIntolerance then
-                  Interval[start of Event.onset.toInterval(), Event.lastOccurrence] overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.clinicalStatus ~ QICoreCommon."allergy-active"
-                    and not (Event.verificationStatus ~ QICoreCommon."allergy-unconfirmed"
-                        or Event.verificationStatus ~ QICoreCommon."allergy-refuted"
-                        or Event.verificationStatus ~ "allergy-entered-in-error")
+                  Interval[start of (Event as AllergyIntolerance).onset.toInterval(), (Event as AllergyIntolerance).lastOccurrence] overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
+                    and (Event as AllergyIntolerance).clinicalStatus ~ QICoreCommon."allergy-active"
+                    and not ((Event as AllergyIntolerance).verificationStatus ~ QICoreCommon."allergy-unconfirmed"
+                        or (Event as AllergyIntolerance).verificationStatus ~ QICoreCommon."allergy-refuted"
+                        or (Event as AllergyIntolerance).verificationStatus ~ "allergy-entered-in-error")
                 when Event is MedicationRequest then
                   First( ( collapse (Event.dosageInstruction.timing.repeat.bounds DoseTime
                                         return DoseTime.toInterval()) ) DrugPeriods
                            sort by start of $this ) overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.status in { 'active', 'completed' }
-                    and Event.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
-                    and Event.doNotPerform is not true
+                    and (Event as MedicationRequest).status in { 'active', 'completed' }
+                    and (Event as MedicationRequest).intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
+                    and (Event as MedicationRequest).doNotPerform is not true
                 when Event is "observation-heartrate" then
-                  Event.effective.toInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.status in {'final', 'amended', 'corrected'}
+                  (Event as "observation-heartrate").effective.toInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
+                    and (Event as "observation-heartrate").status in {'final', 'amended', 'corrected'}
                 else false
               end
           )

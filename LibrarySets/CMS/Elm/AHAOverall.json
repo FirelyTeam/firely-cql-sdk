@@ -2985,7 +2985,7 @@
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Case",
                      "caseItem" : [ {
-                        "locator" : "141:17-143:58",
+                        "locator" : "141:17-143:73",
                         "when" : {
                            "locator" : "141:22-141:39",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -3022,16 +3022,16 @@
                            }
                         },
                         "then" : {
-                           "locator" : "142:19-143:58",
+                           "locator" : "142:19-143:73",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "operand" : [ {
-                              "locator" : "142:19-142:115",
+                              "locator" : "142:19-142:130",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "precision" : "Day",
                               "type" : "OverlapsAfter",
                               "operand" : [ {
-                                 "locator" : "142:19-142:44",
+                                 "locator" : "142:19-142:59",
                                  "name" : "prevalenceInterval",
                                  "libraryName" : "QICoreCommon",
                                  "type" : "FunctionRef",
@@ -3043,10 +3043,12 @@
                                     }
                                  },
                                  "operand" : [ {
-                                    "asType" : "{http://hl7.org/fhir}Condition",
+                                    "locator" : "142:19-142:38",
+                                    "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                    "strict" : false,
                                     "type" : "As",
                                     "operand" : {
-                                       "locator" : "142:19-142:23",
+                                       "locator" : "142:20-142:24",
                                        "name" : "Event",
                                        "type" : "OperandRef",
                                        "resultTypeSpecifier" : {
@@ -3068,10 +3070,16 @@
                                              "type" : "NamedTypeSpecifier"
                                           } ]
                                        }
+                                    },
+                                    "asTypeSpecifier" : {
+                                       "locator" : "142:29-142:37",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                       "name" : "{http://hl7.org/fhir}Condition",
+                                       "type" : "NamedTypeSpecifier"
                                     }
                                  } ]
                               }, {
-                                 "locator" : "142:68-142:115",
+                                 "locator" : "142:83-142:130",
                                  "name" : "ToInterval",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
@@ -3089,15 +3097,17 @@
                                  } ]
                               } ]
                            }, {
-                              "locator" : "143:25-143:58",
+                              "locator" : "143:25-143:73",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "name" : "isConfirmedActiveDiagnosis",
                               "type" : "FunctionRef",
                               "operand" : [ {
-                                 "asType" : "{http://hl7.org/fhir}Condition",
+                                 "locator" : "143:25-143:44",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                 "strict" : false,
                                  "type" : "As",
                                  "operand" : {
-                                    "locator" : "143:25-143:29",
+                                    "locator" : "143:26-143:30",
                                     "name" : "Event",
                                     "type" : "OperandRef",
                                     "resultTypeSpecifier" : {
@@ -3119,12 +3129,18 @@
                                           "type" : "NamedTypeSpecifier"
                                        } ]
                                     }
+                                 },
+                                 "asTypeSpecifier" : {
+                                    "locator" : "143:35-143:43",
+                                    "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                    "name" : "{http://hl7.org/fhir}Condition",
+                                    "type" : "NamedTypeSpecifier"
                                  }
                               } ]
                            } ]
                         }
                      }, {
-                        "locator" : "144:17-146:50",
+                        "locator" : "144:17-146:65",
                         "when" : {
                            "locator" : "144:22-144:39",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -3161,16 +3177,16 @@
                            }
                         },
                         "then" : {
-                           "locator" : "145:19-146:50",
+                           "locator" : "145:19-146:65",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "operand" : [ {
-                              "locator" : "145:19-145:117",
+                              "locator" : "145:19-145:132",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "precision" : "Day",
                               "type" : "OverlapsAfter",
                               "operand" : [ {
-                                 "locator" : "145:19-145:46",
+                                 "locator" : "145:19-145:61",
                                  "name" : "toInterval",
                                  "libraryName" : "QICoreCommon",
                                  "type" : "FunctionRef",
@@ -3182,7 +3198,7 @@
                                     }
                                  },
                                  "operand" : [ {
-                                    "locator" : "145:19-145:33",
+                                    "locator" : "145:19-145:48",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -3203,7 +3219,80 @@
                                        "path" : "performed",
                                        "type" : "Property",
                                        "source" : {
-                                          "locator" : "145:19-145:23",
+                                          "locator" : "145:19-145:38",
+                                          "resultTypeName" : "{http://hl7.org/fhir}Procedure",
+                                          "strict" : false,
+                                          "type" : "As",
+                                          "operand" : {
+                                             "locator" : "145:20-145:24",
+                                             "name" : "Event",
+                                             "type" : "OperandRef",
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ChoiceTypeSpecifier",
+                                                "choice" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Condition",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Procedure",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Observation",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ]
+                                             }
+                                          },
+                                          "asTypeSpecifier" : {
+                                             "locator" : "145:29-145:37",
+                                             "resultTypeName" : "{http://hl7.org/fhir}Procedure",
+                                             "name" : "{http://hl7.org/fhir}Procedure",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }
+                                    } ]
+                                 } ]
+                              }, {
+                                 "locator" : "145:85-145:132",
+                                 "name" : "ToInterval",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "path" : "period",
+                                    "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "146:25-146:65",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "locator" : "146:25-146:51",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "status",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "locator" : "146:25-146:44",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Procedure",
+                                       "strict" : false,
+                                       "type" : "As",
+                                       "operand" : {
+                                          "locator" : "146:26-146:30",
                                           "name" : "Event",
                                           "type" : "OperandRef",
                                           "resultTypeSpecifier" : {
@@ -3225,64 +3314,17 @@
                                                 "type" : "NamedTypeSpecifier"
                                              } ]
                                           }
-                                       }
-                                    } ]
-                                 } ]
-                              }, {
-                                 "locator" : "145:70-145:117",
-                                 "name" : "ToInterval",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "resultTypeSpecifier" : {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 },
-                                 "operand" : [ {
-                                    "path" : "period",
-                                    "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
-                                    "type" : "Property"
-                                 } ]
-                              } ]
-                           }, {
-                              "locator" : "146:25-146:50",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "Equal",
-                              "operand" : [ {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "status",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "locator" : "146:25-146:29",
-                                       "name" : "Event",
-                                       "type" : "OperandRef",
-                                       "resultTypeSpecifier" : {
-                                          "type" : "ChoiceTypeSpecifier",
-                                          "choice" : [ {
-                                             "name" : "{http://hl7.org/fhir}Condition",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}Procedure",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}Observation",
-                                             "type" : "NamedTypeSpecifier"
-                                          } ]
+                                       },
+                                       "asTypeSpecifier" : {
+                                          "locator" : "146:35-146:43",
+                                          "resultTypeName" : "{http://hl7.org/fhir}Procedure",
+                                          "name" : "{http://hl7.org/fhir}Procedure",
+                                          "type" : "NamedTypeSpecifier"
                                        }
                                     }
                                  }
                               }, {
-                                 "locator" : "146:40-146:50",
+                                 "locator" : "146:55-146:65",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "completed",
@@ -3291,7 +3333,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "147:17-152:81",
+                        "locator" : "147:17-152:105",
                         "when" : {
                            "locator" : "147:22-147:48",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -3328,20 +3370,20 @@
                            }
                         },
                         "then" : {
-                           "locator" : "148:19-152:81",
+                           "locator" : "148:19-152:105",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "operand" : [ {
-                              "locator" : "148:19-149:76",
+                              "locator" : "148:19-149:100",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "And",
                               "operand" : [ {
-                                 "locator" : "148:19-148:154",
+                                 "locator" : "148:19-148:202",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "precision" : "Day",
                                  "type" : "OverlapsAfter",
                                  "operand" : [ {
-                                    "locator" : "148:19-148:83",
+                                    "locator" : "148:19-148:131",
                                     "lowClosed" : true,
                                     "highClosed" : true,
                                     "type" : "Interval",
@@ -3353,11 +3395,11 @@
                                        }
                                     },
                                     "low" : {
-                                       "locator" : "148:28-148:60",
+                                       "locator" : "148:28-148:84",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Start",
                                        "operand" : {
-                                          "locator" : "148:37-148:60",
+                                          "locator" : "148:37-148:84",
                                           "name" : "toInterval",
                                           "libraryName" : "QICoreCommon",
                                           "type" : "FunctionRef",
@@ -3369,7 +3411,7 @@
                                              }
                                           },
                                           "operand" : [ {
-                                             "locator" : "148:37-148:47",
+                                             "locator" : "148:37-148:71",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -3399,7 +3441,202 @@
                                                 "path" : "onset",
                                                 "type" : "Property",
                                                 "source" : {
-                                                   "locator" : "148:37-148:41",
+                                                   "locator" : "148:37-148:65",
+                                                   "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                   "strict" : false,
+                                                   "type" : "As",
+                                                   "operand" : {
+                                                      "locator" : "148:38-148:42",
+                                                      "name" : "Event",
+                                                      "type" : "OperandRef",
+                                                      "resultTypeSpecifier" : {
+                                                         "type" : "ChoiceTypeSpecifier",
+                                                         "choice" : [ {
+                                                            "name" : "{http://hl7.org/fhir}Condition",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{http://hl7.org/fhir}Procedure",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{http://hl7.org/fhir}Observation",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ]
+                                                      }
+                                                   },
+                                                   "asTypeSpecifier" : {
+                                                      "locator" : "148:47-148:64",
+                                                      "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                      "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }
+                                             } ]
+                                          } ]
+                                       }
+                                    },
+                                    "high" : {
+                                       "locator" : "148:87-148:130",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "lastOccurrence",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "locator" : "148:87-148:115",
+                                             "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                             "strict" : false,
+                                             "type" : "As",
+                                             "operand" : {
+                                                "locator" : "148:88-148:92",
+                                                "name" : "Event",
+                                                "type" : "OperandRef",
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ChoiceTypeSpecifier",
+                                                   "choice" : [ {
+                                                      "name" : "{http://hl7.org/fhir}Condition",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}Procedure",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}Observation",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ]
+                                                }
+                                             },
+                                             "asTypeSpecifier" : {
+                                                "locator" : "148:97-148:114",
+                                                "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }, {
+                                    "locator" : "148:155-148:202",
+                                    "name" : "ToInterval",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "operand" : [ {
+                                       "path" : "period",
+                                       "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
+                                       "type" : "Property"
+                                    } ]
+                                 } ]
+                              }, {
+                                 "locator" : "149:25-149:100",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "locator" : "149:25-149:68",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "clinicalStatus",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "locator" : "149:25-149:53",
+                                          "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                          "strict" : false,
+                                          "type" : "As",
+                                          "operand" : {
+                                             "locator" : "149:26-149:30",
+                                             "name" : "Event",
+                                             "type" : "OperandRef",
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ChoiceTypeSpecifier",
+                                                "choice" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Condition",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Procedure",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Observation",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ]
+                                             }
+                                          },
+                                          "asTypeSpecifier" : {
+                                             "locator" : "149:35-149:52",
+                                             "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                             "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }
+                                    } ]
+                                 }, {
+                                    "type" : "ToConcept",
+                                    "operand" : {
+                                       "locator" : "149:72-149:100",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "name" : "allergy-active",
+                                       "libraryName" : "QICoreCommon",
+                                       "type" : "CodeRef"
+                                    }
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "150:25-152:105",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Not",
+                              "operand" : {
+                                 "locator" : "150:29-152:105",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "Or",
+                                 "operand" : [ {
+                                    "locator" : "150:30-151:108",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "Or",
+                                    "operand" : [ {
+                                       "locator" : "150:30-150:114",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "Equivalent",
+                                       "operand" : [ {
+                                          "locator" : "150:30-150:77",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "name" : "ToConcept",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "operand" : [ {
+                                             "path" : "verificationStatus",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "locator" : "150:30-150:58",
+                                                "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                "strict" : false,
+                                                "type" : "As",
+                                                "operand" : {
+                                                   "locator" : "150:31-150:35",
                                                    "name" : "Event",
                                                    "type" : "OperandRef",
                                                    "resultTypeSpecifier" : {
@@ -3421,166 +3658,19 @@
                                                          "type" : "NamedTypeSpecifier"
                                                       } ]
                                                    }
-                                                }
-                                             } ]
-                                          } ]
-                                       }
-                                    },
-                                    "high" : {
-                                       "locator" : "148:63-148:82",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "path" : "value",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "path" : "lastOccurrence",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "locator" : "148:63-148:67",
-                                             "name" : "Event",
-                                             "type" : "OperandRef",
-                                             "resultTypeSpecifier" : {
-                                                "type" : "ChoiceTypeSpecifier",
-                                                "choice" : [ {
-                                                   "name" : "{http://hl7.org/fhir}Condition",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }, {
-                                                   "name" : "{http://hl7.org/fhir}Procedure",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }, {
+                                                },
+                                                "asTypeSpecifier" : {
+                                                   "locator" : "150:40-150:57",
+                                                   "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
                                                    "name" : "{http://hl7.org/fhir}AllergyIntolerance",
                                                    "type" : "NamedTypeSpecifier"
-                                                }, {
-                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }, {
-                                                   "name" : "{http://hl7.org/fhir}Observation",
-                                                   "type" : "NamedTypeSpecifier"
-                                                } ]
-                                             }
-                                          }
-                                       }
-                                    }
-                                 }, {
-                                    "locator" : "148:107-148:154",
-                                    "name" : "ToInterval",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "resultTypeSpecifier" : {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "pointType" : {
-                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    },
-                                    "operand" : [ {
-                                       "path" : "period",
-                                       "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
-                                       "type" : "Property"
-                                    } ]
-                                 } ]
-                              }, {
-                                 "locator" : "149:25-149:76",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "Equivalent",
-                                 "operand" : [ {
-                                    "locator" : "149:25-149:44",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                                    "name" : "ToConcept",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "clinicalStatus",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "locator" : "149:25-149:29",
-                                          "name" : "Event",
-                                          "type" : "OperandRef",
-                                          "resultTypeSpecifier" : {
-                                             "type" : "ChoiceTypeSpecifier",
-                                             "choice" : [ {
-                                                "name" : "{http://hl7.org/fhir}Condition",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}Procedure",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}Observation",
-                                                "type" : "NamedTypeSpecifier"
-                                             } ]
-                                          }
-                                       }
-                                    } ]
-                                 }, {
-                                    "type" : "ToConcept",
-                                    "operand" : {
-                                       "locator" : "149:48-149:76",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                                       "name" : "allergy-active",
-                                       "libraryName" : "QICoreCommon",
-                                       "type" : "CodeRef"
-                                    }
-                                 } ]
-                              } ]
-                           }, {
-                              "locator" : "150:25-152:81",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "Not",
-                              "operand" : {
-                                 "locator" : "150:29-152:81",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "Or",
-                                 "operand" : [ {
-                                    "locator" : "150:30-151:84",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "type" : "Or",
-                                    "operand" : [ {
-                                       "locator" : "150:30-150:90",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                       "type" : "Equivalent",
-                                       "operand" : [ {
-                                          "locator" : "150:30-150:53",
-                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                                          "name" : "ToConcept",
-                                          "libraryName" : "FHIRHelpers",
-                                          "type" : "FunctionRef",
-                                          "operand" : [ {
-                                             "path" : "verificationStatus",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "locator" : "150:30-150:34",
-                                                "name" : "Event",
-                                                "type" : "OperandRef",
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ChoiceTypeSpecifier",
-                                                   "choice" : [ {
-                                                      "name" : "{http://hl7.org/fhir}Condition",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}Procedure",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}Observation",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   } ]
                                                 }
                                              }
                                           } ]
                                        }, {
                                           "type" : "ToConcept",
                                           "operand" : {
-                                             "locator" : "150:57-150:90",
+                                             "locator" : "150:81-150:114",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                              "name" : "allergy-unconfirmed",
                                              "libraryName" : "QICoreCommon",
@@ -3588,11 +3678,11 @@
                                           }
                                        } ]
                                     }, {
-                                       "locator" : "151:28-151:84",
+                                       "locator" : "151:28-151:108",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Equivalent",
                                        "operand" : [ {
-                                          "locator" : "151:28-151:51",
+                                          "locator" : "151:28-151:75",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                           "name" : "ToConcept",
                                           "libraryName" : "FHIRHelpers",
@@ -3601,34 +3691,46 @@
                                              "path" : "verificationStatus",
                                              "type" : "Property",
                                              "source" : {
-                                                "locator" : "151:28-151:32",
-                                                "name" : "Event",
-                                                "type" : "OperandRef",
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ChoiceTypeSpecifier",
-                                                   "choice" : [ {
-                                                      "name" : "{http://hl7.org/fhir}Condition",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}Procedure",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   }, {
-                                                      "name" : "{http://hl7.org/fhir}Observation",
-                                                      "type" : "NamedTypeSpecifier"
-                                                   } ]
+                                                "locator" : "151:28-151:56",
+                                                "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                "strict" : false,
+                                                "type" : "As",
+                                                "operand" : {
+                                                   "locator" : "151:29-151:33",
+                                                   "name" : "Event",
+                                                   "type" : "OperandRef",
+                                                   "resultTypeSpecifier" : {
+                                                      "type" : "ChoiceTypeSpecifier",
+                                                      "choice" : [ {
+                                                         "name" : "{http://hl7.org/fhir}Condition",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}Procedure",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}Observation",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ]
+                                                   }
+                                                },
+                                                "asTypeSpecifier" : {
+                                                   "locator" : "151:38-151:55",
+                                                   "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                   "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                   "type" : "NamedTypeSpecifier"
                                                 }
                                              }
                                           } ]
                                        }, {
                                           "type" : "ToConcept",
                                           "operand" : {
-                                             "locator" : "151:55-151:84",
+                                             "locator" : "151:79-151:108",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                              "name" : "allergy-refuted",
                                              "libraryName" : "QICoreCommon",
@@ -3637,11 +3739,11 @@
                                        } ]
                                     } ]
                                  }, {
-                                    "locator" : "152:28-152:80",
+                                    "locator" : "152:28-152:104",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "locator" : "152:28-152:51",
+                                       "locator" : "152:28-152:75",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
@@ -3650,34 +3752,46 @@
                                           "path" : "verificationStatus",
                                           "type" : "Property",
                                           "source" : {
-                                             "locator" : "152:28-152:32",
-                                             "name" : "Event",
-                                             "type" : "OperandRef",
-                                             "resultTypeSpecifier" : {
-                                                "type" : "ChoiceTypeSpecifier",
-                                                "choice" : [ {
-                                                   "name" : "{http://hl7.org/fhir}Condition",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }, {
-                                                   "name" : "{http://hl7.org/fhir}Procedure",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }, {
-                                                   "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }, {
-                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }, {
-                                                   "name" : "{http://hl7.org/fhir}Observation",
-                                                   "type" : "NamedTypeSpecifier"
-                                                } ]
+                                             "locator" : "152:28-152:56",
+                                             "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                             "strict" : false,
+                                             "type" : "As",
+                                             "operand" : {
+                                                "locator" : "152:29-152:33",
+                                                "name" : "Event",
+                                                "type" : "OperandRef",
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ChoiceTypeSpecifier",
+                                                   "choice" : [ {
+                                                      "name" : "{http://hl7.org/fhir}Condition",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}Procedure",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}Observation",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ]
+                                                }
+                                             },
+                                             "asTypeSpecifier" : {
+                                                "locator" : "152:38-152:55",
+                                                "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                "type" : "NamedTypeSpecifier"
                                              }
                                           }
                                        } ]
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "locator" : "152:55-152:80",
+                                          "locator" : "152:79-152:104",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "allergy-entered-in-error",
                                           "type" : "CodeRef"
@@ -3688,7 +3802,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "153:17-159:54",
+                        "locator" : "153:17-159:77",
                         "when" : {
                            "locator" : "153:22-153:47",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -3725,15 +3839,15 @@
                            }
                         },
                         "then" : {
-                           "locator" : "154:19-159:54",
+                           "locator" : "154:19-159:77",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "operand" : [ {
-                              "locator" : "154:19-158:119",
+                              "locator" : "154:19-158:142",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "And",
                               "operand" : [ {
-                                 "locator" : "154:19-157:65",
+                                 "locator" : "154:19-157:88",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "And",
                                  "operand" : [ {
@@ -4067,17 +4181,98 @@
                                        } ]
                                     } ]
                                  }, {
-                                    "locator" : "157:25-157:65",
+                                    "locator" : "157:25-157:88",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "In",
                                     "operand" : [ {
+                                       "locator" : "157:25-157:59",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "path" : "value",
                                        "type" : "Property",
                                        "source" : {
                                           "path" : "status",
                                           "type" : "Property",
                                           "source" : {
-                                             "locator" : "157:25-157:29",
+                                             "locator" : "157:25-157:52",
+                                             "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "strict" : false,
+                                             "type" : "As",
+                                             "operand" : {
+                                                "locator" : "157:26-157:30",
+                                                "name" : "Event",
+                                                "type" : "OperandRef",
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ChoiceTypeSpecifier",
+                                                   "choice" : [ {
+                                                      "name" : "{http://hl7.org/fhir}Condition",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}Procedure",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{http://hl7.org/fhir}Observation",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ]
+                                                }
+                                             },
+                                             "asTypeSpecifier" : {
+                                                "locator" : "157:35-157:51",
+                                                "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          }
+                                       }
+                                    }, {
+                                       "locator" : "157:64-157:88",
+                                       "type" : "List",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       },
+                                       "element" : [ {
+                                          "locator" : "157:66-157:73",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : "active",
+                                          "type" : "Literal"
+                                       }, {
+                                          "locator" : "157:76-157:86",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : "completed",
+                                          "type" : "Literal"
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "locator" : "158:25-158:142",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "In",
+                                 "operand" : [ {
+                                    "locator" : "158:25-158:59",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "intent",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "locator" : "158:25-158:52",
+                                          "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "strict" : false,
+                                          "type" : "As",
+                                          "operand" : {
+                                             "locator" : "158:26-158:30",
                                              "name" : "Event",
                                              "type" : "OperandRef",
                                              "resultTypeSpecifier" : {
@@ -4099,72 +4294,17 @@
                                                    "type" : "NamedTypeSpecifier"
                                                 } ]
                                              }
-                                          }
-                                       }
-                                    }, {
-                                       "locator" : "157:41-157:65",
-                                       "type" : "List",
-                                       "resultTypeSpecifier" : {
-                                          "type" : "ListTypeSpecifier",
-                                          "elementType" : {
-                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          },
+                                          "asTypeSpecifier" : {
+                                             "locator" : "158:35-158:51",
+                                             "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
                                              "type" : "NamedTypeSpecifier"
-                                          }
-                                       },
-                                       "element" : [ {
-                                          "locator" : "157:43-157:50",
-                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : "active",
-                                          "type" : "Literal"
-                                       }, {
-                                          "locator" : "157:53-157:63",
-                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : "completed",
-                                          "type" : "Literal"
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "locator" : "158:25-158:119",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "In",
-                                 "operand" : [ {
-                                    "locator" : "158:25-158:36",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                    "path" : "value",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "intent",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "locator" : "158:25-158:29",
-                                          "name" : "Event",
-                                          "type" : "OperandRef",
-                                          "resultTypeSpecifier" : {
-                                             "type" : "ChoiceTypeSpecifier",
-                                             "choice" : [ {
-                                                "name" : "{http://hl7.org/fhir}Condition",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}Procedure",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}Observation",
-                                                "type" : "NamedTypeSpecifier"
-                                             } ]
                                           }
                                        }
                                     }
                                  }, {
-                                    "locator" : "158:41-158:119",
+                                    "locator" : "158:64-158:142",
                                     "type" : "List",
                                     "resultTypeSpecifier" : {
                                        "type" : "ListTypeSpecifier",
@@ -4174,31 +4314,31 @@
                                        }
                                     },
                                     "element" : [ {
-                                       "locator" : "158:43-158:49",
+                                       "locator" : "158:66-158:72",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : "order",
                                        "type" : "Literal"
                                     }, {
-                                       "locator" : "158:52-158:67",
+                                       "locator" : "158:75-158:90",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : "original-order",
                                        "type" : "Literal"
                                     }, {
-                                       "locator" : "158:70-158:83",
+                                       "locator" : "158:93-158:106",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : "reflex-order",
                                        "type" : "Literal"
                                     }, {
-                                       "locator" : "158:86-158:99",
+                                       "locator" : "158:109-158:122",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : "filler-order",
                                        "type" : "Literal"
                                     }, {
-                                       "locator" : "158:102-158:117",
+                                       "locator" : "158:125-158:140",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : "instance-order",
@@ -4207,15 +4347,15 @@
                                  } ]
                               } ]
                            }, {
-                              "locator" : "159:25-159:54",
+                              "locator" : "159:25-159:77",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Not",
                               "operand" : {
-                                 "locator" : "159:25-159:54",
+                                 "locator" : "159:25-159:77",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "IsTrue",
                                  "operand" : {
-                                    "locator" : "159:25-159:42",
+                                    "locator" : "159:25-159:65",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "path" : "value",
                                     "type" : "Property",
@@ -4223,27 +4363,39 @@
                                        "path" : "doNotPerform",
                                        "type" : "Property",
                                        "source" : {
-                                          "locator" : "159:25-159:29",
-                                          "name" : "Event",
-                                          "type" : "OperandRef",
-                                          "resultTypeSpecifier" : {
-                                             "type" : "ChoiceTypeSpecifier",
-                                             "choice" : [ {
-                                                "name" : "{http://hl7.org/fhir}Condition",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}Procedure",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "type" : "NamedTypeSpecifier"
-                                             }, {
-                                                "name" : "{http://hl7.org/fhir}Observation",
-                                                "type" : "NamedTypeSpecifier"
-                                             } ]
+                                          "locator" : "159:25-159:52",
+                                          "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "strict" : false,
+                                          "type" : "As",
+                                          "operand" : {
+                                             "locator" : "159:26-159:30",
+                                             "name" : "Event",
+                                             "type" : "OperandRef",
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ChoiceTypeSpecifier",
+                                                "choice" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Condition",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Procedure",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Observation",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ]
+                                             }
+                                          },
+                                          "asTypeSpecifier" : {
+                                             "locator" : "159:35-159:51",
+                                             "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "type" : "NamedTypeSpecifier"
                                           }
                                        }
                                     }
@@ -4252,7 +4404,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "160:17-162:73",
+                        "locator" : "160:17-162:102",
                         "when" : {
                            "locator" : "160:22-160:53",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -4289,16 +4441,16 @@
                            }
                         },
                         "then" : {
-                           "locator" : "161:19-162:73",
+                           "locator" : "161:19-162:102",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "operand" : [ {
-                              "locator" : "161:19-161:117",
+                              "locator" : "161:19-161:146",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "precision" : "Day",
                               "type" : "OverlapsAfter",
                               "operand" : [ {
-                                 "locator" : "161:19-161:46",
+                                 "locator" : "161:19-161:75",
                                  "name" : "toInterval",
                                  "libraryName" : "QICoreCommon",
                                  "type" : "FunctionRef",
@@ -4310,7 +4462,7 @@
                                     }
                                  },
                                  "operand" : [ {
-                                    "locator" : "161:19-161:33",
+                                    "locator" : "161:19-161:62",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -4331,7 +4483,80 @@
                                        "path" : "effective",
                                        "type" : "Property",
                                        "source" : {
-                                          "locator" : "161:19-161:23",
+                                          "locator" : "161:19-161:52",
+                                          "resultTypeName" : "{http://hl7.org/fhir}Observation",
+                                          "strict" : false,
+                                          "type" : "As",
+                                          "operand" : {
+                                             "locator" : "161:20-161:24",
+                                             "name" : "Event",
+                                             "type" : "OperandRef",
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ChoiceTypeSpecifier",
+                                                "choice" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Condition",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Procedure",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{http://hl7.org/fhir}Observation",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ]
+                                             }
+                                          },
+                                          "asTypeSpecifier" : {
+                                             "locator" : "161:29-161:51",
+                                             "resultTypeName" : "{http://hl7.org/fhir}Observation",
+                                             "name" : "{http://hl7.org/fhir}Observation",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }
+                                    } ]
+                                 } ]
+                              }, {
+                                 "locator" : "161:99-161:146",
+                                 "name" : "ToInterval",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "path" : "period",
+                                    "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "162:25-162:102",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "In",
+                              "operand" : [ {
+                                 "locator" : "162:25-162:65",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Status",
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "status",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "locator" : "162:25-162:58",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Observation",
+                                       "strict" : false,
+                                       "type" : "As",
+                                       "operand" : {
+                                          "locator" : "162:26-162:30",
                                           "name" : "Event",
                                           "type" : "OperandRef",
                                           "resultTypeSpecifier" : {
@@ -4353,64 +4578,17 @@
                                                 "type" : "NamedTypeSpecifier"
                                              } ]
                                           }
-                                       }
-                                    } ]
-                                 } ]
-                              }, {
-                                 "locator" : "161:70-161:117",
-                                 "name" : "ToInterval",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "resultTypeSpecifier" : {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 },
-                                 "operand" : [ {
-                                    "path" : "period",
-                                    "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
-                                    "type" : "Property"
-                                 } ]
-                              } ]
-                           }, {
-                              "locator" : "162:25-162:73",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "In",
-                              "operand" : [ {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "status",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "locator" : "162:25-162:29",
-                                       "name" : "Event",
-                                       "type" : "OperandRef",
-                                       "resultTypeSpecifier" : {
-                                          "type" : "ChoiceTypeSpecifier",
-                                          "choice" : [ {
-                                             "name" : "{http://hl7.org/fhir}Condition",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}Procedure",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{http://hl7.org/fhir}Observation",
-                                             "type" : "NamedTypeSpecifier"
-                                          } ]
+                                       },
+                                       "asTypeSpecifier" : {
+                                          "locator" : "162:35-162:57",
+                                          "resultTypeName" : "{http://hl7.org/fhir}Observation",
+                                          "name" : "{http://hl7.org/fhir}Observation",
+                                          "type" : "NamedTypeSpecifier"
                                        }
                                     }
                                  }
                               }, {
-                                 "locator" : "162:41-162:73",
+                                 "locator" : "162:70-162:102",
                                  "type" : "List",
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
@@ -4420,19 +4598,19 @@
                                     }
                                  },
                                  "element" : [ {
-                                    "locator" : "162:42-162:48",
+                                    "locator" : "162:71-162:77",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "final",
                                     "type" : "Literal"
                                  }, {
-                                    "locator" : "162:51-162:59",
+                                    "locator" : "162:80-162:88",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "amended",
                                     "type" : "Literal"
                                  }, {
-                                    "locator" : "162:62-162:72",
+                                    "locator" : "162:91-162:101",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "corrected",

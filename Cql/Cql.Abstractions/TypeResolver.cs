@@ -190,5 +190,14 @@ namespace Hl7.Cql.Abstractions
         /// <param name="propertyName">The property name.</param>
         internal abstract bool ShouldUseSourceObject(Type type, string propertyName);
 
+        /// <summary>
+        /// Returns true when the given type is used by the model to represent a FHIR choice type.
+        /// Since C# does not have a direct representation of choice types, this method is used by
+        /// the infrastructure to insert dynamic handling of choice types at runtime.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        internal abstract bool RepresentsChoiceType(Type type);
+
     }
 }
