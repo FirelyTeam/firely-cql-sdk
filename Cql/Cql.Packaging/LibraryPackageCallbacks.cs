@@ -7,18 +7,24 @@ internal readonly record struct LibraryPackageCallbacks
 {
     public LibraryPackageCallbacks(
         Func<Resource, string>? buildUrlFromResource = null,
-        Action<Library>? onLibraryResourceCreated = null)
+        Action<(string name, Stream stream, bool isTyple)>? onBeforeCompileStream = null,
+        Action<IEnumerable<Resource>>? afterPackageMutator = null)
     {
+        _onBeforeCompileStream = onBeforeCompileStream;
+        _afterPackageMutator = afterPackageMutator;
         _buildUrlFromResource = buildUrlFromResource;
-        _onLibraryResourceCreated = onLibraryResourceCreated;
     }
 
     private readonly Func<Resource, string>? _buildUrlFromResource;
-    private readonly Action<Library>? _onLibraryResourceCreated;
+    private readonly Action<(string name, Stream stream, bool isTyple)>? _onBeforeCompileStream;
+    private readonly Action<IEnumerable<Resource>>? _afterPackageMutator;
 
     public string BuildUrlFromResource(Resource resource) => 
         _buildUrlFromResource?.Invoke(resource) ?? "#";
 
-    public void NotifyLibraryResourceCreated(Library library) => 
-        _onLibraryResourceCreated?.Invoke(library);
+    public void OnBeforeCompileStream(string name, Stream stream, bool isTuple) =>
+        _onBeforeCompileStream?.Invoke((name, stream, isTuple));
+
+    public void OnAfterPackageMutate(IEnumerable<Resource> resources) =>
+        _afterPackageMutator?.Invoke(resources);
 }

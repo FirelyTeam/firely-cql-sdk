@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Packaging.ResourceWriters;
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
+using Hl7.Cql.CodeGeneration.NET;
 using static System.Console;
 
 namespace Hl7.Cql.Packager;
@@ -9,16 +10,16 @@ internal class OptionsConsoleDumper
 {
     private readonly PackagerOptions _packagerOptions;
     private readonly FhirResourceWriterOptions _fhirResourceWriterOptions;
-    private readonly CSharpResourceWriterOptions _csharpResourceWriterOptions;
+    private readonly CSharpCodeWriterOptions _csharpCodeWriterOptions;
 
     public OptionsConsoleDumper(
         IOptions<PackagerOptions> packagerOptions,
         IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
-        IOptions<CSharpResourceWriterOptions> csharpResourceWriterOptions)
+        IOptions<CSharpCodeWriterOptions> csharpResourceWriterOptions)
     {
         _packagerOptions = packagerOptions.Value;
         _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
-        _csharpResourceWriterOptions = csharpResourceWriterOptions.Value;
+        _csharpCodeWriterOptions = csharpResourceWriterOptions.Value;
     }
 
     public void DumpToConsole()
@@ -36,7 +37,7 @@ internal class OptionsConsoleDumper
             ArgFor(_packagerOptions.Debug),
             ArgFor("Fhir", _fhirResourceWriterOptions.OutDirectory),
             ArgFor("Fhir", _fhirResourceWriterOptions.OverrideDate),
-            ArgFor("CSharp", _csharpResourceWriterOptions.OutDirectory),
+            ArgFor("CSharp", _csharpCodeWriterOptions.OutDirectory),
         }.Where(t => t.value is not null)
         .ToArray();
 

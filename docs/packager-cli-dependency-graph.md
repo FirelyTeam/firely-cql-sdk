@@ -1,5 +1,75 @@
 # PackagerCLI
 
+## Service Dependencies (excl Logger and Options)
+
+```mermaid
+classDiagram
+    direction BT
+
+    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
+
+    class TypeManager {
+        get_TypeResolver() TypeResolver
+        get_TupleTypes() IEnumerable~Type~
+    }
+
+    subgraph Generating_CSharp_From_LibrarySet_AndDefinitions
+        class CSharpLibrarySetToStreamsWriter {
+        }
+
+        class CSharpCodeStreamPostProcessor {
+        }
+
+        class WriteToFileCSharpCodeStreamPostProcessor {
+        }
+    end
+
+
+    %% Inheritance  
+    
+    CqlOperatorsBinding --> OperatorBinding : inherits
+    FhirResourceWriter --> ResourceWriter : inherits
+    WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
+
+    %% Injected Dependencies
+
+    CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
+    TypeManager ..> AssemblyCompiler : injected
+
+    TypeManager ..> ExpressionBuilder : injected
+
+    ResourcePackager ..> PackagerCliProgram : injected 
+    OptionsConsoleDumper ..> PackagerCliProgram : injected 
+    
+       
+    TypeResolver ..> CqlOperatorsBinding : injected
+    TypeConverter ..> CqlOperatorsBinding : injected
+
+    ModelInspector ..> TypeConverter : injected  
+
+    TypeResolver ..> TypeManager : injected
+
+    AssemblyCompiler ..> LibraryPackager : injected
+    TypeResolver ..> LibraryPackager : injected
+    LibrarySetExpressionBuilder ..> LibraryPackager : injected
+    
+    CSharpCodeStreamPostProcessor ..> CSharpLibrarySetToStreamsWriter : injected\n(optional)
+    TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
+
+    TypeManager ..> LibraryExpressionBuilder : injected
+    ExpressionBuilder ..> LibraryExpressionBuilder : injected
+    OperatorBinding ..> LibraryExpressionBuilder : injected
+
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
+
+    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
+    LibraryPackager ..> ResourcePackager : injected
+
+    %% Rest
+    ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
+
+```
+
 ## ExpressionBuilders and Contexts
 ```mermaid
 classDiagram
@@ -74,59 +144,4 @@ classDiagram
     ExpressionBuilderContext ..> LibraryExpressionBuilderContext : owner context
     ExpressionBuilderContext ..> ExpressionBuilderContext : owner context
     LibraryExpressionBuilderContext ..> LibrarySetExpressionBuilderContext : owner context
-```
-
-## Service Dependencies (excl Logger and Options)
-
-```mermaid
-classDiagram
-    direction LR
-
-    class TypeManager {
-        get_TypeResolver() TypeResolver
-        get_TupleTypes() IEnumerable~Type~
-    }
-
-    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
-
-    %% Inheritance  
-    CqlOperatorsBinding --> OperatorBinding : inherits
-    CSharpResourceWriter --> ResourceWriter : inherits
-    FhirResourceWriter --> ResourceWriter : inherits
-
-    %% Injected Dependencies
-    CSharpSourceCodeWriter ..> AssemblyCompiler : injected
-    TypeManager ..> AssemblyCompiler : injected
-
-    TypeManager ..> ExpressionBuilder : injected
-
-    ResourcePackager ..> PackagerCliProgram : injected 
-    OptionsConsoleDumper ..> PackagerCliProgram : injected 
-    
-
-    TypeConverter ..> CqlOperatorsBinding : injected         
-    TypeResolver ..> CqlOperatorsBinding : injected    
-
-    ModelInspector ..> TypeConverter : injected  
-
-    TypeResolver ..> TypeManager : injected
-
-    TypeResolver ..> LibraryPackager : injected
-    AssemblyCompiler ..> LibraryPackager : injected
-    LibrarySetExpressionBuilder ..> LibraryPackager : injected
-    
-    TypeResolver ..> CSharpSourceCodeWriter : injected
-
-    TypeManager ..> LibraryExpressionBuilder : injected
-    ExpressionBuilder ..> LibraryExpressionBuilder : injected
-    OperatorBinding ..> LibraryExpressionBuilder : injected
-
-    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
-
-    %% Rest
-    ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
-
-    %% Obsolete
-    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
-    LibraryPackager ..> ResourcePackager : injected
 ```

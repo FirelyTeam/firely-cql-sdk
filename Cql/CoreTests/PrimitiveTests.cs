@@ -3520,20 +3520,12 @@ namespace CoreTests
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
-            var writer = Factory.CSharpSourceCodeWriter;
-            var dict = new Dictionary<string, MemoryStream>();
-
-            writer.Write(
+            var writer = Factory.CSharpLibrarySetToStreamsWriter;
+            var items = writer.Write(
                 definitions, 
                 Factory.TypeManager.TupleTypes,
-                librarySet,
-                lib =>
-                {
-                    var ms = new MemoryStream();
-                    dict[lib] = ms; 
-                    return ms;
-                });
-            Debug.Assert(dict.Any());
+                librarySet);
+            Debug.Assert(items.Count() > 0); // Do not replace with Any
         }
 
         [TestMethod]

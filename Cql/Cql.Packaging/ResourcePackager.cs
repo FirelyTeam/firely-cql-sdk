@@ -22,8 +22,7 @@ namespace Hl7.Cql.Packaging
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
         public ResourcePackager(
-            ILoggerFactory logFactory, 
-            params ResourceWriter[] resourceWriters)
+            ILoggerFactory logFactory, params ResourceWriter[] resourceWriters)
         {
             _libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
             _logFactory = logFactory;
@@ -79,32 +78,16 @@ namespace Hl7.Cql.Packaging
             if (_resourceWriters.Length == 0) 
                 return; //Skip since no writers provided
 
-            HashSet<Resource> resourcesWritten = new();
-            LibraryPackager libraryPackager = new LibraryPackagerFactory(_logFactory).LibraryPackager;
             LibraryPackageCallbacks callbacks = new(
-                buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl),
-                onLibraryResourceCreated: library =>
-                {
-                    foreach (var resourceWriter in _resourceWriters)
-                    {
-                        afterPackageMutator?.Invoke(new [] {library});
-                        resourceWriter.WriteResource(library);
-                        resourcesWritten.Add(library);
-                    }
-                });
+                afterPackageMutator: afterPackageMutator,
+                buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
 
             LibrarySet librarySet = new(elmDir.FullName);
             librarySet.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
-            List<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks).ToList();
-            
-            var remainingResources = resources.Except(resourcesWritten).ToList();
-            afterPackageMutator?.Invoke(remainingResources);
-            if (remainingResources.Any())
+            List<Resource> resources = _libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks).ToList();
+            foreach (var resourceWriter in _resourceWriters)
             {
-                foreach (var resourceWriter in _resourceWriters)
-                {
-                    resourceWriter.WriteResources(remainingResources);
-                }
+                resourceWriter.WriteResources(resources);
             }
         }
     }

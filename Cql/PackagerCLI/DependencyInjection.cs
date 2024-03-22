@@ -56,8 +56,8 @@ internal static class DependencyInjection
         FhirResourceWriterOptions fhirResourceWriterOptions = new();
         FhirResourceWriterOptions.BindConfig(fhirResourceWriterOptions, config);
 
-        CSharpResourceWriterOptions cSharpResourceWriterOptions = new();
-        CSharpResourceWriterOptions.BindConfig(cSharpResourceWriterOptions, config);
+        CSharpCodeWriterOptions cSharpCodeWriterOptions = new();
+        CSharpCodeWriterOptions.BindConfig(cSharpCodeWriterOptions, config);
 
         List<ServiceDescriptor> resourceWritersServiceDescriptors = new(2);
 
@@ -70,12 +70,12 @@ internal static class DependencyInjection
                 .ValidateOnStart();
         }
 
-        if (cSharpResourceWriterOptions.OutDirectory is {} csharpDir)
+        if (cSharpCodeWriterOptions.OutDirectory is {} csharpDir)
         {
-            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
+            services.AddSingleton<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor>();
             services
-                .AddOptions<CSharpResourceWriterOptions>()
-                .Configure<IConfiguration>(CSharpResourceWriterOptions.BindConfig)
+                .AddOptions<CSharpCodeWriterOptions>()
+                .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
                 .ValidateOnStart();
         }
 
@@ -89,7 +89,7 @@ internal static class DependencyInjection
     public static void TryAddCompilationServices(this IServiceCollection services)
     {
         services.TryAddSingleton<OperatorBinding, CqlOperatorsBinding>();
-        services.TryAddSingleton<CSharpSourceCodeWriter>();
+        services.TryAddSingleton<CSharpLibrarySetToStreamsWriter>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
 
@@ -104,6 +104,7 @@ internal static class DependencyInjection
     public static void TryAddBuilders(this IServiceCollection services)
     {
         services.TryAddSingleton<ResourcePackager, ResourcePackagerInjected>();
+        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
         services.TryAddSingleton<LibraryPackager>();
         services.TryAddSingleton<ExpressionBuilder>();
         services.TryAddSingleton<LibraryExpressionBuilder>();
@@ -113,8 +114,7 @@ internal static class DependencyInjection
 
 file class ResourcePackagerInjected : ResourcePackager
 {
-    public ResourcePackagerInjected(
-        LibraryPackager libraryPackager, 
+    public ResourcePackagerInjected(LibraryPackager libraryPackager,
         ILoggerFactory logFactory,
         IEnumerable<ResourceWriter> resourceWriters) : base(libraryPackager, logFactory, resourceWriters)
     {
