@@ -47,25 +47,28 @@ internal class ResourcePackager
         DirectoryInfo cqlDirectory,
         string? resourceCanonicalRootUrl = null)
     {
+        // 1. LOAD ELM FILES
+        //
+        //
 
-        LibrarySet librarySet = new(elmDirectory.FullName);
-        librarySet.LoadLibraries(elmDirectory.GetFiles("*.json", SearchOption.AllDirectories));
+        LibrarySet librarySet;
+        try
+        {
+            librarySet = new(elmDirectory.FullName);
+            librarySet.LoadLibraries(elmDirectory.GetFiles("*.json", SearchOption.AllDirectories));
+        }
+        catch (Exception e)
+        {
+            throw new ResourcePackagerErrors(LoadElmFilesException: e).ToException();
+        }
 
+        // 2. BUILD EXPRESSIONS
         // Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
         // while we try to continue building the rest of the artifacts up until the point of failure.
-
-        var resources = new List<Resource>();
-
-        void OnResourceCreated(Resource resource)
-        {
-            _fhirResourcePostProcessor?.ProcessResource(resource);
-            resources!.Add(resource);
-        }
 
         var librariesByNameAndVersion = new Dictionary<string, Library>();
         var definitions = new DefinitionDictionary<LambdaExpression>();
         ExceptionDispatchInfo? expressionBuildingExceptionInfo = null;
-        ExceptionDispatchInfo? resourceBuildingExceptionInfo = null;
         try
         {
             _librarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
@@ -78,12 +81,39 @@ internal class ResourcePackager
             expressionBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
         }
 
+        // 3. GENERATE C# ASSEMBLIES 
+        //
+        //
+
+        IDictionary<string, AssemblyData> assembliesByLibraryName;
         try
         {
-            var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
-            var assemblyDatas = _assemblyCompiler.Compile(librarySet, definitions);
+            assembliesByLibraryName = _assemblyCompiler.Compile(librarySet, definitions);
+        }
+        catch (Exception e)
+        {
+            throw new ResourcePackagerErrors(
+                ExpressionBuildingException: expressionBuildingExceptionInfo?.SourceException, 
+                AssemblyCompilingException:e).ToException();
+        }
 
-            foreach (var (name, asmData) in assemblyDatas)
+        // 4. GENERATE FHIR RESOURCES
+        //
+        //
+
+        try
+        {
+            var resources = new List<Resource>();
+
+            void OnResourceCreated(Resource resource)
+            {
+                _fhirResourcePostProcessor?.ProcessResource(resource);
+                resources!.Add(resource);
+            }
+
+            var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
+
+            foreach (var (name, asmData) in assembliesByLibraryName)
             {
                 if (name is "TupleTypes")
                 {
@@ -112,12 +142,14 @@ internal class ResourcePackager
                     var library = librarySet.GetLibrary(name)!;
                     var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
                     if (!elmFile.Exists)
-                        elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
+                        elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
+                            $"{library.identifier?.id ?? string.Empty}.json"));
 
                     if (!elmFile.Exists)
                         throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
 
-                    var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+                    var cqlFiles =
+                        cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
                     if (cqlFiles.Length == 0)
                     {
                         cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
@@ -158,6 +190,7 @@ internal class ResourcePackager
                                 tags.Add(t);
                         }
                     }
+
                     var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
                     var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
                     if (measureAnnotation != null
@@ -171,7 +204,8 @@ internal class ResourcePackager
                         measure.Id = library.identifier?.id!;
                         measure.Version = library.identifier?.version!;
                         measure.Status = PublicationStatus.Active;
-                        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond).ToString();
+                        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
+                            .ToString();
                         measure.EffectivePeriod = new Period
                         {
                             Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
@@ -183,27 +217,34 @@ internal class ResourcePackager
                             throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
                         if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure))
-                            throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
+                            throw new InvalidOperationException(
+                                $"We didn't create a measure for library {libForMeasure}");
 
                         measure.Library = new List<string> { libForMeasure!.Url };
                         OnResourceCreated(measure);
                     }
                 }
             }
+
+            if (expressionBuildingExceptionInfo is not null)
+            {
+                throw new ResourcePackagerErrors(
+                    LoadElmFilesException: expressionBuildingExceptionInfo.SourceException)
+                    .ToException();
+            }
+
+            return resources;
+        }
+        catch (CqlException<ResourcePackagerErrors>)
+        {
+            throw;
         }
         catch (Exception e)
         {
-            resourceBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
+            throw new ResourcePackagerErrors(
+                LoadElmFilesException: expressionBuildingExceptionInfo?.SourceException,
+                ResourceBuildingException: e).ToException();
         }
-
-        if (expressionBuildingExceptionInfo is { } || resourceBuildingExceptionInfo is { })
-        {
-            throw new LibraryPackagerErrors(
-                expressionBuildingExceptionInfo?.SourceException, 
-                resourceBuildingExceptionInfo?.SourceException).ToException();
-        }
-
-        return resources;
     }
 
     private static Library CreateLibraryResource(
@@ -480,25 +521,40 @@ internal class ResourcePackager
     #endregion 
 }
 
-internal readonly record struct LibraryPackagerErrors(
-    Exception? ExpressionBuildingException,
-    Exception? ResourceBuildingException) : ICqlError
+internal readonly record struct ResourcePackagerErrors(
+    Exception? LoadElmFilesException = null,
+    Exception? ExpressionBuildingException = null,
+    Exception? AssemblyCompilingException = null,
+    Exception? ResourceBuildingException = null) : ICqlError
 {
     public string GetMessage()
     {
         StringBuilder sb = new();
         int i = 1;
-        sb.AppendLine("The following exceptions occurred during Library Packaging:");
-        if (ExpressionBuildingException is { } e1)
+        sb.Append("The following exceptions occurred during Library Packaging:");
+        if (LoadElmFilesException is { } lefe)
         {
-            sb.AppendLine(Invariant($"{i++}. ExpressionBuildingException"));
-            sb.Append(e1);
+            if (sb.Length > 0) sb.AppendLine().AppendLine();
+            sb.AppendLine(Invariant($"{i++}. LoadElmFilesException"));
+            sb.Append(lefe);
         }
-        if (ResourceBuildingException is { } e2)
+        if (ExpressionBuildingException is { } ebe)
+        {
+            if (sb.Length > 0) sb.AppendLine().AppendLine();
+            sb.AppendLine(Invariant($"{i++}. ExpressionBuildingException"));
+            sb.Append(ebe);
+        }
+        if (AssemblyCompilingException is { } ace)
+        {
+            if (sb.Length > 0) sb.AppendLine().AppendLine();
+            sb.AppendLine(Invariant($"{i++}. AssemblyCompilingException"));
+            sb.Append(ace);
+        }
+        if (ResourceBuildingException is { } rbe)
         {
             if (sb.Length > 0) sb.AppendLine().AppendLine();
             sb.AppendLine(Invariant($"{i++}. ResourceBuildingException"));
-            sb.Append(e2);
+            sb.Append(rbe);
         }
         return sb.ToString();
     }
