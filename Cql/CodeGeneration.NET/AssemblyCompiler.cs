@@ -9,7 +9,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Microsoft.CodeAnalysis;
@@ -22,7 +22,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -30,14 +29,17 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private readonly TypeManager _typeManager;
         private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
+        private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
 
         public AssemblyCompiler(
             CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter,
-            TypeManager typeManager)
+            TypeManager typeManager,
+            CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null)
         {
             _cSharpLibrarySetToStreamsWriter = cSharpLibrarySetToStreamsWriter;
             _typeManager = typeManager;
+            _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
                 {
@@ -63,49 +65,59 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(string name, AssemblyData asmData)> Compile(
-            LibrarySet librarySet, 
-            DefinitionDictionary<LambdaExpression> definitions)
-        {
-            IEnumerable<(string name, Stream stream)> streamsByName = _cSharpLibrarySetToStreamsWriter.Write(definitions, _typeManager.TupleTypes, librarySet);
-            return CompileSourceCodeStreams(librarySet, streamsByName);
-        }
-
-        private IEnumerable<(string name, AssemblyData asmData)> CompileSourceCodeStreams(
+        public IDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet,
-            IEnumerable<(string name, Stream stream)> streamsByLibraryName)
+            DefinitionDictionary<LambdaExpression>? definitions = null)
         {
-            var assemblies = new Dictionary<string, AssemblyData>();
-            List<(string name, Stream stream)> tupleStreams = new List<(string name, Stream stream)>();
-            AssemblyData[] dependencyAssemblies = Array.Empty<AssemblyData>();
-            bool isScanningTuples = true;
-            foreach (var (name, stream) in streamsByLibraryName)
+            definitions ??= new();
+
+            Dictionary<string, AssemblyData> results = new();
+
+            List<(string libraryName, Stream stream, bool isTuple)> items = new();
+
+            _cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
+                definitions,
+                librarySet,
+                _typeManager.TupleTypes, new(
+                    onAfterStep: CSharpSourceCodeStep
+                ));
+
+
+            return results;
+
+            void CSharpSourceCodeStep(CSharpSourceCodeStep next)
             {
-                var isTuple = name.StartsWith("Tuples" + Path.DirectorySeparatorChar);
-                if (isTuple)
+                switch (next)
                 {
-                    if (!isScanningTuples)
-                        throw new ExpectedTuplesBeforeLibrariesError().ToException();
-                    tupleStreams.Add((name, stream));
-                }
-                else
-                {
-                    if (isScanningTuples)
-                    {
-                        isScanningTuples = false;
-                        var tuple = CompileTuples(tupleStreams, assemblies, _referencesLazy.Value);
-                        dependencyAssemblies = new[] { tuple.asmData };
-                        yield return tuple;
-                    }
-                    var library = librarySet.GetLibrary(name)!;
-                    yield return CompileLibrary(stream, assemblies, librarySet, library, _referencesLazy.Value, dependencyAssemblies);
+                    case CSharpSourceCodeStep.OnStream onStream:
+                        // Write out C# File
+                        _cSharpCodeStreamPostProcessor?.ProcessStream(onStream.Name, onStream.Stream);
+                        items.Add((onStream.Name, onStream.Stream, onStream.IsTuple));
+                        break;
+
+                    case NET.CSharpSourceCodeStep.OnDone:
+                        // Compile Tuples
+                        var tupleStreams = 
+                            items
+                                .Where(item => item.isTuple)
+                                .Select(item => (item.libraryName, item.stream));
+                        var tupleAssembly = CompileTuples(tupleStreams, _referencesLazy.Value);
+                        results.Add("TupleTypes", tupleAssembly);
+                        AssemblyData[] additionalReferences = new[] { tupleAssembly };
+
+                        // Compile Libraries
+                        foreach (var (libraryName, stream, _) in items.Where(item => !item.isTuple))
+                        {
+                            var library = librarySet.GetLibrary(libraryName)!;
+                            CompileNode(stream, results, librarySet, library, _referencesLazy.Value, additionalReferences);
+                        }
+                        break;
                 }
             }
         }
 
-        private static (string name, AssemblyData asmData) CompileTuples(
-            IEnumerable<(string name, Stream stream)> tupleStreams,
-            Dictionary<string, AssemblyData> assemblies,
+        private static AssemblyData CompileTuples(
+            IEnumerable<(string libraryName, Stream stream)> tupleStreams,
             IEnumerable<Assembly> assemblyReferences)
         {
             var metadataReferences = new List<MetadataReference>();
@@ -114,7 +126,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }
-            var compilation = CSharpCompilation.Create("Tuples")
+            var compilation = CSharpCompilation.Create($"Tuples")
                 .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
                     optimizationLevel: OptimizationLevel.Release))
                 .WithReferences(metadataReferences);
@@ -127,8 +139,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                 sourceCodeStream.Seek(0, SeekOrigin.Begin);
                 var reader = new StreamReader(sourceCodeStream);
                 var sourceCode = reader.ReadToEnd().Trim();
-                sources.Add(kvp.name.Substring("Tuples\\".Length), sourceCode);
+                sources.Add(kvp.libraryName.Substring("Tuples\\".Length), sourceCode);
                 var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
+
                 compilation = compilation.AddSyntaxTrees(tree);
             }
             var codeStream = new MemoryStream();
@@ -163,17 +176,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             var bytes = codeStream.ToArray();
             var asmData = new AssemblyData(bytes, sources);
-            assemblies.Add("TupleTypes", asmData);
-            return ("TupleTypes", asmData);
+            return asmData;
         }
 
-        private static (string name, AssemblyData asmData) CompileLibrary(
+        private static void CompileNode(
             Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
             LibrarySet librarySet,
-            Library library,
+            Elm.Library library,
             IEnumerable<Assembly> assemblyReferences,
-            IEnumerable<AssemblyData> dependencyAssemblies)
+            IEnumerable<AssemblyData>? dependencyAssemblies)
         {
             sourceCodeStream.Flush();
             sourceCodeStream.Seek(0, SeekOrigin.Begin);
@@ -247,7 +259,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             var bytes = codeStream.ToArray();
             var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.NameAndVersion()!, sourceCode } });
             assemblies.Add(library.NameAndVersion()!, asmData);
-            return (library.NameAndVersion()!, asmData);
         }
 
 
@@ -284,11 +295,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.dll")));
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.Annotations.dll")));
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.TypeConverter.dll")));
-        }
-    }
 
-    internal readonly record struct ExpectedTuplesBeforeLibrariesError()  : ICqlError
-    {
-        public string GetMessage() => "Expected all tuple types before library types";
+
+        }
     }
 }

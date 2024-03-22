@@ -20,7 +20,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Packaging;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -30,21 +29,17 @@ namespace Hl7.Cql.CodeGeneration.NET
     internal class CSharpLibrarySetToStreamsWriter
     {
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
-        private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
         /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
-        /// <param name="cSharpCodeStreamPostProcessor">CSharp source code writer</param>
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
-            TypeResolver typeResolver,
-            CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor)
+            TypeResolver typeResolver)
         {
             _logger = logger;
-            _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -130,13 +125,13 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// Writes C# source code from inputs.
         /// </summary>
         /// <param name="definitions">The lambda expressions to write.</param>
-        /// <param name="tupleTypes">Tuple types generated during lambda creation.</param>
         /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
+        /// <param name="tupleTypes">Tuple types generated during lambda creation.</param>
         /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
-        public IEnumerable<(string name, Stream stream)> Write(
+        public void ProcessDefinitions(
             DefinitionDictionary<LambdaExpression> definitions,
-            IReadOnlyCollection<Type> tupleTypes,
             LibrarySet librarySet,
+            IReadOnlyCollection<Type> tupleTypes,
             CSharpSourceCodeWriterCallbacks? callbacks = default)
         {
             List<Stream> streamsToDispose = new();
@@ -146,16 +141,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                 foreach (var tuple in WriteTupleTypes(tupleTypes, callbacks))
                 {
                     streamsToDispose.Add(tuple.stream);
-                    _cSharpCodeStreamPostProcessor?.ProcessStream(tuple.name, tuple.stream);
-                    yield return tuple;
+                    callbacks.Step(tuple.name, tuple.stream, isTuple: true);
                 }
 
                 foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks))
                 {
                     streamsToDispose.Add(tuple.stream);
-                    _cSharpCodeStreamPostProcessor?.ProcessStream(tuple.name, tuple.stream);
-                    yield return tuple;
+                    callbacks.Step(tuple.name, tuple.stream, isTuple: false);
                 }
+
+                callbacks.Done();
             }
             finally
             {
