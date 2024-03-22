@@ -1,30 +1,33 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics;
+using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
+[DebuggerDisplay("{DebuggerView}")]
 internal class LibrarySetExpressionBuilderContext : IBuilderContext
 {
     private readonly LibrarySet _librarySet;
-    private readonly DefinitionDictionary<LambdaExpression> _definitions;
+    private readonly BuilderContextInfo _contextInfo;
+    private readonly DefinitionDictionary<LambdaExpression> _allDefinitions;
 
     public LibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {
         _librarySet = librarySet;
-        _definitions = definitions;
-        OuterContext = null;
-        ContextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
+        _allDefinitions = definitions;
+        _contextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
-    public IBuilderContext? OuterContext { get; }
+    IBuilderContext? IBuilderContext.OuterContext => null;
 
-    public BuilderContextInfo ContextInfo { get; }
+    BuilderContextInfo IBuilderContext.ContextInfo => _contextInfo;
 
     public LibrarySet LibrarySet => _librarySet;
 
     public void MergeDefinitions(DefinitionDictionary<LambdaExpression> definitions) => 
-        _definitions.Merge(definitions);
-        
+        _allDefinitions.Merge(definitions);
+
+    public string DebuggerView => this.GetDebuggerView();
 }

@@ -37,6 +37,11 @@ internal static class Traversal
         return roots;
     }
 
+    public static IEnumerable<(T From, T To)> GetEdges<T>(
+        this IEnumerable<T> allItems,
+        Func<T, IEnumerable<T>> getNextItems) =>
+        allItems.SelectMany(getNextItems, (f, t) => (f, t));
+
     public static IEnumerable<T> TopologicalSort<T>(
         this IEnumerable<T> allItems,
         Func<T, IEnumerable<T>> getNextItems)

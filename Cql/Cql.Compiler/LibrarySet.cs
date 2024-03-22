@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Infrastructure.Diagramming;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;
 using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
@@ -17,7 +18,8 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Contains a set of libraries ordered topologically.
 /// </summary>
-public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<string, Library>
+[DebuggerDisplay("LibrarySet (Nodes:{_libraryInfosByKey.Count}, Edges:{GetEdgesCount()})")]
+public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<string, Library>
 {
     /// <summary>
     /// The name of this library set. An example could be the directory name containing the libraries.
@@ -26,13 +28,11 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
 
     private readonly Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
     
-    private (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted) _calculatedState;
+    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) _calculatedState;
+    
     private readonly LibraryByNameAndVersionHashSet _librariesNotCalculatedYet;
 
-    private bool ShouldRecalculateState() => _librariesNotCalculatedYet.Any();
-
-
-    private static readonly (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted)
+    private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
         EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
 
     /// <summary>
@@ -45,48 +45,48 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
         _librariesNotCalculatedYet = new();
         _calculatedState = EmptyCached;
         _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)>();
+        AsReadOnlyDictionary = new ReadOnlyDictionaryAdapter(this);
     }
 
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     private bool TryGetLibraryInfoByKey(
-        string? key,
+        string? nameAndVersion,
         bool throwError,
         out (Library library, LibraryByNameAndVersionHashSet dependencies) info)
     {
-        if (ShouldRecalculateState())
-            RecalculateState();
+        RecalculateStateIfNecessary();
 
         info = default;
-        if (key is not (null or ""))
+        if (nameAndVersion is not (null or ""))
         {
-            if (_libraryInfosByKey.TryGetValue(key, out info))
+            if (_libraryInfosByKey.TryGetValue(nameAndVersion, out info))
                 return true;
         }
 
-        if (throwError) throw new KeyNotFoundError(key ?? "(null)", "Library").ToException();
+        if (throwError) throw new KeyNotFoundError(nameAndVersion ?? "(null)", "Library").ToException();
         return false;
     }
 
     /// <summary>
     /// Gets the library with the specified key.
     /// </summary>
-    /// <param name="key">The key of the library to retrieve.</param>
+    /// <param name="nameAndVersion">The key of the library to retrieve.</param>
     /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
     /// <returns>The library with the specified key, or <c>null</c> if the library is not found.</returns>
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    public Library? GetLibrary(string key, bool throwError = true) =>
-        TryGetLibraryInfoByKey(key, throwError, out var info) ? info.library : null;
+    public Library? GetLibrary(string nameAndVersion, bool throwError = true) =>
+        TryGetLibraryInfoByKey(nameAndVersion, throwError, out var info) ? info.library : null;
 
 
     /// <summary>
     /// Gets the dependencies of the library with the specified key.
     /// </summary>
-    /// <param name="key">The key of the library to retrieve the dependencies for.</param>
+    /// <param name="nameAndVersion">The key of the library to retrieve the dependencies for.</param>
     /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
     /// <returns>The dependencies of the library with the specified key, or an empty list if the library is not found.</returns>
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    public IReadOnlySet<Library> GetLibraryDependencies(string key, bool throwError = true) =>
-        TryGetLibraryInfoByKey(key, throwError, out var info) ? info.dependencies : EmptySet<Library>.Instance;
+    public IReadOnlySet<Library> GetLibraryDependencies(string? nameAndVersion, bool throwError = true) =>
+        TryGetLibraryInfoByKey(nameAndVersion, throwError, out var info) ? info.dependencies : EmptySet<Library>.Instance;
 
     /// <summary>
     /// Loads the libraries from the specified collection of files.
@@ -132,16 +132,17 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
         return libraries;
     }
 
-    private (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted) GetCalculatedState()
+    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) GetCalculatedState()
     {
-        if (ShouldRecalculateState()) 
-            RecalculateState();
-
+        RecalculateStateIfNecessary();
         return _calculatedState;
     }
 
-    private void RecalculateState()
+    private void RecalculateStateIfNecessary()
     {
+        if (_librariesNotCalculatedYet.Count == 0)
+            return ;
+
         foreach (var library in _librariesNotCalculatedYet)
         {
             var dependencies = _libraryInfosByKey[library.NameAndVersion()!].dependencies;
@@ -179,44 +180,15 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
         _calculatedState = (rootLibraries, topologicallySortedLibraries);
     }
 
-    IEnumerator<KeyValuePair<string, Library>> IEnumerable<KeyValuePair<string, Library>>.GetEnumerator() =>
-        GetCalculatedState().TopologicallySorted.Select(lib => KeyValuePair.Create(lib.NameAndVersion()!, lib)).GetEnumerator();
-
     /// <inheritdoc/>
     public IEnumerator<Library> GetEnumerator() => 
-        GetCalculatedState().TopologicallySorted.GetEnumerator();
+        GetCalculatedState().TopologicallySortedLibraries.GetEnumerator();
 
     /// <inheritdoc/>
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     
     /// <inheritdoc/>
     public int Count => _libraryInfosByKey.Count;
-
-    /// <inheritdoc/>
-    bool IReadOnlyDictionary<string, Library>.ContainsKey(string key) =>
-        _libraryInfosByKey.ContainsKey(key);
-
-    /// <inheritdoc/>
-    bool IReadOnlyDictionary<string, Library>.TryGetValue(string key, [NotNullWhen(true)] out Library? value)
-    {
-        if (_libraryInfosByKey.TryGetValue(key, out var t))
-        {
-            value = t.library;
-            return true;
-        }
-
-        value = default;
-        return false;
-    }
-
-    /// <inheritdoc/>
-    Library IReadOnlyDictionary<string, Library>.this[string key] => _libraryInfosByKey[key].library;
-    
-    /// <inheritdoc/>
-    IEnumerable<string> IReadOnlyDictionary<string, Library>.Keys => _libraryInfosByKey.Keys;
-    
-    /// <inheritdoc/>
-    IEnumerable<Library> IReadOnlyDictionary<string, Library>.Values => _libraryInfosByKey.Values.Select(v => v.library).ToArray();
 
     /// <summary>
     /// Loads the specified library and its dependencies from the specified directory.
@@ -266,5 +238,69 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
         _librariesNotCalculatedYet.AddRange(libraries);
 
         return libraries;
+    }
+
+    private int GetEdgesCount() =>
+        this
+            .GetEdges(lib => GetLibraryDependencies(lib.NameAndVersion(false)))
+            .Count();
+
+    internal string MermaidDiagram => this.BuildMermaidFlowChart(
+        getNextItems: lib => GetLibraryDependencies(lib.NameAndVersion(false)),
+        formatItem: lib => lib.NameAndVersion(false) ?? "???");
+
+    /// <summary>
+    /// Returns this LibrarySet as a <see cref="T:IReadOnlyDictionary{string,Library}"/>
+    /// which is also topologically sorted.
+    /// </summary>
+    /// <remarks>
+    /// Keep internal for now, but could be made public if needed.
+    /// </remarks>>
+    internal IReadOnlyDictionary<string, Library> AsReadOnlyDictionary { get; }
+
+    private readonly record struct ReadOnlyDictionaryAdapter(LibrarySet LibrarySet) : IReadOnlyDictionary<string, Library>
+    {
+        /// <inheritdoc/>
+        public int Count => LibrarySet.Count;
+
+        /// <inheritdoc/>
+        public bool ContainsKey(string key) => 
+            LibrarySet._libraryInfosByKey.ContainsKey(key);
+
+        /// <inheritdoc/>
+        public bool TryGetValue(string key, [NotNullWhen(true)] out Library? value)
+        {
+            if (LibrarySet._libraryInfosByKey.TryGetValue(key, out var tuple))
+            {
+                value = tuple.library;
+                return true;
+            }
+
+            value = null;
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public Library this[string key] => 
+            LibrarySet._libraryInfosByKey[key].library;
+
+        /// <inheritdoc/>
+        public IEnumerable<Library> Values => 
+            LibrarySet.GetCalculatedState().TopologicallySortedLibraries;
+
+        /// <inheritdoc/>
+        public IEnumerable<string> Keys => 
+            LibrarySet.GetCalculatedState().TopologicallySortedLibraries.Select(lib => lib.NameAndVersion(true)!);
+
+        /// <inheritdoc/>
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc/>
+        public IEnumerator<KeyValuePair<string, Library>> GetEnumerator() =>
+            LibrarySet
+                .GetCalculatedState()
+                .TopologicallySortedLibraries
+                .Select(lib => KeyValuePair.Create(lib.NameAndVersion(true)!, lib))
+                .GetEnumerator();
     }
 }

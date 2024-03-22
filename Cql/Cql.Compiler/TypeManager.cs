@@ -95,7 +95,7 @@ namespace Hl7.Cql.Compiler
                 case ExpressionRef expressionRef:
                 {
                     var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
-                    if (!ctx.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                    if (!ctx.LibraryContext.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
                     var returnType = definition!.ReturnType;
@@ -106,12 +106,12 @@ namespace Hl7.Cql.Compiler
                 case ExpressionDef { expression: not null } def:
                 {
                     ctx = ctx.Deeper(def.expression);
-                    var type = TypeFor(def.expression, ctx, false);
+                    var type = TypeFor(def.expression, ctx, throwIfNotFound: false);
                     if (type == null)
                     {
                         if (def.expression is SingletonFrom singleton)
                         {
-                            type = TypeFor(singleton, ctx, false);
+                            type = TypeFor(singleton, ctx, throwIfNotFound: false);
                             if (type == null)
                             {
                                 if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)

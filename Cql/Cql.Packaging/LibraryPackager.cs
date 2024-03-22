@@ -359,7 +359,7 @@ internal class LibraryPackager
     {
         LibrarySet ls = new(elmDir.FullName);
         ls.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
-        return ls;
+        return ls.AsReadOnlyDictionary;
     }
 
     [UsedImplicitly]

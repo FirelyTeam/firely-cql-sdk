@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Fhir;
+﻿using System;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -6,7 +7,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

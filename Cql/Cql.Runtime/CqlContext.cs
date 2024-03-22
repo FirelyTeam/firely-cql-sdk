@@ -44,7 +44,8 @@ namespace Hl7.Cql.Runtime
         /// <param name="operators">The <see cref="ICqlOperators"/> implementation to use.</param>
         /// <param name="parameters">The input parameters, or <see langword="null"/>. </param>
         /// <param name="delegates">The delegates, or <see langword="null"/>.  If <see langword="null"/>, runtime errors will occur when CQL expressions attempt to reference other definitions.</param>
-        protected internal CqlContext(ICqlOperators operators,
+        protected internal CqlContext(
+            ICqlOperators operators,
             IDictionary<string, object>? parameters = null,
             DefinitionDictionary<Delegate>? delegates = null)
         {
