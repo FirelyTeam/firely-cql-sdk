@@ -6,12 +6,10 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
-using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
@@ -98,9 +96,8 @@ internal static class DependencyInjection
 
     public static void TryAddBuilders(this IServiceCollection services)
     {
-        services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
-        services.TryAddSingleton<LibraryPackager>();
+        services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton<ExpressionBuilder>();
         services.TryAddSingleton<LibraryExpressionBuilder>();
         services.TryAddSingleton<LibrarySetExpressionBuilder>();

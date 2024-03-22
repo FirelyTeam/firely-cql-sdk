@@ -14,7 +14,7 @@ internal class PackagerCliProgram
     public PackagerCliProgram(
         ILogger<PackagerCliProgram> logger,
         IOptions<PackagerOptions> packageArgsOptions,
-        OptionsConsoleDumper optionsConsoleDumper, 
+        OptionsConsoleDumper optionsConsoleDumper,
         ResourcePackager resourcePackager)
     {
         _logger = logger;
@@ -41,7 +41,7 @@ internal class PackagerCliProgram
     {
         _optionsConsoleDumper.DumpToConsole();
         var opt = _packagerOptions;
-        _resourcePackager.Package(opt.ElmDirectory, opt.CqlDirectory);
+        _resourcePackager.PackageResources(opt.ElmDirectory, opt.CqlDirectory, opt.CanonicalRootUrl?.ToString());
         return 0;
     }
 }

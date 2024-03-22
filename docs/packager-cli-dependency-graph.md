@@ -50,10 +50,10 @@ classDiagram
 
     TypeResolver ..> TypeManager : injected
 
-    AssemblyCompiler ..> LibraryPackager : injected
-    TypeResolver ..> LibraryPackager : injected
-    LibrarySetExpressionBuilder ..> LibraryPackager : injected
-    FhirResourcePostProcessor ..> LibraryPackager : injected\n(optional) 
+    AssemblyCompiler ..> ResourcePackager : injected
+    TypeResolver ..> ResourcePackager : injected
+    LibrarySetExpressionBuilder ..> ResourcePackager : injected
+    FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
@@ -62,12 +62,6 @@ classDiagram
     OperatorBinding ..> LibraryExpressionBuilder : injected
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
-
-    LibraryPackager ..> ResourcePackager : injected
-
-    %% Rest
-    ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
-
 ```
 
 ## ExpressionBuilders and Contexts
