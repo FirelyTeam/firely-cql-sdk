@@ -36,13 +36,11 @@ internal partial class ExpressionBuilder
 
         var source = TranslateExpression(querySource.expression, ctx);
 
-        var isSingle = false;
         // promote single objects into enumerables so where works
         if (!IsOrImplementsIEnumerableOfT(source.Type))
         {
             var arrayInit = Expression.NewArrayInit(source.Type, source);
             source = arrayInit;
-            isSingle = true;
         }
         var @return = source;
 
@@ -204,7 +202,8 @@ internal partial class ExpressionBuilder
             ctx = ctx.Pop();
         }
 
-        if (isSingle)
+        // Auto-demotion
+        if (query.resultTypeSpecifier is not elm.ListTypeSpecifier)
         {
             var callSingle = ctx.OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
             @return = callSingle;
