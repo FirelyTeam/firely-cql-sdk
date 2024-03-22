@@ -212,7 +212,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine($"namespace {Namespace}");
                     writer.WriteLine("{");
                     writer.WriteLine();
-                    writer.WithIndent(() =>
+                    writer.Indent(() =>
                     {
                         WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, writer);
                     });
@@ -251,12 +251,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             else
                 writer.WriteLine($"public class {className}");
             writer.WriteLine("{");
-            writer.WriteLine();
-            writer.WithIndent(() =>
+            writer.Indent(() =>
             {
                 // Class
                 writer.WriteLine();
-
                 writer.WriteLine($"{AccessModifierString(_contextAccessModifier)} CqlContext context;");
                 writer.WriteLine();
                 WriteCachedValues(definitions, libraryName, writer);
@@ -265,7 +263,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine($"public {className}(CqlContext context)");
                 writer.WriteLine("{");
                 {
-                    writer.WithIndent(() =>
+                    writer.Indent(() =>
                     {
                         writer.WriteLine("this.context = context ?? throw new ArgumentNullException(\"context\");");
                         writer.WriteLine();
@@ -377,7 +375,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine();
                 writer.WriteLine($"namespace {tupleType.Namespace}");
                 writer.WriteLine("{");
-                writer.WithIndent(() =>
+                writer.Indent(() =>
                 {
                     WriteTupleType(writer, tupleType);
                 });
@@ -465,7 +463,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var privateMethodName = PrivateMethodNameFor(methodName!);
 
                 var func = expressionConverter.ConvertTopLevelFunctionDefinition(0, overload, privateMethodName, "private");
-                writer.Write(func);
+                writer.WriteLine(func);
                 writer.WriteLine();
                 writer.WriteLine($"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, tags);
@@ -535,8 +533,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine($"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
             writer.WriteLine($"public class {tupleType.Name}: {ExpressionConverter.PrettyTypeName(tupleType.BaseType!)}");
             writer.WriteLine("{");
-
-            writer.WithIndent(() =>
+            writer.Indent(() =>
             {
                 foreach (var property in tupleType.GetProperties())
                 {

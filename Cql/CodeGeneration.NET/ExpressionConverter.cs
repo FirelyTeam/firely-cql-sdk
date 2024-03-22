@@ -464,7 +464,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var funcSb = new StringBuilder();
 
-            funcSb.Append(indent, specifiers + " ");
+            funcSb.Append(specifiers + " "); 
             funcSb.Append(PrettyTypeName(function.ReturnType) + " ");
             funcSb.Append(name);
 

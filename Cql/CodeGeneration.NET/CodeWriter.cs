@@ -1,120 +1,146 @@
 ﻿using System;
-using System.CodeDom.Compiler;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-internal class CodeWriter : IndentedTextWriter
+internal abstract class CodeWriter : TextWriter
 {
-    private static readonly FieldInfo __tabsPendingField = typeof(IndentedTextWriter).GetField("_tabsPending", BindingFlags.NonPublic | BindingFlags.Instance)!;
-    private readonly IUtility _util;
+    public const string DefaultTabString = "    ";
 
-    protected CodeWriter(TextWriter writer, string tabString = DefaultTabString) : base(writer, tabString)
+    private readonly IBaseWriterHelper _helper;
+    private readonly string _indent;
+    private ImmutableList<string> _currentIndents;
+    private ImmutableList<string> _nextIndents;
+    private bool _isAfterNewLine;
+    private char _lastChar;
+    private char _secondLastChar;
+    protected readonly TextWriter _baseWriter;
+
+    public override Encoding Encoding => _baseWriter.Encoding;
+
+
+    protected CodeWriter(TextWriter baseWriter, string tabString = DefaultTabString)
     {
-        _util = Wrap(writer);
+        _baseWriter = baseWriter;
+        _isAfterNewLine = false;
+        _indent = tabString;
+        _currentIndents = _nextIndents = ImmutableList<string>.Empty;
+        _helper = CreateBaseWriterHelper() ?? throw new NotSupportedException("BaseWriter not supported.");
     }
 
-    private static IUtility Wrap(TextWriter writer) =>
-        writer switch
-        {
-            StreamWriter { BaseStream: { CanSeek: true, CanWrite: true } s } => new StreamUtility(s),
-            StringWriter s => new StringBuilderUtility(s.GetStringBuilder()),
-            _ => throw new NotSupportedException("Writer must either be a StreamWriter with a seekable and writable BaseStream, or a StringWriter."),
-        };
+    protected abstract IBaseWriterHelper? CreateBaseWriterHelper();
 
-    public int Position => _util.GetPosition(this);
-
-    public void TruncateToLength(int length) => _util.TruncateToLength(this, length);
-
-    public void WithIndent(Action action)
+    public void Indent(string indent, Action action)
     {
-        Indent++;
+        _nextIndents = _nextIndents.Add(indent);
+        if (_isAfterNewLine)
+            _currentIndents = _nextIndents;
         try
         {
             action();
         }
         finally
         {
-            Indent--;
+            _nextIndents = _nextIndents.RemoveAt(_nextIndents.Count - 1);
+            if (_isAfterNewLine)
+                _currentIndents = _nextIndents;
         }
     }
 
-    public string DebuggerView =>
-        _util.WriteToString(this);
+    public void Indent(Action action) =>
+        Indent(_indent, action);
 
-    public string DebuggerViewLast20Lines =>
-        string.Join(Environment.NewLine,
-            DebuggerView.Split(new []{Environment.NewLine}, StringSplitOptions.None).TakeLast(20)
-        );
+    public override string ToString() => _helper.WriteToString(this);
 
-    public override string ToString() => _util.WriteToString(this);
-
-    protected override void OutputTabs()
+    private void DumpIndents()
     {
-        if (Indent > 0 && _util.GetPosition(this) == 0)
+        foreach (var indent in _currentIndents)
         {
-            __tabsPendingField.SetValue(this, true);
+            _baseWriter.Write(indent);
         }
-        base.OutputTabs();
+        _currentIndents = _nextIndents;
     }
 
-    private interface IUtility
+    public override void Write(char value)
     {
-        int GetPosition(CodeWriter owner);
-        void TruncateToLength(CodeWriter owner, int length);
+        if (_isAfterNewLine)
+        {
+            bool nextCharIsNewLine = IsANewLineChar(value);
+
+            if (!nextCharIsNewLine)
+            {
+                DumpIndents();
+            }
+        }
+
+        _baseWriter.Write(value);
+
+        _secondLastChar = _lastChar;
+        _lastChar = value;
+        _isAfterNewLine = IsNewLine(_secondLastChar, _lastChar);
+    }
+
+    private bool IsNewLine(char c0, char c1) =>
+        NewLine.Length switch
+        {
+            1 => NewLine[0] == c1,
+            2 => NewLine[0] == c0 && NewLine[1] == c1,
+            _ => false,
+        };
+
+    private bool IsANewLineChar(char value) =>
+        NewLine.Length switch
+        {
+            1 => NewLine[0] == value,
+            2 => NewLine[0] == value || NewLine[1] == value,
+            _ => false,
+        };
+
+    public override void Flush()
+    {
+        _baseWriter.Flush();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _baseWriter.Dispose();
+        }
+        base.Dispose(disposing);
+    }
+
+    protected interface IBaseWriterHelper
+    {
         string WriteToString(CodeWriter owner);
     }
+}
 
-    private readonly record struct StreamUtility(Stream BaseStream) : IUtility
+internal class StreamCodeWriter : CodeWriter
+{
+    public StreamCodeWriter(Stream stream, Encoding? encoding = null, int bufferSize = 1024, bool leaveOpen = false, string tabString = DefaultTabString)
+        : base(new StreamWriter(stream, encoding ?? Encoding.UTF8, bufferSize, leaveOpen), tabString)
     {
-        public int GetPosition(CodeWriter owner)
-        {
-            owner.Flush();
-            return (int)BaseStream.Position;
-        }
+    }
 
-        public void TruncateToLength(CodeWriter owner, int length)
-        {
-            owner.Flush();
-            BaseStream.SetLength(length);
-        }
+    protected override IBaseWriterHelper? CreateBaseWriterHelper() =>
+        _baseWriter is StreamWriter { BaseStream: { CanSeek: true, CanWrite: true } s }
+            ? new StreamBaseWriterHelper(s)
+            : null;
 
+    private readonly record struct StreamBaseWriterHelper(Stream BaseStream) : IBaseWriterHelper
+    {
         public string WriteToString(CodeWriter owner)
         {
-            owner.Flush();
-            if (GetPosition(owner) == 0) 
+            if (BaseStream.Position == 0)
                 return "";
 
             BaseStream.Seek(0, SeekOrigin.Begin);
             var text = new StreamReader(BaseStream).ReadToEnd();
             return text;
-        }
-    }
-
-    private readonly record struct StringBuilderUtility(StringBuilder BaseStringBuilder) : IUtility
-    {
-        public int GetPosition(CodeWriter owner)
-        {
-            owner.Flush();
-            return BaseStringBuilder.Length;
-        }
-
-        public void TruncateToLength(CodeWriter owner, int length)
-        {
-            owner.Flush();
-            BaseStringBuilder.Remove(length, BaseStringBuilder.Length - length);
-        }
-
-        public string WriteToString(CodeWriter owner)
-        {
-            owner.Flush();
-            if (GetPosition(owner) == 0) 
-                return "";
-
-            return BaseStringBuilder.ToString();
         }
     }
 }
@@ -124,12 +150,15 @@ internal class StringBuilderCodeWriter : CodeWriter
     public StringBuilderCodeWriter(string tabString = DefaultTabString) : base(new StringWriter(), tabString)
     {
     }
-}
 
-internal class StreamCodeWriter : CodeWriter
-{
-    public StreamCodeWriter(Stream stream, Encoding? encoding = null, int bufferSize = 1024, bool leaveOpen = false, string tabString = DefaultTabString)
-        : base(new StreamWriter(stream, encoding ?? Encoding.UTF8, bufferSize, leaveOpen), tabString)
+    protected override IBaseWriterHelper? CreateBaseWriterHelper() =>
+        _baseWriter is StringWriter sw
+            ? new StringBuilderBaseWriterHelper(sw.GetStringBuilder())
+            : null;
+
+
+    private readonly record struct StringBuilderBaseWriterHelper(StringBuilder BaseStringBuilder) : IBaseWriterHelper
     {
+        public string WriteToString(CodeWriter owner) => BaseStringBuilder.ToString();
     }
 }
