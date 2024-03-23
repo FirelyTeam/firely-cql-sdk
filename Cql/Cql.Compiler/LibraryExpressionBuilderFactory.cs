@@ -15,12 +15,12 @@ internal class LibraryExpressionBuilderFactory : ExpressionBuilderFactory
 
     public LibraryExpressionBuilderFactory(ILoggerFactory loggerFactory, int cacheSize = 0) : base(loggerFactory, cacheSize)
     {
-        _libraryExpressionsBuilder = Deferred(() => new LibraryExpressionBuilder(Logger<LibraryExpressionBuilder>(), ExpressionBuilder, CqlOperatorsBinding, TypeManager));
+        _libraryExpressionsBuilder = Deferred(() => new LibraryExpressionBuilder(loggerFactory, ExpressionBuilder, CqlOperatorsBinding, TypeManager));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
 
-        ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
+        //ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
     }
 
     public LibraryExpressionBuilder LibraryExpressionBuilder => _libraryExpressionsBuilder.Value;

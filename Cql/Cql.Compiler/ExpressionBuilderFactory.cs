@@ -25,9 +25,9 @@ internal class ExpressionBuilderFactory
         _typeConverter = Deferred(() => FhirTypeConverter.Create(ModelInspector, cacheSize));
         _cqlOperatorsBinding = Deferred(() => new CqlOperatorsBinding(FhirTypeResolver, TypeConverter));
         _typeManager = Deferred(() => new TypeManager(FhirTypeResolver));
-        _expressionBuilder = Deferred(() => new ExpressionBuilder(TypeManager, Logger<ExpressionBuilder>()));
+        _expressionBuilder = Deferred(() => new ExpressionBuilder(TypeManager, loggerFactory));
 
-        ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
+        //ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
     }
 

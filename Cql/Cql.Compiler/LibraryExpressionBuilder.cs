@@ -19,17 +19,19 @@ internal class LibraryExpressionBuilder
     public static readonly ParameterExpression ContextParameter = Expression.Parameter(typeof(CqlContext), "context");
 
     private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly ILoggerFactory _loggerFactory;
     private readonly ExpressionBuilder _expressionBuilder;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
 
     public LibraryExpressionBuilder(
-        ILogger<LibraryExpressionBuilder> logger,
+        ILoggerFactory loggerFactory,
         ExpressionBuilder expressionBuilder, 
         OperatorBinding operatorBinding,
         TypeManager typeManager)
     {
-        _logger = logger;
+        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
+        _loggerFactory = loggerFactory;
         _expressionBuilder = expressionBuilder;
         _operatorBinding = operatorBinding;
         _typeManager = typeManager;
@@ -39,7 +41,7 @@ internal class LibraryExpressionBuilder
         Library library,
         LibrarySetExpressionBuilderContext? libsCtx,
         DefinitionDictionary<LambdaExpression> definitions) =>
-        new(library, _expressionBuilder.Settings, _operatorBinding, definitions, libsCtx);
+        new(library, _expressionBuilder.Settings, _operatorBinding, definitions, _typeManager, _loggerFactory, libsCtx);
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
@@ -283,7 +285,7 @@ internal class LibraryExpressionBuilder
         }
 
         //ctx = ctx.Deeper(expressionDef);
-        var bodyExpression = _expressionBuilder.TranslateExpression(expressionDef.expression, ctx);
+        var bodyExpression = ctx.TranslateExpression(expressionDef.expression);
         var lambda = Expression.Lambda(bodyExpression, parameters);
         if (function?.operand != null &&
             ctx.LibraryContext.Definitions.ContainsKey(ctx.LibraryContext.LibraryKey, expressionDef.name, functionParameterTypes))
@@ -336,7 +338,7 @@ internal class LibraryExpressionBuilder
 
         Expression? defaultValue = null;
         if (parameter.@default != null)
-            defaultValue = Expression.TypeAs(_expressionBuilder.TranslateExpression(parameter.@default, ctx), typeof(object));
+            defaultValue = Expression.TypeAs(ctx.TranslateExpression(parameter.@default), typeof(object));
         else defaultValue = Expression.Constant(null, typeof(object));
 
         var resolveParam = Expression.Call(
@@ -373,7 +375,7 @@ internal class LibraryExpressionBuilder
     {
         var parameters = signature
             .Select((type, index) =>
-                Expression.Parameter(type, ExpressionBuilder.TypeNameToIdentifier(type, ctx) + index))
+                Expression.Parameter(type, ExpressionBuilderContext.TypeNameToIdentifier(type, ctx) + index))
             .ToArray();
         var ctor = ConstructorInfos.NotImplementedException;
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));

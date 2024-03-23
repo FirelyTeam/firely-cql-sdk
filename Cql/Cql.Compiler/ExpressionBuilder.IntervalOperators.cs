@@ -15,11 +15,12 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    internal partial class ExpressionBuilderContext
     {
-        private Expression Collapse(elm.Collapse e, ExpressionBuilderContext ctx)
+        private Expression Collapse(elm.Collapse e)
         {
-            var operand = TranslateExpression(e.operand![0]!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var operand = ctx.TranslateExpression(e.operand![0]!);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
                 var elementType = _typeManager.Resolver.GetListElementType(operand.Type, @throw: true)!;
@@ -36,10 +37,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression Contains(elm.Contains e, ExpressionBuilderContext ctx)
+        private Expression Contains(elm.Contains e)
         {
-            var left = TranslateExpression(e!.operand![0]!, ctx);
-            var right = TranslateExpression(e.operand[1]!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e!.operand![0]!);
+            var right = ctx.TranslateExpression(e.operand[1]!);
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
@@ -48,7 +50,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (elementType.IsAssignableFrom(right.Type))
                     {
-                        right = ChangeType(right, elementType, ctx);
+                        right = ctx.ChangeType(right, elementType);
                     }
                     else throw ctx.NewExpressionBuildingException($"Cannot convert Contains target {TypeManager.PrettyTypeName(right.Type)} to {TypeManager.PrettyTypeName(elementType)}");
                 }
@@ -63,13 +65,14 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression End(elm.End e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.IntervalEnd, e, ctx);
+        private Expression End(elm.End e) =>
+            UnaryOperator(CqlOperator.IntervalEnd, e);
 
-        private Expression? Ends(elm.Ends e, ExpressionBuilderContext ctx)
+        private Expression? Ends(elm.Ends e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsInterval(left.Type, out var leftPointType))
             {
@@ -84,10 +87,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression Except(elm.Except e, ExpressionBuilderContext ctx)
+        protected Expression Except(elm.Except e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type) && IsOrImplementsIEnumerableOfT(right.Type))
             {
                 return ctx.OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter, left, right);
@@ -106,17 +110,19 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression? Expand(elm.Expand e, ExpressionBuilderContext ctx)
+        protected Expression? Expand(elm.Expand e)
         {
-            var source = TranslateExpression(e!.operand![0]!, ctx);
-            var quantity = TranslateExpression(e!.operand![1]!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var source = ctx.TranslateExpression(e!.operand![0]!);
+            var quantity = ctx.TranslateExpression(e!.operand![1]!);
             return ctx.OperatorBinding.Bind(CqlOperator.Expand, ctx.RuntimeContextParameter, source, quantity);
         }
 
-        protected Expression In(elm.In e, ExpressionBuilderContext ctx)
+        protected Expression In(elm.In e)
         {
-            var left = TranslateExpression(e.operand![0]!, ctx);
-            var right = TranslateExpression(e.operand![1]!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]!);
+            var right = ctx.TranslateExpression(e.operand![1]!);
             if (IsOrImplementsIEnumerableOfT(right.Type))
             {
                 return ctx.OperatorBinding.Bind(CqlOperator.InList, ctx.RuntimeContextParameter, left, right);
@@ -132,10 +138,11 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression? Includes(elm.Includes e, ExpressionBuilderContext ctx)
+        protected Expression? Includes(elm.Includes e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -169,11 +176,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression IncludedIn(elm.IncludedIn e, ExpressionBuilderContext ctx)
+        protected Expression IncludedIn(elm.IncludedIn e)
         {
-
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -207,10 +214,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression Intersect(elm.Intersect e, ExpressionBuilderContext ctx)
+        protected Expression Intersect(elm.Intersect e)
         {
-            var left = TranslateExpression(e.operand![0]!, ctx);
-            var right = TranslateExpression(e.operand![1]!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]!);
+            var right = ctx.TranslateExpression(e.operand![1]!);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 return ctx.OperatorBinding.Bind(CqlOperator.ListIntersect, ctx.RuntimeContextParameter, left, right);
@@ -226,10 +234,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression? Meets(elm.Meets e, ExpressionBuilderContext ctx)
+        protected Expression? Meets(elm.Meets e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -244,10 +253,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression? MeetsAfter(elm.MeetsAfter e, ExpressionBuilderContext ctx)
+        private Expression? MeetsAfter(elm.MeetsAfter e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -262,10 +272,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression? MeetsBefore(elm.MeetsBefore e, ExpressionBuilderContext ctx)
+        private Expression? MeetsBefore(elm.MeetsBefore e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -281,10 +292,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression Overlaps(elm.Overlaps e, ExpressionBuilderContext ctx)
+        protected Expression Overlaps(elm.Overlaps e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -299,10 +311,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression OverlapsBefore(elm.OverlapsBefore e, ExpressionBuilderContext ctx)
+        private Expression OverlapsBefore(elm.OverlapsBefore e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -317,10 +330,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression OverlapsAfter(elm.OverlapsAfter e, ExpressionBuilderContext ctx)
+        private Expression OverlapsAfter(elm.OverlapsAfter e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -338,13 +352,14 @@ namespace Hl7.Cql.Compiler
 
 
 
-        protected Expression? PointFrom(elm.PointFrom e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.PointFrom, e, ctx);
+        protected Expression? PointFrom(elm.PointFrom e) =>
+            UnaryOperator(CqlOperator.PointFrom, e);
 
-        protected Expression? ProperIncludes(elm.ProperIncludes e, ExpressionBuilderContext ctx)
+        protected Expression? ProperIncludes(elm.ProperIncludes e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
@@ -374,10 +389,11 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression? ProperIncludedIn(elm.ProperIncludedIn e, ExpressionBuilderContext ctx)
+        protected Expression? ProperIncludedIn(elm.ProperIncludedIn e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -405,10 +421,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression? ProperIn(elm.ProperIn e, ExpressionBuilderContext ctx)
+        private Expression? ProperIn(elm.ProperIn e)
         {
-            var element = TranslateExpression(e.operand![0], ctx);
-            var intervalOrList = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var element = ctx.TranslateExpression(e.operand![0]);
+            var intervalOrList = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(intervalOrList.Type, out var pointType))
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
@@ -421,10 +438,11 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression? ProperContains(elm.ProperContains e, ExpressionBuilderContext ctx)
+        protected Expression? ProperContains(elm.ProperContains e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -453,14 +471,15 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Start(elm.Start start, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.IntervalStart, start, ctx);
+        protected Expression Start(elm.Start start) =>
+            UnaryOperator(CqlOperator.IntervalStart, start);
 
 
-        protected Expression? Starts(elm.Starts e, ExpressionBuilderContext ctx)
+        protected Expression? Starts(elm.Starts e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
@@ -476,10 +495,11 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Union(elm.Union e, ExpressionBuilderContext ctx)
+        protected Expression Union(elm.Union e)
         {
-            var left = TranslateExpression(e.operand![0], ctx);
-            var right = TranslateExpression(e.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(e.operand![0]);
+            var right = ctx.TranslateExpression(e.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -503,8 +523,8 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(ctx);
         }
 
-        protected Expression? Width(elm.Width e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Width, e, ctx);
+        protected Expression? Width(elm.Width e) =>
+            UnaryOperator(CqlOperator.Width, e);
 
     }
 }

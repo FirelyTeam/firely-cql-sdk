@@ -5,15 +5,16 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    internal partial class ExpressionBuilderContext
     {
-        private Expression Message(elm.Message e, ExpressionBuilderContext ctx)
+        private Expression Message(elm.Message e)
         {
-            var source = TranslateExpression(e.source!, ctx);
-            var condition = TranslateExpression(e.condition!, ctx);
-            var code = TranslateExpression(e.code!, ctx);
-            var severity = TranslateExpression(e.severity!, ctx);
-            var message = TranslateExpression(e.message!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var source = ctx.TranslateExpression(e.source!);
+            var condition = ctx.TranslateExpression(e.condition!);
+            var code = ctx.TranslateExpression(e.code!);
+            var severity = ctx.TranslateExpression(e.severity!);
+            var message = ctx.TranslateExpression(e.message!);
             if (source is ConstantExpression constant && constant.Value == null)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.

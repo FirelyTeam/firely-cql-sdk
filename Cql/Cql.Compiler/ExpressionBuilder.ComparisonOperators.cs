@@ -14,26 +14,29 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    internal partial class ExpressionBuilderContext
     {
-        protected Expression Equal(elm.Equal eq, ExpressionBuilderContext ctx)
+        protected Expression Equal(elm.Equal eq)
         {
-            var lhsExpression = TranslateExpression(eq.operand![0], ctx);
-            var rhsExpression = TranslateExpression(eq.operand![1], ctx);
-            return Equal(lhsExpression, rhsExpression, ctx);
+            ExpressionBuilderContext ctx = this;
+            var lhsExpression = ctx.TranslateExpression(eq.operand![0]);
+            var rhsExpression = ctx.TranslateExpression(eq.operand![1]);
+            return Equal(lhsExpression, rhsExpression);
         }
 
-        protected Expression NotEqual(elm.NotEqual eq, ExpressionBuilderContext ctx)
+        protected Expression NotEqual(elm.NotEqual eq)
         {
-            var lhsExpression = TranslateExpression(eq.operand![0], ctx);
-            var rhsExpression = TranslateExpression(eq.operand![1], ctx);
-            var equal = Equal(lhsExpression, rhsExpression, ctx);
+            ExpressionBuilderContext ctx = this;
+            var lhsExpression = ctx.TranslateExpression(eq.operand![0]);
+            var rhsExpression = ctx.TranslateExpression(eq.operand![1]);
+            var equal = ctx.Equal(lhsExpression, rhsExpression);
             var not = ctx.OperatorBinding.Bind(CqlOperator.Not, ctx.RuntimeContextParameter, equal);
             return not;
         }
 
-        protected Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)
+        protected Expression Equal(Expression left, Expression right)
         {
+            ExpressionBuilderContext ctx = this;
             if (IsEnum(left.Type))
             {
                 if (IsEnum(right.Type))
@@ -85,10 +88,11 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Equivalent(elm.Equivalent eqv, ExpressionBuilderContext ctx)
+        protected Expression Equivalent(elm.Equivalent eqv)
         {
-            var left = TranslateExpression(eqv.operand![0], ctx);
-            var right = TranslateExpression(eqv.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var left = ctx.TranslateExpression(eqv.operand![0]);
+            var right = ctx.TranslateExpression(eqv.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -116,16 +120,16 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Greater(elm.Greater e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Greater, e, ctx);
+        protected Expression Greater(elm.Greater e) =>
+            BinaryOperator(CqlOperator.Greater, e);
 
-        protected Expression GreaterOrEqual(elm.GreaterOrEqual e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.GreaterOrEqual, e, ctx);
+        protected Expression GreaterOrEqual(elm.GreaterOrEqual e) =>
+            BinaryOperator(CqlOperator.GreaterOrEqual, e);
 
-        protected Expression Less(elm.Less e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Less, e, ctx);
-        protected Expression LessOrEqual(elm.LessOrEqual e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.LessOrEqual, e, ctx);
+        protected Expression Less(elm.Less e) =>
+            BinaryOperator(CqlOperator.Less, e);
+        protected Expression LessOrEqual(elm.LessOrEqual e) =>
+            BinaryOperator(CqlOperator.LessOrEqual, e);
 
 
 

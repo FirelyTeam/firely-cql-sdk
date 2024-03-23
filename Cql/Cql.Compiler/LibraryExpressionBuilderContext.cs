@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
@@ -16,19 +17,25 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 {
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
+    private readonly TypeManager _typeManager;
+    private readonly ILoggerFactory _loggerFactory;
     public LibrarySetExpressionBuilderContext? LibrarySetContext { get; }
 
     public LibraryExpressionBuilderContext(
         Library library,
         ExpressionBuilderSettings expressionBuilderSettings,
         OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> definitions,
+        DefinitionDictionary<LambdaExpression> definitions, 
+        TypeManager typeManager,
+        ILoggerFactory loggerFactory,
         LibrarySetExpressionBuilderContext? libsCtx = null)
     {
 
         _expressionBuilderSettings = expressionBuilderSettings;
         _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
         Definitions = definitions;
+        _typeManager = typeManager;
+        _loggerFactory = loggerFactory;
         Library = library;
         LibrarySetContext = libsCtx;
         _libraryNameAndVersionByAlias = new();
@@ -51,7 +58,9 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
             _expressionBuilderSettings,
             LibraryExpressionBuilder.ContextParameter,
             this,
-            element);
+            element,
+            _typeManager,
+            _loggerFactory.CreateLogger<ExpressionBuilderContext>());
 
     #region Definitions
 

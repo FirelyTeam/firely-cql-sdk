@@ -15,6 +15,7 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler
 {
@@ -26,12 +27,16 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     internal partial class ExpressionBuilderContext
     {
+        private readonly TypeManager _typeManager;
+
         internal ExpressionBuilderContext(
             OperatorBinding operatorBinding, 
             ExpressionBuilderSettings settings,
             ParameterExpression contextParameter,
             LibraryExpressionBuilderContext libContext,
-            elm.Element element)
+            elm.Element element, 
+            TypeManager typeManager,
+            ILogger<ExpressionBuilderContext> logger)
         {
             _element = element;
             _outerContext = null;
@@ -43,6 +48,8 @@ namespace Hl7.Cql.Compiler
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
             _scopes = new Dictionary<string, (Expression, elm.Element)>();
             LibraryContext = libContext;
+            _typeManager = typeManager;
+            _logger = logger;
             ExpressionMutators = new List<IExpressionMutator>();
             CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
@@ -60,6 +67,8 @@ namespace Hl7.Cql.Compiler
             Libraries = source.Libraries;
             _scopes = source._scopes;
             LibraryContext = source.LibraryContext;
+            _typeManager = source._typeManager;
+            _logger = source._logger;
             ExpressionMutators = source.ExpressionMutators;
             CustomImplementations = source.CustomImplementations;
         }

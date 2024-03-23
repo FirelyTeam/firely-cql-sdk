@@ -8,39 +8,39 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    internal partial class ExpressionBuilderContext
     {
 
-        protected Expression CalculateAge(elm.CalculateAge e, ExpressionBuilderContext ctx)
+        protected Expression CalculateAge(elm.CalculateAge e)
         {
+            ExpressionBuilderContext ctx = this;
             var units = Precision(e.precision, e.precisionSpecified);
-            var birthDate = TranslateExpression(e.operand!, ctx);
+            var birthDate = ctx.TranslateExpression(e.operand!);
             return ctx.OperatorBinding.Bind(CqlOperator.CalculateAge, ctx.RuntimeContextParameter, birthDate, units);
         }
 
-        protected Expression CalculateAgeAt(elm.CalculateAgeAt e, ExpressionBuilderContext ctx)
+        protected Expression CalculateAgeAt(elm.CalculateAgeAt e)
         {
+            ExpressionBuilderContext ctx = this;
             var units = Precision(e.precision, e.precisionSpecified);
-            var birthDate = TranslateExpression(e.operand![0], ctx);
-            var asOf = TranslateExpression(e.operand[1], ctx); // should be "as of" argument
+            var birthDate = ctx.TranslateExpression(e.operand![0]);
+            var asOf = ctx.TranslateExpression(e.operand[1]); // should be "as of" argument
             return ctx.OperatorBinding.Bind(CqlOperator.CalculateAgeAt, ctx.RuntimeContextParameter, birthDate, asOf, units);
         }
 
 
-        protected Expression InValueSet(elm.InValueSet e, ExpressionBuilderContext ctx)
+        protected Expression InValueSet(elm.InValueSet e)
         {
-            var code = TranslateExpression(e.code!, ctx);
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
+            ExpressionBuilderContext ctx = this;
+            var code = ctx.TranslateExpression(e.code!);
+            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
             var codeType = code.Type;
             if (codeType == _typeManager.Resolver.CodeType)
             {
@@ -57,13 +57,14 @@ namespace Hl7.Cql.Compiler
             else throw new NotImplementedException().WithContext(ctx);
         }
 
-        private Expression AnyInValueSet(elm.AnyInValueSet e, ExpressionBuilderContext ctx)
+        private Expression AnyInValueSet(elm.AnyInValueSet e)
         {
-            var codes = TranslateExpression(e.codes!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var codes = ctx.TranslateExpression(e.codes!);
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
                 throw ctx.NewExpressionBuildingException("Only List types are allowed for AnyInValueSet");
             var codeType = _typeManager.Resolver.GetListElementType(codes.Type, true)!;
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
+            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
             if (codeType == _typeManager.Resolver.CodeType)
             {
                 return ctx.OperatorBinding.Bind(CqlOperator.CodesInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
@@ -80,10 +81,11 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        public Expression ExpandValueSet(elm.ExpandValueSet e, ExpressionBuilderContext ctx)
+        public Expression ExpandValueSet(elm.ExpandValueSet e)
         {
-            var operand = TranslateExpression(e.operand!, ctx);
-            var call = CallCreateValueSetFacade(ctx, operand);
+            ExpressionBuilderContext ctx = this;
+            var operand = ctx.TranslateExpression(e.operand!);
+            var call = ctx.CallCreateValueSetFacade(operand);
             return call;
         }
     }

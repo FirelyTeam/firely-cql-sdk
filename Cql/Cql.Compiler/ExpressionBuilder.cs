@@ -34,26 +34,22 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal partial class ExpressionBuilder
     {
-        // Yeah, hardwired to FHIR 4.0.1 for now.
-        private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
-
-        private readonly ILogger<ExpressionBuilder> _logger;
-
         private readonly TypeManager _typeManager;
+        private readonly ILoggerFactory _loggerFactory;
 
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="typeManager">The <see cref="_typeManager"/> used to resolve and create types referenced.</param>
-        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued.</param>
+        /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used to log all messages issued.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         public ExpressionBuilder(
             TypeManager typeManager,
-            ILogger<ExpressionBuilder> logger)
+            ILoggerFactory loggerFactory)
         {
             _typeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _loggerFactory = loggerFactory;
             Settings = new ExpressionBuilderSettings();
         }
 
@@ -74,538 +70,546 @@ namespace Hl7.Cql.Compiler
         /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="lambdas">Existing lambdas, required if <paramref name="expression"/> contains any references to other ELM definitions</param>
         public LambdaExpression Lambda(
-            Elm.Library library,
+            Library library,
             Elm.Expression expression,
             OperatorBinding operatorBinding,
             DefinitionDictionary<LambdaExpression>? lambdas = null)
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(library, Settings, operatorBinding, lambdas);
+            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(library, Settings, operatorBinding, lambdas, _typeManager, _loggerFactory);
             var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression);
-            var translated = TranslateExpression(expression, ctx);
+            var translated = ctx.TranslateExpression(expression);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
         }
+    }
 
-        internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
+    partial class ExpressionBuilderContext
+    {
+        // Yeah, hardwired to FHIR 4.0.1 for now.
+        private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
+
+        private readonly ILogger<ExpressionBuilderContext> _logger = null!;
+
+        internal Expression TranslateExpression(Element op)
         {
-            ctx = ctx.Push(op);
+            ExpressionBuilderContext ctx = Push(op);
             Expression? expression;
             switch (op)
             {
                 case Abs abs:
-                    expression = Abs(abs, ctx);
+                    expression = ctx.Abs(abs);
                     break;
                 case Add add:
-                    expression = Add(add, ctx);
+                    expression = ctx.Add(add);
                     break;
                 case After after:
-                    expression = After(after, ctx);
+                    expression = ctx.After(after);
                     break;
                 case AliasRef ar:
-                    expression = AliasRef(ar, ctx);
+                    expression = ctx.AliasRef(ar);
                     break;
                 case AllTrue alt:
-                    expression = AllTrue(alt, ctx);
+                    expression = ctx.AllTrue(alt);
                     break;
                 case And and:
-                    expression = And(and, ctx);
+                    expression = ctx.And(and);
                     break;
                 case As @as:
-                    expression = As(@as, ctx);
+                    expression = ctx.As(@as);
                     break;
                 case AnyTrue ate:
-                    expression = AnyTrue(ate, ctx);
+                    expression = ctx.AnyTrue(ate);
                     break;
                 case AnyInValueSet avs:
-                    expression = AnyInValueSet(avs, ctx);
+                    expression = ctx.AnyInValueSet(avs);
                     break;
                 case Avg avg:
-                    expression = Avg(avg, ctx);
+                    expression = ctx.Avg(avg);
                     break;
                 case Before before:
-                    expression = Before(before, ctx);
+                    expression = ctx.Before(before);
                     break;
                 case CalculateAgeAt caa:
-                    expression = CalculateAgeAt(caa, ctx);
+                    expression = ctx.CalculateAgeAt(caa);
                     break;
                 case CalculateAge ca:
-                    expression = CalculateAge(ca, ctx);
+                    expression = ctx.CalculateAge(ca);
                     break;
                 case Case ce:
-                    expression = Case(ce, ctx);
+                    expression = ctx.Case(ce);
                     break;
                 case Ceiling ceil:
-                    expression = Ceiling(ceil, ctx);
+                    expression = ctx.Ceiling(ceil);
                     break;
                 case Coalesce cle:
-                    expression = Coalesce(cle, ctx);
+                    expression = ctx.Coalesce(cle);
                     break;
                 case CodeRef cre:
-                    expression = CodeRef(cre, ctx);
+                    expression = ctx.CodeRef(cre);
                     break;
                 case CodeSystemRef csr:
-                    expression = CodeSystemRef(csr, ctx);
+                    expression = ctx.CodeSystemRef(csr);
                     break;
                 case Collapse col:
-                    expression = Collapse(col, ctx);
+                    expression = ctx.Collapse(col);
                     break;
                 case Combine com:
-                    expression = Combine(com, ctx);
+                    expression = ctx.Combine(com);
                     break;
                 case Concatenate cctn:
-                    expression = Concatenate(cctn, ctx);
+                    expression = ctx.Concatenate(cctn);
                     break;
                 case ConceptRef cr:
-                    expression = ConceptRef(cr, ctx);
+                    expression = ctx.ConceptRef(cr);
                     break;
                 case Contains ct:
-                    expression = Contains(ct, ctx);
+                    expression = ctx.Contains(ct);
                     break;
                 case ConvertQuantity cqe:
-                    expression = ConvertQuantity(cqe, ctx);
+                    expression = ctx.ConvertQuantity(cqe);
                     break;
                 case ConvertsToBoolean ce:
-                    expression = ConvertsToBoolean(ce, ctx);
+                    expression = ctx.ConvertsToBoolean(ce);
                     break;
                 case ConvertsToDate ce:
-                    expression = ConvertsToDate(ce, ctx);
+                    expression = ctx.ConvertsToDate(ce);
                     break;
                 case ConvertsToDateTime ce:
-                    expression = ConvertsToDateTime(ce, ctx);
+                    expression = ctx.ConvertsToDateTime(ce);
                     break;
                 case ConvertsToDecimal ce:
-                    expression = ConvertsToDecimal(ce, ctx);
+                    expression = ctx.ConvertsToDecimal(ce);
                     break;
                 case ConvertsToLong ce:
-                    expression = ConvertsToLong(ce, ctx);
+                    expression = ctx.ConvertsToLong(ce);
                     break;
                 case ConvertsToInteger ce:
-                    expression = ConvertsToInteger(ce, ctx);
+                    expression = ctx.ConvertsToInteger(ce);
                     break;
                 case ConvertsToQuantity ce:
-                    expression = ConvertsToQuantity(ce, ctx);
+                    expression = ctx.ConvertsToQuantity(ce);
                     break;
                 case ConvertsToString ce:
-                    expression = ConvertsToString(ce, ctx);
+                    expression = ctx.ConvertsToString(ce);
                     break;
                 case ConvertsToTime ce:
-                    expression = ConvertsToTime(ce, ctx);
+                    expression = ctx.ConvertsToTime(ce);
                     break;
                 case Count ce:
-                    expression = Count(ce, ctx);
+                    expression = ctx.Count(ce);
                     break;
                 case DateFrom dfe:
-                    expression = DateFrom(dfe, ctx);
+                    expression = ctx.DateFrom(dfe);
                     break;
                 case elm.DateTime dt:
-                    expression = DateTime(dt, ctx);
+                    expression = ctx.DateTime(dt);
                     break;
                 case Date d:
-                    expression = Date(d, ctx);
+                    expression = ctx.Date(d);
                     break;
                 case DateTimeComponentFrom dtcf:
-                    expression = DateTimeComponentFrom(dtcf, ctx);
+                    expression = ctx.DateTimeComponentFrom(dtcf);
                     break;
                 case Descendents desc:
-                    expression = Descendents(desc, ctx);
+                    expression = ctx.Descendents(desc);
                     break;
                 case DifferenceBetween dbe:
-                    expression = DifferenceBetween(dbe, ctx);
+                    expression = ctx.DifferenceBetween(dbe);
                     break;
                 case Distinct distinct:
-                    expression = Distinct(distinct, ctx);
+                    expression = ctx.Distinct(distinct);
                     break;
                 case Divide divide:
-                    expression = Divide(divide, ctx);
+                    expression = ctx.Divide(divide);
                     break;
                 case DurationBetween dbe:
-                    expression = DurationBetween(dbe, ctx);
+                    expression = ctx.DurationBetween(dbe);
                     break;
                 case End e:
-                    expression = End(e, ctx);
+                    expression = ctx.End(e);
                     break;
                 case Ends e:
-                    expression = Ends(e, ctx);
+                    expression = ctx.Ends(e);
                     break;
                 case EndsWith e:
-                    expression = EndsWith(e, ctx);
+                    expression = ctx.EndsWith(e);
                     break;
                 case Equal eq:
-                    expression = Equal(eq, ctx);
+                    expression = ctx.Equal(eq);
                     break;
                 case Equivalent eqv:
-                    expression = Equivalent(eqv, ctx);
+                    expression = ctx.Equivalent(eqv);
                     break;
                 case Except ex:
-                    expression = Except(ex, ctx);
+                    expression = ctx.Except(ex);
                     break;
                 case Exists ex:
-                    expression = Exists(ex, ctx);
+                    expression = ctx.Exists(ex);
                     break;
                 case Exp exe:
-                    expression = Exp(exe, ctx);
+                    expression = ctx.Exp(exe);
                     break;
                 case Expand expand:
-                    expression = Expand(expand, ctx);
+                    expression = ctx.Expand(expand);
                     break;
                 case ExpandValueSet evs:
-                    expression = ExpandValueSet(evs, ctx);
+                    expression = ctx.ExpandValueSet(evs);
                     break;
                 case FunctionRef fre:
-                    expression = FunctionRef(fre, ctx);
+                    expression = ctx.FunctionRef(fre);
                     break;
                 case ExpressionRef ere:
-                    expression = ExpressionRef(ere, ctx);
+                    expression = ctx.ExpressionRef(ere);
                     break;
                 case First first:
-                    expression = First(first, ctx);
+                    expression = ctx.First(first);
                     break;
                 case Flatten fl:
-                    expression = Flatten(fl, ctx);
+                    expression = ctx.Flatten(fl);
                     break;
                 case Floor floor:
-                    expression = Floor(floor, ctx);
+                    expression = ctx.Floor(floor);
                     break;
                 case GeometricMean gme:
-                    expression = GeometricMean(gme, ctx);
+                    expression = ctx.GeometricMean(gme);
                     break;
                 case Greater gtr:
-                    expression = Greater(gtr, ctx);
+                    expression = ctx.Greater(gtr);
                     break;
                 case GreaterOrEqual gtre:
-                    expression = GreaterOrEqual(gtre, ctx);
+                    expression = ctx.GreaterOrEqual(gtre);
                     break;
                 case HighBoundary hb:
-                    expression = HighBoundary(hb, ctx);
+                    expression = ctx.HighBoundary(hb);
                     break;
                 case IdentifierRef ire:
-                    expression = IdentifierRef(ire, ctx);
+                    expression = ctx.IdentifierRef(ire);
                     break;
                 case If @if:
-                    expression = If(@if, ctx);
+                    expression = ctx.If(@if);
                     break;
                 case Implies implies:
-                    expression = Implies(implies, ctx);
+                    expression = ctx.Implies(implies);
                     break;
                 case Includes inc:
-                    expression = Includes(inc, ctx);
+                    expression = ctx.Includes(inc);
                     break;
                 case IncludedIn ii:
-                    expression = IncludedIn(ii, ctx);
+                    expression = ctx.IncludedIn(ii);
                     break;
                 case Indexer idx:
-                    expression = Indexer(idx, ctx);
+                    expression = ctx.Indexer(idx);
                     break;
                 case IndexOf io:
-                    expression = IndexOf(io, ctx);
+                    expression = ctx.IndexOf(io);
                     break;
                 case Instance ine:
-                    expression = Instance(ine, ctx);
+                    expression = ctx.Instance(ine);
                     break;
                 case Intersect ise:
-                    expression = Intersect(ise, ctx);
+                    expression = ctx.Intersect(ise);
                     break;
                 case Interval ie:
-                    expression = IntervalExpression(ie, ctx);
+                    expression = ctx.IntervalExpression(ie);
                     break;
                 case InValueSet inv:
-                    expression = InValueSet(inv, ctx);
+                    expression = ctx.InValueSet(inv);
                     break;
                 case In @in:
-                    expression = In(@in, ctx);
+                    expression = ctx.In(@in);
                     break;
                 case Is @is:
-                    expression = Is(@is, ctx);
+                    expression = ctx.Is(@is);
                     break;
-                case IsFalse @isn:
-                    expression = IsFalse(@isn, ctx);
+                case IsFalse isn:
+                    expression = ctx.IsFalse(isn);
                     break;
-                case IsNull @isn:
-                    expression = IsNull(@isn, ctx);
+                case IsNull isn:
+                    expression = ctx.IsNull(isn);
                     break;
-                case IsTrue @isn:
-                    expression = IsTrue(@isn, ctx);
+                case IsTrue isn:
+                    expression = ctx.IsTrue(isn);
                     break;
                 case Last last:
-                    expression = Last(last, ctx);
+                    expression = ctx.Last(last);
                     break;
                 case LastPositionOf lpo:
-                    expression = LastPositionOf(lpo, ctx);
+                    expression = ctx.LastPositionOf(lpo);
                     break;
                 case Length len:
-                    expression = Length(len, ctx);
+                    expression = ctx.Length(len);
                     break;
                 case Less less:
-                    expression = Less(less, ctx);
+                    expression = ctx.Less(less);
                     break;
                 case LessOrEqual lesse:
-                    expression = LessOrEqual(lesse, ctx);
+                    expression = ctx.LessOrEqual(lesse);
                     break;
                 case List list:
-                    expression = List(list, ctx);
+                    expression = ctx.List(list);
                     break;
                 case Literal lit:
-                    expression = Literal(lit, ctx);
+                    expression = ctx.Literal(lit);
                     break;
                 case Ln ln:
-                    expression = Ln(ln, ctx);
+                    expression = ctx.Ln(ln);
                     break;
                 case Log log:
-                    expression = Log(log, ctx);
+                    expression = ctx.Log(log);
                     break;
                 case LowBoundary lb:
-                    expression = LowBoundary(lb, ctx);
+                    expression = ctx.LowBoundary(lb);
                     break;
                 case Lower e:
-                    expression = Lower(e, ctx);
+                    expression = ctx.Lower(e);
                     break;
                 case Matches e:
-                    expression = Matches(e, ctx);
+                    expression = ctx.Matches(e);
                     break;
                 case Max max:
-                    expression = Max(max, ctx);
+                    expression = ctx.Max(max);
                     break;
                 case MaxValue max:
-                    expression = MaxValue(max, ctx);
+                    expression = ctx.MaxValue(max);
                     break;
                 case Median med:
-                    expression = Median(med, ctx);
+                    expression = ctx.Median(med);
                     break;
                 case Meets meets:
-                    expression = Meets(meets, ctx);
+                    expression = ctx.Meets(meets);
                     break;
                 case MeetsBefore meets:
-                    expression = MeetsBefore(meets, ctx);
+                    expression = ctx.MeetsBefore(meets);
                     break;
                 case MeetsAfter meets:
-                    expression = MeetsAfter(meets, ctx);
+                    expression = ctx.MeetsAfter(meets);
                     break;
                 case Message msg:
-                    expression = Message(msg, ctx);
+                    expression = ctx.Message(msg);
                     break;
                 case Min min:
-                    expression = Min(min, ctx);
+                    expression = ctx.Min(min);
                     break;
                 case MinValue min:
-                    expression = MinValue(min, ctx);
+                    expression = ctx.MinValue(min);
                     break;
                 case Mode mode:
-                    expression = Mode(mode, ctx);
+                    expression = ctx.Mode(mode);
                     break;
                 case Modulo mod:
-                    expression = Modulo(mod, ctx);
+                    expression = ctx.Modulo(mod);
                     break;
                 case Multiply mul:
-                    expression = Multiply(mul, ctx);
+                    expression = ctx.Multiply(mul);
                     break;
                 case Negate neg:
-                    expression = Negate(neg, ctx);
+                    expression = ctx.Negate(neg);
                     break;
                 case Not not:
-                    expression = Not(not, ctx);
+                    expression = ctx.Not(not);
                     break;
                 case NotEqual ne:
-                    expression = NotEqual(ne, ctx);
+                    expression = ctx.NotEqual(ne);
                     break;
                 case Now now:
-                    expression = Now(now, ctx);
+                    expression = ctx.Now(now);
                     break;
                 case Null @null:
-                    expression = Null(@null, ctx);
+                    expression = ctx.Null(@null);
                     break;
                 case OperandRef ore:
-                    expression = OperandRef(ore, ctx);
+                    expression = ctx.OperandRef(ore);
                     break;
                 case Or or:
-                    expression = Or(or, ctx);
+                    expression = ctx.Or(or);
                     break;
                 case Overlaps ole:
-                    expression = Overlaps(ole, ctx);
+                    expression = ctx.Overlaps(ole);
                     break;
                 case OverlapsAfter ola:
-                    expression = OverlapsAfter(ola, ctx);
+                    expression = ctx.OverlapsAfter(ola);
                     break;
                 case OverlapsBefore olb:
-                    expression = OverlapsBefore(olb, ctx);
+                    expression = ctx.OverlapsBefore(olb);
                     break;
                 case ParameterRef pre:
-                    expression = ParameterRef(pre, ctx);
+                    expression = ctx.ParameterRef(pre);
                     break;
                 case PointFrom pf:
-                    expression = PointFrom(pf, ctx);
+                    expression = ctx.PointFrom(pf);
                     break;
                 case PopulationStdDev pstd:
-                    expression = PopulationStdDev(pstd, ctx);
+                    expression = ctx.PopulationStdDev(pstd);
                     break;
                 case PopulationVariance pvar:
-                    expression = PopulationVariance(pvar, ctx);
+                    expression = ctx.PopulationVariance(pvar);
                     break;
                 case PositionOf po:
-                    expression = PositionOf(po, ctx);
+                    expression = ctx.PositionOf(po);
                     break;
                 case Power pow:
-                    expression = Power(pow, ctx);
+                    expression = ctx.Power(pow);
                     break;
                 case Precision pre:
-                    expression = Precision(pre, ctx);
+                    expression = ctx.Precision(pre);
                     break;
                 case Predecessor prd:
-                    expression = Predecessor(prd, ctx);
+                    expression = ctx.Predecessor(prd);
                     break;
                 case Product prod:
-                    expression = Product(prod, ctx);
+                    expression = ctx.Product(prod);
                     break;
                 case ProperContains pc:
-                    expression = ProperContains(pc, ctx);
+                    expression = ctx.ProperContains(pc);
                     break;
                 case ProperIn pi:
-                    expression = ProperIn(pi, ctx);
+                    expression = ctx.ProperIn(pi);
                     break;
                 case ProperIncludes pi:
-                    expression = ProperIncludes(pi, ctx);
+                    expression = ctx.ProperIncludes(pi);
                     break;
                 case ProperIncludedIn pie:
-                    expression = ProperIncludedIn(pie, ctx);
+                    expression = ctx.ProperIncludedIn(pie);
                     break;
                 case Property pe:
-                    expression = Property(pe, ctx);
+                    expression = ctx.Property(pe);
                     break;
                 case Quantity qua:
-                    expression = Quantity(qua, ctx);
+                    expression = ctx.Quantity(qua);
                     break;
                 case Query qe:
-                    expression = Query(qe, ctx);
+                    expression = ctx.Query(qe);
                     break;
                 case QueryLetRef qlre:
-                    expression = QueryLetRef(qlre, ctx);
+                    expression = ctx.QueryLetRef(qlre);
                     break;
                 case Ratio re:
-                    expression = Ratio(re, ctx);
+                    expression = ctx.Ratio(re);
                     break;
                 case ReplaceMatches e:
-                    expression = ReplaceMatches(e, ctx);
+                    expression = ctx.ReplaceMatches(e);
                     break;
                 case Retrieve re:
-                    expression = Retrieve(re, ctx);
+                    expression = ctx.Retrieve(re);
                     break;
                 case Round rnd:
-                    expression = Round(rnd, ctx);
+                    expression = ctx.Round(rnd);
                     break;
                 case SameAs sa:
-                    expression = SameAs(sa, ctx);
+                    expression = ctx.SameAs(sa);
                     break;
                 case SameOrAfter soa:
-                    expression = SameOrAfter(soa, ctx);
+                    expression = ctx.SameOrAfter(soa);
                     break;
                 case SameOrBefore sob:
-                    expression = SameOrBefore(sob, ctx);
+                    expression = ctx.SameOrBefore(sob);
                     break;
                 case SingletonFrom sf:
-                    expression = SingletonFrom(sf, ctx);
+                    expression = ctx.SingletonFrom(sf);
                     break;
                 case Slice slice:
-                    expression = Slice(slice, ctx);
+                    expression = ctx.Slice(slice);
                     break;
                 case Split split:
-                    expression = Split(split, ctx);
+                    expression = ctx.Split(split);
                     break;
                 case Substring e:
-                    expression = Substring(e, ctx);
+                    expression = ctx.Substring(e);
                     break;
                 case Subtract sub:
-                    expression = Subtract(sub, ctx);
+                    expression = ctx.Subtract(sub);
                     break;
                 case Successor suc:
-                    expression = Successor(suc, ctx);
+                    expression = ctx.Successor(suc);
                     break;
                 case Sum sum:
-                    expression = Sum(sum, ctx);
+                    expression = ctx.Sum(sum);
                     break;
                 case Starts starts:
-                    expression = Starts(starts, ctx);
+                    expression = ctx.Starts(starts);
                     break;
                 case Start start:
-                    expression = Start(start, ctx);
+                    expression = ctx.Start(start);
                     break;
                 case StartsWith e:
-                    expression = StartsWith(e, ctx);
+                    expression = ctx.StartsWith(e);
                     break;
                 case StdDev stddev:
-                    expression = StdDev(stddev, ctx);
+                    expression = ctx.StdDev(stddev);
                     break;
                 case Time time:
-                    expression = Time(time, ctx);
+                    expression = ctx.Time(time);
                     break;
                 case TimeOfDay tod:
-                    expression = TimeOfDay(tod, ctx);
+                    expression = ctx.TimeOfDay(tod);
                     break;
                 case TimezoneOffsetFrom tofe:
-                    expression = TimezoneOffsetFrom(tofe, ctx);
+                    expression = ctx.TimezoneOffsetFrom(tofe);
                     break;
                 case ToBoolean e:
-                    expression = ToBoolean(e, ctx);
+                    expression = ctx.ToBoolean(e);
                     break;
                 case ToConcept tc:
-                    expression = ToConcept(tc, ctx);
+                    expression = ctx.ToConcept(tc);
                     break;
                 case ToDateTime tdte:
-                    expression = ToDateTime(tdte, ctx);
+                    expression = ctx.ToDateTime(tdte);
                     break;
                 case ToDate tde:
-                    expression = ToDate(tde, ctx);
+                    expression = ctx.ToDate(tde);
                     break;
                 case Today today:
-                    expression = Today(today, ctx);
+                    expression = ctx.Today(today);
                     break;
                 case ToDecimal tde:
-                    expression = ToDecimal(tde, ctx);
+                    expression = ctx.ToDecimal(tde);
                     break;
                 case ToInteger tde:
-                    expression = ToInteger(tde, ctx);
+                    expression = ctx.ToInteger(tde);
                     break;
                 case ToList tle:
-                    expression = ToList(tle, ctx);
+                    expression = ctx.ToList(tle);
                     break;
                 case ToLong toLong:
-                    expression = ToLong(toLong, ctx);
+                    expression = ctx.ToLong(toLong);
                     break;
                 case ToQuantity tq:
-                    expression = ToQuantity(tq, ctx);
+                    expression = ctx.ToQuantity(tq);
                     break;
                 case ToString e:
-                    expression = ToString(e, ctx);
+                    expression = ctx.ToString(e);
                     break;
                 case ToTime e:
-                    expression = ToTime(e, ctx);
+                    expression = ctx.ToTime(e);
                     break;
                 case Truncate trunc:
-                    expression = Truncate(trunc, ctx);
+                    expression = ctx.Truncate(trunc);
                     break;
                 case TruncatedDivide div:
-                    expression = TruncatedDivide(div, ctx);
+                    expression = ctx.TruncatedDivide(div);
                     break;
                 case elm.Tuple tu:
-                    expression = Tuple(tu, ctx);
+                    expression = ctx.Tuple(tu);
                     break;
                 case Union ue:
-                    expression = Union(ue, ctx);
+                    expression = ctx.Union(ue);
                     break;
                 case ValueSetRef vsre:
-                    expression = ValueSetRef(vsre, ctx);
+                    expression = ctx.ValueSetRef(vsre);
                     break;
                 case Variance variance:
-                    expression = Variance(variance, ctx);
+                    expression = ctx.Variance(variance);
                     break;
                 case Upper e:
-                    expression = Upper(e, ctx);
+                    expression = ctx.Upper(e);
                     break;
                 case Width width:
-                    expression = Width(width, ctx);
+                    expression = ctx.Width(width);
                     break;
                 case Xor xor:
-                    expression = Xor(xor, ctx);
+                    expression = ctx.Xor(xor);
                     break;
                 default: throw ctx.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.");
             }
@@ -614,24 +618,26 @@ namespace Hl7.Cql.Compiler
             return expression!;
         }
 
-        protected Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be, ExpressionBuilderContext ctx)
+        protected Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be)
         {
-            var lhsExpression = TranslateExpression(be.operand![0], ctx);
-            var rhsExpression = TranslateExpression(be.operand![1], ctx);
+            ExpressionBuilderContext ctx = this;
+            var lhsExpression = ctx.TranslateExpression(be.operand![0]);
+            var rhsExpression = ctx.TranslateExpression(be.operand![1]);
             var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, lhsExpression, rhsExpression);
             return call;
         }
 
-        protected Expression UnaryOperator(CqlOperator @operator, elm.UnaryExpression unary, ExpressionBuilderContext ctx)
+        protected Expression UnaryOperator(CqlOperator @operator, elm.UnaryExpression unary)
         {
-            var operand = TranslateExpression(unary.operand!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var operand = ctx.TranslateExpression(unary.operand!);
             var resultType = unary.resultTypeSpecifier != null
                 ? _typeManager.TypeFor(unary.resultTypeSpecifier, ctx)
                 : null;
             var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
             if (resultType != null && resultType != call.Type)
             {
-                var typeAs = ChangeType(call, resultType, ctx);
+                var typeAs = ctx.ChangeType(call, resultType);
                 return typeAs;
             }
             else
@@ -640,10 +646,11 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression NaryOperator(CqlOperator @operator, elm.NaryExpression ne, ExpressionBuilderContext ctx)
+        protected Expression NaryOperator(CqlOperator @operator, NaryExpression ne)
         {
+            ExpressionBuilderContext ctx = this;
             var operators = ne.operand
-                .Select(op => TranslateExpression(op, ctx))
+                .Select(op => ctx.TranslateExpression(op))
                 .ToArray();
             var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operators);
             return call;
@@ -664,18 +671,20 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression AggregateOperator(CqlOperator @operator, AggregateExpression aggregate, ExpressionBuilderContext ctx)
+        protected Expression AggregateOperator(CqlOperator @operator, AggregateExpression aggregate)
         {
-            var operand = TranslateExpression(aggregate.source!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var operand = ctx.TranslateExpression(aggregate.source!);
             var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
             return call;
         }
 
-        protected Expression? IdentifierRef(IdentifierRef ire, ExpressionBuilderContext ctx)
+        protected Expression? IdentifierRef(IdentifierRef ire)
         {
+            ExpressionBuilderContext ctx = this;
             if (string.Equals("$this", ire.name) && ctx.ImpliedAlias != null)
             {
-                var scopeExpression = ctx.GetScopeExpression(ctx.ImpliedAlias);
+                var scopeExpression = ctx.GetScopeExpression(ctx.ImpliedAlias!);
                 return scopeExpression;
             }
             var pe = new Property
@@ -688,19 +697,20 @@ namespace Hl7.Cql.Compiler
                 scope = ctx.ImpliedAlias!,
             };
             ctx = ctx.Push(pe);
-            var prop = Property(pe, ctx);
+            var prop = ctx.Property(pe);
             return prop;
         }
 
 
         protected bool IsOrImplementsIEnumerableOfT(Type type) => _typeManager.Resolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
-        protected Expression ValueSetRef(ValueSetRef valueSetRef, ExpressionBuilderContext ctx)
+        protected Expression ValueSetRef(ValueSetRef valueSetRef)
         {
+            ExpressionBuilderContext ctx = this;
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw ctx.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
             var type = _typeManager.TypeFor(valueSetRef, ctx)!;
-            var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
+            var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet));
 
             if (IsOrImplementsIEnumerableOfT(type))
             {
@@ -710,27 +720,30 @@ namespace Hl7.Cql.Compiler
                     throw ctx.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");
                 }
 
-                var @new = CallCreateValueSetFacade(ctx, cqlValueSet);
+                var @new = ctx.CallCreateValueSetFacade(cqlValueSet);
                 return @new;
             }
             return cqlValueSet;
         }
 
-        protected Expression QueryLetRef(QueryLetRef qlre, ExpressionBuilderContext ctx)
+        protected Expression QueryLetRef(QueryLetRef qlre)
         {
+            ExpressionBuilderContext ctx = this;
             var name = qlre.name!;
             var expr = ctx.GetScopeExpression(name);
             return expr;
         }
 
-        protected Expression AliasRef(AliasRef ar, ExpressionBuilderContext ctx)
+        protected Expression AliasRef(AliasRef ar)
         {
+            ExpressionBuilderContext ctx = this;
             var expr = ctx.GetScopeExpression(ar.name!);
             return expr;
         }
 
-        protected Expression Tuple(elm.Tuple tuple, ExpressionBuilderContext ctx)
+        protected Expression Tuple(elm.Tuple tuple)
         {
+            ExpressionBuilderContext ctx = this;
             Type tupleType;
             if (tuple.resultTypeSpecifier is null)
             {
@@ -748,10 +761,10 @@ namespace Hl7.Cql.Compiler
                 var elementBindings = (tuple.element!)
                                .Select(element =>
                                {
-                                   var value = TranslateExpression(element.value!, ctx);
-                                   var memberInfo = GetProperty(tupleType, ExpressionBuilderContext.NormalizeIdentifier(element.name!)!) 
+                                   var value = ctx.TranslateExpression(element.value!);
+                                   var memberInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!)
                                                     ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
-                                   var binding = Binding(value, memberInfo, ctx);
+                                   var binding = Binding(value, memberInfo);
                                    return binding;
                                })
                                .ToArray();
@@ -761,16 +774,16 @@ namespace Hl7.Cql.Compiler
             else return @new;
         }
 
-        protected Expression List(List list, ExpressionBuilderContext ctx)
+        protected Expression List(List list)
         {
             if (list.resultTypeSpecifier == null)
-                throw ctx.NewExpressionBuildingException($"List is missing a result type specifier.");
+                throw this.NewExpressionBuildingException($"List is missing a result type specifier.");
             if (list.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
             {
 
-                var elementType = _typeManager.TypeFor(listTypeSpecifier.elementType, ctx);
+                var elementType = _typeManager.TypeFor(listTypeSpecifier.elementType, this);
                 var elements = list.element?
-                    .Select(ele => TranslateExpression(ele, ctx))
+                    .Select(ele => TranslateExpression(ele))
                     .ToArray() ?? new Expression[0];
                 if (!elementType.IsNullable() && elements.Any(exp => exp.Type.IsNullable()))
                 {
@@ -800,38 +813,41 @@ namespace Hl7.Cql.Compiler
                 return asEnumerable;
             }
             else
-                throw ctx.NewExpressionBuildingException($"List is the wrong type");
+                throw this.NewExpressionBuildingException($"List is the wrong type");
 
         }
 
-        protected Expression CodeRef(CodeRef codeRef, ExpressionBuilderContext ctx)
+        protected Expression CodeRef(CodeRef codeRef)
         {
             if (string.IsNullOrWhiteSpace(codeRef.name))
-                throw ctx.NewExpressionBuildingException("The code ref has no name.");
+                throw this.NewExpressionBuildingException("The code ref has no name.");
 
-            var type = _typeManager.Resolver.ResolveType(codeRef.resultTypeName.Name) ?? throw ctx.NewExpressionBuildingException($"Unable to resolve type {codeRef.resultTypeName}");
-            return InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.libraryName, type!, ctx);
+            var type = _typeManager.Resolver.ResolveType(codeRef.resultTypeName.Name) ?? throw this.NewExpressionBuildingException($"Unable to resolve type {codeRef.resultTypeName}");
+            return InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.libraryName, type!);
         }
 
-        private Expression CodeSystemRef(CodeSystemRef codeSystemRef, ExpressionBuilderContext ctx)
+        private Expression CodeSystemRef(CodeSystemRef codeSystemRef)
         {
+            ExpressionBuilderContext ctx = this;
             if (string.IsNullOrWhiteSpace(codeSystemRef.name))
                 throw ctx.NewExpressionBuildingException("The code system ref has no name.");
-            
+
             var type = _typeManager.Resolver.CodeType.MakeArrayType();
-            return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type!, ctx);
+            return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type!);
         }
-        protected Expression ConceptRef(ConceptRef conceptRef, ExpressionBuilderContext ctx)
+        protected Expression ConceptRef(ConceptRef conceptRef)
         {
+            ExpressionBuilderContext ctx = this;
             if (string.IsNullOrWhiteSpace(conceptRef.name))
                 throw ctx.NewExpressionBuildingException("The concept ref has no name.");
-            
+
             var type = _typeManager.Resolver.CodeType.MakeArrayType();
-            return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type!, ctx);
+            return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type!);
         }
 
-        protected Expression Instance(Instance ine, ExpressionBuilderContext ctx)
+        protected Expression Instance(Instance ine)
         {
+            ExpressionBuilderContext ctx = this;
             var instanceType = _typeManager.Resolver.ResolveType(ine.classType.Name!)
                 ?? throw ctx.NewExpressionBuildingException($"Could not resolve type for '{ine.classType.Name!}'");
 
@@ -842,7 +858,7 @@ namespace Hl7.Cql.Compiler
                 // FHIR.RemittanceOutcome maps to an enum type
                 if (ine.element?.Length == 1 && string.Equals(ine.element![0].name, "value", StringComparison.OrdinalIgnoreCase))
                 {
-                    var enumValueValue = TranslateExpression(ine.element[0]!.value!, ctx);
+                    var enumValueValue = TranslateExpression(ine.element[0]!.value!);
                     if (enumValueValue.Type == instanceType)
                         return enumValueValue;
                     else if (enumValueValue.Type == typeof(string))
@@ -876,7 +892,7 @@ namespace Hl7.Cql.Compiler
             //}
 
             var tuples = ine.element!
-                .Select(el => (el.name!, TranslateExpression(el.value!, ctx)))
+                .Select(el => (el.name!, TranslateExpression(el.value!)))
                 .ToArray();
 
             // Handle immutable primitives without public setters on their properties.
@@ -915,7 +931,7 @@ namespace Hl7.Cql.Compiler
                 var ctor = ConstructorInfos.CqlQuantity;
 
                 if (unitExpr is not null)
-                    unitExpr = ChangeType(unitExpr, typeof(string), ctx);
+                    unitExpr = ChangeType(unitExpr, typeof(string));
 
                 var @new = Expression.New(ctor,
                     valueExpr ?? Expression.Default(typeof(decimal?)),
@@ -978,7 +994,7 @@ namespace Hl7.Cql.Compiler
                     var element = tuple.Item1;
                     var expression = tuple.Item2;
                     var memberInfo = GetProperty(instanceType!, element) ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType!)}");
-                    var binding = Binding(expression, memberInfo, ctx);
+                    var binding = Binding(expression, memberInfo);
                     elementBindings[i] = binding;
                 }
                 var ctor = instanceType!.GetConstructor(Type.EmptyTypes)!;
@@ -988,8 +1004,9 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected MemberAssignment Binding(Expression value, MemberInfo memberInfo, ExpressionBuilderContext ctx)
+        protected MemberAssignment Binding(Expression value, MemberInfo memberInfo)
         {
+            ExpressionBuilderContext ctx = this;
             if (memberInfo is PropertyInfo property)
             {
                 if (value.Type == property.PropertyType)
@@ -1020,8 +1037,8 @@ namespace Hl7.Cql.Compiler
                         }
                         else
                         {
-                            var selectParameter = Expression.Parameter(valueEnumerableElement, TypeNameToIdentifier(value.Type, ctx));
-                            var body = ChangeType(selectParameter, memberArrayElement, ctx);
+                            var selectParameter = Expression.Parameter(valueEnumerableElement, TypeNameToIdentifier(value.Type, this));
+                            var body = ChangeType(selectParameter, memberArrayElement);
                             var selectLambda = Expression.Lambda(body, selectParameter);
                             var callSelectMethod = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, value, selectLambda);
                             var toArrayMethod = typeof(Enumerable)
@@ -1042,7 +1059,7 @@ namespace Hl7.Cql.Compiler
                         return Expression.Bind(memberInfo, newList);
                     }
                 }
-                var convert = ChangeType(value, property.PropertyType, ctx);
+                var convert = ChangeType(value, property.PropertyType);
                 return Expression.Bind(memberInfo, convert);
             }
             else throw new NotImplementedException().WithContext(ctx);
@@ -1065,14 +1082,15 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
-        protected Expression If(If @if, ExpressionBuilderContext ctx)
+        protected Expression If(If @if)
         {
-            var rc = TranslateExpression(@if.condition!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var rc = TranslateExpression(@if.condition!);
             var condition = Expression.Coalesce(rc, Expression.Constant(false, typeof(bool)));
-            var then = TranslateExpression(@if.then!, ctx);
+            var then = TranslateExpression(@if.then!);
             if (@if.@else != null)
             {
-                var @else = TranslateExpression(@if.@else!, ctx);
+                var @else = TranslateExpression(@if.@else!);
                 if (then.Type.IsValueType)
                 {
                     @else = HandleNullable(@else, then.Type);
@@ -1090,18 +1108,20 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Null(Null @null, ExpressionBuilderContext ctx)
+        protected Expression Null(Null @null)
         {
+            ExpressionBuilderContext ctx = this;
             var nullType = _typeManager.TypeFor(@null, ctx) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
 
-        protected Expression Literal(Literal lit, ExpressionBuilderContext ctx)
+        protected Expression Literal(Literal lit)
         {
+            ExpressionBuilderContext ctx = this;
             string message = $"Cannot resolve type for {lit.valueType}";
             var type = _typeManager.Resolver.ResolveType(lit.valueType.Name!) ?? throw ctx.NewExpressionBuildingException(message);
-            var (value, convertedType) = ConvertLiteral(lit, type, ctx);
+            var (value, convertedType) = ConvertLiteral(lit, type);
 
             if (type.IsNullable())
             {
@@ -1112,10 +1132,10 @@ namespace Hl7.Cql.Compiler
             return Expression.Constant(value, convertedType);
         }
 
-        private static (object?, Type) ConvertLiteral(Literal lit, Type? type, ExpressionBuilderContext ctx)
+        public (object?, Type) ConvertLiteral(Literal lit, Type? type)
         {
             if (type == null)
-                throw new NotImplementedException().WithContext(ctx);
+                throw new NotImplementedException().WithContext(this);
             else if (type.IsNullable())
             {
                 if (string.IsNullOrWhiteSpace(lit.value))
@@ -1151,32 +1171,34 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression OperandRef(OperandRef ore, ExpressionBuilderContext ctx)
+        protected Expression OperandRef(OperandRef ore)
         {
+            ExpressionBuilderContext ctx = this;
             if (ctx.Operands.TryGetValue(ore.name!, out var expression))
                 return expression;
             else throw ctx.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
         }
 
-        protected Expression Case(Case ce, ExpressionBuilderContext ctx)
+        protected Expression Case(Case ce)
         {
+            ExpressionBuilderContext ctx = this;
 
             //[{ when1, then1 }, { when2, then2}, { when3, then3 }]
             // when1 ? then 1 : (when2 ? then 2 : (when3 ? then 3 : else }
             if (ce.caseItem?.Length > 0 && ce.@else != null)
             {
-                var elseThen = TranslateExpression(ce.@else!, ctx);
+                var elseThen = TranslateExpression(ce.@else!);
                 var cases = new List<CaseWhenThenExpression.WhenThenCase>();
 
                 if (ce.comparand != null)
                 {
-                    var comparand = TranslateExpression(ce.comparand, ctx);
+                    var comparand = TranslateExpression(ce.comparand);
 
                     foreach (var caseItem in ce.caseItem)
                     {
-                        var caseWhen = TranslateExpression(caseItem.when!, ctx);
-                        var caseWhenEquality = Expression.Coalesce(Equal(comparand, caseWhen, ctx), Expression.Constant(false));
-                        var caseThen = TranslateExpression(caseItem.then!, ctx);
+                        var caseWhen = TranslateExpression(caseItem.when!);
+                        var caseWhenEquality = Expression.Coalesce(Equal(comparand, caseWhen), Expression.Constant(false));
+                        var caseThen = TranslateExpression(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
                             caseThen = Expression.Convert(caseThen, elseThen.Type);
@@ -1188,8 +1210,8 @@ namespace Hl7.Cql.Compiler
                 {
                     foreach (var caseItem in ce.caseItem)
                     {
-                        var caseWhen = TranslateExpression(caseItem.when!, ctx);
-                        var caseThen = TranslateExpression(caseItem.then!, ctx);
+                        var caseWhen = TranslateExpression(caseItem.when!);
+                        var caseThen = TranslateExpression(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
                             caseThen = Expression.Convert(caseThen, elseThen.Type);
@@ -1220,8 +1242,9 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
-        private Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
+        private Expression Retrieve(Retrieve retrieve)
         {
+            ExpressionBuilderContext ctx = this;
             Type? sourceElementType;
             string? cqlRetrieveResultType;
 
@@ -1268,7 +1291,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (string.IsNullOrWhiteSpace(valueSetRef.name))
                         throw ctx.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-                    var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef!.libraryName, typeof(CqlValueSet), ctx);
+                    var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef!.libraryName, typeof(CqlValueSet));
                     var call = ctx.OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
                     return call;
@@ -1277,7 +1300,7 @@ namespace Hl7.Cql.Compiler
                 {
                     // In this construct, instead of querying a value set, we're testing resources
                     // against a list of codes, e.g., as defined by the code from or codesystem construct
-                    var codes = TranslateExpression(retrieve.codes, ctx);
+                    var codes = TranslateExpression(retrieve.codes);
                     var call = ctx.OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
                     return call;
@@ -1291,22 +1314,22 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Property(Property op, ExpressionBuilderContext ctx)
+        protected Expression Property(Property op)
         {
             if (string.IsNullOrWhiteSpace(op.path))
-                throw ctx.NewExpressionBuildingException("path cannot be null or empty");
+                throw this.NewExpressionBuildingException("path cannot be null or empty");
             //var path = ExpressionBuilderContext.NormalizeIdentifier(op.path);
             var path = op.path;
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
-                var scopeExpression = ctx.GetScopeExpression(op.scope!);
-                var expectedType = _typeManager.TypeFor(op, ctx) ?? typeof(object);
+                var scopeExpression = this.GetScopeExpression(op.scope!);
+                var expectedType = _typeManager.TypeFor(op, this) ?? typeof(object);
                 var pathMemberInfo = _typeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
                     _typeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
                 {
-                    _logger.LogWarning(ctx.FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
+                    _logger.LogWarning(this.FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
+                    var call = this.OperatorBinding.Bind(CqlOperator.LateBoundProperty, this.RuntimeContextParameter,
                         scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
                 }
@@ -1324,16 +1347,16 @@ namespace Hl7.Cql.Compiler
                 //    return call;
                 //}
                 string message = $"TypeManager failed to resolve type.";
-                var resultType = _typeManager.TypeFor(op, ctx) ?? throw ctx.NewExpressionBuildingException(message);
+                var resultType = _typeManager.TypeFor(op, this) ?? throw this.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
-                    propogate = ChangeType(propogate, resultType, ctx);
+                    propogate = ChangeType(propogate, resultType);
                 }
                 return propogate;
             }
             else if (op.source != null)
             {
-                var source = TranslateExpression(op.source, ctx);
+                var source = TranslateExpression(op.source);
                 var parts = path.Split('.');
                 if (parts.Length > 1)
                 {
@@ -1352,16 +1375,17 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = _typeManager.TypeFor(op, ctx)!;
-                    var result = PropertyHelper(source, path, expectedType, ctx);
+                    var expectedType = _typeManager.TypeFor(op, this)!;
+                    var result = PropertyHelper(source, path, expectedType);
                     return result;
                 }
             }
-            else throw new NotImplementedException().WithContext(ctx);
+            else throw new NotImplementedException().WithContext(this);
         }
 
-        protected Expression PropertyHelper(Expression source, string? path, Type expectedType, ExpressionBuilderContext ctx)
+        protected Expression PropertyHelper(Expression source, string? path, Type expectedType)
         {
+            ExpressionBuilderContext ctx = this;
             Expression? result = null;
             if (_typeManager.Resolver.ShouldUseSourceObject(source.Type, path!))
             {
@@ -1390,10 +1414,10 @@ namespace Hl7.Cql.Compiler
                     {
                         if (expectedType != ifIs.Type)
                         {
-                            ifIs = ChangeType(ifIs, expectedType!, ctx);
+                            ifIs = ChangeType(ifIs, expectedType!);
                         }
                         if (expectedType != elseNull.Type)
-                            elseNull = ChangeType(elseNull, expectedType, ctx);
+                            elseNull = ChangeType(elseNull, expectedType);
                     }
                     var condition = Expression.Condition(isCheck, ifIs, elseNull);
                     return condition;
@@ -1401,7 +1425,7 @@ namespace Hl7.Cql.Compiler
 
                 result = PropagateNull(source, pathMemberInfo);
             }
-                
+
             if (expectedType != null && expectedType != result.Type)
             {
                 if (expectedType == typeof(string))
@@ -1409,20 +1433,21 @@ namespace Hl7.Cql.Compiler
                     if (IsEnum(result.Type))
                         return result;
                 }
-                result = ChangeType(result, expectedType, ctx);
+                result = ChangeType(result, expectedType);
             }
             return result;
         }
 
-        protected Expression FunctionRef(FunctionRef op, ExpressionBuilderContext ctx)
+        protected Expression FunctionRef(FunctionRef op)
         {
+            ExpressionBuilderContext ctx = this;
             var operands = op.operand
-                .Select(operand => TranslateExpression(operand, ctx))
+                .Select(operand => TranslateExpression(operand))
                 .ToArray();
             var operandTypes = operands
                 .Select(op => op.Type);
 
-            var functionType = GetFunctionRefReturnType(op, operandTypes, ctx);
+            var functionType = GetFunctionRefReturnType(op, operandTypes);
 
             var funcTypeParameters =
                 new[] { typeof(CqlContext) }
@@ -1456,7 +1481,7 @@ namespace Hl7.Cql.Compiler
             // to the actual function are.
             operands = operands.Prepend(ctx.RuntimeContextParameter).ToArray();
 
-            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands, ctx);
+            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands);
             return invoke;
         }
 
@@ -1518,27 +1543,28 @@ namespace Hl7.Cql.Compiler
             return funcType;
         }
 
-        protected Type GetFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes, ExpressionBuilderContext ctx)
+        protected Type GetFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes)
         {
+            ExpressionBuilderContext ctx = this;
             // Try determining the return type from the resultTypeSpecifier or resultTypeName
             if (op.resultTypeSpecifier != null)
             {
                 string message = $"Cannot resolve result type {op.resultTypeSpecifier}.";
                 return _typeManager.TypeFor(op.resultTypeSpecifier, ctx) ?? throw ctx.NewExpressionBuildingException(message);
             }
-            
+
             if (!string.IsNullOrWhiteSpace(op.resultTypeName?.Name))
             {
                 return _typeManager.Resolver.ResolveType(op.resultTypeName.Name!)
                     ?? throw ctx.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
             }
-            
+
             // If that failed, try some hard-coded special cases from the FHIRHelpers
             if (op.libraryName?.StartsWith("FHIRHelpers") == true)
             {
-                if (DetermineFhirHelpersReturnType(op) is {} resolved) return resolved;
+                if (DetermineFhirHelpersReturnType(op) is { } resolved) return resolved;
             }
-            
+
             // We failed....
             throw ctx.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
         }
@@ -1569,7 +1595,7 @@ namespace Hl7.Cql.Compiler
                 {
                     var operand = op.operand![0];
                     var typeName = operand.resultTypeName?.Name;
-                            
+
                     if (operand is As @as)
                     {
                         typeName = @as.asType?.Name;
@@ -1578,7 +1604,7 @@ namespace Hl7.Cql.Compiler
                         if (typeName == null)
                             typeName = @as.resultTypeName.Name;
                     }
-                            
+
                     if (typeName == "{http://hl7.org/fhir}Period")
                     {
                         var pointType = _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
@@ -1601,12 +1627,13 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression ExpressionRef(ExpressionRef expressionRef, ExpressionBuilderContext ctx)
+        protected Expression ExpressionRef(ExpressionRef expressionRef)
         {
+            ExpressionBuilderContext ctx = this;
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
             {
-                expressionType = _typeManager.TypeFor(expressionRef.resultTypeSpecifier, ctx);
+                expressionType = _typeManager.TypeFor(expressionRef.resultTypeSpecifier, this);
             }
             else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
             {
@@ -1626,15 +1653,16 @@ namespace Hl7.Cql.Compiler
             if (expressionType == null)
                 throw ctx.NewExpressionBuildingException($"Unable to determine type for {expressionRef.localId}");
 
-            var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType, ctx);
+            var invoke = ctx.InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType);
             return invoke;
         }
 
-        protected Expression ParameterRef(ParameterRef op, ExpressionBuilderContext ctx)
+        protected Expression ParameterRef(ParameterRef op)
         {
+            ExpressionBuilderContext ctx = this;
             if (ctx.LibraryContext.Definitions.TryGetValue(ctx.LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
             {
-                var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda, ctx);
+                var invoke = ctx.InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda);
                 return invoke;
             }
 
@@ -1665,44 +1693,43 @@ namespace Hl7.Cql.Compiler
         /// <param name="libraryAlias">If this is an external call, the local alias defined in the using statement</param>
         /// <param name="definitionType">The Func or Action type of this definition</param>
         /// <param name="arguments">The function arguments</param>
-        /// <param name="ctx">The builder context.</param>
         /// <returns></returns>
         protected Expression InvokeDefinedFunctionThroughRuntimeContext(string name, string libraryAlias,
             Type definitionType,
-            Expression[] arguments,
-            ExpressionBuilderContext ctx)
+            Expression[] arguments)
         {
+            ExpressionBuilderContext ctx = this;
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError:false)
+            string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
                 ?? throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
         }
 
         protected Expression InvokeDefinitionThroughRuntimeContext(
-            string name, 
+            string name,
             string? libraryAlias,
-            LambdaExpression definition,
-            ExpressionBuilderContext ctx)
+            LambdaExpression definition)
         {
+            ExpressionBuilderContext ctx = this;
             var type = definition.Type;
             if (type.IsGenericType)
             {
                 var typeArgs = type.GetGenericArguments();
                 var returnType = typeArgs[^1];
-                var invoke = InvokeDefinitionThroughRuntimeContext(name, libraryAlias, returnType, ctx);
+                var invoke = ctx.InvokeDefinitionThroughRuntimeContext(name, libraryAlias, returnType);
                 return invoke;
             }
             else throw ctx.NewExpressionBuildingException("LambdaExpressions should be a variant of Func<>");
         }
 
         protected Expression InvokeDefinitionThroughRuntimeContext(
-            string name, 
+            string name,
             string? libraryAlias,
-            Type definitionReturnType,
-            ExpressionBuilderContext ctx)
+            Type definitionReturnType)
         {
+            ExpressionBuilderContext ctx = this;
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
             string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
@@ -1726,9 +1753,9 @@ namespace Hl7.Cql.Compiler
                 _ => expression,
             };
 
-        private Expression CrossJoin(AliasedQuerySource[] sources, Type tupleType, ExpressionBuilderContext ctx)
+        private Expression CrossJoin(AliasedQuerySource[] sources, Type tupleType)
         {
-
+            ExpressionBuilderContext ctx = this;
             //var a = new int[] { 1, 2, 3 };
             //var b = new int[] { 4, 5, 6 };
             //var c = new int[] { 7, 8, 9 };
@@ -1750,10 +1777,10 @@ namespace Hl7.Cql.Compiler
             // the first pair are special as they are not working off of a partially built tuple,
             // they are working only off of the initial selectmany parameters.
             var first = sources[0];
-            var firstExpression = TranslateExpression(first.expression!, ctx);
+            var firstExpression = ctx.TranslateExpression(first.expression!);
             var firstElementType = _typeManager.Resolver.GetListElementType(firstExpression.Type)!;
             var second = sources[1];
-            var secondExpression = TranslateExpression(second.expression!, ctx);
+            var secondExpression = ctx.TranslateExpression(second.expression!);
             var secondElementType = _typeManager.Resolver.GetListElementType(secondExpression.Type)!;
 
             var firstLambdaParameter = Expression.Parameter(firstElementType, $"_{first.alias}");
@@ -1779,7 +1806,7 @@ namespace Hl7.Cql.Compiler
                 {
                     var source = sources[i];
 
-                    var sourceExpression = TranslateExpression(source.expression!, ctx);
+                    var sourceExpression = ctx.TranslateExpression(source.expression!);
                     string message = $"{sourceExpression.Type} was expected to be a list type.";
                     var sourceElementType = _typeManager.Resolver.GetListElementType(sourceExpression.Type) ?? throw ctx.NewExpressionBuildingException(message);
 
@@ -1829,7 +1856,7 @@ namespace Hl7.Cql.Compiler
             var typeName = type.Name.ToLowerInvariant();
             if (type.IsGenericType)
             {
-                var genericTypeNames = string.Join("_", type.GetGenericArguments().Select(t => TypeNameToIdentifier(t, null)));
+                var genericTypeNames = string.Join("_", type.GetGenericArguments().Select(t => TypeNameToIdentifier(t, ctx)));
                 var tick = typeName.IndexOf('`');
                 if (tick > -1)
                     typeName = typeName[..tick];
@@ -1849,7 +1876,7 @@ namespace Hl7.Cql.Compiler
                 typeName = uniqueTypeName;
             }
 
-            return ExpressionBuilderContext.NormalizeIdentifier(typeName!)!;
+            return NormalizeIdentifier(typeName!)!;
         }
 
         private static bool IsEnum(Type type)
@@ -1861,8 +1888,9 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
-        internal MethodCallExpression CallCreateValueSetFacade(ExpressionBuilderContext ctx, Expression operand)
+        internal MethodCallExpression CallCreateValueSetFacade(Expression operand)
         {
+            ExpressionBuilderContext ctx = this;
             var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
             var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
             var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);

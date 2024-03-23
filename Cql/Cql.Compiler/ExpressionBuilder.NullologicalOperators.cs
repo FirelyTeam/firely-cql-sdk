@@ -16,12 +16,13 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    internal partial class ExpressionBuilderContext
     {
-        protected Expression Coalesce(elm.Coalesce ce, ExpressionBuilderContext ctx)
+        protected Expression Coalesce(elm.Coalesce ce)
         {
+            ExpressionBuilderContext ctx = this;
             var operands = ce.operand!
-                .Select(op => TranslateExpression(op, ctx))
+                .Select(op => ctx.TranslateExpression(op))
                 .ToArray();
             if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
             {
@@ -54,9 +55,10 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression IsNull(elm.IsNull isn, ExpressionBuilderContext ctx)
+        protected Expression IsNull(elm.IsNull isn)
         {
-            var operand = TranslateExpression(isn.operand!, ctx);
+            ExpressionBuilderContext ctx = this;
+            var operand = ctx.TranslateExpression(isn.operand!);
             if (operand.Type.IsValueType && operand.Type.IsNullable() == false)
                 return Expression.Constant(false, typeof(bool?));
             else
@@ -67,12 +69,12 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression? IsFalse(elm.IsFalse e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.IsFalse, e, ctx);
+        protected Expression? IsFalse(elm.IsFalse e) =>
+            UnaryOperator(CqlOperator.IsFalse, e);
 
 
-        protected Expression? IsTrue(elm.IsTrue e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.IsTrue, e, ctx);
+        protected Expression? IsTrue(elm.IsTrue e) =>
+            UnaryOperator(CqlOperator.IsTrue, e);
 
 
     }

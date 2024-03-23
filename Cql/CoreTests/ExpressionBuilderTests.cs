@@ -70,7 +70,7 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            var property = Factory.ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id");
+            var property = Factory.TypeManager.Resolver.GetProperty(typeof(MeasureReport.PopulationComponent), "id");
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }
