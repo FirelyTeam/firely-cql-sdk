@@ -73,12 +73,11 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Negate(elm.Negate e)
         {
-            ExpressionBuilderContext ctx = this;
             // handle things like -2147483648 which gets translated to Negate(2147483648)
             // since int.MaxValue is 2147483647, we have to handle this specially
             if (e.operand is elm.Literal literal)
             {
-                var literalType = _typeManager.TypeFor(literal, ctx);
+                var literalType = _typeManager.TypeFor(literal, this);
                 if (literalType == typeof(int?) && literal.value == "2147483648")
                 {
                     return Expression.Constant(int.MinValue);
@@ -88,7 +87,7 @@ namespace Hl7.Cql.Compiler
                     return Expression.Constant(long.MinValue);
                 }
             }
-            return ctx.UnaryOperator(CqlOperator.Negate, e);
+            return UnaryOperator(CqlOperator.Negate, e);
         }
 
         protected Expression? Precision(elm.Precision e) =>
