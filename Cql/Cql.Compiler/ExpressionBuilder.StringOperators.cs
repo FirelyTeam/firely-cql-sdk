@@ -20,12 +20,11 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Combine(elm.Combine e)
         {
-            ExpressionBuilderContext ctx = this;
-            var source = ctx.TranslateExpression(e.source!);
+            var source = this.TranslateExpression(e.source!);
             var operand = e.separator == null
                 ? Expression.Constant(null, typeof(string))
-                : ctx.TranslateExpression(e.separator);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Combine, ctx.RuntimeContextParameter, source, operand);
+                : this.TranslateExpression(e.separator);
+            var call = this.OperatorBinding.Bind(CqlOperator.Combine, this.RuntimeContextParameter, source, operand);
             return call;
         }
 
@@ -37,41 +36,38 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Indexer(elm.Indexer e)
         {
-            ExpressionBuilderContext ctx = this;
-            var left = ctx.TranslateExpression(e!.operand![0]!);
-            var right = ctx.TranslateExpression(e!.operand![1]!);
+            var left = this.TranslateExpression(e!.operand![0]!);
+            var right = this.TranslateExpression(e!.operand![1]!);
             if (left.Type == typeof(string))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.CharAt, ctx.RuntimeContextParameter, left, right);
+                return this.OperatorBinding.Bind(CqlOperator.CharAt, this.RuntimeContextParameter, left, right);
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.ElementAt, ctx.RuntimeContextParameter, left, right);
+                return this.OperatorBinding.Bind(CqlOperator.ElementAt, this.RuntimeContextParameter, left, right);
             }
-            else throw new NotImplementedException().WithContext(ctx);
+            else throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression? LastPositionOf(elm.LastPositionOf e)
         {
-            ExpressionBuilderContext ctx = this;
-            var @string = ctx.TranslateExpression(e!.@string!);
-            var pattern = ctx.TranslateExpression(e!.pattern!);
-            return ctx.OperatorBinding.Bind(CqlOperator.LastPositionOf, ctx.RuntimeContextParameter, @string, pattern);
+            var @string = this.TranslateExpression(e!.@string!);
+            var pattern = this.TranslateExpression(e!.pattern!);
+            return this.OperatorBinding.Bind(CqlOperator.LastPositionOf, this.RuntimeContextParameter, @string, pattern);
         }
 
         protected Expression? Length(elm.Length len)
         {
-            ExpressionBuilderContext ctx = this;
-            var operand = ctx.TranslateExpression(len.operand!);
+            var operand = this.TranslateExpression(len.operand!);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.ListLength, ctx.RuntimeContextParameter, operand);
+                return this.OperatorBinding.Bind(CqlOperator.ListLength, this.RuntimeContextParameter, operand);
             }
             else if (operand.Type == typeof(string))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.StringLength, ctx.RuntimeContextParameter, operand);
+                return this.OperatorBinding.Bind(CqlOperator.StringLength, this.RuntimeContextParameter, operand);
             }
-            else throw new NotImplementedException().WithContext(ctx);
+            else throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression? Lower(elm.Lower e) =>
@@ -82,20 +78,18 @@ namespace Hl7.Cql.Compiler
 
         protected Expression PositionOf(elm.PositionOf e)
         {
-            ExpressionBuilderContext ctx = this;
-            var @string = ctx.TranslateExpression(e!.@string!);
-            var pattern = ctx.TranslateExpression(e!.pattern!);
-            return ctx.OperatorBinding.Bind(CqlOperator.PositionOf, ctx.RuntimeContextParameter, pattern, @string);
+            var @string = this.TranslateExpression(e!.@string!);
+            var pattern = this.TranslateExpression(e!.pattern!);
+            return this.OperatorBinding.Bind(CqlOperator.PositionOf, this.RuntimeContextParameter, pattern, @string);
 
         }
 
         protected Expression? ReplaceMatches(elm.ReplaceMatches e)
         {
-            ExpressionBuilderContext ctx = this;
-            var source = ctx.TranslateExpression(e.operand![0]!);
-            var pattern = ctx.TranslateExpression(e.operand![1]!);
-            var substitution = ctx.TranslateExpression(e.operand![2]!);
-            return ctx.OperatorBinding.Bind(CqlOperator.ReplaceMatches, ctx.RuntimeContextParameter, source, pattern, substitution);
+            var source = this.TranslateExpression(e.operand![0]!);
+            var pattern = this.TranslateExpression(e.operand![1]!);
+            var substitution = this.TranslateExpression(e.operand![2]!);
+            return this.OperatorBinding.Bind(CqlOperator.ReplaceMatches, this.RuntimeContextParameter, source, pattern, substitution);
         }
 
         protected Expression Split(elm.Split e)
@@ -111,13 +105,12 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Substring(elm.Substring e)
         {
-            ExpressionBuilderContext ctx = this;
-            var stringToSub = ctx.TranslateExpression(e!.stringToSub!);
-            var startIndex = ctx.TranslateExpression(e!.startIndex!);
+            var stringToSub = this.TranslateExpression(e!.stringToSub!);
+            var startIndex = this.TranslateExpression(e!.startIndex!);
             var length = e.length == null
                 ? Expression.Constant(null, typeof(int?))
-                : ctx.TranslateExpression(e.length);
-            return ctx.OperatorBinding.Bind(CqlOperator.Substring, ctx.RuntimeContextParameter, stringToSub, startIndex, length);
+                : this.TranslateExpression(e.length);
+            return this.OperatorBinding.Bind(CqlOperator.Substring, this.RuntimeContextParameter, stringToSub, startIndex, length);
         }
 
         protected Expression? Upper(elm.Upper e) =>

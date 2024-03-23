@@ -20,13 +20,12 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Coalesce(elm.Coalesce ce)
         {
-            ExpressionBuilderContext ctx = this;
             var operands = ce.operand!
-                .Select(op => ctx.TranslateExpression(op))
+                .Select(op => this.TranslateExpression(op))
                 .ToArray();
             if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
             {
-                var call = ctx.OperatorBinding.Bind(CqlOperator.Coalesce, ctx.RuntimeContextParameter, operands[0]);
+                var call = this.OperatorBinding.Bind(CqlOperator.Coalesce, this.RuntimeContextParameter, operands[0]);
                 return call;
             }
             var distinctOperandTypes = operands
@@ -34,7 +33,7 @@ namespace Hl7.Cql.Compiler
                 .Distinct()
                 .ToArray();
             if (distinctOperandTypes.Length != 1)
-                throw ctx.NewExpressionBuildingException("All operand types should match when using Coalesce");
+                throw this.NewExpressionBuildingException("All operand types should match when using Coalesce");
             var type = operands[0].Type;
             if (type.IsValueType && !type.IsNullable())
                 throw new NotSupportedException("Coalesce on value types is not defined.");
@@ -57,8 +56,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression IsNull(elm.IsNull isn)
         {
-            ExpressionBuilderContext ctx = this;
-            var operand = ctx.TranslateExpression(isn.operand!);
+            var operand = this.TranslateExpression(isn.operand!);
             if (operand.Type.IsValueType && operand.Type.IsNullable() == false)
                 return Expression.Constant(false, typeof(bool?));
             else

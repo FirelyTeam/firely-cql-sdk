@@ -27,29 +27,26 @@ namespace Hl7.Cql.Compiler
 
         protected Expression First(elm.First e)
         {
-            ExpressionBuilderContext ctx = this;
-            var operand = ctx.TranslateExpression(e.source!);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.First, ctx.RuntimeContextParameter, operand);
+            var operand = this.TranslateExpression(e.source!);
+            var call = this.OperatorBinding.Bind(CqlOperator.First, this.RuntimeContextParameter, operand);
             return call;
         }
 
         protected Expression IndexOf(elm.IndexOf e)
         {
-            ExpressionBuilderContext ctx = this;
-            var source = ctx.TranslateExpression(e.source!);
-            var element = ctx.TranslateExpression(e.element!);
+            var source = this.TranslateExpression(e.source!);
+            var element = this.TranslateExpression(e.element!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.IndexOf, ctx.RuntimeContextParameter, source, element);
+                return this.OperatorBinding.Bind(CqlOperator.IndexOf, this.RuntimeContextParameter, source, element);
             }
-            throw new NotImplementedException().WithContext(ctx);
+            throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression Last(elm.Last e)
         {
-            ExpressionBuilderContext ctx = this;
-            var operand = ctx.TranslateExpression(e.source!);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Last, ctx.RuntimeContextParameter, operand);
+            var operand = this.TranslateExpression(e.source!);
+            var call = this.OperatorBinding.Bind(CqlOperator.Last, this.RuntimeContextParameter, operand);
             return call;
         }
 
@@ -59,19 +56,18 @@ namespace Hl7.Cql.Compiler
 
         private Expression? Slice(elm.Slice slice)
         {
-            ExpressionBuilderContext ctx = this;
-            var source = ctx.TranslateExpression(slice.source!);
+            var source = this.TranslateExpression(slice.source!);
             var start = slice.startIndex == null || slice.startIndex is elm.Null
                 ? Expression.Constant(null, typeof(int?))
-                : ctx.TranslateExpression(slice.startIndex!);
+                : this.TranslateExpression(slice.startIndex!);
             var end = slice.endIndex == null || slice.endIndex is elm.Null
                 ? Expression.Constant(null, typeof(int?))
-                : ctx.TranslateExpression(slice.endIndex!);
+                : this.TranslateExpression(slice.endIndex!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.Slice, ctx.RuntimeContextParameter, source, start, end);
+                return this.OperatorBinding.Bind(CqlOperator.Slice, this.RuntimeContextParameter, source, start, end);
             }
-            throw new NotImplementedException().WithContext(ctx);
+            throw new NotImplementedException().WithContext(this);
         }
     }
 }

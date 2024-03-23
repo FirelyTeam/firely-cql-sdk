@@ -8,25 +8,23 @@ namespace Hl7.Cql.Compiler
     {
         private Expression IntervalExpression(elm.Interval ie)
         {
-            ExpressionBuilderContext ctx = this;
             var lowClosed = ie.lowClosedExpression != null
-                ? ctx.TranslateExpression(ie.lowClosedExpression)
+                ? this.TranslateExpression(ie.lowClosedExpression)
                 : Expression.Constant(ie.lowClosed, typeof(bool?));
             var highClosed = ie.highClosedExpression != null
-                ? ctx.TranslateExpression(ie.highClosedExpression)
+                ? this.TranslateExpression(ie.highClosedExpression)
                 : Expression.Constant(ie.highClosed, typeof(bool?));
             lowClosed = ChangeType(lowClosed, typeof(bool?));
             highClosed = ChangeType(highClosed, typeof(bool?));
-            var low = ctx.TranslateExpression(ie.low!);
-            var high = ctx.TranslateExpression(ie.high!);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Interval, ctx.RuntimeContextParameter, low, high, lowClosed, highClosed);
+            var low = this.TranslateExpression(ie.low!);
+            var high = this.TranslateExpression(ie.high!);
+            var call = this.OperatorBinding.Bind(CqlOperator.Interval, this.RuntimeContextParameter, low, high, lowClosed, highClosed);
             return call;
         }
 
 
         private Expression Ratio(elm.Ratio re)
         {
-            ExpressionBuilderContext ctx = this;
             var numExpr = new elm.Quantity();
             numExpr.value = re.numerator!.value;
             numExpr.unit = re.numerator!.unit;
@@ -35,10 +33,10 @@ namespace Hl7.Cql.Compiler
             denomExpr.value = re.denominator!.value;
             denomExpr.unit = re.denominator!.unit;
 
-            var numExprTranslated = ctx.TranslateExpression(numExpr);
-            var denomExprTranslated = ctx.TranslateExpression(numExpr);
+            var numExprTranslated = this.TranslateExpression(numExpr);
+            var denomExprTranslated = this.TranslateExpression(numExpr);
 
-            return ctx.OperatorBinding.Bind(CqlOperator.Ratio, ctx.RuntimeContextParameter, numExprTranslated, denomExprTranslated);
+            return this.OperatorBinding.Bind(CqlOperator.Ratio, this.RuntimeContextParameter, numExprTranslated, denomExprTranslated);
         }
 
         private Expression Quantity(elm.Quantity quantityExpression) =>

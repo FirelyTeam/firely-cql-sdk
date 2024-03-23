@@ -16,12 +16,11 @@ internal partial class ExpressionBuilderContext
 {
     protected Expression Query(elm.Query query)
     {
-        ExpressionBuilderContext ctx = this;
         return query.source?.Length switch
         {
-            null or 0 => throw ctx.NewExpressionBuildingException("Queries must define at least 1 source"),
-            1 => ctx.SingleSourceQuery(query),
-            _ => ctx.MultiSourceQuery(query),
+            null or 0 => throw this.NewExpressionBuildingException("Queries must define at least 1 source"),
+            1 => this.SingleSourceQuery(query),
+            _ => this.MultiSourceQuery(query),
         };
     }
         
@@ -437,11 +436,10 @@ internal partial class ExpressionBuilderContext
     protected LambdaExpression WithToSelectManyBody(ParameterExpression rootScopeParameter,
         RelationshipClause with)
     {
-        ExpressionBuilderContext ctx = this;
         if (with.expression == null)
-            throw ctx.NewExpressionBuildingException($"With must have a 'source' expression.");
+            throw this.NewExpressionBuildingException($"With must have a 'source' expression.");
         if (with.suchThat == null)
-            throw ctx.NewExpressionBuildingException($"With must have a 'such that' expression.");
+            throw this.NewExpressionBuildingException($"With must have a 'such that' expression.");
 
         //define "With Such That":
         //[Encounter] E
@@ -455,7 +453,7 @@ internal partial class ExpressionBuilderContext
         //        bundle.Entry.ByResourceType<Condition>() // <-- 
         //            .Where(P => true) // such that goes here
         //            .Select(P => E));
-        var source = ctx.TranslateExpression(with.expression);
+        var source = this.TranslateExpression(with.expression);
         if (!IsOrImplementsIEnumerableOfT(source.Type))
         {
             // e.g.:
@@ -468,16 +466,16 @@ internal partial class ExpressionBuilderContext
         var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
 
         var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
-        var whereContext = ctx.WithScope(with.alias!, whereLambdaParameter, with);
+        var whereContext = this.WithScope(with.alias!, whereLambdaParameter, with);
         var suchThatBody = whereContext.TranslateExpression(with.suchThat);
 
         var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-        var callWhereOnSource = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, source, whereLambda);
+        var callWhereOnSource = this.OperatorBinding.Bind(CqlOperator.Where, this.RuntimeContextParameter, source, whereLambda);
 
         var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var selectBody = rootScopeParameter; // P => E
         var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-        var callSelectOnWhere = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, callWhereOnSource, selectLambda);
+        var callSelectOnWhere = this.OperatorBinding.Bind(CqlOperator.Select, this.RuntimeContextParameter, callWhereOnSource, selectLambda);
         var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
 
         return selectManyLambda;
@@ -486,11 +484,10 @@ internal partial class ExpressionBuilderContext
     protected LambdaExpression WithToSelectManyBody(Type tupleType,
         RelationshipClause with)
     {
-        ExpressionBuilderContext ctx = this;
         if (with.expression == null)
-            throw ctx.NewExpressionBuildingException($"With must have a source expression.");
+            throw this.NewExpressionBuildingException($"With must have a source expression.");
         if (with.suchThat == null)
-            throw ctx.NewExpressionBuildingException($"With must have a suchthat expression.");
+            throw this.NewExpressionBuildingException($"With must have a suchthat expression.");
 
         //define "With Such That":
         //from [Encounter] enc,
@@ -517,12 +514,12 @@ internal partial class ExpressionBuilderContext
         //            .Where(P => true) // such that goes here, in place of "true"
         //            .Select(P => E));
 
-        var selectManyParameter = Expression.Parameter(tupleType, TypeNameToIdentifier(tupleType, ctx));
+        var selectManyParameter = Expression.Parameter(tupleType, TypeNameToIdentifier(tupleType, this));
         var scopes = (from property in tupleType.GetProperties()
                 let propertyAccess = Expression.Property(selectManyParameter, property)
                 select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, with)))
             .ToArray();
-        var selectManyContext = ctx.WithScopes(scopes);
+        var selectManyContext = this.WithScopes(scopes);
 
         var source = selectManyContext.TranslateExpression(with.expression);
         var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
@@ -531,12 +528,12 @@ internal partial class ExpressionBuilderContext
         var whereContext = selectManyContext.WithScope(with.alias!, whereLambdaParameter, with);
         var suchThatBody = selectManyContext.TranslateExpression(with.suchThat);
         var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-        var callWhereOnSource = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, source, whereLambda);
+        var callWhereOnSource = this.OperatorBinding.Bind(CqlOperator.Where, this.RuntimeContextParameter, source, whereLambda);
 
         var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var selectBody = selectManyParameter; // P => E
         var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-        var callSelectOnWhere = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, callWhereOnSource, selectLambda);
+        var callSelectOnWhere = this.OperatorBinding.Bind(CqlOperator.Select, this.RuntimeContextParameter, callWhereOnSource, selectLambda);
 
         var selectManyLambda = Expression.Lambda(callSelectOnWhere, selectManyParameter);
         return selectManyLambda;

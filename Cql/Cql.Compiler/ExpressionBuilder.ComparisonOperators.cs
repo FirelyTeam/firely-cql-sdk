@@ -18,25 +18,22 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Equal(elm.Equal eq)
         {
-            ExpressionBuilderContext ctx = this;
-            var lhsExpression = ctx.TranslateExpression(eq.operand![0]);
-            var rhsExpression = ctx.TranslateExpression(eq.operand![1]);
+            var lhsExpression = this.TranslateExpression(eq.operand![0]);
+            var rhsExpression = this.TranslateExpression(eq.operand![1]);
             return Equal(lhsExpression, rhsExpression);
         }
 
         protected Expression NotEqual(elm.NotEqual eq)
         {
-            ExpressionBuilderContext ctx = this;
-            var lhsExpression = ctx.TranslateExpression(eq.operand![0]);
-            var rhsExpression = ctx.TranslateExpression(eq.operand![1]);
-            var equal = ctx.Equal(lhsExpression, rhsExpression);
-            var not = ctx.OperatorBinding.Bind(CqlOperator.Not, ctx.RuntimeContextParameter, equal);
+            var lhsExpression = this.TranslateExpression(eq.operand![0]);
+            var rhsExpression = this.TranslateExpression(eq.operand![1]);
+            var equal = this.Equal(lhsExpression, rhsExpression);
+            var not = this.OperatorBinding.Bind(CqlOperator.Not, this.RuntimeContextParameter, equal);
             return not;
         }
 
         protected Expression Equal(Expression left, Expression right)
         {
-            ExpressionBuilderContext ctx = this;
             if (IsEnum(left.Type))
             {
                 if (IsEnum(right.Type))
@@ -47,26 +44,26 @@ namespace Hl7.Cql.Compiler
                 }
                 else if (right.Type == typeof(string))
                 {
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
-                        ctx.RuntimeContextParameter,
+                    var call = this.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
+                        this.RuntimeContextParameter,
                         Expression.Convert(left, typeof(object)),
                         right);
                     return call;
                 }
-                else throw new NotImplementedException().WithContext(ctx);
+                else throw new NotImplementedException().WithContext(this);
             }
             else if (IsEnum(right.Type))
             {
                 if (left.Type == typeof(string))
                 {
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
-                        ctx.RuntimeContextParameter,
+                    var call = this.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
+                        this.RuntimeContextParameter,
                         Expression.Convert(right, typeof(object)),
                         left);
                     return call;
 
                 }
-                else throw new NotImplementedException().WithContext(ctx);
+                else throw new NotImplementedException().WithContext(this);
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
@@ -75,24 +72,23 @@ namespace Hl7.Cql.Compiler
                 {
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
-                        throw ctx.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
+                        throw this.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
+                    var call = this.OperatorBinding.Bind(CqlOperator.ListEqual, this.RuntimeContextParameter, left, right);
                     return call;
                 }
-                throw new NotImplementedException().WithContext(ctx);
+                throw new NotImplementedException().WithContext(this);
             }
             else
             {
-                var call = ctx.OperatorBinding.Bind(CqlOperator.Equal, ctx.RuntimeContextParameter, left, right);
+                var call = this.OperatorBinding.Bind(CqlOperator.Equal, this.RuntimeContextParameter, left, right);
                 return call;
             }
         }
 
         protected Expression Equivalent(elm.Equivalent eqv)
         {
-            ExpressionBuilderContext ctx = this;
-            var left = ctx.TranslateExpression(eqv.operand![0]);
-            var right = ctx.TranslateExpression(eqv.operand![1]);
+            var left = this.TranslateExpression(eqv.operand![0]);
+            var right = this.TranslateExpression(eqv.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -105,17 +101,17 @@ namespace Hl7.Cql.Compiler
                         //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
                         return Expression.Constant(false, typeof(bool?));
                     }
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.ListEquivalent, ctx.RuntimeContextParameter, left, right);
+                    var call = this.OperatorBinding.Bind(CqlOperator.ListEquivalent, this.RuntimeContextParameter, left, right);
                     return call;
                 }
                 else
                 {
-                    throw new NotImplementedException().WithContext(ctx);
+                    throw new NotImplementedException().WithContext(this);
                 }
             }
             else
             {
-                var call = ctx.OperatorBinding.Bind(CqlOperator.Equivalent, ctx.RuntimeContextParameter, left, right);
+                var call = this.OperatorBinding.Bind(CqlOperator.Equivalent, this.RuntimeContextParameter, left, right);
                 return call;
             }
         }

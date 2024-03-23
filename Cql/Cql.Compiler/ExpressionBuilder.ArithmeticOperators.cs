@@ -51,19 +51,17 @@ namespace Hl7.Cql.Compiler
 
         protected Expression MaxValue(elm.MaxValue max)
         {
-            ExpressionBuilderContext ctx = this;
             var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.MaximumValue,
-                ctx.RuntimeContextParameter,
+            var call = this.OperatorBinding.Bind(CqlOperator.MaximumValue,
+                this.RuntimeContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
         protected Expression MinValue(elm.MinValue min)
         {
-            ExpressionBuilderContext ctx = this;
             var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.MinimumValue,
-                ctx.RuntimeContextParameter,
+            var call = this.OperatorBinding.Bind(CqlOperator.MinimumValue,
+                this.RuntimeContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
@@ -104,13 +102,12 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Round(elm.Round e)
         {
-            ExpressionBuilderContext ctx = this;
-            var operand = ctx.TranslateExpression(e.operand!);
+            var operand = this.TranslateExpression(e.operand!);
             Expression? precision;
             if (e.precision != null)
-                precision = ctx.TranslateExpression(e.precision!);
+                precision = this.TranslateExpression(e.precision!);
             else precision = Expression.Constant(null, typeof(int?));
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Round, ctx.RuntimeContextParameter, operand, precision);
+            var call = this.OperatorBinding.Bind(CqlOperator.Round, this.RuntimeContextParameter, operand, precision);
             return call;
         }
 
