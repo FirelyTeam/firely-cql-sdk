@@ -27,26 +27,26 @@ namespace Hl7.Cql.Compiler
 
         protected Expression First(elm.First e)
         {
-            var operand = this.TranslateExpression(e.source!);
-            var call = this.OperatorBinding.Bind(CqlOperator.First, this.RuntimeContextParameter, operand);
+            var operand = TranslateExpression(e.source!);
+            var call = OperatorBinding.Bind(CqlOperator.First, RuntimeContextParameter, operand);
             return call;
         }
 
         protected Expression IndexOf(elm.IndexOf e)
         {
-            var source = this.TranslateExpression(e.source!);
-            var element = this.TranslateExpression(e.element!);
+            var source = TranslateExpression(e.source!);
+            var element = TranslateExpression(e.element!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return this.OperatorBinding.Bind(CqlOperator.IndexOf, this.RuntimeContextParameter, source, element);
+                return OperatorBinding.Bind(CqlOperator.IndexOf, RuntimeContextParameter, source, element);
             }
             throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression Last(elm.Last e)
         {
-            var operand = this.TranslateExpression(e.source!);
-            var call = this.OperatorBinding.Bind(CqlOperator.Last, this.RuntimeContextParameter, operand);
+            var operand = TranslateExpression(e.source!);
+            var call = OperatorBinding.Bind(CqlOperator.Last, RuntimeContextParameter, operand);
             return call;
         }
 
@@ -56,16 +56,16 @@ namespace Hl7.Cql.Compiler
 
         private Expression? Slice(elm.Slice slice)
         {
-            var source = this.TranslateExpression(slice.source!);
+            var source = TranslateExpression(slice.source!);
             var start = slice.startIndex == null || slice.startIndex is elm.Null
                 ? Expression.Constant(null, typeof(int?))
-                : this.TranslateExpression(slice.startIndex!);
+                : TranslateExpression(slice.startIndex!);
             var end = slice.endIndex == null || slice.endIndex is elm.Null
                 ? Expression.Constant(null, typeof(int?))
-                : this.TranslateExpression(slice.endIndex!);
+                : TranslateExpression(slice.endIndex!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return this.OperatorBinding.Bind(CqlOperator.Slice, this.RuntimeContextParameter, source, start, end);
+                return OperatorBinding.Bind(CqlOperator.Slice, RuntimeContextParameter, source, start, end);
             }
             throw new NotImplementedException().WithContext(this);
         }

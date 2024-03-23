@@ -45,14 +45,14 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         BuildUrlByCodeSystemRef();
     }
 
-    public Elm.Library Library { get; }
+    public Library Library { get; }
 
     public string LibraryKey => Library.NameAndVersion()!;
 
     public bool AllowUnresolvedExternals => _expressionBuilderSettings.AllowUnresolvedExternals;
 
     public ExpressionBuilderContext NewExpressionBuilderContext(
-        Elm.Element element) =>
+        Element element) =>
         new ExpressionBuilderContext(
             _operatorBinding,
             _expressionBuilderSettings,

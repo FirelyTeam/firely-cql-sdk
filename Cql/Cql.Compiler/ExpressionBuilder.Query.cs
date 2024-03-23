@@ -1,26 +1,26 @@
 ﻿namespace Hl7.Cql.Compiler;
 
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Elm;
+using Abstractions;
+using Elm;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
+using elm = Elm;
 using Expression = System.Linq.Expressions.Expression;
 
-using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
+using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Elm.Element)>;
 
 
 internal partial class ExpressionBuilderContext
 {
-    protected Expression Query(elm.Query query)
+    protected Expression Query(Query query)
     {
         return query.source?.Length switch
         {
             null or 0 => throw this.NewExpressionBuildingException("Queries must define at least 1 source"),
-            1 => this.SingleSourceQuery(query),
-            _ => this.MultiSourceQuery(query),
+            1 => SingleSourceQuery(query),
+            _ => MultiSourceQuery(query),
         };
     }
         
@@ -50,7 +50,7 @@ internal partial class ExpressionBuilderContext
 
         Type elementType = _typeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
 
-        var rootScopeParameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias);
+        var rootScopeParameterName = NormalizeIdentifier(querySourceAlias);
         var rootScopeParameter = Expression.Parameter(elementType, rootScopeParameterName);
         ctx = WithScope(querySourceAlias, rootScopeParameter, querySource.expression);
         
@@ -223,7 +223,7 @@ internal partial class ExpressionBuilderContext
         // The combinations will be stored in a tuple whose fields are named by source alias.
         // we will then create an expression that creates this cross-product of tuples,
         // and use that as the singular query source for subsequent parts of the query.
-        var tupleSpecifier = new elm.TupleTypeSpecifier
+        var tupleSpecifier = new TupleTypeSpecifier
         {
             element = query.source.Select(source =>
             {
@@ -453,7 +453,7 @@ internal partial class ExpressionBuilderContext
         //        bundle.Entry.ByResourceType<Condition>() // <-- 
         //            .Where(P => true) // such that goes here
         //            .Select(P => E));
-        var source = this.TranslateExpression(with.expression);
+        var source = TranslateExpression(with.expression);
         if (!IsOrImplementsIEnumerableOfT(source.Type))
         {
             // e.g.:
@@ -466,16 +466,16 @@ internal partial class ExpressionBuilderContext
         var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
 
         var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
-        var whereContext = this.WithScope(with.alias!, whereLambdaParameter, with);
+        var whereContext = WithScope(with.alias!, whereLambdaParameter, with);
         var suchThatBody = whereContext.TranslateExpression(with.suchThat);
 
         var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-        var callWhereOnSource = this.OperatorBinding.Bind(CqlOperator.Where, this.RuntimeContextParameter, source, whereLambda);
+        var callWhereOnSource = OperatorBinding.Bind(CqlOperator.Where, RuntimeContextParameter, source, whereLambda);
 
         var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var selectBody = rootScopeParameter; // P => E
         var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-        var callSelectOnWhere = this.OperatorBinding.Bind(CqlOperator.Select, this.RuntimeContextParameter, callWhereOnSource, selectLambda);
+        var callSelectOnWhere = OperatorBinding.Bind(CqlOperator.Select, RuntimeContextParameter, callWhereOnSource, selectLambda);
         var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
 
         return selectManyLambda;
@@ -519,7 +519,7 @@ internal partial class ExpressionBuilderContext
                 let propertyAccess = Expression.Property(selectManyParameter, property)
                 select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, with)))
             .ToArray();
-        var selectManyContext = this.WithScopes(scopes);
+        var selectManyContext = WithScopes(scopes);
 
         var source = selectManyContext.TranslateExpression(with.expression);
         var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
@@ -528,12 +528,12 @@ internal partial class ExpressionBuilderContext
         var whereContext = selectManyContext.WithScope(with.alias!, whereLambdaParameter, with);
         var suchThatBody = selectManyContext.TranslateExpression(with.suchThat);
         var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-        var callWhereOnSource = this.OperatorBinding.Bind(CqlOperator.Where, this.RuntimeContextParameter, source, whereLambda);
+        var callWhereOnSource = OperatorBinding.Bind(CqlOperator.Where, RuntimeContextParameter, source, whereLambda);
 
         var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var selectBody = selectManyParameter; // P => E
         var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-        var callSelectOnWhere = this.OperatorBinding.Bind(CqlOperator.Select, this.RuntimeContextParameter, callWhereOnSource, selectLambda);
+        var callSelectOnWhere = OperatorBinding.Bind(CqlOperator.Select, RuntimeContextParameter, callWhereOnSource, selectLambda);
 
         var selectManyLambda = Expression.Lambda(callSelectOnWhere, selectManyParameter);
         return selectManyLambda;

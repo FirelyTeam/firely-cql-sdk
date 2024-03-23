@@ -54,7 +54,7 @@ namespace Hl7.Cql.Compiler
                 else
                 {
                     var type = _typeManager.TypeFor(@as.asTypeSpecifier!, this);
-                    var operand = this.TranslateExpression(@as.operand!);
+                    var operand = TranslateExpression(@as.operand!);
                     return new ElmAsExpression(operand, type);
                 }
             }
@@ -69,10 +69,10 @@ namespace Hl7.Cql.Compiler
                 var type = _typeManager.Resolver.ResolveType(@as.asType.Name!) 
                     ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
-                var operand = this.TranslateExpression(@as.operand);
+                var operand = TranslateExpression(@as.operand);
                 if (!type.IsAssignableTo(operand.Type))
                 {
-                    _logger.LogWarning(this.FormatMessage($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand));
+                    _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand));
                 }
 
                 return new ElmAsExpression(operand, type);
@@ -81,7 +81,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Is(elm.Is @is)
         {
-            var op = this.TranslateExpression(@is.operand!);
+            var op = TranslateExpression(@is.operand!);
             Type? type = null;
             if (@is.isTypeSpecifier != null) 
             {
@@ -120,8 +120,8 @@ namespace Hl7.Cql.Compiler
                 return Expression.Constant(null, typeof(IEnumerable<object>));
             else
             {
-                var source = this.TranslateExpression(e.source);
-                var call = this.OperatorBinding.Bind(CqlOperator.Descendents, this.RuntimeContextParameter, source);
+                var source = TranslateExpression(e.source);
+                var call = OperatorBinding.Bind(CqlOperator.Descendents, RuntimeContextParameter, source);
                 return call;
             }
         }
@@ -135,9 +135,9 @@ namespace Hl7.Cql.Compiler
         /// <returns></returns>
         protected Expression ConvertQuantity(elm.ConvertQuantity cqe)
         {
-            var quantity = this.TranslateExpression(cqe.operand![0]);
-            var unit = this.TranslateExpression(cqe.operand![1]);
-            var call = this.OperatorBinding.Bind(CqlOperator.ConvertQuantity, this.RuntimeContextParameter, quantity, unit);
+            var quantity = TranslateExpression(cqe.operand![0]);
+            var unit = TranslateExpression(cqe.operand![1]);
+            var call = OperatorBinding.Bind(CqlOperator.ConvertQuantity, RuntimeContextParameter, quantity, unit);
             return call;
         }
 
@@ -171,26 +171,26 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ToBoolean(elm.ToBoolean e)
         {
-            var operand = this.TranslateExpression(e.operand!);
-            return this.ChangeType(operand, typeof(bool?));
+            var operand = TranslateExpression(e.operand!);
+            return ChangeType(operand, typeof(bool?));
         }
 
         protected Expression? ToConcept(elm.ToConcept e)
         {
-            var operand = this.TranslateExpression(e.operand!);
-            return this.ChangeType(operand, _typeManager.Resolver.ConceptType);
+            var operand = TranslateExpression(e.operand!);
+            return ChangeType(operand, _typeManager.Resolver.ConceptType);
         }
 
         protected Expression? ToDate(elm.ToDate e)
         {
-            var operand = this.TranslateExpression(e.operand!);
-            return this.ChangeType(operand, _typeManager.Resolver.DateType);
+            var operand = TranslateExpression(e.operand!);
+            return ChangeType(operand, _typeManager.Resolver.DateType);
         }
 
         protected Expression ToDateTime(elm.ToDateTime e)
         {
-            var operand = this.TranslateExpression(e.operand!);
-            return this.ChangeType(operand, _typeManager.Resolver.DateTimeType);
+            var operand = TranslateExpression(e.operand!);
+            return ChangeType(operand, _typeManager.Resolver.DateTimeType);
         }
 
 
@@ -202,8 +202,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ToLong(elm.ToLong e)
         {
-            var operand = this.TranslateExpression(e.operand!);
-            return this.ChangeType(operand, typeof(long?));
+            var operand = TranslateExpression(e.operand!);
+            return ChangeType(operand, typeof(long?));
         }
 
         protected Expression? ToInteger(elm.ToInteger e)
@@ -214,8 +214,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ToQuantity(elm.ToQuantity tq)
         {
-            var operand = this.TranslateExpression(tq.operand!);
-            return this.ChangeType(operand, _typeManager.Resolver.QuantityType);
+            var operand = TranslateExpression(tq.operand!);
+            return ChangeType(operand, _typeManager.Resolver.QuantityType);
         }
 
         protected Expression? ToString(elm.ToString e)
@@ -225,14 +225,14 @@ namespace Hl7.Cql.Compiler
         }
         protected Expression? ToTime(elm.ToTime e)
         {
-            var operand = this.TranslateExpression(e.operand!);
-            return this.ChangeType(operand, _typeManager.Resolver.TimeType);
+            var operand = TranslateExpression(e.operand!);
+            return ChangeType(operand, _typeManager.Resolver.TimeType);
         }
 
         protected Expression ToList(elm.ToList e)
         {
-            var operand = this.TranslateExpression(e.operand!);
-            var call = this.OperatorBinding.Bind(CqlOperator.ToList, this.RuntimeContextParameter, operand);
+            var operand = TranslateExpression(e.operand!);
+            var call = OperatorBinding.Bind(CqlOperator.ToList, RuntimeContextParameter, operand);
             return call;
         }
 
@@ -248,19 +248,19 @@ namespace Hl7.Cql.Compiler
                 var inputElementType = _typeManager.Resolver.GetListElementType(input.Type, true)!;
                 var outputElementType = _typeManager.Resolver.GetListElementType(outputType, true)!;
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
-                var lambdaBody = this.ChangeType(lambdaParameter, outputElementType);
+                var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                var callSelect = this.OperatorBinding.Bind(CqlOperator.Select, this.RuntimeContextParameter, input, lambda);
+                var callSelect = OperatorBinding.Bind(CqlOperator.Select, RuntimeContextParameter, input, lambda);
                 return callSelect;
             }
             else if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                var call = this.OperatorBinding.Bind(CqlOperator.Convert, this.RuntimeContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
+                var call = OperatorBinding.Bind(CqlOperator.Convert, RuntimeContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
                 return call;
             }
             else
             {
-                var call = this.OperatorBinding.Bind(CqlOperator.Convert, this.RuntimeContextParameter, input, Expression.Constant(outputType, typeof(Type)));
+                var call = OperatorBinding.Bind(CqlOperator.Convert, RuntimeContextParameter, input, Expression.Constant(outputType, typeof(Type)));
                 return call;
             }
         }

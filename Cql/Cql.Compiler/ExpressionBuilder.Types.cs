@@ -9,16 +9,16 @@ namespace Hl7.Cql.Compiler
         private Expression IntervalExpression(elm.Interval ie)
         {
             var lowClosed = ie.lowClosedExpression != null
-                ? this.TranslateExpression(ie.lowClosedExpression)
+                ? TranslateExpression(ie.lowClosedExpression)
                 : Expression.Constant(ie.lowClosed, typeof(bool?));
             var highClosed = ie.highClosedExpression != null
-                ? this.TranslateExpression(ie.highClosedExpression)
+                ? TranslateExpression(ie.highClosedExpression)
                 : Expression.Constant(ie.highClosed, typeof(bool?));
             lowClosed = ChangeType(lowClosed, typeof(bool?));
             highClosed = ChangeType(highClosed, typeof(bool?));
-            var low = this.TranslateExpression(ie.low!);
-            var high = this.TranslateExpression(ie.high!);
-            var call = this.OperatorBinding.Bind(CqlOperator.Interval, this.RuntimeContextParameter, low, high, lowClosed, highClosed);
+            var low = TranslateExpression(ie.low!);
+            var high = TranslateExpression(ie.high!);
+            var call = OperatorBinding.Bind(CqlOperator.Interval, RuntimeContextParameter, low, high, lowClosed, highClosed);
             return call;
         }
 
@@ -33,10 +33,10 @@ namespace Hl7.Cql.Compiler
             denomExpr.value = re.denominator!.value;
             denomExpr.unit = re.denominator!.unit;
 
-            var numExprTranslated = this.TranslateExpression(numExpr);
-            var denomExprTranslated = this.TranslateExpression(numExpr);
+            var numExprTranslated = TranslateExpression(numExpr);
+            var denomExprTranslated = TranslateExpression(numExpr);
 
-            return this.OperatorBinding.Bind(CqlOperator.Ratio, this.RuntimeContextParameter, numExprTranslated, denomExprTranslated);
+            return OperatorBinding.Bind(CqlOperator.Ratio, RuntimeContextParameter, numExprTranslated, denomExprTranslated);
         }
 
         private Expression Quantity(elm.Quantity quantityExpression) =>

@@ -18,17 +18,17 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Equal(elm.Equal eq)
         {
-            var lhsExpression = this.TranslateExpression(eq.operand![0]);
-            var rhsExpression = this.TranslateExpression(eq.operand![1]);
+            var lhsExpression = TranslateExpression(eq.operand![0]);
+            var rhsExpression = TranslateExpression(eq.operand![1]);
             return Equal(lhsExpression, rhsExpression);
         }
 
         protected Expression NotEqual(elm.NotEqual eq)
         {
-            var lhsExpression = this.TranslateExpression(eq.operand![0]);
-            var rhsExpression = this.TranslateExpression(eq.operand![1]);
-            var equal = this.Equal(lhsExpression, rhsExpression);
-            var not = this.OperatorBinding.Bind(CqlOperator.Not, this.RuntimeContextParameter, equal);
+            var lhsExpression = TranslateExpression(eq.operand![0]);
+            var rhsExpression = TranslateExpression(eq.operand![1]);
+            var equal = Equal(lhsExpression, rhsExpression);
+            var not = OperatorBinding.Bind(CqlOperator.Not, RuntimeContextParameter, equal);
             return not;
         }
 
@@ -44,8 +44,8 @@ namespace Hl7.Cql.Compiler
                 }
                 else if (right.Type == typeof(string))
                 {
-                    var call = this.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
-                        this.RuntimeContextParameter,
+                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString,
+                        RuntimeContextParameter,
                         Expression.Convert(left, typeof(object)),
                         right);
                     return call;
@@ -56,8 +56,8 @@ namespace Hl7.Cql.Compiler
             {
                 if (left.Type == typeof(string))
                 {
-                    var call = this.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
-                        this.RuntimeContextParameter,
+                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString,
+                        RuntimeContextParameter,
                         Expression.Convert(right, typeof(object)),
                         left);
                     return call;
@@ -73,22 +73,22 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
                         throw this.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                    var call = this.OperatorBinding.Bind(CqlOperator.ListEqual, this.RuntimeContextParameter, left, right);
+                    var call = OperatorBinding.Bind(CqlOperator.ListEqual, RuntimeContextParameter, left, right);
                     return call;
                 }
                 throw new NotImplementedException().WithContext(this);
             }
             else
             {
-                var call = this.OperatorBinding.Bind(CqlOperator.Equal, this.RuntimeContextParameter, left, right);
+                var call = OperatorBinding.Bind(CqlOperator.Equal, RuntimeContextParameter, left, right);
                 return call;
             }
         }
 
         protected Expression Equivalent(elm.Equivalent eqv)
         {
-            var left = this.TranslateExpression(eqv.operand![0]);
-            var right = this.TranslateExpression(eqv.operand![1]);
+            var left = TranslateExpression(eqv.operand![0]);
+            var right = TranslateExpression(eqv.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -101,7 +101,7 @@ namespace Hl7.Cql.Compiler
                         //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
                         return Expression.Constant(false, typeof(bool?));
                     }
-                    var call = this.OperatorBinding.Bind(CqlOperator.ListEquivalent, this.RuntimeContextParameter, left, right);
+                    var call = OperatorBinding.Bind(CqlOperator.ListEquivalent, RuntimeContextParameter, left, right);
                     return call;
                 }
                 else
@@ -111,7 +111,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var call = this.OperatorBinding.Bind(CqlOperator.Equivalent, this.RuntimeContextParameter, left, right);
+                var call = OperatorBinding.Bind(CqlOperator.Equivalent, RuntimeContextParameter, left, right);
                 return call;
             }
         }

@@ -620,22 +620,22 @@ namespace Hl7.Cql.Compiler
 
         protected Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be)
         {
-            var lhsExpression = this.TranslateExpression(be.operand![0]);
-            var rhsExpression = this.TranslateExpression(be.operand![1]);
-            var call = this.OperatorBinding.Bind(@operator, this.RuntimeContextParameter, lhsExpression, rhsExpression);
+            var lhsExpression = TranslateExpression(be.operand![0]);
+            var rhsExpression = TranslateExpression(be.operand![1]);
+            var call = OperatorBinding.Bind(@operator, RuntimeContextParameter, lhsExpression, rhsExpression);
             return call;
         }
 
         protected Expression UnaryOperator(CqlOperator @operator, elm.UnaryExpression unary)
         {
-            var operand = this.TranslateExpression(unary.operand!);
+            var operand = TranslateExpression(unary.operand!);
             var resultType = unary.resultTypeSpecifier != null
                 ? _typeManager.TypeFor(unary.resultTypeSpecifier, this)
                 : null;
-            var call = this.OperatorBinding.Bind(@operator, this.RuntimeContextParameter, operand);
+            var call = OperatorBinding.Bind(@operator, RuntimeContextParameter, operand);
             if (resultType != null && resultType != call.Type)
             {
-                var typeAs = this.ChangeType(call, resultType);
+                var typeAs = ChangeType(call, resultType);
                 return typeAs;
             }
             else
@@ -647,9 +647,9 @@ namespace Hl7.Cql.Compiler
         protected Expression NaryOperator(CqlOperator @operator, NaryExpression ne)
         {
             var operators = ne.operand
-                .Select(op => this.TranslateExpression(op))
+                .Select(op => TranslateExpression(op))
                 .ToArray();
-            var call = this.OperatorBinding.Bind(@operator, this.RuntimeContextParameter, operators);
+            var call = OperatorBinding.Bind(@operator, RuntimeContextParameter, operators);
             return call;
         }
 
@@ -670,8 +670,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression AggregateOperator(CqlOperator @operator, AggregateExpression aggregate)
         {
-            var operand = this.TranslateExpression(aggregate.source!);
-            var call = this.OperatorBinding.Bind(@operator, this.RuntimeContextParameter, operand);
+            var operand = TranslateExpression(aggregate.source!);
+            var call = OperatorBinding.Bind(@operator, RuntimeContextParameter, operand);
             return call;
         }
 
@@ -715,7 +715,7 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");
                 }
 
-                var @new = this.CallCreateValueSetFacade(cqlValueSet);
+                var @new = CallCreateValueSetFacade(cqlValueSet);
                 return @new;
             }
             return cqlValueSet;
@@ -724,13 +724,13 @@ namespace Hl7.Cql.Compiler
         protected Expression QueryLetRef(QueryLetRef qlre)
         {
             var name = qlre.name!;
-            var expr = this.GetScopeExpression(name);
+            var expr = GetScopeExpression(name);
             return expr;
         }
 
         protected Expression AliasRef(AliasRef ar)
         {
-            var expr = this.GetScopeExpression(ar.name!);
+            var expr = GetScopeExpression(ar.name!);
             return expr;
         }
 
@@ -753,7 +753,7 @@ namespace Hl7.Cql.Compiler
                 var elementBindings = (tuple.element!)
                                .Select(element =>
                                {
-                                   var value = this.TranslateExpression(element.value!);
+                                   var value = TranslateExpression(element.value!);
                                    var memberInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!, _typeManager.Resolver)
                                                     ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
                                    var binding = Binding(value, memberInfo);
@@ -1028,7 +1028,7 @@ namespace Hl7.Cql.Compiler
                             var selectParameter = Expression.Parameter(valueEnumerableElement, TypeNameToIdentifier(value.Type, this));
                             var body = ChangeType(selectParameter, memberArrayElement);
                             var selectLambda = Expression.Lambda(body, selectParameter);
-                            var callSelectMethod = this.OperatorBinding.Bind(CqlOperator.Select, this.RuntimeContextParameter, value, selectLambda);
+                            var callSelectMethod = OperatorBinding.Bind(CqlOperator.Select, RuntimeContextParameter, value, selectLambda);
                             var toArrayMethod = typeof(Enumerable)
                                 .GetMethod(nameof(Enumerable.ToArray))!
                                 .MakeGenericMethod(memberArrayElement);
@@ -1158,7 +1158,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression OperandRef(OperandRef ore)
         {
-            if (this.Operands.TryGetValue(ore.name!, out var expression))
+            if (Operands.TryGetValue(ore.name!, out var expression))
                 return expression;
             else throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
         }
@@ -1273,7 +1273,7 @@ namespace Hl7.Cql.Compiler
                     if (string.IsNullOrWhiteSpace(valueSetRef.name))
                         throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
                     var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef!.libraryName, typeof(CqlValueSet));
-                    var call = this.OperatorBinding.Bind(CqlOperator.Retrieve, this.RuntimeContextParameter,
+                    var call = OperatorBinding.Bind(CqlOperator.Retrieve, RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
                     return call;
                 }
@@ -1282,14 +1282,14 @@ namespace Hl7.Cql.Compiler
                     // In this construct, instead of querying a value set, we're testing resources
                     // against a list of codes, e.g., as defined by the code from or codesystem construct
                     var codes = TranslateExpression(retrieve.codes);
-                    var call = this.OperatorBinding.Bind(CqlOperator.Retrieve, this.RuntimeContextParameter,
+                    var call = OperatorBinding.Bind(CqlOperator.Retrieve, RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
                     return call;
                 }
             }
             else
             {
-                var call = this.OperatorBinding.Bind(CqlOperator.Retrieve, this.RuntimeContextParameter,
+                var call = OperatorBinding.Bind(CqlOperator.Retrieve, RuntimeContextParameter,
                     Expression.Constant(sourceElementType, typeof(Type)), Expression.Constant(null, typeof(CqlValueSet)), codeProperty!);
                 return call;
             }
@@ -1303,14 +1303,14 @@ namespace Hl7.Cql.Compiler
             var path = op.path;
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
-                var scopeExpression = this.GetScopeExpression(op.scope!);
+                var scopeExpression = GetScopeExpression(op.scope!);
                 var expectedType = _typeManager.TypeFor(op, this) ?? typeof(object);
                 var pathMemberInfo = _typeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
                     _typeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
                 {
-                    _logger.LogWarning(this.FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
-                    var call = this.OperatorBinding.Bind(CqlOperator.LateBoundProperty, this.RuntimeContextParameter,
+                    _logger.LogWarning(FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
+                    var call = OperatorBinding.Bind(CqlOperator.LateBoundProperty, RuntimeContextParameter,
                         scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
                 }
@@ -1376,8 +1376,8 @@ namespace Hl7.Cql.Compiler
                 var pathMemberInfo = _typeManager.Resolver.GetProperty(source.Type, path!);
                 if (pathMemberInfo == null)
                 {
-                    _logger.LogWarning(this.FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
-                    var call = this.OperatorBinding.Bind(CqlOperator.LateBoundProperty, this.RuntimeContextParameter,
+                    _logger.LogWarning(FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
+                    var call = OperatorBinding.Bind(CqlOperator.LateBoundProperty, RuntimeContextParameter,
                         source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
                 }
@@ -1449,7 +1449,7 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
-                        var bind = this.OperatorBinding.Bind(CqlOperator.Convert, this.RuntimeContextParameter,
+                        var bind = OperatorBinding.Bind(CqlOperator.Convert, RuntimeContextParameter,
 
                             new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                         return bind;
@@ -1458,7 +1458,7 @@ namespace Hl7.Cql.Compiler
             }
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
-            operands = operands.Prepend(this.RuntimeContextParameter).ToArray();
+            operands = operands.Prepend(RuntimeContextParameter).ToArray();
 
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands);
             return invoke;
@@ -1637,9 +1637,9 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ParameterRef(ParameterRef op)
         {
-            if (this.LibraryContext.Definitions.TryGetValue(this.LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
+            if (LibraryContext.Definitions.TryGetValue(LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
             {
-                var invoke = this.InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda);
+                var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda);
                 return invoke;
             }
 
@@ -1675,9 +1675,9 @@ namespace Hl7.Cql.Compiler
             Type definitionType,
             Expression[] arguments)
         {
-            var definitionsProperty = Expression.Property(this.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
+            var definitionsProperty = Expression.Property(RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string libraryName = this.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
+            string libraryName = LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
                 ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
@@ -1693,7 +1693,7 @@ namespace Hl7.Cql.Compiler
             {
                 var typeArgs = type.GetGenericArguments();
                 var returnType = typeArgs[^1];
-                var invoke = this.InvokeDefinitionThroughRuntimeContext(name, libraryAlias, returnType);
+                var invoke = InvokeDefinitionThroughRuntimeContext(name, libraryAlias, returnType);
                 return invoke;
             }
             else throw this.NewExpressionBuildingException("LambdaExpressions should be a variant of Func<>");
@@ -1704,13 +1704,13 @@ namespace Hl7.Cql.Compiler
             string? libraryAlias,
             Type definitionReturnType)
         {
-            var definitionsProperty = Expression.Property(this.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
+            var definitionsProperty = Expression.Property(RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string libraryName = this.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
+            string libraryName = LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
                                   ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
-            return new DefinitionCallExpression(definitionsProperty, libraryName, name, this.RuntimeContextParameter, funcType);
+            return new DefinitionCallExpression(definitionsProperty, libraryName, name, RuntimeContextParameter, funcType);
         }
 
         private static Expression HandleNullable(Expression expression, Type targetType) =>
@@ -1750,10 +1750,10 @@ namespace Hl7.Cql.Compiler
             // the first pair are special as they are not working off of a partially built tuple,
             // they are working only off of the initial selectmany parameters.
             var first = sources[0];
-            var firstExpression = this.TranslateExpression(first.expression!);
+            var firstExpression = TranslateExpression(first.expression!);
             var firstElementType = _typeManager.Resolver.GetListElementType(firstExpression.Type)!;
             var second = sources[1];
-            var secondExpression = this.TranslateExpression(second.expression!);
+            var secondExpression = TranslateExpression(second.expression!);
             var secondElementType = _typeManager.Resolver.GetListElementType(secondExpression.Type)!;
 
             var firstLambdaParameter = Expression.Parameter(firstElementType, $"_{first.alias}");
@@ -1766,7 +1766,7 @@ namespace Hl7.Cql.Compiler
                 Expression.Bind(tupleType.GetProperty(second.alias)!, secondLambdaParameter));
             var secondSelectManyParameter = Expression.Lambda(memberInit, firstLambdaParameter, secondLambdaParameter);
 
-            var callSelectMany = this.OperatorBinding.Bind(CqlOperator.SelectManyResults, this.RuntimeContextParameter,
+            var callSelectMany = OperatorBinding.Bind(CqlOperator.SelectManyResults, RuntimeContextParameter,
                 firstExpression,
                 firstSelectManyParameter,
                 secondSelectManyParameter);
@@ -1779,7 +1779,7 @@ namespace Hl7.Cql.Compiler
                 {
                     var source = sources[i];
 
-                    var sourceExpression = this.TranslateExpression(source.expression!);
+                    var sourceExpression = TranslateExpression(source.expression!);
                     string message = $"{sourceExpression.Type} was expected to be a list type.";
                     var sourceElementType = _typeManager.Resolver.GetListElementType(sourceExpression.Type) ?? throw this.NewExpressionBuildingException(message);
 
@@ -1801,7 +1801,7 @@ namespace Hl7.Cql.Compiler
                     memberInit = Expression.MemberInit(newTuple, bindings);
                     var p2 = Expression.Lambda(memberInit, ab, c);
 
-                    var callAgain = this.OperatorBinding.Bind(CqlOperator.SelectManyResults, this.RuntimeContextParameter,
+                    var callAgain = OperatorBinding.Bind(CqlOperator.SelectManyResults, RuntimeContextParameter,
                         callSelectMany,
                         p1,
                         p2);
@@ -1865,7 +1865,7 @@ namespace Hl7.Cql.Compiler
         {
             var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
             var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
-            var property = Expression.Property(this.RuntimeContextParameter, operatorsProperty);
+            var property = Expression.Property(RuntimeContextParameter, operatorsProperty);
             var call = Expression.Call(property, createFacadeMethod, operand);
 
             return call;

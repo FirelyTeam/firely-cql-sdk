@@ -21,11 +21,11 @@ namespace Hl7.Cql.Compiler
         protected Expression Coalesce(elm.Coalesce ce)
         {
             var operands = ce.operand!
-                .Select(op => this.TranslateExpression(op))
+                .Select(op => TranslateExpression(op))
                 .ToArray();
             if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
             {
-                var call = this.OperatorBinding.Bind(CqlOperator.Coalesce, this.RuntimeContextParameter, operands[0]);
+                var call = OperatorBinding.Bind(CqlOperator.Coalesce, RuntimeContextParameter, operands[0]);
                 return call;
             }
             var distinctOperandTypes = operands
@@ -56,7 +56,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression IsNull(elm.IsNull isn)
         {
-            var operand = this.TranslateExpression(isn.operand!);
+            var operand = TranslateExpression(isn.operand!);
             if (operand.Type.IsValueType && operand.Type.IsNullable() == false)
                 return Expression.Constant(false, typeof(bool?));
             else

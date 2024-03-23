@@ -77,7 +77,7 @@ namespace Hl7.Cql.Compiler
             ExpressionBuilderContext outer,
             Elm.Element element) : this(outer)
         {
-            Debug.Assert(element != this._element);
+            Debug.Assert(element != _element);
             _outerContext = outer;
             OperatorBinding = OperatorBindingRethrowDecorator.Decorate(this, outer.OperatorBinding);
             _element = element;
@@ -239,7 +239,7 @@ namespace Hl7.Cql.Compiler
                     scopes.Add(normalizedIdentifier, kvp.Value);
                 }
             }
-            var subContext = this.WithScopes(scopes);
+            var subContext = WithScopes(scopes);
             return subContext;
         }
 
