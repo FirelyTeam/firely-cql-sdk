@@ -189,5 +189,6 @@ namespace Hl7.Cql.Abstractions
         /// <param name="type">The .NET type</param>
         /// <param name="propertyName">The property name.</param>
         internal abstract bool ShouldUseSourceObject(Type type, string propertyName);
+
     }
 }
