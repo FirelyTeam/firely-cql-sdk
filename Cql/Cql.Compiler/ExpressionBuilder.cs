@@ -677,10 +677,9 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? IdentifierRef(IdentifierRef ire)
         {
-            ExpressionBuilderContext ctx = this;
-            if (string.Equals("$this", ire.name) && ctx.ImpliedAlias != null)
+            if (string.Equals("$this", ire.name) && ImpliedAlias != null)
             {
-                var scopeExpression = ctx.GetScopeExpression(ctx.ImpliedAlias!);
+                var scopeExpression = GetScopeExpression(ImpliedAlias!);
                 return scopeExpression;
             }
             var pe = new Property
@@ -690,10 +689,9 @@ namespace Hl7.Cql.Compiler
                 localId = ire.localId,
                 locator = ire.locator,
                 path = ire.name,
-                scope = ctx.ImpliedAlias!,
+                scope = ImpliedAlias!,
             };
-            ctx = ctx.Push(pe);
-            var prop = ctx.Property(pe);
+            var prop = Push(pe).Property(pe);
             return prop;
         }
 

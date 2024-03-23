@@ -108,10 +108,9 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Expand(elm.Expand e)
         {
-            ExpressionBuilderContext ctx = this;
-            var source = ctx.TranslateExpression(e!.operand![0]!);
-            var quantity = ctx.TranslateExpression(e!.operand![1]!);
-            return ctx.OperatorBinding.Bind(CqlOperator.Expand, ctx.RuntimeContextParameter, source, quantity);
+            var source = this.TranslateExpression(e!.operand![0]!);
+            var quantity = this.TranslateExpression(e!.operand![1]!);
+            return OperatorBinding.Bind(CqlOperator.Expand, this.RuntimeContextParameter, source, quantity);
         }
 
         protected Expression In(elm.In e)

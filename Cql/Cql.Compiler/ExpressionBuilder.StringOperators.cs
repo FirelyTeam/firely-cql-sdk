@@ -94,10 +94,9 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Split(elm.Split e)
         {
-            ExpressionBuilderContext ctx = this;
-            var stringToSplit = ctx.TranslateExpression(e.stringToSplit!);
-            var separator = ctx.TranslateExpression(e.separator!);
-            return ctx.OperatorBinding.Bind(CqlOperator.Split, ctx.RuntimeContextParameter, stringToSplit, separator);
+            var stringToSplit = TranslateExpression(e.stringToSplit!);
+            var separator = TranslateExpression(e.separator!);
+            return OperatorBinding.Bind(CqlOperator.Split, RuntimeContextParameter, stringToSplit, separator);
         }
 
         protected Expression? StartsWith(elm.StartsWith e) =>
