@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 
@@ -70,7 +71,7 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            var property = Factory.TypeManager.Resolver.GetProperty(typeof(MeasureReport.PopulationComponent), "id");
+            var property = ExpressionBuilderContext.GetProperty(typeof(MeasureReport.PopulationComponent), "id", Factory.TypeManager.Resolver);
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

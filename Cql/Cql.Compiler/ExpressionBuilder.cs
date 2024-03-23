@@ -762,7 +762,7 @@ namespace Hl7.Cql.Compiler
                                .Select(element =>
                                {
                                    var value = ctx.TranslateExpression(element.value!);
-                                   var memberInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!)
+                                   var memberInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!, _typeManager.Resolver)
                                                     ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
                                    var binding = Binding(value, memberInfo);
                                    return binding;
@@ -993,7 +993,7 @@ namespace Hl7.Cql.Compiler
                     var tuple = tuples[i];
                     var element = tuple.Item1;
                     var expression = tuple.Item2;
-                    var memberInfo = GetProperty(instanceType!, element) ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType!)}");
+                    var memberInfo = GetProperty(instanceType!, element, _typeManager.Resolver) ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType!)}");
                     var binding = Binding(expression, memberInfo);
                     elementBindings[i] = binding;
                 }
@@ -1669,7 +1669,7 @@ namespace Hl7.Cql.Compiler
             throw ctx.NewExpressionBuildingException($"Parameter {op.name} hasn't been defined yet.");
         }
 
-        protected internal MemberInfo? GetProperty(Type type, string name)
+        protected internal static MemberInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
         {
             if (type.IsGenericType)
             {
@@ -1685,7 +1685,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            var member = _typeManager.Resolver.GetProperty(type, name);
+            var member = typeResolver.GetProperty(type, name);
             return member;
         }
 
