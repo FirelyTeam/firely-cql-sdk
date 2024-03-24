@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
         protected Expression First(elm.First e)
         {
             var operand = TranslateExpression(e.source!);
-            var call = OperatorBinding.Bind(CqlOperator.First, RuntimeContextParameter, operand);
+            var call = _operatorBinding.Bind(CqlOperator.First, ExpressionBuilder.ContextParameter, operand);
             return call;
         }
 
@@ -38,7 +38,7 @@ namespace Hl7.Cql.Compiler
             var element = TranslateExpression(e.element!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return OperatorBinding.Bind(CqlOperator.IndexOf, RuntimeContextParameter, source, element);
+                return _operatorBinding.Bind(CqlOperator.IndexOf, ExpressionBuilder.ContextParameter, source, element);
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -46,7 +46,7 @@ namespace Hl7.Cql.Compiler
         protected Expression Last(elm.Last e)
         {
             var operand = TranslateExpression(e.source!);
-            var call = OperatorBinding.Bind(CqlOperator.Last, RuntimeContextParameter, operand);
+            var call = _operatorBinding.Bind(CqlOperator.Last, ExpressionBuilder.ContextParameter, operand);
             return call;
         }
 
@@ -65,7 +65,7 @@ namespace Hl7.Cql.Compiler
                 : TranslateExpression(slice.endIndex!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return OperatorBinding.Bind(CqlOperator.Slice, RuntimeContextParameter, source, start, end);
+                return _operatorBinding.Bind(CqlOperator.Slice, ExpressionBuilder.ContextParameter, source, start, end);
             }
             throw new NotImplementedException().WithContext(this);
         }

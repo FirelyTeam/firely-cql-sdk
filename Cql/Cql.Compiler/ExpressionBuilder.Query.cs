@@ -72,11 +72,11 @@ internal partial class ContextualExpressionBuilder
 
                 var selectManyLambda = ctx.WithToSelectManyBody(rootScopeParameter, relationship);
 
-                var selectManyCall = ctx.OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
+                var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, ExpressionBuilder.ContextParameter,
                     @return, selectManyLambda);
                 if (relationship is Without)
                 {
-                    var callExcept = ctx.OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter,
+                    var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, ExpressionBuilder.ContextParameter,
                         @return, selectManyCall);
                     @return = callExcept;
                 }
@@ -102,7 +102,7 @@ internal partial class ContextualExpressionBuilder
             
             var whereBody = ctx.TranslateExpression(query.where);
             var whereLambda = Expression.Lambda(whereBody, rootScopeParameter);
-            var callWhere = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
+            var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, ExpressionBuilder.ContextParameter, @return, whereLambda);
             @return = callWhere;
 
             ctx = ctx.Pop();
@@ -114,7 +114,7 @@ internal partial class ContextualExpressionBuilder
 
             var selectBody = ctx.TranslateExpression(query.@return.expression!);
             var selectLambda = Expression.Lambda(selectBody, rootScopeParameter);
-            var callSelect = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, @return, selectLambda);
+            var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, ExpressionBuilder.ContextParameter, @return, selectLambda);
             @return = callSelect;
 
             ctx = ctx.Pop();
@@ -144,7 +144,7 @@ internal partial class ContextualExpressionBuilder
 
             var lambdaBody = subContext.TranslateExpression(query.aggregate.expression!);
             var lambda = Expression.Lambda(lambdaBody, resultParameter, rootScopeParameter);
-            var aggregateCall = ctx.OperatorBinding.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
+            var aggregateCall = ctx._operatorBinding.Bind(CqlOperator.Aggregate, ExpressionBuilder.ContextParameter, @return, lambda, startingValue);
             @return = aggregateCall;
 
             ctx = ctx.Pop();
@@ -172,7 +172,7 @@ internal partial class ContextualExpressionBuilder
                     var sortMemberExpression = subContext.TranslateExpression(byExpression.expression);
                     var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
                     var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                    var sort = ctx.OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                    var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, ExpressionBuilder.ContextParameter,
                         @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                     @return = sort;
                 }
@@ -189,13 +189,13 @@ internal partial class ContextualExpressionBuilder
                     var pathExpression = ctx.PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
                     var lambdaBody = Expression.Convert(pathExpression, typeof(object));
                     var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                    var sort = ctx.OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                    var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, ExpressionBuilder.ContextParameter,
                         @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                     @return = sort;
                 }
                 else
                 {
-                    var sort = ctx.OperatorBinding.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
+                    var sort = ctx._operatorBinding.Bind(CqlOperator.Sort, ExpressionBuilder.ContextParameter,
                         @return, Expression.Constant(order, typeof(ListSortDirection)));
                     @return = sort;
                 }
@@ -209,7 +209,7 @@ internal partial class ContextualExpressionBuilder
         // Because we promoted the source to a list, we now have to demote the result again.
         if (promotedSource)
         {
-            var callSingle = ctx.OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
+            var callSingle = ctx._operatorBinding.Bind(CqlOperator.Single, ExpressionBuilder.ContextParameter, @return);
             @return = callSingle;
         }
         
@@ -266,11 +266,11 @@ internal partial class ContextualExpressionBuilder
             {
                 var selectManyLambda = ctx.WithToSelectManyBody(multiSourceTupleType, relationship);
 
-                var selectManyCall = ctx.OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
+                var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, ExpressionBuilder.ContextParameter,
                     @return, selectManyLambda);
                 if (relationship is Without)
                 {
-                    var callExcept = ctx.OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter,
+                    var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, ExpressionBuilder.ContextParameter,
                         @return, selectManyCall);
                     @return = callExcept;
                 }
@@ -298,7 +298,7 @@ internal partial class ContextualExpressionBuilder
             
             var whereBody = subContext.TranslateExpression(query.where);
             var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
-            var callWhere = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
+            var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, ExpressionBuilder.ContextParameter, @return, whereLambda);
             @return = callWhere;
         }
 
@@ -320,7 +320,7 @@ internal partial class ContextualExpressionBuilder
 
             var selectBody = subContext.TranslateExpression(query.@return.expression!);
             var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-            var callSelect = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, @return, selectLambda);
+            var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, ExpressionBuilder.ContextParameter, @return, selectLambda);
             @return = callSelect;
         }
 
@@ -361,7 +361,7 @@ internal partial class ContextualExpressionBuilder
 
                 var lambdaBody = subContext.TranslateExpression(query.aggregate.expression!);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
-                var aggregateCall = ctx.OperatorBinding.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
+                var aggregateCall = ctx._operatorBinding.Bind(CqlOperator.Aggregate, ExpressionBuilder.ContextParameter, @return, lambda, startingValue);
                 @return = aggregateCall;
             }
             else
@@ -426,7 +426,7 @@ internal partial class ContextualExpressionBuilder
         if (isSingle)
         {
             var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
-            var callSingle = ctx.OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
+            var callSingle = ctx._operatorBinding.Bind(CqlOperator.Single, ExpressionBuilder.ContextParameter, @return);
             @return = callSingle;
         }
 
@@ -470,12 +470,12 @@ internal partial class ContextualExpressionBuilder
         var suchThatBody = whereContext.TranslateExpression(with.suchThat);
 
         var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-        var callWhereOnSource = OperatorBinding.Bind(CqlOperator.Where, RuntimeContextParameter, source, whereLambda);
+        var callWhereOnSource = _operatorBinding.Bind(CqlOperator.Where, ExpressionBuilder.ContextParameter, source, whereLambda);
 
         var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var selectBody = rootScopeParameter; // P => E
         var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-        var callSelectOnWhere = OperatorBinding.Bind(CqlOperator.Select, RuntimeContextParameter, callWhereOnSource, selectLambda);
+        var callSelectOnWhere = _operatorBinding.Bind(CqlOperator.Select, ExpressionBuilder.ContextParameter, callWhereOnSource, selectLambda);
         var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
 
         return selectManyLambda;
@@ -528,12 +528,12 @@ internal partial class ContextualExpressionBuilder
         var whereContext = selectManyContext.WithScope(with.alias!, whereLambdaParameter, with);
         var suchThatBody = selectManyContext.TranslateExpression(with.suchThat);
         var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-        var callWhereOnSource = OperatorBinding.Bind(CqlOperator.Where, RuntimeContextParameter, source, whereLambda);
+        var callWhereOnSource = _operatorBinding.Bind(CqlOperator.Where, ExpressionBuilder.ContextParameter, source, whereLambda);
 
         var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         var selectBody = selectManyParameter; // P => E
         var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-        var callSelectOnWhere = OperatorBinding.Bind(CqlOperator.Select, RuntimeContextParameter, callWhereOnSource, selectLambda);
+        var callSelectOnWhere = _operatorBinding.Bind(CqlOperator.Select, ExpressionBuilder.ContextParameter, callWhereOnSource, selectLambda);
 
         var selectManyLambda = Expression.Lambda(callSelectOnWhere, selectManyParameter);
         return selectManyLambda;

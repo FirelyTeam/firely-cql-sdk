@@ -8,7 +8,7 @@ partial class ExpressionBuilder
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? definitions = null) =>
-        new ContextualLibrarySetExpressionBuilder( _loggerFactory, _operatorBinding, _typeManager, Settings, librarySet, definitions ?? new())
+        new ContextualLibrarySetExpressionBuilder( _loggerFactory, _operatorBinding, _typeManager, _settings, librarySet, definitions ?? new())
             .ProcessLibrarySet();
 }
 

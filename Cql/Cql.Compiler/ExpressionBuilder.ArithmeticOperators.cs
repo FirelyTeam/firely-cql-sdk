@@ -52,16 +52,16 @@ namespace Hl7.Cql.Compiler
         protected Expression MaxValue(elm.MaxValue max)
         {
             var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
-            var call = OperatorBinding.Bind(CqlOperator.MaximumValue,
-                RuntimeContextParameter,
+            var call = _operatorBinding.Bind(CqlOperator.MaximumValue,
+                ExpressionBuilder.ContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
         protected Expression MinValue(elm.MinValue min)
         {
             var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
-            var call = OperatorBinding.Bind(CqlOperator.MinimumValue,
-                RuntimeContextParameter,
+            var call = _operatorBinding.Bind(CqlOperator.MinimumValue,
+                ExpressionBuilder.ContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
@@ -106,7 +106,7 @@ namespace Hl7.Cql.Compiler
             if (e.precision != null)
                 precision = TranslateExpression(e.precision!);
             else precision = Expression.Constant(null, typeof(int?));
-            var call = OperatorBinding.Bind(CqlOperator.Round, RuntimeContextParameter, operand, precision);
+            var call = _operatorBinding.Bind(CqlOperator.Round, ExpressionBuilder.ContextParameter, operand, precision);
             return call;
         }
 
