@@ -28,6 +28,24 @@ classDiagram
     }
 
     namespace Expression_Building {
+        class Expression{
+        }
+
+        class Library{
+        }
+
+        class LibrarySet{
+        }
+
+        class ContextualExpressionBuilder{
+        }
+
+        class ContextualLibraryExpressionBuilder{
+        }
+
+        class ContextualLibrarySetExpressionBuilder{
+        }
+
         class ExpressionBuilder {
         }
 
@@ -64,7 +82,8 @@ classDiagram
     }
 
     %% Inheritance  
-    
+
+   
     CqlOperatorsBinding --> OperatorBinding : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
@@ -74,7 +93,16 @@ classDiagram
     CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected
+    
+    Expression ..> ContextualExpressionBuilder : processed by
 
+    ContextualExpressionBuilder ..> ContextualLibraryExpressionBuilder : created by
+    Library ..> ContextualLibraryExpressionBuilder : processed by
+
+    ContextualLibraryExpressionBuilder ..> ContextualLibrarySetExpressionBuilder : created by
+    LibrarySet ..> ContextualLibrarySetExpressionBuilder : processed by
+
+    ContextualLibrarySetExpressionBuilder ..> ExpressionBuilder : created by
     TypeManager ..> ExpressionBuilder : injected
     OperatorBinding ..> ExpressionBuilder : injected
 
@@ -97,6 +125,8 @@ classDiagram
 ```
 
 ## ExpressionBuilders and Contexts
+⚠️ This diagram is outdated!
+
 ```mermaid
 classDiagram
     direction TD

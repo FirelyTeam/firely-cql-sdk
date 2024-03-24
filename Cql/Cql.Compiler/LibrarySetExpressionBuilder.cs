@@ -1,44 +1,28 @@
 ﻿using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
 partial class ExpressionBuilder
 {
-    // private readonly ILogger<LibrarySetExpressionBuilder> _logger;
-    // private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
-    //
-    // public LibrarySetExpressionBuilder(
-    //     ILogger<LibrarySetExpressionBuilder> logger, 
-    //     LibraryExpressionBuilder libraryExpressionBuilder)
-    // {
-    //     _logger = logger;
-    //     _libraryExpressionBuilder = libraryExpressionBuilder;
-    // }
-    //
-    private ContextualLibrarySetExpressionBuilder CreateContextualLibrarySetExpressionBuilder(
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions) =>
-        new ContextualLibrarySetExpressionBuilder(librarySet, definitions);
-
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? definitions = null)
+        DefinitionDictionary<LambdaExpression>? definitions = null) =>
+        new ContextualLibrarySetExpressionBuilder( _loggerFactory, _operatorBinding, _typeManager, Settings, librarySet, definitions ?? new())
+            .ProcessLibrarySet();
+}
 
+internal partial class ContextualLibrarySetExpressionBuilder
+{
+    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet()
     {
-        definitions ??= new();
-        var libsCtx = CreateContextualLibrarySetExpressionBuilder(librarySet, definitions);
-        ProcessLibrarySet(libsCtx);
-        return definitions;
-    }
-
-    private void ProcessLibrarySet(ContextualLibrarySetExpressionBuilder libsCtx)
-    {
-        foreach (var library in libsCtx.LibrarySet)
-        { 
-            var packageDefinitions = ProcessLibrary(library, libsCtx);
-            libsCtx.MergeDefinitions(packageDefinitions);
+        foreach (var library in LibrarySet)
+        {
+            var packageDefinitions = CreateContextualLibraryExpressionBuilder(library, new()).ProcessLibrary();
+            _allDefinitions.Merge(packageDefinitions);
         }
+
+        return _allDefinitions;
     }
+
 }

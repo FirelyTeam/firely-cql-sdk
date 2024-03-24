@@ -27,21 +27,22 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     internal partial class ContextualExpressionBuilder
     {
+        private static readonly ParameterExpression ContextParameter = Expression.Parameter(typeof(CqlContext), "context");
+
         private readonly TypeManager _typeManager;
 
         internal ContextualExpressionBuilder(
-            OperatorBinding operatorBinding, 
-            ExpressionBuilderSettings settings,
-            ParameterExpression contextParameter,
-            ContextualLibraryExpressionBuilder libContext,
-            elm.Element element, 
+            ILogger<ContextualExpressionBuilder> logger,
+            OperatorBinding operatorBinding,
             TypeManager typeManager,
-            ILogger<ContextualExpressionBuilder> logger)
+            ExpressionBuilderSettings settings,
+            ContextualLibraryExpressionBuilder libContext,
+            elm.Element element)
         {
             _element = element;
             _outerContext = null;
             ExpressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
-            RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
+            RuntimeContextParameter = ContextParameter;
             OperatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();

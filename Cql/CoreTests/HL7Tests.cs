@@ -48,14 +48,14 @@ namespace CoreTests
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
             var libraryExpressionBuilder = NewExpressionBuilder();
-            var definitions = libraryExpressionBuilder.ProcessLibrary(fhirHelpersPackage);
+            var definitions = libraryExpressionBuilder.ProcessSingleLibrary(fhirHelpersPackage);
             LambdasByTestName.Lambdas.Merge(definitions);
 
 
             foreach (var file in hl7TestDirectory.GetFiles("*.json"))
             {
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
-                definitions = libraryExpressionBuilder.ProcessLibrary(elmPackage);
+                definitions = libraryExpressionBuilder.ProcessSingleLibrary(elmPackage);
                 LambdasByTestName.Lambdas.Merge(definitions);
             }
 

@@ -13,13 +13,14 @@ namespace Hl7.Cql.Compiler;
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal class ContextualLibraryExpressionBuilder : IBuilderContext
+internal partial class ContextualLibraryExpressionBuilder : IBuilderContext
 {
+    private readonly ILogger<ContextualLibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
-    public ContextualLibrarySetExpressionBuilder? LibrarySetContext { get; }
+    private ContextualLibrarySetExpressionBuilder? LibrarySetContext { get; }
 
     public ContextualLibraryExpressionBuilder(
         Library library,
@@ -36,6 +37,7 @@ internal class ContextualLibraryExpressionBuilder : IBuilderContext
         Definitions = definitions;
         _typeManager = typeManager;
         _loggerFactory = loggerFactory;
+        _logger = loggerFactory.CreateLogger<ContextualLibraryExpressionBuilder>();
         Library = library;
         LibrarySetContext = libsCtx;
         _libraryNameAndVersionByAlias = new();
@@ -53,14 +55,7 @@ internal class ContextualLibraryExpressionBuilder : IBuilderContext
 
     public ContextualExpressionBuilder CreateContextualExpressionBuilder(
         Element element) =>
-        new ContextualExpressionBuilder(
-            _operatorBinding,
-            _expressionBuilderSettings,
-            ExpressionBuilder.ContextParameter,
-            this,
-            element,
-            _typeManager,
-            _loggerFactory.CreateLogger<ContextualExpressionBuilder>());
+        new(_loggerFactory.CreateLogger<ContextualExpressionBuilder>(), _operatorBinding, _typeManager, _expressionBuilderSettings, this, element);
 
     #region Definitions
 

@@ -52,7 +52,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the settings used while building expressions.
         /// </summary>
-        public ExpressionBuilderSettings Settings { get; }
+        private ExpressionBuilderSettings Settings { get; }
 
         /// <summary>
         /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
@@ -63,22 +63,27 @@ namespace Hl7.Cql.Compiler
         /// </remarks>
         /// <param name="library">The containing ELM library</param>
         /// <param name="expression">The ELM expression to convert</param>
-        /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="lambdas">Existing lambdas, required if <paramref name="expression"/> contains any references to other ELM definitions</param>
         public LambdaExpression Lambda(
             Library library,
             Elm.Expression expression,
-            OperatorBinding operatorBinding,
             DefinitionDictionary<LambdaExpression>? lambdas = null)
         {
+            var librarySet = CreateLibrarySetOfOne(library);
+            var translated = CreateContextualLibrarySetExpressionBuilder(librarySet, lambdas)
+                .CreateContextualLibraryExpressionBuilder(library, new())
+                .CreateContextualExpressionBuilder(expression)
+                .TranslateExpression(expression);
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
-            lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            var libraryExpressionsBuilderContext = new ContextualLibraryExpressionBuilder(library, Settings, operatorBinding, lambdas, _typeManager, _loggerFactory);
-            var ctx = libraryExpressionsBuilderContext.CreateContextualExpressionBuilder(expression);
-            var translated = ctx.TranslateExpression(expression);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
         }
+
+        private static LibrarySet CreateLibrarySetOfOne(Library library) => 
+            new($"Single LibrarySet `{library}`", library);
+
+        private ContextualLibrarySetExpressionBuilder CreateContextualLibrarySetExpressionBuilder(LibrarySet librarySet, DefinitionDictionary<LambdaExpression>? lambdas) => 
+            new(_loggerFactory, _operatorBinding, _typeManager, Settings, librarySet, lambdas??new());
     }
 
     partial class ContextualExpressionBuilder

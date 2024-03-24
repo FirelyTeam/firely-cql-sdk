@@ -27,7 +27,7 @@ namespace Hl7.Cql.Packaging
         {
             var factory = new ExpressionBuilderFactory(logFactory);
             var expressionBuilder = factory.ExpressionBuilder;
-            var lambda = expressionBuilder.Lambda(library, expression, factory.CqlOperatorsBinding);
+            var lambda = expressionBuilder.Lambda(library, expression);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);
         }
