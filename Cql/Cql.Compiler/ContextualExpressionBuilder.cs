@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
-using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
@@ -55,10 +54,10 @@ namespace Hl7.Cql.Compiler
         private ContextualExpressionBuilder(
             ContextualExpressionBuilder source)
         {
-            _operatorBinding = source._operatorBinding;
             _element = source._element;
             _outerContext = source._outerContext;
             _expressionBuilderSettings = source._expressionBuilderSettings;
+            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
             _impliedAlias = source._impliedAlias;
             _operands = source._operands;
             _libraries = source._libraries;

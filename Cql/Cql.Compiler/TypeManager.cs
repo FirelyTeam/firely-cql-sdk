@@ -33,12 +33,12 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the <see cref="TypeResolver"/> this TypeManager uses.
         /// </summary>
-        public TypeResolver Resolver { get; }
+        protected internal TypeResolver Resolver { get; }
 
         /// <summary>
         /// Gets the namespace for generated tuple types as supplied in the constructor.
         /// </summary>
-        private string TupleTypeNamespace { get; }
+        protected internal string TupleTypeNamespace { get; }
 
         /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
@@ -47,7 +47,7 @@ namespace Hl7.Cql.Compiler
 
         private readonly List<Type> TupleTypeList;
 
-        private ModuleBuilder ModuleBuilder { get; }
+        public ModuleBuilder ModuleBuilder { get; }
 
         private Hasher Hasher { get; }
 
@@ -78,259 +78,6 @@ namespace Hl7.Cql.Compiler
             TupleTypeNamespace = tupleTypeNamespace;
         }
 
-        internal Type? TypeFor(
-            Element element,
-            ContextualExpressionBuilder ctx,
-            bool throwIfNotFound = true)
-        {
-            if (element?.resultTypeSpecifier != null)
-                return TypeFor(element.resultTypeSpecifier, ctx);
-
-            if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
-                return Resolver.ResolveType(element!.resultTypeName!.Name)
-                       ?? throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
-
-            switch (element)
-            {
-                case ExpressionRef expressionRef:
-                {
-                    var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
-                    if (!ctx.LibraryContext.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
-                        throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
-
-                    var returnType = definition!.ReturnType;
-
-                    return returnType;
-                }
-
-                case ExpressionDef { expression: not null } def:
-                {
-                    ctx = ctx.Push(def.expression);
-                    var type = TypeFor(def.expression, ctx, throwIfNotFound: false);
-                    if (type == null)
-                    {
-                        if (def.expression is SingletonFrom singleton)
-                        {
-                            type = TypeFor(singleton, ctx, throwIfNotFound: false);
-                            if (type == null)
-                            {
-                                if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
-                                {
-                                    type = Resolver.ResolveType(retrieve.dataType.Name);
-                                    if (type != null)
-                                        return type;
-                                }
-                            }
-                            else return type;
-                        }
-                    }
-
-                    break;
-                }
-
-                case Property propertyExpression when !string.IsNullOrWhiteSpace(propertyExpression.path):
-                {
-                    Type? sourceType = null;
-                    if (propertyExpression.source != null)
-                        sourceType = TypeFor(propertyExpression.source!, ctx.Push(propertyExpression.source));
-                    else if (propertyExpression.scope != null)
-                    {
-                        var scope = ctx.GetScope(propertyExpression.scope);
-                        sourceType = scope.Item1.Type;
-                    }
-                    if (sourceType != null)
-                    {
-                        var property = Resolver.GetProperty(sourceType, propertyExpression.path);
-                        if (property != null)
-                            return property.PropertyType;
-                        return typeof(object); // this is likely a choice
-                    }
-
-                    break;
-                }
-
-                case AliasRef aliasRef when !string.IsNullOrWhiteSpace(aliasRef.name):
-                {
-                    var scope = ctx.GetScope(aliasRef.name);
-                    return scope.Item1.Type;
-                }
-
-                case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
-                {
-                    ctx.Operands.TryGetValue(operandRef.name, out var operand);
-                    if (operand != null)
-                        return operand.Type;
-                    break;
-                }
-            }
-            if (throwIfNotFound)
-                throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
-            
-            return null;
-        }
-
-        internal Type TypeFor(TypeSpecifier resultTypeSpecifier,
-            ContextualExpressionBuilder ctx)
-        {
-            if (resultTypeSpecifier == null) 
-                return typeof(object);
-
-            if (resultTypeSpecifier is IntervalTypeSpecifier interval)
-            {
-                var pointType = TypeFor(interval.pointType!, ctx);
-                var intervalType = typeof(CqlInterval<>).MakeGenericType(pointType);
-                return intervalType;
-            }
-
-            if (resultTypeSpecifier is NamedTypeSpecifier named)
-            {
-                var type = Resolver.ResolveType(named.name.Name!);
-                if (type == null)
-                    throw new ArgumentException("Cannot resolve type for expression");
-                return type!;
-            }
-
-            if (resultTypeSpecifier is ChoiceTypeSpecifier)
-            {
-                return typeof(object);
-            }
-
-            if (resultTypeSpecifier is ListTypeSpecifier list)
-            {
-                if (list.elementType == null)
-                    throw new ArgumentException("ListTypeSpecifier must have a non-null elementType");
-                var elementType = TypeFor(list.elementType, ctx);
-                if (elementType == null)
-                    throw new ArgumentException("Cannot resolve type for expression");
-
-                var enumerableOfElementType = typeof(IEnumerable<>).MakeGenericType(elementType);
-                return enumerableOfElementType;
-            }
-
-            if (resultTypeSpecifier is TupleTypeSpecifier tuple)
-            {
-                // witnessed in ELM:
-                //"type" : "TupleTypeSpecifier",
-                //"resultTypeSpecifier" : {
-                //      "type" : "TupleTypeSpecifier",
-                //      "element": { ... x ... }
-                // },
-                // "element": { ... y ... }
-                //
-                // In the example above, x and y have different structures.
-                // Code handles x but not y
-                if (resultTypeSpecifier.resultTypeSpecifier != null)
-                    return TypeFor(tuple.resultTypeSpecifier, ctx);
-
-                return TupleTypeFor(tuple, ctx);
-            }
-
-            throw new NotImplementedException().WithContext(ctx);
-        }
-
-        internal static string PrettyTypeName(Type type)
-        {
-            string typeName = type.Name;
-            if (type.IsGenericType)
-            {
-                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    typeName = Nullable.GetUnderlyingType(type)!.Name;
-                }
-                else
-                {
-                    if (type.IsGenericType)
-                    {
-                        var tildeIndex = type.Name.IndexOf('`');
-                        var rootName = type.Name.Substring(0, tildeIndex);
-                        var genericArgumentNames = type.GetGenericArguments()
-                            .Select(arg => PrettyTypeName(arg));
-                        var prettyName = $"{rootName}{string.Join("", genericArgumentNames)}";
-                        typeName = prettyName;
-                    }
-                }
-            }
-            return typeName;
-        }
-
-        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ContextualExpressionBuilder ctx, Func<Type, Type>? changeType = null)
-        {
-            var elements = tuple.element;
-
-            if (elements?.Length == 0)
-                return typeof(object);
-
-            var elementTuples = elements!
-                .Select(e => (e.name, e.elementType))
-                .ToArray();
-            return TupleTypeFor(elementTuples, ctx, changeType);
-        }
-
-        internal Type TupleTypeFor(elm.Tuple tuple, ContextualExpressionBuilder ctx, Func<Type, Type>? changeType = null)
-        {
-            var elements = tuple.element;
-
-            if (elements?.Length == 0)
-                return typeof(object);
-
-            var elementTuples = elements!
-                .Select(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")))
-                .ToArray();
-            return TupleTypeFor(elementTuples, ctx, changeType);
-        }
-
-        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ContextualExpressionBuilder ctx, Func<Type, Type>? changeType)
-        {
-            var elementInfo = elements!
-                                .ToDictionary(el => el.name, el =>
-                                {
-                                    Type? type;
-                                    if (el.elementType != null)
-                                        type = TypeFor(el.elementType!, ctx);
-                                    else
-                                    {
-                                        throw ctx.NewExpressionBuildingException($"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
-                                    }
-                                    if (changeType != null)
-                                        type = changeType(type);
-                                    return type;
-                                });
-            var allTypes = TupleTypes;
-            foreach (var type in allTypes)
-            {
-                var typeIsMatch = true;
-                foreach (var kvp in elementInfo)
-                {
-                    var normalizedKey = ContextualExpressionBuilder.NormalizeIdentifier(kvp.Key);
-                    var typeProperty = type.GetProperty(normalizedKey!);
-                    if (typeProperty == null || typeProperty.PropertyType != kvp.Value)
-                    {
-                        typeIsMatch = false;
-                        break;
-                    }
-                }
-                if (typeIsMatch)
-                    return type;
-            }
-
-            var typeName = $"{TupleTypeNamespace}.{TupleTypeNameFor(elementInfo)}";
-
-            var myTypeBuilder = ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
-
-            foreach (var kvp in elementInfo)
-            {
-                if (kvp.Key != null)
-                {
-                    var name = ContextualExpressionBuilder.NormalizeIdentifier(kvp.Key);
-                    var type = kvp.Value;
-                    DefineProperty(myTypeBuilder, name!, kvp.Key, type);
-                }
-            }
-            var typeInfo = myTypeBuilder.CreateTypeInfo();
-            AddTupleType(typeInfo!);
-            return typeInfo!;
-        }
-
         /// <summary>
         /// Gets a unique tuple name given the elements (members) of the type.
         /// This method must return the same value for equal values of <paramref name="elementInfo"/>.
@@ -339,7 +86,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
         /// <returns>The unique tuple type name.</returns>
-        protected string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
+        public string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)
@@ -349,14 +96,14 @@ namespace Hl7.Cql.Compiler
             return $"Tuple_{tupleId}";
         }
 
-        private void AddTupleType(Type type)
+        public void AddTupleType(Type type)
         {
             if (TupleTypeList.Contains(type))
                 throw new ArgumentException($"Type {type.Name} already exists", nameof(type));
             TupleTypeList.Add(type);
         }
 
-        private static void DefineProperty(TypeBuilder myTypeBuilder, string normalizedName, string cqlName, Type type)
+        public static void DefineProperty(TypeBuilder myTypeBuilder, string normalizedName, string cqlName, Type type)
         {
             var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
             var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
@@ -384,6 +131,260 @@ namespace Hl7.Cql.Compiler
                 propertyBuilder.SetSetMethod(set);
             }
         }
+        
+        internal static string PrettyTypeName(Type type)
+        {
+            string typeName = type.Name;
+            if (type.IsGenericType)
+            {
+                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    typeName = Nullable.GetUnderlyingType(type)!.Name;
+                }
+                else
+                {
+                    if (type.IsGenericType)
+                    {
+                        var tildeIndex = type.Name.IndexOf('`');
+                        var rootName = type.Name.Substring(0, tildeIndex);
+                        var genericArgumentNames = type.GetGenericArguments()
+                            .Select(arg => PrettyTypeName(arg));
+                        var prettyName = $"{rootName}{string.Join("", genericArgumentNames)}";
+                        typeName = prettyName;
+                    }
+                }
+            }
+            return typeName;
+        }
+    }
 
+    internal partial class ContextualExpressionBuilder
+    {
+        private Type? TypeFor(
+            Element element,
+            bool throwIfNotFound = true)
+        {
+            ContextualExpressionBuilder ctx = this;
+            if (element?.resultTypeSpecifier != null)
+                return TypeFor(element.resultTypeSpecifier);
+
+            if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
+                return _typeManager.Resolver.ResolveType(element!.resultTypeName!.Name)
+                       ?? throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
+
+            switch (element)
+            {
+                case ExpressionRef expressionRef:
+                    {
+                        var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
+                        if (!ctx.LibraryContext.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                            throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
+
+                        var returnType = definition!.ReturnType;
+
+                        return returnType;
+                    }
+
+                case ExpressionDef { expression: not null } def:
+                    {
+                        ctx = ctx.Push(def.expression);
+                        var type = TypeFor(def.expression, throwIfNotFound: false);
+                        if (type == null)
+                        {
+                            if (def.expression is SingletonFrom singleton)
+                            {
+                                type = TypeFor(singleton, throwIfNotFound: false);
+                                if (type == null)
+                                {
+                                    if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
+                                    {
+                                        type = _typeManager.Resolver.ResolveType(retrieve.dataType.Name);
+                                        if (type != null)
+                                            return type;
+                                    }
+                                }
+                                else return type;
+                            }
+                        }
+
+                        break;
+                    }
+
+                case Property propertyExpression when !string.IsNullOrWhiteSpace(propertyExpression.path):
+                    {
+                        Type? sourceType = null;
+                        if (propertyExpression.source != null)
+                            sourceType = TypeFor(propertyExpression.source!);
+                        else if (propertyExpression.scope != null)
+                        {
+                            var scope = ctx.GetScope(propertyExpression.scope);
+                            sourceType = scope.Item1.Type;
+                        }
+                        if (sourceType != null)
+                        {
+                            var property = _typeManager.Resolver.GetProperty(sourceType, propertyExpression.path);
+                            if (property != null)
+                                return property.PropertyType;
+                            return typeof(object); // this is likely a choice
+                        }
+
+                        break;
+                    }
+
+                case AliasRef aliasRef when !string.IsNullOrWhiteSpace(aliasRef.name):
+                    {
+                        var scope = ctx.GetScope(aliasRef.name);
+                        return scope.Item1.Type;
+                    }
+
+                case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
+                    {
+                        ctx.Operands.TryGetValue(operandRef.name, out var operand);
+                        if (operand != null)
+                            return operand.Type;
+                        break;
+                    }
+            }
+            if (throwIfNotFound)
+                throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
+
+            return null;
+        }
+
+        private Type TypeFor(TypeSpecifier resultTypeSpecifier)
+        {
+            if (resultTypeSpecifier == null)
+                return typeof(object);
+
+            if (resultTypeSpecifier is IntervalTypeSpecifier interval)
+            {
+                var pointType = TypeFor(interval.pointType!);
+                var intervalType = typeof(CqlInterval<>).MakeGenericType(pointType);
+                return intervalType;
+            }
+
+            if (resultTypeSpecifier is NamedTypeSpecifier named)
+            {
+                var type = _typeManager.Resolver.ResolveType(named.name.Name!);
+                if (type == null)
+                    throw new ArgumentException("Cannot resolve type for expression");
+                return type!;
+            }
+
+            if (resultTypeSpecifier is ChoiceTypeSpecifier)
+            {
+                return typeof(object);
+            }
+
+            if (resultTypeSpecifier is ListTypeSpecifier list)
+            {
+                if (list.elementType == null)
+                    throw new ArgumentException("ListTypeSpecifier must have a non-null elementType");
+                var elementType = TypeFor(list.elementType);
+                if (elementType == null)
+                    throw new ArgumentException("Cannot resolve type for expression");
+
+                var enumerableOfElementType = typeof(IEnumerable<>).MakeGenericType(elementType);
+                return enumerableOfElementType;
+            }
+
+            if (resultTypeSpecifier is TupleTypeSpecifier tuple)
+            {
+                // witnessed in ELM:
+                //"type" : "TupleTypeSpecifier",
+                //"resultTypeSpecifier" : {
+                //      "type" : "TupleTypeSpecifier",
+                //      "element": { ... x ... }
+                // },
+                // "element": { ... y ... }
+                //
+                // In the example above, x and y have different structures.
+                // Code handles x but not y
+                if (resultTypeSpecifier.resultTypeSpecifier != null)
+                    return TypeFor(tuple.resultTypeSpecifier);
+
+                return TupleTypeFor(tuple);
+            }
+
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Type TupleTypeFor(TupleTypeSpecifier tuple, Func<Type, Type>? changeType = null)
+        {
+            var elements = tuple.element;
+
+            if (elements?.Length == 0)
+                return typeof(object);
+
+            var elementTuples = elements!
+                .Select(e => (e.name, e.elementType))
+                .ToArray();
+            return TupleTypeFor(elementTuples, changeType);
+        }
+
+        private Type TupleTypeFor(elm.Tuple tuple, Func<Type, Type>? changeType = null)
+        {
+            var elements = tuple.element;
+
+            if (elements?.Length == 0)
+                return typeof(object);
+
+            var elementTuples = elements!
+                .Select(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")))
+                .ToArray();
+            return TupleTypeFor(elementTuples, changeType);
+        }
+
+        private Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, Func<Type, Type>? changeType)
+        {
+            var elementInfo = elements!
+                                .ToDictionary(el => el.name, el =>
+                                {
+                                    Type? type;
+                                    if (el.elementType != null)
+                                        type = TypeFor(el.elementType!);
+                                    else
+                                    {
+                                        throw this.NewExpressionBuildingException($"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
+                                    }
+                                    if (changeType != null)
+                                        type = changeType(type);
+                                    return type;
+                                });
+            var allTypes = _typeManager.TupleTypes;
+            foreach (var type in allTypes)
+            {
+                var typeIsMatch = true;
+                foreach (var kvp in elementInfo)
+                {
+                    var normalizedKey = NormalizeIdentifier(kvp.Key);
+                    var typeProperty = type.GetProperty(normalizedKey!);
+                    if (typeProperty == null || typeProperty.PropertyType != kvp.Value)
+                    {
+                        typeIsMatch = false;
+                        break;
+                    }
+                }
+                if (typeIsMatch)
+                    return type;
+            }
+
+            var typeName = $"{_typeManager.TupleTypeNamespace}.{_typeManager.TupleTypeNameFor(elementInfo)}";
+
+            var myTypeBuilder = _typeManager.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
+
+            foreach (var kvp in elementInfo)
+            {
+                if (kvp.Key != null)
+                {
+                    var name = NormalizeIdentifier(kvp.Key);
+                    var type = kvp.Value;
+                    TypeManager.DefineProperty(myTypeBuilder, name!, kvp.Key, type);
+                }
+            }
+            var typeInfo = myTypeBuilder.CreateTypeInfo();
+            _typeManager.AddTupleType(typeInfo!); // TODO: PDB - This is changing external state. Should become internal instead
+            return typeInfo!;
+        }
     }
 }

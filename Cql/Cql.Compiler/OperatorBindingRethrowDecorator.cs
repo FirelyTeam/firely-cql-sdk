@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Exceptions;
+using Expression = System.Linq.Expressions.Expression;
+
 
 namespace Hl7.Cql.Compiler;
 

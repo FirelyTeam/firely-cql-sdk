@@ -629,7 +629,7 @@ namespace Hl7.Cql.Compiler
         {
             var operand = TranslateExpression(unary.operand!);
             var resultType = unary.resultTypeSpecifier != null
-                ? _typeManager.TypeFor(unary.resultTypeSpecifier, this)
+                ? TypeFor(unary.resultTypeSpecifier)
                 : null;
             var call = _operatorBinding.Bind(@operator, ExpressionBuilder.ContextParameter, operand);
             if (resultType != null && resultType != call.Type)
@@ -701,7 +701,7 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-            var type = _typeManager.TypeFor(valueSetRef, this)!;
+            var type = TypeFor(valueSetRef)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet));
 
             if (IsOrImplementsIEnumerableOfT(type))
@@ -736,12 +736,12 @@ namespace Hl7.Cql.Compiler
             Type tupleType;
             if (tuple.resultTypeSpecifier is null)
             {
-                tupleType = _typeManager.TupleTypeFor(tuple, this);
+                tupleType = TupleTypeFor(tuple);
             }
             else
             {
                 var tupleTypeSpecifier = (tuple.resultTypeSpecifier as elm.TupleTypeSpecifier) ?? throw this.NewExpressionBuildingException($"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
-                tupleType = _typeManager.TupleTypeFor(tupleTypeSpecifier, this);
+                tupleType = TupleTypeFor(tupleTypeSpecifier);
             }
 
             var @new = Expression.New(tupleType);
@@ -770,7 +770,7 @@ namespace Hl7.Cql.Compiler
             if (list.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
             {
 
-                var elementType = _typeManager.TypeFor(listTypeSpecifier.elementType, this);
+                var elementType = TypeFor(listTypeSpecifier.elementType);
                 var elements = list.element?
                     .Select(ele => TranslateExpression(ele))
                     .ToArray() ?? new Expression[0];
@@ -1094,7 +1094,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Null(Null @null)
         {
-            var nullType = _typeManager.TypeFor(@null, this) ?? typeof(object);
+            var nullType = TypeFor(@null) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
@@ -1240,7 +1240,7 @@ namespace Hl7.Cql.Compiler
                 if (retrieve.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
                 {
                     cqlRetrieveResultType = listTypeSpecifier.elementType is elm.NamedTypeSpecifier nts ? nts.name.Name : null;
-                    sourceElementType = _typeManager.TypeFor(listTypeSpecifier.elementType, this);
+                    sourceElementType = TypeFor(listTypeSpecifier.elementType);
                 }
                 else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.").WithContext(this);
             }
@@ -1301,7 +1301,7 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = GetScopeExpression(op.scope!);
-                var expectedType = _typeManager.TypeFor(op, this) ?? typeof(object);
+                var expectedType = TypeFor(op) ?? typeof(object);
                 var pathMemberInfo = _typeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
                     _typeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -1325,7 +1325,7 @@ namespace Hl7.Cql.Compiler
                 //    return call;
                 //}
                 string message = $"TypeManager failed to resolve type.";
-                var resultType = _typeManager.TypeFor(op, this) ?? throw this.NewExpressionBuildingException(message);
+                var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
                     propogate = ChangeType(propogate, resultType);
@@ -1353,7 +1353,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = _typeManager.TypeFor(op, this)!;
+                    var expectedType = TypeFor(op)!;
                     var result = PropertyHelper(source, path, expectedType);
                     return result;
                 }
@@ -1525,7 +1525,7 @@ namespace Hl7.Cql.Compiler
             if (op.resultTypeSpecifier != null)
             {
                 string message = $"Cannot resolve result type {op.resultTypeSpecifier}.";
-                return _typeManager.TypeFor(op.resultTypeSpecifier, this) ?? throw this.NewExpressionBuildingException(message);
+                return TypeFor(op.resultTypeSpecifier) ?? throw this.NewExpressionBuildingException(message);
             }
 
             if (!string.IsNullOrWhiteSpace(op.resultTypeName?.Name))
@@ -1608,7 +1608,7 @@ namespace Hl7.Cql.Compiler
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
             {
-                expressionType = _typeManager.TypeFor(expressionRef.resultTypeSpecifier, this);
+                expressionType = TypeFor(expressionRef.resultTypeSpecifier);
             }
             else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
             {
@@ -1620,7 +1620,7 @@ namespace Hl7.Cql.Compiler
                 if (def != null)
                 {
                     ctx = ctx.Push(def);
-                    expressionType = _typeManager.TypeFor(def, ctx);
+                    expressionType = TypeFor(def);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }

@@ -215,7 +215,7 @@ partial class ContextualExpressionBuilder
             {
                 if (operand.operandTypeSpecifier != null)
                 {
-                    var operandType = _typeManager.TypeFor(operand.operandTypeSpecifier, this)!;
+                    var operandType = TypeFor(operand.operandTypeSpecifier)!;
                     var opName = NormalizeIdentifier(operand.name);
                     var parameter = Expression.Parameter(operandType, opName);
                     _operands.Add(operand.name, parameter);
@@ -242,7 +242,7 @@ partial class ContextualExpressionBuilder
             {
                 if (LibraryContext.AllowUnresolvedExternals)
                 {
-                    var returnType = _typeManager.TypeFor(expressionDef, this)!;
+                    var returnType = TypeFor(expressionDef)!;
                     var paramTypes = new[] { typeof(CqlContext) }
                         .Concat(functionParameterTypes)
                         .ToArray();
@@ -320,7 +320,7 @@ partial class ContextualExpressionBuilder
             defaultValue
         );
 
-        var parameterType = _typeManager.TypeFor(parameter.parameterTypeSpecifier, this);
+        var parameterType = TypeFor(parameter.parameterTypeSpecifier);
         var cast = Expression.Convert(resolveParam, parameterType);
         // e.g. (bundle, context) => context.Parameters["Measurement Period"]
         var lambda = Expression.Lambda(cast, ExpressionBuilder.ContextParameter);

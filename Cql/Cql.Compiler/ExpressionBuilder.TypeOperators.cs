@@ -27,7 +27,7 @@ namespace Hl7.Cql.Compiler
                 // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
                 if ((list.element?.Length ?? 0) == 0)
                 {
-                    var type = _typeManager.TypeFor(@as.asTypeSpecifier!, this);
+                    var type = TypeFor(@as.asTypeSpecifier!);
                     if (IsOrImplementsIEnumerableOfT(type))
                     {
                         var listElementType = _typeManager.Resolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
@@ -47,13 +47,13 @@ namespace Hl7.Cql.Compiler
             {
                 if (@as.operand is elm.Null)
                 {
-                    var type = _typeManager.TypeFor(@as.asTypeSpecifier!, this);
+                    var type = TypeFor(@as.asTypeSpecifier!);
                     var defaultExpression = Expression.Default(type);
                     return new ElmAsExpression(defaultExpression, type);
                 }
                 else
                 {
-                    var type = _typeManager.TypeFor(@as.asTypeSpecifier!, this);
+                    var type = TypeFor(@as.asTypeSpecifier!);
                     var operand = TranslateExpression(@as.operand!);
                     return new ElmAsExpression(operand, type);
                 }
@@ -87,11 +87,11 @@ namespace Hl7.Cql.Compiler
             {
                 if (@is.isTypeSpecifier is elm.ChoiceTypeSpecifier choice)
                 {
-                    var firstChoiceType = _typeManager.TypeFor(choice.choice[0], this) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                    var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
                     Expression result = Expression.TypeIs(op, firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
-                        var cti = _typeManager.TypeFor(choice.choice[i], this) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                        var cti = TypeFor(choice.choice[i]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
                         var ie = Expression.TypeIs(op, cti);
                         result = Expression.Or(result, ie);
                     }
@@ -99,7 +99,7 @@ namespace Hl7.Cql.Compiler
                     return ta;
                 }
 
-                type = _typeManager.TypeFor(@is.isTypeSpecifier, this) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                type = TypeFor(@is.isTypeSpecifier) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
             }
             else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
             {

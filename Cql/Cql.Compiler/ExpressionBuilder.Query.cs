@@ -128,7 +128,7 @@ internal partial class ContextualExpressionBuilder
             Type? resultType = null;
             if (query.aggregate.resultTypeSpecifier != null)
             {
-                resultType = _typeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx);
+                resultType = TypeFor(query.aggregate.resultTypeSpecifier);
             }
             else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
             {
@@ -181,7 +181,7 @@ internal partial class ContextualExpressionBuilder
                     var parameterName = "@this";
                     var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
                     var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    var pathMemberType = ctx._typeManager.TypeFor(byColumn, ctx);
+                    var pathMemberType = ctx.TypeFor(byColumn);
                     if (pathMemberType == null)
                     {
                         throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
@@ -234,7 +234,7 @@ internal partial class ContextualExpressionBuilder
                 };
             }).ToArray(),
         };
-        var multiSourceTupleType = _typeManager.TupleTypeFor(tupleSpecifier, ctx, (type) => 
+        var multiSourceTupleType = TupleTypeFor(tupleSpecifier, (type) => 
             IsOrImplementsIEnumerableOfT(type)
                 ? _typeManager.Resolver.GetListElementType(type, true)!
                 : throw new NotSupportedException("Query sources must be lists."));
@@ -343,7 +343,7 @@ internal partial class ContextualExpressionBuilder
                 Type? resultType = null;
                 if (query.aggregate.resultTypeSpecifier != null)
                 {
-                    resultType = ctx._typeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx);
+                    resultType = ctx.TypeFor(query.aggregate.resultTypeSpecifier);
                 }
                 else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
                 {
