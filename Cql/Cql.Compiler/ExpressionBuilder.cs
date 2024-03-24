@@ -15,7 +15,6 @@ using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -25,14 +24,12 @@ using Hl7.Cql.Operators;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
-using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
-
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
-    internal partial class ExpressionBuilder
+    internal class ExpressionBuilder
     {
         private readonly TypeManager _typeManager;
         private readonly ILoggerFactory _loggerFactory;
