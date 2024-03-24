@@ -29,24 +29,23 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
-    internal class ExpressionBuilder
+    internal partial class ExpressionBuilder
     {
+        private readonly ILogger<ExpressionBuilder> _logger;
         private readonly TypeManager _typeManager;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly OperatorBinding _operatorBinding;
 
 
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="typeManager">The <see cref="_typeManager"/> used to resolve and create types referenced.</param>
-        /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used to log all messages issued.</param>
-        /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         public ExpressionBuilder(
+            ILoggerFactory loggerFactory,
             TypeManager typeManager,
-            ILoggerFactory loggerFactory)
+            OperatorBinding operatorBinding)
         {
-            _typeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
+            _typeManager = typeManager;
             _loggerFactory = loggerFactory;
+            _operatorBinding = operatorBinding;
+            _logger = loggerFactory.CreateLogger<ExpressionBuilder>();
             Settings = new ExpressionBuilderSettings();
         }
 
@@ -74,24 +73,24 @@ namespace Hl7.Cql.Compiler
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(library, Settings, operatorBinding, lambdas, _typeManager, _loggerFactory);
-            var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression);
+            var libraryExpressionsBuilderContext = new ContextualLibraryExpressionBuilder(library, Settings, operatorBinding, lambdas, _typeManager, _loggerFactory);
+            var ctx = libraryExpressionsBuilderContext.CreateContextualExpressionBuilder(expression);
             var translated = ctx.TranslateExpression(expression);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
         }
     }
 
-    partial class ExpressionBuilderContext
+    partial class ContextualExpressionBuilder
     {
         // Yeah, hardwired to FHIR 4.0.1 for now.
         private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
 
-        private readonly ILogger<ExpressionBuilderContext> _logger = null!;
+        private readonly ILogger<ContextualExpressionBuilder> _logger = null!;
 
         internal Expression TranslateExpression(Element op)
         {
-            ExpressionBuilderContext ctx = Push(op);
+            ContextualExpressionBuilder ctx = Push(op);
             Expression? expression;
             switch (op)
             {
@@ -1602,7 +1601,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ExpressionRef(ExpressionRef expressionRef)
         {
-            ExpressionBuilderContext ctx = this;
+            ContextualExpressionBuilder ctx = this;
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
             {
@@ -1819,7 +1818,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        internal static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
+        internal static string TypeNameToIdentifier(Type type, ContextualExpressionBuilder? ctx)
         {
             var typeName = type.Name.ToLowerInvariant();
             if (type.IsGenericType)

@@ -16,7 +16,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilderContext
+    internal partial class ContextualExpressionBuilder
     {
         protected Expression Coalesce(elm.Coalesce ce)
         {

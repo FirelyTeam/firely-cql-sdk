@@ -5,13 +5,13 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler;
 
 [DebuggerDisplay("{DebuggerView}")]
-internal class LibrarySetExpressionBuilderContext : IBuilderContext
+internal class ContextualLibrarySetExpressionBuilder : IBuilderContext
 {
     private readonly LibrarySet _librarySet;
     private readonly BuilderContextInfo _contextInfo;
     private readonly DefinitionDictionary<LambdaExpression> _allDefinitions;
 
-    public LibrarySetExpressionBuilderContext(
+    public ContextualLibrarySetExpressionBuilder(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {

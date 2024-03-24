@@ -12,7 +12,7 @@ using Expression = System.Linq.Expressions.Expression;
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Elm.Element)>;
 
 
-internal partial class ExpressionBuilderContext
+internal partial class ContextualExpressionBuilder
 {
     protected Expression Query(Query query)
     {
@@ -26,7 +26,7 @@ internal partial class ExpressionBuilderContext
         
     protected Expression SingleSourceQuery(Query query)
     {
-        ExpressionBuilderContext ctx = this;
+        ContextualExpressionBuilder ctx = this;
         var querySource = query.source.Single();
         var querySourceAlias = !string.IsNullOrWhiteSpace(querySource.alias)
             ? querySource.alias
@@ -218,7 +218,7 @@ internal partial class ExpressionBuilderContext
 
     protected Expression MultiSourceQuery(Query query)
     {
-        ExpressionBuilderContext ctx = this;
+        ContextualExpressionBuilder ctx = this;
         // The technique here is to create a cross product of all the query sources.
         // The combinations will be stored in a tuple whose fields are named by source alias.
         // we will then create an expression that creates this cross-product of tuples,

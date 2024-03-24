@@ -4,11 +4,11 @@ using elm = Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler;
 
 [DebuggerDisplay("{DebuggerView}")]
-partial class ExpressionBuilderContext : IBuilderContext
+partial class ContextualExpressionBuilder : IBuilderContext
 {
     private readonly Elm.Element _element;
 
-    private readonly ExpressionBuilderContext? _outerContext;
+    private readonly ContextualExpressionBuilder? _outerContext;
 
     IBuilderContext? IBuilderContext.OuterContext => (IBuilderContext?)_outerContext ?? LibraryContext;
 

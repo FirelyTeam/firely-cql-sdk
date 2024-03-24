@@ -4,23 +4,23 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibrarySetExpressionBuilder
+partial class ExpressionBuilder
 {
-    private readonly ILogger<LibrarySetExpressionBuilder> _logger;
-    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
-
-    public LibrarySetExpressionBuilder(
-        ILogger<LibrarySetExpressionBuilder> logger, 
-        LibraryExpressionBuilder libraryExpressionBuilder)
-    {
-        _logger = logger;
-        _libraryExpressionBuilder = libraryExpressionBuilder;
-    }
-
-    private LibrarySetExpressionBuilderContext CreateContext(
+    // private readonly ILogger<LibrarySetExpressionBuilder> _logger;
+    // private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
+    //
+    // public LibrarySetExpressionBuilder(
+    //     ILogger<LibrarySetExpressionBuilder> logger, 
+    //     LibraryExpressionBuilder libraryExpressionBuilder)
+    // {
+    //     _logger = logger;
+    //     _libraryExpressionBuilder = libraryExpressionBuilder;
+    // }
+    //
+    private ContextualLibrarySetExpressionBuilder CreateContextualLibrarySetExpressionBuilder(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions) =>
-        new LibrarySetExpressionBuilderContext(librarySet, definitions);
+        new ContextualLibrarySetExpressionBuilder(librarySet, definitions);
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
@@ -28,16 +28,16 @@ internal class LibrarySetExpressionBuilder
 
     {
         definitions ??= new();
-        var libsCtx = CreateContext(librarySet, definitions);
+        var libsCtx = CreateContextualLibrarySetExpressionBuilder(librarySet, definitions);
         ProcessLibrarySet(libsCtx);
         return definitions;
     }
 
-    private void ProcessLibrarySet(LibrarySetExpressionBuilderContext libsCtx)
+    private void ProcessLibrarySet(ContextualLibrarySetExpressionBuilder libsCtx)
     {
         foreach (var library in libsCtx.LibrarySet)
         { 
-            var packageDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, libsCtx);
+            var packageDefinitions = ProcessLibrary(library, libsCtx);
             libsCtx.MergeDefinitions(packageDefinitions);
         }
     }

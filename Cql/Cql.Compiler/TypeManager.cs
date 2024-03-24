@@ -80,7 +80,7 @@ namespace Hl7.Cql.Compiler
 
         internal Type? TypeFor(
             Element element,
-            ExpressionBuilderContext ctx,
+            ContextualExpressionBuilder ctx,
             bool throwIfNotFound = true)
         {
             if (element?.resultTypeSpecifier != null)
@@ -170,7 +170,7 @@ namespace Hl7.Cql.Compiler
         }
 
         internal Type TypeFor(TypeSpecifier resultTypeSpecifier,
-            ExpressionBuilderContext ctx)
+            ContextualExpressionBuilder ctx)
         {
             if (resultTypeSpecifier == null) 
                 return typeof(object);
@@ -253,7 +253,7 @@ namespace Hl7.Cql.Compiler
             return typeName;
         }
 
-        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ExpressionBuilderContext ctx, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ContextualExpressionBuilder ctx, Func<Type, Type>? changeType = null)
         {
             var elements = tuple.element;
 
@@ -266,7 +266,7 @@ namespace Hl7.Cql.Compiler
             return TupleTypeFor(elementTuples, ctx, changeType);
         }
 
-        internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext ctx, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(elm.Tuple tuple, ContextualExpressionBuilder ctx, Func<Type, Type>? changeType = null)
         {
             var elements = tuple.element;
 
@@ -279,7 +279,7 @@ namespace Hl7.Cql.Compiler
             return TupleTypeFor(elementTuples, ctx, changeType);
         }
 
-        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext ctx, Func<Type, Type>? changeType)
+        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ContextualExpressionBuilder ctx, Func<Type, Type>? changeType)
         {
             var elementInfo = elements!
                                 .ToDictionary(el => el.name, el =>
@@ -301,7 +301,7 @@ namespace Hl7.Cql.Compiler
                 var typeIsMatch = true;
                 foreach (var kvp in elementInfo)
                 {
-                    var normalizedKey = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
+                    var normalizedKey = ContextualExpressionBuilder.NormalizeIdentifier(kvp.Key);
                     var typeProperty = type.GetProperty(normalizedKey!);
                     if (typeProperty == null || typeProperty.PropertyType != kvp.Value)
                     {
@@ -321,7 +321,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (kvp.Key != null)
                 {
-                    var name = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
+                    var name = ContextualExpressionBuilder.NormalizeIdentifier(kvp.Key);
                     var type = kvp.Value;
                     DefineProperty(myTypeBuilder, name!, kvp.Key, type);
                 }

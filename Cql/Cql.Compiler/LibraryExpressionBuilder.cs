@@ -14,48 +14,48 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// The builder for processing the library into definitions.
 /// </summary>
-internal class LibraryExpressionBuilder
+partial class ExpressionBuilder
 {
     public static readonly ParameterExpression ContextParameter = Expression.Parameter(typeof(CqlContext), "context");
 
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly ILoggerFactory _loggerFactory;
-    private readonly ExpressionBuilder _expressionBuilder;
-    private readonly OperatorBinding _operatorBinding;
-    private readonly TypeManager _typeManager;
+    // private readonly ILogger<LibraryExpressionBuilder> _logger;
+    // private readonly ILoggerFactory _loggerFactory;
+    // private readonly ExpressionBuilder _expressionBuilder;
+    // private readonly OperatorBinding _operatorBinding;
+    // private readonly TypeManager _typeManager;
+    //
+    // public LibraryExpressionBuilder(
+    //     ILoggerFactory loggerFactory,
+    //     ExpressionBuilder expressionBuilder, 
+    //     OperatorBinding operatorBinding,
+    //     TypeManager typeManager)
+    // {
+    //     _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
+    //     _loggerFactory = loggerFactory;
+    //     _expressionBuilder = expressionBuilder;
+    //     _operatorBinding = operatorBinding;
+    //     _typeManager = typeManager;
+    // }
 
-    public LibraryExpressionBuilder(
-        ILoggerFactory loggerFactory,
-        ExpressionBuilder expressionBuilder, 
-        OperatorBinding operatorBinding,
-        TypeManager typeManager)
-    {
-        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
-        _loggerFactory = loggerFactory;
-        _expressionBuilder = expressionBuilder;
-        _operatorBinding = operatorBinding;
-        _typeManager = typeManager;
-    }
-
-    private LibraryExpressionBuilderContext CreateContext(
+    private ContextualLibraryExpressionBuilder CreateContextualLibraryExpressionBuilder(
         Library library,
-        LibrarySetExpressionBuilderContext? libsCtx,
+        ContextualLibrarySetExpressionBuilder? libsCtx,
         DefinitionDictionary<LambdaExpression> definitions) =>
-        new(library, _expressionBuilder.Settings, _operatorBinding, definitions, _typeManager, _loggerFactory, libsCtx);
+        new(library, Settings, _operatorBinding, definitions, _typeManager, _loggerFactory, libsCtx);
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
-        LibrarySetExpressionBuilderContext? libsCtx = null,
+        ContextualLibrarySetExpressionBuilder? libsCtx = null,
         DefinitionDictionary<LambdaExpression>? definitions = null)
 
     {
         definitions ??= new();
-        var libCtx = CreateContext(library, libsCtx, definitions);
+        var libCtx = CreateContextualLibraryExpressionBuilder(library, libsCtx, definitions);
         ProcessLibrary(libCtx);
         return definitions;
     }
 
-    private void ProcessLibrary(LibraryExpressionBuilderContext libCtx)
+    private void ProcessLibrary(ContextualLibraryExpressionBuilder libCtx)
     {
         var library = libCtx.Library;
         _logger.LogInformation("Building expressions for '{library}'", libCtx.LibraryKey);
@@ -64,7 +64,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var includeDef in includeDefs)
             {
-                ProcessIncludes(includeDef, libCtx.NewExpressionBuilderContext(includeDef));
+                ProcessIncludes(includeDef, libCtx.CreateContextualExpressionBuilder(includeDef));
             }
         }
 
@@ -72,7 +72,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var valueSetDef in valueSetDefs)
             {
-                ProcessValueSetDef(valueSetDef, libCtx.NewExpressionBuilderContext(valueSetDef));
+                ProcessValueSetDef(valueSetDef, libCtx.CreateContextualExpressionBuilder(valueSetDef));
             }
         }
 
@@ -82,7 +82,7 @@ internal class LibraryExpressionBuilder
 
             foreach (var codeDef in codeDefs)
             {
-                ProcessCodeDef(codeDef, libCtx.NewExpressionBuilderContext(codeDef), foundCodeNameCodeSystemUrls);
+                ProcessCodeDef(codeDef, libCtx.CreateContextualExpressionBuilder(codeDef), foundCodeNameCodeSystemUrls);
             }
         }
 
@@ -90,7 +90,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var codeSystemDef in codeSystemDefs)
             {
-                ProcessCodeSystemDef(codeSystemDef, libCtx.NewExpressionBuilderContext(codeSystemDef));
+                ProcessCodeSystemDef(codeSystemDef, libCtx.CreateContextualExpressionBuilder(codeSystemDef));
             }
         }
 
@@ -98,7 +98,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var conceptDef in conceptDefs)
             {
-                ProcessConceptDef(conceptDef, libCtx.NewExpressionBuilderContext(conceptDef));
+                ProcessConceptDef(conceptDef, libCtx.CreateContextualExpressionBuilder(conceptDef));
             }
         }
 
@@ -106,7 +106,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var parameterDef in parameterDefs)
             {
-                ProcessParameterDef(parameterDef, libCtx.NewExpressionBuilderContext(parameterDef));
+                ProcessParameterDef(parameterDef, libCtx.CreateContextualExpressionBuilder(parameterDef));
             }
         }
 
@@ -114,14 +114,14 @@ internal class LibraryExpressionBuilder
         {
             foreach (var expressionDef in expressionDefs)
             {
-                ProcessExpressionDef(expressionDef, libCtx.NewExpressionBuilderContext(expressionDef));
+                ProcessExpressionDef(expressionDef, libCtx.CreateContextualExpressionBuilder(expressionDef));
             }
         }
     }
 
     private void ProcessCodeSystemDef(
         CodeSystemDef codeSystem,
-        ExpressionBuilderContext ctx)
+        ContextualExpressionBuilder ctx)
     {
         if (ctx.LibraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
         {
@@ -152,7 +152,7 @@ internal class LibraryExpressionBuilder
 
     private void ProcessConceptDef(
         ConceptDef conceptDef,
-        ExpressionBuilderContext ctx)
+        ContextualExpressionBuilder ctx)
     {
         if (conceptDef.code.Length <= 0)
         {
@@ -193,7 +193,7 @@ internal class LibraryExpressionBuilder
 
     private void ProcessCodeDef(
         CodeDef codeDef,
-        ExpressionBuilderContext ctx,
+        ContextualExpressionBuilder ctx,
         ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet)
     {
         if (codeDef.codeSystem == null)
@@ -223,7 +223,7 @@ internal class LibraryExpressionBuilder
 
     private void ProcessExpressionDef(
         ExpressionDef expressionDef,
-        ExpressionBuilderContext ctx)
+        ContextualExpressionBuilder ctx)
     {
         if (string.IsNullOrWhiteSpace(expressionDef.name))
         {
@@ -243,7 +243,7 @@ internal class LibraryExpressionBuilder
                 if (operand.operandTypeSpecifier != null)
                 {
                     var operandType = _typeManager.TypeFor(operand.operandTypeSpecifier, ctx)!;
-                    var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
+                    var opName = ContextualExpressionBuilder.NormalizeIdentifier(operand.name);
                     var parameter = Expression.Parameter(operandType, opName);
                     ctx.Operands.Add(operand.name, parameter);
                     functionParameterTypes[i] = parameter.Type;
@@ -317,7 +317,7 @@ internal class LibraryExpressionBuilder
 
     private void ProcessIncludes(
         IncludeDef includeDef,
-        ExpressionBuilderContext ctx)
+        ContextualExpressionBuilder ctx)
     {
         var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
             ? includeDef.localIdentifier!
@@ -331,7 +331,7 @@ internal class LibraryExpressionBuilder
 
     private void ProcessParameterDef(
         ParameterDef parameter,
-        ExpressionBuilderContext ctx)
+        ContextualExpressionBuilder ctx)
     {
         if (ctx.LibraryContext.Definitions.ContainsKey(ctx.LibraryContext.LibraryKey, parameter.name!))
             throw ctx.NewExpressionBuildingException($"There is already a definition named {parameter.name}", null);
@@ -358,7 +358,7 @@ internal class LibraryExpressionBuilder
 
     private void ProcessValueSetDef(
         ValueSetDef valueSetDef,
-        ExpressionBuilderContext ctx)
+        ContextualExpressionBuilder ctx)
     {
         var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
             Expression.Constant(valueSetDef.version, typeof(string)));
@@ -368,14 +368,14 @@ internal class LibraryExpressionBuilder
     }
 
     private static LambdaExpression NotImplemented(
-        ExpressionBuilderContext ctx,
+        ContextualExpressionBuilder ctx,
         string nav,
         Type[] signature,
         Type returnType)
     {
         var parameters = signature
             .Select((type, index) =>
-                Expression.Parameter(type, ExpressionBuilderContext.TypeNameToIdentifier(type, ctx) + index))
+                Expression.Parameter(type, ContextualExpressionBuilder.TypeNameToIdentifier(type, ctx) + index))
             .ToArray();
         var ctor = ConstructorInfos.NotImplementedException;
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));

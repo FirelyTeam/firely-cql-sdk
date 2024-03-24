@@ -13,22 +13,22 @@ namespace Hl7.Cql.Compiler;
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal class LibraryExpressionBuilderContext : IBuilderContext
+internal class ContextualLibraryExpressionBuilder : IBuilderContext
 {
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
-    public LibrarySetExpressionBuilderContext? LibrarySetContext { get; }
+    public ContextualLibrarySetExpressionBuilder? LibrarySetContext { get; }
 
-    public LibraryExpressionBuilderContext(
+    public ContextualLibraryExpressionBuilder(
         Library library,
         ExpressionBuilderSettings expressionBuilderSettings,
         OperatorBinding operatorBinding,
         DefinitionDictionary<LambdaExpression> definitions, 
         TypeManager typeManager,
         ILoggerFactory loggerFactory,
-        LibrarySetExpressionBuilderContext? libsCtx = null)
+        ContextualLibrarySetExpressionBuilder? libsCtx = null)
     {
 
         _expressionBuilderSettings = expressionBuilderSettings;
@@ -51,16 +51,16 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     public bool AllowUnresolvedExternals => _expressionBuilderSettings.AllowUnresolvedExternals;
 
-    public ExpressionBuilderContext NewExpressionBuilderContext(
+    public ContextualExpressionBuilder CreateContextualExpressionBuilder(
         Element element) =>
-        new ExpressionBuilderContext(
+        new ContextualExpressionBuilder(
             _operatorBinding,
             _expressionBuilderSettings,
-            LibraryExpressionBuilder.ContextParameter,
+            ExpressionBuilder.ContextParameter,
             this,
             element,
             _typeManager,
-            _loggerFactory.CreateLogger<ExpressionBuilderContext>());
+            _loggerFactory.CreateLogger<ContextualExpressionBuilder>());
 
     #region Definitions
 

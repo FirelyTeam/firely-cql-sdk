@@ -31,12 +31,6 @@ classDiagram
         class ExpressionBuilder {
         }
 
-        class LibraryExpressionBuilder {
-        }
-
-        class LibrarySetExpressionBuilder {
-        }
-
         class OperatorBinding {
         }
 
@@ -82,6 +76,7 @@ classDiagram
     TypeManager ..> AssemblyCompiler : injected
 
     TypeManager ..> ExpressionBuilder : injected
+    OperatorBinding ..> ExpressionBuilder : injected
 
     ResourcePackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
@@ -95,16 +90,10 @@ classDiagram
 
     AssemblyCompiler ..> ResourcePackager : injected
     TypeResolver ..> ResourcePackager : injected
-    LibrarySetExpressionBuilder ..> ResourcePackager : injected
+    ExpressionBuilder ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
-
-    OperatorBinding ..> LibraryExpressionBuilder : injected
-    TypeManager ..> LibraryExpressionBuilder : injected
-    ExpressionBuilder ..> LibraryExpressionBuilder : injected
-
-    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 ```
 
 ## ExpressionBuilders and Contexts

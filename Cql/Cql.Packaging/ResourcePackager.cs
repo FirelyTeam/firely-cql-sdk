@@ -25,7 +25,7 @@ namespace Hl7.Cql.Packaging;
 #pragma warning disable CS1591
 internal class ResourcePackager
 {
-    private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
+    private readonly ExpressionBuilder _expressionBuilder;
     private readonly AssemblyCompiler _assemblyCompiler;
     private readonly TypeResolver _typeResolver;
     private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor;
@@ -33,12 +33,12 @@ internal class ResourcePackager
     public ResourcePackager(
         TypeResolver typeResolver,
         AssemblyCompiler assemblyCompiler,
-        LibrarySetExpressionBuilder librarySetExpressionBuilder, 
+        ExpressionBuilder expressionBuilder, 
         FhirResourcePostProcessor? fhirResourcePostProcessor)
     {
         _typeResolver = typeResolver;
         _assemblyCompiler = assemblyCompiler;
-        _librarySetExpressionBuilder = librarySetExpressionBuilder;
+        _expressionBuilder = expressionBuilder;
         _fhirResourcePostProcessor = fhirResourcePostProcessor;
     }
 
@@ -72,7 +72,7 @@ internal class ResourcePackager
         ExceptionDispatchInfo? expressionBuildingExceptionInfo = null;
         try
         {
-            _librarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
+            _expressionBuilder.ProcessLibrarySet(librarySet, definitions);
         }
         catch (Exception e)
         {
@@ -525,7 +525,7 @@ internal class ResourcePackager
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
         LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory, cacheSize);
-        var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+        var definitions = factory.ExpressionBuilder.ProcessLibrarySet(librarySet);
         var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
         var asmContext = new AssemblyLoadContext($"{lib}-{version}");
         foreach (var (_, asmData) in assemblyData)

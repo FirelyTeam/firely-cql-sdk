@@ -15,8 +15,8 @@ public class LibrarySetExpressionBuilderTests
     {
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(TestUtility.CmsElmDirectory, "CumulativeMedicationDuration");
-        var f = new LibrarySetExpressionBuilderFactory(NullLoggerFactory.Instance);
-        var defs = f.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+        var f = new ExpressionBuilderFactory(NullLoggerFactory.Instance);
+        var defs = f.ExpressionBuilder.ProcessLibrarySet(librarySet);
         var lambdaExpression = defs["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];
         Assert.IsNotNull(lambdaExpression);
 

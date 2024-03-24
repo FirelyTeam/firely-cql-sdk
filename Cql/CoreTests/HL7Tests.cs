@@ -47,7 +47,7 @@ namespace CoreTests
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            var libraryExpressionBuilder = NewLibraryExpressionBuilder();
+            var libraryExpressionBuilder = NewExpressionBuilder();
             var definitions = libraryExpressionBuilder.ProcessLibrary(fhirHelpersPackage);
             LambdasByTestName.Lambdas.Merge(definitions);
 
@@ -67,9 +67,9 @@ namespace CoreTests
             Context = FhirCqlContext.WithDataSource(delegates: allDelegates);
         }
 
-        private static LibraryExpressionBuilder NewLibraryExpressionBuilder()
+        private static ExpressionBuilder NewExpressionBuilder()
         {
-            return new LibraryExpressionBuilderFactory(LoggerFactory).LibraryExpressionBuilder;
+            return new ExpressionBuilderFactory(LoggerFactory).ExpressionBuilder;
         }
 
         internal static CqlContext Context;

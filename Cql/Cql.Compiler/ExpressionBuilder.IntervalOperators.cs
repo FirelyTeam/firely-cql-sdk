@@ -15,7 +15,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilderContext
+    internal partial class ContextualExpressionBuilder
     {
         private Expression Collapse(elm.Collapse e)
         {

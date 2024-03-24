@@ -18,7 +18,7 @@ using F = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilderContext
+    internal partial class ContextualExpressionBuilder
     {
         protected Expression As(elm.As @as)
         {

@@ -99,7 +99,5 @@ internal static class DependencyInjection
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
         services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton<ExpressionBuilder>();
-        services.TryAddSingleton<LibraryExpressionBuilder>();
-        services.TryAddSingleton<LibrarySetExpressionBuilder>();
     }
 }

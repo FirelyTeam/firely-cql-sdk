@@ -5,7 +5,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilderContext
+    internal partial class ContextualExpressionBuilder
     {
         protected Expression AllTrue(elm.AllTrue e) =>
             AggregateOperator(CqlOperator.AllTrue, e);
