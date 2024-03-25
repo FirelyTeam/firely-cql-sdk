@@ -46,6 +46,18 @@ classDiagram
         class LibraryDefinitionsBuilder {
 %%            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
+
+        class OperatorBinding {
+        }
+
+        class CqlOperatorsBinding {
+        }
+
+        class TypeConverter {
+        }
+
+        class ModelInspector {
+        }
     }
 
     namespace Fhir_Resource_Building {
@@ -83,18 +95,6 @@ classDiagram
     
         class TypeResolver {
         }
-
-        class OperatorBinding {
-        }
-
-        class CqlOperatorsBinding {
-        }
-
-        class TypeConverter {
-        }
-
-        class ModelInspector {
-        }
 %%    }
 
     %% Inheritance  
@@ -130,9 +130,9 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
+    OperatorBinding ..> LibraryDefinitionsBuilder : injected
     TypeManager ..> LibraryDefinitionsBuilder : injected
     LibrarySetExpressionBuilder ..> LibraryDefinitionsBuilder : created by
-    OperatorBinding ..> LibraryDefinitionsBuilder : injected
 
     TypeResolver ..> TypeManager : injected
 
