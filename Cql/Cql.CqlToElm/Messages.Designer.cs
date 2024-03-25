@@ -61,6 +61,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Identifier {0} is a library and cannot be used as an expression..
+        /// </summary>
+        internal static string ExpressionCannotBeLibraryRef {
+            get {
+                return ResourceManager.GetString("ExpressionCannotBeLibraryRef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expression of type &apos;{0}&apos; cannot be cast as a value of type &apos;{1}&apos;..
         /// </summary>
         internal static string TypeCannotBeCast {
@@ -75,6 +84,24 @@ namespace Hl7.Cql.CqlToElm {
         internal static string TypeFoundIsNotExpected {
             get {
                 return ResourceManager.GetString("TypeFoundIsNotExpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A reference to a model library is unexpected at this point..
+        /// </summary>
+        internal static string UnexpectedLibraryReference {
+            get {
+                return ResourceManager.GetString("UnexpectedLibraryReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
+        /// </summary>
+        internal static string UnresolvedLibrary {
+            get {
+                return ResourceManager.GetString("UnresolvedLibrary", resourceCulture);
             }
         }
     }

@@ -15,6 +15,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public LibraryBuilder LibraryBuilder { get; }
         public ILibraryProvider LibraryProvider { get; }
         public CoercionProvider CoercionProvider { get; }
+        public MessageProvider Messaging { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
         
 
@@ -26,7 +27,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifierVisitor typeSpecifierVisitor,
             LibraryBuilder libraryBuilder,
             ILibraryProvider libraryProvider,
-            CoercionProvider coercionProvider)
+            CoercionProvider coercionProvider,
+            MessageProvider messaging)
             : base(identifierProvider, invocationBuilder)
         {
             ModelProvider = modelProvider;
@@ -34,6 +36,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryBuilder = libraryBuilder;
             LibraryProvider = libraryProvider;
             CoercionProvider = coercionProvider;
+            Messaging = messaging;
             ExpressionVisitor = expressionVisitor;
         }
 
@@ -52,7 +55,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return new IncludeDefSymbol(localIdentifier, new ReferencedLibrary(library!)).WithLocator(context.Locator());
             }
             else
-            {                
+            {
+                
+                error ??= Messaging.UnresolvedLibrary(libraryName, version);
                 // To be able to continue to parse, create an empty library scope with the name and version
                 // and return that so we can act as if some library was found.
                 var emptyLibrary = new Library { identifier = new VersionedIdentifier { id = libraryName, version = version } };

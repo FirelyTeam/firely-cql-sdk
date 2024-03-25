@@ -29,8 +29,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
                     "A reference to a model library is unexpected at this point.").WithLocator(context.Locator());
             else if (term is IncludeRef ir)
-                return SymbolScopeExtensions.MakeErrorReference(null, ir.IncludeDef.localIdentifier,
-                    "A reference to a library is unexpected at this point.").WithLocator(context.Locator());
+                return ir.AddError(Messaging.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
+                    .WithLocator(context.Locator());
             else if (term is null)
             {
                 var message = $"Type {context.expressionTerm().GetType()} is not implemented";

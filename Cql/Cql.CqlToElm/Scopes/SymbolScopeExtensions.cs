@@ -7,20 +7,6 @@ namespace Hl7.Cql.CqlToElm
 {
     internal static class SymbolScopeExtensions
     {
-        //private static bool TryGetRef(this ISymbolScope scope, string? libraryName, string identifier, out Expression? definitionRef)
-        //{
-        //    if (scope.TryResolveSymbol(identifier, out var symbol))
-        //    {
-        //        definitionRef = symbol!.ToRef(libraryName);
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        definitionRef = null;
-        //        return false;
-        //    }
-        //}
-
         internal static bool TryResolveNamedTypeSpecifier(this SymbolTable symbolTable,
             string? libraryName, string typeName, out NamedTypeSpecifier? namedType, out string? error)
         {

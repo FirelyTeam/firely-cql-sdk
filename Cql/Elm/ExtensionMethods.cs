@@ -62,7 +62,7 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static CqlToElmError[] GetErrors(this Element node)
         {
-            var allErrors = new List<CqlToElmError>();
+            var allErrors = new HashSet<CqlToElmError>();
             var visitor = new ElmTreeWalker(nodeHandler);
 
             visitor.Walk(node);
@@ -72,7 +72,12 @@ namespace Hl7.Cql.Elm
             {
                 if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
                 {
-                    allErrors.AddRange(errors);
+                    // avoid duplicate errors.
+                    foreach(var error in errors)
+                    {
+                        if (!allErrors.Contains(error))
+                            allErrors.Add(error);
+                    }    
                 }
 
                 // Let the walker visit my children.

@@ -276,7 +276,9 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math
-            ", "Could not find library: Math*", "A reference to a library is unexpected at this point.");
+            ", 
+            "Unable to resolve library: Math version 'latest'. Are you sure this library version exists and that you have access?",
+            "Identifier Math is a library and cannot be used as an expression.");
         }
 
         [TestMethod]
