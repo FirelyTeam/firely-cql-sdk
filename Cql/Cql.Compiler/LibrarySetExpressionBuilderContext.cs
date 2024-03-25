@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace Hl7.Cql.Compiler;
 
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class ContextualLibrarySetExpressionBuilder : IBuilderContext
+internal partial class ContextualLibrarySetExpressionBuilder : IContextualExpressionBuilder
 {
     private readonly ILoggerFactory _loggerFactory;
     private readonly OperatorBinding _operatorBinding;
@@ -34,9 +34,9 @@ internal partial class ContextualLibrarySetExpressionBuilder : IBuilderContext
         _contextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
-    IBuilderContext? IBuilderContext.OuterContext => null;
+    IContextualExpressionBuilder? IContextualExpressionBuilder.OuterContext => null;
 
-    BuilderContextInfo IBuilderContext.ContextInfo => _contextInfo;
+    BuilderContextInfo IContextualExpressionBuilder.ContextInfo => _contextInfo;
 
     public LibrarySet LibrarySet => _librarySet;
 

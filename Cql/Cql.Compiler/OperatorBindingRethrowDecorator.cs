@@ -8,21 +8,21 @@ namespace Hl7.Cql.Compiler;
 
 internal sealed class OperatorBindingRethrowDecorator : OperatorBinding
 {
-    private readonly IBuilderContext _owningBuilderContext;
+    private readonly IContextualExpressionBuilder _owningContextualExpressionBuilder;
 
-    public static OperatorBinding Decorate(IBuilderContext owningBuilderContext, OperatorBinding operatorBinding) =>
+    public static OperatorBinding Decorate(IContextualExpressionBuilder owningContextualExpressionBuilder, OperatorBinding operatorBinding) =>
         operatorBinding switch
         {
-            OperatorBindingRethrowDecorator fromSameContext when fromSameContext._owningBuilderContext == owningBuilderContext => fromSameContext,
-            OperatorBindingRethrowDecorator fromAnotherContext => new OperatorBindingRethrowDecorator(owningBuilderContext, fromAnotherContext.Inner),
-            _ => new OperatorBindingRethrowDecorator(owningBuilderContext, operatorBinding)
+            OperatorBindingRethrowDecorator fromSameContext when fromSameContext._owningContextualExpressionBuilder == owningContextualExpressionBuilder => fromSameContext,
+            OperatorBindingRethrowDecorator fromAnotherContext => new OperatorBindingRethrowDecorator(owningContextualExpressionBuilder, fromAnotherContext.Inner),
+            _ => new OperatorBindingRethrowDecorator(owningContextualExpressionBuilder, operatorBinding)
         };
 
     private OperatorBindingRethrowDecorator(
-        IBuilderContext owningBuilderContext,
+        IContextualExpressionBuilder owningContextualExpressionBuilder,
         OperatorBinding inner)
     {
-        _owningBuilderContext = owningBuilderContext;
+        _owningContextualExpressionBuilder = owningContextualExpressionBuilder;
         Inner = inner;
     }
 
@@ -40,7 +40,7 @@ internal sealed class OperatorBindingRethrowDecorator : OperatorBinding
         }
         catch (Exception e)
         {
-            throw _owningBuilderContext.NewExpressionBuildingException(e.Message, e);
+            throw _owningContextualExpressionBuilder.NewExpressionBuildingException(e.Message, e);
         }
     }
 }

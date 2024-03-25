@@ -9,14 +9,14 @@ internal readonly record struct ExpressionBuildingError : ICqlError
     private const string DefaultMessage = "Exception occurred during expression building.";
 
     public ExpressionBuildingError(
-        IBuilderContext? context = null,
+        IContextualExpressionBuilder? context = null,
         string? message = null)
     {
         Context = context;
         Message = message ?? DefaultMessage;
     }
 
-    public IBuilderContext? Context { get; }
+    public IContextualExpressionBuilder? Context { get; }
 
     private string Message { get; }
 
@@ -35,6 +35,6 @@ internal static class ExpressionBuildingErrorExtensions
 {
     public static CqlException WithContext(
         this Exception e,
-        IBuilderContext ctx) =>
+        IContextualExpressionBuilder ctx) =>
         ctx.NewExpressionBuildingException(innerException: e);
 }

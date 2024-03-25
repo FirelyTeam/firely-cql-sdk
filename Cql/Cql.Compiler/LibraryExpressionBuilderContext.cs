@@ -13,7 +13,7 @@ namespace Hl7.Cql.Compiler;
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class ContextualLibraryExpressionBuilder : IBuilderContext
+internal partial class ContextualLibraryExpressionBuilder : IContextualExpressionBuilder
 {
     private readonly ILogger<ContextualLibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
@@ -155,9 +155,9 @@ internal partial class ContextualLibraryExpressionBuilder : IBuilderContext
 
     #endregion
 
-    IBuilderContext? IBuilderContext.OuterContext => LibrarySetContext;
+    IContextualExpressionBuilder? IContextualExpressionBuilder.OuterContext => LibrarySetContext;
 
-    BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(Library);
+    BuilderContextInfo IContextualExpressionBuilder.ContextInfo => BuilderContextInfo.FromElement(Library);
 
 
     private readonly record struct LibraryNameAndName(string? LibraryName, string Name);

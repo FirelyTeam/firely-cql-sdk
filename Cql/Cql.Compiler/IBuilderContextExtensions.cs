@@ -5,12 +5,12 @@ using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Compiler;
 
-internal static class IBuilderContextExtensions
+internal static class IContextualExpressionBuilderExtensions
 {
 
-    public static IEnumerable<IBuilderContext> SelfAndAncestorContexts(this IBuilderContext context)
+    public static IEnumerable<IContextualExpressionBuilder> SelfAndAncestorContexts(this IContextualExpressionBuilder context)
     {
-        IBuilderContext? currentContext = context;
+        IContextualExpressionBuilder? currentContext = context;
         while (currentContext != null)
         {
             yield return currentContext;
@@ -19,20 +19,20 @@ internal static class IBuilderContextExtensions
     }
 
     public static CqlException NewExpressionBuildingException(
-        this IBuilderContext context,
+        this IContextualExpressionBuilder context,
         string? message = null, 
         Exception? innerException = null) =>
         new ExpressionBuildingError(context, message).ToException(innerException);
 
-    public static string GetExpressionPath(this IBuilderContext builderContext) =>
+    public static string GetExpressionPath(this IContextualExpressionBuilder contextualExpressionBuilder) =>
         $"\r\n\tExpression Path:{string.Concat(
-            from context in builderContext.SelfAndAncestorContexts().Reverse()
+            from context in contextualExpressionBuilder.SelfAndAncestorContexts().Reverse()
             select $"\r\n\t* {context.ContextInfo}"
         )}";
 
-    public static string GetDebuggerView(this IBuilderContext builderContext) =>
-        $"{builderContext.GetType().Name}\r\n\tExpression Path:{string.Concat(
-            from context in builderContext.SelfAndAncestorContexts().Reverse()
+    public static string GetDebuggerView(this IContextualExpressionBuilder contextualExpressionBuilder) =>
+        $"{contextualExpressionBuilder.GetType().Name}\r\n\tExpression Path:{string.Concat(
+            from context in contextualExpressionBuilder.SelfAndAncestorContexts().Reverse()
             select $"\r\n\t* {context.ContextInfo}"
         )}";
 

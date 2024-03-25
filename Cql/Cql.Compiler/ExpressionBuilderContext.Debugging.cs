@@ -4,17 +4,17 @@ using elm = Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler;
 
 [DebuggerDisplay("{DebuggerView}")]
-partial class ContextualExpressionBuilder : IBuilderContext
+partial class ContextualExpressionBuilder : IContextualExpressionBuilder
 {
     private readonly Elm.Element _element;
 
     private readonly ContextualExpressionBuilder? _outerContext;
 
-    IBuilderContext? IBuilderContext.OuterContext => (IBuilderContext?)_outerContext ?? LibraryContext;
+    IContextualExpressionBuilder? IContextualExpressionBuilder.OuterContext => (IContextualExpressionBuilder?)_outerContext ?? LibraryContext;
 
-    BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(_element);
+    BuilderContextInfo IContextualExpressionBuilder.ContextInfo => BuilderContextInfo.FromElement(_element);
 
-    public string FormatMessage(string message, elm.Element? element = null)
+    private string FormatMessage(string message, elm.Element? element = null)
     {
         var locator = element?.locator;
 
