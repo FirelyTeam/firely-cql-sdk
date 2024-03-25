@@ -17,7 +17,7 @@ internal class LibraryDefinitionsBuilderFactory
     private readonly Lazy<Conversion.TypeConverter> _typeConverter;
     private readonly Lazy<CqlOperatorsBinding> _cqlOperatorsBinding;
     private readonly Lazy<TypeManager> _typeManager;
-    private readonly Lazy<LibraryDefinitionsBuilder> _expressionBuilder;
+    private readonly Lazy<LibraryDefinitionsBuilder> _libraryDefinitionsBuilder;
 
     public LibraryDefinitionsBuilderFactory(ILoggerFactory loggerFactory, int? cacheSize = null)
     {
@@ -25,7 +25,7 @@ internal class LibraryDefinitionsBuilderFactory
         _typeConverter = Deferred(() => FhirTypeConverter.Create(ModelInspector, cacheSize));
         _cqlOperatorsBinding = Deferred(() => new CqlOperatorsBinding(FhirTypeResolver, TypeConverter));
         _typeManager = Deferred(() => new TypeManager(FhirTypeResolver));
-        _expressionBuilder = Deferred(() => new LibraryDefinitionsBuilder(loggerFactory, TypeManager, CqlOperatorsBinding));
+        _libraryDefinitionsBuilder = Deferred(() => new LibraryDefinitionsBuilder(loggerFactory, TypeManager, CqlOperatorsBinding));
 
         //ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
@@ -41,5 +41,5 @@ internal class LibraryDefinitionsBuilderFactory
 
     public TypeManager TypeManager => _typeManager.Value;
 
-    public LibraryDefinitionsBuilder LibraryDefinitionsBuilder => _expressionBuilder.Value;
+    public LibraryDefinitionsBuilder LibraryDefinitionsBuilder => _libraryDefinitionsBuilder.Value;
 }
