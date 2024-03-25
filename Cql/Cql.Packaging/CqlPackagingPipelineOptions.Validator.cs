@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.Packager;
+namespace Hl7.Cql.Packaging;
 
-partial class PackagerOptions
+partial class CqlToResourcePackagingOptions
 {
-    internal class Validator : IValidateOptions<PackagerOptions>
+    internal class Validator : IValidateOptions<CqlToResourcePackagingOptions>
     {
-        public ValidateOptionsResult Validate(string? name, PackagerOptions options)
+        public ValidateOptionsResult Validate(string? name, CqlToResourcePackagingOptions options)
         {
             ValidateOptionsResultBuilder? builder = null;
 

@@ -1,6 +1,6 @@
-﻿namespace Hl7.Cql.Packager;
+﻿namespace Hl7.Cql.Packaging;
 
-internal partial class PackagerOptions
+internal partial class CqlToResourcePackagingOptions
 {
     public const string ConfigSection = "Packager";
 

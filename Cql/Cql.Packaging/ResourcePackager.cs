@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Fhir.Model;
 using FhirLibrary = Hl7.Fhir.Model.Library;
-using Microsoft.Extensions.Logging;
 using Annotation = Hl7.Cql.Elm.Annotation;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 

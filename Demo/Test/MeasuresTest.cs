@@ -147,7 +147,7 @@ namespace Test
         {
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
-            LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory, cacheSize);
+            ResourcePackagerFactory factory = new ResourcePackagerFactory(logFactory, cacheSize);
             var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");

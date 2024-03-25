@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Hl7.Cql.Packager;
+namespace Hl7.Cql.Packaging;
 
-partial class PackagerOptions
+partial class CqlToResourcePackagingOptions
 {
-    public static void BindConfig(PackagerOptions opt, IConfiguration config)
+    public static void BindConfig(CqlToResourcePackagingOptions opt, IConfiguration config)
     {
         var section = config.GetRequiredSection(ConfigSection);
         section.Bind(opt);
