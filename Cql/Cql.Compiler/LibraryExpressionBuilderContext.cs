@@ -16,7 +16,7 @@ namespace Hl7.Cql.Compiler;
 internal partial class LibraryExpressionBuilder : IBuilderNode
 {
     private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings;
+    private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
@@ -24,7 +24,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public LibraryExpressionBuilder(
         Library library,
-        ExpressionBuilderSettings expressionBuilderSettings,
+        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         OperatorBinding operatorBinding,
         DefinitionDictionary<LambdaExpression> definitions, 
         TypeManager typeManager,
@@ -32,7 +32,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
         LibrarySetExpressionBuilder? libsCtx = null)
     {
         // External Services
-        _expressionBuilderSettings = expressionBuilderSettings;
+        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
         _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
         _typeManager = typeManager;
         _loggerFactory = loggerFactory;
@@ -58,11 +58,11 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public string LibraryKey => Library.NameAndVersion()!;
 
-    public bool AllowUnresolvedExternals => _expressionBuilderSettings.AllowUnresolvedExternals;
+    public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
 
     public ExpressionBuilder CreateContextualExpressionBuilder(
         Element element) =>
-        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _expressionBuilderSettings, this, element);
+        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _libraryDefinitionBuilderSettings, this, element);
 
     #region Definitions
 

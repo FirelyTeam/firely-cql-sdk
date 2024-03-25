@@ -12,7 +12,7 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
     private readonly ILoggerFactory _loggerFactory;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings;
+    private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
     private readonly LibrarySet _librarySet;
     private readonly BuilderDebuggerInfo _debuggerInfo;
     private readonly DefinitionDictionary<LambdaExpression> _allDefinitions;
@@ -21,7 +21,7 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
         ILoggerFactory loggerFactory,
         OperatorBinding operatorBinding,
         TypeManager typeManager,
-        ExpressionBuilderSettings expressionBuilderSettings,
+        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {
@@ -29,7 +29,7 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
         _loggerFactory = loggerFactory;
         _operatorBinding = operatorBinding;
         _typeManager = typeManager;
-        _expressionBuilderSettings = expressionBuilderSettings;
+        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
 
         // External State
         _librarySet = librarySet;
@@ -50,6 +50,6 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
     public LibraryExpressionBuilder CreateContextualLibraryExpressionBuilder(
         Library library,
         DefinitionDictionary<LambdaExpression> definitions) =>
-        new(library, _expressionBuilderSettings, _operatorBinding, definitions, _typeManager, _loggerFactory, this);
+        new(library, _libraryDefinitionBuilderSettings, _operatorBinding, definitions, _typeManager, _loggerFactory, this);
 
 }

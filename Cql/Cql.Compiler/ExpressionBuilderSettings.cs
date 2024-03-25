@@ -13,7 +13,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Describes settings to control the behavior of <see cref="LibraryDefinitionsBuilder"/>
     /// </summary>
-    internal class ExpressionBuilderSettings
+    internal class LibraryDefinitionBuilderSettings
     {
         /// <summary>
         /// Allows a child scope to redefine an existing parent scope.  Default is <see langword="true" />
@@ -42,7 +42,7 @@ namespace Hl7.Cql.Compiler
         /// Here, X is being used twice, because the source is a subquery.  X is used in the subquery and is also used
         /// in the main query.  ELM does not limit the scope of the first X to only the subquery as it probably should.
         /// </remarks>
-        public bool AllowScopeRedefinition { get; set; } = true;
+        public bool AllowScopeRedefinition { get; init; } = true;
 
         /// <summary>
         /// When <see langword="true"/>, functions declared external will throw <see cref="NotImplementedException"/> at runtime
@@ -50,7 +50,8 @@ namespace Hl7.Cql.Compiler
         /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in <see cref="ExpressionBuilder._customImplementations"/>.
         /// The default value is <see langword="true"/>.
         /// </summary>
-        public bool AllowUnresolvedExternals { get; set; } = true;
+        public bool AllowUnresolvedExternals { get; init; } = true;
 
+        public static readonly LibraryDefinitionBuilderSettings Default = new LibraryDefinitionBuilderSettings();
     }
 }

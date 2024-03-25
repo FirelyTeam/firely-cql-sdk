@@ -32,7 +32,7 @@ namespace Hl7.Cql.Compiler
             ILogger<ExpressionBuilder> logger,
             OperatorBinding operatorBinding,
             TypeManager typeManager,
-            ExpressionBuilderSettings settings,
+            LibraryDefinitionBuilderSettings settings,
             LibraryExpressionBuilder libContext,
             elm.Element element)
         {
@@ -42,7 +42,7 @@ namespace Hl7.Cql.Compiler
             _logger = logger;
 
             // External State
-            _expressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
+            _libraryDefinitionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             _element = element;
             LibraryContext = libContext;
 
@@ -61,7 +61,7 @@ namespace Hl7.Cql.Compiler
         {
             _element = source._element;
             _outerContext = source._outerContext;
-            _expressionBuilderSettings = source._expressionBuilderSettings;
+            _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
             _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
             _impliedAlias = source._impliedAlias;
             _operands = source._operands;
@@ -113,7 +113,7 @@ namespace Hl7.Cql.Compiler
 
         private readonly IList<IExpressionMutator> _expressionMutators;
 
-        private readonly ExpressionBuilderSettings _expressionBuilderSettings;
+        private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
 
         private readonly OperatorBinding _operatorBinding;
 
@@ -202,7 +202,7 @@ namespace Hl7.Cql.Compiler
         internal ExpressionBuilder WithScopes(string? alias, params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
             var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
-            if (_expressionBuilderSettings.AllowScopeRedefinition)
+            if (_libraryDefinitionBuilderSettings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
                 {
@@ -223,7 +223,7 @@ namespace Hl7.Cql.Compiler
 
                     if (scopes.ContainsKey(normalizedIdentifier))
                         throw this.NewExpressionBuildingException(
-                            $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_expressionBuilderSettings.AllowScopeRedefinition)} to true");
+                            $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_libraryDefinitionBuilderSettings.AllowScopeRedefinition)} to true");
                     scopes.Add(normalizedIdentifier, kvp.Value);
                 }
             }
