@@ -719,6 +719,8 @@ Hl7.Cql.Elm.ValueSetRef.ValueSetRef() -> void
 Hl7.Cql.Elm.Variance
 Hl7.Cql.Elm.Variance.Variance() -> void
 Hl7.Cql.Elm.VersionedIdentifier
+Hl7.Cql.Elm.VersionedIdentifier.CompareTo(Hl7.Cql.Elm.VersionedIdentifier? other) -> int
+Hl7.Cql.Elm.VersionedIdentifier.Equals(Hl7.Cql.Elm.VersionedIdentifier? other) -> bool
 Hl7.Cql.Elm.VersionedIdentifier.VersionedIdentifier() -> void
 Hl7.Cql.Elm.Width
 Hl7.Cql.Elm.Width.Width() -> void
@@ -752,6 +754,8 @@ override Hl7.Cql.Elm.TupleTypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.TupleTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.TypeSpecifier.Equals(object? obj) -> bool
 override Hl7.Cql.Elm.TypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.VersionedIdentifier.Equals(object? obj) -> bool
+override Hl7.Cql.Elm.VersionedIdentifier.GetHashCode() -> int
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType = Hl7.Cql.Elm.ErrorType.semantic, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.AddUnresolvedOperatorError<T>(this T! node, string! name, params Hl7.Cql.Elm.TypeSpecifier![]! argumentTypes) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! node) -> Hl7.Cql.Elm.CqlToElmError![]!

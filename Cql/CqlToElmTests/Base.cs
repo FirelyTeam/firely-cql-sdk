@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
@@ -39,6 +40,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddTransient<InvocationBuilder>()
                 .AddSingleton<CoercionProvider>()
                 .AddSingleton<ElmFactory>()
+                .AddSingleton<ILibraryProvider, MemoryLibraryProvider>()
                 .AddScoped<CqlToElmConverter>();
             Services = services.BuildServiceProvider();
 

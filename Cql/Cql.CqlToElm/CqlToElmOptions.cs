@@ -12,6 +12,16 @@
 
         /// <summary>
         /// <para>
+        /// The root path where all input libraries will be located.
+        /// </para>
+        /// <para>
+        /// This path may contain CQL files, JSON ELM libraries, and XML ELM libraries.
+        /// </para>
+        /// </summary>
+        public string? Input { get; set; }
+
+        /// <summary>
+        /// <para>
         /// Sets the default URI of the ELM model that will be automatically included
         /// as a <code>using</code> directive, using the local identifer <code>System</code>.
         /// </para>

@@ -15,10 +15,8 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class CqlToElmConverter
     {
-        /// <summary>
-        /// Constructs an instance.
-        /// </summary>
-        public CqlToElmConverter(IServiceScopeFactory scopeFactory, ILogger<CqlToElmConverter> logger)
+        public CqlToElmConverter(IServiceScopeFactory scopeFactory, 
+            ILogger<CqlToElmConverter> logger)
         {
             ScopeFactory = scopeFactory;
             Logger = logger;
