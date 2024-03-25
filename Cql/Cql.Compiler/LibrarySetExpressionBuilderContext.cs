@@ -47,9 +47,9 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
 
     public string DebuggerView => this.GetDebuggerView();
 
-    public LibraryExpressionBuilder CreateContextualLibraryExpressionBuilder(
+    public LibraryExpressionBuilder CreateLibraryExpressionBuilder(
         Library library,
-        DefinitionDictionary<LambdaExpression> definitions) =>
-        new(library, _libraryDefinitionBuilderSettings, _operatorBinding, definitions, _typeManager, _loggerFactory, this);
+        DefinitionDictionary<LambdaExpression>? definitions = null) =>
+        new(library, _libraryDefinitionBuilderSettings, _operatorBinding, definitions ?? new(), _typeManager, _loggerFactory, this);
 
 }

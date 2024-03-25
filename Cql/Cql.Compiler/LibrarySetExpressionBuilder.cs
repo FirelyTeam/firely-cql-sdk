@@ -9,7 +9,7 @@ internal partial class LibrarySetExpressionBuilder
     {
         foreach (var library in LibrarySet)
         {
-            var packageDefinitions = CreateContextualLibraryExpressionBuilder(library, new()).ProcessLibrary();
+            var packageDefinitions = CreateLibraryExpressionBuilder(library, new()).ProcessLibrary();
             _allDefinitions.Merge(packageDefinitions);
         }
 

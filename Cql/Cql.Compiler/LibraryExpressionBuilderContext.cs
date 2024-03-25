@@ -60,7 +60,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
 
-    public ExpressionBuilder CreateContextualExpressionBuilder(
+    public ExpressionBuilder CreateExpressionBuilder(
         Element element) =>
         new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _libraryDefinitionBuilderSettings, this, element);
 

@@ -21,7 +21,7 @@ partial class LibraryExpressionBuilder
         {
             foreach (var includeDef in includeDefs)
             {
-                CreateContextualExpressionBuilder(includeDef).ProcessIncludes(includeDef);
+                CreateExpressionBuilder(includeDef).ProcessIncludes(includeDef);
             }
         }
 
@@ -29,7 +29,7 @@ partial class LibraryExpressionBuilder
         {
             foreach (var valueSetDef in valueSetDefs)
             {
-                CreateContextualExpressionBuilder(valueSetDef).ProcessValueSetDef(valueSetDef);
+                CreateExpressionBuilder(valueSetDef).ProcessValueSetDef(valueSetDef);
             }
         }
 
@@ -39,7 +39,7 @@ partial class LibraryExpressionBuilder
 
             foreach (var codeDef in codeDefs)
             {
-                CreateContextualExpressionBuilder(codeDef).ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls);
+                CreateExpressionBuilder(codeDef).ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls);
             }
         }
 
@@ -47,7 +47,7 @@ partial class LibraryExpressionBuilder
         {
             foreach (var codeSystemDef in codeSystemDefs)
             {
-                CreateContextualExpressionBuilder(codeSystemDef).ProcessCodeSystemDef(codeSystemDef);
+                CreateExpressionBuilder(codeSystemDef).ProcessCodeSystemDef(codeSystemDef);
             }
         }
 
@@ -55,7 +55,7 @@ partial class LibraryExpressionBuilder
         {
             foreach (var conceptDef in conceptDefs)
             {
-                CreateContextualExpressionBuilder(conceptDef).ProcessConceptDef(conceptDef);
+                CreateExpressionBuilder(conceptDef).ProcessConceptDef(conceptDef);
             }
         }
 
@@ -63,7 +63,7 @@ partial class LibraryExpressionBuilder
         {
             foreach (var parameterDef in parameterDefs)
             {
-                CreateContextualExpressionBuilder(parameterDef).ProcessParameterDef(parameterDef);
+                CreateExpressionBuilder(parameterDef).ProcessParameterDef(parameterDef);
             }
         }
 
@@ -71,7 +71,7 @@ partial class LibraryExpressionBuilder
         {
             foreach (var expressionDef in expressionDefs)
             {
-                CreateContextualExpressionBuilder(expressionDef).ProcessExpressionDef(expressionDef);
+                CreateExpressionBuilder(expressionDef).ProcessExpressionDef(expressionDef);
             }
         }
 

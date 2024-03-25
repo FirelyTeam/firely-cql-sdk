@@ -73,9 +73,9 @@ internal class LibraryDefinitionsBuilder
         DefinitionDictionary<LambdaExpression>? lambdas = null)
     {
         var librarySet = CreateLibrarySetOfOne(library);
-        var translated = CreateContextualLibrarySetExpressionBuilder(librarySet, lambdas)
-            .CreateContextualLibraryExpressionBuilder(library, new())
-            .CreateContextualExpressionBuilder(expression)
+        var translated = CreateLibrarySetExpressionBuilder(librarySet, lambdas)
+            .CreateLibraryExpressionBuilder(library)
+            .CreateExpressionBuilder(expression)
             .TranslateExpression(expression);
         var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
         var lambda = Expression.Lambda(translated, parameter);
@@ -85,6 +85,6 @@ internal class LibraryDefinitionsBuilder
     private static LibrarySet CreateLibrarySetOfOne(Library library) =>
         new($"Single LibrarySet `{library}`", library);
 
-    private LibrarySetExpressionBuilder CreateContextualLibrarySetExpressionBuilder(LibrarySet librarySet, DefinitionDictionary<LambdaExpression>? lambdas) =>
+    private LibrarySetExpressionBuilder CreateLibrarySetExpressionBuilder(LibrarySet librarySet, DefinitionDictionary<LambdaExpression>? lambdas) =>
         new(_loggerFactory, _operatorBinding, _typeManager, LibraryDefinitionBuilderSettings.Default, librarySet, lambdas ?? new());
 }
