@@ -12,7 +12,7 @@ namespace Hl7.Cql.Packaging;
 /// The idea is not to inject this into service types, it's purpose is to
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
-internal class ResourcePackagerFactory : ExpressionBuilderFactory
+internal class ResourcePackagerFactory : LibraryDefinitionsBuilderFactory
 {
     private readonly Lazy<CSharpLibrarySetToStreamsWriter> _cSharpSourceCodeWriter;
     private readonly Lazy<CSharpCodeStreamPostProcessor?> _cSharpCodeStreamPostProcessor;

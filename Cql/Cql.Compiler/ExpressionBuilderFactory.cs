@@ -11,7 +11,7 @@ namespace Hl7.Cql.Compiler;
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
 
-internal class ExpressionBuilderFactory
+internal class LibraryDefinitionsBuilderFactory
 {
     private readonly Lazy<FhirTypeResolver> _fhirTypeResolver;
     private readonly Lazy<Conversion.TypeConverter> _typeConverter;
@@ -19,7 +19,7 @@ internal class ExpressionBuilderFactory
     private readonly Lazy<TypeManager> _typeManager;
     private readonly Lazy<LibraryDefinitionsBuilder> _expressionBuilder;
 
-    public ExpressionBuilderFactory(ILoggerFactory loggerFactory, int? cacheSize = null)
+    public LibraryDefinitionsBuilderFactory(ILoggerFactory loggerFactory, int? cacheSize = null)
     {
         _fhirTypeResolver = Deferred(() => new FhirTypeResolver(ModelInspector));
         _typeConverter = Deferred(() => FhirTypeConverter.Create(ModelInspector, cacheSize));
