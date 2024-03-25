@@ -61,6 +61,11 @@ classDiagram
         }
     }
 
+    namespace Cql_To_Resource_Pipeline {
+        class CqlToResourcePackagingPipeline {
+        }        
+    }
+
     namespace Application {
         class PackagerCliProgram {
         }
@@ -83,10 +88,12 @@ classDiagram
 
     TypeManager ..> ExpressionBuilder : injected
 
-    ResourcePackager ..> PackagerCliProgram : injected 
+    ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
+    AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
+    LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
+
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
-    AssemblyCompiler ..> PackagerCliProgram : injected
-    LibrarySetExpressionBuilder ..> PackagerCliProgram : injected
+    CqlToResourcePackagingPipeline ..> PackagerCliProgram : injected
       
     TypeResolver ..> CqlOperatorsBinding : injected
     TypeConverter ..> CqlOperatorsBinding : injected
