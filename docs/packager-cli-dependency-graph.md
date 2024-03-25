@@ -13,7 +13,10 @@ classDiagram
         get_TupleTypes() IEnumerable~Type~
     }
 
-    subgraph Generating_CSharp_From_LibrarySet_AndDefinitions
+    namespace CSharpCode_Generate_And_Compile {
+        class AssemblyCompiler {
+        }
+
         class CSharpLibrarySetToStreamsWriter {
         }
 
@@ -22,14 +25,60 @@ classDiagram
 
         class WriteToFileCSharpCodeStreamPostProcessor {
         }
-    end
+    }
 
+    namespace Expression_Building {
+        class ExpressionBuilder {
+        }
+
+        class LibraryExpressionBuilder {
+        }
+
+        class LibrarySetExpressionBuilder {
+        }
+
+        class OperatorBinding {
+        }
+
+        class CqlOperatorsBinding {
+        }
+
+        class TypeConverter {
+        }
+
+        class ModelInspector {
+        }
+    }
+
+    namespace Fhir_Resource_Building {
+        class ResourcePackager {
+        }
+
+        class FhirResourcePostProcessor {
+        }
+
+        class WriteToFileFhirResourcePostProcessor {
+        }
+    }
+
+    namespace Cql_To_Resource_Pipeline {
+        class CqlToResourcePackagingPipeline {
+        }        
+    }
+
+    namespace Application {
+        class PackagerCliProgram {
+        }
+
+        class OptionsConsoleDumper {
+        }
+    }
 
     %% Inheritance  
     
     CqlOperatorsBinding --> OperatorBinding : inherits
-    FhirResourceWriter --> ResourceWriter : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
+    WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
     %% Injected Dependencies
 
@@ -39,8 +88,12 @@ classDiagram
 
     TypeManager ..> ExpressionBuilder : injected
 
-    ResourcePackager ..> PackagerCliProgram : injected 
+    ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
+    AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
+    LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
+
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
+    CqlToResourcePackagingPipeline ..> PackagerCliProgram : injected
       
     TypeResolver ..> CqlOperatorsBinding : injected
     TypeConverter ..> CqlOperatorsBinding : injected
@@ -49,24 +102,16 @@ classDiagram
 
     TypeResolver ..> TypeManager : injected
 
-    AssemblyCompiler ..> LibraryPackager : injected
-    TypeResolver ..> LibraryPackager : injected
-    LibrarySetExpressionBuilder ..> LibraryPackager : injected
+    TypeResolver ..> ResourcePackager : injected
+    FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
+    OperatorBinding ..> LibraryExpressionBuilder : injected
     TypeManager ..> LibraryExpressionBuilder : injected
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
-    OperatorBinding ..> LibraryExpressionBuilder : injected
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
-
-    IEnumerable_ResourceWriter_ ..> ResourcePackager : injected 
-    LibraryPackager ..> ResourcePackager : injected
-
-    %% Rest
-    ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
-
 ```
 
 ## ExpressionBuilders and Contexts

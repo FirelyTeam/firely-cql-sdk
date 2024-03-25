@@ -7,27 +7,27 @@ namespace Hl7.Cql.Packager;
 internal class PackagerCliProgram
 {
     private readonly OptionsConsoleDumper _optionsConsoleDumper;
-    private readonly PackagerOptions _packagerOptions;
     private readonly ILogger<PackagerCliProgram> _logger;
-    private readonly ResourcePackager _resourcePackager;
+    private readonly CqlToResourcePackagingPipeline _pipeline;
 
     public PackagerCliProgram(
         ILogger<PackagerCliProgram> logger,
-        IOptions<PackagerOptions> packageArgsOptions,
-        OptionsConsoleDumper optionsConsoleDumper, 
-        ResourcePackager resourcePackager)
+        IOptions<CqlToResourcePackagingOptions > options,
+        OptionsConsoleDumper optionsConsoleDumper,
+        CqlToResourcePackagingPipeline pipeline)
     {
         _logger = logger;
         _optionsConsoleDumper = optionsConsoleDumper;
-        _resourcePackager = resourcePackager;
-        _packagerOptions = packageArgsOptions.Value;
+        _pipeline = pipeline;
     }
 
     public int Run()
     {
         try
         {
-            return RunCore();
+            _optionsConsoleDumper.DumpToConsole();
+            _pipeline.ProcessCqlToResources();
+            return 0;
         }
         catch (Exception e)
         {
@@ -35,13 +35,5 @@ internal class PackagerCliProgram
             Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
             return -1;
         }
-    }
-
-    private int RunCore()
-    {
-        _optionsConsoleDumper.DumpToConsole();
-        var opt = _packagerOptions;
-        _resourcePackager.Package(opt.ElmDirectory, opt.CqlDirectory);
-        return 0;
     }
 }

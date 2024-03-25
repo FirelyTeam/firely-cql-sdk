@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
             _outerContext = null;
             ExpressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
-            OperatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
+            OperatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -70,7 +70,7 @@ namespace Hl7.Cql.Compiler
         {
             Debug.Assert(element != this._element);
             _outerContext = outer;
-            OperatorBinding = new OperatorBindingRethrowDecorator(this, ((OperatorBindingRethrowDecorator)outer.OperatorBinding).Inner);
+            OperatorBinding = OperatorBindingRethrowDecorator.Decorate(this, outer.OperatorBinding);
             _element = element;
         }
 

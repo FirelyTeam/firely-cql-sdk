@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -30,7 +27,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     {
 
         _expressionBuilderSettings = expressionBuilderSettings;
-        _operatorBinding = operatorBinding;
+        _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
         Definitions = definitions;
         Library = library;
         LibrarySetContext = libsCtx;

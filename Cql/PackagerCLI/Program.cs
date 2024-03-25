@@ -4,7 +4,7 @@ using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.ResourceWriters;
+using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,18 +40,18 @@ public class Program
 
     private static IDictionary<string, string> BuildSwitchMappings()
     {
-        const string PackageSection = PackagerOptions.ConfigSection + ":";
+        const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
         const string CSharpResourceWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
         return new SortedDictionary<string, string>
         {
             // @formatter:off
-            [PackagerOptions.ArgNameElmDirectory]             = PackageSection + nameof(PackagerOptions.ElmDirectory),
-            [PackagerOptions.ArgNameCqlDirectory]             = PackageSection + nameof(PackagerOptions.CqlDirectory),
-            [PackagerOptions.ArgNameDebug]                    = PackageSection + nameof(PackagerOptions.Debug),
-            [PackagerOptions.ArgNameForce]                    = PackageSection + nameof(PackagerOptions.Force),
-            [PackagerOptions.ArgNameCanonicalRootUrl]         = PackageSection + nameof(PackagerOptions.CanonicalRootUrl),
+            [CqlToResourcePackagingOptions.ArgNameElmDirectory]             = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
+            [CqlToResourcePackagingOptions.ArgNameCqlDirectory]             = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
+            [CqlToResourcePackagingOptions.ArgNameDebug]                    = PackageSection + nameof(CqlToResourcePackagingOptions.Debug),
+            [CqlToResourcePackagingOptions.ArgNameForce]                    = PackageSection + nameof(CqlToResourcePackagingOptions.Force),
+            [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl]         = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
             [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
@@ -135,7 +135,7 @@ public class Program
         {
             return hostBuilder.Build();
         }
-        catch (OptionsValidationException e) when (e.OptionsType == typeof(PackagerOptions))
+        catch (OptionsValidationException e) when (e.OptionsType == typeof(CqlToResourcePackagingOptions))
         {
             foreach (var failure in e.Failures)
             {
