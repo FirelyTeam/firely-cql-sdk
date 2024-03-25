@@ -73,7 +73,7 @@ internal class LibraryDefinitionsBuilder
         DefinitionDictionary<LambdaExpression>? lambdas = null)
     {
         var librarySet = CreateLibrarySetOfOne(library);
-        var translated = CreateLibrarySetExpressionBuilder(librarySet, lambdas)
+        var translated = CreateLibrarySetExpressionBuilder(librarySet)
             .CreateLibraryExpressionBuilder(library)
             .CreateExpressionBuilder(expression)
             .TranslateExpression(expression);
@@ -85,6 +85,6 @@ internal class LibraryDefinitionsBuilder
     private static LibrarySet CreateLibrarySetOfOne(Library library) =>
         new($"Single LibrarySet `{library}`", library);
 
-    private LibrarySetExpressionBuilder CreateLibrarySetExpressionBuilder(LibrarySet librarySet, DefinitionDictionary<LambdaExpression>? lambdas) =>
+    private LibrarySetExpressionBuilder CreateLibrarySetExpressionBuilder(LibrarySet librarySet, DefinitionDictionary<LambdaExpression>? lambdas = null) =>
         new(_loggerFactory, _operatorBinding, _typeManager, LibraryDefinitionBuilderSettings.Default, librarySet, lambdas ?? new());
 }
