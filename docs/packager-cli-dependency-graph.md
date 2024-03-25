@@ -85,6 +85,8 @@ classDiagram
 
     ResourcePackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
+    AssemblyCompiler ..> PackagerCliProgram : injected
+    LibrarySetExpressionBuilder ..> PackagerCliProgram : injected
       
     TypeResolver ..> CqlOperatorsBinding : injected
     TypeConverter ..> CqlOperatorsBinding : injected
@@ -93,9 +95,7 @@ classDiagram
 
     TypeResolver ..> TypeManager : injected
 
-    AssemblyCompiler ..> ResourcePackager : injected
     TypeResolver ..> ResourcePackager : injected
-    LibrarySetExpressionBuilder ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected

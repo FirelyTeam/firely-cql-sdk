@@ -66,7 +66,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IDictionary<string, AssemblyData> Compile(
+        public IReadOnlyDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression>? definitions = null)
         {

@@ -18,7 +18,7 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
     private readonly Lazy<CSharpCodeStreamPostProcessor?> _cSharpCodeStreamPostProcessor;
     private readonly Lazy<FhirResourcePostProcessor?> _fhirResourcePostProcessor;
     private readonly Lazy<AssemblyCompiler> _assemblyCompiler;
-    private readonly Lazy<ResourcePackager> _libraryPackager;
+    private readonly Lazy<ResourcePackager> _resourcePackager;
     private readonly Lazy<CqlTypeToFhirTypeMapper> _cqlTypeToFhirTypeMapper;
 
     public LibraryPackagerFactory(
@@ -43,7 +43,7 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
                 : null);
         _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
         _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor));
-        _libraryPackager = Deferred(() => new ResourcePackager(FhirTypeResolver, AssemblyCompiler, LibrarySetExpressionBuilder, FhirResourcePostProcessor));
+        _resourcePackager = Deferred(() => new ResourcePackager(FhirTypeResolver, FhirResourcePostProcessor));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
@@ -62,5 +62,5 @@ internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
 
     public AssemblyCompiler AssemblyCompiler => _assemblyCompiler.Value;
 
-    public ResourcePackager ResourcePackager => _libraryPackager.Value;
+    public ResourcePackager ResourcePackager => _resourcePackager.Value;
 }

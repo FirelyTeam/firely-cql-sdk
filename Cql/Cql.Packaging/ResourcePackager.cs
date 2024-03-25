@@ -1,22 +1,15 @@
-using System.Globalization;
-using System.Linq.Expressions;
-using System.Runtime.ExceptionServices;
 using System.Runtime.Loader;
 using System.Text;
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging.PostProcessors;
-using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
-using JetBrains.Annotations;
-using Library = Hl7.Fhir.Model.Library;
+using FhirLibrary = Hl7.Fhir.Model.Library;
 using Microsoft.Extensions.Logging;
-using static System.FormattableString;
 using Annotation = Hl7.Cql.Elm.Annotation;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 
@@ -25,122 +18,26 @@ namespace Hl7.Cql.Packaging;
 #pragma warning disable CS1591
 internal class ResourcePackager
 {
-    private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
-    private readonly AssemblyCompiler _assemblyCompiler;
     private readonly TypeResolver _typeResolver;
     private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor;
 
     public ResourcePackager(
         TypeResolver typeResolver,
-        AssemblyCompiler assemblyCompiler,
-        LibrarySetExpressionBuilder librarySetExpressionBuilder, 
         FhirResourcePostProcessor? fhirResourcePostProcessor)
     {
         _typeResolver = typeResolver;
-        _assemblyCompiler = assemblyCompiler;
-        _librarySetExpressionBuilder = librarySetExpressionBuilder;
         _fhirResourcePostProcessor = fhirResourcePostProcessor;
     }
 
     public IReadOnlyCollection<Resource> PackageResources(
         DirectoryInfo elmDirectory,
         DirectoryInfo cqlDirectory,
-        string? resourceCanonicalRootUrl = null)
-    {
-        //
-        // 1. LOAD ELM FILES
-        //
-
-        LibrarySet librarySet;
-        try
-        {
-            librarySet = new(elmDirectory.FullName);
-            librarySet.LoadLibraries(elmDirectory.GetFiles("*.json", SearchOption.AllDirectories));
-        }
-        catch (Exception e)
-        {
-            throw new ResourcePackagerErrors(LoadElmFilesException: e).ToException();
-        }
-
-        //
-        // 2. BUILD EXPRESSIONS
-        //      Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
-        //      while we try to continue building the rest of the artifacts up until the point of failure.
-
-        var librariesByNameAndVersion = new Dictionary<string, Library>();
-        var definitions = new DefinitionDictionary<LambdaExpression>();
-        ExceptionDispatchInfo? expressionBuildingExceptionInfo = null;
-        try
-        {
-            _librarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
-        }
-        catch (Exception e)
-        {
-            var librarySetReplacement = new LibrarySet();
-            librarySetReplacement.AddLibraries(definitions.Libraries.Select(lib => librarySet.GetLibrary(lib, true)!));
-            librarySet = librarySetReplacement;
-            expressionBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
-        }
-
-        //
-        // 3. GENERATE C# ASSEMBLIES 
-        //
-
-        IDictionary<string, AssemblyData> assembliesByLibraryName;
-        try
-        {
-            assembliesByLibraryName = _assemblyCompiler.Compile(librarySet, definitions);
-        }
-        catch (Exception e)
-        {
-            throw new ResourcePackagerErrors(
-                ExpressionBuildingException: expressionBuildingExceptionInfo?.SourceException, 
-                AssemblyCompilingException:e).ToException();
-        }
-
-        //
-        // 4. GENERATE FHIR RESOURCES
-        //
-
-        try
-        {
-            var resources = BuildResources(
-                elmDirectory,
-                cqlDirectory, 
-                resourceCanonicalRootUrl, 
-                librarySet,
-                assembliesByLibraryName, librariesByNameAndVersion);
-
-            if (expressionBuildingExceptionInfo is not null)
-            {
-                throw new ResourcePackagerErrors(
-                    LoadElmFilesException: expressionBuildingExceptionInfo.SourceException)
-                    .ToException();
-            }
-
-            return resources;
-        }
-        catch (CqlException<ResourcePackagerErrors>)
-        {
-            throw;
-        }
-        catch (Exception e)
-        {
-            throw new ResourcePackagerErrors(
-                LoadElmFilesException: expressionBuildingExceptionInfo?.SourceException,
-                ResourceBuildingException: e).ToException();
-        }
-    }
-
-    private List<Resource> BuildResources(
-        DirectoryInfo elmDirectory,
-        DirectoryInfo cqlDirectory,
         string? resourceCanonicalRootUrl,
         LibrarySet librarySet,
-        IDictionary<string, AssemblyData> assembliesByLibraryName,
-        IDictionary<string, Library> librariesByNameAndVersion)
+        IReadOnlyDictionary<string, AssemblyData> assembliesByLibraryName)
     {
         var resources = new List<Resource>();
+        var librariesByNameAndVersion = new Dictionary<string, FhirLibrary>();
 
         void OnResourceCreated(Resource resource)
         {
@@ -256,7 +153,6 @@ internal class ResourcePackager
                     if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure))
                         throw new InvalidOperationException(
                             $"We didn't create a measure for library {libForMeasure}");
-
                     measure.Library = new List<string> { libForMeasure!.Url };
                     OnResourceCreated(measure);
                 }
@@ -266,7 +162,7 @@ internal class ResourcePackager
         return resources;
     }
 
-    private static Library CreateLibraryResource(
+    private static FhirLibrary CreateLibraryResource(
         FileInfo elmFile,
         FileInfo? cqlFile,
         AssemblyData assembly,
@@ -290,7 +186,7 @@ internal class ResourcePackager
             ContentType = Elm.Library.JsonMimeType,
             Data = bytes,
         };
-        var library = new Library();
+        var library = new FhirLibrary();
         library.Content.Add(attachment);
         library.Type = LogicLibraryCodeableConcept;
         string libraryId = $"{elmLibrary!.NameAndVersion()}";
@@ -456,125 +352,5 @@ internal class ResourcePackager
         }
 
         return parameterDefinition;
-    }
-
-    #region Static Utiltities
-
-    [UsedImplicitly]
-    [Obsolete("Use LibrarySet.LoadLibraries instead.")]
-    public static IReadOnlyDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
-    {
-        LibrarySet ls = new(elmDir.FullName);
-        ls.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
-        return ls.AsReadOnlyDictionary;
-    }
-
-    [UsedImplicitly]
-    public static AssemblyLoadContext LoadResources(
-        DirectoryInfo dir,
-        string lib,
-        string version)
-    {
-        var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
-        using var fs = libFile.OpenRead();
-        var library = fs.ParseFhir<Library>();
-        var dependencies = library.GetDependencies(dir);
-        var allLibs = dependencies.AllLibraries();
-        var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        allLibs.LoadAssemblies(asmContext);
-
-        var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
-        using var tupleFs = tupleTypes.OpenRead();
-        var binaries = new[]
-        {
-                tupleFs.ParseFhir<Binary>()
-            };
-
-        binaries.LoadAssembles(asmContext);
-        return asmContext;
-    }
-
-    [UsedImplicitly]
-    public static AssemblyLoadContext LoadElm(
-        DirectoryInfo elmDirectory,
-        string lib,
-        string version,
-        LogLevel logLevel = LogLevel.Error,
-        int cacheSize = 0)
-    {
-        var logFactory = LoggerFactory
-                      .Create(logging =>
-                      {
-                          logging.AddFilter(level => level >= logLevel);
-                          logging.AddConsole(console =>
-                          {
-                              console.LogToStandardErrorThreshold = LogLevel.Error;
-                          });
-                      });
-        return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
-    }
-
-    [UsedImplicitly]
-    public static AssemblyLoadContext LoadElm(
-        DirectoryInfo elmDirectory,
-        string lib,
-        string version,
-        ILoggerFactory logFactory,
-        int cacheSize)
-    {
-        LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
-        LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory, cacheSize);
-        var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-        var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
-        var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        foreach (var (_, asmData) in assemblyData)
-        {
-            var assemblyBytes = asmData.Binary;
-            using var ms = new MemoryStream(assemblyBytes);
-            asmContext.LoadFromStream(ms);
-        }
-        return asmContext;
-    }
-
-    #endregion 
-}
-
-internal readonly record struct ResourcePackagerErrors(
-    Exception? LoadElmFilesException = null,
-    Exception? ExpressionBuildingException = null,
-    Exception? AssemblyCompilingException = null,
-    Exception? ResourceBuildingException = null) : ICqlError
-{
-    public string GetMessage()
-    {
-        StringBuilder sb = new();
-        int i = 1;
-        sb.Append("The following exceptions occurred during Library Packaging:");
-        if (LoadElmFilesException is { } lefe)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. LoadElmFilesException"));
-            sb.Append(lefe);
-        }
-        if (ExpressionBuildingException is { } ebe)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. ExpressionBuildingException"));
-            sb.Append(ebe);
-        }
-        if (AssemblyCompilingException is { } ace)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. AssemblyCompilingException"));
-            sb.Append(ace);
-        }
-        if (ResourceBuildingException is { } rbe)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. ResourceBuildingException"));
-            sb.Append(rbe);
-        }
-        return sb.ToString();
     }
 }
