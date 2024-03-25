@@ -12,7 +12,7 @@ using Hl7.Cql.Runtime;
 namespace CoreTests
 {
     [TestClass]
-    public class ExpressionBuilderTests
+    public class LibraryDefinitionsBuilderTests
     {
         private static ILoggerFactory LoggerFactory { get; } =
             Microsoft.Extensions.Logging.LoggerFactory
@@ -25,7 +25,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.ExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -35,7 +35,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.ExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -45,7 +45,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.ExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -62,7 +62,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = Factory.ExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -71,7 +71,7 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            var property = ContextualExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", Factory.TypeManager.Resolver);
+            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", Factory.TypeManager.Resolver);
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

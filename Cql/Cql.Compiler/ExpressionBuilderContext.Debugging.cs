@@ -4,15 +4,15 @@ using elm = Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler;
 
 [DebuggerDisplay("{DebuggerView}")]
-partial class ContextualExpressionBuilder : IContextualExpressionBuilder
+partial class ExpressionBuilder : IBuilderNode
 {
     private readonly Elm.Element _element;
 
-    private readonly ContextualExpressionBuilder? _outerContext;
+    private readonly ExpressionBuilder? _outerContext;
 
-    IContextualExpressionBuilder? IContextualExpressionBuilder.OuterContext => (IContextualExpressionBuilder?)_outerContext ?? LibraryContext;
+    IBuilderNode? IBuilderNode.OuterBuilder => (IBuilderNode?)_outerContext ?? LibraryContext;
 
-    BuilderContextInfo IContextualExpressionBuilder.ContextInfo => BuilderContextInfo.FromElement(_element);
+    BuilderDebuggerInfo IBuilderNode.BuilderDebuggerInfo => BuilderDebuggerInfo.FromElement(_element);
 
     private string FormatMessage(string message, elm.Element? element = null)
     {

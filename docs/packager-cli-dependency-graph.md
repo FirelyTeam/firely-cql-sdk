@@ -37,16 +37,16 @@ classDiagram
         class LibrarySet{
         }
 
-        class ContextualExpressionBuilder{
+        class ExpressionBuilder{
         }
 
-        class ContextualLibraryExpressionBuilder{
+        class LibraryExpressionBuilder{
         }
 
-        class ContextualLibrarySetExpressionBuilder{
+        class LibrarySetExpressionBuilder{
         }
 
-        class ExpressionBuilder {
+        class LibraryDefinitionsBuilder {
         }
 
         class OperatorBinding {
@@ -94,17 +94,17 @@ classDiagram
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected
     
-    Expression ..> ContextualExpressionBuilder : processed by
+    Expression ..> ExpressionBuilder : processed by
 
-    ContextualExpressionBuilder ..> ContextualLibraryExpressionBuilder : created by
-    Library ..> ContextualLibraryExpressionBuilder : processed by
+    ExpressionBuilder ..> LibraryExpressionBuilder : created by
+    Library ..> LibraryExpressionBuilder : processed by
 
-    ContextualLibraryExpressionBuilder ..> ContextualLibrarySetExpressionBuilder : created by
-    LibrarySet ..> ContextualLibrarySetExpressionBuilder : processed by
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : created by
+    LibrarySet ..> LibrarySetExpressionBuilder : processed by
 
-    ContextualLibrarySetExpressionBuilder ..> ExpressionBuilder : created by
-    TypeManager ..> ExpressionBuilder : injected
-    OperatorBinding ..> ExpressionBuilder : injected
+    LibrarySetExpressionBuilder ..> LibraryDefinitionsBuilder : created by
+    TypeManager ..> LibraryDefinitionsBuilder : injected
+    OperatorBinding ..> LibraryDefinitionsBuilder : injected
 
     ResourcePackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
@@ -118,13 +118,13 @@ classDiagram
 
     AssemblyCompiler ..> ResourcePackager : injected
     TypeResolver ..> ResourcePackager : injected
-    ExpressionBuilder ..> ResourcePackager : injected
+    LibraryDefinitionsBuilder ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 ```
 
-## ExpressionBuilders and Contexts
+## LibraryDefinitionsBuilders and ExpressionBuilders
 ⚠️ This diagram is outdated!
 
 ```mermaid
@@ -145,7 +145,7 @@ classDiagram
     }
 
     class LibraryExpressionBuilder {
-       _expressionBuilder : ExpressionBuilder
+       _expressionBuilder : LibraryDefinitionsBuilder
        _operatorBinding : OperatorBinding
        _typeManager : TypeManager
 
@@ -167,7 +167,7 @@ classDiagram
        get AllowUnresolvedExternals() bool => _expressionBuilderSettings.AllowUnresolvedExternals
     }
 
-    class ExpressionBuilder {
+    class LibraryDefinitionsBuilder {
         _typeManager : TypeManager
         get_Settings() ExpressionBuilderSettings
     }
@@ -192,9 +192,9 @@ classDiagram
 
     LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilderContext : creates and processes
     LibraryExpressionBuilder ..> LibraryExpressionBuilderContext : creates
-    ExpressionBuilder ..> ExpressionBuilderContext : creates
+    LibraryDefinitionsBuilder ..> ExpressionBuilderContext : creates
 
-    ExpressionBuilder ..> LibraryExpressionBuilder : injected
+    LibraryDefinitionsBuilder ..> LibraryExpressionBuilder : injected
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
     ExpressionBuilderContext ..> LibraryExpressionBuilderContext : owner context

@@ -14,7 +14,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         protected Expression? Distinct(elm.Distinct e) =>
             UnaryOperator(CqlOperator.Distinct, e);
@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
         protected Expression First(elm.First e)
         {
             var operand = TranslateExpression(e.source!);
-            var call = _operatorBinding.Bind(CqlOperator.First, ExpressionBuilder.ContextParameter, operand);
+            var call = _operatorBinding.Bind(CqlOperator.First, LibraryDefinitionsBuilder.ContextParameter, operand);
             return call;
         }
 
@@ -38,7 +38,7 @@ namespace Hl7.Cql.Compiler
             var element = TranslateExpression(e.element!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return _operatorBinding.Bind(CqlOperator.IndexOf, ExpressionBuilder.ContextParameter, source, element);
+                return _operatorBinding.Bind(CqlOperator.IndexOf, LibraryDefinitionsBuilder.ContextParameter, source, element);
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -46,7 +46,7 @@ namespace Hl7.Cql.Compiler
         protected Expression Last(elm.Last e)
         {
             var operand = TranslateExpression(e.source!);
-            var call = _operatorBinding.Bind(CqlOperator.Last, ExpressionBuilder.ContextParameter, operand);
+            var call = _operatorBinding.Bind(CqlOperator.Last, LibraryDefinitionsBuilder.ContextParameter, operand);
             return call;
         }
 
@@ -65,7 +65,7 @@ namespace Hl7.Cql.Compiler
                 : TranslateExpression(slice.endIndex!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return _operatorBinding.Bind(CqlOperator.Slice, ExpressionBuilder.ContextParameter, source, start, end);
+                return _operatorBinding.Bind(CqlOperator.Slice, LibraryDefinitionsBuilder.ContextParameter, source, start, end);
             }
             throw new NotImplementedException().WithContext(this);
         }

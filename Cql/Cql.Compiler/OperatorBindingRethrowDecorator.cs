@@ -8,21 +8,21 @@ namespace Hl7.Cql.Compiler;
 
 internal sealed class OperatorBindingRethrowDecorator : OperatorBinding
 {
-    private readonly IContextualExpressionBuilder _owningContextualExpressionBuilder;
+    private readonly IBuilderNode _owningBuilder;
 
-    public static OperatorBinding Decorate(IContextualExpressionBuilder owningContextualExpressionBuilder, OperatorBinding operatorBinding) =>
+    public static OperatorBinding Decorate(IBuilderNode owningBuilder, OperatorBinding operatorBinding) =>
         operatorBinding switch
         {
-            OperatorBindingRethrowDecorator fromSameContext when fromSameContext._owningContextualExpressionBuilder == owningContextualExpressionBuilder => fromSameContext,
-            OperatorBindingRethrowDecorator fromAnotherContext => new OperatorBindingRethrowDecorator(owningContextualExpressionBuilder, fromAnotherContext.Inner),
-            _ => new OperatorBindingRethrowDecorator(owningContextualExpressionBuilder, operatorBinding)
+            OperatorBindingRethrowDecorator fromSameContext when fromSameContext._owningBuilder == owningBuilder => fromSameContext,
+            OperatorBindingRethrowDecorator fromAnotherContext => new OperatorBindingRethrowDecorator(owningBuilder, fromAnotherContext.Inner),
+            _ => new OperatorBindingRethrowDecorator(owningBuilder, operatorBinding)
         };
 
     private OperatorBindingRethrowDecorator(
-        IContextualExpressionBuilder owningContextualExpressionBuilder,
+        IBuilderNode owningBuilder,
         OperatorBinding inner)
     {
-        _owningContextualExpressionBuilder = owningContextualExpressionBuilder;
+        _owningBuilder = owningBuilder;
         Inner = inner;
     }
 
@@ -40,7 +40,7 @@ internal sealed class OperatorBindingRethrowDecorator : OperatorBinding
         }
         catch (Exception e)
         {
-            throw _owningContextualExpressionBuilder.NewExpressionBuildingException(e.Message, e);
+            throw _owningBuilder.NewExpressionBuildingException(e.Message, e);
         }
     }
 }

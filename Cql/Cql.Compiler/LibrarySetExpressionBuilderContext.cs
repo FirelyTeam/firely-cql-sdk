@@ -7,17 +7,17 @@ using Microsoft.Extensions.Logging;
 namespace Hl7.Cql.Compiler;
 
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class ContextualLibrarySetExpressionBuilder : IContextualExpressionBuilder
+internal partial class LibrarySetExpressionBuilder : IBuilderNode
 {
     private readonly ILoggerFactory _loggerFactory;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
     private readonly LibrarySet _librarySet;
-    private readonly BuilderContextInfo _contextInfo;
+    private readonly BuilderDebuggerInfo _debuggerInfo;
     private readonly DefinitionDictionary<LambdaExpression> _allDefinitions;
 
-    public ContextualLibrarySetExpressionBuilder(
+    public LibrarySetExpressionBuilder(
         ILoggerFactory loggerFactory,
         OperatorBinding operatorBinding,
         TypeManager typeManager,
@@ -25,24 +25,29 @@ internal partial class ContextualLibrarySetExpressionBuilder : IContextualExpres
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {
+        // External Services
         _loggerFactory = loggerFactory;
         _operatorBinding = operatorBinding;
         _typeManager = typeManager;
         _expressionBuilderSettings = expressionBuilderSettings;
+
+        // External State
         _librarySet = librarySet;
         _allDefinitions = definitions;
-        _contextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
+
+        // Internal State
+        _debuggerInfo = new BuilderDebuggerInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
-    IContextualExpressionBuilder? IContextualExpressionBuilder.OuterContext => null;
+    IBuilderNode? IBuilderNode.OuterBuilder => null;
 
-    BuilderContextInfo IContextualExpressionBuilder.ContextInfo => _contextInfo;
+    BuilderDebuggerInfo IBuilderNode.BuilderDebuggerInfo => _debuggerInfo;
 
     public LibrarySet LibrarySet => _librarySet;
 
     public string DebuggerView => this.GetDebuggerView();
 
-    public ContextualLibraryExpressionBuilder CreateContextualLibraryExpressionBuilder(
+    public LibraryExpressionBuilder CreateContextualLibraryExpressionBuilder(
         Library library,
         DefinitionDictionary<LambdaExpression> definitions) =>
         new(library, _expressionBuilderSettings, _operatorBinding, definitions, _typeManager, _loggerFactory, this);

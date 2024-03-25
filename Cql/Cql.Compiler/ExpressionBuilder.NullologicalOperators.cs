@@ -16,7 +16,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         protected Expression Coalesce(elm.Coalesce ce)
         {
@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler
                 .ToArray();
             if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
             {
-                var call = _operatorBinding.Bind(CqlOperator.Coalesce, ExpressionBuilder.ContextParameter, operands[0]);
+                var call = _operatorBinding.Bind(CqlOperator.Coalesce, LibraryDefinitionsBuilder.ContextParameter, operands[0]);
                 return call;
             }
             var distinctOperandTypes = operands

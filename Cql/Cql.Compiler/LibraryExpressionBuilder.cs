@@ -11,21 +11,7 @@ using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Compiler;
 
-/// <summary>
-/// The builder for processing the library into definitions.
-/// </summary>
-partial class ExpressionBuilder 
-{
-    public static readonly ParameterExpression ContextParameter = Expression.Parameter(typeof(CqlContext), "context");
-
-    public DefinitionDictionary<LambdaExpression> ProcessLibrary(
-        Library library,
-        DefinitionDictionary<LambdaExpression>? definitions = null) =>
-            new ContextualLibraryExpressionBuilder(library, _settings, _operatorBinding, definitions??new(), _typeManager, _loggerFactory, null)
-                .ProcessLibrary();
-}
-
-partial class ContextualLibraryExpressionBuilder
+partial class LibraryExpressionBuilder
 {
     public DefinitionDictionary<LambdaExpression> ProcessLibrary()
     {
@@ -94,7 +80,7 @@ partial class ContextualLibraryExpressionBuilder
 
 }
 
-partial class ContextualExpressionBuilder
+partial class ExpressionBuilder
 {
     public void ProcessCodeSystemDef(
         CodeSystemDef codeSystem)
@@ -112,7 +98,7 @@ partial class ContextualExpressionBuilder
                     ))
                 .ToArray();
             var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-            var contextParameter = ExpressionBuilder.ContextParameter;
+            var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
             var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
             LibraryContext.Definitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
         }
@@ -120,7 +106,7 @@ partial class ContextualExpressionBuilder
         {
             var newArray =
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-            var contextParameter = ExpressionBuilder.ContextParameter;
+            var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
             var lambda = Expression.Lambda(newArray, contextParameter);
             LibraryContext.Definitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
         }
@@ -133,7 +119,7 @@ partial class ContextualExpressionBuilder
         {
             var newArray =
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-            var contextParameter = ExpressionBuilder.ContextParameter;
+            var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
             var lambda = Expression.Lambda(newArray, contextParameter);
             LibraryContext.Definitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
         }
@@ -160,7 +146,7 @@ partial class ContextualExpressionBuilder
             var asEnumerable = Expression.TypeAs(arrayOfCodesInitializer, typeof(IEnumerable<CqlCode>));
             var display = Expression.Constant(conceptDef.display, typeof(string));
             var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
-            var contextParameter = ExpressionBuilder.ContextParameter;
+            var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
             var lambda = Expression.Lambda(newConcept, contextParameter);
             LibraryContext.Definitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
         }
@@ -190,7 +176,7 @@ partial class ContextualExpressionBuilder
             Expression.Constant(null, typeof(string)),
             Expression.Constant(null, typeof(string))!
         );
-        var contextParameter = ExpressionBuilder.ContextParameter;
+        var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
         var lambda = Expression.Lambda(newCodingExpression, contextParameter);
         LibraryContext.Definitions.Add(LibraryContext.LibraryKey, codeDef.name!, lambda);
     }
@@ -205,7 +191,7 @@ partial class ContextualExpressionBuilder
 
         var expressionKey = $"{LibraryContext.LibraryKey}.{expressionDef.name}";
         Type[] functionParameterTypes = Type.EmptyTypes;
-        var parameters = new[] { ExpressionBuilder.ContextParameter };
+        var parameters = new[] { LibraryDefinitionsBuilder.ContextParameter };
         var function = expressionDef as FunctionDef;
         if (function is { operand: not null })
         {
@@ -313,7 +299,7 @@ partial class ContextualExpressionBuilder
         else defaultValue = Expression.Constant(null, typeof(object));
 
         var resolveParam = Expression.Call(
-            ExpressionBuilder.ContextParameter,
+            LibraryDefinitionsBuilder.ContextParameter,
             typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
             Expression.Constant(LibraryContext.LibraryKey),
             Expression.Constant(parameter.name),
@@ -323,7 +309,7 @@ partial class ContextualExpressionBuilder
         var parameterType = TypeFor(parameter.parameterTypeSpecifier);
         var cast = Expression.Convert(resolveParam, parameterType);
         // e.g. (bundle, context) => context.Parameters["Measurement Period"]
-        var lambda = Expression.Lambda(cast, ExpressionBuilder.ContextParameter);
+        var lambda = Expression.Lambda(cast, LibraryDefinitionsBuilder.ContextParameter);
         LibraryContext.Definitions.Add(LibraryContext.LibraryKey, parameter.name!, lambda);
     }
 
@@ -332,13 +318,13 @@ partial class ContextualExpressionBuilder
     {
         var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
             Expression.Constant(valueSetDef.version, typeof(string)));
-        var contextParameter = ExpressionBuilder.ContextParameter;
+        var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
         var lambda = Expression.Lambda(@new, contextParameter);
         LibraryContext.Definitions.Add(LibraryContext.LibraryKey, valueSetDef.name!, lambda);
     }
 
     private static LambdaExpression NotImplemented(
-        ContextualExpressionBuilder ctx,
+        ExpressionBuilder ctx,
         string nav,
         Type[] signature,
         Type returnType)

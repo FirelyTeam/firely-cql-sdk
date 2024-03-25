@@ -18,7 +18,7 @@ using F = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         protected Expression As(elm.As @as)
         {
@@ -121,7 +121,7 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var source = TranslateExpression(e.source);
-                var call = _operatorBinding.Bind(CqlOperator.Descendents, ExpressionBuilder.ContextParameter, source);
+                var call = _operatorBinding.Bind(CqlOperator.Descendents, LibraryDefinitionsBuilder.ContextParameter, source);
                 return call;
             }
         }
@@ -137,7 +137,7 @@ namespace Hl7.Cql.Compiler
         {
             var quantity = TranslateExpression(cqe.operand![0]);
             var unit = TranslateExpression(cqe.operand![1]);
-            var call = _operatorBinding.Bind(CqlOperator.ConvertQuantity, ExpressionBuilder.ContextParameter, quantity, unit);
+            var call = _operatorBinding.Bind(CqlOperator.ConvertQuantity, LibraryDefinitionsBuilder.ContextParameter, quantity, unit);
             return call;
         }
 
@@ -232,7 +232,7 @@ namespace Hl7.Cql.Compiler
         protected Expression ToList(elm.ToList e)
         {
             var operand = TranslateExpression(e.operand!);
-            var call = _operatorBinding.Bind(CqlOperator.ToList, ExpressionBuilder.ContextParameter, operand);
+            var call = _operatorBinding.Bind(CqlOperator.ToList, LibraryDefinitionsBuilder.ContextParameter, operand);
             return call;
         }
 
@@ -250,17 +250,17 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                var callSelect = _operatorBinding.Bind(CqlOperator.Select, ExpressionBuilder.ContextParameter, input, lambda);
+                var callSelect = _operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, input, lambda);
                 return callSelect;
             }
             else if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                var call = _operatorBinding.Bind(CqlOperator.Convert, ExpressionBuilder.ContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
+                var call = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
                 return call;
             }
             else
             {
-                var call = _operatorBinding.Bind(CqlOperator.Convert, ExpressionBuilder.ContextParameter, input, Expression.Constant(outputType, typeof(Type)));
+                var call = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter, input, Expression.Constant(outputType, typeof(Type)));
                 return call;
             }
         }

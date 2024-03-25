@@ -22,37 +22,42 @@ namespace Hl7.Cql.Compiler
     /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
     /// </summary>
     /// <remarks>
-    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ContextualExpressionBuilder)"/>.
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilder)"/>.
     /// </remarks>
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         private readonly TypeManager _typeManager;
 
-        internal ContextualExpressionBuilder(
-            ILogger<ContextualExpressionBuilder> logger,
+        internal ExpressionBuilder(
+            ILogger<ExpressionBuilder> logger,
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             ExpressionBuilderSettings settings,
-            ContextualLibraryExpressionBuilder libContext,
+            LibraryExpressionBuilder libContext,
             elm.Element element)
         {
-            _element = element;
-            _outerContext = null;
-            _expressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
+            // External Services
             _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+            _typeManager = typeManager;
+            _logger = logger;
+
+            // External State
+            _expressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
+            _element = element;
+            LibraryContext = libContext;
+
+            // Internal State
+            _outerContext = null;
             _impliedAlias = null;
             _operands = new Dictionary<string, ParameterExpression>();
             _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
             _scopes = new Dictionary<string, (Expression, elm.Element)>();
-            LibraryContext = libContext;
-            _typeManager = typeManager;
-            _logger = logger;
             _expressionMutators = new List<IExpressionMutator>();
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
 
-        private ContextualExpressionBuilder(
-            ContextualExpressionBuilder source)
+        private ExpressionBuilder(
+            ExpressionBuilder source)
         {
             _element = source._element;
             _outerContext = source._outerContext;
@@ -69,8 +74,8 @@ namespace Hl7.Cql.Compiler
             _customImplementations = source._customImplementations;
         }
 
-        private ContextualExpressionBuilder(
-            ContextualExpressionBuilder outer,
+        private ExpressionBuilder(
+            ExpressionBuilder outer,
             Elm.Element element) : this(outer)
         {
             Debug.Assert(element != _element);
@@ -79,8 +84,8 @@ namespace Hl7.Cql.Compiler
             _element = element;
         }
 
-        private ContextualExpressionBuilder(
-            ContextualExpressionBuilder outer,
+        private ExpressionBuilder(
+            ExpressionBuilder outer,
             string? impliedAlias,
             IDictionary<string, (Expression, elm.Element)> scopes) : this(outer)
         {
@@ -88,7 +93,7 @@ namespace Hl7.Cql.Compiler
             _impliedAlias = impliedAlias;
         }
 
-        internal ContextualLibraryExpressionBuilder LibraryContext { get; }
+        internal LibraryExpressionBuilder LibraryContext { get; }
 
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
@@ -191,10 +196,10 @@ namespace Hl7.Cql.Compiler
         internal bool HasScope(string elmAlias) => _scopes.ContainsKey(elmAlias);
 
 
-        internal ContextualExpressionBuilder WithScope(string alias, Expression expr, elm.Element element) => 
+        internal ExpressionBuilder WithScope(string alias, Expression expr, elm.Element element) => 
             WithScopes(KeyValuePair.Create(alias, (expr, element)));
 
-        internal ContextualExpressionBuilder WithScopes(string? alias, params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
+        internal ExpressionBuilder WithScopes(string? alias, params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
             var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
             if (_expressionBuilderSettings.AllowScopeRedefinition)
@@ -222,18 +227,18 @@ namespace Hl7.Cql.Compiler
                     scopes.Add(normalizedIdentifier, kvp.Value);
                 }
             }
-            var subContext = new ContextualExpressionBuilder(this, impliedAlias:alias, scopes: scopes);
+            var subContext = new ExpressionBuilder(this, impliedAlias:alias, scopes: scopes);
             return subContext;
         }
 
         /// <summary>
         /// Creates a copy with the scopes provided.
         /// </summary>
-        internal ContextualExpressionBuilder
+        internal ExpressionBuilder
             WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps) => 
             WithScopes(_impliedAlias, kvps);
 
-        internal ContextualExpressionBuilder WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
+        internal ExpressionBuilder WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
         {
             var subContext = WithScopes(aliasName, new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
             return subContext;
@@ -242,7 +247,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ContextualExpressionBuilder Push(
+        internal ExpressionBuilder Push(
             elm.Element element)
         {
             if (element == _element)
@@ -251,10 +256,10 @@ namespace Hl7.Cql.Compiler
                 return this;
             }
 
-            return new ContextualExpressionBuilder(this, element);
+            return new ExpressionBuilder(this, element);
         }
 
-        internal ContextualExpressionBuilder Pop() => _outerContext ?? throw new InvalidOperationException("Cannot pop the root context.");
+        internal ExpressionBuilder Pop() => _outerContext ?? throw new InvalidOperationException("Cannot pop the root context.");
         
         public Expression? Mutate(elm.Element op, Expression? expression)
         {

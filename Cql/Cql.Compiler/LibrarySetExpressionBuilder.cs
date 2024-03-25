@@ -3,16 +3,7 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
-partial class ExpressionBuilder
-{
-    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? definitions = null) =>
-        new ContextualLibrarySetExpressionBuilder( _loggerFactory, _operatorBinding, _typeManager, _settings, librarySet, definitions ?? new())
-            .ProcessLibrarySet();
-}
-
-internal partial class ContextualLibrarySetExpressionBuilder
+internal partial class LibrarySetExpressionBuilder
 {
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet()
     {

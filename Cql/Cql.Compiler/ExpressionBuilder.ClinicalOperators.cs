@@ -15,14 +15,14 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
 
         protected Expression CalculateAge(elm.CalculateAge e)
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand!);
-            return _operatorBinding.Bind(CqlOperator.CalculateAge, ExpressionBuilder.ContextParameter, birthDate, units);
+            return _operatorBinding.Bind(CqlOperator.CalculateAge, LibraryDefinitionsBuilder.ContextParameter, birthDate, units);
         }
 
         protected Expression CalculateAgeAt(elm.CalculateAgeAt e)
@@ -30,7 +30,7 @@ namespace Hl7.Cql.Compiler
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand![0]);
             var asOf = TranslateExpression(e.operand[1]); // should be "as of" argument
-            return _operatorBinding.Bind(CqlOperator.CalculateAgeAt, ExpressionBuilder.ContextParameter, birthDate, asOf, units);
+            return _operatorBinding.Bind(CqlOperator.CalculateAgeAt, LibraryDefinitionsBuilder.ContextParameter, birthDate, asOf, units);
         }
 
 
@@ -41,15 +41,15 @@ namespace Hl7.Cql.Compiler
             var codeType = code.Type;
             if (codeType == _typeManager.Resolver.CodeType)
             {
-                return _operatorBinding.Bind(CqlOperator.CodeInValueSet, ExpressionBuilder.ContextParameter, code, valueSet);
+                return _operatorBinding.Bind(CqlOperator.CodeInValueSet, LibraryDefinitionsBuilder.ContextParameter, code, valueSet);
             }
             else if (codeType == _typeManager.Resolver.ConceptType)
             {
-                return _operatorBinding.Bind(CqlOperator.ConceptInValueSet, ExpressionBuilder.ContextParameter, code, valueSet);
+                return _operatorBinding.Bind(CqlOperator.ConceptInValueSet, LibraryDefinitionsBuilder.ContextParameter, code, valueSet);
             }
             else if (codeType == typeof(string))
             {
-                return _operatorBinding.Bind(CqlOperator.StringInValueSet, ExpressionBuilder.ContextParameter, code, valueSet);
+                return _operatorBinding.Bind(CqlOperator.StringInValueSet, LibraryDefinitionsBuilder.ContextParameter, code, valueSet);
             }
             else throw new NotImplementedException().WithContext(this);
         }
@@ -63,15 +63,15 @@ namespace Hl7.Cql.Compiler
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
             if (codeType == _typeManager.Resolver.CodeType)
             {
-                return _operatorBinding.Bind(CqlOperator.CodesInValueSet, ExpressionBuilder.ContextParameter, codes, valueSet);
+                return _operatorBinding.Bind(CqlOperator.CodesInValueSet, LibraryDefinitionsBuilder.ContextParameter, codes, valueSet);
             }
             else if (codeType == _typeManager.Resolver.ConceptType)
             {
-                return _operatorBinding.Bind(CqlOperator.ConceptsInValueSet, ExpressionBuilder.ContextParameter, codes, valueSet);
+                return _operatorBinding.Bind(CqlOperator.ConceptsInValueSet, LibraryDefinitionsBuilder.ContextParameter, codes, valueSet);
             }
             else if (codeType == typeof(string))
             {
-                return _operatorBinding.Bind(CqlOperator.StringsInValueSet, ExpressionBuilder.ContextParameter, codes, valueSet);
+                return _operatorBinding.Bind(CqlOperator.StringsInValueSet, LibraryDefinitionsBuilder.ContextParameter, codes, valueSet);
             }
             else throw new NotImplementedException($"AnyInValueSet not implemented for element type {TypeManager.PrettyTypeName(codeType)}").WithContext(this);
 

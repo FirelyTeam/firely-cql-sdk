@@ -29,7 +29,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            DefinitionDictionary<LambdaExpression> definitions = Factory.ExpressionBuilder.ProcessLibrary(elmPackage);
+            DefinitionDictionary<LambdaExpression> definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
@@ -38,7 +38,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            Factory.ExpressionBuilder.ProcessLibrary(elmPackage, definitions: definitions);
+            Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage, definitions: definitions);
             AggregatesDefinitions = definitions.CompileAll();
         }
 

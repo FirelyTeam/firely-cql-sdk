@@ -14,7 +14,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         protected Expression After(elm.After e)
         {
@@ -25,20 +25,20 @@ namespace Hl7.Cql.Compiler
             {
                 if (IsInterval(right.Type, out var rightElementType))
                 {
-                    return _operatorBinding.Bind(CqlOperator.IntervalAfterInterval, ExpressionBuilder.ContextParameter, left, right, precision);
+                    return _operatorBinding.Bind(CqlOperator.IntervalAfterInterval, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
                 }
                 else
                 {
-                    return _operatorBinding.Bind(CqlOperator.IntervalAfterElement, ExpressionBuilder.ContextParameter, left, right, precision);
+                    return _operatorBinding.Bind(CqlOperator.IntervalAfterElement, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
                 }
             }
             else if (IsInterval(right.Type, out var rightElementType))
             {
-                return _operatorBinding.Bind(CqlOperator.ElementAfterInterval, ExpressionBuilder.ContextParameter, left, right, precision);
+                return _operatorBinding.Bind(CqlOperator.ElementAfterInterval, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
             else
             {
-                return _operatorBinding.Bind(CqlOperator.After, ExpressionBuilder.ContextParameter, left, right, precision);
+                return _operatorBinding.Bind(CqlOperator.After, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
         }
 
@@ -51,21 +51,21 @@ namespace Hl7.Cql.Compiler
             {
                 if (IsInterval(right.Type, out var rightElementType))
                 {
-                    return _operatorBinding.Bind(CqlOperator.IntervalBeforeInterval, ExpressionBuilder.ContextParameter, left, right, precision);
+                    return _operatorBinding.Bind(CqlOperator.IntervalBeforeInterval, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
 
                 }
                 else
                 {
-                    return _operatorBinding.Bind(CqlOperator.IntervalBeforeElement, ExpressionBuilder.ContextParameter, left, right, precision);
+                    return _operatorBinding.Bind(CqlOperator.IntervalBeforeElement, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
                 }
             }
             else if (IsInterval(right.Type, out var rightElementType))
             {
-                return _operatorBinding.Bind(CqlOperator.ElementBeforeInterval, ExpressionBuilder.ContextParameter, left, right, precision);
+                return _operatorBinding.Bind(CqlOperator.ElementBeforeInterval, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
             else
             {
-                return _operatorBinding.Bind(CqlOperator.Before, ExpressionBuilder.ContextParameter, left, right, precision);
+                return _operatorBinding.Bind(CqlOperator.Before, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
         }
         protected Expression Date(elm.Date e)
@@ -74,7 +74,7 @@ namespace Hl7.Cql.Compiler
             var month = (e.month != null) ? TranslateExpression(e.month) : Expression.Constant(null, typeof(int?));
             var day = (e.day != null) ? TranslateExpression(e.day) : Expression.Constant(null, typeof(int?));
 
-            return _operatorBinding.Bind(CqlOperator.Date, ExpressionBuilder.ContextParameter, year, month, day);
+            return _operatorBinding.Bind(CqlOperator.Date, LibraryDefinitionsBuilder.ContextParameter, year, month, day);
         }
 
         protected Expression DateTime(elm.DateTime e)
@@ -92,7 +92,7 @@ namespace Hl7.Cql.Compiler
                 offset = ChangeType(offset, typeof(decimal?));
             }
 
-            return _operatorBinding.Bind(CqlOperator.DateTime, ExpressionBuilder.ContextParameter, year, month, day, hour, minute, second, milliseconds, offset);
+            return _operatorBinding.Bind(CqlOperator.DateTime, LibraryDefinitionsBuilder.ContextParameter, year, month, day, hour, minute, second, milliseconds, offset);
         }
 
         /// <remarks>See https://cql.hl7.org/02-authorsguide.html#datetime-operators</remarks>
@@ -108,7 +108,7 @@ namespace Hl7.Cql.Compiler
                 case elm.DateTimePrecision.Minute:
                 case elm.DateTimePrecision.Second:
                 case elm.DateTimePrecision.Millisecond:
-                    return _operatorBinding.Bind(CqlOperator.DateTimeComponent, ExpressionBuilder.ContextParameter, op, Precision(e.precision, e.precisionSpecified));
+                    return _operatorBinding.Bind(CqlOperator.DateTimeComponent, LibraryDefinitionsBuilder.ContextParameter, op, Precision(e.precision, e.precisionSpecified));
                 default:
                     throw new NotSupportedException($"Unsupported date time component: {e.precision}");
             }
@@ -117,7 +117,7 @@ namespace Hl7.Cql.Compiler
         private Expression DateFrom(elm.DateFrom dfe)
         {
             var op = TranslateExpression(dfe.operand!);
-            return _operatorBinding.Bind(CqlOperator.DateComponent, ExpressionBuilder.ContextParameter, op);
+            return _operatorBinding.Bind(CqlOperator.DateComponent, LibraryDefinitionsBuilder.ContextParameter, op);
         }
 
         protected Expression? DifferenceBetween(elm.DifferenceBetween e)
@@ -125,7 +125,7 @@ namespace Hl7.Cql.Compiler
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
             var precision = Precision(e.precision, e.precisionSpecified);
-            return _operatorBinding.Bind(CqlOperator.DifferenceBetween, ExpressionBuilder.ContextParameter, left, right, precision);
+            return _operatorBinding.Bind(CqlOperator.DifferenceBetween, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
         }
 
         protected Expression DurationBetween(elm.DurationBetween e)
@@ -133,11 +133,11 @@ namespace Hl7.Cql.Compiler
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
             var precision = Precision(e.precision, e.precisionSpecified);
-            return _operatorBinding.Bind(CqlOperator.DurationBetween, ExpressionBuilder.ContextParameter, left, right, precision);
+            return _operatorBinding.Bind(CqlOperator.DurationBetween, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
         }
 
         protected Expression? Now(elm.Now now) =>
-            _operatorBinding.Bind(CqlOperator.Now, ExpressionBuilder.ContextParameter);
+            _operatorBinding.Bind(CqlOperator.Now, LibraryDefinitionsBuilder.ContextParameter);
 
         protected Expression? SameAs(elm.SameAs e)
         {
@@ -148,14 +148,14 @@ namespace Hl7.Cql.Compiler
             {
                 if (IsInterval(right.Type, out var rightElementType))
                 {
-                    return _operatorBinding.Bind(CqlOperator.IntervalSameAs, ExpressionBuilder.ContextParameter, left, right, precision);
+                    return _operatorBinding.Bind(CqlOperator.IntervalSameAs, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
                 }
                 else
                     throw this.NewExpressionBuildingException();
             }
             else
             {
-                return _operatorBinding.Bind(CqlOperator.SameAs, ExpressionBuilder.ContextParameter, left, right, precision);
+                return _operatorBinding.Bind(CqlOperator.SameAs, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
         }
 
@@ -168,14 +168,14 @@ namespace Hl7.Cql.Compiler
             {
                 if (IsInterval(right.Type, out var rightElementType))
                 {
-                    return _operatorBinding.Bind(CqlOperator.IntervalSameOrAfter, ExpressionBuilder.ContextParameter, left, right, precision);
+                    return _operatorBinding.Bind(CqlOperator.IntervalSameOrAfter, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
                 }
                 else
                     throw this.NewExpressionBuildingException();
             }
             else
             {
-                return _operatorBinding.Bind(CqlOperator.SameOrAfter, ExpressionBuilder.ContextParameter, left, right, precision);
+                return _operatorBinding.Bind(CqlOperator.SameOrAfter, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
         }
 
@@ -188,14 +188,14 @@ namespace Hl7.Cql.Compiler
             {
                 if (IsInterval(right.Type, out var rightElementType))
                 {
-                    return _operatorBinding.Bind(CqlOperator.IntervalSameOrBefore, ExpressionBuilder.ContextParameter, left, right, precision);
+                    return _operatorBinding.Bind(CqlOperator.IntervalSameOrBefore, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
                 }
                 else
                     throw this.NewExpressionBuildingException();
             }
             else
             {
-                return _operatorBinding.Bind(CqlOperator.SameOrBefore, ExpressionBuilder.ContextParameter, left, right, precision);
+                return _operatorBinding.Bind(CqlOperator.SameOrBefore, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
         }
 
@@ -205,16 +205,16 @@ namespace Hl7.Cql.Compiler
             var minute = e.minute != null ? TranslateExpression(e.minute) : Expression.Constant(null, typeof(int?));
             var second = e.second != null ? TranslateExpression(e.second) : Expression.Constant(null, typeof(int?));
             var millisecond = e.millisecond != null ? TranslateExpression(e.millisecond) : Expression.Constant(null, typeof(int?));
-            return _operatorBinding.Bind(CqlOperator.Time, ExpressionBuilder.ContextParameter, hour, minute, second, millisecond);
+            return _operatorBinding.Bind(CqlOperator.Time, LibraryDefinitionsBuilder.ContextParameter, hour, minute, second, millisecond);
         }
 
         protected Expression? TimeOfDay(elm.TimeOfDay e) =>
-            _operatorBinding.Bind(CqlOperator.TimeOfDay, ExpressionBuilder.ContextParameter);
+            _operatorBinding.Bind(CqlOperator.TimeOfDay, LibraryDefinitionsBuilder.ContextParameter);
 
         protected Expression? TimezoneOffsetFrom(elm.TimezoneOffsetFrom e) =>
             UnaryOperator(CqlOperator.TimeZoneComponent, e);
 
         protected Expression? Today(elm.Today e) =>
-            _operatorBinding.Bind(CqlOperator.Today, ExpressionBuilder.ContextParameter);
+            _operatorBinding.Bind(CqlOperator.Today, LibraryDefinitionsBuilder.ContextParameter);
     }
 }

@@ -158,13 +158,13 @@ namespace Hl7.Cql.Compiler
         }
     }
 
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         private Type? TypeFor(
             Element element,
             bool throwIfNotFound = true)
         {
-            ContextualExpressionBuilder ctx = this;
+            ExpressionBuilder ctx = this;
             if (element?.resultTypeSpecifier != null)
                 return TypeFor(element.resultTypeSpecifier);
 

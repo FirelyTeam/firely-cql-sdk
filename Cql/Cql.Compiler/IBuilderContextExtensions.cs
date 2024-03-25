@@ -5,35 +5,35 @@ using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Compiler;
 
-internal static class IContextualExpressionBuilderExtensions
+internal static class IBuilderNodeExtensions
 {
 
-    public static IEnumerable<IContextualExpressionBuilder> SelfAndAncestorContexts(this IContextualExpressionBuilder context)
+    public static IEnumerable<IBuilderNode> SelfAndAncestorBuilders(this IBuilderNode context)
     {
-        IContextualExpressionBuilder? currentContext = context;
+        IBuilderNode? currentContext = context;
         while (currentContext != null)
         {
             yield return currentContext;
-            currentContext = currentContext.OuterContext;
+            currentContext = currentContext.OuterBuilder;
         }
     }
 
     public static CqlException NewExpressionBuildingException(
-        this IContextualExpressionBuilder context,
+        this IBuilderNode context,
         string? message = null, 
         Exception? innerException = null) =>
         new ExpressionBuildingError(context, message).ToException(innerException);
 
-    public static string GetExpressionPath(this IContextualExpressionBuilder contextualExpressionBuilder) =>
+    public static string GetExpressionPath(this IBuilderNode builder) =>
         $"\r\n\tExpression Path:{string.Concat(
-            from context in contextualExpressionBuilder.SelfAndAncestorContexts().Reverse()
-            select $"\r\n\t* {context.ContextInfo}"
+            from context in builder.SelfAndAncestorBuilders().Reverse()
+            select $"\r\n\t* {context.BuilderDebuggerInfo}"
         )}";
 
-    public static string GetDebuggerView(this IContextualExpressionBuilder contextualExpressionBuilder) =>
-        $"{contextualExpressionBuilder.GetType().Name}\r\n\tExpression Path:{string.Concat(
-            from context in contextualExpressionBuilder.SelfAndAncestorContexts().Reverse()
-            select $"\r\n\t* {context.ContextInfo}"
+    public static string GetDebuggerView(this IBuilderNode builder) =>
+        $"{builder.GetType().Name}\r\n\tExpression Path:{string.Concat(
+            from context in builder.SelfAndAncestorBuilders().Reverse()
+            select $"\r\n\t* {context.BuilderDebuggerInfo}"
         )}";
 
 }

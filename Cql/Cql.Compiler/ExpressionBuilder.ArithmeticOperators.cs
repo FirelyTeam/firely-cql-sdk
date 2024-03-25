@@ -16,7 +16,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ContextualExpressionBuilder
+    internal partial class ExpressionBuilder
     {
 
         protected Expression Abs(elm.Abs e) =>
@@ -53,7 +53,7 @@ namespace Hl7.Cql.Compiler
         {
             var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
             var call = _operatorBinding.Bind(CqlOperator.MaximumValue,
-                ExpressionBuilder.ContextParameter,
+                LibraryDefinitionsBuilder.ContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
@@ -61,7 +61,7 @@ namespace Hl7.Cql.Compiler
         {
             var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
             var call = _operatorBinding.Bind(CqlOperator.MinimumValue,
-                ExpressionBuilder.ContextParameter,
+                LibraryDefinitionsBuilder.ContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
@@ -106,7 +106,7 @@ namespace Hl7.Cql.Compiler
             if (e.precision != null)
                 precision = TranslateExpression(e.precision!);
             else precision = Expression.Constant(null, typeof(int?));
-            var call = _operatorBinding.Bind(CqlOperator.Round, ExpressionBuilder.ContextParameter, operand, precision);
+            var call = _operatorBinding.Bind(CqlOperator.Round, LibraryDefinitionsBuilder.ContextParameter, operand, precision);
             return call;
         }
 

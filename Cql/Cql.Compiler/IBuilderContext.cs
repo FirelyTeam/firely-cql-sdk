@@ -1,7 +1,7 @@
 ﻿namespace Hl7.Cql.Compiler;
 
-internal interface IContextualExpressionBuilder
+internal interface IBuilderNode
 {
-    IContextualExpressionBuilder? OuterContext { get; }
-    BuilderContextInfo ContextInfo { get; }
+    IBuilderNode? OuterBuilder { get; }
+    BuilderDebuggerInfo BuilderDebuggerInfo { get; }
 }

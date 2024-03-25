@@ -11,7 +11,7 @@ using System;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// Describes settings to control the behavior of <see cref="ExpressionBuilder"/>
+    /// Describes settings to control the behavior of <see cref="LibraryDefinitionsBuilder"/>
     /// </summary>
     internal class ExpressionBuilderSettings
     {
@@ -46,8 +46,8 @@ namespace Hl7.Cql.Compiler
 
         /// <summary>
         /// When <see langword="true"/>, functions declared external will throw <see cref="NotImplementedException"/> at runtime
-        /// if they are not found in <see cref="ContextualExpressionBuilder._customImplementations"/>.  When <see langword="false"/>, an
-        /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in <see cref="ContextualExpressionBuilder._customImplementations"/>.
+        /// if they are not found in <see cref="ExpressionBuilder._customImplementations"/>.  When <see langword="false"/>, an
+        /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in <see cref="ExpressionBuilder._customImplementations"/>.
         /// The default value is <see langword="true"/>.
         /// </summary>
         public bool AllowUnresolvedExternals { get; set; } = true;

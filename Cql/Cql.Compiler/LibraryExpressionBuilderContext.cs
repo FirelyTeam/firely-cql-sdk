@@ -13,37 +13,44 @@ namespace Hl7.Cql.Compiler;
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class ContextualLibraryExpressionBuilder : IContextualExpressionBuilder
+internal partial class LibraryExpressionBuilder : IBuilderNode
 {
-    private readonly ILogger<ContextualLibraryExpressionBuilder> _logger;
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
-    private ContextualLibrarySetExpressionBuilder? LibrarySetContext { get; }
+    private LibrarySetExpressionBuilder? LibrarySetContext { get; }
 
-    public ContextualLibraryExpressionBuilder(
+    public LibraryExpressionBuilder(
         Library library,
         ExpressionBuilderSettings expressionBuilderSettings,
         OperatorBinding operatorBinding,
         DefinitionDictionary<LambdaExpression> definitions, 
         TypeManager typeManager,
         ILoggerFactory loggerFactory,
-        ContextualLibrarySetExpressionBuilder? libsCtx = null)
+        LibrarySetExpressionBuilder? libsCtx = null)
     {
-
+        // External Services
         _expressionBuilderSettings = expressionBuilderSettings;
         _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
-        Definitions = definitions;
         _typeManager = typeManager;
         _loggerFactory = loggerFactory;
-        _logger = loggerFactory.CreateLogger<ContextualLibraryExpressionBuilder>();
+        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
+
+        // External State
+        Definitions = definitions;
         Library = library;
         LibrarySetContext = libsCtx;
+
+        // Internal State
         _libraryNameAndVersionByAlias = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
         _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
+
+
+        // Building up _codeSystemIdsByCodeSystemRefs
         BuildUrlByCodeSystemRef();
     }
 
@@ -53,9 +60,9 @@ internal partial class ContextualLibraryExpressionBuilder : IContextualExpressio
 
     public bool AllowUnresolvedExternals => _expressionBuilderSettings.AllowUnresolvedExternals;
 
-    public ContextualExpressionBuilder CreateContextualExpressionBuilder(
+    public ExpressionBuilder CreateContextualExpressionBuilder(
         Element element) =>
-        new(_loggerFactory.CreateLogger<ContextualExpressionBuilder>(), _operatorBinding, _typeManager, _expressionBuilderSettings, this, element);
+        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _expressionBuilderSettings, this, element);
 
     #region Definitions
 
@@ -155,9 +162,9 @@ internal partial class ContextualLibraryExpressionBuilder : IContextualExpressio
 
     #endregion
 
-    IContextualExpressionBuilder? IContextualExpressionBuilder.OuterContext => LibrarySetContext;
+    IBuilderNode? IBuilderNode.OuterBuilder => LibrarySetContext;
 
-    BuilderContextInfo IContextualExpressionBuilder.ContextInfo => BuilderContextInfo.FromElement(Library);
+    BuilderDebuggerInfo IBuilderNode.BuilderDebuggerInfo => BuilderDebuggerInfo.FromElement(Library);
 
 
     private readonly record struct LibraryNameAndName(string? LibraryName, string Name);

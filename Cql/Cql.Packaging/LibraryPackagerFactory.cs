@@ -43,7 +43,7 @@ internal class LibraryPackagerFactory : ExpressionBuilderFactory
                 : null);
         _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
         _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor));
-        _resourcePackager = Deferred(() => new ResourcePackager(FhirTypeResolver, AssemblyCompiler, ExpressionBuilder, FhirResourcePostProcessor));
+        _resourcePackager = Deferred(() => new ResourcePackager(FhirTypeResolver, AssemblyCompiler, LibraryDefinitionsBuilder, FhirResourcePostProcessor));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
