@@ -171,9 +171,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitLongNumberLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.LongNumberLiteralContext context)
         {
-            if (!bool.TryParse(Configuration[nameof(CqlToElmOptions.ValidateLiterals)] ?? bool.FalseString, out var validateLiterals))
-                validateLiterals = true;
-
             var valueText = context.GetText()[..^1];
 
             Literal literal;
@@ -184,7 +181,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 literal = ElmFactory.Literal(valueText)
                     .WithResultType(SystemTypes.LongType);
                 literal.valueType = SystemTypes.LongType.name;
-                if (validateLiterals)
+                if (Options.ValidateLiterals ?? true)
                     literal.AddError($"Unparseable long literal {valueText}.", ErrorType.syntax);
             }
             return literal
@@ -211,8 +208,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 value = value,
             };
 
-            var validateLiterals = Option(o => o.ValidateLiterals);
-
             NamedTypeSpecifier? typeSpecifier = null;
 
             if (DecimalExpression.IsMatch(value))
@@ -222,7 +217,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     abs = abs[1..];
                 var parts = abs.Split('.');
 
-                if (validateLiterals)
+                if (Options.ValidateLiterals ?? true)
                 {
                     if (parts.Sum(p => p.Length) > 28)
                     {
@@ -237,12 +232,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else if (int.TryParse(value, out var i))
                 typeSpecifier = SystemTypes.IntegerType;
-            else if (long.TryParse(value, out var l) && !Option(o => o.LongsRequireSuffix))
+            else if (long.TryParse(value, out var l) && !(Options.LongsRequireSuffix ?? true))
             {
                 typeSpecifier = SystemTypes.LongType;
             }
-
-            else if (validateLiterals)
+            else if (Options.ValidateLiterals ?? true)
                 return literal.AddError($"Unparseable numeric literal '{value}'.", ErrorType.syntax);
             else
             {

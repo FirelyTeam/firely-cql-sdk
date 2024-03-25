@@ -155,7 +155,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
             var @operator = context.GetChild(1).GetText();
-            var typeSpec = TypeSpecifierVisitor.Visit(context.typeSpecifier());
+            var typeSpecifier = TypeSpecifierVisitor.Visit(context.typeSpecifier());
 
             Expression expression;
             // the is operator is performend at runtime.  It is possible through static type analysis to
@@ -165,8 +165,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 expression = new Is
                 {
                     operand = operand,
-                    isTypeSpecifier = typeSpec,
-                    isType = typeSpec is NamedTypeSpecifier nts ? typeSpec.resultTypeName : null
+                    isTypeSpecifier = typeSpecifier,
+                    isType = typeSpecifier is NamedTypeSpecifier nts ? typeSpecifier.resultTypeName : null
                 }.WithResultType(SystemTypes.BooleanType);                
             }
             else if (@operator == "as")
@@ -175,13 +175,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 expression = new As
                 {
                     operand = operand,
-                    asTypeSpecifier = typeSpec,
-                    asType = typeSpec is NamedTypeSpecifier nts ? typeSpec.resultTypeName : null
-                }.WithResultType(typeSpec);                
-                var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpec);
-                if (cost > CoercionCost.Cast)
+                    asTypeSpecifier = typeSpecifier,
+                    asType = typeSpecifier is NamedTypeSpecifier nts ? typeSpecifier.resultTypeName : null
+                }.WithResultType(typeSpecifier);
+                if (!CoercionProvider.CanBeExplicitlyCast(operand.resultTypeSpecifier, typeSpecifier))
                     expression
-                        .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpec}'.");
+                        .AddError(Messaging.TypeCannotBeCast(operand.resultTypeSpecifier, typeSpecifier));
             }
             else throw new InvalidOperationException($"Unexpected term {@operator}.  Expected 'is' or 'as'.");
 
@@ -206,7 +205,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpecifier);
             if (cost > CoercionCost.Cast)
                 expression
-                    .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpecifier}'.");
+                    .AddError(Messaging.TypeCannotBeCast(operand.resultTypeSpecifier, typeSpecifier));
             return expression
                 .WithId()
                 .WithLocator(context.Locator());

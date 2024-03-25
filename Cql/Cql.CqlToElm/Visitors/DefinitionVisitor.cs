@@ -183,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var result = CoercionProvider.Coerce(defaultExpr, type);
 
-                if (result.Error is null)
+                if (result.Success)
                     return result.Result;
                 else
                     return defaultExpr.AddError($"Expected an expression of type '{type}', but found an expression of type '{defaultExpr.resultTypeSpecifier}'.");

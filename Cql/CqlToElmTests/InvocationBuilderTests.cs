@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,11 +42,11 @@ namespace Hl7.Cql.CqlToElm.Test
         private static Interval Interval(Expression low, Expression high) => new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
         private static readonly Null Null = new Null().WithResultType(SystemTypes.AnyType);
 
-
+        private static readonly ParameterTypeSpecifier T = new ParameterTypeSpecifier { parameterName = "T" };
         private static void AssertCompatible(FunctionDef function, Expression[] arguments, CoercionCost mostExpensive, int? totalCost = null)
         {
             var result = InvocationBuilder.MatchSignature(function, arguments);
-            Assert.IsTrue(result.Compatible);
+            result.Compatible.Should().BeTrue();
             Assert.AreEqual(mostExpensive, result.MostExpensive);
             if (totalCost != null)
                 Assert.AreEqual(totalCost.Value, result.TotalCost);
@@ -64,7 +65,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var arguments = new[] { Boolean() };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.And, arguments);
-            Assert.IsFalse(result.Compatible);
+            result.Compatible.Should().BeFalse();
             Assert.IsTrue(result.HasTooFewArguments);
         }
 
@@ -73,7 +74,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var arguments = new[] { Boolean(), Boolean(), Boolean() };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.And, arguments);
-            Assert.IsFalse(result.Compatible);
+            result.Compatible.Should().BeFalse();
             Assert.IsTrue(result.HasTooManyArguments);
         }
 
@@ -100,12 +101,12 @@ namespace Hl7.Cql.CqlToElm.Test
 
             arguments = Array.Empty<Expression>();
             result = InvocationBuilder.MatchSignature(SystemLibrary.Date, arguments);
-            Assert.IsFalse(result.Compatible);
+            result.Compatible.Should().BeFalse();
             Assert.IsTrue(result.HasTooFewArguments);
 
             arguments = new[] { Integer(2023), Integer(2), Integer(14), Integer(10) };
             result = InvocationBuilder.MatchSignature(SystemLibrary.Date, arguments);
-            Assert.IsFalse(result.Compatible);
+            result.Compatible.Should().BeFalse();
             Assert.IsTrue(result.HasTooManyArguments);
         }
         
@@ -115,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var T = Generic();
             var function = new SystemFunction<Abs>(new[] { T }, T);
             var arguments = new[] { Integer(1) };
-            var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            var inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
@@ -123,7 +124,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
             arguments = new[] { Decimal(1) };
-            inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.DecimalType, inference[T.parameterName]);
@@ -136,7 +137,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var T = Generic();
             var function = new SystemFunction<Expression>(new[] { T.ToListType() }, T);
             var arguments = new[] { List(Integer(1)) };
-            var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            var inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
@@ -151,7 +152,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var T = Generic();
             var function = new SystemFunction<Expression>(new[] { T.ToIntervalType() }, T);
             var arguments = new[] { Interval(Integer(1), Integer(10)) };
-            var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            var inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
@@ -164,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var T = Generic();
             var function = new SystemFunction<Expression>(new[] { T.ToListType().ToListType() }, T);
             var arguments = new[] { List(List(Integer(1))) };
-            var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            var inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
@@ -177,7 +178,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var T = Generic();
             var function = new SystemFunction<Expression>(new TypeSpecifier[] { T.ToListType(), SystemTypes.AnyType }, SystemTypes.BooleanType);
             var arguments = new[] { List(Null), List(Null) };
-            var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            var inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
@@ -191,7 +192,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var T = Generic();
             var function = new SystemFunction<Expression>(new TypeSpecifier[] { T.ToListType(), T }, SystemTypes.BooleanType);
             var arguments = new Expression[] { List(Null), List(Null) };
-            var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            var inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
@@ -204,7 +205,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // Because in both cases T is inferred to be Any, in the two list case, this results in a List Demotion to T.
             // In the second case, no list demotion is necessary and Any exactly matches Any.
             arguments = new Expression[] { List(Null), Null };
-            inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
+            inference = InvocationBuilder.InferGenericArgument(arguments[0].resultTypeSpecifier, function.operand[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
@@ -219,7 +220,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var arguments = new Expression[] { Quantity(), DateTime() };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.Add, arguments);
-            Assert.IsFalse(result.Compatible);
+            result.Compatible.Should().BeFalse();
         }
 
         [TestMethod]
@@ -228,8 +229,9 @@ namespace Hl7.Cql.CqlToElm.Test
             //define"Includes Null Left Input": null includes {2}
 
             var arguments = new Expression[] { Null, List(Integer(2)) };
-            var result = InvocationBuilder.MatchSignature(SystemLibrary.Includes, arguments);
-            Assert.IsTrue(result.Compatible);
+            var function = new SystemFunction<Expression>(new TypeSpecifier[] { T.ToListType(), T.ToListType() }, SystemTypes.BooleanType, "f");
+            var result = InvocationBuilder.MatchSignature(function, arguments);
+            result.Compatible.Should().BeTrue();
         }
 
         [TestMethod]
@@ -238,7 +240,7 @@ namespace Hl7.Cql.CqlToElm.Test
             //define "TestMessageTrace Input": Message({ 3,4,5},true,'300','Trace','This is a trace')
             var arguments = new Expression[] { List(Integer(3)), Boolean(true), String("300"), String("Trace"), String("This is a trace") };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.Message, arguments);
-            Assert.IsTrue(result.Compatible);
+            result.Compatible.Should().BeTrue();
         }
 
         [TestMethod]
@@ -247,7 +249,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var function = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.AnyType }, SystemTypes.AnyType, "f");
             var arguments = new Expression[] { List(Integer(1)) };
             var result = InvocationBuilder.MatchSignature(function, arguments);
-            Assert.IsTrue(result.Compatible);
+            result.Compatible.Should().BeTrue();
         }
 
         [TestMethod]
@@ -255,7 +257,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var arguments = new Expression[] { Interval(Integer(1), Integer(2)), Interval(Null, Null) };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.Equal, arguments);
-            Assert.IsTrue(result.Compatible);
+            result.Compatible.Should().BeTrue();
         }
 
         [TestMethod]
@@ -278,7 +280,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new Expression[] { @as };
             var function = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.DecimalType }, SystemTypes.AnyType, "f");
             var result = InvocationBuilder.MatchSignature(function, arguments);
-            Assert.IsTrue(result.Compatible);
+            result.Compatible.Should().BeTrue();
             Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.MostExpensive);
         }
 
@@ -287,26 +289,34 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var arguments = new Expression[] { Integer(), Interval(Null, Null) };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.In, arguments);
-            Assert.IsTrue(result.Compatible);
+            result.Compatible.Should().BeTrue();
             Assert.AreEqual(CoercionCost.Cast, result.MostExpensive);
         }
         [TestMethod]
-        public void NullContainsIntegerAmibugious()
+        public void MatchNullContainsIntegerAmibugious()
         {
             // null contains 5
             var arguments = new Expression[] { Null, Integer(5) };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.Contains, arguments);
-            Assert.IsFalse(result.Compatible);
-            Assert.IsTrue(result.IsAmbiguous);
+            result.Compatible.Should().BeFalse();
+            result.IsAmbiguous.Should().BeTrue();
         }
 
         [TestMethod]
-        public void EqualsListIntervals()
+        public void MatchEqualsListIntervals()
         {
             var list = List(Interval(Integer(1), Integer(2)));
             var arguments = new Expression[] { list, list };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.Equal, arguments);
-            Assert.IsTrue(result.Compatible);
+            result.Compatible.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void MatchPointFromNull()
+        {
+            var arguments = new Expression[] { Interval(Null, Null) };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.PointFrom, arguments);
+            result.Compatible.Should().BeTrue();
         }
 
     }

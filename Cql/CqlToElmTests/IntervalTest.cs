@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[{},{}]
-            ", "Intervals can only be constructed for orderable types*");
+            ", "Could not resolve call to operator Interval*");
         }
 
         [TestMethod]
