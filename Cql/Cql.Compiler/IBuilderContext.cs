@@ -3,5 +3,5 @@
 internal interface IBuilderNode
 {
     IBuilderNode? OuterBuilder { get; }
-    BuilderDebuggerInfo BuilderDebuggerInfo { get; }
+    BuilderDebuggerInfo? BuilderDebuggerInfo { get; }
 }

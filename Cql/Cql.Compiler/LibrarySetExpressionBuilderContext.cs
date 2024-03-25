@@ -41,7 +41,7 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
 
     IBuilderNode? IBuilderNode.OuterBuilder => null;
 
-    BuilderDebuggerInfo IBuilderNode.BuilderDebuggerInfo => _debuggerInfo;
+    BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo => _debuggerInfo;
 
     public LibrarySet LibrarySet => _librarySet;
 

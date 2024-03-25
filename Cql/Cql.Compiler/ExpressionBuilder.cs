@@ -35,527 +35,528 @@ namespace Hl7.Cql.Compiler
 
         internal Expression TranslateExpression(Element op)
         {
-            ExpressionBuilder ctx = Push(op);
+            using var _ = PushElement(op);
+
             Expression? expression;
             switch (op)
             {
                 case Abs abs:
-                    expression = ctx.Abs(abs);
+                    expression = Abs(abs);
                     break;
                 case Add add:
-                    expression = ctx.Add(add);
+                    expression = Add(add);
                     break;
                 case After after:
-                    expression = ctx.After(after);
+                    expression = After(after);
                     break;
                 case AliasRef ar:
-                    expression = ctx.AliasRef(ar);
+                    expression = AliasRef(ar);
                     break;
                 case AllTrue alt:
-                    expression = ctx.AllTrue(alt);
+                    expression = AllTrue(alt);
                     break;
                 case And and:
-                    expression = ctx.And(and);
+                    expression = And(and);
                     break;
                 case As @as:
-                    expression = ctx.As(@as);
+                    expression = As(@as);
                     break;
                 case AnyTrue ate:
-                    expression = ctx.AnyTrue(ate);
+                    expression = AnyTrue(ate);
                     break;
                 case AnyInValueSet avs:
-                    expression = ctx.AnyInValueSet(avs);
+                    expression = AnyInValueSet(avs);
                     break;
                 case Avg avg:
-                    expression = ctx.Avg(avg);
+                    expression = Avg(avg);
                     break;
                 case Before before:
-                    expression = ctx.Before(before);
+                    expression = Before(before);
                     break;
                 case CalculateAgeAt caa:
-                    expression = ctx.CalculateAgeAt(caa);
+                    expression = CalculateAgeAt(caa);
                     break;
                 case CalculateAge ca:
-                    expression = ctx.CalculateAge(ca);
+                    expression = CalculateAge(ca);
                     break;
                 case Case ce:
-                    expression = ctx.Case(ce);
+                    expression = Case(ce);
                     break;
                 case Ceiling ceil:
-                    expression = ctx.Ceiling(ceil);
+                    expression = Ceiling(ceil);
                     break;
                 case Coalesce cle:
-                    expression = ctx.Coalesce(cle);
+                    expression = Coalesce(cle);
                     break;
                 case CodeRef cre:
-                    expression = ctx.CodeRef(cre);
+                    expression = CodeRef(cre);
                     break;
                 case CodeSystemRef csr:
-                    expression = ctx.CodeSystemRef(csr);
+                    expression = CodeSystemRef(csr);
                     break;
                 case Collapse col:
-                    expression = ctx.Collapse(col);
+                    expression = Collapse(col);
                     break;
                 case Combine com:
-                    expression = ctx.Combine(com);
+                    expression = Combine(com);
                     break;
                 case Concatenate cctn:
-                    expression = ctx.Concatenate(cctn);
+                    expression = Concatenate(cctn);
                     break;
                 case ConceptRef cr:
-                    expression = ctx.ConceptRef(cr);
+                    expression = ConceptRef(cr);
                     break;
                 case Contains ct:
-                    expression = ctx.Contains(ct);
+                    expression = Contains(ct);
                     break;
                 case ConvertQuantity cqe:
-                    expression = ctx.ConvertQuantity(cqe);
+                    expression = ConvertQuantity(cqe);
                     break;
                 case ConvertsToBoolean ce:
-                    expression = ctx.ConvertsToBoolean(ce);
+                    expression = ConvertsToBoolean(ce);
                     break;
                 case ConvertsToDate ce:
-                    expression = ctx.ConvertsToDate(ce);
+                    expression = ConvertsToDate(ce);
                     break;
                 case ConvertsToDateTime ce:
-                    expression = ctx.ConvertsToDateTime(ce);
+                    expression = ConvertsToDateTime(ce);
                     break;
                 case ConvertsToDecimal ce:
-                    expression = ctx.ConvertsToDecimal(ce);
+                    expression = ConvertsToDecimal(ce);
                     break;
                 case ConvertsToLong ce:
-                    expression = ctx.ConvertsToLong(ce);
+                    expression = ConvertsToLong(ce);
                     break;
                 case ConvertsToInteger ce:
-                    expression = ctx.ConvertsToInteger(ce);
+                    expression = ConvertsToInteger(ce);
                     break;
                 case ConvertsToQuantity ce:
-                    expression = ctx.ConvertsToQuantity(ce);
+                    expression = ConvertsToQuantity(ce);
                     break;
                 case ConvertsToString ce:
-                    expression = ctx.ConvertsToString(ce);
+                    expression = ConvertsToString(ce);
                     break;
                 case ConvertsToTime ce:
-                    expression = ctx.ConvertsToTime(ce);
+                    expression = ConvertsToTime(ce);
                     break;
                 case Count ce:
-                    expression = ctx.Count(ce);
+                    expression = Count(ce);
                     break;
                 case DateFrom dfe:
-                    expression = ctx.DateFrom(dfe);
+                    expression = DateFrom(dfe);
                     break;
                 case elm.DateTime dt:
-                    expression = ctx.DateTime(dt);
+                    expression = DateTime(dt);
                     break;
                 case Date d:
-                    expression = ctx.Date(d);
+                    expression = Date(d);
                     break;
                 case DateTimeComponentFrom dtcf:
-                    expression = ctx.DateTimeComponentFrom(dtcf);
+                    expression = DateTimeComponentFrom(dtcf);
                     break;
                 case Descendents desc:
-                    expression = ctx.Descendents(desc);
+                    expression = Descendents(desc);
                     break;
                 case DifferenceBetween dbe:
-                    expression = ctx.DifferenceBetween(dbe);
+                    expression = DifferenceBetween(dbe);
                     break;
                 case Distinct distinct:
-                    expression = ctx.Distinct(distinct);
+                    expression = Distinct(distinct);
                     break;
                 case Divide divide:
-                    expression = ctx.Divide(divide);
+                    expression = Divide(divide);
                     break;
                 case DurationBetween dbe:
-                    expression = ctx.DurationBetween(dbe);
+                    expression = DurationBetween(dbe);
                     break;
                 case End e:
-                    expression = ctx.End(e);
+                    expression = End(e);
                     break;
                 case Ends e:
-                    expression = ctx.Ends(e);
+                    expression = Ends(e);
                     break;
                 case EndsWith e:
-                    expression = ctx.EndsWith(e);
+                    expression = EndsWith(e);
                     break;
                 case Equal eq:
-                    expression = ctx.Equal(eq);
+                    expression = Equal(eq);
                     break;
                 case Equivalent eqv:
-                    expression = ctx.Equivalent(eqv);
+                    expression = Equivalent(eqv);
                     break;
                 case Except ex:
-                    expression = ctx.Except(ex);
+                    expression = Except(ex);
                     break;
                 case Exists ex:
-                    expression = ctx.Exists(ex);
+                    expression = Exists(ex);
                     break;
                 case Exp exe:
-                    expression = ctx.Exp(exe);
+                    expression = Exp(exe);
                     break;
                 case Expand expand:
-                    expression = ctx.Expand(expand);
+                    expression = Expand(expand);
                     break;
                 case ExpandValueSet evs:
-                    expression = ctx.ExpandValueSet(evs);
+                    expression = ExpandValueSet(evs);
                     break;
                 case FunctionRef fre:
-                    expression = ctx.FunctionRef(fre);
+                    expression = FunctionRef(fre);
                     break;
                 case ExpressionRef ere:
-                    expression = ctx.ExpressionRef(ere);
+                    expression = ExpressionRef(ere);
                     break;
                 case First first:
-                    expression = ctx.First(first);
+                    expression = First(first);
                     break;
                 case Flatten fl:
-                    expression = ctx.Flatten(fl);
+                    expression = Flatten(fl);
                     break;
                 case Floor floor:
-                    expression = ctx.Floor(floor);
+                    expression = Floor(floor);
                     break;
                 case GeometricMean gme:
-                    expression = ctx.GeometricMean(gme);
+                    expression = GeometricMean(gme);
                     break;
                 case Greater gtr:
-                    expression = ctx.Greater(gtr);
+                    expression = Greater(gtr);
                     break;
                 case GreaterOrEqual gtre:
-                    expression = ctx.GreaterOrEqual(gtre);
+                    expression = GreaterOrEqual(gtre);
                     break;
                 case HighBoundary hb:
-                    expression = ctx.HighBoundary(hb);
+                    expression = HighBoundary(hb);
                     break;
                 case IdentifierRef ire:
-                    expression = ctx.IdentifierRef(ire);
+                    expression = IdentifierRef(ire);
                     break;
                 case If @if:
-                    expression = ctx.If(@if);
+                    expression = If(@if);
                     break;
                 case Implies implies:
-                    expression = ctx.Implies(implies);
+                    expression = Implies(implies);
                     break;
                 case Includes inc:
-                    expression = ctx.Includes(inc);
+                    expression = Includes(inc);
                     break;
                 case IncludedIn ii:
-                    expression = ctx.IncludedIn(ii);
+                    expression = IncludedIn(ii);
                     break;
                 case Indexer idx:
-                    expression = ctx.Indexer(idx);
+                    expression = Indexer(idx);
                     break;
                 case IndexOf io:
-                    expression = ctx.IndexOf(io);
+                    expression = IndexOf(io);
                     break;
                 case Instance ine:
-                    expression = ctx.Instance(ine);
+                    expression = Instance(ine);
                     break;
                 case Intersect ise:
-                    expression = ctx.Intersect(ise);
+                    expression = Intersect(ise);
                     break;
                 case Interval ie:
-                    expression = ctx.IntervalExpression(ie);
+                    expression = IntervalExpression(ie);
                     break;
                 case InValueSet inv:
-                    expression = ctx.InValueSet(inv);
+                    expression = InValueSet(inv);
                     break;
                 case In @in:
-                    expression = ctx.In(@in);
+                    expression = In(@in);
                     break;
                 case Is @is:
-                    expression = ctx.Is(@is);
+                    expression = Is(@is);
                     break;
                 case IsFalse isn:
-                    expression = ctx.IsFalse(isn);
+                    expression = IsFalse(isn);
                     break;
                 case IsNull isn:
-                    expression = ctx.IsNull(isn);
+                    expression = IsNull(isn);
                     break;
                 case IsTrue isn:
-                    expression = ctx.IsTrue(isn);
+                    expression = IsTrue(isn);
                     break;
                 case Last last:
-                    expression = ctx.Last(last);
+                    expression = Last(last);
                     break;
                 case LastPositionOf lpo:
-                    expression = ctx.LastPositionOf(lpo);
+                    expression = LastPositionOf(lpo);
                     break;
                 case Length len:
-                    expression = ctx.Length(len);
+                    expression = Length(len);
                     break;
                 case Less less:
-                    expression = ctx.Less(less);
+                    expression = Less(less);
                     break;
                 case LessOrEqual lesse:
-                    expression = ctx.LessOrEqual(lesse);
+                    expression = LessOrEqual(lesse);
                     break;
                 case List list:
-                    expression = ctx.List(list);
+                    expression = List(list);
                     break;
                 case Literal lit:
-                    expression = ctx.Literal(lit);
+                    expression = Literal(lit);
                     break;
                 case Ln ln:
-                    expression = ctx.Ln(ln);
+                    expression = Ln(ln);
                     break;
                 case Log log:
-                    expression = ctx.Log(log);
+                    expression = Log(log);
                     break;
                 case LowBoundary lb:
-                    expression = ctx.LowBoundary(lb);
+                    expression = LowBoundary(lb);
                     break;
                 case Lower e:
-                    expression = ctx.Lower(e);
+                    expression = Lower(e);
                     break;
                 case Matches e:
-                    expression = ctx.Matches(e);
+                    expression = Matches(e);
                     break;
                 case Max max:
-                    expression = ctx.Max(max);
+                    expression = Max(max);
                     break;
                 case MaxValue max:
-                    expression = ctx.MaxValue(max);
+                    expression = MaxValue(max);
                     break;
                 case Median med:
-                    expression = ctx.Median(med);
+                    expression = Median(med);
                     break;
                 case Meets meets:
-                    expression = ctx.Meets(meets);
+                    expression = Meets(meets);
                     break;
                 case MeetsBefore meets:
-                    expression = ctx.MeetsBefore(meets);
+                    expression = MeetsBefore(meets);
                     break;
                 case MeetsAfter meets:
-                    expression = ctx.MeetsAfter(meets);
+                    expression = MeetsAfter(meets);
                     break;
                 case Message msg:
-                    expression = ctx.Message(msg);
+                    expression = Message(msg);
                     break;
                 case Min min:
-                    expression = ctx.Min(min);
+                    expression = Min(min);
                     break;
                 case MinValue min:
-                    expression = ctx.MinValue(min);
+                    expression = MinValue(min);
                     break;
                 case Mode mode:
-                    expression = ctx.Mode(mode);
+                    expression = Mode(mode);
                     break;
                 case Modulo mod:
-                    expression = ctx.Modulo(mod);
+                    expression = Modulo(mod);
                     break;
                 case Multiply mul:
-                    expression = ctx.Multiply(mul);
+                    expression = Multiply(mul);
                     break;
                 case Negate neg:
-                    expression = ctx.Negate(neg);
+                    expression = Negate(neg);
                     break;
                 case Not not:
-                    expression = ctx.Not(not);
+                    expression = Not(not);
                     break;
                 case NotEqual ne:
-                    expression = ctx.NotEqual(ne);
+                    expression = NotEqual(ne);
                     break;
                 case Now now:
-                    expression = ctx.Now(now);
+                    expression = Now(now);
                     break;
                 case Null @null:
-                    expression = ctx.Null(@null);
+                    expression = Null(@null);
                     break;
                 case OperandRef ore:
-                    expression = ctx.OperandRef(ore);
+                    expression = OperandRef(ore);
                     break;
                 case Or or:
-                    expression = ctx.Or(or);
+                    expression = Or(or);
                     break;
                 case Overlaps ole:
-                    expression = ctx.Overlaps(ole);
+                    expression = Overlaps(ole);
                     break;
                 case OverlapsAfter ola:
-                    expression = ctx.OverlapsAfter(ola);
+                    expression = OverlapsAfter(ola);
                     break;
                 case OverlapsBefore olb:
-                    expression = ctx.OverlapsBefore(olb);
+                    expression = OverlapsBefore(olb);
                     break;
                 case ParameterRef pre:
-                    expression = ctx.ParameterRef(pre);
+                    expression = ParameterRef(pre);
                     break;
                 case PointFrom pf:
-                    expression = ctx.PointFrom(pf);
+                    expression = PointFrom(pf);
                     break;
                 case PopulationStdDev pstd:
-                    expression = ctx.PopulationStdDev(pstd);
+                    expression = PopulationStdDev(pstd);
                     break;
                 case PopulationVariance pvar:
-                    expression = ctx.PopulationVariance(pvar);
+                    expression = PopulationVariance(pvar);
                     break;
                 case PositionOf po:
-                    expression = ctx.PositionOf(po);
+                    expression = PositionOf(po);
                     break;
                 case Power pow:
-                    expression = ctx.Power(pow);
+                    expression = Power(pow);
                     break;
                 case Precision pre:
-                    expression = ctx.Precision(pre);
+                    expression = Precision(pre);
                     break;
                 case Predecessor prd:
-                    expression = ctx.Predecessor(prd);
+                    expression = Predecessor(prd);
                     break;
                 case Product prod:
-                    expression = ctx.Product(prod);
+                    expression = Product(prod);
                     break;
                 case ProperContains pc:
-                    expression = ctx.ProperContains(pc);
+                    expression = ProperContains(pc);
                     break;
                 case ProperIn pi:
-                    expression = ctx.ProperIn(pi);
+                    expression = ProperIn(pi);
                     break;
                 case ProperIncludes pi:
-                    expression = ctx.ProperIncludes(pi);
+                    expression = ProperIncludes(pi);
                     break;
                 case ProperIncludedIn pie:
-                    expression = ctx.ProperIncludedIn(pie);
+                    expression = ProperIncludedIn(pie);
                     break;
                 case Property pe:
-                    expression = ctx.Property(pe);
+                    expression = Property(pe);
                     break;
                 case Quantity qua:
-                    expression = ctx.Quantity(qua);
+                    expression = Quantity(qua);
                     break;
                 case Query qe:
-                    expression = ctx.Query(qe);
+                    expression = Query(qe);
                     break;
                 case QueryLetRef qlre:
-                    expression = ctx.QueryLetRef(qlre);
+                    expression = QueryLetRef(qlre);
                     break;
                 case Ratio re:
-                    expression = ctx.Ratio(re);
+                    expression = Ratio(re);
                     break;
                 case ReplaceMatches e:
-                    expression = ctx.ReplaceMatches(e);
+                    expression = ReplaceMatches(e);
                     break;
                 case Retrieve re:
-                    expression = ctx.Retrieve(re);
+                    expression = Retrieve(re);
                     break;
                 case Round rnd:
-                    expression = ctx.Round(rnd);
+                    expression = Round(rnd);
                     break;
                 case SameAs sa:
-                    expression = ctx.SameAs(sa);
+                    expression = SameAs(sa);
                     break;
                 case SameOrAfter soa:
-                    expression = ctx.SameOrAfter(soa);
+                    expression = SameOrAfter(soa);
                     break;
                 case SameOrBefore sob:
-                    expression = ctx.SameOrBefore(sob);
+                    expression = SameOrBefore(sob);
                     break;
                 case SingletonFrom sf:
-                    expression = ctx.SingletonFrom(sf);
+                    expression = SingletonFrom(sf);
                     break;
                 case Slice slice:
-                    expression = ctx.Slice(slice);
+                    expression = Slice(slice);
                     break;
                 case Split split:
-                    expression = ctx.Split(split);
+                    expression = Split(split);
                     break;
                 case Substring e:
-                    expression = ctx.Substring(e);
+                    expression = Substring(e);
                     break;
                 case Subtract sub:
-                    expression = ctx.Subtract(sub);
+                    expression = Subtract(sub);
                     break;
                 case Successor suc:
-                    expression = ctx.Successor(suc);
+                    expression = Successor(suc);
                     break;
                 case Sum sum:
-                    expression = ctx.Sum(sum);
+                    expression = Sum(sum);
                     break;
                 case Starts starts:
-                    expression = ctx.Starts(starts);
+                    expression = Starts(starts);
                     break;
                 case Start start:
-                    expression = ctx.Start(start);
+                    expression = Start(start);
                     break;
                 case StartsWith e:
-                    expression = ctx.StartsWith(e);
+                    expression = StartsWith(e);
                     break;
                 case StdDev stddev:
-                    expression = ctx.StdDev(stddev);
+                    expression = StdDev(stddev);
                     break;
                 case Time time:
-                    expression = ctx.Time(time);
+                    expression = Time(time);
                     break;
                 case TimeOfDay tod:
-                    expression = ctx.TimeOfDay(tod);
+                    expression = TimeOfDay(tod);
                     break;
                 case TimezoneOffsetFrom tofe:
-                    expression = ctx.TimezoneOffsetFrom(tofe);
+                    expression = TimezoneOffsetFrom(tofe);
                     break;
                 case ToBoolean e:
-                    expression = ctx.ToBoolean(e);
+                    expression = ToBoolean(e);
                     break;
                 case ToConcept tc:
-                    expression = ctx.ToConcept(tc);
+                    expression = ToConcept(tc);
                     break;
                 case ToDateTime tdte:
-                    expression = ctx.ToDateTime(tdte);
+                    expression = ToDateTime(tdte);
                     break;
                 case ToDate tde:
-                    expression = ctx.ToDate(tde);
+                    expression = ToDate(tde);
                     break;
                 case Today today:
-                    expression = ctx.Today(today);
+                    expression = Today(today);
                     break;
                 case ToDecimal tde:
-                    expression = ctx.ToDecimal(tde);
+                    expression = ToDecimal(tde);
                     break;
                 case ToInteger tde:
-                    expression = ctx.ToInteger(tde);
+                    expression = ToInteger(tde);
                     break;
                 case ToList tle:
-                    expression = ctx.ToList(tle);
+                    expression = ToList(tle);
                     break;
                 case ToLong toLong:
-                    expression = ctx.ToLong(toLong);
+                    expression = ToLong(toLong);
                     break;
                 case ToQuantity tq:
-                    expression = ctx.ToQuantity(tq);
+                    expression = ToQuantity(tq);
                     break;
                 case ToString e:
-                    expression = ctx.ToString(e);
+                    expression = ToString(e);
                     break;
                 case ToTime e:
-                    expression = ctx.ToTime(e);
+                    expression = ToTime(e);
                     break;
                 case Truncate trunc:
-                    expression = ctx.Truncate(trunc);
+                    expression = Truncate(trunc);
                     break;
                 case TruncatedDivide div:
-                    expression = ctx.TruncatedDivide(div);
+                    expression = TruncatedDivide(div);
                     break;
                 case elm.Tuple tu:
-                    expression = ctx.Tuple(tu);
+                    expression = Tuple(tu);
                     break;
                 case Union ue:
-                    expression = ctx.Union(ue);
+                    expression = Union(ue);
                     break;
                 case ValueSetRef vsre:
-                    expression = ctx.ValueSetRef(vsre);
+                    expression = ValueSetRef(vsre);
                     break;
                 case Variance variance:
-                    expression = ctx.Variance(variance);
+                    expression = Variance(variance);
                     break;
                 case Upper e:
-                    expression = ctx.Upper(e);
+                    expression = Upper(e);
                     break;
                 case Width width:
-                    expression = ctx.Width(width);
+                    expression = Width(width);
                     break;
                 case Xor xor:
-                    expression = ctx.Xor(xor);
+                    expression = Xor(xor);
                     break;
-                default: throw ctx.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.");
+                default: throw this.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.");
             }
 
-            expression = ctx.Mutate(op, expression);
+            expression = Mutate(op, expression);
             return expression!;
         }
 
@@ -632,7 +633,7 @@ namespace Hl7.Cql.Compiler
                 path = ire.name,
                 scope = _impliedAlias!,
             };
-            var prop = Push(pe).Property(pe);
+            var prop = Property(pe);
             return prop;
         }
 
@@ -1236,6 +1237,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Property(Property op)
         {
+            using var _ = PushElement(op);
+
             if (string.IsNullOrWhiteSpace(op.path))
                 throw this.NewExpressionBuildingException("path cannot be null or empty");
             //var path = ExpressionBuilderContext.NormalizeIdentifier(op.path);
@@ -1546,7 +1549,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ExpressionRef(ExpressionRef expressionRef)
         {
-            ExpressionBuilder ctx = this;
+            IDisposable pop = null!;
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
             {
@@ -1558,19 +1561,21 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var def = ctx.LibraryContext.Library.statements?.SingleOrDefault(d => d.name == expressionRef.name);
+                var def = LibraryContext.Library.statements?.SingleOrDefault(d => d.name == expressionRef.name);
                 if (def != null)
                 {
-                    ctx = ctx.Push(def);
+                    pop = PushElement(def);
                     expressionType = TypeFor(def);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }
 
-            if (expressionType == null)
-                throw ctx.NewExpressionBuildingException($"Unable to determine type for {expressionRef.localId}");
+            using var _2 = pop;
 
-            var invoke = ctx.InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType);
+            if (expressionType == null)
+                throw this.NewExpressionBuildingException($"Unable to determine type for {expressionRef.localId}");
+
+            var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType);
             return invoke;
         }
 

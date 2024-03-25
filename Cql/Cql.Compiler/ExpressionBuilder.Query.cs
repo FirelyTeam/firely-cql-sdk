@@ -68,7 +68,7 @@ internal partial class ExpressionBuilder
         {
             foreach (var relationship in query.relationship)
             {
-                ctx = ctx.Push(relationship);
+                using var _ = ctx.PushElement(relationship);
 
                 var selectManyLambda = ctx.WithToSelectManyBody(rootScopeParameter, relationship);
 
@@ -84,8 +84,6 @@ internal partial class ExpressionBuilder
                 {
                     @return = selectManyCall;
                 }
-
-                ctx = ctx.Pop();
             }
         }
             
@@ -98,31 +96,27 @@ internal partial class ExpressionBuilder
 
         if (query.where != null)
         {
-            ctx = ctx.Push(query.where);
+            using var _ = ctx.PushElement(query.where);
             
             var whereBody = ctx.TranslateExpression(query.where);
             var whereLambda = Expression.Lambda(whereBody, rootScopeParameter);
             var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
             @return = callWhere;
-
-            ctx = ctx.Pop();
         }
 
         if (query.@return != null)
         {
-            ctx = ctx.Push(query.@return);
+            using var _ = ctx.PushElement(query.@return);
 
             var selectBody = ctx.TranslateExpression(query.@return.expression!);
             var selectLambda = Expression.Lambda(selectBody, rootScopeParameter);
             var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
             @return = callSelect;
-
-            ctx = ctx.Pop();
         }
 
         if (query.aggregate != null)
         {
-            ctx = ctx.Push(query.aggregate);
+            using var _ = ctx.PushElement(query.aggregate);
 
             var resultAlias = query.aggregate.identifier!;
             Type? resultType = null;
@@ -146,8 +140,6 @@ internal partial class ExpressionBuilder
             var lambda = Expression.Lambda(lambdaBody, resultParameter, rootScopeParameter);
             var aggregateCall = ctx._operatorBinding.Bind(CqlOperator.Aggregate, LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
             @return = aggregateCall;
-
-            ctx = ctx.Pop();
         }
 
 
@@ -156,11 +148,11 @@ internal partial class ExpressionBuilder
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByDirection))]
         if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)
         {
-            ctx = ctx.Push(query.sort);
+            using var _ = ctx.PushElement(query.sort);
 
             foreach (var by in query.sort.by)
             {
-                ctx = ctx.Push(by);
+                using var _2 = ctx.PushElement(by);
 
                 ListSortDirection order = by.direction.ListSortOrder();
                 if (by is ByExpression byExpression)
@@ -199,11 +191,7 @@ internal partial class ExpressionBuilder
                         @return, Expression.Constant(order, typeof(ListSortDirection)));
                     @return = sort;
                 }
-
-                ctx = ctx.Pop();
             }
-
-            ctx = ctx.Pop();
         }
 
         // Because we promoted the source to a list, we now have to demote the result again.

@@ -62,7 +62,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public ExpressionBuilder CreateExpressionBuilder(
         Element element) =>
-        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _libraryDefinitionBuilderSettings, this, element);
+        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _libraryDefinitionBuilderSettings, this);
 
     #region Definitions
 
@@ -164,7 +164,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     IBuilderNode? IBuilderNode.OuterBuilder => LibrarySetContext;
 
-    BuilderDebuggerInfo IBuilderNode.BuilderDebuggerInfo => BuilderDebuggerInfo.FromElement(Library);
+    BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo => BuilderDebuggerInfo.FromElement(Library);
 
 
     private readonly record struct LibraryNameAndName(string? LibraryName, string Name);

@@ -8,7 +8,7 @@ namespace Hl7.Cql.Compiler;
 internal static class IBuilderNodeExtensions
 {
 
-    public static IEnumerable<IBuilderNode> SelfAndAncestorBuilders(this IBuilderNode context)
+    public static IEnumerable<IBuilderNode?> SelfAndAncestorBuilders(this IBuilderNode context)
     {
         IBuilderNode? currentContext = context;
         while (currentContext != null)
@@ -26,13 +26,13 @@ internal static class IBuilderNodeExtensions
 
     public static string GetExpressionPath(this IBuilderNode builder) =>
         $"\r\n\tExpression Path:{string.Concat(
-            from context in builder.SelfAndAncestorBuilders().Reverse()
+            from context in builder.SelfAndAncestorBuilders().Reverse().OfType<IBuilderNode>()
             select $"\r\n\t* {context.BuilderDebuggerInfo}"
         )}";
 
     public static string GetDebuggerView(this IBuilderNode builder) =>
         $"{builder.GetType().Name}\r\n\tExpression Path:{string.Concat(
-            from context in builder.SelfAndAncestorBuilders().Reverse()
+            from context in builder.SelfAndAncestorBuilders().Reverse().OfType<IBuilderNode>()
             select $"\r\n\t* {context.BuilderDebuggerInfo}"
         )}";
 

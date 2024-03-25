@@ -164,20 +164,19 @@ namespace Hl7.Cql.Compiler
             Element element,
             bool throwIfNotFound = true)
         {
-            ExpressionBuilder ctx = this;
             if (element?.resultTypeSpecifier != null)
                 return TypeFor(element.resultTypeSpecifier);
 
             if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
                 return _typeManager.Resolver.ResolveType(element!.resultTypeName!.Name)
-                       ?? throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
+                       ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
 
             switch (element)
             {
                 case ExpressionRef expressionRef:
                     {
-                        var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
-                        if (!ctx.LibraryContext.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                        var libraryName = expressionRef.libraryName ?? LibraryContext.LibraryKey;
+                        if (!LibraryContext.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                             throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
                         var returnType = definition!.ReturnType;
@@ -187,7 +186,7 @@ namespace Hl7.Cql.Compiler
 
                 case ExpressionDef { expression: not null } def:
                     {
-                        ctx = ctx.Push(def.expression);
+                        using var _ = PushElement(def.expression);
                         var type = TypeFor(def.expression, throwIfNotFound: false);
                         if (type == null)
                         {
@@ -217,7 +216,7 @@ namespace Hl7.Cql.Compiler
                             sourceType = TypeFor(propertyExpression.source!);
                         else if (propertyExpression.scope != null)
                         {
-                            var scope = ctx.GetScope(propertyExpression.scope);
+                            var scope = GetScope(propertyExpression.scope);
                             sourceType = scope.Item1.Type;
                         }
                         if (sourceType != null)
@@ -233,20 +232,20 @@ namespace Hl7.Cql.Compiler
 
                 case AliasRef aliasRef when !string.IsNullOrWhiteSpace(aliasRef.name):
                     {
-                        var scope = ctx.GetScope(aliasRef.name);
+                        var scope = GetScope(aliasRef.name);
                         return scope.Item1.Type;
                     }
 
                 case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
                     {
-                        ctx.Operands.TryGetValue(operandRef.name, out var operand);
+                        Operands.TryGetValue(operandRef.name, out var operand);
                         if (operand != null)
                             return operand.Type;
                         break;
                     }
             }
             if (throwIfNotFound)
-                throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
+                throw this.NewExpressionBuildingException("Cannot resolve type for expression");
 
             return null;
         }

@@ -24,6 +24,8 @@ namespace Hl7.Cql.Compiler
         {
             if (@as.operand is elm.List list)
             {
+                using var _ = PushElement(list);
+
                 // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
                 if ((list.element?.Length ?? 0) == 0)
                 {
@@ -45,6 +47,8 @@ namespace Hl7.Cql.Compiler
             // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
             if (@as.asTypeSpecifier != null)
             {
+                using var _ = PushElement(@as.asTypeSpecifier);
+
                 if (@as.operand is elm.Null)
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);

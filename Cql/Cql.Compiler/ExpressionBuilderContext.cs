@@ -33,8 +33,7 @@ namespace Hl7.Cql.Compiler
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             LibraryDefinitionBuilderSettings settings,
-            LibraryExpressionBuilder libContext,
-            elm.Element element)
+            LibraryExpressionBuilder libContext)
         {
             // External Services
             _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
@@ -43,11 +42,9 @@ namespace Hl7.Cql.Compiler
 
             // External State
             _libraryDefinitionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
-            _element = element;
             LibraryContext = libContext;
 
             // Internal State
-            _outerContext = null;
             _impliedAlias = null;
             _operands = new Dictionary<string, ParameterExpression>();
             _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -59,8 +56,7 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilder(
             ExpressionBuilder source)
         {
-            _element = source._element;
-            _outerContext = source._outerContext;
+            _elementStack = new Stack<elm.Element>(_elementStack);
             _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
             _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
             _impliedAlias = source._impliedAlias;
@@ -76,16 +72,6 @@ namespace Hl7.Cql.Compiler
 
         private ExpressionBuilder(
             ExpressionBuilder outer,
-            Elm.Element element) : this(outer)
-        {
-            Debug.Assert(element != _element);
-            _outerContext = outer;
-            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, outer._operatorBinding);
-            _element = element;
-        }
-
-        private ExpressionBuilder(
-            ExpressionBuilder outer,
             string? impliedAlias,
             IDictionary<string, (Expression, elm.Element)> scopes) : this(outer)
         {
@@ -93,7 +79,7 @@ namespace Hl7.Cql.Compiler
             _impliedAlias = impliedAlias;
         }
 
-        internal LibraryExpressionBuilder LibraryContext { get; }
+        private LibraryExpressionBuilder LibraryContext { get; }
 
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
@@ -243,23 +229,6 @@ namespace Hl7.Cql.Compiler
             var subContext = WithScopes(aliasName, new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
             return subContext;
         }
-
-        /// <summary>
-        /// Clones this ExpressionBuilderContext
-        /// </summary>
-        internal ExpressionBuilder Push(
-            elm.Element element)
-        {
-            if (element == _element)
-            {
-                Debug.WriteLine($"Unnecessary call to {nameof(Push)}, since the current context already points to the element.");
-                return this;
-            }
-
-            return new ExpressionBuilder(this, element);
-        }
-
-        internal ExpressionBuilder Pop() => _outerContext ?? throw new InvalidOperationException("Cannot pop the root context.");
         
         public Expression? Mutate(elm.Element op, Expression? expression)
         {
