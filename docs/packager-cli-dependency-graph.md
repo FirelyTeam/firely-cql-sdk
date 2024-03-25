@@ -15,12 +15,14 @@ classDiagram
 
     namespace CSharpCode_Generate_And_Compile {
         class AssemblyCompiler {
+            Compile(librarySet : LibrarySet,definitions : DefinitionDictionary~LambdaExpression~? = null) IDictionary~string, AssemblyData~
         }
 
         class CSharpLibrarySetToStreamsWriter {
         }
 
         class CSharpCodeStreamPostProcessor {
+            ProcessStream(name : string, stream : Stream) void
         }
 
         class WriteToFileCSharpCodeStreamPostProcessor {
@@ -47,6 +49,7 @@ classDiagram
         }
 
         class LibraryDefinitionsBuilder {
+            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
 
         class OperatorBinding {
@@ -64,9 +67,11 @@ classDiagram
 
     namespace Fhir_Resource_Building {
         class ResourcePackager {
+            PackageResources(elmDirectory : DirectoryInfo, cqlDirectory : DirectoryInfo, resourceCanonicalRootUrl : string? = null) IReadOnlyCollection~Resource~
         }
 
         class FhirResourcePostProcessor {
+            ProcessResource(resource : Resource) void
         }
 
         class WriteToFileFhirResourcePostProcessor {
