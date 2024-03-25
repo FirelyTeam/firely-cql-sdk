@@ -35,4 +35,13 @@
 		</Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="CqlPackagingPipelineOptions.Binding.cs">
+	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlPackagingPipelineOptions.Validator.cs">
+	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

@@ -12,7 +12,7 @@ namespace Hl7.Cql.Packaging;
 /// The idea is not to inject this into service types, it's purpose is to
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
-internal class LibraryPackagerFactory : ExpressionBuilderFactory
+internal class ResourcePackagerFactory : ExpressionBuilderFactory
 {
     private readonly Lazy<CSharpLibrarySetToStreamsWriter> _cSharpSourceCodeWriter;
     private readonly Lazy<CSharpCodeStreamPostProcessor?> _cSharpCodeStreamPostProcessor;
@@ -21,7 +21,7 @@ internal class LibraryPackagerFactory : ExpressionBuilderFactory
     private readonly Lazy<ResourcePackager> _resourcePackager;
     private readonly Lazy<CqlTypeToFhirTypeMapper> _cqlTypeToFhirTypeMapper;
 
-    public LibraryPackagerFactory(
+    public ResourcePackagerFactory(
         ILoggerFactory loggerFactory, 
         int cacheSize = 0, 
         string? csharpOutDirectory = null,
@@ -43,7 +43,7 @@ internal class LibraryPackagerFactory : ExpressionBuilderFactory
                 : null);
         _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
         _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor));
-        _resourcePackager = Deferred(() => new ResourcePackager(FhirTypeResolver, AssemblyCompiler, LibraryDefinitionsBuilder, FhirResourcePostProcessor));
+        _resourcePackager = Deferred(() => new ResourcePackager(FhirTypeResolver, FhirResourcePostProcessor));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);

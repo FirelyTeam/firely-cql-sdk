@@ -24,15 +24,15 @@ internal static class DependencyInjection
 
     private static void TryAddPackagerOptions(IServiceCollection services, IConfiguration config)
     {
-        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<PackagerOptions>)))
+        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
             return;
 
         services
-            .AddOptions<PackagerOptions>()
-            .Configure<IConfiguration>(PackagerOptions.BindConfig)
+            .AddOptions<CqlToResourcePackagingOptions>()
+            .Configure<IConfiguration>(CqlToResourcePackagingOptions.BindConfig)
             .ValidateOnStart();
 
-        services.AddSingleton<IValidateOptions<PackagerOptions>, PackagerOptions.Validator>();
+        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
     }
 
     public static void TryAddResourceWriters(this IServiceCollection services, IConfiguration config)
@@ -50,8 +50,8 @@ internal static class DependencyInjection
     /// </remarks>
     private static void TryAddConfiguredResourceWriters(IServiceCollection services, IConfiguration config)
     {
-        PackagerOptions packagerOptions = new();
-        PackagerOptions.BindConfig(packagerOptions, config);
+        CqlToResourcePackagingOptions options = new();
+        CqlToResourcePackagingOptions.BindConfig(options, config);
 
         FhirResourceWriterOptions fhirResourceWriterOptions = new();
         FhirResourceWriterOptions.BindConfig(fhirResourceWriterOptions, config);
@@ -97,6 +97,7 @@ internal static class DependencyInjection
     public static void TryAddBuilders(this IServiceCollection services)
     {
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
+        services.TryAddSingleton<CqlToResourcePackagingPipeline>();
         services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton<LibraryDefinitionsBuilder>();
     }
