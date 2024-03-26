@@ -1,6 +1,5 @@
 ﻿#pragma warning disable IDE1006 // Naming violation suppressed.
 #pragma warning disable RS0016 // Undocumented public api members.
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;

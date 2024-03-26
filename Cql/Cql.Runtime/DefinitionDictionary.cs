@@ -124,7 +124,7 @@ public class DefinitionDictionary<T> where T : class
     /// <param name="definition">The name of the definition.</param>
     /// <param name="expression">The <see langword="out"/> parameter containing the result.</param>
     /// <returns><see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definition"/> is present in this dictionary.</returns>
-    public bool TryGetValue(string? libraryName, string definition, out T? expression)
+    public bool TryGetValue(string? libraryName, string definition, [NotNullWhen(true)] out T? expression)
     {
         libraryName ??= string.Empty;
         if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
@@ -152,7 +152,7 @@ public class DefinitionDictionary<T> where T : class
     /// <param name="signature">The signature of the definition.</param>
     /// <param name="expression">The <see langword="out"/> parameter containing the result.</param>
     /// <returns><see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definition"/>, and <paramref name="signature"/> is present in this dictionary.</returns>
-    public bool TryGetValue(string? libraryName, string definition, Type[] signature, out T? expression)
+    public bool TryGetValue(string? libraryName, string definition, Type[] signature, [NotNullWhen(true)]out T? expression)
     {
         libraryName ??= string.Empty;
         if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))

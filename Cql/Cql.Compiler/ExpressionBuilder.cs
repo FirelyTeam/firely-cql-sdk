@@ -1140,11 +1140,10 @@ namespace Hl7.Cql.Compiler
             if (op.libraryName is { } libraryAlias)
             {
                 var libraryKey = LibraryContext.GetNameAndVersionFromAlias(libraryAlias);
+                if (!LibraryContext.LibraryDefinitions.TryGetValue(libraryKey, op.name, operandTypes.ToArray(), out var definition))
+                    throw this.NewExpressionBuildingException($"Cannot resolve a library definition for function {op.libraryName ?? ""}.{op.name}");
 
-                var libraryContextDefinition = 
-                    LibraryContext
-                    .LibraryDefinitions[libraryKey, op.name, operandTypes.ToArray()];
-                return libraryContextDefinition.ReturnType;
+                return definition.ReturnType;
             }
 
             // We failed....
