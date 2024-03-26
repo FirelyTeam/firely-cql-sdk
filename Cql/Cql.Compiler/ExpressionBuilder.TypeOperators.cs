@@ -24,22 +24,23 @@ namespace Hl7.Cql.Compiler
         {
             if (@as.operand is elm.List list)
             {
-                using var _ = PushElement(list);
-
-                // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
-                if ((list.element?.Length ?? 0) == 0)
+                using (PushElement(list))
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
-                    if (IsOrImplementsIEnumerableOfT(type))
+                    // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
+                    if ((list.element?.Length ?? 0) == 0)
                     {
-                        var listElementType = _typeManager.Resolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
-                        var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
-                        var elmAs = new ElmAsExpression(newArray, type);
-                        return elmAs;
-                    }
-                    else
-                    {
-                        throw this.NewExpressionBuildingException("Cannot use as operator on a list if the as type is not also a list type.");
+                        var type = TypeFor(@as.asTypeSpecifier!);
+                        if (IsOrImplementsIEnumerableOfT(type))
+                        {
+                            var listElementType = _typeManager.Resolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
+                            var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
+                            var elmAs = new ElmAsExpression(newArray, type);
+                            return elmAs;
+                        }
+                        else
+                        {
+                            throw this.NewExpressionBuildingException("Cannot use as operator on a list if the as type is not also a list type.");
+                        }
                     }
                 }
             }
@@ -47,19 +48,20 @@ namespace Hl7.Cql.Compiler
             // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
             if (@as.asTypeSpecifier != null)
             {
-                using var _ = PushElement(@as.asTypeSpecifier);
-
-                if (@as.operand is elm.Null)
+                using (PushElement(@as.asTypeSpecifier))
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
-                    var defaultExpression = Expression.Default(type);
-                    return new ElmAsExpression(defaultExpression, type);
-                }
-                else
-                {
-                    var type = TypeFor(@as.asTypeSpecifier!);
-                    var operand = TranslateExpression(@as.operand!);
-                    return new ElmAsExpression(operand, type);
+                    if (@as.operand is elm.Null)
+                    {
+                        var type = TypeFor(@as.asTypeSpecifier!);
+                        var defaultExpression = Expression.Default(type);
+                        return new ElmAsExpression(defaultExpression, type);
+                    }
+                    else
+                    {
+                        var type = TypeFor(@as.asTypeSpecifier!);
+                        var operand = TranslateExpression(@as.operand!);
+                        return new ElmAsExpression(operand, type);
+                    }
                 }
             }
             else

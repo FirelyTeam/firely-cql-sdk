@@ -35,529 +35,531 @@ namespace Hl7.Cql.Compiler
 
         internal Expression TranslateExpression(Element op)
         {
-            using var _ = PushElement(op);
-
-            Expression? expression;
-            switch (op)
+            using (PushElement(op))
             {
-                case Abs abs:
-                    expression = Abs(abs);
-                    break;
-                case Add add:
-                    expression = Add(add);
-                    break;
-                case After after:
-                    expression = After(after);
-                    break;
-                case AliasRef ar:
-                    expression = AliasRef(ar);
-                    break;
-                case AllTrue alt:
-                    expression = AllTrue(alt);
-                    break;
-                case And and:
-                    expression = And(and);
-                    break;
-                case As @as:
-                    expression = As(@as);
-                    break;
-                case AnyTrue ate:
-                    expression = AnyTrue(ate);
-                    break;
-                case AnyInValueSet avs:
-                    expression = AnyInValueSet(avs);
-                    break;
-                case Avg avg:
-                    expression = Avg(avg);
-                    break;
-                case Before before:
-                    expression = Before(before);
-                    break;
-                case CalculateAgeAt caa:
-                    expression = CalculateAgeAt(caa);
-                    break;
-                case CalculateAge ca:
-                    expression = CalculateAge(ca);
-                    break;
-                case Case ce:
-                    expression = Case(ce);
-                    break;
-                case Ceiling ceil:
-                    expression = Ceiling(ceil);
-                    break;
-                case Coalesce cle:
-                    expression = Coalesce(cle);
-                    break;
-                case CodeRef cre:
-                    expression = CodeRef(cre);
-                    break;
-                case CodeSystemRef csr:
-                    expression = CodeSystemRef(csr);
-                    break;
-                case Collapse col:
-                    expression = Collapse(col);
-                    break;
-                case Combine com:
-                    expression = Combine(com);
-                    break;
-                case Concatenate cctn:
-                    expression = Concatenate(cctn);
-                    break;
-                case ConceptRef cr:
-                    expression = ConceptRef(cr);
-                    break;
-                case Contains ct:
-                    expression = Contains(ct);
-                    break;
-                case ConvertQuantity cqe:
-                    expression = ConvertQuantity(cqe);
-                    break;
-                case ConvertsToBoolean ce:
-                    expression = ConvertsToBoolean(ce);
-                    break;
-                case ConvertsToDate ce:
-                    expression = ConvertsToDate(ce);
-                    break;
-                case ConvertsToDateTime ce:
-                    expression = ConvertsToDateTime(ce);
-                    break;
-                case ConvertsToDecimal ce:
-                    expression = ConvertsToDecimal(ce);
-                    break;
-                case ConvertsToLong ce:
-                    expression = ConvertsToLong(ce);
-                    break;
-                case ConvertsToInteger ce:
-                    expression = ConvertsToInteger(ce);
-                    break;
-                case ConvertsToQuantity ce:
-                    expression = ConvertsToQuantity(ce);
-                    break;
-                case ConvertsToString ce:
-                    expression = ConvertsToString(ce);
-                    break;
-                case ConvertsToTime ce:
-                    expression = ConvertsToTime(ce);
-                    break;
-                case Count ce:
-                    expression = Count(ce);
-                    break;
-                case DateFrom dfe:
-                    expression = DateFrom(dfe);
-                    break;
-                case elm.DateTime dt:
-                    expression = DateTime(dt);
-                    break;
-                case Date d:
-                    expression = Date(d);
-                    break;
-                case DateTimeComponentFrom dtcf:
-                    expression = DateTimeComponentFrom(dtcf);
-                    break;
-                case Descendents desc:
-                    expression = Descendents(desc);
-                    break;
-                case DifferenceBetween dbe:
-                    expression = DifferenceBetween(dbe);
-                    break;
-                case Distinct distinct:
-                    expression = Distinct(distinct);
-                    break;
-                case Divide divide:
-                    expression = Divide(divide);
-                    break;
-                case DurationBetween dbe:
-                    expression = DurationBetween(dbe);
-                    break;
-                case End e:
-                    expression = End(e);
-                    break;
-                case Ends e:
-                    expression = Ends(e);
-                    break;
-                case EndsWith e:
-                    expression = EndsWith(e);
-                    break;
-                case Equal eq:
-                    expression = Equal(eq);
-                    break;
-                case Equivalent eqv:
-                    expression = Equivalent(eqv);
-                    break;
-                case Except ex:
-                    expression = Except(ex);
-                    break;
-                case Exists ex:
-                    expression = Exists(ex);
-                    break;
-                case Exp exe:
-                    expression = Exp(exe);
-                    break;
-                case Expand expand:
-                    expression = Expand(expand);
-                    break;
-                case ExpandValueSet evs:
-                    expression = ExpandValueSet(evs);
-                    break;
-                case FunctionRef fre:
-                    expression = FunctionRef(fre);
-                    break;
-                case ExpressionRef ere:
-                    expression = ExpressionRef(ere);
-                    break;
-                case First first:
-                    expression = First(first);
-                    break;
-                case Flatten fl:
-                    expression = Flatten(fl);
-                    break;
-                case Floor floor:
-                    expression = Floor(floor);
-                    break;
-                case GeometricMean gme:
-                    expression = GeometricMean(gme);
-                    break;
-                case Greater gtr:
-                    expression = Greater(gtr);
-                    break;
-                case GreaterOrEqual gtre:
-                    expression = GreaterOrEqual(gtre);
-                    break;
-                case HighBoundary hb:
-                    expression = HighBoundary(hb);
-                    break;
-                case IdentifierRef ire:
-                    expression = IdentifierRef(ire);
-                    break;
-                case If @if:
-                    expression = If(@if);
-                    break;
-                case Implies implies:
-                    expression = Implies(implies);
-                    break;
-                case Includes inc:
-                    expression = Includes(inc);
-                    break;
-                case IncludedIn ii:
-                    expression = IncludedIn(ii);
-                    break;
-                case Indexer idx:
-                    expression = Indexer(idx);
-                    break;
-                case IndexOf io:
-                    expression = IndexOf(io);
-                    break;
-                case Instance ine:
-                    expression = Instance(ine);
-                    break;
-                case Intersect ise:
-                    expression = Intersect(ise);
-                    break;
-                case Interval ie:
-                    expression = IntervalExpression(ie);
-                    break;
-                case InValueSet inv:
-                    expression = InValueSet(inv);
-                    break;
-                case In @in:
-                    expression = In(@in);
-                    break;
-                case Is @is:
-                    expression = Is(@is);
-                    break;
-                case IsFalse isn:
-                    expression = IsFalse(isn);
-                    break;
-                case IsNull isn:
-                    expression = IsNull(isn);
-                    break;
-                case IsTrue isn:
-                    expression = IsTrue(isn);
-                    break;
-                case Last last:
-                    expression = Last(last);
-                    break;
-                case LastPositionOf lpo:
-                    expression = LastPositionOf(lpo);
-                    break;
-                case Length len:
-                    expression = Length(len);
-                    break;
-                case Less less:
-                    expression = Less(less);
-                    break;
-                case LessOrEqual lesse:
-                    expression = LessOrEqual(lesse);
-                    break;
-                case List list:
-                    expression = List(list);
-                    break;
-                case Literal lit:
-                    expression = Literal(lit);
-                    break;
-                case Ln ln:
-                    expression = Ln(ln);
-                    break;
-                case Log log:
-                    expression = Log(log);
-                    break;
-                case LowBoundary lb:
-                    expression = LowBoundary(lb);
-                    break;
-                case Lower e:
-                    expression = Lower(e);
-                    break;
-                case Matches e:
-                    expression = Matches(e);
-                    break;
-                case Max max:
-                    expression = Max(max);
-                    break;
-                case MaxValue max:
-                    expression = MaxValue(max);
-                    break;
-                case Median med:
-                    expression = Median(med);
-                    break;
-                case Meets meets:
-                    expression = Meets(meets);
-                    break;
-                case MeetsBefore meets:
-                    expression = MeetsBefore(meets);
-                    break;
-                case MeetsAfter meets:
-                    expression = MeetsAfter(meets);
-                    break;
-                case Message msg:
-                    expression = Message(msg);
-                    break;
-                case Min min:
-                    expression = Min(min);
-                    break;
-                case MinValue min:
-                    expression = MinValue(min);
-                    break;
-                case Mode mode:
-                    expression = Mode(mode);
-                    break;
-                case Modulo mod:
-                    expression = Modulo(mod);
-                    break;
-                case Multiply mul:
-                    expression = Multiply(mul);
-                    break;
-                case Negate neg:
-                    expression = Negate(neg);
-                    break;
-                case Not not:
-                    expression = Not(not);
-                    break;
-                case NotEqual ne:
-                    expression = NotEqual(ne);
-                    break;
-                case Now now:
-                    expression = Now(now);
-                    break;
-                case Null @null:
-                    expression = Null(@null);
-                    break;
-                case OperandRef ore:
-                    expression = OperandRef(ore);
-                    break;
-                case Or or:
-                    expression = Or(or);
-                    break;
-                case Overlaps ole:
-                    expression = Overlaps(ole);
-                    break;
-                case OverlapsAfter ola:
-                    expression = OverlapsAfter(ola);
-                    break;
-                case OverlapsBefore olb:
-                    expression = OverlapsBefore(olb);
-                    break;
-                case ParameterRef pre:
-                    expression = ParameterRef(pre);
-                    break;
-                case PointFrom pf:
-                    expression = PointFrom(pf);
-                    break;
-                case PopulationStdDev pstd:
-                    expression = PopulationStdDev(pstd);
-                    break;
-                case PopulationVariance pvar:
-                    expression = PopulationVariance(pvar);
-                    break;
-                case PositionOf po:
-                    expression = PositionOf(po);
-                    break;
-                case Power pow:
-                    expression = Power(pow);
-                    break;
-                case Precision pre:
-                    expression = Precision(pre);
-                    break;
-                case Predecessor prd:
-                    expression = Predecessor(prd);
-                    break;
-                case Product prod:
-                    expression = Product(prod);
-                    break;
-                case ProperContains pc:
-                    expression = ProperContains(pc);
-                    break;
-                case ProperIn pi:
-                    expression = ProperIn(pi);
-                    break;
-                case ProperIncludes pi:
-                    expression = ProperIncludes(pi);
-                    break;
-                case ProperIncludedIn pie:
-                    expression = ProperIncludedIn(pie);
-                    break;
-                case Property pe:
-                    expression = Property(pe);
-                    break;
-                case Quantity qua:
-                    expression = Quantity(qua);
-                    break;
-                case Query qe:
-                    expression = Query(qe);
-                    break;
-                case QueryLetRef qlre:
-                    expression = QueryLetRef(qlre);
-                    break;
-                case Ratio re:
-                    expression = Ratio(re);
-                    break;
-                case ReplaceMatches e:
-                    expression = ReplaceMatches(e);
-                    break;
-                case Retrieve re:
-                    expression = Retrieve(re);
-                    break;
-                case Round rnd:
-                    expression = Round(rnd);
-                    break;
-                case SameAs sa:
-                    expression = SameAs(sa);
-                    break;
-                case SameOrAfter soa:
-                    expression = SameOrAfter(soa);
-                    break;
-                case SameOrBefore sob:
-                    expression = SameOrBefore(sob);
-                    break;
-                case SingletonFrom sf:
-                    expression = SingletonFrom(sf);
-                    break;
-                case Slice slice:
-                    expression = Slice(slice);
-                    break;
-                case Split split:
-                    expression = Split(split);
-                    break;
-                case Substring e:
-                    expression = Substring(e);
-                    break;
-                case Subtract sub:
-                    expression = Subtract(sub);
-                    break;
-                case Successor suc:
-                    expression = Successor(suc);
-                    break;
-                case Sum sum:
-                    expression = Sum(sum);
-                    break;
-                case Starts starts:
-                    expression = Starts(starts);
-                    break;
-                case Start start:
-                    expression = Start(start);
-                    break;
-                case StartsWith e:
-                    expression = StartsWith(e);
-                    break;
-                case StdDev stddev:
-                    expression = StdDev(stddev);
-                    break;
-                case Time time:
-                    expression = Time(time);
-                    break;
-                case TimeOfDay tod:
-                    expression = TimeOfDay(tod);
-                    break;
-                case TimezoneOffsetFrom tofe:
-                    expression = TimezoneOffsetFrom(tofe);
-                    break;
-                case ToBoolean e:
-                    expression = ToBoolean(e);
-                    break;
-                case ToConcept tc:
-                    expression = ToConcept(tc);
-                    break;
-                case ToDateTime tdte:
-                    expression = ToDateTime(tdte);
-                    break;
-                case ToDate tde:
-                    expression = ToDate(tde);
-                    break;
-                case Today today:
-                    expression = Today(today);
-                    break;
-                case ToDecimal tde:
-                    expression = ToDecimal(tde);
-                    break;
-                case ToInteger tde:
-                    expression = ToInteger(tde);
-                    break;
-                case ToList tle:
-                    expression = ToList(tle);
-                    break;
-                case ToLong toLong:
-                    expression = ToLong(toLong);
-                    break;
-                case ToQuantity tq:
-                    expression = ToQuantity(tq);
-                    break;
-                case ToString e:
-                    expression = ToString(e);
-                    break;
-                case ToTime e:
-                    expression = ToTime(e);
-                    break;
-                case Truncate trunc:
-                    expression = Truncate(trunc);
-                    break;
-                case TruncatedDivide div:
-                    expression = TruncatedDivide(div);
-                    break;
-                case elm.Tuple tu:
-                    expression = Tuple(tu);
-                    break;
-                case Union ue:
-                    expression = Union(ue);
-                    break;
-                case ValueSetRef vsre:
-                    expression = ValueSetRef(vsre);
-                    break;
-                case Variance variance:
-                    expression = Variance(variance);
-                    break;
-                case Upper e:
-                    expression = Upper(e);
-                    break;
-                case Width width:
-                    expression = Width(width);
-                    break;
-                case Xor xor:
-                    expression = Xor(xor);
-                    break;
-                default: throw this.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.");
-            }
 
-            expression = Mutate(op, expression);
-            return expression!;
+                Expression? expression;
+                switch (op)
+                {
+                    case Abs abs:
+                        expression = Abs(abs);
+                        break;
+                    case Add add:
+                        expression = Add(add);
+                        break;
+                    case After after:
+                        expression = After(after);
+                        break;
+                    case AliasRef ar:
+                        expression = AliasRef(ar);
+                        break;
+                    case AllTrue alt:
+                        expression = AllTrue(alt);
+                        break;
+                    case And and:
+                        expression = And(and);
+                        break;
+                    case As @as:
+                        expression = As(@as);
+                        break;
+                    case AnyTrue ate:
+                        expression = AnyTrue(ate);
+                        break;
+                    case AnyInValueSet avs:
+                        expression = AnyInValueSet(avs);
+                        break;
+                    case Avg avg:
+                        expression = Avg(avg);
+                        break;
+                    case Before before:
+                        expression = Before(before);
+                        break;
+                    case CalculateAgeAt caa:
+                        expression = CalculateAgeAt(caa);
+                        break;
+                    case CalculateAge ca:
+                        expression = CalculateAge(ca);
+                        break;
+                    case Case ce:
+                        expression = Case(ce);
+                        break;
+                    case Ceiling ceil:
+                        expression = Ceiling(ceil);
+                        break;
+                    case Coalesce cle:
+                        expression = Coalesce(cle);
+                        break;
+                    case CodeRef cre:
+                        expression = CodeRef(cre);
+                        break;
+                    case CodeSystemRef csr:
+                        expression = CodeSystemRef(csr);
+                        break;
+                    case Collapse col:
+                        expression = Collapse(col);
+                        break;
+                    case Combine com:
+                        expression = Combine(com);
+                        break;
+                    case Concatenate cctn:
+                        expression = Concatenate(cctn);
+                        break;
+                    case ConceptRef cr:
+                        expression = ConceptRef(cr);
+                        break;
+                    case Contains ct:
+                        expression = Contains(ct);
+                        break;
+                    case ConvertQuantity cqe:
+                        expression = ConvertQuantity(cqe);
+                        break;
+                    case ConvertsToBoolean ce:
+                        expression = ConvertsToBoolean(ce);
+                        break;
+                    case ConvertsToDate ce:
+                        expression = ConvertsToDate(ce);
+                        break;
+                    case ConvertsToDateTime ce:
+                        expression = ConvertsToDateTime(ce);
+                        break;
+                    case ConvertsToDecimal ce:
+                        expression = ConvertsToDecimal(ce);
+                        break;
+                    case ConvertsToLong ce:
+                        expression = ConvertsToLong(ce);
+                        break;
+                    case ConvertsToInteger ce:
+                        expression = ConvertsToInteger(ce);
+                        break;
+                    case ConvertsToQuantity ce:
+                        expression = ConvertsToQuantity(ce);
+                        break;
+                    case ConvertsToString ce:
+                        expression = ConvertsToString(ce);
+                        break;
+                    case ConvertsToTime ce:
+                        expression = ConvertsToTime(ce);
+                        break;
+                    case Count ce:
+                        expression = Count(ce);
+                        break;
+                    case DateFrom dfe:
+                        expression = DateFrom(dfe);
+                        break;
+                    case elm.DateTime dt:
+                        expression = DateTime(dt);
+                        break;
+                    case Date d:
+                        expression = Date(d);
+                        break;
+                    case DateTimeComponentFrom dtcf:
+                        expression = DateTimeComponentFrom(dtcf);
+                        break;
+                    case Descendents desc:
+                        expression = Descendents(desc);
+                        break;
+                    case DifferenceBetween dbe:
+                        expression = DifferenceBetween(dbe);
+                        break;
+                    case Distinct distinct:
+                        expression = Distinct(distinct);
+                        break;
+                    case Divide divide:
+                        expression = Divide(divide);
+                        break;
+                    case DurationBetween dbe:
+                        expression = DurationBetween(dbe);
+                        break;
+                    case End e:
+                        expression = End(e);
+                        break;
+                    case Ends e:
+                        expression = Ends(e);
+                        break;
+                    case EndsWith e:
+                        expression = EndsWith(e);
+                        break;
+                    case Equal eq:
+                        expression = Equal(eq);
+                        break;
+                    case Equivalent eqv:
+                        expression = Equivalent(eqv);
+                        break;
+                    case Except ex:
+                        expression = Except(ex);
+                        break;
+                    case Exists ex:
+                        expression = Exists(ex);
+                        break;
+                    case Exp exe:
+                        expression = Exp(exe);
+                        break;
+                    case Expand expand:
+                        expression = Expand(expand);
+                        break;
+                    case ExpandValueSet evs:
+                        expression = ExpandValueSet(evs);
+                        break;
+                    case FunctionRef fre:
+                        expression = FunctionRef(fre);
+                        break;
+                    case ExpressionRef ere:
+                        expression = ExpressionRef(ere);
+                        break;
+                    case First first:
+                        expression = First(first);
+                        break;
+                    case Flatten fl:
+                        expression = Flatten(fl);
+                        break;
+                    case Floor floor:
+                        expression = Floor(floor);
+                        break;
+                    case GeometricMean gme:
+                        expression = GeometricMean(gme);
+                        break;
+                    case Greater gtr:
+                        expression = Greater(gtr);
+                        break;
+                    case GreaterOrEqual gtre:
+                        expression = GreaterOrEqual(gtre);
+                        break;
+                    case HighBoundary hb:
+                        expression = HighBoundary(hb);
+                        break;
+                    case IdentifierRef ire:
+                        expression = IdentifierRef(ire);
+                        break;
+                    case If @if:
+                        expression = If(@if);
+                        break;
+                    case Implies implies:
+                        expression = Implies(implies);
+                        break;
+                    case Includes inc:
+                        expression = Includes(inc);
+                        break;
+                    case IncludedIn ii:
+                        expression = IncludedIn(ii);
+                        break;
+                    case Indexer idx:
+                        expression = Indexer(idx);
+                        break;
+                    case IndexOf io:
+                        expression = IndexOf(io);
+                        break;
+                    case Instance ine:
+                        expression = Instance(ine);
+                        break;
+                    case Intersect ise:
+                        expression = Intersect(ise);
+                        break;
+                    case Interval ie:
+                        expression = IntervalExpression(ie);
+                        break;
+                    case InValueSet inv:
+                        expression = InValueSet(inv);
+                        break;
+                    case In @in:
+                        expression = In(@in);
+                        break;
+                    case Is @is:
+                        expression = Is(@is);
+                        break;
+                    case IsFalse isn:
+                        expression = IsFalse(isn);
+                        break;
+                    case IsNull isn:
+                        expression = IsNull(isn);
+                        break;
+                    case IsTrue isn:
+                        expression = IsTrue(isn);
+                        break;
+                    case Last last:
+                        expression = Last(last);
+                        break;
+                    case LastPositionOf lpo:
+                        expression = LastPositionOf(lpo);
+                        break;
+                    case Length len:
+                        expression = Length(len);
+                        break;
+                    case Less less:
+                        expression = Less(less);
+                        break;
+                    case LessOrEqual lesse:
+                        expression = LessOrEqual(lesse);
+                        break;
+                    case List list:
+                        expression = List(list);
+                        break;
+                    case Literal lit:
+                        expression = Literal(lit);
+                        break;
+                    case Ln ln:
+                        expression = Ln(ln);
+                        break;
+                    case Log log:
+                        expression = Log(log);
+                        break;
+                    case LowBoundary lb:
+                        expression = LowBoundary(lb);
+                        break;
+                    case Lower e:
+                        expression = Lower(e);
+                        break;
+                    case Matches e:
+                        expression = Matches(e);
+                        break;
+                    case Max max:
+                        expression = Max(max);
+                        break;
+                    case MaxValue max:
+                        expression = MaxValue(max);
+                        break;
+                    case Median med:
+                        expression = Median(med);
+                        break;
+                    case Meets meets:
+                        expression = Meets(meets);
+                        break;
+                    case MeetsBefore meets:
+                        expression = MeetsBefore(meets);
+                        break;
+                    case MeetsAfter meets:
+                        expression = MeetsAfter(meets);
+                        break;
+                    case Message msg:
+                        expression = Message(msg);
+                        break;
+                    case Min min:
+                        expression = Min(min);
+                        break;
+                    case MinValue min:
+                        expression = MinValue(min);
+                        break;
+                    case Mode mode:
+                        expression = Mode(mode);
+                        break;
+                    case Modulo mod:
+                        expression = Modulo(mod);
+                        break;
+                    case Multiply mul:
+                        expression = Multiply(mul);
+                        break;
+                    case Negate neg:
+                        expression = Negate(neg);
+                        break;
+                    case Not not:
+                        expression = Not(not);
+                        break;
+                    case NotEqual ne:
+                        expression = NotEqual(ne);
+                        break;
+                    case Now now:
+                        expression = Now(now);
+                        break;
+                    case Null @null:
+                        expression = Null(@null);
+                        break;
+                    case OperandRef ore:
+                        expression = OperandRef(ore);
+                        break;
+                    case Or or:
+                        expression = Or(or);
+                        break;
+                    case Overlaps ole:
+                        expression = Overlaps(ole);
+                        break;
+                    case OverlapsAfter ola:
+                        expression = OverlapsAfter(ola);
+                        break;
+                    case OverlapsBefore olb:
+                        expression = OverlapsBefore(olb);
+                        break;
+                    case ParameterRef pre:
+                        expression = ParameterRef(pre);
+                        break;
+                    case PointFrom pf:
+                        expression = PointFrom(pf);
+                        break;
+                    case PopulationStdDev pstd:
+                        expression = PopulationStdDev(pstd);
+                        break;
+                    case PopulationVariance pvar:
+                        expression = PopulationVariance(pvar);
+                        break;
+                    case PositionOf po:
+                        expression = PositionOf(po);
+                        break;
+                    case Power pow:
+                        expression = Power(pow);
+                        break;
+                    case Precision pre:
+                        expression = Precision(pre);
+                        break;
+                    case Predecessor prd:
+                        expression = Predecessor(prd);
+                        break;
+                    case Product prod:
+                        expression = Product(prod);
+                        break;
+                    case ProperContains pc:
+                        expression = ProperContains(pc);
+                        break;
+                    case ProperIn pi:
+                        expression = ProperIn(pi);
+                        break;
+                    case ProperIncludes pi:
+                        expression = ProperIncludes(pi);
+                        break;
+                    case ProperIncludedIn pie:
+                        expression = ProperIncludedIn(pie);
+                        break;
+                    case Property pe:
+                        expression = Property(pe);
+                        break;
+                    case Quantity qua:
+                        expression = Quantity(qua);
+                        break;
+                    case Query qe:
+                        expression = Query(qe);
+                        break;
+                    case QueryLetRef qlre:
+                        expression = QueryLetRef(qlre);
+                        break;
+                    case Ratio re:
+                        expression = Ratio(re);
+                        break;
+                    case ReplaceMatches e:
+                        expression = ReplaceMatches(e);
+                        break;
+                    case Retrieve re:
+                        expression = Retrieve(re);
+                        break;
+                    case Round rnd:
+                        expression = Round(rnd);
+                        break;
+                    case SameAs sa:
+                        expression = SameAs(sa);
+                        break;
+                    case SameOrAfter soa:
+                        expression = SameOrAfter(soa);
+                        break;
+                    case SameOrBefore sob:
+                        expression = SameOrBefore(sob);
+                        break;
+                    case SingletonFrom sf:
+                        expression = SingletonFrom(sf);
+                        break;
+                    case Slice slice:
+                        expression = Slice(slice);
+                        break;
+                    case Split split:
+                        expression = Split(split);
+                        break;
+                    case Substring e:
+                        expression = Substring(e);
+                        break;
+                    case Subtract sub:
+                        expression = Subtract(sub);
+                        break;
+                    case Successor suc:
+                        expression = Successor(suc);
+                        break;
+                    case Sum sum:
+                        expression = Sum(sum);
+                        break;
+                    case Starts starts:
+                        expression = Starts(starts);
+                        break;
+                    case Start start:
+                        expression = Start(start);
+                        break;
+                    case StartsWith e:
+                        expression = StartsWith(e);
+                        break;
+                    case StdDev stddev:
+                        expression = StdDev(stddev);
+                        break;
+                    case Time time:
+                        expression = Time(time);
+                        break;
+                    case TimeOfDay tod:
+                        expression = TimeOfDay(tod);
+                        break;
+                    case TimezoneOffsetFrom tofe:
+                        expression = TimezoneOffsetFrom(tofe);
+                        break;
+                    case ToBoolean e:
+                        expression = ToBoolean(e);
+                        break;
+                    case ToConcept tc:
+                        expression = ToConcept(tc);
+                        break;
+                    case ToDateTime tdte:
+                        expression = ToDateTime(tdte);
+                        break;
+                    case ToDate tde:
+                        expression = ToDate(tde);
+                        break;
+                    case Today today:
+                        expression = Today(today);
+                        break;
+                    case ToDecimal tde:
+                        expression = ToDecimal(tde);
+                        break;
+                    case ToInteger tde:
+                        expression = ToInteger(tde);
+                        break;
+                    case ToList tle:
+                        expression = ToList(tle);
+                        break;
+                    case ToLong toLong:
+                        expression = ToLong(toLong);
+                        break;
+                    case ToQuantity tq:
+                        expression = ToQuantity(tq);
+                        break;
+                    case ToString e:
+                        expression = ToString(e);
+                        break;
+                    case ToTime e:
+                        expression = ToTime(e);
+                        break;
+                    case Truncate trunc:
+                        expression = Truncate(trunc);
+                        break;
+                    case TruncatedDivide div:
+                        expression = TruncatedDivide(div);
+                        break;
+                    case elm.Tuple tu:
+                        expression = Tuple(tu);
+                        break;
+                    case Union ue:
+                        expression = Union(ue);
+                        break;
+                    case ValueSetRef vsre:
+                        expression = ValueSetRef(vsre);
+                        break;
+                    case Variance variance:
+                        expression = Variance(variance);
+                        break;
+                    case Upper e:
+                        expression = Upper(e);
+                        break;
+                    case Width width:
+                        expression = Width(width);
+                        break;
+                    case Xor xor:
+                        expression = Xor(xor);
+                        break;
+                    default: throw this.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.");
+                }
+
+                expression = Mutate(op, expression);
+                return expression!;
+            }
         }
 
         protected Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be)
@@ -1237,73 +1239,74 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Property(Property op)
         {
-            using var _ = PushElement(op);
-
-            if (string.IsNullOrWhiteSpace(op.path))
-                throw this.NewExpressionBuildingException("path cannot be null or empty");
-            //var path = ExpressionBuilderContext.NormalizeIdentifier(op.path);
-            var path = op.path;
-            if (!string.IsNullOrWhiteSpace(op.scope))
+            using (PushElement(op))
             {
-                var scopeExpression = GetScopeExpression(op.scope!);
-                var expectedType = TypeFor(op) ?? typeof(object);
-                var pathMemberInfo = _typeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
-                    _typeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
-                if (pathMemberInfo == null)
+                if (string.IsNullOrWhiteSpace(op.path))
+                    throw this.NewExpressionBuildingException("path cannot be null or empty");
+                //var path = ExpressionBuilderContext.NormalizeIdentifier(op.path);
+                var path = op.path;
+                if (!string.IsNullOrWhiteSpace(op.scope))
                 {
-                    _logger.LogWarning(FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
-                    var call = _operatorBinding.Bind(CqlOperator.LateBoundProperty, LibraryDefinitionsBuilder.ContextParameter,
-                        scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
-                    return call;
-                }
-                var propogate = PropagateNull(scopeExpression, pathMemberInfo);
-                // This is only necessary for Firely b/c it always initializes colleciton members even if they are 
-                // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
-                //
-                //if (typeof(Resource).IsAssignableFrom(scopeExpression.Type)
-                //    && pathMemberInfo is PropertyInfo prop
-                //    && IsOrImplementsIEnumerableOfT(prop.PropertyType))
-                //{
-                //    var method = typeof(BuiltIns).GetMethod(nameof(BuiltIns.NullIfEmpty))
-                //        .MakeGenericMethod(GetElementType(prop.PropertyType));
-                //    var call = Expression.Call(method, propogate);
-                //    return call;
-                //}
-                string message = $"TypeManager failed to resolve type.";
-                var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
-                if (resultType != propogate.Type)
-                {
-                    propogate = ChangeType(propogate, resultType);
-                }
-                return propogate;
-            }
-            else if (op.source != null)
-            {
-                var source = TranslateExpression(op.source);
-                var parts = path.Split('.');
-                if (parts.Length > 1)
-                {
-                    // support paths like birthDate.value on Patient
-                    for (int i = 0; i < parts.Length; i++)
+                    var scopeExpression = GetScopeExpression(op.scope!);
+                    var expectedType = TypeFor(op) ?? typeof(object);
+                    var pathMemberInfo = _typeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
+                        _typeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
+                    if (pathMemberInfo == null)
                     {
-                        var pathPart = parts[i];
-                        var pathMemberInfo = _typeManager.Resolver.GetProperty(source.Type, pathPart!);
-                        if (pathMemberInfo != null)
-                        {
-                            var propertyAccess = PropagateNull(source, pathMemberInfo);
-                            source = propertyAccess;
-                        }
+                        _logger.LogWarning(FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
+                        var call = _operatorBinding.Bind(CqlOperator.LateBoundProperty, LibraryDefinitionsBuilder.ContextParameter,
+                            scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
+                        return call;
                     }
-                    return source;
+                    var propogate = PropagateNull(scopeExpression, pathMemberInfo);
+                    // This is only necessary for Firely b/c it always initializes colleciton members even if they are 
+                    // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
+                    //
+                    //if (typeof(Resource).IsAssignableFrom(scopeExpression.Type)
+                    //    && pathMemberInfo is PropertyInfo prop
+                    //    && IsOrImplementsIEnumerableOfT(prop.PropertyType))
+                    //{
+                    //    var method = typeof(BuiltIns).GetMethod(nameof(BuiltIns.NullIfEmpty))
+                    //        .MakeGenericMethod(GetElementType(prop.PropertyType));
+                    //    var call = Expression.Call(method, propogate);
+                    //    return call;
+                    //}
+                    string message = $"TypeManager failed to resolve type.";
+                    var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
+                    if (resultType != propogate.Type)
+                    {
+                        propogate = ChangeType(propogate, resultType);
+                    }
+                    return propogate;
                 }
-                else
+                else if (op.source != null)
                 {
-                    var expectedType = TypeFor(op)!;
-                    var result = PropertyHelper(source, path, expectedType);
-                    return result;
+                    var source = TranslateExpression(op.source);
+                    var parts = path.Split('.');
+                    if (parts.Length > 1)
+                    {
+                        // support paths like birthDate.value on Patient
+                        for (int i = 0; i < parts.Length; i++)
+                        {
+                            var pathPart = parts[i];
+                            var pathMemberInfo = _typeManager.Resolver.GetProperty(source.Type, pathPart!);
+                            if (pathMemberInfo != null)
+                            {
+                                var propertyAccess = PropagateNull(source, pathMemberInfo);
+                                source = propertyAccess;
+                            }
+                        }
+                        return source;
+                    }
+                    else
+                    {
+                        var expectedType = TypeFor(op)!;
+                        var result = PropertyHelper(source, path, expectedType);
+                        return result;
+                    }
                 }
+                else throw new NotImplementedException().WithContext(this);
             }
-            else throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression PropertyHelper(Expression source, string? path, Type expectedType)
@@ -1549,34 +1552,40 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ExpressionRef(ExpressionRef expressionRef)
         {
-            IDisposable pop = null!;
-            Type? expressionType = null;
-            if (expressionRef.resultTypeSpecifier != null)
+            IPopToken popToken = null!;
+            try
             {
-                expressionType = TypeFor(expressionRef.resultTypeSpecifier);
-            }
-            else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
-            {
-                expressionType = _typeManager.Resolver.ResolveType(expressionRef.resultTypeName.Name!);
-            }
-            else
-            {
-                var def = LibraryContext.Library.statements?.SingleOrDefault(d => d.name == expressionRef.name);
-                if (def != null)
+                Type? expressionType = null;
+                if (expressionRef.resultTypeSpecifier != null)
                 {
-                    pop = PushElement(def);
-                    expressionType = TypeFor(def);
+                    expressionType = TypeFor(expressionRef.resultTypeSpecifier);
                 }
-                else throw new NotSupportedException("Unable to resolve expression reference type.");
+                else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
+                {
+                    expressionType = _typeManager.Resolver.ResolveType(expressionRef.resultTypeName.Name!);
+                }
+                else
+                {
+                    var def = LibraryContext.Library.statements?.SingleOrDefault(d => d.name == expressionRef.name);
+                    if (def != null)
+                    {
+                        popToken = PushElement(def);
+                        expressionType = TypeFor(def);
+                    }
+                    else throw new NotSupportedException("Unable to resolve expression reference type.");
+                }
+
+                if (expressionType == null)
+                    throw this.NewExpressionBuildingException($"Unable to determine type for {expressionRef.localId}");
+
+                var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType);
+
+                return invoke;
             }
-
-            using var _2 = pop;
-
-            if (expressionType == null)
-                throw this.NewExpressionBuildingException($"Unable to determine type for {expressionRef.localId}");
-
-            var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType);
-            return invoke;
+            finally
+            {
+                popToken?.Pop();
+            }
         }
 
         protected Expression ParameterRef(ParameterRef op)

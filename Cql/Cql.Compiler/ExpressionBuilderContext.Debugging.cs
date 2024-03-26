@@ -35,7 +35,7 @@ partial class ExpressionBuilder : IBuilderNode
 
     public string DebuggerView => this.GetDebuggerView();
 
-    private IDisposable PushElement(elm.Element element)
+    private IPopToken PushElement(elm.Element element)
     {
         elm.Element? previous = _elementStack.Any() ? _elementStack.Peek() : null;
         if (previous == element) return new EmptyDisposable();
@@ -59,7 +59,12 @@ partial class ExpressionBuilder : IBuilderNode
             : null!;
     }
 
-    private readonly record struct PopElementToken : IDisposable
+    protected interface IPopToken : IDisposable
+    {
+        void Pop();
+    }
+
+    private readonly record struct PopElementToken : IPopToken
     {
         private readonly ExpressionBuilder _owner;
         private readonly elm.Element? _previousElement;
@@ -70,7 +75,9 @@ partial class ExpressionBuilder : IBuilderNode
             _previousElement = previousElement;
         }
 
-        void IDisposable.Dispose()
+        void IDisposable.Dispose() => Pop();
+
+        public void Pop()
         {
             var expectedPreviousElement = _owner._elementStack.Count > 1 ? _owner._elementStack.ElementAt(1) : null;
             if (_previousElement != expectedPreviousElement)
@@ -80,9 +87,13 @@ partial class ExpressionBuilder : IBuilderNode
         }
     }
 
-    private readonly record struct EmptyDisposable : IDisposable
+    private readonly record struct EmptyDisposable : IPopToken
     {
         void IDisposable.Dispose()
+        {
+        }
+
+        void IPopToken.Pop()
         {
         }
     }

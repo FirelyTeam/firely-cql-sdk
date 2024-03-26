@@ -186,26 +186,27 @@ namespace Hl7.Cql.Compiler
 
                 case ExpressionDef { expression: not null } def:
                     {
-                        using var _ = PushElement(def.expression);
-                        var type = TypeFor(def.expression, throwIfNotFound: false);
-                        if (type == null)
+                        using (PushElement(def.expression))
                         {
-                            if (def.expression is SingletonFrom singleton)
+                            var type = TypeFor(def.expression, throwIfNotFound: false);
+                            if (type == null)
                             {
-                                type = TypeFor(singleton, throwIfNotFound: false);
-                                if (type == null)
+                                if (def.expression is SingletonFrom singleton)
                                 {
-                                    if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
+                                    type = TypeFor(singleton, throwIfNotFound: false);
+                                    if (type == null)
                                     {
-                                        type = _typeManager.Resolver.ResolveType(retrieve.dataType.Name);
-                                        if (type != null)
-                                            return type;
+                                        if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
+                                        {
+                                            type = _typeManager.Resolver.ResolveType(retrieve.dataType.Name);
+                                            if (type != null)
+                                                return type;
+                                        }
                                     }
+                                    else return type;
                                 }
-                                else return type;
                             }
                         }
-
                         break;
                     }
 

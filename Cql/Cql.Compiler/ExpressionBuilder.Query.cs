@@ -68,21 +68,22 @@ internal partial class ExpressionBuilder
         {
             foreach (var relationship in query.relationship)
             {
-                using var _ = ctx.PushElement(relationship);
-
-                var selectManyLambda = ctx.WithToSelectManyBody(rootScopeParameter, relationship);
-
-                var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
-                    @return, selectManyLambda);
-                if (relationship is Without)
+                using (ctx.PushElement(relationship))
                 {
-                    var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
-                        @return, selectManyCall);
-                    @return = callExcept;
-                }
-                else
-                {
-                    @return = selectManyCall;
+                    var selectManyLambda = ctx.WithToSelectManyBody(rootScopeParameter, relationship);
+
+                    var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
+                        @return, selectManyLambda);
+                    if (relationship is Without)
+                    {
+                        var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
+                            @return, selectManyCall);
+                        @return = callExcept;
+                    }
+                    else
+                    {
+                        @return = selectManyCall;
+                    }
                 }
             }
         }
@@ -96,50 +97,54 @@ internal partial class ExpressionBuilder
 
         if (query.where != null)
         {
-            using var _ = ctx.PushElement(query.where);
-            
-            var whereBody = ctx.TranslateExpression(query.where);
-            var whereLambda = Expression.Lambda(whereBody, rootScopeParameter);
-            var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
-            @return = callWhere;
+            using (ctx.PushElement(query.where))
+            {
+                var whereBody = ctx.TranslateExpression(query.where);
+                var whereLambda = Expression.Lambda(whereBody, rootScopeParameter);
+                var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
+                @return = callWhere;
+            }
+
         }
 
         if (query.@return != null)
         {
-            using var _ = ctx.PushElement(query.@return);
-
-            var selectBody = ctx.TranslateExpression(query.@return.expression!);
-            var selectLambda = Expression.Lambda(selectBody, rootScopeParameter);
-            var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
-            @return = callSelect;
+            using (ctx.PushElement(query.@return))
+            {
+                var selectBody = ctx.TranslateExpression(query.@return.expression!);
+                var selectLambda = Expression.Lambda(selectBody, rootScopeParameter);
+                var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
+                @return = callSelect;
+            }
         }
 
         if (query.aggregate != null)
         {
-            using var _ = ctx.PushElement(query.aggregate);
-
-            var resultAlias = query.aggregate.identifier!;
-            Type? resultType = null;
-            if (query.aggregate.resultTypeSpecifier != null)
+            using (ctx.PushElement(query.aggregate))
             {
-                resultType = TypeFor(query.aggregate.resultTypeSpecifier);
+                var resultAlias = query.aggregate.identifier!;
+                Type? resultType = null;
+                if (query.aggregate.resultTypeSpecifier != null)
+                {
+                    resultType = TypeFor(query.aggregate.resultTypeSpecifier);
+                }
+                else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
+                {
+                    resultType = _typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
+                }
+
+                if (resultType is null)
+                    throw ctx.NewExpressionBuildingException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
+
+                var resultParameter = Expression.Parameter(resultType, resultAlias);
+                var subContext = ctx.WithScope(resultAlias!, resultParameter, query.aggregate);
+                var startingValue = subContext.TranslateExpression(query.aggregate.starting!);
+
+                var lambdaBody = subContext.TranslateExpression(query.aggregate.expression!);
+                var lambda = Expression.Lambda(lambdaBody, resultParameter, rootScopeParameter);
+                var aggregateCall = ctx._operatorBinding.Bind(CqlOperator.Aggregate, LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
+                @return = aggregateCall;
             }
-            else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
-            {
-                resultType = _typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
-            }
-
-            if (resultType is null)
-                throw ctx.NewExpressionBuildingException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
-
-            var resultParameter = Expression.Parameter(resultType, resultAlias);
-            var subContext = ctx.WithScope(resultAlias!, resultParameter, query.aggregate);
-            var startingValue = subContext.TranslateExpression(query.aggregate.starting!);
-
-            var lambdaBody = subContext.TranslateExpression(query.aggregate.expression!);
-            var lambda = Expression.Lambda(lambdaBody, resultParameter, rootScopeParameter);
-            var aggregateCall = ctx._operatorBinding.Bind(CqlOperator.Aggregate, LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
-            @return = aggregateCall;
         }
 
 
@@ -148,48 +153,50 @@ internal partial class ExpressionBuilder
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByDirection))]
         if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)
         {
-            using var _ = ctx.PushElement(query.sort);
-
-            foreach (var by in query.sort.by)
+            using (ctx.PushElement(query.sort))
             {
-                using var _2 = ctx.PushElement(by);
-
-                ListSortDirection order = by.direction.ListSortOrder();
-                if (by is ByExpression byExpression)
+                foreach (var by in query.sort.by)
                 {
-                    var parameterName = "@this";
-                    var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-                    var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
-                    var sortMemberExpression = subContext.TranslateExpression(byExpression.expression);
-                    var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
-                    var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                    var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
-                        @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
-                    @return = sort;
-                }
-                else if (by is ByColumn byColumn)
-                {
-                    var parameterName = "@this";
-                    var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-                    var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    var pathMemberType = ctx.TypeFor(byColumn);
-                    if (pathMemberType == null)
+                    using (ctx.PushElement(by))
                     {
-                        throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
+                        ListSortDirection order = by.direction.ListSortOrder();
+                        if (by is ByExpression byExpression)
+                        {
+                            var parameterName = "@this";
+                            var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+                            var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                            var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
+                            var sortMemberExpression = subContext.TranslateExpression(byExpression.expression);
+                            var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
+                            var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
+                            var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
+                                @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                            @return = sort;
+                        }
+                        else if (by is ByColumn byColumn)
+                        {
+                            var parameterName = "@this";
+                            var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+                            var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                            var pathMemberType = ctx.TypeFor(byColumn);
+                            if (pathMemberType == null)
+                            {
+                                throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
+                            }
+                            var pathExpression = ctx.PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
+                            var lambdaBody = Expression.Convert(pathExpression, typeof(object));
+                            var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
+                            var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
+                                @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                            @return = sort;
+                        }
+                        else
+                        {
+                            var sort = ctx._operatorBinding.Bind(CqlOperator.Sort, LibraryDefinitionsBuilder.ContextParameter,
+                                @return, Expression.Constant(order, typeof(ListSortDirection)));
+                            @return = sort;
+                        }
                     }
-                    var pathExpression = ctx.PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
-                    var lambdaBody = Expression.Convert(pathExpression, typeof(object));
-                    var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                    var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
-                        @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
-                    @return = sort;
-                }
-                else
-                {
-                    var sort = ctx._operatorBinding.Bind(CqlOperator.Sort, LibraryDefinitionsBuilder.ContextParameter,
-                        @return, Expression.Constant(order, typeof(ListSortDirection)));
-                    @return = sort;
                 }
             }
         }
