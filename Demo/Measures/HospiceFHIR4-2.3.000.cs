@@ -19,11 +19,11 @@ public class HospiceFHIR4_2_3_000
 
     #region Cached values
 
-    internal Lazy<CqlValueSet> __Encounter_Inpatient;
-    internal Lazy<CqlValueSet> __Hospice_care_ambulatory;
+    internal Lazy<CqlCode[]> __SNOMEDCT_2017_09;
     internal Lazy<CqlCode> __Discharge_to_healthcare_facility_for_hospice_care__procedure_;
     internal Lazy<CqlCode> __Discharge_to_home_for_hospice_care__procedure_;
-    internal Lazy<CqlCode[]> __SNOMEDCT_2017_09;
+    internal Lazy<CqlValueSet> __Encounter_Inpatient;
+    internal Lazy<CqlValueSet> __Hospice_care_ambulatory;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<bool?> __Has_Hospice;
@@ -36,11 +36,11 @@ public class HospiceFHIR4_2_3_000
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
 
-        __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
-        __Hospice_care_ambulatory = new Lazy<CqlValueSet>(this.Hospice_care_ambulatory_Value);
+        __SNOMEDCT_2017_09 = new Lazy<CqlCode[]>(this.SNOMEDCT_2017_09_Value);
         __Discharge_to_healthcare_facility_for_hospice_care__procedure_ = new Lazy<CqlCode>(this.Discharge_to_healthcare_facility_for_hospice_care__procedure__Value);
         __Discharge_to_home_for_hospice_care__procedure_ = new Lazy<CqlCode>(this.Discharge_to_home_for_hospice_care__procedure__Value);
-        __SNOMEDCT_2017_09 = new Lazy<CqlCode[]>(this.SNOMEDCT_2017_09_Value);
+        __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
+        __Hospice_care_ambulatory = new Lazy<CqlValueSet>(this.Hospice_care_ambulatory_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Has_Hospice = new Lazy<bool?>(this.Has_Hospice_Value);
@@ -51,6 +51,32 @@ public class HospiceFHIR4_2_3_000
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
 
     #endregion
+
+	private CqlCode[] SNOMEDCT_2017_09_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("SNOMEDCT:2017-09")]
+	public CqlCode[] SNOMEDCT_2017_09() => 
+		__SNOMEDCT_2017_09.Value;
+
+	private CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure__Value() => 
+		new CqlCode("428371000124100", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
+	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_() => 
+		__Discharge_to_healthcare_facility_for_hospice_care__procedure_.Value;
+
+	private CqlCode Discharge_to_home_for_hospice_care__procedure__Value() => 
+		new CqlCode("428361000124107", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Discharge to home for hospice care (procedure)")]
+	public CqlCode Discharge_to_home_for_hospice_care__procedure_() => 
+		__Discharge_to_home_for_hospice_care__procedure_.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
@@ -67,35 +93,6 @@ public class HospiceFHIR4_2_3_000
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
 	public CqlValueSet Hospice_care_ambulatory() => 
 		__Hospice_care_ambulatory.Value;
-
-	private CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure__Value() => 
-		new CqlCode("428371000124100", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
-	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_() => 
-		__Discharge_to_healthcare_facility_for_hospice_care__procedure_.Value;
-
-	private CqlCode Discharge_to_home_for_hospice_care__procedure__Value() => 
-		new CqlCode("428361000124107", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Discharge to home for hospice care (procedure)")]
-	public CqlCode Discharge_to_home_for_hospice_care__procedure_() => 
-		__Discharge_to_home_for_hospice_care__procedure_.Value;
-
-	private CqlCode[] SNOMEDCT_2017_09_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
-			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("SNOMEDCT:2017-09")]
-	public CqlCode[] SNOMEDCT_2017_09() => 
-		__SNOMEDCT_2017_09.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

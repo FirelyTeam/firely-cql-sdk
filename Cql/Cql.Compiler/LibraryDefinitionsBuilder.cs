@@ -75,7 +75,7 @@ internal class LibraryDefinitionsBuilder
         var librarySet = CreateLibrarySetOfOne(library);
         var translated = CreateLibrarySetExpressionBuilder(librarySet)
             .CreateLibraryExpressionBuilder(library)
-            .CreateExpressionBuilder(expression)
+            .CreateExpressionBuilder()
             .TranslateExpression(expression);
         var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
         var lambda = Expression.Lambda(translated, parameter);

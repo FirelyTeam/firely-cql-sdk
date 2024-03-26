@@ -19,6 +19,8 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
     #region Cached values
 
+    internal Lazy<CqlCode[]> __LOINC;
+    internal Lazy<CqlCode> __Birth_date;
     internal Lazy<CqlValueSet> __Annual_Wellness_Visit;
     internal Lazy<CqlValueSet> __Diabetes;
     internal Lazy<CqlValueSet> __Discharged_to_Health_Care_Facility_for_Hospice_Care;
@@ -31,8 +33,6 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     internal Lazy<CqlValueSet> __Preventive_Care_Services___Established_Office_Visit__18_and_Up;
     internal Lazy<CqlValueSet> __Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
     internal Lazy<CqlValueSet> __Telephone_Visits;
-    internal Lazy<CqlCode> __Birth_date;
-    internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
@@ -63,6 +63,8 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
         AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 = new AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000(context);
         CumulativeMedicationDurationFHIR4_1_0_000 = new CumulativeMedicationDurationFHIR4_1_0_000(context);
 
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
         __Annual_Wellness_Visit = new Lazy<CqlValueSet>(this.Annual_Wellness_Visit_Value);
         __Diabetes = new Lazy<CqlValueSet>(this.Diabetes_Value);
         __Discharged_to_Health_Care_Facility_for_Hospice_Care = new Lazy<CqlValueSet>(this.Discharged_to_Health_Care_Facility_for_Hospice_Care_Value);
@@ -75,8 +77,6 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
         __Preventive_Care_Services___Established_Office_Visit__18_and_Up = new Lazy<CqlValueSet>(this.Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value);
         __Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new Lazy<CqlValueSet>(this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value);
         __Telephone_Visits = new Lazy<CqlValueSet>(this.Telephone_Visits_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
@@ -105,6 +105,25 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     public CumulativeMedicationDurationFHIR4_1_0_000 CumulativeMedicationDurationFHIR4_1_0_000 { get; }
 
     #endregion
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
 
 	private CqlValueSet Annual_Wellness_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
@@ -201,27 +220,6 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
 	public CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -20,13 +22,13 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
-    private LibrarySetExpressionBuilder? LibrarySetContext { get; }
+    public LibrarySetExpressionBuilder? LibrarySetContext { get; }
 
     public LibraryExpressionBuilder(
         Library library,
         LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> definitions, 
+        DefinitionDictionary<LambdaExpression> libraryDefinitions, 
         TypeManager typeManager,
         ILoggerFactory loggerFactory,
         LibrarySetExpressionBuilder? libsCtx = null)
@@ -39,7 +41,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
         _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
         // External State
-        Definitions = definitions;
+        LibraryDefinitions = libraryDefinitions;
         Library = library;
         LibrarySetContext = libsCtx;
 
@@ -48,10 +50,6 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
         _codesByName = new();
         _codesByCodeSystemName = new();
         _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
-
-
-        // Building up _codeSystemIdsByCodeSystemRefs
-        BuildUrlByCodeSystemRef();
     }
 
     public Library Library { get; }
@@ -60,13 +58,37 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
 
-    public ExpressionBuilder CreateExpressionBuilder(
-        Element element) =>
+    public ExpressionBuilder CreateExpressionBuilder() =>
         new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _libraryDefinitionBuilderSettings, this);
 
     #region Definitions
 
-    public DefinitionDictionary<LambdaExpression> Definitions { get; }
+    public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
+
+    private void BuildIncludedDefinitions()
+    {
+        if (LibrarySetContext != null)
+        {
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
+            {
+                AddDefinitions(libraryDependency);
+            }
+        }
+
+        void AddDefinitions(Library library)
+        {
+            string libraryName = library.NameAndVersion(true)!;
+            if (!HasAliasForNameAndVersion(libraryName))
+                throw new LibraryAliasUnresolvedError(library).ToException();
+
+            if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
+                    libraryName,
+                    out IEnumerable<KeyValuePair<string, List<(Type[], LambdaExpression)>>>? definitions))
+            {
+                LibraryDefinitions.Merge(libraryName, definitions);
+            }
+        }
+    }
 
     #endregion
 
@@ -74,18 +96,21 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     private readonly Dictionary<string, string> _libraryNameAndVersionByAlias;
 
-    public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
-        _libraryNameAndVersionByAlias.Add(includeAlias, includeNameAndVersion);
+    public void AddAliasForNameAndVersion(string alias, string libraryKey) =>
+        _libraryNameAndVersionByAlias.Add(alias, libraryKey);
 
-    public string? GetIncludeNameAndVersion(string? alias, bool throwError = true)
+    public string? GetNameAndVersionFromAlias(string? alias, bool throwError = true)
     {
         if (alias == null)
             return LibraryKey;
         if (throwError)
             return _libraryNameAndVersionByAlias[alias];
-        _libraryNameAndVersionByAlias.TryGetValue(alias, out string? result);
-        return result;
+        _libraryNameAndVersionByAlias.TryGetValue(alias, out string? libraryKey);
+        return libraryKey;
     }
+
+    public bool HasAliasForNameAndVersion(string libraryKey) => 
+        _libraryNameAndVersionByAlias.ContainsValue(libraryKey);
 
     #endregion
 
@@ -130,7 +155,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
 
-    private void BuildUrlByCodeSystemRef()
+    private void BuildIncludedCodeSystemRefs()
     {
         if (LibrarySetContext != null)
         {
@@ -156,7 +181,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)]out string? url)
     {
-        var libraryName = GetIncludeNameAndVersion(codeSystemRef.libraryName);
+        var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);
         return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
     }
 

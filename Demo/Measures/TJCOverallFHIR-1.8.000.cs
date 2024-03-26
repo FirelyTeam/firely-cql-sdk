@@ -19,6 +19,8 @@ public class TJCOverallFHIR_1_8_000
 
     #region Cached values
 
+    internal Lazy<CqlCode[]> __LOINC;
+    internal Lazy<CqlCode> __Birth_date;
     internal Lazy<CqlValueSet> __Comfort_Measures;
     internal Lazy<CqlValueSet> __Discharge_To_Acute_Care_Facility;
     internal Lazy<CqlValueSet> __Discharged_to_Health_Care_Facility_for_Hospice_Care;
@@ -32,8 +34,6 @@ public class TJCOverallFHIR_1_8_000
     internal Lazy<CqlValueSet> __Observation_Services;
     internal Lazy<CqlValueSet> __Patient_Expired;
     internal Lazy<CqlValueSet> __Ticagrelor_Therapy;
-    internal Lazy<CqlCode> __Birth_date;
-    internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Non_Elective_Inpatient_Encounter;
@@ -53,6 +53,8 @@ public class TJCOverallFHIR_1_8_000
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
 
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
         __Comfort_Measures = new Lazy<CqlValueSet>(this.Comfort_Measures_Value);
         __Discharge_To_Acute_Care_Facility = new Lazy<CqlValueSet>(this.Discharge_To_Acute_Care_Facility_Value);
         __Discharged_to_Health_Care_Facility_for_Hospice_Care = new Lazy<CqlValueSet>(this.Discharged_to_Health_Care_Facility_for_Hospice_Care_Value);
@@ -66,8 +68,6 @@ public class TJCOverallFHIR_1_8_000
         __Observation_Services = new Lazy<CqlValueSet>(this.Observation_Services_Value);
         __Patient_Expired = new Lazy<CqlValueSet>(this.Patient_Expired_Value);
         __Ticagrelor_Therapy = new Lazy<CqlValueSet>(this.Ticagrelor_Therapy_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Non_Elective_Inpatient_Encounter = new Lazy<IEnumerable<Encounter>>(this.Non_Elective_Inpatient_Encounter_Value);
@@ -85,6 +85,25 @@ public class TJCOverallFHIR_1_8_000
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
 
     #endregion
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
 
 	private CqlValueSet Comfort_Measures_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", null);
@@ -189,27 +208,6 @@ public class TJCOverallFHIR_1_8_000
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.39")]
 	public CqlValueSet Ticagrelor_Therapy() => 
 		__Ticagrelor_Therapy.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

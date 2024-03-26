@@ -1137,72 +1137,18 @@ namespace Hl7.Cql.Compiler
                     ?? throw this.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
             }
 
-            // If that failed, try some hard-coded special cases from the FHIRHelpers
-            if (op.libraryName?.StartsWith("FHIRHelpers") == true)
+            if (op.libraryName is { } libraryAlias)
             {
-                if (DetermineFhirHelpersReturnType(op) is { } resolved) return resolved;
+                var libraryKey = LibraryContext.GetNameAndVersionFromAlias(libraryAlias);
+
+                var libraryContextDefinition = 
+                    LibraryContext
+                    .LibraryDefinitions[libraryKey, op.name, operandTypes.ToArray()];
+                return libraryContextDefinition.ReturnType;
             }
 
             // We failed....
             throw this.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
-        }
-
-        private Type? DetermineFhirHelpersReturnType(FunctionRef op) // TODO: Remove hack (in another PR)
-        {
-            // cql-to-elm does not handle FHIRHelpers conversion function refs appropriately; they are missing resultTypeSpecifiers
-            return op.name switch
-            {
-                "ToDate" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!,
-                "ToDateTime" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!,
-                "ToQuantity" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!,
-                "ToInteger" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!,
-                "ToBoolean" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!,
-                "ToString" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!,
-                "ToDecimal" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!,
-                "ToRatio" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!,
-                "ToCode" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!,
-                "ToConcept" => _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!,
-                "ToValue" => typeof(object),  // choice type
-                "ToInterval" when op is { resultTypeSpecifier: null, resultTypeName: null } => BindToInterval(),
-                _ => null
-            };
-
-            Type? BindToInterval()
-            {
-                if (op.operand?.Length == 1)
-                {
-                    var operand = op.operand![0];
-                    var typeName = operand.resultTypeName?.Name;
-
-                    if (operand is As @as)
-                    {
-                        typeName = @as.asType?.Name;
-                        if (typeName == null && @as.asTypeSpecifier != null)
-                            typeName = @as.asTypeSpecifier.resultTypeName.Name;
-                        if (typeName == null)
-                            typeName = @as.resultTypeName.Name;
-                    }
-
-                    if (typeName == "{http://hl7.org/fhir}Period")
-                    {
-                        var pointType = _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
-                        var intervalType = _typeManager.Resolver.IntervalType(pointType!);
-                        {
-                            return intervalType;
-                        }
-                    }
-                    else if (typeName == "{http://hl7.org/fhir}Range")
-                    {
-                        var pointType = _typeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
-                        var intervalType = _typeManager.Resolver.IntervalType(pointType!);
-                        {
-                            return intervalType;
-                        }
-                    }
-                }
-
-                return null;
-            }
         }
 
         protected Expression ExpressionRef(ExpressionRef expressionRef)
@@ -1245,7 +1191,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ParameterRef(ParameterRef op)
         {
-            if (LibraryContext.Definitions.TryGetValue(LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
+            if (LibraryContext.LibraryDefinitions.TryGetValue(LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
             {
                 var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda);
                 return invoke;
@@ -1285,7 +1231,7 @@ namespace Hl7.Cql.Compiler
         {
             var definitionsProperty = Expression.Property(LibraryDefinitionsBuilder.ContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string libraryName = LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
+            string libraryName = LibraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
                 ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
@@ -1314,7 +1260,7 @@ namespace Hl7.Cql.Compiler
         {
             var definitionsProperty = Expression.Property(LibraryDefinitionsBuilder.ContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
-            string libraryName = LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError: false)
+            string libraryName = LibraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
                                   ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
