@@ -21,3 +21,8 @@ internal readonly record struct MissingIdentifierError(IGetNameAndVersion Source
 {
     public string GetMessage() => $"{Source.GetType().Name} did not have an identifier.";
 }
+
+internal readonly record struct IncludeDefMissingAliasError(IncludeDef IncludeDef) : ICqlError
+{
+    public string GetMessage() => $"IncludeDef did not have an alias. IncludeDef: {IncludeDef.ToString() ?? IncludeDef.localId}";
+}

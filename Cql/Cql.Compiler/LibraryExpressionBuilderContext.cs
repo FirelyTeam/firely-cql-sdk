@@ -46,7 +46,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
         LibrarySetContext = libsCtx;
 
         // Internal State
-        _libraryNameAndVersionByAlias = new();
+        _libraryIdentifiersByAlias = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
         _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
@@ -65,7 +65,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
 
-    private void BuildIncludedDefinitions()
+    private void AddLibraryDefinitionsFromIncludes()
     {
         if (LibrarySetContext != null)
         {
@@ -92,25 +92,25 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     #endregion
 
-    #region Local Library Identifiers
+    #region Library Identifiers by Alias
 
-    private readonly Dictionary<string, string> _libraryNameAndVersionByAlias;
+    private readonly Dictionary<string, string> _libraryIdentifiersByAlias;
 
     public void AddAliasForNameAndVersion(string alias, string libraryKey) =>
-        _libraryNameAndVersionByAlias.Add(alias, libraryKey);
+        _libraryIdentifiersByAlias.Add(alias, libraryKey);
 
     public string? GetNameAndVersionFromAlias(string? alias, bool throwError = true)
     {
         if (alias == null)
             return LibraryKey;
         if (throwError)
-            return _libraryNameAndVersionByAlias[alias];
-        _libraryNameAndVersionByAlias.TryGetValue(alias, out string? libraryKey);
+            return _libraryIdentifiersByAlias[alias];
+        _libraryIdentifiersByAlias.TryGetValue(alias, out string? libraryKey);
         return libraryKey;
     }
 
     public bool HasAliasForNameAndVersion(string libraryKey) => 
-        _libraryNameAndVersionByAlias.ContainsValue(libraryKey);
+        _libraryIdentifiersByAlias.ContainsValue(libraryKey);
 
     #endregion
 
@@ -155,7 +155,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
 
-    private void BuildIncludedCodeSystemRefs()
+    private void AddCodeSystemRefsFromIncludes()
     {
         if (LibrarySetContext != null)
         {

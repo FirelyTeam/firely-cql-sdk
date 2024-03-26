@@ -1,11 +1,30 @@
 ﻿#pragma warning disable IDE1006 // Naming violation suppressed.
 #pragma warning disable RS0016 // Undocumented public api members.
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Fhir.Model;
 using System.Diagnostics;
 
 namespace Hl7.Cql.Elm;
+
+partial class IncludeDef
+{
+    /// <summary>
+    /// Gets the alias of the IncludeDef.
+    /// </summary>
+    /// <param name="throwError">Indicates whether to throw an exception if the alias is missing.</param>
+    /// <returns>The alias of the IncludeDef.</returns>
+    public string? GetAlias(bool throwError = true)
+    {
+        if (!string.IsNullOrEmpty(localIdentifier))
+            return localIdentifier!;
+        if (!string.IsNullOrEmpty(path))
+            return path!;
+        if (throwError)
+            throw new IncludeDefMissingAliasError(this).ToException();
+        return null!;
+    }
+}
 
 #region NameAndVersion
 

@@ -23,8 +23,8 @@ partial class LibraryExpressionBuilder
             {
                 CreateExpressionBuilder().ProcessIncludes(includeDef);
             }
-            BuildIncludedDefinitions();
-            BuildIncludedCodeSystemRefs();
+            AddLibraryDefinitionsFromIncludes();
+            AddCodeSystemRefsFromIncludes();
         }
 
         if (Library.codeSystems is { Length: > 0 } codeSystemDefs)
@@ -295,10 +295,7 @@ partial class ExpressionBuilder
     {
         using (PushElement(includeDef))
         {
-            var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
-                ? includeDef.localIdentifier!
-                : includeDef.path!;
-
+            var alias = includeDef.GetAlias()!;
             var libNav = includeDef.NameAndVersion(false) ??
                          throw this.NewExpressionBuildingException(
                              $"Include {includeDef.localId} does not have a well-formed name and version", null);
