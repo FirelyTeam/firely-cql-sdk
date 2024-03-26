@@ -264,7 +264,7 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.Floor(4)
-            ", "Could not find library: Math*", "Could not resolve call to operator*");
+            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve call to operator*");
         }
 
         [TestMethod]
@@ -290,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.MaxInt
-            ", "Could not find library: Math*", "Unable to resolve identifier MaxInt in library Math.");
+            ", "Unable to resolve library: Math version 'latest'*", "Unable to resolve identifier MaxInt in library Math.");
         }
 
 
@@ -443,7 +443,7 @@ namespace Hl7.Cql.CqlToElm.Test
             include Math
 
              define error: Patient
-            ", "Could not find library: Math*", "Unable to resolve identifier 'Patient'.");
+            ", "Unable to resolve library: Math version 'latest'*", "Unable to resolve identifier 'Patient'.");
         }
 
         [TestMethod]

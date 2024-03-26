@@ -20,7 +20,7 @@ namespace Hl7.Cql.Elm
         /// </summary>
         internal static bool IsVisible(this IDefinitionElement symbol, AccessModifier access)
         {
-            return access > symbol.Access;
+            return access >= symbol.Access;
         }
 
         /// <summary>
