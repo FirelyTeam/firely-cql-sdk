@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace Hl7.Cql.Compiler;
 
-internal readonly record struct BuilderContextInfo(
+internal readonly record struct BuilderDebuggerInfo(
     string ElementType,
     string? Locator = null,
     string? ResultType = null,
@@ -36,9 +36,9 @@ internal readonly record struct BuilderContextInfo(
         return sb.ToString();
     }
 
-    public static BuilderContextInfo FromElement(Elm.Element element)
+    public static BuilderDebuggerInfo FromElement(Elm.Element element)
     {
-        BuilderContextInfo obj = new(
+        BuilderDebuggerInfo obj = new(
             ElementType: element.GetType().Name,
             Locator: element.locator,
             ResultType: GetElemTypeName(element),

@@ -18,101 +18,101 @@ namespace Hl7.Cql.Compiler
     internal partial class ExpressionBuilder
     {
 
-        protected Expression? Combine(elm.Combine e, ExpressionBuilderContext ctx)
+        protected Expression? Combine(elm.Combine e)
         {
-            var source = TranslateExpression(e.source!, ctx);
+            var source = TranslateExpression(e.source!);
             var operand = e.separator == null
                 ? Expression.Constant(null, typeof(string))
-                : TranslateExpression(e.separator, ctx);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Combine, ctx.RuntimeContextParameter, source, operand);
+                : TranslateExpression(e.separator);
+            var call = _operatorBinding.Bind(CqlOperator.Combine, LibraryDefinitionsBuilder.ContextParameter, source, operand);
             return call;
         }
 
-        protected Expression Concatenate(elm.Concatenate e, ExpressionBuilderContext ctx) =>
-            NaryOperator(CqlOperator.Concatenate, e, ctx);
+        protected Expression Concatenate(elm.Concatenate e) =>
+            NaryOperator(CqlOperator.Concatenate, e);
 
-        protected Expression? EndsWith(elm.EndsWith e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.EndsWith, e, ctx);
+        protected Expression? EndsWith(elm.EndsWith e) =>
+            BinaryOperator(CqlOperator.EndsWith, e);
 
-        protected Expression Indexer(elm.Indexer e, ExpressionBuilderContext ctx)
+        protected Expression Indexer(elm.Indexer e)
         {
-            var left = TranslateExpression(e!.operand![0]!, ctx);
-            var right = TranslateExpression(e!.operand![1]!, ctx);
+            var left = TranslateExpression(e!.operand![0]!);
+            var right = TranslateExpression(e!.operand![1]!);
             if (left.Type == typeof(string))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.CharAt, ctx.RuntimeContextParameter, left, right);
+                return _operatorBinding.Bind(CqlOperator.CharAt, LibraryDefinitionsBuilder.ContextParameter, left, right);
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.ElementAt, ctx.RuntimeContextParameter, left, right);
+                return _operatorBinding.Bind(CqlOperator.ElementAt, LibraryDefinitionsBuilder.ContextParameter, left, right);
             }
-            else throw new NotImplementedException().WithContext(ctx);
+            else throw new NotImplementedException().WithContext(this);
         }
 
-        protected Expression? LastPositionOf(elm.LastPositionOf e, ExpressionBuilderContext ctx)
+        protected Expression? LastPositionOf(elm.LastPositionOf e)
         {
-            var @string = TranslateExpression(e!.@string!, ctx);
-            var pattern = TranslateExpression(e!.pattern!, ctx);
-            return ctx.OperatorBinding.Bind(CqlOperator.LastPositionOf, ctx.RuntimeContextParameter, @string, pattern);
+            var @string = TranslateExpression(e!.@string!);
+            var pattern = TranslateExpression(e!.pattern!);
+            return _operatorBinding.Bind(CqlOperator.LastPositionOf, LibraryDefinitionsBuilder.ContextParameter, @string, pattern);
         }
 
-        protected Expression? Length(elm.Length len, ExpressionBuilderContext ctx)
+        protected Expression? Length(elm.Length len)
         {
-            var operand = TranslateExpression(len.operand!, ctx);
+            var operand = TranslateExpression(len.operand!);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.ListLength, ctx.RuntimeContextParameter, operand);
+                return _operatorBinding.Bind(CqlOperator.ListLength, LibraryDefinitionsBuilder.ContextParameter, operand);
             }
             else if (operand.Type == typeof(string))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.StringLength, ctx.RuntimeContextParameter, operand);
+                return _operatorBinding.Bind(CqlOperator.StringLength, LibraryDefinitionsBuilder.ContextParameter, operand);
             }
-            else throw new NotImplementedException().WithContext(ctx);
+            else throw new NotImplementedException().WithContext(this);
         }
 
-        protected Expression? Lower(elm.Lower e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Lower, e, ctx);
+        protected Expression? Lower(elm.Lower e) =>
+            UnaryOperator(CqlOperator.Lower, e);
 
-        protected Expression? Matches(elm.Matches e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Matches, e, ctx);
+        protected Expression? Matches(elm.Matches e) =>
+            BinaryOperator(CqlOperator.Matches, e);
 
-        protected Expression PositionOf(elm.PositionOf e, ExpressionBuilderContext ctx)
+        protected Expression PositionOf(elm.PositionOf e)
         {
-            var @string = TranslateExpression(e!.@string!, ctx);
-            var pattern = TranslateExpression(e!.pattern!, ctx);
-            return ctx.OperatorBinding.Bind(CqlOperator.PositionOf, ctx.RuntimeContextParameter, pattern, @string);
+            var @string = TranslateExpression(e!.@string!);
+            var pattern = TranslateExpression(e!.pattern!);
+            return _operatorBinding.Bind(CqlOperator.PositionOf, LibraryDefinitionsBuilder.ContextParameter, pattern, @string);
 
         }
 
-        protected Expression? ReplaceMatches(elm.ReplaceMatches e, ExpressionBuilderContext ctx)
+        protected Expression? ReplaceMatches(elm.ReplaceMatches e)
         {
-            var source = TranslateExpression(e.operand![0]!, ctx);
-            var pattern = TranslateExpression(e.operand![1]!, ctx);
-            var substitution = TranslateExpression(e.operand![2]!, ctx);
-            return ctx.OperatorBinding.Bind(CqlOperator.ReplaceMatches, ctx.RuntimeContextParameter, source, pattern, substitution);
+            var source = TranslateExpression(e.operand![0]!);
+            var pattern = TranslateExpression(e.operand![1]!);
+            var substitution = TranslateExpression(e.operand![2]!);
+            return _operatorBinding.Bind(CqlOperator.ReplaceMatches, LibraryDefinitionsBuilder.ContextParameter, source, pattern, substitution);
         }
 
-        protected Expression Split(elm.Split e, ExpressionBuilderContext ctx)
+        protected Expression Split(elm.Split e)
         {
-            var stringToSplit = TranslateExpression(e.stringToSplit!, ctx);
-            var separator = TranslateExpression(e.separator!, ctx);
-            return ctx.OperatorBinding.Bind(CqlOperator.Split, ctx.RuntimeContextParameter, stringToSplit, separator);
+            var stringToSplit = TranslateExpression(e.stringToSplit!);
+            var separator = TranslateExpression(e.separator!);
+            return _operatorBinding.Bind(CqlOperator.Split, LibraryDefinitionsBuilder.ContextParameter, stringToSplit, separator);
         }
 
-        protected Expression? StartsWith(elm.StartsWith e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.StartsWith, e, ctx);
+        protected Expression? StartsWith(elm.StartsWith e) =>
+            BinaryOperator(CqlOperator.StartsWith, e);
 
-        protected Expression? Substring(elm.Substring e, ExpressionBuilderContext ctx)
+        protected Expression? Substring(elm.Substring e)
         {
-            var stringToSub = TranslateExpression(e!.stringToSub!, ctx);
-            var startIndex = TranslateExpression(e!.startIndex!, ctx);
+            var stringToSub = TranslateExpression(e!.stringToSub!);
+            var startIndex = TranslateExpression(e!.startIndex!);
             var length = e.length == null
                 ? Expression.Constant(null, typeof(int?))
-                : TranslateExpression(e.length, ctx);
-            return ctx.OperatorBinding.Bind(CqlOperator.Substring, ctx.RuntimeContextParameter, stringToSub, startIndex, length);
+                : TranslateExpression(e.length);
+            return _operatorBinding.Bind(CqlOperator.Substring, LibraryDefinitionsBuilder.ContextParameter, stringToSub, startIndex, length);
         }
 
-        protected Expression? Upper(elm.Upper e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Upper, e, ctx);
+        protected Expression? Upper(elm.Upper e) =>
+            UnaryOperator(CqlOperator.Upper, e);
     }
 }

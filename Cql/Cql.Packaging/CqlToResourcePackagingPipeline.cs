@@ -14,19 +14,19 @@ namespace Hl7.Cql.Packaging;
 internal class CqlToResourcePackagingPipeline
 {
     protected readonly ResourcePackager _resourcePackager;
-    protected readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
+    protected readonly LibraryDefinitionsBuilder _LibraryDefinitionsBuilder;
     protected readonly AssemblyCompiler _assemblyCompiler;
     protected readonly CqlToResourcePackagingOptions _options;
 
     public CqlToResourcePackagingPipeline(
         IOptions<CqlToResourcePackagingOptions> options,
-        ResourcePackager resourcePackager, 
-        LibrarySetExpressionBuilder librarySetExpressionBuilder, 
+        ResourcePackager resourcePackager,
+        LibraryDefinitionsBuilder libraryDefinitionsBuilder, 
         AssemblyCompiler assemblyCompiler)
     {
         _options = options.Value;
         _resourcePackager = resourcePackager;
-        _librarySetExpressionBuilder = librarySetExpressionBuilder;
+        _LibraryDefinitionsBuilder = libraryDefinitionsBuilder;
         _assemblyCompiler = assemblyCompiler;
     }
 
@@ -120,7 +120,7 @@ internal class CqlToResourcePackagingPipeline
         _assemblyCompiler.Compile(librarySet, definitions);
 
     protected virtual void BuildExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) => 
-        _librarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
+        _LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet, definitions);
 
     protected virtual LibrarySet LoadElmFiles()
     {

@@ -1,27 +1,28 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Exceptions;
+using Expression = System.Linq.Expressions.Expression;
+
 
 namespace Hl7.Cql.Compiler;
 
 internal sealed class OperatorBindingRethrowDecorator : OperatorBinding
 {
-    private readonly IBuilderContext _owningBuilderContext;
+    private readonly IBuilderNode _owningBuilder;
 
-    public static OperatorBinding Decorate(IBuilderContext owningBuilderContext, OperatorBinding operatorBinding) =>
+    public static OperatorBinding Decorate(IBuilderNode owningBuilder, OperatorBinding operatorBinding) =>
         operatorBinding switch
         {
-            OperatorBindingRethrowDecorator fromSameContext when fromSameContext._owningBuilderContext == owningBuilderContext => fromSameContext,
-            OperatorBindingRethrowDecorator fromAnotherContext => new OperatorBindingRethrowDecorator(owningBuilderContext, fromAnotherContext.Inner),
-            _ => new OperatorBindingRethrowDecorator(owningBuilderContext, operatorBinding)
+            OperatorBindingRethrowDecorator fromSameContext when fromSameContext._owningBuilder == owningBuilder => fromSameContext,
+            OperatorBindingRethrowDecorator fromAnotherContext => new OperatorBindingRethrowDecorator(owningBuilder, fromAnotherContext.Inner),
+            _ => new OperatorBindingRethrowDecorator(owningBuilder, operatorBinding)
         };
 
     private OperatorBindingRethrowDecorator(
-        IBuilderContext owningBuilderContext,
+        IBuilderNode owningBuilder,
         OperatorBinding inner)
     {
-        _owningBuilderContext = owningBuilderContext;
+        _owningBuilder = owningBuilder;
         Inner = inner;
     }
 
@@ -39,7 +40,7 @@ internal sealed class OperatorBindingRethrowDecorator : OperatorBinding
         }
         catch (Exception e)
         {
-            throw _owningBuilderContext.NewExpressionBuildingException(e.Message, e);
+            throw _owningBuilder.NewExpressionBuildingException(e.Message, e);
         }
     }
 }
