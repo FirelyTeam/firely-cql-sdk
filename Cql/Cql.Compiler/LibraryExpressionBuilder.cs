@@ -295,7 +295,7 @@ partial class ExpressionBuilder
     {
         using (PushElement(includeDef))
         {
-            var alias = includeDef.GetAlias()!;
+            var alias = includeDef.GetLibraryAlias()!;
             var libNav = includeDef.NameAndVersion(false) ??
                          throw this.NewExpressionBuildingException(
                              $"Include {includeDef.localId} does not have a well-formed name and version", null);

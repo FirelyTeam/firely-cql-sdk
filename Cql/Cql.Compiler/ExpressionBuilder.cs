@@ -302,7 +302,7 @@ namespace Hl7.Cql.Compiler
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
             var type = TypeFor(valueSetRef)!;
-            var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet));
+            var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.GetLibraryAlias(false), typeof(CqlValueSet));
 
             if (IsOrImplementsIEnumerableOfT(type))
             {
@@ -412,7 +412,7 @@ namespace Hl7.Cql.Compiler
                 throw this.NewExpressionBuildingException("The code ref has no name.");
 
             var type = _typeManager.Resolver.ResolveType(codeRef.resultTypeName.Name) ?? throw this.NewExpressionBuildingException($"Unable to resolve type {codeRef.resultTypeName}");
-            return InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.libraryName, type!);
+            return InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.GetLibraryAlias(false), type!);
         }
 
         private Expression CodeSystemRef(CodeSystemRef codeSystemRef)
@@ -421,7 +421,7 @@ namespace Hl7.Cql.Compiler
                 throw this.NewExpressionBuildingException("The code system ref has no name.");
 
             var type = _typeManager.Resolver.CodeType.MakeArrayType();
-            return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type!);
+            return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.GetLibraryAlias(false), type!);
         }
         protected Expression ConceptRef(ConceptRef conceptRef)
         {
@@ -429,7 +429,7 @@ namespace Hl7.Cql.Compiler
                 throw this.NewExpressionBuildingException("The concept ref has no name.");
 
             var type = _typeManager.Resolver.CodeType.MakeArrayType();
-            return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type!);
+            return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.GetLibraryAlias(false), type!);
         }
 
         protected Expression Instance(Instance ine)
@@ -869,7 +869,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (string.IsNullOrWhiteSpace(valueSetRef.name))
                         throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-                    var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef!.libraryName, typeof(CqlValueSet));
+                    var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.GetLibraryAlias(false), typeof(CqlValueSet));
                     var call = _operatorBinding.Bind(CqlOperator.Retrieve, LibraryDefinitionsBuilder.ContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
                     return call;
@@ -1039,7 +1039,7 @@ namespace Hl7.Cql.Compiler
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
-            if (op.libraryName != null && op.libraryName.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase))
+            if (op.GetLibraryAlias(false) is {} libraryAlias && libraryAlias.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase))
             {
                 if (op.name!.Equals("tostring", StringComparison.OrdinalIgnoreCase))
                 {
@@ -1060,7 +1060,7 @@ namespace Hl7.Cql.Compiler
             // to the actual function are.
             operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
 
-            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands);
+            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.GetLibraryAlias(false), funcType, operands);
             return invoke;
         }
 
@@ -1134,20 +1134,20 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.resultTypeName?.Name))
             {
                 return _typeManager.Resolver.ResolveType(op.resultTypeName.Name!)
-                    ?? throw this.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
+                    ?? throw this.NewExpressionBuildingException($"Cannot determine type for function {op.GetLibraryAlias(false) ?? ""}.{op.name}");
             }
 
-            if (op.libraryName is { } libraryAlias)
+            if (op.GetLibraryAlias(false) is { } libraryAlias)
             {
                 var libraryKey = LibraryContext.GetNameAndVersionFromAlias(libraryAlias);
                 if (!LibraryContext.LibraryDefinitions.TryGetValue(libraryKey, op.name, operandTypes.ToArray(), out var definition))
-                    throw this.NewExpressionBuildingException($"Cannot resolve a library definition for function {op.libraryName ?? ""}.{op.name}");
+                    throw this.NewExpressionBuildingException($"Cannot resolve a library definition for function {op.GetLibraryAlias() ?? ""}.{op.name}");
 
                 return definition.ReturnType;
             }
 
             // We failed....
-            throw this.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
+            throw this.NewExpressionBuildingException($"Cannot determine type for function {op.GetLibraryAlias(false) ?? ""}.{op.name}");
         }
 
         protected Expression ExpressionRef(ExpressionRef expressionRef)
@@ -1178,7 +1178,7 @@ namespace Hl7.Cql.Compiler
                 if (expressionType == null)
                     throw this.NewExpressionBuildingException($"Unable to determine type for {expressionRef.localId}");
 
-                var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType);
+                var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.GetLibraryAlias(false), expressionType);
 
                 return invoke;
             }
@@ -1224,7 +1224,9 @@ namespace Hl7.Cql.Compiler
         /// <param name="definitionType">The Func or Action type of this definition</param>
         /// <param name="arguments">The function arguments</param>
         /// <returns></returns>
-        protected Expression InvokeDefinedFunctionThroughRuntimeContext(string name, string libraryAlias,
+        protected Expression InvokeDefinedFunctionThroughRuntimeContext(
+            string name, 
+            string? libraryAlias,
             Type definitionType,
             Expression[] arguments)
         {

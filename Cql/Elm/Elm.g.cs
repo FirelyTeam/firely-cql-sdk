@@ -2330,7 +2330,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string libraryName {
+        private string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -2456,7 +2456,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string libraryName {
+        private string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -3735,7 +3735,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string libraryName {
+        private string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -5147,7 +5147,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string libraryName {
+        private string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -5204,7 +5204,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string libraryName {
+        private string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -5240,7 +5240,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string libraryName {
+        private string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -5314,7 +5314,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string libraryName {
+        private string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -5322,7 +5322,7 @@ namespace Hl7.Cql.Elm {
                 this.libraryNameField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool preserve {

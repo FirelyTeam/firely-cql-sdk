@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Fhir.Language.Debugging;
 
 namespace Hl7.Cql.Elm;
 
@@ -22,7 +23,7 @@ internal readonly record struct MissingIdentifierError(IGetNameAndVersion Source
     public string GetMessage() => $"{Source.GetType().Name} did not have an identifier.";
 }
 
-internal readonly record struct IncludeDefMissingAliasError(IncludeDef IncludeDef) : ICqlError
+internal readonly record struct MissingAliasError(IGetLibraryAlias Source) : ICqlError
 {
-    public string GetMessage() => $"IncludeDef did not have an alias. IncludeDef: {IncludeDef.ToString() ?? IncludeDef.localId}";
+    public string GetMessage() => $"{Source.GetType().Name} did not have an alias. Source: {Source}";
 }

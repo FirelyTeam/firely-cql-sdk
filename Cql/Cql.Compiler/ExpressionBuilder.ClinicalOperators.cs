@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
         protected Expression InValueSet(elm.InValueSet e)
         {
             var code = TranslateExpression(e.code!);
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
+            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.GetLibraryAlias(false), typeof(CqlValueSet));
             var codeType = code.Type;
             if (codeType == _typeManager.Resolver.CodeType)
             {
@@ -60,7 +60,7 @@ namespace Hl7.Cql.Compiler
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
                 throw this.NewExpressionBuildingException("Only List types are allowed for AnyInValueSet");
             var codeType = _typeManager.Resolver.GetListElementType(codes.Type, true)!;
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
+            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.GetLibraryAlias(false), typeof(CqlValueSet));
             if (codeType == _typeManager.Resolver.CodeType)
             {
                 return _operatorBinding.Bind(CqlOperator.CodesInValueSet, LibraryDefinitionsBuilder.ContextParameter, codes, valueSet);
