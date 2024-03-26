@@ -85,6 +85,8 @@ partial class ExpressionBuilder
     public void ProcessCodeSystemDef(
         CodeSystemDef codeSystem)
     {
+        using var _ = PushElement(codeSystem);
+
         if (LibraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
         {
             var initMembers = codes
@@ -115,6 +117,8 @@ partial class ExpressionBuilder
     public void ProcessConceptDef(
         ConceptDef conceptDef)
     {
+        using var _ = PushElement(conceptDef);
+
         if (conceptDef.code.Length <= 0)
         {
             var newArray =
@@ -156,6 +160,8 @@ partial class ExpressionBuilder
         CodeDef codeDef,
         ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet)
     {
+        using var _ = PushElement(codeDef);
+
         if (codeDef.codeSystem == null)
             throw this.NewExpressionBuildingException("Code definition has a null codeSystem node.", null);
 
@@ -184,6 +190,8 @@ partial class ExpressionBuilder
     public void ProcessExpressionDef(
         ExpressionDef expressionDef)
     {
+        using var _ = PushElement(expressionDef);
+
         if (string.IsNullOrWhiteSpace(expressionDef.name))
         {
             throw this.NewExpressionBuildingException($"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.", null);
@@ -277,6 +285,8 @@ partial class ExpressionBuilder
     public void ProcessIncludes(
         IncludeDef includeDef)
     {
+        using var _ = PushElement(includeDef);
+
         var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
             ? includeDef.localIdentifier!
             : includeDef.path!;
@@ -290,6 +300,8 @@ partial class ExpressionBuilder
     public void ProcessParameterDef(
         ParameterDef parameter)
     {
+        using var _ = PushElement(parameter);
+
         if (LibraryContext.Definitions.ContainsKey(LibraryContext.LibraryKey, parameter.name!))
             throw this.NewExpressionBuildingException($"There is already a definition named {parameter.name}", null);
 
@@ -316,6 +328,8 @@ partial class ExpressionBuilder
     public void ProcessValueSetDef(
         ValueSetDef valueSetDef)
     {
+        using var _ = PushElement(valueSetDef);
+
         var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
             Expression.Constant(valueSetDef.version, typeof(string)));
         var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
