@@ -41,7 +41,7 @@ partial class ExpressionBuilder : IBuilderNode
         if (previous == element) return new EmptyDisposable();
 
         _elementStack.Push(element);
-        return new PopElementToken(this) { PreviousElement = previous };
+        return new PopElementToken(this, previous);
     }
 
     private readonly record struct ExpressionBuilderNode : IBuilderNode
@@ -62,15 +62,22 @@ partial class ExpressionBuilder : IBuilderNode
     private readonly record struct PopElementToken : IDisposable
     {
         private readonly ExpressionBuilder _owner;
+        private readonly elm.Element? _previousElement;
 
-        public PopElementToken(ExpressionBuilder Owner)
+        public PopElementToken(ExpressionBuilder owner, elm.Element? previousElement)
         {
-            _owner = Owner;
+            _owner = owner;
+            _previousElement = previousElement;
         }
 
-        public elm.Element? PreviousElement { get; init; }
+        void IDisposable.Dispose()
+        {
+            var expectedPreviousElement = _owner._elementStack.Count > 1 ? _owner._elementStack.ElementAt(1) : null;
+            if (_previousElement != expectedPreviousElement)
+                throw new InvalidOperationException("Popping should be called in the correct reverse order.");
 
-        void IDisposable.Dispose() => _ = _owner._elementStack.Pop();
+            _ = _owner._elementStack.Pop();
+        }
     }
 
     private readonly record struct EmptyDisposable : IDisposable
