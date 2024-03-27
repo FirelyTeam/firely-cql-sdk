@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -914,7 +914,7 @@ namespace Hl7.Cql.Compiler
                         return call;
                     }
                     var propogate = PropagateNull(scopeExpression, pathMemberInfo);
-                    // This is only necessary for Firely b/c it always initializes colleciton members even if they are 
+                    // This is only necessary for Firely b/c it always initializes colleciton members even if they are
                     // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
                     //
                     //if (typeof(Resource).IsAssignableFrom(scopeExpression.Type)
@@ -1036,6 +1036,16 @@ namespace Hl7.Cql.Compiler
 
             var funcType = GetFuncType(funcTypeParameters);
 
+
+            // if (op.libraryName is { } libraryAlias)
+            // {
+            //     var libraryKey = LibraryContext.GetNameAndVersionFromAlias(libraryAlias);
+            //     if (!LibraryContext.LibraryDefinitions.TryGetValue(libraryKey, op.name, operandTypes.ToArray(), out var definition))
+            //         throw this.NewExpressionBuildingException($"Cannot resolve a library definition for function {op.libraryName ?? ""}.{op.name}");
+            //
+            //     return definition;
+            // }
+
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
@@ -1056,6 +1066,7 @@ namespace Hl7.Cql.Compiler
                     }
                 }
             }
+
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
             operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
@@ -1225,7 +1236,7 @@ namespace Hl7.Cql.Compiler
         /// <param name="arguments">The function arguments</param>
         /// <returns></returns>
         protected Expression InvokeDefinedFunctionThroughRuntimeContext(
-            string name, 
+            string name,
             string? libraryAlias,
             Type definitionType,
             Expression[] arguments)

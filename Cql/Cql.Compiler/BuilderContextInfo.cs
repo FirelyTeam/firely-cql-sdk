@@ -50,7 +50,7 @@ internal readonly record struct BuilderDebuggerInfo(
         {
             StringBuilder sb = new();
             Append(FromNameAndVersion());
-            Append(FromLibraryAlias());
+            Append(FromLibraryName());
             Append(FromContext());
             Append(FromName());
             Append(FromPath());
@@ -66,7 +66,7 @@ internal readonly record struct BuilderDebuggerInfo(
             string? FromPath() => (elem as IGetPath)?.path;
             string? FromContext() => (elem as ExpressionDef)?.context;
             string? FromNameAndVersion() => (elem as IGetNameAndVersion)?.NameAndVersion(throwError: false);
-            string? FromLibraryAlias() => (elem as IGetLibraryName)?.libraryName;
+            string? FromLibraryName() => (elem as IGetLibraryName)?.libraryName;
             string? FromName() => (elem as IGetName)?.name;
         }
 

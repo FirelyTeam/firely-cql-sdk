@@ -12,7 +12,7 @@ public class LibrarySetTests
     public void LoadLibraryAndDependencies_ReturnsLibraryAndDependencies_WhenGivenDirectoryAndLibraryName()
     {
         LibrarySet librarySet = new();
-        var libraries = librarySet.LoadLibraryAndDependencies(Paths.Cms.ElmDir,"DischargedonAntithromboticTherapyFHIR");
+        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir,"DischargedonAntithromboticTherapyFHIR");
         Assert.IsTrue(libraries.Count == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
         Assert.IsTrue(librarySet.Cast<object>().Count() == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
     }
@@ -21,7 +21,7 @@ public class LibrarySetTests
     public void LoadLibraryAndDependencies_ReturnsTopologicallyOrderedLibraries_WhenEnumerating()
     {
         LibrarySet librarySet = new();
-        var libraries = librarySet.LoadLibraryAndDependencies(Paths.Cms.ElmDir, "DischargedonAntithromboticTherapyFHIR");
+        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "DischargedonAntithromboticTherapyFHIR");
         Assert.IsTrue(libraries.Count == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
         Assert.IsTrue(librarySet.Cast<object>().Count() == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
         var list = string.Join(", ", libraries.Select(l => l.identifier.id));
