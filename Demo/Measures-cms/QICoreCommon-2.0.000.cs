@@ -19,6 +19,21 @@ public class QICoreCommon_2_0_000
 
     #region Cached values
 
+    internal Lazy<CqlCode[]> __LOINC;
+    internal Lazy<CqlCode[]> __SNOMEDCT;
+    internal Lazy<CqlCode[]> __ActCode;
+    internal Lazy<CqlCode[]> __RoleCode;
+    internal Lazy<CqlCode[]> __Diagnosis_Role;
+    internal Lazy<CqlCode[]> __RequestIntent;
+    internal Lazy<CqlCode[]> __MedicationRequestCategory;
+    internal Lazy<CqlCode[]> __ConditionClinicalStatusCodes;
+    internal Lazy<CqlCode[]> __ConditionVerificationStatusCodes;
+    internal Lazy<CqlCode[]> __AllergyIntoleranceClinicalStatusCodes;
+    internal Lazy<CqlCode[]> __AllergyIntoleranceVerificationStatusCodes;
+    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
+    internal Lazy<CqlCode[]> __USCoreObservationCategoryExtensionCodes;
+    internal Lazy<CqlCode[]> __ConditionCategory;
+    internal Lazy<CqlCode[]> __USCoreConditionCategoryExtensionCodes;
     internal Lazy<CqlCode> __Birthdate;
     internal Lazy<CqlCode> __Dead;
     internal Lazy<CqlCode> __ER;
@@ -77,21 +92,6 @@ public class QICoreCommon_2_0_000
     internal Lazy<CqlCode> __therapy;
     internal Lazy<CqlCode> __activity;
     internal Lazy<CqlCode> __clinical_test;
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<CqlCode[]> __SNOMEDCT;
-    internal Lazy<CqlCode[]> __ActCode;
-    internal Lazy<CqlCode[]> __RoleCode;
-    internal Lazy<CqlCode[]> __Diagnosis_Role;
-    internal Lazy<CqlCode[]> __RequestIntent;
-    internal Lazy<CqlCode[]> __MedicationRequestCategory;
-    internal Lazy<CqlCode[]> __ConditionClinicalStatusCodes;
-    internal Lazy<CqlCode[]> __ConditionVerificationStatusCodes;
-    internal Lazy<CqlCode[]> __AllergyIntoleranceClinicalStatusCodes;
-    internal Lazy<CqlCode[]> __AllergyIntoleranceVerificationStatusCodes;
-    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
-    internal Lazy<CqlCode[]> __USCoreObservationCategoryExtensionCodes;
-    internal Lazy<CqlCode[]> __ConditionCategory;
-    internal Lazy<CqlCode[]> __USCoreConditionCategoryExtensionCodes;
     internal Lazy<Patient> __Patient;
 
     #endregion
@@ -101,6 +101,21 @@ public class QICoreCommon_2_0_000
 
         FHIRHelpers_4_3_000 = new FHIRHelpers_4_3_000(context);
 
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
+        __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
+        __ActCode = new Lazy<CqlCode[]>(this.ActCode_Value);
+        __RoleCode = new Lazy<CqlCode[]>(this.RoleCode_Value);
+        __Diagnosis_Role = new Lazy<CqlCode[]>(this.Diagnosis_Role_Value);
+        __RequestIntent = new Lazy<CqlCode[]>(this.RequestIntent_Value);
+        __MedicationRequestCategory = new Lazy<CqlCode[]>(this.MedicationRequestCategory_Value);
+        __ConditionClinicalStatusCodes = new Lazy<CqlCode[]>(this.ConditionClinicalStatusCodes_Value);
+        __ConditionVerificationStatusCodes = new Lazy<CqlCode[]>(this.ConditionVerificationStatusCodes_Value);
+        __AllergyIntoleranceClinicalStatusCodes = new Lazy<CqlCode[]>(this.AllergyIntoleranceClinicalStatusCodes_Value);
+        __AllergyIntoleranceVerificationStatusCodes = new Lazy<CqlCode[]>(this.AllergyIntoleranceVerificationStatusCodes_Value);
+        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
+        __USCoreObservationCategoryExtensionCodes = new Lazy<CqlCode[]>(this.USCoreObservationCategoryExtensionCodes_Value);
+        __ConditionCategory = new Lazy<CqlCode[]>(this.ConditionCategory_Value);
+        __USCoreConditionCategoryExtensionCodes = new Lazy<CqlCode[]>(this.USCoreConditionCategoryExtensionCodes_Value);
         __Birthdate = new Lazy<CqlCode>(this.Birthdate_Value);
         __Dead = new Lazy<CqlCode>(this.Dead_Value);
         __ER = new Lazy<CqlCode>(this.ER_Value);
@@ -159,21 +174,6 @@ public class QICoreCommon_2_0_000
         __therapy = new Lazy<CqlCode>(this.therapy_Value);
         __activity = new Lazy<CqlCode>(this.activity_Value);
         __clinical_test = new Lazy<CqlCode>(this.clinical_test_Value);
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
-        __ActCode = new Lazy<CqlCode[]>(this.ActCode_Value);
-        __RoleCode = new Lazy<CqlCode[]>(this.RoleCode_Value);
-        __Diagnosis_Role = new Lazy<CqlCode[]>(this.Diagnosis_Role_Value);
-        __RequestIntent = new Lazy<CqlCode[]>(this.RequestIntent_Value);
-        __MedicationRequestCategory = new Lazy<CqlCode[]>(this.MedicationRequestCategory_Value);
-        __ConditionClinicalStatusCodes = new Lazy<CqlCode[]>(this.ConditionClinicalStatusCodes_Value);
-        __ConditionVerificationStatusCodes = new Lazy<CqlCode[]>(this.ConditionVerificationStatusCodes_Value);
-        __AllergyIntoleranceClinicalStatusCodes = new Lazy<CqlCode[]>(this.AllergyIntoleranceClinicalStatusCodes_Value);
-        __AllergyIntoleranceVerificationStatusCodes = new Lazy<CqlCode[]>(this.AllergyIntoleranceVerificationStatusCodes_Value);
-        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
-        __USCoreObservationCategoryExtensionCodes = new Lazy<CqlCode[]>(this.USCoreObservationCategoryExtensionCodes_Value);
-        __ConditionCategory = new Lazy<CqlCode[]>(this.ConditionCategory_Value);
-        __USCoreConditionCategoryExtensionCodes = new Lazy<CqlCode[]>(this.USCoreConditionCategoryExtensionCodes_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
     }
     #region Dependencies
@@ -181,6 +181,186 @@ public class QICoreCommon_2_0_000
     public FHIRHelpers_4_3_000 FHIRHelpers_4_3_000 { get; }
 
     #endregion
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
+
+	private CqlCode[] SNOMEDCT_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("SNOMEDCT")]
+	public CqlCode[] SNOMEDCT() => 
+		__SNOMEDCT.Value;
+
+	private CqlCode[] ActCode_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("ActCode")]
+	public CqlCode[] ActCode() => 
+		__ActCode.Value;
+
+	private CqlCode[] RoleCode_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("RoleCode")]
+	public CqlCode[] RoleCode() => 
+		__RoleCode.Value;
+
+	private CqlCode[] Diagnosis_Role_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("Diagnosis Role")]
+	public CqlCode[] Diagnosis_Role() => 
+		__Diagnosis_Role.Value;
+
+	private CqlCode[] RequestIntent_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("RequestIntent")]
+	public CqlCode[] RequestIntent() => 
+		__RequestIntent.Value;
+
+	private CqlCode[] MedicationRequestCategory_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("MedicationRequestCategory")]
+	public CqlCode[] MedicationRequestCategory() => 
+		__MedicationRequestCategory.Value;
+
+	private CqlCode[] ConditionClinicalStatusCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("ConditionClinicalStatusCodes")]
+	public CqlCode[] ConditionClinicalStatusCodes() => 
+		__ConditionClinicalStatusCodes.Value;
+
+	private CqlCode[] ConditionVerificationStatusCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("ConditionVerificationStatusCodes")]
+	public CqlCode[] ConditionVerificationStatusCodes() => 
+		__ConditionVerificationStatusCodes.Value;
+
+	private CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
+	public CqlCode[] AllergyIntoleranceClinicalStatusCodes() => 
+		__AllergyIntoleranceClinicalStatusCodes.Value;
+
+	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
+	public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
+		__AllergyIntoleranceVerificationStatusCodes.Value;
+
+	private CqlCode[] ObservationCategoryCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("ObservationCategoryCodes")]
+	public CqlCode[] ObservationCategoryCodes() => 
+		__ObservationCategoryCodes.Value;
+
+	private CqlCode[] USCoreObservationCategoryExtensionCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("USCoreObservationCategoryExtensionCodes")]
+	public CqlCode[] USCoreObservationCategoryExtensionCodes() => 
+		__USCoreObservationCategoryExtensionCodes.Value;
+
+	private CqlCode[] ConditionCategory_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("ConditionCategory")]
+	public CqlCode[] ConditionCategory() => 
+		__ConditionCategory.Value;
+
+	private CqlCode[] USCoreConditionCategoryExtensionCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("USCoreConditionCategoryExtensionCodes")]
+	public CqlCode[] USCoreConditionCategoryExtensionCodes() => 
+		__USCoreConditionCategoryExtensionCodes.Value;
 
 	private CqlCode Birthdate_Value() => 
 		new CqlCode("21112-8", "http://loinc.org", null, null);
@@ -587,258 +767,6 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("clinical-test")]
 	public CqlCode clinical_test() => 
 		__clinical_test.Value;
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private CqlCode[] SNOMEDCT_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("419099009", "http://snomed.info/sct", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
-		__SNOMEDCT.Value;
-
-	private CqlCode[] ActCode_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("FLD", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("HH", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("IMP", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("ACUTE", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("NONAC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("OBSENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("PRENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("SS", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("ActCode")]
-	public CqlCode[] ActCode() => 
-		__ActCode.Value;
-
-	private CqlCode[] RoleCode_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, null),
-			new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("RoleCode")]
-	public CqlCode[] RoleCode() => 
-		__RoleCode.Value;
-
-	private CqlCode[] Diagnosis_Role_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-			new CqlCode("AD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-			new CqlCode("DD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-			new CqlCode("CC", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-			new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-			new CqlCode("pre-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-			new CqlCode("post-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-			new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("Diagnosis Role")]
-	public CqlCode[] Diagnosis_Role() => 
-		__Diagnosis_Role.Value;
-
-	private CqlCode[] RequestIntent_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("RequestIntent")]
-	public CqlCode[] RequestIntent() => 
-		__RequestIntent.Value;
-
-	private CqlCode[] MedicationRequestCategory_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("inpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, null),
-			new CqlCode("outpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, null),
-			new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, null),
-			new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("MedicationRequestCategory")]
-	public CqlCode[] MedicationRequestCategory() => 
-		__MedicationRequestCategory.Value;
-
-	private CqlCode[] ConditionClinicalStatusCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-			new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-			new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-			new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-			new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("ConditionClinicalStatusCodes")]
-	public CqlCode[] ConditionClinicalStatusCodes() => 
-		__ConditionClinicalStatusCodes.Value;
-
-	private CqlCode[] ConditionVerificationStatusCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
-			new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
-			new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
-			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
-			new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
-			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("ConditionVerificationStatusCodes")]
-	public CqlCode[] ConditionVerificationStatusCodes() => 
-		__ConditionVerificationStatusCodes.Value;
-
-	private CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, null),
-			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, null),
-			new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
-	public CqlCode[] AllergyIntoleranceClinicalStatusCodes() => 
-		__AllergyIntoleranceClinicalStatusCodes.Value;
-
-	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
-			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
-			new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
-	public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
-		__AllergyIntoleranceVerificationStatusCodes.Value;
-
-	private CqlCode[] ObservationCategoryCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("imaging", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("procedure", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("therapy", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("activity", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
-		__ObservationCategoryCodes.Value;
-
-	private CqlCode[] USCoreObservationCategoryExtensionCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("clinical-test", "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("USCoreObservationCategoryExtensionCodes")]
-	public CqlCode[] USCoreObservationCategoryExtensionCodes() => 
-		__USCoreObservationCategoryExtensionCodes.Value;
-
-	private CqlCode[] ConditionCategory_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category", null, null),
-			new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("ConditionCategory")]
-	public CqlCode[] ConditionCategory() => 
-		__ConditionCategory.Value;
-
-	private CqlCode[] USCoreConditionCategoryExtensionCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("USCoreConditionCategoryExtensionCodes")]
-	public CqlCode[] USCoreConditionCategoryExtensionCodes() => 
-		__USCoreConditionCategoryExtensionCodes.Value;
 
 	private Patient Patient_Value()
 	{

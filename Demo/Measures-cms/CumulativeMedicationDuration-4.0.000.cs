@@ -19,6 +19,8 @@ public class CumulativeMedicationDuration_4_0_000
 
     #region Cached values
 
+    internal Lazy<CqlCode[]> __V3TimingEvent;
+    internal Lazy<CqlCode[]> __EventTiming;
     internal Lazy<CqlCode> __HS;
     internal Lazy<CqlCode> __WAKE;
     internal Lazy<CqlCode> __C;
@@ -67,8 +69,6 @@ public class CumulativeMedicationDuration_4_0_000
     internal Lazy<CqlCode> __Three_times_daily__qualifier_value_;
     internal Lazy<CqlCode> __Twice_a_day__qualifier_value_;
     internal Lazy<CqlCode> __Two_to_four_times_a_day__qualifier_value_;
-    internal Lazy<CqlCode[]> __V3TimingEvent;
-    internal Lazy<CqlCode[]> __EventTiming;
     internal Lazy<string> __ErrorLevel;
     internal Lazy<Patient> __Patient;
 
@@ -80,6 +80,8 @@ public class CumulativeMedicationDuration_4_0_000
         FHIRHelpers_4_3_000 = new FHIRHelpers_4_3_000(context);
         QICoreCommon_2_0_000 = new QICoreCommon_2_0_000(context);
 
+        __V3TimingEvent = new Lazy<CqlCode[]>(this.V3TimingEvent_Value);
+        __EventTiming = new Lazy<CqlCode[]>(this.EventTiming_Value);
         __HS = new Lazy<CqlCode>(this.HS_Value);
         __WAKE = new Lazy<CqlCode>(this.WAKE_Value);
         __C = new Lazy<CqlCode>(this.C_Value);
@@ -128,8 +130,6 @@ public class CumulativeMedicationDuration_4_0_000
         __Three_times_daily__qualifier_value_ = new Lazy<CqlCode>(this.Three_times_daily__qualifier_value__Value);
         __Twice_a_day__qualifier_value_ = new Lazy<CqlCode>(this.Twice_a_day__qualifier_value__Value);
         __Two_to_four_times_a_day__qualifier_value_ = new Lazy<CqlCode>(this.Two_to_four_times_a_day__qualifier_value__Value);
-        __V3TimingEvent = new Lazy<CqlCode[]>(this.V3TimingEvent_Value);
-        __EventTiming = new Lazy<CqlCode[]>(this.EventTiming_Value);
         __ErrorLevel = new Lazy<string>(this.ErrorLevel_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
     }
@@ -139,6 +139,30 @@ public class CumulativeMedicationDuration_4_0_000
     public QICoreCommon_2_0_000 QICoreCommon_2_0_000 { get; }
 
     #endregion
+
+	private CqlCode[] V3TimingEvent_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("V3TimingEvent")]
+	public CqlCode[] V3TimingEvent() => 
+		__V3TimingEvent.Value;
+
+	private CqlCode[] EventTiming_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("EventTiming")]
+	public CqlCode[] EventTiming() => 
+		__EventTiming.Value;
 
 	private CqlCode HS_Value() => 
 		new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
@@ -475,58 +499,6 @@ public class CumulativeMedicationDuration_4_0_000
     [CqlDeclaration("Two to four times a day (qualifier value)")]
 	public CqlCode Two_to_four_times_a_day__qualifier_value_() => 
 		__Two_to_four_times_a_day__qualifier_value_.Value;
-
-	private CqlCode[] V3TimingEvent_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("V3TimingEvent")]
-	public CqlCode[] V3TimingEvent() => 
-		__V3TimingEvent.Value;
-
-	private CqlCode[] EventTiming_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("MORN", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("NOON", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("AFT", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("EVE", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("PHS", "http://hl7.org/fhir/event-timing", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("EventTiming")]
-	public CqlCode[] EventTiming() => 
-		__EventTiming.Value;
 
 	private string ErrorLevel_Value()
 	{
