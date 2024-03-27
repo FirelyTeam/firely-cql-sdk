@@ -54,15 +54,11 @@ namespace CoreTests
         [TestMethod]
         public void Medication_Request_Example_Test()
         {
-            var files =
-                """
-                    Test\Medication_Request_Example.json
-                    Libs\FHIRHelpers-4.0.1.json
-                    """.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                    .Select(line => new FileInfo($@"Input\ELM\{line}"))
-                    .Where(fi => fi.Exists)
-                    .ToArray();
-            Assert.IsTrue(files.Length==2);
+            var files = new FileInfo[]
+                {
+                   new(@"Input\ELM\Test\Medication_Request_Example.json"),
+                   new(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json")
+                };
             var librarySet = new LibrarySet();
             librarySet.LoadLibraries(files);
 
