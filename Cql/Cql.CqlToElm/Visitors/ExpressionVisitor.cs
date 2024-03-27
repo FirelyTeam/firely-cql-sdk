@@ -113,7 +113,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
                 return new Interval()
-                    .AddUnresolvedOperatorError("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier)
+                    .AddError(Messaging.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
                     .WithLocator(context.Locator())
                     .WithResultType(low.resultTypeSpecifier.ToIntervalType());
         }

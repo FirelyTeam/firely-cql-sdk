@@ -23,15 +23,14 @@ namespace Hl7.Cql.CqlToElm.Test
         protected static IServiceProvider Services;
 
         internal static ExpressionBuilder ExpressionBuilder;
-        
+
         internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
 
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
-        {
-            var services = new ServiceCollection()
+        protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null) =>
+            new ServiceCollection()
                 .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
                 .AddVisitors()
                 .AddContext()
@@ -46,7 +45,11 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddSingleton<ElmFactory>()
                 .AddSingleton<ILibraryProvider, MemoryLibraryProvider>()
                 .AddScoped<CqlToElmConverter>();
-            Services = services.BuildServiceProvider();
+
+        protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
+        {
+
+            Services = ServiceCollection(options).BuildServiceProvider();
 
             var lib = new Library
             {
@@ -57,11 +60,24 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
         protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+        protected virtual Library ConvertLibrary(IServiceProvider services, string cql) =>
+            services.GetRequiredService<CqlToElmConverter>().ConvertLibrary(cql);
 
+       
         internal Library MakeLibrary(string cql, params string[] expectedErrors)
         {
             var library = ConvertLibrary(cql);
 
+            if (expectedErrors.Any())
+                library.ShouldReportError(expectedErrors);
+            else
+                library.ShouldSucceed();
+
+            return library;
+        }
+        internal Library MakeLibrary(IServiceProvider services, string cql, params string[] expectedErrors)
+        {
+            var library = ConvertLibrary(services, cql);
             if (expectedErrors.Any())
                 library.ShouldReportError(expectedErrors);
             else
@@ -159,7 +175,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lts = (IntervalTypeSpecifier)typeSpecifier;
             Assert.IsNotNull(lts.pointType);
             Assert.AreEqual(lts.pointType, pointType);
-           
+
         }
 
         protected void AssertChoiceType(TypeSpecifier specifier, params string[] namedTypes)

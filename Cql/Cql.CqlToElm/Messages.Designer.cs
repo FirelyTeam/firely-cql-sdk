@@ -61,6 +61,33 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not resolve call to operator {0} with signature ({1})..
+        /// </summary>
+        internal static string CouldNotResolveFunction {
+            get {
+                return ResourceManager.GetString("CouldNotResolveFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve identifier {0} in the current library..
+        /// </summary>
+        internal static string CouldNotResolveInCurrent {
+            get {
+                return ResourceManager.GetString("CouldNotResolveInCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve identifier {0} in library {1}..
+        /// </summary>
+        internal static string CouldNotResolveInLibrary {
+            get {
+                return ResourceManager.GetString("CouldNotResolveInLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Identifier {0} is a library and cannot be used as an expression..
         /// </summary>
         internal static string ExpressionCannotBeLibraryRef {
@@ -88,20 +115,20 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
+        /// </summary>
+        internal static string UnableToResolveLibrary {
+            get {
+                return ResourceManager.GetString("UnableToResolveLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A reference to a model library is unexpected at this point..
         /// </summary>
         internal static string UnexpectedLibraryReference {
             get {
                 return ResourceManager.GetString("UnexpectedLibraryReference", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
-        /// </summary>
-        internal static string UnresolvedLibrary {
-            get {
-                return ResourceManager.GetString("UnresolvedLibrary", resourceCulture);
             }
         }
     }

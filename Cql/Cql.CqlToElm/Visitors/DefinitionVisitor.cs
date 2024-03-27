@@ -57,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 
-                error ??= Messaging.UnresolvedLibrary(libraryName, version);
+                error ??= Messaging.UnableToResolveLibrary(libraryName, version);
                 // To be able to continue to parse, create an empty library scope with the name and version
                 // and return that so we can act as if some library was found.
                 var emptyLibrary = new Library { identifier = new VersionedIdentifier { id = libraryName, version = version } };

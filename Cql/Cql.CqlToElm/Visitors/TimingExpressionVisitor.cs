@@ -177,7 +177,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         .WithLocator(context.Locator())
                         .WithId()
                         .WithResultType(SystemTypes.BooleanType)
-                        .AddUnresolvedOperatorError("Start", lhs.resultTypeSpecifier);
+                        .AddError(Messaging.CouldNotResolveFunction("Start", lhs.resultTypeSpecifier));
             }
             else if (firstToken == "ends")
             {
@@ -187,7 +187,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         .WithLocator(context.Locator())
                         .WithId()
                         .WithResultType(SystemTypes.BooleanType)
-                        .AddUnresolvedOperatorError("End", lhs.resultTypeSpecifier);
+                        .AddError(Messaging.CouldNotResolveFunction("End", lhs.resultTypeSpecifier));
             }
             else if (firstToken == "properly")
                 properly = true;

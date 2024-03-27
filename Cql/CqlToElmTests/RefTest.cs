@@ -240,7 +240,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 parameter x default 'bla'
 
                 define {nameof(InvokeParameter)}: x(4)
-            ", "Could not resolve call to operator x with signature(Integer).");
+            ", "Could not resolve call to operator x with signature (Integer).");
         }
 
         [TestMethod]
@@ -290,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.MaxInt
-            ", "Unable to resolve library: Math version 'latest'*", "Unable to resolve identifier MaxInt in library Math.");
+            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier MaxInt in library Math.");
         }
 
 
@@ -443,7 +443,7 @@ namespace Hl7.Cql.CqlToElm.Test
             include Math
 
              define error: Patient
-            ", "Unable to resolve library: Math version 'latest'*", "Unable to resolve identifier 'Patient'.");
+            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier Patient in the current library.");
         }
 
         [TestMethod]

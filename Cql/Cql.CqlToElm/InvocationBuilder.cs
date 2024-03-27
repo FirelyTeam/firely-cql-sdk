@@ -25,12 +25,17 @@ namespace Hl7.Cql.CqlToElm
         public IModelProvider Provider { get; }
         public CoercionProvider CoercionProvider { get; }
         public ElmFactory ElmFactory { get; }
+        public MessageProvider Messaging { get; }
 
-        public InvocationBuilder(IModelProvider provider, CoercionProvider coercionProvider, ElmFactory elmFactory)
+        public InvocationBuilder(IModelProvider provider, 
+            CoercionProvider coercionProvider, 
+            ElmFactory elmFactory,
+            MessageProvider messaging)
         {
             Provider = provider;
             CoercionProvider = coercionProvider;
             ElmFactory = elmFactory;
+            Messaging = messaging;
         }
 
         /// <summary>
@@ -47,7 +52,7 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(systemFunction, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
             expression = systemFunction.Validate(expression);
             var newResultType = ReplaceGenericType(systemFunction.resultTypeSpecifier, result.GenericInferences);
             return expression
@@ -68,7 +73,7 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(result.Function, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
             if (result.Function is SystemFunction systemFunction)
                 expression = systemFunction.Validate(expression);
             var newResultType = ReplaceGenericType(result.Function.resultTypeSpecifier, result.GenericInferences);
@@ -91,7 +96,7 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(function, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
             var newResultType = ReplaceGenericType(function.resultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
@@ -115,8 +120,7 @@ namespace Hl7.Cql.CqlToElm
                 if (result.Error is not null)
                     expression.AddError(result.Error);
                 else
-                    expression.AddUnresolvedOperatorError(result.Function.name,
-                        result.Arguments.Select(arg => arg.Result.resultTypeSpecifier).ToArray());
+                    expression.AddError(Messaging.CouldNotResolveFunction(result.Function.name, result.Arguments.Select(a=>a.Result).ToArray()));
                 return expression;
             }
         }
@@ -180,7 +184,7 @@ namespace Hl7.Cql.CqlToElm
                 }
                 string? error = null;
                 if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))
-                    error = candidate.GetUnresolvedOperatorMessage(arguments.Select(arg => arg.resultTypeSpecifier).ToArray());
+                    error = Messaging.CouldNotResolveFunction(candidate.name, arguments);
                 return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
             }
         }
@@ -299,7 +303,7 @@ namespace Hl7.Cql.CqlToElm
                 firstMatch.Arguments,
                 firstMatch.GenericInferences,
                 firstMatch.Flags,
-                firstMatch.Function.GetUnresolvedOperatorMessage(arguments.Select(t => t.resultTypeSpecifier).ToArray()));
+                Messaging.CouldNotResolveFunction(firstMatch.Function.name, arguments));
             return result;
         }
 

@@ -1,7 +1,9 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -69,10 +71,39 @@ namespace Hl7.Cql.CqlToElm
                 .WithResultType(SystemTypes.AnyType)
                 .AddError(error);
 
-        public static Expression Ref(this ISymbolScope symbolScope, string? libraryName, string identifier)
+        public static Expression Ref(this ISymbolScope symbolScope, string? libraryAlias, string identifier, MessageProvider messaging)
         {
-            var success = TryResolveIdentifier(symbolScope, libraryName, identifier, out var result, out var error);
-            return success ? result!.ToRef(libraryName) : MakeErrorReference(libraryName, identifier, error!);
+            var success = TryResolveIdentifier(symbolScope, libraryAlias, identifier, out var result);
+            if (success)
+            {
+                return result!.ToRef(libraryAlias);
+            }
+            else
+            {
+                if (libraryAlias is not null)
+                {
+                    if (symbolScope.TryGetLibraryNameFromLocalAlias(libraryAlias, out var libraryName))
+                        return MakeErrorReference(libraryAlias, identifier, messaging.CouldNotResolveInLibrary(identifier, libraryName!));
+                    else
+                        return MakeErrorReference(libraryAlias, identifier, messaging.CouldNotResolveInLibrary(identifier, libraryAlias));
+                }
+                else
+                {
+
+                    return MakeErrorReference(libraryAlias, identifier, messaging.CouldNotResolveInCurrent(identifier));
+                }
+            }
+        }
+
+        public static bool TryGetLibraryNameFromLocalAlias(this ISymbolScope symbolScope, string libraryAlias, out string? libraryName)
+        {
+            if (symbolScope.TryResolveIdentifier(null, libraryAlias, out var ele) && ele is IncludeDefSymbol ids)
+            {
+                libraryName = ids!.path;
+                return true;
+            }
+            libraryName = null;
+            return false;
         }
 
         /// <summary>
@@ -81,17 +112,12 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>True if the identifier was found, false otherwise. <paramref name="result"/> will contain the reference
         /// to the definition in the <see cref="ISymbolScope"/> on success or an <see cref="IdentifierRef"/> with an error 
         /// annotation otherwise.</returns>
-        public static bool TryResolveIdentifier(this ISymbolScope symbolScope, string? libraryName, string identifier, out IDefinitionElement? result, out string? error)
+        public static bool TryResolveIdentifier(this ISymbolScope symbolScope, string? libraryName, string identifier, out IDefinitionElement? result)
         {
             result = null;
-            error = null;
-
             if (libraryName is null)
             {
-                if (!symbolScope.TryResolveSymbol(identifier, out result))
-                {
-                    error = $"Unable to resolve identifier '{identifier}'.";
-                }
+                return symbolScope.TryResolveSymbol(identifier, out result);
             }
             else
             {
@@ -99,19 +125,12 @@ namespace Hl7.Cql.CqlToElm
                 {
                     if (library is IncludeDefSymbol includeDef)
                     {
-                        if (includeDef.Library.TryResolveSymbol(identifier, out var definition))
-                            result = definition;
-                        else
-                            error = $"Unable to resolve identifier {identifier} in library {libraryName}.";
+                        return includeDef.Library.TryResolveSymbol(identifier, out result);
                     }
-                    else
-                        error = $"'{libraryName}' is not a reference to an included library.";
                 }
-                else
-                    error = $"Unable to resolve library '{libraryName}'.";
             }
-
-            return error is null;
+            result = null;
+            return false;
         }
 
     }

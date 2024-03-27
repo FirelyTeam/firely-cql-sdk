@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var unqualified = context.referentialIdentifier().Parse();
             var libraryName = qualifiers.Any() ? string.Join(".", qualifiers) : null;
 
-            var result = LibraryBuilder.CurrentScope.Ref(libraryName, unqualified);
+            var result = LibraryBuilder.CurrentScope.Ref(libraryName, unqualified, Messaging);
             return result.WithLocator(context.Locator());
         }
 
@@ -175,7 +175,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (LeftExpressionTerm is IncludeRef ir)
             {
                 var libraryName = ir.IncludeDef.localIdentifier;
-                return LibraryBuilder.CurrentScope.Ref(libraryName, memberName).WithLocator(context.Locator());
+                return LibraryBuilder.CurrentScope
+                    .Ref(libraryName, memberName, Messaging)
+                    .WithLocator(context.Locator());
             }
 
             // Left side is not a library name, so we must assume we are dealing with a true member invocation,
@@ -329,8 +331,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitMemberInvocation([NotNull] cqlParser.MemberInvocationContext context)
         {
             var identifier = context.referentialIdentifier().Parse();
-            var definitionRef = LibraryBuilder.CurrentScope!.Ref(null, identifier);
-            return definitionRef.WithLocator(context.Locator());
+            return LibraryBuilder.CurrentScope!
+                .Ref(null, identifier, Messaging)
+                .WithLocator(context.Locator());
         }
 
         // function  : referentialIdentifier '(' paramList? ')'
@@ -345,8 +348,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             IDefinitionElement? symbolDef = null;
 
-            var inScope = LibraryBuilder.CurrentScope.TryResolveIdentifier(libraryName, funcName, out var scopeDef, out var scopeError);
-            var inSystemScope = LibraryBuilder.SystemScope.TryResolveIdentifier(libraryName, funcName, out var systemDef, out var systemError);
+            var inScope = LibraryBuilder.CurrentScope.TryResolveIdentifier(libraryName, funcName, out var scopeDef);
+            var inSystemScope = LibraryBuilder.SystemScope.TryResolveIdentifier(libraryName, funcName, out var systemDef);
             if (inScope)
             {
                 if (inSystemScope)
@@ -370,8 +373,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .AddError(msg);
             FunctionRef unresolved() => new FunctionRef { name = funcName, operand = paramList }
                     .WithResultType(SystemTypes.AnyType)
-                    .AddUnresolvedOperatorError(funcName, paramList.Select(p => p.resultTypeSpecifier).ToArray());
-
+                    .AddError(Messaging.CouldNotResolveFunction(funcName, paramList));
             Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] arguments, bool fluent)
             {
                 var funcRef = InvocationBuilder.Invoke(funcDef, libraryName, arguments);
@@ -410,15 +412,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         // | '$this'                           #thisInvocation
         public override Expression VisitThisInvocation([NotNull] cqlParser.ThisInvocationContext context) =>
-            LibraryBuilder.CurrentScope.Ref(null, context.GetText()).WithLocator(context.Locator());
+            LibraryBuilder.CurrentScope
+                .Ref(null, context.GetText(), Messaging)
+                .WithLocator(context.Locator());
 
         // | '$index'                          #indexInvocation
         public override Expression VisitIndexInvocation([NotNull] cqlParser.IndexInvocationContext context) =>
-            LibraryBuilder.CurrentScope.Ref(null, context.GetText()).WithLocator(context.Locator());
+            LibraryBuilder.CurrentScope
+                .Ref(null, context.GetText(), Messaging)
+                .WithLocator(context.Locator());
 
         // | '$total'                          #totalInvocation
         public override Expression VisitTotalInvocation([NotNull] cqlParser.TotalInvocationContext context) =>
-            LibraryBuilder.CurrentScope.Ref(null, context.GetText()).WithLocator(context.Locator());
+            LibraryBuilder.CurrentScope
+                .Ref(null, context.GetText(), Messaging)
+                .WithLocator(context.Locator());
     }
 
 }

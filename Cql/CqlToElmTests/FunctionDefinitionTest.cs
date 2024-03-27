@@ -96,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             _ = MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): b", "Unable to resolve identifier 'b'.");
+                define function Double(a Integer): b", "Could not resolve identifier b in the current library.");
         }
 
         [TestMethod]

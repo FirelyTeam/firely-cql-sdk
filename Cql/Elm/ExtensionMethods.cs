@@ -107,17 +107,5 @@ namespace Hl7.Cql.Elm
 
             return node;
         }
-
-        public static string GetUnresolvedOperatorMessage(this FunctionDef function, params TypeSpecifier[] argumentTypes) =>
-             $"Could not resolve call to operator {function.name} with signature({string.Join(", ", argumentTypes.Select(t => t.ToString()))}).";
-        public static string GetUnresolvedOperatorMessage(this FunctionDef function, params Expression[] arguments) =>
-            $"Could not resolve call to operator {function.name} with signature({string.Join(", ", arguments.Select(t => t.resultTypeSpecifier.ToString()))}).";
-
-
-        public static T AddUnresolvedOperatorError<T>(this T node, string name, params TypeSpecifier[] argumentTypes)
-            where T: Element =>
-            AddError(node,
-                $"Could not resolve call to operator {name} with signature({string.Join(", ", argumentTypes.Select(t=>t.ToString()))}).");                
-
     }
 }
