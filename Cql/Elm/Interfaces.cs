@@ -110,7 +110,7 @@ partial class VersionedIdentifier : IGetNameAndVersion
 
 #endregion
 
-#region interface IGetLibraryName
+#region IGetLibraryName
 
 internal interface IGetLibraryName
 {
