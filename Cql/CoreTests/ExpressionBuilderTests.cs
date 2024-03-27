@@ -54,15 +54,20 @@ namespace CoreTests
         [TestMethod]
         public void Medication_Request_Example_Test()
         {
-            var elm = new FileInfo(@"Input\ELM\Test\Medication_Request_Example.json");
-            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
+            var files = new FileInfo[]
+                {
+                   new(@"Input\ELM\Test\Medication_Request_Example.json"),
+                   new(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json")
+                };
+            var librarySet = new LibrarySet();
+            librarySet.LoadLibraries(files);
 
             var fdt = new FhirDateTime(2023, 12, 11, 9, 41, 30, TimeSpan.FromHours(-5));
             var fdts = fdt.ToString();
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }

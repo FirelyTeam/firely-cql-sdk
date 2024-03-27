@@ -10,10 +10,10 @@ internal partial class LibrarySetExpressionBuilder
         foreach (var library in LibrarySet)
         {
             var packageDefinitions = CreateLibraryExpressionBuilder(library, new()).ProcessLibrary();
-            _allDefinitions.Merge(packageDefinitions);
+            LibrarySetDefinitions.Merge(packageDefinitions);
         }
 
-        return _allDefinitions;
+        return LibrarySetDefinitions;
     }
 
 }

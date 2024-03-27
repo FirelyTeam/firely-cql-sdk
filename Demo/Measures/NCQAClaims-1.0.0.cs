@@ -1430,15 +1430,16 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(ClaimResponse ResponseItem)
 		{
-			var h_ = context.Operators.Convert<string>(ResponseItem?.OutcomeElement);
-			var i_ = new string[]
+			var h_ = FHIRHelpers_4_0_001.ToString(ResponseItem?.OutcomeElement);
+			var i_ = context.Operators.Convert<string>(h_);
+			var j_ = new string[]
 			{
 				"complete",
 				"partial",
 			};
-			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
+			var k_ = context.Operators.InList<string>(i_, (j_ as IEnumerable<string>));
 
-			return j_;
+			return k_;
 		};
 		var b_ = context.Operators.WhereOrNull<ClaimResponse>(claimResponse, a_);
 		var c_ = new Tuples.Tuple_GRhdjhBUGcJfFRBeODDiYLCdD
@@ -1451,78 +1452,78 @@ public class NCQAClaims_1_0_0
 		};
 		IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL> e_(Tuples.Tuple_GRhdjhBUGcJfFRBeODDiYLCdD ClaimResponse)
 		{
-			Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL k_(ClaimResponse ClmResp)
+			Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL l_(ClaimResponse ClmResp)
 			{
-				var m_ = context.Operators.Convert<string>(ClmResp?.Request?.ReferenceElement);
-				var n_ = NCQAFHIRBase_1_0_0.GetId(m_);
-				bool? o_(ClaimResponse.ItemComponent ResponseItem)
+				var n_ = FHIRHelpers_4_0_001.ToString(ClmResp?.Request?.ReferenceElement);
+				var o_ = NCQAFHIRBase_1_0_0.GetId(n_);
+				bool? p_(ClaimResponse.ItemComponent ResponseItem)
 				{
-					bool? r_(ClaimResponse.AdjudicationComponent @this)
+					bool? s_(ClaimResponse.AdjudicationComponent @this)
 					{
-						var al_ = context.Operators.Not((bool?)(@this?.Category is null));
-
-						return al_;
-					};
-					var s_ = context.Operators.WhereOrNull<ClaimResponse.AdjudicationComponent>(ResponseItem?.Adjudication, r_);
-					CodeableConcept t_(ClaimResponse.AdjudicationComponent @this) => 
-						@this?.Category;
-					var u_ = context.Operators.SelectOrNull<ClaimResponse.AdjudicationComponent, CodeableConcept>(s_, t_);
-					bool? v_(CodeableConcept @this)
-					{
-						var am_ = context.Operators.Not((bool?)(@this?.Coding is null));
+						var am_ = context.Operators.Not((bool?)(@this?.Category is null));
 
 						return am_;
 					};
-					var w_ = context.Operators.WhereOrNull<CodeableConcept>(u_, v_);
-					List<Coding> x_(CodeableConcept @this) => 
-						@this?.Coding;
-					var y_ = context.Operators.SelectOrNull<CodeableConcept, List<Coding>>(w_, x_);
-					var z_ = context.Operators.FlattenList<Coding>(y_);
-					bool? aa_(Coding CategoryItem)
+					var t_ = context.Operators.WhereOrNull<ClaimResponse.AdjudicationComponent>(ResponseItem?.Adjudication, s_);
+					CodeableConcept u_(ClaimResponse.AdjudicationComponent @this) => 
+						@this?.Category;
+					var v_ = context.Operators.SelectOrNull<ClaimResponse.AdjudicationComponent, CodeableConcept>(t_, u_);
+					bool? w_(CodeableConcept @this)
 					{
-						var an_ = context.Operators.Equal(CategoryItem?.CodeElement?.Value, "benefit");
+						var an_ = context.Operators.Not((bool?)(@this?.Coding is null));
 
 						return an_;
 					};
-					var ab_ = context.Operators.WhereOrNull<Coding>(z_, aa_);
-					var ac_ = context.Operators.ExistsInList<Coding>(ab_);
-					bool? ad_(ClaimResponse.AdjudicationComponent @this)
+					var x_ = context.Operators.WhereOrNull<CodeableConcept>(v_, w_);
+					List<Coding> y_(CodeableConcept @this) => 
+						@this?.Coding;
+					var z_ = context.Operators.SelectOrNull<CodeableConcept, List<Coding>>(x_, y_);
+					var aa_ = context.Operators.FlattenList<Coding>(z_);
+					bool? ab_(Coding CategoryItem)
 					{
-						var ao_ = context.Operators.Not((bool?)(@this?.Amount is null));
+						var ao_ = context.Operators.Equal(CategoryItem?.CodeElement?.Value, "benefit");
 
 						return ao_;
 					};
-					var ae_ = context.Operators.WhereOrNull<ClaimResponse.AdjudicationComponent>(ResponseItem?.Adjudication, ad_);
-					Money af_(ClaimResponse.AdjudicationComponent @this) => 
-						@this?.Amount;
-					var ag_ = context.Operators.SelectOrNull<ClaimResponse.AdjudicationComponent, Money>(ae_, af_);
-					bool? ah_(Money DollarAmount)
+					var ac_ = context.Operators.WhereOrNull<Coding>(aa_, ab_);
+					var ad_ = context.Operators.ExistsInList<Coding>(ac_);
+					bool? ae_(ClaimResponse.AdjudicationComponent @this)
 					{
-						var ap_ = FHIRHelpers_4_0_001.ToDecimal(DollarAmount?.ValueElement);
-						var aq_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-						var ar_ = context.Operators.Greater(ap_, aq_);
+						var ap_ = context.Operators.Not((bool?)(@this?.Amount is null));
 
-						return ar_;
+						return ap_;
 					};
-					var ai_ = context.Operators.WhereOrNull<Money>(ag_, ah_);
-					var aj_ = context.Operators.ExistsInList<Money>(ai_);
-					var ak_ = context.Operators.And(ac_, aj_);
+					var af_ = context.Operators.WhereOrNull<ClaimResponse.AdjudicationComponent>(ResponseItem?.Adjudication, ae_);
+					Money ag_(ClaimResponse.AdjudicationComponent @this) => 
+						@this?.Amount;
+					var ah_ = context.Operators.SelectOrNull<ClaimResponse.AdjudicationComponent, Money>(af_, ag_);
+					bool? ai_(Money DollarAmount)
+					{
+						var aq_ = FHIRHelpers_4_0_001.ToDecimal(DollarAmount?.ValueElement);
+						var ar_ = context.Operators.ConvertIntegerToDecimal((int?)0);
+						var as_ = context.Operators.Greater(aq_, ar_);
 
-					return ak_;
+						return as_;
+					};
+					var aj_ = context.Operators.WhereOrNull<Money>(ah_, ai_);
+					var ak_ = context.Operators.ExistsInList<Money>(aj_);
+					var al_ = context.Operators.And(ad_, ak_);
+
+					return al_;
 				};
-				var p_ = context.Operators.WhereOrNull<ClaimResponse.ItemComponent>((ClmResp?.Item as IEnumerable<ClaimResponse.ItemComponent>), o_);
-				var q_ = new Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL
+				var q_ = context.Operators.WhereOrNull<ClaimResponse.ItemComponent>((ClmResp?.Item as IEnumerable<ClaimResponse.ItemComponent>), p_);
+				var r_ = new Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL
 				{
 					Response = ClmResp,
-					ResponseID = n_,
-					LineItems = p_,
+					ResponseID = o_,
+					LineItems = q_,
 				};
 
-				return q_;
+				return r_;
 			};
-			var l_ = context.Operators.SelectOrNull<ClaimResponse, Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(ClaimResponse?.PaidResponse, k_);
+			var m_ = context.Operators.SelectOrNull<ClaimResponse, Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(ClaimResponse?.PaidResponse, l_);
 
-			return l_;
+			return m_;
 		};
 		var f_ = context.Operators.SelectOrNull<Tuples.Tuple_GRhdjhBUGcJfFRBeODDiYLCdD, IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>>(d_, e_);
 		var g_ = context.Operators.SingleOrNull<IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>>(f_);
@@ -1663,10 +1664,10 @@ public class NCQAClaims_1_0_0
 					{
 						bool? u_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
-							var y_ = context.Operators.Convert<string>(((medClaim?.ClaimofInterest is Resource)
+							var y_ = FHIRHelpers_4_0_001.ToString(((medClaim?.ClaimofInterest is Resource)
 									? ((medClaim?.ClaimofInterest as Resource).IdElement)
 									: null));
-							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
+							var z_ = FHIRHelpers_4_0_001.ToString(pClaim?.Response?.Request?.ReferenceElement);
 							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
@@ -1991,10 +1992,10 @@ public class NCQAClaims_1_0_0
 					{
 						bool? u_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
-							var y_ = context.Operators.Convert<string>(((medClaim?.ClaimofInterest is Resource)
+							var y_ = FHIRHelpers_4_0_001.ToString(((medClaim?.ClaimofInterest is Resource)
 									? ((medClaim?.ClaimofInterest as Resource).IdElement)
 									: null));
-							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
+							var z_ = FHIRHelpers_4_0_001.ToString(pClaim?.Response?.Request?.ReferenceElement);
 							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
@@ -2239,10 +2240,10 @@ public class NCQAClaims_1_0_0
 					{
 						bool? u_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
-							var y_ = context.Operators.Convert<string>(((medClaim?.ClaimofInterest is Resource)
+							var y_ = FHIRHelpers_4_0_001.ToString(((medClaim?.ClaimofInterest is Resource)
 									? ((medClaim?.ClaimofInterest as Resource).IdElement)
 									: null));
-							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
+							var z_ = FHIRHelpers_4_0_001.ToString(pClaim?.Response?.Request?.ReferenceElement);
 							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
@@ -2431,10 +2432,10 @@ public class NCQAClaims_1_0_0
 					{
 						bool? u_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
-							var y_ = context.Operators.Convert<string>(((medClaim?.Claim is Resource)
+							var y_ = FHIRHelpers_4_0_001.ToString(((medClaim?.Claim is Resource)
 									? ((medClaim?.Claim as Resource).IdElement)
 									: null));
-							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
+							var z_ = FHIRHelpers_4_0_001.ToString(pClaim?.Response?.Request?.ReferenceElement);
 							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
@@ -2632,8 +2633,8 @@ public class NCQAClaims_1_0_0
 		{
 			bool? c_(ClaimResponse CR)
 			{
-				var h_ = context.Operators.Convert<string>(Claim?.IdElement);
-				var i_ = context.Operators.Convert<string>(CR?.Request?.ReferenceElement);
+				var h_ = FHIRHelpers_4_0_001.ToString(Claim?.IdElement);
+				var i_ = FHIRHelpers_4_0_001.ToString(CR?.Request?.ReferenceElement);
 				var j_ = NCQAFHIRBase_1_0_0.GetId(i_);
 				var k_ = context.Operators.Equal(h_, j_);
 
@@ -2642,11 +2643,11 @@ public class NCQAClaims_1_0_0
 			var d_ = context.Operators.WhereOrNull<ClaimResponse>(claimResponse, c_);
 			bool? e_(Claim C)
 			{
-				var l_ = context.Operators.Convert<string>(Claim?.IdElement);
+				var l_ = FHIRHelpers_4_0_001.ToString(Claim?.IdElement);
 				bool? m_(ClaimResponse CR)
 				{
-					var aa_ = context.Operators.Convert<string>(Claim?.IdElement);
-					var ab_ = context.Operators.Convert<string>(CR?.Request?.ReferenceElement);
+					var aa_ = FHIRHelpers_4_0_001.ToString(Claim?.IdElement);
+					var ab_ = FHIRHelpers_4_0_001.ToString(CR?.Request?.ReferenceElement);
 					var ac_ = NCQAFHIRBase_1_0_0.GetId(ab_);
 					var ad_ = context.Operators.Equal(aa_, ac_);
 
@@ -2674,7 +2675,7 @@ public class NCQAClaims_1_0_0
 					@this?.ReferenceElement;
 				var v_ = context.Operators.SelectOrNull<ResourceReference, FhirString>(t_, u_);
 				var w_ = context.Operators.SingleOrNull<FhirString>(v_);
-				var x_ = context.Operators.Convert<string>(w_);
+				var x_ = FHIRHelpers_4_0_001.ToString(w_);
 				var y_ = NCQAFHIRBase_1_0_0.GetId(x_);
 				var z_ = context.Operators.Equal(l_, y_);
 
@@ -2905,7 +2906,7 @@ public class NCQAClaims_1_0_0
 				};
 				string af_(FhirString r)
 				{
-					var ai_ = context.Operators.Convert<string>(r);
+					var ai_ = FHIRHelpers_4_0_001.ToString(r);
 					var aj_ = NCQAFHIRBase_1_0_0.GetId(ai_);
 
 					return aj_;
@@ -2939,7 +2940,7 @@ public class NCQAClaims_1_0_0
 			var ak_ = context.Operators.RetrieveByValueSet<Practitioner>(null, null);
 			bool? al_(Practitioner p)
 			{
-				var as_ = context.Operators.Convert<string>(p?.IdElement);
+				var as_ = FHIRHelpers_4_0_001.ToString(p?.IdElement);
 				bool? at_(Tuples.Tuple_GIfhUVACThMQNGPGjYhYHEfGS @this)
 				{
 					var az_ = context.Operators.Not((bool?)(@this?.CareTeamsProviderID is null));
@@ -3145,7 +3146,7 @@ public class NCQAClaims_1_0_0
 				};
 				string ah_(FhirString r)
 				{
-					var ak_ = context.Operators.Convert<string>(r);
+					var ak_ = FHIRHelpers_4_0_001.ToString(r);
 					var al_ = NCQAFHIRBase_1_0_0.GetId(ak_);
 
 					return al_;
@@ -3179,7 +3180,7 @@ public class NCQAClaims_1_0_0
 			var am_ = context.Operators.RetrieveByValueSet<Location>(null, null);
 			bool? an_(Location l)
 			{
-				var au_ = context.Operators.Convert<string>(l?.IdElement);
+				var au_ = FHIRHelpers_4_0_001.ToString(l?.IdElement);
 				bool? av_(Tuples.Tuple_FPCXihcEeChSjIUJHVXRcEXMI @this)
 				{
 					var bb_ = context.Operators.Not((bool?)(@this?.ItemLocationID is null));

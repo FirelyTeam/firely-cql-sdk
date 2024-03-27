@@ -19,13 +19,13 @@ public class Status_1_6_000
 
     #region Cached values
 
+    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
+    internal Lazy<CqlCode[]> __ConditionClinicalStatusCodes;
     internal Lazy<CqlCode> __laboratory;
     internal Lazy<CqlCode> __exam;
     internal Lazy<CqlCode> __survey;
     internal Lazy<CqlCode> __vital_signs;
     internal Lazy<CqlCode> __active;
-    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
-    internal Lazy<CqlCode[]> __ConditionClinicalStatusCodes;
     internal Lazy<Patient> __Patient;
 
     #endregion
@@ -35,13 +35,13 @@ public class Status_1_6_000
 
         FHIRHelpers_4_3_000 = new FHIRHelpers_4_3_000(context);
 
+        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
+        __ConditionClinicalStatusCodes = new Lazy<CqlCode[]>(this.ConditionClinicalStatusCodes_Value);
         __laboratory = new Lazy<CqlCode>(this.laboratory_Value);
         __exam = new Lazy<CqlCode>(this.exam_Value);
         __survey = new Lazy<CqlCode>(this.survey_Value);
         __vital_signs = new Lazy<CqlCode>(this.vital_signs_Value);
         __active = new Lazy<CqlCode>(this.active_Value);
-        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
-        __ConditionClinicalStatusCodes = new Lazy<CqlCode[]>(this.ConditionClinicalStatusCodes_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
     }
     #region Dependencies
@@ -49,6 +49,30 @@ public class Status_1_6_000
     public FHIRHelpers_4_3_000 FHIRHelpers_4_3_000 { get; }
 
     #endregion
+
+	private CqlCode[] ObservationCategoryCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("ObservationCategoryCodes")]
+	public CqlCode[] ObservationCategoryCodes() => 
+		__ObservationCategoryCodes.Value;
+
+	private CqlCode[] ConditionClinicalStatusCodes_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("ConditionClinicalStatusCodes")]
+	public CqlCode[] ConditionClinicalStatusCodes() => 
+		__ConditionClinicalStatusCodes.Value;
 
 	private CqlCode laboratory_Value() => 
 		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
@@ -84,37 +108,6 @@ public class Status_1_6_000
     [CqlDeclaration("active")]
 	public CqlCode active() => 
 		__active.Value;
-
-	private CqlCode[] ObservationCategoryCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
-		__ObservationCategoryCodes.Value;
-
-	private CqlCode[] ConditionClinicalStatusCodes_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("ConditionClinicalStatusCodes")]
-	public CqlCode[] ConditionClinicalStatusCodes() => 
-		__ConditionClinicalStatusCodes.Value;
 
 	private Patient Patient_Value()
 	{

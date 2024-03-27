@@ -19,6 +19,15 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 
     #region Cached values
 
+    internal Lazy<CqlCode[]> __LOINC;
+    internal Lazy<CqlCode[]> __SNOMEDCT;
+    internal Lazy<CqlCode> __Birth_date;
+    internal Lazy<CqlCode> __Healthcare_professional__occupation_;
+    internal Lazy<CqlCode> __Macular_edema_absent__situation_;
+    internal Lazy<CqlCode> __Medical_practitioner__occupation_;
+    internal Lazy<CqlCode> __Ophthalmologist__occupation_;
+    internal Lazy<CqlCode> __Optometrist__occupation_;
+    internal Lazy<CqlCode> __Physician__occupation_;
     internal Lazy<CqlValueSet> __Care_Services_in_Long_Term_Residential_Facility;
     internal Lazy<CqlValueSet> __Diabetic_Retinopathy;
     internal Lazy<CqlValueSet> __Level_of_Severity_of_Retinopathy_Findings;
@@ -30,15 +39,6 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     internal Lazy<CqlValueSet> __Ophthalmological_Services;
     internal Lazy<CqlValueSet> __Outpatient_Consultation;
     internal Lazy<CqlValueSet> __Patient_Reason;
-    internal Lazy<CqlCode> __Birth_date;
-    internal Lazy<CqlCode> __Healthcare_professional__occupation_;
-    internal Lazy<CqlCode> __Macular_edema_absent__situation_;
-    internal Lazy<CqlCode> __Medical_practitioner__occupation_;
-    internal Lazy<CqlCode> __Ophthalmologist__occupation_;
-    internal Lazy<CqlCode> __Optometrist__occupation_;
-    internal Lazy<CqlCode> __Physician__occupation_;
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<CqlCode[]> __SNOMEDCT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
@@ -69,6 +69,15 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
 
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
+        __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
+        __Healthcare_professional__occupation_ = new Lazy<CqlCode>(this.Healthcare_professional__occupation__Value);
+        __Macular_edema_absent__situation_ = new Lazy<CqlCode>(this.Macular_edema_absent__situation__Value);
+        __Medical_practitioner__occupation_ = new Lazy<CqlCode>(this.Medical_practitioner__occupation__Value);
+        __Ophthalmologist__occupation_ = new Lazy<CqlCode>(this.Ophthalmologist__occupation__Value);
+        __Optometrist__occupation_ = new Lazy<CqlCode>(this.Optometrist__occupation__Value);
+        __Physician__occupation_ = new Lazy<CqlCode>(this.Physician__occupation__Value);
         __Care_Services_in_Long_Term_Residential_Facility = new Lazy<CqlValueSet>(this.Care_Services_in_Long_Term_Residential_Facility_Value);
         __Diabetic_Retinopathy = new Lazy<CqlValueSet>(this.Diabetic_Retinopathy_Value);
         __Level_of_Severity_of_Retinopathy_Findings = new Lazy<CqlValueSet>(this.Level_of_Severity_of_Retinopathy_Findings_Value);
@@ -80,15 +89,6 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         __Ophthalmological_Services = new Lazy<CqlValueSet>(this.Ophthalmological_Services_Value);
         __Outpatient_Consultation = new Lazy<CqlValueSet>(this.Outpatient_Consultation_Value);
         __Patient_Reason = new Lazy<CqlValueSet>(this.Patient_Reason_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
-        __Healthcare_professional__occupation_ = new Lazy<CqlCode>(this.Healthcare_professional__occupation__Value);
-        __Macular_edema_absent__situation_ = new Lazy<CqlCode>(this.Macular_edema_absent__situation__Value);
-        __Medical_practitioner__occupation_ = new Lazy<CqlCode>(this.Medical_practitioner__occupation__Value);
-        __Ophthalmologist__occupation_ = new Lazy<CqlCode>(this.Ophthalmologist__occupation__Value);
-        __Optometrist__occupation_ = new Lazy<CqlCode>(this.Optometrist__occupation__Value);
-        __Physician__occupation_ = new Lazy<CqlCode>(this.Physician__occupation__Value);
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
@@ -117,6 +117,79 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
 
     #endregion
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
+
+	private CqlCode[] SNOMEDCT_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("SNOMEDCT")]
+	public CqlCode[] SNOMEDCT() => 
+		__SNOMEDCT.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
+
+	private CqlCode Healthcare_professional__occupation__Value() => 
+		new CqlCode("223366009", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Healthcare professional (occupation)")]
+	public CqlCode Healthcare_professional__occupation_() => 
+		__Healthcare_professional__occupation_.Value;
+
+	private CqlCode Macular_edema_absent__situation__Value() => 
+		new CqlCode("428341000124108", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Macular edema absent (situation)")]
+	public CqlCode Macular_edema_absent__situation_() => 
+		__Macular_edema_absent__situation_.Value;
+
+	private CqlCode Medical_practitioner__occupation__Value() => 
+		new CqlCode("158965000", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Medical practitioner (occupation)")]
+	public CqlCode Medical_practitioner__occupation_() => 
+		__Medical_practitioner__occupation_.Value;
+
+	private CqlCode Ophthalmologist__occupation__Value() => 
+		new CqlCode("422234006", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Ophthalmologist (occupation)")]
+	public CqlCode Ophthalmologist__occupation_() => 
+		__Ophthalmologist__occupation_.Value;
+
+	private CqlCode Optometrist__occupation__Value() => 
+		new CqlCode("28229004", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Optometrist (occupation)")]
+	public CqlCode Optometrist__occupation_() => 
+		__Optometrist__occupation_.Value;
+
+	private CqlCode Physician__occupation__Value() => 
+		new CqlCode("309343006", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Physician (occupation)")]
+	public CqlCode Physician__occupation_() => 
+		__Physician__occupation_.Value;
 
 	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
@@ -206,88 +279,6 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	public CqlValueSet Patient_Reason() => 
 		__Patient_Reason.Value;
 
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
-
-	private CqlCode Healthcare_professional__occupation__Value() => 
-		new CqlCode("223366009", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Healthcare professional (occupation)")]
-	public CqlCode Healthcare_professional__occupation_() => 
-		__Healthcare_professional__occupation_.Value;
-
-	private CqlCode Macular_edema_absent__situation__Value() => 
-		new CqlCode("428341000124108", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Macular edema absent (situation)")]
-	public CqlCode Macular_edema_absent__situation_() => 
-		__Macular_edema_absent__situation_.Value;
-
-	private CqlCode Medical_practitioner__occupation__Value() => 
-		new CqlCode("158965000", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Medical practitioner (occupation)")]
-	public CqlCode Medical_practitioner__occupation_() => 
-		__Medical_practitioner__occupation_.Value;
-
-	private CqlCode Ophthalmologist__occupation__Value() => 
-		new CqlCode("422234006", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Ophthalmologist (occupation)")]
-	public CqlCode Ophthalmologist__occupation_() => 
-		__Ophthalmologist__occupation_.Value;
-
-	private CqlCode Optometrist__occupation__Value() => 
-		new CqlCode("28229004", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Optometrist (occupation)")]
-	public CqlCode Optometrist__occupation_() => 
-		__Optometrist__occupation_.Value;
-
-	private CqlCode Physician__occupation__Value() => 
-		new CqlCode("309343006", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Physician (occupation)")]
-	public CqlCode Physician__occupation_() => 
-		__Physician__occupation_.Value;
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private CqlCode[] SNOMEDCT_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("223366009", "http://snomed.info/sct", null, null),
-			new CqlCode("428341000124108", "http://snomed.info/sct", null, null),
-			new CqlCode("158965000", "http://snomed.info/sct", null, null),
-			new CqlCode("422234006", "http://snomed.info/sct", null, null),
-			new CqlCode("28229004", "http://snomed.info/sct", null, null),
-			new CqlCode("309343006", "http://snomed.info/sct", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
-		__SNOMEDCT.Value;
-
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004", "Measurement Period", null);
@@ -376,8 +367,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var q_ = this.Measurement_Period();
 			var r_ = FHIRHelpers_4_0_001.ToInterval(QualifyingEncounter?.Period);
 			var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, r_, null);
-			var t_ = context.Operators.Convert<string>(QualifyingEncounter?.StatusElement);
-			var u_ = context.Operators.Equal(t_, "finished");
+			var t_ = FHIRHelpers_4_0_001.ToString(QualifyingEncounter?.StatusElement);
+			var u_ = context.Operators.EnumEqualsString(t_, "finished");
 			var v_ = context.Operators.And(s_, u_);
 
 			return v_;
@@ -433,7 +424,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		bool? a_(Extension E)
 		{
 			var e_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var f_ = context.Operators.Convert<string>(e_);
+			var f_ = FHIRHelpers_4_0_001.ToString(e_);
 			var g_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
 			var h_ = context.Operators.Equal(f_, g_);
 
@@ -483,8 +474,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication LevelOfSeverityNotCommunicated)
 		{
-			var q_ = context.Operators.Convert<string>(LevelOfSeverityNotCommunicated?.StatusElement);
-			var r_ = context.Operators.Equal(q_, "not-done");
+			var q_ = FHIRHelpers_4_0_001.ToString(LevelOfSeverityNotCommunicated?.StatusElement);
+			var r_ = context.Operators.EnumEqualsString(q_, "not-done");
 			var s_ = this.GetModifierExtension(LevelOfSeverityNotCommunicated, "qicore-notDone");
 			var t_ = FHIRHelpers_4_0_001.ToBoolean((s_?.Value as FhirBoolean));
 			var u_ = context.Operators.IsTrue(t_);
@@ -536,8 +527,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var f_ = context.Operators.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? g_(Communication MacularEdemaAbsentNotCommunicated)
 		{
-			var r_ = context.Operators.Convert<string>(MacularEdemaAbsentNotCommunicated?.StatusElement);
-			var s_ = context.Operators.Equal(r_, "not-done");
+			var r_ = FHIRHelpers_4_0_001.ToString(MacularEdemaAbsentNotCommunicated?.StatusElement);
+			var s_ = context.Operators.EnumEqualsString(r_, "not-done");
 			var t_ = this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, "qicore-notDone");
 			var u_ = FHIRHelpers_4_0_001.ToBoolean((t_?.Value as FhirBoolean));
 			var v_ = context.Operators.IsTrue(u_);
@@ -588,8 +579,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication MacularEdemaPresentNotCommunicated)
 		{
-			var q_ = context.Operators.Convert<string>(MacularEdemaPresentNotCommunicated?.StatusElement);
-			var r_ = context.Operators.Equal(q_, "not-done");
+			var q_ = FHIRHelpers_4_0_001.ToString(MacularEdemaPresentNotCommunicated?.StatusElement);
+			var r_ = context.Operators.EnumEqualsString(q_, "not-done");
 			var s_ = this.GetModifierExtension(MacularEdemaPresentNotCommunicated, "qicore-notDone");
 			var t_ = FHIRHelpers_4_0_001.ToBoolean((s_?.Value as FhirBoolean));
 			var u_ = context.Operators.IsTrue(t_);
@@ -675,18 +666,19 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
 		bool? e_(Observation MacularExam)
 		{
-			var o_ = context.Operators.Convert<string>(MacularExam?.StatusElement);
-			var p_ = new string[]
+			var o_ = FHIRHelpers_4_0_001.ToString(MacularExam?.StatusElement);
+			var p_ = context.Operators.Convert<string>(o_);
+			var q_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
-			var r_ = context.Operators.Not((bool?)(MacularExam?.Value is null));
-			var s_ = context.Operators.And(q_, r_);
+			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
+			var s_ = context.Operators.Not((bool?)(MacularExam?.Value is null));
+			var t_ = context.Operators.And(r_, s_);
 
-			return s_;
+			return t_;
 		};
 		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
 
@@ -738,8 +730,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication LevelOfSeverityCommunicated)
 		{
-			var q_ = context.Operators.Convert<string>(LevelOfSeverityCommunicated?.StatusElement);
-			var r_ = context.Operators.Equal(q_, "completed");
+			var q_ = FHIRHelpers_4_0_001.ToString(LevelOfSeverityCommunicated?.StatusElement);
+			var r_ = context.Operators.EnumEqualsString(q_, "completed");
 
 			return r_;
 		};
@@ -780,8 +772,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var f_ = context.Operators.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? g_(Communication MacularEdemaAbsentCommunicated)
 		{
-			var r_ = context.Operators.Convert<string>(MacularEdemaAbsentCommunicated?.StatusElement);
-			var s_ = context.Operators.Equal(r_, "completed");
+			var r_ = FHIRHelpers_4_0_001.ToString(MacularEdemaAbsentCommunicated?.StatusElement);
+			var s_ = context.Operators.EnumEqualsString(r_, "completed");
 
 			return s_;
 		};
@@ -821,8 +813,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication MacularEdemaPresentCommunicated)
 		{
-			var q_ = context.Operators.Convert<string>(MacularEdemaPresentCommunicated?.StatusElement);
-			var r_ = context.Operators.Equal(q_, "completed");
+			var q_ = FHIRHelpers_4_0_001.ToString(MacularEdemaPresentCommunicated?.StatusElement);
+			var r_ = context.Operators.EnumEqualsString(q_, "completed");
 
 			return r_;
 		};

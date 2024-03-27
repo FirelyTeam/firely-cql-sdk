@@ -1,25 +1,30 @@
 @echo off
 SETLOCAL EnableDelayedExpansion
 
+REM Note on : REM Generated C# files must have file extension of .g.cs
 REM For more info regarding nullability on generated files, see: https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references
 SET in_file=expression.cs
+SET temp_file=Elm.g.cs.tmp
 SET out_file=Elm.g.cs
-SET temp_file=temp.txt
-SET line_number=0
 
 PUSHD Schema
+
 ECHO Generating xsd into C#: '%in_file%'
 xsd /c .\library.xsd .\types.xsd .\clinicalexpression.xsd .\cqlannotations.xsd .\expression.xsd /o:.. /n:Hl7.Cql.Elm > NUL
+
 POPD
 
 
 REM Clear the temporary file if it exists
 ECHO Post processing into temporary file: '%temp_file%'
+
 IF EXIST %temp_file% (
     DEL %temp_file%
 )
 
 REM Read each line from the existing file
+SET line_number=0
+
 FOR /F "tokens=* delims=" %%A IN (%in_file%) DO (
     SET /A line_number+=1
     IF !line_number! EQU 11 (
@@ -39,8 +44,10 @@ FOR /F "tokens=* delims=" %%A IN (%in_file%) DO (
 
 REM Move the temporary file to the output file
 ECHO Replacing '%temp_file%' over 'out_file%'
+
 MOVE /Y %temp_file% %out_file% > NUL
 
+REM Cleanup
 ECHO Removing '%in_file%'
 DEL %in_file%
 

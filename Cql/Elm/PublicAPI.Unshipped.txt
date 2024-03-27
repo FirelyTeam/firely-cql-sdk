@@ -813,8 +813,6 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.CodeFilterElement.value.set -> void
 ~Hl7.Cql.Elm.CodeFilterElement.valueSetProperty.get -> string
 ~Hl7.Cql.Elm.CodeFilterElement.valueSetProperty.set -> void
-~Hl7.Cql.Elm.CodeRef.libraryName.get -> string
-~Hl7.Cql.Elm.CodeRef.libraryName.set -> void
 ~Hl7.Cql.Elm.CodeRef.name.get -> string
 ~Hl7.Cql.Elm.CodeRef.name.set -> void
 ~Hl7.Cql.Elm.CodeSystemDef.id.get -> string
@@ -823,8 +821,6 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.CodeSystemDef.name.set -> void
 ~Hl7.Cql.Elm.CodeSystemDef.version.get -> string
 ~Hl7.Cql.Elm.CodeSystemDef.version.set -> void
-~Hl7.Cql.Elm.CodeSystemRef.libraryName.get -> string
-~Hl7.Cql.Elm.CodeSystemRef.libraryName.set -> void
 ~Hl7.Cql.Elm.CodeSystemRef.name.get -> string
 ~Hl7.Cql.Elm.CodeSystemRef.name.set -> void
 ~Hl7.Cql.Elm.Combine.separator.get -> Hl7.Cql.Elm.Expression
@@ -841,8 +837,6 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.ConceptDef.display.set -> void
 ~Hl7.Cql.Elm.ConceptDef.name.get -> string
 ~Hl7.Cql.Elm.ConceptDef.name.set -> void
-~Hl7.Cql.Elm.ConceptRef.libraryName.get -> string
-~Hl7.Cql.Elm.ConceptRef.libraryName.set -> void
 ~Hl7.Cql.Elm.ConceptRef.name.get -> string
 ~Hl7.Cql.Elm.ConceptRef.name.set -> void
 ~Hl7.Cql.Elm.ContextDef.name.get -> string
@@ -915,8 +909,6 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.ExpressionDef.expression.set -> void
 ~Hl7.Cql.Elm.ExpressionDef.name.get -> string
 ~Hl7.Cql.Elm.ExpressionDef.name.set -> void
-~Hl7.Cql.Elm.ExpressionRef.libraryName.get -> string
-~Hl7.Cql.Elm.ExpressionRef.libraryName.set -> void
 ~Hl7.Cql.Elm.ExpressionRef.name.get -> string
 ~Hl7.Cql.Elm.ExpressionRef.name.set -> void
 ~Hl7.Cql.Elm.Filter.condition.get -> Hl7.Cql.Elm.Expression
@@ -941,8 +933,6 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.FunctionRef.operand.set -> void
 ~Hl7.Cql.Elm.FunctionRef.signature.get -> Hl7.Cql.Elm.TypeSpecifier[]
 ~Hl7.Cql.Elm.FunctionRef.signature.set -> void
-~Hl7.Cql.Elm.IdentifierRef.libraryName.get -> string
-~Hl7.Cql.Elm.IdentifierRef.libraryName.set -> void
 ~Hl7.Cql.Elm.IdentifierRef.name.get -> string
 ~Hl7.Cql.Elm.IdentifierRef.name.set -> void
 ~Hl7.Cql.Elm.If.condition.get -> Hl7.Cql.Elm.Expression
@@ -1105,8 +1095,6 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.ParameterDef.parameterType.set -> void
 ~Hl7.Cql.Elm.ParameterDef.parameterTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
 ~Hl7.Cql.Elm.ParameterDef.parameterTypeSpecifier.set -> void
-~Hl7.Cql.Elm.ParameterRef.libraryName.get -> string
-~Hl7.Cql.Elm.ParameterRef.libraryName.set -> void
 ~Hl7.Cql.Elm.ParameterRef.name.get -> string
 ~Hl7.Cql.Elm.ParameterRef.name.set -> void
 ~Hl7.Cql.Elm.ParameterTypeSpecifier.parameterName.get -> string
@@ -1275,8 +1263,6 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.ValueSetDef.name.set -> void
 ~Hl7.Cql.Elm.ValueSetDef.version.get -> string
 ~Hl7.Cql.Elm.ValueSetDef.version.set -> void
-~Hl7.Cql.Elm.ValueSetRef.libraryName.get -> string
-~Hl7.Cql.Elm.ValueSetRef.libraryName.set -> void
 ~Hl7.Cql.Elm.ValueSetRef.name.get -> string
 ~Hl7.Cql.Elm.ValueSetRef.name.set -> void
 ~Hl7.Cql.Elm.VersionedIdentifier.id.get -> string

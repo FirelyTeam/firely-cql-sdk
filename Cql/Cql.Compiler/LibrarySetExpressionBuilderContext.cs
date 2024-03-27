@@ -15,7 +15,7 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
     private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
     private readonly LibrarySet _librarySet;
     private readonly BuilderDebuggerInfo _debuggerInfo;
-    private readonly DefinitionDictionary<LambdaExpression> _allDefinitions;
+    public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
 
     public LibrarySetExpressionBuilder(
         ILoggerFactory loggerFactory,
@@ -33,7 +33,7 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
 
         // External State
         _librarySet = librarySet;
-        _allDefinitions = definitions;
+        LibrarySetDefinitions = definitions;
 
         // Internal State
         _debuggerInfo = new BuilderDebuggerInfo("LibrarySet", Name: _librarySet.Name!);

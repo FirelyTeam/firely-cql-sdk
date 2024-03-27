@@ -19,13 +19,13 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     #region Cached values
 
+    internal Lazy<CqlCode[]> __LOINC;
+    internal Lazy<CqlCode> __Birth_date;
     internal Lazy<CqlValueSet> __birth_date;
     internal Lazy<CqlValueSet> __Diabetes;
     internal Lazy<CqlValueSet> __Encounter_Inpatient;
     internal Lazy<CqlValueSet> __Glucose_lab_test;
     internal Lazy<CqlValueSet> __Hypoglycemics_Treatment_Medications;
-    internal Lazy<CqlCode> __Birth_date;
-    internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
@@ -54,13 +54,13 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
 
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
         __birth_date = new Lazy<CqlValueSet>(this.birth_date_Value);
         __Diabetes = new Lazy<CqlValueSet>(this.Diabetes_Value);
         __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
         __Glucose_lab_test = new Lazy<CqlValueSet>(this.Glucose_lab_test_Value);
         __Hypoglycemics_Treatment_Medications = new Lazy<CqlValueSet>(this.Hypoglycemics_Treatment_Medications_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
@@ -87,6 +87,25 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
 
     #endregion
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[0]
+;
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
 
 	private CqlValueSet birth_date_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", null);
@@ -127,27 +146,6 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.394")]
 	public CqlValueSet Hypoglycemics_Treatment_Medications() => 
 		__Hypoglycemics_Treatment_Medications.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[]
-		{
-			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
@@ -339,8 +337,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var d_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, MedicationAdministration, Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(a_, b_, c_);
 		bool? e_(Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW tuple_ebceideejujlqkcdbhkcqvihw)
 		{
-			var o_ = context.Operators.Convert<string>(tuple_ebceideejujlqkcdbhkcqvihw.HypoglycemicMedication?.StatusElement);
-			var p_ = context.Operators.Equal(o_, "completed");
+			var o_ = FHIRHelpers_4_0_001.ToString(tuple_ebceideejujlqkcdbhkcqvihw.HypoglycemicMedication?.StatusElement);
+			var p_ = context.Operators.EnumEqualsString(o_, "completed");
 			var q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(tuple_ebceideejujlqkcdbhkcqvihw.HypoglycemicMedication?.Effective);
 			var r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(tuple_ebceideejujlqkcdbhkcqvihw.EncounterWithHospitalization?.hospitalizationPeriod, q_, null);
 			var s_ = context.Operators.And(p_, r_);
@@ -370,8 +368,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			{
 				var l_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab?.Effective as FhirDateTime));
 				var m_ = context.Operators.ElementInInterval<CqlDateTime>(l_, EncounterWithHospitalization?.hospitalizationPeriod, null);
-				var n_ = context.Operators.Convert<string>(BloodGlucoseLab?.StatusElement);
-				var o_ = context.Operators.Equal(n_, "final");
+				var n_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab?.StatusElement);
+				var o_ = context.Operators.EnumEqualsString(n_, "final");
 				var p_ = context.Operators.And(m_, o_);
 				var q_ = FHIRHelpers_4_0_001.ToQuantity((BloodGlucoseLab?.Value as Quantity));
 				var r_ = context.Operators.Quantity(200m, "mg/dL");
@@ -555,8 +553,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 				var h_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
 				bool? i_(Observation BloodGlucoseLab1)
 				{
-					var x_ = context.Operators.Convert<string>(BloodGlucoseLab1?.StatusElement);
-					var y_ = context.Operators.Equal(x_, "final");
+					var x_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab1?.StatusElement);
+					var y_ = context.Operators.EnumEqualsString(x_, "final");
 					var z_ = FHIRHelpers_4_0_001.ToQuantity((BloodGlucoseLab1?.Value as Quantity));
 					var aa_ = context.Operators.Quantity(300m, "mg/dL");
 					var ab_ = context.Operators.Greater(z_, aa_);
@@ -572,8 +570,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 				var m_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
 				bool? n_(Observation BloodGlucoseLab2)
 				{
-					var ag_ = context.Operators.Convert<string>(BloodGlucoseLab2?.StatusElement);
-					var ah_ = context.Operators.Equal(ag_, "final");
+					var ag_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab2?.StatusElement);
+					var ah_ = context.Operators.EnumEqualsString(ag_, "final");
 					var ai_ = FHIRHelpers_4_0_001.ToQuantity((BloodGlucoseLab2?.Value as Quantity));
 					var aj_ = context.Operators.Quantity(200m, "mg/dL");
 					var ak_ = context.Operators.GreaterOrEqual(ai_, aj_);
@@ -589,8 +587,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 				var r_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
 				bool? s_(Observation BloodGlucoseLab3)
 				{
-					var ap_ = context.Operators.Convert<string>(BloodGlucoseLab3?.StatusElement);
-					var aq_ = context.Operators.Equal(ap_, "final");
+					var ap_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab3?.StatusElement);
+					var aq_ = context.Operators.EnumEqualsString(ap_, "final");
 					var ar_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab3?.Effective as FhirDateTime));
 					var as_ = context.Operators.ElementInInterval<CqlDateTime>(ar_, EncounterDay?.dayPeriod, null);
 					var at_ = context.Operators.And(aq_, as_);

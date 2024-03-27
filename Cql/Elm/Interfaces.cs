@@ -1,8 +1,19 @@
 ﻿#pragma warning disable IDE1006 // Naming violation suppressed.
+#pragma warning disable RS0016 // Undocumented public api members.
 
+using System;
 using Hl7.Cql.Abstractions.Exceptions;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace Hl7.Cql.Elm;
+
+file static class StringExtensions
+{
+    public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
+}
+
 
 #region NameAndVersion
 
@@ -11,43 +22,66 @@ internal interface IGetNameAndVersion
     /// <summary>
     /// Gets the name with version, or just the name if no version exists.
     /// </summary>
+    /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
+    /// <returns>The name with version, or just the name if no version exists.</returns>
     string? NameAndVersion(bool throwError = true);
+
+    /// <summary>
+    /// Gets the versioned identifier, or null if the identifier is missing.
+    /// </summary>
+    /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
+    /// <returns>The versioned identifier, or null if the identifier is missing.</returns>
+    VersionedIdentifier? GetVersionedIdentifier(bool throwError = true);
 }
 
+[DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class Library : IGetNameAndVersion
 {
-    /// <inheritedoc/>
-    public string? NameAndVersion(bool throwError = true)
+    /// <inheritdoc />
+    public string? NameAndVersion(bool throwError = true) =>
+        GetVersionedIdentifier(throwError)!
+       .NameAndVersion(throwError);
+
+    /// <inheritdoc />
+    public VersionedIdentifier? GetVersionedIdentifier(bool throwError = true)
     {
-        if (identifier == null)
-        {
-            if (throwError) throw new MissingIdentifierError(this).ToException();
-            return null;
-        }
-        return identifier.NameAndVersion(throwError);
+        if (identifier != null) return identifier;
+
+        if (throwError) throw new MissingIdentifierError(this).ToException();
+        return null;
     }
+
+    /// <inheritdoc />
+    public override string? ToString() => NameAndVersion(false);
 }
 
+[DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class IncludeDef : IGetNameAndVersion
 {
-    /// <inheritedoc/>
-    public string? NameAndVersion(bool throwError = true)
+    /// <inheritdoc />
+    public string? NameAndVersion(bool throwError = true) =>
+        GetVersionedIdentifier(throwError)!
+            .NameAndVersion(throwError);
+
+    /// <inheritdoc />
+    public VersionedIdentifier? GetVersionedIdentifier(bool throwError = true)
     {
-        if (string.IsNullOrEmpty(path))
-        {
-            if (throwError) throw new MissingNameError(this).ToException();
-            return null;
-        }
+        if (path is {Length:>0})
+            return new()
+            {
+                id = path,
+                version = version is {Length:0} ? null : version
+            };
 
-        if (string.IsNullOrEmpty(version))
-        {
-            return path;
-        }
-
-        return $"{path}-{version}";
+        if (throwError) throw new MissingIdentifierError(this).ToException();
+        return null;
     }
+
+    /// <inheritdoc />
+    public override string? ToString() => NameAndVersion(false);
 }
 
+[DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class VersionedIdentifier : IGetNameAndVersion
 {
     /// <inheritedoc/>
@@ -66,23 +100,37 @@ partial class VersionedIdentifier : IGetNameAndVersion
 
         return $"{id}-{version}";
     }
+
+    /// <inheritdoc />
+    VersionedIdentifier? IGetNameAndVersion.GetVersionedIdentifier(bool throwError) => this;
+
+    /// <inheritdoc />
+    public override string? ToString() => NameAndVersion(false);
 }
 
 #endregion
 
-#region LibraryName
+#region IGetLibraryName
 
 internal interface IGetLibraryName
 {
     string? libraryName { get; }
 }
-partial class CodeRef : IGetLibraryName {}
-partial class CodeSystemRef : IGetLibraryName {}
-partial class ConceptRef : IGetLibraryName {}
-partial class ExpressionRef : IGetLibraryName {}
-partial class IdentifierRef : IGetLibraryName {}
-partial class ParameterRef : IGetLibraryName {}
-partial class ValueSetRef : IGetLibraryName {}
+
+partial class IncludeDef : IGetLibraryName
+{
+    /// <nodoc />
+    public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
+}
+
+
+partial class CodeRef : IGetLibraryName { }
+partial class CodeSystemRef : IGetLibraryName { }
+partial class ConceptRef : IGetLibraryName { }
+partial class ExpressionRef : IGetLibraryName { }
+partial class IdentifierRef : IGetLibraryName { }
+partial class ParameterRef : IGetLibraryName { }
+partial class ValueSetRef : IGetLibraryName { }
 
 #endregion
 
@@ -100,7 +148,7 @@ partial class Property : IGetPath { }
 
 #region Name
 
-internal interface IGetName 
+internal interface IGetName
 {
     string? name { get; }
 }
