@@ -2,10 +2,8 @@
 
 using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
-using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -53,9 +51,10 @@ public class Program
             [CqlToResourcePackagingOptions.ArgNameForce]                    = PackageSection + nameof(CqlToResourcePackagingOptions.Force),
             [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl]         = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-            [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+            [CSharpCodeWriterOptions.ArgNameOutDirectory]                   = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
-            [FhirResourceWriterOptions.ArgNameOutDirectory]   = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+            [FhirResourceWriterOptions.ArgNameOutDirectory]                 = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+            [FhirResourceWriterOptions.ArgNameOverrideDate]                 = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
             // @formatter:on
         };
     }
@@ -63,9 +62,9 @@ public class Program
     private const string Usage =
         """
         Packager CLI Usage:
-        
+
             -?|-h|-help                                Show this help
-                                                       
+
             --elm                  <directory>         Library root directory
             --cql                  <directory>         CQL root directory
             [--fhir]               <file|directory>    Resource location, either file name or directory
@@ -107,12 +106,32 @@ public class Program
 
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
-        services.AddPackagerServices(context.Configuration);
-        services.TryAddResourceWriters(context.Configuration);
-        services.TryAddTypeServices();
-        services.TryAddCompilationServices();
-        services.TryAddBuilders();
+        TryAddPackagerOptions(services, context.Configuration);
+        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
+        services.AddSingleton<ProgramCqlPackagerFactory>();
+        services.AddSingleton<PackagerCliProgram>();
         services.TryAddSingleton<OptionsConsoleDumper>();
+    }
+
+    private static void TryAddPackagerOptions(IServiceCollection services, IConfiguration config)
+    {
+        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
+            return;
+
+        services
+            .AddOptions<CqlToResourcePackagingOptions>()
+            .Configure<IConfiguration>(CqlToResourcePackagingOptions.BindConfig)
+            .ValidateOnStart();
+
+        services
+            .AddOptions<FhirResourceWriterOptions>()
+            .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
+            .ValidateOnStart();
+
+        services
+            .AddOptions<CSharpCodeWriterOptions>()
+            .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
+            .ValidateOnStart();
     }
 
     private static int Run(IHostBuilder hostBuilder)
@@ -150,5 +169,16 @@ public class Program
     private static void ShowHelp()
     {
         Console.WriteLine(Usage);
+    }
+}
+
+internal class ProgramCqlPackagerFactory : CqlPackagerFactory
+{
+    public ProgramCqlPackagerFactory(
+        ILoggerFactory loggerFactory,
+        IOptions<CqlToResourcePackagingOptions> cqlToResourcePackagingOptions,
+        IOptions<CSharpCodeWriterOptions> cSharpCodeWriterOptions,
+        IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions) : base(loggerFactory, 0, cqlToResourcePackagingOptions.Value, cSharpCodeWriterOptions.Value, fhirResourceWriterOptions.Value)
+    {
     }
 }
