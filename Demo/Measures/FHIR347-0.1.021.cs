@@ -541,8 +541,8 @@ public class FHIR347_0_1_021
 			var al_ = this.Measurement_Period();
 			var am_ = context.Operators.End(al_);
 			var an_ = context.Operators.Before(ak_, am_, null);
-			var ao_ = context.Operators.Convert<string>(ASCVDProcedure?.StatusElement);
-			var ap_ = context.Operators.Equal(ao_, "completed");
+			var ao_ = FHIRHelpers_4_0_001.ToString(ASCVDProcedure?.StatusElement);
+			var ap_ = context.Operators.EnumEqualsString(ao_, "completed");
 			var aq_ = context.Operators.And(an_, ap_);
 
 			return aq_;
@@ -587,8 +587,8 @@ public class FHIR347_0_1_021
 			var z_ = this.Measurement_Period();
 			var aa_ = FHIRHelpers_4_0_001.ToInterval(ValidEncounter?.Period);
 			var ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, aa_, null);
-			var ac_ = context.Operators.Convert<string>(ValidEncounter?.StatusElement);
-			var ad_ = context.Operators.Equal(ac_, "finished");
+			var ac_ = FHIRHelpers_4_0_001.ToString(ValidEncounter?.StatusElement);
+			var ad_ = context.Operators.EnumEqualsString(ac_, "finished");
 			var ae_ = context.Operators.And(ab_, ad_);
 
 			return ae_;
@@ -659,18 +659,19 @@ public class FHIR347_0_1_021
 			var k_ = context.Operators.End(j_);
 			var l_ = context.Operators.Before(i_, k_, null);
 			var m_ = context.Operators.And(g_, l_);
-			var n_ = context.Operators.Convert<string>(LDL?.StatusElement);
-			var o_ = new string[]
+			var n_ = FHIRHelpers_4_0_001.ToString(LDL?.StatusElement);
+			var o_ = context.Operators.Convert<string>(n_);
+			var p_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"appended",
 			};
-			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
-			var q_ = context.Operators.And(m_, p_);
+			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
+			var r_ = context.Operators.And(m_, q_);
 
-			return q_;
+			return r_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 
@@ -908,20 +909,21 @@ public class FHIR347_0_1_021
 			var z_ = this.Measurement_Period();
 			var aa_ = context.Operators.End(z_);
 			var ab_ = context.Operators.SameOrBefore(y_, aa_, null);
-			var ac_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.StatusElement);
-			var ad_ = new string[]
+			var ac_ = FHIRHelpers_4_0_001.ToString(PalliativeOrHospiceCareOrder?.StatusElement);
+			var ad_ = context.Operators.Convert<string>(ac_);
+			var ae_ = new string[]
 			{
 				"active",
 				"on-hold",
 				"completed",
 			};
-			var ae_ = context.Operators.InList<string>(ac_, (ad_ as IEnumerable<string>));
-			var af_ = context.Operators.And(ab_, ae_);
-			var ag_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.IntentElement);
-			var ah_ = context.Operators.Equal(ag_, "order");
-			var ai_ = context.Operators.And(af_, ah_);
+			var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
+			var ag_ = context.Operators.And(ab_, af_);
+			var ah_ = FHIRHelpers_4_0_001.ToString(PalliativeOrHospiceCareOrder?.IntentElement);
+			var ai_ = context.Operators.EnumEqualsString(ah_, "order");
+			var aj_ = context.Operators.And(ag_, ai_);
 
-			return ai_;
+			return aj_;
 		};
 		var g_ = context.Operators.WhereOrNull<ServiceRequest>(e_, f_);
 		var h_ = context.Operators.ExistsInList<ServiceRequest>(g_);
@@ -930,16 +932,16 @@ public class FHIR347_0_1_021
 		var m_ = context.Operators.ListUnion<Procedure>(j_, l_);
 		bool? n_(Procedure PalliativeOrHospiceCarePerformed)
 		{
-			var aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(PalliativeOrHospiceCarePerformed?.Performed);
-			var ak_ = context.Operators.Start(aj_);
-			var al_ = this.Measurement_Period();
-			var am_ = context.Operators.End(al_);
-			var an_ = context.Operators.SameOrBefore(ak_, am_, null);
-			var ao_ = context.Operators.Convert<string>(PalliativeOrHospiceCarePerformed?.StatusElement);
-			var ap_ = context.Operators.Equal(ao_, "completed");
-			var aq_ = context.Operators.And(an_, ap_);
+			var ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(PalliativeOrHospiceCarePerformed?.Performed);
+			var al_ = context.Operators.Start(ak_);
+			var am_ = this.Measurement_Period();
+			var an_ = context.Operators.End(am_);
+			var ao_ = context.Operators.SameOrBefore(al_, an_, null);
+			var ap_ = FHIRHelpers_4_0_001.ToString(PalliativeOrHospiceCarePerformed?.StatusElement);
+			var aq_ = context.Operators.EnumEqualsString(ap_, "completed");
+			var ar_ = context.Operators.And(ao_, aq_);
 
-			return aq_;
+			return ar_;
 		};
 		var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
 		var p_ = context.Operators.ExistsInList<Procedure>(o_);
@@ -949,16 +951,16 @@ public class FHIR347_0_1_021
 		var t_ = context.Operators.RetrieveByCodes<Encounter>(s_, null);
 		bool? u_(Encounter PalliativeEncounter)
 		{
-			var ar_ = FHIRHelpers_4_0_001.ToInterval(PalliativeEncounter?.Period);
-			var as_ = context.Operators.Start(ar_);
-			var at_ = this.Measurement_Period();
-			var au_ = context.Operators.End(at_);
-			var av_ = context.Operators.SameOrBefore(as_, au_, null);
-			var aw_ = context.Operators.Convert<string>(PalliativeEncounter?.StatusElement);
-			var ax_ = context.Operators.Equal(aw_, "finished");
-			var ay_ = context.Operators.And(av_, ax_);
+			var as_ = FHIRHelpers_4_0_001.ToInterval(PalliativeEncounter?.Period);
+			var at_ = context.Operators.Start(as_);
+			var au_ = this.Measurement_Period();
+			var av_ = context.Operators.End(au_);
+			var aw_ = context.Operators.SameOrBefore(at_, av_, null);
+			var ax_ = FHIRHelpers_4_0_001.ToString(PalliativeEncounter?.StatusElement);
+			var ay_ = context.Operators.EnumEqualsString(ax_, "finished");
+			var az_ = context.Operators.And(aw_, ay_);
 
-			return ay_;
+			return az_;
 		};
 		var v_ = context.Operators.WhereOrNull<Encounter>(t_, u_);
 		var w_ = context.Operators.ExistsInList<Encounter>(v_);
@@ -1137,19 +1139,20 @@ public class FHIR347_0_1_021
 			var t_ = FHIRHelpers_4_0_001.ToDateTime(StatinOrdered?.AuthoredOnElement);
 			var u_ = this.Measurement_Period();
 			var v_ = context.Operators.ElementInInterval<CqlDateTime>(t_, u_, null);
-			var w_ = context.Operators.Convert<string>(StatinOrdered?.StatusElement);
-			var x_ = new string[]
+			var w_ = FHIRHelpers_4_0_001.ToString(StatinOrdered?.StatusElement);
+			var x_ = context.Operators.Convert<string>(w_);
+			var y_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
-			var z_ = context.Operators.And(v_, y_);
-			var aa_ = context.Operators.Convert<string>(StatinOrdered?.IntentElement);
-			var ab_ = context.Operators.Equal(aa_, "order");
-			var ac_ = context.Operators.And(z_, ab_);
+			var z_ = context.Operators.InList<string>(x_, (y_ as IEnumerable<string>));
+			var aa_ = context.Operators.And(v_, z_);
+			var ab_ = FHIRHelpers_4_0_001.ToString(StatinOrdered?.IntentElement);
+			var ac_ = context.Operators.EnumEqualsString(ab_, "order");
+			var ad_ = context.Operators.And(aa_, ac_);
 
-			return ac_;
+			return ad_;
 		};
 		var s_ = context.Operators.WhereOrNull<MedicationRequest>(q_, r_);
 
@@ -1180,9 +1183,9 @@ public class FHIR347_0_1_021
 		{
 			bool? t_(Dosage @this)
 			{
-				var ae_ = context.Operators.Not((bool?)(@this?.Timing is null));
+				var af_ = context.Operators.Not((bool?)(@this?.Timing is null));
 
-				return ae_;
+				return af_;
 			};
 			var u_ = context.Operators.WhereOrNull<Dosage>(ActiveStatin?.DosageInstruction, t_);
 			Timing v_(Dosage @this) => 
@@ -1190,7 +1193,7 @@ public class FHIR347_0_1_021
 			var w_ = context.Operators.SelectOrNull<Dosage, Timing>(u_, v_);
 			bool? x_(Timing T)
 			{
-				object af_()
+				object ag_()
 				{
 					if (T?.Repeat?.Bounds is Range)
 					{
@@ -1205,24 +1208,25 @@ public class FHIR347_0_1_021
 						return null;
 					};
 				};
-				var ag_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(af_());
-				var ah_ = this.Measurement_Period();
-				var ai_ = context.Operators.Overlaps(ag_, ah_, null);
+				var ah_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ag_());
+				var ai_ = this.Measurement_Period();
+				var aj_ = context.Operators.Overlaps(ah_, ai_, null);
 
-				return ai_;
+				return aj_;
 			};
 			var y_ = context.Operators.WhereOrNull<Timing>(w_, x_);
 			var z_ = context.Operators.ExistsInList<Timing>(y_);
-			var aa_ = context.Operators.Convert<string>(ActiveStatin?.StatusElement);
-			var ab_ = new string[]
+			var aa_ = FHIRHelpers_4_0_001.ToString(ActiveStatin?.StatusElement);
+			var ab_ = context.Operators.Convert<string>(aa_);
+			var ac_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var ac_ = context.Operators.InList<string>(aa_, (ab_ as IEnumerable<string>));
-			var ad_ = context.Operators.And(z_, ac_);
+			var ad_ = context.Operators.InList<string>(ab_, (ac_ as IEnumerable<string>));
+			var ae_ = context.Operators.And(z_, ad_);
 
-			return ad_;
+			return ae_;
 		};
 		var s_ = context.Operators.WhereOrNull<MedicationRequest>(q_, r_);
 

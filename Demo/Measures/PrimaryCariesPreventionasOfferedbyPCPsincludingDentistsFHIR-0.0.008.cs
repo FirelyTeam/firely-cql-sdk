@@ -278,8 +278,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			var z_ = this.Measurement_Period();
 			var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ValidEncounter?.Period as object));
 			var ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, aa_, null);
-			var ac_ = context.Operators.Convert<string>(ValidEncounter?.StatusElement);
-			var ad_ = context.Operators.Equal(ac_, "finished");
+			var ac_ = FHIRHelpers_4_0_001.ToString(ValidEncounter?.StatusElement);
+			var ad_ = context.Operators.EnumEqualsString(ac_, "finished");
 			var ae_ = context.Operators.And(ab_, ad_);
 
 			return ae_;
@@ -409,8 +409,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			var f_ = this.Measurement_Period();
 			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(FluorideApplication?.Performed);
 			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, g_, null);
-			var i_ = context.Operators.Convert<string>(FluorideApplication?.StatusElement);
-			var j_ = context.Operators.Equal(i_, "completed");
+			var i_ = FHIRHelpers_4_0_001.ToString(FluorideApplication?.StatusElement);
+			var j_ = context.Operators.EnumEqualsString(i_, "completed");
 			var k_ = context.Operators.And(h_, j_);
 
 			return k_;

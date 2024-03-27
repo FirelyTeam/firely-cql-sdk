@@ -225,8 +225,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter EncounterInpatient)
 		{
-			var e_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
-			var f_ = context.Operators.Equal(e_, "finished");
+			var e_ = FHIRHelpers_4_0_001.ToString(EncounterInpatient?.StatusElement);
+			var f_ = context.Operators.EnumEqualsString(e_, "finished");
 			var g_ = FHIRHelpers_4_0_001.ToInterval(EncounterInpatient?.Period);
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
@@ -275,9 +275,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		var e_ = context.Operators.ListUnion<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration HypoMedication)
 		{
-			var h_ = context.Operators.Convert<string>(HypoMedication?.StatusElement);
-			var i_ = context.Operators.Equal(h_, "completed");
-			var k_ = context.Operators.Equal(h_, "not-done");
+			var h_ = FHIRHelpers_4_0_001.ToString(HypoMedication?.StatusElement);
+			var i_ = context.Operators.EnumEqualsString(h_, "completed");
+			var k_ = context.Operators.EnumEqualsString(h_, "not-done");
 			var l_ = context.Operators.Not(k_);
 			var m_ = context.Operators.And(i_, l_);
 
@@ -369,10 +369,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var ah_ = context.Operators.Start(y_);
 					var ai_ = context.Operators.Not((bool?)(ah_ is null));
 					var aj_ = context.Operators.And(af_, ai_);
-					var ak_ = context.Operators.Convert<string>(BloodGlucoseLab?.StatusElement);
-					var al_ = context.Operators.Equal(ak_, "final");
+					var ak_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab?.StatusElement);
+					var al_ = context.Operators.EnumEqualsString(ak_, "final");
 					var am_ = context.Operators.And(aj_, al_);
-					var ao_ = context.Operators.Equal(ak_, "cancelled");
+					var ao_ = context.Operators.EnumEqualsString(ak_, "cancelled");
 					var ap_ = context.Operators.Not(ao_);
 					var aq_ = context.Operators.And(am_, ap_);
 					var as_ = context.Operators.Start(w_);
@@ -408,10 +408,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var bm_ = context.Operators.Start(bd_);
 					var bn_ = context.Operators.Not((bool?)(bm_ is null));
 					var bo_ = context.Operators.And(bk_, bn_);
-					var bp_ = context.Operators.Convert<string>(BloodGlucoseLab?.StatusElement);
-					var bq_ = context.Operators.Equal(bp_, "final");
+					var bp_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab?.StatusElement);
+					var bq_ = context.Operators.EnumEqualsString(bp_, "final");
 					var br_ = context.Operators.And(bo_, bq_);
-					var bt_ = context.Operators.Equal(bp_, "cancelled");
+					var bt_ = context.Operators.EnumEqualsString(bp_, "cancelled");
 					var bu_ = context.Operators.Not(bt_);
 					var bv_ = context.Operators.And(br_, bu_);
 					var bx_ = context.Operators.Start(bb_);
@@ -451,10 +451,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var cx_ = context.Operators.Not((bool?)(cw_ is null));
 					var cy_ = context.Operators.And(cu_, cx_);
 					var cz_ = context.Operators.And(ck_, cy_);
-					var da_ = context.Operators.Convert<string>(FollowupBloodGlucoseLab?.StatusElement);
-					var db_ = context.Operators.Equal(da_, "final");
+					var da_ = FHIRHelpers_4_0_001.ToString(FollowupBloodGlucoseLab?.StatusElement);
+					var db_ = context.Operators.EnumEqualsString(da_, "final");
 					var dc_ = context.Operators.And(cz_, db_);
-					var de_ = context.Operators.Equal(da_, "cancelled");
+					var de_ = context.Operators.EnumEqualsString(da_, "cancelled");
 					var df_ = context.Operators.Not(de_);
 					var dg_ = context.Operators.And(dc_, df_);
 					var dh_ = FHIRHelpers_4_0_001.ToQuantity((FollowupBloodGlucoseLab?.Value as Quantity));

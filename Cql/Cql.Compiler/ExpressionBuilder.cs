@@ -1023,8 +1023,10 @@ namespace Hl7.Cql.Compiler
             var operands = op.operand
                 .Select(operand => TranslateExpression(operand))
                 .ToArray();
+
             var operandTypes = operands
-                .Select(op => op.Type);
+                .Select(op => op.Type)
+                .ToArray();
 
             var functionType = GetFunctionRefReturnType(op, operandTypes);
 
@@ -1033,44 +1035,11 @@ namespace Hl7.Cql.Compiler
                 .Concat(operandTypes)
                 .Concat(new[] { functionType })
                 .ToArray();
-
-            var funcType = GetFuncType(funcTypeParameters);
-
-
-            // if (op.libraryName is { } libraryAlias)
-            // {
-            //     var libraryKey = LibraryContext.GetNameAndVersionFromAlias(libraryAlias);
-            //     if (!LibraryContext.LibraryDefinitions.TryGetValue(libraryKey, op.name, operandTypes.ToArray(), out var definition))
-            //         throw this.NewExpressionBuildingException($"Cannot resolve a library definition for function {op.libraryName ?? ""}.{op.name}");
-            //
-            //     return definition;
-            // }
-
-            // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
-            // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
-            // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
-            if (op.libraryName is {} libraryAlias && libraryAlias.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase))
-            {
-                if (op.name!.Equals("tostring", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (operands[0].Type == typeof(string))
-                    {
-                        return operands[0];
-                    }
-                    else
-                    {
-                        var bind = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter,
-
-                            new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
-                        return bind;
-                    }
-                }
-            }
-
+            
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
             operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
-
+            var funcType = GetFuncType(funcTypeParameters);
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName, funcType, operands);
             return invoke;
         }

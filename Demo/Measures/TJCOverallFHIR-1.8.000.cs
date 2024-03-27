@@ -378,8 +378,8 @@ public class TJCOverallFHIR_1_8_000
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest P)
 		{
-			var j_ = context.Operators.Convert<string>(P?.IntentElement);
-			var k_ = context.Operators.Equal(j_, "order");
+			var j_ = FHIRHelpers_4_0_001.ToString(P?.IntentElement);
+			var k_ = context.Operators.EnumEqualsString(j_, "order");
 
 			return k_;
 		};
@@ -387,15 +387,16 @@ public class TJCOverallFHIR_1_8_000
 		var f_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? g_(Procedure InterventionPerformed)
 		{
-			var l_ = context.Operators.Convert<string>(InterventionPerformed?.StatusElement);
-			var m_ = new string[]
+			var l_ = FHIRHelpers_4_0_001.ToString(InterventionPerformed?.StatusElement);
+			var m_ = context.Operators.Convert<string>(l_);
+			var n_ = new string[]
 			{
 				"completed",
 				"in-progress",
 			};
-			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
+			var o_ = context.Operators.InList<string>(m_, (n_ as IEnumerable<string>));
 
-			return n_;
+			return o_;
 		};
 		var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
 		var i_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));

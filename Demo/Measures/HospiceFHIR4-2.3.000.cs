@@ -123,8 +123,8 @@ public class HospiceFHIR4_2_3_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter DischargeHospice)
 		{
-			var r_ = context.Operators.Convert<string>(DischargeHospice?.StatusElement);
-			var s_ = context.Operators.Equal(r_, "finished");
+			var r_ = FHIRHelpers_4_0_001.ToString(DischargeHospice?.StatusElement);
+			var s_ = context.Operators.EnumEqualsString(r_, "finished");
 			var t_ = FHIRHelpers_4_0_001.ToConcept(DischargeHospice?.Hospitalization?.DischargeDisposition);
 			var u_ = this.Discharge_to_home_for_hospice_care__procedure_();
 			var v_ = context.Operators.ConvertCodeToConcept(u_);
@@ -148,22 +148,23 @@ public class HospiceFHIR4_2_3_000
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
 		bool? h_(ServiceRequest HospiceOrder)
 		{
-			var ai_ = context.Operators.Convert<string>(HospiceOrder?.StatusElement);
-			var aj_ = new string[]
+			var ai_ = FHIRHelpers_4_0_001.ToString(HospiceOrder?.StatusElement);
+			var aj_ = context.Operators.Convert<string>(ai_);
+			var ak_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var ak_ = context.Operators.InList<string>(ai_, (aj_ as IEnumerable<string>));
-			var al_ = context.Operators.Convert<string>(HospiceOrder?.IntentElement);
-			var am_ = context.Operators.Equal(al_, "order");
-			var an_ = context.Operators.And(ak_, am_);
-			var ao_ = this.Measurement_Period();
-			var ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((HospiceOrder?.AuthoredOnElement as object));
-			var aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ap_, null);
-			var ar_ = context.Operators.And(an_, aq_);
+			var al_ = context.Operators.InList<string>(aj_, (ak_ as IEnumerable<string>));
+			var am_ = FHIRHelpers_4_0_001.ToString(HospiceOrder?.IntentElement);
+			var an_ = context.Operators.EnumEqualsString(am_, "order");
+			var ao_ = context.Operators.And(al_, an_);
+			var ap_ = this.Measurement_Period();
+			var aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((HospiceOrder?.AuthoredOnElement as object));
+			var ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, aq_, null);
+			var as_ = context.Operators.And(ao_, ar_);
 
-			return ar_;
+			return as_;
 		};
 		var i_ = context.Operators.WhereOrNull<ServiceRequest>(g_, h_);
 		var j_ = context.Operators.ExistsInList<ServiceRequest>(i_);
@@ -171,14 +172,14 @@ public class HospiceFHIR4_2_3_000
 		var m_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
 		bool? n_(Procedure HospicePerformed)
 		{
-			var as_ = context.Operators.Convert<string>(HospicePerformed?.StatusElement);
-			var at_ = context.Operators.Equal(as_, "completed");
-			var au_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(HospicePerformed?.Performed);
-			var av_ = this.Measurement_Period();
-			var aw_ = context.Operators.Overlaps(au_, av_, null);
-			var ax_ = context.Operators.And(at_, aw_);
+			var at_ = FHIRHelpers_4_0_001.ToString(HospicePerformed?.StatusElement);
+			var au_ = context.Operators.EnumEqualsString(at_, "completed");
+			var av_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(HospicePerformed?.Performed);
+			var aw_ = this.Measurement_Period();
+			var ax_ = context.Operators.Overlaps(av_, aw_, null);
+			var ay_ = context.Operators.And(au_, ax_);
 
-			return ax_;
+			return ay_;
 		};
 		var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
 		var p_ = context.Operators.ExistsInList<Procedure>(o_);

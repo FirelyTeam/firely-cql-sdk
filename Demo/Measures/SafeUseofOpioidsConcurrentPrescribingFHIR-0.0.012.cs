@@ -198,8 +198,8 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
 			var j_ = context.Operators.GreaterOrEqual(i_, (int?)18);
-			var k_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
-			var l_ = context.Operators.Equal(k_, "finished");
+			var k_ = FHIRHelpers_4_0_001.ToString(EncounterInpatient?.StatusElement);
+			var l_ = context.Operators.EnumEqualsString(k_, "finished");
 			var m_ = context.Operators.And(j_, l_);
 
 			return m_;
@@ -249,11 +249,11 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				var ab_ = FHIRHelpers_4_0_001.ToDateTime(OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement);
 				var ac_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
 				var ad_ = context.Operators.ElementInInterval<CqlDateTime>(ab_, ac_, null);
-				var ae_ = context.Operators.Convert<string>(OpioidOrBenzodiazepineDischargeMedication?.StatusElement);
-				var af_ = context.Operators.Equal(ae_, "active");
+				var ae_ = FHIRHelpers_4_0_001.ToString(OpioidOrBenzodiazepineDischargeMedication?.StatusElement);
+				var af_ = context.Operators.EnumEqualsString(ae_, "active");
 				var ag_ = context.Operators.And(ad_, af_);
-				var ah_ = context.Operators.Convert<string>(OpioidOrBenzodiazepineDischargeMedication?.IntentElement);
-				var ai_ = context.Operators.Equal(ah_, "plan");
+				var ah_ = FHIRHelpers_4_0_001.ToString(OpioidOrBenzodiazepineDischargeMedication?.IntentElement);
+				var ai_ = context.Operators.EnumEqualsString(ah_, "plan");
 				var aj_ = context.Operators.And(ag_, ai_);
 
 				return aj_;
@@ -427,8 +427,8 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				var ae_ = FHIRHelpers_4_0_001.ToDateTime(PalliativeOrHospiceCareOrder?.AuthoredOnElement);
 				var af_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
 				var ag_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, af_, null);
-				var ah_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.IntentElement);
-				var ai_ = context.Operators.Equal(ah_, "order");
+				var ah_ = FHIRHelpers_4_0_001.ToString(PalliativeOrHospiceCareOrder?.IntentElement);
+				var ai_ = context.Operators.EnumEqualsString(ah_, "order");
 				var aj_ = context.Operators.And(ag_, ai_);
 
 				return aj_;
