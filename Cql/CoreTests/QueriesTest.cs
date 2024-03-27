@@ -22,7 +22,7 @@ namespace CoreTests
             Microsoft.Extensions.Logging.LoggerFactory
                 .Create(logging => logging.AddDebug());
 
-        private static LibraryDefinitionsBuilderFactory Factory = new(LoggerFactory);
+        private static CqlCompilerFactory Factory = new(LoggerFactory);
 
         [ClassInitialize]
         public static void Initialize(TestContext context)

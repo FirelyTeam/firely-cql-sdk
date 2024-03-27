@@ -69,7 +69,7 @@ namespace CoreTests
 
         private static LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder()
         {
-            return new LibraryDefinitionsBuilderFactory(LoggerFactory).LibraryDefinitionsBuilder;
+            return new CqlCompilerFactory(LoggerFactory).LibraryDefinitionsBuilder;
         }
 
         internal static CqlContext Context;

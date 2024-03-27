@@ -18,7 +18,7 @@ namespace CoreTests
             Microsoft.Extensions.Logging.LoggerFactory
                 .Create(logging => logging.AddDebug());
 
-        private static LibraryDefinitionsBuilderFactory Factory = new(LoggerFactory);
+        private static CqlCompilerFactory Factory = new(LoggerFactory);
 
         [TestMethod]
         public void AggregateQueries_1_0_0()

@@ -1,6 +1,5 @@
 ﻿using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
 
@@ -8,17 +7,19 @@ internal class PackagerCliProgram
 {
     private readonly OptionsConsoleDumper _optionsConsoleDumper;
     private readonly ILogger<PackagerCliProgram> _logger;
+    private readonly ProgramCqlPackagerFactory _packagerCliFactory;
     private readonly CqlToResourcePackagingPipeline _pipeline;
 
     public PackagerCliProgram(
         ILogger<PackagerCliProgram> logger,
-        IOptions<CqlToResourcePackagingOptions > options,
         OptionsConsoleDumper optionsConsoleDumper,
-        CqlToResourcePackagingPipeline pipeline)
+        ProgramCqlPackagerFactory packagerCliFactory
+        )
     {
         _logger = logger;
         _optionsConsoleDumper = optionsConsoleDumper;
-        _pipeline = pipeline;
+        _pipeline = packagerCliFactory.CqlToResourcePackagingPipeline;
+        _packagerCliFactory = packagerCliFactory;
     }
 
     public int Run()

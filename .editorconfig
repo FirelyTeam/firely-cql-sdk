@@ -12,4 +12,4 @@ dotnet_diagnostic.CA1304.severity = none
 
 # CA1309: use ordinal string comparison
 dotnet_diagnostic.CA1309.severity = none
-
+csharp_style_namespace_declarations = file_scoped:silent
