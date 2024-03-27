@@ -9,6 +9,11 @@ using System.Linq;
 
 namespace Hl7.Cql.Elm;
 
+file static class StringExtensions
+{
+    public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
+}
+
 
 #region NameAndVersion
 
@@ -33,7 +38,7 @@ internal interface IGetNameAndVersion
 partial class Library : IGetNameAndVersion
 {
     /// <inheritdoc />
-    public string? NameAndVersion(bool throwError = true) => 
+    public string? NameAndVersion(bool throwError = true) =>
         GetVersionedIdentifier(throwError)!
        .NameAndVersion(throwError);
 
@@ -61,10 +66,10 @@ partial class IncludeDef : IGetNameAndVersion
     /// <inheritdoc />
     public VersionedIdentifier? GetVersionedIdentifier(bool throwError = true)
     {
-        if (path is {Length:>0}) 
+        if (path is {Length:>0})
             return new()
             {
-                id = path, 
+                id = path,
                 version = version is {Length:0} ? null : version
             };
 
@@ -105,97 +110,27 @@ partial class VersionedIdentifier : IGetNameAndVersion
 
 #endregion
 
-#region interface IGetAlias (from libraryName)
+#region interface IGetLibraryName
 
-/// <summary>
-/// Gets an alias
-/// </summary>
-public interface IGetLibraryAlias
+internal interface IGetLibraryName
 {
-    /// <summary>
-    /// Gets the alias.
-    /// </summary>
-    /// <param name="throwError">Indicates whether to throw an exception if the alias is missing.</param>
-    /// <returns>The alias.</returns>
-    string? GetLibraryAlias(bool throwError = true);
+    string? libraryName { get; }
 }
 
-static class Sanitizer
+partial class IncludeDef : IGetLibraryName
 {
-    public static string? SanitizeLibraryName(this IGetLibraryAlias source, string? libraryNameWithVersion, bool throwError = true)
-    {
-        if (!string.IsNullOrEmpty(libraryNameWithVersion))
-        {
-            return SanitizeNameAndVersion(libraryNameWithVersion);
-        }
-
-        if (throwError)
-            throw new MissingAliasError(source).ToException();
-
-        return null!;
-    }
-
-    public static string SanitizeNameAndVersion(string libraryNameWithVersion)
-    {
-        var parts = libraryNameWithVersion.Split('-', 2);
-        if (parts.Length == 1) return parts[0];
-
-        var version = parts[1];
-        var versionParts = version.Split('.');
-        version = string.Join('.', versionParts.Select(vp => vp.TrimStart('0'))); // Remove leading zeros
-        return $"{parts[0]}-{version}";
-    }
-}
-
-partial class IncludeDef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) =>
-        this.SanitizeLibraryName(localIdentifier, false)
-        ?? this.SanitizeLibraryName(path, throwError);
+    /// <nodoc />
+    public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }
 
 
-partial class CodeRef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) => this.SanitizeLibraryName(libraryName, throwError);
-}
-
-partial class CodeSystemRef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) => this.SanitizeLibraryName(libraryName, throwError);
-}
-partial class ConceptRef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) => this.SanitizeLibraryName(libraryName, throwError);
-}
-
-partial class ExpressionRef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) => this.SanitizeLibraryName(libraryName, throwError);
-}
-
-partial class IdentifierRef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) => this.SanitizeLibraryName(libraryName, throwError);
-}
-
-partial class ParameterRef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) => this.SanitizeLibraryName(libraryName, throwError);
-}
-
-partial class ValueSetRef : IGetLibraryAlias
-{
-    /// <inheritdoc/>
-    public string? GetLibraryAlias(bool throwError = true) => this.SanitizeLibraryName(libraryName, throwError);
-}
+partial class CodeRef : IGetLibraryName { }
+partial class CodeSystemRef : IGetLibraryName { }
+partial class ConceptRef : IGetLibraryName { }
+partial class ExpressionRef : IGetLibraryName { }
+partial class IdentifierRef : IGetLibraryName { }
+partial class ParameterRef : IGetLibraryName { }
+partial class ValueSetRef : IGetLibraryName { }
 
 #endregion
 
@@ -213,7 +148,7 @@ partial class Property : IGetPath { }
 
 #region Name
 
-internal interface IGetName 
+internal interface IGetName
 {
     string? name { get; }
 }
@@ -224,9 +159,7 @@ partial class CodeSystemRef : IGetName { }
 partial class ConceptDef : IGetName { }
 partial class ConceptRef : IGetName { }
 partial class ExpressionDef : IGetName { }
-
-partial class ExpressionRef : IGetName
-{ }
+partial class ExpressionRef : IGetName { }
 partial class IdentifierRef : IGetName { }
 partial class InstanceElement : IGetName { }
 partial class OperandDef : IGetName { }

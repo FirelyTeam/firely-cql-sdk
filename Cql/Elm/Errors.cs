@@ -23,7 +23,7 @@ internal readonly record struct MissingIdentifierError(IGetNameAndVersion Source
     public string GetMessage() => $"{Source.GetType().Name} did not have an identifier.";
 }
 
-internal readonly record struct MissingAliasError(IGetLibraryAlias Source) : ICqlError
+internal readonly record struct MissingAliasError(IGetLibraryName Source) : ICqlError
 {
     public string GetMessage() => $"{Source.GetType().Name} did not have an alias. Source: {Source}";
 }

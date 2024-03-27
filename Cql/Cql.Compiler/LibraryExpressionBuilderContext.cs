@@ -181,7 +181,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)]out string? url)
     {
-        var libraryName = GetNameAndVersionFromAlias(codeSystemRef.GetLibraryAlias(false));
+        var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);
         return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
     }
 
