@@ -89,7 +89,7 @@ internal static class DependencyInjection
     public static void TryAddTypeServices(this IServiceCollection services)
     {
         services.TryAddSingleton(ModelInfo.ModelInspector);
-        services.TryAddSingleton<TypeResolver>(FhirTypeResolver.Default);
+        services.TryAddSingleton<Abstractions.TypeResolver>(FhirTypeResolver.Default);
         services.TryAddSingleton<TypeConverter>(FhirTypeConverter.Default);
         services.TryAddSingleton<TypeManager>();
     }

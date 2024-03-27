@@ -3,7 +3,6 @@ using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging;
 
@@ -12,55 +11,59 @@ namespace Hl7.Cql.Packaging;
 /// The idea is not to inject this into service types, it's purpose is to
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
-internal class ResourcePackagerFactory : LibraryDefinitionsBuilderFactory
+internal class CqlPackagerFactory : CqlCompilerFactory
 {
-    private readonly Lazy<CSharpLibrarySetToStreamsWriter> _cSharpSourceCodeWriter;
-    private readonly Lazy<CSharpCodeStreamPostProcessor?> _cSharpCodeStreamPostProcessor;
-    private readonly Lazy<FhirResourcePostProcessor?> _fhirResourcePostProcessor;
-    private readonly Lazy<AssemblyCompiler> _assemblyCompiler;
-    private readonly Lazy<ResourcePackager> _resourcePackager;
-    private readonly Lazy<CqlTypeToFhirTypeMapper> _cqlTypeToFhirTypeMapper;
+    // public DirectoryInfo? CSharpOutDirectory => CqlToResourcePackagingOptions.CqlDirectory
+    // public DirectoryInfo? FhirResourceOutDirectory { get; }
+    // public DateTime? FhirResourceOverrideDate { get; }
+    public CqlToResourcePackagingOptions CqlToResourcePackagingOptions { get; }
+    public CSharpCodeWriterOptions? CSharpCodeWriterOptions { get; }
+    public FhirResourceWriterOptions? FhirResourceWriterOptions { get; }
 
-    public ResourcePackagerFactory(
-        ILoggerFactory loggerFactory, 
-        int cacheSize = 0, 
-        string? csharpOutDirectory = null,
-        string? fhirResourceOutDirectory = null,
-        DateTime? fhirResourceOverrideDate = null) : base(loggerFactory, cacheSize)
+    public CqlPackagerFactory(
+        ILoggerFactory loggerFactory,
+        int cacheSize = 0,
+        CqlToResourcePackagingOptions? cqlToResourcePackagingOptions = default,
+        CSharpCodeWriterOptions? cSharpCodeWriterOptions = default,
+        FhirResourceWriterOptions? fhirResourceWriterOptions = default) : base(loggerFactory, cacheSize)
     {
-        _cqlTypeToFhirTypeMapper = Deferred(() => new CqlTypeToFhirTypeMapper(FhirTypeResolver));
-        _cSharpCodeStreamPostProcessor = Deferred<CSharpCodeStreamPostProcessor?>(() =>
-            csharpOutDirectory is not null
-                ? new WriteToFileCSharpCodeStreamPostProcessor(
-                    Options(new CSharpCodeWriterOptions() { OutDirectory = new DirectoryInfo(csharpOutDirectory) }),
-                    Logger<WriteToFileCSharpCodeStreamPostProcessor>()) 
-                : null);
-        _fhirResourcePostProcessor = Deferred<FhirResourcePostProcessor?>(() =>
-            fhirResourceOutDirectory is not null
-                ? new WriteToFileFhirResourcePostProcessor(
-                    Options(new FhirResourceWriterOptions() { OutDirectory = new DirectoryInfo(fhirResourceOutDirectory), OverrideDate = fhirResourceOverrideDate}),
-                    Logger<WriteToFileFhirResourcePostProcessor>())
-                : null);
-        _cSharpSourceCodeWriter = Deferred(() => new CSharpLibrarySetToStreamsWriter(Logger<CSharpLibrarySetToStreamsWriter>(), FhirTypeResolver));
-        _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor));
-        _resourcePackager = Deferred(() => new ResourcePackager(FhirTypeResolver, FhirResourcePostProcessor));
-
-
-        static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
-
-        ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
-
-        IOptions<T> Options<T>(T options) where T : class => Microsoft.Extensions.Options.Options.Create<T>(options);
+        CqlToResourcePackagingOptions = cqlToResourcePackagingOptions ?? new();
+        CSharpCodeWriterOptions = cSharpCodeWriterOptions;
+        FhirResourceWriterOptions = fhirResourceWriterOptions;
     }
 
-    public CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => _cqlTypeToFhirTypeMapper.Value;
+    public virtual CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => Singleton(NewCqlTypeToFhirTypeMapper);
+    protected virtual CqlTypeToFhirTypeMapper NewCqlTypeToFhirTypeMapper() => new(TypeResolver);
 
-    public CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => _cSharpSourceCodeWriter.Value;
+    public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => Singleton(NewCSharpLibrarySetToStreamsWriter);
+    protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(Logger<CSharpLibrarySetToStreamsWriter>(), TypeResolver);
 
-    public CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => _cSharpCodeStreamPostProcessor.Value;
-    public FhirResourcePostProcessor? FhirResourcePostProcessor => _fhirResourcePostProcessor.Value;
+    public virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
+    protected virtual CSharpCodeStreamPostProcessor? NewCSharpCodeStreamPostProcessorOrNull() =>
+        CSharpCodeWriterOptions is { OutDirectory: { } } opt
+            ? NewWriteToFileCSharpCodeStreamPostProcessor(opt)
+            : default(CSharpCodeStreamPostProcessor);
+    protected virtual WriteToFileCSharpCodeStreamPostProcessor NewWriteToFileCSharpCodeStreamPostProcessor(
+        CSharpCodeWriterOptions opt) =>
+        new(Options(opt), Logger<WriteToFileCSharpCodeStreamPostProcessor>());
 
-    public AssemblyCompiler AssemblyCompiler => _assemblyCompiler.Value;
+    public virtual FhirResourcePostProcessor? FhirResourcePostProcessor => Singleton(NewFhirResourcePostProcessorOrNull);
+    protected virtual FhirResourcePostProcessor? NewFhirResourcePostProcessorOrNull() =>
+        FhirResourceWriterOptions is { OutDirectory: {} } opt
+            ? NewWriteToFileFhirResourcePostProcessor(opt)
+            : default(FhirResourcePostProcessor);
+    protected virtual WriteToFileFhirResourcePostProcessor NewWriteToFileFhirResourcePostProcessor(
+        FhirResourceWriterOptions opt) =>
+        new(Options(opt), Logger<WriteToFileFhirResourcePostProcessor>());
 
-    public ResourcePackager ResourcePackager => _resourcePackager.Value;
+
+    public AssemblyCompiler AssemblyCompiler => Singleton(NewAssemblyCompiler);
+    protected virtual AssemblyCompiler NewAssemblyCompiler() => new(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor);
+
+    public ResourcePackager ResourcePackager => Singleton(NewResourcePackager);
+    protected virtual ResourcePackager NewResourcePackager() => new(TypeResolver, FhirResourcePostProcessor);
+
+    public CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => Singleton(NewCqlToResourcePackagingPipeline);
+    protected virtual CqlToResourcePackagingPipeline NewCqlToResourcePackagingPipeline() =>
+        new(Options(CqlToResourcePackagingOptions), ResourcePackager, LibraryDefinitionsBuilder, AssemblyCompiler);
 }
