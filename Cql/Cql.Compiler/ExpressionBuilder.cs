@@ -1035,7 +1035,7 @@ namespace Hl7.Cql.Compiler
                 .Concat(operandTypes)
                 .Concat(new[] { functionType })
                 .ToArray();
-            
+
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
             operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
