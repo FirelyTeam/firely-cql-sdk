@@ -206,8 +206,14 @@ internal partial class ExpressionBuilder
         {
             var callSingle = ctx._operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
             @return = callSingle;
+         
         }
-        
+
+        if (query.resultTypeSpecifier is elm.ListTypeSpecifier && !IsOrImplementsIEnumerableOfT(@return.Type))
+        {
+            @return = Expression.NewArrayInit(@return.Type, @return);
+        }
+
         return @return;
     }
 
