@@ -13,9 +13,6 @@ namespace Hl7.Cql.Packaging;
 /// </summary>
 internal class CqlPackagerFactory : CqlCompilerFactory
 {
-    // public DirectoryInfo? CSharpOutDirectory => CqlToResourcePackagingOptions.CqlDirectory
-    // public DirectoryInfo? FhirResourceOutDirectory { get; }
-    // public DateTime? FhirResourceOverrideDate { get; }
     public CqlToResourcePackagingOptions CqlToResourcePackagingOptions { get; }
     public CSharpCodeWriterOptions? CSharpCodeWriterOptions { get; }
     public FhirResourceWriterOptions? FhirResourceWriterOptions { get; }

@@ -100,7 +100,7 @@ partial class Property : IGetPath { }
 
 #region Name
 
-internal interface IGetName 
+internal interface IGetName
 {
     string? name { get; }
 }
