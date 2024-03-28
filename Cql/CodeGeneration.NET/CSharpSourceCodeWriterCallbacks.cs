@@ -34,7 +34,7 @@ internal class CSharpSourceCodeWriterCallbacks
     public Stream GetStreamForLibraryName(string libraryName) =>
         _streamsAlreadyCreated.Add(libraryName)
             ? new MemoryStream()
-            : throw new AlreadyCreatedStreamPreviouslyForLibraryNameError(libraryName).ToException();
+            : throw new AlreadyCreatedAStreamForLibraryNameError(libraryName).ToException();
 
     public bool ShouldWriteLibrary(string libraryName) =>
         _shouldWriteLibrary?.Invoke(libraryName) ?? true;
@@ -55,7 +55,7 @@ internal abstract record CSharpSourceCodeStep
     public record OnDone() : CSharpSourceCodeStep;
 }
 
-internal readonly record struct AlreadyCreatedStreamPreviouslyForLibraryNameError(string LibraryName) : ICqlError
+internal readonly record struct AlreadyCreatedAStreamForLibraryNameError(string LibraryName) : ICqlError
 {
     public string GetMessage() => $"Already created a stream for this library name before. Library Name: '{LibraryName}'";
 }

@@ -14,7 +14,7 @@ public class LibrarySetExpressionBuilderTests
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
         LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(TestUtility.CmsElmDirectory, "CumulativeMedicationDuration");
+        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");
         var f = new CqlCompilerFactory(NullLoggerFactory.Instance);
         var defs = f.LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet);
         var lambdaExpression = defs["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];

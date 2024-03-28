@@ -34,16 +34,16 @@ jobs:
       parameters:
         nuGetServiceConnections: ${{ parameters.nuGetServiceConnections }}
         nuGetSources: ${{ parameters.nuGetSources }}
-      
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true 
+
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true
     displayName: 'dotnet build $(buildConfiguration) with version suffix  and no restore'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'true')))
-    
+
   - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
     displayName: 'dotnet build $(buildConfiguration) with version suffix'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'false')))
 
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true 
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true
     displayName: 'dotnet build $(buildConfiguration)'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
@@ -60,12 +60,12 @@ jobs:
     - template: package.yml
       parameters:
         artifactName: ${{parameters.packageArtifactName}}
-        useVersionSuffix: ${{ parameters.useVersionSuffix }}  
-  
+        useVersionSuffix: ${{ parameters.useVersionSuffix }}
+
   - ${{ if eq(parameters.publishArtifacts, 'true') }}:
     - template: publish.yml
       parameters:
         useVersionSuffix: ${{ parameters.useVersionSuffix }}
         publishWebProjects: ${{ parameters.publishWebProjects }}
         zipAfterPublish: ${{ parameters.zipAfterPublish }}
-        
+

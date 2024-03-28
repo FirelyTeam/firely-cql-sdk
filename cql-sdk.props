@@ -35,7 +35,8 @@
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
-		<LangVersion>11.0</LangVersion>
+		<!-- Bofore upgrading to 12, need to fix the build and test pipeline -->
+		<LangVersion>11</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Configurations>Debug;Release;FullDebug</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
@@ -48,8 +49,8 @@
 		<Optimize>false</Optimize>
 		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
 		<LibraryPKHash></LibraryPKHash>
-	</PropertyGroup>	
-	
+	</PropertyGroup>
+
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<SignAssembly>True</SignAssembly>
 		<DelaySign>true</DelaySign>
@@ -62,12 +63,12 @@
 
 	<ItemGroup>
 		<!--
-		JetBrains.Annotations help reduce false positive warnings, explicitly declare purity and nullability in your code, 
-		deal with implicit usages of members, support special semantics of APIs in ASP.NET and XAML frameworks and 
+		JetBrains.Annotations help reduce false positive warnings, explicitly declare purity and nullability in your code,
+		deal with implicit usages of members, support special semantics of APIs in ASP.NET and XAML frameworks and
 		otherwise increase accuracy of JetBrains Rider and ReSharper code inspections.
 
-		All usages of JetBrains.Annotations attributes are erased from metadata by default, which means no actual binary 
-		reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in 
+		All usages of JetBrains.Annotations attributes are erased from metadata by default, which means no actual binary
+		reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in
 		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
