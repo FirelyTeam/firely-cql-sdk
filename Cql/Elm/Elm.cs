@@ -1,11 +1,8 @@
 ﻿#pragma warning disable IDE1006 // Naming violation suppressed.
-#pragma warning disable RS0016 // Undocumented public api members.
 
-using System;
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Elm;
 
@@ -14,9 +11,11 @@ file static class StringExtensions
     public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
 }
 
+#region GetNameAndVersion
 
-#region NameAndVersion
-
+/// <summary>
+/// Interface for getting the name and version of an object.
+/// </summary>
 internal interface IGetNameAndVersion
 {
     /// <summary>
@@ -40,7 +39,7 @@ partial class Library : IGetNameAndVersion
     /// <inheritdoc />
     public string? NameAndVersion(bool throwError = true) =>
         GetVersionedIdentifier(throwError)!
-       .NameAndVersion(throwError);
+            .NameAndVersion(throwError);
 
     /// <inheritdoc />
     public VersionedIdentifier? GetVersionedIdentifier(bool throwError = true)
@@ -110,16 +109,22 @@ partial class VersionedIdentifier : IGetNameAndVersion
 
 #endregion
 
-#region IGetLibraryName
+#region GetLibraryName
 
+/// <summary>
+/// Interface for getting the library name of an object.
+/// </summary>
 internal interface IGetLibraryName
 {
+    /// <summary>
+    /// Gets the library name.
+    /// </summary>
     string? libraryName { get; }
 }
 
 partial class IncludeDef : IGetLibraryName
 {
-    /// <nodoc />
+    [JsonIgnore]
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }
 
@@ -134,10 +139,16 @@ partial class ValueSetRef : IGetLibraryName { }
 
 #endregion
 
-#region Path
+#region GetPath
 
+/// <summary>
+/// Interface for getting the path of an object.
+/// </summary>
 internal interface IGetPath
 {
+    /// <summary>
+    /// Gets the path.
+    /// </summary>
     string? path { get; }
 }
 partial class AggregateExpression : IGetPath { }
@@ -146,10 +157,16 @@ partial class Property : IGetPath { }
 
 #endregion
 
-#region Name
+#region GetName
 
+/// <summary>
+/// Interface for getting the name of an object.
+/// </summary>
 internal interface IGetName
 {
+    /// <summary>
+    /// Gets the name.
+    /// </summary>
     string? name { get; }
 }
 partial class AliasRef : IGetName { }
