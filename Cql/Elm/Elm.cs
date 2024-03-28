@@ -124,6 +124,7 @@ internal interface IGetLibraryName
 
 partial class IncludeDef : IGetLibraryName
 {
+    /// <inheritdoc />
     [JsonIgnore]
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }
