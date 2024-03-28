@@ -110,6 +110,7 @@ partial class CodeSystemDef : IGetName { }
 partial class CodeSystemRef : IGetName { }
 partial class ConceptDef : IGetName { }
 partial class ConceptRef : IGetName { }
+partial class ExpressionDef : IGetName { }
 partial class ExpressionRef : IGetName { }
 partial class IdentifierRef : IGetName { }
 partial class InstanceElement : IGetName { }

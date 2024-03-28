@@ -1,23 +1,24 @@
-﻿using Hl7.Cql.Packaging.ResourceWriters;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Packaging;
 using static System.Console;
+using Hl7.Cql.Packaging.PostProcessors;
 
 namespace Hl7.Cql.Packager;
 
 internal class OptionsConsoleDumper
 {
-    private readonly PackagerOptions _packagerOptions;
+    private readonly CqlToResourcePackagingOptions _options;
     private readonly FhirResourceWriterOptions _fhirResourceWriterOptions;
     private readonly CSharpCodeWriterOptions _csharpCodeWriterOptions;
 
     public OptionsConsoleDumper(
-        IOptions<PackagerOptions> packagerOptions,
+        IOptions<CqlToResourcePackagingOptions> packagerOptions,
         IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
         IOptions<CSharpCodeWriterOptions> csharpResourceWriterOptions)
     {
-        _packagerOptions = packagerOptions.Value;
+        _options = packagerOptions.Value;
         _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
         _csharpCodeWriterOptions = csharpResourceWriterOptions.Value;
     }
@@ -30,11 +31,11 @@ internal class OptionsConsoleDumper
         WriteLine("- Arguments Provided ----------------------------");
         (string name, object? value)[] values = new[]
         {
-            ArgFor(_packagerOptions.CqlDirectory),
-            ArgFor(_packagerOptions.ElmDirectory),
-            ArgFor(_packagerOptions.CanonicalRootUrl),
-            ArgFor(_packagerOptions.Force),
-            ArgFor(_packagerOptions.Debug),
+            ArgFor(_options.CqlDirectory),
+            ArgFor(_options.ElmDirectory),
+            ArgFor(_options.CanonicalRootUrl),
+            ArgFor(_options.Force),
+            ArgFor(_options.Debug),
             ArgFor("Fhir", _fhirResourceWriterOptions.OutDirectory),
             ArgFor("Fhir", _fhirResourceWriterOptions.OverrideDate),
             ArgFor("CSharp", _csharpCodeWriterOptions.OutDirectory),

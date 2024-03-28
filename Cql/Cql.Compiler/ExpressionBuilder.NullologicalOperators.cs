@@ -18,14 +18,14 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression Coalesce(elm.Coalesce ce, ExpressionBuilderContext ctx)
+        protected Expression Coalesce(elm.Coalesce ce)
         {
             var operands = ce.operand!
-                .Select(op => TranslateExpression(op, ctx))
+                .Select(op => TranslateExpression(op))
                 .ToArray();
             if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
             {
-                var call = ctx.OperatorBinding.Bind(CqlOperator.Coalesce, ctx.RuntimeContextParameter, operands[0]);
+                var call = _operatorBinding.Bind(CqlOperator.Coalesce, LibraryDefinitionsBuilder.ContextParameter, operands[0]);
                 return call;
             }
             var distinctOperandTypes = operands
@@ -33,7 +33,7 @@ namespace Hl7.Cql.Compiler
                 .Distinct()
                 .ToArray();
             if (distinctOperandTypes.Length != 1)
-                throw ctx.NewExpressionBuildingException("All operand types should match when using Coalesce");
+                throw this.NewExpressionBuildingException("All operand types should match when using Coalesce");
             var type = operands[0].Type;
             if (type.IsValueType && !type.IsNullable())
                 throw new NotSupportedException("Coalesce on value types is not defined.");
@@ -54,9 +54,9 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression IsNull(elm.IsNull isn, ExpressionBuilderContext ctx)
+        protected Expression IsNull(elm.IsNull isn)
         {
-            var operand = TranslateExpression(isn.operand!, ctx);
+            var operand = TranslateExpression(isn.operand!);
             if (operand.Type.IsValueType && operand.Type.IsNullable() == false)
                 return Expression.Constant(false, typeof(bool?));
             else
@@ -67,12 +67,12 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression? IsFalse(elm.IsFalse e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.IsFalse, e, ctx);
+        protected Expression? IsFalse(elm.IsFalse e) =>
+            UnaryOperator(CqlOperator.IsFalse, e);
 
 
-        protected Expression? IsTrue(elm.IsTrue e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.IsTrue, e, ctx);
+        protected Expression? IsTrue(elm.IsTrue e) =>
+            UnaryOperator(CqlOperator.IsTrue, e);
 
 
     }

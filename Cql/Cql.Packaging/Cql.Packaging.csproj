@@ -28,6 +28,22 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Test" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Test" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="CqlPackagingPipelineOptions..*.cs">
+			<DependentUpon>CqlPackagingPipelineOptions..cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="CqlPackagingPipelineOptions.Binding.cs">
+	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlPackagingPipelineOptions.Validator.cs">
+	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 

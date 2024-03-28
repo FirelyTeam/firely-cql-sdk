@@ -12,9 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
-using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler
 {
@@ -22,66 +22,64 @@ namespace Hl7.Cql.Compiler
     /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
     /// </summary>
     /// <remarks>
-    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilder)"/>.
     /// </remarks>
-    internal partial class ExpressionBuilderContext
+    internal partial class ExpressionBuilder
     {
-        internal ExpressionBuilderContext(
-            OperatorBinding operatorBinding, 
-            ExpressionBuilderSettings settings,
-            ParameterExpression contextParameter,
-            LibraryExpressionBuilderContext libContext,
-            elm.Element element)
+        private readonly TypeManager _typeManager;
+
+        internal ExpressionBuilder(
+            ILogger<ExpressionBuilder> logger,
+            OperatorBinding operatorBinding,
+            TypeManager typeManager,
+            LibraryDefinitionBuilderSettings settings,
+            LibraryExpressionBuilder libContext)
         {
-            _element = element;
-            _outerContext = null;
-            ExpressionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
-            RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
-            OperatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
-            ImpliedAlias = null;
-            Operands = new Dictionary<string, ParameterExpression>();
-            Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopes = new Dictionary<string, (Expression, elm.Element)>();
+            // External Services
+            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+            _typeManager = typeManager;
+            _logger = logger;
+
+            // External State
+            _libraryDefinitionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             LibraryContext = libContext;
-            ExpressionMutators = new List<IExpressionMutator>();
-            CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
+
+            // Internal State
+            _impliedAlias = null;
+            _operands = new Dictionary<string, ParameterExpression>();
+            _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+            _scopes = new Dictionary<string, (Expression, elm.Element)>();
+            _expressionMutators = new List<IExpressionMutator>();
+            _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
 
-        private ExpressionBuilderContext(
-            ExpressionBuilderContext source)
+        private ExpressionBuilder(
+            ExpressionBuilder source)
         {
-            OperatorBinding = source.OperatorBinding;
-            _element = source._element;
-            _outerContext = source._outerContext;
-            ExpressionBuilderSettings = source.ExpressionBuilderSettings;
-            RuntimeContextParameter = source.RuntimeContextParameter;
-            ImpliedAlias = source.ImpliedAlias;
-            Operands = source.Operands;
-            Libraries = source.Libraries;
+            _elementStack = new Stack<elm.Element>(_elementStack);
+            _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
+            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
+            _impliedAlias = source._impliedAlias;
+            _operands = source._operands;
+            _libraries = source._libraries;
             _scopes = source._scopes;
             LibraryContext = source.LibraryContext;
-            ExpressionMutators = source.ExpressionMutators;
-            CustomImplementations = source.CustomImplementations;
+            _typeManager = source._typeManager;
+            _logger = source._logger;
+            _expressionMutators = source._expressionMutators;
+            _customImplementations = source._customImplementations;
         }
 
-        private ExpressionBuilderContext(
-            ExpressionBuilderContext outer,
-            Elm.Element element) : this(outer)
-        {
-            Debug.Assert(element != this._element);
-            _outerContext = outer;
-            OperatorBinding = new OperatorBindingRethrowDecorator(this, ((OperatorBindingRethrowDecorator)outer.OperatorBinding).Inner);
-            _element = element;
-        }
-
-        private ExpressionBuilderContext(
-            ExpressionBuilderContext outer,
+        private ExpressionBuilder(
+            ExpressionBuilder outer,
+            string? impliedAlias,
             IDictionary<string, (Expression, elm.Element)> scopes) : this(outer)
         {
             _scopes = scopes;
+            _impliedAlias = impliedAlias;
         }
 
-        internal LibraryExpressionBuilderContext LibraryContext { get; }
+        private LibraryExpressionBuilder LibraryContext { get; }
 
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
@@ -91,41 +89,29 @@ namespace Hl7.Cql.Compiler
         /// This function can be used to provide .NET native functions in place of ELM functions, and should also be used to implement
         /// functions defined in CQL with the <code>external</code> keyword.
         /// </remarks> 
-        private IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
+        private readonly Dictionary<string, Func<ParameterExpression[], LambdaExpression>> _customImplementations;
 
 
         public bool TryGetCustomImplementationByExpressionKey(
             string expressionKey,
             [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) =>
-            CustomImplementations.TryGetValue(expressionKey, out factory);
+            _customImplementations.TryGetValue(expressionKey, out factory);
 
-        /// <summary>
-        /// The expression visitors that will be executed (in order) on translated expressions.
-        /// </summary>
-        private IList<IExpressionMutator> ExpressionMutators { get; }
+        private readonly IList<IExpressionMutator> _expressionMutators;
 
-        private ExpressionBuilderSettings ExpressionBuilderSettings { get; }
+        private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
 
-        /// <summary>
-        /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
-        /// </summary>
-        /// <remarks>
-        /// Having access to the <see cref="CqlContext"/> is almost always necessary when implementing operators because the context contains all comparers, value sets, CQL parameter values, and other data provided at runtime.
-        /// </remarks>
-        public ParameterExpression RuntimeContextParameter { get; }
-
-        /// <summary>
-        /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
-        /// </summary>
-        public OperatorBinding OperatorBinding { get; }
+        private readonly OperatorBinding _operatorBinding;
 
         /// <summary>
         /// Parameters for function definitions.
         /// </summary>
-        internal IDictionary<string, ParameterExpression> Operands { get; }
+        internal IReadOnlyDictionary<string, ParameterExpression> Operands => _operands;
 
-        private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; }
+        private readonly Dictionary<string, ParameterExpression> _operands;
         
+        private readonly Dictionary<string, DefinitionDictionary<LambdaExpression>> _libraries;
+
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
         /// this value is the implied alias name that should qualify it, e.g. from DRR-E 2022:
@@ -137,7 +123,7 @@ namespace Hl7.Cql.Compiler
         /// The use of "effective" here is unqualified and is implied to be PHQ.effective
         /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
         /// </summary>
-        internal string? ImpliedAlias { get; private set; }
+        private readonly string? _impliedAlias;
 
         internal static string NormalizeIdentifier(string identifier)
         {
@@ -196,16 +182,13 @@ namespace Hl7.Cql.Compiler
         internal bool HasScope(string elmAlias) => _scopes.ContainsKey(elmAlias);
 
 
-        internal ExpressionBuilderContext WithScope(string alias, Expression expr, elm.Element element) => 
+        internal ExpressionBuilder WithScope(string alias, Expression expr, elm.Element element) => 
             WithScopes(KeyValuePair.Create(alias, (expr, element)));
 
-        /// <summary>
-        /// Creates a copy with the scopes provided.
-        /// </summary>
-        internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
+        internal ExpressionBuilder WithScopes(string? alias, params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
             var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
-            if (ExpressionBuilderSettings.AllowScopeRedefinition)
+            if (_libraryDefinitionBuilderSettings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
                 {
@@ -226,48 +209,30 @@ namespace Hl7.Cql.Compiler
 
                     if (scopes.ContainsKey(normalizedIdentifier))
                         throw this.NewExpressionBuildingException(
-                            $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
+                            $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_libraryDefinitionBuilderSettings.AllowScopeRedefinition)} to true");
                     scopes.Add(normalizedIdentifier, kvp.Value);
                 }
             }
-            var subContext = this.WithScopes(scopes);
-            return subContext;
-        }
-
-        internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
-        {
-            var subContext = WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
-            subContext.ImpliedAlias = aliasName;
+            var subContext = new ExpressionBuilder(this, impliedAlias:alias, scopes: scopes);
             return subContext;
         }
 
         /// <summary>
-        /// Clones this ExpressionBuilderContext
+        /// Creates a copy with the scopes provided.
         /// </summary>
-        private ExpressionBuilderContext WithScopes(
-            IDictionary<string, (Expression, elm.Element)> scopes) =>
-            new(this, scopes: scopes);
+        internal ExpressionBuilder
+            WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps) => 
+            WithScopes(_impliedAlias, kvps);
 
-        /// <summary>
-        /// Clones this ExpressionBuilderContext
-        /// </summary>
-        internal ExpressionBuilderContext Push(
-            elm.Element element)
+        internal ExpressionBuilder WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
         {
-            if (element == _element)
-            {
-                Debug.WriteLine($"Unnecessary call to {nameof(Push)}, since the current context already points to the element.");
-                return this;
-            }
-
-            return new ExpressionBuilderContext(this, element);
+            var subContext = WithScopes(aliasName, new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
+            return subContext;
         }
-
-        internal ExpressionBuilderContext Pop() => _outerContext ?? throw new InvalidOperationException("Cannot pop the root context.");
         
         public Expression? Mutate(elm.Element op, Expression? expression)
         {
-            foreach (var visitor in ExpressionMutators)
+            foreach (var visitor in _expressionMutators)
             {
                 expression = visitor.Mutate(expression!, op, this);
             }

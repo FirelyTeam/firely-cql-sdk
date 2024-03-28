@@ -7,19 +7,19 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        private Expression Message(elm.Message e, ExpressionBuilderContext ctx)
+        private Expression Message(elm.Message e)
         {
-            var source = TranslateExpression(e.source!, ctx);
-            var condition = TranslateExpression(e.condition!, ctx);
-            var code = TranslateExpression(e.code!, ctx);
-            var severity = TranslateExpression(e.severity!, ctx);
-            var message = TranslateExpression(e.message!, ctx);
+            var source = TranslateExpression(e.source!);
+            var condition = TranslateExpression(e.condition!);
+            var code = TranslateExpression(e.code!);
+            var severity = TranslateExpression(e.severity!);
+            var message = TranslateExpression(e.message!);
             if (source is ConstantExpression constant && constant.Value == null)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
                 source = Expression.TypeAs(constant, constant.Type);
             }
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Message, ctx.RuntimeContextParameter, source, code, severity, message);
+            var call = _operatorBinding.Bind(CqlOperator.Message, LibraryDefinitionsBuilder.ContextParameter, source, code, severity, message);
             if (condition.Type.IsNullable())
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));

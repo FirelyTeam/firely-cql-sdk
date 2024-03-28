@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Hl7.Cql.Packaging.ResourceWriters;
+namespace Hl7.Cql.Packaging.PostProcessors;
 
 
 /// <summary>

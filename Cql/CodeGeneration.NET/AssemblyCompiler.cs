@@ -8,8 +8,8 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Microsoft.CodeAnalysis;
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IDictionary<string, AssemblyData> Compile(
+        public IReadOnlyDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression>? definitions = null)
         {

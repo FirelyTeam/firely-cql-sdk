@@ -19,66 +19,65 @@ namespace Hl7.Cql.Compiler
     internal partial class ExpressionBuilder
     {
 
-        protected Expression Abs(elm.Abs e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Abs, e, ctx);
+        protected Expression Abs(elm.Abs e) =>
+            UnaryOperator(CqlOperator.Abs, e);
 
-        protected Expression Add(elm.Add e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Add, e, ctx);
+        protected Expression Add(elm.Add e) =>
+            BinaryOperator(CqlOperator.Add, e);
 
-        protected Expression? Ceiling(elm.Ceiling e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Ceiling, e, ctx);
+        protected Expression? Ceiling(elm.Ceiling e) =>
+            UnaryOperator(CqlOperator.Ceiling, e);
 
-        protected Expression Divide(elm.Divide e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Divide, e, ctx);
+        protected Expression Divide(elm.Divide e) =>
+            BinaryOperator(CqlOperator.Divide, e);
 
-        protected Expression? Floor(elm.Floor e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Floor, e, ctx);
+        protected Expression? Floor(elm.Floor e) =>
+            UnaryOperator(CqlOperator.Floor, e);
 
-        protected Expression? Exp(elm.Exp e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Exp, e, ctx);
+        protected Expression? Exp(elm.Exp e) =>
+            UnaryOperator(CqlOperator.Exp, e);
 
-        protected Expression? HighBoundary(elm.HighBoundary e, ExpressionBuilderContext ctx) =>
-             BinaryOperator(CqlOperator.HighBoundary, e, ctx);
+        protected Expression? HighBoundary(elm.HighBoundary e) =>
+             BinaryOperator(CqlOperator.HighBoundary, e);
 
-        protected Expression? Log(elm.Log e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Log, e, ctx);
+        protected Expression? Log(elm.Log e) =>
+            BinaryOperator(CqlOperator.Log, e);
 
-        protected Expression? LowBoundary(elm.LowBoundary e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.LowBoundary, e, ctx);
+        protected Expression? LowBoundary(elm.LowBoundary e) =>
+            BinaryOperator(CqlOperator.LowBoundary, e);
 
-        protected Expression? Ln(elm.Ln e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Ln, e, ctx);
+        protected Expression? Ln(elm.Ln e) =>
+            UnaryOperator(CqlOperator.Ln, e);
 
-        protected Expression MaxValue(elm.MaxValue max, ExpressionBuilderContext ctx)
+        protected Expression MaxValue(elm.MaxValue max)
         {
-
             var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.MaximumValue,
-                ctx.RuntimeContextParameter,
+            var call = _operatorBinding.Bind(CqlOperator.MaximumValue,
+                LibraryDefinitionsBuilder.ContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
-        protected Expression MinValue(elm.MinValue min, ExpressionBuilderContext ctx)
+        protected Expression MinValue(elm.MinValue min)
         {
             var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.MinimumValue,
-                ctx.RuntimeContextParameter,
+            var call = _operatorBinding.Bind(CqlOperator.MinimumValue,
+                LibraryDefinitionsBuilder.ContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
-        protected Expression? Modulo(elm.Modulo e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Modulo, e, ctx);
+        protected Expression? Modulo(elm.Modulo e) =>
+            BinaryOperator(CqlOperator.Modulo, e);
 
-        protected Expression? Multiply(elm.Multiply e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Multiply, e, ctx);
+        protected Expression? Multiply(elm.Multiply e) =>
+            BinaryOperator(CqlOperator.Multiply, e);
 
-        protected Expression Negate(elm.Negate e, ExpressionBuilderContext ctx)
+        protected Expression Negate(elm.Negate e)
         {
             // handle things like -2147483648 which gets translated to Negate(2147483648)
             // since int.MaxValue is 2147483647, we have to handle this specially
             if (e.operand is elm.Literal literal)
             {
-                var literalType = _typeManager.TypeFor(literal, ctx);
+                var literalType = TypeFor(literal);
                 if (literalType == typeof(int?) && literal.value == "2147483648")
                 {
                     return Expression.Constant(int.MinValue);
@@ -88,39 +87,39 @@ namespace Hl7.Cql.Compiler
                     return Expression.Constant(long.MinValue);
                 }
             }
-            return UnaryOperator(CqlOperator.Negate, e, ctx);
+            return UnaryOperator(CqlOperator.Negate, e);
         }
 
-        protected Expression? Precision(elm.Precision e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Precision, e, ctx);
+        protected Expression? Precision(elm.Precision e) =>
+            UnaryOperator(CqlOperator.Precision, e);
 
-        protected Expression? Predecessor(elm.Predecessor e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Predecessor, e, ctx);
+        protected Expression? Predecessor(elm.Predecessor e) =>
+            UnaryOperator(CqlOperator.Predecessor, e);
 
-        protected Expression? Power(elm.Power e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Pow, e, ctx);
+        protected Expression? Power(elm.Power e) =>
+            BinaryOperator(CqlOperator.Pow, e);
 
-        protected Expression? Round(elm.Round e, ExpressionBuilderContext ctx)
+        protected Expression? Round(elm.Round e)
         {
-            var operand = TranslateExpression(e.operand!, ctx);
+            var operand = TranslateExpression(e.operand!);
             Expression? precision;
             if (e.precision != null)
-                precision = TranslateExpression(e.precision!, ctx);
+                precision = TranslateExpression(e.precision!);
             else precision = Expression.Constant(null, typeof(int?));
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Round, ctx.RuntimeContextParameter, operand, precision);
+            var call = _operatorBinding.Bind(CqlOperator.Round, LibraryDefinitionsBuilder.ContextParameter, operand, precision);
             return call;
         }
 
-        protected Expression Subtract(elm.Subtract e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Subtract, e, ctx);
-        protected Expression? Successor(elm.Successor e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Successor, e, ctx);
+        protected Expression Subtract(elm.Subtract e) =>
+            BinaryOperator(CqlOperator.Subtract, e);
+        protected Expression? Successor(elm.Successor e) =>
+            UnaryOperator(CqlOperator.Successor, e);
 
-        protected Expression? Truncate(elm.Truncate e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Truncate, e, ctx);
+        protected Expression? Truncate(elm.Truncate e) =>
+            UnaryOperator(CqlOperator.Truncate, e);
 
-        protected Expression? TruncatedDivide(elm.TruncatedDivide e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.TruncatedDivide, e, ctx);
+        protected Expression? TruncatedDivide(elm.TruncatedDivide e) =>
+            BinaryOperator(CqlOperator.TruncatedDivide, e);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

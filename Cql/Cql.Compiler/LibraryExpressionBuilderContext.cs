@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
@@ -15,46 +13,56 @@ namespace Hl7.Cql.Compiler;
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal class LibraryExpressionBuilderContext : IBuilderContext
+internal partial class LibraryExpressionBuilder : IBuilderNode
 {
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings;
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
-    public LibrarySetExpressionBuilderContext? LibrarySetContext { get; }
+    private readonly TypeManager _typeManager;
+    private readonly ILoggerFactory _loggerFactory;
+    private LibrarySetExpressionBuilder? LibrarySetContext { get; }
 
-    public LibraryExpressionBuilderContext(
+    public LibraryExpressionBuilder(
         Library library,
-        ExpressionBuilderSettings expressionBuilderSettings,
+        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> definitions,
-        LibrarySetExpressionBuilderContext? libsCtx = null)
+        DefinitionDictionary<LambdaExpression> definitions, 
+        TypeManager typeManager,
+        ILoggerFactory loggerFactory,
+        LibrarySetExpressionBuilder? libsCtx = null)
     {
+        // External Services
+        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
+        _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+        _typeManager = typeManager;
+        _loggerFactory = loggerFactory;
+        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
-        _expressionBuilderSettings = expressionBuilderSettings;
-        _operatorBinding = operatorBinding;
+        // External State
         Definitions = definitions;
         Library = library;
         LibrarySetContext = libsCtx;
+
+        // Internal State
         _libraryNameAndVersionByAlias = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
         _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
+
+
+        // Building up _codeSystemIdsByCodeSystemRefs
         BuildUrlByCodeSystemRef();
     }
 
-    public Elm.Library Library { get; }
+    public Library Library { get; }
 
     public string LibraryKey => Library.NameAndVersion()!;
 
-    public bool AllowUnresolvedExternals => _expressionBuilderSettings.AllowUnresolvedExternals;
+    public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
 
-    public ExpressionBuilderContext NewExpressionBuilderContext(
-        Elm.Element element) =>
-        new ExpressionBuilderContext(
-            _operatorBinding,
-            _expressionBuilderSettings,
-            LibraryExpressionBuilder.ContextParameter,
-            this,
-            element);
+    public ExpressionBuilder CreateExpressionBuilder(
+        Element element) =>
+        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _libraryDefinitionBuilderSettings, this);
 
     #region Definitions
 
@@ -154,9 +162,9 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     #endregion
 
-    IBuilderContext? IBuilderContext.OuterContext => LibrarySetContext;
+    IBuilderNode? IBuilderNode.OuterBuilder => LibrarySetContext;
 
-    BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(Library);
+    BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo => BuilderDebuggerInfo.FromElement(Library);
 
 
     private readonly record struct LibraryNameAndName(string? LibraryName, string Name);
