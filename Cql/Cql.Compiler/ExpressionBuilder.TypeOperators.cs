@@ -246,7 +246,7 @@ namespace Hl7.Cql.Compiler
         {
             if (input.Type == outputType)
                 return input;
-            else if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
+            else if (input.Type == typeof(object) || _typeManager.Resolver.RepresentsChoiceType(input.Type) || outputType.IsAssignableFrom(input.Type))
                 return Expression.TypeAs(input, outputType);
             else if (IsOrImplementsIEnumerableOfT(input.Type)
                 && IsOrImplementsIEnumerableOfT(outputType))
