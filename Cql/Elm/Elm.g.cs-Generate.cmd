@@ -10,8 +10,7 @@ SET out_file=Elm.g.cs
 PUSHD Schema
 
 ECHO Generating xsd into C#: '%in_file%'
-xsd /c .\library.xsd .\types.xsd .\clinicalexpression.xsd .\cqlannotations.xsd .\expression.xsd /o:.. /n:Hl7.Cql.Elm > NUL
-
+xsd /c .\library.xsd .\clinicalexpression.xsd .\cqlannotations.xsd .\expression.xsd /o:.. /n:Hl7.Cql.Elm > NUL
 POPD
 
 
