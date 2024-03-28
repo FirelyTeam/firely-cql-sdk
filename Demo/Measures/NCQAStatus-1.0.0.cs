@@ -89,8 +89,8 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Encounter E)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToString(E?.StatusElement);
-			var d_ = context.Operators.EnumEqualsString(c_, "finished");
+			var c_ = context.Operators.Convert<string>(E?.StatusElement);
+			var d_ = context.Operators.Equal(c_, "finished");
 
 			return d_;
 		};
@@ -104,8 +104,8 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Immunization I)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToString(I?.StatusElement);
-			var d_ = context.Operators.EnumEqualsString(c_, "completed");
+			var c_ = context.Operators.Convert<string>(I?.StatusElement);
+			var d_ = context.Operators.Equal(c_, "completed");
 
 			return d_;
 		};
@@ -119,8 +119,8 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationDispense M)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToString(M?.StatusElement);
-			var d_ = context.Operators.EnumEqualsString(c_, "completed");
+			var c_ = context.Operators.Convert<string>(M?.StatusElement);
+			var d_ = context.Operators.Equal(c_, "completed");
 
 			return d_;
 		};
@@ -134,15 +134,14 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToString(M?.StatusElement);
-			var d_ = context.Operators.Convert<string>(c_);
-			var e_ = new string[]
+			var c_ = context.Operators.Convert<string>(M?.StatusElement);
+			var d_ = new string[]
 			{
 				"completed",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
 
-			return f_;
+			return e_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(Med, a_);
 
@@ -154,8 +153,8 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToString(P?.StatusElement);
-			var d_ = context.Operators.EnumEqualsString(c_, "completed");
+			var c_ = context.Operators.Convert<string>(P?.StatusElement);
+			var d_ = context.Operators.Equal(c_, "completed");
 
 			return d_;
 		};
@@ -169,16 +168,15 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToString(P?.StatusElement);
-			var d_ = context.Operators.Convert<string>(c_);
-			var e_ = new string[]
+			var c_ = context.Operators.Convert<string>(P?.StatusElement);
+			var d_ = new string[]
 			{
 				"completed",
 				"in-progress",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
 
-			return f_;
+			return e_;
 		};
 		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
 

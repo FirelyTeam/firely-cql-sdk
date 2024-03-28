@@ -114,7 +114,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		bool? b_(Extension Extension)
 		{
 			var l_ = context.Operators.Convert<FhirUri>(Extension?.Url);
-			var m_ = FHIRHelpers_4_0_001.ToString(l_);
+			var m_ = context.Operators.Convert<string>(l_);
 			var n_ = context.Operators.Equal(m_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return n_;
@@ -127,9 +127,9 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		bool? g_(Extension E)
 		{
 			var o_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var p_ = FHIRHelpers_4_0_001.ToString(o_);
+			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = context.Operators.Equal(p_, "ombCategory");
-			var s_ = FHIRHelpers_4_0_001.ToString(o_);
+			var s_ = context.Operators.Convert<string>(o_);
 			var t_ = context.Operators.Equal(s_, "detailed");
 			var u_ = context.Operators.Or(q_, t_);
 
@@ -188,7 +188,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		bool? b_(Extension Extension)
 		{
 			var l_ = context.Operators.Convert<FhirUri>(Extension?.Url);
-			var m_ = FHIRHelpers_4_0_001.ToString(l_);
+			var m_ = context.Operators.Convert<string>(l_);
 			var n_ = context.Operators.Equal(m_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return n_;
@@ -201,9 +201,9 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		bool? g_(Extension E)
 		{
 			var o_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var p_ = FHIRHelpers_4_0_001.ToString(o_);
+			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = context.Operators.Equal(p_, "ombCategory");
-			var s_ = FHIRHelpers_4_0_001.ToString(o_);
+			var s_ = context.Operators.Convert<string>(o_);
 			var t_ = context.Operators.Equal(s_, "detailed");
 			var u_ = context.Operators.Or(q_, t_);
 
@@ -225,13 +225,13 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	{
 		CqlCode a_()
 		{
-			if ((context.Operators.EnumEqualsString(FHIRHelpers_4_0_001.ToString(this.Patient()?.GenderElement), "male") ?? false))
+			if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient()?.GenderElement), "male") ?? false))
 			{
 				string b_ = null;
 
 				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", b_, "Male");
 			}
-			else if ((context.Operators.EnumEqualsString(FHIRHelpers_4_0_001.ToString(this.Patient()?.GenderElement), "female") ?? false))
+			else if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient()?.GenderElement), "female") ?? false))
 			{
 				string c_ = null;
 

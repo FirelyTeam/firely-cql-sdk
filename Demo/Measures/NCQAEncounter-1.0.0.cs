@@ -50,8 +50,8 @@ public class NCQAEncounter_1_0_0
 		{
 			bool? f_(Condition C)
 			{
-				var i_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
-				var j_ = FHIRHelpers_4_0_001.ToString(CRef);
+				var i_ = context.Operators.Convert<string>(C?.IdElement);
+				var j_ = context.Operators.Convert<string>(CRef);
 				var k_ = NCQAFHIRBase_1_0_0.GetId(j_);
 				var l_ = context.Operators.Equal(i_, k_);
 
@@ -89,8 +89,8 @@ public class NCQAEncounter_1_0_0
 		{
 			bool? k_(Condition C)
 			{
-				var n_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
-				var o_ = FHIRHelpers_4_0_001.ToString(PrincipalDiagnosis?.Condition?.ReferenceElement);
+				var n_ = context.Operators.Convert<string>(C?.IdElement);
+				var o_ = context.Operators.Convert<string>(PrincipalDiagnosis?.Condition?.ReferenceElement);
 				var p_ = NCQAFHIRBase_1_0_0.GetId(o_);
 				var q_ = context.Operators.Equal(n_, p_);
 

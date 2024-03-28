@@ -294,8 +294,8 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter TelehealthEncounter)
 		{
-			var e_ = FHIRHelpers_4_0_001.ToString(TelehealthEncounter?.StatusElement);
-			var f_ = context.Operators.EnumEqualsString(e_, "finished");
+			var e_ = context.Operators.Convert<string>(TelehealthEncounter?.StatusElement);
+			var f_ = context.Operators.Equal(e_, "finished");
 			var g_ = this.Measurement_Period();
 			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((TelehealthEncounter?.Period as object));
 			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, h_, null);
@@ -365,29 +365,28 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation RecentHbA1c)
 		{
-			var h_ = FHIRHelpers_4_0_001.ToString(RecentHbA1c?.StatusElement);
-			var i_ = context.Operators.Convert<string>(h_);
-			var j_ = new string[]
+			var h_ = context.Operators.Convert<string>(RecentHbA1c?.StatusElement);
+			var i_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var k_ = context.Operators.InList<string>(i_, (j_ as IEnumerable<string>));
-			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(RecentHbA1c?.Effective);
-			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.ElementInInterval<CqlDateTime>(l_, m_, null);
-			var o_ = context.Operators.And(k_, n_);
+			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
+			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(RecentHbA1c?.Effective);
+			var l_ = this.Measurement_Period();
+			var m_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, null);
+			var n_ = context.Operators.And(j_, m_);
 
-			return o_;
+			return n_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
-			var q_ = context.Operators.Start(p_);
+			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+			var p_ = context.Operators.Start(o_);
 
-			return q_;
+			return p_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.LastOfList<Observation>(f_);
@@ -432,21 +431,20 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation NoHbA1c)
 		{
-			var g_ = FHIRHelpers_4_0_001.ToString(NoHbA1c?.StatusElement);
-			var h_ = context.Operators.Convert<string>(g_);
-			var i_ = new string[]
+			var g_ = context.Operators.Convert<string>(NoHbA1c?.StatusElement);
+			var h_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(NoHbA1c?.Effective);
-			var l_ = this.Measurement_Period();
-			var m_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, null);
-			var n_ = context.Operators.And(j_, m_);
+			var i_ = context.Operators.InList<string>(g_, (h_ as IEnumerable<string>));
+			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(NoHbA1c?.Effective);
+			var k_ = this.Measurement_Period();
+			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, null);
+			var m_ = context.Operators.And(i_, l_);
 
-			return n_;
+			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 		var e_ = context.Operators.ExistsInList<Observation>(d_);

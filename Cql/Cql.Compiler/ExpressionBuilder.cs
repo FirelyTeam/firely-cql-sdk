@@ -1036,11 +1036,39 @@ namespace Hl7.Cql.Compiler
                 .Concat(new[] { functionType })
                 .ToArray();
 
+            var funcType = GetFuncType(funcTypeParameters);
+
+            // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
+            // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
+            // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
+            if (op.libraryName is { } alias)
+            {
+                string libraryName = LibraryContext.GetNameAndVersionFromAlias(alias, true)!;
+                if (libraryName.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase)
+                    && op.name!.Equals("tostring", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (operands[0].Type == typeof(string))
+                    {
+                        return operands[0];
+                    }
+
+                    var bind = _operatorBinding.Bind(
+                        CqlOperator.Convert,
+                        LibraryDefinitionsBuilder.ContextParameter,
+                        new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
+                    return bind;
+
+                    // operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
+                    // var funcType = GetFuncType(funcTypeParameters);
+                    // var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName, funcType, operands);
+                    // return invoke;
+                }
+            }
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
             operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
-            var funcType = GetFuncType(funcTypeParameters);
-            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName, funcType, operands);
+
+            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands);
             return invoke;
         }
 

@@ -474,8 +474,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter EncounterInpatient)
 		{
-			var e_ = FHIRHelpers_4_0_001.ToString(EncounterInpatient?.StatusElement);
-			var f_ = context.Operators.EnumEqualsString(e_, "finished");
+			var e_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
+			var f_ = context.Operators.Equal(e_, "finished");
 			var g_ = FHIRHelpers_4_0_001.ToInterval(EncounterInpatient?.Period);
 			var h_ = this.LengthInDays(g_);
 			var i_ = context.Operators.LessOrEqual(h_, (int?)120);
@@ -503,8 +503,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter EDVisit)
 		{
-			var h_ = FHIRHelpers_4_0_001.ToString(EDVisit?.StatusElement);
-			var i_ = context.Operators.EnumEqualsString(h_, "finished");
+			var h_ = context.Operators.Convert<string>(EDVisit?.StatusElement);
+			var i_ = context.Operators.Equal(h_, "finished");
 			var j_ = FHIRHelpers_4_0_001.ToInterval(EDVisit?.Period);
 			var k_ = context.Operators.End(j_);
 			var l_ = FHIRHelpers_4_0_001.ToInterval(TheEncounter?.Period);
@@ -1115,8 +1115,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			var c_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 			bool? d_(Condition C)
 			{
-				var g_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
-				var h_ = FHIRHelpers_4_0_001.ToString(D?.Condition?.ReferenceElement);
+				var g_ = context.Operators.Convert<string>(C?.IdElement);
+				var h_ = context.Operators.Convert<string>(D?.Condition?.ReferenceElement);
 				var i_ = this.GetId(h_);
 				var j_ = context.Operators.Equal(g_, i_);
 
@@ -1138,8 +1138,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		var a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition C)
 		{
-			var e_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
-			var f_ = FHIRHelpers_4_0_001.ToString(reference?.ReferenceElement);
+			var e_ = context.Operators.Convert<string>(C?.IdElement);
+			var f_ = context.Operators.Convert<string>(reference?.ReferenceElement);
 			var g_ = this.GetId(f_);
 			var h_ = context.Operators.Equal(e_, g_);
 
@@ -1157,7 +1157,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		bool? a_(Extension E)
 		{
 			var e_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var f_ = FHIRHelpers_4_0_001.ToString(e_);
+			var f_ = context.Operators.Convert<string>(e_);
 			var g_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
 			var h_ = context.Operators.Equal(f_, g_);
 
@@ -1177,7 +1177,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		bool? a_(Extension E)
 		{
 			var e_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var f_ = FHIRHelpers_4_0_001.ToString(e_);
+			var f_ = context.Operators.Convert<string>(e_);
 			var g_ = context.Operators.Equal(f_, url);
 
 			return g_;
@@ -1238,8 +1238,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			var k_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 			bool? l_(Condition C)
 			{
-				var o_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
-				var p_ = FHIRHelpers_4_0_001.ToString(PD?.Condition?.ReferenceElement);
+				var o_ = context.Operators.Convert<string>(C?.IdElement);
+				var p_ = context.Operators.Convert<string>(PD?.Condition?.ReferenceElement);
 				var q_ = this.GetId(p_);
 				var r_ = context.Operators.Equal(o_, q_);
 
@@ -1262,8 +1262,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		var a_ = context.Operators.RetrieveByValueSet<Location>(null, null);
 		bool? b_(Location L)
 		{
-			var e_ = FHIRHelpers_4_0_001.ToString(L?.IdElement);
-			var f_ = FHIRHelpers_4_0_001.ToString(reference?.ReferenceElement);
+			var e_ = context.Operators.Convert<string>(L?.IdElement);
+			var f_ = context.Operators.Convert<string>(reference?.ReferenceElement);
 			var g_ = this.GetId(f_);
 			var h_ = context.Operators.Equal(e_, g_);
 
@@ -1281,7 +1281,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		bool? a_(Extension E)
 		{
 			var e_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var f_ = FHIRHelpers_4_0_001.ToString(e_);
+			var f_ = context.Operators.Convert<string>(e_);
 			var g_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", url);
 			var h_ = context.Operators.Equal(f_, g_);
 
@@ -1312,7 +1312,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		bool? a_(Extension E)
 		{
 			var e_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var f_ = FHIRHelpers_4_0_001.ToString(e_);
+			var f_ = context.Operators.Convert<string>(e_);
 			var g_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", id);
 			var h_ = context.Operators.Equal(f_, g_);
 
@@ -1351,8 +1351,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var b_ = context.Operators.RetrieveByValueSet<Medication>(null, null);
 				bool? c_(Medication M)
 				{
-					var f_ = FHIRHelpers_4_0_001.ToString(M?.IdElement);
-					var g_ = FHIRHelpers_4_0_001.ToString((request?.Medication as ResourceReference)?.ReferenceElement);
+					var f_ = context.Operators.Convert<string>(M?.IdElement);
+					var g_ = context.Operators.Convert<string>((request?.Medication as ResourceReference)?.ReferenceElement);
 					var h_ = this.GetId(g_);
 					var i_ = context.Operators.Equal(f_, h_);
 

@@ -367,8 +367,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var q_ = this.Measurement_Period();
 			var r_ = FHIRHelpers_4_0_001.ToInterval(QualifyingEncounter?.Period);
 			var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, r_, null);
-			var t_ = FHIRHelpers_4_0_001.ToString(QualifyingEncounter?.StatusElement);
-			var u_ = context.Operators.EnumEqualsString(t_, "finished");
+			var t_ = context.Operators.Convert<string>(QualifyingEncounter?.StatusElement);
+			var u_ = context.Operators.Equal(t_, "finished");
 			var v_ = context.Operators.And(s_, u_);
 
 			return v_;
@@ -424,7 +424,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		bool? a_(Extension E)
 		{
 			var e_ = context.Operators.Convert<FhirUri>(E?.Url);
-			var f_ = FHIRHelpers_4_0_001.ToString(e_);
+			var f_ = context.Operators.Convert<string>(e_);
 			var g_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
 			var h_ = context.Operators.Equal(f_, g_);
 
@@ -474,8 +474,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication LevelOfSeverityNotCommunicated)
 		{
-			var q_ = FHIRHelpers_4_0_001.ToString(LevelOfSeverityNotCommunicated?.StatusElement);
-			var r_ = context.Operators.EnumEqualsString(q_, "not-done");
+			var q_ = context.Operators.Convert<string>(LevelOfSeverityNotCommunicated?.StatusElement);
+			var r_ = context.Operators.Equal(q_, "not-done");
 			var s_ = this.GetModifierExtension(LevelOfSeverityNotCommunicated, "qicore-notDone");
 			var t_ = FHIRHelpers_4_0_001.ToBoolean((s_?.Value as FhirBoolean));
 			var u_ = context.Operators.IsTrue(t_);
@@ -527,8 +527,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var f_ = context.Operators.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? g_(Communication MacularEdemaAbsentNotCommunicated)
 		{
-			var r_ = FHIRHelpers_4_0_001.ToString(MacularEdemaAbsentNotCommunicated?.StatusElement);
-			var s_ = context.Operators.EnumEqualsString(r_, "not-done");
+			var r_ = context.Operators.Convert<string>(MacularEdemaAbsentNotCommunicated?.StatusElement);
+			var s_ = context.Operators.Equal(r_, "not-done");
 			var t_ = this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, "qicore-notDone");
 			var u_ = FHIRHelpers_4_0_001.ToBoolean((t_?.Value as FhirBoolean));
 			var v_ = context.Operators.IsTrue(u_);
@@ -579,8 +579,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication MacularEdemaPresentNotCommunicated)
 		{
-			var q_ = FHIRHelpers_4_0_001.ToString(MacularEdemaPresentNotCommunicated?.StatusElement);
-			var r_ = context.Operators.EnumEqualsString(q_, "not-done");
+			var q_ = context.Operators.Convert<string>(MacularEdemaPresentNotCommunicated?.StatusElement);
+			var r_ = context.Operators.Equal(q_, "not-done");
 			var s_ = this.GetModifierExtension(MacularEdemaPresentNotCommunicated, "qicore-notDone");
 			var t_ = FHIRHelpers_4_0_001.ToBoolean((s_?.Value as FhirBoolean));
 			var u_ = context.Operators.IsTrue(t_);
@@ -666,19 +666,18 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
 		bool? e_(Observation MacularExam)
 		{
-			var o_ = FHIRHelpers_4_0_001.ToString(MacularExam?.StatusElement);
-			var p_ = context.Operators.Convert<string>(o_);
-			var q_ = new string[]
+			var o_ = context.Operators.Convert<string>(MacularExam?.StatusElement);
+			var p_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
-			var s_ = context.Operators.Not((bool?)(MacularExam?.Value is null));
-			var t_ = context.Operators.And(r_, s_);
+			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
+			var r_ = context.Operators.Not((bool?)(MacularExam?.Value is null));
+			var s_ = context.Operators.And(q_, r_);
 
-			return t_;
+			return s_;
 		};
 		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
 
@@ -730,8 +729,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication LevelOfSeverityCommunicated)
 		{
-			var q_ = FHIRHelpers_4_0_001.ToString(LevelOfSeverityCommunicated?.StatusElement);
-			var r_ = context.Operators.EnumEqualsString(q_, "completed");
+			var q_ = context.Operators.Convert<string>(LevelOfSeverityCommunicated?.StatusElement);
+			var r_ = context.Operators.Equal(q_, "completed");
 
 			return r_;
 		};
@@ -772,8 +771,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var f_ = context.Operators.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? g_(Communication MacularEdemaAbsentCommunicated)
 		{
-			var r_ = FHIRHelpers_4_0_001.ToString(MacularEdemaAbsentCommunicated?.StatusElement);
-			var s_ = context.Operators.EnumEqualsString(r_, "completed");
+			var r_ = context.Operators.Convert<string>(MacularEdemaAbsentCommunicated?.StatusElement);
+			var s_ = context.Operators.Equal(r_, "completed");
 
 			return s_;
 		};
@@ -813,8 +812,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var e_ = context.Operators.SelectManyOrNull<Communication, Communication>(c_, d_);
 		bool? f_(Communication MacularEdemaPresentCommunicated)
 		{
-			var q_ = FHIRHelpers_4_0_001.ToString(MacularEdemaPresentCommunicated?.StatusElement);
-			var r_ = context.Operators.EnumEqualsString(q_, "completed");
+			var q_ = context.Operators.Convert<string>(MacularEdemaPresentCommunicated?.StatusElement);
+			var r_ = context.Operators.Equal(q_, "completed");
 
 			return r_;
 		};
