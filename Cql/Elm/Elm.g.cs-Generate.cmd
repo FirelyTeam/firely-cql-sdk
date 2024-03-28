@@ -28,7 +28,7 @@ FOR /F "tokens=* delims=" %%A IN (%in_file%) DO (
     ) ELSE IF !line_number! EQU 13 (
         REM Insert
         ECHO #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        ECHO #pragma warning disable RS0016 // Symbol not declared as part of the public spec
+        ECHO // #pragma warning disable RS0016 // Symbol not declared as part of the public spec
         ECHO.
         ECHO.%%A
     ) ELSE (
