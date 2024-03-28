@@ -15,12 +15,12 @@ using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
@@ -40,19 +40,23 @@ namespace Hl7.Cql.Compiler
         private readonly ILogger<ExpressionBuilder> _logger;
 
         private readonly TypeManager _typeManager;
+        private readonly TypeConverter _typeConverter;
 
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="typeManager">The <see cref="_typeManager"/> used to resolve and create types referenced.</param>
+        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced.</param>
+        /// <param name="typeConverter">The <see cref="TypeConverter"/> used to determine convertibility between types in the model.</param>
         /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         public ExpressionBuilder(
             TypeManager typeManager,
+            TypeConverter typeConverter,
             ILogger<ExpressionBuilder> logger)
         {
             _typeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
+            _typeConverter = typeConverter;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Settings = new ExpressionBuilderSettings();
         }
@@ -749,9 +753,9 @@ namespace Hl7.Cql.Compiler
                                .Select(element =>
                                {
                                    var value = TranslateExpression(element.value!, ctx);
-                                   var memberInfo = GetProperty(tupleType, ExpressionBuilderContext.NormalizeIdentifier(element.name!)!) 
+                                   var propInfo = GetProperty(tupleType, ExpressionBuilderContext.NormalizeIdentifier(element.name!)!) 
                                                     ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
-                                   var binding = Binding(value, memberInfo, ctx);
+                                   var binding = Binding(value, propInfo, ctx);
                                    return binding;
                                })
                                .ToArray();
@@ -1464,9 +1468,6 @@ namespace Hl7.Cql.Compiler
                     }
                 }
             }
-            // all functions still take the bundle and context parameters, plus whatver the operands
-            // to the actual function are.
-            operands = operands.Prepend(ctx.RuntimeContextParameter).ToArray();
 
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands, ctx);
             return invoke;
@@ -1653,7 +1654,7 @@ namespace Hl7.Cql.Compiler
             throw ctx.NewExpressionBuildingException($"Parameter {op.name} hasn't been defined yet.");
         }
 
-        protected internal MemberInfo? GetProperty(Type type, string name)
+        protected internal PropertyInfo? GetProperty(Type type, string name)
         {
             if (type.IsGenericType)
             {
@@ -1662,7 +1663,6 @@ namespace Hl7.Cql.Compiler
                 {
                     if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
                     {
-                        string message = $"value element not found as a Value property on object.";
                         var valueMember = type.GetProperty("Value");
                         return valueMember;
                     }
@@ -1689,7 +1689,19 @@ namespace Hl7.Cql.Compiler
             string libraryName = ctx.LibraryContext.GetIncludeNameAndVersion(libraryAlias, throwError:false)
                 ?? throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
-            return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
+            var argumentTypes = arguments.Select(a => a.Type).ToArray();
+            var selected = ctx.LibraryContext.Definitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
+            var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
+            
+            // all functions still take the bundle and context parameters, plus whatver the operands
+            // to the actual function are.
+            var convertedArguments = arguments.Select((arg, i) => ChangeType(arg, parameterTypes[i], ctx))
+                .Prepend(ctx.RuntimeContextParameter)
+                .ToArray();
+            
+            return new FunctionCallExpression(definitionsProperty, libraryName, name, convertedArguments, definitionType);
+
+            bool CheckConversion(Type from, Type to) => _typeConverter.CanConvert(from, to);
         }
 
         protected Expression InvokeDefinitionThroughRuntimeContext(

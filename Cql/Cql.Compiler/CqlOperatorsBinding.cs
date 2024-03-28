@@ -28,8 +28,8 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal class CqlOperatorsBinding : OperatorBinding
     {
-        internal TypeConverter? TypeConverter { get; private set; }
-        internal TypeResolver TypeResolver { get; private set; }
+        internal TypeConverter? TypeConverter { get; }
+        internal TypeResolver TypeResolver { get; }
 
         /// <summary>
         /// Creates an instance.

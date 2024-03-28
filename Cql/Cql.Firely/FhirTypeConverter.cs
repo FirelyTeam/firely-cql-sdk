@@ -144,6 +144,7 @@ namespace Hl7.Cql.Fhir
             add((M.PositiveInt pi) => pi.ToString());
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));
             add((M.UnsignedInt ui) => ui.ToString());
+            add<DataType,string?>(ConvertChoiceTypeToString);
 
             add((M.Canonical c) => c.ToString());
 
@@ -163,6 +164,20 @@ namespace Hl7.Cql.Fhir
             {
                 foreach (Type t in tos) converter.AddConversion(typeof(M.Parameters.ParameterComponent), t,
                     f => converter.ConvertHelper(((M.Parameters.ParameterComponent)f).Value, t)!);
+            }
+
+            // This is our implementation of FHIRHelpers.ToString() for the basic datatypes,
+            // since the ELM->CQL generator does not always insert a ToString() where we would
+            // need it (i.e. when it know that a choice type is a string, but we don't)
+            string? ConvertChoiceTypeToString(DataType dt)
+            { 
+                return dt switch
+                {
+                    FhirString fs => fs.Value,
+                    PrimitiveType { ObjectValue: string os } => os,
+                    PrimitiveType pt => pt.ObjectValue?.ToString(),
+                    _ => throw new InvalidCastException($"Cannot cast a FHIR value of type {dt.TypeName} to a string")  
+                };
             }
         }
 

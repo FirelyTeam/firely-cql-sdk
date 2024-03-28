@@ -66,6 +66,27 @@ public class DefinitionDictionary<T>
             throw new KeyNotFoundException($"No overload of {definition} matches the arguments {string.Join(",", signature.Select(p => p.Name))}");
         }
     }
+    
+    internal T Resolve(string? libraryName, string definition, Func<Type,Type,bool> conversionCheck, params Type[] signature)
+    {
+            libraryName ??= string.Empty;
+            
+            if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
+            {
+                var overloads = library[definition];
+                var t = BestMatch(signature, overloads, conversionCheck);
+                
+                if (t is null)
+                    throw new KeyNotFoundException($"No overload of {definition} matches the arguments {string.Join(",", signature.Select(p => p.Name))}");
+                else 
+                    return t;
+            }
+            else
+            {
+                throw new KeyNotFoundException($"The library {libraryName} is unknown here.");    
+            }
+            
+    }
 
     /// <summary>
     /// Returns <see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.
@@ -415,11 +436,13 @@ public class DefinitionDictionary<T>
     /// </summary>
     /// <param name="parameterTypes">The type of the parameters being passed to the method</param>
     /// <param name="overloads">The signatures of overloads available</param>
+    /// <param name="conversionCheck"></param>
     /// <returns>The best match for <paramref name="parameterTypes"/>, or <c>null</c> if no match exists</returns>
-    internal T? BestMatch(Type[] parameterTypes, IEnumerable<(Type[] Signature, T T)> overloads)
+    internal T? BestMatch(Type[] parameterTypes, IEnumerable<(Type[] Signature, T T)> overloads,
+        Func<Type, Type, bool>? conversionCheck = null)
     {
         var groups = (from overload in overloads
-            let score = Score(parameterTypes, overload.Signature)
+            let score = Score(parameterTypes, overload.Signature, conversionCheck)
             where score != null
             group overload by score into g
             orderby g.Key
@@ -442,7 +465,7 @@ public class DefinitionDictionary<T>
     /// Calculates a score (lower is better) for matching <paramref name="parameterTypes"/> to the overload <paramref name="signature"/>.
     /// </summary>
     /// <returns>0 for exact matches; greater than 0 for signatures that can be bound through polymorphism; and <c>null</c> for incompatibility</returns>
-    internal int? Score(Type[] parameterTypes, Type[] signature)
+    internal int? Score(Type[] parameterTypes, Type[] signature, Func<Type, Type, bool>? conversionCheck = null)
     {
         int? distance = 0;
         if (parameterTypes.Length == signature.Length)
@@ -463,6 +486,13 @@ public class DefinitionDictionary<T>
                         baseType = baseType.BaseType;
                     }
                     distance += distanceP;
+                }
+                else if (conversionCheck is not null)
+                {
+                    if (conversionCheck(parameterTypes[i], signature[i]))
+                        distance += 5;
+                    else
+                        return null;
                 }
                 else
                 {
