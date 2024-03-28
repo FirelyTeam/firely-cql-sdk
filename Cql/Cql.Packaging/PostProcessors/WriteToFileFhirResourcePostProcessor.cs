@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.ComponentModel;
+using System.Text.Json;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Logging;
@@ -29,7 +30,8 @@ internal class WriteToFileFhirResourcePostProcessor : FhirResourcePostProcessor
         if (resource is Library library
             && _fhirResourceWriterOptions.OverrideDate is { } overrideDate)
         {
-            library.Date = overrideDate.ToString("u");
+            const string ISO8061 = "O";
+            library.Date = overrideDate.ToString(ISO8061);
             if (library.Meta is { } meta)
             {
                 meta.LastUpdated = overrideDate;

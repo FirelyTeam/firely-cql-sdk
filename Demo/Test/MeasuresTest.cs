@@ -3,7 +3,9 @@ using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.Loader;
+using CoreTests;
 using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
@@ -41,7 +43,7 @@ namespace Test
         {
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
-            var dir = new DirectoryInfo("Resources");
+            var dir = LibrarySetsDirs.Demo.ResourcesDir;// new DirectoryInfo("Resources");
             var asmContext = LoadResources(dir, lib, version);
 
             var patientEverything = new Bundle();   // Add data
@@ -57,7 +59,7 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator_FromElm()
         {
-            var elmDir = new DirectoryInfo("../../../../Elm/Json");
+            var elmDir = LibrarySetsDirs.Demo.ElmDir;
             Assert.IsTrue(elmDir.Exists);
 
             var lib = "BCSEHEDISMY2022";
