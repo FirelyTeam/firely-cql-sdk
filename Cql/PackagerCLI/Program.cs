@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+using System.Collections.Concurrent;
 using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
@@ -11,8 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
 using Serilog;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Hl7.Cql.Packager;
 
@@ -63,9 +67,9 @@ public class Program
     private const string Usage =
         """
         Packager CLI Usage:
-        
+
             -?|-h|-help                                Show this help
-                                                       
+
             --elm                  <directory>         Library root directory
             --cql                  <directory>         CQL root directory
             [--fhir]               <file|directory>    Resource location, either file name or directory
@@ -91,9 +95,13 @@ public class Program
         logging.ClearProviders();
 
         logging.AddFilter(level => level >= LogLevel.Trace);
-        logging.AddConsole(console =>
+        logging
+        .AddConsole(opt =>
         {
-            console.LogToStandardErrorThreshold = LogLevel.Error;
+            opt.FormatterName = "NoCategory";
+        })
+        .AddConsoleFormatter<NoCategoryConsoleFormatterDecorator, SimpleConsoleFormatterOptions>(opt =>
+        {
         });
 
         var logFile = Path.Combine(".", "build.log");
@@ -151,4 +159,56 @@ public class Program
     {
         Console.WriteLine(Usage);
     }
+}
+
+file sealed class NoCategoryConsoleFormatterDecorator : ConsoleFormatter
+{
+    public NoCategoryConsoleFormatterDecorator(
+        IOptionsMonitor<SimpleConsoleFormatterOptions> options) : base("NoCategory")
+    {
+    }
+
+    public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider? scopeProvider, TextWriter textWriter)
+    {
+        var message = logEntry.Formatter(logEntry.State, logEntry.Exception);
+        var logLevelString = GetLogLevelString(logEntry.LogLevel);
+        textWriter.WriteLine($"{GetForegroundColorEscapeCode(logLevelString.Item2)}{logLevelString.Item1}{DefaultForegroundColor} : {message}");
+    }
+
+    private static (string, ConsoleColor) GetLogLevelString(LogLevel logLevel) =>
+        logLevel switch
+        {
+            LogLevel.Trace => ("trce", ConsoleColor.Gray),
+            LogLevel.Debug => ("dbug", ConsoleColor.Gray),
+            LogLevel.Information => ("info", ConsoleColor.White),
+            LogLevel.Warning => ("warn", ConsoleColor.Yellow),
+            LogLevel.Error => ("fail", ConsoleColor.Red),
+            LogLevel.Critical => ("crit", ConsoleColor.Magenta),
+            _ => throw new ArgumentOutOfRangeException(nameof(logLevel))
+        };
+
+    private static string GetForegroundColorEscapeCode(ConsoleColor color)
+    {
+        return color switch
+        {
+            ConsoleColor.Black => "\x1B[30m",
+            ConsoleColor.DarkRed => "\x1B[31m",
+            ConsoleColor.DarkGreen => "\x1B[32m",
+            ConsoleColor.DarkYellow => "\x1B[33m",
+            ConsoleColor.DarkBlue => "\x1B[34m",
+            ConsoleColor.DarkMagenta => "\x1B[35m",
+            ConsoleColor.DarkCyan => "\x1B[36m",
+            ConsoleColor.Gray => "\x1B[37m",
+            ConsoleColor.Red => "\x1B[1m\x1B[31m",
+            ConsoleColor.Green => "\x1B[1m\x1B[32m",
+            ConsoleColor.Yellow => "\x1B[1m\x1B[33m",
+            ConsoleColor.Blue => "\x1B[1m\x1B[34m",
+            ConsoleColor.Magenta => "\x1B[1m\x1B[35m",
+            ConsoleColor.Cyan => "\x1B[1m\x1B[36m",
+            ConsoleColor.White => "\x1B[1m\x1B[37m",
+            _ => DefaultForegroundColor // default foreground color
+        };
+    }
+
+    private const string DefaultForegroundColor = "\x1B[39m\x1B[22m"; // reset to default foreground color
 }
