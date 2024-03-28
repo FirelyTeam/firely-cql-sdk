@@ -19,11 +19,11 @@ public class NCQAPalliativeCare_1_0_0
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __ICD_10;
-    internal Lazy<CqlCode> __Encounter_for_palliative_care;
     internal Lazy<CqlValueSet> __Palliative_Care_Assessment;
     internal Lazy<CqlValueSet> __Palliative_Care_Encounter;
     internal Lazy<CqlValueSet> __Palliative_Care_Intervention;
+    internal Lazy<CqlCode> __Encounter_for_palliative_care;
+    internal Lazy<CqlCode[]> __ICD_10;
 
     #endregion
     public NCQAPalliativeCare_1_0_0(CqlContext context)
@@ -34,11 +34,11 @@ public class NCQAPalliativeCare_1_0_0
         NCQAFHIRBase_1_0_0 = new NCQAFHIRBase_1_0_0(context);
         NCQAStatus_1_0_0 = new NCQAStatus_1_0_0(context);
 
-        __ICD_10 = new Lazy<CqlCode[]>(this.ICD_10_Value);
-        __Encounter_for_palliative_care = new Lazy<CqlCode>(this.Encounter_for_palliative_care_Value);
         __Palliative_Care_Assessment = new Lazy<CqlValueSet>(this.Palliative_Care_Assessment_Value);
         __Palliative_Care_Encounter = new Lazy<CqlValueSet>(this.Palliative_Care_Encounter_Value);
         __Palliative_Care_Intervention = new Lazy<CqlValueSet>(this.Palliative_Care_Intervention_Value);
+        __Encounter_for_palliative_care = new Lazy<CqlCode>(this.Encounter_for_palliative_care_Value);
+        __ICD_10 = new Lazy<CqlCode[]>(this.ICD_10_Value);
     }
     #region Dependencies
 
@@ -47,25 +47,6 @@ public class NCQAPalliativeCare_1_0_0
     public NCQAStatus_1_0_0 NCQAStatus_1_0_0 { get; }
 
     #endregion
-
-	private CqlCode[] ICD_10_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("ICD-10")]
-	public CqlCode[] ICD_10() => 
-		__ICD_10.Value;
-
-	private CqlCode Encounter_for_palliative_care_Value() => 
-		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null);
-
-    [CqlDeclaration("Encounter for palliative care")]
-	public CqlCode Encounter_for_palliative_care() => 
-		__Encounter_for_palliative_care.Value;
 
 	private CqlValueSet Palliative_Care_Assessment_Value() => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", null);
@@ -90,6 +71,27 @@ public class NCQAPalliativeCare_1_0_0
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
 	public CqlValueSet Palliative_Care_Intervention() => 
 		__Palliative_Care_Intervention.Value;
+
+	private CqlCode Encounter_for_palliative_care_Value() => 
+		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null);
+
+    [CqlDeclaration("Encounter for palliative care")]
+	public CqlCode Encounter_for_palliative_care() => 
+		__Encounter_for_palliative_care.Value;
+
+	private CqlCode[] ICD_10_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("ICD-10")]
+	public CqlCode[] ICD_10() => 
+		__ICD_10.Value;
 
     [CqlDeclaration("Palliative Care Overlapping Period")]
 	public bool? Palliative_Care_Overlapping_Period(CqlInterval<CqlDateTime> Period)

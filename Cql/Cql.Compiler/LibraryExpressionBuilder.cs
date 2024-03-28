@@ -7,7 +7,6 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Compiler;
 
@@ -27,11 +26,11 @@ partial class LibraryExpressionBuilder
             AddCodeSystemRefsFromIncludes();
         }
 
-        if (Library.codeSystems is { Length: > 0 } codeSystemDefs)
+        if (Library.valueSets is { Length: > 0 } valueSetDefs)
         {
-            foreach (var codeSystemDef in codeSystemDefs)
+            foreach (var valueSetDef in valueSetDefs)
             {
-                CreateExpressionBuilder().ProcessCodeSystemDef(codeSystemDef);
+                CreateExpressionBuilder().ProcessValueSetDef(valueSetDef);
             }
         }
 
@@ -45,11 +44,11 @@ partial class LibraryExpressionBuilder
             }
         }
 
-        if (Library.valueSets is { Length: > 0 } valueSetDefs)
+        if (Library.codeSystems is { Length: > 0 } codeSystemDefs)
         {
-            foreach (var valueSetDef in valueSetDefs)
+            foreach (var codeSystemDef in codeSystemDefs)
             {
-                CreateExpressionBuilder().ProcessValueSetDef(valueSetDef);
+                CreateExpressionBuilder().ProcessCodeSystemDef(codeSystemDef);
             }
         }
 
@@ -76,7 +75,6 @@ partial class LibraryExpressionBuilder
                 CreateExpressionBuilder().ProcessExpressionDef(expressionDef);
             }
         }
-
 
         return LibraryDefinitions;
     }

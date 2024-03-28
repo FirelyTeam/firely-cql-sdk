@@ -19,12 +19,12 @@ public class PalliativeCareFHIR_0_6_000
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
-    internal Lazy<CqlCode> __Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
-    internal Lazy<CqlCode> __survey;
     internal Lazy<CqlValueSet> __Palliative_Care_Encounter;
     internal Lazy<CqlValueSet> __Palliative_Care_Intervention;
+    internal Lazy<CqlCode> __Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
+    internal Lazy<CqlCode> __survey;
+    internal Lazy<CqlCode[]> __LOINC;
+    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<bool?> __Palliative_Care_in_the_Measurement_Period;
@@ -37,12 +37,12 @@ public class PalliativeCareFHIR_0_6_000
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
 
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
-        __Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new Lazy<CqlCode>(this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal__Value);
-        __survey = new Lazy<CqlCode>(this.survey_Value);
         __Palliative_Care_Encounter = new Lazy<CqlValueSet>(this.Palliative_Care_Encounter_Value);
         __Palliative_Care_Intervention = new Lazy<CqlValueSet>(this.Palliative_Care_Intervention_Value);
+        __Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new Lazy<CqlCode>(this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal__Value);
+        __survey = new Lazy<CqlCode>(this.survey_Value);
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
+        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Palliative_Care_in_the_Measurement_Period = new Lazy<bool?>(this.Palliative_Care_in_the_Measurement_Period_Value);
@@ -53,44 +53,6 @@ public class PalliativeCareFHIR_0_6_000
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
 
     #endregion
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private CqlCode[] ObservationCategoryCodes_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
-		__ObservationCategoryCodes.Value;
-
-	private CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal__Value() => 
-		new CqlCode("71007-9", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)")]
-	public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_() => 
-		__Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_.Value;
-
-	private CqlCode survey_Value() => 
-		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
-
-    [CqlDeclaration("survey")]
-	public CqlCode survey() => 
-		__survey.Value;
 
 	private CqlValueSet Palliative_Care_Encounter_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", null);
@@ -107,6 +69,48 @@ public class PalliativeCareFHIR_0_6_000
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135")]
 	public CqlValueSet Palliative_Care_Intervention() => 
 		__Palliative_Care_Intervention.Value;
+
+	private CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal__Value() => 
+		new CqlCode("71007-9", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)")]
+	public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_() => 
+		__Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_.Value;
+
+	private CqlCode survey_Value() => 
+		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
+
+    [CqlDeclaration("survey")]
+	public CqlCode survey() => 
+		__survey.Value;
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("71007-9", "http://loinc.org", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
+
+	private CqlCode[] ObservationCategoryCodes_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("ObservationCategoryCodes")]
+	public CqlCode[] ObservationCategoryCodes() => 
+		__ObservationCategoryCodes.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

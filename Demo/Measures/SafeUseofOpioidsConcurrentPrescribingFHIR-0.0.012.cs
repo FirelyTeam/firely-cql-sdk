@@ -19,8 +19,6 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<CqlCode> __Birth_date;
     internal Lazy<CqlValueSet> __All_Primary_and_Secondary_Cancer;
     internal Lazy<CqlValueSet> __Discharge_To_Acute_Care_Facility;
     internal Lazy<CqlValueSet> __Encounter_Inpatient;
@@ -29,6 +27,8 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     internal Lazy<CqlValueSet> __Patient_Expired;
     internal Lazy<CqlValueSet> __Schedule_II_and_III_Opioid_Medications;
     internal Lazy<CqlValueSet> __Schedule_IV_Benzodiazepines;
+    internal Lazy<CqlCode> __Birth_date;
+    internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18;
@@ -50,8 +50,6 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
 
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
         __All_Primary_and_Secondary_Cancer = new Lazy<CqlValueSet>(this.All_Primary_and_Secondary_Cancer_Value);
         __Discharge_To_Acute_Care_Facility = new Lazy<CqlValueSet>(this.Discharge_To_Acute_Care_Facility_Value);
         __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
@@ -60,6 +58,8 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         __Patient_Expired = new Lazy<CqlValueSet>(this.Patient_Expired_Value);
         __Schedule_II_and_III_Opioid_Medications = new Lazy<CqlValueSet>(this.Schedule_II_and_III_Opioid_Medications_Value);
         __Schedule_IV_Benzodiazepines = new Lazy<CqlValueSet>(this.Schedule_IV_Benzodiazepines_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18 = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18_Value);
@@ -79,25 +79,6 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
 
     #endregion
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
 
 	private CqlValueSet All_Primary_and_Secondary_Cancer_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.161", null);
@@ -162,6 +143,27 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1125.1")]
 	public CqlValueSet Schedule_IV_Benzodiazepines() => 
 		__Schedule_IV_Benzodiazepines.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("21112-8", "http://loinc.org", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

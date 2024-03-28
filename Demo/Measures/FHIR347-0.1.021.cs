@@ -19,8 +19,6 @@ public class FHIR347_0_1_021
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __ICD10CM;
-    internal Lazy<CqlCode> __Encounter_for_palliative_care;
     internal Lazy<CqlValueSet> __Annual_Wellness_Visit;
     internal Lazy<CqlValueSet> __Atherosclerosis_and_Peripheral_Arterial_Disease;
     internal Lazy<CqlValueSet> __Breastfeeding;
@@ -56,6 +54,8 @@ public class FHIR347_0_1_021
     internal Lazy<CqlValueSet> __Stable_and_Unstable_Angina;
     internal Lazy<CqlValueSet> __Statin_Allergen;
     internal Lazy<CqlValueSet> __Statin_Associated_Muscle_Symptoms;
+    internal Lazy<CqlCode> __Encounter_for_palliative_care;
+    internal Lazy<CqlCode[]> __ICD10CM;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<object>> __ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period;
@@ -97,8 +97,6 @@ public class FHIR347_0_1_021
         SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
 
-        __ICD10CM = new Lazy<CqlCode[]>(this.ICD10CM_Value);
-        __Encounter_for_palliative_care = new Lazy<CqlCode>(this.Encounter_for_palliative_care_Value);
         __Annual_Wellness_Visit = new Lazy<CqlValueSet>(this.Annual_Wellness_Visit_Value);
         __Atherosclerosis_and_Peripheral_Arterial_Disease = new Lazy<CqlValueSet>(this.Atherosclerosis_and_Peripheral_Arterial_Disease_Value);
         __Breastfeeding = new Lazy<CqlValueSet>(this.Breastfeeding_Value);
@@ -134,6 +132,8 @@ public class FHIR347_0_1_021
         __Stable_and_Unstable_Angina = new Lazy<CqlValueSet>(this.Stable_and_Unstable_Angina_Value);
         __Statin_Allergen = new Lazy<CqlValueSet>(this.Statin_Allergen_Value);
         __Statin_Associated_Muscle_Symptoms = new Lazy<CqlValueSet>(this.Statin_Associated_Muscle_Symptoms_Value);
+        __Encounter_for_palliative_care = new Lazy<CqlCode>(this.Encounter_for_palliative_care_Value);
+        __ICD10CM = new Lazy<CqlCode[]>(this.ICD10CM_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period = new Lazy<IEnumerable<object>>(this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period_Value);
@@ -173,25 +173,6 @@ public class FHIR347_0_1_021
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
 
     #endregion
-
-	private CqlCode[] ICD10CM_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("ICD10CM")]
-	public CqlCode[] ICD10CM() => 
-		__ICD10CM.Value;
-
-	private CqlCode Encounter_for_palliative_care_Value() => 
-		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null);
-
-    [CqlDeclaration("Encounter for palliative care")]
-	public CqlCode Encounter_for_palliative_care() => 
-		__Encounter_for_palliative_care.Value;
 
 	private CqlValueSet Annual_Wellness_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
@@ -472,6 +453,27 @@ public class FHIR347_0_1_021
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.85")]
 	public CqlValueSet Statin_Associated_Muscle_Symptoms() => 
 		__Statin_Associated_Muscle_Symptoms.Value;
+
+	private CqlCode Encounter_for_palliative_care_Value() => 
+		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null);
+
+    [CqlDeclaration("Encounter for palliative care")]
+	public CqlCode Encounter_for_palliative_care() => 
+		__Encounter_for_palliative_care.Value;
+
+	private CqlCode[] ICD10CM_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("ICD10CM")]
+	public CqlCode[] ICD10CM() => 
+		__ICD10CM.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

@@ -19,8 +19,6 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
-    internal Lazy<CqlCode> __laboratory;
     internal Lazy<CqlValueSet> __Congenital_or_Acquired_Absence_of_Cervix;
     internal Lazy<CqlValueSet> __Home_Healthcare_Services;
     internal Lazy<CqlValueSet> __HPV_Test;
@@ -31,6 +29,8 @@ public class CervicalCancerScreeningFHIR_0_0_005
     internal Lazy<CqlValueSet> __Preventive_Care_Services___Established_Office_Visit__18_and_Up;
     internal Lazy<CqlValueSet> __Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
     internal Lazy<CqlValueSet> __Telephone_Visits;
+    internal Lazy<CqlCode> __laboratory;
+    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
@@ -59,8 +59,6 @@ public class CervicalCancerScreeningFHIR_0_0_005
         HospiceFHIR4_2_3_000 = new HospiceFHIR4_2_3_000(context);
         PalliativeCareFHIR_0_6_000 = new PalliativeCareFHIR_0_6_000(context);
 
-        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
-        __laboratory = new Lazy<CqlCode>(this.laboratory_Value);
         __Congenital_or_Acquired_Absence_of_Cervix = new Lazy<CqlValueSet>(this.Congenital_or_Acquired_Absence_of_Cervix_Value);
         __Home_Healthcare_Services = new Lazy<CqlValueSet>(this.Home_Healthcare_Services_Value);
         __HPV_Test = new Lazy<CqlValueSet>(this.HPV_Test_Value);
@@ -71,6 +69,8 @@ public class CervicalCancerScreeningFHIR_0_0_005
         __Preventive_Care_Services___Established_Office_Visit__18_and_Up = new Lazy<CqlValueSet>(this.Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value);
         __Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new Lazy<CqlValueSet>(this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value);
         __Telephone_Visits = new Lazy<CqlValueSet>(this.Telephone_Visits_Value);
+        __laboratory = new Lazy<CqlCode>(this.laboratory_Value);
+        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
@@ -97,25 +97,6 @@ public class CervicalCancerScreeningFHIR_0_0_005
     public PalliativeCareFHIR_0_6_000 PalliativeCareFHIR_0_6_000 { get; }
 
     #endregion
-
-	private CqlCode[] ObservationCategoryCodes_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
-		__ObservationCategoryCodes.Value;
-
-	private CqlCode laboratory_Value() => 
-		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
-
-    [CqlDeclaration("laboratory")]
-	public CqlCode laboratory() => 
-		__laboratory.Value;
 
 	private CqlValueSet Congenital_or_Acquired_Absence_of_Cervix_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016", null);
@@ -196,6 +177,27 @@ public class CervicalCancerScreeningFHIR_0_0_005
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
 	public CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
+
+	private CqlCode laboratory_Value() => 
+		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
+
+    [CqlDeclaration("laboratory")]
+	public CqlCode laboratory() => 
+		__laboratory.Value;
+
+	private CqlCode[] ObservationCategoryCodes_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("ObservationCategoryCodes")]
+	public CqlCode[] ObservationCategoryCodes() => 
+		__ObservationCategoryCodes.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

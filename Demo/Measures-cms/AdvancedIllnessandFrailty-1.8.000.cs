@@ -19,11 +19,6 @@ public class AdvancedIllnessandFrailty_1_8_000
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<CqlCode[]> __SNOMEDCT;
-    internal Lazy<CqlCode> __Housing_status;
-    internal Lazy<CqlCode> __Lives_in_a_nursing_home__finding_;
-    internal Lazy<CqlCode> __Medical_equipment_used;
     internal Lazy<CqlValueSet> __Acute_Inpatient;
     internal Lazy<CqlValueSet> __Advanced_Illness;
     internal Lazy<CqlValueSet> __Dementia_Medications;
@@ -35,6 +30,11 @@ public class AdvancedIllnessandFrailty_1_8_000
     internal Lazy<CqlValueSet> __Nonacute_Inpatient;
     internal Lazy<CqlValueSet> __Observation;
     internal Lazy<CqlValueSet> __Outpatient;
+    internal Lazy<CqlCode> __Housing_status;
+    internal Lazy<CqlCode> __Lives_in_a_nursing_home__finding_;
+    internal Lazy<CqlCode> __Medical_equipment_used;
+    internal Lazy<CqlCode[]> __LOINC;
+    internal Lazy<CqlCode[]> __SNOMEDCT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<bool?> __Has_Criteria_Indicating_Frailty;
@@ -57,11 +57,6 @@ public class AdvancedIllnessandFrailty_1_8_000
         CumulativeMedicationDuration_4_0_000 = new CumulativeMedicationDuration_4_0_000(context);
         Status_1_6_000 = new Status_1_6_000(context);
 
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
-        __Housing_status = new Lazy<CqlCode>(this.Housing_status_Value);
-        __Lives_in_a_nursing_home__finding_ = new Lazy<CqlCode>(this.Lives_in_a_nursing_home__finding__Value);
-        __Medical_equipment_used = new Lazy<CqlCode>(this.Medical_equipment_used_Value);
         __Acute_Inpatient = new Lazy<CqlValueSet>(this.Acute_Inpatient_Value);
         __Advanced_Illness = new Lazy<CqlValueSet>(this.Advanced_Illness_Value);
         __Dementia_Medications = new Lazy<CqlValueSet>(this.Dementia_Medications_Value);
@@ -73,6 +68,11 @@ public class AdvancedIllnessandFrailty_1_8_000
         __Nonacute_Inpatient = new Lazy<CqlValueSet>(this.Nonacute_Inpatient_Value);
         __Observation = new Lazy<CqlValueSet>(this.Observation_Value);
         __Outpatient = new Lazy<CqlValueSet>(this.Outpatient_Value);
+        __Housing_status = new Lazy<CqlCode>(this.Housing_status_Value);
+        __Lives_in_a_nursing_home__finding_ = new Lazy<CqlCode>(this.Lives_in_a_nursing_home__finding__Value);
+        __Medical_equipment_used = new Lazy<CqlCode>(this.Medical_equipment_used_Value);
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
+        __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Has_Criteria_Indicating_Frailty = new Lazy<bool?>(this.Has_Criteria_Indicating_Frailty_Value);
@@ -93,51 +93,6 @@ public class AdvancedIllnessandFrailty_1_8_000
     public Status_1_6_000 Status_1_6_000 { get; }
 
     #endregion
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private CqlCode[] SNOMEDCT_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
-		__SNOMEDCT.Value;
-
-	private CqlCode Housing_status_Value() => 
-		new CqlCode("71802-3", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Housing status")]
-	public CqlCode Housing_status() => 
-		__Housing_status.Value;
-
-	private CqlCode Lives_in_a_nursing_home__finding__Value() => 
-		new CqlCode("160734000", "http://snomed.info/sct", null, null);
-
-    [CqlDeclaration("Lives in a nursing home (finding)")]
-	public CqlCode Lives_in_a_nursing_home__finding_() => 
-		__Lives_in_a_nursing_home__finding_.Value;
-
-	private CqlCode Medical_equipment_used_Value() => 
-		new CqlCode("98181-1", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Medical equipment used")]
-	public CqlCode Medical_equipment_used() => 
-		__Medical_equipment_used.Value;
 
 	private CqlValueSet Acute_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", null);
@@ -226,6 +181,56 @@ public class AdvancedIllnessandFrailty_1_8_000
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087")]
 	public CqlValueSet Outpatient() => 
 		__Outpatient.Value;
+
+	private CqlCode Housing_status_Value() => 
+		new CqlCode("71802-3", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Housing status")]
+	public CqlCode Housing_status() => 
+		__Housing_status.Value;
+
+	private CqlCode Lives_in_a_nursing_home__finding__Value() => 
+		new CqlCode("160734000", "http://snomed.info/sct", null, null);
+
+    [CqlDeclaration("Lives in a nursing home (finding)")]
+	public CqlCode Lives_in_a_nursing_home__finding_() => 
+		__Lives_in_a_nursing_home__finding_.Value;
+
+	private CqlCode Medical_equipment_used_Value() => 
+		new CqlCode("98181-1", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Medical equipment used")]
+	public CqlCode Medical_equipment_used() => 
+		__Medical_equipment_used.Value;
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("71802-3", "http://loinc.org", null, null),
+			new CqlCode("98181-1", "http://loinc.org", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
+
+	private CqlCode[] SNOMEDCT_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("160734000", "http://snomed.info/sct", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("SNOMEDCT")]
+	public CqlCode[] SNOMEDCT() => 
+		__SNOMEDCT.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

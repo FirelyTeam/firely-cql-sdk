@@ -19,8 +19,6 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<CqlCode> __Birth_date;
     internal Lazy<CqlValueSet> __birth_date;
     internal Lazy<CqlValueSet> __Emergency_Department_Visit;
     internal Lazy<CqlValueSet> __Encounter_Inpatient;
@@ -28,6 +26,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     internal Lazy<CqlValueSet> __Hypoglycemics;
     internal Lazy<CqlValueSet> __Hypoglycemics_Severe_Hypoglycemia;
     internal Lazy<CqlValueSet> __Observation_Services;
+    internal Lazy<CqlCode> __Birth_date;
+    internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
@@ -52,8 +52,6 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
         SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
 
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
         __birth_date = new Lazy<CqlValueSet>(this.birth_date_Value);
         __Emergency_Department_Visit = new Lazy<CqlValueSet>(this.Emergency_Department_Visit_Value);
         __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
@@ -61,6 +59,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
         __Hypoglycemics = new Lazy<CqlValueSet>(this.Hypoglycemics_Value);
         __Hypoglycemics_Severe_Hypoglycemia = new Lazy<CqlValueSet>(this.Hypoglycemics_Severe_Hypoglycemia_Value);
         __Observation_Services = new Lazy<CqlValueSet>(this.Observation_Services_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
@@ -83,25 +83,6 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
 
     #endregion
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
 
 	private CqlValueSet birth_date_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", null);
@@ -158,6 +139,27 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
 	public CqlValueSet Observation_Services() => 
 		__Observation_Services.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("21112-8", "http://loinc.org", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

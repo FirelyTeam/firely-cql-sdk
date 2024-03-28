@@ -19,8 +19,6 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<CqlCode> __Birth_date;
     internal Lazy<CqlValueSet> __Clinical_Oral_Evaluation;
     internal Lazy<CqlValueSet> __Fluoride_Varnish_Application_for_Children;
     internal Lazy<CqlValueSet> __Office_Visit;
@@ -30,6 +28,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     internal Lazy<CqlValueSet> __Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
     internal Lazy<CqlValueSet> __Preventive_Care__Initial_Office_Visit__0_to_17;
     internal Lazy<CqlValueSet> __Telephone_Visits;
+    internal Lazy<CqlCode> __Birth_date;
+    internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
@@ -55,8 +55,6 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
         HospiceFHIR4_2_3_000 = new HospiceFHIR4_2_3_000(context);
 
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
         __Clinical_Oral_Evaluation = new Lazy<CqlValueSet>(this.Clinical_Oral_Evaluation_Value);
         __Fluoride_Varnish_Application_for_Children = new Lazy<CqlValueSet>(this.Fluoride_Varnish_Application_for_Children_Value);
         __Office_Visit = new Lazy<CqlValueSet>(this.Office_Visit_Value);
@@ -66,6 +64,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
         __Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new Lazy<CqlValueSet>(this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value);
         __Preventive_Care__Initial_Office_Visit__0_to_17 = new Lazy<CqlValueSet>(this.Preventive_Care__Initial_Office_Visit__0_to_17_Value);
         __Telephone_Visits = new Lazy<CqlValueSet>(this.Telephone_Visits_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
+        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
@@ -89,25 +89,6 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     public HospiceFHIR4_2_3_000 HospiceFHIR4_2_3_000 { get; }
 
     #endregion
-
-	private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
 
 	private CqlValueSet Clinical_Oral_Evaluation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", null);
@@ -180,6 +161,27 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
 	public CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
+
+	private CqlCode[] LOINC_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("21112-8", "http://loinc.org", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC")]
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

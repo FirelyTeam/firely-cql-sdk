@@ -19,11 +19,6 @@ public class HybridHWMFHIR_0_102_005
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __LOINC_2_69;
-    internal Lazy<CqlCode> __Birth_date;
-    internal Lazy<CqlCode> __Heart_rate;
-    internal Lazy<CqlCode> __Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry;
-    internal Lazy<CqlCode> __Systolic_blood_pressure;
     internal Lazy<CqlValueSet> __Bicarbonate_lab_test;
     internal Lazy<CqlValueSet> __Body_temperature;
     internal Lazy<CqlValueSet> __Creatinine_lab_test;
@@ -39,6 +34,11 @@ public class HybridHWMFHIR_0_102_005
     internal Lazy<CqlValueSet> __Race;
     internal Lazy<CqlValueSet> __Sodium_lab_test;
     internal Lazy<CqlValueSet> __White_blood_cells_count_lab_test;
+    internal Lazy<CqlCode> __Birth_date;
+    internal Lazy<CqlCode> __Heart_rate;
+    internal Lazy<CqlCode> __Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry;
+    internal Lazy<CqlCode> __Systolic_blood_pressure;
+    internal Lazy<CqlCode[]> __LOINC_2_69;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
@@ -58,11 +58,6 @@ public class HybridHWMFHIR_0_102_005
         SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
         MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
 
-        __LOINC_2_69 = new Lazy<CqlCode[]>(this.LOINC_2_69_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
-        __Heart_rate = new Lazy<CqlCode>(this.Heart_rate_Value);
-        __Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry = new Lazy<CqlCode>(this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry_Value);
-        __Systolic_blood_pressure = new Lazy<CqlCode>(this.Systolic_blood_pressure_Value);
         __Bicarbonate_lab_test = new Lazy<CqlValueSet>(this.Bicarbonate_lab_test_Value);
         __Body_temperature = new Lazy<CqlValueSet>(this.Body_temperature_Value);
         __Creatinine_lab_test = new Lazy<CqlValueSet>(this.Creatinine_lab_test_Value);
@@ -78,6 +73,11 @@ public class HybridHWMFHIR_0_102_005
         __Race = new Lazy<CqlValueSet>(this.Race_Value);
         __Sodium_lab_test = new Lazy<CqlValueSet>(this.Sodium_lab_test_Value);
         __White_blood_cells_count_lab_test = new Lazy<CqlValueSet>(this.White_blood_cells_count_lab_test_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
+        __Heart_rate = new Lazy<CqlCode>(this.Heart_rate_Value);
+        __Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry = new Lazy<CqlCode>(this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry_Value);
+        __Systolic_blood_pressure = new Lazy<CqlCode>(this.Systolic_blood_pressure_Value);
+        __LOINC_2_69 = new Lazy<CqlCode[]>(this.LOINC_2_69_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
@@ -95,46 +95,6 @@ public class HybridHWMFHIR_0_102_005
     public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
 
     #endregion
-
-	private CqlCode[] LOINC_2_69_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("LOINC:2.69")]
-	public CqlCode[] LOINC_2_69() => 
-		__LOINC_2_69.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
-
-	private CqlCode Heart_rate_Value() => 
-		new CqlCode("8867-4", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Heart rate")]
-	public CqlCode Heart_rate() => 
-		__Heart_rate.Value;
-
-	private CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry_Value() => 
-		new CqlCode("59408-5", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Oxygen saturation in Arterial blood by Pulse oximetry")]
-	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry() => 
-		__Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry.Value;
-
-	private CqlCode Systolic_blood_pressure_Value() => 
-		new CqlCode("8480-6", "http://loinc.org", null, null);
-
-    [CqlDeclaration("Systolic blood pressure")]
-	public CqlCode Systolic_blood_pressure() => 
-		__Systolic_blood_pressure.Value;
 
 	private CqlValueSet Bicarbonate_lab_test_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", null);
@@ -255,6 +215,51 @@ public class HybridHWMFHIR_0_102_005
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
 	public CqlValueSet White_blood_cells_count_lab_test() => 
 		__White_blood_cells_count_lab_test.Value;
+
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
+
+	private CqlCode Heart_rate_Value() => 
+		new CqlCode("8867-4", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Heart rate")]
+	public CqlCode Heart_rate() => 
+		__Heart_rate.Value;
+
+	private CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry_Value() => 
+		new CqlCode("59408-5", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Oxygen saturation in Arterial blood by Pulse oximetry")]
+	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry() => 
+		__Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry.Value;
+
+	private CqlCode Systolic_blood_pressure_Value() => 
+		new CqlCode("8480-6", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Systolic blood pressure")]
+	public CqlCode Systolic_blood_pressure() => 
+		__Systolic_blood_pressure.Value;
+
+	private CqlCode[] LOINC_2_69_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("21112-8", "http://loinc.org", null, null),
+			new CqlCode("8867-4", "http://loinc.org", null, null),
+			new CqlCode("59408-5", "http://loinc.org", null, null),
+			new CqlCode("8480-6", "http://loinc.org", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("LOINC:2.69")]
+	public CqlCode[] LOINC_2_69() => 
+		__LOINC_2_69.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

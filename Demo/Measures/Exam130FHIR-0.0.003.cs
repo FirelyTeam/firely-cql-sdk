@@ -19,8 +19,6 @@ public class Exam130FHIR_0_0_003
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
-    internal Lazy<CqlCode> __laboratory;
     internal Lazy<CqlValueSet> __Acute_Inpatient;
     internal Lazy<CqlValueSet> __Advanced_Illness;
     internal Lazy<CqlValueSet> __Annual_Wellness_Visit;
@@ -52,6 +50,8 @@ public class Exam130FHIR_0_0_003
     internal Lazy<CqlValueSet> __Telephone_Visits;
     internal Lazy<CqlValueSet> __Total_Colectomy;
     internal Lazy<CqlValueSet> __Total_Colectomy_ICD9;
+    internal Lazy<CqlCode> __laboratory;
+    internal Lazy<CqlCode[]> __ObservationCategoryCodes;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
@@ -102,8 +102,6 @@ public class Exam130FHIR_0_0_003
         PalliativeCareFHIR_0_6_000 = new PalliativeCareFHIR_0_6_000(context);
         CumulativeMedicationDurationFHIR4_1_0_000 = new CumulativeMedicationDurationFHIR4_1_0_000(context);
 
-        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
-        __laboratory = new Lazy<CqlCode>(this.laboratory_Value);
         __Acute_Inpatient = new Lazy<CqlValueSet>(this.Acute_Inpatient_Value);
         __Advanced_Illness = new Lazy<CqlValueSet>(this.Advanced_Illness_Value);
         __Annual_Wellness_Visit = new Lazy<CqlValueSet>(this.Annual_Wellness_Visit_Value);
@@ -135,6 +133,8 @@ public class Exam130FHIR_0_0_003
         __Telephone_Visits = new Lazy<CqlValueSet>(this.Telephone_Visits_Value);
         __Total_Colectomy = new Lazy<CqlValueSet>(this.Total_Colectomy_Value);
         __Total_Colectomy_ICD9 = new Lazy<CqlValueSet>(this.Total_Colectomy_ICD9_Value);
+        __laboratory = new Lazy<CqlCode>(this.laboratory_Value);
+        __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
@@ -183,25 +183,6 @@ public class Exam130FHIR_0_0_003
     public CumulativeMedicationDurationFHIR4_1_0_000 CumulativeMedicationDurationFHIR4_1_0_000 { get; }
 
     #endregion
-
-	private CqlCode[] ObservationCategoryCodes_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
-		__ObservationCategoryCodes.Value;
-
-	private CqlCode laboratory_Value() => 
-		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
-
-    [CqlDeclaration("laboratory")]
-	public CqlCode laboratory() => 
-		__laboratory.Value;
 
 	private CqlValueSet Acute_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", null);
@@ -450,6 +431,27 @@ public class Exam130FHIR_0_0_003
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.11.1136")]
 	public CqlValueSet Total_Colectomy_ICD9() => 
 		__Total_Colectomy_ICD9.Value;
+
+	private CqlCode laboratory_Value() => 
+		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
+
+    [CqlDeclaration("laboratory")]
+	public CqlCode laboratory() => 
+		__laboratory.Value;
+
+	private CqlCode[] ObservationCategoryCodes_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("ObservationCategoryCodes")]
+	public CqlCode[] ObservationCategoryCodes() => 
+		__ObservationCategoryCodes.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{

@@ -19,9 +19,9 @@ public class DevDays_2023_0_0
 
     #region Cached values
 
-    internal Lazy<CqlCode[]> __ICD10;
     internal Lazy<CqlCode> __Sucked_into_jet_engine;
     internal Lazy<CqlCode> __Sucked_into_jet_engine__subsequent_encounter;
+    internal Lazy<CqlCode[]> __ICD10;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Condition>> __Jet_engine_conditions;
@@ -36,9 +36,9 @@ public class DevDays_2023_0_0
 
         FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
 
-        __ICD10 = new Lazy<CqlCode[]>(this.ICD10_Value);
         __Sucked_into_jet_engine = new Lazy<CqlCode>(this.Sucked_into_jet_engine_Value);
         __Sucked_into_jet_engine__subsequent_encounter = new Lazy<CqlCode>(this.Sucked_into_jet_engine__subsequent_encounter_Value);
+        __ICD10 = new Lazy<CqlCode[]>(this.ICD10_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Jet_engine_conditions = new Lazy<IEnumerable<Condition>>(this.Jet_engine_conditions_Value);
@@ -51,18 +51,6 @@ public class DevDays_2023_0_0
     public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
 
     #endregion
-
-	private CqlCode[] ICD10_Value()
-	{
-		var a_ = new CqlCode[0]
-;
-
-		return a_;
-	}
-
-    [CqlDeclaration("ICD10")]
-	public CqlCode[] ICD10() => 
-		__ICD10.Value;
 
 	private CqlCode Sucked_into_jet_engine_Value() => 
 		new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", null, null);
@@ -77,6 +65,21 @@ public class DevDays_2023_0_0
     [CqlDeclaration("Sucked into jet engine, subsequent encounter")]
 	public CqlCode Sucked_into_jet_engine__subsequent_encounter() => 
 		__Sucked_into_jet_engine__subsequent_encounter.Value;
+
+	private CqlCode[] ICD10_Value()
+	{
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", null, null),
+			new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", null, null),
+		};
+
+		return a_;
+	}
+
+    [CqlDeclaration("ICD10")]
+	public CqlCode[] ICD10() => 
+		__ICD10.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
