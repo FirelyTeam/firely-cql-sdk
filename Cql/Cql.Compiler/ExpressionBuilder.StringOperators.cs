@@ -10,7 +10,6 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using Microsoft.Extensions.Logging;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler

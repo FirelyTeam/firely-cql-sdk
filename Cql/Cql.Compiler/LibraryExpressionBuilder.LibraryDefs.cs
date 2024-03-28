@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -14,21 +13,19 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
-[DebuggerDisplay("{DebuggerView}")]
-internal partial class LibraryExpressionBuilder : IBuilderNode
+internal partial class LibraryExpressionBuilder
 {
     private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
-    public LibrarySetExpressionBuilder? LibrarySetContext { get; }
 
     public LibraryExpressionBuilder(
         Library library,
         LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> libraryDefinitions, 
+        DefinitionDictionary<LambdaExpression> libraryDefinitions,
         TypeManager typeManager,
         ILoggerFactory loggerFactory,
         LibrarySetExpressionBuilder? libsCtx = null)
@@ -109,7 +106,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
         return libraryKey;
     }
 
-    public bool HasAliasForNameAndVersion(string libraryKey) => 
+    public bool HasAliasForNameAndVersion(string libraryKey) =>
         _libraryIdentifiersByAlias.ContainsValue(libraryKey);
 
     #endregion
@@ -130,8 +127,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
         _codesByCodeSystemName.Add(codeSystemName!, codings);
         return codings;
     }
-
-    #endregion
+    public LibrarySetExpressionBuilder? LibrarySetContext { get; }
 
     #region Codes By Name (cross library???)
 
@@ -139,7 +135,7 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
         _codesByName.TryGetValue(codeRef.name, out systemCode);
-    
+
     public void AddCode(CodeDef codeDef, CqlCode cqlCode)
     {
         _codesByName.Add(codeDef.name, cqlCode);
@@ -187,17 +183,10 @@ internal partial class LibraryExpressionBuilder : IBuilderNode
 
     #endregion
 
-    IBuilderNode? IBuilderNode.OuterBuilder => LibrarySetContext;
-
-    BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo => BuilderDebuggerInfo.FromElement(Library);
-
 
     private readonly record struct LibraryNameAndName(string? LibraryName, string Name);
 
     private class ByLibraryNameAndNameDictionary<TValue> : Dictionary<LibraryNameAndName, TValue>
     {
     }
-
-    public string DebuggerView => this.GetDebuggerView();
 }
-

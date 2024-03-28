@@ -33,5 +33,17 @@
 		<Compile Update="ExpressionBuilder.*.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
+		<Compile Update="LibraryExpressionBuilder.*.cs">
+			<DependentUpon>LibraryExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="LibrarySetExpressionBuilder.*.cs">
+			<DependentUpon>LibrarySetExpressionBuilder.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="ExpressionBuilder.LibraryDefs.Context.cs">
+	    <DependentUpon>ExpressionBuilder.LibraryDefs.cs</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>
