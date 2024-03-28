@@ -129,6 +129,8 @@ internal partial class LibraryExpressionBuilder
     }
     public LibrarySetExpressionBuilder? LibrarySetContext { get; }
 
+    #endregion
+
     #region Codes By Name (cross library???)
 
     private readonly Dictionary<string, CqlCode> _codesByName;
@@ -182,7 +184,6 @@ internal partial class LibraryExpressionBuilder
     }
 
     #endregion
-
 
     private readonly record struct LibraryNameAndName(string? LibraryName, string Name);
 
