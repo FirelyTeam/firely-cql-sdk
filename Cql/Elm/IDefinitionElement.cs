@@ -164,10 +164,15 @@ namespace Hl7.Cql.Elm
 
         string IDefinitionElement.Name => alias;
 
-        Expression IDefinitionElement.ToRef(string? libraryName) => new AliasRef
+        Expression IDefinitionElement.ToRef(string? libraryName)
         {
-            name = alias,
-        }.WithId().WithResultType(resultTypeSpecifier);
+            TypeSpecifier aliasType;
+            if (resultTypeSpecifier is ListTypeSpecifier list)
+                aliasType = list.elementType;
+            else aliasType = resultTypeSpecifier;
+            var aliasRef = new AliasRef { name = alias }.WithResultType(aliasType);
+            return aliasRef;
+        }
     }
 
     public partial class LetClause : IDefinitionElement
@@ -217,6 +222,25 @@ namespace Hl7.Cql.Elm
             var accessLevel = functions.Select(fd => fd.accessLevel).Min(); // public < private; any public overload makes this public
             return new OverloadedFunctionDef(functions, names[0], accessLevel);       
         }
+
+        public static OverloadedFunctionDef Create(params IDefinitionElement[] elements)
+        {
+#if DEBUG
+            for (int i = 0; i < elements.Length; i++)
+                if (elements[i] is not FunctionDef && elements[i] is not OverloadedFunctionDef)
+                    throw new ArgumentException($"Only functions and overloads can be passed to this method.", nameof(elements));
+            if (elements.Select(e => e.Name).Distinct().Count() != 1)
+                throw new ArgumentException($"All functions should have the same name.", nameof(elements));
+#endif
+            var allFunctions = elements
+                .OfType<OverloadedFunctionDef>()
+                .SelectMany(ofd => ofd.Functions)
+                .Concat(elements.OfType<FunctionDef>())
+                .ToArray();
+            var overload = OverloadedFunctionDef.Create(allFunctions);
+            return overload;
+        }
+
 
         public FunctionDef[] Functions { get; }
 

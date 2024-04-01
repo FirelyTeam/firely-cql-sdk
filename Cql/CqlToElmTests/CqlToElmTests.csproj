@@ -63,4 +63,10 @@
 	  </None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Input\FHIRHelpers-4.0.1.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

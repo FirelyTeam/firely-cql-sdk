@@ -371,6 +371,7 @@ Hl7.Cql.Elm.LetClause.LetClause() -> void
 Hl7.Cql.Elm.Library
 Hl7.Cql.Elm.Library.Library() -> void
 Hl7.Cql.Elm.Library.NameAndVersion.get -> string?
+Hl7.Cql.Elm.Library.WriteJson(System.IO.Stream! stream, bool writeIndented = true) -> void
 Hl7.Cql.Elm.List
 Hl7.Cql.Elm.List.List() -> void
 Hl7.Cql.Elm.ListTypeSpecifier
@@ -763,6 +764,7 @@ static Hl7.Cql.Elm.ExtensionMethods.Signature(this Hl7.Cql.Elm.FunctionDef! def)
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.FunctionDef![]! functions) -> Hl7.Cql.Elm.OverloadedFunctionDef!
+static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IDefinitionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!

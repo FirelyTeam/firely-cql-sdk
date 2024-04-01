@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm
                 .WithResultType(SystemTypes.AnyType)
                 .AddError(error);
 
-        public static Expression Ref(this ISymbolScope symbolScope, string? libraryAlias, string identifier, MessageProvider messaging)
+        public static Expression Ref(this ISymbolScope symbolScope, MessageProvider messaging, string? libraryAlias, string identifier)
         {
             var success = TryResolveIdentifier(symbolScope, libraryAlias, identifier, out var result);
             if (success)

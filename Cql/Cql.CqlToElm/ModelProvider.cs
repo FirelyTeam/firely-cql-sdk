@@ -176,8 +176,16 @@ namespace Hl7.Cql.CqlToElm
         internal static bool TryFindTypeInfoByName(this IModelProvider provider, string uri,
             string typeName, out TypeInfo? typeInfo, out ModelInfo? model)
         {
-            return provider.TryGetModelFromUri(uri, out model) &
-                    model!.TryGetTypeInfoFor(typeName, out typeInfo);
+            if (provider.TryGetModelFromUri(uri, out model)
+                && model is not null
+                && model!.TryGetTypeInfoFor(typeName, out typeInfo))
+                return true;
+            else
+            {
+                typeInfo = null;
+                return false;
+            }
+                
         }
 
         /// <summary>

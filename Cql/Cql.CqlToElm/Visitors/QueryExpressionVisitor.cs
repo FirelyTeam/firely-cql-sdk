@@ -15,10 +15,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitQuery([NotNull] cqlParser.QueryContext context)
         {
             var source = visitSource(context.sourceClause());
+            LibraryBuilder.EnterScope();
+            foreach (var qs in source)
+            {
+                LibraryBuilder.CurrentScope.TryAdd(qs);
+            }
             var sort = visitSort(context.sortClause());
             var @return = visitReturn(context.returnClause()); // pass aliases & lets?
-            
-            TypeSpecifier returnType = @return?.resultTypeSpecifier.ToListType() ??
+            LibraryBuilder.ExitScope();
+            TypeSpecifier returnType = @return?.resultTypeSpecifier ??
                 (returnType = source.Length == 1
                     ? source[0].resultTypeSpecifier
                     : SystemTypes.AnyType.ToListType());
@@ -127,9 +132,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     expression = expression,
                 };
+                // return clauses have list types, even though their expressions generally do not.
                 return rc
                     .WithLocator(returnClauseCtx.Locator())
-                    .WithResultType(expression.resultTypeSpecifier);
+                    .WithResultType(expression.resultTypeSpecifier.ToListType());
             }
         }
 

@@ -34,15 +34,6 @@ namespace Hl7.Cql.Model
                 return name;
         }
 
-        /// <summary>
-        /// Returns the definition information for an element in a class.
-        /// </summary>
-        /// <returns>True if the member was found, false otherwise.</returns>
-        public static bool TryGetElement(this ClassInfo ci, string elementName, out ClassInfoElement? element)
-        {
-            element = ci.element.SingleOrDefault(ele => ele.name == elementName);
 
-            return element is not null;
-        }
     }
 }

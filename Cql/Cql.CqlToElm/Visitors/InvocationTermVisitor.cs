@@ -8,17 +8,42 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
+    // TODO: remove state variable (LeftExpression)
     internal partial class ExpressionVisitor
     {
         // (qualifierExpression '.')* referentialIdentifier
         public override Expression VisitQualifiedIdentifierExpression([NotNull] cqlParser.QualifiedIdentifierExpressionContext context)
         {
-            var qualifiers = context.qualifierExpression().Select(q => q.referentialIdentifier().Parse()).ToArray();
-            var unqualified = context.referentialIdentifier().Parse();
-            var libraryName = qualifiers.Any() ? string.Join(".", qualifiers) : null;
+            var terms = context.qualifierExpression();
+            Expression? left = null;
+            if (terms.Length > 0)
+            {
+                for (int i = 0; i < terms.Length; i++)
+                {
+                    var term = terms[i].referentialIdentifier().Parse();
+                    left = handleTerm(left, term);
+                }
+            }
+            var final = context.referentialIdentifier().Parse();
+            var expression = handleTerm(left, final);
+            return expression ?? throw new NotImplementedException();
+            Expression? handleTerm(Expression? left, string term)
+            {
+                if (left is OperandRef or)
+                {
+                    left = navigateIntoType(or, term);
+                }
+                else if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                {
+                    if (symbol is OperandDef operand)
+                    {
+                        left = new OperandRef { name = operand.name }.WithResultType(operand.resultTypeSpecifier);
+                    }
+                    else throw new NotImplementedException();
+                }
 
-            var result = LibraryBuilder.CurrentScope.Ref(libraryName, unqualified, Messaging);
-            return result.WithLocator(context.Locator());
+                return left;
+            }
         }
 
         public override Expression VisitTermExpression([NotNull] cqlParser.TermExpressionContext context)
@@ -61,7 +86,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         for (int i = 0; i < instanceElementContexts.Length; i++)
                         {
                             var elementName = instanceElementContexts[i].referentialIdentifier().Parse();
-                            if (!@class.TryGetElement(elementName, out var classElement) || classElement is null)
+                            if (!ModelProvider.TryGetElement(@class, elementName, out var classElement) || classElement is null)
                             {
                                 return new Instance()
                                     .AddError($"Member {elementName} not found for type {namedType.name.Name}.")
@@ -176,7 +201,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var libraryName = ir.IncludeDef.localIdentifier;
                 return LibraryBuilder.CurrentScope
-                    .Ref(libraryName, memberName, Messaging)
+                    .Ref(Messaging, libraryName, memberName)
                     .WithLocator(context.Locator());
             }
 
@@ -289,7 +314,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var prop = makeProp(source, memberName);
 
-            if (type is ClassInfo ci && ci.TryGetElement(memberName, out var elementInfo))
+            if (type is ClassInfo ci && ModelProvider.TryGetElement(ci, memberName, out var elementInfo))
             {
                 return prop.WithResultType(elementInfo!.GetTypeSpecifierForElement(ModelProvider));
             }
@@ -332,7 +357,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var identifier = context.referentialIdentifier().Parse();
             return LibraryBuilder.CurrentScope!
-                .Ref(null, identifier, Messaging)
+                .Ref(Messaging, null, identifier)
                 .WithLocator(context.Locator());
         }
 
@@ -353,8 +378,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (inScope)
             {
                 if (inSystemScope)
-                    return error($"Ambiguous function {funcName} found in both local and system scope.");
-                symbolDef = scopeDef;
+                    symbolDef = OverloadedFunctionDef.Create(scopeDef!, systemDef!);
+                else
+                    symbolDef = scopeDef;
             }
             else if (inSystemScope)
                 symbolDef = systemDef;
@@ -413,19 +439,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // | '$this'                           #thisInvocation
         public override Expression VisitThisInvocation([NotNull] cqlParser.ThisInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(null, context.GetText(), Messaging)
+                .Ref(Messaging, null, context.GetText())
                 .WithLocator(context.Locator());
 
         // | '$index'                          #indexInvocation
         public override Expression VisitIndexInvocation([NotNull] cqlParser.IndexInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(null, context.GetText(), Messaging)
+                .Ref(Messaging, null, context.GetText())
                 .WithLocator(context.Locator());
 
         // | '$total'                          #totalInvocation
         public override Expression VisitTotalInvocation([NotNull] cqlParser.TotalInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(null, context.GetText(), Messaging)
+                .Ref(Messaging, null, context.GetText())
                 .WithLocator(context.Locator());
     }
 

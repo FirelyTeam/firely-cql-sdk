@@ -63,6 +63,22 @@ namespace Hl7.Cql.Elm
             JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
                 throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
 
+        /// <summary>
+        /// Writes this library in JSON format to <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream">A writable stream.</param>
+        /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
+        public void WriteJson(Stream stream, bool writeIndented = true)
+        {
+            var options = GetSerializerOptions(false);
+            if (writeIndented)
+                options.WriteIndented = true;
+            else
+                options.WriteIndented = false;
+            JsonSerializer.Serialize(stream, this, options);
+
+        }
+
         internal static DirectedGraph GetIncludedLibraries(IEnumerable<Library> libraries)
         {
             var buildOrder = new DirectedGraph();

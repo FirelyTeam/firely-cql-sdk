@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.Elm;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -41,6 +42,29 @@ namespace Hl7.Cql.CqlToElm
             }
         }
 
-        public bool TryAdd(IDefinitionElement symbol) => symbols.TryAdd(symbol.Name, symbol);
+        public bool TryAdd(IDefinitionElement symbol)
+        {
+            if (symbol is FunctionDef functionDef 
+                && symbols.TryGetValue(symbol.Name, out var existingSymbol))
+            {
+                switch(existingSymbol)
+                {
+                    case FunctionDef existingFunction:
+                        {
+                            var overload = OverloadedFunctionDef.Create(existingFunction, functionDef);
+                            symbols[overload.Name] = overload;
+                            return true;
+                        }
+                    case OverloadedFunctionDef overload:
+                        {
+                            var newOverload = OverloadedFunctionDef.Create(overload.Functions.Append(functionDef).ToArray());
+                            symbols[overload.Name] = overload;
+                            return true;
+                        }
+                    default: break;
+                }
+            }
+            return symbols.TryAdd(symbol.Name, symbol);
+        }
     }
 }
