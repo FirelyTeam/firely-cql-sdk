@@ -29,7 +29,7 @@ namespace CoreTests
             Microsoft.Extensions.Logging.LoggerFactory
                 .Create(logging => logging.AddDebug());
 
-        private static ResourcePackagerFactory Factory = new(LoggerFactory);
+        private static CqlPackagerFactory Factory = new(LoggerFactory);
 
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()

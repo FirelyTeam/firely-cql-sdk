@@ -9,6 +9,12 @@ internal static class LibrarySetsDirs
 {
     private static DirectoryInfo SolutionDir { get; } = GetDir();
 
+    public static class Demo
+    {
+        public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "Demo", "Elm");
+        public static DirectoryInfo ResourcesDir { get; } = GetDir("LibrarySets", "Demo", "Resources");
+    }
+
     public static class Cms
     {
         public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "CMS", "Elm");
