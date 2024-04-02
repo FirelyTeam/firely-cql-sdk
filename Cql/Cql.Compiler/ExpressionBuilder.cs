@@ -1131,16 +1131,12 @@ namespace Hl7.Cql.Compiler
                         LibraryDefinitionsBuilder.ContextParameter,
                         new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                     return bind;
-
-                    // operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
-                    // var funcType = GetFuncType(funcTypeParameters);
-                    // var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName, funcType, operands);
-                    // return invoke;
                 }
             }
-            // all functions still take the bundle and context parameters, plus whatver the operands
-            // to the actual function are.
-            operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
+
+            // // all functions still take the bundle and context parameters, plus whatver the operands
+            // // to the actual function are.
+            // operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
 
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands);
             return invoke;
