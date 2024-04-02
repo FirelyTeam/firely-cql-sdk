@@ -2,8 +2,5 @@
 
 	<Import Project="..\cql-demo.props" />
 	<Import Project="Build\Elm.Targets.xml" />
-
-	<PropertyGroup>
-	</PropertyGroup>
-
+	
 </Project>
