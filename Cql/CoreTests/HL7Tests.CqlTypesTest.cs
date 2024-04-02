@@ -7,7 +7,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "AnyQuantity":
 		///	( 5.0 'g' ) = 5.0'g'
 		/// </summary>
@@ -21,7 +21,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyDateTime":
 		///	( DateTime(2012, 4, 4) ) = @2012-04-04
 		/// </summary>
@@ -35,7 +35,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTime":
 		///	( @T09:00:00.000 ) = @T09:00:00.000
 		/// </summary>
@@ -49,7 +49,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyInterval":
 		///	( Interval[2, 7] ) = Interval[2, 7]
 		/// </summary>
@@ -63,7 +63,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyList":
 		///	( {1, 2, 3} ) = {1, 2, 3}
 		/// </summary>
@@ -77,7 +77,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTuple":
 		///	( Tuple { id: 5, name: 'Chris'} ) = Tuple { id: 5, name: 'Chris'}
 		/// </summary>
@@ -91,7 +91,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyString":
 		///	( Tuple { id: 5, name: 'Chris'}.name ) = 'Chris'
 		/// </summary>
@@ -105,7 +105,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeNull":
 		///	( DateTime(null) ) = null
 		/// </summary>
@@ -119,7 +119,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeProper":
 		///	( DateTime(2016, 7, 7, 6, 25, 33, 910) ) = @2016-07-07T06:25:33.910
 		/// </summary>
@@ -133,7 +133,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncomplete":
 		///	( DateTime(2015, 2, 10) ) = @2015-02-10
 		/// </summary>
@@ -147,7 +147,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeUncertain":
 		///	( days between DateTime(2015, 2, 10) and DateTime(2015, 3) ) = Interval [ 19, 49 ]
 		/// </summary>
@@ -162,7 +162,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMin":
 		///	( DateTime(0001, 1, 1, 0, 0, 0, 0) ) = @0001-01-01T00:00:00.000
 		/// </summary>
@@ -176,7 +176,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMax":
 		///	( DateTime(9999, 12, 31, 23, 59, 59, 999) ) = @9999-12-31T23:59:59.999
 		/// </summary>
@@ -190,7 +190,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityTest":
 		///	( 150.2 'lbs' ) = 150.2 'lbs'
 		/// </summary>
@@ -204,7 +204,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityTest2":
 		///	( 2.5589 'eskimo kisses' ) = 2.5589 'eskimo kisses'
 		/// </summary>
@@ -218,7 +218,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityFractionalTooBig":
 		///	( 5.999999999 'g' ) = 5.999999999 'g'
 		/// </summary>
@@ -232,7 +232,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StringTestEscapeQuotes":
 		///	( '\'I start with a single quote and end with a double quote\"' ) = '\u0027I start with a single quote and end with a double quote\u0022'
 		/// </summary>
@@ -246,7 +246,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StringUnicodeTest":
 		///	( '\u0048\u0069' ) = 'Hi'
 		/// </summary>
@@ -260,7 +260,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProper":
 		///	( @T10:25:12.863 ) = @T10:25:12.863
 		/// </summary>
@@ -274,7 +274,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeAllMax":
 		///	( @T23:59:59.999 ) = @T23:59:59.999
 		/// </summary>
@@ -288,7 +288,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeAllMin":
 		///	( @T00:00:00.000 ) = @T00:00:00.000
 		/// </summary>

@@ -8,7 +8,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "simpleSortAsc":
 		///	( ({4, 5, 1, 6, 2, 1}) sL sort asc ) = {1, 1, 2, 4, 5, 6}
 		/// </summary>
@@ -22,7 +22,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "simpleSortDesc":
 		///	( ({4, 5, 1, 6, 2, 1}) sL sort desc ) = {6, 5, 4, 2, 1, 1}
 		/// </summary>
@@ -36,7 +36,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "simpleSortStringAsc":
 		///	( ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort asc ) = {'Armadillo', 'Wolf', 'aardvark', 'alligator', 'back', 'iguana', 'zebra'}
 		/// </summary>
@@ -50,7 +50,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "simpleSortStringDesc":
 		///	( ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort desc ) = {'zebra', 'iguana', 'back', 'alligator', 'aardvark', 'Wolf', 'Armadillo'}
 		/// </summary>
@@ -64,7 +64,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "SortDatesAsc":
         ///	( ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort asc ) = {DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5), DateTime(2012, 10, 5, 10)}
         /// </summary>
@@ -82,7 +82,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SortDatesDesc":
 		///	( ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort desc ) = {DateTime(2012, 10, 5, 10), DateTime(2012, 10, 5), DateTime(2012, 1, 1, 12), DateTime(2012, 1, 1)}
 		/// </summary>
@@ -97,7 +97,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsABNullHasNull":
 		///	( { 'a', 'b', null } contains null ) = null
 		/// </summary>
@@ -111,7 +111,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsNullFirst":
 		///	( { null, 'b', 'c' } contains 'a' ) = false
 		/// </summary>
@@ -125,7 +125,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsABCHasA":
 		///	( { 'a', 'b', 'c' } contains 'a' ) = true
 		/// </summary>
@@ -139,7 +139,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsJan2012True":
 		///	( { DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 1, 1) } contains DateTime(2012, 1, 1) ) = true
 		/// </summary>
@@ -153,7 +153,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsJan2012False":
 		///	( { DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 1) } contains DateTime(2012, 1, 1) ) = false
 		/// </summary>
@@ -167,7 +167,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsTimeTrue":
 		///	( { @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 } contains @T05:59:59.999 ) = true
 		/// </summary>
@@ -181,7 +181,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsTimeFalse":
 		///	( { @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 } contains @T08:59:59.999 ) = false
 		/// </summary>
@@ -195,7 +195,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ContainsNullLeft":
 		///	( null contains 'a' ) = false
 		/// </summary>
@@ -209,7 +209,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DescendentsEmptyList":
 		///	( (null).descendents() ) = null
 		/// </summary>
@@ -223,7 +223,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DistinctEmptyList":
 		///	( distinct {} ) = {}
 		/// </summary>
@@ -237,7 +237,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DistinctNullNullNull":
 		///	( ( ( distinct { null, null, null } ) = { null } ) ) = null
 		/// </summary>
@@ -251,7 +251,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DistinctANullANull":
 		///	( distinct { 'a', null, 'a', null} ) = {'a', null}
 		/// </summary>
@@ -265,7 +265,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Distinct112233":
 		///	( distinct { 1, 1, 2, 2, 3, 3} ) = {1,2,3}
 		/// </summary>
@@ -279,7 +279,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Distinct123123":
 		///	( distinct { 1, 2, 3, 1, 2, 3} ) = {1,2,3}
 		/// </summary>
@@ -293,7 +293,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DistinctAABBCC":
 		///	( distinct { 'a', 'a', 'b', 'b', 'c', 'c'} ) = {'a','b','c'}
 		/// </summary>
@@ -307,7 +307,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DistinctABCABC":
 		///	( distinct { 'a', 'b', 'c', 'a', 'b', 'c'} ) = {'a','b','c'}
 		/// </summary>
@@ -321,7 +321,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DistinctDateTime":
 		///	( distinct { DateTime(2012, 10, 5), DateTime(2012, 1, 1), DateTime(2012, 1, 1)} ) = { DateTime(2012, 10, 5), DateTime(2012, 1, 1)}
 		/// </summary>
@@ -335,7 +335,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DistinctTime":
 		///	( distinct { @T15:59:59.999, @T20:59:59.999 } ) = { @T15:59:59.999, @T20:59:59.999 }
 		/// </summary>
@@ -349,7 +349,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualNullNull":
 		///	( {null} = {null} ) = null
 		/// </summary>
@@ -363,7 +363,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualEmptyListNull":
 		///	( {} = null ) = null
 		/// </summary>
@@ -377,7 +377,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualNullEmptyList":
 		///	( null = {} ) = null
 		/// </summary>
@@ -391,7 +391,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualEmptyListAndEmptyList":
 		///	( {} = {} ) = true
 		/// </summary>
@@ -405,7 +405,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Equal12And123":
 		///	( { 1, 2 } = { 1, 2, 3 } ) = false
 		/// </summary>
@@ -419,7 +419,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Equal123And12":
 		///	( { 1, 2, 3 } = { 1, 2 } ) = false
 		/// </summary>
@@ -433,7 +433,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Equal123And123":
 		///	( { 1, 2, 3 } = { 1, 2, 3 } ) = true
 		/// </summary>
@@ -447,7 +447,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualDateTimeTrue":
 		///	( {DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} = {DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} ) = true
 		/// </summary>
@@ -461,7 +461,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualDateTimeFalse":
 		///	( {DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} = {DateTime(2012, 1, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} ) = false
 		/// </summary>
@@ -475,7 +475,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } ) = true
 		/// </summary>
@@ -489,7 +489,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EqualTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } = { @T10:59:59.999, @T20:59:59.999, @T20:59:59.999 } ) = false
 		/// </summary>
@@ -503,7 +503,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptEmptyListAndEmptyList":
 		///	( {} except {} ) = {}
 		/// </summary>
@@ -517,7 +517,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Except1234And23":
 		///	( { 1, 2, 3, 4 } except { 2, 3 } ) = { 1, 4 }
 		/// </summary>
@@ -531,7 +531,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Except23And1234":
 		///	( { 2, 3 } except { 1, 2, 3, 4 } ) = {}
 		/// </summary>
@@ -545,7 +545,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptDateTimeList":
 		///	( { DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2010, 1, 1)} except {DateTime(2014, 12, 10), DateTime(2010, 1, 1) } ) = {@2012-05-10}
 		/// </summary>
@@ -559,7 +559,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptTimeList":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } except { @T20:59:59.999, @T12:59:59.999 } ) = {@T15:59:59.999}
 		/// </summary>
@@ -573,7 +573,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptNullRight":
 		///	( { 1, 4 } except null ) = {1, 4}
 		/// </summary>
@@ -587,7 +587,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExistsEmpty":
 		///	( Exists({}) ) = false
 		/// </summary>
@@ -601,7 +601,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExistsListNull":
 		///	( Exists({ null }) ) = false
 		/// </summary>
@@ -615,7 +615,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Exists1":
 		///	( Exists({ 1 }) ) = true
 		/// </summary>
@@ -629,7 +629,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Exists12":
 		///	( Exists({ 1, 2 }) ) = true
 		/// </summary>
@@ -643,7 +643,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExistsDateTime":
 		///	( Exists({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) }) ) = true
 		/// </summary>
@@ -657,7 +657,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExistsTime":
 		///	( Exists({ @T15:59:59.999, @T20:59:59.999 }) ) = true
 		/// </summary>
@@ -671,7 +671,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExistsNull":
 		///	( Exists(null) ) = false
 		/// </summary>
@@ -685,7 +685,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FlattenEmpty":
 		///	( Flatten({{},{}}) ) = {}
 		/// </summary>
@@ -699,7 +699,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FlattenListNullAndNull":
 		///	( Flatten({{null}, {null}}) = {null, null} ) = null
 		/// </summary>
@@ -713,7 +713,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FlattenList12And34":
 		///	( Flatten({{1,2}, {3,4}}) ) = {1,2,3,4}
 		/// </summary>
@@ -727,7 +727,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FlattenDateTime":
 		///	( Flatten({ {DateTime(2012, 5, 10)}, {DateTime(2014, 12, 10)} }) ) = { DateTime(2012, 5, 10), DateTime(2014, 12, 10) }
 		/// </summary>
@@ -741,7 +741,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FlattenTime":
 		///	( Flatten({ {@T15:59:59.999}, {@T20:59:59.999} }) ) = { @T15:59:59.999, @T20:59:59.999 }
 		/// </summary>
@@ -755,7 +755,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FirstEmpty":
 		///	( First({}) ) = null
 		/// </summary>
@@ -769,7 +769,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FirstNull1":
 		///	( First({ null, 1 }) ) = null
 		/// </summary>
@@ -783,7 +783,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "First1Null":
 		///	( First({ 1, null }) ) = 1
 		/// </summary>
@@ -797,7 +797,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "First12":
 		///	( First({ 1, 2 }) ) = 1
 		/// </summary>
@@ -811,7 +811,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FirstDateTime":
 		///	( First({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) }) ) = DateTime(2012, 5, 10)
 		/// </summary>
@@ -825,7 +825,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FirstTime":
 		///	( First({ @T15:59:59.999, @T20:59:59.999 }) ) = @T15:59:59.999
 		/// </summary>
@@ -839,7 +839,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "InNullEmpty":
 		///	( null in {} ) = null
 		/// </summary>
@@ -853,7 +853,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "InNullAnd1Null":
 		///	( null in { 1, null } ) = null
 		/// </summary>
@@ -867,7 +867,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "In1Null":
 		///	( 1 in null ) = false
 		/// </summary>
@@ -881,7 +881,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "In1And12":
 		///	( 1 in { 1, 2 } ) = true
 		/// </summary>
@@ -895,7 +895,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "In3And12":
 		///	( 3 in { 1, 2 } ) = false
 		/// </summary>
@@ -909,7 +909,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "InDateTimeTrue":
 		///	( DateTime(2012, 5, 10) in { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } ) = true
 		/// </summary>
@@ -923,7 +923,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "InDateTimeFalse":
 		///	( DateTime(2012, 6, 10) in { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } ) = false
 		/// </summary>
@@ -937,7 +937,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "InTimeTrue":
 		///	( @T15:59:59.999 in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = true
 		/// </summary>
@@ -951,7 +951,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "InTimeFalse":
 		///	( @T16:59:59.999 in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = false
 		/// </summary>
@@ -965,7 +965,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesEmptyAndEmpty":
 		///	( {} includes {} ) = true
 		/// </summary>
@@ -979,7 +979,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesListNullAndListNull":
 		///	( {null} includes {null} ) = true
 		/// </summary>
@@ -994,7 +994,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Includes123AndEmpty":
 		///	( {1, 2, 3} includes {} ) = true
 		/// </summary>
@@ -1008,7 +1008,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Includes123And2":
 		///	( {1, 2, 3} includes {2} ) = true
 		/// </summary>
@@ -1022,7 +1022,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Includes123And4":
 		///	( {1, 2, 3} includes {4} ) = false
 		/// </summary>
@@ -1036,7 +1036,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesDateTimeTrue":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} includes {DateTime(2012, 5, 10)} ) = true
 		/// </summary>
@@ -1050,7 +1050,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} includes {DateTime(2012, 5, 11)} ) = false
 		/// </summary>
@@ -1064,7 +1064,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesTimeTrue":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } includes @T15:59:59.999 ) = true
 		/// </summary>
@@ -1078,7 +1078,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesTimeFalse":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } includes @T16:59:59.999 ) = false
 		/// </summary>
@@ -1092,7 +1092,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesNullLeft":
 		///	( null includes {2} ) = null
 		/// </summary>
@@ -1106,7 +1106,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludesNullRight":
 		///	( {'s', 'a', 'm'} includes null ) = null
 		/// </summary>
@@ -1120,7 +1120,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInEmptyAndEmpty":
 		///	( {} included in {} ) = true
 		/// </summary>
@@ -1134,7 +1134,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInListNullAndListNull":
 		///	( { null } included in { null } ) = true
 		/// </summary>
@@ -1149,7 +1149,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInEmptyAnd123":
 		///	( {} included in { 1, 2, 3 } ) = true
 		/// </summary>
@@ -1163,7 +1163,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedIn2And123":
 		///	( { 2 } included in { 1, 2, 3 } ) = true
 		/// </summary>
@@ -1177,7 +1177,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedIn4And123":
 		///	( { 4 } included in { 1, 2, 3 } ) = false
 		/// </summary>
@@ -1191,7 +1191,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInDateTimeTrue":
 		///	( { DateTime(2012, 5, 10)} included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = true
 		/// </summary>
@@ -1205,7 +1205,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInDateTimeFalse":
 		///	( {DateTime(2012, 5, 11)} included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = false
 		/// </summary>
@@ -1219,7 +1219,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInTimeTrue":
 		///	( @T15:59:59.999 included in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = true
 		/// </summary>
@@ -1233,7 +1233,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInTimeFalse":
 		///	( @T16:59:59.999 included in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = false
 		/// </summary>
@@ -1247,7 +1247,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInNullLeft":
 		///	( null included in {2} ) = null
 		/// </summary>
@@ -1261,7 +1261,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IncludedInNullRight":
 		///	( {'s', 'a', 'm'} included in null ) = null
 		/// </summary>
@@ -1274,11 +1274,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
-		///define "IndexerNull1List":
-		///	( (null as List<System.Any>)[1] ) = null
-		/// </summary>
+
+        /// <summary>
+        ///define "IndexerNull1List":
+        ///	( (null as List&lt;System.Any>)[1] ) = null
+        /// </summary>
         [TestCategory("CqlListOperatorsTest")]
         [TestMethod]
         public void IndexerNull1List_Test()
@@ -1289,7 +1289,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Indexer0Of12":
 		///	( { 1, 2 }[0] ) = 1
 		/// </summary>
@@ -1303,7 +1303,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Indexer1Of12":
 		///	( { 1, 2 }[1] ) = 2
 		/// </summary>
@@ -1317,7 +1317,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Indexer2Of12":
 		///	( { 1, 2 }[2] ) = null
 		/// </summary>
@@ -1331,7 +1331,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerNeg1Of12":
 		///	( { 1, 2 }[-1] ) = null
 		/// </summary>
@@ -1345,7 +1345,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerDateTime":
 		///	( { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }[1] ) = DateTime(2012, 5, 10)
 		/// </summary>
@@ -1359,7 +1359,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerTime":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }[1] ) = @T15:59:59.999
 		/// </summary>
@@ -1373,7 +1373,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOfEmptyNull":
 		///	( IndexOf({}, null) ) = null
 		/// </summary>
@@ -1387,7 +1387,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOfNullEmpty":
 		///	( IndexOf(null, {}) ) = null
 		/// </summary>
@@ -1401,7 +1401,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOfNullIn1Null":
 		///	( IndexOf({ 1, null }, null) ) = null
 		/// </summary>
@@ -1415,7 +1415,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOf1In12":
 		///	( IndexOf({ 1, 2 }, 1) ) = 0
 		/// </summary>
@@ -1429,7 +1429,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOf2In12":
 		///	( IndexOf({ 1, 2 }, 2) ) = 1
 		/// </summary>
@@ -1443,7 +1443,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOf3In12":
 		///	( IndexOf({ 1, 2 }, 3) ) = -1
 		/// </summary>
@@ -1457,7 +1457,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOfDateTime":
 		///	( IndexOf({ DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }, DateTime(2014, 12, 10)) ) = 2
 		/// </summary>
@@ -1471,7 +1471,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexOfTime":
 		///	( IndexOf({ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }, @T15:59:59.999) ) = 1
 		/// </summary>
@@ -1485,7 +1485,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntersectEmptyListAndEmptyList":
 		///	( {} intersect {} ) = {}
 		/// </summary>
@@ -1499,7 +1499,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Intersect1234And23":
 		///	( { 1, 2, 3, 4 } intersect { 2, 3 } ) = { 2, 3 }
 		/// </summary>
@@ -1513,7 +1513,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Intersect23And1234":
 		///	( {2, 3} intersect { 1, 2, 3, 4 } ) = { 2, 3 }
 		/// </summary>
@@ -1527,7 +1527,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntersectDateTime":
 		///	( { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } intersect { DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2000, 5, 5) } ) = {@2012-05-10, @2014-12-10}
 		/// </summary>
@@ -1541,7 +1541,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntersectTime":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } intersect { @T01:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = {@T15:59:59.999, @T20:59:59.999}
 		/// </summary>
@@ -1555,7 +1555,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastEmpty":
 		///	( Last({}) ) = null
 		/// </summary>
@@ -1569,7 +1569,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastNull1":
 		///	( Last({null, 1}) ) = 1
 		/// </summary>
@@ -1583,7 +1583,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Last1Null":
 		///	( Last({1, null}) ) = null
 		/// </summary>
@@ -1597,7 +1597,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Last12":
 		///	( Last({1, 2}) ) = 2
 		/// </summary>
@@ -1611,7 +1611,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastDateTime":
 		///	( Last({DateTime(2012, 5, 10), DateTime(2014, 12, 10)}) ) = DateTime(2014, 12, 10)
 		/// </summary>
@@ -1625,7 +1625,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastTime":
 		///	( Last({ @T15:59:59.999, @T20:59:59.999 }) ) = @T20:59:59.999
 		/// </summary>
@@ -1639,7 +1639,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthEmptyList":
 		///	( Length({}) ) = 0
 		/// </summary>
@@ -1653,7 +1653,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthNull1":
 		///	( Length({null, 1}) ) = 2
 		/// </summary>
@@ -1667,7 +1667,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Length1Null":
 		///	( Length({1, null}) ) = 2
 		/// </summary>
@@ -1681,7 +1681,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Length12":
 		///	( Length({1, 2}) ) = 2
 		/// </summary>
@@ -1695,7 +1695,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthDateTime":
 		///	( Length({DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)}) ) = 3
 		/// </summary>
@@ -1709,7 +1709,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthTime":
 		///	( Length({ @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999 }) ) = 6
 		/// </summary>
@@ -1723,7 +1723,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthNullList":
 		///	( Length(null as String) ) = 0
 		/// </summary>
@@ -1737,7 +1737,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentEmptyAndEmpty":
 		///	( {} ~ {} ) = true
 		/// </summary>
@@ -1751,7 +1751,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentABCAndABC":
 		///	( { 'a', 'b', 'c' } ~ { 'a', 'b', 'c' } ) = true
 		/// </summary>
@@ -1765,7 +1765,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentABCAndAB":
 		///	( { 'a', 'b', 'c' } ~ { 'a', 'b' } ) = false
 		/// </summary>
@@ -1779,7 +1779,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentABCAnd123":
 		///	( { 'a', 'b', 'c' } ~ { 1, 2, 3 } ) = false
 		/// </summary>
@@ -1793,7 +1793,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Equivalent123AndABC":
 		///	( { 1, 2, 3 } ~ { 'a', 'b', 'c' } ) = false
 		/// </summary>
@@ -1807,7 +1807,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Equivalent123AndString123":
 		///	( { 1, 2, 3 } ~ { '1', '2', '3' } ) = false
 		/// </summary>
@@ -1821,7 +1821,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentDateTimeTrue":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ) = true
 		/// </summary>
@@ -1835,7 +1835,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentDateTimeNull":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ) = false
 		/// </summary>
@@ -1849,7 +1849,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 1)} ) = false
 		/// </summary>
@@ -1863,7 +1863,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.999 } ) = true
 		/// </summary>
@@ -1877,7 +1877,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentTimeNull":
 		///	( { @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.999, null } ) = false
 		/// </summary>
@@ -1891,7 +1891,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EquivalentTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.995 } ) = false
 		/// </summary>
@@ -1905,7 +1905,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EmptyIsNotNull":
 		///	( ( {} is not null ) ) = true
 		/// </summary>
@@ -1919,7 +1919,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualEmptyAndEmpty":
 		///	( {} != {} ) = false
 		/// </summary>
@@ -1933,7 +1933,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualABCAndABC":
 		///	( { 'a', 'b', 'c' } != { 'a', 'b', 'c' } ) = false
 		/// </summary>
@@ -1947,7 +1947,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualABCAndAB":
 		///	( { 'a', 'b', 'c' } != { 'a', 'b' } ) = true
 		/// </summary>
@@ -1961,7 +1961,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualABCAnd123":
 		///	( { 'a', 'b', 'c' } != { 1, 2, 3 } ) = true
 		/// </summary>
@@ -1975,7 +1975,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqual123AndABC":
 		///	( { 1, 2, 3 } != { 'a', 'b', 'c' } ) = true
 		/// </summary>
@@ -1989,7 +1989,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqual123AndString123":
 		///	( { 1, 2, 3 } != { '1', '2', '3' } ) = true
 		/// </summary>
@@ -2003,7 +2003,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualDateTimeTrue":
 		///	( {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} != {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 1, 0, 0, 0, 0)} ) = true
 		/// </summary>
@@ -2017,7 +2017,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualDateTimeFalse":
 		///	( {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} != {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} ) = false
 		/// </summary>
@@ -2031,7 +2031,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999 } ) = true
 		/// </summary>
@@ -2045,7 +2045,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotEqualTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:49.999 } ) = false
 		/// </summary>
@@ -2059,7 +2059,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperContainsNullRightFalse":
 		///	( {'s', 'u', 'n'} properly includes null ) = false
 		/// </summary>
@@ -2073,7 +2073,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperContainsNullRightTrue":
 		///	( {'s', 'u', 'n', null} properly includes null ) = true
 		/// </summary>
@@ -2088,7 +2088,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperContainsTimeTrue":
 		///	( { @T15:59:59, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59 ) = true
 		/// </summary>
@@ -2102,7 +2102,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperContainsTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59 ) = false
 		/// </summary>
@@ -2116,7 +2116,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperInNullRightFalse":
 		///	( null properly included in {'s', 'u', 'n'} ) = false
 		/// </summary>
@@ -2130,7 +2130,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperInNullRightTrue":
 		///	( null properly included in {'s', 'u', 'n', null} ) = true
 		/// </summary>
@@ -2145,7 +2145,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperInTimeTrue":
 		///	( @T15:59:59 properly included in { @T15:59:59, @T20:59:59.999, @T20:59:49.999 } ) = true
 		/// </summary>
@@ -2159,7 +2159,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperInTimeFalse":
 		///	( @T15:59:59 properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } ) = false
 		/// </summary>
@@ -2173,7 +2173,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludesEmptyAndEmpty":
 		///	( {} properly includes {} ) = false
 		/// </summary>
@@ -2187,7 +2187,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludesListNullAndListNull":
 		///	( {null} properly includes {null} ) = false
 		/// </summary>
@@ -2201,7 +2201,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludes123AndEmpty":
 		///	( {1, 2, 3} properly includes {} ) = true
 		/// </summary>
@@ -2215,7 +2215,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludes123And2":
 		///	( {1, 2, 3} properly includes {2} ) = true
 		/// </summary>
@@ -2229,7 +2229,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludes123And4":
 		///	( {1, 2, 3} properly includes {4} ) = false
 		/// </summary>
@@ -2243,7 +2243,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludesDateTimeTrue":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly includes {DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = true
 		/// </summary>
@@ -2257,7 +2257,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludesDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly includes {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = false
 		/// </summary>
@@ -2271,7 +2271,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludesTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes { @T15:59:59.999, @T20:59:59.999 } ) = true
 		/// </summary>
@@ -2285,7 +2285,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludesTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes { @T15:59:59.999, @T20:59:59.999, @T14:59:22.999 } ) = false
 		/// </summary>
@@ -2299,7 +2299,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperlyIncludesNullLeft":
 		///	( null properly includes {2} ) = null
 		/// </summary>
@@ -2313,7 +2313,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedInEmptyAndEmpty":
 		///	( {} properly included in {} ) = false
 		/// </summary>
@@ -2327,7 +2327,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedInListNullAndListNull":
 		///	( {null} properly included in {null} ) = false
 		/// </summary>
@@ -2341,7 +2341,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedInEmptyAnd123":
 		///	( {} properly included in {1, 2, 3} ) = true
 		/// </summary>
@@ -2355,7 +2355,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedIn2And123":
 		///	( {2} properly included in {1, 2, 3} ) = true
 		/// </summary>
@@ -2369,7 +2369,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedIn4And123":
 		///	( {4} properly included in {1, 2, 3} ) = false
 		/// </summary>
@@ -2383,7 +2383,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedInDateTimeTrue":
 		///	( {DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = true
 		/// </summary>
@@ -2397,7 +2397,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedInDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = false
 		/// </summary>
@@ -2411,7 +2411,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedInTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } ) = true
 		/// </summary>
@@ -2425,7 +2425,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperIncludedInTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T14:59:22.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } ) = false
 		/// </summary>
@@ -2439,7 +2439,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ProperlyIncludedInNulRight":
 		///	( {'s', 'u', 'n'} properly included in null ) = null
 		/// </summary>
@@ -2453,7 +2453,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SingletonFromEmpty":
 		///	( singleton from {} ) = null
 		/// </summary>
@@ -2467,7 +2467,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SingletonFromListNull":
 		///	( singleton from {null} ) = null
 		/// </summary>
@@ -2481,7 +2481,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SingletonFrom1":
 		///	( singleton from { 1 } ) = 1
 		/// </summary>
@@ -2495,7 +2495,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SingletonFromDateTime":
 		///	( singleton from { DateTime(2012, 5, 10) } ) = DateTime(2012, 5, 10)
 		/// </summary>
@@ -2509,7 +2509,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SingletonFromTime":
 		///	( singleton from { @T15:59:59.999 } ) = @T15:59:59.999
 		/// </summary>
@@ -2523,7 +2523,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SkipNull":
 		///	( Skip(null, 3) ) = null
 		/// </summary>
@@ -2537,7 +2537,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SkipEven":
 		///	( Skip({1,2,3,4,5}, 2) ) = {3, 4, 5}
 		/// </summary>
@@ -2551,7 +2551,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SkipOdd":
 		///	( Skip({1,2,3,4,5}, 3) ) = {4, 5}
 		/// </summary>
@@ -2565,7 +2565,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SkipNone":
 		///	( Skip({1,2,3,4,5}, 0) ) = {1,2,3,4,5}
 		/// </summary>
@@ -2579,7 +2579,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SkipAll":
 		///	( Skip({1,2,3,4,5}, 5) ) = {}
 		/// </summary>
@@ -2593,7 +2593,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TailNull":
 		///	( Tail(null) ) = null
 		/// </summary>
@@ -2607,7 +2607,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TailEven":
 		///	( Tail({1,2,3,4}) ) = {2,3,4}
 		/// </summary>
@@ -2621,7 +2621,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TailOdd":
 		///	( Tail({1,2,3,4,5}) ) = {2,3,4,5}
 		/// </summary>
@@ -2635,7 +2635,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TailEmpty":
 		///	( Tail({}) ) = {}
 		/// </summary>
@@ -2649,7 +2649,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TailOneElement":
 		///	( Tail({1}) ) = {}
 		/// </summary>
@@ -2663,7 +2663,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TakeNull":
 		///	( Take(null, 3) ) = null
 		/// </summary>
@@ -2677,7 +2677,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TakeNullEmpty":
 		///	( Take({1,2,3}, null as Integer) ) = {}
 		/// </summary>
@@ -2691,7 +2691,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TakeEmpty":
 		///	( Take({1,2,3}, 0) ) = {}
 		/// </summary>
@@ -2705,7 +2705,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TakeEven":
 		///	( Take({1,2,3,4}, 2) ) = {1, 2}
 		/// </summary>
@@ -2719,7 +2719,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TakeOdd":
 		///	( Take({1,2,3,4}, 3) ) = {1, 2, 3}
 		/// </summary>
@@ -2733,7 +2733,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TakeAll":
 		///	( Take({1,2,3,4}, 4) ) = {1, 2, 3, 4}
 		/// </summary>
@@ -2747,7 +2747,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UnionEmptyAndEmpty":
 		///	( {} union {} ) = {}
 		/// </summary>
@@ -2761,7 +2761,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UnionListNullAndListNull":
 		///	(  ( ( { null } union { null } ) = {null} ) = null ) = null
 		/// </summary>
@@ -2775,7 +2775,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Union123AndEmpty":
 		///	( { 1, 2, 3 } union {} ) = {1, 2, 3}
 		/// </summary>
@@ -2789,7 +2789,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Union123And2":
 		///	( { 1, 2, 3 } union { 2 } ) = {1, 2, 3 }
 		/// </summary>
@@ -2803,7 +2803,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Union123And4":
 		///	( { 1, 2, 3 } union { 4 } ) = {1, 2, 3, 4}
 		/// </summary>
@@ -2817,7 +2817,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UnionDateTime":
 		///	( { DateTime(2001, 9, 11)} union {DateTime(2012, 5, 10), DateTime(2014, 12, 10) } ) = {@2001-09-11, @2012-05-10, @2014-12-10}
 		/// </summary>
@@ -2831,7 +2831,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UnionTime":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } union { @T10:59:59.999 } ) = {@T15:59:59.999, @T20:59:59.999, @T12:59:59.999, @T10:59:59.999}
 		/// </summary>
@@ -2845,7 +2845,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "intList":
 		///	( { 3, 2, 1 } ) = {3, 2, 1}
 		/// </summary>
@@ -2859,7 +2859,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "decimalList":
 		///	( { 3.8, 2.4, 1.9 } ) = {3.8, 2.4, 1.9}
 		/// </summary>
@@ -2873,7 +2873,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "quantityList":
 		///	( { 19.99 'lbs', 17.33 'lbs', 10.66 'lbs' } ) = {19.99 'lbs', 17.33 'lbs', 10.66 'lbs'}
 		/// </summary>
@@ -2887,7 +2887,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "dateTimeList":
 		///	( { DateTime(2016), DateTime(2015), DateTime(2010) } ) = {@2016, @2015, @2010}
 		/// </summary>
@@ -2901,7 +2901,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "timeList":
 		///	( { @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 } ) = {@T15:59:59.999, @T15:12:59.999, @T15:12:13.999}
 		/// </summary>

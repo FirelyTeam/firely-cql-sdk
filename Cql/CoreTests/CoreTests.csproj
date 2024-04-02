@@ -3,22 +3,10 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>false</IsPackable>
+		<Nullable>disable</Nullable>
+		<NoWarn>CS1591</NoWarn>
 	</PropertyGroup>
-
-	<!-- <PropertyGroup> -->
-	<!-- 	<FirelySdkVersion>5.5.1</FirelySdkVersion> -->
-	<!-- </PropertyGroup> -->
-
-	<!-- <PropertyGroup Condition=" '$(Configuration)' == 'Release' "> -->
-	<!-- 	<SignAssembly>True</SignAssembly> -->
-	<!-- 	<DelaySign>true</DelaySign> -->
-	<!-- 	<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile> -->
-	<!-- 	<IncludeSymbols>True</IncludeSymbols> -->
-	<!-- 	<GeneratePackageOnBuild>False</GeneratePackageOnBuild> -->
-	<!-- 	<SymbolPackageFormat>snupkg</SymbolPackageFormat> -->
-	<!-- </PropertyGroup> -->
 
 	<ItemGroup>
 		<PackageReference Include="FluentAssertions" Version="6.12.0" />
