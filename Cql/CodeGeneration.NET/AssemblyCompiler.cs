@@ -127,8 +127,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }
             var compilation = CSharpCompilation.Create($"Tuples")
-                .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel: OptimizationLevel.Release))
+                .WithOptions(CreateCSharpCompilationOptions())
                 .WithReferences(metadataReferences);
 
             var sources = new Dictionary<string, string>();
@@ -179,6 +178,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             return asmData;
         }
 
+        private static CSharpCompilationOptions CreateCSharpCompilationOptions() =>
+            new(
+                outputKind: OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel: OptimizationLevel.Release,
+                deterministic: true // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
+            );
+
         private static void CompileNode(
             Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
@@ -222,12 +228,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
             var compilation = CSharpCompilation.Create($"{library.NameAndVersion()!}")
-                .WithOptions(
-                    new CSharpCompilationOptions(
-                        outputKind: OutputKind.DynamicallyLinkedLibrary,
-                        optimizationLevel: OptimizationLevel.Release,
-                        deterministic: true // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
-                        ))
+                .WithOptions(CreateCSharpCompilationOptions())
                 .WithReferences(metadataReferences)
                 .AddSyntaxTrees(tree, asmInfoTree);
             var codeStream = new MemoryStream();
