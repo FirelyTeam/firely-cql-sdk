@@ -7,7 +7,7 @@
 	<Target Name="ELM to C#"
 			BeforeTargets="Compile">
 		<Message Text="Converting ELM to C#"/>
-		<Exec Command='"$(SolutionDir)/Cql/PackagerCLI/bin/debug/$(DotNetVersion)/Hl7.Cql.Packager.exe" --override-utc-date-time "1970-01-01T00:00:00Z" --canonical-root-url https://fire.ly/fhir/ --elm "$(SolutionDir)/LibrarySets/Demo/Elm" --cql "$(SolutionDir)/LibrarySets/Demo/Cql" --cs "$(MSBuildProjectDirectory)/../Measures" --fhir "$(SolutionDir)/LibrarySets/Demo/Resources"' />
+		<Exec Command='"$(SolutionDir)/Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe" --override-utc-date-time "1970-01-01T00:00:00Z" --canonical-root-url https://fire.ly/fhir/ --elm "$(SolutionDir)/LibrarySets/Demo/Elm" --cql "$(SolutionDir)/LibrarySets/Demo/Cql" --cs "$(MSBuildProjectDirectory)/../Measures" --fhir "$(SolutionDir)/LibrarySets/Demo/Resources"' />
 	</Target>
 	<Target Name="Delete C#" AfterTargets="Clean">
 		<Message Text="Deleting C# files...$(MSBuildProjectDirectory)/../Measures/*.cs" />
