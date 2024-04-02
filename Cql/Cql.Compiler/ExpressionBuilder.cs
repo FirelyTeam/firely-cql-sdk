@@ -26,12 +26,74 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
+    /// <summary>
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
+    /// </summary>
+    /// <remarks>
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilder)"/>.
+    /// </remarks>
     partial class ExpressionBuilder
     {
         // Yeah, hardwired to FHIR 4.0.1 for now.
         private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
 
         private readonly ILogger<ExpressionBuilder> _logger = null!;
+
+        internal ExpressionBuilder(
+            ILogger<ExpressionBuilder> logger,
+            OperatorBinding operatorBinding,
+            TypeManager typeManager,
+            TypeConverter typeConverter,
+            LibraryDefinitionBuilderSettings settings,
+            LibraryExpressionBuilder libContext)
+        {
+            // External Services
+            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+            _typeManager = typeManager;
+            _logger = logger;
+            _typeConverter = typeConverter;
+
+            // External State
+            _libraryDefinitionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
+            LibraryContext = libContext;
+
+            // Internal State
+            _impliedAlias = null;
+            _operands = new Dictionary<string, ParameterExpression>();
+            _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+            _scopes = new Dictionary<string, (Expression, Elm.Element)>();
+            _expressionMutators = new List<IExpressionMutator>();
+            _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
+        }
+
+        private ExpressionBuilder(
+            ExpressionBuilder source)
+        {
+            _elementStack = new Stack<Elm.Element>(_elementStack);
+            _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
+            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
+            _impliedAlias = source._impliedAlias;
+            _operands = source._operands;
+            _libraries = source._libraries;
+            _scopes = source._scopes;
+            LibraryContext = source.LibraryContext;
+            _typeManager = source._typeManager;
+            _logger = source._logger;
+            _expressionMutators = source._expressionMutators;
+            _customImplementations = source._customImplementations;
+            _typeConverter = source._typeConverter;
+        }
+
+        private ExpressionBuilder(
+            ExpressionBuilder outer,
+            string? impliedAlias,
+            IDictionary<string, (Expression, Elm.Element)> scopes) : this(outer)
+        {
+            _scopes = scopes;
+            _impliedAlias = impliedAlias;
+        }
+
+
 
         internal Expression TranslateExpression(Element op)
         {

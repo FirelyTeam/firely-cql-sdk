@@ -11,9 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-/// <summary>
-/// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
-/// </summary>
 internal partial class LibraryExpressionBuilder
 {
     private readonly ILogger<LibraryExpressionBuilder> _logger;
@@ -22,36 +19,6 @@ internal partial class LibraryExpressionBuilder
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
     private readonly TypeConverter _typeConverter;
-
-    public LibraryExpressionBuilder(
-        ILoggerFactory loggerFactory,
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        TypeConverter typeConverter,
-        Library library,
-        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
-        DefinitionDictionary<LambdaExpression> libraryDefinitions,
-        LibrarySetExpressionBuilder? libsCtx = null)
-    {
-        // External Services
-        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
-        _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
-        _typeManager = typeManager;
-        _loggerFactory = loggerFactory;
-        _typeConverter = typeConverter;
-        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
-
-        // External State
-        LibraryDefinitions = libraryDefinitions;
-        Library = library;
-        LibrarySetContext = libsCtx;
-
-        // Internal State
-        _libraryIdentifiersByAlias = new();
-        _codesByName = new();
-        _codesByCodeSystemName = new();
-        _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
-    }
 
     public Library Library { get; }
 

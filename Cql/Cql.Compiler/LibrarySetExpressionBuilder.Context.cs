@@ -17,30 +17,6 @@ internal partial class LibrarySetExpressionBuilder : IBuilderNode
     private readonly TypeConverter _typeConverter;
     public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
 
-    public LibrarySetExpressionBuilder(
-        ILoggerFactory loggerFactory,
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        TypeConverter typeConverter,
-        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions)
-    {
-        // External Services
-        _loggerFactory = loggerFactory;
-        _operatorBinding = operatorBinding;
-        _typeManager = typeManager;
-        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
-        _typeConverter = typeConverter;
-
-        // External State
-        _librarySet = librarySet;
-        LibrarySetDefinitions = definitions;
-
-        // Internal State
-        _debuggerInfo = new BuilderDebuggerInfo("LibrarySet", Name: _librarySet.Name!);
-    }
-
     public LibrarySet LibrarySet => _librarySet;
 
     public LibraryExpressionBuilder CreateLibraryExpressionBuilder(
