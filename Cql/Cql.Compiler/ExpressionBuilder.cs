@@ -1095,19 +1095,7 @@ namespace Hl7.Cql.Compiler
         protected Expression FunctionRef(FunctionRef op)
         {
             var operands = op.operand
-                .Select(operand => TranslateExpression(operand))
-                .ToArray();
-
-            var operandTypes = operands
-                .Select(op => op.Type)
-                .ToArray();
-
-            var functionType = GetFunctionRefReturnType(op, operandTypes);
-
-            var funcTypeParameters =
-                new[] { typeof(CqlContext) }
-                .Concat(operandTypes)
-                .Concat(new[] { functionType })
+                .Select(TranslateExpression)
                 .ToArray();
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
@@ -1115,7 +1103,7 @@ namespace Hl7.Cql.Compiler
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
             if (op.libraryName is { } alias)
             {
-                string libraryName = LibraryContext.GetNameAndVersionFromAlias(alias, true)!;
+                string libraryName = LibraryContext.GetNameAndVersionFromAlias(alias, throwError: true)!;
                 if (libraryName.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase)
                     && op.name!.Equals("tostring", StringComparison.OrdinalIgnoreCase))
                 {
@@ -1307,7 +1295,7 @@ namespace Hl7.Cql.Compiler
 
             var argumentTypes = arguments.Select(a => a.Type).ToArray();
             var selected = LibraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
-            Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).ToArray());
+            Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
             var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
 
             // all functions still take the bundle and context parameters, plus whatver the operands

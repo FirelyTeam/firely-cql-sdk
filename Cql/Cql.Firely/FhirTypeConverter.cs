@@ -77,9 +77,7 @@ namespace Hl7.Cql.Fhir
             add((M.Instant p) => p.Value);
             add((M.Instant p) =>
             {
-                if (p.Value is null)
-                    return null;
-                if(p.Value is DateTimeOffset dto)
+                if(p.Value is { } dto)
                     return new CqlDateTime(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes);
                 return null;
             });
@@ -156,7 +154,8 @@ namespace Hl7.Cql.Fhir
             add((M.PositiveInt pi) => pi.ToString());
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));
             add((M.UnsignedInt ui) => ui.ToString());
-            add<DataType,string?>(ConvertChoiceTypeToString);
+            add((M.DataType dt) => ConvertChoiceTypeToString(dt));
+            add((M.DataType dt) => dt as Coding);
 
             add((M.Canonical c) => c.ToString());
 
