@@ -7,7 +7,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "CoalesceANull":
 		///	( Coalesce('a', null) ) = 'a'
 		/// </summary>
@@ -21,7 +21,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CoalesceNullA":
 		///	( Coalesce(null, 'a') ) = 'a'
 		/// </summary>
@@ -35,7 +35,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CoalesceEmptyList":
 		///	( Coalesce({}) ) = null
 		/// </summary>
@@ -49,7 +49,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CoalesceListFirstA":
 		///	( Coalesce({'a', null, null}) ) = 'a'
 		/// </summary>
@@ -63,7 +63,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CoalesceListLastA":
 		///	( Coalesce({null, null, 'a'}) ) = 'a'
 		/// </summary>
@@ -77,7 +77,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CoalesceFirstList":
 		///	( Coalesce({'a'},null, null) ) = {'a'}
 		/// </summary>
@@ -91,7 +91,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CoalesceLastList":
 		///	( Coalesce(null, null, {'a'}) ) = {'a'}
 		/// </summary>
@@ -105,7 +105,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeCoalesce":
 		///	( Coalesce(null, null, DateTime(2012, 5, 18)) ) = DateTime(2012, 5, 18)
 		/// </summary>
@@ -119,7 +119,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeListCoalesce":
 		///	( Coalesce({ null, null, DateTime(2012, 5, 18) }) ) = DateTime(2012, 5, 18)
 		/// </summary>
@@ -133,7 +133,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeCoalesce":
 		///	( Coalesce(null, null, @T05:15:33.556) ) = @T05:15:33.556
 		/// </summary>
@@ -147,7 +147,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeListCoalesce":
 		///	( Coalesce({ null, null, @T05:15:33.556 }) ) = @T05:15:33.556
 		/// </summary>
@@ -161,7 +161,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsNullTrue":
 		///	( IsNull(null) ) = true
 		/// </summary>
@@ -175,7 +175,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsNullFalseEmptyString":
 		///	( IsNull('') ) = false
 		/// </summary>
@@ -189,7 +189,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsNullAlsoFalseAbcString":
 		///	( IsNull('abc') ) = false
 		/// </summary>
@@ -203,7 +203,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsNullAlsoFalseNumber1":
 		///	( IsNull(1) ) = false
 		/// </summary>
@@ -217,7 +217,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsNullAlsoFalseNumberZero":
 		///	( IsNull(0) ) = false
 		/// </summary>
@@ -231,7 +231,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsFalseFalse":
 		///	( IsFalse(false) ) = true
 		/// </summary>
@@ -245,7 +245,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsFalseTrue":
 		///	( IsFalse(true) ) = false
 		/// </summary>
@@ -259,7 +259,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsFalseNull":
 		///	( IsFalse(null) ) = false
 		/// </summary>
@@ -273,7 +273,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsTrueTrue":
 		///	( IsTrue(true) ) = true
 		/// </summary>
@@ -287,7 +287,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsTrueFalse":
 		///	( IsTrue(false) ) = false
 		/// </summary>
@@ -301,7 +301,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IsTrueNull":
 		///	( IsTrue(null) ) = false
 		/// </summary>

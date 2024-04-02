@@ -7,9 +7,9 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "TestAfterNull":
-		///	( null as Interval<Integer> after Interval[1, 10] ) = null
+		///	( null as Interval&lt;Integer> after Interval[1, 10] ) = null
 		/// </summary>
         [TestCategory("CqlIntervalOperatorsTest")]
         [TestMethod]
@@ -21,7 +21,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalAfterTrue":
 		///	( Interval[11, 20] after Interval[1, 10] ) = true
 		/// </summary>
@@ -35,7 +35,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalAfterFalse":
 		///	( Interval[1, 10] after Interval[11, 20] ) = false
 		/// </summary>
@@ -49,7 +49,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalPointAfterTrue":
 		///	( 12 after Interval[1, 10] ) = true
 		/// </summary>
@@ -63,7 +63,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalPointAfterFalse":
 		///	( 9 after Interval[1, 10] ) = false
 		/// </summary>
@@ -77,7 +77,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalAfterPointTrue":
 		///	( Interval[11, 20] after 5 ) = true
 		/// </summary>
@@ -91,7 +91,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalAfterPointFalse":
 		///	( Interval[11, 20] after 12 ) = false
 		/// </summary>
@@ -105,7 +105,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalAfterTrue":
 		///	( Interval[11.0, 20.0] after Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -119,7 +119,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalAfterFalse":
 		///	( Interval[1.0, 10.0] after Interval[11.0, 20.0] ) = false
 		/// </summary>
@@ -133,7 +133,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalPointAfterTrue":
 		///	( 12.0 after Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -147,7 +147,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalPointAfterFalse":
 		///	( 9.0 after Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -161,7 +161,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalAfterPointTrue":
 		///	( Interval[11.0, 20.0] after 5.0 ) = true
 		/// </summary>
@@ -175,7 +175,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalAfterPointFalse":
 		///	( Interval[11.0, 20.0] after 12.0 ) = false
 		/// </summary>
@@ -189,7 +189,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalAfterTrue":
 		///	( Interval[11.0 'g', 20.0 'g'] after Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -203,7 +203,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalAfterFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] after Interval[11.0 'g', 20.0 'g'] ) = false
 		/// </summary>
@@ -217,7 +217,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalPointAfterTrue":
 		///	( 12.0'g' after Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -231,7 +231,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalPointAfterFalse":
 		///	( 9.0'g' after Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -245,7 +245,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalAfterPointTrue":
 		///	( Interval[11.0 'g', 20.0 'g'] after 5.0'g' ) = true
 		/// </summary>
@@ -259,7 +259,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalAfterPointFalse":
 		///	( Interval[11.0 'g', 20.0 'g'] after 12.0'g' ) = false
 		/// </summary>
@@ -273,7 +273,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeAfterTrue":
 		///	( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)] after DateTime(2011, 12, 31) ) = true
 		/// </summary>
@@ -287,7 +287,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeAfterFalse":
 		///	( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)] after DateTime(2012, 12, 31) ) = false
 		/// </summary>
@@ -301,7 +301,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeAfterTrue":
 		///	( Interval[@T15:59:59.999, @T20:59:59.999] after @T12:59:59.999 ) = true
 		/// </summary>
@@ -315,7 +315,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeAfterFalse":
 		///	( Interval[@T15:59:59.999, @T20:59:59.999] after @T17:59:59.999 ) = false
 		/// </summary>
@@ -328,11 +328,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "TestBeforeNull":
-		///	( null as Interval<Integer> before Interval[1, 10] ) = null
-		/// </summary>
+
+        /// <summary>
+        ///define "TestBeforeNull":
+        ///	( null as Interval&lt;Integer> before Interval[1, 10] ) = null
+        /// </summary>
         [TestCategory("CqlIntervalOperatorsTest")]
         [TestMethod]
         public void TestBeforeNull_Test()
@@ -343,7 +343,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalBeforeFalse":
 		///	( Interval[11, 20] before Interval[1, 10] ) = false
 		/// </summary>
@@ -357,7 +357,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalBeforeTrue":
 		///	( Interval[1, 10] before Interval[11, 20] ) = true
 		/// </summary>
@@ -371,7 +371,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalPointBeforeTrue":
 		///	( 9 before Interval[11, 20] ) = true
 		/// </summary>
@@ -385,7 +385,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalPointBeforeFalse":
 		///	( 9 before Interval[1, 10] ) = false
 		/// </summary>
@@ -399,7 +399,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalBeforePointTrue":
 		///	( Interval[1, 10] before 11 ) = true
 		/// </summary>
@@ -413,7 +413,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalBeforePointFalse":
 		///	( Interval[1, 10] before 8 ) = false
 		/// </summary>
@@ -427,7 +427,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalBeforeFalse":
 		///	( Interval[11.0, 20.0] before Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -441,7 +441,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalBeforeTrue":
 		///	( Interval[1.0, 10.0] before Interval[11.0, 20.0] ) = true
 		/// </summary>
@@ -455,7 +455,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalPointBeforeTrue":
 		///	( 9.0 before Interval[11.0, 20.0] ) = true
 		/// </summary>
@@ -469,7 +469,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalPointBeforeFalse":
 		///	( 9.0 before Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -483,7 +483,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalBeforePointTrue":
 		///	( Interval[1.0, 10.0] before 11.0 ) = true
 		/// </summary>
@@ -497,7 +497,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalBeforePointFalse":
 		///	( Interval[1.0, 10.0] before 8.0 ) = false
 		/// </summary>
@@ -511,7 +511,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalBeforeTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] before Interval[11.0 'g', 20.0 'g'] ) = true
 		/// </summary>
@@ -525,7 +525,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalBeforeFalse":
 		///	( Interval[11.0 'g', 20.0 'g'] before Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -539,7 +539,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalPointBeforeTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] before 12.0'g' ) = true
 		/// </summary>
@@ -553,7 +553,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalPointBeforeFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] before 9.0'g' ) = false
 		/// </summary>
@@ -567,7 +567,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalBeforePointTrue":
 		///	( 5.0'g' before Interval[11.0 'g', 20.0 'g'] ) = true
 		/// </summary>
@@ -581,7 +581,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalBeforePointFalse":
 		///	( 12.0'g' before Interval[11.0 'g', 20.0 'g'] ) = false
 		/// </summary>
@@ -595,7 +595,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeBeforeTrue":
 		///	( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)] before DateTime(2012, 2, 27) ) = true
 		/// </summary>
@@ -609,7 +609,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeBeforeFalse":
 		///	( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)] before DateTime(2011, 12, 31) ) = false
 		/// </summary>
@@ -623,7 +623,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeBeforeTrue":
 		///	( Interval[@T15:59:59.999, @T20:59:59.999] before @T22:59:59.999 ) = true
 		/// </summary>
@@ -637,7 +637,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeBeforeFalse":
 		///	( Interval[@T15:59:59.999, @T20:59:59.999] before @T10:59:59.999 ) = false
 		/// </summary>
@@ -650,11 +650,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "TestCollapseNull":
-		///	( collapse {Interval(null as Integer, null as Integer)} ) = null as List<Interval<Integer>>
-		/// </summary>
+
+        /// <summary>
+        ///define "TestCollapseNull":
+        ///	( collapse {Interval(null as Integer, null as Integer)} ) = null as List&lt;Interval&lt;Integer>>
+        /// </summary>
         [TestCategory("CqlIntervalOperatorsTest")]
         [TestMethod]
         public void TestCollapseNull_Test()
@@ -665,7 +665,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalCollapse":
 		///	( collapse { Interval[1,5], Interval[3,7], Interval[12,19], Interval[7,10] } ) = {Interval [ 1, 10 ], Interval [ 12, 19 ]}
 		/// </summary>
@@ -679,7 +679,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalCollapse2":
 		///	( collapse { Interval[1,2], Interval[3,7], Interval[10,19], Interval[7,10] } ) = {Interval [ 1, 19 ]}
 		/// </summary>
@@ -693,7 +693,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalCollapse3":
 		///	( collapse { Interval[4,6], Interval[7,8] } ) = {Interval [ 4, 8 ]}
 		/// </summary>
@@ -707,7 +707,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalCollapse":
 		///	( collapse { Interval[1.0,5.0], Interval[3.0,7.0], Interval[12.0,19.0], Interval[7.0,10.0] } ) = {Interval [ 1.0, 10.0 ], Interval [ 12.0, 19.0 ]}
 		/// </summary>
@@ -721,7 +721,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalCollapse2":
 		///	( collapse { Interval[4.0,6.0], Interval[6.00000001,8.0] } ) = {Interval [ 4.0, 8.0 ]}
 		/// </summary>
@@ -735,7 +735,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalCollapse":
 		///	( collapse { Interval[1.0 'g',5.0 'g'], Interval[3.0 'g',7.0 'g'], Interval[12.0 'g',19.0 'g'], Interval[7.0 'g',10.0 'g'] } ) = {Interval [ 1.0 'g', 10.0 'g' ], Interval [ 12.0 'g', 19.0 'g' ]}
 		/// </summary>
@@ -749,7 +749,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeCollapse":
 		///	( collapse { Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)], Interval[DateTime(2012, 1, 10), DateTime(2012, 1, 25)], Interval[DateTime(2012, 5, 10), DateTime(2012, 5, 25)], Interval[DateTime(2012, 5, 20), DateTime(2012, 5, 30)] } ) = {Interval [ @2012-01-01, @2012-01-25 ], Interval [ @2012-05-10, @2012-05-30 ]}
 		/// </summary>
@@ -763,7 +763,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeCollapse2":
 		///	( collapse { Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)], Interval[DateTime(2012, 1, 16), DateTime(2012, 5, 25)] } ) = {Interval [ @2012-01-01, @2012-05-25 ]}
 		/// </summary>
@@ -777,7 +777,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeCollapse":
 		///	( collapse { Interval[@T01:59:59.999, @T10:59:59.999], Interval[@T08:59:59.999, @T15:59:59.999], Interval[@T17:59:59.999, @T20:59:59.999], Interval[@T18:59:59.999, @T22:59:59.999] } ) = {Interval [ @T01:59:59.999, @T15:59:59.999 ], Interval [ @T17:59:59.999, @T22:59:59.999 ]}
 		/// </summary>
@@ -791,7 +791,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeCollapse2":
 		///	( collapse { Interval[@T01:59:59.999, @T10:59:59.999], Interval[@T11:00:00.000, @T15:59:59.999] } ) = {Interval [ @T01:59:59.999, @T15:59:59.999 ]}
 		/// </summary>
@@ -805,7 +805,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExpandPerDay":
 		///	( expand { Interval[@2018-01-01, @2018-01-04] } per day ) = { Interval[@2018-01-01, @2018-01-01], Interval[@2018-01-02, @2018-01-02], Interval[@2018-01-03, @2018-01-03], Interval[@2018-01-04, @2018-01-04] }
 		/// </summary>
@@ -820,7 +820,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExpandPer2Days":
 		///	( expand { Interval[@2018-01-01, @2018-01-04] } per 2 days ) = { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] }
 		/// </summary>
@@ -835,7 +835,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExpandPerHour":
 		///	( expand { Interval[@T10:00, @T12:30] } per hour ) = { Interval[@T10, @T10], Interval[@T11, @T11], Interval[@T12, @T12] }
 		/// </summary>
@@ -850,7 +850,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExpandPerMinute":
 		///	( expand { Interval[@T10, @T10] } per minute ) = { }
 		/// </summary>
@@ -865,7 +865,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestContainsNull":
 		///	( Interval[1, 10] contains null ) = null
 		/// </summary>
@@ -879,7 +879,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestNullElement1":
 		///	( null contains 5 ) = false
 		/// </summary>
@@ -893,7 +893,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestNullElement2":
 		///	( Interval[null, 5] contains 10 ) = false
 		/// </summary>
@@ -907,7 +907,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalContainsTrue":
 		///	( Interval[1, 10] contains 5 ) = true
 		/// </summary>
@@ -921,7 +921,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalContainsFalse":
 		///	( Interval[1, 10] contains 25 ) = false
 		/// </summary>
@@ -935,7 +935,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalContainsTrue":
 		///	( Interval[1.0, 10.0] contains 8.0 ) = true
 		/// </summary>
@@ -949,7 +949,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalContainsFalse":
 		///	( Interval[1.0, 10.0] contains 255.0 ) = false
 		/// </summary>
@@ -963,7 +963,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalContainsTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] contains 2.0 'g' ) = true
 		/// </summary>
@@ -977,7 +977,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalContainsFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] contains 100.0 'g' ) = false
 		/// </summary>
@@ -991,7 +991,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeContainsTrue":
 		///	( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)] contains DateTime(2012, 1, 10) ) = true
 		/// </summary>
@@ -1005,7 +1005,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeContainsFalse":
 		///	( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)] contains DateTime(2012, 1, 16) ) = false
 		/// </summary>
@@ -1019,7 +1019,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeContainsTrue":
 		///	( Interval[@T01:59:59.999, @T10:59:59.999] contains @T05:59:59.999 ) = true
 		/// </summary>
@@ -1033,7 +1033,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeContainsFalse":
 		///	( Interval[@T01:59:59.999, @T10:59:59.999] contains @T15:59:59.999 ) = false
 		/// </summary>
@@ -1047,7 +1047,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalEnd":
 		///	( end of Interval[1, 10] ) = 10
 		/// </summary>
@@ -1061,7 +1061,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalEnd":
 		///	( end of Interval[1.0, 10.0] ) = 10.0
 		/// </summary>
@@ -1075,7 +1075,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalEnd":
 		///	( end of Interval[1.0 'g', 10.0 'g'] ) = 10.0'g'
 		/// </summary>
@@ -1089,7 +1089,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIntervalEnd":
 		///	( end of Interval[@2016-05-01T00:00:00.000, @2016-05-02T00:00:00.000] ) = @2016-05-02T00:00:00.000
 		/// </summary>
@@ -1103,7 +1103,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIntervalEnd":
 		///	( end of Interval[@T00:00:00.000, @T23:59:59.599] ) = @T23:59:59.599
 		/// </summary>
@@ -1117,7 +1117,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestEndsNull":
 		///	( Interval[1, 10] ends Interval(null, null) ) = null
 		/// </summary>
@@ -1131,7 +1131,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalEndsTrue":
 		///	( Interval[4, 10] ends Interval[1, 10] ) = true
 		/// </summary>
@@ -1145,7 +1145,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalEndsFalse":
 		///	( Interval[44, 50] ends Interval[1, 10] ) = false
 		/// </summary>
@@ -1159,7 +1159,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalEndsTrue":
 		///	( Interval[4.0, 10.0] ends Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -1173,7 +1173,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalEndsFalse":
 		///	( Interval[11.0, 20.0] ends Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -1187,7 +1187,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalEndsTrue":
 		///	( Interval[5.0 'g', 10.0 'g'] ends Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -1201,7 +1201,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalEndsFalse":
 		///	( Interval[11.0 'g', 20.0 'g'] ends Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -1215,7 +1215,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeEndsTrue":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ends Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)] ) = true
 		/// </summary>
@@ -1229,7 +1229,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeEndsFalse":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ends Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 16)] ) = false
 		/// </summary>
@@ -1243,7 +1243,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeEndsTrue":
 		///	( Interval[@T05:59:59.999, @T10:59:59.999] ends Interval[@T01:59:59.999, @T10:59:59.999] ) = true
 		/// </summary>
@@ -1257,7 +1257,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeEndsFalse":
 		///	( Interval[@T05:59:59.999, @T10:59:59.999] ends Interval[@T01:59:59.999, @T11:59:59.999] ) = false
 		/// </summary>
@@ -1271,7 +1271,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestEqualNull":
 		///	( Interval[1, 10] = Interval(null, null) ) = null
 		/// </summary>
@@ -1285,7 +1285,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalEqualTrue":
 		///	( Interval[1, 10] = Interval[1, 10] ) = true
 		/// </summary>
@@ -1299,7 +1299,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalEqualFalse":
 		///	( Interval[1, 10] = Interval[11, 20] ) = false
 		/// </summary>
@@ -1313,7 +1313,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalEqualTrue":
 		///	( Interval[1.0, 10.0] = Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -1327,7 +1327,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalEqualFalse":
 		///	( Interval[1.0, 10.0] = Interval[11.0, 20.0] ) = false
 		/// </summary>
@@ -1341,7 +1341,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalEqualTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] = Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -1355,7 +1355,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalEqualFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] = Interval[11.0 'g', 20.0 'g'] ) = false
 		/// </summary>
@@ -1369,7 +1369,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeEqualTrue":
 		///	( Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)] = Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)] ) = true
 		/// </summary>
@@ -1383,7 +1383,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeEqualFalse":
 		///	( Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)] = Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), DateTime(2012, 1, 16, 0, 0, 0, 0)] ) = false
 		/// </summary>
@@ -1397,7 +1397,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeEqualTrue":
 		///	( Interval[@T05:59:59.999, @T10:59:59.999] = Interval[@T05:59:59.999, @T10:59:59.999] ) = true
 		/// </summary>
@@ -1411,7 +1411,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeEqualFalse":
 		///	( Interval[@T05:59:59.999, @T10:59:59.999] = Interval[@T05:59:59.999, @T10:58:59.999] ) = false
 		/// </summary>
@@ -1424,11 +1424,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "NullInterval":
-		///	( Interval[null as Integer, null as Integer] ) = null as Interval<Integer>
-		/// </summary>
+
+        /// <summary>
+        ///define "NullInterval":
+        ///	( Interval[null as Integer, null as Integer] ) = null as Interval&lt;Integer>
+        /// </summary>
         [TestCategory("CqlIntervalOperatorsTest")]
         [TestMethod]
         public void NullInterval_Test()
@@ -1438,11 +1438,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
-		///define "TestExceptNull":
-		///	( Interval[null as Integer, null as Integer] except Interval[null as Integer, null as Integer] ) = null as Interval<Integer>
-		/// </summary>
+
+        /// <summary>
+        ///define "TestExceptNull":
+        ///	( Interval[null as Integer, null as Integer] except Interval[null as Integer, null as Integer] ) = null as Interval&lt;Integer>
+        /// </summary>
         [TestCategory("CqlIntervalOperatorsTest")]
         [TestMethod]
         public void TestExceptNull_Test()
@@ -1453,7 +1453,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalExcept1to3":
 		///	( Interval[1, 10] except Interval[4, 10] ) = Interval [ 1, 3 ]
 		/// </summary>
@@ -1467,7 +1467,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalExceptNull":
 		///	( Interval[1, 10] except Interval[3, 7] ) = null
 		/// </summary>
@@ -1481,7 +1481,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalExcept1to3":
 		///	( Interval[1.0, 10.0] except Interval[4.0, 10.0] ) = Interval [ 1.0, 3.99999999 ]
 		/// </summary>
@@ -1495,7 +1495,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalExceptNull":
 		///	( Interval[1.0, 10.0] except Interval[3.0, 7.0] ) = null
 		/// </summary>
@@ -1509,7 +1509,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalExcept1to4":
 		///	( Interval[1.0 'g', 10.0 'g'] except Interval[5.0 'g', 10.0 'g'] ) = Interval [ 1.0 'g', 4.99999999 'g' ]
 		/// </summary>
@@ -1524,7 +1524,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Except12":
 		///	( Interval[1, 4] except Interval[3, 6] ) = Interval [ 1, 2 ]
 		/// </summary>
@@ -1538,7 +1538,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptDateTimeInterval":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] except Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 15)] ) = Interval [ @2012-01-05, @2012-01-06 ]
 		/// </summary>
@@ -1552,7 +1552,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptDateTime2":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 16)] except Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 12)] ) = Interval [ @2012-01-13, @2012-01-16 ]
 		/// </summary>
@@ -1566,7 +1566,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptTimeInterval":
 		///	( Interval[@T05:59:59.999, @T10:59:59.999] except Interval[@T08:59:59.999, @T10:59:59.999] ) = Interval [ @T05:59:59.999, @T08:59:59.998 ]
 		/// </summary>
@@ -1580,7 +1580,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExceptTime2":
 		///	( Interval[@T08:59:59.999, @T11:59:59.999] except Interval[@T05:59:59.999, @T10:59:59.999] ) = Interval [ @T11:00:00.000, @T11:59:59.999 ]
 		/// </summary>
@@ -1594,7 +1594,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestInNull":
 		///	( 5 in Interval[null as Integer, null as Integer] ) = false
 		/// </summary>
@@ -1609,7 +1609,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalInTrue":
 		///	( 5 in Interval[1, 10] ) = true
 		/// </summary>
@@ -1623,7 +1623,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalInFalse":
 		///	( 500 in Interval[1, 10] ) = false
 		/// </summary>
@@ -1637,7 +1637,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalInTrue":
 		///	( 9.0 in Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -1651,7 +1651,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalInFalse":
 		///	( -2.0 in Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -1665,7 +1665,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalInTrue":
 		///	( 1.0 'g' in Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -1679,7 +1679,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalInFalse":
 		///	( 55.0 'g' in Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -1693,7 +1693,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeInTrue":
 		///	( DateTime(2012, 1, 7) in Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ) = true
 		/// </summary>
@@ -1707,7 +1707,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeInFalse":
 		///	( DateTime(2012, 1, 17) in Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ) = false
 		/// </summary>
@@ -1721,7 +1721,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeInNullTrue":
 		///	( DateTime(2012, 1, 7) in Interval[DateTime(2012, 1, 5), null] ) = true
 		/// </summary>
@@ -1735,7 +1735,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeInTrue":
 		///	( @T07:59:59.999 in Interval[@T05:59:59.999, @T10:59:59.999] ) = true
 		/// </summary>
@@ -1749,7 +1749,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeInFalse":
 		///	( @T17:59:59.999 in Interval[@T05:59:59.999, @T10:59:59.999] ) = false
 		/// </summary>
@@ -1763,7 +1763,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeInNull":
 		///	( null in Interval[@T05:59:59.999, @T10:59:59.999] ) = null
 		/// </summary>
@@ -1777,7 +1777,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestPeriod1":
 		///	( Interval[@2017-12-20T11:00:00, @2017-12-21T21:00:00] ) = Interval [ @2017-12-20T11:00:00, @2017-12-21T21:00:00 ]
 		/// </summary>
@@ -1791,7 +1791,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestPeriod2":
 		///	( Interval[@2017-12-20T10:30:00, @2017-12-20T12:00:00] ) = Interval [ @2017-12-20T10:30:00, @2017-12-20T12:00:00 ]
 		/// </summary>
@@ -1805,7 +1805,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Issue32Interval":
 		///	( 
 		///				Interval[@2017-12-20T10:30:00, @2017-12-20T12:00:00]
@@ -1823,7 +1823,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestIncludesNull":
 		///	( Interval[1, 10] includes null ) = null
 		/// </summary>
@@ -1837,7 +1837,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalIncludesTrue":
 		///	( Interval[1, 10] includes Interval[4, 10] ) = true
 		/// </summary>
@@ -1851,7 +1851,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalIncludesFalse":
 		///	( Interval[1, 10] includes Interval[44, 50] ) = false
 		/// </summary>
@@ -1865,7 +1865,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalIncludesTrue":
 		///	( Interval[1.0, 10.0] includes Interval[4.0, 10.0] ) = true
 		/// </summary>
@@ -1879,7 +1879,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalIncludesFalse":
 		///	( Interval[1.0, 10.0] includes Interval[11.0, 20.0] ) = false
 		/// </summary>
@@ -1893,7 +1893,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalIncludesTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] includes Interval[5.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -1907,7 +1907,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalIncludesFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] includes Interval[11.0 'g', 20.0 'g'] ) = false
 		/// </summary>
@@ -1921,7 +1921,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncludesTrue":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] includes Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] ) = true
 		/// </summary>
@@ -1935,7 +1935,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncludesFalse":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] includes Interval[DateTime(2012, 1, 4), DateTime(2012, 1, 14)] ) = false
 		/// </summary>
@@ -1949,7 +1949,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIncludesTrue":
 		///	( Interval[@T05:59:59.999, @T10:59:59.999] includes Interval[@T06:59:59.999, @T09:59:59.999] ) = true
 		/// </summary>
@@ -1963,7 +1963,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIncludesFalse":
 		///	( Interval[@T05:59:59.999, @T10:59:59.999] includes Interval[@T04:59:59.999, @T09:59:59.999] ) = false
 		/// </summary>
@@ -1977,7 +1977,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestIncludedInNull":
 		///	( null included in Interval[1, 10] ) = null
 		/// </summary>
@@ -1991,7 +1991,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalIncludedInTrue":
 		///	( Interval[4, 10] included in Interval[1, 10] ) = true
 		/// </summary>
@@ -2005,7 +2005,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalIncludedInFalse":
 		///	( Interval[44, 50] included in Interval[1, 10] ) = false
 		/// </summary>
@@ -2019,7 +2019,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalIncludedInTrue":
 		///	( Interval[4.0, 10.0] included in Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -2033,7 +2033,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalIncludedInFalse":
 		///	( Interval[11.0, 20.0] included in Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -2047,7 +2047,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalIncludedInTrue":
 		///	( Interval[5.0 'g', 10.0 'g'] included in Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -2061,7 +2061,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalIncludedInFalse":
 		///	( Interval[11.0 'g', 20.0 'g'] included in Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -2075,7 +2075,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncludedInTrue":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] included in Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ) = true
 		/// </summary>
@@ -2089,7 +2089,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncludedInFalse":
 		///	( Interval[DateTime(2012, 1, 4), DateTime(2012, 1, 14)] included in Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 15)] ) = false
 		/// </summary>
@@ -2103,7 +2103,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIncludedInTrue":
 		///	( Interval[@T06:59:59.999, @T09:59:59.999] included in Interval[@T05:59:59.999, @T10:59:59.999] ) = true
 		/// </summary>
@@ -2117,7 +2117,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIncludedInFalse":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] included in Interval[@T05:59:59.999, @T10:59:59.999] ) = false
 		/// </summary>
@@ -2131,7 +2131,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncludedInNull":
 		///	( Interval [@2017-09-01T00:00:00, @2017-09-01T00:00:00] included in Interval [@2017-09-01T00:00:00.000, @2017-12-30T23:59:59.999] ) = null
 		/// </summary>
@@ -2145,7 +2145,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncludedInPrecisionTrue":
 		///	( Interval [@2017-09-01T00:00:00, @2017-09-01T00:00:00] included in day of Interval [@2017-09-01T00:00:00.000, @2017-12-30T23:59:59.999] ) = true
 		/// </summary>
@@ -2159,7 +2159,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIncludedInPrecisionNull":
 		///	( Interval [@2017-09-01T00:00:00, @2017-09-01T00:00:00] included in millisecond of Interval [@2017-09-01T00:00:00.000, @2017-12-30T23:59:59.999] ) = null
 		/// </summary>
@@ -2173,7 +2173,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestIntersectNull":
 		///	( Interval[1, 10] intersect Interval[5, null) ) = null
 		/// </summary>
@@ -2188,7 +2188,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalIntersectTest4to10":
 		///	( Interval[1, 10] intersect Interval[4, 10] ) = Interval [ 4, 10 ]
 		/// </summary>
@@ -2202,7 +2202,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalIntersectTestNull":
 		///	( Interval[1, 10] intersect Interval[11, 20] ) = null
 		/// </summary>
@@ -2216,7 +2216,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalIntersectTest4to10":
 		///	( Interval[1.0, 10.0] intersect Interval[4.0, 10.0] ) = Interval [ 4.0, 10.0 ]
 		/// </summary>
@@ -2230,7 +2230,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalIntersectTestNull":
 		///	( Interval[1.0, 10.0] intersect Interval[11.0, 20.0] ) = null
 		/// </summary>
@@ -2244,7 +2244,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalIntersectTest5to10":
 		///	( Interval[1.0 'g', 10.0 'g'] intersect Interval[5.0 'g', 10.0 'g'] ) = Interval [ 5.0 'g', 10.0 'g' ]
 		/// </summary>
@@ -2258,7 +2258,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalIntersectTestNull":
 		///	( Interval[1.0 'g', 10.0 'g'] intersect Interval[11.0 'g', 20.0 'g'] ) = null
 		/// </summary>
@@ -2272,7 +2272,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIntersect":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] intersect Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 10)] ) = Interval [ @2012-01-07, @2012-01-10 ]
 		/// </summary>
@@ -2286,7 +2286,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIntersect":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] intersect Interval[@T04:59:59.999, @T06:59:59.999] ) = Interval [ @T04:59:59.999, @T06:59:59.999 ]
 		/// </summary>
@@ -2300,7 +2300,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalEquivalentTrue":
 		///	( Interval[1, 10] ~ Interval[1, 10] ) = true
 		/// </summary>
@@ -2314,7 +2314,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalEquivalentFalse":
 		///	( Interval[44, 50] ~ Interval[1, 10] ) = false
 		/// </summary>
@@ -2328,7 +2328,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalEquivalentTrue":
 		///	( Interval[1.0, 10.0] ~ Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -2342,7 +2342,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalEquivalentFalse":
 		///	( Interval[11.0, 20.0] ~ Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -2356,7 +2356,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalEquivalentTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] ~ Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -2370,7 +2370,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalEquivalentFalse":
 		///	( Interval[11.0 'g', 20.0 'g'] ~ Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -2384,7 +2384,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeEquivalentTrue":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] ~ Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] ) = true
 		/// </summary>
@@ -2398,7 +2398,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeEquivalentFalse":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] ~ Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 15)] ) = false
 		/// </summary>
@@ -2412,7 +2412,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeEquivalentTrue":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] ~ Interval[@T04:59:59.999, @T09:59:59.999] ) = true
 		/// </summary>
@@ -2426,7 +2426,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeEquivalentFalse":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] ~ Interval[@T04:58:59.999, @T09:59:59.999] ) = false
 		/// </summary>
@@ -2440,7 +2440,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestMeetsNull":
 		///	( Interval(null, 5] meets Interval(null, 15) ) = null
 		/// </summary>
@@ -2454,7 +2454,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalMeetsTrue":
 		///	( Interval[1, 10] meets Interval[11, 20] ) = true
 		/// </summary>
@@ -2468,7 +2468,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalMeetsFalse":
 		///	( Interval[1, 10] meets Interval[44, 50] ) = false
 		/// </summary>
@@ -2482,7 +2482,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalMeetsTrue":
 		///	( Interval[3.01, 5.00000001] meets Interval[5.00000002, 8.50] ) = true
 		/// </summary>
@@ -2496,7 +2496,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalMeetsFalse":
 		///	( Interval[3.01, 5.00000001] meets Interval[5.5, 8.50] ) = false
 		/// </summary>
@@ -2510,7 +2510,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalMeetsTrue":
 		///	( Interval[3.01 'g', 5.00000001 'g'] meets Interval[5.00000002 'g', 8.50 'g'] ) = true
 		/// </summary>
@@ -2524,7 +2524,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalMeetsFalse":
 		///	( Interval[3.01 'g', 5.00000001 'g'] meets Interval[5.5 'g', 8.50 'g'] ) = false
 		/// </summary>
@@ -2538,7 +2538,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMeetsTrue":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 25)] ) = true
 		/// </summary>
@@ -2552,7 +2552,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMeetsFalse":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets Interval[DateTime(2012, 1, 20), DateTime(2012, 1, 25)] ) = false
 		/// </summary>
@@ -2566,7 +2566,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMeetsTrue":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] meets Interval[@T10:00:00.000, @T19:59:59.999] ) = true
 		/// </summary>
@@ -2580,7 +2580,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMeetsFalse":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] meets Interval[@T10:12:00.000, @T19:59:59.999] ) = false
 		/// </summary>
@@ -2594,7 +2594,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestMeetsBeforeNull":
 		///	( Interval(null, 5] meets before Interval(null, 25] ) = null
 		/// </summary>
@@ -2608,7 +2608,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalMeetsBeforeTrue":
 		///	( Interval[1, 10] meets before Interval[11, 20] ) = true
 		/// </summary>
@@ -2622,7 +2622,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalMeetsBeforeFalse":
 		///	( Interval[1, 10] meets before Interval[44, 50] ) = false
 		/// </summary>
@@ -2636,7 +2636,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalMeetsBeforeTrue":
 		///	( Interval[3.50000001, 5.00000011] meets before Interval[5.00000012, 8.50] ) = true
 		/// </summary>
@@ -2650,7 +2650,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalMeetsBeforeFalse":
 		///	( Interval[8.01, 15.00000001] meets before Interval[15.00000000, 18.50] ) = false
 		/// </summary>
@@ -2664,7 +2664,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalMeetsBeforeTrue":
 		///	( Interval[3.50000001 'g', 5.00000011 'g'] meets before Interval[5.00000012 'g', 8.50 'g'] ) = true
 		/// </summary>
@@ -2678,7 +2678,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalMeetsBeforeFalse":
 		///	( Interval[8.01 'g', 15.00000001 'g'] meets before Interval[15.00000000 'g', 18.50 'g'] ) = false
 		/// </summary>
@@ -2692,7 +2692,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMeetsBeforeTrue":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 25)] ) = true
 		/// </summary>
@@ -2706,7 +2706,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMeetsBeforeFalse":
 		///	( Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets Interval[DateTime(2012, 1, 20), DateTime(2012, 1, 25)] ) = false
 		/// </summary>
@@ -2720,7 +2720,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMeetsBeforeTrue":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] meets Interval[@T10:00:00.000, @T19:59:59.999] ) = true
 		/// </summary>
@@ -2734,7 +2734,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMeetsBeforeFalse":
 		///	( Interval[@T04:59:59.999, @T09:59:59.999] meets Interval[@T10:12:00.000, @T19:59:59.999] ) = false
 		/// </summary>
@@ -2748,7 +2748,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestMeetsAfterNull":
 		///	( Interval(null, 5] meets after Interval[11, null) ) = null
 		/// </summary>
@@ -2763,7 +2763,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalMeetsAfterTrue":
 		///	( Interval[11, 20] meets after Interval[1, 10] ) = true
 		/// </summary>
@@ -2777,7 +2777,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalMeetsAfterFalse":
 		///	( Interval[44, 50] meets after Interval[1, 10] ) = false
 		/// </summary>
@@ -2791,7 +2791,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalMeetsAfterTrue":
 		///	( Interval[55.00000123, 128.032156] meets after Interval[12.00258, 55.00000122] ) = true
 		/// </summary>
@@ -2805,7 +2805,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalMeetsAfterFalse":
 		///	( Interval[55.00000124, 150.222222] meets after Interval[12.00258, 55.00000122] ) = false
 		/// </summary>
@@ -2819,7 +2819,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalMeetsAfterTrue":
 		///	( Interval[55.00000123 'g', 128.032156 'g'] meets after Interval[12.00258 'g', 55.00000122 'g'] ) = true
 		/// </summary>
@@ -2833,7 +2833,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalMeetsAfterFalse":
 		///	( Interval[55.00000124 'g', 150.222222 'g'] meets after Interval[12.00258 'g', 55.00000122 'g'] ) = false
 		/// </summary>
@@ -2847,7 +2847,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMeetsAfterTrue":
 		///	( Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 25)] meets Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] ) = true
 		/// </summary>
@@ -2861,7 +2861,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMeetsAfterFalse":
 		///	( Interval[DateTime(2012, 1, 20), DateTime(2012, 1, 25)] meets Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] ) = false
 		/// </summary>
@@ -2875,7 +2875,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMeetsAfterTrue":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] meets Interval[@T04:59:59.999, @T09:59:59.999] ) = true
 		/// </summary>
@@ -2889,7 +2889,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMeetsAfterFalse":
 		///	( Interval[@T10:12:00.000, @T19:59:59.999] meets Interval[@T04:59:59.999, @T09:59:59.999] ) = false
 		/// </summary>
@@ -2903,7 +2903,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalNotEqualTrue":
 		///	( Interval[1, 10] != Interval[11, 20] ) = true
 		/// </summary>
@@ -2917,7 +2917,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalNotEqualFalse":
 		///	( Interval[1, 10] != Interval[1, 10] ) = false
 		/// </summary>
@@ -2931,7 +2931,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalNotEqualTrue":
 		///	( Interval[1.0, 10.0] != Interval[11.0, 20.0] ) = true
 		/// </summary>
@@ -2945,7 +2945,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalNotEqualFalse":
 		///	( Interval[1.0, 10.0] != Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -2959,7 +2959,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalNotEqualTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] != Interval[11.0 'g', 20.0 'g'] ) = true
 		/// </summary>
@@ -2973,7 +2973,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalNotEqualFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] != Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -2987,7 +2987,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeNotEqualTrue":
 		///	( Interval[DateTime(2012, 1, 15, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 0)] != Interval[DateTime(2012, 1, 15, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 22)] ) = true
 		/// </summary>
@@ -3001,7 +3001,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeNotEqualFalse":
 		///	( Interval[DateTime(2012, 1, 15, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 0)] != Interval[DateTime(2012, 1, 15, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 0)] ) = false
 		/// </summary>
@@ -3015,7 +3015,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeNotEqualTrue":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] != Interval[@T10:10:00.000, @T19:59:59.999] ) = true
 		/// </summary>
@@ -3029,7 +3029,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeNotEqualFalse":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] != Interval[@T10:00:00.000, @T19:59:59.999] ) = false
 		/// </summary>
@@ -3043,7 +3043,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterNull":
 		///	( Interval[@2012-12-01, @2013-12-01] on or after null ) = null
 		/// </summary>
@@ -3058,7 +3058,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterDateTrue":
 		///	( Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15 ) = true
 		/// </summary>
@@ -3072,7 +3072,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterDateFalse":
 		///	( @2012-11-15 on or after month of Interval[@2012-12-01, @2013-12-01] ) = false
 		/// </summary>
@@ -3086,7 +3086,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterTimeTrue":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] on or after hour of Interval[@T08:00:00.000, @T09:59:59.999] ) = true
 		/// </summary>
@@ -3100,7 +3100,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterTimeFalse":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] on or after hour of Interval[@T08:00:00.000, @T11:59:59.999] ) = false
 		/// </summary>
@@ -3114,7 +3114,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterIntegerTrue":
 		///	( Interval[6, 10] on or after 6 ) = true
 		/// </summary>
@@ -3128,7 +3128,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterDecimalFalse":
 		///	( 2.5 on or after Interval[1.666, 2.50000001] ) = false
 		/// </summary>
@@ -3142,7 +3142,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrAfterQuantityTrue":
 		///	( 2.5 'mg' on or after Interval[1.666 'mg', 2.50000000 'mg'] ) = true
 		/// </summary>
@@ -3156,7 +3156,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeNull":
 		///	( Interval[@2012-12-01, @2013-12-01] on or before null ) = null
 		/// </summary>
@@ -3171,7 +3171,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeDateTrue":
 		///	( Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15 ) = true
 		/// </summary>
@@ -3185,7 +3185,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeDateFalse":
 		///	( @2012-11-15 on or before month of Interval[@2012-10-01, @2013-12-01] ) = false
 		/// </summary>
@@ -3199,7 +3199,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeTimeTrue":
 		///	( Interval[@T05:00:00.000, @T07:59:59.999] on or before hour of Interval[@T08:00:00.000, @T09:59:59.999] ) = true
 		/// </summary>
@@ -3213,7 +3213,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeTimeFalse":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] on or before hour of Interval[@T08:00:00.000, @T11:59:59.999] ) = false
 		/// </summary>
@@ -3227,7 +3227,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeIntegerTrue":
 		///	( Interval[4, 6] on or before 6 ) = true
 		/// </summary>
@@ -3241,7 +3241,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeDecimalFalse":
 		///	( 1.6667 on or before Interval[1.666, 2.50000001] ) = false
 		/// </summary>
@@ -3255,7 +3255,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOnOrBeforeQuantityTrue":
 		///	( 1.666 'mg' on or before Interval[1.666 'mg', 2.50000000 'mg'] ) = true
 		/// </summary>
@@ -3269,7 +3269,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOverlapsNull":
 		///	( Interval[null as Integer, null as Integer] overlaps Interval[1, 10] ) = null
 		/// </summary>
@@ -3283,7 +3283,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalOverlapsTrue":
 		///	( Interval[1, 10] overlaps Interval[4, 10] ) = true
 		/// </summary>
@@ -3297,7 +3297,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalOverlapsFalse":
 		///	( Interval[1, 10] overlaps Interval[11, 20] ) = false
 		/// </summary>
@@ -3311,7 +3311,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalOverlapsTrue":
 		///	( Interval[1.0, 10.0] overlaps Interval[4.0, 10.0] ) = true
 		/// </summary>
@@ -3325,7 +3325,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalOverlapsFalse":
 		///	( Interval[1.0, 10.0] overlaps Interval[11.0, 20.0] ) = false
 		/// </summary>
@@ -3339,7 +3339,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalOverlapsTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] overlaps Interval[5.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -3353,7 +3353,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalOverlapsFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] overlaps Interval[11.0 'g', 20.0 'g'] ) = false
 		/// </summary>
@@ -3367,7 +3367,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeOverlapsTrue":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] ) = true
 		/// </summary>
@@ -3381,7 +3381,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeOverlapsFalse":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)] ) = false
 		/// </summary>
@@ -3395,7 +3395,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeOverlapsTrue":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] overlaps Interval[@T12:00:00.000, @T21:59:59.999] ) = true
 		/// </summary>
@@ -3409,7 +3409,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeOverlapsFalse":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] overlaps Interval[@T20:00:00.000, @T21:59:59.999] ) = false
 		/// </summary>
@@ -3423,7 +3423,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOverlapsBeforeNull":
 		///	( Interval[null as Integer, null as Integer] overlaps before Interval[1, 10] ) = null
 		/// </summary>
@@ -3437,7 +3437,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalOverlapsBeforeTrue":
 		///	( Interval[1, 10] overlaps before Interval[4, 10] ) = true
 		/// </summary>
@@ -3451,7 +3451,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalOverlapsBeforeFalse":
 		///	( Interval[4, 10] overlaps before Interval[1, 10] ) = false
 		/// </summary>
@@ -3465,7 +3465,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalOverlapsBeforeTrue":
 		///	( Interval[1.0, 10.0] overlaps before Interval[4.0, 10.0] ) = true
 		/// </summary>
@@ -3479,7 +3479,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalOverlapsBeforeFalse":
 		///	( Interval[4.0, 10.0] overlaps before Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -3493,7 +3493,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalOverlapsBeforeTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] overlaps before Interval[5.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -3507,7 +3507,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalOverlapsBeforeFalse":
 		///	( Interval[5.0 'g', 10.0 'g'] overlaps before Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -3521,7 +3521,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeOverlapsBeforeTrue":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] ) = true
 		/// </summary>
@@ -3535,7 +3535,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeOverlapsBeforeFalse":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)] ) = false
 		/// </summary>
@@ -3549,7 +3549,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeOverlapsBeforeTrue":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] overlaps Interval[@T12:00:00.000, @T21:59:59.999] ) = true
 		/// </summary>
@@ -3563,7 +3563,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeOverlapsBeforeFalse":
 		///	( Interval[@T10:00:00.000, @T19:59:59.999] overlaps Interval[@T20:00:00.000, @T21:59:59.999] ) = false
 		/// </summary>
@@ -3577,7 +3577,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestOverlapsAfterNull":
 		///	( Interval[null as Integer, null as Integer] overlaps after Interval[1, 10] ) = null
 		/// </summary>
@@ -3591,7 +3591,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalOverlapsAfterTrue":
 		///	( Interval[4, 15] overlaps after Interval[1, 10] ) = true
 		/// </summary>
@@ -3605,7 +3605,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalOverlapsAfterFalse":
 		///	( Interval[4, 10] overlaps after Interval[1, 10] ) = false
 		/// </summary>
@@ -3619,7 +3619,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalOverlapsAfterTrue":
 		///	( Interval[4.0, 15.0] overlaps after Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -3633,7 +3633,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalOverlapsAfterFalse":
 		///	( Interval[4.0, 10.0] overlaps after Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -3647,7 +3647,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalOverlapsAfterTrue":
 		///	( Interval[5.0 'g', 15.0 'g'] overlaps after Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -3661,7 +3661,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalOverlapsAfterFalse":
 		///	( Interval[5.0 'g', 10.0 'g'] overlaps after Interval[1.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -3675,7 +3675,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeOverlapsAfterTrue":
 		///	( Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] overlaps Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] ) = true
 		/// </summary>
@@ -3689,7 +3689,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeOverlapsAfterFalse":
 		///	( Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)] overlaps Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] ) = false
 		/// </summary>
@@ -3703,7 +3703,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeOverlapsAfterTrue":
 		///	( Interval[@T12:00:00.000, @T21:59:59.999] overlaps Interval[@T10:00:00.000, @T19:59:59.999] ) = true
 		/// </summary>
@@ -3717,7 +3717,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeOverlapsAfterFalse":
 		///	( Interval[@T20:00:00.000, @T21:59:59.999] overlaps Interval[@T10:00:00.000, @T19:59:59.999] ) = false
 		/// </summary>
@@ -3731,7 +3731,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestPointFromNull":
 		///	( point from Interval[null as Integer, null as Integer] ) = null as Integer
 		/// </summary>
@@ -3745,7 +3745,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestPointFromInteger":
 		///	( point from Interval[1, 1] ) = 1
 		/// </summary>
@@ -3759,7 +3759,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestPointFromDecimal":
 		///	( point from Interval[1.0, 1.0] ) = 1.0
 		/// </summary>
@@ -3773,7 +3773,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestPointFromQuantity":
 		///	( point from Interval[1.0 'cm', 1.0 'cm'] ) = 1.0'cm'
 		/// </summary>
@@ -3787,7 +3787,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperContainsTrue":
 		///	( Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.001 ) = true
 		/// </summary>
@@ -3801,7 +3801,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperContainsFalse":
 		///	( Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000 ) = false
 		/// </summary>
@@ -3816,7 +3816,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperContainsNull":
 		///	( Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00 ) = null
 		/// </summary>
@@ -3830,7 +3830,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperContainsPrecisionTrue":
 		///	( Interval[@T12:00:00.000, @T21:59:59.999] properly includes second of @T12:00:01 ) = true
 		/// </summary>
@@ -3844,7 +3844,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperContainsPrecisionFalse":
 		///	( Interval[@T12:00:00.001, @T21:59:59.999] properly includes second of @T12:00:00 ) = false
 		/// </summary>
@@ -3859,7 +3859,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperContainsPrecisionNull":
 		///	( Interval[@T12:00:00.001, @T21:59:59.999] properly includes millisecond of @T12:00:00 ) = null
 		/// </summary>
@@ -3873,7 +3873,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperInTrue":
 		///	( @T12:00:00.001 properly included in Interval[@T12:00:00.000, @T21:59:59.999] ) = true
 		/// </summary>
@@ -3887,7 +3887,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperInFalse":
 		///	( @T12:00:00.000 properly included in  Interval[@T12:00:00.000, @T21:59:59.999] ) = false
 		/// </summary>
@@ -3902,7 +3902,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperInNull":
 		///	( @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999] ) = null
 		/// </summary>
@@ -3916,7 +3916,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperInPrecisionTrue":
 		///	( @T12:00:01 properly included in second of Interval[@T12:00:00.000, @T21:59:59.999] ) = true
 		/// </summary>
@@ -3930,7 +3930,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperInPrecisionFalse":
 		///	( @T12:00:00 properly included in second of Interval[@T12:00:00.001, @T21:59:59.999] ) = false
 		/// </summary>
@@ -3945,7 +3945,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperInPrecisionNull":
 		///	( @T12:00:00 properly included in millisecond of Interval[@T12:00:00.001, @T21:59:59.999] ) = null
 		/// </summary>
@@ -3959,7 +3959,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestProperlyIncludesNull":
 		///	( Interval[null as Integer, null as Integer] properly includes Interval[1, 10] ) = false
 		/// </summary>
@@ -3974,7 +3974,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalProperlyIncludesTrue":
 		///	( Interval[1, 10] properly includes Interval[4, 10] ) = true
 		/// </summary>
@@ -3988,7 +3988,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalProperlyIncludesFalse":
 		///	( Interval[1, 10] properly includes Interval[4, 15] ) = false
 		/// </summary>
@@ -4002,7 +4002,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalProperlyIncludesTrue":
 		///	( Interval[1.0, 10.0] properly includes Interval[4.0, 10.0] ) = true
 		/// </summary>
@@ -4016,7 +4016,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalProperlyIncludesFalse":
 		///	( Interval[1.0, 10.0] properly includes Interval[4.0, 15.0] ) = false
 		/// </summary>
@@ -4030,7 +4030,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalProperlyIncludesTrue":
 		///	( Interval[1.0 'g', 10.0 'g'] properly includes Interval[5.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -4044,7 +4044,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalProperlyIncludesFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] properly includes Interval[5.0 'g', 15.0 'g'] ) = false
 		/// </summary>
@@ -4058,7 +4058,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeProperlyIncludesTrue":
 		///	( Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] properly includes Interval[DateTime(2012, 1, 16), DateTime(2012, 1, 27)] ) = true
 		/// </summary>
@@ -4072,7 +4072,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeProperlyIncludesFalse":
 		///	( Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] properly includes Interval[DateTime(2012, 1, 16), DateTime(2012, 1, 29)] ) = false
 		/// </summary>
@@ -4086,7 +4086,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperlyIncludesTrue":
 		///	( Interval[@T12:00:00.000, @T21:59:59.999] properly includes Interval[@T12:01:01.000, @T21:59:59.998] ) = true
 		/// </summary>
@@ -4100,7 +4100,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperlyIncludesFalse":
 		///	( Interval[@T12:00:00.000, @T21:59:59.999] properly includes Interval[@T12:01:01.000, @T22:00:00.000] ) = false
 		/// </summary>
@@ -4114,7 +4114,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestProperlyIncludedInNull":
 		///	( Interval[1, 10] properly included in Interval[null as Integer, null as Integer] ) = false
 		/// </summary>
@@ -4129,7 +4129,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalProperlyIncludedInTrue":
 		///	( Interval[4, 10] properly included in Interval[1, 10] ) = true
 		/// </summary>
@@ -4143,7 +4143,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalProperlyIncludedInFalse":
 		///	( Interval[4, 15] properly included in Interval[1, 10] ) = false
 		/// </summary>
@@ -4157,7 +4157,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalProperlyIncludedInTrue":
 		///	( Interval[4.0, 10.0] properly included in Interval[1.0, 10.0] ) = true
 		/// </summary>
@@ -4171,7 +4171,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalProperlyIncludedInFalse":
 		///	( Interval[4.0, 15.0] properly included in Interval[1.0, 10.0] ) = false
 		/// </summary>
@@ -4185,7 +4185,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalProperlyIncludedInTrue":
 		///	( Interval[5.0 'g', 10.0 'g'] properly included in Interval[1.0 'g', 10.0 'g'] ) = true
 		/// </summary>
@@ -4199,7 +4199,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalProperlyIncludedInFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] properly included in Interval[5.0 'g', 15.0 'g'] ) = false
 		/// </summary>
@@ -4213,7 +4213,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeProperlyIncludedInTrue":
 		///	( Interval[DateTime(2012, 1, 16), DateTime(2012, 1, 27)] properly included in Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] ) = true
 		/// </summary>
@@ -4227,7 +4227,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeProperlyIncludedInFalse":
 		///	( Interval[DateTime(2012, 1, 16), DateTime(2012, 1, 29)] properly included in Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] ) = false
 		/// </summary>
@@ -4241,7 +4241,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperlyIncludedInTrue":
 		///	( Interval[@T12:01:01.000, @T21:59:59.998] properly included in Interval[@T12:00:00.000, @T21:59:59.999] ) = true
 		/// </summary>
@@ -4255,7 +4255,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeProperlyIncludedInFalse":
 		///	( Interval[@T12:01:01.000, @T22:00:00.000] properly included in Interval[@T12:00:00.000, @T21:59:59.999] ) = false
 		/// </summary>
@@ -4269,7 +4269,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalStart":
 		///	( start of Interval[1, 10] ) = 1
 		/// </summary>
@@ -4283,7 +4283,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalStart":
 		///	( start of Interval[1.0, 10.0] ) = 1.0
 		/// </summary>
@@ -4297,7 +4297,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalStart":
 		///	( start of Interval[1.0 'g', 10.0 'g'] ) = 1.0'g'
 		/// </summary>
@@ -4311,7 +4311,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIntervalStart":
 		///	( start of Interval[@2016-05-01T00:00:00.000, @2016-05-02T00:00:00.000] ) = @2016-05-01T00:00:00.000
 		/// </summary>
@@ -4325,7 +4325,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIntervalStart":
 		///	( start of Interval[@T00:00:00.000, @T23:59:59.599] ) = @T00:00:00.000
 		/// </summary>
@@ -4339,7 +4339,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestStartsNull":
 		///	( Interval[null as Integer, null as Integer] starts Interval[1, 10] ) = null
 		/// </summary>
@@ -4353,7 +4353,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalStartsTrue":
 		///	( Interval[4, 10] starts Interval[4, 15] ) = true
 		/// </summary>
@@ -4367,7 +4367,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalStartsFalse":
 		///	( Interval[1, 10] starts Interval[4, 10] ) = false
 		/// </summary>
@@ -4381,7 +4381,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalStartsTrue":
 		///	( Interval[4.0, 10.0] starts Interval[4.0, 15.0] ) = true
 		/// </summary>
@@ -4395,7 +4395,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalStartsFalse":
 		///	( Interval[1.0, 10.0] starts Interval[4.0, 10.0] ) = false
 		/// </summary>
@@ -4409,7 +4409,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalStartsTrue":
 		///	( Interval[5.0 'g', 10.0 'g'] starts Interval[5.0 'g', 15.0 'g'] ) = true
 		/// </summary>
@@ -4423,7 +4423,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalStartsFalse":
 		///	( Interval[1.0 'g', 10.0 'g'] starts Interval[5.0 'g', 10.0 'g'] ) = false
 		/// </summary>
@@ -4437,7 +4437,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeStartsTrue":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 27)] ) = true
 		/// </summary>
@@ -4451,7 +4451,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeStartsFalse":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts Interval[DateTime(2012, 1, 6), DateTime(2012, 1, 27)] ) = false
 		/// </summary>
@@ -4465,7 +4465,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeStartsTrue":
 		///	( Interval[@T05:59:59.999, @T15:59:59.999] starts Interval[@T05:59:59.999, @T17:59:59.999] ) = true
 		/// </summary>
@@ -4479,7 +4479,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeStartsFalse":
 		///	( Interval[@T05:59:59.999, @T15:59:59.999] starts Interval[@T04:59:59.999, @T17:59:59.999] ) = false
 		/// </summary>
@@ -4493,7 +4493,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TestUnionNull":
 		///	( Interval[null as Integer, null as Integer] union Interval[1, 10] ) = null
 		/// </summary>
@@ -4507,7 +4507,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalUnion1To15":
 		///	( Interval[1, 10] union Interval[4, 15] ) = Interval [ 1, 15 ]
 		/// </summary>
@@ -4521,7 +4521,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalUnionNull":
 		///	( Interval[1, 10] union Interval[44, 50] ) = null
 		/// </summary>
@@ -4535,7 +4535,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalUnion1To15":
 		///	( Interval[1.0, 10.0] union Interval[4.0, 15.0] ) = Interval [ 1.0, 15.0 ]
 		/// </summary>
@@ -4549,7 +4549,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalUnionNull":
 		///	( Interval[1.0, 10.0] union Interval[14.0, 15.0] ) = null
 		/// </summary>
@@ -4563,7 +4563,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalUnion1To15":
 		///	( Interval[1.0 'g', 10.0 'g'] union Interval[5.0 'g', 15.0 'g'] ) = Interval [ 1.0 'g', 15.0 'g' ]
 		/// </summary>
@@ -4577,7 +4577,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalUnionNull":
 		///	( Interval[1.0 'g', 10.0 'g'] union Interval[14.0 'g', 15.0 'g'] ) = null
 		/// </summary>
@@ -4591,7 +4591,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeUnion":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] union Interval[DateTime(2012, 1, 25), DateTime(2012, 1, 28)] ) = Interval [ @2012-01-05, @2012-01-28 ]
 		/// </summary>
@@ -4605,7 +4605,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeUnionNull":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] union Interval[DateTime(2012, 1, 27), DateTime(2012, 1, 28)] ) = null
 		/// </summary>
@@ -4619,7 +4619,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeUnion":
 		///	( Interval[@T05:59:59.999, @T15:59:59.999] union Interval[@T10:59:59.999, @T20:59:59.999] ) = Interval [ @T05:59:59.999, @T20:59:59.999 ]
 		/// </summary>
@@ -4633,7 +4633,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeUnionNull":
 		///	( Interval[@T05:59:59.999, @T15:59:59.999] union Interval[@T16:59:59.999, @T20:59:59.999] ) = null
 		/// </summary>
@@ -4647,7 +4647,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalTestWidth9":
 		///	( width of Interval[1, 10] ) = 9
 		/// </summary>
@@ -4660,11 +4660,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "IntervalTestWidthNull":
-		///	( width of (null as Interval<Any>) ) = null as Integer
-		/// </summary>
+
+        /// <summary>
+        ///define "IntervalTestWidthNull":
+        ///	( width of (null as Interval&lt;Any>) ) = null as Integer
+        /// </summary>
         [TestCategory("CqlIntervalOperatorsTest")]
         [TestMethod]
         public void IntervalTestWidthNull_Test()
@@ -4675,7 +4675,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalTestWidth11":
 		///	( width of Interval[4.0, 15.0] ) = 11.0
 		/// </summary>
@@ -4689,7 +4689,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalTestWidth5":
 		///	( width of Interval[5.0 'g', 10.0 'g'] ) = 5.0'g'
 		/// </summary>
@@ -4703,7 +4703,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeWidth":
 		///	( width of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] ) = 20 days
 		/// </summary>
@@ -4718,7 +4718,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeWidth":
 		///	( width of Interval[@T05:59:59.999, @T15:59:59.999] ) = 36000000 milliseconds
 		/// </summary>
@@ -4733,7 +4733,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalTest":
 		///	( Interval[1, 10] ) = Interval[1, 10]
 		/// </summary>
@@ -4747,7 +4747,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalTest2":
 		///	( Interval[11, 20] ) = Interval[11, 20]
 		/// </summary>
@@ -4761,7 +4761,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalTest3":
 		///	( Interval[44, 50] ) = Interval[44, 50]
 		/// </summary>
@@ -4775,7 +4775,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalTest4":
 		///	( Interval[4, 10] ) = Interval[4, 10]
 		/// </summary>
@@ -4789,7 +4789,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerIntervalTest5":
 		///	( Interval[4, 15] ) = Interval[4, 15]
 		/// </summary>
@@ -4803,7 +4803,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalTest":
 		///	( Interval[1.0, 10.0] ) = Interval[1.0, 10.0]
 		/// </summary>
@@ -4817,7 +4817,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalTest2":
 		///	( Interval[11.0, 20.0] ) = Interval[11.0, 20.0]
 		/// </summary>
@@ -4831,7 +4831,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalTest3":
 		///	( Interval[4.0, 10.0] ) = Interval[4.0, 10.0]
 		/// </summary>
@@ -4845,7 +4845,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalTest4":
 		///	( Interval[4.0, 15.0] ) = Interval[4.0, 15.0]
 		/// </summary>
@@ -4859,7 +4859,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalIntervalTest5":
 		///	( Interval[14.0, 15.0] ) = Interval[14.0, 15.0]
 		/// </summary>
@@ -4873,7 +4873,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalTest":
 		///	( Interval[1.0 'g', 10.0 'g'] ) = Interval[1.0 'g', 10.0 'g']
 		/// </summary>
@@ -4887,7 +4887,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalTest2":
 		///	( Interval[11.0 'g', 20.0 'g'] ) = Interval[11.0 'g', 20.0 'g']
 		/// </summary>
@@ -4901,7 +4901,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalTest3":
 		///	( Interval[5.0 'g', 10.0 'g'] ) = Interval[5.0 'g', 10.0 'g']
 		/// </summary>
@@ -4915,7 +4915,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalTest4":
 		///	( Interval[5.0 'g', 15.0 'g'] ) = Interval[5.0 'g', 15.0 'g']
 		/// </summary>
@@ -4929,7 +4929,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityIntervalTest5":
 		///	( Interval[14.0 'g', 15.0 'g'] ) = Interval[14.0 'g', 15.0 'g']
 		/// </summary>
@@ -4943,7 +4943,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeIntervalTest":
 		///	( Interval[@2016-05-01T00:00:00.000, @2016-05-02T00:00:00.000] ) = Interval[@2016-05-01T00:00:00.000, @2016-05-02T00:00:00.000]
 		/// </summary>
@@ -4957,7 +4957,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeIntervalTest":
 		///	( Interval[@T00:00:00.000, @T23:59:59.599] ) = Interval[@T00:00:00.000, @T23:59:59.599]
 		/// </summary>
@@ -4971,7 +4971,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CollapseIntervalTestInteger":
 		///	( {Interval[1, 10], Interval[11, 20], Interval[44, 50]} ) = {Interval[1, 10], Interval[11, 20], Interval[44, 50]}
 		/// </summary>

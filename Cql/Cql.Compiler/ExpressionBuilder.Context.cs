@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 
@@ -47,7 +46,7 @@ namespace Hl7.Cql.Compiler
             _impliedAlias = null;
             _operands = new Dictionary<string, ParameterExpression>();
             _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopes = new Dictionary<string, (Expression, elm.Element)>();
+            _scopes = new Dictionary<string, (Expression, Elm.Element)>();
             _expressionMutators = new List<IExpressionMutator>();
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
@@ -55,7 +54,7 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilder(
             ExpressionBuilder source)
         {
-            _elementStack = new Stack<elm.Element>(_elementStack);
+            _elementStack = new Stack<Elm.Element>(_elementStack);
             _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
             _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
             _impliedAlias = source._impliedAlias;
@@ -72,7 +71,7 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilder(
             ExpressionBuilder outer,
             string? impliedAlias,
-            IDictionary<string, (Expression, elm.Element)> scopes) : this(outer)
+            IDictionary<string, (Expression, Elm.Element)> scopes) : this(outer)
         {
             _scopes = scopes;
             _impliedAlias = impliedAlias;
@@ -164,7 +163,7 @@ namespace Hl7.Cql.Compiler
             else throw this.NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
 
-        internal (Expression, elm.Element) GetScope(string elmAlias)
+        internal (Expression, Elm.Element) GetScope(string elmAlias)
         {
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (_scopes.TryGetValue(normalized, out var expression))
@@ -175,18 +174,18 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private readonly IDictionary<string, (Expression, elm.Element)> _scopes;
+        private readonly IDictionary<string, (Expression, Elm.Element)> _scopes;
 
 
         internal bool HasScope(string elmAlias) => _scopes.ContainsKey(elmAlias);
 
 
-        internal ExpressionBuilder WithScope(string alias, Expression expr, elm.Element element) => 
+        internal ExpressionBuilder WithScope(string alias, Expression expr, Elm.Element element) => 
             WithScopes(KeyValuePair.Create(alias, (expr, element)));
 
-        internal ExpressionBuilder WithScopes(string? alias, params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
+        internal ExpressionBuilder WithScopes(string? alias, params KeyValuePair<string, (Expression, Elm.Element)>[] kvps)
         {
-            var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
+            var scopes = new Dictionary<string, (Expression, Elm.Element)>(_scopes);
             if (_libraryDefinitionBuilderSettings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
@@ -220,16 +219,16 @@ namespace Hl7.Cql.Compiler
         /// Creates a copy with the scopes provided.
         /// </summary>
         internal ExpressionBuilder
-            WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps) => 
+            WithScopes(params KeyValuePair<string, (Expression, Elm.Element)>[] kvps) => 
             WithScopes(_impliedAlias, kvps);
 
-        internal ExpressionBuilder WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
+        internal ExpressionBuilder WithImpliedAlias(string aliasName, Expression linqExpression, Elm.Element elmExpression)
         {
-            var subContext = WithScopes(aliasName, new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
+            var subContext = WithScopes(aliasName, new KeyValuePair<string, (Expression, Elm.Element)>(aliasName, (linqExpression, elmExpression)));
             return subContext;
         }
 
-        public Expression? Mutate(elm.Element op, Expression? expression)
+        public Expression? Mutate(Elm.Element op, Expression? expression)
         {
             foreach (var visitor in _expressionMutators)
             {

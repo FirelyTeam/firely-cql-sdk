@@ -1,11 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
+	<PropertyGroup>
+		<!-- If you change the version here, you also need to update it in the pom.xml file -->
+		<CqlToElmCliVersion>2.11.0</CqlToElmCliVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<ElmFiles Include="$(SolutionDir)\LibrarySets\Demo\Cql\*.json" />
 		<ElmFiles Include="$(SolutionDir)\LibrarySets\CMS\Cql\*.json" />
 	</ItemGroup>
 
-	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-3.8.0.jar">
+	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-$(CqlToElmCliVersion).jar">
 		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies" />
 	</Target>
 	<Target Name="CQL to ELM"

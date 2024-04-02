@@ -7,7 +7,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "TrueAndTrue":
 		///	( true and true ) = true
 		/// </summary>
@@ -21,7 +21,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueAndFalse":
 		///	( true and false ) = false
 		/// </summary>
@@ -35,7 +35,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueAndNull":
 		///	( true and null ) = null
 		/// </summary>
@@ -49,7 +49,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseAndTrue":
 		///	( false and true ) = false
 		/// </summary>
@@ -63,7 +63,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseAndFalse":
 		///	( false and false ) = false
 		/// </summary>
@@ -77,7 +77,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseAndNull":
 		///	( false and null ) = false
 		/// </summary>
@@ -91,7 +91,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullAndTrue":
 		///	( null and true ) = null
 		/// </summary>
@@ -105,7 +105,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullAndFalse":
 		///	( null and false ) = false
 		/// </summary>
@@ -119,7 +119,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullAndNull":
 		///	( null and null ) = null
 		/// </summary>
@@ -133,7 +133,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueImpliesTrue":
 		///	( true implies true ) = true
 		/// </summary>
@@ -148,7 +148,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueImpliesFalse":
 		///	( true implies false ) = false
 		/// </summary>
@@ -163,7 +163,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueImpliesNull":
 		///	( true implies null ) = null
 		/// </summary>
@@ -178,7 +178,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseImpliesTrue":
 		///	( false implies true ) = true
 		/// </summary>
@@ -193,7 +193,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseImpliesFalse":
 		///	( false implies false ) = true
 		/// </summary>
@@ -208,7 +208,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseImpliesNull":
 		///	( false implies null ) = true
 		/// </summary>
@@ -223,7 +223,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullImpliesTrue":
 		///	( null implies true ) = true
 		/// </summary>
@@ -238,7 +238,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullImpliesFalse":
 		///	( null implies false ) = null
 		/// </summary>
@@ -253,7 +253,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullImpliesNull":
 		///	( null implies null ) = null
 		/// </summary>
@@ -268,7 +268,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotTrue":
 		///	( not true ) = false
 		/// </summary>
@@ -282,7 +282,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotFalse":
 		///	( not false ) = true
 		/// </summary>
@@ -296,7 +296,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NotNull":
 		///	( not null ) = null
 		/// </summary>
@@ -310,7 +310,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueOrTrue":
 		///	( true or true ) = true
 		/// </summary>
@@ -324,7 +324,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueOrFalse":
 		///	( true or false ) = true
 		/// </summary>
@@ -338,7 +338,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueOrNull":
 		///	( true or null ) = true
 		/// </summary>
@@ -352,7 +352,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseOrTrue":
 		///	( false or true ) = true
 		/// </summary>
@@ -366,7 +366,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseOrFalse":
 		///	( false or false ) = false
 		/// </summary>
@@ -380,7 +380,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseOrNull":
 		///	( false or null ) = null
 		/// </summary>
@@ -394,7 +394,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullOrTrue":
 		///	( null or true ) = true
 		/// </summary>
@@ -408,7 +408,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullOrFalse":
 		///	( null or false ) = null
 		/// </summary>
@@ -422,7 +422,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullOrNull":
 		///	( null or null ) = null
 		/// </summary>
@@ -436,7 +436,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueXorTrue":
 		///	( true xor true ) = false
 		/// </summary>
@@ -450,7 +450,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueXorFalse":
 		///	( true xor false ) = true
 		/// </summary>
@@ -464,7 +464,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TrueXorNull":
 		///	( true xor null ) = null
 		/// </summary>
@@ -478,7 +478,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseXorTrue":
 		///	( false xor true ) = true
 		/// </summary>
@@ -492,7 +492,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseXorFalse":
 		///	( false xor false ) = false
 		/// </summary>
@@ -506,7 +506,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FalseXorNull":
 		///	( false xor null ) = null
 		/// </summary>
@@ -520,7 +520,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullXorTrue":
 		///	( null xor true ) = null
 		/// </summary>
@@ -534,7 +534,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullXorFalse":
 		///	( null xor false ) = null
 		/// </summary>
@@ -548,7 +548,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NullXorNull":
 		///	( null xor null ) = null
 		/// </summary>

@@ -7,7 +7,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "CombineNull":
 		///	( Combine(null) ) = null
 		/// </summary>
@@ -21,7 +21,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CombineEmptyList":
 		///	( Combine({}) ) = ''
 		/// </summary>
@@ -35,7 +35,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CombineABC":
 		///	( Combine({'a', 'b', 'c'}) ) = 'abc'
 		/// </summary>
@@ -49,7 +49,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CombineABCSepDash":
 		///	( Combine({'a', 'b', 'c'}, '-') ) = 'a-b-c'
 		/// </summary>
@@ -63,7 +63,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ConcatenateNullNull":
 		///	( Concatenate(null, null) ) = null
 		/// </summary>
@@ -77,7 +77,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ConcatenateANull":
 		///	( Concatenate('a', null) ) = null
 		/// </summary>
@@ -91,7 +91,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ConcatenateNullB":
 		///	( Concatenate(null, 'b') ) = null
 		/// </summary>
@@ -105,7 +105,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ConcatenateAB":
 		///	( Concatenate('a', 'b') ) = 'ab'
 		/// </summary>
@@ -119,7 +119,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ConcatenateABWithAdd":
 		///	( 'a' + 'b' ) = 'ab'
 		/// </summary>
@@ -133,7 +133,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EndsWithNull":
 		///	( EndsWith(null, null) ) = null
 		/// </summary>
@@ -147,7 +147,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EndsWithTrue":
 		///	( EndsWith('Chris Schuler is the man!!', 'n!!') ) = true
 		/// </summary>
@@ -161,7 +161,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "EndsWithFalse":
 		///	( EndsWith('Chris Schuler is the man!!', 'n!') ) = false
 		/// </summary>
@@ -175,7 +175,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerNullNull":
 		///	( Indexer(null as String, null) ) = null
 		/// </summary>
@@ -189,7 +189,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerANull":
 		///	( Indexer('a', null) ) = null
 		/// </summary>
@@ -203,7 +203,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerNull1String":
 		///	( Indexer(null as String, 1) ) = null
 		/// </summary>
@@ -217,7 +217,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerAB0":
 		///	( Indexer('ab', 0) ) = 'a'
 		/// </summary>
@@ -231,7 +231,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerAB1":
 		///	( Indexer('ab', 1) ) = 'b'
 		/// </summary>
@@ -245,7 +245,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerAB2":
 		///	( Indexer('ab', 2) ) = null
 		/// </summary>
@@ -259,7 +259,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IndexerABNeg1":
 		///	( Indexer('ab', -1) ) = null
 		/// </summary>
@@ -273,7 +273,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastPositionOfNull":
 		///	( LastPositionOf(null, null) ) = null
 		/// </summary>
@@ -287,7 +287,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastPositionOfNull1":
 		///	( LastPositionOf(null, 'hi') ) = null
 		/// </summary>
@@ -301,7 +301,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastPositionOfNull2":
 		///	( LastPositionOf('hi', null) ) = null
 		/// </summary>
@@ -315,7 +315,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastPositionOf1":
 		///	( LastPositionOf('hi', 'Ohio is the place to be!') ) = 1
 		/// </summary>
@@ -329,7 +329,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LastPositionOf2":
 		///	( LastPositionOf('hi', 'Say hi to Ohio!') ) = 11
 		/// </summary>
@@ -343,7 +343,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthNullString":
 		///	( Length(null as String) ) = 0
 		/// </summary>
@@ -357,7 +357,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthEmptyString":
 		///	( Length('') ) = 0
 		/// </summary>
@@ -371,7 +371,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthA":
 		///	( Length('a') ) = 1
 		/// </summary>
@@ -385,7 +385,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LengthAB":
 		///	( Length('ab') ) = 2
 		/// </summary>
@@ -399,7 +399,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowerNull":
 		///	( Lower(null) ) = null
 		/// </summary>
@@ -413,7 +413,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowerEmpty":
 		///	( Lower('') ) = ''
 		/// </summary>
@@ -427,7 +427,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowerA":
 		///	( Lower('A') ) = 'a'
 		/// </summary>
@@ -441,7 +441,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowerB":
 		///	( Lower('b') ) = 'b'
 		/// </summary>
@@ -455,7 +455,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowerAB":
 		///	( Lower('Ab') ) = 'ab'
 		/// </summary>
@@ -469,7 +469,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesNull":
 		///	( Matches('Not all who wander are lost', null) ) = null
 		/// </summary>
@@ -483,7 +483,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesNumberFalse":
 		///	( Matches('Not all who wander are lost', '.*\\d+') ) = false
 		/// </summary>
@@ -497,7 +497,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesNumberTrue":
 		///	( Matches('Not all who wander are lost - circa 2017', '.*\\d+') ) = true
 		/// </summary>
@@ -511,7 +511,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesAllTrue":
 		///	( Matches('Not all who wander are lost', '.*') ) = true
 		/// </summary>
@@ -525,7 +525,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesWordsAndSpacesTrue":
 		///	( Matches('Not all who wander are lost', '[\\w|\\s]+') ) = true
 		/// </summary>
@@ -539,7 +539,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesWordsAndSpacesFalse":
 		///	( Matches('Not all who wander are lost - circa 2017', '[\\w]+') ) = false
 		/// </summary>
@@ -553,7 +553,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesNotWords":
 		///	( Matches('   ', '\\W+') ) = true
 		/// </summary>
@@ -567,7 +567,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MatchesWhiteSpace":
 		///	( Matches(' \n\t', '\\s+') ) = true
 		/// </summary>
@@ -581,7 +581,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PositionOfNullNull":
 		///	( PositionOf(null, null) ) = null
 		/// </summary>
@@ -595,7 +595,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PositionOfANull":
 		///	( PositionOf('a', null) ) = null
 		/// </summary>
@@ -609,7 +609,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PositionOfNullA":
 		///	( PositionOf(null, 'a') ) = null
 		/// </summary>
@@ -623,7 +623,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PositionOfAInAB":
 		///	( PositionOf('a', 'ab') ) = 0
 		/// </summary>
@@ -637,7 +637,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PositionOfBInAB":
 		///	( PositionOf('b', 'ab') ) = 1
 		/// </summary>
@@ -651,7 +651,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PositionOfCInAB":
 		///	( PositionOf('c', 'ab') ) = -1
 		/// </summary>
@@ -665,7 +665,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ReplaceMatchesNull":
 		///	( ReplaceMatches('Not all who wander are lost', null, 'But I am...') ) = null
 		/// </summary>
@@ -679,7 +679,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ReplaceMatchesAll":
 		///	( ReplaceMatches('Not all who wander are lost', 'Not all who wander are lost', 'But still waters run deep') ) = 'But still waters run deep'
 		/// </summary>
@@ -693,7 +693,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ReplaceMatchesMany":
 		///	( ReplaceMatches('Who put the bop in the bop she bop she bop?', 'bop', 'bang') ) = 'Who put the bang in the bang she bang she bang?'
 		/// </summary>
@@ -707,7 +707,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ReplaceMatchesSpaces":
 		///	( ReplaceMatches('All that glitters is not gold', '\\s', '$') ) = 'All$that$glitters$is$not$gold'
 		/// </summary>
@@ -721,7 +721,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SplitNullNull":
 		///	( Split(null, null) ) = null
 		/// </summary>
@@ -735,7 +735,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SplitNullComma":
 		///	( Split(null, ',') ) = null
 		/// </summary>
@@ -749,7 +749,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SplitABNull":
 		///	( Split('a,b', null) ) = {'a,b'}
 		/// </summary>
@@ -763,7 +763,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SplitABDash":
 		///	( Split('a,b', '-') ) = {'a,b'}
 		/// </summary>
@@ -777,7 +777,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SplitABComma":
 		///	( Split('a,b', ',') ) = {'a','b'}
 		/// </summary>
@@ -791,7 +791,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StartsWithNull":
 		///	( StartsWith(null, null) ) = null
 		/// </summary>
@@ -805,7 +805,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StartsWithNull1":
 		///	( StartsWith('hi', null) ) = null
 		/// </summary>
@@ -819,7 +819,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StartsWithNull2":
 		///	( StartsWith(null, 'hi') ) = null
 		/// </summary>
@@ -833,7 +833,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StartsWithTrue1":
 		///	( StartsWith('Breathe deep the gathering gloom', 'Bre') ) = true
 		/// </summary>
@@ -847,7 +847,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StartsWithFalse1":
 		///	( StartsWith('Breathe deep the gathering gloom', 'bre') ) = false
 		/// </summary>
@@ -861,7 +861,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringNullNull":
 		///	( Substring(null, null) ) = null
 		/// </summary>
@@ -875,7 +875,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringANull":
 		///	( Substring('a', null) ) = null
 		/// </summary>
@@ -889,7 +889,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringNull1":
 		///	( Substring(null, 1) ) = null
 		/// </summary>
@@ -903,7 +903,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringAB0":
 		///	( Substring('ab', 0) ) = 'ab'
 		/// </summary>
@@ -917,7 +917,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringAB1":
 		///	( Substring('ab', 1) ) = 'b'
 		/// </summary>
@@ -931,7 +931,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringAB2":
 		///	( Substring('ab', 2) ) = null
 		/// </summary>
@@ -945,7 +945,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringABNeg1":
 		///	( Substring('ab', -1) ) = null
 		/// </summary>
@@ -959,7 +959,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringAB0To1":
 		///	( Substring('ab', 0, 1) ) = 'a'
 		/// </summary>
@@ -973,7 +973,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringABC1To1":
 		///	( Substring('abc', 1, 1) ) = 'b'
 		/// </summary>
@@ -987,7 +987,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubstringAB0To3":
 		///	( Substring('ab', 0, 3) ) = 'ab'
 		/// </summary>
@@ -1001,7 +1001,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UpperNull":
 		///	( Upper(null) ) = null
 		/// </summary>
@@ -1015,7 +1015,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UpperEmpty":
 		///	( Upper('') ) = ''
 		/// </summary>
@@ -1029,7 +1029,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UpperA":
 		///	( Upper('a') ) = 'A'
 		/// </summary>
@@ -1043,7 +1043,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UpperB":
 		///	( Upper('B') ) = 'B'
 		/// </summary>
@@ -1057,7 +1057,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "UpperAB":
 		///	( Upper('aB') ) = 'AB'
 		/// </summary>
@@ -1071,7 +1071,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "QuantityToString":
 		///	( ToString(125 'cm') ) = '125cm'
 		/// </summary>
@@ -1085,7 +1085,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeToString1":
 		///	( ToString(DateTime(2000, 1, 1)) ) = '2000-01-01'
 		/// </summary>
@@ -1099,7 +1099,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeToString2":
 		///	( ToString(DateTime(2000, 1, 1, 15, 25, 25, 300)) ) = '2000-01-01T15:25:25.300'
 		/// </summary>
@@ -1113,7 +1113,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "DateTimeToString3":
         ///	( ToString(DateTime(2000, 1, 1, 8, 25, 25, 300, -7)) ) = '2000-01-01T08:25:25.300'
         /// </summary>
@@ -1133,7 +1133,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeToString1":
 		///	( ToString(@T09:30:01.003) ) = '09:30:01.003'
 		/// </summary>

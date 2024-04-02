@@ -361,7 +361,7 @@ namespace CoreTests
 
         /// <summary>
         /// Handles ( 9 after Interval[1, null]) = false
-        /// same as interval start < 9
+        /// same as interval start &lt; 9
         /// </summary>
         [TestMethod]
         public void Element_After_Interval_Null_End_Inclusive_False()

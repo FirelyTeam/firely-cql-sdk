@@ -11,21 +11,20 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
 
-        protected Expression CalculateAge(elm.CalculateAge e)
+        protected Expression CalculateAge(Elm.CalculateAge e)
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand!);
             return _operatorBinding.Bind(CqlOperator.CalculateAge, LibraryDefinitionsBuilder.ContextParameter, birthDate, units);
         }
 
-        protected Expression CalculateAgeAt(elm.CalculateAgeAt e)
+        protected Expression CalculateAgeAt(Elm.CalculateAgeAt e)
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand![0]);
@@ -34,7 +33,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression InValueSet(elm.InValueSet e)
+        protected Expression InValueSet(Elm.InValueSet e)
         {
             var code = TranslateExpression(e.code!);
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
@@ -54,7 +53,7 @@ namespace Hl7.Cql.Compiler
             else throw new NotImplementedException().WithContext(this);
         }
 
-        private Expression AnyInValueSet(elm.AnyInValueSet e)
+        private Expression AnyInValueSet(Elm.AnyInValueSet e)
         {
             var codes = TranslateExpression(e.codes!);
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
@@ -77,7 +76,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        public Expression ExpandValueSet(elm.ExpandValueSet e)
+        public Expression ExpandValueSet(Elm.ExpandValueSet e)
         {
             var operand = TranslateExpression(e.operand!);
             var call = CallCreateValueSetFacade(operand);

@@ -10,29 +10,28 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression? Distinct(elm.Distinct e) =>
+        protected Expression? Distinct(Elm.Distinct e) =>
             UnaryOperator(CqlOperator.Distinct, e);
 
-        protected Expression Exists(elm.Exists e) =>
+        protected Expression Exists(Elm.Exists e) =>
             UnaryOperator(CqlOperator.Exists, e);
 
-        protected Expression Flatten(elm.Flatten e) =>
+        protected Expression Flatten(Elm.Flatten e) =>
             UnaryOperator(CqlOperator.Flatten, e);
 
-        protected Expression First(elm.First e)
+        protected Expression First(Elm.First e)
         {
             var operand = TranslateExpression(e.source!);
             var call = _operatorBinding.Bind(CqlOperator.First, LibraryDefinitionsBuilder.ContextParameter, operand);
             return call;
         }
 
-        protected Expression IndexOf(elm.IndexOf e)
+        protected Expression IndexOf(Elm.IndexOf e)
         {
             var source = TranslateExpression(e.source!);
             var element = TranslateExpression(e.element!);
@@ -43,24 +42,24 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(this);
         }
 
-        protected Expression Last(elm.Last e)
+        protected Expression Last(Elm.Last e)
         {
             var operand = TranslateExpression(e.source!);
             var call = _operatorBinding.Bind(CqlOperator.Last, LibraryDefinitionsBuilder.ContextParameter, operand);
             return call;
         }
 
-        private Expression SingletonFrom(elm.SingletonFrom e) =>
+        private Expression SingletonFrom(Elm.SingletonFrom e) =>
             UnaryOperator(CqlOperator.Single, e);
 
 
-        private Expression? Slice(elm.Slice slice)
+        private Expression? Slice(Elm.Slice slice)
         {
             var source = TranslateExpression(slice.source!);
-            var start = slice.startIndex == null || slice.startIndex is elm.Null
+            var start = slice.startIndex == null || slice.startIndex is Elm.Null
                 ? Expression.Constant(null, typeof(int?))
                 : TranslateExpression(slice.startIndex!);
-            var end = slice.endIndex == null || slice.endIndex is elm.Null
+            var end = slice.endIndex == null || slice.endIndex is Elm.Null
                 ? Expression.Constant(null, typeof(int?))
                 : TranslateExpression(slice.endIndex!);
             if (IsOrImplementsIEnumerableOfT(source.Type))

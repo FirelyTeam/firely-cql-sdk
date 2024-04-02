@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
@@ -61,7 +61,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             catch (Exception e)
             {
                 _ = e;
-                return 
+                return
                     $$"""
                     ((Func<dynamic>)(() => throw new NotImplementedException()))()
                     /* Generator Error:
@@ -71,12 +71,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                                .Split(new []{Environment.NewLine}, StringSplitOptions.None)
                                .Select(line => $"    {line}{Environment.NewLine}")
                         )
-                    }} 
+                    }}
                     */
                     """;
             }
         }
-        private static readonly ObjectIDGenerator gen = new();
 
         public string LibraryName { get; }
 
@@ -494,7 +493,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         // Linq.Expressions needs an explicit conversion from a value type
         // type to object, but the C# compiler will insert that boxing,
-        // so we can remove those casts. 
+        // so we can remove those casts.
         private static Expression StripBoxing(Expression node)
         {
             // (x as object) => x
@@ -546,6 +545,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                     throw new NotSupportedException($"Don't know how to convert unary operator {strippedUnary.NodeType} into C#.");
             }
         }
+
+#pragma warning disable SYSLIB0050 // Type or member is obsolete
+        private static readonly ObjectIDGenerator gen = new();
+#pragma warning restore SYSLIB0050 // Type or member is obsolete
 
         private static string paramName(ParameterExpression p)
         {

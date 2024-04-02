@@ -13,16 +13,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
-using elm = Hl7.Cql.Elm;
 using F = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression As(elm.As @as)
+        protected Expression As(Elm.As @as)
         {
-            if (@as.operand is elm.List list)
+            if (@as.operand is Elm.List list)
             {
                 using (PushElement(list))
                 {
@@ -50,7 +49,7 @@ namespace Hl7.Cql.Compiler
             {
                 using (PushElement(@as.asTypeSpecifier))
                 {
-                    if (@as.operand is elm.Null)
+                    if (@as.operand is Elm.Null)
                     {
                         var type = TypeFor(@as.asTypeSpecifier!);
                         var defaultExpression = Expression.Default(type);
@@ -85,13 +84,13 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Is(elm.Is @is)
+        protected Expression Is(Elm.Is @is)
         {
             var op = TranslateExpression(@is.operand!);
             Type? type = null;
             if (@is.isTypeSpecifier != null) 
             {
-                if (@is.isTypeSpecifier is elm.ChoiceTypeSpecifier choice)
+                if (@is.isTypeSpecifier is Elm.ChoiceTypeSpecifier choice)
                 {
                     var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
                     Expression result = Expression.TypeIs(op, firstChoiceType);
@@ -120,7 +119,7 @@ namespace Hl7.Cql.Compiler
             return nullable;
         }
 
-        private Expression? Descendents(elm.Descendents e)
+        private Expression? Descendents(Elm.Descendents e)
         {
             if (e.source == null)
                 return Expression.Constant(null, typeof(IEnumerable<object>));
@@ -139,7 +138,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="cqe"></param>
         /// <returns></returns>
-        protected Expression ConvertQuantity(elm.ConvertQuantity cqe)
+        protected Expression ConvertQuantity(Elm.ConvertQuantity cqe)
         {
             var quantity = TranslateExpression(cqe.operand![0]);
             var unit = TranslateExpression(cqe.operand![1]);
@@ -147,95 +146,95 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        protected Expression? ConvertsToLong(elm.ConvertsToLong e) =>
+        protected Expression? ConvertsToLong(Elm.ConvertsToLong e) =>
             UnaryOperator(CqlOperator.ConvertsToLong, e);
 
-        private Expression? ConvertsToInteger(elm.ConvertsToInteger e) =>
+        private Expression? ConvertsToInteger(Elm.ConvertsToInteger e) =>
             UnaryOperator(CqlOperator.ConvertsToInteger, e);
 
-        protected Expression? ConvertsToDecimal(elm.ConvertsToDecimal e) =>
+        protected Expression? ConvertsToDecimal(Elm.ConvertsToDecimal e) =>
             UnaryOperator(CqlOperator.ConvertsToDecimal, e);
 
-        protected Expression? ConvertsToDateTime(elm.ConvertsToDateTime e) =>
+        protected Expression? ConvertsToDateTime(Elm.ConvertsToDateTime e) =>
             UnaryOperator(CqlOperator.ConvertsToDateTime, e);
 
-        protected Expression? ConvertsToDate(elm.ConvertsToDate e) =>
+        protected Expression? ConvertsToDate(Elm.ConvertsToDate e) =>
             UnaryOperator(CqlOperator.ConvertsToDate, e);
 
-        protected Expression? ConvertsToBoolean(elm.ConvertsToBoolean e) =>
+        protected Expression? ConvertsToBoolean(Elm.ConvertsToBoolean e) =>
             UnaryOperator(CqlOperator.ConvertsToDate, e);
 
-        private Expression? ConvertsToQuantity(elm.ConvertsToQuantity e) =>
+        private Expression? ConvertsToQuantity(Elm.ConvertsToQuantity e) =>
             UnaryOperator(CqlOperator.ConvertsToQuantity, e);
 
-        private Expression? ConvertsToString(elm.ConvertsToString e) =>
+        private Expression? ConvertsToString(Elm.ConvertsToString e) =>
             UnaryOperator(CqlOperator.ConvertsToString, e);
 
-        private Expression? ConvertsToTime(elm.ConvertsToTime e) =>
+        private Expression? ConvertsToTime(Elm.ConvertsToTime e) =>
             UnaryOperator(CqlOperator.ConvertsToTime, e);
 
 
-        protected Expression? ToBoolean(elm.ToBoolean e)
+        protected Expression? ToBoolean(Elm.ToBoolean e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(bool?));
         }
 
-        protected Expression? ToConcept(elm.ToConcept e)
+        protected Expression? ToConcept(Elm.ToConcept e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.ConceptType);
         }
 
-        protected Expression? ToDate(elm.ToDate e)
+        protected Expression? ToDate(Elm.ToDate e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.DateType);
         }
 
-        protected Expression ToDateTime(elm.ToDateTime e)
+        protected Expression ToDateTime(Elm.ToDateTime e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.DateTimeType);
         }
 
 
-        protected Expression ToDecimal(elm.ToDecimal e)
+        protected Expression ToDecimal(Elm.ToDecimal e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(decimal?));
         }
 
-        protected Expression ToLong(elm.ToLong e)
+        protected Expression ToLong(Elm.ToLong e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(long?));
         }
 
-        protected Expression? ToInteger(elm.ToInteger e)
+        protected Expression? ToInteger(Elm.ToInteger e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(int?));
         }
 
-        protected Expression? ToQuantity(elm.ToQuantity tq)
+        protected Expression? ToQuantity(Elm.ToQuantity tq)
         {
             var operand = TranslateExpression(tq.operand!);
             return ChangeType(operand, _typeManager.Resolver.QuantityType);
         }
 
-        protected Expression? ToString(elm.ToString e)
+        protected Expression? ToString(Elm.ToString e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(string));
         }
-        protected Expression? ToTime(elm.ToTime e)
+        protected Expression? ToTime(Elm.ToTime e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.TimeType);
         }
 
-        protected Expression ToList(elm.ToList e)
+        protected Expression ToList(Elm.ToList e)
         {
             var operand = TranslateExpression(e.operand!);
             var call = _operatorBinding.Bind(CqlOperator.ToList, LibraryDefinitionsBuilder.ContextParameter, operand);

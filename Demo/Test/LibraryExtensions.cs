@@ -65,7 +65,7 @@ namespace Hl7.Cql.Packaging
                 {
                     if (node.Value.Properties != null)
                     {
-                        if (node.Value.Properties.TryGetValue(libraryProperty, out object? libObject)
+                        if (node.Value.Properties.TryGetValue(libraryProperty, out object libObject)
                             && libObject is FhirLibrary library)
                         {
                             yield return library;
