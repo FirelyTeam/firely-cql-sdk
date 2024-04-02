@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="FHIRHelpers-4.0.001.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />

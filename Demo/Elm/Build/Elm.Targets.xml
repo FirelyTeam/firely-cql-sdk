@@ -2,13 +2,21 @@
 <Project>
 	<ItemGroup>
 		<CSharpFiles Include="$(MSBuildProjectDirectory)/../Measures/*.cs" />
+		<CSharpFiles Include="$(MSBuildProjectDirectory)/../Measures-cms/*.cs" />
 	</ItemGroup>
 
-	<Target Name="ELM to C#"
+	<Target Name="ELM to C# - Demo"
 			BeforeTargets="Compile">
-		<Message Text="Converting ELM to C#"/>
+		<Message Text="Converting ELM to C# - Demo"/>
 		<Exec Command='"$(SolutionDir)/Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe" --override-utc-date-time "1970-01-01T00:00:00Z" --canonical-root-url https://fire.ly/fhir/ --elm "$(SolutionDir)/LibrarySets/Demo/Elm" --cql "$(SolutionDir)/LibrarySets/Demo/Cql" --cs "$(MSBuildProjectDirectory)/../Measures" --fhir "$(SolutionDir)/LibrarySets/Demo/Resources"' />
 	</Target>
+
+	<Target Name="ELM to C# - CMS Measures-"
+	        BeforeTargets="Compile">
+		<Message Text="Converting ELM to C# - CMS Measures"/>
+		<Exec Command='"$(SolutionDir)/Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe" --override-utc-date-time "1970-01-01T00:00:00Z" --canonical-root-url https://fire.ly/fhir/ --elm "$(SolutionDir)/LibrarySets/CMS/Elm" --cql "$(SolutionDir)/LibrarySets/CMS/Cql" --cs "$(MSBuildProjectDirectory)/../Measures-cms" --fhir "$(SolutionDir)/LibrarySets/CMS/Resources"' />
+	</Target>
+
 	<Target Name="Delete C#" AfterTargets="Clean">
 		<Message Text="Deleting C# files...$(MSBuildProjectDirectory)/../Measures/*.cs" />
 		<Delete Files="@(CSharpFiles)" />

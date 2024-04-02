@@ -12,7 +12,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 namespace Tuples
 {
-    [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.0.0")]
     public class Tuple_DOALBUVOFWRHAUjdPUNBfNdUB: TupleBaseType
     {
         [CqlDeclaration("AggregateClaim")]
