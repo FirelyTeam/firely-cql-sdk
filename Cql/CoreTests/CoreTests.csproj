@@ -1,21 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>false</IsPackable>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<FirelySdkVersion>5.5.1</FirelySdkVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<SignAssembly>True</SignAssembly>
-		<DelaySign>true</DelaySign>
-		<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
-		<IncludeSymbols>True</IncludeSymbols>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Nullable>disable</Nullable>
+		<NoWarn>CS1591</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -42,7 +32,7 @@
 		<ProjectReference Include="..\ELM\ELM.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -62,49 +52,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="HL7Tests.CqlAggregateFunctionsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlAggregateTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlArithmeticFunctionsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlComparisonOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlConditionalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlDateTimeOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlErrorsAndMessagingOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlIntervalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlListOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlLogicalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlNullologicalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlStringOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlTypeOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlTypesTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.ValueLiteralsAndSelectors.cs">
+		<Compile Update="HL7Tests.*.cs">
 			<DependentUpon>HL7Tests.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>

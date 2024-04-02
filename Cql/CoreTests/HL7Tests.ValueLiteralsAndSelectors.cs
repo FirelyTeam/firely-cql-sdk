@@ -7,9 +7,9 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "Null":
-		///	( @2000 < @2000-01 ) = null
+		///	( @2000 &lt; @2000-01 ) = null
 		/// </summary>
         [TestCategory("ValueLiteralsAndSelectors")]
         [TestMethod]
@@ -20,8 +20,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "BooleanFalse":
 		///	( false ) = (1~0)
 		/// </summary>
@@ -34,8 +34,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "BooleanTrue":
 		///	( true ) = (1~1)
 		/// </summary>
@@ -48,8 +48,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerZero":
 		///	( 0 ) = 42-42
 		/// </summary>
@@ -62,8 +62,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerPosZero":
 		///	( +0 ) = 42-42
 		/// </summary>
@@ -76,8 +76,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerNegZero":
 		///	( -0 ) = 42-42
 		/// </summary>
@@ -90,8 +90,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerOne":
 		///	( 1 ) = 42-41
 		/// </summary>
@@ -104,8 +104,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerPosOne":
 		///	( +1 ) = 42-41
 		/// </summary>
@@ -118,8 +118,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerNegOne":
 		///	( -1 ) = 42-43
 		/// </summary>
@@ -132,8 +132,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerTwo":
 		///	( 2 ) = 42-40
 		/// </summary>
@@ -146,8 +146,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerPosTwo":
 		///	( +2 ) = 42-40
 		/// </summary>
@@ -160,8 +160,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerNegTwo":
 		///	( -2 ) = 42-44
 		/// </summary>
@@ -174,8 +174,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "Integer10Pow9":
 		///	( 1000000000 ) = Power(10,9)
 		/// </summary>
@@ -188,8 +188,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerPos10Pow9":
 		///	( +1000000000 ) = +Power(10,9)
 		/// </summary>
@@ -202,8 +202,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerNeg10Pow9":
 		///	( -1000000000 ) = -Power(10,9)
 		/// </summary>
@@ -216,8 +216,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "Integer2Pow31ToZero1IntegerMaxValue":
 		///	( 2147483647 ) = Power(2,30)-1+Power(2,30)
 		/// </summary>
@@ -230,8 +230,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerPos2Pow31ToZero1IntegerMaxValue":
 		///	( +2147483647 ) = +Power(2,30)-1+Power(2,30)
 		/// </summary>
@@ -244,8 +244,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerNeg2Pow31ToZero1":
 		///	( -2147483647 ) = -Power(2,30)+1-Power(2,30)
 		/// </summary>
@@ -258,8 +258,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "IntegerNeg2Pow31IntegerMinValue":
 		///	( -2147483648 ) = -Power(2,30)-Power(2,30)
 		/// </summary>
@@ -272,8 +272,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalZero":
 		///	( 0.0 ) = 42.0-42.0
 		/// </summary>
@@ -286,8 +286,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPosZero":
 		///	( +0.0 ) = 42.0-42.0
 		/// </summary>
@@ -300,8 +300,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNegZero":
 		///	( -0.0 ) = 42.0-42.0
 		/// </summary>
@@ -314,8 +314,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalOne":
 		///	( 1.0 ) = 42.0-41.0
 		/// </summary>
@@ -328,8 +328,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPosOne":
 		///	( +1.0 ) = 42.0-41.0
 		/// </summary>
@@ -342,8 +342,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNegOne":
 		///	( -1.0 ) = 42.0-43.0
 		/// </summary>
@@ -356,8 +356,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalTwo":
 		///	( 2.0 ) = 42.0-40.0
 		/// </summary>
@@ -370,8 +370,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPosTwo":
 		///	( +2.0 ) = 42.0-40.0
 		/// </summary>
@@ -384,8 +384,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNegTwo":
 		///	( -2.0 ) = 42.0-44.0
 		/// </summary>
@@ -398,8 +398,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "Decimal10Pow9":
 		///	( 1000000000.0 ) = Power(10.0,9.0)
 		/// </summary>
@@ -412,8 +412,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPos10Pow9":
 		///	( +1000000000.0 ) = +Power(10.0,9.0)
 		/// </summary>
@@ -426,8 +426,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNeg10Pow9":
 		///	( -1000000000.0 ) = -Power(10.0,9.0)
 		/// </summary>
@@ -440,8 +440,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "Decimal2Pow31ToZero1":
 		///	( 2147483647.0 ) = Power(2.0,30.0)-1+Power(2.0,30.0)
 		/// </summary>
@@ -454,8 +454,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPos2Pow31ToZero1":
 		///	( +2147483647.0 ) = +Power(2.0,30.0)-1+Power(2.0,30.0)
 		/// </summary>
@@ -468,8 +468,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNeg2Pow31ToZero1":
 		///	( -2147483647.0 ) = -Power(2.0,30.0)+1.0-Power(2.0,30.0)
 		/// </summary>
@@ -482,8 +482,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "Decimal2Pow31":
 		///	( 2147483648.0 ) = Power(2.0,30.0)+Power(2.0,30.0)
 		/// </summary>
@@ -496,8 +496,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPos2Pow31":
 		///	( +2147483648.0 ) = +Power(2.0,30.0)+Power(2.0,30.0)
 		/// </summary>
@@ -510,8 +510,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNeg2Pow31":
 		///	( -2147483648.0 ) = -Power(2.0,30.0)-Power(2.0,30.0)
 		/// </summary>
@@ -524,8 +524,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "Decimal2Pow31ToInf1":
 		///	( 2147483649.0 ) = Power(2.0,30.0)+1.0+Power(2.0,30.0)
 		/// </summary>
@@ -538,8 +538,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPos2Pow31ToInf1":
 		///	( +2147483649.0 ) = +Power(2.0,30.0)+1.0+Power(2.0,30.0)
 		/// </summary>
@@ -552,8 +552,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNeg2Pow31ToInf1":
 		///	( -2147483649.0 ) = -Power(2.0,30.0)-1.0-Power(2.0,30.0)
 		/// </summary>
@@ -566,8 +566,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalZeroStep":
 		///	( 0.00000000 ) = 42.0-42.0
 		/// </summary>
@@ -580,8 +580,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPosZeroStep":
 		///	( +0.00000000 ) = 42.0-42.0
 		/// </summary>
@@ -594,8 +594,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNegZeroStep":
 		///	( -0.00000000 ) = 42.0-42.0
 		/// </summary>
@@ -608,8 +608,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalOneStep":
 		///	( 0.00000001 ) = Power(10.0,-8)
 		/// </summary>
@@ -622,8 +622,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPosOneStep":
 		///	( +0.00000001 ) = +Power(10.0,-8)
 		/// </summary>
@@ -636,8 +636,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNegOneStep":
 		///	( -0.00000001 ) = -Power(10.0,-8)
 		/// </summary>
@@ -650,8 +650,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalTwoStep":
 		///	( 0.00000002 ) = 2.0*Power(10.0,-8)
 		/// </summary>
@@ -664,8 +664,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPosTwoStep":
 		///	( +0.00000002 ) = +2.0*Power(10.0,-8)
 		/// </summary>
@@ -678,8 +678,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNegTwoStep":
 		///	( -0.00000002 ) = -2.0*Power(10.0,-8)
 		/// </summary>
@@ -692,8 +692,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalTenStep":
 		///	( 0.0000001 ) = Power(10.0,-7)
 		/// </summary>
@@ -706,8 +706,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPosTenStep":
 		///	( +0.0000001 ) = +Power(10.0,-7)
 		/// </summary>
@@ -720,8 +720,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNegTenStep":
 		///	( -0.0000001 ) = -Power(10.0,-7)
 		/// </summary>
@@ -734,8 +734,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "Decimal10Pow28ToZeroOneStepDecimalMaxValue":
 		///	( 9999999999999999999999999999.99999999 ) = 10*1000000000000000000000000000.00000000-0.00000001
 		/// </summary>
@@ -748,8 +748,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue":
 		///	( +9999999999999999999999999999.99999999 ) = +10*1000000000000000000000000000.00000000-0.00000001
 		/// </summary>
@@ -762,8 +762,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue":
 		///	( -9999999999999999999999999999.99999999 ) = -10*1000000000000000000000000000.00000000+0.00000001
 		/// </summary>
@@ -776,7 +776,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

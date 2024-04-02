@@ -10,64 +10,63 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression? Distinct(elm.Distinct e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Distinct, e, ctx);
+        protected Expression? Distinct(Elm.Distinct e) =>
+            UnaryOperator(CqlOperator.Distinct, e);
 
-        protected Expression Exists(elm.Exists e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Exists, e, ctx);
+        protected Expression Exists(Elm.Exists e) =>
+            UnaryOperator(CqlOperator.Exists, e);
 
-        protected Expression Flatten(elm.Flatten e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Flatten, e, ctx);
+        protected Expression Flatten(Elm.Flatten e) =>
+            UnaryOperator(CqlOperator.Flatten, e);
 
-        protected Expression First(elm.First e, ExpressionBuilderContext ctx)
+        protected Expression First(Elm.First e)
         {
-            var operand = TranslateExpression(e.source!, ctx);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.First, ctx.RuntimeContextParameter, operand);
+            var operand = TranslateExpression(e.source!);
+            var call = _operatorBinding.Bind(CqlOperator.First, LibraryDefinitionsBuilder.ContextParameter, operand);
             return call;
         }
 
-        protected Expression IndexOf(elm.IndexOf e, ExpressionBuilderContext ctx)
+        protected Expression IndexOf(Elm.IndexOf e)
         {
-            var source = TranslateExpression(e.source!, ctx);
-            var element = TranslateExpression(e.element!, ctx);
+            var source = TranslateExpression(e.source!);
+            var element = TranslateExpression(e.element!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.IndexOf, ctx.RuntimeContextParameter, source, element);
+                return _operatorBinding.Bind(CqlOperator.IndexOf, LibraryDefinitionsBuilder.ContextParameter, source, element);
             }
-            throw new NotImplementedException().WithContext(ctx);
+            throw new NotImplementedException().WithContext(this);
         }
 
-        protected Expression Last(elm.Last e, ExpressionBuilderContext ctx)
+        protected Expression Last(Elm.Last e)
         {
-            var operand = TranslateExpression(e.source!, ctx);
-            var call = ctx.OperatorBinding.Bind(CqlOperator.Last, ctx.RuntimeContextParameter, operand);
+            var operand = TranslateExpression(e.source!);
+            var call = _operatorBinding.Bind(CqlOperator.Last, LibraryDefinitionsBuilder.ContextParameter, operand);
             return call;
         }
 
-        private Expression SingletonFrom(elm.SingletonFrom e, ExpressionBuilderContext ctx) =>
-            UnaryOperator(CqlOperator.Single, e, ctx);
+        private Expression SingletonFrom(Elm.SingletonFrom e) =>
+            UnaryOperator(CqlOperator.Single, e);
 
 
-        private Expression? Slice(elm.Slice slice, ExpressionBuilderContext ctx)
+        private Expression? Slice(Elm.Slice slice)
         {
-            var source = TranslateExpression(slice.source!, ctx);
-            var start = slice.startIndex == null || slice.startIndex is elm.Null
+            var source = TranslateExpression(slice.source!);
+            var start = slice.startIndex == null || slice.startIndex is Elm.Null
                 ? Expression.Constant(null, typeof(int?))
-                : TranslateExpression(slice.startIndex!, ctx);
-            var end = slice.endIndex == null || slice.endIndex is elm.Null
+                : TranslateExpression(slice.startIndex!);
+            var end = slice.endIndex == null || slice.endIndex is Elm.Null
                 ? Expression.Constant(null, typeof(int?))
-                : TranslateExpression(slice.endIndex!, ctx);
+                : TranslateExpression(slice.endIndex!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return ctx.OperatorBinding.Bind(CqlOperator.Slice, ctx.RuntimeContextParameter, source, start, end);
+                return _operatorBinding.Bind(CqlOperator.Slice, LibraryDefinitionsBuilder.ContextParameter, source, start, end);
             }
-            throw new NotImplementedException().WithContext(ctx);
+            throw new NotImplementedException().WithContext(this);
         }
     }
 }

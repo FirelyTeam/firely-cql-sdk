@@ -1,13 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+  <Import Project="..\cql-demo.props" />
 
+  <PropertyGroup>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Cql\CoreTests\LibrarySetsDirs.cs" Link="LibrarySetsDirs.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />

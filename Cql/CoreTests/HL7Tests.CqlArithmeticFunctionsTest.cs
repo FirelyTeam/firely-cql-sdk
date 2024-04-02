@@ -8,7 +8,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "AbsNull":
 		///	( Abs(null as Integer) ) = null
 		/// </summary>
@@ -22,7 +22,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Abs0":
 		///	( Abs(0) ) = 0
 		/// </summary>
@@ -36,7 +36,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AbsNeg1":
 		///	( Abs(-1) ) = 1
 		/// </summary>
@@ -50,7 +50,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AbsNeg1Dec":
 		///	( Abs(-1.0) ) = 1.0
 		/// </summary>
@@ -64,7 +64,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Abs0Dec":
 		///	( Abs(0.0) ) = 0.0
 		/// </summary>
@@ -78,7 +78,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Abs1cm":
 		///	( Abs(-1.0'cm') ) = 1.0'cm'
 		/// </summary>
@@ -92,7 +92,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AbsLong":
 		///	( Abs(-1L) ) = 1L
 		/// </summary>
@@ -106,7 +106,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AddNull":
 		///	( 1 + null ) = null
 		/// </summary>
@@ -120,7 +120,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Add11":
 		///	( 1 + 1 ) = 2
 		/// </summary>
@@ -134,7 +134,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Add1D1D":
 		///	( 1.0 + 1.0 ) = 2.0
 		/// </summary>
@@ -148,7 +148,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Add1Q1Q":
 		///	( 1'g/cm3' + 1'g/cm3' ) = 2.0'g/cm3'
 		/// </summary>
@@ -162,7 +162,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AddIAndD":
 		///	( 1 + 2.0 ) = 3.0
 		/// </summary>
@@ -176,7 +176,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Add1L1L":
 		///	( 1L + 1L ) = 2L
 		/// </summary>
@@ -190,7 +190,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CeilingNull":
 		///	( Ceiling(null as Decimal) ) = null
 		/// </summary>
@@ -204,7 +204,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Ceiling1D":
 		///	( Ceiling(1.0) ) = 1
 		/// </summary>
@@ -218,7 +218,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Ceiling1D1":
 		///	( Ceiling(1.1) ) = 2
 		/// </summary>
@@ -232,7 +232,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CeilingNegD1":
 		///	( Ceiling(-0.1) ) = 0
 		/// </summary>
@@ -246,7 +246,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CeilingNeg1":
 		///	( Ceiling(-1.0) ) = -1
 		/// </summary>
@@ -260,7 +260,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CeilingNeg1D1":
 		///	( Ceiling(-1.1) ) = -1
 		/// </summary>
@@ -274,7 +274,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Ceiling1I":
 		///	( Ceiling(1) ) = 1
 		/// </summary>
@@ -288,7 +288,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DivideNull":
 		///	( 1 / null ) = null
 		/// </summary>
@@ -302,7 +302,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide10":
 		///	( 1 / 0 ) = null
 		/// </summary>
@@ -316,7 +316,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide01":
 		///	( 0 / 1 ) = 0.0
 		/// </summary>
@@ -330,7 +330,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide11":
 		///	( 1 / 1 ) = 1.0
 		/// </summary>
@@ -344,7 +344,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide1d1d":
 		///	( 1.0 / 1.0 ) = 1.0
 		/// </summary>
@@ -358,7 +358,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide103":
 		///	( 10 / 3 ) = 3.33333333
 		/// </summary>
@@ -372,7 +372,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide1Q1":
 		///	( 1'g/cm3' / 1.0 ) = 1.0'g/cm3'
 		/// </summary>
@@ -386,7 +386,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide1Q1Q":
 		///	( 1'g/cm3' / 1'g/cm3' ) = 1.0'1'
 		/// </summary>
@@ -400,7 +400,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide10I5D":
 		///	( 10 / 5.0 ) = 2.0
 		/// </summary>
@@ -414,7 +414,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide10I5I":
 		///	( 10 / 5 ) = 2.0
 		/// </summary>
@@ -428,7 +428,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Divide10Q5I":
 		///	( 10.0 'g' / 5 ) = 2.0'g'
 		/// </summary>
@@ -442,7 +442,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FloorNull":
 		///	( Floor(null as Decimal) ) = null
 		/// </summary>
@@ -456,7 +456,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Floor1":
 		///	( Floor(1) ) = 1
 		/// </summary>
@@ -470,7 +470,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Floor1D":
 		///	( Floor(1.0) ) = 1
 		/// </summary>
@@ -484,7 +484,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Floor1D1":
 		///	( Floor(1.1) ) = 1
 		/// </summary>
@@ -498,7 +498,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FloorNegD1":
 		///	( Floor(-0.1) ) = -1
 		/// </summary>
@@ -512,7 +512,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FloorNeg1":
 		///	( Floor(-1.0) ) = -1
 		/// </summary>
@@ -526,7 +526,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "FloorNeg1D1":
 		///	( Floor(-1.1) ) = -2
 		/// </summary>
@@ -540,7 +540,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Floor2I":
 		///	( Floor(2) ) = 2
 		/// </summary>
@@ -554,7 +554,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExpNull":
 		///	( Exp(null as Decimal) ) = null
 		/// </summary>
@@ -568,7 +568,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Exp0":
 		///	( Exp(0) ) = 1.0
 		/// </summary>
@@ -582,7 +582,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExpNeg0":
 		///	( Exp(-0) ) = 1.0
 		/// </summary>
@@ -596,7 +596,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Exp1":
 		///	( Exp(1) ) = 2.718281828459045090795598298427648842334747314453125
 		/// </summary>
@@ -610,7 +610,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ExpNeg1":
 		///	( Exp(-1) ) = 0.367879441171442334024277442949824035167694091796875
 		/// </summary>
@@ -624,7 +624,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "HighBoundaryDecimal":
 		///	( HighBoundary(1.587, 8) ) = 1.58799999
 		/// </summary>
@@ -638,7 +638,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "HighBoundaryDateMonth":
 		///	( HighBoundary(@2014, 6) ) = @2014-12
 		/// </summary>
@@ -652,7 +652,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "HighBoundaryDateTimeMillisecond":
 		///	( HighBoundary(@2014-01-01T08, 17) ) = @2014-01-01T08:59:59.999
 		/// </summary>
@@ -666,7 +666,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "HighBoundaryTimeMillisecond":
 		///	( HighBoundary(@T10:30, 9) ) = @T10:30:59.999
 		/// </summary>
@@ -680,7 +680,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LogNullNull":
 		///	( Log(null, null) ) = null
 		/// </summary>
@@ -694,7 +694,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Log1BaseNull":
 		///	( Log(1, null) ) = null
 		/// </summary>
@@ -708,7 +708,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Log1Base1":
 		///	( Log(1, 1) ) = 0.0
 		/// </summary>
@@ -722,7 +722,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Log1Base2":
 		///	( Log(1, 2) ) = 0.0
 		/// </summary>
@@ -736,7 +736,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Log1Base100":
 		///	( Log(1, 100) ) = 0.0
 		/// </summary>
@@ -750,7 +750,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Log16Base2":
 		///	( Log(16, 2) ) = 4.0
 		/// </summary>
@@ -764,7 +764,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LogD125Base2":
 		///	( Log(0.125, 2) ) = -3.0
 		/// </summary>
@@ -778,7 +778,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowBoundaryDecimal":
 		///	( LowBoundary(1.587, 8) ) = 1.58700000
 		/// </summary>
@@ -792,7 +792,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowBoundaryDateMonth":
 		///	( LowBoundary(@2014, 6) ) = @2014-01
 		/// </summary>
@@ -806,7 +806,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowBoundaryDateTimeMillisecond":
 		///	( LowBoundary(@2014-01-01T08, 17) ) = @2014-01-01T08:00:00.000
 		/// </summary>
@@ -820,7 +820,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LowBoundaryTimeMillisecond":
 		///	( LowBoundary(@T10:30, 9) ) = @T10:30:00.000
 		/// </summary>
@@ -834,7 +834,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LnNull":
 		///	( Ln(null) ) = null
 		/// </summary>
@@ -848,7 +848,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Ln1":
 		///	( Ln(1) ) = 0.0
 		/// </summary>
@@ -862,7 +862,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LnNeg1":
 		///	( Ln(-1) ) = null
 		/// </summary>
@@ -876,7 +876,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Ln1000":
 		///	( Ln(1000) ) = 6.907755278982136815102421678602695465087890625
 		/// </summary>
@@ -890,7 +890,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Ln1000D":
 		///	( Ln(1000.0) ) = 6.907755278982136815102421678602695465087890625
 		/// </summary>
@@ -904,7 +904,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerMinValue":
 		///	( minimum Integer ) = -2147483648
 		/// </summary>
@@ -918,7 +918,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LongMinValue":
 		///	( minimum Long ) = -9223372036854775808
 		/// </summary>
@@ -933,7 +933,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalMinValue":
 		///	( minimum Decimal ) = -9999999999999999999999999999.99999999
 		/// </summary>
@@ -948,7 +948,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMinValue":
 		///	( minimum DateTime ) = @0001-01-01T00:00:00.000
 		/// </summary>
@@ -962,7 +962,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateMinValue":
 		///	( minimum Date ) = @0001-01-01
 		/// </summary>
@@ -976,7 +976,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMinValue":
 		///	( minimum Time ) = @T00:00:00.000
 		/// </summary>
@@ -990,7 +990,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IntegerMaxValue":
 		///	( maximum Integer ) = 2147483647
 		/// </summary>
@@ -1004,7 +1004,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "LongMaxValue":
 		///	( maximum Long ) = 9223372036854775807
 		/// </summary>
@@ -1019,7 +1019,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DecimalMaxValue":
 		///	( maximum Decimal ) = 9999999999999999999999999999.99999999
 		/// </summary>
@@ -1034,7 +1034,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateTimeMaxValue":
 		///	( maximum DateTime ) = @9999-12-31T23:59:59.999
 		/// </summary>
@@ -1048,7 +1048,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "DateMaxValue":
 		///	( maximum Date ) = @9999-12-31
 		/// </summary>
@@ -1062,7 +1062,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TimeMaxValue":
 		///	( maximum Time ) = @T23:59:59.999
 		/// </summary>
@@ -1076,7 +1076,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ModuloNull":
 		///	( 1 mod null ) = null
 		/// </summary>
@@ -1090,7 +1090,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Modulo0By0":
 		///	( 0 mod 0 ) = null
 		/// </summary>
@@ -1104,7 +1104,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Modulo4By2":
 		///	( 4 mod 2 ) = 0
 		/// </summary>
@@ -1118,7 +1118,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Modulo4LBy2L":
 		///	( 4L mod 2L ) = 0L
 		/// </summary>
@@ -1133,7 +1133,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Modulo4DBy2D":
 		///	( 4.0 mod 2.0 ) = 0.0
 		/// </summary>
@@ -1147,7 +1147,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Modulo10By3":
 		///	( 10 mod 3 ) = 1
 		/// </summary>
@@ -1161,7 +1161,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Modulo10DBy3D":
 		///	( 10.0 mod 3.0 ) = 1.0
 		/// </summary>
@@ -1175,7 +1175,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Modulo10IBy3D":
 		///	( 10 mod 3.0 ) = 1.0
 		/// </summary>
@@ -1189,7 +1189,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ModuloDResult":
 		///	( 3.5 mod 3 ) = 0.5
 		/// </summary>
@@ -1203,7 +1203,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ModuloQuantity":
 		///	( 3.5 'gm' mod 3 'gm' ) = 0.5 'gm'
 		/// </summary>
@@ -1218,7 +1218,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MultiplyNull":
 		///	( 1 * null ) = null
 		/// </summary>
@@ -1232,7 +1232,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Multiply1By1":
 		///	( 1 * 1 ) = 1
 		/// </summary>
@@ -1246,7 +1246,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Multiply1DBy2D":
 		///	( 1.0 * 2.0 ) = 2.0
 		/// </summary>
@@ -1260,7 +1260,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Multiply1By1L":
 		///	( 1 * 1L ) = 1L
 		/// </summary>
@@ -1275,7 +1275,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Multiply1IBy2D":
 		///	( 1 * 2.0 ) = 2.0
 		/// </summary>
@@ -1289,7 +1289,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Multiply1CMBy2CM":
 		///	( 1.0 'cm' * 2.0 'cm' ) = 2.0'cm2'
 		/// </summary>
@@ -1304,7 +1304,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NegateNull":
 		///	( -(null as Integer) ) = null
 		/// </summary>
@@ -1318,7 +1318,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Negate0":
 		///	( -0 ) = 0
 		/// </summary>
@@ -1332,7 +1332,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NegateNeg0":
 		///	( -(-0) ) = 0
 		/// </summary>
@@ -1346,7 +1346,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Negate1":
 		///	( -1 ) = -1
 		/// </summary>
@@ -1360,7 +1360,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NegateNeg1":
 		///	( -(-1) ) = 1
 		/// </summary>
@@ -1374,7 +1374,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NegateNeg1L":
 		///	( -(-1L) ) = 1L
 		/// </summary>
@@ -1389,7 +1389,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Negate0D":
 		///	( -(0.0) ) = 0.0
 		/// </summary>
@@ -1403,7 +1403,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NegateNeg0D":
 		///	( -(-0.0) ) = 0.0
 		/// </summary>
@@ -1417,7 +1417,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Negate1D":
 		///	( -(1.0) ) = -1.0
 		/// </summary>
@@ -1431,7 +1431,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "NegateNeg1D":
 		///	( -(-1.0) ) = 1.0
 		/// </summary>
@@ -1445,7 +1445,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Negate1CM":
 		///	( -(1'cm') ) = -1.0'cm'
 		/// </summary>
@@ -1459,7 +1459,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PrecisionDecimal":
 		///	( Precision(1.58700) ) = 5
 		/// </summary>
@@ -1473,7 +1473,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PrecisionYear":
 		///	( Precision(@2014) ) = 4
 		/// </summary>
@@ -1487,7 +1487,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PrecisionDateTimeMilliseconds":
 		///	( Precision(@2014-01-05T10:30:00.000) ) = 17
 		/// </summary>
@@ -1501,7 +1501,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PrecisionTimeMinutes":
 		///	( Precision(@T10:30) ) = 4
 		/// </summary>
@@ -1515,7 +1515,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PrecisionTimeMilliseconds":
 		///	( Precision(@T10:30:00.000) ) = 9
 		/// </summary>
@@ -1529,7 +1529,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorNull":
 		///	( predecessor of (null as Integer) ) = null
 		/// </summary>
@@ -1543,7 +1543,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOf0":
 		///	( predecessor of 0 ) = -1
 		/// </summary>
@@ -1557,7 +1557,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOf1":
 		///	( predecessor of 1 ) = 0
 		/// </summary>
@@ -1571,7 +1571,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOf1L":
 		///	( predecessor of 1L ) = 0L
 		/// </summary>
@@ -1586,7 +1586,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOf1D":
 		///	( predecessor of 1.0 ) = 0.99999999
 		/// </summary>
@@ -1600,7 +1600,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOf101D":
 		///	( predecessor of 1.01 ) = 1.00999999
 		/// </summary>
@@ -1614,7 +1614,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOf1QCM":
 		///	( predecessor of 1.0 'cm' ) = 0.99999999'cm'
 		/// </summary>
@@ -1628,7 +1628,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOfJan12000":
 		///	( predecessor of DateTime(2000,1,1) ) = @1999-12-31
 		/// </summary>
@@ -1642,7 +1642,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PredecessorOfNoon":
 		///	( predecessor of @T12:00:00.000 ) = @T11:59:59.999
 		/// </summary>
@@ -1656,7 +1656,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PowerNullToNull":
 		///	( Power(null as Integer, null as Integer) ) = null
 		/// </summary>
@@ -1670,7 +1670,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power0To0":
 		///	( Power(0, 0) ) = 1
 		/// </summary>
@@ -1684,7 +1684,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2To2":
 		///	( Power(2, 2) ) = 4
 		/// </summary>
@@ -1698,7 +1698,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PowerNeg2To2":
 		///	( Power(-2, 2) ) = 4
 		/// </summary>
@@ -1712,7 +1712,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2ToNeg2":
 		///	( Power(2.0, -2.0) ) = 0.25
 		/// </summary>
@@ -1726,7 +1726,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2LTo2L":
 		///	( Power(2L, 2L) ) = 4L
 		/// </summary>
@@ -1741,7 +1741,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2DTo2D":
 		///	( Power(2.0, 2.0) ) = 4.0
 		/// </summary>
@@ -1755,7 +1755,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PowerNeg2DTo2D":
 		///	( Power(-2.0, 2.0) ) = 4.0
 		/// </summary>
@@ -1769,7 +1769,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2DToNeg2D":
 		///	( Power(2.0, -2.0) ) = 0.25
 		/// </summary>
@@ -1783,7 +1783,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2DTo2":
 		///	( Power(2.0, 2) ) = 4.0
 		/// </summary>
@@ -1797,7 +1797,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2To2D":
 		///	( Power(2, 2.0) ) = 4.0
 		/// </summary>
@@ -1811,7 +1811,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2To4":
 		///	( 2^4 ) = 16
 		/// </summary>
@@ -1825,7 +1825,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2DTo4D":
 		///	( 2.0^4.0 ) = 16.0
 		/// </summary>
@@ -1839,7 +1839,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Power2DToNeg2DEquivalence":
 		///	( Power(2.0, -2.0) ~ 0.25 ) = true
 		/// </summary>
@@ -1853,7 +1853,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "RoundNull":
 		///	( Round(null as Decimal) ) = null
 		/// </summary>
@@ -1867,7 +1867,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Round1":
 		///	( Round(1) ) = 1.0
 		/// </summary>
@@ -1881,7 +1881,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Round0D5":
 		///	( Round(0.5) ) = 1.0
 		/// </summary>
@@ -1895,7 +1895,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Round0D4":
 		///	( Round(0.4) ) = 0.0
 		/// </summary>
@@ -1909,7 +1909,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Round3D14159":
 		///	( Round(3.14159, 2) ) = 3.14
 		/// </summary>
@@ -1923,7 +1923,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "RoundNeg0D5":
 		///	( Round(-0.5) ) = 0.0
 		/// </summary>
@@ -1938,7 +1938,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "RoundNeg0D4":
 		///	( Round(-0.4) ) = 0.0
 		/// </summary>
@@ -1952,7 +1952,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "RoundNeg0D6":
 		///	( Round(-0.6) ) = -1.0
 		/// </summary>
@@ -1966,7 +1966,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "RoundNeg1D1":
 		///	( Round(-1.1) ) = -1.0
 		/// </summary>
@@ -1980,7 +1980,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "RoundNeg1D5":
 		///	( Round(-1.5) ) = -1.0
 		/// </summary>
@@ -1995,7 +1995,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "RoundNeg1D6":
 		///	( Round(-1.6) ) = -2.0
 		/// </summary>
@@ -2009,7 +2009,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SubtractNull":
 		///	( 1 - null ) = null
 		/// </summary>
@@ -2023,7 +2023,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Subtract1And1":
 		///	( 1 - 1 ) = 0
 		/// </summary>
@@ -2037,7 +2037,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Subtract1LAnd1L":
 		///	( 1L - 1L ) = 0L
 		/// </summary>
@@ -2052,7 +2052,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Subtract1DAnd2D":
 		///	( 1.0 - 2.0 ) = -1.0
 		/// </summary>
@@ -2066,7 +2066,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Subtract1CMAnd2CM":
 		///	( 1.0 'cm' - 2.0 'cm' ) = -1.0'cm'
 		/// </summary>
@@ -2080,7 +2080,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Subtract2And11D":
 		///	( 2 - 1.1 ) = 0.9
 		/// </summary>
@@ -2094,7 +2094,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorNull":
 		///	( successor of (null as Integer) ) = null
 		/// </summary>
@@ -2108,7 +2108,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorOf0":
 		///	( successor of 0 ) = 1
 		/// </summary>
@@ -2122,7 +2122,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorOf1":
 		///	( successor of 1 ) = 2
 		/// </summary>
@@ -2136,7 +2136,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorOf1L":
 		///	( successor of 1L ) = 2L
 		/// </summary>
@@ -2151,7 +2151,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorOf1D":
 		///	( successor of 1.0 ) = 1.00000001
 		/// </summary>
@@ -2165,7 +2165,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorOf101D":
 		///	( successor of 1.01 ) = 1.01000001
 		/// </summary>
@@ -2179,7 +2179,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorOfJan12000":
 		///	( successor of DateTime(2000,1,1) ) = @2000-01-02
 		/// </summary>
@@ -2193,7 +2193,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SuccessorOfNoon":
 		///	( successor of @T12:00:00.000 ) = @T12:00:00.001
 		/// </summary>
@@ -2207,7 +2207,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncateNull":
 		///	( Truncate(null as Decimal) ) = null
 		/// </summary>
@@ -2221,7 +2221,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Truncate0":
 		///	( Truncate(0) ) = 0
 		/// </summary>
@@ -2235,7 +2235,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Truncate0D0":
 		///	( Truncate(0.0) ) = 0
 		/// </summary>
@@ -2249,7 +2249,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Truncate0D1":
 		///	( Truncate(0.1) ) = 0
 		/// </summary>
@@ -2263,7 +2263,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Truncate1":
 		///	( Truncate(1) ) = 1
 		/// </summary>
@@ -2277,7 +2277,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Truncate1D0":
 		///	( Truncate(1.0) ) = 1
 		/// </summary>
@@ -2291,7 +2291,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Truncate1D1":
 		///	( Truncate(1.1) ) = 1
 		/// </summary>
@@ -2305,7 +2305,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "Truncate1D9":
 		///	( Truncate(1.9) ) = 1
 		/// </summary>
@@ -2319,7 +2319,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncateNeg1":
 		///	( Truncate(-1) ) = -1
 		/// </summary>
@@ -2333,7 +2333,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncateNeg1D0":
 		///	( Truncate(-1.0) ) = -1
 		/// </summary>
@@ -2347,7 +2347,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncateNeg1D1":
 		///	( Truncate(-1.1) ) = -1
 		/// </summary>
@@ -2361,7 +2361,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncateNeg1D9":
 		///	( Truncate(-1.9) ) = -1
 		/// </summary>
@@ -2375,7 +2375,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivideNull":
 		///	( (null as Integer) div (null as Integer) ) = null
 		/// </summary>
@@ -2389,7 +2389,7 @@ namespace CoreTests
             Assert.AreEqual(null, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide2By1":
 		///	( 2 div 1 ) = 2
 		/// </summary>
@@ -2403,7 +2403,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide10By3":
 		///	( 10 div 3 ) = 3
 		/// </summary>
@@ -2417,7 +2417,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide10LBy3L":
 		///	( 10L div 3L ) = 3L
 		/// </summary>
@@ -2432,7 +2432,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide10d1By3D1":
 		///	( 10.1 div 3.1 ) = 3.0
 		/// </summary>
@@ -2446,7 +2446,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivideNeg2ByNeg1":
 		///	( -2 div -1 ) = 2
 		/// </summary>
@@ -2460,7 +2460,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivideNeg10ByNeg3":
 		///	( -10 div -3 ) = 3
 		/// </summary>
@@ -2474,7 +2474,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivideNeg10d1ByNeg3D1":
 		///	( -10.1 div -3.1 ) = 3.0
 		/// </summary>
@@ -2488,7 +2488,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivideNeg2By1":
 		///	( -2 div 1 ) = -2
 		/// </summary>
@@ -2502,7 +2502,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivideNeg10By3":
 		///	( -10 div 3 ) = -3
 		/// </summary>
@@ -2516,7 +2516,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivideNeg10d1By3D1":
 		///	( -10.1 div 3.1 ) = -3.0
 		/// </summary>
@@ -2530,7 +2530,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide2ByNeg1":
 		///	( 2 div -1 ) = -2
 		/// </summary>
@@ -2544,7 +2544,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide10ByNeg3":
 		///	( 10 div -3 ) = -3
 		/// </summary>
@@ -2558,7 +2558,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide10d1ByNeg3D1":
 		///	( 10.1 div -3.1 ) = -3.0
 		/// </summary>
@@ -2572,7 +2572,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide10By5D":
 		///	( 10 div 5.0 ) = 2.0
 		/// </summary>
@@ -2586,7 +2586,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "TruncatedDivide10d1ByNeg3D1Quantity":
 		///	( 10.1 'gm' div -3.1 'gm' ) = -3.0 'gm'
 		/// </summary>

@@ -29,7 +29,7 @@ namespace CoreTests
             Microsoft.Extensions.Logging.LoggerFactory
                 .Create(logging => logging.AddDebug());
 
-        private static LibraryPackagerFactory Factory = new(LoggerFactory);
+        private static CqlPackagerFactory Factory = new(LoggerFactory);
 
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
@@ -361,7 +361,7 @@ namespace CoreTests
 
         /// <summary>
         /// Handles ( 9 after Interval[1, null]) = false
-        /// same as interval start < 9
+        /// same as interval start &lt; 9
         /// </summary>
         [TestMethod]
         public void Element_After_Interval_Null_End_Inclusive_False()
@@ -3520,7 +3520,7 @@ namespace CoreTests
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
             var writer = Factory.CSharpLibrarySetToStreamsWriter;
             bool isDone = false;
             writer.ProcessDefinitions(

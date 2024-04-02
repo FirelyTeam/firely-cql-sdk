@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Runtime;
@@ -9,14 +12,12 @@ namespace Hl7.Cql.Runtime;
 /// Maps library, definition, and signatures to values.
 /// </summary>
 /// <typeparam name="T">The value mapped by the keys in this dictionary.</typeparam>
-public class DefinitionDictionary<T>
-    where T : class
+public class DefinitionDictionary<T> where T : class
 {
 
     private readonly Dictionary<string, Dictionary<string, List<(Type[] Signature, T T)>>> ExpressionsByLibrary = new();
 
     private readonly Dictionary<string, List<Tag>> TagsByLibrary = new();
-
 
     /// <summary>
     /// Gets the value for the given <paramref name="libraryName"/> and <paramref name="definition"/>.
@@ -144,7 +145,7 @@ public class DefinitionDictionary<T>
     /// <param name="definition">The name of the definition.</param>
     /// <param name="expression">The <see langword="out"/> parameter containing the result.</param>
     /// <returns><see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definition"/> is present in this dictionary.</returns>
-    public bool TryGetValue(string? libraryName, string definition, out T? expression)
+    public bool TryGetValue(string? libraryName, string definition, [NotNullWhen(true)] out T? expression)
     {
         libraryName ??= string.Empty;
         if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
@@ -172,7 +173,7 @@ public class DefinitionDictionary<T>
     /// <param name="signature">The signature of the definition.</param>
     /// <param name="expression">The <see langword="out"/> parameter containing the result.</param>
     /// <returns><see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definition"/>, and <paramref name="signature"/> is present in this dictionary.</returns>
-    public bool TryGetValue(string? libraryName, string definition, Type[] signature, out T? expression)
+    public bool TryGetValue(string? libraryName, string definition, Type[] signature, [NotNullWhen(true)]out T? expression)
     {
         libraryName ??= string.Empty;
         if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
@@ -276,7 +277,7 @@ public class DefinitionDictionary<T>
     /// <param name="libraryName">The name of the library.</param>
     /// <param name="definitions">The <see langword="out"/> parameter containing the result.</param>
     /// <returns><see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.</returns>
-    public bool TryGetDefinitionsForLibrary(string? libraryName, out IEnumerable<KeyValuePair<string, List<(Type[], T)>>>? definitions)
+    public bool TryGetDefinitionsForLibrary(string? libraryName, [NotNullWhen(true)]out IEnumerable<KeyValuePair<string, List<(Type[], T)>>>? definitions)
     {
         if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName, out var library))
         {
@@ -297,7 +298,7 @@ public class DefinitionDictionary<T>
     /// <param name="libraryName">The name of the library.</param>
     /// <param name="definitions">The <see langword="out"/> parameter containing the result.</param>
     /// <returns><see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.</returns>
-    public bool TryGetDefinesForLibrary(string? libraryName, out IEnumerable<KeyValuePair<string, T>>? definitions)
+    public bool TryGetDefinesForLibrary(string? libraryName, [NotNullWhen(true)] out IEnumerable<KeyValuePair<string, T>>? definitions)
     {
         if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName, out var library))
         {
@@ -359,7 +360,7 @@ public class DefinitionDictionary<T>
     /// <param name="signature">The list of types to select the correct definition.</param>
     /// <param name="tags">The <see langword="out"/> parameter to hold the resulting lookup of tags and their values.</param>
     /// <returns><see langword="true"/> if the definiton has tags and thus <paramref name="tags"/> is not <see langword="null"/>; otherwise, <see langword="false"/>.</returns>
-    public bool TryGetTags(string library, string definition, Type[] signature, out ILookup<string, string>? tags)
+    public bool TryGetTags(string library, string definition, Type[] signature, [NotNullWhen(true)] out ILookup<string, string>? tags)
     {
         signature ??= new Type[0];
         if (TagsByLibrary.TryGetValue(library, out var tagsList))
@@ -426,6 +427,25 @@ public class DefinitionDictionary<T>
                 {
                     TagsByLibrary.Add(tagKey.Key, tagKey.Value);
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Merges <paramref name="expressions"/> for a given <paramref name="libKey"></paramref> into this dictionary, with existing keys remaining preserved.
+    /// This means that if a key exists in this dictionary, it will not be overwritten by the value of keys in <paramref name="expressions"/>.
+    /// </summary>
+    /// <param name="libKey">The library name and version.</param>
+    /// <param name="expressions">The expressions to add.</param>
+    public void Merge(
+        string libKey,
+        IEnumerable<KeyValuePair<string, List<(Type[], T)>>> expressions)
+    {
+        foreach (var (definition, overloads) in expressions)
+        {
+            foreach (var (signature, expression) in overloads)
+            {
+                Add(libKey, definition, signature, expression);
             }
         }
     }

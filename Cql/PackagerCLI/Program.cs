@@ -2,10 +2,9 @@
 
 using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler;
+using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.ResourceWriters;
-using Hl7.Fhir.Model;
+using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -40,22 +39,23 @@ public class Program
 
     private static IDictionary<string, string> BuildSwitchMappings()
     {
-        const string PackageSection = PackagerOptions.ConfigSection + ":";
+        const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
         const string CSharpResourceWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
         return new SortedDictionary<string, string>
         {
             // @formatter:off
-            [PackagerOptions.ArgNameElmDirectory]             = PackageSection + nameof(PackagerOptions.ElmDirectory),
-            [PackagerOptions.ArgNameCqlDirectory]             = PackageSection + nameof(PackagerOptions.CqlDirectory),
-            [PackagerOptions.ArgNameDebug]                    = PackageSection + nameof(PackagerOptions.Debug),
-            [PackagerOptions.ArgNameForce]                    = PackageSection + nameof(PackagerOptions.Force),
-            [PackagerOptions.ArgNameCanonicalRootUrl]         = PackageSection + nameof(PackagerOptions.CanonicalRootUrl),
+            [CqlToResourcePackagingOptions.ArgNameElmDirectory]             = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
+            [CqlToResourcePackagingOptions.ArgNameCqlDirectory]             = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
+            [CqlToResourcePackagingOptions.ArgNameDebug]                    = PackageSection + nameof(CqlToResourcePackagingOptions.Debug),
+            [CqlToResourcePackagingOptions.ArgNameForce]                    = PackageSection + nameof(CqlToResourcePackagingOptions.Force),
+            [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl]         = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-            [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+            [CSharpCodeWriterOptions.ArgNameOutDirectory]                   = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
-            [FhirResourceWriterOptions.ArgNameOutDirectory]   = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+            [FhirResourceWriterOptions.ArgNameOutDirectory]                 = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+            [FhirResourceWriterOptions.ArgNameOverrideDate]                 = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
             // @formatter:on
         };
     }
@@ -63,9 +63,9 @@ public class Program
     private const string Usage =
         """
         Packager CLI Usage:
-        
+
             -?|-h|-help                                Show this help
-                                                       
+
             --elm                  <directory>         Library root directory
             --cql                  <directory>         CQL root directory
             [--fhir]               <file|directory>    Resource location, either file name or directory
@@ -91,9 +91,9 @@ public class Program
         logging.ClearProviders();
 
         logging.AddFilter(level => level >= LogLevel.Trace);
-        logging.AddConsole(console =>
+        logging.AddCleanConsole(opt =>
         {
-            console.LogToStandardErrorThreshold = LogLevel.Error;
+            // opt.NoColor = true;
         });
 
         var logFile = Path.Combine(".", "build.log");
@@ -107,12 +107,32 @@ public class Program
 
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
-        services.AddPackagerServices(context.Configuration);
-        services.TryAddResourceWriters(context.Configuration);
-        services.TryAddTypeServices();
-        services.TryAddCompilationServices();
-        services.TryAddBuilders();
+        TryAddPackagerOptions(services, context.Configuration);
+        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
+        services.AddSingleton<ProgramCqlPackagerFactory>();
+        services.AddSingleton<PackagerCliProgram>();
         services.TryAddSingleton<OptionsConsoleDumper>();
+    }
+
+    private static void TryAddPackagerOptions(IServiceCollection services, IConfiguration config)
+    {
+        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
+            return;
+
+        services
+            .AddOptions<CqlToResourcePackagingOptions>()
+            .Configure<IConfiguration>(CqlToResourcePackagingOptions.BindConfig)
+            .ValidateOnStart();
+
+        services
+            .AddOptions<FhirResourceWriterOptions>()
+            .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
+            .ValidateOnStart();
+
+        services
+            .AddOptions<CSharpCodeWriterOptions>()
+            .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
+            .ValidateOnStart();
     }
 
     private static int Run(IHostBuilder hostBuilder)
@@ -135,7 +155,7 @@ public class Program
         {
             return hostBuilder.Build();
         }
-        catch (OptionsValidationException e) when (e.OptionsType == typeof(PackagerOptions))
+        catch (OptionsValidationException e) when (e.OptionsType == typeof(CqlToResourcePackagingOptions))
         {
             foreach (var failure in e.Failures)
             {

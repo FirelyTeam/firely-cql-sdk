@@ -7,7 +7,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "BetweenIntTrue":
 		///	( 4 between 2 and 6 ) = true
 		/// </summary>
@@ -20,8 +20,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqTrueTrue":
 		///	( true = true ) = true
 		/// </summary>
@@ -34,8 +34,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqTrueFalse":
 		///	( true = false ) = false
 		/// </summary>
@@ -48,8 +48,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqFalseFalse":
 		///	( false = false ) = true
 		/// </summary>
@@ -62,8 +62,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqFalseTrue":
 		///	( false = true ) = false
 		/// </summary>
@@ -76,8 +76,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqNullNull":
 		///	( null = null ) = null
 		/// </summary>
@@ -90,8 +90,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqTrueNull":
 		///	( true = null ) = null
 		/// </summary>
@@ -104,8 +104,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqNullTrue":
 		///	( null = true ) = null
 		/// </summary>
@@ -118,8 +118,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqInt1Int1":
 		///	( 1 = 1 ) = true
 		/// </summary>
@@ -132,8 +132,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqInt1Int2":
 		///	( 1 = 2 ) = false
 		/// </summary>
@@ -146,8 +146,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqStringAStringA":
 		///	( 'a' = 'a' ) = true
 		/// </summary>
@@ -160,8 +160,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqStringAStringB":
 		///	( 'a' = 'b' ) = false
 		/// </summary>
@@ -174,8 +174,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqFloat1Float1":
 		///	( 1.0 = 1.0 ) = true
 		/// </summary>
@@ -188,8 +188,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqFloat1Float2":
 		///	( 1.0 = 2.0 ) = false
 		/// </summary>
@@ -202,8 +202,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqFloat1Int1":
 		///	( 1.0 = 1 ) = true
 		/// </summary>
@@ -216,8 +216,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleEqFloat1Int2":
 		///	( 1.0 = 2 ) = false
 		/// </summary>
@@ -230,8 +230,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "QuantityEqCM1CM1":
 		///	( 1'cm' = 1'cm' ) = true
 		/// </summary>
@@ -245,7 +245,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "QuantityEqCM1M01":
         ///	( 1'cm' = 0.01'm' ) = true
         /// </summary>
@@ -259,8 +259,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "QuantityEqDiffPrecision":
 		///	( 2.0'cm' = 2.00'cm' ) = true
 		/// </summary>
@@ -273,8 +273,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleEqJohnJohn":
 		///	( Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : 'John' } ) = true
 		/// </summary>
@@ -287,8 +287,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleEqJohnJane":
 		///	( Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'Jane' } ) = false
 		/// </summary>
@@ -301,8 +301,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleEqJohn1John2":
 		///	( Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'John' } ) = false
 		/// </summary>
@@ -315,8 +315,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleEqDateTimeTrue":
 		///	( Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } ) = true
 		/// </summary>
@@ -329,8 +329,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleEqDateTimeFalse":
 		///	( Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 5, 0, 0, 0) } ) = false
 		/// </summary>
@@ -343,8 +343,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleEqTimeTrue":
 		///	( Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.541 } ) = true
 		/// </summary>
@@ -357,8 +357,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleEqTimeFalse":
 		///	( Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.540 } ) = false
 		/// </summary>
@@ -371,8 +371,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeEqTodayToday":
 		///	( Today() = Today() ) = true
 		/// </summary>
@@ -385,8 +385,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeEqTodayYesterday":
 		///	( Today() = Today() - 1 days ) = false
 		/// </summary>
@@ -399,8 +399,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeEqJanJan":
 		///	( DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 1, 5, 5, 0, 0, 0, 0) ) = true
 		/// </summary>
@@ -413,8 +413,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeEqJanJuly":
 		///	( DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 7, 5, 5, 0, 0, 0, 0) ) = false
 		/// </summary>
@@ -427,8 +427,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeEqNull":
 		///	( DateTime(null) = DateTime(null) ) = null
 		/// </summary>
@@ -441,8 +441,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeUTC":
 		///	( @2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00 ) = true
 		/// </summary>
@@ -455,8 +455,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeEq10A10A":
 		///	( @T10:00:00.000 = @T10:00:00.000 ) = true
 		/// </summary>
@@ -469,8 +469,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeEq10A10P":
 		///	( @T10:00:00.000 = @T22:00:00.000 ) = false
 		/// </summary>
@@ -483,8 +483,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterZZ":
 		///	( 0 > 0 ) = false
 		/// </summary>
@@ -497,8 +497,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterZ1":
 		///	( 0 > 1 ) = false
 		/// </summary>
@@ -511,8 +511,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterZNeg1":
 		///	( 0 > -1 ) = true
 		/// </summary>
@@ -525,8 +525,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterDecZZ":
 		///	( 0.0 > 0.0 ) = false
 		/// </summary>
@@ -539,8 +539,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterDecZ1":
 		///	( 0.0 > 1.0 ) = false
 		/// </summary>
@@ -553,8 +553,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterDecZNeg1":
 		///	( 0.0 > -1.0 ) = true
 		/// </summary>
@@ -567,8 +567,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterCM0CM0":
 		///	( 0'cm' > 0'cm' ) = false
 		/// </summary>
@@ -581,8 +581,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterCM0CM1":
 		///	( 0'cm' > 1'cm' ) = false
 		/// </summary>
@@ -595,8 +595,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterCM0NegCM1":
 		///	( 0'cm' > -1'cm' ) = true
 		/// </summary>
@@ -609,8 +609,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterM1CM1":
 		///	( 1'm' > 1'cm' ) = true
 		/// </summary>
@@ -625,7 +625,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "GreaterM1CM10":
         ///	( 1'm' > 10'cm' ) = true
         /// </summary>
@@ -639,8 +639,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterAA":
 		///	( 'a' > 'a' ) = false
 		/// </summary>
@@ -653,8 +653,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterAB":
 		///	( 'a' > 'b' ) = false
 		/// </summary>
@@ -667,8 +667,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterBA":
 		///	( 'b' > 'a' ) = true
 		/// </summary>
@@ -681,8 +681,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterAThanAA":
 		///	( 'a' > 'aa' ) = false
 		/// </summary>
@@ -695,8 +695,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterAAThanA":
 		///	( 'aa' > 'a' ) = true
 		/// </summary>
@@ -709,8 +709,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterJackJill":
 		///	( 'Jack' > 'Jill' ) = false
 		/// </summary>
@@ -723,8 +723,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeGreaterTrue":
 		///	( DateTime(2012, 2, 12) > DateTime(2012, 2, 10) ) = true
 		/// </summary>
@@ -737,8 +737,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeGreaterFalse":
 		///	( DateTime(2012, 2, 12) > DateTime(2012, 2, 13) ) = false
 		/// </summary>
@@ -751,8 +751,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeGreaterTrue":
 		///	( @T10:00:00.001 > @T10:00:00.000 ) = true
 		/// </summary>
@@ -765,8 +765,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeGreaterFalse":
 		///	( @T10:00:00.000 > @T10:00:00.001 ) = false
 		/// </summary>
@@ -779,8 +779,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyGreaterNull":
 		///	( DateTime(2014) > DateTime(2014, 2, 15) ) = null
 		/// </summary>
@@ -793,8 +793,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyGreaterTrue":
 		///	( DateTime(2015) > DateTime(2014, 2, 15) ) = true
 		/// </summary>
@@ -807,8 +807,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyGreaterFalse":
 		///	( DateTime(2013) > DateTime(2014, 2, 15) ) = false
 		/// </summary>
@@ -821,8 +821,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualZZ":
 		///	( 0 >= 0 ) = true
 		/// </summary>
@@ -835,8 +835,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualZ1":
 		///	( 0 >= 1 ) = false
 		/// </summary>
@@ -849,8 +849,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualZNeg1":
 		///	( 0 >= -1 ) = true
 		/// </summary>
@@ -863,8 +863,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualDecZZ":
 		///	( 0.0 >= 0.0 ) = true
 		/// </summary>
@@ -877,8 +877,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualDecZ1":
 		///	( 0.0 >= 1.0 ) = false
 		/// </summary>
@@ -891,8 +891,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualDecZNeg1":
 		///	( 0.0 >= -1.0 ) = true
 		/// </summary>
@@ -905,8 +905,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualCM0CM0":
 		///	( 0'cm' >= 0'cm' ) = true
 		/// </summary>
@@ -919,8 +919,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualCM0CM1":
 		///	( 0'cm' >= 1'cm' ) = false
 		/// </summary>
@@ -933,8 +933,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualCM0NegCM1":
 		///	( 0'cm' >= -1'cm' ) = true
 		/// </summary>
@@ -947,8 +947,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualM1CM1":
 		///	( 1'm' >= 1'cm' ) = true
 		/// </summary>
@@ -963,7 +963,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "GreaterOrEqualM1CM10":
         ///	( 1'm' >= 10'cm' ) = true
         /// </summary>
@@ -977,8 +977,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualAA":
 		///	( 'a' >= 'a' ) = true
 		/// </summary>
@@ -991,8 +991,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualAB":
 		///	( 'a' >= 'b' ) = false
 		/// </summary>
@@ -1005,8 +1005,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualBA":
 		///	( 'b' >= 'a' ) = true
 		/// </summary>
@@ -1019,8 +1019,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualAThanAA":
 		///	( 'a' >= 'aa' ) = false
 		/// </summary>
@@ -1033,8 +1033,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualAAThanA":
 		///	( 'aa' >= 'a' ) = true
 		/// </summary>
@@ -1047,8 +1047,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "GreaterOrEqualJackJill":
 		///	( 'Jack' >= 'Jill' ) = false
 		/// </summary>
@@ -1061,8 +1061,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeGreaterEqTrue":
 		///	( DateTime(2012, 2, 12, 0, 0, 0, 0) >= DateTime(2012, 2, 10, 0, 0, 0, 0) ) = true
 		/// </summary>
@@ -1075,8 +1075,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeGreaterEqTrue2":
 		///	( DateTime(2012, 2, 12, 0, 0, 0, 0) >= DateTime(2012, 2, 12, 0, 0, 0, 0) ) = true
 		/// </summary>
@@ -1089,8 +1089,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeGreaterEqFalse":
 		///	( DateTime(2012, 2, 12, 0, 0, 0, 0) >= DateTime(2012, 2, 13, 0, 0, 0, 0) ) = false
 		/// </summary>
@@ -1103,8 +1103,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeGreaterEqTrue":
 		///	( @T10:00:00.001 >= @T10:00:00.000 ) = true
 		/// </summary>
@@ -1117,8 +1117,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeGreaterEqTrue2":
 		///	( @T10:00:00.000 >= @T10:00:00.000 ) = true
 		/// </summary>
@@ -1131,8 +1131,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeGreaterEqFalse":
 		///	( @T10:00:00.000 >= @T10:00:00.001 ) = false
 		/// </summary>
@@ -1145,8 +1145,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyGreaterEqualNull":
 		///	( DateTime(2014) >= DateTime(2014, 2, 15) ) = null
 		/// </summary>
@@ -1159,8 +1159,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyGreaterEqualTrue":
 		///	( DateTime(2015) >= DateTime(2014, 2, 15) ) = true
 		/// </summary>
@@ -1173,8 +1173,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyGreaterEqualFalse":
 		///	( DateTime(2013) >= DateTime(2014, 2, 15) ) = false
 		/// </summary>
@@ -1187,11 +1187,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessZZ":
-		///	( 0 < 0 ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessZZ":
+        ///	( 0 &lt;0 ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessZZ_Test()
@@ -1201,11 +1201,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessZ1":
-		///	( 0 < 1 ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "LessZ1":
+        ///	( 0 &lt; 1 ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessZ1_Test()
@@ -1215,11 +1215,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessZNeg1":
-		///	( 0 < -1 ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessZNeg1":
+        ///	( 0 &lt; -1 ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessZNeg1_Test()
@@ -1229,11 +1229,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessDecZZ":
-		///	( 0.0 < 0.0 ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessDecZZ":
+        ///	( 0.0 &lt; 0.0 ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessDecZZ_Test()
@@ -1243,11 +1243,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessDecZ1":
-		///	( 0.0 < 1.0 ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "LessDecZ1":
+        ///	( 0.0 &lt; 1.0 ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessDecZ1_Test()
@@ -1257,11 +1257,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessDecZNeg1":
-		///	( 0.0 < -1.0 ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessDecZNeg1":
+        ///	( 0.0 &lt; -1.0 ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessDecZNeg1_Test()
@@ -1271,11 +1271,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessCM0CM0":
-		///	( 0'cm' < 0'cm' ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessCM0CM0":
+        ///	( 0'cm' &lt; 0'cm' ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessCM0CM0_Test()
@@ -1285,11 +1285,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessCM0CM1":
-		///	( 0'cm' < 1'cm' ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "LessCM0CM1":
+        ///	( 0'cm' &lt; 1'cm' ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessCM0CM1_Test()
@@ -1299,11 +1299,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessCM0NegCM1":
-		///	( 0'cm' < -1'cm' ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessCM0NegCM1":
+        ///	( 0'cm' &lt; -1'cm' ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessCM0NegCM1_Test()
@@ -1314,9 +1314,9 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "LessM1CM1":
-        ///	( 1'm' < 1'cm' ) = false
+        ///	( 1'm' &lt; 1'cm' ) = false
         /// </summary>
         [Ignore(NotSupported)]
         [TestCategory("CqlComparisonOperatorsTest")]
@@ -1329,9 +1329,9 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "LessM1CM10":
-        ///	( 1'm' < 10'cm' ) = false
+        ///	( 1'm' &lt; 10'cm' ) = false
         /// </summary>
         [Ignore(NotSupported)]
         [TestCategory("CqlComparisonOperatorsTest")]
@@ -1343,11 +1343,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessAA":
-		///	( 'a' < 'a' ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessAA":
+        ///	( 'a' &lt; 'a' ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessAA_Test()
@@ -1357,11 +1357,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessAB":
-		///	( 'a' < 'b' ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "LessAB":
+        ///	( 'a' &lt; 'b' ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessAB_Test()
@@ -1371,11 +1371,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessBA":
-		///	( 'b' < 'a' ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessBA":
+        ///	( 'b' &lt; 'a' ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessBA_Test()
@@ -1385,11 +1385,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessAThanAA":
-		///	( 'a' < 'aa' ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "LessAThanAA":
+        ///	( 'a' &lt; 'aa' ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessAThanAA_Test()
@@ -1399,11 +1399,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessAAThanA":
-		///	( 'aa' < 'a' ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "LessAAThanA":
+        ///	( 'aa' &lt; 'a' ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessAAThanA_Test()
@@ -1413,11 +1413,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "LessJackJill":
-		///	( 'Jack' < 'Jill' ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "LessJackJill":
+        ///	( 'Jack' &lt; 'Jill' ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void LessJackJill_Test()
@@ -1427,11 +1427,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "DateTimeLessTrue":
-		///	( DateTime(2012, 2, 9) < DateTime(2012, 2, 10) ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "DateTimeLessTrue":
+        ///	( DateTime(2012, 2, 9) &lt; DateTime(2012, 2, 10) ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void DateTimeLessTrue_Test()
@@ -1441,10 +1441,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeLessFalse":
-		///	( DateTime(2012, 2, 14) < DateTime(2012, 2, 13) ) = false
+		///	( DateTime(2012, 2, 14) &lt; DateTime(2012, 2, 13) ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1455,11 +1455,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "TimeLessTrue":
-		///	( @T10:00:00.001 < @T10:00:00.002 ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "TimeLessTrue":
+        ///	( @T10:00:00.001 &lt; @T10:00:00.002 ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void TimeLessTrue_Test()
@@ -1469,11 +1469,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "TimeLessFalse":
-		///	( @T10:10:00.000 < @T10:00:00.001 ) = false
-		/// </summary>
+
+        /// <summary>
+        ///define "TimeLessFalse":
+        ///	( @T10:10:00.000 &lt; @T10:00:00.001 ) = false
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void TimeLessFalse_Test()
@@ -1483,11 +1483,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
-		///define "UncertaintyLessNull":
-		///	( DateTime(2014) < DateTime(2014, 2, 15) ) = null
-		/// </summary>
+
+        /// <summary>
+        ///define "UncertaintyLessNull":
+        ///	( DateTime(2014) &lt; DateTime(2014, 2, 15) ) = null
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void UncertaintyLessNull_Test()
@@ -1497,11 +1497,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
-		///define "UncertaintyLessTrue":
-		///	( DateTime(2013) < DateTime(2014, 2, 15) ) = true
-		/// </summary>
+
+        /// <summary>
+        ///define "UncertaintyLessTrue":
+        ///	( DateTime(2013) &lt; DateTime(2014, 2, 15) ) = true
+        /// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
         public void UncertaintyLessTrue_Test()
@@ -1511,10 +1511,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyLessFalse":
-		///	( DateTime(2015) < DateTime(2014, 2, 15) ) = false
+		///	( DateTime(2015) &lt; DateTime(2014, 2, 15) ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1525,10 +1525,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualZZ":
-		///	( 0 <= 0 ) = true
+		///	( 0 &lt;= 0 ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1539,10 +1539,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualZ1":
-		///	( 0 <= 1 ) = true
+		///	( 0 &lt;= 1 ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1553,10 +1553,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualZNeg1":
-		///	( 0 <= -1 ) = false
+		///	( 0 &lt;= -1 ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1567,10 +1567,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualDecZZ":
-		///	( 0.0 <= 0.0 ) = true
+		///	( 0.0 &lt;= 0.0 ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1581,10 +1581,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualDecZ1":
-		///	( 0.0 <= 1.0 ) = true
+		///	( 0.0 &lt;= 1.0 ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1595,10 +1595,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualDecZNeg1":
-		///	( 0.0 <= -1.0 ) = false
+		///	( 0.0 &lt;= -1.0 ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1609,10 +1609,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualCM0CM0":
-		///	( 0'cm' <= 0'cm' ) = true
+		///	( 0'cm' &lt;= 0'cm' ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1623,10 +1623,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualCM0CM1":
-		///	( 0'cm' <= 1'cm' ) = true
+		///	( 0'cm' &lt;= 1'cm' ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1637,10 +1637,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualCM0NegCM1":
-		///	( 0'cm' <= -1'cm' ) = false
+		///	( 0'cm' &lt;= -1'cm' ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1652,9 +1652,9 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "LessOrEqualM1CM1":
-        ///	( 1'm' <= 1'cm' ) = false
+        ///	( 1'm' &lt;= 1'cm' ) = false
         /// </summary>
         [Ignore(NotSupported)]
         [TestCategory("CqlComparisonOperatorsTest")]
@@ -1666,10 +1666,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualM1CM10":
-		///	( 1'm' <= 10'cm' ) = false
+		///	( 1'm' &lt;= 10'cm' ) = false
 		/// </summary>
         [Ignore(NotSupported)]
         [TestCategory("CqlComparisonOperatorsTest")]
@@ -1681,10 +1681,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualAA":
-		///	( 'a' <= 'a' ) = true
+		///	( 'a' &lt;= 'a' ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1695,10 +1695,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualAB":
-		///	( 'a' <= 'b' ) = true
+		///	( 'a' &lt;= 'b' ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1709,10 +1709,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualBA":
-		///	( 'b' <= 'a' ) = false
+		///	( 'b' &lt;= 'a' ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1723,10 +1723,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualAThanAA":
-		///	( 'a' <= 'aa' ) = true
+		///	( 'a' &lt;= 'aa' ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1737,10 +1737,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualAAThanA":
-		///	( 'aa' <= 'a' ) = false
+		///	( 'aa' &lt;= 'a' ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1751,10 +1751,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "LessOrEqualJackJill":
-		///	( 'Jack' <= 'Jill' ) = true
+		///	( 'Jack' &lt;= 'Jill' ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1765,10 +1765,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeLessEqTrue":
-		///	( DateTime(2012, 2, 9, 0, 0, 0, 0) <= DateTime(2012, 2, 10, 0, 0, 0, 0) ) = true
+		///	( DateTime(2012, 2, 9, 0, 0, 0, 0) &lt;= DateTime(2012, 2, 10, 0, 0, 0, 0) ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1779,10 +1779,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeLessEqTrue2":
-		///	( DateTime(2012, 2, 12, 0, 0, 0, 0) <= DateTime(2012, 2, 12, 0, 0, 0, 0) ) = true
+		///	( DateTime(2012, 2, 12, 0, 0, 0, 0) &lt;= DateTime(2012, 2, 12, 0, 0, 0, 0) ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1793,10 +1793,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeLessEqFalse":
-		///	( DateTime(2012, 2, 12, 1, 0, 0, 0) <= DateTime(2012, 2, 12, 0, 0, 0, 0) ) = false
+		///	( DateTime(2012, 2, 12, 1, 0, 0, 0) &lt;= DateTime(2012, 2, 12, 0, 0, 0, 0) ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1807,10 +1807,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeLessEqTrue":
-		///	( @T10:00:00.001 <= @T10:00:00.002 ) = true
+		///	( @T10:00:00.001 &lt;= @T10:00:00.002 ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1821,10 +1821,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeLessEqTrue2":
-		///	( @T10:00:00.000 <= @T10:00:00.000 ) = true
+		///	( @T10:00:00.000 &lt;= @T10:00:00.000 ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1835,10 +1835,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeLessEqFalse":
-		///	( @T10:00:00.002 <= @T10:00:00.001 ) = false
+		///	( @T10:00:00.002 &lt;= @T10:00:00.001 ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1849,10 +1849,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyLessEqualNull":
-		///	( DateTime(2014) <= DateTime(2014, 2, 15) ) = null
+		///	( DateTime(2014) &lt;= DateTime(2014, 2, 15) ) = null
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1863,10 +1863,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyLessEqualTrue":
-		///	( DateTime(2013) <= DateTime(2014, 2, 15) ) = true
+		///	( DateTime(2013) &lt;= DateTime(2014, 2, 15) ) = true
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1877,10 +1877,10 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "UncertaintyLessEqualFalse":
-		///	( DateTime(2015) <= DateTime(2014, 2, 15) ) = false
+		///	( DateTime(2015) &lt;= DateTime(2014, 2, 15) ) = false
 		/// </summary>
         [TestCategory("CqlComparisonOperatorsTest")]
         [TestMethod]
@@ -1891,8 +1891,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTrueTrue":
 		///	( true ~ true ) = true
 		/// </summary>
@@ -1905,8 +1905,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTrueFalse":
 		///	( true ~ false ) = false
 		/// </summary>
@@ -1919,8 +1919,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivFalseFalse":
 		///	( false ~ false ) = true
 		/// </summary>
@@ -1933,8 +1933,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivFalseTrue":
 		///	( false ~ true ) = false
 		/// </summary>
@@ -1947,8 +1947,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivNullNull":
 		///	( null ~ null ) = true
 		/// </summary>
@@ -1961,8 +1961,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTrueNull":
 		///	( true ~ null ) = false
 		/// </summary>
@@ -1975,8 +1975,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivNullTrue":
 		///	( null ~ true ) = false
 		/// </summary>
@@ -1989,8 +1989,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivInt1Int1":
 		///	( 1 ~ 1 ) = true
 		/// </summary>
@@ -2003,8 +2003,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivInt1Int2":
 		///	( 1 ~ 2 ) = false
 		/// </summary>
@@ -2017,8 +2017,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivStringAStringA":
 		///	( 'a' ~ 'a' ) = true
 		/// </summary>
@@ -2031,8 +2031,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivStringAStringB":
 		///	( 'a' ~ 'b' ) = false
 		/// </summary>
@@ -2045,8 +2045,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivFloat1Float1":
 		///	( 1.0 ~ 1.0 ) = true
 		/// </summary>
@@ -2059,8 +2059,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivFloat1Float2":
 		///	( 1.0 ~ 2.0 ) = false
 		/// </summary>
@@ -2073,8 +2073,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivFloat1Int1":
 		///	( 1.0 ~ 1 ) = true
 		/// </summary>
@@ -2087,8 +2087,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivFloat1Int2":
 		///	( 1.0 ~ 2 ) = false
 		/// </summary>
@@ -2101,8 +2101,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivEqCM1CM1":
 		///	( 1'cm' ~ 1'cm' ) = true
 		/// </summary>
@@ -2116,7 +2116,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "EquivEqCM1M01":
         ///	( 1'cm' ~ 0.01'm' ) = true
         /// </summary>
@@ -2130,8 +2130,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTupleJohnJohn":
 		///	( Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John' } ) = true
 		/// </summary>
@@ -2144,8 +2144,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTupleJohnJohnWithNulls":
 		///	( Tuple { Id : 1, Name : 'John', Position: null } ~ Tuple { Id : 1, Name : 'John', Position: null } ) = true
 		/// </summary>
@@ -2158,8 +2158,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTupleJohnJane":
 		///	( Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'Jane' } ) = false
 		/// </summary>
@@ -2172,8 +2172,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTupleJohn1John2":
 		///	( Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'John' } ) = false
 		/// </summary>
@@ -2186,8 +2186,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivDateTimeTodayToday":
 		///	( Today() ~ Today() ) = true
 		/// </summary>
@@ -2200,8 +2200,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivDateTimeTodayYesterday":
 		///	( Today() ~ Today() - 1 days ) = false
 		/// </summary>
@@ -2214,8 +2214,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTime10A10A":
 		///	( @T10:00:00.000 ~ @T10:00:00.000 ) = true
 		/// </summary>
@@ -2228,8 +2228,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "EquivTime10A10P":
 		///	( @T10:00:00.000 ~ @T22:00:00.000 ) = false
 		/// </summary>
@@ -2242,8 +2242,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqTrueTrue":
 		///	( true != true ) = false
 		/// </summary>
@@ -2256,8 +2256,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqTrueFalse":
 		///	( true != false ) = true
 		/// </summary>
@@ -2270,8 +2270,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqFalseFalse":
 		///	( false != false ) = false
 		/// </summary>
@@ -2284,8 +2284,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqFalseTrue":
 		///	( false != true ) = true
 		/// </summary>
@@ -2298,8 +2298,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqNullNull":
 		///	( null != null ) = null
 		/// </summary>
@@ -2312,8 +2312,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqTrueNull":
 		///	( true != null ) = null
 		/// </summary>
@@ -2326,8 +2326,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqNullTrue":
 		///	( null != true ) = null
 		/// </summary>
@@ -2340,8 +2340,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqInt1Int1":
 		///	( 1 != 1 ) = false
 		/// </summary>
@@ -2354,8 +2354,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqInt1Int2":
 		///	( 1 != 2 ) = true
 		/// </summary>
@@ -2368,8 +2368,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqStringAStringA":
 		///	( 'a' != 'a' ) = false
 		/// </summary>
@@ -2382,8 +2382,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqStringAStringB":
 		///	( 'a' != 'b' ) = true
 		/// </summary>
@@ -2396,8 +2396,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqFloat1Float1":
 		///	( 1.0 != 1.0 ) = false
 		/// </summary>
@@ -2410,8 +2410,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqFloat1Float2":
 		///	( 1.0 != 2.0 ) = true
 		/// </summary>
@@ -2424,8 +2424,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqFloat1Int1":
 		///	( 1.0 != 1 ) = false
 		/// </summary>
@@ -2438,8 +2438,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "SimpleNotEqFloat1Int2":
 		///	( 1.0 != 2 ) = true
 		/// </summary>
@@ -2452,8 +2452,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "QuantityNotEqCM1CM1":
 		///	( 1'cm' != 1'cm' ) = false
 		/// </summary>
@@ -2467,7 +2467,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summaray>
+        /// <summary>
         ///define "QuantityNotEqCM1M01":
         ///	( 1'cm' != 0.01'm' ) = false
         /// </summary>
@@ -2481,8 +2481,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleNotEqJohnJohn":
 		///	( Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : 'John' } ) = false
 		/// </summary>
@@ -2495,8 +2495,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleNotEqJohnJane":
 		///	( Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'Jane' } ) = true
 		/// </summary>
@@ -2509,8 +2509,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TupleNotEqJohn1John2":
 		///	( Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'John' } ) = true
 		/// </summary>
@@ -2523,8 +2523,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeNotEqTodayToday":
 		///	( Today() != Today() ) = false
 		/// </summary>
@@ -2537,8 +2537,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "DateTimeNotEqTodayYesterday":
 		///	( Today() != Today() - 1 days ) = true
 		/// </summary>
@@ -2551,8 +2551,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeNotEq10A10A":
 		///	( @T10:00:00.000 != @T10:00:00.000 ) = false
 		/// </summary>
@@ -2565,8 +2565,8 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
-        /// <summaray>
+
+        /// <summary>
 		///define "TimeNotEq10A10P":
 		///	( @T10:00:00.000 != @T22:00:00.000 ) = true
 		/// </summary>
@@ -2579,7 +2579,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

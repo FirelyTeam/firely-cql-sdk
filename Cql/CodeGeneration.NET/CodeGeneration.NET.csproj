@@ -21,11 +21,12 @@
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
-		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="Test" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 

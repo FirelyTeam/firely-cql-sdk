@@ -10,29 +10,28 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression Equal(elm.Equal eq, ExpressionBuilderContext ctx)
+        protected Expression Equal(Elm.Equal eq)
         {
-            var lhsExpression = TranslateExpression(eq.operand![0], ctx);
-            var rhsExpression = TranslateExpression(eq.operand![1], ctx);
-            return Equal(lhsExpression, rhsExpression, ctx);
+            var lhsExpression = TranslateExpression(eq.operand![0]);
+            var rhsExpression = TranslateExpression(eq.operand![1]);
+            return Equal(lhsExpression, rhsExpression);
         }
 
-        protected Expression NotEqual(elm.NotEqual eq, ExpressionBuilderContext ctx)
+        protected Expression NotEqual(Elm.NotEqual eq)
         {
-            var lhsExpression = TranslateExpression(eq.operand![0], ctx);
-            var rhsExpression = TranslateExpression(eq.operand![1], ctx);
-            var equal = Equal(lhsExpression, rhsExpression, ctx);
-            var not = ctx.OperatorBinding.Bind(CqlOperator.Not, ctx.RuntimeContextParameter, equal);
+            var lhsExpression = TranslateExpression(eq.operand![0]);
+            var rhsExpression = TranslateExpression(eq.operand![1]);
+            var equal = Equal(lhsExpression, rhsExpression);
+            var not = _operatorBinding.Bind(CqlOperator.Not, LibraryDefinitionsBuilder.ContextParameter, equal);
             return not;
         }
 
-        protected Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)
+        protected Expression Equal(Expression left, Expression right)
         {
             if (IsEnum(left.Type))
             {
@@ -44,26 +43,26 @@ namespace Hl7.Cql.Compiler
                 }
                 else if (right.Type == typeof(string))
                 {
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
-                        ctx.RuntimeContextParameter,
+                    var call = _operatorBinding.Bind(CqlOperator.EnumEqualsString,
+                        LibraryDefinitionsBuilder.ContextParameter,
                         Expression.Convert(left, typeof(object)),
                         right);
                     return call;
                 }
-                else throw new NotImplementedException().WithContext(ctx);
+                else throw new NotImplementedException().WithContext(this);
             }
             else if (IsEnum(right.Type))
             {
                 if (left.Type == typeof(string))
                 {
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.EnumEqualsString,
-                        ctx.RuntimeContextParameter,
+                    var call = _operatorBinding.Bind(CqlOperator.EnumEqualsString,
+                        LibraryDefinitionsBuilder.ContextParameter,
                         Expression.Convert(right, typeof(object)),
                         left);
                     return call;
 
                 }
-                else throw new NotImplementedException().WithContext(ctx);
+                else throw new NotImplementedException().WithContext(this);
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
@@ -72,23 +71,23 @@ namespace Hl7.Cql.Compiler
                 {
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
-                        throw ctx.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
+                        throw this.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
+                    var call = _operatorBinding.Bind(CqlOperator.ListEqual, LibraryDefinitionsBuilder.ContextParameter, left, right);
                     return call;
                 }
-                throw new NotImplementedException().WithContext(ctx);
+                throw new NotImplementedException().WithContext(this);
             }
             else
             {
-                var call = ctx.OperatorBinding.Bind(CqlOperator.Equal, ctx.RuntimeContextParameter, left, right);
+                var call = _operatorBinding.Bind(CqlOperator.Equal, LibraryDefinitionsBuilder.ContextParameter, left, right);
                 return call;
             }
         }
 
-        protected Expression Equivalent(elm.Equivalent eqv, ExpressionBuilderContext ctx)
+        protected Expression Equivalent(Elm.Equivalent eqv)
         {
-            var left = TranslateExpression(eqv.operand![0], ctx);
-            var right = TranslateExpression(eqv.operand![1], ctx);
+            var left = TranslateExpression(eqv.operand![0]);
+            var right = TranslateExpression(eqv.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
@@ -101,31 +100,31 @@ namespace Hl7.Cql.Compiler
                         //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
                         return Expression.Constant(false, typeof(bool?));
                     }
-                    var call = ctx.OperatorBinding.Bind(CqlOperator.ListEquivalent, ctx.RuntimeContextParameter, left, right);
+                    var call = _operatorBinding.Bind(CqlOperator.ListEquivalent, LibraryDefinitionsBuilder.ContextParameter, left, right);
                     return call;
                 }
                 else
                 {
-                    throw new NotImplementedException().WithContext(ctx);
+                    throw new NotImplementedException().WithContext(this);
                 }
             }
             else
             {
-                var call = ctx.OperatorBinding.Bind(CqlOperator.Equivalent, ctx.RuntimeContextParameter, left, right);
+                var call = _operatorBinding.Bind(CqlOperator.Equivalent, LibraryDefinitionsBuilder.ContextParameter, left, right);
                 return call;
             }
         }
 
-        protected Expression Greater(elm.Greater e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Greater, e, ctx);
+        protected Expression Greater(Elm.Greater e) =>
+            BinaryOperator(CqlOperator.Greater, e);
 
-        protected Expression GreaterOrEqual(elm.GreaterOrEqual e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.GreaterOrEqual, e, ctx);
+        protected Expression GreaterOrEqual(Elm.GreaterOrEqual e) =>
+            BinaryOperator(CqlOperator.GreaterOrEqual, e);
 
-        protected Expression Less(elm.Less e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.Less, e, ctx);
-        protected Expression LessOrEqual(elm.LessOrEqual e, ExpressionBuilderContext ctx) =>
-            BinaryOperator(CqlOperator.LessOrEqual, e, ctx);
+        protected Expression Less(Elm.Less e) =>
+            BinaryOperator(CqlOperator.Less, e);
+        protected Expression LessOrEqual(Elm.LessOrEqual e) =>
+            BinaryOperator(CqlOperator.LessOrEqual, e);
 
 
 

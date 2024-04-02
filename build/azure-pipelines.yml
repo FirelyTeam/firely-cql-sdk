@@ -6,18 +6,18 @@ resources:
     - repository: templates
       type: github
       name: FirelyTeam/azure-pipeline-templates
-      endpoint: FirelyTeam 
+      endpoint: FirelyTeam
 
 variables:
   - group: CodeSigning
   - group: APIKeys
-  - template: variables.yml  
+  - template: variables.yml
 
-pool: 
+pool:
   vmImage: $(vmImage)
 
 trigger:
-  branches: 
+  branches:
     include:
     - develop*
     - release*
@@ -26,7 +26,7 @@ trigger:
 stages:
 - stage: build
   jobs:
-  - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
+  - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
     - template: templates/build.yml  # Template reference
       parameters:
         dotNetCoreVersion: $(DOTNET_CORE_SDK)
@@ -35,9 +35,9 @@ stages:
         restoreDependencies: true
         nuGetServiceConnections: GitHubPackageGetFeed
         nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
-        pool: 
+        pool:
           vmImage: $(vmImage)
-    
+
   - ${{ if startswith(variables['Build.SourceBranch'], 'refs/tags/v') }}:  # release mode
     - template: templates/build.yml  # Template reference
       parameters:
@@ -45,7 +45,7 @@ stages:
         useVersionSuffix: false
         packageArtifacts: true
         restoreDependencies: true
-        pool: 
+        pool:
           vmImage: $(vmImage)
 
 - stage: deployToGitHub
@@ -64,15 +64,15 @@ stages:
             parameters:
               artifact: 'NuGetPackages'
               source: https://nuget.pkg.github.com/FirelyTeam/index.json
-              apiKey: $(GITHUB_PACKAGES_APIKEY)                
+              apiKey: $(GITHUB_PACKAGES_APIKEY)
 
 - stage: deployToNuget
   dependsOn: deployToGitHub
   displayName: Deploy packages to NuGet
   condition: and(succeeded(), startswith(variables['Build.SourceBranch'], 'refs/tags/v'))
   jobs:
-  - deployment: NuGet    
-    displayName: Deploy Packages to Nuget      
+  - deployment: NuGet
+    displayName: Deploy Packages to Nuget
     environment: NuGet
     strategy:
       runOnce:

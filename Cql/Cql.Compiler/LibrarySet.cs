@@ -39,13 +39,15 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// Initializes a new instance of the <see cref="LibrarySet"/> class.
     /// </summary>
     /// <param name="name">The name of the library set.</param>
-    public LibrarySet(string name = "")
+    /// <param name="libraries">A set of libraries.</param>
+    public LibrarySet(string name = "", params Library[] libraries)
     {
         Name = name;
         _librariesNotCalculatedYet = new();
         _calculatedState = EmptyCached;
         _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)>();
         AsReadOnlyDictionary = new ReadOnlyDictionaryAdapter(this);
+        AddLibraries(libraries);
     }
 
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>

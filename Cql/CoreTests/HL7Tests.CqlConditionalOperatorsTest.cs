@@ -7,7 +7,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "IfTrue1":
 		///	( if 10 > 5 then 5 else 10 ) = 5
 		/// </summary>
@@ -21,7 +21,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IfFalse1":
 		///	( if 10 = 5 then 10 + 5 else 10 - 5 ) = 5
 		/// </summary>
@@ -35,7 +35,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "IfNull1":
 		///	( if 10 = null then 5 else 10 ) = 10
 		/// </summary>
@@ -49,7 +49,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StandardCase1":
 		///	( 
 		///				case
@@ -69,7 +69,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StandardCase2":
 		///	( 
 		///				case
@@ -89,7 +89,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StandardCase3":
 		///	( 
 		///				case
@@ -109,7 +109,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SelectedCase1":
 		///	( 
 		///				case 5
@@ -129,7 +129,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SelectedCase2":
 		///	( 
 		///				case 10
@@ -149,7 +149,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SelectedCase3":
 		///	( 
 		///				case 10 + 5

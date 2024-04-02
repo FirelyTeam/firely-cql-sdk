@@ -3,6 +3,12 @@ using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
+using System.Globalization;
+using System.Runtime.Loader;
+using CoreTests;
+using Hl7.Cql.Compiler;
+using JetBrains.Annotations;
+using Microsoft.Extensions.Logging;
 
 namespace Test
 {
@@ -37,14 +43,14 @@ namespace Test
         {
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
-            var dir = new DirectoryInfo("Resources");
-            var asmContext = LibraryPackager.LoadResources(dir, lib, version);
+            var dir = LibrarySetsDirs.Demo.ResourcesDir;// new DirectoryInfo("Resources");
+            var asmContext = LoadResources(dir, lib, version);
 
             var patientEverything = new Bundle();   // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
             var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
-            var results = asmContext.Run(lib, version, context);
+            var results = AssemblyLoadContextExtensions.Run(asmContext, lib, version, context);
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
@@ -53,7 +59,7 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator_FromElm()
         {
-            var elmDir = new DirectoryInfo("../../../../Elm/Json");
+            var elmDir = LibrarySetsDirs.Demo.ElmDir;
             Assert.IsTrue(elmDir.Exists);
 
             var lib = "BCSEHEDISMY2022";
@@ -65,7 +71,7 @@ namespace Test
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var asmContext = LibraryPackager.LoadElm(elmDir, lib, version);
+            var asmContext = LoadElm(elmDir, lib, version);
             var results = asmContext.Run(lib, version, context);
             var elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
@@ -88,5 +94,72 @@ namespace Test
             Assert.IsFalse((bool?)numerator);
         }
 
+        [UsedImplicitly]
+        public static AssemblyLoadContext LoadResources(
+            DirectoryInfo dir,
+            string lib,
+            string version)
+        {
+            var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
+            using var fs = libFile.OpenRead();
+            var library = StreamExtensions.ParseFhir<Library>(fs);
+            var dependencies = library.GetDependencies(dir);
+            var allLibs = dependencies.AllLibraries();
+            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+            allLibs.LoadAssemblies(asmContext);
+
+            var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
+            using var tupleFs = tupleTypes.OpenRead();
+            var binaries = new[]
+            {
+                StreamExtensions.ParseFhir<Binary>(tupleFs)
+            };
+
+            binaries.LoadAssembles(asmContext);
+            return asmContext;
+        }
+
+        [UsedImplicitly]
+        public static AssemblyLoadContext LoadElm(
+            DirectoryInfo elmDirectory,
+            string lib,
+            string version,
+            LogLevel logLevel = LogLevel.Error,
+            int cacheSize = 0)
+        {
+            var logFactory = LoggerFactory
+                .Create(logging =>
+                {
+                    logging.AddFilter(level => level >= logLevel);
+                    logging.AddConsole(console =>
+                    {
+                        console.LogToStandardErrorThreshold = LogLevel.Error;
+                    });
+                });
+            return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
+        }
+
+        [UsedImplicitly]
+        public static AssemblyLoadContext LoadElm(
+            DirectoryInfo elmDirectory,
+            string lib,
+            string version,
+            ILoggerFactory logFactory,
+            int cacheSize)
+        {
+            LibrarySet librarySet = new();
+            librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
+            CqlPackagerFactory factory = new CqlPackagerFactory(logFactory, cacheSize);
+            var definitions = factory.LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet);
+            var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
+            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+            foreach (var (_, asmData) in assemblyData)
+            {
+                var assemblyBytes = asmData.Binary;
+                using var ms = new MemoryStream(assemblyBytes);
+                asmContext.LoadFromStream(ms);
+            }
+            return asmContext;
+        }
     }
 }

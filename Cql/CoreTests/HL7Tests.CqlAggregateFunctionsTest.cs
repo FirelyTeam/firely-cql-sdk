@@ -9,7 +9,7 @@ namespace CoreTests
     public partial class HL7Tests
     {
 
-        /// <summaray>
+        /// <summary>
 		///define "AllTrueAllTrue":
 		///	( AllTrue({true,true}) ) = true
 		/// </summary>
@@ -23,7 +23,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AllTrueTrueFirst":
 		///	( AllTrue({true,false}) ) = false
 		/// </summary>
@@ -37,7 +37,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AllTrueFalseFirst":
 		///	( AllTrue({false,true}) ) = false
 		/// </summary>
@@ -51,7 +51,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AllTrueAllTrueFalseTrue":
 		///	( AllTrue({true,false,true}) ) = false
 		/// </summary>
@@ -65,7 +65,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AllTrueAllFalseTrueFalse":
 		///	( AllTrue({false,true,false}) ) = false
 		/// </summary>
@@ -79,7 +79,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AllTrueNullFirst":
 		///	( AllTrue({null,true,true}) ) = true
 		/// </summary>
@@ -93,7 +93,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AllTrueEmptyList":
 		///	( AllTrue({}) ) = true
 		/// </summary>
@@ -107,7 +107,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueAllTrue":
 		///	( AnyTrue({true,true}) ) = true
 		/// </summary>
@@ -121,7 +121,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueAllFalse":
 		///	( AnyTrue({false,false}) ) = false
 		/// </summary>
@@ -135,7 +135,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueAllTrueFalseTrue":
 		///	( AnyTrue({true,false,true}) ) = true
 		/// </summary>
@@ -149,7 +149,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueAllFalseTrueFalse":
 		///	( AnyTrue({false,true,false}) ) = true
 		/// </summary>
@@ -163,7 +163,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueTrueFirst":
 		///	( AnyTrue({true,false}) ) = true
 		/// </summary>
@@ -177,7 +177,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueFalseFirst":
 		///	( AnyTrue({false,true}) ) = true
 		/// </summary>
@@ -191,7 +191,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueNullFirstThenTrue":
 		///	( AnyTrue({null,true}) ) = true
 		/// </summary>
@@ -205,7 +205,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueNullFirstThenFalse":
 		///	( AnyTrue({null,false}) ) = false
 		/// </summary>
@@ -219,7 +219,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AnyTrueEmptyList":
 		///	( AnyTrue({}) ) = false
 		/// </summary>
@@ -233,7 +233,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "AvgTest1":
 		///	( Avg({ 1.0, 2.0, 3.0, 6.0 }) ) = 3.0
 		/// </summary>
@@ -247,7 +247,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CountTest1":
 		///	( Count({ 15, 5, 99, null, 1 }) ) = 4
 		/// </summary>
@@ -261,7 +261,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CountTestDateTime":
 		///	( Count({ DateTime(2014), DateTime(2001), DateTime(2010) }) ) = 3
 		/// </summary>
@@ -275,7 +275,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CountTestTime":
 		///	( Count({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }) ) = 3
 		/// </summary>
@@ -289,7 +289,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "CountTestNull":
 		///	( Count({}) ) = 0
 		/// </summary>
@@ -303,7 +303,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MaxTestInteger":
 		///	( Max({ 5, 12, 1, 15, 0, 4, 90, 44 }) ) = 90
 		/// </summary>
@@ -317,7 +317,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MaxTestString":
 		///	( Max({ 'hi', 'bye', 'zebra' }) ) = 'zebra'
 		/// </summary>
@@ -331,7 +331,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MaxTestDateTime":
 		///	( Max({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }) ) = DateTime(2012, 10, 6)
 		/// </summary>
@@ -345,7 +345,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MaxTestTime":
 		///	( Max({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }) ) = @T20:59:59.999
 		/// </summary>
@@ -359,7 +359,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MedianTestDecimal":
 		///	( Median({6.0, 5.0, 4.0, 3.0, 2.0, 1.0}) ) = 3.5
 		/// </summary>
@@ -373,7 +373,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MinTestInteger":
 		///	( Min({5, 12, 1, 15, 0, 4, 90, 44}) ) = 0
 		/// </summary>
@@ -387,7 +387,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MinTestString":
 		///	( Min({'hi', 'bye', 'zebra'}) ) = 'bye'
 		/// </summary>
@@ -401,7 +401,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MinTestDateTime":
 		///	( Min({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }) ) = DateTime(2012, 9, 5)
 		/// </summary>
@@ -415,7 +415,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "MinTestTime":
 		///	( Min({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }) ) = @T05:59:59.999
 		/// </summary>
@@ -429,7 +429,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ModeTestInteger":
 		///	( Mode({ 2, 1, 8, 2, 9, 1, 9, 9 }) ) = 9
 		/// </summary>
@@ -443,7 +443,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ModeTestDateTime":
 		///	( Mode({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) }) ) = DateTime(2012, 9, 5)
 		/// </summary>
@@ -457,7 +457,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "ModeTestTime":
 		///	( Mode({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999, @T05:59:59.999 }) ) = @T05:59:59.999
 		/// </summary>
@@ -471,7 +471,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PopStdDevTest1":
 		///	( PopulationStdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 1.41421356
 		/// </summary>
@@ -485,7 +485,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "PopVarianceTest1":
 		///	( PopulationVariance({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 2.0
 		/// </summary>
@@ -499,7 +499,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "StdDevTest1":
 		///	( StdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 1.58113883
 		/// </summary>
@@ -513,7 +513,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SumTest1":
 		///	( Sum({ 6.0, 2.0, 3.0, 4.0, 5.0 }) ) = 20.0
 		/// </summary>
@@ -527,7 +527,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "SumTestNull":
 		///	( Sum({ null, 1, null }) ) = 1
 		/// </summary>
@@ -541,7 +541,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
                                         
-        /// <summaray>
+        /// <summary>
 		///define "VarianceTest1":
 		///	( Variance({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 2.5
 		/// </summary>

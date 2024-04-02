@@ -14,14 +14,14 @@ public class LibrarySetExpressionBuilderTests
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
         LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(TestUtility.CmsElmDirectory, "CumulativeMedicationDuration");
-        var f = new LibrarySetExpressionBuilderFactory(NullLoggerFactory.Instance);
-        var defs = f.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");
+        var f = new CqlCompilerFactory(NullLoggerFactory.Instance);
+        var defs = f.LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet);
         var lambdaExpression = defs["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];
         Assert.IsNotNull(lambdaExpression);
 
         var del = lambdaExpression.Compile(true);
-        var res = (CqlCode)del.DynamicInvoke(new CqlContext(CqlOperators.Create(f.FhirTypeResolver, f.TypeConverter)));
+        var res = (CqlCode)del.DynamicInvoke(new CqlContext(CqlOperators.Create(f.TypeResolver, f.TypeConverter)));
         Assert.AreEqual(("307469008", "http://snomed.info/sct"), (res.code, res.system));
     }
 

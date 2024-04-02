@@ -14,7 +14,6 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Elm;
 
-[DebuggerDisplay("Library ({NameAndVersion(false)})")]
 public partial class Library
 {
     public const string JsonMimeType = "application/elm+json";
@@ -82,7 +81,7 @@ public partial class Library
     {
         if (!file.Exists)
             throw new FileNotFoundException("File does not exist.", file.FullName);
-        
+
         using var stream = file.OpenRead();
         var library = LoadFromJson(stream);
         if (validate)
@@ -134,10 +133,6 @@ internal class LibraryByNameAndVersionHashSet : HashSet<Library>
     public LibraryByNameAndVersionHashSet(int capacity) : base(capacity, Library.EqualityComparerByNameAndVersion)
     {
     }
-
-    protected LibraryByNameAndVersionHashSet(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
 }
 
 internal class LibraryByNameAndVersionDictionary<TValue> : Dictionary<Library, TValue>
@@ -155,10 +150,6 @@ internal class LibraryByNameAndVersionDictionary<TValue> : Dictionary<Library, T
     }
 
     public LibraryByNameAndVersionDictionary(int capacity) : base(capacity, Library.EqualityComparerByNameAndVersion)
-    {
-    }
-
-    protected LibraryByNameAndVersionDictionary(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 }
