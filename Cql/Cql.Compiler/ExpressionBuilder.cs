@@ -21,7 +21,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Operators;
-using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
@@ -74,7 +73,7 @@ namespace Hl7.Cql.Compiler
                     ConvertsToTime ce => ConvertsToTime(ce),
                     Count ce => Count(ce),
                     DateFrom dfe => DateFrom(dfe),
-                    elm.DateTime dt => DateTime(dt),
+                    Elm.DateTime dt => DateTime(dt),
                     Date d => Date(d),
                     DateTimeComponentFrom dtcf => DateTimeComponentFrom(dtcf),
                     Descendents desc => Descendents(desc),
@@ -203,7 +202,7 @@ namespace Hl7.Cql.Compiler
                     ToTime e => ToTime(e),
                     Truncate trunc => Truncate(trunc),
                     TruncatedDivide div => TruncatedDivide(div),
-                    elm.Tuple tu => Tuple(tu),
+                    Elm.Tuple tu => Tuple(tu),
                     Union ue => Union(ue),
                     ValueSetRef vsre => ValueSetRef(vsre),
                     Variance variance => Variance(variance),
@@ -217,7 +216,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be)
+        protected Expression BinaryOperator(CqlOperator @operator, Elm.BinaryExpression be)
         {
             var lhsExpression = TranslateExpression(be.operand![0]);
             var rhsExpression = TranslateExpression(be.operand![1]);
@@ -225,7 +224,7 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        protected Expression UnaryOperator(CqlOperator @operator, elm.UnaryExpression unary)
+        protected Expression UnaryOperator(CqlOperator @operator, Elm.UnaryExpression unary)
         {
             var operand = TranslateExpression(unary.operand!);
             var resultType = unary.resultTypeSpecifier != null
@@ -331,7 +330,7 @@ namespace Hl7.Cql.Compiler
             return expr;
         }
 
-        protected Expression Tuple(elm.Tuple tuple)
+        protected Expression Tuple(Elm.Tuple tuple)
         {
             Type tupleType;
             if (tuple.resultTypeSpecifier is null)
@@ -340,7 +339,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var tupleTypeSpecifier = (tuple.resultTypeSpecifier as elm.TupleTypeSpecifier) ?? throw this.NewExpressionBuildingException($"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
+                var tupleTypeSpecifier = (tuple.resultTypeSpecifier as Elm.TupleTypeSpecifier) ?? throw this.NewExpressionBuildingException($"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
                 tupleType = TupleTypeFor(tupleTypeSpecifier);
             }
 
@@ -367,7 +366,7 @@ namespace Hl7.Cql.Compiler
         {
             if (list.resultTypeSpecifier == null)
                 throw this.NewExpressionBuildingException($"List is missing a result type specifier.");
-            if (list.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
+            if (list.resultTypeSpecifier is Elm.ListTypeSpecifier listTypeSpecifier)
             {
 
                 var elementType = TypeFor(listTypeSpecifier.elementType);
@@ -849,9 +848,9 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                if (retrieve.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
+                if (retrieve.resultTypeSpecifier is Elm.ListTypeSpecifier listTypeSpecifier)
                 {
-                    cqlRetrieveResultType = listTypeSpecifier.elementType is elm.NamedTypeSpecifier nts ? nts.name.Name : null;
+                    cqlRetrieveResultType = listTypeSpecifier.elementType is Elm.NamedTypeSpecifier nts ? nts.name.Name : null;
                     sourceElementType = TypeFor(listTypeSpecifier.elementType);
                 }
                 else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.").WithContext(this);

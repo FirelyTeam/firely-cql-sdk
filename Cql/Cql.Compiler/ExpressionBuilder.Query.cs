@@ -6,7 +6,6 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using elm = Elm;
 using Expression = System.Linq.Expressions.Expression;
 
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Elm.Element)>;
@@ -23,7 +22,7 @@ internal partial class ExpressionBuilder
             _ => MultiSourceQuery(query),
         };
     }
-        
+
     protected Expression SingleSourceQuery(Query query)
     {
         ExpressionBuilder ctx = this;
@@ -36,7 +35,7 @@ internal partial class ExpressionBuilder
             throw ctx.NewExpressionBuildingException("Query sources must have an expression");
 
         var source = ctx.TranslateExpression(querySource.expression);
-        
+
         var promotedSource = false;
         // promote single objects into enumerables so where works
         if (!IsOrImplementsIEnumerableOfT(source.Type))
@@ -45,7 +44,7 @@ internal partial class ExpressionBuilder
             source = arrayInit;
             promotedSource = true;
         }
-       
+
         var @return = source;
 
         Type elementType = _typeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
@@ -53,7 +52,7 @@ internal partial class ExpressionBuilder
         var rootScopeParameterName = NormalizeIdentifier(querySourceAlias);
         var rootScopeParameter = Expression.Parameter(elementType, rootScopeParameterName);
         ctx = WithScope(querySourceAlias, rootScopeParameter, querySource.expression);
-        
+
         if (query.let != null)
         {
             foreach (var let in query.let)
@@ -87,7 +86,7 @@ internal partial class ExpressionBuilder
                 }
             }
         }
-            
+
         // 20240312 EK: refactoring made this redundant, but I am not sure it really is, so I am keeping
         // it around. It was used to redefine the type for the "rootScopeParameter", which used to be defined
         // inside every if statement here (so for where, return, etc).
@@ -206,10 +205,10 @@ internal partial class ExpressionBuilder
         {
             var callSingle = ctx._operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
             @return = callSingle;
-         
+
         }
 
-        if (query.resultTypeSpecifier is elm.ListTypeSpecifier && !IsOrImplementsIEnumerableOfT(@return.Type))
+        if (query.resultTypeSpecifier is Elm.ListTypeSpecifier && !IsOrImplementsIEnumerableOfT(@return.Type))
         {
             @return = Expression.NewArrayInit(@return.Type, @return);
         }
@@ -235,7 +234,7 @@ internal partial class ExpressionBuilder
                 };
             }).ToArray(),
         };
-        var multiSourceTupleType = TupleTypeFor(tupleSpecifier, (type) => 
+        var multiSourceTupleType = TupleTypeFor(tupleSpecifier, (type) =>
             IsOrImplementsIEnumerableOfT(type)
                 ? _typeManager.Resolver.GetListElementType(type, true)!
                 : throw new NotSupportedException("Query sources must be lists."));
@@ -251,7 +250,7 @@ internal partial class ExpressionBuilder
         }
 
         var @return = source;
-        
+
         if (query.let != null)
         {
             foreach (var let in query.let)
@@ -260,7 +259,7 @@ internal partial class ExpressionBuilder
                 ctx = ctx.WithScope(let.identifier!, expression, let.expression!);
             }
         }
-        
+
         if (query.relationship is not null)
         {
             foreach (var relationship in query.relationship)
@@ -296,7 +295,7 @@ internal partial class ExpressionBuilder
                 )
                 .ToArray();
             var subContext = ctx.WithScopes(scopes);
-            
+
             var whereBody = subContext.TranslateExpression(query.where);
             var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
             var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
@@ -451,7 +450,7 @@ internal partial class ExpressionBuilder
         //Func<Bundle, Context, IEnumerable<Encounter>> x = (bundle, ctx) =>
         //    bundle.Entry.ByResourceType<Encounter>()
         //    .SelectMany(E =>
-        //        bundle.Entry.ByResourceType<Condition>() // <-- 
+        //        bundle.Entry.ByResourceType<Condition>() // <--
         //            .Where(P => true) // such that goes here
         //            .Select(P => E));
         var source = TranslateExpression(with.expression);
@@ -510,8 +509,8 @@ internal partial class ExpressionBuilder
         //  IEnumerable<Tuple1> source = <cross join expression>;
         //
         //  source
-        //    .SelectMany(T => 
-        //        bundle.Entry.ByResourceType<Condition>() // <-- 
+        //    .SelectMany(T =>
+        //        bundle.Entry.ByResourceType<Condition>() // <--
         //            .Where(P => true) // such that goes here, in place of "true"
         //            .Select(P => E));
 
@@ -540,5 +539,5 @@ internal partial class ExpressionBuilder
         return selectManyLambda;
     }
 
-        
+
 }

@@ -1,13 +1,12 @@
 ﻿using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        private Expression Message(elm.Message e)
+        private Expression Message(Elm.Message e)
         {
             var source = TranslateExpression(e.source!);
             var condition = TranslateExpression(e.condition!);

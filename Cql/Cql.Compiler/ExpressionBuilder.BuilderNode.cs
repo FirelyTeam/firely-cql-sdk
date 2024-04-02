@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
@@ -24,7 +23,7 @@ partial class ExpressionBuilder : IBuilderNode
     BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo =>
         CreateBuilderNode().BuilderDebuggerInfo;
 
-    private string FormatMessage(string message, elm.Element? element = null)
+    private string FormatMessage(string message, Elm.Element? element = null)
     {
         var locator = element?.locator;
 
@@ -35,9 +34,9 @@ partial class ExpressionBuilder : IBuilderNode
 
     public string DebuggerView => this.GetDebuggerView();
 
-    private IPopToken PushElement(elm.Element element)
+    private IPopToken PushElement(Elm.Element element)
     {
-        elm.Element? previous = _elementStack.Any() ? _elementStack.Peek() : null;
+        Elm.Element? previous = _elementStack.Any() ? _elementStack.Peek() : null;
         if (previous == element) return new EmptyDisposable();
 
         _elementStack.Push(element);
@@ -47,7 +46,7 @@ partial class ExpressionBuilder : IBuilderNode
     private readonly record struct ExpressionBuilderNode : IBuilderNode
     {
         public LibraryExpressionBuilder LibraryExpressionBuilder { get; init; }
-        public List<elm.Element> ElementStackList { get; init; }
+        public List<Elm.Element> ElementStackList { get; init; }
         public int ElementStackPosition { get; init; }
 
         public IBuilderNode? OuterBuilder => ElementStackPosition > 0
@@ -67,9 +66,9 @@ partial class ExpressionBuilder : IBuilderNode
     private readonly record struct PopElementToken : IPopToken
     {
         private readonly ExpressionBuilder _owner;
-        private readonly elm.Element? _previousElement;
+        private readonly Elm.Element? _previousElement;
 
-        public PopElementToken(ExpressionBuilder owner, elm.Element? previousElement)
+        public PopElementToken(ExpressionBuilder owner, Elm.Element? previousElement)
         {
             _owner = owner;
             _previousElement = previousElement;

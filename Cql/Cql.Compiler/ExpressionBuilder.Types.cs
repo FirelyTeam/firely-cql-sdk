@@ -1,12 +1,11 @@
 ﻿using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        private Expression IntervalExpression(elm.Interval ie)
+        private Expression IntervalExpression(Elm.Interval ie)
         {
             var lowClosed = ie.lowClosedExpression != null
                 ? TranslateExpression(ie.lowClosedExpression)
@@ -23,13 +22,13 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        private Expression Ratio(elm.Ratio re)
+        private Expression Ratio(Elm.Ratio re)
         {
-            var numExpr = new elm.Quantity();
+            var numExpr = new Elm.Quantity();
             numExpr.value = re.numerator!.value;
             numExpr.unit = re.numerator!.unit;
 
-            var denomExpr = new elm.Quantity();
+            var denomExpr = new Elm.Quantity();
             denomExpr.value = re.denominator!.value;
             denomExpr.unit = re.denominator!.unit;
 
@@ -39,7 +38,7 @@ namespace Hl7.Cql.Compiler
             return _operatorBinding.Bind(CqlOperator.Ratio, LibraryDefinitionsBuilder.ContextParameter, numExprTranslated, denomExprTranslated);
         }
 
-        private Expression Quantity(elm.Quantity quantityExpression) =>
+        private Expression Quantity(Elm.Quantity quantityExpression) =>
             _operatorBinding.Bind(CqlOperator.Quantity, LibraryDefinitionsBuilder.ContextParameter,
                 Expression.Constant(quantityExpression.value, typeof(decimal?)),
                 Expression.Constant(quantityExpression.unit, typeof(string)),

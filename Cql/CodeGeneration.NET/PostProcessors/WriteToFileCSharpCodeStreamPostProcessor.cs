@@ -19,7 +19,7 @@ internal class WriteToFileCSharpCodeStreamPostProcessor : CSharpCodeStreamPostPr
 
     public override void ProcessStream(string name, Stream stream)
     {
-        var file = new FileInfo($"{Path.Combine(_csharpCodeWriterOptions.OutDirectory!.FullName, name)}.cs");
+        var file = new FileInfo($"{Path.Combine(_csharpCodeWriterOptions.OutDirectory!.FullName, name)}.g.cs");
         _logger.LogInformation("Writing C# file: '{file}'", file.FullName);
 
         file.Directory!.Create();

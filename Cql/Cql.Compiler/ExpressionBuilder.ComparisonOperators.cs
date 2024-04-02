@@ -10,20 +10,19 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression Equal(elm.Equal eq)
+        protected Expression Equal(Elm.Equal eq)
         {
             var lhsExpression = TranslateExpression(eq.operand![0]);
             var rhsExpression = TranslateExpression(eq.operand![1]);
             return Equal(lhsExpression, rhsExpression);
         }
 
-        protected Expression NotEqual(elm.NotEqual eq)
+        protected Expression NotEqual(Elm.NotEqual eq)
         {
             var lhsExpression = TranslateExpression(eq.operand![0]);
             var rhsExpression = TranslateExpression(eq.operand![1]);
@@ -85,7 +84,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Equivalent(elm.Equivalent eqv)
+        protected Expression Equivalent(Elm.Equivalent eqv)
         {
             var left = TranslateExpression(eqv.operand![0]);
             var right = TranslateExpression(eqv.operand![1]);
@@ -116,15 +115,15 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Greater(elm.Greater e) =>
+        protected Expression Greater(Elm.Greater e) =>
             BinaryOperator(CqlOperator.Greater, e);
 
-        protected Expression GreaterOrEqual(elm.GreaterOrEqual e) =>
+        protected Expression GreaterOrEqual(Elm.GreaterOrEqual e) =>
             BinaryOperator(CqlOperator.GreaterOrEqual, e);
 
-        protected Expression Less(elm.Less e) =>
+        protected Expression Less(Elm.Less e) =>
             BinaryOperator(CqlOperator.Less, e);
-        protected Expression LessOrEqual(elm.LessOrEqual e) =>
+        protected Expression LessOrEqual(Elm.LessOrEqual e) =>
             BinaryOperator(CqlOperator.LessOrEqual, e);
 
 

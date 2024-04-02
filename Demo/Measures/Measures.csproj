@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\cql-demo.props" />
+
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-	<!--<NoWarn>CS0162</NoWarn>-->  
+	<!--<NoWarn>CS0162</NoWarn>-->
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="FHIRHelpers-4.0.001.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />

@@ -10,13 +10,12 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression After(elm.After e)
+        protected Expression After(Elm.After e)
         {
             var left = TranslateExpression(e!.operand![0]!);
             var right = TranslateExpression(e.operand[1]!);
@@ -42,7 +41,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression? Before(elm.Before e)
+        protected Expression? Before(Elm.Before e)
         {
             var left = TranslateExpression(e!.operand![0]!);
             var right = TranslateExpression(e.operand[1]!);
@@ -68,7 +67,7 @@ namespace Hl7.Cql.Compiler
                 return _operatorBinding.Bind(CqlOperator.Before, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
             }
         }
-        protected Expression Date(elm.Date e)
+        protected Expression Date(Elm.Date e)
         {
             var year = (e.year != null) ? TranslateExpression(e.year) : Expression.Constant(null, typeof(int?));
             var month = (e.month != null) ? TranslateExpression(e.month) : Expression.Constant(null, typeof(int?));
@@ -77,7 +76,7 @@ namespace Hl7.Cql.Compiler
             return _operatorBinding.Bind(CqlOperator.Date, LibraryDefinitionsBuilder.ContextParameter, year, month, day);
         }
 
-        protected Expression DateTime(elm.DateTime e)
+        protected Expression DateTime(Elm.DateTime e)
         {
             var year = e.year != null ? TranslateExpression(e.year) : Expression.Constant(null, typeof(int?));
             var month = e.month != null ? TranslateExpression(e.month) : Expression.Constant(null, typeof(int?));
@@ -96,31 +95,31 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <remarks>See https://cql.hl7.org/02-authorsguide.html#datetime-operators</remarks>
-        protected Expression DateTimeComponentFrom(elm.DateTimeComponentFrom e)
+        protected Expression DateTimeComponentFrom(Elm.DateTimeComponentFrom e)
         {
             var op = TranslateExpression(e.operand!);
             switch (e.precision)
             {
-                case elm.DateTimePrecision.Day:
-                case elm.DateTimePrecision.Month:
-                case elm.DateTimePrecision.Year:
-                case elm.DateTimePrecision.Hour:
-                case elm.DateTimePrecision.Minute:
-                case elm.DateTimePrecision.Second:
-                case elm.DateTimePrecision.Millisecond:
+                case Elm.DateTimePrecision.Day:
+                case Elm.DateTimePrecision.Month:
+                case Elm.DateTimePrecision.Year:
+                case Elm.DateTimePrecision.Hour:
+                case Elm.DateTimePrecision.Minute:
+                case Elm.DateTimePrecision.Second:
+                case Elm.DateTimePrecision.Millisecond:
                     return _operatorBinding.Bind(CqlOperator.DateTimeComponent, LibraryDefinitionsBuilder.ContextParameter, op, Precision(e.precision, e.precisionSpecified));
                 default:
                     throw new NotSupportedException($"Unsupported date time component: {e.precision}");
             }
         }
 
-        private Expression DateFrom(elm.DateFrom dfe)
+        private Expression DateFrom(Elm.DateFrom dfe)
         {
             var op = TranslateExpression(dfe.operand!);
             return _operatorBinding.Bind(CqlOperator.DateComponent, LibraryDefinitionsBuilder.ContextParameter, op);
         }
 
-        protected Expression? DifferenceBetween(elm.DifferenceBetween e)
+        protected Expression? DifferenceBetween(Elm.DifferenceBetween e)
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
@@ -128,7 +127,7 @@ namespace Hl7.Cql.Compiler
             return _operatorBinding.Bind(CqlOperator.DifferenceBetween, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
         }
 
-        protected Expression DurationBetween(elm.DurationBetween e)
+        protected Expression DurationBetween(Elm.DurationBetween e)
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
@@ -136,10 +135,10 @@ namespace Hl7.Cql.Compiler
             return _operatorBinding.Bind(CqlOperator.DurationBetween, LibraryDefinitionsBuilder.ContextParameter, left, right, precision);
         }
 
-        protected Expression? Now(elm.Now now) =>
+        protected Expression? Now(Elm.Now now) =>
             _operatorBinding.Bind(CqlOperator.Now, LibraryDefinitionsBuilder.ContextParameter);
 
-        protected Expression? SameAs(elm.SameAs e)
+        protected Expression? SameAs(Elm.SameAs e)
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
@@ -159,7 +158,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression SameOrAfter(elm.SameOrAfter e)
+        protected Expression SameOrAfter(Elm.SameOrAfter e)
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
@@ -179,7 +178,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression SameOrBefore(elm.SameOrBefore e)
+        protected Expression SameOrBefore(Elm.SameOrBefore e)
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
@@ -199,7 +198,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Time(elm.Time e)
+        protected Expression Time(Elm.Time e)
         {
             var hour = e.hour != null ? TranslateExpression(e.hour) : Expression.Constant(null, typeof(int?));
             var minute = e.minute != null ? TranslateExpression(e.minute) : Expression.Constant(null, typeof(int?));
@@ -208,13 +207,13 @@ namespace Hl7.Cql.Compiler
             return _operatorBinding.Bind(CqlOperator.Time, LibraryDefinitionsBuilder.ContextParameter, hour, minute, second, millisecond);
         }
 
-        protected Expression? TimeOfDay(elm.TimeOfDay e) =>
+        protected Expression? TimeOfDay(Elm.TimeOfDay e) =>
             _operatorBinding.Bind(CqlOperator.TimeOfDay, LibraryDefinitionsBuilder.ContextParameter);
 
-        protected Expression? TimezoneOffsetFrom(elm.TimezoneOffsetFrom e) =>
+        protected Expression? TimezoneOffsetFrom(Elm.TimezoneOffsetFrom e) =>
             UnaryOperator(CqlOperator.TimeZoneComponent, e);
 
-        protected Expression? Today(elm.Today e) =>
+        protected Expression? Today(Elm.Today e) =>
             _operatorBinding.Bind(CqlOperator.Today, LibraryDefinitionsBuilder.ContextParameter);
     }
 }
