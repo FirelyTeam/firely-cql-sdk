@@ -10,7 +10,6 @@ using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 using System.Diagnostics.CodeAnalysis;
@@ -229,7 +228,7 @@ namespace Hl7.Cql.Compiler
             var subContext = WithScopes(aliasName, new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
             return subContext;
         }
-        
+
         public Expression? Mutate(elm.Element op, Expression? expression)
         {
             foreach (var visitor in _expressionMutators)

@@ -9,7 +9,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24122.1"
+		                  PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -19,6 +21,9 @@
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\ELM\ELM.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
@@ -26,12 +31,18 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" Key="$(LibraryPKHash)" />
-    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24122.1" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Compile Update="ExpressionBuilder.*.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
+		<Compile Update="LibraryExpressionBuilder.*.cs">
+			<DependentUpon>LibraryExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="LibrarySetExpressionBuilder.*.cs">
+			<DependentUpon>LibrarySetExpressionBuilder.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
+
 </Project>

@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
 using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Compiler

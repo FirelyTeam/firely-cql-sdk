@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -97,7 +98,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                     case NET.CSharpSourceCodeStep.OnDone:
                         // Compile Tuples
-                        var tupleStreams = 
+                        var tupleStreams =
                             items
                                 .Where(item => item.isTuple)
                                 .Select(item => (item.libraryName, item.stream));
@@ -127,8 +128,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }
             var compilation = CSharpCompilation.Create($"Tuples")
-                .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel: OptimizationLevel.Release))
+                .WithOptions(CreateCSharpCompilationOptions())
                 .WithReferences(metadataReferences);
 
             var sources = new Dictionary<string, string>();
@@ -179,6 +179,14 @@ namespace Hl7.Cql.CodeGeneration.NET
             return asmData;
         }
 
+        private static CSharpCompilationOptions CreateCSharpCompilationOptions() =>
+            new(
+                outputKind: OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel: OptimizationLevel.Release,
+                deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
+                sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
+            );
+
         private static void CompileNode(
             Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
@@ -222,8 +230,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
             var compilation = CSharpCompilation.Create($"{library.NameAndVersion()!}")
-                .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel: OptimizationLevel.Release))
+                .WithOptions(CreateCSharpCompilationOptions())
                 .WithReferences(metadataReferences)
                 .AddSyntaxTrees(tree, asmInfoTree);
             var codeStream = new MemoryStream();

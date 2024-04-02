@@ -2,6 +2,7 @@
 
 using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
@@ -90,9 +91,9 @@ public class Program
         logging.ClearProviders();
 
         logging.AddFilter(level => level >= LogLevel.Trace);
-        logging.AddConsole(console =>
+        logging.AddCleanConsole(opt =>
         {
-            console.LogToStandardErrorThreshold = LogLevel.Error;
+            // opt.NoColor = true;
         });
 
         var logFile = Path.Combine(".", "build.log");
@@ -169,16 +170,5 @@ public class Program
     private static void ShowHelp()
     {
         Console.WriteLine(Usage);
-    }
-}
-
-internal class ProgramCqlPackagerFactory : CqlPackagerFactory
-{
-    public ProgramCqlPackagerFactory(
-        ILoggerFactory loggerFactory,
-        IOptions<CqlToResourcePackagingOptions> cqlToResourcePackagingOptions,
-        IOptions<CSharpCodeWriterOptions> cSharpCodeWriterOptions,
-        IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions) : base(loggerFactory, 0, cqlToResourcePackagingOptions.Value, cSharpCodeWriterOptions.Value, fhirResourceWriterOptions.Value)
-    {
     }
 }

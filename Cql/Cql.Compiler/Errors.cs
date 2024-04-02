@@ -1,4 +1,6 @@
-﻿using Hl7.Cql.Elm;
+﻿using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Elm;
+using System;
 
 namespace Hl7.Cql.Compiler;
 
@@ -16,4 +18,39 @@ internal readonly record struct LibraryIdentifierMustBeUniqueError(Library Libra
 internal readonly record struct LibraryAliasUnresolvedError(Library Library) : ILibraryError
 {
     public string GetMessage() => $"Could not resolve alias from the Library name and version. Library Identifier: '{Library}'";
+}
+
+internal readonly record struct ExpressionBuildingError : ICqlError
+{
+    private const string DefaultMessage = "Exception occurred during expression building.";
+
+    public ExpressionBuildingError(
+        IBuilderNode? context = null,
+        string? message = null)
+    {
+        Context = context;
+        Message = message ?? DefaultMessage;
+    }
+
+    public IBuilderNode? Context { get; }
+
+    private string Message { get; }
+
+    public string GetMessage()
+    {
+        var message = Context is null
+            ? Message
+            : $$"""
+                {{Message}}{{Context.GetExpressionPath()}}
+                """;
+        return message;
+    }
+}
+
+internal static class ExpressionBuildingErrorExtensions
+{
+    public static CqlException WithContext(
+        this Exception e,
+        IBuilderNode ctx) =>
+        ctx.NewExpressionBuildingException(innerException: e);
 }

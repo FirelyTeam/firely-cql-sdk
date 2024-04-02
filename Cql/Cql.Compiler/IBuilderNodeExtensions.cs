@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Fhir.Rest;
 
 namespace Hl7.Cql.Compiler;
 
@@ -21,7 +20,7 @@ internal static class IBuilderNodeExtensions
 
     public static CqlException NewExpressionBuildingException(
         this IBuilderNode context,
-        string? message = null, 
+        string? message = null,
         Exception? innerException = null) =>
         new ExpressionBuildingError(context, message).ToException(innerException);
 
