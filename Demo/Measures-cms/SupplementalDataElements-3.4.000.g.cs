@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.0.0")]
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
 public class SupplementalDataElements_3_4_000
 {
@@ -127,9 +127,9 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool? k_(Extension @this)
 			{
-				var af_ = context.Operators.Equal(@this?.Url, "ombCategory");
+				var ag_ = context.Operators.Equal(@this?.Url, "ombCategory");
 
-				return af_;
+				return ag_;
 			};
 			var l_ = context.Operators.WhereOrNull<Extension>(((E is Element)
 					? ((E as Element).Extension)
@@ -138,48 +138,50 @@ public class SupplementalDataElements_3_4_000
 				@this?.Value;
 			var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
 			var o_ = context.Operators.SingleOrNull<DataType>(n_);
-			var p_ = FHIRHelpers_4_3_000.ToCode(o_);
-			var q_ = new CqlCode[]
+			var p_ = context.Operators.Convert<Coding>(o_);
+			var q_ = FHIRHelpers_4_3_000.ToCode(p_);
+			var r_ = new CqlCode[]
 			{
-				p_,
+				q_,
 			};
-			bool? r_(Extension @this)
+			bool? s_(Extension @this)
 			{
-				var ag_ = context.Operators.Equal(@this?.Url, "detailed");
-
-				return ag_;
-			};
-			var s_ = context.Operators.WhereOrNull<Extension>(((E is Element)
-					? ((E as Element).Extension)
-					: null), r_);
-			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, m_);
-			CqlCode v_(DataType @this)
-			{
-				var ah_ = FHIRHelpers_4_3_000.ToCode(@this);
+				var ah_ = context.Operators.Equal(@this?.Url, "detailed");
 
 				return ah_;
 			};
-			var w_ = context.Operators.SelectOrNull<DataType, CqlCode>(u_, v_);
-			var x_ = context.Operators.ValueSetUnion((q_ as IEnumerable<CqlCode>), w_);
-			bool? y_(Extension @this)
-			{
-				var ai_ = context.Operators.Equal(@this?.Url, "text");
-
-				return ai_;
-			};
-			var z_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+			var t_ = context.Operators.WhereOrNull<Extension>(((E is Element)
 					? ((E as Element).Extension)
-					: null), y_);
-			var ab_ = context.Operators.SelectOrNull<Extension, DataType>(z_, m_);
-			var ac_ = context.Operators.SingleOrNull<DataType>(ab_);
-			var ad_ = context.Operators.Convert<string>(ac_);
-			var ae_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+					: null), s_);
+			var v_ = context.Operators.SelectOrNull<Extension, DataType>(t_, m_);
+			CqlCode w_(DataType @this)
 			{
-				codes = x_,
-				display = ad_,
+				var ai_ = context.Operators.Convert<Coding>(@this);
+				var aj_ = FHIRHelpers_4_3_000.ToCode(ai_);
+
+				return aj_;
+			};
+			var x_ = context.Operators.SelectOrNull<DataType, CqlCode>(v_, w_);
+			var y_ = context.Operators.ValueSetUnion((r_ as IEnumerable<CqlCode>), x_);
+			bool? z_(Extension @this)
+			{
+				var ak_ = context.Operators.Equal(@this?.Url, "text");
+
+				return ak_;
+			};
+			var aa_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+					? ((E as Element).Extension)
+					: null), z_);
+			var ac_ = context.Operators.SelectOrNull<Extension, DataType>(aa_, m_);
+			var ad_ = context.Operators.SingleOrNull<DataType>(ac_);
+			var ae_ = context.Operators.Convert<string>(ad_);
+			var af_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			{
+				codes = y_,
+				display = ae_,
 			};
 
-			return ae_;
+			return af_;
 		};
 		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
 		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
@@ -259,16 +261,17 @@ public class SupplementalDataElements_3_4_000
 			var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
 			CqlCode o_(DataType @this)
 			{
-				var af_ = FHIRHelpers_4_3_000.ToCode(@this);
+				var af_ = context.Operators.Convert<Coding>(@this);
+				var ag_ = FHIRHelpers_4_3_000.ToCode(af_);
 
-				return af_;
+				return ag_;
 			};
 			var p_ = context.Operators.SelectOrNull<DataType, CqlCode>(n_, o_);
 			bool? q_(Extension @this)
 			{
-				var ag_ = context.Operators.Equal(@this?.Url, "detailed");
+				var ah_ = context.Operators.Equal(@this?.Url, "detailed");
 
-				return ag_;
+				return ah_;
 			};
 			var r_ = context.Operators.WhereOrNull<Extension>(((R is Element)
 					? ((R as Element).Extension)
@@ -276,17 +279,18 @@ public class SupplementalDataElements_3_4_000
 			var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, m_);
 			CqlCode u_(DataType @this)
 			{
-				var ah_ = FHIRHelpers_4_3_000.ToCode(@this);
+				var ai_ = context.Operators.Convert<Coding>(@this);
+				var aj_ = FHIRHelpers_4_3_000.ToCode(ai_);
 
-				return ah_;
+				return aj_;
 			};
 			var v_ = context.Operators.SelectOrNull<DataType, CqlCode>(t_, u_);
 			var w_ = context.Operators.ValueSetUnion(p_, v_);
 			bool? x_(Extension @this)
 			{
-				var ai_ = context.Operators.Equal(@this?.Url, "text");
+				var ak_ = context.Operators.Equal(@this?.Url, "text");
 
-				return ai_;
+				return ak_;
 			};
 			var y_ = context.Operators.WhereOrNull<Extension>(((R is Element)
 					? ((R as Element).Extension)

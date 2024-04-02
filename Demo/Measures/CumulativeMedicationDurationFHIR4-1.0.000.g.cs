@@ -643,7 +643,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					var w_ = FHIRHelpers_4_0_001.ToInterval((p_?.Timing?.Repeat?.Bounds as Period));
 					var x_ = context.Operators.Start(w_);
 					var z_ = context.Operators.Start(s_);
-					var ab_ = FHIRHelpers_4_0_001.ToQuantity(R?.DispenseRequest?.ExpectedSupplyDuration);
+					var ab_ = FHIRHelpers_4_0_001.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
 					var ac_ = FHIRHelpers_4_0_001.ToQuantity(R?.DispenseRequest?.Quantity);
 					var ae_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((p_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var af_ = FHIRHelpers_4_0_001.ToInterval((ae_?.Dose as Range));

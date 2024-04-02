@@ -894,7 +894,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				var i_ = this.Patient();
 				var j_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
-				var k_ = FHIRHelpers_4_0_001.ToQuantity((choice as Age));
+				var k_ = FHIRHelpers_4_0_001.ToQuantity(((choice as Age) as Quantity));
 				var l_ = context.Operators.Add(j_, k_);
 				var n_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var p_ = context.Operators.Add(n_, k_);
@@ -1015,7 +1015,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				var h_ = this.Patient();
 				var i_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
-				var j_ = FHIRHelpers_4_0_001.ToQuantity((condition?.Abatement as Age));
+				var j_ = FHIRHelpers_4_0_001.ToQuantity(((condition?.Abatement as Age) as Quantity));
 				var k_ = context.Operators.Add(i_, j_);
 				var m_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
 				var o_ = context.Operators.Add(m_, j_);

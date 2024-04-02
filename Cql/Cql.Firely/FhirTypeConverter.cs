@@ -9,10 +9,7 @@
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
-using Hl7.Fhir.Model;
-using Hl7.Fhir.Support;
 using Hl7.Fhir.Utility;
-using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text;
 using M = Hl7.Fhir.Model;
@@ -27,9 +24,9 @@ namespace Hl7.Cql.Fhir
         /// <summary>
         /// Singleton for the default configuration of this TypeConverter
         /// </summary>
-        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
+        public static readonly TypeConverter Default = Create(M.ModelInfo.ModelInspector);
 
-        static LRUCache<CqlDateTime>? dateTimes;
+        private static LRUCache<CqlDateTime>? _dateTimes;
 
         /// <summary>
         /// Allows for the creation of a converter with the specified model 
@@ -40,9 +37,9 @@ namespace Hl7.Cql.Fhir
         public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
         {
             var lruCacheSize = cacheSize ?? 0;  
-            if (lruCacheSize > 0 && dateTimes is null)
+            if (lruCacheSize > 0 && _dateTimes is null)
             {
-                dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
+                _dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
             }
 
             return TypeConverter
@@ -56,9 +53,9 @@ namespace Hl7.Cql.Fhir
 
         internal static TypeConverter CreateQuantityConversions(this TypeConverter converter)
         {
-            converter.AddConversion<Quantity, Age>(q =>
+            converter.AddConversion<M.Quantity, M.Age>(q =>
             {
-                var a = new Age();
+                var a = new M.Age();
                 q.CopyTo(a);
                 return a;
             });
@@ -82,8 +79,8 @@ namespace Hl7.Cql.Fhir
                 return null;
             });
             add((M.FhirUrl p) => p.Value);
-            add((M.Integer c) => new UnsignedInt(c.Value));
-            add((M.Integer c) => new PositiveInt(c.Value));
+            add((M.Integer c) => new M.UnsignedInt(c.Value));
+            add((M.Integer c) => new M.PositiveInt(c.Value));
             add((M.Code c) => c.Value);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
@@ -95,7 +92,7 @@ namespace Hl7.Cql.Fhir
                 if (f.Value is null)
                     return null;
 
-                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
+                if (_dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                 {
                     return datetime;
                 }
@@ -107,7 +104,7 @@ namespace Hl7.Cql.Fhir
                         dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
                         dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
 
-                    dateTimes?.Insert(f.Value, cqlDateTime);
+                    _dateTimes?.Insert(f.Value, cqlDateTime);
                     return cqlDateTime;
                 }
 
@@ -118,7 +115,7 @@ namespace Hl7.Cql.Fhir
                 if (f.Value is null)
                     return null;
 
-                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
+                if (_dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                     return datetime.DateOnly;
 
                 if (f.TryToDateTime(out var dt))
@@ -128,7 +125,7 @@ namespace Hl7.Cql.Fhir
                         dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
                         dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
 
-                    dateTimes?.Insert(f.Value, cqlDateTime);
+                    _dateTimes?.Insert(f.Value, cqlDateTime);
                     return cqlDateTime.DateOnly;
                 }
 
@@ -155,7 +152,7 @@ namespace Hl7.Cql.Fhir
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));
             add((M.UnsignedInt ui) => ui.ToString());
             add((M.DataType dt) => ConvertChoiceTypeToString(dt));
-            add((M.DataType dt) => dt as Coding);
+            add((M.DataType dt) => dt as M.Coding);
 
             add((M.Canonical c) => c.ToString());
 
@@ -165,9 +162,8 @@ namespace Hl7.Cql.Fhir
             // Add a basic Fhir primitive->Cql primitive conversion
             void add<I, O>(Func<I, O> tos)
             {
-                converter.AddConversion<I, O>(tos);
-                if (!toTypes.Contains(typeof(O)))
-                    toTypes.Add(typeof(O));
+                converter.AddConversion(tos);
+                toTypes.Add(typeof(O));
             }
 
             // Add a ParameterComponent->Cql primitive via the now registered basic conversion.
@@ -179,14 +175,14 @@ namespace Hl7.Cql.Fhir
 
             // This is our implementation of FHIRHelpers.ToString() for the basic datatypes,
             // since the ELM->CQL generator does not always insert a ToString() where we would
-            // need it (i.e. when it know that a choice type is a string, but we don't)
-            string? ConvertChoiceTypeToString(DataType dt)
+            // need it (i.e. when it know that a choice type is a string, but we don't).
+            string? ConvertChoiceTypeToString(M.DataType dt)
             { 
                 return dt switch
                 {
-                    FhirString fs => fs.Value,
-                    PrimitiveType { ObjectValue: string os } => os,
-                    PrimitiveType pt => pt.ObjectValue?.ToString(),
+                    M.FhirString fs => fs.Value,
+                    M.PrimitiveType { ObjectValue: string os } => os,
+                    M.PrimitiveType pt => pt.ObjectValue?.ToString(),
                     _ => throw new InvalidCastException($"Cannot cast a FHIR value of type {dt.TypeName} to a string")  
                 };
             }
@@ -323,8 +319,8 @@ namespace Hl7.Cql.Fhir
                 else return null;
             });
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
-            converter.AddConversion<string, FhirUri>(str => new FhirUri(str));
-            converter.AddConversion<FhirUri, string>(uri => uri.Value);
+            converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
+            converter.AddConversion<M.FhirUri, string>(uri => uri.Value);
             //converter.AddConversion<M.Quantity.QuantityComparator, string>(qc => qc switch
             //{
             //    M.Quantity.QuantityComparator.Ad => "=",
@@ -357,11 +353,11 @@ namespace Hl7.Cql.Fhir
 
             void addEnumConversion(Type enumType)
             {
-                var codeType = typeof(Code<>).MakeGenericType(enumType);
+                var codeType = typeof(M.Code<>).MakeGenericType(enumType);
                 var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
                 converter.AddConversion(codeType, typeof(CqlCode), (code) =>
                 {
-                    var systemAndCode = (ISystemAndCode)code;
+                    var systemAndCode = (M.ISystemAndCode)code;
                     return new CqlCode(systemAndCode.Code, systemAndCode.System);
                 });
                 converter.AddConversion(codeType, nullableEnumType, (code) => 
@@ -371,7 +367,7 @@ namespace Hl7.Cql.Fhir
 
                 converter.AddConversion(codeType, typeof(string), (code) =>
                 {
-                    var systemAndCode = (ISystemAndCode)code;
+                    var systemAndCode = (M.ISystemAndCode)code;
                     return systemAndCode.Code;
                 });
 

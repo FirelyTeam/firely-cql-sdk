@@ -152,7 +152,7 @@ namespace Hl7.Cql.Conversion
         {
             if (from == null)
                 return null;
-            var fromType = from?.GetType() ?? throw new ArgumentNullException(nameof(from));
+            var fromType = from.GetType();
             if (Converters.TryGetValue(fromType, out var toDictionary))
                 if (toDictionary.TryGetValue(to, out Func<object, object>? convert))
                     return convert(from);

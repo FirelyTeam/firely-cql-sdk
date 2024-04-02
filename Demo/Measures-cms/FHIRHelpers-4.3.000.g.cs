@@ -486,7 +486,7 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Age)
 			{
-				var g_ = this.ToQuantity((value as Age));
+				var g_ = this.ToQuantity(((value as Age) as Quantity));
 
 				return (g_ as object);
 			}
@@ -504,19 +504,19 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Count)
 			{
-				var j_ = this.ToQuantity((value as Count));
+				var j_ = this.ToQuantity(((value as Count) as Quantity));
 
 				return (j_ as object);
 			}
 			else if (value is Distance)
 			{
-				var k_ = this.ToQuantity((value as Distance));
+				var k_ = this.ToQuantity(((value as Distance) as Quantity));
 
 				return (k_ as object);
 			}
 			else if (value is Duration)
 			{
-				var l_ = this.ToQuantity((value as Duration));
+				var l_ = this.ToQuantity(((value as Duration) as Quantity));
 
 				return (l_ as object);
 			}

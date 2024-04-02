@@ -1060,7 +1060,7 @@ public class CumulativeMedicationDuration_4_0_000
 		{
 			CqlInterval<CqlDate> e_()
 			{
-				if ((context.Operators.And(context.Operators.Not((bool?)(((context.Operators.DateFrom(context.Operators.Start((FHIRHelpers_4_3_000.ToValue((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds) as CqlInterval<CqlDateTime>))) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement))) ?? context.Operators.DateFrom(context.Operators.Start(FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod)))) is null)), context.Operators.Not((bool?)(context.Operators.Multiply(((context.Operators.ConvertQuantity(FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.ExpectedSupplyDuration), "d"))?.value ?? context.Operators.Divide(FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity)?.value, context.Operators.Multiply((context.Operators.End((FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlInterval<CqlQuantity>)) ?? (FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlQuantity))?.value, ((this.ToDaily((((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyMaxElement)?.Value ?? ((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyElement)?.Value), this.Quantity(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodElement)?.Value, context.Operators.Convert<Code<Timing.UnitsOfTime>>(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodUnitElement)?.Value))) ?? context.Operators.ConvertIntegerToDecimal(context.Operators.CountOrNull<CqlTime>(context.Operators.LateBoundProperty<IEnumerable<CqlTime>>((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.TimeOfDayElement, "value")))) ?? (decimal?)1.0m)))), context.Operators.ConvertIntegerToDecimal(context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0)))) is null))) ?? false))
+				if ((context.Operators.And(context.Operators.Not((bool?)(((context.Operators.DateFrom(context.Operators.Start((FHIRHelpers_4_3_000.ToValue((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds) as CqlInterval<CqlDateTime>))) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement))) ?? context.Operators.DateFrom(context.Operators.Start(FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod)))) is null)), context.Operators.Not((bool?)(context.Operators.Multiply(((context.Operators.ConvertQuantity(FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity)), "d"))?.value ?? context.Operators.Divide(FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity)?.value, context.Operators.Multiply((context.Operators.End((FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlInterval<CqlQuantity>)) ?? (FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlQuantity))?.value, ((this.ToDaily((((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyMaxElement)?.Value ?? ((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyElement)?.Value), this.Quantity(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodElement)?.Value, context.Operators.Convert<string>(context.Operators.Convert<Code<Timing.UnitsOfTime>>(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodUnitElement)?.Value)))) ?? context.Operators.ConvertIntegerToDecimal(context.Operators.CountOrNull<CqlTime>(context.Operators.LateBoundProperty<IEnumerable<CqlTime>>((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.TimeOfDayElement, "value")))) ?? (decimal?)1.0m)))), context.Operators.ConvertIntegerToDecimal(context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0)))) is null))) ?? false))
 				{
 					var f_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
 					var g_ = FHIRHelpers_4_3_000.ToValue(f_?.Timing?.Repeat?.Bounds);
@@ -1077,7 +1077,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var t_ = context.Operators.DateFrom(j_);
 					var v_ = context.Operators.Start(l_);
 					var w_ = context.Operators.DateFrom(v_);
-					var x_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.ExpectedSupplyDuration);
+					var x_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
 					var y_ = context.Operators.ConvertQuantity(x_, "d");
 					var z_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
 					var ab_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((f_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
@@ -1086,47 +1086,48 @@ public class CumulativeMedicationDuration_4_0_000
 					var af_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((f_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var ag_ = FHIRHelpers_4_3_000.ToValue(af_?.Dose);
 					var al_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(f_?.Timing?.Repeat?.PeriodUnitElement?.Value);
-					var am_ = this.Quantity(f_?.Timing?.Repeat?.PeriodElement?.Value, al_);
-					var an_ = this.ToDaily((f_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? f_?.Timing?.Repeat?.FrequencyElement?.Value), am_);
-					var ap_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(f_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var aq_ = context.Operators.CountOrNull<CqlTime>(ap_);
-					var ar_ = context.Operators.ConvertIntegerToDecimal(aq_);
-					var as_ = context.Operators.Multiply((ad_ ?? (ag_ as CqlQuantity))?.value, ((an_ ?? ar_) ?? (decimal?)1.0m));
-					var at_ = context.Operators.Divide(z_?.value, as_);
-					var au_ = context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0));
-					var av_ = context.Operators.ConvertIntegerToDecimal(au_);
-					var aw_ = context.Operators.Multiply((y_?.value ?? at_), av_);
-					var ax_ = context.Operators.ConvertIntegerToDecimal((int?)1);
-					var ay_ = context.Operators.Subtract(aw_, ax_);
-					var az_ = this.Quantity(ay_, "day");
-					var ba_ = context.Operators.Add(((r_ ?? t_) ?? w_), az_);
-					var bb_ = context.Operators.Interval(((i_ ?? k_) ?? n_), ba_, true, true);
+					var am_ = context.Operators.Convert<string>(al_);
+					var an_ = this.Quantity(f_?.Timing?.Repeat?.PeriodElement?.Value, am_);
+					var ao_ = this.ToDaily((f_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? f_?.Timing?.Repeat?.FrequencyElement?.Value), an_);
+					var aq_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(f_?.Timing?.Repeat?.TimeOfDayElement, "value");
+					var ar_ = context.Operators.CountOrNull<CqlTime>(aq_);
+					var as_ = context.Operators.ConvertIntegerToDecimal(ar_);
+					var at_ = context.Operators.Multiply((ad_ ?? (ag_ as CqlQuantity))?.value, ((ao_ ?? as_) ?? (decimal?)1.0m));
+					var au_ = context.Operators.Divide(z_?.value, at_);
+					var av_ = context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0));
+					var aw_ = context.Operators.ConvertIntegerToDecimal(av_);
+					var ax_ = context.Operators.Multiply((y_?.value ?? au_), aw_);
+					var ay_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+					var az_ = context.Operators.Subtract(ax_, ay_);
+					var ba_ = this.Quantity(az_, "day");
+					var bb_ = context.Operators.Add(((r_ ?? t_) ?? w_), ba_);
+					var bc_ = context.Operators.Interval(((i_ ?? k_) ?? n_), bb_, true, true);
 
-					return bb_;
+					return bc_;
 				}
 				else if ((context.Operators.And(context.Operators.Not((bool?)(((context.Operators.DateFrom(context.Operators.Start((FHIRHelpers_4_3_000.ToValue((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds) as CqlInterval<CqlDateTime>))) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement))) ?? context.Operators.DateFrom(context.Operators.Start(FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod)))) is null)), context.Operators.Not((bool?)((FHIRHelpers_4_3_000.ToValue((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds) as CqlInterval<CqlDateTime>)?.high is null))) ?? false))
 				{
-					var bc_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-					var bd_ = FHIRHelpers_4_3_000.ToValue(bc_?.Timing?.Repeat?.Bounds);
-					var be_ = context.Operators.Start((bd_ as CqlInterval<CqlDateTime>));
-					var bf_ = context.Operators.DateFrom(be_);
-					var bg_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
-					var bh_ = context.Operators.DateFrom(bg_);
-					var bi_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
-					var bj_ = context.Operators.Start(bi_);
-					var bk_ = context.Operators.DateFrom(bj_);
-					var bm_ = FHIRHelpers_4_3_000.ToValue(bc_?.Timing?.Repeat?.Bounds);
-					var bn_ = context.Operators.End((bm_ as CqlInterval<CqlDateTime>));
-					var bo_ = context.Operators.DateFrom(bn_);
-					var bp_ = context.Operators.Interval(((bf_ ?? bh_) ?? bk_), bo_, true, true);
+					var bd_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var be_ = FHIRHelpers_4_3_000.ToValue(bd_?.Timing?.Repeat?.Bounds);
+					var bf_ = context.Operators.Start((be_ as CqlInterval<CqlDateTime>));
+					var bg_ = context.Operators.DateFrom(bf_);
+					var bh_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
+					var bi_ = context.Operators.DateFrom(bh_);
+					var bj_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
+					var bk_ = context.Operators.Start(bj_);
+					var bl_ = context.Operators.DateFrom(bk_);
+					var bn_ = FHIRHelpers_4_3_000.ToValue(bd_?.Timing?.Repeat?.Bounds);
+					var bo_ = context.Operators.End((bn_ as CqlInterval<CqlDateTime>));
+					var bp_ = context.Operators.DateFrom(bo_);
+					var bq_ = context.Operators.Interval(((bg_ ?? bi_) ?? bl_), bp_, true, true);
 
-					return bp_;
+					return bq_;
 				}
 				else
 				{
-					CqlInterval<CqlDate> bq_ = null;
+					CqlInterval<CqlDate> br_ = null;
 
-					return (bq_ as CqlInterval<CqlDate>);
+					return (br_ as CqlInterval<CqlDate>);
 				};
 			};
 
@@ -1149,7 +1150,7 @@ public class CumulativeMedicationDuration_4_0_000
 		{
 			CqlInterval<CqlDate> e_()
 			{
-				if ((context.Operators.And(context.Operators.Not((bool?)((context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(D?.WhenHandedOverElement)) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(D?.WhenPreparedElement))) is null)), context.Operators.Not((bool?)(((context.Operators.ConvertQuantity(FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply), "d"))?.value ?? context.Operators.Divide(FHIRHelpers_4_3_000.ToQuantity(D?.Quantity)?.value, context.Operators.Multiply((context.Operators.End((FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlInterval<CqlQuantity>)) ?? (FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlQuantity))?.value, ((this.ToDaily((((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyMaxElement)?.Value ?? ((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyElement)?.Value), this.Quantity(((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodElement)?.Value, context.Operators.Convert<Code<Timing.UnitsOfTime>>(((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodUnitElement)?.Value))) ?? context.Operators.ConvertIntegerToDecimal(context.Operators.CountOrNull<CqlTime>(context.Operators.LateBoundProperty<IEnumerable<CqlTime>>((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.TimeOfDayElement, "value")))) ?? (decimal?)1.0m)))) is null))) ?? false))
+				if ((context.Operators.And(context.Operators.Not((bool?)((context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(D?.WhenHandedOverElement)) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(D?.WhenPreparedElement))) is null)), context.Operators.Not((bool?)(((context.Operators.ConvertQuantity(FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply), "d"))?.value ?? context.Operators.Divide(FHIRHelpers_4_3_000.ToQuantity(D?.Quantity)?.value, context.Operators.Multiply((context.Operators.End((FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlInterval<CqlQuantity>)) ?? (FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlQuantity))?.value, ((this.ToDaily((((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyMaxElement)?.Value ?? ((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyElement)?.Value), this.Quantity(((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodElement)?.Value, context.Operators.Convert<string>(context.Operators.Convert<Code<Timing.UnitsOfTime>>(((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodUnitElement)?.Value)))) ?? context.Operators.ConvertIntegerToDecimal(context.Operators.CountOrNull<CqlTime>(context.Operators.LateBoundProperty<IEnumerable<CqlTime>>((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.TimeOfDayElement, "value")))) ?? (decimal?)1.0m)))) is null))) ?? false))
 				{
 					var f_ = context.Operators.Convert<CqlDateTime>(D?.WhenHandedOverElement);
 					var g_ = context.Operators.DateFrom(f_);
@@ -1167,26 +1168,27 @@ public class CumulativeMedicationDuration_4_0_000
 					var v_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((q_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var w_ = FHIRHelpers_4_3_000.ToValue(v_?.Dose);
 					var ab_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(q_?.Timing?.Repeat?.PeriodUnitElement?.Value);
-					var ac_ = this.Quantity(q_?.Timing?.Repeat?.PeriodElement?.Value, ab_);
-					var ad_ = this.ToDaily((q_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? q_?.Timing?.Repeat?.FrequencyElement?.Value), ac_);
-					var af_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(q_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var ag_ = context.Operators.CountOrNull<CqlTime>(af_);
-					var ah_ = context.Operators.ConvertIntegerToDecimal(ag_);
-					var ai_ = context.Operators.Multiply((t_ ?? (w_ as CqlQuantity))?.value, ((ad_ ?? ah_) ?? (decimal?)1.0m));
-					var aj_ = context.Operators.Divide(p_?.value, ai_);
-					var ak_ = context.Operators.ConvertIntegerToDecimal((int?)1);
-					var al_ = context.Operators.Subtract((o_?.value ?? aj_), ak_);
-					var am_ = this.Quantity(al_, "day");
-					var an_ = context.Operators.Add((k_ ?? m_), am_);
-					var ao_ = context.Operators.Interval((g_ ?? i_), an_, true, true);
+					var ac_ = context.Operators.Convert<string>(ab_);
+					var ad_ = this.Quantity(q_?.Timing?.Repeat?.PeriodElement?.Value, ac_);
+					var ae_ = this.ToDaily((q_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? q_?.Timing?.Repeat?.FrequencyElement?.Value), ad_);
+					var ag_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(q_?.Timing?.Repeat?.TimeOfDayElement, "value");
+					var ah_ = context.Operators.CountOrNull<CqlTime>(ag_);
+					var ai_ = context.Operators.ConvertIntegerToDecimal(ah_);
+					var aj_ = context.Operators.Multiply((t_ ?? (w_ as CqlQuantity))?.value, ((ae_ ?? ai_) ?? (decimal?)1.0m));
+					var ak_ = context.Operators.Divide(p_?.value, aj_);
+					var al_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+					var am_ = context.Operators.Subtract((o_?.value ?? ak_), al_);
+					var an_ = this.Quantity(am_, "day");
+					var ao_ = context.Operators.Add((k_ ?? m_), an_);
+					var ap_ = context.Operators.Interval((g_ ?? i_), ao_, true, true);
 
-					return ao_;
+					return ap_;
 				}
 				else
 				{
-					CqlInterval<CqlDate> ap_ = null;
+					CqlInterval<CqlDate> aq_ = null;
 
-					return (ap_ as CqlInterval<CqlDate>);
+					return (aq_ as CqlInterval<CqlDate>);
 				};
 			};
 

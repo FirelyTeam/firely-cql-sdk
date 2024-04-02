@@ -9,9 +9,9 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
-[CqlLibrary("ALARACTOQRFHIR", "0.1.001")]
-public class ALARACTOQRFHIR_0_1_001
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.0.0")]
+[CqlLibrary("AlaraCTFHIR", "0.1.001")]
+public class AlaraCTFHIR_0_1_001
 {
 
 
@@ -19,25 +19,26 @@ public class ALARACTOQRFHIR_0_1_001
 
     #region Cached values
 
-    internal Lazy<CqlValueSet> __Encounter_Inpatient;
+    internal Lazy<CqlCode> __Birth_date;
     internal Lazy<CqlCode> __Calculated_CT_global_noise;
     internal Lazy<CqlCode> __Calculated_CT_size_adjusted_dose;
     internal Lazy<CqlCode> __CT_dose_and_image_quality_category;
     internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Observation>> __Qualified_Scan;
-    internal Lazy<IEnumerable<Observation>> __Initial_Population;
-    internal Lazy<IEnumerable<Observation>> __Denominator;
-    internal Lazy<IEnumerable<Observation>> __Denominator_Exclusion;
-    internal Lazy<IEnumerable<Observation>> __Numerator;
     internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
     internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
     internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
+    internal Lazy<IEnumerable<Observation>> __Qualifying_CTScan;
+    internal Lazy<IEnumerable<Observation>> __Qualifying_CTScan_with_Values;
+    internal Lazy<bool?> __Initial_Population;
+    internal Lazy<bool?> __Denominator;
+    internal Lazy<bool?> __Denominator_Exclusion;
+    internal Lazy<bool?> __Numerator;
 
     #endregion
-    public ALARACTOQRFHIR_0_1_001(CqlContext context)
+    public AlaraCTFHIR_0_1_001(CqlContext context)
     {
         this.context = context ?? throw new ArgumentNullException("context");
 
@@ -46,22 +47,23 @@ public class ALARACTOQRFHIR_0_1_001
         QICoreCommon_2_0_000 = new QICoreCommon_2_0_000(context);
         SupplementalDataElements_3_4_000 = new SupplementalDataElements_3_4_000(context);
 
-        __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
+        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
         __Calculated_CT_global_noise = new Lazy<CqlCode>(this.Calculated_CT_global_noise_Value);
         __Calculated_CT_size_adjusted_dose = new Lazy<CqlCode>(this.Calculated_CT_size_adjusted_dose_Value);
         __CT_dose_and_image_quality_category = new Lazy<CqlCode>(this.CT_dose_and_image_quality_category_Value);
         __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __Qualified_Scan = new Lazy<IEnumerable<Observation>>(this.Qualified_Scan_Value);
-        __Initial_Population = new Lazy<IEnumerable<Observation>>(this.Initial_Population_Value);
-        __Denominator = new Lazy<IEnumerable<Observation>>(this.Denominator_Value);
-        __Denominator_Exclusion = new Lazy<IEnumerable<Observation>>(this.Denominator_Exclusion_Value);
-        __Numerator = new Lazy<IEnumerable<Observation>>(this.Numerator_Value);
         __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
         __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
+        __Qualifying_CTScan = new Lazy<IEnumerable<Observation>>(this.Qualifying_CTScan_Value);
+        __Qualifying_CTScan_with_Values = new Lazy<IEnumerable<Observation>>(this.Qualifying_CTScan_with_Values_Value);
+        __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
+        __Denominator = new Lazy<bool?>(this.Denominator_Value);
+        __Denominator_Exclusion = new Lazy<bool?>(this.Denominator_Exclusion_Value);
+        __Numerator = new Lazy<bool?>(this.Numerator_Value);
     }
     #region Dependencies
 
@@ -72,13 +74,12 @@ public class ALARACTOQRFHIR_0_1_001
 
     #endregion
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
 
-    [CqlDeclaration("Encounter Inpatient")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
-		__Encounter_Inpatient.Value;
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
 
 	private CqlCode Calculated_CT_global_noise_Value() => 
 		new CqlCode("96912-1", "http://loinc.org", null, null);
@@ -105,6 +106,7 @@ public class ALARACTOQRFHIR_0_1_001
 	{
 		var a_ = new CqlCode[]
 		{
+			new CqlCode("21112-8", "http://loinc.org", null, null),
 			new CqlCode("96912-1", "http://loinc.org", null, null),
 			new CqlCode("96913-9", "http://loinc.org", null, null),
 			new CqlCode("96914-7", "http://loinc.org", null, null),
@@ -123,7 +125,7 @@ public class ALARACTOQRFHIR_0_1_001
 		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
 		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
 		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("ALARACTOQRFHIR-0.1.001", "Measurement Period", e_);
+		var f_ = context.ResolveParameter("AlaraCTFHIR-0.1.001", "Measurement Period", e_);
 
 		return (CqlInterval<CqlDateTime>)f_;
 	}
@@ -144,68 +146,78 @@ public class ALARACTOQRFHIR_0_1_001
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Observation> Qualified_Scan_Value()
+	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	{
+		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+
+		return a_;
+	}
+
+    [CqlDeclaration("SDE Ethnicity")]
+	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+		__SDE_Ethnicity.Value;
+
+	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	{
+		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+
+		return a_;
+	}
+
+    [CqlDeclaration("SDE Payer")]
+	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+		__SDE_Payer.Value;
+
+	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	{
+		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+
+		return a_;
+	}
+
+    [CqlDeclaration("SDE Race")]
+	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+		__SDE_Race.Value;
+
+	private CqlCode SDE_Sex_Value()
+	{
+		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+
+		return a_;
+	}
+
+    [CqlDeclaration("SDE Sex")]
+	public CqlCode SDE_Sex() => 
+		__SDE_Sex.Value;
+
+	private IEnumerable<Observation> Qualifying_CTScan_Value()
 	{
 		var a_ = this.CT_dose_and_image_quality_category();
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		bool? d_(Observation CTScan)
+		bool? d_(Observation CTScanResult)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToValue(CTScan?.Effective);
+			var g_ = FHIRHelpers_4_3_000.ToValue(CTScanResult?.Effective);
 			var h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
 			var j_ = this.Patient();
-			var k_ = context.Operators.Convert<CqlDate>(j_?.BirthDateElement?.Value);
+			var k_ = context.Operators.ConvertStringToDateTime(j_?.BirthDateElement?.Value);
 			var m_ = context.Operators.Start(f_);
-			var n_ = context.Operators.DateFrom(m_);
-			var o_ = context.Operators.CalculateAgeAt(k_, n_, "year");
-			var p_ = context.Operators.GreaterOrEqual(o_, (int?)18);
-			var q_ = context.Operators.And(i_, p_);
+			var n_ = context.Operators.CalculateAgeAt(k_, m_, "year");
+			var o_ = context.Operators.GreaterOrEqual(n_, (int?)18);
+			var p_ = context.Operators.And(i_, o_);
 
-			return q_;
+			return p_;
 		};
 		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
 
 		return e_;
 	}
 
-    [CqlDeclaration("Qualified Scan")]
-	public IEnumerable<Observation> Qualified_Scan() => 
-		__Qualified_Scan.Value;
-
-	private IEnumerable<Observation> Initial_Population_Value()
-	{
-		var a_ = this.Qualified_Scan();
-		IEnumerable<Observation> c_(Observation CTScan)
-		{
-			var f_ = this.Encounter_Inpatient();
-			var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-			bool? h_(Encounter InpatientEncounter)
-			{
-				var l_ = this.Measurement_Period();
-				var m_ = FHIRHelpers_4_3_000.ToValue(CTScan?.Effective);
-				var n_ = QICoreCommon_2_0_000.ToInterval(m_);
-				var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
-
-				return o_;
-			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
-			Observation j_(Encounter InpatientEncounter) => 
-				CTScan;
-			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
-
-			return k_;
-		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(a_, c_);
-		var e_ = context.Operators.ListExcept<Observation>(a_, d_);
-
-		return e_;
-	}
-
-    [CqlDeclaration("Initial Population")]
-	public IEnumerable<Observation> Initial_Population() => 
-		__Initial_Population.Value;
+    [CqlDeclaration("Qualifying CTScan")]
+	public IEnumerable<Observation> Qualifying_CTScan() => 
+		__Qualifying_CTScan.Value;
 
     [CqlDeclaration("Global Noise Value")]
 	public decimal? Global_Noise_Value(Observation Obs)
@@ -263,17 +275,17 @@ public class ALARACTOQRFHIR_0_1_001
 		return e_;
 	}
 
-	private IEnumerable<Observation> Denominator_Value()
+	private IEnumerable<Observation> Qualifying_CTScan_with_Values_Value()
 	{
-		var a_ = this.Initial_Population();
-		bool? b_(Observation IP)
+		var a_ = this.Qualifying_CTScan();
+		bool? b_(Observation CTScan)
 		{
-			var d_ = this.Global_Noise_Value(IP);
+			var d_ = this.Global_Noise_Value(CTScan);
 			var e_ = context.Operators.Not((bool?)(d_ is null));
-			var f_ = this.Size_Adjusted_Value(IP);
+			var f_ = this.Size_Adjusted_Value(CTScan);
 			var g_ = context.Operators.Not((bool?)(f_ is null));
 			var h_ = context.Operators.And(e_, g_);
-			var i_ = FHIRHelpers_4_3_000.ToValue(IP?.Value);
+			var i_ = FHIRHelpers_4_3_000.ToValue(CTScan?.Value);
 			var j_ = context.Operators.Not((bool?)(i_ is null));
 			var k_ = context.Operators.And(h_, j_);
 
@@ -284,37 +296,62 @@ public class ALARACTOQRFHIR_0_1_001
 		return c_;
 	}
 
+    [CqlDeclaration("Qualifying CTScan with Values")]
+	public IEnumerable<Observation> Qualifying_CTScan_with_Values() => 
+		__Qualifying_CTScan_with_Values.Value;
+
+	private bool? Initial_Population_Value()
+	{
+		var a_ = this.Qualifying_CTScan();
+		var b_ = context.Operators.ExistsInList<Observation>(a_);
+
+		return b_;
+	}
+
+    [CqlDeclaration("Initial Population")]
+	public bool? Initial_Population() => 
+		__Initial_Population.Value;
+
+	private bool? Denominator_Value()
+	{
+		var a_ = this.Qualifying_CTScan_with_Values();
+		var b_ = context.Operators.ExistsInList<Observation>(a_);
+
+		return b_;
+	}
+
     [CqlDeclaration("Denominator")]
-	public IEnumerable<Observation> Denominator() => 
+	public bool? Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Observation> Denominator_Exclusion_Value()
+	private bool? Denominator_Exclusion_Value()
 	{
-		var a_ = this.Denominator();
-		bool? b_(Observation Denominator)
+		var a_ = this.Qualifying_CTScan_with_Values();
+		bool? b_(Observation CTScan)
 		{
-			var d_ = FHIRHelpers_4_3_000.ToValue(Denominator?.Value);
-			bool? e_(CqlCode @this)
+			var e_ = FHIRHelpers_4_3_000.ToValue(CTScan?.Value);
+			bool? f_(CqlCode @this)
 			{
-				var j_ = context.Operators.Not((bool?)(@this?.code is null));
+				var k_ = context.Operators.Not((bool?)(@this?.code is null));
 
-				return j_;
+				return k_;
 			};
-			var f_ = context.Operators.WhereOrNull<CqlCode>(((d_ as CqlConcept)?.codes as IEnumerable<CqlCode>), e_);
-			string g_(CqlCode @this) => 
+			var g_ = context.Operators.WhereOrNull<CqlCode>(((e_ as CqlConcept)?.codes as IEnumerable<CqlCode>), f_);
+			string h_(CqlCode @this) => 
 				@this?.code;
-			var h_ = context.Operators.SelectOrNull<CqlCode, string>(f_, g_);
-			var i_ = context.Operators.ListContains<string>(h_, "FULLBODY");
+			var i_ = context.Operators.SelectOrNull<CqlCode, string>(g_, h_);
+			var j_ = context.Operators.ListContains<string>(i_, "FULLBODY");
 
-			return i_;
+			return j_;
 		};
 		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var d_ = context.Operators.ExistsInList<Observation>(c_);
 
-		return c_;
+		return d_;
 	}
 
     [CqlDeclaration("Denominator Exclusion")]
-	public IEnumerable<Observation> Denominator_Exclusion() => 
+	public bool? Denominator_Exclusion() => 
 		__Denominator_Exclusion.Value;
 
     [CqlDeclaration("Qualifies")]
@@ -407,66 +444,23 @@ public class ALARACTOQRFHIR_0_1_001
 		return bs_;
 	}
 
-	private IEnumerable<Observation> Numerator_Value()
+	private bool? Numerator_Value()
 	{
-		var a_ = this.Denominator();
-		bool? b_(Observation Denominator)
+		var a_ = this.Qualifying_CTScan_with_Values();
+		bool? b_(Observation CTScan)
 		{
-			var d_ = this.CT_Scan_Qualifies(Denominator);
+			var e_ = this.CT_Scan_Qualifies(CTScan);
 
-			return d_;
+			return e_;
 		};
 		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var d_ = context.Operators.ExistsInList<Observation>(c_);
 
-		return c_;
+		return d_;
 	}
 
     [CqlDeclaration("Numerator")]
-	public IEnumerable<Observation> Numerator() => 
+	public bool? Numerator() => 
 		__Numerator.Value;
-
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
-	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
-
-		return a_;
-	}
-
-    [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
-		__SDE_Ethnicity.Value;
-
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
-	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
-
-		return a_;
-	}
-
-    [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
-		__SDE_Payer.Value;
-
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
-	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
-
-		return a_;
-	}
-
-    [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
-		__SDE_Race.Value;
-
-	private CqlCode SDE_Sex_Value()
-	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
-
-		return a_;
-	}
-
-    [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
-		__SDE_Sex.Value;
 
 }
