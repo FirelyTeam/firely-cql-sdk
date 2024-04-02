@@ -184,7 +184,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
                 optimizationLevel: OptimizationLevel.Release,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
-                sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null),
+                sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
         private static void CompileNode(
