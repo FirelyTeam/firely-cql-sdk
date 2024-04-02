@@ -67,26 +67,26 @@ public class DefinitionDictionary<T> where T : class
             throw new KeyNotFoundException($"No overload of {definition} matches the arguments {string.Join(",", signature.Select(p => p.Name))}");
         }
     }
-    
+
     internal T Resolve(string? libraryName, string definition, Func<Type,Type,bool> conversionCheck, params Type[] signature)
     {
             libraryName ??= string.Empty;
-            
+
             if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
             {
                 var overloads = library[definition];
                 var t = BestMatch(signature, overloads, conversionCheck);
-                
+
                 if (t is null)
                     throw new KeyNotFoundException($"No overload of {definition} matches the arguments {string.Join(",", signature.Select(p => p.Name))}");
-                else 
+                else
                     return t;
             }
             else
             {
-                throw new KeyNotFoundException($"The library {libraryName} is unknown here.");    
+                throw new KeyNotFoundException($"The library {libraryName} is unknown here.");
             }
-            
+
     }
 
     /// <summary>
@@ -451,7 +451,7 @@ public class DefinitionDictionary<T> where T : class
     }
 
     /// <summary>
-    /// One method is closer than another if all of its parameter types are narrower than (or the same as) the parameter types of the other method. 
+    /// One method is closer than another if all of its parameter types are narrower than (or the same as) the parameter types of the other method.
     /// If neither method's parameters are narrower than the other, then there is no way for to determine which method is closer to the arguments.
     /// </summary>
     /// <param name="parameterTypes">The type of the parameters being passed to the method</param>
@@ -527,7 +527,7 @@ public class DefinitionDictionary<T> where T : class
 
     internal class Tag
     {
-           
+
         public string Library { get; }
         public string Definition { get; }
         public Type[] Signature { get; }
@@ -553,7 +553,7 @@ public class DefinitionDictionary<T> where T : class
 
         /// <summary>
         /// Removes all whitespace from the value, except for a single space between 'words'.
-        /// All newlines, tabs, and other whitespace characters will be replaced by a single space.            
+        /// All newlines, tabs, and other whitespace characters will be replaced by a single space.
         /// </summary>
         /// <param name="value"></param>
         /// <returns>The <paramref name="value"/> string with only single spaces</returns>
