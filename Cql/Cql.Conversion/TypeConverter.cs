@@ -64,7 +64,6 @@ namespace Hl7.Cql.Conversion
         {
             AddConversion<Uri, string>(uri => uri.AbsoluteUri);
             AddConversion<string, Uri>(@string => new Uri(@string));
-
             return this;
         }
 

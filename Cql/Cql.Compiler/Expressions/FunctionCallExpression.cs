@@ -54,7 +54,7 @@ namespace Hl7.Cql.Compiler
         public override Expression Reduce()
         {
             var argumentTypesExpressions = Arguments
-                .Skip(1)
+                //.Skip(1)
                 .Select(a => Constant(a.Type));
 
             var typeArrayInitializer = NewArrayInit(typeof(Type), argumentTypesExpressions);

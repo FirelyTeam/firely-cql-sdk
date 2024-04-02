@@ -47,10 +47,22 @@ namespace Hl7.Cql.Fhir
 
             return TypeConverter
                 .Create()
+                .CreateQuantityConversions()
                 .ConvertSystemTypes()
                 .ConvertFhirToCqlPrimitives()
                 .ConvertCqlPrimitivesToFhir()
                 .ConvertCodeTypes(model);
+        }
+
+        internal static TypeConverter CreateQuantityConversions(this TypeConverter converter)
+        {
+            converter.AddConversion<Quantity, Age>(q =>
+            {
+                var a = new Age();
+                q.CopyTo(a);
+                return a;
+            });
+            return converter;
         }
 
         internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
@@ -338,6 +350,7 @@ namespace Hl7.Cql.Fhir
                         .Where(t => t.GetCustomAttribute<FhirEnumerationAttribute>() != null)))
                 .Distinct()
                 .ToArray();
+
             foreach (var enumType in enumTypes)
             {
                 addEnumConversion(enumType);
