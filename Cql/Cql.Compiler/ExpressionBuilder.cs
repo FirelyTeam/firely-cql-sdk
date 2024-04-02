@@ -1317,7 +1317,7 @@ namespace Hl7.Cql.Compiler
                 ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             var argumentTypes = arguments.Select(a => a.Type).ToArray();
-            var selected = LibraryContext.LibrarySetContext!.LibrarySetDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
+            var selected = LibraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
             var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
 
             // all functions still take the bundle and context parameters, plus whatver the operands
