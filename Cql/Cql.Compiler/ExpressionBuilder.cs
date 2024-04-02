@@ -1110,8 +1110,6 @@ namespace Hl7.Cql.Compiler
                 .Concat(new[] { functionType })
                 .ToArray();
 
-            var funcType = GetFuncType(funcTypeParameters);
-
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
@@ -1134,7 +1132,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands);
+            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands);
             return invoke;
         }
 
@@ -1294,15 +1292,14 @@ namespace Hl7.Cql.Compiler
 
         /// <param name="name">The function name</param>
         /// <param name="libraryAlias">If this is an external call, the local alias defined in the using statement</param>
-        /// <param name="definitionType">The Func or Action type of this definition</param>
         /// <param name="arguments">The function arguments</param>
         /// <returns></returns>
         protected Expression InvokeDefinedFunctionThroughRuntimeContext(
             string name,
             string? libraryAlias,
-            Type definitionType,
             Expression[] arguments)
         {
+
             var definitionsProperty = Expression.Property(LibraryDefinitionsBuilder.ContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
             string libraryName = LibraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
@@ -1310,11 +1307,13 @@ namespace Hl7.Cql.Compiler
 
             var argumentTypes = arguments.Select(a => a.Type).ToArray();
             var selected = LibraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
+            Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).ToArray());
             var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
 
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
-            var convertedArguments = arguments.Select((arg, i) => ChangeType(arg, parameterTypes[i]))
+            var convertedArguments = arguments
+                .Select((arg, i) => ChangeType(arg, parameterTypes[i]))
                 .Prepend(LibraryDefinitionsBuilder.ContextParameter)
                 .ToArray();
 

@@ -250,11 +250,6 @@ namespace Hl7.Cql.Compiler
             if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
                 return Expression.TypeAs(input, outputType);
 
-            // var typeName = _typeManager. input.Type.Name;
-            // var outputTypeName = outputType.Name;
-            //
-            // Debug.WriteLine($"### {typeName} --> {outputTypeName}");
-
             if (IsOrImplementsIEnumerableOfT(input.Type)
                 && IsOrImplementsIEnumerableOfT(outputType))
             {
