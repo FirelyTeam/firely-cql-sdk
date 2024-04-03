@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.0.0",
+         "translatorVersion" : "3.1.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       } ],
@@ -341,6 +341,13 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : [ {
                         "locator" : "44:5-51:3",
                         "type" : "Union",
@@ -351,6 +358,19 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : [ {
                            "locator" : "44:7-49:54",
                            "type" : "Union",
@@ -361,6 +381,19 @@
                                  "type" : "NamedTypeSpecifier"
                               }
                            },
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Encounter",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Encounter",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : [ {
                               "locator" : "44:7-47:85",
                               "type" : "Union",
@@ -371,6 +404,19 @@
                                     "type" : "NamedTypeSpecifier"
                                  }
                               },
+                              "signature" : [ {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }, {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : [ {
                                  "locator" : "44:7-45:50",
                                  "type" : "Union",
@@ -381,6 +427,19 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  },
+                                 "signature" : [ {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "44:7-44:35",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -426,6 +485,19 @@
                                  } ]
                               }, {
                                  "type" : "Union",
+                                 "signature" : [ {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "46:13-46:89",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -472,6 +544,19 @@
                               } ]
                            }, {
                               "type" : "Union",
+                              "signature" : [ {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }, {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : [ {
                                  "locator" : "48:13-48:53",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -547,6 +632,19 @@
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "precision" : "Day",
                   "type" : "IncludedIn",
+                  "signature" : [ {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : [ {
                      "locator" : "52:11-52:32",
                      "name" : "ToInterval",
@@ -588,19 +686,50 @@
                "locator" : "35:3-41:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "locator" : "35:3-38:42",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "35:3-37:23",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : [ {
                         "locator" : "35:3-37:3",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "precision" : "Year",
                         "type" : "CalculateAgeAt",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "path" : "value",
                            "type" : "Property",
@@ -616,10 +745,21 @@
                            "locator" : "35:16-36:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "type" : "DateFrom",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "36:5-36:31",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "End",
+                              "signature" : [ {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : {
                                  "locator" : "36:12-36:31",
                                  "name" : "Measurement Period",
@@ -665,6 +805,13 @@
                      "locator" : "38:9-38:42",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "38:16-38:42",
                         "name" : "Qualifying Encounters",
@@ -682,6 +829,13 @@
                   "locator" : "39:9-41:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
+                  "signature" : [ {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : {
                      "locator" : "39:16-41:5",
                      "type" : "Query",
@@ -730,6 +884,19 @@
                         "locator" : "40:9-40:75",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Overlaps",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : [ {
                            "locator" : "40:15-40:45",
                            "name" : "prevalenceInterval",
@@ -742,6 +909,10 @@
                                  "type" : "NamedTypeSpecifier"
                               }
                            },
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "40:15-40:22",
                               "resultTypeName" : "{http://hl7.org/fhir}Condition",
@@ -786,14 +957,35 @@
                "locator" : "58:3-61:69",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "locator" : "58:3-60:74",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "58:3-59:73",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "58:3-58:32",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -832,6 +1024,13 @@
                "locator" : "80:3-82:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "80:10-82:3",
                   "type" : "Query",
@@ -880,6 +1079,19 @@
                      "locator" : "81:7-81:76",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Overlaps",
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : [ {
                         "locator" : "81:13-81:46",
                         "name" : "prevalenceInterval",
@@ -892,6 +1104,10 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "81:13-81:23",
                            "resultTypeName" : "{http://hl7.org/fhir}Condition",
@@ -957,6 +1173,13 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : [ {
                         "locator" : "72:5-72:52",
                         "dataType" : "{http://hl7.org/fhir}Observation",
@@ -987,6 +1210,19 @@
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "precision" : "Day",
                   "type" : "IncludedIn",
+                  "signature" : [ {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : [ {
                      "locator" : "73:11-73:46",
                      "name" : "toInterval",
@@ -999,6 +1235,31 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Timing",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     } ],
                      "operand" : [ {
                         "locator" : "73:11-73:31",
                         "name" : "ToValue",
@@ -1087,6 +1348,13 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : [ {
                         "locator" : "76:5-76:52",
                         "dataType" : "{http://hl7.org/fhir}Observation",
@@ -1117,6 +1385,19 @@
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "precision" : "Day",
                   "type" : "IncludedIn",
+                  "signature" : [ {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : [ {
                      "locator" : "77:11-77:46",
                      "name" : "toInterval",
@@ -1129,6 +1410,31 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Timing",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     } ],
                      "operand" : [ {
                         "locator" : "77:11-77:31",
                         "name" : "ToValue",
@@ -1175,10 +1481,24 @@
                         "locator" : "77:71-77:108",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Subtract",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "77:71-77:99",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "77:80-77:99",
                               "name" : "Measurement Period",
@@ -1203,6 +1523,13 @@
                         "locator" : "77:111-77:137",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "77:118-77:137",
                            "name" : "Measurement Period",
@@ -1229,10 +1556,24 @@
                "locator" : "64:3-69:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "locator" : "64:3-66:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "64:5-64:57",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -1242,6 +1583,13 @@
                      "locator" : "65:11-65:57",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "65:18-65:57",
                         "name" : "Retinal Exam in Measurement Period",
@@ -1259,10 +1607,21 @@
                   "locator" : "67:8-69:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "67:10-67:70",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Not",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
                         "locator" : "67:14-67:70",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -1273,6 +1632,13 @@
                      "locator" : "68:13-68:73",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "68:20-68:73",
                         "name" : "Retinal Exam in Measurement Period or Year Prior",

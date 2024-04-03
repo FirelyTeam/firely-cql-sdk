@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.0.0",
+         "translatorVersion" : "3.1.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       }, {
@@ -166,6 +166,10 @@
                               "name" : "ToString",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}uri",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "path" : "url",
                                  "scope" : "$this",
@@ -236,6 +240,19 @@
                                  "type" : "NamedTypeSpecifier"
                               }
                            },
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : [ {
                               "locator" : "32:14-32:30",
                               "type" : "List",
@@ -273,6 +290,10 @@
                                              "name" : "ToString",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}uri",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "path" : "url",
                                                 "scope" : "$this",
@@ -329,6 +350,10 @@
                                           "name" : "ToString",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}uri",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "path" : "url",
                                              "scope" : "$this",
@@ -392,6 +417,10 @@
                                     "name" : "ToString",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}uri",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "path" : "url",
                                        "scope" : "$this",
@@ -663,6 +692,10 @@
                               "name" : "ToString",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}uri",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "path" : "url",
                                  "scope" : "$this",
@@ -733,6 +766,19 @@
                                  "type" : "NamedTypeSpecifier"
                               }
                            },
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : [ {
                               "locator" : "46:14-46:26",
                               "type" : "Query",
@@ -764,6 +810,10 @@
                                           "name" : "ToString",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}uri",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "path" : "url",
                                              "scope" : "$this",
@@ -831,6 +881,10 @@
                                           "name" : "ToString",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}uri",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "path" : "url",
                                              "scope" : "$this",
@@ -894,6 +948,10 @@
                                     "name" : "ToString",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}uri",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "path" : "url",
                                        "scope" : "$this",
@@ -938,6 +996,13 @@
                      "locator" : "52:12-52:34",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "52:12-52:25",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -1001,6 +1066,13 @@
                      "locator" : "53:12-53:36",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "53:12-53:25",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",

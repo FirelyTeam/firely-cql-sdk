@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.0.0",
+         "translatorVersion" : "3.1.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       } ],
@@ -599,6 +599,13 @@
                   "locator" : "79:30-79:43",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "Start",
+                  "signature" : [ {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : {
                      "locator" : "79:39-79:43",
                      "name" : "Value",
@@ -615,6 +622,13 @@
                   "locator" : "79:49-79:60",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "End",
+                  "signature" : [ {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : {
                      "locator" : "79:56-79:60",
                      "name" : "Value",
@@ -709,10 +723,24 @@
                   "locator" : "73:9-75:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "73:15-74:64",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "73:15-73:52",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -762,6 +790,13 @@
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "LengthInDays",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : [ {
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
@@ -790,9 +825,26 @@
                      "locator" : "75:14-75:71",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : [ {
                         "locator" : "75:40-75:43",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
@@ -835,6 +887,13 @@
                "locator" : "83:3-88:5",
                "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                "type" : "Last",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
                   "locator" : "84:5-87:27",
                   "type" : "Query",
@@ -883,6 +942,13 @@
                      "locator" : "85:7-86:112",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "85:13-85:39",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -920,12 +986,36 @@
                         "locator" : "86:13-86:112",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "86:33-86:46",
                            "type" : "In",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : [ {
                               "locator" : "86:28-86:31",
                               "type" : "End",
+                              "signature" : [ {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : {
                                  "name" : "ToInterval",
                                  "libraryName" : "FHIRHelpers",
@@ -968,6 +1058,13 @@
                                     "locator" : "86:61-86:112",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
+                                    "signature" : [ {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "86:70-86:112",
                                        "name" : "ToInterval",
@@ -1009,6 +1106,13 @@
                                  "locator" : "86:61-86:112",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "locator" : "86:70-86:112",
                                     "name" : "ToInterval",
@@ -1043,13 +1147,28 @@
                         }, {
                            "locator" : "86:33-86:46",
                            "type" : "Not",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "86:33-86:46",
                               "type" : "IsNull",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Any",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "86:61-86:112",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "locator" : "86:70-86:112",
                                     "name" : "ToInterval",
@@ -1095,6 +1214,13 @@
                            "locator" : "87:15-87:27",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
@@ -1156,6 +1282,10 @@
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "name" : "ED Visit",
                      "type" : "FunctionRef",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "92:16-92:27",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter",
@@ -1188,6 +1318,10 @@
                         "locator" : "94:12-94:20",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IsNull",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Any",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "94:12",
                            "resultTypeName" : "{http://hl7.org/fhir}Encounter",
@@ -1232,6 +1366,13 @@
                            "locator" : "95:23-95:63",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "95:32-95:63",
                               "name" : "ToInterval",
@@ -1261,6 +1402,13 @@
                            "locator" : "95:66-95:115",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "95:73-95:115",
                               "name" : "ToInterval",
@@ -1336,6 +1484,10 @@
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "name" : "ED Visit",
                      "type" : "FunctionRef",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "99:16-99:27",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter",
@@ -1368,6 +1520,10 @@
                         "locator" : "101:12-101:30",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IsNull",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Any",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "101:12-101:22",
                            "resultTypeName" : "{http://hl7.org/fhir}Encounter",
@@ -1403,6 +1559,16 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Encounter.Location",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "102:22-102:68",
                            "type" : "List",
@@ -1472,6 +1638,13 @@
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "LengthInDays",
                "type" : "FunctionRef",
+               "signature" : [ {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : [ {
                   "locator" : "106:16-106:46",
                   "name" : "Hospitalization",
@@ -1483,6 +1656,10 @@
                         "type" : "NamedTypeSpecifier"
                      }
                   },
+                  "signature" : [ {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "106:34-106:45",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
@@ -1511,6 +1688,13 @@
                "locator" : "110:3-110:42",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Start",
+               "signature" : [ {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "110:12-110:42",
                   "name" : "Hospitalization",
@@ -1522,6 +1706,10 @@
                         "type" : "NamedTypeSpecifier"
                      }
                   },
+                  "signature" : [ {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "110:30-110:41",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
@@ -1550,6 +1738,13 @@
                "locator" : "114:3-114:52",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "End",
+               "signature" : [ {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "114:10-114:52",
                   "name" : "ToInterval",
@@ -1600,6 +1795,13 @@
                "locator" : "118:3-121:12",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Start",
+               "signature" : [ {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "118:12-121:12",
                   "name" : "ToInterval",
@@ -1625,6 +1827,13 @@
                         "locator" : "118:35-121:4",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter.Location",
                         "type" : "First",
+                        "signature" : [ {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Encounter.Location",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "source" : {
                            "locator" : "119:8-120:52",
                            "type" : "Query",
@@ -1656,6 +1865,10 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  },
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "119:38-119:49",
                                     "resultTypeName" : "{http://hl7.org/fhir}Encounter",
@@ -1676,6 +1889,13 @@
                                     "locator" : "120:14-120:52",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
+                                    "signature" : [ {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "120:23-120:52",
                                        "name" : "ToInterval",
@@ -1758,6 +1978,13 @@
                      "locator" : "177:19-180:6",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "type" : "Last",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "source" : {
                         "locator" : "177:24-179:27",
                         "type" : "Query",
@@ -1806,12 +2033,36 @@
                            "locator" : "178:7-178:81",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "178:33-178:46",
                               "type" : "In",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : [ {
                                  "locator" : "178:28-178:31",
                                  "type" : "End",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
@@ -1854,6 +2105,13 @@
                                        "locator" : "178:61-178:81",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Start",
+                                       "signature" : [ {
+                                          "type" : "IntervalTypeSpecifier",
+                                          "pointType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : {
                                           "name" : "ToInterval",
                                           "libraryName" : "FHIRHelpers",
@@ -1882,6 +2140,13 @@
                                     "locator" : "178:61-178:81",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
+                                    "signature" : [ {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "name" : "ToInterval",
                                        "libraryName" : "FHIRHelpers",
@@ -1903,13 +2168,28 @@
                            }, {
                               "locator" : "178:33-178:46",
                               "type" : "Not",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "178:33-178:46",
                                  "type" : "IsNull",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Any",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : {
                                     "locator" : "178:61-178:81",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
+                                    "signature" : [ {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "name" : "ToInterval",
                                        "libraryName" : "FHIRHelpers",
@@ -1941,6 +2221,13 @@
                                  "locator" : "179:15-179:27",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
@@ -1969,10 +2256,24 @@
                      "locator" : "181:18-181:74",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "181:27-181:50",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
@@ -1998,6 +2299,13 @@
                         "locator" : "181:53-181:73",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
@@ -2024,6 +2332,13 @@
                      "locator" : "182:15-185:6",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "type" : "Last",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "source" : {
                         "locator" : "182:20-184:27",
                         "type" : "Query",
@@ -2072,12 +2387,36 @@
                            "locator" : "183:7-183:69",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "183:32-183:45",
                               "type" : "In",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : [ {
                                  "locator" : "183:27-183:30",
                                  "type" : "End",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
@@ -2139,9 +2478,17 @@
                            }, {
                               "locator" : "183:32-183:45",
                               "type" : "Not",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "183:32-183:45",
                                  "type" : "IsNull",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Any",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : {
                                     "locator" : "183:60-183:69",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -2162,6 +2509,13 @@
                                  "locator" : "184:15-184:27",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
@@ -2209,10 +2563,24 @@
                         "locator" : "186:21-186:65",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Coalesce",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "186:30-186:52",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
@@ -2245,6 +2613,13 @@
                         "locator" : "186:68-186:86",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
@@ -2806,6 +3181,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "215:35-215:51",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -2824,6 +3203,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "215:79-215:96",
                                        "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -2896,6 +3279,10 @@
                                        "name" : "ToDate",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}date",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "216:27-216:43",
                                           "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -2914,6 +3301,10 @@
                                        "name" : "ToQuantity",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "216:71-216:88",
                                           "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -3000,6 +3391,10 @@
                                  "name" : "ToDate",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}date",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "215:35-215:51",
                                     "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3018,6 +3413,10 @@
                                  "name" : "ToQuantity",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "215:79-215:96",
                                     "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -3090,6 +3489,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "216:27-216:43",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3108,6 +3511,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "216:71-216:88",
                                        "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -3199,6 +3606,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "215:35-215:51",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3217,6 +3628,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "215:79-215:96",
                                        "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -3289,6 +3704,10 @@
                                        "name" : "ToDate",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}date",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "216:27-216:43",
                                           "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3307,6 +3726,10 @@
                                        "name" : "ToQuantity",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "216:71-216:88",
                                           "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -3393,6 +3816,10 @@
                                  "name" : "ToDate",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}date",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "215:35-215:51",
                                     "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3411,6 +3838,10 @@
                                  "name" : "ToQuantity",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "215:79-215:96",
                                     "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -3483,6 +3914,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "216:27-216:43",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3501,6 +3936,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "216:71-216:88",
                                        "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -3638,6 +4077,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "218:35-218:51",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3656,6 +4099,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "218:79-218:104",
                                        "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -3734,6 +4181,10 @@
                                        "name" : "ToDate",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}date",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "219:27-219:43",
                                           "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3752,6 +4203,10 @@
                                        "name" : "ToQuantity",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "219:71-219:97",
                                           "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -3844,6 +4299,10 @@
                                  "name" : "ToDate",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}date",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "218:35-218:51",
                                     "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3862,6 +4321,10 @@
                                  "name" : "ToQuantity",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "218:79-218:104",
                                     "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -3940,6 +4403,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "219:27-219:43",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -3958,6 +4425,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "219:71-219:97",
                                        "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -4055,6 +4526,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "218:35-218:51",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -4073,6 +4548,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "218:79-218:104",
                                        "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -4151,6 +4630,10 @@
                                        "name" : "ToDate",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}date",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "219:27-219:43",
                                           "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -4169,6 +4652,10 @@
                                        "name" : "ToQuantity",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "219:71-219:97",
                                           "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -4261,6 +4748,10 @@
                                  "name" : "ToDate",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}date",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "218:35-218:51",
                                     "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -4279,6 +4770,10 @@
                                  "name" : "ToQuantity",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "218:79-218:104",
                                     "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -4357,6 +4852,10 @@
                                     "name" : "ToDate",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}date",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "219:27-219:43",
                                        "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -4375,6 +4874,10 @@
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "219:71-219:97",
                                        "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -4488,6 +4991,25 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "source" : {
                         "locator" : "221:15-221:40",
                         "strict" : false,
@@ -4604,6 +5126,25 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "source" : {
                         "locator" : "223:15-223:40",
                         "strict" : false,
@@ -5125,6 +5666,25 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "source" : {
                            "locator" : "239:11-239:36",
                            "strict" : false,
@@ -5279,6 +5839,10 @@
                                           "name" : "ToDate",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}date",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "241:33-241:49",
                                              "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5297,6 +5861,10 @@
                                           "name" : "ToQuantity",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "241:77-241:107",
                                              "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -5369,6 +5937,10 @@
                                              "name" : "ToDate",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}date",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "242:25-242:41",
                                                 "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5387,6 +5959,10 @@
                                              "name" : "ToQuantity",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Quantity",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "242:69-242:99",
                                                 "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -5473,6 +6049,10 @@
                                        "name" : "ToDate",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}date",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "241:33-241:49",
                                           "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5491,6 +6071,10 @@
                                        "name" : "ToQuantity",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "241:77-241:107",
                                           "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -5563,6 +6147,10 @@
                                           "name" : "ToDate",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}date",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "242:25-242:41",
                                              "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5581,6 +6169,10 @@
                                           "name" : "ToQuantity",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "242:69-242:99",
                                              "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -5672,6 +6264,10 @@
                                           "name" : "ToDate",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}date",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "241:33-241:49",
                                              "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5690,6 +6286,10 @@
                                           "name" : "ToQuantity",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "241:77-241:107",
                                              "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -5762,6 +6362,10 @@
                                              "name" : "ToDate",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}date",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "242:25-242:41",
                                                 "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5780,6 +6384,10 @@
                                              "name" : "ToQuantity",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Quantity",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "242:69-242:99",
                                                 "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -5866,6 +6474,10 @@
                                        "name" : "ToDate",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}date",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "241:33-241:49",
                                           "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5884,6 +6496,10 @@
                                        "name" : "ToQuantity",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "241:77-241:107",
                                           "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -5956,6 +6572,10 @@
                                           "name" : "ToDate",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}date",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "242:25-242:41",
                                              "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -5974,6 +6594,10 @@
                                           "name" : "ToQuantity",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "242:69-242:99",
                                              "resultTypeName" : "{http://hl7.org/fhir}Age",
@@ -6119,6 +6743,10 @@
                                              "name" : "ToDate",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}date",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "244:34-244:50",
                                                 "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6137,6 +6765,10 @@
                                              "name" : "ToQuantity",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Quantity",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "244:78-244:116",
                                                 "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6215,6 +6847,10 @@
                                                 "name" : "ToDate",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}date",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "locator" : "245:26-245:42",
                                                    "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6233,6 +6869,10 @@
                                                 "name" : "ToQuantity",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Quantity",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "locator" : "245:70-245:109",
                                                    "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6325,6 +6965,10 @@
                                           "name" : "ToDate",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}date",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "244:34-244:50",
                                              "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6343,6 +6987,10 @@
                                           "name" : "ToQuantity",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "244:78-244:116",
                                              "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6421,6 +7069,10 @@
                                              "name" : "ToDate",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}date",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "245:26-245:42",
                                                 "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6439,6 +7091,10 @@
                                              "name" : "ToQuantity",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Quantity",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "245:70-245:109",
                                                 "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6536,6 +7192,10 @@
                                              "name" : "ToDate",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}date",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "244:34-244:50",
                                                 "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6554,6 +7214,10 @@
                                              "name" : "ToQuantity",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Quantity",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "244:78-244:116",
                                                 "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6632,6 +7296,10 @@
                                                 "name" : "ToDate",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}date",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "locator" : "245:26-245:42",
                                                    "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6650,6 +7318,10 @@
                                                 "name" : "ToQuantity",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Quantity",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "locator" : "245:70-245:109",
                                                    "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6742,6 +7414,10 @@
                                           "name" : "ToDate",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}date",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "244:34-244:50",
                                              "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6760,6 +7436,10 @@
                                           "name" : "ToQuantity",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "244:78-244:116",
                                              "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6838,6 +7518,10 @@
                                              "name" : "ToDate",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}date",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "245:26-245:42",
                                                 "resultTypeName" : "{http://hl7.org/fhir}date",
@@ -6856,6 +7540,10 @@
                                              "name" : "ToQuantity",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Quantity",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "245:70-245:109",
                                                 "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -6983,6 +7671,13 @@
                                     "locator" : "247:15-247:58",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "End",
+                                    "signature" : [ {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "247:22-247:58",
                                        "name" : "Normalize Interval",
@@ -6994,6 +7689,31 @@
                                              "type" : "NamedTypeSpecifier"
                                           }
                                        },
+                                       "signature" : [ {
+                                          "type" : "ChoiceTypeSpecifier",
+                                          "choice" : [ {
+                                             "name" : "{http://hl7.org/fhir}dateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}Period",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}Timing",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}instant",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}string",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}Age",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}Range",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ]
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "247:43-247:57",
                                           "path" : "onset",
@@ -7105,10 +7825,24 @@
                   "locator" : "259:6-261:43",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "259:6-260:46",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "259:6-259:40",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -7124,6 +7858,10 @@
                            "name" : "ToConcept",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}CodeableConcept",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "259:6-259:29",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
@@ -7164,6 +7902,10 @@
                            "name" : "ToConcept",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}CodeableConcept",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "260:8-260:31",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
@@ -7205,6 +7947,10 @@
                         "name" : "ToConcept",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}CodeableConcept",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "261:8-261:31",
                            "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
@@ -7248,6 +7994,13 @@
                      "locator" : "262:14-262:59",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "Start",
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "262:23-262:59",
                         "name" : "Normalize Interval",
@@ -7259,6 +8012,31 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{http://hl7.org/fhir}dateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Period",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Timing",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}instant",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}string",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Age",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Range",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        } ],
                         "operand" : [ {
                            "locator" : "262:44-262:58",
                            "path" : "onset",
@@ -7295,6 +8073,13 @@
                      "locator" : "262:62-262:100",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "262:69-262:100",
                         "name" : "Normalize Abatement",
@@ -7306,6 +8091,10 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "262:91-262:99",
                            "resultTypeName" : "{http://hl7.org/fhir}Condition",
@@ -7331,6 +8120,13 @@
                      "locator" : "264:14-264:59",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "Start",
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "264:23-264:59",
                         "name" : "Normalize Interval",
@@ -7342,6 +8138,31 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{http://hl7.org/fhir}dateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Period",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Timing",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}instant",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}string",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Age",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Range",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        } ],
                         "operand" : [ {
                            "locator" : "264:44-264:58",
                            "path" : "onset",
@@ -7378,6 +8199,13 @@
                      "locator" : "264:62-264:100",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "264:69-264:100",
                         "name" : "Normalize Abatement",
@@ -7389,6 +8217,10 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "264:91-264:99",
                            "resultTypeName" : "{http://hl7.org/fhir}Condition",
@@ -7436,6 +8268,13 @@
                         "type" : "NamedTypeSpecifier"
                      }
                   },
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "stringToSplit" : {
                      "locator" : "268:14-268:16",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -7524,6 +8363,13 @@
                      "locator" : "273:12-273:85",
                      "resultTypeName" : "{http://hl7.org/fhir}Condition",
                      "type" : "SingletonFrom",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "273:27-273:85",
                         "type" : "Query",
@@ -7590,6 +8436,10 @@
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "name" : "GetId",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "name" : "ToString",
                                  "libraryName" : "FHIRHelpers",
@@ -7638,6 +8488,13 @@
                "locator" : "276:3-276:74",
                "resultTypeName" : "{http://hl7.org/fhir}Condition",
                "type" : "SingletonFrom",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "276:18-276:74",
                   "type" : "Query",
@@ -7704,6 +8561,10 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "GetId",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "name" : "ToString",
                            "libraryName" : "FHIRHelpers",
@@ -8410,6 +9271,10 @@
                               "name" : "ToInteger",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "284:70-284:75",
                                  "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
@@ -8509,6 +9374,10 @@
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "name" : "GetId",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "name" : "ToString",
                                  "libraryName" : "FHIRHelpers",
@@ -8630,6 +9499,10 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "GetId",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "name" : "ToString",
                            "libraryName" : "FHIRHelpers",
@@ -8822,6 +9695,13 @@
                         "type" : "NamedTypeSpecifier"
                      }
                   },
+                  "signature" : [ {
+                     "name" : "{http://hl7.org/fhir}DomainResource",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "325:38-325:51",
                      "resultTypeName" : "{http://hl7.org/fhir}DomainResource",
@@ -9030,6 +9910,13 @@
                         "type" : "NamedTypeSpecifier"
                      }
                   },
+                  "signature" : [ {
+                     "name" : "{http://hl7.org/fhir}Element",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "339:33-339:39",
                      "resultTypeName" : "{http://hl7.org/fhir}Element",
@@ -9218,6 +10105,10 @@
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "name" : "GetId",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "name" : "ToString",
                                  "libraryName" : "FHIRHelpers",
@@ -9292,18 +10183,40 @@
                "locator" : "354:3-356:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
                   "locator" : "354:7-356:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "354:9-354:31",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IsNull",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
                         "locator" : "354:9-354:23",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "354:18-354:23",
                            "name" : "period",
@@ -9332,6 +10245,13 @@
                         "locator" : "355:10-355:24",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "355:19-355:24",
                            "name" : "period",
@@ -9384,18 +10304,40 @@
                "locator" : "360:3-364:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
                   "locator" : "360:7-364:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "361:5-361:25",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IsNull",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
                         "locator" : "361:5-361:17",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "361:12-361:17",
                            "name" : "period",
@@ -9424,6 +10366,13 @@
                         "locator" : "363:7-363:19",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "363:14-363:19",
                            "name" : "period",
@@ -9497,6 +10446,31 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}dateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Period",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Timing",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}instant",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}string",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Age",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Range",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     } ],
                      "operand" : [ {
                         "locator" : "368:25-368:30",
                         "name" : "choice",
@@ -9542,6 +10516,13 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "HasEnd",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : [ {
                            "locator" : "370:19-370:24",
                            "name" : "period",
@@ -9559,6 +10540,13 @@
                         "locator" : "370:33-370:45",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "370:40-370:45",
                            "name" : "period",
@@ -9576,6 +10564,13 @@
                         "locator" : "371:12-371:26",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "371:21-371:26",
                            "name" : "period",
@@ -9692,6 +10687,31 @@
                            "type" : "NamedTypeSpecifier"
                         }
                      },
+                     "signature" : [ {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}dateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Period",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Timing",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}instant",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}string",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Age",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Range",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     } ],
                      "operand" : [ {
                         "locator" : "375:25-375:30",
                         "name" : "choice",
@@ -9737,6 +10757,13 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "HasStart",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : [ {
                            "locator" : "377:20-377:25",
                            "name" : "period",
@@ -9754,6 +10781,13 @@
                         "locator" : "377:34-377:48",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "377:43-377:48",
                            "name" : "period",
@@ -9771,6 +10805,13 @@
                         "locator" : "378:12-378:24",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "378:19-378:24",
                            "name" : "period",

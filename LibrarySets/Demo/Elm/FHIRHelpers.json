@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.0.0",
+         "translatorVersion" : "3.1.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       } ],
@@ -71,6 +71,10 @@
                   "locator" : "8:6-8:19",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
                      "locator" : "8:6-8:11",
                      "resultTypeName" : "{http://hl7.org/fhir}Period",
@@ -167,6 +171,10 @@
                   "locator" : "14:6-14:21",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
                      "locator" : "14:6-14:13",
                      "resultTypeName" : "{http://hl7.org/fhir}Quantity",
@@ -255,6 +263,10 @@
                   "locator" : "20:6-20:18",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
                      "locator" : "20:6-20:10",
                      "resultTypeName" : "{http://hl7.org/fhir}Ratio",
@@ -283,6 +295,10 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "ToQuantity",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "23:46-23:60",
                            "resultTypeName" : "{http://hl7.org/fhir}Quantity",
@@ -303,6 +319,10 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "ToQuantity",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "23:88-23:104",
                            "resultTypeName" : "{http://hl7.org/fhir}Quantity",
@@ -355,6 +375,10 @@
                   "locator" : "26:6-26:18",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
                      "locator" : "26:6-26:10",
                      "resultTypeName" : "{http://hl7.org/fhir}Range",
@@ -394,6 +418,10 @@
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "name" : "ToQuantity",
                      "type" : "FunctionRef",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "29:29-29:37",
                         "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -412,6 +440,10 @@
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "name" : "ToQuantity",
                      "type" : "FunctionRef",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "29:52-29:61",
                         "resultTypeName" : "{http://hl7.org/fhir}SimpleQuantity",
@@ -451,6 +483,10 @@
                   "locator" : "32:6-32:19",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
                      "locator" : "32:6-32:11",
                      "resultTypeName" : "{http://hl7.org/fhir}Coding",
@@ -579,6 +615,10 @@
                   "locator" : "43:6-43:20",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
                      "locator" : "43:6-43:12",
                      "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
@@ -654,6 +694,10 @@
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                               "name" : "ToCode",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Coding",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "47:51",
                                  "resultTypeName" : "{http://hl7.org/fhir}Coding",
