@@ -4,6 +4,10 @@
 		<TargetFrameworks>net8.0</TargetFrameworks>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<FirelySdkVersion>5.7.0</FirelySdkVersion>
+	</PropertyGroup>
+
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>

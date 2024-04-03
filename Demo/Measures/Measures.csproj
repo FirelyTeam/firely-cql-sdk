@@ -10,7 +10,7 @@
     <ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
-    <PackageReference Include="Hl7.Fhir.R4" Version="5.4.0" />
+    <PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
   </ItemGroup>
 
 </Project>
