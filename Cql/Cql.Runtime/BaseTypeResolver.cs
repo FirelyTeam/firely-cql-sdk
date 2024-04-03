@@ -123,10 +123,19 @@ namespace Hl7.Cql.Runtime
         /// <inheritdoc/>
         public override Type? ResolveType(string typeSpecifier)
         {
-            if (Types.TryGetValue(typeSpecifier, out var type))
+            var correctedTypeSpecifier = CorrectQiCoreExtensionTypes(typeSpecifier);
+            
+            if (Types.TryGetValue(correctedTypeSpecifier, out var type))
                 return type;
-            else throw new ArgumentException($"Type {typeSpecifier} is not bound", nameof(typeSpecifier));
+            else throw new ArgumentException($"Type {correctedTypeSpecifier} is not bound", nameof(typeSpecifier));
         }
+
+        private static string CorrectQiCoreExtensionTypes(string typeSpecifier) =>
+            typeSpecifier switch
+            {
+                "{http://hl7.org/fhir}NotDoneRecorded" => "{http://hl7.org/fhir}dateTime",
+                _ => typeSpecifier
+            };
 
         /// <inheritdoc/>
         public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)

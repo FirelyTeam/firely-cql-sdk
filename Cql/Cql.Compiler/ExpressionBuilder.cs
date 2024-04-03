@@ -20,17 +20,80 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
+    /// <summary>
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
+    /// </summary>
+    /// <remarks>
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilder)"/>.
+    /// </remarks>
     partial class ExpressionBuilder
     {
         // Yeah, hardwired to FHIR 4.0.1 for now.
         private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
 
         private readonly ILogger<ExpressionBuilder> _logger = null!;
+
+        internal ExpressionBuilder(
+            ILogger<ExpressionBuilder> logger,
+            OperatorBinding operatorBinding,
+            TypeManager typeManager,
+            TypeConverter typeConverter,
+            LibraryDefinitionBuilderSettings settings,
+            LibraryExpressionBuilder libContext)
+        {
+            // External Services
+            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+            _typeManager = typeManager;
+            _logger = logger;
+            _typeConverter = typeConverter;
+
+            // External State
+            _libraryDefinitionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
+            LibraryContext = libContext;
+
+            // Internal State
+            _impliedAlias = null;
+            _operands = new Dictionary<string, ParameterExpression>();
+            _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+            _scopes = new Dictionary<string, (Expression, Elm.Element)>();
+            _expressionMutators = new List<IExpressionMutator>();
+            _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
+        }
+
+        private ExpressionBuilder(
+            ExpressionBuilder source)
+        {
+            _elementStack = new Stack<Elm.Element>(_elementStack);
+            _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
+            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
+            _impliedAlias = source._impliedAlias;
+            _operands = source._operands;
+            _libraries = source._libraries;
+            _scopes = source._scopes;
+            LibraryContext = source.LibraryContext;
+            _typeManager = source._typeManager;
+            _logger = source._logger;
+            _expressionMutators = source._expressionMutators;
+            _customImplementations = source._customImplementations;
+            _typeConverter = source._typeConverter;
+        }
+
+        private ExpressionBuilder(
+            ExpressionBuilder outer,
+            string? impliedAlias,
+            IDictionary<string, (Expression, Elm.Element)> scopes) : this(outer)
+        {
+            _scopes = scopes;
+            _impliedAlias = impliedAlias;
+        }
+
+
 
         internal Expression TranslateExpression(Element op)
         {
@@ -350,9 +413,9 @@ namespace Hl7.Cql.Compiler
                                .Select(element =>
                                {
                                    var value = TranslateExpression(element.value!);
-                                   var memberInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!, _typeManager.Resolver)
+                                   var propInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!, _typeManager.Resolver)
                                                     ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
-                                   var binding = Binding(value, memberInfo);
+                                   var binding = Binding(value, propInfo);
                                    return binding;
                                })
                                .ToArray();
@@ -1032,29 +1095,15 @@ namespace Hl7.Cql.Compiler
         protected Expression FunctionRef(FunctionRef op)
         {
             var operands = op.operand
-                .Select(operand => TranslateExpression(operand))
+                .Select(TranslateExpression)
                 .ToArray();
-
-            var operandTypes = operands
-                .Select(op => op.Type)
-                .ToArray();
-
-            var functionType = GetFunctionRefReturnType(op, operandTypes);
-
-            var funcTypeParameters =
-                new[] { typeof(CqlContext) }
-                .Concat(operandTypes)
-                .Concat(new[] { functionType })
-                .ToArray();
-
-            var funcType = GetFuncType(funcTypeParameters);
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
             if (op.libraryName is { } alias)
             {
-                string libraryName = LibraryContext.GetNameAndVersionFromAlias(alias, true)!;
+                string libraryName = LibraryContext.GetNameAndVersionFromAlias(alias, throwError: true)!;
                 if (libraryName.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase)
                     && op.name!.Equals("tostring", StringComparison.OrdinalIgnoreCase))
                 {
@@ -1068,18 +1117,10 @@ namespace Hl7.Cql.Compiler
                         LibraryDefinitionsBuilder.ContextParameter,
                         new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                     return bind;
-
-                    // operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
-                    // var funcType = GetFuncType(funcTypeParameters);
-                    // var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName, funcType, operands);
-                    // return invoke;
                 }
             }
-            // all functions still take the bundle and context parameters, plus whatver the operands
-            // to the actual function are.
-            operands = operands.Prepend(LibraryDefinitionsBuilder.ContextParameter).ToArray();
 
-            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands);
+            var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands);
             return invoke;
         }
 
@@ -1218,7 +1259,7 @@ namespace Hl7.Cql.Compiler
             throw this.NewExpressionBuildingException($"Parameter {op.name} hasn't been defined yet.");
         }
 
-        protected internal static MemberInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
+        protected internal static PropertyInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
         {
             if (type.IsGenericType)
             {
@@ -1227,7 +1268,6 @@ namespace Hl7.Cql.Compiler
                 {
                     if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
                     {
-                        string message = $"value element not found as a Value property on object.";
                         var valueMember = type.GetProperty("Value");
                         return valueMember;
                     }
@@ -1240,21 +1280,34 @@ namespace Hl7.Cql.Compiler
 
         /// <param name="name">The function name</param>
         /// <param name="libraryAlias">If this is an external call, the local alias defined in the using statement</param>
-        /// <param name="definitionType">The Func or Action type of this definition</param>
         /// <param name="arguments">The function arguments</param>
         /// <returns></returns>
         protected Expression InvokeDefinedFunctionThroughRuntimeContext(
             string name,
             string? libraryAlias,
-            Type definitionType,
             Expression[] arguments)
         {
+
             var definitionsProperty = Expression.Property(LibraryDefinitionsBuilder.ContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
             string libraryName = LibraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
                 ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
-            return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
+            var argumentTypes = arguments.Select(a => a.Type).ToArray();
+            var selected = LibraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
+            Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
+            var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
+
+            // all functions still take the bundle and context parameters, plus whatver the operands
+            // to the actual function are.
+            var convertedArguments = arguments
+                .Select((arg, i) => ChangeType(arg, parameterTypes[i]))
+                .Prepend(LibraryDefinitionsBuilder.ContextParameter)
+                .ToArray();
+
+            return new FunctionCallExpression(definitionsProperty, libraryName, name, convertedArguments, definitionType);
+
+            bool CheckConversion(Type from, Type to) => _typeConverter.CanConvert(from, to);
         }
 
         protected Expression InvokeDefinitionThroughRuntimeContext(

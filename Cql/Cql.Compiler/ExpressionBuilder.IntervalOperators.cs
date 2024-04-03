@@ -479,12 +479,13 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1]);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type)!;
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
+                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type)!;
                     if (leftElementType != rightElementType)
-                        throw this.NewExpressionBuildingException();
+                        throw this.NewExpressionBuildingException($"Union requires both operands to be of the same type, " +
+                                                                  $"but left is {leftElementType.Name} and right is {rightElementType.Name}.");
                     return _operatorBinding.Bind(CqlOperator.ListUnion, LibraryDefinitionsBuilder.ContextParameter, left, right);
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.Logging;
@@ -23,8 +24,8 @@ internal class CqlCompilerFactory : CqlAbstractionsFactory
     protected virtual ModelInspector NewModelInspector() => Hl7.Fhir.Model.ModelInfo.ModelInspector;
 
 
-    public virtual Conversion.TypeConverter TypeConverter => Singleton(NewTypeConverter);
-    protected virtual Conversion.TypeConverter NewTypeConverter() => FhirTypeConverter.Create(ModelInspector, CacheSize);
+    public virtual TypeConverter TypeConverter => Singleton(NewTypeConverter);
+    protected virtual TypeConverter NewTypeConverter() => FhirTypeConverter.Create(ModelInspector, CacheSize);
 
     public virtual TypeResolver TypeResolver => Singleton(NewTypeResolver);
     protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);
@@ -36,5 +37,5 @@ internal class CqlCompilerFactory : CqlAbstractionsFactory
     protected virtual TypeManager NewTypeManager() => new(TypeResolver);
 
     public virtual LibraryDefinitionsBuilder LibraryDefinitionsBuilder => Singleton(NewLibraryDefinitionsBuilder);
-    protected virtual LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder() => new(LoggerFactory, TypeManager, OperatorsBinding);
+    protected virtual LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder() => new(LoggerFactory, OperatorsBinding, TypeManager, TypeConverter);
 }

@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -11,6 +11,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Expressions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
 using F = Hl7.Fhir.Model;
@@ -67,11 +68,11 @@ namespace Hl7.Cql.Compiler
             {
                 if (string.IsNullOrWhiteSpace(@as.asType.Name))
                     throw this.NewExpressionBuildingException("The 'as' operator has no type name.");
-                
+
                 if (@as.operand is null)
                     throw this.NewExpressionBuildingException("Operand cannot be null");
 
-                var type = _typeManager.Resolver.ResolveType(@as.asType.Name!) 
+                var type = _typeManager.Resolver.ResolveType(@as.asType.Name!)
                     ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
                 var operand = TranslateExpression(@as.operand);
@@ -88,7 +89,7 @@ namespace Hl7.Cql.Compiler
         {
             var op = TranslateExpression(@is.operand!);
             Type? type = null;
-            if (@is.isTypeSpecifier != null) 
+            if (@is.isTypeSpecifier != null)
             {
                 if (@is.isTypeSpecifier is Elm.ChoiceTypeSpecifier choice)
                 {
@@ -245,9 +246,11 @@ namespace Hl7.Cql.Compiler
         {
             if (input.Type == outputType)
                 return input;
-            else if (input.Type == typeof(object) || _typeManager.Resolver.RepresentsChoiceType(input.Type) || outputType.IsAssignableFrom(input.Type))
+
+            if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
                 return Expression.TypeAs(input, outputType);
-            else if (IsOrImplementsIEnumerableOfT(input.Type)
+
+            if (IsOrImplementsIEnumerableOfT(input.Type)
                 && IsOrImplementsIEnumerableOfT(outputType))
             {
                 var inputElementType = _typeManager.Resolver.GetListElementType(input.Type, true)!;
@@ -258,7 +261,8 @@ namespace Hl7.Cql.Compiler
                 var callSelect = _operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, input, lambda);
                 return callSelect;
             }
-            else if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
+
+            if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
                 var call = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
                 return call;
@@ -269,12 +273,12 @@ namespace Hl7.Cql.Compiler
                 return call;
             }
         }
-  
+
         private static readonly Dictionary<(Type,Type),Type> KnownErrors = new()
         {
             [(typeof(F.ObservationStatus?), typeof(F.Code<F.VerificationResult.StatusCode>))] = typeof(F.ObservationStatus?)
-        };   
-        
+        };
+
         // At this moment (20240308) the QICore translation by the current tooling (3.8.0.0) of the CQl-to-ELM
         // translator is incorrect. This method is a temporary workaround to correct the incorrectly mapped binding
         // names. This method should be removed once the QICore translation is fixed.

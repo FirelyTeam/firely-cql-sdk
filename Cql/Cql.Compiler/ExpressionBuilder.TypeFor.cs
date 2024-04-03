@@ -100,7 +100,7 @@ internal partial class ExpressionBuilder
         return null;
     }
 
-    private Type TypeFor(TypeSpecifier resultTypeSpecifier)
+    private Type TypeFor(TypeSpecifier? resultTypeSpecifier)
     {
         if (resultTypeSpecifier == null)
             return typeof(object);

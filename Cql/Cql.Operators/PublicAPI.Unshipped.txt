@@ -73,7 +73,7 @@ Hl7.Cql.Operators.ICqlOperators.ComponentFrom(Hl7.Cql.Primitives.CqlTime? argume
 Hl7.Cql.Operators.ICqlOperators.Concatenate(string? left, string? right) -> string?
 Hl7.Cql.Operators.ICqlOperators.ConceptInValueSet(Hl7.Cql.Primitives.CqlConcept? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ConceptsInValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlConcept?>? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
-Hl7.Cql.Operators.ICqlOperators.Convert<T>(object? from) -> T
+Hl7.Cql.Operators.ICqlOperators.Convert<T>(object? from) -> T?
 Hl7.Cql.Operators.ICqlOperators.ConvertBooleanToDecimal(bool? b) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.ConvertBooleanToInteger(bool? b) -> int?
 Hl7.Cql.Operators.ICqlOperators.ConvertBooleanToLong(bool? b) -> long?

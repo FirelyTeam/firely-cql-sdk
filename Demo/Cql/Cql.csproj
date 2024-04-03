@@ -2,7 +2,9 @@
 
 	<Import Project="..\cql-demo.props" />
 	<Import Project="Build\Cql.Targets.xml" />
-
-	<PropertyGroup>
-	</PropertyGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Build\target\" />
+	  <Folder Include="Build\target\dependency\" />
+	</ItemGroup>
 </Project>

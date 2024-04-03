@@ -1,12 +1,48 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
+/// </summary>
 partial class LibraryExpressionBuilder
 {
+    public LibraryExpressionBuilder(
+        ILoggerFactory loggerFactory,
+        OperatorBinding operatorBinding,
+        TypeManager typeManager,
+        TypeConverter typeConverter,
+        Library library,
+        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
+        DefinitionDictionary<LambdaExpression> libraryDefinitions,
+        LibrarySetExpressionBuilder? libsCtx = null)
+    {
+        // External Services
+        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
+        _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+        _typeManager = typeManager;
+        _loggerFactory = loggerFactory;
+        _typeConverter = typeConverter;
+        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
+
+        // External State
+        LibraryDefinitions = libraryDefinitions;
+        Library = library;
+        LibrarySetContext = libsCtx;
+
+        // Internal State
+        _libraryIdentifiersByAlias = new();
+        _codesByName = new();
+        _codesByCodeSystemName = new();
+        _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
+    }
+
+
     public DefinitionDictionary<LambdaExpression> ProcessLibrary()
     {
         _logger.LogInformation("Building expressions for '{library}'", LibraryKey);

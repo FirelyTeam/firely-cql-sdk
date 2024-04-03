@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.11.0",
+         "translatorVersion" : "3.1.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       } ],
@@ -478,10 +478,30 @@
                   "locator" : "36:5-37:63",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "36:11-36:95",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IncludedIn",
+                     "signature" : [ {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : [ {
                         "locator" : "36:11-36:60",
                         "name" : "ToInterval",
@@ -494,6 +514,31 @@
                               "type" : "NamedTypeSpecifier"
                            }
                         },
+                        "signature" : [ {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Timing",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        } ],
                         "operand" : [ {
                            "locator" : "36:37-36:58",
                            "name" : "ToValue",
@@ -540,13 +585,31 @@
                      "locator" : "37:11-37:63",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "GreaterOrEqual",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "37:13-37:55",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "precision" : "Year",
                         "type" : "CalculateAgeAt",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDateTime",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "path" : "value",
                               "type" : "Property",
@@ -563,6 +626,13 @@
                            "locator" : "37:26-37:54",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "37:35-37:54",
                               "name" : "Measurement Period",
@@ -597,6 +667,13 @@
                "locator" : "88:3-92:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "SingletonFrom",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "88:18-92:3",
                   "type" : "Query",
@@ -639,10 +716,24 @@
                      "locator" : "89:7-90:54",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "89:13-89:49",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equivalent",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "89:13-89:18",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
@@ -656,6 +747,10 @@
                            } ]
                         }, {
                            "type" : "ToConcept",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "89:22-89:49",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -667,6 +762,13 @@
                         "locator" : "90:13-90:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "90:13-90:40",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -851,6 +953,13 @@
                "locator" : "95:3-99:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "SingletonFrom",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "95:18-99:3",
                   "type" : "Query",
@@ -893,10 +1002,24 @@
                      "locator" : "96:7-97:51",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "96:13-96:55",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equivalent",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "96:13-96:18",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
@@ -910,6 +1033,10 @@
                            } ]
                         }, {
                            "type" : "ToConcept",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "96:22-96:55",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -921,6 +1048,13 @@
                         "locator" : "97:13-97:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "97:13-97:40",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -1144,23 +1278,49 @@
                   "locator" : "41:5-43:34",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "41:11-42:51",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "41:11-41:50",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Not",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "41:11-41:50",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "IsNull",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "41:11-41:38",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "name" : "Global Noise Value",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Observation",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "41:32-41:37",
                                  "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1173,15 +1333,27 @@
                         "locator" : "42:11-42:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Not",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "42:11-42:51",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "IsNull",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "42:11-42:39",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "name" : "Size Adjusted Value",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Observation",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "42:33-42:38",
                                  "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1195,10 +1367,18 @@
                      "locator" : "43:11-43:34",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Not",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
                         "locator" : "43:11-43:34",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IsNull",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Any",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "43:11-43:22",
                            "name" : "ToValue",
@@ -1267,6 +1447,13 @@
                "locator" : "46:3-46:32",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Observation",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "46:10-46:32",
                   "name" : "Qualifying CTScan",
@@ -1290,6 +1477,13 @@
                "locator" : "49:3-49:44",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Observation",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "49:10-49:44",
                   "name" : "Qualifying CTScan with Values",
@@ -1313,6 +1507,13 @@
                "locator" : "52:3-54:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Observation",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "52:10-54:3",
                   "type" : "Query",
@@ -1351,6 +1552,16 @@
                      "locator" : "53:7-53:70",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Contains",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "53:13-53:50",
                         "type" : "Query",
@@ -1488,10 +1699,27 @@
                "locator" : "82:3-85:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "locator" : "82:3-82:51",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Contains",
+                  "signature" : [ {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "82:3-82:37",
                      "type" : "Query",
@@ -1623,15 +1851,33 @@
                   "locator" : "83:9-85:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "83:11-83:53",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "GreaterOrEqual",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "83:11-83:35",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "name" : "Global Noise Value",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "83:32-83:34",
                            "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1648,11 +1894,22 @@
                      "locator" : "84:12-84:58",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "GreaterOrEqual",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "84:12-84:37",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "name" : "Size Adjusted Value",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "84:34-84:36",
                            "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1712,75 +1969,207 @@
                "locator" : "62:3-79:47",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "locator" : "62:3-78:47",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "62:3-77:43",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "62:3-76:39",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "62:3-75:49",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Or",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "62:3-74:47",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Or",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "62:3-73:46",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Or",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "62:3-72:44",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Or",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "62:3-71:44",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Or",
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "62:3-70:43",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Or",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "62:3-69:52",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                              "type" : "Or",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "62:3-68:43",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                 "type" : "Or",
+                                                "signature" : [ {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "locator" : "62:3-67:43",
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                    "type" : "Or",
+                                                   "signature" : [ {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ],
                                                    "operand" : [ {
                                                       "locator" : "62:3-66:45",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Or",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "62:3-65:44",
                                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                          "type" : "Or",
+                                                         "signature" : [ {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
                                                             "locator" : "62:3-64:46",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Or",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "62:3-63:45",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                                "type" : "Or",
+                                                               "signature" : [ {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }, {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : [ {
                                                                   "locator" : "62:3-62:40",
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                                   "name" : "Qualifies",
                                                                   "type" : "FunctionRef",
+                                                                  "signature" : [ {
+                                                                     "name" : "{http://hl7.org/fhir}Observation",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  } ],
                                                                   "operand" : [ {
                                                                      "locator" : "62:15-62:16",
                                                                      "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1794,6 +2183,10 @@
                                                                      "type" : "Literal"
                                                                   }, {
                                                                      "type" : "ToDecimal",
+                                                                     "signature" : [ {
+                                                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                        "type" : "NamedTypeSpecifier"
+                                                                     } ],
                                                                      "operand" : {
                                                                         "locator" : "62:33-62:34",
                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1803,6 +2196,10 @@
                                                                      }
                                                                   }, {
                                                                      "type" : "ToDecimal",
+                                                                     "signature" : [ {
+                                                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                        "type" : "NamedTypeSpecifier"
+                                                                     } ],
                                                                      "operand" : {
                                                                         "locator" : "62:37-62:39",
                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1816,6 +2213,19 @@
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                                   "name" : "Qualifies",
                                                                   "type" : "FunctionRef",
+                                                                  "signature" : [ {
+                                                                     "name" : "{http://hl7.org/fhir}Observation",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  } ],
                                                                   "operand" : [ {
                                                                      "locator" : "63:20-63:21",
                                                                      "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1829,6 +2239,10 @@
                                                                      "type" : "Literal"
                                                                   }, {
                                                                      "type" : "ToDecimal",
+                                                                     "signature" : [ {
+                                                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                        "type" : "NamedTypeSpecifier"
+                                                                     } ],
                                                                      "operand" : {
                                                                         "locator" : "63:38-63:39",
                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1838,6 +2252,10 @@
                                                                      }
                                                                   }, {
                                                                      "type" : "ToDecimal",
+                                                                     "signature" : [ {
+                                                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                        "type" : "NamedTypeSpecifier"
+                                                                     } ],
                                                                      "operand" : {
                                                                         "locator" : "63:42-63:44",
                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1852,6 +2270,19 @@
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                                "name" : "Qualifies",
                                                                "type" : "FunctionRef",
+                                                               "signature" : [ {
+                                                                  "name" : "{http://hl7.org/fhir}Observation",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }, {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }, {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }, {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : [ {
                                                                   "locator" : "64:20-64:21",
                                                                   "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1865,6 +2296,10 @@
                                                                   "type" : "Literal"
                                                                }, {
                                                                   "type" : "ToDecimal",
+                                                                  "signature" : [ {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  } ],
                                                                   "operand" : {
                                                                      "locator" : "64:38-64:39",
                                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1874,6 +2309,10 @@
                                                                   }
                                                                }, {
                                                                   "type" : "ToDecimal",
+                                                                  "signature" : [ {
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  } ],
                                                                   "operand" : {
                                                                      "locator" : "64:42-64:45",
                                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1888,6 +2327,19 @@
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "name" : "Qualifies",
                                                             "type" : "FunctionRef",
+                                                            "signature" : [ {
+                                                               "name" : "{http://hl7.org/fhir}Observation",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "65:20-65:21",
                                                                "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1901,6 +2353,10 @@
                                                                "type" : "Literal"
                                                             }, {
                                                                "type" : "ToDecimal",
+                                                               "signature" : [ {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : {
                                                                   "locator" : "65:38-65:39",
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1910,6 +2366,10 @@
                                                                }
                                                             }, {
                                                                "type" : "ToDecimal",
+                                                               "signature" : [ {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : {
                                                                   "locator" : "65:42-65:43",
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1924,6 +2384,19 @@
                                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                          "name" : "Qualifies",
                                                          "type" : "FunctionRef",
+                                                         "signature" : [ {
+                                                            "name" : "{http://hl7.org/fhir}Observation",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
                                                             "locator" : "66:20-66:21",
                                                             "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1937,6 +2410,10 @@
                                                             "type" : "Literal"
                                                          }, {
                                                             "type" : "ToDecimal",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : {
                                                                "locator" : "66:38-66:39",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1946,6 +2423,10 @@
                                                             }
                                                          }, {
                                                             "type" : "ToDecimal",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : {
                                                                "locator" : "66:42-66:44",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1960,6 +2441,19 @@
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "name" : "Qualifies",
                                                       "type" : "FunctionRef",
+                                                      "signature" : [ {
+                                                         "name" : "{http://hl7.org/fhir}Observation",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "67:20-67:21",
                                                          "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -1973,6 +2467,10 @@
                                                          "type" : "Literal"
                                                       }, {
                                                          "type" : "ToDecimal",
+                                                         "signature" : [ {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : {
                                                             "locator" : "67:36-67:37",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1982,6 +2480,10 @@
                                                          }
                                                       }, {
                                                          "type" : "ToDecimal",
+                                                         "signature" : [ {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : {
                                                             "locator" : "67:40-67:42",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1996,6 +2498,19 @@
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                    "name" : "Qualifies",
                                                    "type" : "FunctionRef",
+                                                   "signature" : [ {
+                                                      "name" : "{http://hl7.org/fhir}Observation",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ],
                                                    "operand" : [ {
                                                       "locator" : "68:20-68:21",
                                                       "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2009,6 +2524,10 @@
                                                       "type" : "Literal"
                                                    }, {
                                                       "type" : "ToDecimal",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "68:36-68:37",
                                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2018,6 +2537,10 @@
                                                       }
                                                    }, {
                                                       "type" : "ToDecimal",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "68:40-68:42",
                                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2032,6 +2555,19 @@
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                 "name" : "Qualifies",
                                                 "type" : "FunctionRef",
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Observation",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "locator" : "69:20-69:21",
                                                    "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2045,6 +2581,10 @@
                                                    "type" : "Literal"
                                                 }, {
                                                    "type" : "ToDecimal",
+                                                   "signature" : [ {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ],
                                                    "operand" : {
                                                       "locator" : "69:44-69:45",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2054,6 +2594,10 @@
                                                    }
                                                 }, {
                                                    "type" : "ToDecimal",
+                                                   "signature" : [ {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ],
                                                    "operand" : {
                                                       "locator" : "69:48-69:51",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2068,6 +2612,19 @@
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                              "name" : "Qualifies",
                                              "type" : "FunctionRef",
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Observation",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "70:20-70:21",
                                                 "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2081,6 +2638,10 @@
                                                 "type" : "Literal"
                                              }, {
                                                 "type" : "ToDecimal",
+                                                "signature" : [ {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "70:35-70:37",
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2090,6 +2651,10 @@
                                                 }
                                              }, {
                                                 "type" : "ToDecimal",
+                                                "signature" : [ {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "70:40-70:42",
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2104,6 +2669,19 @@
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "name" : "Qualifies",
                                           "type" : "FunctionRef",
+                                          "signature" : [ {
+                                             "name" : "{http://hl7.org/fhir}Observation",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "71:20-71:21",
                                              "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2117,6 +2695,10 @@
                                              "type" : "Literal"
                                           }, {
                                              "type" : "ToDecimal",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : {
                                                 "locator" : "71:35-71:37",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2126,6 +2708,10 @@
                                              }
                                           }, {
                                              "type" : "ToDecimal",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : {
                                                 "locator" : "71:40-71:43",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2140,6 +2726,19 @@
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "name" : "Qualifies",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Observation",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "72:20-72:21",
                                           "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2153,6 +2752,10 @@
                                           "type" : "Literal"
                                        }, {
                                           "type" : "ToDecimal",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : {
                                              "locator" : "72:35-72:37",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2162,6 +2765,10 @@
                                           }
                                        }, {
                                           "type" : "ToDecimal",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : {
                                              "locator" : "72:40-72:43",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2176,6 +2783,19 @@
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "name" : "Qualifies",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Observation",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "73:20-73:21",
                                        "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2189,6 +2809,10 @@
                                        "type" : "Literal"
                                     }, {
                                        "type" : "ToDecimal",
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : {
                                           "locator" : "73:39-73:40",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2198,6 +2822,10 @@
                                        }
                                     }, {
                                        "type" : "ToDecimal",
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : {
                                           "locator" : "73:43-73:45",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2212,6 +2840,19 @@
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "name" : "Qualifies",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}Observation",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "74:20-74:21",
                                     "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2225,6 +2866,10 @@
                                     "type" : "Literal"
                                  }, {
                                     "type" : "ToDecimal",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : {
                                        "locator" : "74:39-74:40",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2234,6 +2879,10 @@
                                     }
                                  }, {
                                     "type" : "ToDecimal",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : {
                                        "locator" : "74:43-74:46",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2248,6 +2897,19 @@
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "name" : "Qualifies",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Observation",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "75:20-75:21",
                                  "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2261,6 +2923,10 @@
                                  "type" : "Literal"
                               }, {
                                  "type" : "ToDecimal",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : {
                                     "locator" : "75:41-75:42",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2270,6 +2936,10 @@
                                  }
                               }, {
                                  "type" : "ToDecimal",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : {
                                     "locator" : "75:45-75:48",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2284,6 +2954,19 @@
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "Qualifies",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}Observation",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "76:20-76:21",
                               "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2297,6 +2980,10 @@
                               "type" : "Literal"
                            }, {
                               "type" : "ToDecimal",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "76:31-76:32",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2306,6 +2993,10 @@
                               }
                            }, {
                               "type" : "ToDecimal",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "76:35-76:38",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2320,6 +3011,19 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Qualifies",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "77:20-77:21",
                            "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2333,6 +3037,10 @@
                            "type" : "Literal"
                         }, {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "77:35-77:36",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2342,6 +3050,10 @@
                            }
                         }, {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "77:39-77:42",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2356,6 +3068,19 @@
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Qualifies",
                      "type" : "FunctionRef",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}Observation",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "78:20-78:21",
                         "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2369,6 +3094,10 @@
                         "type" : "Literal"
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "78:39-78:40",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2378,6 +3107,10 @@
                         }
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "78:43-78:46",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2392,6 +3125,19 @@
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Qualifies",
                   "type" : "FunctionRef",
+                  "signature" : [ {
+                     "name" : "{http://hl7.org/fhir}Observation",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
                      "locator" : "79:20-79:21",
                      "resultTypeName" : "{http://hl7.org/fhir}Observation",
@@ -2405,6 +3151,10 @@
                      "type" : "Literal"
                   }, {
                      "type" : "ToDecimal",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
                         "locator" : "79:39-79:40",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2414,6 +3164,10 @@
                      }
                   }, {
                      "type" : "ToDecimal",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
                         "locator" : "79:43-79:46",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2443,6 +3197,13 @@
                "locator" : "57:3-59:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Observation",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : {
                   "locator" : "57:10-59:3",
                   "type" : "Query",
@@ -2482,6 +3243,10 @@
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "CT Scan Qualifies",
                      "type" : "FunctionRef",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}Observation",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "58:33-58:38",
                         "resultTypeName" : "{http://hl7.org/fhir}Observation",

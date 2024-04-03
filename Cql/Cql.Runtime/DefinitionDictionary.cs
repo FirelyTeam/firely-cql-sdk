@@ -68,6 +68,27 @@ public class DefinitionDictionary<T> where T : class
         }
     }
 
+    internal T Resolve(string? libraryName, string definition, Func<Type,Type,bool> conversionCheck, params Type[] signature)
+    {
+            libraryName ??= string.Empty;
+
+            if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
+            {
+                var overloads = library[definition];
+                var t = BestMatch(signature, overloads, conversionCheck);
+
+                if (t is null)
+                    throw new KeyNotFoundException($"No overload of {definition} matches the arguments {string.Join(",", signature.Select(p => p.Name))}");
+                else
+                    return t;
+            }
+            else
+            {
+                throw new KeyNotFoundException($"The library {libraryName} is unknown here.");
+            }
+
+    }
+
     /// <summary>
     /// Returns <see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.
     /// </summary>
@@ -430,16 +451,18 @@ public class DefinitionDictionary<T> where T : class
     }
 
     /// <summary>
-    /// One method is closer than another if all of its parameter types are narrower than (or the same as) the parameter types of the other method. 
+    /// One method is closer than another if all of its parameter types are narrower than (or the same as) the parameter types of the other method.
     /// If neither method's parameters are narrower than the other, then there is no way for to determine which method is closer to the arguments.
     /// </summary>
     /// <param name="parameterTypes">The type of the parameters being passed to the method</param>
     /// <param name="overloads">The signatures of overloads available</param>
+    /// <param name="conversionCheck"></param>
     /// <returns>The best match for <paramref name="parameterTypes"/>, or <c>null</c> if no match exists</returns>
-    internal T? BestMatch(Type[] parameterTypes, IEnumerable<(Type[] Signature, T T)> overloads)
+    internal T? BestMatch(Type[] parameterTypes, IEnumerable<(Type[] Signature, T T)> overloads,
+        Func<Type, Type, bool>? conversionCheck = null)
     {
         var groups = (from overload in overloads
-            let score = Score(parameterTypes, overload.Signature)
+            let score = Score(parameterTypes, overload.Signature, conversionCheck)
             where score != null
             group overload by score into g
             orderby g.Key
@@ -462,7 +485,7 @@ public class DefinitionDictionary<T> where T : class
     /// Calculates a score (lower is better) for matching <paramref name="parameterTypes"/> to the overload <paramref name="signature"/>.
     /// </summary>
     /// <returns>0 for exact matches; greater than 0 for signatures that can be bound through polymorphism; and <c>null</c> for incompatibility</returns>
-    internal int? Score(Type[] parameterTypes, Type[] signature)
+    internal int? Score(Type[] parameterTypes, Type[] signature, Func<Type, Type, bool>? conversionCheck = null)
     {
         int? distance = 0;
         if (parameterTypes.Length == signature.Length)
@@ -484,6 +507,13 @@ public class DefinitionDictionary<T> where T : class
                     }
                     distance += distanceP;
                 }
+                else if (conversionCheck is not null)
+                {
+                    if (conversionCheck(parameterTypes[i], signature[i]))
+                        distance += 5;
+                    else
+                        return null;
+                }
                 else
                 {
                     // The parameter[i] is not compatible with the signature[i]
@@ -497,7 +527,7 @@ public class DefinitionDictionary<T> where T : class
 
     internal class Tag
     {
-           
+
         public string Library { get; }
         public string Definition { get; }
         public Type[] Signature { get; }
@@ -523,7 +553,7 @@ public class DefinitionDictionary<T> where T : class
 
         /// <summary>
         /// Removes all whitespace from the value, except for a single space between 'words'.
-        /// All newlines, tabs, and other whitespace characters will be replaced by a single space.            
+        /// All newlines, tabs, and other whitespace characters will be replaced by a single space.
         /// </summary>
         /// <param name="value"></param>
         /// <returns>The <paramref name="value"/> string with only single spaces</returns>

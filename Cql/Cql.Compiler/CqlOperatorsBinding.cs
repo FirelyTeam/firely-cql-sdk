@@ -27,8 +27,8 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal class CqlOperatorsBinding : OperatorBinding
     {
-        internal TypeConverter? TypeConverter { get; private set; }
-        internal TypeResolver TypeResolver { get; private set; }
+        internal TypeConverter? TypeConverter { get; }
+        internal TypeResolver TypeResolver { get; }
 
         /// <summary>
         /// Creates an instance.
@@ -731,9 +731,9 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         private Expression BindConvert(MemberExpression operators, Expression source, Expression typeExpression)
         {
-            if (typeExpression is ConstantExpression constExpression && constExpression.Value is Type to)
+            if (typeExpression is ConstantExpression { Value: Type toType })
             {
-                var methodName = CqlOperators.ConversionFunctionName(source.Type, to);
+                var methodName = CqlOperators.ConversionFunctionName(source.Type, toType);
                 if (methodName != null)
                 {
                     var method = OperatorsType.GetMethod(methodName);
@@ -744,13 +744,13 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var conversion = CanConvert(source.Type, to);
+                    var conversion = CanConvert(source.Type, toType);
                     if (conversion != ConversionType.Incompatible)
                     {
-                        var convert = Convert(source, to, operators, conversion);
+                        var convert = Convert(source, toType, operators, conversion);
                         return convert;
                     }
-                    else throw new ArgumentException($"Cannot convert {source.Type} to {to}", nameof(source));
+                    else throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
                 }
             }
             else throw new ArgumentException("Expected constant type expression", nameof(typeExpression));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -10,9 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-/// <summary>
-/// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
-/// </summary>
 internal partial class LibraryExpressionBuilder
 {
     private readonly ILogger<LibraryExpressionBuilder> _logger;
@@ -20,34 +18,7 @@ internal partial class LibraryExpressionBuilder
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
     private readonly ILoggerFactory _loggerFactory;
-
-    public LibraryExpressionBuilder(
-        Library library,
-        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
-        OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> libraryDefinitions,
-        TypeManager typeManager,
-        ILoggerFactory loggerFactory,
-        LibrarySetExpressionBuilder? libsCtx = null)
-    {
-        // External Services
-        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
-        _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
-        _typeManager = typeManager;
-        _loggerFactory = loggerFactory;
-        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
-
-        // External State
-        LibraryDefinitions = libraryDefinitions;
-        Library = library;
-        LibrarySetContext = libsCtx;
-
-        // Internal State
-        _libraryIdentifiersByAlias = new();
-        _codesByName = new();
-        _codesByCodeSystemName = new();
-        _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
-    }
+    private readonly TypeConverter _typeConverter;
 
     public Library Library { get; }
 
@@ -56,7 +27,7 @@ internal partial class LibraryExpressionBuilder
     public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
 
     public ExpressionBuilder CreateExpressionBuilder() =>
-        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _libraryDefinitionBuilderSettings, this);
+        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _typeConverter, _libraryDefinitionBuilderSettings, this);
 
     #region Definitions
 

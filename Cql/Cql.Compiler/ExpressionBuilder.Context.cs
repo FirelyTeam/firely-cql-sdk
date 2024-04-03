@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -12,70 +12,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
+using Hl7.Cql.Conversion;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler
 {
-    /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
-    /// </summary>
-    /// <remarks>
-    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilder)"/>.
-    /// </remarks>
     internal partial class ExpressionBuilder
     {
         private readonly TypeManager _typeManager;
-
-        internal ExpressionBuilder(
-            ILogger<ExpressionBuilder> logger,
-            OperatorBinding operatorBinding,
-            TypeManager typeManager,
-            LibraryDefinitionBuilderSettings settings,
-            LibraryExpressionBuilder libContext)
-        {
-            // External Services
-            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
-            _typeManager = typeManager;
-            _logger = logger;
-
-            // External State
-            _libraryDefinitionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
-            LibraryContext = libContext;
-
-            // Internal State
-            _impliedAlias = null;
-            _operands = new Dictionary<string, ParameterExpression>();
-            _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopes = new Dictionary<string, (Expression, Elm.Element)>();
-            _expressionMutators = new List<IExpressionMutator>();
-            _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
-        }
-
-        private ExpressionBuilder(
-            ExpressionBuilder source)
-        {
-            _elementStack = new Stack<Elm.Element>(_elementStack);
-            _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
-            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
-            _impliedAlias = source._impliedAlias;
-            _operands = source._operands;
-            _libraries = source._libraries;
-            _scopes = source._scopes;
-            LibraryContext = source.LibraryContext;
-            _typeManager = source._typeManager;
-            _logger = source._logger;
-            _expressionMutators = source._expressionMutators;
-            _customImplementations = source._customImplementations;
-        }
-
-        private ExpressionBuilder(
-            ExpressionBuilder outer,
-            string? impliedAlias,
-            IDictionary<string, (Expression, Elm.Element)> scopes) : this(outer)
-        {
-            _scopes = scopes;
-            _impliedAlias = impliedAlias;
-        }
+        private readonly TypeConverter _typeConverter;
 
         private LibraryExpressionBuilder LibraryContext { get; }
 
@@ -86,7 +31,7 @@ namespace Hl7.Cql.Compiler
         /// <remarks>
         /// This function can be used to provide .NET native functions in place of ELM functions, and should also be used to implement
         /// functions defined in CQL with the <code>external</code> keyword.
-        /// </remarks> 
+        /// </remarks>
         private readonly Dictionary<string, Func<ParameterExpression[], LambdaExpression>> _customImplementations;
 
 
@@ -107,7 +52,7 @@ namespace Hl7.Cql.Compiler
         internal IReadOnlyDictionary<string, ParameterExpression> Operands => _operands;
 
         private readonly Dictionary<string, ParameterExpression> _operands;
-        
+
         private readonly Dictionary<string, DefinitionDictionary<LambdaExpression>> _libraries;
 
         /// <summary>
@@ -117,7 +62,7 @@ namespace Hl7.Cql.Compiler
         ///     "PHQ-9 Assessments" PHQ
         ///      where ...
         ///      sort by date from start of FHIRBase."Normalize Interval"(effective) asc
-        /// </code> 
+        /// </code>
         /// The use of "effective" here is unqualified and is implied to be PHQ.effective
         /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
         /// </summary>
@@ -180,7 +125,7 @@ namespace Hl7.Cql.Compiler
         internal bool HasScope(string elmAlias) => _scopes.ContainsKey(elmAlias);
 
 
-        internal ExpressionBuilder WithScope(string alias, Expression expr, Elm.Element element) => 
+        internal ExpressionBuilder WithScope(string alias, Expression expr, Elm.Element element) =>
             WithScopes(KeyValuePair.Create(alias, (expr, element)));
 
         internal ExpressionBuilder WithScopes(string? alias, params KeyValuePair<string, (Expression, Elm.Element)>[] kvps)
@@ -219,7 +164,7 @@ namespace Hl7.Cql.Compiler
         /// Creates a copy with the scopes provided.
         /// </summary>
         internal ExpressionBuilder
-            WithScopes(params KeyValuePair<string, (Expression, Elm.Element)>[] kvps) => 
+            WithScopes(params KeyValuePair<string, (Expression, Elm.Element)>[] kvps) =>
             WithScopes(_impliedAlias, kvps);
 
         internal ExpressionBuilder WithImpliedAlias(string aliasName, Expression linqExpression, Elm.Element elmExpression)
