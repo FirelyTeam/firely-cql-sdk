@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.11.0",
+         "translatorVersion" : "3.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       } ],
@@ -439,8 +439,19 @@
                      "locator" : "44:19-44:51",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "44:19-44:27",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -451,6 +462,13 @@
                         "locator" : "44:31-44:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Divide",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "44:32-44:35",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -484,12 +502,30 @@
                      "locator" : "45:21-45:58",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "45:21-45:53",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "45:21-45:29",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -500,6 +536,13 @@
                            "locator" : "45:33-45:53",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "45:34-45:37",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -521,6 +564,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "45:57-45:58",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -543,16 +590,41 @@
                      "locator" : "46:19-46:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "46:19-46:56",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "46:19-46:51",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "type" : "ToDecimal",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "46:19-46:27",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -563,6 +635,13 @@
                               "locator" : "46:31-46:51",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "type" : "Divide",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "46:32-46:35",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -584,6 +663,10 @@
                            } ]
                         }, {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "46:55-46:56",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -594,6 +677,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "46:60-46:61",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -616,12 +703,30 @@
                      "locator" : "47:19-47:56",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "47:19-47:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "47:19-47:27",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -632,6 +737,13 @@
                            "locator" : "47:31-47:51",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "47:32-47:35",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -653,6 +765,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "47:55-47:56",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -675,12 +791,30 @@
                      "locator" : "48:20-48:63",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "48:20-48:52",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "48:20-48:28",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -691,6 +825,13 @@
                            "locator" : "48:32-48:52",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "48:33-48:36",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -712,10 +853,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "48:56-48:63",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "48:57-48:58",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -745,12 +897,30 @@
                      "locator" : "49:20-49:64",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "49:20-49:52",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "49:20-49:28",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -761,6 +931,13 @@
                            "locator" : "49:32-49:52",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "49:33-49:36",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -782,10 +959,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "49:56-49:64",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "49:57-49:58",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -815,12 +1003,30 @@
                      "locator" : "50:19-50:64",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "50:19-50:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "50:19-50:27",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -831,6 +1037,13 @@
                            "locator" : "50:31-50:51",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "50:32-50:35",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -852,10 +1065,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "50:55-50:64",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "50:56-50:57",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -885,8 +1109,19 @@
                      "locator" : "51:22-51:54",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "51:22-51:30",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -897,6 +1132,13 @@
                         "locator" : "51:34-51:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Divide",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "51:35-51:38",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -930,12 +1172,30 @@
                      "locator" : "52:24-52:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "52:24-52:56",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "52:24-52:32",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -946,6 +1206,13 @@
                            "locator" : "52:36-52:56",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "52:37-52:40",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -967,6 +1234,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "52:60-52:61",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -989,16 +1260,41 @@
                      "locator" : "53:24-53:66",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "53:24-53:61",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "53:24-53:56",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "type" : "ToDecimal",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "53:24-53:32",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1009,6 +1305,13 @@
                               "locator" : "53:36-53:56",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "type" : "Divide",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "53:37-53:40",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1030,6 +1333,10 @@
                            } ]
                         }, {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "53:60-53:61",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1040,6 +1347,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "53:65-53:66",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1062,12 +1373,30 @@
                      "locator" : "54:21-54:58",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "54:21-54:53",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "54:21-54:29",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1078,6 +1407,13 @@
                            "locator" : "54:33-54:53",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "54:34-54:37",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1099,6 +1435,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "54:57-54:58",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1121,12 +1461,30 @@
                      "locator" : "55:22-55:65",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "55:22-55:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "55:22-55:30",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1137,6 +1495,13 @@
                            "locator" : "55:34-55:54",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "55:35-55:38",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1158,10 +1523,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "55:58-55:65",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "55:59-55:60",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1191,12 +1567,30 @@
                      "locator" : "56:23-56:67",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "56:23-56:55",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "56:23-56:31",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1207,6 +1601,13 @@
                            "locator" : "56:35-56:55",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "56:36-56:39",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1228,10 +1629,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "56:59-56:67",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "56:60-56:61",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1261,12 +1673,30 @@
                      "locator" : "57:22-57:67",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "57:22-57:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "57:22-57:30",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1277,6 +1707,13 @@
                            "locator" : "57:34-57:54",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "57:35-57:38",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1298,10 +1735,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "57:58-57:67",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "57:59-57:60",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1331,8 +1779,19 @@
                      "locator" : "58:23-58:55",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "58:23-58:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1343,6 +1802,13 @@
                         "locator" : "58:35-58:55",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Divide",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "58:36-58:39",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1376,12 +1842,30 @@
                      "locator" : "59:25-59:62",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "59:25-59:57",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "59:25-59:33",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1392,6 +1876,13 @@
                            "locator" : "59:37-59:57",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "59:38-59:41",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1413,6 +1904,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "59:61-59:62",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1435,16 +1930,41 @@
                      "locator" : "60:25-60:67",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Multiply",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "60:25-60:62",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "60:25-60:57",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "type" : "ToDecimal",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : {
                                  "locator" : "60:25-60:33",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1455,6 +1975,13 @@
                               "locator" : "60:37-60:57",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "type" : "Divide",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "60:38-60:41",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1476,6 +2003,10 @@
                            } ]
                         }, {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "60:61-60:62",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1486,6 +2017,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "60:66-60:67",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1508,12 +2043,30 @@
                      "locator" : "61:22-61:59",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "61:22-61:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "61:22-61:30",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1524,6 +2077,13 @@
                            "locator" : "61:34-61:54",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "61:35-61:38",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1545,6 +2105,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "61:58-61:59",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1567,12 +2131,30 @@
                      "locator" : "62:23-62:66",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "62:23-62:55",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "62:23-62:31",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1583,6 +2165,13 @@
                            "locator" : "62:35-62:55",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "62:36-62:39",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1604,10 +2193,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "62:59-62:66",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "62:60-62:61",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1637,12 +2237,30 @@
                      "locator" : "63:24-63:68",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "63:24-63:56",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "63:24-63:32",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1653,6 +2271,13 @@
                            "locator" : "63:36-63:56",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "63:37-63:40",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1674,10 +2299,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "63:60-63:68",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "63:61-63:62",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1707,12 +2343,30 @@
                      "locator" : "64:23-64:68",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Divide",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "64:23-64:55",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "Multiply",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "type" : "ToDecimal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : {
                               "locator" : "64:23-64:31",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -1723,6 +2377,13 @@
                            "locator" : "64:35-64:55",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "Divide",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "64:36-64:39",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -1744,10 +2405,21 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "64:59-64:68",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "Multiply",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "64:60-64:61",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2032,6 +2704,13 @@
                      "locator" : "158:20-158:52",
                      "resultTypeName" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
                      "type" : "SingletonFrom",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "158:35-158:52",
                         "path" : "doseAndRate",
@@ -2133,6 +2812,13 @@
                      "locator" : "161:13-161:52",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "161:22-161:37",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
@@ -2141,6 +2827,10 @@
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}Range",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "161:29-161:37",
                               "resultTypeName" : "{http://hl7.org/fhir}Range",
@@ -2184,6 +2874,13 @@
                      "locator" : "163:18-163:78",
                      "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}positiveInt",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{http://hl7.org/fhir}positiveInt",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "163:27-163:52",
                         "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
@@ -2313,6 +3010,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "165:57-165:86",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2438,6 +3139,13 @@
                      "locator" : "169:16-169:68",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "name" : "ToInteger",
                         "libraryName" : "FHIRHelpers",
@@ -2471,6 +3179,16 @@
                      "locator" : "171:9-175:9",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "172:11-172:31",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -2479,6 +3197,10 @@
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}Period",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "172:20-172:31",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
@@ -2494,6 +3216,10 @@
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}Period",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "173:20-173:51",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
@@ -2512,6 +3238,10 @@
                         "name" : "ToDateTime",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}dateTime",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "174:11-174:22",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
@@ -2558,10 +3288,21 @@
                                  "locator" : "177:15-177:33",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Period",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "177:22-177:33",
                                        "resultTypeName" : "{http://hl7.org/fhir}Period",
@@ -2574,14 +3315,32 @@
                               "locator" : "177:46-177:83",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Equal",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "177:46-177:64",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Period",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "177:53-177:64",
                                        "resultTypeName" : "{http://hl7.org/fhir}Period",
@@ -2620,10 +3379,21 @@
                            "locator" : "178:29-178:47",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "178:36-178:47",
                                  "resultTypeName" : "{http://hl7.org/fhir}Period",
@@ -2655,6 +3425,13 @@
                            "locator" : "180:29-180:109",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Add",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "180:29-180:37",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -2664,10 +3441,24 @@
                               "locator" : "180:41-180:109",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "type" : "Multiply",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "180:41-180:93",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "type" : "Coalesce",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "name" : "ToQuantity",
                                     "libraryName" : "FHIRHelpers",
@@ -2682,6 +3473,13 @@
                                     "locator" : "180:62-180:92",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "type" : "Divide",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "name" : "ToQuantity",
                                        "libraryName" : "FHIRHelpers",
@@ -2696,6 +3494,13 @@
                                        "locator" : "180:73-180:92",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "type" : "Multiply",
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "180:74-180:77",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
@@ -2703,6 +3508,10 @@
                                           "type" : "QueryLetRef"
                                        }, {
                                           "type" : "ToQuantity",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : {
                                              "locator" : "180:81-180:91",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -2714,10 +3523,21 @@
                                  } ]
                               }, {
                                  "type" : "ToQuantity",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : {
                                     "locator" : "180:97-180:109",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "type" : "Add",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "180:98",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -2789,6 +3609,13 @@
                      "locator" : "265:15-265:48",
                      "resultTypeName" : "{http://hl7.org/fhir}Dosage",
                      "type" : "SingletonFrom",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Dosage",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "265:30-265:48",
                         "path" : "dosageInstruction",
@@ -2811,6 +3638,13 @@
                      "locator" : "266:20-266:52",
                      "resultTypeName" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
                      "type" : "SingletonFrom",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
                      "operand" : {
                         "locator" : "266:35-266:52",
                         "path" : "doseAndRate",
@@ -2912,14 +3746,32 @@
                      "locator" : "269:13-269:52",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "269:22-269:37",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "End",
+                        "signature" : [ {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}Range",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "269:29-269:37",
                               "resultTypeName" : "{http://hl7.org/fhir}Range",
@@ -2963,6 +3815,13 @@
                      "locator" : "271:18-271:78",
                      "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}positiveInt",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{http://hl7.org/fhir}positiveInt",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "271:27-271:52",
                         "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
@@ -3069,6 +3928,16 @@
                      "locator" : "273:20-273:92",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "273:29-273:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -3092,6 +3961,10 @@
                         } ]
                      }, {
                         "type" : "ToDecimal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "locator" : "273:57-273:86",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -3137,6 +4010,13 @@
                      "locator" : "275:9-278:9",
                      "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                      "type" : "Coalesce",
+                     "signature" : [ {
+                        "name" : "{http://hl7.org/fhir}dateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{http://hl7.org/fhir}dateTime",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "locator" : "276:11-276:26",
                         "resultTypeName" : "{http://hl7.org/fhir}dateTime",
@@ -3178,6 +4058,10 @@
                         "name" : "ToDateTime",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}dateTime",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "280:18-280:26",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
@@ -3189,10 +4073,21 @@
                         "locator" : "280:29-280:97",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Add",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "name" : "ToDateTime",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}dateTime",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "280:29-280:37",
                               "resultTypeName" : "{http://hl7.org/fhir}dateTime",
@@ -3203,6 +4098,13 @@
                            "locator" : "280:41-280:97",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "type" : "Coalesce",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "name" : "ToQuantity",
                               "libraryName" : "FHIRHelpers",
@@ -3218,6 +4120,13 @@
                               "locator" : "280:64-280:96",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "type" : "Divide",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "name" : "ToQuantity",
                                  "libraryName" : "FHIRHelpers",
@@ -3233,6 +4142,13 @@
                                  "locator" : "280:77-280:96",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "type" : "Multiply",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "280:78-280:81",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
@@ -3240,6 +4156,10 @@
                                     "type" : "QueryLetRef"
                                  }, {
                                     "type" : "ToQuantity",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : {
                                        "locator" : "280:85-280:95",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
@@ -3372,6 +4292,10 @@
                         "name" : "ToInterval",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Period",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "asType" : "{http://hl7.org/fhir}Period",
                            "type" : "As",
@@ -3478,6 +4402,13 @@
                            "locator" : "313:29-313:59",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Add",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "313:29-313:37",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -3529,6 +4460,13 @@
                "locator" : "328:3-328:99",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Sum",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
                   "locator" : "328:7-328:98",
                   "type" : "Query",
@@ -3602,6 +4540,13 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "precision" : "Day",
                         "type" : "DifferenceBetween",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "locator" : "328:76-328:85",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -3622,6 +4567,13 @@
                            "locator" : "328:91-328:98",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
+                           "signature" : [ {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "328:98",
                               "name" : "X",
@@ -3827,6 +4779,13 @@
                                  "locator" : "337:16-337:58",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Max",
+                                 "signature" : [ {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "source" : {
                                     "locator" : "337:20-337:57",
                                     "type" : "List",
@@ -3841,10 +4800,24 @@
                                        "locator" : "337:22-337:43",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Add",
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "337:22-337:35",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                           "type" : "End",
+                                          "signature" : [ {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "337:29-337:35",
                                              "type" : "Last",
@@ -3905,6 +4878,13 @@
                                  "locator" : "338:16-338:93",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Add",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "338:16",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -3919,15 +4899,33 @@
                                        "name" : "value",
                                        "value" : {
                                           "type" : "ToDecimal",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : {
                                              "locator" : "338:45-338:78",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                              "type" : "Coalesce",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "338:54-338:74",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                                 "precision" : "Day",
                                                 "type" : "DurationBetween",
+                                                "signature" : [ {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "type" : "Start",
                                                    "operand" : {
@@ -3944,6 +4942,13 @@
                                                    }
                                                 }, {
                                                    "type" : "End",
+                                                   "signature" : [ {
+                                                      "type" : "IntervalTypeSpecifier",
+                                                      "pointType" : {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   } ],
                                                    "operand" : {
                                                       "locator" : "338:74",
                                                       "name" : "X",

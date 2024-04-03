@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.11.0",
+         "translatorVersion" : "3.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       } ],
@@ -1373,6 +1373,13 @@
                                           "locator" : "53:21-53:57",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{http://hl7.org/fhir}Claim.Item",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "53:28-53:57",
                                              "path" : "LineItems",
@@ -2197,6 +2204,13 @@
                                                       "locator" : "74:17-76:11",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Exists",
+                                                      "signature" : [ {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "elementType" : {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "74:24-76:11",
                                                          "type" : "Query",
@@ -2274,6 +2288,13 @@
                                                       "locator" : "77:16-79:13",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Exists",
+                                                      "signature" : [ {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "elementType" : {
+                                                            "name" : "{http://hl7.org/fhir}Coding",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "77:23-79:13",
                                                          "type" : "Query",
@@ -2488,6 +2509,13 @@
                                           "locator" : "81:21-81:57",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{http://hl7.org/fhir}Claim.Item",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "81:28-81:57",
                                              "path" : "LineItems",
@@ -3143,6 +3171,13 @@
                                        "locator" : "100:9-102:9",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
+                                       "signature" : [ {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}Coding",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : {
                                           "locator" : "100:22-102:9",
                                           "type" : "Query",
@@ -3418,6 +3453,13 @@
                                     "locator" : "104:19-104:58",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Exists",
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Claim",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "104:26-104:58",
                                        "path" : "DiagnosisItems",
@@ -4358,6 +4400,13 @@
                                                 "locator" : "123:11-125:11",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                 "type" : "Exists",
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "123:24-125:11",
                                                    "type" : "Query",
@@ -4734,6 +4783,13 @@
                                                             "locator" : "130:15-132:15",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Exists",
+                                                            "signature" : [ {
+                                                               "type" : "ListTypeSpecifier",
+                                                               "elementType" : {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }
+                                                            } ],
                                                             "operand" : {
                                                                "locator" : "130:28-132:15",
                                                                "type" : "Query",
@@ -4959,10 +5015,24 @@
                                                                               "locator" : "136:118-136:237",
                                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                                               "type" : "Subtract",
+                                                                              "signature" : [ {
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              }, {
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              } ],
                                                                               "operand" : [ {
                                                                                  "locator" : "136:118-136:229",
                                                                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                                                  "type" : "Add",
+                                                                                 "signature" : [ {
+                                                                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                                                    "type" : "NamedTypeSpecifier"
+                                                                                 }, {
+                                                                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                    "type" : "NamedTypeSpecifier"
+                                                                                 } ],
                                                                                  "operand" : [ {
                                                                                     "locator" : "136:118-136:170",
                                                                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -5045,6 +5115,10 @@
                                                                            "type" : "Interval",
                                                                            "low" : {
                                                                               "type" : "ToDateTime",
+                                                                              "signature" : [ {
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              } ],
                                                                               "operand" : {
                                                                                  "path" : "low",
                                                                                  "type" : "Property",
@@ -5097,10 +5171,24 @@
                                                                                        "locator" : "137:64-137:155",
                                                                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                        "type" : "Subtract",
+                                                                                       "signature" : [ {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       }, {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       } ],
                                                                                        "operand" : [ {
                                                                                           "locator" : "137:64-137:147",
                                                                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                           "type" : "Add",
+                                                                                          "signature" : [ {
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          }, {
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          } ],
                                                                                           "operand" : [ {
                                                                                              "name" : "ToDate",
                                                                                              "libraryName" : "FHIRHelpers",
@@ -5232,10 +5320,24 @@
                                                                                     "locator" : "137:64-137:155",
                                                                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                     "type" : "Subtract",
+                                                                                    "signature" : [ {
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    }, {
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    } ],
                                                                                     "operand" : [ {
                                                                                        "locator" : "137:64-137:147",
                                                                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                        "type" : "Add",
+                                                                                       "signature" : [ {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       }, {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       } ],
                                                                                        "operand" : [ {
                                                                                           "name" : "ToDate",
                                                                                           "libraryName" : "FHIRHelpers",
@@ -5316,6 +5418,10 @@
                                                                            },
                                                                            "high" : {
                                                                               "type" : "ToDateTime",
+                                                                              "signature" : [ {
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              } ],
                                                                               "operand" : {
                                                                                  "path" : "high",
                                                                                  "type" : "Property",
@@ -5368,10 +5474,24 @@
                                                                                        "locator" : "137:64-137:155",
                                                                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                        "type" : "Subtract",
+                                                                                       "signature" : [ {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       }, {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       } ],
                                                                                        "operand" : [ {
                                                                                           "locator" : "137:64-137:147",
                                                                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                           "type" : "Add",
+                                                                                          "signature" : [ {
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          }, {
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          } ],
                                                                                           "operand" : [ {
                                                                                              "name" : "ToDate",
                                                                                              "libraryName" : "FHIRHelpers",
@@ -5503,10 +5623,24 @@
                                                                                     "locator" : "137:64-137:155",
                                                                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                     "type" : "Subtract",
+                                                                                    "signature" : [ {
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    }, {
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    } ],
                                                                                     "operand" : [ {
                                                                                        "locator" : "137:64-137:147",
                                                                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                                                        "type" : "Add",
+                                                                                       "signature" : [ {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       }, {
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       } ],
                                                                                        "operand" : [ {
                                                                                           "name" : "ToDate",
                                                                                           "libraryName" : "FHIRHelpers",
@@ -5707,6 +5841,13 @@
                                                       "locator" : "142:27-142:63",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Exists",
+                                                      "signature" : [ {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "elementType" : {
+                                                            "name" : "{http://hl7.org/fhir}Claim.Item",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "142:34-142:63",
                                                          "path" : "LineItems",
@@ -6602,6 +6743,13 @@
                                        "locator" : "165:9-167:9",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
+                                       "signature" : [ {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}Coding",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : {
                                           "locator" : "165:22-167:9",
                                           "type" : "Query",
@@ -7026,6 +7174,13 @@
                                                             "locator" : "173:21-175:15",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Exists",
+                                                            "signature" : [ {
+                                                               "type" : "ListTypeSpecifier",
+                                                               "elementType" : {
+                                                                  "name" : "{http://hl7.org/fhir}Coding",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }
+                                                            } ],
                                                             "operand" : {
                                                                "locator" : "173:28-175:15",
                                                                "type" : "Query",
@@ -7183,6 +7338,13 @@
                                                             "locator" : "176:20-178:17",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Exists",
+                                                            "signature" : [ {
+                                                               "type" : "ListTypeSpecifier",
+                                                               "elementType" : {
+                                                                  "name" : "{http://hl7.org/fhir}Coding",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }
+                                                            } ],
                                                             "operand" : {
                                                                "locator" : "176:27-178:17",
                                                                "type" : "Query",
@@ -8213,6 +8375,13 @@
                                                       "locator" : "204:17-206:11",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Exists",
+                                                      "signature" : [ {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "elementType" : {
+                                                            "name" : "{http://hl7.org/fhir}Coding",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "204:24-206:11",
                                                          "type" : "Query",
@@ -8364,6 +8533,13 @@
                                                       "locator" : "207:16-209:13",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Exists",
+                                                      "signature" : [ {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "elementType" : {
+                                                            "name" : "{http://hl7.org/fhir}Coding",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "207:23-209:13",
                                                          "type" : "Query",
@@ -8741,6 +8917,13 @@
                                                                "locator" : "216:15-221:15",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                                "type" : "Exists",
+                                                               "signature" : [ {
+                                                                  "type" : "ListTypeSpecifier",
+                                                                  "elementType" : {
+                                                                     "name" : "{http://hl7.org/fhir}Claim.Diagnosis",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }
+                                                               } ],
                                                                "operand" : {
                                                                   "locator" : "216:28-221:15",
                                                                   "type" : "Query",
@@ -8784,6 +8967,13 @@
                                                                         "locator" : "217:25-217:77",
                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                                         "type" : "Equal",
+                                                                        "signature" : [ {
+                                                                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                           "type" : "NamedTypeSpecifier"
+                                                                        }, {
+                                                                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                                           "type" : "NamedTypeSpecifier"
+                                                                        } ],
                                                                         "operand" : [ {
                                                                            "locator" : "217:25-217:73",
                                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -8808,6 +8998,13 @@
                                                                         "locator" : "218:25-220:21",
                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                                         "type" : "Exists",
+                                                                        "signature" : [ {
+                                                                           "type" : "ListTypeSpecifier",
+                                                                           "elementType" : {
+                                                                              "name" : "{http://hl7.org/fhir}Coding",
+                                                                              "type" : "NamedTypeSpecifier"
+                                                                           }
+                                                                        } ],
                                                                         "operand" : {
                                                                            "locator" : "218:32-220:21",
                                                                            "type" : "Query",
@@ -9642,6 +9839,13 @@
                                        "locator" : "243:9-248:9",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
+                                       "signature" : [ {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}Claim.Diagnosis",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : {
                                           "locator" : "243:22-248:9",
                                           "type" : "Query",
@@ -9685,6 +9889,13 @@
                                                 "locator" : "244:19-244:71",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                 "type" : "Equal",
+                                                "signature" : [ {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
                                                    "locator" : "244:19-244:67",
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -9709,6 +9920,13 @@
                                                 "locator" : "245:19-247:15",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                 "type" : "Exists",
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}Coding",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "245:26-247:15",
                                                    "type" : "Query",
@@ -10593,6 +10811,10 @@
                                  "name" : "ToString",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}RemittanceOutcome",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "427:13-427:32",
                                     "resultTypeName" : "{http://hl7.org/fhir}RemittanceOutcome",
@@ -10794,6 +11016,10 @@
                                     "name" : "ToString",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}string",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "432:44-432:68",
                                        "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -10854,6 +11080,13 @@
                                        "locator" : "434:21-436:15",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
+                                       "signature" : [ {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}Coding",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : {
                                           "locator" : "434:28-436:15",
                                           "type" : "Query",
@@ -10958,6 +11191,13 @@
                                              "locator" : "435:19-435:59",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                              "type" : "Equal",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "435:25-435:47",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -10983,6 +11223,13 @@
                                        "locator" : "437:21-439:17",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
+                                       "signature" : [ {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}Money",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : {
                                           "locator" : "437:28-439:17",
                                           "type" : "Query",
@@ -11053,6 +11300,13 @@
                                              "locator" : "438:21-438:48",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                              "type" : "Greater",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "name" : "ToDecimal",
                                                 "libraryName" : "FHIRHelpers",
@@ -11066,6 +11320,10 @@
                                                 } ]
                                              }, {
                                                 "type" : "ToDecimal",
+                                                "signature" : [ {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "438:48",
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -11222,6 +11480,13 @@
                            "locator" : "446:11-448:5",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Coding",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "446:18-448:5",
                               "type" : "Query",
@@ -11326,6 +11591,16 @@
                                  "locator" : "447:9-447:85",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "In",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "447:15-447:57",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -11356,6 +11631,13 @@
                            "locator" : "449:11-451:7",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Coding",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "449:18-451:7",
                               "type" : "Query",
@@ -11482,6 +11764,16 @@
                                  "locator" : "450:11-450:73",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "In",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "450:17-450:52",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -11629,6 +11921,13 @@
                               "locator" : "456:11-458:11",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
+                              "signature" : [ {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Coding",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : {
                                  "locator" : "456:24-458:11",
                                  "type" : "Query",
@@ -11672,6 +11971,16 @@
                                     "locator" : "457:15-457:91",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "In",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "457:21-457:63",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -12481,6 +12790,34 @@
                                           "locator" : "311:13-315:13",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "type" : "TupleTypeSpecifier",
+                                                "element" : [ {
+                                                   "name" : "Response",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}ClaimResponse",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "ResponseID",
+                                                   "elementType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "LineItems",
+                                                   "elementType" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "elementType" : {
+                                                         "name" : "{http://hl7.org/fhir}ClaimResponse.Item",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   }
+                                                } ]
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "311:26-315:13",
                                              "type" : "Query",
@@ -12610,10 +12947,21 @@
                                                       "locator" : "313:29-313:110",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "name" : "ToString",
                                                          "libraryName" : "FHIRHelpers",
                                                          "type" : "FunctionRef",
+                                                         "signature" : [ {
+                                                            "name" : "{http://hl7.org/fhir}id",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
                                                             "locator" : "313:29-313:55",
                                                             "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -12637,6 +12985,10 @@
                                                             "name" : "ToString",
                                                             "libraryName" : "FHIRHelpers",
                                                             "type" : "FunctionRef",
+                                                            "signature" : [ {
+                                                               "name" : "{http://hl7.org/fhir}string",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "313:76-313:108",
                                                                "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -12662,6 +13014,13 @@
                                                       "locator" : "314:25-314:79",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "314:25-314:49",
                                                          "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
@@ -13024,6 +13383,13 @@
                                     "locator" : "322:21-322:75",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Exists",
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Claim.Item",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "322:28-322:75",
                                        "type" : "Flatten",
@@ -14421,6 +14787,13 @@
                            "locator" : "464:11-466:5",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Coding",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "464:18-466:5",
                               "type" : "Query",
@@ -14525,6 +14898,16 @@
                                  "locator" : "465:9-465:85",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "In",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "465:15-465:57",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -14555,6 +14938,13 @@
                            "locator" : "467:10-469:7",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Coding",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
                               "locator" : "467:17-469:7",
                               "type" : "Query",
@@ -14681,6 +15071,16 @@
                                  "locator" : "468:11-468:73",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "In",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "468:17-468:52",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -14774,6 +15174,13 @@
                         "locator" : "470:17-474:7",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Exists",
+                        "signature" : [ {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Claim.Item",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
                            "locator" : "470:24-474:7",
                            "type" : "Query",
@@ -14813,6 +15220,13 @@
                               "locator" : "471:11-473:11",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
+                              "signature" : [ {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Coding",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : {
                                  "locator" : "471:24-473:11",
                                  "type" : "Query",
@@ -14856,6 +15270,16 @@
                                     "locator" : "472:15-472:91",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "In",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "472:21-472:63",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -14971,6 +15395,13 @@
                                  "locator" : "478:13-480:13",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Exists",
+                                 "signature" : [ {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Coding",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
                                     "locator" : "478:26-480:13",
                                     "type" : "Query",
@@ -15014,6 +15445,16 @@
                                        "locator" : "479:17-479:93",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "In",
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "479:23-479:65",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -15130,6 +15571,13 @@
                                  "locator" : "487:13-487:49",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Equal",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
                                     "locator" : "487:19-487:45",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -15933,6 +16381,34 @@
                                           "locator" : "340:13-344:13",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "type" : "TupleTypeSpecifier",
+                                                "element" : [ {
+                                                   "name" : "Response",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}ClaimResponse",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "ResponseID",
+                                                   "elementType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "LineItems",
+                                                   "elementType" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "elementType" : {
+                                                         "name" : "{http://hl7.org/fhir}ClaimResponse.Item",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   }
+                                                } ]
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "340:26-344:13",
                                              "type" : "Query",
@@ -16062,10 +16538,21 @@
                                                       "locator" : "342:29-342:110",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "name" : "ToString",
                                                          "libraryName" : "FHIRHelpers",
                                                          "type" : "FunctionRef",
+                                                         "signature" : [ {
+                                                            "name" : "{http://hl7.org/fhir}id",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
                                                             "locator" : "342:29-342:55",
                                                             "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -16089,6 +16576,10 @@
                                                             "name" : "ToString",
                                                             "libraryName" : "FHIRHelpers",
                                                             "type" : "FunctionRef",
+                                                            "signature" : [ {
+                                                               "name" : "{http://hl7.org/fhir}string",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "342:76-342:108",
                                                                "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -16114,6 +16605,13 @@
                                                       "locator" : "343:25-343:79",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "343:25-343:49",
                                                          "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
@@ -16476,6 +16974,13 @@
                                     "locator" : "351:21-351:75",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Exists",
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Claim.Item",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "351:28-351:75",
                                        "type" : "Flatten",
@@ -17687,6 +18192,13 @@
                   "locator" : "494:7-496:7",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
+                  "signature" : [ {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Coding",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : {
                      "locator" : "494:20-496:7",
                      "type" : "Query",
@@ -17791,6 +18303,16 @@
                         "locator" : "495:11-495:87",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "In",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : [ {
                            "locator" : "495:17-495:59",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -17934,6 +18456,13 @@
                               "locator" : "501:13-503:13",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
+                              "signature" : [ {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Coding",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ],
                               "operand" : {
                                  "locator" : "501:26-503:13",
                                  "type" : "Query",
@@ -17977,6 +18506,16 @@
                                     "locator" : "502:17-502:93",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "In",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "502:23-502:65",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -18756,6 +19295,34 @@
                                           "locator" : "369:13-373:13",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "type" : "TupleTypeSpecifier",
+                                                "element" : [ {
+                                                   "name" : "Response",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}ClaimResponse",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "ResponseID",
+                                                   "elementType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "LineItems",
+                                                   "elementType" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "elementType" : {
+                                                         "name" : "{http://hl7.org/fhir}ClaimResponse.Item",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   }
+                                                } ]
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "369:26-373:13",
                                              "type" : "Query",
@@ -18885,10 +19452,21 @@
                                                       "locator" : "371:29-371:110",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "name" : "ToString",
                                                          "libraryName" : "FHIRHelpers",
                                                          "type" : "FunctionRef",
+                                                         "signature" : [ {
+                                                            "name" : "{http://hl7.org/fhir}id",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
                                                             "locator" : "371:29-371:55",
                                                             "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -18912,6 +19490,10 @@
                                                             "name" : "ToString",
                                                             "libraryName" : "FHIRHelpers",
                                                             "type" : "FunctionRef",
+                                                            "signature" : [ {
+                                                               "name" : "{http://hl7.org/fhir}string",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "371:76-371:108",
                                                                "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -18937,6 +19519,13 @@
                                                       "locator" : "372:25-372:79",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "372:25-372:49",
                                                          "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
@@ -19299,6 +19888,13 @@
                                     "locator" : "380:21-380:75",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Exists",
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Claim.Item",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "380:28-380:75",
                                        "type" : "Flatten",
@@ -21486,6 +22082,34 @@
                                           "locator" : "398:13-402:13",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "type" : "TupleTypeSpecifier",
+                                                "element" : [ {
+                                                   "name" : "Response",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}ClaimResponse",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "ResponseID",
+                                                   "elementType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }, {
+                                                   "name" : "LineItems",
+                                                   "elementType" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "elementType" : {
+                                                         "name" : "{http://hl7.org/fhir}ClaimResponse.Item",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   }
+                                                } ]
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "398:26-402:13",
                                              "type" : "Query",
@@ -21615,10 +22239,21 @@
                                                       "locator" : "400:29-400:100",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "name" : "ToString",
                                                          "libraryName" : "FHIRHelpers",
                                                          "type" : "FunctionRef",
+                                                         "signature" : [ {
+                                                            "name" : "{http://hl7.org/fhir}id",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
                                                             "locator" : "400:29-400:45",
                                                             "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -21642,6 +22277,10 @@
                                                             "name" : "ToString",
                                                             "libraryName" : "FHIRHelpers",
                                                             "type" : "FunctionRef",
+                                                            "signature" : [ {
+                                                               "name" : "{http://hl7.org/fhir}string",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "400:66-400:98",
                                                                "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -21667,6 +22306,13 @@
                                                       "locator" : "401:25-401:79",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "Equal",
+                                                      "signature" : [ {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "name" : "{http://hl7.org/fhir}positiveInt",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "401:25-401:49",
                                                          "resultTypeName" : "{http://hl7.org/fhir}positiveInt",
@@ -22203,6 +22849,13 @@
                                     "locator" : "409:21-409:75",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Exists",
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Claim.Item",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : {
                                        "locator" : "409:28-409:75",
                                        "type" : "Flatten",
@@ -22782,6 +23435,10 @@
                                                       "locator" : "414:64-414:121",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                       "type" : "ToDate",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "414:71-414:120",
                                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -22821,14 +23478,32 @@
                                                       "locator" : "414:124-414:247",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                                       "type" : "ToDate",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : {
                                                          "locator" : "414:131-414:246",
                                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                          "type" : "Subtract",
+                                                         "signature" : [ {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
                                                             "locator" : "414:131-414:238",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                             "type" : "Add",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "414:131-414:180",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -24022,10 +24697,21 @@
                         "locator" : "511:9-511:66",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "name" : "ToString",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}id",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "511:15-511:22",
                               "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -24043,6 +24729,10 @@
                               "name" : "ToString",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "511:45-511:64",
                                  "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -24108,10 +24798,21 @@
                         "locator" : "514:9-514:96",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
                            "name" : "ToString",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}id",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
                               "locator" : "514:15-514:22",
                               "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -24129,6 +24830,10 @@
                               "name" : "ToString",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
                                  "locator" : "514:45-514:94",
                                  "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -24687,6 +25392,13 @@
                                        "locator" : "528:11-531:11",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
+                                       "signature" : [ {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}Claim.Item",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       } ],
                                        "operand" : {
                                           "locator" : "528:24-531:11",
                                           "type" : "Query",
@@ -24726,6 +25438,13 @@
                                              "locator" : "529:15-530:50",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                              "type" : "Exists",
+                                             "signature" : [ {
+                                                "type" : "ListTypeSpecifier",
+                                                "elementType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             } ],
                                              "operand" : {
                                                 "locator" : "529:28-530:50",
                                                 "type" : "Query",
@@ -24778,6 +25497,10 @@
                                                    "locator" : "530:17-530:50",
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                    "type" : "InValueSet",
+                                                   "signature" : [ {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ],
                                                    "code" : {
                                                       "locator" : "530:23-530:30",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -24886,6 +25609,13 @@
                                           "locator" : "535:17-538:11",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{http://hl7.org/fhir}Claim.Item",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "535:24-538:11",
                                              "type" : "Query",
@@ -24925,6 +25655,13 @@
                                                 "locator" : "536:15-537:63",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                 "type" : "Exists",
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "536:28-537:63",
                                                    "type" : "Query",
@@ -24977,6 +25714,10 @@
                                                       "locator" : "537:17-537:63",
                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                       "type" : "InValueSet",
+                                                      "signature" : [ {
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "code" : {
                                                          "locator" : "537:23-537:30",
                                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -24998,6 +25739,13 @@
                                           "locator" : "539:16-541:13",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{http://hl7.org/fhir}Coding",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "539:23-541:13",
                                              "type" : "Query",
@@ -25043,6 +25791,10 @@
                                                 "locator" : "540:17-540:65",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                 "type" : "InValueSet",
+                                                "signature" : [ {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "code" : {
                                                    "locator" : "540:23-540:36",
                                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -25218,6 +25970,13 @@
                                        "locator" : "548:23-548:65",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Equal",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}id",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}id",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "548:23-548:46",
                                           "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -25298,6 +26057,13 @@
                                        "locator" : "551:23-551:65",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Equal",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}id",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}id",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "551:23-551:38",
                                           "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -25567,6 +26333,13 @@
                                     "locator" : "559:11-559:57",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equal",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "559:17-559:53",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -25824,6 +26597,10 @@
                                                       "name" : "ToString",
                                                       "libraryName" : "FHIRHelpers",
                                                       "type" : "FunctionRef",
+                                                      "signature" : [ {
+                                                         "name" : "{http://hl7.org/fhir}string",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "566:45",
                                                          "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -25942,10 +26719,24 @@
                                     "locator" : "572:9-572:67",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "In",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : [ {
                                        "name" : "ToString",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}id",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "572:15-572:18",
                                           "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -26304,6 +27095,13 @@
                                                             "locator" : "579:25-579:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equal",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "579:25-579:38",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -26327,6 +27125,13 @@
                                                             "locator" : "580:25-580:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equivalent",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "name" : "ToConcept",
                                                                "libraryName" : "FHIRHelpers",
@@ -26342,6 +27147,10 @@
                                                                "locator" : "580:34-580:73",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                                                "type" : "ToConcept",
+                                                               "signature" : [ {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : {
                                                                   "locator" : "580:44-580:72",
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -26442,6 +27251,13 @@
                                                             "locator" : "585:25-585:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equal",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "585:25-585:38",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -26465,6 +27281,13 @@
                                                             "locator" : "586:25-586:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equivalent",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "name" : "ToConcept",
                                                                "libraryName" : "FHIRHelpers",
@@ -26480,6 +27303,10 @@
                                                                "locator" : "586:34-586:73",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                                                "type" : "ToConcept",
+                                                               "signature" : [ {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : {
                                                                   "locator" : "586:44-586:72",
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -26569,6 +27396,13 @@
                                           "locator" : "594:33-594:79",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{http://hl7.org/fhir}Claim",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "594:40-594:79",
                                              "type" : "Query",
@@ -26650,10 +27484,24 @@
                                           "locator" : "594:86-604:13",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "type" : "Add",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "594:88-600:15",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                              "type" : "Add",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "594:88-596:15",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -26747,6 +27595,13 @@
                                                 "locator" : "596:18-600:15",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                                 "type" : "Count",
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}string",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                } ],
                                                 "source" : {
                                                    "locator" : "596:24-599:26",
                                                    "type" : "Query",
@@ -26904,6 +27759,13 @@
                                              "locator" : "600:18-603:15",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                              "type" : "Count",
+                                             "signature" : [ {
+                                                "type" : "ListTypeSpecifier",
+                                                "elementType" : {
+                                                   "name" : "{http://hl7.org/fhir}Identifier",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             } ],
                                              "source" : {
                                                 "locator" : "600:24-602:17",
                                                 "type" : "Flatten",
@@ -26914,6 +27776,16 @@
                                                       "type" : "NamedTypeSpecifier"
                                                    }
                                                 },
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "elementType" : {
+                                                         "name" : "{http://hl7.org/fhir}Identifier",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   }
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "600:31-602:17",
                                                    "type" : "Query",
@@ -27291,6 +28163,13 @@
                                     "locator" : "614:11-614:56",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equal",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
                                        "locator" : "614:17-614:52",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -27687,6 +28566,10 @@
                                                       "name" : "ToString",
                                                       "libraryName" : "FHIRHelpers",
                                                       "type" : "FunctionRef",
+                                                      "signature" : [ {
+                                                         "name" : "{http://hl7.org/fhir}string",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
                                                          "locator" : "622:45",
                                                          "resultTypeName" : "{http://hl7.org/fhir}string",
@@ -27805,10 +28688,24 @@
                                     "locator" : "628:9-628:76",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "In",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
                                     "operand" : [ {
                                        "name" : "ToString",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}id",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
                                           "locator" : "628:15-628:18",
                                           "resultTypeName" : "{http://hl7.org/fhir}id",
@@ -28170,6 +29067,13 @@
                                                             "locator" : "635:25-635:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equal",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "635:25-635:38",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -28193,6 +29097,13 @@
                                                             "locator" : "636:25-636:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equivalent",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "name" : "ToConcept",
                                                                "libraryName" : "FHIRHelpers",
@@ -28208,6 +29119,10 @@
                                                                "locator" : "636:34-636:73",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                                                "type" : "ToConcept",
+                                                               "signature" : [ {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : {
                                                                   "locator" : "636:44-636:72",
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -28308,6 +29223,13 @@
                                                             "locator" : "641:25-641:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equal",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "locator" : "641:25-641:38",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
@@ -28331,6 +29253,13 @@
                                                             "locator" : "642:25-642:73",
                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                                             "type" : "Equivalent",
+                                                            "signature" : [ {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
                                                                "name" : "ToConcept",
                                                                "libraryName" : "FHIRHelpers",
@@ -28346,6 +29275,10 @@
                                                                "locator" : "642:34-642:73",
                                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                                                "type" : "ToConcept",
+                                                               "signature" : [ {
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : {
                                                                   "locator" : "642:44-642:72",
                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
@@ -28435,6 +29368,13 @@
                                           "locator" : "650:33-650:93",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Exists",
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{http://hl7.org/fhir}Claim.Item",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
                                              "locator" : "650:40-650:93",
                                              "type" : "Flatten",
@@ -28522,14 +29462,35 @@
                                           "locator" : "650:100-660:13",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "type" : "Add",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
                                              "locator" : "650:102-656:15",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                              "type" : "Add",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
                                                 "locator" : "650:102-652:15",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                                 "type" : "Count",
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}Reference",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                } ],
                                                 "source" : {
                                                    "locator" : "650:108-651:49",
                                                    "type" : "Query",
@@ -28622,6 +29583,13 @@
                                                 "locator" : "652:18-656:15",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                                 "type" : "Count",
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "name" : "{http://hl7.org/fhir}string",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                } ],
                                                 "source" : {
                                                    "locator" : "652:24-655:26",
                                                    "type" : "Query",
@@ -28652,6 +29620,16 @@
                                                                "type" : "NamedTypeSpecifier"
                                                             }
                                                          },
+                                                         "signature" : [ {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "elementType" : {
+                                                               "type" : "ListTypeSpecifier",
+                                                               "elementType" : {
+                                                                  "name" : "{http://hl7.org/fhir}string",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }
+                                                            }
+                                                         } ],
                                                          "operand" : {
                                                             "locator" : "652:32-654:17",
                                                             "type" : "Query",
@@ -28779,6 +29757,13 @@
                                              "locator" : "656:18-659:15",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                              "type" : "Count",
+                                             "signature" : [ {
+                                                "type" : "ListTypeSpecifier",
+                                                "elementType" : {
+                                                   "name" : "{http://hl7.org/fhir}Identifier",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             } ],
                                              "source" : {
                                                 "locator" : "656:24-658:17",
                                                 "type" : "Flatten",
@@ -28789,6 +29774,16 @@
                                                       "type" : "NamedTypeSpecifier"
                                                    }
                                                 },
+                                                "signature" : [ {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "elementType" : {
+                                                         "name" : "{http://hl7.org/fhir}Identifier",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   }
+                                                } ],
                                                 "operand" : {
                                                    "locator" : "656:31-658:17",
                                                    "type" : "Query",

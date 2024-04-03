@@ -2,7 +2,7 @@
 <Project>
 	<PropertyGroup>
 		<!-- If you change the version here, you also need to update it in the pom.xml file -->
-		<CqlToElmCliVersion>2.11.0</CqlToElmCliVersion>
+		<CqlToElmCliVersion>3.4.0</CqlToElmCliVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -17,8 +17,8 @@
 			DependsOnTargets="Download CQL to ELM CLI via Maven"
 			AfterTargets="Build">
 		<Message Text="Converting CQL to ELM"/>
-		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(SolutionDir)\LibrarySets\Demo\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\Demo\Elm" -locators true -result-types true'/>
-		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(SolutionDir)\LibrarySets\CMS\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\CMS\Elm" -locators true -result-types true'/>		
+		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\Demo\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\Demo\Elm" -locators true -result-types true -signatures Overloads'/>
+		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\CMS\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\CMS\Elm" -locators true -result-types true'/>
 	</Target>
 	<Target Name="Delete ELM" AfterTargets="Clean">
 		<Message Text="Deleting ELM files..." />

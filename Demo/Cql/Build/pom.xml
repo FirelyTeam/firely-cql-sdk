@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <project>
+	<!--
+	README: https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/cql-to-elm/OVERVIEW.md
+	-->
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>firely.cql</groupId>
 	<artifactId>demo</artifactId>
@@ -11,16 +15,51 @@
 			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</repository>
 	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>info.cqframework</groupId>
 			<artifactId>cql-to-elm-cli</artifactId>
-			<version>2.11.0</version>
+			<version>3.0.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>info.cqframework</groupId>
 			<artifactId>elm-fhir</artifactId>
-			<version>2.11.0</version>
+			<version>3.0.0</version>
 		</dependency>
+
+		<!-- <dependency> -->
+		<!-- 	<groupId>info.cqframework</groupId> -->
+		<!-- 	<artifactId>cql</artifactId> -->
+		<!-- 	<version>3.0.0</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>info.cqframework</groupId> -->
+		<!-- 	<artifactId>model</artifactId> -->
+		<!-- 	<version>3.0.0</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>info.cqframework</groupId> -->
+		<!-- 	<artifactId>elm</artifactId> -->
+		<!-- 	<version>3.0.0</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>info.cqframework</groupId> -->
+		<!-- 	<artifactId>cql-to-elm</artifactId> -->
+		<!-- 	<version>3.0.0</version> -->
+		<!-- </dependency> -->
+		<!-- -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>info.cqframework</groupId> -->
+		<!-- 	<artifactId>quick</artifactId> -->
+		<!-- 	<version>3.0.0</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>info.cqframework</groupId> -->
+		<!-- 	<artifactId>qdm</artifactId> -->
+		<!-- 	<version>3.0.0</version> -->
+		<!-- </dependency> -->
+
 	</dependencies>
 </project>
