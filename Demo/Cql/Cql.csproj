@@ -5,4 +5,9 @@
 
 	<PropertyGroup>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Folder Include="Build\target\" />
+	  <Folder Include="Build\target\dependency\" />
+	</ItemGroup>
 </Project>
