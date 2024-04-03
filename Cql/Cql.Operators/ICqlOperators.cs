@@ -19,7 +19,7 @@ namespace Hl7.Cql.Operators
 
         IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
 
-        T Convert<T>(object? from);
+        T? Convert<T>(object? from);
 
         IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class;
         IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class;

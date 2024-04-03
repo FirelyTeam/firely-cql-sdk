@@ -55,8 +55,8 @@ Hl7.Cql.Primitives.CqlDateTime.TimeOnly.get -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Primitives.CqlDateTime.Value.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
 Hl7.Cql.Primitives.CqlDateTime.WholeCalendarPeriodsBetween(Hl7.Cql.Primitives.CqlDateTime! high, string! precision) -> int?
 Hl7.Cql.Primitives.CqlInterval<T>
-Hl7.Cql.Primitives.CqlInterval<T>.CqlInterval(T low, T high, bool lowClosed, bool highClosed) -> void
-Hl7.Cql.Primitives.CqlInterval<T>.CqlInterval(T low, T high, bool? lowClosed, bool? highClosed) -> void
+Hl7.Cql.Primitives.CqlInterval<T>.CqlInterval(T? low, T? high, bool lowClosed, bool highClosed) -> void
+Hl7.Cql.Primitives.CqlInterval<T>.CqlInterval(T? low, T? high, bool? lowClosed, bool? highClosed) -> void
 Hl7.Cql.Primitives.CqlInterval<T>.high.get -> T
 Hl7.Cql.Primitives.CqlInterval<T>.highClosed.get -> bool?
 Hl7.Cql.Primitives.CqlInterval<T>.low.get -> T

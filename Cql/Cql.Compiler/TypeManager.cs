@@ -145,7 +145,7 @@ namespace Hl7.Cql.Compiler
                         var tildeIndex = type.Name.IndexOf('`');
                         var rootName = type.Name.Substring(0, tildeIndex);
                         var genericArgumentNames = type.GetGenericArguments()
-                            .Select(arg => PrettyTypeName(arg));
+                            .Select(PrettyTypeName);
                         var prettyName = $"{rootName}{string.Join("", genericArgumentNames)}";
                         typeName = prettyName;
                     }

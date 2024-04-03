@@ -24,8 +24,8 @@ internal class CqlCompilerFactory : CqlAbstractionsFactory
     protected virtual ModelInspector NewModelInspector() => Hl7.Fhir.Model.ModelInfo.ModelInspector;
 
 
-    public virtual Conversion.TypeConverter TypeConverter => Singleton(NewTypeConverter);
-    protected virtual Conversion.TypeConverter NewTypeConverter() => FhirTypeConverter.Create(ModelInspector, CacheSize);
+    public virtual TypeConverter TypeConverter => Singleton(NewTypeConverter);
+    protected virtual TypeConverter NewTypeConverter() => FhirTypeConverter.Create(ModelInspector, CacheSize);
 
     public virtual TypeResolver TypeResolver => Singleton(NewTypeResolver);
     protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);

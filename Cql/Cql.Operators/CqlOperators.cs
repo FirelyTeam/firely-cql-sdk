@@ -188,7 +188,7 @@ namespace Hl7.Cql.Runtime
 
         public bool Equivalent(object? x, object? y, string? precision) => Comparer.Equivalent(x, y, precision);
 
-        public T Convert<T>(object? from) => TypeConverter.Convert<T>(from);
+        public T? Convert<T>(object? from) => TypeConverter.Convert<T>(from);
 
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class =>
             DataSource.RetrieveByCodes<T>(codes, codeProperty);
