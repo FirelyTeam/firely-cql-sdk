@@ -134,6 +134,7 @@ namespace Hl7.Cql.Runtime
             typeSpecifier switch
             {
                 "{http://hl7.org/fhir}NotDoneRecorded" => "{http://hl7.org/fhir}dateTime",
+                "{http://hl7.org/fhir}EncounterProcedureExtension" => "{http://hl7.org/fhir}Extension",
                 _ => typeSpecifier
             };
 
