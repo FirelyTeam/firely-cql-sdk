@@ -24,7 +24,7 @@ partial class LibraryExpressionBuilder
     {
         // External Services
         _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
-        _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+        _operatorBinding = operatorBinding;
         _typeManager = typeManager;
         _loggerFactory = loggerFactory;
         _typeConverter = typeConverter;
@@ -42,7 +42,7 @@ partial class LibraryExpressionBuilder
         _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
     }
 
-
+    [RethrowExceptionsAsExpressionBuilderException]
     public DefinitionDictionary<LambdaExpression> ProcessLibrary()
     {
         _logger.LogInformation("Building expressions for '{library}'", LibraryKey);

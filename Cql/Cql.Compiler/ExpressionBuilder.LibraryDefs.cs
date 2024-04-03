@@ -12,6 +12,7 @@ namespace Hl7.Cql.Compiler;
 
 partial class ExpressionBuilder
 {
+    [RethrowExceptionsAsExpressionBuilderException]
     public void ProcessCodeSystemDef(
         CodeSystemDef codeSystem)
     {
@@ -45,6 +46,7 @@ partial class ExpressionBuilder
         }
     }
 
+    [RethrowExceptionsAsExpressionBuilderException]
     public void ProcessConceptDef(
         ConceptDef conceptDef)
     {
@@ -88,6 +90,7 @@ partial class ExpressionBuilder
         }
     }
 
+    [RethrowExceptionsAsExpressionBuilderException]
     public void ProcessCodeDef(
         CodeDef codeDef,
         ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet)
@@ -121,6 +124,7 @@ partial class ExpressionBuilder
         }
     }
 
+    [RethrowExceptionsAsExpressionBuilderException]
     public void ProcessExpressionDef(
         ExpressionDef expressionDef)
     {
@@ -217,6 +221,7 @@ partial class ExpressionBuilder
         }
     }
 
+    [RethrowExceptionsAsExpressionBuilderException]
     public void ProcessIncludes(
         IncludeDef includeDef)
     {
@@ -231,6 +236,7 @@ partial class ExpressionBuilder
         }
     }
 
+    [RethrowExceptionsAsExpressionBuilderException]
     public void ProcessParameterDef(
         ParameterDef parameter)
     {
@@ -260,6 +266,7 @@ partial class ExpressionBuilder
         }
     }
 
+    [RethrowExceptionsAsExpressionBuilderException]
     public void ProcessValueSetDef(
         ValueSetDef valueSetDef)
     {

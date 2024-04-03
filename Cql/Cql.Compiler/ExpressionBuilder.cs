@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler
             LibraryExpressionBuilder libContext)
         {
             // External Services
-            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, operatorBinding);
+            _operatorBinding = operatorBinding;
             _typeManager = typeManager;
             _logger = logger;
             _typeConverter = typeConverter;
@@ -71,7 +71,7 @@ namespace Hl7.Cql.Compiler
         {
             _elementStack = new Stack<Elm.Element>(_elementStack);
             _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
-            _operatorBinding = OperatorBindingRethrowDecorator.Decorate(this, source._operatorBinding);
+            _operatorBinding = source._operatorBinding;
             _impliedAlias = source._impliedAlias;
             _operands = source._operands;
             _libraries = source._libraries;
@@ -95,6 +95,7 @@ namespace Hl7.Cql.Compiler
 
 
 
+        [RethrowExceptionsAsExpressionBuilderException]
         internal Expression TranslateExpression(Element op)
         {
             using (PushElement(op))

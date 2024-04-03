@@ -32,6 +32,7 @@ internal partial class LibrarySetExpressionBuilder
     }
 
 
+    [RethrowExceptionsAsExpressionBuilderException]
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet()
     {
         foreach (var library in LibrarySet)
