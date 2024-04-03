@@ -250,7 +250,24 @@ internal partial class ExpressionBuilder
         }
 
         var @return = source;
-
+        
+        var elementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        
+        if(elementType != multiSourceTupleType)
+            throw ctx.NewExpressionBuildingException($"Expected element type {multiSourceTupleType.Name} but got {elementType.Name}");
+       
+        var sourceParameterName = TypeNameToIdentifier(elementType, ctx);
+        var sourceParameter = Expression.Parameter(elementType, sourceParameterName);
+        
+        var scopes =
+            (
+                from property in multiSourceTupleType!.GetProperties()
+                let propertyAccess = Expression.Property(sourceParameter, property)
+                select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
+            )
+            .ToArray();
+        ctx = ctx.WithScopes(scopes);
+        
         if (query.let != null)
         {
             foreach (var let in query.let)
@@ -266,11 +283,11 @@ internal partial class ExpressionBuilder
             {
                 var selectManyLambda = ctx.WithToSelectManyBody(multiSourceTupleType, relationship);
 
-                var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
+                var selectManyCall = _operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
                     @return, selectManyLambda);
                 if (relationship is Without)
                 {
-                    var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
+                    var callExcept = _operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
                         @return, selectManyCall);
                     @return = callExcept;
                 }
@@ -280,47 +297,20 @@ internal partial class ExpressionBuilder
                 }
             }
         }
-
-        var elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        
         if (query.where != null)
         {
-            var parameterName = TypeNameToIdentifier(elementType, ctx);
-
-            var whereLambdaParameter = Expression.Parameter(multiSourceTupleType, parameterName);
-            var scopes =
-                (
-                    from property in multiSourceTupleType!.GetProperties()
-                    let propertyAccess = Expression.Property(whereLambdaParameter, property)
-                    select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query.@where))
-                )
-                .ToArray();
-            var subContext = ctx.WithScopes(scopes);
-
-            var whereBody = subContext.TranslateExpression(query.where);
-            var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
-            var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
+            var whereBody = ctx.TranslateExpression(query.where);
+            var whereLambda = Expression.Lambda(whereBody, sourceParameter);
+            var callWhere = _operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
             @return = callWhere;
         }
-
-
-
+        
         if (query.@return != null)
         {
-            var parameterName = TypeNameToIdentifier(elementType, ctx);
-            var selectLambdaParameter = Expression.Parameter(elementType, parameterName);
-
-            var scopes =
-                (
-                    from property in multiSourceTupleType!.GetProperties()
-                    let propertyAccess = Expression.Property(selectLambdaParameter, property)
-                    select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query.@return))
-                )
-                .ToArray();
-            var subContext = ctx.WithScopes(scopes);
-
-            var selectBody = subContext.TranslateExpression(query.@return.expression!);
-            var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-            var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
+            var selectBody = ctx.TranslateExpression(query.@return.expression!);
+            var selectLambda = Expression.Lambda(selectBody, sourceParameter);
+            var callSelect = _operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
             @return = callSelect;
         }
 
@@ -328,26 +318,15 @@ internal partial class ExpressionBuilder
         {
             if (query.aggregate is AggregateClause)
             {
-                var parameterName = TypeNameToIdentifier(elementType, ctx);
-                var sourceParameter = Expression.Parameter(multiSourceTupleType, parameterName);
-                var scopes =
-                    (
-                        from property in multiSourceTupleType!.GetProperties()
-                        let propertyAccess = Expression.Property(sourceParameter, property)
-                        select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
-                    )
-                    .ToArray();
-                var subContext = ctx.WithScopes(scopes);
-
                 var resultAlias = query.aggregate.identifier!;
                 Type? resultType = null;
                 if (query.aggregate.resultTypeSpecifier != null)
                 {
-                    resultType = ctx.TypeFor(query.aggregate.resultTypeSpecifier);
+                    resultType = TypeFor(query.aggregate.resultTypeSpecifier);
                 }
                 else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
                 {
-                    resultType = ctx._typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
+                    resultType = _typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
                 }
 
                 if (resultType is null)
@@ -355,13 +334,13 @@ internal partial class ExpressionBuilder
 
                 var resultParameter = Expression.Parameter(resultType, resultAlias);
 
-                subContext = subContext.WithScope(resultAlias, resultParameter, query.aggregate);
+                var subContext = ctx.WithScope(resultAlias, resultParameter, query.aggregate);
 
                 var startingValue = subContext.TranslateExpression(query.aggregate.starting!);
 
                 var lambdaBody = subContext.TranslateExpression(query.aggregate.expression!);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
-                var aggregateCall = ctx._operatorBinding.Bind(CqlOperator.Aggregate, LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
+                var aggregateCall = _operatorBinding.Bind(CqlOperator.Aggregate, LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
                 @return = aggregateCall;
             }
             else
@@ -425,8 +404,8 @@ internal partial class ExpressionBuilder
 
         if (isSingle)
         {
-            var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
-            var callSingle = ctx._operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
+            //var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
+            var callSingle = _operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
             @return = callSingle;
         }
 

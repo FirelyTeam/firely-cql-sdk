@@ -124,8 +124,17 @@ internal class CqlToResourcePackagingPipeline
 
     protected virtual LibrarySet LoadElmFiles()
     {
+        string[] hardcodedSkipFiles = [
+            
+            // Contains a union between incompatible tuples,
+            // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
+            "AntithromboticTherapyByEndofHospitalDay2FHIR.json",
+        ];
+        
         LibrarySet librarySet = new(_options.ElmDirectory.FullName);
-        librarySet.LoadLibraries(_options.ElmDirectory.GetFiles("*.json", SearchOption.AllDirectories));
+        var files = _options.ElmDirectory.GetFiles("*.json", SearchOption.AllDirectories)
+            .Where(fi => !hardcodedSkipFiles.Contains(fi.Name)).ToArray();
+        librarySet.LoadLibraries(files);
         return librarySet;
     }
 }

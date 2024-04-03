@@ -11,7 +11,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
-using Hl7.FhirPath.Sprache;
 using System.Reflection;
 
 namespace Hl7.Cql.Fhir
