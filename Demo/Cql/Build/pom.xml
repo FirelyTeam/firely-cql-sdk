@@ -22,44 +22,10 @@
 			<artifactId>cql-to-elm-cli</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>info.cqframework</groupId>
 			<artifactId>elm-fhir</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- 	<groupId>info.cqframework</groupId> -->
-		<!-- 	<artifactId>cql</artifactId> -->
-		<!-- 	<version>3.1.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- 	<groupId>info.cqframework</groupId> -->
-		<!-- 	<artifactId>model</artifactId> -->
-		<!-- 	<version>3.1.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- 	<groupId>info.cqframework</groupId> -->
-		<!-- 	<artifactId>elm</artifactId> -->
-		<!-- 	<version>3.1.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- 	<groupId>info.cqframework</groupId> -->
-		<!-- 	<artifactId>cql-to-elm</artifactId> -->
-		<!-- 	<version>3.1.0</version> -->
-		<!-- </dependency> -->
-		<!-- -->
-		<!-- <dependency> -->
-		<!-- 	<groupId>info.cqframework</groupId> -->
-		<!-- 	<artifactId>quick</artifactId> -->
-		<!-- 	<version>3.1.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- 	<groupId>info.cqframework</groupId> -->
-		<!-- 	<artifactId>qdm</artifactId> -->
-		<!-- 	<version>3.1.0</version> -->
-		<!-- </dependency> -->
-
 	</dependencies>
 </project>
