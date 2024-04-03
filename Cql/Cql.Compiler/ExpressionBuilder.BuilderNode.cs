@@ -13,7 +13,7 @@ partial class ExpressionBuilder : IBuilderNode
     private IBuilderNode CreateBuilderNode() => new ExpressionBuilderNode()
     {
         LibraryExpressionBuilder = LibraryContext,
-        ElementStackList = _elementStack.ToList(),
+        ElementStackList = _elementStack.Reverse().ToList(),
         ElementStackPosition = _elementStack.Count - 1
     };
 

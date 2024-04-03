@@ -13,265 +13,288 @@ namespace Hl7.Cql.Compiler;
 partial class ExpressionBuilder
 {
     public void ProcessCodeSystemDef(
-        CodeSystemDef codeSystem)
-    {
-        using (PushElement(codeSystem))
+        CodeSystemDef codeSystem) =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
-            if (LibraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
+            using (PushElement(codeSystem))
             {
-                var initMembers = codes
-                    .Select(coding =>
-                        Expression.New(
-                            ConstructorInfos.CqlCode,
-                            Expression.Constant(coding.code),
-                            Expression.Constant(coding.system),
-                            Expression.Constant(null, typeof(string)),
-                            Expression.Constant(null, typeof(string))
-                        ))
-                    .ToArray();
-                var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
-                var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
+                if (LibraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
+                {
+                    var initMembers = codes
+                        .Select(coding =>
+                            Expression.New(
+                                ConstructorInfos.CqlCode,
+                                Expression.Constant(coding.code),
+                                Expression.Constant(coding.system),
+                                Expression.Constant(null, typeof(string)),
+                                Expression.Constant(null, typeof(string))
+                            ))
+                        .ToArray();
+                    var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
+                    var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
+                    var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
+                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
+                }
+                else
+                {
+                    var newArray =
+                        Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
+                    var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
+                    var lambda = Expression.Lambda(newArray, contextParameter);
+                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
+                }
             }
-            else
-            {
-                var newArray =
-                    Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-                var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
-                var lambda = Expression.Lambda(newArray, contextParameter);
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
-            }
-        }
-    }
+        });
+
 
     public void ProcessConceptDef(
-        ConceptDef conceptDef)
-    {
-        using (PushElement(conceptDef))
+        ConceptDef conceptDef) =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
-            if (conceptDef.code.Length <= 0)
+            using (PushElement(conceptDef))
             {
-                var newArray =
-                    Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-                var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
-                var lambda = Expression.Lambda(newArray, contextParameter);
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
-            }
-            else
-            {
-                var initMembers = new Expression[conceptDef.code.Length];
-                for (int i = 0; i < conceptDef.code.Length; i++)
+                if (conceptDef.code.Length <= 0)
                 {
-                    var codeRef = conceptDef.code[i];
-                    if (!LibraryContext.TryGetCode(codeRef, out var systemCode))
-                        throw this.NewExpressionBuildingException(
-                            $"Code {codeRef.name} in concept {conceptDef.name} is not defined.", null);
-
-                    initMembers[i] = Expression.New(
-                        ConstructorInfos.CqlCode,
-                        Expression.Constant(systemCode.code),
-                        Expression.Constant(systemCode.system),
-                        Expression.Constant(null, typeof(string)),
-                        Expression.Constant(null, typeof(string))
-                    );
+                    var newArray =
+                        Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
+                    var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
+                    var lambda = Expression.Lambda(newArray, contextParameter);
+                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
                 }
+                else
+                {
+                    var initMembers = new Expression[conceptDef.code.Length];
+                    for (int i = 0; i < conceptDef.code.Length; i++)
+                    {
+                        var codeRef = conceptDef.code[i];
+                        if (!LibraryContext.TryGetCode(codeRef, out var systemCode))
+                            throw this.NewExpressionBuildingException(
+                                $"Code {codeRef.name} in concept {conceptDef.name} is not defined.", null);
 
-                var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                var asEnumerable = Expression.TypeAs(arrayOfCodesInitializer, typeof(IEnumerable<CqlCode>));
-                var display = Expression.Constant(conceptDef.display, typeof(string));
-                var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
-                var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
-                var lambda = Expression.Lambda(newConcept, contextParameter);
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
+                        initMembers[i] = Expression.New(
+                            ConstructorInfos.CqlCode,
+                            Expression.Constant(systemCode.code),
+                            Expression.Constant(systemCode.system),
+                            Expression.Constant(null, typeof(string)),
+                            Expression.Constant(null, typeof(string))
+                        );
+                    }
+
+                    var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
+                    var asEnumerable = Expression.TypeAs(arrayOfCodesInitializer, typeof(IEnumerable<CqlCode>));
+                    var display = Expression.Constant(conceptDef.display, typeof(string));
+                    var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
+                    var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
+                    var lambda = Expression.Lambda(newConcept, contextParameter);
+                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
+                }
             }
-        }
-    }
+        });
 
     public void ProcessCodeDef(
         CodeDef codeDef,
-        ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet)
-    {
-        using (PushElement(codeDef))
+        ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet) =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
+            using (PushElement(codeDef))
+            {
 
-            if (codeDef.codeSystem == null)
-                throw this.NewExpressionBuildingException("Code definition has a null codeSystem node.", null);
+                if (codeDef.codeSystem == null)
+                    throw this.NewExpressionBuildingException("Code definition has a null codeSystem node.", null);
 
-            if (!LibraryContext.TryGetCodeSystemName(codeDef.codeSystem, out string? csUrl))
-                throw this.NewExpressionBuildingException($"Undefined code system {codeDef.codeSystem.name!}", null);
+                if (!LibraryContext.TryGetCodeSystemName(codeDef.codeSystem, out string? csUrl))
+                    throw this.NewExpressionBuildingException($"Undefined code system {codeDef.codeSystem.name!}",
+                        null);
 
-            if (!codeNameCodeSystemUrlsSet.Add((codeDef.name!, csUrl!)))
-                throw this.NewExpressionBuildingException(
-                    $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})", null);
+                if (!codeNameCodeSystemUrlsSet.Add((codeDef.name!, csUrl!)))
+                    throw this.NewExpressionBuildingException(
+                        $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})", null);
 
-            var systemCode = new CqlCode(codeDef.id, csUrl);
-            LibraryContext.AddCode(codeDef, systemCode);
+                var systemCode = new CqlCode(codeDef.id, csUrl);
+                LibraryContext.AddCode(codeDef, systemCode);
 
-            var newCodingExpression = Expression.New(
-                ConstructorInfos.CqlCode,
-                Expression.Constant(codeDef.id),
-                Expression.Constant(csUrl),
-                Expression.Constant(null, typeof(string)),
-                Expression.Constant(null, typeof(string))!
-            );
-            var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
-            var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-            LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeDef.name!, lambda);
-        }
-    }
+                var newCodingExpression = Expression.New(
+                    ConstructorInfos.CqlCode,
+                    Expression.Constant(codeDef.id),
+                    Expression.Constant(csUrl),
+                    Expression.Constant(null, typeof(string)),
+                    Expression.Constant(null, typeof(string))!
+                );
+                var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
+                var lambda = Expression.Lambda(newCodingExpression, contextParameter);
+                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeDef.name!, lambda);
+            }
+        });
 
     public void ProcessExpressionDef(
-        ExpressionDef expressionDef)
-    {
-        using (PushElement(expressionDef))
+        ExpressionDef expressionDef) =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
-            if (string.IsNullOrWhiteSpace(expressionDef.name))
+            using (PushElement(expressionDef))
             {
-                throw this.NewExpressionBuildingException($"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.", null);
-            }
-
-            var expressionKey = $"{LibraryContext.LibraryKey}.{expressionDef.name}";
-            Type[] functionParameterTypes = Type.EmptyTypes;
-            var parameters = new[] { LibraryDefinitionsBuilder.ContextParameter };
-            var function = expressionDef as FunctionDef;
-            if (function is { operand: not null })
-            {
-                functionParameterTypes = new Type[function.operand!.Length];
-                int i = 0;
-                foreach (var operand in function.operand!)
+                if (string.IsNullOrWhiteSpace(expressionDef.name))
                 {
-                    if (operand.operandTypeSpecifier != null)
+                    throw this.NewExpressionBuildingException(
+                        $"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.",
+                        null);
+                }
+
+                var expressionKey = $"{LibraryContext.LibraryKey}.{expressionDef.name}";
+                Type[] functionParameterTypes = Type.EmptyTypes;
+                var parameters = new[] { LibraryDefinitionsBuilder.ContextParameter };
+                var function = expressionDef as FunctionDef;
+                if (function is { operand: not null })
+                {
+                    functionParameterTypes = new Type[function.operand!.Length];
+                    int i = 0;
+                    foreach (var operand in function.operand!)
                     {
-                        var operandType = TypeFor(operand.operandTypeSpecifier)!;
-                        var opName = NormalizeIdentifier(operand.name);
-                        var parameter = Expression.Parameter(operandType, opName);
-                        _operands.Add(operand.name, parameter);
-                        functionParameterTypes[i] = parameter.Type;
-                        i += 1;
+                        if (operand.operandTypeSpecifier != null)
+                        {
+                            var operandType = TypeFor(operand.operandTypeSpecifier)!;
+                            var opName = NormalizeIdentifier(operand.name);
+                            var parameter = Expression.Parameter(operandType, opName);
+                            _operands.Add(operand.name, parameter);
+                            functionParameterTypes[i] = parameter.Type;
+                            i += 1;
+                        }
+                        else
+                            throw this.NewExpressionBuildingException(
+                                $"Operand for function {expressionDef.name} is missing its {nameof(operand.operandTypeSpecifier)} property",
+                                null);
                     }
-                    else
-                        throw this.NewExpressionBuildingException(
-                            $"Operand for function {expressionDef.name} is missing its {nameof(operand.operandTypeSpecifier)} property",
-                            null);
-                }
 
-                parameters = parameters
-                    .Concat(_operands.Values)
-                    .ToArray();
-                if (TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
-                {
-                    var customLambda = factory(parameters);
-                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name, functionParameterTypes, customLambda);
-                    return;
-                }
-
-                if (function?.external ?? false)
-                {
-                    if (LibraryContext.AllowUnresolvedExternals)
+                    parameters = parameters
+                        .Concat(_operands.Values)
+                        .ToArray();
+                    if (TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
                     {
-                        var returnType = TypeFor(expressionDef)!;
-                        var paramTypes = new[] { typeof(CqlContext) }
-                            .Concat(functionParameterTypes)
-                            .ToArray();
-                        var notImplemented = NotImplemented(this, expressionKey, paramTypes, returnType);
-                        LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name, paramTypes, notImplemented);
-                        _logger.LogWarning(FormatMessage($"Function '{expressionDef.name}' is declared external, but it was not defined in the expression scope. " +
-                                                              "A stub has been created that throws a NotImplemented exception."), expressionDef);
+                        var customLambda = factory(parameters);
+                        LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name,
+                            functionParameterTypes, customLambda);
                         return;
                     }
 
-                    throw this.NewExpressionBuildingException($"{expressionKey} is declared external, but it was not defined in the expression scope.");
-                }
-            }
-
-            //ctx = ctx.Deeper(expressionDef);
-            var bodyExpression = TranslateExpression(expressionDef.expression);
-            var lambda = Expression.Lambda(bodyExpression, parameters);
-            if (function?.operand != null &&
-                LibraryContext.LibraryDefinitions.ContainsKey(LibraryContext.LibraryKey, expressionDef.name, functionParameterTypes))
-            {
-                var ops = function.operand
-                    .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
-                    .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
-                _logger.LogWarning(FormatMessage($"Function {expressionDef.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists."));
-            }
-            else
-            {
-                if (expressionDef.annotation is { Length: > 0 } annotations)
-                {
-                    var tags = annotations.OfType<Annotation>()
-                        .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
-                        .Where(tag => !string.IsNullOrWhiteSpace(tag?.name));
-
-                    foreach (var tag in tags)
+                    if (function?.external ?? false)
                     {
-                        string[] values = new[] { tag.value ?? "" };
-                        LibraryContext.LibraryDefinitions.AddTag(LibraryContext.LibraryKey, expressionDef.name, functionParameterTypes, tag.name, values);
+                        if (LibraryContext.AllowUnresolvedExternals)
+                        {
+                            var returnType = TypeFor(expressionDef)!;
+                            var paramTypes = new[] { typeof(CqlContext) }
+                                .Concat(functionParameterTypes)
+                                .ToArray();
+                            var notImplemented = NotImplemented(this, expressionKey, paramTypes, returnType);
+                            LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name,
+                                paramTypes, notImplemented);
+                            _logger.LogWarning(FormatMessage(
+                                $"Function '{expressionDef.name}' is declared external, but it was not defined in the expression scope. " +
+                                "A stub has been created that throws a NotImplemented exception."), expressionDef);
+                            return;
+                        }
+
+                        throw this.NewExpressionBuildingException(
+                            $"{expressionKey} is declared external, but it was not defined in the expression scope.");
                     }
                 }
 
-                Type[] signature = functionParameterTypes ?? Array.Empty<Type>();
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name, signature, lambda);
+                //ctx = ctx.Deeper(expressionDef);
+                var bodyExpression = TranslateExpression(expressionDef.expression);
+                var lambda = Expression.Lambda(bodyExpression, parameters);
+                if (function?.operand != null &&
+                    LibraryContext.LibraryDefinitions.ContainsKey(LibraryContext.LibraryKey, expressionDef.name,
+                        functionParameterTypes))
+                {
+                    var ops = function.operand
+                        .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
+                        .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
+                    _logger.LogWarning(FormatMessage(
+                        $"Function {expressionDef.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists."));
+                }
+                else
+                {
+                    if (expressionDef.annotation is { Length: > 0 } annotations)
+                    {
+                        var tags = annotations.OfType<Annotation>()
+                            .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
+                            .Where(tag => !string.IsNullOrWhiteSpace(tag?.name));
+
+                        foreach (var tag in tags)
+                        {
+                            string[] values = new[] { tag.value ?? "" };
+                            LibraryContext.LibraryDefinitions.AddTag(LibraryContext.LibraryKey, expressionDef.name,
+                                functionParameterTypes, tag.name, values);
+                        }
+                    }
+
+                    Type[] signature = functionParameterTypes ?? Array.Empty<Type>();
+                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name, signature,
+                        lambda);
+                }
             }
-        }
-    }
+        });
 
     public void ProcessIncludes(
-        IncludeDef includeDef)
-    {
-        using (PushElement(includeDef))
+        IncludeDef includeDef) =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
-            var alias = includeDef.libraryName
-                    ?? throw this.NewExpressionBuildingException($"Include {includeDef.localId} does not have a alias.");
+            using (PushElement(includeDef))
+            {
+                var alias = includeDef.libraryName
+                            ?? throw this.NewExpressionBuildingException(
+                                $"Include {includeDef.localId} does not have a alias.");
 
-            var libNav = includeDef.NameAndVersion(false) ??
-                         throw this.NewExpressionBuildingException($"Include {includeDef.localId} does not have a well-formed name and version");
-            LibraryContext.AddAliasForNameAndVersion(alias, libNav);
-        }
-    }
+                var libNav = includeDef.NameAndVersion(false) ??
+                             throw this.NewExpressionBuildingException(
+                                 $"Include {includeDef.localId} does not have a well-formed name and version");
+                LibraryContext.AddAliasForNameAndVersion(alias, libNav);
+            }
+        });
 
     public void ProcessParameterDef(
-        ParameterDef parameter)
-    {
-        using (PushElement(parameter))
+        ParameterDef parameter) =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
-            if (LibraryContext.LibraryDefinitions.ContainsKey(LibraryContext.LibraryKey, parameter.name!))
-                throw this.NewExpressionBuildingException($"There is already a definition named {parameter.name}", null);
+            using (PushElement(parameter))
+            {
+                if (LibraryContext.LibraryDefinitions.ContainsKey(LibraryContext.LibraryKey, parameter.name!))
+                    throw this.NewExpressionBuildingException($"There is already a definition named {parameter.name}",
+                        null);
 
-            Expression? defaultValue = null;
-            if (parameter.@default != null)
-                defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default), typeof(object));
-            else defaultValue = Expression.Constant(null, typeof(object));
+                Expression? defaultValue = null;
+                if (parameter.@default != null)
+                    defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default), typeof(object));
+                else defaultValue = Expression.Constant(null, typeof(object));
 
-            var resolveParam = Expression.Call(
-                LibraryDefinitionsBuilder.ContextParameter,
-                typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
-                Expression.Constant(LibraryContext.LibraryKey),
-                Expression.Constant(parameter.name),
-                defaultValue
-            );
+                var resolveParam = Expression.Call(
+                    LibraryDefinitionsBuilder.ContextParameter,
+                    typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
+                    Expression.Constant(LibraryContext.LibraryKey),
+                    Expression.Constant(parameter.name),
+                    defaultValue
+                );
 
-            var parameterType = TypeFor(parameter.parameterTypeSpecifier);
-            var cast = Expression.Convert(resolveParam, parameterType);
-            // e.g. (bundle, context) => context.Parameters["Measurement Period"]
-            var lambda = Expression.Lambda(cast, LibraryDefinitionsBuilder.ContextParameter);
-            LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, parameter.name!, lambda);
-        }
-    }
+                var parameterType = TypeFor(parameter.parameterTypeSpecifier);
+                var cast = Expression.Convert(resolveParam, parameterType);
+                // e.g. (bundle, context) => context.Parameters["Measurement Period"]
+                var lambda = Expression.Lambda(cast, LibraryDefinitionsBuilder.ContextParameter);
+                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, parameter.name!, lambda);
+            }
+        });
 
     public void ProcessValueSetDef(
-        ValueSetDef valueSetDef)
-    {
-        using (PushElement(valueSetDef))
+        ValueSetDef valueSetDef) =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
-            var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
-                Expression.Constant(valueSetDef.version, typeof(string)));
-            var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
-            var lambda = Expression.Lambda(@new, contextParameter);
-            LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, valueSetDef.name!, lambda);
-        }
-    }
+            using (PushElement(valueSetDef))
+            {
+                var @new = Expression.New(ConstructorInfos.CqlValueSet,
+                    Expression.Constant(valueSetDef.id, typeof(string)),
+                    Expression.Constant(valueSetDef.version, typeof(string)));
+                var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
+                var lambda = Expression.Lambda(@new, contextParameter);
+                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, valueSetDef.name!, lambda);
+            }
+        });
 
     private static LambdaExpression NotImplemented(
         ExpressionBuilder ctx,
