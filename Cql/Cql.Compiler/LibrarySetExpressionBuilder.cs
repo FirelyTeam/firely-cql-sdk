@@ -31,17 +31,15 @@ internal partial class LibrarySetExpressionBuilder
         _debuggerInfo = new BuilderDebuggerInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
-
-    [RethrowExceptionsAsExpressionBuilderException]
-    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet()
-    {
-        foreach (var library in LibrarySet)
+    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet() =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
-            var packageDefinitions = CreateLibraryExpressionBuilder(library, new()).ProcessLibrary();
-            LibrarySetDefinitions.Merge(packageDefinitions);
-        }
+            foreach (var library in LibrarySet)
+            {
+                var packageDefinitions = CreateLibraryExpressionBuilder(library, new()).ProcessLibrary();
+                LibrarySetDefinitions.Merge(packageDefinitions);
+            }
 
-        return LibrarySetDefinitions;
-    }
-
+            return LibrarySetDefinitions;
+        });
 }
