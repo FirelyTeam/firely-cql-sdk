@@ -189,16 +189,25 @@ namespace Hl7.Cql.Fhir
         }
 
 
-        private class DataTypeSubTypeConverter : ITypeConverterEntry
+        private class DataTypeSubTypeConverter(TypeConverter converter) : ITypeConverterEntry
         {
-            public bool Handles(Type from, Type to) => from == typeof(M.DataType) && to.IsAssignableTo(typeof(M.DataType));
+            public bool Handles(Type from, Type to) => from == typeof(M.DataType);
 
-            public object? Convert(object? instance, Type to) => instance is M.DataType ? instance : null;
+            public object? Convert(object? instance, Type to)
+            {
+                var toIsDataType = to.IsAssignableTo(typeof(M.DataType)); 
+                return (instance, toIsDataType) switch
+                {
+                    (M.DataType, true) => instance,
+                    (M.DataType dt, false) => converter.Convert(instance, to),
+                    _ => null
+                };
+            }
         }
 
         internal static TypeConverter ConvertDataTypeChoices(this TypeConverter converter)
         {
-            converter.AddConverter(new DataTypeSubTypeConverter());            
+            converter.AddConverter(new DataTypeSubTypeConverter(converter));            
             return converter;
         }
 

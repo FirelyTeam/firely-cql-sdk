@@ -1030,7 +1030,16 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
-                        var expectedType = TypeFor(op)!;
+                        var expectedType = TypeFor(op, throwIfNotFound: false);
+                        
+                        // If we cannot determine the type from the ELM, let's try
+                        // if the POCO model can help us.
+                        if(expectedType == null)
+                        {
+                            expectedType = _typeManager.Resolver.GetProperty(source.Type, path)?.PropertyType
+                                ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
+                        }
+                        
                         var result = PropertyHelper(source, path, expectedType);
                         return result;
                     }

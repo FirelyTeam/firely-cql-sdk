@@ -124,8 +124,36 @@ internal class CqlToResourcePackagingPipeline
 
     protected virtual LibrarySet LoadElmFiles()
     {
+        string[] hardcodedSkipFiles = [
+            
+            // These contain a union between incompatible tuples,
+            // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
+            "AntithromboticTherapyByEndofHospitalDay2FHIR.json",
+            "IntensiveCareUnitVenousThromboembolismProphylaxisFHIR.json",
+            "VenousThromboembolismProphylaxisFHIR.json",
+            
+            // These uses choice types, move into a property on such a choice, and then calls an
+            // overloaded function, so we cannot find out which overload to call.
+            // A solution is to either a) Introduce choice types in our system instead of object, 
+            // b) introduce runtime resolution, based on the runtime types of the arguments when one of
+            // the arguments is a choice (=object).
+            "InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR.json",
+            "PCSBMIScreenAndFollowUpFHIR.json",
+            
+            // This uses a multi-source query where one of the sources is a singleton,
+            // we still need to work on this issue - see https://github.com/FirelyTeam/firely-cql-sdk/issues/220
+            "UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR.json",
+            
+            // These files produce incorrect C#. Have not looked into it yet.
+            "CesareanBirthFHIR.json",
+            "HybridHospitalWideMortalityFHIR.json",
+            "HybridHospitalWideReadmissionFHIR.json",
+        ];
+        
         LibrarySet librarySet = new(_options.ElmDirectory.FullName);
-        librarySet.LoadLibraries(_options.ElmDirectory.GetFiles("*.json", SearchOption.AllDirectories));
+        var files = _options.ElmDirectory.GetFiles("*.json", SearchOption.AllDirectories)
+            .Where(fi => !hardcodedSkipFiles.Contains(fi.Name)).ToArray();
+        librarySet.LoadLibraries(files);
         return librarySet;
     }
 }
