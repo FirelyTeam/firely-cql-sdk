@@ -25,10 +25,12 @@ internal sealed class CleanConsoleFormatter : ConsoleFormatter
 
     public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider? scopeProvider, TextWriter textWriter)
     {
+        var options = _optionsMonitor.CurrentValue.Options;
+
         var message = logEntry.Formatter(logEntry.State, logEntry.Exception);
         var (logLevelText, logLevelConsoleColor) = GetLogLevelString(logEntry.LogLevel);
         var (escLogLevelForegroundColor, escDefaultForegroundColor) = 
-            _optionsMonitor.CurrentValue.Options.NoColor
+            options.NoColor
                 ? ("", "")
                 : (GetForegroundColorEscapeCode(logLevelConsoleColor), DefaultForegroundColor);
         textWriter.WriteLine($"{escLogLevelForegroundColor}{logLevelText}{escDefaultForegroundColor}: {message}");

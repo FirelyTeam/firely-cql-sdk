@@ -4,6 +4,10 @@ internal readonly record struct KeyNotFoundError(string Key, string? ValueTypeNa
 {
     public string GetMessage() => $"{ValueTypeName ?? "Object"} not found by key. Key: '{Key}'";
 }
+internal readonly record struct UnsupportedSwitchCaseError(object Value, string? ValueTypeName = null) : ICqlError
+{
+    public string GetMessage() => $"Switch case not supported for {ValueTypeName ?? "Object"} of value: '{Value}'";
+}
 
 internal readonly record struct CouldNotDeserializeFileError(string FilePath, string? ObjectTypeName = null) : ICqlError
 {

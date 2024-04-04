@@ -1,4 +1,6 @@
-﻿namespace Hl7.Cql.Compiler;
+﻿using Microsoft.Extensions.Logging;
+
+namespace Hl7.Cql.Compiler;
 
 using Abstractions;
 using Elm;
@@ -13,19 +15,20 @@ using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePa
 
 internal partial class ExpressionBuilder
 {
-    protected Expression Query(Query query)
-    {
-        return query.source?.Length switch
+    protected Expression Query(Query query) =>
+        query.source?.Length switch
         {
             null or 0 => throw this.NewExpressionBuildingException("Queries must define at least 1 source"),
             1 => SingleSourceQuery(query),
             _ => MultiSourceQuery(query),
         };
-    }
 
     protected Expression SingleSourceQuery(Query query)
     {
         ExpressionBuilder ctx = this;
+
+        _logger.LogDebug("Found Single Source Query at: {at}", ctx.DebuggerView);
+
         var querySource = query.source.Single();
         var querySourceAlias = !string.IsNullOrWhiteSpace(querySource.alias)
             ? querySource.alias
@@ -219,6 +222,9 @@ internal partial class ExpressionBuilder
     protected Expression MultiSourceQuery(Query query)
     {
         ExpressionBuilder ctx = this;
+
+        _logger.LogDebug("Found Multi Source Query with {count} sources at: {at}", query.source!.Length, ctx.DebuggerView);
+
         // The technique here is to create a cross product of all the query sources.
         // The combinations will be stored in a tuple whose fields are named by source alias.
         // we will then create an expression that creates this cross-product of tuples,
@@ -250,15 +256,15 @@ internal partial class ExpressionBuilder
         }
 
         var @return = source;
-        
+
         var elementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
-        
+
         if(elementType != multiSourceTupleType)
             throw ctx.NewExpressionBuildingException($"Expected element type {multiSourceTupleType.Name} but got {elementType.Name}");
-       
+
         var sourceParameterName = TypeNameToIdentifier(elementType, ctx);
         var sourceParameter = Expression.Parameter(elementType, sourceParameterName);
-        
+
         var scopes =
             (
                 from property in multiSourceTupleType!.GetProperties()
@@ -267,7 +273,7 @@ internal partial class ExpressionBuilder
             )
             .ToArray();
         ctx = ctx.WithScopes(scopes);
-        
+
         if (query.let != null)
         {
             foreach (var let in query.let)
@@ -297,7 +303,7 @@ internal partial class ExpressionBuilder
                 }
             }
         }
-        
+
         if (query.where != null)
         {
             var whereBody = ctx.TranslateExpression(query.where);
@@ -305,7 +311,7 @@ internal partial class ExpressionBuilder
             var callWhere = _operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
             @return = callWhere;
         }
-        
+
         if (query.@return != null)
         {
             var selectBody = ctx.TranslateExpression(query.@return.expression!);
@@ -412,7 +418,8 @@ internal partial class ExpressionBuilder
         return @return;
     }
 
-    protected LambdaExpression WithToSelectManyBody(ParameterExpression rootScopeParameter,
+    protected LambdaExpression WithToSelectManyBody(
+        ParameterExpression rootScopeParameter,
         RelationshipClause with)
     {
         if (with.expression == null)
@@ -460,7 +467,8 @@ internal partial class ExpressionBuilder
         return selectManyLambda;
     }
 
-    protected LambdaExpression WithToSelectManyBody(Type tupleType,
+    protected LambdaExpression WithToSelectManyBody(
+        Type tupleType,
         RelationshipClause with)
     {
         if (with.expression == null)
