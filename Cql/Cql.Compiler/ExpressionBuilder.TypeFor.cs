@@ -63,7 +63,7 @@ internal partial class ExpressionBuilder
             {
                 Type? sourceType = null;
                 if (propertyExpression.source != null)
-                    sourceType = TypeFor(propertyExpression.source!);
+                    sourceType = TypeFor(propertyExpression.source!, throwIfNotFound);
                 else if (propertyExpression.scope != null)
                 {
                     var scope = GetScope(propertyExpression.scope);
