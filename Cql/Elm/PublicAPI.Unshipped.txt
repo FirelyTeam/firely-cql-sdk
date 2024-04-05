@@ -720,9 +720,9 @@ override Hl7.Cql.Elm.VersionedIdentifier.ToString() -> string?
 static Hl7.Cql.Elm.ExtensionMethods.ListSortOrder(this Hl7.Cql.Elm.SortDirection direction) -> System.ComponentModel.ListSortDirection
 static Hl7.Cql.Elm.Library.ComparerByNameAndVersion.get -> System.Collections.Generic.IComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
-static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library?
-static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library?
-static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library?
+static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
 static readonly Hl7.Cql.Elm.Library.JsonSerializerOptions -> System.Text.Json.JsonSerializerOptions!
 static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.Json.JsonSerializerOptions!
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression
