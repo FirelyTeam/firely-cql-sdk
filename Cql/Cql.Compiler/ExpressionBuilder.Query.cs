@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
@@ -15,19 +18,65 @@ using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePa
 
 internal partial class ExpressionBuilder
 {
-    protected Expression Query(Query query) =>
-        query.source?.Length switch
+    protected Expression Query(Query query)
+    {
+        var sourceLength = query.source?.Length ?? 0;
+
+        var lines = ReadCqlLines(query);
+        _logger.LogDebug(
+            "Found {queryType} Query at: {at}{lines}",
+            ((ReadOnlySpan<string>)["Empty", "Single", "Multi"])[Math.Clamp(sourceLength, 0, 2)],
+            DebuggerView,
+            lines is {} ? $"\nand lines are:{string.Concat(from l in lines select $"\n\t{l}")}" : "");
+
+        ReadCqlLines(query);
+
+        return sourceLength switch
         {
-            null or 0 => throw this.NewExpressionBuildingException("Queries must define at least 1 source"),
+            0 => throw this.NewExpressionBuildingException("Queries must define at least 1 source"),
             1 => SingleSourceQuery(query),
             _ => MultiSourceQuery(query),
         };
+    }
+
+    private string[]? ReadCqlLines(Element element)
+    {
+        if (element.locator?.Split([":", "-"], 4, StringSplitOptions.TrimEntries) is not [{} r0, { } c0, { } r1, { } c1]) return null;
+
+        static int ParseInt32(string s) => int.Parse(s, CultureInfo.InvariantCulture);
+
+        var (row0, col0, row1, col1) = (ParseInt32(r0), ParseInt32(c0), ParseInt32(r1), ParseInt32(c1));
+
+        var elmFilePath = LibraryContext.Library.OriginalFilePath;
+        if (elmFilePath is null)
+            return null;
+
+        var fiElm = new FileInfo(elmFilePath);
+        var fiCql = new FileInfo(Path.Combine(fiElm.Directory!.Parent!.FullName, "CQL", fiElm.Name[..^4]+"cql" ));
+        if (!fiCql.Exists)
+            return null;
+
+        var lines=
+            System.IO.File.ReadLines(fiCql.FullName)
+            .Select((lineText, i) => (lineText, lineNum: i + 1))
+            .Where(t => t.lineNum >= row0 && t.lineNum <= row1)
+            .Select(t =>
+            {
+                var lineText = t.lineText;
+                Debug.Assert(row0 != row1 || col1 > col0);
+                if (t.lineNum == row1)
+                    lineText = lineText[..(col1)] + "<<<" + lineText[(col1)..];
+                if (t.lineNum == row0)
+                    lineText = lineText[..col0] + ">>>" + lineText[col0..];
+                return lineText;
+            })
+            .ToArray();
+        return lines;
+    }
 
     protected Expression SingleSourceQuery(Query query)
     {
         ExpressionBuilder ctx = this;
-
-        _logger.LogDebug("Found Single Source Query at: {at}", ctx.DebuggerView);
 
         var querySource = query.source.Single();
         var querySourceAlias = !string.IsNullOrWhiteSpace(querySource.alias)
@@ -39,16 +88,7 @@ internal partial class ExpressionBuilder
 
         var source = ctx.TranslateExpression(querySource.expression);
 
-        var promotedSource = false;
-        // promote single objects into enumerables so where works
-        if (!IsOrImplementsIEnumerableOfT(source.Type))
-        {
-            var arrayInit = Expression.NewArrayInit(source.Type, source);
-            source = arrayInit;
-            promotedSource = true;
-        }
-
-        var @return = source;
+        var (@return, isSourcePromoted) = TryPromoteSource(query, source);
 
         Type elementType = _typeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
 
@@ -89,24 +129,15 @@ internal partial class ExpressionBuilder
                 }
             }
         }
-
         // 20240312 EK: refactoring made this redundant, but I am not sure it really is, so I am keeping
         // it around. It was used to redefine the type for the "rootScopeParameter", which used to be defined
         // inside every if statement here (so for where, return, etc).
         // -----
         // The element type may have changed
         // elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
-
-        if (query.where != null)
+        if (query.where is { } queryWhere)
         {
-            using (ctx.PushElement(query.where))
-            {
-                var whereBody = ctx.TranslateExpression(query.where);
-                var whereLambda = Expression.Lambda(whereBody, rootScopeParameter);
-                var callWhere = ctx._operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
-                @return = callWhere;
-            }
-
+            @return = ctx.Where(queryWhere, rootScopeParameter, @return);
         }
 
         if (query.@return != null)
@@ -120,102 +151,205 @@ internal partial class ExpressionBuilder
             }
         }
 
-        if (query.aggregate != null)
+        if (query.aggregate is { } queryAggregate)
         {
-            using (ctx.PushElement(query.aggregate))
-            {
-                var resultAlias = query.aggregate.identifier!;
-                Type? resultType = null;
-                if (query.aggregate.resultTypeSpecifier != null)
-                {
-                    resultType = TypeFor(query.aggregate.resultTypeSpecifier);
-                }
-                else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
-                {
-                    resultType = _typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
-                }
-
-                if (resultType is null)
-                    throw ctx.NewExpressionBuildingException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
-
-                var resultParameter = Expression.Parameter(resultType, resultAlias);
-                var subContext = ctx.WithScope(resultAlias!, resultParameter, query.aggregate);
-                var startingValue = subContext.TranslateExpression(query.aggregate.starting!);
-
-                var lambdaBody = subContext.TranslateExpression(query.aggregate.expression!);
-                var lambda = Expression.Lambda(lambdaBody, resultParameter, rootScopeParameter);
-                var aggregateCall = ctx._operatorBinding.Bind(CqlOperator.Aggregate, LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
-                @return = aggregateCall;
-            }
+            @return = ctx.AggregateClause(query, queryAggregate, rootScopeParameter, @return);
         }
 
+        if (query.sort is { by.Length: > 0 })
+        {
+            @return = ctx.SortClause(query, @return);
+        }
 
+        return ctx.TryDemoteSource(query, @return, isSourcePromoted);
+    }
+
+    protected Expression TryDemoteSource(
+        Query query,
+        Expression source,
+        bool isSourcePromoted)
+    {
+        // Because we promoted the source to a list, we now have to demote the result again.
+        if (isSourcePromoted)
+        {
+            var callSingle = _operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, source);
+            source = callSingle;
+
+        }
+
+        if (query.resultTypeSpecifier is Elm.ListTypeSpecifier && !IsOrImplementsIEnumerableOfT(source.Type))
+        {
+            source = Expression.NewArrayInit(source.Type, source);
+        }
+
+        return source;
+    }
+
+    private (Expression joinedSource, bool[] isSourcePromoted) CrossJoin(
+        Query multiSourceQuery,
+        Type tupleType)
+    {
+        //var a = new int[] { 1, 2, 3 };
+        //var b = new int[] { 4, 5, 6 };
+        //var c = new int[] { 7, 8, 9 };
+
+        //var result = a
+        //    .SelectMany(_a =>
+        //        b.SelectMany(_b =>
+        //            c.Select(_c => new { _a, _b, _c, })))
+        //    .ToArray();
+        //Assert.AreEqual(27, result.Length);
+
+        //var result2 =
+        //    a.SelectMany(_a => b, (__a, _b) => new { __a, _b })
+        //        .SelectMany(ab => c, (_ab, _c) => new { _ab.__a, _ab._b, _c })
+        //            .ToArray();
+
+        AliasedQuerySource[] sources = multiSourceQuery.source;
+        if (sources.Length < 2) throw this.NewExpressionBuildingException($"This method should only be called for 2 or more query sources");
+
+        bool[] isSourcePromotedArr = new bool[sources.Length];
+
+        // the first pair are special as they are not working off of a partially built tuple,
+        // they are working only off of the initial selectmany parameters.
+        var source0 = sources[0];
+        var firstExpression = TranslateExpression(source0.expression!);
+        (firstExpression, isSourcePromotedArr[0]) = TryPromoteSource(multiSourceQuery, firstExpression);
+        var firstElementType = _typeManager.Resolver.GetListElementType(firstExpression.Type)!;
+
+        var source1 = sources[1];
+        var secondExpression = TranslateExpression(source1.expression!);
+        (secondExpression, isSourcePromotedArr[1]) = TryPromoteSource(multiSourceQuery, secondExpression);
+        var secondElementType = _typeManager.Resolver.GetListElementType(secondExpression.Type)!;
+
+        var firstLambdaParameter = Expression.Parameter(firstElementType, $"_{source0.alias}");
+        var firstSelectManyParameter = Expression.Lambda(secondExpression, firstLambdaParameter);
+
+        var secondLambdaParameter = Expression.Parameter(secondElementType, $"_{source1.alias}");
+        var newTuple = Expression.New(tupleType);
+        var memberInit = Expression.MemberInit(newTuple,
+            Expression.Bind(tupleType.GetProperty(source0.alias)!, firstLambdaParameter),
+            Expression.Bind(tupleType.GetProperty(source1.alias)!, secondLambdaParameter));
+        var secondSelectManyParameter = Expression.Lambda(memberInit, firstLambdaParameter, secondLambdaParameter);
+
+        var callSelectMany = _operatorBinding.Bind(
+            CqlOperator.SelectManyResults,
+            LibraryDefinitionsBuilder.ContextParameter,
+            firstExpression,
+            firstSelectManyParameter,
+            secondSelectManyParameter);
+
+        // var enumerableOfTupleType = callSelectMany.Type;
+
+        for (int i = 2; i < sources.Length; i++)
+        {
+            var source = sources[i];
+
+            var sourceExpression = TranslateExpression(source.expression!);
+            (sourceExpression, isSourcePromotedArr[i]) = TryPromoteSource(multiSourceQuery, sourceExpression);
+            string message = $"{sourceExpression.Type} was expected to be a list type.";
+            var sourceElementType = _typeManager.Resolver.GetListElementType(sourceExpression.Type) ?? throw this.NewExpressionBuildingException(message);
+
+            var parameterName = string.Join(string.Empty, sources.Take(i).Select(st => st.alias));
+            var parameter = Expression.Parameter(tupleType, $"_{parameterName}");
+            var p1 = Expression.Lambda(sourceExpression, parameter);
+
+            // .SelectMany(ab => c, (ab,c) => new Tuple { x = ab.x,  y = ab.y, c = c } )
+            var ab = Expression.Parameter(tupleType, parameterName);
+            var c = Expression.Parameter(sourceElementType, $"_{source.alias}");
+            var bindings = new MemberAssignment[i + 1];
+            for (int j = 0; j < i; j++)
+            {
+                var prop = tupleType.GetProperty(sources[j].alias)!;
+                bindings[j] = Expression.Bind(prop, Expression.Property(ab, prop));
+            }
+
+            bindings[i] = Expression.Bind(tupleType.GetProperty(source.alias)!, c);
+            @newTuple = Expression.New(tupleType);
+            memberInit = Expression.MemberInit(newTuple, bindings);
+            var p2 = Expression.Lambda(memberInit, ab, c);
+
+            var callAgain = _operatorBinding.Bind(CqlOperator.SelectManyResults,
+                LibraryDefinitionsBuilder.ContextParameter,
+                callSelectMany,
+                p1,
+                p2);
+            callSelectMany = callAgain;
+        }
+
+        return (callSelectMany, isSourcePromotedArr);
+    }
+
+    private (Expression source, bool isSourcePromoted) TryPromoteSource(Query query, Expression source)
+    {
+        var isSourcePromoted = false;
+        // promote single objects into enumerables so where works
+        if (!IsOrImplementsIEnumerableOfT(source.Type))
+        {
+            var arrayInit = Expression.NewArrayInit(source.Type, source);
+            source = arrayInit;
+            isSourcePromoted = true;
+        }
+
+        return (source, isSourcePromoted);
+    }
+
+    protected Expression SortClause(
+        Query query,
+        Expression @return)
+    {
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByExpression))]
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByColumn))]
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByDirection))]
-        if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)
+        using (PushElement(query.sort))
         {
-            using (ctx.PushElement(query.sort))
+            foreach (var by in query.sort.by)
             {
-                foreach (var by in query.sort.by)
+                using (PushElement(by))
                 {
-                    using (ctx.PushElement(by))
+                    ListSortDirection order = by.direction.ListSortOrder();
+                    switch (by)
                     {
-                        ListSortDirection order = by.direction.ListSortOrder();
-                        if (by is ByExpression byExpression)
+                        case ByExpression byExpression:
                         {
                             var parameterName = "@this";
-                            var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+                            var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
                             var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                            var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
+                            var subContext = WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
                             var sortMemberExpression = subContext.TranslateExpression(byExpression.expression);
                             var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
                             var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                            var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
+                            var sort = _operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
                                 @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
-                            @return = sort;
+                            return sort;
                         }
-                        else if (by is ByColumn byColumn)
+                        case ByColumn byColumn:
                         {
                             var parameterName = "@this";
-                            var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+                            var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
                             var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                            var pathMemberType = ctx.TypeFor(byColumn);
+                            var pathMemberType = TypeFor(byColumn);
                             if (pathMemberType == null)
                             {
-                                throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
+                                throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
                             }
-                            var pathExpression = ctx.PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
+                            var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
                             var lambdaBody = Expression.Convert(pathExpression, typeof(object));
                             var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                            var sort = ctx._operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
+                            var sort = _operatorBinding.Bind(CqlOperator.SortBy, LibraryDefinitionsBuilder.ContextParameter,
                                 @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
-                            @return = sort;
+                            return sort;
                         }
-                        else
+                        default:
                         {
-                            var sort = ctx._operatorBinding.Bind(CqlOperator.Sort, LibraryDefinitionsBuilder.ContextParameter,
+                            var sort = _operatorBinding.Bind(CqlOperator.Sort, LibraryDefinitionsBuilder.ContextParameter,
                                 @return, Expression.Constant(order, typeof(ListSortDirection)));
-                            @return = sort;
+                            return sort;
                         }
                     }
                 }
             }
         }
-
-        // Because we promoted the source to a list, we now have to demote the result again.
-        if (promotedSource)
-        {
-            var callSingle = ctx._operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
-            @return = callSingle;
-
-        }
-
-        if (query.resultTypeSpecifier is Elm.ListTypeSpecifier && !IsOrImplementsIEnumerableOfT(@return.Type))
-        {
-            @return = Expression.NewArrayInit(@return.Type, @return);
-        }
-
         return @return;
     }
 
@@ -223,39 +357,28 @@ internal partial class ExpressionBuilder
     {
         ExpressionBuilder ctx = this;
 
-        _logger.LogDebug("Found Multi Source Query with {count} sources at: {at}", query.source!.Length, ctx.DebuggerView);
-
         // The technique here is to create a cross product of all the query sources.
         // The combinations will be stored in a tuple whose fields are named by source alias.
         // we will then create an expression that creates this cross-product of tuples,
         // and use that as the singular query source for subsequent parts of the query.
         var tupleSpecifier = new TupleTypeSpecifier
         {
-            element = query.source.Select(source =>
-            {
-                return new TupleElementDefinition
+            element = query.source
+                .Select(source => new TupleElementDefinition
                 {
                     name = source.alias ?? throw ctx.NewExpressionBuildingException("Missing alias for multi-source query; this is illegal"),
                     elementType = source.resultTypeSpecifier,
-                };
-            }).ToArray(),
+                })
+                .ToArray(),
         };
-        var multiSourceTupleType = TupleTypeFor(tupleSpecifier, (type) =>
-            IsOrImplementsIEnumerableOfT(type)
+
+        var multiSourceTupleType = TupleTypeFor(
+            tupleSpecifier,
+            (type) => IsOrImplementsIEnumerableOfT(type)
                 ? _typeManager.Resolver.GetListElementType(type, true)!
                 : throw new NotSupportedException("Query sources must be lists."));
-        var crossJoinedSource = ctx.CrossJoin(query.source!, multiSourceTupleType);
-        var source = crossJoinedSource;
 
-        var isSingle = false;
-        if (!IsOrImplementsIEnumerableOfT(source.Type))
-        {
-            var arrayInit = Expression.NewArrayInit(source.Type, source);
-            source = arrayInit;
-            isSingle = true;
-        }
-
-        var @return = source;
+        var (@return, isSourcesPromoted) = ctx.CrossJoin(query, multiSourceTupleType);
 
         var elementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
 
@@ -304,12 +427,9 @@ internal partial class ExpressionBuilder
             }
         }
 
-        if (query.where != null)
+        if (query.where is { } queryWhere)
         {
-            var whereBody = ctx.TranslateExpression(query.where);
-            var whereLambda = Expression.Lambda(whereBody, sourceParameter);
-            var callWhere = _operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
-            @return = callWhere;
+            @return = ctx.Where(queryWhere, sourceParameter, @return);
         }
 
         if (query.@return != null)
@@ -320,42 +440,12 @@ internal partial class ExpressionBuilder
             @return = callSelect;
         }
 
-        if (query.aggregate != null)
+        if (query.aggregate is { } queryAggregate)
         {
-            if (query.aggregate is AggregateClause)
-            {
-                var resultAlias = query.aggregate.identifier!;
-                Type? resultType = null;
-                if (query.aggregate.resultTypeSpecifier != null)
-                {
-                    resultType = TypeFor(query.aggregate.resultTypeSpecifier);
-                }
-                else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
-                {
-                    resultType = _typeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
-                }
-
-                if (resultType is null)
-                    throw ctx.NewExpressionBuildingException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
-
-                var resultParameter = Expression.Parameter(resultType, resultAlias);
-
-                var subContext = ctx.WithScope(resultAlias, resultParameter, query.aggregate);
-
-                var startingValue = subContext.TranslateExpression(query.aggregate.starting!);
-
-                var lambdaBody = subContext.TranslateExpression(query.aggregate.expression!);
-                var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
-                var aggregateCall = _operatorBinding.Bind(CqlOperator.Aggregate, LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
-                @return = aggregateCall;
-            }
-            else
-            {
-                throw new NotImplementedException($"Aggregate type {query.aggregate.GetType().Name} is not yet implemented.").WithContext(ctx);
-            }
+            @return = ctx.AggregateClause(query, queryAggregate, sourceParameter, @return);
         }
 
-        if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)
+        if (query.sort is { by.Length: > 0 })
         {
             throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(ctx);
             //foreach (var by in query.sort.by)
@@ -408,14 +498,15 @@ internal partial class ExpressionBuilder
             //}
         }
 
-        if (isSingle)
-        {
-            //var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
-            var callSingle = _operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
-            @return = callSingle;
-        }
+        // if (isSourcePromoted)
+        // {
+        //     //var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
+        //     var callSingle = _operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
+        //     @return = callSingle;
+        // }
 
-        return @return;
+        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted=>isSourcePromoted);
+        return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
     }
 
     protected LambdaExpression WithToSelectManyBody(
@@ -423,9 +514,10 @@ internal partial class ExpressionBuilder
         RelationshipClause with)
     {
         if (with.expression == null)
-            throw this.NewExpressionBuildingException($"With must have a 'source' expression.");
+            throw this.NewExpressionBuildingException("With must have a 'source' expression.");
+
         if (with.suchThat == null)
-            throw this.NewExpressionBuildingException($"With must have a 'such that' expression.");
+            throw this.NewExpressionBuildingException("With must have a 'such that' expression.");
 
         //define "With Such That":
         //[Encounter] E
@@ -526,5 +618,54 @@ internal partial class ExpressionBuilder
         return selectManyLambda;
     }
 
+
+    protected Expression Where(
+        Elm.Expression queryWhere,
+        ParameterExpression sourceParameter,
+        Expression @return)
+    {
+        using (PushElement(queryWhere))
+        {
+            var whereBody = TranslateExpression(queryWhere);
+            var whereLambda = Expression.Lambda(whereBody, sourceParameter);
+            var callWhere = _operatorBinding.Bind(CqlOperator.Where, LibraryDefinitionsBuilder.ContextParameter, @return, whereLambda);
+            return callWhere;
+        }
+    }
+
+    protected Expression AggregateClause(
+        Query query,
+        AggregateClause queryAggregate,
+        ParameterExpression sourceParameter,
+        Expression @return)
+    {
+        using (PushElement(queryAggregate))
+        {
+            var resultAlias = queryAggregate.identifier!;
+            Type? resultType = null;
+            if (queryAggregate.resultTypeSpecifier is { } typeSpecifier)
+            {
+                resultType = TypeFor(typeSpecifier);
+            }
+            else if (!string.IsNullOrWhiteSpace(queryAggregate.resultTypeName.Name!))
+            {
+                resultType = _typeManager.Resolver.ResolveType(queryAggregate.resultTypeName.Name!);
+            }
+
+            if (resultType is null)
+                throw this.NewExpressionBuildingException(
+                    $"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
+
+            var resultParameter = Expression.Parameter(resultType, resultAlias);
+            var subContext = WithScope(resultAlias!, resultParameter, queryAggregate);
+            var startingValue = subContext.TranslateExpression(queryAggregate.starting!);
+
+            var lambdaBody = subContext.TranslateExpression(queryAggregate.expression!);
+            var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
+            var aggregateCall = _operatorBinding.Bind(CqlOperator.Aggregate,
+                LibraryDefinitionsBuilder.ContextParameter, @return, lambda, startingValue);
+            return aggregateCall;
+        }
+    }
 
 }
