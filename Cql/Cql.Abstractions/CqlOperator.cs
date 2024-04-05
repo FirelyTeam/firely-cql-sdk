@@ -59,7 +59,7 @@ namespace Hl7.Cql.Abstractions
         Combine,
         EndsWith,
         CharAt,
-        ElementAt,
+        ListElementAt,
         LastPositionOf,
         ListLength,
         StringLength,
@@ -128,7 +128,7 @@ namespace Hl7.Cql.Abstractions
         Distinct,
         Exists,
         Flatten,
-        IndexOf,
+        ListIndexOf,
         First,
         Last,
         Tail,
@@ -166,7 +166,7 @@ namespace Hl7.Cql.Abstractions
         SelectMany,
         SelectManyResults,
         Where,
-        Sort,
+        ListSort,
         SortBy,
         Single,
         MeetsAfter,
@@ -187,7 +187,8 @@ namespace Hl7.Cql.Abstractions
         MaximumValue,
         ResolveValueSet,
         Aggregate,
-        Implies
+        Implies,
+        CrossJoin
     }
 }
 

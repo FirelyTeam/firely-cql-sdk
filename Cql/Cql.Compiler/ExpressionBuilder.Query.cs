@@ -1,6 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using Dumpify;
+using Dumpify.Descriptors;
+using Dumpify.Descriptors.ValueProviders;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
@@ -185,6 +192,56 @@ internal partial class ExpressionBuilder
         return source;
     }
 
+    private (Expression joinedSource, bool[] isSourcePromoted) CrossJoinNew(
+        Query multiSourceQuery)
+    {
+        AliasedQuerySource[] sources = multiSourceQuery.source;
+        if (sources.Length < 2)
+            throw this.NewExpressionBuildingException("This CrossJoin method should only be called on multi-source queries.");
+
+        if (sources.Length > 4)
+            throw this.NewExpressionBuildingException("CrossJoins on multi-source queries with more than 4 sources is not yet supported.");
+
+        if (sources.Any(s => string.IsNullOrEmpty(s.alias)))
+            throw this.NewExpressionBuildingException("Multi-source Queries must all have aliases.");
+
+        var sourceExpressions = sources
+            .SelectToArray(source => TranslateExpression(source.expression));
+
+        // If a source is not of a list-type (ie, a singleton), it needs to be promoted to a list type.
+
+        var promotedSourceExpressions = sourceExpressions
+            .SelectToArray(expr => TryPromoteSource(multiSourceQuery, expr).source);
+
+        if (promotedSourceExpressions.Any(promotedSource => !IsOrImplementsIEnumerableOfT(promotedSource.Type)))
+            throw this.NewExpressionBuildingException("A promoted source must have a type that is enumerable.");
+
+
+        var crossJoinExpression = _operatorBinding.Bind(
+            CqlOperator.CrossJoin,
+            LibraryDefinitionsBuilder.ContextParameter,
+            promotedSourceExpressions);
+
+        // var all =
+        //     sources
+        //         .Zip(translatedSourceExpressions, possiblePromotedSources)
+        //         .SelectToArray(sources.Length, t =>
+        //         {
+        //             var (source, translatedSourceExpression, (possiblePromotedSource, wasSourcePromoted)) = t;
+        //             var listType = possiblePromotedSource.Type;
+        //             var listElementType = _typeManager.Resolver.GetListElementType(listType);
+        //             return (source, translatedSourceExpression, possiblePromotedSource, wasSourcePromoted, listType, listElementType);
+        //         });
+
+        // The technique here is to create a cross product of all the query sources.
+        // The combinations will be stored in a tuple whose fields are named by source alias.
+        // we will then create an expression that creates this cross-product of tuples,
+        // and use that as the singular query source for subsequent parts of the query.
+        // var multiSourceTupleType = TupleTypeFor(all.ToDictionary(t => t.source.alias!, t => t.listElementType!));
+
+        return (crossJoinExpression, [])!;
+    }
+
     private (Expression joinedSource, bool[] isSourcePromoted) CrossJoin(
         Query multiSourceQuery,
         Type tupleType)
@@ -239,8 +296,6 @@ internal partial class ExpressionBuilder
             firstSelectManyParameter,
             secondSelectManyParameter);
 
-        // var enumerableOfTupleType = callSelectMany.Type;
-
         for (int i = 2; i < sources.Length; i++)
         {
             var source = sources[i];
@@ -265,7 +320,7 @@ internal partial class ExpressionBuilder
             }
 
             bindings[i] = Expression.Bind(tupleType.GetProperty(source.alias)!, c);
-            @newTuple = Expression.New(tupleType);
+            newTuple = Expression.New(tupleType);
             memberInit = Expression.MemberInit(newTuple, bindings);
             var p2 = Expression.Lambda(memberInit, ab, c);
 
@@ -342,7 +397,7 @@ internal partial class ExpressionBuilder
                         }
                         default:
                         {
-                            var sort = _operatorBinding.Bind(CqlOperator.Sort, LibraryDefinitionsBuilder.ContextParameter,
+                            var sort = _operatorBinding.Bind(CqlOperator.ListSort, LibraryDefinitionsBuilder.ContextParameter,
                                 @return, Expression.Constant(order, typeof(ListSortDirection)));
                             return sort;
                         }
@@ -353,36 +408,32 @@ internal partial class ExpressionBuilder
         return @return;
     }
 
+    private bool IsMultiSourceSingletonLibrary => // REVIEW: Remove this
+        LibraryContext.Library.OriginalFilePath!.Contains("Urinary");
+
     protected Expression MultiSourceQuery(Query query)
     {
         ExpressionBuilder ctx = this;
 
-        // The technique here is to create a cross product of all the query sources.
-        // The combinations will be stored in a tuple whose fields are named by source alias.
-        // we will then create an expression that creates this cross-product of tuples,
-        // and use that as the singular query source for subsequent parts of the query.
-        var tupleSpecifier = new TupleTypeSpecifier
+        Expression? @return;
+        bool[]? isSourcesPromoted;
+        Type multiSourceTupleType;
+
+        if (IsMultiSourceSingletonLibrary)
         {
-            element = query.source
-                .Select(source => new TupleElementDefinition
-                {
-                    name = source.alias ?? throw ctx.NewExpressionBuildingException("Missing alias for multi-source query; this is illegal"),
-                    elementType = source.resultTypeSpecifier,
-                })
-                .ToArray(),
-        };
-
-        var multiSourceTupleType = TupleTypeFor(
-            tupleSpecifier,
-            (type) => IsOrImplementsIEnumerableOfT(type)
-                ? _typeManager.Resolver.GetListElementType(type, true)!
-                : throw new NotSupportedException("Query sources must be lists."));
-
-        var (@return, isSourcesPromoted) = ctx.CrossJoin(query, multiSourceTupleType);
+            (@return, isSourcesPromoted) = ctx.CrossJoinNew(query);
+            multiSourceTupleType = null!;
+            return @return; // REVIEW: Must be removed
+        }
+        else
+        {
+            multiSourceTupleType = ctx.GetMultiSourceTupleType(query);
+            (@return, isSourcesPromoted) = ctx.CrossJoin(query, multiSourceTupleType);
+        }
 
         var elementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
 
-        if(elementType != multiSourceTupleType)
+        if (elementType != multiSourceTupleType)
             throw ctx.NewExpressionBuildingException($"Expected element type {multiSourceTupleType.Name} but got {elementType.Name}");
 
         var sourceParameterName = TypeNameToIdentifier(elementType, ctx);
@@ -507,6 +558,35 @@ internal partial class ExpressionBuilder
 
         var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted=>isSourcePromoted);
         return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
+    }
+
+    private Type GetMultiSourceTupleType(Query query)
+    {
+        // The technique here is to create a cross product of all the query sources.
+        // The combinations will be stored in a tuple whose fields are named by source alias.
+        // we will then create an expression that creates this cross-product of tuples,
+        // and use that as the singular query source for subsequent parts of the query.
+        var tupleSpecifier = new TupleTypeSpecifier
+        {
+            element = query.source
+                .Select(source => new TupleElementDefinition
+                {
+                    name = source.alias ?? throw this.NewExpressionBuildingException("Missing alias for multi-source query; this is illegal"),
+                    elementType = source.resultTypeSpecifier,
+                })
+                .ToArray(),
+        };
+
+        tupleSpecifier.Dump();
+
+        var multiSourceTupleType = TupleTypeFor(
+            tupleSpecifier,
+            // type => _typeManager.Resolver.GetListElementType(type, true)!);
+            type => IsOrImplementsIEnumerableOfT(type)
+                ? _typeManager.Resolver.GetListElementType(type, true)!
+                : throw new NotSupportedException("Query sources must be lists."));
+
+        return multiSourceTupleType;
     }
 
     protected LambdaExpression WithToSelectManyBody(
@@ -668,4 +748,72 @@ internal partial class ExpressionBuilder
         }
     }
 
+}
+
+internal static class Extensions
+{
+    public static T[] SelectToArray<TIn, T>(
+        this IReadOnlyCollection<TIn> source,
+        Func<TIn, T> select) =>
+        SelectToArray(source.AsEnumerable(), source.Count, select);
+
+    public static T[] SelectToArray<TIn, T>(
+        this IEnumerable<TIn> source,
+        int sourceLength,
+        Func<TIn, T> select)
+    {
+        T[] array = new T[sourceLength];
+        int i = -1;
+        foreach (var item in source)
+        {
+            ++i;
+            array[i] = select(item);
+        }
+
+        return array;
+    }
+}
+
+file class NoNullsRenderer() : IRenderer
+{
+    public IRenderedObject Render(
+        object? obj,
+        IDescriptor? descriptor,
+        RendererConfig config)
+    {
+        if (obj is null)
+        {
+            config = config with
+            {
+                MemberProvider = new NoNullsMemberProvider(config.MemberProvider),
+            };
+        }
+        return DumpConfig.Default.Renderer.Render(obj, descriptor, config);
+    }
+}
+
+file class NoNullsMemberProvider(IMemberProvider Inner) : IMemberProvider
+{
+    public bool Equals(IMemberProvider? other)
+    {
+        return ReferenceEquals(this, other);
+    }
+
+    public IEnumerable<IValueProvider> GetMembers(Type type)
+    {
+        return Inner.GetMembers(type).Select(vp => new NoNullsValueProvider(vp));
+    }
+}
+
+file class NoNullsValueProvider(IValueProvider Inner) : IValueProvider
+{
+    public object? GetValue(object source)
+    {
+        var value = Inner.GetValue(source);
+        return value;
+    }
+
+    public string Name => Inner.Name;
+    public MemberInfo Info => Inner.Info;
+    public Type MemberType => Inner.MemberType;
 }

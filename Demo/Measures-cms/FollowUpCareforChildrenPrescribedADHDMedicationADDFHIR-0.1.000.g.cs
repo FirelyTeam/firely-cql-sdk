@@ -1246,7 +1246,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var fj_ = context.Operators.Quantity(300m, "days");
 			var fk_ = context.Operators.Add(fh_, fj_);
 			var fl_ = context.Operators.Interval(fh_, fk_, true, true);
-			var fm_ = context.Operators.IntervalIntersectsInterval<CqlDate>(ADHDMedication, fl_);
+			var fm_ = context.Operators.IntervalIntersect<CqlDate>(ADHDMedication, fl_);
 
 			return fm_;
 		};

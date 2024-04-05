@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -151,8 +152,10 @@ internal class CqlToResourcePackagingPipeline
         ];
 
         LibrarySet librarySet = new(_options.ElmDirectory.FullName);
-        var files = _options.ElmDirectory.GetFiles("*.json", SearchOption.AllDirectories)
-            .Where(fi => !hardcodedSkipFiles.Contains(fi.Name)).ToArray();
+        var files = _options.ElmDirectory
+            .GetFiles("*.json", SearchOption.AllDirectories)
+            .Where(fi => !hardcodedSkipFiles.Contains(fi.Name))
+            .ToArray();
         librarySet.LoadLibraries(files);
         return librarySet;
     }

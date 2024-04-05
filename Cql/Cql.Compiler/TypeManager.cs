@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -83,7 +83,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
         /// <returns>The unique tuple type name.</returns>
-        public string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
+        public string TupleTypeNameFor(IReadOnlyDictionary<string, Type> elementInfo)
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)
@@ -128,7 +128,7 @@ namespace Hl7.Cql.Compiler
                 propertyBuilder.SetSetMethod(set);
             }
         }
-        
+
         internal static string PrettyTypeName(Type type)
         {
             string typeName = type.Name;

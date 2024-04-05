@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
             var element = TranslateExpression(e.element!);
             if (IsOrImplementsIEnumerableOfT(source.Type))
             {
-                return _operatorBinding.Bind(CqlOperator.IndexOf, LibraryDefinitionsBuilder.ContextParameter, source, element);
+                return _operatorBinding.Bind(CqlOperator.ListIndexOf, LibraryDefinitionsBuilder.ContextParameter, source, element);
             }
             throw new NotImplementedException().WithContext(this);
         }

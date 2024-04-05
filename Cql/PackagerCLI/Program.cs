@@ -107,7 +107,10 @@ public class Program
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
-            .WriteTo.File(logFile, formatProvider: CultureInfo.InvariantCulture)
+            .WriteTo.File(
+                logFile,
+                outputTemplate: "{Level:u4}: {Message:lj}{NewLine}{Exception}",
+                formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
         logging.AddSerilog();
     }

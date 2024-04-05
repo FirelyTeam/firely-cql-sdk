@@ -1157,7 +1157,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var v_ = context.Operators.End(u_);
 			var w_ = context.Operators.DateFrom(v_);
 			var x_ = context.Operators.Interval(t_, w_, true, true);
-			var y_ = context.Operators.IntervalIntersectsInterval<CqlDate>(r_, x_);
+			var y_ = context.Operators.IntervalIntersect<CqlDate>(r_, x_);
 
 			return y_;
 		};
