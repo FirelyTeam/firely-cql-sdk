@@ -385,31 +385,40 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	{
 		IEnumerable<CqlDate> a_()
 		{
-			if ((context.Operators.Not((bool?)(context.Operators.ListUnion<CqlDate>(this.Outpatient_Encounters_with_Advanced_Illness(), this.Nonacute_Inpatient_Discharge_with_Advanced_Illness()) is null)) ?? false))
+			bool b_()
 			{
-				var b_ = this.Outpatient_Encounters_with_Advanced_Illness();
-				var c_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
-				var d_ = context.Operators.ListUnion<CqlDate>(b_, c_);
+				var c_ = this.Outpatient_Encounters_with_Advanced_Illness();
+				var d_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
+				var e_ = context.Operators.ListUnion<CqlDate>(c_, d_);
+				var f_ = context.Operators.Not((bool?)(e_ is null));
 
-				return d_;
+				return (f_ ?? false);
+			};
+			if (b_())
+			{
+				var g_ = this.Outpatient_Encounters_with_Advanced_Illness();
+				var h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
+				var i_ = context.Operators.ListUnion<CqlDate>(g_, h_);
+
+				return i_;
 			}
 			else if ((this.Outpatient_Encounters_with_Advanced_Illness() is null))
 			{
-				var e_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
+				var j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
 
-				return e_;
+				return j_;
 			}
 			else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness() is null))
 			{
-				var f_ = this.Outpatient_Encounters_with_Advanced_Illness();
+				var k_ = this.Outpatient_Encounters_with_Advanced_Illness();
 
-				return f_;
+				return k_;
 			}
 			else
 			{
-				IEnumerable<CqlDate> g_ = null;
+				IEnumerable<CqlDate> l_ = null;
 
-				return (g_ as IEnumerable<CqlDate>);
+				return (l_ as IEnumerable<CqlDate>);
 			};
 		};
 

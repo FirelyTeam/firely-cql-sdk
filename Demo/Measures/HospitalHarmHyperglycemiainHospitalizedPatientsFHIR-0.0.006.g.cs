@@ -480,26 +480,40 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			var i_ = context.Operators.Add(d_, h_);
 			CqlDateTime j_()
 			{
-				if ((context.Operators.Less(context.Operators.DurationBetween(context.Operators.Add(context.Operators.Start(Period), context.Operators.Multiply(context.Operators.Quantity(24m, "hours"), context.Operators.ConvertIntegerToQuantity(context.Operators.Subtract(DayIndex, (int?)1)))), context.Operators.End(Period), "hour"), (int?)24) ?? false))
+				bool m_()
 				{
-					var m_ = context.Operators.Start(Period);
-					var n_ = context.Operators.Quantity(24m, "hours");
-					var o_ = context.Operators.Subtract(DayIndex, (int?)1);
-					var p_ = context.Operators.ConvertIntegerToQuantity(o_);
-					var q_ = context.Operators.Multiply(n_, p_);
-					var r_ = context.Operators.Add(m_, q_);
+					var n_ = context.Operators.Start(Period);
+					var o_ = context.Operators.Quantity(24m, "hours");
+					var p_ = context.Operators.Subtract(DayIndex, (int?)1);
+					var q_ = context.Operators.ConvertIntegerToQuantity(p_);
+					var r_ = context.Operators.Multiply(o_, q_);
+					var s_ = context.Operators.Add(n_, r_);
+					var t_ = context.Operators.End(Period);
+					var u_ = context.Operators.DurationBetween(s_, t_, "hour");
+					var v_ = context.Operators.Less(u_, (int?)24);
 
-					return r_;
+					return (v_ ?? false);
+				};
+				if (m_())
+				{
+					var w_ = context.Operators.Start(Period);
+					var x_ = context.Operators.Quantity(24m, "hours");
+					var y_ = context.Operators.Subtract(DayIndex, (int?)1);
+					var z_ = context.Operators.ConvertIntegerToQuantity(y_);
+					var aa_ = context.Operators.Multiply(x_, z_);
+					var ab_ = context.Operators.Add(w_, aa_);
+
+					return ab_;
 				}
 				else
 				{
-					var s_ = context.Operators.Start(Period);
-					var t_ = context.Operators.Quantity(24m, "hours");
-					var u_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
-					var v_ = context.Operators.Multiply(t_, u_);
-					var w_ = context.Operators.Add(s_, v_);
+					var ac_ = context.Operators.Start(Period);
+					var ad_ = context.Operators.Quantity(24m, "hours");
+					var ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
+					var af_ = context.Operators.Multiply(ad_, ae_);
+					var ag_ = context.Operators.Add(ac_, af_);
 
-					return w_;
+					return ag_;
 				};
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);

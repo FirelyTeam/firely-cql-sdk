@@ -344,23 +344,44 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var g_ = context.Operators.Not((bool?)(f_ is null));
 			object h_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective) is CqlDateTime)
+				bool m_()
 				{
-					var m_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var p_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var q_ = p_ is CqlDateTime;
 
-					return ((m_ as CqlDateTime) as object);
+					return q_;
+				};
+				bool n_()
+				{
+					var r_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var s_ = r_ is CqlInterval<CqlDateTime>;
+
+					return s_;
+				};
+				bool o_()
+				{
+					var t_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var u_ = t_ is CqlDateTime;
+
+					return u_;
+				};
+				if (m_())
+				{
+					var v_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+
+					return ((v_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective) is CqlInterval<CqlDateTime>)
+				else if (n_())
 				{
-					var n_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var w_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
 
-					return ((n_ as CqlInterval<CqlDateTime>) as object);
+					return ((w_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective) is CqlDateTime)
+				else if (o_())
 				{
-					var o_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var x_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
 
-					return ((o_ as CqlDateTime) as object);
+					return ((x_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -394,23 +415,44 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var g_ = context.Operators.Not((bool?)(f_ is null));
 			object h_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective) is CqlDateTime)
+				bool s_()
 				{
-					var s_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var v_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var w_ = v_ is CqlDateTime;
 
-					return ((s_ as CqlDateTime) as object);
+					return w_;
+				};
+				bool t_()
+				{
+					var x_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var y_ = x_ is CqlInterval<CqlDateTime>;
+
+					return y_;
+				};
+				bool u_()
+				{
+					var z_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var aa_ = z_ is CqlDateTime;
+
+					return aa_;
+				};
+				if (s_())
+				{
+					var ab_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+
+					return ((ab_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective) is CqlInterval<CqlDateTime>)
+				else if (t_())
 				{
-					var t_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var ac_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
 
-					return ((t_ as CqlInterval<CqlDateTime>) as object);
+					return ((ac_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective) is CqlDateTime)
+				else if (u_())
 				{
-					var u_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var ad_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
 
-					return ((u_ as CqlDateTime) as object);
+					return ((ad_ as CqlDateTime) as object);
 				}
 				else
 				{

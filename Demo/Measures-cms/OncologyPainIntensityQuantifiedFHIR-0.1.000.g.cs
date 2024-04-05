@@ -448,34 +448,54 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			{
 				bool? j_()
 				{
-					if ((context.Operators.ExistsInList<CqlConcept>(context.Operators.WhereOrNull<CqlConcept>(context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(RadiationManagementEncounter?.Type, (CodeableConcept @this) => 
-										FHIRHelpers_4_3_000.ToConcept(@this)), (CqlConcept RadiationManagement) => 
-									context.Operators.Equivalent(RadiationManagement, context.Operators.ConvertCodeToConcept(this.Radiation_treatment_management__5_treatments())))) ?? false))
+					bool q_()
 					{
-						var q_ = FHIRHelpers_4_3_000.ToValue(PainAssessed?.Effective);
-						var r_ = QICoreCommon_2_0_000.toInterval(q_);
-						var s_ = context.Operators.End(r_);
-						var t_ = FHIRHelpers_4_3_000.ToInterval(RadiationManagementEncounter?.Period);
-						var u_ = context.Operators.Start(t_);
-						var v_ = context.Operators.Quantity(6m, "days");
-						var w_ = context.Operators.Subtract(u_, v_);
-						var y_ = context.Operators.Start(t_);
-						var z_ = context.Operators.Interval(w_, y_, true, true);
-						var aa_ = context.Operators.ElementInInterval<CqlDateTime>(s_, z_, "day");
-						var ac_ = context.Operators.Start(t_);
-						var ad_ = context.Operators.Not((bool?)(ac_ is null));
-						var ae_ = context.Operators.And(aa_, ad_);
+						CqlConcept r_(CodeableConcept @this)
+						{
+							var w_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-						return ae_;
+							return w_;
+						};
+						var s_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(RadiationManagementEncounter?.Type, r_);
+						bool? t_(CqlConcept RadiationManagement)
+						{
+							var x_ = this.Radiation_treatment_management__5_treatments();
+							var y_ = context.Operators.ConvertCodeToConcept(x_);
+							var z_ = context.Operators.Equivalent(RadiationManagement, y_);
+
+							return z_;
+						};
+						var u_ = context.Operators.WhereOrNull<CqlConcept>(s_, t_);
+						var v_ = context.Operators.ExistsInList<CqlConcept>(u_);
+
+						return (v_ ?? false);
+					};
+					if (q_())
+					{
+						var aa_ = FHIRHelpers_4_3_000.ToValue(PainAssessed?.Effective);
+						var ab_ = QICoreCommon_2_0_000.toInterval(aa_);
+						var ac_ = context.Operators.End(ab_);
+						var ad_ = FHIRHelpers_4_3_000.ToInterval(RadiationManagementEncounter?.Period);
+						var ae_ = context.Operators.Start(ad_);
+						var af_ = context.Operators.Quantity(6m, "days");
+						var ag_ = context.Operators.Subtract(ae_, af_);
+						var ai_ = context.Operators.Start(ad_);
+						var aj_ = context.Operators.Interval(ag_, ai_, true, true);
+						var ak_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, aj_, "day");
+						var am_ = context.Operators.Start(ad_);
+						var an_ = context.Operators.Not((bool?)(am_ is null));
+						var ao_ = context.Operators.And(ak_, an_);
+
+						return ao_;
 					}
 					else
 					{
-						var af_ = FHIRHelpers_4_3_000.ToInterval(RadiationManagementEncounter?.Period);
-						var ag_ = FHIRHelpers_4_3_000.ToValue(PainAssessed?.Effective);
-						var ah_ = QICoreCommon_2_0_000.toInterval(ag_);
-						var ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
+						var ap_ = FHIRHelpers_4_3_000.ToInterval(RadiationManagementEncounter?.Period);
+						var aq_ = FHIRHelpers_4_3_000.ToValue(PainAssessed?.Effective);
+						var ar_ = QICoreCommon_2_0_000.toInterval(aq_);
+						var as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
 
-						return ai_;
+						return as_;
 					};
 				};
 				var k_ = FHIRHelpers_4_3_000.ToValue(PainAssessed?.Value);

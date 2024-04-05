@@ -116,8 +116,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 if (ReferenceEquals(childStatement, lastExpression))
                 {
-
-                    if (childStatement is not CaseWhenThenExpression)
+                    if (childStatement is not 
+                        (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
                     {
                         if (!isFirstStatement) sb.AppendLine();
                         sb.Append(indent + 1, "return ");

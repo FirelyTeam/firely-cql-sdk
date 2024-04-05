@@ -717,20 +717,28 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			{
 				CqlInterval<CqlDateTime> r_()
 				{
-					if ((context.Operators.Start(QICoreCommon_2_0_000.toInterval(FHIRHelpers_4_3_000.ToValue(PSATest?.Effective))) is null))
+					bool aa_()
+					{
+						var ab_ = FHIRHelpers_4_3_000.ToValue(PSATest?.Effective);
+						var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
+						var ad_ = context.Operators.Start(ac_);
+
+						return (ad_ is null);
+					};
+					if (aa_())
 					{
 						return null;
 					}
 					else
 					{
-						var aa_ = FHIRHelpers_4_3_000.ToValue(PSATest?.Effective);
-						var ab_ = QICoreCommon_2_0_000.toInterval(aa_);
-						var ac_ = context.Operators.Start(ab_);
-						var ae_ = QICoreCommon_2_0_000.toInterval(aa_);
-						var af_ = context.Operators.Start(ae_);
-						var ag_ = context.Operators.Interval(ac_, af_, true, true);
+						var ae_ = FHIRHelpers_4_3_000.ToValue(PSATest?.Effective);
+						var af_ = QICoreCommon_2_0_000.toInterval(ae_);
+						var ag_ = context.Operators.Start(af_);
+						var ai_ = QICoreCommon_2_0_000.toInterval(ae_);
+						var aj_ = context.Operators.Start(ai_);
+						var ak_ = context.Operators.Interval(ag_, aj_, true, true);
 
-						return ag_;
+						return ak_;
 					};
 				};
 				var s_ = FHIRHelpers_4_3_000.ToValue(MostRecentProstateCancerStaging?.Effective);
@@ -759,11 +767,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			var ah_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
-			var aj_ = context.Operators.Start(ai_);
+			var al_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+			var am_ = QICoreCommon_2_0_000.toInterval(al_);
+			var an_ = context.Operators.Start(am_);
 
-			return aj_;
+			return an_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.LastOfList<Observation>(f_);
@@ -773,11 +781,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		bool? i_(Observation LastPSATest)
 		{
-			var ak_ = FHIRHelpers_4_3_000.ToValue(LastPSATest?.Value);
-			var al_ = context.Operators.Quantity(10m, "ng/mL");
-			var am_ = context.Operators.Less((ak_ as CqlQuantity), al_);
+			var ao_ = FHIRHelpers_4_3_000.ToValue(LastPSATest?.Value);
+			var ap_ = context.Operators.Quantity(10m, "ng/mL");
+			var aq_ = context.Operators.Less((ao_ as CqlQuantity), ap_);
 
-			return am_;
+			return aq_;
 		};
 		var j_ = context.Operators.SelectOrNull<Observation, bool?>(h_, i_);
 		var k_ = context.Operators.SingleOrNull<bool?>(j_);
