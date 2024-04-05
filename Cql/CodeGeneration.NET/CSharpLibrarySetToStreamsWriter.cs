@@ -326,7 +326,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions, 
+            string libraryName, StreamWriter writer, int indentLevel)
         {
             writer.WriteLine(indentLevel, "#region Cached values");
             writer.WriteLine();
@@ -423,7 +424,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private string DefinitionCacheKeyForMethod(string methodName)
         {
             if (methodName[0] == '@')
-                return "__" + methodName.Substring(1);
+                return "__" + methodName[1..];
             else return "__" + methodName;
         }
         private string PrivateMethodNameFor(string methodName) => methodName + "_Value";

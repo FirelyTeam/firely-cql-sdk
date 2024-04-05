@@ -143,11 +143,6 @@ internal class CqlToResourcePackagingPipeline
             // This uses a multi-source query where one of the sources is a singleton,
             // we still need to work on this issue - see https://github.com/FirelyTeam/firely-cql-sdk/issues/220
             "UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR.json",
-            
-            // These files produce incorrect C#. Have not looked into it yet.
-            "CesareanBirthFHIR.json",
-            "HybridHospitalWideMortalityFHIR.json",
-            "HybridHospitalWideReadmissionFHIR.json",
         ];
         
         LibrarySet librarySet = new(_options.ElmDirectory.FullName);
