@@ -277,7 +277,8 @@ namespace Hl7.Cql.Compiler
 
             var methodCrossJoin = genericDefinitionMethodCrossJoin.MakeGenericMethod(sourceListElementTypes);
 
-            return Expression.Lambda(Expression.Call(operators, methodCrossJoin, sources));
+            //return Expression.Lambda(Expression.Call(operators, methodCrossJoin, sources));
+            return Expression.Call(operators, methodCrossJoin, sources);
         }
 
         private Expression ToList(Expression[] parameters, MemberExpression operators)
@@ -464,7 +465,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression Flatten(MemberExpression operators, Expression operand)
         {
-            var elementType = TypeResolver.GetListElementType(operand.Type, @throw: true)!;
+            var elementType = TypeResolver.GetListElementType(operand.Type, throwError: true)!;
             if (IsOrImplementsIEnumerableOfT(elementType))
             {
                 var nestedElementType = TypeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
@@ -940,10 +941,10 @@ namespace Hl7.Cql.Compiler
         private MethodCallExpression Select(Expression operators,
             Expression source, Expression lambda)
         {
-            if (lambda is LambdaExpression lamdaExpr)
+            if (lambda is LambdaExpression lambdaExpr)
             {
                 var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
-                var resultType = lamdaExpr.ReturnType;
+                var resultType = lambdaExpr.ReturnType;
                 var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType, resultType);
                 var call = Expression.Call(operators, genericMethod, source, lambda);

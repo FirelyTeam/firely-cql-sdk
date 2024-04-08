@@ -20,7 +20,7 @@ namespace Hl7.Cql.Compiler
             var operand = TranslateExpression(e.operand![0]!);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
-                var elementType = _typeManager.Resolver.GetListElementType(operand.Type, @throw: true)!;
+                var elementType = _typeManager.Resolver.GetListElementType(operand.Type, throwError: true)!;
                 if (IsInterval(elementType, out var pointType))
                 {
                     var precision = Expression.Constant(null, typeof(string));
@@ -41,7 +41,7 @@ namespace Hl7.Cql.Compiler
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var elementType = _typeManager.Resolver.GetListElementType(left.Type, @throw: true)!;
+                var elementType = _typeManager.Resolver.GetListElementType(left.Type, throwError: true)!;
                 if (elementType != right.Type)
                 {
                     if (elementType.IsAssignableFrom(right.Type))

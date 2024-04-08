@@ -725,8 +725,8 @@ namespace Hl7.Cql.Compiler
                 return true;
             if (IsOrImplementsIEnumerableOfT(from) && IsOrImplementsIEnumerableOfT(to))
             {
-                var fromElement = _typeManager.Resolver.GetListElementType(from, @throw: true)!;
-                var toElement = _typeManager.Resolver.GetListElementType(to, @throw: true)!;
+                var fromElement = _typeManager.Resolver.GetListElementType(from, throwError: true)!;
+                var toElement = _typeManager.Resolver.GetListElementType(to, throwError: true)!;
                 return IsConvertible(fromElement, toElement);
             }
             return false;

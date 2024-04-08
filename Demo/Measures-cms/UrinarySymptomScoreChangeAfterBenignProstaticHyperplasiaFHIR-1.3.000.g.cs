@@ -7,7 +7,6 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
-using Tuples;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.0.0")]
@@ -53,7 +52,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
     internal Lazy<bool?> __Has_BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment;
     internal Lazy<bool?> __Has_Morbid_Obesity_Diagnosis_or_BMI_Exam_Result__Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment;
     internal Lazy<bool?> __Denominator_Exclusions;
-    internal Lazy<Func<IEnumerable<ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>>>> __Urinary_Symptom_Score_Change;
+    internal Lazy<int?> __Urinary_Symptom_Score_Change;
     internal Lazy<bool?> __Has_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3;
     internal Lazy<bool?> __Numerator;
     internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
@@ -103,7 +102,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
         __Has_BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment = new Lazy<bool?>(this.Has_BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment_Value);
         __Has_Morbid_Obesity_Diagnosis_or_BMI_Exam_Result__Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment = new Lazy<bool?>(this.Has_Morbid_Obesity_Diagnosis_or_BMI_Exam_Result__Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment_Value);
         __Denominator_Exclusions = new Lazy<bool?>(this.Denominator_Exclusions_Value);
-        __Urinary_Symptom_Score_Change = new Lazy<Func<IEnumerable<ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>>>>(this.Urinary_Symptom_Score_Change_Value);
+        __Urinary_Symptom_Score_Change = new Lazy<int?>(this.Urinary_Symptom_Score_Change_Value);
         __Has_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3 = new Lazy<bool?>(this.Has_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
         __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
@@ -1051,30 +1050,44 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	public bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private Func<IEnumerable<ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>>> Urinary_Symptom_Score_Change_Value()
+	private int? Urinary_Symptom_Score_Change_Value()
 	{
-		IEnumerable<ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>> a_()
+		var a_ = this.Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis();
+		var b_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
 		{
-			var b_ = this.Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis();
-			var c_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
-			{
-				b_,
-			};
-			var d_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis();
-			var e_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
-			{
-				d_,
-			};
-			IEnumerable<(Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Tuple_HHCMSSZgDEUSHVCefGhfGYQZI)> f_ = context.Operators.CrossJoin<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(c_, e_);
-
-			return f_;
+			a_,
 		};
+		var c_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis();
+		var d_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
+		{
+			c_,
+		};
+		var e_ = context.Operators.CrossJoin<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(b_, d_);
+		Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI f_(ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> _select0)
+		{
+			var k_ = new Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI
+			{
+				FirstUSSAssessment = _select0.Item1,
+				FollowUpUSSAssessment = _select0.Item2,
+			};
 
-		return a_;
+			return k_;
+		};
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>, Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI>(e_, f_);
+		int? h_(Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI tuple_faeshvmwygmybalajitzuecdi)
+		{
+			var l_ = context.Operators.Subtract(tuple_faeshvmwygmybalajitzuecdi.FirstUSSAssessment?.valueInteger, tuple_faeshvmwygmybalajitzuecdi.FollowUpUSSAssessment?.valueInteger);
+
+			return l_;
+		};
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI, int?>(g_, h_);
+		var j_ = context.Operators.SingleOrNull<int?>(i_);
+
+		return j_;
 	}
 
     [CqlDeclaration("Urinary Symptom Score Change")]
-	public Func<IEnumerable<ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>>> Urinary_Symptom_Score_Change() => 
+	public int? Urinary_Symptom_Score_Change() => 
 		__Urinary_Symptom_Score_Change.Value;
 
 	private bool? Has_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3_Value()

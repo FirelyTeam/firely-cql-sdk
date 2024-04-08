@@ -121,9 +121,9 @@ Hl7.Cql.Operators.ICqlOperators.ConvertStringToTime(string? s) -> Hl7.Cql.Primit
 Hl7.Cql.Operators.ICqlOperators.ConvertTimeToString(Hl7.Cql.Primitives.CqlTime? t) -> string?
 Hl7.Cql.Operators.ICqlOperators.CountOrNull<T>(System.Collections.Generic.IEnumerable<T>? source) -> int?
 Hl7.Cql.Operators.ICqlOperators.CreateValueSetFacade(Hl7.Cql.Primitives.CqlValueSet! valueSet) -> Hl7.Cql.ValueSets.IValueSetFacade!
-Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4>(System.Collections.Generic.IEnumerable<T1>! source1, System.Collections.Generic.IEnumerable<T2>! source2, System.Collections.Generic.IEnumerable<T3>! source3, System.Collections.Generic.IEnumerable<T4>! source4) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4)>!
-Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3>(System.Collections.Generic.IEnumerable<T1>! source1, System.Collections.Generic.IEnumerable<T2>! source2, System.Collections.Generic.IEnumerable<T3>! source3) -> System.Collections.Generic.IEnumerable<(T1, T2, T3)>!
-Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2>(System.Collections.Generic.IEnumerable<T1>! source1, System.Collections.Generic.IEnumerable<T2>! source2) -> System.Collections.Generic.IEnumerable<(T1, T2)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3) -> System.Collections.Generic.IEnumerable<(T1, T2, T3)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2) -> System.Collections.Generic.IEnumerable<(T1, T2)>!
 Hl7.Cql.Operators.ICqlOperators.Date(int? year, int? month, int? day) -> Hl7.Cql.Primitives.CqlDate?
 Hl7.Cql.Operators.ICqlOperators.DateFrom(Hl7.Cql.Primitives.CqlDateTime? argument) -> Hl7.Cql.Primitives.CqlDate?
 Hl7.Cql.Operators.ICqlOperators.DateTime(int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, decimal? offset) -> Hl7.Cql.Primitives.CqlDateTime?

@@ -95,9 +95,9 @@ internal partial class ExpressionBuilder
 
         var source = ctx.TranslateExpression(querySource.expression);
 
-        var (@return, isSourcePromoted) = TryPromoteSource(query, source);
+        var (@return, isSourcePromoted) = TryPromoteSource(source);
 
-        Type elementType = _typeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
+        Type elementType = _typeManager.Resolver.GetListElementType(@return.Type, throwError: true)!;
 
         var rootScopeParameterName = NormalizeIdentifier(querySourceAlias);
         var rootScopeParameter = Expression.Parameter(elementType, rootScopeParameterName);
@@ -199,39 +199,100 @@ internal partial class ExpressionBuilder
         if (sources.Length < 2)
             throw this.NewExpressionBuildingException("This CrossJoin method should only be called on multi-source queries.");
 
+        // Future Feature: Support for more than 4 sources
+
         if (sources.Length > 4)
             throw this.NewExpressionBuildingException("CrossJoins on multi-source queries with more than 4 sources is not yet supported.");
 
-        if (sources.Any(s => string.IsNullOrEmpty(s.alias)))
+        var aliases = sources.SelectToArray(s => s.alias);
+        if (aliases.Any(alias => string.IsNullOrEmpty(alias)))
             throw this.NewExpressionBuildingException("Multi-source Queries must all have aliases.");
 
         var sourceExpressions = sources
             .SelectToArray(source => TranslateExpression(source.expression));
 
-        // If a source is not of a list-type (ie, a singleton), it needs to be promoted to a list type.
+        // Returns a CrossJoin between IEnumerable<> of T1, T2, T3, etc and return into IEnumerable<(T1, T2, T3, etc)>
+        // a) If a source is not of a list-type (ie, a singleton), it needs to be promoted to a list type.
+        // b) Cross-Join
+        //    IEnumerable<A> a = ...;
+        //    IEnumerable<B> b = ...;
+        //    IEnumerable<c> c = ...;
+        //    IEnumerable<(A, B, C)> crossJoinedValueTupleResults = CrossJoin<A, B, C>(a, b, c);
 
-        var promotedSourceExpressions = sourceExpressions
-            .SelectToArray(expr => TryPromoteSource(multiSourceQuery, expr).source);
+        var tryPromoteSourceExpressions = sourceExpressions.SelectToArray(expr => TryPromoteSource(expr));
+        var promotedSourceExpressions = tryPromoteSourceExpressions.SelectToArray(s => s.source);
+        var isSourcesPromoted = tryPromoteSourceExpressions.SelectToArray(s => s.isSourcePromoted);
 
         if (promotedSourceExpressions.Any(promotedSource => !IsOrImplementsIEnumerableOfT(promotedSource.Type)))
             throw this.NewExpressionBuildingException("A promoted source must have a type that is enumerable.");
 
-
-        var crossJoinExpression = _operatorBinding.Bind(
+        var crossJoinedValueTupleResultsExpression = _operatorBinding.Bind(
             CqlOperator.CrossJoin,
             LibraryDefinitionsBuilder.ContextParameter,
             promotedSourceExpressions);
 
-        // var all =
-        //     sources
-        //         .Zip(translatedSourceExpressions, possiblePromotedSources)
-        //         .SelectToArray(sources.Length, t =>
-        //         {
-        //             var (source, translatedSourceExpression, (possiblePromotedSource, wasSourcePromoted)) = t;
-        //             var listType = possiblePromotedSource.Type;
-        //             var listElementType = _typeManager.Resolver.GetListElementType(listType);
-        //             return (source, translatedSourceExpression, possiblePromotedSource, wasSourcePromoted, listType, listElementType);
-        //         });
+        // Select the IEnumerable<> of value-tuples above into IEnumerable<> of our custom tuple
+        // a) Create the custom tuple
+        // b) Select
+        //    IEnumerable<Tuple_ABC> crossJoinedCqlTupleResults = Select(
+        //        crossJoinedValueTupleResults,
+        //        valueTuple => {
+        //            var abc = new Tuple_ABC();
+        //            abc.A = t.Item1;
+        //            abc.B = t.Item2;
+        //            abc.C = t.Item3;
+        //            return abc;
+        //        });
+
+        Type[] sourceListElementTypes = promotedSourceExpressions
+            .SelectToArray(pse => this._typeManager.Resolver.GetListElementType(pse.Type, true)!);
+
+        var aliasAndElementTypes = aliases
+            .Zip(sourceListElementTypes, (alias, elementType) => (alias, elementType))
+            .ToDictionary(t => t.alias, t => t.elementType);
+
+        // IEnumerable<(A,B,C)
+        var funcResultType = crossJoinedValueTupleResultsExpression.Type;
+
+        // (A,B,C)
+        const BindingFlags bfPublicInstance = BindingFlags.Public | BindingFlags.Instance;
+
+        Type valueTupleType = _typeManager.Resolver.GetListElementType(funcResultType, true)!;
+        FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
+
+        Type cqlTupleType = TupleTypeFor(aliasAndElementTypes);
+        PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
+
+        Debug.Assert(valueTupleFields.Length > 0);
+        Debug.Assert(valueTupleFields.Length == cqlTupleProperties.Length);
+
+        var valueTupleTypeParam = Expression.Parameter(valueTupleType, "_select0");
+        var selectExpression =
+            Expression.Lambda(
+                CopyValueTupleIntoCqlTuple(),
+                valueTupleTypeParam);
+
+        Expression CopyValueTupleIntoCqlTuple()
+        {
+            var newCqlTupleExpr = Expression.New(cqlTupleType);
+
+            var memberAssignments = valueTupleFields
+                .Zip(cqlTupleProperties, (valueTupleField, cqlTupleProp) => (valueTupleField, cqlTupleProp))
+                .SelectToArray(
+                    valueTupleFields.Length,
+                    t => Expression.Bind(
+                    t.cqlTupleProp.GetSetMethod()!,
+                    Expression.Field(valueTupleTypeParam, t.valueTupleField)));
+
+            var copyProps = Expression.MemberInit(newCqlTupleExpr, memberAssignments);
+            return copyProps;
+        }
+
+        var crossJoinedCqlTupleResultsExpression = _operatorBinding.Bind(
+            CqlOperator.Select,
+            LibraryDefinitionsBuilder.ContextParameter,
+            crossJoinedValueTupleResultsExpression,
+            selectExpression);
 
         // The technique here is to create a cross product of all the query sources.
         // The combinations will be stored in a tuple whose fields are named by source alias.
@@ -239,7 +300,7 @@ internal partial class ExpressionBuilder
         // and use that as the singular query source for subsequent parts of the query.
         // var multiSourceTupleType = TupleTypeFor(all.ToDictionary(t => t.source.alias!, t => t.listElementType!));
 
-        return (crossJoinExpression, [])!;
+        return (crossJoinedCqlTupleResultsExpression, isSourcesPromoted)!;
     }
 
     private (Expression joinedSource, bool[] isSourcePromoted) CrossJoin(
@@ -271,12 +332,12 @@ internal partial class ExpressionBuilder
         // they are working only off of the initial selectmany parameters.
         var source0 = sources[0];
         var firstExpression = TranslateExpression(source0.expression!);
-        (firstExpression, isSourcePromotedArr[0]) = TryPromoteSource(multiSourceQuery, firstExpression);
+        (firstExpression, isSourcePromotedArr[0]) = TryPromoteSource(firstExpression);
         var firstElementType = _typeManager.Resolver.GetListElementType(firstExpression.Type)!;
 
         var source1 = sources[1];
         var secondExpression = TranslateExpression(source1.expression!);
-        (secondExpression, isSourcePromotedArr[1]) = TryPromoteSource(multiSourceQuery, secondExpression);
+        (secondExpression, isSourcePromotedArr[1]) = TryPromoteSource(secondExpression);
         var secondElementType = _typeManager.Resolver.GetListElementType(secondExpression.Type)!;
 
         var firstLambdaParameter = Expression.Parameter(firstElementType, $"_{source0.alias}");
@@ -301,7 +362,7 @@ internal partial class ExpressionBuilder
             var source = sources[i];
 
             var sourceExpression = TranslateExpression(source.expression!);
-            (sourceExpression, isSourcePromotedArr[i]) = TryPromoteSource(multiSourceQuery, sourceExpression);
+            (sourceExpression, isSourcePromotedArr[i]) = TryPromoteSource(sourceExpression);
             string message = $"{sourceExpression.Type} was expected to be a list type.";
             var sourceElementType = _typeManager.Resolver.GetListElementType(sourceExpression.Type) ?? throw this.NewExpressionBuildingException(message);
 
@@ -335,7 +396,7 @@ internal partial class ExpressionBuilder
         return (callSelectMany, isSourcePromotedArr);
     }
 
-    private (Expression source, bool isSourcePromoted) TryPromoteSource(Query query, Expression source)
+    private (Expression source, bool isSourcePromoted) TryPromoteSource(Expression source)
     {
         var isSourcePromoted = false;
         // promote single objects into enumerables so where works
@@ -422,8 +483,7 @@ internal partial class ExpressionBuilder
         if (IsMultiSourceSingletonLibrary)
         {
             (@return, isSourcesPromoted) = ctx.CrossJoinNew(query);
-            multiSourceTupleType = null!;
-            return @return; // REVIEW: Must be removed
+            multiSourceTupleType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
         }
         else
         {
@@ -576,8 +636,6 @@ internal partial class ExpressionBuilder
                 })
                 .ToArray(),
         };
-
-        tupleSpecifier.Dump();
 
         var multiSourceTupleType = TupleTypeFor(
             tupleSpecifier,

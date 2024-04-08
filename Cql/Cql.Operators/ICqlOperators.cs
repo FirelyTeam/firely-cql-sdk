@@ -451,6 +451,22 @@ namespace Hl7.Cql.Operators
         bool? SamePrecision(CqlTime? left, CqlTime? right);
         IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
         IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
+
+        IEnumerable<(T1, T2)> CrossJoin<T1, T2>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2);
+
+        IEnumerable<(T1, T2, T3)> CrossJoin<T1, T2, T3>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3);
+
+        IEnumerable<(T1, T2, T3, T4)> CrossJoin<T1, T2, T3, T4>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4);
+
         IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select);
         T? SingleOrNull<T>(IEnumerable<T>? source);
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);
@@ -521,21 +537,6 @@ namespace Hl7.Cql.Operators
         long? Width(CqlInterval<long?>? @this);
         bool? Xor(bool? left, bool? right);
         bool? Xor(Lazy<bool?> left, Lazy<bool?> right);
-
-        IEnumerable<(T1, T2)> CrossJoin<T1, T2>(
-            IEnumerable<T1> source1,
-            IEnumerable<T2> source2);
-
-        IEnumerable<(T1, T2, T3)> CrossJoin<T1, T2, T3>(
-            IEnumerable<T1> source1,
-            IEnumerable<T2> source2,
-            IEnumerable<T3> source3);
-
-        IEnumerable<(T1, T2, T3, T4)> CrossJoin<T1, T2, T3, T4>(
-            IEnumerable<T1> source1,
-            IEnumerable<T2> source2,
-            IEnumerable<T3> source3,
-            IEnumerable<T4> source4);
 
         #endregion
     }

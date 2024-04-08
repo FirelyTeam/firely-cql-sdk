@@ -1,5 +1,5 @@
 ﻿#nullable enable
-abstract Hl7.Cql.Abstractions.TypeResolver.GetListElementType(System.Type! type, bool throw = false) -> System.Type?
+abstract Hl7.Cql.Abstractions.TypeResolver.GetListElementType(System.Type! type, bool throwError = false) -> System.Type?
 abstract Hl7.Cql.Abstractions.TypeResolver.ImplementsGenericInterface(System.Type! type, System.Type! genericInterfaceTypeDefinition) -> bool
 abstract Hl7.Cql.Abstractions.TypeResolver.ResolveType(string! typeSpecifier) -> System.Type?
 const Hl7.Cql.Abstractions.UCUMUnits.Centimeter = "cm" -> string!
