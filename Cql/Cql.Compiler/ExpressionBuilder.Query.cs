@@ -1,27 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using Dumpify;
-using Dumpify.Descriptors;
-using Dumpify.Descriptors.ValueProviders;
 using Microsoft.Extensions.Logging;
-
-namespace Hl7.Cql.Compiler;
-
-using Abstractions;
-using Elm;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
 using Expression = System.Linq.Expressions.Expression;
+using Hl7.Cql.Elm;
 
-using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Elm.Element)>;
+using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
 
+namespace Hl7.Cql.Compiler;
 
 internal partial class ExpressionBuilder
 {
@@ -30,11 +23,31 @@ internal partial class ExpressionBuilder
         var sourceLength = query.source?.Length ?? 0;
 
         var lines = ReadCqlLines(query);
+        var sources = ReadSources();
+
+        (string alias, Type sourceType, bool needsPromotion)[] ReadSources() => query.source!
+            .SelectToArray(s =>
+            {
+                var sourceType = TranslateExpression(s.expression).Type;
+                var needsPromotion = !IsOrImplementsIEnumerableOfT(sourceType);
+                return (
+                    s.alias,
+                    sourceType,
+                    needsPromotion
+                );
+            });
+
         _logger.LogDebug(
-            "Found {queryType} Query at: {at}{lines}",
+            """
+             Found {queryType} Query with {sourceCount} source(s) at: {at}
+             Sources:{sources}
+             CQL: {lines}
+             """,
             ((ReadOnlySpan<string>)["Empty", "Single", "Multi"])[Math.Clamp(sourceLength, 0, 2)],
+            sourceLength,
             DebuggerView,
-            lines is {} ? $"\nand lines are:{string.Concat(from l in lines select $"\n\t{l}")}" : "");
+            $"{string.Concat(from s in sources select $"\n\t{s.alias}: {s.sourceType}{(s.needsPromotion?" (singleton)":"")}")}",
+            lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
 
         ReadCqlLines(query);
 
@@ -830,48 +843,4 @@ internal static class Extensions
 
         return array;
     }
-}
-
-file class NoNullsRenderer() : IRenderer
-{
-    public IRenderedObject Render(
-        object? obj,
-        IDescriptor? descriptor,
-        RendererConfig config)
-    {
-        if (obj is null)
-        {
-            config = config with
-            {
-                MemberProvider = new NoNullsMemberProvider(config.MemberProvider),
-            };
-        }
-        return DumpConfig.Default.Renderer.Render(obj, descriptor, config);
-    }
-}
-
-file class NoNullsMemberProvider(IMemberProvider Inner) : IMemberProvider
-{
-    public bool Equals(IMemberProvider? other)
-    {
-        return ReferenceEquals(this, other);
-    }
-
-    public IEnumerable<IValueProvider> GetMembers(Type type)
-    {
-        return Inner.GetMembers(type).Select(vp => new NoNullsValueProvider(vp));
-    }
-}
-
-file class NoNullsValueProvider(IValueProvider Inner) : IValueProvider
-{
-    public object? GetValue(object source)
-    {
-        var value = Inner.GetValue(source);
-        return value;
-    }
-
-    public string Name => Inner.Name;
-    public MemberInfo Info => Inner.Info;
-    public Type MemberType => Inner.MemberType;
 }
