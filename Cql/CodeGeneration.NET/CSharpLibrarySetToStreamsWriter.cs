@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -53,7 +53,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             _aliasedUsings = BuildAliasedUsings(typeResolver);
         }
 
-        private static List<(string, string)> BuildAliasedUsings(TypeResolver typeResolver) => 
+        private static List<(string, string)> BuildAliasedUsings(TypeResolver typeResolver) =>
             typeResolver.Aliases.ToList();
 
         private static HashSet<string> BuildUsings(TypeResolver typeResolver)
@@ -218,7 +218,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private void WriteClass(DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
             Func<string, string?> libraryNameToClassName,
-            string libraryName, 
+            string libraryName,
             StreamWriter writer,
             int indentLevel)
         {
@@ -308,9 +308,9 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private static void WriteDependencies(
-            LibrarySet librarySet, 
-            Func<string, string?> libraryNameToClassName, 
-            string libraryName, 
+            LibrarySet librarySet,
+            Func<string, string?> libraryNameToClassName,
+            string libraryName,
             StreamWriter writer,
             int indentLevel)
         {
@@ -324,7 +324,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions, 
+        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions,
             string libraryName, StreamWriter writer, int indentLevel)
         {
             writer.WriteLine(indentLevel, "#region Cached values");
@@ -394,7 +394,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             int indent)
         {
             var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
-            
+
             bool atFirst = true;
 
             foreach (var dependentLibrary in requiredLibraries)
@@ -495,7 +495,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 //      writer.WriteLine();
             }
         }
-
+        
         private static void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
         {
             if (tags != null)
@@ -550,6 +550,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 body = visitor.Visit(body);
             }
+
             return body;
         }
 
@@ -564,4 +565,3 @@ namespace Hl7.Cql.CodeGeneration.NET
         };
     }
 }
-

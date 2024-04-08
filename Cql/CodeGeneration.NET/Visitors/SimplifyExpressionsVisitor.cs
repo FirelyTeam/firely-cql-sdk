@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -16,7 +16,7 @@ using System.Linq.Expressions;
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     /// <summary>
-    /// <para>This Visitor will (in most cases) create a new variable for a nested expression, 
+    /// <para>This Visitor will (in most cases) create a new variable for a nested expression,
     /// and assign the visited node's expression to that variable, thus unwinding the deeply nested
     /// structure of Linq.Expression to make it easier to debug and inspect the intermediate values.</para>
     /// <para>E.g. exprA(exprB(4)) will be turned into:</para>
@@ -144,7 +144,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             {
                 // Don't simplify simple converts.
                 ExpressionType.Convert or ExpressionType.TypeAs => base.VisitUnary(node),
-                
+
                 // Don't simplify throw expressions
                 ExpressionType.Throw => base.VisitUnary(node),
                 _ => MakeLet(base.VisitUnary(node))
@@ -163,14 +163,14 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
                 // The interim value of an assignment is clear, we don't need to simplify
                 { NodeType: ExpressionType.Assign } => base.VisitBinary(node),
-                
+
                 _ => MakeLet(base.VisitBinary(node))
             };
         }
 
         // While visiting an expression the visitor keeps track of new assignments necessary
         // to simplify the expression. When done, the last expression (the return value) and
-        // the collected assignments can be combined into a block with this function. 
+        // the collected assignments can be combined into a block with this function.
         internal Expression ToBlock(Expression node)
         {
             // If there are no assignments (unlikely, we have introduced them to split large calls
@@ -227,7 +227,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             var visitedElse = elseVisitor.Visit(node.ElseCase);
 
             var caseStatementBlockVisitor = new SimplifyExpressionsVisitor();
-            
+
             var cases = node.WhenThenCases.Select(c => visitCase(c,caseStatementBlockVisitor))
                 .ToList();
             var newCaseWhenThen = node.Update(cases.AsReadOnly(), visitedElse);
@@ -235,10 +235,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             // To make sure the if block in C# (which is NOT an expression) can
             // be used everywhere, we place the block inside its own lambda.
             // This also ensures the lexical exits work correctly.
-            var caseStatementLambda = Expression.Lambda(caseStatementBlockVisitor.ToBlock(newCaseWhenThen)); 
+            var caseStatementLambda = Expression.Lambda(caseStatementBlockVisitor.ToBlock(newCaseWhenThen));
             var lambdaVar = MakeLet(caseStatementLambda);
             return Expression.Invoke(lambdaVar);
-            
+
             // Each of the cases will be translated to blocks, which can hold their own
             // local variables and lexical return, just like the body of a Lambda. So,
             // we use a nested vistor here to create a nested block.
@@ -249,13 +249,13 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 // we can simplify its body, and then can call the lambda to make sure
                 // we evaluate the condition as late as possible (we don't want to evaluate
                 // a cases before we've checked the cases before it).
-                var newWhen = isSimpleWhen(c.When) ? 
-                    c.When 
+                var newWhen = isSimpleWhen(c.When) ?
+                    c.When
                     : Expression.Invoke(whenVisitor.CollectVisit(Expression.Lambda(c.When)));
 
                 var thenVisitor = new SimplifyExpressionsVisitor();
                 return c.Update(newWhen, thenVisitor.Visit(c.Then));
-                
+
                 // simple a ? b : c, with simple b and c
                 bool isSimpleWhen(Expression when)
                 {
@@ -267,4 +267,3 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         }
     }
 }
-
