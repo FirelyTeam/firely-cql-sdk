@@ -16,19 +16,20 @@ using System.Linq.Expressions;
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     /// <summary>
-    /// This Visitor will (in most cases) create a new variable for a nested expression, 
+    /// <para>This Visitor will (in most cases) create a new variable for a nested expression, 
     /// and assign the visited node's expression to that variable, thus unwinding the deeply nested
-    /// structure of Linq.Expression to make it easier to debug and inspect the intermediate values.
-    ///
-    /// E.g. exprA(exprB(4)) will be turned into
+    /// structure of Linq.Expression to make it easier to debug and inspect the intermediate values.</para>
+    /// <para>E.g. exprA(exprB(4)) will be turned into:</para>
+    /// <code>
     ///     var b = exprB(4)
     ///     var a = exprA(b)
     ///     return a;
+    /// </code>
     /// </summary>
     internal class SimplifyExpressionsVisitor : ExpressionVisitor
     {
         private readonly List<BinaryExpression> _assignments = [];
-        private bool atRoot = true;
+        private bool _atRoot = true;
 
         public IReadOnlyCollection<BinaryExpression> Assignments => _assignments;
 
@@ -39,14 +40,14 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             // We needs a different action at the "root" of the tree than at the nodes of the tree,
             // see <see cref="ToBlock(Expression)"/> for more information.
-            if (atRoot)
+            if (_atRoot)
             {
-                atRoot = false;
-                var visited = doVisit(node);
+                _atRoot = false;
+                var visited = DoVisit(node);
                 return ToBlock(visited);
             }
             else
-                return doVisit(node);
+                return DoVisit(node);
         }
 
         [return: NotNullIfNotNull("node")]
@@ -54,10 +55,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         {
             if (node is null) return null;
 
-            return doVisit(node);
+            return DoVisit(node);
         }
 
-        private Expression doVisit(Expression node)
+        private Expression DoVisit(Expression node)
         {
             // This visit will, by default, call `simplify()` on every
             // type of node, which unwinds the nesting. Note that, even if you
@@ -81,11 +82,11 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 CaseWhenThenExpression cwt => VisitCaseWhenThenExpression(cwt),
 
                 // Simplify all others.
-                _ => makeLet(base.Visit(node))
+                _ => MakeLet(base.Visit(node))
             };
         }
 
-        private ParameterExpression makeLet(Expression node)
+        private ParameterExpression MakeLet(Expression node)
         {
             // transform complex expression into a variable +
             // variable assignment with the expression in the RHS.
@@ -103,7 +104,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             if (isSimpleConditional(node))
                 return node;
 
-            var cwt = toCwt(node);
+            var cwt = ToCwt(node);
             return Visit(cwt);
 
             // simple a ? b : c, with simple b and c
@@ -118,7 +119,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             }
         }
 
-        private static CaseWhenThenExpression toCwt(ConditionalExpression ce)
+        private static CaseWhenThenExpression ToCwt(ConditionalExpression ce)
         {
             var exprs = flatten(ce).ToList();
             var cases = exprs
@@ -146,7 +147,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 
                 // Don't simplify throw expressions
                 ExpressionType.Throw => base.VisitUnary(node),
-                _ => makeLet(base.VisitUnary(node))
+                _ => MakeLet(base.VisitUnary(node))
             };
         }
 
@@ -163,7 +164,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 // The interim value of an assignment is clear, we don't need to simplify
                 { NodeType: ExpressionType.Assign } => base.VisitBinary(node),
                 
-                _ => makeLet(base.VisitBinary(node))
+                _ => MakeLet(base.VisitBinary(node))
             };
         }
 
@@ -235,7 +236,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             // be used everywhere, we place the block inside its own lambda.
             // This also ensures the lexical exits work correctly.
             var caseStatementLambda = Expression.Lambda(caseStatementBlockVisitor.ToBlock(newCaseWhenThen)); 
-            var lambdaVar = makeLet(caseStatementLambda);
+            var lambdaVar = MakeLet(caseStatementLambda);
             return Expression.Invoke(lambdaVar);
             
             // Each of the cases will be translated to blocks, which can hold their own

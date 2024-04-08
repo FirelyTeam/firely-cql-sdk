@@ -43,10 +43,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
-            _version = GetType().Assembly?.GetName()?.Version?.ToString() ?? "1.0.0";
+            _version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0";
             _tool = GetType()
-                       .Assembly?
-                       .GetCustomAttributes(false)
+                       .Assembly.GetCustomAttributes(false)
                        .OfType<AssemblyProductAttribute>()
                        .SingleOrDefault()?
                        .Product
@@ -209,7 +208,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (!string.IsNullOrWhiteSpace(Namespace))
                 {
                     writer.WriteLine(indentLevel, "}");
-                    indentLevel -= 1;
                 }
 
                 writer.Flush();
@@ -231,7 +229,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var nameAndVersion = libraryName.Split('-');
             if (nameAndVersion.Length == 2)
             {
-                if (System.Version.TryParse(nameAndVersion[1], out var version))
+                if (Version.TryParse(nameAndVersion[1], out _))
                 {
                     libraryAttribute = nameAndVersion[0];
                     versionAttribute = nameAndVersion[1];
@@ -316,11 +314,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             StreamWriter writer,
             int indentLevel)
         {
-            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, true);
+            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
 
-            foreach (var dependentLibrary in requiredLibraries!)
+            foreach (var dependentLibrary in requiredLibraries)
             {
-                var typeName = libraryNameToClassName!(dependentLibrary.NameAndVersion()!);
+                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion()!);
                 var memberName = typeName;
                 writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
             }
@@ -359,7 +357,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 yield break;
             }
 
-            foreach (var tupleType in tupleTypes!)
+            foreach (var tupleType in tupleTypes)
             {
                 if (tupleType == null!)
                     continue;
@@ -395,7 +393,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Func<string, string> libraryNameToClassName,
             int indent)
         {
-            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, true);
+            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
             
             bool atFirst = true;
 
@@ -473,12 +471,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     if (overload.Body is NewExpression @new)
                     {
                         var arg = @new.Arguments[0];
-                        if (arg is ConstantExpression constant)
+                        if (arg is ConstantExpression { Value: string valueSetId })
                         {
-                            if (constant.Value is string valueSetId)
-                            {
-                                writer.WriteLine(indentLevel, $"[CqlValueSet(\"{valueSetId}\")]");
-                            }
+                            writer.WriteLine(indentLevel, $"[CqlValueSet(\"{valueSetId}\")]");
                         }
                     }
                 }
@@ -527,7 +522,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private int WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
+        private void WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
             writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {ExpressionConverter.PrettyTypeName(tupleType.BaseType!)}");
@@ -547,7 +542,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             indentLevel--;
             writer.WriteLine(indentLevel, $"}}");
-            return indentLevel;
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
