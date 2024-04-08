@@ -1096,113 +1096,257 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	{
 		CqlQuantity a_()
 		{
-			if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.reserpine_0_1_MG_Oral_Tablet())) ?? false))
+			bool b_()
 			{
-				var b_ = context.Operators.Quantity(0.1m, "mg");
+				var t_ = this.reserpine_0_1_MG_Oral_Tablet();
+				var u_ = context.Operators.ConvertCodeToConcept(t_);
+				var v_ = context.Operators.Equivalent(Strength, u_);
 
-				return b_;
+				return (v_ ?? false);
+			};
+			bool c_()
+			{
+				var w_ = this.reserpine_0_25_MG_Oral_Tablet();
+				var x_ = context.Operators.ConvertCodeToConcept(w_);
+				var y_ = context.Operators.Equivalent(Strength, x_);
+
+				return (y_ ?? false);
+			};
+			bool d_()
+			{
+				var z_ = this.digoxin_0_05_MG_ML_Oral_Solution();
+				var aa_ = context.Operators.ConvertCodeToConcept(z_);
+				var ab_ = context.Operators.Equivalent(Strength, aa_);
+
+				return (ab_ ?? false);
+			};
+			bool e_()
+			{
+				var ac_ = this.digoxin_0_0625_MG_Oral_Tablet();
+				var ad_ = context.Operators.ConvertCodeToConcept(ac_);
+				var ae_ = context.Operators.Equivalent(Strength, ad_);
+
+				return (ae_ ?? false);
+			};
+			bool f_()
+			{
+				var af_ = this._1_ML_digoxin_0_1_MG_ML_Injection();
+				var ag_ = context.Operators.ConvertCodeToConcept(af_);
+				var ah_ = context.Operators.Equivalent(Strength, ag_);
+
+				return (ah_ ?? false);
+			};
+			bool g_()
+			{
+				var ai_ = this.digoxin_0_125_MG_Oral_Tablet();
+				var aj_ = context.Operators.ConvertCodeToConcept(ai_);
+				var ak_ = context.Operators.Equivalent(Strength, aj_);
+
+				return (ak_ ?? false);
+			};
+			bool h_()
+			{
+				var al_ = this.digoxin_0_1875_MG_Oral_Tablet();
+				var am_ = context.Operators.ConvertCodeToConcept(al_);
+				var an_ = context.Operators.Equivalent(Strength, am_);
+
+				return (an_ ?? false);
+			};
+			bool i_()
+			{
+				var ao_ = this.digoxin_0_25_MG_Oral_Tablet();
+				var ap_ = context.Operators.ConvertCodeToConcept(ao_);
+				var aq_ = context.Operators.Equivalent(Strength, ap_);
+
+				return (aq_ ?? false);
+			};
+			bool j_()
+			{
+				var ar_ = this._2_ML_digoxin_0_25_MG_ML_Injection();
+				var as_ = context.Operators.ConvertCodeToConcept(ar_);
+				var at_ = context.Operators.Equivalent(Strength, as_);
+
+				return (at_ ?? false);
+			};
+			bool k_()
+			{
+				var au_ = this.doxepin_3_MG_Oral_Tablet();
+				var av_ = context.Operators.ConvertCodeToConcept(au_);
+				var aw_ = context.Operators.Equivalent(Strength, av_);
+
+				return (aw_ ?? false);
+			};
+			bool l_()
+			{
+				var ax_ = this.doxepin_6_MG_Oral_Tablet();
+				var ay_ = context.Operators.ConvertCodeToConcept(ax_);
+				var az_ = context.Operators.Equivalent(Strength, ay_);
+
+				return (az_ ?? false);
+			};
+			bool m_()
+			{
+				var ba_ = this.doxepin_hydrochloride_10_MG_Oral_Capsule();
+				var bb_ = context.Operators.ConvertCodeToConcept(ba_);
+				var bc_ = context.Operators.Equivalent(Strength, bb_);
+
+				return (bc_ ?? false);
+			};
+			bool n_()
+			{
+				var bd_ = this.doxepin_hydrochloride_10_MG_ML_Oral_Solution();
+				var be_ = context.Operators.ConvertCodeToConcept(bd_);
+				var bf_ = context.Operators.Equivalent(Strength, be_);
+
+				return (bf_ ?? false);
+			};
+			bool o_()
+			{
+				var bg_ = this.doxepin_hydrochloride_25_MG_Oral_Capsule();
+				var bh_ = context.Operators.ConvertCodeToConcept(bg_);
+				var bi_ = context.Operators.Equivalent(Strength, bh_);
+
+				return (bi_ ?? false);
+			};
+			bool p_()
+			{
+				var bj_ = this.doxepin_hydrochloride_50_MG_Oral_Capsule();
+				var bk_ = context.Operators.ConvertCodeToConcept(bj_);
+				var bl_ = context.Operators.Equivalent(Strength, bk_);
+
+				return (bl_ ?? false);
+			};
+			bool q_()
+			{
+				var bm_ = this.doxepin_hydrochloride_75_MG_Oral_Capsule();
+				var bn_ = context.Operators.ConvertCodeToConcept(bm_);
+				var bo_ = context.Operators.Equivalent(Strength, bn_);
+
+				return (bo_ ?? false);
+			};
+			bool r_()
+			{
+				var bp_ = this.doxepin_hydrochloride_100_MG_Oral_Capsule();
+				var bq_ = context.Operators.ConvertCodeToConcept(bp_);
+				var br_ = context.Operators.Equivalent(Strength, bq_);
+
+				return (br_ ?? false);
+			};
+			bool s_()
+			{
+				var bs_ = this.doxepin_hydrochloride_150_MG_Oral_Capsule();
+				var bt_ = context.Operators.ConvertCodeToConcept(bs_);
+				var bu_ = context.Operators.Equivalent(Strength, bt_);
+
+				return (bu_ ?? false);
+			};
+			if (b_())
+			{
+				var bv_ = context.Operators.Quantity(0.1m, "mg");
+
+				return bv_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.reserpine_0_25_MG_Oral_Tablet())) ?? false))
+			else if (c_())
 			{
-				var c_ = context.Operators.Quantity(0.25m, "mg");
+				var bw_ = context.Operators.Quantity(0.25m, "mg");
 
-				return c_;
+				return bw_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.digoxin_0_05_MG_ML_Oral_Solution())) ?? false))
+			else if (d_())
 			{
-				var d_ = context.Operators.Quantity(0.05m, "mg/mL");
+				var bx_ = context.Operators.Quantity(0.05m, "mg/mL");
 
-				return d_;
+				return bx_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.digoxin_0_0625_MG_Oral_Tablet())) ?? false))
+			else if (e_())
 			{
-				var e_ = context.Operators.Quantity(0.0625m, "mg");
+				var by_ = context.Operators.Quantity(0.0625m, "mg");
 
-				return e_;
+				return by_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this._1_ML_digoxin_0_1_MG_ML_Injection())) ?? false))
+			else if (f_())
 			{
-				var f_ = context.Operators.Quantity(0.1m, "mg/mL");
+				var bz_ = context.Operators.Quantity(0.1m, "mg/mL");
 
-				return f_;
+				return bz_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.digoxin_0_125_MG_Oral_Tablet())) ?? false))
+			else if (g_())
 			{
-				var g_ = context.Operators.Quantity(0.125m, "mg");
+				var ca_ = context.Operators.Quantity(0.125m, "mg");
 
-				return g_;
+				return ca_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.digoxin_0_1875_MG_Oral_Tablet())) ?? false))
+			else if (h_())
 			{
-				var h_ = context.Operators.Quantity(0.1875m, "mg");
+				var cb_ = context.Operators.Quantity(0.1875m, "mg");
 
-				return h_;
+				return cb_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.digoxin_0_25_MG_Oral_Tablet())) ?? false))
+			else if (i_())
 			{
-				var i_ = context.Operators.Quantity(0.25m, "mg");
+				var cc_ = context.Operators.Quantity(0.25m, "mg");
 
-				return i_;
+				return cc_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this._2_ML_digoxin_0_25_MG_ML_Injection())) ?? false))
+			else if (j_())
 			{
-				var j_ = context.Operators.Quantity(0.25m, "mg/mL");
+				var cd_ = context.Operators.Quantity(0.25m, "mg/mL");
 
-				return j_;
+				return cd_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_3_MG_Oral_Tablet())) ?? false))
+			else if (k_())
 			{
-				var k_ = context.Operators.Quantity(3m, "mg");
+				var ce_ = context.Operators.Quantity(3m, "mg");
 
-				return k_;
+				return ce_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_6_MG_Oral_Tablet())) ?? false))
+			else if (l_())
 			{
-				var l_ = context.Operators.Quantity(6m, "mg");
+				var cf_ = context.Operators.Quantity(6m, "mg");
 
-				return l_;
+				return cf_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_hydrochloride_10_MG_Oral_Capsule())) ?? false))
+			else if (m_())
 			{
-				var m_ = context.Operators.Quantity(10m, "mg");
+				var cg_ = context.Operators.Quantity(10m, "mg");
 
-				return m_;
+				return cg_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_hydrochloride_10_MG_ML_Oral_Solution())) ?? false))
+			else if (n_())
 			{
-				var n_ = context.Operators.Quantity(10m, "mg/mL");
+				var ch_ = context.Operators.Quantity(10m, "mg/mL");
 
-				return n_;
+				return ch_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_hydrochloride_25_MG_Oral_Capsule())) ?? false))
+			else if (o_())
 			{
-				var o_ = context.Operators.Quantity(25m, "mg");
+				var ci_ = context.Operators.Quantity(25m, "mg");
 
-				return o_;
+				return ci_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_hydrochloride_50_MG_Oral_Capsule())) ?? false))
+			else if (p_())
 			{
-				var p_ = context.Operators.Quantity(50m, "mg");
+				var cj_ = context.Operators.Quantity(50m, "mg");
 
-				return p_;
+				return cj_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_hydrochloride_75_MG_Oral_Capsule())) ?? false))
+			else if (q_())
 			{
-				var q_ = context.Operators.Quantity(75m, "mg");
+				var ck_ = context.Operators.Quantity(75m, "mg");
 
-				return q_;
+				return ck_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_hydrochloride_100_MG_Oral_Capsule())) ?? false))
+			else if (r_())
 			{
-				var r_ = context.Operators.Quantity(100m, "mg");
+				var cl_ = context.Operators.Quantity(100m, "mg");
 
-				return r_;
+				return cl_;
 			}
-			else if ((context.Operators.Equivalent(Strength, context.Operators.ConvertCodeToConcept(this.doxepin_hydrochloride_150_MG_Oral_Capsule())) ?? false))
+			else if (s_())
 			{
-				var s_ = context.Operators.Quantity(150m, "mg");
+				var cm_ = context.Operators.Quantity(150m, "mg");
 
-				return s_;
+				return cm_;
 			}
 			else
 			{
@@ -1224,16 +1368,33 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		{
 			CqlQuantity e_()
 			{
-				if ((context.Operators.And(context.Operators.Not((bool?)(this.MedicationRequestPeriodInDays(Order) is null)), context.Operators.Or(context.Operators.Equal(this.MedicationStrengthPerUnit(CQMCommon_2_0_000.getMedicationCode(Order))?.unit, "mg"), context.Operators.And(context.Operators.Equal(this.MedicationStrengthPerUnit(CQMCommon_2_0_000.getMedicationCode(Order))?.unit, "mg/mL"), context.Operators.Equal(FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity)?.unit, "mL")))) ?? false))
+				bool f_()
 				{
-					var f_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
-					var g_ = CQMCommon_2_0_000.getMedicationCode(Order);
-					var h_ = this.MedicationStrengthPerUnit(g_);
-					var i_ = context.Operators.Multiply(f_, h_);
-					var j_ = this.MedicationRequestPeriodInDays(Order);
-					var k_ = context.Operators.Divide(i_, new CqlQuantity(j_, "d"));
+					var g_ = this.MedicationRequestPeriodInDays(Order);
+					var h_ = context.Operators.Not((bool?)(g_ is null));
+					var i_ = CQMCommon_2_0_000.getMedicationCode(Order);
+					var j_ = this.MedicationStrengthPerUnit(i_);
+					var k_ = context.Operators.Equal(j_?.unit, "mg");
+					var m_ = this.MedicationStrengthPerUnit(i_);
+					var n_ = context.Operators.Equal(m_?.unit, "mg/mL");
+					var o_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
+					var p_ = context.Operators.Equal(o_?.unit, "mL");
+					var q_ = context.Operators.And(n_, p_);
+					var r_ = context.Operators.Or(k_, q_);
+					var s_ = context.Operators.And(h_, r_);
 
-					return k_;
+					return (s_ ?? false);
+				};
+				if (f_())
+				{
+					var t_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
+					var u_ = CQMCommon_2_0_000.getMedicationCode(Order);
+					var v_ = this.MedicationStrengthPerUnit(u_);
+					var w_ = context.Operators.Multiply(t_, v_);
+					var x_ = this.MedicationRequestPeriodInDays(Order);
+					var y_ = context.Operators.Divide(w_, new CqlQuantity(x_, "d"));
+
+					return y_;
 				}
 				else
 				{

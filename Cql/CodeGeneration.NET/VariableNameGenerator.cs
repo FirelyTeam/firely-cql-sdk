@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,36 +101,28 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public static string? NormalizeIdentifier(string? identifier)
         {
-            if (identifier == null)
+            if (string.IsNullOrEmpty(identifier))
                 return null;
+            
+            if (identifier.StartsWith('$'))
+                identifier = identifier[1..];
 
-            identifier = identifier.Replace(" ", "_");
-            identifier = identifier.Replace("-", "_");
-            identifier = identifier.Replace(".", "_");
-            identifier = identifier.Replace(",", "_");
-            identifier = identifier.Replace("[", "_");
-            identifier = identifier.Replace("]", "_");
-            identifier = identifier.Replace("(", "_");
-            identifier = identifier.Replace(")", "_");
-            identifier = identifier.Replace(":", "_");
-            identifier = identifier.Replace("/", "_");
-            identifier = identifier.Replace("+", "plus");
-            identifier = identifier.Replace("-", "minus");
-            identifier = identifier.Replace("\"", "");
-            identifier = identifier.Replace("'", "");
-            identifier = identifier.Replace(";", "_");
-            identifier = identifier.Replace("&", "and");
-
-
-            if (identifier.StartsWith("$"))
-                identifier = identifier.Substring(1);
-            var keyword = SyntaxFacts.GetKeywordKind(identifier);
-            if (keyword != SyntaxKind.None)
-            {
-                identifier = $"@{identifier}";
-            }
-            if (char.IsDigit(identifier[0]))
+            identifier = identifier.Replace("\"",string.Empty);
+            identifier = identifier.Replace("'",string.Empty);
+            identifier = identifier.Replace("&","and");
+            
+            // If we start with an invalid character for the start position, add an underscore
+            if (!SyntaxFacts.IsIdentifierStartCharacter(identifier[0]) && 
+                SyntaxFacts.IsIdentifierPartCharacter(identifier[0]))
                 identifier = "_" + identifier;
+
+            // go over the string and replace all characters that are not allowed in an identifier
+            var replaced = identifier.Select(c => SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_');
+            identifier = string.Concat(replaced);
+            
+            if (SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None)
+                identifier = $"@{identifier}";
+            
             return identifier;
         }
 

@@ -587,12 +587,19 @@ public class NCQAFHIRBase_1_0_0
 	{
 		string a_()
 		{
-			if ((context.Operators.Greater(context.Operators.PositionOf("/", uri), (int?)0) ?? false))
+			bool b_()
 			{
-				var b_ = context.Operators.Split(uri, "/");
-				var c_ = context.Operators.LastOfList<string>(b_);
+				var c_ = context.Operators.PositionOf("/", uri);
+				var d_ = context.Operators.Greater(c_, (int?)0);
 
-				return c_;
+				return (d_ ?? false);
+			};
+			if (b_())
+			{
+				var e_ = context.Operators.Split(uri, "/");
+				var f_ = context.Operators.LastOfList<string>(e_);
+
+				return f_;
 			}
 			else
 			{

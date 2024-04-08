@@ -2748,28 +2748,35 @@ public class CQMCommon_2_0_000
 	{
 		CqlConcept a_()
 		{
-			if (FHIRHelpers_4_3_000.ToValue(request?.Medication) is CqlConcept)
+			bool b_()
 			{
-				var b_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+				var c_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+				var d_ = c_ is CqlConcept;
 
-				return (b_ as CqlConcept);
+				return d_;
+			};
+			if (b_())
+			{
+				var e_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+
+				return (e_ as CqlConcept);
 			}
 			else
 			{
-				var c_ = context.Operators.RetrieveByValueSet<Medication>(null, null);
-				bool? d_(Medication M)
+				var f_ = context.Operators.RetrieveByValueSet<Medication>(null, null);
+				bool? g_(Medication M)
 				{
-					var h_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
-					var i_ = QICoreCommon_2_0_000.getId(((h_ as ResourceReference)?.ReferenceElement)?.Value);
-					var j_ = context.Operators.Equal(M?.IdElement?.Value, i_);
+					var k_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+					var l_ = QICoreCommon_2_0_000.getId(((k_ as ResourceReference)?.ReferenceElement)?.Value);
+					var m_ = context.Operators.Equal(M?.IdElement?.Value, l_);
 
-					return j_;
+					return m_;
 				};
-				var e_ = context.Operators.WhereOrNull<Medication>(c_, d_);
-				var f_ = context.Operators.SingleOrNull<Medication>(e_);
-				var g_ = FHIRHelpers_4_3_000.ToConcept(f_?.Code);
+				var h_ = context.Operators.WhereOrNull<Medication>(f_, g_);
+				var i_ = context.Operators.SingleOrNull<Medication>(h_);
+				var j_ = FHIRHelpers_4_3_000.ToConcept(i_?.Code);
 
-				return g_;
+				return j_;
 			};
 		};
 
@@ -2782,28 +2789,35 @@ public class CQMCommon_2_0_000
 	{
 		CqlConcept a_()
 		{
-			if (FHIRHelpers_4_3_000.ToValue(request?.Medication) is CqlConcept)
+			bool b_()
 			{
-				var b_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+				var c_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+				var d_ = c_ is CqlConcept;
 
-				return (b_ as CqlConcept);
+				return d_;
+			};
+			if (b_())
+			{
+				var e_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+
+				return (e_ as CqlConcept);
 			}
 			else
 			{
-				var c_ = context.Operators.RetrieveByValueSet<Medication>(null, null);
-				bool? d_(Medication M)
+				var f_ = context.Operators.RetrieveByValueSet<Medication>(null, null);
+				bool? g_(Medication M)
 				{
-					var h_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
-					var i_ = QICoreCommon_2_0_000.getId(((h_ as ResourceReference)?.ReferenceElement)?.Value);
-					var j_ = context.Operators.Equal(M?.IdElement?.Value, i_);
+					var k_ = FHIRHelpers_4_3_000.ToValue(request?.Medication);
+					var l_ = QICoreCommon_2_0_000.getId(((k_ as ResourceReference)?.ReferenceElement)?.Value);
+					var m_ = context.Operators.Equal(M?.IdElement?.Value, l_);
 
-					return j_;
+					return m_;
 				};
-				var e_ = context.Operators.WhereOrNull<Medication>(c_, d_);
-				var f_ = context.Operators.SingleOrNull<Medication>(e_);
-				var g_ = FHIRHelpers_4_3_000.ToConcept(f_?.Code);
+				var h_ = context.Operators.WhereOrNull<Medication>(f_, g_);
+				var i_ = context.Operators.SingleOrNull<Medication>(h_);
+				var j_ = FHIRHelpers_4_3_000.ToConcept(i_?.Code);
 
-				return g_;
+				return j_;
 			};
 		};
 

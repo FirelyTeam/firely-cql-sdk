@@ -100,11 +100,18 @@ public class SupplementalDataElements_3_4_000
 	{
 		List<Extension> a_()
 		{
-			if (this.Patient() is DomainResource)
+			bool i_()
 			{
-				var i_ = this.Patient();
+				var j_ = this.Patient();
+				var k_ = j_ is DomainResource;
 
-				return (i_ as DomainResource).Extension;
+				return k_;
+			};
+			if (i_())
+			{
+				var l_ = this.Patient();
+
+				return (l_ as DomainResource).Extension;
 			}
 			else
 			{
@@ -113,9 +120,9 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			var j_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
-			return j_;
+			return m_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
 		var d_ = context.Operators.SingleOrNull<Extension>(c_);
@@ -125,63 +132,63 @@ public class SupplementalDataElements_3_4_000
 		};
 		Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension E)
 		{
-			bool? k_(Extension @this)
+			bool? n_(Extension @this)
 			{
-				var ag_ = context.Operators.Equal(@this?.Url, "ombCategory");
-
-				return ag_;
-			};
-			var l_ = context.Operators.WhereOrNull<Extension>(((E is Element)
-					? ((E as Element).Extension)
-					: null), k_);
-			DataType m_(Extension @this) => 
-				@this?.Value;
-			var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
-			var o_ = context.Operators.SingleOrNull<DataType>(n_);
-			var p_ = context.Operators.Convert<Coding>(o_);
-			var q_ = FHIRHelpers_4_3_000.ToCode(p_);
-			var r_ = new CqlCode[]
-			{
-				q_,
-			};
-			bool? s_(Extension @this)
-			{
-				var ah_ = context.Operators.Equal(@this?.Url, "detailed");
-
-				return ah_;
-			};
-			var t_ = context.Operators.WhereOrNull<Extension>(((E is Element)
-					? ((E as Element).Extension)
-					: null), s_);
-			var v_ = context.Operators.SelectOrNull<Extension, DataType>(t_, m_);
-			CqlCode w_(DataType @this)
-			{
-				var ai_ = context.Operators.Convert<Coding>(@this);
-				var aj_ = FHIRHelpers_4_3_000.ToCode(ai_);
+				var aj_ = context.Operators.Equal(@this?.Url, "ombCategory");
 
 				return aj_;
 			};
-			var x_ = context.Operators.SelectOrNull<DataType, CqlCode>(v_, w_);
-			var y_ = context.Operators.ValueSetUnion((r_ as IEnumerable<CqlCode>), x_);
-			bool? z_(Extension @this)
+			var o_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+					? ((E as Element).Extension)
+					: null), n_);
+			DataType p_(Extension @this) => 
+				@this?.Value;
+			var q_ = context.Operators.SelectOrNull<Extension, DataType>(o_, p_);
+			var r_ = context.Operators.SingleOrNull<DataType>(q_);
+			var s_ = context.Operators.Convert<Coding>(r_);
+			var t_ = FHIRHelpers_4_3_000.ToCode(s_);
+			var u_ = new CqlCode[]
 			{
-				var ak_ = context.Operators.Equal(@this?.Url, "text");
+				t_,
+			};
+			bool? v_(Extension @this)
+			{
+				var ak_ = context.Operators.Equal(@this?.Url, "detailed");
 
 				return ak_;
 			};
-			var aa_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+			var w_ = context.Operators.WhereOrNull<Extension>(((E is Element)
 					? ((E as Element).Extension)
-					: null), z_);
-			var ac_ = context.Operators.SelectOrNull<Extension, DataType>(aa_, m_);
-			var ad_ = context.Operators.SingleOrNull<DataType>(ac_);
-			var ae_ = context.Operators.Convert<string>(ad_);
-			var af_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+					: null), v_);
+			var y_ = context.Operators.SelectOrNull<Extension, DataType>(w_, p_);
+			CqlCode z_(DataType @this)
 			{
-				codes = y_,
-				display = ae_,
+				var al_ = context.Operators.Convert<Coding>(@this);
+				var am_ = FHIRHelpers_4_3_000.ToCode(al_);
+
+				return am_;
+			};
+			var aa_ = context.Operators.SelectOrNull<DataType, CqlCode>(y_, z_);
+			var ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
+			bool? ac_(Extension @this)
+			{
+				var an_ = context.Operators.Equal(@this?.Url, "text");
+
+				return an_;
+			};
+			var ad_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+					? ((E as Element).Extension)
+					: null), ac_);
+			var af_ = context.Operators.SelectOrNull<Extension, DataType>(ad_, p_);
+			var ag_ = context.Operators.SingleOrNull<DataType>(af_);
+			var ah_ = context.Operators.Convert<string>(ag_);
+			var ai_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			{
+				codes = ab_,
+				display = ah_,
 			};
 
-			return af_;
+			return ai_;
 		};
 		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
 		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
@@ -222,11 +229,18 @@ public class SupplementalDataElements_3_4_000
 	{
 		List<Extension> a_()
 		{
-			if (this.Patient() is DomainResource)
+			bool i_()
 			{
-				var i_ = this.Patient();
+				var j_ = this.Patient();
+				var k_ = j_ is DomainResource;
 
-				return (i_ as DomainResource).Extension;
+				return k_;
+			};
+			if (i_())
+			{
+				var l_ = this.Patient();
+
+				return (l_ as DomainResource).Extension;
 			}
 			else
 			{
@@ -235,9 +249,9 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			var j_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
-			return j_;
+			return m_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
 		var d_ = context.Operators.SingleOrNull<Extension>(c_);
@@ -247,64 +261,64 @@ public class SupplementalDataElements_3_4_000
 		};
 		Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension R)
 		{
-			bool? k_(Extension @this)
+			bool? n_(Extension @this)
 			{
-				var ae_ = context.Operators.Equal(@this?.Url, "ombCategory");
-
-				return ae_;
-			};
-			var l_ = context.Operators.WhereOrNull<Extension>(((R is Element)
-					? ((R as Element).Extension)
-					: null), k_);
-			DataType m_(Extension @this) => 
-				@this?.Value;
-			var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
-			CqlCode o_(DataType @this)
-			{
-				var af_ = context.Operators.Convert<Coding>(@this);
-				var ag_ = FHIRHelpers_4_3_000.ToCode(af_);
-
-				return ag_;
-			};
-			var p_ = context.Operators.SelectOrNull<DataType, CqlCode>(n_, o_);
-			bool? q_(Extension @this)
-			{
-				var ah_ = context.Operators.Equal(@this?.Url, "detailed");
+				var ah_ = context.Operators.Equal(@this?.Url, "ombCategory");
 
 				return ah_;
 			};
-			var r_ = context.Operators.WhereOrNull<Extension>(((R is Element)
+			var o_ = context.Operators.WhereOrNull<Extension>(((R is Element)
 					? ((R as Element).Extension)
-					: null), q_);
-			var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, m_);
-			CqlCode u_(DataType @this)
+					: null), n_);
+			DataType p_(Extension @this) => 
+				@this?.Value;
+			var q_ = context.Operators.SelectOrNull<Extension, DataType>(o_, p_);
+			CqlCode r_(DataType @this)
 			{
 				var ai_ = context.Operators.Convert<Coding>(@this);
 				var aj_ = FHIRHelpers_4_3_000.ToCode(ai_);
 
 				return aj_;
 			};
-			var v_ = context.Operators.SelectOrNull<DataType, CqlCode>(t_, u_);
-			var w_ = context.Operators.ValueSetUnion(p_, v_);
-			bool? x_(Extension @this)
+			var s_ = context.Operators.SelectOrNull<DataType, CqlCode>(q_, r_);
+			bool? t_(Extension @this)
 			{
-				var ak_ = context.Operators.Equal(@this?.Url, "text");
+				var ak_ = context.Operators.Equal(@this?.Url, "detailed");
 
 				return ak_;
 			};
-			var y_ = context.Operators.WhereOrNull<Extension>(((R is Element)
+			var u_ = context.Operators.WhereOrNull<Extension>(((R is Element)
 					? ((R as Element).Extension)
-					: null), x_);
-			var aa_ = context.Operators.SelectOrNull<Extension, DataType>(y_, m_);
-			var ab_ = context.Operators.SingleOrNull<DataType>(aa_);
-			var ac_ = context.Operators.Convert<string>(ab_);
-			var ad_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+					: null), t_);
+			var w_ = context.Operators.SelectOrNull<Extension, DataType>(u_, p_);
+			CqlCode x_(DataType @this)
 			{
-				codes = w_,
-				display = ac_,
+				var al_ = context.Operators.Convert<Coding>(@this);
+				var am_ = FHIRHelpers_4_3_000.ToCode(al_);
+
+				return am_;
+			};
+			var y_ = context.Operators.SelectOrNull<DataType, CqlCode>(w_, x_);
+			var z_ = context.Operators.ValueSetUnion(s_, y_);
+			bool? aa_(Extension @this)
+			{
+				var an_ = context.Operators.Equal(@this?.Url, "text");
+
+				return an_;
+			};
+			var ab_ = context.Operators.WhereOrNull<Extension>(((R is Element)
+					? ((R as Element).Extension)
+					: null), aa_);
+			var ad_ = context.Operators.SelectOrNull<Extension, DataType>(ab_, p_);
+			var ae_ = context.Operators.SingleOrNull<DataType>(ad_);
+			var af_ = context.Operators.Convert<string>(ae_);
+			var ag_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			{
+				codes = z_,
+				display = af_,
 			};
 
-			return ad_;
+			return ag_;
 		};
 		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
 		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
@@ -320,17 +334,31 @@ public class SupplementalDataElements_3_4_000
 	{
 		CqlCode a_()
 		{
-			if ((context.Operators.EnumEqualsString(this.Patient()?.GenderElement?.Value, "male") ?? false))
+			bool b_()
 			{
-				string b_ = null;
+				var d_ = this.Patient();
+				var e_ = context.Operators.EnumEqualsString(d_?.GenderElement?.Value, "male");
 
-				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", b_, "Male");
+				return (e_ ?? false);
+			};
+			bool c_()
+			{
+				var f_ = this.Patient();
+				var g_ = context.Operators.EnumEqualsString(f_?.GenderElement?.Value, "female");
+
+				return (g_ ?? false);
+			};
+			if (b_())
+			{
+				string h_ = null;
+
+				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", h_, "Male");
 			}
-			else if ((context.Operators.EnumEqualsString(this.Patient()?.GenderElement?.Value, "female") ?? false))
+			else if (c_())
 			{
-				string c_ = null;
+				string i_ = null;
 
-				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", c_, "Female");
+				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", i_, "Female");
 			}
 			else
 			{

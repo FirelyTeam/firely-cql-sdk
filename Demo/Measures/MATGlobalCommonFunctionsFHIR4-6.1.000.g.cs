@@ -1107,25 +1107,42 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
-			if ((context.Operators.Or(context.Operators.Or(context.Operators.Equivalent(FHIRHelpers_4_0_001.ToConcept(condition?.ClinicalStatus), context.Operators.ConvertCodeToConcept(this.active())), context.Operators.Equivalent(FHIRHelpers_4_0_001.ToConcept(condition?.ClinicalStatus), context.Operators.ConvertCodeToConcept(this.recurrence()))), context.Operators.Equivalent(FHIRHelpers_4_0_001.ToConcept(condition?.ClinicalStatus), context.Operators.ConvertCodeToConcept(this.relapse()))) ?? false))
+			bool b_()
 			{
-				var b_ = this.Normalize_Interval(condition?.Onset);
-				var c_ = context.Operators.Start(b_);
-				var d_ = this.Normalize_Abatement(condition);
-				var e_ = context.Operators.End(d_);
-				var f_ = context.Operators.Interval(c_, e_, true, true);
+				var c_ = FHIRHelpers_4_0_001.ToConcept(condition?.ClinicalStatus);
+				var d_ = this.active();
+				var e_ = context.Operators.ConvertCodeToConcept(d_);
+				var f_ = context.Operators.Equivalent(c_, e_);
+				var h_ = this.recurrence();
+				var i_ = context.Operators.ConvertCodeToConcept(h_);
+				var j_ = context.Operators.Equivalent(c_, i_);
+				var k_ = context.Operators.Or(f_, j_);
+				var m_ = this.relapse();
+				var n_ = context.Operators.ConvertCodeToConcept(m_);
+				var o_ = context.Operators.Equivalent(c_, n_);
+				var p_ = context.Operators.Or(k_, o_);
 
-				return f_;
+				return (p_ ?? false);
+			};
+			if (b_())
+			{
+				var q_ = this.Normalize_Interval(condition?.Onset);
+				var r_ = context.Operators.Start(q_);
+				var s_ = this.Normalize_Abatement(condition);
+				var t_ = context.Operators.End(s_);
+				var u_ = context.Operators.Interval(r_, t_, true, true);
+
+				return u_;
 			}
 			else
 			{
-				var g_ = this.Normalize_Interval(condition?.Onset);
-				var h_ = context.Operators.Start(g_);
-				var i_ = this.Normalize_Abatement(condition);
-				var j_ = context.Operators.End(i_);
-				var k_ = context.Operators.Interval(h_, j_, true, false);
+				var v_ = this.Normalize_Interval(condition?.Onset);
+				var w_ = context.Operators.Start(v_);
+				var x_ = this.Normalize_Abatement(condition);
+				var y_ = context.Operators.End(x_);
+				var z_ = context.Operators.Interval(w_, y_, true, false);
 
-				return k_;
+				return z_;
 			};
 		};
 

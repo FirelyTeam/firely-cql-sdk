@@ -439,23 +439,44 @@ public class HIVViralSuppressionFHIR_0_1_000
 		{
 			object h_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective) is CqlDateTime)
+				bool l_()
 				{
-					var l_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var o_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var p_ = o_ is CqlDateTime;
 
-					return ((l_ as CqlDateTime) as object);
+					return p_;
+				};
+				bool m_()
+				{
+					var q_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var r_ = q_ is CqlInterval<CqlDateTime>;
+
+					return r_;
+				};
+				bool n_()
+				{
+					var s_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var t_ = s_ is CqlDateTime;
+
+					return t_;
+				};
+				if (l_())
+				{
+					var u_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+
+					return ((u_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective) is CqlInterval<CqlDateTime>)
+				else if (m_())
 				{
-					var m_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var v_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
 
-					return ((m_ as CqlInterval<CqlDateTime>) as object);
+					return ((v_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective) is CqlDateTime)
+				else if (n_())
 				{
-					var n_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var w_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
 
-					return ((n_ as CqlDateTime) as object);
+					return ((w_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -471,11 +492,11 @@ public class HIVViralSuppressionFHIR_0_1_000
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var p_ = QICoreCommon_2_0_000.ToInterval(o_);
-			var q_ = context.Operators.Start(p_);
+			var x_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+			var y_ = QICoreCommon_2_0_000.ToInterval(x_);
+			var z_ = context.Operators.Start(y_);
 
-			return q_;
+			return z_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.LastOfList<Observation>(f_);
