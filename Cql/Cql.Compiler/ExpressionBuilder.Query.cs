@@ -22,6 +22,7 @@ internal partial class ExpressionBuilder
     {
         var sourceLength = query.source?.Length ?? 0;
 
+#if DEBUG // REVIEW: For debugging purposes right now - might delete at a later stage
         var lines = ReadCqlLines(query);
         var sources = ReadSources();
 
@@ -37,6 +38,41 @@ internal partial class ExpressionBuilder
                 );
             });
 
+        string[]? ReadCqlLines(Element element)
+        {
+            if (element.locator?.Split([":", "-"], 4, StringSplitOptions.TrimEntries) is not [{ } r0, { } c0, { } r1, { } c1]) return null;
+
+            static int ParseInt32(string s) => int.Parse(s, CultureInfo.InvariantCulture);
+
+            var (row0, col0, row1, col1) = (ParseInt32(r0), ParseInt32(c0), ParseInt32(r1), ParseInt32(c1));
+
+            var elmFilePath = LibraryContext.Library.OriginalFilePath;
+            if (elmFilePath is null)
+                return null;
+
+            var fiElm = new FileInfo(elmFilePath);
+            var fiCql = new FileInfo(Path.Combine(fiElm.Directory!.Parent!.FullName, "CQL", fiElm.Name[..^4] + "cql"));
+            if (!fiCql.Exists)
+                return null;
+
+            var lines =
+                System.IO.File.ReadLines(fiCql.FullName)
+                    .Select((lineText, i) => (lineText, lineNum: i + 1))
+                    .Where(t => t.lineNum >= row0 && t.lineNum <= row1)
+                    .Select(t =>
+                    {
+                        var lineText = t.lineText;
+                        Debug.Assert(row0 != row1 || col1 > col0);
+                        if (t.lineNum == row1)
+                            lineText = lineText[..(col1)] + "<<<" + lineText[(col1)..];
+                        if (t.lineNum == row0)
+                            lineText = lineText[..col0] + ">>>" + lineText[col0..];
+                        return lineText;
+                    })
+                    .ToArray();
+            return lines;
+        }
+
         _logger.LogDebug(
             """
              Found {queryType} Query with {sourceCount} source(s) at: {at}
@@ -48,8 +84,7 @@ internal partial class ExpressionBuilder
             DebuggerView,
             $"{string.Concat(from s in sources select $"\n\t{s.alias}: {s.sourceType}{(s.needsPromotion?" (singleton)":"")}")}",
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
-
-        ReadCqlLines(query);
+#endif
 
         return sourceLength switch
         {
@@ -57,41 +92,6 @@ internal partial class ExpressionBuilder
             1 => SingleSourceQuery(query),
             _ => MultiSourceQuery(query),
         };
-    }
-
-    private string[]? ReadCqlLines(Element element)
-    {
-        if (element.locator?.Split([":", "-"], 4, StringSplitOptions.TrimEntries) is not [{} r0, { } c0, { } r1, { } c1]) return null;
-
-        static int ParseInt32(string s) => int.Parse(s, CultureInfo.InvariantCulture);
-
-        var (row0, col0, row1, col1) = (ParseInt32(r0), ParseInt32(c0), ParseInt32(r1), ParseInt32(c1));
-
-        var elmFilePath = LibraryContext.Library.OriginalFilePath;
-        if (elmFilePath is null)
-            return null;
-
-        var fiElm = new FileInfo(elmFilePath);
-        var fiCql = new FileInfo(Path.Combine(fiElm.Directory!.Parent!.FullName, "CQL", fiElm.Name[..^4]+"cql" ));
-        if (!fiCql.Exists)
-            return null;
-
-        var lines=
-            System.IO.File.ReadLines(fiCql.FullName)
-            .Select((lineText, i) => (lineText, lineNum: i + 1))
-            .Where(t => t.lineNum >= row0 && t.lineNum <= row1)
-            .Select(t =>
-            {
-                var lineText = t.lineText;
-                Debug.Assert(row0 != row1 || col1 > col0);
-                if (t.lineNum == row1)
-                    lineText = lineText[..(col1)] + "<<<" + lineText[(col1)..];
-                if (t.lineNum == row0)
-                    lineText = lineText[..col0] + ">>>" + lineText[col0..];
-                return lineText;
-            })
-            .ToArray();
-        return lines;
     }
 
     protected Expression SingleSourceQuery(Query query)
@@ -211,11 +211,6 @@ internal partial class ExpressionBuilder
         AliasedQuerySource[] sources = multiSourceQuery.source;
         if (sources.Length < 2)
             throw this.NewExpressionBuildingException("This CrossJoin method should only be called on multi-source queries.");
-
-        // Future Feature: Support for more than 4 sources
-
-        if (sources.Length > 4)
-            throw this.NewExpressionBuildingException("CrossJoins on multi-source queries with more than 4 sources is not yet supported.");
 
         var aliases = sources.SelectToArray(s => s.alias);
         if (aliases.Any(alias => string.IsNullOrEmpty(alias)))
@@ -493,16 +488,16 @@ internal partial class ExpressionBuilder
         bool[]? isSourcesPromoted;
         Type multiSourceTupleType;
 
-        if (IsMultiSourceSingletonLibrary)
-        {
+        // if (IsMultiSourceSingletonLibrary)
+        // {
             (@return, isSourcesPromoted) = ctx.CrossJoinNew(query);
             multiSourceTupleType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
-        }
-        else
-        {
-            multiSourceTupleType = ctx.GetMultiSourceTupleType(query);
-            (@return, isSourcesPromoted) = ctx.CrossJoin(query, multiSourceTupleType);
-        }
+        // }
+        // else
+        // {
+        //     multiSourceTupleType = ctx.GetMultiSourceTupleType(query);
+        //     (@return, isSourcesPromoted) = ctx.CrossJoin(query, multiSourceTupleType);
+        // }
 
         var elementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
 

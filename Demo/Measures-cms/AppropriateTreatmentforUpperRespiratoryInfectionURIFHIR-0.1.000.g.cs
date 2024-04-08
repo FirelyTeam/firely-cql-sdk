@@ -463,25 +463,21 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 	private IEnumerable<Encounter> Encounter_with_Upper_Respiratory_Infection_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<Condition> b_(Encounter _QualifyingEncounters)
-		{
-			var i_ = this.Upper_Respiratory_Infection();
-			var j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
-
-			return j_;
-		};
-		Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW c_(Encounter _QualifyingEncounters, Condition _URI)
+		var b_ = this.Upper_Respiratory_Infection();
+		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
+		var d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
+		Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW e_(ValueTuple<Encounter,Condition> _select0)
 		{
 			var k_ = new Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW
 			{
-				QualifyingEncounters = _QualifyingEncounters,
-				URI = _URI,
+				QualifyingEncounters = _select0.Item1,
+				URI = _select0.Item2,
 			};
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, Condition, Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Condition>, Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(d_, e_);
+		bool? g_(Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw)
 		{
 			var l_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_clqrpffcjgifzuvdvediikexw.URI);
 			var m_ = context.Operators.Start(l_);
@@ -494,12 +490,12 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return u_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(d_, e_);
-		Encounter g_(Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(f_, g_);
+		Encounter i_(Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw) => 
 			tuple_clqrpffcjgifzuvdvediikexw.QualifyingEncounters;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW, Encounter>(f_, g_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW, Encounter>(h_, i_);
 
-		return h_;
+		return j_;
 	}
 
     [CqlDeclaration("Encounter with Upper Respiratory Infection")]

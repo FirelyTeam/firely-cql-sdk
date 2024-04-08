@@ -276,7 +276,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((LongTermFacilityEncounter?.Period as object));
 			var q_ = this.Measurement_Period();
-			var r_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(p_, q_);
+			var r_ = context.Operators.IntervalIntersect<CqlDateTime>(p_, q_);
 
 			return r_;
 		};

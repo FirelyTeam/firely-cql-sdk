@@ -467,6 +467,40 @@ namespace Hl7.Cql.Operators
             IEnumerable<T3>? source3,
             IEnumerable<T4>? source4);
 
+        IEnumerable<(T1, T2, T3, T4, T5)> CrossJoin<T1, T2, T3, T4, T5>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5);
+
+        IEnumerable<(T1, T2, T3, T4, T5, T6)> CrossJoin<T1, T2, T3, T4, T5, T6>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5,
+            IEnumerable<T6>? source6);
+
+        IEnumerable<(T1, T2, T3, T4, T5, T6, T7)> CrossJoin<T1, T2, T3, T4, T5, T6, T7>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5,
+            IEnumerable<T6>? source6,
+            IEnumerable<T7>? source7);
+
+        IEnumerable<(T1, T2, T3, T4, T5, T6, T7, T8)> CrossJoin<T1, T2, T3, T4, T5, T6, T7, T8>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5,
+            IEnumerable<T6>? source6,
+            IEnumerable<T7>? source7,
+            IEnumerable<T8>? source8);
+
         IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select);
         T? SingleOrNull<T>(IEnumerable<T>? source);
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);

@@ -264,20 +264,19 @@ namespace Hl7.Cql.Compiler
 
         private Expression CrossJoin(MemberExpression operators, Expression[] sources)
         {
-            Debug.Assert(sources.Length is >= 2 and <= 4, "Only allowed to do cross-joins on 2 to 4 sources");
+            var genericDefinitionMethodCrossJoin =
+                OperatorsType
+                    .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                    .SingleOrDefault(mi =>
+                        mi.Name == nameof(ICqlOperators.CrossJoin)
+                        && mi.GetGenericArguments().Length == sources.Length)
+                ?? throw new NotSupportedException($"No CrossJoin support for '{sources.Length}' source(s).");
 
             Type[] sourceListElementTypes =
                 sources.SelectToArray(s => this.TypeResolver.GetListElementType(s.Type, true)!);
 
-            var genericDefinitionMethodCrossJoin =
-                OperatorsType
-                .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .SingleOrDefault(mi => mi.Name == nameof(ICqlOperators.CrossJoin) && mi.GetGenericArguments().Length == sources.Length)
-                ?? throw new NotSupportedException();
-
             var methodCrossJoin = genericDefinitionMethodCrossJoin.MakeGenericMethod(sourceListElementTypes);
 
-            //return Expression.Lambda(Expression.Call(operators, methodCrossJoin, sources));
             return Expression.Call(operators, methodCrossJoin, sources);
         }
 

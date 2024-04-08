@@ -581,24 +581,19 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private IEnumerable<Encounter> Two_Outpatient_Encounters_during_Measurement_Period_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<Encounter> b_(Encounter _OfficeVisit1)
-		{
-			var i_ = this.Qualifying_Encounters();
-
-			return i_;
-		};
-		Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe c_(Encounter _OfficeVisit1, Encounter _OfficeVisit2)
+		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
+		Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe d_(ValueTuple<Encounter,Encounter> _select0)
 		{
 			var j_ = new Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe
 			{
-				OfficeVisit1 = _OfficeVisit1,
-				OfficeVisit2 = _OfficeVisit2,
+				OfficeVisit1 = _select0.Item1,
+				OfficeVisit2 = _select0.Item2,
 			};
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, Encounter, Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe tuple_fgyjhhbrrztdgeekjqjiibgue)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe>(c_, d_);
+		bool? f_(Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe tuple_fgyjhhbrrztdgeekjqjiibgue)
 		{
 			var k_ = FHIRHelpers_4_3_000.ToInterval(tuple_fgyjhhbrrztdgeekjqjiibgue.OfficeVisit2?.Period);
 			var l_ = QICoreCommon_2_0_000.ToInterval((k_ as object));
@@ -612,12 +607,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return s_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe>(d_, e_);
-		Encounter g_(Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe tuple_fgyjhhbrrztdgeekjqjiibgue) => 
+		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe>(e_, f_);
+		Encounter h_(Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe tuple_fgyjhhbrrztdgeekjqjiibgue) => 
 			tuple_fgyjhhbrrztdgeekjqjiibgue.OfficeVisit1;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe, Encounter>(f_, g_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe, Encounter>(g_, h_);
 
-		return h_;
+		return i_;
 	}
 
     [CqlDeclaration("Two Outpatient Encounters during Measurement Period")]
@@ -699,27 +694,23 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _PROMIS10MentalScore)
-		{
-			var l_ = this.PROMIS_10_Global_Physical_Health__GPH__score_T_score();
-			var m_ = context.Operators.ToList<CqlCode>(l_);
-			var n_ = context.Operators.RetrieveByCodes<Observation>(m_, null);
-			var o_ = Status_1_6_000.Final_Survey_Observation(n_);
-
-			return o_;
-		};
-		Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM f_(Observation _PROMIS10MentalScore, Observation _PROMIS10PhysicalScore)
+		var e_ = this.PROMIS_10_Global_Physical_Health__GPH__score_T_score();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
+		Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM j_(ValueTuple<Observation,Observation> _select0)
 		{
 			var p_ = new Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM
 			{
-				PROMIS10MentalScore = _PROMIS10MentalScore,
-				PROMIS10PhysicalScore = _PROMIS10PhysicalScore,
+				PROMIS10MentalScore = _select0.Item1,
+				PROMIS10PhysicalScore = _select0.Item2,
 			};
 
 			return p_;
 		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(i_, j_);
+		bool? l_(Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
 			var r_ = QICoreCommon_2_0_000.ToInterval(q_);
@@ -739,8 +730,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(g_, h_);
-		CqlDate j_(Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
+		var m_ = context.Operators.WhereOrNull<Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(k_, l_);
+		CqlDate n_(Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
 		{
 			var af_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
 			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
@@ -759,9 +750,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM, CqlDate>(i_, j_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM, CqlDate>(m_, n_);
 
-		return k_;
+		return o_;
 	}
 
     [CqlDeclaration("Date PROMIS10 Total Assessment Completed")]
@@ -771,85 +762,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_PROMIS10_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_PROMIS10_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK c_(Encounter _ValidEncounters, CqlDate _InitialPROMIS10Date)
-		{
-			var n_ = new Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK
+			var l_ = new Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialPROMIS10Date = _InitialPROMIS10Date,
+				ValidEncounters = _select0.Item1,
+				InitialPROMIS10Date = _select0.Item2,
+				FollowupPROMIS10Date = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK _ValidEncountersInitialPROMIS10Date)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(d_, e_);
+		bool? g_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK tuple_bapoxcdqpiefffdprayqhjvmk)
 		{
-			var o_ = this.Date_PROMIS10_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_bapoxcdqpiefffdprayqhjvmk.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_bapoxcdqpiefffdprayqhjvmk.InitialPROMIS10Date);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_bapoxcdqpiefffdprayqhjvmk.FollowupPROMIS10Date);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK f_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK ValidEncountersInitialPROMIS10Date, CqlDate _FollowupPROMIS10Date)
-		{
-			var p_ = new Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK
-			{
-				ValidEncounters = ValidEncountersInitialPROMIS10Date.ValidEncounters,
-				InitialPROMIS10Date = ValidEncountersInitialPROMIS10Date.InitialPROMIS10Date,
-				FollowupPROMIS10Date = _FollowupPROMIS10Date,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK, CqlDate, Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK tuple_bapoxcdqpiefffdprayqhjvmk)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_bapoxcdqpiefffdprayqhjvmk.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_bapoxcdqpiefffdprayqhjvmk.InitialPROMIS10Date);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_bapoxcdqpiefffdprayqhjvmk.FollowupPROMIS10Date);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(g_, h_);
-		Encounter j_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK tuple_bapoxcdqpiefffdprayqhjvmk) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(f_, g_);
+		Encounter i_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK tuple_bapoxcdqpiefffdprayqhjvmk) => 
 			tuple_bapoxcdqpiefffdprayqhjvmk.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS10 Assessments")]
@@ -862,269 +832,175 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _Promis29Sleep)
-		{
-			var aa_ = this.PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score();
-			var ab_ = context.Operators.ToList<CqlCode>(aa_);
-			var ac_ = context.Operators.RetrieveByCodes<Observation>(ab_, null);
-			var ad_ = Status_1_6_000.Final_Survey_Observation(ac_);
-
-			return ad_;
-		};
-		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb f_(Observation _Promis29Sleep, Observation _Promis29SocialRoles)
-		{
-			var ae_ = new Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb
-			{
-				Promis29Sleep = _Promis29Sleep,
-				Promis29SocialRoles = _Promis29SocialRoles,
-			};
-
-			return ae_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(d_, e_, f_);
-		IEnumerable<Observation> h_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb _Promis29SleepPromis29SocialRoles)
-		{
-			var af_ = this.PROMIS_29_Physical_function_score_T_score();
-			var ag_ = context.Operators.ToList<CqlCode>(af_);
-			var ah_ = context.Operators.RetrieveByCodes<Observation>(ag_, null);
-			var ai_ = Status_1_6_000.Final_Survey_Observation(ah_);
-
-			return ai_;
-		};
-		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb i_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb Promis29SleepPromis29SocialRoles, Observation _Promis29Physical)
+		var e_ = this.PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = this.PROMIS_29_Physical_function_score_T_score();
+		var j_ = context.Operators.ToList<CqlCode>(i_);
+		var k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
+		var l_ = Status_1_6_000.Final_Survey_Observation(k_);
+		var m_ = this.PROMIS_29_Pain_interference_score_T_score();
+		var n_ = context.Operators.ToList<CqlCode>(m_);
+		var o_ = context.Operators.RetrieveByCodes<Observation>(n_, null);
+		var p_ = Status_1_6_000.Final_Survey_Observation(o_);
+		var q_ = this.PROMIS_29_Fatigue_score_T_score();
+		var r_ = context.Operators.ToList<CqlCode>(q_);
+		var s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
+		var t_ = Status_1_6_000.Final_Survey_Observation(s_);
+		var u_ = this.PROMIS_29_Depression_score_T_score();
+		var v_ = context.Operators.ToList<CqlCode>(u_);
+		var w_ = context.Operators.RetrieveByCodes<Observation>(v_, null);
+		var x_ = Status_1_6_000.Final_Survey_Observation(w_);
+		var y_ = this.PROMIS_29_Anxiety_score_T_score();
+		var z_ = context.Operators.ToList<CqlCode>(y_);
+		var aa_ = context.Operators.RetrieveByCodes<Observation>(z_, null);
+		var ab_ = Status_1_6_000.Final_Survey_Observation(aa_);
+		var ac_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_, ab_);
+		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb ad_(ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation,Observation> _select0)
 		{
 			var aj_ = new Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb
 			{
-				Promis29Sleep = Promis29SleepPromis29SocialRoles.Promis29Sleep,
-				Promis29SocialRoles = Promis29SleepPromis29SocialRoles.Promis29SocialRoles,
-				Promis29Physical = _Promis29Physical,
+				Promis29Sleep = _select0.Item1,
+				Promis29SocialRoles = _select0.Item2,
+				Promis29Physical = _select0.Item3,
+				Promis29Pain = _select0.Item4,
+				Promis29Fatigue = _select0.Item5,
+				Promis29Depression = _select0.Item6,
+				Promis29Anxiety = _select0.Item7,
 			};
 
 			return aj_;
 		};
-		var j_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, Observation, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(g_, h_, i_);
-		IEnumerable<Observation> k_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb _Promis29SleepPromis29SocialRolesPromis29Physical)
+		var ae_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation,Observation>, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(ac_, ad_);
+		bool? af_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb tuple_itzjebebsegnifgclhjyijnb)
 		{
-			var ak_ = this.PROMIS_29_Pain_interference_score_T_score();
-			var al_ = context.Operators.ToList<CqlCode>(ak_);
-			var am_ = context.Operators.RetrieveByCodes<Observation>(al_, null);
-			var an_ = Status_1_6_000.Final_Survey_Observation(am_);
+			var ak_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Sleep?.Effective);
+			var al_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			var am_ = context.Operators.Start(al_);
+			var an_ = context.Operators.DateFrom(am_);
+			var ao_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29SocialRoles?.Effective);
+			var ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
+			var aq_ = context.Operators.Start(ap_);
+			var ar_ = context.Operators.DateFrom(aq_);
+			var as_ = context.Operators.SameAs(an_, ar_, "day");
+			var at_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29SocialRoles?.Value);
+			var au_ = context.Operators.Not((bool?)(at_ is null));
+			var av_ = context.Operators.And(as_, au_);
+			var ax_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			var ay_ = context.Operators.Start(ax_);
+			var az_ = context.Operators.DateFrom(ay_);
+			var ba_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Physical?.Effective);
+			var bb_ = QICoreCommon_2_0_000.ToInterval(ba_);
+			var bc_ = context.Operators.Start(bb_);
+			var bd_ = context.Operators.DateFrom(bc_);
+			var be_ = context.Operators.SameAs(az_, bd_, "day");
+			var bf_ = context.Operators.And(av_, be_);
+			var bg_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Physical?.Value);
+			var bh_ = context.Operators.Not((bool?)(bg_ is null));
+			var bi_ = context.Operators.And(bf_, bh_);
+			var bk_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			var bl_ = context.Operators.Start(bk_);
+			var bm_ = context.Operators.DateFrom(bl_);
+			var bn_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Pain?.Effective);
+			var bo_ = QICoreCommon_2_0_000.ToInterval(bn_);
+			var bp_ = context.Operators.Start(bo_);
+			var bq_ = context.Operators.DateFrom(bp_);
+			var br_ = context.Operators.SameAs(bm_, bq_, "day");
+			var bs_ = context.Operators.And(bi_, br_);
+			var bt_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Pain?.Value);
+			var bu_ = context.Operators.Not((bool?)(bt_ is null));
+			var bv_ = context.Operators.And(bs_, bu_);
+			var bx_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			var by_ = context.Operators.Start(bx_);
+			var bz_ = context.Operators.DateFrom(by_);
+			var ca_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Fatigue?.Effective);
+			var cb_ = QICoreCommon_2_0_000.ToInterval(ca_);
+			var cc_ = context.Operators.Start(cb_);
+			var cd_ = context.Operators.DateFrom(cc_);
+			var ce_ = context.Operators.SameAs(bz_, cd_, "day");
+			var cf_ = context.Operators.And(bv_, ce_);
+			var cg_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Fatigue?.Value);
+			var ch_ = context.Operators.Not((bool?)(cg_ is null));
+			var ci_ = context.Operators.And(cf_, ch_);
+			var ck_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			var cl_ = context.Operators.Start(ck_);
+			var cm_ = context.Operators.DateFrom(cl_);
+			var cn_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Depression?.Effective);
+			var co_ = QICoreCommon_2_0_000.ToInterval(cn_);
+			var cp_ = context.Operators.Start(co_);
+			var cq_ = context.Operators.DateFrom(cp_);
+			var cr_ = context.Operators.SameAs(cm_, cq_, "day");
+			var cs_ = context.Operators.And(ci_, cr_);
+			var ct_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Depression?.Value);
+			var cu_ = context.Operators.Not((bool?)(ct_ is null));
+			var cv_ = context.Operators.And(cs_, cu_);
+			var cx_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			var cy_ = context.Operators.Start(cx_);
+			var cz_ = context.Operators.DateFrom(cy_);
+			var da_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Anxiety?.Effective);
+			var db_ = QICoreCommon_2_0_000.ToInterval(da_);
+			var dc_ = context.Operators.Start(db_);
+			var dd_ = context.Operators.DateFrom(dc_);
+			var de_ = context.Operators.SameAs(cz_, dd_, "day");
+			var df_ = context.Operators.And(cv_, de_);
+			var dg_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Anxiety?.Value);
+			var dh_ = context.Operators.Not((bool?)(dg_ is null));
+			var di_ = context.Operators.And(df_, dh_);
+			var dj_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Sleep?.Value);
+			var dk_ = context.Operators.Not((bool?)(dj_ is null));
+			var dl_ = context.Operators.And(di_, dk_);
 
-			return an_;
+			return dl_;
 		};
-		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb l_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb Promis29SleepPromis29SocialRolesPromis29Physical, Observation _Promis29Pain)
+		var ag_ = context.Operators.WhereOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(ae_, af_);
+		CqlDate ah_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb tuple_itzjebebsegnifgclhjyijnb)
 		{
-			var ao_ = new Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb
-			{
-				Promis29Sleep = Promis29SleepPromis29SocialRolesPromis29Physical.Promis29Sleep,
-				Promis29SocialRoles = Promis29SleepPromis29SocialRolesPromis29Physical.Promis29SocialRoles,
-				Promis29Physical = Promis29SleepPromis29SocialRolesPromis29Physical.Promis29Physical,
-				Promis29Pain = _Promis29Pain,
-			};
-
-			return ao_;
-		};
-		var m_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, Observation, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(j_, k_, l_);
-		IEnumerable<Observation> n_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb _Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29Pain)
-		{
-			var ap_ = this.PROMIS_29_Fatigue_score_T_score();
-			var aq_ = context.Operators.ToList<CqlCode>(ap_);
-			var ar_ = context.Operators.RetrieveByCodes<Observation>(aq_, null);
-			var as_ = Status_1_6_000.Final_Survey_Observation(ar_);
-
-			return as_;
-		};
-		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb o_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29Pain, Observation _Promis29Fatigue)
-		{
-			var at_ = new Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb
-			{
-				Promis29Sleep = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29Pain.Promis29Sleep,
-				Promis29SocialRoles = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29Pain.Promis29SocialRoles,
-				Promis29Physical = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29Pain.Promis29Physical,
-				Promis29Pain = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29Pain.Promis29Pain,
-				Promis29Fatigue = _Promis29Fatigue,
-			};
-
-			return at_;
-		};
-		var p_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, Observation, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(m_, n_, o_);
-		IEnumerable<Observation> q_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb _Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29Fatigue)
-		{
-			var au_ = this.PROMIS_29_Depression_score_T_score();
-			var av_ = context.Operators.ToList<CqlCode>(au_);
-			var aw_ = context.Operators.RetrieveByCodes<Observation>(av_, null);
-			var ax_ = Status_1_6_000.Final_Survey_Observation(aw_);
-
-			return ax_;
-		};
-		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb r_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29Fatigue, Observation _Promis29Depression)
-		{
-			var ay_ = new Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb
-			{
-				Promis29Sleep = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29Fatigue.Promis29Sleep,
-				Promis29SocialRoles = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29Fatigue.Promis29SocialRoles,
-				Promis29Physical = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29Fatigue.Promis29Physical,
-				Promis29Pain = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29Fatigue.Promis29Pain,
-				Promis29Fatigue = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29Fatigue.Promis29Fatigue,
-				Promis29Depression = _Promis29Depression,
-			};
-
-			return ay_;
-		};
-		var s_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, Observation, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(p_, q_, r_);
-		IEnumerable<Observation> t_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb _Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression)
-		{
-			var az_ = this.PROMIS_29_Anxiety_score_T_score();
-			var ba_ = context.Operators.ToList<CqlCode>(az_);
-			var bb_ = context.Operators.RetrieveByCodes<Observation>(ba_, null);
-			var bc_ = Status_1_6_000.Final_Survey_Observation(bb_);
-
-			return bc_;
-		};
-		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb u_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression, Observation _Promis29Anxiety)
-		{
-			var bd_ = new Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb
-			{
-				Promis29Sleep = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression.Promis29Sleep,
-				Promis29SocialRoles = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression.Promis29SocialRoles,
-				Promis29Physical = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression.Promis29Physical,
-				Promis29Pain = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression.Promis29Pain,
-				Promis29Fatigue = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression.Promis29Fatigue,
-				Promis29Depression = Promis29SleepPromis29SocialRolesPromis29PhysicalPromis29PainPromis29FatiguePromis29Depression.Promis29Depression,
-				Promis29Anxiety = _Promis29Anxiety,
-			};
-
-			return bd_;
-		};
-		var v_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, Observation, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(s_, t_, u_);
-		bool? w_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb tuple_itzjebebsegnifgclhjyijnb)
-		{
-			var be_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Sleep?.Effective);
-			var bf_ = QICoreCommon_2_0_000.ToInterval(be_);
-			var bg_ = context.Operators.Start(bf_);
-			var bh_ = context.Operators.DateFrom(bg_);
-			var bi_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29SocialRoles?.Effective);
-			var bj_ = QICoreCommon_2_0_000.ToInterval(bi_);
-			var bk_ = context.Operators.Start(bj_);
-			var bl_ = context.Operators.DateFrom(bk_);
-			var bm_ = context.Operators.SameAs(bh_, bl_, "day");
-			var bn_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29SocialRoles?.Value);
-			var bo_ = context.Operators.Not((bool?)(bn_ is null));
-			var bp_ = context.Operators.And(bm_, bo_);
-			var br_ = QICoreCommon_2_0_000.ToInterval(be_);
-			var bs_ = context.Operators.Start(br_);
-			var bt_ = context.Operators.DateFrom(bs_);
-			var bu_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Physical?.Effective);
-			var bv_ = QICoreCommon_2_0_000.ToInterval(bu_);
-			var bw_ = context.Operators.Start(bv_);
-			var bx_ = context.Operators.DateFrom(bw_);
-			var by_ = context.Operators.SameAs(bt_, bx_, "day");
-			var bz_ = context.Operators.And(bp_, by_);
-			var ca_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Physical?.Value);
-			var cb_ = context.Operators.Not((bool?)(ca_ is null));
-			var cc_ = context.Operators.And(bz_, cb_);
-			var ce_ = QICoreCommon_2_0_000.ToInterval(be_);
-			var cf_ = context.Operators.Start(ce_);
-			var cg_ = context.Operators.DateFrom(cf_);
-			var ch_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Pain?.Effective);
-			var ci_ = QICoreCommon_2_0_000.ToInterval(ch_);
-			var cj_ = context.Operators.Start(ci_);
-			var ck_ = context.Operators.DateFrom(cj_);
-			var cl_ = context.Operators.SameAs(cg_, ck_, "day");
-			var cm_ = context.Operators.And(cc_, cl_);
-			var cn_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Pain?.Value);
-			var co_ = context.Operators.Not((bool?)(cn_ is null));
-			var cp_ = context.Operators.And(cm_, co_);
-			var cr_ = QICoreCommon_2_0_000.ToInterval(be_);
-			var cs_ = context.Operators.Start(cr_);
-			var ct_ = context.Operators.DateFrom(cs_);
-			var cu_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Fatigue?.Effective);
-			var cv_ = QICoreCommon_2_0_000.ToInterval(cu_);
-			var cw_ = context.Operators.Start(cv_);
-			var cx_ = context.Operators.DateFrom(cw_);
-			var cy_ = context.Operators.SameAs(ct_, cx_, "day");
-			var cz_ = context.Operators.And(cp_, cy_);
-			var da_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Fatigue?.Value);
-			var db_ = context.Operators.Not((bool?)(da_ is null));
-			var dc_ = context.Operators.And(cz_, db_);
-			var de_ = QICoreCommon_2_0_000.ToInterval(be_);
-			var df_ = context.Operators.Start(de_);
-			var dg_ = context.Operators.DateFrom(df_);
-			var dh_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Depression?.Effective);
-			var di_ = QICoreCommon_2_0_000.ToInterval(dh_);
-			var dj_ = context.Operators.Start(di_);
-			var dk_ = context.Operators.DateFrom(dj_);
-			var dl_ = context.Operators.SameAs(dg_, dk_, "day");
-			var dm_ = context.Operators.And(dc_, dl_);
-			var dn_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Depression?.Value);
-			var do_ = context.Operators.Not((bool?)(dn_ is null));
-			var dp_ = context.Operators.And(dm_, do_);
-			var dr_ = QICoreCommon_2_0_000.ToInterval(be_);
+			var dm_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Sleep?.Effective);
+			var dn_ = QICoreCommon_2_0_000.ToInterval(dm_);
+			var do_ = context.Operators.Start(dn_);
+			var dp_ = context.Operators.DateFrom(do_);
+			var dq_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29SocialRoles?.Effective);
+			var dr_ = QICoreCommon_2_0_000.ToInterval(dq_);
 			var ds_ = context.Operators.Start(dr_);
 			var dt_ = context.Operators.DateFrom(ds_);
-			var du_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Anxiety?.Effective);
+			var du_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Physical?.Effective);
 			var dv_ = QICoreCommon_2_0_000.ToInterval(du_);
 			var dw_ = context.Operators.Start(dv_);
 			var dx_ = context.Operators.DateFrom(dw_);
-			var dy_ = context.Operators.SameAs(dt_, dx_, "day");
-			var dz_ = context.Operators.And(dp_, dy_);
-			var ea_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Anxiety?.Value);
-			var eb_ = context.Operators.Not((bool?)(ea_ is null));
-			var ec_ = context.Operators.And(dz_, eb_);
-			var ed_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Sleep?.Value);
-			var ee_ = context.Operators.Not((bool?)(ed_ is null));
-			var ef_ = context.Operators.And(ec_, ee_);
-
-			return ef_;
-		};
-		var x_ = context.Operators.WhereOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(v_, w_);
-		CqlDate y_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb tuple_itzjebebsegnifgclhjyijnb)
-		{
-			var eg_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Sleep?.Effective);
+			var dy_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Pain?.Effective);
+			var dz_ = QICoreCommon_2_0_000.ToInterval(dy_);
+			var ea_ = context.Operators.Start(dz_);
+			var eb_ = context.Operators.DateFrom(ea_);
+			var ec_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Fatigue?.Effective);
+			var ed_ = QICoreCommon_2_0_000.ToInterval(ec_);
+			var ee_ = context.Operators.Start(ed_);
+			var ef_ = context.Operators.DateFrom(ee_);
+			var eg_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Depression?.Effective);
 			var eh_ = QICoreCommon_2_0_000.ToInterval(eg_);
 			var ei_ = context.Operators.Start(eh_);
 			var ej_ = context.Operators.DateFrom(ei_);
-			var ek_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29SocialRoles?.Effective);
+			var ek_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Anxiety?.Effective);
 			var el_ = QICoreCommon_2_0_000.ToInterval(ek_);
 			var em_ = context.Operators.Start(el_);
 			var en_ = context.Operators.DateFrom(em_);
-			var eo_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Physical?.Effective);
-			var ep_ = QICoreCommon_2_0_000.ToInterval(eo_);
-			var eq_ = context.Operators.Start(ep_);
-			var er_ = context.Operators.DateFrom(eq_);
-			var es_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Pain?.Effective);
-			var et_ = QICoreCommon_2_0_000.ToInterval(es_);
-			var eu_ = context.Operators.Start(et_);
-			var ev_ = context.Operators.DateFrom(eu_);
-			var ew_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Fatigue?.Effective);
-			var ex_ = QICoreCommon_2_0_000.ToInterval(ew_);
-			var ey_ = context.Operators.Start(ex_);
-			var ez_ = context.Operators.DateFrom(ey_);
-			var fa_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Depression?.Effective);
-			var fb_ = QICoreCommon_2_0_000.ToInterval(fa_);
-			var fc_ = context.Operators.Start(fb_);
-			var fd_ = context.Operators.DateFrom(fc_);
-			var fe_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Anxiety?.Effective);
-			var ff_ = QICoreCommon_2_0_000.ToInterval(fe_);
-			var fg_ = context.Operators.Start(ff_);
-			var fh_ = context.Operators.DateFrom(fg_);
-			var fi_ = new CqlDate[]
+			var eo_ = new CqlDate[]
 			{
+				dp_,
+				dt_,
+				dx_,
+				eb_,
+				ef_,
 				ej_,
 				en_,
-				er_,
-				ev_,
-				ez_,
-				fd_,
-				fh_,
 			};
-			var fj_ = context.Operators.MaxOrNull<CqlDate>((fi_ as IEnumerable<CqlDate>));
+			var ep_ = context.Operators.MaxOrNull<CqlDate>((eo_ as IEnumerable<CqlDate>));
 
-			return fj_;
+			return ep_;
 		};
-		var z_ = context.Operators.SelectOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, CqlDate>(x_, y_);
+		var ai_ = context.Operators.SelectOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, CqlDate>(ag_, ah_);
 
-		return z_;
+		return ai_;
 	}
 
     [CqlDeclaration("Date PROMIS29 Total Assessment Completed")]
@@ -1134,85 +1010,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_PROMIS29_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_PROMIS29_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba c_(Encounter _ValidEncounters, CqlDate _InitialPROMIS29Date)
-		{
-			var n_ = new Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba
+			var l_ = new Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialPROMIS29Date = _InitialPROMIS29Date,
+				ValidEncounters = _select0.Item1,
+				InitialPROMIS29Date = _select0.Item2,
+				FollowupPROMIS29Date = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba _ValidEncountersInitialPROMIS29Date)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(d_, e_);
+		bool? g_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba tuple_dcgyafmugiitlmlbigqthxaba)
 		{
-			var o_ = this.Date_PROMIS29_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dcgyafmugiitlmlbigqthxaba.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_dcgyafmugiitlmlbigqthxaba.InitialPROMIS29Date);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_dcgyafmugiitlmlbigqthxaba.FollowupPROMIS29Date);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba f_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba ValidEncountersInitialPROMIS29Date, CqlDate _FollowupPROMIS29Date)
-		{
-			var p_ = new Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba
-			{
-				ValidEncounters = ValidEncountersInitialPROMIS29Date.ValidEncounters,
-				InitialPROMIS29Date = ValidEncountersInitialPROMIS29Date.InitialPROMIS29Date,
-				FollowupPROMIS29Date = _FollowupPROMIS29Date,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba, CqlDate, Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba tuple_dcgyafmugiitlmlbigqthxaba)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_dcgyafmugiitlmlbigqthxaba.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_dcgyafmugiitlmlbigqthxaba.InitialPROMIS29Date);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_dcgyafmugiitlmlbigqthxaba.FollowupPROMIS29Date);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(g_, h_);
-		Encounter j_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba tuple_dcgyafmugiitlmlbigqthxaba) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(f_, g_);
+		Encounter i_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba tuple_dcgyafmugiitlmlbigqthxaba) => 
 			tuple_dcgyafmugiitlmlbigqthxaba.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS29 Assessments")]
@@ -1225,27 +1080,23 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _VR12MentalAssessment)
-		{
-			var l_ = this.VR_12_Physical_component_summary__PCS__score___oblique_method_T_score();
-			var m_ = context.Operators.ToList<CqlCode>(l_);
-			var n_ = context.Operators.RetrieveByCodes<Observation>(m_, null);
-			var o_ = Status_1_6_000.Final_Survey_Observation(n_);
-
-			return o_;
-		};
-		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ f_(Observation _VR12MentalAssessment, Observation _VR12PhysicalAssessment)
+		var e_ = this.VR_12_Physical_component_summary__PCS__score___oblique_method_T_score();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
+		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ j_(ValueTuple<Observation,Observation> _select0)
 		{
 			var p_ = new Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
-				VR12MentalAssessment = _VR12MentalAssessment,
-				VR12PhysicalAssessment = _VR12PhysicalAssessment,
+				VR12MentalAssessment = _select0.Item1,
+				VR12PhysicalAssessment = _select0.Item2,
 			};
 
 			return p_;
 		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
+		bool? l_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
 			var r_ = QICoreCommon_2_0_000.ToInterval(q_);
@@ -1265,8 +1116,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
-		CqlDate j_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var m_ = context.Operators.WhereOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(k_, l_);
+		CqlDate n_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
 			var af_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
 			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
@@ -1285,9 +1136,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(i_, j_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(m_, n_);
 
-		return k_;
+		return o_;
 	}
 
     [CqlDeclaration("Date VR12 Oblique Total Assessment Completed")]
@@ -1297,85 +1148,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU c_(Encounter _ValidEncounters, CqlDate _InitialVR12ObliqueDate)
-		{
-			var n_ = new Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU
+			var l_ = new Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialVR12ObliqueDate = _InitialVR12ObliqueDate,
+				ValidEncounters = _select0.Item1,
+				InitialVR12ObliqueDate = _select0.Item2,
+				FollowupVR12ObliqueDate = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU _ValidEncountersInitialVR12ObliqueDate)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(d_, e_);
+		bool? g_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU tuple_ehgfqcqtpmavgfjerngbdigou)
 		{
-			var o_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_ehgfqcqtpmavgfjerngbdigou.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_ehgfqcqtpmavgfjerngbdigou.InitialVR12ObliqueDate);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_ehgfqcqtpmavgfjerngbdigou.FollowupVR12ObliqueDate);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU f_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU ValidEncountersInitialVR12ObliqueDate, CqlDate _FollowupVR12ObliqueDate)
-		{
-			var p_ = new Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU
-			{
-				ValidEncounters = ValidEncountersInitialVR12ObliqueDate.ValidEncounters,
-				InitialVR12ObliqueDate = ValidEncountersInitialVR12ObliqueDate.InitialVR12ObliqueDate,
-				FollowupVR12ObliqueDate = _FollowupVR12ObliqueDate,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU, CqlDate, Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU tuple_ehgfqcqtpmavgfjerngbdigou)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_ehgfqcqtpmavgfjerngbdigou.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_ehgfqcqtpmavgfjerngbdigou.InitialVR12ObliqueDate);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_ehgfqcqtpmavgfjerngbdigou.FollowupVR12ObliqueDate);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(g_, h_);
-		Encounter j_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU tuple_ehgfqcqtpmavgfjerngbdigou) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(f_, g_);
+		Encounter i_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU tuple_ehgfqcqtpmavgfjerngbdigou) => 
 			tuple_ehgfqcqtpmavgfjerngbdigou.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Oblique Assessments")]
@@ -1388,27 +1218,23 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _VR12MentalAssessment)
-		{
-			var l_ = this.VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score();
-			var m_ = context.Operators.ToList<CqlCode>(l_);
-			var n_ = context.Operators.RetrieveByCodes<Observation>(m_, null);
-			var o_ = Status_1_6_000.Final_Survey_Observation(n_);
-
-			return o_;
-		};
-		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ f_(Observation _VR12MentalAssessment, Observation _VR12PhysicalAssessment)
+		var e_ = this.VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
+		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ j_(ValueTuple<Observation,Observation> _select0)
 		{
 			var p_ = new Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
-				VR12MentalAssessment = _VR12MentalAssessment,
-				VR12PhysicalAssessment = _VR12PhysicalAssessment,
+				VR12MentalAssessment = _select0.Item1,
+				VR12PhysicalAssessment = _select0.Item2,
 			};
 
 			return p_;
 		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
+		bool? l_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
 			var r_ = QICoreCommon_2_0_000.ToInterval(q_);
@@ -1428,8 +1254,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
-		CqlDate j_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var m_ = context.Operators.WhereOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(k_, l_);
+		CqlDate n_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
 			var af_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
 			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
@@ -1448,9 +1274,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(i_, j_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(m_, n_);
 
-		return k_;
+		return o_;
 	}
 
     [CqlDeclaration("Date VR12 Orthogonal Total Assessment Completed")]
@@ -1460,85 +1286,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ c_(Encounter _ValidEncounters, CqlDate _InitialVR12OrthogonalDate)
-		{
-			var n_ = new Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ
+			var l_ = new Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialVR12OrthogonalDate = _InitialVR12OrthogonalDate,
+				ValidEncounters = _select0.Item1,
+				InitialVR12OrthogonalDate = _select0.Item2,
+				FollowupVR12OrthogonalDate = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ _ValidEncountersInitialVR12OrthogonalDate)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(d_, e_);
+		bool? g_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ tuple_dathnxwghivrygrfgdxjyjkrz)
 		{
-			var o_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dathnxwghivrygrfgdxjyjkrz.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_dathnxwghivrygrfgdxjyjkrz.InitialVR12OrthogonalDate);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_dathnxwghivrygrfgdxjyjkrz.FollowupVR12OrthogonalDate);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ f_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ ValidEncountersInitialVR12OrthogonalDate, CqlDate _FollowupVR12OrthogonalDate)
-		{
-			var p_ = new Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ
-			{
-				ValidEncounters = ValidEncountersInitialVR12OrthogonalDate.ValidEncounters,
-				InitialVR12OrthogonalDate = ValidEncountersInitialVR12OrthogonalDate.InitialVR12OrthogonalDate,
-				FollowupVR12OrthogonalDate = _FollowupVR12OrthogonalDate,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ, CqlDate, Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ tuple_dathnxwghivrygrfgdxjyjkrz)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_dathnxwghivrygrfgdxjyjkrz.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_dathnxwghivrygrfgdxjyjkrz.InitialVR12OrthogonalDate);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_dathnxwghivrygrfgdxjyjkrz.FollowupVR12OrthogonalDate);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(g_, h_);
-		Encounter j_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ tuple_dathnxwghivrygrfgdxjyjkrz) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(f_, g_);
+		Encounter i_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ tuple_dathnxwghivrygrfgdxjyjkrz) => 
 			tuple_dathnxwghivrygrfgdxjyjkrz.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Orthogonal Assessments")]
@@ -1551,27 +1356,23 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _VR36MentalAssessment)
-		{
-			var l_ = this.VR_36_Physical_component_summary__PCS__score___oblique_method_T_score();
-			var m_ = context.Operators.ToList<CqlCode>(l_);
-			var n_ = context.Operators.RetrieveByCodes<Observation>(m_, null);
-			var o_ = Status_1_6_000.Final_Survey_Observation(n_);
-
-			return o_;
-		};
-		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh f_(Observation _VR36MentalAssessment, Observation _VR36PhysicalAssessment)
+		var e_ = this.VR_36_Physical_component_summary__PCS__score___oblique_method_T_score();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
+		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh j_(ValueTuple<Observation,Observation> _select0)
 		{
 			var p_ = new Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh
 			{
-				VR36MentalAssessment = _VR36MentalAssessment,
-				VR36PhysicalAssessment = _VR36PhysicalAssessment,
+				VR36MentalAssessment = _select0.Item1,
+				VR36PhysicalAssessment = _select0.Item2,
 			};
 
 			return p_;
 		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(i_, j_);
+		bool? l_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_ebsjtadmhbbibbkjaibebhcjh.VR36MentalAssessment?.Effective);
 			var r_ = QICoreCommon_2_0_000.ToInterval(q_);
@@ -1591,8 +1392,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(g_, h_);
-		CqlDate j_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
+		var m_ = context.Operators.WhereOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(k_, l_);
+		CqlDate n_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
 		{
 			var af_ = FHIRHelpers_4_3_000.ToValue(tuple_ebsjtadmhbbibbkjaibebhcjh.VR36MentalAssessment?.Effective);
 			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
@@ -1611,9 +1412,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(i_, j_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(m_, n_);
 
-		return k_;
+		return o_;
 	}
 
     [CqlDeclaration("Date VR36 Oblique Total Assessment Completed")]
@@ -1623,85 +1424,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_VR36_Oblique_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_VR36_Oblique_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi c_(Encounter _ValidEncounters, CqlDate _InitialVR36ObliqueDate)
-		{
-			var n_ = new Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi
+			var l_ = new Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialVR36ObliqueDate = _InitialVR36ObliqueDate,
+				ValidEncounters = _select0.Item1,
+				InitialVR36ObliqueDate = _select0.Item2,
+				FollowupVR36ObliqueDate = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi _ValidEncountersInitialVR36ObliqueDate)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(d_, e_);
+		bool? g_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi tuple_hnuzsejfeiqxihxgudxliwidi)
 		{
-			var o_ = this.Date_VR36_Oblique_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_hnuzsejfeiqxihxgudxliwidi.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_hnuzsejfeiqxihxgudxliwidi.InitialVR36ObliqueDate);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_hnuzsejfeiqxihxgudxliwidi.FollowupVR36ObliqueDate);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi f_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi ValidEncountersInitialVR36ObliqueDate, CqlDate _FollowupVR36ObliqueDate)
-		{
-			var p_ = new Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi
-			{
-				ValidEncounters = ValidEncountersInitialVR36ObliqueDate.ValidEncounters,
-				InitialVR36ObliqueDate = ValidEncountersInitialVR36ObliqueDate.InitialVR36ObliqueDate,
-				FollowupVR36ObliqueDate = _FollowupVR36ObliqueDate,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi, CqlDate, Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi tuple_hnuzsejfeiqxihxgudxliwidi)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_hnuzsejfeiqxihxgudxliwidi.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_hnuzsejfeiqxihxgudxliwidi.InitialVR36ObliqueDate);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_hnuzsejfeiqxihxgudxliwidi.FollowupVR36ObliqueDate);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(g_, h_);
-		Encounter j_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi tuple_hnuzsejfeiqxihxgudxliwidi) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(f_, g_);
+		Encounter i_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi tuple_hnuzsejfeiqxihxgudxliwidi) => 
 			tuple_hnuzsejfeiqxihxgudxliwidi.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Oblique Assessments")]
@@ -1714,27 +1494,23 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _VR36MentalAssessment)
-		{
-			var l_ = this.VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score();
-			var m_ = context.Operators.ToList<CqlCode>(l_);
-			var n_ = context.Operators.RetrieveByCodes<Observation>(m_, null);
-			var o_ = Status_1_6_000.Final_Survey_Observation(n_);
-
-			return o_;
-		};
-		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh f_(Observation _VR36MentalAssessment, Observation _VR36PhysicalAssessment)
+		var e_ = this.VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
+		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh j_(ValueTuple<Observation,Observation> _select0)
 		{
 			var p_ = new Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh
 			{
-				VR36MentalAssessment = _VR36MentalAssessment,
-				VR36PhysicalAssessment = _VR36PhysicalAssessment,
+				VR36MentalAssessment = _select0.Item1,
+				VR36PhysicalAssessment = _select0.Item2,
 			};
 
 			return p_;
 		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(i_, j_);
+		bool? l_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_ebsjtadmhbbibbkjaibebhcjh.VR36MentalAssessment?.Effective);
 			var r_ = QICoreCommon_2_0_000.ToInterval(q_);
@@ -1754,8 +1530,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(g_, h_);
-		CqlDate j_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
+		var m_ = context.Operators.WhereOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(k_, l_);
+		CqlDate n_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
 		{
 			var af_ = FHIRHelpers_4_3_000.ToValue(tuple_ebsjtadmhbbibbkjaibebhcjh.VR36MentalAssessment?.Effective);
 			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
@@ -1774,9 +1550,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(i_, j_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(m_, n_);
 
-		return k_;
+		return o_;
 	}
 
     [CqlDeclaration("Date VR36 Orthogonal Total Assessment Completed")]
@@ -1786,85 +1562,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_VR36_Orthogonal_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_VR36_Orthogonal_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi c_(Encounter _ValidEncounters, CqlDate _InitialVR36OrthogonalDate)
-		{
-			var n_ = new Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi
+			var l_ = new Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialVR36OrthogonalDate = _InitialVR36OrthogonalDate,
+				ValidEncounters = _select0.Item1,
+				InitialVR36OrthogonalDate = _select0.Item2,
+				FollowupVR36OrthogonalDate = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi _ValidEncountersInitialVR36OrthogonalDate)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(d_, e_);
+		bool? g_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi tuple_fzfelixhkplafndgwdmescidi)
 		{
-			var o_ = this.Date_VR36_Orthogonal_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_fzfelixhkplafndgwdmescidi.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_fzfelixhkplafndgwdmescidi.InitialVR36OrthogonalDate);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_fzfelixhkplafndgwdmescidi.FollowupVR36OrthogonalDate);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi f_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi ValidEncountersInitialVR36OrthogonalDate, CqlDate _FollowupVR36OrthogonalDate)
-		{
-			var p_ = new Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi
-			{
-				ValidEncounters = ValidEncountersInitialVR36OrthogonalDate.ValidEncounters,
-				InitialVR36OrthogonalDate = ValidEncountersInitialVR36OrthogonalDate.InitialVR36OrthogonalDate,
-				FollowupVR36OrthogonalDate = _FollowupVR36OrthogonalDate,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi, CqlDate, Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi tuple_fzfelixhkplafndgwdmescidi)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_fzfelixhkplafndgwdmescidi.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_fzfelixhkplafndgwdmescidi.InitialVR36OrthogonalDate);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_fzfelixhkplafndgwdmescidi.FollowupVR36OrthogonalDate);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(g_, h_);
-		Encounter j_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi tuple_fzfelixhkplafndgwdmescidi) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(f_, g_);
+		Encounter i_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi tuple_fzfelixhkplafndgwdmescidi) => 
 			tuple_fzfelixhkplafndgwdmescidi.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Orthogonal Assessments")]
@@ -1877,27 +1632,23 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _MLHFQPhysical)
-		{
-			var l_ = this.Emotional_score__MLHFQ_();
-			var m_ = context.Operators.ToList<CqlCode>(l_);
-			var n_ = context.Operators.RetrieveByCodes<Observation>(m_, null);
-			var o_ = Status_1_6_000.Final_Survey_Observation(n_);
-
-			return o_;
-		};
-		Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU f_(Observation _MLHFQPhysical, Observation _MLHFQEmotional)
+		var e_ = this.Emotional_score__MLHFQ_();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
+		Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU j_(ValueTuple<Observation,Observation> _select0)
 		{
 			var p_ = new Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU
 			{
-				MLHFQPhysical = _MLHFQPhysical,
-				MLHFQEmotional = _MLHFQEmotional,
+				MLHFQPhysical = _select0.Item1,
+				MLHFQEmotional = _select0.Item2,
 			};
 
 			return p_;
 		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU tuple_cbaklcfrcuhxghpfcscgcafhu)
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU>(i_, j_);
+		bool? l_(Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU tuple_cbaklcfrcuhxghpfcscgcafhu)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_cbaklcfrcuhxghpfcscgcafhu.MLHFQPhysical?.Effective);
 			var r_ = QICoreCommon_2_0_000.ToInterval(q_);
@@ -1917,8 +1668,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU>(g_, h_);
-		CqlDate j_(Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU tuple_cbaklcfrcuhxghpfcscgcafhu)
+		var m_ = context.Operators.WhereOrNull<Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU>(k_, l_);
+		CqlDate n_(Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU tuple_cbaklcfrcuhxghpfcscgcafhu)
 		{
 			var af_ = FHIRHelpers_4_3_000.ToValue(tuple_cbaklcfrcuhxghpfcscgcafhu.MLHFQPhysical?.Effective);
 			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
@@ -1937,9 +1688,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU, CqlDate>(i_, j_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU, CqlDate>(m_, n_);
 
-		return k_;
+		return o_;
 	}
 
     [CqlDeclaration("Date MLHFQ Total Assessment Completed")]
@@ -1949,85 +1700,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_MLHFQ_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_MLHFQ_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi c_(Encounter _ValidEncounters, CqlDate _InitialMLHFQDate)
-		{
-			var n_ = new Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi
+			var l_ = new Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialMLHFQDate = _InitialMLHFQDate,
+				ValidEncounters = _select0.Item1,
+				InitialMLHFQDate = _select0.Item2,
+				FollowupMLHFQDate = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi _ValidEncountersInitialMLHFQDate)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(d_, e_);
+		bool? g_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi tuple_dgnbkfgfrhawdzadfpzkifxli)
 		{
-			var o_ = this.Date_MLHFQ_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dgnbkfgfrhawdzadfpzkifxli.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_dgnbkfgfrhawdzadfpzkifxli.InitialMLHFQDate);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_dgnbkfgfrhawdzadfpzkifxli.FollowupMLHFQDate);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi f_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi ValidEncountersInitialMLHFQDate, CqlDate _FollowupMLHFQDate)
-		{
-			var p_ = new Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi
-			{
-				ValidEncounters = ValidEncountersInitialMLHFQDate.ValidEncounters,
-				InitialMLHFQDate = ValidEncountersInitialMLHFQDate.InitialMLHFQDate,
-				FollowupMLHFQDate = _FollowupMLHFQDate,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi, CqlDate, Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi tuple_dgnbkfgfrhawdzadfpzkifxli)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_dgnbkfgfrhawdzadfpzkifxli.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_dgnbkfgfrhawdzadfpzkifxli.InitialMLHFQDate);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_dgnbkfgfrhawdzadfpzkifxli.FollowupMLHFQDate);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(g_, h_);
-		Encounter j_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi tuple_dgnbkfgfrhawdzadfpzkifxli) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(f_, g_);
+		Encounter i_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi tuple_dgnbkfgfrhawdzadfpzkifxli) => 
 			tuple_dgnbkfgfrhawdzadfpzkifxli.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up MLHFQ Assessments")]
@@ -2040,27 +1770,23 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _KCCQ12Item)
-		{
-			var l_ = this.Overall_summary_score__KCCQ_12_();
-			var m_ = context.Operators.ToList<CqlCode>(l_);
-			var n_ = context.Operators.RetrieveByCodes<Observation>(m_, null);
-			var o_ = Status_1_6_000.Final_Survey_Observation(n_);
-
-			return o_;
-		};
-		Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF f_(Observation _KCCQ12Item, Observation _KCCQ12Summary)
+		var e_ = this.Overall_summary_score__KCCQ_12_();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
+		Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF j_(ValueTuple<Observation,Observation> _select0)
 		{
 			var p_ = new Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF
 			{
-				KCCQ12Item = _KCCQ12Item,
-				KCCQ12Summary = _KCCQ12Summary,
+				KCCQ12Item = _select0.Item1,
+				KCCQ12Summary = _select0.Item2,
 			};
 
 			return p_;
 		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF tuple_ffjnyamqhzaofymnskahaudlf)
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF>(i_, j_);
+		bool? l_(Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF tuple_ffjnyamqhzaofymnskahaudlf)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_ffjnyamqhzaofymnskahaudlf.KCCQ12Item?.Effective);
 			var r_ = QICoreCommon_2_0_000.ToInterval(q_);
@@ -2080,8 +1806,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF>(g_, h_);
-		CqlDate j_(Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF tuple_ffjnyamqhzaofymnskahaudlf)
+		var m_ = context.Operators.WhereOrNull<Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF>(k_, l_);
+		CqlDate n_(Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF tuple_ffjnyamqhzaofymnskahaudlf)
 		{
 			var af_ = FHIRHelpers_4_3_000.ToValue(tuple_ffjnyamqhzaofymnskahaudlf.KCCQ12Item?.Effective);
 			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
@@ -2100,9 +1826,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF, CqlDate>(i_, j_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF, CqlDate>(m_, n_);
 
-		return k_;
+		return o_;
 	}
 
     [CqlDeclaration("Date KCCQ12 Total Assessment Completed")]
@@ -2112,85 +1838,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_KCCQ12_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_KCCQ12_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi c_(Encounter _ValidEncounters, CqlDate _InitialKCCQ12Date)
-		{
-			var n_ = new Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi
+			var l_ = new Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialKCCQ12Date = _InitialKCCQ12Date,
+				ValidEncounters = _select0.Item1,
+				InitialKCCQ12Date = _select0.Item2,
+				FollowupKCCQ12Date = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi _ValidEncountersInitialKCCQ12Date)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(d_, e_);
+		bool? g_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi tuple_dnzcztnizuqfffijaydwagbfi)
 		{
-			var o_ = this.Date_KCCQ12_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dnzcztnizuqfffijaydwagbfi.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_dnzcztnizuqfffijaydwagbfi.InitialKCCQ12Date);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_dnzcztnizuqfffijaydwagbfi.FollowupKCCQ12Date);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi f_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi ValidEncountersInitialKCCQ12Date, CqlDate _FollowupKCCQ12Date)
-		{
-			var p_ = new Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi
-			{
-				ValidEncounters = ValidEncountersInitialKCCQ12Date.ValidEncounters,
-				InitialKCCQ12Date = ValidEncountersInitialKCCQ12Date.InitialKCCQ12Date,
-				FollowupKCCQ12Date = _FollowupKCCQ12Date,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi, CqlDate, Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi tuple_dnzcztnizuqfffijaydwagbfi)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_dnzcztnizuqfffijaydwagbfi.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_dnzcztnizuqfffijaydwagbfi.InitialKCCQ12Date);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_dnzcztnizuqfffijaydwagbfi.FollowupKCCQ12Date);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(g_, h_);
-		Encounter j_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi tuple_dnzcztnizuqfffijaydwagbfi) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(f_, g_);
+		Encounter i_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi tuple_dnzcztnizuqfffijaydwagbfi) => 
 			tuple_dnzcztnizuqfffijaydwagbfi.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ12 Assessments")]
@@ -2203,227 +1908,153 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
-		IEnumerable<Observation> e_(Observation _KCCQLifeQuality)
+		var e_ = this.Symptom_stability_score__KCCQ_();
+		var f_ = context.Operators.ToList<CqlCode>(e_);
+		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
+		var i_ = this.Self_efficacy_score__KCCQ_();
+		var j_ = context.Operators.ToList<CqlCode>(i_);
+		var k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
+		var l_ = Status_1_6_000.Final_Survey_Observation(k_);
+		var m_ = this.Total_symptom_score__KCCQ_();
+		var n_ = context.Operators.ToList<CqlCode>(m_);
+		var o_ = context.Operators.RetrieveByCodes<Observation>(n_, null);
+		var p_ = Status_1_6_000.Final_Survey_Observation(o_);
+		var q_ = this.Physical_limitation_score__KCCQ_();
+		var r_ = context.Operators.ToList<CqlCode>(q_);
+		var s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
+		var t_ = Status_1_6_000.Final_Survey_Observation(s_);
+		var u_ = this.Social_limitation_score__KCCQ_();
+		var v_ = context.Operators.ToList<CqlCode>(u_);
+		var w_ = context.Operators.RetrieveByCodes<Observation>(v_, null);
+		var x_ = Status_1_6_000.Final_Survey_Observation(w_);
+		var y_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_);
+		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV z_(ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation> _select0)
 		{
-			var x_ = this.Symptom_stability_score__KCCQ_();
-			var y_ = context.Operators.ToList<CqlCode>(x_);
-			var z_ = context.Operators.RetrieveByCodes<Observation>(y_, null);
-			var aa_ = Status_1_6_000.Final_Survey_Observation(z_);
-
-			return aa_;
-		};
-		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV f_(Observation _KCCQLifeQuality, Observation _KCCQSymptomStability)
-		{
-			var ab_ = new Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV
+			var af_ = new Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV
 			{
-				KCCQLifeQuality = _KCCQLifeQuality,
-				KCCQSymptomStability = _KCCQSymptomStability,
+				KCCQLifeQuality = _select0.Item1,
+				KCCQSymptomStability = _select0.Item2,
+				KCCQSelfEfficacy = _select0.Item3,
+				KCCQSymptoms = _select0.Item4,
+				KCCQPhysicalLimits = _select0.Item5,
+				KCCQSocialLimits = _select0.Item6,
 			};
-
-			return ab_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Observation, Observation, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(d_, e_, f_);
-		IEnumerable<Observation> h_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV _KCCQLifeQualityKCCQSymptomStability)
-		{
-			var ac_ = this.Self_efficacy_score__KCCQ_();
-			var ad_ = context.Operators.ToList<CqlCode>(ac_);
-			var ae_ = context.Operators.RetrieveByCodes<Observation>(ad_, null);
-			var af_ = Status_1_6_000.Final_Survey_Observation(ae_);
 
 			return af_;
 		};
-		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV i_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV KCCQLifeQualityKCCQSymptomStability, Observation _KCCQSelfEfficacy)
+		var aa_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation>, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(y_, z_);
+		bool? ab_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV tuple_bbipkfiyffdqclchpcxkdafmv)
 		{
-			var ag_ = new Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV
-			{
-				KCCQLifeQuality = KCCQLifeQualityKCCQSymptomStability.KCCQLifeQuality,
-				KCCQSymptomStability = KCCQLifeQualityKCCQSymptomStability.KCCQSymptomStability,
-				KCCQSelfEfficacy = _KCCQSelfEfficacy,
-			};
-
-			return ag_;
-		};
-		var j_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, Observation, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(g_, h_, i_);
-		IEnumerable<Observation> k_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV _KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacy)
-		{
-			var ah_ = this.Total_symptom_score__KCCQ_();
-			var ai_ = context.Operators.ToList<CqlCode>(ah_);
-			var aj_ = context.Operators.RetrieveByCodes<Observation>(ai_, null);
-			var ak_ = Status_1_6_000.Final_Survey_Observation(aj_);
-
-			return ak_;
-		};
-		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV l_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacy, Observation _KCCQSymptoms)
-		{
-			var al_ = new Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV
-			{
-				KCCQLifeQuality = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacy.KCCQLifeQuality,
-				KCCQSymptomStability = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacy.KCCQSymptomStability,
-				KCCQSelfEfficacy = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacy.KCCQSelfEfficacy,
-				KCCQSymptoms = _KCCQSymptoms,
-			};
-
-			return al_;
-		};
-		var m_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, Observation, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(j_, k_, l_);
-		IEnumerable<Observation> n_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV _KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptoms)
-		{
-			var am_ = this.Physical_limitation_score__KCCQ_();
-			var an_ = context.Operators.ToList<CqlCode>(am_);
-			var ao_ = context.Operators.RetrieveByCodes<Observation>(an_, null);
-			var ap_ = Status_1_6_000.Final_Survey_Observation(ao_);
-
-			return ap_;
-		};
-		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV o_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptoms, Observation _KCCQPhysicalLimits)
-		{
-			var aq_ = new Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV
-			{
-				KCCQLifeQuality = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptoms.KCCQLifeQuality,
-				KCCQSymptomStability = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptoms.KCCQSymptomStability,
-				KCCQSelfEfficacy = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptoms.KCCQSelfEfficacy,
-				KCCQSymptoms = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptoms.KCCQSymptoms,
-				KCCQPhysicalLimits = _KCCQPhysicalLimits,
-			};
-
-			return aq_;
-		};
-		var p_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, Observation, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(m_, n_, o_);
-		IEnumerable<Observation> q_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV _KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptomsKCCQPhysicalLimits)
-		{
-			var ar_ = this.Social_limitation_score__KCCQ_();
-			var as_ = context.Operators.ToList<CqlCode>(ar_);
-			var at_ = context.Operators.RetrieveByCodes<Observation>(as_, null);
-			var au_ = Status_1_6_000.Final_Survey_Observation(at_);
-
-			return au_;
-		};
-		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV r_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptomsKCCQPhysicalLimits, Observation _KCCQSocialLimits)
-		{
-			var av_ = new Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV
-			{
-				KCCQLifeQuality = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptomsKCCQPhysicalLimits.KCCQLifeQuality,
-				KCCQSymptomStability = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptomsKCCQPhysicalLimits.KCCQSymptomStability,
-				KCCQSelfEfficacy = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptomsKCCQPhysicalLimits.KCCQSelfEfficacy,
-				KCCQSymptoms = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptomsKCCQPhysicalLimits.KCCQSymptoms,
-				KCCQPhysicalLimits = KCCQLifeQualityKCCQSymptomStabilityKCCQSelfEfficacyKCCQSymptomsKCCQPhysicalLimits.KCCQPhysicalLimits,
-				KCCQSocialLimits = _KCCQSocialLimits,
-			};
-
-			return av_;
-		};
-		var s_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, Observation, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(p_, q_, r_);
-		bool? t_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV tuple_bbipkfiyffdqclchpcxkdafmv)
-		{
-			var aw_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQLifeQuality?.Effective);
+			var ag_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQLifeQuality?.Effective);
+			var ah_ = QICoreCommon_2_0_000.ToInterval(ag_);
+			var ai_ = context.Operators.Start(ah_);
+			var aj_ = context.Operators.DateFrom(ai_);
+			var ak_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptomStability?.Effective);
+			var al_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			var am_ = context.Operators.Start(al_);
+			var an_ = context.Operators.DateFrom(am_);
+			var ao_ = context.Operators.SameAs(aj_, an_, "day");
+			var ap_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptomStability?.Value);
+			var aq_ = context.Operators.Not((bool?)(ap_ is null));
+			var ar_ = context.Operators.And(ao_, aq_);
+			var at_ = QICoreCommon_2_0_000.ToInterval(ag_);
+			var au_ = context.Operators.Start(at_);
+			var av_ = context.Operators.DateFrom(au_);
+			var aw_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSelfEfficacy?.Effective);
 			var ax_ = QICoreCommon_2_0_000.ToInterval(aw_);
 			var ay_ = context.Operators.Start(ax_);
 			var az_ = context.Operators.DateFrom(ay_);
-			var ba_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptomStability?.Effective);
-			var bb_ = QICoreCommon_2_0_000.ToInterval(ba_);
-			var bc_ = context.Operators.Start(bb_);
-			var bd_ = context.Operators.DateFrom(bc_);
-			var be_ = context.Operators.SameAs(az_, bd_, "day");
-			var bf_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptomStability?.Value);
-			var bg_ = context.Operators.Not((bool?)(bf_ is null));
-			var bh_ = context.Operators.And(be_, bg_);
-			var bj_ = QICoreCommon_2_0_000.ToInterval(aw_);
-			var bk_ = context.Operators.Start(bj_);
-			var bl_ = context.Operators.DateFrom(bk_);
-			var bm_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSelfEfficacy?.Effective);
-			var bn_ = QICoreCommon_2_0_000.ToInterval(bm_);
-			var bo_ = context.Operators.Start(bn_);
-			var bp_ = context.Operators.DateFrom(bo_);
-			var bq_ = context.Operators.SameAs(bl_, bp_, "day");
-			var br_ = context.Operators.And(bh_, bq_);
-			var bs_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSelfEfficacy?.Value);
-			var bt_ = context.Operators.Not((bool?)(bs_ is null));
-			var bu_ = context.Operators.And(br_, bt_);
-			var bw_ = QICoreCommon_2_0_000.ToInterval(aw_);
-			var bx_ = context.Operators.Start(bw_);
-			var by_ = context.Operators.DateFrom(bx_);
-			var bz_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptoms?.Effective);
-			var ca_ = QICoreCommon_2_0_000.ToInterval(bz_);
-			var cb_ = context.Operators.Start(ca_);
-			var cc_ = context.Operators.DateFrom(cb_);
-			var cd_ = context.Operators.SameAs(by_, cc_, "day");
-			var ce_ = context.Operators.And(bu_, cd_);
-			var cf_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptoms?.Value);
-			var cg_ = context.Operators.Not((bool?)(cf_ is null));
-			var ch_ = context.Operators.And(ce_, cg_);
-			var cj_ = QICoreCommon_2_0_000.ToInterval(aw_);
-			var ck_ = context.Operators.Start(cj_);
-			var cl_ = context.Operators.DateFrom(ck_);
-			var cm_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQPhysicalLimits?.Effective);
-			var cn_ = QICoreCommon_2_0_000.ToInterval(cm_);
-			var co_ = context.Operators.Start(cn_);
-			var cp_ = context.Operators.DateFrom(co_);
-			var cq_ = context.Operators.SameAs(cl_, cp_, "day");
-			var cr_ = context.Operators.And(ch_, cq_);
-			var cs_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQPhysicalLimits?.Value);
+			var ba_ = context.Operators.SameAs(av_, az_, "day");
+			var bb_ = context.Operators.And(ar_, ba_);
+			var bc_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSelfEfficacy?.Value);
+			var bd_ = context.Operators.Not((bool?)(bc_ is null));
+			var be_ = context.Operators.And(bb_, bd_);
+			var bg_ = QICoreCommon_2_0_000.ToInterval(ag_);
+			var bh_ = context.Operators.Start(bg_);
+			var bi_ = context.Operators.DateFrom(bh_);
+			var bj_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptoms?.Effective);
+			var bk_ = QICoreCommon_2_0_000.ToInterval(bj_);
+			var bl_ = context.Operators.Start(bk_);
+			var bm_ = context.Operators.DateFrom(bl_);
+			var bn_ = context.Operators.SameAs(bi_, bm_, "day");
+			var bo_ = context.Operators.And(be_, bn_);
+			var bp_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptoms?.Value);
+			var bq_ = context.Operators.Not((bool?)(bp_ is null));
+			var br_ = context.Operators.And(bo_, bq_);
+			var bt_ = QICoreCommon_2_0_000.ToInterval(ag_);
+			var bu_ = context.Operators.Start(bt_);
+			var bv_ = context.Operators.DateFrom(bu_);
+			var bw_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQPhysicalLimits?.Effective);
+			var bx_ = QICoreCommon_2_0_000.ToInterval(bw_);
+			var by_ = context.Operators.Start(bx_);
+			var bz_ = context.Operators.DateFrom(by_);
+			var ca_ = context.Operators.SameAs(bv_, bz_, "day");
+			var cb_ = context.Operators.And(br_, ca_);
+			var cc_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQPhysicalLimits?.Value);
+			var cd_ = context.Operators.Not((bool?)(cc_ is null));
+			var ce_ = context.Operators.And(cb_, cd_);
+			var cg_ = QICoreCommon_2_0_000.ToInterval(ag_);
+			var ch_ = context.Operators.Start(cg_);
+			var ci_ = context.Operators.DateFrom(ch_);
+			var cj_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSocialLimits?.Effective);
+			var ck_ = QICoreCommon_2_0_000.ToInterval(cj_);
+			var cl_ = context.Operators.Start(ck_);
+			var cm_ = context.Operators.DateFrom(cl_);
+			var cn_ = context.Operators.SameAs(ci_, cm_, "day");
+			var co_ = context.Operators.And(ce_, cn_);
+			var cp_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSocialLimits?.Value);
+			var cq_ = context.Operators.Not((bool?)(cp_ is null));
+			var cr_ = context.Operators.And(co_, cq_);
+			var cs_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQLifeQuality?.Value);
 			var ct_ = context.Operators.Not((bool?)(cs_ is null));
 			var cu_ = context.Operators.And(cr_, ct_);
-			var cw_ = QICoreCommon_2_0_000.ToInterval(aw_);
+
+			return cu_;
+		};
+		var ac_ = context.Operators.WhereOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(aa_, ab_);
+		CqlDate ad_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV tuple_bbipkfiyffdqclchpcxkdafmv)
+		{
+			var cv_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQLifeQuality?.Effective);
+			var cw_ = QICoreCommon_2_0_000.ToInterval(cv_);
 			var cx_ = context.Operators.Start(cw_);
 			var cy_ = context.Operators.DateFrom(cx_);
-			var cz_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSocialLimits?.Effective);
+			var cz_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptomStability?.Effective);
 			var da_ = QICoreCommon_2_0_000.ToInterval(cz_);
 			var db_ = context.Operators.Start(da_);
 			var dc_ = context.Operators.DateFrom(db_);
-			var dd_ = context.Operators.SameAs(cy_, dc_, "day");
-			var de_ = context.Operators.And(cu_, dd_);
-			var df_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSocialLimits?.Value);
-			var dg_ = context.Operators.Not((bool?)(df_ is null));
-			var dh_ = context.Operators.And(de_, dg_);
-			var di_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQLifeQuality?.Value);
-			var dj_ = context.Operators.Not((bool?)(di_ is null));
-			var dk_ = context.Operators.And(dh_, dj_);
-
-			return dk_;
-		};
-		var u_ = context.Operators.WhereOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(s_, t_);
-		CqlDate v_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV tuple_bbipkfiyffdqclchpcxkdafmv)
-		{
-			var dl_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQLifeQuality?.Effective);
+			var dd_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSelfEfficacy?.Effective);
+			var de_ = QICoreCommon_2_0_000.ToInterval(dd_);
+			var df_ = context.Operators.Start(de_);
+			var dg_ = context.Operators.DateFrom(df_);
+			var dh_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptoms?.Effective);
+			var di_ = QICoreCommon_2_0_000.ToInterval(dh_);
+			var dj_ = context.Operators.Start(di_);
+			var dk_ = context.Operators.DateFrom(dj_);
+			var dl_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQPhysicalLimits?.Effective);
 			var dm_ = QICoreCommon_2_0_000.ToInterval(dl_);
 			var dn_ = context.Operators.Start(dm_);
 			var do_ = context.Operators.DateFrom(dn_);
-			var dp_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptomStability?.Effective);
+			var dp_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSocialLimits?.Effective);
 			var dq_ = QICoreCommon_2_0_000.ToInterval(dp_);
 			var dr_ = context.Operators.Start(dq_);
 			var ds_ = context.Operators.DateFrom(dr_);
-			var dt_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSelfEfficacy?.Effective);
-			var du_ = QICoreCommon_2_0_000.ToInterval(dt_);
-			var dv_ = context.Operators.Start(du_);
-			var dw_ = context.Operators.DateFrom(dv_);
-			var dx_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSymptoms?.Effective);
-			var dy_ = QICoreCommon_2_0_000.ToInterval(dx_);
-			var dz_ = context.Operators.Start(dy_);
-			var ea_ = context.Operators.DateFrom(dz_);
-			var eb_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQPhysicalLimits?.Effective);
-			var ec_ = QICoreCommon_2_0_000.ToInterval(eb_);
-			var ed_ = context.Operators.Start(ec_);
-			var ee_ = context.Operators.DateFrom(ed_);
-			var ef_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQSocialLimits?.Effective);
-			var eg_ = QICoreCommon_2_0_000.ToInterval(ef_);
-			var eh_ = context.Operators.Start(eg_);
-			var ei_ = context.Operators.DateFrom(eh_);
-			var ej_ = new CqlDate[]
+			var dt_ = new CqlDate[]
 			{
+				cy_,
+				dc_,
+				dg_,
+				dk_,
 				do_,
 				ds_,
-				dw_,
-				ea_,
-				ee_,
-				ei_,
 			};
-			var ek_ = context.Operators.MaxOrNull<CqlDate>((ej_ as IEnumerable<CqlDate>));
+			var du_ = context.Operators.MaxOrNull<CqlDate>((dt_ as IEnumerable<CqlDate>));
 
-			return ek_;
+			return du_;
 		};
-		var w_ = context.Operators.SelectOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, CqlDate>(u_, v_);
+		var ae_ = context.Operators.SelectOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, CqlDate>(ac_, ad_);
 
-		return w_;
+		return ae_;
 	}
 
     [CqlDeclaration("Date KCCQ Domain Assessment Completed")]
@@ -2433,85 +2064,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_KCCQ_Domain_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_KCCQ_Domain_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC c_(Encounter _ValidEncounters, CqlDate _InitialKCCQAssessmentDate)
-		{
-			var n_ = new Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC
+			var l_ = new Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialKCCQAssessmentDate = _InitialKCCQAssessmentDate,
+				ValidEncounters = _select0.Item1,
+				InitialKCCQAssessmentDate = _select0.Item2,
+				FollowupKCCQAssessmentDate = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC _ValidEncountersInitialKCCQAssessmentDate)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(d_, e_);
+		bool? g_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC tuple_gechmkfhepfubfjyjevegqtrc)
 		{
-			var o_ = this.Date_KCCQ_Domain_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_gechmkfhepfubfjyjevegqtrc.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_gechmkfhepfubfjyjevegqtrc.InitialKCCQAssessmentDate);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_gechmkfhepfubfjyjevegqtrc.FollowupKCCQAssessmentDate);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC f_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC ValidEncountersInitialKCCQAssessmentDate, CqlDate _FollowupKCCQAssessmentDate)
-		{
-			var p_ = new Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC
-			{
-				ValidEncounters = ValidEncountersInitialKCCQAssessmentDate.ValidEncounters,
-				InitialKCCQAssessmentDate = ValidEncountersInitialKCCQAssessmentDate.InitialKCCQAssessmentDate,
-				FollowupKCCQAssessmentDate = _FollowupKCCQAssessmentDate,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC, CqlDate, Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC tuple_gechmkfhepfubfjyjevegqtrc)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_gechmkfhepfubfjyjevegqtrc.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_gechmkfhepfubfjyjevegqtrc.InitialKCCQAssessmentDate);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_gechmkfhepfubfjyjevegqtrc.FollowupKCCQAssessmentDate);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(g_, h_);
-		Encounter j_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC tuple_gechmkfhepfubfjyjevegqtrc) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(f_, g_);
+		Encounter i_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC tuple_gechmkfhepfubfjyjevegqtrc) => 
 			tuple_gechmkfhepfubfjyjevegqtrc.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Domain Score Assessments")]
@@ -2558,85 +2168,64 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Value()
 	{
 		var a_ = this.Qualifying_Encounters();
-		IEnumerable<CqlDate> b_(Encounter _ValidEncounters)
+		var b_ = this.Date_KCCQ_Total_Assessment_Completed();
+		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
+		Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
 		{
-			var m_ = this.Date_KCCQ_Total_Assessment_Completed();
-
-			return m_;
-		};
-		Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf c_(Encounter _ValidEncounters, CqlDate _InitialKCCQTotalScore)
-		{
-			var n_ = new Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf
+			var l_ = new Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf
 			{
-				ValidEncounters = _ValidEncounters,
-				InitialKCCQTotalScore = _InitialKCCQTotalScore,
+				ValidEncounters = _select0.Item1,
+				InitialKCCQTotalScore = _select0.Item2,
+				FollowupKCCQTotalScore = _select0.Item3,
 			};
 
-			return n_;
+			return l_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, CqlDate, Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(a_, b_, c_);
-		IEnumerable<CqlDate> e_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf _ValidEncountersInitialKCCQTotalScore)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(d_, e_);
+		bool? g_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf tuple_dsdkcfqmumbjegqcvveyhpydf)
 		{
-			var o_ = this.Date_KCCQ_Total_Assessment_Completed();
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dsdkcfqmumbjegqcvveyhpydf.ValidEncounters?.Period);
+			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var o_ = context.Operators.End(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(180m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
+			var u_ = context.Operators.ConvertDateToDateTime(tuple_dsdkcfqmumbjegqcvveyhpydf.InitialKCCQTotalScore);
+			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var x_ = context.Operators.End(w_);
+			var y_ = context.Operators.Quantity(14m, "days");
+			var z_ = context.Operators.Subtract(x_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ac_ = context.Operators.End(ab_);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+			var ah_ = context.Operators.End(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.And(t_, aj_);
+			var al_ = context.Operators.ConvertDateToDateTime(tuple_dsdkcfqmumbjegqcvveyhpydf.FollowupKCCQTotalScore);
+			var am_ = context.Operators.DateFrom(al_);
+			var ao_ = context.Operators.DateFrom(u_);
+			var ap_ = context.Operators.Quantity(30m, "days");
+			var aq_ = context.Operators.Add(ao_, ap_);
+			var as_ = context.Operators.DateFrom(u_);
+			var au_ = context.Operators.Add(as_, r_);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
+			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var ax_ = context.Operators.And(ak_, aw_);
 
-			return o_;
+			return ax_;
 		};
-		Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf f_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf ValidEncountersInitialKCCQTotalScore, CqlDate _FollowupKCCQTotalScore)
-		{
-			var p_ = new Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf
-			{
-				ValidEncounters = ValidEncountersInitialKCCQTotalScore.ValidEncounters,
-				InitialKCCQTotalScore = ValidEncountersInitialKCCQTotalScore.InitialKCCQTotalScore,
-				FollowupKCCQTotalScore = _FollowupKCCQTotalScore,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf, CqlDate, Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf tuple_dsdkcfqmumbjegqcvveyhpydf)
-		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(tuple_dsdkcfqmumbjegqcvveyhpydf.ValidEncounters?.Period);
-			var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var s_ = context.Operators.End(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.End(t_);
-			var v_ = context.Operators.Quantity(180m, "days");
-			var w_ = context.Operators.Subtract(u_, v_);
-			var x_ = context.Operators.SameOrBefore(s_, w_, "day");
-			var y_ = context.Operators.ConvertDateToDateTime(tuple_dsdkcfqmumbjegqcvveyhpydf.InitialKCCQTotalScore);
-			var aa_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(14m, "days");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var ag_ = context.Operators.End(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(y_, ah_, "day");
-			var ak_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
-			var al_ = context.Operators.End(ak_);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.And(x_, an_);
-			var ap_ = context.Operators.ConvertDateToDateTime(tuple_dsdkcfqmumbjegqcvveyhpydf.FollowupKCCQTotalScore);
-			var aq_ = context.Operators.DateFrom(ap_);
-			var as_ = context.Operators.DateFrom(y_);
-			var at_ = context.Operators.Quantity(30m, "days");
-			var au_ = context.Operators.Add(as_, at_);
-			var aw_ = context.Operators.DateFrom(y_);
-			var ay_ = context.Operators.Add(aw_, v_);
-			var az_ = context.Operators.Interval(au_, ay_, true, true);
-			var ba_ = context.Operators.ElementInInterval<CqlDate>(aq_, az_, "day");
-			var bb_ = context.Operators.And(ao_, ba_);
-
-			return bb_;
-		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(g_, h_);
-		Encounter j_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf tuple_dsdkcfqmumbjegqcvveyhpydf) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(f_, g_);
+		Encounter i_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf tuple_dsdkcfqmumbjegqcvveyhpydf) => 
 			tuple_dsdkcfqmumbjegqcvveyhpydf.ValidEncounters;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf, Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf, Encounter>(h_, i_);
+		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
-		return l_;
+		return k_;
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Total Score Assessments")]

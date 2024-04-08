@@ -402,24 +402,19 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Value()
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
-		IEnumerable<Encounter> b_(Encounter _OutpatientEncounter1)
-		{
-			var j_ = this.Outpatient_Encounters_with_Advanced_Illness();
-
-			return j_;
-		};
-		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe c_(Encounter _OutpatientEncounter1, Encounter _OutpatientEncounter2)
+		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
+		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _select0)
 		{
 			var k_ = new Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe
 			{
-				OutpatientEncounter1 = _OutpatientEncounter1,
-				OutpatientEncounter2 = _OutpatientEncounter2,
+				OutpatientEncounter1 = _select0.Item1,
+				OutpatientEncounter2 = _select0.Item2,
 			};
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, Encounter, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
+		bool? f_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
 			var m_ = context.Operators.End(l_);
@@ -431,13 +426,13 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return r_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(d_, e_);
-		Encounter g_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
+		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
+		Encounter h_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(f_, g_);
-		var i_ = context.Operators.ExistsInList<Encounter>(h_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
+		var j_ = context.Operators.ExistsInList<Encounter>(i_);
 
-		return i_;
+		return j_;
 	}
 
     [CqlDeclaration("Has Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]

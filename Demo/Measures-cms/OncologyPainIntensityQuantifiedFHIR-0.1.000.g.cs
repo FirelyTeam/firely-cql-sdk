@@ -207,110 +207,72 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 		var a_ = this.Office_Visit();
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = Status_1_6_000.Finished_Encounter(b_);
-		IEnumerable<Procedure> d_(Encounter _FaceToFaceOrTelehealthEncounter)
+		var d_ = this.Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period();
+		var f_ = this.Cancer();
+		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
+		var h_ = context.Operators.CrossJoin<Encounter, Procedure, Procedure, Condition>(c_, d_, d_, g_);
+		Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT i_(ValueTuple<Encounter,Procedure,Procedure,Condition> _select0)
 		{
-			var q_ = this.Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period();
-
-			return q_;
-		};
-		Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT e_(Encounter _FaceToFaceOrTelehealthEncounter, Procedure _ChemoBeforeEncounter)
-		{
-			var r_ = new Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT
+			var o_ = new Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT
 			{
-				FaceToFaceOrTelehealthEncounter = _FaceToFaceOrTelehealthEncounter,
-				ChemoBeforeEncounter = _ChemoBeforeEncounter,
+				FaceToFaceOrTelehealthEncounter = _select0.Item1,
+				ChemoBeforeEncounter = _select0.Item2,
+				ChemoAfterEncounter = _select0.Item3,
+				Cancer = _select0.Item4,
 			};
 
-			return r_;
+			return o_;
 		};
-		var f_ = context.Operators.SelectManyResultsOrNull<Encounter, Procedure, Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(c_, d_, e_);
-		IEnumerable<Procedure> g_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT _FaceToFaceOrTelehealthEncounterChemoBeforeEncounter)
+		var j_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Procedure,Procedure,Condition>, Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(h_, i_);
+		bool? k_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt)
 		{
-			var s_ = this.Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period();
+			var p_ = QICoreCommon_2_0_000.isActive(tuple_hehdgghaahjzgibaaamlgasgt.Cancer);
+			var q_ = QICoreCommon_2_0_000.prevalenceInterval(tuple_hehdgghaahjzgibaaamlgasgt.Cancer);
+			var r_ = FHIRHelpers_4_3_000.ToInterval(tuple_hehdgghaahjzgibaaamlgasgt.FaceToFaceOrTelehealthEncounter?.Period);
+			var s_ = context.Operators.Overlaps(q_, r_, null);
+			var t_ = context.Operators.And(p_, s_);
+			var u_ = FHIRHelpers_4_3_000.ToValue(tuple_hehdgghaahjzgibaaamlgasgt.ChemoBeforeEncounter?.Performed);
+			var v_ = QICoreCommon_2_0_000.toInterval(u_);
+			var w_ = context.Operators.Start(v_);
+			var y_ = context.Operators.End(r_);
+			var z_ = context.Operators.Quantity(30m, "days");
+			var aa_ = context.Operators.Subtract(y_, z_);
+			var ac_ = context.Operators.End(r_);
+			var ad_ = context.Operators.Interval(aa_, ac_, true, true);
+			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(w_, ad_, "day");
+			var ag_ = context.Operators.End(r_);
+			var ah_ = context.Operators.Not((bool?)(ag_ is null));
+			var ai_ = context.Operators.And(ae_, ah_);
+			var aj_ = context.Operators.And(t_, ai_);
+			var ak_ = FHIRHelpers_4_3_000.ToValue(tuple_hehdgghaahjzgibaaamlgasgt.ChemoAfterEncounter?.Performed);
+			var al_ = QICoreCommon_2_0_000.toInterval(ak_);
+			var am_ = context.Operators.Start(al_);
+			var ao_ = context.Operators.End(r_);
+			var aq_ = context.Operators.End(r_);
+			var as_ = context.Operators.Add(aq_, z_);
+			var at_ = context.Operators.Interval(ao_, as_, true, true);
+			var au_ = context.Operators.ElementInInterval<CqlDateTime>(am_, at_, "day");
+			var aw_ = context.Operators.End(r_);
+			var ax_ = context.Operators.Not((bool?)(aw_ is null));
+			var ay_ = context.Operators.And(au_, ax_);
+			var az_ = context.Operators.And(aj_, ay_);
+			var bb_ = QICoreCommon_2_0_000.toInterval(ak_);
+			var bd_ = QICoreCommon_2_0_000.toInterval(u_);
+			var be_ = context.Operators.IntervalSameAs<CqlDateTime>(bb_, bd_, "day");
+			var bf_ = context.Operators.Not(be_);
+			var bg_ = context.Operators.And(az_, bf_);
+			var bh_ = this.Measurement_Period();
+			var bj_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bh_, r_, null);
+			var bk_ = context.Operators.And(bg_, bj_);
 
-			return s_;
+			return bk_;
 		};
-		Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT h_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT FaceToFaceOrTelehealthEncounterChemoBeforeEncounter, Procedure _ChemoAfterEncounter)
-		{
-			var t_ = new Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT
-			{
-				FaceToFaceOrTelehealthEncounter = FaceToFaceOrTelehealthEncounterChemoBeforeEncounter.FaceToFaceOrTelehealthEncounter,
-				ChemoBeforeEncounter = FaceToFaceOrTelehealthEncounterChemoBeforeEncounter.ChemoBeforeEncounter,
-				ChemoAfterEncounter = _ChemoAfterEncounter,
-			};
-
-			return t_;
-		};
-		var i_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Procedure, Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(f_, g_, h_);
-		IEnumerable<Condition> j_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT _FaceToFaceOrTelehealthEncounterChemoBeforeEncounterChemoAfterEncounter)
-		{
-			var u_ = this.Cancer();
-			var v_ = context.Operators.RetrieveByValueSet<Condition>(u_, null);
-
-			return v_;
-		};
-		Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT k_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT FaceToFaceOrTelehealthEncounterChemoBeforeEncounterChemoAfterEncounter, Condition _Cancer)
-		{
-			var w_ = new Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT
-			{
-				FaceToFaceOrTelehealthEncounter = FaceToFaceOrTelehealthEncounterChemoBeforeEncounterChemoAfterEncounter.FaceToFaceOrTelehealthEncounter,
-				ChemoBeforeEncounter = FaceToFaceOrTelehealthEncounterChemoBeforeEncounterChemoAfterEncounter.ChemoBeforeEncounter,
-				ChemoAfterEncounter = FaceToFaceOrTelehealthEncounterChemoBeforeEncounterChemoAfterEncounter.ChemoAfterEncounter,
-				Cancer = _Cancer,
-			};
-
-			return w_;
-		};
-		var l_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Condition, Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(i_, j_, k_);
-		bool? m_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt)
-		{
-			var x_ = QICoreCommon_2_0_000.isActive(tuple_hehdgghaahjzgibaaamlgasgt.Cancer);
-			var y_ = QICoreCommon_2_0_000.prevalenceInterval(tuple_hehdgghaahjzgibaaamlgasgt.Cancer);
-			var z_ = FHIRHelpers_4_3_000.ToInterval(tuple_hehdgghaahjzgibaaamlgasgt.FaceToFaceOrTelehealthEncounter?.Period);
-			var aa_ = context.Operators.Overlaps(y_, z_, null);
-			var ab_ = context.Operators.And(x_, aa_);
-			var ac_ = FHIRHelpers_4_3_000.ToValue(tuple_hehdgghaahjzgibaaamlgasgt.ChemoBeforeEncounter?.Performed);
-			var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var ae_ = context.Operators.Start(ad_);
-			var ag_ = context.Operators.End(z_);
-			var ah_ = context.Operators.Quantity(30m, "days");
-			var ai_ = context.Operators.Subtract(ag_, ah_);
-			var ak_ = context.Operators.End(z_);
-			var al_ = context.Operators.Interval(ai_, ak_, true, true);
-			var am_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, al_, "day");
-			var ao_ = context.Operators.End(z_);
-			var ap_ = context.Operators.Not((bool?)(ao_ is null));
-			var aq_ = context.Operators.And(am_, ap_);
-			var ar_ = context.Operators.And(ab_, aq_);
-			var as_ = FHIRHelpers_4_3_000.ToValue(tuple_hehdgghaahjzgibaaamlgasgt.ChemoAfterEncounter?.Performed);
-			var at_ = QICoreCommon_2_0_000.toInterval(as_);
-			var au_ = context.Operators.Start(at_);
-			var aw_ = context.Operators.End(z_);
-			var ay_ = context.Operators.End(z_);
-			var ba_ = context.Operators.Add(ay_, ah_);
-			var bb_ = context.Operators.Interval(aw_, ba_, true, true);
-			var bc_ = context.Operators.ElementInInterval<CqlDateTime>(au_, bb_, "day");
-			var be_ = context.Operators.End(z_);
-			var bf_ = context.Operators.Not((bool?)(be_ is null));
-			var bg_ = context.Operators.And(bc_, bf_);
-			var bh_ = context.Operators.And(ar_, bg_);
-			var bj_ = QICoreCommon_2_0_000.toInterval(as_);
-			var bl_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var bm_ = context.Operators.IntervalSameAs<CqlDateTime>(bj_, bl_, "day");
-			var bn_ = context.Operators.Not(bm_);
-			var bo_ = context.Operators.And(bh_, bn_);
-			var bp_ = this.Measurement_Period();
-			var br_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bp_, z_, null);
-			var bs_ = context.Operators.And(bo_, br_);
-
-			return bs_;
-		};
-		var n_ = context.Operators.WhereOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(l_, m_);
-		Encounter o_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt) => 
+		var l_ = context.Operators.WhereOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(j_, k_);
+		Encounter m_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt) => 
 			tuple_hehdgghaahjzgibaaamlgasgt.FaceToFaceOrTelehealthEncounter;
-		var p_ = context.Operators.SelectOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Encounter>(n_, o_);
+		var n_ = context.Operators.SelectOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Encounter>(l_, m_);
 
-		return p_;
+		return n_;
 	}
 
     [CqlDeclaration("Face to Face or Telehealth Encounter with Ongoing Chemotherapy")]

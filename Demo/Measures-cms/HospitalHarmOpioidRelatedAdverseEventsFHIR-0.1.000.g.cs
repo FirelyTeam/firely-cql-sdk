@@ -368,106 +368,86 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private IEnumerable<Encounter> Encounter_with_Non_Enteral_Opioid_Antagonist_Administration_Outside_of_Operating_Room_and_within_12_Hrs_After_Opioid_Value()
 	{
 		var a_ = this.Opioid_Antagonist_Administration();
-		IEnumerable<MedicationAdministration> b_(MedicationAdministration _OpioidAntagonistGiven)
+		var b_ = this.Opioid_Administration();
+		var c_ = this.Denominator();
+		var d_ = context.Operators.CrossJoin<MedicationAdministration, MedicationAdministration, Encounter>(a_, b_, c_);
+		Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI e_(ValueTuple<MedicationAdministration,MedicationAdministration,Encounter> _select0)
 		{
-			var l_ = this.Opioid_Administration();
-
-			return l_;
-		};
-		Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI c_(MedicationAdministration _OpioidAntagonistGiven, MedicationAdministration _OpioidGiven)
-		{
-			var m_ = new Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI
+			var k_ = new Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI
 			{
-				OpioidAntagonistGiven = _OpioidAntagonistGiven,
-				OpioidGiven = _OpioidGiven,
+				OpioidAntagonistGiven = _select0.Item1,
+				OpioidGiven = _select0.Item2,
+				EncounterWithQualifyingAge = _select0.Item3,
 			};
 
-			return m_;
+			return k_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<MedicationAdministration, MedicationAdministration, Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(a_, b_, c_);
-		IEnumerable<Encounter> e_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI _OpioidAntagonistGivenOpioidGiven)
+		var f_ = context.Operators.SelectOrNull<ValueTuple<MedicationAdministration,MedicationAdministration,Encounter>, Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(d_, e_);
+		bool? g_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI tuple_eupiswiddkenbbaixeecrbcdi)
 		{
-			var n_ = this.Denominator();
-
-			return n_;
-		};
-		Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI f_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI OpioidAntagonistGivenOpioidGiven, Encounter _EncounterWithQualifyingAge)
-		{
-			var o_ = new Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI
+			bool? l_(Encounter.LocationComponent EncounterLocation)
 			{
-				OpioidAntagonistGiven = OpioidAntagonistGivenOpioidGiven.OpioidAntagonistGiven,
-				OpioidGiven = OpioidAntagonistGivenOpioidGiven.OpioidGiven,
-				EncounterWithQualifyingAge = _EncounterWithQualifyingAge,
-			};
-
-			return o_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI, Encounter, Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(d_, e_, f_);
-		bool? h_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI tuple_eupiswiddkenbbaixeecrbcdi)
-		{
-			bool? p_(Encounter.LocationComponent EncounterLocation)
-			{
-				var bc_ = CQMCommon_2_0_000.GetLocation(EncounterLocation?.Location);
-				CqlConcept bd_(CodeableConcept @this)
+				var ay_ = CQMCommon_2_0_000.GetLocation(EncounterLocation?.Location);
+				CqlConcept az_(CodeableConcept @this)
 				{
-					var bn_ = FHIRHelpers_4_3_000.ToConcept(@this);
+					var bj_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-					return bn_;
+					return bj_;
 				};
-				var be_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(bc_?.Type, bd_);
-				var bf_ = this.Operating_Room_Suite();
-				var bg_ = context.Operators.ConceptsInValueSet(be_, bf_);
-				var bh_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidAntagonistGiven?.Effective);
-				var bi_ = QICoreCommon_2_0_000.ToInterval(bh_);
-				var bj_ = context.Operators.Start(bi_);
-				var bk_ = FHIRHelpers_4_3_000.ToInterval(EncounterLocation?.Period);
-				var bl_ = context.Operators.ElementInInterval<CqlDateTime>(bj_, bk_, null);
-				var bm_ = context.Operators.And(bg_, bl_);
+				var ba_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(ay_?.Type, az_);
+				var bb_ = this.Operating_Room_Suite();
+				var bc_ = context.Operators.ConceptsInValueSet(ba_, bb_);
+				var bd_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidAntagonistGiven?.Effective);
+				var be_ = QICoreCommon_2_0_000.ToInterval(bd_);
+				var bf_ = context.Operators.Start(be_);
+				var bg_ = FHIRHelpers_4_3_000.ToInterval(EncounterLocation?.Period);
+				var bh_ = context.Operators.ElementInInterval<CqlDateTime>(bf_, bg_, null);
+				var bi_ = context.Operators.And(bc_, bh_);
 
-				return bm_;
+				return bi_;
 			};
-			var q_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((tuple_eupiswiddkenbbaixeecrbcdi.EncounterWithQualifyingAge?.Location as IEnumerable<Encounter.LocationComponent>), p_);
-			var r_ = context.Operators.ExistsInList<Encounter.LocationComponent>(q_);
-			var s_ = context.Operators.Not(r_);
-			var t_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidAntagonistGiven?.Effective);
-			var u_ = QICoreCommon_2_0_000.ToInterval(t_);
-			var v_ = context.Operators.Start(u_);
-			var w_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_eupiswiddkenbbaixeecrbcdi.EncounterWithQualifyingAge);
-			var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
-			var y_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidGiven?.Effective);
-			var z_ = QICoreCommon_2_0_000.ToInterval(y_);
-			var aa_ = context.Operators.Start(z_);
-			var ac_ = context.Operators.ElementInInterval<CqlDateTime>(aa_, w_, null);
-			var ad_ = context.Operators.And(x_, ac_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(y_);
-			var ag_ = context.Operators.End(af_);
-			var ai_ = QICoreCommon_2_0_000.ToInterval(t_);
-			var aj_ = context.Operators.Start(ai_);
-			var ak_ = context.Operators.Quantity(12m, "hours");
-			var al_ = context.Operators.Subtract(aj_, ak_);
-			var an_ = QICoreCommon_2_0_000.ToInterval(t_);
-			var ao_ = context.Operators.Start(an_);
-			var ap_ = context.Operators.Interval(al_, ao_, true, false);
-			var aq_ = context.Operators.ElementInInterval<CqlDateTime>(ag_, ap_, null);
-			var as_ = QICoreCommon_2_0_000.ToInterval(t_);
-			var at_ = context.Operators.Start(as_);
-			var au_ = context.Operators.Not((bool?)(at_ is null));
-			var av_ = context.Operators.And(aq_, au_);
-			var aw_ = context.Operators.And(ad_, av_);
-			var ax_ = FHIRHelpers_4_3_000.ToConcept(tuple_eupiswiddkenbbaixeecrbcdi.OpioidAntagonistGiven?.Dosage?.Route);
-			var ay_ = this.Routes_of_Administration_for_Opioid_Antagonists();
-			var az_ = context.Operators.ConceptInValueSet(ax_, ay_);
-			var ba_ = context.Operators.And(aw_, az_);
-			var bb_ = context.Operators.And(s_, ba_);
+			var m_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((tuple_eupiswiddkenbbaixeecrbcdi.EncounterWithQualifyingAge?.Location as IEnumerable<Encounter.LocationComponent>), l_);
+			var n_ = context.Operators.ExistsInList<Encounter.LocationComponent>(m_);
+			var o_ = context.Operators.Not(n_);
+			var p_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidAntagonistGiven?.Effective);
+			var q_ = QICoreCommon_2_0_000.ToInterval(p_);
+			var r_ = context.Operators.Start(q_);
+			var s_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_eupiswiddkenbbaixeecrbcdi.EncounterWithQualifyingAge);
+			var t_ = context.Operators.ElementInInterval<CqlDateTime>(r_, s_, null);
+			var u_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidGiven?.Effective);
+			var v_ = QICoreCommon_2_0_000.ToInterval(u_);
+			var w_ = context.Operators.Start(v_);
+			var y_ = context.Operators.ElementInInterval<CqlDateTime>(w_, s_, null);
+			var z_ = context.Operators.And(t_, y_);
+			var ab_ = QICoreCommon_2_0_000.ToInterval(u_);
+			var ac_ = context.Operators.End(ab_);
+			var ae_ = QICoreCommon_2_0_000.ToInterval(p_);
+			var af_ = context.Operators.Start(ae_);
+			var ag_ = context.Operators.Quantity(12m, "hours");
+			var ah_ = context.Operators.Subtract(af_, ag_);
+			var aj_ = QICoreCommon_2_0_000.ToInterval(p_);
+			var ak_ = context.Operators.Start(aj_);
+			var al_ = context.Operators.Interval(ah_, ak_, true, false);
+			var am_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, al_, null);
+			var ao_ = QICoreCommon_2_0_000.ToInterval(p_);
+			var ap_ = context.Operators.Start(ao_);
+			var aq_ = context.Operators.Not((bool?)(ap_ is null));
+			var ar_ = context.Operators.And(am_, aq_);
+			var as_ = context.Operators.And(z_, ar_);
+			var at_ = FHIRHelpers_4_3_000.ToConcept(tuple_eupiswiddkenbbaixeecrbcdi.OpioidAntagonistGiven?.Dosage?.Route);
+			var au_ = this.Routes_of_Administration_for_Opioid_Antagonists();
+			var av_ = context.Operators.ConceptInValueSet(at_, au_);
+			var aw_ = context.Operators.And(as_, av_);
+			var ax_ = context.Operators.And(o_, aw_);
 
-			return bb_;
+			return ax_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(g_, h_);
-		Encounter j_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI tuple_eupiswiddkenbbaixeecrbcdi) => 
+		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(f_, g_);
+		Encounter i_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI tuple_eupiswiddkenbbaixeecrbcdi) => 
 			tuple_eupiswiddkenbbaixeecrbcdi.EncounterWithQualifyingAge;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI, Encounter>(i_, j_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI, Encounter>(h_, i_);
 
-		return k_;
+		return j_;
 	}
 
     [CqlDeclaration("Encounter with Non Enteral Opioid Antagonist Administration Outside of Operating Room and within 12 Hrs After Opioid")]

@@ -273,108 +273,116 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	private IEnumerable<Observation> Glucose_Test_with_Result_Less_Than_40_Value()
 	{
 		var a_ = this.Denominator();
-		IEnumerable<MedicationAdministration> b_(Encounter _QualifyingEncounter)
+		var b_ = this.Hypoglycemic_Medication_Administration();
+		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
+		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		var e_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(a_, b_, d_);
+		Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ f_(ValueTuple<Encounter,MedicationAdministration,Observation> _select0)
 		{
-			var l_ = this.Hypoglycemic_Medication_Administration();
+			var l_ = new Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ
+			{
+				QualifyingEncounter = _select0.Item1,
+				HypoglycemicMedication = _select0.Item2,
+				GlucoseTest = _select0.Item3,
+			};
 
 			return l_;
 		};
-		Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ c_(Encounter _QualifyingEncounter, MedicationAdministration _HypoglycemicMedication)
-		{
-			var m_ = new Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ
-			{
-				QualifyingEncounter = _QualifyingEncounter,
-				HypoglycemicMedication = _HypoglycemicMedication,
-			};
-
-			return m_;
-		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, MedicationAdministration, Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(a_, b_, c_);
-		IEnumerable<Observation> e_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ _QualifyingEncounterHypoglycemicMedication)
-		{
-			var n_ = this.Glucose_Lab_Test_Mass_Per_Volume();
-			var o_ = context.Operators.RetrieveByValueSet<Observation>(n_, null);
-
-			return o_;
-		};
-		Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ f_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ QualifyingEncounterHypoglycemicMedication, Observation _GlucoseTest)
-		{
-			var p_ = new Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ
-			{
-				QualifyingEncounter = QualifyingEncounterHypoglycemicMedication.QualifyingEncounter,
-				HypoglycemicMedication = QualifyingEncounterHypoglycemicMedication.HypoglycemicMedication,
-				GlucoseTest = _GlucoseTest,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ, Observation, Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(d_, e_, f_);
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(e_, f_);
 		bool? h_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz)
 		{
-			object q_()
+			object m_()
 			{
 				if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
 				{
-					var at_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var ap_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((at_ as CqlDateTime) as object);
+					return ((ap_ as CqlDateTime) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
 				{
-					var au_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var aq_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((au_ as CqlInterval<CqlDateTime>) as object);
+					return ((aq_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
 				{
-					var av_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var ar_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((av_ as CqlDateTime) as object);
+					return ((ar_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
 				};
 			};
-			var r_ = QICoreCommon_2_0_000.Earliest(q_());
-			var s_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dsfjbilfcbvjwbysgxhdjckiz.QualifyingEncounter);
-			var t_ = context.Operators.ElementInInterval<CqlDateTime>(r_, s_, null);
-			var u_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.StatusElement?.Value);
-			var v_ = context.Operators.Convert<string>(u_);
-			var w_ = new string[]
+			var n_ = QICoreCommon_2_0_000.Earliest(m_());
+			var o_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dsfjbilfcbvjwbysgxhdjckiz.QualifyingEncounter);
+			var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+			var q_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.StatusElement?.Value);
+			var r_ = context.Operators.Convert<string>(q_);
+			var s_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
-			var y_ = context.Operators.And(t_, x_);
-			var z_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Value);
-			var aa_ = context.Operators.Quantity(40m, "mg/dL");
-			var ab_ = context.Operators.Less((z_ as CqlQuantity), aa_);
-			var ac_ = context.Operators.And(y_, ab_);
-			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.HypoglycemicMedication?.Effective);
-			var ae_ = QICoreCommon_2_0_000.ToInterval(ad_);
-			var af_ = context.Operators.Start(ae_);
+			var t_ = context.Operators.InList<string>(r_, (s_ as IEnumerable<string>));
+			var u_ = context.Operators.And(p_, t_);
+			var v_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Value);
+			var w_ = context.Operators.Quantity(40m, "mg/dL");
+			var x_ = context.Operators.Less((v_ as CqlQuantity), w_);
+			var y_ = context.Operators.And(u_, x_);
+			var z_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.HypoglycemicMedication?.Effective);
+			var aa_ = QICoreCommon_2_0_000.ToInterval(z_);
+			var ab_ = context.Operators.Start(aa_);
+			object ac_()
+			{
+				if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
+				{
+					var as_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+
+					return ((as_ as CqlDateTime) as object);
+				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
+				{
+					var at_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+
+					return ((at_ as CqlInterval<CqlDateTime>) as object);
+				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
+				{
+					var au_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+
+					return ((au_ as CqlDateTime) as object);
+				}
+				else
+				{
+					return null;
+				};
+			};
+			var ad_ = QICoreCommon_2_0_000.Earliest(ac_());
+			var ae_ = context.Operators.Quantity(24m, "hours");
+			var af_ = context.Operators.Subtract(ad_, ae_);
 			object ag_()
 			{
 				if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
 				{
-					var aw_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var av_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((aw_ as CqlDateTime) as object);
+					return ((av_ as CqlDateTime) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
 				{
-					var ax_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var aw_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((ax_ as CqlInterval<CqlDateTime>) as object);
+					return ((aw_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
 				{
-					var ay_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var ax_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((ay_ as CqlDateTime) as object);
+					return ((ax_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -382,27 +390,27 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var ah_ = QICoreCommon_2_0_000.Earliest(ag_());
-			var ai_ = context.Operators.Quantity(24m, "hours");
-			var aj_ = context.Operators.Subtract(ah_, ai_);
+			var ai_ = context.Operators.Interval(af_, ah_, true, true);
+			var aj_ = context.Operators.ElementInInterval<CqlDateTime>(ab_, ai_, null);
 			object ak_()
 			{
 				if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
 				{
-					var az_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var ay_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((az_ as CqlDateTime) as object);
+					return ((ay_ as CqlDateTime) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
 				{
-					var ba_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var az_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((ba_ as CqlInterval<CqlDateTime>) as object);
+					return ((az_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
 				{
-					var bb_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+					var ba_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
 
-					return ((bb_ as CqlDateTime) as object);
+					return ((ba_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -410,39 +418,11 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var al_ = QICoreCommon_2_0_000.Earliest(ak_());
-			var am_ = context.Operators.Interval(aj_, al_, true, true);
-			var an_ = context.Operators.ElementInInterval<CqlDateTime>(af_, am_, null);
-			object ao_()
-			{
-				if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
-				{
-					var bc_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
+			var am_ = context.Operators.Not((bool?)(al_ is null));
+			var an_ = context.Operators.And(aj_, am_);
+			var ao_ = context.Operators.And(y_, an_);
 
-					return ((bc_ as CqlDateTime) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
-				{
-					var bd_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
-
-					return ((bd_ as CqlInterval<CqlDateTime>) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective) is CqlDateTime)
-				{
-					var be_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Effective);
-
-					return ((be_ as CqlDateTime) as object);
-				}
-				else
-				{
-					return null;
-				};
-			};
-			var ap_ = QICoreCommon_2_0_000.Earliest(ao_());
-			var aq_ = context.Operators.Not((bool?)(ap_ is null));
-			var ar_ = context.Operators.And(an_, aq_);
-			var as_ = context.Operators.And(ac_, ar_);
-
-			return as_;
+			return ao_;
 		};
 		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(g_, h_);
 		Observation j_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz) => 
@@ -459,63 +439,95 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	private IEnumerable<Observation> Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80_Value()
 	{
 		var a_ = this.Denominator();
-		IEnumerable<Observation> b_(Encounter _QualifyingEncounter)
+		var b_ = this.Glucose_Test_with_Result_Less_Than_40();
+		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
+		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		var e_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(a_, b_, d_);
+		Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ f_(ValueTuple<Encounter,Observation,Observation> _select0)
 		{
-			var l_ = this.Glucose_Test_with_Result_Less_Than_40();
+			var l_ = new Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ
+			{
+				QualifyingEncounter = _select0.Item1,
+				LowGlucoseTest = _select0.Item2,
+				FollowupGlucoseTest = _select0.Item3,
+			};
 
 			return l_;
 		};
-		Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ c_(Encounter _QualifyingEncounter, Observation _LowGlucoseTest)
-		{
-			var m_ = new Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ
-			{
-				QualifyingEncounter = _QualifyingEncounter,
-				LowGlucoseTest = _LowGlucoseTest,
-			};
-
-			return m_;
-		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, Observation, Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(a_, b_, c_);
-		IEnumerable<Observation> e_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ _QualifyingEncounterLowGlucoseTest)
-		{
-			var n_ = this.Glucose_Lab_Test_Mass_Per_Volume();
-			var o_ = context.Operators.RetrieveByValueSet<Observation>(n_, null);
-
-			return o_;
-		};
-		Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ f_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ QualifyingEncounterLowGlucoseTest, Observation _FollowupGlucoseTest)
-		{
-			var p_ = new Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ
-			{
-				QualifyingEncounter = QualifyingEncounterLowGlucoseTest.QualifyingEncounter,
-				LowGlucoseTest = QualifyingEncounterLowGlucoseTest.LowGlucoseTest,
-				FollowupGlucoseTest = _FollowupGlucoseTest,
-			};
-
-			return p_;
-		};
-		var g_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ, Observation, Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(d_, e_, f_);
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation,Observation>, Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(e_, f_);
 		bool? h_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz)
 		{
-			object q_()
+			object m_()
 			{
 				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective) is CqlDateTime)
 				{
-					var ba_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
+					var aw_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
 
-					return ((ba_ as CqlDateTime) as object);
+					return ((aw_ as CqlDateTime) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
 				{
-					var bb_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
+					var ax_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
 
-					return ((bb_ as CqlInterval<CqlDateTime>) as object);
+					return ((ax_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective) is CqlDateTime)
 				{
-					var bc_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
+					var ay_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
+
+					return ((ay_ as CqlDateTime) as object);
+				}
+				else
+				{
+					return null;
+				};
+			};
+			var n_ = QICoreCommon_2_0_000.Earliest(m_());
+			object o_()
+			{
+				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
+				{
+					var az_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+
+					return ((az_ as CqlDateTime) as object);
+				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
+				{
+					var ba_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+
+					return ((ba_ as CqlInterval<CqlDateTime>) as object);
+				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
+				{
+					var bb_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+
+					return ((bb_ as CqlDateTime) as object);
+				}
+				else
+				{
+					return null;
+				};
+			};
+			var p_ = QICoreCommon_2_0_000.Earliest(o_());
+			object q_()
+			{
+				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
+				{
+					var bc_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
 
 					return ((bc_ as CqlDateTime) as object);
+				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
+				{
+					var bd_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+
+					return ((bd_ as CqlInterval<CqlDateTime>) as object);
+				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
+				{
+					var be_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+
+					return ((be_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -523,81 +535,57 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var r_ = QICoreCommon_2_0_000.Earliest(q_());
-			object s_()
+			var s_ = context.Operators.Quantity(5m, "minutes");
+			var t_ = context.Operators.Add(r_, s_);
+			var u_ = context.Operators.Interval(p_, t_, false, true);
+			var v_ = context.Operators.ElementInInterval<CqlDateTime>(n_, u_, null);
+			object w_()
 			{
 				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
-				{
-					var bd_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((bd_ as CqlDateTime) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
-				{
-					var be_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((be_ as CqlInterval<CqlDateTime>) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
 				{
 					var bf_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
 
 					return ((bf_ as CqlDateTime) as object);
 				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
+				{
+					var bg_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+
+					return ((bg_ as CqlInterval<CqlDateTime>) as object);
+				}
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
+				{
+					var bh_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+
+					return ((bh_ as CqlDateTime) as object);
+				}
 				else
 				{
 					return null;
 				};
 			};
-			var t_ = QICoreCommon_2_0_000.Earliest(s_());
-			object u_()
+			var x_ = QICoreCommon_2_0_000.Earliest(w_());
+			var y_ = context.Operators.Not((bool?)(x_ is null));
+			var z_ = context.Operators.And(v_, y_);
+			object aa_()
 			{
 				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
-				{
-					var bg_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((bg_ as CqlDateTime) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
-				{
-					var bh_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((bh_ as CqlInterval<CqlDateTime>) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
 				{
 					var bi_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
 
 					return ((bi_ as CqlDateTime) as object);
 				}
-				else
-				{
-					return null;
-				};
-			};
-			var v_ = QICoreCommon_2_0_000.Earliest(u_());
-			var w_ = context.Operators.Quantity(5m, "minutes");
-			var x_ = context.Operators.Add(v_, w_);
-			var y_ = context.Operators.Interval(t_, x_, false, true);
-			var z_ = context.Operators.ElementInInterval<CqlDateTime>(r_, y_, null);
-			object aa_()
-			{
-				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
+				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
 				{
 					var bj_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
 
-					return ((bj_ as CqlDateTime) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
-				{
-					var bk_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((bk_ as CqlInterval<CqlDateTime>) as object);
+					return ((bj_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
 				{
-					var bl_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
+					var bk_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
 
-					return ((bl_ as CqlDateTime) as object);
+					return ((bk_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -605,84 +593,56 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var ab_ = QICoreCommon_2_0_000.Earliest(aa_());
-			var ac_ = context.Operators.Not((bool?)(ab_ is null));
-			var ad_ = context.Operators.And(z_, ac_);
-			object ae_()
-			{
-				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
-				{
-					var bm_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((bm_ as CqlDateTime) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
-				{
-					var bn_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((bn_ as CqlInterval<CqlDateTime>) as object);
-				}
-				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective) is CqlDateTime)
-				{
-					var bo_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.Effective);
-
-					return ((bo_ as CqlDateTime) as object);
-				}
-				else
-				{
-					return null;
-				};
-			};
-			var af_ = QICoreCommon_2_0_000.Earliest(ae_());
-			var ag_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_cqtbbrgobhbjhtlcmkyteoihz.QualifyingEncounter);
-			var ah_ = context.Operators.ElementInInterval<CqlDateTime>(af_, ag_, null);
-			var ai_ = context.Operators.And(ad_, ah_);
-			object aj_()
+			var ac_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_cqtbbrgobhbjhtlcmkyteoihz.QualifyingEncounter);
+			var ad_ = context.Operators.ElementInInterval<CqlDateTime>(ab_, ac_, null);
+			var ae_ = context.Operators.And(z_, ad_);
+			object af_()
 			{
 				if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective) is CqlDateTime)
 				{
-					var bp_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
+					var bl_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
 
-					return ((bp_ as CqlDateTime) as object);
+					return ((bl_ as CqlDateTime) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective) is CqlInterval<CqlDateTime>)
 				{
-					var bq_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
+					var bm_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
 
-					return ((bq_ as CqlInterval<CqlDateTime>) as object);
+					return ((bm_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective) is CqlDateTime)
 				{
-					var br_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
+					var bn_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Effective);
 
-					return ((br_ as CqlDateTime) as object);
+					return ((bn_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
 				};
 			};
-			var ak_ = QICoreCommon_2_0_000.Earliest(aj_());
-			var am_ = context.Operators.ElementInInterval<CqlDateTime>(ak_, ag_, null);
-			var an_ = context.Operators.And(ai_, am_);
-			var ao_ = context.Operators.Equivalent(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.IdElement?.Value, tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.IdElement?.Value);
-			var ap_ = context.Operators.Not(ao_);
-			var aq_ = context.Operators.And(an_, ap_);
-			var ar_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.StatusElement?.Value);
-			var as_ = context.Operators.Convert<string>(ar_);
-			var at_ = new string[]
+			var ag_ = QICoreCommon_2_0_000.Earliest(af_());
+			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(ag_, ac_, null);
+			var aj_ = context.Operators.And(ae_, ai_);
+			var ak_ = context.Operators.Equivalent(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.IdElement?.Value, tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.IdElement?.Value);
+			var al_ = context.Operators.Not(ak_);
+			var am_ = context.Operators.And(aj_, al_);
+			var an_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.StatusElement?.Value);
+			var ao_ = context.Operators.Convert<string>(an_);
+			var ap_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var au_ = context.Operators.InList<string>(as_, (at_ as IEnumerable<string>));
-			var av_ = context.Operators.And(aq_, au_);
-			var aw_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Value);
-			var ax_ = context.Operators.Quantity(80m, "mg/dL");
-			var ay_ = context.Operators.Greater((aw_ as CqlQuantity), ax_);
-			var az_ = context.Operators.And(av_, ay_);
+			var aq_ = context.Operators.InList<string>(ao_, (ap_ as IEnumerable<string>));
+			var ar_ = context.Operators.And(am_, aq_);
+			var as_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Value);
+			var at_ = context.Operators.Quantity(80m, "mg/dL");
+			var au_ = context.Operators.Greater((as_ as CqlQuantity), at_);
+			var av_ = context.Operators.And(ar_, au_);
 
-			return az_;
+			return av_;
 		};
 		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(g_, h_);
 		Observation j_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz) => 
@@ -733,24 +693,20 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	private IEnumerable<Encounter> Encounter_with_Severe_Hypoglycemic_Harm_Event_Value()
 	{
 		var a_ = this.Denominator();
-		IEnumerable<Observation> b_(Encounter _QualifyingEncounter)
-		{
-			var i_ = this.Severe_Hypoglycemic_Harm_Event();
-
-			return i_;
-		};
-		Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS c_(Encounter _QualifyingEncounter, Observation _HypoglycemicEvent)
+		var b_ = this.Severe_Hypoglycemic_Harm_Event();
+		var c_ = context.Operators.CrossJoin<Encounter, Observation>(a_, b_);
+		Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS d_(ValueTuple<Encounter,Observation> _select0)
 		{
 			var j_ = new Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS
 			{
-				QualifyingEncounter = _QualifyingEncounter,
-				HypoglycemicEvent = _HypoglycemicEvent,
+				QualifyingEncounter = _select0.Item1,
+				HypoglycemicEvent = _select0.Item2,
 			};
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, Observation, Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(c_, d_);
+		bool? f_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs)
 		{
 			object k_()
 			{
@@ -783,12 +739,12 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return n_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(d_, e_);
-		Encounter g_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs) => 
+		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(e_, f_);
+		Encounter h_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs) => 
 			tuple_dkowlzzjeftkbjljexpnieafs.QualifyingEncounter;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(f_, g_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(g_, h_);
 
-		return h_;
+		return i_;
 	}
 
     [CqlDeclaration("Encounter with Severe Hypoglycemic Harm Event")]
