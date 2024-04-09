@@ -26,16 +26,16 @@ internal partial class ExpressionBuilder
         var lines = ReadCqlLines(query);
         var sources = ReadSources();
 
-        (string alias, Type sourceType, bool needsPromotion)[] ReadSources() => query.source!
+        (string alias, Type sourceType, bool isEnumerationType)[] ReadSources() => query.source!
             .SelectToArray(s =>
             {
                 var sourceType = TranslateExpression(s.expression).Type;
-                var needsPromotion = !IsOrImplementsIEnumerableOfT(sourceType);
-                if (needsPromotion) sourceType = _typeManager.Resolver.GetListElementType(sourceType, true)!;
+                var isEnumerationType = IsOrImplementsIEnumerableOfT(sourceType);
+                if (isEnumerationType) sourceType = _typeManager.Resolver.GetListElementType(sourceType, true)!;
                 return (
                     s.alias,
                     sourceType,
-                    needsPromotion
+                    isEnumerationType
                 );
             });
 
@@ -83,7 +83,7 @@ internal partial class ExpressionBuilder
             ((ReadOnlySpan<string>)["Empty", "Single", "Multi"])[Math.Clamp(sourceLength, 0, 2)],
             sourceLength,
             DebuggerView,
-            $"{string.Concat(from s in sources select $"\n\t{s.alias}: {(s.needsPromotion ? " Singleton" : "Enumeration")} of {s.sourceType}")}",
+            $"{string.Concat(from s in sources select $"\n\t{s.alias}: {(s.isEnumerationType ? "Enumeration" : "Singleton")} of {s.sourceType}")}",
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
 #endif
 
