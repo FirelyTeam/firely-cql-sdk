@@ -33,8 +33,7 @@ internal partial class ExpressionBuilder
 
         ParameterExpression scopeParameter;
 
-        var (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
-        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
+        var (@return, sourcesPreviouslySingletons) = ctx.ProcessQuerySources(query);
         var returnType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
         var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
         if (returnElementType != returnType)
@@ -179,8 +178,40 @@ internal partial class ExpressionBuilder
             }
         }
 
-        return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
+        // Because we promoted the source to a list, we now have to demote the result again.
+        var wasAnySourceASingleton = sourcesPreviouslySingletons.Any(b => b);
+        if (wasAnySourceASingleton)
+        {
+            Debug.Assert(sourcesPreviouslySingletons.All(b => b));
+            @return = ctx.DemoteSourceListToSingleton(@return);
+        }
+
+        if (query.resultTypeSpecifier is Elm.ListTypeSpecifier && !ctx._typeResolver.ImplementsGenericIEnumerable(@return.Type))
+        {
+            @return = Expression.NewArrayInit(@return.Type, @return);
+        }
+
+        return @return;
     }
+
+    public Expression DemoteSourceListToSingleton(Expression source)
+    {
+        source = BindCqlOperator(CqlOperator.Single, source);
+        return source;
+    }
+
+    private (Expression source, bool sourceWasSingleton) PromoteSourceSingletonToList(Expression source)
+    {
+        // promote single objects into enumerables so where works
+        if (_typeResolver.ImplementsGenericIEnumerable(source.Type))
+            return (source, false);
+
+        var arrayInit = Expression.NewArrayInit(source.Type, source);
+        source = arrayInit;
+        return (source, true);
+    }
+
+
 
     [Conditional("DEBUG")]
     private void QueryDumpDebugInfoToLog(Query query)
@@ -250,27 +281,6 @@ internal partial class ExpressionBuilder
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
     }
 
-    protected Expression TryDemoteSource(
-        Query query,
-        Expression source,
-        bool isSourcePromoted)
-    {
-        // Because we promoted the source to a list, we now have to demote the result again.
-        if (isSourcePromoted)
-        {
-            var callSingle = BindCqlOperator(CqlOperator.Single, source);
-            source = callSingle;
-
-        }
-
-        if (query.resultTypeSpecifier is Elm.ListTypeSpecifier && !_typeResolver.ImplementsGenericIEnumerable(source.Type))
-        {
-            source = Expression.NewArrayInit(source.Type, source);
-        }
-
-        return source;
-    }
-
     private (Expression sourceExpression, bool[] isSourcePromoted) ProcessQuerySources(Query query)
     {
         AliasedQuerySource[] sources = query.source;
@@ -293,16 +303,13 @@ internal partial class ExpressionBuilder
         //    IEnumerable<c> c = ...;
         //    IEnumerable<(A, B, C)> crossJoinedValueTupleResults = CrossJoin<A, B, C>(a, b, c);
 
-        var tryPromoteSourceExpressions = sourceExpressions.SelectToArray(expr => TryPromoteSource(expr));
-        var promotedSourceExpressions = tryPromoteSourceExpressions.SelectToArray(s => s.source);
-        var isSourcesPromoted = tryPromoteSourceExpressions.SelectToArray(s => s.isSourcePromoted);
-
-        if (promotedSourceExpressions.Any(promotedSource => !_typeResolver.ImplementsGenericIEnumerable(promotedSource.Type)))
-            throw this.NewExpressionBuildingException("A promoted source must have a type that is enumerable.");
+        var temp = sourceExpressions.SelectToArray(expr => PromoteSourceSingletonToList(expr));
+        var promotedSourceExpressions = temp.SelectToArray(s => s.source);
+        var originalSourceWereSingletons = temp.SelectToArray(s => s.sourceWasSingleton);
 
         // Only one source, so no need for cross-joining. Return as-is.
         if (sources.Length == 1)
-            return (promotedSourceExpressions[0], isSourcesPromoted);
+            return (promotedSourceExpressions[0], originalSourceWereSingletons);
 
         var crossJoinedValueTupleResultsExpression = BindCqlOperator(CqlOperator.CrossJoin, promotedSourceExpressions);
 
@@ -368,21 +375,7 @@ internal partial class ExpressionBuilder
             crossJoinedValueTupleResultsExpression,
             selectExpression);
 
-        return (crossJoinedCqlTupleResultsExpression, isSourcesPromoted)!;
-    }
-
-    private (Expression source, bool isSourcePromoted) TryPromoteSource(Expression source)
-    {
-        var isSourcePromoted = false;
-        // promote single objects into enumerables so where works
-        if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
-        {
-            var arrayInit = Expression.NewArrayInit(source.Type, source);
-            source = arrayInit;
-            isSourcePromoted = true;
-        }
-
-        return (source, isSourcePromoted);
+        return (crossJoinedCqlTupleResultsExpression, originalSourceWereSingletons)!;
     }
 
     protected Expression SortClause(
