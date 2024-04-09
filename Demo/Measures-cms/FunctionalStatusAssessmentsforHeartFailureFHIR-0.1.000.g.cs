@@ -582,12 +582,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		var a_ = this.Qualifying_Encounters();
 		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
-		Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe d_(ValueTuple<Encounter,Encounter> _select0)
+		Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe d_(ValueTuple<Encounter,Encounter> _valueTuple)
 		{
 			var j_ = new Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe
 			{
-				OfficeVisit1 = _select0.Item1,
-				OfficeVisit2 = _select0.Item2,
+				OfficeVisit1 = _valueTuple.Item1,
+				OfficeVisit2 = _valueTuple.Item2,
 			};
 
 			return j_;
@@ -699,12 +699,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
 		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-		Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM j_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM j_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var p_ = new Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM
 			{
-				PROMIS10MentalScore = _select0.Item1,
-				PROMIS10PhysicalScore = _select0.Item2,
+				PROMIS10MentalScore = _valueTuple.Item1,
+				PROMIS10PhysicalScore = _valueTuple.Item2,
 			};
 
 			return p_;
@@ -764,13 +764,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_PROMIS10_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK
 			{
-				ValidEncounters = _select0.Item1,
-				InitialPROMIS10Date = _select0.Item2,
-				FollowupPROMIS10Date = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialPROMIS10Date = _valueTuple.Item2,
+				FollowupPROMIS10Date = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -857,17 +857,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var aa_ = context.Operators.RetrieveByCodes<Observation>(z_, null);
 		var ab_ = Status_1_6_000.Final_Survey_Observation(aa_);
 		var ac_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_, ab_);
-		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb ad_(ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation,Observation> _select0)
+		Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb ad_(ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation,Observation> _valueTuple)
 		{
 			var aj_ = new Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb
 			{
-				Promis29Sleep = _select0.Item1,
-				Promis29SocialRoles = _select0.Item2,
-				Promis29Physical = _select0.Item3,
-				Promis29Pain = _select0.Item4,
-				Promis29Fatigue = _select0.Item5,
-				Promis29Depression = _select0.Item6,
-				Promis29Anxiety = _select0.Item7,
+				Promis29Sleep = _valueTuple.Item1,
+				Promis29SocialRoles = _valueTuple.Item2,
+				Promis29Physical = _valueTuple.Item3,
+				Promis29Pain = _valueTuple.Item4,
+				Promis29Fatigue = _valueTuple.Item5,
+				Promis29Depression = _valueTuple.Item6,
+				Promis29Anxiety = _valueTuple.Item7,
 			};
 
 			return aj_;
@@ -1012,13 +1012,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_PROMIS29_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba
 			{
-				ValidEncounters = _select0.Item1,
-				InitialPROMIS29Date = _select0.Item2,
-				FollowupPROMIS29Date = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialPROMIS29Date = _valueTuple.Item2,
+				FollowupPROMIS29Date = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -1085,12 +1085,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
 		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ j_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ j_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var p_ = new Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
-				VR12MentalAssessment = _select0.Item1,
-				VR12PhysicalAssessment = _select0.Item2,
+				VR12MentalAssessment = _valueTuple.Item1,
+				VR12PhysicalAssessment = _valueTuple.Item2,
 			};
 
 			return p_;
@@ -1150,13 +1150,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU
 			{
-				ValidEncounters = _select0.Item1,
-				InitialVR12ObliqueDate = _select0.Item2,
-				FollowupVR12ObliqueDate = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialVR12ObliqueDate = _valueTuple.Item2,
+				FollowupVR12ObliqueDate = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -1223,12 +1223,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
 		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ j_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ j_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var p_ = new Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
-				VR12MentalAssessment = _select0.Item1,
-				VR12PhysicalAssessment = _select0.Item2,
+				VR12MentalAssessment = _valueTuple.Item1,
+				VR12PhysicalAssessment = _valueTuple.Item2,
 			};
 
 			return p_;
@@ -1288,13 +1288,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ
 			{
-				ValidEncounters = _select0.Item1,
-				InitialVR12OrthogonalDate = _select0.Item2,
-				FollowupVR12OrthogonalDate = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialVR12OrthogonalDate = _valueTuple.Item2,
+				FollowupVR12OrthogonalDate = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -1361,12 +1361,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
 		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh j_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh j_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var p_ = new Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh
 			{
-				VR36MentalAssessment = _select0.Item1,
-				VR36PhysicalAssessment = _select0.Item2,
+				VR36MentalAssessment = _valueTuple.Item1,
+				VR36PhysicalAssessment = _valueTuple.Item2,
 			};
 
 			return p_;
@@ -1426,13 +1426,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_VR36_Oblique_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi
 			{
-				ValidEncounters = _select0.Item1,
-				InitialVR36ObliqueDate = _select0.Item2,
-				FollowupVR36ObliqueDate = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialVR36ObliqueDate = _valueTuple.Item2,
+				FollowupVR36ObliqueDate = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -1499,12 +1499,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
 		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh j_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh j_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var p_ = new Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh
 			{
-				VR36MentalAssessment = _select0.Item1,
-				VR36PhysicalAssessment = _select0.Item2,
+				VR36MentalAssessment = _valueTuple.Item1,
+				VR36PhysicalAssessment = _valueTuple.Item2,
 			};
 
 			return p_;
@@ -1564,13 +1564,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_VR36_Orthogonal_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi
 			{
-				ValidEncounters = _select0.Item1,
-				InitialVR36OrthogonalDate = _select0.Item2,
-				FollowupVR36OrthogonalDate = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialVR36OrthogonalDate = _valueTuple.Item2,
+				FollowupVR36OrthogonalDate = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -1637,12 +1637,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
 		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-		Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU j_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU j_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var p_ = new Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU
 			{
-				MLHFQPhysical = _select0.Item1,
-				MLHFQEmotional = _select0.Item2,
+				MLHFQPhysical = _valueTuple.Item1,
+				MLHFQEmotional = _valueTuple.Item2,
 			};
 
 			return p_;
@@ -1702,13 +1702,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_MLHFQ_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi
 			{
-				ValidEncounters = _select0.Item1,
-				InitialMLHFQDate = _select0.Item2,
-				FollowupMLHFQDate = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialMLHFQDate = _valueTuple.Item2,
+				FollowupMLHFQDate = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -1775,12 +1775,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
 		var h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		var i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-		Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF j_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF j_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var p_ = new Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF
 			{
-				KCCQ12Item = _select0.Item1,
-				KCCQ12Summary = _select0.Item2,
+				KCCQ12Item = _valueTuple.Item1,
+				KCCQ12Summary = _valueTuple.Item2,
 			};
 
 			return p_;
@@ -1840,13 +1840,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_KCCQ12_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi
 			{
-				ValidEncounters = _select0.Item1,
-				InitialKCCQ12Date = _select0.Item2,
-				FollowupKCCQ12Date = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialKCCQ12Date = _valueTuple.Item2,
+				FollowupKCCQ12Date = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -1929,16 +1929,16 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var w_ = context.Operators.RetrieveByCodes<Observation>(v_, null);
 		var x_ = Status_1_6_000.Final_Survey_Observation(w_);
 		var y_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_);
-		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV z_(ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation> _select0)
+		Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV z_(ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation> _valueTuple)
 		{
 			var af_ = new Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV
 			{
-				KCCQLifeQuality = _select0.Item1,
-				KCCQSymptomStability = _select0.Item2,
-				KCCQSelfEfficacy = _select0.Item3,
-				KCCQSymptoms = _select0.Item4,
-				KCCQPhysicalLimits = _select0.Item5,
-				KCCQSocialLimits = _select0.Item6,
+				KCCQLifeQuality = _valueTuple.Item1,
+				KCCQSymptomStability = _valueTuple.Item2,
+				KCCQSelfEfficacy = _valueTuple.Item3,
+				KCCQSymptoms = _valueTuple.Item4,
+				KCCQPhysicalLimits = _valueTuple.Item5,
+				KCCQSocialLimits = _valueTuple.Item6,
 			};
 
 			return af_;
@@ -2066,13 +2066,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_KCCQ_Domain_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC
 			{
-				ValidEncounters = _select0.Item1,
-				InitialKCCQAssessmentDate = _select0.Item2,
-				FollowupKCCQAssessmentDate = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialKCCQAssessmentDate = _valueTuple.Item2,
+				FollowupKCCQAssessmentDate = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -2170,13 +2170,13 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var a_ = this.Qualifying_Encounters();
 		var b_ = this.Date_KCCQ_Total_Assessment_Completed();
 		var d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-		Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf e_(ValueTuple<Encounter,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf e_(ValueTuple<Encounter,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf
 			{
-				ValidEncounters = _select0.Item1,
-				InitialKCCQTotalScore = _select0.Item2,
-				FollowupKCCQTotalScore = _select0.Item3,
+				ValidEncounters = _valueTuple.Item1,
+				InitialKCCQTotalScore = _valueTuple.Item2,
+				FollowupKCCQTotalScore = _valueTuple.Item3,
 			};
 
 			return l_;

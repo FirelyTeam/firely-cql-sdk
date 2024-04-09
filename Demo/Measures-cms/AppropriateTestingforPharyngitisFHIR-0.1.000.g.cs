@@ -588,12 +588,12 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days();
 		var b_ = this.Pharyngitis_or_Tonsillitis();
 		var c_ = context.Operators.CrossJoin<Encounter, Condition>(a_, b_);
-		Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC d_(ValueTuple<Encounter,Condition> _select0)
+		Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC d_(ValueTuple<Encounter,Condition> _valueTuple)
 		{
 			var j_ = new Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC
 			{
-				VisitWithAntibiotic = _select0.Item1,
-				AcutePharyngitisTonsillitis = _select0.Item2,
+				VisitWithAntibiotic = _valueTuple.Item1,
+				AcutePharyngitisTonsillitis = _valueTuple.Item2,
 			};
 
 			return j_;
@@ -729,12 +729,12 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Group_A_Streptococcus_Lab_Test_With_Result();
 		var b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic();
 		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV d_(ValueTuple<Observation,Encounter> _select0)
+		Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV d_(ValueTuple<Observation,Encounter> _valueTuple)
 		{
 			var j_ = new Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV
 			{
-				GroupAStreptococcusTest = _select0.Item1,
-				EncounterWithPharyngitis = _select0.Item2,
+				GroupAStreptococcusTest = _valueTuple.Item1,
+				EncounterWithPharyngitis = _valueTuple.Item2,
 			};
 
 			return j_;

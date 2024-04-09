@@ -421,12 +421,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Hospital_Dietitian_Referral();
 		var c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
-		Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC e_(ValueTuple<Encounter,Procedure> _select0)
+		Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC e_(ValueTuple<Encounter,Procedure> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC
 			{
-				QualifyingEncounter = _select0.Item1,
-				HospitalDietitianReferral = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				HospitalDietitianReferral = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -472,12 +472,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Malnutrition_Risk_Screening();
 		var c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
-		Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS e_(ValueTuple<Encounter,Observation> _select0)
+		Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS e_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS
 			{
-				QualifyingEncounter = _select0.Item1,
-				MalnutritionRiskScreening = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				MalnutritionRiskScreening = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -556,12 +556,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Malnutrition_Risk_Screening();
 		var c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
-		Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS e_(ValueTuple<Encounter,Observation> _select0)
+		Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS e_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS
 			{
-				QualifyingEncounter = _select0.Item1,
-				MalnutritionRiskScreening = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				MalnutritionRiskScreening = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -638,12 +638,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Malnutrition_Risk_Screening();
 		var c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
-		Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS e_(ValueTuple<Encounter,Observation> _select0)
+		Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS e_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS
 			{
-				QualifyingEncounter = _select0.Item1,
-				MalnutritionRiskScreening = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				MalnutritionRiskScreening = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -719,12 +719,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Nutrition_Assessment();
 		var c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
-		Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh e_(ValueTuple<Encounter,Observation> _select0)
+		Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh e_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh
 			{
-				QualifyingEncounter = _select0.Item1,
-				NutritionAssessment = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				NutritionAssessment = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -781,12 +781,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Nutrition_Assessment();
 		var c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
-		Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh e_(ValueTuple<Encounter,Observation> _select0)
+		Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh e_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh
 			{
-				QualifyingEncounter = _select0.Item1,
-				NutritionAssessment = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				NutritionAssessment = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -840,12 +840,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Nutrition_Assessment();
 		var c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
-		Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh e_(ValueTuple<Encounter,Observation> _select0)
+		Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh e_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh
 			{
-				QualifyingEncounter = _select0.Item1,
-				NutritionAssessment = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				NutritionAssessment = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -896,12 +896,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Malnutrition_Diagnosis();
 		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
-		Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb e_(ValueTuple<Encounter,Condition> _select0)
+		Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb e_(ValueTuple<Encounter,Condition> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb
 			{
-				QualifyingEncounter = _select0.Item1,
-				MalnutritionDiagnosis = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				MalnutritionDiagnosis = _valueTuple.Item2,
 			};
 
 			return k_;
@@ -938,12 +938,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var b_ = this.Nutrition_Care_Plan();
 		var c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
-		Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg e_(ValueTuple<Encounter,Procedure> _select0)
+		Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg e_(ValueTuple<Encounter,Procedure> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg
 			{
-				QualifyingEncounter = _select0.Item1,
-				NutritionCarePlan = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				NutritionCarePlan = _valueTuple.Item2,
 			};
 
 			return k_;

@@ -418,12 +418,12 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 		var b_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV d_(ValueTuple<Observation,Encounter> _select0)
+		Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV d_(ValueTuple<Observation,Encounter> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV
 			{
-				HeartRate = _select0.Item1,
-				ModerateOrSevereLVSDHFOutpatientEncounter = _select0.Item2,
+				HeartRate = _valueTuple.Item1,
+				ModerateOrSevereLVSDHFOutpatientEncounter = _valueTuple.Item2,
 			};
 
 			return k_;

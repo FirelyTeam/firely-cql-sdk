@@ -211,14 +211,14 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 		var f_ = this.Cancer();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
 		var h_ = context.Operators.CrossJoin<Encounter, Procedure, Procedure, Condition>(c_, d_, d_, g_);
-		Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT i_(ValueTuple<Encounter,Procedure,Procedure,Condition> _select0)
+		Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT i_(ValueTuple<Encounter,Procedure,Procedure,Condition> _valueTuple)
 		{
 			var o_ = new Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT
 			{
-				FaceToFaceOrTelehealthEncounter = _select0.Item1,
-				ChemoBeforeEncounter = _select0.Item2,
-				ChemoAfterEncounter = _select0.Item3,
-				Cancer = _select0.Item4,
+				FaceToFaceOrTelehealthEncounter = _valueTuple.Item1,
+				ChemoBeforeEncounter = _valueTuple.Item2,
+				ChemoAfterEncounter = _valueTuple.Item3,
+				Cancer = _valueTuple.Item4,
 			};
 
 			return o_;

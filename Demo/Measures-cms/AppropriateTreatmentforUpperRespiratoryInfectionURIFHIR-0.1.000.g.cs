@@ -466,12 +466,12 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var b_ = this.Upper_Respiratory_Infection();
 		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
-		Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW e_(ValueTuple<Encounter,Condition> _select0)
+		Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW e_(ValueTuple<Encounter,Condition> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW
 			{
-				QualifyingEncounters = _select0.Item1,
-				URI = _select0.Item2,
+				QualifyingEncounters = _valueTuple.Item1,
+				URI = _valueTuple.Item2,
 			};
 
 			return k_;

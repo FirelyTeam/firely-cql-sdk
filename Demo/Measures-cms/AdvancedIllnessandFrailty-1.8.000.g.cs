@@ -403,12 +403,12 @@ public class AdvancedIllnessandFrailty_1_8_000
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
 		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
-		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _select0)
+		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe
 			{
-				OutpatientEncounter1 = _select0.Item1,
-				OutpatientEncounter2 = _select0.Item2,
+				OutpatientEncounter1 = _valueTuple.Item1,
+				OutpatientEncounter2 = _valueTuple.Item2,
 			};
 
 			return k_;

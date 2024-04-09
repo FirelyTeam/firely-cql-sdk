@@ -432,24 +432,19 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service_Value()
 	{
 		var a_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness();
-		IEnumerable<CqlDate> b_(CqlDate _OutpatientVisit1)
-		{
-			var j_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness();
-
-			return j_;
-		};
-		Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR c_(CqlDate _OutpatientVisit1, CqlDate _OutpatientVisit2)
+		var c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
+		Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR d_(ValueTuple<CqlDate,CqlDate> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR
 			{
-				OutpatientVisit1 = _OutpatientVisit1,
-				OutpatientVisit2 = _OutpatientVisit2,
+				OutpatientVisit1 = _valueTuple.Item1,
+				OutpatientVisit2 = _valueTuple.Item2,
 			};
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<CqlDate, CqlDate, Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate>, Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(c_, d_);
+		bool? f_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur)
 		{
 			var l_ = context.Operators.Quantity(1m, "day");
 			var m_ = context.Operators.Add(tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit1, l_);
@@ -457,13 +452,13 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 			return n_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(d_, e_);
-		CqlDate g_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur) => 
+		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(e_, f_);
+		CqlDate h_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur) => 
 			tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit1;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR, CqlDate>(f_, g_);
-		var i_ = context.Operators.ExistsInList<CqlDate>(h_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR, CqlDate>(g_, h_);
+		var j_ = context.Operators.ExistsInList<CqlDate>(i_);
 
-		return i_;
+		return j_;
 	}
 
     [CqlDeclaration("Two Outpatient Visits with Advanced Illness on Different Dates of Service")]

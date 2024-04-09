@@ -371,13 +371,13 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		var b_ = this.Opioid_Administration();
 		var c_ = this.Denominator();
 		var d_ = context.Operators.CrossJoin<MedicationAdministration, MedicationAdministration, Encounter>(a_, b_, c_);
-		Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI e_(ValueTuple<MedicationAdministration,MedicationAdministration,Encounter> _select0)
+		Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI e_(ValueTuple<MedicationAdministration,MedicationAdministration,Encounter> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI
 			{
-				OpioidAntagonistGiven = _select0.Item1,
-				OpioidGiven = _select0.Item2,
-				EncounterWithQualifyingAge = _select0.Item3,
+				OpioidAntagonistGiven = _valueTuple.Item1,
+				OpioidGiven = _valueTuple.Item2,
+				EncounterWithQualifyingAge = _valueTuple.Item3,
 			};
 
 			return k_;

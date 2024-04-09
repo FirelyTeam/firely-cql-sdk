@@ -273,7 +273,7 @@ public class NCQACQLBase_1_0_0
 		var a_ = this.Sort_Date_Intervals(coveringIntervals);
 		CqlInterval<CqlDate> b_(CqlInterval<CqlDate> sortedInterval)
 		{
-			var e_ = context.Operators.IntervalIntersectsInterval<CqlDate>(baseInterval, sortedInterval);
+			var e_ = context.Operators.IntervalIntersect<CqlDate>(baseInterval, sortedInterval);
 
 			return e_;
 		};
@@ -289,7 +289,7 @@ public class NCQACQLBase_1_0_0
 		var a_ = this.Sort_DateTime_Intervals(coveringIntervals);
 		CqlInterval<CqlDateTime> b_(CqlInterval<CqlDateTime> sortedInterval)
 		{
-			var e_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(baseInterval, sortedInterval);
+			var e_ = context.Operators.IntervalIntersect<CqlDateTime>(baseInterval, sortedInterval);
 
 			return e_;
 		};
@@ -339,7 +339,7 @@ public class NCQACQLBase_1_0_0
 						{
 							bool u_()
 							{
-								var v_ = context.Operators.ListIndex<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var v_ = context.Operators.ListIndexOf<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var w_ = context.Operators.Equal(v_, (int?)0);
 
 								return (w_ ?? false);
@@ -349,14 +349,14 @@ public class NCQACQLBase_1_0_0
 								var x_ = context.Operators.Start(baseInterval);
 								var y_ = context.Operators.Start(sortedCovering);
 								var z_ = context.Operators.Interval(x_, y_, true, true);
-								var aa_ = context.Operators.IntervalIntersectsInterval<CqlDate>(z_, baseInterval);
+								var aa_ = context.Operators.IntervalIntersect<CqlDate>(z_, baseInterval);
 								var ab_ = context.Operators.IntervalExcept(aa_, sortedCovering);
 
 								return ab_;
 							}
 							else
 							{
-								var ac_ = context.Operators.ListIndex<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var ac_ = context.Operators.ListIndexOf<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var ad_ = context.Operators.Subtract(ac_, (int?)1);
 								var ae_ = context.Operators.ListElementAt<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, ad_);
 								var af_ = context.Operators.Start(ae_);
@@ -401,7 +401,7 @@ public class NCQACQLBase_1_0_0
 					var at_ = context.Operators.End(baseInterval);
 					var au_ = context.Operators.Interval(as_, at_, false, true);
 					var aw_ = context.Operators.IntervalExcept(au_, ar_);
-					var ax_ = context.Operators.IntervalIntersectsInterval<CqlDate>(aw_, baseInterval);
+					var ax_ = context.Operators.IntervalIntersect<CqlDate>(aw_, baseInterval);
 					var ay_ = new CqlInterval<CqlDate>[]
 					{
 						ax_,
@@ -477,7 +477,7 @@ public class NCQACQLBase_1_0_0
 						{
 							bool u_()
 							{
-								var v_ = context.Operators.ListIndex<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var v_ = context.Operators.ListIndexOf<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var w_ = context.Operators.Equal(v_, (int?)0);
 
 								return (w_ ?? false);
@@ -487,14 +487,14 @@ public class NCQACQLBase_1_0_0
 								var x_ = context.Operators.Start(baseInterval);
 								var y_ = context.Operators.Start(sortedCovering);
 								var z_ = context.Operators.Interval(x_, y_, true, true);
-								var aa_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(z_, baseInterval);
+								var aa_ = context.Operators.IntervalIntersect<CqlDateTime>(z_, baseInterval);
 								var ab_ = context.Operators.IntervalExcept(aa_, sortedCovering);
 
 								return ab_;
 							}
 							else
 							{
-								var ac_ = context.Operators.ListIndex<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var ac_ = context.Operators.ListIndexOf<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var ad_ = context.Operators.Subtract(ac_, (int?)1);
 								var ae_ = context.Operators.ListElementAt<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, ad_);
 								var af_ = context.Operators.Start(ae_);
@@ -539,7 +539,7 @@ public class NCQACQLBase_1_0_0
 					var at_ = context.Operators.End(baseInterval);
 					var au_ = context.Operators.Interval(as_, at_, false, true);
 					var aw_ = context.Operators.IntervalExcept(au_, ar_);
-					var ax_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(aw_, baseInterval);
+					var ax_ = context.Operators.IntervalIntersect<CqlDateTime>(aw_, baseInterval);
 					var ay_ = new CqlInterval<CqlDateTime>[]
 					{
 						ax_,

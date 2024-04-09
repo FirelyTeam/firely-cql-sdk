@@ -1200,14 +1200,14 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.DTaP_Immunizations_or_Procedures();
 		var e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
-		Tuples.Tuple_EDFAENKgHPZdhfZCdMcGebfcS f_(ValueTuple<CqlDate,CqlDate,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_EDFAENKgHPZdhfZCdMcGebfcS f_(ValueTuple<CqlDate,CqlDate,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_EDFAENKgHPZdhfZCdMcGebfcS
 			{
-				DTaPVaccination1 = _select0.Item1,
-				DTaPVaccination2 = _select0.Item2,
-				DTaPVaccination3 = _select0.Item3,
-				DTaPVaccination4 = _select0.Item4,
+				DTaPVaccination1 = _valueTuple.Item1,
+				DTaPVaccination2 = _valueTuple.Item2,
+				DTaPVaccination3 = _valueTuple.Item3,
+				DTaPVaccination4 = _valueTuple.Item4,
 			};
 
 			return l_;
@@ -1333,13 +1333,13 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.Polio_Immunizations_or_Procedures();
 		var d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
-		Tuples.Tuple_GOXKBgTPjADgQhXfdgXgTMIJS e_(ValueTuple<CqlDate,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_GOXKBgTPjADgQhXfdgXgTMIJS e_(ValueTuple<CqlDate,CqlDate,CqlDate> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_GOXKBgTPjADgQhXfdgXgTMIJS
 			{
-				PolioVaccination1 = _select0.Item1,
-				PolioVaccination2 = _select0.Item2,
-				PolioVaccination3 = _select0.Item3,
+				PolioVaccination1 = _valueTuple.Item1,
+				PolioVaccination2 = _valueTuple.Item2,
+				PolioVaccination3 = _valueTuple.Item3,
 			};
 
 			return k_;
@@ -1859,13 +1859,13 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.Hepatitis_B_Immunizations_or_Procedures();
 		var d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
-		Tuples.Tuple_BGiOaDWjFAVaAFWAKdFWJcFOg e_(ValueTuple<CqlDate,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_BGiOaDWjFAVaAFWAKdFWJcFOg e_(ValueTuple<CqlDate,CqlDate,CqlDate> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_BGiOaDWjFAVaAFWAKdFWJcFOg
 			{
-				HepatitisBVaccination1 = _select0.Item1,
-				HepatitisBVaccination2 = _select0.Item2,
-				HepatitisBVaccination3 = _select0.Item3,
+				HepatitisBVaccination1 = _valueTuple.Item1,
+				HepatitisBVaccination2 = _valueTuple.Item2,
+				HepatitisBVaccination3 = _valueTuple.Item3,
 			};
 
 			return k_;
@@ -1943,13 +1943,13 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var a_ = this.Hepatitis_B_Immunizations_or_Procedures();
 		var c_ = this.NewBorn_Vaccine_Requirement();
 		var d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, c_);
-		Tuples.Tuple_BbghRjaMVeQThBCTRUcdHSBQH e_(ValueTuple<CqlDate,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_BbghRjaMVeQThBCTRUcdHSBQH e_(ValueTuple<CqlDate,CqlDate,CqlDate> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_BbghRjaMVeQThBCTRUcdHSBQH
 			{
-				HepatitisBVaccination1 = _select0.Item1,
-				HepatitisBVaccination2 = _select0.Item2,
-				NewBornVaccine3 = _select0.Item3,
+				HepatitisBVaccination1 = _valueTuple.Item1,
+				HepatitisBVaccination2 = _valueTuple.Item2,
+				NewBornVaccine3 = _valueTuple.Item3,
 			};
 
 			return k_;
@@ -2143,14 +2143,14 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.Pneumococcal_Conjugate_Immunizations_or_Procedures();
 		var e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
-		Tuples.Tuple_BVCGRhSDCRLNScbMJUKidNAJh f_(ValueTuple<CqlDate,CqlDate,CqlDate,CqlDate> _select0)
+		Tuples.Tuple_BVCGRhSDCRLNScbMJUKidNAJh f_(ValueTuple<CqlDate,CqlDate,CqlDate,CqlDate> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_BVCGRhSDCRLNScbMJUKidNAJh
 			{
-				PneumococcalVaccination1 = _select0.Item1,
-				PneumococcalVaccination2 = _select0.Item2,
-				PneumococcalVaccination3 = _select0.Item3,
-				PneumococcalVaccination4 = _select0.Item4,
+				PneumococcalVaccination1 = _valueTuple.Item1,
+				PneumococcalVaccination2 = _valueTuple.Item2,
+				PneumococcalVaccination3 = _valueTuple.Item3,
+				PneumococcalVaccination4 = _valueTuple.Item4,
 			};
 
 			return l_;
@@ -2596,12 +2596,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.Influenza_Immunizations_or_Procedures();
 		var c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
-		Tuples.Tuple_ESUAOONTBOMCFNSgVCeZOQUbj d_(ValueTuple<CqlDate,CqlDate> _select0)
+		Tuples.Tuple_ESUAOONTBOMCFNSgVCeZOQUbj d_(ValueTuple<CqlDate,CqlDate> _valueTuple)
 		{
 			var j_ = new Tuples.Tuple_ESUAOONTBOMCFNSgVCeZOQUbj
 			{
-				FluVaccination1 = _select0.Item1,
-				FluVaccination2 = _select0.Item2,
+				FluVaccination1 = _valueTuple.Item1,
+				FluVaccination2 = _valueTuple.Item2,
 			};
 
 			return j_;

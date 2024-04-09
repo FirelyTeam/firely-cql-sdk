@@ -1104,15 +1104,15 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
 		var t_ = Status_1_6_000.isAssessmentPerformed(s_);
 		var u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
-		Tuples.Tuple_EPUbUfihDVTJZfYVTHGLFUeUf v_(ValueTuple<Observation,Observation,Observation,Observation,Observation> _select0)
+		Tuples.Tuple_EPUbUfihDVTJZfYVTHGLFUeUf v_(ValueTuple<Observation,Observation,Observation,Observation,Observation> _valueTuple)
 		{
 			var ab_ = new Tuples.Tuple_EPUbUfihDVTJZfYVTHGLFUeUf
 			{
-				HOOSLifeQuality = _select0.Item1,
-				HOOSSport = _select0.Item2,
-				HOOSActivityScore = _select0.Item3,
-				HOOSSymptoms = _select0.Item4,
-				HOOSPain = _select0.Item5,
+				HOOSLifeQuality = _valueTuple.Item1,
+				HOOSSport = _valueTuple.Item2,
+				HOOSActivityScore = _valueTuple.Item3,
+				HOOSSymptoms = _valueTuple.Item4,
+				HOOSPain = _valueTuple.Item5,
 			};
 
 			return ab_;
@@ -1416,12 +1416,12 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM h_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var n_ = new Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM
 			{
-				PROMIS10MentalScore = _select0.Item1,
-				PROMIS10PhysicalScore = _select0.Item2,
+				PROMIS10MentalScore = _valueTuple.Item1,
+				PROMIS10PhysicalScore = _valueTuple.Item2,
 			};
 
 			return n_;
@@ -1564,12 +1564,12 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var n_ = new Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
-				VR12MentalAssessment = _select0.Item1,
-				VR12PhysicalAssessment = _select0.Item2,
+				VR12MentalAssessment = _valueTuple.Item1,
+				VR12PhysicalAssessment = _valueTuple.Item2,
 			};
 
 			return n_;
@@ -1712,12 +1712,12 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _select0)
+		Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
 			var n_ = new Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
-				VR12MentalAssessment = _select0.Item1,
-				VR12PhysicalAssessment = _select0.Item2,
+				VR12MentalAssessment = _valueTuple.Item1,
+				VR12PhysicalAssessment = _valueTuple.Item2,
 			};
 
 			return n_;

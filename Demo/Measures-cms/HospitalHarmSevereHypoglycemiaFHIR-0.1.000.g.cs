@@ -277,13 +277,13 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(a_, b_, d_);
-		Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ f_(ValueTuple<Encounter,MedicationAdministration,Observation> _select0)
+		Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ f_(ValueTuple<Encounter,MedicationAdministration,Observation> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ
 			{
-				QualifyingEncounter = _select0.Item1,
-				HypoglycemicMedication = _select0.Item2,
-				GlucoseTest = _select0.Item3,
+				QualifyingEncounter = _valueTuple.Item1,
+				HypoglycemicMedication = _valueTuple.Item2,
+				GlucoseTest = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -527,13 +527,13 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(a_, b_, d_);
-		Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ f_(ValueTuple<Encounter,Observation,Observation> _select0)
+		Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ f_(ValueTuple<Encounter,Observation,Observation> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ
 			{
-				QualifyingEncounter = _select0.Item1,
-				LowGlucoseTest = _select0.Item2,
-				FollowupGlucoseTest = _select0.Item3,
+				QualifyingEncounter = _valueTuple.Item1,
+				LowGlucoseTest = _valueTuple.Item2,
+				FollowupGlucoseTest = _valueTuple.Item3,
 			};
 
 			return l_;
@@ -905,12 +905,12 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var a_ = this.Denominator();
 		var b_ = this.Severe_Hypoglycemic_Harm_Event();
 		var c_ = context.Operators.CrossJoin<Encounter, Observation>(a_, b_);
-		Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS d_(ValueTuple<Encounter,Observation> _select0)
+		Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS d_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
 			var j_ = new Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS
 			{
-				QualifyingEncounter = _select0.Item1,
-				HypoglycemicEvent = _select0.Item2,
+				QualifyingEncounter = _valueTuple.Item1,
+				HypoglycemicEvent = _valueTuple.Item2,
 			};
 
 			return j_;

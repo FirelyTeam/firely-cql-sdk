@@ -373,7 +373,7 @@ internal partial class ExpressionBuilder
         Debug.Assert(valueTupleFields.Length > 0);
         Debug.Assert(valueTupleFields.Length == cqlTupleProperties.Length);
 
-        var valueTupleTypeParam = Expression.Parameter(valueTupleType, "_select0");
+        var valueTupleTypeParam = Expression.Parameter(valueTupleType, "_valueTuple");
         var selectExpression =
             Expression.Lambda(
                 CopyValueTupleIntoCqlTuple(),

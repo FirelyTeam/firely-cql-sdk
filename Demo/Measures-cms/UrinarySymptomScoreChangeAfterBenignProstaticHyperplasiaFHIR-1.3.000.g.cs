@@ -1168,12 +1168,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			c_,
 		};
 		var e_ = context.Operators.CrossJoin<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(b_, d_);
-		Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI f_(ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> _select0)
+		Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI f_(ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI
 			{
-				FirstUSSAssessment = _select0.Item1,
-				FollowUpUSSAssessment = _select0.Item2,
+				FirstUSSAssessment = _valueTuple.Item1,
+				FollowUpUSSAssessment = _valueTuple.Item2,
 			};
 
 			return k_;
