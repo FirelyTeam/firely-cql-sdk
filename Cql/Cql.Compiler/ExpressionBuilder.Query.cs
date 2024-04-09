@@ -86,17 +86,19 @@ internal partial class ExpressionBuilder
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
 #endif
 
+        //return MultiSourceQuery(query);
+        // return SingleSourceQuery(query);
         return sourceLength switch
         {
             0 => throw this.NewExpressionBuildingException("Queries must define at least 1 source"),
-            1 => SingleSourceQuery(query),
-            _ => MultiSourceQuery(query),
+            1 => SingleSourceQuery(this, query),
+            _ => MultiSourceQuery(this, query),
         };
     }
 
-    protected Expression SingleSourceQuery(Query query)
+    protected static Expression SingleSourceQuery(ExpressionBuilder ctx, Query query)
     {
-        ExpressionBuilder ctx = this;
+        //ExpressionBuilder ctx = this;
 
         var querySource = query.source.Single();
         var querySourceAlias = !string.IsNullOrWhiteSpace(querySource.alias)
@@ -108,13 +110,13 @@ internal partial class ExpressionBuilder
 
         var source = ctx.TranslateExpression(querySource.expression);
 
-        var (@return, isSourcePromoted) = TryPromoteSource(source);
+        var (@return, isSourcePromoted) = ctx.TryPromoteSource(source);
 
-        Type elementType = _typeManager.Resolver.GetListElementType(@return.Type, throwError: true)!;
+        Type elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, throwError: true)!;
 
-        var rootScopeParameterName = NormalizeIdentifier(querySourceAlias);
-        var rootScopeParameter = Expression.Parameter(elementType, rootScopeParameterName);
-        ctx = WithScope(querySourceAlias, rootScopeParameter, querySource.expression);
+        var sourceParameterName = NormalizeIdentifier(querySourceAlias);
+        var scopeParameter = Expression.Parameter(elementType, sourceParameterName);
+        ctx = ctx.WithScope(querySourceAlias, scopeParameter, querySource.expression);
 
         if (query.let != null)
         {
@@ -132,7 +134,7 @@ internal partial class ExpressionBuilder
             {
                 using (ctx.PushElement(relationship))
                 {
-                    var selectManyLambda = ctx.WithToSelectManyBody(rootScopeParameter, relationship);
+                    var selectManyLambda = ctx.WithToSelectManyBody(scopeParameter, relationship);
 
                     var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
                         @return, selectManyLambda);
@@ -157,7 +159,7 @@ internal partial class ExpressionBuilder
         // elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
         if (query.where is { } queryWhere)
         {
-            @return = ctx.Where(queryWhere, rootScopeParameter, @return);
+            @return = ctx.Where(queryWhere, scopeParameter, @return);
         }
 
         if (query.@return != null)
@@ -165,7 +167,7 @@ internal partial class ExpressionBuilder
             using (ctx.PushElement(query.@return))
             {
                 var selectBody = ctx.TranslateExpression(query.@return.expression!);
-                var selectLambda = Expression.Lambda(selectBody, rootScopeParameter);
+                var selectLambda = Expression.Lambda(selectBody, scopeParameter);
                 var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
                 @return = callSelect;
             }
@@ -173,7 +175,7 @@ internal partial class ExpressionBuilder
 
         if (query.aggregate is { } queryAggregate)
         {
-            @return = ctx.AggregateClause(query, queryAggregate, rootScopeParameter, @return);
+            @return = ctx.AggregateClause(query, queryAggregate, scopeParameter, @return);
         }
 
         if (query.sort is { by.Length: > 0 })
@@ -205,16 +207,16 @@ internal partial class ExpressionBuilder
         return source;
     }
 
-    private (Expression joinedSource, bool[] isSourcePromoted) CrossJoinNew(
-        Query multiSourceQuery)
+    private (Expression sourceExpression, bool[] isSourcePromoted) ProcessQuerySources(Query query)
     {
-        AliasedQuerySource[] sources = multiSourceQuery.source;
-        if (sources.Length < 2)
-            throw this.NewExpressionBuildingException("This CrossJoin method should only be called on multi-source queries.");
+        AliasedQuerySource[] sources = query.source;
+
+        if (sources.Length is 0)
+            throw this.NewExpressionBuildingException("A query must have at least one source.");
 
         var aliases = sources.SelectToArray(s => s.alias);
         if (aliases.Any(alias => string.IsNullOrEmpty(alias)))
-            throw this.NewExpressionBuildingException("Multi-source Queries must all have aliases.");
+            throw this.NewExpressionBuildingException("Query sources must have aliases.");
 
         var sourceExpressions = sources
             .SelectToArray(source => TranslateExpression(source.expression));
@@ -233,6 +235,10 @@ internal partial class ExpressionBuilder
 
         if (promotedSourceExpressions.Any(promotedSource => !IsOrImplementsIEnumerableOfT(promotedSource.Type)))
             throw this.NewExpressionBuildingException("A promoted source must have a type that is enumerable.");
+
+        // Only one source, so no need for cross-joining. Return as-is.
+        if (sources.Length == 1)
+            return (promotedSourceExpressions[0], isSourcesPromoted);
 
         var crossJoinedValueTupleResultsExpression = _operatorBinding.Bind(
             CqlOperator.CrossJoin,
@@ -301,12 +307,6 @@ internal partial class ExpressionBuilder
             LibraryDefinitionsBuilder.ContextParameter,
             crossJoinedValueTupleResultsExpression,
             selectExpression);
-
-        // The technique here is to create a cross product of all the query sources.
-        // The combinations will be stored in a tuple whose fields are named by source alias.
-        // we will then create an expression that creates this cross-product of tuples,
-        // and use that as the singular query source for subsequent parts of the query.
-        // var multiSourceTupleType = TupleTypeFor(all.ToDictionary(t => t.source.alias!, t => t.listElementType!));
 
         return (crossJoinedCqlTupleResultsExpression, isSourcesPromoted)!;
     }
@@ -477,40 +477,24 @@ internal partial class ExpressionBuilder
         return @return;
     }
 
-    private bool IsMultiSourceSingletonLibrary => // REVIEW: Remove this
-        LibraryContext.Library.OriginalFilePath!.Contains("Urinary");
-
-    protected Expression MultiSourceQuery(Query query)
+    protected static Expression MultiSourceQuery(ExpressionBuilder ctx, Query query)
     {
-        ExpressionBuilder ctx = this;
+        //ExpressionBuilder ctx = this;
 
-        Expression? @return;
-        bool[]? isSourcesPromoted;
-        Type multiSourceTupleType;
-
-        // if (IsMultiSourceSingletonLibrary)
-        // {
-            (@return, isSourcesPromoted) = ctx.CrossJoinNew(query);
-            multiSourceTupleType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
-        // }
-        // else
-        // {
-        //     multiSourceTupleType = ctx.GetMultiSourceTupleType(query);
-        //     (@return, isSourcesPromoted) = ctx.CrossJoin(query, multiSourceTupleType);
-        // }
-
-        var elementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        var (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
+        var multiSourceTupleType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        var elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
 
         if (elementType != multiSourceTupleType)
             throw ctx.NewExpressionBuildingException($"Expected element type {multiSourceTupleType.Name} but got {elementType.Name}");
 
         var sourceParameterName = TypeNameToIdentifier(elementType, ctx);
-        var sourceParameter = Expression.Parameter(elementType, sourceParameterName);
+        var scopeParameter = Expression.Parameter(elementType, sourceParameterName);
 
         var scopes =
             (
                 from property in multiSourceTupleType!.GetProperties()
-                let propertyAccess = Expression.Property(sourceParameter, property)
+                let propertyAccess = Expression.Property(scopeParameter, property)
                 select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
             )
             .ToArray();
@@ -525,43 +509,51 @@ internal partial class ExpressionBuilder
             }
         }
 
+        // handle with/such-that
         if (query.relationship is not null)
         {
             foreach (var relationship in query.relationship)
             {
-                var selectManyLambda = ctx.WithToSelectManyBody(multiSourceTupleType, relationship);
+                using (ctx.PushElement(relationship))
+                {
+                    var selectManyLambda = ctx.WithToSelectManyBody(scopeParameter, relationship);
+                    // var selectManyLambda = ctx.WithToSelectManyBody(multiSourceTupleType, relationship);
 
-                var selectManyCall = _operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
-                    @return, selectManyLambda);
-                if (relationship is Without)
-                {
-                    var callExcept = _operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
-                        @return, selectManyCall);
-                    @return = callExcept;
-                }
-                else
-                {
-                    @return = selectManyCall;
+                    var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
+                        @return, selectManyLambda);
+                    if (relationship is Without)
+                    {
+                        var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
+                            @return, selectManyCall);
+                        @return = callExcept;
+                    }
+                    else
+                    {
+                        @return = selectManyCall;
+                    }
                 }
             }
         }
 
         if (query.where is { } queryWhere)
         {
-            @return = ctx.Where(queryWhere, sourceParameter, @return);
+            @return = ctx.Where(queryWhere, scopeParameter, @return);
         }
 
         if (query.@return != null)
         {
-            var selectBody = ctx.TranslateExpression(query.@return.expression!);
-            var selectLambda = Expression.Lambda(selectBody, sourceParameter);
-            var callSelect = _operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
-            @return = callSelect;
+            using (ctx.PushElement(query.@return))
+            {
+                var selectBody = ctx.TranslateExpression(query.@return.expression!);
+                var selectLambda = Expression.Lambda(selectBody, scopeParameter);
+                var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
+                @return = callSelect;
+            }
         }
 
         if (query.aggregate is { } queryAggregate)
         {
-            @return = ctx.AggregateClause(query, queryAggregate, sourceParameter, @return);
+            @return = ctx.AggregateClause(query, queryAggregate, scopeParameter, @return);
         }
 
         if (query.sort is { by.Length: > 0 })
@@ -624,7 +616,7 @@ internal partial class ExpressionBuilder
         //     @return = callSingle;
         // }
 
-        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted=>isSourcePromoted);
+        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
         return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
     }
 
