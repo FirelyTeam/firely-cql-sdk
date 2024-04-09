@@ -21,7 +21,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Operators;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
@@ -34,16 +33,13 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     partial class ExpressionBuilder
     {
-        // Yeah, hardwired to FHIR 4.0.1 for now.
-        private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
-
         private readonly OperatorBinding _operatorBinding;
         private readonly TypeManager _typeManager;
         private readonly ILogger<ExpressionBuilder> _logger;
         private readonly TypeConverter _typeConverter;
         private readonly TypeResolver _typeResolver;
 
-        private readonly Stack<Elm.Element> _elementStack;
+        private readonly Stack<Element> _elementStack;
         private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
         private readonly LibraryExpressionBuilder _libraryContext;
         private readonly Dictionary<string, DefinitionDictionary<LambdaExpression>> _libraries;
@@ -51,7 +47,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private readonly IDictionary<string, (Expression, Elm.Element)> _scopes;
+        private readonly IDictionary<string, (Expression, Element)> _scopes;
 
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
@@ -107,7 +103,7 @@ namespace Hl7.Cql.Compiler
             _impliedAlias = null;
             _operands = new Dictionary<string, ParameterExpression>();
             _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopes = new Dictionary<string, (Expression, Elm.Element)>();
+            _scopes = new Dictionary<string, (Expression, Element)>();
             _expressionMutators = new List<IExpressionMutator>();
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
@@ -115,7 +111,7 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilder(
             ExpressionBuilder source)
         {
-            _elementStack = new Stack<Elm.Element>(source._elementStack);
+            _elementStack = new Stack<Element>(source._elementStack);
             _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
             _operatorBinding = source._operatorBinding;
             _impliedAlias = source._impliedAlias;
@@ -134,7 +130,7 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilder(
             ExpressionBuilder outer,
             string? impliedAlias,
-            IDictionary<string, (Expression, Elm.Element)> scopes) : this(outer)
+            IDictionary<string, (Expression, Element)> scopes) : this(outer)
         {
             _scopes = scopes;
             _impliedAlias = impliedAlias;
@@ -220,7 +216,7 @@ namespace Hl7.Cql.Compiler
                             Variance variance          => AggregateOperator(CqlOperator.Variance, variance),
 
                             Negate neg                 => neg.operand is
-                                Elm.Literal literal
+                                Literal literal
                                 ? NegateLiteral(neg, literal)
                                 : UnaryOperator(CqlOperator.Negate, neg),
 
@@ -336,6 +332,12 @@ namespace Hl7.Cql.Compiler
                         return expression!;
                     }
                 });
+
+        protected Expression? Mutate(Element op, Expression? expression) =>
+            _expressionMutators.Aggregate(
+                expression,
+                (current, visitor) =>
+                    visitor.Mutate(current!, op, this));
 
         protected Expression BindCqlOperator(CqlOperator @operator, params Expression[] parameters)
             => _operatorBinding.Bind(@operator, LibraryDefinitionsBuilder.ContextParameter, parameters);

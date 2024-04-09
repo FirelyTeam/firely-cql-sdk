@@ -166,7 +166,7 @@ partial class ExpressionBuilder
                     parameters = parameters
                         .Concat(_operands.Values)
                         .ToArray();
-                    if (TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
+                    if (_customImplementations.TryGetValue(expressionKey, out var factory))
                     {
                         var customLambda = factory(parameters);
                         _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,

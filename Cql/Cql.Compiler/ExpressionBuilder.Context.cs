@@ -85,14 +85,5 @@ namespace Hl7.Cql.Compiler
             var subContext = WithScopes(aliasName, new KeyValuePair<string, (Expression, Elm.Element)>(aliasName, (linqExpression, elmExpression)));
             return subContext;
         }
-
-        public Expression? Mutate(Elm.Element op, Expression? expression)
-        {
-            foreach (var visitor in _expressionMutators)
-            {
-                expression = visitor.Mutate(expression!, op, this);
-            }
-            return expression;
-        }
     }
 }
