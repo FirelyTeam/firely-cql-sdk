@@ -15,12 +15,10 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
-using JetBrains.Annotations;
 using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Compiler
@@ -274,7 +272,7 @@ namespace Hl7.Cql.Compiler
                 ?? throw new NotSupportedException($"No CrossJoin support for '{sources.Length}' source(s).");
 
             Type[] sourceListElementTypes =
-                sources.SelectToArray(s => this.TypeResolver.GetListElementType(s.Type, true)!);
+                sources.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!);
 
             var methodCrossJoin = genericDefinitionMethodCrossJoin.MakeGenericMethod(sourceListElementTypes);
 
@@ -489,7 +487,7 @@ namespace Hl7.Cql.Compiler
         private Expression Width(MemberExpression operators, Expression operand)
         {
             // This should be disallowed but isn't, so handle it:
-            if (operand.Type == typeof(Primitives.CqlInterval<object>))
+            if (operand.Type == typeof(CqlInterval<object>))
                 return Expression.Constant(null, typeof(int?));
             else return BindUnaryOperator(nameof(ICqlOperators.Width), operators, operand);
         }
@@ -516,9 +514,9 @@ namespace Hl7.Cql.Compiler
             {
                 if (low.Type == high.Type)
                 {
-                    return Expression.Constant(null, typeof(Primitives.CqlInterval<>).MakeGenericType(low.Type));
+                    return Expression.Constant(null, typeof(CqlInterval<>).MakeGenericType(low.Type));
                 }
-                else return Expression.Constant(null, typeof(Primitives.CqlInterval<object>));
+                else return Expression.Constant(null, typeof(CqlInterval<object>));
 
             }
 

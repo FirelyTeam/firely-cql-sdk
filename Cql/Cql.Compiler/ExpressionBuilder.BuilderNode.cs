@@ -8,11 +8,9 @@ namespace Hl7.Cql.Compiler;
 [DebuggerDisplay("{DebuggerView}")]
 partial class ExpressionBuilder : IBuilderNode
 {
-   private readonly Stack<Elm.Element> _elementStack = new();
-
     private IBuilderNode CreateBuilderNode() => new ExpressionBuilderNode()
     {
-        LibraryExpressionBuilder = LibraryContext,
+        LibraryExpressionBuilder = _libraryContext,
         ElementStackList = _elementStack.Reverse().ToList(),
         ElementStackPosition = _elementStack.Count - 1
     };
@@ -28,8 +26,8 @@ partial class ExpressionBuilder : IBuilderNode
         var locator = element?.locator;
 
         return string.IsNullOrWhiteSpace(locator)
-            ? $"{LibraryContext.LibraryKey}: {message}"
-            : $"{LibraryContext.LibraryKey} line {locator}: {message}";
+            ? $"{_libraryContext.LibraryKey}: {message}"
+            : $"{_libraryContext.LibraryKey} line {locator}: {message}";
     }
 
     public string DebuggerView => this.GetDebuggerView();

@@ -22,9 +22,9 @@ namespace Hl7.Cql.Compiler
             var operands = ce.operand!
                 .Select(op => TranslateExpression(op))
                 .ToArray();
-            if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
+            if (operands.Length == 1 && _typeResolver.ImplementsGenericIEnumerable(operands[0].Type))
             {
-                var call = _operatorBinding.Bind(CqlOperator.Coalesce, LibraryDefinitionsBuilder.ContextParameter, operands[0]);
+                var call = BindCqlOperator(CqlOperator.Coalesce, operands[0]);
                 return call;
             }
             var distinctOperandTypes = operands
@@ -65,14 +65,5 @@ namespace Hl7.Cql.Compiler
                 return asNullableBool;
             }
         }
-
-        protected Expression? IsFalse(Elm.IsFalse e) =>
-            UnaryOperator(CqlOperator.IsFalse, e);
-
-
-        protected Expression? IsTrue(Elm.IsTrue e) =>
-            UnaryOperator(CqlOperator.IsTrue, e);
-
-
     }
 }

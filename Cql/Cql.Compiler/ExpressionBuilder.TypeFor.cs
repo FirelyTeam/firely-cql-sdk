@@ -25,8 +25,8 @@ internal partial class ExpressionBuilder
         {
             case ExpressionRef expressionRef:
             {
-                var libraryName = expressionRef.libraryName ?? LibraryContext.LibraryKey;
-                if (!LibraryContext.LibraryDefinitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                var libraryName = expressionRef.libraryName ?? _libraryContext.LibraryKey;
+                if (!_libraryContext.LibraryDefinitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                     throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
                 var returnType = definition!.ReturnType;
@@ -89,7 +89,7 @@ internal partial class ExpressionBuilder
 
             case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
             {
-                Operands.TryGetValue(operandRef.name, out var operand);
+                _operands.TryGetValue(operandRef.name, out var operand);
                 if (operand != null)
                     return operand.Type;
                 break;

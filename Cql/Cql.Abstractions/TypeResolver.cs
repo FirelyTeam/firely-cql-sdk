@@ -127,6 +127,8 @@ namespace Hl7.Cql.Abstractions
         /// <returns><c>true</c> if the type implements the generic interface; otherwise, <c>false</c>.</returns>
         public abstract bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition);
 
+        internal virtual bool ImplementsGenericIEnumerable(Type type) => ImplementsGenericInterface(type, typeof(IEnumerable<>));
+
         /// <summary>
         /// Gets the list element type of <paramref name="type"/>.
         /// </summary>
