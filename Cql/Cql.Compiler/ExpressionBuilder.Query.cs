@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Expression = System.Linq.Expressions.Expression;
 using Hl7.Cql.Elm;
 
@@ -549,28 +550,4 @@ internal partial class ExpressionBuilder
         }
     }
 
-}
-
-internal static class Extensions
-{
-    public static T[] SelectToArray<TIn, T>(
-        this IReadOnlyCollection<TIn> source,
-        Func<TIn, T> select) =>
-        SelectToArray(source.AsEnumerable(), source.Count, select);
-
-    public static T[] SelectToArray<TIn, T>(
-        this IEnumerable<TIn> source,
-        int sourceLength,
-        Func<TIn, T> select)
-    {
-        T[] array = new T[sourceLength];
-        int i = -1;
-        foreach (var item in source)
-        {
-            ++i;
-            array[i] = select(item);
-        }
-
-        return array;
-    }
 }
