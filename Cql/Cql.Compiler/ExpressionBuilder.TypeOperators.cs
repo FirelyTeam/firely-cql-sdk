@@ -127,7 +127,7 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var source = TranslateExpression(e.source);
-                var call = _operatorBinding.Bind(CqlOperator.Descendents, LibraryDefinitionsBuilder.ContextParameter, source);
+                var call = BindCqlOperator(CqlOperator.Descendents, source);
                 return call;
             }
         }
@@ -143,36 +143,9 @@ namespace Hl7.Cql.Compiler
         {
             var quantity = TranslateExpression(cqe.operand![0]);
             var unit = TranslateExpression(cqe.operand![1]);
-            var call = _operatorBinding.Bind(CqlOperator.ConvertQuantity, LibraryDefinitionsBuilder.ContextParameter, quantity, unit);
+            var call = BindCqlOperator(CqlOperator.ConvertQuantity, quantity, unit);
             return call;
         }
-
-        protected Expression? ConvertsToLong(Elm.ConvertsToLong e) =>
-            UnaryOperator(CqlOperator.ConvertsToLong, e);
-
-        private Expression? ConvertsToInteger(Elm.ConvertsToInteger e) =>
-            UnaryOperator(CqlOperator.ConvertsToInteger, e);
-
-        protected Expression? ConvertsToDecimal(Elm.ConvertsToDecimal e) =>
-            UnaryOperator(CqlOperator.ConvertsToDecimal, e);
-
-        protected Expression? ConvertsToDateTime(Elm.ConvertsToDateTime e) =>
-            UnaryOperator(CqlOperator.ConvertsToDateTime, e);
-
-        protected Expression? ConvertsToDate(Elm.ConvertsToDate e) =>
-            UnaryOperator(CqlOperator.ConvertsToDate, e);
-
-        protected Expression? ConvertsToBoolean(Elm.ConvertsToBoolean e) =>
-            UnaryOperator(CqlOperator.ConvertsToDate, e);
-
-        private Expression? ConvertsToQuantity(Elm.ConvertsToQuantity e) =>
-            UnaryOperator(CqlOperator.ConvertsToQuantity, e);
-
-        private Expression? ConvertsToString(Elm.ConvertsToString e) =>
-            UnaryOperator(CqlOperator.ConvertsToString, e);
-
-        private Expression? ConvertsToTime(Elm.ConvertsToTime e) =>
-            UnaryOperator(CqlOperator.ConvertsToTime, e);
 
 
         protected Expression? ToBoolean(Elm.ToBoolean e)
@@ -238,7 +211,7 @@ namespace Hl7.Cql.Compiler
         protected Expression ToList(Elm.ToList e)
         {
             var operand = TranslateExpression(e.operand!);
-            var call = _operatorBinding.Bind(CqlOperator.ToList, LibraryDefinitionsBuilder.ContextParameter, operand);
+            var call = BindCqlOperator(CqlOperator.ToList, operand);
             return call;
         }
 
@@ -258,18 +231,18 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                var callSelect = _operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, input, lambda);
+                var callSelect = BindCqlOperator(CqlOperator.Select, input, lambda);
                 return callSelect;
             }
 
             if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                var call = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
+                var call = BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
                 return call;
             }
             else
             {
-                var call = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter, input, Expression.Constant(outputType, typeof(Type)));
+                var call = BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
                 return call;
             }
         }
