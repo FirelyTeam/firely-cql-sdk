@@ -162,7 +162,7 @@ namespace Hl7.Cql.Abstractions
         ConvertsToTime,
         ConvertsToString,
         ConvertsToQuantity,
-        Descendents,
+        Descendants,
         SelectMany,
         SelectManyResults,
         Where,
