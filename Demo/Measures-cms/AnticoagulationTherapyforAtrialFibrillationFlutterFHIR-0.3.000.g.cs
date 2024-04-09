@@ -294,23 +294,44 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				var bb_ = context.Operators.InList<string>(az_, (ba_ as IEnumerable<string>));
 				object bc_()
 				{
-					if (FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective) is CqlDateTime)
+					bool bi_()
 					{
-						var bi_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bl_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bm_ = bl_ is CqlDateTime;
 
-						return ((bi_ as CqlDateTime) as object);
+						return bm_;
+					};
+					bool bj_()
+					{
+						var bn_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bo_ = bn_ is CqlInterval<CqlDateTime>;
+
+						return bo_;
+					};
+					bool bk_()
+					{
+						var bp_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bq_ = bp_ is CqlDateTime;
+
+						return bq_;
+					};
+					if (bi_())
+					{
+						var br_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+
+						return ((br_ as CqlDateTime) as object);
 					}
-					else if (FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective) is CqlInterval<CqlDateTime>)
+					else if (bj_())
 					{
-						var bj_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bs_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bj_ as CqlInterval<CqlDateTime>) as object);
+						return ((bs_ as CqlInterval<CqlDateTime>) as object);
 					}
-					else if (FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective) is CqlDateTime)
+					else if (bk_())
 					{
-						var bk_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bt_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bk_ as CqlDateTime) as object);
+						return ((bt_ as CqlDateTime) as object);
 					}
 					else
 					{

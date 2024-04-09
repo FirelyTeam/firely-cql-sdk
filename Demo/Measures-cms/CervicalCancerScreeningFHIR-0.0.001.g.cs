@@ -335,23 +335,44 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		{
 			object f_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective) is CqlDateTime)
+				bool s_()
 				{
-					var s_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
+					var v_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
+					var w_ = v_ is CqlDateTime;
 
-					return ((s_ as CqlDateTime) as object);
+					return w_;
+				};
+				bool t_()
+				{
+					var x_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
+					var y_ = x_ is CqlInterval<CqlDateTime>;
+
+					return y_;
+				};
+				bool u_()
+				{
+					var z_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
+					var aa_ = z_ is CqlDateTime;
+
+					return aa_;
+				};
+				if (s_())
+				{
+					var ab_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
+
+					return ((ab_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective) is CqlInterval<CqlDateTime>)
+				else if (t_())
 				{
-					var t_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
+					var ac_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
 
-					return ((t_ as CqlInterval<CqlDateTime>) as object);
+					return ((ac_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective) is CqlDateTime)
+				else if (u_())
 				{
-					var u_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
+					var ad_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Effective);
 
-					return ((u_ as CqlDateTime) as object);
+					return ((ad_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -392,23 +413,44 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
 			object h_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective) is CqlDateTime)
+				bool aa_()
 				{
-					var aa_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var ad_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var ae_ = ad_ is CqlDateTime;
 
-					return ((aa_ as CqlDateTime) as object);
+					return ae_;
+				};
+				bool ab_()
+				{
+					var af_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var ag_ = af_ is CqlInterval<CqlDateTime>;
+
+					return ag_;
+				};
+				bool ac_()
+				{
+					var ah_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var ai_ = ah_ is CqlDateTime;
+
+					return ai_;
+				};
+				if (aa_())
+				{
+					var aj_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+
+					return ((aj_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective) is CqlInterval<CqlDateTime>)
+				else if (ab_())
 				{
-					var ab_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var ak_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
 
-					return ((ab_ as CqlInterval<CqlDateTime>) as object);
+					return ((ak_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective) is CqlDateTime)
+				else if (ac_())
 				{
-					var ac_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var al_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
 
-					return ((ac_ as CqlDateTime) as object);
+					return ((al_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -421,23 +463,44 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var l_ = context.Operators.GreaterOrEqual(k_, (int?)30);
 			object m_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective) is CqlDateTime)
+				bool am_()
 				{
-					var ad_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var ap_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var aq_ = ap_ is CqlDateTime;
 
-					return ((ad_ as CqlDateTime) as object);
+					return aq_;
+				};
+				bool an_()
+				{
+					var ar_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var as_ = ar_ is CqlInterval<CqlDateTime>;
+
+					return as_;
+				};
+				bool ao_()
+				{
+					var at_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var au_ = at_ is CqlDateTime;
+
+					return au_;
+				};
+				if (am_())
+				{
+					var av_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+
+					return ((av_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective) is CqlInterval<CqlDateTime>)
+				else if (an_())
 				{
-					var ae_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var aw_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
 
-					return ((ae_ as CqlInterval<CqlDateTime>) as object);
+					return ((aw_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective) is CqlDateTime)
+				else if (ao_())
 				{
-					var af_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
+					var ax_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Effective);
 
-					return ((af_ as CqlDateTime) as object);
+					return ((ax_ as CqlDateTime) as object);
 				}
 				else
 				{

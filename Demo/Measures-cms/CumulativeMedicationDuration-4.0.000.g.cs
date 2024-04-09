@@ -790,253 +790,582 @@ public class CumulativeMedicationDuration_4_0_000
 	{
 		decimal? a_()
 		{
-			if ((context.Operators.Equivalent(frequency, this.HS()) ?? false))
+			bool b_()
 			{
-				var b_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var aw_ = this.HS();
+				var ax_ = context.Operators.Equivalent(frequency, aw_);
 
-				return b_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.WAKE()) ?? false))
+				return (ax_ ?? false);
+			};
+			bool c_()
 			{
-				var c_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var ay_ = this.WAKE();
+				var az_ = context.Operators.Equivalent(frequency, ay_);
 
-				return c_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.C()) ?? false))
+				return (az_ ?? false);
+			};
+			bool d_()
 			{
-				var d_ = context.Operators.ConvertIntegerToDecimal((int?)3);
+				var ba_ = this.C();
+				var bb_ = context.Operators.Equivalent(frequency, ba_);
 
-				return d_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.CM()) ?? false))
+				return (bb_ ?? false);
+			};
+			bool e_()
 			{
-				var e_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bc_ = this.CM();
+				var bd_ = context.Operators.Equivalent(frequency, bc_);
 
-				return e_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.CD()) ?? false))
+				return (bd_ ?? false);
+			};
+			bool f_()
 			{
-				var f_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var be_ = this.CD();
+				var bf_ = context.Operators.Equivalent(frequency, be_);
 
-				return f_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.CV()) ?? false))
+				return (bf_ ?? false);
+			};
+			bool g_()
 			{
-				var g_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bg_ = this.CV();
+				var bh_ = context.Operators.Equivalent(frequency, bg_);
 
-				return g_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.AC()) ?? false))
+				return (bh_ ?? false);
+			};
+			bool h_()
 			{
-				var h_ = context.Operators.ConvertIntegerToDecimal((int?)3);
+				var bi_ = this.AC();
+				var bj_ = context.Operators.Equivalent(frequency, bi_);
 
-				return h_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.ACM()) ?? false))
+				return (bj_ ?? false);
+			};
+			bool i_()
 			{
-				var i_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bk_ = this.ACM();
+				var bl_ = context.Operators.Equivalent(frequency, bk_);
 
-				return i_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.ACD()) ?? false))
+				return (bl_ ?? false);
+			};
+			bool j_()
 			{
-				var j_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bm_ = this.ACD();
+				var bn_ = context.Operators.Equivalent(frequency, bm_);
 
-				return j_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.ACV()) ?? false))
+				return (bn_ ?? false);
+			};
+			bool k_()
 			{
-				var k_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bo_ = this.ACV();
+				var bp_ = context.Operators.Equivalent(frequency, bo_);
 
-				return k_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.PC()) ?? false))
+				return (bp_ ?? false);
+			};
+			bool l_()
 			{
-				var l_ = context.Operators.ConvertIntegerToDecimal((int?)3);
+				var bq_ = this.PC();
+				var br_ = context.Operators.Equivalent(frequency, bq_);
 
-				return l_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.PCM()) ?? false))
+				return (br_ ?? false);
+			};
+			bool m_()
 			{
-				var m_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bs_ = this.PCM();
+				var bt_ = context.Operators.Equivalent(frequency, bs_);
 
-				return m_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.PCD()) ?? false))
+				return (bt_ ?? false);
+			};
+			bool n_()
 			{
-				var n_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bu_ = this.PCD();
+				var bv_ = context.Operators.Equivalent(frequency, bu_);
 
-				return n_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.PCV()) ?? false))
+				return (bv_ ?? false);
+			};
+			bool o_()
 			{
-				var o_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var bw_ = this.PCV();
+				var bx_ = context.Operators.Equivalent(frequency, bw_);
 
-				return o_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.MORN()) ?? false))
+				return (bx_ ?? false);
+			};
+			bool p_()
 			{
-				var p_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var by_ = this.MORN();
+				var bz_ = context.Operators.Equivalent(frequency, by_);
 
-				return p_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.MORN_early()) ?? false))
+				return (bz_ ?? false);
+			};
+			bool q_()
 			{
-				var q_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var ca_ = this.MORN_early();
+				var cb_ = context.Operators.Equivalent(frequency, ca_);
 
-				return q_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.MORN_late()) ?? false))
+				return (cb_ ?? false);
+			};
+			bool r_()
 			{
-				var r_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var cc_ = this.MORN_late();
+				var cd_ = context.Operators.Equivalent(frequency, cc_);
 
-				return r_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.NOON()) ?? false))
+				return (cd_ ?? false);
+			};
+			bool s_()
 			{
-				var s_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var ce_ = this.NOON();
+				var cf_ = context.Operators.Equivalent(frequency, ce_);
 
-				return s_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.AFT()) ?? false))
+				return (cf_ ?? false);
+			};
+			bool t_()
 			{
-				var t_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var cg_ = this.AFT();
+				var ch_ = context.Operators.Equivalent(frequency, cg_);
 
-				return t_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.AFT_early()) ?? false))
+				return (ch_ ?? false);
+			};
+			bool u_()
 			{
-				var u_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var ci_ = this.AFT_early();
+				var cj_ = context.Operators.Equivalent(frequency, ci_);
 
-				return u_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.AFT_late()) ?? false))
+				return (cj_ ?? false);
+			};
+			bool v_()
 			{
-				var v_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var ck_ = this.AFT_late();
+				var cl_ = context.Operators.Equivalent(frequency, ck_);
 
-				return v_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.EVE()) ?? false))
+				return (cl_ ?? false);
+			};
+			bool w_()
 			{
-				var w_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var cm_ = this.EVE();
+				var cn_ = context.Operators.Equivalent(frequency, cm_);
 
-				return w_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.EVE_early()) ?? false))
+				return (cn_ ?? false);
+			};
+			bool x_()
 			{
-				var x_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var co_ = this.EVE_early();
+				var cp_ = context.Operators.Equivalent(frequency, co_);
 
-				return x_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.EVE_late()) ?? false))
+				return (cp_ ?? false);
+			};
+			bool y_()
 			{
-				var y_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var cq_ = this.EVE_late();
+				var cr_ = context.Operators.Equivalent(frequency, cq_);
 
-				return y_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.NIGHT()) ?? false))
+				return (cr_ ?? false);
+			};
+			bool z_()
 			{
-				var z_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var cs_ = this.NIGHT();
+				var ct_ = context.Operators.Equivalent(frequency, cs_);
 
-				return z_;
-			}
-			else if ((context.Operators.Equivalent(frequency, this.PHS()) ?? false))
+				return (ct_ ?? false);
+			};
+			bool aa_()
 			{
-				var aa_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+				var cu_ = this.PHS();
+				var cv_ = context.Operators.Equivalent(frequency, cu_);
 
-				return aa_;
+				return (cv_ ?? false);
+			};
+			bool ab_()
+			{
+				var cw_ = this.Once_daily__qualifier_value_();
+				var cx_ = context.Operators.Equivalent(frequency, cw_);
+
+				return (cx_ ?? false);
+			};
+			bool ac_()
+			{
+				var cy_ = this.Twice_a_day__qualifier_value_();
+				var cz_ = context.Operators.Equivalent(frequency, cy_);
+
+				return (cz_ ?? false);
+			};
+			bool ad_()
+			{
+				var da_ = this.Three_times_daily__qualifier_value_();
+				var db_ = context.Operators.Equivalent(frequency, da_);
+
+				return (db_ ?? false);
+			};
+			bool ae_()
+			{
+				var dc_ = this.Four_times_daily__qualifier_value_();
+				var dd_ = context.Operators.Equivalent(frequency, dc_);
+
+				return (dd_ ?? false);
+			};
+			bool af_()
+			{
+				var de_ = this.Every_twenty_four_hours__qualifier_value_();
+				var df_ = context.Operators.Equivalent(frequency, de_);
+
+				return (df_ ?? false);
+			};
+			bool ag_()
+			{
+				var dg_ = this.Every_twelve_hours__qualifier_value_();
+				var dh_ = context.Operators.Equivalent(frequency, dg_);
+
+				return (dh_ ?? false);
+			};
+			bool ah_()
+			{
+				var di_ = this.Every_thirty_six_hours__qualifier_value_();
+				var dj_ = context.Operators.Equivalent(frequency, di_);
+
+				return (dj_ ?? false);
+			};
+			bool ai_()
+			{
+				var dk_ = this.Every_eight_hours__qualifier_value_();
+				var dl_ = context.Operators.Equivalent(frequency, dk_);
+
+				return (dl_ ?? false);
+			};
+			bool aj_()
+			{
+				var dm_ = this.Every_four_hours__qualifier_value_();
+				var dn_ = context.Operators.Equivalent(frequency, dm_);
+
+				return (dn_ ?? false);
+			};
+			bool ak_()
+			{
+				var do_ = this.Every_six_hours__qualifier_value_();
+				var dp_ = context.Operators.Equivalent(frequency, do_);
+
+				return (dp_ ?? false);
+			};
+			bool al_()
+			{
+				var dq_ = this.Every_seventy_two_hours__qualifier_value_();
+				var dr_ = context.Operators.Equivalent(frequency, dq_);
+
+				return (dr_ ?? false);
+			};
+			bool am_()
+			{
+				var ds_ = this.Every_forty_eight_hours__qualifier_value_();
+				var dt_ = context.Operators.Equivalent(frequency, ds_);
+
+				return (dt_ ?? false);
+			};
+			bool an_()
+			{
+				var du_ = this.Every_eight_to_twelve_hours__qualifier_value_();
+				var dv_ = context.Operators.Equivalent(frequency, du_);
+
+				return (dv_ ?? false);
+			};
+			bool ao_()
+			{
+				var dw_ = this.Every_six_to_eight_hours__qualifier_value_();
+				var dx_ = context.Operators.Equivalent(frequency, dw_);
+
+				return (dx_ ?? false);
+			};
+			bool ap_()
+			{
+				var dy_ = this.Every_three_to_four_hours__qualifier_value_();
+				var dz_ = context.Operators.Equivalent(frequency, dy_);
+
+				return (dz_ ?? false);
+			};
+			bool aq_()
+			{
+				var ea_ = this.Every_three_to_six_hours__qualifier_value_();
+				var eb_ = context.Operators.Equivalent(frequency, ea_);
+
+				return (eb_ ?? false);
+			};
+			bool ar_()
+			{
+				var ec_ = this.Every_two_to_four_hours__qualifier_value_();
+				var ed_ = context.Operators.Equivalent(frequency, ec_);
+
+				return (ed_ ?? false);
+			};
+			bool as_()
+			{
+				var ee_ = this.One_to_four_times_a_day__qualifier_value_();
+				var ef_ = context.Operators.Equivalent(frequency, ee_);
+
+				return (ef_ ?? false);
+			};
+			bool at_()
+			{
+				var eg_ = this.One_to_three_times_a_day__qualifier_value_();
+				var eh_ = context.Operators.Equivalent(frequency, eg_);
+
+				return (eh_ ?? false);
+			};
+			bool au_()
+			{
+				var ei_ = this.One_to_two_times_a_day__qualifier_value_();
+				var ej_ = context.Operators.Equivalent(frequency, ei_);
+
+				return (ej_ ?? false);
+			};
+			bool av_()
+			{
+				var ek_ = this.Two_to_four_times_a_day__qualifier_value_();
+				var el_ = context.Operators.Equivalent(frequency, ek_);
+
+				return (el_ ?? false);
+			};
+			if (b_())
+			{
+				var em_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return em_;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Once_daily__qualifier_value_()) ?? false))
+			else if (c_())
+			{
+				var en_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return en_;
+			}
+			else if (d_())
+			{
+				var eo_ = context.Operators.ConvertIntegerToDecimal((int?)3);
+
+				return eo_;
+			}
+			else if (e_())
+			{
+				var ep_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return ep_;
+			}
+			else if (f_())
+			{
+				var eq_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return eq_;
+			}
+			else if (g_())
+			{
+				var er_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return er_;
+			}
+			else if (h_())
+			{
+				var es_ = context.Operators.ConvertIntegerToDecimal((int?)3);
+
+				return es_;
+			}
+			else if (i_())
+			{
+				var et_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return et_;
+			}
+			else if (j_())
+			{
+				var eu_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return eu_;
+			}
+			else if (k_())
+			{
+				var ev_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return ev_;
+			}
+			else if (l_())
+			{
+				var ew_ = context.Operators.ConvertIntegerToDecimal((int?)3);
+
+				return ew_;
+			}
+			else if (m_())
+			{
+				var ex_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return ex_;
+			}
+			else if (n_())
+			{
+				var ey_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return ey_;
+			}
+			else if (o_())
+			{
+				var ez_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return ez_;
+			}
+			else if (p_())
+			{
+				var fa_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fa_;
+			}
+			else if (q_())
+			{
+				var fb_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fb_;
+			}
+			else if (r_())
+			{
+				var fc_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fc_;
+			}
+			else if (s_())
+			{
+				var fd_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fd_;
+			}
+			else if (t_())
+			{
+				var fe_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fe_;
+			}
+			else if (u_())
+			{
+				var ff_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return ff_;
+			}
+			else if (v_())
+			{
+				var fg_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fg_;
+			}
+			else if (w_())
+			{
+				var fh_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fh_;
+			}
+			else if (x_())
+			{
+				var fi_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fi_;
+			}
+			else if (y_())
+			{
+				var fj_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fj_;
+			}
+			else if (z_())
+			{
+				var fk_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fk_;
+			}
+			else if (aa_())
+			{
+				var fl_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+
+				return fl_;
+			}
+			else if (ab_())
 			{
 				return (decimal?)1.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Twice_a_day__qualifier_value_()) ?? false))
+			else if (ac_())
 			{
 				return (decimal?)2.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Three_times_daily__qualifier_value_()) ?? false))
+			else if (ad_())
 			{
 				return (decimal?)3.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Four_times_daily__qualifier_value_()) ?? false))
+			else if (ae_())
 			{
 				return (decimal?)4.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_twenty_four_hours__qualifier_value_()) ?? false))
+			else if (af_())
 			{
 				return (decimal?)1.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_twelve_hours__qualifier_value_()) ?? false))
+			else if (ag_())
 			{
 				return (decimal?)2.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_thirty_six_hours__qualifier_value_()) ?? false))
+			else if (ah_())
 			{
 				return (decimal?)0.67m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_eight_hours__qualifier_value_()) ?? false))
+			else if (ai_())
 			{
 				return (decimal?)3.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_four_hours__qualifier_value_()) ?? false))
+			else if (aj_())
 			{
 				return (decimal?)6.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_six_hours__qualifier_value_()) ?? false))
+			else if (ak_())
 			{
 				return (decimal?)4.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_seventy_two_hours__qualifier_value_()) ?? false))
+			else if (al_())
 			{
 				return (decimal?)0.33m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_forty_eight_hours__qualifier_value_()) ?? false))
+			else if (am_())
 			{
 				return (decimal?)0.5m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_eight_to_twelve_hours__qualifier_value_()) ?? false))
+			else if (an_())
 			{
 				return (decimal?)3.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_six_to_eight_hours__qualifier_value_()) ?? false))
+			else if (ao_())
 			{
 				return (decimal?)4.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_three_to_four_hours__qualifier_value_()) ?? false))
+			else if (ap_())
 			{
 				return (decimal?)8.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_three_to_six_hours__qualifier_value_()) ?? false))
+			else if (aq_())
 			{
 				return (decimal?)8.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Every_two_to_four_hours__qualifier_value_()) ?? false))
+			else if (ar_())
 			{
 				return (decimal?)12.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.One_to_four_times_a_day__qualifier_value_()) ?? false))
+			else if (as_())
 			{
 				return (decimal?)4.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.One_to_three_times_a_day__qualifier_value_()) ?? false))
+			else if (at_())
 			{
 				return (decimal?)3.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.One_to_two_times_a_day__qualifier_value_()) ?? false))
+			else if (au_())
 			{
 				return (decimal?)2.0m;
 			}
-			else if ((context.Operators.Equivalent(frequency, this.Two_to_four_times_a_day__qualifier_value_()) ?? false))
+			else if (av_())
 			{
 				return (decimal?)4.0m;
 			}
 			else
 			{
-				var ab_ = this.ErrorLevel();
-				var ac_ = context.Operators.Concatenate("Unknown frequency code ", (frequency?.code ?? ""));
-				var ad_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", ab_, ac_);
+				var fm_ = this.ErrorLevel();
+				var fn_ = context.Operators.Concatenate("Unknown frequency code ", (frequency?.code ?? ""));
+				var fo_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", fm_, fn_);
 
-				return (decimal?)ad_;
+				return (decimal?)fo_;
 			};
 		};
 
@@ -1060,74 +1389,129 @@ public class CumulativeMedicationDuration_4_0_000
 		{
 			CqlInterval<CqlDate> e_()
 			{
-				if ((context.Operators.And(context.Operators.Not((bool?)(((context.Operators.DateFrom(context.Operators.Start((FHIRHelpers_4_3_000.ToValue((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds) as CqlInterval<CqlDateTime>))) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement))) ?? context.Operators.DateFrom(context.Operators.Start(FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod)))) is null)), context.Operators.Not((bool?)(context.Operators.Multiply(((context.Operators.ConvertQuantity(FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity)), "d"))?.value ?? context.Operators.Divide(FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity)?.value, context.Operators.Multiply((context.Operators.End((FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlInterval<CqlQuantity>)) ?? (FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlQuantity))?.value, ((this.ToDaily((((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyMaxElement)?.Value ?? ((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyElement)?.Value), this.Quantity(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodElement)?.Value, context.Operators.Convert<string>(context.Operators.Convert<Code<Timing.UnitsOfTime>>(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodUnitElement)?.Value)))) ?? context.Operators.ConvertIntegerToDecimal(context.Operators.CountOrNull<CqlTime>(context.Operators.LateBoundProperty<IEnumerable<CqlTime>>((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.TimeOfDayElement, "value")))) ?? (decimal?)1.0m)))), context.Operators.ConvertIntegerToDecimal(context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0)))) is null))) ?? false))
+				bool f_()
 				{
-					var f_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-					var g_ = FHIRHelpers_4_3_000.ToValue(f_?.Timing?.Repeat?.Bounds);
-					var h_ = context.Operators.Start((g_ as CqlInterval<CqlDateTime>));
-					var i_ = context.Operators.DateFrom(h_);
-					var j_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
+					var h_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Timing?.Repeat?.Bounds);
+					var j_ = context.Operators.Start((i_ as CqlInterval<CqlDateTime>));
 					var k_ = context.Operators.DateFrom(j_);
-					var l_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
-					var m_ = context.Operators.Start(l_);
-					var n_ = context.Operators.DateFrom(m_);
-					var p_ = FHIRHelpers_4_3_000.ToValue(f_?.Timing?.Repeat?.Bounds);
-					var q_ = context.Operators.Start((p_ as CqlInterval<CqlDateTime>));
-					var r_ = context.Operators.DateFrom(q_);
-					var t_ = context.Operators.DateFrom(j_);
-					var v_ = context.Operators.Start(l_);
-					var w_ = context.Operators.DateFrom(v_);
-					var x_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
-					var y_ = context.Operators.ConvertQuantity(x_, "d");
-					var z_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
-					var ab_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((f_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-					var ac_ = FHIRHelpers_4_3_000.ToValue(ab_?.Dose);
-					var ad_ = context.Operators.End((ac_ as CqlInterval<CqlQuantity>));
-					var af_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((f_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-					var ag_ = FHIRHelpers_4_3_000.ToValue(af_?.Dose);
-					var al_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(f_?.Timing?.Repeat?.PeriodUnitElement?.Value);
-					var am_ = context.Operators.Convert<string>(al_);
-					var an_ = this.Quantity(f_?.Timing?.Repeat?.PeriodElement?.Value, am_);
-					var ao_ = this.ToDaily((f_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? f_?.Timing?.Repeat?.FrequencyElement?.Value), an_);
-					var aq_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(f_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var ar_ = context.Operators.CountOrNull<CqlTime>(aq_);
-					var as_ = context.Operators.ConvertIntegerToDecimal(ar_);
-					var at_ = context.Operators.Multiply((ad_ ?? (ag_ as CqlQuantity))?.value, ((ao_ ?? as_) ?? (decimal?)1.0m));
-					var au_ = context.Operators.Divide(z_?.value, at_);
-					var av_ = context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0));
-					var aw_ = context.Operators.ConvertIntegerToDecimal(av_);
-					var ax_ = context.Operators.Multiply((y_?.value ?? au_), aw_);
-					var ay_ = context.Operators.ConvertIntegerToDecimal((int?)1);
-					var az_ = context.Operators.Subtract(ax_, ay_);
-					var ba_ = this.Quantity(az_, "day");
-					var bb_ = context.Operators.Add(((r_ ?? t_) ?? w_), ba_);
-					var bc_ = context.Operators.Interval(((i_ ?? k_) ?? n_), bb_, true, true);
+					var l_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
+					var m_ = context.Operators.DateFrom(l_);
+					var n_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
+					var o_ = context.Operators.Start(n_);
+					var p_ = context.Operators.DateFrom(o_);
+					var q_ = context.Operators.Not((bool?)(((k_ ?? m_) ?? p_) is null));
+					var r_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
+					var s_ = context.Operators.ConvertQuantity(r_, "d");
+					var t_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
+					var v_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var w_ = FHIRHelpers_4_3_000.ToValue(v_?.Dose);
+					var x_ = context.Operators.End((w_ as CqlInterval<CqlQuantity>));
+					var z_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Dose);
+					var af_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(h_?.Timing?.Repeat?.PeriodUnitElement?.Value);
+					var ag_ = context.Operators.Convert<string>(af_);
+					var ah_ = this.Quantity(h_?.Timing?.Repeat?.PeriodElement?.Value, ag_);
+					var ai_ = this.ToDaily((h_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? h_?.Timing?.Repeat?.FrequencyElement?.Value), ah_);
+					var ak_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(h_?.Timing?.Repeat?.TimeOfDayElement, "value");
+					var al_ = context.Operators.CountOrNull<CqlTime>(ak_);
+					var am_ = context.Operators.ConvertIntegerToDecimal(al_);
+					var an_ = context.Operators.Multiply((x_ ?? (aa_ as CqlQuantity))?.value, ((ai_ ?? am_) ?? (decimal?)1.0m));
+					var ao_ = context.Operators.Divide(t_?.value, an_);
+					var ap_ = context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0));
+					var aq_ = context.Operators.ConvertIntegerToDecimal(ap_);
+					var ar_ = context.Operators.Multiply((s_?.value ?? ao_), aq_);
+					var as_ = context.Operators.Not((bool?)(ar_ is null));
+					var at_ = context.Operators.And(q_, as_);
 
-					return bc_;
-				}
-				else if ((context.Operators.And(context.Operators.Not((bool?)(((context.Operators.DateFrom(context.Operators.Start((FHIRHelpers_4_3_000.ToValue((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds) as CqlInterval<CqlDateTime>))) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement))) ?? context.Operators.DateFrom(context.Operators.Start(FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod)))) is null)), context.Operators.Not((bool?)((FHIRHelpers_4_3_000.ToValue((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds) as CqlInterval<CqlDateTime>)?.high is null))) ?? false))
+					return (at_ ?? false);
+				};
+				bool g_()
 				{
-					var bd_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-					var be_ = FHIRHelpers_4_3_000.ToValue(bd_?.Timing?.Repeat?.Bounds);
-					var bf_ = context.Operators.Start((be_ as CqlInterval<CqlDateTime>));
-					var bg_ = context.Operators.DateFrom(bf_);
-					var bh_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
-					var bi_ = context.Operators.DateFrom(bh_);
-					var bj_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
-					var bk_ = context.Operators.Start(bj_);
-					var bl_ = context.Operators.DateFrom(bk_);
-					var bn_ = FHIRHelpers_4_3_000.ToValue(bd_?.Timing?.Repeat?.Bounds);
-					var bo_ = context.Operators.End((bn_ as CqlInterval<CqlDateTime>));
-					var bp_ = context.Operators.DateFrom(bo_);
-					var bq_ = context.Operators.Interval(((bg_ ?? bi_) ?? bl_), bp_, true, true);
+					var au_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var av_ = FHIRHelpers_4_3_000.ToValue(au_?.Timing?.Repeat?.Bounds);
+					var aw_ = context.Operators.Start((av_ as CqlInterval<CqlDateTime>));
+					var ax_ = context.Operators.DateFrom(aw_);
+					var ay_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
+					var az_ = context.Operators.DateFrom(ay_);
+					var ba_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
+					var bb_ = context.Operators.Start(ba_);
+					var bc_ = context.Operators.DateFrom(bb_);
+					var bd_ = context.Operators.Not((bool?)(((ax_ ?? az_) ?? bc_) is null));
+					var bf_ = FHIRHelpers_4_3_000.ToValue(au_?.Timing?.Repeat?.Bounds);
+					var bg_ = context.Operators.Not((bool?)((bf_ as CqlInterval<CqlDateTime>)?.high is null));
+					var bh_ = context.Operators.And(bd_, bg_);
 
-					return bq_;
+					return (bh_ ?? false);
+				};
+				if (f_())
+				{
+					var bi_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var bj_ = FHIRHelpers_4_3_000.ToValue(bi_?.Timing?.Repeat?.Bounds);
+					var bk_ = context.Operators.Start((bj_ as CqlInterval<CqlDateTime>));
+					var bl_ = context.Operators.DateFrom(bk_);
+					var bm_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
+					var bn_ = context.Operators.DateFrom(bm_);
+					var bo_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
+					var bp_ = context.Operators.Start(bo_);
+					var bq_ = context.Operators.DateFrom(bp_);
+					var bs_ = FHIRHelpers_4_3_000.ToValue(bi_?.Timing?.Repeat?.Bounds);
+					var bt_ = context.Operators.Start((bs_ as CqlInterval<CqlDateTime>));
+					var bu_ = context.Operators.DateFrom(bt_);
+					var bw_ = context.Operators.DateFrom(bm_);
+					var by_ = context.Operators.Start(bo_);
+					var bz_ = context.Operators.DateFrom(by_);
+					var ca_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
+					var cb_ = context.Operators.ConvertQuantity(ca_, "d");
+					var cc_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
+					var ce_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((bi_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var cf_ = FHIRHelpers_4_3_000.ToValue(ce_?.Dose);
+					var cg_ = context.Operators.End((cf_ as CqlInterval<CqlQuantity>));
+					var ci_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((bi_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var cj_ = FHIRHelpers_4_3_000.ToValue(ci_?.Dose);
+					var co_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(bi_?.Timing?.Repeat?.PeriodUnitElement?.Value);
+					var cp_ = context.Operators.Convert<string>(co_);
+					var cq_ = this.Quantity(bi_?.Timing?.Repeat?.PeriodElement?.Value, cp_);
+					var cr_ = this.ToDaily((bi_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? bi_?.Timing?.Repeat?.FrequencyElement?.Value), cq_);
+					var ct_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(bi_?.Timing?.Repeat?.TimeOfDayElement, "value");
+					var cu_ = context.Operators.CountOrNull<CqlTime>(ct_);
+					var cv_ = context.Operators.ConvertIntegerToDecimal(cu_);
+					var cw_ = context.Operators.Multiply((cg_ ?? (cj_ as CqlQuantity))?.value, ((cr_ ?? cv_) ?? (decimal?)1.0m));
+					var cx_ = context.Operators.Divide(cc_?.value, cw_);
+					var cy_ = context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0));
+					var cz_ = context.Operators.ConvertIntegerToDecimal(cy_);
+					var da_ = context.Operators.Multiply((cb_?.value ?? cx_), cz_);
+					var db_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+					var dc_ = context.Operators.Subtract(da_, db_);
+					var dd_ = this.Quantity(dc_, "day");
+					var de_ = context.Operators.Add(((bu_ ?? bw_) ?? bz_), dd_);
+					var df_ = context.Operators.Interval(((bl_ ?? bn_) ?? bq_), de_, true, true);
+
+					return df_;
+				}
+				else if (g_())
+				{
+					var dg_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var dh_ = FHIRHelpers_4_3_000.ToValue(dg_?.Timing?.Repeat?.Bounds);
+					var di_ = context.Operators.Start((dh_ as CqlInterval<CqlDateTime>));
+					var dj_ = context.Operators.DateFrom(di_);
+					var dk_ = context.Operators.Convert<CqlDateTime>(R?.AuthoredOnElement);
+					var dl_ = context.Operators.DateFrom(dk_);
+					var dm_ = FHIRHelpers_4_3_000.ToInterval(R?.DispenseRequest?.ValidityPeriod);
+					var dn_ = context.Operators.Start(dm_);
+					var do_ = context.Operators.DateFrom(dn_);
+					var dq_ = FHIRHelpers_4_3_000.ToValue(dg_?.Timing?.Repeat?.Bounds);
+					var dr_ = context.Operators.End((dq_ as CqlInterval<CqlDateTime>));
+					var ds_ = context.Operators.DateFrom(dr_);
+					var dt_ = context.Operators.Interval(((dj_ ?? dl_) ?? do_), ds_, true, true);
+
+					return dt_;
 				}
 				else
 				{
-					CqlInterval<CqlDate> br_ = null;
+					CqlInterval<CqlDate> du_ = null;
 
-					return (br_ as CqlInterval<CqlDate>);
+					return (du_ as CqlInterval<CqlDate>);
 				};
 			};
 
@@ -1150,45 +1534,75 @@ public class CumulativeMedicationDuration_4_0_000
 		{
 			CqlInterval<CqlDate> e_()
 			{
-				if ((context.Operators.And(context.Operators.Not((bool?)((context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(D?.WhenHandedOverElement)) ?? context.Operators.DateFrom(context.Operators.Convert<CqlDateTime>(D?.WhenPreparedElement))) is null)), context.Operators.Not((bool?)(((context.Operators.ConvertQuantity(FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply), "d"))?.value ?? context.Operators.Divide(FHIRHelpers_4_3_000.ToQuantity(D?.Quantity)?.value, context.Operators.Multiply((context.Operators.End((FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlInterval<CqlQuantity>)) ?? (FHIRHelpers_4_3_000.ToValue((context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>(((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>)))?.Dose) as CqlQuantity))?.value, ((this.ToDaily((((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyMaxElement)?.Value ?? ((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.FrequencyElement)?.Value), this.Quantity(((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodElement)?.Value, context.Operators.Convert<string>(context.Operators.Convert<Code<Timing.UnitsOfTime>>(((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.PeriodUnitElement)?.Value)))) ?? context.Operators.ConvertIntegerToDecimal(context.Operators.CountOrNull<CqlTime>(context.Operators.LateBoundProperty<IEnumerable<CqlTime>>((((context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.TimeOfDayElement, "value")))) ?? (decimal?)1.0m)))) is null))) ?? false))
+				bool f_()
 				{
-					var f_ = context.Operators.Convert<CqlDateTime>(D?.WhenHandedOverElement);
-					var g_ = context.Operators.DateFrom(f_);
-					var h_ = context.Operators.Convert<CqlDateTime>(D?.WhenPreparedElement);
-					var i_ = context.Operators.DateFrom(h_);
-					var k_ = context.Operators.DateFrom(f_);
-					var m_ = context.Operators.DateFrom(h_);
-					var n_ = FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply);
-					var o_ = context.Operators.ConvertQuantity(n_, "d");
-					var p_ = FHIRHelpers_4_3_000.ToQuantity(D?.Quantity);
-					var q_ = context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>));
-					var r_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((q_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-					var s_ = FHIRHelpers_4_3_000.ToValue(r_?.Dose);
-					var t_ = context.Operators.End((s_ as CqlInterval<CqlQuantity>));
-					var v_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((q_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-					var w_ = FHIRHelpers_4_3_000.ToValue(v_?.Dose);
-					var ab_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(q_?.Timing?.Repeat?.PeriodUnitElement?.Value);
-					var ac_ = context.Operators.Convert<string>(ab_);
-					var ad_ = this.Quantity(q_?.Timing?.Repeat?.PeriodElement?.Value, ac_);
-					var ae_ = this.ToDaily((q_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? q_?.Timing?.Repeat?.FrequencyElement?.Value), ad_);
-					var ag_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(q_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var ah_ = context.Operators.CountOrNull<CqlTime>(ag_);
-					var ai_ = context.Operators.ConvertIntegerToDecimal(ah_);
-					var aj_ = context.Operators.Multiply((t_ ?? (w_ as CqlQuantity))?.value, ((ae_ ?? ai_) ?? (decimal?)1.0m));
-					var ak_ = context.Operators.Divide(p_?.value, aj_);
-					var al_ = context.Operators.ConvertIntegerToDecimal((int?)1);
-					var am_ = context.Operators.Subtract((o_?.value ?? ak_), al_);
-					var an_ = this.Quantity(am_, "day");
-					var ao_ = context.Operators.Add((k_ ?? m_), an_);
-					var ap_ = context.Operators.Interval((g_ ?? i_), ao_, true, true);
+					var g_ = context.Operators.Convert<CqlDateTime>(D?.WhenHandedOverElement);
+					var h_ = context.Operators.DateFrom(g_);
+					var i_ = context.Operators.Convert<CqlDateTime>(D?.WhenPreparedElement);
+					var j_ = context.Operators.DateFrom(i_);
+					var k_ = context.Operators.Not((bool?)((h_ ?? j_) is null));
+					var l_ = FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply);
+					var m_ = context.Operators.ConvertQuantity(l_, "d");
+					var n_ = FHIRHelpers_4_3_000.ToQuantity(D?.Quantity);
+					var o_ = context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>));
+					var p_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((o_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var q_ = FHIRHelpers_4_3_000.ToValue(p_?.Dose);
+					var r_ = context.Operators.End((q_ as CqlInterval<CqlQuantity>));
+					var t_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((o_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var u_ = FHIRHelpers_4_3_000.ToValue(t_?.Dose);
+					var z_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(o_?.Timing?.Repeat?.PeriodUnitElement?.Value);
+					var aa_ = context.Operators.Convert<string>(z_);
+					var ab_ = this.Quantity(o_?.Timing?.Repeat?.PeriodElement?.Value, aa_);
+					var ac_ = this.ToDaily((o_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? o_?.Timing?.Repeat?.FrequencyElement?.Value), ab_);
+					var ae_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(o_?.Timing?.Repeat?.TimeOfDayElement, "value");
+					var af_ = context.Operators.CountOrNull<CqlTime>(ae_);
+					var ag_ = context.Operators.ConvertIntegerToDecimal(af_);
+					var ah_ = context.Operators.Multiply((r_ ?? (u_ as CqlQuantity))?.value, ((ac_ ?? ag_) ?? (decimal?)1.0m));
+					var ai_ = context.Operators.Divide(n_?.value, ah_);
+					var aj_ = context.Operators.Not((bool?)((m_?.value ?? ai_) is null));
+					var ak_ = context.Operators.And(k_, aj_);
 
-					return ap_;
+					return (ak_ ?? false);
+				};
+				if (f_())
+				{
+					var al_ = context.Operators.Convert<CqlDateTime>(D?.WhenHandedOverElement);
+					var am_ = context.Operators.DateFrom(al_);
+					var an_ = context.Operators.Convert<CqlDateTime>(D?.WhenPreparedElement);
+					var ao_ = context.Operators.DateFrom(an_);
+					var aq_ = context.Operators.DateFrom(al_);
+					var as_ = context.Operators.DateFrom(an_);
+					var at_ = FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply);
+					var au_ = context.Operators.ConvertQuantity(at_, "d");
+					var av_ = FHIRHelpers_4_3_000.ToQuantity(D?.Quantity);
+					var aw_ = context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>));
+					var ax_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((aw_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var ay_ = FHIRHelpers_4_3_000.ToValue(ax_?.Dose);
+					var az_ = context.Operators.End((ay_ as CqlInterval<CqlQuantity>));
+					var bb_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((aw_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var bc_ = FHIRHelpers_4_3_000.ToValue(bb_?.Dose);
+					var bh_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(aw_?.Timing?.Repeat?.PeriodUnitElement?.Value);
+					var bi_ = context.Operators.Convert<string>(bh_);
+					var bj_ = this.Quantity(aw_?.Timing?.Repeat?.PeriodElement?.Value, bi_);
+					var bk_ = this.ToDaily((aw_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? aw_?.Timing?.Repeat?.FrequencyElement?.Value), bj_);
+					var bm_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(aw_?.Timing?.Repeat?.TimeOfDayElement, "value");
+					var bn_ = context.Operators.CountOrNull<CqlTime>(bm_);
+					var bo_ = context.Operators.ConvertIntegerToDecimal(bn_);
+					var bp_ = context.Operators.Multiply((az_ ?? (bc_ as CqlQuantity))?.value, ((bk_ ?? bo_) ?? (decimal?)1.0m));
+					var bq_ = context.Operators.Divide(av_?.value, bp_);
+					var br_ = context.Operators.ConvertIntegerToDecimal((int?)1);
+					var bs_ = context.Operators.Subtract((au_?.value ?? bq_), br_);
+					var bt_ = this.Quantity(bs_, "day");
+					var bu_ = context.Operators.Add((aq_ ?? as_), bt_);
+					var bv_ = context.Operators.Interval((am_ ?? ao_), bu_, true, true);
+
+					return bv_;
 				}
 				else
 				{
-					CqlInterval<CqlDate> aq_ = null;
+					CqlInterval<CqlDate> bw_ = null;
 
-					return (aq_ as CqlInterval<CqlDate>);
+					return (bw_ as CqlInterval<CqlDate>);
 				};
 			};
 
@@ -1219,27 +1633,40 @@ public class CumulativeMedicationDuration_4_0_000
 		{
 			CqlInterval<CqlDate> e_()
 			{
-				if ((context.Operators.And(context.Operators.Not((bool?)(context.Operators.DateFrom(context.Operators.Start((FHIRHelpers_4_3_000.ToValue(Administration?.Effective) as CqlInterval<CqlDateTime>))) is null)), context.Operators.Not((bool?)(this.TherapeuticDuration((FHIRHelpers_4_3_000.ToValue(Administration?.Medication) as CqlConcept)) is null))) ?? false))
+				bool f_()
 				{
-					var f_ = FHIRHelpers_4_3_000.ToValue(Administration?.Effective);
-					var g_ = context.Operators.Start((f_ as CqlInterval<CqlDateTime>));
-					var h_ = context.Operators.DateFrom(g_);
-					var j_ = context.Operators.Start((f_ as CqlInterval<CqlDateTime>));
-					var k_ = context.Operators.DateFrom(j_);
-					var l_ = FHIRHelpers_4_3_000.ToValue(Administration?.Medication);
-					var m_ = this.TherapeuticDuration((l_ as CqlConcept));
-					var n_ = context.Operators.Add(k_, m_);
-					var o_ = context.Operators.ConvertIntegerToQuantity((int?)1);
-					var p_ = context.Operators.Subtract(n_, o_);
-					var q_ = context.Operators.Interval(h_, p_, true, true);
+					var g_ = FHIRHelpers_4_3_000.ToValue(Administration?.Effective);
+					var h_ = context.Operators.Start((g_ as CqlInterval<CqlDateTime>));
+					var i_ = context.Operators.DateFrom(h_);
+					var j_ = context.Operators.Not((bool?)(i_ is null));
+					var k_ = FHIRHelpers_4_3_000.ToValue(Administration?.Medication);
+					var l_ = this.TherapeuticDuration((k_ as CqlConcept));
+					var m_ = context.Operators.Not((bool?)(l_ is null));
+					var n_ = context.Operators.And(j_, m_);
 
-					return q_;
+					return (n_ ?? false);
+				};
+				if (f_())
+				{
+					var o_ = FHIRHelpers_4_3_000.ToValue(Administration?.Effective);
+					var p_ = context.Operators.Start((o_ as CqlInterval<CqlDateTime>));
+					var q_ = context.Operators.DateFrom(p_);
+					var s_ = context.Operators.Start((o_ as CqlInterval<CqlDateTime>));
+					var t_ = context.Operators.DateFrom(s_);
+					var u_ = FHIRHelpers_4_3_000.ToValue(Administration?.Medication);
+					var v_ = this.TherapeuticDuration((u_ as CqlConcept));
+					var w_ = context.Operators.Add(t_, v_);
+					var x_ = context.Operators.ConvertIntegerToQuantity((int?)1);
+					var y_ = context.Operators.Subtract(w_, x_);
+					var z_ = context.Operators.Interval(q_, y_, true, true);
+
+					return z_;
 				}
 				else
 				{
-					CqlInterval<CqlDate> r_ = null;
+					CqlInterval<CqlDate> aa_ = null;
 
-					return (r_ as CqlInterval<CqlDate>);
+					return (aa_ as CqlInterval<CqlDate>);
 				};
 			};
 

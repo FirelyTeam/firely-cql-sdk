@@ -1098,18 +1098,25 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var an_ = QICoreCommon_2_0_000.ToInterval((am_ as object));
 			CqlInterval<CqlDateTime> ao_()
 			{
-				if ((context.Operators.Start(this.Measurement_Period()) is null))
+				bool aq_()
+				{
+					var ar_ = this.Measurement_Period();
+					var as_ = context.Operators.Start(ar_);
+
+					return (as_ is null);
+				};
+				if (aq_())
 				{
 					return null;
 				}
 				else
 				{
-					var aq_ = this.Measurement_Period();
-					var ar_ = context.Operators.Start(aq_);
-					var at_ = context.Operators.Start(aq_);
-					var au_ = context.Operators.Interval(ar_, at_, true, true);
+					var at_ = this.Measurement_Period();
+					var au_ = context.Operators.Start(at_);
+					var aw_ = context.Operators.Start(at_);
+					var ax_ = context.Operators.Interval(au_, aw_, true, true);
 
-					return au_;
+					return ax_;
 				};
 			};
 			var ap_ = context.Operators.IntervalBeforeInterval(an_, ao_(), null);

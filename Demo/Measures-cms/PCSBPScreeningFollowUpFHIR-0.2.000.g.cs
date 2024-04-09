@@ -471,18 +471,25 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var n_ = context.Operators.And(l_, m_);
 				CqlInterval<CqlDateTime> o_()
 				{
-					if ((context.Operators.Start(QICoreCommon_2_0_000.prevalenceInterval(Hypertension)) is null))
+					bool s_()
+					{
+						var t_ = QICoreCommon_2_0_000.prevalenceInterval(Hypertension);
+						var u_ = context.Operators.Start(t_);
+
+						return (u_ is null);
+					};
+					if (s_())
 					{
 						return null;
 					}
 					else
 					{
-						var s_ = QICoreCommon_2_0_000.prevalenceInterval(Hypertension);
-						var t_ = context.Operators.Start(s_);
-						var v_ = context.Operators.Start(s_);
-						var w_ = context.Operators.Interval(t_, v_, true, true);
+						var v_ = QICoreCommon_2_0_000.prevalenceInterval(Hypertension);
+						var w_ = context.Operators.Start(v_);
+						var y_ = context.Operators.Start(v_);
+						var z_ = context.Operators.Interval(w_, y_, true, true);
 
-						return w_;
+						return z_;
 					};
 				};
 				var p_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);

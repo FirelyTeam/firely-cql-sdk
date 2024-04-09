@@ -12,8 +12,11 @@ dotnet_diagnostic.ca1304.severity = none
 
 # CA1309: use ordinal string comparison
 dotnet_diagnostic.ca1309.severity = none
-csharp_style_namespace_declarations = file_scoped:silent
 
 # ReSharper properties
 resharper_max_formal_parameters_on_line = 2
 resharper_max_primary_constructor_parameters_on_line = 2
+
+# Other
+trim_trailing_whitespace = true
+csharp_style_namespace_declarations = file_scoped:silent

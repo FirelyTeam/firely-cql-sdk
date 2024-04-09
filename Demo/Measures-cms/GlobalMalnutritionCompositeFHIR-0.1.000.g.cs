@@ -993,11 +993,25 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		int? a_()
 		{
-			if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral(), NutritionAssessment) ?? false))
+			bool b_()
+			{
+				var d_ = this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral();
+				var e_ = context.Operators.ListContains<Encounter>(d_, NutritionAssessment);
+
+				return (e_ ?? false);
+			};
+			bool c_()
+			{
+				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
+				var g_ = context.Operators.ListContains<Encounter>(f_, NutritionAssessment);
+
+				return (g_ ?? false);
+			};
+			if (b_())
 			{
 				return (int?)0;
 			}
-			else if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral(), NutritionAssessment) ?? false))
+			else if (c_())
 			{
 				return ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_and_Identified_Status(), NutritionAssessment) ?? false)
 					? (int?)1
@@ -1017,23 +1031,58 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		int? a_()
 		{
-			if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral(), MalnutritionDiagonsis) ?? false))
+			bool b_()
+			{
+				var d_ = this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral();
+				var e_ = context.Operators.ListContains<Encounter>(d_, MalnutritionDiagonsis);
+
+				return (e_ ?? false);
+			};
+			bool c_()
+			{
+				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
+				var g_ = context.Operators.ListContains<Encounter>(f_, MalnutritionDiagonsis);
+
+				return (g_ ?? false);
+			};
+			if (b_())
 			{
 				return (int?)0;
 			}
-			else if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral(), MalnutritionDiagonsis) ?? false))
+			else if (c_())
 			{
-				int? b_()
+				int? h_()
 				{
-					if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Diagnosis(), MalnutritionDiagonsis) ?? false))
+					bool i_()
 					{
-						int? c_()
+						var j_ = this.Encounter_with_Malnutrition_Diagnosis();
+						var k_ = context.Operators.ListContains<Encounter>(j_, MalnutritionDiagonsis);
+
+						return (k_ ?? false);
+					};
+					if (i_())
+					{
+						int? l_()
 						{
-							if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(), MalnutritionDiagonsis) ?? false))
+							bool m_()
+							{
+								var o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished();
+								var p_ = context.Operators.ListContains<Encounter>(o_, MalnutritionDiagonsis);
+
+								return (p_ ?? false);
+							};
+							bool n_()
+							{
+								var q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished();
+								var r_ = context.Operators.ListContains<Encounter>(q_, MalnutritionDiagonsis);
+
+								return (r_ ?? false);
+							};
+							if (m_())
 							{
 								return (int?)0;
 							}
-							else if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished(), MalnutritionDiagonsis) ?? false))
+							else if (n_())
 							{
 								return (int?)1;
 							}
@@ -1043,7 +1092,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							};
 						};
 
-						return c_();
+						return l_();
 					}
 					else
 					{
@@ -1051,7 +1100,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					};
 				};
 
-				return b_();
+				return h_();
 			}
 			else
 			{
@@ -1067,23 +1116,58 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		int? a_()
 		{
-			if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral(), NutritionCarePlan) ?? false))
+			bool b_()
+			{
+				var d_ = this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral();
+				var e_ = context.Operators.ListContains<Encounter>(d_, NutritionCarePlan);
+
+				return (e_ ?? false);
+			};
+			bool c_()
+			{
+				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
+				var g_ = context.Operators.ListContains<Encounter>(f_, NutritionCarePlan);
+
+				return (g_ ?? false);
+			};
+			if (b_())
 			{
 				return (int?)0;
 			}
-			else if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral(), NutritionCarePlan) ?? false))
+			else if (c_())
 			{
-				int? b_()
+				int? h_()
 				{
-					if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Care_Plan(), NutritionCarePlan) ?? false))
+					bool i_()
 					{
-						int? c_()
+						var j_ = this.Encounter_with_Nutrition_Care_Plan();
+						var k_ = context.Operators.ListContains<Encounter>(j_, NutritionCarePlan);
+
+						return (k_ ?? false);
+					};
+					if (i_())
+					{
+						int? l_()
 						{
-							if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(), NutritionCarePlan) ?? false))
+							bool m_()
+							{
+								var o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished();
+								var p_ = context.Operators.ListContains<Encounter>(o_, NutritionCarePlan);
+
+								return (p_ ?? false);
+							};
+							bool n_()
+							{
+								var q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished();
+								var r_ = context.Operators.ListContains<Encounter>(q_, NutritionCarePlan);
+
+								return (r_ ?? false);
+							};
+							if (m_())
 							{
 								return (int?)0;
 							}
-							else if ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished(), NutritionCarePlan) ?? false))
+							else if (n_())
 							{
 								return (int?)1;
 							}
@@ -1093,7 +1177,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							};
 						};
 
-						return c_();
+						return l_();
 					}
 					else
 					{
@@ -1101,7 +1185,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					};
 				};
 
-				return b_();
+				return h_();
 			}
 			else
 			{
@@ -1136,11 +1220,45 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		int? a_()
 		{
-			if ((context.Operators.And(context.Operators.And(context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(), QualifyingEncounter), context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk(), QualifyingEncounter)), context.Operators.Not(context.Operators.ListContains<Encounter>(this.Encounter_with_Hospital_Dietitian_Referral(), QualifyingEncounter))) ?? false))
+			bool b_()
+			{
+				var d_ = this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral();
+				var e_ = context.Operators.ListContains<Encounter>(d_, QualifyingEncounter);
+				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk();
+				var g_ = context.Operators.ListContains<Encounter>(f_, QualifyingEncounter);
+				var h_ = context.Operators.And(e_, g_);
+				var i_ = this.Encounter_with_Hospital_Dietitian_Referral();
+				var j_ = context.Operators.ListContains<Encounter>(i_, QualifyingEncounter);
+				var k_ = context.Operators.Not(j_);
+				var l_ = context.Operators.And(h_, k_);
+
+				return (l_ ?? false);
+			};
+			bool c_()
+			{
+				var m_ = this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral();
+				var n_ = context.Operators.ListContains<Encounter>(m_, QualifyingEncounter);
+				var o_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk();
+				var p_ = context.Operators.ListContains<Encounter>(o_, QualifyingEncounter);
+				var q_ = context.Operators.And(n_, p_);
+				var r_ = this.Encounter_with_Hospital_Dietitian_Referral();
+				var s_ = context.Operators.ListContains<Encounter>(r_, QualifyingEncounter);
+				var t_ = context.Operators.Or(q_, s_);
+				var u_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished();
+				var v_ = context.Operators.ListContains<Encounter>(u_, QualifyingEncounter);
+				var w_ = context.Operators.And(t_, v_);
+				var x_ = this.Encounter_with_Nutrition_Assessment_and_Identified_Status();
+				var y_ = context.Operators.ListContains<Encounter>(x_, QualifyingEncounter);
+				var z_ = context.Operators.Not(y_);
+				var aa_ = context.Operators.Or(w_, z_);
+
+				return (aa_ ?? false);
+			};
+			if (b_())
 			{
 				return (int?)1;
 			}
-			else if ((context.Operators.Or(context.Operators.And(context.Operators.Or(context.Operators.And(context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(), QualifyingEncounter), context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_at_Risk(), QualifyingEncounter)), context.Operators.ListContains<Encounter>(this.Encounter_with_Hospital_Dietitian_Referral(), QualifyingEncounter)), context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(), QualifyingEncounter)), context.Operators.Not(context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_and_Identified_Status(), QualifyingEncounter))) ?? false))
+			else if (c_())
 			{
 				return (int?)2;
 			}

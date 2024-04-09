@@ -506,18 +506,25 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			var m_ = QICoreCommon_2_0_000.ToInterval(l_);
 			CqlInterval<CqlDateTime> n_()
 			{
-				if ((context.Operators.End(this.Measurement_Period()) is null))
+				bool q_()
+				{
+					var r_ = this.Measurement_Period();
+					var s_ = context.Operators.End(r_);
+
+					return (s_ is null);
+				};
+				if (q_())
 				{
 					return null;
 				}
 				else
 				{
-					var q_ = this.Measurement_Period();
-					var r_ = context.Operators.End(q_);
-					var t_ = context.Operators.End(q_);
-					var u_ = context.Operators.Interval(r_, t_, true, true);
+					var t_ = this.Measurement_Period();
+					var u_ = context.Operators.End(t_);
+					var w_ = context.Operators.End(t_);
+					var x_ = context.Operators.Interval(u_, w_, true, true);
 
-					return u_;
+					return x_;
 				};
 			};
 			var o_ = context.Operators.IntervalSameOrBefore(m_, n_(), null);
@@ -907,23 +914,44 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		{
 			object g_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective) is CqlDateTime)
+				bool n_()
 				{
-					var n_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var q_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var r_ = q_ is CqlDateTime;
 
-					return ((n_ as CqlDateTime) as object);
+					return r_;
+				};
+				bool o_()
+				{
+					var s_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var t_ = s_ is CqlInterval<CqlDateTime>;
+
+					return t_;
+				};
+				bool p_()
+				{
+					var u_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var v_ = u_ is CqlDateTime;
+
+					return v_;
+				};
+				if (n_())
+				{
+					var w_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+
+					return ((w_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective) is CqlInterval<CqlDateTime>)
+				else if (o_())
 				{
-					var o_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var x_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
 
-					return ((o_ as CqlInterval<CqlDateTime>) as object);
+					return ((x_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective) is CqlDateTime)
+				else if (p_())
 				{
-					var p_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var y_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
 
-					return ((p_ as CqlDateTime) as object);
+					return ((y_ as CqlDateTime) as object);
 				}
 				else
 				{

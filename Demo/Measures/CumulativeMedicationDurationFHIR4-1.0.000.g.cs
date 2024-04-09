@@ -590,17 +590,24 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	{
 		decimal? a_()
 		{
-			if ((context.Operators.Equal(frequency, this.C()) ?? false))
+			bool b_()
+			{
+				var c_ = this.C();
+				var d_ = context.Operators.Equal(frequency, c_);
+
+				return (d_ ?? false);
+			};
+			if (b_())
 			{
 				return (decimal?)3.0m;
 			}
 			else
 			{
-				var b_ = this.ErrorLevel();
-				var c_ = context.Operators.Concatenate("Unknown frequency code ", (frequency?.code ?? ""));
-				var d_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", b_, c_);
+				var e_ = this.ErrorLevel();
+				var f_ = context.Operators.Concatenate("Unknown frequency code ", (frequency?.code ?? ""));
+				var g_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", e_, f_);
 
-				return (decimal?)d_;
+				return (decimal?)g_;
 			};
 		};
 
@@ -618,58 +625,72 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 		{
 			CqlInterval<CqlDateTime> e_()
 			{
-				if ((context.Operators.Not(context.Operators.Or((bool?)(context.Operators.End(FHIRHelpers_4_0_001.ToInterval(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds as Period))) is null), context.Operators.Equal(context.Operators.End(FHIRHelpers_4_0_001.ToInterval(((((context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds as Period))), context.Operators.Maximum<CqlDateTime>()))) ?? false))
+				bool f_()
 				{
-					var f_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-					var g_ = FHIRHelpers_4_0_001.ToInterval((f_?.Timing?.Repeat?.Bounds as Period));
-					var h_ = context.Operators.Start(g_);
-					var i_ = FHIRHelpers_4_0_001.ToInterval(R?.DispenseRequest?.ValidityPeriod);
-					var j_ = context.Operators.Start(i_);
-					var k_ = FHIRHelpers_4_0_001.ToDateTime(R?.AuthoredOnElement);
-					var m_ = FHIRHelpers_4_0_001.ToInterval((f_?.Timing?.Repeat?.Bounds as Period));
-					var n_ = context.Operators.End(m_);
-					var o_ = context.Operators.Interval(((h_ ?? j_) ?? k_), n_, true, true);
+					var g_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var h_ = FHIRHelpers_4_0_001.ToInterval((g_?.Timing?.Repeat?.Bounds as Period));
+					var i_ = context.Operators.End(h_);
+					var k_ = FHIRHelpers_4_0_001.ToInterval((g_?.Timing?.Repeat?.Bounds as Period));
+					var l_ = context.Operators.End(k_);
+					var m_ = context.Operators.Maximum<CqlDateTime>();
+					var n_ = context.Operators.Equal(l_, m_);
+					var o_ = context.Operators.Or((bool?)(i_ is null), n_);
+					var p_ = context.Operators.Not(o_);
 
-					return o_;
+					return (p_ ?? false);
+				};
+				if (f_())
+				{
+					var q_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var r_ = FHIRHelpers_4_0_001.ToInterval((q_?.Timing?.Repeat?.Bounds as Period));
+					var s_ = context.Operators.Start(r_);
+					var t_ = FHIRHelpers_4_0_001.ToInterval(R?.DispenseRequest?.ValidityPeriod);
+					var u_ = context.Operators.Start(t_);
+					var v_ = FHIRHelpers_4_0_001.ToDateTime(R?.AuthoredOnElement);
+					var x_ = FHIRHelpers_4_0_001.ToInterval((q_?.Timing?.Repeat?.Bounds as Period));
+					var y_ = context.Operators.End(x_);
+					var z_ = context.Operators.Interval(((s_ ?? u_) ?? v_), y_, true, true);
+
+					return z_;
 				}
 				else
 				{
-					var p_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-					var q_ = FHIRHelpers_4_0_001.ToInterval((p_?.Timing?.Repeat?.Bounds as Period));
-					var r_ = context.Operators.Start(q_);
-					var s_ = FHIRHelpers_4_0_001.ToInterval(R?.DispenseRequest?.ValidityPeriod);
-					var t_ = context.Operators.Start(s_);
-					var u_ = FHIRHelpers_4_0_001.ToDateTime(R?.AuthoredOnElement);
-					var w_ = FHIRHelpers_4_0_001.ToInterval((p_?.Timing?.Repeat?.Bounds as Period));
-					var x_ = context.Operators.Start(w_);
-					var z_ = context.Operators.Start(s_);
-					var ab_ = FHIRHelpers_4_0_001.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
-					var ac_ = FHIRHelpers_4_0_001.ToQuantity(R?.DispenseRequest?.Quantity);
-					var ae_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((p_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-					var af_ = FHIRHelpers_4_0_001.ToInterval((ae_?.Dose as Range));
-					var ag_ = context.Operators.End(af_);
-					var ai_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((p_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-					var aj_ = FHIRHelpers_4_0_001.ToQuantity((ai_?.Dose as Quantity));
-					var al_ = context.Operators.Convert<Integer>(p_?.Timing?.Repeat?.FrequencyMaxElement);
-					var an_ = context.Operators.Convert<Integer>(p_?.Timing?.Repeat?.FrequencyElement);
-					var ao_ = FHIRHelpers_4_0_001.ToInteger((al_ ?? an_));
-					var aq_ = FHIRHelpers_4_0_001.ToDecimal(p_?.Timing?.Repeat?.PeriodElement);
-					var as_ = context.Operators.Convert<string>(p_?.Timing?.Repeat?.PeriodUnitElement?.Value);
-					var at_ = this.ToDaily(ao_, new CqlQuantity(aq_, as_));
-					var av_ = context.Operators.CountOrNull<Time>((p_?.Timing?.Repeat?.TimeOfDayElement as IEnumerable<Time>));
-					var aw_ = context.Operators.ConvertIntegerToDecimal(av_);
-					var ax_ = context.Operators.ConvertDecimalToQuantity(((at_ ?? aw_) ?? (decimal?)1.0m));
-					var ay_ = context.Operators.Multiply((ag_ ?? aj_), ax_);
-					var az_ = context.Operators.Divide(ac_, ay_);
-					var ba_ = context.Operators.Convert<Integer>(R?.DispenseRequest?.NumberOfRepeatsAllowedElement);
-					var bb_ = FHIRHelpers_4_0_001.ToInteger(ba_);
-					var bc_ = context.Operators.Add((int?)1, (bb_ ?? (int?)0));
-					var bd_ = context.Operators.ConvertIntegerToQuantity(bc_);
-					var be_ = context.Operators.Multiply((ab_ ?? az_), bd_);
-					var bf_ = context.Operators.Add(((x_ ?? z_) ?? u_), be_);
-					var bg_ = context.Operators.Interval(((r_ ?? t_) ?? u_), bf_, true, true);
+					var aa_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var ab_ = FHIRHelpers_4_0_001.ToInterval((aa_?.Timing?.Repeat?.Bounds as Period));
+					var ac_ = context.Operators.Start(ab_);
+					var ad_ = FHIRHelpers_4_0_001.ToInterval(R?.DispenseRequest?.ValidityPeriod);
+					var ae_ = context.Operators.Start(ad_);
+					var af_ = FHIRHelpers_4_0_001.ToDateTime(R?.AuthoredOnElement);
+					var ah_ = FHIRHelpers_4_0_001.ToInterval((aa_?.Timing?.Repeat?.Bounds as Period));
+					var ai_ = context.Operators.Start(ah_);
+					var ak_ = context.Operators.Start(ad_);
+					var am_ = FHIRHelpers_4_0_001.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
+					var an_ = FHIRHelpers_4_0_001.ToQuantity(R?.DispenseRequest?.Quantity);
+					var ap_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((aa_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var aq_ = FHIRHelpers_4_0_001.ToInterval((ap_?.Dose as Range));
+					var ar_ = context.Operators.End(aq_);
+					var at_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((aa_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var au_ = FHIRHelpers_4_0_001.ToQuantity((at_?.Dose as Quantity));
+					var aw_ = context.Operators.Convert<Integer>(aa_?.Timing?.Repeat?.FrequencyMaxElement);
+					var ay_ = context.Operators.Convert<Integer>(aa_?.Timing?.Repeat?.FrequencyElement);
+					var az_ = FHIRHelpers_4_0_001.ToInteger((aw_ ?? ay_));
+					var bb_ = FHIRHelpers_4_0_001.ToDecimal(aa_?.Timing?.Repeat?.PeriodElement);
+					var bd_ = context.Operators.Convert<string>(aa_?.Timing?.Repeat?.PeriodUnitElement?.Value);
+					var be_ = this.ToDaily(az_, new CqlQuantity(bb_, bd_));
+					var bg_ = context.Operators.CountOrNull<Time>((aa_?.Timing?.Repeat?.TimeOfDayElement as IEnumerable<Time>));
+					var bh_ = context.Operators.ConvertIntegerToDecimal(bg_);
+					var bi_ = context.Operators.ConvertDecimalToQuantity(((be_ ?? bh_) ?? (decimal?)1.0m));
+					var bj_ = context.Operators.Multiply((ar_ ?? au_), bi_);
+					var bk_ = context.Operators.Divide(an_, bj_);
+					var bl_ = context.Operators.Convert<Integer>(R?.DispenseRequest?.NumberOfRepeatsAllowedElement);
+					var bm_ = FHIRHelpers_4_0_001.ToInteger(bl_);
+					var bn_ = context.Operators.Add((int?)1, (bm_ ?? (int?)0));
+					var bo_ = context.Operators.ConvertIntegerToQuantity(bn_);
+					var bp_ = context.Operators.Multiply((am_ ?? bk_), bo_);
+					var bq_ = context.Operators.Add(((ai_ ?? ak_) ?? af_), bp_);
+					var br_ = context.Operators.Interval(((ac_ ?? ae_) ?? af_), bq_, true, true);
 
-					return bg_;
+					return br_;
 				};
 			};
 
@@ -740,23 +761,35 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 		{
 			CqlInterval<CqlDateTime> e_()
 			{
-				if ((context.Operators.And(context.Operators.Not((bool?)(context.Operators.Start(FHIRHelpers_4_0_001.ToInterval((Administration?.Effective as Period))) is null)), context.Operators.Not((bool?)(this.TherapeuticDuration(FHIRHelpers_4_0_001.ToConcept((Administration?.Medication as CodeableConcept))) is null))) ?? false))
+				bool f_()
 				{
-					var f_ = FHIRHelpers_4_0_001.ToInterval((Administration?.Effective as Period));
-					var g_ = context.Operators.Start(f_);
-					var i_ = context.Operators.Start(f_);
+					var g_ = FHIRHelpers_4_0_001.ToInterval((Administration?.Effective as Period));
+					var h_ = context.Operators.Start(g_);
+					var i_ = context.Operators.Not((bool?)(h_ is null));
 					var j_ = FHIRHelpers_4_0_001.ToConcept((Administration?.Medication as CodeableConcept));
 					var k_ = this.TherapeuticDuration(j_);
-					var l_ = context.Operators.Add(i_, k_);
-					var m_ = context.Operators.Interval(g_, l_, true, true);
+					var l_ = context.Operators.Not((bool?)(k_ is null));
+					var m_ = context.Operators.And(i_, l_);
 
-					return m_;
+					return (m_ ?? false);
+				};
+				if (f_())
+				{
+					var n_ = FHIRHelpers_4_0_001.ToInterval((Administration?.Effective as Period));
+					var o_ = context.Operators.Start(n_);
+					var q_ = context.Operators.Start(n_);
+					var r_ = FHIRHelpers_4_0_001.ToConcept((Administration?.Medication as CodeableConcept));
+					var s_ = this.TherapeuticDuration(r_);
+					var t_ = context.Operators.Add(q_, s_);
+					var u_ = context.Operators.Interval(o_, t_, true, true);
+
+					return u_;
 				}
 				else
 				{
-					CqlInterval<CqlDateTime> n_ = null;
+					CqlInterval<CqlDateTime> v_ = null;
 
-					return (n_ as CqlInterval<CqlDateTime>);
+					return (v_ as CqlInterval<CqlDateTime>);
 				};
 			};
 

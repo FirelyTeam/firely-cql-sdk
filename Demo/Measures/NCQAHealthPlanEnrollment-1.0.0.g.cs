@@ -195,59 +195,66 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		bool? a_()
 		{
+			bool b_()
+			{
+				var c_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, participationPeriod, null);
+				var d_ = context.Operators.Not(c_);
+
+				return (d_ ?? false);
+			};
 			if ((context.Operators.ElementInInterval<CqlDate>(AnchorDate, participationPeriod, null) ?? false))
 			{
-				var b_ = this.All_Coverage_Info(Coverage, participationPeriod);
-				bool? c_(Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC @this)
+				var e_ = this.All_Coverage_Info(Coverage, participationPeriod);
+				bool? f_(Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC @this)
 				{
-					var k_ = context.Operators.Not((bool?)(@this?.CollapsedFinal is null));
+					var n_ = context.Operators.Not((bool?)(@this?.CollapsedFinal is null));
 
-					return k_;
+					return n_;
 				};
-				var d_ = context.Operators.WhereOrNull<Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC>(b_, c_);
-				IEnumerable<CqlInterval<CqlDate>> e_(Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC @this) => 
+				var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC>(e_, f_);
+				IEnumerable<CqlInterval<CqlDate>> h_(Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC @this) => 
 					@this?.CollapsedFinal;
-				var f_ = context.Operators.SelectOrNull<Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC, IEnumerable<CqlInterval<CqlDate>>>(d_, e_);
-				var g_ = context.Operators.FlattenList<CqlInterval<CqlDate>>(f_);
-				bool? h_(CqlInterval<CqlDate> FinalInterval)
+				var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC, IEnumerable<CqlInterval<CqlDate>>>(g_, h_);
+				var j_ = context.Operators.FlattenList<CqlInterval<CqlDate>>(i_);
+				bool? k_(CqlInterval<CqlDate> FinalInterval)
 				{
-					var l_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, FinalInterval, null);
+					var o_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, FinalInterval, null);
 
-					return l_;
+					return o_;
 				};
-				var i_ = context.Operators.WhereOrNull<CqlInterval<CqlDate>>(g_, h_);
-				var j_ = context.Operators.ExistsInList<CqlInterval<CqlDate>>(i_);
+				var l_ = context.Operators.WhereOrNull<CqlInterval<CqlDate>>(j_, k_);
+				var m_ = context.Operators.ExistsInList<CqlInterval<CqlDate>>(l_);
 
-				return j_;
+				return m_;
 			}
-			else if ((context.Operators.Not(context.Operators.ElementInInterval<CqlDate>(AnchorDate, participationPeriod, null)) ?? false))
+			else if (b_())
 			{
-				bool? m_(Coverage @this)
+				bool? p_(Coverage @this)
 				{
-					var t_ = context.Operators.Not((bool?)(@this?.Period is null));
+					var w_ = context.Operators.Not((bool?)(@this?.Period is null));
 
-					return t_;
+					return w_;
 				};
-				var n_ = context.Operators.WhereOrNull<Coverage>(Coverage, m_);
-				Period o_(Coverage @this) => 
+				var q_ = context.Operators.WhereOrNull<Coverage>(Coverage, p_);
+				Period r_(Coverage @this) => 
 					@this?.Period;
-				var p_ = context.Operators.SelectOrNull<Coverage, Period>(n_, o_);
-				bool? q_(Period Cperiod)
+				var s_ = context.Operators.SelectOrNull<Coverage, Period>(q_, r_);
+				bool? t_(Period Cperiod)
 				{
-					var u_ = NCQAFHIRBase_1_0_0.Normalize_Interval((Cperiod as object));
-					var v_ = context.Operators.Start(u_);
-					var w_ = context.Operators.DateFrom(v_);
-					var y_ = context.Operators.End(u_);
+					var x_ = NCQAFHIRBase_1_0_0.Normalize_Interval((Cperiod as object));
+					var y_ = context.Operators.Start(x_);
 					var z_ = context.Operators.DateFrom(y_);
-					var aa_ = context.Operators.Interval(w_, z_, true, true);
-					var ab_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, aa_, null);
+					var ab_ = context.Operators.End(x_);
+					var ac_ = context.Operators.DateFrom(ab_);
+					var ad_ = context.Operators.Interval(z_, ac_, true, true);
+					var ae_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, ad_, null);
 
-					return ab_;
+					return ae_;
 				};
-				var r_ = context.Operators.WhereOrNull<Period>(p_, q_);
-				var s_ = context.Operators.ExistsInList<Period>(r_);
+				var u_ = context.Operators.WhereOrNull<Period>(s_, t_);
+				var v_ = context.Operators.ExistsInList<Period>(u_);
 
-				return s_;
+				return v_;
 			}
 			else if ((AnchorDate is null))
 			{

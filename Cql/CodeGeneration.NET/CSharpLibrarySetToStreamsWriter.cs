@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -43,10 +43,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
-            _version = GetType().Assembly?.GetName()?.Version?.ToString() ?? "1.0.0";
+            _version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0";
             _tool = GetType()
-                       .Assembly?
-                       .GetCustomAttributes(false)
+                       .Assembly.GetCustomAttributes(false)
                        .OfType<AssemblyProductAttribute>()
                        .SingleOrDefault()?
                        .Product
@@ -54,7 +53,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             _aliasedUsings = BuildAliasedUsings(typeResolver);
         }
 
-        private static List<(string, string)> BuildAliasedUsings(TypeResolver typeResolver) => 
+        private static List<(string, string)> BuildAliasedUsings(TypeResolver typeResolver) =>
             typeResolver.Aliases.ToList();
 
         private static HashSet<string> BuildUsings(TypeResolver typeResolver)
@@ -209,7 +208,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (!string.IsNullOrWhiteSpace(Namespace))
                 {
                     writer.WriteLine(indentLevel, "}");
-                    indentLevel -= 1;
                 }
 
                 writer.Flush();
@@ -220,7 +218,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private void WriteClass(DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
             Func<string, string?> libraryNameToClassName,
-            string libraryName, 
+            string libraryName,
             StreamWriter writer,
             int indentLevel)
         {
@@ -231,7 +229,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var nameAndVersion = libraryName.Split('-');
             if (nameAndVersion.Length == 2)
             {
-                if (System.Version.TryParse(nameAndVersion[1], out var version))
+                if (Version.TryParse(nameAndVersion[1], out _))
                 {
                     libraryAttribute = nameAndVersion[0];
                     versionAttribute = nameAndVersion[1];
@@ -310,23 +308,24 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private static void WriteDependencies(
-            LibrarySet librarySet, 
-            Func<string, string?> libraryNameToClassName, 
-            string libraryName, 
+            LibrarySet librarySet,
+            Func<string, string?> libraryNameToClassName,
+            string libraryName,
             StreamWriter writer,
             int indentLevel)
         {
-            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, true);
+            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
 
-            foreach (var dependentLibrary in requiredLibraries!)
+            foreach (var dependentLibrary in requiredLibraries)
             {
-                var typeName = libraryNameToClassName!(dependentLibrary.NameAndVersion()!);
+                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion()!);
                 var memberName = typeName;
                 writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
             }
         }
 
-        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions,
+            string libraryName, StreamWriter writer, int indentLevel)
         {
             writer.WriteLine(indentLevel, "#region Cached values");
             writer.WriteLine();
@@ -358,7 +357,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 yield break;
             }
 
-            foreach (var tupleType in tupleTypes!)
+            foreach (var tupleType in tupleTypes)
             {
                 if (tupleType == null!)
                     continue;
@@ -394,8 +393,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             Func<string, string> libraryNameToClassName,
             int indent)
         {
-            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, true);
-            
+            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
+
             bool atFirst = true;
 
             foreach (var dependentLibrary in requiredLibraries)
@@ -423,7 +422,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private string DefinitionCacheKeyForMethod(string methodName)
         {
             if (methodName[0] == '@')
-                return "__" + methodName.Substring(1);
+                return "__" + methodName[1..];
             else return "__" + methodName;
         }
         private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
@@ -472,12 +471,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     if (overload.Body is NewExpression @new)
                     {
                         var arg = @new.Arguments[0];
-                        if (arg is ConstantExpression constant)
+                        if (arg is ConstantExpression { Value: string valueSetId })
                         {
-                            if (constant.Value is string valueSetId)
-                            {
-                                writer.WriteLine(indentLevel, $"[CqlValueSet(\"{valueSetId}\")]");
-                            }
+                            writer.WriteLine(indentLevel, $"[CqlValueSet(\"{valueSetId}\")]");
                         }
                     }
                 }
@@ -499,7 +495,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 //      writer.WriteLine();
             }
         }
-
+        
         private static void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
         {
             if (tags != null)
@@ -526,7 +522,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private int WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
+        private void WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
             writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {ExpressionConverter.PrettyTypeName(tupleType.BaseType!)}");
@@ -546,7 +542,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             indentLevel--;
             writer.WriteLine(indentLevel, $"}}");
-            return indentLevel;
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
@@ -555,6 +550,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 body = visitor.Visit(body);
             }
+
             return body;
         }
 
@@ -569,4 +565,3 @@ namespace Hl7.Cql.CodeGeneration.NET
         };
     }
 }
-

@@ -432,23 +432,44 @@ public class PCMaternal_5_16_000
 			var p_ = context.Operators.And(k_, o_);
 			object q_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective) is CqlDateTime)
+				bool z_()
 				{
-					var z_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
+					var ac_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
+					var ad_ = ac_ is CqlDateTime;
 
-					return ((z_ as CqlDateTime) as object);
+					return ad_;
+				};
+				bool aa_()
+				{
+					var ae_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
+					var af_ = ae_ is CqlInterval<CqlDateTime>;
+
+					return af_;
+				};
+				bool ab_()
+				{
+					var ag_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
+					var ah_ = ag_ is CqlDateTime;
+
+					return ah_;
+				};
+				if (z_())
+				{
+					var ai_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
+
+					return ((ai_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective) is CqlInterval<CqlDateTime>)
+				else if (aa_())
 				{
-					var aa_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
+					var aj_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
 
-					return ((aa_ as CqlInterval<CqlDateTime>) as object);
+					return ((aj_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective) is CqlDateTime)
+				else if (ab_())
 				{
-					var ab_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
+					var ak_ = FHIRHelpers_4_3_000.ToValue(TimeOfDelivery?.Effective);
 
-					return ((ab_ as CqlDateTime) as object);
+					return ((ak_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -467,34 +488,55 @@ public class PCMaternal_5_16_000
 		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			object ac_()
+			object al_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlDateTime)
+				bool an_()
 				{
-					var ae_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var aq_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ar_ = aq_ is CqlDateTime;
 
-					return ((ae_ as CqlDateTime) as object);
+					return ar_;
+				};
+				bool ao_()
+				{
+					var as_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var at_ = as_ is CqlInterval<CqlDateTime>;
+
+					return at_;
+				};
+				bool ap_()
+				{
+					var au_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var av_ = au_ is CqlDateTime;
+
+					return av_;
+				};
+				if (an_())
+				{
+					var aw_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+
+					return ((aw_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlInterval<CqlDateTime>)
+				else if (ao_())
 				{
-					var af_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ax_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
 
-					return ((af_ as CqlInterval<CqlDateTime>) as object);
+					return ((ax_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlDateTime)
+				else if (ap_())
 				{
-					var ag_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ay_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
 
-					return ((ag_ as CqlDateTime) as object);
+					return ((ay_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
 				};
 			};
-			var ad_ = QICoreCommon_2_0_000.earliest(ac_());
+			var am_ = QICoreCommon_2_0_000.earliest(al_());
 
-			return ad_;
+			return am_;
 		};
 		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.LastOfList<Observation>(g_);
@@ -525,23 +567,44 @@ public class PCMaternal_5_16_000
 			var p_ = context.Operators.And(k_, o_);
 			object q_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective) is CqlDateTime)
+				bool ac_()
 				{
-					var ac_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
+					var af_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
+					var ag_ = af_ is CqlDateTime;
 
-					return ((ac_ as CqlDateTime) as object);
+					return ag_;
+				};
+				bool ad_()
+				{
+					var ah_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
+					var ai_ = ah_ is CqlInterval<CqlDateTime>;
+
+					return ai_;
+				};
+				bool ae_()
+				{
+					var aj_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
+					var ak_ = aj_ is CqlDateTime;
+
+					return ak_;
+				};
+				if (ac_())
+				{
+					var al_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
+
+					return ((al_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective) is CqlInterval<CqlDateTime>)
+				else if (ad_())
 				{
-					var ad_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
+					var am_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
 
-					return ((ad_ as CqlInterval<CqlDateTime>) as object);
+					return ((am_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective) is CqlDateTime)
+				else if (ae_())
 				{
-					var ae_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
+					var an_ = FHIRHelpers_4_3_000.ToValue(EstimatedDateOfDelivery?.Effective);
 
-					return ((ae_ as CqlDateTime) as object);
+					return ((an_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -563,34 +626,55 @@ public class PCMaternal_5_16_000
 		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			object af_()
+			object ao_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlDateTime)
+				bool aq_()
 				{
-					var ah_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var at_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var au_ = at_ is CqlDateTime;
 
-					return ((ah_ as CqlDateTime) as object);
+					return au_;
+				};
+				bool ar_()
+				{
+					var av_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var aw_ = av_ is CqlInterval<CqlDateTime>;
+
+					return aw_;
+				};
+				bool as_()
+				{
+					var ax_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ay_ = ax_ is CqlDateTime;
+
+					return ay_;
+				};
+				if (aq_())
+				{
+					var az_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+
+					return ((az_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlInterval<CqlDateTime>)
+				else if (ar_())
 				{
-					var ai_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ba_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
 
-					return ((ai_ as CqlInterval<CqlDateTime>) as object);
+					return ((ba_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlDateTime)
+				else if (as_())
 				{
-					var aj_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var bb_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
 
-					return ((aj_ as CqlDateTime) as object);
+					return ((bb_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
 				};
 			};
-			var ag_ = QICoreCommon_2_0_000.earliest(af_());
+			var ap_ = QICoreCommon_2_0_000.earliest(ao_());
 
-			return ag_;
+			return ap_;
 		};
 		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.LastOfList<Observation>(g_);
@@ -643,23 +727,44 @@ public class PCMaternal_5_16_000
 		{
 			object i_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlDateTime)
+				bool ao_()
 				{
-					var ao_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var ar_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var as_ = ar_ is CqlDateTime;
 
-					return ((ao_ as CqlDateTime) as object);
+					return as_;
+				};
+				bool ap_()
+				{
+					var at_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var au_ = at_ is CqlInterval<CqlDateTime>;
+
+					return au_;
+				};
+				bool aq_()
+				{
+					var av_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var aw_ = av_ is CqlDateTime;
+
+					return aw_;
+				};
+				if (ao_())
+				{
+					var ax_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+
+					return ((ax_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlInterval<CqlDateTime>)
+				else if (ap_())
 				{
-					var ap_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var ay_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
 
-					return ((ap_ as CqlInterval<CqlDateTime>) as object);
+					return ((ay_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlDateTime)
+				else if (aq_())
 				{
-					var aq_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var az_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
 
-					return ((aq_ as CqlDateTime) as object);
+					return ((az_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -689,23 +794,44 @@ public class PCMaternal_5_16_000
 			var aa_ = context.Operators.And(v_, z_);
 			object ab_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlDateTime)
+				bool ba_()
 				{
-					var ar_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bd_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var be_ = bd_ is CqlDateTime;
 
-					return ((ar_ as CqlDateTime) as object);
+					return be_;
+				};
+				bool bb_()
+				{
+					var bf_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bg_ = bf_ is CqlInterval<CqlDateTime>;
+
+					return bg_;
+				};
+				bool bc_()
+				{
+					var bh_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bi_ = bh_ is CqlDateTime;
+
+					return bi_;
+				};
+				if (ba_())
+				{
+					var bj_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+
+					return ((bj_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlInterval<CqlDateTime>)
+				else if (bb_())
 				{
-					var as_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bk_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
 
-					return ((as_ as CqlInterval<CqlDateTime>) as object);
+					return ((bk_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlDateTime)
+				else if (bc_())
 				{
-					var at_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bl_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
 
-					return ((at_ as CqlDateTime) as object);
+					return ((bl_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -716,23 +842,44 @@ public class PCMaternal_5_16_000
 			var ae_ = context.Operators.SameAs(ac_, k_, "day");
 			object af_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlDateTime)
+				bool bm_()
 				{
-					var au_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bp_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bq_ = bp_ is CqlDateTime;
 
-					return ((au_ as CqlDateTime) as object);
+					return bq_;
+				};
+				bool bn_()
+				{
+					var br_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bs_ = br_ is CqlInterval<CqlDateTime>;
+
+					return bs_;
+				};
+				bool bo_()
+				{
+					var bt_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bu_ = bt_ is CqlDateTime;
+
+					return bu_;
+				};
+				if (bm_())
+				{
+					var bv_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+
+					return ((bv_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlInterval<CqlDateTime>)
+				else if (bn_())
 				{
-					var av_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bw_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
 
-					return ((av_ as CqlInterval<CqlDateTime>) as object);
+					return ((bw_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective) is CqlDateTime)
+				else if (bo_())
 				{
-					var aw_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
+					var bx_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Effective);
 
-					return ((aw_ as CqlDateTime) as object);
+					return ((bx_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -752,34 +899,55 @@ public class PCMaternal_5_16_000
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			object ax_()
+			object by_()
 			{
-				if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlDateTime)
+				bool ca_()
 				{
-					var az_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var cd_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ce_ = cd_ is CqlDateTime;
 
-					return ((az_ as CqlDateTime) as object);
+					return ce_;
+				};
+				bool cb_()
+				{
+					var cf_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var cg_ = cf_ is CqlInterval<CqlDateTime>;
+
+					return cg_;
+				};
+				bool cc_()
+				{
+					var ch_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ci_ = ch_ is CqlDateTime;
+
+					return ci_;
+				};
+				if (ca_())
+				{
+					var cj_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+
+					return ((cj_ as CqlDateTime) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlInterval<CqlDateTime>)
+				else if (cb_())
 				{
-					var ba_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var ck_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
 
-					return ((ba_ as CqlInterval<CqlDateTime>) as object);
+					return ((ck_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (FHIRHelpers_4_3_000.ToValue(@this?.Effective) is CqlDateTime)
+				else if (cc_())
 				{
-					var bb_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+					var cl_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
 
-					return ((bb_ as CqlDateTime) as object);
+					return ((cl_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
 				};
 			};
-			var ay_ = QICoreCommon_2_0_000.earliest(ax_());
+			var bz_ = QICoreCommon_2_0_000.earliest(by_());
 
-			return ay_;
+			return bz_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.LastOfList<Observation>(f_);
