@@ -44,7 +44,6 @@ namespace Hl7.Cql.Compiler
                 else if (right.Type == typeof(string))
                 {
                     var call = BindCqlOperator(CqlOperator.EnumEqualsString,
-                        LibraryDefinitionsBuilder.ContextParameter,
                         Expression.Convert(left, typeof(object)),
                         right);
                     return call;
@@ -56,7 +55,6 @@ namespace Hl7.Cql.Compiler
                 if (left.Type == typeof(string))
                 {
                     var call = BindCqlOperator(CqlOperator.EnumEqualsString,
-                        LibraryDefinitionsBuilder.ContextParameter,
                         Expression.Convert(right, typeof(object)),
                         left);
                     return call;
@@ -64,10 +62,10 @@ namespace Hl7.Cql.Compiler
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
-            else if (IsOrImplementsIEnumerableOfT(left.Type))
+            else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type, true)!;
-                if (IsOrImplementsIEnumerableOfT(right.Type))
+                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
                 {
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
@@ -88,10 +86,10 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(eqv.operand![0]);
             var right = TranslateExpression(eqv.operand![1]);
-            if (IsOrImplementsIEnumerableOfT(left.Type))
+            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
                 var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
-                if (IsOrImplementsIEnumerableOfT(right.Type))
+                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
                 {
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)

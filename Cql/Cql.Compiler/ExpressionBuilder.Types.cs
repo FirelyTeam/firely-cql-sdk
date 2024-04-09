@@ -39,7 +39,8 @@ namespace Hl7.Cql.Compiler
         }
 
         private Expression Quantity(Elm.Quantity quantityExpression) =>
-            BindCqlOperator(CqlOperator.Quantity, LibraryDefinitionsBuilder.ContextParameter,
+            BindCqlOperator(
+                CqlOperator.Quantity,
                 Expression.Constant(quantityExpression.value, typeof(decimal?)),
                 Expression.Constant(quantityExpression.unit, typeof(string)),
                 Expression.Constant("http://unitsofmeasure.org", typeof(string)));

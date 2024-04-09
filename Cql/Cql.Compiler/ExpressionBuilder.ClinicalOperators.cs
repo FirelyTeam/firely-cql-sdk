@@ -56,7 +56,7 @@ namespace Hl7.Cql.Compiler
         private Expression AnyInValueSet(Elm.AnyInValueSet e)
         {
             var codes = TranslateExpression(e.codes!);
-            if (!IsOrImplementsIEnumerableOfT(codes.Type))
+            if (!_typeResolver.ImplementsGenericIEnumerable(codes.Type))
                 throw this.NewExpressionBuildingException("Only List types are allowed for AnyInValueSet");
             var codeType = _typeManager.Resolver.GetListElementType(codes.Type, true)!;
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));

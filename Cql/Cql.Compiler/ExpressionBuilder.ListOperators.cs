@@ -26,7 +26,7 @@ namespace Hl7.Cql.Compiler
         {
             var source = TranslateExpression(e.source!);
             var element = TranslateExpression(e.element!);
-            if (!IsOrImplementsIEnumerableOfT(source.Type))
+            if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
             return BindCqlOperator(CqlOperator.ListIndexOf, source, element);
@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler
             var end = slice.endIndex == null || slice.endIndex is Elm.Null
                 ? Expression.Constant(null, typeof(int?))
                 : TranslateExpression(slice.endIndex!);
-            if (!IsOrImplementsIEnumerableOfT(source.Type))
+            if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
             return BindCqlOperator(CqlOperator.Slice, source, start, end);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -18,7 +17,7 @@ partial class ExpressionBuilder
         {
             using (PushElement(codeSystem))
             {
-                if (LibraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
+                if (_libraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
                 {
                     var initMembers = codes
                         .Select(coding =>
@@ -33,7 +32,7 @@ partial class ExpressionBuilder
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
                     var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
                     var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
+                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, codeSystem.name, lambda);
                 }
                 else
                 {
@@ -41,7 +40,7 @@ partial class ExpressionBuilder
                         Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
                     var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
                     var lambda = Expression.Lambda(newArray, contextParameter);
-                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeSystem.name, lambda);
+                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, codeSystem.name, lambda);
                 }
             }
         });
@@ -59,7 +58,7 @@ partial class ExpressionBuilder
                         Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
                     var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
                     var lambda = Expression.Lambda(newArray, contextParameter);
-                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
+                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, conceptDef.name, lambda);
                 }
                 else
                 {
@@ -67,7 +66,7 @@ partial class ExpressionBuilder
                     for (int i = 0; i < conceptDef.code.Length; i++)
                     {
                         var codeRef = conceptDef.code[i];
-                        if (!LibraryContext.TryGetCode(codeRef, out var systemCode))
+                        if (!_libraryContext.TryGetCode(codeRef, out var systemCode))
                             throw this.NewExpressionBuildingException(
                                 $"Code {codeRef.name} in concept {conceptDef.name} is not defined.", null);
 
@@ -86,7 +85,7 @@ partial class ExpressionBuilder
                     var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
                     var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
                     var lambda = Expression.Lambda(newConcept, contextParameter);
-                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, conceptDef.name, lambda);
+                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, conceptDef.name, lambda);
                 }
             }
         });
@@ -102,7 +101,7 @@ partial class ExpressionBuilder
                 if (codeDef.codeSystem == null)
                     throw this.NewExpressionBuildingException("Code definition has a null codeSystem node.", null);
 
-                if (!LibraryContext.TryGetCodeSystemName(codeDef.codeSystem, out string? csUrl))
+                if (!_libraryContext.TryGetCodeSystemName(codeDef.codeSystem, out string? csUrl))
                     throw this.NewExpressionBuildingException($"Undefined code system {codeDef.codeSystem.name!}",
                         null);
 
@@ -111,7 +110,7 @@ partial class ExpressionBuilder
                         $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})", null);
 
                 var systemCode = new CqlCode(codeDef.id, csUrl);
-                LibraryContext.AddCode(codeDef, systemCode);
+                _libraryContext.AddCode(codeDef, systemCode);
 
                 var newCodingExpression = Expression.New(
                     ConstructorInfos.CqlCode,
@@ -122,7 +121,7 @@ partial class ExpressionBuilder
                 );
                 var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
                 var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, codeDef.name!, lambda);
+                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, codeDef.name!, lambda);
             }
         });
 
@@ -139,7 +138,7 @@ partial class ExpressionBuilder
                         null);
                 }
 
-                var expressionKey = $"{LibraryContext.LibraryKey}.{expressionDef.name}";
+                var expressionKey = $"{_libraryContext.LibraryKey}.{expressionDef.name}";
                 Type[] functionParameterTypes = Type.EmptyTypes;
                 var parameters = new[] { LibraryDefinitionsBuilder.ContextParameter };
                 var function = expressionDef as FunctionDef;
@@ -170,21 +169,21 @@ partial class ExpressionBuilder
                     if (TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
                     {
                         var customLambda = factory(parameters);
-                        LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name,
+                        _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,
                             functionParameterTypes, customLambda);
                         return;
                     }
 
                     if (function?.external ?? false)
                     {
-                        if (LibraryContext.AllowUnresolvedExternals)
+                        if (_libraryContext.AllowUnresolvedExternals)
                         {
                             var returnType = TypeFor(expressionDef)!;
                             var paramTypes = new[] { typeof(CqlContext) }
                                 .Concat(functionParameterTypes)
                                 .ToArray();
                             var notImplemented = NotImplemented(this, expressionKey, paramTypes, returnType);
-                            LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name,
+                            _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,
                                 paramTypes, notImplemented);
                             _logger.LogWarning(FormatMessage(
                                 $"Function '{expressionDef.name}' is declared external, but it was not defined in the expression scope. " +
@@ -201,7 +200,7 @@ partial class ExpressionBuilder
                 var bodyExpression = TranslateExpression(expressionDef.expression);
                 var lambda = Expression.Lambda(bodyExpression, parameters);
                 if (function?.operand != null &&
-                    LibraryContext.LibraryDefinitions.ContainsKey(LibraryContext.LibraryKey, expressionDef.name,
+                    _libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryKey, expressionDef.name,
                         functionParameterTypes))
                 {
                     var ops = function.operand
@@ -221,13 +220,13 @@ partial class ExpressionBuilder
                         foreach (var tag in tags)
                         {
                             string[] values = new[] { tag.value ?? "" };
-                            LibraryContext.LibraryDefinitions.AddTag(LibraryContext.LibraryKey, expressionDef.name,
+                            _libraryContext.LibraryDefinitions.AddTag(_libraryContext.LibraryKey, expressionDef.name,
                                 functionParameterTypes, tag.name, values);
                         }
                     }
 
                     Type[] signature = functionParameterTypes ?? Array.Empty<Type>();
-                    LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, expressionDef.name, signature,
+                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name, signature,
                         lambda);
                 }
             }
@@ -246,7 +245,7 @@ partial class ExpressionBuilder
                 var libNav = includeDef.NameAndVersion(false) ??
                              throw this.NewExpressionBuildingException(
                                  $"Include {includeDef.localId} does not have a well-formed name and version");
-                LibraryContext.AddAliasForNameAndVersion(alias, libNav);
+                _libraryContext.AddAliasForNameAndVersion(alias, libNav);
             }
         });
 
@@ -256,7 +255,7 @@ partial class ExpressionBuilder
         {
             using (PushElement(parameter))
             {
-                if (LibraryContext.LibraryDefinitions.ContainsKey(LibraryContext.LibraryKey, parameter.name!))
+                if (_libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryKey, parameter.name!))
                     throw this.NewExpressionBuildingException($"There is already a definition named {parameter.name}",
                         null);
 
@@ -268,7 +267,7 @@ partial class ExpressionBuilder
                 var resolveParam = Expression.Call(
                     LibraryDefinitionsBuilder.ContextParameter,
                     typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
-                    Expression.Constant(LibraryContext.LibraryKey),
+                    Expression.Constant(_libraryContext.LibraryKey),
                     Expression.Constant(parameter.name),
                     defaultValue
                 );
@@ -277,7 +276,7 @@ partial class ExpressionBuilder
                 var cast = Expression.Convert(resolveParam, parameterType);
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
                 var lambda = Expression.Lambda(cast, LibraryDefinitionsBuilder.ContextParameter);
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, parameter.name!, lambda);
+                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, parameter.name!, lambda);
             }
         });
 
@@ -292,30 +291,7 @@ partial class ExpressionBuilder
                     Expression.Constant(valueSetDef.version, typeof(string)));
                 var contextParameter = LibraryDefinitionsBuilder.ContextParameter;
                 var lambda = Expression.Lambda(@new, contextParameter);
-                LibraryContext.LibraryDefinitions.Add(LibraryContext.LibraryKey, valueSetDef.name!, lambda);
+                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, valueSetDef.name!, lambda);
             }
         });
-
-    private static LambdaExpression NotImplemented(
-        ExpressionBuilder ctx,
-        string nav,
-        Type[] signature,
-        Type returnType)
-    {
-        var parameters = signature
-            .Select((type, index) =>
-                Expression.Parameter(type, TypeNameToIdentifier(type, ctx) + index))
-            .ToArray();
-        var ctor = ConstructorInfos.NotImplementedException;
-        var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
-        var @throw = Expression.Throw(@new, returnType);
-        var lambda = Expression.Lambda(@throw, parameters);
-        //var funcTypes = new Type[functionParameterTypes.Length + 1];
-        //Array.Copy(functionParameterTypes, funcTypes, functionParameterTypes.Length);
-        //funcTypes[funcTypes.Length - 1] = returnType;
-        //var funcType = GetFuncType(funcTypes);
-        //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
-        //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
-        return lambda;
-    }
 }

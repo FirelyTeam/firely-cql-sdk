@@ -15,7 +15,6 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-
         protected Expression? Combine(Elm.Combine e)
         {
             var source = TranslateExpression(e.source!);
@@ -34,7 +33,7 @@ namespace Hl7.Cql.Compiler
             {
                 return BindCqlOperator(CqlOperator.CharAt, left, right);
             }
-            else if (IsOrImplementsIEnumerableOfT(left.Type))
+            else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
                 return BindCqlOperator(CqlOperator.ListElementAt, left, right);
             }
@@ -51,7 +50,7 @@ namespace Hl7.Cql.Compiler
         protected Expression? Length(Elm.Length len)
         {
             var operand = TranslateExpression(len.operand!);
-            if (IsOrImplementsIEnumerableOfT(operand.Type))
+            if (_typeResolver.ImplementsGenericIEnumerable(operand.Type))
             {
                 return BindCqlOperator(CqlOperator.ListLength, operand);
             }

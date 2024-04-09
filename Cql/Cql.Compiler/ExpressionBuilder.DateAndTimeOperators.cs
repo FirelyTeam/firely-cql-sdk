@@ -135,9 +135,6 @@ namespace Hl7.Cql.Compiler
             return BindCqlOperator(CqlOperator.DurationBetween, left, right, precision);
         }
 
-        protected Expression? Now(Elm.Now now) =>
-            BindCqlOperator(CqlOperator.Now, LibraryDefinitionsBuilder.ContextParameter);
-
         protected Expression? SameAs(Elm.SameAs e)
         {
             var left = TranslateExpression(e.operand![0]);
@@ -148,8 +145,7 @@ namespace Hl7.Cql.Compiler
                 if (!IsInterval(right.Type, out var rightElementType))
                     throw this.NewExpressionBuildingException();
 
-                return BindCqlOperator(CqlOperator.IntervalSameAs, LibraryDefinitionsBuilder.ContextParameter,
-                    left, right, precision);
+                return BindCqlOperator(CqlOperator.IntervalSameAs, left, right, precision);
             }
             else
             {
