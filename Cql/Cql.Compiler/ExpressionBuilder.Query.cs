@@ -186,7 +186,7 @@ internal partial class ExpressionBuilder
         return @return;
     }
 
-    public Expression DemoteSourceListToSingleton(Expression source)
+    private Expression DemoteSourceListToSingleton(Expression source)
     {
         source = BindCqlOperator(CqlOperator.Single, source);
         return source;
