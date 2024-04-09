@@ -142,7 +142,7 @@ namespace Hl7.Cql.Operators
         CqlDate? Date(int? year, int? month, int? day);
         CqlDate? DateFrom(CqlDateTime? argument);
         CqlDateTime? DateTime(int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, decimal? offset);
-        IEnumerable<object?>? Descendants(object? argument);
+        IEnumerable<object?>? Descendents(object? argument);
         int? DifferenceBetween(CqlDate? low, CqlDate? high, string? precision);
         int? DifferenceBetween(CqlDateTime? low, CqlDateTime? high, string? precision);
         int? DifferenceBetween(CqlTime? low, CqlTime? high, string? precision);

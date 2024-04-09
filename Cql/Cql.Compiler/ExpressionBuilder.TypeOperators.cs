@@ -127,7 +127,7 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var source = TranslateExpression(e.source);
-                var call = _operatorBinding.Bind(CqlOperator.Descendants, LibraryDefinitionsBuilder.ContextParameter, source);
+                var call = _operatorBinding.Bind(CqlOperator.Descendents, LibraryDefinitionsBuilder.ContextParameter, source);
                 return call;
             }
         }

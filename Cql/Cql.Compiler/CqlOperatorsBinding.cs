@@ -198,7 +198,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.ConvertsToString                 => BindUnaryOperator(nameof(ICqlOperators.ConvertsToString), operators, parameters[0]),
                 CqlOperator.ConvertsToTime                   => BindUnaryOperator(nameof(ICqlOperators.ConvertsToTime), operators, parameters[0]),
                 CqlOperator.DateComponent                    => BindUnaryOperator(nameof(ICqlOperators.DateFrom), operators, parameters[0]),
-                CqlOperator.Descendants                      => BindUnaryOperator(nameof(ICqlOperators.Descendants), operators, parameters[0]),
+                CqlOperator.Descendents                      => BindUnaryOperator(nameof(ICqlOperators.Descendents), operators, parameters[0]),
                 CqlOperator.IntervalEnd                      => BindUnaryOperator(nameof(ICqlOperators.End), operators, parameters[0]),
                 CqlOperator.Exp                              => BindUnaryOperator(nameof(ICqlOperators.Exp), operators, parameters[0]),
                 CqlOperator.Floor                            => BindUnaryOperator(nameof(ICqlOperators.Floor), operators, parameters[0]),
