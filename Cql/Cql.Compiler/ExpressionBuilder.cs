@@ -362,6 +362,8 @@ namespace Hl7.Cql.Compiler
 
         protected bool IsOrImplementsIEnumerableOfT(Type type) => _typeManager.Resolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
+        protected Type? GetListElementType(Type type) => _typeManager.Resolver.GetListElementType(type);
+        
         protected Expression ValueSetRef(ValueSetRef valueSetRef)
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
@@ -371,7 +373,7 @@ namespace Hl7.Cql.Compiler
 
             if (IsOrImplementsIEnumerableOfT(type))
             {
-                var elementType = _typeManager.Resolver.GetListElementType(type);
+                var elementType = GetListElementType(type);
                 if (elementType != typeof(CqlCode))
                 {
                     throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");

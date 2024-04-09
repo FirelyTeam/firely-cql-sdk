@@ -13,13 +13,14 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
 using Hl7.Cql.Conversion;
-using Microsoft.Extensions.Logging;
+using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
         private readonly TypeManager _typeManager;
+
         private readonly TypeConverter _typeConverter;
 
         private LibraryExpressionBuilder LibraryContext { get; }

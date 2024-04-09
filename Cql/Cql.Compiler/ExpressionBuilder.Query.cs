@@ -31,6 +31,7 @@ internal partial class ExpressionBuilder
             {
                 var sourceType = TranslateExpression(s.expression).Type;
                 var needsPromotion = !IsOrImplementsIEnumerableOfT(sourceType);
+                if (needsPromotion) sourceType = _typeManager.Resolver.GetListElementType(sourceType, true)!;
                 return (
                     s.alias,
                     sourceType,
@@ -82,41 +83,69 @@ internal partial class ExpressionBuilder
             ((ReadOnlySpan<string>)["Empty", "Single", "Multi"])[Math.Clamp(sourceLength, 0, 2)],
             sourceLength,
             DebuggerView,
-            $"{string.Concat(from s in sources select $"\n\t{s.alias}: {s.sourceType}{(s.needsPromotion?" (singleton)":"")}")}",
+            $"{string.Concat(from s in sources select $"\n\t{s.alias}: {(s.needsPromotion ? " Singleton" : "Enumeration")} of {s.sourceType}")}",
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
 #endif
 
-        //return MultiSourceQuery(query);
-        // return SingleSourceQuery(query);
-        return sourceLength switch
-        {
-            0 => throw this.NewExpressionBuildingException("Queries must define at least 1 source"),
-            1 => SingleSourceQuery(this, query),
-            _ => MultiSourceQuery(this, query),
-        };
+        return QueryImpl(query);
     }
 
-    protected static Expression SingleSourceQuery(ExpressionBuilder ctx, Query query)
+    protected Expression QueryImpl(Query query)
     {
-        //ExpressionBuilder ctx = this;
+        ExpressionBuilder ctx = this;
 
-        var querySource = query.source.Single();
-        var querySourceAlias = !string.IsNullOrWhiteSpace(querySource.alias)
-            ? querySource.alias
-            : throw ctx.NewExpressionBuildingException("Only aliased query sources are supported.");
+        ParameterExpression scopeParameter;
+        Expression? @return;
+        bool[] isSourcesPromoted;
+        switch (query.source.Length)
+        {
+            case 0:
+                throw ctx.NewExpressionBuildingException("Queries must define at least 1 source");
+            case 1:
+            {
+                var querySource = query.source.Single();
+                var querySourceAlias = !string.IsNullOrWhiteSpace(querySource.alias)
+                    ? querySource.alias
+                    : throw ctx.NewExpressionBuildingException("Only aliased query sources are supported.");
 
-        if (querySource.expression is null)
-            throw ctx.NewExpressionBuildingException("Query sources must have an expression");
+                if (querySource.expression is null)
+                    throw ctx.NewExpressionBuildingException("Query sources must have an expression");
 
-        var source = ctx.TranslateExpression(querySource.expression);
+                var source = ctx.TranslateExpression(querySource.expression);
 
-        var (@return, isSourcePromoted) = ctx.TryPromoteSource(source);
+                (@return, var isSourcePromoted) = ctx.TryPromoteSource(source);
+                isSourcesPromoted = [isSourcePromoted];
 
-        Type elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, throwError: true)!;
+                Type elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, throwError: true)!;
 
-        var sourceParameterName = NormalizeIdentifier(querySourceAlias);
-        var scopeParameter = Expression.Parameter(elementType, sourceParameterName);
-        ctx = ctx.WithScope(querySourceAlias, scopeParameter, querySource.expression);
+                var sourceParameterName = NormalizeIdentifier(querySourceAlias);
+                scopeParameter = Expression.Parameter(elementType, sourceParameterName);
+                ctx = ctx.WithScope(querySourceAlias, scopeParameter, querySource.expression);
+                break;
+            }
+            default:
+            {
+                (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
+                var multiSourceTupleType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+                var elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+
+                if (elementType != multiSourceTupleType)
+                    throw ctx.NewExpressionBuildingException($"Expected element type {multiSourceTupleType.Name} but got {elementType.Name}");
+
+                var sourceParameterName = TypeNameToIdentifier(elementType, ctx);
+                scopeParameter = Expression.Parameter(elementType, sourceParameterName);
+
+                var scopes =
+                    (
+                        from property in multiSourceTupleType!.GetProperties()
+                        let propertyAccess = Expression.Property(scopeParameter, property)
+                        select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
+                    )
+                    .ToArray();
+                ctx = ctx.WithScopes(scopes);
+                break;
+            }
+        }
 
         if (query.let != null)
         {
@@ -180,10 +209,74 @@ internal partial class ExpressionBuilder
 
         if (query.sort is { by.Length: > 0 })
         {
-            @return = ctx.SortClause(query, @return);
+            if (query.source.Length == 1)
+                @return = ctx.SortClause(query, @return);
+            else
+            {
+                throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(ctx);
+                //foreach (var by in query.sort.by)
+                //{
+                //    var order = ListSortDirection.Ascending;
+                //    if (by.direction == "desc" || by.direction == "descending")
+                //        order = ListSortDirection.Descending;
+                //    else if (by.direction == "asc" || by.direction == "ascending")
+                //        order = ListSortDirection.Ascending;
+                //    else throw ctx.NewExpressionBuildingException($"Invalid sort order {by.direction}");
+
+                //    if (by.expression != null)
+                //    {
+                //        var parameterName = "@this";
+                //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
+                //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                //        var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, by.expression);
+                //        var sortMemberExpression = TranslateExpression(by.expression, subContext);
+                //        var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
+                //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
+                //        @return = sort;
+                //    }
+                //    else if (by.path != null && by.resultTypeName != null)
+                //    {
+                //        var parameterName = "@this";
+                //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
+                //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                //        var pathMemberType = TypeResolver.ResolveType(by.resultTypeName);
+                //        if (pathMemberType == null)
+                //        {
+                //            var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
+                //            ctx.LogError(msg);
+                //            throw ctx.NewExpressionBuildingException(msg);
+                //        }
+                //        var pathExpression = PropertyHelper(sortMemberParameter, by.path, pathMemberType!, ctx);
+                //        var lambdaBody = Expression.Convert(pathExpression, typeof(object));
+                //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
+                //        @return = sort;
+                //    }
+                //    else
+                //    {
+                //        var sort = Operators.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
+                //            @return, Expression.Constant(order, typeof(SortOrder)));
+                //        @return = sort;
+                //    }
+                //}
+
+            }
         }
 
-        return ctx.TryDemoteSource(query, @return, isSourcePromoted);
+
+        // if (isSourcePromoted)
+        // {
+        //     //var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
+        //     var callSingle = _operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
+        //     @return = callSingle;
+        // }
+
+
+        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
+        return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
     }
 
     protected Expression TryDemoteSource(
@@ -475,176 +568,6 @@ internal partial class ExpressionBuilder
             }
         }
         return @return;
-    }
-
-    protected static Expression MultiSourceQuery(ExpressionBuilder ctx, Query query)
-    {
-        //ExpressionBuilder ctx = this;
-
-        var (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
-        var multiSourceTupleType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-        var elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-
-        if (elementType != multiSourceTupleType)
-            throw ctx.NewExpressionBuildingException($"Expected element type {multiSourceTupleType.Name} but got {elementType.Name}");
-
-        var sourceParameterName = TypeNameToIdentifier(elementType, ctx);
-        var scopeParameter = Expression.Parameter(elementType, sourceParameterName);
-
-        var scopes =
-            (
-                from property in multiSourceTupleType!.GetProperties()
-                let propertyAccess = Expression.Property(scopeParameter, property)
-                select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
-            )
-            .ToArray();
-        ctx = ctx.WithScopes(scopes);
-
-        if (query.let != null)
-        {
-            foreach (var let in query.let)
-            {
-                var expression = ctx.TranslateExpression(let.expression!);
-                ctx = ctx.WithScope(let.identifier!, expression, let.expression!);
-            }
-        }
-
-        // handle with/such-that
-        if (query.relationship is not null)
-        {
-            foreach (var relationship in query.relationship)
-            {
-                using (ctx.PushElement(relationship))
-                {
-                    var selectManyLambda = ctx.WithToSelectManyBody(scopeParameter, relationship);
-                    // var selectManyLambda = ctx.WithToSelectManyBody(multiSourceTupleType, relationship);
-
-                    var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
-                        @return, selectManyLambda);
-                    if (relationship is Without)
-                    {
-                        var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
-                            @return, selectManyCall);
-                        @return = callExcept;
-                    }
-                    else
-                    {
-                        @return = selectManyCall;
-                    }
-                }
-            }
-        }
-
-        if (query.where is { } queryWhere)
-        {
-            @return = ctx.Where(queryWhere, scopeParameter, @return);
-        }
-
-        if (query.@return != null)
-        {
-            using (ctx.PushElement(query.@return))
-            {
-                var selectBody = ctx.TranslateExpression(query.@return.expression!);
-                var selectLambda = Expression.Lambda(selectBody, scopeParameter);
-                var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
-                @return = callSelect;
-            }
-        }
-
-        if (query.aggregate is { } queryAggregate)
-        {
-            @return = ctx.AggregateClause(query, queryAggregate, scopeParameter, @return);
-        }
-
-        if (query.sort is { by.Length: > 0 })
-        {
-            throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(ctx);
-            //foreach (var by in query.sort.by)
-            //{
-            //    var order = ListSortDirection.Ascending;
-            //    if (by.direction == "desc" || by.direction == "descending")
-            //        order = ListSortDirection.Descending;
-            //    else if (by.direction == "asc" || by.direction == "ascending")
-            //        order = ListSortDirection.Ascending;
-            //    else throw ctx.NewExpressionBuildingException($"Invalid sort order {by.direction}");
-
-            //    if (by.expression != null)
-            //    {
-            //        var parameterName = "@this";
-            //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
-            //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-            //        var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, by.expression);
-            //        var sortMemberExpression = TranslateExpression(by.expression, subContext);
-            //        var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
-            //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
-            //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
-            //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
-            //        @return = sort;
-            //    }
-            //    else if (by.path != null && by.resultTypeName != null)
-            //    {
-            //        var parameterName = "@this";
-            //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
-            //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-            //        var pathMemberType = TypeResolver.ResolveType(by.resultTypeName);
-            //        if (pathMemberType == null)
-            //        {
-            //            var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
-            //            ctx.LogError(msg);
-            //            throw ctx.NewExpressionBuildingException(msg);
-            //        }
-            //        var pathExpression = PropertyHelper(sortMemberParameter, by.path, pathMemberType!, ctx);
-            //        var lambdaBody = Expression.Convert(pathExpression, typeof(object));
-            //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
-            //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
-            //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
-            //        @return = sort;
-            //    }
-            //    else
-            //    {
-            //        var sort = Operators.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
-            //            @return, Expression.Constant(order, typeof(SortOrder)));
-            //        @return = sort;
-            //    }
-            //}
-        }
-
-        // if (isSourcePromoted)
-        // {
-        //     //var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
-        //     var callSingle = _operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
-        //     @return = callSingle;
-        // }
-
-        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
-        return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
-    }
-
-    private Type GetMultiSourceTupleType(Query query)
-    {
-        // The technique here is to create a cross product of all the query sources.
-        // The combinations will be stored in a tuple whose fields are named by source alias.
-        // we will then create an expression that creates this cross-product of tuples,
-        // and use that as the singular query source for subsequent parts of the query.
-        var tupleSpecifier = new TupleTypeSpecifier
-        {
-            element = query.source
-                .Select(source => new TupleElementDefinition
-                {
-                    name = source.alias ?? throw this.NewExpressionBuildingException("Missing alias for multi-source query; this is illegal"),
-                    elementType = source.resultTypeSpecifier,
-                })
-                .ToArray(),
-        };
-
-        var multiSourceTupleType = TupleTypeFor(
-            tupleSpecifier,
-            // type => _typeManager.Resolver.GetListElementType(type, true)!);
-            type => IsOrImplementsIEnumerableOfT(type)
-                ? _typeManager.Resolver.GetListElementType(type, true)!
-                : throw new NotSupportedException("Query sources must be lists."));
-
-        return multiSourceTupleType;
     }
 
     protected LambdaExpression WithToSelectManyBody(
