@@ -94,57 +94,41 @@ internal partial class ExpressionBuilder
     {
         ExpressionBuilder ctx = this;
 
-        ParameterExpression scopeParameter;
-        Expression? @return;
-        bool[] isSourcesPromoted;
-        switch (query.source.Length)
+        var sources = query.source;
+        if (sources.Length == 0)
         {
-            case 0:
-                throw ctx.NewExpressionBuildingException("Queries must define at least 1 source");
-            case 1:
-            {
-                var querySource = query.source.Single();
-                var querySourceAlias = !string.IsNullOrWhiteSpace(querySource.alias)
-                    ? querySource.alias
-                    : throw ctx.NewExpressionBuildingException("Only aliased query sources are supported.");
+            throw ctx.NewExpressionBuildingException("Queries must define at least 1 source");
+        }
 
-                if (querySource.expression is null)
-                    throw ctx.NewExpressionBuildingException("Query sources must have an expression");
+        ParameterExpression scopeParameter;
 
-                var source = ctx.TranslateExpression(querySource.expression);
+        var (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
+        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
+        var returnType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        if (returnElementType != returnType)
+            throw ctx.NewExpressionBuildingException(
+                $"Expected element type {returnType.Name} but got {returnElementType.Name}");
 
-                (@return, var isSourcePromoted) = ctx.TryPromoteSource(source);
-                isSourcesPromoted = [isSourcePromoted];
-
-                Type elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, throwError: true)!;
-
-                var sourceParameterName = NormalizeIdentifier(querySourceAlias);
-                scopeParameter = Expression.Parameter(elementType, sourceParameterName);
-                ctx = ctx.WithScope(querySourceAlias, scopeParameter, querySource.expression);
-                break;
-            }
-            default:
-            {
-                (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
-                var multiSourceTupleType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-                var elementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-
-                if (elementType != multiSourceTupleType)
-                    throw ctx.NewExpressionBuildingException($"Expected element type {multiSourceTupleType.Name} but got {elementType.Name}");
-
-                var sourceParameterName = TypeNameToIdentifier(elementType, ctx);
-                scopeParameter = Expression.Parameter(elementType, sourceParameterName);
-
-                var scopes =
-                    (
-                        from property in multiSourceTupleType!.GetProperties()
-                        let propertyAccess = Expression.Property(scopeParameter, property)
-                        select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
-                    )
-                    .ToArray();
-                ctx = ctx.WithScopes(scopes);
-                break;
-            }
+        if (sources.Length == 1)
+        {
+            var source0 = sources[0];
+            var sourceParameterName = NormalizeIdentifier(source0.alias);
+            scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
+            ctx = ctx.WithScope(source0.alias, scopeParameter, source0.expression);
+        }
+        else
+        {
+            var sourceParameterName = TypeNameToIdentifier(returnElementType, ctx);
+            scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
+            var scopes =
+                (
+                    from property in returnType!.GetProperties()
+                    let propertyAccess = Expression.Property(scopeParameter, property)
+                    select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
+                )
+                .ToArray();
+            ctx = ctx.WithScopes(scopes);
         }
 
         if (query.let != null)
@@ -209,7 +193,7 @@ internal partial class ExpressionBuilder
 
         if (query.sort is { by.Length: > 0 })
         {
-            if (query.source.Length == 1)
+            if (sources.Length == 1)
                 @return = ctx.SortClause(query, @return);
             else
             {
@@ -266,16 +250,6 @@ internal partial class ExpressionBuilder
             }
         }
 
-
-        // if (isSourcePromoted)
-        // {
-        //     //var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type);
-        //     var callSingle = _operatorBinding.Bind(CqlOperator.Single, LibraryDefinitionsBuilder.ContextParameter, @return);
-        //     @return = callSingle;
-        // }
-
-
-        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
         return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
     }
 
