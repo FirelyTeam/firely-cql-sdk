@@ -27,7 +27,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="linqExpression">The source expression.</param>
         /// <param name="elmExpression">The corresponding ELM expression.</param>
-        /// <param name="ctx">The build context.  Be careful modifying this value as it can have unexpected side effects (e.g., removing key from <see cref="ExpressionBuilder._scopes"/> could break the builder.).</param>
+        /// <param name="ctx">The build context.  Be careful modifying this value as it can have unexpected side effects (e.g., removing key from <see cref="ExpressionBuilder.Scopes"/> could break the builder.).</param>
         public System.Linq.Expressions.Expression Mutate(
             System.Linq.Expressions.Expression linqExpression,
             Elm.Element elmExpression,

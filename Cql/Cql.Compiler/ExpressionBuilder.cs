@@ -48,20 +48,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private readonly IDictionary<string, (Expression, Element)> _scopes;
-
-        /// <summary>
-        /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
-        /// this value is the implied alias name that should qualify it, e.g. from DRR-E 2022:
-        /// <code>
-        ///     "PHQ-9 Assessments" PHQ
-        ///      where ...
-        ///      sort by date from start of FHIRBase."Normalize Interval"(effective) asc
-        /// </code>
-        /// The use of "effective" here is unqualified and is implied to be PHQ.effective
-        /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
-        /// </summary>
-        private readonly string? _impliedAlias;
+        private ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)> _scopesStack;
 
         /// <summary>
         /// Parameters for function definitions.
@@ -101,40 +88,11 @@ namespace Hl7.Cql.Compiler
 
             // Internal State
             _elementStack = ImmutableStack<Element>.Empty;
-            _impliedAlias = null;
             _operands = new Dictionary<string, ParameterExpression>();
             _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopes = new Dictionary<string, (Expression, Element)>();
+            _scopesStack = ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)>.Empty;
             _expressionMutators = new List<IExpressionMutator>();
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
-        }
-
-        private ExpressionBuilder(
-            ExpressionBuilder source)
-        {
-            _elementStack = source._elementStack;
-            _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
-            _operatorBinding = source._operatorBinding;
-            _impliedAlias = source._impliedAlias;
-            _operands = source._operands;
-            _libraries = source._libraries;
-            _scopes = source._scopes;
-            _libraryContext = source._libraryContext;
-            _typeManager = source._typeManager;
-            _logger = source._logger;
-            _expressionMutators = source._expressionMutators;
-            _customImplementations = source._customImplementations;
-            _typeConverter = source._typeConverter;
-            _typeResolver = _typeManager.Resolver;
-        }
-
-        private ExpressionBuilder(
-            ExpressionBuilder outer,
-            string? impliedAlias,
-            IDictionary<string, (Expression, Element)> scopes) : this(outer)
-        {
-            _scopes = scopes;
-            _impliedAlias = impliedAlias;
         }
 
         internal Expression TranslateExpression(Element op) =>
@@ -384,9 +342,9 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? IdentifierRef(IdentifierRef ire)
         {
-            if (string.Equals("$this", ire.name) && _impliedAlias != null)
+            if (string.Equals("$this", ire.name) && ImpliedAlias != null)
             {
-                var scopeExpression = GetScopeExpression(_impliedAlias!);
+                var scopeExpression = GetScopeExpression(ImpliedAlias!);
                 return scopeExpression;
             }
             var pe = new Property
@@ -396,7 +354,7 @@ namespace Hl7.Cql.Compiler
                 localId = ire.localId,
                 locator = ire.locator,
                 path = ire.name,
-                scope = _impliedAlias!,
+                scope = ImpliedAlias!,
             };
             var prop = Property(pe);
             return prop;

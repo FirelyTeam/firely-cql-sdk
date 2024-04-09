@@ -23,14 +23,14 @@ internal partial class ExpressionBuilder
     {
         QueryDumpDebugInfoToLog(query);
 
-        ExpressionBuilder ctx = this;
+        using PopTokenCleanupStack cleanupScopes = new();
 
         var sources = query.source;
         if (sources.Length == 0)
-            throw ctx.NewExpressionBuildingException("Queries must define at least 1 source");
+            throw this.NewExpressionBuildingException("Queries must define at least 1 source");
 
-        var (@return, sourcesPreviouslySingletons) = ctx.ProcessQuerySources(query);
-        var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        var (@return, sourcesPreviouslySingletons) = ProcessQuerySources(query);
+        var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
 
         ParameterExpression scopeParameter;
         if (sources.Length == 1)
@@ -38,11 +38,11 @@ internal partial class ExpressionBuilder
             var source0 = sources[0];
             var sourceParameterName = NormalizeIdentifier(source0.alias);
             scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
-            ctx = ctx.WithScope(source0.alias, scopeParameter, source0.expression);
+            cleanupScopes.PushForCleanup(PushScopes(ImpliedAlias, KeyValuePair.Create(source0.alias, ((Expression)scopeParameter, (Element)source0.expression))));
         }
         else
         {
-            var sourceParameterName = TypeNameToIdentifier(returnElementType, ctx);
+            var sourceParameterName = TypeNameToIdentifier(returnElementType, this);
             scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
             var scopes =
                 (
@@ -51,15 +51,15 @@ internal partial class ExpressionBuilder
                     select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
                 )
                 .ToArray();
-            ctx = ctx.WithScopes(scopes);
+            cleanupScopes.PushForCleanup(PushScopes(ImpliedAlias, scopes));
         }
 
         if (query.let != null)
         {
             foreach (var let in query.let)
             {
-                var expression = ctx.TranslateExpression(let.expression!);
-                ctx = ctx.WithScope(let.identifier!, expression, let.expression!);
+                var expression = TranslateExpression(let.expression!);
+                cleanupScopes.PushForCleanup(PushScopes(ImpliedAlias, KeyValuePair.Create(let.identifier!, (expression, (Element)let.expression!))));
             }
         }
 
@@ -68,14 +68,14 @@ internal partial class ExpressionBuilder
         {
             foreach (var relationship in query.relationship)
             {
-                using (ctx.PushElement(relationship))
+                using (PushElement(relationship))
                 {
-                    var selectManyLambda = ctx.WithToSelectManyBody(scopeParameter, relationship);
+                    var selectManyLambda = WithToSelectManyBody(scopeParameter, relationship);
 
-                    var selectManyCall = ctx.BindCqlOperator(CqlOperator.SelectMany, @return, selectManyLambda);
+                    var selectManyCall = BindCqlOperator(CqlOperator.SelectMany, @return, selectManyLambda);
                     if (relationship is Without)
                     {
-                        var callExcept = ctx.BindCqlOperator(CqlOperator.ListExcept, @return, selectManyCall);
+                        var callExcept = BindCqlOperator(CqlOperator.ListExcept, @return, selectManyCall);
                         @return = callExcept;
                     }
                     else
@@ -93,32 +93,32 @@ internal partial class ExpressionBuilder
         // elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
         if (query.where is { } queryWhere)
         {
-            @return = ctx.Where(queryWhere, scopeParameter, @return);
+            @return = Where(queryWhere, scopeParameter, @return);
         }
 
         if (query.@return != null)
         {
-            using (ctx.PushElement(query.@return))
+            using (PushElement(query.@return))
             {
-                var selectBody = ctx.TranslateExpression(query.@return.expression!);
+                var selectBody = TranslateExpression(query.@return.expression!);
                 var selectLambda = Expression.Lambda(selectBody, scopeParameter);
-                var callSelect = ctx.BindCqlOperator(CqlOperator.Select, @return, selectLambda);
+                var callSelect = BindCqlOperator(CqlOperator.Select, @return, selectLambda);
                 @return = callSelect;
             }
         }
 
         if (query.aggregate is { } queryAggregate)
         {
-            @return = ctx.AggregateClause(query, queryAggregate, scopeParameter, @return);
+            @return = AggregateClause(query, queryAggregate, scopeParameter, @return);
         }
 
         if (query.sort is { by.Length: > 0 })
         {
             if (sources.Length == 1)
-                @return = ctx.SortClause(query, @return);
+                @return = SortClause(query, @return);
             else
             {
-                throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(ctx);
+                throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(this);
                 //foreach (var by in query.sort.by)
                 //{
                 //    var order = ListSortDirection.Ascending;
@@ -175,10 +175,10 @@ internal partial class ExpressionBuilder
         var wereAllSourcesPreviouslySingletons = sourcesPreviouslySingletons.All(b => b);
         if (wereAllSourcesPreviouslySingletons)
         {
-            @return = ctx.DemoteSourceListToSingleton(@return);
+            @return = DemoteSourceListToSingleton(@return);
         }
 
-        if (query.resultTypeSpecifier is Elm.ListTypeSpecifier && !ctx._typeResolver.ImplementsGenericIEnumerable(@return.Type))
+        if (query.resultTypeSpecifier is ListTypeSpecifier && !_typeResolver.ImplementsGenericIEnumerable(@return.Type))
         {
             @return = Expression.NewArrayInit(@return.Type, @return);
         }
@@ -241,7 +241,7 @@ internal partial class ExpressionBuilder
                 return null;
 
             var lines =
-                System.IO.File.ReadLines(fiCql.FullName)
+                File.ReadLines(fiCql.FullName)
                     .Select((lineText, i) => (lineText, lineNum: i + 1))
                     .Where(t => t.lineNum >= row0 && t.lineNum <= row1)
                     .Select(t =>
@@ -317,7 +317,7 @@ internal partial class ExpressionBuilder
         //        });
 
         Type[] sourceListElementTypes = promotedSourceExpressions
-            .SelectToArray(pse => this._typeManager.Resolver.GetListElementType(pse.Type, true)!);
+            .SelectToArray(pse => _typeManager.Resolver.GetListElementType(pse.Type, true)!);
 
         var aliasAndElementTypes = aliases
             .Zip(sourceListElementTypes, (alias, elementType) => (alias, elementType))
@@ -389,12 +389,15 @@ internal partial class ExpressionBuilder
                             var parameterName = "@this";
                             var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
                             var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                            var subContext = WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
-                            var sortMemberExpression = subContext.TranslateExpression(byExpression.expression);
-                            var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
-                            var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                            var sort = BindCqlOperator(CqlOperator.SortBy, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
-                            return sort;
+                            using (PushScopes(parameterName,
+                                       KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
+                            {
+                                var sortMemberExpression = TranslateExpression(byExpression.expression);
+                                var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
+                                var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
+                                var sort = BindCqlOperator(CqlOperator.SortBy, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                                return sort;
+                            }
                         }
                         case ByColumn byColumn:
                         {
@@ -459,19 +462,21 @@ internal partial class ExpressionBuilder
         var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
 
         var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
-        var whereContext = WithScope(with.alias!, whereLambdaParameter, with);
-        var suchThatBody = whereContext.TranslateExpression(with.suchThat);
+        using (PushScopes(ImpliedAlias, KeyValuePair.Create(with.alias!, ((Expression)whereLambdaParameter, (Element)with))))
+        {
+            var suchThatBody = TranslateExpression(with.suchThat);
 
-        var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-        var callWhereOnSource = BindCqlOperator(CqlOperator.Where, source, whereLambda);
+            var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
+            var callWhereOnSource = BindCqlOperator(CqlOperator.Where, source, whereLambda);
 
-        var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
-        var selectBody = rootScopeParameter; // P => E
-        var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-        var callSelectOnWhere = BindCqlOperator(CqlOperator.Select, callWhereOnSource, selectLambda);
-        var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
+            var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
+            var selectBody = rootScopeParameter; // P => E
+            var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
+            var callSelectOnWhere = BindCqlOperator(CqlOperator.Select, callWhereOnSource, selectLambda);
+            var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
+            return selectManyLambda;
 
-        return selectManyLambda;
+        }
     }
 
 
@@ -513,14 +518,15 @@ internal partial class ExpressionBuilder
                     $"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
 
             var resultParameter = Expression.Parameter(resultType, resultAlias);
-            var subContext = WithScope(resultAlias!, resultParameter, queryAggregate);
-            var startingValue = subContext.TranslateExpression(queryAggregate.starting!);
-
-            var lambdaBody = subContext.TranslateExpression(queryAggregate.expression!);
-            var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
-            var aggregateCall = BindCqlOperator(CqlOperator.Aggregate,
-                @return, lambda, startingValue);
-            return aggregateCall;
+            using (PushScopes(ImpliedAlias, KeyValuePair.Create(resultAlias!, ((Expression)resultParameter, (Element)queryAggregate))))
+            {
+                var startingValue = TranslateExpression(queryAggregate.starting!);
+                var lambdaBody = TranslateExpression(queryAggregate.expression!);
+                var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
+                var aggregateCall = BindCqlOperator(CqlOperator.Aggregate,
+                    @return, lambda, startingValue);
+                return aggregateCall;
+            }
         }
     }
 }

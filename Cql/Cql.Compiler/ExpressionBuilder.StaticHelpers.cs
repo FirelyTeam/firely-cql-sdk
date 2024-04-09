@@ -233,7 +233,6 @@ partial class ExpressionBuilder
         return false;
     }
 
-    
     protected interface IPopToken : IDisposable
     {
         void Pop();
@@ -249,6 +248,19 @@ partial class ExpressionBuilder
 
         void IPopToken.Pop()
         {
+        }
+    }
+
+    private readonly record struct PopTokenCleanupStack() : IPopToken
+    {
+        private readonly Stack<IPopToken> _stack = new();
+
+        public void PushForCleanup(IPopToken popToken) => _stack.Push(popToken);
+        void IDisposable.Dispose() => Pop();
+        public void Pop()
+        {
+            while (_stack.TryPop(out var next))
+                next.Pop();
         }
     }
 }
