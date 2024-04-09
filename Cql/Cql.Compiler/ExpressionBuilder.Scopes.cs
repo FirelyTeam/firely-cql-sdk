@@ -9,7 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Hl7.Cql.Elm;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
@@ -17,9 +17,9 @@ namespace Hl7.Cql.Compiler
     internal partial class ExpressionBuilder
     {
         private IReadOnlyDictionary<string, (Expression expr, Elm.Element element)> Scopes =>
-            _scopesStack.IsEmpty
-                ? ReadOnlyDictionary<string, (Expression expr, Elm.Element element)>.Empty
-                : _scopesStack.Peek().scopes;
+            _impliedAliasAndScopesStack.TryPeek(out var item)
+                ? item.scopes
+                : ReadOnlyDictionary<string, (Expression expr, Elm.Element element)>.Empty;
 
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
@@ -33,10 +33,9 @@ namespace Hl7.Cql.Compiler
         /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
         /// </summary>
         private string? ImpliedAlias =>
-            _scopesStack.IsEmpty
-                ? null
-                : _scopesStack.Peek().impliedAlias;
-
+            _impliedAliasAndScopesStack.TryPeek(out var item)
+                ? item.impliedAlias
+                : null;
 
         protected Expression GetScopeExpression(string elmAlias)
         {
@@ -89,7 +88,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            _scopesStack = _scopesStack.Push((alias, scopes));
+            _impliedAliasAndScopesStack = _impliedAliasAndScopesStack.Push((alias, scopes));
             return new PopScopesToken(this);
         }
 
@@ -117,7 +116,7 @@ namespace Hl7.Cql.Compiler
                 if (_previousElement != expectedPreviousElement)
                     throw new InvalidOperationException("Popping should be called in the correct reverse order.");*/
 
-                _owner._scopesStack = _owner._scopesStack.Pop();
+                _owner._impliedAliasAndScopesStack = _owner._impliedAliasAndScopesStack.Pop();
             }
         }
     }

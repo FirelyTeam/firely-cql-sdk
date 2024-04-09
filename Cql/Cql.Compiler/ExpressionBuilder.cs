@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)> _scopesStack;
+        private ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)> _impliedAliasAndScopesStack;
 
         /// <summary>
         /// Parameters for function definitions.
@@ -90,7 +90,7 @@ namespace Hl7.Cql.Compiler
             _elementStack = ImmutableStack<Element>.Empty;
             _operands = new Dictionary<string, ParameterExpression>();
             _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopesStack = ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)>.Empty;
+            _impliedAliasAndScopesStack = ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)>.Empty;
             _expressionMutators = new List<IExpressionMutator>();
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }

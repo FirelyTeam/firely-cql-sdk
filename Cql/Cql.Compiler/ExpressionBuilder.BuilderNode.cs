@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
 
@@ -35,7 +36,7 @@ partial class ExpressionBuilder : IBuilderNode
 
     private IPopToken PushElement(Elm.Element element)
     {
-        Elm.Element? previous = _elementStack.IsEmpty ? null : _elementStack.Peek();
+        _elementStack.TryPeek(out var previous);
         if (previous == element) return EmptyDisposable.Instance;
 
         _elementStack = _elementStack.Push(element);
