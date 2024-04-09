@@ -15,6 +15,7 @@ using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -39,7 +40,7 @@ namespace Hl7.Cql.Compiler
         private readonly TypeConverter _typeConverter;
         private readonly TypeResolver _typeResolver;
 
-        private readonly Stack<Element> _elementStack;
+        private ImmutableStack<Element> _elementStack;
         private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
         private readonly LibraryExpressionBuilder _libraryContext;
         private readonly Dictionary<string, DefinitionDictionary<LambdaExpression>> _libraries;
@@ -99,7 +100,7 @@ namespace Hl7.Cql.Compiler
             _libraryContext = libContext;
 
             // Internal State
-            _elementStack = new Stack<Element>();
+            _elementStack = ImmutableStack<Element>.Empty;
             _impliedAlias = null;
             _operands = new Dictionary<string, ParameterExpression>();
             _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -111,7 +112,7 @@ namespace Hl7.Cql.Compiler
         private ExpressionBuilder(
             ExpressionBuilder source)
         {
-            _elementStack = new Stack<Element>(source._elementStack);
+            _elementStack = source._elementStack;
             _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
             _operatorBinding = source._operatorBinding;
             _impliedAlias = source._impliedAlias;
