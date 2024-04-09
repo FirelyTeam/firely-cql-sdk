@@ -20,9 +20,173 @@ internal partial class ExpressionBuilder
 {
     protected Expression Query(Query query)
     {
-        var sourceLength = query.source?.Length ?? 0;
+        QueryDumpDebugInfoToLog(query);
 
-#if DEBUG // REVIEW: For debugging purposes right now - might delete at a later stage
+        ExpressionBuilder ctx = this;
+
+        var sources = query.source;
+        if (sources.Length == 0)
+        {
+            throw ctx.NewExpressionBuildingException("Queries must define at least 1 source");
+        }
+
+        ParameterExpression scopeParameter;
+
+        var (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
+        var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
+        var returnType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
+        if (returnElementType != returnType)
+            throw ctx.NewExpressionBuildingException(
+                $"Expected element type {returnType.Name} but got {returnElementType.Name}");
+
+        if (sources.Length == 1)
+        {
+            var source0 = sources[0];
+            var sourceParameterName = NormalizeIdentifier(source0.alias);
+            scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
+            ctx = ctx.WithScope(source0.alias, scopeParameter, source0.expression);
+        }
+        else
+        {
+            var sourceParameterName = TypeNameToIdentifier(returnElementType, ctx);
+            scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
+            var scopes =
+                (
+                    from property in returnType!.GetProperties()
+                    let propertyAccess = Expression.Property(scopeParameter, property)
+                    select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
+                )
+                .ToArray();
+            ctx = ctx.WithScopes(scopes);
+        }
+
+        if (query.let != null)
+        {
+            foreach (var let in query.let)
+            {
+                var expression = ctx.TranslateExpression(let.expression!);
+                ctx = ctx.WithScope(let.identifier!, expression, let.expression!);
+            }
+        }
+
+        // handle with/such-that
+        if (query.relationship is not null)
+        {
+            foreach (var relationship in query.relationship)
+            {
+                using (ctx.PushElement(relationship))
+                {
+                    var selectManyLambda = ctx.WithToSelectManyBody(scopeParameter, relationship);
+
+                    var selectManyCall = ctx._operatorBinding.Bind(CqlOperator.SelectMany, LibraryDefinitionsBuilder.ContextParameter,
+                        @return, selectManyLambda);
+                    if (relationship is Without)
+                    {
+                        var callExcept = ctx._operatorBinding.Bind(CqlOperator.ListExcept, LibraryDefinitionsBuilder.ContextParameter,
+                            @return, selectManyCall);
+                        @return = callExcept;
+                    }
+                    else
+                    {
+                        @return = selectManyCall;
+                    }
+                }
+            }
+        }
+        // 20240312 EK: refactoring made this redundant, but I am not sure it really is, so I am keeping
+        // it around. It was used to redefine the type for the "rootScopeParameter", which used to be defined
+        // inside every if statement here (so for where, return, etc).
+        // -----
+        // The element type may have changed
+        // elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
+        if (query.where is { } queryWhere)
+        {
+            @return = ctx.Where(queryWhere, scopeParameter, @return);
+        }
+
+        if (query.@return != null)
+        {
+            using (ctx.PushElement(query.@return))
+            {
+                var selectBody = ctx.TranslateExpression(query.@return.expression!);
+                var selectLambda = Expression.Lambda(selectBody, scopeParameter);
+                var callSelect = ctx._operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, @return, selectLambda);
+                @return = callSelect;
+            }
+        }
+
+        if (query.aggregate is { } queryAggregate)
+        {
+            @return = ctx.AggregateClause(query, queryAggregate, scopeParameter, @return);
+        }
+
+        if (query.sort is { by.Length: > 0 })
+        {
+            if (sources.Length == 1)
+                @return = ctx.SortClause(query, @return);
+            else
+            {
+                throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(ctx);
+                //foreach (var by in query.sort.by)
+                //{
+                //    var order = ListSortDirection.Ascending;
+                //    if (by.direction == "desc" || by.direction == "descending")
+                //        order = ListSortDirection.Descending;
+                //    else if (by.direction == "asc" || by.direction == "ascending")
+                //        order = ListSortDirection.Ascending;
+                //    else throw ctx.NewExpressionBuildingException($"Invalid sort order {by.direction}");
+
+                //    if (by.expression != null)
+                //    {
+                //        var parameterName = "@this";
+                //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
+                //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                //        var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, by.expression);
+                //        var sortMemberExpression = TranslateExpression(by.expression, subContext);
+                //        var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
+                //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
+                //        @return = sort;
+                //    }
+                //    else if (by.path != null && by.resultTypeName != null)
+                //    {
+                //        var parameterName = "@this";
+                //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
+                //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                //        var pathMemberType = TypeResolver.ResolveType(by.resultTypeName);
+                //        if (pathMemberType == null)
+                //        {
+                //            var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
+                //            ctx.LogError(msg);
+                //            throw ctx.NewExpressionBuildingException(msg);
+                //        }
+                //        var pathExpression = PropertyHelper(sortMemberParameter, by.path, pathMemberType!, ctx);
+                //        var lambdaBody = Expression.Convert(pathExpression, typeof(object));
+                //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
+                //        @return = sort;
+                //    }
+                //    else
+                //    {
+                //        var sort = Operators.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
+                //            @return, Expression.Constant(order, typeof(SortOrder)));
+                //        @return = sort;
+                //    }
+                //}
+
+            }
+        }
+
+        return ctx.TryDemoteSource(query, @return, isAnySourcePromoted);
+    }
+
+    [Conditional("DEBUG")]
+    private void QueryDumpDebugInfoToLog(Query query)
+    {
+        var sourceLength = query.source?.Length ?? 0;
         var lines = ReadCqlLines(query);
         var sources = ReadSources();
 
@@ -76,18 +240,15 @@ internal partial class ExpressionBuilder
 
         _logger.LogDebug(
             """
-             Found {queryType} Query with {sourceCount} source(s) at: {at}
-             Sources:{sources}
-             CQL: {lines}
-             """,
+            Found {queryType} Query with {sourceCount} source(s) at: {at}
+            Sources:{sources}
+            CQL: {lines}
+            """,
             ((ReadOnlySpan<string>)["Empty", "Single", "Multi"])[Math.Clamp(sourceLength, 0, 2)],
             sourceLength,
             DebuggerView,
             $"{string.Concat(from s in sources select $"\n\t{s.alias}: {(s.isEnumerationType ? "Enumeration" : "Singleton")} of {s.sourceType}")}",
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
-#endif
-
-        return QueryImpl(query);
     }
 
     protected Expression QueryImpl(Query query)
