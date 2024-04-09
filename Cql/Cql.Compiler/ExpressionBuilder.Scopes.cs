@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -16,10 +17,14 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        private IReadOnlyDictionary<string, (Expression expr, Elm.Element element)> Scopes =>
-            _impliedAliasAndScopesStack.TryPeek(out var item)
-                ? item.scopes
-                : ReadOnlyDictionary<string, (Expression expr, Elm.Element element)>.Empty;
+        protected IReadOnlyDictionary<string, (Expression expr, Elm.Element element)> Scopes
+        {
+            get
+            {
+                _impliedAliasAndScopesStack.TryPeek(out var item);
+                return item.scopes ?? ReadOnlyDictionary<string, (Expression expr, Elm.Element element)>.Empty;
+            }
+        }
 
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
@@ -32,7 +37,7 @@ namespace Hl7.Cql.Compiler
         /// The use of "effective" here is unqualified and is implied to be PHQ.effective
         /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
         /// </summary>
-        private string? ImpliedAlias =>
+        protected string? ImpliedAlias =>
             _impliedAliasAndScopesStack.TryPeek(out var item)
                 ? item.impliedAlias
                 : null;
@@ -59,10 +64,14 @@ namespace Hl7.Cql.Compiler
         protected bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
 
         protected IPopToken PushScopes(
-            string? alias,
+            string? alias = null,
             params KeyValuePair<string, (Expression, Elm.Element)>[] kvps)
         {
-            var scopes = new Dictionary<string, (Expression, Elm.Element)>(Scopes);
+            _impliedAliasAndScopesStack.TryPeek(out var peek);
+
+            var scopes = new Dictionary<string, (Expression, Elm.Element)>(peek.scopes ?? ReadOnlyDictionary<string, (Expression, Elm.Element)>.Empty);
+            alias ??= peek.impliedAlias;
+
             if (_libraryDefinitionBuilderSettings.AllowScopeRedefinition)
             {
                 foreach (var (expr, element) in kvps)
@@ -88,33 +97,32 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            _impliedAliasAndScopesStack = _impliedAliasAndScopesStack.Push((alias, scopes));
-            return new PopScopesToken(this);
+            var prevId = peek.id;
+            _impliedAliasAndScopesStack = _impliedAliasAndScopesStack.Push((new object(), alias, scopes));
+            return new PopScopesToken(this, prevId);
         }
 
 
 
         private readonly record struct PopScopesToken : IPopToken
         {
-            private readonly ExpressionBuilder _owner;/*
-            private readonly Elm.Element? _previousElement;*/
+            private readonly ExpressionBuilder _owner;
+            private readonly object? _prevId;
 
-            public PopScopesToken(
-                ExpressionBuilder owner/*,
-                Elm.Element? previousElement*/)
+            public PopScopesToken(ExpressionBuilder owner, object? prevId)
             {
-                _owner = owner;/*
-                _previousElement = previousElement;*/
+                _owner = owner;
+                _prevId = prevId;
             }
 
             void IDisposable.Dispose() => Pop();
 
             public void Pop()
             {
-                /*var expectedPreviousElement = _owner._elementStack.ElementAtOrDefault(1);
+                var expectedPrevId = _owner._impliedAliasAndScopesStack.ElementAtOrDefault(1).id;
 
-                if (_previousElement != expectedPreviousElement)
-                    throw new InvalidOperationException("Popping should be called in the correct reverse order.");*/
+                if (_prevId != expectedPrevId)
+                    throw new InvalidOperationException("Popping should be called in the correct reverse order.");
 
                 _owner._impliedAliasAndScopesStack = _owner._impliedAliasAndScopesStack.Pop();
             }

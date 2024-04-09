@@ -255,8 +255,13 @@ partial class ExpressionBuilder
     {
         private readonly Stack<IPopToken> _stack = new();
 
-        public void PushForCleanup(IPopToken popToken) => _stack.Push(popToken);
+        /// <summary>
+        /// Registers a pop token which will be popped later when this stack is popped.
+        /// </summary>
+        public void Register(IPopToken popToken) => _stack.Push(popToken);
+
         void IDisposable.Dispose() => Pop();
+
         public void Pop()
         {
             while (_stack.TryPop(out var next))

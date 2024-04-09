@@ -23,7 +23,7 @@ internal partial class ExpressionBuilder
     {
         QueryDumpDebugInfoToLog(query);
 
-        using PopTokenCleanupStack cleanupScopes = new();
+        using PopTokenCleanupStack scopesStack = new();
 
         var sources = query.source;
         if (sources.Length == 0)
@@ -38,7 +38,7 @@ internal partial class ExpressionBuilder
             var source0 = sources[0];
             var sourceParameterName = NormalizeIdentifier(source0.alias);
             scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
-            cleanupScopes.PushForCleanup(PushScopes(ImpliedAlias, KeyValuePair.Create(source0.alias, ((Expression)scopeParameter, (Element)source0.expression))));
+            scopesStack.Register(PushScopes(ImpliedAlias, KeyValuePair.Create(source0.alias, ((Expression)scopeParameter, (Element)source0.expression))));
         }
         else
         {
@@ -51,7 +51,7 @@ internal partial class ExpressionBuilder
                     select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
                 )
                 .ToArray();
-            cleanupScopes.PushForCleanup(PushScopes(ImpliedAlias, scopes));
+            scopesStack.Register(PushScopes(ImpliedAlias, scopes));
         }
 
         if (query.let != null)
@@ -59,7 +59,7 @@ internal partial class ExpressionBuilder
             foreach (var let in query.let)
             {
                 var expression = TranslateExpression(let.expression!);
-                cleanupScopes.PushForCleanup(PushScopes(ImpliedAlias, KeyValuePair.Create(let.identifier!, (expression, (Element)let.expression!))));
+                scopesStack.Register(PushScopes(ImpliedAlias, KeyValuePair.Create(let.identifier!, (expression, (Element)let.expression!))));
             }
         }
 

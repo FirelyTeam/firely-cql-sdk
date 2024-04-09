@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -43,19 +44,18 @@ namespace Hl7.Cql.Compiler
         private ImmutableStack<Element> _elementStack;
         private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
         private readonly LibraryExpressionBuilder _libraryContext;
-        private readonly Dictionary<string, DefinitionDictionary<LambdaExpression>> _libraries;
 
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)> _impliedAliasAndScopesStack;
+        private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack;
 
         /// <summary>
         /// Parameters for function definitions.
         /// </summary>
         private readonly Dictionary<string, ParameterExpression> _operands;
 
-        private readonly IList<IExpressionMutator> _expressionMutators;
+        private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators; // Not used yet, since it's always empty
 
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
@@ -89,9 +89,8 @@ namespace Hl7.Cql.Compiler
             // Internal State
             _elementStack = ImmutableStack<Element>.Empty;
             _operands = new Dictionary<string, ParameterExpression>();
-            _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _impliedAliasAndScopesStack = ImmutableStack<(string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)> scopes)>.Empty;
-            _expressionMutators = new List<IExpressionMutator>();
+            _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
+            _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
 
@@ -174,10 +173,9 @@ namespace Hl7.Cql.Compiler
                             StdDev stddev              => AggregateOperator(CqlOperator.StdDev, stddev),
                             Variance variance          => AggregateOperator(CqlOperator.Variance, variance),
 
-                            Negate neg                 => neg.operand is
-                                Literal literal
-                                ? NegateLiteral(neg, literal)
-                                : UnaryOperator(CqlOperator.Negate, neg),
+                            Negate neg                 => neg.operand is Literal literal
+                                                              ? NegateLiteral(neg, literal)
+                                                              : UnaryOperator(CqlOperator.Negate, neg),
 
                             TimeOfDay tod              => BindCqlOperator(CqlOperator.TimeOfDay),
                             Today today                => BindCqlOperator(CqlOperator.Today),
@@ -436,7 +434,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeFor(listTypeSpecifier.elementType);
                 var elements = list.element?
                     .Select(ele => TranslateExpression(ele))
-                    .ToArray() ?? new Expression[0];
+                    .ToArray() ?? [];
                 if (!elementType.IsNullable() && elements.Any(exp => exp.Type.IsNullable()))
                 {
                     for (int i = 0; i < elements.Length; i++)
@@ -512,11 +510,10 @@ namespace Hl7.Cql.Compiler
                         return enumValueValue;
                     else if (enumValueValue.Type == typeof(string))
                     {
-                        var parseMethod = typeof(Enum).GetMethods()
-                            .Where(m =>
-                                m.Name == nameof(Enum.Parse)
-                                && m.GetParameters().Length == 3)
-                            .Single();
+                        var parseMethod = typeof(Enum)
+                            .GetMethods()
+                            .Single(m => m.Name == nameof(Enum.Parse)
+                                         && m.GetParameters().Length == 3);
                         var callEnumParse = Expression.Call(parseMethod, Expression.Constant(instanceType), enumValueValue, Expression.Constant(true));
                         return callEnumParse;
                     }

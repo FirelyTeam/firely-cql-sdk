@@ -225,7 +225,7 @@ partial class ExpressionBuilder
                         }
                     }
 
-                    Type[] signature = functionParameterTypes ?? Array.Empty<Type>();
+                    Type[] signature = functionParameterTypes ?? [];
                     _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name, signature,
                         lambda);
                 }
