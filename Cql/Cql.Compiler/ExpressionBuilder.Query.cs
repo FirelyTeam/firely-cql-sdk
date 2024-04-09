@@ -35,11 +35,7 @@ internal partial class ExpressionBuilder
 
         var (@return, isSourcesPromoted) = ctx.ProcessQuerySources(query);
         var isAnySourcePromoted = isSourcesPromoted.Any(isSourcePromoted => isSourcePromoted);
-        var returnType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
         var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-        if (returnElementType != returnType)
-            throw ctx.NewExpressionBuildingException(
-                $"Expected element type {returnType.Name} but got {returnElementType.Name}");
 
         if (sources.Length == 1)
         {
@@ -54,7 +50,7 @@ internal partial class ExpressionBuilder
             scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
             var scopes =
                 (
-                    from property in returnType!.GetProperties()
+                    from property in returnElementType!.GetProperties()
                     let propertyAccess = Expression.Property(scopeParameter, property)
                     select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
                 )
