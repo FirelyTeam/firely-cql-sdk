@@ -27,19 +27,12 @@ internal partial class ExpressionBuilder
 
         var sources = query.source;
         if (sources.Length == 0)
-        {
             throw ctx.NewExpressionBuildingException("Queries must define at least 1 source");
-        }
-
-        ParameterExpression scopeParameter;
 
         var (@return, sourcesPreviouslySingletons) = ctx.ProcessQuerySources(query);
-        var returnType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
         var returnElementType = ctx._typeManager.Resolver.GetListElementType(@return.Type, true)!;
-        if (returnElementType != returnType)
-            throw ctx.NewExpressionBuildingException(
-                $"Expected element type {returnType.Name} but got {returnElementType.Name}");
 
+        ParameterExpression scopeParameter;
         if (sources.Length == 1)
         {
             var source0 = sources[0];
@@ -53,7 +46,7 @@ internal partial class ExpressionBuilder
             scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
             var scopes =
                 (
-                    from property in returnType!.GetProperties()
+                    from property in returnElementType!.GetProperties()
                     let propertyAccess = Expression.Property(scopeParameter, property)
                     select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
                 )
@@ -179,10 +172,9 @@ internal partial class ExpressionBuilder
         }
 
         // Because we promoted the source to a list, we now have to demote the result again.
-        var wasAnySourceASingleton = sourcesPreviouslySingletons.Any(b => b);
-        if (wasAnySourceASingleton)
+        var wereAllSourcesPreviouslySingletons = sourcesPreviouslySingletons.All(b => b);
+        if (wereAllSourcesPreviouslySingletons)
         {
-            Debug.Assert(sourcesPreviouslySingletons.All(b => b));
             @return = ctx.DemoteSourceListToSingleton(@return);
         }
 
@@ -200,14 +192,12 @@ internal partial class ExpressionBuilder
         return source;
     }
 
-    private (Expression source, bool sourceWasSingleton) PromoteSourceSingletonToList(Expression source)
+    private (Expression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(Expression source)
     {
-        // promote single objects into enumerables so where works
         if (_typeResolver.ImplementsGenericIEnumerable(source.Type))
             return (source, false);
 
-        var arrayInit = Expression.NewArrayInit(source.Type, source);
-        source = arrayInit;
+        source = Expression.NewArrayInit(source.Type, source);
         return (source, true);
     }
 
@@ -305,7 +295,7 @@ internal partial class ExpressionBuilder
 
         var temp = sourceExpressions.SelectToArray(expr => PromoteSourceSingletonToList(expr));
         var promotedSourceExpressions = temp.SelectToArray(s => s.source);
-        var originalSourceWereSingletons = temp.SelectToArray(s => s.sourceWasSingleton);
+        var originalSourceWereSingletons = temp.SelectToArray(s => s.sourceOriginallyASingleton);
 
         // Only one source, so no need for cross-joining. Return as-is.
         if (sources.Length == 1)
