@@ -271,7 +271,7 @@ internal partial class ExpressionBuilder
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
     }
 
-    private (Expression sourceExpression, bool[] isSourcePromoted) ProcessQuerySources(Query query)
+    private (Expression sourceExpression, bool[] sourcesPreviouslySingletons) ProcessQuerySources(Query query)
     {
         AliasedQuerySource[] sources = query.source;
 
@@ -295,11 +295,11 @@ internal partial class ExpressionBuilder
 
         var temp = sourceExpressions.SelectToArray(expr => PromoteSourceSingletonToList(expr));
         var promotedSourceExpressions = temp.SelectToArray(s => s.source);
-        var originalSourceWereSingletons = temp.SelectToArray(s => s.sourceOriginallyASingleton);
+        var sourcesPreviouslySingletons = temp.SelectToArray(s => s.sourceOriginallyASingleton);
 
         // Only one source, so no need for cross-joining. Return as-is.
         if (sources.Length == 1)
-            return (promotedSourceExpressions[0], originalSourceWereSingletons);
+            return (promotedSourceExpressions[0], sourcesPreviouslySingletons);
 
         var crossJoinedValueTupleResultsExpression = BindCqlOperator(CqlOperator.CrossJoin, promotedSourceExpressions);
 
@@ -365,7 +365,7 @@ internal partial class ExpressionBuilder
             crossJoinedValueTupleResultsExpression,
             selectExpression);
 
-        return (crossJoinedCqlTupleResultsExpression, originalSourceWereSingletons)!;
+        return (crossJoinedCqlTupleResultsExpression, sourcesPreviouslySingletons)!;
     }
 
     protected Expression SortClause(
