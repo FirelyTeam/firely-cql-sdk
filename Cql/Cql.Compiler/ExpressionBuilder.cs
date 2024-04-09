@@ -321,7 +321,6 @@ namespace Hl7.Cql.Compiler
                             Substring e                => Substring(e),
                             Starts starts              => Starts(starts),
                             Time time                  => Time(time),
-
                             Elm.Tuple tu               => Tuple(tu),
                             Union ue                   => Union(ue),
                             ValueSetRef vsre           => ValueSetRef(vsre),
