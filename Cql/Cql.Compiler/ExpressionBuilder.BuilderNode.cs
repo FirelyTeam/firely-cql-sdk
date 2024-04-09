@@ -12,7 +12,7 @@ partial class ExpressionBuilder : IBuilderNode
     private IBuilderNode CreateBuilderNode() => new ExpressionBuilderNode()
     {
         LibraryExpressionBuilder = _libraryContext,
-        ElementStackList = _elementStack.ToList(),
+        ElementStackList = [.. _elementStack],
         ElementStackPosition = 0,
     };
 
@@ -36,7 +36,7 @@ partial class ExpressionBuilder : IBuilderNode
     private IPopToken PushElement(Elm.Element element)
     {
         Elm.Element? previous = _elementStack.IsEmpty ? null : _elementStack.Peek();
-        if (previous == element) return new EmptyDisposable();
+        if (previous == element) return EmptyDisposable.Instance;
 
         _elementStack = _elementStack.Push(element);
         return new PopElementToken(this, previous);
@@ -55,11 +55,6 @@ partial class ExpressionBuilder : IBuilderNode
         public BuilderDebuggerInfo? BuilderDebuggerInfo => ElementStackPosition >= 0
             ? Hl7.Cql.Compiler.BuilderDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
             : null!;
-    }
-
-    protected interface IPopToken : IDisposable
-    {
-        void Pop();
     }
 
     private readonly record struct PopElementToken : IPopToken
@@ -83,17 +78,6 @@ partial class ExpressionBuilder : IBuilderNode
                 throw new InvalidOperationException("Popping should be called in the correct reverse order.");
 
             _owner._elementStack = _owner._elementStack.Pop();
-        }
-    }
-
-    private readonly record struct EmptyDisposable : IPopToken
-    {
-        void IDisposable.Dispose()
-        {
-        }
-
-        void IPopToken.Pop()
-        {
         }
     }
 }

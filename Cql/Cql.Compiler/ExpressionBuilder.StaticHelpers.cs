@@ -233,5 +233,22 @@ partial class ExpressionBuilder
         return false;
     }
 
+    
+    protected interface IPopToken : IDisposable
+    {
+        void Pop();
+    }
 
+    private readonly record struct EmptyDisposable : IPopToken
+    {
+        public static readonly EmptyDisposable Instance = new();
+
+        void IDisposable.Dispose()
+        {
+        }
+
+        void IPopToken.Pop()
+        {
+        }
+    }
 }
