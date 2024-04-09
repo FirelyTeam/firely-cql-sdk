@@ -42,12 +42,15 @@ internal static class EnumerableExtensions
         }
 
         T[] array = new T[sourceLength];
-        int i = -1;
+        int i = 0;
         foreach (var item in source)
         {
-            ++i;
             array[i] = select(item);
+            ++i;
         }
+
+        if (sourceLength != i)
+            throw new ArgumentException($"Source array must have '{sourceLength}' element(s), but has '{i}'.");
 
         return array;
     }
