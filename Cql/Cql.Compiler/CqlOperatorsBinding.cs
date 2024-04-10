@@ -23,19 +23,6 @@ using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Compiler
 {
-    internal class CqlContextExpressions
-    {
-        /// <summary>
-        /// The context parameter for expressions.
-        /// </summary>
-        public static readonly ParameterExpression CqlContext_Parameter = Expression.Parameter(typeof(CqlContext), "context");
-
-        public static readonly MemberExpression CqlContext_Operators_Property = Expression.Property(CqlContext_Parameter, PropertyInfos.CqlContext_Operators);
-        public static Type CqlContext_Operators_Type => CqlContext_Operators_Property.Type; // ICqlOperators;
-
-        public static readonly MemberExpression CqlContext_Definitions_Property = Expression.Property(CqlContext_Parameter, PropertyInfos.CqlContext_Definitions);
-    }
-
     /// <summary>
     /// Implements <see cref="OperatorBinding"/> by calling methods in <see cref="CqlOperators"/>.
     /// </summary>
@@ -44,9 +31,6 @@ namespace Hl7.Cql.Compiler
         internal TypeConverter? TypeConverter { get; }
 
         internal TypeResolver TypeResolver { get; }
-
-
-        MemberExpression operators => CqlContextExpressions.CqlContext_Operators_Property;
 
 
         /// <summary>
@@ -76,194 +60,196 @@ namespace Hl7.Cql.Compiler
         /// <param name="operator">The operator to bind.</param>
         /// <param name="parameters">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
         /// <returns>An expression that implements <paramref name="operator"/>.  In most cases, this will be a <see cref="MethodCallExpression"/>.</returns>
-        public override Expression Bind(CqlOperator @operator, params Expression[] parameters)
+        public override Expression Bind(
+            CqlOperator @operator,
+            params Expression[] parameters)
         {
             return @operator switch
             {
                 // @formatter:off
-                CqlOperator.Aggregate                        => Aggregate(operators, parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Aggregate                        => Aggregate(parameters[0], parameters[1], parameters[2]),
 
-                CqlOperator.IntervalIntersect                => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalIntersect), operators, parameters[0], parameters[1]),
+                CqlOperator.IntervalIntersect                => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalIntersect), parameters[0], parameters[1]),
                 CqlOperator.IntervalProperlyIncludesElement when parameters.Length == 2
-                                                             => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), operators, parameters[0], parameters[1]),
-                CqlOperator.IntervalUnion                    => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalUnion), operators, parameters[0], parameters[1]),
-                CqlOperator.ListContains                     => BindBinaryGenericOperator(nameof(ICqlOperators.ListContains), operators, parameters[0], parameters[1]),
-                CqlOperator.ListElementAt                    => BindBinaryGenericOperator(nameof(ICqlOperators.ListElementAt), operators, parameters[0], parameters[1]),
-                CqlOperator.ListEqual                        => BindBinaryGenericOperator(nameof(ICqlOperators.ListEqual), operators, parameters[0], parameters[1]),
-                CqlOperator.ListEquivalent                   => BindBinaryGenericOperator(nameof(ICqlOperators.ListEquivalent), operators, parameters[0], parameters[1]),
-                CqlOperator.ListExcept                       => BindBinaryGenericOperator(nameof(ICqlOperators.ListExcept), operators, parameters[0], parameters[1]),
-                CqlOperator.ListIncludesElement              => BindBinaryGenericOperator(nameof(ICqlOperators.ListIncludesElement), operators, parameters[0], parameters[1]),
-                CqlOperator.ListIncludesList                 => BindBinaryGenericOperator(nameof(ICqlOperators.ListIncludesList), operators, parameters[0], parameters[1]),
-                CqlOperator.ListIndexOf                      => BindBinaryGenericOperator(nameof(ICqlOperators.ListIndexOf), operators, parameters[0], parameters[1]),
-                CqlOperator.ListIntersect                    => BindBinaryGenericOperator(nameof(ICqlOperators.ListIntersect), operators, parameters[0], parameters[1]),
-                CqlOperator.ListProperlyIncludesElement      => BindBinaryGenericOperator(nameof(ICqlOperators.ListProperlyIncludesElement), operators, parameters[0], parameters[1]),
-                CqlOperator.ListProperlyIncludesList         => BindBinaryGenericOperator(nameof(ICqlOperators.ListProperlyIncludesList), operators, parameters[0], parameters[1]),
-                CqlOperator.ListSort                         => BindBinaryGenericOperator(@operator.ToString(), operators, parameters[0], parameters[1]),
+                                                             => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), parameters[0], parameters[1]),
+                CqlOperator.IntervalUnion                    => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalUnion), parameters[0], parameters[1]),
+                CqlOperator.ListContains                     => BindBinaryGenericOperator(nameof(ICqlOperators.ListContains), parameters[0], parameters[1]),
+                CqlOperator.ListElementAt                    => BindBinaryGenericOperator(nameof(ICqlOperators.ListElementAt), parameters[0], parameters[1]),
+                CqlOperator.ListEqual                        => BindBinaryGenericOperator(nameof(ICqlOperators.ListEqual), parameters[0], parameters[1]),
+                CqlOperator.ListEquivalent                   => BindBinaryGenericOperator(nameof(ICqlOperators.ListEquivalent), parameters[0], parameters[1]),
+                CqlOperator.ListExcept                       => BindBinaryGenericOperator(nameof(ICqlOperators.ListExcept), parameters[0], parameters[1]),
+                CqlOperator.ListIncludesElement              => BindBinaryGenericOperator(nameof(ICqlOperators.ListIncludesElement), parameters[0], parameters[1]),
+                CqlOperator.ListIncludesList                 => BindBinaryGenericOperator(nameof(ICqlOperators.ListIncludesList), parameters[0], parameters[1]),
+                CqlOperator.ListIndexOf                      => BindBinaryGenericOperator(nameof(ICqlOperators.ListIndexOf), parameters[0], parameters[1]),
+                CqlOperator.ListIntersect                    => BindBinaryGenericOperator(nameof(ICqlOperators.ListIntersect), parameters[0], parameters[1]),
+                CqlOperator.ListProperlyIncludesElement      => BindBinaryGenericOperator(nameof(ICqlOperators.ListProperlyIncludesElement), parameters[0], parameters[1]),
+                CqlOperator.ListProperlyIncludesList         => BindBinaryGenericOperator(nameof(ICqlOperators.ListProperlyIncludesList), parameters[0], parameters[1]),
+                CqlOperator.ListSort                         => BindBinaryGenericOperator(@operator.ToString(), parameters[0], parameters[1]),
 
-                CqlOperator.Add                              => BindBinaryOperator(nameof(ICqlOperators.Add), operators, parameters[0], parameters[1]),
-                CqlOperator.And                              => BindBinaryOperator(nameof(ICqlOperators.And), operators, parameters[0], parameters[1]),
-                CqlOperator.CodeInValueSet                   => BindBinaryOperator(nameof(ICqlOperators.CodeInValueSet), operators, parameters[0], parameters[1]),
-                CqlOperator.CodesInValueSet                  => BindBinaryOperator(nameof(ICqlOperators.CodesInValueSet), operators, parameters[0], parameters[1]),
-                CqlOperator.Collapse                         => BindBinaryOperator(nameof(ICqlOperators.Collapse), operators, parameters[0], parameters[1]),
-                CqlOperator.Combine                          => BindBinaryOperator(nameof(ICqlOperators.Combine), operators, parameters[0], parameters[1]),
-                CqlOperator.DateTimeComponent                => BindBinaryOperator(nameof(ICqlOperators.ComponentFrom), operators, parameters[0], parameters[1]),
-                CqlOperator.Concatenate                      => BindBinaryOperator(nameof(ICqlOperators.Concatenate), operators, parameters[0], parameters[1]),
-                CqlOperator.ConceptInValueSet                => BindBinaryOperator(nameof(ICqlOperators.ConceptInValueSet), operators, parameters[0], parameters[1]),
-                CqlOperator.ConceptsInValueSet               => BindBinaryOperator(nameof(ICqlOperators.ConceptsInValueSet), operators, parameters[0], parameters[1]),
-                CqlOperator.ConvertQuantity                  => BindBinaryOperator(nameof(ICqlOperators.ConvertQuantity), operators, parameters[0], parameters[1]),
-                CqlOperator.Divide                           => BindBinaryOperator(nameof(ICqlOperators.Divide), operators, parameters[0], parameters[1]),
-                CqlOperator.EndsWith                         => BindBinaryOperator(nameof(ICqlOperators.EndsWith), operators, parameters[0], parameters[1]),
-                CqlOperator.EnumEqualsString                 => BindBinaryOperator(nameof(ICqlOperators.EnumEqualsString), operators, parameters[0], parameters[1]),
-                CqlOperator.Equal                            => BindBinaryOperator(nameof(ICqlOperators.Equal), operators, parameters[0], parameters[1]),
-                CqlOperator.Equivalent                       => BindBinaryOperator(nameof(ICqlOperators.Equivalent), operators, parameters[0], parameters[1]),
-                CqlOperator.Greater                          => BindBinaryOperator(nameof(ICqlOperators.Greater), operators, parameters[0], parameters[1]),
-                CqlOperator.GreaterOrEqual                   => BindBinaryOperator(nameof(ICqlOperators.GreaterOrEqual), operators, parameters[0], parameters[1]),
-                CqlOperator.HighBoundary                     => BindBinaryOperator(nameof(ICqlOperators.HighBoundary), operators, parameters[0], parameters[1]),
-                CqlOperator.Implies                          => BindBinaryOperator(nameof(ICqlOperators.Implies), operators, parameters[0], parameters[1]),
-                CqlOperator.IntervalExcept                   => BindBinaryOperator(nameof(ICqlOperators.IntervalExcept), operators, parameters[0], parameters[1]),
-                CqlOperator.LastPositionOf                   => BindBinaryOperator(nameof(ICqlOperators.LastPositionOf), operators, parameters[0], parameters[1]),
-                CqlOperator.Less                             => BindBinaryOperator(nameof(ICqlOperators.Less), operators, parameters[0], parameters[1]),
-                CqlOperator.LessOrEqual                      => BindBinaryOperator(nameof(ICqlOperators.LessOrEqual), operators, parameters[0], parameters[1]),
-                CqlOperator.Log                              => BindBinaryOperator(nameof(ICqlOperators.Log), operators, parameters[0], parameters[1]),
-                CqlOperator.LowBoundary                      => BindBinaryOperator(nameof(ICqlOperators.LowBoundary), operators, parameters[0], parameters[1]),
-                CqlOperator.Matches                          => BindBinaryOperator(nameof(ICqlOperators.Matches), operators, parameters[0], parameters[1]),
-                CqlOperator.Modulo                           => BindBinaryOperator(nameof(ICqlOperators.Modulo), operators, parameters[0], parameters[1]),
-                CqlOperator.Multiply                         => BindBinaryOperator(nameof(ICqlOperators.Multiply), operators, parameters[0], parameters[1]),
-                CqlOperator.Or                               => BindBinaryOperator(nameof(ICqlOperators.Or), operators, parameters[0], parameters[1]),
-                CqlOperator.PositionOf                       => BindBinaryOperator(nameof(ICqlOperators.PositionOf), operators, parameters[0], parameters[1]),
-                CqlOperator.Pow                              => BindBinaryOperator(nameof(ICqlOperators.Power), operators, parameters[0], parameters[1]),
-                CqlOperator.Round                            => BindBinaryOperator(nameof(ICqlOperators.Round), operators, parameters[0], parameters[1]),
-                CqlOperator.Split                            => BindBinaryOperator(nameof(ICqlOperators.Split), operators, parameters[0], parameters[1]),
-                CqlOperator.StartsWith                       => BindBinaryOperator(nameof(ICqlOperators.StartsWith), operators, parameters[0], parameters[1]),
-                CqlOperator.CharAt                           => BindBinaryOperator(nameof(ICqlOperators.StringIndexer), operators, parameters[0], parameters[1]),
-                CqlOperator.StringInValueSet                 => BindBinaryOperator(nameof(ICqlOperators.StringInValueSet), operators, parameters[0], parameters[1]),
-                CqlOperator.StringsInValueSet                => BindBinaryOperator(nameof(ICqlOperators.StringsInValueSet), operators, parameters[0], parameters[1]),
-                CqlOperator.Subtract                         => BindBinaryOperator(nameof(ICqlOperators.Subtract), operators, parameters[0], parameters[1]),
-                CqlOperator.TruncatedDivide                  => BindBinaryOperator(nameof(ICqlOperators.TruncateDivide), operators, parameters[0], parameters[1]),
-                CqlOperator.Xor                              => BindBinaryOperator(nameof(ICqlOperators.Xor), operators, parameters[0], parameters[1]),
-                CqlOperator.CalculateAgeAt                   => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.CalculateAgeAt), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.ElementAfterInterval             => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.ElementAfterInterval), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.ElementBeforeInterval            => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.ElementBeforeInterval), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalAfterElement             => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalAfterElement), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalBeforeElement            => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalBeforeElement), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalContains                 => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalContains), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalSameOrAfter              => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalSameOrAfter), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalSameOrBefore             => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalSameOrBefore), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Overlaps                         => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.Overlaps), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.OverlapsAfter                    => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.OverlapsAfter), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.OverlapsBefore                   => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.OverlapsBefore), operators, parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Add                              => BindBinaryOperator(nameof(ICqlOperators.Add), parameters[0], parameters[1]),
+                CqlOperator.And                              => BindBinaryOperator(nameof(ICqlOperators.And), parameters[0], parameters[1]),
+                CqlOperator.CodeInValueSet                   => BindBinaryOperator(nameof(ICqlOperators.CodeInValueSet), parameters[0], parameters[1]),
+                CqlOperator.CodesInValueSet                  => BindBinaryOperator(nameof(ICqlOperators.CodesInValueSet), parameters[0], parameters[1]),
+                CqlOperator.Collapse                         => BindBinaryOperator(nameof(ICqlOperators.Collapse), parameters[0], parameters[1]),
+                CqlOperator.Combine                          => BindBinaryOperator(nameof(ICqlOperators.Combine), parameters[0], parameters[1]),
+                CqlOperator.DateTimeComponent                => BindBinaryOperator(nameof(ICqlOperators.ComponentFrom), parameters[0], parameters[1]),
+                CqlOperator.Concatenate                      => BindBinaryOperator(nameof(ICqlOperators.Concatenate), parameters[0], parameters[1]),
+                CqlOperator.ConceptInValueSet                => BindBinaryOperator(nameof(ICqlOperators.ConceptInValueSet), parameters[0], parameters[1]),
+                CqlOperator.ConceptsInValueSet               => BindBinaryOperator(nameof(ICqlOperators.ConceptsInValueSet), parameters[0], parameters[1]),
+                CqlOperator.ConvertQuantity                  => BindBinaryOperator(nameof(ICqlOperators.ConvertQuantity), parameters[0], parameters[1]),
+                CqlOperator.Divide                           => BindBinaryOperator(nameof(ICqlOperators.Divide), parameters[0], parameters[1]),
+                CqlOperator.EndsWith                         => BindBinaryOperator(nameof(ICqlOperators.EndsWith), parameters[0], parameters[1]),
+                CqlOperator.EnumEqualsString                 => BindBinaryOperator(nameof(ICqlOperators.EnumEqualsString), parameters[0], parameters[1]),
+                CqlOperator.Equal                            => BindBinaryOperator(nameof(ICqlOperators.Equal), parameters[0], parameters[1]),
+                CqlOperator.Equivalent                       => BindBinaryOperator(nameof(ICqlOperators.Equivalent), parameters[0], parameters[1]),
+                CqlOperator.Greater                          => BindBinaryOperator(nameof(ICqlOperators.Greater), parameters[0], parameters[1]),
+                CqlOperator.GreaterOrEqual                   => BindBinaryOperator(nameof(ICqlOperators.GreaterOrEqual), parameters[0], parameters[1]),
+                CqlOperator.HighBoundary                     => BindBinaryOperator(nameof(ICqlOperators.HighBoundary), parameters[0], parameters[1]),
+                CqlOperator.Implies                          => BindBinaryOperator(nameof(ICqlOperators.Implies), parameters[0], parameters[1]),
+                CqlOperator.IntervalExcept                   => BindBinaryOperator(nameof(ICqlOperators.IntervalExcept), parameters[0], parameters[1]),
+                CqlOperator.LastPositionOf                   => BindBinaryOperator(nameof(ICqlOperators.LastPositionOf), parameters[0], parameters[1]),
+                CqlOperator.Less                             => BindBinaryOperator(nameof(ICqlOperators.Less), parameters[0], parameters[1]),
+                CqlOperator.LessOrEqual                      => BindBinaryOperator(nameof(ICqlOperators.LessOrEqual), parameters[0], parameters[1]),
+                CqlOperator.Log                              => BindBinaryOperator(nameof(ICqlOperators.Log), parameters[0], parameters[1]),
+                CqlOperator.LowBoundary                      => BindBinaryOperator(nameof(ICqlOperators.LowBoundary), parameters[0], parameters[1]),
+                CqlOperator.Matches                          => BindBinaryOperator(nameof(ICqlOperators.Matches), parameters[0], parameters[1]),
+                CqlOperator.Modulo                           => BindBinaryOperator(nameof(ICqlOperators.Modulo), parameters[0], parameters[1]),
+                CqlOperator.Multiply                         => BindBinaryOperator(nameof(ICqlOperators.Multiply), parameters[0], parameters[1]),
+                CqlOperator.Or                               => BindBinaryOperator(nameof(ICqlOperators.Or), parameters[0], parameters[1]),
+                CqlOperator.PositionOf                       => BindBinaryOperator(nameof(ICqlOperators.PositionOf), parameters[0], parameters[1]),
+                CqlOperator.Pow                              => BindBinaryOperator(nameof(ICqlOperators.Power), parameters[0], parameters[1]),
+                CqlOperator.Round                            => BindBinaryOperator(nameof(ICqlOperators.Round), parameters[0], parameters[1]),
+                CqlOperator.Split                            => BindBinaryOperator(nameof(ICqlOperators.Split), parameters[0], parameters[1]),
+                CqlOperator.StartsWith                       => BindBinaryOperator(nameof(ICqlOperators.StartsWith), parameters[0], parameters[1]),
+                CqlOperator.CharAt                           => BindBinaryOperator(nameof(ICqlOperators.StringIndexer), parameters[0], parameters[1]),
+                CqlOperator.StringInValueSet                 => BindBinaryOperator(nameof(ICqlOperators.StringInValueSet), parameters[0], parameters[1]),
+                CqlOperator.StringsInValueSet                => BindBinaryOperator(nameof(ICqlOperators.StringsInValueSet), parameters[0], parameters[1]),
+                CqlOperator.Subtract                         => BindBinaryOperator(nameof(ICqlOperators.Subtract), parameters[0], parameters[1]),
+                CqlOperator.TruncatedDivide                  => BindBinaryOperator(nameof(ICqlOperators.TruncateDivide), parameters[0], parameters[1]),
+                CqlOperator.Xor                              => BindBinaryOperator(nameof(ICqlOperators.Xor), parameters[0], parameters[1]),
+                CqlOperator.CalculateAgeAt                   => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.CalculateAgeAt), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.ElementAfterInterval             => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.ElementAfterInterval), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.ElementBeforeInterval            => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.ElementBeforeInterval), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalAfterElement             => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalAfterElement), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalBeforeElement            => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalBeforeElement), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalContains                 => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalContains), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalSameOrAfter              => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalSameOrAfter), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalSameOrBefore             => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.IntervalSameOrBefore), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Overlaps                         => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.Overlaps), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.OverlapsAfter                    => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.OverlapsAfter), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.OverlapsBefore                   => BindBinaryOperatorWithPrecision(nameof(ICqlOperators.OverlapsBefore), parameters[0], parameters[1], parameters[2]),
 
-                CqlOperator.Convert                          => BindConvert(operators, parameters[0], parameters[1]),
+                CqlOperator.Convert                          => BindConvert(parameters[0], parameters[1]),
 
-                CqlOperator.InInterval                       => BindTernaryGenericOperator(nameof(ICqlOperators.ElementInInterval), operators, parameters[0], parameters[1], parameters[2], true),
-                CqlOperator.Ends                             => BindTernaryGenericOperator(nameof(ICqlOperators.Ends), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalIncludesElement          => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalIncludesElement), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalIncludesInterval         => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalIncludesInterval), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalProperlyIncludesInterval => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalProperlyIncludesInterval), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalSameAs                   => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalSameAs), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Slice                            => BindTernaryGenericOperator(nameof(ICqlOperators.Slice), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Starts                           => BindTernaryGenericOperator(nameof(ICqlOperators.Starts), operators, parameters[0], parameters[1], parameters[2]),
+                CqlOperator.InInterval                       => BindTernaryGenericOperator(nameof(ICqlOperators.ElementInInterval), parameters[0], parameters[1], parameters[2], true),
+                CqlOperator.Ends                             => BindTernaryGenericOperator(nameof(ICqlOperators.Ends), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalIncludesElement          => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalIncludesElement), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalIncludesInterval         => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalIncludesInterval), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalProperlyIncludesInterval => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalProperlyIncludesInterval), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalSameAs                   => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalSameAs), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Slice                            => BindTernaryGenericOperator(nameof(ICqlOperators.Slice), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Starts                           => BindTernaryGenericOperator(nameof(ICqlOperators.Starts), parameters[0], parameters[1], parameters[2]),
 
-                CqlOperator.After                            => BindTernaryOperator(nameof(ICqlOperators.After), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Before                           => BindTernaryOperator(nameof(ICqlOperators.Before), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.DifferenceBetween                => BindTernaryOperator(nameof(ICqlOperators.DifferenceBetween), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.DurationBetween                  => BindTernaryOperator(nameof(ICqlOperators.DurationBetween), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalAfterInterval            => BindTernaryOperator(nameof(ICqlOperators.IntervalAfterInterval), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalBeforeInterval           => BindTernaryOperator(nameof(ICqlOperators.IntervalBeforeInterval), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalProperlyIncludesElement  => BindTernaryOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Meets                            => BindTernaryOperator(nameof(ICqlOperators.Meets), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.MeetsAfter                       => BindTernaryOperator(nameof(ICqlOperators.MeetsAfter), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.MeetsBefore                      => BindTernaryOperator(nameof(ICqlOperators.MeetsBefore), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.ReplaceMatches                   => BindTernaryOperator(nameof(ICqlOperators.ReplaceMatches), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.SameAs                           => BindTernaryOperator(nameof(ICqlOperators.SameAs), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.SameOrAfter                      => BindTernaryOperator(nameof(ICqlOperators.SameOrAfter), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.SameOrBefore                     => BindTernaryOperator(nameof(ICqlOperators.SameOrBefore), operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Substring                        => BindTernaryOperator(nameof(ICqlOperators.Substring), operators, parameters[0], parameters[1], parameters[2]),
+                CqlOperator.After                            => BindTernaryOperator(nameof(ICqlOperators.After), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Before                           => BindTernaryOperator(nameof(ICqlOperators.Before), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.DifferenceBetween                => BindTernaryOperator(nameof(ICqlOperators.DifferenceBetween), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.DurationBetween                  => BindTernaryOperator(nameof(ICqlOperators.DurationBetween), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalAfterInterval            => BindTernaryOperator(nameof(ICqlOperators.IntervalAfterInterval), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalBeforeInterval           => BindTernaryOperator(nameof(ICqlOperators.IntervalBeforeInterval), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.IntervalProperlyIncludesElement  => BindTernaryOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Meets                            => BindTernaryOperator(nameof(ICqlOperators.Meets), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.MeetsAfter                       => BindTernaryOperator(nameof(ICqlOperators.MeetsAfter), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.MeetsBefore                      => BindTernaryOperator(nameof(ICqlOperators.MeetsBefore), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.ReplaceMatches                   => BindTernaryOperator(nameof(ICqlOperators.ReplaceMatches), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.SameAs                           => BindTernaryOperator(nameof(ICqlOperators.SameAs), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.SameOrAfter                      => BindTernaryOperator(nameof(ICqlOperators.SameOrAfter), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.SameOrBefore                     => BindTernaryOperator(nameof(ICqlOperators.SameOrBefore), parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Substring                        => BindTernaryOperator(nameof(ICqlOperators.Substring), parameters[0], parameters[1], parameters[2]),
 
-                CqlOperator.Count                            => BindUnaryGenericOperator(nameof(ICqlOperators.CountOrNull), operators, parameters[0]),
-                CqlOperator.Exists                           => BindUnaryGenericOperator(nameof(ICqlOperators.ExistsInList), operators, parameters[0]),
-                CqlOperator.First                            => BindUnaryGenericOperator(nameof(ICqlOperators.FirstOfList), operators, parameters[0]),
-                CqlOperator.Last                             => BindUnaryGenericOperator(nameof(ICqlOperators.LastOfList), operators, parameters[0]),
-                CqlOperator.Distinct                         => BindUnaryGenericOperator(nameof(ICqlOperators.ListDistinct), operators, parameters[0]),
-                CqlOperator.ListLength                       => BindUnaryGenericOperator(nameof(ICqlOperators.ListLength), operators, parameters[0]),
-                CqlOperator.Tail                             => BindUnaryGenericOperator(nameof(ICqlOperators.ListTail), operators, parameters[0]),
-                CqlOperator.MaxElementInList                 => BindUnaryGenericOperator(nameof(ICqlOperators.MaxOrNull), operators, parameters[0]),
-                CqlOperator.MinElementInList                 => BindUnaryGenericOperator(nameof(ICqlOperators.MinOrNull), operators, parameters[0]),
-                CqlOperator.Mode                             => BindUnaryGenericOperator(nameof(ICqlOperators.Mode), operators, parameters[0]),
-                CqlOperator.PointFrom                        => BindUnaryGenericOperator(nameof(ICqlOperators.PointFrom), operators, parameters[0]),
-                CqlOperator.Single                           => BindUnaryGenericOperator(nameof(ICqlOperators.SingleOrNull), operators, parameters[0]),
+                CqlOperator.Count                            => BindUnaryGenericOperator(nameof(ICqlOperators.CountOrNull), parameters[0]),
+                CqlOperator.Exists                           => BindUnaryGenericOperator(nameof(ICqlOperators.ExistsInList), parameters[0]),
+                CqlOperator.First                            => BindUnaryGenericOperator(nameof(ICqlOperators.FirstOfList), parameters[0]),
+                CqlOperator.Last                             => BindUnaryGenericOperator(nameof(ICqlOperators.LastOfList), parameters[0]),
+                CqlOperator.Distinct                         => BindUnaryGenericOperator(nameof(ICqlOperators.ListDistinct), parameters[0]),
+                CqlOperator.ListLength                       => BindUnaryGenericOperator(nameof(ICqlOperators.ListLength), parameters[0]),
+                CqlOperator.Tail                             => BindUnaryGenericOperator(nameof(ICqlOperators.ListTail), parameters[0]),
+                CqlOperator.MaxElementInList                 => BindUnaryGenericOperator(nameof(ICqlOperators.MaxOrNull), parameters[0]),
+                CqlOperator.MinElementInList                 => BindUnaryGenericOperator(nameof(ICqlOperators.MinOrNull), parameters[0]),
+                CqlOperator.Mode                             => BindUnaryGenericOperator(nameof(ICqlOperators.Mode), parameters[0]),
+                CqlOperator.PointFrom                        => BindUnaryGenericOperator(nameof(ICqlOperators.PointFrom), parameters[0]),
+                CqlOperator.Single                           => BindUnaryGenericOperator(nameof(ICqlOperators.SingleOrNull), parameters[0]),
 
-                CqlOperator.Abs                              => BindUnaryOperator(nameof(ICqlOperators.Abs), operators, parameters[0]),
-                CqlOperator.AllTrue                          => BindUnaryOperator(nameof(ICqlOperators.AllTrue), operators, parameters[0]),
-                CqlOperator.AnyTrue                          => BindUnaryOperator(nameof(ICqlOperators.AnyTrue), operators, parameters[0]),
-                CqlOperator.Avg                              => BindUnaryOperator(nameof(ICqlOperators.Avg), operators, parameters[0]),
-                CqlOperator.Ceiling                          => BindUnaryOperator(nameof(ICqlOperators.Ceiling), operators, parameters[0]),
-                CqlOperator.ConvertsToDate                   => BindUnaryOperator(nameof(ICqlOperators.ConvertsToDate), operators, parameters[0]),
-                CqlOperator.ConvertsToDateTime               => BindUnaryOperator(nameof(ICqlOperators.ConvertsToDateTime), operators, parameters[0]),
-                CqlOperator.ConvertsToDecimal                => BindUnaryOperator(nameof(ICqlOperators.ConvertsToDecimal), operators, parameters[0]),
-                CqlOperator.ConvertsToInteger                => BindUnaryOperator(nameof(ICqlOperators.ConvertsToInteger), operators, parameters[0]),
-                CqlOperator.ConvertsToLong                   => BindUnaryOperator(nameof(ICqlOperators.ConvertsToLong), operators, parameters[0]),
-                CqlOperator.ConvertsToQuantity               => BindUnaryOperator(nameof(ICqlOperators.ConvertsToQuantity), operators, parameters[0]),
-                CqlOperator.ConvertsToString                 => BindUnaryOperator(nameof(ICqlOperators.ConvertsToString), operators, parameters[0]),
-                CqlOperator.ConvertsToTime                   => BindUnaryOperator(nameof(ICqlOperators.ConvertsToTime), operators, parameters[0]),
-                CqlOperator.DateComponent                    => BindUnaryOperator(nameof(ICqlOperators.DateFrom), operators, parameters[0]),
-                CqlOperator.Descendents                      => BindUnaryOperator(nameof(ICqlOperators.Descendents), operators, parameters[0]),
-                CqlOperator.IntervalEnd                      => BindUnaryOperator(nameof(ICqlOperators.End), operators, parameters[0]),
-                CqlOperator.Exp                              => BindUnaryOperator(nameof(ICqlOperators.Exp), operators, parameters[0]),
-                CqlOperator.Floor                            => BindUnaryOperator(nameof(ICqlOperators.Floor), operators, parameters[0]),
-                CqlOperator.GeometricMean                    => BindUnaryOperator(nameof(ICqlOperators.GeometricMean), operators, parameters[0]),
-                CqlOperator.IsFalse                          => BindUnaryOperator(nameof(ICqlOperators.IsFalse), operators, parameters[0]),
-                CqlOperator.IsTrue                           => BindUnaryOperator(nameof(ICqlOperators.IsTrue), operators, parameters[0]),
-                CqlOperator.Ln                               => BindUnaryOperator(nameof(ICqlOperators.Ln), operators, parameters[0]),
-                CqlOperator.Lower                            => BindUnaryOperator(nameof(ICqlOperators.Lower), operators, parameters[0]),
-                CqlOperator.Median                           => BindUnaryOperator(nameof(ICqlOperators.Median), operators, parameters[0]),
-                CqlOperator.Negate                           => BindUnaryOperator(nameof(ICqlOperators.Negate), operators, parameters[0]),
-                CqlOperator.Not                              => BindUnaryOperator(nameof(ICqlOperators.Not), operators, parameters[0]),
-                CqlOperator.PopulationStdDev                 => BindUnaryOperator(nameof(ICqlOperators.PopulationStdDev), operators, parameters[0]),
-                CqlOperator.PopulationVariance               => BindUnaryOperator(nameof(ICqlOperators.PopulationVariance), operators, parameters[0]),
-                CqlOperator.Precision                        => BindUnaryOperator(nameof(ICqlOperators.Precision), operators, parameters[0]),
-                CqlOperator.Predecessor                      => BindUnaryOperator(nameof(ICqlOperators.Predecessor), operators, parameters[0]),
-                CqlOperator.Product                          => BindUnaryOperator(nameof(ICqlOperators.Product), operators, parameters[0]),
-                CqlOperator.IntervalStart                    => BindUnaryOperator(nameof(ICqlOperators.Start), operators, parameters[0]),
-                CqlOperator.StdDev                           => BindUnaryOperator(nameof(ICqlOperators.StdDev), operators, parameters[0]),
-                CqlOperator.StringLength                     => BindUnaryOperator(nameof(ICqlOperators.StringLength), operators, parameters[0]),
-                CqlOperator.Successor                        => BindUnaryOperator(nameof(ICqlOperators.Successor), operators, parameters[0]),
-                CqlOperator.Sum                              => BindUnaryOperator(nameof(ICqlOperators.Sum), operators, parameters[0]),
-                CqlOperator.TimeComponent                    => BindUnaryOperator(nameof(ICqlOperators.TimeFrom), operators, parameters[0]),
-                CqlOperator.TimeZoneComponent                => BindUnaryOperator(nameof(ICqlOperators.TimezoneOffsetFrom), operators, parameters[0]),
-                CqlOperator.Truncate                         => BindUnaryOperator(nameof(ICqlOperators.Truncate), operators, parameters[0]),
-                CqlOperator.Upper                            => BindUnaryOperator(nameof(ICqlOperators.Upper), operators, parameters[0]),
-                CqlOperator.Variance                         => BindUnaryOperator(nameof(ICqlOperators.Variance), operators, parameters[0]),
+                CqlOperator.Abs                              => BindUnaryOperator(nameof(ICqlOperators.Abs), parameters[0]),
+                CqlOperator.AllTrue                          => BindUnaryOperator(nameof(ICqlOperators.AllTrue), parameters[0]),
+                CqlOperator.AnyTrue                          => BindUnaryOperator(nameof(ICqlOperators.AnyTrue), parameters[0]),
+                CqlOperator.Avg                              => BindUnaryOperator(nameof(ICqlOperators.Avg), parameters[0]),
+                CqlOperator.Ceiling                          => BindUnaryOperator(nameof(ICqlOperators.Ceiling), parameters[0]),
+                CqlOperator.ConvertsToDate                   => BindUnaryOperator(nameof(ICqlOperators.ConvertsToDate), parameters[0]),
+                CqlOperator.ConvertsToDateTime               => BindUnaryOperator(nameof(ICqlOperators.ConvertsToDateTime), parameters[0]),
+                CqlOperator.ConvertsToDecimal                => BindUnaryOperator(nameof(ICqlOperators.ConvertsToDecimal), parameters[0]),
+                CqlOperator.ConvertsToInteger                => BindUnaryOperator(nameof(ICqlOperators.ConvertsToInteger), parameters[0]),
+                CqlOperator.ConvertsToLong                   => BindUnaryOperator(nameof(ICqlOperators.ConvertsToLong), parameters[0]),
+                CqlOperator.ConvertsToQuantity               => BindUnaryOperator(nameof(ICqlOperators.ConvertsToQuantity), parameters[0]),
+                CqlOperator.ConvertsToString                 => BindUnaryOperator(nameof(ICqlOperators.ConvertsToString), parameters[0]),
+                CqlOperator.ConvertsToTime                   => BindUnaryOperator(nameof(ICqlOperators.ConvertsToTime), parameters[0]),
+                CqlOperator.DateComponent                    => BindUnaryOperator(nameof(ICqlOperators.DateFrom), parameters[0]),
+                CqlOperator.Descendents                      => BindUnaryOperator(nameof(ICqlOperators.Descendents), parameters[0]),
+                CqlOperator.IntervalEnd                      => BindUnaryOperator(nameof(ICqlOperators.End), parameters[0]),
+                CqlOperator.Exp                              => BindUnaryOperator(nameof(ICqlOperators.Exp), parameters[0]),
+                CqlOperator.Floor                            => BindUnaryOperator(nameof(ICqlOperators.Floor), parameters[0]),
+                CqlOperator.GeometricMean                    => BindUnaryOperator(nameof(ICqlOperators.GeometricMean), parameters[0]),
+                CqlOperator.IsFalse                          => BindUnaryOperator(nameof(ICqlOperators.IsFalse), parameters[0]),
+                CqlOperator.IsTrue                           => BindUnaryOperator(nameof(ICqlOperators.IsTrue), parameters[0]),
+                CqlOperator.Ln                               => BindUnaryOperator(nameof(ICqlOperators.Ln), parameters[0]),
+                CqlOperator.Lower                            => BindUnaryOperator(nameof(ICqlOperators.Lower), parameters[0]),
+                CqlOperator.Median                           => BindUnaryOperator(nameof(ICqlOperators.Median), parameters[0]),
+                CqlOperator.Negate                           => BindUnaryOperator(nameof(ICqlOperators.Negate), parameters[0]),
+                CqlOperator.Not                              => BindUnaryOperator(nameof(ICqlOperators.Not), parameters[0]),
+                CqlOperator.PopulationStdDev                 => BindUnaryOperator(nameof(ICqlOperators.PopulationStdDev), parameters[0]),
+                CqlOperator.PopulationVariance               => BindUnaryOperator(nameof(ICqlOperators.PopulationVariance), parameters[0]),
+                CqlOperator.Precision                        => BindUnaryOperator(nameof(ICqlOperators.Precision), parameters[0]),
+                CqlOperator.Predecessor                      => BindUnaryOperator(nameof(ICqlOperators.Predecessor), parameters[0]),
+                CqlOperator.Product                          => BindUnaryOperator(nameof(ICqlOperators.Product), parameters[0]),
+                CqlOperator.IntervalStart                    => BindUnaryOperator(nameof(ICqlOperators.Start), parameters[0]),
+                CqlOperator.StdDev                           => BindUnaryOperator(nameof(ICqlOperators.StdDev), parameters[0]),
+                CqlOperator.StringLength                     => BindUnaryOperator(nameof(ICqlOperators.StringLength), parameters[0]),
+                CqlOperator.Successor                        => BindUnaryOperator(nameof(ICqlOperators.Successor), parameters[0]),
+                CqlOperator.Sum                              => BindUnaryOperator(nameof(ICqlOperators.Sum), parameters[0]),
+                CqlOperator.TimeComponent                    => BindUnaryOperator(nameof(ICqlOperators.TimeFrom), parameters[0]),
+                CqlOperator.TimeZoneComponent                => BindUnaryOperator(nameof(ICqlOperators.TimezoneOffsetFrom), parameters[0]),
+                CqlOperator.Truncate                         => BindUnaryOperator(nameof(ICqlOperators.Truncate), parameters[0]),
+                CqlOperator.Upper                            => BindUnaryOperator(nameof(ICqlOperators.Upper), parameters[0]),
+                CqlOperator.Variance                         => BindUnaryOperator(nameof(ICqlOperators.Variance), parameters[0]),
 
-                CqlOperator.CalculateAge                     => BindUnaryOperatorWithPrecision(nameof(ICqlOperators.CalculateAge), operators, parameters[0], parameters[1]),
-                CqlOperator.Coalesce                         => Coalesce(operators, parameters[0]),
-                CqlOperator.CrossJoin                        => CrossJoin(operators, parameters),
-                CqlOperator.Expand                           => Expand(operators, parameters[0], parameters[1]),
+                CqlOperator.CalculateAge                     => BindUnaryOperatorWithPrecision(nameof(ICqlOperators.CalculateAge), parameters[0], parameters[1]),
+                CqlOperator.Coalesce                         => Coalesce(parameters[0]),
+                CqlOperator.CrossJoin                        => CrossJoin(parameters),
+                CqlOperator.Expand                           => Expand(parameters[0], parameters[1]),
 
-                CqlOperator.Date                             => Expression.Call(operators, CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Date))!, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.DateTime                         => Expression.Call(operators, CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.DateTime))!, parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7]),
-                CqlOperator.Now                              => Expression.Call(operators, CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Now))!),
-                CqlOperator.Quantity                         => Expression.Call(operators, CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Quantity))!, parameters[0], parameters[1]),
-                CqlOperator.Time                             => Expression.Call(operators, CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Time))!, parameters[0], parameters[1], parameters[2], parameters[3]),
-                CqlOperator.TimeOfDay                        => Expression.Call(operators, CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.TimeOfDay))!),
-                CqlOperator.Today                            => Expression.Call(operators, CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Today))!),
-                CqlOperator.Flatten                          => Flatten(operators, parameters[0]),
-                CqlOperator.InList                           => InList(operators, parameters[0], parameters[1]),
-                CqlOperator.Interval                         => Interval(operators, parameters[0], parameters[1], parameters[2], parameters[3]),
-                CqlOperator.LateBoundProperty                => LateBoundProperty(operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.ListUnion                        => ListUnion(operators, parameters[0], parameters[1]),
-                CqlOperator.MaximumValue                     => Maximum(operators, parameters[0]),
-                CqlOperator.Message                          => Message(operators, parameters),
-                CqlOperator.MinimumValue                     => Minimum(operators, parameters[0]),
-                CqlOperator.ResolveValueSet                  => ResolveValueSet(operators, parameters[0]),
-                CqlOperator.Retrieve                         => Retrieve(operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Select                           => Select(operators, parameters[0], parameters[1]),
-                CqlOperator.SelectMany                       => SelectMany(operators: operators, source: parameters[0], collectionSelectorLambda: parameters[1]),
-                CqlOperator.SelectManyResults                => SelectManyResults(operators: operators, source: parameters[0], collectionSelectorLambda: parameters[1], resultSelectorLambda: parameters[2]),
-                CqlOperator.SortBy                           => SortBy(operators, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.ToList                           => ToList(parameters, operators),
-                CqlOperator.Where                            => Where(operators, parameters[0], parameters[1]),
-                CqlOperator.Width                            => Width(operators, parameters[0]),
+                CqlOperator.Date                             => CqlContextExpressions.Call_CqlContext_Operators(CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Date))!, parameters[0], parameters[1], parameters[2]),
+                CqlOperator.DateTime                         => CqlContextExpressions.Call_CqlContext_Operators(CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.DateTime))!, parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7]),
+                CqlOperator.Now                              => CqlContextExpressions.Call_CqlContext_Operators(CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Now))!),
+                CqlOperator.Quantity                         => CqlContextExpressions.Call_CqlContext_Operators(CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Quantity))!, parameters[0], parameters[1]),
+                CqlOperator.Time                             => CqlContextExpressions.Call_CqlContext_Operators(CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Time))!, parameters[0], parameters[1], parameters[2], parameters[3]),
+                CqlOperator.TimeOfDay                        => CqlContextExpressions.Call_CqlContext_Operators(CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.TimeOfDay))!),
+                CqlOperator.Today                            => CqlContextExpressions.Call_CqlContext_Operators(CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Today))!),
+                CqlOperator.Flatten                          => Flatten(parameters[0]),
+                CqlOperator.InList                           => InList(parameters[0], parameters[1]),
+                CqlOperator.Interval                         => Interval(parameters[0], parameters[1], parameters[2], parameters[3]),
+                CqlOperator.LateBoundProperty                => LateBoundProperty(parameters[0], parameters[1], parameters[2]),
+                CqlOperator.ListUnion                        => ListUnion(parameters[0], parameters[1]),
+                CqlOperator.MaximumValue                     => Maximum(parameters[0]),
+                CqlOperator.Message                          => Message(parameters),
+                CqlOperator.MinimumValue                     => Minimum(parameters[0]),
+                CqlOperator.ResolveValueSet                  => ResolveValueSet(parameters[0]),
+                CqlOperator.Retrieve                         => Retrieve(parameters[0], parameters[1], parameters[2]),
+                CqlOperator.Select                           => Select(parameters[0], parameters[1]),
+                CqlOperator.SelectMany                       => SelectMany(source: parameters[0], collectionSelectorLambda: parameters[1]),
+                CqlOperator.SelectManyResults                => SelectManyResults(source: parameters[0], collectionSelectorLambda: parameters[1], resultSelectorLambda: parameters[2]),
+                CqlOperator.SortBy                           => SortBy(parameters[0], parameters[1], parameters[2]),
+                CqlOperator.ToList                           => ToList(parameters),
+                CqlOperator.Where                            => Where(parameters[0], parameters[1]),
+                CqlOperator.Width                            => Width(parameters[0]),
                 CqlOperator.Ratio
                 or CqlOperator.PropertyOrDefault
                 or _                                         => throw new NotSupportedException($"Operator {Enum.GetName(typeof(CqlOperator), @operator)} is not supported by this binding.")
@@ -271,7 +257,7 @@ namespace Hl7.Cql.Compiler
             };
         }
 
-        private Expression CrossJoin(MemberExpression operators, Expression[] sources)
+        private Expression CrossJoin(Expression[] sources)
         {
             var genericDefinitionMethodCrossJoin = CqlContextExpressions.CqlContext_Operators_Type
                     .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -285,19 +271,21 @@ namespace Hl7.Cql.Compiler
 
             var methodCrossJoin = genericDefinitionMethodCrossJoin.MakeGenericMethod(sourceListElementTypes);
 
-            return Expression.Call(operators, methodCrossJoin, sources);
+            return CqlContextExpressions.Call_CqlContext_Operators(methodCrossJoin, sources);
         }
 
-        private Expression ToList(Expression[] parameters, MemberExpression operators)
+        private Expression ToList(Expression[] parameters)
         {
             var method = CqlContextExpressions.CqlContext_Operators_Type
                 .GetMethod(nameof(ICqlOperators.ToList))!
                 .MakeGenericMethod(parameters[0].Type);
-            var call = Expression.Call(operators, method, parameters[0]);
+            var call = CqlContextExpressions.Call_CqlContext_Operators(method, parameters[0]);
             return call;
         }
 
-        private Expression Expand(MemberExpression operators, Expression argument, Expression perQuantity)
+        private Expression Expand(
+            Expression argument,
+            Expression perQuantity)
         {
             if (perQuantity is ConstantExpression ce && ce.Value == null)
                 perQuantity = Expression.Constant(null, typeof(CqlQuantity));
@@ -320,7 +308,7 @@ namespace Hl7.Cql.Compiler
                             var operandConversion = CanConvert(argument.Type, methodParameters[0].ParameterType);
                             if (operandConversion == ConversionType.Incompatible)
                                 continue;
-                            var call = Expression.Call(operators, method, argument, perQuantity);
+                            var call = CqlContextExpressions.Call_CqlContext_Operators(method, argument, perQuantity);
                             return call;
                         }
                     }
@@ -341,7 +329,7 @@ namespace Hl7.Cql.Compiler
                         var operandConversion = CanConvert(argument.Type, methodParameters[0].ParameterType);
                         if (operandConversion == ConversionType.Incompatible)
                             continue;
-                        var call = Expression.Call(operators, method, argument, perQuantity);
+                        var call = CqlContextExpressions.Call_CqlContext_Operators(method, argument, perQuantity);
                         return call;
                     }
                 }
@@ -350,7 +338,10 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException($"Expand allows only a List<Interval<T>> or an Interval<T> as a parameter.", nameof(argument));
         }
 
-        private Expression SortBy(MemberExpression operators, Expression source, Expression by, Expression order)
+        private Expression SortBy(
+            Expression source,
+            Expression by,
+            Expression order)
         {
             if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
             {
@@ -358,31 +349,35 @@ namespace Hl7.Cql.Compiler
                 var method = CqlContextExpressions.CqlContext_Operators_Type
                     .GetMethod(nameof(ICqlOperators.ListSortBy))!
                     .MakeGenericMethod(elementType);
-                var call = Expression.Call(operators, method, source, lambda, orderConstant);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method, source, lambda, orderConstant);
                 return call;
 
             }
             else throw new ArgumentException("SortBy expects 3 parameters: source, lambda, and SortOrder constant", nameof(by));
         }
 
-        private Expression InList(MemberExpression operators, Expression left, Expression right)
+        private Expression InList(
+            Expression left,
+            Expression right)
         {
             if (left.Type == typeof(CqlCode))
             {
                 var rightElementType = TypeResolver.GetListElementType(right.Type);
                 if (rightElementType == typeof(CqlCode))
                 {
-                    return BindBinaryOperator(nameof(ICqlOperators.CodeInList), operators, left, right);
+                    return BindBinaryOperator(nameof(ICqlOperators.CodeInList), left, right);
                 }
             }
-            return BindBinaryGenericOperatorOrNull(nameof(ICqlOperators.InList), operators, left, right, true);
+            return BindBinaryGenericOperatorOrNull(nameof(ICqlOperators.InList), left, right, true);
         }
 
-        private Expression ListUnion(MemberExpression operators, Expression left, Expression right)
+        private Expression ListUnion(
+            Expression left,
+            Expression right)
         {
             if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
             {
-                return BindBinaryOperator(nameof(ICqlOperators.ValueSetUnion), operators,
+                return BindBinaryOperator(nameof(ICqlOperators.ValueSetUnion),
                     Expression.TypeAs(left, typeof(IEnumerable<CqlCode>)),
                     Expression.TypeAs(right, typeof(IEnumerable<CqlCode>)));
             }
@@ -392,49 +387,49 @@ namespace Hl7.Cql.Compiler
                 var rightElementType = TypeResolver.GetListElementType(right.Type);
                 if (rightElementType == typeof(CqlCode))
                 {
-                    return BindBinaryOperator(nameof(ICqlOperators.ValueSetUnion), operators, left, right);
+                    return BindBinaryOperator(nameof(ICqlOperators.ValueSetUnion), left, right);
                 }
             }
 
-            return BindBinaryGenericOperator(nameof(ICqlOperators.ListUnion), operators, left, right);
+            return BindBinaryGenericOperator(nameof(ICqlOperators.ListUnion), left, right);
         }
 
-        private Expression ResolveValueSet(MemberExpression operators, Expression expression)
+        private Expression ResolveValueSet(Expression expression)
         {
             if (expression is NewExpression @new && @new.Type == typeof(CqlValueSet))
             {
                 var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.ResolveValueSet))!;
-                var call = Expression.Call(operators, method, @new);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method, @new);
                 return call;
             }
             else throw new ArgumentException("Expression should be a constant CqlValueSet");
         }
 
-        private Expression Minimum(MemberExpression operators, Expression typeConstant)
+        private Expression Minimum(Expression typeConstant)
         {
             if (typeConstant is ConstantExpression constant && constant.Value is Type t)
             {
                 var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Minimum))!
                     .MakeGenericMethod(t);
-                var call = Expression.Call(operators, method);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method);
                 return call;
             }
             else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
         }
 
-        private Expression Maximum(MemberExpression operators, Expression typeConstant)
+        private Expression Maximum(Expression typeConstant)
         {
             if (typeConstant is ConstantExpression constant && constant.Value is Type t)
             {
                 var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Maximum))!
                     .MakeGenericMethod(t);
-                var call = Expression.Call(operators, method);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method);
                 return call;
             }
             else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
         }
 
-        private Expression Coalesce(MemberExpression operators, Expression operand)
+        private Expression Coalesce(Expression operand)
         {
             if (operand.Type.IsGenericType)
             {
@@ -447,14 +442,14 @@ namespace Hl7.Cql.Compiler
                         var underlying = Nullable.GetUnderlyingType(genericArgumentType)!;
                         var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.CoalesceValueTypes))!
                             .MakeGenericMethod(underlying);
-                        var call = Expression.Call(operators, method, operand);
+                        var call = CqlContextExpressions.Call_CqlContext_Operators(method, operand);
                         return call;
                     }
                     else
                     {
                         var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.CoalesceValueTypes))!
                             .MakeGenericMethod(genericArgumentType);
-                        var call = Expression.Call(operators, method, operand);
+                        var call = CqlContextExpressions.Call_CqlContext_Operators(method, operand);
                         return call;
                     }
                 }
@@ -462,7 +457,7 @@ namespace Hl7.Cql.Compiler
                 {
                     var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Coalesce))!
                         .MakeGenericMethod(genericArgumentType);
-                    var call = Expression.Call(operators, method, operand);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(method, operand);
                     return call;
                 }
             }
@@ -470,7 +465,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        private Expression Flatten(MemberExpression operators, Expression operand)
+        private Expression Flatten(Expression operand)
         {
             var elementType = TypeResolver.GetListElementType(operand.Type, throwError: true)!;
             if (IsOrImplementsIEnumerableOfT(elementType))
@@ -479,7 +474,7 @@ namespace Hl7.Cql.Compiler
                 var method = CqlContextExpressions.CqlContext_Operators_Type
                         .GetMethod(nameof(ICqlOperators.FlattenList))!
                         .MakeGenericMethod(nestedElementType);
-                var call = Expression.Call(operators, method, operand);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method, operand);
                 return call;
             }
             else if (elementType == typeof(object))
@@ -487,21 +482,24 @@ namespace Hl7.Cql.Compiler
                 // This scenario can happen in late-bound property chains
                 var method = CqlContextExpressions.CqlContext_Operators_Type
                     .GetMethod(nameof(ICqlOperators.FlattenLateBoundList))!;
-                var call = Expression.Call(operators, method, operand);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method, operand);
                 return call;
             }
             else return operand; // flatten is being called on a list that is already flat.
         }
 
-        private Expression Width(MemberExpression operators, Expression operand)
+        private Expression Width(Expression operand)
         {
             // This should be disallowed but isn't, so handle it:
             if (operand.Type == typeof(CqlInterval<object>))
                 return Expression.Constant(null, typeof(int?));
-            else return BindUnaryOperator(nameof(ICqlOperators.Width), operators, operand);
+            else return BindUnaryOperator(nameof(ICqlOperators.Width), operand);
         }
 
-        private MethodCallExpression LateBoundProperty(MemberExpression operators, Expression source, Expression propertyName, Expression typeExpression)
+        private MethodCallExpression LateBoundProperty(
+            Expression source,
+            Expression propertyName,
+            Expression typeExpression)
         {
             if (typeExpression is ConstantExpression constExpression)
             {
@@ -510,16 +508,19 @@ namespace Hl7.Cql.Compiler
                     .MakeGenericMethod(type!);
                 if (source.Type != typeof(object))
                     source = Expression.TypeAs(source, typeof(object));
-                var call = Expression.Call(operators, method, source, propertyName);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method, source, propertyName);
                 return call;
             }
             else throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
         }
 
-        private Expression Interval(MemberExpression operators, Expression low, Expression high, Expression lowClosed, Expression highClosed)
+        private Expression Interval(
+            Expression low,
+            Expression high,
+            Expression lowClosed,
+            Expression highClosed)
         {
-            if ((low is ConstantExpression lce && lce.Value == null)
-                && (high is ConstantExpression hce && hce.Value == null))
+            if (low is ConstantExpression { Value: null } && high is ConstantExpression { Value: null })
             {
                 if (low.Type == high.Type)
                 {
@@ -533,7 +534,7 @@ namespace Hl7.Cql.Compiler
                 new[] { low.Type, high.Type, typeof(bool?), typeof(bool?) });
             if (exactMethod != null)
             {
-                var call = Expression.Call(operators, exactMethod, low, high, lowClosed, highClosed);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(exactMethod, low, high, lowClosed, highClosed);
                 return call;
             }
             else
@@ -552,9 +553,9 @@ namespace Hl7.Cql.Compiler
                         if (lowConversion == ConversionType.Incompatible
                             || highConversion == ConversionType.Incompatible)
                             continue;
-                        low = Convert(low, methodParameters[0].ParameterType, operators, lowConversion);
-                        high = Convert(high, methodParameters[1].ParameterType, operators, highConversion);
-                        var call = Expression.Call(operators, method, low, high, lowClosed, highClosed);
+                        low = Convert(low, methodParameters[0].ParameterType, lowConversion);
+                        high = Convert(high, methodParameters[1].ParameterType, highConversion);
+                        var call = CqlContextExpressions.Call_CqlContext_Operators(method, low, high, lowClosed, highClosed);
                         return call;
                     }
                 }
@@ -562,17 +563,19 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"No suitable Interval method could be found for {low.Type}", nameof(low));
         }
 
-        private MethodCallExpression Message(MemberExpression operators, Expression[] parameters)
+        private MethodCallExpression Message(Expression[] parameters)
         {
             var messageMethod = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.Message))!
                 .MakeGenericMethod(parameters[0].Type);
-            return Expression.Call(operators, messageMethod, parameters[0], parameters[1], parameters[2], parameters[3]);
+            return CqlContextExpressions.Call_CqlContext_Operators(messageMethod, parameters[0], parameters[1], parameters[2], parameters[3]);
         }
 
         /// <summary>
         /// Handles explicit conversions, i.e., the Convert operator
         /// </summary>
-        private Expression BindConvert(MemberExpression operators, Expression source, Expression typeExpression)
+        private Expression BindConvert(
+            Expression source,
+            Expression typeExpression)
         {
             if (typeExpression is ConstantExpression { Value: Type toType })
             {
@@ -582,7 +585,7 @@ namespace Hl7.Cql.Compiler
                     var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(methodName);
                     if (method == null)
                         throw new ArgumentException($"No conversion method implemented; expecting {methodName}", nameof(typeExpression));
-                    var call = Expression.Call(operators, method, source);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(method, source);
                     return call;
                 }
                 else
@@ -590,7 +593,7 @@ namespace Hl7.Cql.Compiler
                     var conversion = CanConvert(source.Type, toType);
                     if (conversion != ConversionType.Incompatible)
                     {
-                        var convert = Convert(source, toType, operators, conversion);
+                        var convert = Convert(source, toType, conversion);
                         return convert;
                     }
                     else throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
@@ -599,7 +602,10 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
         }
 
-        protected MethodCallExpression BindBinaryOperator(string methodName, Expression operators, Expression left, Expression right)
+        protected MethodCallExpression BindBinaryOperator(
+            string methodName,
+            Expression left,
+            Expression right)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -613,16 +619,21 @@ namespace Hl7.Cql.Compiler
                     var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
                     if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
                         continue;
-                    left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
-                    right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
+                    left = Convert(left, methodParameters[0].ParameterType, leftConversion);
+                    right = Convert(right, methodParameters[1].ParameterType, rightConversion);
 
-                    var call = Expression.Call(operators, method, left, right);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(method, left, right);
                     return call;
                 }
             }
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
-        protected MethodCallExpression BindTernaryOperator(string methodName, Expression operators, Expression first, Expression second, Expression third)
+
+        protected MethodCallExpression BindTernaryOperator(
+            string methodName,
+            Expression first,
+            Expression second,
+            Expression third)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -640,10 +651,10 @@ namespace Hl7.Cql.Compiler
                         || secondConversion == ConversionType.Incompatible
                         || thirdConversion == ConversionType.Incompatible)
                         continue;
-                    first = Convert(first, methodParameters[0].ParameterType, operators, firstConversion);
-                    second = Convert(second, methodParameters[1].ParameterType, operators, secondConversion);
-                    third = Convert(third, methodParameters[2].ParameterType, operators, thirdConversion);
-                    var call = Expression.Call(operators, method, first, second, third);
+                    first = Convert(first, methodParameters[0].ParameterType, firstConversion);
+                    second = Convert(second, methodParameters[1].ParameterType, secondConversion);
+                    third = Convert(third, methodParameters[2].ParameterType, thirdConversion);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(method, first, second, third);
                     return call;
                 }
             }
@@ -651,7 +662,11 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"No suitable binary method {methodName}({first.Type}, {second.Type}) could be found.", nameof(methodName));
         }
 
-        protected MethodCallExpression BindBinaryOperatorWithPrecision(string methodName, Expression operators, Expression left, Expression right, Expression precision)
+        protected MethodCallExpression BindBinaryOperatorWithPrecision(
+            string methodName,
+            Expression left,
+            Expression right,
+            Expression precision)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -670,26 +685,28 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
-                        left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
-                        right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
+                        left = Convert(left, methodParameters[0].ParameterType, leftConversion);
+                        right = Convert(right, methodParameters[1].ParameterType, rightConversion);
                         if (methodParameters.Length > 2)
                         {
                             var precisionConversion = CanConvert(precision.Type, methodParameters[2].ParameterType);
                             if (precisionConversion == ConversionType.Incompatible)
                                 continue;
-                            precision = Convert(precision, methodParameters[2].ParameterType, operators, precisionConversion);
-                            return Expression.Call(operators, method, left, right, precision);
+                            precision = Convert(precision, methodParameters[2].ParameterType, precisionConversion);
+                            return CqlContextExpressions.Call_CqlContext_Operators(method, left, right, precision);
 
                         }
                         else
-                            return Expression.Call(operators, method, left, right);
+                            return CqlContextExpressions.Call_CqlContext_Operators(method, left, right);
                     }
                 }
             }
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
 
-        protected MethodCallExpression BindUnaryOperator(string methodName, Expression operators, Expression operand)
+        protected MethodCallExpression BindUnaryOperator(
+            string methodName,
+            Expression operand)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -704,17 +721,20 @@ namespace Hl7.Cql.Compiler
                         continue;
                     var operandParameter = operand;
                     if (operandConversion == ConversionType.Convertible)
-                        operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operators, operandConversion);
+                        operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operandConversion);
                     else if (operandConversion == ConversionType.Assignable)
                         operandParameter = Expression.TypeAs(operandParameter, methodParameters[0].ParameterType);
-                    var call = Expression.Call(operators, method, operandParameter);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(method, operandParameter);
                     return call;
                 }
             }
             throw new ArgumentException($"No suitable unary method {methodName}({operand.Type}) could be found.", nameof(methodName));
         }
 
-        protected MethodCallExpression BindUnaryOperatorWithPrecision(string methodName, Expression operators, Expression operand, Expression precision)
+        protected MethodCallExpression BindUnaryOperatorWithPrecision(
+            string methodName,
+            Expression operand,
+            Expression precision)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -729,10 +749,10 @@ namespace Hl7.Cql.Compiler
                         continue;
                     var operandParameter = operand;
                     if (operandConversion == ConversionType.Convertible)
-                        operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operators, operandConversion);
+                        operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operandConversion);
                     else if (operandConversion == ConversionType.Assignable)
                         operandParameter = Expression.TypeAs(operandParameter, methodParameters[0].ParameterType);
-                    var call = Expression.Call(operators, method, operandParameter, precision);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(method, operandParameter, precision);
                     return call;
                 }
             }
@@ -743,7 +763,9 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Calls methods with a signature of Method%lt;T&gt;(Argument%lt;T&gt;)
         /// </summary>
-        protected MethodCallExpression BindUnaryGenericOperator(string methodName, Expression operators, Expression operand)
+        protected MethodCallExpression BindUnaryGenericOperator(
+            string methodName,
+            Expression operand)
         {
             Type? elementType = null;
             if (operand.Type.IsGenericType)
@@ -770,9 +792,9 @@ namespace Hl7.Cql.Compiler
                             continue;
                         var operandParameter = operand;
                         if (operandConversion == ConversionType.Convertible)
-                            operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operators, operandConversion);
+                            operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operandConversion);
 
-                        var call = Expression.Call(operators, genericMethod, operandParameter);
+                        var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, operandParameter);
                         return call;
                     }
                 }
@@ -781,7 +803,10 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException("Operands to this method must be generic with a single generic type parameter, e.g. IEnumerable<T>", nameof(operand));
         }
 
-        protected MethodCallExpression BindBinaryGenericOperator(string methodName, Expression operators, Expression left, Expression right,
+        protected MethodCallExpression BindBinaryGenericOperator(
+            string methodName,
+            Expression left,
+            Expression right,
             bool genericArgumentFromRight = false)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
@@ -803,16 +828,19 @@ namespace Hl7.Cql.Compiler
                     var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
                     if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
                         continue;
-                    left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
-                    right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
-                    var call = Expression.Call(operators, genericMethod, left, right);
+                    left = Convert(left, methodParameters[0].ParameterType, leftConversion);
+                    right = Convert(right, methodParameters[1].ParameterType, rightConversion);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, left, right);
                     return call;
                 }
             }
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
 
-        protected Expression BindBinaryGenericOperatorOrNull(string methodName, Expression operators, Expression left, Expression right,
+        protected Expression BindBinaryGenericOperatorOrNull(
+            string methodName,
+            Expression left,
+            Expression right,
             bool genericArgumentFromRight = false)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
@@ -834,17 +862,21 @@ namespace Hl7.Cql.Compiler
                     var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
                     if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
                         continue;
-                    left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
-                    right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
-                    var call = Expression.Call(operators, genericMethod, left, right);
+                    left = Convert(left, methodParameters[0].ParameterType, leftConversion);
+                    right = Convert(right, methodParameters[1].ParameterType, rightConversion);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, left, right);
                     return call;
                 }
             }
             return Expression.Constant(null, typeof(object));
         }
 
-        protected MethodCallExpression BindTernaryGenericOperator(string methodName, Expression operators,
-            Expression left, Expression right, Expression precision, bool genericParameterFromRight = false)
+        protected MethodCallExpression BindTernaryGenericOperator(
+            string methodName,
+            Expression left,
+            Expression right,
+            Expression precision,
+            bool genericParameterFromRight = false)
         {
             var methods = CqlContextExpressions.CqlContext_Operators_Type
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -872,16 +904,17 @@ namespace Hl7.Cql.Compiler
                         || rightConversion == ConversionType.Incompatible
                         || precisionConversion == ConversionType.Incompatible)
                         continue;
-                    left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
-                    right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
-                    precision = Convert(precision, methodParameters[2].ParameterType, operators, precisionConversion);
-                    var call = Expression.Call(operators, genericMethod, left, right, precision);
+                    left = Convert(left, methodParameters[0].ParameterType, leftConversion);
+                    right = Convert(right, methodParameters[1].ParameterType, rightConversion);
+                    precision = Convert(precision, methodParameters[2].ParameterType, precisionConversion);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, left, right, precision);
                     return call;
                 }
             }
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
-        private MethodCallExpression Retrieve(MemberExpression operators,
+
+        private MethodCallExpression Retrieve(
             Expression typeExpression,
             Expression valueSetOrCodes,
             Expression codePropertyExpression)
@@ -901,15 +934,17 @@ namespace Hl7.Cql.Compiler
                         codePropertyExpression = Expression.Call(typeOf, method, Expression.Constant(propName));
                     }
 
-                    return Retrieve(operators, type, valueSetOrCodes, codePropertyExpression);
+                    return Retrieve(type, valueSetOrCodes, codePropertyExpression);
                 }
                 else throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));
             }
             else throw new ArgumentException("First parameter to Retrieve is expected to be a constant Type", nameof(typeExpression));
         }
 
-        protected MethodCallExpression Retrieve(MemberExpression operators,
-            Type resourceType, Expression codes, Expression codeProperty)
+        protected MethodCallExpression Retrieve(
+            Type resourceType,
+            Expression codes,
+            Expression codeProperty)
         {
             MethodInfo? forType = null;
             if (codes.Type == typeof(CqlValueSet))
@@ -932,7 +967,7 @@ namespace Hl7.Cql.Compiler
                 else if (IsOrImplementsIEnumerableOfT(elementType) && TypeResolver.GetListElementType(elementType) == typeof(CqlCode))
                 {
                     // call Flatten.
-                    codes = Flatten(operators, codes);
+                    codes = Flatten(codes);
                     var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByCodes))!;
                     forType = method.MakeGenericMethod(resourceType);
                 }
@@ -941,12 +976,13 @@ namespace Hl7.Cql.Compiler
             else
                 throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
 
-            var call = Expression.Call(operators, forType, codes, codeProperty);
+            var call = CqlContextExpressions.Call_CqlContext_Operators(forType, codes, codeProperty);
             return call;
         }
 
-        private MethodCallExpression Select(Expression operators,
-            Expression source, Expression lambda)
+        private MethodCallExpression Select(
+            Expression source,
+            Expression lambda)
         {
             if (lambda is LambdaExpression lambdaExpr)
             {
@@ -954,27 +990,29 @@ namespace Hl7.Cql.Compiler
                 var resultType = lambdaExpr.ReturnType;
                 var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.SelectOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType, resultType);
-                var call = Expression.Call(operators, genericMethod, source, lambda);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, source, lambda);
                 return call;
             }
             else throw new ArgumentException("Source is not generic", nameof(source));
         }
-        private MethodCallExpression Where(Expression operators,
-            Expression source, Expression lambda)
+        private MethodCallExpression Where(
+            Expression source,
+            Expression lambda)
         {
             if (lambda is LambdaExpression lamdaExpr)
             {
                 var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
                 var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.WhereOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType);
-                var call = Expression.Call(operators, genericMethod, source, lambda);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, source, lambda);
                 return call;
             }
             else throw new ArgumentException("Source is not generic", nameof(source));
         }
 
-        private MethodCallExpression SelectMany(Expression operators,
-            Expression source, Expression collectionSelectorLambda)
+        private MethodCallExpression SelectMany(
+            Expression source,
+            Expression collectionSelectorLambda)
         {
             if (collectionSelectorLambda is LambdaExpression collectionSelector)
             {
@@ -986,7 +1024,7 @@ namespace Hl7.Cql.Compiler
                     var genericMethod = method.MakeGenericMethod(
                         firstGenericArgument,
                         secondGenericArgument);
-                    var call = Expression.Call(operators, genericMethod, source, collectionSelector);
+                    var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, source, collectionSelector);
                     return call;
                 }
                 else throw new ArgumentException("Collection selector does not return an IEnumerable", nameof(collectionSelectorLambda));
@@ -994,8 +1032,10 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("Source is not generic", nameof(source));
         }
 
-        private MethodCallExpression SelectManyResults(Expression operators,
-            Expression source, Expression collectionSelectorLambda, Expression resultSelectorLambda)
+        private MethodCallExpression SelectManyResults(
+            Expression source,
+            Expression collectionSelectorLambda,
+            Expression resultSelectorLambda)
         {
             if (collectionSelectorLambda is LambdaExpression collectionSelector)
             {
@@ -1010,7 +1050,7 @@ namespace Hl7.Cql.Compiler
                             firstGenericArgument,
                             secondGenericArgument,
                             resultSelector.ReturnType);
-                        var call = Expression.Call(operators, genericMethod, source, collectionSelector, resultSelector);
+                        var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, source, collectionSelector, resultSelector);
                         return call;
                     }
                     else throw new ArgumentException("Result expression is not a lambda", nameof(resultSelectorLambda));
@@ -1021,7 +1061,9 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("Source is not generic", nameof(source));
         }
 
-        private ConversionType CanConvert(Type from, Type to)
+        private ConversionType CanConvert(
+            Type from,
+            Type to)
         {
             if (from == to)
                 return ConversionType.SameType;
@@ -1035,8 +1077,10 @@ namespace Hl7.Cql.Compiler
             return ConversionType.Incompatible;
         }
 
-        private Expression Convert(Expression source, Type destinationType,
-            Expression operators, ConversionType conversion)
+        private Expression Convert(
+            Expression source,
+            Type destinationType,
+            ConversionType conversion)
         {
             return conversion switch
             {
@@ -1051,20 +1095,22 @@ namespace Hl7.Cql.Compiler
                 var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.Convert))!
                     .MakeGenericMethod(destinationType);
                 source = Expression.TypeAs(source, typeof(object));
-                var call = Expression.Call(operators, method, source);
+                var call = CqlContextExpressions.Call_CqlContext_Operators(method, source);
                 return call;
             }
         }
 
-        private MethodCallExpression Aggregate(Expression operators, Expression source,
-            Expression lambda, Expression seed)
+        private MethodCallExpression Aggregate(
+            Expression source,
+            Expression lambda,
+            Expression seed)
         {
             var sourceType = TypeResolver.GetListElementType(source.Type, false) ??
                 throw new ArgumentException($"Cannot resolve element type for {source.Type.Name}", nameof(source));
             var accumulateType = seed.Type;
             var method = CqlContextExpressions.CqlContext_Operators_Type.GetMethod(nameof(ICqlOperators.AggregateOrNull))!;
             var genericMethod = method.MakeGenericMethod(sourceType, accumulateType);
-            var call = Expression.Call(operators, genericMethod, source, seed, lambda);
+            var call = CqlContextExpressions.Call_CqlContext_Operators(genericMethod, source, seed, lambda);
             return call;
         }
 
