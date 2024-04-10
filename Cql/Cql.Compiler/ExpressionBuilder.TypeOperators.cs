@@ -11,10 +11,8 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Expressions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
-using F = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler
 {
@@ -30,7 +28,7 @@ namespace Hl7.Cql.Compiler
                     if ((list.element?.Length ?? 0) == 0)
                     {
                         var type = TypeFor(@as.asTypeSpecifier!);
-                        if (IsOrImplementsIEnumerableOfT(type))
+                        if (_typeResolver.ImplementsGenericIEnumerable(type))
                         {
                             var listElementType = _typeManager.Resolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
                             var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
@@ -127,7 +125,7 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var source = TranslateExpression(e.source);
-                var call = _operatorBinding.Bind(CqlOperator.Descendents, LibraryDefinitionsBuilder.ContextParameter, source);
+                var call = BindCqlOperator(CqlOperator.Descendents, source);
                 return call;
             }
         }
@@ -143,102 +141,74 @@ namespace Hl7.Cql.Compiler
         {
             var quantity = TranslateExpression(cqe.operand![0]);
             var unit = TranslateExpression(cqe.operand![1]);
-            var call = _operatorBinding.Bind(CqlOperator.ConvertQuantity, LibraryDefinitionsBuilder.ContextParameter, quantity, unit);
+            var call = BindCqlOperator(CqlOperator.ConvertQuantity, quantity, unit);
             return call;
         }
 
-        protected Expression? ConvertsToLong(Elm.ConvertsToLong e) =>
-            UnaryOperator(CqlOperator.ConvertsToLong, e);
-
-        private Expression? ConvertsToInteger(Elm.ConvertsToInteger e) =>
-            UnaryOperator(CqlOperator.ConvertsToInteger, e);
-
-        protected Expression? ConvertsToDecimal(Elm.ConvertsToDecimal e) =>
-            UnaryOperator(CqlOperator.ConvertsToDecimal, e);
-
-        protected Expression? ConvertsToDateTime(Elm.ConvertsToDateTime e) =>
-            UnaryOperator(CqlOperator.ConvertsToDateTime, e);
-
-        protected Expression? ConvertsToDate(Elm.ConvertsToDate e) =>
-            UnaryOperator(CqlOperator.ConvertsToDate, e);
-
-        protected Expression? ConvertsToBoolean(Elm.ConvertsToBoolean e) =>
-            UnaryOperator(CqlOperator.ConvertsToDate, e);
-
-        private Expression? ConvertsToQuantity(Elm.ConvertsToQuantity e) =>
-            UnaryOperator(CqlOperator.ConvertsToQuantity, e);
-
-        private Expression? ConvertsToString(Elm.ConvertsToString e) =>
-            UnaryOperator(CqlOperator.ConvertsToString, e);
-
-        private Expression? ConvertsToTime(Elm.ConvertsToTime e) =>
-            UnaryOperator(CqlOperator.ConvertsToTime, e);
-
-
-        protected Expression? ToBoolean(Elm.ToBoolean e)
+        protected Expression? ChangeTypeToBoolean(Elm.ToBoolean e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(bool?));
         }
 
-        protected Expression? ToConcept(Elm.ToConcept e)
+        protected Expression? ChangeTypeToConcept(Elm.ToConcept e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.ConceptType);
         }
 
-        protected Expression? ToDate(Elm.ToDate e)
+        protected Expression? ChangeTypeToDate(Elm.ToDate e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.DateType);
         }
 
-        protected Expression ToDateTime(Elm.ToDateTime e)
+        protected Expression ChangeTypeToDateTime(Elm.ToDateTime e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.DateTimeType);
         }
 
 
-        protected Expression ToDecimal(Elm.ToDecimal e)
+        protected Expression ChangeTypeToDecimal(Elm.ToDecimal e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(decimal?));
         }
 
-        protected Expression ToLong(Elm.ToLong e)
+        protected Expression ChangeTypeToLong(Elm.ToLong e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(long?));
         }
 
-        protected Expression? ToInteger(Elm.ToInteger e)
+        protected Expression? ChangeTypeToInteger(Elm.ToInteger e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(int?));
         }
 
-        protected Expression? ToQuantity(Elm.ToQuantity tq)
+        protected Expression? ChangeTypeToQuantity(Elm.ToQuantity tq)
         {
             var operand = TranslateExpression(tq.operand!);
             return ChangeType(operand, _typeManager.Resolver.QuantityType);
         }
 
-        protected Expression? ToString(Elm.ToString e)
+        protected Expression? ChangeTypeToString(Elm.ToString e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, typeof(string));
         }
-        protected Expression? ToTime(Elm.ToTime e)
+        protected Expression? ChangeTypeToTime(Elm.ToTime e)
         {
             var operand = TranslateExpression(e.operand!);
             return ChangeType(operand, _typeManager.Resolver.TimeType);
         }
 
-        protected Expression ToList(Elm.ToList e)
+        protected Expression ChangeTypeToList(Elm.ToList e)
         {
             var operand = TranslateExpression(e.operand!);
-            var call = _operatorBinding.Bind(CqlOperator.ToList, LibraryDefinitionsBuilder.ContextParameter, operand);
+            var call = BindCqlOperator(CqlOperator.ToList, operand);
             return call;
         }
 
@@ -250,42 +220,28 @@ namespace Hl7.Cql.Compiler
             if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
                 return Expression.TypeAs(input, outputType);
 
-            if (IsOrImplementsIEnumerableOfT(input.Type)
-                && IsOrImplementsIEnumerableOfT(outputType))
+            if (_typeResolver.ImplementsGenericIEnumerable(input.Type)
+                && _typeResolver.ImplementsGenericIEnumerable(outputType))
             {
                 var inputElementType = _typeManager.Resolver.GetListElementType(input.Type, true)!;
                 var outputElementType = _typeManager.Resolver.GetListElementType(outputType, true)!;
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                var callSelect = _operatorBinding.Bind(CqlOperator.Select, LibraryDefinitionsBuilder.ContextParameter, input, lambda);
+                var callSelect = BindCqlOperator(CqlOperator.Select, input, lambda);
                 return callSelect;
             }
 
             if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                var call = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
+                var call = BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
                 return call;
             }
             else
             {
-                var call = _operatorBinding.Bind(CqlOperator.Convert, LibraryDefinitionsBuilder.ContextParameter, input, Expression.Constant(outputType, typeof(Type)));
+                var call = BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
                 return call;
             }
-        }
-
-        private static readonly Dictionary<(Type,Type),Type> KnownErrors = new()
-        {
-            [(typeof(F.ObservationStatus?), typeof(F.Code<F.VerificationResult.StatusCode>))] = typeof(F.ObservationStatus?)
-        };
-
-        // At this moment (20240308) the QICore translation by the current tooling (3.8.0.0) of the CQl-to-ELM
-        // translator is incorrect. This method is a temporary workaround to correct the incorrectly mapped binding
-        // names. This method should be removed once the QICore translation is fixed.
-        // See https://github.com/cqframework/cqf-tooling/issues/518.
-        private static bool TryCorrectQiCoreBindingError(Type source, Type to, out Type? correctedTo)
-        {
-            return KnownErrors.TryGetValue((source,to), out correctedTo);
         }
     }
 }
