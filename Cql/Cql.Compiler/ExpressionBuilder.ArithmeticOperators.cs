@@ -20,13 +20,15 @@ namespace Hl7.Cql.Compiler
         protected Expression MaxValue(Elm.MaxValue max)
         {
             var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
-            var call = BindCqlOperator(CqlOperator.MaximumValue, Expression.Constant(type, typeof(Type)));
+            Expression[] parameters = new[] { Expression.Constant(type, typeof(Type)) };
+            var call = _operatorBinding.Bind(CqlOperator.MaximumValue, parameters);
             return call;
         }
         protected Expression MinValue(Elm.MinValue min)
         {
             var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
-            var call = BindCqlOperator(CqlOperator.MinimumValue, Expression.Constant(type, typeof(Type)));
+            Expression[] parameters = new[] { Expression.Constant(type, typeof(Type)) };
+            var call = _operatorBinding.Bind(CqlOperator.MinimumValue, parameters);
             return call;
         }
 
@@ -55,7 +57,8 @@ namespace Hl7.Cql.Compiler
             if (e.precision != null)
                 precision = TranslateExpression(e.precision!);
             else precision = Expression.Constant(null, typeof(int?));
-            var call = BindCqlOperator(CqlOperator.Round, operand, precision);
+            Expression[] parameters = new[] { operand, precision };
+            var call = _operatorBinding.Bind(CqlOperator.Round, parameters);
             return call;
         }
     }

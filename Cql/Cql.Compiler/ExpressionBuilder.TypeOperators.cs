@@ -125,7 +125,8 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var source = TranslateExpression(e.source);
-                var call = BindCqlOperator(CqlOperator.Descendents, source);
+                Expression[] parameters = new[] { source };
+                var call = _operatorBinding.Bind(CqlOperator.Descendents, parameters);
                 return call;
             }
         }
@@ -141,7 +142,8 @@ namespace Hl7.Cql.Compiler
         {
             var quantity = TranslateExpression(cqe.operand![0]);
             var unit = TranslateExpression(cqe.operand![1]);
-            var call = BindCqlOperator(CqlOperator.ConvertQuantity, quantity, unit);
+            Expression[] parameters = new[] { quantity, unit };
+            var call = _operatorBinding.Bind(CqlOperator.ConvertQuantity, parameters);
             return call;
         }
 
@@ -208,7 +210,8 @@ namespace Hl7.Cql.Compiler
         protected Expression ChangeTypeToList(Elm.ToList e)
         {
             var operand = TranslateExpression(e.operand!);
-            var call = BindCqlOperator(CqlOperator.ToList, operand);
+            Expression[] parameters = new[] { operand };
+            var call = _operatorBinding.Bind(CqlOperator.ToList, parameters);
             return call;
         }
 
@@ -228,18 +231,21 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                var callSelect = BindCqlOperator(CqlOperator.Select, input, lambda);
+                Expression[] parameters = new[] { input, lambda };
+                var callSelect = _operatorBinding.Bind(CqlOperator.Select, parameters);
                 return callSelect;
             }
 
             if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                var call = BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
+                Expression[] parameters = new[] { input, Expression.Constant(correctedTo, typeof(Type)) };
+                var call = _operatorBinding.Bind(CqlOperator.Convert, parameters);
                 return call;
             }
             else
             {
-                var call = BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
+                Expression[] parameters = new[] { input, Expression.Constant(outputType, typeof(Type)) };
+                var call = _operatorBinding.Bind(CqlOperator.Convert, parameters);
                 return call;
             }
         }

@@ -12,11 +12,6 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class LibraryDefinitionsBuilder
 {
-    /// <summary>
-    /// The context parameter for expressions.
-    /// </summary>
-    public static readonly ParameterExpression ContextParameter = Expression.Parameter(typeof(CqlContext), "context");
-
     private readonly TypeManager _typeManager;
     private readonly TypeConverter _typeConverter;
     private readonly ILoggerFactory _loggerFactory;

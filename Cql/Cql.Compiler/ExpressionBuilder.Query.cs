@@ -82,10 +82,12 @@ internal partial class ExpressionBuilder
                     {
                         var selectManyLambda = WithToSelectManyBody(scopeParameter, relationship);
 
-                        var selectManyCall = BindCqlOperator(CqlOperator.SelectMany, @return, selectManyLambda);
+                        Expression[] parameters = new[] { @return, selectManyLambda };
+                        var selectManyCall = _operatorBinding.Bind(CqlOperator.SelectMany, parameters);
                         if (relationship is Without)
                         {
-                            var callExcept = BindCqlOperator(CqlOperator.ListExcept, @return, selectManyCall);
+                            Expression[] parameters1 = new[] { @return, selectManyCall };
+                            var callExcept = _operatorBinding.Bind(CqlOperator.ListExcept, parameters1);
                             @return = callExcept;
                         }
                         else
@@ -112,7 +114,8 @@ internal partial class ExpressionBuilder
                 {
                     var selectBody = TranslateExpression(query.@return.expression!);
                     var selectLambda = Expression.Lambda(selectBody, scopeParameter);
-                    var callSelect = BindCqlOperator(CqlOperator.Select, @return, selectLambda);
+                    Expression[] parameters = new[] { @return, selectLambda };
+                    var callSelect = _operatorBinding.Bind(CqlOperator.Select, parameters);
                     @return = callSelect;
                 }
             }
@@ -203,7 +206,8 @@ internal partial class ExpressionBuilder
 
     private Expression DemoteSourceListToSingleton(Expression source)
     {
-        source = BindCqlOperator(CqlOperator.Single, source);
+        Expression[] parameters = new[] { source };
+        source = _operatorBinding.Bind(CqlOperator.Single, parameters);
         return source;
     }
 
@@ -316,7 +320,7 @@ internal partial class ExpressionBuilder
         if (sources.Length == 1)
             return (promotedSourceExpressions[0], sourcesPreviouslySingletons);
 
-        var crossJoinedValueTupleResultsExpression = BindCqlOperator(CqlOperator.CrossJoin, promotedSourceExpressions);
+        var crossJoinedValueTupleResultsExpression = _operatorBinding.Bind(CqlOperator.CrossJoin, promotedSourceExpressions);
 
         // Select the IEnumerable<> of value-tuples above into IEnumerable<> of our custom tuple
         // a) Create the custom tuple
@@ -375,10 +379,8 @@ internal partial class ExpressionBuilder
             return copyProps;
         }
 
-        var crossJoinedCqlTupleResultsExpression = BindCqlOperator(
-            CqlOperator.Select,
-            crossJoinedValueTupleResultsExpression,
-            selectExpression);
+        Expression[] parameters = new[] { crossJoinedValueTupleResultsExpression, selectExpression };
+        var crossJoinedCqlTupleResultsExpression = _operatorBinding.Bind(CqlOperator.Select, parameters);
 
         return (crossJoinedCqlTupleResultsExpression, sourcesPreviouslySingletons)!;
     }
@@ -410,7 +412,8 @@ internal partial class ExpressionBuilder
                                 var sortMemberExpression = TranslateExpression(byExpression.expression);
                                 var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
                                 var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                                var sort = BindCqlOperator(CqlOperator.SortBy, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                                Expression[] parameters = new[] { @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)) };
+                                var sort = _operatorBinding.Bind(CqlOperator.SortBy, parameters);
                                 return sort;
                             }
                         }
@@ -427,12 +430,14 @@ internal partial class ExpressionBuilder
                             var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
                             var lambdaBody = Expression.Convert(pathExpression, typeof(object));
                             var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                            var sort = BindCqlOperator(CqlOperator.SortBy, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                            Expression[] parameters = new[] { @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)) };
+                            var sort = _operatorBinding.Bind(CqlOperator.SortBy, parameters);
                             return sort;
                         }
                         default:
                         {
-                            var sort = BindCqlOperator(CqlOperator.ListSort, @return, Expression.Constant(order, typeof(ListSortDirection)));
+                            Expression[] parameters = new[] { @return, Expression.Constant(order, typeof(ListSortDirection)) };
+                            var sort = _operatorBinding.Bind(CqlOperator.ListSort, parameters);
                             return sort;
                         }
                     }
@@ -482,12 +487,14 @@ internal partial class ExpressionBuilder
             var suchThatBody = TranslateExpression(with.suchThat);
 
             var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-            var callWhereOnSource = BindCqlOperator(CqlOperator.Where, source, whereLambda);
+            Expression[] parameters = new[] { source, whereLambda };
+            var callWhereOnSource = _operatorBinding.Bind(CqlOperator.Where, parameters);
 
             var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
             var selectBody = rootScopeParameter; // P => E
             var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-            var callSelectOnWhere = BindCqlOperator(CqlOperator.Select, callWhereOnSource, selectLambda);
+            Expression[] parameters1 = new[] { callWhereOnSource, selectLambda };
+            var callSelectOnWhere = _operatorBinding.Bind(CqlOperator.Select, parameters1);
             var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
             return selectManyLambda;
 
@@ -504,7 +511,8 @@ internal partial class ExpressionBuilder
         {
             var whereBody = TranslateExpression(queryWhere);
             var whereLambda = Expression.Lambda(whereBody, sourceParameter);
-            var callWhere = BindCqlOperator(CqlOperator.Where, @return, whereLambda);
+            Expression[] parameters = new[] { @return, whereLambda };
+            var callWhere = _operatorBinding.Bind(CqlOperator.Where, parameters);
             return callWhere;
         }
     }
@@ -538,8 +546,8 @@ internal partial class ExpressionBuilder
                 var startingValue = TranslateExpression(queryAggregate.starting!);
                 var lambdaBody = TranslateExpression(queryAggregate.expression!);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
-                var aggregateCall = BindCqlOperator(CqlOperator.Aggregate,
-                    @return, lambda, startingValue);
+                Expression[] parameters = new[] { @return, lambda, startingValue };
+                var aggregateCall = _operatorBinding.Bind(CqlOperator.Aggregate, parameters);
                 return aggregateCall;
             }
         }
