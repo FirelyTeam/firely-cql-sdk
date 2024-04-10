@@ -15,13 +15,14 @@ using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Operators;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
@@ -34,44 +35,27 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     partial class ExpressionBuilder
     {
-        // Yeah, hardwired to FHIR 4.0.1 for now.
-        private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
-
         private readonly OperatorBinding _operatorBinding;
         private readonly TypeManager _typeManager;
         private readonly ILogger<ExpressionBuilder> _logger;
         private readonly TypeConverter _typeConverter;
         private readonly TypeResolver _typeResolver;
 
-        private readonly Stack<Elm.Element> _elementStack;
+        private ImmutableStack<Element> _elementStack;
         private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
         private readonly LibraryExpressionBuilder _libraryContext;
-        private readonly Dictionary<string, DefinitionDictionary<LambdaExpression>> _libraries;
 
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private readonly IDictionary<string, (Expression, Elm.Element)> _scopes;
-
-        /// <summary>
-        /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
-        /// this value is the implied alias name that should qualify it, e.g. from DRR-E 2022:
-        /// <code>
-        ///     "PHQ-9 Assessments" PHQ
-        ///      where ...
-        ///      sort by date from start of FHIRBase."Normalize Interval"(effective) asc
-        /// </code>
-        /// The use of "effective" here is unqualified and is implied to be PHQ.effective
-        /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
-        /// </summary>
-        private readonly string? _impliedAlias;
+        private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack;
 
         /// <summary>
         /// Parameters for function definitions.
         /// </summary>
         private readonly Dictionary<string, ParameterExpression> _operands;
 
-        private readonly IList<IExpressionMutator> _expressionMutators;
+        private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators; // Not used yet, since it's always empty
 
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
@@ -103,41 +87,11 @@ namespace Hl7.Cql.Compiler
             _libraryContext = libContext;
 
             // Internal State
-            _elementStack = new Stack<Element>();
-            _impliedAlias = null;
+            _elementStack = ImmutableStack<Element>.Empty;
             _operands = new Dictionary<string, ParameterExpression>();
-            _libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopes = new Dictionary<string, (Expression, Elm.Element)>();
-            _expressionMutators = new List<IExpressionMutator>();
+            _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
+            _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
-        }
-
-        private ExpressionBuilder(
-            ExpressionBuilder source)
-        {
-            _elementStack = new Stack<Elm.Element>(source._elementStack);
-            _libraryDefinitionBuilderSettings = source._libraryDefinitionBuilderSettings;
-            _operatorBinding = source._operatorBinding;
-            _impliedAlias = source._impliedAlias;
-            _operands = source._operands;
-            _libraries = source._libraries;
-            _scopes = source._scopes;
-            _libraryContext = source._libraryContext;
-            _typeManager = source._typeManager;
-            _logger = source._logger;
-            _expressionMutators = source._expressionMutators;
-            _customImplementations = source._customImplementations;
-            _typeConverter = source._typeConverter;
-            _typeResolver = _typeManager.Resolver;
-        }
-
-        private ExpressionBuilder(
-            ExpressionBuilder outer,
-            string? impliedAlias,
-            IDictionary<string, (Expression, Elm.Element)> scopes) : this(outer)
-        {
-            _scopes = scopes;
-            _impliedAlias = impliedAlias;
         }
 
         internal Expression TranslateExpression(Element op) =>
@@ -219,10 +173,9 @@ namespace Hl7.Cql.Compiler
                             StdDev stddev              => AggregateOperator(CqlOperator.StdDev, stddev),
                             Variance variance          => AggregateOperator(CqlOperator.Variance, variance),
 
-                            Negate neg                 => neg.operand is
-                                Elm.Literal literal
-                                ? NegateLiteral(neg, literal)
-                                : UnaryOperator(CqlOperator.Negate, neg),
+                            Negate neg                 => neg.operand is Literal literal
+                                                              ? NegateLiteral(neg, literal)
+                                                              : UnaryOperator(CqlOperator.Negate, neg),
 
                             TimeOfDay tod              => BindCqlOperator(CqlOperator.TimeOfDay),
                             Today today                => BindCqlOperator(CqlOperator.Today),
@@ -325,7 +278,6 @@ namespace Hl7.Cql.Compiler
                             Substring e                => Substring(e),
                             Starts starts              => Starts(starts),
                             Time time                  => Time(time),
-
                             Elm.Tuple tu               => Tuple(tu),
                             Union ue                   => Union(ue),
                             ValueSetRef vsre           => ValueSetRef(vsre),
@@ -336,6 +288,12 @@ namespace Hl7.Cql.Compiler
                         return expression!;
                     }
                 });
+
+        protected Expression? Mutate(Element op, Expression? expression) =>
+            _expressionMutators.Aggregate(
+                expression,
+                (current, visitor) =>
+                    visitor.Mutate(current!, op, this));
 
         protected Expression BindCqlOperator(CqlOperator @operator, params Expression[] parameters)
             => _operatorBinding.Bind(@operator, LibraryDefinitionsBuilder.ContextParameter, parameters);
@@ -382,9 +340,9 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? IdentifierRef(IdentifierRef ire)
         {
-            if (string.Equals("$this", ire.name) && _impliedAlias != null)
+            if (string.Equals("$this", ire.name) && ImpliedAlias != null)
             {
-                var scopeExpression = GetScopeExpression(_impliedAlias!);
+                var scopeExpression = GetScopeExpression(ImpliedAlias!);
                 return scopeExpression;
             }
             var pe = new Property
@@ -394,7 +352,7 @@ namespace Hl7.Cql.Compiler
                 localId = ire.localId,
                 locator = ire.locator,
                 path = ire.name,
-                scope = _impliedAlias!,
+                scope = ImpliedAlias!,
             };
             var prop = Property(pe);
             return prop;
@@ -476,7 +434,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeFor(listTypeSpecifier.elementType);
                 var elements = list.element?
                     .Select(ele => TranslateExpression(ele))
-                    .ToArray() ?? new Expression[0];
+                    .ToArray() ?? [];
                 if (!elementType.IsNullable() && elements.Any(exp => exp.Type.IsNullable()))
                 {
                     for (int i = 0; i < elements.Length; i++)
@@ -552,11 +510,10 @@ namespace Hl7.Cql.Compiler
                         return enumValueValue;
                     else if (enumValueValue.Type == typeof(string))
                     {
-                        var parseMethod = typeof(Enum).GetMethods()
-                            .Where(m =>
-                                m.Name == nameof(Enum.Parse)
-                                && m.GetParameters().Length == 3)
-                            .Single();
+                        var parseMethod = typeof(Enum)
+                            .GetMethods()
+                            .Single(m => m.Name == nameof(Enum.Parse)
+                                         && m.GetParameters().Length == 3);
                         var callEnumParse = Expression.Call(parseMethod, Expression.Constant(instanceType), enumValueValue, Expression.Constant(true));
                         return callEnumParse;
                     }

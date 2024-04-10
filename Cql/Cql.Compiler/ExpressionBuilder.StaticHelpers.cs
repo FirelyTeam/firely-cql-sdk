@@ -6,6 +6,7 @@ using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -18,6 +19,9 @@ namespace Hl7.Cql.Compiler;
 
 partial class ExpressionBuilder
 {
+    // Yeah, hardwired to FHIR 4.0.1 for now.
+    private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
+
 
     private static readonly Dictionary<(Type, Type), Type> KnownErrors = new()
     {
@@ -229,5 +233,21 @@ partial class ExpressionBuilder
         return false;
     }
 
+    protected interface IPopToken : IDisposable
+    {
+        void Pop();
+    }
 
+    private readonly record struct EmptyDisposable : IPopToken
+    {
+        public static readonly EmptyDisposable Instance = new();
+
+        void IDisposable.Dispose()
+        {
+        }
+
+        void IPopToken.Pop()
+        {
+        }
+    }
 }

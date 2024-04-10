@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
@@ -53,5 +54,19 @@ internal static class EnumerableExtensions
             throw new ArgumentException($"Source array must have '{sourceLength}' element(s), but has '{i}'.");
 
         return array;
+    }
+
+    public static bool TryPeek<T>(
+        this IImmutableStack<T> stack,
+        out T value)
+    {
+        if (stack.IsEmpty)
+        {
+            value = default;
+            return false;
+        }
+
+        value = stack.Peek();
+        return true;
     }
 }
