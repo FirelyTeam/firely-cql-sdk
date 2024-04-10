@@ -317,27 +317,23 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 	private IEnumerable<Encounter> Qualifying_Encounters_With_Hypoglycemic_Medication_Value()
 	{
 		var a_ = this.Qualifying_Encounters_With_Hospitalization_Period();
-		IEnumerable<MedicationAdministration> b_(Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW _EncounterWithHospitalization)
-		{
-			var i_ = this.Hypoglycemics_Treatment_Medications();
-			var j_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(i_, null);
-			var l_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(i_, null);
-			var m_ = context.Operators.ListUnion<MedicationAdministration>(j_, l_);
-
-			return m_;
-		};
-		Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW c_(Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW _EncounterWithHospitalization, MedicationAdministration _HypoglycemicMedication)
+		var b_ = this.Hypoglycemics_Treatment_Medications();
+		var c_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(b_, null);
+		var e_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(b_, null);
+		var f_ = context.Operators.ListUnion<MedicationAdministration>(c_, e_);
+		var g_ = context.Operators.CrossJoin<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, MedicationAdministration>(a_, f_);
+		Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW h_(ValueTuple<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW,MedicationAdministration> _valueTuple)
 		{
 			var n_ = new Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW
 			{
-				EncounterWithHospitalization = _EncounterWithHospitalization,
-				HypoglycemicMedication = _HypoglycemicMedication,
+				EncounterWithHospitalization = _valueTuple.Item1,
+				HypoglycemicMedication = _valueTuple.Item2,
 			};
 
 			return n_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, MedicationAdministration, Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW tuple_ebceideejujlqkcdbhkcqvihw)
+		var i_ = context.Operators.SelectOrNull<ValueTuple<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW,MedicationAdministration>, Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(g_, h_);
+		bool? j_(Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW tuple_ebceideejujlqkcdbhkcqvihw)
 		{
 			var o_ = context.Operators.Convert<string>(tuple_ebceideejujlqkcdbhkcqvihw.HypoglycemicMedication?.StatusElement);
 			var p_ = context.Operators.Equal(o_, "completed");
@@ -347,12 +343,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return s_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(d_, e_);
-		Encounter g_(Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW tuple_ebceideejujlqkcdbhkcqvihw) => 
+		var k_ = context.Operators.WhereOrNull<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(i_, j_);
+		Encounter l_(Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW tuple_ebceideejujlqkcdbhkcqvihw) => 
 			tuple_ebceideejujlqkcdbhkcqvihw.EncounterWithHospitalization?.encounter;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW, Encounter>(f_, g_);
+		var m_ = context.Operators.SelectOrNull<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW, Encounter>(k_, l_);
 
-		return h_;
+		return m_;
 	}
 
     [CqlDeclaration("Qualifying Encounters With Hypoglycemic Medication")]

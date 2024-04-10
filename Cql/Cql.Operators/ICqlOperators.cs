@@ -269,7 +269,7 @@ namespace Hl7.Cql.Operators
         bool? IntervalIncludedIn<T>(CqlInterval<T>? smaller, CqlInterval<T>? larger, string precision);
         bool? IntervalIncludesElement<T>(CqlInterval<T>? interval, T t, string? precision);
         bool? IntervalIncludesInterval<T>(CqlInterval<T>? larger, CqlInterval<T>? smaller, string precision);
-        CqlInterval<T>? IntervalIntersectsInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right);
+        CqlInterval<T>? IntervalIntersect<T>(CqlInterval<T>? left, CqlInterval<T>? right);
         bool? IntervalProperlyIncludedInInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string precision);
         bool? IntervalProperlyIncludesElement(CqlInterval<CqlDate>? left, CqlDate right, string precision);
         bool? IntervalProperlyIncludesElement(CqlInterval<CqlDateTime>? left, CqlDateTime right, string precision);
@@ -313,7 +313,7 @@ namespace Hl7.Cql.Operators
         bool? ListIncludedInList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         bool? ListIncludesElement<T>(IEnumerable<T>? left, T right);
         bool? ListIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
-        int? ListIndex<T>(IEnumerable<T>? list, T element);
+        int? ListIndexOf<T>(IEnumerable<T>? list, T element);
         IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         int? ListLength<T>(IEnumerable<T> list);
         bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
@@ -451,6 +451,56 @@ namespace Hl7.Cql.Operators
         bool? SamePrecision(CqlTime? left, CqlTime? right);
         IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
         IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
+
+        IEnumerable<(T1, T2)> CrossJoin<T1, T2>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2);
+
+        IEnumerable<(T1, T2, T3)> CrossJoin<T1, T2, T3>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3);
+
+        IEnumerable<(T1, T2, T3, T4)> CrossJoin<T1, T2, T3, T4>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4);
+
+        IEnumerable<(T1, T2, T3, T4, T5)> CrossJoin<T1, T2, T3, T4, T5>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5);
+
+        IEnumerable<(T1, T2, T3, T4, T5, T6)> CrossJoin<T1, T2, T3, T4, T5, T6>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5,
+            IEnumerable<T6>? source6);
+
+        IEnumerable<(T1, T2, T3, T4, T5, T6, T7)> CrossJoin<T1, T2, T3, T4, T5, T6, T7>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5,
+            IEnumerable<T6>? source6,
+            IEnumerable<T7>? source7);
+
+        IEnumerable<(T1, T2, T3, T4, T5, T6, T7, T8)> CrossJoin<T1, T2, T3, T4, T5, T6, T7, T8>(
+            IEnumerable<T1>? source1,
+            IEnumerable<T2>? source2,
+            IEnumerable<T3>? source3,
+            IEnumerable<T4>? source4,
+            IEnumerable<T5>? source5,
+            IEnumerable<T6>? source6,
+            IEnumerable<T7>? source7,
+            IEnumerable<T8>? source8);
+
         IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select);
         T? SingleOrNull<T>(IEnumerable<T>? source);
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);

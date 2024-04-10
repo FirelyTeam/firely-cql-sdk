@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 
@@ -186,37 +187,46 @@ internal partial class ExpressionBuilder
 
     private Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, Func<Type, Type>? changeType)
     {
-        var elementInfo = elements!
-            .ToDictionary(el => el.name, el =>
-            {
-                Type? type;
-                if (el.elementType != null)
-                    type = TypeFor(el.elementType!);
-                else
+        Dictionary<string, Type> elementInfo = elements!
+            .ToDictionary(
+                el => el.name,
+                el =>
                 {
-                    throw this.NewExpressionBuildingException($"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
-                }
-                if (changeType != null)
-                    type = changeType(type);
-                return type;
+                    if (el.elementType == null)
+                        throw this.NewExpressionBuildingException(
+                            $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
+
+                    var type = TypeFor(el.elementType);
+                    if (changeType != null)
+                        type = changeType(type);
+
+                    return type;
+                });
+
+        return TupleTypeFor(elementInfo);
+    }
+
+    private Type TupleTypeFor(IReadOnlyDictionary<string, Type> elementInfo)
+    {
+        var normalizedProperties = elementInfo
+            .SelectToArray(kvp =>
+            {
+                var propName = NormalizeIdentifier(kvp.Key);
+                var propType = kvp.Value;
+                return (propName, propType);
             });
-        var allTypes = _typeManager.TupleTypes;
-        foreach (var type in allTypes)
-        {
-            var typeIsMatch = true;
-            foreach (var kvp in elementInfo)
+
+        var matchedTupleType = _typeManager.TupleTypes
+            .FirstOrDefault(tupleType =>
             {
-                var normalizedKey = NormalizeIdentifier(kvp.Key);
-                var typeProperty = type.GetProperty(normalizedKey!);
-                if (typeProperty == null || typeProperty.PropertyType != kvp.Value)
-                {
-                    typeIsMatch = false;
-                    break;
-                }
-            }
-            if (typeIsMatch)
-                return type;
-        }
+                var isMatch = normalizedProperties
+                    .All(prop =>
+                        tupleType.GetProperty(prop.propName) is { PropertyType: { } tuplePropertyType }
+                        && tuplePropertyType == prop.propType);
+                return isMatch;
+            });
+        if (matchedTupleType != null)
+            return matchedTupleType;
 
         var typeName = $"{_typeManager.TupleTypeNamespace}.{_typeManager.TupleTypeNameFor(elementInfo)}";
 

@@ -25,7 +25,7 @@ public partial class Library
 
     internal bool IsValidated { get; private set; }
 
-    /// <exception cref="CqlException{LibraryMissingNameAndVersionError}"></exception>
+    /// <exception cref="LibraryMissingIncludeDefPathError"></exception>
     private void Validate()
     {
         if (IsValidated)
@@ -59,23 +59,31 @@ public partial class Library
     }
 
     /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="CqlException{LibraryMissingNameAndVersionError}"></exception>
-    /// <exception cref="CqlException{NotAValidLibraryFileError}"></exception>
-    public static Library? LoadFromJson(
+    /// <exception cref="CouldNotDeserializeFileError"></exception>
+    /// <exception cref="CouldNotValidateFileError"></exception>
+    /// <exception cref="LibraryMissingIncludeDefPathError"></exception>
+    public static Library LoadFromJson(
         DirectoryInfo elmDirectory,
         string lib,
         string version,
         bool validate = true)
     {
         var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
-        if (!elmFile.Exists) elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
-        return LoadFromJson(elmFile, validate);
+        if (elmFile.Exists)
+            return LoadFromJson(elmFile, validate);
+
+        var elmFile2 = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
+        if (elmFile2.Exists)
+            return LoadFromJson(elmFile2, validate);
+
+        throw new FileNotFoundException("File does not exist.", elmFile.FullName);
     }
 
     /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="CqlException{LibraryMissingNameAndVersionError}"></exception>
-    /// <exception cref="CqlException{NotAValidLibraryFileError}"></exception>
-    public static Library? LoadFromJson(
+    /// <exception cref="CouldNotDeserializeFileError"></exception>
+    /// <exception cref="CouldNotValidateFileError"></exception>
+    /// <exception cref="LibraryMissingIncludeDefPathError"></exception>
+    public static Library LoadFromJson(
         FileInfo file,
         bool validate = true)
     {
@@ -83,12 +91,12 @@ public partial class Library
             throw new FileNotFoundException("File does not exist.", file.FullName);
 
         using var stream = file.OpenRead();
-        var library = LoadFromJson(stream);
+        var library = LoadFromJson(stream, file.FullName);
         if (validate)
         {
             if (library is null)
             {
-                throw new CouldNotDeserializeFileError(file.FullName, "ELM Library").ToException();
+                throw new CouldNotDeserializeFileError(file.FullName, typeof(Library).FullName).ToException();
             }
 
             try
@@ -97,27 +105,38 @@ public partial class Library
             }
             catch (Exception e)
             {
-                throw new CouldNotValidateFileError(file.FullName, "ELM Library").ToException(e);
+                throw new CouldNotValidateFileError(file.FullName, typeof(Library).FullName).ToException(e);
             }
         }
 
         return library;
     }
 
-    /// <exception cref="ArgumentException"></exception>
-    public static Library? LoadFromJson(Stream stream) =>
-        JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
-        stream switch
+    /// <exception cref="CouldNotDeserializeFileError"></exception>
+    public static Library LoadFromJson(Stream stream, string? originalFilePath = null)
+    {
+        var library = JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions);
+        originalFilePath ??= stream switch
         {
-            FileStream fs => throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
-            _ => throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}")
+            FileStream { Name: { } name } => name,
+            _ => null,
         };
+
+        if (library is null)
+            throw new CouldNotDeserializeFileError(originalFilePath, typeof(Library).FullName).ToException();
+
+        library.OriginalFilePath = originalFilePath;
+        return library;
+    }
 
     public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =
         EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
 
     public static IComparer<Library> ComparerByNameAndVersion { get; } =
         ComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
+
+    [JsonIgnore]
+    internal string? OriginalFilePath { get; private set; }
 }
 
 internal class LibraryByNameAndVersionHashSet : HashSet<Library>

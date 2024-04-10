@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -980,8 +980,8 @@ namespace Hl7.Cql.Runtime
 
         #endregion
 
-        #region IndexOf
-        public int? ListIndex<T>(IEnumerable<T>? list, T element)
+        #region ListIndexOf
+        public int? ListIndexOf<T>(IEnumerable<T>? list, T element)
         {
             if (list == null || element == null)
                 return null;
@@ -1181,7 +1181,7 @@ namespace Hl7.Cql.Runtime
                 return null;
             else
                 return left.Union(right);
-        }            
+        }
 
         #endregion
 

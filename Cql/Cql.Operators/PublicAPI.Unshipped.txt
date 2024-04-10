@@ -121,6 +121,13 @@ Hl7.Cql.Operators.ICqlOperators.ConvertStringToTime(string? s) -> Hl7.Cql.Primit
 Hl7.Cql.Operators.ICqlOperators.ConvertTimeToString(Hl7.Cql.Primitives.CqlTime? t) -> string?
 Hl7.Cql.Operators.ICqlOperators.CountOrNull<T>(System.Collections.Generic.IEnumerable<T>? source) -> int?
 Hl7.Cql.Operators.ICqlOperators.CreateValueSetFacade(Hl7.Cql.Primitives.CqlValueSet! valueSet) -> Hl7.Cql.ValueSets.IValueSetFacade!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4, T5, T6, T7, T8>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4, System.Collections.Generic.IEnumerable<T5>? source5, System.Collections.Generic.IEnumerable<T6>? source6, System.Collections.Generic.IEnumerable<T7>? source7, System.Collections.Generic.IEnumerable<T8>? source8) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4, T5, T6, T7, T8)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4, T5, T6, T7>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4, System.Collections.Generic.IEnumerable<T5>? source5, System.Collections.Generic.IEnumerable<T6>? source6, System.Collections.Generic.IEnumerable<T7>? source7) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4, T5, T6, T7)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4, T5, T6>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4, System.Collections.Generic.IEnumerable<T5>? source5, System.Collections.Generic.IEnumerable<T6>? source6) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4, T5, T6)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4, T5>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4, System.Collections.Generic.IEnumerable<T5>? source5) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4, T5)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3) -> System.Collections.Generic.IEnumerable<(T1, T2, T3)>!
+Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2) -> System.Collections.Generic.IEnumerable<(T1, T2)>!
 Hl7.Cql.Operators.ICqlOperators.Date(int? year, int? month, int? day) -> Hl7.Cql.Primitives.CqlDate?
 Hl7.Cql.Operators.ICqlOperators.DateFrom(Hl7.Cql.Primitives.CqlDateTime? argument) -> Hl7.Cql.Primitives.CqlDate?
 Hl7.Cql.Operators.ICqlOperators.DateTime(int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, decimal? offset) -> Hl7.Cql.Primitives.CqlDateTime?
@@ -251,7 +258,7 @@ Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<lo
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludedIn<T>(Hl7.Cql.Primitives.CqlInterval<T>? smaller, Hl7.Cql.Primitives.CqlInterval<T>? larger, string! precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludesElement<T>(Hl7.Cql.Primitives.CqlInterval<T>? interval, T t, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludesInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? larger, Hl7.Cql.Primitives.CqlInterval<T>? smaller, string! precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalIntersectsInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right) -> Hl7.Cql.Primitives.CqlInterval<T>?
+Hl7.Cql.Operators.ICqlOperators.IntervalIntersect<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right) -> Hl7.Cql.Primitives.CqlInterval<T>?
 Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludedInInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right, string! precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate!>? left, Hl7.Cql.Primitives.CqlDate! right, string! precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime!>? left, Hl7.Cql.Primitives.CqlDateTime! right, string! precision) -> bool?
@@ -295,7 +302,7 @@ Hl7.Cql.Operators.ICqlOperators.ListExcept<T>(System.Collections.Generic.IEnumer
 Hl7.Cql.Operators.ICqlOperators.ListIncludedInList<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>! right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListIncludesElement<T>(System.Collections.Generic.IEnumerable<T>? left, T right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListIncludesList<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>! right) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ListIndex<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
+Hl7.Cql.Operators.ICqlOperators.ListIndexOf<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
 Hl7.Cql.Operators.ICqlOperators.ListIntersect<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.ListLength<T>(System.Collections.Generic.IEnumerable<T>! list) -> int?
 Hl7.Cql.Operators.ICqlOperators.ListNotEqual<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?

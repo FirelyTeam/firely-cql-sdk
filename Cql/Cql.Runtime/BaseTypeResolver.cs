@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
@@ -124,7 +124,7 @@ namespace Hl7.Cql.Runtime
         public override Type? ResolveType(string typeSpecifier)
         {
             var correctedTypeSpecifier = CorrectQiCoreExtensionTypes(typeSpecifier);
-            
+
             if (Types.TryGetValue(correctedTypeSpecifier, out var type))
                 return type;
             else throw new ArgumentException($"Type {correctedTypeSpecifier} is not bound", nameof(typeSpecifier));
@@ -151,24 +151,24 @@ namespace Hl7.Cql.Runtime
         }
 
         /// <inheritdoc/>
-        public override Type? GetListElementType(Type type, bool @throw = false)
+        public override Type? GetListElementType(Type type, bool throwError = false)
         {
             if (type.IsGenericType)
             {
                 var genericTypeDefinition = type.GetGenericTypeDefinition();
-                if (genericTypeDefinition == typeof(IEnumerable<>) 
-                     || genericTypeDefinition == typeof(List<>) 
+                if (genericTypeDefinition == typeof(IEnumerable<>)
+                     || genericTypeDefinition == typeof(List<>)
                      || genericTypeDefinition == typeof(ICollection<>)
-                ) 
+                )
                     return type.GetGenericArguments()[0];
 
                 // handle LINQ cast iterators, where iterators, selects, etc.
-                if (genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable)) 
+                if (genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))
                     && genericTypeDefinition.Namespace == "System.Linq"
                     && type.GenericTypeArguments.Length == 1)
                     return type.GetGenericArguments()[0];
 
-                else if (@throw) throw new NotSupportedException();
+                else if (throwError) throw new NotSupportedException();
                 else return null;
             }
             else if (type.IsArray)
@@ -182,7 +182,7 @@ namespace Hl7.Cql.Runtime
                     return GetListElementType(enumerableInterface);
             }
 
-            if (@throw)
+            if (throwError)
                 throw new NotSupportedException();
             else return null;
         }

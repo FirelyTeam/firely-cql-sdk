@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -20,7 +20,7 @@ namespace Hl7.Cql.Compiler
             var operand = TranslateExpression(e.operand![0]!);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
-                var elementType = _typeManager.Resolver.GetListElementType(operand.Type, @throw: true)!;
+                var elementType = _typeManager.Resolver.GetListElementType(operand.Type, throwError: true)!;
                 if (IsInterval(elementType, out var pointType))
                 {
                     var precision = Expression.Constant(null, typeof(string));
@@ -41,7 +41,7 @@ namespace Hl7.Cql.Compiler
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var elementType = _typeManager.Resolver.GetListElementType(left.Type, @throw: true)!;
+                var elementType = _typeManager.Resolver.GetListElementType(left.Type, throwError: true)!;
                 if (elementType != right.Type)
                 {
                     if (elementType.IsAssignableFrom(right.Type))

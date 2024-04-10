@@ -1,6 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+using System.Diagnostics;
 using System.Globalization;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
@@ -12,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 
 namespace Hl7.Cql.Packager;
 
@@ -90,20 +94,41 @@ public class Program
     {
         logging.ClearProviders();
 
-        logging.AddFilter(level => level >= LogLevel.Trace);
+        var minLogLevel = Debugger.IsAttached ? LogLevel.Trace : LogLevel.Information;
+        logging.AddFilter(level => level >= minLogLevel);
+
         logging.AddCleanConsole(opt =>
         {
             // opt.NoColor = true;
         });
 
         var logFile = Path.Combine(".", "build.log");
+        File.Delete(logFile);
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .WriteTo
-            .File(logFile, formatProvider: CultureInfo.InvariantCulture)
+            .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
+            .WriteTo.File(
+                logFile,
+                outputTemplate: "{Level:u4}: {Message:lj}{NewLine}{Exception}",
+                formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
         logging.AddSerilog();
     }
+
+    private static LogEventLevel? MapToSeriLogLogEventLevel(LogLevel logLevel) =>
+        logLevel switch
+        {
+            // @formatter: off
+            /* 0 */ LogLevel.Trace       => /* 0 */ LogEventLevel.Verbose,
+            /* 1 */ LogLevel.Debug       => /* 1 */ LogEventLevel.Debug,
+            /* 2 */ LogLevel.Information => /* 2 */ LogEventLevel.Information,
+            /* 3 */ LogLevel.Warning     => /* 3 */ LogEventLevel.Warning,
+            /* 4 */ LogLevel.Error       => /* 4 */ LogEventLevel.Error,
+            /* 5 */ LogLevel.Critical    => /* 5 */ LogEventLevel.Fatal,
+            /* 6 */ LogLevel.None        => /* n/a */ null,
+            // @formatter: on
+            _ => throw new UnsupportedSwitchCaseError(logLevel, typeof(LogLevel).FullName).ToException(),
+        };
 
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {

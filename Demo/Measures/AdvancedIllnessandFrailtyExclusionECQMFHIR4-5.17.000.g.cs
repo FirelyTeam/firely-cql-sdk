@@ -276,7 +276,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((LongTermFacilityEncounter?.Period as object));
 			var q_ = this.Measurement_Period();
-			var r_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(p_, q_);
+			var r_ = context.Operators.IntervalIntersect<CqlDateTime>(p_, q_);
 
 			return r_;
 		};
@@ -353,24 +353,19 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Value()
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
-		IEnumerable<Encounter> b_(Encounter _OutpatientEncounter1)
-		{
-			var i_ = this.Outpatient_Encounters_with_Advanced_Illness();
-
-			return i_;
-		};
-		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe c_(Encounter _OutpatientEncounter1, Encounter _OutpatientEncounter2)
+		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
+		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _valueTuple)
 		{
 			var j_ = new Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe
 			{
-				OutpatientEncounter1 = _OutpatientEncounter1,
-				OutpatientEncounter2 = _OutpatientEncounter2,
+				OutpatientEncounter1 = _valueTuple.Item1,
+				OutpatientEncounter2 = _valueTuple.Item2,
 			};
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Encounter, Encounter, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
+		bool? f_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var k_ = FHIRHelpers_4_0_001.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
 			var l_ = context.Operators.End(k_);
@@ -382,12 +377,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return q_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(d_, e_);
-		Encounter g_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
+		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
+		Encounter h_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(f_, g_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
 
-		return h_;
+		return i_;
 	}
 
     [CqlDeclaration("Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]
@@ -409,24 +404,19 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods_Value()
 	{
 		var a_ = this.Long_Term_Care_Overlapping_Periods();
-		IEnumerable<CqlInterval<CqlDateTime>> b_(CqlInterval<CqlDateTime> _LTCPeriod1)
-		{
-			var i_ = this.Long_Term_Care_Overlapping_Periods();
-
-			return i_;
-		};
-		Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK c_(CqlInterval<CqlDateTime> _LTCPeriod1, CqlInterval<CqlDateTime> _LTCPeriod2)
+		var c_ = context.Operators.CrossJoin<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, a_);
+		Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK d_(ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>> _valueTuple)
 		{
 			var j_ = new Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK
 			{
-				LTCPeriod1 = _LTCPeriod1,
-				LTCPeriod2 = _LTCPeriod2,
+				LTCPeriod1 = _valueTuple.Item1,
+				LTCPeriod2 = _valueTuple.Item2,
 			};
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>, Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(c_, d_);
+		bool? f_(Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
 		{
 			var k_ = context.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
 			var l_ = context.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod2);
@@ -440,8 +430,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return v_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(d_, e_);
-		CqlInterval<CqlDateTime> g_(Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
+		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(e_, f_);
+		CqlInterval<CqlDateTime> h_(Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
 		{
 			var w_ = context.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
 			var x_ = context.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod2);
@@ -449,9 +439,9 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return y_;
 		};
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(f_, g_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(g_, h_);
 
-		return h_;
+		return i_;
 	}
 
     [CqlDeclaration("Long Term Care Adjacent Periods")]

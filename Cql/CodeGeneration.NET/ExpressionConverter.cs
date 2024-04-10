@@ -616,7 +616,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             _ => throw new NotSupportedException($"Don't know how to convert operator {nodeType} into C#."),
         };
 
-        private static string IndentString(int indent) => new(Enumerable.Repeat('\t', indent).ToArray());
+        private static string IndentString(int indent) => new('\t', indent);
 
         private static string PrettyMethodName(MethodBase method)
         {

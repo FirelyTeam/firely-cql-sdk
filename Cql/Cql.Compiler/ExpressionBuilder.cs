@@ -102,178 +102,180 @@ namespace Hl7.Cql.Compiler
                     {
                         Expression? expression = op switch
                         {
-                            Abs abs => Abs(abs),
-                            Add add => Add(add),
-                            After after => After(after),
-                            AliasRef ar => AliasRef(ar),
-                            AllTrue alt => AllTrue(alt),
-                            And and => And(and),
-                            As @as => As(@as),
-                            AnyTrue ate => AnyTrue(ate),
-                            AnyInValueSet avs => AnyInValueSet(avs),
-                            Avg avg => Avg(avg),
-                            Before before => Before(before),
-                            CalculateAgeAt caa => CalculateAgeAt(caa),
-                            CalculateAge ca => CalculateAge(ca),
-                            Case ce => Case(ce),
-                            Ceiling ceil => Ceiling(ceil),
-                            Coalesce cle => Coalesce(cle),
-                            CodeRef cre => CodeRef(cre),
-                            CodeSystemRef csr => CodeSystemRef(csr),
-                            Collapse col => Collapse(col),
-                            Combine com => Combine(com),
-                            Concatenate cctn => Concatenate(cctn),
-                            ConceptRef cr => ConceptRef(cr),
-                            Contains ct => Contains(ct),
-                            ConvertQuantity cqe => ConvertQuantity(cqe),
-                            ConvertsToBoolean ce => ConvertsToBoolean(ce),
-                            ConvertsToDate ce => ConvertsToDate(ce),
-                            ConvertsToDateTime ce => ConvertsToDateTime(ce),
-                            ConvertsToDecimal ce => ConvertsToDecimal(ce),
-                            ConvertsToLong ce => ConvertsToLong(ce),
-                            ConvertsToInteger ce => ConvertsToInteger(ce),
-                            ConvertsToQuantity ce => ConvertsToQuantity(ce),
-                            ConvertsToString ce => ConvertsToString(ce),
-                            ConvertsToTime ce => ConvertsToTime(ce),
-                            Count ce => Count(ce),
-                            DateFrom dfe => DateFrom(dfe),
-                            Elm.DateTime dt => DateTime(dt),
-                            Date d => Date(d),
+                            //@formatter:off
+                            Abs abs                    => Abs(abs),
+                            Add add                    => Add(add),
+                            After after                => After(after),
+                            AliasRef ar                => AliasRef(ar),
+                            AllTrue alt                => AllTrue(alt),
+                            And and                    => And(and),
+                            As @as                     => As(@as),
+                            AnyTrue ate                => AnyTrue(ate),
+                            AnyInValueSet avs          => AnyInValueSet(avs),
+                            Avg avg                    => Avg(avg),
+                            Before before              => Before(before),
+                            CalculateAgeAt caa         => CalculateAgeAt(caa),
+                            CalculateAge ca            => CalculateAge(ca),
+                            Case ce                    => Case(ce),
+                            Ceiling ceil               => Ceiling(ceil),
+                            Coalesce cle               => Coalesce(cle),
+                            CodeRef cre                => CodeRef(cre),
+                            CodeSystemRef csr          => CodeSystemRef(csr),
+                            Collapse col               => Collapse(col),
+                            Combine com                => Combine(com),
+                            Concatenate cctn           => Concatenate(cctn),
+                            ConceptRef cr              => ConceptRef(cr),
+                            Contains ct                => Contains(ct),
+                            ConvertQuantity cqe        => ConvertQuantity(cqe),
+                            ConvertsToBoolean ce       => ConvertsToBoolean(ce),
+                            ConvertsToDate ce          => ConvertsToDate(ce),
+                            ConvertsToDateTime ce      => ConvertsToDateTime(ce),
+                            ConvertsToDecimal ce       => ConvertsToDecimal(ce),
+                            ConvertsToLong ce          => ConvertsToLong(ce),
+                            ConvertsToInteger ce       => ConvertsToInteger(ce),
+                            ConvertsToQuantity ce      => ConvertsToQuantity(ce),
+                            ConvertsToString ce        => ConvertsToString(ce),
+                            ConvertsToTime ce          => ConvertsToTime(ce),
+                            Count ce                   => Count(ce),
+                            DateFrom dfe               => DateFrom(dfe),
+                            Elm.DateTime dt            => DateTime(dt),
+                            Date d                     => Date(d),
                             DateTimeComponentFrom dtcf => DateTimeComponentFrom(dtcf),
-                            Descendents desc => Descendents(desc),
-                            DifferenceBetween dbe => DifferenceBetween(dbe),
-                            Distinct distinct => Distinct(distinct),
-                            Divide divide => Divide(divide),
-                            DurationBetween dbe => DurationBetween(dbe),
-                            End e => End(e),
-                            Ends e => Ends(e),
-                            EndsWith e => EndsWith(e),
-                            Equal eq => Equal(eq),
-                            Equivalent eqv => Equivalent(eqv),
-                            Except ex => Except(ex),
-                            Exists ex => Exists(ex),
-                            Exp exe => Exp(exe),
-                            Expand expand => Expand(expand),
-                            ExpandValueSet evs => ExpandValueSet(evs),
-                            FunctionRef fre => FunctionRef(fre),
-                            ExpressionRef ere => ExpressionRef(ere),
-                            First first => First(first),
-                            Flatten fl => Flatten(fl),
-                            Floor floor => Floor(floor),
-                            GeometricMean gme => GeometricMean(gme),
-                            Greater gtr => Greater(gtr),
-                            GreaterOrEqual gtre => GreaterOrEqual(gtre),
-                            HighBoundary hb => HighBoundary(hb),
-                            IdentifierRef ire => IdentifierRef(ire),
-                            If @if => If(@if),
-                            Implies implies => Implies(implies),
-                            Includes inc => Includes(inc),
-                            IncludedIn ii => IncludedIn(ii),
-                            Indexer idx => Indexer(idx),
-                            IndexOf io => IndexOf(io),
-                            Instance ine => Instance(ine),
-                            Intersect ise => Intersect(ise),
-                            Interval ie => IntervalExpression(ie),
-                            InValueSet inv => InValueSet(inv),
-                            In @in => In(@in),
-                            Is @is => Is(@is),
-                            IsFalse isn => IsFalse(isn),
-                            IsNull isn => IsNull(isn),
-                            IsTrue isn => IsTrue(isn),
-                            Last last => Last(last),
-                            LastPositionOf lpo => LastPositionOf(lpo),
-                            Length len => Length(len),
-                            Less less => Less(less),
-                            LessOrEqual lesse => LessOrEqual(lesse),
-                            List list => List(list),
-                            Literal lit => Literal(lit),
-                            Ln ln => Ln(ln),
-                            Log log => Log(log),
-                            LowBoundary lb => LowBoundary(lb),
-                            Lower e => Lower(e),
-                            Matches e => Matches(e),
-                            Max max => Max(max),
-                            MaxValue max => MaxValue(max),
-                            Median med => Median(med),
-                            Meets meets => Meets(meets),
-                            MeetsBefore meets => MeetsBefore(meets),
-                            MeetsAfter meets => MeetsAfter(meets),
-                            Message msg => Message(msg),
-                            Min min => Min(min),
-                            MinValue min => MinValue(min),
-                            Mode mode => Mode(mode),
-                            Modulo mod => Modulo(mod),
-                            Multiply mul => Multiply(mul),
-                            Negate neg => Negate(neg),
-                            Not not => Not(not),
-                            NotEqual ne => NotEqual(ne),
-                            Now now => Now(now),
-                            Null @null => Null(@null),
-                            OperandRef ore => OperandRef(ore),
-                            Or or => Or(or),
-                            Overlaps ole => Overlaps(ole),
-                            OverlapsAfter ola => OverlapsAfter(ola),
-                            OverlapsBefore olb => OverlapsBefore(olb),
-                            ParameterRef pre => ParameterRef(pre),
-                            PointFrom pf => PointFrom(pf),
-                            PopulationStdDev pstd => PopulationStdDev(pstd),
-                            PopulationVariance pvar => PopulationVariance(pvar),
-                            PositionOf po => PositionOf(po),
-                            Power pow => Power(pow),
-                            Precision pre => Precision(pre),
-                            Predecessor prd => Predecessor(prd),
-                            Product prod => Product(prod),
-                            ProperContains pc => ProperContains(pc),
-                            ProperIn pi => ProperIn(pi),
-                            ProperIncludes pi => ProperIncludes(pi),
-                            ProperIncludedIn pie => ProperIncludedIn(pie),
-                            Property pe => Property(pe),
-                            Quantity qua => Quantity(qua),
-                            Query qe => Query(qe),
-                            QueryLetRef qlre => QueryLetRef(qlre),
-                            Ratio re => Ratio(re),
-                            ReplaceMatches e => ReplaceMatches(e),
-                            Retrieve re => Retrieve(re),
-                            Round rnd => Round(rnd),
-                            SameAs sa => SameAs(sa),
-                            SameOrAfter soa => SameOrAfter(soa),
-                            SameOrBefore sob => SameOrBefore(sob),
-                            SingletonFrom sf => SingletonFrom(sf),
-                            Slice slice => Slice(slice),
-                            Split split => Split(split),
-                            Substring e => Substring(e),
-                            Subtract sub => Subtract(sub),
-                            Successor suc => Successor(suc),
-                            Sum sum => Sum(sum),
-                            Starts starts => Starts(starts),
-                            Start start => Start(start),
-                            StartsWith e => StartsWith(e),
-                            StdDev stddev => StdDev(stddev),
-                            Time time => Time(time),
-                            TimeOfDay tod => TimeOfDay(tod),
-                            TimezoneOffsetFrom tofe => TimezoneOffsetFrom(tofe),
-                            ToBoolean e => ToBoolean(e),
-                            ToConcept tc => ToConcept(tc),
-                            ToDateTime tdte => ToDateTime(tdte),
-                            ToDate tde => ToDate(tde),
-                            Today today => Today(today),
-                            ToDecimal tde => ToDecimal(tde),
-                            ToInteger tde => ToInteger(tde),
-                            ToList tle => ToList(tle),
-                            ToLong toLong => ToLong(toLong),
-                            ToQuantity tq => ToQuantity(tq),
-                            ToString e => ToString(e),
-                            ToTime e => ToTime(e),
-                            Truncate trunc => Truncate(trunc),
-                            TruncatedDivide div => TruncatedDivide(div),
-                            Elm.Tuple tu => Tuple(tu),
-                            Union ue => Union(ue),
-                            ValueSetRef vsre => ValueSetRef(vsre),
-                            Variance variance => Variance(variance),
-                            Upper e => Upper(e),
-                            Width width => Width(width),
-                            Xor xor => Xor(xor),
-                            _ => throw this.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.")
+                            Descendents desc           => Descendents(desc),
+                            DifferenceBetween dbe      => DifferenceBetween(dbe),
+                            Distinct distinct          => Distinct(distinct),
+                            Divide divide              => Divide(divide),
+                            DurationBetween dbe        => DurationBetween(dbe),
+                            End e                      => End(e),
+                            Ends e                     => Ends(e),
+                            EndsWith e                 => EndsWith(e),
+                            Equal eq                   => Equal(eq),
+                            Equivalent eqv             => Equivalent(eqv),
+                            Except ex                  => Except(ex),
+                            Exists ex                  => Exists(ex),
+                            Exp exe                    => Exp(exe),
+                            Expand expand              => Expand(expand),
+                            ExpandValueSet evs         => ExpandValueSet(evs),
+                            FunctionRef fre            => FunctionRef(fre),
+                            ExpressionRef ere          => ExpressionRef(ere),
+                            First first                => First(first),
+                            Flatten fl                 => Flatten(fl),
+                            Floor floor                => Floor(floor),
+                            GeometricMean gme          => GeometricMean(gme),
+                            Greater gtr                => Greater(gtr),
+                            GreaterOrEqual gtre        => GreaterOrEqual(gtre),
+                            HighBoundary hb            => HighBoundary(hb),
+                            IdentifierRef ire          => IdentifierRef(ire),
+                            If @if                     => If(@if),
+                            Implies implies            => Implies(implies),
+                            Includes inc               => Includes(inc),
+                            IncludedIn ii              => IncludedIn(ii),
+                            Indexer idx                => Indexer(idx),
+                            IndexOf io                 => IndexOf(io),
+                            Instance ine               => Instance(ine),
+                            Intersect ise              => Intersect(ise),
+                            Interval ie                => IntervalExpression(ie),
+                            InValueSet inv             => InValueSet(inv),
+                            In @in                     => In(@in),
+                            Is @is                     => Is(@is),
+                            IsFalse isn                => IsFalse(isn),
+                            IsNull isn                 => IsNull(isn),
+                            IsTrue isn                 => IsTrue(isn),
+                            Last last                  => Last(last),
+                            LastPositionOf lpo         => LastPositionOf(lpo),
+                            Length len                 => Length(len),
+                            Less less                  => Less(less),
+                            LessOrEqual lesse          => LessOrEqual(lesse),
+                            List list                  => List(list),
+                            Literal lit                => Literal(lit),
+                            Ln ln                      => Ln(ln),
+                            Log log                    => Log(log),
+                            LowBoundary lb             => LowBoundary(lb),
+                            Lower e                    => Lower(e),
+                            Matches e                  => Matches(e),
+                            Max max                    => Max(max),
+                            MaxValue max               => MaxValue(max),
+                            Median med                 => Median(med),
+                            Meets meets                => Meets(meets),
+                            MeetsBefore meets          => MeetsBefore(meets),
+                            MeetsAfter meets           => MeetsAfter(meets),
+                            Message msg                => Message(msg),
+                            Min min                    => Min(min),
+                            MinValue min               => MinValue(min),
+                            Mode mode                  => Mode(mode),
+                            Modulo mod                 => Modulo(mod),
+                            Multiply mul               => Multiply(mul),
+                            Negate neg                 => Negate(neg),
+                            Not not                    => Not(not),
+                            NotEqual ne                => NotEqual(ne),
+                            Now now                    => Now(now),
+                            Null @null                 => Null(@null),
+                            OperandRef ore             => OperandRef(ore),
+                            Or or                      => Or(or),
+                            Overlaps ole               => Overlaps(ole),
+                            OverlapsAfter ola          => OverlapsAfter(ola),
+                            OverlapsBefore olb         => OverlapsBefore(olb),
+                            ParameterRef pre           => ParameterRef(pre),
+                            PointFrom pf               => PointFrom(pf),
+                            PopulationStdDev pstd      => PopulationStdDev(pstd),
+                            PopulationVariance pvar    => PopulationVariance(pvar),
+                            PositionOf po              => PositionOf(po),
+                            Power pow                  => Power(pow),
+                            Precision pre              => Precision(pre),
+                            Predecessor prd            => Predecessor(prd),
+                            Product prod               => Product(prod),
+                            ProperContains pc          => ProperContains(pc),
+                            ProperIn pi                => ProperIn(pi),
+                            ProperIncludes pi          => ProperIncludes(pi),
+                            ProperIncludedIn pie       => ProperIncludedIn(pie),
+                            Property pe                => Property(pe),
+                            Quantity qua               => Quantity(qua),
+                            Query qe                   => Query(qe),
+                            QueryLetRef qlre           => QueryLetRef(qlre),
+                            Ratio re                   => Ratio(re),
+                            ReplaceMatches e           => ReplaceMatches(e),
+                            Retrieve re                => Retrieve(re),
+                            Round rnd                  => Round(rnd),
+                            SameAs sa                  => SameAs(sa),
+                            SameOrAfter soa            => SameOrAfter(soa),
+                            SameOrBefore sob           => SameOrBefore(sob),
+                            SingletonFrom sf           => SingletonFrom(sf),
+                            Slice slice                => Slice(slice),
+                            Split split                => Split(split),
+                            Substring e                => Substring(e),
+                            Subtract sub               => Subtract(sub),
+                            Successor suc              => Successor(suc),
+                            Sum sum                    => Sum(sum),
+                            Starts starts              => Starts(starts),
+                            Start start                => Start(start),
+                            StartsWith e               => StartsWith(e),
+                            StdDev stddev              => StdDev(stddev),
+                            Time time                  => Time(time),
+                            TimeOfDay tod              => TimeOfDay(tod),
+                            TimezoneOffsetFrom tofe    => TimezoneOffsetFrom(tofe),
+                            ToBoolean e                => ToBoolean(e),
+                            ToConcept tc               => ToConcept(tc),
+                            ToDateTime tdte            => ToDateTime(tdte),
+                            ToDate tde                 => ToDate(tde),
+                            Today today                => Today(today),
+                            ToDecimal tde              => ToDecimal(tde),
+                            ToInteger tde              => ToInteger(tde),
+                            ToList tle                 => ToList(tle),
+                            ToLong toLong              => ToLong(toLong),
+                            ToQuantity tq              => ToQuantity(tq),
+                            ToString e                 => ToString(e),
+                            ToTime e                   => ToTime(e),
+                            Truncate trunc             => Truncate(trunc),
+                            TruncatedDivide div        => TruncatedDivide(div),
+                            Elm.Tuple tu               => Tuple(tu),
+                            Union ue                   => Union(ue),
+                            ValueSetRef vsre           => ValueSetRef(vsre),
+                            Variance variance          => Variance(variance),
+                            Upper e                    => Upper(e),
+                            Width width                => Width(width),
+                            Xor xor                    => Xor(xor),
+                            _                          => throw this.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.")
+                            //@formatter:om
                         };
                         expression = Mutate(op, expression);
                         return expression!;
@@ -360,6 +362,8 @@ namespace Hl7.Cql.Compiler
 
         protected bool IsOrImplementsIEnumerableOfT(Type type) => _typeManager.Resolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
+        protected Type? GetListElementType(Type type) => _typeManager.Resolver.GetListElementType(type);
+        
         protected Expression ValueSetRef(ValueSetRef valueSetRef)
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
@@ -369,7 +373,7 @@ namespace Hl7.Cql.Compiler
 
             if (IsOrImplementsIEnumerableOfT(type))
             {
-                var elementType = _typeManager.Resolver.GetListElementType(type);
+                var elementType = GetListElementType(type);
                 if (elementType != typeof(CqlCode))
                 {
                     throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");
@@ -723,8 +727,8 @@ namespace Hl7.Cql.Compiler
                 return true;
             if (IsOrImplementsIEnumerableOfT(from) && IsOrImplementsIEnumerableOfT(to))
             {
-                var fromElement = _typeManager.Resolver.GetListElementType(from, @throw: true)!;
-                var toElement = _typeManager.Resolver.GetListElementType(to, @throw: true)!;
+                var fromElement = _typeManager.Resolver.GetListElementType(from, throwError: true)!;
+                var toElement = _typeManager.Resolver.GetListElementType(to, throwError: true)!;
                 return IsConvertible(fromElement, toElement);
             }
             return false;
@@ -1031,7 +1035,7 @@ namespace Hl7.Cql.Compiler
                     else
                     {
                         var expectedType = TypeFor(op, throwIfNotFound: false);
-                        
+
                         // If we cannot determine the type from the ELM, let's try
                         // if the POCO model can help us.
                         if(expectedType == null)
@@ -1039,7 +1043,7 @@ namespace Hl7.Cql.Compiler
                             expectedType = _typeManager.Resolver.GetProperty(source.Type, path)?.PropertyType
                                 ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
                         }
-                        
+
                         var result = PropertyHelper(source, path, expectedType);
                         return result;
                     }
@@ -1363,90 +1367,6 @@ namespace Hl7.Cql.Compiler
 
                 _ => expression,
             };
-
-        private Expression CrossJoin(AliasedQuerySource[] sources, Type tupleType)
-        {
-            //var a = new int[] { 1, 2, 3 };
-            //var b = new int[] { 4, 5, 6 };
-            //var c = new int[] { 7, 8, 9 };
-
-            //var result = a
-            //    .SelectMany(_a =>
-            //        b.SelectMany(_b =>
-            //            c.Select(_c => new { _a, _b, _c, })))
-            //    .ToArray();
-            //Assert.AreEqual(27, result.Length);
-
-            //var result2 =
-            //    a.SelectMany(_a => b, (__a, _b) => new { __a, _b })
-            //        .SelectMany(ab => c, (_ab, _c) => new { _ab.__a, _ab._b, _c })
-            //            .ToArray();
-
-            if (sources.Length < 2) throw this.NewExpressionBuildingException($"This method should only be called for 2 or more query sources");
-
-            // the first pair are special as they are not working off of a partially built tuple,
-            // they are working only off of the initial selectmany parameters.
-            var first = sources[0];
-            var firstExpression = TranslateExpression(first.expression!);
-            var firstElementType = _typeManager.Resolver.GetListElementType(firstExpression.Type)!;
-            var second = sources[1];
-            var secondExpression = TranslateExpression(second.expression!);
-            var secondElementType = _typeManager.Resolver.GetListElementType(secondExpression.Type)!;
-
-            var firstLambdaParameter = Expression.Parameter(firstElementType, $"_{first.alias}");
-            var firstSelectManyParameter = Expression.Lambda(secondExpression, firstLambdaParameter);
-
-            var secondLambdaParameter = Expression.Parameter(secondElementType, $"_{second.alias}");
-            var @newTuple = Expression.New(tupleType);
-            var memberInit = Expression.MemberInit(newTuple,
-                Expression.Bind(tupleType.GetProperty(first.alias)!, firstLambdaParameter),
-                Expression.Bind(tupleType.GetProperty(second.alias)!, secondLambdaParameter));
-            var secondSelectManyParameter = Expression.Lambda(memberInit, firstLambdaParameter, secondLambdaParameter);
-
-            var callSelectMany = _operatorBinding.Bind(CqlOperator.SelectManyResults, LibraryDefinitionsBuilder.ContextParameter,
-                firstExpression,
-                firstSelectManyParameter,
-                secondSelectManyParameter);
-
-            var enumerableOfTupleType = callSelectMany.Type;
-
-            if (sources.Length > 2)
-            {
-                for (int i = 2; i < sources.Length; i++)
-                {
-                    var source = sources[i];
-
-                    var sourceExpression = TranslateExpression(source.expression!);
-                    string message = $"{sourceExpression.Type} was expected to be a list type.";
-                    var sourceElementType = _typeManager.Resolver.GetListElementType(sourceExpression.Type) ?? throw this.NewExpressionBuildingException(message);
-
-                    var parameterName = string.Join(string.Empty, sources.Take(i).Select(st => st.alias));
-                    var parameter = Expression.Parameter(tupleType, $"_{parameterName}");
-                    var p1 = Expression.Lambda(sourceExpression, parameter);
-
-                    // .SelectMany(ab => c, (ab,c) => new Tuple { x = ab.x,  y = ab.y, c = c } )
-                    var ab = Expression.Parameter(tupleType, parameterName);
-                    var c = Expression.Parameter(sourceElementType, $"_{source.alias}");
-                    var bindings = new MemberAssignment[i + 1];
-                    for (int j = 0; j < i; j++)
-                    {
-                        var prop = tupleType.GetProperty(sources[j].alias)!;
-                        bindings[j] = Expression.Bind(prop, Expression.Property(ab, prop));
-                    }
-                    bindings[i] = Expression.Bind(tupleType.GetProperty(source.alias)!, c);
-                    @newTuple = Expression.New(tupleType);
-                    memberInit = Expression.MemberInit(newTuple, bindings);
-                    var p2 = Expression.Lambda(memberInit, ab, c);
-
-                    var callAgain = _operatorBinding.Bind(CqlOperator.SelectManyResults, LibraryDefinitionsBuilder.ContextParameter,
-                        callSelectMany,
-                        p1,
-                        p2);
-                    callSelectMany = callAgain;
-                }
-            }
-            return callSelectMany;
-        }
 
         /// <summary>
         /// Implements the null propagation operator (x?.y) into (x == null ? null : x.y);

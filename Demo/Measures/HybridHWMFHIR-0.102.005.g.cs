@@ -346,25 +346,21 @@ public class HybridHWMFHIR_0_102_005
 	{
 		var a_ = this.Encounter_Inpatient();
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		IEnumerable<Coverage> c_(Encounter _InpatientEncounter)
-		{
-			var j_ = this.Medicare_payer();
-			var k_ = context.Operators.RetrieveByValueSet<Coverage>(j_, null);
-
-			return k_;
-		};
-		Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV d_(Encounter _InpatientEncounter, Coverage _Payer)
+		var c_ = this.Medicare_payer();
+		var d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, null);
+		var e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
+		Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV f_(ValueTuple<Encounter,Coverage> _valueTuple)
 		{
 			var l_ = new Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV
 			{
-				InpatientEncounter = _InpatientEncounter,
-				Payer = _Payer,
+				InpatientEncounter = _valueTuple.Item1,
+				Payer = _valueTuple.Item2,
 			};
 
 			return l_;
 		};
-		var e_ = context.Operators.SelectManyResultsOrNull<Encounter, Coverage, Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(b_, c_, d_);
-		bool? f_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv)
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Coverage>, Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
+		bool? h_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv)
 		{
 			var m_ = context.Operators.Convert<string>(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.StatusElement);
 			var n_ = context.Operators.Equal(m_, "finished");
@@ -388,12 +384,12 @@ public class HybridHWMFHIR_0_102_005
 
 			return af_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
-		Encounter h_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
+		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
+		Encounter j_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
 			tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter;
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(g_, h_);
+		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
 
-		return i_;
+		return k_;
 	}
 
     [CqlDeclaration("Inpatient Encounters")]

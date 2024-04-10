@@ -1261,7 +1261,7 @@ namespace Hl7.Cql.Runtime
 
         #region Intersect
 
-        public CqlInterval<T>? IntervalIntersectsInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right)
+        public CqlInterval<T>? IntervalIntersect<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
             if (left == null || right == null) return null;
 

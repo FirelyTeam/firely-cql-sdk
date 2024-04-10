@@ -416,24 +416,20 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Consecutive_Heart_Rates_Less_than_50_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
-		IEnumerable<Encounter> b_(Observation _HeartRate)
-		{
-			var j_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
-
-			return j_;
-		};
-		Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV c_(Observation _HeartRate, Encounter _ModerateOrSevereLVSDHFOutpatientEncounter)
+		var b_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
+		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
+		Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV d_(ValueTuple<Observation,Encounter> _valueTuple)
 		{
 			var k_ = new Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV
 			{
-				HeartRate = _HeartRate,
-				ModerateOrSevereLVSDHFOutpatientEncounter = _ModerateOrSevereLVSDHFOutpatientEncounter,
+				HeartRate = _valueTuple.Item1,
+				ModerateOrSevereLVSDHFOutpatientEncounter = _valueTuple.Item2,
 			};
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyResultsOrNull<Observation, Encounter, Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(a_, b_, c_);
-		bool? e_(Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Observation,Encounter>, Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(c_, d_);
+		bool? f_(Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_fgydjijbhixdbhjjiisjveojv.ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
 			var m_ = FHIRHelpers_4_3_000.ToValue(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Effective);
@@ -486,13 +482,13 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return ai_;
 		};
-		var f_ = context.Operators.WhereOrNull<Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(d_, e_);
-		Observation g_(Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv) => 
+		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(e_, f_);
+		Observation h_(Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv) => 
 			tuple_fgydjijbhixdbhjjiisjveojv.HeartRate;
-		var h_ = context.Operators.SelectOrNull<Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV, Observation>(f_, g_);
-		var i_ = context.Operators.ExistsInList<Observation>(h_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV, Observation>(g_, h_);
+		var j_ = context.Operators.ExistsInList<Observation>(i_);
 
-		return i_;
+		return j_;
 	}
 
     [CqlDeclaration("Has Consecutive Heart Rates Less than 50")]

@@ -42,7 +42,7 @@ namespace Hl7.Cql.Compiler
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                return _operatorBinding.Bind(CqlOperator.ElementAt, LibraryDefinitionsBuilder.ContextParameter, left, right);
+                return _operatorBinding.Bind(CqlOperator.ListElementAt, LibraryDefinitionsBuilder.ContextParameter, left, right);
             }
             else throw new NotImplementedException().WithContext(this);
         }
