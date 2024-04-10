@@ -13,6 +13,8 @@ using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Expression = System.Linq.Expressions.Expression;
 
+using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
+
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
@@ -65,7 +67,7 @@ namespace Hl7.Cql.Compiler
 
         protected IPopToken PushScopes(
             string? alias = null,
-            params KeyValuePair<string, (Expression, Elm.Element)>[] kvps)
+            params ExpressionElementPairForIdentifier[] kvps)
         {
             _impliedAliasAndScopesStack.TryPeek(out var peek);
 
