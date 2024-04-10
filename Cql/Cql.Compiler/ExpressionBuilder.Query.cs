@@ -23,12 +23,15 @@ internal partial class ExpressionBuilder
     {
         QueryDumpDebugInfoToLog(query);
 
-        Action popScopes = null!;
+        Action popTokens = null!;
 
         void PushScopes(
             string? alias = null,
-            params ExpressionElementPairForIdentifier[] kvps) =>
-            popScopes = (() => this.PushScopes(alias, kvps)) + popScopes;
+            params ExpressionElementPairForIdentifier[] kvps)
+        {
+            var popToken = this.PushScopes(alias, kvps);
+            popTokens = (() => popToken.Pop()) + popTokens;
+        }
 
         try
         {
@@ -194,7 +197,7 @@ internal partial class ExpressionBuilder
         }
         finally
         {
-            popScopes?.Invoke();
+            popTokens?.Invoke();
         }
     }
 
