@@ -223,14 +223,17 @@ namespace Hl7.Cql.Compiler
 
                 CqlOperator.CalculateAge                     => BindUnaryOperatorWithPrecision(nameof(ICqlOperators.CalculateAge), parameters[0], parameters[1]),
                 CqlOperator.Coalesce                         => Coalesce(parameters[0]),
-                CqlOperator.CrossJoin                        => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.CrossJoin), parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!), parameters),
+                CqlOperator.CrossJoin                        => CqlContextExpressions.Operators_MethodCallExpression(
+                                                                    nameof(ICqlOperators.CrossJoin),
+                                                                    parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!),
+                                                                    parameters),
                 CqlOperator.Expand                           => Expand(parameters[0], parameters[1]),
 
-                CqlOperator.Date                             => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Date), parameters[0], parameters[1], parameters[2]),
-                CqlOperator.DateTime                         => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.DateTime)!, parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7]),
+                CqlOperator.Date                             => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Date), parameters),
+                CqlOperator.DateTime                         => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.DateTime)!, parameters),
                 CqlOperator.Now                              => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Now)),
-                CqlOperator.Quantity                         => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Quantity), parameters[0], parameters[1]),
-                CqlOperator.Time                             => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Time), parameters[0], parameters[1], parameters[2], parameters[3]),
+                CqlOperator.Quantity                         => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Quantity), parameters[..2]), // Dont need the 3rd parameter
+                CqlOperator.Time                             => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Time), parameters),
                 CqlOperator.TimeOfDay                        => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.TimeOfDay)),
                 CqlOperator.Today                            => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Today)),
                 CqlOperator.Flatten                          => Flatten(parameters[0]),
@@ -239,7 +242,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.LateBoundProperty                => LateBoundProperty(parameters[0], parameters[1], parameters[2]),
                 CqlOperator.ListUnion                        => ListUnion(parameters[0], parameters[1]),
                 CqlOperator.MaximumValue                     => Maximum(parameters[0]),
-                CqlOperator.Message                          => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Message), [parameters[0].Type], parameters[0], parameters[1], parameters[2], parameters[3]),
+                CqlOperator.Message                          => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Message), [parameters[0].Type], parameters),
                 CqlOperator.MinimumValue                     => Minimum(parameters[0]),
                 CqlOperator.ResolveValueSet                  => ResolveValueSet(parameters[0]),
                 CqlOperator.Retrieve                         => Retrieve(parameters[0], parameters[1], parameters[2]),
@@ -247,7 +250,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.SelectMany                       => SelectMany(source: parameters[0], collectionSelectorLambda: parameters[1]),
                 CqlOperator.SelectManyResults                => SelectManyResults(source: parameters[0], collectionSelectorLambda: parameters[1], resultSelectorLambda: parameters[2]),
                 CqlOperator.SortBy                           => SortBy(parameters[0], parameters[1], parameters[2]),
-                CqlOperator.ToList                           => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.ToList), [parameters[0].Type], parameters[0]),
+                CqlOperator.ToList                           => CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.ToList), [parameters[0].Type], parameters),
                 CqlOperator.Where                            => Where(parameters[0], parameters[1]),
                 CqlOperator.Width                            => Width(parameters[0]),
                 CqlOperator.Ratio
@@ -456,9 +459,8 @@ namespace Hl7.Cql.Compiler
             Expression propertyName,
             Expression typeExpression)
         {
-            if (typeExpression is ConstantExpression constExpression)
+            if (typeExpression is ConstantExpression { Value: Type type })
             {
-                var type = constExpression.Value as Type;
                 if (source.Type != typeof(object))
                     source = Expression.TypeAs(source, typeof(object));
 

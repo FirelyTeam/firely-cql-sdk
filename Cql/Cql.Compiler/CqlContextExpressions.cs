@@ -32,7 +32,7 @@ internal class CqlContextExpressions
         string methodName,
         params Expression[]? arguments)
     {
-        var call = Expression.Call(Operators_PropertyExpression, methodName, [], arguments);
+        var call = Expression.Call(Operators_PropertyExpression, methodName, null, arguments);
         return call;
     }
 
