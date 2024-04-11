@@ -13,11 +13,21 @@ partial class CqlOperatorsBinding
     [Flags]
     protected enum BindOptions
     {
-        None = 0,
-        ConvertParameters = 1,
+        None                           = 0,
+
+        ConvertArguments               = BindOption_ConvertArguments,
+        ConvertArgumentGeneric         = BindOption_ConvertArguments | BindOption_Generic,
+        ConvertArgumentsGeneric2ndArg  = BindOption_ConvertArguments | BindOption_Generic | BindOption_GenericFrom2ndArg,
+
+        ReturnNullOverError            = BindOption_ReturnNullOverError,
     }
 
-    protected MethodCallExpression BindToMethod(
+    private const BindOptions BindOption_ConvertArguments    = (BindOptions)1;
+    private const BindOptions BindOption_Generic             = (BindOptions)2;
+    private const BindOptions BindOption_GenericFrom2ndArg   = (BindOptions)4;
+    private const BindOptions BindOption_ReturnNullOverError = (BindOptions)8;
+
+    protected Expression BindToMethod(
         string methodName,
         BindOptions options,
         params Expression[] arguments)
@@ -28,25 +38,46 @@ partial class CqlOperatorsBinding
             return call;
         }
 
-        if (options.HasFlag(BindOptions.ConvertParameters))
-        {
-            var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
+        var bindOptionConvertArguments   = options.HasFlag(BindOption_ConvertArguments);
+        var bindOptionGeneric            = options.HasFlag(BindOption_Generic);
+        var bindOptionGenericFrom2ndArg  = options.HasFlag(BindOption_GenericFrom2ndArg);
+        var bindOptionReturnNullOverError= options.HasFlag(BindOption_ReturnNullOverError);
 
-            foreach (var method in methods)
+        if (bindOptionConvertArguments)
+        {
+            var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName].AsEnumerable();
+            if (bindOptionGeneric) methods = methods.Where(m => m.IsGenericMethod);
+
+            foreach (var curMethod in methods)
             {
+                var method = curMethod;
                 var methodParameters = method.GetParameters();
                 if (methodParameters.Length == arguments.Length)
                 {
-                    ConversionType[] conversions = arguments.SelectToArray((e, i) => CanConvert(e.Type, methodParameters[i].ParameterType));
+                    Type[] parameterTypes = methodParameters.SelectToArray(p => p.ParameterType);
+                    Type[] methodTypeArgs = [];
+                    if (bindOptionGeneric)
+                    {
+                        var genericType = bindOptionGenericFrom2ndArg
+                            ? arguments[1].Type.GetGenericArguments()[0]
+                            : arguments[0].Type.GetGenericArguments()[0];
+                        method = method.MakeGenericMethod(genericType);
+                        parameterTypes = method.GetParameters().SelectToArray(p => p.ParameterType);
+                        methodTypeArgs = [genericType];
+                    }
+                    ConversionType[] conversions = arguments.SelectToArray((e, i) => CanConvert(e.Type, parameterTypes[i]));
                     if (conversions.Any(c => c == ConversionType.Incompatible))
                         continue;
 
-                    var convertedExpressions = arguments.SelectToArray((e, i) => Convert(e, methodParameters[i].ParameterType, conversions[i]));
+                    var convertedExpressions = arguments.SelectToArray((e, i) => Convert(e, parameterTypes[i], conversions[i]));
 
-                    var call = BindToMethod(method, convertedExpressions);
+                    var call = BindToGenericMethod(method, methodTypeArgs, convertedExpressions);
                     return call;
                 }
             }
+
+            if (bindOptionReturnNullOverError)
+                return Expression.Constant(null, typeof(object));
 
             var types = string.Join(", ", arguments.Select(e => e.Type.Name));
             throw new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
@@ -54,6 +85,33 @@ partial class CqlOperatorsBinding
 
         throw new ArgumentOutOfRangeException(nameof(options), options, "Invalid BindOptions");
     }
+
+    /// <summary>
+    /// Calls methods with a signature of Method%lt;T&gt;(Argument%lt;T&gt;)
+    /// </summary>
+    protected Expression BindUnaryGenericOperator(
+        string methodName,
+        Expression operand) =>
+        BindToMethod(methodName,BindOptions.ConvertArgumentGeneric, operand);
+
+    protected Expression BindBinaryGenericOperator(
+        string methodName,
+        bool genericArgumentFromRight,
+        Expression left,
+        Expression right) =>
+        BindToMethod(methodName, genericArgumentFromRight
+            ? BindOptions.ConvertArgumentsGeneric2ndArg
+            : BindOptions.ConvertArgumentGeneric, left, right);
+
+    protected Expression BindTernaryGenericOperator(
+        string methodName,
+        bool genericArgumentFromRight,
+        Expression left,
+        Expression right,
+        Expression precision) =>
+        BindToMethod(methodName, genericArgumentFromRight
+            ? BindOptions.ConvertArgumentsGeneric2ndArg
+            : BindOptions.ConvertArgumentGeneric, left, right, precision);
 
     protected static MethodCallExpression BindToGenericMethod(
         string methodName,
@@ -123,154 +181,14 @@ partial class CqlOperatorsBinding
         throw new ArgumentException($"No suitable unary method {methodName}({operand.Type}) could be found.", nameof(methodName));
     }
 
-    /// <summary>
-    /// Calls methods with a signature of Method%lt;T&gt;(Argument%lt;T&gt;)
-    /// </summary>
-    protected MethodCallExpression BindUnaryGenericOperator(
-        string methodName,
-        Expression operand)
-    {
-        Type? elementType = null;
-        if (operand.Type.IsGenericType)
-        {
-            var operandGenericArguments = operand.Type.GetGenericArguments();
-            elementType = operandGenericArguments[0];
-        }
-        else if (TypeResolver.ImplementsGenericIEnumerable(operand.Type))
-            elementType = TypeResolver.GetListElementType(operand.Type);
-
-        if (elementType != null)
-        {
-            var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName]
-                .Where(m => m.IsGenericMethod && m.GetGenericArguments().Length == 1);
-            foreach (var method in methods)
-            {
-                var genericMethod = method.MakeGenericMethod(elementType);
-                var methodParameters = genericMethod.GetParameters();
-                if (methodParameters.Length == 1)
-                {
-                    var operandConversion = CanConvert(operand.Type, methodParameters[0].ParameterType);
-                    if (operandConversion == ConversionType.Incompatible)
-                        continue;
-                    var operandParameter = operand;
-                    if (operandConversion == ConversionType.Convertible)
-                        operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operandConversion);
-
-                    var call = BindToMethod(genericMethod, operandParameter);
-                    return call;
-                }
-            }
-            throw new ArgumentException($"No suitable unary method {methodName}({operand.Type}) could be found.", nameof(methodName));
-        }
-        throw new ArgumentException("Operands to this method must be generic with a single generic type parameter, e.g. IEnumerable<T>", nameof(operand));
-    }
-
-    protected MethodCallExpression BindBinaryGenericOperator(
-        string methodName,
-        bool genericArgumentFromRight,
-        Expression left,
-        Expression right)
-    {
-        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName]
-            .Where(m => m.IsGenericMethod);
-        foreach (var method in methods)
-        {
-            var methodParameters = method.GetParameters();
-            if (methodParameters.Length == 2)
-            {
-                Type? genericType;
-                if (genericArgumentFromRight)
-                    genericType = right.Type.GetGenericArguments()[0];
-                else
-                    genericType = left.Type.GetGenericArguments()[0];
-                var genericMethod = method.MakeGenericMethod(genericType);
-                methodParameters = genericMethod.GetParameters();
-                var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
-                var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
-                    continue;
-                left = Convert(left, methodParameters[0].ParameterType, leftConversion);
-                right = Convert(right, methodParameters[1].ParameterType, rightConversion);
-                var call = BindToGenericMethod(method, [genericType], left, right);
-                return call;
-            }
-        }
-        throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
-    }
-
-    protected MethodCallExpression BindTernaryGenericOperator(
-        string methodName,
-        bool genericArgumentFromRight,
-        Expression left,
-        Expression right,
-        Expression precision)
-    {
-        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName]
-            .Where(m => m.IsGenericMethod);
-        foreach (var method in methods)
-        {
-            var methodParameters = method.GetParameters();
-            if (methodParameters.Length == 3)
-            {
-                Type? genericType = null;
-                if (genericArgumentFromRight)
-                {
-                    genericType = right.Type.GetGenericArguments()[0];
-                }
-                else
-                {
-                    genericType = left.Type.GetGenericArguments()[0];
-                }
-                var genericMethod = method.MakeGenericMethod(genericType);
-                methodParameters = genericMethod.GetParameters();
-                var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
-                var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                var precisionConversion = CanConvert(precision.Type, methodParameters[2].ParameterType);
-                if (leftConversion == ConversionType.Incompatible
-                    || rightConversion == ConversionType.Incompatible
-                    || precisionConversion == ConversionType.Incompatible)
-                    continue;
-                left = Convert(left, methodParameters[0].ParameterType, leftConversion);
-                right = Convert(right, methodParameters[1].ParameterType, rightConversion);
-                precision = Convert(precision, methodParameters[2].ParameterType, precisionConversion);
-                var call = BindToMethod(genericMethod, left, right, precision);
-                return call;
-            }
-        }
-        throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
-    }
-
     protected Expression BindBinaryGenericOperatorOrNull(
         string methodName,
         bool genericArgumentFromRight,
         Expression left,
-        Expression right)
-    {
-        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
-        foreach (var method in methods)
-        {
-            var methodParameters = method.GetParameters();
-            if (methodParameters.Length == 2)
-            {
-                Type? genericType;
-                if (genericArgumentFromRight)
-                    genericType = right.Type.GetGenericArguments()[0];
-                else
-                    genericType = left.Type.GetGenericArguments()[0];
-                var genericMethod = method.MakeGenericMethod(genericType);
-                methodParameters = genericMethod.GetParameters();
-                var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
-                var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
-                    continue;
-                left = Convert(left, methodParameters[0].ParameterType, leftConversion);
-                right = Convert(right, methodParameters[1].ParameterType, rightConversion);
-                var call = BindToGenericMethod(method, [genericType], left, right);
-                return call;
-            }
-        }
-        return Expression.Constant(null, typeof(object));
-    }
+        Expression right) =>
+        BindToMethod(methodName, genericArgumentFromRight
+            ? BindOptions.ReturnNullOverError | BindOptions.ConvertArgumentsGeneric2ndArg
+            : BindOptions.ReturnNullOverError | BindOptions.ConvertArgumentGeneric, left, right);
 
     protected static MethodCallExpression BindToMethod(
         MethodInfo method,
@@ -285,19 +203,13 @@ partial class CqlOperatorsBinding
         Type[] typeArguments,
         params Expression[]? arguments)
     {
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodInfo.MakeGenericMethod(typeArguments), arguments);
-        return call;
-    }
+        if (typeArguments is [{ }, ..] && methodInfo.IsGenericMethodDefinition)
+            methodInfo = methodInfo.MakeGenericMethod(typeArguments);
 
-    /// <summary>
-    /// ICqlOperators.Convert&lt;convertToType&gt;(source as object)
-    /// </summary>
-    protected static MethodCallExpression BindToConvert(
-        Type convertToType,
-        Expression source)
-    {
-        source = Expression.TypeAs(source, typeof(object));
-        MethodCallExpression call = BindToGenericMethod(nameof(ICqlOperators.Convert), [convertToType], source);
+        var call = Expression.Call(
+            CqlContextExpressions.Operators_PropertyExpression,
+            methodInfo,
+            arguments);
         return call;
     }
 }
