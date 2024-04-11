@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -55,9 +55,5 @@
 		<Compile Update="HL7Tests.*.cs">
 			<DependentUpon>HL7Tests.cs</DependentUpon>
 		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Infrastructure\" />
 	</ItemGroup>
 </Project>
