@@ -10,30 +10,58 @@ namespace Hl7.Cql.Compiler;
 #pragma warning disable CS1591
 partial class CqlOperatorsBinding
 {
-    protected MethodCallExpression ConvertParametersThenBindMethod(
-        string methodName,
-        params Expression[] expressions)
+    [Flags]
+    protected enum BindOptions
     {
-        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
+        None = 0,
+        ConvertParameters = 1,
+    }
 
-        foreach (var method in methods)
+    protected MethodCallExpression BindToMethod(
+        string methodName,
+        BindOptions options,
+        params Expression[] arguments)
+    {
+        if (options == BindOptions.None)
         {
-            var methodParameters = method.GetParameters();
-            if (methodParameters.Length == expressions.Length)
-            {
-                ConversionType[] conversions = expressions.SelectToArray((e,i) => CanConvert(e.Type, methodParameters[i].ParameterType));
-                if (conversions.Any(c => c == ConversionType.Incompatible))
-                    continue;
-
-                var convertedExpressions = expressions.SelectToArray((e,i) => Convert(e, methodParameters[i].ParameterType, conversions[i]));
-
-                var call = BindToMethod(method, convertedExpressions);
-                return call;
-            }
+            var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, null, arguments);
+            return call;
         }
 
-        var types = string.Join(", ", expressions.Select(e => e.Type.Name));
-        throw new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
+        if (options.HasFlag(BindOptions.ConvertParameters))
+        {
+            var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
+
+            foreach (var method in methods)
+            {
+                var methodParameters = method.GetParameters();
+                if (methodParameters.Length == arguments.Length)
+                {
+                    ConversionType[] conversions = arguments.SelectToArray((e, i) => CanConvert(e.Type, methodParameters[i].ParameterType));
+                    if (conversions.Any(c => c == ConversionType.Incompatible))
+                        continue;
+
+                    var convertedExpressions = arguments.SelectToArray((e, i) => Convert(e, methodParameters[i].ParameterType, conversions[i]));
+
+                    var call = BindToMethod(method, convertedExpressions);
+                    return call;
+                }
+            }
+
+            var types = string.Join(", ", arguments.Select(e => e.Type.Name));
+            throw new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
+        }
+
+        throw new ArgumentOutOfRangeException(nameof(options), options, "Invalid BindOptions");
+    }
+
+    protected static MethodCallExpression BindToGenericMethod(
+        string methodName,
+        Type[] typeArguments,
+        params Expression[]? arguments)
+    {
+        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, typeArguments, arguments);
+        return call;
     }
 
     protected MethodCallExpression BindBinaryOperatorWithPrecision(
@@ -139,9 +167,9 @@ partial class CqlOperatorsBinding
 
     protected MethodCallExpression BindBinaryGenericOperator(
         string methodName,
+        bool genericArgumentFromRight,
         Expression left,
-        Expression right,
-        bool genericArgumentFromRight = false)
+        Expression right)
     {
         var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName]
             .Where(m => m.IsGenericMethod);
@@ -163,51 +191,19 @@ partial class CqlOperatorsBinding
                     continue;
                 left = Convert(left, methodParameters[0].ParameterType, leftConversion);
                 right = Convert(right, methodParameters[1].ParameterType, rightConversion);
-                var call = BindToMethod(method, [genericType], left, right);
+                var call = BindToGenericMethod(method, [genericType], left, right);
                 return call;
             }
         }
         throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
     }
 
-    protected Expression BindBinaryGenericOperatorOrNull(
-        string methodName,
-        Expression left,
-        Expression right,
-        bool genericArgumentFromRight = false)
-    {
-        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
-        foreach (var method in methods)
-        {
-            var methodParameters = method.GetParameters();
-            if (methodParameters.Length == 2)
-            {
-                Type? genericType;
-                if (genericArgumentFromRight)
-                    genericType = right.Type.GetGenericArguments()[0];
-                else
-                    genericType = left.Type.GetGenericArguments()[0];
-                var genericMethod = method.MakeGenericMethod(genericType);
-                methodParameters = genericMethod.GetParameters();
-                var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
-                var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
-                    continue;
-                left = Convert(left, methodParameters[0].ParameterType, leftConversion);
-                right = Convert(right, methodParameters[1].ParameterType, rightConversion);
-                var call = BindToMethod(method, [genericType], left, right);
-                return call;
-            }
-        }
-        return Expression.Constant(null, typeof(object));
-    }
-
     protected MethodCallExpression BindTernaryGenericOperator(
         string methodName,
+        bool genericArgumentFromRight,
         Expression left,
         Expression right,
-        Expression precision,
-        bool genericParameterFromRight = false)
+        Expression precision)
     {
         var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName]
             .Where(m => m.IsGenericMethod);
@@ -217,7 +213,7 @@ partial class CqlOperatorsBinding
             if (methodParameters.Length == 3)
             {
                 Type? genericType = null;
-                if (genericParameterFromRight)
+                if (genericArgumentFromRight)
                 {
                     genericType = right.Type.GetGenericArguments()[0];
                 }
@@ -244,30 +240,47 @@ partial class CqlOperatorsBinding
         throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
     }
 
-    protected static MethodCallExpression BindToMethod(MethodInfo method, params Expression[] expressions)
+    protected Expression BindBinaryGenericOperatorOrNull(
+        string methodName,
+        bool genericArgumentFromRight,
+        Expression left,
+        Expression right)
+    {
+        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
+        foreach (var method in methods)
+        {
+            var methodParameters = method.GetParameters();
+            if (methodParameters.Length == 2)
+            {
+                Type? genericType;
+                if (genericArgumentFromRight)
+                    genericType = right.Type.GetGenericArguments()[0];
+                else
+                    genericType = left.Type.GetGenericArguments()[0];
+                var genericMethod = method.MakeGenericMethod(genericType);
+                methodParameters = genericMethod.GetParameters();
+                var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
+                var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
+                if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
+                    continue;
+                left = Convert(left, methodParameters[0].ParameterType, leftConversion);
+                right = Convert(right, methodParameters[1].ParameterType, rightConversion);
+                var call = BindToGenericMethod(method, [genericType], left, right);
+                return call;
+            }
+        }
+        return Expression.Constant(null, typeof(object));
+    }
+
+    protected static MethodCallExpression BindToMethod(
+        MethodInfo method,
+        params Expression[] expressions)
     {
         var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, method, expressions);
         return call;
     }
 
-    protected static MethodCallExpression BindToMethod(
-        string methodName,
-        params Expression[]? arguments)
-    {
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, null, arguments);
-        return call;
-    }
-
-    protected static MethodCallExpression BindToMethod(
-        string methodName,
-        Type[] typeArguments,
-        params Expression[]? arguments)
-    {
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, typeArguments, arguments);
-        return call;
-    }
-
-    protected static MethodCallExpression BindToMethod(
+    protected static MethodCallExpression BindToGenericMethod(
         MethodInfo methodInfo,
         Type[] typeArguments,
         params Expression[]? arguments)
@@ -284,7 +297,7 @@ partial class CqlOperatorsBinding
         Expression source)
     {
         source = Expression.TypeAs(source, typeof(object));
-        MethodCallExpression call = BindToMethod(nameof(ICqlOperators.Convert), [convertToType], source);
+        MethodCallExpression call = BindToGenericMethod(nameof(ICqlOperators.Convert), [convertToType], source);
         return call;
     }
 }
