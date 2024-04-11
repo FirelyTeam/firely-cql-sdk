@@ -17,14 +17,14 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression MaxValue(Elm.MaxValue max)
+        protected Expression MaxValue(MaxValue max)
         {
             var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
             Expression[] parameters = new[] { Expression.Constant(type, typeof(Type)) };
             var call = _operatorBinding.Bind(CqlOperator.MaximumValue, parameters);
             return call;
         }
-        protected Expression MinValue(Elm.MinValue min)
+        protected Expression MinValue(MinValue min)
         {
             var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
             Expression[] parameters = new[] { Expression.Constant(type, typeof(Type)) };
@@ -50,7 +50,7 @@ namespace Hl7.Cql.Compiler
             return UnaryOperator(CqlOperator.Negate, e);
         }
 
-        protected Expression? Round(Elm.Round e)
+        protected Expression? Round(Round e)
         {
             var operand = TranslateExpression(e.operand!);
             Expression? precision;

@@ -32,7 +32,7 @@ internal static class ReflectionUtility
     /// <param name="fnToMethodCall">The expression representing the method call.</param>
     /// <param name="expression">The expression string.</param>
     /// <returns>The method information.</returns>
-    private static MethodInfo MethodOf(
+    public static MethodInfo MethodOf(
         Expression<Action> fnToMethodCall,
         [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "") =>
         (fnToMethodCall.Body is MethodCallExpression mce

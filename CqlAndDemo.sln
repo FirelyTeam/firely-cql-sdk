@@ -215,7 +215,6 @@ Global
 		{12BB22FD-E576-44A9-AE74-A5A673715870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12BB22FD-E576-44A9-AE74-A5A673715870}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.FullDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
 		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -267,7 +266,7 @@ Global
 		{95F35BF6-1FF1-4A5F-8725-A8EA4F1D43CD} = {DEA0937C-6F6B-4B25-8F9B-0ABE82978321}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 		FileExplorer = |build\|docs\|LibrarySets\
+		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 	EndGlobalSection
 EndGlobal
