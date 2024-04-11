@@ -166,9 +166,7 @@ internal partial class ExpressionBuilder
         if (elements?.Length == 0)
             return typeof(object);
 
-        var elementTuples = elements!
-            .Select(e => (e.name, e.elementType))
-            .ToArray();
+        var elementTuples = elements!.SelectToArray(e => (e.name, e.elementType));
         return TupleTypeFor(elementTuples, changeType);
     }
 
@@ -180,8 +178,7 @@ internal partial class ExpressionBuilder
             return typeof(object);
 
         var elementTuples = elements!
-            .Select(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")))
-            .ToArray();
+            .SelectToArray(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")));
         return TupleTypeFor(elementTuples, changeType);
     }
 

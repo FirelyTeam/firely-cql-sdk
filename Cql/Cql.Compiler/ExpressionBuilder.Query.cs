@@ -203,8 +203,8 @@ internal partial class ExpressionBuilder
 
     private Expression DemoteSourceListToSingleton(Expression source)
     {
-        source = _operatorBinding.BindToMethod(CqlOperator.Single, source);
-        return source;
+        // Do not inline this method
+        return _operatorBinding.BindToMethod(CqlOperator.Single, source);
     }
 
     private (Expression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(Expression source)
@@ -498,8 +498,7 @@ internal partial class ExpressionBuilder
         {
             var whereBody = TranslateExpression(queryWhere);
             var whereLambda = Expression.Lambda(whereBody, sourceParameter);
-            var callWhere = _operatorBinding.BindToMethod(CqlOperator.Where, @return, whereLambda);
-            return callWhere;
+            return _operatorBinding.BindToMethod(CqlOperator.Where, @return, whereLambda);
         }
     }
 
@@ -532,8 +531,7 @@ internal partial class ExpressionBuilder
                 var startingValue = TranslateExpression(queryAggregate.starting!);
                 var lambdaBody = TranslateExpression(queryAggregate.expression!);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
-                var aggregateCall = _operatorBinding.BindToMethod(CqlOperator.Aggregate, @return, lambda, startingValue);
-                return aggregateCall;
+                return _operatorBinding.BindToMethod(CqlOperator.Aggregate, @return, lambda, startingValue);
             }
         }
     }

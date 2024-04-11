@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -21,15 +22,14 @@ partial class ExpressionBuilder
                 if (_libraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
                 {
                     var initMembers = codes
-                        .Select(coding =>
+                        .SelectToArray(coding =>
                             Expression.New(
                                 ConstructorInfos.CqlCode,
                                 Expression.Constant(coding.code),
                                 Expression.Constant(coding.system),
                                 Expression.Constant(null, typeof(string)),
                                 Expression.Constant(null, typeof(string))
-                            ))
-                        .ToArray();
+                            ));
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
                     var lambda = Expression.Lambda(arrayOfCodesInitializer, CqlContextExpressions.ParameterExpression);
                     _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, codeSystem.name, lambda);

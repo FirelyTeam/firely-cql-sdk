@@ -52,13 +52,11 @@ namespace Hl7.Cql.Compiler
                     else throw this.NewExpressionBuildingException($"Cannot convert Contains target {TypeManager.PrettyTypeName(right.Type)} to {TypeManager.PrettyTypeName(elementType)}");
                 }
 
-                var call = _operatorBinding.BindToMethod(CqlOperator.ListContains, left, right);
-                return call;
+                return _operatorBinding.BindToMethod(CqlOperator.ListContains, left, right);
             }
             else if (IsInterval(left.Type, out var pointType))
             {
-                var call = _operatorBinding.BindToMethod(CqlOperator.IntervalContains, left, right, precision);
-                return call;
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalContains, left, right, precision);
             }
             throw new NotImplementedException().WithContext(this);
         }

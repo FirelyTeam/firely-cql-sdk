@@ -17,19 +17,6 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression MaxValue(MaxValue max)
-        {
-            var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
-            var call = _operatorBinding.BindToMethod(CqlOperator.MaximumValue, Expression.Constant(type, typeof(Type)));
-            return call;
-        }
-        protected Expression MinValue(MinValue min)
-        {
-            var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
-            var call = _operatorBinding.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(type, typeof(Type)));
-            return call;
-        }
-
         private Expression NegateLiteral(Negate e, Literal literal)
         {
             // handle things like -2147483648 which gets translated to Negate(2147483648)
@@ -55,8 +42,7 @@ namespace Hl7.Cql.Compiler
             if (e.precision != null)
                 precision = TranslateExpression(e.precision!);
             else precision = Expression.Constant(null, typeof(int?));
-            var call = _operatorBinding.BindToMethod(CqlOperator.Round, operand, precision);
-            return call;
+            return _operatorBinding.BindToMethod(CqlOperator.Round, operand, precision);
         }
     }
 }

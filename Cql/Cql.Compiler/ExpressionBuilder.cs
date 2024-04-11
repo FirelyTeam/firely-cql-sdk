@@ -21,6 +21,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
 using BinaryExpression = Hl7.Cql.Elm.BinaryExpression;
@@ -174,9 +175,7 @@ namespace Hl7.Cql.Compiler
                             StdDev stddev              => _operatorBinding.BindToMethod(CqlOperator.StdDev, TranslateExpression(stddev.source!)),
                             Variance variance          => _operatorBinding.BindToMethod(CqlOperator.Variance, TranslateExpression(variance.source!)),
 
-                            Negate neg                 => neg.operand is Literal literal
-                                                              ? NegateLiteral(neg, literal)
-                                                              : UnaryOperator(CqlOperator.Negate, neg),
+                            Negate neg                 => neg.operand is Literal literal ? NegateLiteral(neg, literal) : UnaryOperator(CqlOperator.Negate, neg),
 
                             TimeOfDay tod              => _operatorBinding.BindToMethod(CqlOperator.TimeOfDay),
                             Today today                => _operatorBinding.BindToMethod(CqlOperator.Today),
@@ -244,12 +243,12 @@ namespace Hl7.Cql.Compiler
                             Length len                 => Length(len),
                             List list                  => List(list),
                             Literal lit                => Literal(lit),
-                            MaxValue max               => MaxValue(max),
+                            MaxValue max               => _operatorBinding.BindToMethod(CqlOperator.MaximumValue, Expression.Constant(_typeManager.Resolver.ResolveType(max.valueType!.Name), typeof(Type))),
                             Meets meets                => Meets(meets),
                             MeetsBefore meets          => MeetsBefore(meets),
                             MeetsAfter meets           => MeetsAfter(meets),
                             Message msg                => Message(msg),
-                            MinValue min               => MinValue(min),
+                            MinValue min               => _operatorBinding.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(_typeManager.Resolver.ResolveType(min.valueType!.Name), typeof(Type))),
                             NotEqual ne                => NotEqual(ne),
                             Now now                    => _operatorBinding.BindToMethod(CqlOperator.Now),
                             Null @null                 => Expression.Constant(null, TypeFor(@null) ?? typeof(object)),
@@ -314,11 +313,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression NaryOperator(CqlOperator @operator, NaryExpression ne)
         {
-            var operators = ne.operand
-                .Select(op => TranslateExpression(op))
-                .ToArray();
-            var call = _operatorBinding.BindToMethod(@operator, operators);
-            return call;
+            var operators = ne.operand.SelectToArray(op => TranslateExpression(op));
+            return _operatorBinding.BindToMethod(@operator, operators);
         }
 
         protected Expression? IdentifierRef(IdentifierRef ire)
@@ -378,16 +374,16 @@ namespace Hl7.Cql.Compiler
             var @new = Expression.New(tupleType);
             if (tuple.element?.Length > 0)
             {
-                var elementBindings = (tuple.element!)
-                               .Select(element =>
-                               {
-                                   var value = TranslateExpression(element.value!);
-                                   var propInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!, _typeResolver)
-                                                    ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
-                                   var binding = Binding(value, propInfo);
-                                   return binding;
-                               })
-                               .ToArray();
+                var elementBindings =
+                    tuple.element!
+                        .SelectToArray(element =>
+                        {
+                            var value = TranslateExpression(element.value!);
+                            var propInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!)!, _typeResolver)
+                                           ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
+                            var binding = Binding(value, propInfo);
+                            return binding;
+                        });
                 var init = Expression.MemberInit(@new, elementBindings);
                 return init;
             }
@@ -402,9 +398,7 @@ namespace Hl7.Cql.Compiler
             {
 
                 var elementType = TypeFor(listTypeSpecifier.elementType);
-                var elements = list.element?
-                    .Select(ele => TranslateExpression(ele))
-                    .ToArray() ?? [];
+                var elements = list.element?.SelectToArray(ele => TranslateExpression(ele)) ?? [];
                 if (!elementType.IsNullable() && elements.Any(exp => exp.Type.IsNullable()))
                 {
                     for (int i = 0; i < elements.Length; i++)
@@ -507,9 +501,7 @@ namespace Hl7.Cql.Compiler
             //    }
             //}
 
-            var tuples = ine.element!
-                .Select(el => (el.name!, TranslateExpression(el.value!)))
-                .ToArray();
+            var tuples = ine.element!.SelectToArray(el => (el.name!, TranslateExpression(el.value!)));
 
             // Handle immutable primitives without public setters on their properties.
             if (instanceType == typeof(CqlRatio))
@@ -1027,9 +1019,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression FunctionRef(FunctionRef op)
         {
-            var operands = op.operand
-                .Select(TranslateExpression)
-                .ToArray();
+            var operands = op.operand.SelectToArray(TranslateExpression);
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
@@ -1114,7 +1104,7 @@ namespace Hl7.Cql.Compiler
             string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
                                  ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
-            var argumentTypes = arguments.Select(a => a.Type).ToArray();
+            var argumentTypes = arguments.SelectToArray(a => a.Type);
             var selected = _libraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
             Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
             var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();

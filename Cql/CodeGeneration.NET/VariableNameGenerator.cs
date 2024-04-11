@@ -91,7 +91,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         Letters[lastIndex] = next;
                     }
-                    vn = $"{Prefix}{new string(Letters.ToArray())}{Postfix}";
+                    vn = $"{Prefix}{new string([..Letters])}{Postfix}";
                 }
                 while (Reserved.Contains(vn) || SyntaxFacts.GetKeywordKind(vn) != SyntaxKind.None);
 

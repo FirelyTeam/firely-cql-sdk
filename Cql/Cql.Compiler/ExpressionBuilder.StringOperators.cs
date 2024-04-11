@@ -21,8 +21,7 @@ namespace Hl7.Cql.Compiler
             var operand = e.separator == null
                 ? Expression.Constant(null, typeof(string))
                 : TranslateExpression(e.separator);
-            var call = _operatorBinding.BindToMethod(CqlOperator.Combine, source, operand);
-            return call;
+            return _operatorBinding.BindToMethod(CqlOperator.Combine, source, operand);
         }
 
         protected Expression Indexer(Elm.Indexer e)

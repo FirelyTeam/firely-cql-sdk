@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
@@ -77,10 +78,7 @@ partial class ExpressionBuilder
         Type[] signature,
         Type returnType)
     {
-        var parameters = signature
-            .Select((type, index) =>
-                Expression.Parameter(type, TypeNameToIdentifier(type, ctx) + index))
-            .ToArray();
+        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, ctx) + index));
         var ctor = ConstructorInfos.NotImplementedException;
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
         var @throw = Expression.Throw(@new, returnType);

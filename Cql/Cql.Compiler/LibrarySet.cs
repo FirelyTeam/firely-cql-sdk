@@ -102,9 +102,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     {
         // Loading libraries in parallel
 
-        (FileInfo file, int index)[] input = files
-            .Select((file, ordinal) => (file, index: ordinal))
-            .ToArray();
+        (FileInfo file, int index)[] input = files.SelectToArray((file, ordinal) => (file, index: ordinal));
 
         Library[] libraries = new Library[input.Length];
         Parallel.ForEach(input, t =>
