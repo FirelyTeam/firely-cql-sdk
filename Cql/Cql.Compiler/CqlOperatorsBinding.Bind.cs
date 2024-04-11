@@ -10,22 +10,22 @@ namespace Hl7.Cql.Compiler;
 #pragma warning disable CS1591
 partial class CqlOperatorsBinding
 {
-    [Flags]
-    protected enum BindOptions
-    {
-        None                           = 0,
-
-        ConvertArguments               = BindOption_ConvertArguments,
-        ConvertArgumentsGeneric         = BindOption_ConvertArguments | BindOption_Generic,
-        ConvertArgumentsGeneric2ndArg  = BindOption_ConvertArguments | BindOption_Generic | BindOption_GenericFrom2ndArg,
-
-        ReturnNullOverError            = BindOption_ReturnNullOverError,
-    }
-
+    // @formatter:off
     private const BindOptions BindOption_ConvertArguments    = (BindOptions)1;
     private const BindOptions BindOption_Generic             = (BindOptions)2;
     private const BindOptions BindOption_GenericFrom2ndArg   = (BindOptions)4;
     private const BindOptions BindOption_ReturnNullOverError = (BindOptions)8;
+
+    [Flags]
+    protected enum BindOptions
+    {
+        None                           = 0,
+        ConvertArguments               = BindOption_ConvertArguments,
+        ConvertArgumentsGeneric        = BindOption_ConvertArguments | BindOption_Generic,
+        ConvertArgumentsGeneric2ndArg  = BindOption_ConvertArguments | BindOption_Generic | BindOption_GenericFrom2ndArg,
+        ReturnNullOverError            = BindOption_ReturnNullOverError,
+    }
+    // @formatter:on
 
     protected Expression BindToMethod(
         string methodName,
@@ -55,7 +55,6 @@ partial class CqlOperatorsBinding
                 if (methodParameters.Length == arguments.Length)
                 {
                     Type[] parameterTypes = methodParameters.SelectToArray(p => p.ParameterType);
-                    //Type[] methodTypeArgs = [];
                     if (bindOptionGeneric)
                     {
                         var genericType = bindOptionGenericFrom2ndArg
@@ -63,14 +62,13 @@ partial class CqlOperatorsBinding
                             : arguments[0].Type.GetGenericArguments()[0];
                         method = method.MakeGenericMethod(genericType);
                         parameterTypes = method.GetParameters().SelectToArray(p => p.ParameterType);
-                        //methodTypeArgs = [genericType];
                     }
+
                     ConversionType[] conversions = arguments.SelectToArray((e, i) => CanConvert(e.Type, parameterTypes[i]));
                     if (conversions.Any(c => c == ConversionType.Incompatible))
                         continue;
 
                     arguments = arguments.SelectToArray((e, i) => Convert(e, parameterTypes[i], conversions[i]));
-
                     var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, method, arguments);
                     return call;
                 }
