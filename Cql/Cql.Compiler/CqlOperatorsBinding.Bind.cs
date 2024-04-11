@@ -16,7 +16,7 @@ partial class CqlOperatorsBinding
         None                           = 0,
 
         ConvertArguments               = BindOption_ConvertArguments,
-        ConvertArgumentGeneric         = BindOption_ConvertArguments | BindOption_Generic,
+        ConvertArgumentsGeneric         = BindOption_ConvertArguments | BindOption_Generic,
         ConvertArgumentsGeneric2ndArg  = BindOption_ConvertArguments | BindOption_Generic | BindOption_GenericFrom2ndArg,
 
         ReturnNullOverError            = BindOption_ReturnNullOverError,
@@ -86,33 +86,6 @@ partial class CqlOperatorsBinding
         throw new ArgumentOutOfRangeException(nameof(options), options, "Invalid BindOptions");
     }
 
-    /// <summary>
-    /// Calls methods with a signature of Method%lt;T&gt;(Argument%lt;T&gt;)
-    /// </summary>
-    protected Expression BindUnaryGenericOperator(
-        string methodName,
-        Expression operand) =>
-        BindToMethod(methodName,BindOptions.ConvertArgumentGeneric, operand);
-
-    protected Expression BindBinaryGenericOperator(
-        string methodName,
-        bool genericArgumentFromRight,
-        Expression left,
-        Expression right) =>
-        BindToMethod(methodName, genericArgumentFromRight
-            ? BindOptions.ConvertArgumentsGeneric2ndArg
-            : BindOptions.ConvertArgumentGeneric, left, right);
-
-    protected Expression BindTernaryGenericOperator(
-        string methodName,
-        bool genericArgumentFromRight,
-        Expression left,
-        Expression right,
-        Expression precision) =>
-        BindToMethod(methodName, genericArgumentFromRight
-            ? BindOptions.ConvertArgumentsGeneric2ndArg
-            : BindOptions.ConvertArgumentGeneric, left, right, precision);
-
     protected static MethodCallExpression BindToGenericMethod(
         string methodName,
         Type[] typeArguments,
@@ -180,15 +153,6 @@ partial class CqlOperatorsBinding
         }
         throw new ArgumentException($"No suitable unary method {methodName}({operand.Type}) could be found.", nameof(methodName));
     }
-
-    protected Expression BindBinaryGenericOperatorOrNull(
-        string methodName,
-        bool genericArgumentFromRight,
-        Expression left,
-        Expression right) =>
-        BindToMethod(methodName, genericArgumentFromRight
-            ? BindOptions.ReturnNullOverError | BindOptions.ConvertArgumentsGeneric2ndArg
-            : BindOptions.ReturnNullOverError | BindOptions.ConvertArgumentGeneric, left, right);
 
     protected static MethodCallExpression BindToMethod(
         MethodInfo method,

@@ -67,22 +67,22 @@ namespace Hl7.Cql.Compiler
             var result = @operator switch
             {
                 // @formatter:off
-                CqlOperator.IntervalIntersect                => BindToMethod(nameof(ICqlOperators.IntervalIntersect), BindOptions.ConvertArgumentGeneric, parameters[..2]),
+                CqlOperator.IntervalIntersect                => BindToMethod(nameof(ICqlOperators.IntervalIntersect), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
                 CqlOperator.IntervalProperlyIncludesElement when parameters.Length == 2
-                                                             => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), false, parameters[0], parameters[1]),
-                CqlOperator.IntervalUnion                    => BindBinaryGenericOperator(nameof(ICqlOperators.IntervalUnion), false, parameters[0], parameters[1]),
-                CqlOperator.ListContains                     => BindBinaryGenericOperator(nameof(ICqlOperators.ListContains), false, parameters[0], parameters[1]),
-                CqlOperator.ListElementAt                    => BindBinaryGenericOperator(nameof(ICqlOperators.ListElementAt), false, parameters[0], parameters[1]),
-                CqlOperator.ListEqual                        => BindBinaryGenericOperator(nameof(ICqlOperators.ListEqual), false, parameters[0], parameters[1]),
-                CqlOperator.ListEquivalent                   => BindBinaryGenericOperator(nameof(ICqlOperators.ListEquivalent), false, parameters[0], parameters[1]),
-                CqlOperator.ListExcept                       => BindBinaryGenericOperator(nameof(ICqlOperators.ListExcept), false, parameters[0], parameters[1]),
-                CqlOperator.ListIncludesElement              => BindBinaryGenericOperator(nameof(ICqlOperators.ListIncludesElement), false, parameters[0], parameters[1]),
-                CqlOperator.ListIncludesList                 => BindBinaryGenericOperator(nameof(ICqlOperators.ListIncludesList), false, parameters[0], parameters[1]),
-                CqlOperator.ListIndexOf                      => BindBinaryGenericOperator(nameof(ICqlOperators.ListIndexOf), false, parameters[0], parameters[1]),
-                CqlOperator.ListIntersect                    => BindBinaryGenericOperator(nameof(ICqlOperators.ListIntersect), false, parameters[0], parameters[1]),
-                CqlOperator.ListProperlyIncludesElement      => BindBinaryGenericOperator(nameof(ICqlOperators.ListProperlyIncludesElement), false, parameters[0], parameters[1]),
-                CqlOperator.ListProperlyIncludesList         => BindBinaryGenericOperator(nameof(ICqlOperators.ListProperlyIncludesList), false, parameters[0], parameters[1]),
-                CqlOperator.ListSort                         => BindBinaryGenericOperator(@operator.ToString(), false, parameters[0], parameters[1]),
+                                                             => BindToMethod(nameof(ICqlOperators.IntervalProperlyIncludesElement), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.IntervalUnion                    => BindToMethod(nameof(ICqlOperators.IntervalUnion), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListContains                     => BindToMethod(nameof(ICqlOperators.ListContains), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListElementAt                    => BindToMethod(nameof(ICqlOperators.ListElementAt), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListEqual                        => BindToMethod(nameof(ICqlOperators.ListEqual), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListEquivalent                   => BindToMethod(nameof(ICqlOperators.ListEquivalent), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListExcept                       => BindToMethod(nameof(ICqlOperators.ListExcept), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListIncludesElement              => BindToMethod(nameof(ICqlOperators.ListIncludesElement), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListIncludesList                 => BindToMethod(nameof(ICqlOperators.ListIncludesList), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListIndexOf                      => BindToMethod(nameof(ICqlOperators.ListIndexOf), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListIntersect                    => BindToMethod(nameof(ICqlOperators.ListIntersect), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListProperlyIncludesElement      => BindToMethod(nameof(ICqlOperators.ListProperlyIncludesElement), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListProperlyIncludesList         => BindToMethod(nameof(ICqlOperators.ListProperlyIncludesList), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
+                CqlOperator.ListSort                         => BindToMethod(nameof(ICqlOperators.ListSort), BindOptions.ConvertArgumentsGeneric, parameters[..2]),
 
                 CqlOperator.Add                              => BindToMethod(nameof(ICqlOperators.Add), BindOptions.ConvertArguments, parameters[..2]),
                 CqlOperator.And                              => BindToMethod(nameof(ICqlOperators.And), BindOptions.ConvertArguments, parameters[..2]),
@@ -197,39 +197,33 @@ namespace Hl7.Cql.Compiler
 
                 CqlOperator.Convert                          => BindConvert(parameters[0], parameters[1]),
 
-                CqlOperator.InInterval                       => BindTernaryGenericOperator(nameof(ICqlOperators.ElementInInterval), true, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Ends                             => BindTernaryGenericOperator(nameof(ICqlOperators.Ends), false, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalIncludesElement          => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalIncludesElement), false, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalIncludesInterval         => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalIncludesInterval), false, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalProperlyIncludesInterval => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalProperlyIncludesInterval), false, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.IntervalSameAs                   => BindTernaryGenericOperator(nameof(ICqlOperators.IntervalSameAs), false, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Slice                            => BindTernaryGenericOperator(nameof(ICqlOperators.Slice), false, parameters[0], parameters[1], parameters[2]),
-                CqlOperator.Starts                           => BindTernaryGenericOperator(nameof(ICqlOperators.Starts), false, parameters[0], parameters[1], parameters[2]),
+                CqlOperator.InInterval                       => BindToMethod(nameof(ICqlOperators.ElementInInterval), BindOptions.ConvertArgumentsGeneric2ndArg, parameters[..3]),
+                CqlOperator.Ends                             => BindToMethod(nameof(ICqlOperators.Ends), BindOptions.ConvertArgumentsGeneric, parameters[..3]),
+                CqlOperator.IntervalIncludesElement          => BindToMethod(nameof(ICqlOperators.IntervalIncludesElement), BindOptions.ConvertArgumentsGeneric, parameters[..3]),
+                CqlOperator.IntervalIncludesInterval         => BindToMethod(nameof(ICqlOperators.IntervalIncludesInterval), BindOptions.ConvertArgumentsGeneric, parameters[..3]),
+                CqlOperator.IntervalProperlyIncludesInterval => BindToMethod(nameof(ICqlOperators.IntervalProperlyIncludesInterval), BindOptions.ConvertArgumentsGeneric, parameters[..3]),
+                CqlOperator.IntervalSameAs                   => BindToMethod(nameof(ICqlOperators.IntervalSameAs), BindOptions.ConvertArgumentsGeneric, parameters[..3]),
+                CqlOperator.Slice                            => BindToMethod(nameof(ICqlOperators.Slice), BindOptions.ConvertArgumentsGeneric, parameters[..3]),
+                CqlOperator.Starts                           => BindToMethod(nameof(ICqlOperators.Starts), BindOptions.ConvertArgumentsGeneric, parameters[..3]),
 
-                CqlOperator.Count                            => BindUnaryGenericOperator(nameof(ICqlOperators.CountOrNull), parameters[0]),
-                CqlOperator.Exists                           => BindUnaryGenericOperator(nameof(ICqlOperators.ExistsInList), parameters[0]),
-                CqlOperator.First                            => BindUnaryGenericOperator(nameof(ICqlOperators.FirstOfList), parameters[0]),
-                CqlOperator.Last                             => BindUnaryGenericOperator(nameof(ICqlOperators.LastOfList), parameters[0]),
-                CqlOperator.Distinct                         => BindUnaryGenericOperator(nameof(ICqlOperators.ListDistinct), parameters[0]),
-                CqlOperator.ListLength                       => BindUnaryGenericOperator(nameof(ICqlOperators.ListLength), parameters[0]),
-                CqlOperator.Tail                             => BindUnaryGenericOperator(nameof(ICqlOperators.ListTail), parameters[0]),
-                CqlOperator.MaxElementInList                 => BindUnaryGenericOperator(nameof(ICqlOperators.MaxOrNull), parameters[0]),
-                CqlOperator.MinElementInList                 => BindUnaryGenericOperator(nameof(ICqlOperators.MinOrNull), parameters[0]),
-                CqlOperator.Mode                             => BindUnaryGenericOperator(nameof(ICqlOperators.Mode), parameters[0]),
-                CqlOperator.PointFrom                        => BindUnaryGenericOperator(nameof(ICqlOperators.PointFrom), parameters[0]),
-                CqlOperator.Single                           => BindUnaryGenericOperator(nameof(ICqlOperators.SingleOrNull), parameters[0]),
+                CqlOperator.Count                            => BindToMethod(nameof(ICqlOperators.CountOrNull), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.Exists                           => BindToMethod(nameof(ICqlOperators.ExistsInList), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.First                            => BindToMethod(nameof(ICqlOperators.FirstOfList), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.Last                             => BindToMethod(nameof(ICqlOperators.LastOfList), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.Distinct                         => BindToMethod(nameof(ICqlOperators.ListDistinct), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.ListLength                       => BindToMethod(nameof(ICqlOperators.ListLength), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.Tail                             => BindToMethod(nameof(ICqlOperators.ListTail), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.MaxElementInList                 => BindToMethod(nameof(ICqlOperators.MaxOrNull), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.MinElementInList                 => BindToMethod(nameof(ICqlOperators.MinOrNull), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.Mode                             => BindToMethod(nameof(ICqlOperators.Mode), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.PointFrom                        => BindToMethod(nameof(ICqlOperators.PointFrom), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
+                CqlOperator.Single                           => BindToMethod(nameof(ICqlOperators.SingleOrNull), BindOptions.ConvertArgumentsGeneric, parameters[..1]),
 
                 CqlOperator.Coalesce                         => Coalesce(parameters[0]),
                 CqlOperator.Expand                           => Expand(parameters[0], parameters[1]),
 
-                CqlOperator.Aggregate                        => BindToGenericMethod(
-                                                                   nameof(ICqlOperators.AggregateOrNull),
-                                                                   [TypeResolver.GetListElementType(parameters[0].Type, true)!, parameters[2].Type],
-                                                                   parameters[0], parameters[2], parameters[1]),
-                CqlOperator.CrossJoin                        => BindToGenericMethod(
-                                                                   nameof(ICqlOperators.CrossJoin),
-                                                                   parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!),
-                                                                   parameters),
+                CqlOperator.Aggregate                        => BindToGenericMethod(nameof(ICqlOperators.AggregateOrNull),[TypeResolver.GetListElementType(parameters[0].Type, true)!, parameters[2].Type],parameters[0], parameters[2], parameters[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
+                CqlOperator.CrossJoin                        => BindToGenericMethod(nameof(ICqlOperators.CrossJoin),parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!), parameters),
                 CqlOperator.Date                             => BindToMethod(nameof(ICqlOperators.Date), BindOptions.None, parameters),
                 CqlOperator.DateTime                         => BindToMethod(nameof(ICqlOperators.DateTime)!, BindOptions.None, parameters),
                 CqlOperator.Now                              => BindToMethod(nameof(ICqlOperators.Now), BindOptions.None),
@@ -342,7 +336,7 @@ namespace Hl7.Cql.Compiler
                     return BindToMethod(nameof(ICqlOperators.CodeInList), BindOptions.ConvertArguments, left, right);
                 }
             }
-            return BindBinaryGenericOperatorOrNull(nameof(ICqlOperators.InList), true, left, right);
+            return BindToMethod(nameof(ICqlOperators.InList), BindOptions.ReturnNullOverError | BindOptions.ConvertArgumentsGeneric2ndArg, left, right);
         }
 
         private Expression ListUnion(
@@ -363,7 +357,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            return BindBinaryGenericOperator(nameof(ICqlOperators.ListUnion), false, left, right);
+            return BindToMethod(nameof(ICqlOperators.ListUnion), BindOptions.ConvertArgumentsGeneric, left, right);
         }
 
         private Expression ResolveValueSet(Expression expression)
