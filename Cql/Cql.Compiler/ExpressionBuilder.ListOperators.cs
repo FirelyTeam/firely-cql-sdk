@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
         {
             var operand = TranslateExpression(e.source!);
             Expression[] parameters = new[] { operand };
-            var call = _operatorBinding.Bind(CqlOperator.First, parameters);
+            var call = _operatorBinding.BindToMethod(CqlOperator.First, parameters);
             return call;
         }
 
@@ -31,14 +31,14 @@ namespace Hl7.Cql.Compiler
                 throw new NotImplementedException().WithContext(this);
 
             Expression[] parameters = new[] { source, element };
-            return _operatorBinding.Bind(CqlOperator.ListIndexOf, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.ListIndexOf, parameters);
         }
 
         protected Expression Last(Elm.Last e)
         {
             var operand = TranslateExpression(e.source!);
             Expression[] parameters = new[] { operand };
-            var call = _operatorBinding.Bind(CqlOperator.Last, parameters);
+            var call = _operatorBinding.BindToMethod(CqlOperator.Last, parameters);
             return call;
         }
 
@@ -55,7 +55,7 @@ namespace Hl7.Cql.Compiler
                 throw new NotImplementedException().WithContext(this);
 
             Expression[] parameters = new[] { source, start, end };
-            return _operatorBinding.Bind(CqlOperator.Slice, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.Slice, parameters);
         }
     }
 }

@@ -177,8 +177,8 @@ namespace Hl7.Cql.Compiler
                                                               ? NegateLiteral(neg, literal)
                                                               : UnaryOperator(CqlOperator.Negate, neg),
 
-                            TimeOfDay tod              => _operatorBinding.Bind(CqlOperator.TimeOfDay, new Expression[0]),
-                            Today today                => _operatorBinding.Bind(CqlOperator.Today, new Expression[0]),
+                            TimeOfDay tod              => _operatorBinding.BindToMethod(CqlOperator.TimeOfDay, new Expression[0]),
+                            Today today                => _operatorBinding.BindToMethod(CqlOperator.Today, new Expression[0]),
 
                             ToBoolean e                => ChangeTypeToBoolean(e),
                             ToConcept tc               => ChangeTypeToConcept(tc),
@@ -250,7 +250,7 @@ namespace Hl7.Cql.Compiler
                             Message msg                => Message(msg),
                             MinValue min               => MinValue(min),
                             NotEqual ne                => NotEqual(ne),
-                            Now now                    => _operatorBinding.Bind(CqlOperator.Now, new Expression[0]),
+                            Now now                    => _operatorBinding.BindToMethod(CqlOperator.Now, new Expression[0]),
                             Null @null                 => Null(@null),
                             OperandRef ore             => OperandRef(ore),
                             Overlaps ole               => Overlaps(ole),
@@ -300,7 +300,7 @@ namespace Hl7.Cql.Compiler
             var lhsExpression = TranslateExpression(be.operand![0]);
             var rhsExpression = TranslateExpression(be.operand![1]);
             Expression[] parameters = new[] { lhsExpression, rhsExpression };
-            var call = _operatorBinding.Bind(@operator, parameters);
+            var call = _operatorBinding.BindToMethod(@operator, parameters);
             return call;
         }
 
@@ -311,7 +311,7 @@ namespace Hl7.Cql.Compiler
                 ? TypeFor(unary.resultTypeSpecifier)
                 : null;
             Expression[] parameters = new[] { operand };
-            var call = _operatorBinding.Bind(@operator, parameters);
+            var call = _operatorBinding.BindToMethod(@operator, parameters);
             if (resultType != null && resultType != call.Type)
             {
                 var typeAs = ChangeType(call, resultType);
@@ -326,7 +326,7 @@ namespace Hl7.Cql.Compiler
             var operators = ne.operand
                 .Select(op => TranslateExpression(op))
                 .ToArray();
-            var call = _operatorBinding.Bind(@operator, operators);
+            var call = _operatorBinding.BindToMethod(@operator, operators);
             return call;
         }
 
@@ -334,7 +334,7 @@ namespace Hl7.Cql.Compiler
         {
             var operand = TranslateExpression(aggregate.source!);
             Expression[] parameters = new[] { operand };
-            var call = _operatorBinding.Bind(@operator, parameters);
+            var call = _operatorBinding.BindToMethod(@operator, parameters);
             return call;
         }
 
@@ -686,7 +686,7 @@ namespace Hl7.Cql.Compiler
                             var body = ChangeType(selectParameter, memberArrayElement);
                             var selectLambda = Expression.Lambda(body, selectParameter);
                             Expression[] parameters = new[] { value, selectLambda };
-                            var callSelectMethod = _operatorBinding.Bind(CqlOperator.Select, parameters);
+                            var callSelectMethod = _operatorBinding.BindToMethod(CqlOperator.Select, parameters);
                             var toArrayMethod = typeof(Enumerable)
                                 .GetMethod(nameof(Enumerable.ToArray))!
                                 .MakeGenericMethod(memberArrayElement);
@@ -916,7 +916,7 @@ namespace Hl7.Cql.Compiler
                         throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
                     var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
                     Expression[] parameters = new[] { Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty! };
-                    var call = _operatorBinding.Bind(CqlOperator.Retrieve, parameters);
+                    var call = _operatorBinding.BindToMethod(CqlOperator.Retrieve, parameters);
                     return call;
                 }
                 else
@@ -925,14 +925,14 @@ namespace Hl7.Cql.Compiler
                     // against a list of codes, e.g., as defined by the code from or codesystem construct
                     var codes = TranslateExpression(retrieve.codes);
                     Expression[] parameters = new[] { Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty! };
-                    var call = _operatorBinding.Bind(CqlOperator.Retrieve, parameters);
+                    var call = _operatorBinding.BindToMethod(CqlOperator.Retrieve, parameters);
                     return call;
                 }
             }
             else
             {
                 Expression[] parameters = new[] { Expression.Constant(sourceElementType, typeof(Type)), Expression.Constant(null, typeof(CqlValueSet)), codeProperty! };
-                var call = _operatorBinding.Bind(CqlOperator.Retrieve, parameters);
+                var call = _operatorBinding.BindToMethod(CqlOperator.Retrieve, parameters);
                 return call;
             }
         }
@@ -955,7 +955,7 @@ namespace Hl7.Cql.Compiler
                     {
                         _logger.LogWarning(FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
                         Expression[] parameters = new[] { scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)) };
-                        var call = _operatorBinding.Bind(CqlOperator.LateBoundProperty, parameters);
+                        var call = _operatorBinding.BindToMethod(CqlOperator.LateBoundProperty, parameters);
                         return call;
                     }
                     var propogate = PropagateNull(scopeExpression, pathMemberInfo);
@@ -1032,7 +1032,7 @@ namespace Hl7.Cql.Compiler
                 {
                     _logger.LogWarning(FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
                     Expression[] parameters = new[] { source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)) };
-                    var call = _operatorBinding.Bind(CqlOperator.LateBoundProperty, parameters);
+                    var call = _operatorBinding.BindToMethod(CqlOperator.LateBoundProperty, parameters);
                     return call;
                 }
                 if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
@@ -1093,7 +1093,7 @@ namespace Hl7.Cql.Compiler
                     }
 
                     Expression[] parameters = new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) };
-                    var bind = _operatorBinding.Bind(CqlOperator.Convert, parameters);
+                    var bind = _operatorBinding.BindToMethod(CqlOperator.Convert, parameters);
                     return bind;
                 }
             }

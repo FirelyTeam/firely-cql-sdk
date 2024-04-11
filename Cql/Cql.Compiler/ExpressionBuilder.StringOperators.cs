@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
                 ? Expression.Constant(null, typeof(string))
                 : TranslateExpression(e.separator);
             Expression[] parameters = new[] { source, operand };
-            var call = _operatorBinding.Bind(CqlOperator.Combine, parameters);
+            var call = _operatorBinding.BindToMethod(CqlOperator.Combine, parameters);
             return call;
         }
 
@@ -33,12 +33,12 @@ namespace Hl7.Cql.Compiler
             if (left.Type == typeof(string))
             {
                 Expression[] parameters = new[] { left, right };
-                return _operatorBinding.Bind(CqlOperator.CharAt, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.CharAt, parameters);
             }
             else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
                 Expression[] parameters = new[] { left, right };
-                return _operatorBinding.Bind(CqlOperator.ListElementAt, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.ListElementAt, parameters);
             }
             else throw new NotImplementedException().WithContext(this);
         }
@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler
             var @string = TranslateExpression(e!.@string!);
             var pattern = TranslateExpression(e!.pattern!);
             Expression[] parameters = new[] { @string, pattern };
-            return _operatorBinding.Bind(CqlOperator.LastPositionOf, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.LastPositionOf, parameters);
         }
 
         protected Expression? Length(Elm.Length len)
@@ -57,12 +57,12 @@ namespace Hl7.Cql.Compiler
             if (_typeResolver.ImplementsGenericIEnumerable(operand.Type))
             {
                 Expression[] parameters = new[] { operand };
-                return _operatorBinding.Bind(CqlOperator.ListLength, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.ListLength, parameters);
             }
             else if (operand.Type == typeof(string))
             {
                 Expression[] parameters = new[] { operand };
-                return _operatorBinding.Bind(CqlOperator.StringLength, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.StringLength, parameters);
             }
             else throw new NotImplementedException().WithContext(this);
         }
@@ -72,7 +72,7 @@ namespace Hl7.Cql.Compiler
             var @string = TranslateExpression(e!.@string!);
             var pattern = TranslateExpression(e!.pattern!);
             Expression[] parameters = new[] { pattern, @string };
-            return _operatorBinding.Bind(CqlOperator.PositionOf, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.PositionOf, parameters);
 
         }
 
@@ -82,7 +82,7 @@ namespace Hl7.Cql.Compiler
             var pattern = TranslateExpression(e.operand![1]!);
             var substitution = TranslateExpression(e.operand![2]!);
             Expression[] parameters = new[] { source, pattern, substitution };
-            return _operatorBinding.Bind(CqlOperator.ReplaceMatches, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.ReplaceMatches, parameters);
         }
 
         protected Expression Split(Elm.Split e)
@@ -90,7 +90,7 @@ namespace Hl7.Cql.Compiler
             var stringToSplit = TranslateExpression(e.stringToSplit!);
             var separator = TranslateExpression(e.separator!);
             Expression[] parameters = new[] { stringToSplit, separator };
-            return _operatorBinding.Bind(CqlOperator.Split, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.Split, parameters);
         }
 
         protected Expression? Substring(Elm.Substring e)
@@ -101,7 +101,7 @@ namespace Hl7.Cql.Compiler
                 ? Expression.Constant(null, typeof(int?))
                 : TranslateExpression(e.length);
             Expression[] parameters = new[] { stringToSub, startIndex, length };
-            return _operatorBinding.Bind(CqlOperator.Substring, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.Substring, parameters);
         }
     }
 }

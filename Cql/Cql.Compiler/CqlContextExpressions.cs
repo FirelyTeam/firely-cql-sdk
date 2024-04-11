@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
@@ -12,74 +14,23 @@ namespace Hl7.Cql.Compiler;
 internal class CqlContextExpressions
 {
     private static readonly Type CqlContextType = typeof(CqlContext);
-    private static readonly CqlContext CqlContext = default!;
+    private static readonly CqlContext CqlContextInstance = default!;
 
     public static readonly ParameterExpression ParameterExpression = Expression.Parameter(CqlContextType, "context");
+    private static readonly PropertyInfo Operators_PropertyInfo = ReflectionUtility.PropertyOf(() => CqlContextInstance.Operators);
+    public static readonly MemberExpression Operators_PropertyExpression = Expression.Property(ParameterExpression, Operators_PropertyInfo);
 
-    private static PropertyInfo Operators_PropertyInfo { get; } = ReflectionUtility.PropertyOf(() => CqlContext.Operators);
-
-    public static MemberExpression Operators_PropertyExpression { get; } = Expression.Property(ParameterExpression, Operators_PropertyInfo);
-
-    public static MethodCallExpression Operators_MethodCallExpression(
-        MethodInfo methodInfo,
-        params Expression[]? arguments)
-    {
-        var call = Expression.Call(Operators_PropertyExpression, methodInfo, arguments);
-        return call;
-    }
-
-    public static MethodCallExpression Operators_MethodCallExpression(
-        string methodName,
-        params Expression[]? arguments)
-    {
-        var call = Expression.Call(Operators_PropertyExpression, methodName, null, arguments);
-        return call;
-    }
-
-    public static MethodCallExpression Operators_MethodCallExpression(
-        MethodInfo methodInfo,
-        Type[] typeArguments,
-        params Expression[]? arguments)
-    {
-        var call = Expression.Call(Operators_PropertyExpression, methodInfo.MakeGenericMethod(typeArguments), arguments);
-        return call;
-    }
-
-    public static MethodCallExpression Operators_MethodCallExpression(
-        string methodName,
-        Type[] typeArguments,
-        params Expression[]? arguments)
-    {
-        var call = Expression.Call(Operators_PropertyExpression, methodName, typeArguments, arguments);
-        return call;
-    }
-
-
-    private static PropertyInfo Definitions_PropertyInfo { get; } = ReflectionUtility.PropertyOf(() => CqlContext.Definitions);
-
-    public static MemberExpression Definitions_PropertyExpression { get; } = Expression.Property(ParameterExpression, Definitions_PropertyInfo);
+    private static PropertyInfo Definitions_PropertyInfo = ReflectionUtility.PropertyOf(() => CqlContextInstance.Definitions);
+    public static MemberExpression Definitions_PropertyExpression = Expression.Property(ParameterExpression, Definitions_PropertyInfo);
 }
 
 internal class ICqlOperatorsExpressions
 {
-    public static readonly Type ICqlOperatorsType = typeof(ICqlOperators);
+    private static readonly Type ICqlOperatorsType = typeof(ICqlOperators);
 
-    private static readonly ICqlOperators ICqlOperators = default!;
-
-    /// <summary>
-    /// ICqlOperators.Convert&lt;T&gt;(object?) method.
-    /// </summary>
-    private static MethodInfo Convert_GenericMethodDefinition { get; } = ReflectionUtility.MethodOf(() => ICqlOperators.Convert<object>(default!)).GetGenericMethodDefinition();
-
-    /// <summary>
-    /// ICqlOperators.Convert&lt;convertToType&gt;(source as object)
-    /// </summary>
-    public static MethodCallExpression Convert_MethodCallExpression(
-        Type convertToType,
-        Expression source)
-    {
-        source = Expression.TypeAs(source, typeof(object));
-        MethodCallExpression call = CqlContextExpressions.Operators_MethodCallExpression(nameof(ICqlOperators.Convert), [convertToType], source);
-        return call;
-    }
+    public static readonly IReadOnlyDictionary<string, MethodInfo[]> ICqlOperators_MethodInfos_By_Name =
+        ICqlOperatorsType
+            .GetMethods(BindingFlags.Instance|BindingFlags.Public)
+            .GroupBy(m => m.Name)
+            .ToDictionary(m => m.Key, m => m.ToArray());
 }

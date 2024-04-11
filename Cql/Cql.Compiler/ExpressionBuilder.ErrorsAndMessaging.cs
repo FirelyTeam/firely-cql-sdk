@@ -20,7 +20,7 @@ namespace Hl7.Cql.Compiler
             }
 
             Expression[] parameters = new[] { source, code, severity, message };
-            var call = _operatorBinding.Bind(CqlOperator.Message, parameters);
+            var call = _operatorBinding.BindToMethod(CqlOperator.Message, parameters);
             if (condition.Type.IsNullable())
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));

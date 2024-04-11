@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler
             if (operands.Length == 1 && _typeResolver.ImplementsGenericIEnumerable(operands[0].Type))
             {
                 Expression[] parameters = new[] { operands[0] };
-                var call = _operatorBinding.Bind(CqlOperator.Coalesce, parameters);
+                var call = _operatorBinding.BindToMethod(CqlOperator.Coalesce, parameters);
                 return call;
             }
             var distinctOperandTypes = operands

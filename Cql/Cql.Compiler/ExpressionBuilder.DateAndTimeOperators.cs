@@ -25,23 +25,23 @@ namespace Hl7.Cql.Compiler
                 if (IsInterval(right.Type, out var rightElementType))
                 {
                     Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.Bind(CqlOperator.IntervalAfterInterval, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalAfterInterval, parameters);
                 }
                 else
                 {
                     Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.Bind(CqlOperator.IntervalAfterElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalAfterElement, parameters);
                 }
             }
             else if (IsInterval(right.Type, out var rightElementType))
             {
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.ElementAfterInterval, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.ElementAfterInterval, parameters);
             }
             else
             {
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.After, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.After, parameters);
             }
         }
 
@@ -55,23 +55,23 @@ namespace Hl7.Cql.Compiler
                 if (IsInterval(right.Type, out var rightElementType))
                 {
                     Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.Bind(CqlOperator.IntervalBeforeInterval, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalBeforeInterval, parameters);
                 }
                 else
                 {
                     Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.Bind(CqlOperator.IntervalBeforeElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalBeforeElement, parameters);
                 }
             }
             else if (IsInterval(right.Type, out var rightElementType))
             {
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.ElementBeforeInterval, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.ElementBeforeInterval, parameters);
             }
             else
             {
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.Before, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.Before, parameters);
             }
         }
         protected Expression Date(Elm.Date e)
@@ -81,7 +81,7 @@ namespace Hl7.Cql.Compiler
             var day = (e.day != null) ? TranslateExpression(e.day) : Expression.Constant(null, typeof(int?));
 
             Expression[] parameters = new[] { year, month, day };
-            return _operatorBinding.Bind(CqlOperator.Date, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.Date, parameters);
         }
 
         protected Expression DateTime(Elm.DateTime e)
@@ -100,7 +100,7 @@ namespace Hl7.Cql.Compiler
             }
 
             Expression[] parameters = new[] { year, month, day, hour, minute, second, milliseconds, offset };
-            return _operatorBinding.Bind(CqlOperator.DateTime, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.DateTime, parameters);
         }
 
         /// <remarks>See https://cql.hl7.org/02-authorsguide.html#datetime-operators</remarks>
@@ -117,7 +117,7 @@ namespace Hl7.Cql.Compiler
                 case Elm.DateTimePrecision.Second:
                 case Elm.DateTimePrecision.Millisecond:
                     Expression[] parameters = new[] { op, Precision(e.precision, e.precisionSpecified) };
-                    return _operatorBinding.Bind(CqlOperator.DateTimeComponent, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.DateTimeComponent, parameters);
                 default:
                     throw new NotSupportedException($"Unsupported date time component: {e.precision}");
             }
@@ -127,7 +127,7 @@ namespace Hl7.Cql.Compiler
         {
             var op = TranslateExpression(dfe.operand!);
             Expression[] parameters = new[] { op };
-            return _operatorBinding.Bind(CqlOperator.DateComponent, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.DateComponent, parameters);
         }
 
         protected Expression? DifferenceBetween(Elm.DifferenceBetween e)
@@ -136,7 +136,7 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1]);
             var precision = Precision(e.precision, e.precisionSpecified);
             Expression[] parameters = new[] { left, right, precision };
-            return _operatorBinding.Bind(CqlOperator.DifferenceBetween, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.DifferenceBetween, parameters);
         }
 
         protected Expression DurationBetween(Elm.DurationBetween e)
@@ -145,7 +145,7 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1]);
             var precision = Precision(e.precision, e.precisionSpecified);
             Expression[] parameters = new[] { left, right, precision };
-            return _operatorBinding.Bind(CqlOperator.DurationBetween, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.DurationBetween, parameters);
         }
 
         protected Expression? SameAs(Elm.SameAs e)
@@ -159,12 +159,12 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException();
 
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.IntervalSameAs, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalSameAs, parameters);
             }
             else
             {
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.SameAs, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.SameAs, parameters);
             }
         }
 
@@ -179,12 +179,12 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException();
 
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.IntervalSameOrAfter, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalSameOrAfter, parameters);
             }
             else
             {
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.SameOrAfter, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.SameOrAfter, parameters);
             }
         }
 
@@ -200,11 +200,11 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException();
 
                 Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.Bind(CqlOperator.IntervalSameOrBefore, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalSameOrBefore, parameters);
             }
 
             Expression[] parameters1 = new[] { left, right, precision };
-            return _operatorBinding.Bind(CqlOperator.SameOrBefore, parameters1);
+            return _operatorBinding.BindToMethod(CqlOperator.SameOrBefore, parameters1);
         }
 
         protected Expression Time(Elm.Time e)
@@ -214,7 +214,7 @@ namespace Hl7.Cql.Compiler
             var second = e.second != null ? TranslateExpression(e.second) : Expression.Constant(null, typeof(int?));
             var millisecond = e.millisecond != null ? TranslateExpression(e.millisecond) : Expression.Constant(null, typeof(int?));
             Expression[] parameters = new[] { hour, minute, second, millisecond };
-            return _operatorBinding.Bind(CqlOperator.Time, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.Time, parameters);
         }
     }
 }
