@@ -184,10 +184,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //  '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
         public override Expression VisitRetrieve([Antlr4.Runtime.Misc.NotNull] cqlParser.RetrieveContext context)
         {
-            var contextName = context.contextIdentifier().GetText();
-            var codePath = context.codePath().GetText();
-            var codeComparator = context.codeComparator().GetText();
-            var terminology = Visit(context.terminology());
+            var contextName = context.contextIdentifier()?.GetText();
+            var codePath = context.codePath()?.GetText();
+            var codeComparator = context.codeComparator()?.GetText();
+            var contextTerm = context.terminology();
+            var terminology = contextTerm is null ? null : Visit(contextTerm);
             var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
             var contextExpressionRef = new ExpressionRef
@@ -207,6 +208,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return retrieve;
         }
+
+        public override Expression VisitTerminology([Antlr4.Runtime.Misc.NotNull] cqlParser.TerminologyContext context)
+        {
+            var qie = context.qualifiedIdentifierExpression();
+            var e = context.expression();
+            if (e is not null)
+                throw new NotImplementedException();
+            return Visit(qie);
+        }
+
 
         protected Expression ErrorMessage(string message, string locator)
         {

@@ -11,8 +11,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
+		<PackageReference Include="System.Text.Json" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>

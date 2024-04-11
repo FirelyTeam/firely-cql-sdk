@@ -35,13 +35,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 else if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
                 {
-                    if (symbol is OperandDef operand)
+                    left = symbol switch
                     {
-                        left = new OperandRef { name = operand.name }.WithResultType(operand.resultTypeSpecifier);
-                    }
-                    else throw new NotImplementedException();
+                        OperandDef operand => new OperandRef { name = operand.name }.WithResultType(operand.resultTypeSpecifier),
+                        ValueSetDef valueSet => new ValueSetRef {  name = valueSet.name }.WithResultType(SystemTypes.ValueSetType),
+                        null => throw new NotImplementedException($"Don't know how to handle null symbol"),
+                        _ => throw new NotImplementedException($"Don't know how to handle symbol {symbol!.GetType()}")
+                    };
                 }
-
+                   
                 return left;
             }
         }

@@ -193,34 +193,41 @@ namespace Hl7.Cql.CqlToElm
         // We'll leave the type as Dictionary for now for future proofing
         internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier argumentType, TypeSpecifier operandType)
         {
-            // TODO: This feels very wrong.
-            // But if we allow an argument of List<Integer> to be assigned to T, so many tests fail
-            return operandType switch
+            if (operandType is ParameterTypeSpecifier genericOperand)
             {
-                ParameterTypeSpecifier generic
-                    when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.parameterName, argumentType } },
-                ListTypeSpecifier opList
-                    when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
-                ListTypeSpecifier opList
-                    when argumentType is not ListTypeSpecifier => InferGenericArgument(argumentType, opList.elementType),
-                IntervalTypeSpecifier opInt
-                    when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
-                IntervalTypeSpecifier opInt
-                    when argumentType is not IntervalTypeSpecifier => InferGenericArgument(argumentType, opInt.pointType),
-                _ => new()
-            };
-            Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier operandType, TypeSpecifier argumentType) =>
+                if (argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier)
+                    return new() { { genericOperand.parameterName, argumentType } };
+            }
+            else if (operandType is ListTypeSpecifier listOperand)
+            {
+                if (argumentType is ListTypeSpecifier listArgument)
+                    return InferNestedGeneric(listArgument.elementType, listOperand.elementType);
+                else
+                    return InferGenericArgument(argumentType, listOperand.elementType);
+            }
+            else if (operandType is IntervalTypeSpecifier intervalOperand)
+            {
+                if (argumentType is IntervalTypeSpecifier intervalArgument)
+                    return InferNestedGeneric(intervalArgument.pointType, intervalOperand.pointType);
+                else if (CoercionProvider.HasConversionToIntervalThroughModel(argumentType, out var pointType))
+                    return InferGenericArgument(pointType, intervalOperand.pointType);
+                else
+                    return InferGenericArgument(argumentType, intervalOperand.pointType);
+            }
+            return new();
+
+            Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier argumentType, TypeSpecifier operandType) =>
                 operandType switch
                 {
                     ParameterTypeSpecifier generic => new() { { generic.parameterName, argumentType } },
                     ListTypeSpecifier opList
-                        when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
+                        when argumentType is ListTypeSpecifier argList => InferNestedGeneric(argList.elementType, opList.elementType),
                     ListTypeSpecifier opList
-                        when argumentType is not ListTypeSpecifier => InferNestedGeneric(opList.elementType, argumentType),
+                        when argumentType is not ListTypeSpecifier => InferNestedGeneric(argumentType, opList.elementType),
                     IntervalTypeSpecifier opInt
-                        when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
+                        when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(argInt.pointType, opInt.pointType),
                     IntervalTypeSpecifier opInt
-                        when argumentType is not IntervalTypeSpecifier => InferNestedGeneric(opInt.pointType, argumentType),
+                        when argumentType is not IntervalTypeSpecifier => InferNestedGeneric(argumentType, opInt.pointType),
                     _ => new()
                 };
         }

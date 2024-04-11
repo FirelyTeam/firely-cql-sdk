@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -91,31 +92,43 @@ namespace Hl7.Cql.CqlToElm
                     .WithResultType(type);
             }
 
-            Expression ImplicitCastToClass(Expression expression, TypeSpecifier type)
+            Expression ImplicitCastToClass(Expression expression, TypeSpecifier to)
             {
                 Expression convert;
-                if (type == SystemTypes.QuantityType)
+                if (to == SystemTypes.QuantityType)
                     convert = new ToQuantity { operand = expression };
-                else if (type == SystemTypes.DateType)
+                else if (to == SystemTypes.DateType)
                     convert = new ToDate { operand = expression };
-                else if (type == SystemTypes.DateTimeType)
+                else if (to == SystemTypes.DateTimeType)
                     convert = new ToDateTime { operand = expression };
-                else if (type == SystemTypes.TimeType)
+                else if (to == SystemTypes.TimeType)
                     convert = new ToTime { operand = expression };
-                else if (type == SystemTypes.ConceptType)
+                else if (to == SystemTypes.ConceptType)
                     convert = new ToConcept { operand = expression };
-                else if (type == SystemTypes.RatioType)
+                else if (to == SystemTypes.RatioType)
                     convert = new ToRatio { operand = expression };
                 else
-                    convert = new As
+                {
+                    var fr = FunctionRefForModelConversion(expression.resultTypeSpecifier, to);
+                    if (fr is not null)
                     {
-                        operand = expression,
-                        asTypeSpecifier = type,
-                        asType = type is NamedTypeSpecifier nts ? nts.name : null
-                    };
+                        fr.operand = new[] { expression };
+                        fr.WithResultType(to);
+                        return fr;
+                    }
+                    else
+                    {
+                        convert = new As
+                        {
+                            operand = expression,
+                            asTypeSpecifier = to,
+                            asType = to is NamedTypeSpecifier nts ? nts.name : null
+                        };
+                    }
+                }
                 return convert
                     .WithLocator(expression.locator)
-                    .WithResultType(type);
+                    .WithResultType(to);
             }
 
 
@@ -141,7 +154,7 @@ namespace Hl7.Cql.CqlToElm
             if (IsExactMatch(fromType, to))
                 return CoercionCost.ExactMatch;
             // Do not coerce to an invalid interval type - comes before subtype because every interval type
-            // is a subtype of Interval<Any>
+            // is a subtype of Interval<Any>, which is not a valid interval type.
             else if (to is IntervalTypeSpecifier toInterval && !IsValidIntervalType(toInterval))
                 return CoercionCost.Incompatible;
             else if (IsSubtype(fromType, to))
@@ -276,6 +289,8 @@ namespace Hl7.Cql.CqlToElm
                         return false;
                 }
             }
+            else if (HasImplicitConversionThroughModel(from, to))
+                return true;
             return false;
         }
 
@@ -291,6 +306,8 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsClassType(TypeSpecifier typeSpecifier)
         {
+            if (typeSpecifier is IntervalTypeSpecifier || typeSpecifier is ListTypeSpecifier)
+                return true;
             if (typeSpecifier is NamedTypeSpecifier fromNts)
             {
                 var typeInfo = ModelProvider.FindTypeInfoByNamedType(fromNts);
@@ -322,6 +339,68 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsValidIntervalType(IntervalTypeSpecifier typeSpecifier) =>
             SystemTypes.IntervalPointTypes.Contains(typeSpecifier.pointType);
+
+        internal bool HasConversionToIntervalThroughModel(TypeSpecifier type, [NotNullWhen(true)] out TypeSpecifier? intervalPointType)
+        {
+            if (type is NamedTypeSpecifier fromNts)
+            {
+                if (ModelProvider.TryMakeQualifiedNameFromType(fromNts, out var fromQualified)
+                    && ModelProvider.TryGetConversionFunctions(fromQualified!, out var tuples))
+                {
+                    for (int i = 0; i < tuples!.Length; i++)
+                    {
+                        var tuple = tuples[i];
+                        var to = tuple.To.Trim();
+                        if (to.StartsWith("Interval<"))
+                        {
+                            var pointTypeName = to[9..^1];
+                            var typeName = ModelProvider.TryGetUrlPrefixedName(pointTypeName);
+                            intervalPointType = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName(typeName) };
+                            return true;
+                        }
+                    }
+                }
+            }
+            intervalPointType = null;
+            return false;
+        }
+
+        internal bool HasImplicitConversionThroughModel(TypeSpecifier from, TypeSpecifier to) =>
+            FunctionRefForModelConversion(from, to) is not null;
+
+        private FunctionRef? FunctionRefForModelConversion(TypeSpecifier from, TypeSpecifier to)
+        {
+            var fromValue = typeString(from);
+            var toValue = typeString(to);
+            if (fromValue is not null && toValue is not null)
+            {
+                if (ModelProvider.TryGetConversionFunctionName(fromValue, toValue, out var qualifiedFunctionName))
+                {
+                    var lastDot = qualifiedFunctionName!.LastIndexOf('.');
+                    if (lastDot >= 0)
+                    {
+                        var libraryName = qualifiedFunctionName[..lastDot];
+                        var functionName = qualifiedFunctionName[(lastDot + 1)..];
+                        var @ref = new FunctionRef
+                        {
+                            libraryName = libraryName,
+                            name = functionName,
+                        };
+                        return @ref;
+                    }
+                }
+            }
+            return null;
+            string? typeString(TypeSpecifier type) =>
+                type switch
+                {
+                    NamedTypeSpecifier nts when ModelProvider.TryMakeQualifiedNameFromType(nts, out var fromQualified) => fromQualified,
+                    IntervalTypeSpecifier interval => $"Interval<{typeString(interval.pointType)}>",
+                    ListTypeSpecifier list => $"List<{typeString(list.elementType)}>",
+                    _ => null
+                };
+        }
+
 
     }
 }

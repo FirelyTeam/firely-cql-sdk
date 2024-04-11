@@ -319,5 +319,20 @@ namespace Hl7.Cql.CqlToElm.Test
             result.Compatible.Should().BeTrue();
         }
 
+        [TestMethod]
+        public void MatchStartFromFHIRPeriod()
+        {
+            var fpNts = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Period") };
+            var nullAsFhirPeriod = new As
+            {
+                operand = Null,
+                asType = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Period")
+            }.WithResultType(fpNts);
+            var arguments = new Expression[] { nullAsFhirPeriod };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Start, arguments);
+            result.Compatible.Should().BeTrue();
+        }
+
+
     }
 }

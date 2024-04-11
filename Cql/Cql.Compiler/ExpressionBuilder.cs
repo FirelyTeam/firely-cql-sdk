@@ -12,7 +12,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,10 +24,11 @@ using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler
 {
-    internal record ExpressionBuilderOptions(bool EmitStackTraces);
+    internal record ExpressionBuilderOptions(bool EmitStackTraces = false, bool IgnoreElmErrorAnnotations = true);
 
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
@@ -1185,7 +1185,7 @@ namespace Hl7.Cql.Compiler
             {
                 foreach (var by in query.sort.by)
                 {
-                    ListSortDirection order = ExtensionMethods.ListSortOrder(by.direction);
+                    ListSortDirection order = by.direction.ListSortOrder();
                     if (by is ByExpression byExpression)
                     {
                         var parameterName = "@this";
@@ -1614,8 +1614,9 @@ namespace Hl7.Cql.Compiler
         {
             if (!string.IsNullOrWhiteSpace(cr.name))
             {
-                var type = TypeResolver.CodeType.MakeArrayType();
-                return InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, type!, ctx);
+                var conceptType = TypeManager.TypeFor(cr.resultTypeSpecifier, ctx);
+                var invoke = InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, conceptType, ctx);
+                return invoke;
             }
             else throw new InvalidOperationException($"CodeSystemRef {cr.name} is null");
         }

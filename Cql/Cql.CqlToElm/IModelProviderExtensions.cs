@@ -3,7 +3,9 @@ using Hl7.Cql.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -28,7 +30,7 @@ namespace Hl7.Cql.CqlToElm
 
         internal static bool TryGetTypeForQualifiedName(this IModelProvider provider,
             string qualifiedName,
-            out TypeInfo? type)
+            [NotNullWhen(true)] out TypeInfo? type)
         {
             var (model, name) = splitTypeName(qualifiedName);
             if (string.IsNullOrEmpty(model))
@@ -76,6 +78,66 @@ namespace Hl7.Cql.CqlToElm
             element = allElements.SingleOrDefault(ele => ele.name == elementName);
 
             return element is not null;
+        }
+ 
+        private static readonly Regex UriPrefixedTypeName = new Regex("{(?'uri'\\S+)}(?'name'\\S+)", RegexOptions.Compiled);
+        /// <summary>
+        /// Gets the model from a qualified name, e.g. {http://hl7.org/fhir}Period
+        /// </summary>
+        /// <param name="provider">This model provider</param>
+        /// <param name="namedType">The named type whose model to derive.</param>
+        /// <param name="model">The located model.</param>
+        /// <returns>True if found; false otherwise.</returns>
+        public static bool TryGetModelFromNamedType(this IModelProvider provider, 
+            Elm.NamedTypeSpecifier namedType,
+            out ModelInfo? model)
+        {
+            var match = UriPrefixedTypeName.Match(namedType.name.Name);
+            if (match.Success)
+            {
+                var uri = match.Groups["uri"].Value;
+                return provider.TryGetModelFromUri(uri, out model);
+            }
+            model = null;
+            return false;
+        }
+
+        public static bool TryMakeQualifiedNameFromType(this IModelProvider provider,
+            Elm.NamedTypeSpecifier namedType,
+            out string? qualifiedName)
+        {
+            var match = UriPrefixedTypeName.Match(namedType.name.Name);
+            if (match.Success)
+            {
+                var uri = match.Groups["uri"].Value;
+                var name = match.Groups["name"].Value;
+                if (provider.TryGetModelFromUri(uri, out var model))
+                {
+                    qualifiedName = $"{model.name}.{name}";
+                    return true;
+                }
+            }
+            qualifiedName = null;
+            return false;
+        }
+
+        public static bool TryGetModelFromType(this IModelProvider provider,
+            TypeInfo type, [NotNullWhen(true)] out ModelInfo? model)
+        {
+            var tuple = splitTypeName(type.Name()!);
+            return provider.TryGetModelFromName(tuple.modelPrefix, out model);
+        }
+
+        public static string? TryGetUrlPrefixedName(this IModelProvider provider,
+            string qualifiedName)
+        {
+            if (provider.TryGetTypeForQualifiedName(qualifiedName, out var type)
+                && TryGetModelFromType(provider, type, out var model)) 
+            {
+                var urlPrefixedName = qualifiedName.Replace($"{model.name}.", $"{{{model.url}}}");
+                return urlPrefixedName;
+            }
+            return null;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Fhir.Metrics;
-using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using System;
 using System.Globalization;

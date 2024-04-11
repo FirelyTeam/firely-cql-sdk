@@ -201,8 +201,16 @@ namespace Hl7.Cql.CqlToElm
             return new(model!, typeInfo!);
         }
 
-        internal static TypeInfo? FindTypeInfo(this ModelInfo model, string name) =>
-            model.typeInfo?.SingleOrDefault(t => t.Name() == name);
+        internal static TypeInfo? FindTypeInfo(this ModelInfo model, string name)
+        {
+            var qualified = $"{model.name}.{name}";
+            var type = model.typeInfo?.SingleOrDefault(t =>
+            {
+                var tName = t.Name();
+                return tName == name || tName == qualified;
+            });
+            return type;
+        }
 
         internal static string? Name(this TypeInfo t) => t switch
         {
