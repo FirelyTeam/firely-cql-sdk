@@ -1172,10 +1172,10 @@ namespace Hl7.Cql.Compiler
             // to the actual function are.
             var convertedArguments = arguments
                 .Select((arg, i) => ChangeType(arg, parameterTypes[i]))
-                .Prepend(CqlContextExpressions.CqlContext_Parameter)
+                .Prepend(CqlContextExpressions.ParameterExpression)
                 .ToArray();
 
-            return new FunctionCallExpression(CqlContextExpressions.CqlContext_Definitions_Property, libraryName, name, convertedArguments, definitionType);
+            return new FunctionCallExpression(CqlContextExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
 
             bool CheckConversion(Type from, Type to) => _typeConverter.CanConvert(from, to);
         }
@@ -1205,7 +1205,7 @@ namespace Hl7.Cql.Compiler
                                  ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
-            return new DefinitionCallExpression(CqlContextExpressions.CqlContext_Definitions_Property, libraryName, name, CqlContextExpressions.CqlContext_Parameter, funcType);
+            return new DefinitionCallExpression(CqlContextExpressions.Definitions_PropertyExpression, libraryName, name, CqlContextExpressions.ParameterExpression, funcType);
         }
     }
 }

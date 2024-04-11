@@ -111,8 +111,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Expand(Elm.Expand e)
         {
-            var source = this.TranslateExpression(e!.operand![0]!);
-            var quantity = this.TranslateExpression(e!.operand![1]!);
+            var source = TranslateExpression(e!.operand![0]!);
+            var quantity = TranslateExpression(e!.operand![1]!);
             Expression[] parameters = new[] { source, quantity };
             return _operatorBinding.Bind(CqlOperator.Expand, parameters);
         }

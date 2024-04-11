@@ -3,7 +3,6 @@
 using System.Diagnostics;
 using System.Globalization;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
@@ -23,18 +22,6 @@ public class Program
 {
     public static int Main(string[] args)
     {
-#if DEBUG // Latest Visual Studio can't handle the $(SolutionDir) args in the launchSettings!!
-        var dir = new DirectoryInfo(Environment.CurrentDirectory);
-        while (!File.Exists(Path.Combine(dir!.FullName, "CqlAndDemo.sln")))
-            dir = dir.Parent;
-
-        args = args.SelectToArray(arg =>
-        {
-            var path = arg.StartsWith('/') ? Path.Combine(dir.FullName, arg[1..]) : arg;
-            return path;
-        });
-#endif
-
         if (args.Length == 0 ||
             new[] { "-?", "-h", "-help" }.Any(s => args.Contains(s, StringComparer.InvariantCultureIgnoreCase)))
         {
