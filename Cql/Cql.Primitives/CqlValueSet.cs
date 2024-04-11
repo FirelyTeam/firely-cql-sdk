@@ -15,6 +15,14 @@ namespace Hl7.Cql.Primitives
     [CqlPrimitiveType(CqlPrimitiveType.ValueSet)]
     public class CqlValueSet : CqlVocabulary
     {
+
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        public CqlValueSet()
+        {
+        }
+
         /// <summary>
         /// Creates an instance.
         /// </summary>

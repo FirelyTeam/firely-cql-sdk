@@ -39,6 +39,26 @@ namespace Hl7.Cql.Elm
             }
         }
 
+        public string? Name
+        {
+            get
+            {
+                if (identifier == null)
+                    return null;
+                return identifier.id;
+            }
+        }
+
+        public string? Version
+        {
+            get
+            {
+                if (identifier == null)
+                    return null;
+                return identifier.version;
+            }
+        }
+
         private static JsonSerializerOptions GetSerializerOptions(bool strict)
         {
             var options = new JsonSerializerOptions()
@@ -62,6 +82,22 @@ namespace Hl7.Cql.Elm
         public static Library LoadFromJson(Stream stream) =>
             JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
                 throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
+
+        /// <summary>
+        /// Get a flat list of ELM libraries included in the set of libraries passed in. 
+        /// </summary>
+        /// <param name="libraries">top-level libraries</param>
+        /// <returns>flat list of all included libraries</returns>
+        public static IEnumerable<Library> GetIncludedElmLibraries(IEnumerable<Library> libraries)
+        {
+            var packageGraph = GetIncludedLibraries(libraries);
+            var elmLibraries = packageGraph.Nodes.Values
+                .Select(node => node.Properties?[LibraryNodeProperty] as Library)
+                .Where(p => p is not null)
+                .Select(p => p!)
+                .ToArray();
+            return elmLibraries;
+        }
 
         /// <summary>
         /// Writes this library in JSON format to <paramref name="stream"/>.

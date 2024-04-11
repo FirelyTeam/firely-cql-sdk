@@ -61,14 +61,11 @@ override Hl7.Cql.Iso8601.DateTimeIso8601.ToString() -> string!
 override Hl7.Cql.Iso8601.TimeIso8601.Equals(object? obj) -> bool
 override Hl7.Cql.Iso8601.TimeIso8601.GetHashCode() -> int
 override Hl7.Cql.Iso8601.TimeIso8601.ToString() -> string!
-static Hl7.Cql.Iso8601.DateIso8601.implicit operator Hl7.Cql.Iso8601.DateIso8601!(string! stringValue) -> Hl7.Cql.Iso8601.DateIso8601!
 static Hl7.Cql.Iso8601.DateIso8601.TryParse(string! stringValue, out Hl7.Cql.Iso8601.DateIso8601? dateValue) -> bool
-static Hl7.Cql.Iso8601.DateTimeIso8601.implicit operator Hl7.Cql.Iso8601.DateTimeIso8601!(string! stringValue) -> Hl7.Cql.Iso8601.DateTimeIso8601!
 static Hl7.Cql.Iso8601.DateTimeIso8601.Now.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
 static Hl7.Cql.Iso8601.DateTimeIso8601.TryParse(string! stringValue, out Hl7.Cql.Iso8601.DateTimeIso8601? dateTimeValue) -> bool
 static Hl7.Cql.Iso8601.DateTimeIso8601.UtcNow.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
 static Hl7.Cql.Iso8601.DateTimePrecisionExtensions.ToDateTimePrecision(this string? ucumUnit) -> Hl7.Cql.Iso8601.DateTimePrecision?
-static Hl7.Cql.Iso8601.TimeIso8601.implicit operator Hl7.Cql.Iso8601.TimeIso8601!(string! stringValue) -> Hl7.Cql.Iso8601.TimeIso8601!
 static Hl7.Cql.Iso8601.TimeIso8601.TryParse(string! stringValue, out Hl7.Cql.Iso8601.TimeIso8601? timeValue) -> bool
 static readonly Hl7.Cql.Iso8601.DateIso8601.Expression -> System.Text.RegularExpressions.Regex!
 static readonly Hl7.Cql.Iso8601.DateTimeIso8601.Expression -> System.Text.RegularExpressions.Regex!

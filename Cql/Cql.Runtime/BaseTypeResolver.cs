@@ -3,7 +3,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
 using Hl7.Cql.Abstractions;
@@ -114,7 +114,9 @@ namespace Hl7.Cql.Runtime
             return GetPropertyCore(type, propertyName);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Additional logic get retrieve a <see cref="PropertyInfo"/> by name for a given type.
+        /// </summary>
         protected virtual PropertyInfo? GetPropertyCore(Type type, string propertyName) =>
             type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
@@ -144,12 +146,18 @@ namespace Hl7.Cql.Runtime
             if (type.IsGenericType)
             {
                 var genericTypeDefinition = type.GetGenericTypeDefinition();
-                if (genericTypeDefinition == typeof(IEnumerable<>))
+                if (genericTypeDefinition == typeof(IEnumerable<>) 
+                     || genericTypeDefinition == typeof(List<>) 
+                     || genericTypeDefinition == typeof(ICollection<>)
+                ) 
                     return type.GetGenericArguments()[0];
-                else if (genericTypeDefinition == typeof(List<>))
+
+                // handle LINQ cast iterators, where iterators, selects, etc.
+                if (genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable)) 
+                    && genericTypeDefinition.Namespace == "System.Linq"
+                    && type.GenericTypeArguments.Length == 1)
                     return type.GetGenericArguments()[0];
-                else if (genericTypeDefinition == typeof(ICollection<>))
-                    return type.GetGenericArguments()[0];
+
                 else if (@throw) throw new NotSupportedException();
                 else return null;
             }

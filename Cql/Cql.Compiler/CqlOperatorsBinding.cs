@@ -535,7 +535,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression ListUnion(MemberExpression operators, Expression left, Expression right)
         {
-            if (left.Type == typeof(ValueSetFacade) && right.Type == typeof(ValueSetFacade))
+            if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
             {
                 return BindBinaryOperator(nameof(ICqlOperators.ValueSetUnion), operators,
                     Expression.TypeAs(left, typeof(IEnumerable<CqlCode>)),
