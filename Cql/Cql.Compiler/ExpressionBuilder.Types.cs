@@ -17,9 +17,7 @@ namespace Hl7.Cql.Compiler
             highClosed = ChangeType(highClosed, typeof(bool?));
             var low = TranslateExpression(ie.low!);
             var high = TranslateExpression(ie.high!);
-            Expression[] parameters = new[] { low, high, lowClosed, highClosed };
-            var call = _operatorBinding.BindToMethod(CqlOperator.Interval, parameters);
-            return call;
+            return _operatorBinding.BindToMethod(CqlOperator.Interval, low, high, lowClosed, highClosed);
         }
 
 
@@ -35,15 +33,7 @@ namespace Hl7.Cql.Compiler
 
             var numExprTranslated = TranslateExpression(numExpr);
             var denomExprTranslated = TranslateExpression(numExpr);
-
-            Expression[] parameters = new[] { numExprTranslated, denomExprTranslated };
-            return _operatorBinding.BindToMethod(CqlOperator.Ratio, parameters);
-        }
-
-        private Expression Quantity(Elm.Quantity quantityExpression)
-        {
-            Expression[] parameters = new[] { Expression.Constant(quantityExpression.value, typeof(decimal?)), Expression.Constant(quantityExpression.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string)) };
-            return _operatorBinding.BindToMethod(CqlOperator.Quantity, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.Ratio, numExprTranslated, denomExprTranslated);
         }
     }
 }

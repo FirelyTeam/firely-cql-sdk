@@ -77,7 +77,7 @@ namespace Hl7.Cql.Packaging
                     var valueset = method.GetCustomAttribute<CqlValueSetAttribute>();
                     if (declaration != null && valueset == null)
                     {
-                        var value = method.Invoke(instance, Array.Empty<object?>());
+                        var value = method.Invoke(instance, []);
                         values.Add(declaration.Name, value);
                     }
                 }

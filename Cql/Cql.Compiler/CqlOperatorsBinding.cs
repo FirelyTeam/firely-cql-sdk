@@ -559,7 +559,7 @@ namespace Hl7.Cql.Compiler
                     {
                         var declaringType = pi!.DeclaringType;
                         var propName = pi.Name;
-                        var method = typeof(Type).GetMethod(nameof(Type.GetProperty), new[] { typeof(string) })!;
+                        var method = typeof(Type).GetMethod(nameof(Type.GetProperty), [typeof(string)])!;
                         var typeOf = Expression.Constant(declaringType);
                         codePropertyExpression = Expression.Call(typeOf, method, Expression.Constant(propName));
                     }

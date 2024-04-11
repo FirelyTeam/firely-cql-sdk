@@ -211,7 +211,7 @@ partial class ExpressionBuilder
 
                         foreach (var tag in tags)
                         {
-                            string[] values = new[] { tag.value ?? "" };
+                            string[] values = [tag.value ?? ""];
                             _libraryContext.LibraryDefinitions.AddTag(_libraryContext.LibraryKey, expressionDef.name,
                                 functionParameterTypes, tag.name, values);
                         }

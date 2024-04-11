@@ -33,7 +33,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="display">The display name of this concept.</param>
         public CqlConcept(IEnumerable<CqlCode> codes, string? display)
         {
-            this.codes = codes?.ToArray() ?? Array.Empty<CqlCode>();
+            this.codes = codes?.ToArray() ?? [];
             this.display = display;
         }
 

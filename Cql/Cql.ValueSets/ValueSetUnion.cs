@@ -48,7 +48,7 @@ namespace Hl7.Cql.ValueSets
             if (_facades.Length > 1)
             {
                 var unifiedFacade = new InMemoryValueSet(_facades.SelectMany(f => f));
-                _facades = new[] { unifiedFacade };
+                _facades = [unifiedFacade];
             }
 
             return _facades[0].GetEnumerator();

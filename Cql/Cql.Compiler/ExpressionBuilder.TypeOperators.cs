@@ -118,102 +118,6 @@ namespace Hl7.Cql.Compiler
             return nullable;
         }
 
-        private Expression? Descendents(Elm.Descendents e)
-        {
-            if (e.source == null)
-                return Expression.Constant(null, typeof(IEnumerable<object>));
-            else
-            {
-                var source = TranslateExpression(e.source);
-                Expression[] parameters = new[] { source };
-                var call = _operatorBinding.BindToMethod(CqlOperator.Descendents, parameters);
-                return call;
-            }
-        }
-
-        /// <summary>
-        /// Changes units on a quantity.
-        /// e.g.
-        /// convert FHIRHelpers.ToQuantity ( First.ConceptionQuantity ) to weeks
-        /// </summary>
-        /// <param name="cqe"></param>
-        /// <returns></returns>
-        protected Expression ConvertQuantity(Elm.ConvertQuantity cqe)
-        {
-            var quantity = TranslateExpression(cqe.operand![0]);
-            var unit = TranslateExpression(cqe.operand![1]);
-            Expression[] parameters = new[] { quantity, unit };
-            var call = _operatorBinding.BindToMethod(CqlOperator.ConvertQuantity, parameters);
-            return call;
-        }
-
-        protected Expression? ChangeTypeToBoolean(Elm.ToBoolean e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, typeof(bool?));
-        }
-
-        protected Expression? ChangeTypeToConcept(Elm.ToConcept e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, _typeManager.Resolver.ConceptType);
-        }
-
-        protected Expression? ChangeTypeToDate(Elm.ToDate e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, _typeManager.Resolver.DateType);
-        }
-
-        protected Expression ChangeTypeToDateTime(Elm.ToDateTime e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, _typeManager.Resolver.DateTimeType);
-        }
-
-
-        protected Expression ChangeTypeToDecimal(Elm.ToDecimal e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, typeof(decimal?));
-        }
-
-        protected Expression ChangeTypeToLong(Elm.ToLong e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, typeof(long?));
-        }
-
-        protected Expression? ChangeTypeToInteger(Elm.ToInteger e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, typeof(int?));
-        }
-
-        protected Expression? ChangeTypeToQuantity(Elm.ToQuantity tq)
-        {
-            var operand = TranslateExpression(tq.operand!);
-            return ChangeType(operand, _typeManager.Resolver.QuantityType);
-        }
-
-        protected Expression? ChangeTypeToString(Elm.ToString e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, typeof(string));
-        }
-        protected Expression? ChangeTypeToTime(Elm.ToTime e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            return ChangeType(operand, _typeManager.Resolver.TimeType);
-        }
-
-        protected Expression ChangeTypeToList(Elm.ToList e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            Expression[] parameters = new[] { operand };
-            var call = _operatorBinding.BindToMethod(CqlOperator.ToList, parameters);
-            return call;
-        }
 
         private Expression ChangeType(Expression input, Type outputType)
         {
@@ -231,22 +135,16 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                Expression[] parameters = new[] { input, lambda };
-                var callSelect = _operatorBinding.BindToMethod(CqlOperator.Select, parameters);
-                return callSelect;
+                return _operatorBinding.BindToMethod(CqlOperator.Select, input, lambda);
             }
 
             if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                Expression[] parameters = new[] { input, Expression.Constant(correctedTo, typeof(Type)) };
-                var call = _operatorBinding.BindToMethod(CqlOperator.Convert, parameters);
-                return call;
+                return _operatorBinding.BindToMethod(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
             }
             else
             {
-                Expression[] parameters = new[] { input, Expression.Constant(outputType, typeof(Type)) };
-                var call = _operatorBinding.BindToMethod(CqlOperator.Convert, parameters);
-                return call;
+                return _operatorBinding.BindToMethod(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
             }
         }
     }

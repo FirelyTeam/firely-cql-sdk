@@ -27,8 +27,7 @@ namespace Hl7.Cql.Compiler
             var lhsExpression = TranslateExpression(eq.operand![0]);
             var rhsExpression = TranslateExpression(eq.operand![1]);
             var equal = Equal(lhsExpression, rhsExpression);
-            Expression[] parameters = new[] { equal };
-            var not = _operatorBinding.BindToMethod(CqlOperator.Not, parameters);
+            var not = _operatorBinding.BindToMethod(CqlOperator.Not, equal);
             return not;
         }
 
@@ -44,8 +43,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else if (right.Type == typeof(string))
                 {
-                    Expression[] parameters = new[] { Expression.Convert(left, typeof(object)), right };
-                    var call = _operatorBinding.BindToMethod(CqlOperator.EnumEqualsString, parameters);
+                    var call = _operatorBinding.BindToMethod(CqlOperator.EnumEqualsString, Expression.Convert(left, typeof(object)), right);
                     return call;
                 }
                 else throw new NotImplementedException().WithContext(this);
@@ -54,8 +52,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (left.Type == typeof(string))
                 {
-                    Expression[] parameters = new[] { Expression.Convert(right, typeof(object)), left };
-                    var call = _operatorBinding.BindToMethod(CqlOperator.EnumEqualsString, parameters);
+                    var call = _operatorBinding.BindToMethod(CqlOperator.EnumEqualsString, Expression.Convert(right, typeof(object)), left);
                     return call;
 
                 }
@@ -69,16 +66,14 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
                         throw this.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                    Expression[] parameters = new[] { left, right };
-                    var call = _operatorBinding.BindToMethod(CqlOperator.ListEqual, parameters);
+                    var call = _operatorBinding.BindToMethod(CqlOperator.ListEqual, left, right);
                     return call;
                 }
                 throw new NotImplementedException().WithContext(this);
             }
             else
             {
-                Expression[] parameters = new[] { left, right };
-                var call = _operatorBinding.BindToMethod(CqlOperator.Equal, parameters);
+                var call = _operatorBinding.BindToMethod(CqlOperator.Equal, left, right);
                 return call;
             }
         }
@@ -100,8 +95,7 @@ namespace Hl7.Cql.Compiler
                         return Expression.Constant(false, typeof(bool?));
                     }
 
-                    Expression[] parameters = new[] { left, right };
-                    var call = _operatorBinding.BindToMethod(CqlOperator.ListEquivalent, parameters);
+                    var call = _operatorBinding.BindToMethod(CqlOperator.ListEquivalent, left, right);
                     return call;
                 }
                 else
@@ -111,8 +105,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                Expression[] parameters = new[] { left, right };
-                var call = _operatorBinding.BindToMethod(CqlOperator.Equivalent, parameters);
+                var call = _operatorBinding.BindToMethod(CqlOperator.Equivalent, left, right);
                 return call;
             }
         }

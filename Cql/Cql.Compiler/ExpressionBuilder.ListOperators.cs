@@ -15,14 +15,6 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression First(Elm.First e)
-        {
-            var operand = TranslateExpression(e.source!);
-            Expression[] parameters = new[] { operand };
-            var call = _operatorBinding.BindToMethod(CqlOperator.First, parameters);
-            return call;
-        }
-
         protected Expression IndexOf(Elm.IndexOf e)
         {
             var source = TranslateExpression(e.source!);
@@ -30,16 +22,7 @@ namespace Hl7.Cql.Compiler
             if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
-            Expression[] parameters = new[] { source, element };
-            return _operatorBinding.BindToMethod(CqlOperator.ListIndexOf, parameters);
-        }
-
-        protected Expression Last(Elm.Last e)
-        {
-            var operand = TranslateExpression(e.source!);
-            Expression[] parameters = new[] { operand };
-            var call = _operatorBinding.BindToMethod(CqlOperator.Last, parameters);
-            return call;
+            return _operatorBinding.BindToMethod(CqlOperator.ListIndexOf, source, element);
         }
 
         private Expression? Slice(Elm.Slice slice)
@@ -54,8 +37,7 @@ namespace Hl7.Cql.Compiler
             if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
-            Expression[] parameters = new[] { source, start, end };
-            return _operatorBinding.BindToMethod(CqlOperator.Slice, parameters);
+            return _operatorBinding.BindToMethod(CqlOperator.Slice, source, start, end);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Hl7.Cql.Elm
         public XmlIncludeConverterFactory(bool strict)
         {
             Strict = strict;
-            StrictParams = new object[] { strict };
+            StrictParams = [strict];
         }
 
         public override bool CanConvert(Type typeToConvert)

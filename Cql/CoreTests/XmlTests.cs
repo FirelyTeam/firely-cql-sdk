@@ -40,7 +40,7 @@ namespace CoreTests
                 {
                     foreach(var test in group.test ?? Enumerable.Empty<TestSchema.Test>())
                     {
-                        yield return new object[] { group, test };
+                        yield return [group, test];
                     }
                 }
             }

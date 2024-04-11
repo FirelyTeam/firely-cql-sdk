@@ -29,8 +29,7 @@ namespace Hl7.Cql.Compiler
                         precision = Expression.Constant(quant.unit, typeof(string));
                     }
 
-                    Expression[] parameters = new[] { operand, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.Collapse, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.Collapse, operand, precision);
                 }
             }
             throw new NotImplementedException().WithContext(this);
@@ -53,14 +52,12 @@ namespace Hl7.Cql.Compiler
                     else throw this.NewExpressionBuildingException($"Cannot convert Contains target {TypeManager.PrettyTypeName(right.Type)} to {TypeManager.PrettyTypeName(elementType)}");
                 }
 
-                Expression[] parameters = new[] { left, right };
-                var call = _operatorBinding.BindToMethod(CqlOperator.ListContains, parameters);
+                var call = _operatorBinding.BindToMethod(CqlOperator.ListContains, left, right);
                 return call;
             }
             else if (IsInterval(left.Type, out var pointType))
             {
-                Expression[] parameters = new[] { left, right, precision };
-                var call = _operatorBinding.BindToMethod(CqlOperator.IntervalContains, parameters);
+                var call = _operatorBinding.BindToMethod(CqlOperator.IntervalContains, left, right, precision);
                 return call;
             }
             throw new NotImplementedException().WithContext(this);
@@ -77,8 +74,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.Ends, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.Ends, left, right, precision);
 
                 }
             }
@@ -91,8 +87,7 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1]);
             if (_typeResolver.ImplementsGenericIEnumerable(left.Type) && _typeResolver.ImplementsGenericIEnumerable(right.Type))
             {
-                Expression[] parameters = new[] { left, right };
-                return _operatorBinding.BindToMethod(CqlOperator.ListExcept, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.ListExcept, left, right);
             }
             else if (IsInterval(left.Type, out var leftPointType))
             {
@@ -100,21 +95,12 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalExcept, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalExcept, left, right);
 
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
             throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression? Expand(Elm.Expand e)
-        {
-            var source = TranslateExpression(e!.operand![0]!);
-            var quantity = TranslateExpression(e!.operand![1]!);
-            Expression[] parameters = new[] { source, quantity };
-            return _operatorBinding.BindToMethod(CqlOperator.Expand, parameters);
         }
 
         protected Expression In(Elm.In e)
@@ -123,15 +109,13 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1]!);
             if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
             {
-                Expression[] parameters = new[] { left, right };
-                return _operatorBinding.BindToMethod(CqlOperator.InList, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.InList, left, right);
             }
             else if (IsInterval(right.Type, out var rightElementType))
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
 
-                Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.BindToMethod(CqlOperator.InInterval, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.InInterval, left, right, precision);
 
             }
             else throw new NotImplementedException().WithContext(this);
@@ -150,15 +134,13 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = _typeManager.Resolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesList, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesList, left, right);
                 }
                 else
                 {
                     if (leftElementType != right.Type)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesElement, left, right);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType))
@@ -166,14 +148,12 @@ namespace Hl7.Cql.Compiler
                 if (IsInterval(right.Type, out var pointType))
                 {
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesInterval, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesInterval, left, right, precision);
                 }
                 else
                 {
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesElement, left, right, precision);
                 }
             }
             throw new NotImplementedException().WithContext(this);
@@ -191,30 +171,26 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = _typeManager.Resolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { right, left };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesList, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesList, right, left);
                 }
                 else
                 {
                     if (leftElementType != right.Type)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { right, left };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListIncludesElement, right, left);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType) && IsInterval(right.Type, out var rightPointType))
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
-                Expression[] parameters = new[] { right, left, precision };
-                return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesInterval, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesInterval, right, left, precision);
             }
             else if (IsInterval(right.Type, out var pointType))
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
                 if (left.Type != pointType)
                     throw this.NewExpressionBuildingException();
-                Expression[] parameters = new[] { right, left, precision };
-                return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesElement, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalIncludesElement, right, left, precision);
 
             }
             throw new NotImplementedException().WithContext(this);
@@ -226,15 +202,13 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1]!);
             if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
-                Expression[] parameters = new[] { left, right };
-                return _operatorBinding.BindToMethod(CqlOperator.ListIntersect, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.ListIntersect, left, right);
             }
             else if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
                 {
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalIntersect, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalIntersect, left, right);
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
@@ -252,8 +226,7 @@ namespace Hl7.Cql.Compiler
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.Meets, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.Meets, left, right, precision);
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
@@ -271,8 +244,7 @@ namespace Hl7.Cql.Compiler
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.MeetsAfter, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.MeetsAfter, left, right, precision);
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
@@ -291,8 +263,7 @@ namespace Hl7.Cql.Compiler
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.MeetsBefore, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.MeetsBefore, left, right, precision);
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
@@ -310,8 +281,7 @@ namespace Hl7.Cql.Compiler
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.Overlaps, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.Overlaps, left, right, precision);
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
@@ -329,8 +299,7 @@ namespace Hl7.Cql.Compiler
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.OverlapsBefore, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.OverlapsBefore, left, right, precision);
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
@@ -348,8 +317,7 @@ namespace Hl7.Cql.Compiler
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.OverlapsAfter, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.OverlapsAfter, left, right, precision);
                 }
                 else throw new NotImplementedException().WithContext(this);
             }
@@ -365,28 +333,24 @@ namespace Hl7.Cql.Compiler
                 var precision = Precision(e.precision, e.precisionSpecified);
                 if (IsInterval(right.Type, out var rightPointType))
                 {
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesInterval, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesInterval, left, right, precision);
                 }
                 else
                 {
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, left, right, precision);
                 }
             }
             else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
-                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
+                // var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
                 if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
                 {
-                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesList, parameters);
+                    // var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesList, left, right);
                 }
                 else
                 {
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesElement, left, right);
                 }
             }
             throw new NotImplementedException().WithContext(this);
@@ -402,8 +366,7 @@ namespace Hl7.Cql.Compiler
                 if (IsInterval(right.Type, out var rightPointType))
                 {
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { right, left, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesInterval, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesInterval, right, left, precision);
                 }
             }
             else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
@@ -414,15 +377,13 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { right, left };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesList, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesList, right, left);
                 }
             }
             else if (IsInterval(right.Type, out var rightPointType))
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
-                Expression[] parameters = new[] { right, left, precision };
-                return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, right, left, precision);
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -434,13 +395,11 @@ namespace Hl7.Cql.Compiler
             if (IsInterval(intervalOrList.Type, out var pointType))
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
-                Expression[] parameters = new[] { intervalOrList, element, precision };
-                return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, intervalOrList, element, precision);
             }
             else if (_typeResolver.ImplementsGenericIEnumerable(intervalOrList.Type))
             {
-                Expression[] parameters = new[] { intervalOrList, element };
-                return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesElement, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesElement, intervalOrList, element);
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -457,15 +416,13 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesList, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesList, left, right);
                 }
                 else
                 {
                     if (leftElementType != right.Type)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesElement, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListProperlyIncludesElement, left, right);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType))
@@ -473,8 +430,7 @@ namespace Hl7.Cql.Compiler
                 if (leftPointType != right.Type)
                     throw this.NewExpressionBuildingException();
                 var precision = Precision(e.precision, e.precisionSpecified);
-                Expression[] parameters = new[] { left, right, precision };
-                return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, parameters);
+                return _operatorBinding.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, left, right, precision);
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -490,8 +446,7 @@ namespace Hl7.Cql.Compiler
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
                     var precision = Precision(e.precision, e.precisionSpecified);
-                    Expression[] parameters = new[] { left, right, precision };
-                    return _operatorBinding.BindToMethod(CqlOperator.Starts, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.Starts, left, right, precision);
 
                 }
             }
@@ -512,8 +467,7 @@ namespace Hl7.Cql.Compiler
                     if (leftElementType != rightElementType)
                         throw this.NewExpressionBuildingException($"Union requires both operands to be of the same type, " +
                                                                   $"but left is {leftElementType.Name} and right is {rightElementType.Name}.");
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.ListUnion, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.ListUnion, left, right);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType))
@@ -522,8 +476,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    Expression[] parameters = new[] { left, right };
-                    return _operatorBinding.BindToMethod(CqlOperator.IntervalUnion, parameters);
+                    return _operatorBinding.BindToMethod(CqlOperator.IntervalUnion, left, right);
                 }
             }
             throw new NotImplementedException().WithContext(this);

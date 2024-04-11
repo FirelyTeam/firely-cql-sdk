@@ -55,7 +55,7 @@ partial class CqlOperatorsBinding
                 if (methodParameters.Length == arguments.Length)
                 {
                     Type[] parameterTypes = methodParameters.SelectToArray(p => p.ParameterType);
-                    Type[] methodTypeArgs = [];
+                    //Type[] methodTypeArgs = [];
                     if (bindOptionGeneric)
                     {
                         var genericType = bindOptionGenericFrom2ndArg
@@ -63,15 +63,15 @@ partial class CqlOperatorsBinding
                             : arguments[0].Type.GetGenericArguments()[0];
                         method = method.MakeGenericMethod(genericType);
                         parameterTypes = method.GetParameters().SelectToArray(p => p.ParameterType);
-                        methodTypeArgs = [genericType];
+                        //methodTypeArgs = [genericType];
                     }
                     ConversionType[] conversions = arguments.SelectToArray((e, i) => CanConvert(e.Type, parameterTypes[i]));
                     if (conversions.Any(c => c == ConversionType.Incompatible))
                         continue;
 
-                    var convertedExpressions = arguments.SelectToArray((e, i) => Convert(e, parameterTypes[i], conversions[i]));
+                    arguments = arguments.SelectToArray((e, i) => Convert(e, parameterTypes[i], conversions[i]));
 
-                    var call = BindToGenericMethod(method, methodTypeArgs, convertedExpressions);
+                    var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, method, arguments);
                     return call;
                 }
             }
@@ -159,21 +159,6 @@ partial class CqlOperatorsBinding
         params Expression[] expressions)
     {
         var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, method, expressions);
-        return call;
-    }
-
-    protected static MethodCallExpression BindToGenericMethod(
-        MethodInfo methodInfo,
-        Type[] typeArguments,
-        params Expression[]? arguments)
-    {
-        if (typeArguments is [{ }, ..] && methodInfo.IsGenericMethodDefinition)
-            methodInfo = methodInfo.MakeGenericMethod(typeArguments);
-
-        var call = Expression.Call(
-            CqlContextExpressions.Operators_PropertyExpression,
-            methodInfo,
-            arguments);
         return call;
     }
 }
