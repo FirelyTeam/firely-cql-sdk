@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -10,6 +11,12 @@ namespace Hl7.Cql.Compiler;
 #pragma warning disable CS1591
 partial class CqlOperatorsBinding
 {
+    public static readonly IReadOnlyDictionary<string, MethodInfo[]> ICqlOperators_MethodInfos_By_Name =
+        typeof(ICqlOperators)
+        .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+        .GroupBy(m => m.Name)
+        .ToDictionary(m => m.Key, m => m.ToArray());
+
     // @formatter:off
     private const BindOptions BindOption_ConvertArguments    = (BindOptions)1;
     private const BindOptions BindOption_Generic             = (BindOptions)2;
@@ -45,7 +52,7 @@ partial class CqlOperatorsBinding
 
         if (bindOptionConvertArguments)
         {
-            var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName].AsEnumerable();
+            var methods = ICqlOperators_MethodInfos_By_Name[methodName].AsEnumerable();
             if (bindOptionGeneric) methods = methods.Where(m => m.IsGenericMethod);
 
             foreach (var curMethod in methods)
@@ -99,7 +106,7 @@ partial class CqlOperatorsBinding
         Expression right,
         Expression precision)
     {
-        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
+        var methods = ICqlOperators_MethodInfos_By_Name[methodName];
         foreach (var method in methods)
         {
             var methodParameters = method.GetParameters();
@@ -131,7 +138,7 @@ partial class CqlOperatorsBinding
         Expression operand,
         Expression precision)
     {
-        var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[methodName];
+        var methods = ICqlOperators_MethodInfos_By_Name[methodName];
         foreach (var method in methods)
         {
             var methodParameters = method.GetParameters();

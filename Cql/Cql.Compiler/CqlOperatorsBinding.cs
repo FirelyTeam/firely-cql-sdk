@@ -272,7 +272,7 @@ namespace Hl7.Cql.Compiler
                     throw new ArgumentException($"Unable to determine element type for Expand argument.", nameof(argument));
                 if (IsInterval(elementType))
                 {
-                    var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.ExpandList)];
+                    var methods = ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.ExpandList)];
                     foreach (var method in methods)
                     {
                         var methodParameters = method.GetParameters();
@@ -291,7 +291,7 @@ namespace Hl7.Cql.Compiler
             }
             else if (IsInterval(argument.Type))
             {
-                var methods = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.ExpandInterval)];
+                var methods = ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.ExpandInterval)];
                 foreach (var method in methods)
                 {
                     var methodParameters = method.GetParameters();
@@ -479,7 +479,7 @@ namespace Hl7.Cql.Compiler
 
             }
 
-            var exactMethod = ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.Interval)]
+            var exactMethod = ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.Interval)]
                 .FirstOrDefault(m =>
                     m.GetParameters()
                         .Select(p => p.ParameterType)
@@ -492,7 +492,7 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var methods =
-                    ICqlOperatorsExpressions.ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.Interval)];
+                    ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.Interval)];
                 foreach (var method in methods)
                 {
                     var methodParameters = method.GetParameters();
@@ -712,7 +712,7 @@ namespace Hl7.Cql.Compiler
             };
         }
 
-        protected bool IsInterval(Type type)
+        protected static bool IsInterval(Type type)
         {
             if (type.IsGenericType)
             {

@@ -23,14 +23,3 @@ internal class CqlContextExpressions
     private static PropertyInfo Definitions_PropertyInfo = ReflectionUtility.PropertyOf(() => CqlContextInstance.Definitions);
     public static MemberExpression Definitions_PropertyExpression = Expression.Property(ParameterExpression, Definitions_PropertyInfo);
 }
-
-internal class ICqlOperatorsExpressions
-{
-    private static readonly Type ICqlOperatorsType = typeof(ICqlOperators);
-
-    public static readonly IReadOnlyDictionary<string, MethodInfo[]> ICqlOperators_MethodInfos_By_Name =
-        ICqlOperatorsType
-            .GetMethods(BindingFlags.Instance|BindingFlags.Public)
-            .GroupBy(m => m.Name)
-            .ToDictionary(m => m.Key, m => m.ToArray());
-}
