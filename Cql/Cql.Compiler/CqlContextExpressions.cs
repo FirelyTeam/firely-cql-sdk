@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
-using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;

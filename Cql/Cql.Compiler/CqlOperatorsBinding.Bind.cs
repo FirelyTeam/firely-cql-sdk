@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler;
@@ -17,94 +16,79 @@ partial class CqlOperatorsBinding
         .GroupBy(m => m.Name)
         .ToDictionary(m => m.Key, m => m.ToArray());
 
-    // @formatter:off
-    private const BindOptions BindOption_ConvertArguments    = (BindOptions)0x_01;
-    private const BindOptions BindOption_ReturnNullOverError = (BindOptions)0x_02;
+    private static readonly ConstantExpression NullObject_ConstantExpression = Expression.Constant(null, typeof(object));
 
-    [Flags]
-    protected enum BindOptions
-    {
-        None                           = 0,
-        ConvertArguments               = BindOption_ConvertArguments,
-        ReturnNullOverError            = BindOption_ReturnNullOverError,
-    }
-    // @formatter:on
-
-    protected Expression BindToMethod(
+    private MethodCallExpression? BindToMethodConvertArgsOrNull(
         string methodName,
-        BindOptions options,
         params Expression[] arguments)
     {
-        if (options == BindOptions.None)
-        {
-            return BindToMethod(methodName, arguments);
-        }
+        var methods = ICqlOperators_MethodInfos_By_Name[methodName];
 
-        if (options.HasFlag(BindOption_ConvertArguments))
+        foreach (var method in methods)
         {
-            var methods = ICqlOperators_MethodInfos_By_Name[methodName];
-
-            foreach (var method in methods)
+            MethodInfo bindMethod;
+            if (method is { IsGenericMethodDefinition: true })
             {
-                MethodInfo bindMethod;
-                if (method is { IsGenericMethodDefinition:true })
+                var genericType = arguments switch
                 {
-                    var genericType = arguments switch
-                    {
-                        [{ }, { Type.IsGenericType: true } a1, ..] => a1.Type.GetGenericArguments()[0],
-                        [{ } a0, ..] => a0.Type.GetGenericArguments()[0],
-                        _ => null!, // Can't happen
-                    };
-
-                    bindMethod = method.MakeGenericMethod(genericType);
-                }
-                else
-                {
-                    bindMethod = method;
-                }
-
-                ParameterInfo[] methodParameters = bindMethod.GetParameters();
-                if (methodParameters.Length != arguments.Length)
-                    continue;
-
-                Expression[]? ConvertArguments()
-                {
-                    Expression[] arr = new Expression[arguments.Length];
-                    for (int i = 0; i < arguments.Length; i++)
-                    {
-                        if (!TryConvert(arguments[i].Type, methodParameters[i].ParameterType, arguments[i], out arr[i]!))
-                            return null;
-                    }
-                    return arr;
-                }
-
-                var bindArguments = ConvertArguments();
-                if (bindArguments is null)
-                    continue;
-
-                var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, bindMethod, bindArguments);
-                return call;
+                [{ }, { Type.IsGenericType: true } a1, ..] => a1.Type.GetGenericArguments()[0],
+                [{ } a0, ..] => a0.Type.GetGenericArguments()[0],
+                    _ => null!, // Can't happen
+                };
+                bindMethod = method.MakeGenericMethod(genericType);
+            }
+            else
+            {
+                bindMethod = method;
             }
 
-            if (options.HasFlag(BindOption_ReturnNullOverError))
-                return Expression.Constant(null, typeof(object));
+            ParameterInfo[] methodParameters = bindMethod.GetParameters();
+            if (methodParameters.Length != arguments.Length)
+                continue;
 
-            var types = string.Join(", ", arguments.Select(e => e.Type.Name));
-            throw new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
+            Expression[]? ConvertArguments()
+            {
+                Expression[] arr = new Expression[arguments.Length];
+                for (int i = 0; i < arguments.Length; i++)
+                {
+                    if (!TryConvert(arguments[i].Type, methodParameters[i].ParameterType, arguments[i], out arr[i]!))
+                        return null;
+                }
+                return arr;
+            }
+
+            var bindArguments = ConvertArguments();
+            if (bindArguments is null)
+                continue;
+
+            var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, bindMethod, bindArguments);
+            return call;
         }
 
-        throw new ArgumentOutOfRangeException(nameof(options), options, "Invalid BindOptions");
+        return null;
     }
 
-    private static Expression BindToMethod(
+
+    private MethodCallExpression BindToMethodConvertArgs(
         string methodName,
         params Expression[] arguments)
     {
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, null, arguments);
-        return call;
+        return BindToMethodConvertArgsOrNull(methodName, arguments)
+            ?? throw NoMethodFoundException();
+
+        ArgumentException NoMethodFoundException()
+        {
+            var types = string.Join(", ", arguments.Select(e => e.Type.Name));
+            return new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
+        }
     }
 
-    protected static MethodCallExpression BindToMethod(
+    private static MethodCallExpression BindToMethod(
+        string methodName,
+        params Expression[] arguments) =>
+        Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, null, arguments);
+
+    private static MethodCallExpression BindToMethod(
         string methodName,
         Type[] typeArguments,
         params Expression[] arguments) =>
