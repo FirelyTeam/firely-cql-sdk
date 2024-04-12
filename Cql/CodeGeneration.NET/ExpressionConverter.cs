@@ -63,7 +63,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {{
                         string.Concat(
                            e.ToString()
-                               .Split([Environment.NewLine], StringSplitOptions.None)
+                               .Split(new []{Environment.NewLine}, StringSplitOptions.None)
                                .Select(line => $"    {line}{Environment.NewLine}")
                         )
                     }}

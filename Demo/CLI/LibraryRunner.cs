@@ -31,7 +31,7 @@ namespace CLI
                     var valueset = method.GetCustomAttribute<CqlValueSetAttribute>();
                     if (declaration != null && valueset == null)
                     {
-                        var value = method.Invoke(instance, [])!;
+                        var value = method.Invoke(instance, Array.Empty<object?>())!;
                         values.Add(declaration.Name, value);
                     }
                 }

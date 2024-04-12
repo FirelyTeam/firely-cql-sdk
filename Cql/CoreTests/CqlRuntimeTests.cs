@@ -13,16 +13,16 @@ namespace CoreTests
         public void DefinitionDictionary_BestMatch()
         {
             var dd = new DefinitionDictionary<string>();
-            var score1 = dd.Score([typeof(Claim)], [typeof(Claim)]);
+            var score1 = dd.Score(new[] { typeof(Claim) }, new[] { typeof(Claim) });
             Assert.AreEqual(0, score1); // exact match
-            var score2 = dd.Score([typeof(Claim)], [typeof(DomainResource)]);
+            var score2 = dd.Score(new[] { typeof(Claim) }, new[] { typeof(DomainResource) });
             Assert.AreEqual(1, score2); // signature is 1 level removed from paramter type
-            var score3 = dd.Score([typeof(DomainResource)], [typeof(Claim)]);
+            var score3 = dd.Score(new[] { typeof(DomainResource) }, new[] { typeof(Claim) });
             Assert.IsNull(score3); // DomainResource is not assignable to Claim
 
-            var bestMatch = dd.BestMatch([typeof(Claim)], new[]
+            var bestMatch = dd.BestMatch(new[] { typeof(Claim) }, new[]
             {
-                ([typeof(DomainResource)], "DomainResource"),
+                (new[] { typeof(DomainResource) }, "DomainResource"),
                 (new[] { typeof(Claim) }, "Claim"),
             });
             Assert.AreEqual("Claim", bestMatch);
@@ -32,14 +32,14 @@ namespace CoreTests
         public void DefinitionDictionary_BestMatch_Ambiguous()
         {
             var dd = new DefinitionDictionary<string>();
-            var score1 = dd.Score([typeof(Claim), typeof(Claim)], [typeof(Claim), typeof(DomainResource)]);
+            var score1 = dd.Score(new[] { typeof(Claim), typeof(Claim) }, new[] { typeof(Claim), typeof(DomainResource) });
             Assert.AreEqual(1, score1); // exact match
-            var score2 = dd.Score([typeof(Claim), typeof(Claim)], [typeof(DomainResource), typeof(Claim)]);
+            var score2 = dd.Score(new[] { typeof(Claim), typeof(Claim) }, new[] { typeof(DomainResource), typeof(Claim) });
             Assert.AreEqual(1, score2); // signature is 1 level removed from paramter type
 
-            var bestMatch = dd.BestMatch([typeof(Claim), typeof(Claim)], new[]
+            var bestMatch = dd.BestMatch(new[] { typeof(Claim), typeof(Claim) }, new[]
             {
-                ([typeof(DomainResource), typeof(Claim)], "DomainResource, Claim"),
+                (new[] { typeof(DomainResource), typeof(Claim) }, "DomainResource, Claim"),
                 (new[] { typeof(Claim), typeof(DomainResource) }, "Claim, DomainResource"),
             });
             Assert.IsNull(bestMatch);

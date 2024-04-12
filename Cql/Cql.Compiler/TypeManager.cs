@@ -68,7 +68,7 @@ namespace Hl7.Cql.Compiler
 
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
-            TupleTypeList = [];
+            TupleTypeList = new List<Type>();
             Hasher = new Hasher();
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
@@ -104,9 +104,7 @@ namespace Hl7.Cql.Compiler
         {
             var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
             var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
-            var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor([
-                typeof(string)
-            ])!, [cqlName]);
+            var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor(new[] { typeof(string) })!, new object?[] { cqlName });
             propertyBuilder.SetCustomAttribute(customAttributeBuilder);
             MethodAttributes attributes = MethodAttributes.Public
                     | MethodAttributes.SpecialName
@@ -121,7 +119,7 @@ namespace Hl7.Cql.Compiler
             }
 
             {
-                var set = myTypeBuilder.DefineMethod($"set_{normalizedName}", attributes, null, [type]);
+                var set = myTypeBuilder.DefineMethod($"set_{normalizedName}", attributes, null, new Type[] { type });
                 ILGenerator setIL = set.GetILGenerator();
                 setIL.Emit(OpCodes.Ldarg_0);
                 setIL.Emit(OpCodes.Ldarg_1);

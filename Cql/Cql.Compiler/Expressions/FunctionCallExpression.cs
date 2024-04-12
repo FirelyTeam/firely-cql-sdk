@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
     {
         private static readonly PropertyInfo itemProperty =
             typeof(DefinitionDictionary<Delegate>)
-            .GetProperty("Item", [typeof(string), typeof(string), typeof(Type[])])!;
+            .GetProperty("Item", new[] { typeof(string), typeof(string), typeof(Type[]) })!;
 
         public FunctionCallExpression(Expression definitions,
             string libraryName, string functionName, IReadOnlyCollection<Expression> arguments, Type functionType)

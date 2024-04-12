@@ -51,7 +51,7 @@ namespace CoreTests
 
         public static IEnumerable<object[]> GetData()
         {
-            yield return [new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector)];
+            yield return new object[] { new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector) };
         }
     }
 }

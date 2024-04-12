@@ -21,7 +21,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private List<string> Reserved { get; }
 
-        private readonly List<char> Letters = [(char)('a' - 1)];
+        private readonly List<char> Letters = new() { (char)('a' - 1) };
         private readonly string Prefix = string.Empty;
 
 
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public VariableNameGenerator(IEnumerable<string>? reserved = null, string postfix = "")
         {
-            Reserved = reserved?.ToList() ?? [];
+            Reserved = reserved?.ToList() ?? new List<string>();
             Postfix = postfix;
         }
 
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         internal VariableNameGenerator(List<char> state, IEnumerable<string>? reserved = null, string postfix = "")
         {
-            Reserved = reserved?.ToList() ?? [];
+            Reserved = reserved?.ToList() ?? new List<string>();
             Postfix = postfix;
             Letters = state;
         }
@@ -91,7 +91,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         Letters[lastIndex] = next;
                     }
-                    vn = $"{Prefix}{new string([..Letters])}{Postfix}";
+                    vn = $"{Prefix}{new string(Letters.ToArray())}{Postfix}";
                 }
                 while (Reserved.Contains(vn) || SyntaxFacts.GetKeywordKind(vn) != SyntaxKind.None);
 

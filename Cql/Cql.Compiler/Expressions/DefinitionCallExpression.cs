@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler
     internal class DefinitionCallExpression : Expression
     {
         private static readonly PropertyInfo itemProperty =
-            typeof(DefinitionDictionary<Delegate>).GetProperty("Item", [typeof(string), typeof(string)])!;
+            typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string) })!;
 
         public DefinitionCallExpression(Expression definitions,
             string libraryName, string definitionName, Expression cqlContextParameter, Type definitionType)

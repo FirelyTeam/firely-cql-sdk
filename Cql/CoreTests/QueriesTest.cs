@@ -50,13 +50,13 @@ namespace CoreTests
 
         private static HashValueSetDictionary ValueSets;
         private const string TestCodeSystem = "https://www.ncqa.org/fhir/codesystem/test-cs";
-        private static readonly CqlCode[] TestCodes =
-        [
+        private static readonly CqlCode[] TestCodes = new CqlCode[]
+        {
             new CqlCode("1", TestCodeSystem, null, null),
             new CqlCode("2", TestCodeSystem, null, null),
-            new CqlCode("3", TestCodeSystem, null, null)
+            new CqlCode("3", TestCodeSystem, null, null),
 
-        ];
+        };
 
         private CqlContext GetNewContext(Bundle bundle) => FhirCqlContext.ForBundle(
             bundle: bundle,
@@ -119,7 +119,10 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "code", System = "system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "code", System = "system" }
+                        }
                     }
                 }
             });
@@ -130,7 +133,10 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "bad code", System = "system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "bad code", System = "system" }
+                        }
                     }
                 }
             });
@@ -141,7 +147,10 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "code", System = "bad system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "code", System = "bad system" }
+                        }
                     }
                 }
             });
@@ -207,7 +216,10 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "1", System = TestCodeSystem }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "1", System = TestCodeSystem }
+                        }
                     }
                 }
             });
@@ -218,7 +230,10 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "bad code", System = "system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "bad code", System = "system" }
+                        }
                     }
                 }
             });
@@ -229,7 +244,10 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "code", System = "bad system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "code", System = "bad system" }
+                        }
                     }
                 }
             });
@@ -264,7 +282,10 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "1", System = TestCodeSystem }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "1", System = TestCodeSystem }
+                        }
                     }
                 }
             });
@@ -275,7 +296,10 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "bad code", System = "system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "bad code", System = "system" }
+                        }
                     }
                 }
             });
@@ -286,7 +310,10 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "code", System = "bad system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "code", System = "bad system" }
+                        }
                     }
                 }
             });
@@ -321,7 +348,10 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "1", System = TestCodeSystem }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "1", System = TestCodeSystem }
+                        }
                     }
                 }
             });
@@ -332,7 +362,10 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "bad code", System = "system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "bad code", System = "system" }
+                        }
                     }
                 }
             });
@@ -343,7 +376,10 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = [new Coding { Code = "code", System = "bad system" }]
+                        Coding = new List<Coding>
+                        {
+                            new Coding { Code = "code", System = "bad system" }
+                        }
                     }
                 }
             });

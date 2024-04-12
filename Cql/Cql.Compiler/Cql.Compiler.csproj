@@ -14,8 +14,8 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24122.1" PrivateAssets="All" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<PackageReference Include="Dumpify" Version="0.6.5" />
+	<ItemGroup Condition=" '$(Configuration)' == 'Debug' " >
+		<PackageReference Include="Dumpify" Version="0.6.5"  />
 	</ItemGroup>
 
 	<ItemGroup>

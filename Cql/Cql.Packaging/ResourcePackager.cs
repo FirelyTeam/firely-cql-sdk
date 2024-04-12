@@ -145,7 +145,7 @@ internal class ResourcePackager
                         Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
                         End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
                     };
-                    measure.Group = [];
+                    measure.Group = new List<Measure.GroupComponent>();
                     measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
                     if (library.NameAndVersion() is null)
                         throw new InvalidOperationException("Library NameAndVersion should not be null.");
@@ -271,14 +271,14 @@ internal class ResourcePackager
 
     private static readonly CodeableConcept LogicLibraryCodeableConcept = new()
     {
-        Coding =
-        [
+        Coding = new List<Coding>
+        {
             new Coding
             {
                 Code = "logic-library"!,
                 System = "http://terminology.hl7.org/CodeSystem/library-type"!
             }
-        ]
+        }
     };
 
     private static ParameterDefinition ElmParameterToFhir(
@@ -332,14 +332,14 @@ internal class ResourcePackager
         };
         if (type.ElementType is not null && type.ElementType.FhirType is not null)
         {
-            parameterDefinition.Extension =
-            [
+            parameterDefinition.Extension = new List<Extension>()
+            {
                 new Extension
                 {
                     Value = new Code<FHIRAllTypes>(type.ElementType.FhirType),
                     Url = Constants.ParameterElementTypeExtensionUri
                 }
-            ];
+            };
         }
 
         if (definition.accessLevel == Elm.AccessModifier.Private)

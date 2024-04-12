@@ -31,8 +31,8 @@ internal static class Traversal
         this IEnumerable<T> allItems,
         Func<T, IEnumerable<T>> getNextItems)
     {
-        HashSet<T> allItemsSet = [..allItems];
-        HashSet<T> notARootSet = [..allItems.SelectMany(getNextItems)];
+        HashSet<T> allItemsSet = new HashSet<T>(allItems);
+        HashSet<T> notARootSet = new HashSet<T>(allItems.SelectMany(getNextItems));
         IEnumerable<T> roots = allItemsSet.Except(notARootSet);
         return roots;
     }
@@ -46,7 +46,7 @@ internal static class Traversal
         this IEnumerable<T> allItems,
         Func<T, IEnumerable<T>> getNextItems)
     {
-        HashSet<T> unvisited = [..allItems];
+        HashSet<T> unvisited = new(allItems);
         switch (unvisited.Count)
         {
             case 0:
@@ -55,7 +55,7 @@ internal static class Traversal
                 return EnumerateSingle(unvisited.First());
         }
 
-        HashSet<T> visited = [];
+        HashSet<T> visited = new();
         Queue<T> results = new();
         TraversalCallbacks<T> traversalCallbacks =
             new(

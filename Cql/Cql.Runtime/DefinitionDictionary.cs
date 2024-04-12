@@ -339,12 +339,12 @@ public class DefinitionDictionary<T> where T : class
         {
             if (!TagsByLibrary.TryGetValue(library, out var tags))
             {
-                tags = [];
+                tags = new();
                 TagsByLibrary.Add(library, tags);
             }
             foreach (var value in values)
             {
-                var tag = new Tag(library, definition, signature ?? [], name, value);
+                var tag = new Tag(library, definition, signature ?? new Type[0], name, value);
                 tags.Add(tag);
             }
         }
@@ -360,7 +360,7 @@ public class DefinitionDictionary<T> where T : class
     /// <returns><see langword="true"/> if the definiton has tags and thus <paramref name="tags"/> is not <see langword="null"/>; otherwise, <see langword="false"/>.</returns>
     public bool TryGetTags(string library, string definition, Type[] signature, [NotNullWhen(true)] out ILookup<string, string>? tags)
     {
-        signature ??= [];
+        signature ??= new Type[0];
         if (TagsByLibrary.TryGetValue(library, out var tagsList))
         {
             foreach (var tag in tagsList)
