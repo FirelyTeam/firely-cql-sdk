@@ -198,7 +198,7 @@ namespace Hl7.Cql.Compiler
 
                 CqlOperator.Convert                          => BindConvert(parameters[0], parameters[1]),
 
-                CqlOperator.InInterval                       => BindToMethod(nameof(ICqlOperators.ElementInInterval), BindOptions.ConvertArgumentsGeneric2ndArg, parameters[..3]),
+                CqlOperator.InInterval                       => BindToMethod(nameof(ICqlOperators.ElementInInterval), BindOptions.ConvertArguments, parameters[..3]),
                 CqlOperator.Ends                             => BindToMethod(nameof(ICqlOperators.Ends), BindOptions.ConvertArguments, parameters[..3]),
                 CqlOperator.IntervalIncludesElement          => BindToMethod(nameof(ICqlOperators.IntervalIncludesElement), BindOptions.ConvertArguments, parameters[..3]),
                 CqlOperator.IntervalIncludesInterval         => BindToMethod(nameof(ICqlOperators.IntervalIncludesInterval), BindOptions.ConvertArguments, parameters[..3]),
@@ -225,13 +225,13 @@ namespace Hl7.Cql.Compiler
 
                 CqlOperator.Aggregate                        => BindToMethod(nameof(ICqlOperators.AggregateOrNull),[TypeResolver.GetListElementType(parameters[0].Type, true)!, parameters[2].Type],parameters[0], parameters[2], parameters[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
                 CqlOperator.CrossJoin                        => BindToMethod(nameof(ICqlOperators.CrossJoin),parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!), parameters),
-                CqlOperator.Date                             => BindToMethod(nameof(ICqlOperators.Date), BindOptions.None, parameters),
-                CqlOperator.DateTime                         => BindToMethod(nameof(ICqlOperators.DateTime)!, BindOptions.None, parameters),
-                CqlOperator.Now                              => BindToMethod(nameof(ICqlOperators.Now), BindOptions.None),
-                CqlOperator.Quantity                         => BindToMethod(nameof(ICqlOperators.Quantity), BindOptions.None, parameters[..2]), // Discard the 3rd parameter
-                CqlOperator.Time                             => BindToMethod(nameof(ICqlOperators.Time), BindOptions.None, parameters),
-                CqlOperator.TimeOfDay                        => BindToMethod(nameof(ICqlOperators.TimeOfDay), BindOptions.None),
-                CqlOperator.Today                            => BindToMethod(nameof(ICqlOperators.Today), BindOptions.None),
+                CqlOperator.Date                             => BindToMethod(nameof(ICqlOperators.Date), parameters),
+                CqlOperator.DateTime                         => BindToMethod(nameof(ICqlOperators.DateTime)!, parameters),
+                CqlOperator.Now                              => BindToMethod(nameof(ICqlOperators.Now)),
+                CqlOperator.Quantity                         => BindToMethod(nameof(ICqlOperators.Quantity), parameters[..2]), // Discard the 3rd parameter
+                CqlOperator.Time                             => BindToMethod(nameof(ICqlOperators.Time), parameters),
+                CqlOperator.TimeOfDay                        => BindToMethod(nameof(ICqlOperators.TimeOfDay)),
+                CqlOperator.Today                            => BindToMethod(nameof(ICqlOperators.Today)),
                 CqlOperator.Message                          => BindToMethod(nameof(ICqlOperators.Message), [parameters[0].Type], parameters),
                 CqlOperator.ToList                           => BindToMethod(nameof(ICqlOperators.ToList), [parameters[0].Type], parameters),
 
@@ -342,7 +342,7 @@ namespace Hl7.Cql.Compiler
                     return BindToMethod(nameof(ICqlOperators.CodeInList), BindOptions.ConvertArguments, left, right);
                 }
             }
-            return BindToMethod(nameof(ICqlOperators.InList), BindOptions.ReturnNullOverError | BindOptions.ConvertArgumentsGeneric2ndArg, left, right);
+            return BindToMethod(nameof(ICqlOperators.InList), BindOptions.ReturnNullOverError | BindOptions.ConvertArguments, left, right);
         }
 
         private Expression ListUnion(
@@ -370,7 +370,7 @@ namespace Hl7.Cql.Compiler
         {
             if (expression is NewExpression @new && @new.Type == typeof(CqlValueSet))
             {
-                var call = BindToMethod(nameof(ICqlOperators.ResolveValueSet), BindOptions.None, @new);
+                var call = BindToMethod(nameof(ICqlOperators.ResolveValueSet), @new);
                 return call;
             }
             else throw new ArgumentException("Expression should be a constant CqlValueSet");
@@ -438,7 +438,7 @@ namespace Hl7.Cql.Compiler
             else if (elementType == typeof(object))
             {
                 // This scenario can happen in late-bound property chains
-                var call = BindToMethod(nameof(ICqlOperators.FlattenLateBoundList), BindOptions.None, operand);
+                var call = BindToMethod(nameof(ICqlOperators.FlattenLateBoundList), operand);
                 return call;
             }
             else return operand; // flatten is being called on a list that is already flat.
@@ -532,7 +532,7 @@ namespace Hl7.Cql.Compiler
                 var methodName = CqlOperators.ConversionFunctionName(source.Type, toType);
                 if (methodName != null)
                 {
-                    var call = BindToMethod(methodName, BindOptions.None, source);
+                    var call = BindToMethod(methodName, source);
                     return call;
                 }
                 else

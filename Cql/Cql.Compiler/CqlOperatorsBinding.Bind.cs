@@ -19,15 +19,13 @@ partial class CqlOperatorsBinding
 
     // @formatter:off
     private const BindOptions BindOption_ConvertArguments    = (BindOptions)0x_01;
-    private const BindOptions BindOption_GenericFrom2ndArg   = (BindOptions)0x_02;
-    private const BindOptions BindOption_ReturnNullOverError = (BindOptions)0x_04;
+    private const BindOptions BindOption_ReturnNullOverError = (BindOptions)0x_02;
 
     [Flags]
     protected enum BindOptions
     {
         None                           = 0,
         ConvertArguments               = BindOption_ConvertArguments,
-        ConvertArgumentsGeneric2ndArg  = BindOption_ConvertArguments | BindOption_GenericFrom2ndArg,
         ReturnNullOverError            = BindOption_ReturnNullOverError,
     }
     // @formatter:on
@@ -39,8 +37,7 @@ partial class CqlOperatorsBinding
     {
         if (options == BindOptions.None)
         {
-            var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, null, arguments);
-            return call;
+            return BindToMethod(methodName, arguments);
         }
 
         if (options.HasFlag(BindOption_ConvertArguments))
@@ -52,9 +49,12 @@ partial class CqlOperatorsBinding
                 MethodInfo bindMethod;
                 if (method is { IsGenericMethodDefinition:true })
                 {
-                    var genericType = options.HasFlag(BindOption_GenericFrom2ndArg)
-                        ? arguments[1].Type.GetGenericArguments()[0]
-                        : arguments[0].Type.GetGenericArguments()[0];
+                    var genericType = arguments switch
+                    {
+                        [{ }, { Type.IsGenericType: true } a1, ..] => a1.Type.GetGenericArguments()[0],
+                        [{ } a0, ..] => a0.Type.GetGenericArguments()[0],
+                        _ => null!, // Can't happen
+                    };
 
                     bindMethod = method.MakeGenericMethod(genericType);
                 }
@@ -94,6 +94,14 @@ partial class CqlOperatorsBinding
         }
 
         throw new ArgumentOutOfRangeException(nameof(options), options, "Invalid BindOptions");
+    }
+
+    private static Expression BindToMethod(
+        string methodName,
+        params Expression[] arguments)
+    {
+        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, null, arguments);
+        return call;
     }
 
     protected static MethodCallExpression BindToMethod(
