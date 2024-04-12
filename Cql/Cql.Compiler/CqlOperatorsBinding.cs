@@ -22,11 +22,6 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal partial class CqlOperatorsBinding : OperatorBinding
     {
-        internal static Expression[] RemoveNullPrecisionArg(params Expression?[] args) =>
-            args!;
-            // (args is [.., null] argsLastIsNull ? argsLastIsNull[..^1] : args)!;
-
-
         internal TypeConverter? TypeConverter { get; }
 
         internal TypeResolver TypeResolver { get; }

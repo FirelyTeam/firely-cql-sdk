@@ -21,7 +21,7 @@ namespace Hl7.Cql.Compiler
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand!);
-            return _operatorBinding.BindToMethod(CqlOperator.CalculateAge, RemoveNullPrecisionArg(birthDate, units));
+            return _operatorBinding.BindToMethod(CqlOperator.CalculateAge, birthDate, units);
         }
 
         protected Expression CalculateAgeAt(Elm.CalculateAgeAt e)
@@ -29,7 +29,7 @@ namespace Hl7.Cql.Compiler
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand![0]);
             var asOf = TranslateExpression(e.operand[1]); // should be "as of" argument
-            return _operatorBinding.BindToMethod(CqlOperator.CalculateAgeAt, RemoveNullPrecisionArg(birthDate, asOf, units));
+            return _operatorBinding.BindToMethod(CqlOperator.CalculateAgeAt, birthDate, asOf, units);
         }
 
 

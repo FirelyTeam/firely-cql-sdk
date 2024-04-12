@@ -56,7 +56,7 @@ partial class ExpressionBuilder
         return call;
     }
 
-    protected static ConstantExpression? Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
+    protected static ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
     {
         if (!precisionSpecified)
             return CqlContextExpressions.NullString_ConstantExpression;
