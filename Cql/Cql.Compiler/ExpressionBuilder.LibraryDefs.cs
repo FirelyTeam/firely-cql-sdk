@@ -254,11 +254,12 @@ partial class ExpressionBuilder
                 Expression? defaultValue = null;
                 if (parameter.@default != null)
                     defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default), typeof(object));
-                else defaultValue = Expression.Constant(null, typeof(object));
+                else defaultValue = CqlContextExpressions.NullObject_ConstantExpression;
 
                 var resolveParam = Expression.Call(
                     CqlContextExpressions.ParameterExpression,
-                    typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
+                    nameof(CqlContext.ResolveParameter),
+                    null,
                     Expression.Constant(_libraryContext.LibraryKey),
                     Expression.Constant(parameter.name),
                     defaultValue

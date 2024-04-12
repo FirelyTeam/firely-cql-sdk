@@ -19,4 +19,6 @@ internal class CqlContextExpressions
 
     private static PropertyInfo Definitions_PropertyInfo = ReflectionUtility.PropertyOf(() => CqlContextInstance.Definitions);
     public static MemberExpression Definitions_PropertyExpression = Expression.Property(ParameterExpression, Definitions_PropertyInfo);
+    public static ConstantExpression NullObject_ConstantExpression = Expression.Constant(null, typeof(object));
+    public static ConstantExpression NullString_ConstantExpression = Expression.Constant(null, typeof(string));
 }

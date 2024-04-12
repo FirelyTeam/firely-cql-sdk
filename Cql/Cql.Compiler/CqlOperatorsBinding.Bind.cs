@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler;
@@ -22,49 +23,64 @@ partial class CqlOperatorsBinding
         string methodName,
         params Expression[] arguments)
     {
+        Expression[] args = arguments; // So we don't modify the original array
         var methods = ICqlOperators_MethodInfos_By_Name[methodName];
 
-        foreach (var method in methods)
+        bool removedLastNullArgOnce = false;
+        while (true)
         {
-            MethodInfo bindMethod;
-            if (method is { IsGenericMethodDefinition: true })
-            {
-                var genericType = arguments switch
-                {
-                [{ }, { Type.IsGenericType: true } a1, ..] => a1.Type.GetGenericArguments()[0],
-                [{ } a0, ..] => a0.Type.GetGenericArguments()[0],
-                    _ => null!, // Can't happen
-                };
-                bindMethod = method.MakeGenericMethod(genericType);
-            }
-            else
-            {
-                bindMethod = method;
-            }
+            Expression[] bindArgs = new Expression[args.Length];
 
-            ParameterInfo[] methodParameters = bindMethod.GetParameters();
-            if (methodParameters.Length != arguments.Length)
-                continue;
-
-            Expression[]? ConvertArguments()
+            foreach (var method in methods)
             {
-                Expression[] arr = new Expression[arguments.Length];
-                for (int i = 0; i < arguments.Length; i++)
+                for (int argIndexForGenericMethod = 0; argIndexForGenericMethod < Math.Min(args.Length, 2); argIndexForGenericMethod++)
                 {
-                    if (!TryConvert(arguments[i].Type, methodParameters[i].ParameterType, arguments[i], out arr[i]!))
-                        return null;
+                    MethodInfo bindMethod;
+                    if (method is { IsGenericMethodDefinition: true })
+                    {
+                        if (!args[argIndexForGenericMethod].Type.IsGenericType)
+                            continue;
+
+                        var genericType = args[argIndexForGenericMethod].Type.GetGenericArguments()[0];
+                        bindMethod = method.MakeGenericMethod(genericType);
+                    }
+                    else
+                    {
+                        bindMethod = method;
+                    }
+
+                    ParameterInfo[] methodParameters = bindMethod.GetParameters();
+                    if (methodParameters.Length != args.Length)
+                        continue;
+
+                    bool ConvertBindArguments()
+                    {
+                        for (int i = 0; i < args.Length; i++)
+                        {
+                            if (!TryConvert(args[i].Type, methodParameters[i].ParameterType, args[i], out bindArgs[i]!))
+                                return false;
+                        }
+                        return true;
+                    }
+
+                    if (!ConvertBindArguments())
+                        continue;
+
+                    var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, bindMethod, bindArgs);
+                    return call;
                 }
-                return arr;
             }
 
-            var bindArguments = ConvertArguments();
-            if (bindArguments is null)
+            if (!removedLastNullArgOnce && args[^1] is ConstantExpression { Value: null })
+            {
+                // Handles precision cases where the last argument might be supplied or not
+                args = args[..^1];
+                removedLastNullArgOnce = true;
                 continue;
+            }
 
-            var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, bindMethod, bindArguments);
-            return call;
+            break;
         }
-
         return null;
     }
 

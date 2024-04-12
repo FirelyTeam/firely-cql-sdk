@@ -10,7 +10,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis.CSharp;
 using Expression = System.Linq.Expressions.Expression;
 using F = Hl7.Fhir.Model;
@@ -57,19 +56,14 @@ partial class ExpressionBuilder
         return call;
     }
 
-    protected static ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
+    protected static ConstantExpression? Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
     {
-        if (precisionSpecified)
-        {
-            var name = Enum.GetName(elmPrecision)!.ToLowerInvariant();
-            var ce = Expression.Constant(name, typeof(string));
-            return ce;
-        }
-        else
-        {
-            var ce = Expression.Constant(null, typeof(string));
-            return ce;
-        }
+        if (!precisionSpecified)
+            return CqlContextExpressions.NullString_ConstantExpression;
+
+        var name = Enum.GetName(elmPrecision)!.ToLowerInvariant();
+        var ce = Expression.Constant(name, typeof(string));
+        return ce;
     }
 
     private static LambdaExpression NotImplemented(

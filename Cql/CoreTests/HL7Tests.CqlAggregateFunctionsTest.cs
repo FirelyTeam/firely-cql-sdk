@@ -22,7 +22,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AllTrueTrueFirst":
 		///	( AllTrue({true,false}) ) = false
@@ -36,7 +36,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AllTrueFalseFirst":
 		///	( AllTrue({false,true}) ) = false
@@ -50,7 +50,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AllTrueAllTrueFalseTrue":
 		///	( AllTrue({true,false,true}) ) = false
@@ -64,7 +64,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AllTrueAllFalseTrueFalse":
 		///	( AllTrue({false,true,false}) ) = false
@@ -78,7 +78,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AllTrueNullFirst":
 		///	( AllTrue({null,true,true}) ) = true
@@ -92,7 +92,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AllTrueEmptyList":
 		///	( AllTrue({}) ) = true
@@ -106,7 +106,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueAllTrue":
 		///	( AnyTrue({true,true}) ) = true
@@ -120,7 +120,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueAllFalse":
 		///	( AnyTrue({false,false}) ) = false
@@ -134,7 +134,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueAllTrueFalseTrue":
 		///	( AnyTrue({true,false,true}) ) = true
@@ -148,7 +148,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueAllFalseTrueFalse":
 		///	( AnyTrue({false,true,false}) ) = true
@@ -162,7 +162,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueTrueFirst":
 		///	( AnyTrue({true,false}) ) = true
@@ -176,7 +176,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueFalseFirst":
 		///	( AnyTrue({false,true}) ) = true
@@ -190,7 +190,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueNullFirstThenTrue":
 		///	( AnyTrue({null,true}) ) = true
@@ -204,7 +204,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueNullFirstThenFalse":
 		///	( AnyTrue({null,false}) ) = false
@@ -218,7 +218,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTrueEmptyList":
 		///	( AnyTrue({}) ) = false
@@ -232,7 +232,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AvgTest1":
 		///	( Avg({ 1.0, 2.0, 3.0, 6.0 }) ) = 3.0
@@ -246,7 +246,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CountTest1":
 		///	( Count({ 15, 5, 99, null, 1 }) ) = 4
@@ -260,7 +260,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CountTestDateTime":
 		///	( Count({ DateTime(2014), DateTime(2001), DateTime(2010) }) ) = 3
@@ -274,7 +274,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CountTestTime":
 		///	( Count({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }) ) = 3
@@ -288,7 +288,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CountTestNull":
 		///	( Count({}) ) = 0
@@ -302,7 +302,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MaxTestInteger":
 		///	( Max({ 5, 12, 1, 15, 0, 4, 90, 44 }) ) = 90
@@ -316,7 +316,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MaxTestString":
 		///	( Max({ 'hi', 'bye', 'zebra' }) ) = 'zebra'
@@ -330,7 +330,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MaxTestDateTime":
 		///	( Max({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }) ) = DateTime(2012, 10, 6)
@@ -344,7 +344,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MaxTestTime":
 		///	( Max({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }) ) = @T20:59:59.999
@@ -358,7 +358,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MedianTestDecimal":
 		///	( Median({6.0, 5.0, 4.0, 3.0, 2.0, 1.0}) ) = 3.5
@@ -372,7 +372,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MinTestInteger":
 		///	( Min({5, 12, 1, 15, 0, 4, 90, 44}) ) = 0
@@ -386,7 +386,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MinTestString":
 		///	( Min({'hi', 'bye', 'zebra'}) ) = 'bye'
@@ -400,7 +400,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MinTestDateTime":
 		///	( Min({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }) ) = DateTime(2012, 9, 5)
@@ -414,7 +414,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MinTestTime":
 		///	( Min({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }) ) = @T05:59:59.999
@@ -428,7 +428,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ModeTestInteger":
 		///	( Mode({ 2, 1, 8, 2, 9, 1, 9, 9 }) ) = 9
@@ -442,7 +442,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ModeTestDateTime":
 		///	( Mode({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) }) ) = DateTime(2012, 9, 5)
@@ -456,7 +456,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ModeTestTime":
 		///	( Mode({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999, @T05:59:59.999 }) ) = @T05:59:59.999
@@ -470,7 +470,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "PopStdDevTest1":
 		///	( PopulationStdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 1.41421356
@@ -484,7 +484,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "PopVarianceTest1":
 		///	( PopulationVariance({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 2.0
@@ -498,7 +498,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StdDevTest1":
 		///	( StdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 1.58113883
@@ -512,7 +512,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SumTest1":
 		///	( Sum({ 6.0, 2.0, 3.0, 4.0, 5.0 }) ) = 20.0
@@ -526,7 +526,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SumTestNull":
 		///	( Sum({ null, 1, null }) ) = 1
@@ -540,7 +540,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "VarianceTest1":
 		///	( Variance({ 1.0, 2.0, 3.0, 4.0, 5.0 }) ) = 2.5
@@ -554,7 +554,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+
