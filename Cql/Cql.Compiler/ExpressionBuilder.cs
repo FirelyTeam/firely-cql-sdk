@@ -24,7 +24,6 @@ using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
-using BinaryExpression = Hl7.Cql.Elm.BinaryExpression;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler

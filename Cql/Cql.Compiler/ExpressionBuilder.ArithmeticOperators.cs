@@ -8,7 +8,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using System;
 using System.Globalization;
 using Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;

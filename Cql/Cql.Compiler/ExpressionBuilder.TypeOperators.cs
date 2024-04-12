@@ -10,7 +10,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Expressions;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
 
