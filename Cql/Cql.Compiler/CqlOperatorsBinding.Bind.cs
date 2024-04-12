@@ -18,10 +18,10 @@ partial class CqlOperatorsBinding
         .ToDictionary(m => m.Key, m => m.ToArray());
 
     // @formatter:off
-    private const BindOptions BindOption_ConvertArguments    = (BindOptions)1;
-    private const BindOptions BindOption_Generic             = (BindOptions)2;
-    private const BindOptions BindOption_GenericFrom2ndArg   = (BindOptions)4;
-    private const BindOptions BindOption_ReturnNullOverError = (BindOptions)8;
+    private const BindOptions BindOption_ConvertArguments    = (BindOptions)0x_01;
+    private const BindOptions BindOption_Generic             = (BindOptions)0x_02;
+    private const BindOptions BindOption_GenericFrom2ndArg   = (BindOptions)0x_04;
+    private const BindOptions BindOption_ReturnNullOverError = (BindOptions)0x_08;
 
     [Flags]
     protected enum BindOptions
@@ -45,15 +45,10 @@ partial class CqlOperatorsBinding
             return call;
         }
 
-        var bindOptionConvertArguments   = options.HasFlag(BindOption_ConvertArguments);
-        var bindOptionGeneric            = options.HasFlag(BindOption_Generic);
-        var bindOptionGenericFrom2ndArg  = options.HasFlag(BindOption_GenericFrom2ndArg);
-        var bindOptionReturnNullOverError= options.HasFlag(BindOption_ReturnNullOverError);
-
-        if (bindOptionConvertArguments)
+        if (options.HasFlag(BindOption_ConvertArguments))
         {
             var methods = ICqlOperators_MethodInfos_By_Name[methodName].AsEnumerable();
-            if (bindOptionGeneric) methods = methods.Where(m => m.IsGenericMethod);
+            if (options.HasFlag(BindOption_Generic)) methods = methods.Where(m => m.IsGenericMethod);
 
             foreach (var curMethod in methods)
             {
@@ -62,9 +57,9 @@ partial class CqlOperatorsBinding
                 if (methodParameters.Length == arguments.Length)
                 {
                     Type[] parameterTypes = methodParameters.SelectToArray(p => p.ParameterType);
-                    if (bindOptionGeneric)
+                    if (options.HasFlag(BindOption_Generic))
                     {
-                        var genericType = bindOptionGenericFrom2ndArg
+                        var genericType = options.HasFlag(BindOption_GenericFrom2ndArg)
                             ? arguments[1].Type.GetGenericArguments()[0]
                             : arguments[0].Type.GetGenericArguments()[0];
                         method = method.MakeGenericMethod(genericType);
@@ -81,7 +76,7 @@ partial class CqlOperatorsBinding
                 }
             }
 
-            if (bindOptionReturnNullOverError)
+            if (options.HasFlag(BindOption_ReturnNullOverError))
                 return Expression.Constant(null, typeof(object));
 
             var types = string.Join(", ", arguments.Select(e => e.Type.Name));
@@ -98,65 +93,6 @@ partial class CqlOperatorsBinding
     {
         var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, typeArguments, arguments);
         return call;
-    }
-
-    protected MethodCallExpression BindBinaryOperatorWithPrecision(
-        string methodName,
-        Expression left,
-        Expression right,
-        Expression precision)
-    {
-        var methods = ICqlOperators_MethodInfos_By_Name[methodName];
-        foreach (var method in methods)
-        {
-            var methodParameters = method.GetParameters();
-            if (methodParameters.Length > 1)
-            {
-                var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
-                var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                if (leftConversion != ConversionType.Incompatible
-                    && rightConversion != ConversionType.Incompatible)
-                {
-                    left = Convert(left, methodParameters[0].ParameterType, leftConversion);
-                    right = Convert(right, methodParameters[1].ParameterType, rightConversion);
-                    if (methodParameters.Length <= 2)
-                        return BindToMethod(method, left, right);
-
-                    var precisionConversion = CanConvert(precision.Type, methodParameters[2].ParameterType);
-                    if (precisionConversion == ConversionType.Incompatible)
-                        continue;
-                    precision = Convert(precision, methodParameters[2].ParameterType, precisionConversion);
-                    return BindToMethod(method, left, right, precision);
-                }
-            }
-        }
-        throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
-    }
-
-    protected MethodCallExpression BindUnaryOperatorWithPrecision(
-        string methodName,
-        Expression operand,
-        Expression precision)
-    {
-        var methods = ICqlOperators_MethodInfos_By_Name[methodName];
-        foreach (var method in methods)
-        {
-            var methodParameters = method.GetParameters();
-            if (methodParameters.Length == 2)
-            {
-                var operandConversion = CanConvert(operand.Type, methodParameters[0].ParameterType);
-                if (operandConversion == ConversionType.Incompatible)
-                    continue;
-                var operandParameter = operand;
-                if (operandConversion == ConversionType.Convertible)
-                    operandParameter = Convert(operandParameter, methodParameters[0].ParameterType, operandConversion);
-                else if (operandConversion == ConversionType.Assignable)
-                    operandParameter = Expression.TypeAs(operandParameter, methodParameters[0].ParameterType);
-                var call = BindToMethod(method, operandParameter, precision);
-                return call;
-            }
-        }
-        throw new ArgumentException($"No suitable unary method {methodName}({operand.Type}) could be found.", nameof(methodName));
     }
 
     protected static MethodCallExpression BindToMethod(
