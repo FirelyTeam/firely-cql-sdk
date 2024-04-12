@@ -38,6 +38,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="CqlOperatorsBinding.*.cs">
+			<DependentUpon>CqlOperatorsBinding.cs</DependentUpon>
+		</Compile>
 		<Compile Update="ExpressionBuilder.*.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
