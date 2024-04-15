@@ -30,12 +30,9 @@ namespace Hl7.Cql.Packaging
                 new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
                 library!, builderLogger, new(false));
-            DefinitionDictionary<LambdaExpression>? lambdas = null;
-            ExpressionBuilderContext? ctx = null;
+            DefinitionDictionary<LambdaExpression> lambdas = new DefinitionDictionary<LambdaExpression>();
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
-            lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            ctx ??= new ExpressionBuilderContext(builder, parameter, lambdas, new Dictionary<string, string>());
-            lambdas = new DefinitionDictionary<LambdaExpression>();
+            ExpressionBuilderContext? ctx = new ExpressionBuilderContext(builder, parameter, lambdas, new Dictionary<string, string>());
             var translated = builder.TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             var func = lambda.Compile();
