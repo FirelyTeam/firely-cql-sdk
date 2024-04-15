@@ -39,6 +39,9 @@ partial class CqlOperatorsBinding
     /// </para>
     ///
     /// </summary>
+    /// <param name="methodName">The exact method name to bind to. When there are overloads, the correct method will be resolved.</param>
+    /// <param name="arguments">When an overload exists, returns the arguments that can be provided to this method. Conversions may be included to allow this.</param>
+    /// <param name="throwError">Whether to throw an error if no method overload could be found. This is the default behavior. Otherwise, returns the tuple with method as null.</param>
     private (MethodInfo? method, Expression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
         Expression[] arguments,
