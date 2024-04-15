@@ -24,15 +24,15 @@ internal static class CqlExpressions
 
     public static MemberExpression Definitions_PropertyExpression = Expression.Property(ParameterExpression, Definitions_PropertyInfo);
 
-    public static ConstantExpression NullObject_ConstantExpression = CachedNullConstant<object>.Instance;
+    public static ConstantExpression NullObject_ConstantExpression = Null_ConstantExpression_Cached<object>.Instance;
 
-    public static ConstantExpression NullString_ConstantExpression = CachedNullConstant<string>.Instance;
+    public static ConstantExpression NullString_ConstantExpression = Null_ConstantExpression_Cached<string>.Instance;
 
-    public static ConstantExpression ConstantExpressionForType<TType>() => CachedNullConstant<TType>.Instance;
+    public static ConstantExpression Null_ConstantExpression<TType>() => Null_ConstantExpression_Cached<TType>.Instance;
 
-    private static readonly MethodInfo _genericDefinitionMethodOfConstantExpressionForType = ReflectionUtility.GenericDefinitionMethodOf(() => ConstantExpressionForType<object>());
+    private static readonly MethodInfo _genericDefinitionMethodOfConstantExpressionForType = ReflectionUtility.GenericDefinitionMethodOf(() => Null_ConstantExpression<object>());
 
-    public static ConstantExpression ConstantExpressionForType(Type type)
+    public static ConstantExpression Null_ConstantExpression(Type type)
     {
         if (type == typeof(object))
         {
@@ -47,7 +47,7 @@ internal static class CqlExpressions
             .Invoke(null, [])!;
     }
 
-    private static class CachedNullConstant<T>
+    private static class Null_ConstantExpression_Cached<T>
     {
         public static readonly ConstantExpression Instance = Expression.Constant(null, typeof(T));
     }

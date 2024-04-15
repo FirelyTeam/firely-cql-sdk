@@ -21,7 +21,7 @@ partial class CqlOperatorsBinding
         Expression perQuantity)
     {
         if (perQuantity is ConstantExpression { Value: null })
-            perQuantity = CqlExpressions.ConstantExpressionForType<CqlQuantity>();
+            perQuantity = CqlExpressions.Null_ConstantExpression<CqlQuantity>();
 
         if (TypeResolver.ImplementsGenericIEnumerable(argument.Type))
         {

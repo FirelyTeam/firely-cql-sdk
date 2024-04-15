@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
         {
             var source = TranslateExpression(e.source!);
             var operand = e.separator == null
-                ? Expression.Constant(null, typeof(string))
+                ? CqlExpressions.Null_ConstantExpression<string>()
                 : TranslateExpression(e.separator);
             return _operatorBinding.BindToMethod(CqlOperator.Combine, source, operand);
         }

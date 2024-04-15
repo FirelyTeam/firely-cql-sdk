@@ -863,7 +863,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                codeProperty = Expression.Constant(null, typeof(PropertyInfo));
+                codeProperty = CqlExpressions.Null_ConstantExpression<PropertyInfo>();
             }
 
             if (retrieve.codes != null)
@@ -885,7 +885,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                return _operatorBinding.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), Expression.Constant(null, typeof(CqlValueSet)), codeProperty!);
+                return _operatorBinding.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), CqlExpressions.Null_ConstantExpression<CqlValueSet>(), codeProperty!);
             }
         }
 

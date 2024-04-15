@@ -23,7 +23,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = _typeManager.Resolver.GetListElementType(operand.Type, throwError: true)!;
                 if (IsInterval(elementType, out var pointType))
                 {
-                    var precision = Expression.Constant(null, typeof(string));
+                    var precision = CqlExpressions.Null_ConstantExpression<string>();
                     if (e.operand.Length > 1 && e.operand[1] is Elm.Quantity quant)
                     {
                         precision = Expression.Constant(quant.unit, typeof(string));

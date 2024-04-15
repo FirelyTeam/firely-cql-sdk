@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
             var call = _operatorBinding.BindToMethod(CqlOperator.Message, source, code, severity, message);
             if (condition.Type.IsNullable())
             {
-                condition = Expression.Coalesce(condition,  CqlExpressions.ConstantExpressionForType<bool>());
+                condition = Expression.Coalesce(condition,  CqlExpressions.Null_ConstantExpression<bool>());
             }
 
             return Expression.Condition(condition, call, source);

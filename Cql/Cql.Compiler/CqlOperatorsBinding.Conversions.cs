@@ -38,7 +38,7 @@ partial class CqlOperatorsBinding
         if (fromExpr is ConstantExpression { Value: null }
             && Nullable.GetUnderlyingType(to) is not null)
         {
-            toExpr = CqlExpressions.ConstantExpressionForType(to);
+            toExpr = CqlExpressions.Null_ConstantExpression(to);
             return true;
         }
 

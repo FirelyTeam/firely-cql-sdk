@@ -26,8 +26,8 @@ partial class ExpressionBuilder
                                 ConstructorInfos.CqlCode,
                                 Expression.Constant(coding.code),
                                 Expression.Constant(coding.system),
-                                Expression.Constant(null, typeof(string)),
-                                Expression.Constant(null, typeof(string))
+                                CqlExpressions.Null_ConstantExpression<string>(),
+                                CqlExpressions.Null_ConstantExpression<string>()
                             ));
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
                     var lambda = Expression.Lambda(arrayOfCodesInitializer, CqlExpressions.ParameterExpression);
@@ -69,8 +69,8 @@ partial class ExpressionBuilder
                             ConstructorInfos.CqlCode,
                             Expression.Constant(systemCode.code),
                             Expression.Constant(systemCode.system),
-                            Expression.Constant(null, typeof(string)),
-                            Expression.Constant(null, typeof(string))
+                            CqlExpressions.Null_ConstantExpression<string>(),
+                            CqlExpressions.Null_ConstantExpression<string>()
                         );
                     }
 
@@ -110,8 +110,8 @@ partial class ExpressionBuilder
                     ConstructorInfos.CqlCode,
                     Expression.Constant(codeDef.id),
                     Expression.Constant(csUrl),
-                    Expression.Constant(null, typeof(string)),
-                    Expression.Constant(null, typeof(string))!
+                    CqlExpressions.Null_ConstantExpression<string>(),
+                    CqlExpressions.Null_ConstantExpression<string>()!
                 );
                 var lambda = Expression.Lambda(newCodingExpression, CqlExpressions.ParameterExpression);
                 _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, codeDef.name!, lambda);
