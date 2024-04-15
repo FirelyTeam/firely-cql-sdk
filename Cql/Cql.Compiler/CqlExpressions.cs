@@ -28,7 +28,8 @@ internal static class CqlExpressions
 
     public static ConstantExpression NullString_ConstantExpression = Null_ConstantExpression_Cached<string>.Instance;
 
-    public static ConstantExpression Null_ConstantExpression<TType>() => Null_ConstantExpression_Cached<TType>.Instance;
+    public static ConstantExpression Null_ConstantExpression<TType>()
+        => Null_ConstantExpression_Cached<TType>.Instance;
 
     private static readonly MethodInfo _genericDefinitionMethodOfConstantExpressionForType = ReflectionUtility.GenericDefinitionMethodOf(() => Null_ConstantExpression<object>());
 
