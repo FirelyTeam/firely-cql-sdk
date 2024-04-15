@@ -67,7 +67,13 @@ partial class CqlOperatorsBinding
                 return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), left, right);
             }
         }
-        return (Expression?)BindToMethodConvertArgsOrNull(nameof(ICqlOperators.InList), left, right) ?? CqlContextExpressions.NullObject_ConstantExpression;
+
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), [left, right], false);
+        if (methodInfo is null)
+            return CqlContextExpressions.NullObject_ConstantExpression;
+
+        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodInfo, convertedArgs);
+        return call;
     }
 
     private Expression ListUnion(

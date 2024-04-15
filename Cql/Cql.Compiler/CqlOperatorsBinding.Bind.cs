@@ -17,9 +17,32 @@ partial class CqlOperatorsBinding
         .GroupBy(m => m.Name)
         .ToDictionary(m => m.Key, m => m.ToArray());
 
-    private MethodCallExpression? BindToMethodConvertArgsOrNull(
+    /// <summary>
+    ///
+    /// <para>
+    /// This method tries to match the method name with the arguments against the ICqlOperators methods.
+    /// It also converts the arguments to the correct types if necessary.
+    /// It returns the MethodInfo and the converted arguments, if successful.
+    /// If no method is found, it throws an ArgumentException when <param name="throwError"></param> is <c>true</c>;
+    /// otherwise , it returns <c>null</c> for method on the resulting tuple.
+    /// </para>
+    ///
+    /// <para>
+    /// The discovery of the correct method is done in two steps:
+    /// The first step tries to match the arguments with the method parameters.
+    /// The second step tries to match the arguments with the method parameters, but without the last argument.
+    /// This last step is useful for methods that have a null argument at the end, which is commonly used for precision cases.
+    ///</para>
+    ///
+    /// <para>
+    /// For generic methods, it tries to match the generic type from the first argument, and if it fails, it tries the second argument.
+    /// </para>
+    ///
+    /// </summary>
+    private (MethodInfo? method, Expression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
-        params Expression[] arguments)
+        Expression[] arguments,
+        bool throwError = true)
     {
         Expression[] args = arguments; // So we don't modify the original array
         var methods = ICqlOperators_MethodInfos_By_Name[methodName];
@@ -65,8 +88,7 @@ partial class CqlOperatorsBinding
                     if (!ConvertBindArguments())
                         continue;
 
-                    var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, bindMethod, bindArgs);
-                    return call;
+                    return (bindMethod, bindArgs);
                 }
             }
 
@@ -79,7 +101,14 @@ partial class CqlOperatorsBinding
 
             break;
         }
-        return null;
+
+        if (throwError)
+        {
+            var types = string.Join(", ", arguments.Select(e => e.Type.Name));
+            throw new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
+        }
+
+        return (null, arguments);
     }
 
 
@@ -87,14 +116,9 @@ partial class CqlOperatorsBinding
         string methodName,
         params Expression[] arguments)
     {
-        return BindToMethodConvertArgsOrNull(methodName, arguments)
-            ?? throw NoMethodFoundException();
-
-        ArgumentException NoMethodFoundException()
-        {
-            var types = string.Join(", ", arguments.Select(e => e.Type.Name));
-            return new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
-        }
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
+        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
+        return call;
     }
 
     private static MethodCallExpression BindToMethod(
