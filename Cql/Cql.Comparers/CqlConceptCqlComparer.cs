@@ -10,6 +10,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using System.Linq;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Comparers
 {
@@ -61,10 +62,8 @@ namespace Hl7.Cql.Comparers
         {
             if (x == null || y == null || x.codes == null || y.codes == null)
                 return false;
-            var xCodes = x.codes.Select(code => code.code)
-                .ToArray();
-            var yCodes = y.codes.Select(code => code.code)
-                .ToArray();
+            var xCodes = x.codes.SelectToArray(code => code.code);
+            var yCodes = y.codes.SelectToArray(code => code.code);
 
             for (int i = 0; i < xCodes.Length; i++)
             {

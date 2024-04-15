@@ -8,7 +8,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using System;
 using System.Globalization;
 using Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
@@ -17,19 +16,6 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression MaxValue(Elm.MaxValue max)
-        {
-            var type = _typeManager.Resolver.ResolveType(max.valueType!.Name);
-            var call = BindCqlOperator(CqlOperator.MaximumValue, Expression.Constant(type, typeof(Type)));
-            return call;
-        }
-        protected Expression MinValue(Elm.MinValue min)
-        {
-            var type = _typeManager.Resolver.ResolveType(min.valueType!.Name);
-            var call = BindCqlOperator(CqlOperator.MinimumValue, Expression.Constant(type, typeof(Type)));
-            return call;
-        }
-
         private Expression NegateLiteral(Negate e, Literal literal)
         {
             // handle things like -2147483648 which gets translated to Negate(2147483648)
@@ -48,15 +34,14 @@ namespace Hl7.Cql.Compiler
             return UnaryOperator(CqlOperator.Negate, e);
         }
 
-        protected Expression? Round(Elm.Round e)
+        protected Expression? Round(Round e)
         {
             var operand = TranslateExpression(e.operand!);
             Expression? precision;
             if (e.precision != null)
                 precision = TranslateExpression(e.precision!);
             else precision = Expression.Constant(null, typeof(int?));
-            var call = BindCqlOperator(CqlOperator.Round, operand, precision);
-            return call;
+            return _operatorBinding.BindToMethod(CqlOperator.Round, operand, precision);
         }
     }
 }

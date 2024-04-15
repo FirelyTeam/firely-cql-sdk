@@ -143,6 +143,7 @@ namespace Hl7.Cql.Runtime
         {
             if (type == typeof(string))
                 return false;
+
             return (type.IsGenericType && type.GetGenericTypeDefinition() == genericInterfaceTypeDefinition)
                 || type.GetInterfaces()
                     .Where(ifc => ifc.IsGenericType)

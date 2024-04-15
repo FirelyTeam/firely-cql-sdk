@@ -11,6 +11,7 @@ using Hl7.Cql.Abstractions;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 
 namespace Hl7.Cql.Compiler
@@ -20,12 +21,10 @@ namespace Hl7.Cql.Compiler
         protected Expression Coalesce(Elm.Coalesce ce)
         {
             var operands = ce.operand!
-                .Select(op => TranslateExpression(op))
-                .ToArray();
+                .SelectToArray(op => TranslateExpression(op));
             if (operands.Length == 1 && _typeResolver.ImplementsGenericIEnumerable(operands[0].Type))
             {
-                var call = BindCqlOperator(CqlOperator.Coalesce, operands[0]);
-                return call;
+                return _operatorBinding.BindToMethod(CqlOperator.Coalesce, operands[0]);
             }
             var distinctOperandTypes = operands
                 .Select(op => op.Type)

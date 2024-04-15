@@ -18,7 +18,8 @@ namespace Hl7.Cql.Compiler
                 // create an explicit "null as object" so the generic type can be inferred in source code.
                 source = Expression.TypeAs(constant, constant.Type);
             }
-            var call = BindCqlOperator(CqlOperator.Message, source, code, severity, message);
+
+            var call = _operatorBinding.BindToMethod(CqlOperator.Message, source, code, severity, message);
             if (condition.Type.IsNullable())
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
@@ -185,7 +186,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             // Otherwise introduce a block with the assignments translated to block variables +
             // assignments.
-            var blockParameters = _assignments.Select(a => a.Left).Cast<ParameterExpression>().ToArray();
+            var blockParameters = _assignments.SelectToArray(a => (ParameterExpression)a.Left);
             var newBody = Expression.Block(blockParameters, [.._assignments, node]);
 
             return newBody;

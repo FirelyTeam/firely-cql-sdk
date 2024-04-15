@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
 
@@ -15,9 +14,6 @@ internal static class ConstructorInfos
     public static ConstructorInfo CqlConcept { get; } =
         ReflectionUtility.ConstructorOf(() => new CqlConcept(default(IEnumerable<CqlCode>)!, default(string?)));
 
-    public static ConstructorInfo CqlDeclarationAttribute { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlDeclarationAttribute(default(string)!));
-
     public static ConstructorInfo LazyOfBoolCtor { get; } =
         ReflectionUtility.ConstructorOf(() => new Lazy<bool?>(default(Func<bool?>)!));
 
@@ -30,7 +26,7 @@ internal static class ConstructorInfos
     public static ConstructorInfo CqlRatio { get; } =
         ReflectionUtility.ConstructorOf(() => new CqlRatio(default(CqlQuantity?), default(CqlQuantity?)));
 
-    public static ConstructorInfo CqlQuantity { get; } = 
+    public static ConstructorInfo CqlQuantity { get; } =
         ReflectionUtility.ConstructorOf(() => new CqlQuantity(default(decimal?), default(string?)));
 
     private static ConstructorInfo ListOf<T>() =>
