@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CouldNotFindLibrary" xml:space="preserve">
+    <value>Could not find library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>
+    <comment>{0} = library name, {1} = version</comment>
+  </data>
   <data name="CouldNotResolveFunction" xml:space="preserve">
     <value>Could not resolve call to operator {0} with signature ({1}).</value>
     <comment>{0} = unquoted, unqualified function name (no library name), {1} = comma-separated type names of signature</comment>
@@ -132,6 +136,14 @@
   <data name="ExpressionCannotBeLibraryRef" xml:space="preserve">
     <value>Identifier {0} is a library and cannot be used as an expression.</value>
     <comment>{0} = unquoted library name</comment>
+  </data>
+  <data name="FoundMultipleLibraries" xml:space="preserve">
+    <value>Found multiple libraries with name '{0}'.</value>
+    <comment>{0} = library name</comment>
+  </data>
+  <data name="Latest" xml:space="preserve">
+    <value>latest</value>
+    <comment>The word "latest"</comment>
   </data>
   <data name="TypeCannotBeCast" xml:space="preserve">
     <value>Expression of type '{0}' cannot be cast as a value of type '{1}'.</value>

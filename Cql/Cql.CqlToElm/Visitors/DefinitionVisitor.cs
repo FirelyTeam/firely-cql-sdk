@@ -249,15 +249,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (functionBody is not null)
             {
                 // Enter a new scope for the function body, so that the operands are visible
-                LibraryBuilder.EnterScope();
-                foreach (var operand in operands)
-                    LibraryBuilder.CurrentScope.TryAdd(operand);
+                using (LibraryBuilder.EnterScope())
+                {
+                    foreach (var operand in operands)
+                        LibraryBuilder.CurrentScope.TryAdd(operand);
 
-                // Visit the function body, which will add the expression to the functionDef
-                functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
-
-                // Exit the scope for the function body
-                LibraryBuilder.ExitScope();
+                    // Visit the function body, which will add the expression to the functionDef
+                    functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
+                } 
 
                 // If the function has a return type, make sure the expression is of that type.
                 var expressionType = functionDef.expression.resultTypeSpecifier;

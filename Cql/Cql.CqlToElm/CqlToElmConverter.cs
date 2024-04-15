@@ -15,14 +15,14 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class CqlToElmConverter
     {
-        public CqlToElmConverter(IServiceScopeFactory scopeFactory, 
+        public CqlToElmConverter(IServiceProvider services,
             ILogger<CqlToElmConverter> logger)
         {
-            ScopeFactory = scopeFactory;
+            Services = services;
             Logger = logger;
         }
 
-        public IServiceScopeFactory ScopeFactory { get; }
+        public IServiceProvider Services { get; }
         public ILogger<CqlToElmConverter> Logger { get; }
 
         /// <summary>
@@ -48,25 +48,26 @@ namespace Hl7.Cql.CqlToElm
             parser.RemoveErrorListeners();
             parser.AddErrorListener(parserListener);
 
-            using (var scope = ScopeFactory.CreateScope())
+            using (var scope = Services.CreateScope())
             {
                 var visitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
-
-#if !DEBUG
                 try
                 {
-#endif
-                var library = visitor.Visit(parser.library());
+                    var library = visitor.Visit(parser.library());
 
-                if (library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
-                    Logger.LogWarning("Parsed ELM tree contains errors.");
+                    if (library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
+                        Logger.LogWarning("Parsed ELM tree contains errors.");
 
-                return library;
-#if !DEBUG
+                    return library;
                 }
+#if !DEBUG
                 catch (Exception e)
                 {
-                    Logger.LogCritical(e, "Exception while converting CQL to ELM.");
+                        Logger.LogCritical(e, "Exception while converting CQL to ELM.");
+                }
+#else
+                catch
+                {
                     throw;
                 }
 #endif

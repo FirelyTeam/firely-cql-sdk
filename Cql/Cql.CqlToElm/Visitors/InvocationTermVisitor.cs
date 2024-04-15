@@ -4,6 +4,7 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -229,6 +230,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Expression navigateIntoList(Expression source, Elm.ListTypeSpecifier lts, string memberName)
         {
+            if (lts is null)
+            {
+                throw new ArgumentNullException(nameof(lts));
+            }
             // If we navigate into a list, say, Patient.name.family, we actually need to generate a
             // query. In this query, Patient.name is the source, and "family" is the property we need to
             // navigate into:
@@ -358,6 +363,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitMemberInvocation([NotNull] cqlParser.MemberInvocationContext context)
         {
             var identifier = context.referentialIdentifier().Parse();
+            if (!LibraryBuilder.CurrentScope.TryResolveIdentifier(null, identifier, out var _))
+            {
+                if (LibraryBuilder.CurrentScope.TryResolveIdentifier(null, "$this", out var @this))
+                    return navigateIntoType(@this!.ToRef(null), identifier);
+            }
             return LibraryBuilder.CurrentScope!
                 .Ref(Messaging, null, identifier)
                 .WithLocator(context.Locator());
@@ -409,6 +419,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     fr.libraryName = libraryName;
                 if (fluent && !funcDef.fluent)
                     funcRef.AddError($"Function '{funcDef.name}' is called fluently, but its definition is not marked as fluent.");
+                if (funcRef.resultTypeSpecifier is null)
+                    throw new InvalidOperationException($"Missing result type specifier");
                 return funcRef;
             }
             Expression initializeOverload(OverloadedFunctionDef function, string? libraryName, Expression[] arguments, bool fluent)
@@ -427,6 +439,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         name = function.Name,
                         libraryName = libraryName,
                     }
+                    .WithResultType(SystemTypes.AnyType)
                     .AddError(result.Error ?? throw new InvalidOperationException($"No compatible overload was found, but no error message was populated."));
             }
         }

@@ -50,19 +50,38 @@ namespace Hl7.Cql.CqlToElm
             var usingDefs = symbolTable.Symbols.OfType<UsingDefSymbol>().ToArray();
             var matches = usingDefs.Select(include => (include, modelType: getModelType(include, typeName)))
                     .Where(r => r.modelType is not null).ToList();
-
-            error = (matches.Count, usingDefs.Length) switch
+            if (matches.Count > 1)
             {
-                (_, 0) => $"Cannot resolve type {typeName} as there are no models referenced in this library.",
-                (0, 1) => $"There is no type named '{typeName}' in model library {usingDefs.Single().localIdentifier}.",
-                (0, _) => $"There is no type named '{typeName}' in model libraries {string.Join(",", usingDefs.Select(u => u.localIdentifier))}.",
-                ( > 1, _) => $"Ambiguous type name '{typeName}', found matches in {string.Join(",", matches.Select(m => m.include.localIdentifier))}.",
-                _ => null,
-            };
+                // Reference behavior when there is a conflict (e.g. FHIR.Quantity, System.Quantity) is to prefer the System type.
+                // So, an unqualified Quantity type in a library using FHIR will resolve to System.Quantity.
+                var systemMatches = matches.Where(m => m.include.Model.name == "System").ToArray();
+                if (systemMatches.Length == 1)
+                {
+                    result = systemMatches[0].modelType;
+                    error = null;
+                    return true;
+                }
+                else
+                {
+                    result = null;
+                    error = $"Ambiguous type name '{typeName}', found matches in {string.Join(",", matches.Select(m => m.include.localIdentifier))}.";
+                    return false;
+                }
+            }
 
-            var success = error is null;
-            result = success ? matches.Single().modelType : null;
-            return success;
+            else
+            {
+                error = (matches.Count, usingDefs.Length) switch
+                {
+                    (_, 0) => $"Cannot resolve type {typeName} as there are no models referenced in this library.",
+                    (0, 1) => $"There is no type named '{typeName}' in model library {usingDefs.Single().localIdentifier}.",
+                    (0, _) => $"There is no type named '{typeName}' in model libraries {string.Join(",", usingDefs.Select(u => u.localIdentifier))}.",
+                    _ => null,
+                };
+                var success = error is null;
+                result = success ? matches.Single().modelType : null;
+                return success;
+            }
         }
 
 
@@ -89,7 +108,6 @@ namespace Hl7.Cql.CqlToElm
                 }
                 else
                 {
-
                     return MakeErrorReference(libraryAlias, identifier, messaging.CouldNotResolveInCurrent(identifier));
                 }
             }

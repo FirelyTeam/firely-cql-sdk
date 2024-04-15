@@ -66,5 +66,7 @@ namespace Hl7.Cql.CqlToElm
             }
             return symbols.TryAdd(symbol.Name, symbol);
         }
+
+        public ISymbolScope EnterScope() => new SymbolTable(this);
     }
 }

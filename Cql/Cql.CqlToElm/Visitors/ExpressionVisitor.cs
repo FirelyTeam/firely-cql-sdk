@@ -13,7 +13,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public ExpressionVisitor(IModelProvider provider,
             IOptions<CqlToElmOptions> options,
-            ConverterContext converterContext,
             LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
@@ -23,7 +22,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             MessageProvider messageProvider) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
-            ConverterContext = converterContext;
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
             CoercionProvider = coercionProvider;
@@ -37,8 +35,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private IModelProvider ModelProvider { get; }
         private CqlToElmOptions Options { get; }
         private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
-
-        private ConverterContext ConverterContext { get; }
         private LibraryBuilder LibraryBuilder { get; }
         private CoercionProvider CoercionProvider { get; }
         private ElmFactory ElmFactory { get; }

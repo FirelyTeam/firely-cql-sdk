@@ -15,31 +15,43 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitQuery([NotNull] cqlParser.QueryContext context)
         {
             var source = visitSource(context.sourceClause());
-            LibraryBuilder.EnterScope();
-            foreach (var qs in source)
+            using (LibraryBuilder.EnterScope())
             {
-                LibraryBuilder.CurrentScope.TryAdd(qs);
-            }
-            var sort = visitSort(context.sortClause());
-            var @return = visitReturn(context.returnClause()); // pass aliases & lets?
-            LibraryBuilder.ExitScope();
-            TypeSpecifier returnType = @return?.resultTypeSpecifier ??
-                (returnType = source.Length == 1
-                    ? source[0].resultTypeSpecifier
-                    : SystemTypes.AnyType.ToListType());
-            var query = new Query()
-            {
-                source = source,
-                sort = sort!,
-                @return = @return,
-            };
-            if (query.source.Length == 0)
-                query.AddError($"At least one source is required for this query");
-            return query
-                .WithId()
-                .WithLocator(context.Locator())
-                .WithResultType(returnType);
+                foreach (var qs in source)
+                {
+                    LibraryBuilder.CurrentScope.TryAdd(qs);
+                }
+                // in single source queries, the sort term is unqualified, e.g.:
+                //      from intervals i sort by low asc               
+                // low is a member of i, and would normally not resolve.
+                // by defining $this, we allow low to resolve later.
+                if (source.Length == 1)
+                    LibraryBuilder.CurrentScope.TryAdd(new AliasedQuerySource
+                    {
+                        alias = "$this",
+                        expression = source[0].expression,
+                        resultTypeSpecifier = source[0].resultTypeSpecifier,
+                    });
 
+                var sort = visitSort(context.sortClause());
+                var @return = visitReturn(context.returnClause()); // pass aliases & lets?
+                TypeSpecifier returnType = @return?.resultTypeSpecifier ??
+                    (returnType = source.Length == 1
+                        ? source[0].resultTypeSpecifier
+                        : SystemTypes.AnyType.ToListType());
+                var query = new Query()
+                {
+                    source = source,
+                    sort = sort!,
+                    @return = @return,
+                };
+                if (query.source.Length == 0)
+                    query.AddError($"At least one source is required for this query");
+                return query
+                    .WithId()
+                    .WithLocator(context.Locator())
+                    .WithResultType(returnType);
+            }
 
             AliasedQuerySource[] visitSource(cqlParser.SourceClauseContext sourceClauseCtx) =>
                 sourceClauseCtx?.aliasedQuerySource()?.Select(ctx =>
@@ -67,6 +79,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             expression = expression,
                             alias = ctx.alias().GetText()
                         };
+                        if (expression.resultTypeSpecifier is null)
+                            throw new InvalidOperationException($"Expression has a null result type specifier");
                         return source
                             .WithLocator(context.Locator())
                             .WithResultType(expression.resultTypeSpecifier);

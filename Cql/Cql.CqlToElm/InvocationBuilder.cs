@@ -52,11 +52,18 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(systemFunction, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
-            expression = systemFunction.Validate(expression);
-            var newResultType = ReplaceGenericType(systemFunction.resultTypeSpecifier, result.GenericInferences);
-            return expression
-                .WithResultType(newResultType);
+            {
+                return expression
+                    .AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments))
+                    .WithResultType(SystemTypes.AnyType);
+            }
+            else
+            {
+                expression = systemFunction.Validate(expression);
+                var newResultType = ReplaceGenericType(systemFunction.resultTypeSpecifier, result.GenericInferences);
+                return expression
+                    .WithResultType(newResultType);
+            }
         }
 
         /// <summary>
@@ -67,6 +74,9 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>The invocation of the best-matching overload.</returns>
         internal Expression Invoke(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
+            if (overloadedFunction.Name == "Order by occurrence")
+            {
+            }
             var result = MatchSignature(overloadedFunction, arguments);
             var newArguments = result.Arguments
                 .Select(cr => cr.Result)
@@ -183,8 +193,8 @@ namespace Hl7.Cql.CqlToElm
                     newOperands[i] = CoercionProvider.Coerce(arguments[i], operandTypes[i]);
                 }
                 string? error = null;
-                if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))
-                    error = Messaging.CouldNotResolveFunction(candidate.name, arguments);
+                if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))                
+                    error = Messaging.CouldNotResolveFunction(candidate.name, arguments);                
                 return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
             }
         }
@@ -217,17 +227,13 @@ namespace Hl7.Cql.CqlToElm
             return new();
 
             Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier argumentType, TypeSpecifier operandType) =>
-                operandType switch
+                (operandType, argumentType) switch
                 {
-                    ParameterTypeSpecifier generic => new() { { generic.parameterName, argumentType } },
-                    ListTypeSpecifier opList
-                        when argumentType is ListTypeSpecifier argList => InferNestedGeneric(argList.elementType, opList.elementType),
-                    ListTypeSpecifier opList
-                        when argumentType is not ListTypeSpecifier => InferNestedGeneric(argumentType, opList.elementType),
-                    IntervalTypeSpecifier opInt
-                        when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(argInt.pointType, opInt.pointType),
-                    IntervalTypeSpecifier opInt
-                        when argumentType is not IntervalTypeSpecifier => InferNestedGeneric(argumentType, opInt.pointType),
+                    (ParameterTypeSpecifier generic, _) => new() { { generic.parameterName, argumentType } },
+                    (ListTypeSpecifier opList, ListTypeSpecifier argList) => InferNestedGeneric(argList.elementType, opList.elementType),
+                    (ListTypeSpecifier opList, _) => InferNestedGeneric(argumentType, opList.elementType),
+                    (IntervalTypeSpecifier opInt, IntervalTypeSpecifier argInt) => InferNestedGeneric(argInt.pointType, opInt.pointType),
+                    (IntervalTypeSpecifier opInt, _) => InferNestedGeneric(argumentType, opInt.pointType),
                     _ => new()
                 };
         }

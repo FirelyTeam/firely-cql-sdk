@@ -55,6 +55,8 @@ namespace Hl7.Cql.CqlToElm
 
         public bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol) =>
             symbols.Value.TryResolveSymbol(identifier, out symbol);
+
+        public ISymbolScope EnterScope() => new SymbolTable(this);
     }
 
 }

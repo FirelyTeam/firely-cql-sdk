@@ -19,32 +19,22 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
     internal class FileSystemLibraryProvider : ILibraryProvider
     {
 
-        //public static FileSystemLibraryProvider Create(IServiceProvider services)
-        //{
-        //    var config = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
-        //    var rootDirectory = config.Input switch
-        //    {
-        //        { } => new DirectoryInfo(config.Input),
-        //        _ => new DirectoryInfo(".")
-        //    };
-        //    if (!rootDirectory.Exists)
-        //        throw new ArgumentException($"Directory {rootDirectory} does not exist.");
-        //    var converter = services.GetRequiredService<CqlToElmConverter>();
-        //    var inspector = services.GetRequiredService<StreamInspector>();
-        //    var lp = new FileSystemLibraryProvider(rootDirectory, converter, inspector);
-        //    lp.ScanDirectory();
-        //    return lp;
-        //}
-
-
-        internal FileSystemLibraryProvider(DirectoryInfo rootDirectory, 
-            Func<Stream, Library> converter,
+        public FileSystemLibraryProvider(IOptions<CqlToElmOptions> options, 
+            CqlToElmConverter converter,
             StreamInspector streamInspector)
         {
+            var rootDirectory = options.Value.Input switch
+            {
+                { } => new DirectoryInfo(options.Value.Input),
+                _ => new DirectoryInfo(".")
+            };
+            if (!rootDirectory.Exists)
+                throw new ArgumentException($"Directory {rootDirectory} does not exist.");
             RootDirectory = rootDirectory;
             Converter = converter;
             StreamInspector = streamInspector;
             Libraries = new(); // make case sensitivity configurable?
+            ScanDirectory();
         }
 
 
@@ -59,23 +49,28 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                     && li is not null 
                     && li.VersionedIdentifier is not null)
                 {
-                    var lib = li.Library ?? Converter(stream);
-                    Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, lib);
+                    Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, (file, li.Library));
                 }
             }
         }
 
         public DirectoryInfo RootDirectory { get; }
-        public Func<Stream, Library> Converter { get; }
+        public CqlToElmConverter Converter { get; }
         private StreamInspector StreamInspector { get; }
         
-        private VersionedIdentifierDictionary<Library> Libraries { get; }
+        private VersionedIdentifierDictionary<(FileInfo file, Library? library)> Libraries { get; }
 
         public bool TryResolveLibrary(string libraryName, string? version, out Library? library, out string? error)
         {
             if (Libraries.TryGet(libraryName, version, out var lib))
             {
-                library = lib;
+                if (lib.library is not null)
+                    library = lib.library;
+                else
+                {
+                    using var stream = lib.file.OpenRead();
+                    library = Converter.ConvertLibrary(stream);
+                }
                 error = null;
                 return true;
             }

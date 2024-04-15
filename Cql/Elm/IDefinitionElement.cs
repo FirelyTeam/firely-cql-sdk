@@ -127,7 +127,7 @@ namespace Hl7.Cql.Elm
         {
             libraryName = libraryName,
             name = name,
-        }.WithId().WithResultType(resultTypeSpecifier);
+        }.WithId().WithResultType(resultTypeSpecifier ?? throw new InvalidOperationException("Missing result type specifier for function ref"));
     }
 
     public partial class ContextDef : IDefinitionElement
@@ -169,7 +169,10 @@ namespace Hl7.Cql.Elm
             TypeSpecifier aliasType;
             if (resultTypeSpecifier is ListTypeSpecifier list)
                 aliasType = list.elementType;
-            else aliasType = resultTypeSpecifier;
+            else 
+                aliasType = resultTypeSpecifier;
+            if (aliasType is null)
+                throw new InvalidOperationException($"Alias type is null");
             var aliasRef = new AliasRef { name = alias }.WithResultType(aliasType);
             return aliasRef;
         }
@@ -219,6 +222,8 @@ namespace Hl7.Cql.Elm
             var names = functions.Select(fd => fd.name).Distinct().ToArray();
             if (names.Length > 1)
                 throw new ArgumentException($"All functions in an overload must have the same name. Found {string.Join(", ", names)}", nameof(functions));
+            if (functions.Any(f => f.resultTypeSpecifier is null))
+                throw new ArgumentException("At least one function is missing a result type specifier.");
             var accessLevel = functions.Select(fd => fd.accessLevel).Min(); // public < private; any public overload makes this public
             return new OverloadedFunctionDef(functions, names[0], accessLevel);       
         }
@@ -237,7 +242,7 @@ namespace Hl7.Cql.Elm
                 .SelectMany(ofd => ofd.Functions)
                 .Concat(elements.OfType<FunctionDef>())
                 .ToArray();
-            var overload = OverloadedFunctionDef.Create(allFunctions);
+            var overload = Create(allFunctions);
             return overload;
         }
 
@@ -247,7 +252,7 @@ namespace Hl7.Cql.Elm
         public string Name { get; }
         public AccessModifier Access { get; }
 
-        internal OverloadedFunctionDef(FunctionDef[] functions, 
+        private OverloadedFunctionDef(FunctionDef[] functions, 
             string name, 
             AccessModifier access)
         {

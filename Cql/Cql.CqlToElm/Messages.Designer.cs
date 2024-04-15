@@ -61,6 +61,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
+        /// </summary>
+        internal static string CouldNotFindLibrary {
+            get {
+                return ResourceManager.GetString("CouldNotFindLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not resolve call to operator {0} with signature ({1})..
         /// </summary>
         internal static string CouldNotResolveFunction {
@@ -93,6 +102,24 @@ namespace Hl7.Cql.CqlToElm {
         internal static string ExpressionCannotBeLibraryRef {
             get {
                 return ResourceManager.GetString("ExpressionCannotBeLibraryRef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found multiple libraries with name &apos;{0}&apos;..
+        /// </summary>
+        internal static string FoundMultipleLibraries {
+            get {
+                return ResourceManager.GetString("FoundMultipleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to latest.
+        /// </summary>
+        internal static string Latest {
+            get {
+                return ResourceManager.GetString("Latest", resourceCulture);
             }
         }
         

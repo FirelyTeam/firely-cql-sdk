@@ -75,9 +75,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(libraryName, typeName, out var result, out var error);
 
             //TODO: Might need ErrorTypeSpecifier here
-            result ??= new NamedTypeSpecifier($"urn:cql-unknown-type:{libraryName}", typeName);
-
-            if (error is not null) result!.AddError(error);
+            if (result is null)
+                result = SystemTypes.AnyType; //new NamedTypeSpecifier($"urn:cql-unknown-type:{libraryName}", typeName);
+            if (error is not null) 
+                result!.AddError(error);
+            
             return result.WithLocator(context.Locator());
         }
     }

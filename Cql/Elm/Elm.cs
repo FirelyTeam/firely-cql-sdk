@@ -2760,7 +2760,6 @@ namespace Hl7.Cql.Elm {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(With))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm:r1")]
     public partial class AliasedQuerySource : Element {

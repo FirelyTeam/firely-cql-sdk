@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -69,12 +70,17 @@ namespace Hl7.Cql.CqlToElm
             return services;
         }
 
-        public static IServiceCollection AddContext(this IServiceCollection services) =>
+        public static IServiceCollection AddSystem(this IServiceCollection services) =>
             services
-                .AddScoped<SystemLibrary>()
+                .AddSingleton<CqlToElmConverter>()
+                .AddSingleton<CoercionProvider>()
+                .AddSingleton<ElmFactory>()
+                .AddSingleton<SystemLibrary>()
+                .AddSingleton<StreamInspector>()
                 .AddScoped<LibraryBuilder>()
-                .AddScoped<ILibraryProvider, ConverterContext>()
-                .AddScoped<ConverterContext>();
+                .AddTransient<InvocationBuilder>();
+
+
 
         public static ILoggingBuilder ThrowOn(this ILoggingBuilder builder, LogLevel threshold) =>
             builder.AddProvider(new ThrowingLoggerProvider(threshold));

@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
     {
         public bool TryIdentify(Stream stream, out LibraryInfo? libraryInfo)
         {
-            using var sr = new StreamReader(stream);
+            var sr = new StreamReader(stream);
             var first = PeekFirstNonWhitespaceCharacter(sr);
             switch (first)
             {
@@ -72,10 +72,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             }
             catch { return null; }
         }
-        private Library? FromXml(Stream reader)
-        {
-            throw new NotImplementedException();
-        }
+        private Library? FromXml(Stream reader) => null;
 
         private Regex LibraryWithVersion = new Regex("^library\\s+(?'name'\\S+)(\\s+version\\s+'(?'version'\\d+(\\.\\d+)*)')$", RegexOptions.Compiled);
         private Regex LibraryWithoutVersion = new Regex("^library\\s+(?'name'\\S+)$", RegexOptions.Compiled);
