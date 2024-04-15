@@ -3,7 +3,6 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
-using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 
@@ -59,32 +58,4 @@ internal class LibraryDefinitionsBuilder
         DefinitionDictionary<LambdaExpression>? definitions = null) =>
         new LibraryExpressionBuilder(_loggerFactory, _operatorBinding, _typeManager, _typeConverter, library, LibraryDefinitionBuilderSettings.Default, definitions ?? new())
             .ProcessLibrary();
-
-    /// <summary>
-    /// Creates a lambda expression for the specified library and expression.
-    /// </summary>
-    /// <param name="library">The library.</param>
-    /// <param name="expression">The expression.</param>
-    /// <param name="lambdas">The optional existing definition dictionary of lambda expressions.</param>
-    /// <returns>The lambda expression.</returns>
-    public LambdaExpression Lambda(
-        Library library,
-        Elm.Expression expression,
-        DefinitionDictionary<LambdaExpression>? lambdas = null)
-    {
-        var librarySet = CreateLibrarySetOfOne(library);
-        var translated = CreateLibrarySetExpressionBuilder(librarySet)
-            .CreateLibraryExpressionBuilder(library)
-            .CreateExpressionBuilder()
-            .TranslateExpression(expression);
-        var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
-        var lambda = Expression.Lambda(translated, parameter);
-        return lambda;
-    }
-
-    private static LibrarySet CreateLibrarySetOfOne(Library library) =>
-        new($"Single LibrarySet `{library}`", library);
-
-    private LibrarySetExpressionBuilder CreateLibrarySetExpressionBuilder(LibrarySet librarySet, DefinitionDictionary<LambdaExpression>? lambdas = null) =>
-        new(_loggerFactory, _operatorBinding, _typeManager, _typeConverter, LibraryDefinitionBuilderSettings.Default, librarySet, lambdas ?? new());
 }

@@ -19,7 +19,6 @@ Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Primitives.CqlPri
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
-Hl7.Cql.Packaging.ElmLibraryExtensions
 Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions
 Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.FhirResourceWriterOptions() -> void
 Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
@@ -32,7 +31,6 @@ override Hl7.Cql.Packaging.CqlTypeToFhirMapping.ToString() -> string!
 static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! ctx) -> System.Collections.Generic.IDictionary<string!, object?>!
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator !=(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator ==(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
-static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
 static Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.BindConfig(Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.<Clone>$() -> Hl7.Cql.Packaging.CqlTypeToFhirMapping!
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.EqualityContract.get -> System.Type!
