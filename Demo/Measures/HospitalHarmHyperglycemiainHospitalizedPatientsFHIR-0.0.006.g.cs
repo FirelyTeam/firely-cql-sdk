@@ -163,7 +163,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -265,7 +265,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return e_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(a_, b_);
 
 		return c_;
 	}
@@ -298,14 +298,14 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
 			Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW j_(Condition DiabetesDiagnosis) => 
 				EncounterWithHospitalization;
-			var k_ = context.Operators.Select<Condition, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(i_, j_);
+			var k_ = context.Operators.SelectOrNull<Condition, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(i_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.SelectMany<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(a_, b_);
 		Encounter d_(Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW EncounterWithHospitalization) => 
 			EncounterWithHospitalization?.encounter;
-		var e_ = context.Operators.Select<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Encounter>(c_, d_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -332,7 +332,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW,MedicationAdministration>, Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<ValueTuple<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW,MedicationAdministration>, Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(g_, h_);
 		bool? j_(Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW tuple_ebceideejujlqkcdbhkcqvihw)
 		{
 			var o_ = context.Operators.Convert<string>(tuple_ebceideejujlqkcdbhkcqvihw.HypoglycemicMedication?.StatusElement);
@@ -346,7 +346,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var k_ = context.Operators.WhereOrNull<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW>(i_, j_);
 		Encounter l_(Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW tuple_ebceideejujlqkcdbhkcqvihw) => 
 			tuple_ebceideejujlqkcdbhkcqvihw.EncounterWithHospitalization?.encounter;
-		var m_ = context.Operators.Select<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW, Encounter>(k_, l_);
+		var m_ = context.Operators.SelectOrNull<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW, Encounter>(k_, l_);
 
 		return m_;
 	}
@@ -379,14 +379,14 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
 			Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW j_(Observation BloodGlucoseLab) => 
 				EncounterWithHospitalization;
-			var k_ = context.Operators.Select<Observation, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(i_, j_);
+			var k_ = context.Operators.SelectOrNull<Observation, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(i_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.SelectMany<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>(a_, b_);
 		Encounter d_(Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW EncounterWithHospitalization) => 
 			EncounterWithHospitalization?.encounter;
-		var e_ = context.Operators.Select<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Encounter>(c_, d_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -457,7 +457,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return i_;
 		};
-		var h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
+		var h_ = context.Operators.SelectOrNull<CqlInterval<int?>, int?>(f_, g_);
 
 		return h_;
 	}
@@ -521,7 +521,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return l_;
 		};
-		var c_ = context.Operators.Select<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
 
 		return c_;
 	}
@@ -545,7 +545,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return j_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_FdccSJcWTSebijGjABdUMLEdR>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_FdccSJcWTSebijGjABdUMLEdR>(a_, b_);
 
 		return c_;
 	}
@@ -621,7 +621,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 				return w_;
 			};
-			var e_ = context.Operators.Select<Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf, Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(PertinentEncounterDays?.relevantDays, d_);
+			var e_ = context.Operators.SelectOrNull<Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf, Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(PertinentEncounterDays?.relevantDays, d_);
 			var f_ = new Tuples.Tuple_GiWKJXbiXAiGGBDVZJdMTaVhK
 			{
 				encounter = PertinentEncounterDays?.encounter,
@@ -631,7 +631,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return f_;
 		};
-		var c_ = context.Operators.Select<Tuples.Tuple_FdccSJcWTSebijGjABdUMLEdR, Tuples.Tuple_GiWKJXbiXAiGGBDVZJdMTaVhK>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Tuples.Tuple_FdccSJcWTSebijGjABdUMLEdR, Tuples.Tuple_GiWKJXbiXAiGGBDVZJdMTaVhK>(a_, b_);
 
 		return c_;
 	}
@@ -670,7 +670,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 				return q_;
 			};
-			var g_ = context.Operators.Select<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF, Tuples.Tuple_HBBaLFUhhUfQBEJKjEZegSRLi>(e_, f_);
+			var g_ = context.Operators.SelectOrNull<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF, Tuples.Tuple_HBBaLFUhhUfQBEJKjEZegSRLi>(e_, f_);
 			var h_ = new Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA
 			{
 				encounter = EncounterWithResultDays?.encounter,
@@ -680,7 +680,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return h_;
 		};
-		var c_ = context.Operators.Select<Tuples.Tuple_GiWKJXbiXAiGGBDVZJdMTaVhK, Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Tuples.Tuple_GiWKJXbiXAiGGBDVZJdMTaVhK, Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA>(a_, b_);
 
 		return c_;
 	}
@@ -704,7 +704,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var c_ = context.Operators.WhereOrNull<Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA>(a_, b_);
 		Encounter d_(Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA EncounterWithEventDays) => 
 			EncounterWithEventDays?.encounter;
-		var e_ = context.Operators.Select<Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA, Encounter>(c_, d_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -730,8 +730,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return h_;
 		};
-		var e_ = context.Operators.Select<Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA, int?>(c_, d_);
-		var f_ = context.Operators.Single<int?>(e_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA, int?>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<int?>(e_);
 
 		return f_;
 	}
@@ -756,8 +756,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA, int?>(c_, d_);
-		var f_ = context.Operators.Single<int?>(e_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_CAbQjTVRCSKOYWiIhECGMcDPA, int?>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<int?>(e_);
 
 		return f_;
 	}

@@ -426,7 +426,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -448,7 +448,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return aw_;
 			};
-			var as_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, ar_);
+			var as_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, ar_);
 			bool? at_(CqlConcept T)
 			{
 				var ax_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_();
@@ -472,7 +472,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return bf_;
 			};
-			var bb_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, ba_);
+			var bb_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, ba_);
 			bool? bc_(CqlConcept T)
 			{
 				var bg_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes();
@@ -555,7 +555,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return ah_;
 			};
-			var ad_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, ac_);
+			var ad_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, ac_);
 			bool? ae_(CqlConcept T)
 			{
 				var ai_ = this.Unlisted_preventive_medicine_service();
@@ -582,7 +582,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return aq_;
 			};
-			var am_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, al_);
+			var am_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, al_);
 			bool? an_(CqlConcept T)
 			{
 				var ar_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();
@@ -697,7 +697,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return v_;
 		};
 		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.Single<Observation>(k_);
+		var l_ = context.Operators.SingleOrNull<Observation>(k_);
 
 		return l_;
 	}
@@ -769,7 +769,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return v_;
 		};
 		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.Single<Observation>(k_);
+		var l_ = context.Operators.SingleOrNull<Observation>(k_);
 
 		return l_;
 	}

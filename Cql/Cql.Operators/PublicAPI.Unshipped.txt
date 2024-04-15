@@ -437,10 +437,10 @@ Hl7.Cql.Operators.ICqlOperators.SameOrBefore(Hl7.Cql.Primitives.CqlTime? left, H
 Hl7.Cql.Operators.ICqlOperators.SamePrecision(Hl7.Cql.Primitives.CqlDate? left, Hl7.Cql.Primitives.CqlDate? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.SamePrecision(Hl7.Cql.Primitives.CqlDateTime? left, Hl7.Cql.Primitives.CqlDateTime? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.SamePrecision(Hl7.Cql.Primitives.CqlTime? left, Hl7.Cql.Primitives.CqlTime? right) -> bool?
-Hl7.Cql.Operators.ICqlOperators.SelectMany<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>? source, System.Func<TSource, System.Collections.Generic.IEnumerable<TResult>!>! collectionSelector) -> System.Collections.Generic.IEnumerable<TResult>?
-Hl7.Cql.Operators.ICqlOperators.SelectManyResults<TSource, TCollection, TResult>(System.Collections.Generic.IEnumerable<TSource>? source, System.Func<TSource, System.Collections.Generic.IEnumerable<TCollection>!>! collectionSelector, System.Func<TSource, TCollection, TResult>! resultSelector) -> System.Collections.Generic.IEnumerable<TResult>?
-Hl7.Cql.Operators.ICqlOperators.Select<T, TR>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, TR>! select) -> System.Collections.Generic.IEnumerable<TR>?
-Hl7.Cql.Operators.ICqlOperators.Single<T>(System.Collections.Generic.IEnumerable<T>? source) -> T?
+Hl7.Cql.Operators.ICqlOperators.SelectManyOrNull<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>? source, System.Func<TSource, System.Collections.Generic.IEnumerable<TResult>!>! collectionSelector) -> System.Collections.Generic.IEnumerable<TResult>?
+Hl7.Cql.Operators.ICqlOperators.SelectManyResultsOrNull<TSource, TCollection, TResult>(System.Collections.Generic.IEnumerable<TSource>? source, System.Func<TSource, System.Collections.Generic.IEnumerable<TCollection>!>! collectionSelector, System.Func<TSource, TCollection, TResult>! resultSelector) -> System.Collections.Generic.IEnumerable<TResult>?
+Hl7.Cql.Operators.ICqlOperators.SelectOrNull<T, R>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, R>! select) -> System.Collections.Generic.IEnumerable<R>?
+Hl7.Cql.Operators.ICqlOperators.SingleOrNull<T>(System.Collections.Generic.IEnumerable<T>? source) -> T?
 Hl7.Cql.Operators.ICqlOperators.Slice<T>(System.Collections.Generic.IEnumerable<T>? source, int? startIndex, int? endIndex) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.Split(string! stringToSplit, string! separator) -> System.Collections.Generic.IEnumerable<string!>?
 Hl7.Cql.Operators.ICqlOperators.SplitOnMatches(string! stringToSplit, string! separatorPattern) -> System.Collections.Generic.IEnumerable<string!>?

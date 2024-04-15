@@ -313,7 +313,7 @@ partial class CqlOperatorsBinding
         {
             var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var resultType = lambdaExpr.ReturnType;
-            var call = BindToMethod(nameof(ICqlOperators.Select), [sourceType, resultType], source, lambda);
+            var call = BindToMethod(nameof(ICqlOperators.SelectOrNull), [sourceType, resultType], source, lambda);
             return call;
         }
         else throw new ArgumentException("Source is not generic", nameof(source));
@@ -341,7 +341,7 @@ partial class CqlOperatorsBinding
             if (TypeResolver.ImplementsGenericIEnumerable(collectionSelector.ReturnType))
             {
                 var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
-                var call = BindToMethod(nameof(ICqlOperators.SelectMany), [firstGenericArgument, secondGenericArgument], source, collectionSelector);
+                var call = BindToMethod(nameof(ICqlOperators.SelectManyOrNull), [firstGenericArgument, secondGenericArgument], source, collectionSelector);
                 return call;
             }
             else throw new ArgumentException("Collection selector does not return an IEnumerable", nameof(collectionSelectorLambda));
@@ -371,7 +371,7 @@ partial class CqlOperatorsBinding
             throw new ArgumentException("Result expression is not a lambda", nameof(resultSelectorLambda));
 
         var call = BindToMethod(
-            nameof(ICqlOperators.SelectManyResults),
+            nameof(ICqlOperators.SelectManyResultsOrNull),
             [firstGenericArgument, secondGenericArgument, resultSelector.ReturnType], source,
             collectionSelector, resultSelector);
         return call;

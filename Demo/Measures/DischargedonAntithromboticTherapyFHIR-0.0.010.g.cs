@@ -226,7 +226,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -260,7 +260,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return ab_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), g_);
+			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), g_);
 			var i_ = this.Medical_Reason();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			CqlConcept k_(CodeableConcept X)
@@ -269,7 +269,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return ac_;
 			};
-			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), k_);
+			var l_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), k_);
 			var m_ = this.Patient_Refusal();
 			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
 			var o_ = context.Operators.Or(j_, n_);
@@ -330,11 +330,11 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest NoDischargeAntithrombotic) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -408,11 +408,11 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest DischargePharmacological) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -523,11 +523,11 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest DischargeAntithrombotic) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}

@@ -231,7 +231,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -316,8 +316,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 						: null), k_);
 				DataType m_(Extension @this) => 
 					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.Single<DataType>(n_);
+				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
+				var o_ = context.Operators.SingleOrNull<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Present_on_Admission_or_Clinically_Undetermined();
@@ -380,11 +380,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var h_ = context.Operators.WhereOrNull<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
-			var j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
+			var j_ = context.Operators.SelectOrNull<Observation, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -428,8 +428,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 						: null), k_);
 				DataType m_(Extension @this) => 
 					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.Single<DataType>(n_);
+				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
+				var o_ = context.Operators.SingleOrNull<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Present_on_Admission_or_Clinically_Undetermined();
@@ -492,11 +492,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var h_ = context.Operators.WhereOrNull<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
-			var j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
+			var j_ = context.Operators.SelectOrNull<Observation, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -583,8 +583,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 						: null), k_);
 				DataType m_(Extension @this) => 
 					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.Single<DataType>(n_);
+				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
+				var o_ = context.Operators.SingleOrNull<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
@@ -654,7 +654,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return an_;
 				};
-				var ag_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(ae_, af_);
+				var ag_ = context.Operators.SelectOrNull<Observation.ComponentComponent, CqlConcept>(ae_, af_);
 				var ai_ = context.Operators.ConceptsInValueSet(ag_, ab_);
 				var aj_ = context.Operators.Or(ac_, ai_);
 				var ak_ = context.Operators.And(z_, aj_);
@@ -664,11 +664,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var h_ = context.Operators.WhereOrNull<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
-			var j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
+			var j_ = context.Operators.SelectOrNull<Observation, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -712,8 +712,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 						: null), k_);
 				DataType m_(Extension @this) => 
 					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.Single<DataType>(n_);
+				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
+				var o_ = context.Operators.SingleOrNull<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
@@ -783,7 +783,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return an_;
 				};
-				var ag_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(ae_, af_);
+				var ag_ = context.Operators.SelectOrNull<Observation.ComponentComponent, CqlConcept>(ae_, af_);
 				var ai_ = context.Operators.ConceptsInValueSet(ag_, ab_);
 				var aj_ = context.Operators.Or(ac_, ai_);
 				var ak_ = context.Operators.And(z_, aj_);
@@ -793,11 +793,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var h_ = context.Operators.WhereOrNull<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
-			var j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
+			var j_ = context.Operators.SelectOrNull<Observation, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}

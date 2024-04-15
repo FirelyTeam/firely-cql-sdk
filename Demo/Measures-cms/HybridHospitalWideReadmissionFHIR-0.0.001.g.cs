@@ -285,7 +285,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -331,11 +331,11 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var k_ = context.Operators.WhereOrNull<Coverage>(i_, j_);
 			Encounter l_(Coverage MedicarePayer) => 
 				InpatientEncounter;
-			var m_ = context.Operators.Select<Coverage, Encounter>(k_, l_);
+			var m_ = context.Operators.SelectOrNull<Coverage, Encounter>(k_, l_);
 
 			return m_;
 		};
-		var d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
+		var d_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -452,7 +452,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BJTSgXESaFEOLbMHHiDMHCcdP>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BJTSgXESaFEOLbMHHiDMHCcdP>(a_, b_);
 
 		return c_;
 	}
@@ -558,7 +558,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_DPdLURgGeOHhHAcheMAZcWfbT>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_DPdLURgGeOHhHAcheMAZcWfbT>(a_, b_);
 
 		return c_;
 	}
@@ -1546,7 +1546,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return n_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO>(a_, b_);
 
 		return c_;
 	}
@@ -1652,7 +1652,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_EAccDaIgTNOHbEQUMLJiXWIJO>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_EAccDaIgTNOHbEQUMLJiXWIJO>(a_, b_);
 
 		return c_;
 	}
@@ -1691,7 +1691,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 		var a_ = this.Inpatient_Encounters();
 		string b_(Encounter EncounterInpatient) => 
 			EncounterInpatient?.IdElement?.Value;
-		var c_ = context.Operators.Select<Encounter, string>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, string>(a_, b_);
 
 		return c_;
 	}
@@ -1793,7 +1793,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -1895,7 +1895,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -1997,7 +1997,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2099,7 +2099,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2201,7 +2201,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2303,7 +2303,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2405,7 +2405,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2497,7 +2497,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}

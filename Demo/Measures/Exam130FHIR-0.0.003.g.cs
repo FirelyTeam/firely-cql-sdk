@@ -471,7 +471,7 @@ public class Exam130FHIR_0_0_003
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -738,7 +738,7 @@ public class Exam130FHIR_0_0_003
 			var s_ = context.Operators.WhereOrNull<Coding>(q_, r_);
 			FhirString t_(Coding @this) => 
 				@this?.DisplayElement;
-			var u_ = context.Operators.Select<Coding, FhirString>(s_, t_);
+			var u_ = context.Operators.SelectOrNull<Coding, FhirString>(s_, t_);
 			bool? v_(CodeableConcept @this)
 			{
 				var ak_ = context.Operators.Not((bool?)(@this?.Coding is null));
@@ -748,7 +748,7 @@ public class Exam130FHIR_0_0_003
 			var w_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), v_);
 			List<Coding> x_(CodeableConcept @this) => 
 				@this?.Coding;
-			var y_ = context.Operators.Select<CodeableConcept, List<Coding>>(w_, x_);
+			var y_ = context.Operators.SelectOrNull<CodeableConcept, List<Coding>>(w_, x_);
 			var z_ = context.Operators.FlattenList<Coding>(y_);
 			bool? aa_(Coding @this)
 			{
@@ -759,7 +759,7 @@ public class Exam130FHIR_0_0_003
 			var ab_ = context.Operators.WhereOrNull<Coding>(z_, aa_);
 			Code ac_(Coding @this) => 
 				@this?.CodeElement;
-			var ad_ = context.Operators.Select<Coding, Code>(ab_, ac_);
+			var ad_ = context.Operators.SelectOrNull<Coding, Code>(ab_, ac_);
 			bool? ae_(Code @this)
 			{
 				var am_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -769,7 +769,7 @@ public class Exam130FHIR_0_0_003
 			var af_ = context.Operators.WhereOrNull<Code>(ad_, ae_);
 			string ag_(Code @this) => 
 				@this?.Value;
-			var ah_ = context.Operators.Select<Code, string>(af_, ag_);
+			var ah_ = context.Operators.SelectOrNull<Code, string>(af_, ag_);
 			var ai_ = new Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW
 			{
 				occultDate = p_,
@@ -780,7 +780,7 @@ public class Exam130FHIR_0_0_003
 
 			return ai_;
 		};
-		var f_ = context.Operators.Select<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
 
 		return f_;
 	}
@@ -814,7 +814,7 @@ public class Exam130FHIR_0_0_003
 				var s_ = context.Operators.WhereOrNull<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
 				Code t_(Coding @this) => 
 					@this?.CodeElement;
-				var u_ = context.Operators.Select<Coding, Code>(s_, t_);
+				var u_ = context.Operators.SelectOrNull<Coding, Code>(s_, t_);
 				bool? v_(Code @this)
 				{
 					var ac_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -824,7 +824,7 @@ public class Exam130FHIR_0_0_003
 				var w_ = context.Operators.WhereOrNull<Code>(u_, v_);
 				string x_(Code @this) => 
 					@this?.Value;
-				var y_ = context.Operators.Select<Code, string>(w_, x_);
+				var y_ = context.Operators.SelectOrNull<Code, string>(w_, x_);
 				var z_ = new string[]
 				{
 					"laboratory",
@@ -879,7 +879,7 @@ public class Exam130FHIR_0_0_003
 				var s_ = context.Operators.WhereOrNull<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
 				Code t_(Coding @this) => 
 					@this?.CodeElement;
-				var u_ = context.Operators.Select<Coding, Code>(s_, t_);
+				var u_ = context.Operators.SelectOrNull<Coding, Code>(s_, t_);
 				bool? v_(Code @this)
 				{
 					var ac_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -889,7 +889,7 @@ public class Exam130FHIR_0_0_003
 				var w_ = context.Operators.WhereOrNull<Code>(u_, v_);
 				string x_(Code @this) => 
 					@this?.Value;
-				var y_ = context.Operators.Select<Code, string>(w_, x_);
+				var y_ = context.Operators.SelectOrNull<Code, string>(w_, x_);
 				var z_ = new string[]
 				{
 					"laboratory",
@@ -936,7 +936,7 @@ public class Exam130FHIR_0_0_003
 				var o_ = context.Operators.WhereOrNull<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), n_);
 				Code p_(Coding @this) => 
 					@this?.CodeElement;
-				var q_ = context.Operators.Select<Coding, Code>(o_, p_);
+				var q_ = context.Operators.SelectOrNull<Coding, Code>(o_, p_);
 				bool? r_(Code @this)
 				{
 					var z_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -946,7 +946,7 @@ public class Exam130FHIR_0_0_003
 				var s_ = context.Operators.WhereOrNull<Code>(q_, r_);
 				string t_(Code @this) => 
 					@this?.Value;
-				var u_ = context.Operators.Select<Code, string>(s_, t_);
+				var u_ = context.Operators.SelectOrNull<Code, string>(s_, t_);
 				var v_ = new string[]
 				{
 					"laboratory",
@@ -1043,7 +1043,7 @@ public class Exam130FHIR_0_0_003
 			var w_ = context.Operators.WhereOrNull<Coding>(u_, v_);
 			FhirString x_(Coding @this) => 
 				@this?.DisplayElement;
-			var y_ = context.Operators.Select<Coding, FhirString>(w_, x_);
+			var y_ = context.Operators.SelectOrNull<Coding, FhirString>(w_, x_);
 			bool? z_(CodeableConcept @this)
 			{
 				var ao_ = context.Operators.Not((bool?)(@this?.Coding is null));
@@ -1053,7 +1053,7 @@ public class Exam130FHIR_0_0_003
 			var aa_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), z_);
 			List<Coding> ab_(CodeableConcept @this) => 
 				@this?.Coding;
-			var ac_ = context.Operators.Select<CodeableConcept, List<Coding>>(aa_, ab_);
+			var ac_ = context.Operators.SelectOrNull<CodeableConcept, List<Coding>>(aa_, ab_);
 			var ad_ = context.Operators.FlattenList<Coding>(ac_);
 			bool? ae_(Coding @this)
 			{
@@ -1064,7 +1064,7 @@ public class Exam130FHIR_0_0_003
 			var af_ = context.Operators.WhereOrNull<Coding>(ad_, ae_);
 			Code ag_(Coding @this) => 
 				@this?.CodeElement;
-			var ah_ = context.Operators.Select<Coding, Code>(af_, ag_);
+			var ah_ = context.Operators.SelectOrNull<Coding, Code>(af_, ag_);
 			bool? ai_(Code @this)
 			{
 				var aq_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -1074,7 +1074,7 @@ public class Exam130FHIR_0_0_003
 			var aj_ = context.Operators.WhereOrNull<Code>(ah_, ai_);
 			string ak_(Code @this) => 
 				@this?.Value;
-			var al_ = context.Operators.Select<Code, string>(aj_, ak_);
+			var al_ = context.Operators.SelectOrNull<Code, string>(aj_, ak_);
 			var am_ = new Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW
 			{
 				occultDate = t_,
@@ -1085,7 +1085,7 @@ public class Exam130FHIR_0_0_003
 
 			return am_;
 		};
-		var f_ = context.Operators.Select<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
 
 		return f_;
 	}
@@ -1119,7 +1119,7 @@ public class Exam130FHIR_0_0_003
 				var ac_ = context.Operators.WhereOrNull<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
 				Code ad_(Coding @this) => 
 					@this?.CodeElement;
-				var ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
+				var ae_ = context.Operators.SelectOrNull<Coding, Code>(ac_, ad_);
 				bool? af_(Code @this)
 				{
 					var am_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -1129,7 +1129,7 @@ public class Exam130FHIR_0_0_003
 				var ag_ = context.Operators.WhereOrNull<Code>(ae_, af_);
 				string ah_(Code @this) => 
 					@this?.Value;
-				var ai_ = context.Operators.Select<Code, string>(ag_, ah_);
+				var ai_ = context.Operators.SelectOrNull<Code, string>(ag_, ah_);
 				var aj_ = new string[]
 				{
 					"laboratory",
@@ -1192,7 +1192,7 @@ public class Exam130FHIR_0_0_003
 				var ac_ = context.Operators.WhereOrNull<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
 				Code ad_(Coding @this) => 
 					@this?.CodeElement;
-				var ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
+				var ae_ = context.Operators.SelectOrNull<Coding, Code>(ac_, ad_);
 				bool? af_(Code @this)
 				{
 					var am_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -1202,7 +1202,7 @@ public class Exam130FHIR_0_0_003
 				var ag_ = context.Operators.WhereOrNull<Code>(ae_, af_);
 				string ah_(Code @this) => 
 					@this?.Value;
-				var ai_ = context.Operators.Select<Code, string>(ag_, ah_);
+				var ai_ = context.Operators.SelectOrNull<Code, string>(ag_, ah_);
 				var aj_ = new string[]
 				{
 					"laboratory",
@@ -1257,7 +1257,7 @@ public class Exam130FHIR_0_0_003
 				var y_ = context.Operators.WhereOrNull<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), x_);
 				Code z_(Coding @this) => 
 					@this?.CodeElement;
-				var aa_ = context.Operators.Select<Coding, Code>(y_, z_);
+				var aa_ = context.Operators.SelectOrNull<Coding, Code>(y_, z_);
 				bool? ab_(Code @this)
 				{
 					var aj_ = context.Operators.Not((bool?)(@this?.Value is null));
@@ -1267,7 +1267,7 @@ public class Exam130FHIR_0_0_003
 				var ac_ = context.Operators.WhereOrNull<Code>(aa_, ab_);
 				string ad_(Code @this) => 
 					@this?.Value;
-				var ae_ = context.Operators.Select<Code, string>(ac_, ad_);
+				var ae_ = context.Operators.SelectOrNull<Code, string>(ac_, ad_);
 				var af_ = new string[]
 				{
 					"laboratory",
@@ -1374,7 +1374,7 @@ public class Exam130FHIR_0_0_003
 
 			return u_;
 		};
-		var f_ = context.Operators.Select<Observation, CqlDateTime>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<Observation, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
@@ -1492,7 +1492,7 @@ public class Exam130FHIR_0_0_003
 
 			return u_;
 		};
-		var f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<Procedure, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
@@ -1596,7 +1596,7 @@ public class Exam130FHIR_0_0_003
 
 			return u_;
 		};
-		var f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<Procedure, CqlDateTime>(d_, e_);
 
 		return f_;
 	}

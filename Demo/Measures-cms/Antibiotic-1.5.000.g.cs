@@ -54,7 +54,7 @@ public class Antibiotic_1_5_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -90,14 +90,14 @@ public class Antibiotic_1_5_000
 			var f_ = context.Operators.WhereOrNull<Condition>(comorbidConditions, e_);
 			Encounter g_(Condition comcondition) => 
 				eDate;
-			var h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<Condition, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
+		var b_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(episodeDate, a_);
 		Encounter c_(Encounter eDate) => 
 			eDate;
-		var d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
+		var d_ = context.Operators.SelectOrNull<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -127,14 +127,14 @@ public class Antibiotic_1_5_000
 			var f_ = context.Operators.WhereOrNull<Condition>(competingConditions, e_);
 			Encounter g_(Condition competcondition) => 
 				eDate;
-			var h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<Condition, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
+		var b_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(episodeDate, a_);
 		Encounter c_(Encounter eDate) => 
 			eDate;
-		var d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
+		var d_ = context.Operators.SelectOrNull<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -155,7 +155,7 @@ public class Antibiotic_1_5_000
 				var h_ = context.Operators.WhereOrNull<Dosage>(ActiveMedication?.DosageInstruction, g_);
 				Timing i_(Dosage @this) => 
 					@this?.Timing;
-				var j_ = context.Operators.Select<Dosage, Timing>(h_, i_);
+				var j_ = context.Operators.SelectOrNull<Dosage, Timing>(h_, i_);
 				bool? k_(Timing T)
 				{
 					var o_ = FHIRHelpers_4_3_000.ToValue(T?.Repeat?.Bounds);
@@ -214,11 +214,11 @@ public class Antibiotic_1_5_000
 			var d_ = context.Operators.WhereOrNull<MedicationRequest>(antibioticMedications, c_);
 			Encounter e_(MedicationRequest ActiveMedication) => 
 				DateOfEpisode;
-			var f_ = context.Operators.Select<MedicationRequest, Encounter>(d_, e_);
+			var f_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(d_, e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
+		var b_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(episodeDate, a_);
 
 		return b_;
 	}

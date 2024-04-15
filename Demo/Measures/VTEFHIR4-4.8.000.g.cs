@@ -68,7 +68,7 @@ public class VTEFHIR4_4_8_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -89,7 +89,7 @@ public class VTEFHIR4_4_8_000
 
 				return o_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
+			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);

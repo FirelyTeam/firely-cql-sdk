@@ -671,7 +671,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -845,8 +845,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 						: null), q_);
 				DataType s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.Select<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.Single<DataType>(t_);
+				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
+				var u_ = context.Operators.SingleOrNull<DataType>(t_);
 				var v_ = context.Operators.Convert<CodeableConcept>(u_);
 				var w_ = FHIRHelpers_4_3_000.ToConcept(v_);
 				var x_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();
@@ -928,11 +928,11 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure BloodTransfusion) => 
 				TwentyWeeksPlusEncounter;
-			var i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
+			var i_ = context.Operators.SelectOrNull<Procedure, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1111,8 +1111,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					: null), e_);
 			DataType g_(Extension @this) => 
 				@this?.Value;
-			var h_ = context.Operators.Select<Extension, DataType>(f_, g_);
-			var i_ = context.Operators.Single<DataType>(h_);
+			var h_ = context.Operators.SelectOrNull<Extension, DataType>(f_, g_);
+			var i_ = context.Operators.SingleOrNull<DataType>(h_);
 			var j_ = context.Operators.Convert<CodeableConcept>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
 			var l_ = this.Present_On_Admission_is_Yes_or_Exempt();
@@ -1128,7 +1128,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return p_;
 		};
-		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, CqlConcept>(b_, c_);
+		var d_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, CqlConcept>(b_, c_);
 
 		return d_;
 	}
@@ -1824,7 +1824,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_BUSccGEhJLedCLcPKRPjDcPjV>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_BUSccGEhJLedCLcPKRPjDcPjV>(a_, b_);
 
 		return c_;
 	}
@@ -1922,7 +1922,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA>(a_, b_);
 
 		return c_;
 	}
@@ -2016,7 +2016,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_CYVVSdgZbMfXHMiBHjISgejQI>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_CYVVSdgZbMfXHMiBHjISgejQI>(a_, b_);
 
 		return c_;
 	}
@@ -2080,7 +2080,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return (ap_ as CqlQuantity);
 			};
-			var m_ = context.Operators.Select<Observation.ComponentComponent, CqlQuantity>(k_, l_);
+			var m_ = context.Operators.SelectOrNull<Observation.ComponentComponent, CqlQuantity>(k_, l_);
 			bool? o_(Observation BP)
 			{
 				var aq_ = FHIRHelpers_4_3_000.ToValue(BP?.Effective);
@@ -2125,7 +2125,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return v_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_DBZhWNcHciGGJUSXZKiOPXJYf>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_DBZhWNcHciGGJUSXZKiOPXJYf>(a_, b_);
 
 		return c_;
 	}
@@ -2150,8 +2150,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					: null), e_);
 			DataType g_(Extension @this) => 
 				@this?.Value;
-			var h_ = context.Operators.Select<Extension, DataType>(f_, g_);
-			var i_ = context.Operators.Single<DataType>(h_);
+			var h_ = context.Operators.SelectOrNull<Extension, DataType>(f_, g_);
+			var i_ = context.Operators.SingleOrNull<DataType>(h_);
 			var j_ = context.Operators.Convert<CodeableConcept>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
 			var l_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();
@@ -2167,7 +2167,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return p_;
 		};
-		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, CqlConcept>(b_, c_);
+		var d_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, CqlConcept>(b_, c_);
 
 		return d_;
 	}

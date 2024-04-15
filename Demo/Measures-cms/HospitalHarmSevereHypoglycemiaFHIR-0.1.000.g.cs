@@ -150,7 +150,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -235,11 +235,11 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var f_ = context.Operators.WhereOrNull<MedicationAdministration>(d_, e_);
 			Encounter g_(MedicationAdministration HypoglycemicMedication) => 
 				InpatientHospitalization;
-			var h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<MedicationAdministration, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -288,7 +288,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(e_, f_);
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(e_, f_);
 		bool? h_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz)
 		{
 			object m_()
@@ -511,7 +511,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(g_, h_);
 		Observation j_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz) => 
 			tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest;
-		var k_ = context.Operators.Select<Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ, Observation>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ, Observation>(i_, j_);
 
 		return k_;
 	}
@@ -538,7 +538,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,Observation,Observation>, Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(e_, f_);
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation,Observation>, Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(e_, f_);
 		bool? h_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz)
 		{
 			object m_()
@@ -857,7 +857,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(g_, h_);
 		Observation j_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz) => 
 			tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest;
-		var k_ = context.Operators.Select<Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ, Observation>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ, Observation>(i_, j_);
 
 		return k_;
 	}
@@ -885,7 +885,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				((@this is Resource)
 	? ((@this as Resource).IdElement)
 	: null)?.Value;
-			var h_ = context.Operators.Select<Observation, string>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<Observation, string>(f_, g_);
 			var i_ = context.Operators.InList<string>(LowGlucoseTest?.IdElement?.Value, h_);
 			var j_ = context.Operators.Not(i_);
 
@@ -915,7 +915,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(c_, d_);
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(c_, d_);
 		bool? f_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs)
 		{
 			object k_()
@@ -973,7 +973,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(e_, f_);
 		Encounter h_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs) => 
 			tuple_dkowlzzjeftkbjljexpnieafs.QualifyingEncounter;
-		var i_ = context.Operators.Select<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(g_, h_);
 
 		return i_;
 	}

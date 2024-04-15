@@ -383,7 +383,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -501,11 +501,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
 			Encounter h_(Condition Hypertension) => 
 				QualifyingEncounter;
-			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
+			var i_ = context.Operators.SelectOrNull<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -562,7 +562,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ay_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.Single<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(1m, "mm[Hg]");
 			var o_ = context.Operators.Quantity(120m, "mm[Hg]");
@@ -610,7 +610,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return br_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.Single<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ac_ = context.Operators.Quantity(80m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(n_, ac_, true, false);
@@ -676,7 +676,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ay_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.Single<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(120m, "mm[Hg]");
 			var o_ = context.Operators.Quantity(129m, "mm[Hg]");
@@ -724,7 +724,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return br_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.Single<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity(1m, "mm[Hg]");
 			var ac_ = context.Operators.Quantity(80m, "mm[Hg]");
@@ -812,7 +812,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return l_;
 			};
-			var f_ = context.Operators.Select<CodeableConcept, CqlConcept>(Referral?.ReasonCode, e_);
+			var f_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(Referral?.ReasonCode, e_);
 			var g_ = this.Finding_of_Elevated_Blood_Pressure_or_Hypertension();
 			var h_ = context.Operators.ConceptsInValueSet(f_, g_);
 			var i_ = context.Operators.Convert<Code<RequestIntent>>(Referral?.IntentElement?.Value);
@@ -847,11 +847,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var l_ = context.Operators.WhereOrNull<ServiceRequest>(j_, k_);
 			Encounter m_(ServiceRequest Twoto6MonthRescreen) => 
 				ElevatedEncounter;
-			var n_ = context.Operators.Select<ServiceRequest, Encounter>(l_, m_);
+			var n_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(l_, m_);
 
 			return n_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> d_(Encounter ElevatedEncounter)
 		{
 			var r_ = this.NonPharmacological_Interventions();
@@ -866,11 +866,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var t_ = context.Operators.WhereOrNull<ServiceRequest>(r_, s_);
 			Encounter u_(ServiceRequest NonPharmInterventions) => 
 				ElevatedEncounter;
-			var v_ = context.Operators.Select<ServiceRequest, Encounter>(t_, u_);
+			var v_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(t_, u_);
 
 			return v_;
 		};
-		var e_ = context.Operators.SelectMany<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(c_, d_);
 		IEnumerable<Encounter> g_(Encounter ElevatedEncounter)
 		{
 			var z_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
@@ -885,11 +885,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ab_ = context.Operators.WhereOrNull<ServiceRequest>(z_, aa_);
 			Encounter ac_(ServiceRequest Referral) => 
 				ElevatedEncounter;
-			var ad_ = context.Operators.Select<ServiceRequest, Encounter>(ab_, ac_);
+			var ad_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(ab_, ac_);
 
 			return ad_;
 		};
-		var h_ = context.Operators.SelectMany<Encounter, Encounter>(a_, g_);
+		var h_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, g_);
 		var i_ = context.Operators.ListUnion<Encounter>(e_, h_);
 
 		return i_;
@@ -955,7 +955,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ce_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.Single<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
@@ -1009,7 +1009,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return dh_;
 			};
 			var w_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(u_?.Component, v_);
-			var x_ = context.Operators.Single<Observation.ComponentComponent>(w_);
+			var x_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(w_);
 			var y_ = FHIRHelpers_4_3_000.ToValue(x_?.Value);
 			var aa_ = context.Operators.Greater((y_ as CqlQuantity), n_);
 			var ab_ = context.Operators.And(o_, aa_);
@@ -1063,7 +1063,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ek_;
 			};
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
-			var ak_ = context.Operators.Single<Observation.ComponentComponent>(aj_);
+			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
 			var am_ = context.Operators.Quantity(130m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
@@ -1117,7 +1117,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return fn_;
 			};
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
-			var aw_ = context.Operators.Single<Observation.ComponentComponent>(av_);
+			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
 			var ay_ = context.Operators.Quantity(80m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
@@ -1174,7 +1174,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return bs_;
 			};
 			var m_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(k_?.Component, l_);
-			var n_ = context.Operators.Single<Observation.ComponentComponent>(m_);
+			var n_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(m_);
 			var o_ = FHIRHelpers_4_3_000.ToValue(n_?.Value);
 			var p_ = context.Operators.Quantity(0m, "mm[Hg]");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
@@ -1211,7 +1211,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ch_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.Single<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ac_ = context.Operators.Greater((aa_ as CqlQuantity), p_);
 			var ad_ = context.Operators.And(q_, ac_);
@@ -1248,7 +1248,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cw_;
 			};
 			var al_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(aj_?.Component, ak_);
-			var am_ = context.Operators.Single<Observation.ComponentComponent>(al_);
+			var am_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(al_);
 			var an_ = FHIRHelpers_4_3_000.ToValue(am_?.Value);
 			var ao_ = context.Operators.Quantity(130m, "mm[Hg]");
 			var ap_ = context.Operators.GreaterOrEqual((an_ as CqlQuantity), ao_);
@@ -1285,7 +1285,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return dl_;
 			};
 			var ax_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(av_?.Component, aw_);
-			var ay_ = context.Operators.Single<Observation.ComponentComponent>(ax_);
+			var ay_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(ax_);
 			var az_ = FHIRHelpers_4_3_000.ToValue(ay_?.Value);
 			var ba_ = context.Operators.Quantity(80m, "mm[Hg]");
 			var bb_ = context.Operators.GreaterOrEqual((az_ as CqlQuantity), ba_);
@@ -1329,11 +1329,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.WhereOrNull<ServiceRequest>(g_, h_);
 			ServiceRequest j_(ServiceRequest NonPharmInterventionsHTN) => 
 				FourWeekRescreen;
-			var k_ = context.Operators.Select<ServiceRequest, ServiceRequest>(i_, j_);
+			var k_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(b_, c_);
+		var d_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(b_, c_);
 		var e_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
 		var f_ = context.Operators.ListUnion<ServiceRequest>(d_, e_);
 
@@ -1361,11 +1361,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var f_ = context.Operators.WhereOrNull<ServiceRequest>(d_, e_);
 			Encounter g_(ServiceRequest FirstHTNIntervention) => 
 				FirstHTNEncounter;
-			var h_ = context.Operators.Select<ServiceRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1422,7 +1422,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cc_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.Single<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(130m, "mm[Hg]");
 			var o_ = context.Operators.Quantity(139m, "mm[Hg]");
@@ -1470,7 +1470,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cv_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.Single<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity(80m, "mm[Hg]");
 			var ac_ = context.Operators.Quantity(89m, "mm[Hg]");
@@ -1519,7 +1519,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return do_;
 			};
 			var an_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(al_?.Component, am_);
-			var ao_ = context.Operators.Single<Observation.ComponentComponent>(an_);
+			var ao_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(an_);
 			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_?.Value);
 			var aq_ = context.Operators.Quantity(140m, "mm[Hg]");
 			var ar_ = context.Operators.GreaterOrEqual((ap_ as CqlQuantity), aq_);
@@ -1565,7 +1565,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return eh_;
 			};
 			var az_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ax_?.Component, ay_);
-			var ba_ = context.Operators.Single<Observation.ComponentComponent>(az_);
+			var ba_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(az_);
 			var bb_ = FHIRHelpers_4_3_000.ToValue(ba_?.Value);
 			var bc_ = context.Operators.Quantity(90m, "mm[Hg]");
 			var bd_ = context.Operators.GreaterOrEqual((bb_ as CqlQuantity), bc_);
@@ -1635,11 +1635,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var h_ = context.Operators.WhereOrNull<ServiceRequest>(f_, g_);
 			ServiceRequest i_(ServiceRequest LabECGIntervention) => 
 				Rescreen2to6;
-			var j_ = context.Operators.Select<ServiceRequest, ServiceRequest>(h_, i_);
+			var j_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(a_, b_);
 		IEnumerable<ServiceRequest> d_(ServiceRequest Rescreen2to6)
 		{
 			var r_ = this.NonPharmacological_Interventions();
@@ -1654,11 +1654,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var t_ = context.Operators.WhereOrNull<ServiceRequest>(r_, s_);
 			ServiceRequest u_(ServiceRequest NonPharmSecondIntervention) => 
 				Rescreen2to6;
-			var v_ = context.Operators.Select<ServiceRequest, ServiceRequest>(t_, u_);
+			var v_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(t_, u_);
 
 			return v_;
 		};
-		var e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
+		var e_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(c_, d_);
 
 		return e_;
 	}
@@ -1684,11 +1684,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var j_ = context.Operators.WhereOrNull<ServiceRequest>(h_, i_);
 			Encounter k_(ServiceRequest EncounterInterventions) => 
 				SecondHTNEncounterReading;
-			var l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
+			var l_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter SecondHTNEncounterReading)
 		{
 			var p_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
@@ -1703,11 +1703,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var r_ = context.Operators.WhereOrNull<ServiceRequest>(p_, q_);
 			Encounter s_(ServiceRequest ReferralForHTN) => 
 				SecondHTNEncounterReading;
-			var t_ = context.Operators.Select<ServiceRequest, Encounter>(r_, s_);
+			var t_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(r_, s_);
 
 			return t_;
 		};
-		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
+		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, e_);
 		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 
 		return g_;
@@ -1765,7 +1765,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return bx_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.Single<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
@@ -1811,7 +1811,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cq_;
 			};
 			var w_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(u_?.Component, v_);
-			var x_ = context.Operators.Single<Observation.ComponentComponent>(w_);
+			var x_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(w_);
 			var y_ = FHIRHelpers_4_3_000.ToValue(x_?.Value);
 			var aa_ = context.Operators.Greater((y_ as CqlQuantity), n_);
 			var ab_ = context.Operators.And(o_, aa_);
@@ -1857,7 +1857,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return dj_;
 			};
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
-			var ak_ = context.Operators.Single<Observation.ComponentComponent>(aj_);
+			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
 			var am_ = context.Operators.Quantity(140m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
@@ -1903,7 +1903,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ec_;
 			};
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
-			var aw_ = context.Operators.Single<Observation.ComponentComponent>(av_);
+			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
 			var ay_ = context.Operators.Quantity(90m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
@@ -1951,11 +1951,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<ServiceRequest>(i_, j_);
 			ServiceRequest l_(ServiceRequest ECGLabTest) => 
 				WeeksRescreen;
-			var m_ = context.Operators.Select<ServiceRequest, ServiceRequest>(k_, l_);
+			var m_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(k_, l_);
 
 			return m_;
 		};
-		var d_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(b_, c_);
+		var d_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(b_, c_);
 		IEnumerable<ServiceRequest> e_(ServiceRequest WeeksRescreen)
 		{
 			var aa_ = this.NonPharmacological_Interventions();
@@ -1970,11 +1970,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ac_ = context.Operators.WhereOrNull<ServiceRequest>(aa_, ab_);
 			ServiceRequest ad_(ServiceRequest HTNInterventions) => 
 				WeeksRescreen;
-			var ae_ = context.Operators.Select<ServiceRequest, ServiceRequest>(ac_, ad_);
+			var ae_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(ac_, ad_);
 
 			return ae_;
 		};
-		var f_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(d_, e_);
+		var f_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(d_, e_);
 		IEnumerable<ServiceRequest> g_(ServiceRequest WeeksRescreen)
 		{
 			var ai_ = this.Pharmacologic_Therapy_for_Hypertension();
@@ -1994,11 +1994,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ao_ = context.Operators.WhereOrNull<MedicationRequest>(am_, an_);
 			ServiceRequest ap_(MedicationRequest Medications) => 
 				WeeksRescreen;
-			var aq_ = context.Operators.Select<MedicationRequest, ServiceRequest>(ao_, ap_);
+			var aq_ = context.Operators.SelectOrNull<MedicationRequest, ServiceRequest>(ao_, ap_);
 
 			return aq_;
 		};
-		var h_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(f_, g_);
+		var h_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(f_, g_);
 
 		return h_;
 	}
@@ -2024,11 +2024,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var j_ = context.Operators.WhereOrNull<ServiceRequest>(h_, i_);
 			Encounter k_(ServiceRequest SecondHTN140Over90Interventions) => 
 				SecondHTNEncounterReading140Over90;
-			var l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
+			var l_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter SecondHTNEncounterReading140Over90)
 		{
 			var p_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
@@ -2043,11 +2043,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var r_ = context.Operators.WhereOrNull<ServiceRequest>(p_, q_);
 			Encounter s_(ServiceRequest ReferralToProfessional) => 
 				SecondHTNEncounterReading140Over90;
-			var t_ = context.Operators.Select<ServiceRequest, Encounter>(r_, s_);
+			var t_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(r_, s_);
 
 			return t_;
 		};
-		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
+		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, e_);
 		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 
 		return g_;
@@ -2104,8 +2104,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						: null), r_);
 				DataType t_(Extension @this) => 
 					@this?.Value;
-				var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
-				var v_ = context.Operators.Single<DataType>(u_);
+				var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
+				var v_ = context.Operators.SingleOrNull<DataType>(u_);
 				var w_ = context.Operators.Convert<CodeableConcept>(v_);
 				var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 				var y_ = this.Patient_Declined();
@@ -2119,8 +2119,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var ab_ = context.Operators.WhereOrNull<Extension>(((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
 						: null), aa_);
-				var ad_ = context.Operators.Select<Extension, DataType>(ab_, t_);
-				var ae_ = context.Operators.Single<DataType>(ad_);
+				var ad_ = context.Operators.SelectOrNull<Extension, DataType>(ab_, t_);
+				var ae_ = context.Operators.SingleOrNull<DataType>(ad_);
 				var af_ = context.Operators.Convert<CodeableConcept>(ae_);
 				var ag_ = FHIRHelpers_4_3_000.ToConcept(af_);
 				var ah_ = this.Medical_Reason();
@@ -2136,11 +2136,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var l_ = context.Operators.WhereOrNull<Observation>(j_, k_);
 			Encounter m_(Observation NoBPScreen) => 
 				QualifyingEncounter;
-			var n_ = context.Operators.Select<Observation, Encounter>(l_, m_);
+			var n_ = context.Operators.SelectOrNull<Observation, Encounter>(l_, m_);
 
 			return n_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -2188,8 +2188,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), af_);
 			DataType ah_(Extension @this) => 
 				@this?.Value;
-			var ai_ = context.Operators.Select<Extension, DataType>(ag_, ah_);
-			var aj_ = context.Operators.Single<DataType>(ai_);
+			var ai_ = context.Operators.SelectOrNull<Extension, DataType>(ag_, ah_);
+			var aj_ = context.Operators.SingleOrNull<DataType>(ai_);
 			var ak_ = context.Operators.Convert<CodeableConcept>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToConcept(ak_);
 			var am_ = this.Patient_Declined();
@@ -2236,8 +2236,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), p_);
 			DataType r_(Extension @this) => 
 				@this?.Value;
-			var s_ = context.Operators.Select<Extension, DataType>(q_, r_);
-			var t_ = context.Operators.Single<DataType>(s_);
+			var s_ = context.Operators.SelectOrNull<Extension, DataType>(q_, r_);
+			var t_ = context.Operators.SingleOrNull<DataType>(s_);
 			var u_ = context.Operators.Convert<CodeableConcept>(t_);
 			var v_ = FHIRHelpers_4_3_000.ToConcept(u_);
 			var w_ = this.Patient_Declined();
@@ -2281,8 +2281,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), t_);
 			DataType v_(Extension @this) => 
 				@this?.Value;
-			var w_ = context.Operators.Select<Extension, DataType>(u_, v_);
-			var x_ = context.Operators.Single<DataType>(w_);
+			var w_ = context.Operators.SelectOrNull<Extension, DataType>(u_, v_);
+			var x_ = context.Operators.SingleOrNull<DataType>(w_);
 			var y_ = context.Operators.Convert<CodeableConcept>(x_);
 			var z_ = FHIRHelpers_4_3_000.ToConcept(y_);
 			var aa_ = this.Patient_Declined();
@@ -2330,8 +2330,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), z_);
 			DataType ab_(Extension @this) => 
 				@this?.Value;
-			var ac_ = context.Operators.Select<Extension, DataType>(aa_, ab_);
-			var ad_ = context.Operators.Single<DataType>(ac_);
+			var ac_ = context.Operators.SelectOrNull<Extension, DataType>(aa_, ab_);
+			var ad_ = context.Operators.SingleOrNull<DataType>(ac_);
 			var ae_ = context.Operators.Convert<CodeableConcept>(ad_);
 			var af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
 			var ag_ = this.Patient_Declined();
@@ -2397,8 +2397,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						: null), ao_);
 				DataType aq_(Extension @this) => 
 					@this?.Value;
-				var ar_ = context.Operators.Select<Extension, DataType>(ap_, aq_);
-				var as_ = context.Operators.Single<DataType>(ar_);
+				var ar_ = context.Operators.SelectOrNull<Extension, DataType>(ap_, aq_);
+				var as_ = context.Operators.SingleOrNull<DataType>(ar_);
 				var at_ = context.Operators.Convert<CodeableConcept>(as_);
 				var au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 				var av_ = this.Patient_Declined();
@@ -2416,11 +2416,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var al_ = context.Operators.WhereOrNull<ServiceRequest>(aj_, ak_);
 			Encounter am_(ServiceRequest ElevatedBPDeclinedInterventions) => 
 				ElevatedBPEncounter;
-			var an_ = context.Operators.Select<ServiceRequest, Encounter>(al_, am_);
+			var an_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(al_, am_);
 
 			return an_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter ElevatedBPEncounter)
 		{
 			var bf_ = this.NonPharmacological_Intervention_Not_Ordered();
@@ -2435,11 +2435,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var bh_ = context.Operators.WhereOrNull<ServiceRequest>(bf_, bg_);
 			Encounter bi_(ServiceRequest NotOrdered) => 
 				ElevatedBPEncounter;
-			var bj_ = context.Operators.Select<ServiceRequest, Encounter>(bh_, bi_);
+			var bj_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(bh_, bi_);
 
 			return bj_;
 		};
-		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
+		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, e_);
 		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 		var h_ = this.Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80();
 		IEnumerable<Encounter> i_(Encounter FirstHTNEncounter)
@@ -2466,8 +2466,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						: null), cc_);
 				DataType ce_(Extension @this) => 
 					@this?.Value;
-				var cf_ = context.Operators.Select<Extension, DataType>(cd_, ce_);
-				var cg_ = context.Operators.Single<DataType>(cf_);
+				var cf_ = context.Operators.SelectOrNull<Extension, DataType>(cd_, ce_);
+				var cg_ = context.Operators.SingleOrNull<DataType>(cf_);
 				var ch_ = context.Operators.Convert<CodeableConcept>(cg_);
 				var ci_ = FHIRHelpers_4_3_000.ToConcept(ch_);
 				var cj_ = this.Patient_Declined();
@@ -2485,11 +2485,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var bz_ = context.Operators.WhereOrNull<ServiceRequest>(bx_, by_);
 			Encounter ca_(ServiceRequest FirstHTNDeclinedInterventions) => 
 				FirstHTNEncounter;
-			var cb_ = context.Operators.Select<ServiceRequest, Encounter>(bz_, ca_);
+			var cb_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(bz_, ca_);
 
 			return cb_;
 		};
-		var j_ = context.Operators.SelectMany<Encounter, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(h_, i_);
 		IEnumerable<Encounter> l_(Encounter FirstHTNEncounter)
 		{
 			var ct_ = this.NonPharmacological_Intervention_Not_Ordered();
@@ -2504,11 +2504,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var cv_ = context.Operators.WhereOrNull<ServiceRequest>(ct_, cu_);
 			Encounter cw_(ServiceRequest NoNonPharm) => 
 				FirstHTNEncounter;
-			var cx_ = context.Operators.Select<ServiceRequest, Encounter>(cv_, cw_);
+			var cx_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(cv_, cw_);
 
 			return cx_;
 		};
-		var m_ = context.Operators.SelectMany<Encounter, Encounter>(h_, l_);
+		var m_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(h_, l_);
 		var n_ = context.Operators.ListUnion<Encounter>(j_, m_);
 		var o_ = context.Operators.ListUnion<Encounter>(g_, n_);
 		var p_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89();
@@ -2526,11 +2526,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var dd_ = context.Operators.WhereOrNull<ServiceRequest>(db_, dc_);
 			Encounter de_(ServiceRequest SecondHTNDeclinedInterventions) => 
 				SecondHTNEncounter;
-			var df_ = context.Operators.Select<ServiceRequest, Encounter>(dd_, de_);
+			var df_ = context.Operators.SelectOrNull<ServiceRequest, Encounter>(dd_, de_);
 
 			return df_;
 		};
-		var r_ = context.Operators.SelectMany<Encounter, Encounter>(p_, q_);
+		var r_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(p_, q_);
 		var s_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90();
 		IEnumerable<Encounter> t_(Encounter SecondHTN140Over90Encounter)
 		{
@@ -2547,11 +2547,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var dl_ = context.Operators.WhereOrNull<object>(dj_, dk_);
 			Encounter dm_(object SecondHTN140Over90DeclinedInterventions) => 
 				SecondHTN140Over90Encounter;
-			var dn_ = context.Operators.Select<object, Encounter>(dl_, dm_);
+			var dn_ = context.Operators.SelectOrNull<object, Encounter>(dl_, dm_);
 
 			return dn_;
 		};
-		var u_ = context.Operators.SelectMany<Encounter, Encounter>(s_, t_);
+		var u_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(s_, t_);
 		var v_ = context.Operators.ListUnion<Encounter>(r_, u_);
 		var w_ = context.Operators.ListUnion<Encounter>(o_, v_);
 

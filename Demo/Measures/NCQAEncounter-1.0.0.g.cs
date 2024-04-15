@@ -45,7 +45,7 @@ public class NCQAEncounter_1_0_0
 	{
 		FhirString a_(Encounter.DiagnosisComponent D) => 
 			D?.Condition?.ReferenceElement;
-		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, FhirString>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 		bool? c_(FhirString CRef)
 		{
 			bool? f_(Condition C)
@@ -62,7 +62,7 @@ public class NCQAEncounter_1_0_0
 
 			return h_;
 		};
-		var d_ = context.Operators.Select<FhirString, bool?>(b_, c_);
+		var d_ = context.Operators.SelectOrNull<FhirString, bool?>(b_, c_);
 		var e_ = context.Operators.AnyTrue(d_);
 
 		return e_;
@@ -80,7 +80,7 @@ public class NCQAEncounter_1_0_0
 			return j_;
 		};
 		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
-		var c_ = context.Operators.Single<Encounter.DiagnosisComponent>(b_);
+		var c_ = context.Operators.SingleOrNull<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
 			c_,
@@ -101,8 +101,8 @@ public class NCQAEncounter_1_0_0
 
 			return m_;
 		};
-		var f_ = context.Operators.Select<Encounter.DiagnosisComponent, bool?>(d_, e_);
-		var g_ = context.Operators.Single<bool?>(f_);
+		var f_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, bool?>(d_, e_);
+		var g_ = context.Operators.SingleOrNull<bool?>(f_);
 
 		return g_;
 	}

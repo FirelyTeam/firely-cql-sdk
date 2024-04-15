@@ -223,7 +223,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -351,11 +351,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
 			Encounter h_(Condition PrimaryOpenAngleGlaucoma) => 
 				ValidQualifyingEncounter;
-			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
+			var i_ = context.Operators.SelectOrNull<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -415,11 +415,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamNotPerformed;
-			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
 		bool? h_(Observation CupToDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
@@ -433,8 +433,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.Single<DataType>(u_);
+			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
+			var v_ = context.Operators.SingleOrNull<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 			var y_ = this.Medical_Reason();
@@ -471,11 +471,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamNotPerformed;
-			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
 		bool? h_(Observation OpticDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
@@ -489,8 +489,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.Single<DataType>(u_);
+			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
+			var v_ = context.Operators.SingleOrNull<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 			var y_ = this.Medical_Reason();
@@ -541,11 +541,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamPerformed;
-			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
+			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
 		bool? e_(Observation CupToDiscExamPerformed)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToValue(CupToDiscExamPerformed?.Value);
@@ -591,11 +591,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamPerformed;
-			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
+			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
 		bool? e_(Observation OpticDiscExamPerformed)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToValue(OpticDiscExamPerformed?.Value);

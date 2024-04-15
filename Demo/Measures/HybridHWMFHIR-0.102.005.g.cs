@@ -279,7 +279,7 @@ public class HybridHWMFHIR_0_102_005
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -359,7 +359,7 @@ public class HybridHWMFHIR_0_102_005
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,Coverage>, Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Coverage>, Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
 		bool? h_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv)
 		{
 			var m_ = context.Operators.Convert<string>(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.StatusElement);
@@ -387,7 +387,7 @@ public class HybridHWMFHIR_0_102_005
 		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
 		Encounter j_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
 			tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter;
-		var k_ = context.Operators.Select<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
 
 		return k_;
 	}
@@ -509,7 +509,7 @@ public class HybridHWMFHIR_0_102_005
 
 			return z_;
 		};
-		var c_ = context.Operators.Select<Encounter, string>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, string>(a_, b_);
 
 		return c_;
 	}
@@ -597,7 +597,7 @@ public class HybridHWMFHIR_0_102_005
 
 			return y_;
 		};
-		var c_ = context.Operators.Select<Encounter, string>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, string>(a_, b_);
 
 		return c_;
 	}
@@ -860,8 +860,8 @@ public class HybridHWMFHIR_0_102_005
 
 			return aa_;
 		};
-		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.Single<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}

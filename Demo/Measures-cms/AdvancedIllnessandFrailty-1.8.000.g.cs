@@ -246,7 +246,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -413,7 +413,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return k_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
 		bool? f_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
@@ -429,7 +429,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
 		Encounter h_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		var i_ = context.Operators.Select<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
 		var j_ = context.Operators.ExistsInList<Encounter>(i_);
 
 		return j_;
@@ -624,7 +624,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return ai_;
 		};
 		var s_ = context.Operators.WhereOrNull<Observation>(q_, r_);
-		var t_ = context.Operators.Single<Observation>(s_);
+		var t_ = context.Operators.SingleOrNull<Observation>(s_);
 		var u_ = context.Operators.Not((bool?)(t_ is null));
 		var v_ = context.Operators.And(g_, u_);
 

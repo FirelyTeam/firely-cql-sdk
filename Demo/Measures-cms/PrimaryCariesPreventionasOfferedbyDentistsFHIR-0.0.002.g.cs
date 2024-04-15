@@ -148,7 +148,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -247,7 +247,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 			return r_;
 		};
-		var g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
+		var g_ = context.Operators.SelectOrNull<Procedure, CqlDate>(e_, f_);
 		var h_ = context.Operators.CountOrNull<CqlDate>(g_);
 		var i_ = context.Operators.GreaterOrEqual(h_, (int?)2);
 

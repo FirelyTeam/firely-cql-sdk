@@ -496,7 +496,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -592,7 +592,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe>(c_, d_);
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe>(c_, d_);
 		bool? f_(Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe tuple_fgyjhhbrrztdgeekjqjiibgue)
 		{
 			var k_ = FHIRHelpers_4_3_000.ToInterval(tuple_fgyjhhbrrztdgeekjqjiibgue.OfficeVisit2?.Period);
@@ -610,7 +610,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe>(e_, f_);
 		Encounter h_(Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe tuple_fgyjhhbrrztdgeekjqjiibgue) => 
 			tuple_fgyjhhbrrztdgeekjqjiibgue.OfficeVisit1;
-		var i_ = context.Operators.Select<Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe, Encounter>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_FGYJHhbRRZTDGeEKJQJIIbGUe, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -709,7 +709,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(i_, j_);
 		bool? l_(Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
@@ -750,7 +750,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var o_ = context.Operators.Select<Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM, CqlDate>(m_, n_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_CSQNXjbdUJCRVLSGAJQOISbPM, CqlDate>(m_, n_);
 
 		return o_;
 	}
@@ -775,7 +775,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(d_, e_);
 		bool? g_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK tuple_bapoxcdqpiefffdprayqhjvmk)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_bapoxcdqpiefffdprayqhjvmk.ValidEncounters?.Period);
@@ -816,7 +816,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK>(f_, g_);
 		Encounter i_(Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK tuple_bapoxcdqpiefffdprayqhjvmk) => 
 			tuple_bapoxcdqpiefffdprayqhjvmk.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_BaPOXCdQPieFFFdPRAYQHJVMK, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -872,7 +872,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return aj_;
 		};
-		var ae_ = context.Operators.Select<ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation,Observation>, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(ac_, ad_);
+		var ae_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation,Observation>, Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb>(ac_, ad_);
 		bool? af_(Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb tuple_itzjebebsegnifgclhjyijnb)
 		{
 			var ak_ = FHIRHelpers_4_3_000.ToValue(tuple_itzjebebsegnifgclhjyijnb.Promis29Sleep?.Effective);
@@ -998,7 +998,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ep_;
 		};
-		var ai_ = context.Operators.Select<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, CqlDate>(ag_, ah_);
+		var ai_ = context.Operators.SelectOrNull<Tuples.Tuple_ITZjeBeBSEgNiFGcLhJYIJNb, CqlDate>(ag_, ah_);
 
 		return ai_;
 	}
@@ -1023,7 +1023,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(d_, e_);
 		bool? g_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba tuple_dcgyafmugiitlmlbigqthxaba)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dcgyafmugiitlmlbigqthxaba.ValidEncounters?.Period);
@@ -1064,7 +1064,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba>(f_, g_);
 		Encounter i_(Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba tuple_dcgyafmugiitlmlbigqthxaba) => 
 			tuple_dcgyafmugiitlmlbigqthxaba.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DcgYAFMUGiITLMLBigQTHXaba, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -1095,7 +1095,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
 		bool? l_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
@@ -1136,7 +1136,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var o_ = context.Operators.Select<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(m_, n_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(m_, n_);
 
 		return o_;
 	}
@@ -1161,7 +1161,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(d_, e_);
 		bool? g_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU tuple_ehgfqcqtpmavgfjerngbdigou)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_ehgfqcqtpmavgfjerngbdigou.ValidEncounters?.Period);
@@ -1202,7 +1202,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU>(f_, g_);
 		Encounter i_(Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU tuple_ehgfqcqtpmavgfjerngbdigou) => 
 			tuple_ehgfqcqtpmavgfjerngbdigou.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -1233,7 +1233,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
 		bool? l_(Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
@@ -1274,7 +1274,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var o_ = context.Operators.Select<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(m_, n_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(m_, n_);
 
 		return o_;
 	}
@@ -1299,7 +1299,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(d_, e_);
 		bool? g_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ tuple_dathnxwghivrygrfgdxjyjkrz)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dathnxwghivrygrfgdxjyjkrz.ValidEncounters?.Period);
@@ -1340,7 +1340,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ>(f_, g_);
 		Encounter i_(Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ tuple_dathnxwghivrygrfgdxjyjkrz) => 
 			tuple_dathnxwghivrygrfgdxjyjkrz.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -1371,7 +1371,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(i_, j_);
 		bool? l_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_ebsjtadmhbbibbkjaibebhcjh.VR36MentalAssessment?.Effective);
@@ -1412,7 +1412,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var o_ = context.Operators.Select<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(m_, n_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(m_, n_);
 
 		return o_;
 	}
@@ -1437,7 +1437,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(d_, e_);
 		bool? g_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi tuple_hnuzsejfeiqxihxgudxliwidi)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_hnuzsejfeiqxihxgudxliwidi.ValidEncounters?.Period);
@@ -1478,7 +1478,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi>(f_, g_);
 		Encounter i_(Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi tuple_hnuzsejfeiqxihxgudxliwidi) => 
 			tuple_hnuzsejfeiqxihxgudxliwidi.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_HNUZSEJfeiQXIhXGUDXLiWidi, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -1509,7 +1509,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh>(i_, j_);
 		bool? l_(Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh tuple_ebsjtadmhbbibbkjaibebhcjh)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_ebsjtadmhbbibbkjaibebhcjh.VR36MentalAssessment?.Effective);
@@ -1550,7 +1550,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var o_ = context.Operators.Select<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(m_, n_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_EbSJTAdMHbBibBKjAIBeBhcjh, CqlDate>(m_, n_);
 
 		return o_;
 	}
@@ -1575,7 +1575,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(d_, e_);
 		bool? g_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi tuple_fzfelixhkplafndgwdmescidi)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_fzfelixhkplafndgwdmescidi.ValidEncounters?.Period);
@@ -1616,7 +1616,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi>(f_, g_);
 		Encounter i_(Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi tuple_fzfelixhkplafndgwdmescidi) => 
 			tuple_fzfelixhkplafndgwdmescidi.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FZFeLiXHKPLAfNDgWDMeScIDi, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -1647,7 +1647,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU>(i_, j_);
 		bool? l_(Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU tuple_cbaklcfrcuhxghpfcscgcafhu)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_cbaklcfrcuhxghpfcscgcafhu.MLHFQPhysical?.Effective);
@@ -1688,7 +1688,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var o_ = context.Operators.Select<Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU, CqlDate>(m_, n_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_CBaKLCFRCUhXghPfCScgCAfHU, CqlDate>(m_, n_);
 
 		return o_;
 	}
@@ -1713,7 +1713,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(d_, e_);
 		bool? g_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi tuple_dgnbkfgfrhawdzadfpzkifxli)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dgnbkfgfrhawdzadfpzkifxli.ValidEncounters?.Period);
@@ -1754,7 +1754,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi>(f_, g_);
 		Encounter i_(Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi tuple_dgnbkfgfrhawdzadfpzkifxli) => 
 			tuple_dgnbkfgfrhawdzadfpzkifxli.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DgNBKfGfRHaWDZaDFPZKifXLi, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -1785,7 +1785,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation>, Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF>(i_, j_);
 		bool? l_(Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF tuple_ffjnyamqhzaofymnskahaudlf)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(tuple_ffjnyamqhzaofymnskahaudlf.KCCQ12Item?.Effective);
@@ -1826,7 +1826,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return ao_;
 		};
-		var o_ = context.Operators.Select<Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF, CqlDate>(m_, n_);
+		var o_ = context.Operators.SelectOrNull<Tuples.Tuple_FFJNYaMQHZAOFYMNSKAHAUdLF, CqlDate>(m_, n_);
 
 		return o_;
 	}
@@ -1851,7 +1851,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(d_, e_);
 		bool? g_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi tuple_dnzcztnizuqfffijaydwagbfi)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dnzcztnizuqfffijaydwagbfi.ValidEncounters?.Period);
@@ -1892,7 +1892,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi>(f_, g_);
 		Encounter i_(Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi tuple_dnzcztnizuqfffijaydwagbfi) => 
 			tuple_dnzcztnizuqfffijaydwagbfi.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DNZcZTNIZUQfFfijaYDWagbfi, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -1943,7 +1943,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return af_;
 		};
-		var aa_ = context.Operators.Select<ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation>, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(y_, z_);
+		var aa_ = context.Operators.SelectOrNull<ValueTuple<Observation,Observation,Observation,Observation,Observation,Observation>, Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV>(y_, z_);
 		bool? ab_(Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV tuple_bbipkfiyffdqclchpcxkdafmv)
 		{
 			var ag_ = FHIRHelpers_4_3_000.ToValue(tuple_bbipkfiyffdqclchpcxkdafmv.KCCQLifeQuality?.Effective);
@@ -2052,7 +2052,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return du_;
 		};
-		var ae_ = context.Operators.Select<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, CqlDate>(ac_, ad_);
+		var ae_ = context.Operators.SelectOrNull<Tuples.Tuple_BbiPKFIYFfdQCLCHPcXKDaFMV, CqlDate>(ac_, ad_);
 
 		return ae_;
 	}
@@ -2077,7 +2077,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(d_, e_);
 		bool? g_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC tuple_gechmkfhepfubfjyjevegqtrc)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_gechmkfhepfubfjyjevegqtrc.ValidEncounters?.Period);
@@ -2118,7 +2118,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC>(f_, g_);
 		Encounter i_(Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC tuple_gechmkfhepfubfjyjevegqtrc) => 
 			tuple_gechmkfhepfubfjyjevegqtrc.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_GechMKfhePFUbfJYJeVegQTRC, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;
@@ -2156,7 +2156,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return p_;
 		};
-		var h_ = context.Operators.Select<Observation, CqlDate>(f_, g_);
+		var h_ = context.Operators.SelectOrNull<Observation, CqlDate>(f_, g_);
 
 		return h_;
 	}
@@ -2181,7 +2181,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,CqlDate,CqlDate>, Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(d_, e_);
 		bool? g_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf tuple_dsdkcfqmumbjegqcvveyhpydf)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_dsdkcfqmumbjegqcvveyhpydf.ValidEncounters?.Period);
@@ -2222,7 +2222,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf>(f_, g_);
 		Encounter i_(Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf tuple_dsdkcfqmumbjegqcvveyhpydf) => 
 			tuple_dsdkcfqmumbjegqcvveyhpydf.ValidEncounters;
-		var j_ = context.Operators.Select<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf, Encounter>(h_, i_);
+		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DSdKcfQMUMBjegQCVVeYhPYdf, Encounter>(h_, i_);
 		var k_ = context.Operators.ExistsInList<Encounter>(j_);
 
 		return k_;

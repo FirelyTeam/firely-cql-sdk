@@ -257,7 +257,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -345,7 +345,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 				return ap_;
 			};
-			var ac_ = context.Operators.Select<CodeableConcept, CqlConcept>(ValidEncounter?.ReasonCode, ab_);
+			var ac_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(ValidEncounter?.ReasonCode, ab_);
 			var ad_ = this.Major_Depressive_Disorder_Active();
 			var ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
 			var af_ = CQMCommon_2_0_000.EncounterDiagnosis(ValidEncounter);
@@ -440,11 +440,11 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
 			Encounter i_(Procedure SuicideRiskAssessment) => 
 				MDDEncounter;
-			var j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
+			var j_ = context.Operators.SelectOrNull<Procedure, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}

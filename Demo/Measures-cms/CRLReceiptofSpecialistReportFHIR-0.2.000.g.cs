@@ -160,7 +160,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -251,7 +251,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return ac_;
 		};
-		var f_ = context.Operators.Select<ServiceRequest, Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(d_, e_);
+		var f_ = context.Operators.SelectOrNull<ServiceRequest, Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(d_, e_);
 		object g_(Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK @this) => 
 			@this?.AuthorDate;
 		var h_ = context.Operators.ListSortBy<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
@@ -342,7 +342,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return c_;
 		};
-		var b_ = context.Operators.Select<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
+		var b_ = context.Operators.SelectOrNull<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
 
 		return b_;
 	}
@@ -379,11 +379,11 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			var i_ = context.Operators.WhereOrNull<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(g_, h_);
 			Task j_(Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK FirstReferral) => 
 				ConsultantReportObtained;
-			var k_ = context.Operators.Select<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK, Task>(i_, j_);
+			var k_ = context.Operators.SelectOrNull<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK, Task>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectMany<Task, Task>(b_, c_);
+		var d_ = context.Operators.SelectManyOrNull<Task, Task>(b_, c_);
 		var e_ = context.Operators.ExistsInList<Task>(d_);
 
 		return e_;

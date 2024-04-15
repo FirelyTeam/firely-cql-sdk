@@ -210,7 +210,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.Single<Patient>(a_);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
 		return b_;
 	}
@@ -332,7 +332,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 			return ap_;
 		};
-		var v_ = context.Operators.Select<Encounter, CqlDate>(t_, u_);
+		var v_ = context.Operators.SelectOrNull<Encounter, CqlDate>(t_, u_);
 
 		return v_;
 	}
@@ -372,7 +372,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 			return w_;
 		};
-		var i_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDate>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDate>(g_, h_);
 
 		return i_;
 	}
@@ -443,7 +443,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 			return k_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<CqlDate,CqlDate>, Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(c_, d_);
+		var e_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate>, Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(c_, d_);
 		bool? f_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur)
 		{
 			var l_ = context.Operators.Quantity(1m, "day");
@@ -455,7 +455,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(e_, f_);
 		CqlDate h_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur) => 
 			tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit1;
-		var i_ = context.Operators.Select<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR, CqlDate>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR, CqlDate>(g_, h_);
 		var j_ = context.Operators.ExistsInList<CqlDate>(i_);
 
 		return j_;
