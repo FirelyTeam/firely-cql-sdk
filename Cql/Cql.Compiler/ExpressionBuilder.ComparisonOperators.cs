@@ -15,23 +15,6 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression Equal(Elm.Equal eq)
-        {
-            var lhsExpression = TranslateExpression(eq.operand![0]);
-            var rhsExpression = TranslateExpression(eq.operand![1]);
-            return Equal(lhsExpression, rhsExpression);
-        }
-
-        protected Expression NotEqual(Elm.NotEqual eq)
-        {
-            var lhsExpression = TranslateExpression(eq.operand![0]);
-            var rhsExpression = TranslateExpression(eq.operand![1]);
-            var equal = Equal(lhsExpression, rhsExpression);
-            return _operatorBinding.BindToMethod(CqlOperator.Not, equal);
-        }
-
-        protected Expression Equal(Expression left, Expression right) => _operatorBinding.BindToMethod(CqlOperator.Equal, left, right);
-
         protected Expression Equivalent(Elm.Equivalent eqv)
         {
             var left = TranslateExpression(eqv.operand![0]);

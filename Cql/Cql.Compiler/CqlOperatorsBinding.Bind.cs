@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler;
 

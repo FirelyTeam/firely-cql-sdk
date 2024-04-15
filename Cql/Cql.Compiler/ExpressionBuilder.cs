@@ -1,4 +1,6 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+﻿
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 /*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
@@ -25,7 +27,6 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
 using Expression = System.Linq.Expressions.Expression;
-using TypeExtensions = Hl7.Cql.Compiler.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Compiler
 {
@@ -217,7 +218,7 @@ namespace Hl7.Cql.Compiler
                             DifferenceBetween dbe      => _operatorBinding.BindToMethod(CqlOperator.DifferenceBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
                             DurationBetween dbe        => _operatorBinding.BindToMethod(CqlOperator.DurationBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
                             Ends e                     => Ends(e),
-                            Equal eq                   => Equal(eq),
+                            Equal eq                   => _operatorBinding.BindToMethod(CqlOperator.Equal, TranslateExpression(eq.operand![0]), TranslateExpression(eq.operand![1])),
                             Equivalent eqv             => Equivalent(eqv),
                             Except ex                  => Except(ex),
                             Expand expand              => _operatorBinding.BindToMethod(CqlOperator.Expand, TranslateExpression(expand!.operand![0]!), TranslateExpression(expand!.operand![1]!)),
@@ -249,7 +250,7 @@ namespace Hl7.Cql.Compiler
                             MeetsAfter meets           => MeetsAfter(meets),
                             Message msg                => Message(msg),
                             MinValue min               => _operatorBinding.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
-                            NotEqual ne                => NotEqual(ne),
+                            NotEqual ne                => _operatorBinding.BindToMethod(CqlOperator.Not, _operatorBinding.BindToMethod(CqlOperator.Equal, TranslateExpression(ne.operand![0]), TranslateExpression(ne.operand![1]))),
                             Now now                    => _operatorBinding.BindToMethod(CqlOperator.Now),
                             Null @null                 => Expression.Constant(null, TypeFor(@null) ?? typeof(object)),
                             OperandRef ore             => OperandRef(ore),
@@ -791,7 +792,7 @@ namespace Hl7.Cql.Compiler
                     foreach (var caseItem in ce.caseItem)
                     {
                         var caseWhen = TranslateExpression(caseItem.when!);
-                        var caseWhenEquality = Expression.Coalesce(Equal(comparand, caseWhen), Expression.Constant(false));
+                        var caseWhenEquality = Expression.Coalesce(_operatorBinding.BindToMethod(CqlOperator.Equal, comparand, caseWhen), Expression.Constant(false));
                         var caseThen = TranslateExpression(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)

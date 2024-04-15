@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
