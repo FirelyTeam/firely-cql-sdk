@@ -17,8 +17,6 @@ partial class CqlOperatorsBinding
         .GroupBy(m => m.Name)
         .ToDictionary(m => m.Key, m => m.ToArray());
 
-    private static readonly ConstantExpression NullObject_ConstantExpression = Expression.Constant(null, typeof(object));
-
     private MethodCallExpression? BindToMethodConvertArgsOrNull(
         string methodName,
         params Expression[] arguments)
