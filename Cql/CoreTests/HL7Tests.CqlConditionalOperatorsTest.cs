@@ -17,7 +17,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "IfTrue1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -31,7 +31,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "IfFalse1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -45,7 +45,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "IfNull1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -65,7 +65,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "StandardCase1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -85,7 +85,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "StandardCase2"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -105,7 +105,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "StandardCase3"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -125,7 +125,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "SelectedCase1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -145,7 +145,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "SelectedCase2"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -165,7 +165,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlConditionalOperatorsTest", "SelectedCase3"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         

@@ -1107,7 +1107,7 @@ namespace Hl7.Cql.Runtime
                 return null;
             if ((startIndex == null && endIndex == null) || !source.Any())
             {
-                return Enumerable.Empty<T>();
+                return [];
             }
             var si = startIndex ?? 0;
             if (source is List<T> list)

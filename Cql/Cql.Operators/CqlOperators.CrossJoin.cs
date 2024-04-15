@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Hl7.Cql.Runtime;
 
@@ -7,7 +6,7 @@ partial class CqlOperators
 {
     private IEnumerable<T1> CrossJoin<T1>(
         IEnumerable<T1>? source1) =>
-        source1 ?? Enumerable.Empty<T1>();
+        source1 ?? [];
 
     public IEnumerable<(T1, T2)> CrossJoin<T1, T2>(
         IEnumerable<T1>? source1,

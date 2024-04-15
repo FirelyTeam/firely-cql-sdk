@@ -113,7 +113,7 @@ namespace Hl7.Cql.Fhir
                     {
                         IEnumerable<DataType> idt => idt.ToCodings(),
                         DataType dt => dt.ToCodings(),
-                        _ => Enumerable.Empty<Coding>()
+                        _ => []
                     };
                 }
 

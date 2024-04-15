@@ -55,11 +55,11 @@ namespace Hl7.Cql.Graph
         public IEnumerable<string> GetForwardNodeIds(string nodeId)
         {
             if (nodeId == DirectedGraphNode.EndId)
-                return Enumerable.Empty<string>();
+                return [];
 
             // If node doesn't belong to this graph, just return empty
             if (!_forwardNodesByNodeId.TryGetValue(nodeId, out var forwardNodes))
-                return Enumerable.Empty<string>();
+                return [];
 
             return forwardNodes.Select(forwardNode => forwardNode.NodeId);
         }

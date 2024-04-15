@@ -4,10 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Packaging;
-using Hl7.Cql.Runtime;
 
 namespace CoreTests
 {
@@ -54,11 +51,11 @@ namespace CoreTests
         [TestMethod]
         public void Medication_Request_Example_Test()
         {
-            var files = new FileInfo[]
-                {
-                   new(@"Input\ELM\Test\Medication_Request_Example.json"),
-                   new(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json")
-                };
+            FileInfo[] files =
+            [
+                new(@"Input\ELM\Test\Medication_Request_Example.json"),
+                new(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json")
+            ];
             var librarySet = new LibrarySet();
             librarySet.LoadLibraries(files);
 

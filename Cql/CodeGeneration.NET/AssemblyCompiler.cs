@@ -74,7 +74,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             Dictionary<string, AssemblyData> results = new();
 
-            List<(string libraryName, Stream stream, bool isTuple)> items = new();
+            List<(string libraryName, Stream stream, bool isTuple)> items = [];
 
             _cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
                 definitions,
@@ -104,7 +104,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 .Select(item => (item.libraryName, item.stream));
                         var tupleAssembly = CompileTuples(tupleStreams, _referencesLazy.Value);
                         results.Add("TupleTypes", tupleAssembly);
-                        AssemblyData[] additionalReferences = new[] { tupleAssembly };
+                        AssemblyData[] additionalReferences = [tupleAssembly];
 
                         // Compile Libraries
                         foreach (var (libraryName, stream, _) in items.Where(item => !item.isTuple))

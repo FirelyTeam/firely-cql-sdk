@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using Hl7.Cql.Abstractions.Exceptions;

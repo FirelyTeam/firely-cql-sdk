@@ -61,13 +61,13 @@ namespace CoreTests.Fhir
 
         private BundleDataSource buildDataSource()
         {
-            var resources = new Resource[]
-            {
+            Resource[] resources =
+            [
                 new Patient { Active = true, Gender = AdministrativeGender.Male },  // uncoded
                 new Patient { Active = true, Gender = AdministrativeGender.Female }, // uncoded
                 new Observation { Code = new CodeableConcept("http://nu.nl", "x"), Status = ObservationStatus.Final }, // coded on Code
-                new Observation { Code = new CodeableConcept("http://nu.nl", "y"), Status = ObservationStatus.Preliminary }, // coded on Code
-            };
+                new Observation { Code = new CodeableConcept("http://nu.nl", "y"), Status = ObservationStatus.Preliminary } // coded on Code
+            ];
 
             var bundle = new Bundle();
             foreach (var r in resources) { bundle.AddResourceEntry(r, $"http://someresource/{r.GetHashCode()}"); }

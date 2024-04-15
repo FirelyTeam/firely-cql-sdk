@@ -1,15 +1,10 @@
 ﻿using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Graph;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using System.Linq;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Packaging;
 
 namespace CoreTests
 {

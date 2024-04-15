@@ -339,7 +339,7 @@ public class DefinitionDictionary<T> where T : class
         {
             if (!TagsByLibrary.TryGetValue(library, out var tags))
             {
-                tags = new();
+                tags = [];
                 TagsByLibrary.Add(library, tags);
             }
             foreach (var value in values)

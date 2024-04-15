@@ -3,7 +3,6 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
-using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 

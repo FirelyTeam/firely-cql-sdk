@@ -3,7 +3,6 @@ using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
-using System.Globalization;
 using System.Runtime.Loader;
 using CoreTests;
 using Hl7.Cql.Compiler;

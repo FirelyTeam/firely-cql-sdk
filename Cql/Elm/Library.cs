@@ -5,9 +5,7 @@
 using Hl7.Cql.Abstractions.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Hl7.Cql.Abstractions.Infrastructure;
