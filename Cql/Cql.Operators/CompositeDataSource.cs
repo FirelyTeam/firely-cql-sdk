@@ -59,15 +59,10 @@ namespace Hl7.Cql.Operators
         /// <param name="codes">The list of codes on which to filter the resources, or <see langword="null"/>.</param>
         /// <param name="codeProperty">The property of <typeparamref name="T"/> which defines the code to compare against <paramref name="codes"/>.  This parameter should be <see langword="null"/> when <paramref name="codes"/> is <see langword="null"/>.</param>
         /// <returns>Resources of type <typeparamref name="T"/> matching the parameter criteria.</returns>
-        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class
-        {
-            IEnumerable<T> result = Enumerable.Empty<T>();
-            foreach (var source in DataSources)
-            {
-                result = result.Concat(source.RetrieveByCodes<T>(codes, codeProperty));
-            }
-            return result;
-        }
+        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class =>
+            DataSources
+                .SelectMany(r =>
+                    r.RetrieveByCodes<T>(codes, codeProperty));
 
         /// <summary>
         /// Retrieves resources whose code path contains a code from the <paramref name="valueSet"/> if specified.
@@ -77,14 +72,8 @@ namespace Hl7.Cql.Operators
         /// <param name="valueSet">The value set on which to filter the resources, or <see langword="null"/>.</param>
         /// <param name="codeProperty">The property of <typeparamref name="T"/> which defines the code to compare against <paramref name="valueSet"/>.  This parameter should be <see langword="null"/> when <paramref name="valueSet"/> is <see langword="null"/>.</param>
         /// <returns>Resources of type <typeparamref name="T"/> matching the parameter criteria.</returns>
-        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class
-        {
-            IEnumerable<T> result = Enumerable.Empty<T>();
-            foreach (var source in DataSources)
-            {
-                result = result.Concat(source.RetrieveByValueSet<T>(valueSet, codeProperty));
-            }
-            return result;
-        }
+        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class =>
+            DataSources.SelectMany(r =>
+                r.RetrieveByValueSet<T>(valueSet, codeProperty));
     }
 }

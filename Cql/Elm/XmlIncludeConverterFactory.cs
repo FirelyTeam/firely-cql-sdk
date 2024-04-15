@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Hl7.Cql.Elm
@@ -18,7 +15,7 @@ namespace Hl7.Cql.Elm
         public XmlIncludeConverterFactory(bool strict)
         {
             Strict = strict;
-            StrictParams = new object[] { strict };
+            StrictParams = [strict];
         }
 
         public override bool CanConvert(Type typeToConvert)

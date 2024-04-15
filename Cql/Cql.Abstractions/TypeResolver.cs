@@ -197,8 +197,7 @@ namespace Hl7.Cql.Abstractions
         /// <see cref="ResolveType(string)"/> returns when passed "{http://hl7.org/fhir}"
         /// to avoid conflicts with <see cref="Range"/>.
         /// </remarks>
-        internal virtual IEnumerable<(string alias, string type)> Aliases =>
-            Enumerable.Empty<(string alias, string type)>();
+        internal virtual IEnumerable<(string alias, string type)> Aliases => [];
 
         /// <summary>
         /// Returns whether the source object should be used for the given property.

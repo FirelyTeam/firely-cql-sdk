@@ -30,12 +30,10 @@ namespace Hl7.Cql.Fhir
 
         private readonly Dictionary<Type, List<Resource>> _byType = new();
 
-        public IEnumerable<T> FilterByType<T>()
-        {
-            if (_byType.TryGetValue(typeof(T), out var resources))
-                return resources?.Cast<T>() ?? Enumerable.Empty<T>();
-            else return Enumerable.Empty<T>();
-        }
+        public IEnumerable<T> FilterByType<T>() =>
+            _byType.TryGetValue(typeof(T), out var resources)
+                ? resources.Cast<T>()
+                : [];
 
         public IEnumerable<T> FilterByType<T>(Predicate<Coding> filter)
         {

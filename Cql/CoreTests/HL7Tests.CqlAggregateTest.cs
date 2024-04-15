@@ -21,7 +21,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateTest", "FactorialOfFive"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -42,7 +42,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateTest", "RolledOutIntervals"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         

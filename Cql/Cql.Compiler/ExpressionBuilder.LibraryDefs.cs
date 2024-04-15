@@ -205,7 +205,7 @@ partial class ExpressionBuilder
                     if (expressionDef.annotation is { Length: > 0 } annotations)
                     {
                         var tags = annotations.OfType<Annotation>()
-                            .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
+                            .SelectMany(a => a.t ?? [])
                             .Where(tag => !string.IsNullOrWhiteSpace(tag?.name));
 
                         foreach (var tag in tags)

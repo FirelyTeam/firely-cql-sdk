@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -14,7 +13,7 @@ namespace CoreTests
     public class CqlTypeToFhirTypeMapperTest
     {
         #region Cql to FHIR
-        
+
         [TestMethod]
         public void CqlDate_MapToFhirType()
         {
@@ -121,11 +120,11 @@ namespace CoreTests
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.Boolean, typeEntry.FhirType.Value);
         }
-        
+
         [TestMethod]
         public void LINQResult_MapToFhirType()
         {
-            var list = new List<object> { new Claim() { Id = "claim1" } };
+            List<object> list = [new Claim() { Id = "claim1" }];
 
             var linqResult = list.Cast<Claim>();
 

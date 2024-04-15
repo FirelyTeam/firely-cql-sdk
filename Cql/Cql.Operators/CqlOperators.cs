@@ -160,7 +160,7 @@ namespace Hl7.Cql.Runtime
         public IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> collectionSelector) =>
             source?.Where(t => t != null)
-                .SelectMany(t => collectionSelector(t) ?? Enumerable.Empty<TResult>())?
+                .SelectMany(t => collectionSelector(t) ?? [])?
                 .ToList();
 
         public IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source,

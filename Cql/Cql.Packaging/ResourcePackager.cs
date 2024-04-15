@@ -1,11 +1,8 @@
-using System.Runtime.Loader;
 using System.Text;
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Fhir.Model;
@@ -107,7 +104,7 @@ internal class ResourcePackager
         foreach (var library in librarySet)
         {
             var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
-            foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
+            foreach (var def in library.statements ?? [])
             {
                 if (def.annotation == null)
                     continue;
@@ -145,7 +142,7 @@ internal class ResourcePackager
                         Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
                         End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
                     };
-                    measure.Group = new List<Measure.GroupComponent>();
+                    measure.Group = [];
                     measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
                     if (library.NameAndVersion() is null)
                         throw new InvalidOperationException("Library NameAndVersion should not be null.");
@@ -206,7 +203,7 @@ internal class ResourcePackager
         if (outParams is not null)
             parameters.AddRange(outParams);
         var valueSetParameterDefinitions = new List<ParameterDefinition>();
-        foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<ValueSetDef>())
+        foreach (var valueSet in elmLibrary.valueSets ?? [])
         {
             var valueSetParameter = new ParameterDefinition
             {
@@ -220,7 +217,7 @@ internal class ResourcePackager
         parameters.AddRange(valueSetParameterDefinitions);
         library.Parameter = parameters.Count > 0 ? parameters : null!;
 
-        foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<IncludeDef>())
+        foreach (var include in elmLibrary?.includes ?? [])
         {
             var includeId = $"{include.path}-{include.version}";
             library.RelatedArtifact.Add(new RelatedArtifact
@@ -271,14 +268,14 @@ internal class ResourcePackager
 
     private static readonly CodeableConcept LogicLibraryCodeableConcept = new()
     {
-        Coding = new List<Coding>
-        {
+        Coding =
+        [
             new Coding
             {
                 Code = "logic-library"!,
                 System = "http://terminology.hl7.org/CodeSystem/library-type"!
             }
-        }
+        ]
     };
 
     private static ParameterDefinition ElmParameterToFhir(
@@ -294,8 +291,8 @@ internal class ResourcePackager
 
         var annotations = (elmParameter.annotation?
                                .OfType<Elm.Annotation>()
-                               .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
-                           ?? Enumerable.Empty<Tag>())
+                               .SelectMany(a => a.t ?? [])
+                           ?? [])
             .ToArray();
 
         var parameterDefinition = new ParameterDefinition
@@ -332,14 +329,14 @@ internal class ResourcePackager
         };
         if (type.ElementType is not null && type.ElementType.FhirType is not null)
         {
-            parameterDefinition.Extension = new List<Extension>()
-            {
+            parameterDefinition.Extension =
+            [
                 new Extension
                 {
                     Value = new Code<FHIRAllTypes>(type.ElementType.FhirType),
                     Url = Constants.ParameterElementTypeExtensionUri
                 }
-            };
+            ];
         }
 
         if (definition.accessLevel == Elm.AccessModifier.Private)

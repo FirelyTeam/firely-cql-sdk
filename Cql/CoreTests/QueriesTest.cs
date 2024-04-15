@@ -1,6 +1,5 @@
 ﻿using System;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -10,7 +9,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using Hl7.Cql.Compiler;
 
 namespace CoreTests
@@ -29,7 +27,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            DefinitionDictionary<LambdaExpression> definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
@@ -50,13 +48,13 @@ namespace CoreTests
 
         private static HashValueSetDictionary ValueSets;
         private const string TestCodeSystem = "https://www.ncqa.org/fhir/codesystem/test-cs";
-        private static readonly CqlCode[] TestCodes = new CqlCode[]
-        {
+        private static readonly CqlCode[] TestCodes =
+        [
             new CqlCode("1", TestCodeSystem, null, null),
             new CqlCode("2", TestCodeSystem, null, null),
-            new CqlCode("3", TestCodeSystem, null, null),
+            new CqlCode("3", TestCodeSystem, null, null)
 
-        };
+        ];
 
         private CqlContext GetNewContext(Bundle bundle) => FhirCqlContext.ForBundle(
             bundle: bundle,
@@ -119,10 +117,7 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "code", System = "system" }
-                        }
+                        Coding = [new Coding { Code = "code", System = "system" }]
                     }
                 }
             });
@@ -133,10 +128,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "bad code", System = "system" }
-                        }
+                        Coding = [new Coding { Code = "bad code", System = "system" }]
                     }
                 }
             });
@@ -147,10 +139,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "code", System = "bad system" }
-                        }
+                        Coding = [new Coding { Code = "code", System = "bad system" }]
                     }
                 }
             });
@@ -216,10 +205,7 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "1", System = TestCodeSystem }
-                        }
+                        Coding = [new Coding { Code = "1", System = TestCodeSystem }]
                     }
                 }
             });
@@ -230,10 +216,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "bad code", System = "system" }
-                        }
+                        Coding = [new Coding { Code = "bad code", System = "system" }]
                     }
                 }
             });
@@ -244,10 +227,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "code", System = "bad system" }
-                        }
+                        Coding = [new Coding { Code = "code", System = "bad system" }]
                     }
                 }
             });
@@ -282,10 +262,7 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "1", System = TestCodeSystem }
-                        }
+                        Coding = [new Coding { Code = "1", System = TestCodeSystem }]
                     }
                 }
             });
@@ -296,10 +273,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "bad code", System = "system" }
-                        }
+                        Coding = [new Coding { Code = "bad code", System = "system" }]
                     }
                 }
             });
@@ -310,10 +284,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "code", System = "bad system" }
-                        }
+                        Coding = [new Coding { Code = "code", System = "bad system" }]
                     }
                 }
             });
@@ -348,10 +319,7 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "1", System = TestCodeSystem }
-                        }
+                        Coding = [new Coding { Code = "1", System = TestCodeSystem }]
                     }
                 }
             });
@@ -362,10 +330,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "bad code", System = "system" }
-                        }
+                        Coding = [new Coding { Code = "bad code", System = "system" }]
                     }
                 }
             });
@@ -376,10 +341,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                        Coding = new List<Coding>
-                        {
-                            new Coding { Code = "code", System = "bad system" }
-                        }
+                        Coding = [new Coding { Code = "code", System = "bad system" }]
                     }
                 }
             });

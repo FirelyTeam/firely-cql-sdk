@@ -17,7 +17,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Null"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(null, result);
         }
 
@@ -31,7 +31,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "BooleanFalse"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -45,7 +45,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "BooleanTrue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -59,7 +59,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerZero"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -73,7 +73,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerPosZero"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -87,7 +87,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerNegZero"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -101,7 +101,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerOne"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -115,7 +115,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerPosOne"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -129,7 +129,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerNegOne"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -143,7 +143,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerTwo"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -157,7 +157,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerPosTwo"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -171,7 +171,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerNegTwo"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -185,7 +185,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Integer10Pow9"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -199,7 +199,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerPos10Pow9"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -213,7 +213,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerNeg10Pow9"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -227,7 +227,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Integer2Pow31ToZero1IntegerMaxValue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -241,7 +241,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerPos2Pow31ToZero1IntegerMaxValue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -255,7 +255,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerNeg2Pow31ToZero1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -269,7 +269,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "IntegerNeg2Pow31IntegerMinValue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -283,7 +283,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalZero"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -297,7 +297,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPosZero"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -311,7 +311,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNegZero"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -325,7 +325,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalOne"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -339,7 +339,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPosOne"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -353,7 +353,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNegOne"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -367,7 +367,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalTwo"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -381,7 +381,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPosTwo"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -395,7 +395,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNegTwo"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -409,7 +409,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Decimal10Pow9"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -423,7 +423,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPos10Pow9"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -437,7 +437,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNeg10Pow9"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -451,7 +451,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Decimal2Pow31ToZero1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -465,7 +465,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPos2Pow31ToZero1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -479,7 +479,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNeg2Pow31ToZero1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -493,7 +493,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Decimal2Pow31"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -507,7 +507,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPos2Pow31"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -521,7 +521,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNeg2Pow31"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -535,7 +535,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Decimal2Pow31ToInf1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -549,7 +549,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPos2Pow31ToInf1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -563,7 +563,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNeg2Pow31ToInf1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -577,7 +577,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalZeroStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -591,7 +591,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPosZeroStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -605,7 +605,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNegZeroStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -619,7 +619,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalOneStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -633,7 +633,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPosOneStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -647,7 +647,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNegOneStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -661,7 +661,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalTwoStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -675,7 +675,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPosTwoStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -689,7 +689,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNegTwoStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -703,7 +703,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalTenStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -717,7 +717,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPosTenStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -731,7 +731,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNegTenStep"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -745,7 +745,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "Decimal10Pow28ToZeroOneStepDecimalMaxValue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -759,7 +759,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 
@@ -773,7 +773,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["ValueLiteralsAndSelectors", "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(Context);
+            var result = function(Context);
             Assert.AreEqual(true, result);
         }
 

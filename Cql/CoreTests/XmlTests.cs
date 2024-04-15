@@ -1,11 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace CoreTests
@@ -36,11 +33,11 @@ namespace CoreTests
             {
                 using var stream = file.OpenRead();
                 var tests = (TestSchema.Tests)serializer.Deserialize(stream);
-                foreach(var group in tests.group ?? Enumerable.Empty<TestSchema.Group>())
+                foreach(var group in tests.group ?? [])
                 {
-                    foreach(var test in group.test ?? Enumerable.Empty<TestSchema.Test>())
+                    foreach(var test in group.test ?? [])
                     {
-                        yield return new object[] { group, test };
+                        yield return [group, test];
                     }
                 }
             }

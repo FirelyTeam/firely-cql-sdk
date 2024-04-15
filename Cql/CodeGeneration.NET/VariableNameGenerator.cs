@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private List<string> Reserved { get; }
 
-        private readonly List<char> Letters = new() { (char)('a' - 1) };
+        private readonly List<char> Letters = [(char)('a' - 1)];
         private readonly string Prefix = string.Empty;
 
 
@@ -38,13 +37,13 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <inheritdoc cref="ForNewScope(IEnumerable{ParameterExpression}?)"/>
         public VariableNameGenerator ForNewScope(IEnumerable<string>? scopeNames)
         {
-            var newGenerator = new VariableNameGenerator(Letters, Reserved.Concat(scopeNames ?? Enumerable.Empty<string>()), Postfix);
+            var newGenerator = new VariableNameGenerator(Letters, Reserved.Concat(scopeNames ?? []), Postfix);
             return newGenerator;
         }
 
         public VariableNameGenerator(IEnumerable<string>? reserved = null, string postfix = "")
         {
-            Reserved = reserved?.ToList() ?? new List<string>();
+            Reserved = reserved?.ToList() ?? [];
             Postfix = postfix;
         }
 
@@ -56,7 +55,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         internal VariableNameGenerator(List<char> state, IEnumerable<string>? reserved = null, string postfix = "")
         {
-            Reserved = reserved?.ToList() ?? new List<string>();
+            Reserved = reserved?.ToList() ?? [];
             Postfix = postfix;
             Letters = state;
         }

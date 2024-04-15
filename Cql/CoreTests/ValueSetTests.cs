@@ -13,12 +13,12 @@ namespace CoreTests
         [TestMethod]
         public void Intensional_Value_Set()
         {
-            var files = new[]
-            {
+            string[] files =
+            [
                 @"Input\ValueSets\intensional-value-set.json",
                 @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1009.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json",
-            };
+                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json"
+            ];
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
@@ -40,13 +40,13 @@ namespace CoreTests
         [TestMethod]
         public void Intensional_Value_Set_2_Levels()
         {
-            var files = new[]
-            {
+            string[] files =
+            [
                 @"Input\ValueSets\intensional-value-set-2.json",
                 @"Input\ValueSets\intensional-value-set.json",
                 @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1009.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json",
-            };
+                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json"
+            ];
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
@@ -72,12 +72,12 @@ namespace CoreTests
         [TestMethod]
         public void Intensional_Value_Set_Cycle()
         {
-            var files = new[]
-{
+            string[] files =
+            [
                 @"Input\ValueSets\intensional-value-set-3.json",
-                @"Input\ValueSets\intensional-value-set-4.json",
+                @"Input\ValueSets\intensional-value-set-4.json"
 
-            };
+            ];
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);

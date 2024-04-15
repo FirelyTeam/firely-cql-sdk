@@ -41,7 +41,7 @@ namespace CoreTests
             {
                 var elmId = $"{{{model.url}}}{typeInfo.name}";
                 var type = typeResolver.ResolveType(elmId);
-                foreach (var element in typeInfo.element ?? Enumerable.Empty<ClassInfoElement>())
+                foreach (var element in typeInfo.element ?? [])
                 {
                     var property = typeResolver.GetProperty(type, element.name);
                     Assert.IsNotNull(property, $"Missing property {element.name} in {typeInfo.name}.");
@@ -51,7 +51,7 @@ namespace CoreTests
 
         public static IEnumerable<object[]> GetData()
         {
-            yield return new object[] { new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector) };
+            yield return [new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector)];
         }
     }
 }

@@ -43,7 +43,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     public LibrarySet(string name = "", params Library[] libraries)
     {
         Name = name;
-        _librariesNotCalculatedYet = new();
+        _librariesNotCalculatedYet = [];
         _calculatedState = EmptyCached;
         _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)>();
         AsReadOnlyDictionary = new ReadOnlyDictionaryAdapter(this);
@@ -125,7 +125,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         {
             try
             {
-                _libraryInfosByKey.Add(library.NameAndVersion()!, (library, new()));
+                _libraryInfosByKey.Add(library.NameAndVersion()!, (library, []));
             }
             catch (ArgumentNullException)
             {
@@ -211,8 +211,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         string lib,
         string version = "")
     {
-        List<Library> libraries = new();
-        List<(string lib, string version)> librariesToLoad = new() { (lib, version) };
+        List<Library> libraries = [];
+        List<(string lib, string version)> librariesToLoad = [(lib, version)];
 
         while (librariesToLoad.Any())
         {
@@ -227,7 +227,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
             foreach (var library in librariesLoaded)
             {
-                if (!_libraryInfosByKey.TryAdd(library.NameAndVersion()!, (library, new())))
+                if (!_libraryInfosByKey.TryAdd(library.NameAndVersion()!, (library, [])))
                     continue; // Already loaded, skip
 
                 if (library.includes is { Length: > 0 } includeDefs)
