@@ -210,11 +210,11 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.Single                           => BindToMethodConvertArgs(nameof(ICqlOperators.SingleOrNull), parameters),
 
                 // Direct Bindings
-                CqlOperator.Aggregate                        => BindToMethod(methodName:nameof(ICqlOperators.AggregateOrNull),
-                                                                    typeArguments:[TypeResolver.GetListElementType(parameters[0].Type, true)!, parameters[2].Type],
+                CqlOperator.Aggregate                        => BindToGenericMethod(methodName:nameof(ICqlOperators.AggregateOrNull),
+                                                                    genericTypeArguments:[TypeResolver.GetListElementType(parameters[0].Type, true)!, parameters[2].Type],
                                                                     parameters[0], parameters[2], parameters[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
-                CqlOperator.CrossJoin                        => BindToMethod(methodName:nameof(ICqlOperators.CrossJoin),
-                                                                    typeArguments:parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!),
+                CqlOperator.CrossJoin                        => BindToGenericMethod(methodName:nameof(ICqlOperators.CrossJoin),
+                                                                    genericTypeArguments:parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!),
                                                                     parameters),
                 CqlOperator.Date                             => BindToMethod(nameof(ICqlOperators.Date), parameters),
                 CqlOperator.DateTime                         => BindToMethod(nameof(ICqlOperators.DateTime)!, parameters),
@@ -223,8 +223,8 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.Time                             => BindToMethod(nameof(ICqlOperators.Time), parameters),
                 CqlOperator.TimeOfDay                        => BindToMethod(nameof(ICqlOperators.TimeOfDay)),
                 CqlOperator.Today                            => BindToMethod(nameof(ICqlOperators.Today)),
-                CqlOperator.Message                          => BindToMethod(nameof(ICqlOperators.Message), typeArguments:[parameters[0].Type], parameters),
-                CqlOperator.ToList                           => BindToMethod(nameof(ICqlOperators.ToList), typeArguments:[parameters[0].Type], parameters),
+                CqlOperator.Message                          => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments:[parameters[0].Type], parameters),
+                CqlOperator.ToList                           => BindToGenericMethod(nameof(ICqlOperators.ToList), genericTypeArguments:[parameters[0].Type], parameters),
 
                 // Special cases
                 CqlOperator.Convert                          => BindConvert(parameters[0], parameters[1]),

@@ -104,11 +104,11 @@ partial class CqlOperatorsBinding
         params Expression[] arguments) =>
         Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, null, arguments);
 
-    private static MethodCallExpression BindToMethod(
+    private static MethodCallExpression BindToGenericMethod(
         string methodName,
-        Type[] typeArguments,
+        Type[] genericTypeArguments,
         params Expression[] arguments) =>
-        Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, typeArguments, arguments);
+        Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodName, genericTypeArguments, arguments);
 
     private static MethodCallExpression BindToMethod(
         MethodInfo method,
