@@ -31,7 +31,7 @@ internal static class CqlExpressions
     public static ConstantExpression Null_ConstantExpression<TType>()
         => Null_ConstantExpression_Cached<TType>.Instance;
 
-    private static readonly MethodInfo _genericDefinitionMethodOfConstantExpressionForType = ReflectionUtility.GenericDefinitionMethodOf(() => Null_ConstantExpression<object>());
+    private static readonly MethodInfo _genericDefinitionMethodOfNull_ConstantExpression = ReflectionUtility.GenericDefinitionMethodOf(() => Null_ConstantExpression<object>());
 
     public static ConstantExpression Null_ConstantExpression(Type type)
     {
@@ -43,7 +43,7 @@ internal static class CqlExpressions
         {
             return NullString_ConstantExpression;
         }
-        return (ConstantExpression)_genericDefinitionMethodOfConstantExpressionForType
+        return (ConstantExpression)_genericDefinitionMethodOfNull_ConstantExpression
             .MakeGenericMethod(type)
             .Invoke(null, [])!;
     }

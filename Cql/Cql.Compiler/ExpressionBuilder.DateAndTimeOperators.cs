@@ -68,23 +68,23 @@ namespace Hl7.Cql.Compiler
         }
         protected Expression Date(Elm.Date e)
         {
-            var year = (e.year != null) ? TranslateExpression(e.year) : Expression.Constant(null, typeof(int?));
-            var month = (e.month != null) ? TranslateExpression(e.month) : Expression.Constant(null, typeof(int?));
-            var day = (e.day != null) ? TranslateExpression(e.day) : Expression.Constant(null, typeof(int?));
+            var year = (e.year != null) ? TranslateExpression(e.year) : CqlExpressions.Null_ConstantExpression<int?>();
+            var month = (e.month != null) ? TranslateExpression(e.month) : CqlExpressions.Null_ConstantExpression<int?>();
+            var day = (e.day != null) ? TranslateExpression(e.day) : CqlExpressions.Null_ConstantExpression<int?>();
 
             return _operatorBinding.BindToMethod(CqlOperator.Date, year, month, day);
         }
 
         protected Expression DateTime(Elm.DateTime e)
         {
-            var year = e.year != null ? TranslateExpression(e.year) : Expression.Constant(null, typeof(int?));
-            var month = e.month != null ? TranslateExpression(e.month) : Expression.Constant(null, typeof(int?));
-            var day = e.day != null ? TranslateExpression(e.day) : Expression.Constant(null, typeof(int?));
-            var hour = e.hour != null ? TranslateExpression(e.hour) : Expression.Constant(null, typeof(int?));
-            var minute = e.minute != null ? TranslateExpression(e.minute) : Expression.Constant(null, typeof(int?));
-            var second = e.second != null ? TranslateExpression(e.second) : Expression.Constant(null, typeof(int?));
-            var milliseconds = e.millisecond != null ? TranslateExpression(e.millisecond) : Expression.Constant(null, typeof(int?));
-            var offset = e.timezoneOffset != null ? TranslateExpression(e.timezoneOffset) : Expression.Constant(null, typeof(int?));
+            var year = e.year != null ? TranslateExpression(e.year) : CqlExpressions.Null_ConstantExpression<int?>();
+            var month = e.month != null ? TranslateExpression(e.month) : CqlExpressions.Null_ConstantExpression<int?>();
+            var day = e.day != null ? TranslateExpression(e.day) : CqlExpressions.Null_ConstantExpression<int?>();
+            var hour = e.hour != null ? TranslateExpression(e.hour) : CqlExpressions.Null_ConstantExpression<int?>();
+            var minute = e.minute != null ? TranslateExpression(e.minute) : CqlExpressions.Null_ConstantExpression<int?>();
+            var second = e.second != null ? TranslateExpression(e.second) : CqlExpressions.Null_ConstantExpression<int?>();
+            var milliseconds = e.millisecond != null ? TranslateExpression(e.millisecond) : CqlExpressions.Null_ConstantExpression<int?>();
+            var offset = e.timezoneOffset != null ? TranslateExpression(e.timezoneOffset) : CqlExpressions.Null_ConstantExpression<int?>();
             if (offset.Type != typeof(decimal?))
             {
                 offset = ChangeType(offset, typeof(decimal?));
@@ -167,10 +167,10 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Time(Elm.Time e)
         {
-            var hour = e.hour != null ? TranslateExpression(e.hour) : Expression.Constant(null, typeof(int?));
-            var minute = e.minute != null ? TranslateExpression(e.minute) : Expression.Constant(null, typeof(int?));
-            var second = e.second != null ? TranslateExpression(e.second) : Expression.Constant(null, typeof(int?));
-            var millisecond = e.millisecond != null ? TranslateExpression(e.millisecond) : Expression.Constant(null, typeof(int?));
+            var hour = e.hour != null ? TranslateExpression(e.hour) : CqlExpressions.Null_ConstantExpression<int?>();
+            var minute = e.minute != null ? TranslateExpression(e.minute) : CqlExpressions.Null_ConstantExpression<int?>();
+            var second = e.second != null ? TranslateExpression(e.second) : CqlExpressions.Null_ConstantExpression<int?>();
+            var millisecond = e.millisecond != null ? TranslateExpression(e.millisecond) : CqlExpressions.Null_ConstantExpression<int?>();
             return _operatorBinding.BindToMethod(CqlOperator.Time, hour, minute, second, millisecond);
         }
     }

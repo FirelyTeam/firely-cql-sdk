@@ -88,7 +88,7 @@ namespace Hl7.Cql.Compiler
             var stringToSub = TranslateExpression(e!.stringToSub!);
             var startIndex = TranslateExpression(e!.startIndex!);
             var length = e.length == null
-                ? Expression.Constant(null, typeof(int?))
+                ? CqlExpressions.Null_ConstantExpression<int?>()
                 : TranslateExpression(e.length);
             return _operatorBinding.BindToMethod(CqlOperator.Substring, stringToSub, startIndex, length);
         }

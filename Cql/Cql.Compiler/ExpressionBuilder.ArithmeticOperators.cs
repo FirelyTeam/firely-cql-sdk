@@ -40,7 +40,7 @@ namespace Hl7.Cql.Compiler
             Expression? precision;
             if (e.precision != null)
                 precision = TranslateExpression(e.precision!);
-            else precision = Expression.Constant(null, typeof(int?));
+            else precision = CqlExpressions.Null_ConstantExpression<int?>();
             return _operatorBinding.BindToMethod(CqlOperator.Round, operand, precision);
         }
     }

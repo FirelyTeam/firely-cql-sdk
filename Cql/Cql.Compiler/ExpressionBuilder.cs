@@ -213,7 +213,7 @@ namespace Hl7.Cql.Compiler
                             Elm.DateTime dt            => DateTime(dt),
                             Date d                     => Date(d),
                             DateTimeComponentFrom dtcf => DateTimeComponentFrom(dtcf),
-                            Descendents desc           => desc.source == null ? Expression.Constant(null, typeof(IEnumerable<object>)) : _operatorBinding.BindToMethod(CqlOperator.Descendents, TranslateExpression(desc.source)),
+                            Descendents desc           => desc.source == null ? CqlExpressions.Null_ConstantExpression<IEnumerable<object>>() : _operatorBinding.BindToMethod(CqlOperator.Descendents, TranslateExpression(desc.source)),
                             DifferenceBetween dbe      => _operatorBinding.BindToMethod(CqlOperator.DifferenceBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
                             DurationBetween dbe        => _operatorBinding.BindToMethod(CqlOperator.DurationBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
                             Ends e                     => Ends(e),
