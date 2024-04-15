@@ -203,7 +203,7 @@ internal partial class ExpressionBuilder
 
     private Expression DemoteSourceListToSingleton(Expression source)
     {
-        // Do not inline this method
+        // Do not inline this method, so that we can clearly see the pairing with the call to PromoteSourceSingletonToList
         return _operatorBinding.BindToMethod(CqlOperator.Single, source);
     }
 
