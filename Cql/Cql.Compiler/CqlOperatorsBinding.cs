@@ -1,4 +1,3 @@
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 /*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
@@ -14,6 +13,7 @@ using Hl7.Cql.Runtime;
 using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using System.Xml.XPath;
 
 namespace Hl7.Cql.Compiler
 {
@@ -48,12 +48,7 @@ namespace Hl7.Cql.Compiler
             TypeResolver = typeResolver;
         }
 
-        /// <summary>
-        /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
-        /// </summary>
-        /// <param name="operator">The operator to bind.</param>
-        /// <param name="parameters">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
-        /// <returns>An expression that implements <paramref name="operator"/>.  In most cases, this will be a <see cref="MethodCallExpression"/>.</returns>
+        /// <inheritdoc />
         public override Expression BindToMethod(
             CqlOperator @operator,
             params Expression[] parameters)
@@ -252,6 +247,11 @@ namespace Hl7.Cql.Compiler
             };
             return result;
         }
+
+        /// <inheritdoc />
+        public override Expression ConvertToType(Expression expression, Type type) =>
+            TryConvert(expression, type, out var convertedExpression)
+                ? convertedExpression
+                : expression;
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

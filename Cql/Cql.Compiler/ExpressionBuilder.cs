@@ -711,9 +711,13 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Literal(Literal lit)
         {
-            string message = $"Cannot resolve type for {lit.valueType}";
-            var type = _typeResolver.ResolveType(lit.valueType.Name!) ?? throw this.NewExpressionBuildingException(message);
+            var type = _typeResolver.ResolveType(lit.valueType.Name!) ?? throw this.NewExpressionBuildingException($"Cannot resolve type for {lit.valueType}");
+
+
             var (value, convertedType) = ConvertLiteral(lit, type);
+
+            // var result = _operatorBinding.ConvertToType(Expression.Constant(value), convertedType);
+            // return result;
 
             if (type.IsNullable())
             {

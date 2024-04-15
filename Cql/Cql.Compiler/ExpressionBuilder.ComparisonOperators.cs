@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
                 if (IsEnum(right.Type))
                 {
                     var equal = Expression.Equal(left, right);
-                    var asNullable = Expression.Convert(equal, typeof(bool?));
+                    var asNullable = _operatorBinding.ConvertToType<bool?>(equal);
                     return asNullable;
                 }
                 else if (right.Type == typeof(string))

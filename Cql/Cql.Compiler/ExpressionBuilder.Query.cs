@@ -264,9 +264,19 @@ internal partial class ExpressionBuilder
                         var lineText = t.lineText;
                         Debug.Assert(row0 != row1 || col1 > col0);
                         if (t.lineNum == row1)
-                            lineText = lineText[..(col1)] + "<<<" + lineText[(col1)..];
+                        {
+                            // Cannot trust the locator data in elm files to be within the bounds of the current line
+                            col1 = Math.Clamp(col1, 0, lineText.Length);
+                            lineText = lineText[..col1] + "<<<" + lineText[col1..];
+                        }
+
                         if (t.lineNum == row0)
+                        {
+                            // Cannot trust the locator data in elm files to be within the bounds of the current line
+                            col0 = Math.Clamp(col0, 0, lineText.Length); 
                             lineText = lineText[..col0] + ">>>" + lineText[col0..];
+                        }
+
                         return lineText;
                     })
                     .ToArray();
@@ -405,7 +415,7 @@ internal partial class ExpressionBuilder
                                        KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
                             {
                                 var sortMemberExpression = TranslateExpression(byExpression.expression);
-                                var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
+                                var lambdaBody = _operatorBinding.ConvertToType<object>(sortMemberExpression);
                                 var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                 return _operatorBinding.BindToMethod(CqlOperator.SortBy, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                             }
@@ -421,8 +431,8 @@ internal partial class ExpressionBuilder
                                 throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
                             }
                             var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
-                            var lambdaBody = Expression.Convert(pathExpression, typeof(object));
-                            var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
+                            var lambdaBody = _operatorBinding.ConvertToType<object>(pathExpression);
+                                var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                             return _operatorBinding.BindToMethod(CqlOperator.SortBy, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                         }
                         default:

@@ -13,10 +13,10 @@ namespace Hl7.Cql.Compiler
             var code = TranslateExpression(e.code!);
             var severity = TranslateExpression(e.severity!);
             var message = TranslateExpression(e.message!);
-            if (source is ConstantExpression constant && constant.Value == null)
+            if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
-                source = Expression.TypeAs(constant, constant.Type);
+                source = Expression.Convert(constant, constant.Type);
             }
 
             var call = _operatorBinding.BindToMethod(CqlOperator.Message, source, code, severity, message);

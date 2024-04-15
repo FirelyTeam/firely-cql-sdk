@@ -9,6 +9,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Compiler.Infrastructure;
+using TypeExtensions = Hl7.Cql.Compiler.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinding
@@ -28,13 +30,13 @@ partial class CqlOperatorsBinding
             if (elementType == null)
                 throw new ArgumentException($"Unable to determine element type for Expand argument.", nameof(argument));
 
-            if (!IsInterval(elementType))
+            if (!elementType.IsTypeCqlInterval())
                 throw new ArgumentException($"Expand expects a list element type to be an interval.",
                     nameof(argument));
             return BindToMethod(nameof(ICqlOperators.ExpandList), argument, perQuantity);
         }
 
-        if (!IsInterval(argument.Type))
+        if (!argument.Type.IsTypeCqlInterval())
             throw new ArgumentException($"Expand allows only a List<Interval<T>> or an Interval<T> as a parameter.", nameof(argument));
 
         return BindToMethod(nameof(ICqlOperators.ExpandInterval), argument, perQuantity);
@@ -240,7 +242,7 @@ partial class CqlOperatorsBinding
             return call;
         }
 
-        return TryConvert(source.Type, toType, source, out var convert)
+        return TryConvert(source, toType, out var convert)
             ? convert
             : throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
     }
@@ -381,38 +383,5 @@ partial class CqlOperatorsBinding
             [firstGenericArgument, secondGenericArgument, resultSelector.ReturnType], source,
             collectionSelector, resultSelector);
         return call;
-    }
-
-    private bool TryConvert(
-        Type from, Type to,
-        Expression fromExpr, [NotNullWhen(true)] out Expression? toExpr)
-    {
-        if (from == to)
-        {
-            toExpr = fromExpr;
-            return true;
-        }
-
-        if (to.IsAssignableFrom(from))
-        {
-            toExpr = Expression.TypeAs(fromExpr, to);
-            return true;
-        }
-
-        if (TypeConverter?.CanConvert(from, to) == true)
-        {
-            toExpr = BindToGenericMethod(nameof(ICqlOperators.Convert), [to], Expression.TypeAs(fromExpr, typeof(object)));
-            return true;
-        }
-
-        if (fromExpr is ConstantExpression { Value: null }
-            && Nullable.GetUnderlyingType(to) is not null)
-        {
-            toExpr = Expression.Constant(null, to);
-            return true;
-        }
-
-        toExpr = null;
-        return false;
     }
 }

@@ -552,7 +552,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var as_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var as_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var at_ = context.Operators.Convert<string>(as_?.SystemElement);
 				var au_ = context.Operators.Equal(at_, "http://loinc.org");
 				var aw_ = context.Operators.Convert<string>(as_?.CodeElement);
@@ -600,7 +600,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var bl_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bl_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bm_ = context.Operators.Convert<string>(bl_?.SystemElement);
 				var bn_ = context.Operators.Equal(bm_, "http://loinc.org");
 				var bp_ = context.Operators.Convert<string>(bl_?.CodeElement);
@@ -666,7 +666,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var as_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var as_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var at_ = context.Operators.Convert<string>(as_?.SystemElement);
 				var au_ = context.Operators.Equal(at_, "http://loinc.org");
 				var aw_ = context.Operators.Convert<string>(as_?.CodeElement);
@@ -714,7 +714,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var bl_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bl_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bm_ = context.Operators.Convert<string>(bl_?.SystemElement);
 				var bn_ = context.Operators.Equal(bm_, "http://loinc.org");
 				var bp_ = context.Operators.Convert<string>(bl_?.CodeElement);
@@ -945,7 +945,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var by_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var by_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bz_ = context.Operators.Convert<string>(by_?.SystemElement);
 				var ca_ = context.Operators.Equal(bz_, "http://loinc.org");
 				var cc_ = context.Operators.Convert<string>(by_?.CodeElement);
@@ -999,7 +999,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var u_ = context.Operators.LastOfList<Observation>(t_);
 			bool? v_(Observation.ComponentComponent @this)
 			{
-				var db_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var db_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dc_ = context.Operators.Convert<string>(db_?.SystemElement);
 				var dd_ = context.Operators.Equal(dc_, "http://loinc.org");
 				var df_ = context.Operators.Convert<string>(db_?.CodeElement);
@@ -1053,7 +1053,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ah_ = context.Operators.LastOfList<Observation>(ag_);
 			bool? ai_(Observation.ComponentComponent @this)
 			{
-				var ee_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var ee_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var ef_ = context.Operators.Convert<string>(ee_?.SystemElement);
 				var eg_ = context.Operators.Equal(ef_, "http://loinc.org");
 				var ei_ = context.Operators.Convert<string>(ee_?.CodeElement);
@@ -1107,7 +1107,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var at_ = context.Operators.LastOfList<Observation>(as_);
 			bool? au_(Observation.ComponentComponent @this)
 			{
-				var fh_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var fh_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var fi_ = context.Operators.Convert<string>(fh_?.SystemElement);
 				var fj_ = context.Operators.Equal(fi_, "http://loinc.org");
 				var fl_ = context.Operators.Convert<string>(fh_?.CodeElement);
@@ -1164,7 +1164,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.LastOfList<Observation>(j_);
 			bool? l_(Observation.ComponentComponent @this)
 			{
-				var bm_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bm_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bn_ = context.Operators.Convert<string>(bm_?.SystemElement);
 				var bo_ = context.Operators.Equal(bn_, "http://loinc.org");
 				var bq_ = context.Operators.Convert<string>(bm_?.CodeElement);
@@ -1201,7 +1201,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var cb_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var cb_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cc_ = context.Operators.Convert<string>(cb_?.SystemElement);
 				var cd_ = context.Operators.Equal(cc_, "http://loinc.org");
 				var cf_ = context.Operators.Convert<string>(cb_?.CodeElement);
@@ -1238,7 +1238,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aj_ = context.Operators.LastOfList<Observation>(ai_);
 			bool? ak_(Observation.ComponentComponent @this)
 			{
-				var cq_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var cq_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cr_ = context.Operators.Convert<string>(cq_?.SystemElement);
 				var cs_ = context.Operators.Equal(cr_, "http://loinc.org");
 				var cu_ = context.Operators.Convert<string>(cq_?.CodeElement);
@@ -1275,7 +1275,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var av_ = context.Operators.LastOfList<Observation>(au_);
 			bool? aw_(Observation.ComponentComponent @this)
 			{
-				var df_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var df_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dg_ = context.Operators.Convert<string>(df_?.SystemElement);
 				var dh_ = context.Operators.Equal(dg_, "http://loinc.org");
 				var dj_ = context.Operators.Convert<string>(df_?.CodeElement);
@@ -1412,7 +1412,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var bw_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bw_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bx_ = context.Operators.Convert<string>(bw_?.SystemElement);
 				var by_ = context.Operators.Equal(bx_, "http://loinc.org");
 				var ca_ = context.Operators.Convert<string>(bw_?.CodeElement);
@@ -1460,7 +1460,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var cp_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var cp_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cq_ = context.Operators.Convert<string>(cp_?.SystemElement);
 				var cr_ = context.Operators.Equal(cq_, "http://loinc.org");
 				var ct_ = context.Operators.Convert<string>(cp_?.CodeElement);
@@ -1509,7 +1509,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var al_ = context.Operators.LastOfList<Observation>(ak_);
 			bool? am_(Observation.ComponentComponent @this)
 			{
-				var di_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var di_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dj_ = context.Operators.Convert<string>(di_?.SystemElement);
 				var dk_ = context.Operators.Equal(dj_, "http://loinc.org");
 				var dm_ = context.Operators.Convert<string>(di_?.CodeElement);
@@ -1555,7 +1555,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ax_ = context.Operators.LastOfList<Observation>(aw_);
 			bool? ay_(Observation.ComponentComponent @this)
 			{
-				var eb_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var eb_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var ec_ = context.Operators.Convert<string>(eb_?.SystemElement);
 				var ed_ = context.Operators.Equal(ec_, "http://loinc.org");
 				var ef_ = context.Operators.Convert<string>(eb_?.CodeElement);
@@ -1755,7 +1755,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var br_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var br_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bs_ = context.Operators.Convert<string>(br_?.SystemElement);
 				var bt_ = context.Operators.Equal(bs_, "http://loinc.org");
 				var bv_ = context.Operators.Convert<string>(br_?.CodeElement);
@@ -1801,7 +1801,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var u_ = context.Operators.LastOfList<Observation>(t_);
 			bool? v_(Observation.ComponentComponent @this)
 			{
-				var ck_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var ck_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cl_ = context.Operators.Convert<string>(ck_?.SystemElement);
 				var cm_ = context.Operators.Equal(cl_, "http://loinc.org");
 				var co_ = context.Operators.Convert<string>(ck_?.CodeElement);
@@ -1847,7 +1847,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ah_ = context.Operators.LastOfList<Observation>(ag_);
 			bool? ai_(Observation.ComponentComponent @this)
 			{
-				var dd_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var dd_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var de_ = context.Operators.Convert<string>(dd_?.SystemElement);
 				var df_ = context.Operators.Equal(de_, "http://loinc.org");
 				var dh_ = context.Operators.Convert<string>(dd_?.CodeElement);
@@ -1893,7 +1893,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var at_ = context.Operators.LastOfList<Observation>(as_);
 			bool? au_(Observation.ComponentComponent @this)
 			{
-				var dw_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var dw_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dx_ = context.Operators.Convert<string>(dw_?.SystemElement);
 				var dy_ = context.Operators.Equal(dx_, "http://loinc.org");
 				var ea_ = context.Operators.Convert<string>(dw_?.CodeElement);

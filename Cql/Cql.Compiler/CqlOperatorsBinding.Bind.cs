@@ -85,7 +85,7 @@ partial class CqlOperatorsBinding
                     {
                         for (int i = 0; i < args.Length; i++)
                         {
-                            if (!TryConvert(args[i].Type, methodParameters[i].ParameterType, args[i], out bindArgs[i]!))
+                            if (!TryConvert(args[i], methodParameters[i].ParameterType, out bindArgs[i]!))
                                 return false;
                         }
                         return true;
@@ -117,16 +117,6 @@ partial class CqlOperatorsBinding
         return (null, arguments);
     }
 
-
-    private MethodCallExpression BindToMethodConvertArgs(
-        string methodName,
-        params Expression[] arguments)
-    {
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
-        return call;
-    }
-
     private static MethodCallExpression BindToMethod(
         string methodName,
         params Expression[] arguments) =>
@@ -142,8 +132,4 @@ partial class CqlOperatorsBinding
         MethodInfo method,
         params Expression[] expressions) =>
         Expression.Call(CqlContextExpressions.Operators_PropertyExpression, method, expressions);
-
-    private static bool IsInterval(Type type) =>
-        type.IsGenericType
-        && type.GetGenericTypeDefinition() == typeof(CqlInterval<>);
 }

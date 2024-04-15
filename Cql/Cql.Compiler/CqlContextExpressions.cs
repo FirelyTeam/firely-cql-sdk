@@ -19,6 +19,24 @@ internal class CqlContextExpressions
 
     private static PropertyInfo Definitions_PropertyInfo = ReflectionUtility.PropertyOf(() => CqlContextInstance.Definitions);
     public static MemberExpression Definitions_PropertyExpression = Expression.Property(ParameterExpression, Definitions_PropertyInfo);
-    public static ConstantExpression NullObject_ConstantExpression = Expression.Constant(null, typeof(object));
-    public static ConstantExpression NullString_ConstantExpression = Expression.Constant(null, typeof(string));
+    public static ConstantExpression NullObject_ConstantExpression = CachedNullConstant<object>.Instance;
+    public static ConstantExpression NullString_ConstantExpression = CachedNullConstant<string>.Instance;
+
+    public static ConstantExpression ConstantExpressionForType(Type type)
+    {
+        if (type == typeof(object))
+        {
+            return NullObject_ConstantExpression;
+        }
+        if (type == typeof(string))
+        {
+            return NullString_ConstantExpression;
+        }
+        return (ConstantExpression)typeof(CachedNullConstant<>).MakeGenericType(type).GetField(nameof(CachedNullConstant<object>.Instance))!.GetValue(null)!;
+    }
+
+    private static class CachedNullConstant<T>
+    {
+        public static readonly ConstantExpression Instance = Expression.Constant(null, typeof(T));
+    }
 }
