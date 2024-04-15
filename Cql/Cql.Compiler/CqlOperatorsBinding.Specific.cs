@@ -21,7 +21,7 @@ partial class CqlOperatorsBinding
         Expression perQuantity)
     {
         if (perQuantity is ConstantExpression { Value: null })
-            perQuantity = Expression.Constant(null, typeof(CqlQuantity));
+            perQuantity = CqlExpressions.ConstantExpressionForType<CqlQuantity>();
 
         if (TypeResolver.ImplementsGenericIEnumerable(argument.Type))
         {
@@ -72,9 +72,9 @@ partial class CqlOperatorsBinding
 
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), [left, right], false);
         if (methodInfo is null)
-            return CqlContextExpressions.NullObject_ConstantExpression;
+            return CqlExpressions.NullObject_ConstantExpression;
 
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodInfo, convertedArgs);
+        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo, convertedArgs);
         return call;
     }
 

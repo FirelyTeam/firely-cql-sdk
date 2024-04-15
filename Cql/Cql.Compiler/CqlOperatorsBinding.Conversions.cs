@@ -38,7 +38,7 @@ partial class CqlOperatorsBinding
         if (fromExpr is ConstantExpression { Value: null }
             && Nullable.GetUnderlyingType(to) is not null)
         {
-            toExpr = CqlContextExpressions.ConstantExpressionForType(to);
+            toExpr = CqlExpressions.ConstantExpressionForType(to);
             return true;
         }
 
@@ -51,7 +51,7 @@ partial class CqlOperatorsBinding
         params Expression[] arguments)
     {
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
+        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
         return call;
     }
 }

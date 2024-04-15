@@ -51,7 +51,7 @@ partial class ExpressionBuilder
     internal static MethodCallExpression CallCreateValueSetFacade(Expression operand)
     {
         var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, createFacadeMethod, operand);
+        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, createFacadeMethod, operand);
 
         return call;
     }
@@ -59,7 +59,7 @@ partial class ExpressionBuilder
     protected static ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
     {
         if (!precisionSpecified)
-            return CqlContextExpressions.NullString_ConstantExpression;
+            return CqlExpressions.NullString_ConstantExpression;
 
         var name = Enum.GetName(elmPrecision)!.ToLowerInvariant();
         var ce = Expression.Constant(name, typeof(string));
