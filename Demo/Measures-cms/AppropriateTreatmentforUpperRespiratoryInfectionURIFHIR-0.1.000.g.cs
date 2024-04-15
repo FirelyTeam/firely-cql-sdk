@@ -311,7 +311,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -418,7 +418,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 				return be_;
 			};
-			var ba_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, az_);
+			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, az_);
 			bool? bb_(CqlConcept T)
 			{
 				var bf_ = this.Unlisted_preventive_medicine_service();
@@ -476,7 +476,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Condition>, Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(d_, e_);
 		bool? g_(Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw)
 		{
 			var l_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_clqrpffcjgifzuvdvediikexw.URI);
@@ -493,7 +493,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(f_, g_);
 		Encounter i_(Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw) => 
 			tuple_clqrpffcjgifzuvdvediikexw.QualifyingEncounters;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -520,7 +520,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -615,15 +615,15 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var n_ = context.Operators.WhereOrNull<MedicationRequest>(l_, m_);
 			Encounter o_(MedicationRequest OrderedAntibiotic) => 
 				EncounterWithURI;
-			var p_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(n_, o_);
+			var p_ = context.Operators.Select<MedicationRequest, Encounter>(n_, o_);
 
 			return p_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, c_);
+		var d_ = context.Operators.SelectMany<Encounter, Encounter>(a_, c_);
 		var e_ = context.Operators.ListExcept<Encounter>(a_, d_);
 		Encounter f_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var g_ = context.Operators.SelectOrNull<Encounter, Encounter>(e_, f_);
+		var g_ = context.Operators.Select<Encounter, Encounter>(e_, f_);
 
 		return g_;
 	}
@@ -656,7 +656,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -684,7 +684,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -711,7 +711,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}

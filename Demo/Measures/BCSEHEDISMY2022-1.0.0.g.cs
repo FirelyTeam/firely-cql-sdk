@@ -244,7 +244,7 @@ public class BCSEHEDISMY2022_1_0_0
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -419,7 +419,7 @@ public class BCSEHEDISMY2022_1_0_0
 
 				return v_;
 			};
-			var s_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), r_);
+			var s_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), r_);
 			var t_ = this.Right_Modifier();
 			var u_ = context.Operators.ConceptsInValueSet(s_, t_);
 
@@ -438,7 +438,7 @@ public class BCSEHEDISMY2022_1_0_0
 
 				return aa_;
 			};
-			var x_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((ClinicalUnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), w_);
+			var x_ = context.Operators.Select<CodeableConcept, CqlConcept>((ClinicalUnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), w_);
 			var y_ = this.Clinical_Right_Modifier();
 			var z_ = context.Operators.ConceptsInValueSet(x_, y_);
 
@@ -505,7 +505,7 @@ public class BCSEHEDISMY2022_1_0_0
 
 				return v_;
 			};
-			var s_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), r_);
+			var s_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), r_);
 			var t_ = this.Left_Modifier();
 			var u_ = context.Operators.ConceptsInValueSet(s_, t_);
 
@@ -524,7 +524,7 @@ public class BCSEHEDISMY2022_1_0_0
 
 				return aa_;
 			};
-			var x_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((ClinicalUnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), w_);
+			var x_ = context.Operators.Select<CodeableConcept, CqlConcept>((ClinicalUnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), w_);
 			var y_ = this.Clinical_Left_Modifier();
 			var z_ = context.Operators.ConceptsInValueSet(x_, y_);
 
@@ -591,7 +591,7 @@ public class BCSEHEDISMY2022_1_0_0
 
 				return v_;
 			};
-			var s_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), r_);
+			var s_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), r_);
 			var t_ = this.Bilateral_Modifier();
 			var u_ = context.Operators.ConceptsInValueSet(s_, t_);
 
@@ -610,7 +610,7 @@ public class BCSEHEDISMY2022_1_0_0
 
 				return aa_;
 			};
-			var x_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((ClinicalUnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), w_);
+			var x_ = context.Operators.Select<CodeableConcept, CqlConcept>((ClinicalUnilateralMastectomyProcedure?.BodySite as IEnumerable<CodeableConcept>), w_);
 			var y_ = this.Clinical_Bilateral_Modifier();
 			var z_ = context.Operators.ConceptsInValueSet(x_, y_);
 

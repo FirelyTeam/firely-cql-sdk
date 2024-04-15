@@ -195,7 +195,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -283,7 +283,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 						return ad_;
 					};
-					var u_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(s_?.Type, t_);
+					var u_ = context.Operators.Select<CodeableConcept, CqlConcept>(s_?.Type, t_);
 					var v_ = this.Operating_Room_Suite();
 					var w_ = context.Operators.ConceptsInValueSet(u_, v_);
 					var x_ = FHIRHelpers_4_3_000.ToValue(OpioidGiven?.Effective);
@@ -305,11 +305,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var f_ = context.Operators.WhereOrNull<MedicationAdministration>(d_, e_);
 			Encounter g_(MedicationAdministration OpioidGiven) => 
 				InpatientEncounter;
-			var h_ = context.Operators.SelectOrNull<MedicationAdministration, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -382,7 +382,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<MedicationAdministration,MedicationAdministration,Encounter>, Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<MedicationAdministration,MedicationAdministration,Encounter>, Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(d_, e_);
 		bool? g_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI tuple_eupiswiddkenbbaixeecrbcdi)
 		{
 			bool? l_(Encounter.LocationComponent EncounterLocation)
@@ -394,7 +394,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 					return bj_;
 				};
-				var ba_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(ay_?.Type, az_);
+				var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(ay_?.Type, az_);
 				var bb_ = this.Operating_Room_Suite();
 				var bc_ = context.Operators.ConceptsInValueSet(ba_, bb_);
 				var bd_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidAntagonistGiven?.Effective);
@@ -445,7 +445,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI>(f_, g_);
 		Encounter i_(Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI tuple_eupiswiddkenbbaixeecrbcdi) => 
 			tuple_eupiswiddkenbbaixeecrbcdi.EncounterWithQualifyingAge;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_EUPiSWiDDKENbbAiXeEcRBcdI, Encounter>(h_, i_);
 
 		return j_;
 	}

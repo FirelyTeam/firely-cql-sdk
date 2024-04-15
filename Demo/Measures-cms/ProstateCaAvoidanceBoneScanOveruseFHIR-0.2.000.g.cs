@@ -254,7 +254,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -360,11 +360,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
 			Condition i_(Condition ActiveProstateCancer) => 
 				ProstateCancerPain;
-			var j_ = context.Operators.SelectOrNull<Condition, Condition>(h_, i_);
+			var j_ = context.Operators.Select<Condition, Condition>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Condition, Condition>(b_, c_);
+		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		var e_ = context.Operators.ExistsInList<Condition>(d_);
 
 		return e_;
@@ -397,11 +397,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
 			Procedure i_(Condition ActiveProstateCancer) => 
 				SalvageTherapy;
-			var j_ = context.Operators.SelectOrNull<Condition, Procedure>(h_, i_);
+			var j_ = context.Operators.Select<Condition, Procedure>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(b_, c_);
+		var d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		var e_ = context.Operators.ExistsInList<Procedure>(d_);
 
 		return e_;
@@ -432,11 +432,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
 			Observation h_(Condition ActiveProstateCancer) => 
 				BoneScan;
-			var i_ = context.Operators.SelectOrNull<Condition, Observation>(g_, h_);
+			var i_ = context.Operators.Select<Condition, Observation>(g_, h_);
 
 			return i_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 
 		return d_;
 	}
@@ -566,11 +566,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var p_ = context.Operators.WhereOrNull<Procedure>(n_, o_);
 			Observation q_(Procedure FirstProstateCancerTreatment) => 
 				GleasonScore;
-			var r_ = context.Operators.SelectOrNull<Procedure, Observation>(p_, q_);
+			var r_ = context.Operators.Select<Procedure, Observation>(p_, q_);
 
 			return r_;
 		};
-		var e_ = context.Operators.SelectManyOrNull<Observation, Observation>(c_, d_);
+		var e_ = context.Operators.SelectMany<Observation, Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			var ae_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -592,8 +592,8 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 			return ai_;
 		};
-		var k_ = context.Operators.SelectOrNull<Observation, bool?>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<bool?>(k_);
+		var k_ = context.Operators.Select<Observation, bool?>(i_, j_);
+		var l_ = context.Operators.Single<bool?>(k_);
 
 		return l_;
 	}
@@ -639,11 +639,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var p_ = context.Operators.WhereOrNull<Procedure>(n_, o_);
 			Observation q_(Procedure FirstProstateCancerTreatment) => 
 				ProstateCancerStaging;
-			var r_ = context.Operators.SelectOrNull<Procedure, Observation>(p_, q_);
+			var r_ = context.Operators.Select<Procedure, Observation>(p_, q_);
 
 			return r_;
 		};
-		var e_ = context.Operators.SelectManyOrNull<Observation, Observation>(c_, d_);
+		var e_ = context.Operators.SelectMany<Observation, Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			var ae_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -680,7 +680,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			return az_;
 		};
 		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<Observation>(k_);
+		var l_ = context.Operators.Single<Observation>(k_);
 
 		return l_;
 	}
@@ -760,11 +760,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
 			Observation p_(Observation MostRecentProstateCancerStaging) => 
 				PSATest;
-			var q_ = context.Operators.SelectOrNull<Observation, Observation>(o_, p_);
+			var q_ = context.Operators.Select<Observation, Observation>(o_, p_);
 
 			return q_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		object e_(Observation @this)
 		{
 			var al_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -787,8 +787,8 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 			return aq_;
 		};
-		var j_ = context.Operators.SelectOrNull<Observation, bool?>(h_, i_);
-		var k_ = context.Operators.SingleOrNull<bool?>(j_);
+		var j_ = context.Operators.Select<Observation, bool?>(h_, i_);
+		var k_ = context.Operators.Single<bool?>(j_);
 
 		return k_;
 	}

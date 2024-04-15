@@ -1088,7 +1088,7 @@ namespace Hl7.Cql.Runtime
 
         #region Singleton From
 
-        public T? SingleOrNull<T>(IEnumerable<T>? source)
+        public T? Single<T>(IEnumerable<T>? source)
         {
             if (source == null)
                 return (T?)(object?)null;

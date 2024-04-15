@@ -344,7 +344,7 @@ public class FHIRHelpers_4_3_000
 
 					return d_;
 				};
-				var c_ = context.Operators.SelectOrNull<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
+				var c_ = context.Operators.Select<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
 
 				return new CqlConcept(c_, concept?.TextElement?.Value);
 			};

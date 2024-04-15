@@ -200,7 +200,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -271,11 +271,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var ab_ = context.Operators.WhereOrNull<Condition>(z_, aa_);
 			Encounter ac_(Condition AtrialAblationDiagnosis) => 
 				IschemicStrokeEncounter;
-			var ad_ = context.Operators.SelectOrNull<Condition, Encounter>(ab_, ac_);
+			var ad_ = context.Operators.Select<Condition, Encounter>(ab_, ac_);
 
 			return ad_;
 		};
-		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, e_);
+		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
 		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
@@ -349,11 +349,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var av_ = context.Operators.WhereOrNull<Observation>(at_, au_);
 			Encounter aw_(Observation AtrialAblationObservation) => 
 				IschemicStrokeEncounter;
-			var ax_ = context.Operators.SelectOrNull<Observation, Encounter>(av_, aw_);
+			var ax_ = context.Operators.Select<Observation, Encounter>(av_, aw_);
 
 			return ax_;
 		};
-		var j_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, i_);
+		var j_ = context.Operators.SelectMany<Encounter, Encounter>(a_, i_);
 		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);
 
 		return k_;
@@ -391,11 +391,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var k_ = context.Operators.WhereOrNull<Condition>(i_, j_);
 			Encounter l_(Condition AtrialFibrillationFlutter) => 
 				IschemicStrokeEncounter;
-			var m_ = context.Operators.SelectOrNull<Condition, Encounter>(k_, l_);
+			var m_ = context.Operators.Select<Condition, Encounter>(k_, l_);
 
 			return m_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		bool? e_(Encounter IschemicStrokeEncounter)
 		{
 			var ab_ = CQMCommon_2_0_000.encounterDiagnosis(IschemicStrokeEncounter);
@@ -457,11 +457,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var f_ = context.Operators.WhereOrNull<object>(d_, e_);
 			Encounter g_(object ComfortMeasure) => 
 				Encounter;
-			var h_ = context.Operators.SelectOrNull<object, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -553,11 +553,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var j_ = context.Operators.WhereOrNull<MedicationRequest>(h_, i_);
 			Encounter k_(MedicationRequest DischargeAnticoagulant) => 
 				Encounter;
-			var l_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(j_, k_);
+			var l_ = context.Operators.Select<MedicationRequest, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -578,7 +578,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return v_;
 			};
-			var f_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, e_);
+			var f_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, e_);
 			var g_ = this.Medical_Reason_For_Not_Providing_Treatment();
 			var h_ = context.Operators.ConceptsInValueSet(f_, g_);
 			CqlConcept i_(CodeableConcept @this)
@@ -587,7 +587,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return w_;
 			};
-			var j_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, i_);
+			var j_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, i_);
 			var k_ = this.Patient_Refusal();
 			var l_ = context.Operators.ConceptsInValueSet(j_, k_);
 			var m_ = context.Operators.Or(h_, l_);
@@ -635,11 +635,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest NoDischargeAnticoagulant) => 
 				Encounter;
-			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}

@@ -489,7 +489,7 @@ public class FHIR347_0_1_021
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -1189,7 +1189,7 @@ public class FHIR347_0_1_021
 			var u_ = context.Operators.WhereOrNull<Dosage>(ActiveStatin?.DosageInstruction, t_);
 			Timing v_(Dosage @this) => 
 				@this?.Timing;
-			var w_ = context.Operators.SelectOrNull<Dosage, Timing>(u_, v_);
+			var w_ = context.Operators.Select<Dosage, Timing>(u_, v_);
 			bool? x_(Timing T)
 			{
 				object af_()

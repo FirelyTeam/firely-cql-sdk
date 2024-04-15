@@ -120,7 +120,7 @@ public class CQMCommon_2_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -306,8 +306,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(d_);
+		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
+		var e_ = context.Operators.Single<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
 	}
@@ -345,8 +345,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(d_);
+		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
+		var e_ = context.Operators.Single<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
 	}
@@ -384,8 +384,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<IEnumerable<Encounter.LocationComponent>>(d_);
+		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
+		var e_ = context.Operators.Single<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
 	}
@@ -422,8 +422,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<IEnumerable<Encounter.LocationComponent>>(d_);
+		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
+		var e_ = context.Operators.Single<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
 	}
@@ -587,7 +587,7 @@ public class CQMCommon_2_0_000
 			return f_;
 		};
 		var c_ = context.Operators.WhereOrNull<Location>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Location>(c_);
+		var d_ = context.Operators.Single<Location>(c_);
 
 		return d_;
 	}
@@ -606,14 +606,14 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(g_?.Type, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(g_?.Type, h_);
 			var j_ = this.Emergency_Department_Visit();
 			var k_ = context.Operators.ConceptsInValueSet(i_, j_);
 
 			return k_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter.LocationComponent>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Encounter.LocationComponent>(c_);
+		var d_ = context.Operators.Single<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
 
@@ -634,14 +634,14 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(g_?.Type, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(g_?.Type, h_);
 			var j_ = this.Emergency_Department_Visit();
 			var k_ = context.Operators.ConceptsInValueSet(i_, j_);
 
 			return k_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter.LocationComponent>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Encounter.LocationComponent>(c_);
+		var d_ = context.Operators.Single<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
 
@@ -1365,8 +1365,8 @@ public class CQMCommon_2_0_000
 
 			return aj_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -2087,8 +2087,8 @@ public class CQMCommon_2_0_000
 
 			return aj_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -2279,8 +2279,8 @@ public class CQMCommon_2_0_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -2470,8 +2470,8 @@ public class CQMCommon_2_0_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -2511,7 +2511,7 @@ public class CQMCommon_2_0_000
 
 				return o_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
@@ -2548,7 +2548,7 @@ public class CQMCommon_2_0_000
 
 				return o_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
@@ -2588,11 +2588,11 @@ public class CQMCommon_2_0_000
 				return h_;
 			};
 			var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-			var f_ = context.Operators.SingleOrNull<Condition>(e_);
+			var f_ = context.Operators.Single<Condition>(e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 
 		return b_;
 	}
@@ -2612,11 +2612,11 @@ public class CQMCommon_2_0_000
 				return h_;
 			};
 			var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-			var f_ = context.Operators.SingleOrNull<Condition>(e_);
+			var f_ = context.Operators.Single<Condition>(e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 
 		return b_;
 	}
@@ -2635,7 +2635,7 @@ public class CQMCommon_2_0_000
 			return f_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var d_ = context.Operators.Single<Condition>(c_);
 
 		return d_;
 	}
@@ -2653,7 +2653,7 @@ public class CQMCommon_2_0_000
 			return f_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var d_ = context.Operators.Single<Condition>(c_);
 
 		return d_;
 	}
@@ -2681,12 +2681,12 @@ public class CQMCommon_2_0_000
 				return l_;
 			};
 			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
-			var j_ = context.Operators.SingleOrNull<Condition>(i_);
+			var j_ = context.Operators.Single<Condition>(i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Condition>(d_);
+		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(b_, c_);
+		var e_ = context.Operators.Single<Condition>(d_);
 
 		return e_;
 	}
@@ -2713,12 +2713,12 @@ public class CQMCommon_2_0_000
 				return l_;
 			};
 			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
-			var j_ = context.Operators.SingleOrNull<Condition>(i_);
+			var j_ = context.Operators.Single<Condition>(i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Condition>(d_);
+		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(b_, c_);
+		var e_ = context.Operators.Single<Condition>(d_);
 
 		return e_;
 	}
@@ -2736,7 +2736,7 @@ public class CQMCommon_2_0_000
 			return f_;
 		};
 		var c_ = context.Operators.WhereOrNull<Location>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Location>(c_);
+		var d_ = context.Operators.Single<Location>(c_);
 
 		return d_;
 	}
@@ -2773,7 +2773,7 @@ public class CQMCommon_2_0_000
 					return m_;
 				};
 				var h_ = context.Operators.WhereOrNull<Medication>(f_, g_);
-				var i_ = context.Operators.SingleOrNull<Medication>(h_);
+				var i_ = context.Operators.Single<Medication>(h_);
 				var j_ = FHIRHelpers_4_3_000.ToConcept(i_?.Code);
 
 				return j_;
@@ -2814,7 +2814,7 @@ public class CQMCommon_2_0_000
 					return m_;
 				};
 				var h_ = context.Operators.WhereOrNull<Medication>(f_, g_);
-				var i_ = context.Operators.SingleOrNull<Medication>(h_);
+				var i_ = context.Operators.Single<Medication>(h_);
 				var j_ = FHIRHelpers_4_3_000.ToConcept(i_?.Code);
 
 				return j_;

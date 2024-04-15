@@ -683,7 +683,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -941,11 +941,11 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var fm_ = context.Operators.WhereOrNull<Condition>(fk_, fl_);
 			Procedure fn_(Condition ComorbidDiagnosis) => 
 				CataractSurgeryPerformed;
-			var fo_ = context.Operators.SelectOrNull<Condition, Procedure>(fm_, fn_);
+			var fo_ = context.Operators.Select<Condition, Procedure>(fm_, fn_);
 
 			return fo_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(a_, b_);
+		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}
@@ -1004,11 +1004,11 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
 			Procedure l_(Observation VisualAcuityExamPerformed) => 
 				CataractSurgeryPerformed;
-			var m_ = context.Operators.SelectOrNull<Observation, Procedure>(k_, l_);
+			var m_ = context.Operators.Select<Observation, Procedure>(k_, l_);
 
 			return m_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(a_, b_);
+		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}

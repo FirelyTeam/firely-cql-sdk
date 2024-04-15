@@ -179,7 +179,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -263,11 +263,11 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var r_ = context.Operators.WhereOrNull<MedicationRequest>(p_, q_);
 			Encounter s_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication) => 
 				InpatientEncounter;
-			var t_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(r_, s_);
+			var t_ = context.Operators.Select<MedicationRequest, Encounter>(r_, s_);
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -349,7 +349,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var m_ = context.Operators.WhereOrNull<MedicationRequest>(k_, l_);
 			object n_(MedicationRequest Opioids) => 
 				Opioids?.Medication;
-			var o_ = context.Operators.SelectOrNull<MedicationRequest, object>(m_, n_);
+			var o_ = context.Operators.Select<MedicationRequest, object>(m_, n_);
 			var p_ = context.Operators.CountOrNull<object>(o_);
 			var q_ = context.Operators.GreaterOrEqual(p_, (int?)2);
 
@@ -371,11 +371,11 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var x_ = context.Operators.WhereOrNull<MedicationRequest>(v_, w_);
 			Encounter y_(MedicationRequest OpioidsDischarge) => 
 				InpatientEncounter;
-			var z_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(x_, y_);
+			var z_ = context.Operators.Select<MedicationRequest, Encounter>(x_, y_);
 
 			return z_;
 		};
-		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, e_);
+		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
 		IEnumerable<Encounter> g_(Encounter InpatientEncounter)
 		{
 			var ad_ = this.Schedule_IV_Benzodiazepines();
@@ -391,11 +391,11 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var ag_ = context.Operators.WhereOrNull<MedicationRequest>(ae_, af_);
 			Encounter ah_(MedicationRequest BenzodiazepinesDischarge) => 
 				InpatientEncounter;
-			var ai_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(ag_, ah_);
+			var ai_ = context.Operators.Select<MedicationRequest, Encounter>(ag_, ah_);
 
 			return ai_;
 		};
-		var h_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(f_, g_);
+		var h_ = context.Operators.SelectMany<Encounter, Encounter>(f_, g_);
 		var i_ = context.Operators.ListUnion<Encounter>(c_, h_);
 
 		return i_;
@@ -474,7 +474,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter InpatientEncounter) => 
 			InpatientEncounter;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}

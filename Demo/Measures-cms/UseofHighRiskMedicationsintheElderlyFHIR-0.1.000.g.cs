@@ -726,7 +726,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -777,7 +777,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 				return ar_;
 			};
-			var an_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, am_);
+			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, am_);
 			bool? ao_(CqlConcept T)
 			{
 				var as_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_();
@@ -910,14 +910,14 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
 			MedicationRequest i_(MedicationRequest OrderMedication2) => 
 				OrderMedication1;
-			var j_ = context.Operators.SelectOrNull<MedicationRequest, MedicationRequest>(h_, i_);
+			var j_ = context.Operators.Select<MedicationRequest, MedicationRequest>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<MedicationRequest, MedicationRequest>(a_, b_);
+		var c_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(a_, b_);
 		MedicationRequest d_(MedicationRequest OrderMedication1) => 
 			OrderMedication1;
-		var e_ = context.Operators.SelectOrNull<MedicationRequest, MedicationRequest>(c_, d_);
+		var e_ = context.Operators.Select<MedicationRequest, MedicationRequest>(c_, d_);
 
 		return e_;
 	}
@@ -1039,11 +1039,11 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var e_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
 			var f_ = context.Operators.ConvertQuantity(e_, "d");
 			var g_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
-			var h_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-			var i_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var h_ = context.Operators.Single<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+			var i_ = context.Operators.Single<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 			var j_ = FHIRHelpers_4_3_000.ToValue(i_?.Dose);
 			var k_ = context.Operators.End((j_ as CqlInterval<CqlQuantity>));
-			var m_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var m_ = context.Operators.Single<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 			var n_ = FHIRHelpers_4_3_000.ToValue(m_?.Dose);
 			var s_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(h_?.Timing?.Repeat?.PeriodUnitElement?.Value);
 			var t_ = context.Operators.Convert<string>(s_);
@@ -1060,8 +1060,8 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return ae_;
 		};
-		var c_ = context.Operators.SelectOrNull<MedicationRequest, decimal?>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<decimal?>(c_);
+		var c_ = context.Operators.Select<MedicationRequest, decimal?>(a_, b_);
+		var d_ = context.Operators.Single<decimal?>(c_);
 
 		return d_;
 	}
@@ -1079,7 +1079,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return l_;
 		};
-		var h_ = context.Operators.SelectOrNull<MedicationRequest, decimal?>(f_, g_);
+		var h_ = context.Operators.Select<MedicationRequest, decimal?>(f_, g_);
 		var i_ = context.Operators.Sum(h_);
 		var j_ = context.Operators.ConvertIntegerToDecimal((int?)90);
 		var k_ = context.Operators.Greater(i_, j_);
@@ -1404,8 +1404,8 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return e_();
 		};
-		var c_ = context.Operators.SelectOrNull<MedicationRequest, CqlQuantity>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlQuantity>(c_);
+		var c_ = context.Operators.Select<MedicationRequest, CqlQuantity>(a_, b_);
+		var d_ = context.Operators.Single<CqlQuantity>(c_);
 
 		return d_;
 	}
@@ -1521,7 +1521,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return p_;
 		};
-		var j_ = context.Operators.SelectOrNull<MedicationRequest, CqlDateTime>(h_, i_);
+		var j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
 		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
 		var l_ = context.Operators.FirstOfList<CqlDateTime>(k_);
 
@@ -1570,7 +1570,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return p_;
 		};
-		var j_ = context.Operators.SelectOrNull<MedicationRequest, CqlDateTime>(h_, i_);
+		var j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
 		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
 		var l_ = context.Operators.FirstOfList<CqlDateTime>(k_);
 

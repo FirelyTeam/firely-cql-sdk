@@ -179,7 +179,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -312,11 +312,11 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 			var f_ = context.Operators.WhereOrNull<MedicationAdministration>(d_, e_);
 			Encounter g_(MedicationAdministration HypoglycemicMedication) => 
 				QualifyingEncounter;
-			var h_ = context.Operators.SelectOrNull<MedicationAdministration, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -387,11 +387,11 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				var t_ = context.Operators.WhereOrNull<MedicationAdministration>(r_, s_);
 				Observation u_(MedicationAdministration HypoglycemicMeds) => 
 					BloodGlucoseLab;
-				var v_ = context.Operators.SelectOrNull<MedicationAdministration, Observation>(t_, u_);
+				var v_ = context.Operators.Select<MedicationAdministration, Observation>(t_, u_);
 
 				return v_;
 			};
-			var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+			var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 			var i_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
 			IEnumerable<Observation> j_(Observation BloodGlucoseLab)
 			{
@@ -426,11 +426,11 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				var ay_ = context.Operators.WhereOrNull<MedicationAdministration>(aw_, ax_);
 				Observation az_(MedicationAdministration HypoglycemicMeds) => 
 					BloodGlucoseLab;
-				var ba_ = context.Operators.SelectOrNull<MedicationAdministration, Observation>(ay_, az_);
+				var ba_ = context.Operators.Select<MedicationAdministration, Observation>(ay_, az_);
 
 				return ba_;
 			};
-			var k_ = context.Operators.SelectManyOrNull<Observation, Observation>(i_, j_);
+			var k_ = context.Operators.SelectMany<Observation, Observation>(i_, j_);
 			IEnumerable<Observation> l_(Observation BloodGlucoseLab)
 			{
 				var cb_ = this.Glucose_lab_test();
@@ -469,11 +469,11 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				var ce_ = context.Operators.WhereOrNull<Observation>(cc_, cd_);
 				Observation cf_(Observation FollowupBloodGlucoseLab) => 
 					BloodGlucoseLab;
-				var cg_ = context.Operators.SelectOrNull<Observation, Observation>(ce_, cf_);
+				var cg_ = context.Operators.Select<Observation, Observation>(ce_, cf_);
 
 				return cg_;
 			};
-			var m_ = context.Operators.SelectManyOrNull<Observation, Observation>(k_, l_);
+			var m_ = context.Operators.SelectMany<Observation, Observation>(k_, l_);
 			var n_ = context.Operators.ListExcept<Observation>(g_, m_);
 			bool? o_(Observation BloodGlucoseLab)
 			{

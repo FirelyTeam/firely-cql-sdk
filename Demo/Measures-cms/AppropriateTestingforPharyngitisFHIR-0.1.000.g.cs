@@ -357,7 +357,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -423,7 +423,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 				return bl_;
 			};
-			var bh_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, bg_);
+			var bh_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, bg_);
 			bool? bi_(CqlConcept T)
 			{
 				var bm_ = this.Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate___();
@@ -478,7 +478,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 				return bu_;
 			};
-			var bq_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, bp_);
+			var bq_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, bp_);
 			bool? br_(CqlConcept T)
 			{
 				var bv_ = this.Unlisted_preventive_medicine_service();
@@ -554,11 +554,11 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var k_ = context.Operators.WhereOrNull<MedicationRequest>(i_, j_);
 			Encounter l_(MedicationRequest AntibioticOrdered) => 
 				EDOrAmbulatoryVisit;
-			var m_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(k_, l_);
+			var m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
 			return m_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -598,7 +598,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Condition>, Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC>(c_, d_);
 		bool? f_(Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC tuple_gcvgmboianaairpipicsbupec)
 		{
 			var k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_gcvgmboianaairpipicsbupec.AcutePharyngitisTonsillitis);
@@ -612,7 +612,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC>(e_, f_);
 		Encounter h_(Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC tuple_gcvgmboianaairpipicsbupec) => 
 			tuple_gcvgmboianaairpipicsbupec.VisitWithAntibiotic;
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC, Encounter>(g_, h_);
+		var i_ = context.Operators.Select<Tuples.Tuple_GCVGMbOiaNAaiRPIPICSbUPeC, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -639,7 +639,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 
 			EncounterWithPharyngitis;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -739,7 +739,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Observation,Encounter>, Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Observation,Encounter>, Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV>(c_, d_);
 		bool? f_(Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV tuple_ferjikqtqgcpbsywqkeabbeev)
 		{
 			var k_ = FHIRHelpers_4_3_000.ToValue(tuple_ferjikqtqgcpbsywqkeabbeev.GroupAStreptococcusTest?.Effective);
@@ -759,7 +759,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV>(e_, f_);
 		Encounter h_(Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV tuple_ferjikqtqgcpbsywqkeabbeev) => 
 			tuple_ferjikqtqgcpbsywqkeabbeev.EncounterWithPharyngitis;
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV, Encounter>(g_, h_);
+		var i_ = context.Operators.Select<Tuples.Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -787,7 +787,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 
 			EncounterWithPharyngitis;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -815,7 +815,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 
 			EncounterWithPharyngitis;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -842,7 +842,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 
 			EncounterWithPharyngitis;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}

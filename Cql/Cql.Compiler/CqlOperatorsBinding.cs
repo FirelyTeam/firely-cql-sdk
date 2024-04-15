@@ -207,7 +207,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.MinElementInList                 => BindToMethodConvertArgs(nameof(ICqlOperators.MinOrNull), parameters),
                 CqlOperator.Mode                             => BindToMethodConvertArgs(nameof(ICqlOperators.Mode), parameters),
                 CqlOperator.PointFrom                        => BindToMethodConvertArgs(nameof(ICqlOperators.PointFrom), parameters),
-                CqlOperator.Single                           => BindToMethodConvertArgs(nameof(ICqlOperators.SingleOrNull), parameters),
+                CqlOperator.Single                           => BindToMethodConvertArgs(nameof(ICqlOperators.Single), parameters),
 
                 // Direct Bindings
                 CqlOperator.Aggregate                        => BindToMethod(methodName:nameof(ICqlOperators.AggregateOrNull),

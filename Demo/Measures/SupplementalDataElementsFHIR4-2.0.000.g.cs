@@ -87,7 +87,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -129,7 +129,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension) => 
 			(Extension?.Extension as IEnumerable<Extension>);
-		var e_ = context.Operators.SelectOrNull<Extension, IEnumerable<Extension>>(c_, d_);
+		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
 		var f_ = context.Operators.FlattenList<Extension>(e_);
 		bool? g_(Extension E)
 		{
@@ -145,7 +145,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var h_ = context.Operators.WhereOrNull<Extension>(f_, g_);
 		Coding i_(Extension E) => 
 			(E?.Value as Coding);
-		var j_ = context.Operators.SelectOrNull<Extension, Coding>(h_, i_);
+		var j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
 		return j_;
 	}
@@ -168,7 +168,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return e_;
 		};
-		var d_ = context.Operators.SelectOrNull<Coverage, Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, c_);
+		var d_ = context.Operators.Select<Coverage, Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, c_);
 
 		return d_;
 	}
@@ -210,7 +210,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension) => 
 			(Extension?.Extension as IEnumerable<Extension>);
-		var e_ = context.Operators.SelectOrNull<Extension, IEnumerable<Extension>>(c_, d_);
+		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
 		var f_ = context.Operators.FlattenList<Extension>(e_);
 		bool? g_(Extension E)
 		{
@@ -226,7 +226,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var h_ = context.Operators.WhereOrNull<Extension>(f_, g_);
 		Coding i_(Extension E) => 
 			(E?.Value as Coding);
-		var j_ = context.Operators.SelectOrNull<Extension, Coding>(h_, i_);
+		var j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
 		return j_;
 	}

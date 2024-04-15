@@ -232,7 +232,7 @@ public class Exam125FHIR_0_0_009
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -379,7 +379,7 @@ public class Exam125FHIR_0_0_009
 
 				return n_;
 			};
-			var k_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
 			var l_ = this.Right();
 			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
@@ -446,7 +446,7 @@ public class Exam125FHIR_0_0_009
 
 				return n_;
 			};
-			var k_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
 			var l_ = this.Left();
 			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 

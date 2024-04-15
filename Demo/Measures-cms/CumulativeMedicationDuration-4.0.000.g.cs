@@ -542,7 +542,7 @@ public class CumulativeMedicationDuration_4_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -1391,7 +1391,7 @@ public class CumulativeMedicationDuration_4_0_000
 			{
 				bool f_()
 				{
-					var h_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var h_ = context.Operators.Single<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
 					var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Timing?.Repeat?.Bounds);
 					var j_ = context.Operators.Start((i_ as CqlInterval<CqlDateTime>));
 					var k_ = context.Operators.DateFrom(j_);
@@ -1404,10 +1404,10 @@ public class CumulativeMedicationDuration_4_0_000
 					var r_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
 					var s_ = context.Operators.ConvertQuantity(r_, "d");
 					var t_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
-					var v_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var v_ = context.Operators.Single<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var w_ = FHIRHelpers_4_3_000.ToValue(v_?.Dose);
 					var x_ = context.Operators.End((w_ as CqlInterval<CqlQuantity>));
-					var z_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var z_ = context.Operators.Single<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Dose);
 					var af_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(h_?.Timing?.Repeat?.PeriodUnitElement?.Value);
 					var ag_ = context.Operators.Convert<string>(af_);
@@ -1428,7 +1428,7 @@ public class CumulativeMedicationDuration_4_0_000
 				};
 				bool g_()
 				{
-					var au_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var au_ = context.Operators.Single<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
 					var av_ = FHIRHelpers_4_3_000.ToValue(au_?.Timing?.Repeat?.Bounds);
 					var aw_ = context.Operators.Start((av_ as CqlInterval<CqlDateTime>));
 					var ax_ = context.Operators.DateFrom(aw_);
@@ -1446,7 +1446,7 @@ public class CumulativeMedicationDuration_4_0_000
 				};
 				if (f_())
 				{
-					var bi_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var bi_ = context.Operators.Single<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
 					var bj_ = FHIRHelpers_4_3_000.ToValue(bi_?.Timing?.Repeat?.Bounds);
 					var bk_ = context.Operators.Start((bj_ as CqlInterval<CqlDateTime>));
 					var bl_ = context.Operators.DateFrom(bk_);
@@ -1464,10 +1464,10 @@ public class CumulativeMedicationDuration_4_0_000
 					var ca_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
 					var cb_ = context.Operators.ConvertQuantity(ca_, "d");
 					var cc_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
-					var ce_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((bi_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var ce_ = context.Operators.Single<Dosage.DoseAndRateComponent>((bi_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var cf_ = FHIRHelpers_4_3_000.ToValue(ce_?.Dose);
 					var cg_ = context.Operators.End((cf_ as CqlInterval<CqlQuantity>));
-					var ci_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((bi_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var ci_ = context.Operators.Single<Dosage.DoseAndRateComponent>((bi_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var cj_ = FHIRHelpers_4_3_000.ToValue(ci_?.Dose);
 					var co_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(bi_?.Timing?.Repeat?.PeriodUnitElement?.Value);
 					var cp_ = context.Operators.Convert<string>(co_);
@@ -1491,7 +1491,7 @@ public class CumulativeMedicationDuration_4_0_000
 				}
 				else if (g_())
 				{
-					var dg_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+					var dg_ = context.Operators.Single<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
 					var dh_ = FHIRHelpers_4_3_000.ToValue(dg_?.Timing?.Repeat?.Bounds);
 					var di_ = context.Operators.Start((dh_ as CqlInterval<CqlDateTime>));
 					var dj_ = context.Operators.DateFrom(di_);
@@ -1517,8 +1517,8 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return e_();
 		};
-		var c_ = context.Operators.SelectOrNull<MedicationRequest, CqlInterval<CqlDate>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDate>>(c_);
+		var c_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDate>>(c_);
 
 		return d_;
 	}
@@ -1544,11 +1544,11 @@ public class CumulativeMedicationDuration_4_0_000
 					var l_ = FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply);
 					var m_ = context.Operators.ConvertQuantity(l_, "d");
 					var n_ = FHIRHelpers_4_3_000.ToQuantity(D?.Quantity);
-					var o_ = context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>));
-					var p_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((o_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var o_ = context.Operators.Single<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>));
+					var p_ = context.Operators.Single<Dosage.DoseAndRateComponent>((o_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var q_ = FHIRHelpers_4_3_000.ToValue(p_?.Dose);
 					var r_ = context.Operators.End((q_ as CqlInterval<CqlQuantity>));
-					var t_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((o_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var t_ = context.Operators.Single<Dosage.DoseAndRateComponent>((o_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var u_ = FHIRHelpers_4_3_000.ToValue(t_?.Dose);
 					var z_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(o_?.Timing?.Repeat?.PeriodUnitElement?.Value);
 					var aa_ = context.Operators.Convert<string>(z_);
@@ -1575,11 +1575,11 @@ public class CumulativeMedicationDuration_4_0_000
 					var at_ = FHIRHelpers_4_3_000.ToQuantity(D?.DaysSupply);
 					var au_ = context.Operators.ConvertQuantity(at_, "d");
 					var av_ = FHIRHelpers_4_3_000.ToQuantity(D?.Quantity);
-					var aw_ = context.Operators.SingleOrNull<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>));
-					var ax_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((aw_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var aw_ = context.Operators.Single<Dosage>((D?.DosageInstruction as IEnumerable<Dosage>));
+					var ax_ = context.Operators.Single<Dosage.DoseAndRateComponent>((aw_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var ay_ = FHIRHelpers_4_3_000.ToValue(ax_?.Dose);
 					var az_ = context.Operators.End((ay_ as CqlInterval<CqlQuantity>));
-					var bb_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((aw_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+					var bb_ = context.Operators.Single<Dosage.DoseAndRateComponent>((aw_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 					var bc_ = FHIRHelpers_4_3_000.ToValue(bb_?.Dose);
 					var bh_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(aw_?.Timing?.Repeat?.PeriodUnitElement?.Value);
 					var bi_ = context.Operators.Convert<string>(bh_);
@@ -1608,8 +1608,8 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return e_();
 		};
-		var c_ = context.Operators.SelectOrNull<MedicationDispense, CqlInterval<CqlDate>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDate>>(c_);
+		var c_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDate>>(c_);
 
 		return d_;
 	}
@@ -1672,8 +1672,8 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return e_();
 		};
-		var c_ = context.Operators.SelectOrNull<MedicationAdministration, CqlInterval<CqlDate>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDate>>(c_);
+		var c_ = context.Operators.Select<MedicationAdministration, CqlInterval<CqlDate>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDate>>(c_);
 
 		return d_;
 	}
@@ -1695,7 +1695,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 					return i_;
 				};
-				var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, int?>(b_, c_);
+				var d_ = context.Operators.Select<CqlInterval<CqlDate>, int?>(b_, c_);
 				var e_ = context.Operators.Sum(d_);
 
 				return e_;
@@ -1749,8 +1749,8 @@ public class CumulativeMedicationDuration_4_0_000
 
 				return ad_;
 			};
-			var f_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(d_, e_);
-			var g_ = context.Operators.SingleOrNull<CqlInterval<CqlDate>>(f_);
+			var f_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(d_, e_);
+			var g_ = context.Operators.Single<CqlInterval<CqlDate>>(f_);
 			var h_ = new CqlInterval<CqlDate>[]
 			{
 				g_,
@@ -1808,7 +1808,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return m_;
 		};
-		var d_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDate>>(b_, c_);
+		var d_ = context.Operators.Select<object, CqlInterval<CqlDate>>(b_, c_);
 		bool? e_(object M)
 		{
 			var n_ = M is MedicationDispense;
@@ -1822,7 +1822,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return o_;
 		};
-		var h_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDate>>(f_, g_);
+		var h_ = context.Operators.Select<object, CqlInterval<CqlDate>>(f_, g_);
 		var i_ = this.RolloutIntervals(h_);
 		var j_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(d_, i_);
 		var k_ = this.CumulativeDuration(j_);

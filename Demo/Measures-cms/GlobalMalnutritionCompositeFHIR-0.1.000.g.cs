@@ -303,7 +303,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -431,7 +431,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Procedure>, Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Procedure>, Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC>(d_, e_);
 		bool? g_(Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC tuple_bdofeusqkmfbeyculsqybijjc)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_bdofeusqkmfbeyculsqybijjc.HospitalDietitianReferral?.Code);
@@ -457,7 +457,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC>(f_, g_);
 		Encounter i_(Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC tuple_bdofeusqkmfbeyculsqybijjc) => 
 			tuple_bdofeusqkmfbeyculsqybijjc.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_BdOfeUSQKMfBEYcULSQYBIjjC, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -482,7 +482,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(d_, e_);
 		bool? g_(Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS tuple_ffuejbaxzfeabrilhfreepdgs)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.Code);
@@ -516,7 +516,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(f_, g_);
 		Encounter i_(Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS tuple_ffuejbaxzfeabrilhfreepdgs) => 
 			tuple_ffuejbaxzfeabrilhfreepdgs.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -541,7 +541,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter QualifyingEncounter) => 
 			QualifyingEncounter;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -566,7 +566,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(d_, e_);
 		bool? g_(Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS tuple_ffuejbaxzfeabrilhfreepdgs)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.Code);
@@ -597,7 +597,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(f_, g_);
 		Encounter i_(Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS tuple_ffuejbaxzfeabrilhfreepdgs) => 
 			tuple_ffuejbaxzfeabrilhfreepdgs.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -623,7 +623,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter QualifyingEncounter) => 
 			QualifyingEncounter;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -648,7 +648,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(d_, e_);
 		bool? g_(Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS tuple_ffuejbaxzfeabrilhfreepdgs)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.Code);
@@ -679,7 +679,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS>(f_, g_);
 		Encounter i_(Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS tuple_ffuejbaxzfeabrilhfreepdgs) => 
 			tuple_ffuejbaxzfeabrilhfreepdgs.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_FfUejBAXZfEABRILhFReePdGS, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -704,7 +704,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		Encounter d_(Encounter QualifyingEncounter) => 
 			QualifyingEncounter;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -729,7 +729,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(d_, e_);
 		bool? g_(Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh tuple_fnbckkyclgcbujddfesqqggfh)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.Code);
@@ -766,7 +766,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(f_, g_);
 		Encounter i_(Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh tuple_fnbckkyclgcbujddfesqqggfh) => 
 			tuple_fnbckkyclgcbujddfesqqggfh.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -791,7 +791,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(d_, e_);
 		bool? g_(Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh tuple_fnbckkyclgcbujddfesqqggfh)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.Code);
@@ -825,7 +825,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(f_, g_);
 		Encounter i_(Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh tuple_fnbckkyclgcbujddfesqqggfh) => 
 			tuple_fnbckkyclgcbujddfesqqggfh.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -850,7 +850,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(d_, e_);
 		bool? g_(Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh tuple_fnbckkyclgcbujddfesqqggfh)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.Code);
@@ -881,7 +881,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh>(f_, g_);
 		Encounter i_(Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh tuple_fnbckkyclgcbujddfesqqggfh) => 
 			tuple_fnbckkyclgcbujddfesqqggfh.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_FNbCKKYcLGcBUjDdFESQQgGfh, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -906,7 +906,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Condition>, Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb>(d_, e_);
 		bool? g_(Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb tuple_dtggaxnybdkagbeeecexhumkb)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_dtggaxnybdkagbeeecexhumkb.MalnutritionDiagnosis?.Code);
@@ -923,7 +923,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb>(f_, g_);
 		Encounter i_(Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb tuple_dtggaxnybdkagbeeecexhumkb) => 
 			tuple_dtggaxnybdkagbeeecexhumkb.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_DTggaXNYbDKaGBeEeceXhUMKb, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -948,7 +948,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Procedure>, Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Procedure>, Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg>(d_, e_);
 		bool? g_(Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg tuple_ctmbkgnetphcwpstmvcrebeg)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ctmbkgnetphcwpstmvcrebeg.NutritionCarePlan?.Code);
@@ -973,7 +973,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		var h_ = context.Operators.WhereOrNull<Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg>(f_, g_);
 		Encounter i_(Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg tuple_ctmbkgnetphcwpstmvcrebeg) => 
 			tuple_ctmbkgnetphcwpstmvcrebeg.QualifyingEncounter;
-		var j_ = context.Operators.SelectOrNull<Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuples.Tuple_cTMBKgNETPhcWPSTMVcRebEg, Encounter>(h_, i_);
 
 		return j_;
 	}

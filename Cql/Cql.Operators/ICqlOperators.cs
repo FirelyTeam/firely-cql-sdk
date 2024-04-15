@@ -4,6 +4,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using ListSortDirection = System.ComponentModel.ListSortDirection;
 
@@ -449,8 +450,12 @@ namespace Hl7.Cql.Operators
         bool? SamePrecision(CqlDate? left, CqlDate? right);
         bool? SamePrecision(CqlDateTime? left, CqlDateTime? right);
         bool? SamePrecision(CqlTime? left, CqlTime? right);
-        IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
-        IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
+
+        [return: NotNullIfNotNull(nameof(source))]
+        IEnumerable<TResult>? SelectMany<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
+
+        [return: NotNullIfNotNull(nameof(source))]
+        IEnumerable<TResult>? SelectManyResults<TSource, TCollection, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
 
         IEnumerable<(T1, T2)> CrossJoin<T1, T2>(
             IEnumerable<T1>? source1,
@@ -501,11 +506,19 @@ namespace Hl7.Cql.Operators
             IEnumerable<T7>? source7,
             IEnumerable<T8>? source8);
 
-        IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select);
-        T? SingleOrNull<T>(IEnumerable<T>? source);
+        [return:NotNullIfNotNull(nameof(source))]
+        IEnumerable<TR>? Select<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select);
+
+        [return: NotNullIfNotNull(nameof(source))]
+        T? Single<T>(IEnumerable<T>? source);
+
+        [return: NotNullIfNotNull(nameof(source))]
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);
+
         IEnumerable<string>? Split(string stringToSplit, string separator);
+
         IEnumerable<string>? SplitOnMatches(string stringToSplit, string separatorPattern);
+
         CqlDate? Start(CqlInterval<CqlDate?>? argument);
         CqlDateTime? Start(CqlInterval<CqlDateTime?>? argument);
         CqlQuantity? Start(CqlInterval<CqlQuantity?>? argument);

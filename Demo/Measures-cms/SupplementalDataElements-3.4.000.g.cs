@@ -87,7 +87,7 @@ public class SupplementalDataElements_3_4_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -125,7 +125,7 @@ public class SupplementalDataElements_3_4_000
 			return m_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		var d_ = context.Operators.SingleOrNull<Extension>(c_);
+		var d_ = context.Operators.Single<Extension>(c_);
 		var e_ = new Extension[]
 		{
 			d_,
@@ -143,8 +143,8 @@ public class SupplementalDataElements_3_4_000
 					: null), n_);
 			DataType p_(Extension @this) => 
 				@this?.Value;
-			var q_ = context.Operators.SelectOrNull<Extension, DataType>(o_, p_);
-			var r_ = context.Operators.SingleOrNull<DataType>(q_);
+			var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
+			var r_ = context.Operators.Single<DataType>(q_);
 			var s_ = context.Operators.Convert<Coding>(r_);
 			var t_ = FHIRHelpers_4_3_000.ToCode(s_);
 			var u_ = new CqlCode[]
@@ -160,7 +160,7 @@ public class SupplementalDataElements_3_4_000
 			var w_ = context.Operators.WhereOrNull<Extension>(((E is Element)
 					? ((E as Element).Extension)
 					: null), v_);
-			var y_ = context.Operators.SelectOrNull<Extension, DataType>(w_, p_);
+			var y_ = context.Operators.Select<Extension, DataType>(w_, p_);
 			CqlCode z_(DataType @this)
 			{
 				var al_ = context.Operators.Convert<Coding>(@this);
@@ -168,7 +168,7 @@ public class SupplementalDataElements_3_4_000
 
 				return am_;
 			};
-			var aa_ = context.Operators.SelectOrNull<DataType, CqlCode>(y_, z_);
+			var aa_ = context.Operators.Select<DataType, CqlCode>(y_, z_);
 			var ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
 			bool? ac_(Extension @this)
 			{
@@ -179,8 +179,8 @@ public class SupplementalDataElements_3_4_000
 			var ad_ = context.Operators.WhereOrNull<Extension>(((E is Element)
 					? ((E as Element).Extension)
 					: null), ac_);
-			var af_ = context.Operators.SelectOrNull<Extension, DataType>(ad_, p_);
-			var ag_ = context.Operators.SingleOrNull<DataType>(af_);
+			var af_ = context.Operators.Select<Extension, DataType>(ad_, p_);
+			var ag_ = context.Operators.Single<DataType>(af_);
 			var ah_ = context.Operators.Convert<string>(ag_);
 			var ai_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
@@ -190,8 +190,8 @@ public class SupplementalDataElements_3_4_000
 
 			return ai_;
 		};
-		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.Select<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		var h_ = context.Operators.Single<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
@@ -216,7 +216,7 @@ public class SupplementalDataElements_3_4_000
 
 			return g_;
 		};
-		var d_ = context.Operators.SelectOrNull<Coverage, Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>(b_, c_);
+		var d_ = context.Operators.Select<Coverage, Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>(b_, c_);
 
 		return d_;
 	}
@@ -254,7 +254,7 @@ public class SupplementalDataElements_3_4_000
 			return m_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		var d_ = context.Operators.SingleOrNull<Extension>(c_);
+		var d_ = context.Operators.Single<Extension>(c_);
 		var e_ = new Extension[]
 		{
 			d_,
@@ -272,7 +272,7 @@ public class SupplementalDataElements_3_4_000
 					: null), n_);
 			DataType p_(Extension @this) => 
 				@this?.Value;
-			var q_ = context.Operators.SelectOrNull<Extension, DataType>(o_, p_);
+			var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 			CqlCode r_(DataType @this)
 			{
 				var ai_ = context.Operators.Convert<Coding>(@this);
@@ -280,7 +280,7 @@ public class SupplementalDataElements_3_4_000
 
 				return aj_;
 			};
-			var s_ = context.Operators.SelectOrNull<DataType, CqlCode>(q_, r_);
+			var s_ = context.Operators.Select<DataType, CqlCode>(q_, r_);
 			bool? t_(Extension @this)
 			{
 				var ak_ = context.Operators.Equal(@this?.Url, "detailed");
@@ -290,7 +290,7 @@ public class SupplementalDataElements_3_4_000
 			var u_ = context.Operators.WhereOrNull<Extension>(((R is Element)
 					? ((R as Element).Extension)
 					: null), t_);
-			var w_ = context.Operators.SelectOrNull<Extension, DataType>(u_, p_);
+			var w_ = context.Operators.Select<Extension, DataType>(u_, p_);
 			CqlCode x_(DataType @this)
 			{
 				var al_ = context.Operators.Convert<Coding>(@this);
@@ -298,7 +298,7 @@ public class SupplementalDataElements_3_4_000
 
 				return am_;
 			};
-			var y_ = context.Operators.SelectOrNull<DataType, CqlCode>(w_, x_);
+			var y_ = context.Operators.Select<DataType, CqlCode>(w_, x_);
 			var z_ = context.Operators.ValueSetUnion(s_, y_);
 			bool? aa_(Extension @this)
 			{
@@ -309,8 +309,8 @@ public class SupplementalDataElements_3_4_000
 			var ab_ = context.Operators.WhereOrNull<Extension>(((R is Element)
 					? ((R as Element).Extension)
 					: null), aa_);
-			var ad_ = context.Operators.SelectOrNull<Extension, DataType>(ab_, p_);
-			var ae_ = context.Operators.SingleOrNull<DataType>(ad_);
+			var ad_ = context.Operators.Select<Extension, DataType>(ab_, p_);
+			var ae_ = context.Operators.Single<DataType>(ad_);
 			var af_ = context.Operators.Convert<string>(ae_);
 			var ag_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
@@ -320,8 +320,8 @@ public class SupplementalDataElements_3_4_000
 
 			return ag_;
 		};
-		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.Select<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		var h_ = context.Operators.Single<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}

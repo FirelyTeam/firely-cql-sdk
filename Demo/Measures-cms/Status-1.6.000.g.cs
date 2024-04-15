@@ -119,7 +119,7 @@ public class Status_1_6_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -148,7 +148,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.survey();
@@ -188,7 +188,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.survey();
@@ -568,7 +568,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.laboratory();
@@ -608,7 +608,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.laboratory();
@@ -768,7 +768,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.exam();
@@ -808,7 +808,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.exam();

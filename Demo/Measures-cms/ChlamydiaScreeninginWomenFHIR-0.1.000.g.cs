@@ -393,7 +393,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -814,11 +814,11 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			var q_ = context.Operators.WhereOrNull<ServiceRequest>(o_, p_);
 			ServiceRequest r_(ServiceRequest XrayOrder) => 
 				PregnancyTest;
-			var s_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(q_, r_);
+			var s_ = context.Operators.Select<ServiceRequest, ServiceRequest>(q_, r_);
 
 			return s_;
 		};
-		var e_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(c_, d_);
+		var e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var h_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(g_);
 		IEnumerable<ServiceRequest> i_(ServiceRequest PregnancyTestOrder)
@@ -856,11 +856,11 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			var ax_ = context.Operators.WhereOrNull<MedicationRequest>(av_, aw_);
 			ServiceRequest ay_(MedicationRequest AccutaneOrder) => 
 				PregnancyTestOrder;
-			var az_ = context.Operators.SelectOrNull<MedicationRequest, ServiceRequest>(ax_, ay_);
+			var az_ = context.Operators.Select<MedicationRequest, ServiceRequest>(ax_, ay_);
 
 			return az_;
 		};
-		var j_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(h_, i_);
+		var j_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(h_, i_);
 		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
 		var l_ = context.Operators.ExistsInList<ServiceRequest>(k_);
 

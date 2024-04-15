@@ -210,7 +210,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -280,7 +280,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return r_;
 		};
-		var i_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(g_, h_);
+		var i_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(g_, h_);
 
 		return i_;
 	}
@@ -337,11 +337,11 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			var u_ = context.Operators.WhereOrNull<Condition>(s_, t_);
 			Encounter v_(Condition AdvancedIllnessDiagnosis) => 
 				OutpatientEncounter;
-			var w_ = context.Operators.SelectOrNull<Condition, Encounter>(u_, v_);
+			var w_ = context.Operators.Select<Condition, Encounter>(u_, v_);
 
 			return w_;
 		};
-		var o_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(m_, n_);
+		var o_ = context.Operators.SelectMany<Encounter, Encounter>(m_, n_);
 
 		return o_;
 	}
@@ -364,7 +364,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
 		bool? f_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var k_ = FHIRHelpers_4_0_001.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
@@ -380,7 +380,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
 		Encounter h_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
+		var i_ = context.Operators.Select<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -415,7 +415,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(c_, d_);
 		bool? f_(Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
 		{
 			var k_ = context.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
@@ -439,7 +439,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return y_;
 		};
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(g_, h_);
+		var i_ = context.Operators.Select<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(g_, h_);
 
 		return i_;
 	}
@@ -462,7 +462,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var f_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, int?>(d_, e_);
+		var f_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(d_, e_);
 		var g_ = context.Operators.MaxOrNull<int?>(f_);
 
 		return g_;
@@ -511,11 +511,11 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			var l_ = context.Operators.WhereOrNull<Condition>(j_, k_);
 			Encounter m_(Condition AdvancedIllnessDiagnosis) => 
 				InpatientEncounter;
-			var n_ = context.Operators.SelectOrNull<Condition, Encounter>(l_, m_);
+			var n_ = context.Operators.Select<Condition, Encounter>(l_, m_);
 
 			return n_;
 		};
-		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(d_, e_);
+		var f_ = context.Operators.SelectMany<Encounter, Encounter>(d_, e_);
 
 		return f_;
 	}

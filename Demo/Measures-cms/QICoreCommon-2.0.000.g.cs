@@ -843,7 +843,7 @@ public class QICoreCommon_2_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -882,7 +882,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = context.Operators.ConvertCodeToConcept(category);
@@ -906,7 +906,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = context.Operators.ConvertCodeToConcept(category);
@@ -930,7 +930,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.problem_list_item();
@@ -955,7 +955,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.encounter_diagnosis();
@@ -980,7 +980,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.health_concern();
@@ -1005,7 +1005,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.social_history();
@@ -1030,7 +1030,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.vital_signs();
@@ -1055,7 +1055,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.imaging();
@@ -1080,7 +1080,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.laboratory();
@@ -1105,7 +1105,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.procedure();
@@ -1130,7 +1130,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.survey();
@@ -1155,7 +1155,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.exam();
@@ -1180,7 +1180,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.therapy();
@@ -1205,7 +1205,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.activity();
@@ -1230,7 +1230,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.clinical_test();
@@ -1255,7 +1255,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.Community();
@@ -1280,7 +1280,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.Discharge();
@@ -1315,8 +1315,8 @@ public class QICoreCommon_2_0_000
 
 			return (bool?)h_;
 		};
-		var d_ = context.Operators.SelectOrNull<Extension, bool?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<bool?>(d_);
+		var d_ = context.Operators.Select<Extension, bool?>(b_, c_);
+		var e_ = context.Operators.Single<bool?>(d_);
 
 		return e_;
 	}
@@ -1881,8 +1881,8 @@ public class QICoreCommon_2_0_000
 
 					return ac_();
 				};
-				var aa_ = context.Operators.SelectOrNull<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
-				var ab_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(aa_);
+				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
+				var ab_ = context.Operators.Single<CqlInterval<CqlDateTime>>(aa_);
 
 				return ab_;
 			};
@@ -1960,8 +1960,8 @@ public class QICoreCommon_2_0_000
 
 					return ac_();
 				};
-				var aa_ = context.Operators.SelectOrNull<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
-				var ab_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(aa_);
+				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
+				var ab_ = context.Operators.Single<CqlInterval<CqlDateTime>>(aa_);
 
 				return ab_;
 			};
@@ -2077,8 +2077,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.Single<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2112,8 +2112,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.Single<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2148,8 +2148,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.Single<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2183,8 +2183,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.Single<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2209,7 +2209,7 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var h_ = context.Operators.SelectOrNull<CqlInterval<int?>, int?>(f_, g_);
+		var h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
 
 		return h_;
 	}
@@ -2233,7 +2233,7 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var h_ = context.Operators.SelectOrNull<CqlInterval<int?>, int?>(f_, g_);
+		var h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
 
 		return h_;
 	}
@@ -2299,7 +2299,7 @@ public class QICoreCommon_2_0_000
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectOrNull<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
+		var c_ = context.Operators.Select<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
 
 		return c_;
 	}
@@ -2364,7 +2364,7 @@ public class QICoreCommon_2_0_000
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectOrNull<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
+		var c_ = context.Operators.Select<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
 
 		return c_;
 	}

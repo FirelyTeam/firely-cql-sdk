@@ -151,7 +151,7 @@ public class PCMaternal_5_16_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -369,8 +369,8 @@ public class PCMaternal_5_16_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.Single<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -397,11 +397,11 @@ public class PCMaternal_5_16_000
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure DeliveryProcedure) => 
 				EncounterWithAge;
-			var i_ = context.Operators.SelectOrNull<Procedure, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -709,7 +709,7 @@ public class PCMaternal_5_16_000
 
 			return e_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>(a_, b_);
 
 		return c_;
 	}

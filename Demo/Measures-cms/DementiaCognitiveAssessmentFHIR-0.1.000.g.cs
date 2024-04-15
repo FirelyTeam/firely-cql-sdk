@@ -250,7 +250,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -332,11 +332,11 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
 			Encounter h_(Condition Dementia) => 
 				EncounterAssessCognition;
-			var i_ = context.Operators.SelectOrNull<Condition, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -429,11 +429,11 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
 				CognitiveAssessment;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CognitiveAssessment)
 		{
 			var ad_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Value);
@@ -494,11 +494,11 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
 				NoCognitiveAssessment;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation NoCognitiveAssessment)
 		{
 			bool? r_(Extension @this)
@@ -512,8 +512,8 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingleOrNull<DataType>(u_);
+			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
+			var v_ = context.Operators.Single<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 			var y_ = this.Patient_Reason();

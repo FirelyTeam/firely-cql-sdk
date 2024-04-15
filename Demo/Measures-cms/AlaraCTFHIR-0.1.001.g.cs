@@ -137,7 +137,7 @@ public class AlaraCTFHIR_0_1_001
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.Single<Patient>(a_);
 
 		return b_;
 	}
@@ -241,8 +241,8 @@ public class AlaraCTFHIR_0_1_001
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<decimal?>(d_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
+		var e_ = context.Operators.Single<decimal?>(d_);
 
 		return e_;
 	}
@@ -269,8 +269,8 @@ public class AlaraCTFHIR_0_1_001
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<decimal?>(d_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
+		var e_ = context.Operators.Single<decimal?>(d_);
 
 		return e_;
 	}
@@ -339,7 +339,7 @@ public class AlaraCTFHIR_0_1_001
 			var g_ = context.Operators.WhereOrNull<CqlCode>(((e_ as CqlConcept)?.codes as IEnumerable<CqlCode>), f_);
 			string h_(CqlCode @this) => 
 				@this?.code;
-			var i_ = context.Operators.SelectOrNull<CqlCode, string>(g_, h_);
+			var i_ = context.Operators.Select<CqlCode, string>(g_, h_);
 			var j_ = context.Operators.ListContains<string>(i_, "FULLBODY");
 
 			return j_;
@@ -367,7 +367,7 @@ public class AlaraCTFHIR_0_1_001
 		var c_ = context.Operators.WhereOrNull<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
 		string d_(CqlCode @this) => 
 			@this?.code;
-		var e_ = context.Operators.SelectOrNull<CqlCode, string>(c_, d_);
+		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);
 		var f_ = context.Operators.ListContains<string>(e_, code);
 		var g_ = this.Global_Noise_Value(Obs);
 		var h_ = context.Operators.GreaterOrEqual(g_, noiseThreshold);
