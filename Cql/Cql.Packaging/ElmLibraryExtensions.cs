@@ -1,8 +1,10 @@
-﻿using Hl7.Cql.Compiler;
+﻿using System.Linq.Expressions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
+using Expression = System.Linq.Expressions.Expression;
 using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packaging
@@ -28,7 +30,14 @@ namespace Hl7.Cql.Packaging
                 new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
                 library!, builderLogger, new(false));
-            var lambda = builder.Lambda(expression);
+            DefinitionDictionary<LambdaExpression>? lambdas = null;
+            ExpressionBuilderContext? ctx = null;
+            var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
+            lambdas ??= new DefinitionDictionary<LambdaExpression>();
+            ctx ??= new ExpressionBuilderContext(builder, parameter, lambdas, new Dictionary<string, string>());
+            lambdas = new DefinitionDictionary<LambdaExpression>();
+            var translated = builder.TranslateExpression(expression, ctx);
+            var lambda = Expression.Lambda(translated, parameter);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);
         }
