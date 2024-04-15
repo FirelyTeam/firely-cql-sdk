@@ -18,7 +18,7 @@ internal partial class ExpressionBuilder
             return TypeFor(element.resultTypeSpecifier);
 
         if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
-            return _typeManager.Resolver.ResolveType(element!.resultTypeName!.Name)
+            return _typeResolver.ResolveType(element!.resultTypeName!.Name)
                    ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
 
         switch (element)
@@ -48,7 +48,7 @@ internal partial class ExpressionBuilder
                             {
                                 if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
                                 {
-                                    type = _typeManager.Resolver.ResolveType(retrieve.dataType.Name);
+                                    type = _typeResolver.ResolveType(retrieve.dataType.Name);
                                     if (type != null)
                                         return type;
                                 }
@@ -72,7 +72,7 @@ internal partial class ExpressionBuilder
                 }
                 if (sourceType != null)
                 {
-                    var property = _typeManager.Resolver.GetProperty(sourceType, propertyExpression.path);
+                    var property = _typeResolver.GetProperty(sourceType, propertyExpression.path);
                     if (property != null)
                         return property.PropertyType;
                     return typeof(object); // this is likely a choice
@@ -115,7 +115,7 @@ internal partial class ExpressionBuilder
 
         if (resultTypeSpecifier is NamedTypeSpecifier named)
         {
-            var type = _typeManager.Resolver.ResolveType(named.name.Name!);
+            var type = _typeResolver.ResolveType(named.name.Name!);
             if (type == null)
                 throw new ArgumentException("Cannot resolve type for expression");
             return type!;

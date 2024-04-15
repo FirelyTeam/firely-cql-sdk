@@ -29,7 +29,7 @@ namespace Hl7.Cql.Compiler
                         var type = TypeFor(@as.asTypeSpecifier!);
                         if (_typeResolver.ImplementsGenericIEnumerable(type))
                         {
-                            var listElementType = _typeManager.Resolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
+                            var listElementType = _typeResolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
                             var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
                             var elmAs = new ElmAsExpression(newArray, type);
                             return elmAs;
@@ -69,7 +69,7 @@ namespace Hl7.Cql.Compiler
                 if (@as.operand is null)
                     throw this.NewExpressionBuildingException("Operand cannot be null");
 
-                var type = _typeManager.Resolver.ResolveType(@as.asType.Name!)
+                var type = _typeResolver.ResolveType(@as.asType.Name!)
                     ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
                 var operand = TranslateExpression(@as.operand);
@@ -106,7 +106,7 @@ namespace Hl7.Cql.Compiler
             }
             else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
             {
-                type = _typeManager.Resolver.ResolveType(@is.isType.Name) ?? throw this.NewExpressionBuildingException($"Could not resolve type {@is.isType.Name}");
+                type = _typeResolver.ResolveType(@is.isType.Name) ?? throw this.NewExpressionBuildingException($"Could not resolve type {@is.isType.Name}");
             }
 
             if (type == null)
@@ -129,8 +129,8 @@ namespace Hl7.Cql.Compiler
             if (_typeResolver.ImplementsGenericIEnumerable(input.Type)
                 && _typeResolver.ImplementsGenericIEnumerable(outputType))
             {
-                var inputElementType = _typeManager.Resolver.GetListElementType(input.Type, true)!;
-                var outputElementType = _typeManager.Resolver.GetListElementType(outputType, true)!;
+                var inputElementType = _typeResolver.GetListElementType(input.Type, true)!;
+                var outputElementType = _typeResolver.GetListElementType(outputType, true)!;
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);

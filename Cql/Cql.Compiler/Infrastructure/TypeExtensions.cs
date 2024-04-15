@@ -14,4 +14,13 @@ internal static class TypeExtensions
     /// <param name="type">The type to check.</param>
     /// <returns>True if the type is nullable, false otherwise.</returns>
     public static bool IsNullable(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+
+    public static bool IsEnum(this Type type)
+    {
+        if (type.IsEnum)
+            return true;
+        if (type.IsNullable() && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
+            return true;
+        return false;
+    }
 }

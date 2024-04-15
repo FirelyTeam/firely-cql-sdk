@@ -22,9 +22,9 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal partial class CqlOperatorsBinding : OperatorBinding
     {
-        internal TypeConverter? TypeConverter { get; }
+        private readonly TypeConverter? _typeConverter;
 
-        internal TypeResolver TypeResolver { get; }
+        private readonly TypeResolver _typeResolver;
 
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Hl7.Cql.Compiler
             TypeResolver typeResolver,
             TypeConverter? typeConverter = null)
         {
-            TypeConverter = typeConverter;
-            TypeResolver = typeResolver;
+            _typeConverter = typeConverter;
+            _typeResolver = typeResolver;
         }
 
         /// <inheritdoc />
@@ -88,7 +88,6 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.Divide                           => BindToMethodConvertArgs(nameof(ICqlOperators.Divide), parameters),
                 CqlOperator.EndsWith                         => BindToMethodConvertArgs(nameof(ICqlOperators.EndsWith), parameters),
                 CqlOperator.EnumEqualsString                 => BindToMethodConvertArgs(nameof(ICqlOperators.EnumEqualsString), parameters),
-                CqlOperator.Equal                            => BindToMethodConvertArgs(nameof(ICqlOperators.Equal), parameters),
                 CqlOperator.Equivalent                       => BindToMethodConvertArgs(nameof(ICqlOperators.Equivalent), parameters),
                 CqlOperator.Greater                          => BindToMethodConvertArgs(nameof(ICqlOperators.Greater), parameters),
                 CqlOperator.GreaterOrEqual                   => BindToMethodConvertArgs(nameof(ICqlOperators.GreaterOrEqual), parameters),
@@ -206,10 +205,10 @@ namespace Hl7.Cql.Compiler
 
                 // Direct Bindings
                 CqlOperator.Aggregate                        => BindToGenericMethod(methodName:nameof(ICqlOperators.AggregateOrNull),
-                                                                    genericTypeArguments:[TypeResolver.GetListElementType(parameters[0].Type, true)!, parameters[2].Type],
+                                                                    genericTypeArguments:[_typeResolver.GetListElementType(parameters[0].Type, true)!, parameters[2].Type],
                                                                     parameters[0], parameters[2], parameters[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
                 CqlOperator.CrossJoin                        => BindToGenericMethod(methodName:nameof(ICqlOperators.CrossJoin),
-                                                                    genericTypeArguments:parameters.SelectToArray(s => TypeResolver.GetListElementType(s.Type, true)!),
+                                                                    genericTypeArguments:parameters.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!),
                                                                     parameters),
                 CqlOperator.Date                             => BindToMethod(nameof(ICqlOperators.Date), parameters),
                 CqlOperator.DateTime                         => BindToMethod(nameof(ICqlOperators.DateTime)!, parameters),
@@ -222,6 +221,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.ToList                           => BindToGenericMethod(nameof(ICqlOperators.ToList), genericTypeArguments:[parameters[0].Type], parameters),
 
                 // Special cases
+                CqlOperator.Equal                            => Equal(parameters[0], parameters[1]),
                 CqlOperator.Convert                          => BindConvert(parameters[0], parameters[1]),
                 CqlOperator.Coalesce                         => Coalesce(parameters[0]),
                 CqlOperator.Expand                           => Expand(parameters[0], parameters[1]),

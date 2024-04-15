@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -30,48 +30,7 @@ namespace Hl7.Cql.Compiler
             return _operatorBinding.BindToMethod(CqlOperator.Not, equal);
         }
 
-        protected Expression Equal(Expression left, Expression right)
-        {
-            if (IsEnum(left.Type))
-            {
-                if (IsEnum(right.Type))
-                {
-                    var equal = Expression.Equal(left, right);
-                    var asNullable = _operatorBinding.ConvertToType<bool?>(equal);
-                    return asNullable;
-                }
-                else if (right.Type == typeof(string))
-                {
-                    return _operatorBinding.BindToMethod(CqlOperator.EnumEqualsString, Expression.Convert(left, typeof(object)), right);
-                }
-                else throw new NotImplementedException().WithContext(this);
-            }
-            else if (IsEnum(right.Type))
-            {
-                if (left.Type == typeof(string))
-                {
-                    return _operatorBinding.BindToMethod(CqlOperator.EnumEqualsString, Expression.Convert(right, typeof(object)), left);
-
-                }
-                else throw new NotImplementedException().WithContext(this);
-            }
-            else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
-            {
-                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type, true)!;
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
-                {
-                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type, true)!;
-                    if (rightElementType != leftElementType)
-                        throw this.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                    return _operatorBinding.BindToMethod(CqlOperator.ListEqual, left, right);
-                }
-                throw new NotImplementedException().WithContext(this);
-            }
-            else
-            {
-                return _operatorBinding.BindToMethod(CqlOperator.Equal, left, right);
-            }
-        }
+        protected Expression Equal(Expression left, Expression right) => _operatorBinding.BindToMethod(CqlOperator.Equal, left, right);
 
         protected Expression Equivalent(Elm.Equivalent eqv)
         {
@@ -79,10 +38,10 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(eqv.operand![1]);
             if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
-                var leftElementType = _typeManager.Resolver.GetListElementType(left.Type);
+                var leftElementType = _typeResolver.GetListElementType(left.Type);
                 if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
                 {
-                    var rightElementType = _typeManager.Resolver.GetListElementType(right.Type);
+                    var rightElementType = _typeResolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                     {
                         // This appears in the CQL tests:

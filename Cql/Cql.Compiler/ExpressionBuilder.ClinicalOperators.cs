@@ -38,11 +38,11 @@ namespace Hl7.Cql.Compiler
             var code = TranslateExpression(e.code!);
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
             var codeType = code.Type;
-            if (codeType == _typeManager.Resolver.CodeType)
+            if (codeType == _typeResolver.CodeType)
             {
                 return _operatorBinding.BindToMethod(CqlOperator.CodeInValueSet, code, valueSet);
             }
-            else if (codeType == _typeManager.Resolver.ConceptType)
+            else if (codeType == _typeResolver.ConceptType)
             {
                 return _operatorBinding.BindToMethod(CqlOperator.ConceptInValueSet, code, valueSet);
             }
@@ -58,13 +58,13 @@ namespace Hl7.Cql.Compiler
             var codes = TranslateExpression(e.codes!);
             if (!_typeResolver.ImplementsGenericIEnumerable(codes.Type))
                 throw this.NewExpressionBuildingException("Only List types are allowed for AnyInValueSet");
-            var codeType = _typeManager.Resolver.GetListElementType(codes.Type, true)!;
+            var codeType = _typeResolver.GetListElementType(codes.Type, true)!;
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
-            if (codeType == _typeManager.Resolver.CodeType)
+            if (codeType == _typeResolver.CodeType)
             {
                 return _operatorBinding.BindToMethod(CqlOperator.CodesInValueSet, codes, valueSet);
             }
-            else if (codeType == _typeManager.Resolver.ConceptType)
+            else if (codeType == _typeResolver.ConceptType)
             {
                 return _operatorBinding.BindToMethod(CqlOperator.ConceptsInValueSet, codes, valueSet);
             }

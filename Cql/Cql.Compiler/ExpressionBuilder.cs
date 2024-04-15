@@ -25,6 +25,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
 using Expression = System.Linq.Expressions.Expression;
+using TypeExtensions = Hl7.Cql.Compiler.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Compiler
 {
@@ -180,16 +181,16 @@ namespace Hl7.Cql.Compiler
                             Today today                => _operatorBinding.BindToMethod(CqlOperator.Today),
 
                             ToBoolean e                => ChangeType(TranslateExpression(e.operand!), typeof(bool?)),
-                            ToConcept tc               => ChangeType(TranslateExpression(tc.operand!), _typeManager.Resolver.ConceptType),
-                            ToDateTime tdte            => ChangeType(TranslateExpression(tdte.operand!), _typeManager.Resolver.DateTimeType),
-                            ToDate tde                 => ChangeType(TranslateExpression(tde.operand!), _typeManager.Resolver.DateType),
+                            ToConcept tc               => ChangeType(TranslateExpression(tc.operand!), _typeResolver.ConceptType),
+                            ToDateTime tdte            => ChangeType(TranslateExpression(tdte.operand!), _typeResolver.DateTimeType),
+                            ToDate tde                 => ChangeType(TranslateExpression(tde.operand!), _typeResolver.DateType),
                             ToDecimal tde              => ChangeType(TranslateExpression(tde.operand!), typeof(decimal?)),
                             ToInteger tde              => ChangeType(TranslateExpression(tde.operand!), typeof(int?)),
                             ToList tle                 => _operatorBinding.BindToMethod(CqlOperator.ToList, TranslateExpression(tle.operand!)),
                             ToLong toLong              => ChangeType(TranslateExpression(toLong.operand!), typeof(long?)),
-                            ToQuantity tq              => ChangeType(TranslateExpression(tq.operand!), _typeManager.Resolver.QuantityType),
+                            ToQuantity tq              => ChangeType(TranslateExpression(tq.operand!), _typeResolver.QuantityType),
                             ToString e                 => ChangeType(TranslateExpression(e.operand!), typeof(string)),
-                            ToTime e                   => ChangeType(TranslateExpression(e.operand!), _typeManager.Resolver.TimeType),
+                            ToTime e                   => ChangeType(TranslateExpression(e.operand!), _typeResolver.TimeType),
 
                             After after                => After(after),
                             AliasRef ar                => GetScopeExpression(ar.name!),
@@ -242,12 +243,12 @@ namespace Hl7.Cql.Compiler
                             Length len                 => Length(len),
                             List list                  => List(list),
                             Literal lit                => Literal(lit),
-                            MaxValue max               => _operatorBinding.BindToMethod(CqlOperator.MaximumValue, Expression.Constant(_typeManager.Resolver.ResolveType(max.valueType!.Name), typeof(Type))),
+                            MaxValue max               => _operatorBinding.BindToMethod(CqlOperator.MaximumValue, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
                             Meets meets                => Meets(meets),
                             MeetsBefore meets          => MeetsBefore(meets),
                             MeetsAfter meets           => MeetsAfter(meets),
                             Message msg                => Message(msg),
-                            MinValue min               => _operatorBinding.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(_typeManager.Resolver.ResolveType(min.valueType!.Name), typeof(Type))),
+                            MinValue min               => _operatorBinding.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
                             NotEqual ne                => NotEqual(ne),
                             Now now                    => _operatorBinding.BindToMethod(CqlOperator.Now),
                             Null @null                 => Expression.Constant(null, TypeFor(@null) ?? typeof(object)),
@@ -461,7 +462,7 @@ namespace Hl7.Cql.Compiler
             var instanceType = _typeResolver.ResolveType(ine.classType.Name!)
                                ?? throw this.NewExpressionBuildingException($"Could not resolve type for '{ine.classType.Name!}'");
 
-            if (IsEnum(instanceType))
+            if (instanceType.IsEnum())
             {
                 // constructs like:
                 // FHIR.RemittanceOutcome {value: 'complete'}
@@ -1012,7 +1013,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (expectedType == typeof(string))
                 {
-                    if (IsEnum(result.Type))
+                    if (result.Type.IsEnum())
                         return result;
                 }
                 result = ChangeType(result, expectedType);

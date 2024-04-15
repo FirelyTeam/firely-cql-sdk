@@ -214,15 +214,6 @@ partial class ExpressionBuilder
         return NormalizeIdentifier(typeName!)!;
     }
 
-    private static bool IsEnum(Type type)
-    {
-        if (type.IsEnum)
-            return true;
-        if (type.IsNullable() && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
-            return true;
-        return false;
-    }
-
     protected interface IPopToken : IDisposable
     {
         void Pop();

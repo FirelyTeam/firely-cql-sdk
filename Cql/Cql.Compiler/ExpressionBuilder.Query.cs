@@ -40,7 +40,7 @@ internal partial class ExpressionBuilder
                 throw this.NewExpressionBuildingException("Queries must define at least 1 source");
 
             var (@return, sourcesPreviouslySingletons) = ProcessQuerySources(query);
-            var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
+            var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
 
             ParameterExpression scopeParameter;
             if (sources.Length == 1)
@@ -230,7 +230,7 @@ internal partial class ExpressionBuilder
             {
                 var sourceType = TranslateExpression(s.expression).Type;
                 var isEnumerationType = _typeResolver.ImplementsGenericIEnumerable(sourceType);
-                if (isEnumerationType) sourceType = _typeManager.Resolver.GetListElementType(sourceType, true)!;
+                if (isEnumerationType) sourceType = _typeResolver.GetListElementType(sourceType, true)!;
                 return (
                     s.alias,
                     sourceType,
@@ -342,7 +342,7 @@ internal partial class ExpressionBuilder
         //        });
 
         Type[] sourceListElementTypes = promotedSourceExpressions
-            .SelectToArray(pse => _typeManager.Resolver.GetListElementType(pse.Type, true)!);
+            .SelectToArray(pse => _typeResolver.GetListElementType(pse.Type, true)!);
 
         var aliasAndElementTypes = aliases
             .Zip(sourceListElementTypes, (alias, elementType) => (alias, elementType))
@@ -354,7 +354,7 @@ internal partial class ExpressionBuilder
         // (A,B,C)
         const BindingFlags bfPublicInstance = BindingFlags.Public | BindingFlags.Instance;
 
-        Type valueTupleType = _typeManager.Resolver.GetListElementType(funcResultType, true)!;
+        Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
         FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
 
         Type cqlTupleType = TupleTypeFor(aliasAndElementTypes);
@@ -409,7 +409,7 @@ internal partial class ExpressionBuilder
                         case ByExpression byExpression:
                         {
                             var parameterName = "@this";
-                            var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
+                            var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
                             var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
                             using (PushScopes(parameterName,
                                        KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
@@ -423,7 +423,7 @@ internal partial class ExpressionBuilder
                         case ByColumn byColumn:
                         {
                             var parameterName = "@this";
-                            var returnElementType = _typeManager.Resolver.GetListElementType(@return.Type, true)!;
+                            var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
                             var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
                             var pathMemberType = TypeFor(byColumn);
                             if (pathMemberType == null)
@@ -478,7 +478,7 @@ internal partial class ExpressionBuilder
             var newArray = Expression.NewArrayInit(source.Type, source);
             source = newArray;
         }
-        var sourceElementType = _typeManager.Resolver.GetListElementType(source.Type)!;
+        var sourceElementType = _typeResolver.GetListElementType(source.Type)!;
 
         var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         using (PushScopes(ImpliedAlias, KeyValuePair.Create(with.alias!, ((Expression)whereLambdaParameter, (Element)with))))
@@ -528,7 +528,7 @@ internal partial class ExpressionBuilder
             }
             else if (!string.IsNullOrWhiteSpace(queryAggregate.resultTypeName.Name!))
             {
-                resultType = _typeManager.Resolver.ResolveType(queryAggregate.resultTypeName.Name!);
+                resultType = _typeResolver.ResolveType(queryAggregate.resultTypeName.Name!);
             }
 
             if (resultType is null)

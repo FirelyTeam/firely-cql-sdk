@@ -26,7 +26,7 @@ partial class CqlOperatorsBinding
             return true;
         }
 
-        if (TypeConverter?.CanConvert(from, to) == true)
+        if (_typeConverter?.CanConvert(from, to) == true)
         {
             toExpr = BindToGenericMethod(
                 nameof(ICqlOperators.Convert),
