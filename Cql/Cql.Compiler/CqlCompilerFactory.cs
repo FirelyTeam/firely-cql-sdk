@@ -30,12 +30,13 @@ internal class CqlCompilerFactory : CqlAbstractionsFactory
     public virtual TypeResolver TypeResolver => Singleton(NewTypeResolver);
     protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);
 
-    public virtual CqlOperatorsBinding OperatorsBinding => Singleton(NewCqlOperatorsBinding);
-    protected virtual CqlOperatorsBinding NewCqlOperatorsBinding() => new(TypeResolver, TypeConverter);
+    public virtual CqlOperatorsBinder OperatorsBinder => Singleton(NewCqlOperatorsBinding);
+    protected virtual CqlOperatorsBinder NewCqlOperatorsBinding() => new(TypeResolver, TypeConverter);
 
     public virtual TypeManager TypeManager => Singleton(NewTypeManager);
     protected virtual TypeManager NewTypeManager() => new(TypeResolver);
 
     public virtual LibraryDefinitionsBuilder LibraryDefinitionsBuilder => Singleton(NewLibraryDefinitionsBuilder);
-    protected virtual LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder() => new(LoggerFactory, OperatorsBinding, TypeManager, TypeConverter);
+    protected virtual LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder() =>
+        new(new (LoggerFactory, OperatorsBinder, TypeManager, TypeConverter, LibraryDefinitionBuilderSettings.Default));
 }

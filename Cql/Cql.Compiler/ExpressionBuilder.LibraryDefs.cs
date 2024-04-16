@@ -255,17 +255,18 @@ partial class ExpressionBuilder
                     defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default), typeof(object));
                 else defaultValue = CqlExpressions.NullObject_ConstantExpression;
 
-                var resolveParam = Expression.Call(
-                    CqlExpressions.ParameterExpression,
-                    nameof(CqlContext.ResolveParameter),
-                    null,
-                    Expression.Constant(_libraryContext.LibraryKey),
-                    Expression.Constant(parameter.name),
-                    defaultValue
-                );
+                var resolveParam =
+                    Expression.Call(
+                        CqlExpressions.ParameterExpression,
+                        nameof(CqlContext.ResolveParameter),
+                        null,
+                        Expression.Constant(_libraryContext.LibraryKey),
+                        Expression.Constant(parameter.name),
+                        defaultValue
+                    );
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier);
-                var cast = Expression.Convert(resolveParam, parameterType); // @TODO: Cast
+                var cast = _operatorBinder.CastToType(resolveParam, parameterType); 
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
                 var lambda = Expression.Lambda(cast, CqlExpressions.ParameterExpression);
                 _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, parameter.name!, lambda);

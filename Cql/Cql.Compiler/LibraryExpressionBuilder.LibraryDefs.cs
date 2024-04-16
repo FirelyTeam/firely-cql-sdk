@@ -3,32 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
 internal partial class LibraryExpressionBuilder
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
-    private readonly OperatorBinding _operatorBinding;
-    private readonly TypeManager _typeManager;
-    private readonly ILoggerFactory _loggerFactory;
-    private readonly TypeConverter _typeConverter;
-
-    public Library Library { get; }
-
-    public string LibraryKey => Library.NameAndVersion()!;
-
-    public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
-
-    public ExpressionBuilder CreateExpressionBuilder() =>
-        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _typeConverter, _libraryDefinitionBuilderSettings, this);
-
     #region Definitions
 
     public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }

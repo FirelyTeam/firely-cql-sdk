@@ -5,7 +5,7 @@ using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler;
 
-partial class CqlOperatorsBinding
+partial class CqlOperatorsBinder
 {
     private bool TryConvert(
         Expression fromExpr,

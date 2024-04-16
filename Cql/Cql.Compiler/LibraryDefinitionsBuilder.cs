@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
@@ -11,28 +9,15 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class LibraryDefinitionsBuilder
 {
-    private readonly TypeManager _typeManager;
-    private readonly TypeConverter _typeConverter;
-    private readonly ILoggerFactory _loggerFactory;
-    private readonly OperatorBinding _operatorBinding;
+    private readonly ExpressionBuildingDependencies _dependencies;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibraryDefinitionsBuilder"/> class.
     /// </summary>
-    /// <param name="loggerFactory">The logger factory.</param>
-    /// <param name="operatorBinding">The operator binding.</param>
-    /// <param name="typeManager">The type manager.</param>
-    /// <param name="typeConverter">The type converter.</param>
     public LibraryDefinitionsBuilder(
-        ILoggerFactory loggerFactory,
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        TypeConverter typeConverter)
+        ExpressionBuildingDependencies dependencies)
     {
-        _typeManager = typeManager;
-        _loggerFactory = loggerFactory;
-        _operatorBinding = operatorBinding;
-        _typeConverter = typeConverter;
+        _dependencies = dependencies;
     }
 
     /// <summary>
@@ -44,7 +29,7 @@ internal class LibraryDefinitionsBuilder
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? definitions = null) =>
-        new LibrarySetExpressionBuilder(_loggerFactory, _operatorBinding, _typeManager, _typeConverter, LibraryDefinitionBuilderSettings.Default, librarySet, definitions ?? new())
+        new LibrarySetExpressionBuilder(_dependencies, librarySet, definitions ?? new())
             .ProcessLibrarySet();
 
     /// <summary>
@@ -56,6 +41,6 @@ internal class LibraryDefinitionsBuilder
     public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
         DefinitionDictionary<LambdaExpression>? definitions = null) =>
-        new LibraryExpressionBuilder(_loggerFactory, _operatorBinding, _typeManager, _typeConverter, library, LibraryDefinitionBuilderSettings.Default, definitions ?? new())
+        new LibraryExpressionBuilder(_dependencies, library, definitions ?? new())
             .ProcessLibrary();
 }

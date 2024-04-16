@@ -12,7 +12,7 @@ using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Compiler;
-partial class CqlOperatorsBinding
+partial class CqlOperatorsBinder
 {
     private Expression Equal(Expression left, Expression right)
     {

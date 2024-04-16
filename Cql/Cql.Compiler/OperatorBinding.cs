@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
 
@@ -14,7 +15,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Binds <see cref="CqlOperator"/>s to <see cref="Expression"/>s.
     /// </summary>
-    internal abstract class OperatorBinding
+    internal abstract class OperatorBinder
     {
         /// <summary>
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
@@ -30,7 +31,7 @@ namespace Hl7.Cql.Compiler
         /// <param name="expression">The expression to convert.</param>
         /// <param name="type">The type to convert the expression to.</param>
         /// <returns>The converted expression.</returns>
-        public abstract Expression ConvertToType(Expression expression, System.Type type);
+        public abstract Expression ConvertToType(Expression expression, Type type);
 
         /// <summary>
         /// Converts the given <paramref name="expression"/> to the specified type <typeparamref name="T"/>.
@@ -40,5 +41,21 @@ namespace Hl7.Cql.Compiler
         /// <returns>The converted expression.</returns>
         public Expression ConvertToType<T>(Expression expression) =>
             ConvertToType(expression, typeof(T));
+
+        /// <summary>
+        /// Casts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
+        /// </summary>
+        /// <param name="expression">The expression to cast.</param>
+        /// <param name="type">The type to cast the expression to.</param>
+        /// <returns>The expression that was cast.</returns>
+        public abstract Expression CastToType(Expression expression, Type type);
+    }
+
+    internal abstract class ContextBinder
+    {
+        public abstract Expression ResolveParameter(
+            string libraryKey,
+            string parameterName,
+            Expression defaultValue);
     }
 }

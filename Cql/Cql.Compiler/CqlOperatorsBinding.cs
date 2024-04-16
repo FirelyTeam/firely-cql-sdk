@@ -17,9 +17,9 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// Implements <see cref="OperatorBinding"/> by calling methods in <see cref="CqlOperators"/>.
+    /// Implements <see cref="OperatorBinder"/> by calling methods in <see cref="CqlOperators"/>.
     /// </summary>
-    internal partial class CqlOperatorsBinding : OperatorBinding
+    internal partial class CqlOperatorsBinder : OperatorBinder
     {
         private readonly TypeConverter? _typeConverter;
 
@@ -39,7 +39,7 @@ namespace Hl7.Cql.Compiler
         /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
         /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
         /// </param>
-        public CqlOperatorsBinding(
+        public CqlOperatorsBinder(
             TypeResolver typeResolver,
             TypeConverter? typeConverter = null)
         {
@@ -251,6 +251,15 @@ namespace Hl7.Cql.Compiler
         public override Expression ConvertToType(Expression expression, Type type) =>
             TryConvert(expression, type, out var convertedExpression)
                 ? convertedExpression
-                : expression;
+                : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
+
+        ///// <inheritdoc />
+        public override Expression CastToType(Expression expression, Type type)
+        {
+            if (expression.Type != typeof(object))
+                throw new ArgumentException("Cast only allowed on Object typed expressions.", nameof(expression));
+
+            return Expression.Convert(expression, type);
+        }
     }
 }

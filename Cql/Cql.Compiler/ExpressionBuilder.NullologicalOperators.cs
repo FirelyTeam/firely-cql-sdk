@@ -24,7 +24,7 @@ namespace Hl7.Cql.Compiler
                 .SelectToArray(op => TranslateExpression(op));
             if (operands.Length == 1 && _typeResolver.ImplementsGenericIEnumerable(operands[0].Type))
             {
-                return _operatorBinding.BindToMethod(CqlOperator.Coalesce, operands[0]);
+                return _operatorBinder.BindToMethod(CqlOperator.Coalesce, operands[0]);
             }
             var distinctOperandTypes = operands
                 .Select(op => op.Type)

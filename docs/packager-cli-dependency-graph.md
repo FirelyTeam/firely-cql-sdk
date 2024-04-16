@@ -34,6 +34,12 @@ classDiagram
         class LibrarySet{
         }
 
+        class ExpressionBuildingDependencies{
+        }
+
+        class LibraryDefinitionBuilderSettings {
+        }
+
         class ExpressionBuilder{
         }
 
@@ -47,10 +53,10 @@ classDiagram
 %%            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
 
-        class OperatorBinding {
+        class OperatorBinder {
         }
 
-        class CqlOperatorsBinding {
+        class CqlOperatorsBinder {
         }
 
         class TypeConverter {
@@ -100,7 +106,7 @@ classDiagram
     %% Inheritance  
 
    
-    CqlOperatorsBinding --> OperatorBinding : inherits
+    CqlOperatorsBinder --> OperatorBinder : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
@@ -112,11 +118,8 @@ classDiagram
     
     Expression ..> ExpressionBuilder : processed by
 
-    ExpressionBuilder ..> LibraryExpressionBuilder : created by
-    Library ..> LibraryExpressionBuilder : processed by
-
-    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : created by
     LibrarySet ..> LibrarySetExpressionBuilder : processed by
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : created by
 
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     LibraryDefinitionsBuilder ..> CqlToResourcePackagingPipeline : injected
@@ -125,14 +128,23 @@ classDiagram
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
     CqlToResourcePackagingPipeline ..> PackagerCliProgram : injected
       
-    TypeResolver ..> CqlOperatorsBinding : injected
-    TypeConverter ..> CqlOperatorsBinding : injected
+    TypeResolver ..> CqlOperatorsBinder : injected
+    TypeConverter ..> CqlOperatorsBinder : injected
 
     ModelInspector ..> TypeConverter : injected  
 
-    OperatorBinding ..> LibraryDefinitionsBuilder : injected
-    TypeManager ..> LibraryDefinitionsBuilder : injected
+    ExpressionBuildingDependencies ..> LibraryDefinitionsBuilder : injected
     LibrarySetExpressionBuilder ..> LibraryDefinitionsBuilder : created by
+
+    ILoggerFactory ..> ExpressionBuildingDependencies : injected
+    OperatorBinder ..> ExpressionBuildingDependencies : injected
+    TypeManager ..> ExpressionBuildingDependencies : injected
+    TypeConverter ..> ExpressionBuildingDependencies : injected
+    TypeResolver ..> ExpressionBuildingDependencies : injected (via TypeManager)
+    LibraryDefinitionBuilderSettings ..> ExpressionBuildingDependencies : injected (static)
+
+    ExpressionBuilder ..> LibraryExpressionBuilder : created by
+    Library ..> LibraryExpressionBuilder : processed by
 
     TypeResolver ..> TypeManager : injected
 

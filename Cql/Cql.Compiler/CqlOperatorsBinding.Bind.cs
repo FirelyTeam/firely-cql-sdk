@@ -8,7 +8,7 @@ using Hl7.Cql.Operators;
 namespace Hl7.Cql.Compiler;
 
 #pragma warning disable CS1591
-partial class CqlOperatorsBinding
+partial class CqlOperatorsBinder
 {
     private static readonly IReadOnlyDictionary<string, MethodInfo[]> ICqlOperators_MethodInfos_By_Name =
         typeof(ICqlOperators)

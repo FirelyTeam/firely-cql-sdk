@@ -1,27 +1,22 @@
 ﻿using System.Linq.Expressions;
-using Hl7.Cql.Conversion;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
 internal partial class LibrarySetExpressionBuilder
 {
+    private readonly ExpressionBuildingDependencies _dependencies;
+    private readonly LibrarySet _librarySet;
+    private readonly BuilderDebuggerInfo _debuggerInfo;
+
     public LibrarySetExpressionBuilder(
-        ILoggerFactory loggerFactory,
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        TypeConverter typeConverter,
-        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
+        ExpressionBuildingDependencies dependencies,
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {
         // External Services
-        _loggerFactory = loggerFactory;
-        _operatorBinding = operatorBinding;
-        _typeManager = typeManager;
-        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
-        _typeConverter = typeConverter;
+        _dependencies = dependencies;
 
         // External State
         _librarySet = librarySet;
@@ -42,4 +37,12 @@ internal partial class LibrarySetExpressionBuilder
 
             return LibrarySetDefinitions;
         });
+
+    public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
+    public LibrarySet LibrarySet => _librarySet;
+
+    private LibraryExpressionBuilder CreateLibraryExpressionBuilder(
+        Library library,
+        DefinitionDictionary<LambdaExpression>? definitions = null) =>
+        new(_dependencies, library, definitions ?? new(), this);
 }

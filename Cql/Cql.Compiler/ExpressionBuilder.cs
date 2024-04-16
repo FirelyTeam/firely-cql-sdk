@@ -38,7 +38,7 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     partial class ExpressionBuilder
     {
-        private readonly OperatorBinding _operatorBinding;
+        private readonly OperatorBinder _operatorBinder;
         private readonly TypeManager _typeManager;
         private readonly ILogger<ExpressionBuilder> _logger;
         private readonly TypeConverter _typeConverter;
@@ -71,22 +71,20 @@ namespace Hl7.Cql.Compiler
         private readonly Dictionary<string, Func<ParameterExpression[], LambdaExpression>> _customImplementations;
 
         internal ExpressionBuilder(
-            ILogger<ExpressionBuilder> logger,
-            OperatorBinding operatorBinding,
-            TypeManager typeManager,
-            TypeConverter typeConverter,
-            LibraryDefinitionBuilderSettings settings,
+
+            ExpressionBuildingDependencies dependencies,
             LibraryExpressionBuilder libContext)
         {
             // External Services
-            _operatorBinding = operatorBinding;
-            _typeManager = typeManager;
-            _logger = logger;
-            _typeConverter = typeConverter;
-            _typeResolver = _typeManager.Resolver;
+            _operatorBinder = dependencies.OperatorBinder;
+            _typeManager = dependencies.TypeManager;
+            _libraryDefinitionBuilderSettings = dependencies.LibraryDefinitionBuilderSettings;
+            _typeConverter = dependencies.TypeConverter;
+            _typeConverter = dependencies.TypeConverter;
+            _typeResolver = dependencies.TypeResolver;
+            _logger = dependencies.LoggerFactory.CreateLogger<ExpressionBuilder>();
 
             // External State
-            _libraryDefinitionBuilderSettings = settings ?? throw new ArgumentNullException(nameof(settings));
             _libraryContext = libContext;
 
             // Internal State
@@ -138,48 +136,48 @@ namespace Hl7.Cql.Compiler
                             Upper e                    => UnaryOperator(CqlOperator.Upper, e),
                             Width width                => UnaryOperator(CqlOperator.Width, width),
 
-                            Add add                    => _operatorBinding.BindToMethod(CqlOperator.Add, TranslateExpression(add.operand![0]), TranslateExpression(add.operand![1])),
-                            And and                    => _operatorBinding.BindToMethod(CqlOperator.And, TranslateExpression(and.operand![0]), TranslateExpression(and.operand![1])),   // https://cql.hl7.org/09-b-cqlreference.html#and
-                            Divide divide              => _operatorBinding.BindToMethod(CqlOperator.Divide, TranslateExpression(divide.operand![0]), TranslateExpression(divide.operand![1])),
-                            EndsWith e                 => _operatorBinding.BindToMethod(CqlOperator.EndsWith, TranslateExpression(e.operand![0]), TranslateExpression(e.operand![1])),
-                            Greater gtr                => _operatorBinding.BindToMethod(CqlOperator.Greater, TranslateExpression(gtr.operand![0]), TranslateExpression(gtr.operand![1])),
-                            GreaterOrEqual gtre        => _operatorBinding.BindToMethod(CqlOperator.GreaterOrEqual, TranslateExpression(gtre.operand![0]), TranslateExpression(gtre.operand![1])),
-                            HighBoundary hb            => _operatorBinding.BindToMethod(CqlOperator.HighBoundary, TranslateExpression(hb.operand![0]), TranslateExpression(hb.operand![1])),
-                            Implies implies            => _operatorBinding.BindToMethod(CqlOperator.Implies, TranslateExpression(implies.operand![0]), TranslateExpression(implies.operand![1])), // https://cql.hl7.org/09-b-cqlreference.html#implies
-                            Less less                  => _operatorBinding.BindToMethod(CqlOperator.Less, TranslateExpression(less.operand![0]), TranslateExpression(less.operand![1])),
-                            LessOrEqual lesse          => _operatorBinding.BindToMethod(CqlOperator.LessOrEqual, TranslateExpression(lesse.operand![0]), TranslateExpression(lesse.operand![1])),
-                            Log log                    => _operatorBinding.BindToMethod(CqlOperator.Log, TranslateExpression(log.operand![0]), TranslateExpression(log.operand![1])),
-                            LowBoundary lb             => _operatorBinding.BindToMethod(CqlOperator.LowBoundary, TranslateExpression(lb.operand![0]), TranslateExpression(lb.operand![1])),
-                            Matches e                  => _operatorBinding.BindToMethod(CqlOperator.Matches, TranslateExpression(e.operand![0]), TranslateExpression(e.operand![1])),
-                            Modulo mod                 => _operatorBinding.BindToMethod(CqlOperator.Modulo, TranslateExpression(mod.operand![0]), TranslateExpression(mod.operand![1])),
-                            Multiply mul               => _operatorBinding.BindToMethod(CqlOperator.Multiply, TranslateExpression(mul.operand![0]), TranslateExpression(mul.operand![1])),
-                            Or or                      => _operatorBinding.BindToMethod(CqlOperator.Or, TranslateExpression(or.operand![0]), TranslateExpression(or.operand![1])), // https://cql.hl7.org/09-b-cqlreference.html#or
-                            Power pow                  => _operatorBinding.BindToMethod(CqlOperator.Pow, TranslateExpression(pow.operand![0]), TranslateExpression(pow.operand![1])),
-                            Subtract sub               => _operatorBinding.BindToMethod(CqlOperator.Subtract, TranslateExpression(sub.operand![0]), TranslateExpression(sub.operand![1])),
-                            StartsWith e               => _operatorBinding.BindToMethod(CqlOperator.StartsWith, TranslateExpression(e.operand![0]), TranslateExpression(e.operand![1])),
-                            TruncatedDivide div        => _operatorBinding.BindToMethod(CqlOperator.TruncatedDivide, TranslateExpression(div.operand![0]), TranslateExpression(div.operand![1])),
-                            Xor xor                    => _operatorBinding.BindToMethod(CqlOperator.Xor, TranslateExpression(xor.operand![0]), TranslateExpression(xor.operand![1])),
+                            Add add                    => _operatorBinder.BindToMethod(CqlOperator.Add, TranslateExpression(add.operand![0]), TranslateExpression(add.operand![1])),
+                            And and                    => _operatorBinder.BindToMethod(CqlOperator.And, TranslateExpression(and.operand![0]), TranslateExpression(and.operand![1])),   // https://cql.hl7.org/09-b-cqlreference.html#and
+                            Divide divide              => _operatorBinder.BindToMethod(CqlOperator.Divide, TranslateExpression(divide.operand![0]), TranslateExpression(divide.operand![1])),
+                            EndsWith e                 => _operatorBinder.BindToMethod(CqlOperator.EndsWith, TranslateExpression(e.operand![0]), TranslateExpression(e.operand![1])),
+                            Greater gtr                => _operatorBinder.BindToMethod(CqlOperator.Greater, TranslateExpression(gtr.operand![0]), TranslateExpression(gtr.operand![1])),
+                            GreaterOrEqual gtre        => _operatorBinder.BindToMethod(CqlOperator.GreaterOrEqual, TranslateExpression(gtre.operand![0]), TranslateExpression(gtre.operand![1])),
+                            HighBoundary hb            => _operatorBinder.BindToMethod(CqlOperator.HighBoundary, TranslateExpression(hb.operand![0]), TranslateExpression(hb.operand![1])),
+                            Implies implies            => _operatorBinder.BindToMethod(CqlOperator.Implies, TranslateExpression(implies.operand![0]), TranslateExpression(implies.operand![1])), // https://cql.hl7.org/09-b-cqlreference.html#implies
+                            Less less                  => _operatorBinder.BindToMethod(CqlOperator.Less, TranslateExpression(less.operand![0]), TranslateExpression(less.operand![1])),
+                            LessOrEqual lesse          => _operatorBinder.BindToMethod(CqlOperator.LessOrEqual, TranslateExpression(lesse.operand![0]), TranslateExpression(lesse.operand![1])),
+                            Log log                    => _operatorBinder.BindToMethod(CqlOperator.Log, TranslateExpression(log.operand![0]), TranslateExpression(log.operand![1])),
+                            LowBoundary lb             => _operatorBinder.BindToMethod(CqlOperator.LowBoundary, TranslateExpression(lb.operand![0]), TranslateExpression(lb.operand![1])),
+                            Matches e                  => _operatorBinder.BindToMethod(CqlOperator.Matches, TranslateExpression(e.operand![0]), TranslateExpression(e.operand![1])),
+                            Modulo mod                 => _operatorBinder.BindToMethod(CqlOperator.Modulo, TranslateExpression(mod.operand![0]), TranslateExpression(mod.operand![1])),
+                            Multiply mul               => _operatorBinder.BindToMethod(CqlOperator.Multiply, TranslateExpression(mul.operand![0]), TranslateExpression(mul.operand![1])),
+                            Or or                      => _operatorBinder.BindToMethod(CqlOperator.Or, TranslateExpression(or.operand![0]), TranslateExpression(or.operand![1])), // https://cql.hl7.org/09-b-cqlreference.html#or
+                            Power pow                  => _operatorBinder.BindToMethod(CqlOperator.Pow, TranslateExpression(pow.operand![0]), TranslateExpression(pow.operand![1])),
+                            Subtract sub               => _operatorBinder.BindToMethod(CqlOperator.Subtract, TranslateExpression(sub.operand![0]), TranslateExpression(sub.operand![1])),
+                            StartsWith e               => _operatorBinder.BindToMethod(CqlOperator.StartsWith, TranslateExpression(e.operand![0]), TranslateExpression(e.operand![1])),
+                            TruncatedDivide div        => _operatorBinder.BindToMethod(CqlOperator.TruncatedDivide, TranslateExpression(div.operand![0]), TranslateExpression(div.operand![1])),
+                            Xor xor                    => _operatorBinder.BindToMethod(CqlOperator.Xor, TranslateExpression(xor.operand![0]), TranslateExpression(xor.operand![1])),
 
-                            AllTrue alt                => _operatorBinding.BindToMethod(CqlOperator.AllTrue, TranslateExpression(alt.source!)),
-                            AnyTrue ate                => _operatorBinding.BindToMethod(CqlOperator.AnyTrue, TranslateExpression(ate.source!)),
-                            Avg avg                    => _operatorBinding.BindToMethod(CqlOperator.Avg, TranslateExpression(avg.source!)),
-                            Count ce                   => _operatorBinding.BindToMethod(CqlOperator.Count, TranslateExpression(ce.source!)),
-                            GeometricMean gme          => _operatorBinding.BindToMethod(CqlOperator.GeometricMean, TranslateExpression(gme.source!)),
-                            Max max                    => _operatorBinding.BindToMethod(CqlOperator.MaxElementInList, TranslateExpression(max.source!)),
-                            Median med                 => _operatorBinding.BindToMethod(CqlOperator.Median, TranslateExpression(med.source!)),
-                            Min min                    => _operatorBinding.BindToMethod(CqlOperator.MinElementInList, TranslateExpression(min.source!)),
-                            Mode mode                  => _operatorBinding.BindToMethod(CqlOperator.Mode, TranslateExpression(mode.source!)),
-                            PopulationStdDev pstd      => _operatorBinding.BindToMethod(CqlOperator.PopulationStdDev, TranslateExpression(pstd.source!)),
-                            PopulationVariance pvar    => _operatorBinding.BindToMethod(CqlOperator.PopulationVariance, TranslateExpression(pvar.source!)),
-                            Product prod               => _operatorBinding.BindToMethod(CqlOperator.Product, TranslateExpression(prod.source!)),
-                            Sum sum                    => _operatorBinding.BindToMethod(CqlOperator.Sum, TranslateExpression(sum.source!)),
-                            StdDev stddev              => _operatorBinding.BindToMethod(CqlOperator.StdDev, TranslateExpression(stddev.source!)),
-                            Variance variance          => _operatorBinding.BindToMethod(CqlOperator.Variance, TranslateExpression(variance.source!)),
+                            AllTrue alt                => _operatorBinder.BindToMethod(CqlOperator.AllTrue, TranslateExpression(alt.source!)),
+                            AnyTrue ate                => _operatorBinder.BindToMethod(CqlOperator.AnyTrue, TranslateExpression(ate.source!)),
+                            Avg avg                    => _operatorBinder.BindToMethod(CqlOperator.Avg, TranslateExpression(avg.source!)),
+                            Count ce                   => _operatorBinder.BindToMethod(CqlOperator.Count, TranslateExpression(ce.source!)),
+                            GeometricMean gme          => _operatorBinder.BindToMethod(CqlOperator.GeometricMean, TranslateExpression(gme.source!)),
+                            Max max                    => _operatorBinder.BindToMethod(CqlOperator.MaxElementInList, TranslateExpression(max.source!)),
+                            Median med                 => _operatorBinder.BindToMethod(CqlOperator.Median, TranslateExpression(med.source!)),
+                            Min min                    => _operatorBinder.BindToMethod(CqlOperator.MinElementInList, TranslateExpression(min.source!)),
+                            Mode mode                  => _operatorBinder.BindToMethod(CqlOperator.Mode, TranslateExpression(mode.source!)),
+                            PopulationStdDev pstd      => _operatorBinder.BindToMethod(CqlOperator.PopulationStdDev, TranslateExpression(pstd.source!)),
+                            PopulationVariance pvar    => _operatorBinder.BindToMethod(CqlOperator.PopulationVariance, TranslateExpression(pvar.source!)),
+                            Product prod               => _operatorBinder.BindToMethod(CqlOperator.Product, TranslateExpression(prod.source!)),
+                            Sum sum                    => _operatorBinder.BindToMethod(CqlOperator.Sum, TranslateExpression(sum.source!)),
+                            StdDev stddev              => _operatorBinder.BindToMethod(CqlOperator.StdDev, TranslateExpression(stddev.source!)),
+                            Variance variance          => _operatorBinder.BindToMethod(CqlOperator.Variance, TranslateExpression(variance.source!)),
 
                             Negate neg                 => neg.operand is Literal literal ? NegateLiteral(neg, literal) : UnaryOperator(CqlOperator.Negate, neg),
 
-                            TimeOfDay tod              => _operatorBinding.BindToMethod(CqlOperator.TimeOfDay),
-                            Today today                => _operatorBinding.BindToMethod(CqlOperator.Today),
+                            TimeOfDay tod              => _operatorBinder.BindToMethod(CqlOperator.TimeOfDay),
+                            Today today                => _operatorBinder.BindToMethod(CqlOperator.Today),
 
                             ToBoolean e                => ChangeType(TranslateExpression(e.operand!), typeof(bool?)),
                             ToConcept tc               => ChangeType(TranslateExpression(tc.operand!), _typeResolver.ConceptType),
@@ -187,7 +185,7 @@ namespace Hl7.Cql.Compiler
                             ToDate tde                 => ChangeType(TranslateExpression(tde.operand!), _typeResolver.DateType),
                             ToDecimal tde              => ChangeType(TranslateExpression(tde.operand!), typeof(decimal?)),
                             ToInteger tde              => ChangeType(TranslateExpression(tde.operand!), typeof(int?)),
-                            ToList tle                 => _operatorBinding.BindToMethod(CqlOperator.ToList, TranslateExpression(tle.operand!)),
+                            ToList tle                 => _operatorBinder.BindToMethod(CqlOperator.ToList, TranslateExpression(tle.operand!)),
                             ToLong toLong              => ChangeType(TranslateExpression(toLong.operand!), typeof(long?)),
                             ToQuantity tq              => ChangeType(TranslateExpression(tq.operand!), _typeResolver.QuantityType),
                             ToString e                 => ChangeType(TranslateExpression(e.operand!), typeof(string)),
@@ -209,23 +207,23 @@ namespace Hl7.Cql.Compiler
                             Concatenate cctn           => NaryOperator(CqlOperator.Concatenate, cctn),
                             ConceptRef cr              => ConceptRef(cr),
                             Contains ct                => Contains(ct),
-                            ConvertQuantity cqe        => _operatorBinding.BindToMethod(CqlOperator.ConvertQuantity, TranslateExpression(cqe.operand![0]), TranslateExpression(cqe.operand![1])),
-                            DateFrom dfe               => _operatorBinding.BindToMethod(CqlOperator.DateComponent, [TranslateExpression(dfe.operand!)]),
+                            ConvertQuantity cqe        => _operatorBinder.BindToMethod(CqlOperator.ConvertQuantity, TranslateExpression(cqe.operand![0]), TranslateExpression(cqe.operand![1])),
+                            DateFrom dfe               => _operatorBinder.BindToMethod(CqlOperator.DateComponent, [TranslateExpression(dfe.operand!)]),
                             Elm.DateTime dt            => DateTime(dt),
                             Date d                     => Date(d),
                             DateTimeComponentFrom dtcf => DateTimeComponentFrom(dtcf),
-                            Descendents desc           => desc.source == null ? CqlExpressions.Null_ConstantExpression<IEnumerable<object>>() : _operatorBinding.BindToMethod(CqlOperator.Descendents, TranslateExpression(desc.source)),
-                            DifferenceBetween dbe      => _operatorBinding.BindToMethod(CqlOperator.DifferenceBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
-                            DurationBetween dbe        => _operatorBinding.BindToMethod(CqlOperator.DurationBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
+                            Descendents desc           => desc.source == null ? CqlExpressions.Null_ConstantExpression<IEnumerable<object>>() : _operatorBinder.BindToMethod(CqlOperator.Descendents, TranslateExpression(desc.source)),
+                            DifferenceBetween dbe      => _operatorBinder.BindToMethod(CqlOperator.DifferenceBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
+                            DurationBetween dbe        => _operatorBinder.BindToMethod(CqlOperator.DurationBetween, TranslateExpression(dbe.operand![0]), TranslateExpression(dbe.operand![1]), Precision(dbe.precision, dbe.precisionSpecified)),
                             Ends e                     => Ends(e),
-                            Equal eq                   => _operatorBinding.BindToMethod(CqlOperator.Equal, TranslateExpression(eq.operand![0]), TranslateExpression(eq.operand![1])),
+                            Equal eq                   => _operatorBinder.BindToMethod(CqlOperator.Equal, TranslateExpression(eq.operand![0]), TranslateExpression(eq.operand![1])),
                             Equivalent eqv             => Equivalent(eqv),
                             Except ex                  => Except(ex),
-                            Expand expand              => _operatorBinding.BindToMethod(CqlOperator.Expand, TranslateExpression(expand!.operand![0]!), TranslateExpression(expand!.operand![1]!)),
+                            Expand expand              => _operatorBinder.BindToMethod(CqlOperator.Expand, TranslateExpression(expand!.operand![0]!), TranslateExpression(expand!.operand![1]!)),
                             ExpandValueSet evs         => ExpandValueSet(evs),
                             FunctionRef fre            => FunctionRef(fre),
                             ExpressionRef ere          => ExpressionRef(ere),
-                            First first                => _operatorBinding.BindToMethod(CqlOperator.First, TranslateExpression(first.source!)),
+                            First first                => _operatorBinder.BindToMethod(CqlOperator.First, TranslateExpression(first.source!)),
                             IdentifierRef ire          => IdentifierRef(ire),
                             If @if                     => If(@if),
                             Includes inc               => Includes(inc),
@@ -239,19 +237,19 @@ namespace Hl7.Cql.Compiler
                             In @in                     => In(@in),
                             Is @is                     => Is(@is),
                             IsNull isn                 => IsNull(isn),
-                            Last last                  => _operatorBinding.BindToMethod(CqlOperator.Last, TranslateExpression(last.source!)),
+                            Last last                  => _operatorBinder.BindToMethod(CqlOperator.Last, TranslateExpression(last.source!)),
                             LastPositionOf lpo         => LastPositionOf(lpo),
                             Length len                 => Length(len),
                             List list                  => List(list),
                             Literal lit                => Literal(lit),
-                            MaxValue max               => _operatorBinding.BindToMethod(CqlOperator.MaximumValue, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
+                            MaxValue max               => _operatorBinder.BindToMethod(CqlOperator.MaximumValue, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
                             Meets meets                => Meets(meets),
                             MeetsBefore meets          => MeetsBefore(meets),
                             MeetsAfter meets           => MeetsAfter(meets),
                             Message msg                => Message(msg),
-                            MinValue min               => _operatorBinding.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
-                            NotEqual ne                => _operatorBinding.BindToMethod(CqlOperator.Not, _operatorBinding.BindToMethod(CqlOperator.Equal, TranslateExpression(ne.operand![0]), TranslateExpression(ne.operand![1]))),
-                            Now now                    => _operatorBinding.BindToMethod(CqlOperator.Now),
+                            MinValue min               => _operatorBinder.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
+                            NotEqual ne                => _operatorBinder.BindToMethod(CqlOperator.Not, _operatorBinder.BindToMethod(CqlOperator.Equal, TranslateExpression(ne.operand![0]), TranslateExpression(ne.operand![1]))),
+                            Now now                    => _operatorBinder.BindToMethod(CqlOperator.Now),
                             Null @null                 => Expression.Constant(null, TypeFor(@null) ?? typeof(object)),
                             OperandRef ore             => OperandRef(ore),
                             Overlaps ole               => Overlaps(ole),
@@ -264,7 +262,7 @@ namespace Hl7.Cql.Compiler
                             ProperIncludes pi          => ProperIncludes(pi),
                             ProperIncludedIn pie       => ProperIncludedIn(pie),
                             Property pe                => Property(pe),
-                            Quantity qua               => _operatorBinding.BindToMethod(CqlOperator.Quantity, Expression.Constant(qua.value, typeof(decimal?)), Expression.Constant(qua.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string))),
+                            Quantity qua               => _operatorBinder.BindToMethod(CqlOperator.Quantity, Expression.Constant(qua.value, typeof(decimal?)), Expression.Constant(qua.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string))),
                             Query qe                   => Query(qe),
                             QueryLetRef qlre           => GetScopeExpression(qlre.name!),
                             Ratio re                   => Ratio(re),
@@ -302,7 +300,7 @@ namespace Hl7.Cql.Compiler
             var resultType = unary.resultTypeSpecifier != null
                 ? TypeFor(unary.resultTypeSpecifier)
                 : null;
-            var call = _operatorBinding.BindToMethod(@operator, operand);
+            var call = _operatorBinder.BindToMethod(@operator, operand);
             if (resultType != null && resultType != call.Type)
             {
                 var typeAs = ChangeType(call, resultType);
@@ -315,7 +313,7 @@ namespace Hl7.Cql.Compiler
         protected Expression NaryOperator(CqlOperator @operator, NaryExpression ne)
         {
             var operators = ne.operand.SelectToArray(op => TranslateExpression(op));
-            return _operatorBinding.BindToMethod(@operator, operators);
+            return _operatorBinder.BindToMethod(@operator, operators);
         }
 
         protected Expression? IdentifierRef(IdentifierRef ire)
@@ -648,7 +646,7 @@ namespace Hl7.Cql.Compiler
                             var selectParameter = Expression.Parameter(valueEnumerableElement, TypeNameToIdentifier(value.Type, this));
                             var body = ChangeType(selectParameter, memberArrayElement);
                             var selectLambda = Expression.Lambda(body, selectParameter);
-                            var callSelectMethod = _operatorBinding.BindToMethod(CqlOperator.Select, [value, selectLambda
+                            var callSelectMethod = _operatorBinder.BindToMethod(CqlOperator.Select, [value, selectLambda
                             ]);
                             var toArrayMethod = typeof(Enumerable)
                                 .GetMethod(nameof(Enumerable.ToArray))!
@@ -706,7 +704,8 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var ifThen = Expression.Condition(condition, then, Expression.Convert(Expression.Constant(null), then.Type));
+                var @false = Expression.Convert(Expression.Constant(null), then.Type);
+                var ifThen = Expression.Condition(condition, then, @false);
                 return ifThen;
             }
         }
@@ -792,7 +791,7 @@ namespace Hl7.Cql.Compiler
                     foreach (var caseItem in ce.caseItem)
                     {
                         var caseWhen = TranslateExpression(caseItem.when!);
-                        var caseWhenEquality = Expression.Coalesce(_operatorBinding.BindToMethod(CqlOperator.Equal, comparand, caseWhen), Expression.Constant(false));
+                        var caseWhenEquality = Expression.Coalesce(_operatorBinder.BindToMethod(CqlOperator.Equal, comparand, caseWhen), Expression.Constant(false));
                         var caseThen = TranslateExpression(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
@@ -875,19 +874,19 @@ namespace Hl7.Cql.Compiler
                     if (string.IsNullOrWhiteSpace(valueSetRef.name))
                         throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
                     var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
-                    return _operatorBinding.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
+                    return _operatorBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
                 }
                 else
                 {
                     // In this construct, instead of querying a value set, we're testing resources
                     // against a list of codes, e.g., as defined by the code from or codesystem construct
                     var codes = TranslateExpression(retrieve.codes);
-                    return _operatorBinding.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
+                    return _operatorBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
                 }
             }
             else
             {
-                return _operatorBinding.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), CqlExpressions.Null_ConstantExpression<CqlValueSet>(), codeProperty!);
+                return _operatorBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), CqlExpressions.Null_ConstantExpression<CqlValueSet>(), codeProperty!);
             }
         }
 
@@ -908,7 +907,7 @@ namespace Hl7.Cql.Compiler
                     if (pathMemberInfo == null)
                     {
                         _logger.LogWarning(FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
-                        return _operatorBinding.BindToMethod(CqlOperator.LateBoundProperty, scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
+                        return _operatorBinder.BindToMethod(CqlOperator.LateBoundProperty, scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     }
                     var propogate = PropagateNull(scopeExpression, pathMemberInfo);
                     // This is only necessary for Firely b/c it always initializes colleciton members even if they are
@@ -983,7 +982,7 @@ namespace Hl7.Cql.Compiler
                 if (pathMemberInfo == null)
                 {
                     _logger.LogWarning(FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
-                    return _operatorBinding.BindToMethod(CqlOperator.LateBoundProperty, source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
+                    return _operatorBinder.BindToMethod(CqlOperator.LateBoundProperty, source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                 }
                 if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
                 {
@@ -1040,7 +1039,7 @@ namespace Hl7.Cql.Compiler
                         return operands[0];
                     }
 
-                    return _operatorBinding.BindToMethod(CqlOperator.Convert, operands[0], Expression.Constant(typeof(string), typeof(Type)));
+                    return _operatorBinder.BindToMethod(CqlOperator.Convert, operands[0], Expression.Constant(typeof(string), typeof(Type)));
                 }
             }
 
