@@ -1,4 +1,5 @@
 ﻿#pragma warning disable IDE1006 // Naming violation suppressed.
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
@@ -190,5 +191,48 @@ partial class TupleElement: IGetName { }
 partial class TupleElementDefinition: IGetName { }
 partial class ValueSetDef: IGetName { }
 partial class ValueSetRef: IGetName { }
+
+#endregion
+
+#region GetDateTimePrecision
+
+public interface IGetDateTimePrecision
+{
+    DateTimePrecision precision { get; }
+    bool precisionSpecified { get; }
+}
+
+public static class IGetDateTimePrecisionExtensions
+{
+    public static DateTimePrecision? precisionNullable(this IGetDateTimePrecision obj) => obj.precisionSpecified ? obj.precision : null;
+}
+
+partial class CalculateAgeAt : IGetDateTimePrecision {}
+partial class Ends : IGetDateTimePrecision {}
+partial class Starts : IGetDateTimePrecision {}
+partial class OverlapsAfter : IGetDateTimePrecision {}
+partial class OverlapsBefore : IGetDateTimePrecision {}
+partial class Overlaps : IGetDateTimePrecision {}
+partial class MeetsAfter : IGetDateTimePrecision {}
+partial class MeetsBefore : IGetDateTimePrecision {}
+partial class Meets : IGetDateTimePrecision {}
+partial class After : IGetDateTimePrecision {}
+partial class Before : IGetDateTimePrecision {}
+partial class ProperIncludedIn : IGetDateTimePrecision {}
+partial class ProperIncludes : IGetDateTimePrecision {}
+partial class IncludedIn : IGetDateTimePrecision {}
+partial class Includes : IGetDateTimePrecision { }
+partial class ProperIn : IGetDateTimePrecision { }
+partial class In : IGetDateTimePrecision { }
+partial class ProperContains : IGetDateTimePrecision { }
+partial class Contains : IGetDateTimePrecision { }
+partial class SameOrAfter : IGetDateTimePrecision { }
+partial class SameOrBefore : IGetDateTimePrecision { }
+partial class SameAs : IGetDateTimePrecision { }
+partial class DifferenceBetween : IGetDateTimePrecision { }
+partial class DurationBetween : IGetDateTimePrecision { }
+partial class CalculateAge : IGetDateTimePrecision { }
+partial class CalculateAgeAt : IGetDateTimePrecision { }
+partial class DateTimeComponentFrom : IGetDateTimePrecision { }
 
 #endregion
