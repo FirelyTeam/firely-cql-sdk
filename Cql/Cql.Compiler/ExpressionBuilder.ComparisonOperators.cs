@@ -19,30 +19,22 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(eqv.operand![0]);
             var right = TranslateExpression(eqv.operand![1]);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
-            {
-                var leftElementType = _typeResolver.GetListElementType(left.Type);
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
-                {
-                    var rightElementType = _typeResolver.GetListElementType(right.Type);
-                    if (leftElementType != rightElementType)
-                    {
-                        // This appears in the CQL tests:
-                        //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
-                        return Expression.Constant(false, typeof(bool?));
-                    }
-
-                    return _operatorsBinder.BindToMethod(CqlOperator.ListEquivalent, left, right);
-                }
-                else
-                {
-                    throw new NotImplementedException().WithContext(this);
-                }
-            }
-            else
-            {
+            if (!_typeResolver.ImplementsGenericIEnumerable(left.Type))
                 return _operatorsBinder.BindToMethod(CqlOperator.Equivalent, left, right);
+
+            var leftElementType = _typeResolver.GetListElementType(left.Type);
+            if (!_typeResolver.ImplementsGenericIEnumerable(right.Type))
+                throw new NotImplementedException().WithContext(this);
+
+            var rightElementType = _typeResolver.GetListElementType(right.Type);
+            if (leftElementType != rightElementType)
+            {
+                // This appears in the CQL tests:
+                //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
+                return Expression.Constant(false, typeof(bool?));
             }
+
+            return _operatorsBinder.BindToMethod(CqlOperator.ListEquivalent, left, right);
         }
     }
 }

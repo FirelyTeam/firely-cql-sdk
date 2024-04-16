@@ -39,13 +39,6 @@ namespace Hl7.Cql.Compiler
             else throw new NotImplementedException().WithContext(this);
         }
 
-        protected Expression? LastPositionOf(Elm.LastPositionOf e)
-        {
-            var @string = TranslateExpression(e!.@string!);
-            var pattern = TranslateExpression(e!.pattern!);
-            return _operatorsBinder.BindToMethod(CqlOperator.LastPositionOf, @string, pattern);
-        }
-
         protected Expression? Length(Elm.Length len)
         {
             var operand = TranslateExpression(len.operand!);
@@ -58,14 +51,6 @@ namespace Hl7.Cql.Compiler
                 return _operatorsBinder.BindToMethod(CqlOperator.StringLength, operand);
             }
             else throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression PositionOf(Elm.PositionOf e)
-        {
-            var @string = TranslateExpression(e!.@string!);
-            var pattern = TranslateExpression(e!.pattern!);
-            return _operatorsBinder.BindToMethod(CqlOperator.PositionOf, pattern, @string);
-
         }
 
         protected Expression? ReplaceMatches(Elm.ReplaceMatches e)

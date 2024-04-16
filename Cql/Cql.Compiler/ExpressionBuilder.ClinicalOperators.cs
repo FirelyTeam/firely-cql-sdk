@@ -16,23 +16,6 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-
-        protected Expression CalculateAge(Elm.CalculateAge e)
-        {
-            var units = Precision(e.precision, e.precisionSpecified);
-            var birthDate = TranslateExpression(e.operand!);
-            return _operatorsBinder.BindToMethod(CqlOperator.CalculateAge, birthDate, units);
-        }
-
-        protected Expression CalculateAgeAt(Elm.CalculateAgeAt e)
-        {
-            var units = Precision(e.precision, e.precisionSpecified);
-            var birthDate = TranslateExpression(e.operand![0]);
-            var asOf = TranslateExpression(e.operand[1]); // should be "as of" argument
-            return _operatorsBinder.BindToMethod(CqlOperator.CalculateAgeAt, birthDate, asOf, units);
-        }
-
-
         protected Expression InValueSet(Elm.InValueSet e)
         {
             var code = TranslateExpression(e.code!);
@@ -74,13 +57,6 @@ namespace Hl7.Cql.Compiler
             }
             else throw new NotImplementedException($"AnyInValueSet not implemented for element type {TypeManager.PrettyTypeName(codeType)}").WithContext(this);
 
-        }
-
-        public Expression ExpandValueSet(Elm.ExpandValueSet e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            var call = CallCreateValueSetFacade(operand);
-            return call;
         }
     }
 }

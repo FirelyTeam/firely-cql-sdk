@@ -33,16 +33,6 @@ namespace Hl7.Cql.Compiler
 
             return UnaryOperator(CqlOperator.Negate, e);
         }
-
-        protected Expression? Round(Round e)
-        {
-            var operand = TranslateExpression(e.operand!);
-            Expression? precision;
-            if (e.precision != null)
-                precision = TranslateExpression(e.precision!);
-            else precision = CqlExpressions.Null_ConstantExpression<int?>();
-            return _operatorsBinder.BindToMethod(CqlOperator.Round, operand, precision);
-        }
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
