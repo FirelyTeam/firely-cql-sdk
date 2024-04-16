@@ -65,6 +65,11 @@ namespace Hl7.Cql.CqlToElm
             CurrentScope = newScope;
         }
 
+        public void EnterScope(ISymbolScope newScope)
+        {
+            CurrentScope = newScope;
+        }
+
         public void ExitScope()
         {
             if (CurrentScope.Parent is null)

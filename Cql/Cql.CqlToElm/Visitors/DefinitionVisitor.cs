@@ -284,6 +284,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return functionDef;
         }
 
+        // definition : usingDefinition | includeDefinition | codesystemDefinition | valuesetDefinition
+        //   | codeDefinition  | conceptDefinition  | parameterDefinition;
         public void VisitDefinitions(cqlParser.DefinitionContext[] context)
         {
             foreach (var definitionContext in context)
@@ -296,8 +298,33 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // statement : expressionDefinition   | contextDefinition | functionDefinition ;
         public void VisitStatements(cqlParser.StatementContext[] context)
         {
+            var delayedSymbolTable = new DelayedSymbolTable(LibraryBuilder.CurrentScope);
+
+            IReadOnlyCollection<IDefinitionElement> delayedExpressions;
+
+            try
+            {
+                LibraryBuilder.EnterScope(delayedSymbolTable);
+                processStatements(context);
+                delayedExpressions = delayedSymbolTable.Symbols;
+            }
+            finally
+            {
+                LibraryBuilder.ExitScope();
+            }
+
+            // Now that we have processed all the statements, we can add the delayed symbols to the library.
+            foreach (var symbol in delayedExpressions)
+                add(symbol);
+        }
+
+        private void processStatements(cqlParser.StatementContext[] context)
+        {
             ContextDef? activeContext = null;
             List<string> definedContexts = new();
+
+            // We *know* this is a delayed symbol table, if not, we'd better throw.
+            DelayedSymbolTable table = (DelayedSymbolTable)LibraryBuilder.CurrentScope;
 
             // Go over the statements in order, since they can be interleaved
             // with context statements, which become active immediately.
@@ -306,20 +333,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
 #if DEBUG
                 var statementText = statementContext.GetText();
 #endif
-                var statement = Visit(statementContext);
 
-                if (statement is ExpressionDef ed)
+                if (statementContext.expressionDefinition() is { } edCtx)
                 {
-                    // If there is an active context, set it on the expression we just parsed.
-                    if (activeContext is not null)
-                        ed.context = activeContext.name;
-
-                    add(ed);
+                    table.TryAddDelayed(edCtx.identifier().Parse()!, activeContext?.name,
+                        () => (ExpressionDef)Visit(edCtx));
                 }
-                else if (statement is ContextDef cd)
+                else if (statementContext.functionDefinition() is { } fdCtx)
+                {
+                    table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!, activeContext?.name,
+                        () => (ExpressionDef)Visit(fdCtx));
+                }
+                else if (statementContext.contextDefinition() is { } cdCtx)
                 {
                     // If we encounter a context statement, it will be applied to all
                     // subsequent expressions we encounter
+                    var cd = (ContextDef)Visit(cdCtx);
                     activeContext = cd;
 
                     // Make sure we create just one ContextDef per model type.
@@ -339,9 +368,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                 }
                 else
-                    throw new InvalidOperationException($"Encountered unknown statement type {statement.GetType()}.");
+                    throw new InvalidOperationException(
+                        "Encountered unknown statement type in statement rule.");
             }
-
         }
 
         private void add(IDefinitionElement s)
