@@ -251,7 +251,7 @@ namespace Hl7.Cql.Compiler
                             After after => After(after),
                             AliasRef ar => GetScopeExpression(ar.name!),
                             As @as => As(@as),
-                            AnyInValueSet avs => AnyInValueSet(avs),
+                            AnyInValueSet avs => InValueSetPostProcess(avs.valueset, TranslateExpression(avs.codes!), isList: true),
                             Before before => Before(before),
                             CalculateAgeAt caa => _operatorsBinder.BindToMethod(CqlOperator.CalculateAgeAt,
                                 TranslateExpression(caa.operand![0]), TranslateExpression(caa.operand[1]),
@@ -309,7 +309,7 @@ namespace Hl7.Cql.Compiler
                             Instance ine => Instance(ine),
                             Intersect ise => Intersect(ise),
                             Interval ie => IntervalExpression(ie),
-                            InValueSet inv => InValueSet(inv),
+                            InValueSet inv => InValueSetPostProcess(inv.valueset!, TranslateExpression(inv.code!), isList: false),
                             In @in => In(@in),
                             Is @is => Is(@is),
                             IsNull isn => IsNull(isn),
@@ -1116,7 +1116,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression FunctionRef(FunctionRef op)
         {
-            var operands = op.operand.SelectToArray(TranslateExpression);
+            Expression[] operands = op.operand.SelectToArray(TranslateExpression)!;
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.

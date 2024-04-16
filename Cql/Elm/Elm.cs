@@ -1,5 +1,4 @@
 ﻿#pragma warning disable IDE1006 // Naming violation suppressed.
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
@@ -196,14 +195,31 @@ partial class ValueSetRef: IGetName { }
 
 #region GetDateTimePrecision
 
-public interface IGetDateTimePrecision
+/// <summary>
+/// Interface for getting the date tiem precision of an object.
+/// </summary>
+internal interface IGetDateTimePrecision
 {
+    /// <summary>
+    /// Gets the date time precision. Be sure to check <see cref="precisionSpecified"/> before using this property,
+    /// or use <see cref="IGetDateTimePrecisionExtensions.precisionNullable"/> instead.
+    /// </summary>
     DateTimePrecision precision { get; }
+
+    /// <summary>
+    /// Gets whether the date time precision is specified.
+    /// </summary>
     bool precisionSpecified { get; }
 }
 
-public static class IGetDateTimePrecisionExtensions
+/// <summary>
+/// Extension methods for <see cref="IGetDateTimePrecision"/>.
+/// </summary>
+internal static class IGetDateTimePrecisionExtensions
 {
+    /// <summary>
+    /// Gets the <see cref="IGetDateTimePrecision.precision"/>, or null if <see cref="IGetDateTimePrecision.precisionSpecified"/> is <c>false</c>.
+    /// </summary>
     public static DateTimePrecision? precisionNullable(this IGetDateTimePrecision obj) => obj.precisionSpecified ? obj.precision : null;
 }
 

@@ -10,53 +10,34 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using System;
-using System.Linq.Expressions;
+using Hl7.Cql.Elm;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression InValueSet(Elm.InValueSet e)
+        private Expression InValueSetPostProcess(ValueSetRef valueset, Expression expr, bool isList)
         {
-            var code = TranslateExpression(e.code!);
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
-            var codeType = code.Type;
+            var codeType = isList ? _typeResolver.GetListElementType(expr.Type, throwError: true)! : expr.Type;
+
+            var valueSet = InvokeDefinitionThroughRuntimeContext(valueset.name!, valueset.libraryName, typeof(CqlValueSet));
             if (codeType == _typeResolver.CodeType)
             {
-                return _operatorsBinder.BindToMethod(CqlOperator.CodeInValueSet, code, valueSet);
+                return _operatorsBinder.BindToMethod(isList ? CqlOperator.CodesInValueSet : CqlOperator.CodeInValueSet, expr, valueSet);
             }
-            else if (codeType == _typeResolver.ConceptType)
-            {
-                return _operatorsBinder.BindToMethod(CqlOperator.ConceptInValueSet, code, valueSet);
-            }
-            else if (codeType == typeof(string))
-            {
-                return _operatorsBinder.BindToMethod(CqlOperator.StringInValueSet, code, valueSet);
-            }
-            else throw new NotImplementedException().WithContext(this);
-        }
 
-        private Expression AnyInValueSet(Elm.AnyInValueSet e)
-        {
-            var codes = TranslateExpression(e.codes!);
-            if (!_typeResolver.ImplementsGenericIEnumerable(codes.Type))
-                throw this.NewExpressionBuildingException("Only List types are allowed for AnyInValueSet");
-            var codeType = _typeResolver.GetListElementType(codes.Type, true)!;
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet));
-            if (codeType == _typeResolver.CodeType)
+            if (codeType == _typeResolver.ConceptType)
             {
-                return _operatorsBinder.BindToMethod(CqlOperator.CodesInValueSet, codes, valueSet);
+                return _operatorsBinder.BindToMethod(isList ? CqlOperator.ConceptsInValueSet : CqlOperator.ConceptInValueSet, expr, valueSet);
             }
-            else if (codeType == _typeResolver.ConceptType)
-            {
-                return _operatorsBinder.BindToMethod(CqlOperator.ConceptsInValueSet, codes, valueSet);
-            }
-            else if (codeType == typeof(string))
-            {
-                return _operatorsBinder.BindToMethod(CqlOperator.StringsInValueSet, codes, valueSet);
-            }
-            else throw new NotImplementedException($"AnyInValueSet not implemented for element type {TypeManager.PrettyTypeName(codeType)}").WithContext(this);
 
+            if (codeType == typeof(string))
+            {
+                return _operatorsBinder.BindToMethod(isList ? CqlOperator.StringsInValueSet: CqlOperator.StringInValueSet, expr, valueSet);
+            }
+
+            throw new NotImplementedException().WithContext(this);
         }
     }
 }
