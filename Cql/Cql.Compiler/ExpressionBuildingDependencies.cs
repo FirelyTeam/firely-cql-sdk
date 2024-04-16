@@ -9,13 +9,15 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class ExpressionBuildingDependencies(
     ILoggerFactory LoggerFactory,
-    OperatorBinder OperatorBinder,
+    OperatorsBinder operatorsBinder,
     TypeManager TypeManager,
     TypeConverter TypeConverter,
+    ContextBinder ContextBinder,
     LibraryDefinitionBuilderSettings LibraryDefinitionBuilderSettings)
 {
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
-    public OperatorBinder OperatorBinder { get; } = OperatorBinder;
+    public OperatorsBinder OperatorsBinder { get; } = operatorsBinder;
+    public ContextBinder ContextBinder { get; } = ContextBinder;
     public TypeConverter TypeConverter { get; } = TypeConverter;
     public TypeManager TypeManager { get; } = TypeManager;
     public LibraryDefinitionBuilderSettings LibraryDefinitionBuilderSettings { get; } = LibraryDefinitionBuilderSettings;

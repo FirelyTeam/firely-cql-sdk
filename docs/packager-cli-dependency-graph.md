@@ -53,7 +53,7 @@ classDiagram
 %%            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
 
-        class OperatorBinder {
+        class OperatorsBinder {
         }
 
         class CqlOperatorsBinder {
@@ -106,7 +106,7 @@ classDiagram
     %% Inheritance  
 
    
-    CqlOperatorsBinder --> OperatorBinder : inherits
+    CqlOperatorsBinder --> OperatorsBinder : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
@@ -137,7 +137,7 @@ classDiagram
     LibrarySetExpressionBuilder ..> LibraryDefinitionsBuilder : created by
 
     ILoggerFactory ..> ExpressionBuildingDependencies : injected
-    OperatorBinder ..> ExpressionBuildingDependencies : injected
+    OperatorsBinder ..> ExpressionBuildingDependencies : injected
     TypeManager ..> ExpressionBuildingDependencies : injected
     TypeConverter ..> ExpressionBuildingDependencies : injected
     TypeResolver ..> ExpressionBuildingDependencies : injected (via TypeManager)

@@ -17,9 +17,9 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// Implements <see cref="OperatorBinder"/> by calling methods in <see cref="CqlOperators"/>.
+    /// Implements <see cref="OperatorsBinder"/> by calling methods in <see cref="CqlOperators"/>.
     /// </summary>
-    internal partial class CqlOperatorsBinder : OperatorBinder
+    internal partial class CqlOperatorsBinder : OperatorsBinder
     {
         private readonly TypeConverter? _typeConverter;
 

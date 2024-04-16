@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler
             highClosed = ChangeType(highClosed, typeof(bool?));
             var low = TranslateExpression(ie.low!);
             var high = TranslateExpression(ie.high!);
-            return _operatorBinder.BindToMethod(CqlOperator.Interval, low, high, lowClosed, highClosed);
+            return _operatorsBinder.BindToMethod(CqlOperator.Interval, low, high, lowClosed, highClosed);
         }
 
 
@@ -33,7 +33,7 @@ namespace Hl7.Cql.Compiler
 
             var numExprTranslated = TranslateExpression(numExpr);
             var denomExprTranslated = TranslateExpression(numExpr);
-            return _operatorBinder.BindToMethod(CqlOperator.Ratio, numExprTranslated, denomExprTranslated);
+            return _operatorsBinder.BindToMethod(CqlOperator.Ratio, numExprTranslated, denomExprTranslated);
         }
     }
 }

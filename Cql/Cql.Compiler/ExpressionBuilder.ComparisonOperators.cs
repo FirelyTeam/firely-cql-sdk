@@ -32,7 +32,7 @@ namespace Hl7.Cql.Compiler
                         return Expression.Constant(false, typeof(bool?));
                     }
 
-                    return _operatorBinder.BindToMethod(CqlOperator.ListEquivalent, left, right);
+                    return _operatorsBinder.BindToMethod(CqlOperator.ListEquivalent, left, right);
                 }
                 else
                 {
@@ -41,7 +41,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                return _operatorBinder.BindToMethod(CqlOperator.Equivalent, left, right);
+                return _operatorsBinder.BindToMethod(CqlOperator.Equivalent, left, right);
             }
         }
     }
