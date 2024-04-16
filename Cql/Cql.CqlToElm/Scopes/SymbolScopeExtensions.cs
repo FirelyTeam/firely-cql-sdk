@@ -1,7 +1,9 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+﻿using System;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using System.Diagnostics;
 using System.Linq;
+using Hl7.Cql.CqlToElm.Visitors;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -86,29 +88,36 @@ namespace Hl7.Cql.CqlToElm
             result = null;
             error = null;
 
-            if (libraryName is null)
+            try
             {
-                if (!symbolScope.TryResolveSymbol(identifier, out result))
+                if (libraryName is null)
                 {
-                    error = $"Unable to resolve identifier '{identifier}'.";
-                }
-            }
-            else
-            {
-                if (symbolScope.TryResolveSymbol(libraryName, out var library))
-                {
-                    if (library is IncludeDefSymbol includeDef)
+                    if (!symbolScope.TryResolveSymbol(identifier, out result))
                     {
-                        if (includeDef.Library.TryResolveSymbol(identifier, out var definition))
-                            result = definition;
-                        else
-                            error = $"Unable to resolve identifier {identifier} in library {libraryName}.";
+                        error = $"Unable to resolve identifier '{identifier}'.";
                     }
-                    else
-                        error = $"'{libraryName}' is not a reference to an included library.";
                 }
                 else
-                    error = $"Unable to resolve library '{libraryName}'.";
+                {
+                    if (symbolScope.TryResolveSymbol(libraryName, out var library))
+                    {
+                        if (library is IncludeDefSymbol includeDef)
+                        {
+                            if (includeDef.Library.TryResolveSymbol(identifier, out var definition))
+                                result = definition;
+                            else
+                                error = $"Unable to resolve identifier {identifier} in library {libraryName}.";
+                        }
+                        else
+                            error = $"'{libraryName}' is not a reference to an included library.";
+                    }
+                    else
+                        error = $"Unable to resolve library '{libraryName}'.";
+                }
+            }
+            catch (CircularReferenceException ex)
+            {
+                error = ex.Message;
             }
 
             return error is null;

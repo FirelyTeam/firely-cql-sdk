@@ -148,17 +148,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DetectsCycle()
         {
-            // This should really not be an exception, but an error in the output.
-            // This is left as an exercise for the reader.
-#if DEBUG
-            Assert.ThrowsException<InvalidOperationException>(
-#else
-            Assert.ThrowsException<AggregateException>(
-#endif
-                () => MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define a: b                
-                define b: a"), "Cycle detected in definition of 'a'.");
+            _ = MakeLibrary(@"
+            library FuncTest version '1.0.0'          
+            define a: b                
+            define b: a", "Circular reference detected in a.");
         }
     }
 }

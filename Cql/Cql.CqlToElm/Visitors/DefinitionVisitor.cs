@@ -5,6 +5,7 @@ using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Antlr4.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -336,13 +337,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 if (statementContext.expressionDefinition() is { } edCtx)
                 {
-                    table.TryAddDelayed(edCtx.identifier().Parse()!, activeContext?.name,
-                        () => (ExpressionDef)Visit(edCtx));
+                    table.TryAddDelayed(edCtx.identifier().Parse()!,
+                        () => visitWithContextName(edCtx, activeContext?.name));
                 }
                 else if (statementContext.functionDefinition() is { } fdCtx)
                 {
-                    table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!, activeContext?.name,
-                        () => (ExpressionDef)Visit(fdCtx));
+                    table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!,
+                        () => visitWithContextName(fdCtx, activeContext?.name));
                 }
                 else if (statementContext.contextDefinition() is { } cdCtx)
                 {
@@ -371,6 +372,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     throw new InvalidOperationException(
                         "Encountered unknown statement type in statement rule.");
             }
+        }
+
+        private ExpressionDef visitWithContextName(ParserRuleContext ctx, string? contextName)
+        {
+            var ed = (ExpressionDef)Visit(ctx);
+            ed.context = contextName!;
+            return ed;
         }
 
         private void add(IDefinitionElement s)

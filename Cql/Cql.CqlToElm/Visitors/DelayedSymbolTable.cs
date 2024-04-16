@@ -18,17 +18,8 @@ internal class DelayedSymbolTable : ISymbolScope
     private readonly Lazy<IDefinitionElement> _inProgress = new(
         () => throw new InvalidOperationException("Circular reference detected."));
 
-    public bool TryAddDelayed(string name, string? contextName, Func<ExpressionDef> factory)
-    {
-        return _factories.TryAdd(name, new Lazy<IDefinitionElement>(create));
-
-        ExpressionDef create()
-        {
-            var expressionDef = factory();
-            expressionDef.context = contextName;
-            return expressionDef;
-        }
-    }
+    public bool TryAddDelayed(string name, Func<ExpressionDef> factory) =>
+        _factories.TryAdd(name, new Lazy<IDefinitionElement>(factory));
 
     public bool TryAdd(IDefinitionElement symbol) =>
         _factories.TryAdd(symbol.Name, new Lazy<IDefinitionElement>(symbol));
@@ -57,7 +48,7 @@ internal class DelayedSymbolTable : ISymbolScope
         catch (InvalidOperationException e) when
             (e.Message == "ValueFactory attempted to access the Value property of this instance.")
         {
-            throw new InvalidOperationException($"Expression {symbol} references itself cyclically.");
+            throw new CircularReferenceException(symbol);
         }
     }
 }
