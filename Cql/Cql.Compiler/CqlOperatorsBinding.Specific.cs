@@ -26,7 +26,7 @@ partial class CqlOperatorsBinder
             }
             else if (right.Type == typeof(string))
             {
-                return BindToMethod(CqlOperator.EnumEqualsString, Expression.Convert(left, typeof(object)), right);
+                return BindToMethod(CqlOperator.EnumEqualsString, left.ExprConvert<object>(), right);
             }
             else throw new NotImplementedException();
         }
@@ -34,7 +34,7 @@ partial class CqlOperatorsBinder
         {
             if (left.Type == typeof(string))
             {
-                return BindToMethod(CqlOperator.EnumEqualsString, Expression.Convert(right, typeof(object)), left);
+                return BindToMethod(CqlOperator.EnumEqualsString, right.ExprConvert<object>(), left);
 
             }
             else throw new NotImplementedException();
@@ -125,7 +125,9 @@ partial class CqlOperatorsBinder
     {
         if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
         {
-            return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), Expression.TypeAs(left, typeof(IEnumerable<CqlCode>)), Expression.TypeAs(right, typeof(IEnumerable<CqlCode>)));
+            return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion),
+                left.ExprTypeAs<IEnumerable<CqlCode>>(),
+                right.ExprTypeAs<IEnumerable<CqlCode>>());
         }
         var leftElementType = _typeResolver.GetListElementType(left.Type);
         if (leftElementType == typeof(CqlCode))
@@ -232,7 +234,7 @@ partial class CqlOperatorsBinder
         if (typeExpression is ConstantExpression { Value: Type type })
         {
             if (source.Type != typeof(object))
-                source = Expression.TypeAs(source, typeof(object));
+                source = source.ExprTypeAs<object>();
 
             var call = BindToGenericMethod(nameof(ICqlOperators.LateBoundProperty), [type!], source, propertyName);
             return call;

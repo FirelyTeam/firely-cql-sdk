@@ -164,7 +164,7 @@ partial class ExpressionBuilder
                 targetNullTypeArg: Nullable.GetUnderlyingType(targetType)) switch
             {
                 // Only targetType is nullable
-                (exprNullTypeArg: null, targetNullTypeArg: not null) => Expression.Convert(expression, targetType),
+                (exprNullTypeArg: null, targetNullTypeArg: not null) => expression.ExprConvert(targetType),
 
                 // Both are nullable or not nullable
                 ({ } exprNullTypeArg, targetNullTypeArg: null) => Expression.Coalesce(expression, Expression.Default(exprNullTypeArg)),

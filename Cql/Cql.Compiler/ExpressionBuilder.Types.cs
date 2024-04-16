@@ -9,14 +9,16 @@ namespace Hl7.Cql.Compiler
         {
             var lowClosed = ie.lowClosedExpression != null
                 ? TranslateExpression(ie.lowClosedExpression)
-                : Expression.Constant(ie.lowClosed, typeof(bool?));
+                : Expression.Constant(((bool?)ie.lowClosed), typeof(bool?));
+            lowClosed = ChangeType(lowClosed, typeof(bool?));
+            var low = TranslateExpression(ie.low!);
+
             var highClosed = ie.highClosedExpression != null
                 ? TranslateExpression(ie.highClosedExpression)
-                : Expression.Constant(ie.highClosed, typeof(bool?));
-            lowClosed = ChangeType(lowClosed, typeof(bool?));
+                : Expression.Constant(((bool?)ie.highClosed), typeof(bool?));
             highClosed = ChangeType(highClosed, typeof(bool?));
-            var low = TranslateExpression(ie.low!);
             var high = TranslateExpression(ie.high!);
+
             return _operatorsBinder.BindToMethod(CqlOperator.Interval, low, high, lowClosed, highClosed);
         }
 

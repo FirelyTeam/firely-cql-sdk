@@ -16,7 +16,7 @@ namespace Hl7.Cql.Compiler
             if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
-                source = Expression.Convert(constant, constant.Type);
+                source = constant.ExprConvert(constant.Type);
             }
 
             var call = _operatorsBinder.BindToMethod(CqlOperator.Message, source, code, severity, message);

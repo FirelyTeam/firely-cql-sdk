@@ -60,7 +60,7 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var compare = Expression.Equal(operand, Expression.Constant(null));
-                var asNullableBool = Expression.Convert(compare, typeof(bool?));
+                var asNullableBool = compare.ExprConvert<bool?>();
                 return asNullableBool;
             }
         }

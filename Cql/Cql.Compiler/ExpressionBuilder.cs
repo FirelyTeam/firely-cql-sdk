@@ -253,7 +253,7 @@ namespace Hl7.Cql.Compiler
                             MinValue min               => _operatorsBinder.BindToMethod(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
                             NotEqual ne                => _operatorsBinder.BindToMethod(CqlOperator.Not, _operatorsBinder.BindToMethod(CqlOperator.Equal, TranslateExpression(ne.operand![0]), TranslateExpression(ne.operand![1]))),
                             Now now                    => _operatorsBinder.BindToMethod(CqlOperator.Now),
-                            Null @null                 => Expression.Constant(null, TypeFor(@null) ?? typeof(object)),
+                            Null @null                 => CqlExpressions.Null_ConstantExpression(TypeFor(@null) ?? typeof(object)),
                             OperandRef ore             => OperandRef(ore),
                             Overlaps ole               => Overlaps(ole),
                             OverlapsAfter ola          => OverlapsAfter(ola),
@@ -265,7 +265,11 @@ namespace Hl7.Cql.Compiler
                             ProperIncludes pi          => ProperIncludes(pi),
                             ProperIncludedIn pie       => ProperIncludedIn(pie),
                             Property pe                => Property(pe),
-                            Quantity qua               => _operatorsBinder.BindToMethod(CqlOperator.Quantity, Expression.Constant(qua.value, typeof(decimal?)), Expression.Constant(qua.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string))),
+                            Quantity qua               => _operatorsBinder.BindToMethod(
+                                                              CqlOperator.Quantity,
+                                                              Expression.Constant((qua.value), typeof(decimal?)),
+                                                              Expression.Constant(qua.unit, typeof(string)),
+                                                              Expression.Constant("http://unitsofmeasure.org", typeof(string))),
                             Query qe                   => Query(qe),
                             QueryLetRef qlre           => GetScopeExpression(qlre.name!),
                             Ratio re                   => Ratio(re),
@@ -413,7 +417,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (elements[i].Type != elementType)
                     {
-                        elements[i] = Expression.TypeAs(elements[i], elementType);
+                        elements[i] = elements[i].ExprTypeAs(elementType);
                     }
                 }
                 Expression? array = null;
@@ -425,7 +429,7 @@ namespace Hl7.Cql.Compiler
                 {
                     array = Expression.NewArrayBounds(elementType, Expression.Constant(0));
                 }
-                var asEnumerable = Expression.TypeAs(array, typeof(IEnumerable<>).MakeGenericType(elementType));
+                var asEnumerable = array.ExprTypeAs(typeof(IEnumerable<>).MakeGenericType(elementType));
                 return asEnumerable;
             }
             else
@@ -707,7 +711,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var @false = Expression.Convert(Expression.Constant(null), then.Type);
+                var @false = Expression.Constant(null).ExprConvert(then.Type);
                 var ifThen = Expression.Condition(condition, then, @false);
                 return ifThen;
             }
@@ -725,8 +729,8 @@ namespace Hl7.Cql.Compiler
 
             if (type.IsNullable())
             {
-                var changed = Expression.Constant(value, convertedType);
-                var asNullable = Expression.Convert(changed, type);
+                var changed = Expression.Constant(value!, convertedType);
+                var asNullable = changed.ExprConvert(type);
                 return asNullable;
             }
             return Expression.Constant(value, convertedType);
@@ -798,7 +802,7 @@ namespace Hl7.Cql.Compiler
                         var caseThen = TranslateExpression(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
-                            caseThen = Expression.Convert(caseThen, elseThen.Type);
+                            caseThen = caseThen.ExprConvert(elseThen.Type);
 
                         cases.Add(new(caseWhenEquality, caseThen));
                     }
@@ -811,7 +815,7 @@ namespace Hl7.Cql.Compiler
                         var caseThen = TranslateExpression(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
-                            caseThen = Expression.Convert(caseThen, elseThen.Type);
+                            caseThen = caseThen.ExprConvert(elseThen.Type);
 
                         if (caseWhen.Type.IsNullable())
                         {
@@ -989,8 +993,8 @@ namespace Hl7.Cql.Compiler
                 }
                 if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
                 {
-                    var isCheck = Expression.TypeIs(source, pathMemberInfo.DeclaringType!);
-                    var typeAs = Expression.TypeAs(source, pathMemberInfo.DeclaringType!);
+                    var isCheck = source.ExprTypeIs(pathMemberInfo.DeclaringType!);
+                    var typeAs = source.ExprTypeAs(pathMemberInfo.DeclaringType!);
                     var pathAccess = Expression.MakeMemberAccess(typeAs, pathMemberInfo);
                     Expression? ifIs = pathAccess;
                     Expression elseNull = Expression.Constant(null, property.PropertyType);

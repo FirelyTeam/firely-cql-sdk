@@ -31,7 +31,7 @@ partial class CqlOperatorsBinder
             toExpr = BindToGenericMethod(
                 nameof(ICqlOperators.Convert),
                 [to],
-                Expression.Convert(fromExpr, typeof(object)));
+                fromExpr.ExprConvert<object>());
             return true;
         }
 

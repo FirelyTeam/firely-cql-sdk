@@ -75,7 +75,7 @@ partial class ExpressionBuilder
                     }
 
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                    var asEnumerable = Expression.TypeAs(arrayOfCodesInitializer, typeof(IEnumerable<CqlCode>));
+                    var asEnumerable = arrayOfCodesInitializer.ExprTypeAs<IEnumerable<CqlCode>>();
                     var display = Expression.Constant(conceptDef.display, typeof(string));
                     var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
                     var lambda = Expression.Lambda(newConcept, CqlExpressions.ParameterExpression);
@@ -252,7 +252,7 @@ partial class ExpressionBuilder
 
                 Expression? defaultValue = null;
                 if (parameter.@default != null)
-                    defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default), typeof(object));
+                    defaultValue = TranslateExpression(parameter.@default).ExprTypeAs<object>();
                 else defaultValue = CqlExpressions.NullObject_ConstantExpression;
 
                 var resolveParam = _contextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);

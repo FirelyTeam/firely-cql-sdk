@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression As(Elm.As @as)
+        protected Expression As(Elm.As @as) // @TODO: Cast
         {
             if (@as.operand is Elm.List list)
             {
@@ -82,7 +82,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Is(Elm.Is @is)
+        protected Expression Is(Elm.Is @is) // @TODO: Cast
         {
             var op = TranslateExpression(@is.operand!);
             Type? type = null;
@@ -91,14 +91,14 @@ namespace Hl7.Cql.Compiler
                 if (@is.isTypeSpecifier is Elm.ChoiceTypeSpecifier choice)
                 {
                     var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
-                    Expression result = Expression.TypeIs(op, firstChoiceType);
+                    Expression result = op.ExprTypeIs(firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
                         var cti = TypeFor(choice.choice[i]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
-                        var ie = Expression.TypeIs(op, cti);
+                        var ie = op.ExprTypeIs(cti);
                         result = Expression.Or(result, ie);
                     }
-                    var ta = Expression.TypeAs(result, typeof(bool?));
+                    var ta = result.ExprTypeAs<bool?>();
                     return ta;
                 }
 
@@ -112,8 +112,8 @@ namespace Hl7.Cql.Compiler
             if (type == null)
                 throw this.NewExpressionBuildingException($"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
 
-            var isExpression = Expression.TypeIs(op, type);
-            var nullable = Expression.TypeAs(isExpression, typeof(bool?));
+            var isExpression = op.ExprTypeIs(type);
+            var nullable = isExpression.ExprTypeAs<bool?>();
             return nullable;
         }
 
@@ -124,7 +124,7 @@ namespace Hl7.Cql.Compiler
                 return input;
 
             if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
-                return Expression.TypeAs(input, outputType);
+                return input.ExprTypeAs(outputType);
 
             if (_typeResolver.ImplementsGenericIEnumerable(input.Type)
                 && _typeResolver.ImplementsGenericIEnumerable(outputType))

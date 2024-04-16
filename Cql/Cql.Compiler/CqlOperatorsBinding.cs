@@ -259,7 +259,7 @@ namespace Hl7.Cql.Compiler
             if (expression.Type != typeof(object))
                 throw new ArgumentException("Cast only allowed on Object typed expressions.", nameof(expression));
 
-            return Expression.Convert(expression, type);
+            return expression.ExprConvert(type);
         }
     }
 }
