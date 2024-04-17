@@ -8,7 +8,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using System;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
@@ -19,42 +18,33 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression After(Elm.After e)
         {
-            var left = TranslateExpression(e.operand[0]);
-            var right = TranslateExpression(e.operand[1]!);
-            var precision = e.precisionOrNull();
-            if (left.Type.IsCqlInterval(out _))
+            var expr = TranslateExpressions(e.operand[0], e.operand[1], e.precisionOrNull())!;
+            var leftIsCqlInterval = expr[0].Type.IsCqlInterval(out _);
+            var rightIsCqlInterval = expr[1].Type.IsCqlInterval(out _);
+            var method = (leftIsCqlInterval, rightIsCqlInterval) switch
             {
-                return BindCqlOperatorsMethod(
-                    right.Type.IsCqlInterval(out _) ? CqlOperator.IntervalAfterInterval : CqlOperator.IntervalAfterElement,
-                    left, right, precision);
-            }
-
-            return BindCqlOperatorsMethod(right.Type.IsCqlInterval(out _)
-                ? CqlOperator.ElementAfterInterval
-                : CqlOperator.After, left, right, precision);
+                (true, true)  => CqlOperator.IntervalAfterInterval,
+                (true, false) => CqlOperator.IntervalAfterElement,
+                (false, true) => CqlOperator.ElementAfterInterval,
+                _             => CqlOperator.After
+            };
+            return BindCqlOperatorsMethod(method, expr);
         }
 
         protected Expression? Before(Elm.Before e)
         {
-            var left = TranslateExpression(e!.operand[0]);
-            var right = TranslateExpression(e.operand[1]!);
-            var precision = e.precisionOrNull();
-            if (left.Type.IsCqlInterval(out _))
+            var expr = TranslateExpressions(e.operand[0], e.operand[1], e.precisionOrNull())!;
+            var leftIsCqlInterval = expr[0].Type.IsCqlInterval(out _);
+            var rightIsCqlInterval = expr[1].Type.IsCqlInterval(out _);
+            var method = (leftIsCqlInterval, rightIsCqlInterval) switch
             {
-                return BindCqlOperatorsMethod(right.Type.IsCqlInterval(out _)
-                    ? CqlOperator.IntervalBeforeInterval
-                    : CqlOperator.IntervalBeforeElement, left, right, precision);
-            }
-
-            return BindCqlOperatorsMethod(right.Type.IsCqlInterval(out _)
-                ? CqlOperator.ElementBeforeInterval
-                : CqlOperator.Before, left, right, precision);
+                (true, true)  => CqlOperator.IntervalBeforeInterval,
+                (true, false) => CqlOperator.IntervalBeforeElement,
+                (false, true) => CqlOperator.ElementBeforeInterval,
+                _             => CqlOperator.Before
+            };
+            return BindCqlOperatorsMethod(method, expr);
         }
-        protected Expression Date(Elm.Date e) =>
-            BindCqlOperatorsMethod(CqlOperator.Date,
-                TranslateExpression(e.year) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.month) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.day) ?? NullConstantExpression.Int32);
 
         protected Expression DateTime(Elm.DateTime e)
         {
@@ -65,13 +55,13 @@ namespace Hl7.Cql.Compiler
             }
 
             return BindCqlOperatorsMethod(CqlOperator.DateTime,
-                TranslateExpression(e.year) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.month) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.day) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.hour) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.minute) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.second) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.millisecond) ?? NullConstantExpression.Int32,
+                e.year,
+                e.month,
+                e.day,
+                e.hour,
+                e.minute,
+                e.second,
+                e.millisecond,
                 offset);
         }
 
@@ -119,15 +109,6 @@ namespace Hl7.Cql.Compiler
             }
 
             return BindCqlOperatorsMethod(CqlOperator.SameOrBefore, left, right, precision);
-        }
-
-        protected Expression Time(Elm.Time e)
-        {
-            return BindCqlOperatorsMethod(CqlOperator.Time,
-                TranslateExpression(e.hour) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.minute) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.second) ?? NullConstantExpression.Int32,
-                TranslateExpression(e.millisecond) ?? NullConstantExpression.Int32);
         }
     }
 }

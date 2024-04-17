@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -98,7 +97,10 @@ namespace Hl7.Cql.Compiler
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
 
-        private Expression[] TranslateExpressions<T>(params T[]? args) =>
+        private Expression[] TranslateExpressions(params object?[] args) =>
+            TranslateExpressions<object?>(args);
+
+        private Expression[] TranslateExpressions<T>(params T?[] args) =>
             args switch
             {
                 null or []               => [],
@@ -230,7 +232,7 @@ namespace Hl7.Cql.Compiler
                             ConvertQuantity cqe        => BindCqlOperatorsMethod(CqlOperator.ConvertQuantity, (cqe.operand[..2])),
                             DateFrom dfe               => BindCqlOperatorsMethod(CqlOperator.DateComponent, (dfe.operand!)),
                             Elm.DateTime dt            => DateTime(dt),
-                            Date d                     => Date(d),
+                            Date d                     => BindCqlOperatorsMethod(CqlOperator.Date, d.year, d.month, d.day),
                             DateTimeComponentFrom dtcf => BindCqlOperatorsMethod(CqlOperator.DateTimeComponent, TranslateExpression(dtcf.operand!), dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
                             Descendents desc           => desc.source == null ? NullConstantExpression.ForType<IEnumerable<object>>() : BindCqlOperatorsMethod(CqlOperator.Descendents, (desc.source)),
                             DifferenceBetween dbe      => BindCqlOperatorsMethod(CqlOperator.DifferenceBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
@@ -284,7 +286,7 @@ namespace Hl7.Cql.Compiler
                             Quantity qua               => BindCqlOperatorsMethod(CqlOperator.Quantity, Expression.Constant(qua.value, typeof(decimal?)), Expression.Constant(qua.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string))),
                             Query qe                   => Query(qe),
                             QueryLetRef qlre           => GetScopeExpression(qlre.name!),
-                            Ratio re                   => Ratio(re),
+                            Ratio re                   => BindCqlOperatorsMethod(CqlOperator.Ratio, re.numerator, re.denominator),
                             ReplaceMatches e           => ReplaceMatches(e),
                             Retrieve re                => Retrieve(re),
                             Round rnd                  => BindCqlOperatorsMethod(CqlOperator.Round, TranslateExpression(rnd.operand!), rnd.precision is { } precision ? TranslateExpression(precision) : NullConstantExpression.Int32),
@@ -295,7 +297,7 @@ namespace Hl7.Cql.Compiler
                             Split split                => Split(split),
                             Substring e                => Substring(e),
                             Starts starts              => Starts(starts),
-                            Time time                  => Time(time),
+                            Time time                  => BindCqlOperatorsMethod(CqlOperator.Time, time.hour, time.minute, time.second, time.millisecond),
                             Elm.Tuple tu               => Tuple(tu),
                             Union ue                   => Union(ue),
                             ValueSetRef vsre           => ValueSetRef(vsre),
