@@ -48,7 +48,7 @@ partial class ExpressionBuilder
         return name;
     }
 
-    private ConstantExpression Precision(IGetDateTimePrecision elementWithDateTimePrecision)
+    private Expression Precision(IGetDateTimePrecision elementWithDateTimePrecision)
     {
         if (PrecisionToString(elementWithDateTimePrecision) is {} n)
         {

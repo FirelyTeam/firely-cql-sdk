@@ -21,9 +21,9 @@ internal abstract class OperatorsBinder
     /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
     /// </summary>
     /// <param name="operator">The operator to bind.</param>
-    /// <param name="parameters">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
+    /// <param name="args">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
     /// <returns>An expression that implements <paramref name="operator"/>. In most cases, this will be a <see cref="MethodCallExpression"/>.</returns>
-    public abstract Expression BindToMethod(CqlOperator @operator, params Expression[] parameters);
+    public abstract Expression BindToMethod(CqlOperator @operator, params Expression[] args);
 
     /// <summary>
     /// Converts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.

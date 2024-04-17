@@ -51,26 +51,26 @@ namespace Hl7.Cql.Compiler
         }
         protected Expression Date(Elm.Date e) =>
             _operatorsBinder.BindToMethod(CqlOperator.Date,
-                TranslateExpression(e.year) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.month) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.day) ?? NullConstantExpression.NullableInt32);
+                TranslateExpression(e.year) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.month) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.day) ?? NullConstantExpression.Int32);
 
         protected Expression DateTime(Elm.DateTime e)
         {
-            var offset = e.timezoneOffset is { } tzo ? TranslateExpression(tzo) : NullConstantExpression.NullableInt32;
+            var offset = e.timezoneOffset is { } tzo ? TranslateExpression(tzo) : NullConstantExpression.Int32;
             if (offset.Type != typeof(decimal?))
             {
                 offset = ChangeType(offset, typeof(decimal?));
             }
 
             return _operatorsBinder.BindToMethod(CqlOperator.DateTime,
-                TranslateExpression(e.year) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.month) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.day) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.hour) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.minute) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.second) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.millisecond) ?? NullConstantExpression.NullableInt32,
+                TranslateExpression(e.year) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.month) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.day) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.hour) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.minute) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.second) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.millisecond) ?? NullConstantExpression.Int32,
                 offset);
         }
 
@@ -123,10 +123,10 @@ namespace Hl7.Cql.Compiler
         protected Expression Time(Elm.Time e)
         {
             return _operatorsBinder.BindToMethod(CqlOperator.Time,
-                TranslateExpression(e.hour) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.minute) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.second) ?? NullConstantExpression.NullableInt32,
-                TranslateExpression(e.millisecond) ?? NullConstantExpression.NullableInt32);
+                TranslateExpression(e.hour) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.minute) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.second) ?? NullConstantExpression.Int32,
+                TranslateExpression(e.millisecond) ?? NullConstantExpression.Int32);
         }
     }
 }

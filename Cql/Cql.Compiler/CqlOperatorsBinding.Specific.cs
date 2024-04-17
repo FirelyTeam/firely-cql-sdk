@@ -229,7 +229,7 @@ partial class CqlOperatorsBinder
     {
         // This should be disallowed but isn't, so handle it:
         if (operand.Type == typeof(CqlInterval<object>))
-            return NullConstantExpression.NullableInt32;
+            return NullConstantExpression.Int32;
 
         return BindToMethodConvertArgs(nameof(ICqlOperators.Width), operand);
     }

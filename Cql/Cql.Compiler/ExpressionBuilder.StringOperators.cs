@@ -75,7 +75,7 @@ namespace Hl7.Cql.Compiler
             var stringToSub = TranslateExpression(e!.stringToSub!);
             var startIndex = TranslateExpression(e!.startIndex!);
             var length = e.length == null
-                ? NullConstantExpression.NullableInt32
+                ? NullConstantExpression.Int32
                 : TranslateExpression(e.length);
             return _operatorsBinder.BindToMethod(CqlOperator.Substring, stringToSub, startIndex, length);
         }

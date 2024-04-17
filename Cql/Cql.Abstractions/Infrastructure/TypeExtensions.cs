@@ -19,6 +19,15 @@ internal static class TypeExtensionsX
     }
 
     /// <summary>
+    /// Checks if the specified type can have values that accept null values, such as reference types or nullable value types.
+    /// </summary>
+    /// <param name="type">The type to check.</param>
+    /// <returns>True if the type can accept null values, false otherwise.</returns>
+    public static bool AllowNullValues(this Type type) =>
+        !type.IsValueType
+        || type.IsNullable(out _);
+
+    /// <summary>
     /// Checks if the specified type is an enum or a nullable enum.
     /// </summary>
     /// <param name="type">The type to check.</param>

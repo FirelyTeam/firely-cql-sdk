@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 
@@ -20,6 +25,12 @@ partial class CqlOperatorsBinder
             return true;
         }
 
+        if (to.AllowNullValues() && fromExpr is ConstantExpression { Value: null })
+        {
+            toExpr = NullConstantExpression.ForType(to);
+            return true;
+        }
+
         if (to.IsAssignableFrom(from))
         {
             toExpr = Expression.Convert(fromExpr, to); // Direct cast
@@ -32,13 +43,6 @@ partial class CqlOperatorsBinder
                 nameof(ICqlOperators.Convert),
                 [to],
                 fromExpr.ExprConvert<object>());
-            return true;
-        }
-
-        if (fromExpr is ConstantExpression { Value: null }
-            && Nullable.GetUnderlyingType(to) is not null)
-        {
-            toExpr = NullConstantExpression.ForType(to);
             return true;
         }
 

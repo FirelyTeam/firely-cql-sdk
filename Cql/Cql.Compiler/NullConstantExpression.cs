@@ -10,7 +10,7 @@ internal static class NullConstantExpression
 {
     public static ConstantExpression Object = Typed<object>.Instance;
     public static ConstantExpression String = Typed<string>.Instance;
-    public static ConstantExpression NullableInt32 = Typed<int?>.Instance;
+    public static ConstantExpression Int32  = Typed<int?>.Instance;
 
     public static ConstantExpression ForType<TType>()
         => Typed<TType>.Instance;
