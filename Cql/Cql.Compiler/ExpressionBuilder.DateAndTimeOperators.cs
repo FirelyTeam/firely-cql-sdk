@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
                 (false, true) => CqlOperator.ElementAfterInterval,
                 _             => CqlOperator.After
             };
-            return BindCqlOperatorsMethod(method, expr);
+            return BindCqlOperator(method, expr);
         }
 
         protected Expression? Before(Elm.Before e)
@@ -43,7 +43,7 @@ namespace Hl7.Cql.Compiler
                 (false, true) => CqlOperator.ElementBeforeInterval,
                 _             => CqlOperator.Before
             };
-            return BindCqlOperatorsMethod(method, expr);
+            return BindCqlOperator(method, expr);
         }
 
         protected Expression DateTime(Elm.DateTime e)
@@ -54,7 +54,7 @@ namespace Hl7.Cql.Compiler
                 offset = ChangeType(offset, typeof(decimal?));
             }
 
-            return BindCqlOperatorsMethod(CqlOperator.DateTime,
+            return BindCqlOperator(CqlOperator.DateTime,
                 e.year,
                 e.month,
                 e.day,
@@ -73,11 +73,11 @@ namespace Hl7.Cql.Compiler
             if (left.Type.IsCqlInterval(out _))
             {
                 return right.Type.IsCqlInterval(out _)
-                    ? BindCqlOperatorsMethod(CqlOperator.IntervalSameAs, left, right, precision)
+                    ? BindCqlOperator(CqlOperator.IntervalSameAs, left, right, precision)
                     : throw this.NewExpressionBuildingException();
             }
 
-            return BindCqlOperatorsMethod(CqlOperator.SameAs, left, right, precision);
+            return BindCqlOperator(CqlOperator.SameAs, left, right, precision);
         }
 
         protected Expression SameOrAfter(Elm.SameOrAfter e)
@@ -88,11 +88,11 @@ namespace Hl7.Cql.Compiler
             if (left.Type.IsCqlInterval(out _))
             {
                 return right.Type.IsCqlInterval(out _)
-                    ? BindCqlOperatorsMethod(CqlOperator.IntervalSameOrAfter, left, right, precision)
+                    ? BindCqlOperator(CqlOperator.IntervalSameOrAfter, left, right, precision)
                     : throw this.NewExpressionBuildingException();
             }
 
-            return BindCqlOperatorsMethod(CqlOperator.SameOrAfter, left, right, precision);
+            return BindCqlOperator(CqlOperator.SameOrAfter, left, right, precision);
         }
 
         protected Expression SameOrBefore(Elm.SameOrBefore e)
@@ -104,11 +104,11 @@ namespace Hl7.Cql.Compiler
             if (left.Type.IsCqlInterval(out _))
             {
                 return right.Type.IsCqlInterval(out _)
-                    ? BindCqlOperatorsMethod(CqlOperator.IntervalSameOrBefore, left, right, precision)
+                    ? BindCqlOperator(CqlOperator.IntervalSameOrBefore, left, right, precision)
                     : throw this.NewExpressionBuildingException();
             }
 
-            return BindCqlOperatorsMethod(CqlOperator.SameOrBefore, left, right, precision);
+            return BindCqlOperator(CqlOperator.SameOrBefore, left, right, precision);
         }
     }
 }

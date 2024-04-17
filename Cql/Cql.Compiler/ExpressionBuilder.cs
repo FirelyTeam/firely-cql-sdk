@@ -109,13 +109,13 @@ namespace Hl7.Cql.Compiler
                 _                        => throw new InvalidOperationException("Invalid type for args")
             };
 
-        private Expression BindCqlOperatorsMethod(CqlOperator @operator) =>
+        private Expression BindCqlOperator(CqlOperator @operator) =>
             _operatorsBinder.BindToMethod(@operator);
 
-        private Expression BindCqlOperatorsMethod(CqlOperator @operator, params object?[] args) =>
-            BindCqlOperatorsMethod<object>(@operator, args);
+        private Expression BindCqlOperator(CqlOperator @operator, params object?[] args) =>
+            BindCqlOperator<object>(@operator, args);
 
-        private Expression BindCqlOperatorsMethod<T>(CqlOperator @operator, params T?[] args) =>
+        private Expression BindCqlOperator<T>(CqlOperator @operator, params T?[] args) =>
             _operatorsBinder.BindToMethod(@operator, TranslateExpressions(args));
 
         [return:NotNullIfNotNull(nameof(arg))]
@@ -163,52 +163,52 @@ namespace Hl7.Cql.Compiler
                             Truncate trunc             => UnaryOperator(CqlOperator.Truncate, trunc),
                             Upper e                    => UnaryOperator(CqlOperator.Upper, e),
                             Width width                => UnaryOperator(CqlOperator.Width, width),
-                            Add add                    => BindCqlOperatorsMethod(CqlOperator.Add, add.operand[..2]),
-                            And and                    => BindCqlOperatorsMethod(CqlOperator.And, and.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#and
-                            Divide divide              => BindCqlOperatorsMethod(CqlOperator.Divide, divide.operand[..2]),
-                            EndsWith e                 => BindCqlOperatorsMethod(CqlOperator.EndsWith, e.operand[..2]),
-                            Greater gtr                => BindCqlOperatorsMethod(CqlOperator.Greater, gtr.operand[..2]),
-                            GreaterOrEqual gtre        => BindCqlOperatorsMethod(CqlOperator.GreaterOrEqual, gtre.operand[..2]),
-                            HighBoundary hb            => BindCqlOperatorsMethod(CqlOperator.HighBoundary, hb.operand[..2]),
-                            Implies implies            => BindCqlOperatorsMethod(CqlOperator.Implies, implies.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#implies
-                            Less less                  => BindCqlOperatorsMethod(CqlOperator.Less, less.operand[..2]),
-                            LessOrEqual lesse          => BindCqlOperatorsMethod(CqlOperator.LessOrEqual, lesse.operand[..2]),
-                            Log log                    => BindCqlOperatorsMethod(CqlOperator.Log, log.operand[..2]),
-                            LowBoundary lb             => BindCqlOperatorsMethod(CqlOperator.LowBoundary, lb.operand[..2]),
-                            Matches e                  => BindCqlOperatorsMethod(CqlOperator.Matches, e.operand[..2]),
-                            Modulo mod                 => BindCqlOperatorsMethod(CqlOperator.Modulo, mod.operand[..2]),
-                            Multiply mul               => BindCqlOperatorsMethod(CqlOperator.Multiply, mul.operand[..2]),
-                            Or or                      => BindCqlOperatorsMethod(CqlOperator.Or, or.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#or
-                            Power pow                  => BindCqlOperatorsMethod(CqlOperator.Pow, pow.operand[..2]),
-                            Subtract sub               => BindCqlOperatorsMethod(CqlOperator.Subtract, sub.operand[..2]),
-                            StartsWith e               => BindCqlOperatorsMethod(CqlOperator.StartsWith, e.operand[..2]),
-                            TruncatedDivide div        => BindCqlOperatorsMethod(CqlOperator.TruncatedDivide, div.operand[..2]),
-                            Xor xor                    => BindCqlOperatorsMethod(CqlOperator.Xor, xor.operand[..2]),
-                            AllTrue alt                => BindCqlOperatorsMethod(CqlOperator.AllTrue, alt.source),
-                            AnyTrue ate                => BindCqlOperatorsMethod(CqlOperator.AnyTrue, ate.source),
-                            Avg avg                    => BindCqlOperatorsMethod(CqlOperator.Avg, avg.source),
-                            Count ce                   => BindCqlOperatorsMethod(CqlOperator.Count, ce.source),
-                            GeometricMean gme          => BindCqlOperatorsMethod(CqlOperator.GeometricMean, gme.source),
-                            Max max                    => BindCqlOperatorsMethod(CqlOperator.MaxElementInList, max.source),
-                            Median med                 => BindCqlOperatorsMethod(CqlOperator.Median, med.source),
-                            Min min                    => BindCqlOperatorsMethod(CqlOperator.MinElementInList, min.source),
-                            Mode mode                  => BindCqlOperatorsMethod(CqlOperator.Mode, mode.source),
-                            PopulationStdDev pstd      => BindCqlOperatorsMethod(CqlOperator.PopulationStdDev, pstd.source),
-                            PopulationVariance pvar    => BindCqlOperatorsMethod(CqlOperator.PopulationVariance, pvar.source),
-                            Product prod               => BindCqlOperatorsMethod(CqlOperator.Product, prod.source),
-                            Sum sum                    => BindCqlOperatorsMethod(CqlOperator.Sum, sum.source),
-                            StdDev stddev              => BindCqlOperatorsMethod(CqlOperator.StdDev, stddev.source),
-                            Variance variance          => BindCqlOperatorsMethod(CqlOperator.Variance, variance.source),
+                            Add add                    => BindCqlOperator(CqlOperator.Add, add.operand[..2]),
+                            And and                    => BindCqlOperator(CqlOperator.And, and.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#and
+                            Divide divide              => BindCqlOperator(CqlOperator.Divide, divide.operand[..2]),
+                            EndsWith e                 => BindCqlOperator(CqlOperator.EndsWith, e.operand[..2]),
+                            Greater gtr                => BindCqlOperator(CqlOperator.Greater, gtr.operand[..2]),
+                            GreaterOrEqual gtre        => BindCqlOperator(CqlOperator.GreaterOrEqual, gtre.operand[..2]),
+                            HighBoundary hb            => BindCqlOperator(CqlOperator.HighBoundary, hb.operand[..2]),
+                            Implies implies            => BindCqlOperator(CqlOperator.Implies, implies.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#implies
+                            Less less                  => BindCqlOperator(CqlOperator.Less, less.operand[..2]),
+                            LessOrEqual lesse          => BindCqlOperator(CqlOperator.LessOrEqual, lesse.operand[..2]),
+                            Log log                    => BindCqlOperator(CqlOperator.Log, log.operand[..2]),
+                            LowBoundary lb             => BindCqlOperator(CqlOperator.LowBoundary, lb.operand[..2]),
+                            Matches e                  => BindCqlOperator(CqlOperator.Matches, e.operand[..2]),
+                            Modulo mod                 => BindCqlOperator(CqlOperator.Modulo, mod.operand[..2]),
+                            Multiply mul               => BindCqlOperator(CqlOperator.Multiply, mul.operand[..2]),
+                            Or or                      => BindCqlOperator(CqlOperator.Or, or.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#or
+                            Power pow                  => BindCqlOperator(CqlOperator.Pow, pow.operand[..2]),
+                            Subtract sub               => BindCqlOperator(CqlOperator.Subtract, sub.operand[..2]),
+                            StartsWith e               => BindCqlOperator(CqlOperator.StartsWith, e.operand[..2]),
+                            TruncatedDivide div        => BindCqlOperator(CqlOperator.TruncatedDivide, div.operand[..2]),
+                            Xor xor                    => BindCqlOperator(CqlOperator.Xor, xor.operand[..2]),
+                            AllTrue alt                => BindCqlOperator(CqlOperator.AllTrue, alt.source),
+                            AnyTrue ate                => BindCqlOperator(CqlOperator.AnyTrue, ate.source),
+                            Avg avg                    => BindCqlOperator(CqlOperator.Avg, avg.source),
+                            Count ce                   => BindCqlOperator(CqlOperator.Count, ce.source),
+                            GeometricMean gme          => BindCqlOperator(CqlOperator.GeometricMean, gme.source),
+                            Max max                    => BindCqlOperator(CqlOperator.MaxElementInList, max.source),
+                            Median med                 => BindCqlOperator(CqlOperator.Median, med.source),
+                            Min min                    => BindCqlOperator(CqlOperator.MinElementInList, min.source),
+                            Mode mode                  => BindCqlOperator(CqlOperator.Mode, mode.source),
+                            PopulationStdDev pstd      => BindCqlOperator(CqlOperator.PopulationStdDev, pstd.source),
+                            PopulationVariance pvar    => BindCqlOperator(CqlOperator.PopulationVariance, pvar.source),
+                            Product prod               => BindCqlOperator(CqlOperator.Product, prod.source),
+                            Sum sum                    => BindCqlOperator(CqlOperator.Sum, sum.source),
+                            StdDev stddev              => BindCqlOperator(CqlOperator.StdDev, stddev.source),
+                            Variance variance          => BindCqlOperator(CqlOperator.Variance, variance.source),
                             Negate neg                 => neg.operand is Literal literal ? NegateLiteral(neg, literal) : UnaryOperator(CqlOperator.Negate, neg),
-                            TimeOfDay tod              => BindCqlOperatorsMethod(CqlOperator.TimeOfDay),
-                            Today today                => BindCqlOperatorsMethod(CqlOperator.Today),
+                            TimeOfDay tod              => BindCqlOperator(CqlOperator.TimeOfDay),
+                            Today today                => BindCqlOperator(CqlOperator.Today),
                             ToBoolean e                => ChangeType((e.operand!), typeof(bool?)),
                             ToConcept tc               => ChangeType((tc.operand!), _typeResolver.ConceptType),
                             ToDateTime tdte            => ChangeType((tdte.operand!), _typeResolver.DateTimeType),
                             ToDate tde                 => ChangeType((tde.operand!), _typeResolver.DateType),
                             ToDecimal tde              => ChangeType((tde.operand!), typeof(decimal?)),
                             ToInteger tde              => ChangeType((tde.operand!), typeof(int?)),
-                            ToList tle                 => BindCqlOperatorsMethod(CqlOperator.ToList, (tle.operand!)),
+                            ToList tle                 => BindCqlOperator(CqlOperator.ToList, (tle.operand!)),
                             ToLong toLong              => ChangeType((toLong.operand!), typeof(long?)),
                             ToQuantity tq              => ChangeType((tq.operand!), _typeResolver.QuantityType),
                             ToString e                 => ChangeType((e.operand!), typeof(string)),
@@ -218,33 +218,33 @@ namespace Hl7.Cql.Compiler
                             As @as                     => As(@as),
                             AnyInValueSet avs          => InValueSetPostProcess(avs.valueset, TranslateExpression(avs.codes!), isList: true),
                             Before before              => Before(before),
-                            CalculateAgeAt caa         => BindCqlOperatorsMethod(CqlOperator.CalculateAgeAt, TranslateExpression(caa.operand[0]), TranslateExpression(caa.operand[1]), caa.precisionOrNull()),
-                            CalculateAge ca            => BindCqlOperatorsMethod(CqlOperator.CalculateAge, TranslateExpression(ca.operand), ca.precisionOrNull()),
+                            CalculateAgeAt caa         => BindCqlOperator(CqlOperator.CalculateAgeAt, TranslateExpression(caa.operand[0]), TranslateExpression(caa.operand[1]), caa.precisionOrNull()),
+                            CalculateAge ca            => BindCqlOperator(CqlOperator.CalculateAge, TranslateExpression(ca.operand), ca.precisionOrNull()),
                             Case ce                    => Case(ce),
                             Coalesce cle               => Coalesce(cle),
                             CodeRef cre                => CodeRef(cre),
                             CodeSystemRef csr          => CodeSystemRef(csr),
                             Collapse col               => Collapse(col),
                             Combine com                => Combine(com),
-                            Concatenate cctn           => BindCqlOperatorsMethod(CqlOperator.Concatenate, cctn.operand),
+                            Concatenate cctn           => BindCqlOperator(CqlOperator.Concatenate, cctn.operand),
                             ConceptRef cr              => ConceptRef(cr),
                             Contains ct                => Contains(ct),
-                            ConvertQuantity cqe        => BindCqlOperatorsMethod(CqlOperator.ConvertQuantity, (cqe.operand[..2])),
-                            DateFrom dfe               => BindCqlOperatorsMethod(CqlOperator.DateComponent, (dfe.operand!)),
+                            ConvertQuantity cqe        => BindCqlOperator(CqlOperator.ConvertQuantity, (cqe.operand[..2])),
+                            DateFrom dfe               => BindCqlOperator(CqlOperator.DateComponent, (dfe.operand!)),
                             Elm.DateTime dt            => DateTime(dt),
-                            Date d                     => BindCqlOperatorsMethod(CqlOperator.Date, d.year, d.month, d.day),
-                            DateTimeComponentFrom dtcf => BindCqlOperatorsMethod(CqlOperator.DateTimeComponent, TranslateExpression(dtcf.operand!), dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
-                            Descendents desc           => desc.source == null ? NullConstantExpression.ForType<IEnumerable<object>>() : BindCqlOperatorsMethod(CqlOperator.Descendents, (desc.source)),
-                            DifferenceBetween dbe      => BindCqlOperatorsMethod(CqlOperator.DifferenceBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
-                            DurationBetween dbe        => BindCqlOperatorsMethod(CqlOperator.DurationBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
+                            Date d                     => BindCqlOperator(CqlOperator.Date, d.year, d.month, d.day),
+                            DateTimeComponentFrom dtcf => BindCqlOperator(CqlOperator.DateTimeComponent, TranslateExpression(dtcf.operand!), dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
+                            Descendents desc           => desc.source == null ? NullConstantExpression.ForType<IEnumerable<object>>() : BindCqlOperator(CqlOperator.Descendents, (desc.source)),
+                            DifferenceBetween dbe      => BindCqlOperator(CqlOperator.DifferenceBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
+                            DurationBetween dbe        => BindCqlOperator(CqlOperator.DurationBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
                             Ends e                     => Ends(e),
-                            Equal eq                   => BindCqlOperatorsMethod(CqlOperator.Equal, (eq.operand[..2])),
+                            Equal eq                   => BindCqlOperator(CqlOperator.Equal, (eq.operand[..2])),
                             Equivalent eqv             => Equivalent(eqv),
                             Except ex                  => Except(ex),
-                            Expand expand              => BindCqlOperatorsMethod(CqlOperator.Expand, (expand.operand[..2])), ExpandValueSet evs => CqlOperatorsBinder.CallCreateValueSetFacade(TranslateExpression(evs.operand!)),
+                            Expand expand              => BindCqlOperator(CqlOperator.Expand, (expand.operand[..2])), ExpandValueSet evs => CqlOperatorsBinder.CallCreateValueSetFacade(TranslateExpression(evs.operand!)),
                             FunctionRef fre            => FunctionRef(fre),
                             ExpressionRef ere          => ExpressionRef(ere),
-                            First first                => BindCqlOperatorsMethod(CqlOperator.First, (first.source!)),
+                            First first                => BindCqlOperator(CqlOperator.First, (first.source!)),
                             IdentifierRef ire          => IdentifierRef(ire),
                             If @if                     => If(@if),
                             Includes inc               => Includes(inc),
@@ -258,38 +258,38 @@ namespace Hl7.Cql.Compiler
                             In @in                     => In(@in),
                             Is @is                     => Is(@is),
                             IsNull isn                 => IsNull(isn),
-                            Last last                  => BindCqlOperatorsMethod(CqlOperator.Last, last.source),
-                            LastPositionOf lpo         => BindCqlOperatorsMethod(CqlOperator.LastPositionOf, lpo.@string, lpo.pattern!),
+                            Last last                  => BindCqlOperator(CqlOperator.Last, last.source),
+                            LastPositionOf lpo         => BindCqlOperator(CqlOperator.LastPositionOf, lpo.@string, lpo.pattern!),
                             Length len                 => Length(len),
                             List list                  => List(list),
                             Literal lit                => Literal(lit),
-                            MaxValue max               => BindCqlOperatorsMethod(CqlOperator.MaximumValue, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
+                            MaxValue max               => BindCqlOperator(CqlOperator.MaximumValue, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
                             Meets meets                => Meets(meets),
                             MeetsBefore meets          => MeetsBefore(meets),
                             MeetsAfter meets           => MeetsAfter(meets),
                             Message msg                => Message(msg),
-                            MinValue min               => BindCqlOperatorsMethod(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
-                            NotEqual ne                => BindCqlOperatorsMethod(CqlOperator.Not, BindCqlOperatorsMethod(CqlOperator.Equal, (ne.operand[..2]))),
-                            Now now                    => BindCqlOperatorsMethod(CqlOperator.Now),
+                            MinValue min               => BindCqlOperator(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
+                            NotEqual ne                => BindCqlOperator(CqlOperator.Not, BindCqlOperator(CqlOperator.Equal, (ne.operand[..2]))),
+                            Now now                    => BindCqlOperator(CqlOperator.Now),
                             Null @null                 => NullConstantExpression.ForType(TypeFor(@null)!),
                             OperandRef ore             => OperandRef(ore),
                             Overlaps ole               => Overlaps(ole),
                             OverlapsAfter ola          => OverlapsAfter(ola),
                             OverlapsBefore olb         => OverlapsBefore(olb),
                             ParameterRef pre           => ParameterRef(pre),
-                            PositionOf po              => BindCqlOperatorsMethod(CqlOperator.PositionOf, po.pattern, po.@string),
+                            PositionOf po              => BindCqlOperator(CqlOperator.PositionOf, po.pattern, po.@string),
                             ProperContains pc          => ProperContains(pc),
                             ProperIn pi                => ProperIn(pi),
                             ProperIncludes pi          => ProperIncludes(pi),
                             ProperIncludedIn pie       => ProperIncludedIn(pie),
                             Property pe                => Property(pe),
-                            Quantity qua               => BindCqlOperatorsMethod(CqlOperator.Quantity, Expression.Constant(qua.value, typeof(decimal?)), Expression.Constant(qua.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string))),
+                            Quantity qua               => BindCqlOperator(CqlOperator.Quantity, Expression.Constant(qua.value, typeof(decimal?)), Expression.Constant(qua.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string))),
                             Query qe                   => Query(qe),
                             QueryLetRef qlre           => GetScopeExpression(qlre.name!),
-                            Ratio re                   => BindCqlOperatorsMethod(CqlOperator.Ratio, re.numerator, re.denominator),
+                            Ratio re                   => BindCqlOperator(CqlOperator.Ratio, re.numerator, re.denominator),
                             ReplaceMatches e           => ReplaceMatches(e),
                             Retrieve re                => Retrieve(re),
-                            Round rnd                  => BindCqlOperatorsMethod(CqlOperator.Round, TranslateExpression(rnd.operand!), rnd.precision is { } precision ? TranslateExpression(precision) : NullConstantExpression.Int32),
+                            Round rnd                  => BindCqlOperator(CqlOperator.Round, TranslateExpression(rnd.operand!), rnd.precision is { } precision ? TranslateExpression(precision) : NullConstantExpression.Int32),
                             SameAs sa                  => SameAs(sa),
                             SameOrAfter soa            => SameOrAfter(soa),
                             SameOrBefore sob           => SameOrBefore(sob),
@@ -297,7 +297,7 @@ namespace Hl7.Cql.Compiler
                             Split split                => Split(split),
                             Substring e                => Substring(e),
                             Starts starts              => Starts(starts),
-                            Time time                  => BindCqlOperatorsMethod(CqlOperator.Time, time.hour, time.minute, time.second, time.millisecond),
+                            Time time                  => BindCqlOperator(CqlOperator.Time, time.hour, time.minute, time.second, time.millisecond),
                             Elm.Tuple tu               => Tuple(tu),
                             Union ue                   => Union(ue),
                             ValueSetRef vsre           => ValueSetRef(vsre),
@@ -324,7 +324,7 @@ namespace Hl7.Cql.Compiler
             var resultType = unary.resultTypeSpecifier != null
                 ? TypeFor(unary.resultTypeSpecifier)
                 : null;
-            var call = BindCqlOperatorsMethod(@operator, operand);
+            var call = BindCqlOperator(@operator, operand);
             if (resultType != null && resultType != call.Type)
             {
                 var typeAs = ChangeType(call, resultType);
@@ -667,7 +667,7 @@ namespace Hl7.Cql.Compiler
                             var selectParameter = Expression.Parameter(valueEnumerableElement, TypeNameToIdentifier(value.Type, this));
                             var body = ChangeType(selectParameter, memberArrayElement);
                             var selectLambda = Expression.Lambda(body, selectParameter);
-                            var callSelectMethod = BindCqlOperatorsMethod(CqlOperator.Select, [value, selectLambda
+                            var callSelectMethod = BindCqlOperator(CqlOperator.Select, [value, selectLambda
                             ]);
                             var toArrayMethod = typeof(Enumerable)
                                 .GetMethod(nameof(Enumerable.ToArray))!
@@ -808,7 +808,7 @@ namespace Hl7.Cql.Compiler
                     foreach (var caseItem in ce.caseItem)
                     {
                         var caseWhen = TranslateExpression(caseItem.when!);
-                        var caseWhenEquality = Expression.Coalesce(BindCqlOperatorsMethod(CqlOperator.Equal, comparand, caseWhen), Expression.Constant(false));
+                        var caseWhenEquality = Expression.Coalesce(BindCqlOperator(CqlOperator.Equal, comparand, caseWhen), Expression.Constant(false));
                         var caseThen = TranslateExpression(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
@@ -891,16 +891,16 @@ namespace Hl7.Cql.Compiler
                     if (string.IsNullOrWhiteSpace(valueSetRef.name))
                         throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
                     var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
-                    return BindCqlOperatorsMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty);
+                    return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty);
                 }
 
                 // In this construct, instead of querying a value set, we're testing resources
                 // against a list of codes, e.g., as defined by the code from or codesystem construct
                 var codes = TranslateExpression(retrieve.codes);
-                return BindCqlOperatorsMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty);
+                return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty);
             }
 
-            return BindCqlOperatorsMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), NullConstantExpression.ForType<CqlValueSet>(), codeProperty);
+            return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), NullConstantExpression.ForType<CqlValueSet>(), codeProperty);
         }
 
         protected Expression Property(Property op)
@@ -920,7 +920,7 @@ namespace Hl7.Cql.Compiler
                     if (pathMemberInfo == null)
                     {
                         _logger.LogWarning(FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
-                        return BindCqlOperatorsMethod(CqlOperator.LateBoundProperty, scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
+                        return BindCqlOperator(CqlOperator.LateBoundProperty, scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     }
                     var propogate = PropagateNull(scopeExpression, pathMemberInfo);
                     // This is only necessary for Firely b/c it always initializes colleciton members even if they are
@@ -994,7 +994,7 @@ namespace Hl7.Cql.Compiler
                 if (pathMemberInfo == null)
                 {
                     _logger.LogWarning(FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
-                    return BindCqlOperatorsMethod(CqlOperator.LateBoundProperty, source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
+                    return BindCqlOperator(CqlOperator.LateBoundProperty, source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                 }
                 if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
                 {
@@ -1051,7 +1051,7 @@ namespace Hl7.Cql.Compiler
                         return operands[0];
                     }
 
-                    return BindCqlOperatorsMethod(CqlOperator.Convert, operands[0], Expression.Constant(typeof(string), typeof(Type)));
+                    return BindCqlOperator(CqlOperator.Convert, operands[0], Expression.Constant(typeof(string), typeof(Type)));
                 }
             }
 
@@ -1172,13 +1172,13 @@ namespace Hl7.Cql.Compiler
 
             var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
             if (codeType == _typeResolver.CodeType)
-                return BindCqlOperatorsMethod(isList ? CqlOperator.CodesInValueSet : CqlOperator.CodeInValueSet, expr, valueSet);
+                return BindCqlOperator(isList ? CqlOperator.CodesInValueSet : CqlOperator.CodeInValueSet, expr, valueSet);
 
             if (codeType == _typeResolver.ConceptType)
-                return BindCqlOperatorsMethod(isList ? CqlOperator.ConceptsInValueSet : CqlOperator.ConceptInValueSet, expr, valueSet);
+                return BindCqlOperator(isList ? CqlOperator.ConceptsInValueSet : CqlOperator.ConceptInValueSet, expr, valueSet);
 
             if (codeType == typeof(string))
-                return BindCqlOperatorsMethod(isList ? CqlOperator.StringsInValueSet: CqlOperator.StringInValueSet, expr, valueSet);
+                return BindCqlOperator(isList ? CqlOperator.StringsInValueSet: CqlOperator.StringInValueSet, expr, valueSet);
 
             throw new NotImplementedException().WithContext(this);
         }

@@ -136,15 +136,15 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                return BindCqlOperatorsMethod(CqlOperator.Select, input, lambda);
+                return BindCqlOperator(CqlOperator.Select, input, lambda);
             }
 
             if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                return BindCqlOperatorsMethod(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
+                return BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
             }
 
-            return BindCqlOperatorsMethod(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
+            return BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
         }
     }
 }
