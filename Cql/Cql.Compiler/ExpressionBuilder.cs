@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -131,38 +132,38 @@ namespace Hl7.Cql.Compiler
                         Expression? expression = element switch
                         {
                             //@formatter:off
-                            Abs abs                    => ChangeType(BindCqlOperator(CqlOperator.Abs, abs.operand), abs.resultTypeSpecifier),
-                            Ceiling ceil               => ChangeType(BindCqlOperator(CqlOperator.Ceiling, ceil.operand), ceil.resultTypeSpecifier),
-                            ConvertsToBoolean ce       => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDate, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToDate ce          => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDate, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToDateTime ce      => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDateTime, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToDecimal ce       => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDecimal, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToLong ce          => ChangeType(BindCqlOperator(CqlOperator.ConvertsToLong, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToInteger ce       => ChangeType(BindCqlOperator(CqlOperator.ConvertsToInteger, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToQuantity ce      => ChangeType(BindCqlOperator(CqlOperator.ConvertsToQuantity, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToString ce        => ChangeType(BindCqlOperator(CqlOperator.ConvertsToString, ce.operand), ce.resultTypeSpecifier),
-                            ConvertsToTime ce          => ChangeType(BindCqlOperator(CqlOperator.ConvertsToTime, ce.operand), ce.resultTypeSpecifier),
-                            Distinct distinct          => ChangeType(BindCqlOperator(CqlOperator.Distinct, distinct.operand), distinct.resultTypeSpecifier),
-                            End e                      => ChangeType(BindCqlOperator(CqlOperator.IntervalEnd, e.operand), e.resultTypeSpecifier),
-                            Exists ex                  => ChangeType(BindCqlOperator(CqlOperator.Exists, ex.operand), ex.resultTypeSpecifier),
-                            Exp exe                    => ChangeType(BindCqlOperator(CqlOperator.Exp, exe.operand), exe.resultTypeSpecifier),
-                            Flatten fl                 => ChangeType(BindCqlOperator(CqlOperator.Flatten, fl.operand), fl.resultTypeSpecifier),
-                            Floor floor                => ChangeType(BindCqlOperator(CqlOperator.Floor, floor.operand), floor.resultTypeSpecifier),
-                            IsFalse isn                => ChangeType(BindCqlOperator(CqlOperator.IsFalse, isn.operand), isn.resultTypeSpecifier),
-                            IsTrue isn                 => ChangeType(BindCqlOperator(CqlOperator.IsTrue, isn.operand), isn.resultTypeSpecifier),
-                            Ln ln                      => ChangeType(BindCqlOperator(CqlOperator.Ln, ln.operand), ln.resultTypeSpecifier),
-                            Lower e                    => ChangeType(BindCqlOperator(CqlOperator.Lower, e.operand), e.resultTypeSpecifier),
-                            Not not                    => ChangeType(BindCqlOperator(CqlOperator.Not, not.operand), not.resultTypeSpecifier),
-                            PointFrom pf               => ChangeType(BindCqlOperator(CqlOperator.PointFrom, pf.operand), pf.resultTypeSpecifier),
-                            Precision pre              => ChangeType(BindCqlOperator(CqlOperator.Precision, pre.operand), pre.resultTypeSpecifier),
-                            Predecessor prd            => ChangeType(BindCqlOperator(CqlOperator.Predecessor, prd.operand), prd.resultTypeSpecifier),
-                            SingletonFrom sf           => ChangeType(BindCqlOperator(CqlOperator.Single, sf.operand), sf.resultTypeSpecifier),
-                            Successor suc              => ChangeType(BindCqlOperator(CqlOperator.Successor, suc.operand), suc.resultTypeSpecifier),
-                            Start start                => ChangeType(BindCqlOperator(CqlOperator.IntervalStart, start.operand), start.resultTypeSpecifier),
-                            TimezoneOffsetFrom tofe    => ChangeType(BindCqlOperator(CqlOperator.TimeZoneComponent, tofe.operand), tofe.resultTypeSpecifier),
-                            Truncate trunc             => ChangeType(BindCqlOperator(CqlOperator.Truncate, trunc.operand), trunc.resultTypeSpecifier),
-                            Upper e                    => ChangeType(BindCqlOperator(CqlOperator.Upper, e.operand), e.resultTypeSpecifier),
-                            Width width                => ChangeType(BindCqlOperator(CqlOperator.Width, width.operand), width.resultTypeSpecifier),
+                            Abs abs                    => BindCqlOperator(CqlOperator.Abs, abs.operand),
+                            Ceiling ceil               => BindCqlOperator(CqlOperator.Ceiling, ceil.operand),
+                            ConvertsToBoolean ce       => BindCqlOperator(CqlOperator.ConvertsToDate, ce.operand),
+                            ConvertsToDate ce          => BindCqlOperator(CqlOperator.ConvertsToDate, ce.operand),
+                            ConvertsToDateTime ce      => BindCqlOperator(CqlOperator.ConvertsToDateTime, ce.operand),
+                            ConvertsToDecimal ce       => BindCqlOperator(CqlOperator.ConvertsToDecimal, ce.operand),
+                            ConvertsToLong ce          => BindCqlOperator(CqlOperator.ConvertsToLong, ce.operand),
+                            ConvertsToInteger ce       => BindCqlOperator(CqlOperator.ConvertsToInteger, ce.operand),
+                            ConvertsToQuantity ce      => BindCqlOperator(CqlOperator.ConvertsToQuantity, ce.operand),
+                            ConvertsToString ce        => BindCqlOperator(CqlOperator.ConvertsToString, ce.operand),
+                            ConvertsToTime ce          => BindCqlOperator(CqlOperator.ConvertsToTime, ce.operand),
+                            Distinct distinct          => BindCqlOperator(CqlOperator.Distinct, distinct.operand),
+                            End e                      => BindCqlOperator(CqlOperator.IntervalEnd, e.operand),
+                            Exists ex                  => BindCqlOperator(CqlOperator.Exists, ex.operand),
+                            Exp exe                    => BindCqlOperator(CqlOperator.Exp, exe.operand),
+                            Flatten fl                 => BindCqlOperator(CqlOperator.Flatten, fl.operand),
+                            Floor floor                => BindCqlOperator(CqlOperator.Floor, floor.operand),
+                            IsFalse isn                => BindCqlOperator(CqlOperator.IsFalse, isn.operand),
+                            IsTrue isn                 => BindCqlOperator(CqlOperator.IsTrue, isn.operand),
+                            Ln ln                      => BindCqlOperator(CqlOperator.Ln, ln.operand),
+                            Lower e                    => BindCqlOperator(CqlOperator.Lower, e.operand),
+                            Not not                    => BindCqlOperator(CqlOperator.Not, not.operand),
+                            PointFrom pf               => BindCqlOperator(CqlOperator.PointFrom, pf.operand),
+                            Precision pre              => BindCqlOperator(CqlOperator.Precision, pre.operand),
+                            Predecessor prd            => BindCqlOperator(CqlOperator.Predecessor, prd.operand),
+                            SingletonFrom sf           => BindCqlOperator(CqlOperator.Single, sf.operand),
+                            Successor suc              => BindCqlOperator(CqlOperator.Successor, suc.operand),
+                            Start start                => BindCqlOperator(CqlOperator.IntervalStart, start.operand),
+                            TimezoneOffsetFrom tofe    => BindCqlOperator(CqlOperator.TimeZoneComponent, tofe.operand),
+                            Truncate trunc             => BindCqlOperator(CqlOperator.Truncate, trunc.operand),
+                            Upper e                    => BindCqlOperator(CqlOperator.Upper, e.operand),
+                            Width width                => BindCqlOperator(CqlOperator.Width, width.operand),
                             Add add                    => BindCqlOperator(CqlOperator.Add, add.operand[..2]),
                             And and                    => BindCqlOperator(CqlOperator.And, and.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#and
                             Divide divide              => BindCqlOperator(CqlOperator.Divide, divide.operand[..2]),
@@ -305,6 +306,8 @@ namespace Hl7.Cql.Compiler
                                      $"Expression {arg.GetType().FullName} is not implemented.")
                             //@formatter:on
                         };
+
+                        expression = ChangeType(expression!, element.resultTypeSpecifier);
                         expression = Mutate(element, expression);
                         return expression!;
                     }
