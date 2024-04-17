@@ -24,22 +24,27 @@ partial class CqlOperatorsBinder
                 var asNullable = ConvertToType<bool?>(equal);
                 return asNullable;
             }
-            else if (right.Type == typeof(string))
+
+            if (right.Type == typeof(string))
             {
                 return BindToMethod(CqlOperator.EnumEqualsString, left.ExprConvert<object>(), right);
             }
-            else throw new NotImplementedException();
+
+            throw new NotImplementedException();
         }
-        else if (right.Type.IsEnum())
+
+        if (right.Type.IsEnum())
         {
             if (left.Type == typeof(string))
             {
                 return BindToMethod(CqlOperator.EnumEqualsString, right.ExprConvert<object>(), left);
 
             }
-            else throw new NotImplementedException();
+
+            throw new NotImplementedException();
         }
-        else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+
+        if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
         {
             var leftElementType = _typeResolver.GetListElementType(left.Type, true)!;
             if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
@@ -51,10 +56,8 @@ partial class CqlOperatorsBinder
             }
             throw new NotImplementedException();
         }
-        else
-        {
-            return BindToMethodConvertArgs(nameof(ICqlOperators.Equal), left, right);
-        }
+
+        return BindToMethodConvertArgs(nameof(ICqlOperators.Equal), left, right);
     }
 
     private Expression Expand(
@@ -62,7 +65,7 @@ partial class CqlOperatorsBinder
         Expression perQuantity)
     {
         if (perQuantity is ConstantExpression { Value: null })
-            perQuantity = CqlExpressions.Null_ConstantExpression<CqlQuantity>();
+            perQuantity = NullConstantExpression.ForType<CqlQuantity>();
 
         if (_typeResolver.ImplementsGenericIEnumerable(argument.Type))
         {
@@ -71,13 +74,13 @@ partial class CqlOperatorsBinder
             if (elementType == null)
                 throw new ArgumentException($"Unable to determine element type for Expand argument.", nameof(argument));
 
-            if (!elementType.IsTypeCqlInterval())
+            if (!elementType.IsCqlInterval(out _))
                 throw new ArgumentException($"Expand expects a list element type to be an interval.",
                     nameof(argument));
             return BindToMethod(nameof(ICqlOperators.ExpandList), argument, perQuantity);
         }
 
-        if (!argument.Type.IsTypeCqlInterval())
+        if (!argument.Type.IsCqlInterval(out _))
             throw new ArgumentException($"Expand allows only a List<Interval<T>> or an Interval<T> as a parameter.", nameof(argument));
 
         return BindToMethod(nameof(ICqlOperators.ExpandInterval), argument, perQuantity);
@@ -95,7 +98,8 @@ partial class CqlOperatorsBinder
             return call;
 
         }
-        else throw new ArgumentException("SortBy expects 3 parameters: source, lambda, and SortOrder constant", nameof(by));
+
+        throw new ArgumentException("SortBy expects 3 parameters: source, lambda, and SortOrder constant", nameof(by));
     }
 
     private Expression InList(
@@ -113,7 +117,7 @@ partial class CqlOperatorsBinder
 
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), [left, right], false);
         if (methodInfo is null)
-            return CqlExpressions.NullObject_ConstantExpression;
+            return NullConstantExpression.Object;
 
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo, convertedArgs);
         return call;
@@ -149,7 +153,8 @@ partial class CqlOperatorsBinder
             var call = BindToMethod(nameof(ICqlOperators.ResolveValueSet), @new);
             return call;
         }
-        else throw new ArgumentException("Expression should be a constant CqlValueSet");
+
+        throw new ArgumentException("Expression should be a constant CqlValueSet");
     }
 
     private Expression Minimum(Expression typeConstant)
@@ -159,7 +164,8 @@ partial class CqlOperatorsBinder
             var call = BindToGenericMethod(nameof(ICqlOperators.Minimum), [t]);
             return call;
         }
-        else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
+
+        throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
     }
 
     private Expression Maximum(Expression typeConstant)
@@ -169,7 +175,8 @@ partial class CqlOperatorsBinder
             var call = BindToGenericMethod(nameof(ICqlOperators.Maximum), [t]);
             return call;
         }
-        else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
+
+        throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
     }
 
     private Expression Coalesce(Expression operand)
@@ -221,7 +228,7 @@ partial class CqlOperatorsBinder
     {
         // This should be disallowed but isn't, so handle it:
         if (operand.Type == typeof(CqlInterval<object>))
-            return CqlExpressions.Null_ConstantExpression<int?>();
+            return NullConstantExpression.ForType<int?>();
 
         return BindToMethodConvertArgs(nameof(ICqlOperators.Width), operand);
     }
@@ -239,7 +246,8 @@ partial class CqlOperatorsBinder
             var call = BindToGenericMethod(nameof(ICqlOperators.LateBoundProperty), [type!], source, propertyName);
             return call;
         }
-        else throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
+
+        throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
     }
 
     private Expression Interval(
@@ -367,7 +375,8 @@ partial class CqlOperatorsBinder
             var call = BindToGenericMethod(nameof(ICqlOperators.SelectOrNull), [sourceType, resultType], source, lambda);
             return call;
         }
-        else throw new ArgumentException("Source is not generic", nameof(source));
+
+        throw new ArgumentException("Source is not generic", nameof(source));
     }
     private MethodCallExpression Where(
         Expression source,
@@ -379,7 +388,8 @@ partial class CqlOperatorsBinder
             var call = BindToGenericMethod(nameof(ICqlOperators.WhereOrNull), [sourceType], source, lambda);
             return call;
         }
-        else throw new ArgumentException("Source is not generic", nameof(source));
+
+        throw new ArgumentException("Source is not generic", nameof(source));
     }
 
     private MethodCallExpression SelectMany(
@@ -395,9 +405,11 @@ partial class CqlOperatorsBinder
                 var call = BindToGenericMethod(nameof(ICqlOperators.SelectManyOrNull), [firstGenericArgument, secondGenericArgument], source, collectionSelector);
                 return call;
             }
-            else throw new ArgumentException("Collection selector does not return an IEnumerable", nameof(collectionSelectorLambda));
+
+            throw new ArgumentException("Collection selector does not return an IEnumerable", nameof(collectionSelectorLambda));
         }
-        else throw new ArgumentException("Source is not generic", nameof(source));
+
+        throw new ArgumentException("Source is not generic", nameof(source));
     }
 
     private MethodCallExpression SelectManyResults(

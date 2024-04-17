@@ -34,10 +34,8 @@ namespace Hl7.Cql.Compiler
                             var elmAs = new ElmAsExpression(newArray, type);
                             return elmAs;
                         }
-                        else
-                        {
-                            throw this.NewExpressionBuildingException("Cannot use as operator on a list if the as type is not also a list type.");
-                        }
+
+                        throw this.NewExpressionBuildingException("Cannot use as operator on a list if the as type is not also a list type.");
                     }
                 }
             }
@@ -61,7 +59,7 @@ namespace Hl7.Cql.Compiler
                     }
                 }
             }
-            else
+
             {
                 if (string.IsNullOrWhiteSpace(@as.asType.Name))
                     throw this.NewExpressionBuildingException("The 'as' operator has no type name.");
@@ -70,7 +68,7 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException("Operand cannot be null");
 
                 var type = _typeResolver.ResolveType(@as.asType.Name!)
-                    ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
+                           ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
                 var operand = TranslateExpression(@as.operand);
                 if (!type.IsAssignableTo(operand.Type))
@@ -141,10 +139,8 @@ namespace Hl7.Cql.Compiler
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
             }
-            else
-            {
-                return _operatorsBinder.BindToMethod(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
-            }
+
+            return _operatorsBinder.BindToMethod(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
         }
     }
 }

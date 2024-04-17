@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
         {
             var source = TranslateExpression(e.source!);
             var operand = e.separator == null
-                ? CqlExpressions.Null_ConstantExpression<string>()
+                ? NullConstantExpression.ForType<string>()
                 : TranslateExpression(e.separator);
             return _operatorsBinder.BindToMethod(CqlOperator.Combine, source, operand);
         }
@@ -32,11 +32,12 @@ namespace Hl7.Cql.Compiler
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.CharAt, left, right);
             }
-            else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+
+            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.ListElementAt, left, right);
             }
-            else throw new NotImplementedException().WithContext(this);
+            throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression? Length(Elm.Length len)
@@ -46,11 +47,12 @@ namespace Hl7.Cql.Compiler
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.ListLength, operand);
             }
-            else if (operand.Type == typeof(string))
+
+            if (operand.Type == typeof(string))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.StringLength, operand);
             }
-            else throw new NotImplementedException().WithContext(this);
+            throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression? ReplaceMatches(Elm.ReplaceMatches e)
@@ -73,7 +75,7 @@ namespace Hl7.Cql.Compiler
             var stringToSub = TranslateExpression(e!.stringToSub!);
             var startIndex = TranslateExpression(e!.startIndex!);
             var length = e.length == null
-                ? CqlExpressions.Null_ConstantExpression<int?>()
+                ? NullConstantExpression.ForType<int?>()
                 : TranslateExpression(e.length);
             return _operatorsBinder.BindToMethod(CqlOperator.Substring, stringToSub, startIndex, length);
         }

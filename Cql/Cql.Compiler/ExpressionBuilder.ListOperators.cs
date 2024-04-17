@@ -29,10 +29,10 @@ namespace Hl7.Cql.Compiler
         {
             var source = TranslateExpression(slice.source!);
             var start = slice.startIndex == null || slice.startIndex is Elm.Null
-                ? CqlExpressions.Null_ConstantExpression<int?>()
+                ? NullConstantExpression.ForType<int?>()
                 : TranslateExpression(slice.startIndex!);
             var end = slice.endIndex == null || slice.endIndex is Elm.Null
-                ? CqlExpressions.Null_ConstantExpression<int?>()
+                ? NullConstantExpression.ForType<int?>()
                 : TranslateExpression(slice.endIndex!);
             if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
                 throw new NotImplementedException().WithContext(this);

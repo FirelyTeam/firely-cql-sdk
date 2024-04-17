@@ -72,8 +72,7 @@ namespace Hl7.Cql.Compiler
 
             if (expression != MemberExpression.Expression)
                 return new NullConditionalMemberExpression(MemberExpression.Update(expression));
-            else
-                return this;
+            return this;
         }
     }
 }

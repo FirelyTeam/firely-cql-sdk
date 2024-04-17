@@ -17,8 +17,8 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Equivalent(Elm.Equivalent eqv)
         {
-            var left = TranslateExpression(eqv.operand![0]);
-            var right = TranslateExpression(eqv.operand![1]);
+            var left = TranslateExpression(eqv.operand[0]);
+            var right = TranslateExpression(eqv.operand[1]);
             if (!_typeResolver.ImplementsGenericIEnumerable(left.Type))
                 return _operatorsBinder.BindToMethod(CqlOperator.Equivalent, left, right);
 

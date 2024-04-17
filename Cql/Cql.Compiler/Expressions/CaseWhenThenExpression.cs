@@ -27,8 +27,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (When == when && Then == then)
                     return this;
-                else
-                    return new WhenThenCase(when, then);
+                return new WhenThenCase(when, then);
             }
         }
 
@@ -84,8 +83,7 @@ namespace Hl7.Cql.Compiler
         {
             if (Enumerable.SequenceEqual(WhenThenCases, whenThenCases) && ElseCase == elseCase)
                 return this;
-            else
-                return new CaseWhenThenExpression(whenThenCases, elseCase);
+            return new CaseWhenThenExpression(whenThenCases, elseCase);
         }
 
         public override Type Type => ElseCase.Type;

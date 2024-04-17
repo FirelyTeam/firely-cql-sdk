@@ -36,31 +36,13 @@ partial class ExpressionBuilder
         return KnownErrors.TryGetValue((source, to), out correctedTo);
     }
 
-    protected static bool IsInterval(Type t, out Type? elementType)
+    protected static ConstantExpression Precision(IGetDateTimePrecision elementWithDateTimePrecision)
     {
-        if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(CqlInterval<>))
-        {
-            elementType = t.GetGenericArguments()[0];
-            return true;
-        }
-        elementType = null;
-        return false;
-    }
+        var precisionNullable = elementWithDateTimePrecision.precisionNullable();
+        if (precisionNullable is not {} precision)
+            return NullConstantExpression.String;
 
-    internal static MethodCallExpression CallCreateValueSetFacade(Expression operand)
-    {
-        var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
-        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, createFacadeMethod, operand);
-
-        return call;
-    }
-
-    protected static ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
-    {
-        if (!precisionSpecified)
-            return CqlExpressions.NullString_ConstantExpression;
-
-        var name = Enum.GetName(elmPrecision)!.ToLowerInvariant();
+        var name = Enum.GetName(precision)!.ToLowerInvariant();
         var ce = Expression.Constant(name, typeof(string));
         return ce;
     }
@@ -179,10 +161,7 @@ partial class ExpressionBuilder
     {
         if (before.Type.IsValueType)
             return before;
-        else
-        {
-            return new NullConditionalMemberExpression(before, member);
-        }
+        return new NullConditionalMemberExpression(before, member);
     }
 
     internal static string TypeNameToIdentifier(Type type, ExpressionBuilder? ctx)

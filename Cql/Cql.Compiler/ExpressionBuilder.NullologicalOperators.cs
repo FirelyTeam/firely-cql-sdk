@@ -23,46 +23,39 @@ namespace Hl7.Cql.Compiler
             var operands = ce.operand!
                 .SelectToArray(op => TranslateExpression(op));
             if (operands.Length == 1 && _typeResolver.ImplementsGenericIEnumerable(operands[0].Type))
-            {
                 return _operatorsBinder.BindToMethod(CqlOperator.Coalesce, operands[0]);
-            }
+
             var distinctOperandTypes = operands
                 .Select(op => op.Type)
                 .Distinct()
                 .ToArray();
             if (distinctOperandTypes.Length != 1)
                 throw this.NewExpressionBuildingException("All operand types should match when using Coalesce");
-            var type = operands[0].Type;
-            if (type.IsValueType && !type.IsNullable())
-                throw new NotSupportedException("Coalesce on value types is not defined.");
-            else
-            {
-                if (operands.Length == 1)
-                    return operands[0];
-                else
-                {
 
-                    var coalesce = Expression.Coalesce(operands[0], operands[1]);
-                    for (int i = 2; i < operands.Length; i++)
-                    {
-                        coalesce = Expression.Coalesce(coalesce, operands[i]);
-                    }
-                    return coalesce;
-                }
+            var type = operands[0].Type;
+            if (type.IsValueType && !type.IsNullable(out _))
+                throw new NotSupportedException("Coalesce on value types is not defined.");
+
+            if (operands.Length == 1)
+                return operands[0];
+
+            var coalesce = Expression.Coalesce(operands[0], operands[1]);
+            for (int i = 2; i < operands.Length; i++)
+            {
+                coalesce = Expression.Coalesce(coalesce, operands[i]);
             }
+            return coalesce;
         }
 
         protected Expression IsNull(Elm.IsNull isn)
         {
             var operand = TranslateExpression(isn.operand!);
-            if (operand.Type.IsValueType && operand.Type.IsNullable() == false)
+            if (operand.Type.IsValueType && operand.Type.IsNullable(out _) == false)
                 return Expression.Constant(false, typeof(bool?));
-            else
-            {
-                var compare = Expression.Equal(operand, Expression.Constant(null));
-                var asNullableBool = compare.ExprConvert<bool?>();
-                return asNullableBool;
-            }
+
+            var compare = Expression.Equal(operand, Expression.Constant(null));
+            var asNullableBool = compare.ExprConvert<bool?>();
+            return asNullableBool;
         }
     }
 }

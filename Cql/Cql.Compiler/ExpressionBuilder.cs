@@ -29,6 +29,7 @@ using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
 using Expression = System.Linq.Expressions.Expression;
 using System.Dynamic;
+using TypeExtensions = Hl7.Cql.Compiler.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Compiler
 {
@@ -255,9 +256,9 @@ namespace Hl7.Cql.Compiler
                             Before before => Before(before),
                             CalculateAgeAt caa => _operatorsBinder.BindToMethod(CqlOperator.CalculateAgeAt,
                                 TranslateExpression(caa.operand![0]), TranslateExpression(caa.operand[1]),
-                                Precision(caa.precision, caa.precisionSpecified)),
+                                Precision(caa)),
                             CalculateAge ca => _operatorsBinder.BindToMethod(CqlOperator.CalculateAge,
-                                TranslateExpression(ca.operand), Precision(ca.precision, ca.precisionSpecified)),
+                                TranslateExpression(ca.operand), Precision(ca)),
                             Case ce => Case(ce),
                             Coalesce cle => Coalesce(cle),
                             CodeRef cre => CodeRef(cre),
@@ -275,18 +276,18 @@ namespace Hl7.Cql.Compiler
                             Date d => Date(d),
                             DateTimeComponentFrom dtcf => DateTimeComponentFrom(dtcf),
                             Descendents desc => desc.source == null
-                                ? CqlExpressions.Null_ConstantExpression<IEnumerable<object>>()
+                                ? NullConstantExpression.ForType<IEnumerable<object>>()
                                 : _operatorsBinder.BindToMethod(CqlOperator.Descendents,
                                     TranslateExpression(desc.source)),
                             DifferenceBetween dbe => _operatorsBinder.BindToMethod(CqlOperator.DifferenceBetween,
                             [
                                 ..TranslateExpressions(dbe.operand[..2]),
-                                Precision(dbe.precision, dbe.precisionSpecified)
+                                Precision(dbe)
                             ]),
                             DurationBetween dbe => _operatorsBinder.BindToMethod(CqlOperator.DurationBetween,
                             [
                                 ..TranslateExpressions(dbe.operand[..2]),
-                                Precision(dbe.precision, dbe.precisionSpecified)
+                                Precision(dbe)
                             ]),
                             Ends e => Ends(e),
                             Equal eq => _operatorsBinder.BindToMethod(CqlOperator.Equal,
@@ -295,7 +296,7 @@ namespace Hl7.Cql.Compiler
                             Except ex => Except(ex),
                             Expand expand => _operatorsBinder.BindToMethod(CqlOperator.Expand,
                                 TranslateExpressions(expand.operand[..2])),
-                            ExpandValueSet evs => CallCreateValueSetFacade(TranslateExpression(evs.operand!)),
+                            ExpandValueSet evs => CqlOperatorsBinder.CallCreateValueSetFacade(TranslateExpression(evs.operand!)),
                             FunctionRef fre => FunctionRef(fre),
                             ExpressionRef ere => ExpressionRef(ere),
                             First first => _operatorsBinder.BindToMethod(CqlOperator.First,
@@ -332,7 +333,7 @@ namespace Hl7.Cql.Compiler
                                 _operatorsBinder.BindToMethod(CqlOperator.Equal,
                                     TranslateExpressions(ne.operand[..2]))),
                             Now now => _operatorsBinder.BindToMethod(CqlOperator.Now),
-                            Null @null => CqlExpressions.Null_ConstantExpression(TypeFor(@null) ?? typeof(object)),
+                            Null @null => NullConstantExpression.ForType(TypeFor(@null)!),
                             OperandRef ore => OperandRef(ore),
                             Overlaps ole => Overlaps(ole),
                             OverlapsAfter ola => OverlapsAfter(ola),
@@ -359,7 +360,7 @@ namespace Hl7.Cql.Compiler
                                 TranslateExpression(rnd.operand!),
                                 rnd.precision is { } precision
                                     ? TranslateExpression(precision!)
-                                    : CqlExpressions.Null_ConstantExpression<int?>()),
+                                    : NullConstantExpression.ForType<int?>()),
                             SameAs sa => SameAs(sa),
                             SameOrAfter soa => SameOrAfter(soa),
                             SameOrBefore sob => SameOrBefore(sob),
@@ -444,7 +445,7 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");
                 }
 
-                var @new = CallCreateValueSetFacade(cqlValueSet);
+                var @new = CqlOperatorsBinder.CallCreateValueSetFacade(cqlValueSet);
                 return @new;
             }
             return cqlValueSet;
@@ -479,7 +480,8 @@ namespace Hl7.Cql.Compiler
                 var init = Expression.MemberInit(@new, elementBindings);
                 return init;
             }
-            else return @new;
+
+            return @new;
         }
 
         protected Expression List(List list)
@@ -491,7 +493,7 @@ namespace Hl7.Cql.Compiler
 
                 var elementType = TypeFor(listTypeSpecifier.elementType);
                 var elements = list.element?.SelectToArray(ele => TranslateExpression(ele)) ?? [];
-                if (!elementType.IsNullable() && elements.Any(exp => exp.Type.IsNullable()))
+                if (!elementType.IsNullable(out _) && elements.Any(exp => exp.Type.IsNullable(out _)))
                 {
                     for (int i = 0; i < elements.Length; i++)
                     {
@@ -518,8 +520,8 @@ namespace Hl7.Cql.Compiler
                 var asEnumerable = array.ExprTypeAs(typeof(IEnumerable<>).MakeGenericType(elementType));
                 return asEnumerable;
             }
-            else
-                throw this.NewExpressionBuildingException($"List is the wrong type");
+
+            throw this.NewExpressionBuildingException($"List is the wrong type");
 
         }
 
@@ -564,7 +566,7 @@ namespace Hl7.Cql.Compiler
                     var enumValueValue = TranslateExpression(ine.element[0]!.value!);
                     if (enumValueValue.Type == instanceType)
                         return enumValueValue;
-                    else if (enumValueValue.Type == typeof(string))
+                    if (enumValueValue.Type == typeof(string))
                     {
                         var parseMethod = typeof(Enum)
                             .GetMethods()
@@ -615,7 +617,8 @@ namespace Hl7.Cql.Compiler
                     denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
                 return @new;
             }
-            else if (instanceType == typeof(CqlQuantity))
+
+            if (instanceType == typeof(CqlQuantity))
             {
                 Expression? valueExpr = null;
                 Expression? unitExpr = null;
@@ -638,7 +641,7 @@ namespace Hl7.Cql.Compiler
                     unitExpr ?? Expression.Default(typeof(string)));
                 return @new;
             }
-            else if (instanceType == typeof(CqlCode))
+            if (instanceType == typeof(CqlCode))
             {
                 Expression? codeExpr = null;
                 Expression? systemExpr = null;
@@ -666,7 +669,7 @@ namespace Hl7.Cql.Compiler
                     displayExpr ?? Expression.Default(typeof(string)));
                 return @new;
             }
-            else if (instanceType == typeof(CqlConcept))
+            if (instanceType == typeof(CqlConcept))
             {
                 Expression? codesExpr = null;
                 Expression? displayExpr = null;
@@ -712,7 +715,8 @@ namespace Hl7.Cql.Compiler
                 {
                     return Expression.Bind(memberInfo, value);
                 }
-                else if (property.PropertyType.IsArray)
+
+                if (property.PropertyType.IsArray)
                 {
                     if (value.Type.IsArray)
                     {
@@ -762,7 +766,8 @@ namespace Hl7.Cql.Compiler
                 var convert = ChangeType(value, property.PropertyType);
                 return Expression.Bind(memberInfo, convert);
             }
-            else throw new NotImplementedException().WithContext(this);
+
+            throw new NotImplementedException().WithContext(this);
         }
 
         protected Expression If(If @if)
@@ -795,12 +800,10 @@ namespace Hl7.Cql.Compiler
 
                 return ifThenElse;
             }
-            else
-            {
-                var @false = Expression.Constant(null).ExprConvert(then.Type);
-                var ifThen = Expression.Condition(condition, then, @false);
-                return ifThen;
-            }
+
+            var @false = Expression.Constant(null).ExprConvert(then.Type);
+            var ifThen = Expression.Condition(condition, then, @false);
+            return ifThen;
         }
 
         protected Expression Literal(Literal lit)
@@ -813,7 +816,7 @@ namespace Hl7.Cql.Compiler
             // var result = _operatorBinding.ConvertToType(Expression.Constant(value), convertedType);
             // return result;
 
-            if (type.IsNullable())
+            if (type.IsNullable(out _))
             {
                 var changed = Expression.Constant(value!, convertedType);
                 var asNullable = changed.ExprConvert(type);
@@ -822,50 +825,47 @@ namespace Hl7.Cql.Compiler
             return Expression.Constant(value, convertedType);
         }
 
-        public (object?, Type) ConvertLiteral(Literal lit, Type? type)
+        protected (object?, Type) ConvertLiteral(Literal lit, Type? type)
         {
             if (type == null)
                 throw new NotImplementedException().WithContext(this);
-            else if (type.IsNullable())
+
+            if (type.IsNullable(out var underlyingType))
             {
                 if (string.IsNullOrWhiteSpace(lit.value))
                     return (null, type);
-                else
+
+                if (!typeof(IConvertible).IsAssignableFrom(underlyingType))
+                    throw new NotSupportedException("Only convertible types can be used for literals.");
+
+                try
                 {
-                    var underlyingType = Nullable.GetUnderlyingType(type);
-                    if (typeof(IConvertible).IsAssignableFrom(underlyingType))
-                    {
-                        try
-                        {
-                            var converted = System.Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture);
-                            return (converted, underlyingType);
-                        }
-                        catch (OverflowException)
-                        {
-                            return (null, type);
-                        }
-                    }
-                    else throw new NotSupportedException("Only convertible types can be used for literals.");
+                    var converted = System.Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture); //@ TODO: Cast
+                    return (converted, underlyingType);
+                }
+                catch (OverflowException)
+                {
+                    return (null, type);
                 }
             }
-            else
+
+            if (type == typeof(string))
+                return (lit.value, type);
+
+            if (typeof(IConvertible).IsAssignableFrom(type!))
             {
-                if (type == typeof(string))
-                    return (lit.value, type);
-                if (typeof(IConvertible).IsAssignableFrom(type!))
-                {
-                    var converted = System.Convert.ChangeType(lit.value, type, CultureInfo.InvariantCulture);
-                    return (converted, type);
-                }
-                else throw new NotSupportedException("Only convertible types can be used for literals.");
+                var converted = System.Convert.ChangeType(lit.value, type, CultureInfo.InvariantCulture); //@ TODO: Cast
+                return (converted, type);
             }
+
+            throw new NotSupportedException("Only convertible types can be used for literals.");
         }
 
         protected Expression OperandRef(OperandRef ore)
         {
             if (_operands.TryGetValue(ore.name!, out var expression))
                 return expression;
-            else throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
+            throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
         }
 
         protected Expression Case(Case ce)
@@ -903,7 +903,7 @@ namespace Hl7.Cql.Compiler
                         if (caseThen.Type != elseThen.Type)
                             caseThen = caseThen.ExprConvert(elseThen.Type);
 
-                        if (caseWhen.Type.IsNullable())
+                        if (caseWhen.Type.IsNullable(out _))
                         {
                             caseWhen = Expression.Coalesce(caseWhen, Expression.Constant(false));
                         }
@@ -915,7 +915,7 @@ namespace Hl7.Cql.Compiler
                 return new CaseWhenThenExpression(cases, elseThen);
             }
 
-            else throw this.NewExpressionBuildingException("Invalid case expression.  At least 1 case and an else must be present.");
+            throw this.NewExpressionBuildingException("Invalid case expression.  At least 1 case and an else must be present.");
         }
 
         private Expression Retrieve(Retrieve retrieve)
@@ -957,7 +957,7 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                codeProperty = CqlExpressions.Null_ConstantExpression<PropertyInfo>();
+                codeProperty = NullConstantExpression.ForType<PropertyInfo>();
             }
 
             if (retrieve.codes != null)
@@ -969,18 +969,14 @@ namespace Hl7.Cql.Compiler
                     var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
                     return _operatorsBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
                 }
-                else
-                {
-                    // In this construct, instead of querying a value set, we're testing resources
-                    // against a list of codes, e.g., as defined by the code from or codesystem construct
-                    var codes = TranslateExpression(retrieve.codes);
-                    return _operatorsBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
-                }
+
+                // In this construct, instead of querying a value set, we're testing resources
+                // against a list of codes, e.g., as defined by the code from or codesystem construct
+                var codes = TranslateExpression(retrieve.codes);
+                return _operatorsBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
             }
-            else
-            {
-                return _operatorsBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), CqlExpressions.Null_ConstantExpression<CqlValueSet>(), codeProperty!);
-            }
+
+            return _operatorsBinder.BindToMethod(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), NullConstantExpression.ForType<CqlValueSet>(), codeProperty!);
         }
 
         protected Expression Property(Property op)
@@ -1023,7 +1019,8 @@ namespace Hl7.Cql.Compiler
                     }
                     return propogate;
                 }
-                else if (op.source != null)
+
+                if (op.source != null)
                 {
                     var source = TranslateExpression(op.source);
                     var parts = path.Split('.');
@@ -1042,23 +1039,21 @@ namespace Hl7.Cql.Compiler
                         }
                         return source;
                     }
-                    else
+
+                    var expectedType = TypeFor(op, throwIfNotFound: false);
+
+                    // If we cannot determine the type from the ELM, let's try
+                    // if the POCO model can help us.
+                    if(expectedType == null)
                     {
-                        var expectedType = TypeFor(op, throwIfNotFound: false);
-
-                        // If we cannot determine the type from the ELM, let's try
-                        // if the POCO model can help us.
-                        if(expectedType == null)
-                        {
-                            expectedType = _typeResolver.GetProperty(source.Type, path)?.PropertyType
-                                ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
-                        }
-
-                        var result = PropertyHelper(source, path, expectedType);
-                        return result;
+                        expectedType = _typeResolver.GetProperty(source.Type, path)?.PropertyType
+                                       ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
                     }
+
+                    var result = PropertyHelper(source, path, expectedType);
+                    return result;
                 }
-                else throw new NotImplementedException().WithContext(this);
+                throw new NotImplementedException().WithContext(this);
             }
         }
 
@@ -1231,7 +1226,8 @@ namespace Hl7.Cql.Compiler
                 var invoke = InvokeDefinitionThroughRuntimeContext(name, libraryAlias, returnType);
                 return invoke;
             }
-            else throw this.NewExpressionBuildingException("LambdaExpressions should be a variant of Func<>");
+
+            throw this.NewExpressionBuildingException("LambdaExpressions should be a variant of Func<>");
         }
 
         protected Expression InvokeDefinitionThroughRuntimeContext(
@@ -1244,6 +1240,23 @@ namespace Hl7.Cql.Compiler
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
             return new DefinitionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, CqlExpressions.ParameterExpression, funcType);
+        }
+
+        private Expression InValueSetPostProcess(ValueSetRef valueset, Expression expr, bool isList)
+        {
+            var codeType = isList ? _typeResolver.GetListElementType(expr.Type, throwError: true)! : expr.Type;
+
+            var valueSet = InvokeDefinitionThroughRuntimeContext(valueset.name!, valueset.libraryName, typeof(CqlValueSet));
+            if (codeType == _typeResolver.CodeType)
+                return _operatorsBinder.BindToMethod(isList ? CqlOperator.CodesInValueSet : CqlOperator.CodeInValueSet, expr, valueSet);
+
+            if (codeType == _typeResolver.ConceptType)
+                return _operatorsBinder.BindToMethod(isList ? CqlOperator.ConceptsInValueSet : CqlOperator.ConceptInValueSet, expr, valueSet);
+
+            if (codeType == typeof(string))
+                return _operatorsBinder.BindToMethod(isList ? CqlOperator.StringsInValueSet: CqlOperator.StringInValueSet, expr, valueSet);
+
+            throw new NotImplementedException().WithContext(this);
         }
     }
 }

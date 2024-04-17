@@ -84,8 +84,7 @@ namespace Hl7.Cql.Compiler
         {
             if (Enumerable.SequenceEqual(Arguments, arguments))
                 return this;
-            else
-                return new FunctionCallExpression(Definitions, LibraryName, FunctionName, arguments, FunctionType);
+            return new FunctionCallExpression(Definitions, LibraryName, FunctionName, arguments, FunctionType);
         }
 
         public override Type Type => DefinitionCallExpression.GetReturnTypeFromDelegateType(FunctionType);

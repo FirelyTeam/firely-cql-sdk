@@ -38,7 +38,7 @@ partial class CqlOperatorsBinder
         if (fromExpr is ConstantExpression { Value: null }
             && Nullable.GetUnderlyingType(to) is not null)
         {
-            toExpr = CqlExpressions.Null_ConstantExpression(to);
+            toExpr = NullConstantExpression.ForType(to);
             return true;
         }
 
@@ -52,6 +52,13 @@ partial class CqlOperatorsBinder
     {
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
+        return call;
+    }
+
+    internal static MethodCallExpression CallCreateValueSetFacade(Expression operand)
+    {
+        var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
+        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, createFacadeMethod, operand);
         return call;
     }
 }
