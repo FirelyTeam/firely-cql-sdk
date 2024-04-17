@@ -1617,7 +1617,7 @@ public class CumulativeMedicationDuration_4_0_000
     [CqlDeclaration("TherapeuticDuration")]
 	public CqlQuantity TherapeuticDuration(CqlConcept medication)
 	{
-		var a_ = context.Operators.Quantity(14m, "days");
+		var a_ = context.Operators.Quantity((decimal?)14m, "days");
 
 		return a_;
 	}
@@ -1723,7 +1723,7 @@ public class CumulativeMedicationDuration_4_0_000
 			{
 				var j_ = context.Operators.LastOfList<CqlInterval<CqlDate>>(R);
 				var k_ = context.Operators.End(j_);
-				var l_ = context.Operators.Quantity(1m, "day");
+				var l_ = context.Operators.Quantity((decimal?)1m, "day");
 				var m_ = context.Operators.Add(k_, l_);
 				var n_ = context.Operators.Start(X);
 				var o_ = new CqlDate[]

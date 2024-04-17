@@ -22,19 +22,31 @@ partial class CqlOperatorsBinder
             return true;
         }
 
-        if (to.AllowNullValues() && fromExpr is ConstantExpression { Value: null })
+        if (fromExpr is ConstantExpression fromConstant)
         {
-            toExpr = NullConstantExpression.ForType(to);
-            return true;
-        }
+            if (fromConstant.Value is null && to.AllowNullValues())
+            {
+                // Null
+                toExpr = NullConstantExpression.ForType(to);
+                return true;
+            }
 
-        if (to == typeof(string) && fromExpr is ConstantExpression { Value: Enum enumValue })
-        {
-            var name = Enum.GetName(enumValue.GetType(), enumValue);
-            if (name is null)
-                throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
-            toExpr = Expression.Constant(name.ToLowerInvariant());
-            return true;
+            if (fromConstant.Value is Enum enumValue && to == typeof(string) )
+            {
+                // Enum to lowercase string
+                var name = Enum.GetName(enumValue.GetType(), enumValue);
+                if (name is null)
+                    throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
+                toExpr = Expression.Constant(name.ToLowerInvariant());
+                return true;
+            }
+
+            if (fromConstant.Type.IsValueType && to.IsNullable(out var toUnderlyingType) && fromConstant.Type == toUnderlyingType)
+            {
+                // e.g. int -> int?
+                toExpr = Expression.Convert(fromExpr, to);
+                return true;
+            }
         }
 
         if (to.IsAssignableFrom(from))

@@ -415,7 +415,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				var q_ = context.Operators.Start(p_);
 				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
 				var s_ = context.Operators.End(r_);
-				var t_ = context.Operators.Quantity(12m, "months");
+				var t_ = context.Operators.Quantity((decimal?)12m, "months");
 				var u_ = context.Operators.Subtract(s_, t_);
 				var w_ = context.Operators.End(r_);
 				var x_ = context.Operators.Interval(u_, w_, true, true);

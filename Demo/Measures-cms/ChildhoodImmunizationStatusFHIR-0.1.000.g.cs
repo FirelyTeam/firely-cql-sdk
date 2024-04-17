@@ -943,7 +943,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.Patient();
 		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = context.Operators.Quantity(2m, "years");
+		var c_ = context.Operators.Quantity((decimal?)2m, "years");
 		var d_ = context.Operators.Add(b_, c_);
 
 		return d_;
@@ -1121,7 +1121,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = context.Operators.ConvertDateToDateTime(b_);
 		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Quantity(42m, "days");
+		var e_ = context.Operators.Quantity((decimal?)42m, "days");
 		var f_ = context.Operators.Add(d_, e_);
 		var g_ = this.Date_of_Second_Birthday();
 		var h_ = context.Operators.Interval(f_, g_, true, true);
@@ -1215,7 +1215,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var g_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate,CqlDate,CqlDate>, Tuples.Tuple_EDFAENKgHPZdhfZCdMcGebfcS>(e_, f_);
 		bool? h_(Tuples.Tuple_EDFAENKgHPZdhfZCdMcGebfcS tuple_edfaenkghpzdhfzcdmcgebfcs)
 		{
-			var m_ = context.Operators.Quantity(1m, "day");
+			var m_ = context.Operators.Quantity((decimal?)1m, "day");
 			var n_ = context.Operators.Add(tuple_edfaenkghpzdhfzcdmcgebfcs.DTaPVaccination1, m_);
 			var o_ = context.Operators.SameOrAfter(tuple_edfaenkghpzdhfzcdmcgebfcs.DTaPVaccination2, n_, "day");
 			var q_ = context.Operators.Add(tuple_edfaenkghpzdhfzcdmcgebfcs.DTaPVaccination2, m_);
@@ -1347,7 +1347,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var f_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate,CqlDate>, Tuples.Tuple_GOXKBgTPjADgQhXfdgXgTMIJS>(d_, e_);
 		bool? g_(Tuples.Tuple_GOXKBgTPjADgQhXfdgXgTMIJS tuple_goxkbgtpjadgqhxfdgxgtmijs)
 		{
-			var l_ = context.Operators.Quantity(1m, "day");
+			var l_ = context.Operators.Quantity((decimal?)1m, "day");
 			var m_ = context.Operators.Add(tuple_goxkbgtpjadgqhxfdgxgtmijs.PolioVaccination1, l_);
 			var n_ = context.Operators.SameOrAfter(tuple_goxkbgtpjadgqhxfdgxgtmijs.PolioVaccination2, m_, "day");
 			var p_ = context.Operators.Add(tuple_goxkbgtpjadgqhxfdgxgtmijs.PolioVaccination2, l_);
@@ -1399,7 +1399,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = context.Operators.ConvertDateToDateTime(b_);
 		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Quantity(1m, "year");
+		var e_ = context.Operators.Quantity((decimal?)1m, "year");
 		var f_ = context.Operators.Add(d_, e_);
 
 		return f_;
@@ -1705,7 +1705,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var f_ = this.Hib_3_or_4_Dose_Immunizations();
 			bool? g_(CqlDate AllHibDoses2)
 			{
-				var k_ = context.Operators.Quantity(1m, "day");
+				var k_ = context.Operators.Quantity((decimal?)1m, "day");
 				var l_ = context.Operators.Subtract(AllHibDoses2, k_);
 				var m_ = context.Operators.Interval(l_, AllHibDoses2, false, false);
 				var n_ = context.Operators.ElementInInterval<CqlDate>(AllHibDoses1, m_, null);
@@ -1873,7 +1873,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var f_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate,CqlDate>, Tuples.Tuple_BGiOaDWjFAVaAFWAKdFWJcFOg>(d_, e_);
 		bool? g_(Tuples.Tuple_BGiOaDWjFAVaAFWAKdFWJcFOg tuple_bgioadwjfavaafwakdfwjcfog)
 		{
-			var l_ = context.Operators.Quantity(1m, "day");
+			var l_ = context.Operators.Quantity((decimal?)1m, "day");
 			var m_ = context.Operators.Add(tuple_bgioadwjfavaafwakdfwjcfog.HepatitisBVaccination1, l_);
 			var n_ = context.Operators.SameOrAfter(tuple_bgioadwjfavaafwakdfwjcfog.HepatitisBVaccination2, m_, "day");
 			var p_ = context.Operators.Add(tuple_bgioadwjfavaafwakdfwjcfog.HepatitisBVaccination2, l_);
@@ -1909,7 +1909,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var n_ = context.Operators.ConvertStringToDate(i_?.BirthDateElement?.Value);
 			var o_ = context.Operators.ConvertDateToDateTime(n_);
 			var p_ = context.Operators.DateFrom(o_);
-			var q_ = context.Operators.Quantity(7m, "days");
+			var q_ = context.Operators.Quantity((decimal?)7m, "days");
 			var r_ = context.Operators.Add(p_, q_);
 			var s_ = context.Operators.Interval(l_, r_, true, true);
 			var t_ = FHIRHelpers_4_3_000.ToValue(NewBornVaccine?.Performed);
@@ -1957,7 +1957,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var f_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate,CqlDate>, Tuples.Tuple_BbghRjaMVeQThBCTRUcdHSBQH>(d_, e_);
 		bool? g_(Tuples.Tuple_BbghRjaMVeQThBCTRUcdHSBQH tuple_bbghrjamveqthbctrucdhsbqh)
 		{
-			var l_ = context.Operators.Quantity(1m, "day");
+			var l_ = context.Operators.Quantity((decimal?)1m, "day");
 			var m_ = context.Operators.Add(tuple_bbghrjamveqthbctrucdhsbqh.HepatitisBVaccination1, l_);
 			var n_ = context.Operators.SameOrAfter(tuple_bbghrjamveqthbctrucdhsbqh.HepatitisBVaccination2, m_, "day");
 			var p_ = context.Operators.Add(tuple_bbghrjamveqthbctrucdhsbqh.NewBornVaccine3, l_);
@@ -2158,7 +2158,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var g_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate,CqlDate,CqlDate>, Tuples.Tuple_BVCGRhSDCRLNScbMJUKidNAJh>(e_, f_);
 		bool? h_(Tuples.Tuple_BVCGRhSDCRLNScbMJUKidNAJh tuple_bvcgrhsdcrlnscbmjukidnajh)
 		{
-			var m_ = context.Operators.Quantity(1m, "day");
+			var m_ = context.Operators.Quantity((decimal?)1m, "day");
 			var n_ = context.Operators.Add(tuple_bvcgrhsdcrlnscbmjukidnajh.PneumococcalVaccination1, m_);
 			var o_ = context.Operators.SameOrAfter(tuple_bvcgrhsdcrlnscbmjukidnajh.PneumococcalVaccination2, n_, "day");
 			var q_ = context.Operators.Add(tuple_bvcgrhsdcrlnscbmjukidnajh.PneumococcalVaccination2, m_);
@@ -2422,7 +2422,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var f_ = this.Rotavirus_2_or_3_Dose_Immunizations();
 			bool? g_(CqlDate AllRotavirusDoses2)
 			{
-				var k_ = context.Operators.Quantity(1m, "day");
+				var k_ = context.Operators.Quantity((decimal?)1m, "day");
 				var l_ = context.Operators.Subtract(AllRotavirusDoses2, k_);
 				var m_ = context.Operators.Interval(l_, AllRotavirusDoses2, false, false);
 				var n_ = context.Operators.ElementInInterval<CqlDate>(AllRotavirusDoses1, m_, null);
@@ -2515,7 +2515,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = context.Operators.ConvertDateToDateTime(b_);
 		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Quantity(180m, "days");
+		var e_ = context.Operators.Quantity((decimal?)180m, "days");
 		var f_ = context.Operators.Add(d_, e_);
 		var g_ = this.Date_of_Second_Birthday();
 		var h_ = context.Operators.Interval(f_, g_, true, true);
@@ -2609,7 +2609,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var e_ = context.Operators.SelectOrNull<ValueTuple<CqlDate,CqlDate>, Tuples.Tuple_ESUAOONTBOMCFNSgVCeZOQUbj>(c_, d_);
 		bool? f_(Tuples.Tuple_ESUAOONTBOMCFNSgVCeZOQUbj tuple_esuaoontbomcfnsgvcezoqubj)
 		{
-			var k_ = context.Operators.Quantity(1m, "day");
+			var k_ = context.Operators.Quantity((decimal?)1m, "day");
 			var l_ = context.Operators.Add(tuple_esuaoontbomcfnsgvcezoqubj.FluVaccination1, k_);
 			var m_ = context.Operators.SameOrAfter(tuple_esuaoontbomcfnsgvcezoqubj.FluVaccination2, l_, "day");
 

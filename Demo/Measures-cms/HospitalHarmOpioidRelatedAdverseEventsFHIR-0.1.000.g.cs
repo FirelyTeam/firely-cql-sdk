@@ -423,7 +423,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var ac_ = context.Operators.End(ab_);
 			var ae_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var af_ = context.Operators.Start(ae_);
-			var ag_ = context.Operators.Quantity(12m, "hours");
+			var ag_ = context.Operators.Quantity((decimal?)12m, "hours");
 			var ah_ = context.Operators.Subtract(af_, ag_);
 			var aj_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var ak_ = context.Operators.Start(aj_);

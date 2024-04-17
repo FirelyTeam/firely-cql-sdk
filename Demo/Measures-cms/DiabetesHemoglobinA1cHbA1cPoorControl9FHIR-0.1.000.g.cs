@@ -329,7 +329,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	{
 		var a_ = this.Most_Recent_HbA1c();
 		var b_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
-		var c_ = context.Operators.Quantity(9m, "%");
+		var c_ = context.Operators.Quantity((decimal?)9m, "%");
 		var d_ = context.Operators.Greater((b_ as CqlQuantity), c_);
 
 		return d_;

@@ -98,34 +98,38 @@ namespace Hl7.Cql.Compiler
             _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
 
-        private Expression[] TranslateExpressions(params object?[] args) =>
-            TranslateExpressions<object?>(args);
-
-        private Expression[] TranslateExpressions<T>(params T?[] args) =>
-            args switch
-            {
-                null or []               => [],
-                Expression[] expressions => expressions,
-                object[] objects         => objects.SelectToArray(obj => TranslateExpression(obj!)),
-                _                        => throw new InvalidOperationException("Invalid type for args")
-            };
-
         private Expression BindCqlOperator(CqlOperator @operator) =>
             _operatorsBinder.BindToMethod(@operator);
 
         private Expression BindCqlOperator(CqlOperator @operator, params object?[] args) =>
-            BindCqlOperator<object>(@operator, args);
+            _operatorsBinder.BindToMethod(@operator, TranslateAll(args));
 
         private Expression BindCqlOperator<T>(CqlOperator @operator, params T?[] args) =>
-            _operatorsBinder.BindToMethod(@operator, TranslateExpressions(args));
+            _operatorsBinder.BindToMethod(@operator, TranslateAll(args));
+
+        private Expression[] TranslateAll(params object?[] args) =>
+            TranslateAll<object?>(args);
+
+        private Expression[] TranslateAll<T>(params T?[] args) =>
+            args switch
+            {
+                Expression[] expressions => expressions,
+                object[] objects         => objects.SelectToArray(obj => Translate(obj!)),
+                _                        => [],
+            };
 
         [return:NotNullIfNotNull(nameof(arg))]
-        internal Expression? TranslateExpression(object? arg) =>
+        internal Expression? Translate(object? arg) =>
             arg switch
             {
-                null                  => NullConstantExpression.Object,
+                //null                  => NullConstantExpression.Object,
                 Expression expression => expression,
-                Element element       => this.CatchRethrowExpressionBuildingException(_ =>
+                Element element       => TranslateElement(element),
+                var obj               => Expression.Constant(obj),
+            };
+
+        private Expression TranslateElement(Element element) =>
+            this.CatchRethrowExpressionBuildingException(_ =>
                 {
                     using (PushElement(element))
                     {
@@ -203,24 +207,24 @@ namespace Hl7.Cql.Compiler
                             Negate neg                 => neg.operand is Literal literal ? NegateLiteral(neg, literal) : ChangeType(BindCqlOperator(CqlOperator.Negate, neg.operand), neg.resultTypeSpecifier),
                             TimeOfDay tod              => BindCqlOperator(CqlOperator.TimeOfDay),
                             Today today                => BindCqlOperator(CqlOperator.Today),
-                            ToBoolean e                => ChangeType((e.operand!), typeof(bool?)),
-                            ToConcept tc               => ChangeType((tc.operand!), _typeResolver.ConceptType),
-                            ToDateTime tdte            => ChangeType((tdte.operand!), _typeResolver.DateTimeType),
-                            ToDate tde                 => ChangeType((tde.operand!), _typeResolver.DateType),
-                            ToDecimal tde              => ChangeType((tde.operand!), typeof(decimal?)),
-                            ToInteger tde              => ChangeType((tde.operand!), typeof(int?)),
-                            ToList tle                 => BindCqlOperator(CqlOperator.ToList, (tle.operand!)),
-                            ToLong toLong              => ChangeType((toLong.operand!), typeof(long?)),
-                            ToQuantity tq              => ChangeType((tq.operand!), _typeResolver.QuantityType),
-                            ToString e                 => ChangeType((e.operand!), typeof(string)),
-                            ToTime e                   => ChangeType((e.operand!), _typeResolver.TimeType),
+                            ToBoolean e                => ChangeType(e.operand!, typeof(bool?)),
+                            ToConcept tc               => ChangeType(tc.operand!, _typeResolver.ConceptType),
+                            ToDateTime tdte            => ChangeType(tdte.operand!, _typeResolver.DateTimeType),
+                            ToDate tde                 => ChangeType(tde.operand!, _typeResolver.DateType),
+                            ToDecimal tde              => ChangeType(tde.operand!, typeof(decimal?)),
+                            ToInteger tde              => ChangeType(tde.operand!, typeof(int?)),
+                            ToList tle                 => BindCqlOperator(CqlOperator.ToList, tle.operand!),
+                            ToLong toLong              => ChangeType(toLong.operand!, typeof(long?)),
+                            ToQuantity tq              => ChangeType(tq.operand!, _typeResolver.QuantityType),
+                            ToString e                 => ChangeType(e.operand!, typeof(string)),
+                            ToTime e                   => ChangeType(e.operand!, _typeResolver.TimeType),
                             After after                => After(after),
                             AliasRef ar                => GetScopeExpression(ar.name!),
                             As @as                     => As(@as),
-                            AnyInValueSet avs          => InValueSetPostProcess(avs.valueset, TranslateExpression(avs.codes!), isList: true),
+                            AnyInValueSet avs          => ProcessValueSet(avs.valueset, avs.codes, isList: true),
                             Before before              => Before(before),
-                            CalculateAgeAt caa         => BindCqlOperator(CqlOperator.CalculateAgeAt, TranslateExpression(caa.operand[0]), TranslateExpression(caa.operand[1]), caa.precisionOrNull()),
-                            CalculateAge ca            => BindCqlOperator(CqlOperator.CalculateAge, TranslateExpression(ca.operand), ca.precisionOrNull()),
+                            CalculateAgeAt caa         => BindCqlOperator(CqlOperator.CalculateAgeAt, [.. caa.operand[..2], caa.precisionOrNull()]),
+                            CalculateAge ca            => BindCqlOperator(CqlOperator.CalculateAge, ca.operand, ca.precisionOrNull()),
                             Case ce                    => Case(ce),
                             Coalesce cle               => Coalesce(cle),
                             CodeRef cre                => CodeRef(cre),
@@ -230,22 +234,23 @@ namespace Hl7.Cql.Compiler
                             Concatenate cctn           => BindCqlOperator(CqlOperator.Concatenate, cctn.operand),
                             ConceptRef cr              => ConceptRef(cr),
                             Contains ct                => Contains(ct),
-                            ConvertQuantity cqe        => BindCqlOperator(CqlOperator.ConvertQuantity, (cqe.operand[..2])),
-                            DateFrom dfe               => BindCqlOperator(CqlOperator.DateComponent, (dfe.operand!)),
+                            ConvertQuantity cqe        => BindCqlOperator(CqlOperator.ConvertQuantity, cqe.operand[..2]),
+                            DateFrom dfe               => BindCqlOperator(CqlOperator.DateComponent, dfe.operand!),
                             Elm.DateTime dt            => DateTime(dt),
                             Date d                     => BindCqlOperator(CqlOperator.Date, d.year, d.month, d.day),
-                            DateTimeComponentFrom dtcf => BindCqlOperator(CqlOperator.DateTimeComponent, TranslateExpression(dtcf.operand!), dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
-                            Descendents desc           => desc.source == null ? NullConstantExpression.ForType<IEnumerable<object>>() : BindCqlOperator(CqlOperator.Descendents, (desc.source)),
-                            DifferenceBetween dbe      => BindCqlOperator(CqlOperator.DifferenceBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
-                            DurationBetween dbe        => BindCqlOperator(CqlOperator.DurationBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
+                            DateTimeComponentFrom dtcf => BindCqlOperator(CqlOperator.DateTimeComponent, dtcf.operand, dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
+                            Descendents desc           => desc.source == null ? NullConstantExpression.ForType<IEnumerable<object>>() : BindCqlOperator(CqlOperator.Descendents, desc.source),
+                            DifferenceBetween dbe      => BindCqlOperator(CqlOperator.DifferenceBetween, [.. dbe.operand[..2], dbe.precisionOrNull()]),
+                            DurationBetween dbe        => BindCqlOperator(CqlOperator.DurationBetween, [.. dbe.operand[..2], dbe.precisionOrNull()]),
                             Ends e                     => Ends(e),
-                            Equal eq                   => BindCqlOperator(CqlOperator.Equal, (eq.operand[..2])),
+                            Equal eq                   => BindCqlOperator(CqlOperator.Equal, eq.operand[..2]),
                             Equivalent eqv             => Equivalent(eqv),
                             Except ex                  => Except(ex),
-                            Expand expand              => BindCqlOperator(CqlOperator.Expand, (expand.operand[..2])), ExpandValueSet evs => CqlOperatorsBinder.CallCreateValueSetFacade(TranslateExpression(evs.operand!)),
+                            Expand expand              => BindCqlOperator(CqlOperator.Expand, expand.operand[..2]),
+                            ExpandValueSet evs         => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(evs.operand!)),
                             FunctionRef fre            => FunctionRef(fre),
                             ExpressionRef ere          => ExpressionRef(ere),
-                            First first                => BindCqlOperator(CqlOperator.First, (first.source!)),
+                            First first                => BindCqlOperator(CqlOperator.First, first.source!),
                             IdentifierRef ire          => IdentifierRef(ire),
                             If @if                     => If(@if),
                             Includes inc               => Includes(inc),
@@ -255,7 +260,7 @@ namespace Hl7.Cql.Compiler
                             Instance ine               => Instance(ine),
                             Intersect ise              => Intersect(ise),
                             Interval ie                => IntervalExpression(ie),
-                            InValueSet inv             => InValueSetPostProcess(inv.valueset!, TranslateExpression(inv.code!), isList: false),
+                            InValueSet inv             => ProcessValueSet(inv.valueset!, inv.code, isList: false),
                             In @in                     => In(@in),
                             Is @is                     => Is(@is),
                             IsNull isn                 => IsNull(isn),
@@ -270,7 +275,7 @@ namespace Hl7.Cql.Compiler
                             MeetsAfter meets           => MeetsAfter(meets),
                             Message msg                => Message(msg),
                             MinValue min               => BindCqlOperator(CqlOperator.MinimumValue, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
-                            NotEqual ne                => BindCqlOperator(CqlOperator.Not, BindCqlOperator(CqlOperator.Equal, (ne.operand[..2]))),
+                            NotEqual ne                => BindCqlOperator(CqlOperator.Not, BindCqlOperator(CqlOperator.Equal, ne.operand[..2])),
                             Now now                    => BindCqlOperator(CqlOperator.Now),
                             Null @null                 => NullConstantExpression.ForType(TypeFor(@null)!),
                             OperandRef ore             => OperandRef(ore),
@@ -284,13 +289,13 @@ namespace Hl7.Cql.Compiler
                             ProperIncludes pi          => ProperIncludes(pi),
                             ProperIncludedIn pie       => ProperIncludedIn(pie),
                             Property pe                => Property(pe),
-                            Quantity qua               => BindCqlOperator(CqlOperator.Quantity, Expression.Constant(qua.value, typeof(decimal?)), Expression.Constant(qua.unit, typeof(string)), Expression.Constant("http://unitsofmeasure.org", typeof(string))),
+                            Quantity qua               => BindCqlOperator(CqlOperator.Quantity, qua.value, qua.unit, "http://unitsofmeasure.org"),
                             Query qe                   => Query(qe),
                             QueryLetRef qlre           => GetScopeExpression(qlre.name!),
                             Ratio re                   => BindCqlOperator(CqlOperator.Ratio, re.numerator, re.denominator),
                             ReplaceMatches e           => ReplaceMatches(e),
                             Retrieve re                => Retrieve(re),
-                            Round rnd                  => BindCqlOperator(CqlOperator.Round, TranslateExpression(rnd.operand!), rnd.precision is { } precision ? TranslateExpression(precision) : NullConstantExpression.Int32),
+                            Round rnd                  => BindCqlOperator(CqlOperator.Round, rnd.operand, rnd.precision),
                             SameAs sa                  => SameAs(sa),
                             SameOrAfter soa            => SameOrAfter(soa),
                             SameOrBefore sob           => SameOrBefore(sob),
@@ -302,8 +307,7 @@ namespace Hl7.Cql.Compiler
                             Elm.Tuple tu               => Tuple(tu),
                             Union ue                   => Union(ue),
                             ValueSetRef vsre           => ValueSetRef(vsre),
-                            _                          => throw this.NewExpressionBuildingException(
-                                     $"Expression {arg.GetType().FullName} is not implemented.")
+                            _                          => throw this.NewExpressionBuildingException($"Expression {element.GetType().FullName} is not implemented.")
                             //@formatter:on
                         };
 
@@ -311,9 +315,7 @@ namespace Hl7.Cql.Compiler
                         expression = Mutate(element, expression);
                         return expression!;
                     }
-                }),
-                {} obj        => Expression.Constant(obj),
-            };
+                });
 
         protected Expression? Mutate(Element op, Expression? expression) =>
             _expressionMutators.Aggregate(
@@ -382,7 +384,7 @@ namespace Hl7.Cql.Compiler
                     tuple.element!
                         .SelectToArray(element =>
                         {
-                            var value = TranslateExpression(element.value!);
+                            var value = Translate(element.value!);
                             var propInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
                                            ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType)}");
                             var binding = Binding(value, propInfo);
@@ -403,7 +405,7 @@ namespace Hl7.Cql.Compiler
             {
 
                 var elementType = TypeFor(listTypeSpecifier.elementType);
-                var elements =  TranslateExpressions(list.element);
+                var elements =  TranslateAll(list.element);
                 if (!elementType.IsNullable(out _) && elements.Any(exp => exp.Type.IsNullable(out _)))
                 {
                     for (int i = 0; i < elements.Length; i++)
@@ -474,15 +476,16 @@ namespace Hl7.Cql.Compiler
                 // FHIR.RemittanceOutcome maps to an enum type
                 if (ine.element?.Length == 1 && string.Equals(ine.element![0].name, "value", StringComparison.OrdinalIgnoreCase))
                 {
-                    var enumValueValue = TranslateExpression(ine.element[0]!.value!);
+                    var enumValueValue = Translate(ine.element[0]!.value!);
+
                     if (enumValueValue.Type == instanceType)
                         return enumValueValue;
-                    if (enumValueValue.Type == typeof(string))
+
+                    if (enumValueValue.Type == typeof(string)) //@ TODO: Cast
                     {
                         var parseMethod = typeof(Enum)
                             .GetMethods()
-                            .Single(m => m.Name == nameof(Enum.Parse)
-                                         && m.GetParameters().Length == 3);
+                            .Single(m => m.Name == nameof(Enum.Parse) && m.GetParameters().Length == 3);
                         var callEnumParse = Expression.Call(parseMethod, Expression.Constant(instanceType), enumValueValue, Expression.Constant(true));
                         return callEnumParse;
                     }
@@ -506,7 +509,7 @@ namespace Hl7.Cql.Compiler
             //    }
             //}
 
-            var tuples = ine.element!.SelectToArray(el => (el.name!, TranslateExpression(el.value!)));
+            var tuples = ine.element!.SelectToArray(el => (el.name!, Translate(el.value)));
 
             // Handle immutable primitives without public setters on their properties.
             if (instanceType == typeof(CqlRatio))
@@ -683,12 +686,12 @@ namespace Hl7.Cql.Compiler
 
         protected Expression If(If @if)
         {
-            var rc = TranslateExpression(@if.condition!);
+            var rc = Translate(@if.condition!);
             var condition = Expression.Coalesce(rc, Expression.Constant(false, typeof(bool)));
-            var then = TranslateExpression(@if.then!);
+            var then = Translate(@if.then!);
             if (@if.@else != null)
             {
-                var @else = TranslateExpression(@if.@else!);
+                var @else = Translate(@if.@else!);
                 if (then.Type.IsValueType)
                 {
                     @else = HandleNullable(@else, then.Type);
@@ -736,7 +739,7 @@ namespace Hl7.Cql.Compiler
             return Expression.Constant(value, convertedType);
         }
 
-        protected (object?, Type) ConvertLiteral(Literal lit, Type? type)
+        protected (object?, Type) ConvertLiteral(Literal lit, Type? type) //@ TODO: Cast
         {
             if (type == null)
                 throw new NotImplementedException().WithContext(this);
@@ -785,18 +788,18 @@ namespace Hl7.Cql.Compiler
             // when1 ? then 1 : (when2 ? then 2 : (when3 ? then 3 : else }
             if (ce.caseItem?.Length > 0 && ce.@else != null)
             {
-                var elseThen = TranslateExpression(ce.@else!);
+                var elseThen = Translate(ce.@else!);
                 var cases = new List<CaseWhenThenExpression.WhenThenCase>();
 
                 if (ce.comparand != null)
                 {
-                    var comparand = TranslateExpression(ce.comparand);
+                    var comparand = Translate(ce.comparand);
 
                     foreach (var caseItem in ce.caseItem)
                     {
-                        var caseWhen = TranslateExpression(caseItem.when!);
+                        var caseWhen = Translate(caseItem.when!);
                         var caseWhenEquality = Expression.Coalesce(BindCqlOperator(CqlOperator.Equal, comparand, caseWhen), Expression.Constant(false));
-                        var caseThen = TranslateExpression(caseItem.then!);
+                        var caseThen = Translate(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
                             caseThen = caseThen.ExprConvert(elseThen.Type);
@@ -808,8 +811,8 @@ namespace Hl7.Cql.Compiler
                 {
                     foreach (var caseItem in ce.caseItem)
                     {
-                        var caseWhen = TranslateExpression(caseItem.when!);
-                        var caseThen = TranslateExpression(caseItem.then!);
+                        var caseWhen = Translate(caseItem.when!);
+                        var caseThen = Translate(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
                             caseThen = caseThen.ExprConvert(elseThen.Type);
@@ -883,7 +886,7 @@ namespace Hl7.Cql.Compiler
 
                 // In this construct, instead of querying a value set, we're testing resources
                 // against a list of codes, e.g., as defined by the code from or codesystem construct
-                var codes = TranslateExpression(retrieve.codes);
+                var codes = Translate(retrieve.codes);
                 return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty);
             }
 
@@ -933,7 +936,7 @@ namespace Hl7.Cql.Compiler
 
                 if (op.source != null)
                 {
-                    var source = TranslateExpression(op.source);
+                    var source = Translate(op.source);
                     var parts = path.Split('.');
                     if (parts.Length > 1)
                     {
@@ -1022,7 +1025,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression FunctionRef(FunctionRef op)
         {
-            Expression[] operands = TranslateExpressions(op.operand);
+            Expression[] operands = TranslateAll(op.operand);
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
@@ -1153,8 +1156,10 @@ namespace Hl7.Cql.Compiler
             return new DefinitionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, CqlExpressions.ParameterExpression, funcType);
         }
 
-        private Expression InValueSetPostProcess(ValueSetRef valueSetRef, Expression expr, bool isList)
+        private Expression ProcessValueSet(ValueSetRef valueSetRef, Elm.Expression valueExpr, bool isList)
         {
+            Expression expr = Translate(valueExpr);
+
             var codeType = isList ? _typeResolver.GetListElementType(expr.Type, throwError: true)! : expr.Type;
 
             var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));

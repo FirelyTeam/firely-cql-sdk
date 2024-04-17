@@ -462,7 +462,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity(2m, "years");
+			var l_ = context.Operators.Quantity((decimal?)2m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
@@ -492,7 +492,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity(4m, "years");
+			var k_ = context.Operators.Quantity((decimal?)4m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -521,7 +521,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity(4m, "years");
+			var k_ = context.Operators.Quantity((decimal?)4m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -550,7 +550,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity(9m, "years");
+			var k_ = context.Operators.Quantity((decimal?)9m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);

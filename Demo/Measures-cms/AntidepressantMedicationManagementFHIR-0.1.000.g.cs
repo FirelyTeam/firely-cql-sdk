@@ -334,7 +334,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var h_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MajorDepression);
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
-			var l_ = context.Operators.Quantity(60m, "days");
+			var l_ = context.Operators.Quantity((decimal?)60m, "days");
 			var m_ = context.Operators.Subtract(f_, l_);
 			var p_ = context.Operators.Add(f_, l_);
 			var q_ = context.Operators.Interval(m_, p_, true, true);
@@ -393,7 +393,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var ah_ = context.Operators.Start(ag_);
 			var ai_ = context.Operators.DateFrom(ah_);
 			var aj_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var ak_ = context.Operators.Quantity(60m, "days");
+			var ak_ = context.Operators.Quantity((decimal?)60m, "days");
 			var al_ = context.Operators.Subtract(aj_, ak_);
 			var ao_ = context.Operators.Add(aj_, ak_);
 			var ap_ = context.Operators.Interval(al_, ao_, true, true);
@@ -476,7 +476,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var r_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>(p_, q_);
 			var s_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(r_);
 			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var v_ = context.Operators.Quantity(105m, "days");
+			var v_ = context.Operators.Quantity((decimal?)105m, "days");
 			var w_ = context.Operators.Subtract(l_, v_);
 			var y_ = context.Operators.Interval(w_, l_, true, false);
 			var z_ = context.Operators.Overlaps(t_, y_, null);
@@ -506,7 +506,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		{
 			var i_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
 			var j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var l_ = context.Operators.Quantity(114m, "days");
+			var l_ = context.Operators.Quantity((decimal?)114m, "days");
 			var m_ = context.Operators.Add(j_, l_);
 			var n_ = context.Operators.Interval(j_, m_, true, true);
 			var o_ = context.Operators.IntervalIntersect<CqlDate>(i_, n_);
@@ -557,7 +557,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		{
 			var i_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
 			var j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var l_ = context.Operators.Quantity(231m, "days");
+			var l_ = context.Operators.Quantity((decimal?)231m, "days");
 			var m_ = context.Operators.Add(j_, l_);
 			var n_ = context.Operators.Interval(j_, m_, true, true);
 			var o_ = context.Operators.IntervalIntersect<CqlDate>(i_, n_);

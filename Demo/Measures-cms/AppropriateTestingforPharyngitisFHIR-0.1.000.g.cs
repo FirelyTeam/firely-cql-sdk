@@ -542,7 +542,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 				var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 				var p_ = context.Operators.Start(o_);
 				var q_ = context.Operators.Convert<CqlDateTime>(AntibioticOrdered?.AuthoredOnElement);
-				var r_ = context.Operators.Quantity(3m, "days");
+				var r_ = context.Operators.Quantity((decimal?)3m, "days");
 				var s_ = context.Operators.Subtract(q_, r_);
 				var u_ = context.Operators.Interval(s_, q_, true, true);
 				var v_ = context.Operators.ElementInInterval<CqlDateTime>(p_, u_, null);
@@ -747,7 +747,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var m_ = context.Operators.Start(l_);
 			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_ferjikqtqgcpbsywqkeabbeev.EncounterWithPharyngitis?.Period);
 			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity(3m, "days");
+			var p_ = context.Operators.Quantity((decimal?)3m, "days");
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
 			var u_ = context.Operators.Add(s_, p_);

@@ -446,7 +446,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			var s_ = context.Operators.And(o_, r_);
 			var t_ = context.Operators.Convert<Quantity>(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Value);
 			var u_ = FHIRHelpers_4_3_000.ToQuantity(t_);
-			var v_ = context.Operators.Quantity(50m, "/min");
+			var v_ = context.Operators.Quantity((decimal?)50m, "/min");
 			var w_ = context.Operators.Less(u_, v_);
 			var x_ = context.Operators.And(s_, w_);
 			var y_ = context.Operators.RetrieveByValueSet<Observation>(null, null);

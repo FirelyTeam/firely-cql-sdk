@@ -211,11 +211,11 @@ namespace Hl7.Cql.Compiler
                                                                     args),
                 CqlOperator.Date                             => BindToMethodConvertArgs(nameof(ICqlOperators.Date), args),
                 CqlOperator.DateTime                         => BindToMethodConvertArgs(nameof(ICqlOperators.DateTime)!, args),
-                CqlOperator.Now                              => BindToMethod(nameof(ICqlOperators.Now)),
-                CqlOperator.Quantity                         => BindToMethod(nameof(ICqlOperators.Quantity), args[..2]), // Discard the 3rd parameter!!
+                CqlOperator.Now                              => BindToMethodConvertArgs(nameof(ICqlOperators.Now)),
+                CqlOperator.Quantity                         => BindToMethodConvertArgs(nameof(ICqlOperators.Quantity), args[..2]), // Discard the 3rd parameter!!
                 CqlOperator.Time                             => BindToMethodConvertArgs(nameof(ICqlOperators.Time), args),
-                CqlOperator.TimeOfDay                        => BindToMethod(nameof(ICqlOperators.TimeOfDay)),
-                CqlOperator.Today                            => BindToMethod(nameof(ICqlOperators.Today)),
+                CqlOperator.TimeOfDay                        => BindToMethodConvertArgs(nameof(ICqlOperators.TimeOfDay)),
+                CqlOperator.Today                            => BindToMethodConvertArgs(nameof(ICqlOperators.Today)),
                 CqlOperator.Message                          => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments:[args[0].Type], args),
                 CqlOperator.ToList                           => BindToGenericMethod(nameof(ICqlOperators.ToList), genericTypeArguments:[args[0].Type], args),
 

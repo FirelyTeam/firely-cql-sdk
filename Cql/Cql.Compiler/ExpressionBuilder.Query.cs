@@ -68,7 +68,7 @@ internal partial class ExpressionBuilder
             {
                 foreach (var let in query.let)
                 {
-                    var expression = TranslateExpression(let.expression!);
+                    var expression = Translate(let.expression!);
                     PushScopes(ImpliedAlias, KeyValuePair.Create(let.identifier!, (expression, (Element)let.expression!)));
                 }
             }
@@ -110,7 +110,7 @@ internal partial class ExpressionBuilder
             {
                 using (PushElement(query.@return))
                 {
-                    var selectBody = TranslateExpression(query.@return.expression!);
+                    var selectBody = Translate(query.@return.expression!);
                     var selectLambda = Expression.Lambda(selectBody, scopeParameter);
                     var callSelect = BindCqlOperator(CqlOperator.Select, @return, selectLambda);
                     @return = callSelect;
@@ -228,7 +228,7 @@ internal partial class ExpressionBuilder
         (string alias, Type sourceType, bool isEnumerationType)[] ReadSources() => query.source!
             .SelectToArray(s =>
             {
-                var sourceType = TranslateExpression(s.expression).Type;
+                var sourceType = Translate(s.expression).Type;
                 var isEnumerationType = _typeResolver.IsListType(sourceType);
                 if (isEnumerationType) sourceType = _typeResolver.GetListElementType(sourceType, true)!;
                 return (
@@ -307,7 +307,7 @@ internal partial class ExpressionBuilder
         if (aliases.Any(alias => string.IsNullOrEmpty(alias)))
             throw this.NewExpressionBuildingException("Query sources must have aliases.");
 
-        var sourceExpressions = TranslateExpressions(sources.SelectToArray(source => source.expression));
+        var sourceExpressions = TranslateAll(sources.SelectToArray(source => source.expression));
 
         // Returns a CrossJoin between IEnumerable<> of T1, T2, T3, etc and return into IEnumerable<(T1, T2, T3, etc)>
         // a) If a source is not of a list-type (ie, a singleton), it needs to be promoted to a list type.
@@ -413,7 +413,7 @@ internal partial class ExpressionBuilder
                             using (PushScopes(parameterName,
                                        KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
                             {
-                                var sortMemberExpression = TranslateExpression(byExpression.expression);
+                                var sortMemberExpression = Translate(byExpression.expression);
                                 var lambdaBody = _operatorsBinder.ConvertToType<object>(sortMemberExpression);
                                 var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                 return BindCqlOperator(CqlOperator.SortBy, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
@@ -467,7 +467,7 @@ internal partial class ExpressionBuilder
         //        bundle.Entry.ByResourceType<Condition>() // <--
         //            .Where(P => true) // such that goes here
         //            .Select(P => E));
-        var source = TranslateExpression(with.expression);
+        var source = Translate(with.expression);
         if (!_typeResolver.IsListType(source.Type))
         {
             // e.g.:
@@ -482,7 +482,7 @@ internal partial class ExpressionBuilder
         var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
         using (PushScopes(ImpliedAlias, KeyValuePair.Create(with.alias!, ((Expression)whereLambdaParameter, (Element)with))))
         {
-            var suchThatBody = TranslateExpression(with.suchThat);
+            var suchThatBody = Translate(with.suchThat);
 
             var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
             var callWhereOnSource = BindCqlOperator(CqlOperator.Where, source, whereLambda);
@@ -505,7 +505,7 @@ internal partial class ExpressionBuilder
     {
         using (PushElement(queryWhere))
         {
-            var whereBody = TranslateExpression(queryWhere);
+            var whereBody = Translate(queryWhere);
             var whereLambda = Expression.Lambda(whereBody, sourceParameter);
             return BindCqlOperator(CqlOperator.Where, @return, whereLambda);
         }
@@ -537,8 +537,8 @@ internal partial class ExpressionBuilder
             var resultParameter = Expression.Parameter(resultType, resultAlias);
             using (PushScopes(ImpliedAlias, KeyValuePair.Create(resultAlias!, ((Expression)resultParameter, (Element)queryAggregate))))
             {
-                var startingValue = TranslateExpression(queryAggregate.starting!);
-                var lambdaBody = TranslateExpression(queryAggregate.expression!);
+                var startingValue = Translate(queryAggregate.starting!);
+                var lambdaBody = Translate(queryAggregate.expression!);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
                 return BindCqlOperator(CqlOperator.Aggregate, @return, lambda, startingValue);
             }

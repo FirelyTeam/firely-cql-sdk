@@ -796,7 +796,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var y_ = context.Operators.End(x_);
 				var aa_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 				var ab_ = context.Operators.End(aa_);
-				var ac_ = context.Operators.Quantity(6m, "days");
+				var ac_ = context.Operators.Quantity((decimal?)6m, "days");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(y_, ad_, true, true);
 				var af_ = context.Operators.ElementInInterval<CqlDateTime>(v_, ae_, "day");
@@ -838,7 +838,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var bf_ = context.Operators.End(be_);
 				var bh_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
 				var bi_ = context.Operators.End(bh_);
-				var bj_ = context.Operators.Quantity(6m, "days");
+				var bj_ = context.Operators.Quantity((decimal?)6m, "days");
 				var bk_ = context.Operators.Add(bi_, bj_);
 				var bl_ = context.Operators.Interval(bf_, bk_, true, true);
 				var bm_ = context.Operators.ElementInInterval<CqlDateTime>(bc_, bl_, "day");

@@ -188,7 +188,7 @@ partial class ExpressionBuilder
                 }
 
                 //ctx = ctx.Deeper(expressionDef);
-                var bodyExpression = TranslateExpression(expressionDef.expression);
+                var bodyExpression = Translate(expressionDef.expression);
                 var lambda = Expression.Lambda(bodyExpression, parameters);
                 if (function?.operand != null &&
                     _libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryKey, expressionDef.name,
@@ -252,7 +252,7 @@ partial class ExpressionBuilder
 
                 Expression? defaultValue = null;
                 if (parameter.@default != null)
-                    defaultValue = TranslateExpression(parameter.@default).ExprTypeAs<object>();
+                    defaultValue = Translate(parameter.@default).ExprTypeAs<object>();
                 else defaultValue = NullConstantExpression.Object;
 
                 var resolveParam = _contextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);

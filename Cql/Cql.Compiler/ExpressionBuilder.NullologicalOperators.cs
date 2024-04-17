@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Coalesce(Elm.Coalesce ce)
         {
-            var operands = TranslateExpressions(ce.operand);
+            var operands = TranslateAll(ce.operand);
             if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
                 return BindCqlOperator(CqlOperator.Coalesce, operands[0]);
 
@@ -47,7 +47,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression IsNull(Elm.IsNull isn)
         {
-            var operand = TranslateExpression(isn.operand!);
+            var operand = Translate(isn.operand!);
             if (operand.Type.IsValueType && operand.Type.IsNullable(out _) == false)
                 return Expression.Constant(false, typeof(bool?));
 

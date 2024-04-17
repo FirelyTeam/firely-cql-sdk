@@ -17,8 +17,8 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression IndexOf(Elm.IndexOf e)
         {
-            var source = TranslateExpression(e.source!);
-            var element = TranslateExpression(e.element!);
+            var source = Translate(e.source!);
+            var element = Translate(e.element!);
             if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
@@ -27,13 +27,13 @@ namespace Hl7.Cql.Compiler
 
         private Expression? Slice(Elm.Slice slice)
         {
-            var source = TranslateExpression(slice.source!);
+            var source = Translate(slice.source!);
             var start = slice.startIndex == null || slice.startIndex is Elm.Null
                 ? NullConstantExpression.Int32
-                : TranslateExpression(slice.startIndex!);
+                : Translate(slice.startIndex!);
             var end = slice.endIndex == null || slice.endIndex is Elm.Null
                 ? NullConstantExpression.Int32
-                : TranslateExpression(slice.endIndex!);
+                : Translate(slice.endIndex!);
             if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 

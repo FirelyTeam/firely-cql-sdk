@@ -822,7 +822,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var s_ = context.Operators.ElementInInterval<CqlDateTime>(q_, r_, null);
 				var u_ = context.Operators.Start(p_);
 				var w_ = context.Operators.Start(r_);
-				var x_ = context.Operators.Quantity(24m, "hours");
+				var x_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var y_ = context.Operators.Subtract(w_, x_);
 				var aa_ = context.Operators.Start(r_);
 				var ab_ = context.Operators.Interval(y_, aa_, true, false);
@@ -864,7 +864,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var l_ = context.Operators.Start(k_);
 				var m_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
 				var n_ = context.Operators.Start(m_);
-				var o_ = context.Operators.Quantity(21m, "days");
+				var o_ = context.Operators.Quantity((decimal?)21m, "days");
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
 				var s_ = context.Operators.Interval(p_, r_, true, false);
@@ -913,7 +913,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var s_ = QICoreCommon_2_0_000.toInterval(m_);
 				var t_ = context.Operators.Start(s_);
 				var v_ = context.Operators.Start(p_);
-				var w_ = context.Operators.Quantity(24m, "hours");
+				var w_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(p_);
 				var aa_ = context.Operators.Interval(x_, z_, true, false);
@@ -965,7 +965,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var t_ = context.Operators.Start(s_);
 				var u_ = FHIRHelpers_4_3_000.ToInterval(EDwSTEMI?.Period);
 				var v_ = context.Operators.Start(u_);
-				var w_ = context.Operators.Quantity(90m, "days");
+				var w_ = context.Operators.Quantity((decimal?)90m, "days");
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(u_);
 				var aa_ = context.Operators.Interval(x_, z_, true, true);
@@ -1003,7 +1003,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var l_ = context.Operators.Start(k_);
 				var m_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
 				var n_ = context.Operators.Start(m_);
-				var o_ = context.Operators.Quantity(90m, "days");
+				var o_ = context.Operators.Quantity((decimal?)90m, "days");
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
 				var s_ = context.Operators.Interval(p_, r_, true, false);
@@ -1125,7 +1125,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var p_ = QICoreCommon_2_0_000.toInterval(o_);
 				var q_ = context.Operators.Start(p_);
 				var r_ = this.currentemergencyDepartmentArrivalTime(EDwithSTEMI);
-				var t_ = context.Operators.Quantity(30m, "minutes");
+				var t_ = context.Operators.Quantity((decimal?)30m, "minutes");
 				var u_ = context.Operators.Add(r_, t_);
 				var v_ = context.Operators.Interval(r_, u_, false, true);
 				var w_ = context.Operators.ElementInInterval<CqlDateTime>(q_, v_, null);
@@ -1164,7 +1164,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var k_ = QICoreCommon_2_0_000.toInterval(j_);
 				var l_ = context.Operators.Start(k_);
 				var m_ = this.currentemergencyDepartmentArrivalTime(EDwithSTEMI);
-				var o_ = context.Operators.Quantity(90m, "minutes");
+				var o_ = context.Operators.Quantity((decimal?)90m, "minutes");
 				var p_ = context.Operators.Add(m_, o_);
 				var q_ = context.Operators.Interval(m_, p_, false, true);
 				var r_ = context.Operators.ElementInInterval<CqlDateTime>(l_, q_, null);
@@ -1200,7 +1200,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var e_ = context.Operators.End(d_);
 			var g_ = context.Operators.Start(d_);
 			var i_ = context.Operators.Start(d_);
-			var j_ = context.Operators.Quantity(45m, "minutes");
+			var j_ = context.Operators.Quantity((decimal?)45m, "minutes");
 			var k_ = context.Operators.Add(i_, j_);
 			var l_ = context.Operators.Interval(g_, k_, false, true);
 			var m_ = context.Operators.ElementInInterval<CqlDateTime>(e_, l_, null);

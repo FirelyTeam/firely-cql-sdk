@@ -802,7 +802,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		{
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.Start(l_);
-			var n_ = context.Operators.Quantity(6m, "months");
+			var n_ = context.Operators.Quantity((decimal?)6m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
@@ -822,7 +822,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var w_ = context.Operators.Start(v_);
 			var x_ = this.Measurement_Period();
 			var y_ = context.Operators.Start(x_);
-			var z_ = context.Operators.Quantity(6m, "months");
+			var z_ = context.Operators.Quantity((decimal?)6m, "months");
 			var aa_ = context.Operators.Subtract(y_, z_);
 			var ac_ = context.Operators.End(x_);
 			var ad_ = context.Operators.Interval(aa_, ac_, true, true);
@@ -852,7 +852,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var i_ = context.Operators.Convert<CqlDateTime>(CessationPharmacotherapyOrdered?.AuthoredOnElement);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity(6m, "months");
+			var l_ = context.Operators.Quantity((decimal?)6m, "months");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
@@ -881,7 +881,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var i_ = context.Operators.Convert<CqlDateTime>(TakingCessationPharmacotherapy?.AuthoredOnElement);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity(6m, "months");
+			var l_ = context.Operators.Quantity((decimal?)6m, "months");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);

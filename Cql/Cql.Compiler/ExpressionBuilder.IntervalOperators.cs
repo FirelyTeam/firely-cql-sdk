@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
     {
         private Expression Collapse(Elm.Collapse e)
         {
-            var operand = TranslateExpression(e.operand![0]!);
+            var operand = Translate(e.operand![0]!);
             if (_typeResolver.IsListType(operand.Type))
             {
                 var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
@@ -39,8 +39,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression Contains(Elm.Contains e)
         {
-            var left = TranslateExpression(e!.operand![0]!);
-            var right = TranslateExpression(e.operand[1]!);
+            var left = Translate(e!.operand![0]!);
+            var right = Translate(e.operand[1]!);
             var precision = e.precisionOrNull();
             if (_typeResolver.IsListType(left.Type))
             {
@@ -66,8 +66,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? Ends(Elm.Ends e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             var precision = e.precisionOrNull();
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
@@ -84,8 +84,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Except(Elm.Except e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (_typeResolver.IsListType(left.Type) && _typeResolver.IsListType(right.Type))
             {
                 return BindCqlOperator(CqlOperator.ListExcept, left, right);
@@ -108,8 +108,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression In(Elm.In e)
         {
-            var left = TranslateExpression(e.operand![0]!);
-            var right = TranslateExpression(e.operand![1]!);
+            var left = Translate(e.operand![0]!);
+            var right = Translate(e.operand![1]!);
             if (_typeResolver.IsListType(right.Type))
             {
                 return BindCqlOperator(CqlOperator.InList, left, right);
@@ -128,8 +128,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Includes(Elm.Includes e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
@@ -164,8 +164,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression IncludedIn(Elm.IncludedIn e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
@@ -201,8 +201,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Intersect(Elm.Intersect e)
         {
-            var left = TranslateExpression(e.operand![0]!);
-            var right = TranslateExpression(e.operand![1]!);
+            var left = Translate(e.operand![0]!);
+            var right = Translate(e.operand![1]!);
             if (_typeResolver.IsListType(left.Type))
             {
                 return BindCqlOperator(CqlOperator.ListIntersect, left, right);
@@ -222,8 +222,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Meets(Elm.Meets e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -241,8 +241,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? MeetsAfter(Elm.MeetsAfter e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -260,8 +260,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? MeetsBefore(Elm.MeetsBefore e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -280,8 +280,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Overlaps(Elm.Overlaps e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -299,8 +299,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression OverlapsBefore(Elm.OverlapsBefore e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -318,8 +318,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression OverlapsAfter(Elm.OverlapsAfter e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -337,8 +337,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ProperIncludes(Elm.ProperIncludes e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 var precision = e.precisionOrNull();
@@ -367,8 +367,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ProperIncludedIn(Elm.ProperIncludedIn e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -398,8 +398,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? ProperIn(Elm.ProperIn e)
         {
-            var element = TranslateExpression(e.operand![0]);
-            var intervalOrList = TranslateExpression(e.operand![1]);
+            var element = Translate(e.operand![0]);
+            var intervalOrList = Translate(e.operand![1]);
             if (intervalOrList.Type.IsCqlInterval(out var pointType))
             {
                 var precision = e.precisionOrNull();
@@ -415,8 +415,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ProperContains(Elm.ProperContains e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
@@ -445,8 +445,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Starts(Elm.Starts e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -464,8 +464,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Union(Elm.Union e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type)!;

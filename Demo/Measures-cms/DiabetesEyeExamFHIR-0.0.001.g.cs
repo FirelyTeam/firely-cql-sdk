@@ -399,7 +399,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 		{
 			var f_ = this.Measurement_Period();
 			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.Quantity(1m, "year");
+			var h_ = context.Operators.Quantity((decimal?)1m, "year");
 			var i_ = context.Operators.Subtract(g_, h_);
 			var k_ = context.Operators.End(f_);
 			var l_ = context.Operators.Interval(i_, k_, true, true);

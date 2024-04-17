@@ -782,7 +782,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		bool? i_(Observation LastPSATest)
 		{
 			var ao_ = FHIRHelpers_4_3_000.ToValue(LastPSATest?.Value);
-			var ap_ = context.Operators.Quantity(10m, "ng/mL");
+			var ap_ = context.Operators.Quantity((decimal?)10m, "ng/mL");
 			var aq_ = context.Operators.Less((ao_ as CqlQuantity), ap_);
 
 			return aq_;

@@ -17,17 +17,17 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression? Combine(Elm.Combine e)
         {
-            var source = TranslateExpression(e.source!);
+            var source = Translate(e.source!);
             var operand = e.separator == null
                 ? NullConstantExpression.String
-                : TranslateExpression(e.separator);
+                : Translate(e.separator);
             return BindCqlOperator(CqlOperator.Combine, source, operand);
         }
 
         protected Expression Indexer(Elm.Indexer e)
         {
-            var left = TranslateExpression(e!.operand![0]!);
-            var right = TranslateExpression(e!.operand![1]!);
+            var left = Translate(e!.operand![0]!);
+            var right = Translate(e!.operand![1]!);
             if (left.Type == typeof(string))
             {
                 return BindCqlOperator(CqlOperator.CharAt, left, right);
@@ -42,7 +42,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Length(Elm.Length len)
         {
-            var operand = TranslateExpression(len.operand!);
+            var operand = Translate(len.operand!);
             if (_typeResolver.IsListType(operand.Type))
             {
                 return BindCqlOperator(CqlOperator.ListLength, operand);
@@ -57,26 +57,26 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ReplaceMatches(Elm.ReplaceMatches e)
         {
-            var source = TranslateExpression(e.operand![0]!);
-            var pattern = TranslateExpression(e.operand![1]!);
-            var substitution = TranslateExpression(e.operand![2]!);
+            var source = Translate(e.operand![0]!);
+            var pattern = Translate(e.operand![1]!);
+            var substitution = Translate(e.operand![2]!);
             return BindCqlOperator(CqlOperator.ReplaceMatches, source, pattern, substitution);
         }
 
         protected Expression Split(Elm.Split e)
         {
-            var stringToSplit = TranslateExpression(e.stringToSplit!);
-            var separator = TranslateExpression(e.separator!);
+            var stringToSplit = Translate(e.stringToSplit!);
+            var separator = Translate(e.separator!);
             return BindCqlOperator(CqlOperator.Split, stringToSplit, separator);
         }
 
         protected Expression? Substring(Elm.Substring e)
         {
-            var stringToSub = TranslateExpression(e!.stringToSub!);
-            var startIndex = TranslateExpression(e!.startIndex!);
+            var stringToSub = Translate(e!.stringToSub!);
+            var startIndex = Translate(e!.startIndex!);
             var length = e.length == null
                 ? NullConstantExpression.Int32
-                : TranslateExpression(e.length);
+                : Translate(e.length);
             return BindCqlOperator(CqlOperator.Substring, stringToSub, startIndex, length);
         }
     }

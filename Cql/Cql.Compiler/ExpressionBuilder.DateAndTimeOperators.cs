@@ -18,7 +18,7 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression After(Elm.After e)
         {
-            var expr = TranslateExpressions(e.operand[0], e.operand[1], e.precisionOrNull())!;
+            var expr = TranslateAll(e.operand[0], e.operand[1], e.precisionOrNull())!;
             var leftIsCqlInterval = expr[0].Type.IsCqlInterval(out _);
             var rightIsCqlInterval = expr[1].Type.IsCqlInterval(out _);
             var method = (leftIsCqlInterval, rightIsCqlInterval) switch
@@ -33,7 +33,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Before(Elm.Before e)
         {
-            var expr = TranslateExpressions(e.operand[0], e.operand[1], e.precisionOrNull())!;
+            var expr = TranslateAll(e.operand[0], e.operand[1], e.precisionOrNull())!;
             var leftIsCqlInterval = expr[0].Type.IsCqlInterval(out _);
             var rightIsCqlInterval = expr[1].Type.IsCqlInterval(out _);
             var method = (leftIsCqlInterval, rightIsCqlInterval) switch
@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression DateTime(Elm.DateTime e)
         {
-            var offset = e.timezoneOffset is { } tzo ? TranslateExpression(tzo) : NullConstantExpression.Int32;
+            var offset = e.timezoneOffset is { } tzo ? Translate(tzo) : NullConstantExpression.Int32;
             if (offset.Type != typeof(decimal?))
             {
                 offset = ChangeType(offset, typeof(decimal?));
@@ -67,8 +67,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? SameAs(Elm.SameAs e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             var precision = e.precisionOrNull();
             if (left.Type.IsCqlInterval(out _))
             {
@@ -82,8 +82,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression SameOrAfter(Elm.SameOrAfter e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             var precision = e.precisionOrNull();
             if (left.Type.IsCqlInterval(out _))
             {
@@ -97,8 +97,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression SameOrBefore(Elm.SameOrBefore e)
         {
-            var left = TranslateExpression(e.operand![0]);
-            var right = TranslateExpression(e.operand![1]);
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
             var precision = e.precisionOrNull();
 
             if (left.Type.IsCqlInterval(out _))

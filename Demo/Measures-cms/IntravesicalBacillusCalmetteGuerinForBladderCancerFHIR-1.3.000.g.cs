@@ -750,7 +750,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var x_ = context.Operators.Start(w_);
 				var z_ = QICoreCommon_2_0_000.toInterval(v_);
 				var aa_ = context.Operators.Start(z_);
-				var ab_ = context.Operators.Quantity(6m, "months");
+				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
 				var ad_ = context.Operators.Interval(x_, ac_, false, true);
 				var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, null);
@@ -842,7 +842,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var x_ = context.Operators.Start(w_);
 				var z_ = QICoreCommon_2_0_000.toInterval(v_);
 				var aa_ = context.Operators.Start(z_);
-				var ab_ = context.Operators.Quantity(6m, "months");
+				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
 				var ad_ = context.Operators.Interval(x_, ac_, false, true);
 				var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, null);
@@ -1057,7 +1057,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var p_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
 				var q_ = QICoreCommon_2_0_000.toInterval(p_);
 				var r_ = context.Operators.Start(q_);
-				var s_ = context.Operators.Quantity(6m, "months");
+				var s_ = context.Operators.Quantity((decimal?)6m, "months");
 				var t_ = context.Operators.Subtract(r_, s_);
 				var v_ = QICoreCommon_2_0_000.toInterval(p_);
 				var w_ = context.Operators.Start(v_);
@@ -1166,7 +1166,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ab_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
 				var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var ad_ = context.Operators.Start(ac_);
-				var ae_ = context.Operators.Quantity(6m, "months");
+				var ae_ = context.Operators.Quantity((decimal?)6m, "months");
 				var af_ = context.Operators.Subtract(ad_, ae_);
 				var ah_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var ai_ = context.Operators.Start(ah_);
@@ -1223,7 +1223,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var bh_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
 				var bi_ = QICoreCommon_2_0_000.toInterval(bh_);
 				var bj_ = context.Operators.Start(bi_);
-				var bk_ = context.Operators.Quantity(6m, "months");
+				var bk_ = context.Operators.Quantity((decimal?)6m, "months");
 				var bl_ = context.Operators.Subtract(bj_, bk_);
 				var bn_ = QICoreCommon_2_0_000.toInterval(bh_);
 				var bo_ = context.Operators.Start(bn_);

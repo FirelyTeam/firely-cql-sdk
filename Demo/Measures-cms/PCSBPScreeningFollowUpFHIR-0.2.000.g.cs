@@ -564,8 +564,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(1m, "mm[Hg]");
-			var o_ = context.Operators.Quantity(120m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
+			var o_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
 			var p_ = context.Operators.Interval(n_, o_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
@@ -612,7 +612,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
 			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
-			var ac_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(n_, ac_, true, false);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.And(q_, ae_);
@@ -678,8 +678,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(120m, "mm[Hg]");
-			var o_ = context.Operators.Quantity(129m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
+			var o_ = context.Operators.Quantity((decimal?)129m, "mm[Hg]");
 			var p_ = context.Operators.Interval(n_, o_, true, true);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
@@ -726,8 +726,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
 			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
-			var ab_ = context.Operators.Quantity(1m, "mm[Hg]");
-			var ac_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ab_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
+			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(ab_, ac_, true, false);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.And(q_, ae_);
@@ -912,7 +912,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var be_ = context.Operators.End(bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var bg_ = context.Operators.Start(bf_);
-				var bh_ = context.Operators.Quantity(1m, "year");
+				var bh_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bi_ = context.Operators.Subtract(bg_, bh_);
 				var bk_ = context.Operators.Start(bf_);
 				var bl_ = context.Operators.Interval(bi_, bk_, true, true);
@@ -957,7 +957,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
 			bool? q_(Observation BloodPressure)
 			{
@@ -966,7 +966,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var ch_ = context.Operators.End(cg_);
 				var ci_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var cj_ = context.Operators.Start(ci_);
-				var ck_ = context.Operators.Quantity(1m, "year");
+				var ck_ = context.Operators.Quantity((decimal?)1m, "year");
 				var cl_ = context.Operators.Subtract(cj_, ck_);
 				var cn_ = context.Operators.Start(ci_);
 				var co_ = context.Operators.Interval(cl_, cn_, true, true);
@@ -1020,7 +1020,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var dk_ = context.Operators.End(dj_);
 				var dl_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var dm_ = context.Operators.Start(dl_);
-				var dn_ = context.Operators.Quantity(1m, "year");
+				var dn_ = context.Operators.Quantity((decimal?)1m, "year");
 				var do_ = context.Operators.Subtract(dm_, dn_);
 				var dq_ = context.Operators.Start(dl_);
 				var dr_ = context.Operators.Interval(do_, dq_, true, true);
@@ -1065,7 +1065,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
 			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
-			var am_ = context.Operators.Quantity(130m, "mm[Hg]");
+			var am_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
 			bool? ap_(Observation BloodPressure)
 			{
@@ -1074,7 +1074,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var en_ = context.Operators.End(em_);
 				var eo_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var ep_ = context.Operators.Start(eo_);
-				var eq_ = context.Operators.Quantity(1m, "year");
+				var eq_ = context.Operators.Quantity((decimal?)1m, "year");
 				var er_ = context.Operators.Subtract(ep_, eq_);
 				var et_ = context.Operators.Start(eo_);
 				var eu_ = context.Operators.Interval(er_, et_, true, true);
@@ -1119,7 +1119,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
 			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
-			var ay_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ay_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
 			var ba_ = context.Operators.Or(an_, az_);
 			var bb_ = context.Operators.And(ab_, ba_);
@@ -1176,7 +1176,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var m_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(k_?.Component, l_);
 			var n_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(m_);
 			var o_ = FHIRHelpers_4_3_000.ToValue(n_?.Value);
-			var p_ = context.Operators.Quantity(0m, "mm[Hg]");
+			var p_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
 			bool? s_(Observation BloodPressure)
 			{
@@ -1250,7 +1250,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var al_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(aj_?.Component, ak_);
 			var am_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(al_);
 			var an_ = FHIRHelpers_4_3_000.ToValue(am_?.Value);
-			var ao_ = context.Operators.Quantity(130m, "mm[Hg]");
+			var ao_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var ap_ = context.Operators.GreaterOrEqual((an_ as CqlQuantity), ao_);
 			bool? ar_(Observation BloodPressure)
 			{
@@ -1287,7 +1287,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ax_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(av_?.Component, aw_);
 			var ay_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(ax_);
 			var az_ = FHIRHelpers_4_3_000.ToValue(ay_?.Value);
-			var ba_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ba_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var bb_ = context.Operators.GreaterOrEqual((az_ as CqlQuantity), ba_);
 			var bc_ = context.Operators.Or(ap_, bb_);
 			var bd_ = context.Operators.And(ad_, bc_);
@@ -1424,8 +1424,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(130m, "mm[Hg]");
-			var o_ = context.Operators.Quantity(139m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
+			var o_ = context.Operators.Quantity((decimal?)139m, "mm[Hg]");
 			var p_ = context.Operators.Interval(n_, o_, true, true);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
@@ -1472,8 +1472,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
 			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
-			var ab_ = context.Operators.Quantity(80m, "mm[Hg]");
-			var ac_ = context.Operators.Quantity(89m, "mm[Hg]");
+			var ab_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
+			var ac_ = context.Operators.Quantity((decimal?)89m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(ab_, ac_, true, true);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.Or(q_, ae_);
@@ -1521,7 +1521,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var an_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(al_?.Component, am_);
 			var ao_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(an_);
 			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_?.Value);
-			var aq_ = context.Operators.Quantity(140m, "mm[Hg]");
+			var aq_ = context.Operators.Quantity((decimal?)140m, "mm[Hg]");
 			var ar_ = context.Operators.GreaterOrEqual((ap_ as CqlQuantity), aq_);
 			bool? at_(Observation BloodPressure)
 			{
@@ -1567,7 +1567,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var az_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ax_?.Component, ay_);
 			var ba_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(az_);
 			var bb_ = FHIRHelpers_4_3_000.ToValue(ba_?.Value);
-			var bc_ = context.Operators.Quantity(90m, "mm[Hg]");
+			var bc_ = context.Operators.Quantity((decimal?)90m, "mm[Hg]");
 			var bd_ = context.Operators.GreaterOrEqual((bb_ as CqlQuantity), bc_);
 			var be_ = context.Operators.Or(ar_, bd_);
 			var bf_ = context.Operators.Not(be_);
@@ -1767,7 +1767,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
 			bool? q_(Observation BloodPressure)
 			{
@@ -1859,7 +1859,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
 			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
-			var am_ = context.Operators.Quantity(140m, "mm[Hg]");
+			var am_ = context.Operators.Quantity((decimal?)140m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
 			bool? ap_(Observation BloodPressure)
 			{
@@ -1905,7 +1905,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
 			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
-			var ay_ = context.Operators.Quantity(90m, "mm[Hg]");
+			var ay_ = context.Operators.Quantity((decimal?)90m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
 			var ba_ = context.Operators.Or(an_, az_);
 			var bb_ = context.Operators.And(ab_, ba_);

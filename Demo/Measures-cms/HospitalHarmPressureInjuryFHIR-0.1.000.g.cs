@@ -356,7 +356,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
 				var q_ = context.Operators.Start(n_);
-				var r_ = context.Operators.Quantity(72m, "hours");
+				var r_ = context.Operators.Quantity((decimal?)72m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, true, true);
 				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
@@ -468,7 +468,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
 				var q_ = context.Operators.Start(n_);
-				var r_ = context.Operators.Quantity(24m, "hours");
+				var r_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, true, true);
 				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
@@ -622,7 +622,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var m_ = context.Operators.Start(l_);
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity(72m, "hours");
+				var p_ = context.Operators.Quantity((decimal?)72m, "hours");
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
 				var t_ = context.Operators.Interval(q_, s_, true, true);
@@ -751,7 +751,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var m_ = context.Operators.Start(l_);
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity(24m, "hours");
+				var p_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
 				var t_ = context.Operators.Interval(q_, s_, true, true);

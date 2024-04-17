@@ -444,7 +444,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var bl_ = this.Measurement_Period();
 			var bm_ = context.Operators.Start(bl_);
 			var bo_ = context.Operators.End(bl_);
-			var bp_ = context.Operators.Quantity(3m, "days");
+			var bp_ = context.Operators.Quantity((decimal?)3m, "days");
 			var bq_ = context.Operators.Subtract(bo_, bp_);
 			var br_ = context.Operators.Interval(bm_, bq_, true, true);
 			var bs_ = context.Operators.ElementInInterval<CqlDateTime>(bk_, br_, "day");
@@ -601,7 +601,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 				var t_ = context.Operators.Start(s_);
 				var v_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Quantity(3m, "days");
+				var x_ = context.Operators.Quantity((decimal?)3m, "days");
 				var y_ = context.Operators.Add(w_, x_);
 				var z_ = context.Operators.Interval(t_, y_, true, true);
 				var aa_ = context.Operators.ElementInInterval<CqlDateTime>(q_, z_, null);

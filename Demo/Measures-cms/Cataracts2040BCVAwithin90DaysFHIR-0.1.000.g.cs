@@ -705,7 +705,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var j_ = QICoreCommon_2_0_000.toInterval(f_);
 			var k_ = context.Operators.Start(j_);
 			var m_ = context.Operators.End(e_);
-			var n_ = context.Operators.Quantity(92m, "days");
+			var n_ = context.Operators.Quantity((decimal?)92m, "days");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var p_ = context.Operators.SameOrBefore(k_, o_, null);
 			var q_ = context.Operators.And(h_, p_);
@@ -975,7 +975,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				var s_ = context.Operators.End(r_);
 				var u_ = QICoreCommon_2_0_000.toInterval(q_);
 				var v_ = context.Operators.End(u_);
-				var w_ = context.Operators.Quantity(90m, "days");
+				var w_ = context.Operators.Quantity((decimal?)90m, "days");
 				var x_ = context.Operators.Add(v_, w_);
 				var y_ = context.Operators.Interval(s_, x_, false, true);
 				var z_ = context.Operators.ElementInInterval<CqlDateTime>(p_, y_, "day");

@@ -385,7 +385,7 @@ public class AHAOverall_2_6_000
 		bool? c_(Observation EjectionFraction)
 		{
 			var n_ = FHIRHelpers_4_3_000.ToValue(EjectionFraction?.Value);
-			var o_ = context.Operators.Quantity(40m, "%");
+			var o_ = context.Operators.Quantity((decimal?)40m, "%");
 			var p_ = context.Operators.LessOrEqual((n_ as CqlQuantity), o_);
 			var q_ = context.Operators.Convert<Code<ObservationStatus>>(EjectionFraction?.StatusElement?.Value);
 			var r_ = context.Operators.Convert<string>(q_);

@@ -898,7 +898,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			var f_ = context.Operators.Convert<Quantity>(FirstBMI?.Value);
 			var g_ = FHIRHelpers_4_3_000.ToQuantity(f_);
-			var h_ = context.Operators.Quantity(20m, "kg/m2");
+			var h_ = context.Operators.Quantity((decimal?)20m, "kg/m2");
 			var i_ = context.Operators.LessOrEqual((g_ as CqlQuantity), h_);
 
 			return i_;
@@ -927,7 +927,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var m_ = this.Measurement_Period();
 			var n_ = context.Operators.ElementInInterval<CqlDateTime>(l_, m_, null);
 			var o_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Value);
-			var p_ = context.Operators.Quantity(2m, "{drinks}/d");
+			var p_ = context.Operators.Quantity((decimal?)2m, "{drinks}/d");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
 			var r_ = context.Operators.And(n_, q_);
 
@@ -1489,7 +1489,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? e_(Observation FRAX)
 		{
 			var ad_ = FHIRHelpers_4_3_000.ToValue(FRAX?.Value);
-			var ae_ = context.Operators.Quantity(8.4m, "%");
+			var ae_ = context.Operators.Quantity((decimal?)8.4m, "%");
 			var af_ = context.Operators.GreaterOrEqual((ad_ as CqlQuantity), ae_);
 
 			return af_;

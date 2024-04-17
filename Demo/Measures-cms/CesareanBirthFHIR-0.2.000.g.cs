@@ -282,7 +282,7 @@ public class CesareanBirthFHIR_0_2_000
 		{
 			var d_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
 			var e_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
-			var f_ = context.Operators.Quantity(37m, "weeks");
+			var f_ = context.Operators.Quantity((decimal?)37m, "weeks");
 			var g_ = context.Operators.GreaterOrEqual(e_, f_);
 			var h_ = context.Operators.And((bool?)(d_ is null), g_);
 
@@ -440,7 +440,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var r_ = QICoreCommon_2_0_000.earliest(q_());
 			var s_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var t_ = context.Operators.Quantity(42m, "weeks");
+			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
 			var w_ = context.Operators.Interval(u_, s_, true, false);
 			var x_ = context.Operators.ElementInInterval<CqlDateTime>(r_, w_, null);
@@ -566,7 +566,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity(42m, "weeks");
+			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
@@ -704,7 +704,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity(42m, "weeks");
+			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
@@ -842,7 +842,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity(42m, "weeks");
+			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);

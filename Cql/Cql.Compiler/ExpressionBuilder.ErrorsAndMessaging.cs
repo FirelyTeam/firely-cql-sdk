@@ -8,11 +8,11 @@ namespace Hl7.Cql.Compiler
     {
         private Expression Message(Elm.Message e)
         {
-            var source = TranslateExpression(e.source!);
-            var condition = TranslateExpression(e.condition!);
-            var code = TranslateExpression(e.code!);
-            var severity = TranslateExpression(e.severity!);
-            var message = TranslateExpression(e.message!);
+            var source = Translate(e.source!);
+            var condition = Translate(e.condition!);
+            var code = Translate(e.code!);
+            var severity = Translate(e.severity!);
+            var message = Translate(e.message!);
             if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.

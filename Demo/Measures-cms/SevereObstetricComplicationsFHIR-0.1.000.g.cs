@@ -761,7 +761,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		{
 			var d_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
 			var e_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
-			var f_ = context.Operators.Quantity(20m, "weeks");
+			var f_ = context.Operators.Quantity((decimal?)20m, "weeks");
 			var g_ = context.Operators.GreaterOrEqual(e_, f_);
 			var h_ = context.Operators.And((bool?)(d_ is null), g_);
 
@@ -1702,9 +1702,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var i_ = context.Operators.Interval((int?)20, (int?)36, true, true);
 			var j_ = context.Operators.ElementInInterval<int?>(h_, i_, null);
 			var l_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
-			var m_ = context.Operators.Quantity(20m, "weeks");
+			var m_ = context.Operators.Quantity((decimal?)20m, "weeks");
 			var n_ = context.Operators.GreaterOrEqual(l_, m_);
-			var p_ = context.Operators.Quantity(36m, "weeks");
+			var p_ = context.Operators.Quantity((decimal?)36m, "weeks");
 			var q_ = context.Operators.LessOrEqual(l_, p_);
 			var r_ = context.Operators.And(n_, q_);
 			var s_ = context.Operators.And((bool?)(h_ is null), r_);
@@ -1747,7 +1747,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var u_ = context.Operators.Convert<CqlDateTime>(Hematocrit?.IssuedElement?.Value);
 				var v_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Quantity(1440m, "minutes");
+				var x_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var y_ = context.Operators.Subtract(w_, x_);
 				var z_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var aa_ = context.Operators.Interval(y_, z_, true, false);
@@ -1784,7 +1784,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var al_ = context.Operators.Convert<CqlDateTime>(Hematocrit?.IssuedElement?.Value);
 				var am_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var an_ = context.Operators.Start(am_);
-				var ao_ = context.Operators.Quantity(1440m, "minutes");
+				var ao_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ap_ = context.Operators.Subtract(an_, ao_);
 				var aq_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ar_ = context.Operators.Interval(ap_, aq_, true, false);
@@ -1845,7 +1845,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var u_ = context.Operators.Convert<CqlDateTime>(WBC?.IssuedElement?.Value);
 				var v_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Quantity(1440m, "minutes");
+				var x_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var y_ = context.Operators.Subtract(w_, x_);
 				var z_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var aa_ = context.Operators.Interval(y_, z_, true, false);
@@ -1882,7 +1882,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var al_ = context.Operators.Convert<CqlDateTime>(WBC?.IssuedElement?.Value);
 				var am_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var an_ = context.Operators.Start(am_);
-				var ao_ = context.Operators.Quantity(1440m, "minutes");
+				var ao_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ap_ = context.Operators.Subtract(an_, ao_);
 				var aq_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ar_ = context.Operators.Interval(ap_, aq_, true, false);
@@ -1943,7 +1943,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var v_ = QICoreCommon_2_0_000.earliest(u_);
 				var w_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var aa_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ab_ = context.Operators.Interval(z_, aa_, true, false);
@@ -1978,7 +1978,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ak_ = QICoreCommon_2_0_000.earliest(aj_);
 				var al_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var am_ = context.Operators.Start(al_);
-				var an_ = context.Operators.Quantity(1440m, "minutes");
+				var an_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ao_ = context.Operators.Subtract(am_, an_);
 				var ap_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var aq_ = context.Operators.Interval(ao_, ap_, true, false);
@@ -2037,7 +2037,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var x_ = QICoreCommon_2_0_000.earliest(w_);
 				var y_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var z_ = context.Operators.Start(y_);
-				var aa_ = context.Operators.Quantity(1440m, "minutes");
+				var aa_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ab_ = context.Operators.Subtract(z_, aa_);
 				var ac_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ad_ = context.Operators.Interval(ab_, ac_, true, false);
@@ -2087,7 +2087,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ar_ = QICoreCommon_2_0_000.earliest(aq_);
 				var as_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				var at_ = context.Operators.Start(as_);
-				var au_ = context.Operators.Quantity(1440m, "minutes");
+				var au_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var av_ = context.Operators.Subtract(at_, au_);
 				var aw_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ax_ = context.Operators.Interval(av_, aw_, true, false);

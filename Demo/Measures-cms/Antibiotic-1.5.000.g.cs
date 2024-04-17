@@ -77,7 +77,7 @@ public class Antibiotic_1_5_000
 				var m_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
 				var n_ = context.Operators.Start(m_);
 				var o_ = context.Operators.DateFrom(n_);
-				var p_ = context.Operators.Quantity(1m, "year");
+				var p_ = context.Operators.Quantity((decimal?)1m, "year");
 				var q_ = context.Operators.Subtract(o_, p_);
 				var s_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
 				var t_ = context.Operators.Start(s_);
@@ -114,7 +114,7 @@ public class Antibiotic_1_5_000
 				var k_ = FHIRHelpers_4_3_000.ToInterval(eDate?.Period);
 				var l_ = context.Operators.Start(k_);
 				var n_ = context.Operators.Start(k_);
-				var o_ = context.Operators.Quantity(3m, "days");
+				var o_ = context.Operators.Quantity((decimal?)3m, "days");
 				var p_ = context.Operators.Add(n_, o_);
 				var q_ = context.Operators.Interval(l_, p_, true, true);
 				var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, "day");
@@ -164,12 +164,12 @@ public class Antibiotic_1_5_000
 					var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var s_ = context.Operators.Start(r_);
 					var t_ = context.Operators.DateFrom(s_);
-					var u_ = context.Operators.Quantity(30m, "days");
+					var u_ = context.Operators.Quantity((decimal?)30m, "days");
 					var v_ = context.Operators.Subtract(t_, u_);
 					var x_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var y_ = context.Operators.Start(x_);
 					var z_ = context.Operators.DateFrom(y_);
-					var aa_ = context.Operators.Quantity(1m, "day");
+					var aa_ = context.Operators.Quantity((decimal?)1m, "day");
 					var ab_ = context.Operators.Subtract(z_, aa_);
 					var ac_ = context.Operators.Interval(v_, ab_, true, true);
 					var ad_ = context.Operators.ConvertDateToDateTime(ac_?.low);

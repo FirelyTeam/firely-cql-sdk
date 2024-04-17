@@ -55,7 +55,7 @@ namespace Hl7.Cql.Compiler
                     else
                     {
                         var type = TypeFor(@as.asTypeSpecifier!);
-                        var operand = TranslateExpression(@as.operand!);
+                        var operand = Translate(@as.operand!);
                         return new ElmAsExpression(operand, type);
                     }
                 }
@@ -71,7 +71,7 @@ namespace Hl7.Cql.Compiler
                 var type = _typeResolver.ResolveType(@as.asType.Name!)
                            ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
-                var operand = TranslateExpression(@as.operand);
+                var operand = Translate(@as.operand);
                 if (!type.IsAssignableTo(operand.Type))
                 {
                     _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand));
@@ -83,7 +83,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Is(Elm.Is @is) // @TODO: Cast
         {
-            var op = TranslateExpression(@is.operand!);
+            var op = Translate(@is.operand!);
             Type? type = null;
             if (@is.isTypeSpecifier != null)
             {
@@ -136,7 +136,7 @@ namespace Hl7.Cql.Compiler
         private Expression ChangeType(
             Element element,
             Type outputType)
-            => ChangeType(TranslateExpression(element), outputType); // @TODO: Cast
+            => ChangeType(Translate(element), outputType); // @TODO: Cast
 
         private Expression ChangeType(
             Expression input,

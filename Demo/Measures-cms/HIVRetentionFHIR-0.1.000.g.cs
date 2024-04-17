@@ -484,7 +484,7 @@ public class HIVRetentionFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity(240m, "days");
+			var j_ = context.Operators.Quantity((decimal?)240m, "days");
 			var k_ = context.Operators.Add(i_, j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = context.Operators.ConvertDateToDateTime(l_);
@@ -543,7 +543,7 @@ public class HIVRetentionFHIR_0_1_000
 			var aj_ = this.Measurement_Period();
 			var ak_ = context.Operators.Start(aj_);
 			var am_ = context.Operators.Start(aj_);
-			var an_ = context.Operators.Quantity(240m, "days");
+			var an_ = context.Operators.Quantity((decimal?)240m, "days");
 			var ao_ = context.Operators.Add(am_, an_);
 			var ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			var aq_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
@@ -714,7 +714,7 @@ public class HIVRetentionFHIR_0_1_000
 				var q_ = context.Operators.Start(p_);
 				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithHIV?.Period);
 				var s_ = context.Operators.End(r_);
-				var t_ = context.Operators.Quantity(90m, "days");
+				var t_ = context.Operators.Quantity((decimal?)90m, "days");
 				var u_ = context.Operators.Add(s_, t_);
 				var v_ = context.Operators.SameOrAfter(q_, u_, "day");
 				var x_ = context.Operators.Start(r_);
@@ -758,7 +758,7 @@ public class HIVRetentionFHIR_0_1_000
 				var m_ = context.Operators.Start(l_);
 				var n_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithHIV?.Period);
 				var o_ = context.Operators.End(n_);
-				var p_ = context.Operators.Quantity(90m, "days");
+				var p_ = context.Operators.Quantity((decimal?)90m, "days");
 				var q_ = context.Operators.Add(o_, p_);
 				var r_ = context.Operators.SameOrAfter(m_, q_, "day");
 				var s_ = context.Operators.And(k_, r_);
