@@ -116,11 +116,31 @@ namespace Hl7.Cql.Compiler
             return nullable;
         }
 
+        private Expression ChangeType(
+            Expression expr,
+            TypeSpecifier? typeSpecifier) // @TODO: Cast
+        {
+            if (typeSpecifier is null)
+                return expr;
 
-        private Expression ChangeType(Element element, Type outputType)
+            if (TypeFor(typeSpecifier) is {} resultType && resultType != expr.Type)
+            {
+                var typeAs = ChangeType(expr, resultType);
+                return typeAs;
+            }
+
+            return expr;
+        }
+
+
+        private Expression ChangeType(
+            Element element,
+            Type outputType)
             => ChangeType(TranslateExpression(element), outputType); // @TODO: Cast
 
-        private Expression ChangeType(Expression input, Type outputType) // @TODO: Cast
+        private Expression ChangeType(
+            Expression input,
+            Type outputType) // @TODO: Cast
         {
             if (input.Type == outputType)
                 return input;

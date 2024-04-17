@@ -131,38 +131,38 @@ namespace Hl7.Cql.Compiler
                         Expression? expression = element switch
                         {
                             //@formatter:off
-                            Abs abs                    => UnaryOperator(CqlOperator.Abs, abs),
-                            Ceiling ceil               => UnaryOperator(CqlOperator.Ceiling, ceil),
-                            ConvertsToBoolean ce       => UnaryOperator(CqlOperator.ConvertsToDate, ce),
-                            ConvertsToDate ce          => UnaryOperator(CqlOperator.ConvertsToDate, ce),
-                            ConvertsToDateTime ce      => UnaryOperator(CqlOperator.ConvertsToDateTime, ce),
-                            ConvertsToDecimal ce       => UnaryOperator(CqlOperator.ConvertsToDecimal, ce),
-                            ConvertsToLong ce          => UnaryOperator(CqlOperator.ConvertsToLong, ce),
-                            ConvertsToInteger ce       => UnaryOperator(CqlOperator.ConvertsToInteger, ce),
-                            ConvertsToQuantity ce      => UnaryOperator(CqlOperator.ConvertsToQuantity, ce),
-                            ConvertsToString ce        => UnaryOperator(CqlOperator.ConvertsToString, ce),
-                            ConvertsToTime ce          => UnaryOperator(CqlOperator.ConvertsToTime, ce),
-                            Distinct distinct          => UnaryOperator(CqlOperator.Distinct, distinct),
-                            End e                      => UnaryOperator(CqlOperator.IntervalEnd, e),
-                            Exists ex                  => UnaryOperator(CqlOperator.Exists, ex),
-                            Exp exe                    => UnaryOperator(CqlOperator.Exp, exe),
-                            Flatten fl                 => UnaryOperator(CqlOperator.Flatten, fl),
-                            Floor floor                => UnaryOperator(CqlOperator.Floor, floor),
-                            IsFalse isn                => UnaryOperator(CqlOperator.IsFalse, isn),
-                            IsTrue isn                 => UnaryOperator(CqlOperator.IsTrue, isn),
-                            Ln ln                      => UnaryOperator(CqlOperator.Ln, ln),
-                            Lower e                    => UnaryOperator(CqlOperator.Lower, e),
-                            Not not                    => UnaryOperator(CqlOperator.Not, not),
-                            PointFrom pf               => UnaryOperator(CqlOperator.PointFrom, pf),
-                            Precision pre              => UnaryOperator(CqlOperator.Precision, pre),
-                            Predecessor prd            => UnaryOperator(CqlOperator.Predecessor, prd),
-                            SingletonFrom sf           => UnaryOperator(CqlOperator.Single, sf),
-                            Successor suc              => UnaryOperator(CqlOperator.Successor, suc),
-                            Start start                => UnaryOperator(CqlOperator.IntervalStart, start),
-                            TimezoneOffsetFrom tofe    => UnaryOperator(CqlOperator.TimeZoneComponent, tofe),
-                            Truncate trunc             => UnaryOperator(CqlOperator.Truncate, trunc),
-                            Upper e                    => UnaryOperator(CqlOperator.Upper, e),
-                            Width width                => UnaryOperator(CqlOperator.Width, width),
+                            Abs abs                    => ChangeType(BindCqlOperator(CqlOperator.Abs, abs.operand), abs.resultTypeSpecifier),
+                            Ceiling ceil               => ChangeType(BindCqlOperator(CqlOperator.Ceiling, ceil.operand), ceil.resultTypeSpecifier),
+                            ConvertsToBoolean ce       => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDate, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToDate ce          => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDate, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToDateTime ce      => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDateTime, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToDecimal ce       => ChangeType(BindCqlOperator(CqlOperator.ConvertsToDecimal, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToLong ce          => ChangeType(BindCqlOperator(CqlOperator.ConvertsToLong, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToInteger ce       => ChangeType(BindCqlOperator(CqlOperator.ConvertsToInteger, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToQuantity ce      => ChangeType(BindCqlOperator(CqlOperator.ConvertsToQuantity, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToString ce        => ChangeType(BindCqlOperator(CqlOperator.ConvertsToString, ce.operand), ce.resultTypeSpecifier),
+                            ConvertsToTime ce          => ChangeType(BindCqlOperator(CqlOperator.ConvertsToTime, ce.operand), ce.resultTypeSpecifier),
+                            Distinct distinct          => ChangeType(BindCqlOperator(CqlOperator.Distinct, distinct.operand), distinct.resultTypeSpecifier),
+                            End e                      => ChangeType(BindCqlOperator(CqlOperator.IntervalEnd, e.operand), e.resultTypeSpecifier),
+                            Exists ex                  => ChangeType(BindCqlOperator(CqlOperator.Exists, ex.operand), ex.resultTypeSpecifier),
+                            Exp exe                    => ChangeType(BindCqlOperator(CqlOperator.Exp, exe.operand), exe.resultTypeSpecifier),
+                            Flatten fl                 => ChangeType(BindCqlOperator(CqlOperator.Flatten, fl.operand), fl.resultTypeSpecifier),
+                            Floor floor                => ChangeType(BindCqlOperator(CqlOperator.Floor, floor.operand), floor.resultTypeSpecifier),
+                            IsFalse isn                => ChangeType(BindCqlOperator(CqlOperator.IsFalse, isn.operand), isn.resultTypeSpecifier),
+                            IsTrue isn                 => ChangeType(BindCqlOperator(CqlOperator.IsTrue, isn.operand), isn.resultTypeSpecifier),
+                            Ln ln                      => ChangeType(BindCqlOperator(CqlOperator.Ln, ln.operand), ln.resultTypeSpecifier),
+                            Lower e                    => ChangeType(BindCqlOperator(CqlOperator.Lower, e.operand), e.resultTypeSpecifier),
+                            Not not                    => ChangeType(BindCqlOperator(CqlOperator.Not, not.operand), not.resultTypeSpecifier),
+                            PointFrom pf               => ChangeType(BindCqlOperator(CqlOperator.PointFrom, pf.operand), pf.resultTypeSpecifier),
+                            Precision pre              => ChangeType(BindCqlOperator(CqlOperator.Precision, pre.operand), pre.resultTypeSpecifier),
+                            Predecessor prd            => ChangeType(BindCqlOperator(CqlOperator.Predecessor, prd.operand), prd.resultTypeSpecifier),
+                            SingletonFrom sf           => ChangeType(BindCqlOperator(CqlOperator.Single, sf.operand), sf.resultTypeSpecifier),
+                            Successor suc              => ChangeType(BindCqlOperator(CqlOperator.Successor, suc.operand), suc.resultTypeSpecifier),
+                            Start start                => ChangeType(BindCqlOperator(CqlOperator.IntervalStart, start.operand), start.resultTypeSpecifier),
+                            TimezoneOffsetFrom tofe    => ChangeType(BindCqlOperator(CqlOperator.TimeZoneComponent, tofe.operand), tofe.resultTypeSpecifier),
+                            Truncate trunc             => ChangeType(BindCqlOperator(CqlOperator.Truncate, trunc.operand), trunc.resultTypeSpecifier),
+                            Upper e                    => ChangeType(BindCqlOperator(CqlOperator.Upper, e.operand), e.resultTypeSpecifier),
+                            Width width                => ChangeType(BindCqlOperator(CqlOperator.Width, width.operand), width.resultTypeSpecifier),
                             Add add                    => BindCqlOperator(CqlOperator.Add, add.operand[..2]),
                             And and                    => BindCqlOperator(CqlOperator.And, and.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#and
                             Divide divide              => BindCqlOperator(CqlOperator.Divide, divide.operand[..2]),
@@ -199,7 +199,7 @@ namespace Hl7.Cql.Compiler
                             Sum sum                    => BindCqlOperator(CqlOperator.Sum, sum.source),
                             StdDev stddev              => BindCqlOperator(CqlOperator.StdDev, stddev.source),
                             Variance variance          => BindCqlOperator(CqlOperator.Variance, variance.source),
-                            Negate neg                 => neg.operand is Literal literal ? NegateLiteral(neg, literal) : UnaryOperator(CqlOperator.Negate, neg),
+                            Negate neg                 => neg.operand is Literal literal ? NegateLiteral(neg, literal) : ChangeType(BindCqlOperator(CqlOperator.Negate, neg.operand), neg.resultTypeSpecifier),
                             TimeOfDay tod              => BindCqlOperator(CqlOperator.TimeOfDay),
                             Today today                => BindCqlOperator(CqlOperator.Today),
                             ToBoolean e                => ChangeType((e.operand!), typeof(bool?)),
@@ -317,22 +317,6 @@ namespace Hl7.Cql.Compiler
                 expression,
                 (current, visitor) =>
                     visitor.Mutate(current!, op, this));
-
-        protected Expression UnaryOperator(CqlOperator @operator, Elm.UnaryExpression unary)
-        {
-            var operand = TranslateExpression(unary.operand!);
-            var resultType = unary.resultTypeSpecifier != null
-                ? TypeFor(unary.resultTypeSpecifier)
-                : null;
-            var call = BindCqlOperator(@operator, operand);
-            if (resultType != null && resultType != call.Type)
-            {
-                var typeAs = ChangeType(call, resultType);
-                return typeAs;
-            }
-
-            return call;
-        }
 
         protected Expression? IdentifierRef(IdentifierRef ire)
         {
