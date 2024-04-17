@@ -99,6 +99,23 @@ namespace Hl7.Cql.CqlToElm.Builtin
             Upper,
             Variance);
 
+        public bool IsSystemFunction(string name, params TypeSpecifier[] operands) =>
+            operands?.Length switch
+            {
+                0 => expressions
+                        .OfType<ExpressionDef>()
+                        .Any(ed => ed.name == name),
+                > 0 => expressions
+                    .OfType<FunctionDef>()
+                    .Any(fd => fd.name == name
+                        && fd.operand?.Length == operands.Length
+                        && fd.operand
+                            .Select(op => op.resultTypeSpecifier)
+                            .Zip(operands, (x, y) => x == y)
+                            .All(x => x)),
+                _ => false
+            };
+
         private static readonly ExpressionDef[] expressions = typeof(SystemLibrary)
                 .GetFields(System.Reflection.BindingFlags.Static)
                 .Where(field => typeof(ExpressionDef).IsAssignableFrom(field.FieldType))

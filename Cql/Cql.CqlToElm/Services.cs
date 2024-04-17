@@ -37,6 +37,7 @@ namespace Hl7.Cql.CqlToElm
             services.AddScoped<LibraryVisitor>();
             services.AddScoped<DefinitionVisitor>();
             services.AddScoped<TypeSpecifierVisitor>();
+            services.AddScoped<OrderingVisitor>();
             return services;
         }
 
