@@ -188,7 +188,7 @@ internal partial class ExpressionBuilder
                 @return = DemoteSourceListToSingleton(@return);
             }
 
-            if (query.resultTypeSpecifier is ListTypeSpecifier && !_typeResolver.ImplementsGenericIEnumerable(@return.Type))
+            if (query.resultTypeSpecifier is ListTypeSpecifier && !_typeResolver.IsListType(@return.Type))
             {
                 @return = Expression.NewArrayInit(@return.Type, @return);
             }
@@ -209,7 +209,7 @@ internal partial class ExpressionBuilder
 
     private (Expression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(Expression source)
     {
-        if (_typeResolver.ImplementsGenericIEnumerable(source.Type))
+        if (_typeResolver.IsListType(source.Type))
             return (source, false);
 
         source = Expression.NewArrayInit(source.Type, source);
@@ -229,7 +229,7 @@ internal partial class ExpressionBuilder
             .SelectToArray(s =>
             {
                 var sourceType = TranslateExpression(s.expression).Type;
-                var isEnumerationType = _typeResolver.ImplementsGenericIEnumerable(sourceType);
+                var isEnumerationType = _typeResolver.IsListType(sourceType);
                 if (isEnumerationType) sourceType = _typeResolver.GetListElementType(sourceType, true)!;
                 return (
                     s.alias,
@@ -469,7 +469,7 @@ internal partial class ExpressionBuilder
         //            .Where(P => true) // such that goes here
         //            .Select(P => E));
         var source = TranslateExpression(with.expression);
-        if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
+        if (!_typeResolver.IsListType(source.Type))
         {
             // e.g.:
             // with "Index Prescription Start Date" IPSD

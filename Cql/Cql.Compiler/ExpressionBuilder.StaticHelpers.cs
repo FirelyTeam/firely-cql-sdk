@@ -7,8 +7,6 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
-using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
 using Microsoft.CodeAnalysis.CSharp;
 using Expression = System.Linq.Expressions.Expression;
 using F = Hl7.Fhir.Model;

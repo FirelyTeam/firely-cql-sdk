@@ -139,19 +139,6 @@ namespace Hl7.Cql.Runtime
             };
 
         /// <inheritdoc/>
-        public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
-        {
-            if (type == typeof(string))
-                return false;
-
-            return (type.IsGenericType && type.GetGenericTypeDefinition() == genericInterfaceTypeDefinition)
-                || type.GetInterfaces()
-                    .Where(ifc => ifc.IsGenericType)
-                    .Select(ifc => ifc.GetGenericTypeDefinition())
-                    .Any(ifc => ifc == genericInterfaceTypeDefinition);
-        }
-
-        /// <inheritdoc/>
         public override Type? GetListElementType(Type type, bool throwError = false)
         {
             if (type.IsGenericType)

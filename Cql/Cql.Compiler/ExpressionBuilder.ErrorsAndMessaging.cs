@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler
 {

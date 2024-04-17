@@ -27,7 +27,7 @@ namespace Hl7.Cql.Compiler
                     if ((list.element?.Length ?? 0) == 0)
                     {
                         var type = TypeFor(@as.asTypeSpecifier!);
-                        if (_typeResolver.ImplementsGenericIEnumerable(type))
+                        if (_typeResolver.IsListType(type))
                         {
                             var listElementType = _typeResolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
                             var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
@@ -124,8 +124,8 @@ namespace Hl7.Cql.Compiler
             if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
                 return input.ExprTypeAs(outputType);
 
-            if (_typeResolver.ImplementsGenericIEnumerable(input.Type)
-                && _typeResolver.ImplementsGenericIEnumerable(outputType))
+            if (_typeResolver.IsListType(input.Type)
+                && _typeResolver.IsListType(outputType))
             {
                 var inputElementType = _typeResolver.GetListElementType(input.Type, true)!;
                 var outputElementType = _typeResolver.GetListElementType(outputType, true)!;

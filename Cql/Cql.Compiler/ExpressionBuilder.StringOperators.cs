@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
         {
             var source = TranslateExpression(e.source!);
             var operand = e.separator == null
-                ? NullConstantExpression.ForType<string>()
+                ? NullConstantExpression.String
                 : TranslateExpression(e.separator);
             return _operatorsBinder.BindToMethod(CqlOperator.Combine, source, operand);
         }
@@ -33,7 +33,7 @@ namespace Hl7.Cql.Compiler
                 return _operatorsBinder.BindToMethod(CqlOperator.CharAt, left, right);
             }
 
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.ListElementAt, left, right);
             }
@@ -43,7 +43,7 @@ namespace Hl7.Cql.Compiler
         protected Expression? Length(Elm.Length len)
         {
             var operand = TranslateExpression(len.operand!);
-            if (_typeResolver.ImplementsGenericIEnumerable(operand.Type))
+            if (_typeResolver.IsListType(operand.Type))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.ListLength, operand);
             }
@@ -75,7 +75,7 @@ namespace Hl7.Cql.Compiler
             var stringToSub = TranslateExpression(e!.stringToSub!);
             var startIndex = TranslateExpression(e!.startIndex!);
             var length = e.length == null
-                ? NullConstantExpression.ForType<int?>()
+                ? NullConstantExpression.NullableInt32
                 : TranslateExpression(e.length);
             return _operatorsBinder.BindToMethod(CqlOperator.Substring, stringToSub, startIndex, length);
         }

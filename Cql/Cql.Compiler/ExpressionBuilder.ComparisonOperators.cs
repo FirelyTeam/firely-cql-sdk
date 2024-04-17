@@ -19,11 +19,11 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(eqv.operand[0]);
             var right = TranslateExpression(eqv.operand[1]);
-            if (!_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (!_typeResolver.IsListType(left.Type))
                 return _operatorsBinder.BindToMethod(CqlOperator.Equivalent, left, right);
 
             var leftElementType = _typeResolver.GetListElementType(left.Type);
-            if (!_typeResolver.ImplementsGenericIEnumerable(right.Type))
+            if (!_typeResolver.IsListType(right.Type))
                 throw new NotImplementedException().WithContext(this);
 
             var rightElementType = _typeResolver.GetListElementType(right.Type);

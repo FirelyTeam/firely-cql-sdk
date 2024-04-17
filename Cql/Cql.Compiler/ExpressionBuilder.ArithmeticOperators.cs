@@ -16,12 +16,14 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
+        private const string Int32MaxPlusOneAsString = "2147483648";
+
         private Expression NegateLiteral(Negate e, Literal literal)
         {
             // handle things like -2147483648 which gets translated to Negate(2147483648)
             // since int.MaxValue is 2147483647, we have to handle this specially
             var literalType = TypeFor(literal);
-            if (literalType == typeof(int?) && literal.value == "2147483648")
+            if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
             {
                 return Expression.Constant(int.MinValue);
             }

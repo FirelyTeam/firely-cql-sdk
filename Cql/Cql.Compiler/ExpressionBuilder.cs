@@ -25,11 +25,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
 using Expression = System.Linq.Expressions.Expression;
-using System.Dynamic;
-using TypeExtensions = Hl7.Cql.Compiler.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Compiler
 {
@@ -360,7 +357,7 @@ namespace Hl7.Cql.Compiler
                                 TranslateExpression(rnd.operand!),
                                 rnd.precision is { } precision
                                     ? TranslateExpression(precision!)
-                                    : NullConstantExpression.ForType<int?>()),
+                                    : NullConstantExpression.NullableInt32),
                             SameAs sa => SameAs(sa),
                             SameOrAfter soa => SameOrAfter(soa),
                             SameOrBefore sob => SameOrBefore(sob),
@@ -437,7 +434,7 @@ namespace Hl7.Cql.Compiler
             var type = TypeFor(valueSetRef)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet));
 
-            if (_typeResolver.ImplementsGenericIEnumerable(type))
+            if (_typeResolver.IsListType(type))
             {
                 var elementType = _typeResolver.GetListElementType(type);
                 if (elementType != typeof(CqlCode))
@@ -753,9 +750,9 @@ namespace Hl7.Cql.Compiler
                         }
                     }
                 }
-                else if (_typeResolver.ImplementsGenericInterface(property.PropertyType, typeof(ICollection<>)))
+                else if (property.PropertyType.IsImplementingGenericTypeDefinition(typeof(ICollection<>)))
                 {
-                    if (_typeResolver.ImplementsGenericIEnumerable(value.Type))
+                    if (_typeResolver.IsListType(value.Type))
                     {
                         var elementType = _typeResolver.GetListElementType(property.PropertyType)!;
                         var ctor = ConstructorInfos.ListOf(elementType);

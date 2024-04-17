@@ -26,8 +26,8 @@ partial class ExpressionBuilder
                                 ConstructorInfos.CqlCode,
                                 Expression.Constant(coding.code),
                                 Expression.Constant(coding.system),
-                                NullConstantExpression.ForType<string>(),
-                                NullConstantExpression.ForType<string>()
+                                NullConstantExpression.String,
+                                NullConstantExpression.String
                             ));
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
                     var lambda = Expression.Lambda(arrayOfCodesInitializer, CqlExpressions.ParameterExpression);
@@ -69,8 +69,8 @@ partial class ExpressionBuilder
                             ConstructorInfos.CqlCode,
                             Expression.Constant(systemCode.code),
                             Expression.Constant(systemCode.system),
-                            NullConstantExpression.ForType<string>(),
-                            NullConstantExpression.ForType<string>()
+                            NullConstantExpression.String,
+                            NullConstantExpression.String
                         );
                     }
 
@@ -110,8 +110,8 @@ partial class ExpressionBuilder
                     ConstructorInfos.CqlCode,
                     Expression.Constant(codeDef.id),
                     Expression.Constant(csUrl),
-                    NullConstantExpression.ForType<string>(),
-                    NullConstantExpression.ForType<string>()!
+                    NullConstantExpression.String,
+                    NullConstantExpression.String!
                 );
                 var lambda = Expression.Lambda(newCodingExpression, CqlExpressions.ParameterExpression);
                 _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, codeDef.name!, lambda);

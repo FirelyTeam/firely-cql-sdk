@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Abstractions
 {
@@ -115,18 +116,21 @@ namespace Hl7.Cql.Abstractions
         public abstract Type? ResolveType(string typeSpecifier);
 
         /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="type"/> implements the generic interface specified by <paramref name="genericInterfaceTypeDefinition"/>.
+        /// Determines whether the specified type is a list type.
+        /// This is usually determined by checking if the type implements <see cref="IEnumerable{T}"/>,
+        /// however, some types are not considered list types even if they do implement this interface,
+        /// such as <see cref="string"/> or FHIR primitive types.
         /// </summary>
-        /// <remarks>
-        /// This is typically used in conjunction with <see cref="GetListElementType(Type, bool)"/>, where
-        /// <paramref name="genericInterfaceTypeDefinition"/> is <see cref="IEnumerable{T}"/>.
-        /// </remarks>
         /// <param name="type">The type to check.</param>
-        /// <param name="genericInterfaceTypeDefinition">The generic type definition.</param>
-        /// <returns><c>true</c> if the type implements the generic interface; otherwise, <c>false</c>.</returns>
-        public abstract bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition);
+        /// <returns><see langword="true"/> if the type is a list type; otherwise, <see langword="false"/>.</returns>
+        internal virtual bool IsListType(Type type)
+        {
+            if (type == typeof(string))
+                return false;
 
-        internal virtual bool ImplementsGenericIEnumerable(Type type) => ImplementsGenericInterface(type, typeof(IEnumerable<>));
+            var isImplementing = type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>));
+            return isImplementing;
+        }
 
         /// <summary>
         /// Gets the list element type of <paramref name="type"/>.

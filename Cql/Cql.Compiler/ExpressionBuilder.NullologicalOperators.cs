@@ -12,7 +12,6 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Infrastructure;
 
 namespace Hl7.Cql.Compiler
 {
@@ -22,7 +21,7 @@ namespace Hl7.Cql.Compiler
         {
             var operands = ce.operand!
                 .SelectToArray(op => TranslateExpression(op));
-            if (operands.Length == 1 && _typeResolver.ImplementsGenericIEnumerable(operands[0].Type))
+            if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
                 return _operatorsBinder.BindToMethod(CqlOperator.Coalesce, operands[0]);
 
             var distinctOperandTypes = operands

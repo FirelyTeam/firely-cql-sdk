@@ -19,12 +19,12 @@ namespace Hl7.Cql.Compiler
         private Expression Collapse(Elm.Collapse e)
         {
             var operand = TranslateExpression(e.operand![0]!);
-            if (_typeResolver.ImplementsGenericIEnumerable(operand.Type))
+            if (_typeResolver.IsListType(operand.Type))
             {
                 var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
                 if (elementType.IsCqlInterval(out var pointType))
                 {
-                    var precision = NullConstantExpression.ForType<string>();
+                    var precision = NullConstantExpression.String;
                     if (e.operand.Length > 1 && e.operand[1] is Elm.Quantity quant)
                     {
                         precision = Expression.Constant(quant.unit, typeof(string));
@@ -41,7 +41,7 @@ namespace Hl7.Cql.Compiler
             var left = TranslateExpression(e!.operand![0]!);
             var right = TranslateExpression(e.operand[1]!);
             var precision = Precision(e);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 var elementType = _typeResolver.GetListElementType(left.Type, throwError: true)!;
                 if (elementType != right.Type)
@@ -85,7 +85,7 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type) && _typeResolver.ImplementsGenericIEnumerable(right.Type))
+            if (_typeResolver.IsListType(left.Type) && _typeResolver.IsListType(right.Type))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.ListExcept, left, right);
             }
@@ -109,7 +109,7 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(e.operand![0]!);
             var right = TranslateExpression(e.operand![1]!);
-            if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+            if (_typeResolver.IsListType(right.Type))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.InList, left, right);
             }
@@ -129,10 +129,10 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+                if (_typeResolver.IsListType(right.Type))
                 {
                     var rightElementType = _typeResolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
@@ -165,10 +165,10 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+                if (_typeResolver.IsListType(right.Type))
                 {
                     var rightElementType = _typeResolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
@@ -202,7 +202,7 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(e.operand![0]!);
             var right = TranslateExpression(e.operand![1]!);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.ListIntersect, left, right);
             }
@@ -349,10 +349,10 @@ namespace Hl7.Cql.Compiler
                 return _operatorsBinder.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, left, right, precision);
             }
 
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 // var leftElementType = _typeResolver.GetListElementType(left.Type);
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+                if (_typeResolver.IsListType(right.Type))
                 {
                     // var rightElementType = _typeResolver.GetListElementType(right.Type);
                     return _operatorsBinder.BindToMethod(CqlOperator.ListProperlyIncludesList, left, right);
@@ -376,10 +376,10 @@ namespace Hl7.Cql.Compiler
                     return _operatorsBinder.BindToMethod(CqlOperator.IntervalProperlyIncludesInterval, right, left, precision);
                 }
             }
-            else if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            else if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+                if (_typeResolver.IsListType(right.Type))
                 {
                     var rightElementType = _typeResolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
@@ -405,7 +405,7 @@ namespace Hl7.Cql.Compiler
                 return _operatorsBinder.BindToMethod(CqlOperator.IntervalProperlyIncludesElement, intervalOrList, element, precision);
             }
 
-            if (_typeResolver.ImplementsGenericIEnumerable(intervalOrList.Type))
+            if (_typeResolver.IsListType(intervalOrList.Type))
             {
                 return _operatorsBinder.BindToMethod(CqlOperator.ListProperlyIncludesElement, intervalOrList, element);
             }
@@ -416,10 +416,10 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+                if (_typeResolver.IsListType(right.Type))
                 {
                     var rightElementType = _typeResolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
@@ -465,10 +465,10 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(e.operand![0]);
             var right = TranslateExpression(e.operand![1]);
-            if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+            if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type)!;
-                if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+                if (_typeResolver.IsListType(right.Type))
                 {
                     var rightElementType = _typeResolver.GetListElementType(right.Type)!;
                     if (leftElementType != rightElementType)

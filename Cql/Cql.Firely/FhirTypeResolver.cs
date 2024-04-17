@@ -28,12 +28,12 @@ namespace Hl7.Cql.Fhir
             adjust();
         }
 
-        public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
+        internal override bool IsListType(Type type)
         {
-            if (genericInterfaceTypeDefinition == typeof(IEnumerable<>)
-                && type.GetCustomAttribute<FhirTypeAttribute>() != null)
+            if (type.GetCustomAttribute<FhirTypeAttribute>() != null)
                 return false;
-            return base.ImplementsGenericInterface(type, genericInterfaceTypeDefinition);
+
+            return base.IsListType(type);
         }
 
 

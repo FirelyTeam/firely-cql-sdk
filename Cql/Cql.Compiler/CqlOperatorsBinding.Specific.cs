@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinder
@@ -44,10 +45,10 @@ partial class CqlOperatorsBinder
             throw new NotImplementedException();
         }
 
-        if (_typeResolver.ImplementsGenericIEnumerable(left.Type))
+        if (_typeResolver.IsListType(left.Type))
         {
             var leftElementType = _typeResolver.GetListElementType(left.Type, true)!;
-            if (_typeResolver.ImplementsGenericIEnumerable(right.Type))
+            if (_typeResolver.IsListType(right.Type))
             {
                 var rightElementType = _typeResolver.GetListElementType(right.Type, true)!;
                 if (rightElementType != leftElementType)
@@ -67,7 +68,7 @@ partial class CqlOperatorsBinder
         if (perQuantity is ConstantExpression { Value: null })
             perQuantity = NullConstantExpression.ForType<CqlQuantity>();
 
-        if (_typeResolver.ImplementsGenericIEnumerable(argument.Type))
+        if (_typeResolver.IsListType(argument.Type))
         {
 
             var elementType = _typeResolver.GetListElementType(argument.Type)!;
@@ -207,7 +208,7 @@ partial class CqlOperatorsBinder
     private Expression Flatten(Expression operand)
     {
         var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
-        if (_typeResolver.ImplementsGenericIEnumerable(elementType))
+        if (_typeResolver.IsListType(elementType))
         {
             var nestedElementType = _typeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
             var call = BindToGenericMethod(nameof(ICqlOperators.FlattenList), [nestedElementType], operand);
@@ -228,7 +229,7 @@ partial class CqlOperatorsBinder
     {
         // This should be disallowed but isn't, so handle it:
         if (operand.Type == typeof(CqlInterval<object>))
-            return NullConstantExpression.ForType<int?>();
+            return NullConstantExpression.NullableInt32;
 
         return BindToMethodConvertArgs(nameof(ICqlOperators.Width), operand);
     }
@@ -336,7 +337,7 @@ partial class CqlOperatorsBinder
             var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByValueSet))!;
             forType = method.MakeGenericMethod(resourceType);
         }
-        else if (_typeResolver.ImplementsGenericIEnumerable(codes.Type))
+        else if (_typeResolver.IsListType(codes.Type))
         {
             var elementType = _typeResolver.GetListElementType(codes.Type, true)!;
             if (elementType == typeof(CqlCode))
@@ -348,7 +349,7 @@ partial class CqlOperatorsBinder
             // for expressions like:
             // [Source : "Definition returning List<Code>"]
             // this ends up turning the codes expression into a List<List<Code>>
-            else if (_typeResolver.ImplementsGenericIEnumerable(elementType) && _typeResolver.GetListElementType(elementType) == typeof(CqlCode))
+            else if (_typeResolver.IsListType(elementType) && _typeResolver.GetListElementType(elementType) == typeof(CqlCode))
             {
                 // call Flatten.
                 codes = Flatten(codes);
@@ -399,7 +400,7 @@ partial class CqlOperatorsBinder
         if (collectionSelectorLambda is LambdaExpression collectionSelector)
         {
             var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
-            if (_typeResolver.ImplementsGenericIEnumerable(collectionSelector.ReturnType))
+            if (_typeResolver.IsListType(collectionSelector.ReturnType))
             {
                 var secondGenericArgument = _typeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
                 var call = BindToGenericMethod(nameof(ICqlOperators.SelectManyOrNull), [firstGenericArgument, secondGenericArgument], source, collectionSelector);
@@ -423,7 +424,7 @@ partial class CqlOperatorsBinder
         var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ??
                                    throw new InvalidOperationException(
                                        $"{source.Type} was expected to be a list type.");
-        if (!_typeResolver.ImplementsGenericIEnumerable(collectionSelector.ReturnType))
+        if (!_typeResolver.IsListType(collectionSelector.ReturnType))
             throw new ArgumentException("Collection lambda does not return an IEnumerable",
                 nameof(collectionSelectorLambda));
 
