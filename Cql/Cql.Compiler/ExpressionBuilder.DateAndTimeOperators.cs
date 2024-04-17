@@ -26,7 +26,7 @@ namespace Hl7.Cql.Compiler
                 (false, true) => CqlOperator.ElementAfterInterval,
                 _             => CqlOperator.After
             }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, expr);
+            return BindCqlOperator(CqlOperator.After, expr);
         }
 
         protected Expression? Before(Elm.Before e)

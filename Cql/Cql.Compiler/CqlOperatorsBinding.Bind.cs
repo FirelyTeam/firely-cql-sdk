@@ -4,17 +4,20 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Operators;
+using Hl7.Fhir.Specification;
 
 namespace Hl7.Cql.Compiler;
 
 #pragma warning disable CS1591
 partial class CqlOperatorsBinder
 {
-    private static readonly IReadOnlyDictionary<string, MethodInfo[]> ICqlOperators_MethodInfos_By_Name =
+    private static readonly IReadOnlyDictionary<string, (MethodInfo method, ParameterInfo[] parameters)[]> ICqlOperators_MethodsWithParameters_By_Name =
         typeof(ICqlOperators)
         .GetMethods(BindingFlags.Instance | BindingFlags.Public)
         .GroupBy(m => m.Name)
-        .ToDictionary(m => m.Key, m => m.ToArray());
+        .ToDictionary(
+            m => m.Key,
+            m => m.Select(m => (m, m.GetParameters())).ToArray());
 
     /// <summary>
     ///
@@ -47,44 +50,83 @@ partial class CqlOperatorsBinder
     private (MethodInfo? method, Expression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
         Expression[] arguments,
-        bool throwError = true)
+        bool throwError = true
+    )
+    {
+        var candidates = ResolveMethodInfosWithPotentialArgumentConversions(methodName, arguments).ToArray();
+
+        return candidates switch
+        {
+            [] when throwError =>
+                throw new ArgumentException(
+                                      $"No suitable method found {methodName}({string.Join(", ", arguments.Select(e => e.Type.Name))}).",
+                                      nameof(methodName)),
+            [] => (null, []),
+            [{ } only] => only,
+            _ => candidates.Last() // REVIEW: We should still come up with a way to pick the best candidate
+        };
+    }
+
+    private IEnumerable<(MethodInfo? method, Expression[] arguments)> ResolveMethodInfosWithPotentialArgumentConversions(
+        string methodName,
+        Expression[] arguments)
     {
         Expression[] args = arguments; // So we don't modify the original array
-        var methods = ICqlOperators_MethodInfos_By_Name[methodName];
 
         for (int i = 0; i < 2; i++) // Try twice, first with all arguments, then without the last one
         {
+            var methodsWithParameters = ICqlOperators_MethodsWithParameters_By_Name[methodName]
+                .Where(t => t.parameters.Length == args.Length);
+
             if (args.Length == 0)
             {
                 // No conversions, find method without parameters
-                return (methods.SingleOrDefault(m => m.GetParameters().Length == 0), []);
+                foreach (var (method, _) in methodsWithParameters)
+                {
+                    yield return (method, []);
+                }
+
+                break;
             }
 
-            Expression[] bindArgs = new Expression[args.Length];
-
-            foreach (var method in methods)
+            foreach (var (method, methodParameters) in methodsWithParameters)
             {
-                for (int argIndexForGenericMethod = 0;
-                     argIndexForGenericMethod < Math.Min(args.Length, 2);
-                     argIndexForGenericMethod++) // Try to get generic type from argument up to the second one
+                if (method is { IsGenericMethodDefinition: true })
                 {
-                    MethodInfo bindMethod;
-                    if (method is { IsGenericMethodDefinition: true })
+                    // Generic method, try to get generic type from argument
+                    for (int argIndexForGenericMethod = 0;
+                         argIndexForGenericMethod < Math.Min(args.Length, 2);
+                         argIndexForGenericMethod++) // Try to get generic type from argument up to the second one
                     {
                         if (!args[argIndexForGenericMethod].Type.IsGenericType)
                             continue; // Not a generic argument, try again
 
-                        var genericType = args[argIndexForGenericMethod].Type.GetGenericArguments()[0];
-                        bindMethod = method.MakeGenericMethod(genericType);
-                    }
-                    else
-                    {
-                        bindMethod = method;
-                    }
+                        var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments()[0];
+                        var genericMethod = method.MakeGenericMethod(genericTypeArg);
+                        var genericMethodParameters = genericMethod.GetParameters();
 
-                    ParameterInfo[] methodParameters = bindMethod.GetParameters();
-                    if (methodParameters.Length != args.Length)
-                        continue;
+                        Expression[] bindArgs = new Expression[args.Length]; // Must copy the array, especially since we are enumerating and potentially modifying this array.
+
+                        bool ConvertBindArguments()
+                        {
+                            for (int i = 0; i < args.Length; i++)
+                            {
+                                if (!TryConvert(args[i], genericMethodParameters[i].ParameterType, out bindArgs[i]!))
+                                    return false;
+                            }
+                            return true;
+                        }
+
+                        if (!ConvertBindArguments())
+                            continue;
+
+                        yield return (genericMethod, bindArgs);
+                        break;
+                    }
+                }
+                else
+                {
+                    Expression[] bindArgs = new Expression[args.Length]; // Must copy the array, especially since we are enumerating and potentially modifying this array.
 
                     bool ConvertBindArguments()
                     {
@@ -99,7 +141,7 @@ partial class CqlOperatorsBinder
                     if (!ConvertBindArguments())
                         continue;
 
-                    return (bindMethod, bindArgs);
+                    yield return (method, bindArgs);
                 }
             }
 
@@ -112,14 +154,6 @@ partial class CqlOperatorsBinder
 
             break;
         }
-
-        if (throwError)
-        {
-            var types = string.Join(", ", arguments.Select(e => e.Type.Name));
-            throw new ArgumentException($"No suitable method found {methodName}({types}).", nameof(methodName));
-        }
-
-        return (null, arguments);
     }
 
     private static MethodCallExpression BindToMethod(

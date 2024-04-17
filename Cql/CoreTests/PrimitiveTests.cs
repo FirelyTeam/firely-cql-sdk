@@ -334,7 +334,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalAfterElement(interval, nine, null);
+            var contains = fcq.After(interval, nine, null);
             Assert.IsNotNull(contains);
             Assert.IsTrue((contains ?? false) == false);
         }
@@ -352,7 +352,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalAfterElement(interval, nine, null);
+            var contains = fcq.After(interval, nine, null);
             Assert.IsNull(contains);
         }
 

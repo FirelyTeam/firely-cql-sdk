@@ -16,6 +16,27 @@ Hl7.Cql.Operators.ICqlOperators.Add(Hl7.Cql.Primitives.CqlQuantity? left, Hl7.Cq
 Hl7.Cql.Operators.ICqlOperators.Add(Hl7.Cql.Primitives.CqlTime? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Add(int? left, int? right) -> int?
 Hl7.Cql.Operators.ICqlOperators.Add(long? left, long? right) -> long?
+Hl7.Cql.Operators.ICqlOperators.After(decimal? right, Hl7.Cql.Primitives.CqlInterval<decimal?>? left, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlDate? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlDateTime? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, decimal? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, Hl7.Cql.Primitives.CqlInterval<decimal?>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlDate? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlDateTime? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlQuantity? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlTime? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<int?>? left, Hl7.Cql.Primitives.CqlInterval<int?>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<int?>? left, int? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<long?>? left, Hl7.Cql.Primitives.CqlInterval<long?>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlInterval<long?>? left, long? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlQuantity? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(Hl7.Cql.Primitives.CqlTime? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(int? right, Hl7.Cql.Primitives.CqlInterval<int?>? left, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.After(long? right, Hl7.Cql.Primitives.CqlInterval<long?>? left, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.After(object? left, object? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Age(string! precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.AgeAt(Hl7.Cql.Primitives.CqlDate? asOf, string! precision) -> int?
@@ -140,13 +161,6 @@ Hl7.Cql.Operators.ICqlOperators.Divide(Hl7.Cql.Primitives.CqlQuantity? left, Hl7
 Hl7.Cql.Operators.ICqlOperators.DurationBetween(Hl7.Cql.Primitives.CqlDate? low, Hl7.Cql.Primitives.CqlDate? high, string? precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.DurationBetween(Hl7.Cql.Primitives.CqlDateTime? low, Hl7.Cql.Primitives.CqlDateTime? high, string? precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.DurationBetween(Hl7.Cql.Primitives.CqlTime? low, Hl7.Cql.Primitives.CqlTime? high, string? precision) -> int?
-Hl7.Cql.Operators.ICqlOperators.ElementAfterInterval(decimal? right, Hl7.Cql.Primitives.CqlInterval<decimal?>? left, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ElementAfterInterval(Hl7.Cql.Primitives.CqlDate? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ElementAfterInterval(Hl7.Cql.Primitives.CqlDateTime? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ElementAfterInterval(Hl7.Cql.Primitives.CqlQuantity? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ElementAfterInterval(Hl7.Cql.Primitives.CqlTime? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ElementAfterInterval(int? right, Hl7.Cql.Primitives.CqlInterval<int?>? left, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ElementAfterInterval(long? right, Hl7.Cql.Primitives.CqlInterval<long?>? left, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ElementBeforeInterval(decimal? right, Hl7.Cql.Primitives.CqlInterval<decimal?>? left, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ElementBeforeInterval(Hl7.Cql.Primitives.CqlDate? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ElementBeforeInterval(Hl7.Cql.Primitives.CqlDateTime? right, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, string? precision) -> bool?
@@ -213,20 +227,6 @@ Hl7.Cql.Operators.ICqlOperators.Interval(Hl7.Cql.Primitives.CqlQuantity? low, Hl
 Hl7.Cql.Operators.ICqlOperators.Interval(Hl7.Cql.Primitives.CqlTime? low, Hl7.Cql.Primitives.CqlTime? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>?
 Hl7.Cql.Operators.ICqlOperators.Interval(int? low, int? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<int?>?
 Hl7.Cql.Operators.ICqlOperators.Interval(long? low, long? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<long?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterElement(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, decimal? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlDate? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlDateTime? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlQuantity? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlTime? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterElement(Hl7.Cql.Primitives.CqlInterval<int?>? left, int? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterElement(Hl7.Cql.Primitives.CqlInterval<long?>? left, long? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterInterval(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, Hl7.Cql.Primitives.CqlInterval<decimal?>? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterInterval(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterInterval(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterInterval(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterInterval(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterInterval(Hl7.Cql.Primitives.CqlInterval<int?>? left, Hl7.Cql.Primitives.CqlInterval<int?>? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalAfterInterval(Hl7.Cql.Primitives.CqlInterval<long?>? left, Hl7.Cql.Primitives.CqlInterval<long?>? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalBeforeElement(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, decimal? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalBeforeElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlDate? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalBeforeElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlDateTime? right, string? precision) -> bool?
