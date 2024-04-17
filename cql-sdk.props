@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0</TargetFrameworks>
+		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
@@ -72,7 +72,9 @@
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
 		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+
+
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>
-

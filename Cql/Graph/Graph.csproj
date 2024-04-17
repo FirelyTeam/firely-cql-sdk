@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="$(ProjectPath)..\..\cql-sdk.props" />
+	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Graph</AssemblyName>
@@ -17,8 +17,6 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Elm" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24122.1" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>
-
