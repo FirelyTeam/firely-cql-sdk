@@ -21,7 +21,7 @@ namespace Hl7.Cql.Compiler
         {
             var operands = TranslateExpressions(ce.operand);
             if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
-                return _operatorsBinder.BindToMethod(CqlOperator.Coalesce, operands[0]);
+                return BindCqlOperatorsMethod(CqlOperator.Coalesce, operands[0]);
 
             var distinctOperandTypes = operands
                 .Select(op => op.Type)

@@ -211,6 +211,12 @@ internal interface IGetDateTimePrecision
     bool precisionSpecified { get; }
 }
 
+internal static class IGetDateTimePrecisionExtensions
+{
+    public static DateTimePrecision? precisionOrNull(this IGetDateTimePrecision elementWithDateTimePrecision) =>
+        elementWithDateTimePrecision.precisionSpecified ? elementWithDateTimePrecision.precision : null;
+}
+
 partial class CalculateAgeAt : IGetDateTimePrecision {}
 partial class Ends : IGetDateTimePrecision {}
 partial class Starts : IGetDateTimePrecision {}

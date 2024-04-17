@@ -31,6 +31,15 @@ partial class CqlOperatorsBinder
             return true;
         }
 
+        if (to == typeof(string) && fromExpr is ConstantExpression { Value: Enum enumValue })
+        {
+            var name = Enum.GetName(enumValue.GetType(), enumValue);
+            if (name is null)
+                throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
+            toExpr = Expression.Constant(name.ToLowerInvariant());
+            return true;
+        }
+
         if (to.IsAssignableFrom(from))
         {
             toExpr = Expression.Convert(fromExpr, to); // Direct cast

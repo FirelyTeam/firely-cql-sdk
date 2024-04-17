@@ -106,25 +106,23 @@ namespace Hl7.Cql.Compiler
                 object[] objects         => objects.SelectToArray(obj => TranslateExpression(obj!)),
                 _                        => throw new InvalidOperationException("Invalid type for args")
             };
-        //     where T : Element
-        // {
-        //     var translateExpressions = args.SelectToArray(op => TranslateExpression(op));
-        //     return translateExpressions;
-        // }
 
         private Expression BindCqlOperatorsMethod(CqlOperator @operator) =>
             _operatorsBinder.BindToMethod(@operator);
 
-        private Expression BindCqlOperatorsMethod<T>(CqlOperator @operator, params T[]? args) =>
+        private Expression BindCqlOperatorsMethod(CqlOperator @operator, params object?[] args) =>
+            BindCqlOperatorsMethod<object>(@operator, args);
+
+        private Expression BindCqlOperatorsMethod<T>(CqlOperator @operator, params T?[] args) =>
             _operatorsBinder.BindToMethod(@operator, TranslateExpressions(args));
 
         [return:NotNullIfNotNull(nameof(arg))]
         internal Expression? TranslateExpression(object? arg) =>
             arg switch
             {
-                null                  => null,
+                null                  => NullConstantExpression.Object,
                 Expression expression => expression,
-                Element element => this.CatchRethrowExpressionBuildingException(_ =>
+                Element element       => this.CatchRethrowExpressionBuildingException(_ =>
                 {
                     using (PushElement(element))
                     {
@@ -218,8 +216,8 @@ namespace Hl7.Cql.Compiler
                             As @as                     => As(@as),
                             AnyInValueSet avs          => InValueSetPostProcess(avs.valueset, TranslateExpression(avs.codes!), isList: true),
                             Before before              => Before(before),
-                            CalculateAgeAt caa         => BindCqlOperatorsMethod(CqlOperator.CalculateAgeAt, TranslateExpression(caa.operand[0]), TranslateExpression(caa.operand[1]), Precision(caa)),
-                            CalculateAge ca            => BindCqlOperatorsMethod(CqlOperator.CalculateAge, TranslateExpression(ca.operand), Precision(ca)),
+                            CalculateAgeAt caa         => BindCqlOperatorsMethod(CqlOperator.CalculateAgeAt, TranslateExpression(caa.operand[0]), TranslateExpression(caa.operand[1]), caa.precisionOrNull()),
+                            CalculateAge ca            => BindCqlOperatorsMethod(CqlOperator.CalculateAge, TranslateExpression(ca.operand), ca.precisionOrNull()),
                             Case ce                    => Case(ce),
                             Coalesce cle               => Coalesce(cle),
                             CodeRef cre                => CodeRef(cre),
@@ -233,10 +231,10 @@ namespace Hl7.Cql.Compiler
                             DateFrom dfe               => BindCqlOperatorsMethod(CqlOperator.DateComponent, (dfe.operand!)),
                             Elm.DateTime dt            => DateTime(dt),
                             Date d                     => Date(d),
-                            DateTimeComponentFrom dtcf => BindCqlOperatorsMethod(CqlOperator.DateTimeComponent, TranslateExpression(dtcf.operand!), Precision(dtcf)), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
+                            DateTimeComponentFrom dtcf => BindCqlOperatorsMethod(CqlOperator.DateTimeComponent, TranslateExpression(dtcf.operand!), dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
                             Descendents desc           => desc.source == null ? NullConstantExpression.ForType<IEnumerable<object>>() : BindCqlOperatorsMethod(CqlOperator.Descendents, (desc.source)),
-                            DifferenceBetween dbe      => BindCqlOperatorsMethod(CqlOperator.DifferenceBetween, [..TranslateExpressions(dbe.operand[..2]), Precision(dbe)]),
-                            DurationBetween dbe        => BindCqlOperatorsMethod(CqlOperator.DurationBetween, [..TranslateExpressions(dbe.operand[..2]), Precision(dbe)]),
+                            DifferenceBetween dbe      => BindCqlOperatorsMethod(CqlOperator.DifferenceBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
+                            DurationBetween dbe        => BindCqlOperatorsMethod(CqlOperator.DurationBetween, [..TranslateExpressions(dbe.operand[..2]), dbe.precisionOrNull()]),
                             Ends e                     => Ends(e),
                             Equal eq                   => BindCqlOperatorsMethod(CqlOperator.Equal, (eq.operand[..2])),
                             Equivalent eqv             => Equivalent(eqv),
@@ -309,7 +307,7 @@ namespace Hl7.Cql.Compiler
                         return expression!;
                     }
                 }),
-                _ => throw new NotSupportedException()
+                {} obj        => Expression.Constant(obj),
             };
 
         protected Expression? Mutate(Element op, Expression? expression) =>

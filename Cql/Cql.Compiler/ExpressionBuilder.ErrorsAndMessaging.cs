@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
                 source = constant.ExprConvert(constant.Type);
             }
 
-            var call = _operatorsBinder.BindToMethod(CqlOperator.Message, source, code, severity, message);
+            var call = BindCqlOperatorsMethod(CqlOperator.Message, source, code, severity, message);
             if (condition.Type.IsNullable(out _))
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));
