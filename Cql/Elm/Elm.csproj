@@ -13,7 +13,7 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24072.1" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>

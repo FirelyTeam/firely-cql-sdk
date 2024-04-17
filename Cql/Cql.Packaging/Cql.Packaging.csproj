@@ -21,7 +21,7 @@
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24122.1" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
