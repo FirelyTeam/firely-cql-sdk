@@ -50,11 +50,3 @@ internal abstract class OperatorsBinder
     /// <returns>The expression that was cast.</returns>
     public abstract Expression CastToType(Expression expression, Type type);
 }
-
-internal abstract class ContextBinder
-{
-    public abstract Expression ResolveParameter(
-        string libraryKey,
-        string parameterName,
-        Expression defaultValue);
-}

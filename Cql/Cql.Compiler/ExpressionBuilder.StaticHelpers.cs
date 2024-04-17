@@ -34,11 +34,15 @@ partial class ExpressionBuilder
         return KnownErrors.TryGetValue((source, to), out correctedTo);
     }
 
-    protected static ConstantExpression Precision(IGetDateTimePrecision elementWithDateTimePrecision)
+    protected ConstantExpression Precision(IGetDateTimePrecision elementWithDateTimePrecision)
     {
-        var precisionNullable = elementWithDateTimePrecision.precisionNullable();
-        if (precisionNullable is not {} precision)
+        if (!elementWithDateTimePrecision.precisionSpecified)
             return NullConstantExpression.String;
+
+        var precision = elementWithDateTimePrecision.precision;
+
+        if (!Enum.IsDefined(precision))
+            throw this.NewExpressionBuildingException($"Not a valid precision: {precision}.");
 
         var name = Enum.GetName(precision)!.ToLowerInvariant();
         var ce = Expression.Constant(name, typeof(string));

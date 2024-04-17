@@ -201,8 +201,7 @@ partial class ValueSetRef: IGetName { }
 internal interface IGetDateTimePrecision
 {
     /// <summary>
-    /// Gets the date time precision. Be sure to check <see cref="precisionSpecified"/> before using this property,
-    /// or use <see cref="IGetDateTimePrecisionExtensions.precisionNullable"/> instead.
+    /// Gets the date time precision. Be sure to check <see cref="precisionSpecified"/> before using this property.
     /// </summary>
     DateTimePrecision precision { get; }
 
@@ -210,17 +209,6 @@ internal interface IGetDateTimePrecision
     /// Gets whether the date time precision is specified.
     /// </summary>
     bool precisionSpecified { get; }
-}
-
-/// <summary>
-/// Extension methods for <see cref="IGetDateTimePrecision"/>.
-/// </summary>
-internal static class IGetDateTimePrecisionExtensions
-{
-    /// <summary>
-    /// Gets the <see cref="IGetDateTimePrecision.precision"/>, or null if <see cref="IGetDateTimePrecision.precisionSpecified"/> is <c>false</c>.
-    /// </summary>
-    public static DateTimePrecision? precisionNullable(this IGetDateTimePrecision obj) => obj.precisionSpecified ? obj.precision : null;
 }
 
 partial class CalculateAgeAt : IGetDateTimePrecision {}
@@ -248,7 +236,6 @@ partial class SameAs : IGetDateTimePrecision { }
 partial class DifferenceBetween : IGetDateTimePrecision { }
 partial class DurationBetween : IGetDateTimePrecision { }
 partial class CalculateAge : IGetDateTimePrecision { }
-partial class CalculateAgeAt : IGetDateTimePrecision { }
 partial class DateTimeComponentFrom : IGetDateTimePrecision { }
 
 #endregion

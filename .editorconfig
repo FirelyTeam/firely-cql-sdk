@@ -14,8 +14,32 @@ dotnet_diagnostic.ca1304.severity = none
 dotnet_diagnostic.ca1309.severity = none
 
 # ReSharper properties
+resharper_align_linq_query = true
+resharper_align_multiline_calls_chain = true
+resharper_align_multiline_expression = true
+resharper_align_multiline_extends_list = true
+resharper_align_multiline_parameter = true
+resharper_align_multiple_declaration = true
+resharper_align_multline_type_parameter_constrains = true
+resharper_align_multline_type_parameter_list = true
+resharper_csharp_empty_block_style = together_same_line
+resharper_csharp_int_align_comments = true
+resharper_csharp_stick_comment = false
+resharper_csharp_wrap_after_declaration_lpar = true
+resharper_csharp_wrap_before_declaration_rpar = true
+resharper_indent_nested_foreach_stmt = true
+resharper_indent_nested_for_stmt = true
+resharper_indent_nested_usings_stmt = true
+resharper_indent_nested_while_stmt = true
+resharper_indent_primary_constructor_decl_pars = inside
+resharper_int_align_switch_expressions = true
+resharper_int_align_switch_sections = true
 resharper_max_formal_parameters_on_line = 2
 resharper_max_primary_constructor_parameters_on_line = 2
+resharper_outdent_statement_labels = true
+resharper_place_simple_case_statement_on_same_line = if_owner_is_single_line
+resharper_wrap_before_primary_constructor_declaration_lpar = true
+resharper_wrap_before_primary_constructor_declaration_rpar = true
 
 # Other
 trim_trailing_whitespace = true

@@ -49,13 +49,11 @@ namespace Hl7.Cql.Compiler
                 ? CqlOperator.ElementBeforeInterval
                 : CqlOperator.Before, left, right, precision);
         }
-        protected Expression Date(Elm.Date e)
-        {
-            return _operatorsBinder.BindToMethod(CqlOperator.Date,
+        protected Expression Date(Elm.Date e) =>
+            _operatorsBinder.BindToMethod(CqlOperator.Date,
                 TranslateExpression(e.year) ?? NullConstantExpression.NullableInt32,
                 TranslateExpression(e.month) ?? NullConstantExpression.NullableInt32,
                 TranslateExpression(e.day) ?? NullConstantExpression.NullableInt32);
-        }
 
         protected Expression DateTime(Elm.DateTime e)
         {
@@ -76,14 +74,7 @@ namespace Hl7.Cql.Compiler
                 offset);
         }
 
-        /// <remarks>See https://cql.hl7.org/02-authorsguide.html#datetime-operators</remarks>
-        protected Expression DateTimeComponentFrom(Elm.DateTimeComponentFrom e)
-        {
-            if (!Enum.IsDefined(e.precision))
-                throw new NotSupportedException($"Unsupported date time component: {e.precision}");
-
-            return _operatorsBinder.BindToMethod(CqlOperator.DateTimeComponent, TranslateExpression(e.operand!), Precision(e));
-        }
+        protected Expression DateTimeComponentFrom(Elm.DateTimeComponentFrom e) => _operatorsBinder.BindToMethod(CqlOperator.DateTimeComponent, TranslateExpression(e.operand!), Precision(e)); 
 
         protected Expression? SameAs(Elm.SameAs e)
         {
