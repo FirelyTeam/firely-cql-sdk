@@ -1118,7 +1118,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 					return ax_;
 				};
 			};
-			var ap_ = context.Operators.IntervalBeforeInterval(an_, ao_(), null);
+			var ap_ = context.Operators.Before(an_, ao_(), null);
 
 			return ap_;
 		};

@@ -458,7 +458,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				var ao_ = QICoreCommon_2_0_000.toInterval(ak_);
 				var ap_ = FHIRHelpers_4_3_000.ToValue(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Effective);
 				var aq_ = QICoreCommon_2_0_000.toInterval(ap_);
-				var ar_ = context.Operators.IntervalBeforeInterval(ao_, aq_, null);
+				var ar_ = context.Operators.Before(ao_, aq_, null);
 				var as_ = context.Operators.And(am_, ar_);
 
 				return as_;

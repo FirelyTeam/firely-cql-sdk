@@ -369,7 +369,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalBeforeElement(interval, nine, null);
+            var contains = fcq.Before(interval, nine, null);
             Assert.IsNotNull(contains);
             Assert.IsTrue((contains ?? false) == false);
         }
@@ -386,7 +386,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalBeforeElement(interval, nine, null);
+            var contains = fcq.Before(interval, nine, null);
             Assert.IsNotNull(contains);
             Assert.IsTrue((contains ?? false) == false);
         }

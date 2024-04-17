@@ -16,32 +16,6 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression After(Elm.After e)
-        {
-            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
-            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
-            {
-                (true, true)  => CqlOperator.IntervalAfterInterval,
-                (true, false) => CqlOperator.IntervalAfterElement,
-                (false, true) => CqlOperator.ElementAfterInterval,
-                _             => CqlOperator.After
-            }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(CqlOperator.After, expr);
-        }
-
-        protected Expression? Before(Elm.Before e)
-        {
-            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
-            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
-            {
-                (true, true)  => CqlOperator.IntervalBeforeInterval,
-                (true, false) => CqlOperator.IntervalBeforeElement,
-                (false, true) => CqlOperator.ElementBeforeInterval,
-                _             => CqlOperator.Before
-            }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, expr);
-        }
-
         protected Expression? SameAs(Elm.SameAs e)
         {
             var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;

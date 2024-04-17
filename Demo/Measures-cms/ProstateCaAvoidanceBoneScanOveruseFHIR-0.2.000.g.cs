@@ -742,7 +742,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				};
 				var s_ = FHIRHelpers_4_3_000.ToValue(MostRecentProstateCancerStaging?.Effective);
 				var t_ = QICoreCommon_2_0_000.toInterval(s_);
-				var u_ = context.Operators.IntervalBeforeInterval(r_(), t_, null);
+				var u_ = context.Operators.Before(r_(), t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(PSATest?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
