@@ -74,8 +74,6 @@ namespace Hl7.Cql.Compiler
                 offset);
         }
 
-        protected Expression DateTimeComponentFrom(Elm.DateTimeComponentFrom e) => _operatorsBinder.BindToMethod(CqlOperator.DateTimeComponent, TranslateExpression(e.operand!), Precision(e)); 
-
         protected Expression? SameAs(Elm.SameAs e)
         {
             var left = TranslateExpression(e.operand![0]);

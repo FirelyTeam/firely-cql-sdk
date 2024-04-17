@@ -10,8 +10,9 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Expressions;
 using System;
-using System.Linq.Expressions;
+using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
@@ -115,6 +116,9 @@ namespace Hl7.Cql.Compiler
             return nullable;
         }
 
+
+        private Expression ChangeType(Element element, Type outputType)
+            => ChangeType(TranslateExpression(element), outputType); // @TODO: Cast
 
         private Expression ChangeType(Expression input, Type outputType) // @TODO: Cast
         {

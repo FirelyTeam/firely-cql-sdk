@@ -307,8 +307,7 @@ internal partial class ExpressionBuilder
         if (aliases.Any(alias => string.IsNullOrEmpty(alias)))
             throw this.NewExpressionBuildingException("Query sources must have aliases.");
 
-        var sourceExpressions = sources
-            .SelectToArray(source => TranslateExpression(source.expression));
+        var sourceExpressions = TranslateExpressions(sources.SelectToArray(source => source.expression));
 
         // Returns a CrossJoin between IEnumerable<> of T1, T2, T3, etc and return into IEnumerable<(T1, T2, T3, etc)>
         // a) If a source is not of a list-type (ie, a singleton), it needs to be promoted to a list type.

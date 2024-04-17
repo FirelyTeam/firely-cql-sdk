@@ -19,8 +19,7 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Coalesce(Elm.Coalesce ce)
         {
-            var operands = ce.operand!
-                .SelectToArray(op => TranslateExpression(op));
+            var operands = TranslateExpressions(ce.operand);
             if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
                 return _operatorsBinder.BindToMethod(CqlOperator.Coalesce, operands[0]);
 

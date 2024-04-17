@@ -34,10 +34,10 @@ partial class ExpressionBuilder
         return KnownErrors.TryGetValue((source, to), out correctedTo);
     }
 
-    protected ConstantExpression Precision(IGetDateTimePrecision elementWithDateTimePrecision)
+    private string? PrecisionToString(IGetDateTimePrecision elementWithDateTimePrecision)
     {
         if (!elementWithDateTimePrecision.precisionSpecified)
-            return NullConstantExpression.String;
+            return null;
 
         var precision = elementWithDateTimePrecision.precision;
 
@@ -45,8 +45,18 @@ partial class ExpressionBuilder
             throw this.NewExpressionBuildingException($"Not a valid precision: {precision}.");
 
         var name = Enum.GetName(precision)!.ToLowerInvariant();
-        var ce = Expression.Constant(name, typeof(string));
-        return ce;
+        return name;
+    }
+
+    private ConstantExpression Precision(IGetDateTimePrecision elementWithDateTimePrecision)
+    {
+        if (PrecisionToString(elementWithDateTimePrecision) is {} n)
+        {
+            var ce = Expression.Constant(n, typeof(string));
+            return ce;
+        }
+
+        return NullConstantExpression.String;
     }
 
     private static LambdaExpression NotImplemented(
