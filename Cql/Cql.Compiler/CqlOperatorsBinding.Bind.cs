@@ -54,6 +54,12 @@ partial class CqlOperatorsBinder
 
         for (int i = 0; i < 2; i++) // Try twice, first with all arguments, then without the last one
         {
+            if (args.Length == 0)
+            {
+                // No conversions, find method without parameters
+                return (methods.SingleOrDefault(m => m.GetParameters().Length == 0), []);
+            }
+
             Expression[] bindArgs = new Expression[args.Length];
 
             foreach (var method in methods)

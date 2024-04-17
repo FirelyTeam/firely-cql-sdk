@@ -18,97 +18,64 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression After(Elm.After e)
         {
-            var expr = TranslateAll(e.operand[0], e.operand[1], e.precisionOrNull())!;
-            var leftIsCqlInterval = expr[0].Type.IsCqlInterval(out _);
-            var rightIsCqlInterval = expr[1].Type.IsCqlInterval(out _);
-            var method = (leftIsCqlInterval, rightIsCqlInterval) switch
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
                 (true, true)  => CqlOperator.IntervalAfterInterval,
                 (true, false) => CqlOperator.IntervalAfterElement,
                 (false, true) => CqlOperator.ElementAfterInterval,
                 _             => CqlOperator.After
-            };
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
             return BindCqlOperator(method, expr);
         }
 
         protected Expression? Before(Elm.Before e)
         {
-            var expr = TranslateAll(e.operand[0], e.operand[1], e.precisionOrNull())!;
-            var leftIsCqlInterval = expr[0].Type.IsCqlInterval(out _);
-            var rightIsCqlInterval = expr[1].Type.IsCqlInterval(out _);
-            var method = (leftIsCqlInterval, rightIsCqlInterval) switch
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
                 (true, true)  => CqlOperator.IntervalBeforeInterval,
                 (true, false) => CqlOperator.IntervalBeforeElement,
                 (false, true) => CqlOperator.ElementBeforeInterval,
                 _             => CqlOperator.Before
-            };
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
             return BindCqlOperator(method, expr);
-        }
-
-        protected Expression DateTime(Elm.DateTime e)
-        {
-            var offset = e.timezoneOffset is { } tzo ? Translate(tzo) : NullConstantExpression.Int32;
-            if (offset.Type != typeof(decimal?))
-            {
-                offset = ChangeType(offset, typeof(decimal?));
-            }
-
-            return BindCqlOperator(CqlOperator.DateTime,
-                e.year,
-                e.month,
-                e.day,
-                e.hour,
-                e.minute,
-                e.second,
-                e.millisecond,
-                offset);
         }
 
         protected Expression? SameAs(Elm.SameAs e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
-            var precision = e.precisionOrNull();
-            if (left.Type.IsCqlInterval(out _))
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
-                return right.Type.IsCqlInterval(out _)
-                    ? BindCqlOperator(CqlOperator.IntervalSameAs, left, right, precision)
-                    : throw this.NewExpressionBuildingException();
-            }
-
-            return BindCqlOperator(CqlOperator.SameAs, left, right, precision);
+                (true, true)  => CqlOperator.IntervalSameAs,
+                (true, false) => throw this.NewExpressionBuildingException(),
+                _             => CqlOperator.SameAs
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
+            return BindCqlOperator(method, expr);
         }
 
         protected Expression SameOrAfter(Elm.SameOrAfter e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
-            var precision = e.precisionOrNull();
-            if (left.Type.IsCqlInterval(out _))
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
-                return right.Type.IsCqlInterval(out _)
-                    ? BindCqlOperator(CqlOperator.IntervalSameOrAfter, left, right, precision)
-                    : throw this.NewExpressionBuildingException();
-            }
-
-            return BindCqlOperator(CqlOperator.SameOrAfter, left, right, precision);
+                (true, true)  => CqlOperator.IntervalSameOrAfter,
+                (true, false) => throw this.NewExpressionBuildingException(),
+                _             => CqlOperator.SameOrAfter
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
+            return BindCqlOperator(method, expr);
         }
 
         protected Expression SameOrBefore(Elm.SameOrBefore e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
-            var precision = e.precisionOrNull();
-
-            if (left.Type.IsCqlInterval(out _))
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
-                return right.Type.IsCqlInterval(out _)
-                    ? BindCqlOperator(CqlOperator.IntervalSameOrBefore, left, right, precision)
-                    : throw this.NewExpressionBuildingException();
-            }
-
-            return BindCqlOperator(CqlOperator.SameOrBefore, left, right, precision);
+                (true, true)  => CqlOperator.IntervalSameOrBefore,
+                (true, false) => throw this.NewExpressionBuildingException(),
+                _             => CqlOperator.SameOrBefore
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
+            return BindCqlOperator(method, expr);
         }
     }
 }

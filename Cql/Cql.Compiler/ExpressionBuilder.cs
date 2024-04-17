@@ -27,6 +27,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Conversion;
+using DateTime = Hl7.Cql.Elm.DateTime;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
@@ -236,7 +237,7 @@ namespace Hl7.Cql.Compiler
                             Contains ct                => Contains(ct),
                             ConvertQuantity cqe        => BindCqlOperator(CqlOperator.ConvertQuantity, cqe.operand[..2]),
                             DateFrom dfe               => BindCqlOperator(CqlOperator.DateComponent, dfe.operand!),
-                            Elm.DateTime dt            => DateTime(dt),
+                            Elm.DateTime dt            => BindCqlOperator(CqlOperator.DateTime, dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second, dt.millisecond, dt.timezoneOffset),
                             Date d                     => BindCqlOperator(CqlOperator.Date, d.year, d.month, d.day),
                             DateTimeComponentFrom dtcf => BindCqlOperator(CqlOperator.DateTimeComponent, dtcf.operand, dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
                             Descendents desc           => desc.source == null ? NullConstantExpression.ForType<IEnumerable<object>>() : BindCqlOperator(CqlOperator.Descendents, desc.source),
