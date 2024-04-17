@@ -27,10 +27,13 @@
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
+<<<<<<< HEAD
 	</ItemGroup>
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="Hl7.Cql.MultiPackager" Key="$(LibraryPKHash)" />
+=======
+>>>>>>> Merged 1.0 changes + moved reference to package api analyzers to props file
 	</ItemGroup>
 
 	<ItemGroup>
