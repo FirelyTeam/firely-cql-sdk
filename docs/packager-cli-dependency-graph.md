@@ -40,16 +40,25 @@ classDiagram
         class IExpressionBuilderFactory {
         }
 
+        class IExpressionBuilder{
+        }
+
         class ExpressionBuilder{
         }
 
         class ILibraryExpressionBuilderFactory {
         }
 
+        class ILibraryExpressionBuilder{
+        }
+
         class LibraryExpressionBuilder{
         }
 
         class ILibrarySetExpressionBuilderFactory {
+        }
+
+        class ILibrarySetExpressionBuilder{
         }
 
         class LibrarySetExpressionBuilder{
@@ -123,6 +132,9 @@ classDiagram
     CqlCompilerFactory --> ILibrarySetExpressionBuilderFactory : inherits
     CqlCompilerFactory --> ILibraryExpressionBuilderFactory : inherits
     CqlCompilerFactory --> IExpressionBuilderFactory : inherits
+    LibrarySetExpressionBuilder --> ILibrarySetExpressionBuilder : inherits
+    LibraryExpressionBuilderFactory --> ILibraryExpressionBuilder : inherits
+    ExpressionBuilderFactory --> IExpressionBuilder : inherits
    
     CqlOperatorsBinder --> OperatorsBinder : inherits
     CqlContextBinder --> ContextBinder : inherits
@@ -149,7 +161,7 @@ classDiagram
     IExpressionBuilderFactory ..> LibrarySetExpressionBuilder : injected
     LibraryDefinitionBuilderSettings ..> LibrarySetExpressionBuilder : injected
     Library ..> LibraryExpressionBuilder : processed by
-    LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilder : outer context of
+    ILibrarySetExpressionBuilder ..> LibrarySetExpressionBuilder : outer context of
 
     IExpressionBuilderFactory ..> ExpressionBuilder : created by
     OperatorsBinder ..> ExpressionBuilder : injected
@@ -158,7 +170,7 @@ classDiagram
     TypeResolver ..> ExpressionBuilder : injected
     ContextBinder ..> ExpressionBuilder : injected
     LibraryDefinitionBuilderSettings ..> ExpressionBuilder : injected
-    LibraryExpressionBuilder ..> ExpressionBuilder : outer context of
+    ILibraryExpressionBuilder ..> ExpressionBuilder : outer context of
 
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     LibraryDefinitionsBuilder ..> CqlToResourcePackagingPipeline : injected

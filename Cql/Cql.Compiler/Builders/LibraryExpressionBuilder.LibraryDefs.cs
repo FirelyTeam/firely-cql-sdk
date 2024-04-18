@@ -80,7 +80,7 @@ internal partial class LibraryExpressionBuilder
         _codesByCodeSystemName.Add(codeSystemName!, codings);
         return codings;
     }
-    public LibrarySetExpressionBuilder? LibrarySetContext { get; }
+    public ILibrarySetExpressionBuilder? LibrarySetContext { get; }
 
     #endregion
 

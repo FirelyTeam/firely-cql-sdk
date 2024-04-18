@@ -25,7 +25,8 @@ internal class CqlCompilerFactory :
 {
     protected int? CacheSize { get; }
 
-    public CqlCompilerFactory(ILoggerFactory loggerFactory, int? cacheSize = null) : base(loggerFactory: loggerFactory) =>
+    public CqlCompilerFactory(ILoggerFactory loggerFactory, int? cacheSize = null) :
+        base(loggerFactory: loggerFactory) =>
         CacheSize = cacheSize;
 
 
@@ -54,6 +55,7 @@ internal class CqlCompilerFactory :
 
 
     public virtual LibraryDefinitionsBuilder LibraryDefinitionsBuilder => Singleton(fn: NewLibraryDefinitionsBuilder);
+
     protected virtual LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder() =>
         new(librarySetExpressionBuilderFactory: this,
             libraryExpressionBuilderFactory: this);
@@ -61,15 +63,17 @@ internal class CqlCompilerFactory :
     LibrarySetExpressionBuilder ILibrarySetExpressionBuilderFactory.New(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? definitions) =>
-        new(libraryExpressionBuilderFactory: this,
+        new LibrarySetExpressionBuilder(
+            libraryExpressionBuilderFactory: this,
             librarySet: librarySet,
             definitions: definitions ?? new());
 
     LibraryExpressionBuilder ILibraryExpressionBuilderFactory.New(
         Library library,
         DefinitionDictionary<LambdaExpression>? libraryDefinitions,
-        LibrarySetExpressionBuilder? libsCtx) =>
-        new(logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
+        ILibrarySetExpressionBuilder? libsCtx) =>
+        new LibraryExpressionBuilder(
+            logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
             expressionBuilderFactory: this,
             libraryDefinitionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings),
             library: library,
@@ -79,11 +83,12 @@ internal class CqlCompilerFactory :
     protected virtual LibraryDefinitionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         LibraryDefinitionBuilderSettings.Default;
 
-    protected virtual ILogger<LibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
+    protected virtual ILogger<ILibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
         LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
     ExpressionBuilder IExpressionBuilderFactory.New(LibraryExpressionBuilder libCtx) =>
-        new(logger: Singleton(fn: NewExpressionBuilderLogger),
+        new ExpressionBuilder(
+            logger: Singleton(fn: NewExpressionBuilderLogger),
             operatorsBinder: OperatorsBinder,
             typeManager: TypeManager,
             typeConverter: TypeConverter,

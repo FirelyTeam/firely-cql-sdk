@@ -11,7 +11,7 @@ namespace Hl7.Cql.Compiler.Builders;
 /// </summary>
 partial class LibraryExpressionBuilder
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly ILogger<ILibraryExpressionBuilder> _logger;
     private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
     private readonly IExpressionBuilderFactory _expressionBuilderFactory;
 
@@ -22,12 +22,12 @@ partial class LibraryExpressionBuilder
     public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
 
     public LibraryExpressionBuilder(
-        ILogger<LibraryExpressionBuilder> logger,
+        ILogger<ILibraryExpressionBuilder> logger,
         IExpressionBuilderFactory expressionBuilderFactory,
         LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         Library library,
         DefinitionDictionary<LambdaExpression> libraryDefinitions,
-        LibrarySetExpressionBuilder? libsCtx = null)
+        ILibrarySetExpressionBuilder? libsCtx = null)
     {
         // External Services
         _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;

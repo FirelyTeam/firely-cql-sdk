@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler.Builders
 
         private ImmutableStack<Element> _elementStack;
         private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
-        private readonly LibraryExpressionBuilder _libraryContext;
+        private readonly ILibraryExpressionBuilder _libraryContext;
 
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
@@ -80,7 +80,7 @@ namespace Hl7.Cql.Compiler.Builders
             TypeResolver typeResolver,
             ContextBinder contextBinder,
             LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
-            LibraryExpressionBuilder libContext)
+            ILibraryExpressionBuilder libContext)
         {
             // External Services
             _logger = logger;

@@ -3,7 +3,7 @@
 namespace Hl7.Cql.Compiler.Builders;
 
 [DebuggerDisplay("{DebuggerView}")]
-partial class LibraryExpressionBuilder : IBuilderNode
+partial class LibraryExpressionBuilder : ILibraryExpressionBuilder
 {
 
     IBuilderNode? IBuilderNode.OuterBuilder => LibrarySetContext;
