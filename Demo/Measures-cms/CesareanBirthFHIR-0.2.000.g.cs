@@ -385,9 +385,9 @@ public class CesareanBirthFHIR_0_2_000
 			var m_ = context.Operators.Convert<string>(l_);
 			var n_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var o_ = context.Operators.InList<string>(m_, (n_ as IEnumerable<string>));
 			var p_ = context.Operators.And(k_, o_);
@@ -575,9 +575,9 @@ public class CesareanBirthFHIR_0_2_000
 			var v_ = context.Operators.Convert<string>(u_);
 			var w_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
@@ -713,9 +713,9 @@ public class CesareanBirthFHIR_0_2_000
 			var v_ = context.Operators.Convert<string>(u_);
 			var w_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
@@ -851,9 +851,9 @@ public class CesareanBirthFHIR_0_2_000
 			var v_ = context.Operators.Convert<string>(u_);
 			var w_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
@@ -1019,9 +1019,9 @@ public class CesareanBirthFHIR_0_2_000
 						var ad_ = context.Operators.Convert<string>(ac_);
 						var ae_ = new string[]
 						{
-							"final",
-							"amended",
-							"corrected",
+							(string)"final",
+							(string)"amended",
+							(string)"corrected",
 						};
 						var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
 						var ag_ = context.Operators.And(ab_, af_);
@@ -1147,9 +1147,9 @@ public class CesareanBirthFHIR_0_2_000
 						var bv_ = context.Operators.Convert<string>(bu_);
 						var bw_ = new string[]
 						{
-							"final",
-							"amended",
-							"corrected",
+							(string)"final",
+							(string)"amended",
+							(string)"corrected",
 						};
 						var bx_ = context.Operators.InList<string>(bv_, (bw_ as IEnumerable<string>));
 						var by_ = context.Operators.And(bt_, bx_);
@@ -1275,9 +1275,9 @@ public class CesareanBirthFHIR_0_2_000
 						var dn_ = context.Operators.Convert<string>(dm_);
 						var do_ = new string[]
 						{
-							"final",
-							"amended",
-							"corrected",
+							(string)"final",
+							(string)"amended",
+							(string)"corrected",
 						};
 						var dp_ = context.Operators.InList<string>(dn_, (do_ as IEnumerable<string>));
 						var dq_ = context.Operators.And(dl_, dp_);
@@ -1403,9 +1403,9 @@ public class CesareanBirthFHIR_0_2_000
 						var fe_ = context.Operators.Convert<string>(fd_);
 						var ff_ = new string[]
 						{
-							"final",
-							"amended",
-							"corrected",
+							(string)"final",
+							(string)"amended",
+							(string)"corrected",
 						};
 						var fg_ = context.Operators.InList<string>(fe_, (ff_ as IEnumerable<string>));
 						var fh_ = context.Operators.And(fc_, fg_);
@@ -1530,9 +1530,9 @@ public class CesareanBirthFHIR_0_2_000
 						var gv_ = context.Operators.Convert<string>(gu_);
 						var gw_ = new string[]
 						{
-							"final",
-							"amended",
-							"corrected",
+							(string)"final",
+							(string)"amended",
+							(string)"corrected",
 						};
 						var gx_ = context.Operators.InList<string>(gv_, (gw_ as IEnumerable<string>));
 						var gy_ = context.Operators.And(gt_, gx_);
@@ -1657,9 +1657,9 @@ public class CesareanBirthFHIR_0_2_000
 						var im_ = context.Operators.Convert<string>(il_);
 						var in_ = new string[]
 						{
-							"final",
-							"amended",
-							"corrected",
+							(string)"final",
+							(string)"amended",
+							(string)"corrected",
 						};
 						var io_ = context.Operators.InList<string>(im_, (in_ as IEnumerable<string>));
 						var ip_ = context.Operators.And(ik_, io_);
@@ -1848,7 +1848,7 @@ public class CesareanBirthFHIR_0_2_000
 				var l_ = QICoreCommon_2_0_000.toInterval(k_);
 				var m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
 				var n_ = context.Operators.Convert<string>(CSection?.StatusElement?.Value);
-				var o_ = context.Operators.Equal(n_, "completed");
+				var o_ = context.Operators.Equal(n_, (string)"completed");
 				var p_ = context.Operators.And(m_, o_);
 
 				return p_;

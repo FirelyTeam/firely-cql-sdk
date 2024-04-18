@@ -14,18 +14,16 @@ internal static class TypeExtensions
     /// <returns>True if the type is nullable, false otherwise.</returns>
     public static bool IsNullable(this Type type, [NotNullWhen(true)] out Type? underlyingType)
     {
+        if (!type.IsValueType)
+        {
+            // All classes are nullable, return the type itself
+            underlyingType = type;
+            return true;
+        }
+
         underlyingType = Nullable.GetUnderlyingType(type);
         return underlyingType != null;
     }
-
-    /// <summary>
-    /// Checks if the specified type can have values that accept null values, such as reference types or nullable value types.
-    /// </summary>
-    /// <param name="type">The type to check.</param>
-    /// <returns>True if the type can accept null values, false otherwise.</returns>
-    public static bool AllowNullValues(this Type type) =>
-        !type.IsValueType
-        || type.IsNullable(out _);
 
     /// <summary>
     /// Checks if the specified type is an enum or a nullable enum.

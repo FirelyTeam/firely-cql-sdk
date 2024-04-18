@@ -305,20 +305,20 @@ public class TJCOverall_8_11_000
 			var k_ = context.Operators.Convert<string>(j_);
 			var l_ = new string[]
 			{
-				"active",
-				"completed",
-				"on-hold",
+				(string)"active",
+				(string)"completed",
+				(string)"on-hold",
 			};
 			var m_ = context.Operators.InList<string>(k_, (l_ as IEnumerable<string>));
 			var n_ = context.Operators.Convert<Code<RequestIntent>>(SR?.IntentElement?.Value);
 			var o_ = context.Operators.Convert<string>(n_);
 			var p_ = new string[]
 			{
-				"order",
-				"original-order",
-				"reflex-order",
-				"filler-order",
-				"instance-order",
+				(string)"order",
+				(string)"original-order",
+				(string)"reflex-order",
+				(string)"filler-order",
+				(string)"instance-order",
 			};
 			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.And(m_, q_);
@@ -335,8 +335,8 @@ public class TJCOverall_8_11_000
 			var v_ = context.Operators.Convert<string>(InterventionPerformed?.StatusElement?.Value);
 			var w_ = new string[]
 			{
-				"completed",
-				"in-progress",
+				(string)"completed",
+				(string)"in-progress",
 			};
 			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
 

@@ -49,7 +49,7 @@ namespace Test
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
             var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
-            var results = AssemblyLoadContextExtensions.Run(asmContext, lib, version, context);
+            var results = asmContext.Run(lib, version, context);
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
@@ -101,7 +101,7 @@ namespace Test
         {
             var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
             using var fs = libFile.OpenRead();
-            var library = StreamExtensions.ParseFhir<Library>(fs);
+            var library = fs.ParseFhir<Library>();
             var dependencies = library.GetDependencies(dir);
             var allLibs = dependencies.AllLibraries();
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
@@ -111,7 +111,7 @@ namespace Test
             using var tupleFs = tupleTypes.OpenRead();
             var binaries = new[]
             {
-                StreamExtensions.ParseFhir<Binary>(tupleFs)
+                tupleFs.ParseFhir<Binary>()
             };
 
             binaries.LoadAssembles(asmContext);

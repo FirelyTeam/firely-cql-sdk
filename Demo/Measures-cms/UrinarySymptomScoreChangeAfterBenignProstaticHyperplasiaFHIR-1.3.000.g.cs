@@ -280,7 +280,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	{
 		var a_ = this.Patient();
 		var b_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
-		var c_ = context.Operators.Equal(b_, "male");
+		var c_ = context.Operators.Equal(b_, (string)"male");
 
 		return c_;
 	}
@@ -304,7 +304,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var l_ = context.Operators.Not(k_);
 			var m_ = context.Operators.And(h_, l_);
 			var n_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var o_ = context.Operators.Equal(n_, "finished");
+			var o_ = context.Operators.Equal(n_, (string)"finished");
 			var p_ = context.Operators.And(m_, o_);
 
 			return p_;
@@ -419,9 +419,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var i_ = context.Operators.Convert<string>(h_);
 			var j_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var k_ = context.Operators.InList<string>(i_, (j_ as IEnumerable<string>));
 			var l_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Value);
@@ -526,9 +526,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var n_ = context.Operators.Convert<string>(m_);
 			var o_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
 			var q_ = context.Operators.And(l_, p_);
@@ -711,9 +711,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var bk_ = context.Operators.Convert<string>(bj_);
 				var bl_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var bm_ = context.Operators.InList<string>(bk_, (bl_ as IEnumerable<string>));
 				var bn_ = context.Operators.And(bi_, bm_);
@@ -1001,7 +1001,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var t_ = context.Operators.Interval(o_, s_, true, true);
 				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InHospitalServices?.StatusElement?.Value);
-				var w_ = context.Operators.Equal(v_, "finished");
+				var w_ = context.Operators.Equal(v_, (string)"finished");
 				var x_ = context.Operators.And(u_, w_);
 
 				return x_;
@@ -1082,9 +1082,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var q_ = context.Operators.Convert<string>(BMIExam?.StatusElement?.Value);
 				var r_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var s_ = context.Operators.InList<string>(q_, (r_ as IEnumerable<string>));
 				var t_ = context.Operators.And(p_, s_);

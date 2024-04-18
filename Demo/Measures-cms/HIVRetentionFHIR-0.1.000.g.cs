@@ -277,7 +277,7 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			var m_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return m_;
 		};
@@ -291,7 +291,7 @@ public class HIVRetentionFHIR_0_1_000
 		{
 			bool? n_(Extension @this)
 			{
-				var ai_ = context.Operators.Equal(@this?.Url, "ombCategory");
+				var ai_ = context.Operators.Equal(@this?.Url, (string)"ombCategory");
 
 				return ai_;
 			};
@@ -310,7 +310,7 @@ public class HIVRetentionFHIR_0_1_000
 			};
 			bool? v_(Extension @this)
 			{
-				var aj_ = context.Operators.Equal(@this?.Url, "detailed");
+				var aj_ = context.Operators.Equal(@this?.Url, (string)"detailed");
 
 				return aj_;
 			};
@@ -329,7 +329,7 @@ public class HIVRetentionFHIR_0_1_000
 			var ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
 			bool? ac_(Extension @this)
 			{
-				var am_ = context.Operators.Equal(@this?.Url, "text");
+				var am_ = context.Operators.Equal(@this?.Url, (string)"text");
 
 				return am_;
 			};
@@ -382,7 +382,7 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			var m_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return m_;
 		};
@@ -396,7 +396,7 @@ public class HIVRetentionFHIR_0_1_000
 		{
 			bool? n_(Extension @this)
 			{
-				var ag_ = context.Operators.Equal(@this?.Url, "ombCategory");
+				var ag_ = context.Operators.Equal(@this?.Url, (string)"ombCategory");
 
 				return ag_;
 			};
@@ -416,7 +416,7 @@ public class HIVRetentionFHIR_0_1_000
 			var s_ = context.Operators.SelectOrNull<DataType, CqlCode>(q_, r_);
 			bool? t_(Extension @this)
 			{
-				var aj_ = context.Operators.Equal(@this?.Url, "detailed");
+				var aj_ = context.Operators.Equal(@this?.Url, (string)"detailed");
 
 				return aj_;
 			};
@@ -435,7 +435,7 @@ public class HIVRetentionFHIR_0_1_000
 			var z_ = context.Operators.ValueSetUnion(s_, y_);
 			bool? aa_(Extension @this)
 			{
-				var am_ = context.Operators.Equal(@this?.Url, "text");
+				var am_ = context.Operators.Equal(@this?.Url, (string)"text");
 
 				return am_;
 			};

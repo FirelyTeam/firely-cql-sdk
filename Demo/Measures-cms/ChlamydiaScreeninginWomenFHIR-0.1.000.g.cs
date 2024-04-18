@@ -738,7 +738,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var g_ = context.Operators.Interval((int?)16, (int?)24, true, true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
-		var k_ = context.Operators.Equal(j_, "female");
+		var k_ = context.Operators.Equal(j_, (string)"female");
 		var l_ = context.Operators.And(h_, k_);
 		var m_ = this.Qualifying_Encounters();
 		var n_ = context.Operators.ExistsInList<Encounter>(m_);

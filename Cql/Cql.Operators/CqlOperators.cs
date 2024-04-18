@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -89,7 +89,7 @@ namespace Hl7.Cql.Runtime
         /// </remarks>
         /// <seealso cref="CqlComparers"/>
         public ICqlComparer Comparer { get; set; }
-        
+
         /// <summary>
         /// Gets the implementation of <see cref="IValueSetDictionary"/> to use.
         /// </summary>
@@ -98,7 +98,7 @@ namespace Hl7.Cql.Runtime
 
         public TypeResolver TypeResolver { get; }
         public TypeConverter TypeConverter { get; }
-        
+
         /// <summary>
         /// Gets the implementation of <see cref="IDataSource"/> used to implement retrieve methods.
         /// </summary>

@@ -82,7 +82,7 @@ namespace Hl7.Cql.Compiler
 
         public Expression Update(IReadOnlyCollection<Expression> arguments)
         {
-            if (Enumerable.SequenceEqual(Arguments, arguments))
+            if (Arguments.SequenceEqual(arguments))
                 return this;
             return new FunctionCallExpression(Definitions, LibraryName, FunctionName, arguments, FunctionType);
         }

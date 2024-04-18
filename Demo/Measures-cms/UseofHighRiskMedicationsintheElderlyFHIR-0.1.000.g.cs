@@ -1036,7 +1036,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		decimal? b_(MedicationRequest R)
 		{
 			var e_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
-			var f_ = context.Operators.ConvertQuantity(e_, "d");
+			var f_ = context.Operators.ConvertQuantity(e_, (string)"d");
 			var g_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
 			var h_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
 			var i_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
@@ -1373,11 +1373,11 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 					var h_ = context.Operators.Not((bool?)(g_ is null));
 					var i_ = CQMCommon_2_0_000.getMedicationCode(Order);
 					var j_ = this.MedicationStrengthPerUnit(i_);
-					var k_ = context.Operators.Equal(j_?.unit, "mg");
+					var k_ = context.Operators.Equal(j_?.unit, (string)"mg");
 					var m_ = this.MedicationStrengthPerUnit(i_);
-					var n_ = context.Operators.Equal(m_?.unit, "mg/mL");
+					var n_ = context.Operators.Equal(m_?.unit, (string)"mg/mL");
 					var o_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
-					var p_ = context.Operators.Equal(o_?.unit, "mL");
+					var p_ = context.Operators.Equal(o_?.unit, (string)"mL");
 					var q_ = context.Operators.And(n_, p_);
 					var r_ = context.Operators.Or(k_, q_);
 					var s_ = context.Operators.And(h_, r_);
@@ -1391,7 +1391,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 					var v_ = this.MedicationStrengthPerUnit(u_);
 					var w_ = context.Operators.Multiply(t_, v_);
 					var x_ = this.MedicationRequestPeriodInDays(Order);
-					var y_ = context.Operators.Divide(w_, new CqlQuantity(x_, "d"));
+					var y_ = context.Operators.Divide(w_, new CqlQuantity(x_, (string)"d"));
 
 					return y_;
 				}

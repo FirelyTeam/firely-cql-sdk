@@ -378,7 +378,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var v_ = context.Operators.GreaterOrEqual(u_, (int?)24);
 			var w_ = context.Operators.And(p_, v_);
 			var x_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(EncounterInpatient?.StatusElement?.Value);
-			var y_ = context.Operators.Equal(x_, "finished");
+			var y_ = context.Operators.Equal(x_, (string)"finished");
 			var z_ = context.Operators.And(w_, y_);
 
 			return z_;
@@ -439,9 +439,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var o_ = context.Operators.Convert<string>(tuple_bdofeusqkmfbeyculsqybijjc.HospitalDietitianReferral?.StatusElement?.Value);
 			var p_ = new string[]
 			{
-				"active",
-				"completed",
-				"in-progress",
+				(string)"active",
+				(string)"completed",
+				(string)"in-progress",
 			};
 			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.And(n_, q_);
@@ -491,9 +491,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(n_, r_);
@@ -575,9 +575,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(n_, r_);
@@ -657,9 +657,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(n_, r_);
@@ -738,9 +738,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(n_, r_);
@@ -800,9 +800,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(n_, r_);
@@ -859,9 +859,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(n_, r_);
@@ -956,8 +956,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var o_ = context.Operators.Convert<string>(tuple_ctmbkgnetphcwpstmvcrebeg.NutritionCarePlan?.StatusElement?.Value);
 			var p_ = new string[]
 			{
-				"completed",
-				"in-progress",
+				(string)"completed",
+				(string)"in-progress",
 			};
 			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.And(n_, q_);

@@ -405,7 +405,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -439,7 +439,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -456,7 +456,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -524,7 +524,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -557,7 +557,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         #endregion
@@ -582,7 +582,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -602,7 +602,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -623,7 +623,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -646,7 +646,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -663,7 +663,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -684,7 +684,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -708,7 +708,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -798,7 +798,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -865,7 +865,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -889,7 +889,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -934,7 +934,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -954,7 +954,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -978,7 +978,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1005,7 +1005,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1030,7 +1030,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1056,7 +1056,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1081,7 +1081,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1110,7 +1110,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
         #endregion
 
@@ -1136,7 +1136,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1159,7 +1159,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1281,7 +1281,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1306,7 +1306,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1330,7 +1330,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1355,7 +1355,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         /// <summary>
@@ -1379,7 +1379,7 @@ namespace CoreTests
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(Enumerable.SequenceEqual(expand, expected));
+            Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
         #endregion

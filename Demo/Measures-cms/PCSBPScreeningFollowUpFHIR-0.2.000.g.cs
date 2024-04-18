@@ -401,7 +401,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var f_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
 			var g_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, f_, "day");
 			var h_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var i_ = context.Operators.Equivalent(h_, "finished");
+			var i_ = context.Operators.Equivalent(h_, (string)"finished");
 			var j_ = context.Operators.And(g_, i_);
 			var k_ = FHIRHelpers_4_3_000.ToCode(ValidEncounter?.Class);
 			var l_ = this.@virtual();
@@ -529,9 +529,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var al_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var am_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var an_ = context.Operators.InList<string>(al_, (am_ as IEnumerable<string>));
 				var ao_ = context.Operators.And(ak_, an_);
@@ -553,9 +553,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var as_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var at_ = context.Operators.Convert<string>(as_?.SystemElement);
-				var au_ = context.Operators.Equal(at_, "http://loinc.org");
+				var au_ = context.Operators.Equal(at_, (string)"http://loinc.org");
 				var aw_ = context.Operators.Convert<string>(as_?.CodeElement);
-				var ax_ = context.Operators.Equal(aw_, "8480-6");
+				var ax_ = context.Operators.Equal(aw_, (string)"8480-6");
 				var ay_ = context.Operators.And(au_, ax_);
 
 				return ay_;
@@ -577,9 +577,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var be_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var bf_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var bg_ = context.Operators.InList<string>(be_, (bf_ as IEnumerable<string>));
 				var bh_ = context.Operators.And(bd_, bg_);
@@ -601,9 +601,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var bl_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bm_ = context.Operators.Convert<string>(bl_?.SystemElement);
-				var bn_ = context.Operators.Equal(bm_, "http://loinc.org");
+				var bn_ = context.Operators.Equal(bm_, (string)"http://loinc.org");
 				var bp_ = context.Operators.Convert<string>(bl_?.CodeElement);
-				var bq_ = context.Operators.Equal(bp_, "8462-4");
+				var bq_ = context.Operators.Equal(bp_, (string)"8462-4");
 				var br_ = context.Operators.And(bn_, bq_);
 
 				return br_;
@@ -643,9 +643,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var al_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var am_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var an_ = context.Operators.InList<string>(al_, (am_ as IEnumerable<string>));
 				var ao_ = context.Operators.And(ak_, an_);
@@ -667,9 +667,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var as_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var at_ = context.Operators.Convert<string>(as_?.SystemElement);
-				var au_ = context.Operators.Equal(at_, "http://loinc.org");
+				var au_ = context.Operators.Equal(at_, (string)"http://loinc.org");
 				var aw_ = context.Operators.Convert<string>(as_?.CodeElement);
-				var ax_ = context.Operators.Equal(aw_, "8480-6");
+				var ax_ = context.Operators.Equal(aw_, (string)"8480-6");
 				var ay_ = context.Operators.And(au_, ax_);
 
 				return ay_;
@@ -691,9 +691,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var be_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var bf_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var bg_ = context.Operators.InList<string>(be_, (bf_ as IEnumerable<string>));
 				var bh_ = context.Operators.And(bd_, bg_);
@@ -715,9 +715,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var bl_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bm_ = context.Operators.Convert<string>(bl_?.SystemElement);
-				var bn_ = context.Operators.Equal(bm_, "http://loinc.org");
+				var bn_ = context.Operators.Equal(bm_, (string)"http://loinc.org");
 				var bp_ = context.Operators.Convert<string>(bl_?.CodeElement);
-				var bq_ = context.Operators.Equal(bp_, "8462-4");
+				var bq_ = context.Operators.Equal(bp_, (string)"8462-4");
 				var br_ = context.Operators.And(bn_, bq_);
 
 				return br_;
@@ -754,7 +754,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		bool? h_(ServiceRequest FollowUp)
 		{
 			var j_ = context.Operators.Convert<Code<RequestIntent>>(FollowUp?.IntentElement?.Value);
-			var k_ = context.Operators.Equivalent(j_, "order");
+			var k_ = context.Operators.Equivalent(j_, (string)"order");
 
 			return k_;
 		};
@@ -786,7 +786,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		bool? o_(ServiceRequest NonPharmaInterventions)
 		{
 			var q_ = context.Operators.Convert<Code<RequestIntent>>(NonPharmaInterventions?.IntentElement?.Value);
-			var r_ = context.Operators.Equivalent(q_, "order");
+			var r_ = context.Operators.Equivalent(q_, (string)"order");
 
 			return r_;
 		};
@@ -815,7 +815,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var g_ = this.Finding_of_Elevated_Blood_Pressure_or_Hypertension();
 			var h_ = context.Operators.ConceptsInValueSet(f_, g_);
 			var i_ = context.Operators.Convert<Code<RequestIntent>>(Referral?.IntentElement?.Value);
-			var j_ = context.Operators.Equivalent(i_, "order");
+			var j_ = context.Operators.Equivalent(i_, (string)"order");
 			var k_ = context.Operators.And(h_, j_);
 
 			return k_;
@@ -922,9 +922,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var br_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var bs_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var bt_ = context.Operators.InList<string>(br_, (bs_ as IEnumerable<string>));
 				var bu_ = context.Operators.And(bq_, bt_);
@@ -946,9 +946,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var by_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bz_ = context.Operators.Convert<string>(by_?.SystemElement);
-				var ca_ = context.Operators.Equal(bz_, "http://loinc.org");
+				var ca_ = context.Operators.Equal(bz_, (string)"http://loinc.org");
 				var cc_ = context.Operators.Convert<string>(by_?.CodeElement);
-				var cd_ = context.Operators.Equal(cc_, "8480-6");
+				var cd_ = context.Operators.Equal(cc_, (string)"8480-6");
 				var ce_ = context.Operators.And(ca_, cd_);
 
 				return ce_;
@@ -976,9 +976,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var cu_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var cv_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var cw_ = context.Operators.InList<string>(cu_, (cv_ as IEnumerable<string>));
 				var cx_ = context.Operators.And(ct_, cw_);
@@ -1000,9 +1000,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var db_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dc_ = context.Operators.Convert<string>(db_?.SystemElement);
-				var dd_ = context.Operators.Equal(dc_, "http://loinc.org");
+				var dd_ = context.Operators.Equal(dc_, (string)"http://loinc.org");
 				var df_ = context.Operators.Convert<string>(db_?.CodeElement);
-				var dg_ = context.Operators.Equal(df_, "8462-4");
+				var dg_ = context.Operators.Equal(df_, (string)"8462-4");
 				var dh_ = context.Operators.And(dd_, dg_);
 
 				return dh_;
@@ -1030,9 +1030,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var dx_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var dy_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var dz_ = context.Operators.InList<string>(dx_, (dy_ as IEnumerable<string>));
 				var ea_ = context.Operators.And(dw_, dz_);
@@ -1054,9 +1054,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var ee_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var ef_ = context.Operators.Convert<string>(ee_?.SystemElement);
-				var eg_ = context.Operators.Equal(ef_, "http://loinc.org");
+				var eg_ = context.Operators.Equal(ef_, (string)"http://loinc.org");
 				var ei_ = context.Operators.Convert<string>(ee_?.CodeElement);
-				var ej_ = context.Operators.Equal(ei_, "8480-6");
+				var ej_ = context.Operators.Equal(ei_, (string)"8480-6");
 				var ek_ = context.Operators.And(eg_, ej_);
 
 				return ek_;
@@ -1084,9 +1084,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var fa_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var fb_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var fc_ = context.Operators.InList<string>(fa_, (fb_ as IEnumerable<string>));
 				var fd_ = context.Operators.And(ez_, fc_);
@@ -1108,9 +1108,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var fh_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var fi_ = context.Operators.Convert<string>(fh_?.SystemElement);
-				var fj_ = context.Operators.Equal(fi_, "http://loinc.org");
+				var fj_ = context.Operators.Equal(fi_, (string)"http://loinc.org");
 				var fl_ = context.Operators.Convert<string>(fh_?.CodeElement);
-				var fm_ = context.Operators.Equal(fl_, "8462-4");
+				var fm_ = context.Operators.Equal(fl_, (string)"8462-4");
 				var fn_ = context.Operators.And(fj_, fm_);
 
 				return fn_;
@@ -1165,9 +1165,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var bm_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bn_ = context.Operators.Convert<string>(bm_?.SystemElement);
-				var bo_ = context.Operators.Equal(bn_, "http://loinc.org");
+				var bo_ = context.Operators.Equal(bn_, (string)"http://loinc.org");
 				var bq_ = context.Operators.Convert<string>(bm_?.CodeElement);
-				var br_ = context.Operators.Equal(bq_, "8480-6");
+				var br_ = context.Operators.Equal(bq_, (string)"8480-6");
 				var bs_ = context.Operators.And(bo_, br_);
 
 				return bs_;
@@ -1202,9 +1202,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var cb_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cc_ = context.Operators.Convert<string>(cb_?.SystemElement);
-				var cd_ = context.Operators.Equal(cc_, "http://loinc.org");
+				var cd_ = context.Operators.Equal(cc_, (string)"http://loinc.org");
 				var cf_ = context.Operators.Convert<string>(cb_?.CodeElement);
-				var cg_ = context.Operators.Equal(cf_, "8462-4");
+				var cg_ = context.Operators.Equal(cf_, (string)"8462-4");
 				var ch_ = context.Operators.And(cd_, cg_);
 
 				return ch_;
@@ -1239,9 +1239,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var cq_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cr_ = context.Operators.Convert<string>(cq_?.SystemElement);
-				var cs_ = context.Operators.Equal(cr_, "http://loinc.org");
+				var cs_ = context.Operators.Equal(cr_, (string)"http://loinc.org");
 				var cu_ = context.Operators.Convert<string>(cq_?.CodeElement);
-				var cv_ = context.Operators.Equal(cu_, "8480-6");
+				var cv_ = context.Operators.Equal(cu_, (string)"8480-6");
 				var cw_ = context.Operators.And(cs_, cv_);
 
 				return cw_;
@@ -1276,9 +1276,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var df_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dg_ = context.Operators.Convert<string>(df_?.SystemElement);
-				var dh_ = context.Operators.Equal(dg_, "http://loinc.org");
+				var dh_ = context.Operators.Equal(dg_, (string)"http://loinc.org");
 				var dj_ = context.Operators.Convert<string>(df_?.CodeElement);
-				var dk_ = context.Operators.Equal(dj_, "8462-4");
+				var dk_ = context.Operators.Equal(dj_, (string)"8462-4");
 				var dl_ = context.Operators.And(dh_, dk_);
 
 				return dl_;
@@ -1320,7 +1320,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, m_, "day");
 				var r_ = context.Operators.And(n_, q_);
 				var s_ = context.Operators.Convert<Code<RequestIntent>>(FourWeekRescreen?.IntentElement?.Value);
-				var t_ = context.Operators.Equivalent(s_, "order");
+				var t_ = context.Operators.Equivalent(s_, (string)"order");
 				var u_ = context.Operators.And(r_, t_);
 
 				return u_;
@@ -1389,9 +1389,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var bp_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var bq_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var br_ = context.Operators.InList<string>(bp_, (bq_ as IEnumerable<string>));
 				var bs_ = context.Operators.And(bo_, br_);
@@ -1413,9 +1413,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var bw_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bx_ = context.Operators.Convert<string>(bw_?.SystemElement);
-				var by_ = context.Operators.Equal(bx_, "http://loinc.org");
+				var by_ = context.Operators.Equal(bx_, (string)"http://loinc.org");
 				var ca_ = context.Operators.Convert<string>(bw_?.CodeElement);
-				var cb_ = context.Operators.Equal(ca_, "8480-6");
+				var cb_ = context.Operators.Equal(ca_, (string)"8480-6");
 				var cc_ = context.Operators.And(by_, cb_);
 
 				return cc_;
@@ -1437,9 +1437,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var ci_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var cj_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var ck_ = context.Operators.InList<string>(ci_, (cj_ as IEnumerable<string>));
 				var cl_ = context.Operators.And(ch_, ck_);
@@ -1461,9 +1461,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var cp_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cq_ = context.Operators.Convert<string>(cp_?.SystemElement);
-				var cr_ = context.Operators.Equal(cq_, "http://loinc.org");
+				var cr_ = context.Operators.Equal(cq_, (string)"http://loinc.org");
 				var ct_ = context.Operators.Convert<string>(cp_?.CodeElement);
-				var cu_ = context.Operators.Equal(ct_, "8462-4");
+				var cu_ = context.Operators.Equal(ct_, (string)"8462-4");
 				var cv_ = context.Operators.And(cr_, cu_);
 
 				return cv_;
@@ -1486,9 +1486,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var db_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var dc_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var dd_ = context.Operators.InList<string>(db_, (dc_ as IEnumerable<string>));
 				var de_ = context.Operators.And(da_, dd_);
@@ -1510,9 +1510,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var di_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dj_ = context.Operators.Convert<string>(di_?.SystemElement);
-				var dk_ = context.Operators.Equal(dj_, "http://loinc.org");
+				var dk_ = context.Operators.Equal(dj_, (string)"http://loinc.org");
 				var dm_ = context.Operators.Convert<string>(di_?.CodeElement);
-				var dn_ = context.Operators.Equal(dm_, "8480-6");
+				var dn_ = context.Operators.Equal(dm_, (string)"8480-6");
 				var do_ = context.Operators.And(dk_, dn_);
 
 				return do_;
@@ -1532,9 +1532,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var du_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var dv_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var dw_ = context.Operators.InList<string>(du_, (dv_ as IEnumerable<string>));
 				var dx_ = context.Operators.And(dt_, dw_);
@@ -1556,9 +1556,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var eb_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var ec_ = context.Operators.Convert<string>(eb_?.SystemElement);
-				var ed_ = context.Operators.Equal(ec_, "http://loinc.org");
+				var ed_ = context.Operators.Equal(ec_, (string)"http://loinc.org");
 				var ef_ = context.Operators.Convert<string>(eb_?.CodeElement);
-				var eg_ = context.Operators.Equal(ef_, "8462-4");
+				var eg_ = context.Operators.Equal(ef_, (string)"8462-4");
 				var eh_ = context.Operators.And(ed_, eg_);
 
 				return eh_;
@@ -1601,7 +1601,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		bool? k_(ServiceRequest EKGLab)
 		{
 			var m_ = context.Operators.Convert<Code<RequestIntent>>(EKGLab?.IntentElement?.Value);
-			var n_ = context.Operators.Equivalent(m_, "order");
+			var n_ = context.Operators.Equivalent(m_, (string)"order");
 
 			return n_;
 		};
@@ -1732,9 +1732,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var bk_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var bl_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var bm_ = context.Operators.InList<string>(bk_, (bl_ as IEnumerable<string>));
 				var bn_ = context.Operators.And(bj_, bm_);
@@ -1756,9 +1756,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var br_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bs_ = context.Operators.Convert<string>(br_?.SystemElement);
-				var bt_ = context.Operators.Equal(bs_, "http://loinc.org");
+				var bt_ = context.Operators.Equal(bs_, (string)"http://loinc.org");
 				var bv_ = context.Operators.Convert<string>(br_?.CodeElement);
-				var bw_ = context.Operators.Equal(bv_, "8480-6");
+				var bw_ = context.Operators.Equal(bv_, (string)"8480-6");
 				var bx_ = context.Operators.And(bt_, bw_);
 
 				return bx_;
@@ -1778,9 +1778,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var cd_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var ce_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var cf_ = context.Operators.InList<string>(cd_, (ce_ as IEnumerable<string>));
 				var cg_ = context.Operators.And(cc_, cf_);
@@ -1802,9 +1802,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var ck_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cl_ = context.Operators.Convert<string>(ck_?.SystemElement);
-				var cm_ = context.Operators.Equal(cl_, "http://loinc.org");
+				var cm_ = context.Operators.Equal(cl_, (string)"http://loinc.org");
 				var co_ = context.Operators.Convert<string>(ck_?.CodeElement);
-				var cp_ = context.Operators.Equal(co_, "8462-4");
+				var cp_ = context.Operators.Equal(co_, (string)"8462-4");
 				var cq_ = context.Operators.And(cm_, cp_);
 
 				return cq_;
@@ -1824,9 +1824,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var cw_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var cx_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var cy_ = context.Operators.InList<string>(cw_, (cx_ as IEnumerable<string>));
 				var cz_ = context.Operators.And(cv_, cy_);
@@ -1848,9 +1848,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var dd_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var de_ = context.Operators.Convert<string>(dd_?.SystemElement);
-				var df_ = context.Operators.Equal(de_, "http://loinc.org");
+				var df_ = context.Operators.Equal(de_, (string)"http://loinc.org");
 				var dh_ = context.Operators.Convert<string>(dd_?.CodeElement);
-				var di_ = context.Operators.Equal(dh_, "8480-6");
+				var di_ = context.Operators.Equal(dh_, (string)"8480-6");
 				var dj_ = context.Operators.And(df_, di_);
 
 				return dj_;
@@ -1870,9 +1870,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var dp_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 				var dq_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var dr_ = context.Operators.InList<string>(dp_, (dq_ as IEnumerable<string>));
 				var ds_ = context.Operators.And(do_, dr_);
@@ -1894,9 +1894,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				var dw_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dx_ = context.Operators.Convert<string>(dw_?.SystemElement);
-				var dy_ = context.Operators.Equal(dx_, "http://loinc.org");
+				var dy_ = context.Operators.Equal(dx_, (string)"http://loinc.org");
 				var ea_ = context.Operators.Convert<string>(dw_?.CodeElement);
-				var eb_ = context.Operators.Equal(ea_, "8462-4");
+				var eb_ = context.Operators.Equal(ea_, (string)"8462-4");
 				var ec_ = context.Operators.And(dy_, eb_);
 
 				return ec_;
@@ -1939,10 +1939,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var s_ = context.Operators.ElementInInterval<CqlDateTime>(q_, o_, "day");
 				var t_ = context.Operators.And(p_, s_);
 				var u_ = context.Operators.Convert<Code<RequestIntent>>(WeeksRescreen?.IntentElement?.Value);
-				var v_ = context.Operators.Equivalent(u_, "order");
+				var v_ = context.Operators.Equivalent(u_, (string)"order");
 				var w_ = context.Operators.And(t_, v_);
 				var x_ = context.Operators.Convert<Code<RequestIntent>>(ECGLabTest?.IntentElement?.Value);
-				var y_ = context.Operators.Equivalent(x_, "order");
+				var y_ = context.Operators.Equivalent(x_, (string)"order");
 				var z_ = context.Operators.And(w_, y_);
 
 				return z_;
@@ -1986,7 +1986,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var as_ = this.Measurement_Period();
 				var at_ = context.Operators.ElementInInterval<CqlDateTime>(ar_, as_, "day");
 				var au_ = context.Operators.Convert<string>(Medications?.StatusElement?.Value);
-				var av_ = context.Operators.Equivalent(au_, "active");
+				var av_ = context.Operators.Equivalent(au_, (string)"active");
 				var aw_ = context.Operators.And(at_, av_);
 
 				return aw_;
@@ -2095,7 +2095,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, p_, "day");
 				bool? r_(Extension @this)
 				{
-					var ao_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+					var ao_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 					return ao_;
 				};
@@ -2112,7 +2112,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var z_ = context.Operators.ConceptInValueSet(x_, y_);
 				bool? aa_(Extension @this)
 				{
-					var ap_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+					var ap_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 					return ap_;
 				};
@@ -2128,7 +2128,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var aj_ = context.Operators.Or(z_, ai_);
 				var ak_ = context.Operators.And(q_, aj_);
 				var al_ = context.Operators.Convert<Code<ObservationStatus>>(NoBPScreen?.StatusElement?.Value);
-				var am_ = context.Operators.Equal(al_, "cancelled");
+				var am_ = context.Operators.Equal(al_, (string)"cancelled");
 				var an_ = context.Operators.And(ak_, am_);
 
 				return an_;
@@ -2179,7 +2179,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? af_(Extension @this)
 			{
-				var ar_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+				var ar_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return ar_;
 			};
@@ -2195,7 +2195,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var am_ = this.Patient_Declined();
 			var an_ = context.Operators.ConceptInValueSet(al_, am_);
 			var ao_ = context.Operators.Convert<Code<RequestStatus>>(NonPharmIntervention?.StatusElement?.Value);
-			var ap_ = context.Operators.Equal(ao_, "completed");
+			var ap_ = context.Operators.Equal(ao_, (string)"completed");
 			var aq_ = context.Operators.And(an_, ap_);
 
 			return aq_;
@@ -2227,7 +2227,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? p_(Extension @this)
 			{
-				var y_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+				var y_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return y_;
 			};
@@ -2272,7 +2272,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? t_(Extension @this)
 			{
-				var af_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+				var af_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return af_;
 			};
@@ -2288,7 +2288,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aa_ = this.Patient_Declined();
 			var ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 			var ac_ = context.Operators.Convert<Code<RequestStatus>>(SecondHTNDeclinedReferralAndFollowUp?.StatusElement?.Value);
-			var ad_ = context.Operators.Equal(ac_, "completed");
+			var ad_ = context.Operators.Equal(ac_, (string)"completed");
 			var ae_ = context.Operators.And(ab_, ad_);
 
 			return ae_;
@@ -2321,7 +2321,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? z_(Extension @this)
 			{
-				var al_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+				var al_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return al_;
 			};
@@ -2337,7 +2337,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ag_ = this.Patient_Declined();
 			var ah_ = context.Operators.ConceptInValueSet(af_, ag_);
 			var ai_ = context.Operators.Convert<Code<RequestStatus>>(SecondHTN140Over90ReferralFollowUpNotDone?.StatusElement?.Value);
-			var aj_ = context.Operators.Equal(ai_, "completed");
+			var aj_ = context.Operators.Equal(ai_, (string)"completed");
 			var ak_ = context.Operators.And(ah_, aj_);
 
 			return ak_;
@@ -2350,7 +2350,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		bool? s_(MedicationRequest MedicationRequestNotOrdered)
 		{
 			var am_ = context.Operators.Convert<string>(MedicationRequestNotOrdered?.StatusElement?.Value);
-			var an_ = context.Operators.Equal(am_, "completed");
+			var an_ = context.Operators.Equal(am_, (string)"completed");
 
 			return an_;
 		};
@@ -2389,7 +2389,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				bool? ao_(Extension @this)
 				{
-					var be_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+					var be_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 					return be_;
 				};
@@ -2409,7 +2409,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var az_ = context.Operators.ElementInInterval<CqlDateTime>(ax_, ay_, "day");
 				var ba_ = context.Operators.And(aw_, az_);
 				var bb_ = context.Operators.Convert<Code<RequestStatus>>(ElevatedBPDeclinedInterventions?.StatusElement?.Value);
-				var bc_ = context.Operators.Equal(bb_, "completed");
+				var bc_ = context.Operators.Equal(bb_, (string)"completed");
 				var bd_ = context.Operators.And(ba_, bc_);
 
 				return bd_;
@@ -2458,7 +2458,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				bool? cc_(Extension @this)
 				{
-					var cs_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+					var cs_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 					return cs_;
 				};
@@ -2478,7 +2478,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var cn_ = context.Operators.ElementInInterval<CqlDateTime>(cl_, cm_, "day");
 				var co_ = context.Operators.And(ck_, cn_);
 				var cp_ = context.Operators.Convert<Code<RequestStatus>>(FirstHTNDeclinedInterventions?.StatusElement?.Value);
-				var cq_ = context.Operators.Equal(cp_, "completed");
+				var cq_ = context.Operators.Equal(cp_, (string)"completed");
 				var cr_ = context.Operators.And(co_, cq_);
 
 				return cr_;

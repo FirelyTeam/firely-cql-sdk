@@ -356,7 +356,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			var h_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
 			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, h_, null);
 			var j_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var k_ = context.Operators.Equal(j_, "finished");
+			var k_ = context.Operators.Equal(j_, (string)"finished");
 			var l_ = context.Operators.And(i_, k_);
 
 			return l_;
@@ -441,10 +441,10 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			var ag_ = context.Operators.Convert<string>(af_);
 			var ah_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
-				"preliminary",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
+				(string)"preliminary",
 			};
 			var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 			var aj_ = context.Operators.And(ae_, ai_);
@@ -502,7 +502,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				var aa_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return aa_;
 			};

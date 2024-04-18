@@ -221,7 +221,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, "day");
 			var p_ = context.Operators.And(k_, o_);
 			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
-			var r_ = context.Operators.Equal(q_, "finished");
+			var r_ = context.Operators.Equal(q_, (string)"finished");
 			var s_ = context.Operators.And(p_, r_);
 
 			return s_;
@@ -244,8 +244,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		bool? f_(MedicationAdministration Opioids)
 		{
 			var h_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(Opioids?.StatusElement?.Value);
-			var i_ = context.Operators.Equal(h_, "completed");
-			var k_ = context.Operators.Equal(h_, "not-done");
+			var i_ = context.Operators.Equal(h_, (string)"completed");
+			var k_ = context.Operators.Equal(h_, (string)"not-done");
 			var l_ = context.Operators.Not(k_);
 			var m_ = context.Operators.And(i_, l_);
 
@@ -348,8 +348,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		bool? f_(MedicationAdministration AntagonistGiven)
 		{
 			var h_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(AntagonistGiven?.StatusElement?.Value);
-			var i_ = context.Operators.Equal(h_, "completed");
-			var k_ = context.Operators.Equal(h_, "not-done");
+			var i_ = context.Operators.Equal(h_, (string)"completed");
+			var k_ = context.Operators.Equal(h_, (string)"not-done");
 			var l_ = context.Operators.Not(k_);
 			var m_ = context.Operators.And(i_, l_);
 

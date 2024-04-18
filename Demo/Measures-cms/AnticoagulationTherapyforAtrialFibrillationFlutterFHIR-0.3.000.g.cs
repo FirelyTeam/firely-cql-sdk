@@ -229,7 +229,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
 				var q_ = context.Operators.Convert<string>(AtrialAblationProcedure?.StatusElement?.Value);
-				var r_ = context.Operators.Equal(q_, "completed");
+				var r_ = context.Operators.Equal(q_, (string)"completed");
 				var s_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationProcedure?.Performed);
 				var t_ = QICoreCommon_2_0_000.toInterval(s_);
 				var u_ = context.Operators.Start(t_);
@@ -287,9 +287,9 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				var ba_ = context.Operators.Convert<string>(az_);
 				var bb_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var bc_ = context.Operators.InList<string>(ba_, (bb_ as IEnumerable<string>));
 				object bd_()
@@ -476,7 +476,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		bool? b_(Encounter Encounter)
 		{
 			var f_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(Encounter?.StatusElement?.Value);
-			var g_ = context.Operators.Equal(f_, "finished");
+			var g_ = context.Operators.Equal(f_, (string)"finished");
 			var h_ = FHIRHelpers_4_3_000.ToConcept(Encounter?.Hospitalization?.DischargeDisposition);
 			var i_ = this.Discharge_To_Acute_Care_Facility();
 			var j_ = context.Operators.ConceptInValueSet(h_, i_);
@@ -524,19 +524,19 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				var p_ = context.Operators.Convert<string>(DischargeAnticoagulant?.StatusElement?.Value);
 				var q_ = new string[]
 				{
-					"active",
-					"completed",
+					(string)"active",
+					(string)"completed",
 				};
 				var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 				var s_ = context.Operators.And(o_, r_);
 				var t_ = context.Operators.Convert<string>(DischargeAnticoagulant?.IntentElement?.Value);
 				var u_ = new string[]
 				{
-					"order",
-					"original-order",
-					"reflex-order",
-					"filler-order",
-					"instance-order",
+					(string)"order",
+					(string)"original-order",
+					(string)"reflex-order",
+					(string)"filler-order",
+					(string)"instance-order",
 				};
 				var v_ = context.Operators.InList<string>(t_, (u_ as IEnumerable<string>));
 				var w_ = context.Operators.And(s_, v_);
@@ -598,11 +598,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var r_ = context.Operators.Convert<string>(NoAnticoagulant?.IntentElement?.Value);
 			var s_ = new string[]
 			{
-				"order",
-				"original-order",
-				"reflex-order",
-				"filler-order",
-				"instance-order",
+				(string)"order",
+				(string)"original-order",
+				(string)"reflex-order",
+				(string)"filler-order",
+				(string)"instance-order",
 			};
 			var t_ = context.Operators.InList<string>(r_, (s_ as IEnumerable<string>));
 			var u_ = context.Operators.And(q_, t_);

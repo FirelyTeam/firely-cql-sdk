@@ -257,7 +257,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, "day");
 			var p_ = context.Operators.And(k_, o_);
 			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
-			var r_ = context.Operators.Equal(q_, "finished");
+			var r_ = context.Operators.Equal(q_, (string)"finished");
 			var s_ = context.Operators.And(p_, r_);
 
 			return s_;
@@ -306,7 +306,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					var u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var u_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return u_;
 				};
@@ -363,9 +363,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);
@@ -418,7 +418,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					var u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var u_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return u_;
 				};
@@ -475,9 +475,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);
@@ -573,7 +573,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					var u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var u_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return u_;
 				};
@@ -630,9 +630,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);
@@ -702,7 +702,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					var u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var u_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return u_;
 				};
@@ -759,9 +759,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);

@@ -835,7 +835,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var p_ = context.Operators.ConceptInValueSet(n_, o_);
 				bool? q_(Extension @this)
 				{
-					var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var aa_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return aa_;
 				};
@@ -861,7 +861,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			bool? i_(Procedure EncounterSMMProcedures)
 			{
 				var ab_ = context.Operators.Convert<string>(EncounterSMMProcedures?.StatusElement?.Value);
-				var ac_ = context.Operators.Equal(ab_, "completed");
+				var ac_ = context.Operators.Equal(ab_, (string)"completed");
 				var ad_ = FHIRHelpers_4_3_000.ToValue(EncounterSMMProcedures?.Performed);
 				var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
 				var af_ = context.Operators.Start(ae_);
@@ -916,7 +916,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			bool? f_(Procedure BloodTransfusion)
 			{
 				var j_ = context.Operators.Convert<string>(BloodTransfusion?.StatusElement?.Value);
-				var k_ = context.Operators.Equal(j_, "completed");
+				var k_ = context.Operators.Equal(j_, (string)"completed");
 				var l_ = FHIRHelpers_4_3_000.ToValue(BloodTransfusion?.Performed);
 				var m_ = QICoreCommon_2_0_000.toInterval(l_);
 				var n_ = context.Operators.Start(m_);
@@ -999,7 +999,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			bool? n_(Procedure COVIDRespiratoryProcedure)
 			{
 				var y_ = context.Operators.Convert<string>(COVIDRespiratoryProcedure?.StatusElement?.Value);
-				var z_ = context.Operators.Equal(y_, "completed");
+				var z_ = context.Operators.Equal(y_, (string)"completed");
 				var aa_ = FHIRHelpers_4_3_000.ToValue(COVIDRespiratoryProcedure?.Performed);
 				var ab_ = QICoreCommon_2_0_000.toInterval(aa_);
 				var ac_ = context.Operators.Start(ab_);
@@ -1104,7 +1104,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		{
 			bool? e_(Extension @this)
 			{
-				var n_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+				var n_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 				return n_;
 			};
@@ -1757,9 +1757,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ac_ = context.Operators.Convert<string>(Hematocrit?.StatusElement?.Value);
 				var ad_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var ae_ = context.Operators.InList<string>(ac_, (ad_ as IEnumerable<string>));
 				var af_ = context.Operators.And(ab_, ae_);
@@ -1794,9 +1794,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var at_ = context.Operators.Convert<string>(Hematocrit?.StatusElement?.Value);
 				var au_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var av_ = context.Operators.InList<string>(at_, (au_ as IEnumerable<string>));
 				var aw_ = context.Operators.And(as_, av_);
@@ -1855,9 +1855,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ac_ = context.Operators.Convert<string>(WBC?.StatusElement?.Value);
 				var ad_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var ae_ = context.Operators.InList<string>(ac_, (ad_ as IEnumerable<string>));
 				var af_ = context.Operators.And(ab_, ae_);
@@ -1892,9 +1892,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var at_ = context.Operators.Convert<string>(WBC?.StatusElement?.Value);
 				var au_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var av_ = context.Operators.InList<string>(at_, (au_ as IEnumerable<string>));
 				var aw_ = context.Operators.And(as_, av_);
@@ -1953,9 +1953,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ad_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var ae_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
 				var ag_ = context.Operators.And(ac_, af_);
@@ -1988,9 +1988,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var as_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var at_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var au_ = context.Operators.InList<string>(as_, (at_ as IEnumerable<string>));
 				var av_ = context.Operators.And(ar_, au_);
@@ -2047,9 +2047,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var af_ = context.Operators.Convert<string>(BP?.StatusElement?.Value);
 				var ag_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var ah_ = context.Operators.InList<string>(af_, (ag_ as IEnumerable<string>));
 				var ai_ = context.Operators.And(ae_, ah_);
@@ -2097,9 +2097,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var az_ = context.Operators.Convert<string>(BP?.StatusElement?.Value);
 				var ba_ = new string[]
 				{
-					"final",
-					"amended",
-					"corrected",
+					(string)"final",
+					(string)"amended",
+					(string)"corrected",
 				};
 				var bb_ = context.Operators.InList<string>(az_, (ba_ as IEnumerable<string>));
 				var bc_ = context.Operators.And(ay_, bb_);
@@ -2143,7 +2143,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		{
 			bool? e_(Extension @this)
 			{
-				var n_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+				var n_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 				return n_;
 			};

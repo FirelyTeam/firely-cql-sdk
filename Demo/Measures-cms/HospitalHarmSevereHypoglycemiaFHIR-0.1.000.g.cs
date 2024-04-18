@@ -176,7 +176,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, "day");
 			var p_ = context.Operators.And(k_, o_);
 			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
-			var r_ = context.Operators.Equal(q_, "finished");
+			var r_ = context.Operators.Equal(q_, (string)"finished");
 			var s_ = context.Operators.And(p_, r_);
 
 			return s_;
@@ -199,8 +199,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		bool? f_(MedicationAdministration HypoMedication)
 		{
 			var h_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(HypoMedication?.StatusElement?.Value);
-			var i_ = context.Operators.Equal(h_, "completed");
-			var k_ = context.Operators.Equal(h_, "not-done");
+			var i_ = context.Operators.Equal(h_, (string)"completed");
+			var k_ = context.Operators.Equal(h_, (string)"not-done");
 			var l_ = context.Operators.Not(k_);
 			var m_ = context.Operators.And(i_, l_);
 
@@ -343,9 +343,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var r_ = context.Operators.Convert<string>(q_);
 			var s_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var t_ = context.Operators.InList<string>(r_, (s_ as IEnumerable<string>));
 			var u_ = context.Operators.And(p_, t_);
@@ -840,9 +840,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var ao_ = context.Operators.Convert<string>(an_);
 			var ap_ = new string[]
 			{
-				"final",
-				"amended",
-				"corrected",
+				(string)"final",
+				(string)"amended",
+				(string)"corrected",
 			};
 			var aq_ = context.Operators.InList<string>(ao_, (ap_ as IEnumerable<string>));
 			var ar_ = context.Operators.And(am_, aq_);

@@ -31,7 +31,7 @@ partial class CqlOperatorsBinder
 
         if (arg is ConstantExpression fromConstant)
         {
-            if (fromConstant.Value is null && to.AllowNullValues())
+            if (fromConstant.Value is null && to.IsNullable(out _))
             {
                 // Null values to a type that can accept nulls e.g. default(string) or default(int?)
                 result = (NullExpression.ForType(to), TypeConversion.ExactType);

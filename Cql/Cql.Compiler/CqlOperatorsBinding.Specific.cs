@@ -15,52 +15,6 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinder
 {
-    private Expression Equal(Expression left, Expression right) // @TODO: Cast
-    {
-        if (left.Type.IsEnum())
-        {
-            if (right.Type.IsEnum())
-            {
-                var equal = Expression.Equal(left, right);
-                var asNullable = ConvertToType<bool?>(equal);
-                return asNullable;
-            }
-
-            if (right.Type == typeof(string))
-            {
-                return BindToMethod(CqlOperator.EnumEqualsString, null, left.ConvertExpression<object>(), right);
-            }
-
-            throw new NotImplementedException();
-        }
-
-        if (right.Type.IsEnum())
-        {
-            if (left.Type == typeof(string))
-            {
-                return BindToMethod(CqlOperator.EnumEqualsString, null, right.ConvertExpression<object>(), left);
-
-            }
-
-            throw new NotImplementedException();
-        }
-
-        if (_typeResolver.IsListType(left.Type))
-        {
-            var leftElementType = _typeResolver.GetListElementType(left.Type, true)!;
-            if (_typeResolver.IsListType(right.Type))
-            {
-                var rightElementType = _typeResolver.GetListElementType(right.Type, true)!;
-                if (rightElementType != leftElementType)
-                    throw new Exception($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                return BindToMethod(CqlOperator.ListEqual, null, left, right);
-            }
-            throw new NotImplementedException();
-        }
-
-        return BindToMethodConvertArgs(nameof(ICqlOperators.Equal), null, left, right);
-    }
-
     private Expression Expand(
         Expression argument,
         Expression perQuantity)

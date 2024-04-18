@@ -81,7 +81,7 @@ namespace Hl7.Cql.Compiler
 
         public Expression Update(IReadOnlyCollection<WhenThenCase> whenThenCases, Expression elseCase)
         {
-            if (Enumerable.SequenceEqual(WhenThenCases, whenThenCases) && ElseCase == elseCase)
+            if (WhenThenCases.SequenceEqual(whenThenCases) && ElseCase == elseCase)
                 return this;
             return new CaseWhenThenExpression(whenThenCases, elseCase);
         }

@@ -259,19 +259,19 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			var k_ = context.Operators.Convert<string>(Antithrombotic?.StatusElement?.Value);
 			var l_ = new string[]
 			{
-				"active",
-				"completed",
+				(string)"active",
+				(string)"completed",
 			};
 			var m_ = context.Operators.InList<string>(k_, (l_ as IEnumerable<string>));
 			var n_ = context.Operators.And(j_, m_);
 			var o_ = context.Operators.Convert<string>(Antithrombotic?.IntentElement?.Value);
 			var p_ = new string[]
 			{
-				"order",
-				"original-order",
-				"reflex-order",
-				"filler-order",
-				"instance-order",
+				(string)"order",
+				(string)"original-order",
+				(string)"reflex-order",
+				(string)"filler-order",
+				(string)"instance-order",
 			};
 			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.And(n_, q_);
@@ -324,11 +324,11 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			var u_ = context.Operators.Convert<string>(NoAntithromboticDischarge?.IntentElement?.Value);
 			var v_ = new string[]
 			{
-				"order",
-				"original-order",
-				"reflex-order",
-				"filler-order",
-				"instance-order",
+				(string)"order",
+				(string)"original-order",
+				(string)"reflex-order",
+				(string)"filler-order",
+				(string)"instance-order",
 			};
 			var w_ = context.Operators.InList<string>(u_, (v_ as IEnumerable<string>));
 			var x_ = context.Operators.And(t_, w_);
@@ -388,19 +388,19 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			var k_ = context.Operators.Convert<string>(Pharmacological?.StatusElement?.Value);
 			var l_ = new string[]
 			{
-				"active",
-				"completed",
+				(string)"active",
+				(string)"completed",
 			};
 			var m_ = context.Operators.InList<string>(k_, (l_ as IEnumerable<string>));
 			var n_ = context.Operators.And(j_, m_);
 			var o_ = context.Operators.Convert<string>(Pharmacological?.IntentElement?.Value);
 			var p_ = new string[]
 			{
-				"order",
-				"original-order",
-				"reflex-order",
-				"filler-order",
-				"instance-order",
+				(string)"order",
+				(string)"original-order",
+				(string)"reflex-order",
+				(string)"filler-order",
+				(string)"instance-order",
 			};
 			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.And(n_, q_);
