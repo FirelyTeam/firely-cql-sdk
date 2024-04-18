@@ -279,9 +279,10 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private bool? Patient_is_Male_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "male");
+		var b_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		var c_ = context.Operators.Equal(b_, "male");
 
-		return b_;
+		return c_;
 	}
 
     [CqlDeclaration("Patient is Male")]

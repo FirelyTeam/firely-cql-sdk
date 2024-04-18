@@ -708,10 +708,11 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var p_ = context.Operators.SameOrBefore(k_, o_, null);
 			var q_ = context.Operators.And(h_, p_);
-			var r_ = context.Operators.EnumEqualsString(CataractSurgery?.StatusElement?.Value, "completed");
-			var s_ = context.Operators.And(q_, r_);
+			var r_ = context.Operators.Convert<string>(CataractSurgery?.StatusElement?.Value);
+			var s_ = context.Operators.Equal(r_, "completed");
+			var t_ = context.Operators.And(q_, s_);
 
-			return s_;
+			return t_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
 

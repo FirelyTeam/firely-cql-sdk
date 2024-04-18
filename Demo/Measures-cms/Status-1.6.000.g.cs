@@ -483,9 +483,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Immunization I)
 		{
-			var c_ = context.Operators.Equivalent(I?.StatusElement?.Value, "completed");
+			var c_ = context.Operators.Convert<string>(I?.StatusElement?.Value);
+			var d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
 
@@ -497,9 +498,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Immunization I)
 		{
-			var c_ = context.Operators.Equivalent(I?.StatusElement?.Value, "completed");
+			var c_ = context.Operators.Convert<string>(I?.StatusElement?.Value);
+			var d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
 
@@ -511,9 +513,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
+			var c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
+			var d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
 
@@ -525,9 +528,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
+			var c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
+			var d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
 
@@ -539,9 +543,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
+			var c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
+			var d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
 
@@ -633,11 +638,13 @@ public class Status_1_6_000
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var c_ = context.Operators.EnumEqualsString(M?.StatusElement?.Value, "active");
-			var d_ = context.Operators.EnumEqualsString(M?.IntentElement?.Value, "order");
-			var e_ = context.Operators.And(c_, d_);
+			var c_ = context.Operators.Convert<string>(M?.StatusElement?.Value);
+			var d_ = context.Operators.Equal(c_, "active");
+			var e_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			var f_ = context.Operators.Equal(e_, "order");
+			var g_ = context.Operators.And(d_, f_);
 
-			return e_;
+			return g_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 
@@ -649,11 +656,13 @@ public class Status_1_6_000
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var c_ = context.Operators.EnumEqualsString(M?.StatusElement?.Value, "active");
-			var d_ = context.Operators.EnumEqualsString(M?.IntentElement?.Value, "order");
-			var e_ = context.Operators.And(c_, d_);
+			var c_ = context.Operators.Convert<string>(M?.StatusElement?.Value);
+			var d_ = context.Operators.Equal(c_, "active");
+			var e_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			var f_ = context.Operators.Equal(e_, "order");
+			var g_ = context.Operators.And(d_, f_);
 
-			return e_;
+			return g_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 
@@ -716,10 +725,11 @@ public class Status_1_6_000
 				"completed",
 			};
 			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
-			var f_ = context.Operators.EnumEqualsString(M?.IntentElement?.Value, "order");
-			var g_ = context.Operators.And(e_, f_);
+			var f_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			var g_ = context.Operators.Equal(f_, "order");
+			var h_ = context.Operators.And(e_, g_);
 
-			return g_;
+			return h_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 
@@ -738,10 +748,11 @@ public class Status_1_6_000
 				"completed",
 			};
 			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
-			var f_ = context.Operators.EnumEqualsString(M?.IntentElement?.Value, "order");
-			var g_ = context.Operators.And(e_, f_);
+			var f_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			var g_ = context.Operators.Equal(f_, "order");
+			var h_ = context.Operators.And(e_, g_);
 
-			return g_;
+			return h_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 

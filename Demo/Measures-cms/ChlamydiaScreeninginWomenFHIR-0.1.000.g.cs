@@ -737,27 +737,28 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)16, (int?)24, true, true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Qualifying_Encounters();
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
-		var n_ = context.Operators.And(k_, m_);
-		var o_ = this.Has_Assessments_Identifying_Sexual_Activity();
-		var p_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
-		var q_ = context.Operators.Or(o_, p_);
-		var r_ = this.Has_Active_Contraceptive_Medications();
-		var s_ = context.Operators.Or(q_, r_);
-		var t_ = this.Has_Ordered_Contraceptive_Medications();
-		var u_ = context.Operators.Or(s_, t_);
-		var v_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
-		var w_ = context.Operators.Or(u_, v_);
-		var x_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
-		var y_ = context.Operators.Or(w_, x_);
-		var z_ = this.Has_Procedures_Identifying_Sexual_Activity();
-		var aa_ = context.Operators.Or(y_, z_);
-		var ab_ = context.Operators.And(n_, aa_);
+		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		var k_ = context.Operators.Equal(j_, "female");
+		var l_ = context.Operators.And(h_, k_);
+		var m_ = this.Qualifying_Encounters();
+		var n_ = context.Operators.ExistsInList<Encounter>(m_);
+		var o_ = context.Operators.And(l_, n_);
+		var p_ = this.Has_Assessments_Identifying_Sexual_Activity();
+		var q_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
+		var r_ = context.Operators.Or(p_, q_);
+		var s_ = this.Has_Active_Contraceptive_Medications();
+		var t_ = context.Operators.Or(r_, s_);
+		var u_ = this.Has_Ordered_Contraceptive_Medications();
+		var v_ = context.Operators.Or(t_, u_);
+		var w_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
+		var x_ = context.Operators.Or(v_, w_);
+		var y_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
+		var z_ = context.Operators.Or(x_, y_);
+		var aa_ = this.Has_Procedures_Identifying_Sexual_Activity();
+		var ab_ = context.Operators.Or(z_, aa_);
+		var ac_ = context.Operators.And(o_, ab_);
 
-		return ab_;
+		return ac_;
 	}
 
     [CqlDeclaration("Initial Population")]

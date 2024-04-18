@@ -383,15 +383,16 @@ public class PCMaternal_5_16_000
 			var e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, null);
 			bool? f_(Procedure DeliveryProcedure)
 			{
-				var j_ = context.Operators.EnumEqualsString(DeliveryProcedure?.StatusElement?.Value, "completed");
-				var k_ = FHIRHelpers_4_3_000.ToValue(DeliveryProcedure?.Performed);
-				var l_ = QICoreCommon_2_0_000.toInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
-				var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, null);
-				var p_ = context.Operators.And(j_, o_);
+				var j_ = context.Operators.Convert<string>(DeliveryProcedure?.StatusElement?.Value);
+				var k_ = context.Operators.Equal(j_, "completed");
+				var l_ = FHIRHelpers_4_3_000.ToValue(DeliveryProcedure?.Performed);
+				var m_ = QICoreCommon_2_0_000.toInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
+				var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+				var q_ = context.Operators.And(k_, p_);
 
-				return p_;
+				return q_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure DeliveryProcedure) => 

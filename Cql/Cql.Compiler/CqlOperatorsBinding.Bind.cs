@@ -66,20 +66,6 @@ partial class CqlOperatorsBinder
                     nameof(methodName)),
             []       => (null, []),
             [{ } only] => (only.method, only.arguments),
-            // [ { method.ReturnType: { } t0 } ,
-            //   { method.ReturnType: { } t1 } candidate,
-            //     // { arguments: [{ Type: {} t0 }, ..] } candidate,
-            //     // { arguments: [{ Type: {} t1 }, ..] },
-            //     ..]
-            //     when (t0 == typeof(CqlInterval<CqlDateTime>) && t1 == typeof(CqlInterval<CqlDate>))
-            //      || (t0 == typeof(CqlDateTime) && t1 == typeof(CqlDate)) => candidate,
-            // [{ method.ReturnType: { } t1 } candidate,
-            //  { method.ReturnType: { } t0 } ,
-            //         // { arguments: [{ Type: {} t0 }, ..] } candidate,
-            //         // { arguments: [{ Type: {} t1 }, ..] },
-            //         ..]
-            //     when (t0 == typeof(CqlInterval<CqlDateTime>) && t1 == typeof(CqlInterval<CqlDate>))
-            //          || (t0 == typeof(CqlDateTime) && t1 == typeof(CqlDate)) => candidate,
             _ => PickCandidate(candidates)
         };
 
@@ -133,34 +119,33 @@ partial class CqlOperatorsBinder
                     {
                         yield return (method, [], []);
                     }
+                    break;
                 }
-                else
-                {
-                    foreach (var (method, methodParameters) in methodsWithParameters)
-                    {
-                        if (method is not { IsGenericMethodDefinition: true })
-                        {
-                            // Non-generic method
-                            if (TryBindArguments(methodParameters, out var methodArgs, out var conversions))
-                                yield return (method, methodArgs, conversions);
-                        }
-                        else
-                        {
-                            // Generic method, figure out the generic type by the first two arguments
-                            for (int argIndexForGenericMethod = 0;
-                                 argIndexForGenericMethod < Math.Min(args.Length, 2);
-                                 argIndexForGenericMethod
-                                     ++) // Try to get generic type from argument up to the second one
-                            {
-                                if (!args[argIndexForGenericMethod].Type.IsGenericType)
-                                    continue; // Not a generic argument, try again
 
-                                var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments().Single();
-                                var genericMethod = method.MakeGenericMethod(genericTypeArg);
-                                if (TryBindArguments(genericMethod.GetParameters(), out var genericMethodArgs,
-                                                     out var conversions))
-                                    yield return (genericMethod, genericMethodArgs, conversions);
-                            }
+                foreach (var (method, methodParameters) in methodsWithParameters)
+                {
+                    if (method is not { IsGenericMethodDefinition: true })
+                    {
+                        // Non-generic method
+                        if (TryBindArguments(methodParameters, out var methodArgs, out var conversions))
+                            yield return (method, methodArgs, conversions);
+                    }
+                    else
+                    {
+                        // Generic method, figure out the generic type by the first two arguments
+                        for (int argIndexForGenericMethod = 0;
+                             argIndexForGenericMethod < Math.Min(args.Length, 2);
+                             argIndexForGenericMethod
+                                 ++) // Try to get generic type from argument up to the second one
+                        {
+                            if (!args[argIndexForGenericMethod].Type.IsGenericType)
+                                continue; // Not a generic argument, try again
+
+                            var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments().Single();
+                            var genericMethod = method.MakeGenericMethod(genericTypeArg);
+                            if (TryBindArguments(genericMethod.GetParameters(), out var genericMethodArgs,
+                                                 out var conversions))
+                                yield return (genericMethod, genericMethodArgs, conversions);
                         }
                     }
                 }

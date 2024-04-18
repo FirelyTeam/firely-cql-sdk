@@ -318,7 +318,9 @@ namespace Hl7.Cql.Compiler
                             //@formatter:on
                         };
 
-                        //expression = ChangeType(expression!, element.resultTypeSpecifier);
+                        if (resultTypeHint is {} rth && rth != expression!.Type)
+                            expression = ChangeType(expression, rth);
+
                         expression = Mutate(element, expression);
                         return expression!;
                     }

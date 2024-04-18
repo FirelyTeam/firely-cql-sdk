@@ -1985,10 +1985,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var ar_ = context.Operators.Convert<CqlDateTime>(Medications?.AuthoredOnElement);
 				var as_ = this.Measurement_Period();
 				var at_ = context.Operators.ElementInInterval<CqlDateTime>(ar_, as_, "day");
-				var au_ = context.Operators.Equivalent(Medications?.StatusElement?.Value, "active");
-				var av_ = context.Operators.And(at_, au_);
+				var au_ = context.Operators.Convert<string>(Medications?.StatusElement?.Value);
+				var av_ = context.Operators.Equivalent(au_, "active");
+				var aw_ = context.Operators.And(at_, av_);
 
-				return av_;
+				return aw_;
 			};
 			var ao_ = context.Operators.WhereOrNull<MedicationRequest>(am_, an_);
 			ServiceRequest ap_(MedicationRequest Medications) => 
@@ -2348,9 +2349,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var r_ = context.Operators.ListUnion<MedicationRequest>(o_, q_);
 		bool? s_(MedicationRequest MedicationRequestNotOrdered)
 		{
-			var am_ = context.Operators.EnumEqualsString(MedicationRequestNotOrdered?.StatusElement?.Value, "completed");
+			var am_ = context.Operators.Convert<string>(MedicationRequestNotOrdered?.StatusElement?.Value);
+			var an_ = context.Operators.Equal(am_, "completed");
 
-			return am_;
+			return an_;
 		};
 		var t_ = context.Operators.WhereOrNull<MedicationRequest>(r_, s_);
 		var u_ = context.Operators.ListUnion<object>((m_ as IEnumerable<object>), (t_ as IEnumerable<object>));

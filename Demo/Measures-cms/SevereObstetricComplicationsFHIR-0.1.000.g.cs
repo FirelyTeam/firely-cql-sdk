@@ -860,15 +860,16 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var h_ = context.Operators.RetrieveByValueSet<Procedure>(g_, null);
 			bool? i_(Procedure EncounterSMMProcedures)
 			{
-				var ab_ = context.Operators.EnumEqualsString(EncounterSMMProcedures?.StatusElement?.Value, "completed");
-				var ac_ = FHIRHelpers_4_3_000.ToValue(EncounterSMMProcedures?.Performed);
-				var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
-				var ae_ = context.Operators.Start(ad_);
-				var af_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				var ag_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, af_, "day");
-				var ah_ = context.Operators.And(ab_, ag_);
+				var ab_ = context.Operators.Convert<string>(EncounterSMMProcedures?.StatusElement?.Value);
+				var ac_ = context.Operators.Equal(ab_, "completed");
+				var ad_ = FHIRHelpers_4_3_000.ToValue(EncounterSMMProcedures?.Performed);
+				var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
+				var af_ = context.Operators.Start(ae_);
+				var ag_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
+				var ah_ = context.Operators.ElementInInterval<CqlDateTime>(af_, ag_, "day");
+				var ai_ = context.Operators.And(ac_, ah_);
 
-				return ah_;
+				return ai_;
 			};
 			var j_ = context.Operators.WhereOrNull<Procedure>(h_, i_);
 			var k_ = context.Operators.ExistsInList<Procedure>(j_);
@@ -914,15 +915,16 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, null);
 			bool? f_(Procedure BloodTransfusion)
 			{
-				var j_ = context.Operators.EnumEqualsString(BloodTransfusion?.StatusElement?.Value, "completed");
-				var k_ = FHIRHelpers_4_3_000.ToValue(BloodTransfusion?.Performed);
-				var l_ = QICoreCommon_2_0_000.toInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, "day");
-				var p_ = context.Operators.And(j_, o_);
+				var j_ = context.Operators.Convert<string>(BloodTransfusion?.StatusElement?.Value);
+				var k_ = context.Operators.Equal(j_, "completed");
+				var l_ = FHIRHelpers_4_3_000.ToValue(BloodTransfusion?.Performed);
+				var m_ = QICoreCommon_2_0_000.toInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
+				var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, "day");
+				var q_ = context.Operators.And(k_, p_);
 
-				return p_;
+				return q_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure BloodTransfusion) => 
@@ -996,15 +998,16 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure COVIDRespiratoryProcedure)
 			{
-				var y_ = context.Operators.EnumEqualsString(COVIDRespiratoryProcedure?.StatusElement?.Value, "completed");
-				var z_ = FHIRHelpers_4_3_000.ToValue(COVIDRespiratoryProcedure?.Performed);
-				var aa_ = QICoreCommon_2_0_000.toInterval(z_);
-				var ab_ = context.Operators.Start(aa_);
-				var ac_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				var ad_ = context.Operators.ElementInInterval<CqlDateTime>(ab_, ac_, "day");
-				var ae_ = context.Operators.And(y_, ad_);
+				var y_ = context.Operators.Convert<string>(COVIDRespiratoryProcedure?.StatusElement?.Value);
+				var z_ = context.Operators.Equal(y_, "completed");
+				var aa_ = FHIRHelpers_4_3_000.ToValue(COVIDRespiratoryProcedure?.Performed);
+				var ab_ = QICoreCommon_2_0_000.toInterval(aa_);
+				var ac_ = context.Operators.Start(ab_);
+				var ad_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
+				var ae_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, ad_, "day");
+				var af_ = context.Operators.And(z_, ae_);
 
-				return ae_;
+				return af_;
 			};
 			var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
 			var p_ = context.Operators.ExistsInList<Procedure>(o_);

@@ -427,14 +427,15 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			var f_ = context.Operators.RetrieveByCodes<Procedure>(e_, null);
 			bool? g_(Procedure SuicideRiskAssessment)
 			{
-				var k_ = context.Operators.EnumEqualsString(SuicideRiskAssessment?.StatusElement?.Value, "completed");
-				var l_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
-				var m_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
-				var n_ = QICoreCommon_2_0_000.ToInterval(m_);
-				var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
-				var p_ = context.Operators.And(k_, o_);
+				var k_ = context.Operators.Convert<string>(SuicideRiskAssessment?.StatusElement?.Value);
+				var l_ = context.Operators.Equal(k_, "completed");
+				var m_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
+				var n_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
+				var o_ = QICoreCommon_2_0_000.ToInterval(n_);
+				var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, null);
+				var q_ = context.Operators.And(l_, p_);
 
-				return p_;
+				return q_;
 			};
 			var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
 			Encounter i_(Procedure SuicideRiskAssessment) => 

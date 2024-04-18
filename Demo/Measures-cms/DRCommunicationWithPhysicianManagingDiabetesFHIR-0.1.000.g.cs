@@ -712,11 +712,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((LevelOfSeverityNotCommunicated is DomainResource)
 						? ((LevelOfSeverityNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
+				object s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<DataType>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>(u_);
+				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
+				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
 
@@ -771,11 +771,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((MacularEdemaAbsentNotCommunicated is DomainResource)
 						? ((MacularEdemaAbsentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
+				object s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<DataType>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>(u_);
+				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
+				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
 
@@ -830,11 +830,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((MacularEdemaPresentNotCommunicated is DomainResource)
 						? ((MacularEdemaPresentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
+				object s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<DataType>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>(u_);
+				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
+				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
 

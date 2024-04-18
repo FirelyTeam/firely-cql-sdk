@@ -773,16 +773,18 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var h_ = context.Operators.ListUnion<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest OralAnticoagulant)
 			{
-				var m_ = context.Operators.EnumEqualsString(OralAnticoagulant?.StatusElement?.Value, "active");
-				var n_ = context.Operators.EnumEqualsString(OralAnticoagulant?.IntentElement?.Value, "order");
-				var o_ = context.Operators.And(m_, n_);
-				var p_ = context.Operators.Convert<CqlDateTime>(OralAnticoagulant?.AuthoredOnElement);
-				var q_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
-				var r_ = context.Operators.Start(q_);
-				var s_ = context.Operators.SameOrBefore(p_, r_, null);
-				var t_ = context.Operators.And(o_, s_);
+				var m_ = context.Operators.Convert<string>(OralAnticoagulant?.StatusElement?.Value);
+				var n_ = context.Operators.Equal(m_, "active");
+				var o_ = context.Operators.Convert<string>(OralAnticoagulant?.IntentElement?.Value);
+				var p_ = context.Operators.Equal(o_, "order");
+				var q_ = context.Operators.And(n_, p_);
+				var r_ = context.Operators.Convert<CqlDateTime>(OralAnticoagulant?.AuthoredOnElement);
+				var s_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
+				var t_ = context.Operators.Start(s_);
+				var u_ = context.Operators.SameOrBefore(r_, t_, null);
+				var v_ = context.Operators.And(q_, u_);
 
-				return t_;
+				return v_;
 			};
 			var j_ = context.Operators.WhereOrNull<MedicationRequest>(h_, i_);
 			Encounter k_(MedicationRequest OralAnticoagulant) => 
@@ -871,10 +873,11 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
-				var y_ = context.Operators.EnumEqualsString(MajorSurgery?.StatusElement?.Value, "completed");
-				var z_ = context.Operators.And(x_, y_);
+				var y_ = context.Operators.Convert<string>(MajorSurgery?.StatusElement?.Value);
+				var z_ = context.Operators.Equal(y_, "completed");
+				var aa_ = context.Operators.And(x_, z_);
 
-				return z_;
+				return aa_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure MajorSurgery) => 
@@ -921,10 +924,11 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var ae_ = context.Operators.Not((bool?)(ad_ is null));
 				var af_ = context.Operators.And(ab_, ae_);
 				var ag_ = context.Operators.Or(q_, af_);
-				var ah_ = context.Operators.EnumEqualsString(AirwayProcedure?.StatusElement?.Value, "completed");
-				var ai_ = context.Operators.And(ag_, ah_);
+				var ah_ = context.Operators.Convert<string>(AirwayProcedure?.StatusElement?.Value);
+				var ai_ = context.Operators.Equal(ah_, "completed");
+				var aj_ = context.Operators.And(ag_, ai_);
 
-				return ai_;
+				return aj_;
 			};
 			var j_ = context.Operators.WhereOrNull<Procedure>(h_, i_);
 			Encounter k_(Procedure AirwayProcedure) => 
@@ -1010,10 +1014,11 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
-				var y_ = context.Operators.EnumEqualsString(CranialorSpinalSurgery?.StatusElement?.Value, "completed");
-				var z_ = context.Operators.And(x_, y_);
+				var y_ = context.Operators.Convert<string>(CranialorSpinalSurgery?.StatusElement?.Value);
+				var z_ = context.Operators.Equal(y_, "completed");
+				var aa_ = context.Operators.And(x_, z_);
 
-				return z_;
+				return aa_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure CranialorSpinalSurgery) => 
@@ -1169,10 +1174,11 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var r_ = context.Operators.ElementInInterval<CqlDateTime>(l_, q_, null);
 				var t_ = context.Operators.Not((bool?)(m_ is null));
 				var u_ = context.Operators.And(r_, t_);
-				var v_ = context.Operators.EnumEqualsString(PCI?.StatusElement?.Value, "completed");
-				var w_ = context.Operators.And(u_, v_);
+				var v_ = context.Operators.Convert<string>(PCI?.StatusElement?.Value);
+				var w_ = context.Operators.Equal(v_, "completed");
+				var x_ = context.Operators.And(u_, w_);
 
-				return w_;
+				return x_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure PCI) => 
