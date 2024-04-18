@@ -318,7 +318,7 @@ namespace Hl7.Cql.Compiler
                             //@formatter:on
                         };
 
-                        expression = ChangeType(expression!, element.resultTypeSpecifier);
+                        //expression = ChangeType(expression!, element.resultTypeSpecifier);
                         expression = Mutate(element, expression);
                         return expression!;
                     }

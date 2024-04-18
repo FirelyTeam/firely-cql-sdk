@@ -903,7 +903,7 @@ public class AHAOverall_2_6_000
 
 						return cq_;
 					};
-					var bn_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>((bl_ as IEnumerable<object>), bm_);
+					var bn_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>(bl_, bm_);
 					var bo_ = context.Operators.Collapse(bn_, null);
 					object bp_(CqlInterval<CqlDateTime> @this)
 					{
