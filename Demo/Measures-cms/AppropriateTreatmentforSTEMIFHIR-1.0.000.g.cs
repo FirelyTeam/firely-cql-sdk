@@ -505,7 +505,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		bool? c_(Encounter EDEncounter)
 		{
 			var e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(EDEncounter?.StatusElement?.Value);
-			var f_ = context.Operators.Equal(e_, (string)"finished");
+			var f_ = context.Operators.Equal(e_, "finished");
 			var g_ = FHIRHelpers_4_3_000.ToCode(EDEncounter?.Class);
 			var h_ = this.EMER();
 			var i_ = context.Operators.Equivalent(g_, h_);
@@ -563,7 +563,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var m_ = context.Operators.ConvertCodeToConcept(l_);
 				var n_ = context.Operators.Equivalent(k_, m_);
 				var o_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(EDEncounter?.StatusElement?.Value);
-				var p_ = context.Operators.Equal(o_, (string)"finished");
+				var p_ = context.Operators.Equal(o_, "finished");
 				var q_ = context.Operators.And(n_, p_);
 				var r_ = FHIRHelpers_4_3_000.ToCode(EDEncounter?.Class);
 				var s_ = this.EMER();
@@ -695,7 +695,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var l_ = context.Operators.End(k_);
 				var m_ = context.Operators.Before(j_, l_, null);
 				var n_ = context.Operators.Convert<Code<AdverseEvent.AdverseEventActuality>>(ThrombolyticAdverseEvent?.ActualityElement?.Value);
-				var o_ = context.Operators.Equal(n_, (string)"actual");
+				var o_ = context.Operators.Equal(n_, "actual");
 				var p_ = context.Operators.And(m_, o_);
 
 				return p_;
@@ -774,9 +774,9 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			bool? i_(MedicationRequest OralAnticoagulant)
 			{
 				var m_ = context.Operators.Convert<string>(OralAnticoagulant?.StatusElement?.Value);
-				var n_ = context.Operators.Equal(m_, (string)"active");
+				var n_ = context.Operators.Equal(m_, "active");
 				var o_ = context.Operators.Convert<string>(OralAnticoagulant?.IntentElement?.Value);
-				var p_ = context.Operators.Equal(o_, (string)"order");
+				var p_ = context.Operators.Equal(o_, "order");
 				var q_ = context.Operators.And(n_, p_);
 				var r_ = context.Operators.Convert<CqlDateTime>(OralAnticoagulant?.AuthoredOnElement);
 				var s_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
@@ -874,7 +874,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
 				var y_ = context.Operators.Convert<string>(MajorSurgery?.StatusElement?.Value);
-				var z_ = context.Operators.Equal(y_, (string)"completed");
+				var z_ = context.Operators.Equal(y_, "completed");
 				var aa_ = context.Operators.And(x_, z_);
 
 				return aa_;
@@ -925,7 +925,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var af_ = context.Operators.And(ab_, ae_);
 				var ag_ = context.Operators.Or(q_, af_);
 				var ah_ = context.Operators.Convert<string>(AirwayProcedure?.StatusElement?.Value);
-				var ai_ = context.Operators.Equal(ah_, (string)"completed");
+				var ai_ = context.Operators.Equal(ah_, "completed");
 				var aj_ = context.Operators.And(ag_, ai_);
 
 				return aj_;
@@ -1015,7 +1015,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
 				var y_ = context.Operators.Convert<string>(CranialorSpinalSurgery?.StatusElement?.Value);
-				var z_ = context.Operators.Equal(y_, (string)"completed");
+				var z_ = context.Operators.Equal(y_, "completed");
 				var aa_ = context.Operators.And(x_, z_);
 
 				return aa_;
@@ -1124,7 +1124,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			bool? i_(MedicationAdministration Fibrinolytic)
 			{
 				var m_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(Fibrinolytic?.StatusElement?.Value);
-				var n_ = context.Operators.Equal(m_, (string)"completed");
+				var n_ = context.Operators.Equal(m_, "completed");
 				var o_ = FHIRHelpers_4_3_000.ToValue(Fibrinolytic?.Effective);
 				var p_ = QICoreCommon_2_0_000.toInterval(o_);
 				var q_ = context.Operators.Start(p_);
@@ -1175,7 +1175,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var t_ = context.Operators.Not((bool?)(m_ is null));
 				var u_ = context.Operators.And(r_, t_);
 				var v_ = context.Operators.Convert<string>(PCI?.StatusElement?.Value);
-				var w_ = context.Operators.Equal(v_, (string)"completed");
+				var w_ = context.Operators.Equal(v_, "completed");
 				var x_ = context.Operators.And(u_, w_);
 
 				return x_;

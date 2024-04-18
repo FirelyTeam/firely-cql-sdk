@@ -20,7 +20,7 @@ namespace Hl7.Cql.Compiler
             }
 
             var call = BindCqlOperator(CqlOperator.Message, null, source, code, severity, message);
-            if (condition.Type.IsNullable(out _))
+            if (condition.Type.IsNullableValueType(out _))
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));
             }

@@ -120,7 +120,7 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return m_;
 		};
@@ -134,7 +134,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool? n_(Extension @this)
 			{
-				var ai_ = context.Operators.Equal(@this?.Url, (string)"ombCategory");
+				var ai_ = context.Operators.Equal(@this?.Url, "ombCategory");
 
 				return ai_;
 			};
@@ -153,7 +153,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			bool? v_(Extension @this)
 			{
-				var aj_ = context.Operators.Equal(@this?.Url, (string)"detailed");
+				var aj_ = context.Operators.Equal(@this?.Url, "detailed");
 
 				return aj_;
 			};
@@ -172,7 +172,7 @@ public class SupplementalDataElements_3_4_000
 			var ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
 			bool? ac_(Extension @this)
 			{
-				var am_ = context.Operators.Equal(@this?.Url, (string)"text");
+				var am_ = context.Operators.Equal(@this?.Url, "text");
 
 				return am_;
 			};
@@ -250,7 +250,7 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return m_;
 		};
@@ -264,7 +264,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool? n_(Extension @this)
 			{
-				var ag_ = context.Operators.Equal(@this?.Url, (string)"ombCategory");
+				var ag_ = context.Operators.Equal(@this?.Url, "ombCategory");
 
 				return ag_;
 			};
@@ -284,7 +284,7 @@ public class SupplementalDataElements_3_4_000
 			var s_ = context.Operators.SelectOrNull<DataType, CqlCode>(q_, r_);
 			bool? t_(Extension @this)
 			{
-				var aj_ = context.Operators.Equal(@this?.Url, (string)"detailed");
+				var aj_ = context.Operators.Equal(@this?.Url, "detailed");
 
 				return aj_;
 			};
@@ -303,7 +303,7 @@ public class SupplementalDataElements_3_4_000
 			var z_ = context.Operators.ValueSetUnion(s_, y_);
 			bool? aa_(Extension @this)
 			{
-				var am_ = context.Operators.Equal(@this?.Url, (string)"text");
+				var am_ = context.Operators.Equal(@this?.Url, "text");
 
 				return am_;
 			};
@@ -340,7 +340,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				var d_ = this.Patient();
 				var e_ = context.Operators.Convert<string>(d_?.GenderElement?.Value);
-				var f_ = context.Operators.Equal(e_, (string)"male");
+				var f_ = context.Operators.Equal(e_, "male");
 
 				return (f_ ?? false);
 			};
@@ -348,7 +348,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				var g_ = this.Patient();
 				var h_ = context.Operators.Convert<string>(g_?.GenderElement?.Value);
-				var i_ = context.Operators.Equal(h_, (string)"female");
+				var i_ = context.Operators.Equal(h_, "female");
 
 				return (i_ ?? false);
 			};
@@ -356,13 +356,13 @@ public class SupplementalDataElements_3_4_000
 			{
 				string j_ = null;
 
-				return new CqlCode((string)"M", (string)"http://hl7.org/fhir/v3/AdministrativeGender", j_, (string)"Male");
+				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", j_, "Male");
 			}
 			else if (c_())
 			{
 				string k_ = null;
 
-				return new CqlCode((string)"F", (string)"http://hl7.org/fhir/v3/AdministrativeGender", k_, (string)"Female");
+				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", k_, "Female");
 			}
 			else
 			{

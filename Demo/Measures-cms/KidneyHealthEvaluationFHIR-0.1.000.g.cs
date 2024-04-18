@@ -398,7 +398,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			var y_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
 			var z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, y_, null);
 			var aa_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var ab_ = context.Operators.Equal(aa_, (string)"finished");
+			var ab_ = context.Operators.Equal(aa_, "finished");
 			var ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
@@ -508,9 +508,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			var t_ = context.Operators.Convert<string>(s_);
 			var u_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var v_ = context.Operators.InList<string>(t_, (u_ as IEnumerable<string>));
 			var w_ = context.Operators.And(r_, v_);
@@ -534,9 +534,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			var af_ = context.Operators.Convert<string>(ae_);
 			var ag_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var ah_ = context.Operators.InList<string>(af_, (ag_ as IEnumerable<string>));
 			var ai_ = context.Operators.And(ad_, ah_);

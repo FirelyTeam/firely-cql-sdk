@@ -377,7 +377,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 				var o_ = context.Operators.Not((bool?)(n_ is null));
 				var p_ = context.Operators.And(m_, o_);
 				var q_ = context.Operators.Convert<Code<ObservationStatus>>(PainAssessed?.StatusElement?.Value);
-				var r_ = context.Operators.Equal(q_, (string)"final");
+				var r_ = context.Operators.Equal(q_, "final");
 				var s_ = context.Operators.And(p_, r_);
 
 				return s_;
@@ -463,7 +463,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 				var l_ = context.Operators.Not((bool?)(k_ is null));
 				var m_ = context.Operators.And(j_(), l_);
 				var n_ = context.Operators.Convert<Code<ObservationStatus>>(PainAssessed?.StatusElement?.Value);
-				var o_ = context.Operators.Equal(n_, (string)"final");
+				var o_ = context.Operators.Equal(n_, "final");
 				var p_ = context.Operators.And(m_, o_);
 
 				return p_;

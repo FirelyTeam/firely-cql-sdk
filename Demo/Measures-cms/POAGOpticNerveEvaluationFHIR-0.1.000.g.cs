@@ -297,7 +297,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var r_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 			var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, r_, null);
 			var t_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(QualifyingEncounter?.StatusElement?.Value);
-			var u_ = context.Operators.Equal(t_, (string)"finished");
+			var u_ = context.Operators.Equal(t_, "finished");
 			var v_ = context.Operators.And(s_, u_);
 			var w_ = FHIRHelpers_4_3_000.ToCode(QualifyingEncounter?.Class);
 			var x_ = this.@virtual();
@@ -423,7 +423,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return aa_;
 			};
@@ -479,7 +479,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return aa_;
 			};
@@ -553,9 +553,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var s_ = context.Operators.Convert<string>(r_);
 			var t_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);
@@ -603,9 +603,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			var s_ = context.Operators.Convert<string>(r_);
 			var t_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);

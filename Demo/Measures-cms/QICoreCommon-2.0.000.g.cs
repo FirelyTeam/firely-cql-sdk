@@ -1302,7 +1302,7 @@ public class QICoreCommon_2_0_000
 		bool? a_(Extension E)
 		{
 			var f_ = context.Operators.LateBoundProperty<string>(E?.Url, "value");
-			var g_ = context.Operators.Equal(f_, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
+			var g_ = context.Operators.Equal(f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
 
 			return g_;
 		};
@@ -1411,7 +1411,7 @@ public class QICoreCommon_2_0_000
 			}
 			else if (choice is Timing)
 			{
-				var ck_ = context.Operators.Message<object>(null, (string)"NOT_IMPLEMENTED", (string)"Error", ((string)"Calculation of an interval from a Timing value is not supported"));
+				var ck_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
 
 				return (ck_ as CqlInterval<CqlDateTime>);
 			}
@@ -1515,7 +1515,7 @@ public class QICoreCommon_2_0_000
 			}
 			else if (choice is Timing)
 			{
-				var ck_ = context.Operators.Message<object>(null, (string)"NOT_IMPLEMENTED", (string)"Error", ((string)"Calculation of an interval from a Timing value is not supported"));
+				var ck_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
 
 				return (ck_ as CqlInterval<CqlDateTime>);
 			}
@@ -1976,7 +1976,7 @@ public class QICoreCommon_2_0_000
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getId()` instead")]
 	public string GetId(string uri)
 	{
-		var a_ = context.Operators.Split(uri, (string)"/");
+		var a_ = context.Operators.Split(uri, "/");
 		var b_ = context.Operators.LastOfList<string>(a_);
 
 		return b_;
@@ -1987,7 +1987,7 @@ public class QICoreCommon_2_0_000
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in a single-server environment to trace references. However, this function does not attempt to resolve or distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
 	public string getId(string uri)
 	{
-		var a_ = context.Operators.Split(uri, (string)"/");
+		var a_ = context.Operators.Split(uri, "/");
 		var b_ = context.Operators.LastOfList<string>(a_);
 
 		return b_;

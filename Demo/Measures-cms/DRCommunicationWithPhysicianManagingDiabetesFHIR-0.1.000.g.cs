@@ -390,7 +390,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			var r_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 			var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, r_, null);
 			var t_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(QualifyingEncounter?.StatusElement?.Value);
-			var u_ = context.Operators.Equal(t_, (string)"finished");
+			var u_ = context.Operators.Equal(t_, "finished");
 			var v_ = context.Operators.And(s_, u_);
 			var w_ = FHIRHelpers_4_3_000.ToCode(QualifyingEncounter?.Class);
 			var x_ = this.@virtual();
@@ -508,10 +508,10 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			var s_ = context.Operators.Convert<string>(r_);
 			var t_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
-				(string)"preliminary",
+				"final",
+				"amended",
+				"corrected",
+				"preliminary",
 			};
 			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);
@@ -572,7 +572,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		bool? f_(Communication LevelOfSeverityCommunicated)
 		{
 			var u_ = context.Operators.Convert<Code<EventStatus>>(LevelOfSeverityCommunicated?.StatusElement?.Value);
-			var v_ = context.Operators.Equal(u_, (string)"completed");
+			var v_ = context.Operators.Equal(u_, "completed");
 
 			return v_;
 		};
@@ -616,7 +616,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		bool? f_(Communication MacularEdemaAbsentCommunicated)
 		{
 			var u_ = context.Operators.Convert<Code<EventStatus>>(MacularEdemaAbsentCommunicated?.StatusElement?.Value);
-			var v_ = context.Operators.Equal(u_, (string)"completed");
+			var v_ = context.Operators.Equal(u_, "completed");
 
 			return v_;
 		};
@@ -660,7 +660,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		bool? f_(Communication MacularEdemaPresentCommunicated)
 		{
 			var u_ = context.Operators.Convert<Code<EventStatus>>(MacularEdemaPresentCommunicated?.StatusElement?.Value);
-			var v_ = context.Operators.Equal(u_, (string)"completed");
+			var v_ = context.Operators.Equal(u_, "completed");
 
 			return v_;
 		};
@@ -705,7 +705,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			{
 				bool? q_(Extension @this)
 				{
-					var y_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var y_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return y_;
 				};
@@ -764,7 +764,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			{
 				bool? q_(Extension @this)
 				{
-					var y_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var y_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return y_;
 				};
@@ -823,7 +823,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			{
 				bool? q_(Extension @this)
 				{
-					var y_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var y_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return y_;
 				};

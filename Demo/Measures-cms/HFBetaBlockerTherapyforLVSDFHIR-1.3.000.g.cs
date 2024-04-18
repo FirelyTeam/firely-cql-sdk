@@ -348,19 +348,19 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			var j_ = context.Operators.Convert<string>(BetaBlockerOrdered?.StatusElement?.Value);
 			var k_ = new string[]
 			{
-				(string)"active",
-				(string)"completed",
+				"active",
+				"completed",
 			};
 			var l_ = context.Operators.InList<string>(j_, (k_ as IEnumerable<string>));
 			var m_ = context.Operators.And(i_, l_);
 			var n_ = context.Operators.Convert<string>(BetaBlockerOrdered?.IntentElement?.Value);
 			var o_ = new string[]
 			{
-				(string)"order",
-				(string)"original-order",
-				(string)"reflex-order",
-				(string)"filler-order",
-				(string)"instance-order",
+				"order",
+				"original-order",
+				"reflex-order",
+				"filler-order",
+				"instance-order",
 			};
 			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
 			var q_ = context.Operators.And(m_, p_);
@@ -437,9 +437,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			var p_ = context.Operators.Convert<string>(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.StatusElement?.Value);
 			var q_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(o_, r_);
@@ -806,7 +806,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		bool? e_(Procedure ImplantedCardiacPacer)
 		{
 			var s_ = context.Operators.Convert<string>(ImplantedCardiacPacer?.StatusElement?.Value);
-			var t_ = context.Operators.Equal(s_, (string)"completed");
+			var t_ = context.Operators.Equal(s_, "completed");
 
 			return t_;
 		};

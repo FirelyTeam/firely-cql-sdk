@@ -416,7 +416,7 @@ namespace Hl7.Cql.Compiler
 
                 var elementType = TypeFor(listTypeSpecifier.elementType);
                 var elements =  TranslateAll(list.element);
-                if (!elementType.IsNullable(out _) && elements.Any(exp => exp.Type.IsNullable(out _)))
+                if (!elementType.IsNullableValueType(out _) && elements.Any(exp => exp.Type.IsNullableValueType(out _)))
                 {
                     for (int i = 0; i < elements.Length; i++)
                     {
@@ -740,7 +740,7 @@ namespace Hl7.Cql.Compiler
             // var result = _operatorBinding.ConvertToType(Expression.Constant(value), convertedType);
             // return result;
 
-            if (type.IsNullable(out _))
+            if (type.IsNullableValueType(out _))
             {
                 var changed = Expression.Constant(value!, convertedType);
                 var asNullable = changed.ConvertExpression(type);
@@ -754,7 +754,7 @@ namespace Hl7.Cql.Compiler
             if (type == null)
                 throw new NotImplementedException().WithContext(this);
 
-            if (type.IsNullable(out var underlyingType))
+            if (type.IsNullableValueType(out var underlyingType))
             {
                 if (string.IsNullOrWhiteSpace(lit.value))
                     return (null, type);
@@ -827,7 +827,7 @@ namespace Hl7.Cql.Compiler
                         if (caseThen.Type != elseThen.Type)
                             caseThen = caseThen.ConvertExpression(elseThen.Type);
 
-                        if (caseWhen.Type.IsNullable(out _))
+                        if (caseWhen.Type.IsNullableValueType(out _))
                         {
                             caseWhen = Expression.Coalesce(caseWhen, Expression.Constant(false));
                         }

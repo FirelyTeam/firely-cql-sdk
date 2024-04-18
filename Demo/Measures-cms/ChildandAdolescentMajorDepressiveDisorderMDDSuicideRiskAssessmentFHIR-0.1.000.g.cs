@@ -337,7 +337,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 		bool? x_(Encounter ValidEncounter)
 		{
 			var z_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var aa_ = context.Operators.Equal(z_, (string)"finished");
+			var aa_ = context.Operators.Equal(z_, "finished");
 			CqlConcept ab_(CodeableConcept @this)
 			{
 				var ap_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -428,7 +428,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			bool? g_(Procedure SuicideRiskAssessment)
 			{
 				var k_ = context.Operators.Convert<string>(SuicideRiskAssessment?.StatusElement?.Value);
-				var l_ = context.Operators.Equal(k_, (string)"completed");
+				var l_ = context.Operators.Equal(k_, "completed");
 				var m_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
 				var n_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
 				var o_ = QICoreCommon_2_0_000.ToInterval(n_);

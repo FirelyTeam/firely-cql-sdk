@@ -389,7 +389,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
 				var q_ = context.Operators.Convert<string>(SalvageTherapy?.StatusElement?.Value);
-				var r_ = context.Operators.Equal(q_, (string)"completed");
+				var r_ = context.Operators.Equal(q_, "completed");
 				var s_ = context.Operators.And(p_, r_);
 
 				return s_;
@@ -494,7 +494,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, "day");
 			var m_ = context.Operators.Convert<string>(ProstateCancerTreatment?.StatusElement?.Value);
-			var n_ = context.Operators.Equal(m_, (string)"completed");
+			var n_ = context.Operators.Equal(m_, "completed");
 			var o_ = context.Operators.And(l_, n_);
 
 			return o_;
@@ -555,9 +555,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				var aa_ = context.Operators.Convert<string>(z_);
 				var ab_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ac_ = context.Operators.InList<string>(aa_, (ab_ as IEnumerable<string>));
 				var ad_ = context.Operators.And(y_, ac_);
@@ -628,9 +628,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				var aa_ = context.Operators.Convert<string>(z_);
 				var ab_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ac_ = context.Operators.InList<string>(aa_, (ab_ as IEnumerable<string>));
 				var ad_ = context.Operators.And(y_, ac_);
@@ -749,9 +749,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);

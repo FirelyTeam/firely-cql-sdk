@@ -310,7 +310,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var o_ = CQMCommon_2_0_000.lengthInDays(n_);
 				var p_ = context.Operators.Less(o_, (int?)365);
 				var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
-				var r_ = context.Operators.Equal(q_, (string)"finished");
+				var r_ = context.Operators.Equal(q_, "finished");
 				var s_ = context.Operators.And(p_, r_);
 				var t_ = this.Patient();
 				var u_ = context.Operators.Convert<CqlDate>(t_?.BirthDateElement?.Value);
@@ -376,9 +376,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(temperature?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -417,9 +417,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bc_ = context.Operators.Convert<string>(temperature?.StatusElement?.Value);
 				var bd_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var be_ = context.Operators.InList<string>(bc_, (bd_ as IEnumerable<string>));
 				var bf_ = context.Operators.And(bb_, be_);
@@ -482,9 +482,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -523,9 +523,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bc_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var bd_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var be_ = context.Operators.InList<string>(bc_, (bd_ as IEnumerable<string>));
 				var bf_ = context.Operators.And(bb_, be_);
@@ -635,9 +635,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Convert<string>(aa_);
 				var ac_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ad_ = context.Operators.InList<string>(ab_, (ac_ as IEnumerable<string>));
 				var ae_ = context.Operators.And(z_, ad_);
@@ -771,9 +771,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var ch_ = context.Operators.Convert<string>(cg_);
 						var ci_ = new string[]
 						{
-							(string)"final",
-							(string)"amended",
-							(string)"corrected",
+							"final",
+							"amended",
+							"corrected",
 						};
 						var cj_ = context.Operators.InList<string>(ch_, (ci_ as IEnumerable<string>));
 						var ck_ = context.Operators.And(cf_, cj_);
@@ -909,9 +909,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var ek_ = context.Operators.Convert<string>(ej_);
 						var el_ = new string[]
 						{
-							(string)"final",
-							(string)"amended",
-							(string)"corrected",
+							"final",
+							"amended",
+							"corrected",
 						};
 						var em_ = context.Operators.InList<string>(ek_, (el_ as IEnumerable<string>));
 						var en_ = context.Operators.And(ei_, em_);
@@ -1047,9 +1047,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var gn_ = context.Operators.Convert<string>(gm_);
 						var go_ = new string[]
 						{
-							(string)"final",
-							(string)"amended",
-							(string)"corrected",
+							"final",
+							"amended",
+							"corrected",
 						};
 						var gp_ = context.Operators.InList<string>(gn_, (go_ as IEnumerable<string>));
 						var gq_ = context.Operators.And(gl_, gp_);
@@ -1185,9 +1185,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var ip_ = context.Operators.Convert<string>(io_);
 						var iq_ = new string[]
 						{
-							(string)"final",
-							(string)"amended",
-							(string)"corrected",
+							"final",
+							"amended",
+							"corrected",
 						};
 						var ir_ = context.Operators.InList<string>(ip_, (iq_ as IEnumerable<string>));
 						var is_ = context.Operators.And(in_, ir_);
@@ -1322,9 +1322,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var kr_ = context.Operators.Convert<string>(kq_);
 						var ks_ = new string[]
 						{
-							(string)"final",
-							(string)"amended",
-							(string)"corrected",
+							"final",
+							"amended",
+							"corrected",
 						};
 						var kt_ = context.Operators.InList<string>(kr_, (ks_ as IEnumerable<string>));
 						var ku_ = context.Operators.And(kp_, kt_);
@@ -1459,9 +1459,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var mt_ = context.Operators.Convert<string>(ms_);
 						var mu_ = new string[]
 						{
-							(string)"final",
-							(string)"amended",
-							(string)"corrected",
+							"final",
+							"amended",
+							"corrected",
 						};
 						var mv_ = context.Operators.InList<string>(mt_, (mu_ as IEnumerable<string>));
 						var mw_ = context.Operators.And(mr_, mv_);
@@ -1576,9 +1576,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(RespRate?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -1617,9 +1617,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bc_ = context.Operators.Convert<string>(RespRate?.StatusElement?.Value);
 				var bd_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var be_ = context.Operators.InList<string>(bc_, (bd_ as IEnumerable<string>));
 				var bf_ = context.Operators.And(bb_, be_);
@@ -1668,9 +1668,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var d_ = context.Operators.Convert<string>(BloodPressure?.StatusElement?.Value);
 			var e_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
 
@@ -1721,9 +1721,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(bicarbonatelab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -1760,9 +1760,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bb_ = context.Operators.Convert<string>(bicarbonatelab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
@@ -1823,9 +1823,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(CreatinineLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -1862,9 +1862,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bb_ = context.Operators.Convert<string>(CreatinineLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
@@ -1925,9 +1925,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(GlucoseLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -1964,9 +1964,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bb_ = context.Operators.Convert<string>(GlucoseLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
@@ -2027,9 +2027,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(HematocritLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -2066,9 +2066,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bb_ = context.Operators.Convert<string>(HematocritLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
@@ -2129,9 +2129,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(PotassiumLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -2168,9 +2168,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bb_ = context.Operators.Convert<string>(PotassiumLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
@@ -2231,9 +2231,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(SodiumLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -2270,9 +2270,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bb_ = context.Operators.Convert<string>(SodiumLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
@@ -2333,9 +2333,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ag_ = context.Operators.Convert<string>(WhiteBloodCellLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
@@ -2372,9 +2372,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var bb_ = context.Operators.Convert<string>(WhiteBloodCellLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
@@ -2428,9 +2428,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var y_ = context.Operators.Convert<string>(WeightExam?.StatusElement?.Value);
 				var z_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var aa_ = context.Operators.InList<string>(y_, (z_ as IEnumerable<string>));
 				var ab_ = context.Operators.And(x_, aa_);
@@ -2462,9 +2462,9 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var am_ = context.Operators.Convert<string>(WeightExam?.StatusElement?.Value);
 				var an_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
+					"final",
+					"amended",
+					"corrected",
 				};
 				var ao_ = context.Operators.InList<string>(am_, (an_ as IEnumerable<string>));
 				var ap_ = context.Operators.And(al_, ao_);

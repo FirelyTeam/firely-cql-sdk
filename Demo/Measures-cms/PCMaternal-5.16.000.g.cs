@@ -216,7 +216,7 @@ public class PCMaternal_5_16_000
 					var cf_ = context.Operators.Not((bool?)(ce_ is null));
 					var cg_ = context.Operators.And(cc_, cf_);
 					var ch_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var ci_ = context.Operators.Equal(ch_, (string)"finished");
+					var ci_ = context.Operators.Equal(ch_, "finished");
 					var cj_ = context.Operators.And(cg_, ci_);
 
 					return cj_;
@@ -253,7 +253,7 @@ public class PCMaternal_5_16_000
 					var cy_ = context.Operators.Not((bool?)(cx_ is null));
 					var cz_ = context.Operators.And(cv_, cy_);
 					var da_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var db_ = context.Operators.Equal(da_, (string)"finished");
+					var db_ = context.Operators.Equal(da_, "finished");
 					var dc_ = context.Operators.And(cz_, db_);
 
 					return dc_;
@@ -289,7 +289,7 @@ public class PCMaternal_5_16_000
 					var dr_ = context.Operators.Not((bool?)(dq_ is null));
 					var ds_ = context.Operators.And(do_, dr_);
 					var dt_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var du_ = context.Operators.Equal(dt_, (string)"finished");
+					var du_ = context.Operators.Equal(dt_, "finished");
 					var dv_ = context.Operators.And(ds_, du_);
 
 					return dv_;
@@ -310,7 +310,7 @@ public class PCMaternal_5_16_000
 				var bo_ = context.Operators.Not((bool?)((bl_ ?? bn_) is null));
 				var bp_ = context.Operators.And(bc_, bo_);
 				var bq_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastEDOBTriage?.StatusElement?.Value);
-				var br_ = context.Operators.Equal(bq_, (string)"finished");
+				var br_ = context.Operators.Equal(bq_, "finished");
 				var bs_ = context.Operators.And(bp_, br_);
 
 				return bs_;
@@ -344,7 +344,7 @@ public class PCMaternal_5_16_000
 				var em_ = context.Operators.Not((bool?)(el_ is null));
 				var en_ = context.Operators.And(ej_, em_);
 				var eo_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-				var ep_ = context.Operators.Equal(eo_, (string)"finished");
+				var ep_ = context.Operators.Equal(eo_, "finished");
 				var eq_ = context.Operators.And(en_, ep_);
 
 				return eq_;
@@ -384,7 +384,7 @@ public class PCMaternal_5_16_000
 			bool? f_(Procedure DeliveryProcedure)
 			{
 				var j_ = context.Operators.Convert<string>(DeliveryProcedure?.StatusElement?.Value);
-				var k_ = context.Operators.Equal(j_, (string)"completed");
+				var k_ = context.Operators.Equal(j_, "completed");
 				var l_ = FHIRHelpers_4_3_000.ToValue(DeliveryProcedure?.Performed);
 				var m_ = QICoreCommon_2_0_000.toInterval(l_);
 				var n_ = context.Operators.Start(m_);
@@ -424,9 +424,9 @@ public class PCMaternal_5_16_000
 			var m_ = context.Operators.Convert<string>(l_);
 			var n_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var o_ = context.Operators.InList<string>(m_, (n_ as IEnumerable<string>));
 			var p_ = context.Operators.And(k_, o_);
@@ -559,9 +559,9 @@ public class PCMaternal_5_16_000
 			var m_ = context.Operators.Convert<string>(l_);
 			var n_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var o_ = context.Operators.InList<string>(m_, (n_ as IEnumerable<string>));
 			var p_ = context.Operators.And(k_, o_);
@@ -786,9 +786,9 @@ public class PCMaternal_5_16_000
 			var x_ = context.Operators.Convert<string>(w_);
 			var y_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var z_ = context.Operators.InList<string>(x_, (y_ as IEnumerable<string>));
 			var aa_ = context.Operators.And(v_, z_);

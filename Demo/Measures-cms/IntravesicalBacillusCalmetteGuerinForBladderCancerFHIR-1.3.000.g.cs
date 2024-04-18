@@ -473,7 +473,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		bool? f_(Procedure BladderCancerStaging)
 		{
 			var aa_ = context.Operators.Convert<string>(BladderCancerStaging?.StatusElement?.Value);
-			var ab_ = context.Operators.Equal(aa_, (string)"completed");
+			var ab_ = context.Operators.Equal(aa_, "completed");
 
 			return ab_;
 		};
@@ -640,9 +640,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			var ad_ = context.Operators.Convert<string>(ac_);
 			var ae_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
 			var ag_ = context.Operators.And(ab_, af_);
@@ -674,7 +674,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			var l_ = context.Operators.Not(k_);
 			var m_ = context.Operators.And(h_, l_);
 			var n_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var o_ = context.Operators.Equal(n_, (string)"finished");
+			var o_ = context.Operators.Equal(n_, "finished");
 			var p_ = context.Operators.And(m_, o_);
 
 			return p_;
@@ -733,7 +733,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			{
 				bool? p_(Extension @this)
 				{
-					var at_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var at_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return at_;
 				};
@@ -760,7 +760,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var aj_ = context.Operators.And(ae_, ai_);
 				bool? ak_(Extension @this)
 				{
-					var au_ = context.Operators.Equal(@this?.Url, (string)"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var au_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return au_;
 				};
@@ -872,8 +872,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			var ar_ = context.Operators.Convert<string>(aq_);
 			var as_ = new string[]
 			{
-				(string)"in-progress",
-				(string)"completed",
+				"in-progress",
+				"completed",
 			};
 			var at_ = context.Operators.InList<string>(ar_, (as_ as IEnumerable<string>));
 
@@ -1081,7 +1081,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		bool? e_(Procedure Cystectomy)
 		{
 			var ae_ = context.Operators.Convert<string>(Cystectomy?.StatusElement?.Value);
-			var af_ = context.Operators.Equal(ae_, (string)"completed");
+			var af_ = context.Operators.Equal(ae_, "completed");
 
 			return af_;
 		};
@@ -1193,12 +1193,12 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			var aq_ = context.Operators.Convert<string>(ExclusionMed?.StatusElement?.Value);
 			var ar_ = new string[]
 			{
-				(string)"active",
-				(string)"completed",
+				"active",
+				"completed",
 			};
 			var as_ = context.Operators.InList<string>(aq_, (ar_ as IEnumerable<string>));
 			var at_ = context.Operators.Convert<string>(ExclusionMed?.IntentElement?.Value);
-			var au_ = context.Operators.Equal(at_, (string)"order");
+			var au_ = context.Operators.Equal(at_, "order");
 			var av_ = context.Operators.And(as_, au_);
 			var aw_ = context.Operators.IsTrue(ExclusionMed?.DoNotPerformElement?.Value);
 			var ax_ = context.Operators.Not(aw_);
@@ -1249,7 +1249,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		bool? o_(Procedure ExclusionProcedure)
 		{
 			var bx_ = context.Operators.Convert<string>(ExclusionProcedure?.StatusElement?.Value);
-			var by_ = context.Operators.Equal(bx_, (string)"completed");
+			var by_ = context.Operators.Equal(bx_, "completed");
 
 			return by_;
 		};

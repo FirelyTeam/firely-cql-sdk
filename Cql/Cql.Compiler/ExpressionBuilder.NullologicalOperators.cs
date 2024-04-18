@@ -31,7 +31,7 @@ namespace Hl7.Cql.Compiler
                 throw this.NewExpressionBuildingException("All operand types should match when using Coalesce");
 
             var type = operands[0].Type;
-            if (type.IsValueType && !type.IsNullable(out _))
+            if (type.IsValueType && !type.IsNullableValueType(out _))
                 throw new NotSupportedException("Coalesce on value types is not defined.");
 
             if (operands.Length == 1)
@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler
         protected Expression IsNull(Elm.IsNull isn)
         {
             var operand = Translate(isn.operand!);
-            if (operand.Type.IsValueType && operand.Type.IsNullable(out _) == false)
+            if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
                 return Expression.Constant(false, typeof(bool?));
 
             var compare = Expression.Equal(operand, Expression.Constant(null));

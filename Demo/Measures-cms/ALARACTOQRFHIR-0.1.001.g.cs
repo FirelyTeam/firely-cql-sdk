@@ -216,7 +216,7 @@ public class ALARACTOQRFHIR_0_1_001
 			var h_ = context.Operators.ConvertCodeToConcept(g_);
 			var i_ = context.Operators.Equivalent(f_, h_);
 			var j_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
-			var k_ = context.Operators.Equal((j_ as CqlQuantity)?.unit, (string)"[hnsf'U]");
+			var k_ = context.Operators.Equal((j_ as CqlQuantity)?.unit, "[hnsf'U]");
 			var l_ = context.Operators.And(i_, k_);
 
 			return l_;
@@ -244,7 +244,7 @@ public class ALARACTOQRFHIR_0_1_001
 			var h_ = context.Operators.ConvertCodeToConcept(g_);
 			var i_ = context.Operators.Equivalent(f_, h_);
 			var j_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
-			var k_ = context.Operators.Equal((j_ as CqlQuantity)?.unit, (string)"mGy.cm");
+			var k_ = context.Operators.Equal((j_ as CqlQuantity)?.unit, "mGy.cm");
 			var l_ = context.Operators.And(i_, k_);
 
 			return l_;
@@ -303,7 +303,7 @@ public class ALARACTOQRFHIR_0_1_001
 			string g_(CqlCode @this) => 
 				@this?.code;
 			var h_ = context.Operators.SelectOrNull<CqlCode, string>(f_, g_);
-			var i_ = context.Operators.ListContains<string>(h_, (string)"FULLBODY");
+			var i_ = context.Operators.ListContains<string>(h_, "FULLBODY");
 
 			return i_;
 		};
@@ -346,61 +346,61 @@ public class ALARACTOQRFHIR_0_1_001
 	{
 		var a_ = context.Operators.ConvertIntegerToDecimal((int?)64);
 		var b_ = context.Operators.ConvertIntegerToDecimal((int?)598);
-		var c_ = this.Qualifies(IP, ((string)"ABDOPEL LD"), a_, b_);
+		var c_ = this.Qualifies(IP, "ABDOPEL LD", a_, b_);
 		var d_ = context.Operators.ConvertIntegerToDecimal((int?)29);
 		var e_ = context.Operators.ConvertIntegerToDecimal((int?)644);
-		var f_ = this.Qualifies(IP, ((string)"ABDOPEL RT"), d_, e_);
+		var f_ = this.Qualifies(IP, "ABDOPEL RT", d_, e_);
 		var g_ = context.Operators.Or(c_, f_);
 		var i_ = context.Operators.ConvertIntegerToDecimal((int?)1260);
-		var j_ = this.Qualifies(IP, ((string)"ABDOPEL HD"), d_, i_);
+		var j_ = this.Qualifies(IP, "ABDOPEL HD", d_, i_);
 		var k_ = context.Operators.Or(g_, j_);
 		var l_ = context.Operators.ConvertIntegerToDecimal((int?)55);
 		var m_ = context.Operators.ConvertIntegerToDecimal((int?)93);
-		var n_ = this.Qualifies(IP, ((string)"CARDIAC LD"), l_, m_);
+		var n_ = this.Qualifies(IP, "CARDIAC LD", l_, m_);
 		var o_ = context.Operators.Or(k_, n_);
 		var p_ = context.Operators.ConvertIntegerToDecimal((int?)32);
 		var q_ = context.Operators.ConvertIntegerToDecimal((int?)576);
-		var r_ = this.Qualifies(IP, ((string)"CARDIAC RT"), p_, q_);
+		var r_ = this.Qualifies(IP, "CARDIAC RT", p_, q_);
 		var s_ = context.Operators.Or(o_, r_);
 		var u_ = context.Operators.ConvertIntegerToDecimal((int?)377);
-		var v_ = this.Qualifies(IP, ((string)"CHEST LD"), l_, u_);
+		var v_ = this.Qualifies(IP, "CHEST LD", l_, u_);
 		var w_ = context.Operators.Or(s_, v_);
 		var x_ = context.Operators.ConvertIntegerToDecimal((int?)49);
-		var z_ = this.Qualifies(IP, ((string)"CHEST RT"), x_, u_);
+		var z_ = this.Qualifies(IP, "CHEST RT", x_, u_);
 		var aa_ = context.Operators.Or(w_, z_);
 		var ac_ = context.Operators.ConvertIntegerToDecimal((int?)1282);
-		var ad_ = this.Qualifies(IP, ((string)"CHEST-CARDIAC HD"), x_, ac_);
+		var ad_ = this.Qualifies(IP, "CHEST-CARDIAC HD", x_, ac_);
 		var ae_ = context.Operators.Or(aa_, ad_);
 		var af_ = context.Operators.ConvertIntegerToDecimal((int?)115);
 		var ag_ = context.Operators.ConvertIntegerToDecimal((int?)582);
-		var ah_ = this.Qualifies(IP, ((string)"HEAD LD"), af_, ag_);
+		var ah_ = this.Qualifies(IP, "HEAD LD", af_, ag_);
 		var ai_ = context.Operators.Or(ae_, ah_);
 		var ak_ = context.Operators.ConvertIntegerToDecimal((int?)1025);
-		var al_ = this.Qualifies(IP, ((string)"HEAD RT"), af_, ak_);
+		var al_ = this.Qualifies(IP, "HEAD RT", af_, ak_);
 		var am_ = context.Operators.Or(ai_, al_);
 		var ao_ = context.Operators.ConvertIntegerToDecimal((int?)1832);
-		var ap_ = this.Qualifies(IP, ((string)"HEAD HD"), af_, ao_);
+		var ap_ = this.Qualifies(IP, "HEAD HD", af_, ao_);
 		var aq_ = context.Operators.Or(am_, ap_);
 		var ar_ = context.Operators.ConvertIntegerToDecimal((int?)73);
 		var as_ = context.Operators.ConvertIntegerToDecimal((int?)320);
-		var at_ = this.Qualifies(IP, (string)"EXTREMITIES", ar_, as_);
+		var at_ = this.Qualifies(IP, "EXTREMITIES", ar_, as_);
 		var au_ = context.Operators.Or(aq_, at_);
 		var av_ = context.Operators.ConvertIntegerToDecimal((int?)25);
-		var ax_ = this.Qualifies(IP, (string)"NECK-CSPINE", av_, i_);
+		var ax_ = this.Qualifies(IP, "NECK-CSPINE", av_, i_);
 		var ay_ = context.Operators.Or(au_, ax_);
-		var bb_ = this.Qualifies(IP, (string)"TSPINE-LSPINE", av_, i_);
+		var bb_ = this.Qualifies(IP, "TSPINE-LSPINE", av_, i_);
 		var bc_ = context.Operators.Or(ay_, bb_);
 		var be_ = context.Operators.ConvertIntegerToDecimal((int?)1637);
-		var bf_ = this.Qualifies(IP, (string)"CAP", d_, be_);
+		var bf_ = this.Qualifies(IP, "CAP", d_, be_);
 		var bg_ = context.Operators.Or(bc_, bf_);
 		var bi_ = context.Operators.ConvertIntegerToDecimal((int?)2520);
-		var bj_ = this.Qualifies(IP, (string)"TLSPINE", av_, bi_);
+		var bj_ = this.Qualifies(IP, "TLSPINE", av_, bi_);
 		var bk_ = context.Operators.Or(bg_, bj_);
 		var bm_ = context.Operators.ConvertIntegerToDecimal((int?)2285);
-		var bn_ = this.Qualifies(IP, ((string)"HEADNECK RT"), av_, bm_);
+		var bn_ = this.Qualifies(IP, "HEADNECK RT", av_, bm_);
 		var bo_ = context.Operators.Or(bk_, bn_);
 		var bq_ = context.Operators.ConvertIntegerToDecimal((int?)3092);
-		var br_ = this.Qualifies(IP, ((string)"HEADNECK HD"), av_, bq_);
+		var br_ = this.Qualifies(IP, "HEADNECK HD", av_, bq_);
 		var bs_ = context.Operators.Or(bo_, br_);
 
 		return bs_;

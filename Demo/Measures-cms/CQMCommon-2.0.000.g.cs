@@ -135,7 +135,7 @@ public class CQMCommon_2_0_000
 		bool? c_(Encounter EncounterInpatient)
 		{
 			var e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(EncounterInpatient?.StatusElement?.Value);
-			var f_ = context.Operators.Equal(e_, (string)"finished");
+			var f_ = context.Operators.Equal(e_, "finished");
 			var g_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
@@ -200,7 +200,7 @@ public class CQMCommon_2_0_000
 		bool? c_(Encounter EDVisit)
 		{
 			var h_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(EDVisit?.StatusElement?.Value);
-			var i_ = context.Operators.Equal(h_, (string)"finished");
+			var i_ = context.Operators.Equal(h_, "finished");
 			var j_ = FHIRHelpers_4_3_000.ToInterval(EDVisit?.Period);
 			var k_ = context.Operators.End(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(TheEncounter?.Period);
@@ -240,7 +240,7 @@ public class CQMCommon_2_0_000
 		bool? c_(Encounter EDVisit)
 		{
 			var h_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(EDVisit?.StatusElement?.Value);
-			var i_ = context.Operators.Equal(h_, (string)"finished");
+			var i_ = context.Operators.Equal(h_, "finished");
 			var j_ = FHIRHelpers_4_3_000.ToInterval(EDVisit?.Period);
 			var k_ = context.Operators.End(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(TheEncounter?.Period);
@@ -669,7 +669,7 @@ public class CQMCommon_2_0_000
 				bool? ao_(Encounter LastED)
 				{
 					var da_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-					var db_ = context.Operators.Equal(da_, (string)"finished");
+					var db_ = context.Operators.Equal(da_, "finished");
 					var dc_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 					var dd_ = context.Operators.End(dc_);
 					var de_ = this.Observation_Services();
@@ -677,7 +677,7 @@ public class CQMCommon_2_0_000
 					bool? dg_(Encounter LastObs)
 					{
 						var es_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var et_ = context.Operators.Equal(es_, (string)"finished");
+						var et_ = context.Operators.Equal(es_, "finished");
 						var eu_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var ev_ = context.Operators.End(eu_);
 						var ew_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -714,7 +714,7 @@ public class CQMCommon_2_0_000
 					bool? dt_(Encounter LastObs)
 					{
 						var fl_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var fm_ = context.Operators.Equal(fl_, (string)"finished");
+						var fm_ = context.Operators.Equal(fl_, "finished");
 						var fn_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var fo_ = context.Operators.End(fn_);
 						var fp_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -750,7 +750,7 @@ public class CQMCommon_2_0_000
 					bool? eg_(Encounter LastObs)
 					{
 						var ge_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var gf_ = context.Operators.Equal(ge_, (string)"finished");
+						var gf_ = context.Operators.Equal(ge_, "finished");
 						var gg_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var gh_ = context.Operators.End(gg_);
 						var gi_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -803,7 +803,7 @@ public class CQMCommon_2_0_000
 				bool? ax_(Encounter LastObs)
 				{
 					var gz_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var ha_ = context.Operators.Equal(gz_, (string)"finished");
+					var ha_ = context.Operators.Equal(gz_, "finished");
 					var hb_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var hc_ = context.Operators.End(hb_);
 					var hd_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -840,7 +840,7 @@ public class CQMCommon_2_0_000
 				bool? bk_(Encounter LastED)
 				{
 					var hs_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-					var ht_ = context.Operators.Equal(hs_, (string)"finished");
+					var ht_ = context.Operators.Equal(hs_, "finished");
 					var hu_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 					var hv_ = context.Operators.End(hu_);
 					var hw_ = this.Observation_Services();
@@ -848,7 +848,7 @@ public class CQMCommon_2_0_000
 					bool? hy_(Encounter LastObs)
 					{
 						var jk_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var jl_ = context.Operators.Equal(jk_, (string)"finished");
+						var jl_ = context.Operators.Equal(jk_, "finished");
 						var jm_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var jn_ = context.Operators.End(jm_);
 						var jo_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -885,7 +885,7 @@ public class CQMCommon_2_0_000
 					bool? il_(Encounter LastObs)
 					{
 						var kd_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var ke_ = context.Operators.Equal(kd_, (string)"finished");
+						var ke_ = context.Operators.Equal(kd_, "finished");
 						var kf_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var kg_ = context.Operators.End(kf_);
 						var kh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -921,7 +921,7 @@ public class CQMCommon_2_0_000
 					bool? iy_(Encounter LastObs)
 					{
 						var kw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var kx_ = context.Operators.Equal(kw_, (string)"finished");
+						var kx_ = context.Operators.Equal(kw_, "finished");
 						var ky_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var kz_ = context.Operators.End(ky_);
 						var la_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -973,7 +973,7 @@ public class CQMCommon_2_0_000
 				bool? bt_(Encounter LastObs)
 				{
 					var lr_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var ls_ = context.Operators.Equal(lr_, (string)"finished");
+					var ls_ = context.Operators.Equal(lr_, "finished");
 					var lt_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var lu_ = context.Operators.End(lt_);
 					var lv_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1009,7 +1009,7 @@ public class CQMCommon_2_0_000
 				bool? cg_(Encounter LastED)
 				{
 					var mk_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-					var ml_ = context.Operators.Equal(mk_, (string)"finished");
+					var ml_ = context.Operators.Equal(mk_, "finished");
 					var mm_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 					var mn_ = context.Operators.End(mm_);
 					var mo_ = this.Observation_Services();
@@ -1017,7 +1017,7 @@ public class CQMCommon_2_0_000
 					bool? mq_(Encounter LastObs)
 					{
 						var oc_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var od_ = context.Operators.Equal(oc_, (string)"finished");
+						var od_ = context.Operators.Equal(oc_, "finished");
 						var oe_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var of_ = context.Operators.End(oe_);
 						var og_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1054,7 +1054,7 @@ public class CQMCommon_2_0_000
 					bool? nd_(Encounter LastObs)
 					{
 						var ov_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var ow_ = context.Operators.Equal(ov_, (string)"finished");
+						var ow_ = context.Operators.Equal(ov_, "finished");
 						var ox_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var oy_ = context.Operators.End(ox_);
 						var oz_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1090,7 +1090,7 @@ public class CQMCommon_2_0_000
 					bool? nq_(Encounter LastObs)
 					{
 						var po_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var pp_ = context.Operators.Equal(po_, (string)"finished");
+						var pp_ = context.Operators.Equal(po_, "finished");
 						var pq_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var pr_ = context.Operators.End(pq_);
 						var ps_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1142,7 +1142,7 @@ public class CQMCommon_2_0_000
 				bool? cp_(Encounter LastObs)
 				{
 					var qj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var qk_ = context.Operators.Equal(qj_, (string)"finished");
+					var qk_ = context.Operators.Equal(qj_, "finished");
 					var ql_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var qm_ = context.Operators.End(ql_);
 					var qn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1194,7 +1194,7 @@ public class CQMCommon_2_0_000
 			bool? p_(Encounter LastED)
 			{
 				var re_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-				var rf_ = context.Operators.Equal(re_, (string)"finished");
+				var rf_ = context.Operators.Equal(re_, "finished");
 				var rg_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 				var rh_ = context.Operators.End(rg_);
 				var ri_ = this.Observation_Services();
@@ -1202,7 +1202,7 @@ public class CQMCommon_2_0_000
 				bool? rk_(Encounter LastObs)
 				{
 					var sw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var sx_ = context.Operators.Equal(sw_, (string)"finished");
+					var sx_ = context.Operators.Equal(sw_, "finished");
 					var sy_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var sz_ = context.Operators.End(sy_);
 					var ta_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1239,7 +1239,7 @@ public class CQMCommon_2_0_000
 				bool? rx_(Encounter LastObs)
 				{
 					var tp_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var tq_ = context.Operators.Equal(tp_, (string)"finished");
+					var tq_ = context.Operators.Equal(tp_, "finished");
 					var tr_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var ts_ = context.Operators.End(tr_);
 					var tt_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1275,7 +1275,7 @@ public class CQMCommon_2_0_000
 				bool? sk_(Encounter LastObs)
 				{
 					var ui_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var uj_ = context.Operators.Equal(ui_, (string)"finished");
+					var uj_ = context.Operators.Equal(ui_, "finished");
 					var uk_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var ul_ = context.Operators.End(uk_);
 					var um_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1328,7 +1328,7 @@ public class CQMCommon_2_0_000
 			bool? y_(Encounter LastObs)
 			{
 				var vd_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-				var ve_ = context.Operators.Equal(vd_, (string)"finished");
+				var ve_ = context.Operators.Equal(vd_, "finished");
 				var vf_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 				var vg_ = context.Operators.End(vf_);
 				var vh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1391,7 +1391,7 @@ public class CQMCommon_2_0_000
 				bool? ao_(Encounter LastED)
 				{
 					var da_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-					var db_ = context.Operators.Equal(da_, (string)"finished");
+					var db_ = context.Operators.Equal(da_, "finished");
 					var dc_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 					var dd_ = context.Operators.End(dc_);
 					var de_ = this.Observation_Services();
@@ -1399,7 +1399,7 @@ public class CQMCommon_2_0_000
 					bool? dg_(Encounter LastObs)
 					{
 						var es_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var et_ = context.Operators.Equal(es_, (string)"finished");
+						var et_ = context.Operators.Equal(es_, "finished");
 						var eu_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var ev_ = context.Operators.End(eu_);
 						var ew_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1436,7 +1436,7 @@ public class CQMCommon_2_0_000
 					bool? dt_(Encounter LastObs)
 					{
 						var fl_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var fm_ = context.Operators.Equal(fl_, (string)"finished");
+						var fm_ = context.Operators.Equal(fl_, "finished");
 						var fn_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var fo_ = context.Operators.End(fn_);
 						var fp_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1472,7 +1472,7 @@ public class CQMCommon_2_0_000
 					bool? eg_(Encounter LastObs)
 					{
 						var ge_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var gf_ = context.Operators.Equal(ge_, (string)"finished");
+						var gf_ = context.Operators.Equal(ge_, "finished");
 						var gg_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var gh_ = context.Operators.End(gg_);
 						var gi_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1525,7 +1525,7 @@ public class CQMCommon_2_0_000
 				bool? ax_(Encounter LastObs)
 				{
 					var gz_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var ha_ = context.Operators.Equal(gz_, (string)"finished");
+					var ha_ = context.Operators.Equal(gz_, "finished");
 					var hb_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var hc_ = context.Operators.End(hb_);
 					var hd_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1562,7 +1562,7 @@ public class CQMCommon_2_0_000
 				bool? bk_(Encounter LastED)
 				{
 					var hs_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-					var ht_ = context.Operators.Equal(hs_, (string)"finished");
+					var ht_ = context.Operators.Equal(hs_, "finished");
 					var hu_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 					var hv_ = context.Operators.End(hu_);
 					var hw_ = this.Observation_Services();
@@ -1570,7 +1570,7 @@ public class CQMCommon_2_0_000
 					bool? hy_(Encounter LastObs)
 					{
 						var jk_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var jl_ = context.Operators.Equal(jk_, (string)"finished");
+						var jl_ = context.Operators.Equal(jk_, "finished");
 						var jm_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var jn_ = context.Operators.End(jm_);
 						var jo_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1607,7 +1607,7 @@ public class CQMCommon_2_0_000
 					bool? il_(Encounter LastObs)
 					{
 						var kd_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var ke_ = context.Operators.Equal(kd_, (string)"finished");
+						var ke_ = context.Operators.Equal(kd_, "finished");
 						var kf_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var kg_ = context.Operators.End(kf_);
 						var kh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1643,7 +1643,7 @@ public class CQMCommon_2_0_000
 					bool? iy_(Encounter LastObs)
 					{
 						var kw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var kx_ = context.Operators.Equal(kw_, (string)"finished");
+						var kx_ = context.Operators.Equal(kw_, "finished");
 						var ky_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var kz_ = context.Operators.End(ky_);
 						var la_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1695,7 +1695,7 @@ public class CQMCommon_2_0_000
 				bool? bt_(Encounter LastObs)
 				{
 					var lr_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var ls_ = context.Operators.Equal(lr_, (string)"finished");
+					var ls_ = context.Operators.Equal(lr_, "finished");
 					var lt_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var lu_ = context.Operators.End(lt_);
 					var lv_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1731,7 +1731,7 @@ public class CQMCommon_2_0_000
 				bool? cg_(Encounter LastED)
 				{
 					var mk_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-					var ml_ = context.Operators.Equal(mk_, (string)"finished");
+					var ml_ = context.Operators.Equal(mk_, "finished");
 					var mm_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 					var mn_ = context.Operators.End(mm_);
 					var mo_ = this.Observation_Services();
@@ -1739,7 +1739,7 @@ public class CQMCommon_2_0_000
 					bool? mq_(Encounter LastObs)
 					{
 						var oc_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var od_ = context.Operators.Equal(oc_, (string)"finished");
+						var od_ = context.Operators.Equal(oc_, "finished");
 						var oe_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var of_ = context.Operators.End(oe_);
 						var og_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1776,7 +1776,7 @@ public class CQMCommon_2_0_000
 					bool? nd_(Encounter LastObs)
 					{
 						var ov_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var ow_ = context.Operators.Equal(ov_, (string)"finished");
+						var ow_ = context.Operators.Equal(ov_, "finished");
 						var ox_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var oy_ = context.Operators.End(ox_);
 						var oz_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1812,7 +1812,7 @@ public class CQMCommon_2_0_000
 					bool? nq_(Encounter LastObs)
 					{
 						var po_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-						var pp_ = context.Operators.Equal(po_, (string)"finished");
+						var pp_ = context.Operators.Equal(po_, "finished");
 						var pq_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 						var pr_ = context.Operators.End(pq_);
 						var ps_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1864,7 +1864,7 @@ public class CQMCommon_2_0_000
 				bool? cp_(Encounter LastObs)
 				{
 					var qj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var qk_ = context.Operators.Equal(qj_, (string)"finished");
+					var qk_ = context.Operators.Equal(qj_, "finished");
 					var ql_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var qm_ = context.Operators.End(ql_);
 					var qn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1916,7 +1916,7 @@ public class CQMCommon_2_0_000
 			bool? p_(Encounter LastED)
 			{
 				var re_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-				var rf_ = context.Operators.Equal(re_, (string)"finished");
+				var rf_ = context.Operators.Equal(re_, "finished");
 				var rg_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 				var rh_ = context.Operators.End(rg_);
 				var ri_ = this.Observation_Services();
@@ -1924,7 +1924,7 @@ public class CQMCommon_2_0_000
 				bool? rk_(Encounter LastObs)
 				{
 					var sw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var sx_ = context.Operators.Equal(sw_, (string)"finished");
+					var sx_ = context.Operators.Equal(sw_, "finished");
 					var sy_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var sz_ = context.Operators.End(sy_);
 					var ta_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1961,7 +1961,7 @@ public class CQMCommon_2_0_000
 				bool? rx_(Encounter LastObs)
 				{
 					var tp_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var tq_ = context.Operators.Equal(tp_, (string)"finished");
+					var tq_ = context.Operators.Equal(tp_, "finished");
 					var tr_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var ts_ = context.Operators.End(tr_);
 					var tt_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1997,7 +1997,7 @@ public class CQMCommon_2_0_000
 				bool? sk_(Encounter LastObs)
 				{
 					var ui_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var uj_ = context.Operators.Equal(ui_, (string)"finished");
+					var uj_ = context.Operators.Equal(ui_, "finished");
 					var uk_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var ul_ = context.Operators.End(uk_);
 					var um_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2050,7 +2050,7 @@ public class CQMCommon_2_0_000
 			bool? y_(Encounter LastObs)
 			{
 				var vd_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-				var ve_ = context.Operators.Equal(vd_, (string)"finished");
+				var ve_ = context.Operators.Equal(vd_, "finished");
 				var vf_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 				var vg_ = context.Operators.End(vf_);
 				var vh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2108,7 +2108,7 @@ public class CQMCommon_2_0_000
 			bool? g_(Encounter LastED)
 			{
 				var ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-				var ac_ = context.Operators.Equal(ab_, (string)"finished");
+				var ac_ = context.Operators.Equal(ab_, "finished");
 				var ad_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 				var ae_ = context.Operators.End(ad_);
 				var af_ = this.Observation_Services();
@@ -2116,7 +2116,7 @@ public class CQMCommon_2_0_000
 				bool? ah_(Encounter LastObs)
 				{
 					var bt_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var bu_ = context.Operators.Equal(bt_, (string)"finished");
+					var bu_ = context.Operators.Equal(bt_, "finished");
 					var bv_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var bw_ = context.Operators.End(bv_);
 					var bx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2153,7 +2153,7 @@ public class CQMCommon_2_0_000
 				bool? au_(Encounter LastObs)
 				{
 					var cm_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var cn_ = context.Operators.Equal(cm_, (string)"finished");
+					var cn_ = context.Operators.Equal(cm_, "finished");
 					var co_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var cp_ = context.Operators.End(co_);
 					var cq_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2189,7 +2189,7 @@ public class CQMCommon_2_0_000
 				bool? bh_(Encounter LastObs)
 				{
 					var df_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var dg_ = context.Operators.Equal(df_, (string)"finished");
+					var dg_ = context.Operators.Equal(df_, "finished");
 					var dh_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var di_ = context.Operators.End(dh_);
 					var dj_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2242,7 +2242,7 @@ public class CQMCommon_2_0_000
 			bool? p_(Encounter LastObs)
 			{
 				var ea_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-				var eb_ = context.Operators.Equal(ea_, (string)"finished");
+				var eb_ = context.Operators.Equal(ea_, "finished");
 				var ec_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 				var ed_ = context.Operators.End(ec_);
 				var ee_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2299,7 +2299,7 @@ public class CQMCommon_2_0_000
 			bool? g_(Encounter LastED)
 			{
 				var ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastED?.StatusElement?.Value);
-				var ac_ = context.Operators.Equal(ab_, (string)"finished");
+				var ac_ = context.Operators.Equal(ab_, "finished");
 				var ad_ = FHIRHelpers_4_3_000.ToInterval(LastED?.Period);
 				var ae_ = context.Operators.End(ad_);
 				var af_ = this.Observation_Services();
@@ -2307,7 +2307,7 @@ public class CQMCommon_2_0_000
 				bool? ah_(Encounter LastObs)
 				{
 					var bt_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var bu_ = context.Operators.Equal(bt_, (string)"finished");
+					var bu_ = context.Operators.Equal(bt_, "finished");
 					var bv_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var bw_ = context.Operators.End(bv_);
 					var bx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2344,7 +2344,7 @@ public class CQMCommon_2_0_000
 				bool? au_(Encounter LastObs)
 				{
 					var cm_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var cn_ = context.Operators.Equal(cm_, (string)"finished");
+					var cn_ = context.Operators.Equal(cm_, "finished");
 					var co_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var cp_ = context.Operators.End(co_);
 					var cq_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2380,7 +2380,7 @@ public class CQMCommon_2_0_000
 				bool? bh_(Encounter LastObs)
 				{
 					var df_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-					var dg_ = context.Operators.Equal(df_, (string)"finished");
+					var dg_ = context.Operators.Equal(df_, "finished");
 					var dh_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 					var di_ = context.Operators.End(dh_);
 					var dj_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2433,7 +2433,7 @@ public class CQMCommon_2_0_000
 			bool? p_(Encounter LastObs)
 			{
 				var ea_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(LastObs?.StatusElement?.Value);
-				var eb_ = context.Operators.Equal(ea_, (string)"finished");
+				var eb_ = context.Operators.Equal(ea_, "finished");
 				var ec_ = FHIRHelpers_4_3_000.ToInterval(LastObs?.Period);
 				var ed_ = context.Operators.End(ec_);
 				var ee_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);

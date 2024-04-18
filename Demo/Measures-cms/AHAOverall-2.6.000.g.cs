@@ -315,7 +315,7 @@ public class AHAOverall_2_6_000
 	public bool? isFinished(Encounter Visit)
 	{
 		var a_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(Visit?.StatusElement?.Value);
-		var b_ = context.Operators.Equal(a_, (string)"finished");
+		var b_ = context.Operators.Equal(a_, "finished");
 
 		return b_;
 	}
@@ -390,9 +390,9 @@ public class AHAOverall_2_6_000
 			var r_ = context.Operators.Convert<string>(q_);
 			var s_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var t_ = context.Operators.InList<string>(r_, (s_ as IEnumerable<string>));
 			var u_ = context.Operators.And(p_, t_);
@@ -531,7 +531,7 @@ public class AHAOverall_2_6_000
 		bool? e_(Procedure LVADOutpatient)
 		{
 			var s_ = context.Operators.Convert<string>(LVADOutpatient?.StatusElement?.Value);
-			var t_ = context.Operators.Equal(s_, (string)"completed");
+			var t_ = context.Operators.Equal(s_, "completed");
 
 			return t_;
 		};
@@ -696,7 +696,7 @@ public class AHAOverall_2_6_000
 		bool? e_(Procedure HeartTransplant)
 		{
 			var s_ = context.Operators.Convert<string>(HeartTransplant?.StatusElement?.Value);
-			var t_ = context.Operators.Equal(s_, (string)"completed");
+			var t_ = context.Operators.Equal(s_, "completed");
 
 			return t_;
 		};
@@ -722,19 +722,19 @@ public class AHAOverall_2_6_000
 			var h_ = context.Operators.Convert<string>(Order?.StatusElement?.Value);
 			var i_ = new string[]
 			{
-				(string)"active",
-				(string)"completed",
+				"active",
+				"completed",
 			};
 			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Convert<string>(Order?.IntentElement?.Value);
 			var m_ = new string[]
 			{
-				(string)"order",
-				(string)"original-order",
-				(string)"reflex-order",
-				(string)"filler-order",
-				(string)"instance-order",
+				"order",
+				"original-order",
+				"reflex-order",
+				"filler-order",
+				"instance-order",
 			};
 			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
 			var o_ = context.Operators.And(k_, n_);
@@ -795,7 +795,7 @@ public class AHAOverall_2_6_000
 					var m_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
 					var n_ = context.Operators.OverlapsAfter(l_, m_, "day");
 					var o_ = context.Operators.Convert<string>(((Event as Procedure)?.StatusElement)?.Value);
-					var p_ = context.Operators.Equal(o_, (string)"completed");
+					var p_ = context.Operators.Equal(o_, "completed");
 					var q_ = context.Operators.And(n_, p_);
 
 					return q_;
@@ -921,19 +921,19 @@ public class AHAOverall_2_6_000
 					var bv_ = context.Operators.Convert<string>(((Event as MedicationRequest)?.StatusElement)?.Value);
 					var bw_ = new string[]
 					{
-						(string)"active",
-						(string)"completed",
+						"active",
+						"completed",
 					};
 					var bx_ = context.Operators.InList<string>(bv_, (bw_ as IEnumerable<string>));
 					var by_ = context.Operators.And(bu_, bx_);
 					var bz_ = context.Operators.Convert<string>(((Event as MedicationRequest)?.IntentElement)?.Value);
 					var ca_ = new string[]
 					{
-						(string)"order",
-						(string)"original-order",
-						(string)"reflex-order",
-						(string)"filler-order",
-						(string)"instance-order",
+						"order",
+						"original-order",
+						"reflex-order",
+						"filler-order",
+						"instance-order",
 					};
 					var cb_ = context.Operators.InList<string>(bz_, (ca_ as IEnumerable<string>));
 					var cc_ = context.Operators.And(by_, cb_);
@@ -952,9 +952,9 @@ public class AHAOverall_2_6_000
 					var cx_ = context.Operators.Convert<string>(((Event as Observation)?.StatusElement)?.Value);
 					var cy_ = new string[]
 					{
-						(string)"final",
-						(string)"amended",
-						(string)"corrected",
+						"final",
+						"amended",
+						"corrected",
 					};
 					var cz_ = context.Operators.InList<string>(cx_, (cy_ as IEnumerable<string>));
 					var da_ = context.Operators.And(cw_, cz_);

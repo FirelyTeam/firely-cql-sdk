@@ -709,7 +709,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var p_ = context.Operators.SameOrBefore(k_, o_, null);
 			var q_ = context.Operators.And(h_, p_);
 			var r_ = context.Operators.Convert<string>(CataractSurgery?.StatusElement?.Value);
-			var s_ = context.Operators.Equal(r_, (string)"completed");
+			var s_ = context.Operators.Equal(r_, "completed");
 			var t_ = context.Operators.And(q_, s_);
 
 			return t_;
@@ -987,10 +987,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				var ag_ = context.Operators.Convert<string>(af_);
 				var ah_ = new string[]
 				{
-					(string)"final",
-					(string)"amended",
-					(string)"corrected",
-					(string)"preliminary",
+					"final",
+					"amended",
+					"corrected",
+					"preliminary",
 				};
 				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(ae_, ai_);

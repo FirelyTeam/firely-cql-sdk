@@ -12,18 +12,19 @@ internal static class TypeExtensions
     /// <param name="type">The type to check.</param>
     /// <param name="underlyingType">The underlying type for nullable.</param>
     /// <returns>True if the type is nullable, false otherwise.</returns>
-    public static bool IsNullable(this Type type, [NotNullWhen(true)] out Type? underlyingType)
+    public static bool IsNullableValueType(this Type type, [NotNullWhen(true)] out Type? underlyingType)
     {
-        if (!type.IsValueType)
-        {
-            // All classes are nullable, return the type itself
-            underlyingType = type;
-            return true;
-        }
-
         underlyingType = Nullable.GetUnderlyingType(type);
         return underlyingType != null;
     }
+
+    /// <summary>
+    /// Checks if the specified type is nullable.
+    /// </summary>
+    /// <param name="type">The type to check.</param>
+    /// <returns>True if the type is nullable, false otherwise.</returns>
+    public static bool IsNullable(this Type type) =>
+        !type.IsValueType || IsNullableValueType(type, out _);
 
     /// <summary>
     /// Checks if the specified type is an enum or a nullable enum.
@@ -35,7 +36,7 @@ internal static class TypeExtensions
         if (type.IsEnum)
             return true;
 
-        if (IsNullable(type, out var underlyingType) && underlyingType.IsEnum)
+        if (IsNullableValueType(type, out var underlyingType) && underlyingType.IsEnum)
             return true;
 
         return false;

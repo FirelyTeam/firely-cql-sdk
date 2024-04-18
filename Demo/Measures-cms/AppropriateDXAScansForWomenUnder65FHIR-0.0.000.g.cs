@@ -827,7 +827,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var g_ = context.Operators.Interval((int?)50, (int?)63, true, true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
-		var k_ = context.Operators.Equal(j_, (string)"female");
+		var k_ = context.Operators.Equal(j_, "female");
 		var l_ = context.Operators.And(h_, k_);
 		var m_ = this.Qualifying_Encounter();
 		var n_ = context.Operators.ExistsInList<Encounter>(m_);
@@ -1578,9 +1578,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var d_ = context.Operators.Convert<string>(c_);
 			var e_ = new string[]
 			{
-				(string)"final",
-				(string)"amended",
-				(string)"corrected",
+				"final",
+				"amended",
+				"corrected",
 			};
 			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
