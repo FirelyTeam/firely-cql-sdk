@@ -4,7 +4,7 @@
 
 ```mermaid
 classDiagram
-    direction BT
+    direction LR
 
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
@@ -34,16 +34,22 @@ classDiagram
         class LibrarySet{
         }
 
-        class ExpressionBuildingDependencies{
+        class LibraryDefinitionBuilderSettings {
         }
 
-        class LibraryDefinitionBuilderSettings {
+        class IExpressionBuilderFactory {
         }
 
         class ExpressionBuilder{
         }
 
+        class ILibraryExpressionBuilderFactory {
+        }
+
         class LibraryExpressionBuilder{
+        }
+
+        class ILibrarySetExpressionBuilderFactory {
         }
 
         class LibrarySetExpressionBuilder{
@@ -59,10 +65,19 @@ classDiagram
         class CqlOperatorsBinder {
         }
 
+        class ContextBinder{
+        }
+
+        class CqlContextBinder{
+		}
+
         class TypeConverter {
         }
 
         class ModelInspector {
+        }
+
+        class CqlCompilerFactory {
         }
     }
 
@@ -105,8 +120,12 @@ classDiagram
 
     %% Inheritance  
 
+    CqlCompilerFactory --> ILibrarySetExpressionBuilderFactory : inherits
+    CqlCompilerFactory --> ILibraryExpressionBuilderFactory : inherits
+    CqlCompilerFactory --> IExpressionBuilderFactory : inherits
    
     CqlOperatorsBinder --> OperatorsBinder : inherits
+    CqlContextBinder --> ContextBinder : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
@@ -118,8 +137,28 @@ classDiagram
     
     Expression ..> ExpressionBuilder : processed by
 
+    CqlCompilerFactory ..> LibraryDefinitionsBuilder : created by
+    ILibrarySetExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
+    ILibraryExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
+
+    ILibrarySetExpressionBuilderFactory ..> LibrarySetExpressionBuilder : created by
+    ILibraryExpressionBuilderFactory ..> LibrarySetExpressionBuilder : injected
     LibrarySet ..> LibrarySetExpressionBuilder : processed by
-    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : created by
+
+    ILibraryExpressionBuilderFactory ..> LibraryExpressionBuilder : created by
+    IExpressionBuilderFactory ..> LibrarySetExpressionBuilder : injected
+    LibraryDefinitionBuilderSettings ..> LibrarySetExpressionBuilder : injected
+    Library ..> LibraryExpressionBuilder : processed by
+    LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilder : outer context of
+
+    IExpressionBuilderFactory ..> ExpressionBuilder : created by
+    OperatorsBinder ..> ExpressionBuilder : injected
+    TypeManager ..> ExpressionBuilder : injected
+    TypeConverter ..> ExpressionBuilder : injected
+    TypeResolver ..> ExpressionBuilder : injected
+    ContextBinder ..> ExpressionBuilder : injected
+    LibraryDefinitionBuilderSettings ..> ExpressionBuilder : injected
+    LibraryExpressionBuilder ..> ExpressionBuilder : outer context of
 
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     LibraryDefinitionsBuilder ..> CqlToResourcePackagingPipeline : injected
@@ -132,19 +171,6 @@ classDiagram
     TypeConverter ..> CqlOperatorsBinder : injected
 
     ModelInspector ..> TypeConverter : injected  
-
-    ExpressionBuildingDependencies ..> LibraryDefinitionsBuilder : injected
-    LibrarySetExpressionBuilder ..> LibraryDefinitionsBuilder : created by
-
-    ILoggerFactory ..> ExpressionBuildingDependencies : injected
-    OperatorsBinder ..> ExpressionBuildingDependencies : injected
-    TypeManager ..> ExpressionBuildingDependencies : injected
-    TypeConverter ..> ExpressionBuildingDependencies : injected
-    TypeResolver ..> ExpressionBuildingDependencies : injected (via TypeManager)
-    LibraryDefinitionBuilderSettings ..> ExpressionBuildingDependencies : injected (static)
-
-    ExpressionBuilder ..> LibraryExpressionBuilder : created by
-    Library ..> LibraryExpressionBuilder : processed by
 
     TypeResolver ..> TypeManager : injected
 

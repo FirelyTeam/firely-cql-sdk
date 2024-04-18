@@ -10,7 +10,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Expressions
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
