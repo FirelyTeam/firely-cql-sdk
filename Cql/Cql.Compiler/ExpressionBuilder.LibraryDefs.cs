@@ -26,8 +26,8 @@ partial class ExpressionBuilder
                                 ConstructorInfos.CqlCode,
                                 Expression.Constant(coding.code),
                                 Expression.Constant(coding.system),
-                                NullConstantExpression.String,
-                                NullConstantExpression.String
+                                NullExpression.String,
+                                NullExpression.String
                             ));
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
                     var lambda = Expression.Lambda(arrayOfCodesInitializer, CqlExpressions.ParameterExpression);
@@ -69,13 +69,13 @@ partial class ExpressionBuilder
                             ConstructorInfos.CqlCode,
                             Expression.Constant(systemCode.code),
                             Expression.Constant(systemCode.system),
-                            NullConstantExpression.String,
-                            NullConstantExpression.String
+                            NullExpression.String,
+                            NullExpression.String
                         );
                     }
 
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                    var asEnumerable = arrayOfCodesInitializer.ExprTypeAs<IEnumerable<CqlCode>>();
+                    var asEnumerable = arrayOfCodesInitializer.TypeAsExpression<IEnumerable<CqlCode>>();
                     var display = Expression.Constant(conceptDef.display, typeof(string));
                     var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
                     var lambda = Expression.Lambda(newConcept, CqlExpressions.ParameterExpression);
@@ -110,8 +110,8 @@ partial class ExpressionBuilder
                     ConstructorInfos.CqlCode,
                     Expression.Constant(codeDef.id),
                     Expression.Constant(csUrl),
-                    NullConstantExpression.String,
-                    NullConstantExpression.String!
+                    NullExpression.String,
+                    NullExpression.String!
                 );
                 var lambda = Expression.Lambda(newCodingExpression, CqlExpressions.ParameterExpression);
                 _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, codeDef.name!, lambda);
@@ -252,8 +252,8 @@ partial class ExpressionBuilder
 
                 Expression? defaultValue = null;
                 if (parameter.@default != null)
-                    defaultValue = Translate(parameter.@default).ExprTypeAs<object>();
-                else defaultValue = NullConstantExpression.Object;
+                    defaultValue = Translate(parameter.@default).TypeAsExpression<object>();
+                else defaultValue = NullExpression.Object;
 
                 var resolveParam = _contextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);
 

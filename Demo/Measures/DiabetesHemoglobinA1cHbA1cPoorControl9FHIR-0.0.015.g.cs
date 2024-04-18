@@ -317,33 +317,34 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)18, (int?)75, true, false);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var j_ = this.Telehealth_Services();
-		var k_ = context.Operators.ListUnion<Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
-		var m_ = context.Operators.And(h_, l_);
-		var n_ = this.Diabetes();
-		var o_ = context.Operators.RetrieveByValueSet<Condition>(n_, null);
-		bool? p_(Condition Diabetes)
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)18, (int?)75, true, false);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var j_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var k_ = this.Telehealth_Services();
+		var l_ = context.Operators.ListUnion<Encounter>(j_, k_);
+		var m_ = context.Operators.ExistsInList<Encounter>(l_);
+		var n_ = context.Operators.And(i_, m_);
+		var o_ = this.Diabetes();
+		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
+		bool? q_(Condition Diabetes)
 		{
-			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
-			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.Overlaps(t_, u_, null);
+			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
+			var v_ = this.Measurement_Period();
+			var w_ = context.Operators.Overlaps(u_, v_, null);
 
-			return v_;
+			return w_;
 		};
-		var q_ = context.Operators.WhereOrNull<Condition>(o_, p_);
-		var r_ = context.Operators.ExistsInList<Condition>(q_);
-		var s_ = context.Operators.And(m_, r_);
+		var r_ = context.Operators.WhereOrNull<Condition>(p_, q_);
+		var s_ = context.Operators.ExistsInList<Condition>(r_);
+		var t_ = context.Operators.And(n_, s_);
 
-		return s_;
+		return t_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -417,7 +418,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		var a_ = this.Most_Recent_HbA1c();
 		var b_ = FHIRHelpers_4_0_001.ToQuantity((a_?.Value as Quantity));
-		var c_ = context.Operators.Quantity(9m, "%");
+		var c_ = context.Operators.Quantity((decimal?)9m, "%");
 		var d_ = context.Operators.Greater(b_, c_);
 
 		return d_;
@@ -480,19 +481,20 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var b_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var c_ = context.Operators.Or(a_, b_);
 		var d_ = this.Patient();
-		var e_ = context.Operators.Convert<CqlDate>(d_?.BirthDateElement?.Value);
+		var e_ = context.Operators.Convert<CqlDateTime>(d_?.BirthDateElement?.Value);
 		var f_ = this.Measurement_Period();
 		var g_ = context.Operators.Start(f_);
 		var h_ = context.Operators.DateFrom(g_);
-		var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-		var j_ = context.Operators.GreaterOrEqual(i_, (int?)65);
-		var k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
-		var l_ = context.Operators.And(j_, k_);
-		var m_ = context.Operators.Or(c_, l_);
-		var n_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
-		var o_ = context.Operators.Or(m_, n_);
+		var i_ = context.Operators.Convert<CqlDateTime>(h_);
+		var j_ = context.Operators.CalculateAgeAt(e_, i_, "year");
+		var k_ = context.Operators.GreaterOrEqual(j_, (int?)65);
+		var l_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
+		var m_ = context.Operators.And(k_, l_);
+		var n_ = context.Operators.Or(c_, m_);
+		var o_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+		var p_ = context.Operators.Or(n_, o_);
 
-		return o_;
+		return p_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]

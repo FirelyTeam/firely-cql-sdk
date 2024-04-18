@@ -33,7 +33,7 @@ namespace Hl7.Cql.Compiler
                 return Expression.Constant(long.MinValue);
             }
 
-            return ChangeType(BindCqlOperator(CqlOperator.Negate, e.operand), e.resultTypeSpecifier);
+            return ChangeType(BindCqlOperator(CqlOperator.Negate, literalType, e.operand), e.resultTypeSpecifier);
         }
     }
 }

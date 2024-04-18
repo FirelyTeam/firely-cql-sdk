@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler
                 (true, false) => throw this.NewExpressionBuildingException(),
                 _             => CqlOperator.SameAs
             }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, expr);
+            return BindCqlOperator(method, null, expr);
         }
 
         protected Expression SameOrAfter(Elm.SameOrAfter e)
@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
                 (true, false) => throw this.NewExpressionBuildingException(),
                 _             => CqlOperator.SameOrAfter
             }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, expr);
+            return BindCqlOperator(method, null, expr);
         }
 
         protected Expression SameOrBefore(Elm.SameOrBefore e)
@@ -49,7 +49,7 @@ namespace Hl7.Cql.Compiler
                 (true, false) => throw this.NewExpressionBuildingException(),
                 _             => CqlOperator.SameOrBefore
             }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, expr);
+            return BindCqlOperator(method, null, expr);
         }
     }
 }

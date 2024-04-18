@@ -112,8 +112,9 @@ namespace Hl7.Cql.Abstractions
         /// Resolves the .NET type for the given ELM type specifier.
         /// </summary>
         /// <param name="typeSpecifier">The ELM type specifier.</param>
+        /// <param name="throwError">Whether to throw an error if the type was not resolved.</param>
         /// <returns>The .NET type to use.</returns>
-        public abstract Type? ResolveType(string typeSpecifier);
+        public abstract Type? ResolveType(string typeSpecifier, bool throwError = true);
 
         /// <summary>
         /// Determines whether the specified type is a list type.
@@ -197,7 +198,7 @@ namespace Hl7.Cql.Abstractions
         /// </summary>
         /// <remarks>
         /// The base implementation aliases the FHIR Range type to whatever type
-        /// <see cref="ResolveType(string)"/> returns when passed "{http://hl7.org/fhir}"
+        /// <see cref="ResolveType"/> returns when passed "{http://hl7.org/fhir}"
         /// to avoid conflicts with <see cref="Range"/>.
         /// </remarks>
         internal virtual IEnumerable<(string alias, string type)> Aliases => [];

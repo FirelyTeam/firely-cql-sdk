@@ -18,8 +18,7 @@ internal partial class ExpressionBuilder
             return TypeFor(element.resultTypeSpecifier);
 
         if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
-            return _typeResolver.ResolveType(element!.resultTypeName!.Name)
-                   ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
+            return _typeResolver.ResolveType(element!.resultTypeName!.Name, throwIfNotFound);
 
         switch (element)
         {
@@ -27,7 +26,11 @@ internal partial class ExpressionBuilder
             {
                 var libraryName = expressionRef.libraryName ?? _libraryContext.LibraryKey;
                 if (!_libraryContext.LibraryDefinitions.TryGetValue(libraryName, expressionRef.name, out var definition))
-                    throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
+                {
+                    if (throwIfNotFound)
+                        throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
+                    return null;
+                }
 
                 var returnType = definition!.ReturnType;
 
@@ -48,7 +51,7 @@ internal partial class ExpressionBuilder
                             {
                                 if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
                                 {
-                                    type = _typeResolver.ResolveType(retrieve.dataType.Name);
+                                    type = _typeResolver.ResolveType(retrieve.dataType.Name, throwIfNotFound);
                                     if (type != null)
                                         return type;
                                 }
@@ -95,6 +98,7 @@ internal partial class ExpressionBuilder
                 break;
             }
         }
+
         if (throwIfNotFound)
             throw this.NewExpressionBuildingException("Cannot resolve type for expression");
 

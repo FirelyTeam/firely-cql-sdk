@@ -89,7 +89,7 @@ public class NCQAFHIRBase_1_0_0
 						var v_ = context.Operators.Add(t_, u_);
 						var x_ = FHIRHelpers_4_0_001.ToDate(s_?.BirthDateElement);
 						var z_ = context.Operators.Add(x_, u_);
-						var aa_ = context.Operators.Quantity(1m, "year");
+						var aa_ = context.Operators.Quantity((decimal?)1m, "year");
 						var ab_ = context.Operators.Add(z_, aa_);
 						var ac_ = context.Operators.Interval(v_, ab_, true, false);
 
@@ -104,7 +104,7 @@ public class NCQAFHIRBase_1_0_0
 						var ai_ = FHIRHelpers_4_0_001.ToDate(ad_?.BirthDateElement);
 						var aj_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
 						var ak_ = context.Operators.Add(ai_, aj_);
-						var al_ = context.Operators.Quantity(1m, "year");
+						var al_ = context.Operators.Quantity((decimal?)1m, "year");
 						var am_ = context.Operators.Add(ak_, al_);
 						var an_ = context.Operators.Interval(ag_, am_, true, false);
 
@@ -128,7 +128,7 @@ public class NCQAFHIRBase_1_0_0
 						var as_ = context.Operators.Add(aq_, ar_);
 						var au_ = FHIRHelpers_4_0_001.ToDate(ap_?.BirthDateElement);
 						var aw_ = context.Operators.Add(au_, ar_);
-						var ax_ = context.Operators.Quantity(1m, "year");
+						var ax_ = context.Operators.Quantity((decimal?)1m, "year");
 						var ay_ = context.Operators.Add(aw_, ax_);
 						var az_ = context.Operators.Interval(as_, ay_, true, false);
 
@@ -143,7 +143,7 @@ public class NCQAFHIRBase_1_0_0
 						var bf_ = FHIRHelpers_4_0_001.ToDate(ba_?.BirthDateElement);
 						var bg_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
 						var bh_ = context.Operators.Add(bf_, bg_);
-						var bi_ = context.Operators.Quantity(1m, "year");
+						var bi_ = context.Operators.Quantity((decimal?)1m, "year");
 						var bj_ = context.Operators.Add(bh_, bi_);
 						var bk_ = context.Operators.Interval(bd_, bj_, true, false);
 
@@ -167,7 +167,7 @@ public class NCQAFHIRBase_1_0_0
 						var bp_ = context.Operators.Add(bn_, bo_);
 						var br_ = FHIRHelpers_4_0_001.ToDate(bm_?.BirthDateElement);
 						var bt_ = context.Operators.Add(br_, bo_);
-						var bu_ = context.Operators.Quantity(1m, "year");
+						var bu_ = context.Operators.Quantity((decimal?)1m, "year");
 						var bv_ = context.Operators.Add(bt_, bu_);
 						var bw_ = context.Operators.Interval(bp_, bv_, true, false);
 
@@ -182,7 +182,7 @@ public class NCQAFHIRBase_1_0_0
 						var cc_ = FHIRHelpers_4_0_001.ToDate(bx_?.BirthDateElement);
 						var cd_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
 						var ce_ = context.Operators.Add(cc_, cd_);
-						var cf_ = context.Operators.Quantity(1m, "year");
+						var cf_ = context.Operators.Quantity((decimal?)1m, "year");
 						var cg_ = context.Operators.Add(ce_, cf_);
 						var ch_ = context.Operators.Interval(ca_, cg_, true, false);
 
@@ -205,7 +205,7 @@ public class NCQAFHIRBase_1_0_0
 						var cm_ = context.Operators.Add(ck_, cl_);
 						var co_ = FHIRHelpers_4_0_001.ToDate(cj_?.BirthDateElement);
 						var cq_ = context.Operators.Add(co_, cl_);
-						var cr_ = context.Operators.Quantity(1m, "year");
+						var cr_ = context.Operators.Quantity((decimal?)1m, "year");
 						var cs_ = context.Operators.Add(cq_, cr_);
 						var ct_ = context.Operators.Interval(cm_, cs_, true, false);
 
@@ -220,7 +220,7 @@ public class NCQAFHIRBase_1_0_0
 						var cz_ = FHIRHelpers_4_0_001.ToDate(cu_?.BirthDateElement);
 						var da_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
 						var db_ = context.Operators.Add(cz_, da_);
-						var dc_ = context.Operators.Quantity(1m, "year");
+						var dc_ = context.Operators.Quantity((decimal?)1m, "year");
 						var dd_ = context.Operators.Add(db_, dc_);
 						var de_ = context.Operators.Interval(cx_, dd_, true, false);
 
@@ -283,7 +283,7 @@ public class NCQAFHIRBase_1_0_0
 						var v_ = context.Operators.Add(t_, u_);
 						var x_ = FHIRHelpers_4_0_001.ToDate(s_?.BirthDateElement);
 						var z_ = context.Operators.Add(x_, u_);
-						var aa_ = context.Operators.Quantity(1m, "year");
+						var aa_ = context.Operators.Quantity((decimal?)1m, "year");
 						var ab_ = context.Operators.Add(z_, aa_);
 						var ac_ = context.Operators.Interval(v_, ab_, true, false);
 
@@ -298,7 +298,7 @@ public class NCQAFHIRBase_1_0_0
 						var ai_ = FHIRHelpers_4_0_001.ToDate(ad_?.BirthDateElement);
 						var aj_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
 						var ak_ = context.Operators.Add(ai_, aj_);
-						var al_ = context.Operators.Quantity(1m, "year");
+						var al_ = context.Operators.Quantity((decimal?)1m, "year");
 						var am_ = context.Operators.Add(ak_, al_);
 						var an_ = context.Operators.Interval(ag_, am_, true, false);
 
@@ -322,7 +322,7 @@ public class NCQAFHIRBase_1_0_0
 						var as_ = context.Operators.Add(aq_, ar_);
 						var au_ = FHIRHelpers_4_0_001.ToDate(ap_?.BirthDateElement);
 						var aw_ = context.Operators.Add(au_, ar_);
-						var ax_ = context.Operators.Quantity(1m, "year");
+						var ax_ = context.Operators.Quantity((decimal?)1m, "year");
 						var ay_ = context.Operators.Add(aw_, ax_);
 						var az_ = context.Operators.Interval(as_, ay_, true, false);
 
@@ -337,7 +337,7 @@ public class NCQAFHIRBase_1_0_0
 						var bf_ = FHIRHelpers_4_0_001.ToDate(ba_?.BirthDateElement);
 						var bg_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
 						var bh_ = context.Operators.Add(bf_, bg_);
-						var bi_ = context.Operators.Quantity(1m, "year");
+						var bi_ = context.Operators.Quantity((decimal?)1m, "year");
 						var bj_ = context.Operators.Add(bh_, bi_);
 						var bk_ = context.Operators.Interval(bd_, bj_, true, false);
 
@@ -361,7 +361,7 @@ public class NCQAFHIRBase_1_0_0
 						var bp_ = context.Operators.Add(bn_, bo_);
 						var br_ = FHIRHelpers_4_0_001.ToDate(bm_?.BirthDateElement);
 						var bt_ = context.Operators.Add(br_, bo_);
-						var bu_ = context.Operators.Quantity(1m, "year");
+						var bu_ = context.Operators.Quantity((decimal?)1m, "year");
 						var bv_ = context.Operators.Add(bt_, bu_);
 						var bw_ = context.Operators.Interval(bp_, bv_, true, false);
 
@@ -376,7 +376,7 @@ public class NCQAFHIRBase_1_0_0
 						var cc_ = FHIRHelpers_4_0_001.ToDate(bx_?.BirthDateElement);
 						var cd_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
 						var ce_ = context.Operators.Add(cc_, cd_);
-						var cf_ = context.Operators.Quantity(1m, "year");
+						var cf_ = context.Operators.Quantity((decimal?)1m, "year");
 						var cg_ = context.Operators.Add(ce_, cf_);
 						var ch_ = context.Operators.Interval(ca_, cg_, true, false);
 
@@ -399,7 +399,7 @@ public class NCQAFHIRBase_1_0_0
 						var cm_ = context.Operators.Add(ck_, cl_);
 						var co_ = FHIRHelpers_4_0_001.ToDate(cj_?.BirthDateElement);
 						var cq_ = context.Operators.Add(co_, cl_);
-						var cr_ = context.Operators.Quantity(1m, "year");
+						var cr_ = context.Operators.Quantity((decimal?)1m, "year");
 						var cs_ = context.Operators.Add(cq_, cr_);
 						var ct_ = context.Operators.Interval(cm_, cs_, true, false);
 
@@ -414,7 +414,7 @@ public class NCQAFHIRBase_1_0_0
 						var cz_ = FHIRHelpers_4_0_001.ToDate(cu_?.BirthDateElement);
 						var da_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
 						var db_ = context.Operators.Add(cz_, da_);
-						var dc_ = context.Operators.Quantity(1m, "year");
+						var dc_ = context.Operators.Quantity((decimal?)1m, "year");
 						var dd_ = context.Operators.Add(db_, dc_);
 						var de_ = context.Operators.Interval(cx_, dd_, true, false);
 
@@ -494,7 +494,7 @@ public class NCQAFHIRBase_1_0_0
 				var u_ = context.Operators.Add(s_, t_);
 				var w_ = FHIRHelpers_4_0_001.ToDate(r_?.BirthDateElement);
 				var y_ = context.Operators.Add(w_, t_);
-				var z_ = context.Operators.Quantity(1m, "year");
+				var z_ = context.Operators.Quantity((decimal?)1m, "year");
 				var aa_ = context.Operators.Add(y_, z_);
 				var ab_ = context.Operators.Interval(u_, aa_, true, false);
 				var ac_ = context.Operators.ConvertDateToDateTime(ab_?.low);
@@ -530,7 +530,7 @@ public class NCQAFHIRBase_1_0_0
 				var br_ = FHIRHelpers_4_0_001.ToDate(bm_?.BirthDateElement);
 				var bs_ = FHIRHelpers_4_0_001.ToQuantity((choice as Range)?.High);
 				var bt_ = context.Operators.Add(br_, bs_);
-				var bu_ = context.Operators.Quantity(1m, "year");
+				var bu_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bv_ = context.Operators.Add(bt_, bu_);
 				var bw_ = context.Operators.Interval(bp_, bv_, true, false);
 				var bx_ = context.Operators.ConvertDateToDateTime(bw_?.low);
@@ -653,9 +653,9 @@ public class NCQAFHIRBase_1_0_0
 				bool? r_(CqlDate X)
 				{
 					var z_ = context.Operators.ListElementAt<CqlDate>(AnchorList?.SortedList, AnchorList?.AnchorIndex);
-					var aa_ = context.Operators.Quantity(1m, "day");
+					var aa_ = context.Operators.Quantity((decimal?)1m, "day");
 					var ab_ = context.Operators.Add((z_ as CqlDate), aa_);
-					var ad_ = context.Operators.Quantity(30m, "days");
+					var ad_ = context.Operators.Quantity((decimal?)30m, "days");
 					var ae_ = context.Operators.Add((z_ as CqlDate), ad_);
 					var af_ = context.Operators.Interval(ab_, ae_, true, true);
 					var ag_ = context.Operators.ElementInInterval<CqlDate>(X, af_, null);
@@ -689,9 +689,9 @@ public class NCQAFHIRBase_1_0_0
 							bool? ak_(CqlDate X)
 							{
 								var as_ = context.Operators.ListElementAt<CqlDate>(FirstList?.NewList, FirstList?.IndexofNewDate);
-								var at_ = context.Operators.Quantity(1m, "day");
+								var at_ = context.Operators.Quantity((decimal?)1m, "day");
 								var au_ = context.Operators.Add((as_ as CqlDate), at_);
-								var aw_ = context.Operators.Quantity(30m, "days");
+								var aw_ = context.Operators.Quantity((decimal?)30m, "days");
 								var ax_ = context.Operators.Add((as_ as CqlDate), aw_);
 								var ay_ = context.Operators.Interval(au_, ax_, true, true);
 								var az_ = context.Operators.ElementInInterval<CqlDate>(X, ay_, null);
@@ -725,9 +725,9 @@ public class NCQAFHIRBase_1_0_0
 										bool? bd_(CqlDate X)
 										{
 											var bl_ = context.Operators.ListElementAt<CqlDate>(SecondList?.NewList, SecondList?.IndexofNewDate);
-											var bm_ = context.Operators.Quantity(1m, "day");
+											var bm_ = context.Operators.Quantity((decimal?)1m, "day");
 											var bn_ = context.Operators.Add((bl_ as CqlDate), bm_);
-											var bp_ = context.Operators.Quantity(30m, "days");
+											var bp_ = context.Operators.Quantity((decimal?)30m, "days");
 											var bq_ = context.Operators.Add((bl_ as CqlDate), bp_);
 											var br_ = context.Operators.Interval(bn_, bq_, true, true);
 											var bs_ = context.Operators.ElementInInterval<CqlDate>(X, br_, null);
@@ -761,9 +761,9 @@ public class NCQAFHIRBase_1_0_0
 													bool? bw_(CqlDate X)
 													{
 														var ce_ = context.Operators.ListElementAt<CqlDate>(ThirdList?.NewList, ThirdList?.IndexofNewDate);
-														var cf_ = context.Operators.Quantity(1m, "day");
+														var cf_ = context.Operators.Quantity((decimal?)1m, "day");
 														var cg_ = context.Operators.Add((ce_ as CqlDate), cf_);
-														var ci_ = context.Operators.Quantity(30m, "days");
+														var ci_ = context.Operators.Quantity((decimal?)30m, "days");
 														var cj_ = context.Operators.Add((ce_ as CqlDate), ci_);
 														var ck_ = context.Operators.Interval(cg_, cj_, true, true);
 														var cl_ = context.Operators.ElementInInterval<CqlDate>(X, ck_, null);
@@ -797,9 +797,9 @@ public class NCQAFHIRBase_1_0_0
 																bool? cp_(CqlDate X)
 																{
 																	var cx_ = context.Operators.ListElementAt<CqlDate>(FourthList?.NewList, FourthList?.IndexofNewDate);
-																	var cy_ = context.Operators.Quantity(1m, "day");
+																	var cy_ = context.Operators.Quantity((decimal?)1m, "day");
 																	var cz_ = context.Operators.Add((cx_ as CqlDate), cy_);
-																	var db_ = context.Operators.Quantity(30m, "days");
+																	var db_ = context.Operators.Quantity((decimal?)30m, "days");
 																	var dc_ = context.Operators.Add((cx_ as CqlDate), db_);
 																	var dd_ = context.Operators.Interval(cz_, dc_, true, true);
 																	var de_ = context.Operators.ElementInInterval<CqlDate>(X, dd_, null);
@@ -833,9 +833,9 @@ public class NCQAFHIRBase_1_0_0
 																			bool? di_(CqlDate X)
 																			{
 																				var dq_ = context.Operators.ListElementAt<CqlDate>(FifthList?.NewList, FifthList?.IndexofNewDate);
-																				var dr_ = context.Operators.Quantity(1m, "day");
+																				var dr_ = context.Operators.Quantity((decimal?)1m, "day");
 																				var ds_ = context.Operators.Add((dq_ as CqlDate), dr_);
-																				var du_ = context.Operators.Quantity(30m, "days");
+																				var du_ = context.Operators.Quantity((decimal?)30m, "days");
 																				var dv_ = context.Operators.Add((dq_ as CqlDate), du_);
 																				var dw_ = context.Operators.Interval(ds_, dv_, true, true);
 																				var dx_ = context.Operators.ElementInInterval<CqlDate>(X, dw_, null);
@@ -869,9 +869,9 @@ public class NCQAFHIRBase_1_0_0
 																						bool? eb_(CqlDate X)
 																						{
 																							var ej_ = context.Operators.ListElementAt<CqlDate>(SixthList?.NewList, SixthList?.IndexofNewDate);
-																							var ek_ = context.Operators.Quantity(1m, "day");
+																							var ek_ = context.Operators.Quantity((decimal?)1m, "day");
 																							var el_ = context.Operators.Add((ej_ as CqlDate), ek_);
-																							var en_ = context.Operators.Quantity(30m, "days");
+																							var en_ = context.Operators.Quantity((decimal?)30m, "days");
 																							var eo_ = context.Operators.Add((ej_ as CqlDate), en_);
 																							var ep_ = context.Operators.Interval(el_, eo_, true, true);
 																							var eq_ = context.Operators.ElementInInterval<CqlDate>(X, ep_, null);
@@ -905,9 +905,9 @@ public class NCQAFHIRBase_1_0_0
 																									bool? eu_(CqlDate X)
 																									{
 																										var fc_ = context.Operators.ListElementAt<CqlDate>(SeventhList?.NewList, SeventhList?.IndexofNewDate);
-																										var fd_ = context.Operators.Quantity(1m, "day");
+																										var fd_ = context.Operators.Quantity((decimal?)1m, "day");
 																										var fe_ = context.Operators.Add((fc_ as CqlDate), fd_);
-																										var fg_ = context.Operators.Quantity(30m, "days");
+																										var fg_ = context.Operators.Quantity((decimal?)30m, "days");
 																										var fh_ = context.Operators.Add((fc_ as CqlDate), fg_);
 																										var fi_ = context.Operators.Interval(fe_, fh_, true, true);
 																										var fj_ = context.Operators.ElementInInterval<CqlDate>(X, fi_, null);
@@ -941,9 +941,9 @@ public class NCQAFHIRBase_1_0_0
 																												bool? fn_(CqlDate X)
 																												{
 																													var fv_ = context.Operators.ListElementAt<CqlDate>(EighthList?.NewList, EighthList?.IndexofNewDate);
-																													var fw_ = context.Operators.Quantity(1m, "day");
+																													var fw_ = context.Operators.Quantity((decimal?)1m, "day");
 																													var fx_ = context.Operators.Add((fv_ as CqlDate), fw_);
-																													var fz_ = context.Operators.Quantity(30m, "days");
+																													var fz_ = context.Operators.Quantity((decimal?)30m, "days");
 																													var ga_ = context.Operators.Add((fv_ as CqlDate), fz_);
 																													var gb_ = context.Operators.Interval(fx_, ga_, true, true);
 																													var gc_ = context.Operators.ElementInInterval<CqlDate>(X, gb_, null);
@@ -977,9 +977,9 @@ public class NCQAFHIRBase_1_0_0
 																															bool? gg_(CqlDate X)
 																															{
 																																var go_ = context.Operators.ListElementAt<CqlDate>(NinethList?.NewList, NinethList?.IndexofNewDate);
-																																var gp_ = context.Operators.Quantity(1m, "day");
+																																var gp_ = context.Operators.Quantity((decimal?)1m, "day");
 																																var gq_ = context.Operators.Add((go_ as CqlDate), gp_);
-																																var gs_ = context.Operators.Quantity(30m, "days");
+																																var gs_ = context.Operators.Quantity((decimal?)30m, "days");
 																																var gt_ = context.Operators.Add((go_ as CqlDate), gs_);
 																																var gu_ = context.Operators.Interval(gq_, gt_, true, true);
 																																var gv_ = context.Operators.ElementInInterval<CqlDate>(X, gu_, null);
@@ -1013,9 +1013,9 @@ public class NCQAFHIRBase_1_0_0
 																																		bool? gz_(CqlDate X)
 																																		{
 																																			var hh_ = context.Operators.ListElementAt<CqlDate>(TenthList?.NewList, TenthList?.IndexofNewDate);
-																																			var hi_ = context.Operators.Quantity(1m, "day");
+																																			var hi_ = context.Operators.Quantity((decimal?)1m, "day");
 																																			var hj_ = context.Operators.Add((hh_ as CqlDate), hi_);
-																																			var hl_ = context.Operators.Quantity(30m, "days");
+																																			var hl_ = context.Operators.Quantity((decimal?)30m, "days");
 																																			var hm_ = context.Operators.Add((hh_ as CqlDate), hl_);
 																																			var hn_ = context.Operators.Interval(hj_, hm_, true, true);
 																																			var ho_ = context.Operators.ElementInInterval<CqlDate>(X, hn_, null);
@@ -1049,9 +1049,9 @@ public class NCQAFHIRBase_1_0_0
 																																					bool? hs_(CqlDate X)
 																																					{
 																																						var hw_ = context.Operators.ListElementAt<CqlDate>(EleventhList?.NewList, EleventhList?.IndexofNewDate);
-																																						var hx_ = context.Operators.Quantity(1m, "day");
+																																						var hx_ = context.Operators.Quantity((decimal?)1m, "day");
 																																						var hy_ = context.Operators.Add((hw_ as CqlDate), hx_);
-																																						var ia_ = context.Operators.Quantity(30m, "days");
+																																						var ia_ = context.Operators.Quantity((decimal?)30m, "days");
 																																						var ib_ = context.Operators.Add((hw_ as CqlDate), ia_);
 																																						var ic_ = context.Operators.Interval(hy_, ib_, true, true);
 																																						var id_ = context.Operators.ElementInInterval<CqlDate>(X, ic_, null);

@@ -19,9 +19,9 @@ namespace Hl7.Cql.Compiler
         {
             var source = Translate(e.source!);
             var operand = e.separator == null
-                ? NullConstantExpression.String
+                ? NullExpression.String
                 : Translate(e.separator);
-            return BindCqlOperator(CqlOperator.Combine, source, operand);
+            return BindCqlOperator(CqlOperator.Combine, null, source, operand);
         }
 
         protected Expression Indexer(Elm.Indexer e)
@@ -30,12 +30,12 @@ namespace Hl7.Cql.Compiler
             var right = Translate(e!.operand![1]!);
             if (left.Type == typeof(string))
             {
-                return BindCqlOperator(CqlOperator.CharAt, left, right);
+                return BindCqlOperator(CqlOperator.CharAt, null, left, right);
             }
 
             if (_typeResolver.IsListType(left.Type))
             {
-                return BindCqlOperator(CqlOperator.ListElementAt, left, right);
+                return BindCqlOperator(CqlOperator.ListElementAt, null, left, right);
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -45,12 +45,12 @@ namespace Hl7.Cql.Compiler
             var operand = Translate(len.operand!);
             if (_typeResolver.IsListType(operand.Type))
             {
-                return BindCqlOperator(CqlOperator.ListLength, operand);
+                return BindCqlOperator(CqlOperator.ListLength, null, operand);
             }
 
             if (operand.Type == typeof(string))
             {
-                return BindCqlOperator(CqlOperator.StringLength, operand);
+                return BindCqlOperator(CqlOperator.StringLength, null, operand);
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -60,14 +60,14 @@ namespace Hl7.Cql.Compiler
             var source = Translate(e.operand![0]!);
             var pattern = Translate(e.operand![1]!);
             var substitution = Translate(e.operand![2]!);
-            return BindCqlOperator(CqlOperator.ReplaceMatches, source, pattern, substitution);
+            return BindCqlOperator(CqlOperator.ReplaceMatches, null, source, pattern, substitution);
         }
 
         protected Expression Split(Elm.Split e)
         {
             var stringToSplit = Translate(e.stringToSplit!);
             var separator = Translate(e.separator!);
-            return BindCqlOperator(CqlOperator.Split, stringToSplit, separator);
+            return BindCqlOperator(CqlOperator.Split, null, stringToSplit, separator);
         }
 
         protected Expression? Substring(Elm.Substring e)
@@ -75,9 +75,9 @@ namespace Hl7.Cql.Compiler
             var stringToSub = Translate(e!.stringToSub!);
             var startIndex = Translate(e!.startIndex!);
             var length = e.length == null
-                ? NullConstantExpression.Int32
+                ? NullExpression.Int32
                 : Translate(e.length);
-            return BindCqlOperator(CqlOperator.Substring, stringToSub, startIndex, length);
+            return BindCqlOperator(CqlOperator.Substring, null, stringToSub, startIndex, length);
         }
     }
 }

@@ -201,13 +201,12 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.005", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.005", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -312,21 +311,22 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)23, (int?)64, true, false);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.Convert<string>(a_?.GenderElement);
-		var k_ = context.Operators.Equal(j_, "female");
-		var l_ = context.Operators.And(h_, k_);
-		var m_ = this.Qualifying_Encounters();
-		var n_ = context.Operators.ExistsInList<Encounter>(m_);
-		var o_ = context.Operators.And(l_, n_);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)23, (int?)64, true, false);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var k_ = context.Operators.Convert<string>(a_?.GenderElement);
+		var l_ = context.Operators.Equal(k_, "female");
+		var m_ = context.Operators.And(i_, l_);
+		var n_ = this.Qualifying_Encounters();
+		var o_ = context.Operators.ExistsInList<Encounter>(n_);
+		var p_ = context.Operators.And(m_, o_);
 
-		return o_;
+		return p_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -428,7 +428,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(CervicalCytology?.Effective);
 			var m_ = this.Measurement_Period();
 			var n_ = context.Operators.End(m_);
-			var o_ = context.Operators.Quantity(3m, "years");
+			var o_ = context.Operators.Quantity((decimal?)3m, "years");
 			var p_ = context.Operators.Subtract(n_, o_);
 			var r_ = context.Operators.End(m_);
 			var s_ = context.Operators.Interval(p_, r_, true, true);
@@ -467,39 +467,40 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
 			bool? h_(CodeableConcept HPVTestCategory)
 			{
-				var aj_ = this.laboratory();
-				var ak_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
-				var al_ = context.Operators.CodeInList(aj_, (ak_?.codes as IEnumerable<CqlCode>));
+				var ak_ = this.laboratory();
+				var al_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
+				var am_ = context.Operators.CodeInList(ak_, (al_?.codes as IEnumerable<CqlCode>));
 
-				return al_;
+				return am_;
 			};
 			var i_ = context.Operators.WhereOrNull<CodeableConcept>((HPVTest?.Category as IEnumerable<CodeableConcept>), h_);
 			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = this.Patient();
-			var m_ = context.Operators.Convert<CqlDate>(l_?.BirthDateElement?.Value);
+			var m_ = context.Operators.Convert<CqlDateTime>(l_?.BirthDateElement?.Value);
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(HPVTest?.Effective);
 			var o_ = context.Operators.Start(n_);
 			var p_ = context.Operators.DateFrom(o_);
-			var q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
-			var r_ = context.Operators.GreaterOrEqual(q_, (int?)30);
-			var s_ = context.Operators.And(k_, r_);
-			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(HPVTest?.Effective);
-			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.End(u_);
-			var w_ = context.Operators.Quantity(5m, "years");
-			var x_ = context.Operators.Subtract(v_, w_);
-			var z_ = context.Operators.End(u_);
-			var aa_ = context.Operators.Interval(x_, z_, true, true);
-			var ab_ = context.Operators.ElementInInterval<CqlDateTime>(t_, aa_, null);
-			var ad_ = context.Operators.End(u_);
-			var ae_ = context.Operators.Not((bool?)(ad_ is null));
-			var af_ = context.Operators.And(ab_, ae_);
-			var ag_ = context.Operators.And(s_, af_);
-			var ah_ = context.Operators.Not((bool?)(HPVTest?.Value is null));
-			var ai_ = context.Operators.And(ag_, ah_);
+			var q_ = context.Operators.Convert<CqlDateTime>(p_);
+			var r_ = context.Operators.CalculateAgeAt(m_, q_, "year");
+			var s_ = context.Operators.GreaterOrEqual(r_, (int?)30);
+			var t_ = context.Operators.And(k_, s_);
+			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(HPVTest?.Effective);
+			var v_ = this.Measurement_Period();
+			var w_ = context.Operators.End(v_);
+			var x_ = context.Operators.Quantity((decimal?)5m, "years");
+			var y_ = context.Operators.Subtract(w_, x_);
+			var aa_ = context.Operators.End(v_);
+			var ab_ = context.Operators.Interval(y_, aa_, true, true);
+			var ac_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ab_, null);
+			var ae_ = context.Operators.End(v_);
+			var af_ = context.Operators.Not((bool?)(ae_ is null));
+			var ag_ = context.Operators.And(ac_, af_);
+			var ah_ = context.Operators.And(t_, ag_);
+			var ai_ = context.Operators.Not((bool?)(HPVTest?.Value is null));
+			var aj_ = context.Operators.And(ah_, ai_);
 
-			return ai_;
+			return aj_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 
@@ -577,7 +578,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var h_ = this.latest(CervicalCytology?.Effective);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity(3m, "years");
+			var k_ = context.Operators.Quantity((decimal?)3m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -618,29 +619,30 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var f_ = this.isLaboratoryTest(HPVTest);
 			var g_ = context.Operators.And(e_, f_);
 			var h_ = this.Patient();
-			var i_ = context.Operators.Convert<CqlDate>(h_?.BirthDateElement?.Value);
+			var i_ = context.Operators.Convert<CqlDateTime>(h_?.BirthDateElement?.Value);
 			var j_ = this.toInterval(HPVTest?.Effective);
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
-			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-			var n_ = context.Operators.GreaterOrEqual(m_, (int?)30);
-			var o_ = context.Operators.And(g_, n_);
-			var p_ = this.latest(HPVTest?.Effective);
-			var q_ = this.Measurement_Period();
-			var r_ = context.Operators.End(q_);
-			var s_ = context.Operators.Quantity(5m, "years");
-			var t_ = context.Operators.Subtract(r_, s_);
-			var v_ = context.Operators.End(q_);
-			var w_ = context.Operators.Interval(t_, v_, true, true);
-			var x_ = context.Operators.ElementInInterval<CqlDateTime>(p_, w_, null);
-			var z_ = context.Operators.End(q_);
-			var aa_ = context.Operators.Not((bool?)(z_ is null));
-			var ab_ = context.Operators.And(x_, aa_);
-			var ac_ = context.Operators.And(o_, ab_);
-			var ad_ = context.Operators.Not((bool?)(HPVTest?.Value is null));
-			var ae_ = context.Operators.And(ac_, ad_);
+			var m_ = context.Operators.Convert<CqlDateTime>(l_);
+			var n_ = context.Operators.CalculateAgeAt(i_, m_, "year");
+			var o_ = context.Operators.GreaterOrEqual(n_, (int?)30);
+			var p_ = context.Operators.And(g_, o_);
+			var q_ = this.latest(HPVTest?.Effective);
+			var r_ = this.Measurement_Period();
+			var s_ = context.Operators.End(r_);
+			var t_ = context.Operators.Quantity((decimal?)5m, "years");
+			var u_ = context.Operators.Subtract(s_, t_);
+			var w_ = context.Operators.End(r_);
+			var x_ = context.Operators.Interval(u_, w_, true, true);
+			var y_ = context.Operators.ElementInInterval<CqlDateTime>(q_, x_, null);
+			var aa_ = context.Operators.End(r_);
+			var ab_ = context.Operators.Not((bool?)(aa_ is null));
+			var ac_ = context.Operators.And(y_, ab_);
+			var ad_ = context.Operators.And(p_, ac_);
+			var ae_ = context.Operators.Not((bool?)(HPVTest?.Value is null));
+			var af_ = context.Operators.And(ad_, ae_);
 
-			return ae_;
+			return af_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 

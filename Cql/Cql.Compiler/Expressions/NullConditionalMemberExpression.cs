@@ -48,7 +48,7 @@ namespace Hl7.Cql.Compiler
             Expression notNull(Expression expression) => NotEqual(expression, Constant(null, MemberExpression.Expression.Type));
 
             Expression nullableMemberExpression = (MemberExpression.Type != resultType)
-                ? MemberExpression.ExprConvert(resultType)
+                ? MemberExpression.ConvertExpression(resultType)
                 : MemberExpression;
 
             var block = Block(new[] { objectVariable },

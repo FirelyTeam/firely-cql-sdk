@@ -22,22 +22,22 @@ namespace Hl7.Cql.Compiler
             if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
-            return BindCqlOperator(CqlOperator.ListIndexOf, source, element);
+            return BindCqlOperator(CqlOperator.ListIndexOf, null, source, element);
         }
 
         private Expression? Slice(Elm.Slice slice)
         {
             var source = Translate(slice.source!);
             var start = slice.startIndex == null || slice.startIndex is Elm.Null
-                ? NullConstantExpression.Int32
+                ? NullExpression.Int32
                 : Translate(slice.startIndex!);
             var end = slice.endIndex == null || slice.endIndex is Elm.Null
-                ? NullConstantExpression.Int32
+                ? NullExpression.Int32
                 : Translate(slice.endIndex!);
             if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
-            return BindCqlOperator(CqlOperator.Slice, source, start, end);
+            return BindCqlOperator(CqlOperator.Slice, null, source, start, end);
         }
     }
 }

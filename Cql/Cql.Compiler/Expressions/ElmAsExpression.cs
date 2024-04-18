@@ -19,10 +19,10 @@ namespace Hl7.Cql.Compiler.Expressions
         public override Expression Reduce()
         {
             if (AsType!.IsValueType)
-                return Expression.ExprConvert(AsType);
+                return Expression.ConvertExpression(AsType);
             if (Expression is ConstantExpression { Value: null })
                 return Constant(null, AsType);
-            return Expression.ExprTypeAs(AsType);
+            return Expression.TypeAsExpression(AsType);
         }
         protected override Expression VisitChildren(ExpressionVisitor visitor) =>
             Update(visitor.Visit(Expression));

@@ -313,7 +313,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var f_ = context.Operators.DateFrom(e_);
 		var h_ = context.Operators.End(b_);
 		var i_ = context.Operators.DateFrom(h_);
-		var j_ = context.Operators.Quantity(2m, "years");
+		var j_ = context.Operators.Quantity((decimal?)2m, "years");
 		var k_ = context.Operators.Subtract(i_, j_);
 		var l_ = context.Operators.Interval(f_, k_, true, true);
 		var m_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, d_, l_, (int?)0);
@@ -321,7 +321,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var q_ = context.Operators.DateFrom(p_);
 		var s_ = context.Operators.Start(b_);
 		var t_ = context.Operators.DateFrom(s_);
-		var u_ = context.Operators.Quantity(1m, "year");
+		var u_ = context.Operators.Quantity((decimal?)1m, "year");
 		var v_ = context.Operators.Subtract(t_, u_);
 		var x_ = context.Operators.End(b_);
 		var y_ = context.Operators.DateFrom(x_);
@@ -349,19 +349,20 @@ public class BCSEHEDISMY2022_1_0_0
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)52, (int?)74, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Enrolled_During_Participation_Period();
-		var m_ = context.Operators.And(k_, l_);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)52, (int?)74, true, true);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var k_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
+		var l_ = context.Operators.And(i_, k_);
+		var m_ = this.Enrolled_During_Participation_Period();
+		var n_ = context.Operators.And(l_, m_);
 
-		return m_;
+		return n_;
 	}
 
     [CqlDeclaration("Initial Population")]

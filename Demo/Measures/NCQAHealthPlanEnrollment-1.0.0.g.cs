@@ -90,7 +90,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		{
 			var i_ = context.Operators.End(tuple_gdeceaqjofqdgfgxnexuvihlk.Coverage1);
 			var j_ = context.Operators.Start(tuple_gdeceaqjofqdgfgxnexuvihlk.Coverage2);
-			var k_ = context.Operators.Quantity(1m, "day");
+			var k_ = context.Operators.Quantity((decimal?)1m, "day");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var o_ = context.Operators.Add(j_, k_);
 			var p_ = context.Operators.Interval(l_, o_, true, true);

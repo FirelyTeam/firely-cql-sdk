@@ -216,13 +216,13 @@ public class NCQAClaims_1_0_0
 							DataType al_(Claim.ItemComponent @this) => 
 								@this?.Serviced;
 							var am_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(ak_, al_);
-							CqlInterval<CqlDateTime> an_(DataType NormalDate)
+							CqlInterval<CqlDateTime> an_(object NormalDate)
 							{
 								var ar_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return ar_;
 							};
-							var ao_ = context.Operators.SelectOrNull<DataType, CqlInterval<CqlDateTime>>(am_, an_);
+							var ao_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>((am_ as IEnumerable<object>), an_);
 							var ap_ = new Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA
 							{
 								Claim = LineItemDefinition?.Claim,
@@ -314,21 +314,21 @@ public class NCQAClaims_1_0_0
 							DataType ab_(Claim.ProcedureComponent @this) => 
 								@this?.Procedure;
 							var ac_ = context.Operators.SelectOrNull<Claim.ProcedureComponent, DataType>(aa_, ab_);
-							bool? ad_(DataType @this)
+							bool? ad_(object @this)
 							{
 								var aq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 								var ar_ = context.Operators.Not((bool?)(aq_ is null));
 
 								return ar_;
 							};
-							var ae_ = context.Operators.WhereOrNull<DataType>(ac_, ad_);
-							object af_(DataType @this)
+							var ae_ = context.Operators.WhereOrNull<object>((ac_ as IEnumerable<object>), ad_);
+							object af_(object @this)
 							{
 								var as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 								return as_;
 							};
-							var ag_ = context.Operators.SelectOrNull<DataType, object>(ae_, af_);
+							var ag_ = context.Operators.SelectOrNull<object, object>(ae_, af_);
 							var ah_ = context.Operators.FlattenLateBoundList(ag_);
 							Coding ai_(object @object) => 
 								(@object as Coding);
@@ -375,13 +375,13 @@ public class NCQAClaims_1_0_0
 							DataType ax_(Claim.ItemComponent @this) => 
 								@this?.Serviced;
 							var ay_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(aw_, ax_);
-							CqlInterval<CqlDateTime> az_(DataType NormalDate)
+							CqlInterval<CqlDateTime> az_(object NormalDate)
 							{
 								var bd_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return bd_;
 							};
-							var ba_ = context.Operators.SelectOrNull<DataType, CqlInterval<CqlDateTime>>(ay_, az_);
+							var ba_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>((ay_ as IEnumerable<object>), az_);
 							var bb_ = new Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA
 							{
 								Claim = LineItemDefinition?.Claim,
@@ -462,21 +462,21 @@ public class NCQAClaims_1_0_0
 						DataType t_(Claim.DiagnosisComponent @this) => 
 							@this?.Diagnosis;
 						var u_ = context.Operators.SelectOrNull<Claim.DiagnosisComponent, DataType>(s_, t_);
-						bool? v_(DataType @this)
+						bool? v_(object @this)
 						{
 							var ag_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 							var ah_ = context.Operators.Not((bool?)(ag_ is null));
 
 							return ah_;
 						};
-						var w_ = context.Operators.WhereOrNull<DataType>(u_, v_);
-						object x_(DataType @this)
+						var w_ = context.Operators.WhereOrNull<object>((u_ as IEnumerable<object>), v_);
+						object x_(object @this)
 						{
 							var ai_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 							return ai_;
 						};
-						var y_ = context.Operators.SelectOrNull<DataType, object>(w_, x_);
+						var y_ = context.Operators.SelectOrNull<object, object>(w_, x_);
 						var z_ = context.Operators.FlattenLateBoundList(y_);
 						Coding aa_(object @object) => 
 							(@object as Coding);
@@ -652,7 +652,7 @@ public class NCQAClaims_1_0_0
 											var aw_ = context.Operators.Start(at_);
 											var ax_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
 											var ay_ = context.Operators.Add(aw_, new CqlQuantity(ax_, "day"));
-											var az_ = context.Operators.Quantity(1m, "day");
+											var az_ = context.Operators.Quantity((decimal?)1m, "day");
 											var ba_ = context.Operators.Subtract(ay_, az_);
 											var bb_ = context.Operators.Interval(au_, ba_, true, true);
 
@@ -663,7 +663,7 @@ public class NCQAClaims_1_0_0
 											var bc_ = FHIRHelpers_4_0_001.ToDate((i?.Serviced as Date));
 											var be_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
 											var bf_ = context.Operators.Add(bc_, new CqlQuantity(be_, "day"));
-											var bg_ = context.Operators.Quantity(1m, "day");
+											var bg_ = context.Operators.Quantity((decimal?)1m, "day");
 											var bh_ = context.Operators.Subtract(bf_, bg_);
 											var bi_ = context.Operators.Interval(bc_, bh_, true, true);
 											var bj_ = context.Operators.ConvertDateToDateTime(bi_?.low);
@@ -724,13 +724,13 @@ public class NCQAClaims_1_0_0
 									DataType cl_(Claim.ItemComponent @this) => 
 										@this?.Serviced;
 									var cm_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(ck_, cl_);
-									CqlInterval<CqlDateTime> cn_(DataType NormalDate)
+									CqlInterval<CqlDateTime> cn_(object NormalDate)
 									{
 										var ct_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 										return ct_;
 									};
-									var co_ = context.Operators.SelectOrNull<DataType, CqlInterval<CqlDateTime>>(cm_, cn_);
+									var co_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>((cm_ as IEnumerable<object>), cn_);
 									CqlInterval<CqlDateTime> cp_(Tuples.Tuple_DadNQNcGichTGjKhdjJicQeTP d) => 
 										d?.DaysSupplyInterval;
 									var cq_ = context.Operators.SelectOrNull<Tuples.Tuple_DadNQNcGichTGjKhdjJicQeTP, CqlInterval<CqlDateTime>>(ItemCalculation?.CoveredDays, cp_);
@@ -830,21 +830,21 @@ public class NCQAClaims_1_0_0
 						DataType v_(Claim.DiagnosisComponent @this) => 
 							@this?.Diagnosis;
 						var w_ = context.Operators.SelectOrNull<Claim.DiagnosisComponent, DataType>(u_, v_);
-						bool? x_(DataType @this)
+						bool? x_(object @this)
 						{
 							var ai_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 							var aj_ = context.Operators.Not((bool?)(ai_ is null));
 
 							return aj_;
 						};
-						var y_ = context.Operators.WhereOrNull<DataType>(w_, x_);
-						object z_(DataType @this)
+						var y_ = context.Operators.WhereOrNull<object>((w_ as IEnumerable<object>), x_);
+						object z_(object @this)
 						{
 							var ak_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 							return ak_;
 						};
-						var aa_ = context.Operators.SelectOrNull<DataType, object>(y_, z_);
+						var aa_ = context.Operators.SelectOrNull<object, object>(y_, z_);
 						var ab_ = context.Operators.FlattenLateBoundList(aa_);
 						Coding ac_(object @object) => 
 							(@object as Coding);
@@ -901,21 +901,21 @@ public class NCQAClaims_1_0_0
 								DataType bc_(Claim.ProcedureComponent @this) => 
 									@this?.Procedure;
 								var bd_ = context.Operators.SelectOrNull<Claim.ProcedureComponent, DataType>(bb_, bc_);
-								bool? be_(DataType @this)
+								bool? be_(object @this)
 								{
 									var cc_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 									var cd_ = context.Operators.Not((bool?)(cc_ is null));
 
 									return cd_;
 								};
-								var bf_ = context.Operators.WhereOrNull<DataType>(bd_, be_);
-								object bg_(DataType @this)
+								var bf_ = context.Operators.WhereOrNull<object>((bd_ as IEnumerable<object>), be_);
+								object bg_(object @this)
 								{
 									var ce_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 									return ce_;
 								};
-								var bh_ = context.Operators.SelectOrNull<DataType, object>(bf_, bg_);
+								var bh_ = context.Operators.SelectOrNull<object, object>(bf_, bg_);
 								var bi_ = context.Operators.FlattenLateBoundList(bh_);
 								Coding bj_(object @object) => 
 									(@object as Coding);
@@ -1110,21 +1110,21 @@ public class NCQAClaims_1_0_0
 							DataType am_(Claim.ProcedureComponent @this) => 
 								@this?.Procedure;
 							var an_ = context.Operators.SelectOrNull<Claim.ProcedureComponent, DataType>(al_, am_);
-							bool? ao_(DataType @this)
+							bool? ao_(object @this)
 							{
 								var bd_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 								var be_ = context.Operators.Not((bool?)(bd_ is null));
 
 								return be_;
 							};
-							var ap_ = context.Operators.WhereOrNull<DataType>(an_, ao_);
-							object aq_(DataType @this)
+							var ap_ = context.Operators.WhereOrNull<object>((an_ as IEnumerable<object>), ao_);
+							object aq_(object @this)
 							{
 								var bf_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 								return bf_;
 							};
-							var ar_ = context.Operators.SelectOrNull<DataType, object>(ap_, aq_);
+							var ar_ = context.Operators.SelectOrNull<object, object>(ap_, aq_);
 							var as_ = context.Operators.FlattenLateBoundList(ar_);
 							Coding at_(object @object) => 
 								(@object as Coding);
@@ -1583,21 +1583,21 @@ public class NCQAClaims_1_0_0
 			DataType s_(Claim.DiagnosisComponent @this) => 
 				@this?.Diagnosis;
 			var t_ = context.Operators.SelectOrNull<Claim.DiagnosisComponent, DataType>(r_, s_);
-			bool? u_(DataType @this)
+			bool? u_(object @this)
 			{
 				var ak_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
 
 				return al_;
 			};
-			var v_ = context.Operators.WhereOrNull<DataType>(t_, u_);
-			object w_(DataType @this)
+			var v_ = context.Operators.WhereOrNull<object>((t_ as IEnumerable<object>), u_);
+			object w_(object @this)
 			{
 				var am_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 				return am_;
 			};
-			var x_ = context.Operators.SelectOrNull<DataType, object>(v_, w_);
+			var x_ = context.Operators.SelectOrNull<object, object>(v_, w_);
 			var y_ = context.Operators.FlattenLateBoundList(x_);
 			Coding z_(object @object) => 
 				(@object as Coding);
@@ -1897,21 +1897,21 @@ public class NCQAClaims_1_0_0
 			DataType s_(Claim.DiagnosisComponent @this) => 
 				@this?.Diagnosis;
 			var t_ = context.Operators.SelectOrNull<Claim.DiagnosisComponent, DataType>(r_, s_);
-			bool? u_(DataType @this)
+			bool? u_(object @this)
 			{
 				var ak_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
 
 				return al_;
 			};
-			var v_ = context.Operators.WhereOrNull<DataType>(t_, u_);
-			object w_(DataType @this)
+			var v_ = context.Operators.WhereOrNull<object>((t_ as IEnumerable<object>), u_);
+			object w_(object @this)
 			{
 				var am_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 				return am_;
 			};
-			var x_ = context.Operators.SelectOrNull<DataType, object>(v_, w_);
+			var x_ = context.Operators.SelectOrNull<object, object>(v_, w_);
 			var y_ = context.Operators.FlattenLateBoundList(x_);
 			Coding z_(object @object) => 
 				(@object as Coding);
@@ -2618,7 +2618,7 @@ public class NCQAClaims_1_0_0
 									var bv_ = context.Operators.Start(br_);
 									var bw_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
 									var bx_ = context.Operators.Add(bv_, new CqlQuantity(bw_, "day"));
-									var by_ = context.Operators.Quantity(1m, "day");
+									var by_ = context.Operators.Quantity((decimal?)1m, "day");
 									var bz_ = context.Operators.Subtract(bx_, by_);
 									var ca_ = context.Operators.ConvertDateTimeToDate(bz_);
 									var cb_ = context.Operators.Interval(bt_, ca_, true, true);
@@ -3218,9 +3218,9 @@ public class NCQAClaims_1_0_0
 			DataType l_(Claim.ItemComponent @this) => 
 				@this?.Location;
 			var m_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(k_, l_);
-			ResourceReference n_(DataType l) => 
+			ResourceReference n_(object l) => 
 				(l as ResourceReference);
-			var o_ = context.Operators.SelectOrNull<DataType, ResourceReference>(m_, n_);
+			var o_ = context.Operators.SelectOrNull<object, ResourceReference>((m_ as IEnumerable<object>), n_);
 			bool? p_(Claim.ItemComponent i)
 			{
 				var ac_ = context.Operators.Convert<Integer>(i?.SequenceElement);
@@ -3238,7 +3238,7 @@ public class NCQAClaims_1_0_0
 			};
 			var s_ = context.Operators.WhereOrNull<Claim.ItemComponent>(q_, r_);
 			var u_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(s_, l_);
-			string v_(DataType l)
+			string v_(object l)
 			{
 				var ag_ = new FhirString[]
 				{
@@ -3256,7 +3256,7 @@ public class NCQAClaims_1_0_0
 
 				return aj_;
 			};
-			var w_ = context.Operators.SelectOrNull<DataType, string>(u_, v_);
+			var w_ = context.Operators.SelectOrNull<object, string>((u_ as IEnumerable<object>), v_);
 			var x_ = new Tuples.Tuple_FPCXihcEeChSjIUJHVXRcEXMI
 			{
 				SingleItem = (C?.Item as IEnumerable<Claim.ItemComponent>),

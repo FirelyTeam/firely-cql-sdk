@@ -121,13 +121,17 @@ namespace Hl7.Cql.Runtime
             type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
         /// <inheritdoc/>
-        public override Type? ResolveType(string typeSpecifier)
+        public override Type? ResolveType(string typeSpecifier, bool throwError = true)
         {
             var correctedTypeSpecifier = CorrectQiCoreExtensionTypes(typeSpecifier);
 
             if (Types.TryGetValue(correctedTypeSpecifier, out var type))
                 return type;
-            else throw new ArgumentException($"Type {correctedTypeSpecifier} is not bound", nameof(typeSpecifier));
+
+            if (throwError)
+                throw new ArgumentException($"Type {correctedTypeSpecifier} is not bound", nameof(typeSpecifier));
+
+            return null;
         }
 
         private static string CorrectQiCoreExtensionTypes(string typeSpecifier) =>

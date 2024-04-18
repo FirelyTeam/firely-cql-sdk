@@ -1,6 +1,6 @@
 ﻿#nullable enable
 abstract Hl7.Cql.Abstractions.TypeResolver.GetListElementType(System.Type! type, bool throwError = false) -> System.Type?
-abstract Hl7.Cql.Abstractions.TypeResolver.ResolveType(string! typeSpecifier) -> System.Type?
+abstract Hl7.Cql.Abstractions.TypeResolver.ResolveType(string! typeSpecifier, bool throwError = true) -> System.Type?
 const Hl7.Cql.Abstractions.UCUMUnits.Centimeter = "cm" -> string!
 const Hl7.Cql.Abstractions.UCUMUnits.Day = "d" -> string!
 const Hl7.Cql.Abstractions.UCUMUnits.Default = "1" -> string!

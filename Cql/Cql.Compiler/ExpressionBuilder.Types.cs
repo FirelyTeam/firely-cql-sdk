@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
             highClosed = ChangeType(highClosed, typeof(bool?));
             var high = Translate(ie.high!);
 
-            return BindCqlOperator(CqlOperator.Interval, low, high, lowClosed, highClosed);
+            return BindCqlOperator(CqlOperator.Interval, null, low, high, lowClosed, highClosed);
         }
     }
 }

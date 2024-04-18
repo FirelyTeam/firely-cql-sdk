@@ -90,14 +90,14 @@ namespace Hl7.Cql.Compiler
                 if (@is.isTypeSpecifier is Elm.ChoiceTypeSpecifier choice)
                 {
                     var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
-                    Expression result = op.ExprTypeIs(firstChoiceType);
+                    Expression result = op.TypeIsExpression(firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
                         var cti = TypeFor(choice.choice[i]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
-                        var ie = op.ExprTypeIs(cti);
+                        var ie = op.TypeIsExpression(cti);
                         result = Expression.Or(result, ie);
                     }
-                    var ta = result.ExprTypeAs<bool?>();
+                    var ta = result.TypeAsExpression<bool?>();
                     return ta;
                 }
 
@@ -111,8 +111,8 @@ namespace Hl7.Cql.Compiler
             if (type == null)
                 throw this.NewExpressionBuildingException($"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
 
-            var isExpression = op.ExprTypeIs(type);
-            var nullable = isExpression.ExprTypeAs<bool?>();
+            var isExpression = op.TypeIsExpression(type);
+            var nullable = isExpression.TypeAsExpression<bool?>();
             return nullable;
         }
 
@@ -146,7 +146,7 @@ namespace Hl7.Cql.Compiler
                 return input;
 
             if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
-                return input.ExprTypeAs(outputType);
+                return input.TypeAsExpression(outputType);
 
             if (_typeResolver.IsListType(input.Type)
                 && _typeResolver.IsListType(outputType))
@@ -156,15 +156,15 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                return BindCqlOperator(CqlOperator.Select, input, lambda);
+                return BindCqlOperator(CqlOperator.Select, null, input, lambda);
             }
 
             if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
             {
-                return BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(correctedTo, typeof(Type)));
+                return BindCqlOperator(CqlOperator.Convert, null, input, Expression.Constant(correctedTo, typeof(Type)));
             }
 
-            return BindCqlOperator(CqlOperator.Convert, input, Expression.Constant(outputType, typeof(Type)));
+            return BindCqlOperator(CqlOperator.Convert, null, input, Expression.Constant(outputType, typeof(Type)));
         }
     }
 }

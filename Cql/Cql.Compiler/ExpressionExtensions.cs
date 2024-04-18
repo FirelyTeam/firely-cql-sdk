@@ -5,24 +5,24 @@ namespace Hl7.Cql.Compiler;
 
 internal static class ExpressionExtensions
 {
-    public static UnaryExpression ExprConvert(this Expression expression, Type type)
+    public static UnaryExpression ConvertExpression(this Expression expression, Type type)
     {
         var cast = Expression.Convert(expression, type);
         return cast;
     }
 
-    public static UnaryExpression ExprConvert<TType>(this Expression expression) => ExprConvert(expression, typeof(TType));
+    public static UnaryExpression ConvertExpression<TType>(this Expression expression) => ConvertExpression(expression, typeof(TType));
 
 
-    public static UnaryExpression ExprTypeAs(this Expression expression, Type type)
+    public static UnaryExpression TypeAsExpression(this Expression expression, Type type)
     {
         var typeAs = Expression.TypeAs(expression, type);
         return typeAs;
     }
 
-    public static UnaryExpression ExprTypeAs<TType>(this Expression expression) => ExprTypeAs(expression, typeof(TType));
+    public static UnaryExpression TypeAsExpression<TType>(this Expression expression) => TypeAsExpression(expression, typeof(TType));
 
-    public static TypeBinaryExpression ExprTypeIs(this Expression expression, Type type)
+    public static TypeBinaryExpression TypeIsExpression(this Expression expression, Type type)
     {
         var typeAs = Expression.TypeIs(expression, type);
         return typeAs;

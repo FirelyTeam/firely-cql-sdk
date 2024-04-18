@@ -20,7 +20,7 @@ namespace Hl7.Cql.Compiler
             var left = Translate(eqv.operand[0]);
             var right = Translate(eqv.operand[1]);
             if (!_typeResolver.IsListType(left.Type))
-                return BindCqlOperator(CqlOperator.Equivalent, left, right);
+                return BindCqlOperator(CqlOperator.Equivalent, null, left, right);
 
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (!_typeResolver.IsListType(right.Type))
@@ -34,7 +34,7 @@ namespace Hl7.Cql.Compiler
                 return Expression.Constant(false, typeof(bool?));
             }
 
-            return BindCqlOperator(CqlOperator.ListEquivalent, left, right);
+            return BindCqlOperator(CqlOperator.ListEquivalent, null, left, right);
         }
     }
 }

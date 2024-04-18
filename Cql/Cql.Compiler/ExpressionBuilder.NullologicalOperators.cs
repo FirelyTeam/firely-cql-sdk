@@ -21,7 +21,7 @@ namespace Hl7.Cql.Compiler
         {
             var operands = TranslateAll(ce.operand);
             if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
-                return BindCqlOperator(CqlOperator.Coalesce, operands[0]);
+                return BindCqlOperator(CqlOperator.Coalesce, null, operands[0]);
 
             var distinctOperandTypes = operands
                 .Select(op => op.Type)
@@ -52,7 +52,7 @@ namespace Hl7.Cql.Compiler
                 return Expression.Constant(false, typeof(bool?));
 
             var compare = Expression.Equal(operand, Expression.Constant(null));
-            var asNullableBool = compare.ExprConvert<bool?>();
+            var asNullableBool = compare.ConvertExpression<bool?>();
             return asNullableBool;
         }
     }

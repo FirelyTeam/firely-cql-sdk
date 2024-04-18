@@ -15,7 +15,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinder
 {
-    private Expression Equal(Expression left, Expression right)
+    private Expression Equal(Expression left, Expression right) // @TODO: Cast
     {
         if (left.Type.IsEnum())
         {
@@ -28,7 +28,7 @@ partial class CqlOperatorsBinder
 
             if (right.Type == typeof(string))
             {
-                return BindToMethod(CqlOperator.EnumEqualsString, left.ExprConvert<object>(), right);
+                return BindToMethod(CqlOperator.EnumEqualsString, null, left.ConvertExpression<object>(), right);
             }
 
             throw new NotImplementedException();
@@ -38,7 +38,7 @@ partial class CqlOperatorsBinder
         {
             if (left.Type == typeof(string))
             {
-                return BindToMethod(CqlOperator.EnumEqualsString, right.ExprConvert<object>(), left);
+                return BindToMethod(CqlOperator.EnumEqualsString, null, right.ConvertExpression<object>(), left);
 
             }
 
@@ -53,12 +53,12 @@ partial class CqlOperatorsBinder
                 var rightElementType = _typeResolver.GetListElementType(right.Type, true)!;
                 if (rightElementType != leftElementType)
                     throw new Exception($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                return BindToMethod(CqlOperator.ListEqual, left, right);
+                return BindToMethod(CqlOperator.ListEqual, null, left, right);
             }
             throw new NotImplementedException();
         }
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.Equal), left, right);
+        return BindToMethodConvertArgs(nameof(ICqlOperators.Equal), null, left, right);
     }
 
     private Expression Expand(
@@ -66,7 +66,7 @@ partial class CqlOperatorsBinder
         Expression perQuantity)
     {
         if (perQuantity is ConstantExpression { Value: null })
-            perQuantity = NullConstantExpression.ForType<CqlQuantity>();
+            perQuantity = NullExpression.ForType<CqlQuantity>();
 
         if (_typeResolver.IsListType(argument.Type))
         {
@@ -112,13 +112,13 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), left, right);
+                return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), rightElementType, left, right);
             }
         }
 
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), [left, right], false);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), null, [left, right], false);
         if (methodInfo is null)
-            return NullConstantExpression.Object;
+            return NullExpression.Object;
 
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo, convertedArgs);
         return call;
@@ -130,9 +130,11 @@ partial class CqlOperatorsBinder
     {
         if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
         {
-            return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion),
-                left.ExprTypeAs<IEnumerable<CqlCode>>(),
-                right.ExprTypeAs<IEnumerable<CqlCode>>());
+            return BindToMethodConvertArgs(
+                nameof(ICqlOperators.ValueSetUnion),
+                null,
+                left.TypeAsExpression<IEnumerable<CqlCode>>(),
+                right.TypeAsExpression<IEnumerable<CqlCode>>());
         }
         var leftElementType = _typeResolver.GetListElementType(left.Type);
         if (leftElementType == typeof(CqlCode))
@@ -140,11 +142,11 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), left, right);
+                return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), null, left, right);
             }
         }
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.ListUnion), left, right);
+        return BindToMethodConvertArgs(nameof(ICqlOperators.ListUnion), leftElementType, left, right);
     }
 
     private Expression ResolveValueSet(Expression expression)
@@ -229,9 +231,9 @@ partial class CqlOperatorsBinder
     {
         // This should be disallowed but isn't, so handle it:
         if (operand.Type == typeof(CqlInterval<object>))
-            return NullConstantExpression.Int32;
+            return NullExpression.Int32;
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.Width), operand);
+        return BindToMethodConvertArgs(nameof(ICqlOperators.Width), null, operand);
     }
 
     private MethodCallExpression LateBoundProperty(
@@ -242,7 +244,7 @@ partial class CqlOperatorsBinder
         if (typeExpression is ConstantExpression { Value: Type type })
         {
             if (source.Type != typeof(object))
-                source = source.ExprTypeAs<object>();
+                source = source.TypeAsExpression<object>();
 
             var call = BindToGenericMethod(nameof(ICqlOperators.LateBoundProperty), [type!], source, propertyName);
             return call;
@@ -262,8 +264,8 @@ partial class CqlOperatorsBinder
             return Expression.Constant(null, low.Type == high.Type ? typeof(CqlInterval<>).MakeGenericType(low.Type) : typeof(CqlInterval<object>));
         }
 
-        var (exactMethod, _) = ICqlOperators_MethodsWithParameters_By_Name[nameof(ICqlOperators.Interval)]
-            .FirstOrDefault(t =>
+        var (exactMethod, _) = ICqlOperatorsMethodsWithParameters_By_MethodNameAndParameterCount[(nameof(ICqlOperators.Interval), 4)]
+            .SingleOrDefault(t =>
                 t.parameters
                     .Select(p => p.ParameterType)
                     .SequenceEqual([low.Type, high.Type, typeof(bool?), typeof(bool?)]));
@@ -294,8 +296,8 @@ partial class CqlOperatorsBinder
             return call;
         }
 
-        return TryConvert(source, toType, out var convert)
-            ? convert
+        return TryConvert(source, toType, out var t)
+            ? t.arg!
             : throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
     }
 

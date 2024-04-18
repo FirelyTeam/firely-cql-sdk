@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
@@ -10,69 +9,83 @@ namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinder
 {
     private bool TryConvert(
-        Expression fromExpr,
+        Expression arg,
         Type to,
-        [NotNullWhen(true)] out Expression? toExpr)
+        out (Expression arg, TypeConversion conversion) result)
     {
-        Type from = fromExpr.Type;
+        Type from = arg.Type;
 
         if (from == to)
         {
-            toExpr = fromExpr;
+            // Exact match
+            result = (arg, TypeConversion.ExactType);
             return true;
         }
 
-        if (fromExpr is ConstantExpression fromConstant)
+        if (from.IsAssignableTo(to))
+        {
+            // 'from' is a subtype of 'to' e.g. string -> object
+            result = (Expression.Convert(arg, to), TypeConversion.SubType);
+            return true;
+        }
+
+        if (arg is ConstantExpression fromConstant)
         {
             if (fromConstant.Value is null && to.AllowNullValues())
             {
-                // Null
-                toExpr = NullConstantExpression.ForType(to);
+                // Null values to a type that can accept nulls e.g. default(string) or default(int?)
+                result = (NullExpression.ForType(to), TypeConversion.ExactType);
                 return true;
             }
 
             if (fromConstant.Value is Enum enumValue && to == typeof(string) )
             {
-                // Enum to lowercase string
+                // Enum values to lowercase string e.g DateTimePrecision.Year -> "year"
                 var name = Enum.GetName(enumValue.GetType(), enumValue);
                 if (name is null)
                     throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
-                toExpr = Expression.Constant(name.ToLowerInvariant());
+
+                result = (Expression.Constant(name.ToLowerInvariant()), TypeConversion.SimpleConvert);
                 return true;
             }
 
             if (fromConstant.Type.IsValueType && to.IsNullable(out var toUnderlyingType) && fromConstant.Type == toUnderlyingType)
             {
-                // e.g. int -> int?
-                toExpr = Expression.Convert(fromExpr, to);
+                // Value type values to nullable type e.g. int -> int?
+                result = (Expression.Convert(arg, to), TypeConversion.SimpleConvert);
                 return true;
             }
         }
 
-        if (to.IsAssignableFrom(from))
-        {
-            toExpr = Expression.Convert(fromExpr, to); // Direct cast
-            return true;
-        }
-
         if (_typeConverter?.CanConvert(from, to) == true)
         {
-            toExpr = BindToGenericMethod(
+            result = (BindToGenericMethod(
                 nameof(ICqlOperators.Convert),
                 [to],
-                fromExpr.ExprConvert<object>());
+                arg.ConvertExpression<object>()
+                ), TypeConversion.OperatorConvert);
             return true;
         }
 
-        toExpr = null;
+        result = default;
         return false;
+    }
+
+    private enum TypeConversion
+    {
+        NoMatch = 0,
+        ExactType = 1,
+        SubType = 2,
+        SimpleConvert = 3,
+        OperatorConvert = 4,
     }
 
     private MethodCallExpression BindToMethodConvertArgs(
         string methodName,
+        Type? resultTypeHint,
         params Expression[] arguments)
     {
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, resultTypeHint, arguments);
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
         return call;
     }
