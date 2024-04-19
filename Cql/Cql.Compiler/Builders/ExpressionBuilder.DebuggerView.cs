@@ -7,7 +7,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Compiler.Builders;
 
 [DebuggerDisplay("{DebuggerView}")]
-partial class ExpressionBuilder : IBuilderContext
+partial class ExpressionBuilderContext : IBuilderContext
 {
     private IBuilderContext CreateBuilderNode() => new ExpressionBuilderNode()
     {
@@ -59,10 +59,10 @@ partial class ExpressionBuilder : IBuilderContext
 
     private readonly record struct PopElementToken : IPopToken
     {
-        private readonly ExpressionBuilder _owner;
+        private readonly ExpressionBuilderContext _owner;
         private readonly Elm.Element? _previousElement;
 
-        public PopElementToken(ExpressionBuilder owner, Elm.Element? previousElement)
+        public PopElementToken(ExpressionBuilderContext owner, Elm.Element? previousElement)
         {
             _owner = owner;
             _previousElement = previousElement;

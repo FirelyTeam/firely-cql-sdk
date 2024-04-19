@@ -15,7 +15,7 @@ using F = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-partial class ExpressionBuilder
+partial class ExpressionBuilderContext
 {
     // Yeah, hardwired to FHIR 4.0.1 for now.
     private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
@@ -35,13 +35,12 @@ partial class ExpressionBuilder
         return KnownErrors.TryGetValue((source, to), out correctedTo);
     }
 
-    private static LambdaExpression NotImplemented(
-        ExpressionBuilder ctx,
+    private LambdaExpression NotImplemented(
         string nav,
         Type[] signature,
         Type returnType)
     {
-        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, ctx) + index));
+        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, this) + index));
         var ctor = ConstructorInfos.NotImplementedException;
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
         var @throw = Expression.Throw(@new, returnType);
@@ -53,25 +52,6 @@ partial class ExpressionBuilder
         //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
         //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
         return lambda;
-    }
-
-    protected internal static PropertyInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
-    {
-        if (type.IsGenericType)
-        {
-            var gtd = type.GetGenericTypeDefinition();
-            if (gtd == typeof(Nullable<>))
-            {
-                if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
-                {
-                    var valueMember = type.GetProperty("Value");
-                    return valueMember;
-                }
-            }
-        }
-
-        var member = typeResolver.GetProperty(type, name);
-        return member;
     }
 
     protected static Type GetFuncType(Type[] funcTypeParameters) =>
@@ -152,7 +132,7 @@ partial class ExpressionBuilder
         return new NullConditionalMemberExpression(before, member);
     }
 
-    internal static string TypeNameToIdentifier(Type type, ExpressionBuilder? ctx)
+    private static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx = null)
     {
         var typeName = type.Name.ToLowerInvariant();
         if (type.IsGenericType)

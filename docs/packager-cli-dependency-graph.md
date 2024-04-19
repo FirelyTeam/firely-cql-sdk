@@ -154,9 +154,6 @@ classDiagram
         class ExpressionBuilderSettings {
         }
 
-        class IExpressionBuilderFactory {
-        }
-
         class ExpressionBuilder{
         }
 
@@ -214,14 +211,12 @@ classDiagram
     DefinitionDictionary~LambdaExpression~ ..> LibrarySetExpressionBuilderContext : injected
     LibrarySet ..> LibrarySetExpressionBuilderContext : injected
 
-    IExpressionBuilderFactory ..> LibraryExpressionBuilder : injected
+    ExpressionBuilder ..> LibraryExpressionBuilder : injected
 
     LibraryExpressionBuilder ..> LibraryExpressionBuilderContext : injected
     Library ..> LibraryExpressionBuilderContext : injected
     DefinitionDictionary~LambdaExpression~ ..> LibraryExpressionBuilderContext : injected
     ILibraryExpressionBuilderContext ..> LibraryExpressionBuilderContext : injected (optional)
-
-    ExpressionBuilder ..> IExpressionBuilderFactory : created by
 
     OperatorsBinder ..> ExpressionBuilder : injected
     TypeManager ..> ExpressionBuilder : injected

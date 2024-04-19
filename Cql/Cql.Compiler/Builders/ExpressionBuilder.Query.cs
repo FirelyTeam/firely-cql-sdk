@@ -16,7 +16,7 @@ using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePa
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class ExpressionBuilder
+partial class ExpressionBuilderContext
 {
     protected Expression Query(Query query)
     {

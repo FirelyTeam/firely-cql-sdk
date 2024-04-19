@@ -12,14 +12,14 @@ namespace Hl7.Cql.Compiler.Builders;
 internal class LibraryExpressionBuilder
 {
     internal readonly ILogger<LibraryExpressionBuilder> _logger;
-    internal readonly IExpressionBuilderFactory _expressionBuilderFactory;
+    internal readonly ExpressionBuilder _expressionBuilder;
 
     public LibraryExpressionBuilder(
         ILogger<LibraryExpressionBuilder> logger,
-        IExpressionBuilderFactory expressionBuilderFactory)
+        ExpressionBuilder expressionBuilder)
     {
         _logger = logger;
-        _expressionBuilderFactory = expressionBuilderFactory;
+        _expressionBuilder = expressionBuilder;
     }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary(
@@ -35,7 +35,7 @@ internal class LibraryExpressionBuilder
 internal partial class LibraryExpressionBuilderContext
 {
     private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly IExpressionBuilderFactory _expressionBuilderFactory;
+    private readonly ExpressionBuilder _expressionBuilder;
 
     public Library Library { get; }
 
@@ -49,7 +49,7 @@ internal partial class LibraryExpressionBuilderContext
     {
         // External Services
         _logger = builder._logger;
-        _expressionBuilderFactory = builder._expressionBuilderFactory;
+        _expressionBuilder = builder._expressionBuilder;
 
         // External State
         LibraryDefinitions = libraryDefinitions;
@@ -72,7 +72,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    _expressionBuilderFactory.New(this).ProcessIncludes(includeDef);
+                    _expressionBuilder.ProcessIncludes(this, includeDef);
                 }
 
                 AddLibraryDefinitionsFromIncludes();
@@ -83,7 +83,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var valueSetDef in valueSetDefs)
                 {
-                    _expressionBuilderFactory.New(this).ProcessValueSetDef(valueSetDef);
+                    _expressionBuilder.ProcessValueSetDef(this, valueSetDef);
                 }
             }
 
@@ -93,7 +93,7 @@ internal partial class LibraryExpressionBuilderContext
 
                 foreach (var codeDef in codeDefs)
                 {
-                    _expressionBuilderFactory.New(this).ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls);
+                    _expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
                 }
             }
 
@@ -101,7 +101,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var codeSystemDef in codeSystemDefs)
                 {
-                    _expressionBuilderFactory.New(this).ProcessCodeSystemDef(codeSystemDef);
+                    _expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
                 }
             }
 
@@ -109,7 +109,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var conceptDef in conceptDefs)
                 {
-                    _expressionBuilderFactory.New(this).ProcessConceptDef(conceptDef);
+                    _expressionBuilder.ProcessConceptDef(this, conceptDef);
                 }
             }
 
@@ -117,7 +117,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var parameterDef in parameterDefs)
                 {
-                    _expressionBuilderFactory.New(this).ProcessParameterDef(parameterDef);
+                    _expressionBuilder.ProcessParameterDef(this, parameterDef);
                 }
             }
 
@@ -125,7 +125,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var expressionDef in expressionDefs)
                 {
-                    _expressionBuilderFactory.New(this).ProcessExpressionDef(expressionDef);
+                    _expressionBuilder.ProcessExpressionDef(this, expressionDef);
                 }
             }
 

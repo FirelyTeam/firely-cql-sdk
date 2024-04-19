@@ -11,30 +11,29 @@ using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 
-namespace Hl7.Cql.Compiler.Builders
+namespace Hl7.Cql.Compiler.Builders;
+
+partial class ExpressionBuilderContext
 {
-    internal partial class ExpressionBuilder
+    protected Expression Equivalent(Elm.Equivalent eqv)
     {
-        protected Expression Equivalent(Elm.Equivalent eqv)
+        var left = Translate(eqv.operand[0]);
+        var right = Translate(eqv.operand[1]);
+        if (!_typeResolver.IsListType(left.Type))
+            return BindCqlOperator(CqlOperator.Equivalent, null, left, right);
+
+        var leftElementType = _typeResolver.GetListElementType(left.Type);
+        if (!_typeResolver.IsListType(right.Type))
+            throw new NotImplementedException().WithContext(this);
+
+        var rightElementType = _typeResolver.GetListElementType(right.Type);
+        if (leftElementType != rightElementType)
         {
-            var left = Translate(eqv.operand[0]);
-            var right = Translate(eqv.operand[1]);
-            if (!_typeResolver.IsListType(left.Type))
-                return BindCqlOperator(CqlOperator.Equivalent, null, left, right);
-
-            var leftElementType = _typeResolver.GetListElementType(left.Type);
-            if (!_typeResolver.IsListType(right.Type))
-                throw new NotImplementedException().WithContext(this);
-
-            var rightElementType = _typeResolver.GetListElementType(right.Type);
-            if (leftElementType != rightElementType)
-            {
-                // This appears in the CQL tests:
-                //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
-                return Expression.Constant(false, typeof(bool?));
-            }
-
-            return BindCqlOperator(CqlOperator.ListEquivalent, null, left, right);
+            // This appears in the CQL tests:
+            //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
+            return Expression.Constant(false, typeof(bool?));
         }
+
+        return BindCqlOperator(CqlOperator.ListEquivalent, null, left, right);
     }
 }

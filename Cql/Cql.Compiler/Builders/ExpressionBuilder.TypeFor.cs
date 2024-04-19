@@ -8,7 +8,7 @@ using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class ExpressionBuilder
+partial class ExpressionBuilderContext
 {
     private Type? TypeFor(
         Element element,

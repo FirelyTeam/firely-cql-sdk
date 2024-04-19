@@ -15,8 +15,7 @@ namespace Hl7.Cql.Compiler;
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
 internal class CqlCompilerFactory :
-    CqlAbstractionsFactory,
-    IExpressionBuilderFactory
+    CqlAbstractionsFactory
 {
     protected int? CacheSize { get; }
 
@@ -59,7 +58,7 @@ internal class CqlCompilerFactory :
     protected virtual LibraryExpressionBuilder NewLibraryExpressionBuilder() =>
         new LibraryExpressionBuilder(
             logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
-            expressionBuilderFactory: this);
+            ExpressionBuilder);
 
     protected virtual ExpressionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         ExpressionBuilderSettings.Default;
@@ -67,16 +66,16 @@ internal class CqlCompilerFactory :
     protected virtual ILogger<LibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
         LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
-    ExpressionBuilder IExpressionBuilderFactory.New(ILibraryExpressionBuilderContext libCtx) =>
-        new ExpressionBuilder(
-            logger: Singleton(fn: NewExpressionBuilderLogger),
+    public virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
+
+    protected virtual ExpressionBuilder NewExpressionBuilder() =>
+        new(logger: Singleton(fn: NewExpressionBuilderLogger),
             operatorsBinder: OperatorsBinder,
             typeManager: TypeManager,
             typeConverter: TypeConverter,
             typeResolver: TypeResolver,
             contextBinder: ContextBinder,
-            expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings),
-            libContext: libCtx);
+            expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings));
 
     protected virtual ILogger<ExpressionBuilder> NewExpressionBuilderLogger() =>
         LoggerFactory.CreateLogger<ExpressionBuilder>();

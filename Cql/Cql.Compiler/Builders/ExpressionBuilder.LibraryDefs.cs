@@ -12,7 +12,7 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-partial class ExpressionBuilder
+partial class ExpressionBuilderContext
 {
     public void ProcessCodeSystemDef(
         CodeSystemDef codeSystem) =>
@@ -175,7 +175,7 @@ partial class ExpressionBuilder
                             var paramTypes = new[] { typeof(CqlContext) }
                                 .Concat(functionParameterTypes)
                                 .ToArray();
-                            var notImplemented = NotImplemented(this, expressionKey, paramTypes, returnType);
+                            var notImplemented = NotImplemented(expressionKey, paramTypes, returnType);
                             _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,
                                 paramTypes, notImplemented);
                             _logger.LogWarning(FormatMessage(
