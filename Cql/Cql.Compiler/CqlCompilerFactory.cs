@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Binders;
 using Hl7.Cql.Compiler.Builders;
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// This creates all services necessary for a <see cref="LibraryDefinitionsBuilder"/>.
+/// This creates all services necessary for the Hl7.Cql.Compiler assembly.
 /// The idea is not to inject this into service types, it's purpose is to
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
 internal class CqlCompilerFactory :
     CqlAbstractionsFactory,
-    ILibrarySetExpressionBuilderFactory,
-    ILibraryExpressionBuilderFactory,
     IExpressionBuilderFactory
 {
     protected int? CacheSize { get; }
@@ -54,31 +49,22 @@ internal class CqlCompilerFactory :
     protected virtual TypeManager NewTypeManager() => new(resolver: TypeResolver);
 
 
-    public virtual LibraryDefinitionsBuilder LibraryDefinitionsBuilder => Singleton(fn: NewLibraryDefinitionsBuilder);
+    public virtual ILibrarySetExpressionBuilder LibrarySetExpressionBuilder => Singleton(fn: NewLibrarySetExpressionBuilder);
 
-    protected virtual LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder() =>
-        new(librarySetExpressionBuilderFactory: this,
-            libraryExpressionBuilderFactory: this);
+    protected virtual LibrarySetExpressionBuilder NewLibrarySetExpressionBuilder() =>
+        new(LibraryExpressionBuilder);
 
-    LibrarySetExpressionBuilder ILibrarySetExpressionBuilderFactory.New() =>
-        new LibrarySetExpressionBuilder(
-            libraryExpressionBuilderFactory: this);
+    public virtual ILibraryExpressionBuilder LibraryExpressionBuilder => Singleton(fn: NewLibraryExpressionBuilder);
 
-    LibraryExpressionBuilder ILibraryExpressionBuilderFactory.New(
-        Library library,
-        DefinitionDictionary<LambdaExpression>? libraryDefinitions,
-        ILibrarySetExpressionBuilderContext? libsCtx) =>
+    protected virtual LibraryExpressionBuilder NewLibraryExpressionBuilder() =>
         new LibraryExpressionBuilder(
             logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
-            expressionBuilderFactory: this,
-            library: library,
-            libraryDefinitions: libraryDefinitions ?? new(),
-            libsCtx: libsCtx);
+            expressionBuilderFactory: this);
 
-    protected virtual LibraryDefinitionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
-        LibraryDefinitionBuilderSettings.Default;
+    protected virtual ExpressionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
+        ExpressionBuilderSettings.Default;
 
-    protected virtual ILogger<LibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
+    protected virtual ILogger<ILibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
         LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
     ExpressionBuilder IExpressionBuilderFactory.New(ILibraryExpressionBuilderContext libCtx) =>
@@ -89,7 +75,7 @@ internal class CqlCompilerFactory :
             typeConverter: TypeConverter,
             typeResolver: TypeResolver,
             contextBinder: ContextBinder,
-            libraryDefinitionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings),
+            expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings),
             libContext: libCtx);
 
     protected virtual ILogger<ExpressionBuilder> NewExpressionBuilderLogger() =>

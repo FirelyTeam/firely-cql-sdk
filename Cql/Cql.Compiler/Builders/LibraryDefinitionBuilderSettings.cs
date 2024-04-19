@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -11,9 +11,9 @@ using System;
 namespace Hl7.Cql.Compiler.Builders
 {
     /// <summary>
-    /// Describes settings to control the behavior of <see cref="LibraryDefinitionsBuilder"/>
+    /// Describes settings to control the behavior of <see cref="ExpressionBuilder"/>
     /// </summary>
-    internal class LibraryDefinitionBuilderSettings
+    internal class ExpressionBuilderSettings
     {
         /// <summary>
         /// Allows a child scope to redefine an existing parent scope.  Default is <see langword="true" />
@@ -22,18 +22,18 @@ namespace Hl7.Cql.Compiler.Builders
         /// For example, consider this query:
         ///
         /// IinCC X
-        ///    return 
+        ///    return
         ///    (
         ///        Tuple
         ///        {
         ///            sdate: start of X,
-        ///            edate: 
+        ///            edate:
         ///            end of X,
-        ///            ndate: 
+        ///            ndate:
         ///            end of X + System.Quantity { value: DDiff, unit: 'day' }
-        ///        } 
+        ///        }
         ///    ) X
-        ///         return Tuple 
+        ///         return Tuple
         ///         {
         ///             CInterval: Interval[X.sdate, X.edate],
         ///             RInterval: Interval[X.sdate, X.ndate]
@@ -52,6 +52,6 @@ namespace Hl7.Cql.Compiler.Builders
         /// </summary>
         public bool AllowUnresolvedExternals { get; init; } = true;
 
-        public static readonly LibraryDefinitionBuilderSettings Default = new LibraryDefinitionBuilderSettings();
+        public static readonly ExpressionBuilderSettings Default = new ExpressionBuilderSettings();
     }
 }

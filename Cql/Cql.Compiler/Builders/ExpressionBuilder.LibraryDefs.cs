@@ -169,7 +169,7 @@ partial class ExpressionBuilder
 
                     if (function?.external ?? false)
                     {
-                        if (_libraryDefinitionBuilderSettings.AllowUnresolvedExternals)
+                        if (_expressionBuilderSettings.AllowUnresolvedExternals)
                         {
                             var returnType = TypeFor(expressionDef)!;
                             var paramTypes = new[] { typeof(CqlContext) }

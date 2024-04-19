@@ -4,9 +4,9 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal interface ILibraryExpressionBuilderFactory
+internal interface ILibraryExpressionBuilder
 {
-    LibraryExpressionBuilder New(
+    DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
         DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
         ILibrarySetExpressionBuilderContext? libsCtx = null);

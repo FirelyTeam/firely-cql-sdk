@@ -9,107 +9,128 @@ namespace Hl7.Cql.Compiler.Builders;
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
-partial class LibraryExpressionBuilder
+partial class LibraryExpressionBuilder : ILibraryExpressionBuilder
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly ILogger<ILibraryExpressionBuilder> _logger;
     private readonly IExpressionBuilderFactory _expressionBuilderFactory;
 
-    public Library Library { get; }
-
-    public string LibraryKey => Library.NameAndVersion()!;
-
     public LibraryExpressionBuilder(
-        ILogger<LibraryExpressionBuilder> logger,
-        IExpressionBuilderFactory expressionBuilderFactory,
-        Library library,
-        DefinitionDictionary<LambdaExpression> libraryDefinitions,
-        ILibrarySetExpressionBuilderContext? libsCtx = null)
+        ILogger<ILibraryExpressionBuilder> logger,
+        IExpressionBuilderFactory expressionBuilderFactory)
     {
-        // External Services
         _logger = logger;
-
-        // External State
-        LibraryDefinitions = libraryDefinitions;
-        Library = library;
         _expressionBuilderFactory = expressionBuilderFactory;
-        LibrarySetContext = libsCtx;
-
-        // Internal State
-        _libraryIdentifiersByAlias = new();
-        _codesByName = new();
-        _codesByCodeSystemName = new();
-        _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
     }
 
-    public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
-        this.CatchRethrowExpressionBuildingException(_ =>
+    public DefinitionDictionary<LambdaExpression> ProcessLibrary(
+        Library library,
+        DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
+        ILibrarySetExpressionBuilderContext? libsCtx = null)
+    {
+        Context ctx = new(this, library, libraryDefinitions ?? new(), libsCtx);
+        return ctx.ProcessLibrary();
+    }
+
+
+    protected partial class Context
+    {
+        private readonly ILogger<ILibraryExpressionBuilder> _logger;
+        private readonly IExpressionBuilderFactory _expressionBuilderFactory;
+
+        public Library Library { get; }
+
+        public string LibraryKey => Library.NameAndVersion()!;
+
+        public Context(
+            LibraryExpressionBuilder libraryExpressionBuilder,
+            Library library,
+            DefinitionDictionary<LambdaExpression> libraryDefinitions,
+            ILibrarySetExpressionBuilderContext? libsCtx = null)
         {
-            _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
+            // External Services
+            _logger = libraryExpressionBuilder._logger;
+            _expressionBuilderFactory = libraryExpressionBuilder._expressionBuilderFactory;
 
-            if (Library.includes is { Length: > 0 } includeDefs)
+            // External State
+            LibraryDefinitions = libraryDefinitions;
+            Library = library;
+            LibrarySetContext = libsCtx;
+
+            // Internal State
+            _libraryIdentifiersByAlias = new();
+            _codesByName = new();
+            _codesByCodeSystemName = new();
+            _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
+        }
+
+        public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
+            this.CatchRethrowExpressionBuildingException(_ =>
             {
-                foreach (var includeDef in includeDefs)
+                _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
+
+                if (Library.includes is { Length: > 0 } includeDefs)
                 {
-                    NewExpressionBuilder().ProcessIncludes(includeDef);
+                    foreach (var includeDef in includeDefs)
+                    {
+                        _expressionBuilderFactory.New(this).ProcessIncludes(includeDef);
+                    }
+
+                    AddLibraryDefinitionsFromIncludes();
+                    AddCodeSystemRefsFromIncludes();
                 }
 
-                AddLibraryDefinitionsFromIncludes();
-                AddCodeSystemRefsFromIncludes();
-            }
-
-            if (Library.valueSets is { Length: > 0 } valueSetDefs)
-            {
-                foreach (var valueSetDef in valueSetDefs)
+                if (Library.valueSets is { Length: > 0 } valueSetDefs)
                 {
-                    NewExpressionBuilder().ProcessValueSetDef(valueSetDef);
+                    foreach (var valueSetDef in valueSetDefs)
+                    {
+                        _expressionBuilderFactory.New(this).ProcessValueSetDef(valueSetDef);
+                    }
                 }
-            }
 
-            if (Library.codes is { Length: > 0 } codeDefs)
-            {
-                HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
-
-                foreach (var codeDef in codeDefs)
+                if (Library.codes is { Length: > 0 } codeDefs)
                 {
-                    NewExpressionBuilder().ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls);
-                }
-            }
+                    HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
 
-            if (Library.codeSystems is { Length: > 0 } codeSystemDefs)
-            {
-                foreach (var codeSystemDef in codeSystemDefs)
+                    foreach (var codeDef in codeDefs)
+                    {
+                        _expressionBuilderFactory.New(this).ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls);
+                    }
+                }
+
+                if (Library.codeSystems is { Length: > 0 } codeSystemDefs)
                 {
-                    NewExpressionBuilder().ProcessCodeSystemDef(codeSystemDef);
+                    foreach (var codeSystemDef in codeSystemDefs)
+                    {
+                        _expressionBuilderFactory.New(this).ProcessCodeSystemDef(codeSystemDef);
+                    }
                 }
-            }
 
-            if (Library.concepts is { Length: > 0 } conceptDefs)
-            {
-                foreach (var conceptDef in conceptDefs)
+                if (Library.concepts is { Length: > 0 } conceptDefs)
                 {
-                    NewExpressionBuilder().ProcessConceptDef(conceptDef);
+                    foreach (var conceptDef in conceptDefs)
+                    {
+                        _expressionBuilderFactory.New(this).ProcessConceptDef(conceptDef);
+                    }
                 }
-            }
 
-            if (Library.parameters is { Length: > 0 } parameterDefs)
-            {
-                foreach (var parameterDef in parameterDefs)
+                if (Library.parameters is { Length: > 0 } parameterDefs)
                 {
-                    NewExpressionBuilder().ProcessParameterDef(parameterDef);
+                    foreach (var parameterDef in parameterDefs)
+                    {
+                        _expressionBuilderFactory.New(this).ProcessParameterDef(parameterDef);
+                    }
                 }
-            }
 
-            if (Library.statements is { Length: > 0 } expressionDefs)
-            {
-                foreach (var expressionDef in expressionDefs)
+                if (Library.statements is { Length: > 0 } expressionDefs)
                 {
-                    NewExpressionBuilder().ProcessExpressionDef(expressionDef);
+                    foreach (var expressionDef in expressionDefs)
+                    {
+                        _expressionBuilderFactory.New(this).ProcessExpressionDef(expressionDef);
+                    }
                 }
-            }
 
-            return LibraryDefinitions;
-        });
-
-    private ExpressionBuilder NewExpressionBuilder() => _expressionBuilderFactory.New(this);
+                return LibraryDefinitions;
+            });
+    }
 }
 

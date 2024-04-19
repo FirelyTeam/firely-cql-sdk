@@ -47,7 +47,7 @@ namespace Hl7.Cql.Compiler.Builders
         private readonly TypeResolver _typeResolver;
 
         private ImmutableStack<Element> _elementStack;
-        private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
+        private readonly ExpressionBuilderSettings _expressionBuilderSettings;
         private readonly ILibraryExpressionBuilderContext _libraryContext;
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Hl7.Cql.Compiler.Builders
             TypeConverter typeConverter,
             TypeResolver typeResolver,
             ContextBinder contextBinder,
-            LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
+            ExpressionBuilderSettings expressionBuilderSettings,
             ILibraryExpressionBuilderContext libContext)
         {
             // External Services
@@ -87,7 +87,7 @@ namespace Hl7.Cql.Compiler.Builders
             _operatorsBinder = operatorsBinder;
             _contextBinder = contextBinder;
             _typeManager = typeManager;
-            _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
+            _expressionBuilderSettings = expressionBuilderSettings;
             _typeConverter = typeConverter;
             _typeResolver = typeResolver;
 

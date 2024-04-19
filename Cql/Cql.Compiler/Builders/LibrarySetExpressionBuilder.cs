@@ -3,22 +3,52 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class LibrarySetExpressionBuilder
+internal partial class LibrarySetExpressionBuilder : ILibrarySetExpressionBuilder
 {
-    private readonly ILibraryExpressionBuilderFactory _libraryExpressionBuilderFactory;
+    private readonly ILibraryExpressionBuilder _libraryExpressionBuilder;
 
     public LibrarySetExpressionBuilder(
-        ILibraryExpressionBuilderFactory libraryExpressionBuilderFactory)
+        ILibraryExpressionBuilder libraryExpressionBuilder)
     {
-        // External Services
-        _libraryExpressionBuilderFactory = libraryExpressionBuilderFactory;
+        _libraryExpressionBuilder = libraryExpressionBuilder;
     }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? definitions = null)
+        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null)
     {
-        Context context = new(definitions ?? new(), librarySet);
-        return context.ProcessLibrarySet(_libraryExpressionBuilderFactory);
+        Context context = new(this, librarySetDefinitions ?? new(), librarySet);
+        return context.ProcessLibrarySet();
+    }
+
+    protected partial class Context
+    {
+        private readonly ILibraryExpressionBuilder _libraryExpressionBuilder;
+
+        public Context(
+            LibrarySetExpressionBuilder libraryExpressionBuilder,
+            DefinitionDictionary<LambdaExpression> librarySetDefinitions,
+            LibrarySet librarySet)
+        {
+            _libraryExpressionBuilder = libraryExpressionBuilder._libraryExpressionBuilder;
+            LibrarySetDefinitions = librarySetDefinitions;
+            LibrarySet = librarySet;
+            DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);
+        }
+
+        public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
+        public LibrarySet LibrarySet { get; }
+
+        public DefinitionDictionary<LambdaExpression> ProcessLibrarySet() =>
+            this.CatchRethrowExpressionBuildingException(_ =>
+            {
+                foreach (var library in LibrarySet)
+                {
+                    var librarySetDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
+                    LibrarySetDefinitions.Merge(librarySetDefinitions);
+                }
+
+                return LibrarySetDefinitions;
+            });
     }
 }

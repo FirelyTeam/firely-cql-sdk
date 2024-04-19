@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
     {
         /// <summary>
         /// Gets the keys that are required by this interceptor.
-        /// Using two <see cref="IExpressionMutator"/> on the same <see cref="LibraryDefinitionsBuilder"/> which require the same keys will result in an <see cref="InvalidOperationException"/>.
+        /// Using two <see cref="IExpressionMutator"/> on the same <see cref="ExpressionBuilder"/> which require the same keys will result in an <see cref="InvalidOperationException"/>.
         /// </summary>
         public IEnumerable<(string, Type)> RuntimeContextKeys { get; }
 

@@ -5,7 +5,7 @@ The diagram is split into two, the first one showing the high-level dependencies
 
 ```mermaid
 classDiagram
-    direction LR
+    direction TB
 
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
@@ -26,7 +26,7 @@ classDiagram
     }
 
     namespace Expression_Building {
-        class LibraryDefinitionsBuilder {
+        class ILibrarySetExpressionBuilder {
             ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
 
@@ -103,7 +103,7 @@ classDiagram
     TypeManager ..> AssemblyCompiler : injected
     
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
-    LibraryDefinitionsBuilder ..> CqlToResourcePackagingPipeline : injected
+    ILibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
     ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
     
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
@@ -128,49 +128,36 @@ classDiagram
 
 ```mermaid
 classDiagram
-    direction LR
+    direction TB
 
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
 %%    namespace Expression_Building {
-        %% class Elm_Element{
-        %% }
-        %% 
-        %% class Elm_Library{
-        %% }
-        %% 
-        %% class Elm_LibrarySet{
-        %% }
+        class ILibrarySetExpressionBuilderContext{
+        }
 
-        class LibraryDefinitionBuilderSettings {
+        class LibrarySetExpressionBuilder_Context {
+        }
+
+        class LibrarySetExpressionBuilder{
+        }
+
+        class ILibraryExpressionBuilderContext{
+        }
+
+        class LibraryExpressionBuilder_Context {
+        }
+
+        class LibraryExpressionBuilder{
+        }
+        
+        class ExpressionBuilderSettings {
         }
 
         class IExpressionBuilderFactory {
         }
 
         class ExpressionBuilder{
-        }
-
-        class ILibraryExpressionBuilderFactory {
-        }
-
-        class ILibraryExpressionBuilderContext{
-        }
-
-        class LibraryExpressionBuilder{
-        }
-
-        class ILibrarySetExpressionBuilderFactory {
-        }
-
-        class ILibrarySetExpressionBuilderContext{
-        }
-
-        class LibrarySetExpressionBuilder{
-        }
-
-        class LibraryDefinitionsBuilder {
-%%            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
 
         class OperatorsBinder {
@@ -213,43 +200,40 @@ classDiagram
 
     %% Inheritance  
 
-%%    CqlCompilerFactory --> ILibrarySetExpressionBuilderFactory : inherits
-%%    CqlCompilerFactory --> ILibraryExpressionBuilderFactory : inherits
-%%    CqlCompilerFactory --> IExpressionBuilderFactory : inherits
-    LibrarySetExpressionBuilder --> ILibrarySetExpressionBuilderContext : inherits
-    LibraryExpressionBuilder --> ILibraryExpressionBuilderContext : inherits
+    LibrarySetExpressionBuilder --> ILibrarySetExpressionBuilder : inherits
+    LibraryExpressionBuilder --> ILibraryExpressionBuilder : inherits
+    LibrarySetExpressionBuilder_Context --> ILibrarySetExpressionBuilderContext : inherits
+    LibraryExpressionBuilder_Context --> ILibraryExpressionBuilderContext : inherits
    
     CqlContextBinder --> ContextBinder : inherits
     CqlOperatorsBinder --> OperatorsBinder : inherits
 
     %% Injected Dependencies
 
-%%    LibraryDefinitionsBuilder ..> CqlCompilerFactory : created by
+    ILibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
-    ILibrarySetExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
-    ILibraryExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
+    LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilder_Context : injected
+    DefinitionDictionary~LambdaExpression~ ..> LibrarySetExpressionBuilder_Context : injected
+    LibrarySet ..> LibrarySetExpressionBuilder_Context : injected
 
-    ILibrarySetExpressionBuilderFactory ..> LibrarySetExpressionBuilder : created by
-    ILibraryExpressionBuilderFactory ..> LibrarySetExpressionBuilder : injected
-%%    Elm_LibrarySet ..> LibrarySetExpressionBuilder : processed by
-
-    ILibraryExpressionBuilderFactory ..> LibraryExpressionBuilder : created by
     IExpressionBuilderFactory ..> LibraryExpressionBuilder : injected
-    ILibrarySetExpressionBuilderContext ..> LibraryExpressionBuilder : outer context of
-%%    Elm_Library ..> LibraryExpressionBuilder : processed by
 
-    IExpressionBuilderFactory ..> ExpressionBuilder : created by
+    LibraryExpressionBuilder ..> LibraryExpressionBuilder_Context : injected
+    Library ..> LibraryExpressionBuilder_Context : injected
+    DefinitionDictionary~LambdaExpression~ ..> LibraryExpressionBuilder_Context : injected
+    ILibraryExpressionBuilderContext ..> LibraryExpressionBuilder_Context : injected (optional)
+
+    ExpressionBuilder ..> IExpressionBuilderFactory : created by
+
     OperatorsBinder ..> ExpressionBuilder : injected
     TypeManager ..> ExpressionBuilder : injected
     TypeConverter ..> ExpressionBuilder : injected
     TypeResolver ..> ExpressionBuilder : injected
     ContextBinder ..> ExpressionBuilder : injected
-    LibraryDefinitionBuilderSettings ..> ExpressionBuilder : injected
-    ILibraryExpressionBuilderContext ..> ExpressionBuilder : outer context of
-%%    Elm_Element ..> ExpressionBuilder : processed by
-
+    ExpressionBuilderSettings ..> ExpressionBuilder : injected
+    ILibraryExpressionBuilderContext ..> ExpressionBuilder : injected
     
-    LibraryDefinitionsBuilder ..> CqlToResourcePackagingPipeline : injected
+    ILibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
 
     TypeResolver ..> CqlOperatorsBinder : injected
     TypeConverter ..> CqlOperatorsBinder : injected
