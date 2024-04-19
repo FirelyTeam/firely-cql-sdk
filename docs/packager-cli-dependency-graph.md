@@ -136,7 +136,7 @@ classDiagram
         class ILibrarySetExpressionBuilderContext{
         }
 
-        class LibrarySetExpressionBuilder_Context {
+        class LibrarySetExpressionBuilderContext {
         }
 
         class LibrarySetExpressionBuilder{
@@ -145,7 +145,7 @@ classDiagram
         class ILibraryExpressionBuilderContext{
         }
 
-        class LibraryExpressionBuilder_Context {
+        class LibraryExpressionBuilderContext {
         }
 
         class LibraryExpressionBuilder{
@@ -200,8 +200,8 @@ classDiagram
 
     %% Inheritance  
 
-    LibrarySetExpressionBuilder_Context --> ILibrarySetExpressionBuilderContext : implements
-    LibraryExpressionBuilder_Context --> ILibraryExpressionBuilderContext : implements
+    LibrarySetExpressionBuilderContext --> ILibrarySetExpressionBuilderContext : implements
+    LibraryExpressionBuilderContext --> ILibraryExpressionBuilderContext : implements
 
     CqlContextBinder --> ContextBinder : inherits
     CqlOperatorsBinder --> OperatorsBinder : inherits
@@ -210,16 +210,16 @@ classDiagram
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
-    LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilder_Context : injected
-    DefinitionDictionary~LambdaExpression~ ..> LibrarySetExpressionBuilder_Context : injected
-    LibrarySet ..> LibrarySetExpressionBuilder_Context : injected
+    LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilderContext : injected
+    DefinitionDictionary~LambdaExpression~ ..> LibrarySetExpressionBuilderContext : injected
+    LibrarySet ..> LibrarySetExpressionBuilderContext : injected
 
     IExpressionBuilderFactory ..> LibraryExpressionBuilder : injected
 
-    LibraryExpressionBuilder ..> LibraryExpressionBuilder_Context : injected
-    Library ..> LibraryExpressionBuilder_Context : injected
-    DefinitionDictionary~LambdaExpression~ ..> LibraryExpressionBuilder_Context : injected
-    ILibraryExpressionBuilderContext ..> LibraryExpressionBuilder_Context : injected (optional)
+    LibraryExpressionBuilder ..> LibraryExpressionBuilderContext : injected
+    Library ..> LibraryExpressionBuilderContext : injected
+    DefinitionDictionary~LambdaExpression~ ..> LibraryExpressionBuilderContext : injected
+    ILibraryExpressionBuilderContext ..> LibraryExpressionBuilderContext : injected (optional)
 
     ExpressionBuilder ..> IExpressionBuilderFactory : created by
 

@@ -2,13 +2,10 @@
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class LibrarySetExpressionBuilder 
+[DebuggerDisplay("{DebuggerView}")]
+partial class LibrarySetExpressionBuilderContext : ILibrarySetExpressionBuilderContext
 {
-    [DebuggerDisplay("{DebuggerView}")]
-    protected partial class Context : ILibrarySetExpressionBuilderContext
-    {
-        public IBuilderContext? OuterBuilderContext => null;
-        public BuilderContextDebuggerInfo? DebuggerInfo { get; }
-        public string DebuggerView => this.GetDebuggerView();
-    }
+    public IBuilderContext? OuterBuilderContext => null;
+    public BuilderContextDebuggerInfo? DebuggerInfo { get; }
+    public string DebuggerView => this.GetDebuggerView();
 }

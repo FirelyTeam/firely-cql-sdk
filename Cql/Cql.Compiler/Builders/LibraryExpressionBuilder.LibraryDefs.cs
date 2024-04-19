@@ -9,141 +9,138 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class LibraryExpressionBuilder
+partial class LibraryExpressionBuilderContext
 {
-    protected partial class Context
+    #region Definitions
+
+    public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
+
+    private void AddLibraryDefinitionsFromIncludes()
     {
-        #region Definitions
-
-        public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
-
-        private void AddLibraryDefinitionsFromIncludes()
+        if (LibrarySetContext != null)
         {
-            if (LibrarySetContext != null)
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
             {
-                foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
-                {
-                    AddDefinitions(libraryDependency);
-                }
-            }
-
-            void AddDefinitions(Library library)
-            {
-                string libraryName = library.NameAndVersion(true)!;
-                if (!HasAliasForNameAndVersion(libraryName))
-                    throw new LibraryAliasUnresolvedError(library).ToException();
-
-                if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
-                        libraryName,
-                        out IEnumerable<KeyValuePair<string, List<(Type[], LambdaExpression)>>>? definitions))
-                {
-                    LibraryDefinitions.Merge(libraryName, definitions);
-                }
+                AddDefinitions(libraryDependency);
             }
         }
 
-        #endregion
-
-        #region Library Identifiers by Alias
-
-        private readonly Dictionary<string, string> _libraryIdentifiersByAlias;
-
-        public void AddAliasForNameAndVersion(string alias, string libraryKey) =>
-            _libraryIdentifiersByAlias.Add(alias, libraryKey);
-
-        public string? GetNameAndVersionFromAlias(string? alias, bool throwError = true)
+        void AddDefinitions(Library library)
         {
-            if (alias == null)
-                return LibraryKey;
-            if (throwError)
-                return _libraryIdentifiersByAlias[alias];
-            _libraryIdentifiersByAlias.TryGetValue(alias, out string? libraryKey);
-            return libraryKey;
+            string libraryName = library.NameAndVersion(true)!;
+            if (!HasAliasForNameAndVersion(libraryName))
+                throw new LibraryAliasUnresolvedError(library).ToException();
+
+            if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
+                    libraryName,
+                    out IEnumerable<KeyValuePair<string, List<(Type[], LambdaExpression)>>>? definitions))
+            {
+                LibraryDefinitions.Merge(libraryName, definitions);
+            }
         }
+    }
 
-        public bool HasAliasForNameAndVersion(string libraryKey) =>
-            _libraryIdentifiersByAlias.ContainsValue(libraryKey);
+    #endregion
 
-        #endregion
+    #region Library Identifiers by Alias
 
-        #region Codes By CodeSystemName
+    private readonly Dictionary<string, string> _libraryIdentifiersByAlias;
 
-        private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
+    public void AddAliasForNameAndVersion(string alias, string libraryKey) =>
+        _libraryIdentifiersByAlias.Add(alias, libraryKey);
 
-        public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
-            _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
+    public string? GetNameAndVersionFromAlias(string? alias, bool throwError = true)
+    {
+        if (alias == null)
+            return LibraryKey;
+        if (throwError)
+            return _libraryIdentifiersByAlias[alias];
+        _libraryIdentifiersByAlias.TryGetValue(alias, out string? libraryKey);
+        return libraryKey;
+    }
 
-        private List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
-        {
-            if (_codesByCodeSystemName.TryGetValue(codeSystemName!, out var codings))
-                return codings;
+    public bool HasAliasForNameAndVersion(string libraryKey) =>
+        _libraryIdentifiersByAlias.ContainsValue(libraryKey);
 
-            codings = new List<CqlCode>();
-            _codesByCodeSystemName.Add(codeSystemName!, codings);
+    #endregion
+
+    #region Codes By CodeSystemName
+
+    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
+
+    public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
+        _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
+
+    private List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
+    {
+        if (_codesByCodeSystemName.TryGetValue(codeSystemName!, out var codings))
             return codings;
-        }
-        public ILibrarySetExpressionBuilderContext? LibrarySetContext { get; }
 
-        #endregion
+        codings = new List<CqlCode>();
+        _codesByCodeSystemName.Add(codeSystemName!, codings);
+        return codings;
+    }
+    public ILibrarySetExpressionBuilderContext? LibrarySetContext { get; }
 
-        #region Codes By Name (cross library???)
+    #endregion
 
-        private readonly Dictionary<string, CqlCode> _codesByName;
+    #region Codes By Name (cross library???)
 
-        public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
-            _codesByName.TryGetValue(codeRef.name, out systemCode);
+    private readonly Dictionary<string, CqlCode> _codesByName;
 
-        public void AddCode(CodeDef codeDef, CqlCode cqlCode)
+    public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
+        _codesByName.TryGetValue(codeRef.name, out systemCode);
+
+    public void AddCode(CodeDef codeDef, CqlCode cqlCode)
+    {
+        _codesByName.Add(codeDef.name, cqlCode);
+
+        var codeSystemName = codeDef.codeSystem!.name;
+        var codings = GetOrCreateCodesByCodeSystemName(codeSystemName);
+        codings.Add(cqlCode);
+    }
+
+    #endregion
+
+    #region Url By CodeSystemRef (cross library)
+
+    private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
+
+    private void AddCodeSystemRefsFromIncludes()
+    {
+        if (LibrarySetContext != null)
         {
-            _codesByName.Add(codeDef.name, cqlCode);
-
-            var codeSystemName = codeDef.codeSystem!.name;
-            var codings = GetOrCreateCodesByCodeSystemName(codeSystemName);
-            codings.Add(cqlCode);
-        }
-
-        #endregion
-
-        #region Url By CodeSystemRef (cross library)
-
-        private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
-
-        private void AddCodeSystemRefsFromIncludes()
-        {
-            if (LibrarySetContext != null)
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
             {
-                foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
-                {
-                    AddCodeSystemRefs(libraryDependency);
-                }
-            }
-
-            AddCodeSystemRefs(Library);
-
-            void AddCodeSystemRefs(Library library)
-            {
-                if (library.codeSystems is { Length: > 0 } codeSystemDefs)
-                {
-                    foreach (var codeSystemDef in codeSystemDefs)
-                    {
-                        _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
-                    }
-                }
+                AddCodeSystemRefs(libraryDependency);
             }
         }
 
-        public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
+        AddCodeSystemRefs(Library);
+
+        void AddCodeSystemRefs(Library library)
         {
-            var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);
-            return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
+            if (library.codeSystems is { Length: > 0 } codeSystemDefs)
+            {
+                foreach (var codeSystemDef in codeSystemDefs)
+                {
+                    _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
+                }
+            }
         }
+    }
 
-        #endregion
+    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
+    {
+        var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);
+        return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
+    }
 
-        private readonly record struct LibraryNameAndName(string? LibraryName, string Name);
+    #endregion
 
-        private class ByLibraryNameAndNameDictionary<TValue> : Dictionary<LibraryNameAndName, TValue>
-        {
-        }
+    private readonly record struct LibraryNameAndName(string? LibraryName, string Name);
+
+    private class ByLibraryNameAndNameDictionary<TValue> : Dictionary<LibraryNameAndName, TValue>
+    {
     }
 }
