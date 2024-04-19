@@ -37,7 +37,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return null;
 
             var model = ModelProvider.GetModelFromUri(systemUri, systemVersion);
-            return new UsingDefSymbol("System", systemVersion, model);
+            if (model is not null)
+                return new UsingDefSymbol("System", systemVersion, model);
+            else return null;
         }
 
         // libraryDefinition? definition* statement* EOF;

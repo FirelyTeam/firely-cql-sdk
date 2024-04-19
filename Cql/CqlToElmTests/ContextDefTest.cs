@@ -12,12 +12,11 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         protected override Library ConvertLibrary(string cql)
         {
-            var services = LibraryTest.MakeMinimalServiceCollection()
-                .AddModels(mp =>
-                {
-                    mp.Add(Models.ElmR1);
-                    mp.Add(Models.Fhir401);
-                });
+            var services = ServiceCollection(models: mp =>
+            {
+                mp.Add(Models.ElmR1);
+                mp.Add(Models.Fhir401);
+            });
 
             var provider = services.BuildServiceProvider();
             var converter = provider.GetRequiredService<CqlToElmConverter>();
@@ -29,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Context_Of_Known_Model()
         {
             var lib = MakeLibrary(@"
-                library UsingTeest version '1.0.0'
+                library UsingTest version '1.0.0'
 
                 using FHIR
 
@@ -58,24 +57,48 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Context_Of_Unknown_Model()
         {
             var lib = MakeLibrary(@"
-                library UsingTeest version '1.0.0'
+                library UsingTest version '1.0.0'
 
                 using FHIR
 
                 context FHIRX.Patient
-            ", "There is no model named 'FHIRX'.");
+            ", "Could not resolve model name FHIRX");
+        }
+
+        [TestMethod]
+        public void Context_UnknonwType_on_Known_Model()
+        {
+            var lib = MakeLibrary(@"
+                library UsingTest version '1.0.0'
+
+                using FHIR
+
+                context FHIR.doesnotexist
+            ", "Could not resolve context name doesnotexist in model FHIR.");
+        }
+
+        [TestMethod]
+        public void Context_Not_A_Model()
+        {
+            var lib = MakeLibrary(@"
+                library UsingTest version '1.0.0'
+                
+                define derp: false
+                
+                context derp.herp
+            ", "Could not resolve model name derp");
         }
 
         [TestMethod]
         public void Context_Of_Unknown_Type()
         {
             var lib = MakeLibrary(@"
-                library UsingTeest version '1.0.0'
+                library UsingTest version '1.0.0'
 
                 using FHIR
 
                 context ObservationX
-            ", "There is no type named 'ObservationX' in model library FHIR.");
+            ", "Could not resolve context name ObservationX in model FHIR.");
         }
 
     }

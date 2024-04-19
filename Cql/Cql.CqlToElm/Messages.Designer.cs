@@ -70,6 +70,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not resolve context name {0} in model {1}..
+        /// </summary>
+        internal static string CouldNotResolveContextName {
+            get {
+                return ResourceManager.GetString("CouldNotResolveContextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not resolve call to operator {0} with signature ({1})..
         /// </summary>
         internal static string CouldNotResolveFunction {
@@ -97,6 +106,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not resolve model name {0}.
+        /// </summary>
+        internal static string CouldNotResolveModel {
+            get {
+                return ResourceManager.GetString("CouldNotResolveModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Identifier {0} is a library and cannot be used as an expression..
         /// </summary>
         internal static string ExpressionCannotBeLibraryRef {
@@ -120,6 +138,15 @@ namespace Hl7.Cql.CqlToElm {
         internal static string Latest {
             get {
                 return ResourceManager.GetString("Latest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A named type is required in this context..
+        /// </summary>
+        internal static string NamedTypeRequiredInContext {
+            get {
+                return ResourceManager.GetString("NamedTypeRequiredInContext", resourceCulture);
             }
         }
         

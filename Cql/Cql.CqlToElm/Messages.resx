@@ -121,6 +121,10 @@
     <value>Could not find library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>
     <comment>{0} = library name, {1} = version</comment>
   </data>
+  <data name="CouldNotResolveContextName" xml:space="preserve">
+    <value>Could not resolve context name {0} in model {1}.</value>
+    <comment>{0} = name of context, {1} comma separated list of models declared, excluding System</comment>
+  </data>
   <data name="CouldNotResolveFunction" xml:space="preserve">
     <value>Could not resolve call to operator {0} with signature ({1}).</value>
     <comment>{0} = unquoted, unqualified function name (no library name), {1} = comma-separated type names of signature</comment>
@@ -133,6 +137,10 @@
     <value>Could not resolve identifier {0} in library {1}.</value>
     <comment>{0} = unqouted identifier, {1} = library name (not local alias)</comment>
   </data>
+  <data name="CouldNotResolveModel" xml:space="preserve">
+    <value>Could not resolve model name {0}</value>
+    <comment>{0} = model name</comment>
+  </data>
   <data name="ExpressionCannotBeLibraryRef" xml:space="preserve">
     <value>Identifier {0} is a library and cannot be used as an expression.</value>
     <comment>{0} = unquoted library name</comment>
@@ -144,6 +152,9 @@
   <data name="Latest" xml:space="preserve">
     <value>latest</value>
     <comment>The word "latest"</comment>
+  </data>
+  <data name="NamedTypeRequiredInContext" xml:space="preserve">
+    <value>A named type is required in this context.</value>
   </data>
   <data name="TypeCannotBeCast" xml:space="preserve">
     <value>Expression of type '{0}' cannot be cast as a value of type '{1}'.</value>

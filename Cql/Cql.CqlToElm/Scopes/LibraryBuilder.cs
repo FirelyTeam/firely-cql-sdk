@@ -62,8 +62,10 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// Enters a scope which is exited when the return value of this method is disposed.
         /// </summary>
+        /// <param name="newScope">The new scope to enter, or <see langword="null"/>.  If null, this builder's current scope will be entered via <see cref="ISymbolScope.EnterScope"/>.</param>
         /// <returns>An <see cref="IDisposable"/> which upon disposable exits the new scope.</returns>
-        public IDisposable EnterScope() => new DisposableScope(this);
+        public IDisposable EnterScope(ISymbolScope? newScope = null) => 
+            new DisposableScope(this, newScope ?? CurrentScope.EnterScope());
 
         private void ExitScope()
         {
@@ -74,9 +76,8 @@ namespace Hl7.Cql.CqlToElm
         }
         private class DisposableScope : IDisposable
         {
-            public DisposableScope(LibraryBuilder builder)
+            public DisposableScope(LibraryBuilder builder, ISymbolScope newScope)
             {
-                var newScope = builder.CurrentScope.EnterScope();
                 builder.CurrentScope = newScope;
                 Builder = builder;
             }

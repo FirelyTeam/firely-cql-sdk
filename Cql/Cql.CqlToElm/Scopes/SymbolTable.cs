@@ -33,13 +33,7 @@ namespace Hl7.Cql.CqlToElm
         {
             if (symbols.TryGetValue(identifier, out symbol))
                 return true;
-            else
-            {
-                if (Parent is not null)
-                    return Parent.TryResolveSymbol(identifier, out symbol);
-                else
-                    return false;
-            }
+            return Parent is not null && Parent.TryResolveSymbol(identifier, out symbol);
         }
 
         public bool TryAdd(IDefinitionElement symbol)

@@ -20,7 +20,9 @@ namespace Hl7.Cql.CqlToElm
 
         public CultureInfo Culture { get; }
 
-
+                
+        public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>
+            string.Format(Culture, Messages.CouldNotResolveContextName, contextName, string.Join(", ", modelNames));
         public string CouldNotResolveFunction(string functionName, params Expression[] arguments) =>
             string.Format(Culture, Messages.CouldNotResolveFunction, functionName, string.Join(", ", arguments.Select(t => t.resultTypeSpecifier.ToString())));
         public string CouldNotResolveFunction(string functionName, params TypeSpecifier[] types) =>
@@ -31,10 +33,13 @@ namespace Hl7.Cql.CqlToElm
             string.Format(Culture, Messages.CouldNotResolveInCurrent, identifier);
         public string CouldNotResolveLibrary(string name, string? version) =>
              string.Format(Culture, Messages.CouldNotFindLibrary, name, version ?? Messages.Latest);
+        public string CouldNotResolveModel(string name) =>
+             string.Format(Culture, Messages.CouldNotResolveModel, name);
         public string ExpressionCannotBeLibraryRef(string library) =>
             string.Format(Culture, Messages.ExpressionCannotBeLibraryRef, library);
         public string FoundMultipleLibraries(string name) =>
             string.Format(Culture, Messages.FoundMultipleLibraries, name);
+        public string NamedTypeRequiredInContext() => Messages.NamedTypeRequiredInContext;
         public string TypeCannotBeCast(TypeSpecifier from, TypeSpecifier to) =>
             string.Format(Culture, Messages.TypeCannotBeCast, from, to);
         public string TypeFoundIsNotExpected(TypeSpecifier from, TypeSpecifier to) =>

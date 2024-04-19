@@ -1,4 +1,9 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.IO;
+using Antlr4.Runtime;
+using FluentAssertions;
+using Hl7.Cql.CqlToElm.Grammar;
+using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -94,9 +99,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void SignalsUnknownParameters()
         {
-            _ = MakeLibrary(@"
+            MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): b", "Could not resolve identifier b in the current library.");
+                define function Double(a Integer): b",
+            "Could not resolve identifier b in the current library.");
         }
 
         [TestMethod]
@@ -125,6 +131,30 @@ namespace Hl7.Cql.CqlToElm.Test
             var f = shouldDefineFunction(library, "Replace");
             f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
             f.expression.Should().BeOfType<OperandRef>().Which.name.Should().Be("a");
+        }
+
+        [TestMethod]
+        public void DoesForwardsReference()
+        {
+            var library = MakeLibrary(@"
+                library FuncTest version '1.0.0'
+                define b: a                
+                define a: 5");
+
+            var f = library.ShouldDefine<ExpressionDef>("b");
+            f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            f.expression.Should().BeOfType<ExpressionRef>().Which.name.Should().Be("a");
+        }
+
+        [TestMethod]
+        public void DetectsCycle()
+        {
+            // This should really not be an exception, but an error in the output.
+            // This is left as an exercise for the reader.
+            Assert.ThrowsException<InvalidOperationException>(() => MakeLibrary(@"
+                library FuncTest version '1.0.0'
+                define a: b                
+                define b: a"), "Cycle detected in definition of 'a'.");
         }
     }
 }

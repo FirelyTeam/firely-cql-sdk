@@ -14,10 +14,10 @@ namespace Hl7.Cql.CqlToElm
         /// Returns the <see cref="ModelInfo"/> for a model, given the model's uri and version.
         /// </summary>
         /// <exception cref="ArgumentException">There is no model with the given uri.</exception>
-        public static Model.ModelInfo GetModelFromUri(this IModelProvider provider, string uri, string? version = null) =>
+        public static Model.ModelInfo? GetModelFromUri(this IModelProvider provider, string uri, string? version = null) =>
             provider.TryGetModelFromUri(uri, out var model, version) ?
                 model!
-                : throw new InvalidOperationException($"Model {uri} {(version is not null ? $"version {version}" : "")} is not available.");
+                : null;
 
         /// <summary>
         /// Returns the <see cref="ModelInfo"/> for a model, given the model's name and version.

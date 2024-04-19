@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public CoercionProvider CoercionProvider { get; }
         public MessageProvider Messaging { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
-        
+
 
         public DefinitionVisitor(
             LocalIdentifierProvider identifierProvider,
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
             {
-                
+
                 error ??= Messaging.UnableToResolveLibrary(libraryName, version);
                 // To be able to continue to parse, create an empty library scope with the name and version
                 // and return that so we can act as if some library was found.
@@ -256,7 +256,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                     // Visit the function body, which will add the expression to the functionDef
                     functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
-                } 
+                }
 
                 // If the function has a return type, make sure the expression is of that type.
                 var expressionType = functionDef.expression.resultTypeSpecifier;
@@ -300,52 +300,74 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // statement : expressionDefinition   | contextDefinition | functionDefinition ;
         public void VisitStatements(cqlParser.StatementContext[] context)
         {
-            ContextDef? activeContext = null;
-            List<string> definedContexts = new();
+            var delayedSymbolTable = new DelayedSymbolTable(LibraryBuilder.CurrentScope);
 
-            // Go over the statements in order, since they can be interleaved
-            // with context statements, which become active immediately.
-            foreach (var statementContext in context)
+            IReadOnlyCollection<IDefinitionElement> delayedExpressions;
+
+            using (LibraryBuilder.EnterScope(delayedSymbolTable))
             {
-#if DEBUG
-                var statementText = statementContext.GetText();
-#endif
-                var statement = Visit(statementContext);
-
-                if (statement is ExpressionDef ed)
-                {
-                    // If there is an active context, set it on the expression we just parsed.
-                    if (activeContext is not null)
-                        ed.context = activeContext.name;
-
-                    add(ed);
-                }
-                else if (statement is ContextDef cd)
-                {
-                    // If we encounter a context statement, it will be applied to all
-                    // subsequent expressions we encounter
-                    activeContext = cd;
-
-                    // Make sure we create just one ContextDef per model type.
-                    if (!definedContexts.Contains(cd.name))
-                    {
-                        add(cd);
-
-                        if (cd.resultTypeSpecifier is not null && !cd.IsUnfiltered)
-                        {
-                            // Build an expression named after the context, which will
-                            // do a retrieve for all data of that type.
-                            ExpressionDef exprDef = buildContextExpression(statementContext, cd);
-                            add(exprDef);
-                        }
-
-                        definedContexts.Add(cd.name);
-                    }
-                }
-                else
-                    throw new InvalidOperationException($"Encountered unknown statement type {statement.GetType()}.");
+                processStatements(context);
+                delayedExpressions = delayedSymbolTable.Symbols;
             }
 
+            // Now that we have processed all the statements, we can add the delayed symbols to the library.
+            foreach (var symbol in delayedExpressions)
+                add(symbol);
+
+            void processStatements(cqlParser.StatementContext[] context)
+            {
+                ContextDef? activeContext = null;
+                List<string> definedContexts = new();
+
+                // We *know* this is a delayed symbol table, if not, we'd better throw.
+                DelayedSymbolTable table = (DelayedSymbolTable)LibraryBuilder.CurrentScope;
+
+                // Go over the statements in order, since they can be interleaved
+                // with context statements, which become active immediately.
+                foreach (var statementContext in context)
+                {
+#if DEBUG
+                    var statementText = statementContext.GetText();
+#endif
+
+                    if (statementContext.expressionDefinition() is { } edCtx)
+                    {
+                        table.TryAddDelayed(edCtx.identifier().Parse()!, activeContext?.name,
+                            () => (ExpressionDef)Visit(edCtx));
+                    }
+                    else if (statementContext.functionDefinition() is { } fdCtx)
+                    {
+                        table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!, activeContext?.name,
+                            () => (ExpressionDef)Visit(fdCtx));
+                    }
+                    else if (statementContext.contextDefinition() is { } cdCtx)
+                    {
+                        // If we encounter a context statement, it will be applied to all
+                        // subsequent expressions we encounter
+                        var cd = (ContextDef)Visit(cdCtx);
+                        activeContext = cd;
+
+                        // Make sure we create just one ContextDef per model type.
+                        if (!definedContexts.Contains(cd.name))
+                        {
+                            add(cd);
+
+                            if (cd.resultTypeSpecifier is not null && !cd.IsUnfiltered)
+                            {
+                                // Build an expression named after the context, which will
+                                // do a retrieve for all data of that type.
+                                ExpressionDef exprDef = buildContextExpression(statementContext, cd);
+                                add(exprDef);
+                            }
+
+                            definedContexts.Add(cd.name);
+                        }
+                    }
+                    else
+                        throw new InvalidOperationException(
+                            "Encountered unknown statement type in statement rule.");
+                }
+            }
         }
 
         private void add(IDefinitionElement s)
@@ -388,10 +410,59 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = modelIdentifier is null ? identifier : $"{modelIdentifier}.{identifier}"
             }.WithLocator(context.Locator());
 
+
             if (!cd.IsUnfiltered)
             {
-                _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
-                cd = cd.WithResultType(namedType);
+                string? error = null;
+                TypeSpecifier? resultType = null;
+                if (modelIdentifier is not null) // two terms
+                {
+                    if (LibraryBuilder.SymbolTable.TryResolveSymbol(modelIdentifier, out var symbol))
+                    {
+                        if (symbol is UsingDefSymbol ud)
+                        {
+                            var type = TypeSpecifierVisitor.GetModelType(ud, identifier);
+                            if (type is not null)
+                                resultType = type.ToNamedType();
+                            else
+                            {
+                                // library UsingTeest version '1.0.0'
+                                // using FHIR
+                                // context FHIR.doesnotexist
+                                error = Messaging.CouldNotResolveContextName(identifier, modelIdentifier);
+                            }
+                        }
+                        else
+                        {
+                            // library UsingTeest version '1.0.0'
+                            // define derp: false
+                            // context derp.herp
+                            error = Messaging.CouldNotResolveModel(modelIdentifier);
+                        }
+
+                    }
+                    else
+                    {
+                        // library UsingTeest version '1.0.0'
+                        // context doesnot.exist
+                        error = Messaging.CouldNotResolveModel(modelIdentifier);
+                    }
+                }
+                else
+                {
+                    if (TypeSpecifierVisitor.TryGetMatchingTypes(LibraryBuilder.SymbolTable, identifier, out var modelType, out var _))
+                        resultType = modelType.ToNamedType();
+                    else
+                    {
+                        var models = LibraryBuilder.SymbolTable.Symbols
+                            .OfType<UsingDefSymbol>()
+                            .Select(ud => ud.localIdentifier)
+                            .Where(li => li != "System")
+                            .ToArray();
+                        error = Messaging.CouldNotResolveContextName(identifier, models);
+                    }
+                }
+                cd = cd.WithResultType(resultType);
                 if (error is not null) cd.AddError(error);
             }
 

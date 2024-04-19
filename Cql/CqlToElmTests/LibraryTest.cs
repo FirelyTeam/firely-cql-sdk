@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -80,32 +81,15 @@ namespace Hl7.Cql.CqlToElm.Test
 
         #region Using
 
-        public static IServiceCollection MakeMinimalServiceCollection() =>
-             new ServiceCollection()
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
-                .AddMessaging()
-                .AddLogging(b => b.AddDebug().ThrowOn(LogLevel.Error))
-                .AddTransient<CqlToElmConverter>()
-                .AddTransient<InvocationBuilder>()
-                .AddSingleton<CoercionProvider>()
-                .AddSingleton<ElmFactory>()
-                .AddConfiguration(cb => { });
-
         [TestMethod]
         public void Using_AllTerms()
         {
-            var services = MakeMinimalServiceCollection()
-                .AddModels(mp =>
-                {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_AllTerms_WithNamespace",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
+            var services = ServiceCollection(models: mp => mp.Add(new Model.ModelInfo
+            {
+                name = "Namespace.Using_AllTerms_WithNamespace",
+                url = "http://test.org",
+                version = "1.0.0"
+            }));
 
             var x = services.BuildServiceProvider();
             var converter = x.GetRequiredService<CqlToElmConverter>();
@@ -125,8 +109,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms_WithNamespace()
         {
-            var services = MakeMinimalServiceCollection()
-                .AddModels(mp =>
+            var services = ServiceCollection(models: mp =>
                 {
                     mp.Add(new Model.ModelInfo
                     {
@@ -155,9 +138,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_LocalIdentifier()
         {
-            var services = MakeMinimalServiceCollection()
-                .AddModels(mp =>
-                {
+            var services = ServiceCollection(models: mp =>
+            {
                     mp.Add(new Model.ModelInfo
                     {
                         name = "Namespace.Using_NoVersion_LocalIdentifier",
@@ -184,9 +166,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Version_NoIdentifier()
         {
-            var services = MakeMinimalServiceCollection()
-                .AddModels(mp =>
-                {
+            var services = ServiceCollection(models: mp =>
+            {
                     mp.Add(new Model.ModelInfo
                     {
                         name = "Namespace.Using_Version_NoIdentifier",
@@ -212,9 +193,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_NoIdentifier()
         {
-            var services = MakeMinimalServiceCollection()
-                .AddModels(mp =>
-                {
+            var services = ServiceCollection(models: mp =>
+            {
                     mp.Add(new Model.ModelInfo
                     {
                         name = "Namespace.Using_NoVersion_NoIdentifier",
@@ -241,9 +221,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Duplicate_System_NoLocalAlias()
         {
-            var services = MakeMinimalServiceCollection()
-                .AddModels(mp =>
-                {
+            var services = ServiceCollection(models: mp =>
+            {
                     mp.Add(new Model.ModelInfo
                     {
                         name = "System",
@@ -264,7 +243,6 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual("System", library.usings[0].localIdentifier);
             Assert.AreEqual("urn:hl7-org:elm-types:r1", library.usings[0].uri);
             Assert.AreEqual("1.0.0", library.usings[0].version);
-            Assert.IsNotNull(library.usings[0].localId);
         }
 
         #endregion

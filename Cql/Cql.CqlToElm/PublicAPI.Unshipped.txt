@@ -32,7 +32,6 @@ Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromUri(string! uri, out Hl7.Cql.Mode
 Hl7.Cql.CqlToElm.ModelProvider
 static Hl7.Cql.CqlToElm.ModelProvider.GetBaseType(Hl7.Cql.CqlToElm.IModelProvider! provider, Hl7.Cql.Elm.TypeSpecifier! type) -> Hl7.Cql.Elm.NamedTypeSpecifier?
 static Hl7.Cql.CqlToElm.ModelProvider.GetModelFromName(this Hl7.Cql.CqlToElm.IModelProvider! provider, string! name, string? version = null) -> Hl7.Cql.Model.ModelInfo!
-static Hl7.Cql.CqlToElm.ModelProvider.GetModelFromUri(this Hl7.Cql.CqlToElm.IModelProvider! provider, string! uri, string? version = null) -> Hl7.Cql.Model.ModelInfo!
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ChoiceTypeSpecifier! cts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ChoiceTypeSpecifier!
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.IntervalTypeSpecifier! its, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ListTypeSpecifier! lts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ListTypeSpecifier!
