@@ -7,11 +7,11 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal interface ILibraryExpressionBuilder : IBuilderNode
+internal interface ILibraryExpressionBuilderContext : IBuilderNode
 {
     Library Library { get; }
     DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
-    ILibrarySetExpressionBuilder? LibrarySetContext { get; }
+    ILibrarySetExpressionBuilderContext? LibrarySetContext { get; }
     string LibraryKey { get; }
     bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes);
     bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)]out string? url);

@@ -44,7 +44,7 @@ partial class ExpressionBuilder : IBuilderNode
 
     private readonly record struct ExpressionBuilderNode : IBuilderNode
     {
-        public ILibraryExpressionBuilder LibraryExpressionBuilder { get; init; }
+        public ILibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
         public IReadOnlyList<Elm.Element> ElementStackList { get; init; }
         public int ElementStackPosition { get; init; }
 

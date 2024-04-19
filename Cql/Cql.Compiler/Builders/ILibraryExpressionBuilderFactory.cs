@@ -9,5 +9,5 @@ internal interface ILibraryExpressionBuilderFactory
     LibraryExpressionBuilder New(
         Library library,
         DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
-        ILibrarySetExpressionBuilder? libsCtx = null);
+        ILibrarySetExpressionBuilderContext? libsCtx = null);
 }

@@ -71,7 +71,7 @@ internal class CqlCompilerFactory :
     LibraryExpressionBuilder ILibraryExpressionBuilderFactory.New(
         Library library,
         DefinitionDictionary<LambdaExpression>? libraryDefinitions,
-        ILibrarySetExpressionBuilder? libsCtx) =>
+        ILibrarySetExpressionBuilderContext? libsCtx) =>
         new LibraryExpressionBuilder(
             logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
             expressionBuilderFactory: this,
@@ -83,7 +83,7 @@ internal class CqlCompilerFactory :
     protected virtual LibraryDefinitionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         LibraryDefinitionBuilderSettings.Default;
 
-    protected virtual ILogger<ILibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
+    protected virtual ILogger<ILibraryExpressionBuilderContext> NewLibraryExpressionBuilderLogger() =>
         LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
     ExpressionBuilder IExpressionBuilderFactory.New(LibraryExpressionBuilder libCtx) =>

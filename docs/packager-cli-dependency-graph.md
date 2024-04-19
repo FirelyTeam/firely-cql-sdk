@@ -1,6 +1,143 @@
 # PackagerCLI
 
-## Service Dependencies (excl Logger and Options)
+## Expression Builder Dependencies (excl Logger and Options)
+
+```mermaid
+classDiagram
+    direction LR
+
+    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
+
+%%    namespace Expression_Building {
+        %% class Elm_Element{
+        %% }
+        %% 
+        %% class Elm_Library{
+        %% }
+        %% 
+        %% class Elm_LibrarySet{
+        %% }
+
+        class LibraryDefinitionBuilderSettings {
+        }
+
+        class IExpressionBuilderFactory {
+        }
+
+        class ExpressionBuilder{
+        }
+
+        class ILibraryExpressionBuilderFactory {
+        }
+
+        class ILibraryExpressionBuilderContext{
+        }
+
+        class LibraryExpressionBuilder{
+        }
+
+        class ILibrarySetExpressionBuilderFactory {
+        }
+
+        class ILibrarySetExpressionBuilderContext{
+        }
+
+        class LibrarySetExpressionBuilder{
+        }
+
+        class LibraryDefinitionsBuilder {
+%%            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
+        }
+
+        class OperatorsBinder {
+        }
+
+        class CqlOperatorsBinder {
+        }
+
+        class ContextBinder{
+        }
+
+        class CqlContextBinder{
+		}
+
+        class TypeConverter {
+        }
+
+        class ModelInspector {
+        }
+
+        class CqlCompilerFactory {
+        }
+%%    }
+
+    namespace Cql_To_Resource_Pipeline {
+        class CqlToResourcePackagingPipeline {
+        }        
+    }
+
+%%    namespace Dependencies {
+        class TypeManager {
+            get_TypeResolver() TypeResolver
+            get_TupleTypes() IEnumerable~Type~
+        }
+
+    
+        class TypeResolver {
+        }
+%%    }
+
+    %% Inheritance  
+
+%%    CqlCompilerFactory --> ILibrarySetExpressionBuilderFactory : inherits
+%%    CqlCompilerFactory --> ILibraryExpressionBuilderFactory : inherits
+%%    CqlCompilerFactory --> IExpressionBuilderFactory : inherits
+    LibrarySetExpressionBuilder --> ILibrarySetExpressionBuilderContext : inherits
+    LibraryExpressionBuilder --> ILibraryExpressionBuilderContext : inherits
+   
+    CqlContextBinder --> ContextBinder : inherits
+    CqlOperatorsBinder --> OperatorsBinder : inherits
+
+    %% Injected Dependencies
+
+%%    LibraryDefinitionsBuilder ..> CqlCompilerFactory : created by
+
+    ILibrarySetExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
+    ILibraryExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
+
+    ILibrarySetExpressionBuilderFactory ..> LibrarySetExpressionBuilder : created by
+    ILibraryExpressionBuilderFactory ..> LibrarySetExpressionBuilder : injected
+%%    Elm_LibrarySet ..> LibrarySetExpressionBuilder : processed by
+
+    ILibraryExpressionBuilderFactory ..> LibraryExpressionBuilder : created by
+    IExpressionBuilderFactory ..> LibraryExpressionBuilder : injected
+    LibraryDefinitionBuilderSettings ..> LibraryExpressionBuilder : injected
+    ILibrarySetExpressionBuilderContext ..> LibraryExpressionBuilder : outer context of
+%%    Elm_Library ..> LibraryExpressionBuilder : processed by
+
+    IExpressionBuilderFactory ..> ExpressionBuilder : created by
+    OperatorsBinder ..> ExpressionBuilder : injected
+    TypeManager ..> ExpressionBuilder : injected
+    TypeConverter ..> ExpressionBuilder : injected
+    TypeResolver ..> ExpressionBuilder : injected
+    ContextBinder ..> ExpressionBuilder : injected
+    LibraryDefinitionBuilderSettings ..> ExpressionBuilder : injected
+    ILibraryExpressionBuilderContext ..> ExpressionBuilder : outer context of
+%%    Elm_Element ..> ExpressionBuilder : processed by
+
+    
+    LibraryDefinitionsBuilder ..> CqlToResourcePackagingPipeline : injected
+
+    TypeResolver ..> CqlOperatorsBinder : injected
+    TypeConverter ..> CqlOperatorsBinder : injected
+
+    ModelInspector ..> TypeConverter : injected  
+
+    TypeResolver ..> TypeManager : injected
+```
+
+
+## Application Dependencies (excl Logger and Options)
 
 ```mermaid
 classDiagram
@@ -25,47 +162,8 @@ classDiagram
     }
 
     namespace Expression_Building {
-        class Expression{
-        }
-
-        class Library{
-        }
-
-        class LibrarySet{
-        }
-
-        class LibraryDefinitionBuilderSettings {
-        }
-
-        class IExpressionBuilderFactory {
-        }
-
-        class IExpressionBuilder{
-        }
-
-        class ExpressionBuilder{
-        }
-
-        class ILibraryExpressionBuilderFactory {
-        }
-
-        class ILibraryExpressionBuilder{
-        }
-
-        class LibraryExpressionBuilder{
-        }
-
-        class ILibrarySetExpressionBuilderFactory {
-        }
-
-        class ILibrarySetExpressionBuilder{
-        }
-
-        class LibrarySetExpressionBuilder{
-        }
-
         class LibraryDefinitionsBuilder {
-%%            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
+            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
 
         class OperatorsBinder {
@@ -129,13 +227,6 @@ classDiagram
 
     %% Inheritance  
 
-    CqlCompilerFactory --> ILibrarySetExpressionBuilderFactory : inherits
-    CqlCompilerFactory --> ILibraryExpressionBuilderFactory : inherits
-    CqlCompilerFactory --> IExpressionBuilderFactory : inherits
-    LibrarySetExpressionBuilder --> ILibrarySetExpressionBuilder : inherits
-    LibraryExpressionBuilderFactory --> ILibraryExpressionBuilder : inherits
-    ExpressionBuilderFactory --> IExpressionBuilder : inherits
-   
     CqlOperatorsBinder --> OperatorsBinder : inherits
     CqlContextBinder --> ContextBinder : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
@@ -147,31 +238,6 @@ classDiagram
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected
     
-    Expression ..> ExpressionBuilder : processed by
-
-    CqlCompilerFactory ..> LibraryDefinitionsBuilder : created by
-    ILibrarySetExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
-    ILibraryExpressionBuilderFactory ..> LibraryDefinitionsBuilder : injected
-
-    ILibrarySetExpressionBuilderFactory ..> LibrarySetExpressionBuilder : created by
-    ILibraryExpressionBuilderFactory ..> LibrarySetExpressionBuilder : injected
-    LibrarySet ..> LibrarySetExpressionBuilder : processed by
-
-    ILibraryExpressionBuilderFactory ..> LibraryExpressionBuilder : created by
-    IExpressionBuilderFactory ..> LibrarySetExpressionBuilder : injected
-    LibraryDefinitionBuilderSettings ..> LibrarySetExpressionBuilder : injected
-    Library ..> LibraryExpressionBuilder : processed by
-    ILibrarySetExpressionBuilder ..> LibrarySetExpressionBuilder : outer context of
-
-    IExpressionBuilderFactory ..> ExpressionBuilder : created by
-    OperatorsBinder ..> ExpressionBuilder : injected
-    TypeManager ..> ExpressionBuilder : injected
-    TypeConverter ..> ExpressionBuilder : injected
-    TypeResolver ..> ExpressionBuilder : injected
-    ContextBinder ..> ExpressionBuilder : injected
-    LibraryDefinitionBuilderSettings ..> ExpressionBuilder : injected
-    ILibraryExpressionBuilder ..> ExpressionBuilder : outer context of
-
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     LibraryDefinitionsBuilder ..> CqlToResourcePackagingPipeline : injected
     ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
