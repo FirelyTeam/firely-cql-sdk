@@ -56,4 +56,8 @@
 			<DependentUpon>HL7Tests.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Infrastructure\" />
+	</ItemGroup>
 </Project>

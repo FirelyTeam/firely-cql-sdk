@@ -7,8 +7,11 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
+using TypeExtensions = Hl7.Cql.Abstractions.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Compiler.Expressions
 {
@@ -28,8 +31,8 @@ namespace Hl7.Cql.Compiler.Expressions
                 throw new ArgumentException("Expression is not applicable to static member access");
 
             MemberExpression = expression;
-            var isNullableType = !MemberExpression.Type.IsValueType || Nullable.GetUnderlyingType(MemberExpression.Type) is not null;
-            resultType = isNullableType ? MemberExpression.Type : typeof(Nullable<>).MakeGenericType(MemberExpression.Type);
+
+            resultType = MemberExpression.Type.MakeNullable();
         }
 
         public NullConditionalMemberExpression(Expression expression, MemberInfo member) :

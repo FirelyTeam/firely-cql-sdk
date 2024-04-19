@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -22,9 +23,32 @@ internal static class TypeExtensions
     /// Checks if the specified type is nullable.
     /// </summary>
     /// <param name="type">The type to check.</param>
+    /// <param name="nonNullableType">The non-nullable type.</param>
     /// <returns>True if the type is nullable, false otherwise.</returns>
-    public static bool IsNullable(this Type type) =>
-        !type.IsValueType || IsNullableValueType(type, out _);
+    public static bool IsNullable(this Type type, out Type nonNullableType)
+    {
+        nonNullableType = type;
+
+        if (type.IsValueType)
+        {
+            if (!IsNullableValueType(type, out var underlyingType))
+                return false;
+
+            nonNullableType = underlyingType;
+        }
+
+        return true;
+    }
+
+    public static Type MakeNullable(this Type type)
+    {
+        if (IsNullable(type, out var nonNullableType))
+            return type;
+
+        Debug.Assert(type.IsValueType);
+        var nullableType = typeof(Nullable<>).MakeGenericType(nonNullableType);
+        return nullableType;
+    }
 
     /// <summary>
     /// Checks if the specified type is an enum or a nullable enum.
@@ -50,6 +74,9 @@ internal static class TypeExtensions
     /// <returns>True if the type is implementing the generic type definition, false otherwise.</returns>
     public static bool IsImplementingGenericTypeDefinition(this Type type, Type genericTypeDefinition)
     {
+        if (!genericTypeDefinition.IsGenericTypeDefinition)
+            throw new ArgumentException("Must be a generic type definition.", nameof(genericTypeDefinition));
+
         if (type.IsGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition)
             return true;
 

@@ -78,9 +78,9 @@ namespace Hl7.Cql.Compiler
                         var property = _typeResolver.GetProperty(sourceType, propertyExpression.path);
                         if (property != null)
                             return property.PropertyType;
+
                         return typeof(object); // this is likely a choice
                     }
-
                     break;
                 }
 

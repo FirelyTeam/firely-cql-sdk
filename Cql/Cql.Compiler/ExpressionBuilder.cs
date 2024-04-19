@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ pyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
