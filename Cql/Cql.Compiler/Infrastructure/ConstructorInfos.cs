@@ -8,28 +8,28 @@ namespace Hl7.Cql.Compiler.Infrastructure;
 internal static class ConstructorInfos
 {
     public static ConstructorInfo CqlCode { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlCode(default(string?), default(string?), default(string?), default(string?)));
+        ReflectionUtility.ConstructorOf(() => new CqlCode(default, default, default, default));
 
     public static ConstructorInfo CqlConcept { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlConcept(default(IEnumerable<CqlCode>)!, default(string?)));
+        ReflectionUtility.ConstructorOf(() => new CqlConcept(default!, default));
 
     public static ConstructorInfo LazyOfBoolCtor { get; } =
         ReflectionUtility.ConstructorOf(() => new Lazy<bool?>(default(Func<bool?>)!));
 
     public static ConstructorInfo NotImplementedException { get; } =
-        ReflectionUtility.ConstructorOf(() => new NotImplementedException(default(string?)));
+        ReflectionUtility.ConstructorOf(() => new NotImplementedException(default));
 
     public static ConstructorInfo CqlValueSet { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlValueSet(default(string?)!, default(string?)!));
+        ReflectionUtility.ConstructorOf(() => new CqlValueSet(default!, default!));
 
     public static ConstructorInfo CqlRatio { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlRatio(default(CqlQuantity?), default(CqlQuantity?)));
+        ReflectionUtility.ConstructorOf(() => new CqlRatio(default, default));
 
     public static ConstructorInfo CqlQuantity { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlQuantity(default(decimal?), default(string?)));
+        ReflectionUtility.ConstructorOf(() => new CqlQuantity(default, default));
 
     private static ConstructorInfo ListOf<T>() =>
-        ReflectionUtility.ConstructorOf(() => new List<T>((IEnumerable<T>)default(IEnumerable<T>)!));
+        ReflectionUtility.ConstructorOf(() => new List<T>(default(IEnumerable<T>)!));
 
     private static MethodInfo GenericDefinitionMethodListOf { get; } =
         ReflectionUtility.GenericDefinitionMethodOf(() => ListOf<object>()); // MethodInfo to ListOf<>()

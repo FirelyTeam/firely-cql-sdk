@@ -1,7 +1,7 @@
 ﻿using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Compiler.Builders;
 using Hl7.Cql.Elm;
 using System;
-using Hl7.Cql.Compiler.Builders;
 
 namespace Hl7.Cql.Compiler;
 
@@ -26,14 +26,14 @@ internal readonly record struct ExpressionBuildingError : ICqlError
     private const string DefaultMessage = "Exception occurred during expression building.";
 
     public ExpressionBuildingError(
-        IBuilderNode? context = null,
+        IBuilderContext? context = null,
         string? message = null)
     {
         Context = context;
         Message = message ?? DefaultMessage;
     }
 
-    public IBuilderNode? Context { get; }
+    public IBuilderContext? Context { get; }
 
     private string Message { get; }
 
@@ -52,6 +52,6 @@ internal static class ExpressionBuildingErrorExtensions
 {
     public static CqlException WithContext(
         this Exception e,
-        IBuilderNode ctx) =>
+        IBuilderContext ctx) =>
         ctx.NewExpressionBuildingException(innerException: e);
 }

@@ -1,11 +1,11 @@
 ﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Builders;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Builders;
 
 namespace CoreTests
 {
@@ -43,7 +43,7 @@ namespace CoreTests
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            var libraryExpressionBuilder = NewLibraryDefinitionsBuilder();
+            var libraryExpressionBuilder = NewLibraryExpressionBuilder();
             var definitions = libraryExpressionBuilder.ProcessLibrary(fhirHelpersPackage);
             LambdasByTestName.Lambdas.Merge(definitions);
 
@@ -63,9 +63,9 @@ namespace CoreTests
             Context = FhirCqlContext.WithDataSource(delegates: allDelegates);
         }
 
-        private static LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder()
+        private static LibraryExpressionBuilder NewLibraryExpressionBuilder()
         {
-            return new CqlCompilerFactory(LoggerFactory).LibraryDefinitionsBuilder;
+            return new CqlCompilerFactory(LoggerFactory).LibraryExpressionBuilder;
         }
 
         internal static CqlContext Context;

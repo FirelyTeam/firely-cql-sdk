@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors

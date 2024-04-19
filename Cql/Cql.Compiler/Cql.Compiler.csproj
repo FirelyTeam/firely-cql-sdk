@@ -13,8 +13,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(Configuration)' == 'Debug' " >
-		<PackageReference Include="Dumpify" Version="0.6.5"  />
+	<ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<PackageReference Include="Dumpify" Version="0.6.5" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,18 +37,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="CqlOperatorsBinding.*.cs">
-			<DependentUpon>CqlOperatorsBinding.cs</DependentUpon>
+		<Compile Update="Binders\CqlOperatorsBinder.*.cs">
+			<DependentUpon>Binders\CqlOperatorsBinder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="ExpressionBuilder.*.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		<Compile Update="Builders\ExpressionBuilder.*.cs">
+			<DependentUpon>Builders\ExpressionBuilder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="LibraryExpressionBuilder.*.cs">
-			<DependentUpon>LibraryExpressionBuilder.cs</DependentUpon>
+		<Compile Update="Builders\LibraryExpressionBuilder.*.cs">
+			<DependentUpon>Builders\LibraryExpressionBuilder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="LibrarySetExpressionBuilder.*.cs">
-			<DependentUpon>LibrarySetExpressionBuilder.cs</DependentUpon>
+		<Compile Update="Builders\LibrarySetExpressionBuilder.*.cs">
+			<DependentUpon>Builders\LibrarySetExpressionBuilder.cs</DependentUpon>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Binders\CqlOperatorsBinder.Bind.cs">
+	    <DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Binders\CqlOperatorsBinder.Conversions.cs">
+	    <DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Binders\CqlOperatorsBinder.Specific.cs">
+	    <DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

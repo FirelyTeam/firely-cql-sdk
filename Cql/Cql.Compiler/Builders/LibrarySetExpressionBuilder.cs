@@ -1,48 +1,54 @@
 ﻿using System.Linq.Expressions;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class LibrarySetExpressionBuilder
+internal class LibrarySetExpressionBuilder
 {
-    private readonly ExpressionBuildingDependencies _dependencies;
-    private readonly LibrarySet _librarySet;
-    private readonly BuilderDebuggerInfo _debuggerInfo;
+    internal readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
     public LibrarySetExpressionBuilder(
-        ExpressionBuildingDependencies dependencies,
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions)
+        LibraryExpressionBuilder libraryExpressionBuilder)
     {
-        // External Services
-        _dependencies = dependencies;
-
-        // External State
-        _librarySet = librarySet;
-        LibrarySetDefinitions = definitions;
-
-        // Internal State
-        _debuggerInfo = new BuilderDebuggerInfo("LibrarySet", Name: _librarySet.Name!);
+        _libraryExpressionBuilder = libraryExpressionBuilder;
     }
+
+    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null)
+    {
+        LibrarySetExpressionBuilderContext context = new(this, librarySetDefinitions ?? new(), librarySet);
+        return context.ProcessLibrarySet();
+    }
+}
+
+internal partial class LibrarySetExpressionBuilderContext
+{
+    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
+
+    public LibrarySetExpressionBuilderContext(
+        LibrarySetExpressionBuilder builder,
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions,
+        LibrarySet librarySet)
+    {
+        _libraryExpressionBuilder = builder._libraryExpressionBuilder;
+        LibrarySetDefinitions = librarySetDefinitions;
+        LibrarySet = librarySet;
+        DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);
+    }
+
+    public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
+    public LibrarySet LibrarySet { get; }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
             foreach (var library in LibrarySet)
             {
-                var packageDefinitions = CreateLibraryExpressionBuilder(library, new()).ProcessLibrary();
-                LibrarySetDefinitions.Merge(packageDefinitions);
+                var librarySetDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
+                LibrarySetDefinitions.Merge(librarySetDefinitions);
             }
 
             return LibrarySetDefinitions;
         });
-
-    public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
-    public LibrarySet LibrarySet => _librarySet;
-
-    private LibraryExpressionBuilder CreateLibraryExpressionBuilder(
-        Library library,
-        DefinitionDictionary<LambdaExpression>? definitions = null) =>
-        new(_dependencies, library, definitions ?? new(), this);
 }

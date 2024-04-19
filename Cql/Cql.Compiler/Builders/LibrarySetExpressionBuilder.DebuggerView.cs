@@ -3,11 +3,9 @@
 namespace Hl7.Cql.Compiler.Builders;
 
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class LibrarySetExpressionBuilder : IBuilderNode
+partial class LibrarySetExpressionBuilderContext : ILibrarySetExpressionBuilderContext
 {
-    IBuilderNode? IBuilderNode.OuterBuilder => null;
-
-    BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo => _debuggerInfo;
-
+    public IBuilderContext? OuterBuilderContext => null;
+    public BuilderContextDebuggerInfo? DebuggerInfo { get; }
     public string DebuggerView => this.GetDebuggerView();
 }

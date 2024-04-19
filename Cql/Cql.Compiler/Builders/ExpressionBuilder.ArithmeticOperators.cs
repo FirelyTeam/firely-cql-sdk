@@ -12,29 +12,28 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler.Builders
+namespace Hl7.Cql.Compiler.Builders;
+
+partial class ExpressionBuilderContext
 {
-    internal partial class ExpressionBuilder
+    private const string Int32MaxPlusOneAsString = "2147483648";
+
+    private Expression NegateLiteral(Negate e, Literal literal)
     {
-        private const string Int32MaxPlusOneAsString = "2147483648";
-
-        private Expression NegateLiteral(Negate e, Literal literal)
+        // handle things like -2147483648 which gets translated to Negate(2147483648)
+        // since int.MaxValue is 2147483647, we have to handle this specially
+        var literalType = TypeFor(literal);
+        if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
         {
-            // handle things like -2147483648 which gets translated to Negate(2147483648)
-            // since int.MaxValue is 2147483647, we have to handle this specially
-            var literalType = TypeFor(literal);
-            if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
-            {
-                return Expression.Constant(int.MinValue);
-            }
-
-            if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
-            {
-                return Expression.Constant(long.MinValue);
-            }
-
-            return ChangeType(BindCqlOperator(CqlOperator.Negate, literalType, e.operand), e.resultTypeSpecifier);
+            return Expression.Constant(int.MinValue);
         }
+
+        if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
+        {
+            return Expression.Constant(long.MinValue);
+        }
+
+        return ChangeType(BindCqlOperator(CqlOperator.Negate, literalType, e.operand), e.resultTypeSpecifier);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

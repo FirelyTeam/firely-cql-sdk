@@ -1,7 +1,7 @@
 ﻿namespace Hl7.Cql.Compiler.Builders;
 
-internal interface IBuilderNode
+internal interface IBuilderContext
 {
-    IBuilderNode? OuterBuilder { get; }
-    BuilderDebuggerInfo? BuilderDebuggerInfo { get; }
+    IBuilderContext? OuterBuilderContext { get; }
+    BuilderContextDebuggerInfo? DebuggerInfo { get; }
 }

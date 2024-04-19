@@ -10,7 +10,7 @@ using Hl7.Cql.Compiler.Builders;
 namespace CoreTests
 {
     [TestClass]
-    public class LibraryDefinitionsBuilderTests
+    public class LibraryExpressionBuilderTests
     {
         private static ILoggerFactory LoggerFactory { get; } =
             Microsoft.Extensions.Logging.LoggerFactory
@@ -23,7 +23,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -33,7 +33,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -43,7 +43,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrary(elmPackage);
+            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -65,7 +65,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = Factory.LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet);
+            var definitions = Factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }

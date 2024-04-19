@@ -9,7 +9,7 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class LibraryExpressionBuilder
+partial class LibraryExpressionBuilderContext
 {
     #region Definitions
 
@@ -80,7 +80,7 @@ internal partial class LibraryExpressionBuilder
         _codesByCodeSystemName.Add(codeSystemName!, codings);
         return codings;
     }
-    public LibrarySetExpressionBuilder? LibrarySetContext { get; }
+    public ILibrarySetExpressionBuilderContext? LibrarySetContext { get; }
 
     #endregion
 
@@ -130,7 +130,7 @@ internal partial class LibraryExpressionBuilder
         }
     }
 
-    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)]out string? url)
+    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
     {
         var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);
         return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
