@@ -3,12 +3,12 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal partial class LibrarySetExpressionBuilder : ILibrarySetExpressionBuilder
+internal partial class LibrarySetExpressionBuilder
 {
-    private readonly ILibraryExpressionBuilder _libraryExpressionBuilder;
+    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
     public LibrarySetExpressionBuilder(
-        ILibraryExpressionBuilder libraryExpressionBuilder)
+        LibraryExpressionBuilder libraryExpressionBuilder)
     {
         _libraryExpressionBuilder = libraryExpressionBuilder;
     }
@@ -23,7 +23,7 @@ internal partial class LibrarySetExpressionBuilder : ILibrarySetExpressionBuilde
 
     protected partial class Context
     {
-        private readonly ILibraryExpressionBuilder _libraryExpressionBuilder;
+        private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
         public Context(
             LibrarySetExpressionBuilder libraryExpressionBuilder,

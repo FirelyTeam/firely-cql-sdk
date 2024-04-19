@@ -63,7 +63,7 @@ namespace CoreTests
             Context = FhirCqlContext.WithDataSource(delegates: allDelegates);
         }
 
-        private static ILibraryExpressionBuilder NewLibraryExpressionBuilder()
+        private static LibraryExpressionBuilder NewLibraryExpressionBuilder()
         {
             return new CqlCompilerFactory(LoggerFactory).LibraryExpressionBuilder;
         }

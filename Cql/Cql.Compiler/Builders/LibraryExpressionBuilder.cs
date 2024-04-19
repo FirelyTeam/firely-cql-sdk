@@ -9,13 +9,13 @@ namespace Hl7.Cql.Compiler.Builders;
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
-partial class LibraryExpressionBuilder : ILibraryExpressionBuilder
+partial class LibraryExpressionBuilder
 {
-    private readonly ILogger<ILibraryExpressionBuilder> _logger;
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly IExpressionBuilderFactory _expressionBuilderFactory;
 
     public LibraryExpressionBuilder(
-        ILogger<ILibraryExpressionBuilder> logger,
+        ILogger<LibraryExpressionBuilder> logger,
         IExpressionBuilderFactory expressionBuilderFactory)
     {
         _logger = logger;
@@ -34,7 +34,7 @@ partial class LibraryExpressionBuilder : ILibraryExpressionBuilder
 
     protected partial class Context
     {
-        private readonly ILogger<ILibraryExpressionBuilder> _logger;
+        private readonly ILogger<LibraryExpressionBuilder> _logger;
         private readonly IExpressionBuilderFactory _expressionBuilderFactory;
 
         public Library Library { get; }

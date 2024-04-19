@@ -15,14 +15,14 @@ namespace Hl7.Cql.Packaging;
 internal class CqlToResourcePackagingPipeline
 {
     protected readonly ResourcePackager _resourcePackager;
-    protected readonly ILibrarySetExpressionBuilder _LibrarySetExpressionBuilder;
+    protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder;
     protected readonly AssemblyCompiler _assemblyCompiler;
     protected readonly CqlToResourcePackagingOptions _options;
 
     public CqlToResourcePackagingPipeline(
         IOptions<CqlToResourcePackagingOptions> options,
         ResourcePackager resourcePackager,
-        ILibrarySetExpressionBuilder librarySetExpressionBuilder,
+        LibrarySetExpressionBuilder librarySetExpressionBuilder,
         AssemblyCompiler assemblyCompiler)
     {
         _options = options.Value;

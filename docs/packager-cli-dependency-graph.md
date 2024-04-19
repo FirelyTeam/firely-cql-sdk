@@ -26,7 +26,7 @@ classDiagram
     }
 
     namespace Expression_Building {
-        class ILibrarySetExpressionBuilder {
+        class LibrarySetExpressionBuilder {
             ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
 
@@ -200,17 +200,15 @@ classDiagram
 
     %% Inheritance  
 
-    LibrarySetExpressionBuilder --> ILibrarySetExpressionBuilder : inherits
-    LibraryExpressionBuilder --> ILibraryExpressionBuilder : inherits
-    LibrarySetExpressionBuilder_Context --> ILibrarySetExpressionBuilderContext : inherits
-    LibraryExpressionBuilder_Context --> ILibraryExpressionBuilderContext : inherits
-   
+    LibrarySetExpressionBuilder_Context --> ILibrarySetExpressionBuilderContext : implements
+    LibraryExpressionBuilder_Context --> ILibraryExpressionBuilderContext : implements
+
     CqlContextBinder --> ContextBinder : inherits
     CqlOperatorsBinder --> OperatorsBinder : inherits
 
     %% Injected Dependencies
 
-    ILibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
     LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilder_Context : injected
     DefinitionDictionary~LambdaExpression~ ..> LibrarySetExpressionBuilder_Context : injected
@@ -233,7 +231,7 @@ classDiagram
     ExpressionBuilderSettings ..> ExpressionBuilder : injected
     ILibraryExpressionBuilderContext ..> ExpressionBuilder : injected
     
-    ILibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
+    LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
 
     TypeResolver ..> CqlOperatorsBinder : injected
     TypeConverter ..> CqlOperatorsBinder : injected

@@ -49,12 +49,12 @@ internal class CqlCompilerFactory :
     protected virtual TypeManager NewTypeManager() => new(resolver: TypeResolver);
 
 
-    public virtual ILibrarySetExpressionBuilder LibrarySetExpressionBuilder => Singleton(fn: NewLibrarySetExpressionBuilder);
+    public virtual LibrarySetExpressionBuilder LibrarySetExpressionBuilder => Singleton(fn: NewLibrarySetExpressionBuilder);
 
     protected virtual LibrarySetExpressionBuilder NewLibrarySetExpressionBuilder() =>
         new(LibraryExpressionBuilder);
 
-    public virtual ILibraryExpressionBuilder LibraryExpressionBuilder => Singleton(fn: NewLibraryExpressionBuilder);
+    public virtual LibraryExpressionBuilder LibraryExpressionBuilder => Singleton(fn: NewLibraryExpressionBuilder);
 
     protected virtual LibraryExpressionBuilder NewLibraryExpressionBuilder() =>
         new LibraryExpressionBuilder(
@@ -64,7 +64,7 @@ internal class CqlCompilerFactory :
     protected virtual ExpressionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         ExpressionBuilderSettings.Default;
 
-    protected virtual ILogger<ILibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
+    protected virtual ILogger<LibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
         LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
     ExpressionBuilder IExpressionBuilderFactory.New(ILibraryExpressionBuilderContext libCtx) =>
