@@ -109,7 +109,7 @@ internal class ExpressionBuilder
 
     public void ProcessExpressionDef(ILibraryExpressionBuilderContext libCtx, ExpressionDef expressionDef)
     {
-        ExpressionBuilderContext context = new ExpressionBuilderContext(this, libCtx);
+        ExpressionBuilderContext context = new ExpressionBuilderContext(this, libCtx, new());
         context.ProcessExpressionDef(expressionDef);
     }
 
@@ -148,35 +148,26 @@ partial class ExpressionBuilderContext
     private readonly TypeConverter _typeConverter;
     private readonly TypeResolver _typeResolver;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
+    private readonly ILibraryExpressionBuilderContext _libraryContext;
 
     private ImmutableStack<Element> _elementStack;
-    private readonly ILibraryExpressionBuilderContext _libraryContext;
 
     /// <summary>
     /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
     /// </summary>
-    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack;
+    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack; //
 
     /// <summary>
     /// Parameters for function definitions.
     /// </summary>
-    private readonly Dictionary<string, ParameterExpression> _operands;
+    private readonly Dictionary<string, ParameterExpression> _operands; // Used during ProcessExpressionDef
 
     private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators; // Not used yet, since it's always empty
 
-    /// <summary>
-    /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
-    /// to a factory which will produce a <see cref="LambdaExpression"/> given the values of <see cref="ParameterExpression"/>.
-    /// </summary>
-    /// <remarks>
-    /// This function can be used to provide .NET native functions in place of ELM functions, and should also be used to implement
-    /// functions defined in CQL with the <code>external</code> keyword.
-    /// </remarks>
-    private readonly Dictionary<string, Func<ParameterExpression[], LambdaExpression>> _customImplementations;
-
     internal ExpressionBuilderContext(
         ExpressionBuilder builder,
-        ILibraryExpressionBuilderContext libContext)
+        ILibraryExpressionBuilderContext libContext,
+        Dictionary<string, ParameterExpression>? operands = null)
     {
         // External Services
         _logger = builder._logger;
@@ -186,16 +177,15 @@ partial class ExpressionBuilderContext
         _expressionBuilderSettings = builder._expressionBuilderSettings;
         _typeConverter = builder._typeConverter;
         _typeResolver = builder._typeResolver;
+        _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
 
         // External State
         _libraryContext = libContext;
+        _operands = operands!;
 
         // Internal State
         _elementStack = ImmutableStack<Element>.Empty;
-        _operands = new Dictionary<string, ParameterExpression>();
         _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
-        _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
-        _customImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
     }
 
     private Expression BindCqlOperator(

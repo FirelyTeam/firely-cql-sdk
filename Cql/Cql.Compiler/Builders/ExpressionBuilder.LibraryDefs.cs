@@ -159,13 +159,6 @@ partial class ExpressionBuilderContext
                     }
 
                     parameters = [..parameters, .._operands.Values];
-                    if (_customImplementations.TryGetValue(expressionKey, out var factory))
-                    {
-                        var customLambda = factory(parameters);
-                        _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,
-                            functionParameterTypes, customLambda);
-                        return;
-                    }
 
                     if (function?.external ?? false)
                     {

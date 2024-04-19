@@ -46,8 +46,8 @@ namespace Hl7.Cql.Compiler.Builders
 
         /// <summary>
         /// When <see langword="true"/>, functions declared external will throw <see cref="NotImplementedException"/> at runtime
-        /// if they are not found in <see cref="ExpressionBuilderContext._customImplementations"/>.  When <see langword="false"/>, an
-        /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in <see cref="ExpressionBuilderContext._customImplementations"/>.
+        /// if they are not found in customImplementations.  When <see langword="false"/>, an
+        /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in customImplementations.
         /// The default value is <see langword="true"/>.
         /// </summary>
         public bool AllowUnresolvedExternals { get; init; } = true;
