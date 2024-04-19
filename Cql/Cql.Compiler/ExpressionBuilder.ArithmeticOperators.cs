@@ -12,28 +12,29 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler;
-
-partial class ExpressionBuilderContext
+namespace Hl7.Cql.Compiler
 {
-    private const string Int32MaxPlusOneAsString = "2147483648";
-
-    private Expression NegateLiteral(Negate e, Literal literal)
+    partial class ExpressionBuilderContext
     {
-        // handle things like -2147483648 which gets translated to Negate(2147483648)
-        // since int.MaxValue is 2147483647, we have to handle this specially
-        var literalType = TypeFor(literal);
-        if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
-        {
-            return Expression.Constant(int.MinValue);
-        }
+        private const string Int32MaxPlusOneAsString = "2147483648";
 
-        if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
+        private Expression NegateLiteral(Negate e, Literal literal)
         {
-            return Expression.Constant(long.MinValue);
-        }
+            // handle things like -2147483648 which gets translated to Negate(2147483648)
+            // since int.MaxValue is 2147483647, we have to handle this specially
+            var literalType = TypeFor(literal);
+            if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
+            {
+                return Expression.Constant(int.MinValue);
+            }
 
-        return ChangeType(BindCqlOperator(CqlOperator.Negate, literalType, e.operand), e.resultTypeSpecifier);
+            if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
+            {
+                return Expression.Constant(long.MinValue);
+            }
+
+            return ChangeType(BindCqlOperator(CqlOperator.Negate, literalType, e.operand), e.resultTypeSpecifier);
+        }
     }
-}
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+}

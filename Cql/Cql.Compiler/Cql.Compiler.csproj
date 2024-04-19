@@ -47,7 +47,7 @@
 			<DependentUpon>LibraryExpressionBuilder.cs</DependentUpon>
 		</Compile>
 		<Compile Update="LibrarySetExpressionBuilder.*.cs">
-			<DependentUpon>ibrarySetExpressionBuilder.cs</DependentUpon>
+			<DependentUpon>LibrarySetExpressionBuilder.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
 

@@ -12,72 +12,73 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Expressions;
 
-namespace Hl7.Cql.Compiler;
-
-partial class ExpressionBuilderContext
+namespace Hl7.Cql.Compiler
 {
-    protected Expression? Combine(Elm.Combine e)
+    partial class ExpressionBuilderContext
     {
-        var source = Translate(e.source!);
-        var operand = e.separator == null
-                          ? NullExpression.String
-                          : Translate(e.separator);
-        return BindCqlOperator(CqlOperator.Combine, null, source, operand);
-    }
-
-    protected Expression Indexer(Elm.Indexer e)
-    {
-        var left = Translate(e!.operand![0]!);
-        var right = Translate(e!.operand![1]!);
-        if (left.Type == typeof(string))
+        protected Expression? Combine(Elm.Combine e)
         {
-            return BindCqlOperator(CqlOperator.CharAt, null, left, right);
+            var source = Translate(e.source!);
+            var operand = e.separator == null
+                              ? NullExpression.String
+                              : Translate(e.separator);
+            return BindCqlOperator(CqlOperator.Combine, null, source, operand);
         }
 
-        if (_typeResolver.IsListType(left.Type))
+        protected Expression Indexer(Elm.Indexer e)
         {
-            return BindCqlOperator(CqlOperator.ListElementAt, null, left, right);
-        }
-        throw new NotImplementedException().WithContext(this);
-    }
+            var left = Translate(e!.operand![0]!);
+            var right = Translate(e!.operand![1]!);
+            if (left.Type == typeof(string))
+            {
+                return BindCqlOperator(CqlOperator.CharAt, null, left, right);
+            }
 
-    protected Expression? Length(Elm.Length len)
-    {
-        var operand = Translate(len.operand!);
-        if (_typeResolver.IsListType(operand.Type))
+            if (_typeResolver.IsListType(left.Type))
+            {
+                return BindCqlOperator(CqlOperator.ListElementAt, null, left, right);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression? Length(Elm.Length len)
         {
-            return BindCqlOperator(CqlOperator.ListLength, null, operand);
+            var operand = Translate(len.operand!);
+            if (_typeResolver.IsListType(operand.Type))
+            {
+                return BindCqlOperator(CqlOperator.ListLength, null, operand);
+            }
+
+            if (operand.Type == typeof(string))
+            {
+                return BindCqlOperator(CqlOperator.StringLength, null, operand);
+            }
+            throw new NotImplementedException().WithContext(this);
         }
 
-        if (operand.Type == typeof(string))
+        protected Expression? ReplaceMatches(Elm.ReplaceMatches e)
         {
-            return BindCqlOperator(CqlOperator.StringLength, null, operand);
+            var source = Translate(e.operand![0]!);
+            var pattern = Translate(e.operand![1]!);
+            var substitution = Translate(e.operand![2]!);
+            return BindCqlOperator(CqlOperator.ReplaceMatches, null, source, pattern, substitution);
         }
-        throw new NotImplementedException().WithContext(this);
-    }
 
-    protected Expression? ReplaceMatches(Elm.ReplaceMatches e)
-    {
-        var source = Translate(e.operand![0]!);
-        var pattern = Translate(e.operand![1]!);
-        var substitution = Translate(e.operand![2]!);
-        return BindCqlOperator(CqlOperator.ReplaceMatches, null, source, pattern, substitution);
-    }
+        protected Expression Split(Elm.Split e)
+        {
+            var stringToSplit = Translate(e.stringToSplit!);
+            var separator = Translate(e.separator!);
+            return BindCqlOperator(CqlOperator.Split, null, stringToSplit, separator);
+        }
 
-    protected Expression Split(Elm.Split e)
-    {
-        var stringToSplit = Translate(e.stringToSplit!);
-        var separator = Translate(e.separator!);
-        return BindCqlOperator(CqlOperator.Split, null, stringToSplit, separator);
-    }
-
-    protected Expression? Substring(Elm.Substring e)
-    {
-        var stringToSub = Translate(e!.stringToSub!);
-        var startIndex = Translate(e!.startIndex!);
-        var length = e.length == null
-                         ? NullExpression.Int32
-                         : Translate(e.length);
-        return BindCqlOperator(CqlOperator.Substring, null, stringToSub, startIndex, length);
+        protected Expression? Substring(Elm.Substring e)
+        {
+            var stringToSub = Translate(e!.stringToSub!);
+            var startIndex = Translate(e!.startIndex!);
+            var length = e.length == null
+                             ? NullExpression.Int32
+                             : Translate(e.length);
+            return BindCqlOperator(CqlOperator.Substring, null, stringToSub, startIndex, length);
+        }
     }
 }
