@@ -2,5 +2,5 @@
 
 internal interface IExpressionBuilderFactory
 {
-    ExpressionBuilder New(LibraryExpressionBuilder libCtx);
+    ExpressionBuilder New(ILibraryExpressionBuilderContext libCtx);
 }

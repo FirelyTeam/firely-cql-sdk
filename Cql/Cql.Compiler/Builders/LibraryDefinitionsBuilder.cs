@@ -32,8 +32,8 @@ internal class LibraryDefinitionsBuilder
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? definitions = null) =>
-        NewLibrarySetExpressionBuilder(librarySet, definitions)
-            .ProcessLibrarySet();
+        NewLibrarySetExpressionBuilder()
+            .ProcessLibrarySet(librarySet, definitions);
 
     /// <summary>
     /// Processes the library and returns the definition dictionary of lambda expressions.
@@ -47,10 +47,8 @@ internal class LibraryDefinitionsBuilder
         NewLibraryExpressionBuilder(library, libraryDefinitions)
             .ProcessLibrary();
 
-    private LibrarySetExpressionBuilder NewLibrarySetExpressionBuilder(
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? definitions = null) =>
-        _librarySetExpressionBuilderFactory.New(librarySet, definitions);
+    private LibrarySetExpressionBuilder NewLibrarySetExpressionBuilder() =>
+        _librarySetExpressionBuilderFactory.New();
 
     private LibraryExpressionBuilder NewLibraryExpressionBuilder(
         Library library,

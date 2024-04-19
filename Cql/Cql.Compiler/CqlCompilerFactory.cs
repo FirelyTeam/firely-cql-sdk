@@ -60,13 +60,9 @@ internal class CqlCompilerFactory :
         new(librarySetExpressionBuilderFactory: this,
             libraryExpressionBuilderFactory: this);
 
-    LibrarySetExpressionBuilder ILibrarySetExpressionBuilderFactory.New(
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? definitions) =>
+    LibrarySetExpressionBuilder ILibrarySetExpressionBuilderFactory.New() =>
         new LibrarySetExpressionBuilder(
-            libraryExpressionBuilderFactory: this,
-            librarySet: librarySet,
-            definitions: definitions ?? new());
+            libraryExpressionBuilderFactory: this);
 
     LibraryExpressionBuilder ILibraryExpressionBuilderFactory.New(
         Library library,
@@ -75,7 +71,6 @@ internal class CqlCompilerFactory :
         new LibraryExpressionBuilder(
             logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
             expressionBuilderFactory: this,
-            libraryDefinitionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings),
             library: library,
             libraryDefinitions: libraryDefinitions ?? new(),
             libsCtx: libsCtx);
@@ -83,10 +78,10 @@ internal class CqlCompilerFactory :
     protected virtual LibraryDefinitionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         LibraryDefinitionBuilderSettings.Default;
 
-    protected virtual ILogger<ILibraryExpressionBuilderContext> NewLibraryExpressionBuilderLogger() =>
+    protected virtual ILogger<LibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
         LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
-    ExpressionBuilder IExpressionBuilderFactory.New(LibraryExpressionBuilder libCtx) =>
+    ExpressionBuilder IExpressionBuilderFactory.New(ILibraryExpressionBuilderContext libCtx) =>
         new ExpressionBuilder(
             logger: Singleton(fn: NewExpressionBuilderLogger),
             operatorsBinder: OperatorsBinder,

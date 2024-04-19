@@ -235,7 +235,6 @@ classDiagram
 
     ILibraryExpressionBuilderFactory ..> LibraryExpressionBuilder : created by
     IExpressionBuilderFactory ..> LibraryExpressionBuilder : injected
-    LibraryDefinitionBuilderSettings ..> LibraryExpressionBuilder : injected
     ILibrarySetExpressionBuilderContext ..> LibraryExpressionBuilder : outer context of
 %%    Elm_Library ..> LibraryExpressionBuilder : processed by
 

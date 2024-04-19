@@ -11,26 +11,21 @@ namespace Hl7.Cql.Compiler.Builders;
 /// </summary>
 partial class LibraryExpressionBuilder
 {
-    private readonly ILogger<ILibraryExpressionBuilderContext> _logger;
-    private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly IExpressionBuilderFactory _expressionBuilderFactory;
 
     public Library Library { get; }
 
     public string LibraryKey => Library.NameAndVersion()!;
 
-    public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
-
     public LibraryExpressionBuilder(
-        ILogger<ILibraryExpressionBuilderContext> logger,
+        ILogger<LibraryExpressionBuilder> logger,
         IExpressionBuilderFactory expressionBuilderFactory,
-        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         Library library,
         DefinitionDictionary<LambdaExpression> libraryDefinitions,
         ILibrarySetExpressionBuilderContext? libsCtx = null)
     {
         // External Services
-        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
         _logger = logger;
 
         // External State
