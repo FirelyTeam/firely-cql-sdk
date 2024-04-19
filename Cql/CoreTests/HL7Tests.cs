@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.Builders;
 
 namespace CoreTests
 {

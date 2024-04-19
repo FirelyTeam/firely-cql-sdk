@@ -7,14 +7,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Expressions;
-using System;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Builders
 {
     internal partial class ExpressionBuilder
     {

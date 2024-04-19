@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Infrastructure;
 
 internal static class ConstructorInfos
 {

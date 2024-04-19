@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Expressions;
 
 internal static class ExpressionExtensions
 {

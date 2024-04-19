@@ -1,21 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Expression = System.Linq.Expressions.Expression;
 using Hl7.Cql.Elm;
-
+using Microsoft.Extensions.Logging;
+using Expression = System.Linq.Expressions.Expression;
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
 internal partial class ExpressionBuilder
 {

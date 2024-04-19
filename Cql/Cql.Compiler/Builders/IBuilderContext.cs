@@ -1,4 +1,4 @@
-﻿namespace Hl7.Cql.Compiler;
+﻿namespace Hl7.Cql.Compiler.Builders;
 
 internal interface IBuilderNode
 {

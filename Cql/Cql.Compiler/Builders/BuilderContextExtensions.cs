@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Hl7.Cql.Abstractions.Exceptions;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
 internal static class IBuilderNodeExtensions
 {

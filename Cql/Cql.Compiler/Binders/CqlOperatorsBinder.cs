@@ -6,15 +6,16 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
+using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
-using System;
-using System.Linq.Expressions;
-using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Binders
 {
     /// <summary>
     /// Implements <see cref="OperatorsBinder"/> by calling methods in <see cref="CqlOperators"/>.

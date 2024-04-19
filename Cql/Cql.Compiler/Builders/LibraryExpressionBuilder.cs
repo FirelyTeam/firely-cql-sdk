@@ -4,7 +4,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.

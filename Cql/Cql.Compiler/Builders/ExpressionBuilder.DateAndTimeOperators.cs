@@ -12,7 +12,7 @@ using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Builders
 {
     internal partial class ExpressionBuilder
     {

@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using System;
+using Hl7.Cql.Compiler.Builders;
 
 namespace Hl7.Cql.Compiler;
 

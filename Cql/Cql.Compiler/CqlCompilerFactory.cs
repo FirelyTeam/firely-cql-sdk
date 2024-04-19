@@ -1,5 +1,7 @@
 ﻿using System;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Binders;
+using Hl7.Cql.Compiler.Builders;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Fhir.Introspection;

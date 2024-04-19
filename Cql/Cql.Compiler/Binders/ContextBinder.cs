@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Binders;
 
 /// <summary>
 /// Represents an abstract class for binding context information.

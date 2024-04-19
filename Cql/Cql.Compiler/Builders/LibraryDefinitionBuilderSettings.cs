@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Builders
 {
     /// <summary>
     /// Describes settings to control the behavior of <see cref="LibraryDefinitionsBuilder"/>

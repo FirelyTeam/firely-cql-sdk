@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Infrastructure;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Expressions;
 
 #pragma warning disable CS1591
 internal static class NullExpression

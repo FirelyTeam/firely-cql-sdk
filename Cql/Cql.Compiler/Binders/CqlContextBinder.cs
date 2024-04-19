@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Binders;
 
 /// <summary>
 /// Represents a binder to <see cref="CqlContext"/>.

@@ -1,9 +1,9 @@
-﻿using Hl7.Cql.Elm;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Hl7.Cql.Elm;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
 internal readonly record struct BuilderDebuggerInfo(
     string ElementType,

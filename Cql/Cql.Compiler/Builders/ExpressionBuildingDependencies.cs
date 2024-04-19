@@ -1,8 +1,9 @@
 ﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Binders;
 using Hl7.Cql.Conversion;
 using Microsoft.Extensions.Logging;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
 /// <summary>
 /// Since the same dependencies are passed to all the *ExpressionBuilder classes, they are grouped together in this class.

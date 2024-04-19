@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
 [DebuggerDisplay("{DebuggerView}")]
 partial class LibraryExpressionBuilder : IBuilderNode

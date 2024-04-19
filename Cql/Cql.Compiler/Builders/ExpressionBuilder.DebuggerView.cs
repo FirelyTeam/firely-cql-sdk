@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
 [DebuggerDisplay("{DebuggerView}")]
 partial class ExpressionBuilder : IBuilderNode
@@ -53,7 +53,7 @@ partial class ExpressionBuilder : IBuilderNode
             : LibraryExpressionBuilder;
 
         public BuilderDebuggerInfo? BuilderDebuggerInfo => ElementStackPosition >= 0
-            ? Hl7.Cql.Compiler.BuilderDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
+            ? Builders.BuilderDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
             : null!;
     }
 

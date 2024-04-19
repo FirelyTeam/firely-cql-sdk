@@ -15,7 +15,7 @@ using Expression = System.Linq.Expressions.Expression;
 
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Builders
 {
     internal partial class ExpressionBuilder
     {

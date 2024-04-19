@@ -7,12 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -22,11 +16,20 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Binders;
+using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Conversion;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Builders
 {
     /// <summary>
     /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
