@@ -8,7 +8,6 @@
 
 using System;
 using System.Collections.Generic;
-using Hl7.Cql.Compiler.Builders;
 
 namespace Hl7.Cql.Compiler
 {

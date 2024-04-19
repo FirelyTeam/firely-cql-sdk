@@ -37,30 +37,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Binders\CqlOperatorsBinder.*.cs">
-			<DependentUpon>Binders\CqlOperatorsBinder.cs</DependentUpon>
+		<Compile Update="CqlOperatorsBinder.*.cs">
+			<DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="Builders\ExpressionBuilder.*.cs">
-			<DependentUpon>Builders\ExpressionBuilder.cs</DependentUpon>
+		<Compile Update="ExpressionBuilder.*.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="Builders\LibraryExpressionBuilder.*.cs">
-			<DependentUpon>Builders\LibraryExpressionBuilder.cs</DependentUpon>
+		<Compile Update="LibraryExpressionBuilder.*.cs">
+			<DependentUpon>LibraryExpressionBuilder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="Builders\LibrarySetExpressionBuilder.*.cs">
-			<DependentUpon>Builders\LibrarySetExpressionBuilder.cs</DependentUpon>
+		<Compile Update="LibrarySetExpressionBuilder.*.cs">
+			<DependentUpon>ibrarySetExpressionBuilder.cs</DependentUpon>
 		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Binders\CqlOperatorsBinder.Bind.cs">
-	    <DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="Binders\CqlOperatorsBinder.Conversions.cs">
-	    <DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="Binders\CqlOperatorsBinder.Specific.cs">
-	    <DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 </Project>

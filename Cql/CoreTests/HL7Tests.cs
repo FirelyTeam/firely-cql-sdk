@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Builders;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;

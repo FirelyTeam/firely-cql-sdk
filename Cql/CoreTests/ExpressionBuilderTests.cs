@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Builders;
 
 namespace CoreTests
 {
