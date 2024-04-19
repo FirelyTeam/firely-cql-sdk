@@ -3,9 +3,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Builders;
 
-internal readonly record struct BuilderDebuggerInfo(
+internal readonly record struct BuilderContextDebuggerInfo(
     string ElementType,
     string? Locator = null,
     string? ResultType = null,
@@ -35,9 +35,9 @@ internal readonly record struct BuilderDebuggerInfo(
         return sb.ToString();
     }
 
-    public static BuilderDebuggerInfo FromElement(Elm.Element element)
+    public static BuilderContextDebuggerInfo FromElement(Element element)
     {
-        BuilderDebuggerInfo obj = new(
+        BuilderContextDebuggerInfo obj = new(
             ElementType: element.GetType().Name,
             Locator: element.locator,
             ResultType: GetElemTypeName(element),
@@ -45,7 +45,7 @@ internal readonly record struct BuilderDebuggerInfo(
         return obj;
 
 
-        string? GetNameText(Elm.Element elem)
+        string? GetNameText(Element elem)
         {
             StringBuilder sb = new();
             Append(FromNameAndVersion());
@@ -53,7 +53,7 @@ internal readonly record struct BuilderDebuggerInfo(
             Append(FromContext());
             Append(FromName());
             Append(FromPath());
-            return sb.Length==0 ? null : sb.ToString();
+            return sb.Length == 0 ? null : sb.ToString();
 
             void Append(string? text)
             {
@@ -69,25 +69,25 @@ internal readonly record struct BuilderDebuggerInfo(
             string? FromName() => (elem as IGetName)?.name;
         }
 
-        string? GetElemTypeName(Elm.Element elem) =>
+        string? GetElemTypeName(Element elem) =>
             elem switch
             {
                 { resultTypeName: { } t } => t.ToString(),
                 { resultTypeSpecifier: { } t } => GetTypeSpecifierName(t),
-                Elm.As { asType:{ } t } e => t.ToString(),
-                Elm.As { asTypeSpecifier:{ } t } e => GetTypeSpecifierName(t),
+                As { asType: { } t } e => t.ToString(),
+                As { asTypeSpecifier: { } t } e => GetTypeSpecifierName(t),
                 _ => null,
             };
 
-        string? GetTypeSpecifierName(Elm.TypeSpecifier type) =>
+        string? GetTypeSpecifierName(TypeSpecifier type) =>
             type switch
             {
-                Elm.ChoiceTypeSpecifier t => $"Choice<{string.Join(", ", from c in t.choice select GetTypeSpecifierName(c))}>",
-                Elm.IntervalTypeSpecifier t => $"Interval<{GetTypeSpecifierName(t.pointType)}>",
-                Elm.ListTypeSpecifier t => $"List<{GetTypeSpecifierName(t.elementType)}>",
-                Elm.NamedTypeSpecifier t => t.name.ToString(),
-                Elm.ParameterTypeSpecifier t => t.parameterName,
-                Elm.TupleTypeSpecifier t => $"Tuple {{{string.Join(", ", from c in t.element select $"{c.name}: {GetTypeSpecifierName(c.elementType)}}}")}>",
+                ChoiceTypeSpecifier t => $"Choice<{string.Join(", ", from c in t.choice select GetTypeSpecifierName(c))}>",
+                IntervalTypeSpecifier t => $"Interval<{GetTypeSpecifierName(t.pointType)}>",
+                ListTypeSpecifier t => $"List<{GetTypeSpecifierName(t.elementType)}>",
+                NamedTypeSpecifier t => t.name.ToString(),
+                ParameterTypeSpecifier t => t.parameterName,
+                TupleTypeSpecifier t => $"Tuple {{{string.Join(", ", from c in t.element select $"{c.name}: {GetTypeSpecifierName(c.elementType)}}}")}>",
                 _ => throw new SwitchExpressionException("Unexpected switch type: " + type.GetType()),
             };
     }

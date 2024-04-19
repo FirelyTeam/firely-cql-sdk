@@ -8,7 +8,7 @@ internal partial class LibrarySetExpressionBuilder
 {
     private readonly ILibraryExpressionBuilderFactory _libraryExpressionBuilderFactory;
     private readonly LibrarySet _librarySet;
-    private readonly BuilderDebuggerInfo _debuggerInfo;
+    private readonly BuilderContextDebuggerInfo _debuggerInfo;
 
     public LibrarySetExpressionBuilder(
         ILibraryExpressionBuilderFactory libraryExpressionBuilderFactory,
@@ -23,7 +23,7 @@ internal partial class LibrarySetExpressionBuilder
         LibrarySetDefinitions = definitions;
 
         // Internal State
-        _debuggerInfo = new BuilderDebuggerInfo("LibrarySet", Name: _librarySet.Name!);
+        _debuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet() =>

@@ -7,20 +7,20 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Compiler.Builders;
 
 [DebuggerDisplay("{DebuggerView}")]
-partial class ExpressionBuilder : IBuilderNode
+partial class ExpressionBuilder : IBuilderContext
 {
-    private IBuilderNode CreateBuilderNode() => new ExpressionBuilderNode()
+    private IBuilderContext CreateBuilderNode() => new ExpressionBuilderNode()
     {
         LibraryExpressionBuilder = _libraryContext,
         ElementStackList = [.. _elementStack],
         ElementStackPosition = 0,
     };
 
-    IBuilderNode? IBuilderNode.OuterBuilder =>
-        CreateBuilderNode().OuterBuilder;
+    IBuilderContext? IBuilderContext.OuterBuilderContext =>
+        CreateBuilderNode().OuterBuilderContext;
 
-    BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo =>
-        CreateBuilderNode().BuilderDebuggerInfo;
+    BuilderContextDebuggerInfo? IBuilderContext.DebuggerInfo =>
+        CreateBuilderNode().DebuggerInfo;
 
     private string FormatMessage(string message, Elm.Element? element = null)
     {
@@ -42,18 +42,18 @@ partial class ExpressionBuilder : IBuilderNode
         return new PopElementToken(this, previous);
     }
 
-    private readonly record struct ExpressionBuilderNode : IBuilderNode
+    private readonly record struct ExpressionBuilderNode : IBuilderContext
     {
         public ILibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
         public IReadOnlyList<Elm.Element> ElementStackList { get; init; }
         public int ElementStackPosition { get; init; }
 
-        public IBuilderNode? OuterBuilder => ElementStackPosition < ElementStackList.Count - 1
+        public IBuilderContext? OuterBuilderContext => ElementStackPosition < ElementStackList.Count - 1
             ? this with { ElementStackPosition = ElementStackPosition + 1 }
             : LibraryExpressionBuilder;
 
-        public BuilderDebuggerInfo? BuilderDebuggerInfo => ElementStackPosition >= 0
-            ? Hl7.Cql.Compiler.BuilderDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
+        public BuilderContextDebuggerInfo? DebuggerInfo => ElementStackPosition >= 0
+            ? Hl7.Cql.Compiler.Builders.BuilderContextDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
             : null!;
     }
 

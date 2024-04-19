@@ -6,9 +6,9 @@ namespace Hl7.Cql.Compiler.Builders;
 partial class LibraryExpressionBuilder : ILibraryExpressionBuilderContext
 {
 
-    IBuilderNode? IBuilderNode.OuterBuilder => LibrarySetContext;
+    IBuilderContext? IBuilderContext.OuterBuilderContext => LibrarySetContext;
 
-    BuilderDebuggerInfo? IBuilderNode.BuilderDebuggerInfo => BuilderDebuggerInfo.FromElement(Library);
+    BuilderContextDebuggerInfo? IBuilderContext.DebuggerInfo => BuilderContextDebuggerInfo.FromElement(Library);
 
     public string DebuggerView => this.GetDebuggerView();
 

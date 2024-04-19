@@ -7,7 +7,7 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Builders;
 
-internal interface ILibraryExpressionBuilderContext : IBuilderNode
+internal interface ILibraryExpressionBuilderContext : IBuilderContext
 {
     Library Library { get; }
     DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
