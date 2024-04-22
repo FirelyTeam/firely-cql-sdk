@@ -1,26 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 using Expression = System.Linq.Expressions.Expression;
+using MethodAndParametersByParamCountByName = System.Collections.ObjectModel.ReadOnlyDictionary<string, System.Collections.ObjectModel.ReadOnlyDictionary<int, (System.Reflection.MethodInfo method, System.Reflection.ParameterInfo[] parameters)[]>>;
+
 
 namespace Hl7.Cql.Compiler;
 
 #pragma warning disable CS1591
-partial class CqlOperatorsBinder
+internal partial class CqlOperatorsBinder
 {
-    private static readonly IReadOnlyDictionary<(string methodName, int parameterCount), (MethodInfo method, ParameterInfo[] parameters)[]>
-        ICqlOperatorsMethodsWithParameters_By_MethodNameAndParameterCount =
+    private static readonly MethodAndParametersByParamCountByName
+        ICqlOperatorsMethods =
             typeof(ICqlOperators)
                 .GetMethods(BindingFlags.Instance | BindingFlags.Public)
                 .Select(method => (method, parameters:method.GetParameters()))
-                .GroupBy(t => (t.method.Name, t.parameters.Length))
+                .GroupBy(g => g.method.Name)
                 .ToDictionary(
                     g => g.Key,
-                    g => g.ToArray());
+                    g =>
+                        g.GroupBy(g2 => g2.parameters.Length)
+                         .ToDictionary(
+                             g2 => g2.Key,
+                             g2 => g2.ToArray())
+                         .AsReadOnly())
+                .AsReadOnly();
+
+    private static readonly TypeToCSharpStringOptions? TypeToCSharpStringOptions = new(PreferKeywords:true, HideNamespaces:true);
 
     ///  <summary>
     ///
@@ -61,7 +72,7 @@ partial class CqlOperatorsBinder
         {
             [] when throwError =>
                 throw new ArgumentException(
-                    $"No suitable method found {methodName}({string.Join(", ", arguments.Select(e => e.Type.Name))}).",
+                    NoCandidatesErrorMessage(),
                     nameof(methodName)),
             []       => (null, []),
             [{ } only] => (only.method, only.arguments),
@@ -95,6 +106,23 @@ partial class CqlOperatorsBinder
 
             throw new InvalidOperationException("");
         }
+
+        string NoCandidatesErrorMessage()
+        {
+            var parameters = string.Join(", ", arguments.Select(e => e.Type.ToCSharpString(TypeToCSharpStringOptions)));
+            var similar =
+                string.Concat(
+                    ICqlOperatorsMethods
+                        .GetMethodsByName(methodName)
+                        .Select(
+                            t =>
+                                $"\n- {methodName}({string.Join(", ", t.parameters.Select(p => p.ToCSharpString(new(HideParameterName: true))))})")
+                );
+            return $$"""
+                     Mo suitable method found {{methodName}}({{parameters}}).
+                     Methods considered by the same name: {{similar}}
+                     """;
+        }
     }
 
     private IEnumerable<(MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)>
@@ -106,46 +134,42 @@ partial class CqlOperatorsBinder
 
         for (int i = 0; i < 2; i++) // Try twice, first with all arguments, then without the last one
         {
-            if (ICqlOperatorsMethodsWithParameters_By_MethodNameAndParameterCount.TryGetValue(
-                    (methodName, args.Length),
-                    out var methodsWithParameters))
+            var methodsWithParameters = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, args.Length);
+
+            if (args.Length == 0)
             {
-
-                if (args.Length == 0)
+                // No conversions, find method without parameters
+                foreach (var (method, _) in methodsWithParameters)
                 {
-                    // No conversions, find method without parameters
-                    foreach (var (method, _) in methodsWithParameters)
-                    {
-                        yield return (method, [], []);
-                    }
-                    break;
+                    yield return (method, [], []);
                 }
+                break;
+            }
 
-                foreach (var (method, methodParameters) in methodsWithParameters)
+            foreach (var (method, methodParameters) in methodsWithParameters)
+            {
+                if (method is not { IsGenericMethodDefinition: true })
                 {
-                    if (method is not { IsGenericMethodDefinition: true })
+                    // Non-generic method
+                    if (TryBindArguments(methodParameters, out var methodArgs, out var conversions))
+                        yield return (method, methodArgs, conversions);
+                }
+                else
+                {
+                    // Generic method, figure out the generic type by the first two arguments
+                    for (int argIndexForGenericMethod = 0;
+                         argIndexForGenericMethod < Math.Min(args.Length, 2);
+                         argIndexForGenericMethod
+                             ++) // Try to get generic type from argument up to the second one
                     {
-                        // Non-generic method
-                        if (TryBindArguments(methodParameters, out var methodArgs, out var conversions))
-                            yield return (method, methodArgs, conversions);
-                    }
-                    else
-                    {
-                        // Generic method, figure out the generic type by the first two arguments
-                        for (int argIndexForGenericMethod = 0;
-                             argIndexForGenericMethod < Math.Min(args.Length, 2);
-                             argIndexForGenericMethod
-                                 ++) // Try to get generic type from argument up to the second one
-                        {
-                            if (!args[argIndexForGenericMethod].Type.IsGenericType)
-                                continue; // Not a generic argument, try again
+                        if (!args[argIndexForGenericMethod].Type.IsGenericType)
+                            continue; // Not a generic argument, try again
 
-                            var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments().Single();
-                            var genericMethod = method.MakeGenericMethod(genericTypeArg);
-                            if (TryBindArguments(genericMethod.GetParameters(), out var genericMethodArgs,
-                                                 out var conversions))
-                                yield return (genericMethod, genericMethodArgs, conversions);
-                        }
+                        var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments().Single();
+                        var genericMethod = method.MakeGenericMethod(genericTypeArg);
+                        if (TryBindArguments(genericMethod.GetParameters(), out var genericMethodArgs,
+                                             out var conversions))
+                            yield return (genericMethod, genericMethodArgs, conversions);
                     }
                 }
             }

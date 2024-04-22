@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
-internal static class TypeExtensions
+internal static partial class TypeExtensions
 {
     /// <summary>
     /// Checks if the specified type is nullable and returns it via <paramref name="underlyingType"/>

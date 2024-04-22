@@ -17,6 +17,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -116,7 +117,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 if (ReferenceEquals(childStatement, lastExpression))
                 {
-                    if (childStatement is not 
+                    if (childStatement is not
                         (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
                     {
                         if (!isFirstStatement) sb.AppendLine();
@@ -631,55 +632,58 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public static string PrettyTypeName(Type type)
         {
-            string typeName = type.Name;
-            if (type == typeof(int))
-                return "int";
-            else if (type == typeof(bool))
-                return "bool";
-            else if (type == typeof(decimal))
-                return "decimal";
-            else if (type == typeof(float))
-                return "float";
-            else if (type == typeof(double))
-                return "double";
-            else if (type == typeof(string))
-                return "string";
-            else if (type == typeof(object))
-                return "object";
-            if (type.IsGenericType)
-            {
-                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    typeName = $"{PrettyTypeName(Nullable.GetUnderlyingType(type)!)}?";
-                }
-                else
-                {
-                    if (type.IsGenericType)
-                    {
-                        var tildeIndex = type.Name.IndexOf('`');
-                        var rootName = type.Name.Substring(0, tildeIndex);
-                        var genericArgumentNames = type.GetGenericArguments()
-                            .Select(PrettyTypeName);
-                        var prettyName = $"{rootName}<{string.Join(",", genericArgumentNames)}>";
-                        typeName = prettyName;
-                    }
-                }
-            }
-            if (type.IsNested)
-            {
-                typeName = $"{PrettyTypeName(type.DeclaringType!)}.{typeName}";
-            }
-            if (typeName.StartsWith("Tuple_"))
-            {
-                return $"{type.Namespace}.{typeName}";
-            }
-            else if (type.IsArray)
-            {
-                var elementType = type.GetElementType() ??
-                    throw new InvalidOperationException($"Unable to get array element type for {type.FullName}");
-                return $"{PrettyTypeName(elementType)}[]";
-            }
-            else return typeName;
+            string result = type.ToCSharpString(new(PreferKeywords: true));
+            return result;
+            // string typeName = type.Name;
+            // if (type == typeof(int))
+            //     return "int";
+            // else if (type == typeof(bool))
+            //     return "bool";
+            // else if (type == typeof(decimal))
+            //     return "decimal";
+            // else if (type == typeof(float))
+            //     return "float";
+            // else if (type == typeof(double))
+            //     return "double";
+            // else if (type == typeof(string))
+            //     return "string";
+            // else if (type == typeof(object))
+            //     return "object";
+            //
+            // if (type.IsGenericType)
+            // {
+            //     if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            //     {
+            //         typeName = $"{PrettyTypeName(Nullable.GetUnderlyingType(type)!)}?";
+            //     }
+            //     else
+            //     {
+            //         if (type.IsGenericType)
+            //         {
+            //             var tildeIndex = type.Name.IndexOf('`');
+            //             var rootName = type.Name.Substring(0, tildeIndex);
+            //             var genericArgumentNames = type.GetGenericArguments()
+            //                 .Select(PrettyTypeName);
+            //             var prettyName = $"{rootName}<{string.Join(",", genericArgumentNames)}>";
+            //             typeName = prettyName;
+            //         }
+            //     }
+            // }
+            // if (type.IsNested)
+            // {
+            //     typeName = $"{PrettyTypeName(type.DeclaringType!)}.{typeName}";
+            // }
+            // if (typeName.StartsWith("Tuple_"))
+            // {
+            //     return $"{type.Namespace}.{typeName}";
+            // }
+            // else if (type.IsArray)
+            // {
+            //     var elementType = type.GetElementType() ??
+            //         throw new InvalidOperationException($"Unable to get array element type for {type.FullName}");
+            //     return $"{PrettyTypeName(elementType)}[]";
+            // }
+            // else return typeName;
         }
 
         private static string Parenthesize(string term)
@@ -689,7 +693,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             return term.ToCharArray().Any(char.IsWhiteSpace) ? $"({term})" : term;
         }
-        
+
         private static string EscapeKeywords(string symbol)
         {
             var keyword = SyntaxFacts.GetKeywordKind(symbol);

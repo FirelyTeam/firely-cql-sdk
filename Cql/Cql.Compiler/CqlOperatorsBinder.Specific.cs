@@ -217,11 +217,13 @@ partial class CqlOperatorsBinder
             return Expression.Constant(null, low.Type == high.Type ? typeof(CqlInterval<>).MakeGenericType(low.Type) : typeof(CqlInterval<object>));
         }
 
-        var (exactMethod, _) = ICqlOperatorsMethodsWithParameters_By_MethodNameAndParameterCount[(nameof(ICqlOperators.Interval), 4)]
-            .SingleOrDefault(t =>
-                t.parameters
-                    .Select(p => p.ParameterType)
-                    .SequenceEqual([low.Type, high.Type, typeof(bool?), typeof(bool?)]));
+        var (exactMethod, _) =
+            ICqlOperatorsMethods
+                .GetMethodsByNameAndParamCount(nameof(ICqlOperators.Interval), 4)
+                .SingleOrDefault(t =>
+                                     t.parameters
+                                       .Select(p => p.ParameterType)
+                                       .SequenceEqual([low.Type, high.Type, typeof(bool?), typeof(bool?)]));
 
         if (exactMethod != null)
         {

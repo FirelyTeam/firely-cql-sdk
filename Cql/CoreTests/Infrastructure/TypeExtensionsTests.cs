@@ -1,7 +1,10 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
 
 namespace CoreTests.Infrastructure
 {
@@ -194,13 +197,88 @@ namespace CoreTests.Infrastructure
             }
         }
 
+        [TestMethod]
+        public unsafe void ToCSharpString_ShouldReturnCorrectResults()
+        {
+            (Type type, string expected)[] testCases =
+            [
+                // Keywords
+                (typeof(void), "void"),
+                (typeof(byte), "byte"),
+                (typeof(sbyte), "sbyte"),
+                (typeof(char), "char"),
+                (typeof(short), "short"),
+                (typeof(ushort), "ushort"),
+                (typeof(int), "int"),
+                (typeof(uint), "uint"),
+                (typeof(nint), "nint"),
+                (typeof(nuint), "nuint"),
+                (typeof(long), "long"),
+                (typeof(ulong), "ulong"),
+                (typeof(float), "float"),
+                (typeof(double), "double"),
+                (typeof(decimal), "decimal"),
+                (typeof(string), "string"),
+                (typeof(object), "object"),
+                // Arrays
+                (typeof(int[]), "int[]"),
+                (typeof(int[][]), "int[][]"),
+                (typeof(int[,]), "int[,]"),
+                (typeof(int[][,]), "int[,][]"),
+                (typeof(int[,][]), "int[][,]"),
+                // Pointers
+                (typeof(int*), "int*"),
+                (typeof(int**), "int**"),
+                // Mixed Pointers/Arrays
+                (typeof(int*[]*), "int*[]*"),
+                (typeof(int*[,]*), "int*[,]*"),
+                // Nested
+                (typeof(EmptyStruct), "EmptyStruct"),
+                (typeof(EmptyStruct.Nested1.Nested2), "EmptyStruct+Nested1+Nested2"),
+                // Nullable Value Type
+                (typeof(int?), "int?"),
+                // Generic
+                (typeof(IDictionary<string?, int?>), "IDictionary<string,int?>"),
+                (typeof(IDictionary<,>), "IDictionary<,>"),
+            ];
+
+            foreach (var (type, expected) in testCases)
+            {
+                var actual = type.ToCSharpString(
+                    new(HideNamespaces: true, PreferKeywords: true));
+                Assert.AreEqual(expected, actual);
+            }
+
+            Assert.AreEqual(
+                "System.Collections.Generic.IDictionary<,>",
+                typeof(IDictionary<,>).ToCSharpString(new()));
+
+            Assert.AreEqual(
+                "IDictionary<TKey,TValue>",
+                typeof(IDictionary<,>).ToCSharpString(
+                    new(
+                        HideNamespaces: true,
+                        PreferKeywords: true,
+                        ShowGenericTypeParameterNames:true)));
+
+            Assert.AreEqual(
+                "System.Collections.Generic.IDictionary<TKey, TValue>",
+                typeof(IDictionary<,>).ToCSharpString(
+                    new(
+                        HideNamespaces: false,
+                        PreferKeywords: true,
+                        ShowGenericTypeParameterNames:true,
+                        TypeArgDelimited:", ")));
+        }
+
+
         public enum MyEnum
         {
             Value1,
             Value2
         }
 
-        public interface IGenericInterface<T>
+        public interface IGenericInterface<in T>
         {
             void Method(T value);
         }
@@ -227,5 +305,12 @@ namespace CoreTests.Infrastructure
         public class MyClass : MyGenericClass<int>
         {
         }
+    }
+    public readonly record struct EmptyStruct
+    {
+        public readonly record struct Nested1
+        {
+            public readonly record struct Nested2 { }
+        };
     }
 }

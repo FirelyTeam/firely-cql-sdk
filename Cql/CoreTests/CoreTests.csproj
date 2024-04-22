@@ -6,6 +6,7 @@
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
 		<NoWarn>CS1591</NoWarn>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>
