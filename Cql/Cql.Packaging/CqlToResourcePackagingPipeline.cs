@@ -110,7 +110,8 @@ internal class CqlToResourcePackagingPipeline
         }
     }
 
-    protected virtual IReadOnlyCollection<Resource> PackageResources(IReadOnlyDictionary<string, AssemblyData> assembliesByLibraryName, LibrarySet librarySet) => _resourcePackager.PackageResources(
+    protected virtual IReadOnlyCollection<Resource> PackageResources(IReadOnlyDictionary<string, AssemblyData> assembliesByLibraryName, LibrarySet librarySet) =>
+        _resourcePackager.PackageResources(
             _options.ElmDirectory,
             _options.CqlDirectory,
             _options.CanonicalRootUrl?.ToString(),
