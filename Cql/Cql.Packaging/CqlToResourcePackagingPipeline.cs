@@ -114,7 +114,9 @@ internal class CqlToResourcePackagingPipeline
         _resourcePackager.PackageResources(
             _options.ElmDirectory,
             _options.CqlDirectory,
-            _options.CanonicalRootUrl?.ToString(), librarySet, assembliesByLibraryName);
+            _options.CanonicalRootUrl?.ToString(),
+            librarySet,
+            assembliesByLibraryName);
 
     protected virtual IReadOnlyDictionary<string, AssemblyData> CompileExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
         _assemblyCompiler.Compile(librarySet, definitions);
