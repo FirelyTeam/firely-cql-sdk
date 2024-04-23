@@ -61,6 +61,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var hashSet = new HashSet<string>
             {
                 nameof(System),
+                "Tuples",
                 typeof(Enumerable).Namespace!, // System.Linq
                 typeof(ICollection<>).Namespace!, // System.Collections.Generic
                 typeof(CqlContext).Namespace!,

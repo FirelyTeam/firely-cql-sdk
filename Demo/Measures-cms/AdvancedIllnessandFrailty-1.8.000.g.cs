@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -384,7 +385,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var x_ = context.Operators.Quantity((decimal?)1m, "year");
 			var y_ = context.Operators.Subtract(w_, x_);
 			var aa_ = context.Operators.End(v_);
-			var ab_ = context.Operators.Interval(y_, aa_, true, true);
+			var ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)true);
 			var ac_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ab_, "day");
 			var ad_ = context.Operators.And(r_, ac_);
 
@@ -403,9 +404,9 @@ public class AdvancedIllnessandFrailty_1_8_000
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
 		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
-		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _valueTuple)
+		Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _valueTuple)
 		{
-			var k_ = new Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe
+			var k_ = new Tuple_EYKUVMTUWTABihhEAdHIGbSFe
 			{
 				OutpatientEncounter1 = _valueTuple.Item1,
 				OutpatientEncounter2 = _valueTuple.Item2,
@@ -413,8 +414,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return k_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
-		bool? f_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
+		bool? f_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
 			var m_ = context.Operators.End(l_);
@@ -426,10 +427,10 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return r_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
-		Encounter h_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
+		var g_ = context.Operators.WhereOrNull<Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
+		Encounter h_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
 		var j_ = context.Operators.ExistsInList<Encounter>(i_);
 
 		return j_;
@@ -465,7 +466,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var p_ = context.Operators.Quantity((decimal?)1m, "year");
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
-			var t_ = context.Operators.Interval(q_, s_, true, true);
+			var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
 			var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, "day");
 			var v_ = context.Operators.And(j_, u_);
 
@@ -501,7 +502,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var u_ = context.Operators.Quantity((decimal?)1m, "year");
 			var v_ = context.Operators.Subtract(t_, u_);
 			var x_ = context.Operators.End(s_);
-			var y_ = context.Operators.Interval(v_, x_, true, true);
+			var y_ = context.Operators.Interval(v_, x_, (bool?)true, (bool?)true);
 			var z_ = context.Operators.Overlaps(r_, y_, "day");
 			var aa_ = context.Operators.And(k_, z_);
 
@@ -550,7 +551,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)66, (int?)80, true, true);
+		var g_ = context.Operators.Interval((int?)66, (int?)80, (bool?)true, (bool?)true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
 		var i_ = this.Has_Criteria_Indicating_Frailty();
 		var j_ = context.Operators.And(h_, i_);

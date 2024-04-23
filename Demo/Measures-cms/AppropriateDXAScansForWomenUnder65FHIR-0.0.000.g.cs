@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -77,9 +78,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
     internal Lazy<CqlCode[]> __CPT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
     internal Lazy<bool?> __Initial_Population;
@@ -176,9 +177,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
         __CPT = new Lazy<CqlCode[]>(this.CPT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
@@ -688,7 +689,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("AppropriateDXAScansForWomenUnder65FHIR-0.0.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -710,7 +711,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -718,10 +719,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -729,10 +730,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -740,7 +741,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -824,7 +825,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)50, (int?)63, true, true);
+		var g_ = context.Operators.Interval((int?)50, (int?)63, (bool?)true, (bool?)true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
 		var k_ = context.Operators.Equal(j_, "female");
@@ -1114,7 +1115,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 					var at_ = this.Measurement_Period();
 					var au_ = context.Operators.Start(at_);
 					var aw_ = context.Operators.Start(at_);
-					var ax_ = context.Operators.Interval(au_, aw_, true, true);
+					var ax_ = context.Operators.Interval(au_, aw_, (bool?)true, (bool?)true);
 
 					return ax_;
 				};
@@ -1163,7 +1164,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var u_ = this.Measurement_Period();
 			var v_ = context.Operators.End(u_);
 			var w_ = context.Operators.DateFrom(v_);
-			var x_ = context.Operators.Interval(t_, w_, true, true);
+			var x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)true);
 			var y_ = context.Operators.IntervalIntersect<CqlDate>(r_, x_);
 
 			return y_;

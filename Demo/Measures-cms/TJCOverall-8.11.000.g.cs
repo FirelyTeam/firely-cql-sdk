@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -428,7 +429,7 @@ public class TJCOverall_8_11_000
 		var a_ = context.Operators.DateFrom(StartValue);
 		var c_ = context.Operators.Quantity((decimal?)1m, "day");
 		var d_ = context.Operators.Add(a_, c_);
-		var e_ = context.Operators.Interval(a_, d_, true, true);
+		var e_ = context.Operators.Interval(a_, d_, (bool?)true, (bool?)true);
 
 		return e_;
 	}

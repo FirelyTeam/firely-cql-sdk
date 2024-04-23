@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -31,7 +32,7 @@ public class PCMaternal_5_16_000
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Age_Range;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounter_with_Age_Range;
-    internal Lazy<IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
+    internal Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
 
     #endregion
     public PCMaternal_5_16_000(CqlContext context)
@@ -54,7 +55,7 @@ public class PCMaternal_5_16_000
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Encounter_with_Age_Range = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Age_Range_Value);
         __Delivery_Encounter_with_Age_Range = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounter_with_Age_Range_Value);
-        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
+        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
     }
     #region Dependencies
 
@@ -137,7 +138,7 @@ public class PCMaternal_5_16_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("PCMaternal-5.16.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -170,7 +171,7 @@ public class PCMaternal_5_16_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.Interval((int?)8, (int?)65, true, false);
+			var j_ = context.Operators.Interval((int?)8, (int?)65, (bool?)true, (bool?)false);
 			var k_ = context.Operators.ElementInInterval<int?>(i_, j_, null);
 
 			return k_;
@@ -210,7 +211,7 @@ public class PCMaternal_5_16_000
 					var bx_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var by_ = context.Operators.Subtract(bw_, bx_);
 					var ca_ = context.Operators.Start(bv_);
-					var cb_ = context.Operators.Interval(by_, ca_, true, true);
+					var cb_ = context.Operators.Interval(by_, ca_, (bool?)true, (bool?)true);
 					var cc_ = context.Operators.ElementInInterval<CqlDateTime>(bu_, cb_, null);
 					var ce_ = context.Operators.Start(bv_);
 					var cf_ = context.Operators.Not((bool?)(ce_ is null));
@@ -247,7 +248,7 @@ public class PCMaternal_5_16_000
 					var cq_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var cr_ = context.Operators.Subtract(cp_, cq_);
 					var ct_ = context.Operators.Start(co_);
-					var cu_ = context.Operators.Interval(cr_, ct_, true, true);
+					var cu_ = context.Operators.Interval(cr_, ct_, (bool?)true, (bool?)true);
 					var cv_ = context.Operators.ElementInInterval<CqlDateTime>(cn_, cu_, null);
 					var cx_ = context.Operators.Start(co_);
 					var cy_ = context.Operators.Not((bool?)(cx_ is null));
@@ -271,7 +272,7 @@ public class PCMaternal_5_16_000
 				var ax_ = FHIRHelpers_4_3_000.ToInterval(aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
-				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), true, true);
+				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), (bool?)true, (bool?)true);
 				var bc_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, bb_, null);
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
@@ -283,7 +284,7 @@ public class PCMaternal_5_16_000
 					var dj_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var dk_ = context.Operators.Subtract(di_, dj_);
 					var dm_ = context.Operators.Start(dh_);
-					var dn_ = context.Operators.Interval(dk_, dm_, true, true);
+					var dn_ = context.Operators.Interval(dk_, dm_, (bool?)true, (bool?)true);
 					var do_ = context.Operators.ElementInInterval<CqlDateTime>(dg_, dn_, null);
 					var dq_ = context.Operators.Start(dh_);
 					var dr_ = context.Operators.Not((bool?)(dq_ is null));
@@ -338,7 +339,7 @@ public class PCMaternal_5_16_000
 				var ee_ = context.Operators.Quantity((decimal?)1m, "hour");
 				var ef_ = context.Operators.Subtract(ed_, ee_);
 				var eh_ = context.Operators.Start(ec_);
-				var ei_ = context.Operators.Interval(ef_, eh_, true, true);
+				var ei_ = context.Operators.Interval(ef_, eh_, (bool?)true, (bool?)true);
 				var ej_ = context.Operators.ElementInInterval<CqlDateTime>(eb_, ei_, null);
 				var el_ = context.Operators.Start(ec_);
 				var em_ = context.Operators.Not((bool?)(el_ is null));
@@ -364,7 +365,7 @@ public class PCMaternal_5_16_000
 			var w_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 			var x_ = context.Operators.Start(w_);
 			var z_ = context.Operators.End(w_);
-			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
+			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, (bool?)true, (bool?)true);
 
 			return aa_;
 		};
@@ -615,7 +616,7 @@ public class PCMaternal_5_16_000
 			var s_ = this.lastTimeOfDelivery(TheEncounter);
 			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
-			var w_ = context.Operators.Interval(u_, s_, true, true);
+			var w_ = context.Operators.Interval(u_, s_, (bool?)true, (bool?)true);
 			var x_ = context.Operators.ElementInInterval<CqlDateTime>(r_, w_, null);
 			var z_ = context.Operators.Not((bool?)(s_ is null));
 			var aa_ = context.Operators.And(x_, z_);
@@ -695,13 +696,13 @@ public class PCMaternal_5_16_000
 		return e_;
 	}
 
-	private IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
+	private IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
 	{
 		var a_ = this.Delivery_Encounter_with_Age_Range();
-		Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM b_(Encounter DeliveryEncounter)
+		Tuple_CDQdAjUGdePbWTVfePeZUXKFM b_(Encounter DeliveryEncounter)
 		{
 			var d_ = this.calculatedGestationalAge(DeliveryEncounter);
-			var e_ = new Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM
+			var e_ = new Tuple_CDQdAjUGdePbWTVfePeZUXKFM
 			{
 				EncounterID = DeliveryEncounter?.IdElement?.Value,
 				CalculatedCGA = d_,
@@ -709,13 +710,13 @@ public class PCMaternal_5_16_000
 
 			return e_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>(a_, b_);
+		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_CDQdAjUGdePbWTVfePeZUXKFM>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
+	public IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
     [CqlDeclaration("lastEstimatedGestationalAge")]
@@ -775,7 +776,7 @@ public class PCMaternal_5_16_000
 			var k_ = this.lastTimeOfDelivery(TheEncounter);
 			var l_ = context.Operators.Quantity((decimal?)24m, "hours");
 			var m_ = context.Operators.Subtract(k_, l_);
-			var o_ = context.Operators.Interval(m_, k_, true, true);
+			var o_ = context.Operators.Interval(m_, k_, (bool?)true, (bool?)true);
 			var p_ = context.Operators.ElementInInterval<CqlDateTime>(j_, o_, null);
 			var r_ = context.Operators.Not((bool?)(k_ is null));
 			var s_ = context.Operators.And(p_, r_);

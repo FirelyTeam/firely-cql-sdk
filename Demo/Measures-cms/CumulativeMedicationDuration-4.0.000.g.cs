@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -1485,7 +1486,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var dc_ = context.Operators.Subtract(da_, db_);
 					var dd_ = this.Quantity(dc_, "day");
 					var de_ = context.Operators.Add(((bu_ ?? bw_) ?? bz_), dd_);
-					var df_ = context.Operators.Interval(((bl_ ?? bn_) ?? bq_), de_, true, true);
+					var df_ = context.Operators.Interval(((bl_ ?? bn_) ?? bq_), de_, (bool?)true, (bool?)true);
 
 					return df_;
 				}
@@ -1503,7 +1504,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var dq_ = FHIRHelpers_4_3_000.ToValue(dg_?.Timing?.Repeat?.Bounds);
 					var dr_ = context.Operators.End((dq_ as CqlInterval<CqlDateTime>));
 					var ds_ = context.Operators.DateFrom(dr_);
-					var dt_ = context.Operators.Interval(((dj_ ?? dl_) ?? do_), ds_, true, true);
+					var dt_ = context.Operators.Interval(((dj_ ?? dl_) ?? do_), ds_, (bool?)true, (bool?)true);
 
 					return dt_;
 				}
@@ -1594,7 +1595,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var bs_ = context.Operators.Subtract((au_?.value ?? bq_), br_);
 					var bt_ = this.Quantity(bs_, "day");
 					var bu_ = context.Operators.Add((aq_ ?? as_), bt_);
-					var bv_ = context.Operators.Interval((am_ ?? ao_), bu_, true, true);
+					var bv_ = context.Operators.Interval((am_ ?? ao_), bu_, (bool?)true, (bool?)true);
 
 					return bv_;
 				}
@@ -1658,7 +1659,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var w_ = context.Operators.Add(t_, v_);
 					var x_ = context.Operators.ConvertIntegerToQuantity((int?)1);
 					var y_ = context.Operators.Subtract(w_, x_);
-					var z_ = context.Operators.Interval(q_, y_, true, true);
+					var z_ = context.Operators.Interval(q_, y_, (bool?)true, (bool?)true);
 
 					return z_;
 				}
@@ -1745,7 +1746,7 @@ public class CumulativeMedicationDuration_4_0_000
 				var aa_ = context.Operators.ConvertIntegerToDecimal((z_ ?? (int?)0));
 				var ab_ = this.Quantity(aa_, "day");
 				var ac_ = context.Operators.Add(w_, ab_);
-				var ad_ = context.Operators.Interval(p_, ac_, true, true);
+				var ad_ = context.Operators.Interval(p_, ac_, (bool?)true, (bool?)true);
 
 				return ad_;
 			};

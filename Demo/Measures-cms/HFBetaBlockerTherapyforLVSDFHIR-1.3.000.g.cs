@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -56,9 +57,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
     internal Lazy<bool?> __Has_Cardiac_Pacer_Device_Implanted;
     internal Lazy<bool?> __Atrioventricular_Block_without_Cardiac_Pacer;
     internal Lazy<bool?> __Denominator_Exceptions;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -108,9 +109,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
         __Has_Cardiac_Pacer_Device_Implanted = new Lazy<bool?>(this.Has_Cardiac_Pacer_Device_Implanted_Value);
         __Atrioventricular_Block_without_Cardiac_Pacer = new Lazy<bool?>(this.Atrioventricular_Block_without_Cardiac_Pacer_Value);
         __Denominator_Exceptions = new Lazy<bool?>(this.Denominator_Exceptions_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -259,7 +260,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("HFBetaBlockerTherapyforLVSDFHIR-1.3.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -417,9 +418,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 		var b_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV d_(ValueTuple<Observation,Encounter> _valueTuple)
+		Tuple_FgYDjIJBhiXdBHJjiISjVeOjV d_(ValueTuple<Observation,Encounter> _valueTuple)
 		{
-			var k_ = new Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV
+			var k_ = new Tuple_FgYDjIJBhiXdBHJjiISjVeOjV
 			{
 				HeartRate = _valueTuple.Item1,
 				ModerateOrSevereLVSDHFOutpatientEncounter = _valueTuple.Item2,
@@ -427,8 +428,8 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return k_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Observation,Encounter>, Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(c_, d_);
-		bool? f_(Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv)
+		var e_ = context.Operators.SelectOrNull<ValueTuple<Observation,Encounter>, Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(c_, d_);
+		bool? f_(Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_fgydjijbhixdbhjjiisjveojv.ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
 			var m_ = FHIRHelpers_4_3_000.ToValue(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Effective);
@@ -481,10 +482,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return ai_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(e_, f_);
-		Observation h_(Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv) => 
+		var g_ = context.Operators.WhereOrNull<Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(e_, f_);
+		Observation h_(Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv) => 
 			tuple_fgydjijbhixdbhjjiisjveojv.HeartRate;
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_FgYDjIJBhiXdBHJjiISjVeOjV, Observation>(g_, h_);
+		var i_ = context.Operators.SelectOrNull<Tuple_FgYDjIJBhiXdBHJjiISjVeOjV, Observation>(g_, h_);
 		var j_ = context.Operators.ExistsInList<Observation>(i_);
 
 		return j_;
@@ -864,7 +865,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	public bool? Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -872,10 +873,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -883,10 +884,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -894,7 +895,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

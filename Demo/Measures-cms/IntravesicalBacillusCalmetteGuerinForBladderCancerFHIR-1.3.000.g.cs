@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -59,9 +60,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
     internal Lazy<bool?> __Denominator_Exception;
     internal Lazy<MedicationAdministration> __First_BCG_Administered;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Condition>> __Acute_Tuberculosis_Diagnosis;
     internal Lazy<IEnumerable<MedicationRequest>> __Immunosuppressive_Drugs;
@@ -120,9 +121,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
         __Denominator_Exception = new Lazy<bool?>(this.Denominator_Exception_Value);
         __First_BCG_Administered = new Lazy<MedicationAdministration>(this.First_BCG_Administered_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Acute_Tuberculosis_Diagnosis = new Lazy<IEnumerable<Condition>>(this.Acute_Tuberculosis_Diagnosis_Value);
         __Immunosuppressive_Drugs = new Lazy<IEnumerable<MedicationRequest>>(this.Immunosuppressive_Drugs_Value);
@@ -356,7 +357,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR-1.3.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -538,7 +539,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		{
 			var f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
 			var g_ = this.June_30_of_the_Measurement_Period();
-			var h_ = context.Operators.Interval(f_, g_, true, true);
+			var h_ = context.Operators.Interval(f_, g_, (bool?)true, (bool?)true);
 			var i_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
 			var j_ = QICoreCommon_2_0_000.toInterval(i_);
 			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, "day");
@@ -566,7 +567,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		{
 			var f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
 			var g_ = this.June_30_of_the_Measurement_Period();
-			var h_ = context.Operators.Interval(f_, g_, true, true);
+			var h_ = context.Operators.Interval(f_, g_, (bool?)true, (bool?)true);
 			var i_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
 			var j_ = QICoreCommon_2_0_000.toInterval(i_);
 			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, "day");
@@ -752,7 +753,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var aa_ = context.Operators.Start(z_);
 				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
-				var ad_ = context.Operators.Interval(x_, ac_, false, true);
+				var ad_ = context.Operators.Interval(x_, ac_, (bool?)false, (bool?)true);
 				var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, null);
 				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
 				var ah_ = context.Operators.Start(ag_);
@@ -844,7 +845,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var aa_ = context.Operators.Start(z_);
 				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
-				var ad_ = context.Operators.Interval(x_, ac_, false, true);
+				var ad_ = context.Operators.Interval(x_, ac_, (bool?)false, (bool?)true);
 				var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, null);
 				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
 				var ah_ = context.Operators.Start(ag_);
@@ -910,7 +911,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -918,10 +919,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -929,10 +930,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -940,7 +941,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -1061,7 +1062,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var t_ = context.Operators.Subtract(r_, s_);
 				var v_ = QICoreCommon_2_0_000.toInterval(p_);
 				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Interval(t_, w_, true, false);
+				var x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)false);
 				var y_ = context.Operators.ElementInInterval<CqlDateTime>(o_, x_, null);
 				var aa_ = QICoreCommon_2_0_000.toInterval(p_);
 				var ab_ = context.Operators.Start(aa_);
@@ -1171,7 +1172,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var af_ = context.Operators.Subtract(ad_, ae_);
 				var ah_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var ai_ = context.Operators.Start(ah_);
-				var aj_ = context.Operators.Interval(af_, ai_, true, false);
+				var aj_ = context.Operators.Interval(af_, ai_, (bool?)true, (bool?)false);
 				var ak_ = context.Operators.ElementInInterval<CqlDateTime>(aa_, aj_, null);
 				var am_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var an_ = context.Operators.Start(am_);
@@ -1229,7 +1230,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var bm_ = context.Operators.Subtract(bk_, bl_);
 				var bo_ = QICoreCommon_2_0_000.toInterval(bi_);
 				var bp_ = context.Operators.Start(bo_);
-				var bq_ = context.Operators.Interval(bm_, bp_, true, false);
+				var bq_ = context.Operators.Interval(bm_, bp_, (bool?)true, (bool?)false);
 				var br_ = context.Operators.ElementInInterval<CqlDateTime>(bh_, bq_, null);
 				var bt_ = QICoreCommon_2_0_000.toInterval(bi_);
 				var bu_ = context.Operators.Start(bt_);
@@ -1293,7 +1294,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		{
 			if ((context.Operators.Not((bool?)(pointInTime is null)) ?? false))
 			{
-				var b_ = context.Operators.Interval(pointInTime, pointInTime, true, true);
+				var b_ = context.Operators.Interval(pointInTime, pointInTime, (bool?)true, (bool?)true);
 
 				return b_;
 			}

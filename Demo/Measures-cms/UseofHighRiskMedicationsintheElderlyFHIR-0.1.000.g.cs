@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -96,9 +97,9 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
     internal Lazy<CqlDateTime> __Benzodiazepine_Index_Prescription_Start_Date;
     internal Lazy<bool?> __Numerator_2;
     internal Lazy<bool?> __Numerator_3;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -192,9 +193,9 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
         __Benzodiazepine_Index_Prescription_Start_Date = new Lazy<CqlDateTime>(this.Benzodiazepine_Index_Prescription_Start_Date_Value);
         __Numerator_2 = new Lazy<bool?>(this.Numerator_2_Value);
         __Numerator_3 = new Lazy<bool?>(this.Numerator_3_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -712,7 +713,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("UseofHighRiskMedicationsintheElderlyFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -1596,7 +1597,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var aj_ = context.Operators.Quantity((decimal?)1m, "year");
 			var ak_ = context.Operators.Subtract(ai_, aj_);
 			var al_ = this.Antipsychotic_Index_Prescription_Start_Date();
-			var am_ = context.Operators.Interval(ak_, al_, true, true);
+			var am_ = context.Operators.Interval(ak_, al_, (bool?)true, (bool?)true);
 			var an_ = context.Operators.Overlaps(ag_, am_, null);
 
 			return an_;
@@ -1628,7 +1629,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var ar_ = context.Operators.Quantity((decimal?)1m, "year");
 			var as_ = context.Operators.Subtract(aq_, ar_);
 			var at_ = this.Benzodiazepine_Index_Prescription_Start_Date();
-			var au_ = context.Operators.Interval(as_, at_, true, true);
+			var au_ = context.Operators.Interval(as_, at_, (bool?)true, (bool?)true);
 			var av_ = context.Operators.Overlaps(ao_, au_, null);
 
 			return av_;
@@ -1661,7 +1662,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	public bool? Numerator_3() => 
 		__Numerator_3.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1669,10 +1670,10 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1680,10 +1681,10 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1691,7 +1692,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

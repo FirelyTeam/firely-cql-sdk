@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -74,9 +75,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
     internal Lazy<IEnumerable<object>> __Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient;
     internal Lazy<IEnumerable<Encounter>> __Denominator_Exceptions;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -144,9 +145,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
         __Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined = new Lazy<IEnumerable<object>>(this.Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Value);
         __Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient_Value);
         __Denominator_Exceptions = new Lazy<IEnumerable<Encounter>>(this.Denominator_Exceptions_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -369,7 +370,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("PCSBPScreeningFollowUpFHIR-0.2.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -486,7 +487,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						var v_ = QICoreCommon_2_0_000.prevalenceInterval(Hypertension);
 						var w_ = context.Operators.Start(v_);
 						var y_ = context.Operators.Start(v_);
-						var z_ = context.Operators.Interval(w_, y_, true, true);
+						var z_ = context.Operators.Interval(w_, y_, (bool?)true, (bool?)true);
 
 						return z_;
 					};
@@ -565,7 +566,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
 			var o_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
-			var p_ = context.Operators.Interval(n_, o_, true, false);
+			var p_ = context.Operators.Interval(n_, o_, (bool?)true, (bool?)false);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
 			{
@@ -612,7 +613,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
-			var ad_ = context.Operators.Interval(n_, ac_, true, false);
+			var ad_ = context.Operators.Interval(n_, ac_, (bool?)true, (bool?)false);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.And(q_, ae_);
 
@@ -679,7 +680,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
 			var o_ = context.Operators.Quantity((decimal?)129m, "mm[Hg]");
-			var p_ = context.Operators.Interval(n_, o_, true, true);
+			var p_ = context.Operators.Interval(n_, o_, (bool?)true, (bool?)true);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
 			{
@@ -727,7 +728,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
 			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
-			var ad_ = context.Operators.Interval(ab_, ac_, true, false);
+			var ad_ = context.Operators.Interval(ab_, ac_, (bool?)true, (bool?)false);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.And(q_, ae_);
 
@@ -914,7 +915,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var bh_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bi_ = context.Operators.Subtract(bg_, bh_);
 				var bk_ = context.Operators.Start(bf_);
-				var bl_ = context.Operators.Interval(bi_, bk_, true, true);
+				var bl_ = context.Operators.Interval(bi_, bk_, (bool?)true, (bool?)true);
 				var bm_ = context.Operators.ElementInInterval<CqlDateTime>(be_, bl_, null);
 				var bo_ = context.Operators.Start(bf_);
 				var bp_ = context.Operators.Not((bool?)(bo_ is null));
@@ -968,7 +969,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var ck_ = context.Operators.Quantity((decimal?)1m, "year");
 				var cl_ = context.Operators.Subtract(cj_, ck_);
 				var cn_ = context.Operators.Start(ci_);
-				var co_ = context.Operators.Interval(cl_, cn_, true, true);
+				var co_ = context.Operators.Interval(cl_, cn_, (bool?)true, (bool?)true);
 				var cp_ = context.Operators.ElementInInterval<CqlDateTime>(ch_, co_, null);
 				var cr_ = context.Operators.Start(ci_);
 				var cs_ = context.Operators.Not((bool?)(cr_ is null));
@@ -1022,7 +1023,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var dn_ = context.Operators.Quantity((decimal?)1m, "year");
 				var do_ = context.Operators.Subtract(dm_, dn_);
 				var dq_ = context.Operators.Start(dl_);
-				var dr_ = context.Operators.Interval(do_, dq_, true, true);
+				var dr_ = context.Operators.Interval(do_, dq_, (bool?)true, (bool?)true);
 				var ds_ = context.Operators.ElementInInterval<CqlDateTime>(dk_, dr_, null);
 				var du_ = context.Operators.Start(dl_);
 				var dv_ = context.Operators.Not((bool?)(du_ is null));
@@ -1076,7 +1077,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var eq_ = context.Operators.Quantity((decimal?)1m, "year");
 				var er_ = context.Operators.Subtract(ep_, eq_);
 				var et_ = context.Operators.Start(eo_);
-				var eu_ = context.Operators.Interval(er_, et_, true, true);
+				var eu_ = context.Operators.Interval(er_, et_, (bool?)true, (bool?)true);
 				var ev_ = context.Operators.ElementInInterval<CqlDateTime>(en_, eu_, null);
 				var ex_ = context.Operators.Start(eo_);
 				var ey_ = context.Operators.Not((bool?)(ex_ is null));
@@ -1425,7 +1426,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var o_ = context.Operators.Quantity((decimal?)139m, "mm[Hg]");
-			var p_ = context.Operators.Interval(n_, o_, true, true);
+			var p_ = context.Operators.Interval(n_, o_, (bool?)true, (bool?)true);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
 			{
@@ -1473,7 +1474,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var ac_ = context.Operators.Quantity((decimal?)89m, "mm[Hg]");
-			var ad_ = context.Operators.Interval(ab_, ac_, true, true);
+			var ad_ = context.Operators.Interval(ab_, ac_, (bool?)true, (bool?)true);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.Or(q_, ae_);
 			bool? ah_(Observation BloodPressure)
@@ -2576,7 +2577,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	public IEnumerable<Encounter> Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -2584,10 +2585,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -2595,10 +2596,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -2606,7 +2607,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

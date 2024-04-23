@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -56,7 +57,7 @@ public class FHIRHelpers_4_0_001
 			{
 				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
 				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
+				var e_ = context.Operators.Interval(c_, d_, (bool?)true, (bool?)true);
 
 				return e_;
 			};
@@ -80,7 +81,7 @@ public class FHIRHelpers_4_0_001
 			{
 				var c_ = this.ToQuantity(range?.Low);
 				var d_ = this.ToQuantity(range?.High);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
+				var e_ = context.Operators.Interval(c_, d_, (bool?)true, (bool?)true);
 
 				return e_;
 			};

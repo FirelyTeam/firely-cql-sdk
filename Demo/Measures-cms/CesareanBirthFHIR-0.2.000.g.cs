@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -49,11 +50,11 @@ public class CesareanBirthFHIR_0_2_000
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounter_with_Cesarean_Birth;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
-    internal Lazy<IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
+    internal Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
 
     #endregion
     public CesareanBirthFHIR_0_2_000(CqlContext context)
@@ -96,11 +97,11 @@ public class CesareanBirthFHIR_0_2_000
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
         __Delivery_Encounter_with_Cesarean_Birth = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounter_with_Cesarean_Birth_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
-        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
+        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
     }
     #region Dependencies
 
@@ -233,7 +234,7 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("CesareanBirthFHIR-0.2.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -441,7 +442,7 @@ public class CesareanBirthFHIR_0_2_000
 			var s_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
-			var w_ = context.Operators.Interval(u_, s_, true, false);
+			var w_ = context.Operators.Interval(u_, s_, (bool?)true, (bool?)false);
 			var x_ = context.Operators.ElementInInterval<CqlDateTime>(r_, w_, null);
 			var z_ = context.Operators.Not((bool?)(s_ is null));
 			var aa_ = context.Operators.And(x_, z_);
@@ -567,7 +568,7 @@ public class CesareanBirthFHIR_0_2_000
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
-			var p_ = context.Operators.Interval(n_, l_, true, false);
+			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
@@ -705,7 +706,7 @@ public class CesareanBirthFHIR_0_2_000
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
-			var p_ = context.Operators.Interval(n_, l_, true, false);
+			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
@@ -843,7 +844,7 @@ public class CesareanBirthFHIR_0_2_000
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
-			var p_ = context.Operators.Interval(n_, l_, true, false);
+			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
@@ -1880,7 +1881,7 @@ public class CesareanBirthFHIR_0_2_000
 	public IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1888,10 +1889,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1899,10 +1900,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1910,7 +1911,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -1924,7 +1925,7 @@ public class CesareanBirthFHIR_0_2_000
 	public CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
+	private IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
 	{
 		var a_ = PCMaternal_5_16_000.Variable_Calculated_Gestational_Age();
 
@@ -1932,7 +1933,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
+	public IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -48,9 +49,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
     internal Lazy<IEnumerable<CqlInterval<CqlDate>>> __Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD;
     internal Lazy<bool?> __Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days;
     internal Lazy<bool?> __Numerator_2;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -95,9 +96,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
         __Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD = new Lazy<IEnumerable<CqlInterval<CqlDate>>>(this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD_Value);
         __Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days = new Lazy<bool?>(this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days_Value);
         __Numerator_2 = new Lazy<bool?>(this.Numerator_2_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -212,7 +213,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("AntidepressantMedicationManagementFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -269,7 +270,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	{
 		var a_ = this.May_1_of_the_Year_Prior_to_the_Measurement_Period();
 		var b_ = this.April_30_of_the_Measurement_Period();
-		var c_ = context.Operators.Interval(a_, b_, true, true);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)true);
 
 		return c_;
 	}
@@ -296,24 +297,24 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			return r_;
 		};
 		var h_ = context.Operators.WhereOrNull<MedicationDispense>(f_, g_);
-		Tuples.Tuple_DicAHhNAXdJZgCSRQIFKiFWQI i_(MedicationDispense Antidepressant)
+		Tuple_DicAHhNAXdJZgCSRQIFKiFWQI i_(MedicationDispense Antidepressant)
 		{
 			var s_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
 			var t_ = context.Operators.Start(s_);
 			var u_ = context.Operators.ConvertDateToDateTime(t_);
 			var v_ = context.Operators.DateFrom(u_);
-			var w_ = new Tuples.Tuple_DicAHhNAXdJZgCSRQIFKiFWQI
+			var w_ = new Tuple_DicAHhNAXdJZgCSRQIFKiFWQI
 			{
 				AntidepressantDate = v_,
 			};
 
 			return w_;
 		};
-		var j_ = context.Operators.SelectOrNull<MedicationDispense, Tuples.Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(h_, i_);
-		object k_(Tuples.Tuple_DicAHhNAXdJZgCSRQIFKiFWQI @this) => 
+		var j_ = context.Operators.SelectOrNull<MedicationDispense, Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(h_, i_);
+		object k_(Tuple_DicAHhNAXdJZgCSRQIFKiFWQI @this) => 
 			@this?.AntidepressantDate;
-		var l_ = context.Operators.ListSortBy<Tuples.Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-		var m_ = context.Operators.FirstOfList<Tuples.Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(l_);
+		var l_ = context.Operators.ListSortBy<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+		var m_ = context.Operators.FirstOfList<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(l_);
 
 		return m_?.AntidepressantDate;
 	}
@@ -336,7 +337,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var l_ = context.Operators.Quantity((decimal?)60m, "days");
 			var m_ = context.Operators.Subtract(f_, l_);
 			var p_ = context.Operators.Add(f_, l_);
-			var q_ = context.Operators.Interval(m_, p_, true, true);
+			var q_ = context.Operators.Interval(m_, p_, (bool?)true, (bool?)true);
 			var r_ = context.Operators.ElementInInterval<CqlDate>(j_, q_, null);
 			var t_ = context.Operators.Not((bool?)(f_ is null));
 			var u_ = context.Operators.And(r_, t_);
@@ -395,7 +396,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var ak_ = context.Operators.Quantity((decimal?)60m, "days");
 			var al_ = context.Operators.Subtract(aj_, ak_);
 			var ao_ = context.Operators.Add(aj_, ak_);
-			var ap_ = context.Operators.Interval(al_, ao_, true, true);
+			var ap_ = context.Operators.Interval(al_, ao_, (bool?)true, (bool?)true);
 			var aq_ = context.Operators.ElementInInterval<CqlDate>(ai_, ap_, null);
 			var as_ = context.Operators.Not((bool?)(aj_ is null));
 			var at_ = context.Operators.And(aq_, as_);
@@ -467,7 +468,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 				var ac_ = context.Operators.Start(ab_);
 				var ad_ = this.Measurement_Period();
 				var ae_ = context.Operators.End(ad_);
-				var af_ = context.Operators.Interval(ac_, ae_, true, true);
+				var af_ = context.Operators.Interval(ac_, ae_, (bool?)true, (bool?)true);
 				var ag_ = context.Operators.IntervalIntersect<CqlDateTime>((Meds as CqlInterval<CqlDateTime>), af_);
 
 				return ag_;
@@ -477,7 +478,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			var v_ = context.Operators.Quantity((decimal?)105m, "days");
 			var w_ = context.Operators.Subtract(l_, v_);
-			var y_ = context.Operators.Interval(w_, l_, true, false);
+			var y_ = context.Operators.Interval(w_, l_, (bool?)true, (bool?)false);
 			var z_ = context.Operators.Overlaps(t_, y_, null);
 			var aa_ = context.Operators.And(m_, z_);
 
@@ -507,7 +508,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
 			var l_ = context.Operators.Quantity((decimal?)114m, "days");
 			var m_ = context.Operators.Add(j_, l_);
-			var n_ = context.Operators.Interval(j_, m_, true, true);
+			var n_ = context.Operators.Interval(j_, m_, (bool?)true, (bool?)true);
 			var o_ = context.Operators.IntervalIntersect<CqlDate>(i_, n_);
 
 			return o_;
@@ -558,7 +559,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
 			var l_ = context.Operators.Quantity((decimal?)231m, "days");
 			var m_ = context.Operators.Add(j_, l_);
-			var n_ = context.Operators.Interval(j_, m_, true, true);
+			var n_ = context.Operators.Interval(j_, m_, (bool?)true, (bool?)true);
 			var o_ = context.Operators.IntervalIntersect<CqlDate>(i_, n_);
 
 			return o_;
@@ -596,7 +597,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	public bool? Numerator_2() => 
 		__Numerator_2.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -604,10 +605,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -615,10 +616,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -626,7 +627,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

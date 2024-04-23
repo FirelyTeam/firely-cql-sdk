@@ -1,4 +1,5 @@
 using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -16,8 +17,8 @@ namespace Tuples
     public class Tuple_FAESHVMWYGMYBALaJITZUecdI: TupleBaseType
     {
         [CqlDeclaration("FirstUSSAssessment")]
-        public Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FirstUSSAssessment { get; set; }
+        public Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FirstUSSAssessment { get; set; }
         [CqlDeclaration("FollowUpUSSAssessment")]
-        public Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment { get; set; }
+        public Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -182,7 +183,7 @@ public class VTE_8_6_000
 		var f_ = context.Operators.DateFrom(e_);
 		var g_ = context.Operators.Quantity((decimal?)1m, "days");
 		var h_ = context.Operators.Add(f_, g_);
-		var i_ = context.Operators.Interval(c_, h_, true, true);
+		var i_ = context.Operators.Interval(c_, h_, (bool?)true, (bool?)true);
 
 		return i_;
 	}
@@ -207,7 +208,7 @@ public class VTE_8_6_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.Quantity((decimal?)1m, "day");
 		var g_ = context.Operators.Add(e_, f_);
-		var h_ = context.Operators.Interval(c_, g_, true, true);
+		var h_ = context.Operators.Interval(c_, g_, (bool?)true, (bool?)true);
 
 		return h_;
 	}

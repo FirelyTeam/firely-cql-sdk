@@ -206,34 +206,6 @@ partial class CqlOperatorsBinder
         throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
     }
 
-    private Expression Interval(
-        Expression low,
-        Expression high,
-        Expression lowClosed,
-        Expression highClosed)
-    {
-        if (low is ConstantExpression { Value: null } && high is ConstantExpression { Value: null })
-        {
-            return Expression.Constant(null, low.Type == high.Type ? typeof(CqlInterval<>).MakeGenericType(low.Type) : typeof(CqlInterval<object>));
-        }
-
-        var (exactMethod, _) =
-            ICqlOperatorsMethods
-                .GetMethodsByNameAndParamCount(nameof(ICqlOperators.Interval), 4)
-                .SingleOrDefault(t =>
-                                     t.parameters
-                                       .Select(p => p.ParameterType)
-                                       .SequenceEqual([low.Type, high.Type, typeof(bool?), typeof(bool?)]));
-
-        if (exactMethod != null)
-        {
-            var call = BindToMethod(exactMethod, low, high, lowClosed, highClosed);
-            return call;
-        }
-
-        return BindToMethod(nameof(ICqlOperators.Interval), low, high, lowClosed, highClosed);
-    }
-
     /// <summary>
     /// Handles explicit conversions, i.e., the Convert operator
     /// </summary>

@@ -366,7 +366,7 @@ namespace Hl7.Cql.Compiler
                         IndexOf io                 => IndexOf(io),
                         Instance ine               => Instance(ine),
                         Intersect ise              => Intersect(ise),
-                        Interval ie                => IntervalExpression(ie),
+                        Interval ie                => BindCqlOperator(CqlOperator.Interval, null, ie.low, ie.high, (object)ie.lowClosedExpression ?? ie.lowClosed, (object)ie.highClosedExpression ?? ie.highClosed),
                         Is @is                     => Is(@is),
                         IsNull isn                 => IsNull(isn),
                         Length len                 => Length(len),

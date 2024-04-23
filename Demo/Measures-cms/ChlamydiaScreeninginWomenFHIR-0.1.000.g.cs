@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -48,9 +49,9 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
     internal Lazy<CqlCode[]> __SNOMEDCT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounters;
     internal Lazy<bool?> __Has_Assessments_Identifying_Sexual_Activity;
@@ -111,9 +112,9 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
         __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounters = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounters_Value);
         __Has_Assessments_Identifying_Sexual_Activity = new Lazy<bool?>(this.Has_Assessments_Identifying_Sexual_Activity_Value);
@@ -379,7 +380,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("ChlamydiaScreeninginWomenFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -401,7 +402,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -409,10 +410,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -420,10 +421,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -431,7 +432,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -521,7 +522,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					var t_ = this.Measurement_Period();
 					var u_ = context.Operators.End(t_);
 					var w_ = context.Operators.End(t_);
-					var x_ = context.Operators.Interval(u_, w_, true, true);
+					var x_ = context.Operators.Interval(u_, w_, (bool?)true, (bool?)true);
 
 					return x_;
 				};
@@ -735,7 +736,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)16, (int?)24, true, true);
+		var g_ = context.Operators.Interval((int?)16, (int?)24, (bool?)true, (bool?)true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
 		var k_ = context.Operators.Equal(j_, "female");
@@ -798,7 +799,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var ab_ = context.Operators.End(aa_);
 				var ac_ = context.Operators.Quantity((decimal?)6m, "days");
 				var ad_ = context.Operators.Add(ab_, ac_);
-				var ae_ = context.Operators.Interval(y_, ad_, true, true);
+				var ae_ = context.Operators.Interval(y_, ad_, (bool?)true, (bool?)true);
 				var af_ = context.Operators.ElementInInterval<CqlDateTime>(v_, ae_, "day");
 				var ah_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 				var ai_ = context.Operators.End(ah_);
@@ -840,7 +841,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var bi_ = context.Operators.End(bh_);
 				var bj_ = context.Operators.Quantity((decimal?)6m, "days");
 				var bk_ = context.Operators.Add(bi_, bj_);
-				var bl_ = context.Operators.Interval(bf_, bk_, true, true);
+				var bl_ = context.Operators.Interval(bf_, bk_, (bool?)true, (bool?)true);
 				var bm_ = context.Operators.ElementInInterval<CqlDateTime>(bc_, bl_, "day");
 				var bo_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
 				var bp_ = context.Operators.End(bo_);
@@ -985,7 +986,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)16, (int?)20, true, true);
+		var g_ = context.Operators.Interval((int?)16, (int?)20, (bool?)true, (bool?)true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
 
 		return h_;
@@ -1003,7 +1004,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)21, (int?)24, true, true);
+		var g_ = context.Operators.Interval((int?)21, (int?)24, (bool?)true, (bool?)true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
 
 		return h_;

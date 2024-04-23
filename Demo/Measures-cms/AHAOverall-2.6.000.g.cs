@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -252,7 +253,7 @@ public class AHAOverall_2_6_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("AHAOverall-2.6.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -806,7 +807,7 @@ public class AHAOverall_2_6_000
 					var s_ = QICoreCommon_2_0_000.toInterval(r_);
 					var t_ = context.Operators.Start(s_);
 					var u_ = context.Operators.Convert<CqlDateTime>((Event as AllergyIntolerance)?.LastOccurrenceElement);
-					var v_ = context.Operators.Interval(t_, u_, true, true);
+					var v_ = context.Operators.Interval(t_, u_, (bool?)true, (bool?)true);
 					var w_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
 					var x_ = context.Operators.OverlapsAfter(v_, w_, "day");
 					var y_ = FHIRHelpers_4_3_000.ToConcept((Event as AllergyIntolerance)?.ClinicalStatus);

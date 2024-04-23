@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -35,9 +36,9 @@ public class HIVRetentionFHIR_0_1_000
     internal Lazy<CqlCode[]> __CPT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period;
     internal Lazy<bool?> __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period;
@@ -76,9 +77,9 @@ public class HIVRetentionFHIR_0_1_000
         __CPT = new Lazy<CqlCode[]>(this.CPT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period = new Lazy<bool?>(this.Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period_Value);
         __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period = new Lazy<bool?>(this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Value);
@@ -220,7 +221,7 @@ public class HIVRetentionFHIR_0_1_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("HIVRetentionFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -242,7 +243,7 @@ public class HIVRetentionFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -250,10 +251,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		List<Extension> a_()
 		{
@@ -287,7 +288,7 @@ public class HIVRetentionFHIR_0_1_000
 		{
 			d_,
 		};
-		Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension E)
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension E)
 		{
 			bool? n_(Extension @this)
 			{
@@ -340,7 +341,7 @@ public class HIVRetentionFHIR_0_1_000
 				@this?.Value;
 			var af_ = context.Operators.SelectOrNull<Extension, object>(ad_, ae_);
 			var ag_ = context.Operators.SingleOrNull<object>(af_);
-			var ah_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			var ah_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
 				codes = ab_,
 				display = (ag_ as string),
@@ -348,17 +349,17 @@ public class HIVRetentionFHIR_0_1_000
 
 			return ah_;
 		};
-		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.SelectOrNull<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		var h_ = context.Operators.SingleOrNull<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		List<Extension> a_()
 		{
@@ -392,7 +393,7 @@ public class HIVRetentionFHIR_0_1_000
 		{
 			d_,
 		};
-		Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension R)
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension R)
 		{
 			bool? n_(Extension @this)
 			{
@@ -446,7 +447,7 @@ public class HIVRetentionFHIR_0_1_000
 				@this?.Value;
 			var ad_ = context.Operators.SelectOrNull<Extension, object>(ab_, ac_);
 			var ae_ = context.Operators.SingleOrNull<object>(ad_);
-			var af_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			var af_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
 				codes = z_,
 				display = (ae_ as string),
@@ -454,14 +455,14 @@ public class HIVRetentionFHIR_0_1_000
 
 			return af_;
 		};
-		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.SelectOrNull<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		var h_ = context.Operators.SingleOrNull<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -546,7 +547,7 @@ public class HIVRetentionFHIR_0_1_000
 			var am_ = context.Operators.Start(aj_);
 			var an_ = context.Operators.Quantity((decimal?)240m, "days");
 			var ao_ = context.Operators.Add(am_, an_);
-			var ap_ = context.Operators.Interval(ak_, ao_, true, true);
+			var ap_ = context.Operators.Interval(ak_, ao_, (bool?)true, (bool?)true);
 			var aq_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 			var ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, aq_, "day");
 
@@ -647,7 +648,7 @@ public class HIVRetentionFHIR_0_1_000
 						var ba_ = QICoreCommon_2_0_000.prevalenceInterval(HIVDiagnosis);
 						var bb_ = context.Operators.Start(ba_);
 						var bd_ = context.Operators.Start(ba_);
-						var be_ = context.Operators.Interval(bb_, bd_, true, true);
+						var be_ = context.Operators.Interval(bb_, bd_, (bool?)true, (bool?)true);
 
 						return be_;
 					};

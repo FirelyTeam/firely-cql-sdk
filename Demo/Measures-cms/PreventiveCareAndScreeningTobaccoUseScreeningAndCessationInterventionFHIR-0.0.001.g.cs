@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -67,9 +68,9 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
     internal Lazy<bool?> __Numerator_2;
     internal Lazy<bool?> __Numerator_3;
     internal Lazy<bool?> __Denominator_Exclusion;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -133,9 +134,9 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
         __Numerator_2 = new Lazy<bool?>(this.Numerator_2_Value);
         __Numerator_3 = new Lazy<bool?>(this.Numerator_3_Value);
         __Denominator_Exclusion = new Lazy<bool?>(this.Denominator_Exclusion_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -412,7 +413,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR-0.0.001", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -804,7 +805,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var n_ = context.Operators.Quantity((decimal?)6m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
-			var r_ = context.Operators.Interval(o_, q_, true, true);
+			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
 			var s_ = FHIRHelpers_4_3_000.ToValue(TobaccoCessationCounseling?.Performed);
 			var t_ = QICoreCommon_2_0_000.toInterval(s_);
 			var u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, t_, "day");
@@ -824,7 +825,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var z_ = context.Operators.Quantity((decimal?)6m, "months");
 			var aa_ = context.Operators.Subtract(y_, z_);
 			var ac_ = context.Operators.End(x_);
-			var ad_ = context.Operators.Interval(aa_, ac_, true, true);
+			var ad_ = context.Operators.Interval(aa_, ac_, (bool?)true, (bool?)true);
 			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(w_, ad_, "day");
 
 			return ae_;
@@ -854,7 +855,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var l_ = context.Operators.Quantity((decimal?)6m, "months");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, true, true);
+			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, "day");
 
 			return q_;
@@ -883,7 +884,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var l_ = context.Operators.Quantity((decimal?)6m, "months");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, true, true);
+			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, "day");
 
 			return q_;
@@ -950,7 +951,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	public bool? Denominator_Exclusion() => 
 		__Denominator_Exclusion.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -958,10 +959,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -969,10 +970,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -980,7 +981,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -469,7 +470,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	{
 		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -545,7 +546,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			var n_ = context.Operators.Quantity((decimal?)1m, "hour");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
-			var r_ = context.Operators.Interval(o_, q_, true, true);
+			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
 			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
@@ -592,7 +593,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					var i_ = context.Operators.Start(h_);
 					var j_ = FHIRHelpers_4_0_001.ToInterval(TheEncounter?.Period);
 					var k_ = context.Operators.End(j_);
-					var l_ = context.Operators.Interval(i_, k_, true, true);
+					var l_ = context.Operators.Interval(i_, k_, (bool?)true, (bool?)true);
 
 					return l_;
 				};
@@ -715,7 +716,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					var bu_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var bv_ = context.Operators.Subtract(bt_, bu_);
 					var bx_ = context.Operators.Start(bs_);
-					var by_ = context.Operators.Interval(bv_, bx_, true, true);
+					var by_ = context.Operators.Interval(bv_, bx_, (bool?)true, (bool?)true);
 					var bz_ = context.Operators.ElementInInterval<CqlDateTime>(br_, by_, null);
 					var cb_ = context.Operators.Start(bs_);
 					var cc_ = context.Operators.Not((bool?)(cb_ is null));
@@ -749,7 +750,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					var ck_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var cl_ = context.Operators.Subtract(cj_, ck_);
 					var cn_ = context.Operators.Start(ci_);
-					var co_ = context.Operators.Interval(cl_, cn_, true, true);
+					var co_ = context.Operators.Interval(cl_, cn_, (bool?)true, (bool?)true);
 					var cp_ = context.Operators.ElementInInterval<CqlDateTime>(ch_, co_, null);
 					var cr_ = context.Operators.Start(ci_);
 					var cs_ = context.Operators.Not((bool?)(cr_ is null));
@@ -770,7 +771,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
-				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), true, true);
+				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), (bool?)true, (bool?)true);
 				var bc_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, bb_, null);
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
@@ -782,7 +783,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					var da_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var db_ = context.Operators.Subtract(cz_, da_);
 					var dd_ = context.Operators.Start(cy_);
-					var de_ = context.Operators.Interval(db_, dd_, true, true);
+					var de_ = context.Operators.Interval(db_, dd_, (bool?)true, (bool?)true);
 					var df_ = context.Operators.ElementInInterval<CqlDateTime>(cx_, de_, null);
 					var dh_ = context.Operators.Start(cy_);
 					var di_ = context.Operators.Not((bool?)(dh_ is null));
@@ -831,7 +832,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var ds_ = context.Operators.Quantity((decimal?)1m, "hour");
 				var dt_ = context.Operators.Subtract(dr_, ds_);
 				var dv_ = context.Operators.Start(dq_);
-				var dw_ = context.Operators.Interval(dt_, dv_, true, true);
+				var dw_ = context.Operators.Interval(dt_, dv_, (bool?)true, (bool?)true);
 				var dx_ = context.Operators.ElementInInterval<CqlDateTime>(dp_, dw_, null);
 				var dz_ = context.Operators.Start(dq_);
 				var ea_ = context.Operators.Not((bool?)(dz_ is null));
@@ -854,7 +855,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			var w_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 			var x_ = context.Operators.Start(w_);
 			var z_ = context.Operators.End(w_);
-			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
+			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, (bool?)true, (bool?)true);
 
 			return aa_;
 		};
@@ -872,7 +873,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			if (choice is FhirDateTime)
 			{
 				var b_ = FHIRHelpers_4_0_001.ToDateTime((choice as FhirDateTime));
-				var d_ = context.Operators.Interval(b_, b_, true, true);
+				var d_ = context.Operators.Interval(b_, b_, (bool?)true, (bool?)true);
 
 				return d_;
 			}
@@ -885,7 +886,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			else if (choice is Instant)
 			{
 				var f_ = FHIRHelpers_4_0_001.ToDateTime((choice as Instant));
-				var h_ = context.Operators.Interval(f_, f_, true, true);
+				var h_ = context.Operators.Interval(f_, f_, (bool?)true, (bool?)true);
 
 				return h_;
 			}
@@ -899,27 +900,27 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var p_ = context.Operators.Add(n_, k_);
 				var q_ = context.Operators.Quantity((decimal?)1m, "year");
 				var r_ = context.Operators.Add(p_, q_);
-				var s_ = context.Operators.Interval(l_, r_, true, false);
+				var s_ = context.Operators.Interval(l_, r_, (bool?)true, (bool?)false);
 				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
 				var v_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var x_ = context.Operators.Add(v_, k_);
 				var z_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var ab_ = context.Operators.Add(z_, k_);
 				var ad_ = context.Operators.Add(ab_, q_);
-				var ae_ = context.Operators.Interval(x_, ad_, true, false);
+				var ae_ = context.Operators.Interval(x_, ad_, (bool?)true, (bool?)false);
 				var af_ = context.Operators.ConvertDateToDateTime(ae_?.high);
 				var ah_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var aj_ = context.Operators.Add(ah_, k_);
 				var al_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var an_ = context.Operators.Add(al_, k_);
 				var ap_ = context.Operators.Add(an_, q_);
-				var aq_ = context.Operators.Interval(aj_, ap_, true, false);
+				var aq_ = context.Operators.Interval(aj_, ap_, (bool?)true, (bool?)false);
 				var as_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var au_ = context.Operators.Add(as_, k_);
 				var aw_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var ay_ = context.Operators.Add(aw_, k_);
 				var ba_ = context.Operators.Add(ay_, q_);
-				var bb_ = context.Operators.Interval(au_, ba_, true, false);
+				var bb_ = context.Operators.Interval(au_, ba_, (bool?)true, (bool?)false);
 				var bc_ = context.Operators.Interval(t_, af_, aq_?.lowClosed, bb_?.highClosed);
 
 				return bc_;
@@ -935,27 +936,27 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var bk_ = context.Operators.Add(bi_, bj_);
 				var bl_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bm_ = context.Operators.Add(bk_, bl_);
-				var bn_ = context.Operators.Interval(bg_, bm_, true, false);
+				var bn_ = context.Operators.Interval(bg_, bm_, (bool?)true, (bool?)false);
 				var bo_ = context.Operators.ConvertDateToDateTime(bn_?.low);
 				var bq_ = FHIRHelpers_4_0_001.ToDate(bd_?.BirthDateElement);
 				var bs_ = context.Operators.Add(bq_, bf_);
 				var bu_ = FHIRHelpers_4_0_001.ToDate(bd_?.BirthDateElement);
 				var bw_ = context.Operators.Add(bu_, bj_);
 				var by_ = context.Operators.Add(bw_, bl_);
-				var bz_ = context.Operators.Interval(bs_, by_, true, false);
+				var bz_ = context.Operators.Interval(bs_, by_, (bool?)true, (bool?)false);
 				var ca_ = context.Operators.ConvertDateToDateTime(bz_?.high);
 				var cc_ = FHIRHelpers_4_0_001.ToDate(bd_?.BirthDateElement);
 				var ce_ = context.Operators.Add(cc_, bf_);
 				var cg_ = FHIRHelpers_4_0_001.ToDate(bd_?.BirthDateElement);
 				var ci_ = context.Operators.Add(cg_, bj_);
 				var ck_ = context.Operators.Add(ci_, bl_);
-				var cl_ = context.Operators.Interval(ce_, ck_, true, false);
+				var cl_ = context.Operators.Interval(ce_, ck_, (bool?)true, (bool?)false);
 				var cn_ = FHIRHelpers_4_0_001.ToDate(bd_?.BirthDateElement);
 				var cp_ = context.Operators.Add(cn_, bf_);
 				var cr_ = FHIRHelpers_4_0_001.ToDate(bd_?.BirthDateElement);
 				var ct_ = context.Operators.Add(cr_, bj_);
 				var cv_ = context.Operators.Add(ct_, bl_);
-				var cw_ = context.Operators.Interval(cp_, cv_, true, false);
+				var cw_ = context.Operators.Interval(cp_, cv_, (bool?)true, (bool?)false);
 				var cx_ = context.Operators.Interval(bo_, ca_, cl_?.lowClosed, cw_?.highClosed);
 
 				return cx_;
@@ -993,7 +994,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			if (condition?.Abatement is FhirDateTime)
 			{
 				var b_ = FHIRHelpers_4_0_001.ToDateTime((condition?.Abatement as FhirDateTime));
-				var d_ = context.Operators.Interval(b_, b_, true, true);
+				var d_ = context.Operators.Interval(b_, b_, (bool?)true, (bool?)true);
 
 				return d_;
 			}
@@ -1020,27 +1021,27 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var o_ = context.Operators.Add(m_, j_);
 				var p_ = context.Operators.Quantity((decimal?)1m, "year");
 				var q_ = context.Operators.Add(o_, p_);
-				var r_ = context.Operators.Interval(k_, q_, true, false);
+				var r_ = context.Operators.Interval(k_, q_, (bool?)true, (bool?)false);
 				var s_ = context.Operators.ConvertDateToDateTime(r_?.low);
 				var u_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
 				var w_ = context.Operators.Add(u_, j_);
 				var y_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
 				var aa_ = context.Operators.Add(y_, j_);
 				var ac_ = context.Operators.Add(aa_, p_);
-				var ad_ = context.Operators.Interval(w_, ac_, true, false);
+				var ad_ = context.Operators.Interval(w_, ac_, (bool?)true, (bool?)false);
 				var ae_ = context.Operators.ConvertDateToDateTime(ad_?.high);
 				var ag_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
 				var ai_ = context.Operators.Add(ag_, j_);
 				var ak_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
 				var am_ = context.Operators.Add(ak_, j_);
 				var ao_ = context.Operators.Add(am_, p_);
-				var ap_ = context.Operators.Interval(ai_, ao_, true, false);
+				var ap_ = context.Operators.Interval(ai_, ao_, (bool?)true, (bool?)false);
 				var ar_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
 				var at_ = context.Operators.Add(ar_, j_);
 				var av_ = FHIRHelpers_4_0_001.ToDate(h_?.BirthDateElement);
 				var ax_ = context.Operators.Add(av_, j_);
 				var az_ = context.Operators.Add(ax_, p_);
-				var ba_ = context.Operators.Interval(at_, az_, true, false);
+				var ba_ = context.Operators.Interval(at_, az_, (bool?)true, (bool?)false);
 				var bb_ = context.Operators.Interval(s_, ae_, ap_?.lowClosed, ba_?.highClosed);
 
 				return bb_;
@@ -1056,27 +1057,27 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var bj_ = context.Operators.Add(bh_, bi_);
 				var bk_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bl_ = context.Operators.Add(bj_, bk_);
-				var bm_ = context.Operators.Interval(bf_, bl_, true, false);
+				var bm_ = context.Operators.Interval(bf_, bl_, (bool?)true, (bool?)false);
 				var bn_ = context.Operators.ConvertDateToDateTime(bm_?.low);
 				var bp_ = FHIRHelpers_4_0_001.ToDate(bc_?.BirthDateElement);
 				var br_ = context.Operators.Add(bp_, be_);
 				var bt_ = FHIRHelpers_4_0_001.ToDate(bc_?.BirthDateElement);
 				var bv_ = context.Operators.Add(bt_, bi_);
 				var bx_ = context.Operators.Add(bv_, bk_);
-				var by_ = context.Operators.Interval(br_, bx_, true, false);
+				var by_ = context.Operators.Interval(br_, bx_, (bool?)true, (bool?)false);
 				var bz_ = context.Operators.ConvertDateToDateTime(by_?.high);
 				var cb_ = FHIRHelpers_4_0_001.ToDate(bc_?.BirthDateElement);
 				var cd_ = context.Operators.Add(cb_, be_);
 				var cf_ = FHIRHelpers_4_0_001.ToDate(bc_?.BirthDateElement);
 				var ch_ = context.Operators.Add(cf_, bi_);
 				var cj_ = context.Operators.Add(ch_, bk_);
-				var ck_ = context.Operators.Interval(cd_, cj_, true, false);
+				var ck_ = context.Operators.Interval(cd_, cj_, (bool?)true, (bool?)false);
 				var cm_ = FHIRHelpers_4_0_001.ToDate(bc_?.BirthDateElement);
 				var co_ = context.Operators.Add(cm_, be_);
 				var cq_ = FHIRHelpers_4_0_001.ToDate(bc_?.BirthDateElement);
 				var cs_ = context.Operators.Add(cq_, bi_);
 				var cu_ = context.Operators.Add(cs_, bk_);
-				var cv_ = context.Operators.Interval(co_, cu_, true, false);
+				var cv_ = context.Operators.Interval(co_, cu_, (bool?)true, (bool?)false);
 				var cw_ = context.Operators.Interval(bn_, bz_, ck_?.lowClosed, cv_?.highClosed);
 
 				return cw_;
@@ -1086,7 +1087,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var cx_ = this.Normalize_Interval(condition?.Onset);
 				var cy_ = context.Operators.End(cx_);
 				var cz_ = FHIRHelpers_4_0_001.ToDateTime(condition?.RecordedDateElement);
-				var da_ = context.Operators.Interval(cy_, cz_, true, false);
+				var da_ = context.Operators.Interval(cy_, cz_, (bool?)true, (bool?)false);
 
 				return da_;
 			}
@@ -1129,7 +1130,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var r_ = context.Operators.Start(q_);
 				var s_ = this.Normalize_Abatement(condition);
 				var t_ = context.Operators.End(s_);
-				var u_ = context.Operators.Interval(r_, t_, true, true);
+				var u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
 
 				return u_;
 			}
@@ -1139,7 +1140,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var w_ = context.Operators.Start(v_);
 				var x_ = this.Normalize_Abatement(condition);
 				var y_ = context.Operators.End(x_);
-				var z_ = context.Operators.Interval(w_, y_, true, false);
+				var z_ = context.Operators.Interval(w_, y_, (bool?)true, (bool?)false);
 
 				return z_;
 			};

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -37,9 +38,9 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
     internal Lazy<IEnumerable<Encounter>> __Denominator_2;
     internal Lazy<IEnumerable<Encounter>> __Numerator_1;
     internal Lazy<IEnumerable<Encounter>> __Numerator_2;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -71,9 +72,9 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
         __Denominator_2 = new Lazy<IEnumerable<Encounter>>(this.Denominator_2_Value);
         __Numerator_1 = new Lazy<IEnumerable<Encounter>>(this.Numerator_1_Value);
         __Numerator_2 = new Lazy<IEnumerable<Encounter>>(this.Numerator_2_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -151,7 +152,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("OncologyPainIntensityQuantifiedFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -185,7 +186,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			var h_ = context.Operators.Quantity((decimal?)31m, "days");
 			var i_ = context.Operators.Subtract(g_, h_);
 			var k_ = context.Operators.End(f_);
-			var l_ = context.Operators.Interval(i_, k_, true, true);
+			var l_ = context.Operators.Interval(i_, k_, (bool?)true, (bool?)true);
 			var m_ = FHIRHelpers_4_3_000.ToValue(ChemoAdministration?.Performed);
 			var n_ = QICoreCommon_2_0_000.toInterval(m_);
 			var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
@@ -210,9 +211,9 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 		var f_ = this.Cancer();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
 		var h_ = context.Operators.CrossJoin<Encounter, Procedure, Procedure, Condition>(c_, d_, d_, g_);
-		Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT i_(ValueTuple<Encounter,Procedure,Procedure,Condition> _valueTuple)
+		Tuple_HEhDGGHAahjZgibAaAMLGaSGT i_(ValueTuple<Encounter,Procedure,Procedure,Condition> _valueTuple)
 		{
-			var o_ = new Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT
+			var o_ = new Tuple_HEhDGGHAahjZgibAaAMLGaSGT
 			{
 				FaceToFaceOrTelehealthEncounter = _valueTuple.Item1,
 				ChemoBeforeEncounter = _valueTuple.Item2,
@@ -222,8 +223,8 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 			return o_;
 		};
-		var j_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Procedure,Procedure,Condition>, Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(h_, i_);
-		bool? k_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt)
+		var j_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Procedure,Procedure,Condition>, Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(h_, i_);
+		bool? k_(Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt)
 		{
 			var p_ = QICoreCommon_2_0_000.isActive(tuple_hehdgghaahjzgibaaamlgasgt.Cancer);
 			var q_ = QICoreCommon_2_0_000.prevalenceInterval(tuple_hehdgghaahjzgibaaamlgasgt.Cancer);
@@ -237,7 +238,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			var z_ = context.Operators.Quantity((decimal?)30m, "days");
 			var aa_ = context.Operators.Subtract(y_, z_);
 			var ac_ = context.Operators.End(r_);
-			var ad_ = context.Operators.Interval(aa_, ac_, true, true);
+			var ad_ = context.Operators.Interval(aa_, ac_, (bool?)true, (bool?)true);
 			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(w_, ad_, "day");
 			var ag_ = context.Operators.End(r_);
 			var ah_ = context.Operators.Not((bool?)(ag_ is null));
@@ -249,7 +250,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			var ao_ = context.Operators.End(r_);
 			var aq_ = context.Operators.End(r_);
 			var as_ = context.Operators.Add(aq_, z_);
-			var at_ = context.Operators.Interval(ao_, as_, true, true);
+			var at_ = context.Operators.Interval(ao_, as_, (bool?)true, (bool?)true);
 			var au_ = context.Operators.ElementInInterval<CqlDateTime>(am_, at_, "day");
 			var aw_ = context.Operators.End(r_);
 			var ax_ = context.Operators.Not((bool?)(aw_ is null));
@@ -266,10 +267,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 			return bk_;
 		};
-		var l_ = context.Operators.WhereOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(j_, k_);
-		Encounter m_(Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt) => 
+		var l_ = context.Operators.WhereOrNull<Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(j_, k_);
+		Encounter m_(Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt) => 
 			tuple_hehdgghaahjzgibaaamlgasgt.FaceToFaceOrTelehealthEncounter;
-		var n_ = context.Operators.SelectOrNull<Tuples.Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Encounter>(l_, m_);
+		var n_ = context.Operators.SelectOrNull<Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Encounter>(l_, m_);
 
 		return n_;
 	}
@@ -441,7 +442,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 						var af_ = context.Operators.Quantity((decimal?)6m, "days");
 						var ag_ = context.Operators.Subtract(ae_, af_);
 						var ai_ = context.Operators.Start(ad_);
-						var aj_ = context.Operators.Interval(ag_, ai_, true, true);
+						var aj_ = context.Operators.Interval(ag_, ai_, (bool?)true, (bool?)true);
 						var ak_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, aj_, "day");
 						var am_ = context.Operators.Start(ad_);
 						var an_ = context.Operators.Not((bool?)(am_ is null));
@@ -484,7 +485,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	public IEnumerable<Encounter> Numerator_2() => 
 		__Numerator_2.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -492,10 +493,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -503,10 +504,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -514,7 +515,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

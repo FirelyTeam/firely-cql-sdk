@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -77,9 +78,9 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
     internal Lazy<IEnumerable<Encounter>> __PCI_within_90_Minutes_of_Arrival;
     internal Lazy<IEnumerable<Encounter>> __ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -150,9 +151,9 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
         __PCI_within_90_Minutes_of_Arrival = new Lazy<IEnumerable<Encounter>>(this.PCI_within_90_Minutes_of_Arrival_Value);
         __ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival = new Lazy<IEnumerable<Encounter>>(this.ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -476,7 +477,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	{
 		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("AppropriateTreatmentforSTEMIFHIR-1.0.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -826,7 +827,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var x_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var y_ = context.Operators.Subtract(w_, x_);
 				var aa_ = context.Operators.Start(r_);
-				var ab_ = context.Operators.Interval(y_, aa_, true, false);
+				var ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)false);
 				var ac_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ab_, null);
 				var ae_ = context.Operators.Start(r_);
 				var af_ = context.Operators.Not((bool?)(ae_ is null));
@@ -868,7 +869,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var o_ = context.Operators.Quantity((decimal?)21m, "days");
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
-				var s_ = context.Operators.Interval(p_, r_, true, false);
+				var s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)false);
 				var t_ = context.Operators.ElementInInterval<CqlDateTime>(l_, s_, null);
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
@@ -918,7 +919,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var w_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(p_);
-				var aa_ = context.Operators.Interval(x_, z_, true, false);
+				var aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)false);
 				var ab_ = context.Operators.ElementInInterval<CqlDateTime>(t_, aa_, null);
 				var ad_ = context.Operators.Start(p_);
 				var ae_ = context.Operators.Not((bool?)(ad_ is null));
@@ -971,7 +972,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var w_ = context.Operators.Quantity((decimal?)90m, "days");
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(u_);
-				var aa_ = context.Operators.Interval(x_, z_, true, true);
+				var aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)true);
 				var ab_ = context.Operators.ElementInInterval<CqlDateTime>(t_, aa_, null);
 
 				return ab_;
@@ -1009,7 +1010,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var o_ = context.Operators.Quantity((decimal?)90m, "days");
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
-				var s_ = context.Operators.Interval(p_, r_, true, false);
+				var s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)false);
 				var t_ = context.Operators.ElementInInterval<CqlDateTime>(l_, s_, null);
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
@@ -1131,7 +1132,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var r_ = this.currentemergencyDepartmentArrivalTime(EDwithSTEMI);
 				var t_ = context.Operators.Quantity((decimal?)30m, "minutes");
 				var u_ = context.Operators.Add(r_, t_);
-				var v_ = context.Operators.Interval(r_, u_, false, true);
+				var v_ = context.Operators.Interval(r_, u_, (bool?)false, (bool?)true);
 				var w_ = context.Operators.ElementInInterval<CqlDateTime>(q_, v_, null);
 				var y_ = context.Operators.Not((bool?)(r_ is null));
 				var z_ = context.Operators.And(w_, y_);
@@ -1170,7 +1171,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var m_ = this.currentemergencyDepartmentArrivalTime(EDwithSTEMI);
 				var o_ = context.Operators.Quantity((decimal?)90m, "minutes");
 				var p_ = context.Operators.Add(m_, o_);
-				var q_ = context.Operators.Interval(m_, p_, false, true);
+				var q_ = context.Operators.Interval(m_, p_, (bool?)false, (bool?)true);
 				var r_ = context.Operators.ElementInInterval<CqlDateTime>(l_, q_, null);
 				var t_ = context.Operators.Not((bool?)(m_ is null));
 				var u_ = context.Operators.And(r_, t_);
@@ -1207,7 +1208,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var i_ = context.Operators.Start(d_);
 			var j_ = context.Operators.Quantity((decimal?)45m, "minutes");
 			var k_ = context.Operators.Add(i_, j_);
-			var l_ = context.Operators.Interval(g_, k_, false, true);
+			var l_ = context.Operators.Interval(g_, k_, (bool?)false, (bool?)true);
 			var m_ = context.Operators.ElementInInterval<CqlDateTime>(e_, l_, null);
 			var o_ = context.Operators.Start(d_);
 			var p_ = context.Operators.Not((bool?)(o_ is null));
@@ -1243,7 +1244,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	public IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1251,10 +1252,10 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1262,10 +1263,10 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1273,7 +1274,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
