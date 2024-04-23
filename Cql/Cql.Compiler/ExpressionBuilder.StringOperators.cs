@@ -45,39 +45,14 @@ namespace Hl7.Cql.Compiler
             var operand = Translate(len.operand!);
             if (_typeResolver.IsListType(operand.Type))
             {
-                return BindCqlOperator(CqlOperator.ListLength, null, operand);
+                return BindCqlOperator(CqlOperator.Length, null, operand);
             }
 
             if (operand.Type == typeof(string))
             {
-                return BindCqlOperator(CqlOperator.StringLength, null, operand);
+                return BindCqlOperator(CqlOperator.Length, null, operand);
             }
             throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression? ReplaceMatches(Elm.ReplaceMatches e)
-        {
-            var source = Translate(e.operand![0]!);
-            var pattern = Translate(e.operand![1]!);
-            var substitution = Translate(e.operand![2]!);
-            return BindCqlOperator(CqlOperator.ReplaceMatches, null, source, pattern, substitution);
-        }
-
-        protected Expression Split(Elm.Split e)
-        {
-            var stringToSplit = Translate(e.stringToSplit!);
-            var separator = Translate(e.separator!);
-            return BindCqlOperator(CqlOperator.Split, null, stringToSplit, separator);
-        }
-
-        protected Expression? Substring(Elm.Substring e)
-        {
-            var stringToSub = Translate(e!.stringToSub!);
-            var startIndex = Translate(e!.startIndex!);
-            var length = e.length == null
-                             ? NullExpression.Int32
-                             : Translate(e.length);
-            return BindCqlOperator(CqlOperator.Substring, null, stringToSub, startIndex, length);
         }
     }
 }

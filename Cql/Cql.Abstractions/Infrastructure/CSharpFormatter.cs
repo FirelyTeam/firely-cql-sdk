@@ -69,7 +69,7 @@ internal static class CSharpFormatter
         return methodOptions.Write(
             textWriter,
             methodInfo.Name,
-            () => string.Join(methodOptions.ParameterDelimiter, methodInfo.GetParameters().Select(p => p.WriteCSharp(methodOptions.CSharpWriteParameterOptions))),
+            () => methodInfo.GetParameters().SelectToArray(p => p.WriteCSharp(methodOptions.CSharpWriteParameterOptions).ToString()!),
             () => methodInfo.ReturnType.WriteCSharp(methodOptions.CSharpWriteParameterOptions.CSharpWriteTypeOptions).ToString()!);
     }
 
@@ -202,14 +202,17 @@ internal record CSharpWriteMethodOptions
     public CSharpWriteMethodOptions(
         string parameterDelimiter = ", ",
         CSharpWriteParameterOptions? parameterOptions = null,
-        Func<(string name, Func<string> parameters, Func<string> returnType), TextWriterFormatString>? methodFormat = null)
+        Func<(
+            string name,
+            Func<string[]> parameters,
+            Func<string> returnType), TextWriterFormatString>? methodFormat = null)
     {
         ParameterDelimiter = parameterDelimiter;
         _format = methodFormat ?? (t => $"{t.returnType} {t.name}({t.parameters})");
         CSharpWriteParameterOptions = parameterOptions ?? CSharpWriteParameterOptions.Default;
     }
 
-    private readonly Func<(string name, Func<string> parameters, Func<string> returnType), TextWriterFormatString> _format;
+    private readonly Func<(string name, Func<string[]> parameters, Func<string> returnType), TextWriterFormatString> _format;
 
     public string ParameterDelimiter { get; init; }
 
@@ -218,27 +221,28 @@ internal record CSharpWriteMethodOptions
     protected internal virtual TextWriter Write(
         TextWriter? writer,
         string name,
-        Func<string> parameters,
+        Func<string[]> parameters,
         Func<string> returnType) =>
-        _format((name, parameters, returnType)).Write(writer);
+        _format((name, parameters, returnType)).Write(writer, ParameterDelimiter);
 }
 
 [InterpolatedStringHandler]
 internal struct TextWriterFormatString
 {
-    private Action<TextWriter> _appender = null!;
+    private Action<(TextWriter writer, string delimiter)> _appender = null!;
 
     public TextWriterFormatString(int literalLength, int formattedCount)
     {
     }
 
-    public void AppendLiteral(string s) => _appender += w => w.Write(s);
-    public void AppendFormatted(string s) => _appender += w => w.Write(s);
-    public void AppendFormatted(Func<string> s) => AppendFormatted(s());
-    public TextWriter Write(TextWriter? writer)
+    public void AppendLiteral(string s) => _appender += t => t.writer.Write(s);
+    public void AppendFormatted(string s) => AppendLiteral(s);
+    public void AppendFormatted(Func<string> s) => AppendLiteral(s());
+    public void AppendFormatted(Func<string[]> s) => _appender += t => t.writer.Write(string.Join(t.delimiter, s()));
+    public TextWriter Write(TextWriter? writer, string delimiter = "")
     {
         writer ??= CSharpFormatter.NewInvariantCultureStringWriter();
-        _appender?.Invoke(writer);
+        _appender?.Invoke((writer, delimiter));
         return writer;
     }
 }

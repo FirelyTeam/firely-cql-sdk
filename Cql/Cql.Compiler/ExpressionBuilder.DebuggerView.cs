@@ -52,7 +52,7 @@ partial class ExpressionBuilderContext : IBuilderContext
             ? this with { ElementStackPosition = ElementStackPosition + 1 }
             : LibraryExpressionBuilder;
 
-        public BuilderContextDebuggerInfo? DebuggerInfo => ElementStackPosition >= 0
+        public BuilderContextDebuggerInfo? DebuggerInfo => ElementStackPosition >= 0 && ElementStackPosition < ElementStackList.Count
             ? BuilderContextDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
             : null!;
     }

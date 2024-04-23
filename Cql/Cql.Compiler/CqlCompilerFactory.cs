@@ -35,7 +35,11 @@ internal class CqlCompilerFactory :
 
 
     public virtual OperatorsBinder OperatorsBinder => Singleton(fn: NewOperatorsBinder);
-    protected virtual OperatorsBinder NewOperatorsBinder() => new CqlOperatorsBinder(TypeResolver, TypeConverter);
+    protected virtual OperatorsBinder NewOperatorsBinder() =>
+        new CqlOperatorsBinder(
+            Logger<CqlOperatorsBinder>(),
+            TypeResolver,
+            TypeConverter);
 
 
     public virtual ContextBinder ContextBinder => Singleton(fn: NewContextBinder);
@@ -55,26 +59,20 @@ internal class CqlCompilerFactory :
 
     protected virtual LibraryExpressionBuilder NewLibraryExpressionBuilder() =>
         new LibraryExpressionBuilder(
-            logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
+            Logger<LibraryExpressionBuilder>(),
             ExpressionBuilder);
 
     protected virtual ExpressionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         ExpressionBuilderSettings.Default;
 
-    protected virtual ILogger<LibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
-        LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
-
     public virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
 
     protected virtual ExpressionBuilder NewExpressionBuilder() =>
-        new(logger: Singleton(fn: NewExpressionBuilderLogger),
+        new(Logger<ExpressionBuilder>(),
             operatorsBinder: OperatorsBinder,
             typeManager: TypeManager,
             typeConverter: TypeConverter,
             typeResolver: TypeResolver,
             contextBinder: ContextBinder,
             expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings));
-
-    protected virtual ILogger<ExpressionBuilder> NewExpressionBuilderLogger() =>
-        LoggerFactory.CreateLogger<ExpressionBuilder>();
 }

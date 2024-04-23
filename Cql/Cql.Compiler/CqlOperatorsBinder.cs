@@ -14,6 +14,7 @@ using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler
 {
@@ -22,14 +23,17 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal partial class CqlOperatorsBinder : OperatorsBinder
     {
+        private readonly ILogger<CqlOperatorsBinder> _logger;
         private readonly TypeConverter? _typeConverter;
-
         private readonly TypeResolver _typeResolver;
 
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
+        /// <param name="logger">
+        /// The logger used in this binding.
+        /// </param>
         /// <param name="typeResolver">
         /// The type resolver used in this binding.
         /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
@@ -41,11 +45,13 @@ namespace Hl7.Cql.Compiler
         /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
         /// </param>
         public CqlOperatorsBinder(
+            ILogger<CqlOperatorsBinder> logger,
             TypeResolver typeResolver,
             TypeConverter? typeConverter = null)
         {
             _typeConverter = typeConverter;
             _typeResolver = typeResolver;
+            _logger = logger;
         }
 
         /// <inheritdoc />
@@ -132,6 +138,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.IsTrue                           => BindToMethodConvertArgs(nameof(ICqlOperators.IsTrue), resultTypeHint, args),
                 CqlOperator.Last                             => BindToMethodConvertArgs(nameof(ICqlOperators.LastOfList), resultTypeHint, args),
                 CqlOperator.LastPositionOf                   => BindToMethodConvertArgs(nameof(ICqlOperators.LastPositionOf), resultTypeHint, args),
+                CqlOperator.Length                           => BindToMethodConvertArgs(nameof(ICqlOperators.Length), resultTypeHint, args),
                 CqlOperator.Less                             => BindToMethodConvertArgs(nameof(ICqlOperators.Less), resultTypeHint, args),
                 CqlOperator.LessOrEqual                      => BindToMethodConvertArgs(nameof(ICqlOperators.LessOrEqual), resultTypeHint, args),
                 CqlOperator.ListContains                     => BindToMethodConvertArgs(nameof(ICqlOperators.ListContains), resultTypeHint, args),
@@ -144,7 +151,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.ListIncludesList                 => BindToMethodConvertArgs(nameof(ICqlOperators.ListIncludesList), resultTypeHint, args),
                 CqlOperator.ListIndexOf                      => BindToMethodConvertArgs(nameof(ICqlOperators.ListIndexOf), resultTypeHint, args),
                 CqlOperator.ListIntersect                    => BindToMethodConvertArgs(nameof(ICqlOperators.ListIntersect), resultTypeHint, args),
-                CqlOperator.ListLength                       => BindToMethodConvertArgs(nameof(ICqlOperators.ListLength), resultTypeHint, args),
+                //CqlOperator.ListLength                       => BindToMethodConvertArgs(nameof(ICqlOperators.ListLength), resultTypeHint, args),
                 CqlOperator.ListProperlyIncludesElement      => BindToMethodConvertArgs(nameof(ICqlOperators.ListProperlyIncludesElement), resultTypeHint, args),
                 CqlOperator.ListProperlyIncludesList         => BindToMethodConvertArgs(nameof(ICqlOperators.ListProperlyIncludesList), resultTypeHint, args),
                 CqlOperator.ListSort                         => BindToMethodConvertArgs(nameof(ICqlOperators.ListSort), resultTypeHint, args),
@@ -193,7 +200,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.StdDev                           => BindToMethodConvertArgs(nameof(ICqlOperators.StdDev), resultTypeHint, args),
                 CqlOperator.CharAt                           => BindToMethodConvertArgs(nameof(ICqlOperators.StringIndexer), resultTypeHint, args),
                 CqlOperator.StringInValueSet                 => BindToMethodConvertArgs(nameof(ICqlOperators.StringInValueSet), resultTypeHint, args),
-                CqlOperator.StringLength                     => BindToMethodConvertArgs(nameof(ICqlOperators.StringLength), resultTypeHint, args),
+                //CqlOperator.StringLength                     => BindToMethodConvertArgs(nameof(ICqlOperators.StringLength), resultTypeHint, args),
                 CqlOperator.StringsInValueSet                => BindToMethodConvertArgs(nameof(ICqlOperators.StringsInValueSet), resultTypeHint, args),
                 CqlOperator.Substring                        => BindToMethodConvertArgs(nameof(ICqlOperators.Substring), resultTypeHint, args),
                 CqlOperator.Subtract                         => BindToMethodConvertArgs(nameof(ICqlOperators.Subtract), resultTypeHint, args),

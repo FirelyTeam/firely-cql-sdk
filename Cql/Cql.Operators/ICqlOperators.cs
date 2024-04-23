@@ -70,12 +70,6 @@ namespace Hl7.Cql.Operators
         IEnumerable<object> Children(object o);
         T? Coalesce<T>(IEnumerable<T>? source) where T : class;
         T? CoalesceValueTypes<T>(IEnumerable<T?>? source) where T : struct;
-        bool? CodeInCodeSystem(CqlCode? code, CqlCodeSystem? codesystem);
-        bool? CodeInCodeSystem(CqlConcept? code, CqlCodeSystem? codesystem);
-        bool? CodeInCodeSystem(IEnumerable<CqlCode?>? code, CqlCodeSystem? codesystem);
-        bool? CodeInCodeSystem(IEnumerable<CqlConcept?>? code, CqlCodeSystem? codesystem);
-        bool? CodeInCodeSystem(IEnumerable<string?>? code, CqlCodeSystem? codesystem);
-        bool? CodeInCodeSystem(string? code, CqlCodeSystem? codesystem);
         bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument);
         bool? CodeInValueSet(CqlCode? code, CqlValueSet? valueSet);
         bool? CodesInValueSet(IEnumerable<CqlCode?>? codes, CqlValueSet? valueSet);
@@ -315,7 +309,6 @@ namespace Hl7.Cql.Operators
         bool? ListIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         int? ListIndexOf<T>(IEnumerable<T>? list, T element);
         IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right);
-        int? ListLength<T>(IEnumerable<T> list);
         bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListProperlyIncludedInList<T>(IEnumerable<T>? left, IEnumerable<T> right);
@@ -501,7 +494,7 @@ namespace Hl7.Cql.Operators
             IEnumerable<T7>? source7,
             IEnumerable<T8>? source8);
 
-        IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select);
+        IEnumerable<TR>? SelectOrNull<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select);
         T? SingleOrNull<T>(IEnumerable<T>? source);
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);
         IEnumerable<string>? Split(string stringToSplit, string separator);
@@ -519,7 +512,8 @@ namespace Hl7.Cql.Operators
         decimal? StdDev(IEnumerable<decimal?>? argument);
         string? StringIndexer(string? argument, int? index);
         bool? StringInValueSet(string? code, CqlValueSet? valueSet);
-        int? StringLength(string argument);
+        int? Length<T>(IEnumerable<T>? list);
+        int? Length(string argument);
         bool? StringsInValueSet(IEnumerable<string?>? strings, CqlValueSet? valueSet);
         string? Substring(string source, int? startIndex, int? length = null);
         CqlDate? Subtract(CqlDate? left, CqlQuantity? right);

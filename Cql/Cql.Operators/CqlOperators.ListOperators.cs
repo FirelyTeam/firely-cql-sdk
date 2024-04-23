@@ -1037,12 +1037,26 @@ namespace Hl7.Cql.Runtime
 
         #region Length
 
-        public int? ListLength<T>(IEnumerable<T> list)
+        public int? Length(string argument)
         {
-            if (list == null) return null;
-            if (list is IList<T> l)
-                return l.Count;
-            return list.Count();
+            var length = argument switch
+            {
+                null => 0,
+                _    => argument.Length
+            };
+            return length;
+        }
+
+        public int? Length<T>(IEnumerable<T>? list)
+        {
+            int? length = list switch
+            {
+                null                                                 => null,
+                string s                                             => Length(s),
+                { } l when l.TryGetNonEnumeratedCount(out var count) => count,
+                _                                                    => list.Count()
+            };
+            return length;
         }
 
         #endregion

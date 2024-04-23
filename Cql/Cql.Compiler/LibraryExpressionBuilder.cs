@@ -64,7 +64,7 @@ internal partial class LibraryExpressionBuilderContext
     }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
-        this.CatchRethrowExpressionBuildingException<LibraryExpressionBuilderContext, DefinitionDictionary<LambdaExpression>>(_ =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
             _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
 

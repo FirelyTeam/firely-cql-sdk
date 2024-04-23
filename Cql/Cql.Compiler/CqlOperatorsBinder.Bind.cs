@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -34,7 +33,7 @@ internal partial class CqlOperatorsBinder
     private static readonly CSharpWriteTypeOptions CSharpWriteTypeOptions = new(PreferKeywords:true, HideNamespaces:true);
 
     private static readonly CSharpWriteMethodOptions CSharpWriteMethodOptions = new (
-        methodFormat:t => $"\n- {t.name}({t.parameters})",
+        methodFormat:t => $"\n\t* {t.name}({t.parameters})",
         parameterOptions:new (
             parameterFormat:t => $"{t.type}",
             typeOptions: CSharpWriteTypeOptions));
@@ -74,16 +73,21 @@ internal partial class CqlOperatorsBinder
     {
         var candidates = ResolveMethodInfosWithPotentialArgumentConversions(methodName, arguments).ToArray();
 
-        return candidates switch
+        var candidate = candidates switch
         {
-            [] when throwError =>
-                throw new ArgumentException(
-                    NoCandidatesErrorMessage(),
-                    nameof(methodName)),
-            []       => (null, []),
-            [{ } only] => (only.method, only.arguments),
-            _ => PickCandidate(candidates)
+            []                 => (null, []),
+            [{ } only]         => (only.method, only.arguments),
+            _                  => PickCandidate(candidates)
         };
+
+        if (candidate.method is null && throwError)
+        {
+            throw new ArgumentException(
+                NoCandidatesErrorMessage(),
+                nameof(methodName));
+        }
+
+        return candidate;
 
         (MethodInfo? method, Expression[] arguments) PickCandidate(
             (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates)
@@ -115,16 +119,23 @@ internal partial class CqlOperatorsBinder
 
         string NoCandidatesErrorMessage()
         {
-            var parameters = string.Join(", ", arguments.Select(e => e.Type.WriteCSharp(CSharpWriteTypeOptions)));
-            var similar =
+            var input = CSharpWriteMethodOptions
+                             .Write(
+                                 writer: null,
+                                 name: methodName,
+                                 parameters: () => arguments.SelectToArray(e => e.Type.WriteCSharp(CSharpWriteTypeOptions).ToString()!),
+                                 returnType: null!)
+                             .ToString()!;
+
+            var overloads =
                 string.Concat(
                     ICqlOperatorsMethods
                         .GetMethodsByName(methodName)
                         .Select(t => t.method.WriteCSharp(CSharpWriteMethodOptions))
                 );
             return $$"""
-                     Mo suitable method found {{methodName}}({{parameters}}).
-                     Methods considered by the same name: {{similar}}
+                     Mo suitable method could be bound on:{{input}}
+                     from the following method overloads:{{overloads}}
                      """;
         }
     }
