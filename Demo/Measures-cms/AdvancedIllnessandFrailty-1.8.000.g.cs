@@ -277,7 +277,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return as_;
 		};
 		var h_ = context.Operators.WhereOrNull<DeviceRequest>(f_, g_);
-		var i_ = context.Operators.ExistsInList<DeviceRequest>(h_);
+		var i_ = context.Operators.Exists<DeviceRequest>(h_);
 		var j_ = this.Medical_equipment_used();
 		var k_ = context.Operators.ToList<CqlCode>(j_);
 		var l_ = context.Operators.RetrieveByCodes<Observation>(k_, null);
@@ -291,13 +291,13 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var ax_ = QICoreCommon_2_0_000.toInterval(aw_);
 			var ay_ = context.Operators.End(ax_);
 			var az_ = this.Measurement_Period();
-			var ba_ = context.Operators.ElementInInterval<CqlDateTime>(ay_, az_, "day");
+			var ba_ = context.Operators.InInterval<CqlDateTime>(ay_, az_, "day");
 			var bb_ = context.Operators.And(av_, ba_);
 
 			return bb_;
 		};
 		var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
-		var p_ = context.Operators.ExistsInList<Observation>(o_);
+		var p_ = context.Operators.Exists<Observation>(o_);
 		var q_ = context.Operators.Or(i_, p_);
 		var r_ = this.Frailty_Diagnosis();
 		var s_ = context.Operators.RetrieveByValueSet<Condition>(r_, null);
@@ -310,7 +310,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return be_;
 		};
 		var u_ = context.Operators.WhereOrNull<Condition>(s_, t_);
-		var v_ = context.Operators.ExistsInList<Condition>(u_);
+		var v_ = context.Operators.Exists<Condition>(u_);
 		var w_ = context.Operators.Or(q_, v_);
 		var x_ = this.Frailty_Encounter();
 		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
@@ -325,7 +325,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return bi_;
 		};
 		var ab_ = context.Operators.WhereOrNull<Encounter>(z_, aa_);
-		var ac_ = context.Operators.ExistsInList<Encounter>(ab_);
+		var ac_ = context.Operators.Exists<Encounter>(ab_);
 		var ad_ = context.Operators.Or(w_, ac_);
 		var ae_ = this.Frailty_Symptom();
 		var af_ = context.Operators.RetrieveByValueSet<Observation>(ae_, null);
@@ -340,7 +340,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return bm_;
 		};
 		var ai_ = context.Operators.WhereOrNull<Observation>(ag_, ah_);
-		var aj_ = context.Operators.ExistsInList<Observation>(ai_);
+		var aj_ = context.Operators.Exists<Observation>(ai_);
 		var ak_ = context.Operators.Or(ad_, aj_);
 
 		return ak_;
@@ -376,7 +376,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 				return ag_;
 			};
 			var q_ = context.Operators.WhereOrNull<Condition>(o_, p_);
-			var r_ = context.Operators.ExistsInList<Condition>(q_);
+			var r_ = context.Operators.Exists<Condition>(q_);
 			var s_ = FHIRHelpers_4_3_000.ToInterval(OutpatientEncounter?.Period);
 			var t_ = QICoreCommon_2_0_000.toInterval((s_ as object));
 			var u_ = context.Operators.Start(t_);
@@ -386,7 +386,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var y_ = context.Operators.Subtract(w_, x_);
 			var aa_ = context.Operators.End(v_);
 			var ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)true);
-			var ac_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ab_, "day");
+			var ac_ = context.Operators.InInterval<CqlDateTime>(u_, ab_, "day");
 			var ad_ = context.Operators.And(r_, ac_);
 
 			return ad_;
@@ -431,7 +431,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		Encounter h_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
 		var i_ = context.Operators.SelectOrNull<Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 
 		return j_;
 	}
@@ -457,7 +457,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 				return y_;
 			};
 			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
-			var j_ = context.Operators.ExistsInList<Condition>(i_);
+			var j_ = context.Operators.Exists<Condition>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounter?.Period);
 			var l_ = QICoreCommon_2_0_000.toInterval((k_ as object));
 			var m_ = context.Operators.Start(l_);
@@ -467,13 +467,13 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
 			var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
-			var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, "day");
+			var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, "day");
 			var v_ = context.Operators.And(j_, u_);
 
 			return v_;
 		};
 		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Encounter>(e_);
+		var f_ = context.Operators.Exists<Encounter>(e_);
 
 		return f_;
 	}
@@ -509,7 +509,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return aa_;
 		};
 		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
-		var i_ = context.Operators.ExistsInList<MedicationRequest>(h_);
+		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 
 		return i_;
 	}
@@ -552,7 +552,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)66, (int?)80, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var i_ = this.Has_Criteria_Indicating_Frailty();
 		var j_ = context.Operators.And(h_, i_);
 		var k_ = this.Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
@@ -610,7 +610,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return ae_;
 		};
 		var o_ = context.Operators.ListSortBy<Observation>(m_, n_, System.ComponentModel.ListSortDirection.Ascending);
-		var p_ = context.Operators.LastOfList<Observation>(o_);
+		var p_ = context.Operators.Last<Observation>(o_);
 		var q_ = new Observation[]
 		{
 			p_,

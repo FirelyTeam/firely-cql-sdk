@@ -146,7 +146,7 @@ namespace Hl7.Cql.Operators
         int? DurationBetween(CqlDateTime? low, CqlDateTime? high, string? precision);
         int? DurationBetween(CqlTime? low, CqlTime? high, string? precision);
         bool? ElementIncludedInList<T>(T left, IEnumerable<T> right);
-        bool? ElementInInterval<T>(T t, CqlInterval<T>? interval, string? precision);
+        bool? InInterval<T>(T t, CqlInterval<T>? interval, string? precision);
         bool? ElementProperlyIncludedInInterval(CqlDate left, CqlInterval<CqlDate>? right, string precision);
         bool? ElementProperlyIncludedInInterval(CqlDateTime left, CqlInterval<CqlDateTime>? right, string precision);
         bool? ElementProperlyIncludedInInterval(CqlTime left, CqlInterval<CqlTime>? right, string precision);
@@ -164,7 +164,7 @@ namespace Hl7.Cql.Operators
         bool? EnumEqualsString(object? @enum, string? value);
         bool? Equal(object? x, object? y);
         bool? Equivalent(object? x, object? y);
-        bool? ExistsInList<T>(IEnumerable<T> list);
+        bool? Exists<T>(IEnumerable<T> list);
         decimal? Exp(decimal? argument);
         IEnumerable<CqlInterval<CqlDate?>>? ExpandList(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per);
         IEnumerable<CqlInterval<CqlDateTime?>>? ExpandList(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per);
@@ -178,7 +178,7 @@ namespace Hl7.Cql.Operators
         IEnumerable<decimal?>? ExpandInterval(CqlInterval<decimal?>? argument, CqlQuantity? per);
         IEnumerable<int?>? ExpandInterval(CqlInterval<int?>? argument, CqlQuantity? per);
         IEnumerable<long?>? ExpandInterval(CqlInterval<long?>? argument, CqlQuantity? per);
-        T? FirstOfList<T>(IEnumerable<T> enumerable);
+        T? First<T>(IEnumerable<T> enumerable);
         IEnumerable<object>? FlattenLateBoundList(IEnumerable<object> argument);
         IEnumerable<T>? FlattenList<T>(IEnumerable<IEnumerable<T>> argument);
         int? Floor(decimal? argument);
@@ -293,13 +293,13 @@ namespace Hl7.Cql.Operators
         bool? IsNull<T>(T value) where T : class;
         bool? IsNullValue<T>(T? value) where T : struct;
         bool? IsTrue(bool? b);
-        T? LastOfList<T>(IEnumerable<T> enumerable);
+        T? Last<T>(IEnumerable<T> enumerable);
         int? LastPositionOf(string? argument, string? pattern);
         T LateBoundProperty<T>(object? source, string propertyName);
         bool? Less(object? left, object? right);
         bool? LessOrEqual(object? left, object? right);
         bool? ListContains<T>(IEnumerable<T> list, T item);
-        IEnumerable<T>? ListDistinct<T>(IEnumerable<T> source);
+        IEnumerable<T>? Distinct<T>(IEnumerable<T> source);
         T? Indexer<T>(IEnumerable<T>? source, int? index) where T : class;
         bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
@@ -307,7 +307,7 @@ namespace Hl7.Cql.Operators
         bool? ListIncludedInList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         bool? ListIncludesElement<T>(IEnumerable<T>? left, T right);
         bool? ListIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
-        int? IndexOf<T>(IEnumerable<T>? list, T element);
+        int? PositionOf<T>(IEnumerable<T>? list, T element);
         IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
@@ -317,7 +317,7 @@ namespace Hl7.Cql.Operators
         IEnumerable<T>? ListSkip<T>(IEnumerable<T> argument, int? number);
         IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, ListSortDirection order);
         IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order);
-        IEnumerable<T>? ListTail<T>(IEnumerable<T> argument);
+        IEnumerable<T>? Tail<T>(IEnumerable<T> argument);
         IEnumerable<T>? ListTake<T>(IEnumerable<T> argument, int? number);
         IEnumerable<T>? ListUnion<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         decimal? Ln(decimal? argument);
@@ -407,7 +407,7 @@ namespace Hl7.Cql.Operators
         decimal? PopulationStdDev(IEnumerable<decimal?>? source);
         CqlQuantity? PopulationVariance(IEnumerable<CqlQuantity?>? source);
         decimal? PopulationVariance(IEnumerable<decimal?>? source);
-        int? IndexOf(string pattern, string argument);
+        int? PositionOf(string pattern, string argument);
         decimal? Power(decimal? argument, decimal? exponent);
         int? Power(int? argument, int? exponent);
         long? Power(long? argument, long? exponent);
@@ -535,7 +535,7 @@ namespace Hl7.Cql.Operators
         int? Sum(IEnumerable<int?> values);
         long? Sum(IEnumerable<long?> values);
         CqlTime? Time(int? hour, int? minute, int? second, int? millisecond);
-        CqlTime? TimeFrom(CqlDateTime? argument);
+        CqlTime? TimeComponent(CqlDateTime? argument);
         CqlTime? TimeOfDay();
         decimal? TimezoneOffsetFrom(CqlDateTime? argument);
         CqlInterval<CqlDate?>? ToClosed(CqlInterval<CqlDate?>? interval);

@@ -33,7 +33,7 @@ namespace Hl7.Cql.Runtime
 
         #region Distinct
 
-        public IEnumerable<T>? ListDistinct<T>(IEnumerable<T> source)
+        public IEnumerable<T>? Distinct<T>(IEnumerable<T> source)
         {
             if (source == null)
                 return null;
@@ -170,7 +170,7 @@ namespace Hl7.Cql.Runtime
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public bool? ExistsInList<T>(IEnumerable<T> list)
+        public bool? Exists<T>(IEnumerable<T> list)
         {
             if (list == null) return false;
 
@@ -863,7 +863,7 @@ namespace Hl7.Cql.Runtime
 
         #region First
 
-        public T? FirstOfList<T>(IEnumerable<T> enumerable)
+        public T? First<T>(IEnumerable<T> enumerable)
         {
             if (enumerable == null)
             {
@@ -978,7 +978,7 @@ namespace Hl7.Cql.Runtime
 
         #region IndexOf
 
-        public int? IndexOf<T>(IEnumerable<T>? list, T element)
+        public int? PositionOf<T>(IEnumerable<T>? list, T element)
         {
             if (list == null || element == null)
                 return null;
@@ -1014,7 +1014,7 @@ namespace Hl7.Cql.Runtime
 
         #region Last
 
-        public T? LastOfList<T>(IEnumerable<T> enumerable)
+        public T? Last<T>(IEnumerable<T> enumerable)
         {
             if (enumerable == null)
             {
@@ -1149,7 +1149,7 @@ namespace Hl7.Cql.Runtime
                     .ToList();
         }
 
-        public IEnumerable<T>? ListTail<T>(IEnumerable<T> argument)
+        public IEnumerable<T>? Tail<T>(IEnumerable<T> argument)
         {
             if (argument == null)
                 return null;

@@ -255,7 +255,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
 			var m_ = context.Operators.End(g_);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, "day");
+			var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, "day");
 			var p_ = context.Operators.And(k_, o_);
 			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
 			var r_ = context.Operators.Equal(q_, "finished");
@@ -327,7 +327,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				return t_;
 			};
 			var e_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
-			var f_ = context.Operators.ExistsInList<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
 		};
@@ -359,7 +359,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var r_ = context.Operators.Quantity((decimal?)72m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -439,7 +439,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				return t_;
 			};
 			var e_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
-			var f_ = context.Operators.ExistsInList<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
 		};
@@ -471,7 +471,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var r_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -533,7 +533,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				return j_;
 			};
 			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-			var g_ = context.Operators.ExistsInList<Condition>(f_);
+			var g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
 		};
@@ -594,7 +594,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				return t_;
 			};
 			var e_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
-			var f_ = context.Operators.ExistsInList<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
 		};
@@ -626,7 +626,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
 				var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -723,7 +723,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				return t_;
 			};
 			var e_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
-			var f_ = context.Operators.ExistsInList<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
 		};
@@ -755,7 +755,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
 				var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]

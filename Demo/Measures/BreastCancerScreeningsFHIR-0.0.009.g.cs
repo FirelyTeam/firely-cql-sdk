@@ -338,14 +338,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var f_ = context.Operators.Convert<CqlDateTime>(e_);
 		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 		var h_ = context.Operators.Interval((int?)51, (int?)74, true, false);
-		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
 		var k_ = context.Operators.Convert<string>(a_?.GenderElement);
 		var l_ = context.Operators.Equal(k_, "female");
 		var m_ = context.Operators.And(i_, l_);
 		var n_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var o_ = this.Telehealth_Services();
 		var p_ = context.Operators.ListUnion<Encounter>(n_, o_);
-		var q_ = context.Operators.ExistsInList<Encounter>(p_);
+		var q_ = context.Operators.Exists<Encounter>(p_);
 		var r_ = context.Operators.And(m_, q_);
 
 		return r_;
@@ -553,22 +553,22 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	{
 		var a_ = HospiceFHIR4_2_3_000.Has_Hospice();
 		var b_ = this.Right_Mastectomy_Diagnosis();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = this.Right_Mastectomy_Procedure();
-		var e_ = context.Operators.ExistsInList<Procedure>(d_);
+		var e_ = context.Operators.Exists<Procedure>(d_);
 		var f_ = context.Operators.Or(c_, e_);
 		var g_ = this.Left_Mastectomy_Diagnosis();
-		var h_ = context.Operators.ExistsInList<Condition>(g_);
+		var h_ = context.Operators.Exists<Condition>(g_);
 		var i_ = this.Left_Mastectomy_Procedure();
-		var j_ = context.Operators.ExistsInList<Procedure>(i_);
+		var j_ = context.Operators.Exists<Procedure>(i_);
 		var k_ = context.Operators.Or(h_, j_);
 		var l_ = context.Operators.And(f_, k_);
 		var m_ = context.Operators.Or(a_, l_);
 		var n_ = this.Bilateral_Mastectomy_Diagnosis();
-		var o_ = context.Operators.ExistsInList<Condition>(n_);
+		var o_ = context.Operators.Exists<Condition>(n_);
 		var p_ = context.Operators.Or(m_, o_);
 		var q_ = this.Bilateral_Mastectomy_Procedure();
-		var r_ = context.Operators.ExistsInList<Procedure>(q_);
+		var r_ = context.Operators.Exists<Procedure>(q_);
 		var s_ = context.Operators.Or(p_, r_);
 		var t_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var u_ = context.Operators.Or(s_, t_);
@@ -616,7 +616,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
-			var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, null);
+			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -625,7 +625,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return w_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 
 		return e_;
 	}
@@ -657,7 +657,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
-			var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, null);
+			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -666,7 +666,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return w_;
 		};
 		var d_ = context.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
-		var e_ = context.Operators.ExistsInList<DiagnosticReport>(d_);
+		var e_ = context.Operators.Exists<DiagnosticReport>(d_);
 
 		return e_;
 	}
@@ -730,7 +730,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
-			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -739,7 +739,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return x_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 
 		return e_;
 	}
@@ -772,7 +772,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
-			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -781,7 +781,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return x_;
 		};
 		var d_ = context.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
-		var e_ = context.Operators.ExistsInList<DiagnosticReport>(d_);
+		var e_ = context.Operators.Exists<DiagnosticReport>(d_);
 
 		return e_;
 	}

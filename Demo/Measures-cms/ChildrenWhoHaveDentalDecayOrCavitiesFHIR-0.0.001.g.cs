@@ -252,9 +252,9 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)1, (int?)20, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var i_ = this.Qualifying_Encounters();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 
 		return k_;
@@ -299,7 +299,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 			return h_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}

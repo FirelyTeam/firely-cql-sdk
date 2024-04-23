@@ -118,10 +118,10 @@ public class DevDays_2023_0_0
 				return m_;
 			};
 			var e_ = context.Operators.WhereOrNull<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
-			var f_ = context.Operators.ExistsInList<Coding>(e_);
+			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.InInterval<CqlDateTime>(g_, h_, null);
 			var j_ = context.Operators.And(f_, i_);
 
 			return j_;
@@ -149,10 +149,10 @@ public class DevDays_2023_0_0
 				return m_;
 			};
 			var e_ = context.Operators.WhereOrNull<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
-			var f_ = context.Operators.ExistsInList<Coding>(e_);
+			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.InInterval<CqlDateTime>(g_, h_, null);
 			var j_ = context.Operators.And(f_, i_);
 
 			return j_;
@@ -169,7 +169,7 @@ public class DevDays_2023_0_0
 	private bool? Initial_population_Value()
 	{
 		var a_ = this.Jet_engine_conditions();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 
 		return b_;
 	}
@@ -181,7 +181,7 @@ public class DevDays_2023_0_0
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Subsequent_encounters();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 
 		return b_;
 	}

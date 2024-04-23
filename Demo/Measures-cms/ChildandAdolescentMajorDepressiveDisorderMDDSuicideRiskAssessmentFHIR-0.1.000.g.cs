@@ -358,7 +358,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 				return as_;
 			};
 			var ah_ = context.Operators.WhereOrNull<Condition>(af_, ag_);
-			var ai_ = context.Operators.ExistsInList<Condition>(ah_);
+			var ai_ = context.Operators.Exists<Condition>(ah_);
 			var aj_ = context.Operators.Or(ae_, ai_);
 			var ak_ = context.Operators.And(aa_, aj_);
 			var al_ = this.Measurement_Period();

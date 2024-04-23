@@ -639,10 +639,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			return s_;
 		};
 		var k_ = context.Operators.WhereOrNull<Condition>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Condition>(k_);
+		var l_ = context.Operators.Exists<Condition>(k_);
 		var m_ = context.Operators.And(g_, l_);
 		var n_ = this.Two_Outpatient_Encounters_during_Measurement_Period();
-		var o_ = context.Operators.ExistsInList<Encounter>(n_);
+		var o_ = context.Operators.Exists<Encounter>(n_);
 		var p_ = context.Operators.And(m_, o_);
 
 		return p_;
@@ -678,7 +678,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			return k_;
 		};
 		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Condition>(f_);
+		var g_ = context.Operators.Exists<Condition>(f_);
 		var h_ = context.Operators.Or(a_, g_);
 
 		return h_;
@@ -794,7 +794,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -808,7 +808,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -817,7 +817,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_BaPOXCdQPieFFFdPRAYQHJVMK tuple_bapoxcdqpiefffdprayqhjvmk) => 
 			tuple_bapoxcdqpiefffdprayqhjvmk.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_BaPOXCdQPieFFFdPRAYQHJVMK, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -1042,7 +1042,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1056,7 +1056,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1065,7 +1065,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_DcgYAFMUGiITLMLBigQTHXaba tuple_dcgyafmugiitlmlbigqthxaba) => 
 			tuple_dcgyafmugiitlmlbigqthxaba.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_DcgYAFMUGiITLMLBigQTHXaba, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -1180,7 +1180,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1194,7 +1194,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1203,7 +1203,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU tuple_ehgfqcqtpmavgfjerngbdigou) => 
 			tuple_ehgfqcqtpmavgfjerngbdigou.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_EhGfQcQTPMaVGfjeRNgbDIGOU, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -1318,7 +1318,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1332,7 +1332,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1341,7 +1341,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ tuple_dathnxwghivrygrfgdxjyjkrz) => 
 			tuple_dathnxwghivrygrfgdxjyjkrz.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_DaTHNXWGHIVRYGRfGdXJYJKRZ, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -1456,7 +1456,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1470,7 +1470,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1479,7 +1479,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_HNUZSEJfeiQXIhXGUDXLiWidi tuple_hnuzsejfeiqxihxgudxliwidi) => 
 			tuple_hnuzsejfeiqxihxgudxliwidi.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_HNUZSEJfeiQXIhXGUDXLiWidi, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -1594,7 +1594,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1608,7 +1608,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1617,7 +1617,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_FZFeLiXHKPLAfNDgWDMeScIDi tuple_fzfelixhkplafndgwdmescidi) => 
 			tuple_fzfelixhkplafndgwdmescidi.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_FZFeLiXHKPLAfNDgWDMeScIDi, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -1732,7 +1732,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1746,7 +1746,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1755,7 +1755,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_DgNBKfGfRHaWDZaDFPZKifXLi tuple_dgnbkfgfrhawdzadfpzkifxli) => 
 			tuple_dgnbkfgfrhawdzadfpzkifxli.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_DgNBKfGfRHaWDZaDFPZKifXLi, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -1870,7 +1870,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1884,7 +1884,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1893,7 +1893,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_DNZcZTNIZUQfFfijaYDWagbfi tuple_dnzcztnizuqfffijaydwagbfi) => 
 			tuple_dnzcztnizuqfffijaydwagbfi.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_DNZcZTNIZUQfFfijaYDWagbfi, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -2096,7 +2096,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -2110,7 +2110,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -2119,7 +2119,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_GechMKfhePFUbfJYJeVegQTRC tuple_gechmkfhepfubfjyjevegqtrc) => 
 			tuple_gechmkfhepfubfjyjevegqtrc.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_GechMKfhePFUbfJYJeVegQTRC, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}
@@ -2200,7 +2200,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -2214,7 +2214,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.ElementInInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -2223,7 +2223,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		Encounter i_(Tuple_DSdKcfQMUMBjegQCVVeYhPYdf tuple_dsdkcfqmumbjegqcvveyhpydf) => 
 			tuple_dsdkcfqmumbjegqcvveyhpydf.ValidEncounters;
 		var j_ = context.Operators.SelectOrNull<Tuple_DSdKcfQMUMBjegQCVVeYhPYdf, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 
 		return k_;
 	}

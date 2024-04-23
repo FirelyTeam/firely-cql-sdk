@@ -172,7 +172,7 @@ public class NCQAClaims_1_0_0
 								return ag_;
 							};
 							var z_ = context.Operators.WhereOrNull<CqlCode>((x_?.codes as IEnumerable<CqlCode>), y_);
-							var aa_ = context.Operators.ExistsInList<CqlCode>(z_);
+							var aa_ = context.Operators.Exists<CqlCode>(z_);
 							var ab_ = FHIRHelpers_4_0_001.ToConcept((ItemOnLine?.Location as CodeableConcept));
 							bool? ac_(CqlCode PosCode)
 							{
@@ -181,7 +181,7 @@ public class NCQAClaims_1_0_0
 								return ah_;
 							};
 							var ad_ = context.Operators.WhereOrNull<CqlCode>((ab_?.codes as IEnumerable<CqlCode>), ac_);
-							var ae_ = context.Operators.ExistsInList<CqlCode>(ad_);
+							var ae_ = context.Operators.Exists<CqlCode>(ad_);
 							var af_ = context.Operators.And(aa_, ae_);
 
 							return af_;
@@ -204,7 +204,7 @@ public class NCQAClaims_1_0_0
 				{
 					Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA ai_()
 					{
-						if ((context.Operators.ExistsInList<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
+						if ((context.Operators.Exists<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
 						{
 							bool? aj_(Claim.ItemComponent @this)
 							{
@@ -303,7 +303,7 @@ public class NCQAClaims_1_0_0
 								return ao_;
 							};
 							var x_ = context.Operators.WhereOrNull<CqlCode>((v_?.codes as IEnumerable<CqlCode>), w_);
-							var y_ = context.Operators.ExistsInList<CqlCode>(x_);
+							var y_ = context.Operators.Exists<CqlCode>(x_);
 							bool? z_(Claim.ProcedureComponent @this)
 							{
 								var ap_ = context.Operators.Not((bool?)(@this?.Procedure is null));
@@ -340,7 +340,7 @@ public class NCQAClaims_1_0_0
 								return at_;
 							};
 							var al_ = context.Operators.WhereOrNull<Coding>(aj_, ak_);
-							var am_ = context.Operators.ExistsInList<Coding>(al_);
+							var am_ = context.Operators.Exists<Coding>(al_);
 							var an_ = context.Operators.Or(y_, am_);
 
 							return an_;
@@ -363,7 +363,7 @@ public class NCQAClaims_1_0_0
 				{
 					Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA au_()
 					{
-						if ((context.Operators.ExistsInList<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
+						if ((context.Operators.Exists<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
 						{
 							bool? av_(Claim.ItemComponent @this)
 							{
@@ -488,7 +488,7 @@ public class NCQAClaims_1_0_0
 							return aj_;
 						};
 						var ad_ = context.Operators.WhereOrNull<Coding>(ab_, ac_);
-						var ae_ = context.Operators.ExistsInList<Coding>(ad_);
+						var ae_ = context.Operators.Exists<Coding>(ad_);
 
 						return ae_;
 					};
@@ -509,7 +509,7 @@ public class NCQAClaims_1_0_0
 			{
 				Tuples.Tuple_HLLRUdKceDPKeIXGFiiNKjMKI ak_()
 				{
-					if ((context.Operators.ExistsInList<Claim>(HeaderDefinition?.DiagnosisItems) ?? false))
+					if ((context.Operators.Exists<Claim>(HeaderDefinition?.DiagnosisItems) ?? false))
 					{
 						bool? ap_(Claim @this)
 						{
@@ -600,7 +600,7 @@ public class NCQAClaims_1_0_0
 						return x_;
 					};
 					var v_ = context.Operators.WhereOrNull<CqlCode>((t_?.codes as IEnumerable<CqlCode>), u_);
-					var w_ = context.Operators.ExistsInList<CqlCode>(v_);
+					var w_ = context.Operators.Exists<CqlCode>(v_);
 
 					return w_;
 				};
@@ -632,7 +632,7 @@ public class NCQAClaims_1_0_0
 								return ap_;
 							};
 							var an_ = context.Operators.WhereOrNull<CqlCode>((al_?.codes as IEnumerable<CqlCode>), am_);
-							var ao_ = context.Operators.ExistsInList<CqlCode>(an_);
+							var ao_ = context.Operators.Exists<CqlCode>(an_);
 
 							return ao_;
 						};
@@ -712,7 +712,7 @@ public class NCQAClaims_1_0_0
 						{
 							Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC ci_()
 							{
-								if ((context.Operators.ExistsInList<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
+								if ((context.Operators.Exists<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
 								{
 									bool? cj_(Claim.ItemComponent @this)
 									{
@@ -856,7 +856,7 @@ public class NCQAClaims_1_0_0
 							return al_;
 						};
 						var af_ = context.Operators.WhereOrNull<Coding>(ad_, ae_);
-						var ag_ = context.Operators.ExistsInList<Coding>(af_);
+						var ag_ = context.Operators.Exists<Coding>(af_);
 
 						return ag_;
 					};
@@ -927,7 +927,7 @@ public class NCQAClaims_1_0_0
 									return cf_;
 								};
 								var bm_ = context.Operators.WhereOrNull<Coding>(bk_, bl_);
-								var bn_ = context.Operators.ExistsInList<Coding>(bm_);
+								var bn_ = context.Operators.Exists<Coding>(bm_);
 								bool? bo_(Claim.ItemComponent @this)
 								{
 									var cg_ = context.Operators.Not((bool?)(@this?.ProductOrService is null));
@@ -956,7 +956,7 @@ public class NCQAClaims_1_0_0
 									return ci_;
 								};
 								var by_ = context.Operators.WhereOrNull<Coding>(bw_, bx_);
-								var bz_ = context.Operators.ExistsInList<Coding>(by_);
+								var bz_ = context.Operators.Exists<Coding>(by_);
 								var ca_ = context.Operators.Or(bn_, bz_);
 
 								return ca_;
@@ -1099,7 +1099,7 @@ public class NCQAClaims_1_0_0
 								return bb_;
 							};
 							var ai_ = context.Operators.WhereOrNull<Coding>(ag_, ah_);
-							var aj_ = context.Operators.ExistsInList<Coding>(ai_);
+							var aj_ = context.Operators.Exists<Coding>(ai_);
 							bool? ak_(Claim.ProcedureComponent @this)
 							{
 								var bc_ = context.Operators.Not((bool?)(@this?.Procedure is null));
@@ -1136,7 +1136,7 @@ public class NCQAClaims_1_0_0
 								return bg_;
 							};
 							var aw_ = context.Operators.WhereOrNull<Coding>(au_, av_);
-							var ax_ = context.Operators.ExistsInList<Coding>(aw_);
+							var ax_ = context.Operators.Exists<Coding>(aw_);
 							var ay_ = context.Operators.Or(aj_, ax_);
 
 							return ay_;
@@ -1191,13 +1191,13 @@ public class NCQAClaims_1_0_0
 											return cg_;
 										};
 										var cd_ = context.Operators.WhereOrNull<Coding>(cb_, cc_);
-										var ce_ = context.Operators.ExistsInList<Coding>(cd_);
+										var ce_ = context.Operators.Exists<Coding>(cd_);
 										var cf_ = context.Operators.And(ca_, ce_);
 
 										return cf_;
 									};
 									var bw_ = context.Operators.WhereOrNull<Claim.DiagnosisComponent>((RightClaim?.Diagnosis as IEnumerable<Claim.DiagnosisComponent>), bv_);
-									var bx_ = context.Operators.ExistsInList<Claim.DiagnosisComponent>(bw_);
+									var bx_ = context.Operators.Exists<Claim.DiagnosisComponent>(bw_);
 
 									return bx_;
 								};
@@ -1330,13 +1330,13 @@ public class NCQAClaims_1_0_0
 								return ac_;
 							};
 							var z_ = context.Operators.WhereOrNull<Coding>(x_, y_);
-							var aa_ = context.Operators.ExistsInList<Coding>(z_);
+							var aa_ = context.Operators.Exists<Coding>(z_);
 							var ab_ = context.Operators.And(w_, aa_);
 
 							return ab_;
 						};
 						var s_ = context.Operators.WhereOrNull<Claim.DiagnosisComponent>((RightClaim?.Diagnosis as IEnumerable<Claim.DiagnosisComponent>), r_);
-						var t_ = context.Operators.ExistsInList<Claim.DiagnosisComponent>(s_);
+						var t_ = context.Operators.Exists<Claim.DiagnosisComponent>(s_);
 
 						return t_;
 					};
@@ -1493,7 +1493,7 @@ public class NCQAClaims_1_0_0
 						return an_;
 					};
 					var ab_ = context.Operators.WhereOrNull<Coding>(z_, aa_);
-					var ac_ = context.Operators.ExistsInList<Coding>(ab_);
+					var ac_ = context.Operators.Exists<Coding>(ab_);
 					bool? ad_(ClaimResponse.AdjudicationComponent @this)
 					{
 						var ao_ = context.Operators.Not((bool?)(@this?.Amount is null));
@@ -1513,7 +1513,7 @@ public class NCQAClaims_1_0_0
 						return ar_;
 					};
 					var ai_ = context.Operators.WhereOrNull<Money>(ag_, ah_);
-					var aj_ = context.Operators.ExistsInList<Money>(ai_);
+					var aj_ = context.Operators.Exists<Money>(ai_);
 					var ak_ = context.Operators.And(ac_, aj_);
 
 					return ak_;
@@ -1572,7 +1572,7 @@ public class NCQAClaims_1_0_0
 				return ai_;
 			};
 			var o_ = context.Operators.WhereOrNull<Coding>(m_, n_);
-			var p_ = context.Operators.ExistsInList<Coding>(o_);
+			var p_ = context.Operators.Exists<Coding>(o_);
 			bool? q_(Claim.DiagnosisComponent @this)
 			{
 				var aj_ = context.Operators.Not((bool?)(@this?.Diagnosis is null));
@@ -1610,7 +1610,7 @@ public class NCQAClaims_1_0_0
 				return ao_;
 			};
 			var ac_ = context.Operators.WhereOrNull<Coding>(aa_, ab_);
-			var ad_ = context.Operators.ExistsInList<Coding>(ac_);
+			var ad_ = context.Operators.Exists<Coding>(ac_);
 			var ae_ = context.Operators.And(p_, ad_);
 
 			return ae_;
@@ -1628,7 +1628,7 @@ public class NCQAClaims_1_0_0
 					return aw_;
 				};
 				var at_ = context.Operators.WhereOrNull<Coding>((ResponseItem?.ProductOrService?.Coding as IEnumerable<Coding>), as_);
-				var au_ = context.Operators.ExistsInList<Coding>(at_);
+				var au_ = context.Operators.Exists<Coding>(at_);
 
 				return au_;
 			};
@@ -1692,7 +1692,7 @@ public class NCQAClaims_1_0_0
 						return x_;
 					};
 					var s_ = context.Operators.SelectManyOrNull<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL, Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(ClaimAndResponse?.PaidMedicalClaimResponse, r_);
-					var t_ = context.Operators.ExistsInList<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
+					var t_ = context.Operators.Exists<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
 
 					return t_;
 				};
@@ -1731,7 +1731,7 @@ public class NCQAClaims_1_0_0
 							@this?.ClaimItem;
 						var ap_ = context.Operators.SelectOrNull<Tuples.Tuple_CAKcSTUVVXcPjYRXATiiRAEMg, IEnumerable<Claim.ItemComponent>>(an_, ao_);
 						var aq_ = context.Operators.FlattenList<Claim.ItemComponent>(ap_);
-						var ar_ = context.Operators.ExistsInList<Claim.ItemComponent>(aq_);
+						var ar_ = context.Operators.Exists<Claim.ItemComponent>(aq_);
 
 						return (ar_ ?? false);
 					};
@@ -1886,7 +1886,7 @@ public class NCQAClaims_1_0_0
 				return ai_;
 			};
 			var o_ = context.Operators.WhereOrNull<Coding>(m_, n_);
-			var p_ = context.Operators.ExistsInList<Coding>(o_);
+			var p_ = context.Operators.Exists<Coding>(o_);
 			bool? q_(Claim.DiagnosisComponent @this)
 			{
 				var aj_ = context.Operators.Not((bool?)(@this?.Diagnosis is null));
@@ -1924,7 +1924,7 @@ public class NCQAClaims_1_0_0
 				return ao_;
 			};
 			var ac_ = context.Operators.WhereOrNull<Coding>(aa_, ab_);
-			var ad_ = context.Operators.ExistsInList<Coding>(ac_);
+			var ad_ = context.Operators.Exists<Coding>(ac_);
 			var ae_ = context.Operators.Or(p_, ad_);
 
 			return ae_;
@@ -1946,12 +1946,12 @@ public class NCQAClaims_1_0_0
 							return ay_;
 						};
 						var av_ = context.Operators.WhereOrNull<Coding>((ResponseItem?.ProductOrService?.Coding as IEnumerable<Coding>), au_);
-						var aw_ = context.Operators.ExistsInList<Coding>(av_);
+						var aw_ = context.Operators.Exists<Coding>(av_);
 
 						return aw_;
 					};
 					var as_ = context.Operators.WhereOrNull<Claim.ItemComponent>((ProcedureClaims?.Item as IEnumerable<Claim.ItemComponent>), ar_);
-					var at_ = context.Operators.ExistsInList<Claim.ItemComponent>(as_);
+					var at_ = context.Operators.Exists<Claim.ItemComponent>(as_);
 
 					return (at_ ?? false);
 				};
@@ -1967,7 +1967,7 @@ public class NCQAClaims_1_0_0
 							return bg_;
 						};
 						var bd_ = context.Operators.WhereOrNull<Coding>((ResponseItem?.ProductOrService?.Coding as IEnumerable<Coding>), bc_);
-						var be_ = context.Operators.ExistsInList<Coding>(bd_);
+						var be_ = context.Operators.Exists<Coding>(bd_);
 
 						return be_;
 					};
@@ -2054,7 +2054,7 @@ public class NCQAClaims_1_0_0
 						return x_;
 					};
 					var s_ = context.Operators.SelectManyOrNull<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL, Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(ClaimAndResponse?.PaidMedicalClaimResponse, r_);
-					var t_ = context.Operators.ExistsInList<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
+					var t_ = context.Operators.Exists<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
 
 					return t_;
 				};
@@ -2093,7 +2093,7 @@ public class NCQAClaims_1_0_0
 							@this?.ClaimItem;
 						var ap_ = context.Operators.SelectOrNull<Tuples.Tuple_CAKcSTUVVXcPjYRXATiiRAEMg, IEnumerable<Claim.ItemComponent>>(an_, ao_);
 						var aq_ = context.Operators.FlattenList<Claim.ItemComponent>(ap_);
-						var ar_ = context.Operators.ExistsInList<Claim.ItemComponent>(aq_);
+						var ar_ = context.Operators.Exists<Claim.ItemComponent>(aq_);
 
 						return (ar_ ?? false);
 					};
@@ -2236,7 +2236,7 @@ public class NCQAClaims_1_0_0
 				return t_;
 			};
 			var o_ = context.Operators.WhereOrNull<Coding>(m_, n_);
-			var p_ = context.Operators.ExistsInList<Coding>(o_);
+			var p_ = context.Operators.Exists<Coding>(o_);
 
 			return p_;
 		};
@@ -2253,7 +2253,7 @@ public class NCQAClaims_1_0_0
 					return ab_;
 				};
 				var y_ = context.Operators.WhereOrNull<Coding>((ResponseItem?.ProductOrService?.Coding as IEnumerable<Coding>), x_);
-				var z_ = context.Operators.ExistsInList<Coding>(y_);
+				var z_ = context.Operators.Exists<Coding>(y_);
 
 				return z_;
 			};
@@ -2317,7 +2317,7 @@ public class NCQAClaims_1_0_0
 						return x_;
 					};
 					var s_ = context.Operators.SelectManyOrNull<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL, Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(ClaimAndResponse?.PaidMedicalClaimResponse, r_);
-					var t_ = context.Operators.ExistsInList<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
+					var t_ = context.Operators.Exists<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
 
 					return t_;
 				};
@@ -2356,7 +2356,7 @@ public class NCQAClaims_1_0_0
 							@this?.ClaimItem;
 						var ap_ = context.Operators.SelectOrNull<Tuples.Tuple_CAKcSTUVVXcPjYRXATiiRAEMg, IEnumerable<Claim.ItemComponent>>(an_, ao_);
 						var aq_ = context.Operators.FlattenList<Claim.ItemComponent>(ap_);
-						var ar_ = context.Operators.ExistsInList<Claim.ItemComponent>(aq_);
+						var ar_ = context.Operators.Exists<Claim.ItemComponent>(aq_);
 
 						return (ar_ ?? false);
 					};
@@ -2524,7 +2524,7 @@ public class NCQAClaims_1_0_0
 						return x_;
 					};
 					var s_ = context.Operators.SelectManyOrNull<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL, Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(ClaimAndResponse?.PaidPharmacyClaimResponse, r_);
-					var t_ = context.Operators.ExistsInList<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
+					var t_ = context.Operators.Exists<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(s_);
 
 					return t_;
 				};
@@ -2563,7 +2563,7 @@ public class NCQAClaims_1_0_0
 							@this?.ClaimItem;
 						var ap_ = context.Operators.SelectOrNull<Tuples.Tuple_DgRFfDaEDhBINgYbMaeRWZWVT, IEnumerable<Claim.ItemComponent>>(an_, ao_);
 						var aq_ = context.Operators.FlattenList<Claim.ItemComponent>(ap_);
-						var ar_ = context.Operators.ExistsInList<Claim.ItemComponent>(aq_);
+						var ar_ = context.Operators.Exists<Claim.ItemComponent>(aq_);
 
 						return (ar_ ?? false);
 					};
@@ -2818,12 +2818,12 @@ public class NCQAClaims_1_0_0
 								return y_;
 							};
 							var v_ = context.Operators.WhereOrNull<CqlCode>((t_?.codes as IEnumerable<CqlCode>), u_);
-							var w_ = context.Operators.ExistsInList<CqlCode>(v_);
+							var w_ = context.Operators.Exists<CqlCode>(v_);
 
 							return w_;
 						};
 						var r_ = context.Operators.WhereOrNull<Claim.ItemComponent>((c?.Item as IEnumerable<Claim.ItemComponent>), q_);
-						var s_ = context.Operators.ExistsInList<Claim.ItemComponent>(r_);
+						var s_ = context.Operators.Exists<Claim.ItemComponent>(r_);
 
 						return s_;
 					};
@@ -2855,12 +2855,12 @@ public class NCQAClaims_1_0_0
 								return ao_;
 							};
 							var al_ = context.Operators.WhereOrNull<CqlCode>((aj_?.codes as IEnumerable<CqlCode>), ak_);
-							var am_ = context.Operators.ExistsInList<CqlCode>(al_);
+							var am_ = context.Operators.Exists<CqlCode>(al_);
 
 							return am_;
 						};
 						var ad_ = context.Operators.WhereOrNull<Claim.ItemComponent>((c?.Item as IEnumerable<Claim.ItemComponent>), ac_);
-						var ae_ = context.Operators.ExistsInList<Claim.ItemComponent>(ad_);
+						var ae_ = context.Operators.Exists<Claim.ItemComponent>(ad_);
 						bool? af_(Coding tob)
 						{
 							var ap_ = this.Nonacute_Inpatient_Stay();
@@ -2869,7 +2869,7 @@ public class NCQAClaims_1_0_0
 							return aq_;
 						};
 						var ag_ = context.Operators.WhereOrNull<Coding>((c?.SubType?.Coding as IEnumerable<Coding>), af_);
-						var ah_ = context.Operators.ExistsInList<Coding>(ag_);
+						var ah_ = context.Operators.Exists<Coding>(ag_);
 						var ai_ = context.Operators.Or(ae_, ah_);
 
 						return ai_;
@@ -3128,7 +3128,7 @@ public class NCQAClaims_1_0_0
 							Claim cn_(Tuples.Tuple_GIfhUVACThMQNGPGjYhYHEfGS @this) => 
 								@this?.SingleCareTeam;
 							var co_ = context.Operators.SelectOrNull<Tuples.Tuple_GIfhUVACThMQNGPGjYhYHEfGS, Claim>(cm_, cn_);
-							var cp_ = context.Operators.ExistsInList<Claim>(co_);
+							var cp_ = context.Operators.Exists<Claim>(co_);
 
 							return (cp_ ?? false);
 						};
@@ -3383,7 +3383,7 @@ public class NCQAClaims_1_0_0
 								@this?.SingleItem;
 							var cq_ = context.Operators.SelectOrNull<Tuples.Tuple_FPCXihcEeChSjIUJHVXRcEXMI, IEnumerable<Claim.ItemComponent>>(co_, cp_);
 							var cr_ = context.Operators.FlattenList<Claim.ItemComponent>(cq_);
-							var cs_ = context.Operators.ExistsInList<Claim.ItemComponent>(cr_);
+							var cs_ = context.Operators.Exists<Claim.ItemComponent>(cr_);
 
 							return (cs_ ?? false);
 						};

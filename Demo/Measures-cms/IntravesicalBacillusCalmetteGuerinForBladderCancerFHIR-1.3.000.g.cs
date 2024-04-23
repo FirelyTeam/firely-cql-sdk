@@ -488,7 +488,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return ae_;
 		};
 		var i_ = context.Operators.ListSortBy<Procedure>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		var j_ = context.Operators.FirstOfList<Procedure>(i_);
+		var j_ = context.Operators.First<Procedure>(i_);
 
 		return j_;
 	}
@@ -651,7 +651,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return ag_;
 		};
 		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Observation>(e_);
+		var f_ = context.Operators.Exists<Observation>(e_);
 
 		return f_;
 	}
@@ -681,7 +681,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return p_;
 		};
 		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Encounter>(d_);
+		var e_ = context.Operators.Exists<Encounter>(d_);
 
 		return e_;
 	}
@@ -754,7 +754,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
 				var ad_ = context.Operators.Interval(x_, ac_, (bool?)false, (bool?)true);
-				var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, null);
+				var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, null);
 				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
 				var ah_ = context.Operators.Start(ag_);
 				var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -772,7 +772,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ao_ = context.Operators.SingletonFrom<object>(an_);
 				var ap_ = context.Operators.Convert<CqlDateTime>((ao_ as FhirDateTime));
 				var aq_ = this.Measurement_Period();
-				var ar_ = context.Operators.ElementInInterval<CqlDateTime>(ap_, aq_, null);
+				var ar_ = context.Operators.InInterval<CqlDateTime>(ap_, aq_, null);
 				var as_ = context.Operators.And(aj_, ar_);
 
 				return as_;
@@ -811,7 +811,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	private bool? Denominator_Exception_Value()
 	{
 		var a_ = this.BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging();
-		var b_ = context.Operators.ExistsInList<MedicationAdministration>(a_);
+		var b_ = context.Operators.Exists<MedicationAdministration>(a_);
 
 		return b_;
 	}
@@ -846,7 +846,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
 				var ad_ = context.Operators.Interval(x_, ac_, (bool?)false, (bool?)true);
-				var ae_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ad_, null);
+				var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, null);
 				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
 				var ah_ = context.Operators.Start(ag_);
 				var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -854,7 +854,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var al_ = QICoreCommon_2_0_000.toInterval(s_);
 				var am_ = context.Operators.Start(al_);
 				var an_ = this.Measurement_Period();
-				var ao_ = context.Operators.ElementInInterval<CqlDateTime>(am_, an_, null);
+				var ao_ = context.Operators.InInterval<CqlDateTime>(am_, an_, null);
 				var ap_ = context.Operators.And(aj_, ao_);
 
 				return ap_;
@@ -890,7 +890,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return aw_;
 		};
 		var k_ = context.Operators.ListSortBy<MedicationAdministration>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
-		var l_ = context.Operators.FirstOfList<MedicationAdministration>(k_);
+		var l_ = context.Operators.First<MedicationAdministration>(k_);
 
 		return l_;
 	}
@@ -1063,7 +1063,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var v_ = QICoreCommon_2_0_000.toInterval(p_);
 				var w_ = context.Operators.Start(v_);
 				var x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)false);
-				var y_ = context.Operators.ElementInInterval<CqlDateTime>(o_, x_, null);
+				var y_ = context.Operators.InInterval<CqlDateTime>(o_, x_, null);
 				var aa_ = QICoreCommon_2_0_000.toInterval(p_);
 				var ab_ = context.Operators.Start(aa_);
 				var ac_ = context.Operators.Not((bool?)(ab_ is null));
@@ -1138,7 +1138,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return z_;
 		};
 		var l_ = context.Operators.WhereOrNull<Condition>(j_, k_);
-		var m_ = context.Operators.ExistsInList<Condition>(l_);
+		var m_ = context.Operators.Exists<Condition>(l_);
 
 		return m_;
 	}
@@ -1173,7 +1173,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ah_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var ai_ = context.Operators.Start(ah_);
 				var aj_ = context.Operators.Interval(af_, ai_, (bool?)true, (bool?)false);
-				var ak_ = context.Operators.ElementInInterval<CqlDateTime>(aa_, aj_, null);
+				var ak_ = context.Operators.InInterval<CqlDateTime>(aa_, aj_, null);
 				var am_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var an_ = context.Operators.Start(am_);
 				var ao_ = context.Operators.Not((bool?)(an_ is null));
@@ -1231,7 +1231,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var bo_ = QICoreCommon_2_0_000.toInterval(bi_);
 				var bp_ = context.Operators.Start(bo_);
 				var bq_ = context.Operators.Interval(bm_, bp_, (bool?)true, (bool?)false);
-				var br_ = context.Operators.ElementInInterval<CqlDateTime>(bh_, bq_, null);
+				var br_ = context.Operators.InInterval<CqlDateTime>(bh_, bq_, null);
 				var bt_ = QICoreCommon_2_0_000.toInterval(bi_);
 				var bu_ = context.Operators.Start(bt_);
 				var bv_ = context.Operators.Not((bool?)(bu_ is null));
@@ -1256,7 +1256,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		};
 		var p_ = context.Operators.WhereOrNull<Procedure>(n_, o_);
 		var q_ = context.Operators.ListUnion<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));
-		var r_ = context.Operators.ExistsInList<object>(q_);
+		var r_ = context.Operators.Exists<object>(q_);
 
 		return r_;
 	}
@@ -1268,12 +1268,12 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	private bool? Denominator_Exclusion_Value()
 	{
 		var a_ = this.Acute_Tuberculosis_Diagnosis();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 		var c_ = this.Immunosuppressive_Drugs();
-		var d_ = context.Operators.ExistsInList<MedicationRequest>(c_);
+		var d_ = context.Operators.Exists<MedicationRequest>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Cystectomy_Done();
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 		var h_ = context.Operators.Or(e_, g_);
 		var i_ = this.Has_Excluding__HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging();
 		var j_ = context.Operators.Or(h_, i_);

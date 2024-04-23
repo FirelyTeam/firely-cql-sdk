@@ -467,7 +467,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
 		var h_ = this.Diabetic_Retinopathy_Encounter();
-		var i_ = context.Operators.ExistsInList<Encounter>(h_);
+		var i_ = context.Operators.Exists<Encounter>(h_);
 		var j_ = context.Operators.And(g_, i_);
 
 		return j_;
@@ -532,7 +532,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	{
 		var a_ = this.Initial_Population();
 		var b_ = this.Macular_Exam_Performed();
-		var c_ = context.Operators.ExistsInList<Observation>(b_);
+		var c_ = context.Operators.Exists<Observation>(b_);
 		var d_ = context.Operators.And(a_, c_);
 
 		return d_;
@@ -557,7 +557,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
 				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.ElementInInterval<CqlDateTime>(m_, r_, "day");
+				var s_ = context.Operators.InInterval<CqlDateTime>(m_, r_, "day");
 				var t_ = context.Operators.And(p_, s_);
 
 				return t_;
@@ -601,7 +601,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
 				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.ElementInInterval<CqlDateTime>(m_, r_, "day");
+				var s_ = context.Operators.InInterval<CqlDateTime>(m_, r_, "day");
 				var t_ = context.Operators.And(p_, s_);
 
 				return t_;
@@ -645,7 +645,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
 				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.ElementInInterval<CqlDateTime>(m_, r_, "day");
+				var s_ = context.Operators.InInterval<CqlDateTime>(m_, r_, "day");
 				var t_ = context.Operators.And(p_, s_);
 
 				return t_;
@@ -677,11 +677,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated();
-		var b_ = context.Operators.ExistsInList<Communication>(a_);
+		var b_ = context.Operators.Exists<Communication>(a_);
 		var c_ = this.Macular_Edema_Absence_Communicated();
-		var d_ = context.Operators.ExistsInList<Communication>(c_);
+		var d_ = context.Operators.Exists<Communication>(c_);
 		var e_ = this.Macular_Edema_Presence_Communicated();
-		var f_ = context.Operators.ExistsInList<Communication>(e_);
+		var f_ = context.Operators.Exists<Communication>(e_);
 		var g_ = context.Operators.Or(d_, f_);
 		var h_ = context.Operators.And(b_, g_);
 
@@ -719,7 +719,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var u_ = context.Operators.SingletonFrom<object>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
+				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, null);
 
 				return x_;
 			};
@@ -778,7 +778,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var u_ = context.Operators.SingletonFrom<object>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
+				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, null);
 
 				return x_;
 			};
@@ -837,7 +837,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var u_ = context.Operators.SingletonFrom<object>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
+				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, null);
 
 				return x_;
 			};
@@ -872,12 +872,12 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	private bool? Denominator_Exceptions_Value()
 	{
 		var a_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy();
-		var b_ = context.Operators.ExistsInList<Communication>(a_);
+		var b_ = context.Operators.Exists<Communication>(a_);
 		var c_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema();
-		var d_ = context.Operators.ExistsInList<Communication>(c_);
+		var d_ = context.Operators.Exists<Communication>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema();
-		var g_ = context.Operators.ExistsInList<Communication>(f_);
+		var g_ = context.Operators.Exists<Communication>(f_);
 		var h_ = context.Operators.Or(e_, g_);
 
 		return h_;
@@ -890,11 +890,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	private bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Value()
 	{
 		var a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated();
-		var b_ = context.Operators.ExistsInList<Communication>(a_);
+		var b_ = context.Operators.Exists<Communication>(a_);
 		var c_ = this.Macular_Edema_Absence_Communicated();
-		var d_ = context.Operators.ExistsInList<Communication>(c_);
+		var d_ = context.Operators.Exists<Communication>(c_);
 		var e_ = this.Macular_Edema_Presence_Communicated();
-		var f_ = context.Operators.ExistsInList<Communication>(e_);
+		var f_ = context.Operators.Exists<Communication>(e_);
 		var g_ = context.Operators.Or(d_, f_);
 		var h_ = context.Operators.And(b_, g_);
 

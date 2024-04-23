@@ -159,7 +159,7 @@ public class Status_1_6_000
 				return p_;
 			};
 			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
-			var k_ = context.Operators.ExistsInList<CqlConcept>(j_);
+			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
@@ -199,7 +199,7 @@ public class Status_1_6_000
 				return p_;
 			};
 			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
-			var k_ = context.Operators.ExistsInList<CqlConcept>(j_);
+			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
@@ -584,7 +584,7 @@ public class Status_1_6_000
 				return p_;
 			};
 			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
-			var k_ = context.Operators.ExistsInList<CqlConcept>(j_);
+			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
@@ -624,7 +624,7 @@ public class Status_1_6_000
 				return p_;
 			};
 			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
-			var k_ = context.Operators.ExistsInList<CqlConcept>(j_);
+			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
@@ -790,7 +790,7 @@ public class Status_1_6_000
 				return p_;
 			};
 			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
-			var k_ = context.Operators.ExistsInList<CqlConcept>(j_);
+			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
@@ -830,7 +830,7 @@ public class Status_1_6_000
 				return p_;
 			};
 			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
-			var k_ = context.Operators.ExistsInList<CqlConcept>(j_);
+			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;

@@ -362,7 +362,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -405,7 +405,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			return ac_;
 		};
 		var v_ = context.Operators.WhereOrNull<Encounter>(t_, u_);
-		var w_ = context.Operators.ExistsInList<Encounter>(v_);
+		var w_ = context.Operators.Exists<Encounter>(v_);
 
 		return w_;
 	}
@@ -423,7 +423,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)18, (int?)85, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var i_ = this.Has_Active_Diabetes_Overlaps_Measurement_Period();
 		var j_ = context.Operators.And(h_, i_);
 		var k_ = this.Has_Outpatient_Visit_During_Measurement_Period();
@@ -479,7 +479,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private bool? Denominator_Exclusions_Value()
 	{
 		var a_ = this.Has_CKD_Stage_5_or_ESRD_Diagnosis_Overlaps_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 		var c_ = Hospice_6_9_000.Has_Hospice_Services();
 		var d_ = context.Operators.Or(b_, c_);
 		var e_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
@@ -519,7 +519,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			return w_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 		var f_ = this.Urine_Albumin_Creatinine_Ratio();
 		var g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
 		bool? h_(Observation uACRTest)
@@ -545,7 +545,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			return ai_;
 		};
 		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
-		var j_ = context.Operators.ExistsInList<Observation>(i_);
+		var j_ = context.Operators.Exists<Observation>(i_);
 		var k_ = context.Operators.And(e_, j_);
 
 		return k_;

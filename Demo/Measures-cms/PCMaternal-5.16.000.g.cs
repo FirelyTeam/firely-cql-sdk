@@ -172,7 +172,7 @@ public class PCMaternal_5_16_000
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
 			var j_ = context.Operators.Interval((int?)8, (int?)65, (bool?)true, (bool?)false);
-			var k_ = context.Operators.ElementInInterval<int?>(i_, j_, null);
+			var k_ = context.Operators.InInterval<int?>(i_, j_, null);
 
 			return k_;
 		};
@@ -212,7 +212,7 @@ public class PCMaternal_5_16_000
 					var by_ = context.Operators.Subtract(bw_, bx_);
 					var ca_ = context.Operators.Start(bv_);
 					var cb_ = context.Operators.Interval(by_, ca_, (bool?)true, (bool?)true);
-					var cc_ = context.Operators.ElementInInterval<CqlDateTime>(bu_, cb_, null);
+					var cc_ = context.Operators.InInterval<CqlDateTime>(bu_, cb_, null);
 					var ce_ = context.Operators.Start(bv_);
 					var cf_ = context.Operators.Not((bool?)(ce_ is null));
 					var cg_ = context.Operators.And(cc_, cf_);
@@ -231,7 +231,7 @@ public class PCMaternal_5_16_000
 					return cl_;
 				};
 				var ai_ = context.Operators.ListSortBy<Encounter>(ag_, ah_, System.ComponentModel.ListSortDirection.Ascending);
-				var aj_ = context.Operators.LastOfList<Encounter>(ai_);
+				var aj_ = context.Operators.Last<Encounter>(ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToInterval(aj_?.Period);
 				var al_ = context.Operators.Start(ak_);
 				var am_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -249,7 +249,7 @@ public class PCMaternal_5_16_000
 					var cr_ = context.Operators.Subtract(cp_, cq_);
 					var ct_ = context.Operators.Start(co_);
 					var cu_ = context.Operators.Interval(cr_, ct_, (bool?)true, (bool?)true);
-					var cv_ = context.Operators.ElementInInterval<CqlDateTime>(cn_, cu_, null);
+					var cv_ = context.Operators.InInterval<CqlDateTime>(cn_, cu_, null);
 					var cx_ = context.Operators.Start(co_);
 					var cy_ = context.Operators.Not((bool?)(cx_ is null));
 					var cz_ = context.Operators.And(cv_, cy_);
@@ -268,12 +268,12 @@ public class PCMaternal_5_16_000
 					return de_;
 				};
 				var av_ = context.Operators.ListSortBy<Encounter>(at_, au_, System.ComponentModel.ListSortDirection.Ascending);
-				var aw_ = context.Operators.LastOfList<Encounter>(av_);
+				var aw_ = context.Operators.Last<Encounter>(av_);
 				var ax_ = FHIRHelpers_4_3_000.ToInterval(aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
 				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), (bool?)true, (bool?)true);
-				var bc_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, bb_, null);
+				var bc_ = context.Operators.InInterval<CqlDateTime>(ac_, bb_, null);
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
 				{
@@ -285,7 +285,7 @@ public class PCMaternal_5_16_000
 					var dk_ = context.Operators.Subtract(di_, dj_);
 					var dm_ = context.Operators.Start(dh_);
 					var dn_ = context.Operators.Interval(dk_, dm_, (bool?)true, (bool?)true);
-					var do_ = context.Operators.ElementInInterval<CqlDateTime>(dg_, dn_, null);
+					var do_ = context.Operators.InInterval<CqlDateTime>(dg_, dn_, null);
 					var dq_ = context.Operators.Start(dh_);
 					var dr_ = context.Operators.Not((bool?)(dq_ is null));
 					var ds_ = context.Operators.And(do_, dr_);
@@ -304,7 +304,7 @@ public class PCMaternal_5_16_000
 					return dx_;
 				};
 				var bi_ = context.Operators.ListSortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
-				var bj_ = context.Operators.LastOfList<Encounter>(bi_);
+				var bj_ = context.Operators.Last<Encounter>(bi_);
 				var bk_ = FHIRHelpers_4_3_000.ToInterval(bj_?.Period);
 				var bl_ = context.Operators.Start(bk_);
 				var bn_ = context.Operators.Start(am_);
@@ -325,7 +325,7 @@ public class PCMaternal_5_16_000
 				return dz_;
 			};
 			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-			var k_ = context.Operators.LastOfList<Encounter>(j_);
+			var k_ = context.Operators.Last<Encounter>(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(k_?.Period);
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Observation_Services();
@@ -340,7 +340,7 @@ public class PCMaternal_5_16_000
 				var ef_ = context.Operators.Subtract(ed_, ee_);
 				var eh_ = context.Operators.Start(ec_);
 				var ei_ = context.Operators.Interval(ef_, eh_, (bool?)true, (bool?)true);
-				var ej_ = context.Operators.ElementInInterval<CqlDateTime>(eb_, ei_, null);
+				var ej_ = context.Operators.InInterval<CqlDateTime>(eb_, ei_, null);
 				var el_ = context.Operators.Start(ec_);
 				var em_ = context.Operators.Not((bool?)(el_ is null));
 				var en_ = context.Operators.And(ej_, em_);
@@ -359,7 +359,7 @@ public class PCMaternal_5_16_000
 				return es_;
 			};
 			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
-			var t_ = context.Operators.LastOfList<Encounter>(s_);
+			var t_ = context.Operators.Last<Encounter>(s_);
 			var u_ = FHIRHelpers_4_3_000.ToInterval(t_?.Period);
 			var v_ = context.Operators.Start(u_);
 			var w_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -390,7 +390,7 @@ public class PCMaternal_5_16_000
 				var m_ = QICoreCommon_2_0_000.toInterval(l_);
 				var n_ = context.Operators.Start(m_);
 				var o_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+				var p_ = context.Operators.InInterval<CqlDateTime>(n_, o_, null);
 				var q_ = context.Operators.And(k_, p_);
 
 				return q_;
@@ -479,9 +479,9 @@ public class PCMaternal_5_16_000
 			};
 			var r_ = QICoreCommon_2_0_000.earliest(q_());
 			var s_ = this.hospitalizationWithEDOBTriageObservation(TheEncounter);
-			var t_ = context.Operators.ElementInInterval<CqlDateTime>(r_, s_, null);
+			var t_ = context.Operators.InInterval<CqlDateTime>(r_, s_, null);
 			var u_ = context.Operators.And(p_, t_);
-			var x_ = context.Operators.ElementInInterval<CqlDateTime>((j_ as CqlDateTime), s_, null);
+			var x_ = context.Operators.InInterval<CqlDateTime>((j_ as CqlDateTime), s_, null);
 			var y_ = context.Operators.And(u_, x_);
 
 			return y_;
@@ -540,7 +540,7 @@ public class PCMaternal_5_16_000
 			return am_;
 		};
 		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
 		return (i_ as CqlDateTime);
@@ -617,7 +617,7 @@ public class PCMaternal_5_16_000
 			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
 			var w_ = context.Operators.Interval(u_, s_, (bool?)true, (bool?)true);
-			var x_ = context.Operators.ElementInInterval<CqlDateTime>(r_, w_, null);
+			var x_ = context.Operators.InInterval<CqlDateTime>(r_, w_, null);
 			var z_ = context.Operators.Not((bool?)(s_ is null));
 			var aa_ = context.Operators.And(x_, z_);
 			var ab_ = context.Operators.And(p_, aa_);
@@ -678,7 +678,7 @@ public class PCMaternal_5_16_000
 			return ap_;
 		};
 		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
 		return (i_ as CqlDateTime);
@@ -777,7 +777,7 @@ public class PCMaternal_5_16_000
 			var l_ = context.Operators.Quantity((decimal?)24m, "hours");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.Interval(m_, k_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(j_, o_, null);
+			var p_ = context.Operators.InInterval<CqlDateTime>(j_, o_, null);
 			var r_ = context.Operators.Not((bool?)(k_ is null));
 			var s_ = context.Operators.And(p_, r_);
 			var t_ = FHIRHelpers_4_3_000.ToValue(EstimatedGestationalAge?.Value);
@@ -889,7 +889,7 @@ public class PCMaternal_5_16_000
 			};
 			var ag_ = QICoreCommon_2_0_000.earliest(af_());
 			var ah_ = this.hospitalizationWithEDOBTriageObservation(TheEncounter);
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(ag_, ah_, null);
+			var ai_ = context.Operators.InInterval<CqlDateTime>(ag_, ah_, null);
 			var aj_ = context.Operators.And(ae_, ai_);
 			var al_ = context.Operators.Not((bool?)(t_ is null));
 			var am_ = context.Operators.And(aj_, al_);
@@ -951,7 +951,7 @@ public class PCMaternal_5_16_000
 			return bz_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.LastOfList<Observation>(f_);
+		var g_ = context.Operators.Last<Observation>(f_);
 		var h_ = FHIRHelpers_4_3_000.ToValue(g_?.Value);
 
 		return (h_ as CqlQuantity);

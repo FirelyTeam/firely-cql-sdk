@@ -181,7 +181,7 @@ public class TJCOverall_8_11_000
 			var e_ = FHIRHelpers_4_3_000.ToInterval(NonElectiveEncounter?.Period);
 			var f_ = context.Operators.End(e_);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.ElementInInterval<CqlDateTime>(f_, g_, "day");
+			var h_ = context.Operators.InInterval<CqlDateTime>(f_, g_, "day");
 
 			return h_;
 		};
@@ -368,7 +368,7 @@ public class TJCOverall_8_11_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(IschemicStrokeEncounter);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.InInterval<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
@@ -403,7 +403,7 @@ public class TJCOverall_8_11_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(IschemicStrokeEncounter);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.InInterval<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};

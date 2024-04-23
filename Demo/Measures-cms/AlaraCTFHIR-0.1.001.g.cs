@@ -303,7 +303,7 @@ public class AlaraCTFHIR_0_1_001
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Qualifying_CTScan();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}
@@ -315,7 +315,7 @@ public class AlaraCTFHIR_0_1_001
 	private bool? Denominator_Value()
 	{
 		var a_ = this.Qualifying_CTScan_with_Values();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}
@@ -345,7 +345,7 @@ public class AlaraCTFHIR_0_1_001
 			return j_;
 		};
 		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 
 		return d_;
 	}
@@ -454,7 +454,7 @@ public class AlaraCTFHIR_0_1_001
 			return e_;
 		};
 		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 
 		return d_;
 	}

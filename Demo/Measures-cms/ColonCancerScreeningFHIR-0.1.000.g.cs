@@ -238,9 +238,9 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)46, (int?)75, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 
 		return k_;
@@ -314,10 +314,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 	{
 		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 		var b_ = this.Malignant_Neoplasm();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 		var e_ = this.Total_Colectomy_Performed();
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 		var g_ = context.Operators.Or(d_, f_);
 		var h_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty();
 		var i_ = context.Operators.Or(g_, h_);
@@ -390,7 +390,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, "day");
 			var l_ = context.Operators.And(g_, k_);
 
 			return l_;
@@ -466,7 +466,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, "day");
+			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, "day");
 			var r_ = context.Operators.And(g_, q_);
 
 			return r_;
@@ -496,7 +496,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, "day");
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, "day");
 
 			return p_;
 		};
@@ -525,7 +525,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, "day");
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, "day");
 
 			return p_;
 		};
@@ -554,7 +554,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, "day");
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, "day");
 
 			return p_;
 		};
@@ -570,18 +570,18 @@ public class ColonCancerScreeningFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Fecal_Occult_Blood_Test_Performed();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Stool_DNA_with_FIT_Test_Performed();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Flexible_Sigmoidoscopy_Performed();
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 		var h_ = context.Operators.Or(e_, g_);
 		var i_ = this.CT_Colonography_Performed();
-		var j_ = context.Operators.ExistsInList<Observation>(i_);
+		var j_ = context.Operators.Exists<Observation>(i_);
 		var k_ = context.Operators.Or(h_, j_);
 		var l_ = this.Colonoscopy_Performed();
-		var m_ = context.Operators.ExistsInList<Procedure>(l_);
+		var m_ = context.Operators.Exists<Procedure>(l_);
 		var n_ = context.Operators.Or(k_, m_);
 
 		return n_;
@@ -600,7 +600,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)46, (int?)49, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -618,7 +618,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)50, (int?)75, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 
 		return h_;
 	}

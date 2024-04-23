@@ -356,7 +356,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var f_ = context.Operators.Convert<CqlDateTime>(e_);
 		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 		var h_ = context.Operators.Interval((int?)52, (int?)74, true, true);
-		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
 		var k_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
 		var l_ = context.Operators.And(i_, k_);
 		var m_ = this.Enrolled_During_Participation_Period();
@@ -641,21 +641,21 @@ public class BCSEHEDISMY2022_1_0_0
 	private bool? Mastectomy_Exclusion_Value()
 	{
 		var a_ = this.Right_Mastectomy_Diagnosis();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 		var c_ = this.Right_Mastectomy_Procedure();
-		var d_ = context.Operators.ExistsInList<Procedure>(c_);
+		var d_ = context.Operators.Exists<Procedure>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Left_Mastectomy_Diagnosis();
-		var g_ = context.Operators.ExistsInList<Condition>(f_);
+		var g_ = context.Operators.Exists<Condition>(f_);
 		var h_ = this.Left_Mastectomy_Procedure();
-		var i_ = context.Operators.ExistsInList<Procedure>(h_);
+		var i_ = context.Operators.Exists<Procedure>(h_);
 		var j_ = context.Operators.Or(g_, i_);
 		var k_ = context.Operators.And(e_, j_);
 		var l_ = this.Bilateral_Mastectomy_Diagnosis();
-		var m_ = context.Operators.ExistsInList<Condition>(l_);
+		var m_ = context.Operators.Exists<Condition>(l_);
 		var n_ = context.Operators.Or(k_, m_);
 		var o_ = this.Bilateral_Mastectomy_Procedure();
-		var p_ = context.Operators.ExistsInList<Procedure>(o_);
+		var p_ = context.Operators.Exists<Procedure>(o_);
 		var q_ = context.Operators.Or(n_, p_);
 
 		return q_;
@@ -692,12 +692,12 @@ public class BCSEHEDISMY2022_1_0_0
 			var f_ = NCQAFHIRBase_1_0_0.Normalize_Interval(Mammogram?.Effective);
 			var g_ = context.Operators.End(f_);
 			var h_ = this.Participation_Period();
-			var i_ = context.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.InInterval<CqlDateTime>(g_, h_, null);
 
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 
 		return e_;
 	}

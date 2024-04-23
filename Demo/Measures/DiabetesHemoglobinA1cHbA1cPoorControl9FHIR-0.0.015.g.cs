@@ -324,11 +324,11 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var f_ = context.Operators.Convert<CqlDateTime>(e_);
 		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 		var h_ = context.Operators.Interval((int?)18, (int?)75, true, false);
-		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
 		var j_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var k_ = this.Telehealth_Services();
 		var l_ = context.Operators.ListUnion<Encounter>(j_, k_);
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
+		var m_ = context.Operators.Exists<Encounter>(l_);
 		var n_ = context.Operators.And(i_, m_);
 		var o_ = this.Diabetes();
 		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
@@ -341,7 +341,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			return w_;
 		};
 		var r_ = context.Operators.WhereOrNull<Condition>(p_, q_);
-		var s_ = context.Operators.ExistsInList<Condition>(r_);
+		var s_ = context.Operators.Exists<Condition>(r_);
 		var t_ = context.Operators.And(n_, s_);
 
 		return t_;
@@ -378,7 +378,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(RecentHbA1c?.Effective);
 			var l_ = this.Measurement_Period();
-			var m_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, null);
+			var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
 			var n_ = context.Operators.And(j_, m_);
 
 			return n_;
@@ -392,7 +392,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			return p_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.LastOfList<Observation>(f_);
+		var g_ = context.Operators.Last<Observation>(f_);
 
 		return g_;
 	}
@@ -444,13 +444,13 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			var i_ = context.Operators.InList<string>(g_, (h_ as IEnumerable<string>));
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(NoHbA1c?.Effective);
 			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, null);
+			var l_ = context.Operators.InInterval<CqlDateTime>(j_, k_, null);
 			var m_ = context.Operators.And(i_, l_);
 
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 		var f_ = context.Operators.Not(e_);
 
 		return f_;

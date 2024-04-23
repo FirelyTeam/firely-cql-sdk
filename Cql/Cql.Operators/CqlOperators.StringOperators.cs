@@ -59,7 +59,7 @@ namespace Hl7.Cql.Runtime
 
         #region IndexOf
 
-        public int? IndexOf(string? pattern, string? argument)
+        public int? PositionOf(string? pattern, string? argument)
         {
             if (argument == null || pattern == null)
                 return null;

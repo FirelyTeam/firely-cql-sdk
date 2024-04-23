@@ -58,7 +58,7 @@ public class NCQAEncounter_1_0_0
 				return l_;
 			};
 			var g_ = context.Operators.WhereOrNull<Condition>(Conditions, f_);
-			var h_ = context.Operators.ExistsInList<Condition>(g_);
+			var h_ = context.Operators.Exists<Condition>(g_);
 
 			return h_;
 		};
@@ -97,7 +97,7 @@ public class NCQAEncounter_1_0_0
 				return q_;
 			};
 			var l_ = context.Operators.WhereOrNull<Condition>(Conditions, k_);
-			var m_ = context.Operators.ExistsInList<Condition>(l_);
+			var m_ = context.Operators.Exists<Condition>(l_);
 
 			return m_;
 		};
@@ -115,12 +115,12 @@ public class NCQAEncounter_1_0_0
 		{
 			var e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((EncounterPeriod?.Period as object));
 			var f_ = context.Operators.End(e_);
-			var g_ = context.Operators.ElementInInterval<CqlDateTime>(f_, timeperiod, null);
+			var g_ = context.Operators.InInterval<CqlDateTime>(f_, timeperiod, null);
 
 			return g_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}

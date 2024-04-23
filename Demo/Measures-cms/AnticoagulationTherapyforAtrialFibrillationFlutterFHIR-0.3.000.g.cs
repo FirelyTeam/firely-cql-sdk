@@ -242,7 +242,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				return y_;
 			};
 			var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
-			var p_ = context.Operators.ExistsInList<Procedure>(o_);
+			var p_ = context.Operators.Exists<Procedure>(o_);
 
 			return p_;
 		};
@@ -409,7 +409,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				return ah_;
 			};
 			var ad_ = context.Operators.WhereOrNull<Condition>(ab_, ac_);
-			var ae_ = context.Operators.ExistsInList<Condition>(ad_);
+			var ae_ = context.Operators.Exists<Condition>(ad_);
 
 			return ae_;
 		};
@@ -451,7 +451,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.InInterval<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
@@ -546,7 +546,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				var z_ = context.Operators.And(w_, y_);
 				var aa_ = context.Operators.Convert<CqlDateTime>(DischargeAnticoagulant?.AuthoredOnElement);
 				var ab_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
-				var ac_ = context.Operators.ElementInInterval<CqlDateTime>(aa_, ab_, null);
+				var ac_ = context.Operators.InInterval<CqlDateTime>(aa_, ab_, null);
 				var ad_ = context.Operators.And(z_, ac_);
 
 				return ad_;
@@ -629,7 +629,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			{
 				var i_ = context.Operators.Convert<CqlDateTime>(NoDischargeAnticoagulant?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};

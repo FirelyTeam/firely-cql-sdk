@@ -200,7 +200,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			return z_;
 		};
 		var s_ = context.Operators.WhereOrNull<Encounter>(q_, r_);
-		var t_ = context.Operators.ExistsInList<Encounter>(s_);
+		var t_ = context.Operators.Exists<Encounter>(s_);
 
 		return t_;
 	}
@@ -234,7 +234,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			var w_ = context.Operators.Date(v_, (int?)10, (int?)31);
 			var x_ = context.Operators.ConvertDateToDateTime(w_);
 			var y_ = context.Operators.Interval(s_, x_, (bool?)true, (bool?)true);
-			var z_ = context.Operators.ElementInInterval<CqlDateTime>(q_, y_, "day");
+			var z_ = context.Operators.InInterval<CqlDateTime>(q_, y_, "day");
 			var aa_ = context.Operators.And(p_, z_);
 
 			return aa_;
@@ -255,7 +255,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 		object g_(Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK @this) => 
 			@this?.AuthorDate;
 		var h_ = context.Operators.ListSortBy<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-		var i_ = context.Operators.FirstOfList<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(h_);
+		var i_ = context.Operators.First<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(h_);
 
 		return i_;
 	}
@@ -371,7 +371,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				var t_ = context.Operators.And(q_, s_);
 				var v_ = context.Operators.End(n_);
 				var w_ = this.Measurement_Period();
-				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, "day");
+				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, "day");
 				var y_ = context.Operators.And(t_, x_);
 
 				return y_;
@@ -384,7 +384,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			return k_;
 		};
 		var d_ = context.Operators.SelectManyOrNull<Task, Task>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Task>(d_);
+		var e_ = context.Operators.Exists<Task>(d_);
 
 		return e_;
 	}

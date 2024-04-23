@@ -365,7 +365,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var e_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 			var f_ = context.Operators.End(e_);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.ElementInInterval<CqlDateTime>(f_, g_, "day");
+			var h_ = context.Operators.InInterval<CqlDateTime>(f_, g_, "day");
 			var i_ = this.Patient();
 			var j_ = context.Operators.Convert<CqlDate>(i_?.BirthDateElement?.Value);
 			var l_ = context.Operators.Start(e_);
@@ -449,7 +449,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_bdofeusqkmfbeyculsqybijjc.HospitalDietitianReferral?.Performed);
 			var t_ = QICoreCommon_2_0_000.earliest(s_);
 			var u_ = CQMCommon_2_0_000.hospitalizationWithObservation(tuple_bdofeusqkmfbeyculsqybijjc.QualifyingEncounter);
-			var v_ = context.Operators.ElementInInterval<CqlDateTime>(t_, u_, null);
+			var v_ = context.Operators.InInterval<CqlDateTime>(t_, u_, null);
 			var w_ = context.Operators.And(r_, v_);
 
 			return w_;
@@ -614,7 +614,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var f_ = this.Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk();
 			var g_ = context.Operators.ListContains<Encounter>(f_, QualifyingEncounter);
 			var h_ = this.Encounter_with_Hospital_Dietitian_Referral();
-			var i_ = context.Operators.ExistsInList<Encounter>(h_);
+			var i_ = context.Operators.Exists<Encounter>(h_);
 			var j_ = context.Operators.Not(i_);
 			var k_ = context.Operators.And(g_, j_);
 
@@ -915,7 +915,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var o_ = QICoreCommon_2_0_000.prevalenceInterval(tuple_dtggaxnybdkagbeeecexhumkb.MalnutritionDiagnosis);
 			var p_ = context.Operators.Start(o_);
 			var q_ = CQMCommon_2_0_000.hospitalizationWithObservation(tuple_dtggaxnybdkagbeeecexhumkb.QualifyingEncounter);
-			var r_ = context.Operators.ElementInInterval<CqlDateTime>(p_, q_, null);
+			var r_ = context.Operators.InInterval<CqlDateTime>(p_, q_, null);
 			var s_ = context.Operators.And(n_, r_);
 
 			return s_;
@@ -965,7 +965,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_ctmbkgnetphcwpstmvcrebeg.NutritionCarePlan?.Performed);
 			var t_ = QICoreCommon_2_0_000.earliest(s_);
 			var u_ = CQMCommon_2_0_000.hospitalizationWithObservation(tuple_ctmbkgnetphcwpstmvcrebeg.QualifyingEncounter);
-			var v_ = context.Operators.ElementInInterval<CqlDateTime>(t_, u_, null);
+			var v_ = context.Operators.InInterval<CqlDateTime>(t_, u_, null);
 			var w_ = context.Operators.And(r_, v_);
 
 			return w_;

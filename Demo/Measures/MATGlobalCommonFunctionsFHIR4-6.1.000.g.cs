@@ -516,7 +516,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			var j_ = context.Operators.And(f_, i_);
 			var l_ = context.Operators.End(g_);
 			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.ElementInInterval<CqlDateTime>(l_, m_, null);
+			var n_ = context.Operators.InInterval<CqlDateTime>(l_, m_, null);
 			var o_ = context.Operators.And(j_, n_);
 
 			return o_;
@@ -547,7 +547,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
 			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
-			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -564,7 +564,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return z_;
 		};
 		var f_ = context.Operators.ListSortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.LastOfList<Encounter>(f_);
+		var g_ = context.Operators.Last<Encounter>(f_);
 
 		return g_;
 	}
@@ -683,7 +683,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return h_;
 		};
 		var c_ = context.Operators.ListSortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
-		var d_ = context.Operators.FirstOfList<Encounter.LocationComponent>(c_);
+		var d_ = context.Operators.First<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_0_001.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
 
@@ -717,7 +717,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					var bv_ = context.Operators.Subtract(bt_, bu_);
 					var bx_ = context.Operators.Start(bs_);
 					var by_ = context.Operators.Interval(bv_, bx_, (bool?)true, (bool?)true);
-					var bz_ = context.Operators.ElementInInterval<CqlDateTime>(br_, by_, null);
+					var bz_ = context.Operators.InInterval<CqlDateTime>(br_, by_, null);
 					var cb_ = context.Operators.Start(bs_);
 					var cc_ = context.Operators.Not((bool?)(cb_ is null));
 					var cd_ = context.Operators.And(bz_, cc_);
@@ -733,7 +733,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					return cf_;
 				};
 				var ai_ = context.Operators.ListSortBy<Encounter>(ag_, ah_, System.ComponentModel.ListSortDirection.Ascending);
-				var aj_ = context.Operators.LastOfList<Encounter>(ai_);
+				var aj_ = context.Operators.Last<Encounter>(ai_);
 				var ak_ = FHIRHelpers_4_0_001.ToInterval(aj_?.Period);
 				var al_ = context.Operators.Start(ak_);
 				var am_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
@@ -751,7 +751,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					var cl_ = context.Operators.Subtract(cj_, ck_);
 					var cn_ = context.Operators.Start(ci_);
 					var co_ = context.Operators.Interval(cl_, cn_, (bool?)true, (bool?)true);
-					var cp_ = context.Operators.ElementInInterval<CqlDateTime>(ch_, co_, null);
+					var cp_ = context.Operators.InInterval<CqlDateTime>(ch_, co_, null);
 					var cr_ = context.Operators.Start(ci_);
 					var cs_ = context.Operators.Not((bool?)(cr_ is null));
 					var ct_ = context.Operators.And(cp_, cs_);
@@ -767,12 +767,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					return cv_;
 				};
 				var av_ = context.Operators.ListSortBy<Encounter>(at_, au_, System.ComponentModel.ListSortDirection.Ascending);
-				var aw_ = context.Operators.LastOfList<Encounter>(av_);
+				var aw_ = context.Operators.Last<Encounter>(av_);
 				var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
 				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), (bool?)true, (bool?)true);
-				var bc_ = context.Operators.ElementInInterval<CqlDateTime>(ac_, bb_, null);
+				var bc_ = context.Operators.InInterval<CqlDateTime>(ac_, bb_, null);
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
 				{
@@ -784,7 +784,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					var db_ = context.Operators.Subtract(cz_, da_);
 					var dd_ = context.Operators.Start(cy_);
 					var de_ = context.Operators.Interval(db_, dd_, (bool?)true, (bool?)true);
-					var df_ = context.Operators.ElementInInterval<CqlDateTime>(cx_, de_, null);
+					var df_ = context.Operators.InInterval<CqlDateTime>(cx_, de_, null);
 					var dh_ = context.Operators.Start(cy_);
 					var di_ = context.Operators.Not((bool?)(dh_ is null));
 					var dj_ = context.Operators.And(df_, di_);
@@ -800,7 +800,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					return dl_;
 				};
 				var bi_ = context.Operators.ListSortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
-				var bj_ = context.Operators.LastOfList<Encounter>(bi_);
+				var bj_ = context.Operators.Last<Encounter>(bi_);
 				var bk_ = FHIRHelpers_4_0_001.ToInterval(bj_?.Period);
 				var bl_ = context.Operators.Start(bk_);
 				var bn_ = context.Operators.Start(am_);
@@ -818,7 +818,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				return dn_;
 			};
 			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-			var k_ = context.Operators.LastOfList<Encounter>(j_);
+			var k_ = context.Operators.Last<Encounter>(j_);
 			var l_ = FHIRHelpers_4_0_001.ToInterval(k_?.Period);
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Observation_Services();
@@ -833,7 +833,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				var dt_ = context.Operators.Subtract(dr_, ds_);
 				var dv_ = context.Operators.Start(dq_);
 				var dw_ = context.Operators.Interval(dt_, dv_, (bool?)true, (bool?)true);
-				var dx_ = context.Operators.ElementInInterval<CqlDateTime>(dp_, dw_, null);
+				var dx_ = context.Operators.InInterval<CqlDateTime>(dp_, dw_, null);
 				var dz_ = context.Operators.Start(dq_);
 				var ea_ = context.Operators.Not((bool?)(dz_ is null));
 				var eb_ = context.Operators.And(dx_, ea_);
@@ -849,7 +849,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				return ed_;
 			};
 			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
-			var t_ = context.Operators.LastOfList<Encounter>(s_);
+			var t_ = context.Operators.Last<Encounter>(s_);
 			var u_ = FHIRHelpers_4_0_001.ToInterval(t_?.Period);
 			var v_ = context.Operators.Start(u_);
 			var w_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
@@ -1153,7 +1153,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public string GetId(string uri)
 	{
 		var a_ = context.Operators.Split(uri, "/");
-		var b_ = context.Operators.LastOfList<string>(a_);
+		var b_ = context.Operators.Last<string>(a_);
 
 		return b_;
 	}

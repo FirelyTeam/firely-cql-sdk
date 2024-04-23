@@ -433,7 +433,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 				return bo_;
 			};
 			var bj_ = context.Operators.WhereOrNull<CqlConcept>(bh_, bi_);
-			var bk_ = context.Operators.ExistsInList<CqlConcept>(bj_);
+			var bk_ = context.Operators.Exists<CqlConcept>(bj_);
 
 			return bk_;
 		};
@@ -488,7 +488,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 				return bx_;
 			};
 			var bs_ = context.Operators.WhereOrNull<CqlConcept>(bq_, br_);
-			var bt_ = context.Operators.ExistsInList<CqlConcept>(bs_);
+			var bt_ = context.Operators.Exists<CqlConcept>(bs_);
 
 			return bt_;
 		};
@@ -545,7 +545,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 				var r_ = context.Operators.Quantity((decimal?)3m, "days");
 				var s_ = context.Operators.Subtract(q_, r_);
 				var u_ = context.Operators.Interval(s_, q_, (bool?)true, (bool?)true);
-				var v_ = context.Operators.ElementInInterval<CqlDateTime>(p_, u_, null);
+				var v_ = context.Operators.InInterval<CqlDateTime>(p_, u_, null);
 				var x_ = context.Operators.Not((bool?)(q_ is null));
 				var y_ = context.Operators.And(v_, x_);
 
@@ -605,7 +605,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var l_ = context.Operators.Start(k_);
 			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_gcvgmboianaairpipicsbupec.VisitWithAntibiotic?.Period);
 			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(l_, n_, null);
+			var o_ = context.Operators.InInterval<CqlDateTime>(l_, n_, null);
 
 			return o_;
 		};
@@ -752,7 +752,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var s_ = context.Operators.End(n_);
 			var u_ = context.Operators.Add(s_, p_);
 			var v_ = context.Operators.Interval(q_, u_, (bool?)true, (bool?)true);
-			var w_ = context.Operators.ElementInInterval<CqlDateTime>(m_, v_, "day");
+			var w_ = context.Operators.InInterval<CqlDateTime>(m_, v_, "day");
 
 			return w_;
 		};
@@ -780,7 +780,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
 			var l_ = context.Operators.Interval((int?)3, (int?)17, (bool?)true, (bool?)true);
-			var m_ = context.Operators.ElementInInterval<int?>(k_, l_, null);
+			var m_ = context.Operators.InInterval<int?>(k_, l_, null);
 
 			return m_;
 		};
@@ -808,7 +808,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
 			var l_ = context.Operators.Interval((int?)18, (int?)64, (bool?)true, (bool?)true);
-			var m_ = context.Operators.ElementInInterval<int?>(k_, l_, null);
+			var m_ = context.Operators.InInterval<int?>(k_, l_, null);
 
 			return m_;
 		};

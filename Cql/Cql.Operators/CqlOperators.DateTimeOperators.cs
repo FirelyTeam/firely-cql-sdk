@@ -135,7 +135,7 @@ namespace Hl7.Cql.Runtime
             return argument.DateOnly;
         }
 
-        public CqlTime? TimeFrom(CqlDateTime? argument)
+        public CqlTime? TimeComponent(CqlDateTime? argument)
         {
             if (argument == null)
                 return null;

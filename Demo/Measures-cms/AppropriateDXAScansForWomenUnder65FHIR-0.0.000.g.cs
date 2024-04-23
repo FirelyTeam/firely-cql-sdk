@@ -781,7 +781,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				return af_;
 			};
 			var aa_ = context.Operators.WhereOrNull<CqlConcept>(y_, z_);
-			var ab_ = context.Operators.ExistsInList<CqlConcept>(aa_);
+			var ab_ = context.Operators.Exists<CqlConcept>(aa_);
 
 			return ab_;
 		};
@@ -826,12 +826,12 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)50, (int?)63, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
 		var k_ = context.Operators.Equal(j_, "female");
 		var l_ = context.Operators.And(h_, k_);
 		var m_ = this.Qualifying_Encounter();
-		var n_ = context.Operators.ExistsInList<Encounter>(m_);
+		var n_ = context.Operators.Exists<Encounter>(m_);
 		var o_ = context.Operators.And(l_, n_);
 
 		return o_;
@@ -879,7 +879,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return r_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.FirstOfList<Observation>(f_);
+		var g_ = context.Operators.First<Observation>(f_);
 
 		return g_;
 	}
@@ -926,7 +926,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var k_ = QICoreCommon_2_0_000.ToInterval(j_);
 			var l_ = context.Operators.Start(k_);
 			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.ElementInInterval<CqlDateTime>(l_, m_, null);
+			var n_ = context.Operators.InInterval<CqlDateTime>(l_, m_, null);
 			var o_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Value);
 			var p_ = context.Operators.Quantity((decimal?)2m, "{drinks}/d");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
@@ -944,7 +944,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return u_;
 		};
 		var h_ = context.Operators.ListSortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-		var i_ = context.Operators.FirstOfList<Observation>(h_);
+		var i_ = context.Operators.First<Observation>(h_);
 
 		return i_;
 	}
@@ -983,7 +983,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return j_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -1007,7 +1007,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return j_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -1128,7 +1128,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var w_ = context.Operators.ListUnion<object>((n_ as IEnumerable<object>), (v_ as IEnumerable<object>));
 		var x_ = this.Parent_History_of_Hip_Fracture_Assessment();
 		var y_ = context.Operators.ListUnion<object>((w_ as IEnumerable<object>), (x_ as IEnumerable<object>));
-		var z_ = context.Operators.ExistsInList<object>(y_);
+		var z_ = context.Operators.Exists<object>(y_);
 
 		return z_;
 	}
@@ -1245,11 +1245,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var a_ = this.Bilateral_Oophorectomy();
 		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		var c_ = this.ProcedureInPatientHistory(b_);
-		var d_ = context.Operators.ExistsInList<Procedure>(c_);
+		var d_ = context.Operators.Exists<Procedure>(c_);
 		var e_ = this.Evidence_of_Bilateral_Oophorectomy();
 		var f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, null);
 		var g_ = this.ProcedureInPatientHistory(f_);
-		var h_ = context.Operators.ExistsInList<Procedure>(g_);
+		var h_ = context.Operators.Exists<Procedure>(g_);
 		var i_ = context.Operators.Or(d_, h_);
 		var j_ = this.Unilateral_Oophorectomy__Unspecified_Laterality();
 		var k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
@@ -1271,7 +1271,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				return al_;
 			};
 			var ag_ = context.Operators.WhereOrNull<CqlConcept>(ae_, af_);
-			var ah_ = context.Operators.ExistsInList<CqlConcept>(ag_);
+			var ah_ = context.Operators.Exists<CqlConcept>(ag_);
 
 			return ah_;
 		};
@@ -1280,7 +1280,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var o_ = context.Operators.RetrieveByValueSet<Procedure>(n_, null);
 		var p_ = context.Operators.ListUnion<Procedure>(m_, o_);
 		var q_ = this.ProcedureInPatientHistory(p_);
-		var r_ = context.Operators.ExistsInList<Procedure>(q_);
+		var r_ = context.Operators.Exists<Procedure>(q_);
 		var t_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		bool? u_(Procedure UnilateralOophorectomy)
 		{
@@ -1300,7 +1300,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				return au_;
 			};
 			var ap_ = context.Operators.WhereOrNull<CqlConcept>(an_, ao_);
-			var aq_ = context.Operators.ExistsInList<CqlConcept>(ap_);
+			var aq_ = context.Operators.Exists<CqlConcept>(ap_);
 
 			return aq_;
 		};
@@ -1309,7 +1309,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var x_ = context.Operators.RetrieveByValueSet<Procedure>(w_, null);
 		var y_ = context.Operators.ListUnion<Procedure>(v_, x_);
 		var z_ = this.ProcedureInPatientHistory(y_);
-		var aa_ = context.Operators.ExistsInList<Procedure>(z_);
+		var aa_ = context.Operators.Exists<Procedure>(z_);
 		var ab_ = context.Operators.And(r_, aa_);
 		var ac_ = context.Operators.Or(i_, ab_);
 
@@ -1331,7 +1331,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
 		var h_ = context.Operators.ListUnion<Procedure>(e_, g_);
 		var i_ = this.ProcedureInPatientHistory(h_);
-		var j_ = context.Operators.ExistsInList<Procedure>(i_);
+		var j_ = context.Operators.Exists<Procedure>(i_);
 
 		return j_;
 	}
@@ -1403,12 +1403,12 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var bg_ = context.Operators.ListUnion<Condition>(bd_, bf_);
 		var bh_ = context.Operators.ListUnion<Condition>(bb_, bg_);
 		var bi_ = this.DiagnosisInPatientHistory(bh_);
-		var bj_ = context.Operators.ExistsInList<Condition>(bi_);
+		var bj_ = context.Operators.Exists<Condition>(bi_);
 		var bk_ = context.Operators.Or(a_, bj_);
 		var bl_ = this.Chemotherapy();
 		var bm_ = context.Operators.RetrieveByValueSet<Procedure>(bl_, null);
 		var bn_ = this.ProcedureInPatientHistory(bm_);
-		var bo_ = context.Operators.ExistsInList<Procedure>(bn_);
+		var bo_ = context.Operators.Exists<Procedure>(bn_);
 		var bp_ = context.Operators.Or(bk_, bo_);
 		var bq_ = this.Has_Double_or_Bilateral_Oophorectomy();
 		var br_ = context.Operators.Or(bp_, bq_);
@@ -1472,7 +1472,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.DXA_Scan_Order_During_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<ServiceRequest>(a_);
+		var b_ = context.Operators.Exists<ServiceRequest>(a_);
 
 		return b_;
 	}
@@ -1543,7 +1543,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
 			var aq_ = context.Operators.Start(ap_);
 			var ar_ = this.DXA_Scan_Order_During_Measurement_Period();
-			var as_ = context.Operators.FirstOfList<ServiceRequest>(ar_);
+			var as_ = context.Operators.First<ServiceRequest>(ar_);
 			var at_ = context.Operators.Convert<CqlDateTime>(as_?.AuthoredOnElement);
 			var au_ = context.Operators.Before(aq_, at_, null);
 
@@ -1561,7 +1561,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Numerator_Exclusion_Value()
 	{
 		var a_ = this.Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}
@@ -1591,7 +1591,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				return k_;
 			};
 			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
-			var i_ = context.Operators.ExistsInList<CqlConcept>(h_);
+			var i_ = context.Operators.Exists<CqlConcept>(h_);
 			var j_ = context.Operators.And(f_, i_);
 
 			return j_;

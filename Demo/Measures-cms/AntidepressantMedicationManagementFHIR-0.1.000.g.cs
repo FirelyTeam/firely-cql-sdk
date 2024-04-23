@@ -292,7 +292,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var o_ = context.Operators.Start(n_);
 			var p_ = context.Operators.ConvertDateToDateTime(o_);
 			var q_ = this.Intake_Period();
-			var r_ = context.Operators.ElementInInterval<CqlDateTime>(p_, q_, "day");
+			var r_ = context.Operators.InInterval<CqlDateTime>(p_, q_, "day");
 
 			return r_;
 		};
@@ -314,7 +314,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		object k_(Tuple_DicAHhNAXdJZgCSRQIFKiFWQI @this) => 
 			@this?.AntidepressantDate;
 		var l_ = context.Operators.ListSortBy<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-		var m_ = context.Operators.FirstOfList<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(l_);
+		var m_ = context.Operators.First<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(l_);
 
 		return m_?.AntidepressantDate;
 	}
@@ -338,7 +338,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var m_ = context.Operators.Subtract(f_, l_);
 			var p_ = context.Operators.Add(f_, l_);
 			var q_ = context.Operators.Interval(m_, p_, (bool?)true, (bool?)true);
-			var r_ = context.Operators.ElementInInterval<CqlDate>(j_, q_, null);
+			var r_ = context.Operators.InInterval<CqlDate>(j_, q_, null);
 			var t_ = context.Operators.Not((bool?)(f_ is null));
 			var u_ = context.Operators.And(r_, t_);
 			var v_ = context.Operators.And(g_, u_);
@@ -346,7 +346,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			return v_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -397,7 +397,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var al_ = context.Operators.Subtract(aj_, ak_);
 			var ao_ = context.Operators.Add(aj_, ak_);
 			var ap_ = context.Operators.Interval(al_, ao_, (bool?)true, (bool?)true);
-			var aq_ = context.Operators.ElementInInterval<CqlDate>(ai_, ap_, null);
+			var aq_ = context.Operators.InInterval<CqlDate>(ai_, ap_, null);
 			var as_ = context.Operators.Not((bool?)(aj_ is null));
 			var at_ = context.Operators.And(aq_, as_);
 
@@ -423,7 +423,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		var g_ = this.Has_Initial_Major_Depression_Diagnosis();
 		var h_ = context.Operators.And(f_, g_);
 		var i_ = this.Qualifying_Encounters();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 
 		return k_;
@@ -485,7 +485,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			return aa_;
 		};
 		var i_ = context.Operators.WhereOrNull<MedicationRequest>(g_, h_);
-		var j_ = context.Operators.ExistsInList<MedicationRequest>(i_);
+		var j_ = context.Operators.Exists<MedicationRequest>(i_);
 		var k_ = context.Operators.Or(a_, j_);
 
 		return k_;

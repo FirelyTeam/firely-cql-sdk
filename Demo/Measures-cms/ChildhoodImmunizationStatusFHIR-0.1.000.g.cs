@@ -877,7 +877,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				return ag_;
 			};
 			var ab_ = context.Operators.WhereOrNull<CqlConcept>(z_, aa_);
-			var ac_ = context.Operators.ExistsInList<CqlConcept>(ab_);
+			var ac_ = context.Operators.Exists<CqlConcept>(ab_);
 
 			return ac_;
 		};
@@ -918,7 +918,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Equal(f_, (int?)2);
 		var h_ = this.Qualifying_Encounters();
-		var i_ = context.Operators.ExistsInList<Encounter>(h_);
+		var i_ = context.Operators.Exists<Encounter>(h_);
 		var j_ = context.Operators.And(g_, i_);
 
 		return j_;
@@ -980,12 +980,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
 		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Condition>(e_);
+		var f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1005,12 +1005,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
 		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Condition>(e_);
+		var f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1030,12 +1030,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
 		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Condition>(e_);
+		var f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1055,12 +1055,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
 		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Condition>(e_);
+		var f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1080,12 +1080,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
 		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Condition>(e_);
+		var f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1253,7 +1253,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var j_ = context.Operators.Start(i_);
 			var k_ = context.Operators.DateFrom(j_);
 			var l_ = this.First_Two_Years();
-			var m_ = context.Operators.ElementInInterval<CqlDate>(k_, l_, "day");
+			var m_ = context.Operators.InInterval<CqlDate>(k_, l_, "day");
 
 			return m_;
 		};
@@ -1380,7 +1380,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1473,7 +1473,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1497,7 +1497,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.ElementInInterval<CqlDate>(h_, i_, "day");
+			var j_ = context.Operators.InInterval<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1521,7 +1521,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.ElementInInterval<CqlDate>(h_, i_, "day");
+			var j_ = context.Operators.InInterval<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1545,7 +1545,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.ElementInInterval<CqlDate>(h_, i_, "day");
+			var j_ = context.Operators.InInterval<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1708,7 +1708,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				var k_ = context.Operators.Quantity((decimal?)1m, "day");
 				var l_ = context.Operators.Subtract(AllHibDoses2, k_);
 				var m_ = context.Operators.Interval(l_, AllHibDoses2, (bool?)false, (bool?)false);
-				var n_ = context.Operators.ElementInInterval<CqlDate>(AllHibDoses1, m_, null);
+				var n_ = context.Operators.InInterval<CqlDate>(AllHibDoses1, m_, null);
 
 				return n_;
 			};
@@ -1741,7 +1741,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate i_(CqlDate HibVaccinations) => 
 				HibVaccinations;
 			var j_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
-			var k_ = context.Operators.ListDistinct<CqlDate>(j_);
+			var k_ = context.Operators.Distinct<CqlDate>(j_);
 			var l_ = context.Operators.Count<CqlDate>(k_);
 			var m_ = context.Operators.GreaterOrEqual(l_, (int?)4);
 			var n_ = context.Operators.And(g_, m_);
@@ -1749,7 +1749,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var q_ = context.Operators.Greater(p_, (int?)0);
 			var r_ = context.Operators.IsFalse(q_);
 			var u_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
-			var v_ = context.Operators.ListDistinct<CqlDate>(u_);
+			var v_ = context.Operators.Distinct<CqlDate>(u_);
 			var w_ = context.Operators.Count<CqlDate>(v_);
 			var x_ = context.Operators.GreaterOrEqual(w_, (int?)3);
 			var y_ = context.Operators.And(r_, x_);
@@ -1758,7 +1758,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return z_;
 		};
 		var c_ = context.Operators.WhereOrNull<CqlDate>(a_, b_);
-		var d_ = context.Operators.ExistsInList<CqlDate>(c_);
+		var d_ = context.Operators.Exists<CqlDate>(c_);
 
 		return d_;
 	}
@@ -1779,7 +1779,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1996,7 +1996,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.ElementInInterval<CqlDate>(l_, m_, "day");
+			var n_ = context.Operators.InInterval<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2063,7 +2063,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.ElementInInterval<CqlDate>(l_, m_, "day");
+			var n_ = context.Operators.InInterval<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2194,7 +2194,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -2261,7 +2261,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.ElementInInterval<CqlDate>(l_, m_, "day");
+			var n_ = context.Operators.InInterval<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2425,7 +2425,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				var k_ = context.Operators.Quantity((decimal?)1m, "day");
 				var l_ = context.Operators.Subtract(AllRotavirusDoses2, k_);
 				var m_ = context.Operators.Interval(l_, AllRotavirusDoses2, (bool?)false, (bool?)false);
-				var n_ = context.Operators.ElementInInterval<CqlDate>(AllRotavirusDoses1, m_, null);
+				var n_ = context.Operators.InInterval<CqlDate>(AllRotavirusDoses1, m_, null);
 
 				return n_;
 			};
@@ -2458,7 +2458,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate i_(CqlDate RotavirusVaccinations) => 
 				RotavirusVaccinations;
 			var j_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
-			var k_ = context.Operators.ListDistinct<CqlDate>(j_);
+			var k_ = context.Operators.Distinct<CqlDate>(j_);
 			var l_ = context.Operators.Count<CqlDate>(k_);
 			var m_ = context.Operators.GreaterOrEqual(l_, (int?)3);
 			var n_ = context.Operators.And(g_, m_);
@@ -2466,7 +2466,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var q_ = context.Operators.Greater(p_, (int?)0);
 			var r_ = context.Operators.IsFalse(q_);
 			var u_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
-			var v_ = context.Operators.ListDistinct<CqlDate>(u_);
+			var v_ = context.Operators.Distinct<CqlDate>(u_);
 			var w_ = context.Operators.Count<CqlDate>(v_);
 			var x_ = context.Operators.GreaterOrEqual(w_, (int?)2);
 			var y_ = context.Operators.And(r_, x_);
@@ -2475,7 +2475,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return z_;
 		};
 		var c_ = context.Operators.WhereOrNull<CqlDate>(a_, b_);
-		var d_ = context.Operators.ExistsInList<CqlDate>(c_);
+		var d_ = context.Operators.Exists<CqlDate>(c_);
 
 		return d_;
 	}
@@ -2496,7 +2496,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -2695,9 +2695,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Value()
 	{
 		var a_ = this.LAIV_Vaccinations();
-		var b_ = context.Operators.ExistsInList<CqlDate>(a_);
+		var b_ = context.Operators.Exists<CqlDate>(a_);
 		var c_ = this.Influenza_Immunizations_or_Procedures();
-		var d_ = context.Operators.ExistsInList<CqlDate>(c_);
+		var d_ = context.Operators.Exists<CqlDate>(c_);
 		var e_ = context.Operators.And(b_, d_);
 
 		return e_;
@@ -2719,7 +2719,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.ElementInInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -2735,74 +2735,74 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Four_DTaP_Vaccinations();
-		var b_ = context.Operators.ExistsInList<CqlDate>(a_);
+		var b_ = context.Operators.Exists<CqlDate>(a_);
 		var c_ = this.DTaP_Numerator_Inclusion_Conditions();
-		var d_ = context.Operators.ExistsInList<Condition>(c_);
+		var d_ = context.Operators.Exists<Condition>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Three_Polio_Vaccinations();
-		var g_ = context.Operators.ExistsInList<CqlDate>(f_);
+		var g_ = context.Operators.Exists<CqlDate>(f_);
 		var h_ = this.Polio_Numerator_Inclusion_Conditions();
-		var i_ = context.Operators.ExistsInList<Condition>(h_);
+		var i_ = context.Operators.Exists<Condition>(h_);
 		var j_ = context.Operators.Or(g_, i_);
 		var k_ = context.Operators.And(e_, j_);
 		var l_ = this.One_MMR_Vaccination();
-		var m_ = context.Operators.ExistsInList<object>(l_);
+		var m_ = context.Operators.Exists<object>(l_);
 		var n_ = this.MMR_Numerator_Inclusion_Conditions();
-		var o_ = context.Operators.ExistsInList<Condition>(n_);
+		var o_ = context.Operators.Exists<Condition>(n_);
 		var p_ = context.Operators.Or(m_, o_);
 		var q_ = this.Measles_Indicators();
-		var r_ = context.Operators.ExistsInList<Condition>(q_);
+		var r_ = context.Operators.Exists<Condition>(q_);
 		var s_ = this.Mumps_Indicators();
-		var t_ = context.Operators.ExistsInList<Condition>(s_);
+		var t_ = context.Operators.Exists<Condition>(s_);
 		var u_ = context.Operators.And(r_, t_);
 		var v_ = this.Rubella_Indicators();
-		var w_ = context.Operators.ExistsInList<Condition>(v_);
+		var w_ = context.Operators.Exists<Condition>(v_);
 		var x_ = context.Operators.And(u_, w_);
 		var y_ = context.Operators.Or(p_, x_);
 		var z_ = context.Operators.And(k_, y_);
 		var aa_ = this.Has_Appropriate_Number_of_Hib_Immunizations();
 		var ab_ = this.Hib_Numerator_Inclusion_Conditions();
-		var ac_ = context.Operators.ExistsInList<Condition>(ab_);
+		var ac_ = context.Operators.Exists<Condition>(ab_);
 		var ad_ = context.Operators.Or(aa_, ac_);
 		var ae_ = context.Operators.And(z_, ad_);
 		var af_ = this.Three_Hepatitis_B_Vaccinations();
-		var ag_ = context.Operators.ExistsInList<CqlDate>(af_);
+		var ag_ = context.Operators.Exists<CqlDate>(af_);
 		var ah_ = this.Meets_HepB_Vaccination_Requirement();
-		var ai_ = context.Operators.ExistsInList<CqlDate>(ah_);
+		var ai_ = context.Operators.Exists<CqlDate>(ah_);
 		var aj_ = this.Hepatitis_B_Numerator_Inclusion_Conditions();
-		var ak_ = context.Operators.ExistsInList<Condition>(aj_);
+		var ak_ = context.Operators.Exists<Condition>(aj_);
 		var al_ = context.Operators.Or(ai_, ak_);
 		var am_ = context.Operators.Or(ag_, al_);
 		var an_ = context.Operators.And(ae_, am_);
 		var ao_ = this.One_Chicken_Pox_Vaccination();
-		var ap_ = context.Operators.ExistsInList<object>(ao_);
+		var ap_ = context.Operators.Exists<object>(ao_);
 		var aq_ = this.Varicella_Zoster_Numerator_Inclusion_Conditions();
-		var ar_ = context.Operators.ExistsInList<Condition>(aq_);
+		var ar_ = context.Operators.Exists<Condition>(aq_);
 		var as_ = context.Operators.Or(ap_, ar_);
 		var at_ = context.Operators.And(an_, as_);
 		var au_ = this.Four_Pneumococcal_Conjugate_Vaccinations();
-		var av_ = context.Operators.ExistsInList<CqlDate>(au_);
+		var av_ = context.Operators.Exists<CqlDate>(au_);
 		var aw_ = this.Pneumococcal_Conjugate_Numerator_Inclusion_Conditions();
-		var ax_ = context.Operators.ExistsInList<Condition>(aw_);
+		var ax_ = context.Operators.Exists<Condition>(aw_);
 		var ay_ = context.Operators.Or(av_, ax_);
 		var az_ = context.Operators.And(at_, ay_);
 		var ba_ = this.One_Hepatitis_A_Vaccinations();
-		var bb_ = context.Operators.ExistsInList<object>(ba_);
+		var bb_ = context.Operators.Exists<object>(ba_);
 		var bc_ = this.Hepatitis_A_Numerator_Inclusion_Conditions();
-		var bd_ = context.Operators.ExistsInList<Condition>(bc_);
+		var bd_ = context.Operators.Exists<Condition>(bc_);
 		var be_ = context.Operators.Or(bb_, bd_);
 		var bf_ = context.Operators.And(az_, be_);
 		var bg_ = this.Has_Appropriate_Number_of_Rotavirus_Immunizations();
 		var bh_ = this.Rotavirus_Numerator_Inclusion_Conditions();
-		var bi_ = context.Operators.ExistsInList<Condition>(bh_);
+		var bi_ = context.Operators.Exists<Condition>(bh_);
 		var bj_ = context.Operators.Or(bg_, bi_);
 		var bk_ = context.Operators.And(bf_, bj_);
 		var bl_ = this.Two_Influenza_Vaccinations();
-		var bm_ = context.Operators.ExistsInList<CqlDate>(bl_);
+		var bm_ = context.Operators.Exists<CqlDate>(bl_);
 		var bn_ = this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination();
 		var bo_ = context.Operators.Or(bm_, bn_);
 		var bp_ = this.Influenza_Numerator_Inclusion_Conditions();
-		var bq_ = context.Operators.ExistsInList<Condition>(bp_);
+		var bq_ = context.Operators.Exists<Condition>(bp_);
 		var br_ = context.Operators.Or(bo_, bq_);
 		var bs_ = context.Operators.And(bk_, br_);
 

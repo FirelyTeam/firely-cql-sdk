@@ -1722,7 +1722,7 @@ public class CumulativeMedicationDuration_4_0_000
 			};
 			CqlInterval<CqlDate> e_(CqlInterval<CqlDate> X)
 			{
-				var j_ = context.Operators.LastOfList<CqlInterval<CqlDate>>(R);
+				var j_ = context.Operators.Last<CqlInterval<CqlDate>>(R);
 				var k_ = context.Operators.End(j_);
 				var l_ = context.Operators.Quantity((decimal?)1m, "day");
 				var m_ = context.Operators.Add(k_, l_);

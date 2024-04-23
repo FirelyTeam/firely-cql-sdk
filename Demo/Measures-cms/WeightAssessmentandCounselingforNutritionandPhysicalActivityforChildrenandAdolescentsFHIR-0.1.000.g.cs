@@ -526,9 +526,9 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)3, (int?)17, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var i_ = this.Qualifying_Encounter();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 
 		return k_;
@@ -575,7 +575,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	{
 		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 		var b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 
 		return d_;
@@ -666,12 +666,12 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	private bool? Numerator_1_Value()
 	{
 		var a_ = this.BMI_Percentile_in_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Height_in_Measurement_Period();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.And(b_, d_);
 		var f_ = this.Weight_in_Measurement_Period();
-		var g_ = context.Operators.ExistsInList<Observation>(f_);
+		var g_ = context.Operators.Exists<Observation>(f_);
 		var h_ = context.Operators.And(e_, g_);
 
 		return h_;
@@ -696,7 +696,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			return j_;
 		};
 		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -720,7 +720,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			return j_;
 		};
 		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -738,7 +738,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)3, (int?)11, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -756,7 +756,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)12, (int?)17, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 
 		return h_;
 	}

@@ -159,7 +159,7 @@ public class PalliativeCareFHIR_0_6_000
 				return af_;
 			};
 			var w_ = context.Operators.WhereOrNull<CodeableConcept>((PalliativeAssessment?.Category as IEnumerable<CodeableConcept>), v_);
-			var x_ = context.Operators.ExistsInList<CodeableConcept>(w_);
+			var x_ = context.Operators.Exists<CodeableConcept>(w_);
 			var y_ = context.Operators.And(u_, x_);
 			var z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(PalliativeAssessment?.Effective);
 			var aa_ = this.Measurement_Period();
@@ -169,7 +169,7 @@ public class PalliativeCareFHIR_0_6_000
 			return ac_;
 		};
 		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Observation>(e_);
+		var f_ = context.Operators.Exists<Observation>(e_);
 		var g_ = this.Palliative_Care_Encounter();
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
 		bool? i_(Encounter PalliativeEncounter)
@@ -184,7 +184,7 @@ public class PalliativeCareFHIR_0_6_000
 			return al_;
 		};
 		var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 		var l_ = context.Operators.Or(f_, k_);
 		var m_ = this.Palliative_Care_Intervention();
 		var n_ = context.Operators.RetrieveByValueSet<Procedure>(m_, null);
@@ -205,7 +205,7 @@ public class PalliativeCareFHIR_0_6_000
 			return as_;
 		};
 		var p_ = context.Operators.WhereOrNull<Procedure>(n_, o_);
-		var q_ = context.Operators.ExistsInList<Procedure>(p_);
+		var q_ = context.Operators.Exists<Procedure>(p_);
 		var r_ = context.Operators.Or(l_, q_);
 
 		return r_;

@@ -296,7 +296,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var j_ = context.Operators.GreaterOrEqual(i_, (int?)2);
 		var k_ = context.Operators.And(g_, j_);
 		var l_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter();
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
+		var m_ = context.Operators.Exists<Encounter>(l_);
 		var n_ = context.Operators.And(k_, m_);
 
 		return n_;
@@ -310,7 +310,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	{
 		var a_ = this.Initial_Population();
 		var b_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
-		var c_ = context.Operators.ExistsInList<Encounter>(b_);
+		var c_ = context.Operators.Exists<Encounter>(b_);
 		var d_ = context.Operators.And(a_, c_);
 
 		return d_;
@@ -369,7 +369,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return q_;
 		};
 		var g_ = context.Operators.WhereOrNull<MedicationRequest>(e_, f_);
-		var h_ = context.Operators.ExistsInList<MedicationRequest>(g_);
+		var h_ = context.Operators.Exists<MedicationRequest>(g_);
 
 		return h_;
 	}
@@ -391,7 +391,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return i_;
 		};
 		var g_ = context.Operators.WhereOrNull<MedicationRequest>(e_, f_);
-		var h_ = context.Operators.ExistsInList<MedicationRequest>(g_);
+		var h_ = context.Operators.Exists<MedicationRequest>(g_);
 
 		return h_;
 	}
@@ -474,7 +474,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				return av_;
 			};
 			var ac_ = context.Operators.ListSortBy<Observation>(aa_, ab_, System.ComponentModel.ListSortDirection.Ascending);
-			var ad_ = context.Operators.LastOfList<Observation>(ac_);
+			var ad_ = context.Operators.Last<Observation>(ac_);
 			var ae_ = context.Operators.Convert<Quantity>(ad_?.Value);
 			var af_ = FHIRHelpers_4_3_000.ToQuantity(ae_);
 			var ah_ = context.Operators.Less(af_, v_);
@@ -486,7 +486,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		Observation h_(Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv) => 
 			tuple_fgydjijbhixdbhjjiisjveojv.HeartRate;
 		var i_ = context.Operators.SelectOrNull<Tuple_FgYDjIJBhiXdBHJjiISjVeOjV, Observation>(g_, h_);
-		var j_ = context.Operators.ExistsInList<Observation>(i_);
+		var j_ = context.Operators.Exists<Observation>(i_);
 
 		return j_;
 	}
@@ -505,7 +505,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			{
 				var l_ = context.Operators.Convert<CqlDateTime>(NoBetaBlockerOrdered?.AuthoredOnElement);
 				var m_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
-				var n_ = context.Operators.ElementInInterval<CqlDateTime>(l_, m_, null);
+				var n_ = context.Operators.InInterval<CqlDateTime>(l_, m_, null);
 
 				return n_;
 			};
@@ -547,7 +547,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return ab_;
 		};
 		var e_ = context.Operators.WhereOrNull<MedicationRequest>(c_, d_);
-		var f_ = context.Operators.ExistsInList<MedicationRequest>(e_);
+		var f_ = context.Operators.Exists<MedicationRequest>(e_);
 
 		return f_;
 	}
@@ -574,7 +574,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -601,7 +601,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -628,7 +628,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -658,7 +658,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return p_;
 		};
 		var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
-		var h_ = context.Operators.ExistsInList<Condition>(g_);
+		var h_ = context.Operators.Exists<Condition>(g_);
 
 		return h_;
 	}
@@ -685,7 +685,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -715,7 +715,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return q_;
 		};
 		var h_ = context.Operators.WhereOrNull<AllergyIntolerance>(f_, g_);
-		var i_ = context.Operators.ExistsInList<AllergyIntolerance>(h_);
+		var i_ = context.Operators.Exists<AllergyIntolerance>(h_);
 
 		return i_;
 	}
@@ -742,7 +742,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -769,7 +769,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return m_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -812,7 +812,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			return t_;
 		};
 		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 
 		return g_;
 	}

@@ -787,7 +787,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				return au_;
 			};
 			var ap_ = context.Operators.WhereOrNull<CqlConcept>(an_, ao_);
-			var aq_ = context.Operators.ExistsInList<CqlConcept>(ap_);
+			var aq_ = context.Operators.Exists<CqlConcept>(ap_);
 
 			return aq_;
 		};
@@ -821,7 +821,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, (int?)65);
 		var h_ = this.Qualifying_Encounters();
-		var i_ = context.Operators.ExistsInList<Encounter>(h_);
+		var i_ = context.Operators.Exists<Encounter>(h_);
 		var j_ = context.Operators.And(g_, i_);
 
 		return j_;
@@ -866,7 +866,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			{
 				var k_ = context.Operators.Convert<CqlDateTime>(OrderMedication1?.AuthoredOnElement);
 				var l_ = this.Measurement_Period();
-				var m_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, null);
+				var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
 				var n_ = context.Operators.GreaterOrEqual(OrderMedication1?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value, (int?)1);
 				var o_ = context.Operators.And(m_, n_);
 				var q_ = context.Operators.DateFrom(k_);
@@ -874,15 +874,15 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				var s_ = context.Operators.DateFrom(r_);
 				var t_ = context.Operators.Equivalent(q_, s_);
 				var u_ = context.Operators.Not(t_);
-				var x_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, null);
+				var x_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
 				var y_ = context.Operators.And(u_, x_);
-				var ab_ = context.Operators.ElementInInterval<CqlDateTime>(r_, l_, null);
+				var ab_ = context.Operators.InInterval<CqlDateTime>(r_, l_, null);
 				var ac_ = context.Operators.And(y_, ab_);
 				var ad_ = context.Operators.Or(o_, ac_);
 				var af_ = context.Operators.DateFrom(k_);
 				var ah_ = context.Operators.DateFrom(r_);
 				var ai_ = context.Operators.Equivalent(af_, ah_);
-				var al_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, null);
+				var al_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
 				var am_ = context.Operators.And(ai_, al_);
 				var an_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OrderMedication1);
 				var ao_ = context.Operators.Start(an_);
@@ -897,11 +897,11 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				var ax_ = context.Operators.And(am_, aw_);
 				var az_ = context.Operators.Start(an_);
 				var ba_ = context.Operators.ConvertDateToDateTime(az_);
-				var bc_ = context.Operators.ElementInInterval<CqlDateTime>(ba_, l_, null);
+				var bc_ = context.Operators.InInterval<CqlDateTime>(ba_, l_, null);
 				var bd_ = context.Operators.And(ax_, bc_);
 				var bf_ = context.Operators.Start(ar_);
 				var bg_ = context.Operators.ConvertDateToDateTime(bf_);
-				var bi_ = context.Operators.ElementInInterval<CqlDateTime>(bg_, l_, null);
+				var bi_ = context.Operators.InInterval<CqlDateTime>(bg_, l_, null);
 				var bj_ = context.Operators.And(bd_, bi_);
 				var bk_ = context.Operators.Or(ad_, bj_);
 
@@ -1426,7 +1426,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		};
 		var g_ = context.Operators.WhereOrNull<MedicationRequest>(e_, f_);
 		var h_ = this.More_Than_One_Order(g_);
-		var i_ = context.Operators.ExistsInList<MedicationRequest>(h_);
+		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 		var j_ = this.Digoxin();
 		var k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
 		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
@@ -1441,7 +1441,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		};
 		var p_ = context.Operators.WhereOrNull<MedicationRequest>(n_, o_);
 		var q_ = this.More_Than_One_Order(p_);
-		var r_ = context.Operators.ExistsInList<MedicationRequest>(q_);
+		var r_ = context.Operators.Exists<MedicationRequest>(q_);
 		var s_ = context.Operators.Or(i_, r_);
 		var t_ = this.Doxepin();
 		var u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
@@ -1457,7 +1457,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		};
 		var z_ = context.Operators.WhereOrNull<MedicationRequest>(x_, y_);
 		var aa_ = this.More_Than_One_Order(z_);
-		var ab_ = context.Operators.ExistsInList<MedicationRequest>(aa_);
+		var ab_ = context.Operators.Exists<MedicationRequest>(aa_);
 		var ac_ = context.Operators.Or(s_, ab_);
 
 		return ac_;
@@ -1470,7 +1470,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	private bool? Numerator_1_Value()
 	{
 		var a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days();
-		var b_ = context.Operators.ExistsInList<MedicationRequest>(a_);
+		var b_ = context.Operators.Exists<MedicationRequest>(a_);
 		var c_ = this.Two_High_Risk_Medications_with_Prolonged_Duration();
 		var d_ = context.Operators.Or(b_, c_);
 		var e_ = this.High_Risk_Medications_with_Average_Daily_Dose_Criteria();
@@ -1490,7 +1490,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
 		var f_ = this.More_Than_One_Order(e_);
-		var g_ = context.Operators.ExistsInList<MedicationRequest>(f_);
+		var g_ = context.Operators.Exists<MedicationRequest>(f_);
 
 		return g_;
 	}
@@ -1510,7 +1510,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		{
 			var m_ = context.Operators.Convert<CqlDateTime>(AntipsychoticMedication?.AuthoredOnElement);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, null);
+			var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, null);
 
 			return o_;
 		};
@@ -1523,7 +1523,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		};
 		var j_ = context.Operators.SelectOrNull<MedicationRequest, CqlDateTime>(h_, i_);
 		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
-		var l_ = context.Operators.FirstOfList<CqlDateTime>(k_);
+		var l_ = context.Operators.First<CqlDateTime>(k_);
 
 		return l_;
 	}
@@ -1539,7 +1539,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
 		var f_ = this.More_Than_One_Order(e_);
-		var g_ = context.Operators.ExistsInList<MedicationRequest>(f_);
+		var g_ = context.Operators.Exists<MedicationRequest>(f_);
 
 		return g_;
 	}
@@ -1559,7 +1559,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		{
 			var m_ = context.Operators.Convert<CqlDateTime>(BenzodiazepineMedication?.AuthoredOnElement);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, null);
+			var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, null);
 
 			return o_;
 		};
@@ -1572,7 +1572,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		};
 		var j_ = context.Operators.SelectOrNull<MedicationRequest, CqlDateTime>(h_, i_);
 		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
-		var l_ = context.Operators.FirstOfList<CqlDateTime>(k_);
+		var l_ = context.Operators.First<CqlDateTime>(k_);
 
 		return l_;
 	}
@@ -1603,7 +1603,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			return an_;
 		};
 		var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
-		var i_ = context.Operators.ExistsInList<Condition>(h_);
+		var i_ = context.Operators.Exists<Condition>(h_);
 		var j_ = context.Operators.Not(i_);
 		var k_ = context.Operators.And(a_, j_);
 		var l_ = this.More_than_One_Benzodiazepine_Order();
@@ -1635,7 +1635,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			return av_;
 		};
 		var ab_ = context.Operators.WhereOrNull<Condition>(z_, aa_);
-		var ac_ = context.Operators.ExistsInList<Condition>(ab_);
+		var ac_ = context.Operators.Exists<Condition>(ab_);
 		var ad_ = context.Operators.Not(ac_);
 		var ae_ = context.Operators.And(l_, ad_);
 		var af_ = context.Operators.Or(k_, ae_);

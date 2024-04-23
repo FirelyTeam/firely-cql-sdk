@@ -313,7 +313,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var p_ = context.Operators.Less(o_, (int?)20);
 		var q_ = context.Operators.And(h_, p_);
 		var r_ = this.Qualifying_Encounters();
-		var s_ = context.Operators.ExistsInList<Encounter>(r_);
+		var s_ = context.Operators.Exists<Encounter>(r_);
 		var t_ = context.Operators.And(q_, s_);
 
 		return t_;
@@ -380,7 +380,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var f_ = context.Operators.Convert<CqlDateTime>(e_);
 		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 		var h_ = context.Operators.Interval((int?)5, (int?)11, true, true);
-		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
 
 		return i_;
 	}
@@ -399,7 +399,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var f_ = context.Operators.Convert<CqlDateTime>(e_);
 		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 		var h_ = context.Operators.Interval((int?)12, (int?)20, true, false);
-		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
 
 		return i_;
 	}
@@ -424,7 +424,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			return k_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Procedure>(d_);
+		var e_ = context.Operators.Exists<Procedure>(d_);
 
 		return e_;
 	}

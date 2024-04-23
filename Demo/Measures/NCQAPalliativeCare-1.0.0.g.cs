@@ -116,7 +116,7 @@ public class NCQAPalliativeCare_1_0_0
 			return an_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 		var f_ = this.Palliative_Care_Encounter();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = NCQAStatus_1_0_0.Finished_Encounter(g_);
@@ -138,7 +138,7 @@ public class NCQAPalliativeCare_1_0_0
 			return ba_;
 		};
 		var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 		var l_ = context.Operators.Or(e_, k_);
 		var m_ = this.Palliative_Care_Intervention();
 		var n_ = context.Operators.RetrieveByValueSet<Procedure>(m_, null);
@@ -161,7 +161,7 @@ public class NCQAPalliativeCare_1_0_0
 			return bn_;
 		};
 		var q_ = context.Operators.WhereOrNull<Procedure>(o_, p_);
-		var r_ = context.Operators.ExistsInList<Procedure>(q_);
+		var r_ = context.Operators.Exists<Procedure>(q_);
 		var s_ = context.Operators.Or(l_, r_);
 		var t_ = this.Encounter_for_palliative_care();
 		var u_ = context.Operators.ToList<CqlCode>(t_);
@@ -185,7 +185,7 @@ public class NCQAPalliativeCare_1_0_0
 			return ca_;
 		};
 		var y_ = context.Operators.WhereOrNull<Condition>(w_, x_);
-		var z_ = context.Operators.ExistsInList<Condition>(y_);
+		var z_ = context.Operators.Exists<Condition>(y_);
 		var aa_ = context.Operators.Or(s_, z_);
 
 		return aa_;

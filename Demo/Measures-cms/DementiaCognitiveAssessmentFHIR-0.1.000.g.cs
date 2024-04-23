@@ -374,7 +374,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Dementia_Encounter_During_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<Encounter>(a_);
+		var b_ = context.Operators.Exists<Encounter>(a_);
 		var c_ = this.Qualifying_Encounter_During_Measurement_Period();
 		var d_ = context.Operators.Count<Encounter>(c_);
 		var e_ = context.Operators.GreaterOrEqual(d_, (int?)2);
@@ -419,7 +419,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				var u_ = context.Operators.Subtract(s_, t_);
 				var w_ = context.Operators.End(r_);
 				var x_ = context.Operators.Interval(u_, w_, (bool?)true, (bool?)true);
-				var y_ = context.Operators.ElementInInterval<CqlDateTime>(q_, x_, "day");
+				var y_ = context.Operators.InInterval<CqlDateTime>(q_, x_, "day");
 				var aa_ = context.Operators.End(r_);
 				var ab_ = context.Operators.Not((bool?)(aa_ is null));
 				var ac_ = context.Operators.And(y_, ab_);
@@ -464,7 +464,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}
@@ -487,7 +487,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(NoCognitiveAssessment?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
-				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
@@ -533,7 +533,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private bool? Denominator_Exceptions_Value()
 	{
 		var a_ = this.Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}

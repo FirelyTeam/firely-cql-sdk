@@ -494,7 +494,7 @@ public class AHAOverall_2_6_000
 			return t_;
 		};
 		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Condition>(f_);
+		var g_ = context.Operators.Exists<Condition>(f_);
 
 		return g_;
 	}
@@ -537,7 +537,7 @@ public class AHAOverall_2_6_000
 			return t_;
 		};
 		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 
 		return g_;
 	}
@@ -580,7 +580,7 @@ public class AHAOverall_2_6_000
 			return t_;
 		};
 		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Condition>(f_);
+		var g_ = context.Operators.Exists<Condition>(f_);
 
 		return g_;
 	}
@@ -655,10 +655,10 @@ public class AHAOverall_2_6_000
 			return t_;
 		};
 		var j_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 		var l_ = context.Operators.And(g_, k_);
 		var m_ = this.Heart_Failure_Outpatient_Encounter();
-		var n_ = context.Operators.ExistsInList<Encounter>(m_);
+		var n_ = context.Operators.Exists<Encounter>(m_);
 		var o_ = context.Operators.And(l_, n_);
 
 		return o_;
@@ -702,7 +702,7 @@ public class AHAOverall_2_6_000
 			return t_;
 		};
 		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 
 		return g_;
 	}
@@ -719,7 +719,7 @@ public class AHAOverall_2_6_000
 		{
 			var e_ = context.Operators.Convert<CqlDateTime>(Order?.AuthoredOnElement);
 			var f_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
-			var g_ = context.Operators.ElementInInterval<CqlDateTime>(e_, f_, "day");
+			var g_ = context.Operators.InInterval<CqlDateTime>(e_, f_, "day");
 			var h_ = context.Operators.Convert<string>(Order?.StatusElement?.Value);
 			var i_ = new string[]
 			{
@@ -746,7 +746,7 @@ public class AHAOverall_2_6_000
 			return r_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}
@@ -766,7 +766,7 @@ public class AHAOverall_2_6_000
 			return i_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}
@@ -916,7 +916,7 @@ public class AHAOverall_2_6_000
 						return cs_;
 					};
 					var br_ = context.Operators.ListSortBy<CqlInterval<CqlDateTime>>(bp_, bq_, System.ComponentModel.ListSortDirection.Ascending);
-					var bs_ = context.Operators.FirstOfList<CqlInterval<CqlDateTime>>(br_);
+					var bs_ = context.Operators.First<CqlInterval<CqlDateTime>>(br_);
 					var bt_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
 					var bu_ = context.Operators.OverlapsAfter(bs_, bt_, "day");
 					var bv_ = context.Operators.Convert<string>(((Event as MedicationRequest)?.StatusElement)?.Value);
@@ -971,7 +971,7 @@ public class AHAOverall_2_6_000
 			return e_();
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}

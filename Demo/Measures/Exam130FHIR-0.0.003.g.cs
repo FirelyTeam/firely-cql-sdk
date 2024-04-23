@@ -577,11 +577,11 @@ public class Exam130FHIR_0_0_003
 		var f_ = context.Operators.Convert<CqlDateTime>(e_);
 		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 		var h_ = context.Operators.Interval((int?)51, (int?)75, true, false);
-		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
 		var j_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var k_ = this.Telehealth_Services();
 		var l_ = context.Operators.ListUnion<Encounter>(j_, k_);
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
+		var m_ = context.Operators.Exists<Encounter>(l_);
 		var n_ = context.Operators.And(i_, m_);
 
 		return n_;
@@ -678,13 +678,13 @@ public class Exam130FHIR_0_0_003
 	{
 		var a_ = HospiceFHIR4_2_3_000.Has_Hospice();
 		var b_ = this.Malignant_Neoplasm();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 		var e_ = this.Total_Colectomy_Performed();
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 		var g_ = context.Operators.Or(d_, f_);
 		var h_ = this.Total_Colectomy_Condition();
-		var i_ = context.Operators.ExistsInList<Condition>(h_);
+		var i_ = context.Operators.Exists<Condition>(h_);
 		var j_ = context.Operators.Or(g_, i_);
 		var k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var l_ = context.Operators.Or(j_, k_);
@@ -722,7 +722,7 @@ public class Exam130FHIR_0_0_003
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, false, false);
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(g_, n_, null);
+			var o_ = context.Operators.InInterval<CqlDateTime>(g_, n_, null);
 
 			return o_;
 		};
@@ -836,13 +836,13 @@ public class Exam130FHIR_0_0_003
 				return aa_;
 			};
 			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
 			var m_ = context.Operators.And(k_, l_);
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var o_ = this.Measurement_Period();
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+			var p_ = context.Operators.InInterval<CqlDateTime>(n_, o_, null);
 			var q_ = context.Operators.And(m_, p_);
 
 			return q_;
@@ -901,13 +901,13 @@ public class Exam130FHIR_0_0_003
 				return aa_;
 			};
 			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
 			var m_ = context.Operators.And(k_, l_);
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var o_ = this.Measurement_Period();
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, "day");
+			var p_ = context.Operators.InInterval<CqlDateTime>(n_, o_, "day");
 			var q_ = context.Operators.And(m_, p_);
 
 			return q_;
@@ -959,12 +959,12 @@ public class Exam130FHIR_0_0_003
 				return x_;
 			};
 			var f_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), e_);
-			var g_ = context.Operators.ExistsInList<CodeableConcept>(f_);
+			var g_ = context.Operators.Exists<CodeableConcept>(f_);
 			var h_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
 			var i_ = context.Operators.And(g_, h_);
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, "day");
+			var l_ = context.Operators.InInterval<CqlDateTime>(j_, k_, "day");
 			var m_ = context.Operators.And(i_, l_);
 
 			return m_;
@@ -997,7 +997,7 @@ public class Exam130FHIR_0_0_003
 			var j_ = context.Operators.And(h_, i_);
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var l_ = this.Measurement_Period();
-			var m_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, "day");
+			var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, "day");
 			var n_ = context.Operators.And(j_, m_);
 
 			return n_;
@@ -1024,7 +1024,7 @@ public class Exam130FHIR_0_0_003
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, true, true);
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(g_, n_, null);
+			var o_ = context.Operators.InInterval<CqlDateTime>(g_, n_, null);
 			var q_ = context.Operators.End(h_);
 			var r_ = context.Operators.Not((bool?)(q_ is null));
 			var s_ = context.Operators.And(o_, r_);
@@ -1141,7 +1141,7 @@ public class Exam130FHIR_0_0_003
 				return ak_;
 			};
 			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
 			var m_ = context.Operators.And(k_, l_);
@@ -1152,7 +1152,7 @@ public class Exam130FHIR_0_0_003
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, true, true);
-			var v_ = context.Operators.ElementInInterval<CqlDateTime>(n_, u_, null);
+			var v_ = context.Operators.InInterval<CqlDateTime>(n_, u_, null);
 			var x_ = context.Operators.End(o_);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
 			var z_ = context.Operators.And(v_, y_);
@@ -1214,7 +1214,7 @@ public class Exam130FHIR_0_0_003
 				return ak_;
 			};
 			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
 			var m_ = context.Operators.And(k_, l_);
@@ -1225,7 +1225,7 @@ public class Exam130FHIR_0_0_003
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, true, true);
-			var v_ = context.Operators.ElementInInterval<CqlDateTime>(n_, u_, "day");
+			var v_ = context.Operators.InInterval<CqlDateTime>(n_, u_, "day");
 			var x_ = context.Operators.End(o_);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
 			var z_ = context.Operators.And(v_, y_);
@@ -1280,7 +1280,7 @@ public class Exam130FHIR_0_0_003
 				return ah_;
 			};
 			var f_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), e_);
-			var g_ = context.Operators.ExistsInList<CodeableConcept>(f_);
+			var g_ = context.Operators.Exists<CodeableConcept>(f_);
 			var h_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
 			var i_ = context.Operators.And(g_, h_);
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
@@ -1290,7 +1290,7 @@ public class Exam130FHIR_0_0_003
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
-			var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, "day");
+			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, "day");
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -1331,7 +1331,7 @@ public class Exam130FHIR_0_0_003
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
-			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, "day");
+			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, "day");
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -1362,7 +1362,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1408,7 +1408,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, null);
+			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
 			var u_ = context.Operators.And(q_, t_);
@@ -1449,7 +1449,7 @@ public class Exam130FHIR_0_0_003
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
-			var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, null);
+			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -1480,7 +1480,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1519,7 +1519,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1553,7 +1553,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, null);
+			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
 			var u_ = context.Operators.And(q_, t_);
@@ -1584,7 +1584,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1623,7 +1623,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1657,7 +1657,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, null);
+			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
 			var u_ = context.Operators.And(q_, t_);
@@ -1677,18 +1677,18 @@ public class Exam130FHIR_0_0_003
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Colonoscopy_Performed();
-		var b_ = context.Operators.ExistsInList<Procedure>(a_);
+		var b_ = context.Operators.Exists<Procedure>(a_);
 		var c_ = this.Fecal_Occult_Blood_Test_Performed();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Flexible_Sigmoidoscopy_Performed();
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 		var h_ = context.Operators.Or(e_, g_);
 		var i_ = this.Fecal_Immunochemical_Test_DNA_Performed();
-		var j_ = context.Operators.ExistsInList<Observation>(i_);
+		var j_ = context.Operators.Exists<Observation>(i_);
 		var k_ = context.Operators.Or(h_, j_);
 		var l_ = this.CT_Colonography_Performed();
-		var m_ = context.Operators.ExistsInList<Observation>(l_);
+		var m_ = context.Operators.Exists<Observation>(l_);
 		var n_ = context.Operators.Or(k_, m_);
 
 		return n_;

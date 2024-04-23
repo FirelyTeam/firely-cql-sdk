@@ -292,9 +292,9 @@ public class DiabetesEyeExamFHIR_0_0_001
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)18, (int?)75, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var i_ = this.Qualifying_Encounters();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 		var l_ = this.Diabetes();
 		var m_ = context.Operators.RetrieveByValueSet<Condition>(l_, null);
@@ -307,7 +307,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 			return t_;
 		};
 		var o_ = context.Operators.WhereOrNull<Condition>(m_, n_);
-		var p_ = context.Operators.ExistsInList<Condition>(o_);
+		var p_ = context.Operators.Exists<Condition>(o_);
 		var q_ = context.Operators.And(k_, p_);
 
 		return q_;
@@ -358,7 +358,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 			return h_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -422,11 +422,11 @@ public class DiabetesEyeExamFHIR_0_0_001
 	{
 		var a_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period();
 		var b_ = this.Retinal_Exam_in_Measurement_Period();
-		var c_ = context.Operators.ExistsInList<Observation>(b_);
+		var c_ = context.Operators.Exists<Observation>(b_);
 		var d_ = context.Operators.And(a_, c_);
 		var f_ = context.Operators.Not(a_);
 		var g_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior();
-		var h_ = context.Operators.ExistsInList<Observation>(g_);
+		var h_ = context.Operators.Exists<Observation>(g_);
 		var i_ = context.Operators.And(f_, h_);
 		var j_ = context.Operators.Or(d_, i_);
 

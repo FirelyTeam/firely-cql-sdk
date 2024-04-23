@@ -94,7 +94,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			var l_ = context.Operators.Subtract(j_, k_);
 			var o_ = context.Operators.Add(j_, k_);
 			var p_ = context.Operators.Interval(l_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDate>(i_, p_, null);
+			var q_ = context.Operators.InInterval<CqlDate>(i_, p_, null);
 			var s_ = context.Operators.Not((bool?)(j_ is null));
 			var t_ = context.Operators.And(q_, s_);
 
@@ -173,7 +173,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				return r_;
 			};
 			var f_ = context.Operators.WhereOrNull<Coding>((C?.Type?.Coding as IEnumerable<Coding>), e_);
-			var g_ = context.Operators.ExistsInList<Coding>(f_);
+			var g_ = context.Operators.Exists<Coding>(f_);
 
 			return g_;
 		};
@@ -196,12 +196,12 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		{
 			bool b_()
 			{
-				var c_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, participationPeriod, null);
+				var c_ = context.Operators.InInterval<CqlDate>(AnchorDate, participationPeriod, null);
 				var d_ = context.Operators.Not(c_);
 
 				return (d_ ?? false);
 			};
-			if ((context.Operators.ElementInInterval<CqlDate>(AnchorDate, participationPeriod, null) ?? false))
+			if ((context.Operators.InInterval<CqlDate>(AnchorDate, participationPeriod, null) ?? false))
 			{
 				var e_ = this.All_Coverage_Info(Coverage, participationPeriod);
 				bool? f_(Tuples.Tuple_EEdUbUaNBDSUUQFEZDJDbZRcC @this)
@@ -217,12 +217,12 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				var j_ = context.Operators.FlattenList<CqlInterval<CqlDate>>(i_);
 				bool? k_(CqlInterval<CqlDate> FinalInterval)
 				{
-					var o_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, FinalInterval, null);
+					var o_ = context.Operators.InInterval<CqlDate>(AnchorDate, FinalInterval, null);
 
 					return o_;
 				};
 				var l_ = context.Operators.WhereOrNull<CqlInterval<CqlDate>>(j_, k_);
-				var m_ = context.Operators.ExistsInList<CqlInterval<CqlDate>>(l_);
+				var m_ = context.Operators.Exists<CqlInterval<CqlDate>>(l_);
 
 				return m_;
 			}
@@ -246,12 +246,12 @@ public class NCQAHealthPlanEnrollment_1_0_0
 					var ab_ = context.Operators.End(x_);
 					var ac_ = context.Operators.DateFrom(ab_);
 					var ad_ = context.Operators.Interval(z_, ac_, true, true);
-					var ae_ = context.Operators.ElementInInterval<CqlDate>(AnchorDate, ad_, null);
+					var ae_ = context.Operators.InInterval<CqlDate>(AnchorDate, ad_, null);
 
 					return ae_;
 				};
 				var u_ = context.Operators.WhereOrNull<Period>(s_, t_);
-				var v_ = context.Operators.ExistsInList<Period>(u_);
+				var v_ = context.Operators.Exists<Period>(u_);
 
 				return v_;
 			}
@@ -319,7 +319,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				return j_;
 			};
 			var f_ = context.Operators.WhereOrNull<Coding>((C?.Type?.Coding as IEnumerable<Coding>), e_);
-			var g_ = context.Operators.ExistsInList<Coding>(f_);
+			var g_ = context.Operators.Exists<Coding>(f_);
 
 			return g_;
 		};
@@ -386,7 +386,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				return j_;
 			};
 			var f_ = context.Operators.WhereOrNull<Coding>((C?.Type?.Coding as IEnumerable<Coding>), e_);
-			var g_ = context.Operators.ExistsInList<Coding>(f_);
+			var g_ = context.Operators.Exists<Coding>(f_);
 
 			return g_;
 		};

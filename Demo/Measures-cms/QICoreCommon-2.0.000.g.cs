@@ -892,7 +892,7 @@ public class QICoreCommon_2_0_000
 			return h_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -916,7 +916,7 @@ public class QICoreCommon_2_0_000
 			return h_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -941,7 +941,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -966,7 +966,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -991,7 +991,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1016,7 +1016,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1041,7 +1041,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1066,7 +1066,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1091,7 +1091,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1116,7 +1116,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1141,7 +1141,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1166,7 +1166,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1191,7 +1191,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1216,7 +1216,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1241,7 +1241,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1266,7 +1266,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1291,7 +1291,7 @@ public class QICoreCommon_2_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1978,7 +1978,7 @@ public class QICoreCommon_2_0_000
 	public string GetId(string uri)
 	{
 		var a_ = context.Operators.Split(uri, "/");
-		var b_ = context.Operators.LastOfList<string>(a_);
+		var b_ = context.Operators.Last<string>(a_);
 
 		return b_;
 	}
@@ -1989,7 +1989,7 @@ public class QICoreCommon_2_0_000
 	public string getId(string uri)
 	{
 		var a_ = context.Operators.Split(uri, "/");
-		var b_ = context.Operators.LastOfList<string>(a_);
+		var b_ = context.Operators.Last<string>(a_);
 
 		return b_;
 	}

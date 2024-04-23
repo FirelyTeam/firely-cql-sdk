@@ -101,7 +101,7 @@ public class NCQAHospice_1_0_0
 			return p_;
 		};
 		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 		var g_ = this.Hospice_Encounter();
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
 		var i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
@@ -114,7 +114,7 @@ public class NCQAHospice_1_0_0
 			return s_;
 		};
 		var k_ = context.Operators.WhereOrNull<Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.Or(f_, l_);
 
 		return m_;

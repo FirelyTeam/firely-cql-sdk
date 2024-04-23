@@ -297,7 +297,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			return l_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -354,7 +354,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			return ar_;
 		};
 		var ah_ = context.Operators.WhereOrNull<Encounter>(af_, ag_);
-		var ai_ = context.Operators.ExistsInList<Encounter>(ah_);
+		var ai_ = context.Operators.Exists<Encounter>(ah_);
 
 		return ai_;
 	}
@@ -485,7 +485,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, "day");
 
 			return k_;
 		};
@@ -499,7 +499,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			return z_;
 		};
 		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.LastOfList<Observation>(f_);
+		var g_ = context.Operators.Last<Observation>(f_);
 
 		return g_;
 	}

@@ -84,7 +84,7 @@ public class Antibiotic_1_5_000
 				var t_ = context.Operators.Start(s_);
 				var u_ = context.Operators.DateFrom(t_);
 				var v_ = context.Operators.Interval(q_, u_, (bool?)true, (bool?)true);
-				var w_ = context.Operators.ElementInInterval<CqlDate>(k_, v_, null);
+				var w_ = context.Operators.InInterval<CqlDate>(k_, v_, null);
 
 				return w_;
 			};
@@ -118,7 +118,7 @@ public class Antibiotic_1_5_000
 				var o_ = context.Operators.Quantity((decimal?)3m, "days");
 				var p_ = context.Operators.Add(n_, o_);
 				var q_ = context.Operators.Interval(l_, p_, (bool?)true, (bool?)true);
-				var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, "day");
+				var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, "day");
 				var t_ = context.Operators.Start(k_);
 				var u_ = context.Operators.Not((bool?)(t_ is null));
 				var v_ = context.Operators.And(r_, u_);
@@ -208,7 +208,7 @@ public class Antibiotic_1_5_000
 					return bt_;
 				};
 				var l_ = context.Operators.WhereOrNull<Timing>(j_, k_);
-				var m_ = context.Operators.ExistsInList<Timing>(l_);
+				var m_ = context.Operators.Exists<Timing>(l_);
 
 				return m_;
 			};

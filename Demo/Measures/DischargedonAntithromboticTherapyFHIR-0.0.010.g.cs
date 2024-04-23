@@ -288,7 +288,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				return al_;
 			};
 			var r_ = context.Operators.WhereOrNull<CodeableConcept>((NoAntithromboticDischarge?.Category as IEnumerable<CodeableConcept>), q_);
-			var s_ = context.Operators.ExistsInList<CodeableConcept>(r_);
+			var s_ = context.Operators.Exists<CodeableConcept>(r_);
 			var t_ = context.Operators.And(p_, s_);
 			var u_ = context.Operators.Convert<string>(NoAntithromboticDischarge?.StatusElement);
 			var v_ = new string[]
@@ -323,7 +323,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(NoDischargeAntithrombotic?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
@@ -366,7 +366,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				return aa_;
 			};
 			var i_ = context.Operators.WhereOrNull<CodeableConcept>((Pharmacological?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Convert<string>(Pharmacological?.StatusElement);
 			var m_ = new string[]
@@ -401,7 +401,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(DischargePharmacological?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
@@ -481,7 +481,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				return aa_;
 			};
 			var i_ = context.Operators.WhereOrNull<CodeableConcept>((Antithrombotic?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Convert<string>(Antithrombotic?.StatusElement);
 			var m_ = new string[]
@@ -516,7 +516,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(DischargeAntithrombotic?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};

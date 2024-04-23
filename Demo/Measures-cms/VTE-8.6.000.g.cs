@@ -121,7 +121,7 @@ public class VTE_8_6_000
 				return s_;
 			};
 			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-			var g_ = context.Operators.ExistsInList<Condition>(f_);
+			var g_ = context.Operators.Exists<Condition>(f_);
 			var h_ = context.Operators.Not(g_);
 
 			return h_;

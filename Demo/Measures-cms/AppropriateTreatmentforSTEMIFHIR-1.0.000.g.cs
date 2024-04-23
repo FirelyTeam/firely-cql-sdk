@@ -530,7 +530,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				return ab_;
 			};
 			var q_ = context.Operators.WhereOrNull<Condition>(o_, p_);
-			var r_ = context.Operators.ExistsInList<Condition>(q_);
+			var r_ = context.Operators.Exists<Condition>(q_);
 			var s_ = context.Operators.Or(n_, r_);
 			var t_ = context.Operators.And(j_, s_);
 			var u_ = this.Measurement_Period();
@@ -573,7 +573,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var v_ = QICoreCommon_2_0_000.prevalenceInterval(DxSTEMI);
 				var w_ = context.Operators.Start(v_);
 				var x_ = FHIRHelpers_4_3_000.ToInterval(EDEncounter?.Period);
-				var y_ = context.Operators.ElementInInterval<CqlDateTime>(w_, x_, null);
+				var y_ = context.Operators.InInterval<CqlDateTime>(w_, x_, null);
 				var z_ = context.Operators.And(u_, y_);
 				var aa_ = this.Measurement_Period();
 				var ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, x_, "day");
@@ -821,14 +821,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var p_ = QICoreCommon_2_0_000.prevalenceInterval(ExclusionDiagnosis);
 				var q_ = context.Operators.Start(p_);
 				var r_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
-				var s_ = context.Operators.ElementInInterval<CqlDateTime>(q_, r_, null);
+				var s_ = context.Operators.InInterval<CqlDateTime>(q_, r_, null);
 				var u_ = context.Operators.Start(p_);
 				var w_ = context.Operators.Start(r_);
 				var x_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var y_ = context.Operators.Subtract(w_, x_);
 				var aa_ = context.Operators.Start(r_);
 				var ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)false);
-				var ac_ = context.Operators.ElementInInterval<CqlDateTime>(u_, ab_, null);
+				var ac_ = context.Operators.InInterval<CqlDateTime>(u_, ab_, null);
 				var ae_ = context.Operators.Start(r_);
 				var af_ = context.Operators.Not((bool?)(ae_ is null));
 				var ag_ = context.Operators.And(ac_, af_);
@@ -870,7 +870,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
 				var s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)false);
-				var t_ = context.Operators.ElementInInterval<CqlDateTime>(l_, s_, null);
+				var t_ = context.Operators.InInterval<CqlDateTime>(l_, s_, null);
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
@@ -912,7 +912,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var n_ = QICoreCommon_2_0_000.toInterval(m_);
 				var o_ = context.Operators.Start(n_);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
-				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
 				var s_ = QICoreCommon_2_0_000.toInterval(m_);
 				var t_ = context.Operators.Start(s_);
 				var v_ = context.Operators.Start(p_);
@@ -920,7 +920,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(p_);
 				var aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)false);
-				var ab_ = context.Operators.ElementInInterval<CqlDateTime>(t_, aa_, null);
+				var ab_ = context.Operators.InInterval<CqlDateTime>(t_, aa_, null);
 				var ad_ = context.Operators.Start(p_);
 				var ae_ = context.Operators.Not((bool?)(ad_ is null));
 				var af_ = context.Operators.And(ab_, ae_);
@@ -973,7 +973,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(u_);
 				var aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)true);
-				var ab_ = context.Operators.ElementInInterval<CqlDateTime>(t_, aa_, null);
+				var ab_ = context.Operators.InInterval<CqlDateTime>(t_, aa_, null);
 
 				return ab_;
 			};
@@ -1011,7 +1011,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
 				var s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)false);
-				var t_ = context.Operators.ElementInInterval<CqlDateTime>(l_, s_, null);
+				var t_ = context.Operators.InInterval<CqlDateTime>(l_, s_, null);
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
@@ -1133,7 +1133,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var t_ = context.Operators.Quantity((decimal?)30m, "minutes");
 				var u_ = context.Operators.Add(r_, t_);
 				var v_ = context.Operators.Interval(r_, u_, (bool?)false, (bool?)true);
-				var w_ = context.Operators.ElementInInterval<CqlDateTime>(q_, v_, null);
+				var w_ = context.Operators.InInterval<CqlDateTime>(q_, v_, null);
 				var y_ = context.Operators.Not((bool?)(r_ is null));
 				var z_ = context.Operators.And(w_, y_);
 				var aa_ = context.Operators.And(n_, z_);
@@ -1172,7 +1172,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var o_ = context.Operators.Quantity((decimal?)90m, "minutes");
 				var p_ = context.Operators.Add(m_, o_);
 				var q_ = context.Operators.Interval(m_, p_, (bool?)false, (bool?)true);
-				var r_ = context.Operators.ElementInInterval<CqlDateTime>(l_, q_, null);
+				var r_ = context.Operators.InInterval<CqlDateTime>(l_, q_, null);
 				var t_ = context.Operators.Not((bool?)(m_ is null));
 				var u_ = context.Operators.And(r_, t_);
 				var v_ = context.Operators.Convert<string>(PCI?.StatusElement?.Value);
@@ -1209,7 +1209,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var j_ = context.Operators.Quantity((decimal?)45m, "minutes");
 			var k_ = context.Operators.Add(i_, j_);
 			var l_ = context.Operators.Interval(g_, k_, (bool?)false, (bool?)true);
-			var m_ = context.Operators.ElementInInterval<CqlDateTime>(e_, l_, null);
+			var m_ = context.Operators.InInterval<CqlDateTime>(e_, l_, null);
 			var o_ = context.Operators.Start(d_);
 			var p_ = context.Operators.Not((bool?)(o_ is null));
 			var q_ = context.Operators.And(m_, p_);

@@ -180,9 +180,9 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)18, (int?)75, (bool?)true, (bool?)true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 		var l_ = this.Diabetes();
 		var m_ = context.Operators.RetrieveByValueSet<Condition>(l_, null);
@@ -195,7 +195,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			return t_;
 		};
 		var o_ = context.Operators.WhereOrNull<Condition>(m_, n_);
-		var p_ = context.Operators.ExistsInList<Condition>(o_);
+		var p_ = context.Operators.Exists<Condition>(o_);
 		var q_ = context.Operators.And(k_, p_);
 
 		return q_;
@@ -288,7 +288,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			};
 			var j_ = QICoreCommon_2_0_000.Latest(i_());
 			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, "day");
+			var l_ = context.Operators.InInterval<CqlDateTime>(j_, k_, "day");
 
 			return l_;
 		};
@@ -302,7 +302,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			return aa_;
 		};
 		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var h_ = context.Operators.Last<Observation>(g_);
 
 		return h_;
 	}
@@ -394,12 +394,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, "day");
 
 			return k_;
 		};
 		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Observation>(e_);
+		var f_ = context.Operators.Exists<Observation>(e_);
 		var g_ = context.Operators.Not(f_);
 
 		return g_;

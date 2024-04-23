@@ -372,7 +372,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, (int?)65);
 		var h_ = this.Qualifying_Encounter();
-		var i_ = context.Operators.ExistsInList<Encounter>(h_);
+		var i_ = context.Operators.Exists<Encounter>(h_);
 		var j_ = context.Operators.And(g_, i_);
 
 		return j_;
@@ -419,7 +419,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 			return j_;
 		};
 		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Observation>(e_);
+		var f_ = context.Operators.Exists<Observation>(e_);
 
 		return f_;
 	}

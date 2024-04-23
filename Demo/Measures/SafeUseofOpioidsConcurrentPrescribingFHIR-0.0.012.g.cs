@@ -241,7 +241,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 					return aa_;
 				};
 				var v_ = context.Operators.WhereOrNull<CodeableConcept>((Medications?.Category as IEnumerable<CodeableConcept>), u_);
-				var w_ = context.Operators.ExistsInList<CodeableConcept>(v_);
+				var w_ = context.Operators.Exists<CodeableConcept>(v_);
 
 				return w_;
 			};
@@ -251,7 +251,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var ab_ = FHIRHelpers_4_0_001.ToDateTime(OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement);
 				var ac_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var ad_ = context.Operators.ElementInInterval<CqlDateTime>(ab_, ac_, null);
+				var ad_ = context.Operators.InInterval<CqlDateTime>(ab_, ac_, null);
 				var ae_ = context.Operators.Convert<string>(OpioidOrBenzodiazepineDischargeMedication?.StatusElement);
 				var af_ = context.Operators.Equal(ae_, "active");
 				var ag_ = context.Operators.And(ad_, af_);
@@ -343,7 +343,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var r_ = FHIRHelpers_4_0_001.ToDateTime(Opioids?.AuthoredOnElement);
 				var s_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var t_ = context.Operators.ElementInInterval<CqlDateTime>(r_, s_, null);
+				var t_ = context.Operators.InInterval<CqlDateTime>(r_, s_, null);
 
 				return t_;
 			};
@@ -365,7 +365,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var aa_ = FHIRHelpers_4_0_001.ToDateTime(OpioidsDischarge?.AuthoredOnElement);
 				var ab_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var ac_ = context.Operators.ElementInInterval<CqlDateTime>(aa_, ab_, null);
+				var ac_ = context.Operators.InInterval<CqlDateTime>(aa_, ab_, null);
 
 				return ac_;
 			};
@@ -385,7 +385,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var aj_ = FHIRHelpers_4_0_001.ToDateTime(BenzodiazepinesDischarge?.AuthoredOnElement);
 				var ak_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var al_ = context.Operators.ElementInInterval<CqlDateTime>(aj_, ak_, null);
+				var al_ = context.Operators.InInterval<CqlDateTime>(aj_, ak_, null);
 
 				return al_;
 			};
@@ -422,14 +422,14 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				return ad_;
 			};
 			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
-			var j_ = context.Operators.ExistsInList<Condition>(i_);
+			var j_ = context.Operators.Exists<Condition>(i_);
 			var k_ = this.Palliative_or_Hospice_Care();
 			var l_ = context.Operators.RetrieveByValueSet<ServiceRequest>(k_, null);
 			bool? m_(ServiceRequest PalliativeOrHospiceCareOrder)
 			{
 				var ae_ = FHIRHelpers_4_0_001.ToDateTime(PalliativeOrHospiceCareOrder?.AuthoredOnElement);
 				var af_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var ag_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, af_, null);
+				var ag_ = context.Operators.InInterval<CqlDateTime>(ae_, af_, null);
 				var ah_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.IntentElement);
 				var ai_ = context.Operators.Equal(ah_, "order");
 				var aj_ = context.Operators.And(ag_, ai_);
@@ -437,7 +437,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				return aj_;
 			};
 			var n_ = context.Operators.WhereOrNull<ServiceRequest>(l_, m_);
-			var o_ = context.Operators.ExistsInList<ServiceRequest>(n_);
+			var o_ = context.Operators.Exists<ServiceRequest>(n_);
 			var p_ = context.Operators.Or(j_, o_);
 			var r_ = context.Operators.RetrieveByValueSet<Procedure>(k_, null);
 			bool? s_(Procedure PalliativeOrHospiceCarePerformed)
@@ -449,7 +449,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				return am_;
 			};
 			var t_ = context.Operators.WhereOrNull<Procedure>(r_, s_);
-			var u_ = context.Operators.ExistsInList<Procedure>(t_);
+			var u_ = context.Operators.Exists<Procedure>(t_);
 			var v_ = context.Operators.Or(p_, u_);
 			var w_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
 			bool? x_(Encounter InpatientEncounter)
@@ -467,7 +467,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				return ax_;
 			};
 			var y_ = context.Operators.WhereOrNull<Encounter>(w_, x_);
-			var z_ = context.Operators.ExistsInList<Encounter>(y_);
+			var z_ = context.Operators.Exists<Encounter>(y_);
 			var aa_ = context.Operators.Or(v_, z_);
 
 			return aa_;

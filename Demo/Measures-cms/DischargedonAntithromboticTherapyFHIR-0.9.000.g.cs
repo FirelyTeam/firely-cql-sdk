@@ -180,7 +180,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.InInterval<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
@@ -226,7 +226,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			{
 				var m_ = context.Operators.Convert<CqlDateTime>(DischargeAntithrombotic?.AuthoredOnElement);
 				var n_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, null);
+				var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, null);
 
 				return o_;
 			};
@@ -355,7 +355,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			{
 				var i_ = context.Operators.Convert<CqlDateTime>(NoDischargeAntithrombotic?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
@@ -430,7 +430,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			{
 				var i_ = context.Operators.Convert<CqlDateTime>(DischargePharmacological?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};

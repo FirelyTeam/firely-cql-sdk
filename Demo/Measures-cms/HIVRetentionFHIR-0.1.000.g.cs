@@ -497,7 +497,7 @@ public class HIVRetentionFHIR_0_1_000
 			return p_;
 		};
 		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -554,7 +554,7 @@ public class HIVRetentionFHIR_0_1_000
 			return ar_;
 		};
 		var ah_ = context.Operators.WhereOrNull<Encounter>(af_, ag_);
-		var ai_ = context.Operators.ExistsInList<Encounter>(ah_);
+		var ai_ = context.Operators.Exists<Encounter>(ah_);
 
 		return ai_;
 	}
@@ -690,7 +690,7 @@ public class HIVRetentionFHIR_0_1_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 
 		return e_;
 	}
@@ -737,7 +737,7 @@ public class HIVRetentionFHIR_0_1_000
 			return j_;
 		};
 		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}
@@ -775,7 +775,7 @@ public class HIVRetentionFHIR_0_1_000
 			return i_;
 		};
 		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}

@@ -107,7 +107,7 @@ public class VTEFHIR4_4_8_000
 			return q_;
 		};
 		var d_ = context.Operators.ListSortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
-		var e_ = context.Operators.FirstOfList<Encounter.LocationComponent>(d_);
+		var e_ = context.Operators.First<Encounter.LocationComponent>(d_);
 
 		return e_;
 	}

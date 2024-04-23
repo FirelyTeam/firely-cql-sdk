@@ -515,7 +515,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var dg_ = context.Operators.Start(df_);
 			var dh_ = context.Operators.ConvertDateToDateTime(dg_);
 			var di_ = this.Intake_Period();
-			var dj_ = context.Operators.ElementInInterval<CqlDateTime>(dh_, di_, null);
+			var dj_ = context.Operators.InInterval<CqlDateTime>(dh_, di_, null);
 
 			return dj_;
 		};
@@ -559,7 +559,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var dl_ = context.Operators.Start(dk_);
 			var dm_ = context.Operators.ConvertDateToDateTime(dl_);
 			var dn_ = this.Intake_Period();
-			var do_ = context.Operators.ElementInInterval<CqlDateTime>(dm_, dn_, null);
+			var do_ = context.Operators.InInterval<CqlDateTime>(dm_, dn_, null);
 
 			return do_;
 		};
@@ -669,7 +669,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		CqlDate d_(Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this) => 
 			@this?.startDate;
 		var e_ = context.Operators.SelectOrNull<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE, CqlDate>(c_, d_);
-		var f_ = context.Operators.FirstOfList<CqlDate>(e_);
+		var f_ = context.Operators.First<CqlDate>(e_);
 
 		return f_;
 	}
@@ -778,7 +778,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				return k_;
 			};
 			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
-			var h_ = context.Operators.ExistsInList<Condition>(g_);
+			var h_ = context.Operators.Exists<Condition>(g_);
 
 			return h_;
 		};
@@ -803,7 +803,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var i_ = context.Operators.Quantity((decimal?)30m, "days");
 			var j_ = context.Operators.Add(g_, i_);
 			var k_ = context.Operators.Interval(g_, j_, (bool?)false, (bool?)true);
-			var l_ = context.Operators.ElementInInterval<CqlDate>(f_, k_, "day");
+			var l_ = context.Operators.InInterval<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
 
@@ -834,13 +834,13 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var n_ = context.Operators.LessOrEqual(m_, (int?)12);
 		var o_ = context.Operators.And(g_, n_);
 		var p_ = this.Qualifying_Encounter();
-		var q_ = context.Operators.ExistsInList<Encounter>(p_);
+		var q_ = context.Operators.Exists<Encounter>(p_);
 		var r_ = context.Operators.And(o_, q_);
 		var s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
 		var t_ = context.Operators.Not((bool?)(s_ is null));
 		var u_ = context.Operators.And(r_, t_);
 		var v_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase();
-		var w_ = context.Operators.ExistsInList<Encounter>(v_);
+		var w_ = context.Operators.Exists<Encounter>(v_);
 		var x_ = context.Operators.Not(w_);
 		var y_ = context.Operators.And(u_, x_);
 
@@ -889,7 +889,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 		var b_ = this.Narcolepsy_Exclusion();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 
 		return d_;
@@ -934,7 +934,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				return av_;
 			};
 			var ap_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((PsychPharmManagement?.Location as IEnumerable<Encounter.LocationComponent>), ao_);
-			var aq_ = context.Operators.ExistsInList<Encounter.LocationComponent>(ap_);
+			var aq_ = context.Operators.Exists<Encounter.LocationComponent>(ap_);
 
 			return aq_;
 		};
@@ -982,7 +982,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var i_ = context.Operators.Quantity((decimal?)30m, "days");
 			var j_ = context.Operators.Add(g_, i_);
 			var k_ = context.Operators.Interval(g_, j_, (bool?)false, (bool?)true);
-			var l_ = context.Operators.ElementInInterval<CqlDate>(f_, k_, "day");
+			var l_ = context.Operators.InInterval<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
 
@@ -1000,7 +1000,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Numerator_1_Value()
 	{
 		var a_ = this.Encounter_During_Initiation_Phase();
-		var b_ = context.Operators.ExistsInList<Encounter>(a_);
+		var b_ = context.Operators.Exists<Encounter>(a_);
 
 		return b_;
 	}
@@ -1295,7 +1295,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var i_ = context.Operators.Quantity((decimal?)300m, "days");
 			var j_ = context.Operators.Add(g_, i_);
 			var k_ = context.Operators.Interval(g_, j_, (bool?)false, (bool?)true);
-			var l_ = context.Operators.ElementInInterval<CqlDate>(f_, k_, "day");
+			var l_ = context.Operators.InInterval<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
 
@@ -1326,7 +1326,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var n_ = context.Operators.LessOrEqual(m_, (int?)12);
 		var o_ = context.Operators.And(g_, n_);
 		var p_ = this.Qualifying_Encounter();
-		var q_ = context.Operators.ExistsInList<Encounter>(p_);
+		var q_ = context.Operators.Exists<Encounter>(p_);
 		var r_ = context.Operators.And(o_, q_);
 		var s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
 		var t_ = context.Operators.Not((bool?)(s_ is null));
@@ -1334,7 +1334,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var v_ = this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days();
 		var w_ = context.Operators.And(u_, v_);
 		var x_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase();
-		var y_ = context.Operators.ExistsInList<Encounter>(x_);
+		var y_ = context.Operators.Exists<Encounter>(x_);
 		var z_ = context.Operators.Not(y_);
 		var aa_ = context.Operators.And(w_, z_);
 
@@ -1370,7 +1370,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var m_ = context.Operators.Quantity((decimal?)300m, "days");
 			var n_ = context.Operators.Add(i_, m_);
 			var o_ = context.Operators.Interval(k_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.ElementInInterval<CqlDate>(h_, o_, "day");
+			var p_ = context.Operators.InInterval<CqlDate>(h_, o_, "day");
 
 			return p_;
 		};
@@ -1420,7 +1420,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var n_ = context.Operators.Quantity((decimal?)300m, "days");
 			var o_ = context.Operators.Add(j_, n_);
 			var p_ = context.Operators.Interval(l_, o_, (bool?)true, (bool?)true);
-			var q_ = context.Operators.ElementInInterval<CqlDate>(i_, p_, "day");
+			var q_ = context.Operators.InInterval<CqlDate>(i_, p_, "day");
 
 			return q_;
 		};
@@ -1445,7 +1445,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Numerator_2_Value()
 	{
 		var a_ = this.Encounter_During_Initiation_Phase();
-		var b_ = context.Operators.ExistsInList<Encounter>(a_);
+		var b_ = context.Operators.Exists<Encounter>(a_);
 		var c_ = this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 		var d_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 		IEnumerable<CqlDate> e_(CqlDate Encounter1)
@@ -1470,7 +1470,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			return n_;
 		};
 		var f_ = context.Operators.SelectManyOrNull<CqlDate, CqlDate>(d_, e_);
-		var g_ = context.Operators.ExistsInList<CqlDate>(f_);
+		var g_ = context.Operators.Exists<CqlDate>(f_);
 		var h_ = context.Operators.Or(c_, g_);
 		var i_ = context.Operators.And(b_, h_);
 

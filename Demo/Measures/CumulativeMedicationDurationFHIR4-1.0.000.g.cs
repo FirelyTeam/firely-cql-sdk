@@ -832,7 +832,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			};
 			CqlInterval<CqlDateTime> e_(CqlInterval<CqlDateTime> X)
 			{
-				var j_ = context.Operators.LastOfList<CqlInterval<CqlDateTime>>(R);
+				var j_ = context.Operators.Last<CqlInterval<CqlDateTime>>(R);
 				var k_ = context.Operators.End(j_);
 				var l_ = context.Operators.Quantity((decimal?)1m, "day");
 				var m_ = context.Operators.Add(k_, l_);

@@ -374,7 +374,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
 		var h_ = this.Primary_Open_Angle_Glaucoma_Encounter();
-		var i_ = context.Operators.ExistsInList<Encounter>(h_);
+		var i_ = context.Operators.Exists<Encounter>(h_);
 		var j_ = context.Operators.And(g_, i_);
 
 		return j_;
@@ -408,7 +408,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(CupToDiscExamNotPerformed?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
@@ -464,7 +464,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(OpticDiscExamNotPerformed?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
@@ -510,9 +510,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private bool? Denominator_Exceptions_Value()
 	{
 		var a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 
 		return e_;
@@ -625,9 +625,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Cup_to_Disc_Ratio_Performed_with_Result();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Optic_Disc_Exam_Performed_with_Result();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.And(b_, d_);
 
 		return e_;
