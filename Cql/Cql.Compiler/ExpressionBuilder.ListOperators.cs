@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
             if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
-            return BindCqlOperator(CqlOperator.ListIndexOf, null, source, element);
+            return BindCqlOperator(CqlOperator.IndexOf, null, source, element);
         }
 
         private Expression? Slice(Elm.Slice slice)

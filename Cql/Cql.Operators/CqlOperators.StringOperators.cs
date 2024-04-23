@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Runtime
@@ -43,23 +44,33 @@ namespace Hl7.Cql.Runtime
 
         #endregion
 
-        #region Indexer
-        public string? StringIndexer(string? argument, int? index)
+        #region AtIndex
+
+        public string? GetAtIndex(string? argument, int? index)
         {
-            if (argument == null || index == null)
+            if (argument == null || index == null || index < 0 || index >= argument.Length)
                 return null;
-            if (index < 0 || index >= argument.Length)
+
+            var value = argument[index.Value];
+            return value.ToString();
+        }
+
+        #endregion
+
+        #region IndexOf
+
+        public int? IndexOf(string? pattern, string? argument)
+        {
+            if (argument == null || pattern == null)
                 return null;
-            else
-            {
-                var value = argument[index.Value];
-                return value.ToString();
-            }
+
+            return argument.IndexOf(pattern);
         }
 
         #endregion
 
         #region LastPositionOf
+
         public int? LastPositionOf(string? argument, string? pattern)
         {
             if (pattern == null || argument == null)
@@ -95,14 +106,7 @@ namespace Hl7.Cql.Runtime
                 else return false;
             }
         }
-        #endregion
 
-        #region PositionOf
-        public int? PositionOf(string pattern, string argument)
-        {
-            if (argument == null || pattern == null) return null;
-            else return argument.IndexOf(pattern);
-        }
         #endregion
 
         #region ReplaceMatches

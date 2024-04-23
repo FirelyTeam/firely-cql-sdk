@@ -105,10 +105,9 @@ namespace Hl7.Cql.Runtime
         public IDataSource DataSource { get; }
         public CqlDateTime NowValue { get; }
 
-        internal IEqualityComparer<object> EqualityComparer { get; private set; }
-        internal IComparer<object> DataComparer { get; private set; }
-
-        internal ICqlComparer EnumComparer { get; private set; }
+        internal IEqualityComparer<object> EqualityComparer { get; }
+        internal IComparer<object> DataComparer { get; }
+        internal ICqlComparer EnumComparer { get; }
 
         /// <summary>
         /// Raised when the <see cref="ICqlOperators.Message{T}(T, string, string, string)"/> method is called in a CQL library.

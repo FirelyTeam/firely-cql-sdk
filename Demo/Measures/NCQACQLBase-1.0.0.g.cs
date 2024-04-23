@@ -339,7 +339,7 @@ public class NCQACQLBase_1_0_0
 						{
 							bool u_()
 							{
-								var v_ = context.Operators.ListIndexOf<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var v_ = context.Operators.GetAtIndex<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var w_ = context.Operators.Equal(v_, (int?)0);
 
 								return (w_ ?? false);
@@ -356,14 +356,14 @@ public class NCQACQLBase_1_0_0
 							}
 							else
 							{
-								var ac_ = context.Operators.ListIndexOf<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var ac_ = context.Operators.GetAtIndex<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var ad_ = context.Operators.Subtract(ac_, (int?)1);
-								var ae_ = context.Operators.ListElementAt<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, ad_);
+								var ae_ = context.Operators.GetAtIndex<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, ad_);
 								var af_ = context.Operators.Start(ae_);
 								var ag_ = context.Operators.End(sortedCovering);
 								var ah_ = context.Operators.Interval(af_, ag_, false, false);
 								var aj_ = context.Operators.Subtract(ac_, (int?)1);
-								var ak_ = context.Operators.ListElementAt<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, aj_);
+								var ak_ = context.Operators.GetAtIndex<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, aj_);
 								var al_ = context.Operators.IntervalExcept(ah_, ak_);
 								var am_ = context.Operators.IntervalExcept(al_, sortedCovering);
 
@@ -477,7 +477,7 @@ public class NCQACQLBase_1_0_0
 						{
 							bool u_()
 							{
-								var v_ = context.Operators.ListIndexOf<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var v_ = context.Operators.GetAtIndex<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var w_ = context.Operators.Equal(v_, (int?)0);
 
 								return (w_ ?? false);
@@ -494,14 +494,14 @@ public class NCQACQLBase_1_0_0
 							}
 							else
 							{
-								var ac_ = context.Operators.ListIndexOf<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
+								var ac_ = context.Operators.GetAtIndex<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering);
 								var ad_ = context.Operators.Subtract(ac_, (int?)1);
-								var ae_ = context.Operators.ListElementAt<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, ad_);
+								var ae_ = context.Operators.GetAtIndex<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, ad_);
 								var af_ = context.Operators.Start(ae_);
 								var ag_ = context.Operators.End(sortedCovering);
 								var ah_ = context.Operators.Interval(af_, ag_, false, false);
 								var aj_ = context.Operators.Subtract(ac_, (int?)1);
-								var ak_ = context.Operators.ListElementAt<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, aj_);
+								var ak_ = context.Operators.GetAtIndex<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, aj_);
 								var al_ = context.Operators.IntervalExcept(ah_, ak_);
 								var am_ = context.Operators.IntervalExcept(al_, sortedCovering);
 

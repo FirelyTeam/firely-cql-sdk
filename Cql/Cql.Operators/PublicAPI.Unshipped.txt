@@ -216,6 +216,8 @@ Hl7.Cql.Operators.ICqlOperators.Floor(decimal? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Floor(int? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Floor(long? argument) -> long?
 Hl7.Cql.Operators.ICqlOperators.GeometricMean(System.Collections.Generic.IEnumerable<decimal?>! argument) -> decimal?
+Hl7.Cql.Operators.ICqlOperators.GetAtIndex(string? argument, int? index) -> string?
+Hl7.Cql.Operators.ICqlOperators.GetAtIndex<T>(System.Collections.Generic.IEnumerable<T!>? source, int? index) -> T?
 Hl7.Cql.Operators.ICqlOperators.Greater(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.GreaterOrEqual(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.GreaterOrSamePrecision(Hl7.Cql.Primitives.CqlDate? left, string? precision) -> bool?
@@ -227,6 +229,8 @@ Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlDateTime? inp
 Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlTime? input, int? precision) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Implies(bool? left, bool? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Implies(System.Lazy<bool?>! left, System.Lazy<bool?>! right) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IndexOf(string! pattern, string! argument) -> int?
+Hl7.Cql.Operators.ICqlOperators.IndexOf<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
 Hl7.Cql.Operators.ICqlOperators.InList<T>(T element, System.Collections.Generic.IEnumerable<T>! argument) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Interval(decimal? low, decimal? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<decimal?>?
 Hl7.Cql.Operators.ICqlOperators.Interval(Hl7.Cql.Primitives.CqlDate? low, Hl7.Cql.Primitives.CqlDate? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>?
@@ -291,14 +295,12 @@ Hl7.Cql.Operators.ICqlOperators.Less(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.LessOrEqual(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListContains<T>(System.Collections.Generic.IEnumerable<T>! list, T item) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListDistinct<T>(System.Collections.Generic.IEnumerable<T>! source) -> System.Collections.Generic.IEnumerable<T>?
-Hl7.Cql.Operators.ICqlOperators.ListElementAt<T>(System.Collections.Generic.IEnumerable<T>? source, int? index) -> T
 Hl7.Cql.Operators.ICqlOperators.ListEqual<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListEquivalent<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListExcept<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.ListIncludedInList<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>! right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListIncludesElement<T>(System.Collections.Generic.IEnumerable<T>? left, T right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListIncludesList<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>! right) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ListIndexOf<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
 Hl7.Cql.Operators.ICqlOperators.ListIntersect<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.ListNotEqual<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListNotEquivalent<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
@@ -395,7 +397,6 @@ Hl7.Cql.Operators.ICqlOperators.PopulationStdDev(System.Collections.Generic.IEnu
 Hl7.Cql.Operators.ICqlOperators.PopulationStdDev(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? source) -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Operators.ICqlOperators.PopulationVariance(System.Collections.Generic.IEnumerable<decimal?>? source) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.PopulationVariance(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? source) -> Hl7.Cql.Primitives.CqlQuantity?
-Hl7.Cql.Operators.ICqlOperators.PositionOf(string! pattern, string! argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Power(decimal? argument, decimal? exponent) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Power(int? argument, int? exponent) -> int?
 Hl7.Cql.Operators.ICqlOperators.Power(long? argument, long? exponent) -> long?
@@ -450,7 +451,6 @@ Hl7.Cql.Operators.ICqlOperators.Starts<T>(Hl7.Cql.Primitives.CqlInterval<T>? sta
 Hl7.Cql.Operators.ICqlOperators.StartsWith(string! argument, string! prefix) -> bool?
 Hl7.Cql.Operators.ICqlOperators.StdDev(System.Collections.Generic.IEnumerable<decimal?>? argument) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.StdDev(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? argument) -> Hl7.Cql.Primitives.CqlQuantity?
-Hl7.Cql.Operators.ICqlOperators.StringIndexer(string? argument, int? index) -> string?
 Hl7.Cql.Operators.ICqlOperators.StringInValueSet(string? code, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
 Hl7.Cql.Operators.ICqlOperators.StringsInValueSet(System.Collections.Generic.IEnumerable<string?>? strings, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Substring(string! source, int? startIndex, int? length = null) -> string?

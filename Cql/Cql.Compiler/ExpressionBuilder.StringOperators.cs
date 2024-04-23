@@ -14,45 +14,5 @@ using Hl7.Cql.Compiler.Expressions;
 namespace Hl7.Cql.Compiler
 {
     partial class ExpressionBuilderContext
-    {
-        protected Expression? Combine(Elm.Combine e)
-        {
-            var source = Translate(e.source!);
-            var operand = e.separator == null
-                              ? NullExpression.String
-                              : Translate(e.separator);
-            return BindCqlOperator(CqlOperator.Combine, null, source, operand);
-        }
-
-        protected Expression Indexer(Elm.Indexer e)
-        {
-            var left = Translate(e!.operand![0]!);
-            var right = Translate(e!.operand![1]!);
-            if (left.Type == typeof(string))
-            {
-                return BindCqlOperator(CqlOperator.CharAt, null, left, right);
-            }
-
-            if (_typeResolver.IsListType(left.Type))
-            {
-                return BindCqlOperator(CqlOperator.ListElementAt, null, left, right);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression? Length(Elm.Length len)
-        {
-            var operand = Translate(len.operand!);
-            if (_typeResolver.IsListType(operand.Type))
-            {
-                return BindCqlOperator(CqlOperator.Length, null, operand);
-            }
-
-            if (operand.Type == typeof(string))
-            {
-                return BindCqlOperator(CqlOperator.Length, null, operand);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-    }
+    { }
 }

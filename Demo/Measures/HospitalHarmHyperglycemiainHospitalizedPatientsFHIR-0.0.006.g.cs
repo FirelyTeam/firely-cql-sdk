@@ -655,10 +655,10 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			Tuples.Tuple_HBBaLFUhhUfQBEJKjEZegSRLi f_(Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF EncounterDay)
 			{
 				var j_ = context.Operators.Subtract(EncounterDay?.dayIndex, (int?)2);
-				var k_ = context.Operators.ListElementAt<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(EncounterWithResultDays?.relevantDays, j_);
+				var k_ = context.Operators.GetAtIndex<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(EncounterWithResultDays?.relevantDays, j_);
 				var l_ = context.Operators.And(EncounterDay?.hasNoResult, k_?.hasElevatedResult);
 				var m_ = context.Operators.Subtract(EncounterDay?.dayIndex, (int?)3);
-				var n_ = context.Operators.ListElementAt<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(EncounterWithResultDays?.relevantDays, m_);
+				var n_ = context.Operators.GetAtIndex<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(EncounterWithResultDays?.relevantDays, m_);
 				var o_ = context.Operators.And(l_, n_?.hasElevatedResult);
 				var p_ = context.Operators.Or(EncounterDay?.hasSevereResult, o_);
 				var q_ = new Tuples.Tuple_HBBaLFUhhUfQBEJKjEZegSRLi

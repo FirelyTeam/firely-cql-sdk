@@ -300,14 +300,14 @@ namespace Hl7.Cql.Operators
         bool? LessOrEqual(object? left, object? right);
         bool? ListContains<T>(IEnumerable<T> list, T item);
         IEnumerable<T>? ListDistinct<T>(IEnumerable<T> source);
-        T ListElementAt<T>(IEnumerable<T>? source, int? index);
+        T? GetAtIndex<T>(IEnumerable<T>? source, int? index) where T : class;
         bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         IEnumerable<T>? ListExcept<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListIncludedInList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         bool? ListIncludesElement<T>(IEnumerable<T>? left, T right);
         bool? ListIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
-        int? ListIndexOf<T>(IEnumerable<T>? list, T element);
+        int? IndexOf<T>(IEnumerable<T>? list, T element);
         IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
@@ -407,7 +407,7 @@ namespace Hl7.Cql.Operators
         decimal? PopulationStdDev(IEnumerable<decimal?>? source);
         CqlQuantity? PopulationVariance(IEnumerable<CqlQuantity?>? source);
         decimal? PopulationVariance(IEnumerable<decimal?>? source);
-        int? PositionOf(string pattern, string argument);
+        int? IndexOf(string pattern, string argument);
         decimal? Power(decimal? argument, decimal? exponent);
         int? Power(int? argument, int? exponent);
         long? Power(long? argument, long? exponent);
@@ -510,7 +510,7 @@ namespace Hl7.Cql.Operators
         bool? StartsWith(string argument, string prefix);
         CqlQuantity? StdDev(IEnumerable<CqlQuantity?>? argument);
         decimal? StdDev(IEnumerable<decimal?>? argument);
-        string? StringIndexer(string? argument, int? index);
+        string? GetAtIndex(string? argument, int? index);
         bool? StringInValueSet(string? code, CqlValueSet? valueSet);
         int? Length<T>(IEnumerable<T>? list);
         int? Length(string argument);

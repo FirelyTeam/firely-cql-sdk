@@ -951,40 +951,38 @@ namespace Hl7.Cql.Runtime
 
         #endregion
 
-        #region Indexer
+        #region AtIndex
 
-        public T ListElementAt<T>(IEnumerable<T>? source, int? index)
+        public T? GetAtIndex<T>(IEnumerable<T>? source, int? index)
+            where T : class
         {
             if (source == null || index == null)
-                return (T)(object)null!;
+                return null;
+
             if (index.Value < 0)
-                return (T)(object)null!;
-            else if (source is IList<T> list)
+                return null;
+
+            if (source is IList<T> list)
             {
                 if (index >= list.Count)
-                    return (T)(object)null!;
+                    return null;
+
                 return list[index.Value];
             }
-            else
-            {
-                var tList = source
-                    .Skip(index.Value)
-                    .Take(1)
-                    .ToList();
-                if (tList.Count == 1)
-                    return tList[0];
-                else return (T)(object)null!;
-            }
+
+            return source.ElementAtOrDefault(index.Value);
         }
 
 
         #endregion
 
-        #region ListIndexOf
-        public int? ListIndexOf<T>(IEnumerable<T>? list, T element)
+        #region IndexOf
+
+        public int? IndexOf<T>(IEnumerable<T>? list, T element)
         {
             if (list == null || element == null)
                 return null;
+
             int i = 0;
             foreach (T t in list)
             {
@@ -994,6 +992,7 @@ namespace Hl7.Cql.Runtime
             }
             return -1;
         }
+
         #endregion
 
         #region Intersect
