@@ -268,7 +268,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -351,7 +351,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			return y_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 		var e_ = context.Operators.Not((bool?)(d_ is null));
 
 		return e_;
@@ -1015,7 +1015,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			return k_;
 		};
 		var d_ = context.Operators.SelectManyOrNull<Condition, Condition>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Condition>(d_);
+		var e_ = context.Operators.SingletonFrom<Condition>(d_);
 
 		return e_;
 	}
@@ -1187,7 +1187,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			return l_;
 		};
 		var i_ = context.Operators.SelectOrNull<Tuple_FAESHVMWYGMYBALaJITZUecdI, int?>(g_, h_);
-		var j_ = context.Operators.SingleOrNull<int?>(i_);
+		var j_ = context.Operators.SingletonFrom<int?>(i_);
 
 		return j_;
 	}
@@ -1210,7 +1210,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			return g_;
 		};
 		var d_ = context.Operators.WhereOrNull<int?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<int?>(d_);
+		var e_ = context.Operators.SingletonFrom<int?>(d_);
 		var f_ = context.Operators.Not((bool?)(e_ is null));
 
 		return f_;

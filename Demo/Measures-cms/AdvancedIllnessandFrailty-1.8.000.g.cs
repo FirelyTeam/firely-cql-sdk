@@ -247,7 +247,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -625,7 +625,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			return ai_;
 		};
 		var s_ = context.Operators.WhereOrNull<Observation>(q_, r_);
-		var t_ = context.Operators.SingleOrNull<Observation>(s_);
+		var t_ = context.Operators.SingletonFrom<Observation>(s_);
 		var u_ = context.Operators.Not((bool?)(t_ is null));
 		var v_ = context.Operators.And(g_, u_);
 

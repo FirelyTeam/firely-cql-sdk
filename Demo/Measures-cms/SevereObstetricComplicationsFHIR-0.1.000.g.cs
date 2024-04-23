@@ -671,7 +671,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -846,7 +846,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				DataType s_(Extension @this) => 
 					@this?.Value;
 				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<DataType>(t_);
+				var u_ = context.Operators.SingletonFrom<DataType>(t_);
 				var v_ = context.Operators.Convert<CodeableConcept>(u_);
 				var w_ = FHIRHelpers_4_3_000.ToConcept(v_);
 				var x_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();
@@ -1115,7 +1115,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			DataType g_(Extension @this) => 
 				@this?.Value;
 			var h_ = context.Operators.SelectOrNull<Extension, DataType>(f_, g_);
-			var i_ = context.Operators.SingleOrNull<DataType>(h_);
+			var i_ = context.Operators.SingletonFrom<DataType>(h_);
 			var j_ = context.Operators.Convert<CodeableConcept>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
 			var l_ = this.Present_On_Admission_is_Yes_or_Exempt();
@@ -2154,7 +2154,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			DataType g_(Extension @this) => 
 				@this?.Value;
 			var h_ = context.Operators.SelectOrNull<Extension, DataType>(f_, g_);
-			var i_ = context.Operators.SingleOrNull<DataType>(h_);
+			var i_ = context.Operators.SingletonFrom<DataType>(h_);
 			var j_ = context.Operators.Convert<CodeableConcept>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
 			var l_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();

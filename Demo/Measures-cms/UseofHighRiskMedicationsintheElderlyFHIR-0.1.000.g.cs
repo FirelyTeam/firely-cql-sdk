@@ -726,7 +726,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -1039,11 +1039,11 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var e_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
 			var f_ = context.Operators.ConvertQuantity(e_, "d");
 			var g_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
-			var h_ = context.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-			var i_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var h_ = context.Operators.SingletonFrom<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+			var i_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 			var j_ = FHIRHelpers_4_3_000.ToValue(i_?.Dose);
 			var k_ = context.Operators.End((j_ as CqlInterval<CqlQuantity>));
-			var m_ = context.Operators.SingleOrNull<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var m_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
 			var n_ = FHIRHelpers_4_3_000.ToValue(m_?.Dose);
 			var s_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(h_?.Timing?.Repeat?.PeriodUnitElement?.Value);
 			var t_ = context.Operators.Convert<string>(s_);
@@ -1061,7 +1061,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			return ae_;
 		};
 		var c_ = context.Operators.SelectOrNull<MedicationRequest, decimal?>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<decimal?>(c_);
+		var d_ = context.Operators.SingletonFrom<decimal?>(c_);
 
 		return d_;
 	}
@@ -1405,7 +1405,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			return e_();
 		};
 		var c_ = context.Operators.SelectOrNull<MedicationRequest, CqlQuantity>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlQuantity>(c_);
+		var d_ = context.Operators.SingletonFrom<CqlQuantity>(c_);
 
 		return d_;
 	}

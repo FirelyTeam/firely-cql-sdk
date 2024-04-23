@@ -266,7 +266,7 @@ public class AHAOverall_2_6_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -306,7 +306,7 @@ public class AHAOverall_2_6_000
 			return y_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 		var e_ = context.Operators.Not((bool?)(d_ is null));
 
 		return e_;
@@ -854,7 +854,7 @@ public class AHAOverall_2_6_000
 						return ci_;
 					};
 					var ay_ = context.Operators.SelectOrNull<object, object>(aw_, ax_);
-					var az_ = context.Operators.SingleOrNull<object>(ay_);
+					var az_ = context.Operators.SingletonFrom<object>(ay_);
 					var ba_ = new object[]
 					{
 						az_,
@@ -874,7 +874,7 @@ public class AHAOverall_2_6_000
 						return cl_;
 					};
 					var be_ = context.Operators.SelectOrNull<object, object>(bc_, bd_);
-					var bf_ = context.Operators.SingleOrNull<object>(be_);
+					var bf_ = context.Operators.SingletonFrom<object>(be_);
 					var bg_ = new object[]
 					{
 						bf_,
@@ -896,7 +896,7 @@ public class AHAOverall_2_6_000
 						return cq_;
 					};
 					var bk_ = context.Operators.SelectOrNull<object, object>(bi_, bj_);
-					var bl_ = context.Operators.SingleOrNull<object>(bk_);
+					var bl_ = context.Operators.SingletonFrom<object>(bk_);
 					var bm_ = new object[]
 					{
 						bl_,

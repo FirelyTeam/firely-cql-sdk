@@ -316,7 +316,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -716,7 +716,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				object s_(Extension @this) => 
 					@this?.Value;
 				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var u_ = context.Operators.SingletonFrom<object>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
@@ -775,7 +775,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				object s_(Extension @this) => 
 					@this?.Value;
 				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var u_ = context.Operators.SingletonFrom<object>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
@@ -834,7 +834,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				object s_(Extension @this) => 
 					@this?.Value;
 				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var u_ = context.Operators.SingletonFrom<object>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);

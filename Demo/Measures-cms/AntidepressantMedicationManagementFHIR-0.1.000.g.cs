@@ -226,7 +226,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -239,7 +239,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var e_ = context.Operators.DateTime(c_, (int?)4, (int?)30, (int?)23, (int?)59, (int?)59, (int?)0, d_);
 
@@ -254,7 +254,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.Subtract(c_, (int?)1);
 		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var f_ = context.Operators.DateTime(d_, (int?)5, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
@@ -456,7 +456,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		{
 			var l_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
 			var m_ = context.Operators.Not((bool?)(l_ is null));
-			var n_ = context.Operators.SingleOrNull<Dosage>((ActiveAntidepressant?.DosageInstruction as IEnumerable<Dosage>));
+			var n_ = context.Operators.SingletonFrom<Dosage>((ActiveAntidepressant?.DosageInstruction as IEnumerable<Dosage>));
 			var o_ = FHIRHelpers_4_3_000.ToValue(n_?.Timing?.Repeat?.Bounds);
 			var p_ = new object[]
 			{
@@ -474,7 +474,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 				return ag_;
 			};
 			var r_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>(p_, q_);
-			var s_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(r_);
+			var s_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(r_);
 			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			var v_ = context.Operators.Quantity((decimal?)105m, "days");
 			var w_ = context.Operators.Subtract(l_, v_);

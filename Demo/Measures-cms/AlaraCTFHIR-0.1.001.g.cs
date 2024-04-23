@@ -137,7 +137,7 @@ public class AlaraCTFHIR_0_1_001
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -242,7 +242,7 @@ public class AlaraCTFHIR_0_1_001
 			return (m_ as CqlQuantity)?.value;
 		};
 		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<decimal?>(d_);
+		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
 	}
@@ -270,7 +270,7 @@ public class AlaraCTFHIR_0_1_001
 			return (m_ as CqlQuantity)?.value;
 		};
 		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<decimal?>(d_);
+		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
 	}

@@ -254,7 +254,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -595,7 +595,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			return ai_;
 		};
 		var k_ = context.Operators.SelectOrNull<Observation, bool?>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<bool?>(k_);
+		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
 	}
@@ -682,7 +682,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			return az_;
 		};
 		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<Observation>(k_);
+		var l_ = context.Operators.SingletonFrom<Observation>(k_);
 
 		return l_;
 	}
@@ -790,7 +790,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			return aq_;
 		};
 		var j_ = context.Operators.SelectOrNull<Observation, bool?>(h_, i_);
-		var k_ = context.Operators.SingleOrNull<bool?>(j_);
+		var k_ = context.Operators.SingletonFrom<bool?>(j_);
 
 		return k_;
 	}

@@ -151,7 +151,7 @@ public class PCMaternal_5_16_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -370,7 +370,7 @@ public class PCMaternal_5_16_000
 			return aa_;
 		};
 		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -691,7 +691,7 @@ public class PCMaternal_5_16_000
 		var b_ = this.lastEstimatedDeliveryDate(TheEncounter);
 		var c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 		var d_ = context.Operators.Subtract((int?)280, c_);
-		var e_ = context.Operators.DivideAndTruncate(d_, (int?)7);
+		var e_ = context.Operators.TruncatedDivide(d_, (int?)7);
 
 		return e_;
 	}

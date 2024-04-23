@@ -370,7 +370,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -410,7 +410,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return y_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 		var e_ = context.Operators.Not((bool?)(d_ is null));
 
 		return e_;
@@ -501,7 +501,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.Subtract(c_, (int?)1);
 		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var f_ = context.Operators.DateTime(d_, (int?)7, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
@@ -517,7 +517,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var e_ = context.Operators.DateTime(c_, (int?)6, (int?)30, (int?)23, (int?)59, (int?)59, (int?)0, d_);
 
@@ -547,7 +547,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return k_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Procedure>(d_);
+		var e_ = context.Operators.SingletonFrom<Procedure>(d_);
 
 		return e_;
 	}
@@ -575,7 +575,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return k_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Procedure>(d_);
+		var e_ = context.Operators.SingletonFrom<Procedure>(d_);
 
 		return e_;
 	}
@@ -602,7 +602,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				return i_;
 			};
 			var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
-			var g_ = context.Operators.SingleOrNull<Procedure>(f_);
+			var g_ = context.Operators.SingletonFrom<Procedure>(f_);
 
 			return g_;
 		};
@@ -744,7 +744,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				object r_(Extension @this) => 
 					@this?.Value;
 				var s_ = context.Operators.SelectOrNull<Extension, object>(q_, r_);
-				var t_ = context.Operators.SingleOrNull<object>(s_);
+				var t_ = context.Operators.SingletonFrom<object>(s_);
 				var u_ = context.Operators.Convert<CqlDateTime>((t_ as FhirDateTime));
 				var v_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
 				var w_ = QICoreCommon_2_0_000.toInterval(v_);
@@ -769,7 +769,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), ak_);
 				var an_ = context.Operators.SelectOrNull<Extension, object>(al_, r_);
-				var ao_ = context.Operators.SingleOrNull<object>(an_);
+				var ao_ = context.Operators.SingletonFrom<object>(an_);
 				var ap_ = context.Operators.Convert<CqlDateTime>((ao_ as FhirDateTime));
 				var aq_ = this.Measurement_Period();
 				var ar_ = context.Operators.ElementInInterval<CqlDateTime>(ap_, aq_, null);

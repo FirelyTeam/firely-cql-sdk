@@ -496,7 +496,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -746,7 +746,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ai_,
 				am_,
 			};
-			var ao_ = context.Operators.MaxOrNull<CqlDate>((an_ as IEnumerable<CqlDate>));
+			var ao_ = context.Operators.Max<CqlDate>((an_ as IEnumerable<CqlDate>));
 
 			return ao_;
 		};
@@ -994,7 +994,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ej_,
 				en_,
 			};
-			var ep_ = context.Operators.MaxOrNull<CqlDate>((eo_ as IEnumerable<CqlDate>));
+			var ep_ = context.Operators.Max<CqlDate>((eo_ as IEnumerable<CqlDate>));
 
 			return ep_;
 		};
@@ -1132,7 +1132,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ai_,
 				am_,
 			};
-			var ao_ = context.Operators.MaxOrNull<CqlDate>((an_ as IEnumerable<CqlDate>));
+			var ao_ = context.Operators.Max<CqlDate>((an_ as IEnumerable<CqlDate>));
 
 			return ao_;
 		};
@@ -1270,7 +1270,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ai_,
 				am_,
 			};
-			var ao_ = context.Operators.MaxOrNull<CqlDate>((an_ as IEnumerable<CqlDate>));
+			var ao_ = context.Operators.Max<CqlDate>((an_ as IEnumerable<CqlDate>));
 
 			return ao_;
 		};
@@ -1408,7 +1408,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ai_,
 				am_,
 			};
-			var ao_ = context.Operators.MaxOrNull<CqlDate>((an_ as IEnumerable<CqlDate>));
+			var ao_ = context.Operators.Max<CqlDate>((an_ as IEnumerable<CqlDate>));
 
 			return ao_;
 		};
@@ -1546,7 +1546,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ai_,
 				am_,
 			};
-			var ao_ = context.Operators.MaxOrNull<CqlDate>((an_ as IEnumerable<CqlDate>));
+			var ao_ = context.Operators.Max<CqlDate>((an_ as IEnumerable<CqlDate>));
 
 			return ao_;
 		};
@@ -1684,7 +1684,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ai_,
 				am_,
 			};
-			var ao_ = context.Operators.MaxOrNull<CqlDate>((an_ as IEnumerable<CqlDate>));
+			var ao_ = context.Operators.Max<CqlDate>((an_ as IEnumerable<CqlDate>));
 
 			return ao_;
 		};
@@ -1822,7 +1822,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ai_,
 				am_,
 			};
-			var ao_ = context.Operators.MaxOrNull<CqlDate>((an_ as IEnumerable<CqlDate>));
+			var ao_ = context.Operators.Max<CqlDate>((an_ as IEnumerable<CqlDate>));
 
 			return ao_;
 		};
@@ -2048,7 +2048,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				do_,
 				ds_,
 			};
-			var du_ = context.Operators.MaxOrNull<CqlDate>((dt_ as IEnumerable<CqlDate>));
+			var du_ = context.Operators.Max<CqlDate>((dt_ as IEnumerable<CqlDate>));
 
 			return du_;
 		};
@@ -2152,7 +2152,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			{
 				n_,
 			};
-			var p_ = context.Operators.MaxOrNull<CqlDate>((o_ as IEnumerable<CqlDate>));
+			var p_ = context.Operators.Max<CqlDate>((o_ as IEnumerable<CqlDate>));
 
 			return p_;
 		};

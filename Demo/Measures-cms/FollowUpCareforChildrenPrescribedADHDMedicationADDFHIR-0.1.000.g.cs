@@ -411,7 +411,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -424,7 +424,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.Subtract(c_, (int?)1);
 		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var f_ = context.Operators.DateTime(d_, (int?)3, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
@@ -440,7 +440,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var e_ = context.Operators.DateTime(c_, (int?)3, (int?)1, (int?)23, (int?)59, (int?)59, (int?)0, d_);
 		var f_ = context.Operators.Quantity((decimal?)1m, "day");
@@ -753,7 +753,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				return k_;
 			};
 			var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
-			var i_ = context.Operators.SingleOrNull<Condition>(h_);
+			var i_ = context.Operators.SingletonFrom<Condition>(h_);
 
 			return i_;
 		};

@@ -110,7 +110,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.ConvertsToTime                   => BindToMethodConvertArgs(nameof(ICqlOperators.ConvertsToTime), resultTypeHint, args),
                 CqlOperator.Count                            => BindToMethodConvertArgs(nameof(ICqlOperators.Count), resultTypeHint, args),
                 CqlOperator.Date                             => BindToMethodConvertArgs(nameof(ICqlOperators.Date), resultTypeHint, args),
-                CqlOperator.DateFrom                    => BindToMethodConvertArgs(nameof(ICqlOperators.DateFrom), resultTypeHint, args),
+                CqlOperator.DateFrom                         => BindToMethodConvertArgs(nameof(ICqlOperators.DateFrom), resultTypeHint, args),
                 CqlOperator.DateTime                         => BindToMethodConvertArgs(nameof(ICqlOperators.DateTime)!, resultTypeHint, args),
                 CqlOperator.Descendents                      => BindToMethodConvertArgs(nameof(ICqlOperators.Descendents), resultTypeHint, args),
                 CqlOperator.DifferenceBetween                => BindToMethodConvertArgs(nameof(ICqlOperators.DifferenceBetween), resultTypeHint, args),
@@ -192,7 +192,7 @@ namespace Hl7.Cql.Compiler
                 CqlOperator.Precision                        => BindToMethodConvertArgs(nameof(ICqlOperators.Precision), resultTypeHint, args),
                 CqlOperator.Predecessor                      => BindToMethodConvertArgs(nameof(ICqlOperators.Predecessor), resultTypeHint, args),
                 CqlOperator.Product                          => BindToMethodConvertArgs(nameof(ICqlOperators.Product), resultTypeHint, args),
-                CqlOperator.Quantity                         => BindToMethodConvertArgs(nameof(ICqlOperators.Quantity), resultTypeHint, args[..2]), // Discard the 3rd parameter!!
+                CqlOperator.Quantity                         => BindToMethodConvertArgs(nameof(ICqlOperators.Quantity), resultTypeHint, args),
                 CqlOperator.ReplaceMatches                   => BindToMethodConvertArgs(nameof(ICqlOperators.ReplaceMatches), resultTypeHint, args),
                 CqlOperator.Round                            => BindToMethodConvertArgs(nameof(ICqlOperators.Round), resultTypeHint, args),
                 CqlOperator.SameAs                           => BindToMethodConvertArgs(nameof(ICqlOperators.SameAs), resultTypeHint, args),

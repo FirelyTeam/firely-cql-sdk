@@ -223,7 +223,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -434,7 +434,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			DataType t_(Extension @this) => 
 				@this?.Value;
 			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingleOrNull<DataType>(u_);
+			var v_ = context.Operators.SingletonFrom<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 			var y_ = this.Medical_Reason();
@@ -490,7 +490,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			DataType t_(Extension @this) => 
 				@this?.Value;
 			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingleOrNull<DataType>(u_);
+			var v_ = context.Operators.SingletonFrom<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 			var y_ = this.Medical_Reason();

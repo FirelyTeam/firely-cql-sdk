@@ -231,7 +231,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -317,7 +317,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				DataType m_(Extension @this) => 
 					@this?.Value;
 				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingleOrNull<DataType>(n_);
+				var o_ = context.Operators.SingletonFrom<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Present_on_Admission_or_Clinically_Undetermined();
@@ -429,7 +429,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				DataType m_(Extension @this) => 
 					@this?.Value;
 				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingleOrNull<DataType>(n_);
+				var o_ = context.Operators.SingletonFrom<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Present_on_Admission_or_Clinically_Undetermined();
@@ -584,7 +584,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				DataType m_(Extension @this) => 
 					@this?.Value;
 				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingleOrNull<DataType>(n_);
+				var o_ = context.Operators.SingletonFrom<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
@@ -713,7 +713,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				DataType m_(Extension @this) => 
 					@this?.Value;
 				var n_ = context.Operators.SelectOrNull<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingleOrNull<DataType>(n_);
+				var o_ = context.Operators.SingletonFrom<DataType>(n_);
 				var p_ = context.Operators.Convert<CodeableConcept>(o_);
 				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				var r_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();

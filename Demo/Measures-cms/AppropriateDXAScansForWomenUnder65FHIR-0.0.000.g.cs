@@ -702,7 +702,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -905,7 +905,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return i_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Observation>(d_);
+		var e_ = context.Operators.SingletonFrom<Observation>(d_);
 
 		return e_;
 	}

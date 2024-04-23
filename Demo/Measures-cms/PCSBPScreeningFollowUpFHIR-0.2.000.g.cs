@@ -383,7 +383,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -562,7 +562,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ay_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
 			var o_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
@@ -610,7 +610,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return br_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(n_, ac_, (bool?)true, (bool?)false);
@@ -676,7 +676,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ay_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
 			var o_ = context.Operators.Quantity((decimal?)129m, "mm[Hg]");
@@ -724,7 +724,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return br_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
 			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
@@ -955,7 +955,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ce_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
@@ -1009,7 +1009,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return dh_;
 			};
 			var w_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(u_?.Component, v_);
-			var x_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(w_);
+			var x_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(w_);
 			var y_ = FHIRHelpers_4_3_000.ToValue(x_?.Value);
 			var aa_ = context.Operators.Greater((y_ as CqlQuantity), n_);
 			var ab_ = context.Operators.And(o_, aa_);
@@ -1063,7 +1063,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ek_;
 			};
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
-			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
+			var ak_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
 			var am_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
@@ -1117,7 +1117,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return fn_;
 			};
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
-			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
+			var aw_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
 			var ay_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
@@ -1174,7 +1174,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return bs_;
 			};
 			var m_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(k_?.Component, l_);
-			var n_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(m_);
+			var n_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(m_);
 			var o_ = FHIRHelpers_4_3_000.ToValue(n_?.Value);
 			var p_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
@@ -1211,7 +1211,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ch_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ac_ = context.Operators.Greater((aa_ as CqlQuantity), p_);
 			var ad_ = context.Operators.And(q_, ac_);
@@ -1248,7 +1248,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cw_;
 			};
 			var al_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(aj_?.Component, ak_);
-			var am_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(al_);
+			var am_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(al_);
 			var an_ = FHIRHelpers_4_3_000.ToValue(am_?.Value);
 			var ao_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var ap_ = context.Operators.GreaterOrEqual((an_ as CqlQuantity), ao_);
@@ -1285,7 +1285,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return dl_;
 			};
 			var ax_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(av_?.Component, aw_);
-			var ay_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(ax_);
+			var ay_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ax_);
 			var az_ = FHIRHelpers_4_3_000.ToValue(ay_?.Value);
 			var ba_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var bb_ = context.Operators.GreaterOrEqual((az_ as CqlQuantity), ba_);
@@ -1422,7 +1422,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cc_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var o_ = context.Operators.Quantity((decimal?)139m, "mm[Hg]");
@@ -1470,7 +1470,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cv_;
 			};
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
-			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
+			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var ac_ = context.Operators.Quantity((decimal?)89m, "mm[Hg]");
@@ -1519,7 +1519,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return do_;
 			};
 			var an_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(al_?.Component, am_);
-			var ao_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(an_);
+			var ao_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(an_);
 			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_?.Value);
 			var aq_ = context.Operators.Quantity((decimal?)140m, "mm[Hg]");
 			var ar_ = context.Operators.GreaterOrEqual((ap_ as CqlQuantity), aq_);
@@ -1565,7 +1565,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return eh_;
 			};
 			var az_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ax_?.Component, ay_);
-			var ba_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(az_);
+			var ba_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(az_);
 			var bb_ = FHIRHelpers_4_3_000.ToValue(ba_?.Value);
 			var bc_ = context.Operators.Quantity((decimal?)90m, "mm[Hg]");
 			var bd_ = context.Operators.GreaterOrEqual((bb_ as CqlQuantity), bc_);
@@ -1765,7 +1765,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return bx_;
 			};
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
-			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
+			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
@@ -1811,7 +1811,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return cq_;
 			};
 			var w_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(u_?.Component, v_);
-			var x_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(w_);
+			var x_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(w_);
 			var y_ = FHIRHelpers_4_3_000.ToValue(x_?.Value);
 			var aa_ = context.Operators.Greater((y_ as CqlQuantity), n_);
 			var ab_ = context.Operators.And(o_, aa_);
@@ -1857,7 +1857,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return dj_;
 			};
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
-			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
+			var ak_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
 			var am_ = context.Operators.Quantity((decimal?)140m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
@@ -1903,7 +1903,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				return ec_;
 			};
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
-			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
+			var aw_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
 			var ay_ = context.Operators.Quantity((decimal?)90m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
@@ -2106,7 +2106,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				DataType t_(Extension @this) => 
 					@this?.Value;
 				var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
-				var v_ = context.Operators.SingleOrNull<DataType>(u_);
+				var v_ = context.Operators.SingletonFrom<DataType>(u_);
 				var w_ = context.Operators.Convert<CodeableConcept>(v_);
 				var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 				var y_ = this.Patient_Declined();
@@ -2121,7 +2121,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						? ((NoBPScreen as DomainResource).Extension)
 						: null), aa_);
 				var ad_ = context.Operators.SelectOrNull<Extension, DataType>(ab_, t_);
-				var ae_ = context.Operators.SingleOrNull<DataType>(ad_);
+				var ae_ = context.Operators.SingletonFrom<DataType>(ad_);
 				var af_ = context.Operators.Convert<CodeableConcept>(ae_);
 				var ag_ = FHIRHelpers_4_3_000.ToConcept(af_);
 				var ah_ = this.Medical_Reason();
@@ -2190,7 +2190,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			DataType ah_(Extension @this) => 
 				@this?.Value;
 			var ai_ = context.Operators.SelectOrNull<Extension, DataType>(ag_, ah_);
-			var aj_ = context.Operators.SingleOrNull<DataType>(ai_);
+			var aj_ = context.Operators.SingletonFrom<DataType>(ai_);
 			var ak_ = context.Operators.Convert<CodeableConcept>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToConcept(ak_);
 			var am_ = this.Patient_Declined();
@@ -2238,7 +2238,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			DataType r_(Extension @this) => 
 				@this?.Value;
 			var s_ = context.Operators.SelectOrNull<Extension, DataType>(q_, r_);
-			var t_ = context.Operators.SingleOrNull<DataType>(s_);
+			var t_ = context.Operators.SingletonFrom<DataType>(s_);
 			var u_ = context.Operators.Convert<CodeableConcept>(t_);
 			var v_ = FHIRHelpers_4_3_000.ToConcept(u_);
 			var w_ = this.Patient_Declined();
@@ -2283,7 +2283,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			DataType v_(Extension @this) => 
 				@this?.Value;
 			var w_ = context.Operators.SelectOrNull<Extension, DataType>(u_, v_);
-			var x_ = context.Operators.SingleOrNull<DataType>(w_);
+			var x_ = context.Operators.SingletonFrom<DataType>(w_);
 			var y_ = context.Operators.Convert<CodeableConcept>(x_);
 			var z_ = FHIRHelpers_4_3_000.ToConcept(y_);
 			var aa_ = this.Patient_Declined();
@@ -2332,7 +2332,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			DataType ab_(Extension @this) => 
 				@this?.Value;
 			var ac_ = context.Operators.SelectOrNull<Extension, DataType>(aa_, ab_);
-			var ad_ = context.Operators.SingleOrNull<DataType>(ac_);
+			var ad_ = context.Operators.SingletonFrom<DataType>(ac_);
 			var ae_ = context.Operators.Convert<CodeableConcept>(ad_);
 			var af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
 			var ag_ = this.Patient_Declined();
@@ -2400,7 +2400,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				DataType aq_(Extension @this) => 
 					@this?.Value;
 				var ar_ = context.Operators.SelectOrNull<Extension, DataType>(ap_, aq_);
-				var as_ = context.Operators.SingleOrNull<DataType>(ar_);
+				var as_ = context.Operators.SingletonFrom<DataType>(ar_);
 				var at_ = context.Operators.Convert<CodeableConcept>(as_);
 				var au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 				var av_ = this.Patient_Declined();
@@ -2469,7 +2469,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				DataType ce_(Extension @this) => 
 					@this?.Value;
 				var cf_ = context.Operators.SelectOrNull<Extension, DataType>(cd_, ce_);
-				var cg_ = context.Operators.SingleOrNull<DataType>(cf_);
+				var cg_ = context.Operators.SingletonFrom<DataType>(cf_);
 				var ch_ = context.Operators.Convert<CodeableConcept>(cg_);
 				var ci_ = FHIRHelpers_4_3_000.ToConcept(ch_);
 				var cj_ = this.Patient_Declined();

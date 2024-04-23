@@ -426,7 +426,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -697,7 +697,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return v_;
 		};
 		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<Observation>(k_);
+		var l_ = context.Operators.SingletonFrom<Observation>(k_);
 
 		return l_;
 	}
@@ -769,7 +769,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return v_;
 		};
 		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<Observation>(k_);
+		var l_ = context.Operators.SingletonFrom<Observation>(k_);
 
 		return l_;
 	}

@@ -88,7 +88,7 @@ public class SupplementalDataElements_3_4_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -126,7 +126,7 @@ public class SupplementalDataElements_3_4_000
 			return m_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		var d_ = context.Operators.SingleOrNull<Extension>(c_);
+		var d_ = context.Operators.SingletonFrom<Extension>(c_);
 		var e_ = new Extension[]
 		{
 			d_,
@@ -145,7 +145,7 @@ public class SupplementalDataElements_3_4_000
 			DataType p_(Extension @this) => 
 				@this?.Value;
 			var q_ = context.Operators.SelectOrNull<Extension, DataType>(o_, p_);
-			var r_ = context.Operators.SingleOrNull<DataType>(q_);
+			var r_ = context.Operators.SingletonFrom<DataType>(q_);
 			var s_ = context.Operators.Convert<Coding>(r_);
 			var t_ = FHIRHelpers_4_3_000.ToCode(s_);
 			var u_ = new CqlCode[]
@@ -183,7 +183,7 @@ public class SupplementalDataElements_3_4_000
 			object ae_(Extension @this) => 
 				@this?.Value;
 			var af_ = context.Operators.SelectOrNull<Extension, object>(ad_, ae_);
-			var ag_ = context.Operators.SingleOrNull<object>(af_);
+			var ag_ = context.Operators.SingletonFrom<object>(af_);
 			var ah_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
 				codes = ab_,
@@ -193,7 +193,7 @@ public class SupplementalDataElements_3_4_000
 			return ah_;
 		};
 		var g_ = context.Operators.SelectOrNull<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
@@ -256,7 +256,7 @@ public class SupplementalDataElements_3_4_000
 			return m_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		var d_ = context.Operators.SingleOrNull<Extension>(c_);
+		var d_ = context.Operators.SingletonFrom<Extension>(c_);
 		var e_ = new Extension[]
 		{
 			d_,
@@ -314,7 +314,7 @@ public class SupplementalDataElements_3_4_000
 			object ac_(Extension @this) => 
 				@this?.Value;
 			var ad_ = context.Operators.SelectOrNull<Extension, object>(ab_, ac_);
-			var ae_ = context.Operators.SingleOrNull<object>(ad_);
+			var ae_ = context.Operators.SingletonFrom<object>(ad_);
 			var af_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
 				codes = z_,
@@ -324,7 +324,7 @@ public class SupplementalDataElements_3_4_000
 			return af_;
 		};
 		var g_ = context.Operators.SelectOrNull<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}

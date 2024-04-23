@@ -160,7 +160,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -230,7 +230,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			var r_ = this.Measurement_Period();
 			var s_ = context.Operators.Start(r_);
 			var u_ = context.Operators.Start(r_);
-			var v_ = context.Operators.ComponentFrom(u_, "year");
+			var v_ = context.Operators.DateTimeComponentFrom(u_, "year");
 			var w_ = context.Operators.Date(v_, (int?)10, (int?)31);
 			var x_ = context.Operators.ConvertDateToDateTime(w_);
 			var y_ = context.Operators.Interval(s_, x_, (bool?)true, (bool?)true);

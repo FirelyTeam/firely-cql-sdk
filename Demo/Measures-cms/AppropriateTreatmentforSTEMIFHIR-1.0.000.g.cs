@@ -490,7 +490,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -1106,7 +1106,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			return j_;
 		};
 		var b_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
-		var c_ = context.Operators.SingleOrNull<Encounter.LocationComponent>(b_);
+		var c_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(b_);
 		var d_ = FHIRHelpers_4_3_000.ToInterval(c_?.Period);
 		var e_ = context.Operators.Start(d_);
 

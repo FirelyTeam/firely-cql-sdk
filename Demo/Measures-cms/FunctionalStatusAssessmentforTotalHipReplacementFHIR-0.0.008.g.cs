@@ -552,7 +552,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -609,7 +609,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.Subtract(c_, (int?)1);
 		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var f_ = context.Operators.DateTime(d_, (int?)11, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
@@ -686,7 +686,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.Subtract(c_, (int?)2);
 		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var f_ = context.Operators.DateTime(d_, (int?)11, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
@@ -702,7 +702,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		var d_ = context.Operators.Subtract(c_, (int?)1);
 		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 		var f_ = context.Operators.DateTime(d_, (int?)10, (int?)31, (int?)23, (int?)59, (int?)59, (int?)0, e_);
@@ -1205,7 +1205,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				ct_,
 				cx_,
 			};
-			var cz_ = context.Operators.MaxOrNull<CqlDate>((cy_ as IEnumerable<CqlDate>));
+			var cz_ = context.Operators.Max<CqlDate>((cy_ as IEnumerable<CqlDate>));
 
 			return cz_;
 		};
@@ -1463,7 +1463,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				ag_,
 				ak_,
 			};
-			var am_ = context.Operators.MaxOrNull<CqlDate>((al_ as IEnumerable<CqlDate>));
+			var am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
 
 			return am_;
 		};
@@ -1611,7 +1611,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				ag_,
 				ak_,
 			};
-			var am_ = context.Operators.MaxOrNull<CqlDate>((al_ as IEnumerable<CqlDate>));
+			var am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
 
 			return am_;
 		};
@@ -1759,7 +1759,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				ag_,
 				ak_,
 			};
-			var am_ = context.Operators.MaxOrNull<CqlDate>((al_ as IEnumerable<CqlDate>));
+			var am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
 
 			return am_;
 		};
