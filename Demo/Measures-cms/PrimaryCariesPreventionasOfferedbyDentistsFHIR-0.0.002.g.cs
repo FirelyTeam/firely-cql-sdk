@@ -248,7 +248,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 			return r_;
 		};
 		var g_ = context.Operators.SelectOrNull<Procedure, CqlDate>(e_, f_);
-		var h_ = context.Operators.CountOrNull<CqlDate>(g_);
+		var h_ = context.Operators.Count<CqlDate>(g_);
 		var i_ = context.Operators.GreaterOrEqual(h_, (int?)2);
 
 		return i_;

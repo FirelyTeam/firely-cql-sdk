@@ -112,7 +112,7 @@ partial class CqlOperatorsBinder
         throw new ArgumentException("Expression should be a constant CqlValueSet");
     }
 
-    private Expression Minimum(Expression typeConstant)
+    private Expression MinValue(Expression typeConstant)
     {
         if (typeConstant is ConstantExpression { Value: Type t })
         {
@@ -123,7 +123,7 @@ partial class CqlOperatorsBinder
         throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
     }
 
-    private Expression Maximum(Expression typeConstant)
+    private Expression MaxValue(Expression typeConstant)
     {
         if (typeConstant is ConstantExpression { Value: Type t })
         {

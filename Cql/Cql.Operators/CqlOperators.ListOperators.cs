@@ -953,7 +953,7 @@ namespace Hl7.Cql.Runtime
 
         #region AtIndex
 
-        public T? GetAtIndex<T>(IEnumerable<T>? source, int? index)
+        public T? Indexer<T>(IEnumerable<T>? source, int? index)
             where T : class
         {
             if (source == null || index == null)
@@ -1101,7 +1101,7 @@ namespace Hl7.Cql.Runtime
 
         #region Singleton From
 
-        public T? SingleOrNull<T>(IEnumerable<T>? source)
+        public T? SingletonFrom<T>(IEnumerable<T>? source)
         {
             if (source == null)
                 return (T?)(object?)null;

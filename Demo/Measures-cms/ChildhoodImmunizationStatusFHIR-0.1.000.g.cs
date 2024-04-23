@@ -1735,22 +1735,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		bool? b_(CqlDate HibImmunization)
 		{
 			var e_ = this.Hib_4_Dose_Immunizations_or_Procedures();
-			var f_ = context.Operators.CountOrNull<CqlDate>(e_);
+			var f_ = context.Operators.Count<CqlDate>(e_);
 			var g_ = context.Operators.Greater(f_, (int?)0);
 			var h_ = this.All_Hib_Vaccinations();
 			CqlDate i_(CqlDate HibVaccinations) => 
 				HibVaccinations;
 			var j_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
 			var k_ = context.Operators.ListDistinct<CqlDate>(j_);
-			var l_ = context.Operators.CountOrNull<CqlDate>(k_);
+			var l_ = context.Operators.Count<CqlDate>(k_);
 			var m_ = context.Operators.GreaterOrEqual(l_, (int?)4);
 			var n_ = context.Operators.And(g_, m_);
-			var p_ = context.Operators.CountOrNull<CqlDate>(e_);
+			var p_ = context.Operators.Count<CqlDate>(e_);
 			var q_ = context.Operators.Greater(p_, (int?)0);
 			var r_ = context.Operators.IsFalse(q_);
 			var u_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
 			var v_ = context.Operators.ListDistinct<CqlDate>(u_);
-			var w_ = context.Operators.CountOrNull<CqlDate>(v_);
+			var w_ = context.Operators.Count<CqlDate>(v_);
 			var x_ = context.Operators.GreaterOrEqual(w_, (int?)3);
 			var y_ = context.Operators.And(r_, x_);
 			var z_ = context.Operators.Or(n_, y_);
@@ -2452,22 +2452,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		bool? b_(CqlDate RotavirusImmunization)
 		{
 			var e_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures();
-			var f_ = context.Operators.CountOrNull<CqlDate>(e_);
+			var f_ = context.Operators.Count<CqlDate>(e_);
 			var g_ = context.Operators.Greater(f_, (int?)0);
 			var h_ = this.All_Rotavirus_Vaccinations();
 			CqlDate i_(CqlDate RotavirusVaccinations) => 
 				RotavirusVaccinations;
 			var j_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
 			var k_ = context.Operators.ListDistinct<CqlDate>(j_);
-			var l_ = context.Operators.CountOrNull<CqlDate>(k_);
+			var l_ = context.Operators.Count<CqlDate>(k_);
 			var m_ = context.Operators.GreaterOrEqual(l_, (int?)3);
 			var n_ = context.Operators.And(g_, m_);
-			var p_ = context.Operators.CountOrNull<CqlDate>(e_);
+			var p_ = context.Operators.Count<CqlDate>(e_);
 			var q_ = context.Operators.Greater(p_, (int?)0);
 			var r_ = context.Operators.IsFalse(q_);
 			var u_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(h_, i_);
 			var v_ = context.Operators.ListDistinct<CqlDate>(u_);
-			var w_ = context.Operators.CountOrNull<CqlDate>(v_);
+			var w_ = context.Operators.Count<CqlDate>(v_);
 			var x_ = context.Operators.GreaterOrEqual(w_, (int?)2);
 			var y_ = context.Operators.And(r_, x_);
 			var z_ = context.Operators.Or(n_, y_);

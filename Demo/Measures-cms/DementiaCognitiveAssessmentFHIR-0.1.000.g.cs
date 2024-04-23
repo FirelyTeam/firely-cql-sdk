@@ -376,7 +376,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var a_ = this.Dementia_Encounter_During_Measurement_Period();
 		var b_ = context.Operators.ExistsInList<Encounter>(a_);
 		var c_ = this.Qualifying_Encounter_During_Measurement_Period();
-		var d_ = context.Operators.CountOrNull<Encounter>(c_);
+		var d_ = context.Operators.Count<Encounter>(c_);
 		var e_ = context.Operators.GreaterOrEqual(d_, (int?)2);
 		var f_ = context.Operators.And(b_, e_);
 

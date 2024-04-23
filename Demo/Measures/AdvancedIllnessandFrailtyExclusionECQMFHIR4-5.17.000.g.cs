@@ -210,7 +210,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -463,7 +463,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			return j_;
 		};
 		var f_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, int?>(d_, e_);
-		var g_ = context.Operators.MaxOrNull<int?>(f_);
+		var g_ = context.Operators.Max<int?>(f_);
 
 		return g_;
 	}

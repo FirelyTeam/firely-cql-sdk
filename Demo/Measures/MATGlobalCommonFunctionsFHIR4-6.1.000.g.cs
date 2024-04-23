@@ -483,7 +483,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -602,7 +602,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return f_();
 		};
 		var d_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(d_);
+		var e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
 	}
@@ -639,7 +639,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return f_();
 		};
 		var d_ = context.Operators.SelectOrNull<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<IEnumerable<Encounter.LocationComponent>>(d_);
+		var e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
 	}
@@ -860,7 +860,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return aa_;
 		};
 		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -1174,7 +1174,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				return j_;
 			};
 			var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-			var f_ = context.Operators.SingleOrNull<Condition>(e_);
+			var f_ = context.Operators.SingletonFrom<Condition>(e_);
 
 			return f_;
 		};
@@ -1197,7 +1197,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return h_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 
 		return d_;
 	}
@@ -1245,7 +1245,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public Extension GetExtension(DomainResource domainResource, string url)
 	{
 		var a_ = this.GetExtensions(domainResource, url);
-		var b_ = context.Operators.SingleOrNull<Extension>(a_);
+		var b_ = context.Operators.SingletonFrom<Extension>(a_);
 
 		return b_;
 	}
@@ -1254,7 +1254,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public Extension GetExtension(Element element, string url)
 	{
 		var a_ = this.GetExtensions(element, url);
-		var b_ = context.Operators.SingleOrNull<Extension>(a_);
+		var b_ = context.Operators.SingletonFrom<Extension>(a_);
 
 		return b_;
 	}
@@ -1279,7 +1279,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return j_;
 		};
 		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
-		var c_ = context.Operators.SingleOrNull<Encounter.DiagnosisComponent>(b_);
+		var c_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
 			c_,
@@ -1297,12 +1297,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				return r_;
 			};
 			var m_ = context.Operators.WhereOrNull<Condition>(k_, l_);
-			var n_ = context.Operators.SingleOrNull<Condition>(m_);
+			var n_ = context.Operators.SingletonFrom<Condition>(m_);
 
 			return n_;
 		};
 		var f_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>(d_, e_);
-		var g_ = context.Operators.SingleOrNull<Condition>(f_);
+		var g_ = context.Operators.SingletonFrom<Condition>(f_);
 
 		return g_;
 	}
@@ -1321,7 +1321,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return h_;
 		};
 		var c_ = context.Operators.WhereOrNull<Location>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Location>(c_);
+		var d_ = context.Operators.SingletonFrom<Location>(c_);
 
 		return d_;
 	}
@@ -1350,7 +1350,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public Extension GetBaseExtension(DomainResource domainResource, string url)
 	{
 		var a_ = this.GetBaseExtensions(domainResource, url);
-		var b_ = context.Operators.SingleOrNull<Extension>(a_);
+		var b_ = context.Operators.SingletonFrom<Extension>(a_);
 
 		return b_;
 	}
@@ -1383,7 +1383,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public Extension BaseExtension(Element element, string id)
 	{
 		var a_ = this.BaseExtensions(element, id);
-		var b_ = context.Operators.SingleOrNull<Extension>(a_);
+		var b_ = context.Operators.SingletonFrom<Extension>(a_);
 
 		return b_;
 	}
@@ -1410,7 +1410,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					return i_;
 				};
 				var d_ = context.Operators.WhereOrNull<Medication>(b_, c_);
-				var e_ = context.Operators.SingleOrNull<Medication>(d_);
+				var e_ = context.Operators.SingletonFrom<Medication>(d_);
 
 				return e_?.Code;
 			};
@@ -1472,7 +1472,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return f_();
 		};
 		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -1506,7 +1506,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			return f_();
 		};
 		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
 	}

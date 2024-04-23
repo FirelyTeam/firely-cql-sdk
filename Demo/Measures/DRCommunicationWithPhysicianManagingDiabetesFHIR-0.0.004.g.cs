@@ -302,7 +302,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -451,7 +451,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	public Extension GetModifierExtension(DomainResource domainResource, string url)
 	{
 		var a_ = this.GetModifierExtensions(domainResource, url);
-		var b_ = context.Operators.SingleOrNull<Extension>(a_);
+		var b_ = context.Operators.SingletonFrom<Extension>(a_);
 
 		return b_;
 	}

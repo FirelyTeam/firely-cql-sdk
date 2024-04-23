@@ -103,9 +103,6 @@ Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<
 Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>? intervals, string? precision) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>?
 Hl7.Cql.Operators.ICqlOperators.Combine(System.Collections.Generic.IEnumerable<string!>! source, string? separator) -> string?
 Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.Abstractions.ICqlComparer!
-Hl7.Cql.Operators.ICqlOperators.ComponentFrom(Hl7.Cql.Primitives.CqlDate? argument, string? precision) -> int?
-Hl7.Cql.Operators.ICqlOperators.ComponentFrom(Hl7.Cql.Primitives.CqlDateTime? argument, string? precision) -> int?
-Hl7.Cql.Operators.ICqlOperators.ComponentFrom(Hl7.Cql.Primitives.CqlTime? argument, string? precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.Concatenate(string? left, string? right) -> string?
 Hl7.Cql.Operators.ICqlOperators.ConceptInValueSet(Hl7.Cql.Primitives.CqlConcept? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ConceptsInValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlConcept?>? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
@@ -155,7 +152,7 @@ Hl7.Cql.Operators.ICqlOperators.ConvertStringToLong(string? s) -> long?
 Hl7.Cql.Operators.ICqlOperators.ConvertStringToQuantity(string? s) -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Operators.ICqlOperators.ConvertStringToTime(string? s) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.ConvertTimeToString(Hl7.Cql.Primitives.CqlTime? t) -> string?
-Hl7.Cql.Operators.ICqlOperators.CountOrNull<T>(System.Collections.Generic.IEnumerable<T>? source) -> int?
+Hl7.Cql.Operators.ICqlOperators.Count<T>(System.Collections.Generic.IEnumerable<T>? source) -> int?
 Hl7.Cql.Operators.ICqlOperators.CreateValueSetFacade(Hl7.Cql.Primitives.CqlValueSet! valueSet) -> Hl7.Cql.ValueSets.IValueSetFacade!
 Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4, T5, T6, T7, T8>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4, System.Collections.Generic.IEnumerable<T5>? source5, System.Collections.Generic.IEnumerable<T6>? source6, System.Collections.Generic.IEnumerable<T7>? source7, System.Collections.Generic.IEnumerable<T8>? source8) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4, T5, T6, T7, T8)>!
 Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2, T3, T4, T5, T6, T7>(System.Collections.Generic.IEnumerable<T1>? source1, System.Collections.Generic.IEnumerable<T2>? source2, System.Collections.Generic.IEnumerable<T3>? source3, System.Collections.Generic.IEnumerable<T4>? source4, System.Collections.Generic.IEnumerable<T5>? source5, System.Collections.Generic.IEnumerable<T6>? source6, System.Collections.Generic.IEnumerable<T7>? source7) -> System.Collections.Generic.IEnumerable<(T1, T2, T3, T4, T5, T6, T7)>!
@@ -167,6 +164,9 @@ Hl7.Cql.Operators.ICqlOperators.CrossJoin<T1, T2>(System.Collections.Generic.IEn
 Hl7.Cql.Operators.ICqlOperators.Date(int? year, int? month, int? day) -> Hl7.Cql.Primitives.CqlDate?
 Hl7.Cql.Operators.ICqlOperators.DateFrom(Hl7.Cql.Primitives.CqlDateTime? argument) -> Hl7.Cql.Primitives.CqlDate?
 Hl7.Cql.Operators.ICqlOperators.DateTime(int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, decimal? offset) -> Hl7.Cql.Primitives.CqlDateTime?
+Hl7.Cql.Operators.ICqlOperators.DateTimeComponentFrom(Hl7.Cql.Primitives.CqlDate? argument, string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.DateTimeComponentFrom(Hl7.Cql.Primitives.CqlDateTime? argument, string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.DateTimeComponentFrom(Hl7.Cql.Primitives.CqlTime? argument, string? precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.Descendents(object? argument) -> System.Collections.Generic.IEnumerable<object?>?
 Hl7.Cql.Operators.ICqlOperators.DifferenceBetween(Hl7.Cql.Primitives.CqlDate? low, Hl7.Cql.Primitives.CqlDate? high, string? precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.DifferenceBetween(Hl7.Cql.Primitives.CqlDateTime? low, Hl7.Cql.Primitives.CqlDateTime? high, string? precision) -> int?
@@ -216,8 +216,6 @@ Hl7.Cql.Operators.ICqlOperators.Floor(decimal? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Floor(int? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Floor(long? argument) -> long?
 Hl7.Cql.Operators.ICqlOperators.GeometricMean(System.Collections.Generic.IEnumerable<decimal?>! argument) -> decimal?
-Hl7.Cql.Operators.ICqlOperators.GetAtIndex(string? argument, int? index) -> string?
-Hl7.Cql.Operators.ICqlOperators.GetAtIndex<T>(System.Collections.Generic.IEnumerable<T!>? source, int? index) -> T?
 Hl7.Cql.Operators.ICqlOperators.Greater(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.GreaterOrEqual(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.GreaterOrSamePrecision(Hl7.Cql.Primitives.CqlDate? left, string? precision) -> bool?
@@ -229,6 +227,8 @@ Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlDateTime? inp
 Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlTime? input, int? precision) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Implies(bool? left, bool? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Implies(System.Lazy<bool?>! left, System.Lazy<bool?>! right) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Indexer(string? argument, int? index) -> string?
+Hl7.Cql.Operators.ICqlOperators.Indexer<T>(System.Collections.Generic.IEnumerable<T!>? source, int? index) -> T?
 Hl7.Cql.Operators.ICqlOperators.IndexOf(string! pattern, string! argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.IndexOf<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
 Hl7.Cql.Operators.ICqlOperators.InList<T>(T element, System.Collections.Generic.IEnumerable<T>! argument) -> bool?
@@ -321,8 +321,8 @@ Hl7.Cql.Operators.ICqlOperators.LowBoundary(Hl7.Cql.Primitives.CqlDateTime? inpu
 Hl7.Cql.Operators.ICqlOperators.LowBoundary(Hl7.Cql.Primitives.CqlTime? input, int? precision) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Lower(string! argument) -> string?
 Hl7.Cql.Operators.ICqlOperators.Matches(string! source, string! pattern) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Max<T>(System.Collections.Generic.IEnumerable<T>? items) -> T
 Hl7.Cql.Operators.ICqlOperators.Maximum<T>() -> T
-Hl7.Cql.Operators.ICqlOperators.MaxOrNull<T>(System.Collections.Generic.IEnumerable<T>? items) -> T
 Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<decimal?>! source) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<int?>! source) -> int?
 Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<long?>! source) -> long?
@@ -349,8 +349,8 @@ Hl7.Cql.Operators.ICqlOperators.MeetsBefore(Hl7.Cql.Primitives.CqlInterval<int?>
 Hl7.Cql.Operators.ICqlOperators.MeetsBefore(Hl7.Cql.Primitives.CqlInterval<long?>! left, Hl7.Cql.Primitives.CqlInterval<long?>! right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Message<T>(T source, string! code, string! severity, string! message) -> T
 Hl7.Cql.Operators.ICqlOperators.MessageReceived -> System.EventHandler<Hl7.Cql.Operators.MessageEventArgs!>?
+Hl7.Cql.Operators.ICqlOperators.Min<T>(System.Collections.Generic.IEnumerable<T>? items) -> T
 Hl7.Cql.Operators.ICqlOperators.Minimum<T>() -> T
-Hl7.Cql.Operators.ICqlOperators.MinOrNull<T>(System.Collections.Generic.IEnumerable<T>? items) -> T
 Hl7.Cql.Operators.ICqlOperators.Mode<T>(System.Collections.Generic.IEnumerable<T>? typedSource) -> T
 Hl7.Cql.Operators.ICqlOperators.Modulo(decimal? left, decimal? right) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Modulo(Hl7.Cql.Primitives.CqlQuantity! left, Hl7.Cql.Primitives.CqlQuantity! right) -> Hl7.Cql.Primitives.CqlQuantity?
@@ -436,7 +436,7 @@ Hl7.Cql.Operators.ICqlOperators.SamePrecision(Hl7.Cql.Primitives.CqlTime? left, 
 Hl7.Cql.Operators.ICqlOperators.SelectManyOrNull<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>? source, System.Func<TSource, System.Collections.Generic.IEnumerable<TResult>!>! collectionSelector) -> System.Collections.Generic.IEnumerable<TResult>?
 Hl7.Cql.Operators.ICqlOperators.SelectManyResultsOrNull<TSource, TCollection, TResult>(System.Collections.Generic.IEnumerable<TSource>? source, System.Func<TSource, System.Collections.Generic.IEnumerable<TCollection>!>! collectionSelector, System.Func<TSource, TCollection, TResult>! resultSelector) -> System.Collections.Generic.IEnumerable<TResult>?
 Hl7.Cql.Operators.ICqlOperators.SelectOrNull<T, TR>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, TR>! select) -> System.Collections.Generic.IEnumerable<TR>?
-Hl7.Cql.Operators.ICqlOperators.SingleOrNull<T>(System.Collections.Generic.IEnumerable<T>? source) -> T?
+Hl7.Cql.Operators.ICqlOperators.SingletonFrom<T>(System.Collections.Generic.IEnumerable<T>? source) -> T?
 Hl7.Cql.Operators.ICqlOperators.Slice<T>(System.Collections.Generic.IEnumerable<T>? source, int? startIndex, int? endIndex) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.Split(string! stringToSplit, string! separator) -> System.Collections.Generic.IEnumerable<string!>?
 Hl7.Cql.Operators.ICqlOperators.SplitOnMatches(string! stringToSplit, string! separatorPattern) -> System.Collections.Generic.IEnumerable<string!>?
@@ -488,10 +488,10 @@ Hl7.Cql.Operators.ICqlOperators.ToList<T>(T item) -> System.Collections.Generic.
 Hl7.Cql.Operators.ICqlOperators.Truncate(decimal? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Truncate(int? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Truncate(long? argument) -> long?
-Hl7.Cql.Operators.ICqlOperators.TruncateDivide(decimal? left, decimal? right) -> decimal?
-Hl7.Cql.Operators.ICqlOperators.TruncateDivide(Hl7.Cql.Primitives.CqlQuantity? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlQuantity?
-Hl7.Cql.Operators.ICqlOperators.TruncateDivide(int? left, int? right) -> int?
-Hl7.Cql.Operators.ICqlOperators.TruncateDivide(long? left, long? right) -> long?
+Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(decimal? left, decimal? right) -> decimal?
+Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(Hl7.Cql.Primitives.CqlQuantity? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlQuantity?
+Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(int? left, int? right) -> int?
+Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(long? left, long? right) -> long?
 Hl7.Cql.Operators.ICqlOperators.Upper(string! argument) -> string?
 Hl7.Cql.Operators.ICqlOperators.ValueSetUnion(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? left, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? right) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>?
 Hl7.Cql.Operators.ICqlOperators.Variance(System.Collections.Generic.IEnumerable<decimal?>? argument) -> decimal?

@@ -1050,7 +1050,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var u_ = CumulativeMedicationDuration_4_0_000.Quantity(h_?.Timing?.Repeat?.PeriodElement?.Value, t_);
 			var v_ = CumulativeMedicationDuration_4_0_000.ToDaily((h_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? h_?.Timing?.Repeat?.FrequencyElement?.Value), u_);
 			var x_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(h_?.Timing?.Repeat?.TimeOfDayElement, "value");
-			var y_ = context.Operators.CountOrNull<CqlTime>(x_);
+			var y_ = context.Operators.Count<CqlTime>(x_);
 			var z_ = context.Operators.ConvertIntegerToDecimal(y_);
 			var aa_ = context.Operators.Multiply((k_ ?? (n_ as CqlQuantity))?.value, ((v_ ?? z_) ?? (decimal?)1.0m));
 			var ab_ = context.Operators.Divide(g_?.value, aa_);

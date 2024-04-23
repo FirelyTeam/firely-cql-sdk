@@ -292,7 +292,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
 		var h_ = AHAOverall_2_6_000.Qualifying_Outpatient_Encounter_During_Measurement_Period();
-		var i_ = context.Operators.CountOrNull<Encounter>(h_);
+		var i_ = context.Operators.Count<Encounter>(h_);
 		var j_ = context.Operators.GreaterOrEqual(i_, (int?)2);
 		var k_ = context.Operators.And(g_, j_);
 		var l_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter();

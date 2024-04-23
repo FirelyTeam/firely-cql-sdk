@@ -9,6 +9,7 @@
 using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler;
 
@@ -17,6 +18,19 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal abstract class OperatorsBinder
 {
+    /// <summary>
+    /// Binds a <paramref name="methodName"/> on <see cref="ICqlOperators"/> to an <see cref="Expression"/>.
+    /// </summary>
+    /// <param name="methodName">The method to bind to.</param>
+    /// <param name="resultTypeHint"></param>
+    /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
+    /// <returns>A <see cref="MethodCallExpression"/> that binds to a method on <see cref="ICqlOperators"/>.</returns>
+    public abstract MethodCallExpression BindToMethod(
+        string methodName,
+        Type? resultTypeHint,
+        params Expression[] args
+    );
+
     /// <summary>
     /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
     /// </summary>

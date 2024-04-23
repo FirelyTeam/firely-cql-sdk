@@ -634,7 +634,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, (int?)12);
 		var h_ = this.Qualifying_Visit_During_Measurement_Period();
-		var i_ = context.Operators.CountOrNull<Encounter>(h_);
+		var i_ = context.Operators.Count<Encounter>(h_);
 		var j_ = context.Operators.GreaterOrEqual(i_, (int?)2);
 		var k_ = this.Preventive_Visit_During_Measurement_Period();
 		var l_ = context.Operators.ExistsInList<Encounter>(k_);

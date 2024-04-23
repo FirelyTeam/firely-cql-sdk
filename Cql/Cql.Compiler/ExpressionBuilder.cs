@@ -203,6 +203,12 @@ namespace Hl7.Cql.Compiler
             params T?[] args) =>
             _operatorsBinder.BindToMethod(@operator, resultTypeHint, TranslateAll(args));
 
+        private Expression BindCqlOperator<T>(
+            string methodName,
+            Type? resultTypeHint,
+            params T?[] args) =>
+            _operatorsBinder.BindToMethod(methodName, resultTypeHint, TranslateAll(args));
+
         private Expression[] TranslateAll(params object?[] args) =>
             TranslateAll<object?>(args);
 
@@ -247,7 +253,7 @@ namespace Hl7.Cql.Compiler
                         Combine com                => BindCqlOperator(CqlOperator.Combine, resultTypeHint, com.source, com.separator),
                         Concatenate cctn           => BindCqlOperator(CqlOperator.Concatenate, resultTypeHint, cctn.operand),
                         ConvertQuantity cqe        => BindCqlOperator(CqlOperator.ConvertQuantity, resultTypeHint, cqe.operand[..2]),
-                        ConvertsToBoolean ce       => BindCqlOperator(CqlOperator.ConvertsToDate, resultTypeHint, ce.operand),
+                        ConvertsToBoolean ce       => throw new NotImplementedException().WithContext(this), //BindCqlOperator(CqlOperator.ConvertsToBoolean, resultTypeHint, ce.operand),
                         ConvertsToDate ce          => BindCqlOperator(CqlOperator.ConvertsToDate, resultTypeHint, ce.operand),
                         ConvertsToDateTime ce      => BindCqlOperator(CqlOperator.ConvertsToDateTime, resultTypeHint, ce.operand),
                         ConvertsToDecimal ce       => BindCqlOperator(CqlOperator.ConvertsToDecimal, resultTypeHint, ce.operand),
@@ -258,15 +264,15 @@ namespace Hl7.Cql.Compiler
                         ConvertsToTime ce          => BindCqlOperator(CqlOperator.ConvertsToTime, resultTypeHint, ce.operand),
                         Count ce                   => BindCqlOperator(CqlOperator.Count, resultTypeHint, ce.source),
                         Date d                     => BindCqlOperator(CqlOperator.Date, resultTypeHint, d.year, d.month, d.day),
-                        DateFrom dfe               => BindCqlOperator(CqlOperator.DateComponent, resultTypeHint, dfe.operand!),
+                        DateFrom dfe               => BindCqlOperator(CqlOperator.DateFrom, resultTypeHint, dfe.operand!),
                         Descendents desc           => BindCqlOperator(CqlOperator.Descendents, resultTypeHint, desc.source),
                         Elm.DateTime dt            => BindCqlOperator(CqlOperator.DateTime, resultTypeHint, dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second, dt.millisecond, dt.timezoneOffset),
-                        DateTimeComponentFrom dtcf => BindCqlOperator(CqlOperator.DateTimeComponent, resultTypeHint, dtcf.operand, dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
+                        DateTimeComponentFrom dtcf => BindCqlOperator(CqlOperator.DateTimeComponentFrom, resultTypeHint, dtcf.operand, dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
                         DifferenceBetween dbe      => BindCqlOperator(CqlOperator.DifferenceBetween, resultTypeHint, [.. dbe.operand[..2], dbe.precisionOrNull()]),
                         Distinct distinct          => BindCqlOperator(CqlOperator.Distinct, resultTypeHint, distinct.operand),
                         Divide divide              => BindCqlOperator(CqlOperator.Divide, resultTypeHint, divide.operand[..2]),
                         DurationBetween dbe        => BindCqlOperator(CqlOperator.DurationBetween, resultTypeHint, [.. dbe.operand[..2], dbe.precisionOrNull()]),
-                        End e                      => BindCqlOperator(CqlOperator.IntervalEnd, resultTypeHint, e.operand),
+                        End e                      => BindCqlOperator(CqlOperator.End, resultTypeHint, e.operand),
                         EndsWith e                 => BindCqlOperator(CqlOperator.EndsWith, resultTypeHint, e.operand[..2]),
                         Equal eq                   => BindCqlOperator(CqlOperator.Equal, resultTypeHint, eq.operand[..2]),
                         Exists ex                  => BindCqlOperator(CqlOperator.Exists, resultTypeHint, ex.operand),
@@ -280,7 +286,7 @@ namespace Hl7.Cql.Compiler
                         GreaterOrEqual gtre        => BindCqlOperator(CqlOperator.GreaterOrEqual, resultTypeHint, gtre.operand[..2]),
                         HighBoundary hb            => BindCqlOperator(CqlOperator.HighBoundary, resultTypeHint, hb.operand[..2]),
                         Implies implies            => BindCqlOperator(CqlOperator.Implies, resultTypeHint, implies.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#implies
-                        Indexer idx                => BindCqlOperator(CqlOperator.GetAtIndex, resultTypeHint, idx.operand),
+                        Indexer idx                => BindCqlOperator(CqlOperator.Indexer, resultTypeHint, idx.operand),
                         Interval ie                => BindCqlOperator(CqlOperator.Interval, null, ie.low, ie.high, (object)ie.lowClosedExpression ?? ie.lowClosed, (object)ie.highClosedExpression ?? ie.highClosed),
                         IsFalse isn                => BindCqlOperator(CqlOperator.IsFalse, resultTypeHint, isn.operand),
                         IsTrue isn                 => BindCqlOperator(CqlOperator.IsTrue, resultTypeHint, isn.operand),
@@ -294,15 +300,15 @@ namespace Hl7.Cql.Compiler
                         LowBoundary lb             => BindCqlOperator(CqlOperator.LowBoundary, resultTypeHint, lb.operand[..2]),
                         Lower e                    => BindCqlOperator(CqlOperator.Lower, resultTypeHint, e.operand),
                         Matches e                  => BindCqlOperator(CqlOperator.Matches, resultTypeHint, e.operand[..2]),
-                        Max max                    => BindCqlOperator(CqlOperator.MaxElementInList, resultTypeHint, max.source),
-                        MaxValue max               => BindCqlOperator(CqlOperator.MaximumValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
+                        Max max                    => BindCqlOperator(CqlOperator.Max, resultTypeHint, max.source),
+                        MaxValue max               => BindCqlOperator(CqlOperator.MaxValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
                         Median med                 => BindCqlOperator(CqlOperator.Median, resultTypeHint, med.source),
-                        Min min                    => BindCqlOperator(CqlOperator.MinElementInList, resultTypeHint, min.source),
-                        MinValue min               => BindCqlOperator(CqlOperator.MinimumValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
+                        Min min                    => BindCqlOperator(CqlOperator.Min, resultTypeHint, min.source),
+                        MinValue min               => BindCqlOperator(CqlOperator.MinValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
                         Mode mode                  => BindCqlOperator(CqlOperator.Mode, resultTypeHint, mode.source),
                         Modulo mod                 => BindCqlOperator(CqlOperator.Modulo, resultTypeHint, mod.operand[..2]),
                         Multiply mul               => BindCqlOperator(CqlOperator.Multiply, resultTypeHint, mul.operand[..2]),
-                        NotEqual ne                => BindCqlOperator(CqlOperator.Not, resultTypeHint, BindCqlOperator(CqlOperator.Equal, resultTypeHint, ne.operand[..2])),
+                        NotEqual ne                => BindCqlOperator(CqlOperator.Not, resultTypeHint, BindCqlOperator(CqlOperator.Equal, resultTypeHint, ne.operand)),
                         Not not                    => BindCqlOperator(CqlOperator.Not, resultTypeHint, not.operand),
                         Now now                    => BindCqlOperator(CqlOperator.Now, resultTypeHint),
                         Or or                      => BindCqlOperator(CqlOperator.Or, resultTypeHint, or.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#or
@@ -310,7 +316,7 @@ namespace Hl7.Cql.Compiler
                         PopulationStdDev pstd      => BindCqlOperator(CqlOperator.PopulationStdDev, resultTypeHint, pstd.source),
                         PopulationVariance pvar    => BindCqlOperator(CqlOperator.PopulationVariance, resultTypeHint, pvar.source),
                         PositionOf po              => BindCqlOperator(CqlOperator.PositionOf, resultTypeHint, po.pattern, po.@string),
-                        Power pow                  => BindCqlOperator(CqlOperator.Pow, resultTypeHint, pow.operand[..2]),
+                        Power pow                  => BindCqlOperator(CqlOperator.Power, resultTypeHint, pow.operand[..2]),
                         Precision pre              => BindCqlOperator(CqlOperator.Precision, resultTypeHint, pre.operand),
                         Predecessor prd            => BindCqlOperator(CqlOperator.Predecessor, resultTypeHint, prd.operand),
                         Product prod               => BindCqlOperator(CqlOperator.Product, resultTypeHint, prod.source),
@@ -318,9 +324,9 @@ namespace Hl7.Cql.Compiler
                         Ratio re                   => BindCqlOperator(CqlOperator.Ratio, resultTypeHint, re.numerator, re.denominator),
                         ReplaceMatches e           => BindCqlOperator(CqlOperator.ReplaceMatches, null, e.operand),
                         Round rnd                  => BindCqlOperator(CqlOperator.Round, resultTypeHint, rnd.operand, rnd.precision),
-                        SingletonFrom sf           => BindCqlOperator(CqlOperator.Single, resultTypeHint, sf.operand),
+                        SingletonFrom sf           => BindCqlOperator(CqlOperator.SingletonFrom, resultTypeHint, sf.operand),
                         Split split                => BindCqlOperator(CqlOperator.Split, null, split.stringToSplit, split.separator),
-                        Start start                => BindCqlOperator(CqlOperator.IntervalStart, resultTypeHint, start.operand),
+                        Start start                => BindCqlOperator(CqlOperator.Start, resultTypeHint, start.operand),
                         StartsWith e               => BindCqlOperator(CqlOperator.StartsWith, resultTypeHint, e.operand[..2]),
                         StdDev stddev              => BindCqlOperator(CqlOperator.StdDev, resultTypeHint, stddev.source),
                         Substring e                => BindCqlOperator(CqlOperator.Substring, null, e.stringToSub, e.startIndex, e.length),
@@ -329,7 +335,7 @@ namespace Hl7.Cql.Compiler
                         Sum sum                    => BindCqlOperator(CqlOperator.Sum, resultTypeHint, sum.source),
                         Time time                  => BindCqlOperator(CqlOperator.Time, resultTypeHint, time.hour, time.minute, time.second, time.millisecond),
                         TimeOfDay tod              => BindCqlOperator(CqlOperator.TimeOfDay, resultTypeHint),
-                        TimezoneOffsetFrom tofe    => BindCqlOperator(CqlOperator.TimeZoneComponent, resultTypeHint, tofe.operand),
+                        TimezoneOffsetFrom tofe    => BindCqlOperator(CqlOperator.TimezoneOffsetFrom, resultTypeHint, tofe.operand),
                         Today today                => BindCqlOperator(CqlOperator.Today, resultTypeHint),
                         ToList tle                 => BindCqlOperator(CqlOperator.ToList, resultTypeHint, tle.operand!),
                         Truncate trunc             => BindCqlOperator(CqlOperator.Truncate, resultTypeHint, trunc.operand),
@@ -369,7 +375,7 @@ namespace Hl7.Cql.Compiler
                         In @in                     => In(@in),
                         IncludedIn ii              => IncludedIn(ii),
                         Includes inc               => Includes(inc),
-                        IndexOf io                 => IndexOf(io),
+                        IndexOf io                 => BindCqlOperator(CqlOperator.IndexOf, resultTypeHint, io.source, io.element),
                         Instance ine               => Instance(ine),
                         Intersect ise              => Intersect(ise),
                         Is @is                     => Is(@is),
@@ -399,7 +405,7 @@ namespace Hl7.Cql.Compiler
                         SameAs sa                  => SameAs(sa),
                         SameOrAfter soa            => SameOrAfter(soa),
                         SameOrBefore sob           => SameOrBefore(sob),
-                        Slice slice                => Slice(slice),
+                        Slice slice                => BindCqlOperator(CqlOperator.Slice, null, slice.source, slice.startIndex, slice.endIndex),
                         Starts starts              => Starts(starts),
                         Elm.Tuple tu               => Tuple(tu),
                         Union ue                   => Union(ue),

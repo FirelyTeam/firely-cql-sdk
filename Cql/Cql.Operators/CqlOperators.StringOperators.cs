@@ -46,7 +46,7 @@ namespace Hl7.Cql.Runtime
 
         #region AtIndex
 
-        public string? GetAtIndex(string? argument, int? index)
+        public string? Indexer(string? argument, int? index)
         {
             if (argument == null || index == null || index < 0 || index >= argument.Length)
                 return null;

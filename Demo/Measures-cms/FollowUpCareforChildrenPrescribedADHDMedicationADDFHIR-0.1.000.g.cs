@@ -1395,7 +1395,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
 		var a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
-		var b_ = context.Operators.CountOrNull<CqlDate>(a_);
+		var b_ = context.Operators.Count<CqlDate>(a_);
 		var c_ = context.Operators.GreaterOrEqual(b_, (int?)2);
 
 		return c_;

@@ -300,7 +300,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			return r_;
 		};
 		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD, bool?>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<bool?>(k_);
+		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
 	}
@@ -367,7 +367,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			return r_;
 		};
 		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD, bool?>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<bool?>(k_);
+		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
 	}
@@ -434,7 +434,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			return r_;
 		};
 		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD, bool?>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<bool?>(k_);
+		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
 	}

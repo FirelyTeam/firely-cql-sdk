@@ -278,7 +278,7 @@ public class HybridHWMFHIR_0_102_005
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -674,9 +674,9 @@ public class HybridHWMFHIR_0_102_005
     [CqlDeclaration("ToDate")]
 	public CqlDateTime ToDate(CqlDateTime Value)
 	{
-		var a_ = context.Operators.ComponentFrom(Value, "year");
-		var b_ = context.Operators.ComponentFrom(Value, "month");
-		var c_ = context.Operators.ComponentFrom(Value, "day");
+		var a_ = context.Operators.DateTimeComponentFrom(Value, "year");
+		var b_ = context.Operators.DateTimeComponentFrom(Value, "month");
+		var c_ = context.Operators.DateTimeComponentFrom(Value, "day");
 		var d_ = context.Operators.TimezoneOffsetFrom(Value);
 		var e_ = context.Operators.DateTime(a_, b_, c_, (int?)0, (int?)0, (int?)0, (int?)0, d_);
 
@@ -863,7 +863,7 @@ public class HybridHWMFHIR_0_102_005
 			return aa_;
 		};
 		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}

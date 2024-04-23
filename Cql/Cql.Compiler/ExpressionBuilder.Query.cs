@@ -203,7 +203,7 @@ namespace Hl7.Cql.Compiler
         private Expression DemoteSourceListToSingleton(Expression source)
         {
             // Do not inline this method, so that we can clearly see the pairing with the call to PromoteSourceSingletonToList
-            return BindCqlOperator(CqlOperator.Single, null, source);
+            return BindCqlOperator(CqlOperator.SingletonFrom, null, source);
         }
 
         private (Expression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(Expression source)

@@ -80,7 +80,7 @@ public class NCQAEncounter_1_0_0
 			return j_;
 		};
 		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
-		var c_ = context.Operators.SingleOrNull<Encounter.DiagnosisComponent>(b_);
+		var c_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
 			c_,
@@ -102,7 +102,7 @@ public class NCQAEncounter_1_0_0
 			return m_;
 		};
 		var f_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, bool?>(d_, e_);
-		var g_ = context.Operators.SingleOrNull<bool?>(f_);
+		var g_ = context.Operators.SingletonFrom<bool?>(f_);
 
 		return g_;
 	}

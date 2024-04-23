@@ -691,7 +691,7 @@ public class PCMaternal_5_16_000
 		var b_ = this.lastEstimatedDeliveryDate(TheEncounter);
 		var c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 		var d_ = context.Operators.Subtract((int?)280, c_);
-		var e_ = context.Operators.TruncateDivide(d_, (int?)7);
+		var e_ = context.Operators.DivideAndTruncate(d_, (int?)7);
 
 		return e_;
 	}

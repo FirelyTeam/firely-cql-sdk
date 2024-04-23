@@ -81,9 +81,9 @@ namespace Hl7.Cql.Operators
         IEnumerable<CqlInterval<int?>?>? Collapse(IEnumerable<CqlInterval<int?>?>? intervals, string? precision);
         IEnumerable<CqlInterval<long?>?>? Collapse(IEnumerable<CqlInterval<long?>?>? intervals, string? precision);
         string? Combine(IEnumerable<string> source, string? separator);
-        int? ComponentFrom(CqlDate? argument, string? precision);
-        int? ComponentFrom(CqlDateTime? argument, string? precision);
-        int? ComponentFrom(CqlTime? argument, string? precision);
+        int? DateTimeComponentFrom(CqlDate? argument, string? precision);
+        int? DateTimeComponentFrom(CqlDateTime? argument, string? precision);
+        int? DateTimeComponentFrom(CqlTime? argument, string? precision);
         string? Concatenate(string? left, string? right);
         bool? ConceptInValueSet(CqlConcept? concept, CqlValueSet? valueSet);
         bool? ConceptsInValueSet(IEnumerable<CqlConcept?>? concept, CqlValueSet? valueSet);
@@ -132,7 +132,7 @@ namespace Hl7.Cql.Operators
         CqlQuantity? ConvertStringToQuantity(string? s);
         CqlTime? ConvertStringToTime(string? s);
         string? ConvertTimeToString(CqlTime? t);
-        int? CountOrNull<T>(IEnumerable<T>? source);
+        int? Count<T>(IEnumerable<T>? source);
         CqlDate? Date(int? year, int? month, int? day);
         CqlDate? DateFrom(CqlDateTime? argument);
         CqlDateTime? DateTime(int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, decimal? offset);
@@ -300,7 +300,7 @@ namespace Hl7.Cql.Operators
         bool? LessOrEqual(object? left, object? right);
         bool? ListContains<T>(IEnumerable<T> list, T item);
         IEnumerable<T>? ListDistinct<T>(IEnumerable<T> source);
-        T? GetAtIndex<T>(IEnumerable<T>? source, int? index) where T : class;
+        T? Indexer<T>(IEnumerable<T>? source, int? index) where T : class;
         bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         IEnumerable<T>? ListExcept<T>(IEnumerable<T>? left, IEnumerable<T>? right);
@@ -329,7 +329,7 @@ namespace Hl7.Cql.Operators
         string? Lower(string argument);
         bool? Matches(string source, string pattern);
         T Maximum<T>();
-        T MaxOrNull<T>(IEnumerable<T>? items);
+        T Max<T>(IEnumerable<T>? items);
         decimal? Median(IEnumerable<decimal?> source);
         int? Median(IEnumerable<int?> source);
         long? Median(IEnumerable<long?> source);
@@ -359,7 +359,7 @@ namespace Hl7.Cql.Operators
         event EventHandler<MessageEventArgs>? MessageReceived;
 
         T Minimum<T>();
-        T MinOrNull<T>(IEnumerable<T>? items);
+        T Min<T>(IEnumerable<T>? items);
         T Mode<T>(IEnumerable<T>? typedSource);
         CqlQuantity? Modulo(CqlQuantity left, CqlQuantity right);
         decimal? Modulo(decimal? left, decimal? right);
@@ -495,7 +495,7 @@ namespace Hl7.Cql.Operators
             IEnumerable<T8>? source8);
 
         IEnumerable<TR>? SelectOrNull<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select);
-        T? SingleOrNull<T>(IEnumerable<T>? source);
+        T? SingletonFrom<T>(IEnumerable<T>? source);
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);
         IEnumerable<string>? Split(string stringToSplit, string separator);
         IEnumerable<string>? SplitOnMatches(string stringToSplit, string separatorPattern);
@@ -510,7 +510,7 @@ namespace Hl7.Cql.Operators
         bool? StartsWith(string argument, string prefix);
         CqlQuantity? StdDev(IEnumerable<CqlQuantity?>? argument);
         decimal? StdDev(IEnumerable<decimal?>? argument);
-        string? GetAtIndex(string? argument, int? index);
+        string? Indexer(string? argument, int? index);
         bool? StringInValueSet(string? code, CqlValueSet? valueSet);
         int? Length<T>(IEnumerable<T>? list);
         int? Length(string argument);
@@ -550,10 +550,10 @@ namespace Hl7.Cql.Operators
         int? Truncate(decimal? argument);
         int? Truncate(int? argument);
         long? Truncate(long? argument);
-        CqlQuantity? TruncateDivide(CqlQuantity? left, CqlQuantity? right);
-        decimal? TruncateDivide(decimal? left, decimal? right);
-        int? TruncateDivide(int? left, int? right);
-        long? TruncateDivide(long? left, long? right);
+        CqlQuantity? TruncatedDivide(CqlQuantity? left, CqlQuantity? right);
+        decimal? TruncatedDivide(decimal? left, decimal? right);
+        int? TruncatedDivide(int? left, int? right);
+        long? TruncatedDivide(long? left, long? right);
         string? Upper(string argument);
         IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right);
         CqlQuantity? Variance(IEnumerable<CqlQuantity?>? argument);

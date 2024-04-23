@@ -179,7 +179,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -351,7 +351,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			object n_(MedicationRequest Opioids) => 
 				Opioids?.Medication;
 			var o_ = context.Operators.SelectOrNull<MedicationRequest, object>(m_, n_);
-			var p_ = context.Operators.CountOrNull<object>(o_);
+			var p_ = context.Operators.Count<object>(o_);
 			var q_ = context.Operators.GreaterOrEqual(p_, (int?)2);
 
 			return q_;

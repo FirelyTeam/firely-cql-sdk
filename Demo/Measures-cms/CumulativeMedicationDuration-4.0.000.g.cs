@@ -1415,7 +1415,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var ah_ = this.Quantity(h_?.Timing?.Repeat?.PeriodElement?.Value, ag_);
 					var ai_ = this.ToDaily((h_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? h_?.Timing?.Repeat?.FrequencyElement?.Value), ah_);
 					var ak_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(h_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var al_ = context.Operators.CountOrNull<CqlTime>(ak_);
+					var al_ = context.Operators.Count<CqlTime>(ak_);
 					var am_ = context.Operators.ConvertIntegerToDecimal(al_);
 					var an_ = context.Operators.Multiply((x_ ?? (aa_ as CqlQuantity))?.value, ((ai_ ?? am_) ?? (decimal?)1.0m));
 					var ao_ = context.Operators.Divide(t_?.value, an_);
@@ -1475,7 +1475,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var cq_ = this.Quantity(bi_?.Timing?.Repeat?.PeriodElement?.Value, cp_);
 					var cr_ = this.ToDaily((bi_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? bi_?.Timing?.Repeat?.FrequencyElement?.Value), cq_);
 					var ct_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(bi_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var cu_ = context.Operators.CountOrNull<CqlTime>(ct_);
+					var cu_ = context.Operators.Count<CqlTime>(ct_);
 					var cv_ = context.Operators.ConvertIntegerToDecimal(cu_);
 					var cw_ = context.Operators.Multiply((cg_ ?? (cj_ as CqlQuantity))?.value, ((cr_ ?? cv_) ?? (decimal?)1.0m));
 					var cx_ = context.Operators.Divide(cc_?.value, cw_);
@@ -1556,7 +1556,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var ab_ = this.Quantity(o_?.Timing?.Repeat?.PeriodElement?.Value, aa_);
 					var ac_ = this.ToDaily((o_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? o_?.Timing?.Repeat?.FrequencyElement?.Value), ab_);
 					var ae_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(o_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var af_ = context.Operators.CountOrNull<CqlTime>(ae_);
+					var af_ = context.Operators.Count<CqlTime>(ae_);
 					var ag_ = context.Operators.ConvertIntegerToDecimal(af_);
 					var ah_ = context.Operators.Multiply((r_ ?? (u_ as CqlQuantity))?.value, ((ac_ ?? ag_) ?? (decimal?)1.0m));
 					var ai_ = context.Operators.Divide(n_?.value, ah_);
@@ -1587,7 +1587,7 @@ public class CumulativeMedicationDuration_4_0_000
 					var bj_ = this.Quantity(aw_?.Timing?.Repeat?.PeriodElement?.Value, bi_);
 					var bk_ = this.ToDaily((aw_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? aw_?.Timing?.Repeat?.FrequencyElement?.Value), bj_);
 					var bm_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(aw_?.Timing?.Repeat?.TimeOfDayElement, "value");
-					var bn_ = context.Operators.CountOrNull<CqlTime>(bm_);
+					var bn_ = context.Operators.Count<CqlTime>(bm_);
 					var bo_ = context.Operators.ConvertIntegerToDecimal(bn_);
 					var bp_ = context.Operators.Multiply((az_ ?? (bc_ as CqlQuantity))?.value, ((bk_ ?? bo_) ?? (decimal?)1.0m));
 					var bq_ = context.Operators.Divide(av_?.value, bp_);
