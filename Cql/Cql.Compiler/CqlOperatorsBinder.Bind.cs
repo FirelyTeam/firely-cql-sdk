@@ -31,7 +31,13 @@ internal partial class CqlOperatorsBinder
                          .AsReadOnly())
                 .AsReadOnly();
 
-    private static readonly TypeToCSharpStringOptions? TypeToCSharpStringOptions = new(PreferKeywords:true, HideNamespaces:true);
+    private static readonly CSharpWriteTypeOptions CSharpWriteTypeOptions = new(PreferKeywords:true, HideNamespaces:true);
+
+    private static readonly CSharpWriteMethodOptions CSharpWriteMethodOptions = new (
+        methodFormat:t => $"\n- {t.name}({t.parameters})",
+        parameterOptions:new (
+            parameterFormat:t => $"{t.type}",
+            typeOptions: CSharpWriteTypeOptions));
 
     ///  <summary>
     ///
@@ -109,14 +115,12 @@ internal partial class CqlOperatorsBinder
 
         string NoCandidatesErrorMessage()
         {
-            var parameters = string.Join(", ", arguments.Select(e => e.Type.ToCSharpString(TypeToCSharpStringOptions)));
+            var parameters = string.Join(", ", arguments.Select(e => e.Type.WriteCSharp(CSharpWriteTypeOptions)));
             var similar =
                 string.Concat(
                     ICqlOperatorsMethods
                         .GetMethodsByName(methodName)
-                        .Select(
-                            t =>
-                                $"\n- {methodName}({string.Join(", ", t.parameters.Select(p => p.ToCSharpString(new(HideParameterName: true))))})")
+                        .Select(t => t.method.WriteCSharp(CSharpWriteMethodOptions))
                 );
             return $$"""
                      Mo suitable method found {{methodName}}({{parameters}}).

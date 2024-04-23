@@ -1,0 +1,244 @@
+﻿using System.IO;
+using System;
+using System.Globalization;
+using System.Reflection;
+using System.Linq;
+using System.Runtime.CompilerServices;
+
+namespace Hl7.Cql.Abstractions.Infrastructure;
+
+internal static class CSharpFormatter
+{
+    public static string? GetCSharpKeyword(this Type t)
+    {
+        if (t.Namespace != "System")
+            return null;
+
+        string? result = t.Name switch
+        {
+            "Void" when t == typeof(void)       => "void",
+            "Boolean" when t == typeof(bool)    => "bool",
+            "Byte" when t == typeof(byte)       => "byte",
+            "SByte" when t == typeof(sbyte)     => "sbyte",
+            "Char" when t == typeof(char)       => "char",
+            "Int16" when t == typeof(short)     => "short",
+            "UInt16" when t == typeof(ushort)   => "ushort",
+            "Int32" when t == typeof(int)       => "int",
+            "UInt32" when t == typeof(uint)     => "uint",
+            "IntPtr" when t == typeof(nint)     => "nint",
+            "UIntPtr" when t == typeof(nuint)   => "nuint",
+            "Int64" when t == typeof(long)      => "long",
+            "UInt64" when t == typeof(ulong)    => "ulong",
+            "Single" when t == typeof(float)    => "float",
+            "Double" when t == typeof(double)   => "double",
+            "Decimal" when t == typeof(decimal) => "decimal",
+            "String" when t == typeof(string)   => "string",
+            "Object" when t == typeof(object)   => "object",
+            _                                   => null
+        };
+        return result;
+    }
+
+    public static TextWriter WriteCSharp(
+        this Type type,
+        CSharpWriteTypeOptions? typeOptions = null,
+        TextWriter? textWriter = null)
+    {
+        typeOptions ??= CSharpWriteTypeOptions.Default;
+        return typeOptions.Write(textWriter, type);
+    }
+
+    public static TextWriter WriteCSharp(
+        this ParameterInfo parameterInfo,
+        CSharpWriteParameterOptions? parameterOptions = null,
+        TextWriter? textWriter = null)
+    {
+        parameterOptions ??= CSharpWriteParameterOptions.Default;
+        return parameterOptions.Write(
+            textWriter,
+            parameterInfo.Name!,
+            () => parameterInfo.ParameterType.WriteCSharp(parameterOptions.CSharpWriteTypeOptions).ToString()!);
+    }
+
+    public static TextWriter WriteCSharp(
+        this MethodInfo methodInfo,
+        CSharpWriteMethodOptions? methodOptions = null,
+        TextWriter? textWriter = null)
+    {
+        methodOptions ??= CSharpWriteMethodOptions.Default;
+        return methodOptions.Write(
+            textWriter,
+            methodInfo.Name,
+            () => string.Join(methodOptions.ParameterDelimiter, methodInfo.GetParameters().Select(p => p.WriteCSharp(methodOptions.CSharpWriteParameterOptions))),
+            () => methodInfo.ReturnType.WriteCSharp(methodOptions.CSharpWriteParameterOptions.CSharpWriteTypeOptions).ToString()!);
+    }
+
+    internal static StringWriter NewInvariantCultureStringWriter() =>
+        new(CultureInfo.InvariantCulture);
+}
+
+internal record CSharpWriteTypeOptions(
+    bool HideNamespaces = false,
+    bool PreferKeywords = false,
+    bool ShowGenericTypeParameterNames = false, // e.g. IDictionary<TKey,TValue> instead of IDictionary<,>
+    string TypeDelimiter = ",", // [int,string] or <TKey,TValue>
+    string NestedTypeDelimiter = ".") // A.Nested.Nested
+{
+    public static readonly CSharpWriteTypeOptions Default = new();
+
+    private const char OpenArrayBracket = '[';
+    private const char CloseArrayBracket = ']';
+    private const char NullOperator = '?';
+    private const char OpenGenericTypeBracket = '<';
+    private const char CloseGenericTypeBracket = '>';
+    private const char PointerOperator = '*';
+
+    protected internal virtual TextWriter Write(
+        TextWriter? textWriter,
+        Type type)
+    {
+        textWriter ??= CSharpFormatter.NewInvariantCultureStringWriter();
+
+        if (PreferKeywords && type.GetCSharpKeyword() is { } keyword)
+        {
+            textWriter.Write(keyword);
+            return textWriter;
+        }
+
+        switch (type)
+        {
+            case { IsGenericTypeParameter: true }:
+                // Do not remove this, otherwise we go inside the IsNested case and into a recursive loop.
+                if (ShowGenericTypeParameterNames)
+                    WriteName(this);
+                return textWriter;
+
+            case { IsSZArray: true }:
+                type.GetElementType()!.WriteCSharp(this, textWriter);
+                textWriter.Write(OpenArrayBracket);
+                textWriter.Write(CloseArrayBracket);
+                return textWriter;
+
+            case { IsVariableBoundArray: true }:
+                type.GetElementType()!.WriteCSharp(this, textWriter);
+                textWriter.Write(OpenArrayBracket);
+                for (int i = 1; i < type.GetArrayRank(); i++)
+                    textWriter.Write(TypeDelimiter);
+                textWriter.Write(CloseArrayBracket);
+                return textWriter;
+
+            case { IsNested: true }:
+                type.DeclaringType!.WriteCSharp(this, textWriter);
+                textWriter.Write(NestedTypeDelimiter);
+                WriteName(this with { HideNamespaces = true });
+                return textWriter;
+
+            case { IsValueType: true } when type.IsNullableValueType(out var underlyingType):
+                underlyingType.WriteCSharp(this, textWriter);
+                textWriter.Write(NullOperator);
+                return textWriter;
+
+            case { IsGenericType: true } or { IsGenericTypeDefinition: true }:
+                WriteName(this);
+                textWriter.Write(OpenGenericTypeBracket);
+                bool first = true;
+                foreach (var arg in type.GetGenericArguments())
+                {
+                    if (first) first = false;
+                    else textWriter.Write(TypeDelimiter);
+                    arg.WriteCSharp(this, textWriter);
+                }
+                textWriter.Write(CloseGenericTypeBracket);
+                return textWriter;
+
+            case { IsPointer: true }:
+                type.GetElementType()!.WriteCSharp(this, textWriter);
+                textWriter.Write(PointerOperator);
+                return textWriter;
+
+            default:
+                WriteName(this);
+                return textWriter;
+        }
+
+        void WriteName(CSharpWriteTypeOptions opt)
+        {
+            string name = opt.HideNamespaces ? type.Name : (type.FullName ?? type.Name);
+            if (name.IndexOf('`') is var i and >= 0)
+                textWriter.Write(name[..i]);
+            else
+                textWriter.Write(name[..]);
+        }
+    }
+}
+
+internal record CSharpWriteParameterOptions
+{
+    public static readonly CSharpWriteParameterOptions Default = new();
+
+    public CSharpWriteParameterOptions(
+        Func<(string name, Func<string> type), TextWriterFormatString>? parameterFormat = null,
+        CSharpWriteTypeOptions? typeOptions = null)
+    {
+        CSharpWriteTypeOptions = typeOptions ?? CSharpWriteTypeOptions.Default;
+        _format = parameterFormat ?? (t => $"{t.type} {t.name}");
+    }
+
+    private readonly Func<(string name, Func<string> type), TextWriterFormatString> _format;
+
+    public CSharpWriteTypeOptions CSharpWriteTypeOptions { get; init; }
+
+    protected internal virtual TextWriter Write(
+        TextWriter? writer,
+        string name,
+        Func<string> type) =>
+        _format((name, type)).Write(writer);
+}
+
+internal record CSharpWriteMethodOptions
+{
+    public static readonly CSharpWriteMethodOptions Default = new();
+
+    public CSharpWriteMethodOptions(
+        string parameterDelimiter = ", ",
+        CSharpWriteParameterOptions? parameterOptions = null,
+        Func<(string name, Func<string> parameters, Func<string> returnType), TextWriterFormatString>? methodFormat = null)
+    {
+        ParameterDelimiter = parameterDelimiter;
+        _format = methodFormat ?? (t => $"{t.returnType} {t.name}({t.parameters})");
+        CSharpWriteParameterOptions = parameterOptions ?? CSharpWriteParameterOptions.Default;
+    }
+
+    private readonly Func<(string name, Func<string> parameters, Func<string> returnType), TextWriterFormatString> _format;
+
+    public string ParameterDelimiter { get; init; }
+
+    public CSharpWriteParameterOptions CSharpWriteParameterOptions { get; init; }
+
+    protected internal virtual TextWriter Write(
+        TextWriter? writer,
+        string name,
+        Func<string> parameters,
+        Func<string> returnType) =>
+        _format((name, parameters, returnType)).Write(writer);
+}
+
+[InterpolatedStringHandler]
+internal struct TextWriterFormatString
+{
+    private Action<TextWriter> _appender = null!;
+
+    public TextWriterFormatString(int literalLength, int formattedCount)
+    {
+    }
+
+    public void AppendLiteral(string s) => _appender += w => w.Write(s);
+    public void AppendFormatted(string s) => _appender += w => w.Write(s);
+    public void AppendFormatted(Func<string> s) => AppendFormatted(s());
+    public TextWriter Write(TextWriter? writer)
+    {
+        writer ??= CSharpFormatter.NewInvariantCultureStringWriter();
+        _appender?.Invoke(writer);
+        return writer;
+    }
+}
