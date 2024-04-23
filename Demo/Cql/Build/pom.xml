@@ -7,7 +7,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>firely.cql</groupId>
 	<artifactId>demo</artifactId>
-	<version>1</version>
+	<version>1.0</version>
+	<properties>
+		<cql.version>3.1.0</cql.version>
+	</properties>
 	<repositories>
 		<repository>
 			<id>sonatype-public</id>
@@ -20,12 +23,12 @@
 		<dependency>
 			<groupId>info.cqframework</groupId>
 			<artifactId>cql-to-elm-cli</artifactId>
-			<version>3.1.0</version>
+			<version>${cql.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>info.cqframework</groupId>
 			<artifactId>elm-fhir</artifactId>
-			<version>3.1.0</version>
+			<version>${cql.version}</version>
 		</dependency>
 	</dependencies>
 </project>
