@@ -34,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void OnOrAfterMonthOf()
         {
             // https://cql.hl7.org/09-b-cqlreference.html#same-or-after-2
-            var library = createLibraryForExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
+            var library = CreateLibraryForExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
             var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
             sameOrAfter.Should().HaveType(SystemTypes.BooleanType);
             sameOrAfter.operand.Should().NotBeNull();
@@ -162,7 +162,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public void Overlaps()
         {
-            var library = createLibraryForExpression("Interval[null, null] overlaps Interval[1, 10]");
+            var library = CreateLibraryForExpression("Interval[null, null] overlaps Interval[1, 10]");
             var overlaps = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Overlaps>();
             overlaps.Should().HaveType(SystemTypes.BooleanType);
             overlaps.operand.Should().NotBeNull();

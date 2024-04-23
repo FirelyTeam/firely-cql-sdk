@@ -69,12 +69,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+        protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
         protected virtual Library ConvertLibrary(IServiceProvider services, string cql) =>
             services.GetRequiredService<CqlToElmConverter>().ConvertLibrary(cql);
 
        
-        internal Library MakeLibrary(string cql, params string[] expectedErrors)
+        internal static Library MakeLibrary(string cql, params string[] expectedErrors)
         {
             var library = ConvertLibrary(cql);
 
@@ -245,12 +245,30 @@ namespace Hl7.Cql.CqlToElm.Test
 
         }
 
-        protected Library createLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        protected Library CreateLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
         {
             return MakeLibrary($@"
-                library AsTest version '1.0.0'
+                library Test version '1.0.0'
 
                 define private ""{memberName}"": {expression}");
+        }
+
+        protected Library ExpectErrorsForExpression(string expression, 
+            params string[] expectedErrors)
+        {
+            return MakeLibrary($@"
+                library Test version '1.0.0'
+
+                define private ""Has Errors"": {expression}", expectedErrors);
+        }
+
+        protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        {
+            var lib = ConvertLibrary($@"
+                library Test version '1.0.0'
+
+                define private ""{memberName}"": {expression}");
+            return lib.statements[0].expression;
         }
     }
 }

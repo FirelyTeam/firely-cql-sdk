@@ -56,19 +56,25 @@
 		</None>
 		<None Update="Input\HL7\*.cql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>		
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Input\HL7\*.*">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="Input\HL7\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Input\FHIRHelpers-4.0.1.cql">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="Input\FHIRHelpers-4.0.1.cql">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Input\DQIC\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

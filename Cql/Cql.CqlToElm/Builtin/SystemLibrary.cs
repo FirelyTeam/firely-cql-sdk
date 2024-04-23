@@ -186,6 +186,11 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Equivalent> ListEquivalent = binary<Equivalent>(T.ToListType(), T.ToListType(), BooleanType);
         public static SystemFunction<Exists> Exists = unary<Exists>(T.ToListType(), BooleanType);
         public static SystemFunction<Exp> Exp = unary<Exp>(DecimalType, DecimalType);
+        public static OverloadedFunctionDef Expand = OverloadedFunctionDef.Create(
+            binary<Expand>(T.ToIntervalType().ToListType(), QuantityType, T.ToIntervalType().ToListType())
+                .For(T, DecimalType, QuantityType, DateType, DateTimeType, TimeType),
+            binary<Expand>(T.ToIntervalType(), QuantityType, T.ToListType())
+                .For(T, DecimalType, QuantityType, DateType, DateTimeType, TimeType));
         public static SystemFunction<First> First = unary<First>(T.ToListType(), T);
         public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType());
         public static OverloadedFunctionDef Floor = unary<Floor>(T, T).For(T, NumericTypes);

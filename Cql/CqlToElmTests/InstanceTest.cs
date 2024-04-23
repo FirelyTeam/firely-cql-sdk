@@ -29,7 +29,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Instance()
         {
-            var library = createLibraryForExpression("Concept { codes: Code { code: '8480-6' } }");
+            var library = CreateLibraryForExpression("Concept { codes: Code { code: '8480-6' } }");
             var instance = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Instance>();
             instance.element.Should().HaveCount(1);
             instance.element[0].name.Should().Be("codes");

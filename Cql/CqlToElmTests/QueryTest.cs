@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public void StringLengths()
         {
-            var lib = createLibraryForExpression("from ({'hello', 'world'}) str return Length(str)");
+            var lib = CreateLibraryForExpression("from ({'hello', 'world'}) str return Length(str)");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.IntegerType.ToListType());
         }
@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void SortAsc()
         {
-            var lib = createLibraryForExpression("({4, 5, 1, 6, 2, 1}) sL sort asc");
+            var lib = CreateLibraryForExpression("({4, 5, 1, 6, 2, 1}) sL sort asc");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.IntegerType.ToListType());
 

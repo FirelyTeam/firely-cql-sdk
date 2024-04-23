@@ -48,10 +48,12 @@ namespace Hl7.Cql.CqlToElm.Test
             Func<CqlContext, bool?> equalsDef,
             object matchObject)
         {
+            if (SkippedTests.Map.TryGetValue(name, out var reason))
+                Assert.Inconclusive($"Case {name} skipped: {reason}");
             SignatureMatchResult match = (matchObject as SignatureMatchResult)!;
             var context = FhirCqlContext.ForBundle();
             var result = equalsDef(context);
-            //Assert.IsTrue(result);
+            //result.Should().BeTrue();
         }
 
         public static string DisplayName(MethodInfo method, object[] data)

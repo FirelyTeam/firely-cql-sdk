@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration.Assemblies;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,8 @@ namespace Hl7.Cql.CqlToElm
         public ElmFactory ElmFactory { get; }
         public MessageProvider Messaging { get; }
 
-        public InvocationBuilder(IModelProvider provider, 
-            CoercionProvider coercionProvider, 
+        public InvocationBuilder(IModelProvider provider,
+            CoercionProvider coercionProvider,
             ElmFactory elmFactory,
             MessageProvider messaging)
         {
@@ -74,9 +75,6 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>The invocation of the best-matching overload.</returns>
         internal Expression Invoke(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
-            if (overloadedFunction.Name == "Order by occurrence")
-            {
-            }
             var result = MatchSignature(overloadedFunction, arguments);
             var newArguments = result.Arguments
                 .Select(cr => cr.Result)
@@ -130,7 +128,7 @@ namespace Hl7.Cql.CqlToElm
                 if (result.Error is not null)
                     expression.AddError(result.Error);
                 else
-                    expression.AddError(Messaging.CouldNotResolveFunction(result.Function.name, result.Arguments.Select(a=>a.Result).ToArray()));
+                    expression.AddError(Messaging.CouldNotResolveFunction(result.Function.name, result.Arguments.Select(a => a.Result).ToArray()));
                 return expression;
             }
         }
@@ -162,6 +160,7 @@ namespace Hl7.Cql.CqlToElm
             // doing this to make debugging easier
             CoercionResult<Expression>[]? newOperands = null;
             IDictionary<string, TypeSpecifier>? genericInferences = null;
+            IDictionary<string, TypeSpecifier>? anyInference = null;
             var lowestCost = (int)CoercionCost.Incompatible;
             // For each argument, try to use it for inference.
             // As we go, keep track of which of those inferences results in the cheapest translation cost.
@@ -172,19 +171,31 @@ namespace Hl7.Cql.CqlToElm
                 var inferences = InferGenericArgument(argumentType, operandType);
                 if (inferences.Count > 0)
                 {
-                    var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
-                    var cost = replaced.Sum(operand => (int)operand.Cost);
-                    //var cost = (CoercionCost)replaced.Max(operand => (int)operand.Cost);
-                    if (cost < lowestCost)
+                    if (inferences.All(kvp => kvp.Value == SystemTypes.AnyType))
+                        anyInference = inferences;
+                    else
                     {
-                        lowestCost = cost;
-                        newOperands = replaced;
-                        genericInferences = inferences;
+                        var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
+
+                        var cost = replaced.Sum(operand => (int)operand.Cost);
+                        if (cost < lowestCost)
+                        {
+                            lowestCost = cost;
+                            newOperands = replaced;
+                            genericInferences = inferences;
+                        }
                     }
                 }
             }
             if (newOperands != null && genericInferences != null)
+            {
                 return new SignatureMatchResult(candidate, newOperands, genericInferences, flags);
+            }
+            else if (anyInference != null)
+            {
+                newOperands = ReplaceGenericArguments(operandTypes, arguments, anyInference);
+                return new SignatureMatchResult(candidate, newOperands, anyInference, flags);
+            }
             else
             {
                 newOperands = new CoercionResult<Expression>[arguments.Length];
@@ -193,8 +204,8 @@ namespace Hl7.Cql.CqlToElm
                     newOperands[i] = CoercionProvider.Coerce(arguments[i], operandTypes[i]);
                 }
                 string? error = null;
-                if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))                
-                    error = Messaging.CouldNotResolveFunction(candidate.name, arguments);                
+                if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))
+                    error = Messaging.CouldNotResolveFunction(candidate.name, arguments);
                 return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
             }
         }
@@ -279,45 +290,63 @@ namespace Hl7.Cql.CqlToElm
         internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
             var matches = overloadedFunction.Functions
-                .Select(function => MatchSignature(function, arguments))
-                .ToArray();
-            var byCost = matches
+                .Select(function => MatchSignature(function, arguments));                
+            var compatible = matches
                 .Where(result => result.Compatible)
-                .GroupBy(result => result.TotalCost)
-                .OrderBy(group => group.Key)
                 .ToArray();
-            if (byCost.Length > 0)
-            {
-                var cheapest = byCost[0].ToArray();
-                if (cheapest.Length == 1)
-                {
-                    return cheapest[0];
-                }
-                else if (cheapest.Length > 0)
-                {
-                    var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
-                    // match cql-to-elm reference implementation (Java) error messages
-                    var errorSb = new StringBuilder();
-                    errorSb.AppendLine(CultureInfo.InvariantCulture, $"Call to operator {overloadedFunction.Name}({argTypeString}) is ambiguous with:");
-                    foreach (var match in cheapest)
-                    {
-                        var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
-                        errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {overloadedFunction.Name}({matchTypeString})");
-                    }
-                    return new(cheapest[0].Function,
-                        cheapest[0].Arguments,
-                        cheapest[0].GenericInferences,
-                        cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
-                        errorSb.ToString());
-                }
-            }
-            var firstMatch = matches[0];
+            SignatureMatchResult? candidate;
+            if (match(compatible, out candidate))
+                return candidate;
+            // else, issue could not resolve.
+            var firstMatch = matches.First();
             var result = new SignatureMatchResult(firstMatch.Function,
                 firstMatch.Arguments,
                 firstMatch.GenericInferences,
                 firstMatch.Flags,
                 Messaging.CouldNotResolveFunction(firstMatch.Function.name, arguments));
             return result;
+
+            //bool infersAny(SignatureMatchResult result) =>
+            //    result.GenericInferences.Count > 0
+            //    && result.GenericInferences.All(kvp => kvp.Value == SystemTypes.AnyType);
+
+            bool match(SignatureMatchResult[] matches, [NotNullWhen(true)] out SignatureMatchResult? result)
+            {
+                var byCost = matches
+                   .GroupBy(result => result.TotalCost)
+                   .OrderBy(group => group.Key)
+                   .ToArray();
+                if (byCost.Length > 0)
+                {
+                    var cheapest = byCost[0].ToArray();
+                    if (cheapest.Length == 1)
+                    {
+                        result = cheapest[0];
+                        return true;
+                    }
+                    else if (cheapest.Length > 0)
+                    {
+                        var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+                        // match cql-to-elm reference implementation (Java) error messages
+                        var errorSb = new StringBuilder();
+                        errorSb.AppendLine(CultureInfo.InvariantCulture, $"Call to operator {overloadedFunction.Name}({argTypeString}) is ambiguous with:");
+                        foreach (var match in cheapest)
+                        {
+                            var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
+                            errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {overloadedFunction.Name}({matchTypeString})");
+                        }
+                        result = new(cheapest[0].Function,
+                            cheapest[0].Arguments,
+                            cheapest[0].GenericInferences,
+                            cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
+                            errorSb.ToString());
+                        return true;
+                    }
+                }
+                result = null;
+                return false;
+            }
+
         }
 
 

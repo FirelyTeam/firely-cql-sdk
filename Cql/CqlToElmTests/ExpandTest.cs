@@ -20,7 +20,22 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpandPerDay()
         {
-            var lib = createLibraryForExpression("expand { Interval[@2018-01-01, @2018-01-04] } per day");
+            var lib = CreateLibraryForExpression("expand { Interval[@2018-01-01, @2018-01-04] } per day");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+        }
+
+        [TestMethod]
+        public void ExpandIntervalPer2()
+        {
+            var lib = CreateLibraryForExpression("expand { Interval [1, 10] } per 2");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+        }
+            
+
+        [TestMethod]
+        public void Expand_List_Interval()
+        {
+            var lib = CreateLibraryForExpression("expand { Interval[10, 10] } per 0.1");
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
         }
 

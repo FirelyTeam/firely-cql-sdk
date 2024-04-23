@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TestInNullBoundaries()
         {
-            var lib = createLibraryForExpression("5 in Interval[null, null]");
+            var lib = CreateLibraryForExpression("5 in Interval[null, null]");
             var @in = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
             var result = Run<bool?>(@in);
             Assert.IsFalse(result);
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public void NullContains5()
         {
-            var lib = createLibraryForExpression("null contains 5");
+            var lib = CreateLibraryForExpression("null contains 5");
             var @in = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Contains>();
 
         }

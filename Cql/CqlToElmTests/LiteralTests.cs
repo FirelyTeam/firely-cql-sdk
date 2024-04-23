@@ -20,12 +20,6 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
         internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
 
-        protected override Library ConvertLibrary(string cql)
-        {
-            var converter = Services.GetRequiredService<CqlToElmConverter>();
-            return converter.ConvertLibrary(cql);
-        }
-
         [TestMethod]
         public void String_Literal()
         {
@@ -272,7 +266,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public void Long_MinValue()
         {
-            var lib = createLibraryForExpression("-9223372036854775808L");
+            var lib = CreateLibraryForExpression("-9223372036854775808L");
             var literal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>(false);
             literal.Should().HaveType(SystemTypes.LongType);
         }
@@ -1078,7 +1072,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTime_Literal_T()
         {
-            var lib = createLibraryForExpression("@2016T");
+            var lib = CreateLibraryForExpression("@2016T");
             var dt = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateTime>();
             var yearLiteral = dt.year.Should().BeOfType<Literal>().Subject;
             yearLiteral.value.Should().Be("2016");
@@ -1695,9 +1689,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ceiling_1D()
         {
-            var input = createLibraryForExpression("Ceiling(1.0)");
+            var input = CreateLibraryForExpression("Ceiling(1.0)");
             var ceiling = input.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Ceiling>();
-            var output = createLibraryForExpression("1");
+            var output = CreateLibraryForExpression("1");
             var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
             var context = FhirCqlContext.ForBundle();
             var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, new Expression[] { ceiling, literal });

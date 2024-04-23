@@ -105,7 +105,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static T ShouldSucceed<T>(this T e) where T : Element
         {
-            e.GetErrors().Where(e => e.errorSeverity == ErrorSeverity.error).Should().BeEmpty();
+            e.GetErrors()
+                .Where(e => e.errorSeverity == ErrorSeverity.error)
+                .Select(e => e.message)
+                .Should()
+                .BeEmpty();
             return e;
         }
 

@@ -3,6 +3,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -10,20 +11,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class ContextDefTest : Base
     {
-        protected override Library ConvertLibrary(string cql)
-        {
-            var services = ServiceCollection(models: mp =>
-            {
-                mp.Add(Models.ElmR1);
-                mp.Add(Models.Fhir401);
-            });
-
-            var provider = services.BuildServiceProvider();
-            var converter = provider.GetRequiredService<CqlToElmConverter>();
-
-            return converter.ConvertLibrary(cql);
-        }
-
         [TestMethod]
         public void Context_Of_Known_Model()
         {
