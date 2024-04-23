@@ -1,28 +1,6 @@
-﻿global using ScoreKey = System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<System.Collections.Generic.Dictionary<string, string>>>;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO.Compression;
-using System.Runtime.InteropServices;
-using System.Text.Json;
-using System.Diagnostics;
-using System.Reflection;
-/*using Azure;
-using Azure.Core.Pipeline;
-using Azure.Storage;
-using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;*/
-//using Azure.Storage.Files.Shares;
-//using ICSharpCode.SharpZipLib.Zip;
-using System.Net.Http;
-using System.Threading;
+﻿using System.Text.Json;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Fhir;
 
