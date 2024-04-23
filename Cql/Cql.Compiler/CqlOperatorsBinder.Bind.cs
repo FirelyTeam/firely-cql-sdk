@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
+using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 using MethodAndParametersByParamCountByName = System.Collections.ObjectModel.ReadOnlyDictionary<string, System.Collections.ObjectModel.ReadOnlyDictionary<int, (System.Reflection.MethodInfo method, System.Reflection.ParameterInfo[] parameters)[]>>;
 
@@ -94,49 +95,65 @@ internal partial class CqlOperatorsBinder
         {
             if (arguments.Length > 0)
             {
-                // Find best match on arguments
-                candidates = candidates
-                             .OrderBy(c =>
-                             {
-                                 var score = c.conversionMethods
-                                              .Where(cm => cm > TypeConversion.NoMatch)
-                                              .Select(cm => (double)cm)
-                                              .Average();
-                                 return score;
-                             })
-                             .SelectToArray(candidates.Length, o => o);
-                return (candidates[0].method, candidates[0].arguments);
+                var scoredCandidates = candidates
+                    .SelectToArray(t => (t.method, t.arguments, score:Score(t)));
+                Array.Sort(scoredCandidates, (a, b) => a.score.CompareTo(b.score));
+
+                var inputText = InputMethodAndParametersToString();
+                var scoredCandidatesText = string.Concat(
+                    scoredCandidates.Select(t => $"{t.method.WriteCSharp(CSharpWriteMethodOptions)} ({t.score})"));
+
+                _logger?.LogDebug(
+                    "Multiple candidates found for method {input}\nPicking the top item with lowest score: {candidatesAndScore}",
+                    inputText,
+                    scoredCandidatesText);
+
+                return (scoredCandidates[0].method, scoredCandidates[0].arguments);
             }
 
-            if (resultTypeHint is { } t)
-            {
-                // Find best match on return type
-                throw new InvalidOperationException("");
-            }
+            // if (resultTypeHint is { } t)
+            // {
+            //     // Find best match on return type
+            //     throw new InvalidOperationException("");
+            // }
 
             throw new InvalidOperationException("");
         }
 
         string NoCandidatesErrorMessage()
         {
-            var input = CSharpWriteMethodOptions
-                             .Write(
-                                 writer: null,
-                                 name: methodName,
-                                 parameters: () => arguments.SelectToArray(e => e.Type.WriteCSharp(CSharpWriteTypeOptions).ToString()!),
-                                 returnType: null!)
-                             .ToString()!;
+            var inputText = InputMethodAndParametersToString();
 
-            var overloads =
+            var overloadsText =
                 string.Concat(
                     ICqlOperatorsMethods
                         .GetMethodsByName(methodName)
                         .Select(t => t.method.WriteCSharp(CSharpWriteMethodOptions))
                 );
             return $$"""
-                     Mo suitable method could be bound on:{{input}}
-                     from the following method overloads:{{overloads}}
+                     Mo suitable method could be bound on:{{inputText}}
+                     from the following method overloads:{{overloadsText}}
                      """;
+        }
+
+        string InputMethodAndParametersToString()
+        {
+            return CSharpWriteMethodOptions
+                   .Write(
+                       writer: null,
+                       name: methodName,
+                       parameters: () => arguments.SelectToArray(e => e.Type.WriteCSharp(CSharpWriteTypeOptions).ToString()!),
+                       returnType: null!)
+                   .ToString()!;
+        }
+
+        double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
+        {
+            var score = candidate.conversionMethods
+                         .Where(cm => cm > TypeConversion.NoMatch)
+                         .Select(cm => (double)cm)
+                         .Average();
+            return score;
         }
     }
 

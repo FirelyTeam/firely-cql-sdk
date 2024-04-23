@@ -220,7 +220,7 @@ namespace Hl7.Cql.Compiler
             {
                 Expression expression => expression,
                 Element element       => TranslateElement(element),
-                var obj               => Expression.Constant(obj),
+                var obj       => Expression.Constant(obj),
             };
 
         private Expression TranslateElement(Element element) =>
