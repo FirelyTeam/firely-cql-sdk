@@ -29,6 +29,7 @@
     <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
     <ProjectReference Include="..\..\Cql\Cql\Cql.csproj" />
     <ProjectReference Include="..\Measures.Demo\Measures.Demo.csproj" />
+    <ProjectReference Include="..\Test\Test.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
