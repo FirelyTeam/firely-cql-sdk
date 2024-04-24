@@ -1,7 +1,9 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
 
@@ -26,7 +28,7 @@ public class TypeExtensionsTests
     // T? where T: struct
     private static readonly Type NullableGenericStructTypeDefinition =
         typeof(IGenericInterfaceOnStruct<>)
-            .GetMethod("ReturnNullableStruct")!
+            .GetMethod(name: "ReturnNullableStruct")!
             .ReturnType;
 
     private static readonly Type MyClassType = typeof(MyClass);
@@ -41,36 +43,36 @@ public class TypeExtensionsTests
 
         // Act / Assert
         Assert.AreEqual(
-            (NullableStructType.IsNullableValueType(out underlyingType), underlyingType),
-            (true, StructType));
+            expected: (NullableStructType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (true, StructType));
 
         Assert.AreEqual(
-            (StructType.IsNullableValueType(out underlyingType), underlyingType),
-            (false, null));
+            expected: (StructType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (false, null));
 
         Assert.AreEqual(
-            (ReferenceType.IsNullableValueType(out underlyingType), underlyingType),
-            (false, null));
+            expected: (ReferenceType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (false, null));
 
         Assert.AreEqual(
-            (NullableEnumType.IsNullableValueType(out underlyingType), underlyingType),
-            (true, EnumType));
+            expected: (NullableEnumType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (true, EnumType));
 
         Assert.AreEqual(
-            (EnumType.IsNullableValueType(out underlyingType), underlyingType),
-            (false, null));
+            expected: (EnumType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (false, null));
 
         Assert.AreEqual(
-            (GenericDefinitionType.IsNullableValueType(out underlyingType), underlyingType),
-            (false, null));
+            expected: (GenericDefinitionType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (false, null));
 
         Assert.AreEqual(
-            (GenericStructTypeDefinition.IsNullableValueType(out underlyingType), underlyingType),
-            (false, null));
+            expected: (GenericStructTypeDefinition.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (false, null));
 
         Assert.AreEqual(
-            (NullableGenericStructTypeDefinition.IsNullableValueType(out underlyingType), underlyingType),
-            (true, GenericStructTypeDefinition));
+            expected: (NullableGenericStructTypeDefinition.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
+            actual: (true, GenericStructTypeDefinition));
     }
 
 
@@ -82,36 +84,36 @@ public class TypeExtensionsTests
 
         // Act / Assert
         Assert.AreEqual(
-            (NullableStructType.IsNullable(out underlyingType), underlyingType),
-            (true, StructType));
+            expected: (NullableStructType.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (true, StructType));
 
         Assert.AreEqual(
-            (StructType.IsNullable(out underlyingType), underlyingType),
-            (false, StructType));
+            expected: (StructType.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (false, StructType));
 
         Assert.AreEqual(
-            (ReferenceType.IsNullable(out underlyingType), underlyingType),
-            (true, ReferenceType));
+            expected: (ReferenceType.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (true, ReferenceType));
 
         Assert.AreEqual(
-            (NullableEnumType.IsNullable(out underlyingType), underlyingType),
-            (true, EnumType));
+            expected: (NullableEnumType.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (true, EnumType));
 
         Assert.AreEqual(
-            (EnumType.IsNullable(out underlyingType), underlyingType),
-            (false, EnumType));
+            expected: (EnumType.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (false, EnumType));
 
         Assert.AreEqual(
-            (GenericDefinitionType.IsNullable(out underlyingType), underlyingType),
-            (true, GenericDefinitionType));
+            expected: (GenericDefinitionType.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (true, GenericDefinitionType));
 
         Assert.AreEqual(
-            (GenericStructTypeDefinition.IsNullable(out underlyingType), underlyingType),
-            (false, GenericStructTypeDefinition));
+            expected: (GenericStructTypeDefinition.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (false, GenericStructTypeDefinition));
 
         Assert.AreEqual(
-            (NullableGenericStructTypeDefinition.IsNullable(out underlyingType), underlyingType),
-            (true, GenericStructTypeDefinition));
+            expected: (NullableGenericStructTypeDefinition.IsNullable(nonNullableType: out underlyingType), underlyingType),
+            actual: (true, GenericStructTypeDefinition));
     }
 
     [TestMethod]
@@ -119,50 +121,50 @@ public class TypeExtensionsTests
     {
         // Act / Assert
         Assert.AreEqual(
-            NullableStructType.MakeNullable(),
-            NullableStructType);
+            expected: NullableStructType.MakeNullable(),
+            actual: NullableStructType);
 
         Assert.AreEqual(
-            StructType.MakeNullable(),
-            NullableStructType);
+            expected: StructType.MakeNullable(),
+            actual: NullableStructType);
 
         Assert.AreEqual(
-            ReferenceType.MakeNullable(),
-            ReferenceType);
+            expected: ReferenceType.MakeNullable(),
+            actual: ReferenceType);
 
         Assert.AreEqual(
-            NullableEnumType.MakeNullable(),
-            NullableEnumType);
+            expected: NullableEnumType.MakeNullable(),
+            actual: NullableEnumType);
 
         Assert.AreEqual(
-            EnumType.MakeNullable(),
-            NullableEnumType);
+            expected: EnumType.MakeNullable(),
+            actual: NullableEnumType);
 
         Assert.AreEqual(
-            GenericDefinitionType.MakeNullable(),
-            GenericDefinitionType);
+            expected: GenericDefinitionType.MakeNullable(),
+            actual: GenericDefinitionType);
 
         Assert.AreEqual(
-            GenericStructTypeDefinition.MakeNullable(),
-            NullableGenericStructTypeDefinition);
+            expected: GenericStructTypeDefinition.MakeNullable(),
+            actual: NullableGenericStructTypeDefinition);
 
         Assert.AreEqual(
-            NullableGenericStructTypeDefinition.MakeNullable(),
-            NullableGenericStructTypeDefinition);
+            expected: NullableGenericStructTypeDefinition.MakeNullable(),
+            actual: NullableGenericStructTypeDefinition);
     }
 
     [TestMethod]
     public void IsEnum_ShouldReturnCorrectResults()
     {
         // Act / Assert
-        Assert.IsFalse(NullableStructType.IsEnum());
-        Assert.IsFalse(StructType.IsEnum());
-        Assert.IsFalse(ReferenceType.IsEnum());
-        Assert.IsTrue(EnumType.IsEnum());
-        Assert.IsTrue(NullableEnumType.IsEnum());
-        Assert.IsFalse(GenericDefinitionType.IsEnum());
-        Assert.IsFalse(GenericStructTypeDefinition.IsEnum());
-        Assert.IsFalse(NullableGenericStructTypeDefinition.IsEnum());
+        Assert.IsFalse(condition: NullableStructType.IsEnum());
+        Assert.IsFalse(condition: StructType.IsEnum());
+        Assert.IsFalse(condition: ReferenceType.IsEnum());
+        Assert.IsTrue(condition: EnumType.IsEnum());
+        Assert.IsTrue(condition: NullableEnumType.IsEnum());
+        Assert.IsFalse(condition: GenericDefinitionType.IsEnum());
+        Assert.IsFalse(condition: GenericStructTypeDefinition.IsEnum());
+        Assert.IsFalse(condition: NullableGenericStructTypeDefinition.IsEnum());
     }
 
     [TestMethod]
@@ -174,14 +176,14 @@ public class TypeExtensionsTests
         var genericType = typeof(IGenericInterface<int>);
 
         // Act / Assert
-        Assert.IsTrue(MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition));
-        Assert.IsTrue(MyClassGenericType.IsImplementingGenericTypeDefinition(genericTypeDefinition));
-        Assert.IsTrue(MyClassGenericDefinitionType.IsImplementingGenericTypeDefinition(genericTypeDefinition));
+        Assert.IsTrue(condition: MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericTypeDefinition));
+        Assert.IsTrue(condition: MyClassGenericType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericTypeDefinition));
+        Assert.IsTrue(condition: MyClassGenericDefinitionType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericTypeDefinition));
 
-        Assert.IsInstanceOfType<ArgumentException>(Catch(() => MyClassType.IsImplementingGenericTypeDefinition(genericType)));
-        Assert.IsInstanceOfType<ArgumentException>(Catch(() => MyClassType.IsImplementingGenericTypeDefinition(nonGenericInterface)));
-        Assert.IsInstanceOfType<ArgumentException>(Catch(() => MyClassType.IsImplementingGenericTypeDefinition(ReferenceType)));
-        Assert.IsInstanceOfType<ArgumentException>(Catch(() => MyClassType.IsImplementingGenericTypeDefinition(StructType)));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericType)));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: nonGenericInterface)));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: ReferenceType)));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: StructType)));
 
         static Exception? Catch(Action action)
         {
@@ -219,6 +221,11 @@ public class TypeExtensionsTests
     public interface INonGenericInterface
     {
         void Method();
+
+        IList<int> Join(
+            int a,
+            int b,
+            int c);
     }
 
     public abstract class MyGenericClass<T> : IGenericInterface<T>
@@ -239,7 +246,7 @@ public class CSharpFormatterTests
 {
 
     [TestMethod]
-    public unsafe void ToCSharpString_ShouldReturnCorrectResults()
+    public void TypeToCSharpString_ShouldReturnCorrectResults()
     {
         (Type type, string expected)[] testCases =
         [
@@ -276,7 +283,7 @@ public class CSharpFormatterTests
             (typeof(int*[,]*), "int*[,]*"),
             // Nested
             (typeof(EmptyStruct), "EmptyStruct"),
-            (typeof(EmptyStruct.Nested1.Nested2), "EmptyStruct+Nested1+Nested2"),
+            (typeof(EmptyStruct.Nested1.Nested2), "EmptyStruct.Nested1.Nested2"),
             // Nullable Value Type
             (typeof(int?), "int?"),
             // Generic
@@ -287,30 +294,59 @@ public class CSharpFormatterTests
         var typeToCSharpStringOptions = new CSharpWriteTypeOptions(HideNamespaces: true, PreferKeywords: true);
         foreach (var (type, expected) in testCases)
         {
-            var actual = type.WriteCSharp(typeToCSharpStringOptions).ToString()!;
-            Assert.AreEqual(expected, actual);
+            var actual = type.WriteCSharp(typeOptions: typeToCSharpStringOptions).ToString()!;
+            Assert.AreEqual(expected: expected, actual: actual);
         }
 
         Assert.AreEqual(
-            "System.Collections.Generic.IDictionary<,>",
-            typeof(IDictionary<,>).WriteCSharp(new()).ToString()!);
+            expected: "System.Collections.Generic.IDictionary<,>",
+            actual: typeof(IDictionary<,>).WriteCSharp(typeOptions: new()).ToString()!);
 
         Assert.AreEqual(
-            "IDictionary<TKey,TValue>",
-            typeof(IDictionary<,>).WriteCSharp(
-                new(
+            expected: "IDictionary<TKey,TValue>",
+            actual: typeof(IDictionary<,>).WriteCSharp(
+                typeOptions: new(
                     HideNamespaces: true,
                     PreferKeywords: true,
                     ShowGenericTypeParameterNames: true)).ToString()!);
 
         Assert.AreEqual(
-            "System.Collections.Generic.IDictionary<TKey, TValue>",
-            typeof(IDictionary<,>).WriteCSharp(
-                new(
+            expected: "System.Collections.Generic.IDictionary<TKey, TValue>",
+            actual: typeof(IDictionary<,>).WriteCSharp(
+                typeOptions: new(
                     HideNamespaces: false,
                     PreferKeywords: true,
                     ShowGenericTypeParameterNames: true,
                     TypeDelimiter: ", ")).ToString()!);
+
+        Assert.AreEqual(
+            expected: "CoreTests.Infrastructure.EmptyStruct+Nested1+Nested2",
+            actual: typeof(EmptyStruct.Nested1.Nested2).WriteCSharp(
+                typeOptions: new(
+                    NestedTypeDelimiter:"+")).ToString()!);
+    }
+
+    [TestMethod]
+    public void MethodToCSharpString_ShouldReturnCorrectResults()
+    {
+        MethodInfo m = ReflectionUtility.MethodOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.Join(0, 0, 0));
+
+        // NOTE: We do not show the declaring type name for methods
+        Assert.AreEqual(
+            expected: "System.Collections.Generic.IList<System.Int32> Join(System.Int32 a, System.Int32 b, System.Int32 c)",
+            actual: m.WriteCSharp().ToString()!);
+
+        // Delphi style
+        Assert.AreEqual(
+            expected: "Join (a: int, b: int, c: int): IList<int>",
+            actual: m.WriteCSharp(
+                methodOptions: new(
+                    methodFormat: t => $"{t.name} ({t.parameters}): {t.returnType}",
+                    parameterOptions: new(
+                        parameterFormat: t => $"{t.name}: {t.type}",
+                        typeOptions: new(
+                            PreferKeywords:true,
+                            HideNamespaces:true)))).ToString()!);
     }
 }
 
