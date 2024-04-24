@@ -1,0 +1,90 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ output extension=".g.cs" #>
+#nullable enable
+
+using System;
+using System.Linq;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
+namespace Hl7.Cql.Abstractions.Infrastructure;
+
+file static class Helpers
+{
+    public static InvalidOperationException CannotReturnTn(int desiredIndex, int actualIndex) =>
+        new($"Cannot return the T{desiredIndex} value from this T{actualIndex} tuple.");
+}
+
+<#
+const int MaxChoiceLength = 10;
+for (int i = 2; i <= MaxChoiceLength; i++) {
+    string typeArgs = string.Join(", ", Enumerable.Range(0, i).Select(n => $"T{n}"));
+    string tupleContent = string.Join(", ", Enumerable.Range(0, i).Select(n => $"T{n} v{n}"));
+#>
+
+/// <summary>
+/// A value type that is a choice between <#= i #> values.
+/// </summary>
+internal readonly record struct ValueChoice<<#= typeArgs #>>
+    : IChoice
+{
+    private readonly (<#= tupleContent #>) _values;
+
+    private ValueChoice(int index, (<#= tupleContent #>) values)
+    {
+        Index = index;
+        _values = values;
+    }
+
+    public object? Value => ((ITuple)_values)[Index];
+    public int Index { get; }
+<#
+
+    string switchArgs = string.Join(",", Enumerable.Range(0, i).Select(n => $"\n        Action<T{n}> f{n}"));
+    string caseStatements = string.Join("", Enumerable.Range(0, i).Select(n => $"\n            case {n}: f{n}(_values.v{n}); break;"));
+#>
+
+    public void Switch(<#= switchArgs #>)
+    {
+        switch (Index)
+        {<#= caseStatements #>
+            default: throw new UnreachableException();
+        }
+    }
+
+<#
+    string matchArgs = string.Join(",", Enumerable.Range(0, i).Select(n => $"\n        Func<T{n}, TR> f{n}"));
+    string matchExpressions = string.Join("", Enumerable.Range(0, i).Select(n => $"\n            {n} => f{n}(_values.v{n}),"));
+#>
+    public TR Match<TR>(<#= matchArgs #>) =>
+        Index switch
+        {<#= matchExpressions #>
+            _ => throw new UnreachableException(),
+        };
+
+<#
+    for (int j = 0; j < i; j++) {
+        string fromTupleValue = string.Join(", ", Enumerable.Range(0, i).Select((k) => k==j ? $"v{k}" : "default"));
+#>
+    public T<#= j #>? AsT<#= j #>(bool throwError = false) =>
+        (Index, throwError) switch
+        {
+            (<#= j #>, _)     => _values.v<#= j #>,
+            (_, true)  => throw Helpers.CannotReturnTn(<#= j #>, Index),
+            (_, false) => default,
+        };
+
+    public static ValueChoice<<#= typeArgs #>> FromT<#= j #>(T<#= j #> v<#= j #>) => new(<#= j #>, (<#= fromTupleValue #>)!);
+    public static implicit operator ValueChoice<<#= typeArgs #>>(T<#= j #> v<#= j #>) => FromT<#= j #>(v<#= j #>);
+
+<#
+    }
+#>
+}
+
+<#
+}
+#>
