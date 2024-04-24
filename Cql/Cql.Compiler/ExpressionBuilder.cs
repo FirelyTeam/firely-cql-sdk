@@ -10,8 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -26,7 +29,12 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
+using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using Expression = System.Linq.Expressions.Expression;
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
+using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
+using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 
 namespace Hl7.Cql.Compiler
 {
@@ -433,8 +441,7 @@ namespace Hl7.Cql.Compiler
         protected Expression? Mutate(Element op, Expression? expression) =>
             _expressionMutators.Aggregate(
                 expression,
-                (current, visitor) =>
-                    visitor.Mutate(current!, op, this));
+                (current, visitor) => visitor.Mutate(current!, op, this));
 
         protected Expression? IdentifierRef(IdentifierRef ire)
         {
@@ -1288,4 +1295,1346 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(this);
         }
     }
+
+    #region ArithmeticOperators
+
+    partial class ExpressionBuilderContext
+    {
+        private const string Int32MaxPlusOneAsString = "2147483648";
+
+        private Expression NegateLiteral(Negate e, Literal literal)
+        {
+            // handle things like -2147483648 which gets translated to Negate(2147483648)
+            // since int.MaxValue is 2147483647, we have to handle this specially
+            var literalType = TypeFor(literal);
+            if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
+            {
+                return Expression.Constant(int.MinValue);
+            }
+
+            if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
+            {
+                return Expression.Constant(long.MinValue);
+            }
+
+            return ChangeType(BindCqlOperator(CqlOperator.Negate, literalType, e.operand), e.resultTypeSpecifier);
+        }
+    }
+
+    #endregion
+
+    #region ComparisonOperators
+
+    partial class ExpressionBuilderContext
+    {
+        protected Expression Equivalent(Equivalent eqv)
+        {
+            var left = Translate(eqv.operand[0]);
+            var right = Translate(eqv.operand[1]);
+            if (!_typeResolver.IsListType(left.Type))
+                return BindCqlOperator(CqlOperator.Equivalent, null, left, right);
+
+            var leftElementType = _typeResolver.GetListElementType(left.Type);
+            if (!_typeResolver.IsListType(right.Type))
+                throw new NotImplementedException().WithContext(this);
+
+            var rightElementType = _typeResolver.GetListElementType(right.Type);
+            if (leftElementType != rightElementType)
+            {
+                // This appears in the CQL tests:
+                //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
+                return Expression.Constant(false, typeof(bool?));
+            }
+
+            return BindCqlOperator(CqlOperator.ListEquivalent, null, left, right);
+        }
+    }
+
+    #endregion
+
+    #region DateAndTimeOperators
+
+    partial class ExpressionBuilderContext
+    {
+        protected Expression? SameAs(SameAs e)
+        {
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
+            {
+                (true, true) => CqlOperator.IntervalSameAs,
+                (true, false) => throw this.NewExpressionBuildingException(),
+                _ => CqlOperator.SameAs
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
+            return BindCqlOperator(method, null, expr);
+        }
+
+        protected Expression SameOrAfter(SameOrAfter e)
+        {
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
+            {
+                (true, true) => CqlOperator.IntervalSameOrAfter,
+                (true, false) => throw this.NewExpressionBuildingException(),
+                _ => CqlOperator.SameOrAfter
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
+            return BindCqlOperator(method, null, expr);
+        }
+
+        protected Expression SameOrBefore(SameOrBefore e)
+        {
+            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
+            {
+                (true, true) => CqlOperator.IntervalSameOrBefore,
+                (true, false) => throw this.NewExpressionBuildingException(),
+                _ => CqlOperator.SameOrBefore
+            }; // @TODO: Cast - Move to CqlOperatorsBinder
+            return BindCqlOperator(method, null, expr);
+        }
+    }
+
+    #endregion
+
+    #region ErrorsAndMessaging
+
+    partial class ExpressionBuilderContext
+    {
+        private Expression Message(Message e)
+        {
+            var source = Translate(e.source!);
+            var condition = Translate(e.condition!);
+            var code = Translate(e.code!);
+            var severity = Translate(e.severity!);
+            var message = Translate(e.message!);
+            if (source is ConstantExpression { Value: null } constant)
+            {
+                // create an explicit "null as object" so the generic type can be inferred in source code.
+                source = constant.ConvertExpression(constant.Type);
+            }
+
+            var call = BindCqlOperator(CqlOperator.Message, null, source, code, severity, message);
+            if (condition.Type.IsNullableValueType(out _))
+            {
+                condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));
+            }
+
+            return Expression.Condition(condition, call, source);
+        }
+    }
+
+    #endregion
+
+    #region IntervalOperators
+
+    partial class ExpressionBuilderContext
+    {
+        private Expression Collapse(Collapse e)
+        {
+            var operand = Translate(e.operand![0]!);
+            if (_typeResolver.IsListType(operand.Type))
+            {
+                var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
+                if (elementType.IsCqlInterval(out var pointType))
+                {
+                    var precision = NullExpression.String;
+                    if (e.operand.Length > 1 && e.operand[1] is Quantity quant)
+                    {
+                        precision = Expression.Constant(quant.unit, typeof(string));
+                    }
+
+                    return BindCqlOperator(CqlOperator.Collapse, null, operand, precision);
+                }
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Expression Contains(Contains e)
+        {
+            var left = Translate(e!.operand![0]!);
+            var right = Translate(e.operand[1]!);
+            var precision = e.precisionOrNull();
+            if (_typeResolver.IsListType(left.Type))
+            {
+                var elementType = _typeResolver.GetListElementType(left.Type, throwError: true)!;
+                if (elementType != right.Type)
+                {
+                    if (elementType.IsAssignableFrom(right.Type))
+                    {
+                        right = ChangeType(right, elementType);
+                    }
+                    else throw this.NewExpressionBuildingException($"Cannot convert Contains target {TypeManager.PrettyTypeName(right.Type)} to {TypeManager.PrettyTypeName(elementType)}");
+                }
+
+                return BindCqlOperator(CqlOperator.ListContains, elementType, left, right);
+            }
+
+            if (left.Type.IsCqlInterval(out var pointType))
+            {
+                return BindCqlOperator(CqlOperator.IntervalContains, pointType, left, right, precision);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Expression? Ends(Ends e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            var precision = e.precisionOrNull();
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    return BindCqlOperator(CqlOperator.Ends, null, left, right, precision);
+
+                }
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression Except(Except e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (_typeResolver.IsListType(left.Type) && _typeResolver.IsListType(right.Type))
+            {
+                return BindCqlOperator(CqlOperator.ListExcept, null, left, right);
+            }
+
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    return BindCqlOperator(CqlOperator.IntervalExcept, null, left, right);
+
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression In(In e)
+        {
+            var left = Translate(e.operand![0]!);
+            var right = Translate(e.operand![1]!);
+            if (_typeResolver.IsListType(right.Type))
+            {
+                return BindCqlOperator(CqlOperator.InList, null, left, right);
+            }
+
+            if (right.Type.IsCqlInterval(out var rightElementType))
+            {
+                var precision = e.precisionOrNull();
+
+                return BindCqlOperator(CqlOperator.InInterval, rightElementType, left, right, precision);
+
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+
+        protected Expression? Includes(Includes e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (_typeResolver.IsListType(left.Type))
+            {
+                var leftElementType = _typeResolver.GetListElementType(left.Type);
+                if (_typeResolver.IsListType(right.Type))
+                {
+                    var rightElementType = _typeResolver.GetListElementType(left.Type);
+                    if (leftElementType != rightElementType)
+                        throw this.NewExpressionBuildingException();
+                    return BindCqlOperator(CqlOperator.ListIncludesList, null, left, right);
+                }
+
+                if (leftElementType != right.Type)
+                    throw this.NewExpressionBuildingException();
+                return BindCqlOperator(CqlOperator.ListIncludesElement, leftElementType, left, right);
+            }
+
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var pointType))
+                {
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.IntervalIncludesInterval, null, left, right, precision);
+                }
+                else
+                {
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.IntervalIncludesElement, null, left, right, precision);
+                }
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression IncludedIn(IncludedIn e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (_typeResolver.IsListType(left.Type))
+            {
+                var leftElementType = _typeResolver.GetListElementType(left.Type);
+                if (_typeResolver.IsListType(right.Type))
+                {
+                    var rightElementType = _typeResolver.GetListElementType(left.Type);
+                    if (leftElementType != rightElementType)
+                        throw this.NewExpressionBuildingException();
+                    return BindCqlOperator(CqlOperator.ListIncludesList, null, right, left);
+                }
+
+                if (leftElementType != right.Type)
+                    throw this.NewExpressionBuildingException();
+                return BindCqlOperator(CqlOperator.ListIncludesElement, leftElementType, right, left);
+            }
+
+            if (left.Type.IsCqlInterval(out var leftPointType) && right.Type.IsCqlInterval(out var rightPointType))
+            {
+                var precision = e.precisionOrNull();
+                return BindCqlOperator(CqlOperator.IntervalIncludesInterval, null, right, left, precision);
+            }
+            if (right.Type.IsCqlInterval(out var pointType))
+            {
+                var precision = e.precisionOrNull();
+                if (left.Type != pointType)
+                    throw this.NewExpressionBuildingException();
+                return BindCqlOperator(CqlOperator.IntervalIncludesElement, null, right, left, precision);
+
+            }
+
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression Intersect(Intersect e)
+        {
+            var left = Translate(e.operand![0]!);
+            var right = Translate(e.operand![1]!);
+            if (_typeResolver.IsListType(left.Type))
+            {
+                return BindCqlOperator(CqlOperator.ListIntersect, null, left, right);
+            }
+
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    return BindCqlOperator(CqlOperator.IntervalIntersect, null, left, right);
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression? Meets(Meets e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.Meets, null, left, right, precision);
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Expression? MeetsAfter(MeetsAfter e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.MeetsAfter, null, left, right, precision);
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Expression? MeetsBefore(MeetsBefore e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.MeetsBefore, null, left, right, precision);
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression Overlaps(Overlaps e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.Overlaps, null, left, right, precision);
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Expression OverlapsBefore(OverlapsBefore e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.OverlapsBefore, null, left, right, precision);
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Expression OverlapsAfter(OverlapsAfter e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.OverlapsAfter, null, left, right, precision);
+                }
+
+                throw new NotImplementedException().WithContext(this);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression? ProperIncludes(ProperIncludes e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                var precision = e.precisionOrNull();
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    return BindCqlOperator(CqlOperator.IntervalProperlyIncludesInterval, null, left, right, precision);
+                }
+
+                return BindCqlOperator(CqlOperator.IntervalProperlyIncludesElement, null, left, right, precision);
+            }
+
+            if (_typeResolver.IsListType(left.Type))
+            {
+                // var leftElementType = _typeResolver.GetListElementType(left.Type);
+                if (_typeResolver.IsListType(right.Type))
+                {
+                    // var rightElementType = _typeResolver.GetListElementType(right.Type);
+                    return BindCqlOperator(CqlOperator.ListProperlyIncludesList, leftPointType, left, right);
+                }
+
+                return BindCqlOperator(CqlOperator.ListProperlyIncludesElement, leftPointType, left, right);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+
+        protected Expression? ProperIncludedIn(ProperIncludedIn e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.IntervalProperlyIncludesInterval, null, right, left, precision);
+                }
+            }
+            else if (_typeResolver.IsListType(left.Type))
+            {
+                var leftElementType = _typeResolver.GetListElementType(left.Type);
+                if (_typeResolver.IsListType(right.Type))
+                {
+                    var rightElementType = _typeResolver.GetListElementType(right.Type);
+                    if (leftElementType != rightElementType)
+                        throw this.NewExpressionBuildingException();
+                    return BindCqlOperator(CqlOperator.ListProperlyIncludesList, null, right, left);
+                }
+            }
+            else if (right.Type.IsCqlInterval(out var rightPointType))
+            {
+                var precision = e.precisionOrNull();
+                return BindCqlOperator(CqlOperator.IntervalProperlyIncludesElement, null, right, left, precision);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        private Expression? ProperIn(ProperIn e)
+        {
+            var element = Translate(e.operand![0]);
+            var intervalOrList = Translate(e.operand![1]);
+            if (intervalOrList.Type.IsCqlInterval(out var pointType))
+            {
+                var precision = e.precisionOrNull();
+                return BindCqlOperator(CqlOperator.IntervalProperlyIncludesElement, pointType, intervalOrList, element, precision);
+            }
+
+            if (_typeResolver.IsListType(intervalOrList.Type))
+            {
+                return BindCqlOperator(CqlOperator.ListProperlyIncludesElement, pointType, intervalOrList, element);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression? ProperContains(ProperContains e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (_typeResolver.IsListType(left.Type))
+            {
+                var leftElementType = _typeResolver.GetListElementType(left.Type);
+                if (_typeResolver.IsListType(right.Type))
+                {
+                    var rightElementType = _typeResolver.GetListElementType(right.Type);
+                    if (leftElementType != rightElementType)
+                        throw this.NewExpressionBuildingException();
+                    return BindCqlOperator(CqlOperator.ListProperlyIncludesList, null, left, right);
+                }
+
+                if (leftElementType != right.Type)
+                    throw this.NewExpressionBuildingException();
+                return BindCqlOperator(CqlOperator.ListProperlyIncludesElement, leftElementType, left, right);
+            }
+
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (leftPointType != right.Type)
+                    throw this.NewExpressionBuildingException();
+                var precision = e.precisionOrNull();
+                return BindCqlOperator(CqlOperator.IntervalProperlyIncludesElement, leftPointType, left, right, precision);
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+        protected Expression? Starts(Starts e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    var precision = e.precisionOrNull();
+                    return BindCqlOperator(CqlOperator.Starts, null, left, right, precision);
+
+                }
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+
+
+        protected Expression Union(Union e)
+        {
+            var left = Translate(e.operand![0]);
+            var right = Translate(e.operand![1]);
+            if (_typeResolver.IsListType(left.Type))
+            {
+                var leftElementType = _typeResolver.GetListElementType(left.Type)!;
+                if (_typeResolver.IsListType(right.Type))
+                {
+                    var rightElementType = _typeResolver.GetListElementType(right.Type)!;
+                    if (leftElementType != rightElementType)
+                        throw this.NewExpressionBuildingException($"Union requires both operands to be of the same type, " +
+                                                                  $"but left is {leftElementType.Name} and right is {rightElementType.Name}.");
+                    return BindCqlOperator(CqlOperator.ListUnion, null, left, right);
+                }
+            }
+            else if (left.Type.IsCqlInterval(out var leftPointType))
+            {
+                if (right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    if (leftPointType != rightPointType)
+                        throw this.NewExpressionBuildingException();
+                    return BindCqlOperator(CqlOperator.IntervalUnion, null, left, right);
+                }
+            }
+            throw new NotImplementedException().WithContext(this);
+        }
+    }
+
+    #endregion
+
+    #region NullologicalOperators
+
+    partial class ExpressionBuilderContext
+    {
+        protected Expression Coalesce(Coalesce ce)
+        {
+            var operands = TranslateAll(ce.operand);
+            if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
+                return BindCqlOperator(CqlOperator.Coalesce, null, operands[0]);
+
+            var distinctOperandTypes = operands
+                                       .Select(op => op.Type)
+                                       .Distinct()
+                                       .ToArray();
+            if (distinctOperandTypes.Length != 1)
+                throw this.NewExpressionBuildingException("All operand types should match when using Coalesce");
+
+            var type = operands[0].Type;
+            if (type.IsValueType && !type.IsNullableValueType(out _))
+                throw new NotSupportedException("Coalesce on value types is not defined.");
+
+            if (operands.Length == 1)
+                return operands[0];
+
+            var coalesce = Expression.Coalesce(operands[0], operands[1]);
+            for (int i = 2; i < operands.Length; i++)
+            {
+                coalesce = Expression.Coalesce(coalesce, operands[i]);
+            }
+            return coalesce;
+        }
+
+        protected Expression IsNull(IsNull isn)
+        {
+            var operand = Translate(isn.operand!);
+            if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
+                return Expression.Constant(false, typeof(bool?));
+
+            var compare = Expression.Equal(operand, Expression.Constant(null));
+            var asNullableBool = compare.ConvertExpression<bool?>();
+            return asNullableBool;
+        }
+    }
+
+    #endregion
+
+    #region Query
+    partial class ExpressionBuilderContext
+    {
+        protected Expression Query(Query query)
+        {
+            QueryDumpDebugInfoToLog(query);
+
+            Action popTokens = null!;
+
+            void PushScopes(
+                string? alias = null,
+                params ExpressionElementPairForIdentifier[] kvps)
+            {
+                var popToken = this.PushScopes(alias, kvps);
+                popTokens = (() => popToken.Pop()) + popTokens;
+            }
+
+            try
+            {
+                var sources = query.source;
+                if (sources.Length == 0)
+                    throw this.NewExpressionBuildingException("Queries must define at least 1 source");
+
+                var (@return, sourcesPreviouslySingletons) = ProcessQuerySources(query);
+                var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
+
+                ParameterExpression scopeParameter;
+                if (sources.Length == 1)
+                {
+                    var source0 = sources[0];
+                    var sourceParameterName = NormalizeIdentifier(source0.alias);
+                    scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
+                    PushScopes(ImpliedAlias, KeyValuePair.Create(source0.alias, ((Expression)scopeParameter, (Element)source0.expression)));
+                }
+                else
+                {
+                    var sourceParameterName = TypeNameToIdentifier(returnElementType, this);
+                    scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
+                    var scopes =
+                        (
+                            from property in returnElementType!.GetProperties()
+                            let propertyAccess = Expression.Property(scopeParameter, property)
+                            select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
+                        )
+                        .ToArray();
+                    PushScopes(ImpliedAlias, scopes);
+                }
+
+                if (query.let != null)
+                {
+                    foreach (var let in query.let)
+                    {
+                        var expression = Translate(let.expression!);
+                        PushScopes(ImpliedAlias, KeyValuePair.Create(let.identifier!, (expression, (Element)let.expression!)));
+                    }
+                }
+
+                // handle with/such-that
+                if (query.relationship is not null)
+                {
+                    foreach (var relationship in query.relationship)
+                    {
+                        using (PushElement(relationship))
+                        {
+                            var selectManyLambda = WithToSelectManyBody(scopeParameter, relationship);
+
+                            var selectManyCall = BindCqlOperator(CqlOperator.SelectMany, returnElementType, @return, selectManyLambda);
+                            if (relationship is Without)
+                            {
+                                var callExcept = BindCqlOperator(CqlOperator.ListExcept, returnElementType, @return, selectManyCall);
+                                @return = callExcept;
+                            }
+                            else
+                            {
+                                @return = selectManyCall;
+                            }
+                        }
+                    }
+                }
+                // 20240312 EK: refactoring made this redundant, but I am not sure it really is, so I am keeping
+                // it around. It was used to redefine the type for the "rootScopeParameter", which used to be defined
+                // inside every if statement here (so for where, return, etc).
+                // -----
+                // The element type may have changed
+                // elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
+                if (query.where is { } queryWhere)
+                {
+                    @return = Where(queryWhere, scopeParameter, @return);
+                }
+
+                if (query.@return != null)
+                {
+                    using (PushElement(query.@return))
+                    {
+                        var selectBody = Translate(query.@return.expression!);
+                        var selectLambda = Expression.Lambda(selectBody, scopeParameter);
+                        var callSelect = BindCqlOperator(CqlOperator.Select, returnElementType, @return, selectLambda);
+                        @return = callSelect;
+                    }
+                }
+
+                if (query.aggregate is { } queryAggregate)
+                {
+                    @return = AggregateClause(query, queryAggregate, scopeParameter, @return);
+                }
+
+                if (query.sort is { by.Length: > 0 })
+                {
+                    if (sources.Length == 1)
+                        @return = SortClause(query, @return);
+                    else
+                    {
+                        throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(this);
+                        //foreach (var by in query.sort.by)
+                        //{
+                        //    var order = ListSortDirection.Ascending;
+                        //    if (by.direction == "desc" || by.direction == "descending")
+                        //        order = ListSortDirection.Descending;
+                        //    else if (by.direction == "asc" || by.direction == "ascending")
+                        //        order = ListSortDirection.Ascending;
+                        //    else throw ctx.NewExpressionBuildingException($"Invalid sort order {by.direction}");
+
+                        //    if (by.expression != null)
+                        //    {
+                        //        var parameterName = "@this";
+                        //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
+                        //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                        //        var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, by.expression);
+                        //        var sortMemberExpression = TranslateExpression(by.expression, subContext);
+                        //        var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
+                        //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                        //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                        //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
+                        //        @return = sort;
+                        //    }
+                        //    else if (by.path != null && by.resultTypeName != null)
+                        //    {
+                        //        var parameterName = "@this";
+                        //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
+                        //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                        //        var pathMemberType = TypeResolver.ResolveType(by.resultTypeName);
+                        //        if (pathMemberType == null)
+                        //        {
+                        //            var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
+                        //            ctx.LogError(msg);
+                        //            throw ctx.NewExpressionBuildingException(msg);
+                        //        }
+                        //        var pathExpression = PropertyHelper(sortMemberParameter, by.path, pathMemberType!, ctx);
+                        //        var lambdaBody = Expression.Convert(pathExpression, typeof(object));
+                        //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                        //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                        //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
+                        //        @return = sort;
+                        //    }
+                        //    else
+                        //    {
+                        //        var sort = Operators.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
+                        //            @return, Expression.Constant(order, typeof(SortOrder)));
+                        //        @return = sort;
+                        //    }
+                        //}
+
+                    }
+                }
+
+                // Because we promoted the source to a list, we now have to demote the result again.
+                var wereAllSourcesPreviouslySingletons = sourcesPreviouslySingletons.All(b => b);
+                if (wereAllSourcesPreviouslySingletons)
+                {
+                    @return = DemoteSourceListToSingleton(@return);
+                }
+
+                if (query.resultTypeSpecifier is ListTypeSpecifier && !_typeResolver.IsListType(@return.Type))
+                {
+                    @return = Expression.NewArrayInit(@return.Type, @return);
+                }
+
+                return @return;
+            }
+            finally
+            {
+                popTokens?.Invoke();
+            }
+        }
+
+        private Expression DemoteSourceListToSingleton(Expression source)
+        {
+            // Do not inline this method, so that we can clearly see the pairing with the call to PromoteSourceSingletonToList
+            return BindCqlOperator(CqlOperator.SingletonFrom, null, source);
+        }
+
+        private (Expression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(Expression source)
+        {
+            if (_typeResolver.IsListType(source.Type))
+                return (source, false);
+
+            source = Expression.NewArrayInit(source.Type, source);
+            return (source, true);
+        }
+
+
+
+        [Conditional("DEBUG")]
+        private void QueryDumpDebugInfoToLog(Query query)
+        {
+            var sourceLength = query.source?.Length ?? 0;
+            var lines = ReadCqlLines(query);
+            var sources = ReadSources();
+
+            (string alias, Type sourceType, bool isEnumerationType)[] ReadSources() => query.source!
+                .SelectToArray(s =>
+                {
+                    var sourceType = Translate(s.expression).Type;
+                    var isEnumerationType = _typeResolver.IsListType(sourceType);
+                    if (isEnumerationType) sourceType = _typeResolver.GetListElementType(sourceType, true)!;
+                    return (
+                               s.alias,
+                               sourceType,
+                               isEnumerationType
+                           );
+                });
+
+            string[]? ReadCqlLines(Element element)
+            {
+                if (element.locator?.Split([":", "-"], 4, StringSplitOptions.TrimEntries) is not [{ } r0, { } c0, { } r1, { } c1]) return null;
+
+                static int ParseInt32(string s) => int.Parse(s, CultureInfo.InvariantCulture);
+
+                var (row0, col0, row1, col1) = (ParseInt32(r0), ParseInt32(c0), ParseInt32(r1), ParseInt32(c1));
+
+                var elmFilePath = _libraryContext.Library.OriginalFilePath;
+                if (elmFilePath is null)
+                    return null;
+
+                var fiElm = new FileInfo(elmFilePath);
+                var fiCql = new FileInfo(Path.Combine(fiElm.Directory!.Parent!.FullName, "CQL", fiElm.Name[..^4] + "cql"));
+                if (!fiCql.Exists)
+                    return null;
+
+                var lines =
+                    File.ReadLines(fiCql.FullName)
+                        .Select((lineText, i) => (lineText, lineNum: i + 1))
+                        .Where(t => t.lineNum >= row0 && t.lineNum <= row1)
+                        .Select(t =>
+                        {
+                            var lineText = t.lineText;
+                            Debug.Assert(row0 != row1 || col1 > col0);
+                            if (t.lineNum == row1)
+                            {
+                                // Cannot trust the locator data in elm files to be within the bounds of the current line
+                                col1 = Math.Clamp(col1, 0, lineText.Length);
+                                lineText = lineText[..col1] + "<<<" + lineText[col1..];
+                            }
+
+                            if (t.lineNum == row0)
+                            {
+                                // Cannot trust the locator data in elm files to be within the bounds of the current line
+                                col0 = Math.Clamp(col0, 0, lineText.Length);
+                                lineText = lineText[..col0] + ">>>" + lineText[col0..];
+                            }
+
+                            return lineText;
+                        })
+                        .ToArray();
+                return lines;
+            }
+
+            _logger.LogDebug(
+                """
+                Found {queryType} Query with {sourceCount} source(s) at: {at}
+                Sources:{sources}
+                CQL: {lines}
+                """,
+                ((ReadOnlySpan<string>)["Empty", "Single", "Multi"])[Math.Clamp(sourceLength, 0, 2)],
+                sourceLength,
+                DebuggerView,
+                $"{string.Concat(from s in sources select $"\n\t{s.alias}: {(s.isEnumerationType ? "Enumeration" : "Singleton")} of {s.sourceType}")}",
+                lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
+        }
+
+        private (Expression sourceExpression, bool[] sourcesPreviouslySingletons) ProcessQuerySources(Query query)
+        {
+            AliasedQuerySource[] sources = query.source;
+
+            if (sources.Length is 0)
+                throw this.NewExpressionBuildingException("A query must have at least one source.");
+
+            var aliases = sources.SelectToArray(s => s.alias);
+            if (aliases.Any(alias => string.IsNullOrEmpty(alias)))
+                throw this.NewExpressionBuildingException("Query sources must have aliases.");
+
+            var sourceExpressions = TranslateAll(sources.SelectToArray(source => source.expression));
+
+            // Returns a CrossJoin between IEnumerable<> of T1, T2, T3, etc and return into IEnumerable<(T1, T2, T3, etc)>
+            // a) If a source is not of a list-type (ie, a singleton), it needs to be promoted to a list type.
+            // b) Cross-Join
+            //    IEnumerable<A> a = ...;
+            //    IEnumerable<B> b = ...;
+            //    IEnumerable<c> c = ...;
+            //    IEnumerable<(A, B, C)> crossJoinedValueTupleResults = CrossJoin<A, B, C>(a, b, c);
+
+            var temp = sourceExpressions.SelectToArray(expr => PromoteSourceSingletonToList(expr));
+            var promotedSourceExpressions = temp.SelectToArray(s => s.source);
+            var sourcesPreviouslySingletons = temp.SelectToArray(s => s.sourceOriginallyASingleton);
+
+            // Only one source, so no need for cross-joining. Return as-is.
+            if (sources.Length == 1)
+                return (promotedSourceExpressions[0], sourcesPreviouslySingletons);
+
+            var crossJoinedValueTupleResultsExpression = BindCqlOperator(CqlOperator.CrossJoin, null, promotedSourceExpressions);
+
+            // Select the IEnumerable<> of value-tuples above into IEnumerable<> of our custom tuple
+            // a) Create the custom tuple
+            // b) Select
+            //    IEnumerable<Tuple_ABC> crossJoinedCqlTupleResults = Select(
+            //        crossJoinedValueTupleResults,
+            //        valueTuple => {
+            //            var abc = new Tuple_ABC();
+            //            abc.A = t.Item1;
+            //            abc.B = t.Item2;
+            //            abc.C = t.Item3;
+            //            return abc;
+            //        });
+
+            Type[] sourceListElementTypes = promotedSourceExpressions
+                .SelectToArray(pse => _typeResolver.GetListElementType(pse.Type, true)!);
+
+            var aliasAndElementTypes = aliases
+                                       .Zip(sourceListElementTypes, (alias, elementType) => (alias, elementType))
+                                       .ToDictionary(t => t.alias, t => t.elementType);
+
+            // IEnumerable<(A,B,C)
+            var funcResultType = crossJoinedValueTupleResultsExpression.Type;
+
+            // (A,B,C)
+            const BindingFlags bfPublicInstance = BindingFlags.Public | BindingFlags.Instance;
+
+            Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
+            FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
+
+            Type cqlTupleType = TupleTypeFor(aliasAndElementTypes);
+            PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
+
+            Debug.Assert(valueTupleFields.Length > 0);
+            Debug.Assert(valueTupleFields.Length == cqlTupleProperties.Length);
+
+            var valueTupleTypeParam = Expression.Parameter(valueTupleType, "_valueTuple");
+            var selectExpression =
+                Expression.Lambda(
+                    CopyValueTupleIntoCqlTuple(),
+                    valueTupleTypeParam);
+
+            Expression CopyValueTupleIntoCqlTuple()
+            {
+                var newCqlTupleExpr = Expression.New(cqlTupleType);
+
+                var memberAssignments = valueTupleFields
+                                        .Zip(cqlTupleProperties, (valueTupleField, cqlTupleProp) => (valueTupleField, cqlTupleProp))
+                                        .SelectToArray(
+                                            valueTupleFields.Length,
+                                            t => Expression.Bind(
+                                                t.cqlTupleProp.GetSetMethod()!,
+                                                Expression.Field(valueTupleTypeParam, t.valueTupleField)));
+
+                var copyProps = Expression.MemberInit(newCqlTupleExpr, memberAssignments);
+                return copyProps;
+            }
+
+            var crossJoinedCqlTupleResultsExpression = BindCqlOperator(CqlOperator.Select, null, crossJoinedValueTupleResultsExpression, selectExpression);
+
+            return (crossJoinedCqlTupleResultsExpression, sourcesPreviouslySingletons)!;
+        }
+
+        protected Expression SortClause(
+            Query query,
+            Expression @return)
+        {
+            //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByExpression))]
+            //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByColumn))]
+            //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByDirection))]
+            using (PushElement(query.sort))
+            {
+                foreach (var by in query.sort.by)
+                {
+                    using (PushElement(by))
+                    {
+                        ListSortDirection order = by.direction.ListSortOrder();
+                        switch (by)
+                        {
+                            case ByExpression byExpression:
+                                {
+                                    var parameterName = "@this";
+                                    var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
+                                    var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                                    using (PushScopes(parameterName,
+                                                      KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
+                                    {
+                                        var sortMemberExpression = Translate(byExpression.expression);
+                                        var lambdaBody = _operatorsBinder.ConvertToType<object>(sortMemberExpression);
+                                        var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
+                                        return BindCqlOperator(CqlOperator.SortBy, returnElementType, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                                    }
+                                }
+                            case ByColumn byColumn:
+                                {
+                                    var parameterName = "@this";
+                                    var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
+                                    var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                                    var pathMemberType = TypeFor(byColumn);
+                                    if (pathMemberType == null)
+                                    {
+                                        throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
+                                    }
+                                    var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
+                                    var lambdaBody = _operatorsBinder.ConvertToType<object>(pathExpression);
+                                    var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
+                                    return BindCqlOperator(CqlOperator.SortBy, null, @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                                }
+                            default:
+                                {
+                                    return BindCqlOperator(CqlOperator.ListSort, null, @return, Expression.Constant(order, typeof(ListSortDirection)));
+                                }
+                        }
+                    }
+                }
+            }
+            return @return;
+        }
+
+        protected LambdaExpression WithToSelectManyBody(
+            ParameterExpression rootScopeParameter,
+            RelationshipClause with)
+        {
+            if (with.expression == null)
+                throw this.NewExpressionBuildingException("With must have a 'source' expression.");
+
+            if (with.suchThat == null)
+                throw this.NewExpressionBuildingException("With must have a 'such that' expression.");
+
+            //define "With Such That":
+            //[Encounter] E
+            //  with[Condition] P
+            //   such that P.onset during E.period
+            //     and P.abatement after end of E.period
+
+            //Func<Bundle, Context, IEnumerable<Encounter>> x = (bundle, ctx) =>
+            //    bundle.Entry.ByResourceType<Encounter>()
+            //    .SelectMany(E =>
+            //        bundle.Entry.ByResourceType<Condition>() // <--
+            //            .Where(P => true) // such that goes here
+            //            .Select(P => E));
+            var source = Translate(with.expression);
+            if (!_typeResolver.IsListType(source.Type))
+            {
+                // e.g.:
+                // with "Index Prescription Start Date" IPSD
+                // where IPSD is a Date
+                // Promote to an array for consistency.
+                var newArray = Expression.NewArrayInit(source.Type, source);
+                source = newArray;
+            }
+            var sourceElementType = _typeResolver.GetListElementType(source.Type)!;
+
+            var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
+            using (PushScopes(ImpliedAlias, KeyValuePair.Create(with.alias!, ((Expression)whereLambdaParameter, (Element)with))))
+            {
+                var suchThatBody = Translate(with.suchThat);
+
+                var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
+                var callWhereOnSource = BindCqlOperator(CqlOperator.Where, sourceElementType, source, whereLambda);
+
+                var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
+                var selectBody = rootScopeParameter; // P => E
+                var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
+                var callSelectOnWhere = BindCqlOperator(CqlOperator.Select, sourceElementType, callWhereOnSource, selectLambda);
+                var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
+                return selectManyLambda;
+
+            }
+        }
+
+
+        protected Expression Where(
+            Elm.Expression queryWhere,
+            ParameterExpression sourceParameter,
+            Expression @return)
+        {
+            using (PushElement(queryWhere))
+            {
+                var whereBody = Translate(queryWhere);
+                var whereLambda = Expression.Lambda(whereBody, sourceParameter);
+                return BindCqlOperator(CqlOperator.Where, null, @return, whereLambda);
+            }
+        }
+
+        protected Expression AggregateClause(
+            Query query,
+            AggregateClause queryAggregate,
+            ParameterExpression sourceParameter,
+            Expression @return)
+        {
+            using (PushElement(queryAggregate))
+            {
+                var resultAlias = queryAggregate.identifier!;
+                Type? resultType = null;
+                if (queryAggregate.resultTypeSpecifier is { } typeSpecifier)
+                {
+                    resultType = TypeFor(typeSpecifier);
+                }
+                else if (!string.IsNullOrWhiteSpace(queryAggregate.resultTypeName.Name!))
+                {
+                    resultType = _typeResolver.ResolveType(queryAggregate.resultTypeName.Name!);
+                }
+
+                if (resultType is null)
+                    throw this.NewExpressionBuildingException(
+                        $"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
+
+                var resultParameter = Expression.Parameter(resultType, resultAlias);
+                using (PushScopes(ImpliedAlias, KeyValuePair.Create(resultAlias!, ((Expression)resultParameter, (Element)queryAggregate))))
+                {
+                    var startingValue = Translate(queryAggregate.starting!);
+                    var lambdaBody = Translate(queryAggregate.expression!);
+                    var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
+                    return BindCqlOperator(CqlOperator.Aggregate, resultType, @return, lambda, startingValue);
+                }
+            }
+        }
+    }
+
+    #endregion
+
+    #region TypeOperators
+
+    partial class ExpressionBuilderContext
+    {
+        protected Expression As(As @as) // @TODO: Cast
+        {
+            if (@as.operand is List list)
+            {
+                using (PushElement(list))
+                {
+                    // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
+                    if ((list.element?.Length ?? 0) == 0)
+                    {
+                        var type = TypeFor(@as.asTypeSpecifier!);
+                        if (_typeResolver.IsListType(type))
+                        {
+                            var listElementType = _typeResolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
+                            var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
+                            var elmAs = new ElmAsExpression(newArray, type);
+                            return elmAs;
+                        }
+
+                        throw this.NewExpressionBuildingException("Cannot use as operator on a list if the as type is not also a list type.");
+                    }
+                }
+            }
+
+            // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
+            if (@as.asTypeSpecifier != null)
+            {
+                using (PushElement(@as.asTypeSpecifier))
+                {
+                    if (@as.operand is Null)
+                    {
+                        var type = TypeFor(@as.asTypeSpecifier!);
+                        var defaultExpression = Expression.Default(type);
+                        return new ElmAsExpression(defaultExpression, type);
+                    }
+                    else
+                    {
+                        var type = TypeFor(@as.asTypeSpecifier!);
+                        var operand = Translate(@as.operand!);
+                        return new ElmAsExpression(operand, type);
+                    }
+                }
+            }
+
+            {
+                if (string.IsNullOrWhiteSpace(@as.asType.Name))
+                    throw this.NewExpressionBuildingException("The 'as' operator has no type name.");
+
+                if (@as.operand is null)
+                    throw this.NewExpressionBuildingException("Operand cannot be null");
+
+                var type = _typeResolver.ResolveType(@as.asType.Name!)
+                           ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
+
+                var operand = Translate(@as.operand);
+                if (!type.IsAssignableTo(operand.Type))
+                {
+                    _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand));
+                }
+
+                return new ElmAsExpression(operand, type);
+            }
+        }
+
+        protected Expression Is(Is @is) // @TODO: Cast
+        {
+            var op = Translate(@is.operand!);
+            Type? type = null;
+            if (@is.isTypeSpecifier != null)
+            {
+                if (@is.isTypeSpecifier is ChoiceTypeSpecifier choice)
+                {
+                    var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                    Expression result = op.TypeIsExpression(firstChoiceType);
+                    for (int i = 1; i < choice.choice.Length; i++)
+                    {
+                        var cti = TypeFor(choice.choice[i]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                        var ie = op.TypeIsExpression(cti);
+                        result = Expression.Or(result, ie);
+                    }
+                    var ta = result.TypeAsExpression<bool?>();
+                    return ta;
+                }
+
+                type = TypeFor(@is.isTypeSpecifier) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+            }
+            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
+            {
+                type = _typeResolver.ResolveType(@is.isType.Name) ?? throw this.NewExpressionBuildingException($"Could not resolve type {@is.isType.Name}");
+            }
+
+            if (type == null)
+                throw this.NewExpressionBuildingException($"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
+
+            var isExpression = op.TypeIsExpression(type);
+            var nullable = isExpression.TypeAsExpression<bool?>();
+            return nullable;
+        }
+
+        private Expression ChangeType(
+            Expression expr,
+            TypeSpecifier? typeSpecifier) // @TODO: Cast
+        {
+            if (typeSpecifier is null)
+                return expr;
+
+            if (TypeFor(typeSpecifier) is { } resultType && resultType != expr.Type)
+            {
+                var typeAs = ChangeType(expr, resultType);
+                return typeAs;
+            }
+
+            return expr;
+        }
+
+
+        private Expression ChangeType(
+            Element element,
+            Type outputType)
+            => ChangeType(Translate(element), outputType); // @TODO: Cast
+
+        private Expression ChangeType(
+            Expression input,
+            Type outputType) // @TODO: Cast
+        {
+            if (input.Type == outputType)
+                return input;
+
+            if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
+                return input.TypeAsExpression(outputType);
+
+            if (_typeResolver.IsListType(input.Type)
+                && _typeResolver.IsListType(outputType))
+            {
+                var inputElementType = _typeResolver.GetListElementType(input.Type, true)!;
+                var outputElementType = _typeResolver.GetListElementType(outputType, true)!;
+                var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
+                var lambdaBody = ChangeType(lambdaParameter, outputElementType);
+                var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
+                return BindCqlOperator(CqlOperator.Select, null, input, lambda);
+            }
+
+            if (TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
+            {
+                return BindCqlOperator(CqlOperator.Convert, null, input, Expression.Constant(correctedTo, typeof(Type)));
+            }
+
+            return BindCqlOperator(CqlOperator.Convert, null, input, Expression.Constant(outputType, typeof(Type)));
+        }
+    }
+
+    #endregion
 }
