@@ -794,7 +794,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -808,7 +808,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1042,7 +1042,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1056,7 +1056,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1180,7 +1180,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1194,7 +1194,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1318,7 +1318,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1332,7 +1332,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1456,7 +1456,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1470,7 +1470,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1594,7 +1594,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1608,7 +1608,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1732,7 +1732,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1746,7 +1746,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -1870,7 +1870,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -1884,7 +1884,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -2096,7 +2096,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -2110,7 +2110,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;
@@ -2200,7 +2200,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
 			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
 			var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -2214,7 +2214,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
 			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
-			var aw_ = context.Operators.InInterval<CqlDate>(am_, av_, "day");
+			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
 			return ax_;

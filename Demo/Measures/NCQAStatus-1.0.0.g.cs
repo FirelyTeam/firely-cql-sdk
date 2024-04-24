@@ -140,7 +140,7 @@ public class NCQAStatus_1_0_0
 			{
 				"completed",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -175,7 +175,7 @@ public class NCQAStatus_1_0_0
 				"completed",
 				"in-progress",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};

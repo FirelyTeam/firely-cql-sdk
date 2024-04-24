@@ -200,7 +200,7 @@ public class Hospice_6_9_000
 			var az_ = QICoreCommon_2_0_000.toInterval((ay_ as object));
 			var ba_ = context.Operators.End(az_);
 			var bb_ = this.Measurement_Period();
-			var bc_ = context.Operators.InInterval<CqlDateTime>(ba_, bb_, "day");
+			var bc_ = context.Operators.In<CqlDateTime>(ba_, bb_, "day");
 			var bd_ = context.Operators.And(ax_, bc_);
 
 			return bd_;

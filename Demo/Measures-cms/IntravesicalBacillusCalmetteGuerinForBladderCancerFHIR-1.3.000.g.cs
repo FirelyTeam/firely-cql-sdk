@@ -473,19 +473,18 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var e_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(c_, d_);
 		bool? f_(Procedure BladderCancerStaging)
 		{
-			var aa_ = context.Operators.Convert<string>(BladderCancerStaging?.StatusElement?.Value);
-			var ab_ = context.Operators.Equal(aa_, "completed");
+			var aa_ = context.Operators.Equal(BladderCancerStaging?.StatusElement?.Value, "completed");
 
-			return ab_;
+			return aa_;
 		};
 		var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 		object h_(Procedure @this)
 		{
-			var ac_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
-			var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var ae_ = context.Operators.Start(ad_);
+			var ab_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
+			var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
+			var ad_ = context.Operators.Start(ac_);
 
-			return ae_;
+			return ad_;
 		};
 		var i_ = context.Operators.ListSortBy<Procedure>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		var j_ = context.Operators.First<Procedure>(i_);
@@ -645,7 +644,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				"amended",
 				"corrected",
 			};
-			var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
+			var af_ = context.Operators.In<string>(ad_, (ae_ as IEnumerable<string>));
 			var ag_ = context.Operators.And(ab_, af_);
 
 			return ag_;
@@ -741,11 +740,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var q_ = context.Operators.WhereOrNull<Extension>(((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), p_);
-				object r_(Extension @this) => 
+				DataType r_(Extension @this) => 
 					@this?.Value;
-				var s_ = context.Operators.SelectOrNull<Extension, object>(q_, r_);
-				var t_ = context.Operators.SingletonFrom<object>(s_);
-				var u_ = context.Operators.Convert<CqlDateTime>((t_ as FhirDateTime));
+				var s_ = context.Operators.SelectOrNull<Extension, DataType>(q_, r_);
+				var t_ = context.Operators.SingletonFrom<DataType>(s_);
+				var u_ = context.Operators.Convert<CqlDateTime>(t_);
 				var v_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
 				var w_ = QICoreCommon_2_0_000.toInterval(v_);
 				var x_ = context.Operators.Start(w_);
@@ -754,7 +753,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
 				var ad_ = context.Operators.Interval(x_, ac_, (bool?)false, (bool?)true);
-				var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, null);
+				var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, null);
 				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
 				var ah_ = context.Operators.Start(ag_);
 				var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -768,11 +767,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var al_ = context.Operators.WhereOrNull<Extension>(((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), ak_);
-				var an_ = context.Operators.SelectOrNull<Extension, object>(al_, r_);
-				var ao_ = context.Operators.SingletonFrom<object>(an_);
-				var ap_ = context.Operators.Convert<CqlDateTime>((ao_ as FhirDateTime));
+				var an_ = context.Operators.SelectOrNull<Extension, DataType>(al_, r_);
+				var ao_ = context.Operators.SingletonFrom<DataType>(an_);
+				var ap_ = context.Operators.Convert<CqlDateTime>(ao_);
 				var aq_ = this.Measurement_Period();
-				var ar_ = context.Operators.InInterval<CqlDateTime>(ap_, aq_, null);
+				var ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, null);
 				var as_ = context.Operators.And(aj_, ar_);
 
 				return as_;
@@ -846,7 +845,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ab_ = context.Operators.Quantity((decimal?)6m, "months");
 				var ac_ = context.Operators.Add(aa_, ab_);
 				var ad_ = context.Operators.Interval(x_, ac_, (bool?)false, (bool?)true);
-				var ae_ = context.Operators.InInterval<CqlDateTime>(u_, ad_, null);
+				var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, null);
 				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
 				var ah_ = context.Operators.Start(ag_);
 				var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -854,7 +853,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var al_ = QICoreCommon_2_0_000.toInterval(s_);
 				var am_ = context.Operators.Start(al_);
 				var an_ = this.Measurement_Period();
-				var ao_ = context.Operators.InInterval<CqlDateTime>(am_, an_, null);
+				var ao_ = context.Operators.In<CqlDateTime>(am_, an_, null);
 				var ap_ = context.Operators.And(aj_, ao_);
 
 				return ap_;
@@ -876,7 +875,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				"in-progress",
 				"completed",
 			};
-			var at_ = context.Operators.InList<string>(ar_, (as_ as IEnumerable<string>));
+			var at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
 
 			return at_;
 		};
@@ -1063,7 +1062,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var v_ = QICoreCommon_2_0_000.toInterval(p_);
 				var w_ = context.Operators.Start(v_);
 				var x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)false);
-				var y_ = context.Operators.InInterval<CqlDateTime>(o_, x_, null);
+				var y_ = context.Operators.In<CqlDateTime>(o_, x_, null);
 				var aa_ = QICoreCommon_2_0_000.toInterval(p_);
 				var ab_ = context.Operators.Start(aa_);
 				var ac_ = context.Operators.Not((bool?)(ab_ is null));
@@ -1081,10 +1080,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var d_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure Cystectomy)
 		{
-			var ae_ = context.Operators.Convert<string>(Cystectomy?.StatusElement?.Value);
-			var af_ = context.Operators.Equal(ae_, "completed");
+			var ae_ = context.Operators.Equal(Cystectomy?.StatusElement?.Value, "completed");
 
-			return af_;
+			return ae_;
 		};
 		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
 
@@ -1173,7 +1171,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var ah_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var ai_ = context.Operators.Start(ah_);
 				var aj_ = context.Operators.Interval(af_, ai_, (bool?)true, (bool?)false);
-				var ak_ = context.Operators.InInterval<CqlDateTime>(aa_, aj_, null);
+				var ak_ = context.Operators.In<CqlDateTime>(aa_, aj_, null);
 				var am_ = QICoreCommon_2_0_000.toInterval(ab_);
 				var an_ = context.Operators.Start(am_);
 				var ao_ = context.Operators.Not((bool?)(an_ is null));
@@ -1197,15 +1195,14 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				"active",
 				"completed",
 			};
-			var as_ = context.Operators.InList<string>(aq_, (ar_ as IEnumerable<string>));
-			var at_ = context.Operators.Convert<string>(ExclusionMed?.IntentElement?.Value);
-			var au_ = context.Operators.Equal(at_, "order");
-			var av_ = context.Operators.And(as_, au_);
-			var aw_ = context.Operators.IsTrue(ExclusionMed?.DoNotPerformElement?.Value);
-			var ax_ = context.Operators.Not(aw_);
-			var ay_ = context.Operators.And(av_, ax_);
+			var as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
+			var at_ = context.Operators.Equal(ExclusionMed?.IntentElement?.Value, "order");
+			var au_ = context.Operators.And(as_, at_);
+			var av_ = context.Operators.IsTrue(ExclusionMed?.DoNotPerformElement?.Value);
+			var aw_ = context.Operators.Not(av_);
+			var ax_ = context.Operators.And(au_, aw_);
 
-			return ay_;
+			return ax_;
 		};
 		var i_ = context.Operators.WhereOrNull<MedicationRequest>(g_, h_);
 		var j_ = this.Combined_radiotherapy__procedure_();
@@ -1213,46 +1210,45 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var l_ = context.Operators.RetrieveByCodes<Procedure>(k_, null);
 		IEnumerable<Procedure> m_(Procedure ExclusionProcedure)
 		{
-			var az_ = this.First_Bladder_Cancer_Staging_Procedure();
-			var ba_ = new Procedure[]
+			var ay_ = this.First_Bladder_Cancer_Staging_Procedure();
+			var az_ = new Procedure[]
 			{
-				az_,
+				ay_,
 			};
-			bool? bb_(Procedure FirstBladderCancerStaging)
+			bool? ba_(Procedure FirstBladderCancerStaging)
 			{
-				var bf_ = FHIRHelpers_4_3_000.ToValue(ExclusionProcedure?.Performed);
-				var bg_ = QICoreCommon_2_0_000.toInterval(bf_);
-				var bh_ = context.Operators.Start(bg_);
-				var bi_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var bj_ = QICoreCommon_2_0_000.toInterval(bi_);
-				var bk_ = context.Operators.Start(bj_);
-				var bl_ = context.Operators.Quantity((decimal?)6m, "months");
-				var bm_ = context.Operators.Subtract(bk_, bl_);
-				var bo_ = QICoreCommon_2_0_000.toInterval(bi_);
-				var bp_ = context.Operators.Start(bo_);
-				var bq_ = context.Operators.Interval(bm_, bp_, (bool?)true, (bool?)false);
-				var br_ = context.Operators.InInterval<CqlDateTime>(bh_, bq_, null);
-				var bt_ = QICoreCommon_2_0_000.toInterval(bi_);
-				var bu_ = context.Operators.Start(bt_);
-				var bv_ = context.Operators.Not((bool?)(bu_ is null));
-				var bw_ = context.Operators.And(br_, bv_);
+				var be_ = FHIRHelpers_4_3_000.ToValue(ExclusionProcedure?.Performed);
+				var bf_ = QICoreCommon_2_0_000.toInterval(be_);
+				var bg_ = context.Operators.Start(bf_);
+				var bh_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
+				var bi_ = QICoreCommon_2_0_000.toInterval(bh_);
+				var bj_ = context.Operators.Start(bi_);
+				var bk_ = context.Operators.Quantity((decimal?)6m, "months");
+				var bl_ = context.Operators.Subtract(bj_, bk_);
+				var bn_ = QICoreCommon_2_0_000.toInterval(bh_);
+				var bo_ = context.Operators.Start(bn_);
+				var bp_ = context.Operators.Interval(bl_, bo_, (bool?)true, (bool?)false);
+				var bq_ = context.Operators.In<CqlDateTime>(bg_, bp_, null);
+				var bs_ = QICoreCommon_2_0_000.toInterval(bh_);
+				var bt_ = context.Operators.Start(bs_);
+				var bu_ = context.Operators.Not((bool?)(bt_ is null));
+				var bv_ = context.Operators.And(bq_, bu_);
 
-				return bw_;
+				return bv_;
 			};
-			var bc_ = context.Operators.WhereOrNull<Procedure>(ba_, bb_);
-			Procedure bd_(Procedure FirstBladderCancerStaging) => 
+			var bb_ = context.Operators.WhereOrNull<Procedure>(az_, ba_);
+			Procedure bc_(Procedure FirstBladderCancerStaging) => 
 				ExclusionProcedure;
-			var be_ = context.Operators.SelectOrNull<Procedure, Procedure>(bc_, bd_);
+			var bd_ = context.Operators.SelectOrNull<Procedure, Procedure>(bb_, bc_);
 
-			return be_;
+			return bd_;
 		};
 		var n_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(l_, m_);
 		bool? o_(Procedure ExclusionProcedure)
 		{
-			var bx_ = context.Operators.Convert<string>(ExclusionProcedure?.StatusElement?.Value);
-			var by_ = context.Operators.Equal(bx_, "completed");
+			var bw_ = context.Operators.Equal(ExclusionProcedure?.StatusElement?.Value, "completed");
 
-			return by_;
+			return bw_;
 		};
 		var p_ = context.Operators.WhereOrNull<Procedure>(n_, o_);
 		var q_ = context.Operators.ListUnion<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));

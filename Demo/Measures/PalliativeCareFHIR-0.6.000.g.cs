@@ -150,12 +150,12 @@ public class PalliativeCareFHIR_0_6_000
 				"amended",
 				"corrected",
 			};
-			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
+			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			bool? v_(CodeableConcept PalliativeAssessmentCategory)
 			{
 				var ad_ = this.survey();
 				var ae_ = FHIRHelpers_4_0_001.ToConcept(PalliativeAssessmentCategory);
-				var af_ = context.Operators.CodeInList(ad_, (ae_?.codes as IEnumerable<CqlCode>));
+				var af_ = context.Operators.In<CqlCode>(ad_, (ae_?.codes as IEnumerable<CqlCode>));
 
 				return af_;
 			};
@@ -197,7 +197,7 @@ public class PalliativeCareFHIR_0_6_000
 				"completed",
 				"in-progress",
 			};
-			var ao_ = context.Operators.InList<string>(am_, (an_ as IEnumerable<string>));
+			var ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
 			var ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(PalliativeIntervention?.Performed);
 			var aq_ = this.Measurement_Period();
 			var ar_ = context.Operators.Overlaps(ap_, aq_, null);

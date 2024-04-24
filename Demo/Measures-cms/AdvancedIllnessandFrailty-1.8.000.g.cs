@@ -291,7 +291,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var ax_ = QICoreCommon_2_0_000.toInterval(aw_);
 			var ay_ = context.Operators.End(ax_);
 			var az_ = this.Measurement_Period();
-			var ba_ = context.Operators.InInterval<CqlDateTime>(ay_, az_, "day");
+			var ba_ = context.Operators.In<CqlDateTime>(ay_, az_, "day");
 			var bb_ = context.Operators.And(av_, ba_);
 
 			return bb_;
@@ -386,7 +386,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var y_ = context.Operators.Subtract(w_, x_);
 			var aa_ = context.Operators.End(v_);
 			var ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)true);
-			var ac_ = context.Operators.InInterval<CqlDateTime>(u_, ab_, "day");
+			var ac_ = context.Operators.In<CqlDateTime>(u_, ab_, "day");
 			var ad_ = context.Operators.And(r_, ac_);
 
 			return ad_;
@@ -467,7 +467,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
 			var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
-			var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, "day");
+			var u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
 			var v_ = context.Operators.And(j_, u_);
 
 			return v_;
@@ -552,7 +552,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)66, (int?)80, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Has_Criteria_Indicating_Frailty();
 		var j_ = context.Operators.And(h_, i_);
 		var k_ = this.Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();

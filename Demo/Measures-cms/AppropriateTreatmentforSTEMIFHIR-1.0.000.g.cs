@@ -573,7 +573,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var v_ = QICoreCommon_2_0_000.prevalenceInterval(DxSTEMI);
 				var w_ = context.Operators.Start(v_);
 				var x_ = FHIRHelpers_4_3_000.ToInterval(EDEncounter?.Period);
-				var y_ = context.Operators.InInterval<CqlDateTime>(w_, x_, null);
+				var y_ = context.Operators.In<CqlDateTime>(w_, x_, null);
 				var z_ = context.Operators.And(u_, y_);
 				var aa_ = this.Measurement_Period();
 				var ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, x_, "day");
@@ -774,18 +774,16 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var h_ = context.Operators.ListUnion<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest OralAnticoagulant)
 			{
-				var m_ = context.Operators.Convert<string>(OralAnticoagulant?.StatusElement?.Value);
-				var n_ = context.Operators.Equal(m_, "active");
-				var o_ = context.Operators.Convert<string>(OralAnticoagulant?.IntentElement?.Value);
-				var p_ = context.Operators.Equal(o_, "order");
-				var q_ = context.Operators.And(n_, p_);
-				var r_ = context.Operators.Convert<CqlDateTime>(OralAnticoagulant?.AuthoredOnElement);
-				var s_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
-				var t_ = context.Operators.Start(s_);
-				var u_ = context.Operators.SameOrBefore(r_, t_, null);
-				var v_ = context.Operators.And(q_, u_);
+				var m_ = context.Operators.Equal(OralAnticoagulant?.StatusElement?.Value, "active");
+				var n_ = context.Operators.Equal(OralAnticoagulant?.IntentElement?.Value, "order");
+				var o_ = context.Operators.And(m_, n_);
+				var p_ = context.Operators.Convert<CqlDateTime>(OralAnticoagulant?.AuthoredOnElement);
+				var q_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
+				var r_ = context.Operators.Start(q_);
+				var s_ = context.Operators.SameOrBefore(p_, r_, null);
+				var t_ = context.Operators.And(o_, s_);
 
-				return v_;
+				return t_;
 			};
 			var j_ = context.Operators.WhereOrNull<MedicationRequest>(h_, i_);
 			Encounter k_(MedicationRequest OralAnticoagulant) => 
@@ -821,14 +819,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var p_ = QICoreCommon_2_0_000.prevalenceInterval(ExclusionDiagnosis);
 				var q_ = context.Operators.Start(p_);
 				var r_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
-				var s_ = context.Operators.InInterval<CqlDateTime>(q_, r_, null);
+				var s_ = context.Operators.In<CqlDateTime>(q_, r_, null);
 				var u_ = context.Operators.Start(p_);
 				var w_ = context.Operators.Start(r_);
 				var x_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var y_ = context.Operators.Subtract(w_, x_);
 				var aa_ = context.Operators.Start(r_);
 				var ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)false);
-				var ac_ = context.Operators.InInterval<CqlDateTime>(u_, ab_, null);
+				var ac_ = context.Operators.In<CqlDateTime>(u_, ab_, null);
 				var ae_ = context.Operators.Start(r_);
 				var af_ = context.Operators.Not((bool?)(ae_ is null));
 				var ag_ = context.Operators.And(ac_, af_);
@@ -870,15 +868,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
 				var s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)false);
-				var t_ = context.Operators.InInterval<CqlDateTime>(l_, s_, null);
+				var t_ = context.Operators.In<CqlDateTime>(l_, s_, null);
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
-				var y_ = context.Operators.Convert<string>(MajorSurgery?.StatusElement?.Value);
-				var z_ = context.Operators.Equal(y_, "completed");
-				var aa_ = context.Operators.And(x_, z_);
+				var y_ = context.Operators.Equal(MajorSurgery?.StatusElement?.Value, "completed");
+				var z_ = context.Operators.And(x_, y_);
 
-				return aa_;
+				return z_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure MajorSurgery) => 
@@ -912,7 +909,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var n_ = QICoreCommon_2_0_000.toInterval(m_);
 				var o_ = context.Operators.Start(n_);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EDwithSTEMI?.Period);
-				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 				var s_ = QICoreCommon_2_0_000.toInterval(m_);
 				var t_ = context.Operators.Start(s_);
 				var v_ = context.Operators.Start(p_);
@@ -920,16 +917,15 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(p_);
 				var aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)false);
-				var ab_ = context.Operators.InInterval<CqlDateTime>(t_, aa_, null);
+				var ab_ = context.Operators.In<CqlDateTime>(t_, aa_, null);
 				var ad_ = context.Operators.Start(p_);
 				var ae_ = context.Operators.Not((bool?)(ad_ is null));
 				var af_ = context.Operators.And(ab_, ae_);
 				var ag_ = context.Operators.Or(q_, af_);
-				var ah_ = context.Operators.Convert<string>(AirwayProcedure?.StatusElement?.Value);
-				var ai_ = context.Operators.Equal(ah_, "completed");
-				var aj_ = context.Operators.And(ag_, ai_);
+				var ah_ = context.Operators.Equal(AirwayProcedure?.StatusElement?.Value, "completed");
+				var ai_ = context.Operators.And(ag_, ah_);
 
-				return aj_;
+				return ai_;
 			};
 			var j_ = context.Operators.WhereOrNull<Procedure>(h_, i_);
 			Encounter k_(Procedure AirwayProcedure) => 
@@ -973,7 +969,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var x_ = context.Operators.Subtract(v_, w_);
 				var z_ = context.Operators.Start(u_);
 				var aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)true);
-				var ab_ = context.Operators.InInterval<CqlDateTime>(t_, aa_, null);
+				var ab_ = context.Operators.In<CqlDateTime>(t_, aa_, null);
 
 				return ab_;
 			};
@@ -1011,15 +1007,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var p_ = context.Operators.Subtract(n_, o_);
 				var r_ = context.Operators.Start(m_);
 				var s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)false);
-				var t_ = context.Operators.InInterval<CqlDateTime>(l_, s_, null);
+				var t_ = context.Operators.In<CqlDateTime>(l_, s_, null);
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
-				var y_ = context.Operators.Convert<string>(CranialorSpinalSurgery?.StatusElement?.Value);
-				var z_ = context.Operators.Equal(y_, "completed");
-				var aa_ = context.Operators.And(x_, z_);
+				var y_ = context.Operators.Equal(CranialorSpinalSurgery?.StatusElement?.Value, "completed");
+				var z_ = context.Operators.And(x_, y_);
 
-				return aa_;
+				return z_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure CranialorSpinalSurgery) => 
@@ -1133,7 +1128,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var t_ = context.Operators.Quantity((decimal?)30m, "minutes");
 				var u_ = context.Operators.Add(r_, t_);
 				var v_ = context.Operators.Interval(r_, u_, (bool?)false, (bool?)true);
-				var w_ = context.Operators.InInterval<CqlDateTime>(q_, v_, null);
+				var w_ = context.Operators.In<CqlDateTime>(q_, v_, null);
 				var y_ = context.Operators.Not((bool?)(r_ is null));
 				var z_ = context.Operators.And(w_, y_);
 				var aa_ = context.Operators.And(n_, z_);
@@ -1172,14 +1167,13 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				var o_ = context.Operators.Quantity((decimal?)90m, "minutes");
 				var p_ = context.Operators.Add(m_, o_);
 				var q_ = context.Operators.Interval(m_, p_, (bool?)false, (bool?)true);
-				var r_ = context.Operators.InInterval<CqlDateTime>(l_, q_, null);
+				var r_ = context.Operators.In<CqlDateTime>(l_, q_, null);
 				var t_ = context.Operators.Not((bool?)(m_ is null));
 				var u_ = context.Operators.And(r_, t_);
-				var v_ = context.Operators.Convert<string>(PCI?.StatusElement?.Value);
-				var w_ = context.Operators.Equal(v_, "completed");
-				var x_ = context.Operators.And(u_, w_);
+				var v_ = context.Operators.Equal(PCI?.StatusElement?.Value, "completed");
+				var w_ = context.Operators.And(u_, v_);
 
-				return x_;
+				return w_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure PCI) => 
@@ -1209,7 +1203,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var j_ = context.Operators.Quantity((decimal?)45m, "minutes");
 			var k_ = context.Operators.Add(i_, j_);
 			var l_ = context.Operators.Interval(g_, k_, (bool?)false, (bool?)true);
-			var m_ = context.Operators.InInterval<CqlDateTime>(e_, l_, null);
+			var m_ = context.Operators.In<CqlDateTime>(e_, l_, null);
 			var o_ = context.Operators.Start(d_);
 			var p_ = context.Operators.Not((bool?)(o_ is null));
 			var q_ = context.Operators.And(m_, p_);

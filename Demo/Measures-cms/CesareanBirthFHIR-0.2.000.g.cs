@@ -390,7 +390,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var o_ = context.Operators.InList<string>(m_, (n_ as IEnumerable<string>));
+			var o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			var p_ = context.Operators.And(k_, o_);
 			object q_()
 			{
@@ -443,7 +443,7 @@ public class CesareanBirthFHIR_0_2_000
 			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
 			var w_ = context.Operators.Interval(u_, s_, (bool?)true, (bool?)false);
-			var x_ = context.Operators.InInterval<CqlDateTime>(r_, w_, null);
+			var x_ = context.Operators.In<CqlDateTime>(r_, w_, null);
 			var z_ = context.Operators.Not((bool?)(s_ is null));
 			var aa_ = context.Operators.And(x_, z_);
 			var ab_ = context.Operators.And(p_, aa_);
@@ -569,7 +569,7 @@ public class CesareanBirthFHIR_0_2_000
 			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
-			var q_ = context.Operators.InInterval<CqlDateTime>(k_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
 			var u_ = context.Operators.Convert<Code<ObservationStatus>>(Parity?.StatusElement?.Value);
@@ -580,7 +580,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(Parity?.Value);
 			var aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -707,7 +707,7 @@ public class CesareanBirthFHIR_0_2_000
 			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
-			var q_ = context.Operators.InInterval<CqlDateTime>(k_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
 			var u_ = context.Operators.Convert<Code<ObservationStatus>>(PretermBirth?.StatusElement?.Value);
@@ -718,7 +718,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(PretermBirth?.Value);
 			var aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -845,7 +845,7 @@ public class CesareanBirthFHIR_0_2_000
 			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
-			var q_ = context.Operators.InInterval<CqlDateTime>(k_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
 			var u_ = context.Operators.Convert<Code<ObservationStatus>>(TermBirth?.StatusElement?.Value);
@@ -856,7 +856,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(TermBirth?.Value);
 			var aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -1024,7 +1024,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
+						var af_ = context.Operators.In<string>(ad_, (ae_ as IEnumerable<string>));
 						var ag_ = context.Operators.And(ab_, af_);
 
 						return ag_;
@@ -1152,7 +1152,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var bx_ = context.Operators.InList<string>(bv_, (bw_ as IEnumerable<string>));
+						var bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 						var by_ = context.Operators.And(bt_, bx_);
 
 						return by_;
@@ -1280,7 +1280,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var dp_ = context.Operators.InList<string>(dn_, (do_ as IEnumerable<string>));
+						var dp_ = context.Operators.In<string>(dn_, (do_ as IEnumerable<string>));
 						var dq_ = context.Operators.And(dl_, dp_);
 
 						return dq_;
@@ -1408,7 +1408,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var fg_ = context.Operators.InList<string>(fe_, (ff_ as IEnumerable<string>));
+						var fg_ = context.Operators.In<string>(fe_, (ff_ as IEnumerable<string>));
 						var fh_ = context.Operators.And(fc_, fg_);
 
 						return fh_;
@@ -1535,7 +1535,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var gx_ = context.Operators.InList<string>(gv_, (gw_ as IEnumerable<string>));
+						var gx_ = context.Operators.In<string>(gv_, (gw_ as IEnumerable<string>));
 						var gy_ = context.Operators.And(gt_, gx_);
 
 						return gy_;
@@ -1662,7 +1662,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var io_ = context.Operators.InList<string>(im_, (in_ as IEnumerable<string>));
+						var io_ = context.Operators.In<string>(im_, (in_ as IEnumerable<string>));
 						var ip_ = context.Operators.And(ik_, io_);
 
 						return ip_;
@@ -1733,7 +1733,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var e_ = QICoreCommon_2_0_000.earliest(d_());
 			var f_ = FHIRHelpers_4_3_000.ToInterval(ThirtysevenWeeksPlusEncounter?.Period);
-			var g_ = context.Operators.InInterval<CqlDateTime>(e_, f_, null);
+			var g_ = context.Operators.In<CqlDateTime>(e_, f_, null);
 			var h_ = CQMCommon_2_0_000.encounterDiagnosis(ThirtysevenWeeksPlusEncounter);
 			bool? i_(Condition EncounterDiagnosis)
 			{
@@ -1848,11 +1848,10 @@ public class CesareanBirthFHIR_0_2_000
 				var k_ = FHIRHelpers_4_3_000.ToValue(CSection?.Performed);
 				var l_ = QICoreCommon_2_0_000.toInterval(k_);
 				var m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
-				var n_ = context.Operators.Convert<string>(CSection?.StatusElement?.Value);
-				var o_ = context.Operators.Equal(n_, "completed");
-				var p_ = context.Operators.And(m_, o_);
+				var n_ = context.Operators.Equal(CSection?.StatusElement?.Value, "completed");
+				var o_ = context.Operators.And(m_, n_);
 
-				return p_;
+				return o_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure CSection) => 

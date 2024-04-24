@@ -122,7 +122,7 @@ public class DevDays_2023_0_0
 			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.InInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
 			var j_ = context.Operators.And(f_, i_);
 
 			return j_;
@@ -153,7 +153,7 @@ public class DevDays_2023_0_0
 			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.InInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
 			var j_ = context.Operators.And(f_, i_);
 
 			return j_;

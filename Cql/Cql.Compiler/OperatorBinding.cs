@@ -29,24 +29,11 @@ internal abstract class OperatorsBinder
     /// <param name="resultTypeHint"></param>
     /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
     /// <returns>A <see cref="MethodCallExpression"/> that binds to a method on <see cref="ICqlOperators"/>.</returns>
-    public abstract MethodCallExpression BindToMethod(
+    public abstract Expression BindToMethod(
         CqlOperatorsMethod method,
         Type? resultTypeHint,
         params Expression[] args
     );
-
-    // /// <summary>
-    // /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
-    // /// </summary>
-    // /// <param name="operator">The operator to bind.</param>
-    // /// <param name="resultTypeHint"></param>
-    // /// <param name="args">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
-    // /// <returns>An expression that implements <paramref name="operator"/>. In most cases, this will be a <see cref="MethodCallExpression"/>.</returns>
-    // public abstract Expression BindToMethod(
-    //     CqlOperator @operator,
-    //     Type? resultTypeHint,
-    //     params Expression[] args
-    // );
 
     /// <summary>
     /// Converts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.

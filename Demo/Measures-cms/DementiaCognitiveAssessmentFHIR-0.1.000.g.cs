@@ -419,7 +419,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				var u_ = context.Operators.Subtract(s_, t_);
 				var w_ = context.Operators.End(r_);
 				var x_ = context.Operators.Interval(u_, w_, (bool?)true, (bool?)true);
-				var y_ = context.Operators.InInterval<CqlDateTime>(q_, x_, "day");
+				var y_ = context.Operators.In<CqlDateTime>(q_, x_, "day");
 				var aa_ = context.Operators.End(r_);
 				var ab_ = context.Operators.Not((bool?)(aa_ is null));
 				var ac_ = context.Operators.And(y_, ab_);
@@ -447,7 +447,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				"corrected",
 				"preliminary",
 			};
-			var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+			var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 			var aj_ = context.Operators.And(ae_, ai_);
 
 			return aj_;
@@ -487,7 +487,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(NoCognitiveAssessment?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
-				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};

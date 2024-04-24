@@ -255,7 +255,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
 			var m_ = context.Operators.End(g_);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, "day");
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 			var p_ = context.Operators.And(k_, o_);
 			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
 			var r_ = context.Operators.Equal(q_, "finished");
@@ -359,7 +359,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var r_ = context.Operators.Quantity((decimal?)72m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -368,7 +368,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
+				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);
 				var aa_ = FHIRHelpers_4_3_000.ToConcept(SkinExam?.Code);
 				var ab_ = this.Pressure_Injury_Deep_Tissue();
@@ -471,7 +471,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var r_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -480,7 +480,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
+				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);
 				var aa_ = FHIRHelpers_4_3_000.ToConcept(SkinExam?.Code);
 				var ab_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
@@ -626,7 +626,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
 				var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -635,7 +635,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
+				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);
 				var aa_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Value);
 				var ab_ = this.Pressure_Injury_Deep_Tissue();
@@ -755,7 +755,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
 				var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
-				var u_ = context.Operators.InInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -764,7 +764,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
+				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
 				var z_ = context.Operators.And(u_, y_);
 				var aa_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Value);
 				var ab_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();

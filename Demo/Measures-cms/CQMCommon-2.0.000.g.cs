@@ -140,7 +140,7 @@ public class CQMCommon_2_0_000
 			var g_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.InInterval<CqlDateTime>(h_, i_, "day");
+			var j_ = context.Operators.In<CqlDateTime>(h_, i_, "day");
 			var k_ = context.Operators.And(f_, j_);
 
 			return k_;
@@ -210,7 +210,7 @@ public class CQMCommon_2_0_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
 			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
-			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -250,7 +250,7 @@ public class CQMCommon_2_0_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
 			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
-			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -687,7 +687,7 @@ public class CQMCommon_2_0_000
 						var ez_ = context.Operators.Subtract(ex_, ey_);
 						var fb_ = context.Operators.Start(ew_);
 						var fc_ = context.Operators.Interval(ez_, fb_, (bool?)true, (bool?)true);
-						var fd_ = context.Operators.InInterval<CqlDateTime>(ev_, fc_, null);
+						var fd_ = context.Operators.In<CqlDateTime>(ev_, fc_, null);
 						var ff_ = context.Operators.Start(ew_);
 						var fg_ = context.Operators.Not((bool?)(ff_ is null));
 						var fh_ = context.Operators.And(fd_, fg_);
@@ -724,7 +724,7 @@ public class CQMCommon_2_0_000
 						var fs_ = context.Operators.Subtract(fq_, fr_);
 						var fu_ = context.Operators.Start(fp_);
 						var fv_ = context.Operators.Interval(fs_, fu_, (bool?)true, (bool?)true);
-						var fw_ = context.Operators.InInterval<CqlDateTime>(fo_, fv_, null);
+						var fw_ = context.Operators.In<CqlDateTime>(fo_, fv_, null);
 						var fy_ = context.Operators.Start(fp_);
 						var fz_ = context.Operators.Not((bool?)(fy_ is null));
 						var ga_ = context.Operators.And(fw_, fz_);
@@ -746,7 +746,7 @@ public class CQMCommon_2_0_000
 					var dz_ = context.Operators.Start(dy_);
 					var eb_ = context.Operators.Start(dn_);
 					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), (bool?)true, (bool?)true);
-					var ed_ = context.Operators.InInterval<CqlDateTime>(dd_, ec_, null);
+					var ed_ = context.Operators.In<CqlDateTime>(dd_, ec_, null);
 					var ef_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? eg_(Encounter LastObs)
 					{
@@ -760,7 +760,7 @@ public class CQMCommon_2_0_000
 						var gl_ = context.Operators.Subtract(gj_, gk_);
 						var gn_ = context.Operators.Start(gi_);
 						var go_ = context.Operators.Interval(gl_, gn_, (bool?)true, (bool?)true);
-						var gp_ = context.Operators.InInterval<CqlDateTime>(gh_, go_, null);
+						var gp_ = context.Operators.In<CqlDateTime>(gh_, go_, null);
 						var gr_ = context.Operators.Start(gi_);
 						var gs_ = context.Operators.Not((bool?)(gr_ is null));
 						var gt_ = context.Operators.And(gp_, gs_);
@@ -813,7 +813,7 @@ public class CQMCommon_2_0_000
 					var hg_ = context.Operators.Subtract(he_, hf_);
 					var hi_ = context.Operators.Start(hd_);
 					var hj_ = context.Operators.Interval(hg_, hi_, (bool?)true, (bool?)true);
-					var hk_ = context.Operators.InInterval<CqlDateTime>(hc_, hj_, null);
+					var hk_ = context.Operators.In<CqlDateTime>(hc_, hj_, null);
 					var hm_ = context.Operators.Start(hd_);
 					var hn_ = context.Operators.Not((bool?)(hm_ is null));
 					var ho_ = context.Operators.And(hk_, hn_);
@@ -858,7 +858,7 @@ public class CQMCommon_2_0_000
 						var jr_ = context.Operators.Subtract(jp_, jq_);
 						var jt_ = context.Operators.Start(jo_);
 						var ju_ = context.Operators.Interval(jr_, jt_, (bool?)true, (bool?)true);
-						var jv_ = context.Operators.InInterval<CqlDateTime>(jn_, ju_, null);
+						var jv_ = context.Operators.In<CqlDateTime>(jn_, ju_, null);
 						var jx_ = context.Operators.Start(jo_);
 						var jy_ = context.Operators.Not((bool?)(jx_ is null));
 						var jz_ = context.Operators.And(jv_, jy_);
@@ -895,7 +895,7 @@ public class CQMCommon_2_0_000
 						var kk_ = context.Operators.Subtract(ki_, kj_);
 						var km_ = context.Operators.Start(kh_);
 						var kn_ = context.Operators.Interval(kk_, km_, (bool?)true, (bool?)true);
-						var ko_ = context.Operators.InInterval<CqlDateTime>(kg_, kn_, null);
+						var ko_ = context.Operators.In<CqlDateTime>(kg_, kn_, null);
 						var kq_ = context.Operators.Start(kh_);
 						var kr_ = context.Operators.Not((bool?)(kq_ is null));
 						var ks_ = context.Operators.And(ko_, kr_);
@@ -917,7 +917,7 @@ public class CQMCommon_2_0_000
 					var ir_ = context.Operators.Start(iq_);
 					var it_ = context.Operators.Start(if_);
 					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), (bool?)true, (bool?)true);
-					var iv_ = context.Operators.InInterval<CqlDateTime>(hv_, iu_, null);
+					var iv_ = context.Operators.In<CqlDateTime>(hv_, iu_, null);
 					var ix_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? iy_(Encounter LastObs)
 					{
@@ -931,7 +931,7 @@ public class CQMCommon_2_0_000
 						var ld_ = context.Operators.Subtract(lb_, lc_);
 						var lf_ = context.Operators.Start(la_);
 						var lg_ = context.Operators.Interval(ld_, lf_, (bool?)true, (bool?)true);
-						var lh_ = context.Operators.InInterval<CqlDateTime>(kz_, lg_, null);
+						var lh_ = context.Operators.In<CqlDateTime>(kz_, lg_, null);
 						var lj_ = context.Operators.Start(la_);
 						var lk_ = context.Operators.Not((bool?)(lj_ is null));
 						var ll_ = context.Operators.And(lh_, lk_);
@@ -983,7 +983,7 @@ public class CQMCommon_2_0_000
 					var ly_ = context.Operators.Subtract(lw_, lx_);
 					var ma_ = context.Operators.Start(lv_);
 					var mb_ = context.Operators.Interval(ly_, ma_, (bool?)true, (bool?)true);
-					var mc_ = context.Operators.InInterval<CqlDateTime>(lu_, mb_, null);
+					var mc_ = context.Operators.In<CqlDateTime>(lu_, mb_, null);
 					var me_ = context.Operators.Start(lv_);
 					var mf_ = context.Operators.Not((bool?)(me_ is null));
 					var mg_ = context.Operators.And(mc_, mf_);
@@ -1005,7 +1005,7 @@ public class CQMCommon_2_0_000
 				var bz_ = context.Operators.Start(by_);
 				var cb_ = context.Operators.Start(be_);
 				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), (bool?)true, (bool?)true);
-				var cd_ = context.Operators.InInterval<CqlDateTime>(al_, cc_, null);
+				var cd_ = context.Operators.In<CqlDateTime>(al_, cc_, null);
 				var cf_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? cg_(Encounter LastED)
 				{
@@ -1027,7 +1027,7 @@ public class CQMCommon_2_0_000
 						var oj_ = context.Operators.Subtract(oh_, oi_);
 						var ol_ = context.Operators.Start(og_);
 						var om_ = context.Operators.Interval(oj_, ol_, (bool?)true, (bool?)true);
-						var on_ = context.Operators.InInterval<CqlDateTime>(of_, om_, null);
+						var on_ = context.Operators.In<CqlDateTime>(of_, om_, null);
 						var op_ = context.Operators.Start(og_);
 						var oq_ = context.Operators.Not((bool?)(op_ is null));
 						var or_ = context.Operators.And(on_, oq_);
@@ -1064,7 +1064,7 @@ public class CQMCommon_2_0_000
 						var pc_ = context.Operators.Subtract(pa_, pb_);
 						var pe_ = context.Operators.Start(oz_);
 						var pf_ = context.Operators.Interval(pc_, pe_, (bool?)true, (bool?)true);
-						var pg_ = context.Operators.InInterval<CqlDateTime>(oy_, pf_, null);
+						var pg_ = context.Operators.In<CqlDateTime>(oy_, pf_, null);
 						var pi_ = context.Operators.Start(oz_);
 						var pj_ = context.Operators.Not((bool?)(pi_ is null));
 						var pk_ = context.Operators.And(pg_, pj_);
@@ -1086,7 +1086,7 @@ public class CQMCommon_2_0_000
 					var nj_ = context.Operators.Start(ni_);
 					var nl_ = context.Operators.Start(mx_);
 					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), (bool?)true, (bool?)true);
-					var nn_ = context.Operators.InInterval<CqlDateTime>(mn_, nm_, null);
+					var nn_ = context.Operators.In<CqlDateTime>(mn_, nm_, null);
 					var np_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nq_(Encounter LastObs)
 					{
@@ -1100,7 +1100,7 @@ public class CQMCommon_2_0_000
 						var pv_ = context.Operators.Subtract(pt_, pu_);
 						var px_ = context.Operators.Start(ps_);
 						var py_ = context.Operators.Interval(pv_, px_, (bool?)true, (bool?)true);
-						var pz_ = context.Operators.InInterval<CqlDateTime>(pr_, py_, null);
+						var pz_ = context.Operators.In<CqlDateTime>(pr_, py_, null);
 						var qb_ = context.Operators.Start(ps_);
 						var qc_ = context.Operators.Not((bool?)(qb_ is null));
 						var qd_ = context.Operators.And(pz_, qc_);
@@ -1152,7 +1152,7 @@ public class CQMCommon_2_0_000
 					var qq_ = context.Operators.Subtract(qo_, qp_);
 					var qs_ = context.Operators.Start(qn_);
 					var qt_ = context.Operators.Interval(qq_, qs_, (bool?)true, (bool?)true);
-					var qu_ = context.Operators.InInterval<CqlDateTime>(qm_, qt_, null);
+					var qu_ = context.Operators.In<CqlDateTime>(qm_, qt_, null);
 					var qw_ = context.Operators.Start(qn_);
 					var qx_ = context.Operators.Not((bool?)(qw_ is null));
 					var qy_ = context.Operators.And(qu_, qx_);
@@ -1212,7 +1212,7 @@ public class CQMCommon_2_0_000
 					var td_ = context.Operators.Subtract(tb_, tc_);
 					var tf_ = context.Operators.Start(ta_);
 					var tg_ = context.Operators.Interval(td_, tf_, (bool?)true, (bool?)true);
-					var th_ = context.Operators.InInterval<CqlDateTime>(sz_, tg_, null);
+					var th_ = context.Operators.In<CqlDateTime>(sz_, tg_, null);
 					var tj_ = context.Operators.Start(ta_);
 					var tk_ = context.Operators.Not((bool?)(tj_ is null));
 					var tl_ = context.Operators.And(th_, tk_);
@@ -1249,7 +1249,7 @@ public class CQMCommon_2_0_000
 					var tw_ = context.Operators.Subtract(tu_, tv_);
 					var ty_ = context.Operators.Start(tt_);
 					var tz_ = context.Operators.Interval(tw_, ty_, (bool?)true, (bool?)true);
-					var ua_ = context.Operators.InInterval<CqlDateTime>(ts_, tz_, null);
+					var ua_ = context.Operators.In<CqlDateTime>(ts_, tz_, null);
 					var uc_ = context.Operators.Start(tt_);
 					var ud_ = context.Operators.Not((bool?)(uc_ is null));
 					var ue_ = context.Operators.And(ua_, ud_);
@@ -1271,7 +1271,7 @@ public class CQMCommon_2_0_000
 				var sd_ = context.Operators.Start(sc_);
 				var sf_ = context.Operators.Start(rr_);
 				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), (bool?)true, (bool?)true);
-				var sh_ = context.Operators.InInterval<CqlDateTime>(rh_, sg_, null);
+				var sh_ = context.Operators.In<CqlDateTime>(rh_, sg_, null);
 				var sj_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? sk_(Encounter LastObs)
 				{
@@ -1285,7 +1285,7 @@ public class CQMCommon_2_0_000
 					var up_ = context.Operators.Subtract(un_, uo_);
 					var ur_ = context.Operators.Start(um_);
 					var us_ = context.Operators.Interval(up_, ur_, (bool?)true, (bool?)true);
-					var ut_ = context.Operators.InInterval<CqlDateTime>(ul_, us_, null);
+					var ut_ = context.Operators.In<CqlDateTime>(ul_, us_, null);
 					var uv_ = context.Operators.Start(um_);
 					var uw_ = context.Operators.Not((bool?)(uv_ is null));
 					var ux_ = context.Operators.And(ut_, uw_);
@@ -1338,7 +1338,7 @@ public class CQMCommon_2_0_000
 				var vk_ = context.Operators.Subtract(vi_, vj_);
 				var vm_ = context.Operators.Start(vh_);
 				var vn_ = context.Operators.Interval(vk_, vm_, (bool?)true, (bool?)true);
-				var vo_ = context.Operators.InInterval<CqlDateTime>(vg_, vn_, null);
+				var vo_ = context.Operators.In<CqlDateTime>(vg_, vn_, null);
 				var vq_ = context.Operators.Start(vh_);
 				var vr_ = context.Operators.Not((bool?)(vq_ is null));
 				var vs_ = context.Operators.And(vo_, vr_);
@@ -1409,7 +1409,7 @@ public class CQMCommon_2_0_000
 						var ez_ = context.Operators.Subtract(ex_, ey_);
 						var fb_ = context.Operators.Start(ew_);
 						var fc_ = context.Operators.Interval(ez_, fb_, (bool?)true, (bool?)true);
-						var fd_ = context.Operators.InInterval<CqlDateTime>(ev_, fc_, null);
+						var fd_ = context.Operators.In<CqlDateTime>(ev_, fc_, null);
 						var ff_ = context.Operators.Start(ew_);
 						var fg_ = context.Operators.Not((bool?)(ff_ is null));
 						var fh_ = context.Operators.And(fd_, fg_);
@@ -1446,7 +1446,7 @@ public class CQMCommon_2_0_000
 						var fs_ = context.Operators.Subtract(fq_, fr_);
 						var fu_ = context.Operators.Start(fp_);
 						var fv_ = context.Operators.Interval(fs_, fu_, (bool?)true, (bool?)true);
-						var fw_ = context.Operators.InInterval<CqlDateTime>(fo_, fv_, null);
+						var fw_ = context.Operators.In<CqlDateTime>(fo_, fv_, null);
 						var fy_ = context.Operators.Start(fp_);
 						var fz_ = context.Operators.Not((bool?)(fy_ is null));
 						var ga_ = context.Operators.And(fw_, fz_);
@@ -1468,7 +1468,7 @@ public class CQMCommon_2_0_000
 					var dz_ = context.Operators.Start(dy_);
 					var eb_ = context.Operators.Start(dn_);
 					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), (bool?)true, (bool?)true);
-					var ed_ = context.Operators.InInterval<CqlDateTime>(dd_, ec_, null);
+					var ed_ = context.Operators.In<CqlDateTime>(dd_, ec_, null);
 					var ef_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? eg_(Encounter LastObs)
 					{
@@ -1482,7 +1482,7 @@ public class CQMCommon_2_0_000
 						var gl_ = context.Operators.Subtract(gj_, gk_);
 						var gn_ = context.Operators.Start(gi_);
 						var go_ = context.Operators.Interval(gl_, gn_, (bool?)true, (bool?)true);
-						var gp_ = context.Operators.InInterval<CqlDateTime>(gh_, go_, null);
+						var gp_ = context.Operators.In<CqlDateTime>(gh_, go_, null);
 						var gr_ = context.Operators.Start(gi_);
 						var gs_ = context.Operators.Not((bool?)(gr_ is null));
 						var gt_ = context.Operators.And(gp_, gs_);
@@ -1535,7 +1535,7 @@ public class CQMCommon_2_0_000
 					var hg_ = context.Operators.Subtract(he_, hf_);
 					var hi_ = context.Operators.Start(hd_);
 					var hj_ = context.Operators.Interval(hg_, hi_, (bool?)true, (bool?)true);
-					var hk_ = context.Operators.InInterval<CqlDateTime>(hc_, hj_, null);
+					var hk_ = context.Operators.In<CqlDateTime>(hc_, hj_, null);
 					var hm_ = context.Operators.Start(hd_);
 					var hn_ = context.Operators.Not((bool?)(hm_ is null));
 					var ho_ = context.Operators.And(hk_, hn_);
@@ -1580,7 +1580,7 @@ public class CQMCommon_2_0_000
 						var jr_ = context.Operators.Subtract(jp_, jq_);
 						var jt_ = context.Operators.Start(jo_);
 						var ju_ = context.Operators.Interval(jr_, jt_, (bool?)true, (bool?)true);
-						var jv_ = context.Operators.InInterval<CqlDateTime>(jn_, ju_, null);
+						var jv_ = context.Operators.In<CqlDateTime>(jn_, ju_, null);
 						var jx_ = context.Operators.Start(jo_);
 						var jy_ = context.Operators.Not((bool?)(jx_ is null));
 						var jz_ = context.Operators.And(jv_, jy_);
@@ -1617,7 +1617,7 @@ public class CQMCommon_2_0_000
 						var kk_ = context.Operators.Subtract(ki_, kj_);
 						var km_ = context.Operators.Start(kh_);
 						var kn_ = context.Operators.Interval(kk_, km_, (bool?)true, (bool?)true);
-						var ko_ = context.Operators.InInterval<CqlDateTime>(kg_, kn_, null);
+						var ko_ = context.Operators.In<CqlDateTime>(kg_, kn_, null);
 						var kq_ = context.Operators.Start(kh_);
 						var kr_ = context.Operators.Not((bool?)(kq_ is null));
 						var ks_ = context.Operators.And(ko_, kr_);
@@ -1639,7 +1639,7 @@ public class CQMCommon_2_0_000
 					var ir_ = context.Operators.Start(iq_);
 					var it_ = context.Operators.Start(if_);
 					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), (bool?)true, (bool?)true);
-					var iv_ = context.Operators.InInterval<CqlDateTime>(hv_, iu_, null);
+					var iv_ = context.Operators.In<CqlDateTime>(hv_, iu_, null);
 					var ix_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? iy_(Encounter LastObs)
 					{
@@ -1653,7 +1653,7 @@ public class CQMCommon_2_0_000
 						var ld_ = context.Operators.Subtract(lb_, lc_);
 						var lf_ = context.Operators.Start(la_);
 						var lg_ = context.Operators.Interval(ld_, lf_, (bool?)true, (bool?)true);
-						var lh_ = context.Operators.InInterval<CqlDateTime>(kz_, lg_, null);
+						var lh_ = context.Operators.In<CqlDateTime>(kz_, lg_, null);
 						var lj_ = context.Operators.Start(la_);
 						var lk_ = context.Operators.Not((bool?)(lj_ is null));
 						var ll_ = context.Operators.And(lh_, lk_);
@@ -1705,7 +1705,7 @@ public class CQMCommon_2_0_000
 					var ly_ = context.Operators.Subtract(lw_, lx_);
 					var ma_ = context.Operators.Start(lv_);
 					var mb_ = context.Operators.Interval(ly_, ma_, (bool?)true, (bool?)true);
-					var mc_ = context.Operators.InInterval<CqlDateTime>(lu_, mb_, null);
+					var mc_ = context.Operators.In<CqlDateTime>(lu_, mb_, null);
 					var me_ = context.Operators.Start(lv_);
 					var mf_ = context.Operators.Not((bool?)(me_ is null));
 					var mg_ = context.Operators.And(mc_, mf_);
@@ -1727,7 +1727,7 @@ public class CQMCommon_2_0_000
 				var bz_ = context.Operators.Start(by_);
 				var cb_ = context.Operators.Start(be_);
 				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), (bool?)true, (bool?)true);
-				var cd_ = context.Operators.InInterval<CqlDateTime>(al_, cc_, null);
+				var cd_ = context.Operators.In<CqlDateTime>(al_, cc_, null);
 				var cf_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? cg_(Encounter LastED)
 				{
@@ -1749,7 +1749,7 @@ public class CQMCommon_2_0_000
 						var oj_ = context.Operators.Subtract(oh_, oi_);
 						var ol_ = context.Operators.Start(og_);
 						var om_ = context.Operators.Interval(oj_, ol_, (bool?)true, (bool?)true);
-						var on_ = context.Operators.InInterval<CqlDateTime>(of_, om_, null);
+						var on_ = context.Operators.In<CqlDateTime>(of_, om_, null);
 						var op_ = context.Operators.Start(og_);
 						var oq_ = context.Operators.Not((bool?)(op_ is null));
 						var or_ = context.Operators.And(on_, oq_);
@@ -1786,7 +1786,7 @@ public class CQMCommon_2_0_000
 						var pc_ = context.Operators.Subtract(pa_, pb_);
 						var pe_ = context.Operators.Start(oz_);
 						var pf_ = context.Operators.Interval(pc_, pe_, (bool?)true, (bool?)true);
-						var pg_ = context.Operators.InInterval<CqlDateTime>(oy_, pf_, null);
+						var pg_ = context.Operators.In<CqlDateTime>(oy_, pf_, null);
 						var pi_ = context.Operators.Start(oz_);
 						var pj_ = context.Operators.Not((bool?)(pi_ is null));
 						var pk_ = context.Operators.And(pg_, pj_);
@@ -1808,7 +1808,7 @@ public class CQMCommon_2_0_000
 					var nj_ = context.Operators.Start(ni_);
 					var nl_ = context.Operators.Start(mx_);
 					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), (bool?)true, (bool?)true);
-					var nn_ = context.Operators.InInterval<CqlDateTime>(mn_, nm_, null);
+					var nn_ = context.Operators.In<CqlDateTime>(mn_, nm_, null);
 					var np_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nq_(Encounter LastObs)
 					{
@@ -1822,7 +1822,7 @@ public class CQMCommon_2_0_000
 						var pv_ = context.Operators.Subtract(pt_, pu_);
 						var px_ = context.Operators.Start(ps_);
 						var py_ = context.Operators.Interval(pv_, px_, (bool?)true, (bool?)true);
-						var pz_ = context.Operators.InInterval<CqlDateTime>(pr_, py_, null);
+						var pz_ = context.Operators.In<CqlDateTime>(pr_, py_, null);
 						var qb_ = context.Operators.Start(ps_);
 						var qc_ = context.Operators.Not((bool?)(qb_ is null));
 						var qd_ = context.Operators.And(pz_, qc_);
@@ -1874,7 +1874,7 @@ public class CQMCommon_2_0_000
 					var qq_ = context.Operators.Subtract(qo_, qp_);
 					var qs_ = context.Operators.Start(qn_);
 					var qt_ = context.Operators.Interval(qq_, qs_, (bool?)true, (bool?)true);
-					var qu_ = context.Operators.InInterval<CqlDateTime>(qm_, qt_, null);
+					var qu_ = context.Operators.In<CqlDateTime>(qm_, qt_, null);
 					var qw_ = context.Operators.Start(qn_);
 					var qx_ = context.Operators.Not((bool?)(qw_ is null));
 					var qy_ = context.Operators.And(qu_, qx_);
@@ -1934,7 +1934,7 @@ public class CQMCommon_2_0_000
 					var td_ = context.Operators.Subtract(tb_, tc_);
 					var tf_ = context.Operators.Start(ta_);
 					var tg_ = context.Operators.Interval(td_, tf_, (bool?)true, (bool?)true);
-					var th_ = context.Operators.InInterval<CqlDateTime>(sz_, tg_, null);
+					var th_ = context.Operators.In<CqlDateTime>(sz_, tg_, null);
 					var tj_ = context.Operators.Start(ta_);
 					var tk_ = context.Operators.Not((bool?)(tj_ is null));
 					var tl_ = context.Operators.And(th_, tk_);
@@ -1971,7 +1971,7 @@ public class CQMCommon_2_0_000
 					var tw_ = context.Operators.Subtract(tu_, tv_);
 					var ty_ = context.Operators.Start(tt_);
 					var tz_ = context.Operators.Interval(tw_, ty_, (bool?)true, (bool?)true);
-					var ua_ = context.Operators.InInterval<CqlDateTime>(ts_, tz_, null);
+					var ua_ = context.Operators.In<CqlDateTime>(ts_, tz_, null);
 					var uc_ = context.Operators.Start(tt_);
 					var ud_ = context.Operators.Not((bool?)(uc_ is null));
 					var ue_ = context.Operators.And(ua_, ud_);
@@ -1993,7 +1993,7 @@ public class CQMCommon_2_0_000
 				var sd_ = context.Operators.Start(sc_);
 				var sf_ = context.Operators.Start(rr_);
 				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), (bool?)true, (bool?)true);
-				var sh_ = context.Operators.InInterval<CqlDateTime>(rh_, sg_, null);
+				var sh_ = context.Operators.In<CqlDateTime>(rh_, sg_, null);
 				var sj_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? sk_(Encounter LastObs)
 				{
@@ -2007,7 +2007,7 @@ public class CQMCommon_2_0_000
 					var up_ = context.Operators.Subtract(un_, uo_);
 					var ur_ = context.Operators.Start(um_);
 					var us_ = context.Operators.Interval(up_, ur_, (bool?)true, (bool?)true);
-					var ut_ = context.Operators.InInterval<CqlDateTime>(ul_, us_, null);
+					var ut_ = context.Operators.In<CqlDateTime>(ul_, us_, null);
 					var uv_ = context.Operators.Start(um_);
 					var uw_ = context.Operators.Not((bool?)(uv_ is null));
 					var ux_ = context.Operators.And(ut_, uw_);
@@ -2060,7 +2060,7 @@ public class CQMCommon_2_0_000
 				var vk_ = context.Operators.Subtract(vi_, vj_);
 				var vm_ = context.Operators.Start(vh_);
 				var vn_ = context.Operators.Interval(vk_, vm_, (bool?)true, (bool?)true);
-				var vo_ = context.Operators.InInterval<CqlDateTime>(vg_, vn_, null);
+				var vo_ = context.Operators.In<CqlDateTime>(vg_, vn_, null);
 				var vq_ = context.Operators.Start(vh_);
 				var vr_ = context.Operators.Not((bool?)(vq_ is null));
 				var vs_ = context.Operators.And(vo_, vr_);
@@ -2126,7 +2126,7 @@ public class CQMCommon_2_0_000
 					var ca_ = context.Operators.Subtract(by_, bz_);
 					var cc_ = context.Operators.Start(bx_);
 					var cd_ = context.Operators.Interval(ca_, cc_, (bool?)true, (bool?)true);
-					var ce_ = context.Operators.InInterval<CqlDateTime>(bw_, cd_, null);
+					var ce_ = context.Operators.In<CqlDateTime>(bw_, cd_, null);
 					var cg_ = context.Operators.Start(bx_);
 					var ch_ = context.Operators.Not((bool?)(cg_ is null));
 					var ci_ = context.Operators.And(ce_, ch_);
@@ -2163,7 +2163,7 @@ public class CQMCommon_2_0_000
 					var ct_ = context.Operators.Subtract(cr_, cs_);
 					var cv_ = context.Operators.Start(cq_);
 					var cw_ = context.Operators.Interval(ct_, cv_, (bool?)true, (bool?)true);
-					var cx_ = context.Operators.InInterval<CqlDateTime>(cp_, cw_, null);
+					var cx_ = context.Operators.In<CqlDateTime>(cp_, cw_, null);
 					var cz_ = context.Operators.Start(cq_);
 					var da_ = context.Operators.Not((bool?)(cz_ is null));
 					var db_ = context.Operators.And(cx_, da_);
@@ -2185,7 +2185,7 @@ public class CQMCommon_2_0_000
 				var ba_ = context.Operators.Start(az_);
 				var bc_ = context.Operators.Start(ao_);
 				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), (bool?)true, (bool?)true);
-				var be_ = context.Operators.InInterval<CqlDateTime>(ae_, bd_, null);
+				var be_ = context.Operators.In<CqlDateTime>(ae_, bd_, null);
 				var bg_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? bh_(Encounter LastObs)
 				{
@@ -2199,7 +2199,7 @@ public class CQMCommon_2_0_000
 					var dm_ = context.Operators.Subtract(dk_, dl_);
 					var do_ = context.Operators.Start(dj_);
 					var dp_ = context.Operators.Interval(dm_, do_, (bool?)true, (bool?)true);
-					var dq_ = context.Operators.InInterval<CqlDateTime>(di_, dp_, null);
+					var dq_ = context.Operators.In<CqlDateTime>(di_, dp_, null);
 					var ds_ = context.Operators.Start(dj_);
 					var dt_ = context.Operators.Not((bool?)(ds_ is null));
 					var du_ = context.Operators.And(dq_, dt_);
@@ -2252,7 +2252,7 @@ public class CQMCommon_2_0_000
 				var eh_ = context.Operators.Subtract(ef_, eg_);
 				var ej_ = context.Operators.Start(ee_);
 				var ek_ = context.Operators.Interval(eh_, ej_, (bool?)true, (bool?)true);
-				var el_ = context.Operators.InInterval<CqlDateTime>(ed_, ek_, null);
+				var el_ = context.Operators.In<CqlDateTime>(ed_, ek_, null);
 				var en_ = context.Operators.Start(ee_);
 				var eo_ = context.Operators.Not((bool?)(en_ is null));
 				var ep_ = context.Operators.And(el_, eo_);
@@ -2317,7 +2317,7 @@ public class CQMCommon_2_0_000
 					var ca_ = context.Operators.Subtract(by_, bz_);
 					var cc_ = context.Operators.Start(bx_);
 					var cd_ = context.Operators.Interval(ca_, cc_, (bool?)true, (bool?)true);
-					var ce_ = context.Operators.InInterval<CqlDateTime>(bw_, cd_, null);
+					var ce_ = context.Operators.In<CqlDateTime>(bw_, cd_, null);
 					var cg_ = context.Operators.Start(bx_);
 					var ch_ = context.Operators.Not((bool?)(cg_ is null));
 					var ci_ = context.Operators.And(ce_, ch_);
@@ -2354,7 +2354,7 @@ public class CQMCommon_2_0_000
 					var ct_ = context.Operators.Subtract(cr_, cs_);
 					var cv_ = context.Operators.Start(cq_);
 					var cw_ = context.Operators.Interval(ct_, cv_, (bool?)true, (bool?)true);
-					var cx_ = context.Operators.InInterval<CqlDateTime>(cp_, cw_, null);
+					var cx_ = context.Operators.In<CqlDateTime>(cp_, cw_, null);
 					var cz_ = context.Operators.Start(cq_);
 					var da_ = context.Operators.Not((bool?)(cz_ is null));
 					var db_ = context.Operators.And(cx_, da_);
@@ -2376,7 +2376,7 @@ public class CQMCommon_2_0_000
 				var ba_ = context.Operators.Start(az_);
 				var bc_ = context.Operators.Start(ao_);
 				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), (bool?)true, (bool?)true);
-				var be_ = context.Operators.InInterval<CqlDateTime>(ae_, bd_, null);
+				var be_ = context.Operators.In<CqlDateTime>(ae_, bd_, null);
 				var bg_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? bh_(Encounter LastObs)
 				{
@@ -2390,7 +2390,7 @@ public class CQMCommon_2_0_000
 					var dm_ = context.Operators.Subtract(dk_, dl_);
 					var do_ = context.Operators.Start(dj_);
 					var dp_ = context.Operators.Interval(dm_, do_, (bool?)true, (bool?)true);
-					var dq_ = context.Operators.InInterval<CqlDateTime>(di_, dp_, null);
+					var dq_ = context.Operators.In<CqlDateTime>(di_, dp_, null);
 					var ds_ = context.Operators.Start(dj_);
 					var dt_ = context.Operators.Not((bool?)(ds_ is null));
 					var du_ = context.Operators.And(dq_, dt_);
@@ -2443,7 +2443,7 @@ public class CQMCommon_2_0_000
 				var eh_ = context.Operators.Subtract(ef_, eg_);
 				var ej_ = context.Operators.Start(ee_);
 				var ek_ = context.Operators.Interval(eh_, ej_, (bool?)true, (bool?)true);
-				var el_ = context.Operators.InInterval<CqlDateTime>(ed_, ek_, null);
+				var el_ = context.Operators.In<CqlDateTime>(ed_, ek_, null);
 				var en_ = context.Operators.Start(ee_);
 				var eo_ = context.Operators.Not((bool?)(en_ is null));
 				var ep_ = context.Operators.And(el_, eo_);

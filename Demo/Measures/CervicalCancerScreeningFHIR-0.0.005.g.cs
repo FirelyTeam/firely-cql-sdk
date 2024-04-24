@@ -318,7 +318,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)23, (int?)64, (bool?)true, (bool?)false);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement);
 		var k_ = context.Operators.Equal(j_, "female");
 		var l_ = context.Operators.And(h_, k_);
@@ -413,12 +413,12 @@ public class CervicalCancerScreeningFHIR_0_0_005
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			bool? h_(CodeableConcept CervicalCytologyCategory)
 			{
 				var ab_ = this.laboratory();
 				var ac_ = FHIRHelpers_4_0_001.ToConcept(CervicalCytologyCategory);
-				var ad_ = context.Operators.CodeInList(ab_, (ac_?.codes as IEnumerable<CqlCode>));
+				var ad_ = context.Operators.In<CqlCode>(ab_, (ac_?.codes as IEnumerable<CqlCode>));
 
 				return ad_;
 			};
@@ -432,7 +432,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var p_ = context.Operators.Subtract(n_, o_);
 			var r_ = context.Operators.End(m_);
 			var s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)true);
-			var t_ = context.Operators.InInterval<CqlDateTime>(l_, s_, null);
+			var t_ = context.Operators.In<CqlDateTime>(l_, s_, null);
 			var v_ = context.Operators.End(m_);
 			var w_ = context.Operators.Not((bool?)(v_ is null));
 			var x_ = context.Operators.And(t_, w_);
@@ -464,12 +464,12 @@ public class CervicalCancerScreeningFHIR_0_0_005
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			bool? h_(CodeableConcept HPVTestCategory)
 			{
 				var aj_ = this.laboratory();
 				var ak_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
-				var al_ = context.Operators.CodeInList(aj_, (ak_?.codes as IEnumerable<CqlCode>));
+				var al_ = context.Operators.In<CqlCode>(aj_, (ak_?.codes as IEnumerable<CqlCode>));
 
 				return al_;
 			};
@@ -491,7 +491,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var x_ = context.Operators.Subtract(v_, w_);
 			var z_ = context.Operators.End(u_);
 			var aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)true);
-			var ab_ = context.Operators.InInterval<CqlDateTime>(t_, aa_, null);
+			var ab_ = context.Operators.In<CqlDateTime>(t_, aa_, null);
 			var ad_ = context.Operators.End(u_);
 			var ae_ = context.Operators.Not((bool?)(ad_ is null));
 			var af_ = context.Operators.And(ab_, ae_);
@@ -535,7 +535,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			"amended",
 			"corrected",
 		};
-		var c_ = context.Operators.InList<string>(a_, (b_ as IEnumerable<string>));
+		var c_ = context.Operators.In<string>(a_, (b_ as IEnumerable<string>));
 
 		return c_;
 	}
@@ -547,7 +547,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		{
 			var d_ = this.laboratory();
 			var e_ = FHIRHelpers_4_0_001.ToConcept(category);
-			var f_ = context.Operators.CodeInList(d_, (e_?.codes as IEnumerable<CqlCode>));
+			var f_ = context.Operators.In<CqlCode>(d_, (e_?.codes as IEnumerable<CqlCode>));
 
 			return f_;
 		};
@@ -581,7 +581,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -632,7 +632,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var t_ = context.Operators.Subtract(r_, s_);
 			var v_ = context.Operators.End(q_);
 			var w_ = context.Operators.Interval(t_, v_, (bool?)true, (bool?)true);
-			var x_ = context.Operators.InInterval<CqlDateTime>(p_, w_, null);
+			var x_ = context.Operators.In<CqlDateTime>(p_, w_, null);
 			var z_ = context.Operators.End(q_);
 			var aa_ = context.Operators.Not((bool?)(z_ is null));
 			var ab_ = context.Operators.And(x_, aa_);

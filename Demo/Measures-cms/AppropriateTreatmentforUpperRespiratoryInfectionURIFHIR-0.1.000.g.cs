@@ -447,7 +447,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var bp_ = context.Operators.Quantity((decimal?)3m, "days");
 			var bq_ = context.Operators.Subtract(bo_, bp_);
 			var br_ = context.Operators.Interval(bm_, bq_, (bool?)true, (bool?)true);
-			var bs_ = context.Operators.InInterval<CqlDateTime>(bk_, br_, "day");
+			var bs_ = context.Operators.In<CqlDateTime>(bk_, br_, "day");
 
 			return bs_;
 		};
@@ -483,7 +483,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var m_ = context.Operators.Start(l_);
 			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_clqrpffcjgifzuvdvediikexw.QualifyingEncounters?.Period);
 			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			var p_ = context.Operators.InInterval<CqlDateTime>(m_, o_, "day");
+			var p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
 			var s_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			var t_ = context.Operators.OverlapsBefore(l_, s_, null);
 			var u_ = context.Operators.Or(p_, t_);
@@ -604,7 +604,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 				var x_ = context.Operators.Quantity((decimal?)3m, "days");
 				var y_ = context.Operators.Add(w_, x_);
 				var z_ = context.Operators.Interval(t_, y_, (bool?)true, (bool?)true);
-				var aa_ = context.Operators.InInterval<CqlDateTime>(q_, z_, null);
+				var aa_ = context.Operators.In<CqlDateTime>(q_, z_, null);
 				var ac_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 				var ad_ = context.Operators.Start(ac_);
 				var ae_ = context.Operators.Not((bool?)(ad_ is null));
@@ -677,7 +677,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
 			var l_ = context.Operators.Interval((int?)18, (int?)64, (bool?)true, (bool?)true);
-			var m_ = context.Operators.InInterval<int?>(k_, l_, null);
+			var m_ = context.Operators.In<int?>(k_, l_, null);
 
 			return m_;
 		};

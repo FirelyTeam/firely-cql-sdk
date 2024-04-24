@@ -670,7 +670,7 @@ public class FHIR347_0_1_021
 				"corrected",
 				"appended",
 			};
-			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
+			var p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
 			var q_ = context.Operators.And(m_, p_);
 
 			return q_;
@@ -782,7 +782,7 @@ public class FHIR347_0_1_021
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
 		var f_ = context.Operators.Interval((int?)40, (int?)75, (bool?)true, (bool?)true);
-		var g_ = context.Operators.InInterval<int?>(e_, f_, null);
+		var g_ = context.Operators.In<int?>(e_, f_, null);
 		var h_ = this.Has_Diabetes_Diagnosis();
 		var i_ = context.Operators.And(g_, h_);
 		var j_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
@@ -918,7 +918,7 @@ public class FHIR347_0_1_021
 				"on-hold",
 				"completed",
 			};
-			var ae_ = context.Operators.InList<string>(ac_, (ad_ as IEnumerable<string>));
+			var ae_ = context.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
 			var af_ = context.Operators.And(ab_, ae_);
 			var ag_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.IntentElement);
 			var ah_ = context.Operators.Equal(ag_, "order");
@@ -1056,7 +1056,7 @@ public class FHIR347_0_1_021
 		{
 			var f_ = FHIRHelpers_4_0_001.ToDateTime(StatinReaction?.DateElement);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.InInterval<CqlDateTime>(f_, g_, null);
+			var h_ = context.Operators.In<CqlDateTime>(f_, g_, null);
 
 			return h_;
 		};
@@ -1139,14 +1139,14 @@ public class FHIR347_0_1_021
 		{
 			var t_ = FHIRHelpers_4_0_001.ToDateTime(StatinOrdered?.AuthoredOnElement);
 			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.InInterval<CqlDateTime>(t_, u_, null);
+			var v_ = context.Operators.In<CqlDateTime>(t_, u_, null);
 			var w_ = context.Operators.Convert<string>(StatinOrdered?.StatusElement);
 			var x_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
+			var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
 			var z_ = context.Operators.And(v_, y_);
 			var aa_ = context.Operators.Convert<string>(StatinOrdered?.IntentElement);
 			var ab_ = context.Operators.Equal(aa_, "order");
@@ -1222,7 +1222,7 @@ public class FHIR347_0_1_021
 				"active",
 				"completed",
 			};
-			var ac_ = context.Operators.InList<string>(aa_, (ab_ as IEnumerable<string>));
+			var ac_ = context.Operators.In<string>(aa_, (ab_ as IEnumerable<string>));
 			var ad_ = context.Operators.And(z_, ac_);
 
 			return ad_;

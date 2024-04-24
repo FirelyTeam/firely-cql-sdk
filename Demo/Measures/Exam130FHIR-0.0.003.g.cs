@@ -576,7 +576,7 @@ public class Exam130FHIR_0_0_003
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)51, (int?)75, (bool?)true, (bool?)false);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var j_ = this.Telehealth_Services();
 		var k_ = context.Operators.ListUnion<Encounter>(i_, j_);
@@ -720,7 +720,7 @@ public class Exam130FHIR_0_0_003
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, (bool?)false, (bool?)false);
-			var o_ = context.Operators.InInterval<CqlDateTime>(g_, n_, null);
+			var o_ = context.Operators.In<CqlDateTime>(g_, n_, null);
 
 			return o_;
 		};
@@ -802,7 +802,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			bool? h_(CodeableConcept FecalOccultCategory)
 			{
 				bool? r_(Coding @this)
@@ -840,7 +840,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.And(k_, l_);
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var o_ = this.Measurement_Period();
-			var p_ = context.Operators.InInterval<CqlDateTime>(n_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(n_, o_, null);
 			var q_ = context.Operators.And(m_, p_);
 
 			return q_;
@@ -867,7 +867,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			bool? h_(CodeableConcept FecalOccultCategory)
 			{
 				bool? r_(Coding @this)
@@ -905,7 +905,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.And(k_, l_);
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var o_ = this.Measurement_Period();
-			var p_ = context.Operators.InInterval<CqlDateTime>(n_, o_, "day");
+			var p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
 			var q_ = context.Operators.And(m_, p_);
 
 			return q_;
@@ -962,7 +962,7 @@ public class Exam130FHIR_0_0_003
 			var i_ = context.Operators.And(g_, h_);
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.InInterval<CqlDateTime>(j_, k_, "day");
+			var l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
 			var m_ = context.Operators.And(i_, l_);
 
 			return m_;
@@ -989,13 +989,13 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			var h_ = context.Operators.Not(g_);
 			var i_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
 			var j_ = context.Operators.And(h_, i_);
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var l_ = this.Measurement_Period();
-			var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, "day");
+			var m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
 			var n_ = context.Operators.And(j_, m_);
 
 			return n_;
@@ -1022,7 +1022,7 @@ public class Exam130FHIR_0_0_003
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, (bool?)true, (bool?)true);
-			var o_ = context.Operators.InInterval<CqlDateTime>(g_, n_, null);
+			var o_ = context.Operators.In<CqlDateTime>(g_, n_, null);
 			var q_ = context.Operators.End(h_);
 			var r_ = context.Operators.Not((bool?)(q_ is null));
 			var s_ = context.Operators.And(o_, r_);
@@ -1107,7 +1107,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			bool? h_(CodeableConcept FitDNACategory)
 			{
 				bool? ab_(Coding @this)
@@ -1150,7 +1150,7 @@ public class Exam130FHIR_0_0_003
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
-			var v_ = context.Operators.InInterval<CqlDateTime>(n_, u_, null);
+			var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
 			var x_ = context.Operators.End(o_);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
 			var z_ = context.Operators.And(v_, y_);
@@ -1180,7 +1180,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			bool? h_(CodeableConcept FitDNACategory)
 			{
 				bool? ab_(Coding @this)
@@ -1223,7 +1223,7 @@ public class Exam130FHIR_0_0_003
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
-			var v_ = context.Operators.InInterval<CqlDateTime>(n_, u_, "day");
+			var v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 			var x_ = context.Operators.End(o_);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
 			var z_ = context.Operators.And(v_, y_);
@@ -1288,7 +1288,7 @@ public class Exam130FHIR_0_0_003
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
-			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, "day");
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -1318,7 +1318,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			var h_ = context.Operators.Not(g_);
 			var i_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
 			var j_ = context.Operators.And(h_, i_);
@@ -1329,7 +1329,7 @@ public class Exam130FHIR_0_0_003
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
-			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, "day");
+			var s_ = context.Operators.In<CqlDateTime>(k_, r_, "day");
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -1360,7 +1360,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1397,7 +1397,7 @@ public class Exam130FHIR_0_0_003
 				"corrected",
 				"appended",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Colonography?.Effective);
 			var i_ = context.Operators.End(h_);
 			var j_ = this.Measurement_Period();
@@ -1406,7 +1406,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
-			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
 			var u_ = context.Operators.And(q_, t_);
@@ -1437,7 +1437,7 @@ public class Exam130FHIR_0_0_003
 				"corrected",
 				"appended",
 			};
-			var g_ = context.Operators.InList<string>(e_, (f_ as IEnumerable<string>));
+			var g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			var h_ = context.Operators.Not(g_);
 			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Colonography?.Effective);
 			var j_ = context.Operators.End(i_);
@@ -1447,7 +1447,7 @@ public class Exam130FHIR_0_0_003
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
-			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -1478,7 +1478,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1517,7 +1517,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1551,7 +1551,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
-			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
 			var u_ = context.Operators.And(q_, t_);
@@ -1582,7 +1582,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1621,7 +1621,7 @@ public class Exam130FHIR_0_0_003
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
-			var p_ = context.Operators.InInterval<CqlDateTime>(h_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
 			var t_ = context.Operators.And(p_, s_);
@@ -1655,7 +1655,7 @@ public class Exam130FHIR_0_0_003
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
-			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
 			var u_ = context.Operators.And(q_, t_);

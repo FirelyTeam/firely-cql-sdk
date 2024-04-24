@@ -1204,7 +1204,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
-        public bool? InInterval<T>(T t, CqlInterval<T>? interval, string? precision)
+        public bool? In<T>(T t, CqlInterval<T>? interval, string? precision)
         {
             if (t == null) return null;
             if (interval == null) return false;
@@ -1230,7 +1230,7 @@ namespace Hl7.Cql.Runtime
 
         #region Includes
         public bool? IntervalIncludesElement<T>(CqlInterval<T>? interval, T t, string? precision) =>
-            InInterval(t, interval, precision);
+            In(t, interval, precision);
 
         public bool? IntervalIncludesInterval<T>(CqlInterval<T>? larger, CqlInterval<T>? smaller, string precision)
         {

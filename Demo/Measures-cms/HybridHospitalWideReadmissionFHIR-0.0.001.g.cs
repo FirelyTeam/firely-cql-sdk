@@ -323,7 +323,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aa_ = context.Operators.And(s_, z_);
 				var ac_ = context.Operators.End(v_);
 				var ad_ = this.Measurement_Period();
-				var ae_ = context.Operators.InInterval<CqlDateTime>(ac_, ad_, "day");
+				var ae_ = context.Operators.In<CqlDateTime>(ac_, ad_, "day");
 				var af_ = context.Operators.And(aa_, ae_);
 
 				return af_;
@@ -373,7 +373,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ac_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(temperature?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -381,7 +381,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = context.Operators.Convert<Quantity>(temperature?.Value);
 				var al_ = FHIRHelpers_4_3_000.ToQuantity(ak_);
@@ -414,7 +414,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ay_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var az_ = context.Operators.Add(ax_, ay_);
 				var ba_ = context.Operators.Interval(av_, az_, (bool?)true, (bool?)true);
-				var bb_ = context.Operators.InInterval<CqlDateTime>(ar_, ba_, null);
+				var bb_ = context.Operators.In<CqlDateTime>(ar_, ba_, null);
 				var bc_ = context.Operators.Convert<string>(temperature?.StatusElement?.Value);
 				var bd_ = new string[]
 				{
@@ -422,7 +422,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var be_ = context.Operators.InList<string>(bc_, (bd_ as IEnumerable<string>));
+				var be_ = context.Operators.In<string>(bc_, (bd_ as IEnumerable<string>));
 				var bf_ = context.Operators.And(bb_, be_);
 				var bg_ = context.Operators.Convert<Quantity>(temperature?.Value);
 				var bh_ = FHIRHelpers_4_3_000.ToQuantity(bg_);
@@ -479,7 +479,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ac_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -487,7 +487,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = context.Operators.Convert<Quantity>(HeartRate?.Value);
 				var al_ = FHIRHelpers_4_3_000.ToQuantity(ak_);
@@ -520,7 +520,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ay_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var az_ = context.Operators.Add(ax_, ay_);
 				var ba_ = context.Operators.Interval(av_, az_, (bool?)true, (bool?)true);
-				var bb_ = context.Operators.InInterval<CqlDateTime>(ar_, ba_, null);
+				var bb_ = context.Operators.In<CqlDateTime>(ar_, ba_, null);
 				var bc_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var bd_ = new string[]
 				{
@@ -528,7 +528,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var be_ = context.Operators.InList<string>(bc_, (bd_ as IEnumerable<string>));
+				var be_ = context.Operators.In<string>(bc_, (bd_ as IEnumerable<string>));
 				var bf_ = context.Operators.And(bb_, be_);
 				var bg_ = context.Operators.Convert<Quantity>(HeartRate?.Value);
 				var bh_ = FHIRHelpers_4_3_000.ToQuantity(bg_);
@@ -631,7 +631,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var w_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var x_ = context.Operators.Add(v_, w_);
 				var y_ = context.Operators.Interval(t_, x_, (bool?)true, (bool?)true);
-				var z_ = context.Operators.InInterval<CqlDateTime>(p_, y_, null);
+				var z_ = context.Operators.In<CqlDateTime>(p_, y_, null);
 				var aa_ = context.Operators.Convert<Code<ObservationStatus>>(O2Saturation?.StatusElement?.Value);
 				var ab_ = context.Operators.Convert<string>(aa_);
 				var ac_ = new string[]
@@ -640,7 +640,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ad_ = context.Operators.InList<string>(ab_, (ac_ as IEnumerable<string>));
+				var ad_ = context.Operators.In<string>(ab_, (ac_ as IEnumerable<string>));
 				var ae_ = context.Operators.And(z_, ad_);
 				var af_ = FHIRHelpers_4_3_000.ToValue(O2Saturation?.Value);
 				var ag_ = context.Operators.Not((bool?)(af_ is null));
@@ -767,7 +767,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var cc_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var cd_ = context.Operators.Add(cb_, cc_);
 						var ce_ = context.Operators.Interval(bz_, cd_, (bool?)true, (bool?)true);
-						var cf_ = context.Operators.InInterval<CqlDateTime>(bv_, ce_, null);
+						var cf_ = context.Operators.In<CqlDateTime>(bv_, ce_, null);
 						var cg_ = context.Operators.Convert<Code<ObservationStatus>>(O2Saturation?.StatusElement?.Value);
 						var ch_ = context.Operators.Convert<string>(cg_);
 						var ci_ = new string[]
@@ -776,7 +776,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							"amended",
 							"corrected",
 						};
-						var cj_ = context.Operators.InList<string>(ch_, (ci_ as IEnumerable<string>));
+						var cj_ = context.Operators.In<string>(ch_, (ci_ as IEnumerable<string>));
 						var ck_ = context.Operators.And(cf_, cj_);
 						var cl_ = FHIRHelpers_4_3_000.ToValue(O2Saturation?.Value);
 						var cm_ = context.Operators.Not((bool?)(cl_ is null));
@@ -905,7 +905,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var ef_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var eg_ = context.Operators.Add(ee_, ef_);
 						var eh_ = context.Operators.Interval(ec_, eg_, (bool?)true, (bool?)true);
-						var ei_ = context.Operators.InInterval<CqlDateTime>(dy_, eh_, null);
+						var ei_ = context.Operators.In<CqlDateTime>(dy_, eh_, null);
 						var ej_ = context.Operators.Convert<Code<ObservationStatus>>(O2Saturation?.StatusElement?.Value);
 						var ek_ = context.Operators.Convert<string>(ej_);
 						var el_ = new string[]
@@ -914,7 +914,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							"amended",
 							"corrected",
 						};
-						var em_ = context.Operators.InList<string>(ek_, (el_ as IEnumerable<string>));
+						var em_ = context.Operators.In<string>(ek_, (el_ as IEnumerable<string>));
 						var en_ = context.Operators.And(ei_, em_);
 						var eo_ = FHIRHelpers_4_3_000.ToValue(O2Saturation?.Value);
 						var ep_ = context.Operators.Not((bool?)(eo_ is null));
@@ -1043,7 +1043,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var gi_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var gj_ = context.Operators.Add(gh_, gi_);
 						var gk_ = context.Operators.Interval(gf_, gj_, (bool?)true, (bool?)true);
-						var gl_ = context.Operators.InInterval<CqlDateTime>(gb_, gk_, null);
+						var gl_ = context.Operators.In<CqlDateTime>(gb_, gk_, null);
 						var gm_ = context.Operators.Convert<Code<ObservationStatus>>(O2Saturation?.StatusElement?.Value);
 						var gn_ = context.Operators.Convert<string>(gm_);
 						var go_ = new string[]
@@ -1052,7 +1052,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							"amended",
 							"corrected",
 						};
-						var gp_ = context.Operators.InList<string>(gn_, (go_ as IEnumerable<string>));
+						var gp_ = context.Operators.In<string>(gn_, (go_ as IEnumerable<string>));
 						var gq_ = context.Operators.And(gl_, gp_);
 						var gr_ = FHIRHelpers_4_3_000.ToValue(O2Saturation?.Value);
 						var gs_ = context.Operators.Not((bool?)(gr_ is null));
@@ -1181,7 +1181,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var ik_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var il_ = context.Operators.Add(ij_, ik_);
 						var im_ = context.Operators.Interval(ih_, il_, (bool?)true, (bool?)true);
-						var in_ = context.Operators.InInterval<CqlDateTime>(id_, im_, null);
+						var in_ = context.Operators.In<CqlDateTime>(id_, im_, null);
 						var io_ = context.Operators.Convert<Code<ObservationStatus>>(O2Saturation?.StatusElement?.Value);
 						var ip_ = context.Operators.Convert<string>(io_);
 						var iq_ = new string[]
@@ -1190,7 +1190,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							"amended",
 							"corrected",
 						};
-						var ir_ = context.Operators.InList<string>(ip_, (iq_ as IEnumerable<string>));
+						var ir_ = context.Operators.In<string>(ip_, (iq_ as IEnumerable<string>));
 						var is_ = context.Operators.And(in_, ir_);
 						var it_ = FHIRHelpers_4_3_000.ToValue(O2Saturation?.Value);
 						var iu_ = context.Operators.Not((bool?)(it_ is null));
@@ -1318,7 +1318,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var km_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var kn_ = context.Operators.Add(kl_, km_);
 						var ko_ = context.Operators.Interval(kj_, kn_, (bool?)true, (bool?)true);
-						var kp_ = context.Operators.InInterval<CqlDateTime>(kf_, ko_, null);
+						var kp_ = context.Operators.In<CqlDateTime>(kf_, ko_, null);
 						var kq_ = context.Operators.Convert<Code<ObservationStatus>>(O2Saturation?.StatusElement?.Value);
 						var kr_ = context.Operators.Convert<string>(kq_);
 						var ks_ = new string[]
@@ -1327,7 +1327,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							"amended",
 							"corrected",
 						};
-						var kt_ = context.Operators.InList<string>(kr_, (ks_ as IEnumerable<string>));
+						var kt_ = context.Operators.In<string>(kr_, (ks_ as IEnumerable<string>));
 						var ku_ = context.Operators.And(kp_, kt_);
 						var kv_ = FHIRHelpers_4_3_000.ToValue(O2Saturation?.Value);
 						var kw_ = context.Operators.Not((bool?)(kv_ is null));
@@ -1455,7 +1455,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 						var mo_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var mp_ = context.Operators.Add(mn_, mo_);
 						var mq_ = context.Operators.Interval(ml_, mp_, (bool?)true, (bool?)true);
-						var mr_ = context.Operators.InInterval<CqlDateTime>(mh_, mq_, null);
+						var mr_ = context.Operators.In<CqlDateTime>(mh_, mq_, null);
 						var ms_ = context.Operators.Convert<Code<ObservationStatus>>(O2Saturation?.StatusElement?.Value);
 						var mt_ = context.Operators.Convert<string>(ms_);
 						var mu_ = new string[]
@@ -1464,7 +1464,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							"amended",
 							"corrected",
 						};
-						var mv_ = context.Operators.InList<string>(mt_, (mu_ as IEnumerable<string>));
+						var mv_ = context.Operators.In<string>(mt_, (mu_ as IEnumerable<string>));
 						var mw_ = context.Operators.And(mr_, mv_);
 						var mx_ = FHIRHelpers_4_3_000.ToValue(O2Saturation?.Value);
 						var my_ = context.Operators.Not((bool?)(mx_ is null));
@@ -1573,7 +1573,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ac_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(RespRate?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -1581,7 +1581,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = context.Operators.Convert<Quantity>(RespRate?.Value);
 				var al_ = FHIRHelpers_4_3_000.ToQuantity(ak_);
@@ -1614,7 +1614,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ay_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var az_ = context.Operators.Add(ax_, ay_);
 				var ba_ = context.Operators.Interval(av_, az_, (bool?)true, (bool?)true);
-				var bb_ = context.Operators.InInterval<CqlDateTime>(ar_, ba_, null);
+				var bb_ = context.Operators.In<CqlDateTime>(ar_, ba_, null);
 				var bc_ = context.Operators.Convert<string>(RespRate?.StatusElement?.Value);
 				var bd_ = new string[]
 				{
@@ -1622,7 +1622,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var be_ = context.Operators.InList<string>(bc_, (bd_ as IEnumerable<string>));
+				var be_ = context.Operators.In<string>(bc_, (bd_ as IEnumerable<string>));
 				var bf_ = context.Operators.And(bb_, be_);
 				var bg_ = context.Operators.Convert<Quantity>(RespRate?.Value);
 				var bh_ = FHIRHelpers_4_3_000.ToQuantity(bg_);
@@ -1673,7 +1673,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -1718,7 +1718,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(bicarbonatelab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -1726,7 +1726,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(bicarbonatelab?.Value);
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
@@ -1757,7 +1757,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
 				var az_ = context.Operators.Interval(au_, ay_, (bool?)true, (bool?)true);
-				var ba_ = context.Operators.InInterval<CqlDateTime>(aq_, az_, null);
+				var ba_ = context.Operators.In<CqlDateTime>(aq_, az_, null);
 				var bb_ = context.Operators.Convert<string>(bicarbonatelab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
@@ -1765,7 +1765,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
+				var bd_ = context.Operators.In<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToValue(bicarbonatelab?.Value);
 				var bg_ = context.Operators.Not((bool?)(bf_ is null));
@@ -1820,7 +1820,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(CreatinineLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -1828,7 +1828,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(CreatinineLab?.Value);
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
@@ -1859,7 +1859,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
 				var az_ = context.Operators.Interval(au_, ay_, (bool?)true, (bool?)true);
-				var ba_ = context.Operators.InInterval<CqlDateTime>(aq_, az_, null);
+				var ba_ = context.Operators.In<CqlDateTime>(aq_, az_, null);
 				var bb_ = context.Operators.Convert<string>(CreatinineLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
@@ -1867,7 +1867,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
+				var bd_ = context.Operators.In<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToValue(CreatinineLab?.Value);
 				var bg_ = context.Operators.Not((bool?)(bf_ is null));
@@ -1922,7 +1922,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(GlucoseLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -1930,7 +1930,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(GlucoseLab?.Value);
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
@@ -1961,7 +1961,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
 				var az_ = context.Operators.Interval(au_, ay_, (bool?)true, (bool?)true);
-				var ba_ = context.Operators.InInterval<CqlDateTime>(aq_, az_, null);
+				var ba_ = context.Operators.In<CqlDateTime>(aq_, az_, null);
 				var bb_ = context.Operators.Convert<string>(GlucoseLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
@@ -1969,7 +1969,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
+				var bd_ = context.Operators.In<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToValue(GlucoseLab?.Value);
 				var bg_ = context.Operators.Not((bool?)(bf_ is null));
@@ -2024,7 +2024,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(HematocritLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -2032,7 +2032,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(HematocritLab?.Value);
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
@@ -2063,7 +2063,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
 				var az_ = context.Operators.Interval(au_, ay_, (bool?)true, (bool?)true);
-				var ba_ = context.Operators.InInterval<CqlDateTime>(aq_, az_, null);
+				var ba_ = context.Operators.In<CqlDateTime>(aq_, az_, null);
 				var bb_ = context.Operators.Convert<string>(HematocritLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
@@ -2071,7 +2071,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
+				var bd_ = context.Operators.In<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToValue(HematocritLab?.Value);
 				var bg_ = context.Operators.Not((bool?)(bf_ is null));
@@ -2126,7 +2126,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(PotassiumLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -2134,7 +2134,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(PotassiumLab?.Value);
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
@@ -2165,7 +2165,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
 				var az_ = context.Operators.Interval(au_, ay_, (bool?)true, (bool?)true);
-				var ba_ = context.Operators.InInterval<CqlDateTime>(aq_, az_, null);
+				var ba_ = context.Operators.In<CqlDateTime>(aq_, az_, null);
 				var bb_ = context.Operators.Convert<string>(PotassiumLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
@@ -2173,7 +2173,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
+				var bd_ = context.Operators.In<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToValue(PotassiumLab?.Value);
 				var bg_ = context.Operators.Not((bool?)(bf_ is null));
@@ -2228,7 +2228,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(SodiumLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -2236,7 +2236,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(SodiumLab?.Value);
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
@@ -2267,7 +2267,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
 				var az_ = context.Operators.Interval(au_, ay_, (bool?)true, (bool?)true);
-				var ba_ = context.Operators.InInterval<CqlDateTime>(aq_, az_, null);
+				var ba_ = context.Operators.In<CqlDateTime>(aq_, az_, null);
 				var bb_ = context.Operators.Convert<string>(SodiumLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
@@ -2275,7 +2275,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
+				var bd_ = context.Operators.In<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToValue(SodiumLab?.Value);
 				var bg_ = context.Operators.Not((bool?)(bf_ is null));
@@ -2330,7 +2330,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
 				var ae_ = context.Operators.Interval(z_, ad_, (bool?)true, (bool?)true);
-				var af_ = context.Operators.InInterval<CqlDateTime>(v_, ae_, null);
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, null);
 				var ag_ = context.Operators.Convert<string>(WhiteBloodCellLab?.StatusElement?.Value);
 				var ah_ = new string[]
 				{
@@ -2338,7 +2338,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(af_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(WhiteBloodCellLab?.Value);
 				var al_ = context.Operators.Not((bool?)(ak_ is null));
@@ -2369,7 +2369,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
 				var az_ = context.Operators.Interval(au_, ay_, (bool?)true, (bool?)true);
-				var ba_ = context.Operators.InInterval<CqlDateTime>(aq_, az_, null);
+				var ba_ = context.Operators.In<CqlDateTime>(aq_, az_, null);
 				var bb_ = context.Operators.Convert<string>(WhiteBloodCellLab?.StatusElement?.Value);
 				var bc_ = new string[]
 				{
@@ -2377,7 +2377,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var bd_ = context.Operators.InList<string>(bb_, (bc_ as IEnumerable<string>));
+				var bd_ = context.Operators.In<string>(bb_, (bc_ as IEnumerable<string>));
 				var be_ = context.Operators.And(ba_, bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToValue(WhiteBloodCellLab?.Value);
 				var bg_ = context.Operators.Not((bool?)(bf_ is null));
@@ -2425,7 +2425,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var u_ = FHIRHelpers_4_3_000.ToValue(WeightExam?.Effective);
 				var v_ = QICoreCommon_2_0_000.earliest(u_);
 				var w_ = CQMCommon_2_0_000.hospitalizationWithObservationAndOutpatientSurgeryService(EncounterInpatient);
-				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, null);
+				var x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
 				var y_ = context.Operators.Convert<string>(WeightExam?.StatusElement?.Value);
 				var z_ = new string[]
 				{
@@ -2433,7 +2433,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var aa_ = context.Operators.InList<string>(y_, (z_ as IEnumerable<string>));
+				var aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
 				var ab_ = context.Operators.And(x_, aa_);
 				var ac_ = context.Operators.Convert<Quantity>(WeightExam?.Value);
 				var ad_ = FHIRHelpers_4_3_000.ToQuantity(ac_);
@@ -2459,7 +2459,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				var ai_ = FHIRHelpers_4_3_000.ToValue(WeightExam?.Effective);
 				var aj_ = QICoreCommon_2_0_000.earliest(ai_);
 				var ak_ = CQMCommon_2_0_000.hospitalizationWithObservationAndOutpatientSurgeryService(EncounterInpatient);
-				var al_ = context.Operators.InInterval<CqlDateTime>(aj_, ak_, null);
+				var al_ = context.Operators.In<CqlDateTime>(aj_, ak_, null);
 				var am_ = context.Operators.Convert<string>(WeightExam?.StatusElement?.Value);
 				var an_ = new string[]
 				{
@@ -2467,7 +2467,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					"amended",
 					"corrected",
 				};
-				var ao_ = context.Operators.InList<string>(am_, (an_ as IEnumerable<string>));
+				var ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
 				var ap_ = context.Operators.And(al_, ao_);
 				var aq_ = context.Operators.Convert<Quantity>(WeightExam?.Value);
 				var ar_ = FHIRHelpers_4_3_000.ToQuantity(aq_);

@@ -423,7 +423,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)18, (int?)85, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Has_Active_Diabetes_Overlaps_Measurement_Period();
 		var j_ = context.Operators.And(h_, i_);
 		var k_ = this.Has_Outpatient_Visit_During_Measurement_Period();
@@ -513,7 +513,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var v_ = context.Operators.InList<string>(t_, (u_ as IEnumerable<string>));
+			var v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 			var w_ = context.Operators.And(r_, v_);
 
 			return w_;
@@ -539,7 +539,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var ah_ = context.Operators.InList<string>(af_, (ag_ as IEnumerable<string>));
+			var ah_ = context.Operators.In<string>(af_, (ag_ as IEnumerable<string>));
 			var ai_ = context.Operators.And(ad_, ah_);
 
 			return ai_;

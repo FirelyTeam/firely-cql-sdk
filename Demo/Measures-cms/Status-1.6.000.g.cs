@@ -142,7 +142,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
 				var m_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -182,7 +182,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
 				var m_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -255,7 +255,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			var g_ = context.Operators.Convert<Code<RequestIntent>>(D?.IntentElement?.Value);
 			var h_ = context.Operators.Equal(g_, "order");
 			var i_ = context.Operators.And(f_, h_);
@@ -279,7 +279,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			var g_ = context.Operators.Convert<Code<RequestIntent>>(D?.IntentElement?.Value);
 			var h_ = context.Operators.Equal(g_, "order");
 			var i_ = context.Operators.And(f_, h_);
@@ -303,7 +303,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			var g_ = context.Operators.Convert<Code<RequestIntent>>(S?.IntentElement?.Value);
 			var h_ = context.Operators.Equal(g_, "order");
 			var i_ = context.Operators.And(f_, h_);
@@ -327,7 +327,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			var g_ = context.Operators.Convert<Code<RequestIntent>>(S?.IntentElement?.Value);
 			var h_ = context.Operators.Equal(g_, "order");
 			var i_ = context.Operators.And(f_, h_);
@@ -351,7 +351,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			var g_ = context.Operators.Convert<Code<RequestIntent>>(S?.IntentElement?.Value);
 			var h_ = context.Operators.Equal(g_, "order");
 			var i_ = context.Operators.And(f_, h_);
@@ -375,7 +375,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			var g_ = context.Operators.Convert<Code<RequestIntent>>(S?.IntentElement?.Value);
 			var h_ = context.Operators.Equal(g_, "order");
 			var i_ = context.Operators.And(f_, h_);
@@ -400,7 +400,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -422,7 +422,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -446,7 +446,7 @@ public class Status_1_6_000
 				"in-progress",
 				"onleave",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -470,7 +470,7 @@ public class Status_1_6_000
 				"in-progress",
 				"onleave",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -484,10 +484,9 @@ public class Status_1_6_000
 	{
 		bool? a_(Immunization I)
 		{
-			var c_ = context.Operators.Convert<string>(I?.StatusElement?.Value);
-			var d_ = context.Operators.Equivalent(c_, "completed");
+			var c_ = context.Operators.Equivalent(I?.StatusElement?.Value, "completed");
 
-			return d_;
+			return c_;
 		};
 		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
 
@@ -499,10 +498,9 @@ public class Status_1_6_000
 	{
 		bool? a_(Immunization I)
 		{
-			var c_ = context.Operators.Convert<string>(I?.StatusElement?.Value);
-			var d_ = context.Operators.Equivalent(c_, "completed");
+			var c_ = context.Operators.Equivalent(I?.StatusElement?.Value, "completed");
 
-			return d_;
+			return c_;
 		};
 		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
 
@@ -514,10 +512,9 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
-			var d_ = context.Operators.Equivalent(c_, "completed");
+			var c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
 
-			return d_;
+			return c_;
 		};
 		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
 
@@ -529,10 +526,9 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
-			var d_ = context.Operators.Equivalent(c_, "completed");
+			var c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
 
-			return d_;
+			return c_;
 		};
 		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
 
@@ -544,10 +540,9 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
-			var d_ = context.Operators.Equivalent(c_, "completed");
+			var c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
 
-			return d_;
+			return c_;
 		};
 		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
 
@@ -567,7 +562,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
 				var m_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -607,7 +602,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
 				var m_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -639,13 +634,11 @@ public class Status_1_6_000
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var c_ = context.Operators.Convert<string>(M?.StatusElement?.Value);
-			var d_ = context.Operators.Equal(c_, "active");
-			var e_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
-			var f_ = context.Operators.Equal(e_, "order");
-			var g_ = context.Operators.And(d_, f_);
+			var c_ = context.Operators.Equal(M?.StatusElement?.Value, "active");
+			var d_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
+			var e_ = context.Operators.And(c_, d_);
 
-			return g_;
+			return e_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 
@@ -657,13 +650,11 @@ public class Status_1_6_000
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var c_ = context.Operators.Convert<string>(M?.StatusElement?.Value);
-			var d_ = context.Operators.Equal(c_, "active");
-			var e_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
-			var f_ = context.Operators.Equal(e_, "order");
-			var g_ = context.Operators.And(d_, f_);
+			var c_ = context.Operators.Equal(M?.StatusElement?.Value, "active");
+			var d_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
+			var e_ = context.Operators.And(c_, d_);
 
-			return g_;
+			return e_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 
@@ -683,7 +674,7 @@ public class Status_1_6_000
 				"in-progress",
 				"on-hold",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -705,7 +696,7 @@ public class Status_1_6_000
 				"in-progress",
 				"on-hold",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -725,12 +716,11 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
-			var f_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
-			var g_ = context.Operators.Equal(f_, "order");
-			var h_ = context.Operators.And(e_, g_);
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
+			var f_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
+			var g_ = context.Operators.And(e_, f_);
 
-			return h_;
+			return g_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 
@@ -748,12 +738,11 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
-			var f_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
-			var g_ = context.Operators.Equal(f_, "order");
-			var h_ = context.Operators.And(e_, g_);
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
+			var f_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
+			var g_ = context.Operators.And(e_, f_);
 
-			return h_;
+			return g_;
 		};
 		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
 
@@ -773,7 +762,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
 				var m_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -813,7 +802,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
 				var m_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -852,7 +841,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -873,7 +862,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -894,7 +883,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -915,7 +904,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -936,7 +925,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -957,7 +946,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -978,7 +967,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -999,7 +988,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var e_ = context.Operators.InList<string>(c_, (d_ as IEnumerable<string>));
+			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
@@ -1022,7 +1011,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
@@ -1045,7 +1034,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};

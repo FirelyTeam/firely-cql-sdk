@@ -389,7 +389,7 @@ public class HybridHWRFHIR_1_3_005
 					var bv_ = context.Operators.Subtract(bt_, bu_);
 					var bx_ = context.Operators.Start(bs_);
 					var by_ = context.Operators.Interval(bv_, bx_, (bool?)true, (bool?)true);
-					var bz_ = context.Operators.InInterval<CqlDateTime>(br_, by_, null);
+					var bz_ = context.Operators.In<CqlDateTime>(br_, by_, null);
 					var cb_ = context.Operators.Start(bs_);
 					var cc_ = context.Operators.Not((bool?)(cb_ is null));
 					var cd_ = context.Operators.And(bz_, cc_);
@@ -423,7 +423,7 @@ public class HybridHWRFHIR_1_3_005
 					var cl_ = context.Operators.Subtract(cj_, ck_);
 					var cn_ = context.Operators.Start(ci_);
 					var co_ = context.Operators.Interval(cl_, cn_, (bool?)true, (bool?)true);
-					var cp_ = context.Operators.InInterval<CqlDateTime>(ch_, co_, null);
+					var cp_ = context.Operators.In<CqlDateTime>(ch_, co_, null);
 					var cr_ = context.Operators.Start(ci_);
 					var cs_ = context.Operators.Not((bool?)(cr_ is null));
 					var ct_ = context.Operators.And(cp_, cs_);
@@ -444,7 +444,7 @@ public class HybridHWRFHIR_1_3_005
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
 				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), (bool?)true, (bool?)true);
-				var bc_ = context.Operators.InInterval<CqlDateTime>(ac_, bb_, null);
+				var bc_ = context.Operators.In<CqlDateTime>(ac_, bb_, null);
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
 				{
@@ -456,7 +456,7 @@ public class HybridHWRFHIR_1_3_005
 					var db_ = context.Operators.Subtract(cz_, da_);
 					var dd_ = context.Operators.Start(cy_);
 					var de_ = context.Operators.Interval(db_, dd_, (bool?)true, (bool?)true);
-					var df_ = context.Operators.InInterval<CqlDateTime>(cx_, de_, null);
+					var df_ = context.Operators.In<CqlDateTime>(cx_, de_, null);
 					var dh_ = context.Operators.Start(cy_);
 					var di_ = context.Operators.Not((bool?)(dh_ is null));
 					var dj_ = context.Operators.And(df_, di_);
@@ -505,7 +505,7 @@ public class HybridHWRFHIR_1_3_005
 				var dt_ = context.Operators.Subtract(dr_, ds_);
 				var dv_ = context.Operators.Start(dq_);
 				var dw_ = context.Operators.Interval(dt_, dv_, (bool?)true, (bool?)true);
-				var dx_ = context.Operators.InInterval<CqlDateTime>(dp_, dw_, null);
+				var dx_ = context.Operators.In<CqlDateTime>(dp_, dw_, null);
 				var dz_ = context.Operators.Start(dq_);
 				var ea_ = context.Operators.Not((bool?)(dz_ is null));
 				var eb_ = context.Operators.And(dx_, ea_);
@@ -576,7 +576,7 @@ public class HybridHWRFHIR_1_3_005
 			var s_ = FHIRHelpers_4_0_001.ToInterval(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.Period);
 			var t_ = context.Operators.End(s_);
 			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.InInterval<CqlDateTime>(t_, u_, "day");
+			var v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
 			var w_ = context.Operators.And(r_, v_);
 			var x_ = this.Patient();
 			var y_ = context.Operators.Convert<CqlDate>(x_?.BirthDateElement?.Value);
@@ -636,7 +636,7 @@ public class HybridHWRFHIR_1_3_005
 				var al_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var am_ = context.Operators.Add(ak_, al_);
 				var an_ = context.Operators.Interval(ai_, am_, (bool?)true, (bool?)true);
-				var ao_ = context.Operators.InInterval<CqlDateTime>(ae_, an_, null);
+				var ao_ = context.Operators.In<CqlDateTime>(ae_, an_, null);
 				var ap_ = context.Operators.And(ac_, ao_);
 				var aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
 				var ar_ = new string[]
@@ -645,7 +645,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				};
-				var as_ = context.Operators.InList<string>(aq_, (ar_ as IEnumerable<string>));
+				var as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
 				var at_ = context.Operators.And(ap_, as_);
 				var au_ = context.Operators.Not((bool?)(Exam?.Value is null));
 				var av_ = context.Operators.And(at_, au_);
@@ -680,7 +680,7 @@ public class HybridHWRFHIR_1_3_005
 				var bj_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var bk_ = context.Operators.Add(bi_, bj_);
 				var bl_ = context.Operators.Interval(bg_, bk_, (bool?)true, (bool?)true);
-				var bm_ = context.Operators.InInterval<CqlDateTime>(bc_, bl_, null);
+				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, null);
 				var bn_ = context.Operators.And(ba_, bm_);
 				var bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
 				var bp_ = new string[]
@@ -689,7 +689,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				};
-				var bq_ = context.Operators.InList<string>(bo_, (bp_ as IEnumerable<string>));
+				var bq_ = context.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
 				var br_ = context.Operators.And(bn_, bq_);
 				var bs_ = context.Operators.Not((bool?)(Exam?.Value is null));
 				var bt_ = context.Operators.And(br_, bs_);
@@ -742,7 +742,7 @@ public class HybridHWRFHIR_1_3_005
 				var ak_ = context.Operators.Start(af_);
 				var am_ = context.Operators.Add(ak_, ah_);
 				var an_ = context.Operators.Interval(ai_, am_, (bool?)true, (bool?)true);
-				var ao_ = context.Operators.InInterval<CqlDateTime>(ae_, an_, null);
+				var ao_ = context.Operators.In<CqlDateTime>(ae_, an_, null);
 				var ap_ = context.Operators.And(ac_, ao_);
 				var aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
 				var ar_ = new string[]
@@ -751,7 +751,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				};
-				var as_ = context.Operators.InList<string>(aq_, (ar_ as IEnumerable<string>));
+				var as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
 				var at_ = context.Operators.And(ap_, as_);
 				var au_ = context.Operators.Not((bool?)(Exam?.Value is null));
 				var av_ = context.Operators.And(at_, au_);
@@ -785,7 +785,7 @@ public class HybridHWRFHIR_1_3_005
 				var bi_ = context.Operators.Start(bd_);
 				var bk_ = context.Operators.Add(bi_, bf_);
 				var bl_ = context.Operators.Interval(bg_, bk_, (bool?)true, (bool?)true);
-				var bm_ = context.Operators.InInterval<CqlDateTime>(bc_, bl_, null);
+				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, null);
 				var bn_ = context.Operators.And(ba_, bm_);
 				var bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
 				var bp_ = new string[]
@@ -794,7 +794,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				};
-				var bq_ = context.Operators.InList<string>(bo_, (bp_ as IEnumerable<string>));
+				var bq_ = context.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
 				var br_ = context.Operators.And(bn_, bq_);
 				var bs_ = context.Operators.Not((bool?)(Exam?.Value is null));
 				var bt_ = context.Operators.And(br_, bs_);
@@ -845,7 +845,7 @@ public class HybridHWRFHIR_1_3_005
 				var ag_ = context.Operators.Start(ab_);
 				var ai_ = context.Operators.Add(ag_, ad_);
 				var aj_ = context.Operators.Interval(ae_, ai_, (bool?)true, (bool?)true);
-				var ak_ = context.Operators.InInterval<CqlDateTime>(aa_, aj_, null);
+				var ak_ = context.Operators.In<CqlDateTime>(aa_, aj_, null);
 				var al_ = context.Operators.And(z_, ak_);
 				var am_ = context.Operators.Convert<string>(Lab?.StatusElement);
 				var an_ = new string[]
@@ -854,7 +854,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				};
-				var ao_ = context.Operators.InList<string>(am_, (an_ as IEnumerable<string>));
+				var ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
 				var ap_ = context.Operators.And(al_, ao_);
 				var aq_ = context.Operators.Not((bool?)(Lab?.Value is null));
 				var ar_ = context.Operators.And(ap_, aq_);
@@ -881,7 +881,7 @@ public class HybridHWRFHIR_1_3_005
 				var az_ = context.Operators.Start(au_);
 				var bb_ = context.Operators.Add(az_, aw_);
 				var bc_ = context.Operators.Interval(ax_, bb_, (bool?)true, (bool?)true);
-				var bd_ = context.Operators.InInterval<CqlDateTime>(at_, bc_, null);
+				var bd_ = context.Operators.In<CqlDateTime>(at_, bc_, null);
 				var be_ = context.Operators.And(as_, bd_);
 				var bf_ = context.Operators.Convert<string>(Lab?.StatusElement);
 				var bg_ = new string[]
@@ -890,7 +890,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				};
-				var bh_ = context.Operators.InList<string>(bf_, (bg_ as IEnumerable<string>));
+				var bh_ = context.Operators.In<string>(bf_, (bg_ as IEnumerable<string>));
 				var bi_ = context.Operators.And(be_, bh_);
 				var bj_ = context.Operators.Not((bool?)(Lab?.Value is null));
 				var bk_ = context.Operators.And(bi_, bj_);

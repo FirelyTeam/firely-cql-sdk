@@ -68,7 +68,7 @@ partial class CqlOperatorsBinder
             }
         }
 
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), null, [left, right], false);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.In), null, [left, right], false);
         if (methodInfo is null)
             return NullExpression.Object;
 

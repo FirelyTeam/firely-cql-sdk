@@ -319,7 +319,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			var ai_ = context.Operators.End(ac_);
 			var aj_ = context.Operators.DateFrom(ai_);
 			var ak_ = context.Operators.Interval(ag_, aj_, (bool?)true, (bool?)true);
-			var al_ = context.Operators.InInterval<CqlDate>(ab_, ak_, null);
+			var al_ = context.Operators.In<CqlDate>(ab_, ak_, null);
 			var am_ = context.Operators.And(y_, al_);
 
 			return am_;
@@ -361,7 +361,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			var r_ = context.Operators.End(l_);
 			var s_ = context.Operators.DateFrom(r_);
 			var t_ = context.Operators.Interval(p_, s_, (bool?)true, (bool?)true);
-			var u_ = context.Operators.InInterval<CqlDate>(k_, t_, null);
+			var u_ = context.Operators.In<CqlDate>(k_, t_, null);
 
 			return u_;
 		};
@@ -487,7 +487,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			var s_ = context.Operators.End(m_);
 			var t_ = context.Operators.DateFrom(s_);
 			var u_ = context.Operators.Interval(q_, t_, (bool?)true, (bool?)true);
-			var v_ = context.Operators.InInterval<CqlDate>(l_, u_, null);
+			var v_ = context.Operators.In<CqlDate>(l_, u_, null);
 			var w_ = context.Operators.And(i_, v_);
 
 			return w_;
@@ -521,7 +521,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			var q_ = context.Operators.End(k_);
 			var r_ = context.Operators.DateFrom(q_);
 			var s_ = context.Operators.Interval(o_, r_, (bool?)true, (bool?)true);
-			var t_ = context.Operators.InInterval<CqlDate>(j_, s_, null);
+			var t_ = context.Operators.In<CqlDate>(j_, s_, null);
 
 			return t_;
 		};
@@ -555,7 +555,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			var s_ = context.Operators.End(m_);
 			var t_ = context.Operators.DateFrom(s_);
 			var u_ = context.Operators.Interval(q_, t_, (bool?)true, (bool?)true);
-			var v_ = context.Operators.InInterval<CqlDate>(l_, u_, null);
+			var v_ = context.Operators.In<CqlDate>(l_, u_, null);
 
 			return v_;
 		};
@@ -578,7 +578,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)66, (int?)80, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Has_Criteria_Indicating_Frailty();
 		var j_ = context.Operators.And(h_, i_);
 		var k_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service();

@@ -709,11 +709,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var p_ = context.Operators.SameOrBefore(k_, o_, null);
 			var q_ = context.Operators.And(h_, p_);
-			var r_ = context.Operators.Convert<string>(CataractSurgery?.StatusElement?.Value);
-			var s_ = context.Operators.Equal(r_, "completed");
-			var t_ = context.Operators.And(q_, s_);
+			var r_ = context.Operators.Equal(CataractSurgery?.StatusElement?.Value, "completed");
+			var s_ = context.Operators.And(q_, r_);
 
-			return t_;
+			return s_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
 
@@ -979,7 +978,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				var w_ = context.Operators.Quantity((decimal?)90m, "days");
 				var x_ = context.Operators.Add(v_, w_);
 				var y_ = context.Operators.Interval(s_, x_, (bool?)false, (bool?)true);
-				var z_ = context.Operators.InInterval<CqlDateTime>(p_, y_, "day");
+				var z_ = context.Operators.In<CqlDateTime>(p_, y_, "day");
 				var ab_ = QICoreCommon_2_0_000.toInterval(q_);
 				var ac_ = context.Operators.End(ab_);
 				var ad_ = context.Operators.Not((bool?)(ac_ is null));
@@ -993,7 +992,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 					"corrected",
 					"preliminary",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(ae_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(VisualAcuityExamPerformed?.Value);
 				var al_ = this.Visual_Acuity_20_40_or_Better();

@@ -980,7 +980,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1005,7 +1005,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1030,7 +1030,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1055,7 +1055,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1080,7 +1080,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1253,7 +1253,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var j_ = context.Operators.Start(i_);
 			var k_ = context.Operators.DateFrom(j_);
 			var l_ = this.First_Two_Years();
-			var m_ = context.Operators.InInterval<CqlDate>(k_, l_, "day");
+			var m_ = context.Operators.In<CqlDate>(k_, l_, "day");
 
 			return m_;
 		};
@@ -1380,7 +1380,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1473,7 +1473,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1497,7 +1497,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.InInterval<CqlDate>(h_, i_, "day");
+			var j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1521,7 +1521,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.InInterval<CqlDate>(h_, i_, "day");
+			var j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1545,7 +1545,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.InInterval<CqlDate>(h_, i_, "day");
+			var j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1708,7 +1708,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				var k_ = context.Operators.Quantity((decimal?)1m, "day");
 				var l_ = context.Operators.Subtract(AllHibDoses2, k_);
 				var m_ = context.Operators.Interval(l_, AllHibDoses2, (bool?)false, (bool?)false);
-				var n_ = context.Operators.InInterval<CqlDate>(AllHibDoses1, m_, null);
+				var n_ = context.Operators.In<CqlDate>(AllHibDoses1, m_, null);
 
 				return n_;
 			};
@@ -1779,7 +1779,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1996,7 +1996,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.InInterval<CqlDate>(l_, m_, "day");
+			var n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2063,7 +2063,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.InInterval<CqlDate>(l_, m_, "day");
+			var n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2194,7 +2194,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -2261,7 +2261,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.InInterval<CqlDate>(l_, m_, "day");
+			var n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2425,7 +2425,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				var k_ = context.Operators.Quantity((decimal?)1m, "day");
 				var l_ = context.Operators.Subtract(AllRotavirusDoses2, k_);
 				var m_ = context.Operators.Interval(l_, AllRotavirusDoses2, (bool?)false, (bool?)false);
-				var n_ = context.Operators.InInterval<CqlDate>(AllRotavirusDoses1, m_, null);
+				var n_ = context.Operators.In<CqlDate>(AllRotavirusDoses1, m_, null);
 
 				return n_;
 			};
@@ -2496,7 +2496,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -2719,7 +2719,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.InInterval<CqlDate>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};

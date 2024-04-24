@@ -249,7 +249,7 @@ public class TJCOverallFHIR_1_8_000
 			var g_ = context.Operators.LessOrEqual(f_, (int?)120);
 			var i_ = context.Operators.End(e_);
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 			var l_ = context.Operators.And(g_, k_);
 
 			return l_;
@@ -395,7 +395,7 @@ public class TJCOverallFHIR_1_8_000
 				"completed",
 				"in-progress",
 			};
-			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
+			var n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 
 			return n_;
 		};
@@ -421,7 +421,7 @@ public class TJCOverallFHIR_1_8_000
 				var j_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
 				var k_ = FHIRHelpers_4_0_001.ToDateTime(((i_ as FhirDateTime) ?? j_));
 				var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
-				var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
+				var m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 
 				return m_;
 			};
@@ -455,7 +455,7 @@ public class TJCOverallFHIR_1_8_000
 				var l_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
 				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
 				var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
-				var o_ = context.Operators.InInterval<CqlDateTime>((k_ ?? m_), n_, null);
+				var o_ = context.Operators.In<CqlDateTime>((k_ ?? m_), n_, null);
 
 				return o_;
 			};

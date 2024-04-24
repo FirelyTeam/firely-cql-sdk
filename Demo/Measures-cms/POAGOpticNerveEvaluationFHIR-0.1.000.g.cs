@@ -408,7 +408,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(CupToDiscExamNotPerformed?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
@@ -464,7 +464,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(OpticDiscExamNotPerformed?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.InInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
@@ -558,7 +558,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
+			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);
 
 			return v_;
@@ -608,7 +608,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
+			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);
 
 			return v_;

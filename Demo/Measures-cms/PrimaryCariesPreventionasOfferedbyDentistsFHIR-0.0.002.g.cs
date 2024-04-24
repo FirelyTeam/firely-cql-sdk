@@ -188,7 +188,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)1, (int?)20, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Qualifying_Encounters();
 		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
@@ -233,7 +233,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 			var k_ = QICoreCommon_2_0_000.toInterval(j_);
 			var l_ = context.Operators.End(k_);
 			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.InInterval<CqlDateTime>(l_, m_, "day");
+			var n_ = context.Operators.In<CqlDateTime>(l_, m_, "day");
 
 			return n_;
 		};
@@ -267,7 +267,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)1, (int?)5, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -285,7 +285,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)6, (int?)12, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -303,7 +303,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)13, (int?)20, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}

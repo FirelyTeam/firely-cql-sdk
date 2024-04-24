@@ -116,7 +116,7 @@ public class NCQAEncounter_1_0_0
 		{
 			var e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((EncounterPeriod?.Period as object));
 			var f_ = context.Operators.End(e_);
-			var g_ = context.Operators.InInterval<CqlDateTime>(f_, timeperiod, null);
+			var g_ = context.Operators.In<CqlDateTime>(f_, timeperiod, null);
 
 			return g_;
 		};

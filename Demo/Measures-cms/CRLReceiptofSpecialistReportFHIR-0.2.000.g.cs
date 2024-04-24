@@ -222,7 +222,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				"active",
 				"completed",
 			};
-			var m_ = context.Operators.InList<string>(k_, (l_ as IEnumerable<string>));
+			var m_ = context.Operators.In<string>(k_, (l_ as IEnumerable<string>));
 			var n_ = context.Operators.Convert<Code<RequestIntent>>(ReferralOrder?.IntentElement?.Value);
 			var o_ = context.Operators.Equal(n_, "order");
 			var p_ = context.Operators.And(m_, o_);
@@ -234,7 +234,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			var w_ = context.Operators.Date(v_, (int?)10, (int?)31);
 			var x_ = context.Operators.ConvertDateToDateTime(w_);
 			var y_ = context.Operators.Interval(s_, x_, (bool?)true, (bool?)true);
-			var z_ = context.Operators.InInterval<CqlDateTime>(q_, y_, "day");
+			var z_ = context.Operators.In<CqlDateTime>(q_, y_, "day");
 			var aa_ = context.Operators.And(p_, z_);
 
 			return aa_;
@@ -361,7 +361,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			bool? h_(Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK FirstReferral)
 			{
 				var l_ = this.TaskGetRequestID(ConsultantReportObtained);
-				var m_ = context.Operators.InList<string>(FirstReferral?.ID, l_);
+				var m_ = context.Operators.In<string>(FirstReferral?.ID, l_);
 				var n_ = FHIRHelpers_4_3_000.ToInterval(ConsultantReportObtained?.ExecutionPeriod);
 				var o_ = context.Operators.End(n_);
 				var p_ = context.Operators.After(o_, FirstReferral?.AuthorDate, null);
@@ -371,7 +371,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				var t_ = context.Operators.And(q_, s_);
 				var v_ = context.Operators.End(n_);
 				var w_ = this.Measurement_Period();
-				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, "day");
+				var x_ = context.Operators.In<CqlDateTime>(v_, w_, "day");
 				var y_ = context.Operators.And(t_, x_);
 
 				return y_;

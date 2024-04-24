@@ -146,7 +146,7 @@ namespace Hl7.Cql.Operators
         int? DurationBetween(CqlDateTime? low, CqlDateTime? high, string? precision);
         int? DurationBetween(CqlTime? low, CqlTime? high, string? precision);
         bool? ElementIncludedInList<T>(T left, IEnumerable<T> right);
-        bool? InInterval<T>(T t, CqlInterval<T>? interval, string? precision);
+        bool? In<T>(T t, CqlInterval<T>? interval, string? precision);
         bool? ElementProperlyIncludedInInterval(CqlDate left, CqlInterval<CqlDate>? right, string precision);
         bool? ElementProperlyIncludedInInterval(CqlDateTime left, CqlInterval<CqlDateTime>? right, string precision);
         bool? ElementProperlyIncludedInInterval(CqlTime left, CqlInterval<CqlTime>? right, string precision);
@@ -196,7 +196,7 @@ namespace Hl7.Cql.Operators
         decimal? HighBoundary(decimal? input, int? precision);
         bool? Implies(bool? left, bool? right);
         bool? Implies(Lazy<bool?> left, Lazy<bool?> right);
-        bool? InList<T>(T element, IEnumerable<T> argument);
+        bool? In<T>(T element, IEnumerable<T> argument);
         CqlInterval<CqlDate?>? Interval(CqlDate? low, CqlDate? high, bool? lowClosed, bool? highClosed);
         CqlInterval<CqlDateTime?>? Interval(CqlDateTime? low, CqlDateTime? high, bool? lowClosed, bool? highClosed);
         CqlInterval<CqlQuantity?>? Interval(CqlQuantity? low, CqlQuantity? high, bool? lowClosed, bool? highClosed);
@@ -300,14 +300,14 @@ namespace Hl7.Cql.Operators
         bool? LessOrEqual(object? left, object? right);
         bool? ListContains<T>(IEnumerable<T> list, T item);
         IEnumerable<T>? Distinct<T>(IEnumerable<T> source);
-        T? Indexer<T>(IEnumerable<T>? source, int? index) where T : class;
+        T? Indexer<T>(IEnumerable<T>? source, int? index);
         bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         IEnumerable<T>? ListExcept<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListIncludedInList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         bool? ListIncludesElement<T>(IEnumerable<T>? left, T right);
         bool? ListIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
-        int? PositionOf<T>(IEnumerable<T>? list, T element);
+        int? IndexOf<T>(IEnumerable<T>? list, T element);
         IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);

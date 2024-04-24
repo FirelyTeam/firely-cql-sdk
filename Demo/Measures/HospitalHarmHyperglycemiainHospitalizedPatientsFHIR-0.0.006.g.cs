@@ -366,7 +366,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			bool? h_(Observation BloodGlucoseLab)
 			{
 				var l_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab?.Effective as FhirDateTime));
-				var m_ = context.Operators.InInterval<CqlDateTime>(l_, EncounterWithHospitalization?.hospitalizationPeriod, null);
+				var m_ = context.Operators.In<CqlDateTime>(l_, EncounterWithHospitalization?.hospitalizationPeriod, null);
 				var n_ = context.Operators.Convert<string>(BloodGlucoseLab?.StatusElement);
 				var o_ = context.Operators.Equal(n_, "final");
 				var p_ = context.Operators.And(m_, o_);
@@ -573,7 +573,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					var ab_ = context.Operators.Greater(z_, aa_);
 					var ac_ = context.Operators.And(y_, ab_);
 					var ad_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab1?.Effective as FhirDateTime));
-					var ae_ = context.Operators.InInterval<CqlDateTime>(ad_, EncounterDay?.dayPeriod, null);
+					var ae_ = context.Operators.In<CqlDateTime>(ad_, EncounterDay?.dayPeriod, null);
 					var af_ = context.Operators.And(ac_, ae_);
 
 					return af_;
@@ -590,7 +590,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					var ak_ = context.Operators.GreaterOrEqual(ai_, aj_);
 					var al_ = context.Operators.And(ah_, ak_);
 					var am_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab2?.Effective as FhirDateTime));
-					var an_ = context.Operators.InInterval<CqlDateTime>(am_, EncounterDay?.dayPeriod, null);
+					var an_ = context.Operators.In<CqlDateTime>(am_, EncounterDay?.dayPeriod, null);
 					var ao_ = context.Operators.And(al_, an_);
 
 					return ao_;
@@ -603,7 +603,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					var ap_ = context.Operators.Convert<string>(BloodGlucoseLab3?.StatusElement);
 					var aq_ = context.Operators.Equal(ap_, "final");
 					var ar_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab3?.Effective as FhirDateTime));
-					var as_ = context.Operators.InInterval<CqlDateTime>(ar_, EncounterDay?.dayPeriod, null);
+					var as_ = context.Operators.In<CqlDateTime>(ar_, EncounterDay?.dayPeriod, null);
 					var at_ = context.Operators.And(aq_, as_);
 
 					return at_;

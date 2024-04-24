@@ -352,7 +352,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				"active",
 				"completed",
 			};
-			var l_ = context.Operators.InList<string>(j_, (k_ as IEnumerable<string>));
+			var l_ = context.Operators.In<string>(j_, (k_ as IEnumerable<string>));
 			var m_ = context.Operators.And(i_, l_);
 			var n_ = context.Operators.Convert<string>(BetaBlockerOrdered?.IntentElement?.Value);
 			var o_ = new string[]
@@ -363,7 +363,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				"filler-order",
 				"instance-order",
 			};
-			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
+			var p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
 			var q_ = context.Operators.And(m_, p_);
 
 			return q_;
@@ -442,7 +442,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				"amended",
 				"corrected",
 			};
-			var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
+			var r_ = context.Operators.In<string>(p_, (q_ as IEnumerable<string>));
 			var s_ = context.Operators.And(o_, r_);
 			var t_ = context.Operators.Convert<Quantity>(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Value);
 			var u_ = FHIRHelpers_4_3_000.ToQuantity(t_);
@@ -505,7 +505,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			{
 				var l_ = context.Operators.Convert<CqlDateTime>(NoBetaBlockerOrdered?.AuthoredOnElement);
 				var m_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
-				var n_ = context.Operators.InInterval<CqlDateTime>(l_, m_, null);
+				var n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
 
 				return n_;
 			};
@@ -806,10 +806,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var d_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure ImplantedCardiacPacer)
 		{
-			var s_ = context.Operators.Convert<string>(ImplantedCardiacPacer?.StatusElement?.Value);
-			var t_ = context.Operators.Equal(s_, "completed");
+			var s_ = context.Operators.Equal(ImplantedCardiacPacer?.StatusElement?.Value, "completed");
 
-			return t_;
+			return s_;
 		};
 		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
 		var g_ = context.Operators.Exists<Procedure>(f_);

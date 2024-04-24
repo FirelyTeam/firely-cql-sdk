@@ -227,10 +227,11 @@ Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlDateTime? inp
 Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlTime? input, int? precision) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Implies(bool? left, bool? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Implies(System.Lazy<bool?>! left, System.Lazy<bool?>! right) -> bool?
+Hl7.Cql.Operators.ICqlOperators.In<T>(T element, System.Collections.Generic.IEnumerable<T>! argument) -> bool?
+Hl7.Cql.Operators.ICqlOperators.In<T>(T t, Hl7.Cql.Primitives.CqlInterval<T>? interval, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Indexer(string? argument, int? index) -> string?
-Hl7.Cql.Operators.ICqlOperators.Indexer<T>(System.Collections.Generic.IEnumerable<T!>? source, int? index) -> T?
-Hl7.Cql.Operators.ICqlOperators.InInterval<T>(T t, Hl7.Cql.Primitives.CqlInterval<T>? interval, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.InList<T>(T element, System.Collections.Generic.IEnumerable<T>! argument) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Indexer<T>(System.Collections.Generic.IEnumerable<T>? source, int? index) -> T?
+Hl7.Cql.Operators.ICqlOperators.IndexOf<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
 Hl7.Cql.Operators.ICqlOperators.Interval(decimal? low, decimal? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<decimal?>?
 Hl7.Cql.Operators.ICqlOperators.Interval(Hl7.Cql.Primitives.CqlDate? low, Hl7.Cql.Primitives.CqlDate? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>?
 Hl7.Cql.Operators.ICqlOperators.Interval(Hl7.Cql.Primitives.CqlDateTime? low, Hl7.Cql.Primitives.CqlDateTime? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>?
@@ -395,7 +396,6 @@ Hl7.Cql.Operators.ICqlOperators.PopulationStdDev(System.Collections.Generic.IEnu
 Hl7.Cql.Operators.ICqlOperators.PopulationVariance(System.Collections.Generic.IEnumerable<decimal?>? source) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.PopulationVariance(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? source) -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Operators.ICqlOperators.PositionOf(string! pattern, string! argument) -> int?
-Hl7.Cql.Operators.ICqlOperators.PositionOf<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
 Hl7.Cql.Operators.ICqlOperators.Power(decimal? argument, decimal? exponent) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Power(int? argument, int? exponent) -> int?
 Hl7.Cql.Operators.ICqlOperators.Power(long? argument, long? exponent) -> long?

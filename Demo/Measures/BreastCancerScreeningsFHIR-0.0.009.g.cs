@@ -337,7 +337,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)51, (int?)74, (bool?)true, (bool?)false);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement);
 		var k_ = context.Operators.Equal(j_, "female");
 		var l_ = context.Operators.And(h_, k_);
@@ -605,7 +605,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 				"corrected",
 				"appended",
 			};
-			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
@@ -614,7 +614,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
-			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -646,7 +646,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 				"corrected",
 				"appended",
 			};
-			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
@@ -655,7 +655,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
-			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
 			var v_ = context.Operators.And(r_, u_);
@@ -718,7 +718,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 				"corrected",
 				"appended",
 			};
-			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			var i_ = context.Operators.Not(h_);
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
 			var k_ = context.Operators.End(j_);
@@ -728,7 +728,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
-			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -760,7 +760,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 				"corrected",
 				"appended",
 			};
-			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			var i_ = context.Operators.Not(h_);
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
 			var k_ = context.Operators.End(j_);
@@ -770,7 +770,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
-			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);

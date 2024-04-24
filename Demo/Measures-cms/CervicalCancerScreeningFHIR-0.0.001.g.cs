@@ -246,15 +246,14 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)24, (int?)64, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
-		var k_ = context.Operators.Equal(j_, "female");
-		var l_ = context.Operators.And(h_, k_);
-		var m_ = this.Qualifying_Encounters();
-		var n_ = context.Operators.Exists<Encounter>(m_);
-		var o_ = context.Operators.And(l_, n_);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
+		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
+		var k_ = context.Operators.And(h_, j_);
+		var l_ = this.Qualifying_Encounters();
+		var m_ = context.Operators.Exists<Encounter>(l_);
+		var n_ = context.Operators.And(k_, m_);
 
-		return o_;
+		return n_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -387,7 +386,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, (bool?)true, (bool?)true);
-			var o_ = context.Operators.InInterval<CqlDateTime>(g_, n_, "day");
+			var o_ = context.Operators.In<CqlDateTime>(g_, n_, "day");
 			var p_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Value);
 			var q_ = context.Operators.Not((bool?)(p_ is null));
 			var r_ = context.Operators.And(o_, q_);
@@ -515,7 +514,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
-			var v_ = context.Operators.InInterval<CqlDateTime>(n_, u_, "day");
+			var v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 			var w_ = context.Operators.And(l_, v_);
 			var x_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Value);
 			var y_ = context.Operators.Not((bool?)(x_ is null));

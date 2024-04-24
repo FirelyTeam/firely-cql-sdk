@@ -683,7 +683,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				"amended",
 				"corrected",
 			};
-			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
+			var q_ = context.Operators.In<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.Not((bool?)(MacularExam?.Value is null));
 			var s_ = context.Operators.And(q_, r_);
 

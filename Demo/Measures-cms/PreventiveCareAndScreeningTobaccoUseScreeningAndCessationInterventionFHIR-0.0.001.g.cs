@@ -826,7 +826,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var aa_ = context.Operators.Subtract(y_, z_);
 			var ac_ = context.Operators.End(x_);
 			var ad_ = context.Operators.Interval(aa_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(w_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(w_, ad_, "day");
 
 			return ae_;
 		};
@@ -856,7 +856,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
-			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, "day");
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
 		};
@@ -885,7 +885,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
-			var q_ = context.Operators.InInterval<CqlDateTime>(i_, p_, "day");
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
 		};

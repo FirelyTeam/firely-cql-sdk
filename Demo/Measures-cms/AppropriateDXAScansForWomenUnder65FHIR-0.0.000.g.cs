@@ -826,15 +826,14 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)50, (int?)63, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
-		var k_ = context.Operators.Equal(j_, "female");
-		var l_ = context.Operators.And(h_, k_);
-		var m_ = this.Qualifying_Encounter();
-		var n_ = context.Operators.Exists<Encounter>(m_);
-		var o_ = context.Operators.And(l_, n_);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
+		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
+		var k_ = context.Operators.And(h_, j_);
+		var l_ = this.Qualifying_Encounter();
+		var m_ = context.Operators.Exists<Encounter>(l_);
+		var n_ = context.Operators.And(k_, m_);
 
-		return o_;
+		return n_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -926,7 +925,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var k_ = QICoreCommon_2_0_000.ToInterval(j_);
 			var l_ = context.Operators.Start(k_);
 			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.InInterval<CqlDateTime>(l_, m_, null);
+			var n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
 			var o_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Value);
 			var p_ = context.Operators.Quantity((decimal?)2m, "{drinks}/d");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
@@ -1583,7 +1582,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
 				var k_ = FHIRHelpers_4_3_000.ToConcept(@this);

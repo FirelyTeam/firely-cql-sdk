@@ -886,7 +886,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
-        public bool? InList<T>(T element, IEnumerable<T> argument)
+        public bool? In<T>(T element, IEnumerable<T> argument)
         {
             if ((object)element! == null)
                 return null;
@@ -954,18 +954,17 @@ namespace Hl7.Cql.Runtime
         #region AtIndex
 
         public T? Indexer<T>(IEnumerable<T>? source, int? index)
-            where T : class
         {
             if (source == null || index == null)
-                return null;
+                return default;
 
             if (index.Value < 0)
-                return null;
+                return default;
 
             if (source is IList<T> list)
             {
                 if (index >= list.Count)
-                    return null;
+                    return default;
 
                 return list[index.Value];
             }
@@ -978,7 +977,7 @@ namespace Hl7.Cql.Runtime
 
         #region IndexOf
 
-        public int? PositionOf<T>(IEnumerable<T>? list, T element)
+        public int? IndexOf<T>(IEnumerable<T>? list, T element)
         {
             if (list == null || element == null)
                 return null;

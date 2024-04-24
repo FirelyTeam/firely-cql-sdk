@@ -181,7 +181,7 @@ public class TJCOverall_8_11_000
 			var e_ = FHIRHelpers_4_3_000.ToInterval(NonElectiveEncounter?.Period);
 			var f_ = context.Operators.End(e_);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.InInterval<CqlDateTime>(f_, g_, "day");
+			var h_ = context.Operators.In<CqlDateTime>(f_, g_, "day");
 
 			return h_;
 		};
@@ -310,7 +310,7 @@ public class TJCOverall_8_11_000
 				"completed",
 				"on-hold",
 			};
-			var m_ = context.Operators.InList<string>(k_, (l_ as IEnumerable<string>));
+			var m_ = context.Operators.In<string>(k_, (l_ as IEnumerable<string>));
 			var n_ = context.Operators.Convert<Code<RequestIntent>>(SR?.IntentElement?.Value);
 			var o_ = context.Operators.Convert<string>(n_);
 			var p_ = new string[]
@@ -321,7 +321,7 @@ public class TJCOverall_8_11_000
 				"filler-order",
 				"instance-order",
 			};
-			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
+			var q_ = context.Operators.In<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.And(m_, q_);
 			var s_ = context.Operators.IsTrue(SR?.DoNotPerformElement?.Value);
 			var t_ = context.Operators.Not(s_);
@@ -339,7 +339,7 @@ public class TJCOverall_8_11_000
 				"completed",
 				"in-progress",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 
 			return x_;
 		};
@@ -368,7 +368,7 @@ public class TJCOverall_8_11_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(IschemicStrokeEncounter);
-				var p_ = context.Operators.InInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
@@ -403,7 +403,7 @@ public class TJCOverall_8_11_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(IschemicStrokeEncounter);
-				var p_ = context.Operators.InInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};

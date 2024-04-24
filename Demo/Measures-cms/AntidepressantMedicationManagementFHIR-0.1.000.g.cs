@@ -292,7 +292,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var o_ = context.Operators.Start(n_);
 			var p_ = context.Operators.ConvertDateToDateTime(o_);
 			var q_ = this.Intake_Period();
-			var r_ = context.Operators.InInterval<CqlDateTime>(p_, q_, "day");
+			var r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
 
 			return r_;
 		};
@@ -338,7 +338,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var m_ = context.Operators.Subtract(f_, l_);
 			var p_ = context.Operators.Add(f_, l_);
 			var q_ = context.Operators.Interval(m_, p_, (bool?)true, (bool?)true);
-			var r_ = context.Operators.InInterval<CqlDate>(j_, q_, null);
+			var r_ = context.Operators.In<CqlDate>(j_, q_, null);
 			var t_ = context.Operators.Not((bool?)(f_ is null));
 			var u_ = context.Operators.And(r_, t_);
 			var v_ = context.Operators.And(g_, u_);
@@ -397,7 +397,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var al_ = context.Operators.Subtract(aj_, ak_);
 			var ao_ = context.Operators.Add(aj_, ak_);
 			var ap_ = context.Operators.Interval(al_, ao_, (bool?)true, (bool?)true);
-			var aq_ = context.Operators.InInterval<CqlDate>(ai_, ap_, null);
+			var aq_ = context.Operators.In<CqlDate>(ai_, ap_, null);
 			var as_ = context.Operators.Not((bool?)(aj_ is null));
 			var at_ = context.Operators.And(aq_, as_);
 

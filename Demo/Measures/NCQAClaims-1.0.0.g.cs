@@ -168,7 +168,7 @@ public class NCQAClaims_1_0_0
 							var x_ = FHIRHelpers_4_0_001.ToConcept(ItemOnLine?.ProductOrService);
 							bool? y_(CqlCode LineCode)
 							{
-								var ag_ = context.Operators.InList<string>(LineCode?.code, ClaimWithPosCode?.ProceduresAsStrings);
+								var ag_ = context.Operators.In<string>(LineCode?.code, ClaimWithPosCode?.ProceduresAsStrings);
 
 								return ag_;
 							};
@@ -177,7 +177,7 @@ public class NCQAClaims_1_0_0
 							var ab_ = FHIRHelpers_4_0_001.ToConcept((ItemOnLine?.Location as CodeableConcept));
 							bool? ac_(CqlCode PosCode)
 							{
-								var ah_ = context.Operators.InList<string>(PosCode?.code, ClaimWithPosCode?.POSAsString);
+								var ah_ = context.Operators.In<string>(PosCode?.code, ClaimWithPosCode?.POSAsString);
 
 								return ah_;
 							};
@@ -299,7 +299,7 @@ public class NCQAClaims_1_0_0
 							var v_ = FHIRHelpers_4_0_001.ToConcept(ItemOnLine?.ProductOrService);
 							bool? w_(CqlCode LineCode)
 							{
-								var am_ = context.Operators.InList<string>(LineCode?.code, ClaimWithProcedure?.ProceduresAsStrings);
+								var am_ = context.Operators.In<string>(LineCode?.code, ClaimWithProcedure?.ProceduresAsStrings);
 
 								return am_;
 							};
@@ -334,7 +334,7 @@ public class NCQAClaims_1_0_0
 							bool? ai_(object HeaderCode)
 							{
 								var ar_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-								var as_ = context.Operators.InList<string>(ar_?.Value, ClaimWithProcedure?.ProceduresAsStrings);
+								var as_ = context.Operators.In<string>(ar_?.Value, ClaimWithProcedure?.ProceduresAsStrings);
 
 								return as_;
 							};
@@ -480,7 +480,7 @@ public class NCQAClaims_1_0_0
 						bool? aa_(object HeaderCode)
 						{
 							var ah_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-							var ai_ = context.Operators.InList<string>(ah_?.Value, ClaimWithDiagnosis?.DiagnosesAsStrings);
+							var ai_ = context.Operators.In<string>(ah_?.Value, ClaimWithDiagnosis?.DiagnosesAsStrings);
 
 							return ai_;
 						};
@@ -592,7 +592,7 @@ public class NCQAClaims_1_0_0
 					var t_ = FHIRHelpers_4_0_001.ToConcept(ItemOnLine?.ProductOrService);
 					bool? u_(CqlCode LineCode)
 					{
-						var x_ = context.Operators.InList<string>(LineCode?.code, ClaimWithMedication?.MedicationsAsStrings);
+						var x_ = context.Operators.In<string>(LineCode?.code, ClaimWithMedication?.MedicationsAsStrings);
 
 						return x_;
 					};
@@ -624,7 +624,7 @@ public class NCQAClaims_1_0_0
 							var al_ = FHIRHelpers_4_0_001.ToConcept(i?.ProductOrService);
 							bool? am_(CqlCode LineCode)
 							{
-								var ap_ = context.Operators.InList<string>(LineCode?.code, ClaimWithMedication?.MedicationsAsStrings);
+								var ap_ = context.Operators.In<string>(LineCode?.code, ClaimWithMedication?.MedicationsAsStrings);
 
 								return ap_;
 							};
@@ -846,7 +846,7 @@ public class NCQAClaims_1_0_0
 						bool? ac_(object HeaderCode)
 						{
 							var aj_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-							var ak_ = context.Operators.InList<string>(aj_?.Value, ClaimWithDiagnosis?.DiagnosesAsStrings);
+							var ak_ = context.Operators.In<string>(aj_?.Value, ClaimWithDiagnosis?.DiagnosesAsStrings);
 
 							return ak_;
 						};
@@ -915,7 +915,7 @@ public class NCQAClaims_1_0_0
 								bool? bi_(object ProcedureHeaderCode)
 								{
 									var cc_ = context.Operators.LateBoundProperty<Code>(ProcedureHeaderCode, "code");
-									var cd_ = context.Operators.InList<string>(cc_?.Value, ClaimWithDiagnosis?.ProceduresAsStrings);
+									var cd_ = context.Operators.In<string>(cc_?.Value, ClaimWithDiagnosis?.ProceduresAsStrings);
 
 									return cd_;
 								};
@@ -944,7 +944,7 @@ public class NCQAClaims_1_0_0
 								var bt_ = context.Operators.FlattenList<Coding>(bs_);
 								bool? bu_(Coding LineCode)
 								{
-									var cg_ = context.Operators.InList<string>(LineCode?.CodeElement?.Value, ClaimWithDiagnosis?.ProceduresAsStrings);
+									var cg_ = context.Operators.In<string>(LineCode?.CodeElement?.Value, ClaimWithDiagnosis?.ProceduresAsStrings);
 
 									return cg_;
 								};
@@ -1087,7 +1087,7 @@ public class NCQAClaims_1_0_0
 							var ag_ = context.Operators.FlattenList<Coding>(af_);
 							bool? ah_(Coding LineCode)
 							{
-								var az_ = context.Operators.InList<string>(LineCode?.CodeElement?.Value, ClaimWithProcedure?.ProceduresAsStrings);
+								var az_ = context.Operators.In<string>(LineCode?.CodeElement?.Value, ClaimWithProcedure?.ProceduresAsStrings);
 
 								return az_;
 							};
@@ -1122,7 +1122,7 @@ public class NCQAClaims_1_0_0
 							bool? at_(object HeaderCode)
 							{
 								var be_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-								var bf_ = context.Operators.InList<string>(be_?.Value, ClaimWithProcedure?.ProceduresAsStrings);
+								var bf_ = context.Operators.In<string>(be_?.Value, ClaimWithProcedure?.ProceduresAsStrings);
 
 								return bf_;
 							};
@@ -1177,7 +1177,7 @@ public class NCQAClaims_1_0_0
 										var ca_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(RightDiagnosis?.Diagnosis, "coding");
 										bool? cb_(Coding DiagnosisCode)
 										{
-											var cf_ = context.Operators.InList<string>(DiagnosisCode?.CodeElement?.Value, ClaimWithProcedure?.DiagnosesAsStrings);
+											var cf_ = context.Operators.In<string>(DiagnosisCode?.CodeElement?.Value, ClaimWithProcedure?.DiagnosesAsStrings);
 
 											return cf_;
 										};
@@ -1316,7 +1316,7 @@ public class NCQAClaims_1_0_0
 							var x_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(RightDiagnosis?.Diagnosis, "coding");
 							bool? y_(Coding DiagnosisCode)
 							{
-								var ac_ = context.Operators.InList<string>(DiagnosisCode?.CodeElement?.Value, ClaimWithDiagnosis?.DiagnosesAsStrings);
+								var ac_ = context.Operators.In<string>(DiagnosisCode?.CodeElement?.Value, ClaimWithDiagnosis?.DiagnosesAsStrings);
 
 								return ac_;
 							};
@@ -1435,7 +1435,7 @@ public class NCQAClaims_1_0_0
 				"complete",
 				"partial",
 			};
-			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
+			var j_ = context.Operators.In<string>(h_, (i_ as IEnumerable<string>));
 
 			return j_;
 		};
@@ -1558,7 +1558,7 @@ public class NCQAClaims_1_0_0
 			bool? n_(Coding ProductOrServiceCode)
 			{
 				var af_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-				var ag_ = context.Operators.CodeInList(af_, ProductOrServiceValueSet);
+				var ag_ = context.Operators.In<CqlCode>(af_, ProductOrServiceValueSet);
 
 				return ag_;
 			};
@@ -1593,7 +1593,7 @@ public class NCQAClaims_1_0_0
 			bool? z_(object DiagnosisCode)
 			{
 				var al_ = FHIRHelpers_4_0_001.ToCode((DiagnosisCode as Coding));
-				var am_ = context.Operators.CodeInList(al_, DiagnosisValueSet);
+				var am_ = context.Operators.In<CqlCode>(al_, DiagnosisValueSet);
 
 				return am_;
 			};
@@ -1611,7 +1611,7 @@ public class NCQAClaims_1_0_0
 				bool? aq_(Coding ProductOrServiceCode)
 				{
 					var at_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-					var au_ = context.Operators.CodeInList(at_, ProductOrServiceValueSet);
+					var au_ = context.Operators.In<CqlCode>(at_, ProductOrServiceValueSet);
 
 					return au_;
 				};
@@ -1869,7 +1869,7 @@ public class NCQAClaims_1_0_0
 			bool? n_(Coding ProductOrServiceCode)
 			{
 				var af_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-				var ag_ = context.Operators.CodeInList(af_, ProductOrServiceValueSet);
+				var ag_ = context.Operators.In<CqlCode>(af_, ProductOrServiceValueSet);
 
 				return ag_;
 			};
@@ -1904,7 +1904,7 @@ public class NCQAClaims_1_0_0
 			bool? z_(object DiagnosisCode)
 			{
 				var al_ = FHIRHelpers_4_0_001.ToCode((DiagnosisCode as Coding));
-				var am_ = context.Operators.CodeInList(al_, DiagnosisValueSet);
+				var am_ = context.Operators.In<CqlCode>(al_, DiagnosisValueSet);
 
 				return am_;
 			};
@@ -1926,7 +1926,7 @@ public class NCQAClaims_1_0_0
 						bool? as_(Coding ProductOrServiceCode)
 						{
 							var av_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-							var aw_ = context.Operators.CodeInList(av_, ProductOrServiceValueSet);
+							var aw_ = context.Operators.In<CqlCode>(av_, ProductOrServiceValueSet);
 
 							return aw_;
 						};
@@ -1947,7 +1947,7 @@ public class NCQAClaims_1_0_0
 						bool? ba_(Coding ProductOrServiceCode)
 						{
 							var bd_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-							var be_ = context.Operators.CodeInList(bd_, ProductOrServiceValueSet);
+							var be_ = context.Operators.In<CqlCode>(bd_, ProductOrServiceValueSet);
 
 							return be_;
 						};
@@ -2216,7 +2216,7 @@ public class NCQAClaims_1_0_0
 			bool? n_(Coding ProductOrServiceCode)
 			{
 				var s_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-				var t_ = context.Operators.CodeInList(s_, ProductOrServiceValueSet);
+				var t_ = context.Operators.In<CqlCode>(s_, ProductOrServiceValueSet);
 
 				return t_;
 			};
@@ -2233,7 +2233,7 @@ public class NCQAClaims_1_0_0
 				bool? x_(Coding ProductOrServiceCode)
 				{
 					var aa_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-					var ab_ = context.Operators.CodeInList(aa_, ProductOrServiceValueSet);
+					var ab_ = context.Operators.In<CqlCode>(aa_, ProductOrServiceValueSet);
 
 					return ab_;
 				};
@@ -3023,7 +3023,7 @@ public class NCQAClaims_1_0_0
 					@this?.CareTeamsProviderID;
 				var aw_ = context.Operators.SelectOrNull<Tuple_GIfhUVACThMQNGPGjYhYHEfGS, IEnumerable<string>>(au_, av_);
 				var ax_ = context.Operators.FlattenList<string>(aw_);
-				var ay_ = context.Operators.InList<string>(as_, ax_);
+				var ay_ = context.Operators.In<string>(as_, ax_);
 
 				return ay_;
 			};
@@ -3277,7 +3277,7 @@ public class NCQAClaims_1_0_0
 					@this?.ItemLocationID;
 				var ay_ = context.Operators.SelectOrNull<Tuple_FPCXihcEeChSjIUJHVXRcEXMI, IEnumerable<string>>(aw_, ax_);
 				var az_ = context.Operators.FlattenList<string>(ay_);
-				var ba_ = context.Operators.InList<string>(au_, az_);
+				var ba_ = context.Operators.In<string>(au_, az_);
 
 				return ba_;
 			};

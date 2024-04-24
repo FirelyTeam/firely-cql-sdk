@@ -866,7 +866,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			{
 				var k_ = context.Operators.Convert<CqlDateTime>(OrderMedication1?.AuthoredOnElement);
 				var l_ = this.Measurement_Period();
-				var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
+				var m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 				var n_ = context.Operators.GreaterOrEqual(OrderMedication1?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value, (int?)1);
 				var o_ = context.Operators.And(m_, n_);
 				var q_ = context.Operators.DateFrom(k_);
@@ -874,15 +874,15 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				var s_ = context.Operators.DateFrom(r_);
 				var t_ = context.Operators.Equivalent(q_, s_);
 				var u_ = context.Operators.Not(t_);
-				var x_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
+				var x_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 				var y_ = context.Operators.And(u_, x_);
-				var ab_ = context.Operators.InInterval<CqlDateTime>(r_, l_, null);
+				var ab_ = context.Operators.In<CqlDateTime>(r_, l_, null);
 				var ac_ = context.Operators.And(y_, ab_);
 				var ad_ = context.Operators.Or(o_, ac_);
 				var af_ = context.Operators.DateFrom(k_);
 				var ah_ = context.Operators.DateFrom(r_);
 				var ai_ = context.Operators.Equivalent(af_, ah_);
-				var al_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
+				var al_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 				var am_ = context.Operators.And(ai_, al_);
 				var an_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OrderMedication1);
 				var ao_ = context.Operators.Start(an_);
@@ -897,11 +897,11 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				var ax_ = context.Operators.And(am_, aw_);
 				var az_ = context.Operators.Start(an_);
 				var ba_ = context.Operators.ConvertDateToDateTime(az_);
-				var bc_ = context.Operators.InInterval<CqlDateTime>(ba_, l_, null);
+				var bc_ = context.Operators.In<CqlDateTime>(ba_, l_, null);
 				var bd_ = context.Operators.And(ax_, bc_);
 				var bf_ = context.Operators.Start(ar_);
 				var bg_ = context.Operators.ConvertDateToDateTime(bf_);
-				var bi_ = context.Operators.InInterval<CqlDateTime>(bg_, l_, null);
+				var bi_ = context.Operators.In<CqlDateTime>(bg_, l_, null);
 				var bj_ = context.Operators.And(bd_, bi_);
 				var bk_ = context.Operators.Or(ad_, bj_);
 
@@ -1510,7 +1510,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		{
 			var m_ = context.Operators.Convert<CqlDateTime>(AntipsychoticMedication?.AuthoredOnElement);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, null);
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
 
 			return o_;
 		};
@@ -1559,7 +1559,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		{
 			var m_ = context.Operators.Convert<CqlDateTime>(BenzodiazepineMedication?.AuthoredOnElement);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, null);
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
 
 			return o_;
 		};

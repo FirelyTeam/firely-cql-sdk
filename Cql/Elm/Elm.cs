@@ -3,6 +3,7 @@
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+// ReSharper disable InconsistentNaming
 
 namespace Hl7.Cql.Elm;
 
@@ -196,53 +197,148 @@ partial class ValueSetRef: IGetName { }
 #region GetDateTimePrecision
 
 /// <summary>
-/// Interface for getting the date tiem precision of an object.
+/// Interface for getting the precision of an object.
 /// </summary>
-internal interface IGetDateTimePrecision
+internal interface IGetPrecision
 {
-    /// <summary>
-    /// Gets the date time precision. Be sure to check <see cref="precisionSpecified"/> before using this property.
-    /// </summary>
-    DateTimePrecision precision { get; }
-
-    /// <summary>
-    /// Gets whether the date time precision is specified.
-    /// </summary>
-    bool precisionSpecified { get; }
+    object? precisionOrNull { get; }
 }
 
-internal static class IGetDateTimePrecisionExtensions
+partial class CalculateAgeAt : IGetPrecision
 {
-    public static DateTimePrecision? precisionOrNull(this IGetDateTimePrecision elementWithDateTimePrecision) =>
-        elementWithDateTimePrecision.precisionSpecified ? elementWithDateTimePrecision.precision : null;
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
 }
-
-partial class CalculateAgeAt : IGetDateTimePrecision {}
-partial class Ends : IGetDateTimePrecision {}
-partial class Starts : IGetDateTimePrecision {}
-partial class OverlapsAfter : IGetDateTimePrecision {}
-partial class OverlapsBefore : IGetDateTimePrecision {}
-partial class Overlaps : IGetDateTimePrecision {}
-partial class MeetsAfter : IGetDateTimePrecision {}
-partial class MeetsBefore : IGetDateTimePrecision {}
-partial class Meets : IGetDateTimePrecision {}
-partial class After : IGetDateTimePrecision {}
-partial class Before : IGetDateTimePrecision {}
-partial class ProperIncludedIn : IGetDateTimePrecision {}
-partial class ProperIncludes : IGetDateTimePrecision {}
-partial class IncludedIn : IGetDateTimePrecision {}
-partial class Includes : IGetDateTimePrecision { }
-partial class ProperIn : IGetDateTimePrecision { }
-partial class In : IGetDateTimePrecision { }
-partial class ProperContains : IGetDateTimePrecision { }
-partial class Contains : IGetDateTimePrecision { }
-partial class SameOrAfter : IGetDateTimePrecision { }
-partial class SameOrBefore : IGetDateTimePrecision { }
-partial class SameAs : IGetDateTimePrecision { }
-partial class DifferenceBetween : IGetDateTimePrecision { }
-partial class DurationBetween : IGetDateTimePrecision { }
-partial class CalculateAge : IGetDateTimePrecision { }
-partial class DateTimeComponentFrom : IGetDateTimePrecision { }
+partial class Ends : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class Starts : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class OverlapsAfter : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class OverlapsBefore : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class Overlaps : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class MeetsAfter : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class MeetsBefore : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class Meets : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class After : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class Before : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class ProperIncludedIn : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class ProperIncludes : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class IncludedIn : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class Includes : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class ProperIn : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class In : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class ProperContains : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class Contains : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class SameOrAfter : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class SameOrBefore : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class SameAs : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class DifferenceBetween : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class DurationBetween : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class CalculateAge : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class DateTimeComponentFrom : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precisionSpecified ? precision : null;
+}
+partial class Round : IGetPrecision
+{
+    /// <inheritdoc />
+    public object? precisionOrNull => precision;
+}
 
 #endregion
 
@@ -269,32 +365,57 @@ internal interface IGetOperands
     Arity arity { get; }
 }
 
+internal interface IUnaryOperator
+{
+    TypeSpecifier[] signature { get; }
+    Expression operand { get; }
+}
+
 partial class FunctionRef : IGetOperands
 {
-    Expression[] IGetOperands.operands => operand;
+    /// <inheritdoc />
+    public Expression[] operands => operand;
+    /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Nary;
 }
 partial class NaryExpression : IGetOperands
 {
-    Expression[] IGetOperands.operands => operand;
+    /// <inheritdoc />
+    public Expression[] operands => operand;
+    /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Nary;
 }
 partial class TernaryExpression : IGetOperands
 {
-    Expression[] IGetOperands.operands => operand;
+    /// <inheritdoc />
+    public Expression[] operands => operand;
+    /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Ternary;
 }
 partial class BinaryExpression : IGetOperands
 {
-    Expression[] IGetOperands.operands => operand;
+    /// <inheritdoc />
+    public Expression[] operands => operand;
+    /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Binary;
 }
 
-partial class UnaryExpression : IGetOperands
+partial class UnaryExpression : IGetOperands, IUnaryOperator
 {
-    Expression[] IGetOperands.operands => [operand];
+    /// <inheritdoc />
+    public Expression[] operands => [operand];
+    /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Unary;
 }
+
+partial class Round : IGetOperands, IUnaryOperator
+{
+    /// <inheritdoc />
+    public Expression[] operands => [operand];
+    /// <inheritdoc />
+    Arity IGetOperands.arity => Arity.Unary;
+}
+
 
 #endregion
 

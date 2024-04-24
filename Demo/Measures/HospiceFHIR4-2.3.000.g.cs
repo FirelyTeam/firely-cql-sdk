@@ -141,7 +141,7 @@ public class HospiceFHIR4_2_3_000
 			var ad_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((DischargeHospice?.Period as object));
 			var ae_ = context.Operators.End(ad_);
 			var af_ = this.Measurement_Period();
-			var ag_ = context.Operators.InInterval<CqlDateTime>(ae_, af_, null);
+			var ag_ = context.Operators.In<CqlDateTime>(ae_, af_, null);
 			var ah_ = context.Operators.And(ac_, ag_);
 
 			return ah_;
@@ -158,7 +158,7 @@ public class HospiceFHIR4_2_3_000
 				"active",
 				"completed",
 			};
-			var ak_ = context.Operators.InList<string>(ai_, (aj_ as IEnumerable<string>));
+			var ak_ = context.Operators.In<string>(ai_, (aj_ as IEnumerable<string>));
 			var al_ = context.Operators.Convert<string>(HospiceOrder?.IntentElement);
 			var am_ = context.Operators.Equal(al_, "order");
 			var an_ = context.Operators.And(ak_, am_);

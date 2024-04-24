@@ -861,16 +861,15 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var h_ = context.Operators.RetrieveByValueSet<Procedure>(g_, null);
 			bool? i_(Procedure EncounterSMMProcedures)
 			{
-				var ab_ = context.Operators.Convert<string>(EncounterSMMProcedures?.StatusElement?.Value);
-				var ac_ = context.Operators.Equal(ab_, "completed");
-				var ad_ = FHIRHelpers_4_3_000.ToValue(EncounterSMMProcedures?.Performed);
-				var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
-				var af_ = context.Operators.Start(ae_);
-				var ag_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				var ah_ = context.Operators.InInterval<CqlDateTime>(af_, ag_, "day");
-				var ai_ = context.Operators.And(ac_, ah_);
+				var ab_ = context.Operators.Equal(EncounterSMMProcedures?.StatusElement?.Value, "completed");
+				var ac_ = FHIRHelpers_4_3_000.ToValue(EncounterSMMProcedures?.Performed);
+				var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
+				var ae_ = context.Operators.Start(ad_);
+				var af_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
+				var ag_ = context.Operators.In<CqlDateTime>(ae_, af_, "day");
+				var ah_ = context.Operators.And(ab_, ag_);
 
-				return ai_;
+				return ah_;
 			};
 			var j_ = context.Operators.WhereOrNull<Procedure>(h_, i_);
 			var k_ = context.Operators.Exists<Procedure>(j_);
@@ -916,16 +915,15 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, null);
 			bool? f_(Procedure BloodTransfusion)
 			{
-				var j_ = context.Operators.Convert<string>(BloodTransfusion?.StatusElement?.Value);
-				var k_ = context.Operators.Equal(j_, "completed");
-				var l_ = FHIRHelpers_4_3_000.ToValue(BloodTransfusion?.Performed);
-				var m_ = QICoreCommon_2_0_000.toInterval(l_);
-				var n_ = context.Operators.Start(m_);
-				var o_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				var p_ = context.Operators.InInterval<CqlDateTime>(n_, o_, "day");
-				var q_ = context.Operators.And(k_, p_);
+				var j_ = context.Operators.Equal(BloodTransfusion?.StatusElement?.Value, "completed");
+				var k_ = FHIRHelpers_4_3_000.ToValue(BloodTransfusion?.Performed);
+				var l_ = QICoreCommon_2_0_000.toInterval(k_);
+				var m_ = context.Operators.Start(l_);
+				var n_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
+				var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
+				var p_ = context.Operators.And(j_, o_);
 
-				return q_;
+				return p_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure BloodTransfusion) => 
@@ -999,16 +997,15 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure COVIDRespiratoryProcedure)
 			{
-				var y_ = context.Operators.Convert<string>(COVIDRespiratoryProcedure?.StatusElement?.Value);
-				var z_ = context.Operators.Equal(y_, "completed");
-				var aa_ = FHIRHelpers_4_3_000.ToValue(COVIDRespiratoryProcedure?.Performed);
-				var ab_ = QICoreCommon_2_0_000.toInterval(aa_);
-				var ac_ = context.Operators.Start(ab_);
-				var ad_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				var ae_ = context.Operators.InInterval<CqlDateTime>(ac_, ad_, "day");
-				var af_ = context.Operators.And(z_, ae_);
+				var y_ = context.Operators.Equal(COVIDRespiratoryProcedure?.StatusElement?.Value, "completed");
+				var z_ = FHIRHelpers_4_3_000.ToValue(COVIDRespiratoryProcedure?.Performed);
+				var aa_ = QICoreCommon_2_0_000.toInterval(z_);
+				var ab_ = context.Operators.Start(aa_);
+				var ac_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
+				var ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
+				var ae_ = context.Operators.And(y_, ad_);
 
-				return af_;
+				return ae_;
 			};
 			var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
 			var p_ = context.Operators.Exists<Procedure>(o_);
@@ -1703,7 +1700,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		{
 			var h_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
 			var i_ = context.Operators.Interval((int?)20, (int?)36, (bool?)true, (bool?)true);
-			var j_ = context.Operators.InInterval<int?>(h_, i_, null);
+			var j_ = context.Operators.In<int?>(h_, i_, null);
 			var l_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
 			var m_ = context.Operators.Quantity((decimal?)20m, "weeks");
 			var n_ = context.Operators.GreaterOrEqual(l_, m_);
@@ -1754,7 +1751,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var y_ = context.Operators.Subtract(w_, x_);
 				var z_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var aa_ = context.Operators.Interval(y_, z_, (bool?)true, (bool?)false);
-				var ab_ = context.Operators.InInterval<CqlDateTime>(u_, aa_, null);
+				var ab_ = context.Operators.In<CqlDateTime>(u_, aa_, null);
 				var ac_ = context.Operators.Convert<string>(Hematocrit?.StatusElement?.Value);
 				var ad_ = new string[]
 				{
@@ -1762,7 +1759,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var ae_ = context.Operators.InList<string>(ac_, (ad_ as IEnumerable<string>));
+				var ae_ = context.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
 				var af_ = context.Operators.And(ab_, ae_);
 				var ag_ = FHIRHelpers_4_3_000.ToValue(Hematocrit?.Value);
 				var ah_ = context.Operators.Not((bool?)(ag_ is null));
@@ -1791,7 +1788,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ap_ = context.Operators.Subtract(an_, ao_);
 				var aq_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ar_ = context.Operators.Interval(ap_, aq_, (bool?)true, (bool?)false);
-				var as_ = context.Operators.InInterval<CqlDateTime>(al_, ar_, null);
+				var as_ = context.Operators.In<CqlDateTime>(al_, ar_, null);
 				var at_ = context.Operators.Convert<string>(Hematocrit?.StatusElement?.Value);
 				var au_ = new string[]
 				{
@@ -1799,7 +1796,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var av_ = context.Operators.InList<string>(at_, (au_ as IEnumerable<string>));
+				var av_ = context.Operators.In<string>(at_, (au_ as IEnumerable<string>));
 				var aw_ = context.Operators.And(as_, av_);
 				var ax_ = FHIRHelpers_4_3_000.ToValue(Hematocrit?.Value);
 				var ay_ = context.Operators.Not((bool?)(ax_ is null));
@@ -1852,7 +1849,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var y_ = context.Operators.Subtract(w_, x_);
 				var z_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var aa_ = context.Operators.Interval(y_, z_, (bool?)true, (bool?)false);
-				var ab_ = context.Operators.InInterval<CqlDateTime>(u_, aa_, null);
+				var ab_ = context.Operators.In<CqlDateTime>(u_, aa_, null);
 				var ac_ = context.Operators.Convert<string>(WBC?.StatusElement?.Value);
 				var ad_ = new string[]
 				{
@@ -1860,7 +1857,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var ae_ = context.Operators.InList<string>(ac_, (ad_ as IEnumerable<string>));
+				var ae_ = context.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
 				var af_ = context.Operators.And(ab_, ae_);
 				var ag_ = FHIRHelpers_4_3_000.ToValue(WBC?.Value);
 				var ah_ = context.Operators.Not((bool?)(ag_ is null));
@@ -1889,7 +1886,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ap_ = context.Operators.Subtract(an_, ao_);
 				var aq_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ar_ = context.Operators.Interval(ap_, aq_, (bool?)true, (bool?)false);
-				var as_ = context.Operators.InInterval<CqlDateTime>(al_, ar_, null);
+				var as_ = context.Operators.In<CqlDateTime>(al_, ar_, null);
 				var at_ = context.Operators.Convert<string>(WBC?.StatusElement?.Value);
 				var au_ = new string[]
 				{
@@ -1897,7 +1894,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var av_ = context.Operators.InList<string>(at_, (au_ as IEnumerable<string>));
+				var av_ = context.Operators.In<string>(at_, (au_ as IEnumerable<string>));
 				var aw_ = context.Operators.And(as_, av_);
 				var ax_ = FHIRHelpers_4_3_000.ToValue(WBC?.Value);
 				var ay_ = context.Operators.Not((bool?)(ax_ is null));
@@ -1950,7 +1947,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var z_ = context.Operators.Subtract(x_, y_);
 				var aa_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ab_ = context.Operators.Interval(z_, aa_, (bool?)true, (bool?)false);
-				var ac_ = context.Operators.InInterval<CqlDateTime>(v_, ab_, null);
+				var ac_ = context.Operators.In<CqlDateTime>(v_, ab_, null);
 				var ad_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var ae_ = new string[]
 				{
@@ -1958,7 +1955,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
+				var af_ = context.Operators.In<string>(ad_, (ae_ as IEnumerable<string>));
 				var ag_ = context.Operators.And(ac_, af_);
 
 				return ag_;
@@ -1985,7 +1982,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ao_ = context.Operators.Subtract(am_, an_);
 				var ap_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var aq_ = context.Operators.Interval(ao_, ap_, (bool?)true, (bool?)false);
-				var ar_ = context.Operators.InInterval<CqlDateTime>(ak_, aq_, null);
+				var ar_ = context.Operators.In<CqlDateTime>(ak_, aq_, null);
 				var as_ = context.Operators.Convert<string>(HeartRate?.StatusElement?.Value);
 				var at_ = new string[]
 				{
@@ -1993,7 +1990,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var au_ = context.Operators.InList<string>(as_, (at_ as IEnumerable<string>));
+				var au_ = context.Operators.In<string>(as_, (at_ as IEnumerable<string>));
 				var av_ = context.Operators.And(ar_, au_);
 
 				return av_;
@@ -2044,7 +2041,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var ab_ = context.Operators.Subtract(z_, aa_);
 				var ac_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ad_ = context.Operators.Interval(ab_, ac_, (bool?)true, (bool?)false);
-				var ae_ = context.Operators.InInterval<CqlDateTime>(x_, ad_, null);
+				var ae_ = context.Operators.In<CqlDateTime>(x_, ad_, null);
 				var af_ = context.Operators.Convert<string>(BP?.StatusElement?.Value);
 				var ag_ = new string[]
 				{
@@ -2052,7 +2049,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var ah_ = context.Operators.InList<string>(af_, (ag_ as IEnumerable<string>));
+				var ah_ = context.Operators.In<string>(af_, (ag_ as IEnumerable<string>));
 				var ai_ = context.Operators.And(ae_, ah_);
 
 				return ai_;
@@ -2094,7 +2091,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				var av_ = context.Operators.Subtract(at_, au_);
 				var aw_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				var ax_ = context.Operators.Interval(av_, aw_, (bool?)true, (bool?)false);
-				var ay_ = context.Operators.InInterval<CqlDateTime>(ar_, ax_, null);
+				var ay_ = context.Operators.In<CqlDateTime>(ar_, ax_, null);
 				var az_ = context.Operators.Convert<string>(BP?.StatusElement?.Value);
 				var ba_ = new string[]
 				{
@@ -2102,7 +2099,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				};
-				var bb_ = context.Operators.InList<string>(az_, (ba_ as IEnumerable<string>));
+				var bb_ = context.Operators.In<string>(az_, (ba_ as IEnumerable<string>));
 				var bc_ = context.Operators.And(ay_, bb_);
 
 				return bc_;

@@ -230,7 +230,7 @@ public class AlaraCTIQRFHIR_0_1_000
 				var l_ = QICoreCommon_2_0_000.ToInterval(k_);
 				var m_ = context.Operators.Start(l_);
 				var n_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounters?.Period);
-				var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, null);
+				var o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
 				var p_ = this.Measurement_Period();
 				var r_ = QICoreCommon_2_0_000.ToInterval(k_);
 				var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, null);

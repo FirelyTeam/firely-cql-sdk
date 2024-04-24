@@ -239,7 +239,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			var aa_ = context.Operators.Subtract(y_, z_);
 			var ac_ = context.Operators.End(r_);
 			var ad_ = context.Operators.Interval(aa_, ac_, (bool?)true, (bool?)true);
-			var ae_ = context.Operators.InInterval<CqlDateTime>(w_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(w_, ad_, "day");
 			var ag_ = context.Operators.End(r_);
 			var ah_ = context.Operators.Not((bool?)(ag_ is null));
 			var ai_ = context.Operators.And(ae_, ah_);
@@ -251,7 +251,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			var aq_ = context.Operators.End(r_);
 			var as_ = context.Operators.Add(aq_, z_);
 			var at_ = context.Operators.Interval(ao_, as_, (bool?)true, (bool?)true);
-			var au_ = context.Operators.InInterval<CqlDateTime>(am_, at_, "day");
+			var au_ = context.Operators.In<CqlDateTime>(am_, at_, "day");
 			var aw_ = context.Operators.End(r_);
 			var ax_ = context.Operators.Not((bool?)(aw_ is null));
 			var ay_ = context.Operators.And(au_, ax_);
@@ -443,7 +443,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 						var ag_ = context.Operators.Subtract(ae_, af_);
 						var ai_ = context.Operators.Start(ad_);
 						var aj_ = context.Operators.Interval(ag_, ai_, (bool?)true, (bool?)true);
-						var ak_ = context.Operators.InInterval<CqlDateTime>(ac_, aj_, "day");
+						var ak_ = context.Operators.In<CqlDateTime>(ac_, aj_, "day");
 						var am_ = context.Operators.Start(ad_);
 						var an_ = context.Operators.Not((bool?)(am_ is null));
 						var ao_ = context.Operators.And(ak_, an_);

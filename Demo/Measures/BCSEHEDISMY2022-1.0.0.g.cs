@@ -356,7 +356,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)52, (int?)74, (bool?)true, (bool?)true);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
 		var k_ = context.Operators.And(h_, j_);
 		var l_ = this.Enrolled_During_Participation_Period();
@@ -692,7 +692,7 @@ public class BCSEHEDISMY2022_1_0_0
 			var f_ = NCQAFHIRBase_1_0_0.Normalize_Interval(Mammogram?.Effective);
 			var g_ = context.Operators.End(f_);
 			var h_ = this.Participation_Period();
-			var i_ = context.Operators.InInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
 
 			return i_;
 		};

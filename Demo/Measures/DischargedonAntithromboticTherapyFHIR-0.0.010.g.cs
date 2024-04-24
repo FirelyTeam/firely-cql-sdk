@@ -297,7 +297,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				"completed",
 				"cancelled",
 			};
-			var w_ = context.Operators.InList<string>(u_, (v_ as IEnumerable<string>));
+			var w_ = context.Operators.In<string>(u_, (v_ as IEnumerable<string>));
 			var x_ = context.Operators.And(t_, w_);
 			var y_ = context.Operators.Convert<string>(NoAntithromboticDischarge?.IntentElement);
 			var z_ = context.Operators.Equal(y_, "order");
@@ -324,7 +324,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(NoDischargeAntithrombotic?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
@@ -375,7 +375,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				"active",
 				"completed",
 			};
-			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
+			var n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			var o_ = context.Operators.And(k_, n_);
 			var p_ = context.Operators.Convert<string>(Pharmacological?.IntentElement);
 			var q_ = context.Operators.Equal(p_, "order");
@@ -402,7 +402,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(DischargePharmacological?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
@@ -490,7 +490,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				"active",
 				"completed",
 			};
-			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
+			var n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			var o_ = context.Operators.And(k_, n_);
 			var p_ = context.Operators.Convert<string>(Antithrombotic?.IntentElement);
 			var q_ = context.Operators.Equal(p_, "order");
@@ -517,7 +517,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(DischargeAntithrombotic?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.InInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};

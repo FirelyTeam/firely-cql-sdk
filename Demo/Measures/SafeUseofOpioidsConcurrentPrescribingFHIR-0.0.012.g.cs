@@ -251,7 +251,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var ab_ = FHIRHelpers_4_0_001.ToDateTime(OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement);
 				var ac_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var ad_ = context.Operators.InInterval<CqlDateTime>(ab_, ac_, null);
+				var ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, null);
 				var ae_ = context.Operators.Convert<string>(OpioidOrBenzodiazepineDischargeMedication?.StatusElement);
 				var af_ = context.Operators.Equal(ae_, "active");
 				var ag_ = context.Operators.And(ad_, af_);
@@ -343,7 +343,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var r_ = FHIRHelpers_4_0_001.ToDateTime(Opioids?.AuthoredOnElement);
 				var s_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var t_ = context.Operators.InInterval<CqlDateTime>(r_, s_, null);
+				var t_ = context.Operators.In<CqlDateTime>(r_, s_, null);
 
 				return t_;
 			};
@@ -365,7 +365,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var aa_ = FHIRHelpers_4_0_001.ToDateTime(OpioidsDischarge?.AuthoredOnElement);
 				var ab_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var ac_ = context.Operators.InInterval<CqlDateTime>(aa_, ab_, null);
+				var ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, null);
 
 				return ac_;
 			};
@@ -385,7 +385,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var aj_ = FHIRHelpers_4_0_001.ToDateTime(BenzodiazepinesDischarge?.AuthoredOnElement);
 				var ak_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var al_ = context.Operators.InInterval<CqlDateTime>(aj_, ak_, null);
+				var al_ = context.Operators.In<CqlDateTime>(aj_, ak_, null);
 
 				return al_;
 			};
@@ -429,7 +429,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			{
 				var ae_ = FHIRHelpers_4_0_001.ToDateTime(PalliativeOrHospiceCareOrder?.AuthoredOnElement);
 				var af_ = FHIRHelpers_4_0_001.ToInterval(InpatientEncounter?.Period);
-				var ag_ = context.Operators.InInterval<CqlDateTime>(ae_, af_, null);
+				var ag_ = context.Operators.In<CqlDateTime>(ae_, af_, null);
 				var ah_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.IntentElement);
 				var ai_ = context.Operators.Equal(ah_, "order");
 				var aj_ = context.Operators.And(ag_, ai_);

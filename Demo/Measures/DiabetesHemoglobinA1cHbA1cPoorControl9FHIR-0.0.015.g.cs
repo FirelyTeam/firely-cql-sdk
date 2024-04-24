@@ -324,7 +324,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)18, (int?)75, (bool?)true, (bool?)false);
-		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var j_ = this.Telehealth_Services();
 		var k_ = context.Operators.ListUnion<Encounter>(i_, j_);
@@ -375,10 +375,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 				"amended",
 				"corrected",
 			};
-			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
+			var j_ = context.Operators.In<string>(h_, (i_ as IEnumerable<string>));
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(RecentHbA1c?.Effective);
 			var l_ = this.Measurement_Period();
-			var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
+			var m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 			var n_ = context.Operators.And(j_, m_);
 
 			return n_;
@@ -441,10 +441,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 				"amended",
 				"corrected",
 			};
-			var i_ = context.Operators.InList<string>(g_, (h_ as IEnumerable<string>));
+			var i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(NoHbA1c?.Effective);
 			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.InInterval<CqlDateTime>(j_, k_, null);
+			var l_ = context.Operators.In<CqlDateTime>(j_, k_, null);
 			var m_ = context.Operators.And(i_, l_);
 
 			return m_;

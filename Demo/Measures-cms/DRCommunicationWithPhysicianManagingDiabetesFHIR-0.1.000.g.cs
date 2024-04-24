@@ -514,7 +514,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				"corrected",
 				"preliminary",
 			};
-			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
+			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);
 
 			return v_;
@@ -557,7 +557,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
 				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.InInterval<CqlDateTime>(m_, r_, "day");
+				var s_ = context.Operators.In<CqlDateTime>(m_, r_, "day");
 				var t_ = context.Operators.And(p_, s_);
 
 				return t_;
@@ -601,7 +601,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
 				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.InInterval<CqlDateTime>(m_, r_, "day");
+				var s_ = context.Operators.In<CqlDateTime>(m_, r_, "day");
 				var t_ = context.Operators.And(p_, s_);
 
 				return t_;
@@ -645,7 +645,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
 				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.InInterval<CqlDateTime>(m_, r_, "day");
+				var s_ = context.Operators.In<CqlDateTime>(m_, r_, "day");
 				var t_ = context.Operators.And(p_, s_);
 
 				return t_;
@@ -713,13 +713,13 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((LevelOfSeverityNotCommunicated is DomainResource)
 						? ((LevelOfSeverityNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				object s_(Extension @this) => 
+				DataType s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
-				var u_ = context.Operators.SingletonFrom<object>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
+				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
+				var u_ = context.Operators.SingletonFrom<DataType>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>(u_);
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, null);
+				var x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
 
 				return x_;
 			};
@@ -772,13 +772,13 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((MacularEdemaAbsentNotCommunicated is DomainResource)
 						? ((MacularEdemaAbsentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				object s_(Extension @this) => 
+				DataType s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
-				var u_ = context.Operators.SingletonFrom<object>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
+				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
+				var u_ = context.Operators.SingletonFrom<DataType>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>(u_);
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, null);
+				var x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
 
 				return x_;
 			};
@@ -831,13 +831,13 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((MacularEdemaPresentNotCommunicated is DomainResource)
 						? ((MacularEdemaPresentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				object s_(Extension @this) => 
+				DataType s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
-				var u_ = context.Operators.SingletonFrom<object>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
+				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
+				var u_ = context.Operators.SingletonFrom<DataType>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>(u_);
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.InInterval<CqlDateTime>(v_, w_, null);
+				var x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
 
 				return x_;
 			};

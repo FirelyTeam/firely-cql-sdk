@@ -659,7 +659,7 @@ public class NCQAFHIRBase_1_0_0
 					var ad_ = context.Operators.Quantity((decimal?)30m, "days");
 					var ae_ = context.Operators.Add((z_ as CqlDate), ad_);
 					var af_ = context.Operators.Interval(ab_, ae_, (bool?)true, (bool?)true);
-					var ag_ = context.Operators.InInterval<CqlDate>(X, af_, null);
+					var ag_ = context.Operators.In<CqlDate>(X, af_, null);
 					var ah_ = context.Operators.Not(ag_);
 
 					return ah_;
@@ -695,7 +695,7 @@ public class NCQAFHIRBase_1_0_0
 								var aw_ = context.Operators.Quantity((decimal?)30m, "days");
 								var ax_ = context.Operators.Add((as_ as CqlDate), aw_);
 								var ay_ = context.Operators.Interval(au_, ax_, (bool?)true, (bool?)true);
-								var az_ = context.Operators.InInterval<CqlDate>(X, ay_, null);
+								var az_ = context.Operators.In<CqlDate>(X, ay_, null);
 								var ba_ = context.Operators.Not(az_);
 
 								return ba_;
@@ -731,7 +731,7 @@ public class NCQAFHIRBase_1_0_0
 											var bp_ = context.Operators.Quantity((decimal?)30m, "days");
 											var bq_ = context.Operators.Add((bl_ as CqlDate), bp_);
 											var br_ = context.Operators.Interval(bn_, bq_, (bool?)true, (bool?)true);
-											var bs_ = context.Operators.InInterval<CqlDate>(X, br_, null);
+											var bs_ = context.Operators.In<CqlDate>(X, br_, null);
 											var bt_ = context.Operators.Not(bs_);
 
 											return bt_;
@@ -767,7 +767,7 @@ public class NCQAFHIRBase_1_0_0
 														var ci_ = context.Operators.Quantity((decimal?)30m, "days");
 														var cj_ = context.Operators.Add((ce_ as CqlDate), ci_);
 														var ck_ = context.Operators.Interval(cg_, cj_, (bool?)true, (bool?)true);
-														var cl_ = context.Operators.InInterval<CqlDate>(X, ck_, null);
+														var cl_ = context.Operators.In<CqlDate>(X, ck_, null);
 														var cm_ = context.Operators.Not(cl_);
 
 														return cm_;
@@ -803,7 +803,7 @@ public class NCQAFHIRBase_1_0_0
 																	var db_ = context.Operators.Quantity((decimal?)30m, "days");
 																	var dc_ = context.Operators.Add((cx_ as CqlDate), db_);
 																	var dd_ = context.Operators.Interval(cz_, dc_, (bool?)true, (bool?)true);
-																	var de_ = context.Operators.InInterval<CqlDate>(X, dd_, null);
+																	var de_ = context.Operators.In<CqlDate>(X, dd_, null);
 																	var df_ = context.Operators.Not(de_);
 
 																	return df_;
@@ -839,7 +839,7 @@ public class NCQAFHIRBase_1_0_0
 																				var du_ = context.Operators.Quantity((decimal?)30m, "days");
 																				var dv_ = context.Operators.Add((dq_ as CqlDate), du_);
 																				var dw_ = context.Operators.Interval(ds_, dv_, (bool?)true, (bool?)true);
-																				var dx_ = context.Operators.InInterval<CqlDate>(X, dw_, null);
+																				var dx_ = context.Operators.In<CqlDate>(X, dw_, null);
 																				var dy_ = context.Operators.Not(dx_);
 
 																				return dy_;
@@ -875,7 +875,7 @@ public class NCQAFHIRBase_1_0_0
 																							var en_ = context.Operators.Quantity((decimal?)30m, "days");
 																							var eo_ = context.Operators.Add((ej_ as CqlDate), en_);
 																							var ep_ = context.Operators.Interval(el_, eo_, (bool?)true, (bool?)true);
-																							var eq_ = context.Operators.InInterval<CqlDate>(X, ep_, null);
+																							var eq_ = context.Operators.In<CqlDate>(X, ep_, null);
 																							var er_ = context.Operators.Not(eq_);
 
 																							return er_;
@@ -911,7 +911,7 @@ public class NCQAFHIRBase_1_0_0
 																										var fg_ = context.Operators.Quantity((decimal?)30m, "days");
 																										var fh_ = context.Operators.Add((fc_ as CqlDate), fg_);
 																										var fi_ = context.Operators.Interval(fe_, fh_, (bool?)true, (bool?)true);
-																										var fj_ = context.Operators.InInterval<CqlDate>(X, fi_, null);
+																										var fj_ = context.Operators.In<CqlDate>(X, fi_, null);
 																										var fk_ = context.Operators.Not(fj_);
 
 																										return fk_;
@@ -947,7 +947,7 @@ public class NCQAFHIRBase_1_0_0
 																													var fz_ = context.Operators.Quantity((decimal?)30m, "days");
 																													var ga_ = context.Operators.Add((fv_ as CqlDate), fz_);
 																													var gb_ = context.Operators.Interval(fx_, ga_, (bool?)true, (bool?)true);
-																													var gc_ = context.Operators.InInterval<CqlDate>(X, gb_, null);
+																													var gc_ = context.Operators.In<CqlDate>(X, gb_, null);
 																													var gd_ = context.Operators.Not(gc_);
 
 																													return gd_;
@@ -983,7 +983,7 @@ public class NCQAFHIRBase_1_0_0
 																																var gs_ = context.Operators.Quantity((decimal?)30m, "days");
 																																var gt_ = context.Operators.Add((go_ as CqlDate), gs_);
 																																var gu_ = context.Operators.Interval(gq_, gt_, (bool?)true, (bool?)true);
-																																var gv_ = context.Operators.InInterval<CqlDate>(X, gu_, null);
+																																var gv_ = context.Operators.In<CqlDate>(X, gu_, null);
 																																var gw_ = context.Operators.Not(gv_);
 
 																																return gw_;
@@ -1019,7 +1019,7 @@ public class NCQAFHIRBase_1_0_0
 																																			var hl_ = context.Operators.Quantity((decimal?)30m, "days");
 																																			var hm_ = context.Operators.Add((hh_ as CqlDate), hl_);
 																																			var hn_ = context.Operators.Interval(hj_, hm_, (bool?)true, (bool?)true);
-																																			var ho_ = context.Operators.InInterval<CqlDate>(X, hn_, null);
+																																			var ho_ = context.Operators.In<CqlDate>(X, hn_, null);
 																																			var hp_ = context.Operators.Not(ho_);
 
 																																			return hp_;
@@ -1055,7 +1055,7 @@ public class NCQAFHIRBase_1_0_0
 																																						var ia_ = context.Operators.Quantity((decimal?)30m, "days");
 																																						var ib_ = context.Operators.Add((hw_ as CqlDate), ia_);
 																																						var ic_ = context.Operators.Interval(hy_, ib_, (bool?)true, (bool?)true);
-																																						var id_ = context.Operators.InInterval<CqlDate>(X, ic_, null);
+																																						var id_ = context.Operators.In<CqlDate>(X, ic_, null);
 																																						var ie_ = context.Operators.Not(id_);
 
 																																						return ie_;

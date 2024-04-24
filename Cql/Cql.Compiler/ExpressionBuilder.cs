@@ -39,6 +39,8 @@ using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using Tuple = Hl7.Cql.Elm.Tuple;
 using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
+using UnaryExpression = Hl7.Cql.Elm.UnaryExpression;
+using Newtonsoft.Json.Linq;
 
 namespace Hl7.Cql.Compiler
 {
@@ -237,188 +239,128 @@ namespace Hl7.Cql.Compiler
                 var obj               => Expression.Constant(obj),
             };
 
-        private object[] GetBindingArgs(Element element)
+        private object?[] GetBindArgs(Element element)
         {
+            // ReSharper disable CoVariantArrayConversion
             return element switch
             {
                 //@formatter:off
-                Abs abs                    => BindCqlOperator(nameof(ICqlOperators.Abs), resultTypeHint, abs.operand),
-                Add add                    => BindCqlOperator(nameof(ICqlOperators.Add), resultTypeHint, add.operand[..2]),
-                After after                => BindCqlOperator(nameof(ICqlOperators.After), resultTypeHint, [.. after.operand[..2], after.precisionOrNull()]),
-                AllTrue alt                => BindCqlOperator(nameof(ICqlOperators.AllTrue), resultTypeHint, alt.source),
-                And and                    => BindCqlOperator(nameof(ICqlOperators.And), resultTypeHint, and.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#and
-                AnyTrue ate                => BindCqlOperator(nameof(ICqlOperators.AnyTrue), resultTypeHint, ate.source),
-                Avg avg                    => BindCqlOperator(nameof(ICqlOperators.Avg), resultTypeHint, avg.source),
-                Before before              => BindCqlOperator(nameof(ICqlOperators.Before), resultTypeHint, [.. before.operand[..2], before.precisionOrNull()]),
-                CalculateAge ca            => BindCqlOperator(nameof(ICqlOperators.CalculateAge), resultTypeHint, ca.operand, ca.precisionOrNull()),
-                CalculateAgeAt caa         => BindCqlOperator(nameof(ICqlOperators.CalculateAgeAt), resultTypeHint, [.. caa.operand[..2], caa.precisionOrNull()]),
-                Ceiling ceil               => BindCqlOperator(nameof(ICqlOperators.Ceiling), resultTypeHint, ceil.operand),
-                Combine com                => BindCqlOperator(nameof(ICqlOperators.Combine), resultTypeHint, com.source, com.separator),
-                Concatenate cctn           => BindCqlOperator(nameof(ICqlOperators.Concatenate), resultTypeHint, cctn.operand),
-                ConvertQuantity cqe        => BindCqlOperator(nameof(ICqlOperators.ConvertQuantity), resultTypeHint, cqe.operand[..2]),
-                ConvertsToBoolean ce       => throw new NotImplementedException().WithContext(this), //BindCqlOperator(CqlOperator.ConvertsToBoolean, resultTypeHint, ce.operand),
-                ConvertsToDate ce          => BindCqlOperator(nameof(ICqlOperators.ConvertsToDate), resultTypeHint, ce.operand),
-                ConvertsToDateTime ce      => BindCqlOperator(nameof(ICqlOperators.ConvertsToDateTime), resultTypeHint, ce.operand),
-                ConvertsToDecimal ce       => BindCqlOperator(nameof(ICqlOperators.ConvertsToDecimal), resultTypeHint, ce.operand),
-                ConvertsToInteger ce       => BindCqlOperator(nameof(ICqlOperators.ConvertsToInteger), resultTypeHint, ce.operand),
-                ConvertsToLong ce          => BindCqlOperator(nameof(ICqlOperators.ConvertsToLong), resultTypeHint, ce.operand),
-                ConvertsToQuantity ce      => BindCqlOperator(nameof(ICqlOperators.ConvertsToQuantity), resultTypeHint, ce.operand),
-                ConvertsToString ce        => BindCqlOperator(nameof(ICqlOperators.ConvertsToString), resultTypeHint, ce.operand),
-                ConvertsToTime ce          => BindCqlOperator(nameof(ICqlOperators.ConvertsToTime), resultTypeHint, ce.operand),
-                Count ce                   => BindCqlOperator(nameof(ICqlOperators.Count), resultTypeHint, ce.source),
-                Date d                     => BindCqlOperator(nameof(ICqlOperators.Date), resultTypeHint, d.year, d.month, d.day),
-                DateFrom dfe               => BindCqlOperator(nameof(ICqlOperators.DateFrom), resultTypeHint, dfe.operand!),
-                Descendents desc           => BindCqlOperator(nameof(ICqlOperators.Descendents), resultTypeHint, desc.source),
-                DateTime dt                => BindCqlOperator(nameof(ICqlOperators.DateTime), resultTypeHint, dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second, dt.millisecond, dt.timezoneOffset),
-                DateTimeComponentFrom dtcf => BindCqlOperator(nameof(ICqlOperators.DateTimeComponentFrom), resultTypeHint, dtcf.operand, dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
-                DifferenceBetween dbe      => BindCqlOperator(nameof(ICqlOperators.DifferenceBetween), resultTypeHint, [.. dbe.operand[..2], dbe.precisionOrNull()]),
-                Distinct distinct          => BindCqlOperator(nameof(ICqlOperators.Distinct), resultTypeHint, distinct.operand),
-                Divide divide              => BindCqlOperator(nameof(ICqlOperators.Divide), resultTypeHint, divide.operand[..2]),
-                DurationBetween dbe        => BindCqlOperator(nameof(ICqlOperators.DurationBetween), resultTypeHint, [.. dbe.operand[..2], dbe.precisionOrNull()]),
-                End e                      => BindCqlOperator(nameof(ICqlOperators.End), resultTypeHint, e.operand),
-                EndsWith e                 => BindCqlOperator(nameof(ICqlOperators.EndsWith), resultTypeHint, e.operand[..2]),
-                Equal eq                   => BindCqlOperator(nameof(ICqlOperators.Equal), resultTypeHint, eq.operand[..2]),
-                Exists ex                  => BindCqlOperator(nameof(ICqlOperators.Exists), resultTypeHint, ex.operand),
-                Exp exe                    => BindCqlOperator(nameof(ICqlOperators.Exp), resultTypeHint, exe.operand),
-                Expand expand              => BindCqlOperator(CqlOperator.Expand, resultTypeHint, expand.operand[..2]),
-                First first                => BindCqlOperator(nameof(ICqlOperators.First), resultTypeHint, first.source!),
-                Flatten fl                 => BindCqlOperator(CqlOperator.Flatten, resultTypeHint, fl.operand),
-                Floor floor                => BindCqlOperator(nameof(ICqlOperators.Floor), resultTypeHint, floor.operand),
-                GeometricMean gme          => BindCqlOperator(nameof(ICqlOperators.GeometricMean), resultTypeHint, gme.source),
-                Greater gtr                => BindCqlOperator(nameof(ICqlOperators.Greater), resultTypeHint, gtr.operand[..2]),
-                GreaterOrEqual gtre        => BindCqlOperator(nameof(ICqlOperators.GreaterOrEqual), resultTypeHint, gtre.operand[..2]),
-                HighBoundary hb            => BindCqlOperator(nameof(ICqlOperators.HighBoundary), resultTypeHint, hb.operand[..2]),
-                Implies implies            => BindCqlOperator(nameof(ICqlOperators.Implies), resultTypeHint, implies.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#implies
-                Indexer idx                => BindCqlOperator(nameof(ICqlOperators.Indexer), resultTypeHint, idx.operand),
-                Interval ie                => BindCqlOperator(nameof(ICqlOperators.Interval), null, ie.low, ie.high, (object)ie.lowClosedExpression ?? ie.lowClosed, (object)ie.highClosedExpression ?? ie.highClosed),
-                IsFalse isn                => BindCqlOperator(nameof(ICqlOperators.IsFalse), resultTypeHint, isn.operand),
-                IsTrue isn                 => BindCqlOperator(nameof(ICqlOperators.IsTrue), resultTypeHint, isn.operand),
-                Last last                  => BindCqlOperator(nameof(ICqlOperators.Last), resultTypeHint, last.source),
-                LastPositionOf lpo         => BindCqlOperator(nameof(ICqlOperators.LastPositionOf), resultTypeHint, lpo.@string, lpo.pattern!),
-                Length len                 => BindCqlOperator(nameof(ICqlOperators.Length), resultTypeHint, len.operand),
-                Less less                  => BindCqlOperator(nameof(ICqlOperators.Less), resultTypeHint, less.operand[..2]),
-                LessOrEqual lesse          => BindCqlOperator(nameof(ICqlOperators.LessOrEqual), resultTypeHint, lesse.operand[..2]),
-                Ln ln                      => BindCqlOperator(nameof(ICqlOperators.Ln), resultTypeHint, ln.operand),
-                Log log                    => BindCqlOperator(nameof(ICqlOperators.Log), resultTypeHint, log.operand[..2]),
-                LowBoundary lb             => BindCqlOperator(nameof(ICqlOperators.LowBoundary), resultTypeHint, lb.operand[..2]),
-                Lower e                    => BindCqlOperator(nameof(ICqlOperators.Lower), resultTypeHint, e.operand),
-                Matches e                  => BindCqlOperator(nameof(ICqlOperators.Matches), resultTypeHint, e.operand[..2]),
-                Max max                    => BindCqlOperator(nameof(ICqlOperators.Max), resultTypeHint, max.source),
-                MaxValue max               => BindCqlOperator(CqlOperator.MaxValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
-                Median med                 => BindCqlOperator(nameof(ICqlOperators.Median), resultTypeHint, med.source),
-                Min min                    => BindCqlOperator(nameof(ICqlOperators.Min), resultTypeHint, min.source),
-                MinValue min               => BindCqlOperator(CqlOperator.MinValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
-                Mode mode                  => BindCqlOperator(nameof(ICqlOperators.Mode), resultTypeHint, mode.source),
-                Modulo mod                 => BindCqlOperator(nameof(ICqlOperators.Modulo), resultTypeHint, mod.operand[..2]),
-                Multiply mul               => BindCqlOperator(nameof(ICqlOperators.Multiply), resultTypeHint, mul.operand[..2]),
-                NotEqual ne                => BindCqlOperator(nameof(ICqlOperators.Not), resultTypeHint, BindCqlOperator(CqlOperator.Equal, resultTypeHint, ne.operand)),
-                Not not                    => BindCqlOperator(nameof(ICqlOperators.Not), resultTypeHint, not.operand),
-                Now now                    => BindCqlOperator(nameof(ICqlOperators.Now), resultTypeHint),
-                Or or                      => BindCqlOperator(nameof(ICqlOperators.Or), resultTypeHint, or.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#or
-                PointFrom pf               => BindCqlOperator(nameof(ICqlOperators.PointFrom), resultTypeHint, pf.operand),
-                PopulationStdDev pstd      => BindCqlOperator(nameof(ICqlOperators.PopulationStdDev), resultTypeHint, pstd.source),
-                PopulationVariance pvar    => BindCqlOperator(nameof(ICqlOperators.PopulationVariance), resultTypeHint, pvar.source),
-                PositionOf po              => BindCqlOperator(nameof(ICqlOperators.PositionOf), resultTypeHint, po.pattern, po.@string),
-                Power pow                  => BindCqlOperator(nameof(ICqlOperators.Power), resultTypeHint, pow.operand[..2]),
-                Precision pre              => BindCqlOperator(nameof(ICqlOperators.Precision), resultTypeHint, pre.operand),
-                Predecessor prd            => BindCqlOperator(nameof(ICqlOperators.Predecessor), resultTypeHint, prd.operand),
-                Product prod               => BindCqlOperator(nameof(ICqlOperators.Product), resultTypeHint, prod.source),
-                Quantity qua               => BindCqlOperator(nameof(ICqlOperators.Quantity), resultTypeHint, qua.value, qua.unit), // http://unitsofmeasure.org
-                Ratio re                   => BindCqlOperator(CqlOperator.Ratio, resultTypeHint, re.numerator, re.denominator),
-                ReplaceMatches e           => BindCqlOperator(nameof(ICqlOperators.ReplaceMatches), null, e.operand),
-                Round rnd                  => BindCqlOperator(nameof(ICqlOperators.Round), resultTypeHint, rnd.operand, rnd.precision),
-                SingletonFrom sf           => BindCqlOperator(nameof(ICqlOperators.SingletonFrom), resultTypeHint, sf.operand),
-                Split split                => BindCqlOperator(nameof(ICqlOperators.Split), null, split.stringToSplit, split.separator),
-                Start start                => BindCqlOperator(nameof(ICqlOperators.Start), resultTypeHint, start.operand),
-                StartsWith e               => BindCqlOperator(nameof(ICqlOperators.StartsWith), resultTypeHint, e.operand[..2]),
-                StdDev stddev              => BindCqlOperator(nameof(ICqlOperators.StdDev), resultTypeHint, stddev.source),
-                Substring e                => BindCqlOperator(nameof(ICqlOperators.Substring), null, e.stringToSub, e.startIndex, e.length),
-                Subtract sub               => BindCqlOperator(nameof(ICqlOperators.Subtract), resultTypeHint, sub.operand[..2]),
-                Successor suc              => BindCqlOperator(nameof(ICqlOperators.Successor), resultTypeHint, suc.operand),
-                Sum sum                    => BindCqlOperator(nameof(ICqlOperators.Sum), resultTypeHint, sum.source),
-                Time time                  => BindCqlOperator(nameof(ICqlOperators.Time), resultTypeHint, time.hour, time.minute, time.second, time.millisecond),
-                TimeOfDay tod              => BindCqlOperator(nameof(ICqlOperators.TimeOfDay), resultTypeHint),
-                TimezoneOffsetFrom tofe    => BindCqlOperator(nameof(ICqlOperators.TimezoneOffsetFrom), resultTypeHint, tofe.operand),
-                Today today                => BindCqlOperator(nameof(ICqlOperators.Today), resultTypeHint),
-                ToList tle                 => BindCqlOperator(CqlOperator.ToList, resultTypeHint, tle.operand!),
-                Truncate trunc             => BindCqlOperator(nameof(ICqlOperators.Truncate), resultTypeHint, trunc.operand),
-                TruncatedDivide div        => BindCqlOperator(nameof(ICqlOperators.TruncatedDivide), resultTypeHint, div.operand[..2]),
-                Upper e                    => BindCqlOperator(nameof(ICqlOperators.Upper), resultTypeHint, e.operand),
-                Variance variance          => BindCqlOperator(nameof(ICqlOperators.Variance), resultTypeHint, variance.source),
-                Width width                => BindCqlOperator(CqlOperator.Width, resultTypeHint, width.operand),
-                Xor xor                    => BindCqlOperator(nameof(ICqlOperators.Xor), resultTypeHint, xor.operand[..2]),
-                IndexOf io                 => BindCqlOperator(nameof(ICqlOperators.PositionOf), resultTypeHint, io.source, io.element),
-                Slice slice                => BindCqlOperator(nameof(ICqlOperators.Slice), null, slice.source, slice.startIndex, slice.endIndex),
-                Negate neg                 => neg.operand is Literal literal
-                                                  ? NegateLiteral(neg, literal)
-                                                  : ChangeType(BindCqlOperator(CqlOperator.Negate, resultTypeHint, neg.operand), neg.resultTypeSpecifier),
-                As @as               => As(@as),
-                Case ce              => Case(ce),
-                ToTime e             => ChangeType(e.operand!, _typeResolver.TimeType),
-                ToBoolean e          => ChangeType(e.operand!, typeof(bool?)),
-                ToString e           => ChangeType(e.operand!, typeof(string)),
-                ToConcept tc         => ChangeType(tc.operand!, _typeResolver.ConceptType),
-                ToDate tde           => ChangeType(tde.operand!, _typeResolver.DateType),
-                ToDecimal tde        => ChangeType(tde.operand!, typeof(decimal?)),
-                ToInteger tde        => ChangeType(tde.operand!, typeof(int?)),
-                ToDateTime tdte      => ChangeType(tdte.operand!, _typeResolver.DateTimeType),
-                ToLong toLong        => ChangeType(toLong.operand!, typeof(long?)),
-                ToQuantity tq        => ChangeType(tq.operand!, _typeResolver.QuantityType),
-                Coalesce cle         => Coalesce(cle),
-                CodeRef cre          => CodeRef(cre),
-                CodeSystemRef csr    => CodeSystemRef(csr),
-                Collapse col         => Collapse(col),
-                ConceptRef cr        => ConceptRef(cr),
-                Contains ct          => Contains(ct),
-                ExpandValueSet evs   => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(evs.operand!)),
-                Ends e               => Ends(e),
-                Equivalent eqv       => Equivalent(eqv),
-                Except ex            => Except(ex),
-                FunctionRef fre      => FunctionRef(fre),
-                ExpressionRef ere    => ExpressionRef(ere),
-                AliasRef ar          => GetScopeExpression(ar.name!),
-                QueryLetRef qlre     => GetScopeExpression(qlre.name!),
-                IdentifierRef ire    => IdentifierRef(ire),
-                If @if               => If(@if),
-                In @in               => In(@in),
-                IncludedIn ii        => IncludedIn(ii),
-                Includes inc         => Includes(inc),
-                Instance ine         => Instance(ine),
-                Intersect ise        => Intersect(ise),
-                Is @is               => Is(@is),
-                IsNull isn           => IsNull(isn),
-                List list            => List(list),
-                Literal lit          => Literal(lit),
-                Meets meets          => Meets(meets),
-                MeetsAfter meets     => MeetsAfter(meets),
-                MeetsBefore meets    => MeetsBefore(meets),
-                Message msg          => Message(msg),
-                Null @null           => NullExpression.ForType(TypeFor(@null)!),
-                OperandRef ore       => OperandRef(ore),
-                Overlaps ole         => Overlaps(ole),
-                OverlapsAfter ola    => OverlapsAfter(ola),
-                OverlapsBefore olb   => OverlapsBefore(olb),
-                ParameterRef pre     => ParameterRef(pre),
-                AnyInValueSet avs    => ProcessValueSet(avs.valueset, avs.codes, isList: true),
-                InValueSet inv       => ProcessValueSet(inv.valueset!, inv.code, isList: false),
-                ProperContains pc    => ProperContains(pc),
-                ProperIn pi          => ProperIn(pi),
-                ProperIncludedIn pie => ProperIncludedIn(pie),
-                ProperIncludes pi    => ProperIncludes(pi),
-                Property pe          => Property(pe),
-                Query qe             => Query(qe),
-                Retrieve re          => Retrieve(re),
-                SameAs sa            => SameAs(sa),
-                SameOrAfter soa      => SameOrAfter(soa),
-                SameOrBefore sob     => SameOrBefore(sob),
-                Starts starts        => Starts(starts),
-                Tuple tu             => Tuple(tu),
-                Union ue             => Union(ue),
-                ValueSetRef vsre     => ValueSetRef(vsre),
+                Abs or
+                Ceiling or
+                ConvertsToBoolean or
+                ConvertsToDate or
+                ConvertsToDateTime or
+                ConvertsToDecimal or
+                ConvertsToInteger or
+                ConvertsToLong or
+                ConvertsToQuantity or
+                ConvertsToString or
+                ConvertsToTime or
+                DateFrom or
+                Distinct or
+                End or
+                Exists or
+                Exp or
+                Flatten or
+                Floor or
+                IsFalse or
+                IsTrue or
+                Length or
+                Ln or
+                Lower or
+                Not or
+                PointFrom or
+                Precision or
+                Predecessor or
+                SingletonFrom or
+                Start or
+                Successor or
+                TimezoneOffsetFrom or
+                ToList or
+                Truncate or
+                Upper or
+                Width or
+                Negate or
+                Add or
+                And or
+                Concatenate or
+                ConvertQuantity or
+                Divide or
+                EndsWith or
+                Equal or
+                Expand or
+                Greater or
+                GreaterOrEqual or
+                HighBoundary or
+                Implies or
+                Indexer or
+                Less or
+                LessOrEqual or
+                Log or
+                LowBoundary or
+                Matches or
+                Modulo or
+                Multiply or
+                NotEqual or
+                Or or
+                Power or
+                ReplaceMatches or
+                StartsWith or
+                Subtract or
+                TruncatedDivide or
+                Xor => ((IGetOperands)element).operands,
 
-                _                          => throw this.NewExpressionBuildingException($"Expression {element.GetType().FullName} is not implemented.")
+                CalculateAge or
+                DateTimeComponentFrom or
+                After or
+                Before or
+                CalculateAgeAt or
+                DifferenceBetween or
+                DurationBetween or
+                Round => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+
+                AllTrue or
+                AnyTrue or
+                Avg or
+                Descendents or
+                Count or
+                First or
+                GeometricMean or
+                Last or
+                Max or
+                Median or
+                Min or
+                Mode or
+                PopulationStdDev or
+                PopulationVariance or
+                Product or
+                StdDev or
+                Sum or
+                Variance => [((IGetSource)element).source],
+
+                Now or
+                TimeOfDay or
+                Today => [],
+
+                Combine e                  => [((IGetSource)element).source, e.separator],
+                IndexOf e                  => [((IGetSource)element).source, e.element],
+                Slice e                    => [((IGetSource)element).source, e.startIndex, e.endIndex],
+                Date e                     => [e.year, e.month, e.day],
+                DateTime e                 => [e.year, e.month, e.day, e.hour, e.minute, e.second, e.millisecond, e.timezoneOffset],
+                Interval e                 => [e.low, e.high, (object)e.lowClosedExpression ?? e.lowClosed, (object)e.highClosedExpression ?? e.highClosed],
+                LastPositionOf e           => [e.@string, e.pattern],
+                MaxValue e                 => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
+                MinValue e                 => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
+                PositionOf e               => [e.pattern, e.@string],
+                Quantity e                 => [e.value, e.unit], // http://unitsofmeasure.org
+                Ratio e                    => [e.numerator, e.denominator],
+                Split e                    => [e.stringToSplit, e.separator],
+                Substring e                => [e.stringToSub, e.startIndex, e.length],
+                Time e                     => [e.hour, e.minute, e.second, e.millisecond],
+                _                  => throw this.NewExpressionBuildingException($"Gannot get arguments for element {element.GetType().FullName}.")
                 //@formatter:on
             };
+            // ReSharper restore CoVariantArrayConversion
         }
 
         private Expression TranslateElement(Element element) =>
@@ -431,181 +373,178 @@ namespace Hl7.Cql.Compiler
                     Expression? expression = element switch
                     {
                         //@formatter:off
-                        Abs abs                    => BindCqlOperator(nameof(ICqlOperators.Abs), resultTypeHint, abs.operand),
-                        Add add                    => BindCqlOperator(nameof(ICqlOperators.Add), resultTypeHint, add.operand[..2]),
-                        After after                => BindCqlOperator(nameof(ICqlOperators.After), resultTypeHint, [.. after.operand[..2], after.precisionOrNull()]),
-                        AllTrue alt                => BindCqlOperator(nameof(ICqlOperators.AllTrue), resultTypeHint, alt.source),
-                        And and                    => BindCqlOperator(nameof(ICqlOperators.And), resultTypeHint, and.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#and
-                        AnyTrue ate                => BindCqlOperator(nameof(ICqlOperators.AnyTrue), resultTypeHint, ate.source),
-                        Avg avg                    => BindCqlOperator(nameof(ICqlOperators.Avg), resultTypeHint, avg.source),
-                        Before before              => BindCqlOperator(nameof(ICqlOperators.Before), resultTypeHint, [.. before.operand[..2], before.precisionOrNull()]),
-                        CalculateAge ca            => BindCqlOperator(nameof(ICqlOperators.CalculateAge), resultTypeHint, ca.operand, ca.precisionOrNull()),
-                        CalculateAgeAt caa         => BindCqlOperator(nameof(ICqlOperators.CalculateAgeAt), resultTypeHint, [.. caa.operand[..2], caa.precisionOrNull()]),
-                        Ceiling ceil               => BindCqlOperator(nameof(ICqlOperators.Ceiling), resultTypeHint, ceil.operand),
-                        Combine com                => BindCqlOperator(nameof(ICqlOperators.Combine), resultTypeHint, com.source, com.separator),
-                        Concatenate cctn           => BindCqlOperator(nameof(ICqlOperators.Concatenate), resultTypeHint, cctn.operand),
-                        ConvertQuantity cqe        => BindCqlOperator(nameof(ICqlOperators.ConvertQuantity), resultTypeHint, cqe.operand[..2]),
-                        ConvertsToBoolean ce       => throw new NotImplementedException().WithContext(this), //BindCqlOperator(CqlOperator.ConvertsToBoolean, resultTypeHint, ce.operand),
-                        ConvertsToDate ce          => BindCqlOperator(nameof(ICqlOperators.ConvertsToDate), resultTypeHint, ce.operand),
-                        ConvertsToDateTime ce      => BindCqlOperator(nameof(ICqlOperators.ConvertsToDateTime), resultTypeHint, ce.operand),
-                        ConvertsToDecimal ce       => BindCqlOperator(nameof(ICqlOperators.ConvertsToDecimal), resultTypeHint, ce.operand),
-                        ConvertsToInteger ce       => BindCqlOperator(nameof(ICqlOperators.ConvertsToInteger), resultTypeHint, ce.operand),
-                        ConvertsToLong ce          => BindCqlOperator(nameof(ICqlOperators.ConvertsToLong), resultTypeHint, ce.operand),
-                        ConvertsToQuantity ce      => BindCqlOperator(nameof(ICqlOperators.ConvertsToQuantity), resultTypeHint, ce.operand),
-                        ConvertsToString ce        => BindCqlOperator(nameof(ICqlOperators.ConvertsToString), resultTypeHint, ce.operand),
-                        ConvertsToTime ce          => BindCqlOperator(nameof(ICqlOperators.ConvertsToTime), resultTypeHint, ce.operand),
-                        Count ce                   => BindCqlOperator(nameof(ICqlOperators.Count), resultTypeHint, ce.source),
-                        Date d                     => BindCqlOperator(nameof(ICqlOperators.Date), resultTypeHint, d.year, d.month, d.day),
-                        DateFrom dfe               => BindCqlOperator(nameof(ICqlOperators.DateFrom), resultTypeHint, dfe.operand!),
-                        Descendents desc           => BindCqlOperator(nameof(ICqlOperators.Descendents), resultTypeHint, desc.source),
-                        DateTime dt                => BindCqlOperator(nameof(ICqlOperators.DateTime), resultTypeHint, dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second, dt.millisecond, dt.timezoneOffset),
-                        DateTimeComponentFrom dtcf => BindCqlOperator(nameof(ICqlOperators.DateTimeComponentFrom), resultTypeHint, dtcf.operand, dtcf.precisionOrNull()), // https://cql.hl7.org/02-authorsguide.html#datetime-operators
-                        DifferenceBetween dbe      => BindCqlOperator(nameof(ICqlOperators.DifferenceBetween), resultTypeHint, [.. dbe.operand[..2], dbe.precisionOrNull()]),
-                        Distinct distinct          => BindCqlOperator(nameof(ICqlOperators.Distinct), resultTypeHint, distinct.operand),
-                        Divide divide              => BindCqlOperator(nameof(ICqlOperators.Divide), resultTypeHint, divide.operand[..2]),
-                        DurationBetween dbe        => BindCqlOperator(nameof(ICqlOperators.DurationBetween), resultTypeHint, [.. dbe.operand[..2], dbe.precisionOrNull()]),
-                        End e                      => BindCqlOperator(nameof(ICqlOperators.End), resultTypeHint, e.operand),
-                        EndsWith e                 => BindCqlOperator(nameof(ICqlOperators.EndsWith), resultTypeHint, e.operand[..2]),
-                        Equal eq                   => BindCqlOperator(nameof(ICqlOperators.Equal), resultTypeHint, eq.operand[..2]),
-                        Exists ex                  => BindCqlOperator(nameof(ICqlOperators.Exists), resultTypeHint, ex.operand),
-                        Exp exe                    => BindCqlOperator(nameof(ICqlOperators.Exp), resultTypeHint, exe.operand),
-                        Expand expand              => BindCqlOperator(CqlOperator.Expand, resultTypeHint, expand.operand[..2]),
-                        First first                => BindCqlOperator(nameof(ICqlOperators.First), resultTypeHint, first.source!),
-                        Flatten fl                 => BindCqlOperator(CqlOperator.Flatten, resultTypeHint, fl.operand),
-                        Floor floor                => BindCqlOperator(nameof(ICqlOperators.Floor), resultTypeHint, floor.operand),
-                        GeometricMean gme          => BindCqlOperator(nameof(ICqlOperators.GeometricMean), resultTypeHint, gme.source),
-                        Greater gtr                => BindCqlOperator(nameof(ICqlOperators.Greater), resultTypeHint, gtr.operand[..2]),
-                        GreaterOrEqual gtre        => BindCqlOperator(nameof(ICqlOperators.GreaterOrEqual), resultTypeHint, gtre.operand[..2]),
-                        HighBoundary hb            => BindCqlOperator(nameof(ICqlOperators.HighBoundary), resultTypeHint, hb.operand[..2]),
-                        Implies implies            => BindCqlOperator(nameof(ICqlOperators.Implies), resultTypeHint, implies.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#implies
-                        Indexer idx                => BindCqlOperator(nameof(ICqlOperators.Indexer), resultTypeHint, idx.operand),
-                        Interval ie                => BindCqlOperator(nameof(ICqlOperators.Interval), null, ie.low, ie.high, (object)ie.lowClosedExpression ?? ie.lowClosed, (object)ie.highClosedExpression ?? ie.highClosed),
-                        IsFalse isn                => BindCqlOperator(nameof(ICqlOperators.IsFalse), resultTypeHint, isn.operand),
-                        IsTrue isn                 => BindCqlOperator(nameof(ICqlOperators.IsTrue), resultTypeHint, isn.operand),
-                        Last last                  => BindCqlOperator(nameof(ICqlOperators.Last), resultTypeHint, last.source),
-                        LastPositionOf lpo         => BindCqlOperator(nameof(ICqlOperators.LastPositionOf), resultTypeHint, lpo.@string, lpo.pattern!),
-                        Length len                 => BindCqlOperator(nameof(ICqlOperators.Length), resultTypeHint, len.operand),
-                        Less less                  => BindCqlOperator(nameof(ICqlOperators.Less), resultTypeHint, less.operand[..2]),
-                        LessOrEqual lesse          => BindCqlOperator(nameof(ICqlOperators.LessOrEqual), resultTypeHint, lesse.operand[..2]),
-                        Ln ln                      => BindCqlOperator(nameof(ICqlOperators.Ln), resultTypeHint, ln.operand),
-                        Log log                    => BindCqlOperator(nameof(ICqlOperators.Log), resultTypeHint, log.operand[..2]),
-                        LowBoundary lb             => BindCqlOperator(nameof(ICqlOperators.LowBoundary), resultTypeHint, lb.operand[..2]),
-                        Lower e                    => BindCqlOperator(nameof(ICqlOperators.Lower), resultTypeHint, e.operand),
-                        Matches e                  => BindCqlOperator(nameof(ICqlOperators.Matches), resultTypeHint, e.operand[..2]),
-                        Max max                    => BindCqlOperator(nameof(ICqlOperators.Max), resultTypeHint, max.source),
-                        MaxValue max               => BindCqlOperator(CqlOperator.MaxValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(max.valueType!.Name), typeof(Type))),
-                        Median med                 => BindCqlOperator(nameof(ICqlOperators.Median), resultTypeHint, med.source),
-                        Min min                    => BindCqlOperator(nameof(ICqlOperators.Min), resultTypeHint, min.source),
-                        MinValue min               => BindCqlOperator(CqlOperator.MinValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(min.valueType!.Name), typeof(Type))),
-                        Mode mode                  => BindCqlOperator(nameof(ICqlOperators.Mode), resultTypeHint, mode.source),
-                        Modulo mod                 => BindCqlOperator(nameof(ICqlOperators.Modulo), resultTypeHint, mod.operand[..2]),
-                        Multiply mul               => BindCqlOperator(nameof(ICqlOperators.Multiply), resultTypeHint, mul.operand[..2]),
-                        NotEqual ne                => BindCqlOperator(nameof(ICqlOperators.Not), resultTypeHint, BindCqlOperator(CqlOperator.Equal, resultTypeHint, ne.operand)),
-                        Not not                    => BindCqlOperator(nameof(ICqlOperators.Not), resultTypeHint, not.operand),
-                        Now now                    => BindCqlOperator(nameof(ICqlOperators.Now), resultTypeHint),
-                        Or or                      => BindCqlOperator(nameof(ICqlOperators.Or), resultTypeHint, or.operand[..2]), // https://cql.hl7.org/09-b-cqlreference.html#or
-                        PointFrom pf               => BindCqlOperator(nameof(ICqlOperators.PointFrom), resultTypeHint, pf.operand),
-                        PopulationStdDev pstd      => BindCqlOperator(nameof(ICqlOperators.PopulationStdDev), resultTypeHint, pstd.source),
-                        PopulationVariance pvar    => BindCqlOperator(nameof(ICqlOperators.PopulationVariance), resultTypeHint, pvar.source),
-                        PositionOf po              => BindCqlOperator(nameof(ICqlOperators.PositionOf), resultTypeHint, po.pattern, po.@string),
-                        Power pow                  => BindCqlOperator(nameof(ICqlOperators.Power), resultTypeHint, pow.operand[..2]),
-                        Precision pre              => BindCqlOperator(nameof(ICqlOperators.Precision), resultTypeHint, pre.operand),
-                        Predecessor prd            => BindCqlOperator(nameof(ICqlOperators.Predecessor), resultTypeHint, prd.operand),
-                        Product prod               => BindCqlOperator(nameof(ICqlOperators.Product), resultTypeHint, prod.source),
-                        Quantity qua               => BindCqlOperator(nameof(ICqlOperators.Quantity), resultTypeHint, qua.value, qua.unit), // http://unitsofmeasure.org
-                        Ratio re                   => BindCqlOperator(CqlOperator.Ratio, resultTypeHint, re.numerator, re.denominator),
-                        ReplaceMatches e           => BindCqlOperator(nameof(ICqlOperators.ReplaceMatches), null, e.operand),
-                        Round rnd                  => BindCqlOperator(nameof(ICqlOperators.Round), resultTypeHint, rnd.operand, rnd.precision),
-                        SingletonFrom sf           => BindCqlOperator(nameof(ICqlOperators.SingletonFrom), resultTypeHint, sf.operand),
-                        Split split                => BindCqlOperator(nameof(ICqlOperators.Split), null, split.stringToSplit, split.separator),
-                        Start start                => BindCqlOperator(nameof(ICqlOperators.Start), resultTypeHint, start.operand),
-                        StartsWith e               => BindCqlOperator(nameof(ICqlOperators.StartsWith), resultTypeHint, e.operand[..2]),
-                        StdDev stddev              => BindCqlOperator(nameof(ICqlOperators.StdDev), resultTypeHint, stddev.source),
-                        Substring e                => BindCqlOperator(nameof(ICqlOperators.Substring), null, e.stringToSub, e.startIndex, e.length),
-                        Subtract sub               => BindCqlOperator(nameof(ICqlOperators.Subtract), resultTypeHint, sub.operand[..2]),
-                        Successor suc              => BindCqlOperator(nameof(ICqlOperators.Successor), resultTypeHint, suc.operand),
-                        Sum sum                    => BindCqlOperator(nameof(ICqlOperators.Sum), resultTypeHint, sum.source),
-                        Time time                  => BindCqlOperator(nameof(ICqlOperators.Time), resultTypeHint, time.hour, time.minute, time.second, time.millisecond),
-                        TimeOfDay tod              => BindCqlOperator(nameof(ICqlOperators.TimeOfDay), resultTypeHint),
-                        TimezoneOffsetFrom tofe    => BindCqlOperator(nameof(ICqlOperators.TimezoneOffsetFrom), resultTypeHint, tofe.operand),
-                        Today today                => BindCqlOperator(nameof(ICqlOperators.Today), resultTypeHint),
-                        ToList tle                 => BindCqlOperator(CqlOperator.ToList, resultTypeHint, tle.operand!),
-                        Truncate trunc             => BindCqlOperator(nameof(ICqlOperators.Truncate), resultTypeHint, trunc.operand),
-                        TruncatedDivide div        => BindCqlOperator(nameof(ICqlOperators.TruncatedDivide), resultTypeHint, div.operand[..2]),
-                        Upper e                    => BindCqlOperator(nameof(ICqlOperators.Upper), resultTypeHint, e.operand),
-                        Variance variance          => BindCqlOperator(nameof(ICqlOperators.Variance), resultTypeHint, variance.source),
-                        Width width                => BindCqlOperator(CqlOperator.Width, resultTypeHint, width.operand),
-                        Xor xor                    => BindCqlOperator(nameof(ICqlOperators.Xor), resultTypeHint, xor.operand[..2]),
-                        IndexOf io                 => BindCqlOperator(nameof(ICqlOperators.PositionOf), resultTypeHint, io.source, io.element),
-                        Slice slice                => BindCqlOperator(nameof(ICqlOperators.Slice), null, slice.source, slice.startIndex, slice.endIndex),
-                        Negate neg                 => neg.operand is Literal literal
-                                                          ? NegateLiteral(neg, literal)
-                                                          : ChangeType(BindCqlOperator(CqlOperator.Negate, resultTypeHint, neg.operand), neg.resultTypeSpecifier),
-                        As @as                     => As(@as),
-                        Case ce                    => Case(ce),
-                        ToTime e                   => ChangeType(e.operand!, _typeResolver.TimeType),
-                        ToBoolean e                => ChangeType(e.operand!, typeof(bool?)),
-                        ToString e                 => ChangeType(e.operand!, typeof(string)),
-                        ToConcept tc               => ChangeType(tc.operand!, _typeResolver.ConceptType),
-                        ToDate tde                 => ChangeType(tde.operand!, _typeResolver.DateType),
-                        ToDecimal tde              => ChangeType(tde.operand!, typeof(decimal?)),
-                        ToInteger tde              => ChangeType(tde.operand!, typeof(int?)),
-                        ToDateTime tdte            => ChangeType(tdte.operand!, _typeResolver.DateTimeType),
-                        ToLong toLong              => ChangeType(toLong.operand!, typeof(long?)),
-                        ToQuantity tq              => ChangeType(tq.operand!, _typeResolver.QuantityType),
-                        Coalesce cle               => Coalesce(cle),
-                        CodeRef cre                => CodeRef(cre),
-                        CodeSystemRef csr          => CodeSystemRef(csr),
-                        Collapse col               => Collapse(col),
-                        ConceptRef cr              => ConceptRef(cr),
-                        Contains ct                => Contains(ct),
-                        ExpandValueSet evs         => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(evs.operand!)),
-                        Ends e                     => Ends(e),
-                        Equivalent eqv             => Equivalent(eqv),
-                        Except ex                  => Except(ex),
-                        FunctionRef fre => FunctionRef(fre),
-                        ExpressionRef ere          => ExpressionRef(ere),
-                        AliasRef ar                => GetScopeExpression(ar.name!),
-                        QueryLetRef qlre           => GetScopeExpression(qlre.name!),
-                        IdentifierRef ire          => IdentifierRef(ire),
-                        If @if                     => If(@if),
-                        In @in                     => In(@in),
-                        IncludedIn ii              => IncludedIn(ii),
-                        Includes inc               => Includes(inc),
-                        Instance ine               => Instance(ine),
-                        Intersect ise              => Intersect(ise),
-                        Is @is                     => Is(@is),
-                        IsNull isn                 => IsNull(isn),
-                        List list                  => List(list),
-                        Literal lit                => Literal(lit),
-                        Meets meets                => Meets(meets),
-                        MeetsAfter meets           => MeetsAfter(meets),
-                        MeetsBefore meets          => MeetsBefore(meets),
-                        Message msg                => Message(msg),
-                        Null @null                 => NullExpression.ForType(TypeFor(@null)!),
-                        OperandRef ore             => OperandRef(ore),
-                        Overlaps ole               => Overlaps(ole),
-                        OverlapsAfter ola          => OverlapsAfter(ola),
-                        OverlapsBefore olb         => OverlapsBefore(olb),
-                        ParameterRef pre           => ParameterRef(pre),
-                        AnyInValueSet avs          => ProcessValueSet(avs.valueset, avs.codes, isList: true),
-                        InValueSet inv             => ProcessValueSet(inv.valueset!, inv.code, isList: false),
-                        ProperContains pc          => ProperContains(pc),
-                        ProperIn pi                => ProperIn(pi),
-                        ProperIncludedIn pie       => ProperIncludedIn(pie),
-                        ProperIncludes pi          => ProperIncludes(pi),
-                        Property pe                => Property(pe),
-                        Query qe                   => Query(qe),
-                        Retrieve re                => Retrieve(re),
-                        SameAs sa                  => SameAs(sa),
-                        SameOrAfter soa            => SameOrAfter(soa),
-                        SameOrBefore sob           => SameOrBefore(sob),
-                        Starts starts              => Starts(starts),
-                        Tuple tu                   => Tuple(tu),
-                        Union ue                   => Union(ue),
-                        ValueSetRef vsre           => ValueSetRef(vsre),
-
-                        _                          => throw this.NewExpressionBuildingException($"Expression {element.GetType().FullName} is not implemented.")
+                        Abs  or
+                        Add  or
+                        After  or
+                        AllTrue  or
+                        And  or
+                        AnyTrue  or
+                        Avg  or
+                        Before  or
+                        CalculateAge  or
+                        CalculateAgeAt  or
+                        Ceiling  or
+                        Combine  or
+                        Concatenate  or
+                        ConvertQuantity  or
+                        ConvertsToDate  or
+                        ConvertsToDateTime  or
+                        ConvertsToDecimal  or
+                        ConvertsToInteger  or
+                        ConvertsToLong  or
+                        ConvertsToQuantity  or
+                        ConvertsToString  or
+                        ConvertsToTime  or
+                        Count  or
+                        Date  or
+                        DateFrom  or
+                        Descendents  or
+                        DateTime  or
+                        DateTimeComponentFrom  or
+                        DifferenceBetween  or
+                        Distinct  or
+                        Divide  or
+                        DurationBetween  or
+                        End  or
+                        EndsWith  or
+                        Equal  or
+                        Exists  or
+                        Exp  or
+                        First  or
+                        Floor  or
+                        GeometricMean  or
+                        Greater  or
+                        GreaterOrEqual  or
+                        HighBoundary  or
+                        Implies  or
+                        Indexer  or
+                        Interval  or
+                        IsFalse  or
+                        IsTrue  or
+                        Last  or
+                        LastPositionOf  or
+                        Length  or
+                        Less  or
+                        LessOrEqual  or
+                        Ln  or
+                        Log  or
+                        LowBoundary  or
+                        Lower  or
+                        Matches  or
+                        Max  or
+                        Median  or
+                        Min  or
+                        Mode  or
+                        Modulo  or
+                        Multiply  or
+                        Not  or
+                        Now  or
+                        Or  or
+                        PointFrom  or
+                        PopulationStdDev  or
+                        PopulationVariance  or
+                        PositionOf  or
+                        Power  or
+                        Precision  or
+                        Predecessor  or
+                        Product  or
+                        Quantity  or
+                        ReplaceMatches  or
+                        Round  or
+                        SingletonFrom  or
+                        Split  or
+                        Start  or
+                        StartsWith  or
+                        StdDev  or
+                        Substring  or
+                        Subtract  or
+                        Successor  or
+                        Sum  or
+                        Time  or
+                        TimeOfDay  or
+                        TimezoneOffsetFrom  or
+                        Today  or
+                        Truncate  or
+                        TruncatedDivide  or
+                        Upper  or
+                        Variance  or
+                        Xor  or
+                        IndexOf  or
+                        Slice               => BindCqlOperator(element.GetType().Name, resultTypeHint, GetBindArgs(element)),
+                        NotEqual e          => BindCqlOperator(nameof(ICqlOperators.Not), resultTypeHint, BindCqlOperator(CqlOperator.Equal, resultTypeHint, e.operand)),
+                        Expand e            => BindCqlOperator(CqlOperator.Expand, resultTypeHint, e.operand[..2]),
+                        Flatten e           => BindCqlOperator(CqlOperator.Flatten, resultTypeHint, e.operand),
+                        MaxValue e          => BindCqlOperator(CqlOperator.MaxValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        MinValue e          => BindCqlOperator(CqlOperator.MinValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        Ratio e             => BindCqlOperator(CqlOperator.Ratio, resultTypeHint, e.numerator, e.denominator),
+                        ToList e            => BindCqlOperator(CqlOperator.ToList, resultTypeHint, e.operand!),
+                        Width e             => BindCqlOperator(CqlOperator.Width, resultTypeHint, e.operand),
+                        Negate e            => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(CqlOperator.Negate, resultTypeHint, e.operand), e.resultTypeSpecifier),
+                        ConvertsToBoolean e => throw new NotImplementedException().WithContext(this), //BindCqlOperator(CqlOperator.ConvertsToBoolean, resultTypeHint, e.operand),
+                        As e                => As(e),
+                        Case e              => Case(e),
+                        ToTime e            => ChangeType(e.operand!, _typeResolver.TimeType),
+                        ToBoolean e         => ChangeType(e.operand!, typeof(bool?)),
+                        ToString e          => ChangeType(e.operand!, typeof(string)),
+                        ToConcept e         => ChangeType(e.operand!, _typeResolver.ConceptType),
+                        ToDate e            => ChangeType(e.operand!, _typeResolver.DateType),
+                        ToDecimal e         => ChangeType(e.operand!, typeof(decimal?)),
+                        ToInteger e         => ChangeType(e.operand!, typeof(int?)),
+                        ToDateTime e        => ChangeType(e.operand!, _typeResolver.DateTimeType),
+                        ToLong e            => ChangeType(e.operand!, typeof(long?)),
+                        ToQuantity e        => ChangeType(e.operand!, _typeResolver.QuantityType),
+                        Coalesce e          => Coalesce(e),
+                        CodeRef e           => CodeRef(e),
+                        CodeSystemRef e     => CodeSystemRef(e),
+                        Collapse e          => Collapse(e),
+                        ConceptRef e        => ConceptRef(e),
+                        Contains e          => Contains(e),
+                        ExpandValueSet e    => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(e.operand!)),
+                        Ends e              => Ends(e),
+                        Equivalent e        => Equivalent(e),
+                        Except e            => Except(e),
+                        FunctionRef e       => FunctionRef(e),
+                        ExpressionRef e     => ExpressionRef(e),
+                        AliasRef e          => GetScopeExpression(e.name!),
+                        QueryLetRef e       => GetScopeExpression(e.name!),
+                        IdentifierRef e     => IdentifierRef(e),
+                        If e                => If(e),
+                        In e                => In(e),
+                        IncludedIn e        => IncludedIn(e),
+                        Includes e          => Includes(e),
+                        Instance e          => Instance(e),
+                        Intersect e         => Intersect(e),
+                        Is e                => Is(e),
+                        IsNull e            => IsNull(e),
+                        List e              => List(e),
+                        Literal e           => Literal(e),
+                        Meets e             => Meets(e),
+                        MeetsAfter e        => MeetsAfter(e),
+                        MeetsBefore e       => MeetsBefore(e),
+                        Message e           => Message(e),
+                        Null e              => NullExpression.ForType(TypeFor(e)!),
+                        OperandRef e        => OperandRef(e),
+                        Overlaps e          => Overlaps(e),
+                        OverlapsAfter e     => OverlapsAfter(e),
+                        OverlapsBefore e    => OverlapsBefore(e),
+                        ParameterRef e      => ParameterRef(e),
+                        AnyInValueSet e     => ProcessValueSet(e.valueset, e.codes, isList: true),
+                        InValueSet e        => ProcessValueSet(e.valueset!, e.code, isList: false),
+                        ProperContains e    => ProperContains(e),
+                        ProperIn e          => ProperIn(e),
+                        ProperIncludedIn e  => ProperIncludedIn(e),
+                        ProperIncludes e    => ProperIncludes(e),
+                        Property e          => Property(e),
+                        Query e             => Query(e),
+                        Retrieve e          => Retrieve(e),
+                        SameAs e            => SameAs(e),
+                        SameOrAfter e       => SameOrAfter(e),
+                        SameOrBefore e      => SameOrBefore(e),
+                        Starts e            => Starts(e),
+                        Tuple e             => Tuple(e),
+                        Union e             => Union(e),
+                        ValueSetRef e       => ValueSetRef(e),
+                        _          => throw this.NewExpressionBuildingException($"Expression {element.GetType().FullName} is not implemented.")
                         //@formatter:on
                     };
 
@@ -1516,7 +1455,7 @@ namespace Hl7.Cql.Compiler
             var left = Translate(eqv.operand[0]);
             var right = Translate(eqv.operand[1]);
             if (!_typeResolver.IsListType(left.Type))
-                return BindCqlOperator(CqlOperator.Equivalent, null, left, right);
+                return BindCqlOperator(nameof(ICqlOperators.Equivalent), null, left, right);
 
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (!_typeResolver.IsListType(right.Type))
@@ -1542,7 +1481,7 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression? SameAs(SameAs e)
         {
-            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var expr = TranslateAll([.. e.operand[..2], ((IGetPrecision)e).precisionOrNull])!;
             var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
                 (true, true) => CqlOperator.IntervalSameAs,
@@ -1554,7 +1493,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression SameOrAfter(SameOrAfter e)
         {
-            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var expr = TranslateAll([.. e.operand[..2], ((IGetPrecision)e).precisionOrNull])!;
             var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
                 (true, true) => CqlOperator.IntervalSameOrAfter,
@@ -1566,7 +1505,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression SameOrBefore(SameOrBefore e)
         {
-            var expr = TranslateAll([.. e.operand[..2], e.precisionOrNull()])!;
+            var expr = TranslateAll([.. e.operand[..2], ((IGetPrecision)e).precisionOrNull])!;
             var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
             {
                 (true, true) => CqlOperator.IntervalSameOrBefore,
@@ -1636,7 +1575,7 @@ namespace Hl7.Cql.Compiler
         {
             var left = Translate(e!.operand![0]!);
             var right = Translate(e.operand[1]!);
-            var precision = e.precisionOrNull();
+            var precision = ((IGetPrecision)e).precisionOrNull;
             if (_typeResolver.IsListType(left.Type))
             {
                 var elementType = _typeResolver.GetListElementType(left.Type, throwError: true)!;
@@ -1663,7 +1602,7 @@ namespace Hl7.Cql.Compiler
         {
             var left = Translate(e.operand![0]);
             var right = Translate(e.operand![1]);
-            var precision = e.precisionOrNull();
+            var precision = ((IGetPrecision)e).precisionOrNull;
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1707,14 +1646,14 @@ namespace Hl7.Cql.Compiler
             var right = Translate(e.operand![1]!);
             if (_typeResolver.IsListType(right.Type))
             {
-                return BindCqlOperator(CqlOperator.InList, null, left, right);
+                return BindCqlOperator(nameof(ICqlOperators.In), null, left, right);
             }
 
             if (right.Type.IsCqlInterval(out var rightElementType))
             {
-                var precision = e.precisionOrNull();
+                var precision = ((IGetPrecision)e).precisionOrNull;
 
-                return BindCqlOperator(CqlOperator.InInterval, rightElementType, left, right, precision);
+                return BindCqlOperator(nameof(ICqlOperators.In), rightElementType, left, right, precision);
 
             }
             throw new NotImplementedException().WithContext(this);
@@ -1745,12 +1684,12 @@ namespace Hl7.Cql.Compiler
             {
                 if (right.Type.IsCqlInterval(out var pointType))
                 {
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.IntervalIncludesInterval, null, left, right, precision);
                 }
                 else
                 {
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.IntervalIncludesElement, null, left, right, precision);
                 }
             }
@@ -1779,12 +1718,12 @@ namespace Hl7.Cql.Compiler
 
             if (left.Type.IsCqlInterval(out var leftPointType) && right.Type.IsCqlInterval(out var rightPointType))
             {
-                var precision = e.precisionOrNull();
+                var precision = ((IGetPrecision)e).precisionOrNull;
                 return BindCqlOperator(CqlOperator.IntervalIncludesInterval, null, right, left, precision);
             }
             if (right.Type.IsCqlInterval(out var pointType))
             {
-                var precision = e.precisionOrNull();
+                var precision = ((IGetPrecision)e).precisionOrNull;
                 if (left.Type != pointType)
                     throw this.NewExpressionBuildingException();
                 return BindCqlOperator(CqlOperator.IntervalIncludesElement, null, right, left, precision);
@@ -1825,7 +1764,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.Meets, null, left, right, precision);
                 }
 
@@ -1844,7 +1783,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.MeetsAfter, null, left, right, precision);
                 }
 
@@ -1864,7 +1803,7 @@ namespace Hl7.Cql.Compiler
 
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.MeetsBefore, null, left, right, precision);
                 }
 
@@ -1883,7 +1822,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.Overlaps, null, left, right, precision);
                 }
 
@@ -1902,7 +1841,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.OverlapsBefore, null, left, right, precision);
                 }
 
@@ -1921,7 +1860,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.OverlapsAfter, null, left, right, precision);
                 }
 
@@ -1936,7 +1875,7 @@ namespace Hl7.Cql.Compiler
             var right = Translate(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
-                var precision = e.precisionOrNull();
+                var precision = ((IGetPrecision)e).precisionOrNull;
                 if (right.Type.IsCqlInterval(out var rightPointType))
                 {
                     return BindCqlOperator(CqlOperator.IntervalProperlyIncludesInterval, null, left, right, precision);
@@ -1968,7 +1907,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
                 {
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.IntervalProperlyIncludesInterval, null, right, left, precision);
                 }
             }
@@ -1985,7 +1924,7 @@ namespace Hl7.Cql.Compiler
             }
             else if (right.Type.IsCqlInterval(out var rightPointType))
             {
-                var precision = e.precisionOrNull();
+                var precision = ((IGetPrecision)e).precisionOrNull;
                 return BindCqlOperator(CqlOperator.IntervalProperlyIncludesElement, null, right, left, precision);
             }
             throw new NotImplementedException().WithContext(this);
@@ -1997,7 +1936,7 @@ namespace Hl7.Cql.Compiler
             var intervalOrList = Translate(e.operand![1]);
             if (intervalOrList.Type.IsCqlInterval(out var pointType))
             {
-                var precision = e.precisionOrNull();
+                var precision = ((IGetPrecision)e).precisionOrNull;
                 return BindCqlOperator(CqlOperator.IntervalProperlyIncludesElement, pointType, intervalOrList, element, precision);
             }
 
@@ -2032,7 +1971,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (leftPointType != right.Type)
                     throw this.NewExpressionBuildingException();
-                var precision = e.precisionOrNull();
+                var precision = ((IGetPrecision)e).precisionOrNull;
                 return BindCqlOperator(CqlOperator.IntervalProperlyIncludesElement, leftPointType, left, right, precision);
             }
             throw new NotImplementedException().WithContext(this);
@@ -2048,7 +1987,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    var precision = e.precisionOrNull();
+                    var precision = ((IGetPrecision)e).precisionOrNull;
                     return BindCqlOperator(CqlOperator.Starts, null, left, right, precision);
 
                 }
@@ -2322,7 +2261,7 @@ namespace Hl7.Cql.Compiler
         private Expression DemoteSourceListToSingleton(Expression source)
         {
             // Do not inline this method, so that we can clearly see the pairing with the call to PromoteSourceSingletonToList
-            return BindCqlOperator(CqlOperator.SingletonFrom, null, source);
+            return BindCqlOperator(nameof(ICqlOperators.SingletonFrom), null, source);
         }
 
         private (Expression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(Expression source)

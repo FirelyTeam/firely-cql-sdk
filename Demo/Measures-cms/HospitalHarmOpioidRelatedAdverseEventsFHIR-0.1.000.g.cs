@@ -219,7 +219,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
 			var m_ = context.Operators.End(g_);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.InInterval<CqlDateTime>(m_, n_, "day");
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 			var p_ = context.Operators.And(k_, o_);
 			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
 			var r_ = context.Operators.Equal(q_, "finished");
@@ -273,7 +273,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 				var j_ = QICoreCommon_2_0_000.ToInterval(i_);
 				var k_ = context.Operators.Start(j_);
 				var l_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientEncounter);
-				var m_ = context.Operators.InInterval<CqlDateTime>(k_, l_, null);
+				var m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 				bool? n_(Encounter.LocationComponent EncounterLocation)
 				{
 					var s_ = CQMCommon_2_0_000.GetLocation(EncounterLocation?.Location);
@@ -290,7 +290,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 					var y_ = QICoreCommon_2_0_000.ToInterval(x_);
 					var z_ = context.Operators.Start(y_);
 					var aa_ = FHIRHelpers_4_3_000.ToInterval(EncounterLocation?.Period);
-					var ab_ = context.Operators.InInterval<CqlDateTime>(z_, aa_, null);
+					var ab_ = context.Operators.In<CqlDateTime>(z_, aa_, null);
 					var ac_ = context.Operators.And(w_, ab_);
 
 					return ac_;
@@ -401,7 +401,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 				var be_ = QICoreCommon_2_0_000.ToInterval(bd_);
 				var bf_ = context.Operators.Start(be_);
 				var bg_ = FHIRHelpers_4_3_000.ToInterval(EncounterLocation?.Period);
-				var bh_ = context.Operators.InInterval<CqlDateTime>(bf_, bg_, null);
+				var bh_ = context.Operators.In<CqlDateTime>(bf_, bg_, null);
 				var bi_ = context.Operators.And(bc_, bh_);
 
 				return bi_;
@@ -413,11 +413,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var q_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var r_ = context.Operators.Start(q_);
 			var s_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_eupiswiddkenbbaixeecrbcdi.EncounterWithQualifyingAge);
-			var t_ = context.Operators.InInterval<CqlDateTime>(r_, s_, null);
+			var t_ = context.Operators.In<CqlDateTime>(r_, s_, null);
 			var u_ = FHIRHelpers_4_3_000.ToValue(tuple_eupiswiddkenbbaixeecrbcdi.OpioidGiven?.Effective);
 			var v_ = QICoreCommon_2_0_000.ToInterval(u_);
 			var w_ = context.Operators.Start(v_);
-			var y_ = context.Operators.InInterval<CqlDateTime>(w_, s_, null);
+			var y_ = context.Operators.In<CqlDateTime>(w_, s_, null);
 			var z_ = context.Operators.And(t_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval(u_);
 			var ac_ = context.Operators.End(ab_);
@@ -428,7 +428,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var aj_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var ak_ = context.Operators.Start(aj_);
 			var al_ = context.Operators.Interval(ah_, ak_, (bool?)true, (bool?)false);
-			var am_ = context.Operators.InInterval<CqlDateTime>(ac_, al_, null);
+			var am_ = context.Operators.In<CqlDateTime>(ac_, al_, null);
 			var ao_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var ap_ = context.Operators.Start(ao_);
 			var aq_ = context.Operators.Not((bool?)(ap_ is null));
