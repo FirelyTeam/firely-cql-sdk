@@ -336,12 +336,13 @@ public class CSharpFormatterTests
             expected: "System.Collections.Generic.IList<System.Int32> Join(System.Int32 a, System.Int32 b, System.Int32 c)",
             actual: m.WriteCSharp().ToString()!);
 
-        // Delphi style
+        // Delphi-ish style to demonstrate flexibility
         Assert.AreEqual(
-            expected: "Join (a: int, b: int, c: int): IList<int>",
+            expected: "function Join(a: int; b: int; c: int): IList<int>;",
             actual: m.WriteCSharp(
                 methodOptions: new(
-                    methodFormat: t => $"{t.name} ({t.parameters}): {t.returnType}",
+                    methodFormat: t => $"function {t.name}({t.parameters}): {t.returnType};",
+                    parameterDelimiter: "; ",
                     parameterOptions: new(
                         parameterFormat: t => $"{t.name}: {t.type}",
                         typeOptions: new(

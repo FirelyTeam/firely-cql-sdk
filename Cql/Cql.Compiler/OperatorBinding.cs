@@ -10,12 +10,8 @@ using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Operators;
-using OneOf;
 
 namespace Hl7.Cql.Compiler;
-
-[GenerateOneOf]
-internal partial class CqlOperatorsMethod : OneOfBase<string, CqlOperator> { }
 
 /// <summary>
 /// Binds <see cref="CqlOperator"/>s to <see cref="Expression"/>s.
