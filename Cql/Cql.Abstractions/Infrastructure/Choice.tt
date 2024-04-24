@@ -14,63 +14,93 @@
 #nullable enable
 
 using System;
-using System.Linq;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
-file static class Helpers
+file static class Errors
 {
     public static InvalidOperationException CannotReturnTn(int desiredIndex, int actualIndex) =>
         new($"Cannot return the T{desiredIndex} value from this T{actualIndex} tuple.");
+
+    public static InvalidOperationException? CannotHaveTypesDeriveFromEachOther(params Type[] types)
+    {
+        for (int i = 0; i < types.Length; i++)
+        {
+            for (int j = 0; j < types.Length; j++)
+            {
+                if (i == j) continue;
+                if (types[i].IsAssignableFrom(types[j]))
+                {
+                    return new InvalidOperationException(
+                        $"Choice type cannot have combinations of types that derive from each other. T{i} of type {types[i]} derives from T{j} of type {types[j]}.");
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static InvalidOperationException UninitializedChoiceType() =>
+        new("The Choice type was not initialized.");
 }
 
 <#
 const int MaxChoiceLength = 10;
 for (int i = 2; i <= MaxChoiceLength; i++) {
     string typeArgs = string.Join(", ", Enumerable.Range(0, i).Select(n => $"T{n}"));
+    string types = string.Join(", ", Enumerable.Range(0, i).Select(n => $"typeof(T{n})"));
     string tupleContent = string.Join(", ", Enumerable.Range(0, i).Select(n => $"T{n} v{n}"));
 #>
 
 /// <summary>
 /// A value type that is a choice between <#= i #> values.
 /// </summary>
-internal readonly record struct ValueChoice<<#= typeArgs #>>
+internal readonly partial record struct ValueChoice<<#= typeArgs #>>
     : IChoice
 {
+    static ValueChoice()
+    {
+        if (Errors.CannotHaveTypesDeriveFromEachOther(<#= types #>) is { } err)
+            throw err;
+    }
+
     private readonly (<#= tupleContent #>) _values;
+    private readonly int _index; // 1-based, 0 means uninitialized
 
     private ValueChoice(int index, (<#= tupleContent #>) values)
     {
-        Index = index;
+        _index = index + 1;
         _values = values;
     }
 
     public object? Value => ((ITuple)_values)[Index];
-    public int Index { get; }
+    public int Index => _index - 1; // -1 means uninitialized
 <#
 
     string switchArgs = string.Join(",", Enumerable.Range(0, i).Select(n => $"\n        Action<T{n}> f{n}"));
-    string caseStatements = string.Join("", Enumerable.Range(0, i).Select(n => $"\n            case {n}: f{n}(_values.v{n}); break;"));
+    string caseStatements = string.Join("", Enumerable.Range(0, i).Select(n => $"\n            case {n}:  f{n}(_values.v{n}); break;"));
 #>
 
     public void Switch(<#= switchArgs #>)
     {
         switch (Index)
-        {<#= caseStatements #>
+        {
+            case -1: throw Errors.UninitializedChoiceType();<#= caseStatements #>
             default: throw new UnreachableException();
         }
     }
 
 <#
     string matchArgs = string.Join(",", Enumerable.Range(0, i).Select(n => $"\n        Func<T{n}, TR> f{n}"));
-    string matchExpressions = string.Join("", Enumerable.Range(0, i).Select(n => $"\n            {n} => f{n}(_values.v{n}),"));
+    string matchExpressions = string.Join("", Enumerable.Range(0, i).Select(n => $"\n            {n} =>  f{n}(_values.v{n}),"));
 #>
     public TR Match<TR>(<#= matchArgs #>) =>
         Index switch
-        {<#= matchExpressions #>
-            _ => throw new UnreachableException(),
+        {
+            -1 => throw Errors.UninitializedChoiceType(),<#= matchExpressions #>
+            _ =>  throw new UnreachableException(),
         };
 
 <#
@@ -80,19 +110,20 @@ internal readonly record struct ValueChoice<<#= typeArgs #>>
     public T<#= j #>? AsT<#= j #>(bool throwError = false) =>
         (Index, throwError) switch
         {
-            (<#= j #>, _)     => _values.v<#= j #>,
-            (_, true)  => throw Helpers.CannotReturnTn(<#= j #>, Index),
-            (_, false) => default,
+            (-1, _)       => throw Errors.UninitializedChoiceType(),
+            (<#= j #>, _) => _values.v<#= j #>,
+            (_, true)     => throw Errors.CannotReturnTn(<#= j #>, Index),
+            (_, false)    => default,
         };
 
     public static ValueChoice<<#= typeArgs #>> FromT<#= j #>(T<#= j #> v<#= j #>) => new(<#= j #>, (<#= fromTupleValue #>)!);
+    public static ValueChoice<<#= typeArgs #>>[] FromT<#= j #>Array(params T<#= j #>[] v<#= j #>Arr) => v<#= j #>Arr.SelectToArray(FromT<#= j #>);
     public static implicit operator ValueChoice<<#= typeArgs #>>(T<#= j #> v<#= j #>) => FromT<#= j #>(v<#= j #>);
 
 <#
     }
 #>
 }
-
 <#
 }
 #>
