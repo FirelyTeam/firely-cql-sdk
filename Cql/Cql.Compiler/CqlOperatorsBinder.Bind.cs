@@ -8,7 +8,6 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
-using MethodAndParametersByParamCountByName = System.Collections.ObjectModel.ReadOnlyDictionary<string, System.Collections.ObjectModel.ReadOnlyDictionary<int, (System.Reflection.MethodInfo method, System.Reflection.ParameterInfo[] parameters)[]>>;
 
 
 namespace Hl7.Cql.Compiler;

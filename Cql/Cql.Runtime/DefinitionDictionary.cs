@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Runtime;
 

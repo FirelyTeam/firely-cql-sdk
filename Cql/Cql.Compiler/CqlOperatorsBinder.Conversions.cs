@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;

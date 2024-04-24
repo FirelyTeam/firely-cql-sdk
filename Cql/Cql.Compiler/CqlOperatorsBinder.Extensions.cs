@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using MethodAndParameters = (System.Reflection.MethodInfo method, System.Reflection.ParameterInfo[] parameters);
-using MethodAndParametersByParamCountByName = System.Collections.ObjectModel.ReadOnlyDictionary<string, System.Collections.ObjectModel.ReadOnlyDictionary<int, (System.Reflection.MethodInfo method, System.Reflection.ParameterInfo[] parameters)[]>>;
-
 
 namespace Hl7.Cql.Compiler;
 
