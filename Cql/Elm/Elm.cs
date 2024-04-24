@@ -245,3 +245,82 @@ partial class CalculateAge : IGetDateTimePrecision { }
 partial class DateTimeComponentFrom : IGetDateTimePrecision { }
 
 #endregion
+
+#region GetOperands
+
+/// <summary>
+/// Arity is the number of arguments or operands taken by a function.
+/// </summary>
+internal enum Arity
+{
+    Unary,
+    Binary,
+    Ternary,
+    Nary,
+}
+
+/// <summary>
+/// Interface for getting the operands of an object.
+/// </summary>
+internal interface IGetOperands
+{
+    TypeSpecifier[] signature { get; }
+    Expression[] operands { get; }
+    Arity arity { get; }
+}
+
+partial class FunctionRef : IGetOperands
+{
+    Expression[] IGetOperands.operands => operand;
+    Arity IGetOperands.arity => Arity.Nary;
+}
+partial class NaryExpression : IGetOperands
+{
+    Expression[] IGetOperands.operands => operand;
+    Arity IGetOperands.arity => Arity.Nary;
+}
+partial class TernaryExpression : IGetOperands
+{
+    Expression[] IGetOperands.operands => operand;
+    Arity IGetOperands.arity => Arity.Ternary;
+}
+partial class BinaryExpression : IGetOperands
+{
+    Expression[] IGetOperands.operands => operand;
+    Arity IGetOperands.arity => Arity.Binary;
+}
+
+partial class UnaryExpression : IGetOperands
+{
+    Expression[] IGetOperands.operands => [operand];
+    Arity IGetOperands.arity => Arity.Unary;
+}
+
+#endregion
+
+#region GetSource
+
+/// <summary>
+/// Interface for getting the source of an object.
+/// </summary>
+internal interface IGetSource
+{
+    Expression source { get; }
+}
+
+partial class Property : IGetSource {}
+partial class AggregateExpression : IGetSource {}
+partial class Repeat : IGetSource {}
+partial class ForEach : IGetSource {}
+partial class Sort : IGetSource {}
+partial class Filter : IGetSource {}
+partial class Message : IGetSource {}
+partial class Descendents : IGetSource {}
+partial class Children : IGetSource {}
+partial class IndexOf : IGetSource {}
+partial class Slice : IGetSource {}
+partial class Last : IGetSource {}
+partial class First : IGetSource {}
+partial class Combine : IGetSource {}
+
+#endregion

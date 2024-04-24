@@ -2,7 +2,6 @@
 using System;
 using System.Globalization;
 using System.Reflection;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
