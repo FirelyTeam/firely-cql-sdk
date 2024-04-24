@@ -33,40 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="CqlOperators.AggregateFunctions.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.ArithmeticOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.ClinicalOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.ComparisonOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.DateTimeOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.IntervalOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.ListOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.LogicalOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.ModelOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.NullologicalOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.StringOperators.cs">
-	    <DependentUpon>CqlOperators.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlOperators.TypeOperators.cs">
+	  <Compile Update="CqlOperators.*.cs">
 	    <DependentUpon>CqlOperators.cs</DependentUpon>
 	  </Compile>
 	</ItemGroup>
