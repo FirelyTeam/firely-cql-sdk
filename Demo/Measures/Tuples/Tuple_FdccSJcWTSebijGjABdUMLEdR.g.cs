@@ -1,4 +1,5 @@
 using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -22,6 +23,6 @@ namespace Tuples
         [CqlDeclaration("relevantPeriod")]
         public CqlInterval<CqlDateTime> relevantPeriod { get; set; }
         [CqlDeclaration("relevantDays")]
-        public IEnumerable<Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf> relevantDays { get; set; }
+        public IEnumerable<Tuple_BZfjDHYASdKbVKTOeigaYPBVf> relevantDays { get; set; }
     }
 }

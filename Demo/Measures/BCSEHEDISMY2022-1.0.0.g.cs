@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -274,7 +275,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var a_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period();
 		var b_ = this.Measurement_Period();
 		var c_ = context.Operators.End(b_);
-		var d_ = context.Operators.Interval(a_, c_, true, true);
+		var d_ = context.Operators.Interval(a_, c_, (bool?)true, (bool?)true);
 
 		return d_;
 	}
@@ -315,7 +316,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var i_ = context.Operators.DateFrom(h_);
 		var j_ = context.Operators.Quantity((decimal?)2m, "years");
 		var k_ = context.Operators.Subtract(i_, j_);
-		var l_ = context.Operators.Interval(f_, k_, true, true);
+		var l_ = context.Operators.Interval(f_, k_, (bool?)true, (bool?)true);
 		var m_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, d_, l_, (int?)0);
 		var p_ = context.Operators.End(b_);
 		var q_ = context.Operators.DateFrom(p_);
@@ -326,7 +327,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var x_ = context.Operators.End(b_);
 		var y_ = context.Operators.DateFrom(x_);
 		var aa_ = context.Operators.Subtract(y_, u_);
-		var ab_ = context.Operators.Interval(v_, aa_, true, true);
+		var ab_ = context.Operators.Interval(v_, aa_, (bool?)true, (bool?)true);
 		var ac_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, q_, ab_, (int?)45);
 		var ad_ = context.Operators.And(m_, ac_);
 		var ag_ = context.Operators.End(b_);
@@ -335,7 +336,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var ak_ = context.Operators.DateFrom(aj_);
 		var am_ = context.Operators.End(b_);
 		var an_ = context.Operators.DateFrom(am_);
-		var ao_ = context.Operators.Interval(ak_, an_, true, true);
+		var ao_ = context.Operators.Interval(ak_, an_, (bool?)true, (bool?)true);
 		var ap_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, ah_, ao_, (int?)45);
 		var aq_ = context.Operators.And(ad_, ap_);
 
@@ -349,20 +350,19 @@ public class BCSEHEDISMY2022_1_0_0
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.Convert<CqlDateTime>(e_);
-		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
-		var h_ = context.Operators.Interval((int?)52, (int?)74, true, true);
-		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
-		var k_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
-		var l_ = context.Operators.And(i_, k_);
-		var m_ = this.Enrolled_During_Participation_Period();
-		var n_ = context.Operators.And(l_, m_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval((int?)52, (int?)74, (bool?)true, (bool?)true);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
+		var k_ = context.Operators.And(h_, j_);
+		var l_ = this.Enrolled_During_Participation_Period();
+		var m_ = context.Operators.And(k_, l_);
 
-		return n_;
+		return m_;
 	}
 
     [CqlDeclaration("Initial Population")]

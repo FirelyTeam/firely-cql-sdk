@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -30,7 +31,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     internal Lazy<CqlCode[]> __LOINC;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounter_During_Measurement_Period;
@@ -63,7 +64,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
         __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Inpatient_Encounter_During_Measurement_Period = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounter_During_Measurement_Period_Value);
@@ -165,7 +166,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -187,7 +188,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -195,7 +196,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -365,7 +366,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var aa_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var ab_ = context.Operators.Subtract(z_, aa_);
 					var ad_ = context.Operators.Start(y_);
-					var ae_ = context.Operators.Interval(ab_, ad_, true, true);
+					var ae_ = context.Operators.Interval(ab_, ad_, (bool?)true, (bool?)true);
 					var af_ = context.Operators.InInterval<CqlDateTime>(x_, ae_, null);
 					var ah_ = context.Operators.Start(y_);
 					var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -404,7 +405,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var bf_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var bg_ = context.Operators.Subtract(be_, bf_);
 					var bi_ = context.Operators.Start(bd_);
-					var bj_ = context.Operators.Interval(bg_, bi_, true, true);
+					var bj_ = context.Operators.Interval(bg_, bi_, (bool?)true, (bool?)true);
 					var bk_ = context.Operators.InInterval<CqlDateTime>(bc_, bj_, null);
 					var bm_ = context.Operators.Start(bd_);
 					var bn_ = context.Operators.Not((bool?)(bm_ is null));
@@ -446,7 +447,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var cq_ = context.Operators.Start(cn_);
 					var cr_ = context.Operators.Quantity((decimal?)5m, "minutes");
 					var cs_ = context.Operators.Add(cq_, cr_);
-					var ct_ = context.Operators.Interval(co_, cs_, false, true);
+					var ct_ = context.Operators.Interval(co_, cs_, (bool?)false, (bool?)true);
 					var cu_ = context.Operators.InInterval<CqlDateTime>(cm_, ct_, null);
 					var cw_ = context.Operators.Start(cn_);
 					var cx_ = context.Operators.Not((bool?)(cw_ is null));

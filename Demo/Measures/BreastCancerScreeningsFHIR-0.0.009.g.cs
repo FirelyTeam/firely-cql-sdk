@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -34,7 +35,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Telehealth_Services;
@@ -84,7 +85,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Telehealth_Services = new Lazy<IEnumerable<Encounter>>(this.Telehealth_Services_Value);
@@ -218,7 +219,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	{
 		var a_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("BreastCancerScreeningsFHIR-0.0.009", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -251,7 +252,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -259,7 +260,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -314,14 +315,13 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	private int? Age_at_start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.Convert<CqlDateTime>(e_);
-		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 
-		return g_;
+		return f_;
 	}
 
     [CqlDeclaration("Age at start of Measurement Period")]
@@ -331,24 +331,23 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.Convert<CqlDateTime>(e_);
-		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
-		var h_ = context.Operators.Interval((int?)51, (int?)74, true, false);
-		var i_ = context.Operators.InInterval<int?>(g_, h_, null);
-		var k_ = context.Operators.Convert<string>(a_?.GenderElement);
-		var l_ = context.Operators.Equal(k_, "female");
-		var m_ = context.Operators.And(i_, l_);
-		var n_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var o_ = this.Telehealth_Services();
-		var p_ = context.Operators.ListUnion<Encounter>(n_, o_);
-		var q_ = context.Operators.Exists<Encounter>(p_);
-		var r_ = context.Operators.And(m_, q_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval((int?)51, (int?)74, (bool?)true, (bool?)false);
+		var h_ = context.Operators.InInterval<int?>(f_, g_, null);
+		var j_ = context.Operators.Convert<string>(a_?.GenderElement);
+		var k_ = context.Operators.Equal(j_, "female");
+		var l_ = context.Operators.And(h_, k_);
+		var m_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var n_ = this.Telehealth_Services();
+		var o_ = context.Operators.ListUnion<Encounter>(m_, n_);
+		var p_ = context.Operators.Exists<Encounter>(o_);
+		var q_ = context.Operators.And(l_, p_);
 
-		return r_;
+		return q_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -573,20 +572,19 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var t_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var u_ = context.Operators.Or(s_, t_);
 		var v_ = this.Patient();
-		var w_ = context.Operators.Convert<CqlDateTime>(v_?.BirthDateElement?.Value);
+		var w_ = context.Operators.Convert<CqlDate>(v_?.BirthDateElement?.Value);
 		var x_ = this.Measurement_Period();
 		var y_ = context.Operators.Start(x_);
 		var z_ = context.Operators.DateFrom(y_);
-		var aa_ = context.Operators.Convert<CqlDateTime>(z_);
-		var ab_ = context.Operators.CalculateAgeAt(w_, aa_, "year");
-		var ac_ = context.Operators.GreaterOrEqual(ab_, (int?)65);
-		var ad_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
-		var ae_ = context.Operators.And(ac_, ad_);
-		var af_ = context.Operators.Or(u_, ae_);
-		var ag_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
-		var ah_ = context.Operators.Or(af_, ag_);
+		var aa_ = context.Operators.CalculateAgeAt(w_, z_, "year");
+		var ab_ = context.Operators.GreaterOrEqual(aa_, (int?)65);
+		var ac_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
+		var ad_ = context.Operators.And(ab_, ac_);
+		var ae_ = context.Operators.Or(u_, ad_);
+		var af_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+		var ag_ = context.Operators.Or(ae_, af_);
 
-		return ah_;
+		return ag_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -615,7 +613,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var m_ = context.Operators.Quantity((decimal?)27m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
-			var q_ = context.Operators.Interval(n_, p_, true, true);
+			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
 			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
@@ -656,7 +654,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var m_ = context.Operators.Quantity((decimal?)27m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
-			var q_ = context.Operators.Interval(n_, p_, true, true);
+			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
 			var r_ = context.Operators.InInterval<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
@@ -729,7 +727,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var n_ = context.Operators.Quantity((decimal?)27m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
-			var r_ = context.Operators.Interval(o_, q_, true, true);
+			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
 			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
@@ -771,7 +769,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var n_ = context.Operators.Quantity((decimal?)27m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
-			var r_ = context.Operators.Interval(o_, q_, true, true);
+			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
 			var s_ = context.Operators.InInterval<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));

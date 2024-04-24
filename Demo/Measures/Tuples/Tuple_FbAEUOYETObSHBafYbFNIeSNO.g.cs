@@ -1,4 +1,5 @@
 using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -16,7 +17,7 @@ namespace Tuples
     public class Tuple_FbAEUOYETObSHBafYbFNIeSNO: TupleBaseType
     {
         [CqlDeclaration("originalClaim")]
-        public IEnumerable<Tuples.Tuple_DXaYeZVOEAELKIhLMVHZBeASM> originalClaim { get; set; }
+        public IEnumerable<Tuple_DXaYeZVOEAELKIhLMVHZBeASM> originalClaim { get; set; }
         [CqlDeclaration("ServicePeriod")]
         public IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod { get; set; }
     }

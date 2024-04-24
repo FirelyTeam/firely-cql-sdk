@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -105,12 +106,12 @@ public class NCQAPalliativeCare_1_0_0
 			var ad_ = context.Operators.DateFrom(ac_);
 			var af_ = context.Operators.End(ab_);
 			var ag_ = context.Operators.DateFrom(af_);
-			var ah_ = context.Operators.Interval(ad_, ag_, true, true);
+			var ah_ = context.Operators.Interval(ad_, ag_, (bool?)true, (bool?)true);
 			var ai_ = context.Operators.Start(Period);
 			var aj_ = context.Operators.DateFrom(ai_);
 			var ak_ = context.Operators.End(Period);
 			var al_ = context.Operators.DateFrom(ak_);
-			var am_ = context.Operators.Interval(aj_, al_, true, true);
+			var am_ = context.Operators.Interval(aj_, al_, (bool?)true, (bool?)true);
 			var an_ = context.Operators.Overlaps(ah_, am_, null);
 
 			return an_;
@@ -127,12 +128,12 @@ public class NCQAPalliativeCare_1_0_0
 			var aq_ = context.Operators.DateFrom(ap_);
 			var as_ = context.Operators.End(ao_);
 			var at_ = context.Operators.DateFrom(as_);
-			var au_ = context.Operators.Interval(aq_, at_, true, true);
+			var au_ = context.Operators.Interval(aq_, at_, (bool?)true, (bool?)true);
 			var av_ = context.Operators.Start(Period);
 			var aw_ = context.Operators.DateFrom(av_);
 			var ax_ = context.Operators.End(Period);
 			var ay_ = context.Operators.DateFrom(ax_);
-			var az_ = context.Operators.Interval(aw_, ay_, true, true);
+			var az_ = context.Operators.Interval(aw_, ay_, (bool?)true, (bool?)true);
 			var ba_ = context.Operators.Overlaps(au_, az_, null);
 
 			return ba_;
@@ -150,12 +151,12 @@ public class NCQAPalliativeCare_1_0_0
 			var bd_ = context.Operators.DateFrom(bc_);
 			var bf_ = context.Operators.End(bb_);
 			var bg_ = context.Operators.DateFrom(bf_);
-			var bh_ = context.Operators.Interval(bd_, bg_, true, true);
+			var bh_ = context.Operators.Interval(bd_, bg_, (bool?)true, (bool?)true);
 			var bi_ = context.Operators.Start(Period);
 			var bj_ = context.Operators.DateFrom(bi_);
 			var bk_ = context.Operators.End(Period);
 			var bl_ = context.Operators.DateFrom(bk_);
-			var bm_ = context.Operators.Interval(bj_, bl_, true, true);
+			var bm_ = context.Operators.Interval(bj_, bl_, (bool?)true, (bool?)true);
 			var bn_ = context.Operators.Overlaps(bh_, bm_, null);
 
 			return bn_;
@@ -174,12 +175,12 @@ public class NCQAPalliativeCare_1_0_0
 			var bq_ = context.Operators.DateFrom(bp_);
 			var bs_ = context.Operators.End(bo_);
 			var bt_ = context.Operators.DateFrom(bs_);
-			var bu_ = context.Operators.Interval(bq_, bt_, true, true);
+			var bu_ = context.Operators.Interval(bq_, bt_, (bool?)true, (bool?)true);
 			var bv_ = context.Operators.Start(Period);
 			var bw_ = context.Operators.DateFrom(bv_);
 			var bx_ = context.Operators.End(Period);
 			var by_ = context.Operators.DateFrom(bx_);
-			var bz_ = context.Operators.Interval(bw_, by_, true, true);
+			var bz_ = context.Operators.Interval(bw_, by_, (bool?)true, (bool?)true);
 			var ca_ = context.Operators.Overlaps(bu_, bz_, null);
 
 			return ca_;

@@ -1,4 +1,5 @@
 using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -16,6 +17,6 @@ namespace Tuples
     public class Tuple_QDOjYOQaAUWAWKDPBcQCSKDH: TupleBaseType
     {
         [CqlDeclaration("IdentifierTuple")]
-        public IEnumerable<Tuples.Tuple_FNLPNAPOaaMjChWUXdhfgcWIR> IdentifierTuple { get; set; }
+        public IEnumerable<Tuple_FNLPNAPOaaMjChWUXdhfgcWIR> IdentifierTuple { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -16,8 +17,8 @@ namespace Tuples
     public class Tuple_EDASHZgEHSQJbecPJIZegfOIB: TupleBaseType
     {
         [CqlDeclaration("PaidPharmacyClaimResponse")]
-        public IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL> PaidPharmacyClaimResponse { get; set; }
+        public IEnumerable<Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL> PaidPharmacyClaimResponse { get; set; }
         [CqlDeclaration("MedicalClaim")]
-        public IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> MedicalClaim { get; set; }
+        public IEnumerable<Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> MedicalClaim { get; set; }
     }
 }

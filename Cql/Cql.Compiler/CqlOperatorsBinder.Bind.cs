@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Security;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 using Microsoft.Extensions.Logging;
@@ -198,7 +199,16 @@ internal partial class CqlOperatorsBinder
                             continue; // Not a generic argument, try again
 
                         var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments().Single();
-                        var genericMethod = method.MakeGenericMethod(genericTypeArg);
+                        MethodInfo genericMethod;
+                        try
+                        {
+                            genericMethod = method.MakeGenericMethod(genericTypeArg);
+                        }
+                        catch (ArgumentException e) when (e.InnerException is VerificationException) 
+                        {
+                            // Generic type argument is not valid for this method due to constraints
+                            continue;
+                        }
                         if (TryBindArguments(genericMethod.GetParameters(), out var genericMethodArgs,
                                              out var conversions))
                             yield return (genericMethod, genericMethodArgs, conversions);

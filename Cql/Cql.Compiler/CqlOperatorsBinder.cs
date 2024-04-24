@@ -56,16 +56,19 @@ namespace Hl7.Cql.Compiler
 
         /// <inheritdoc />
         public override MethodCallExpression BindToMethod(
-            string methodName,
+            CqlOperatorsMethod method,
             Type? resultTypeHint,
             params Expression[] args)
         {
-            var result = BindToMethodConvertArgs(methodName, resultTypeHint, args);
+            var result =
+                method.Match(
+                    methodName => BindToMethodConvertArgs(methodName, resultTypeHint, args),
+                    cqlOperator => (MethodCallExpression)BindCqlOperator(cqlOperator, resultTypeHint, args))
+                ;
             return result;
         }
 
-        /// <inheritdoc />
-        public override Expression BindToMethod(
+        private Expression BindCqlOperator(
             CqlOperator @operator,
             Type? resultTypeHint,
             params Expression[] args)

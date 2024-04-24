@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -215,7 +216,7 @@ public class TJCOverallFHIR_1_8_000
 	{
 		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("TJCOverallFHIR-1.8.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -481,7 +482,7 @@ public class TJCOverallFHIR_1_8_000
 		var b_ = context.Operators.Quantity((decimal?)1m, "day");
 		var c_ = context.Operators.Add(StartValue, b_);
 		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Interval(a_, d_, true, true);
+		var e_ = context.Operators.Interval(a_, d_, (bool?)true, (bool?)true);
 
 		return e_;
 	}

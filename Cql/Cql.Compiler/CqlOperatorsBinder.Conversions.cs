@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
@@ -68,6 +69,13 @@ partial class CqlOperatorsBinder
             return true;
         }
 
+        if (from == typeof(object))
+        {
+            // Just cast up and hope for the best
+            result = (Expression.Convert(arg, to), TypeConversion.SuperType);
+            return true;
+        }
+
         result = default;
         return false;
     }
@@ -79,6 +87,7 @@ partial class CqlOperatorsBinder
         SubType = 2,
         SimpleConvert = 3,
         OperatorConvert = 4,
+        SuperType = 5, // Unresolved object
     }
 
     private MethodCallExpression BindToMethodConvertArgs(

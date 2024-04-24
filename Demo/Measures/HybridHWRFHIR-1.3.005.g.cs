@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -45,7 +46,7 @@ public class HybridHWRFHIR_1_3_005
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounters;
@@ -87,7 +88,7 @@ public class HybridHWRFHIR_1_3_005
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Inpatient_Encounters = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounters_Value);
@@ -295,7 +296,7 @@ public class HybridHWRFHIR_1_3_005
 	{
 		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
 		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
 		var d_ = context.ResolveParameter("HybridHWRFHIR-1.3.005", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -328,7 +329,7 @@ public class HybridHWRFHIR_1_3_005
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -336,7 +337,7 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -387,7 +388,7 @@ public class HybridHWRFHIR_1_3_005
 					var bu_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var bv_ = context.Operators.Subtract(bt_, bu_);
 					var bx_ = context.Operators.Start(bs_);
-					var by_ = context.Operators.Interval(bv_, bx_, true, true);
+					var by_ = context.Operators.Interval(bv_, bx_, (bool?)true, (bool?)true);
 					var bz_ = context.Operators.InInterval<CqlDateTime>(br_, by_, null);
 					var cb_ = context.Operators.Start(bs_);
 					var cc_ = context.Operators.Not((bool?)(cb_ is null));
@@ -421,7 +422,7 @@ public class HybridHWRFHIR_1_3_005
 					var ck_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var cl_ = context.Operators.Subtract(cj_, ck_);
 					var cn_ = context.Operators.Start(ci_);
-					var co_ = context.Operators.Interval(cl_, cn_, true, true);
+					var co_ = context.Operators.Interval(cl_, cn_, (bool?)true, (bool?)true);
 					var cp_ = context.Operators.InInterval<CqlDateTime>(ch_, co_, null);
 					var cr_ = context.Operators.Start(ci_);
 					var cs_ = context.Operators.Not((bool?)(cr_ is null));
@@ -442,7 +443,7 @@ public class HybridHWRFHIR_1_3_005
 				var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
-				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), true, true);
+				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), (bool?)true, (bool?)true);
 				var bc_ = context.Operators.InInterval<CqlDateTime>(ac_, bb_, null);
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
@@ -454,7 +455,7 @@ public class HybridHWRFHIR_1_3_005
 					var da_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var db_ = context.Operators.Subtract(cz_, da_);
 					var dd_ = context.Operators.Start(cy_);
-					var de_ = context.Operators.Interval(db_, dd_, true, true);
+					var de_ = context.Operators.Interval(db_, dd_, (bool?)true, (bool?)true);
 					var df_ = context.Operators.InInterval<CqlDateTime>(cx_, de_, null);
 					var dh_ = context.Operators.Start(cy_);
 					var di_ = context.Operators.Not((bool?)(dh_ is null));
@@ -503,7 +504,7 @@ public class HybridHWRFHIR_1_3_005
 				var ds_ = context.Operators.Quantity((decimal?)1m, "hour");
 				var dt_ = context.Operators.Subtract(dr_, ds_);
 				var dv_ = context.Operators.Start(dq_);
-				var dw_ = context.Operators.Interval(dt_, dv_, true, true);
+				var dw_ = context.Operators.Interval(dt_, dv_, (bool?)true, (bool?)true);
 				var dx_ = context.Operators.InInterval<CqlDateTime>(dp_, dw_, null);
 				var dz_ = context.Operators.Start(dq_);
 				var ea_ = context.Operators.Not((bool?)(dz_ is null));
@@ -526,7 +527,7 @@ public class HybridHWRFHIR_1_3_005
 			var w_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 			var x_ = context.Operators.Start(w_);
 			var z_ = context.Operators.End(w_);
-			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
+			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, (bool?)true, (bool?)true);
 
 			return aa_;
 		};
@@ -553,9 +554,9 @@ public class HybridHWRFHIR_1_3_005
 		var c_ = this.Medicare_payer();
 		var d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
-		Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV f_(ValueTuple<Encounter,Coverage> _valueTuple)
+		Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV f_(ValueTuple<Encounter,Coverage> _valueTuple)
 		{
-			var l_ = new Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV
+			var l_ = new Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV
 			{
 				InpatientEncounter = _valueTuple.Item1,
 				Payer = _valueTuple.Item2,
@@ -563,8 +564,8 @@ public class HybridHWRFHIR_1_3_005
 
 			return l_;
 		};
-		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Coverage>, Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
-		bool? h_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv)
+		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Coverage>, Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
+		bool? h_(Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv)
 		{
 			var m_ = context.Operators.Convert<string>(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.StatusElement);
 			var n_ = context.Operators.Equal(m_, "finished");
@@ -578,20 +579,19 @@ public class HybridHWRFHIR_1_3_005
 			var v_ = context.Operators.InInterval<CqlDateTime>(t_, u_, "day");
 			var w_ = context.Operators.And(r_, v_);
 			var x_ = this.Patient();
-			var y_ = context.Operators.Convert<CqlDateTime>(x_?.BirthDateElement?.Value);
+			var y_ = context.Operators.Convert<CqlDate>(x_?.BirthDateElement?.Value);
 			var aa_ = context.Operators.Start(s_);
 			var ab_ = context.Operators.DateFrom(aa_);
-			var ac_ = context.Operators.Convert<CqlDateTime>(ab_);
-			var ad_ = context.Operators.CalculateAgeAt(y_, ac_, "year");
-			var ae_ = context.Operators.GreaterOrEqual(ad_, (int?)65);
-			var af_ = context.Operators.And(w_, ae_);
+			var ac_ = context.Operators.CalculateAgeAt(y_, ab_, "year");
+			var ad_ = context.Operators.GreaterOrEqual(ac_, (int?)65);
+			var ae_ = context.Operators.And(w_, ad_);
 
-			return af_;
+			return ae_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
-		Encounter j_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
+		var i_ = context.Operators.WhereOrNull<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
+		Encounter j_(Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
 			tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
+		var k_ = context.Operators.SelectOrNull<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
 
 		return k_;
 	}
@@ -635,7 +635,7 @@ public class HybridHWRFHIR_1_3_005
 				var ak_ = context.Operators.Start(af_);
 				var al_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var am_ = context.Operators.Add(ak_, al_);
-				var an_ = context.Operators.Interval(ai_, am_, true, true);
+				var an_ = context.Operators.Interval(ai_, am_, (bool?)true, (bool?)true);
 				var ao_ = context.Operators.InInterval<CqlDateTime>(ae_, an_, null);
 				var ap_ = context.Operators.And(ac_, ao_);
 				var aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
@@ -679,7 +679,7 @@ public class HybridHWRFHIR_1_3_005
 				var bi_ = context.Operators.Start(bd_);
 				var bj_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var bk_ = context.Operators.Add(bi_, bj_);
-				var bl_ = context.Operators.Interval(bg_, bk_, true, true);
+				var bl_ = context.Operators.Interval(bg_, bk_, (bool?)true, (bool?)true);
 				var bm_ = context.Operators.InInterval<CqlDateTime>(bc_, bl_, null);
 				var bn_ = context.Operators.And(ba_, bm_);
 				var bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
@@ -741,7 +741,7 @@ public class HybridHWRFHIR_1_3_005
 				var ai_ = context.Operators.Subtract(ag_, ah_);
 				var ak_ = context.Operators.Start(af_);
 				var am_ = context.Operators.Add(ak_, ah_);
-				var an_ = context.Operators.Interval(ai_, am_, true, true);
+				var an_ = context.Operators.Interval(ai_, am_, (bool?)true, (bool?)true);
 				var ao_ = context.Operators.InInterval<CqlDateTime>(ae_, an_, null);
 				var ap_ = context.Operators.And(ac_, ao_);
 				var aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
@@ -784,7 +784,7 @@ public class HybridHWRFHIR_1_3_005
 				var bg_ = context.Operators.Subtract(be_, bf_);
 				var bi_ = context.Operators.Start(bd_);
 				var bk_ = context.Operators.Add(bi_, bf_);
-				var bl_ = context.Operators.Interval(bg_, bk_, true, true);
+				var bl_ = context.Operators.Interval(bg_, bk_, (bool?)true, (bool?)true);
 				var bm_ = context.Operators.InInterval<CqlDateTime>(bc_, bl_, null);
 				var bn_ = context.Operators.And(ba_, bm_);
 				var bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
@@ -844,7 +844,7 @@ public class HybridHWRFHIR_1_3_005
 				var ae_ = context.Operators.Subtract(ac_, ad_);
 				var ag_ = context.Operators.Start(ab_);
 				var ai_ = context.Operators.Add(ag_, ad_);
-				var aj_ = context.Operators.Interval(ae_, ai_, true, true);
+				var aj_ = context.Operators.Interval(ae_, ai_, (bool?)true, (bool?)true);
 				var ak_ = context.Operators.InInterval<CqlDateTime>(aa_, aj_, null);
 				var al_ = context.Operators.And(z_, ak_);
 				var am_ = context.Operators.Convert<string>(Lab?.StatusElement);
@@ -880,7 +880,7 @@ public class HybridHWRFHIR_1_3_005
 				var ax_ = context.Operators.Subtract(av_, aw_);
 				var az_ = context.Operators.Start(au_);
 				var bb_ = context.Operators.Add(az_, aw_);
-				var bc_ = context.Operators.Interval(ax_, bb_, true, true);
+				var bc_ = context.Operators.Interval(ax_, bb_, (bool?)true, (bool?)true);
 				var bd_ = context.Operators.InInterval<CqlDateTime>(at_, bc_, null);
 				var be_ = context.Operators.And(as_, bd_);
 				var bf_ = context.Operators.Convert<string>(Lab?.StatusElement);
@@ -985,12 +985,10 @@ public class HybridHWRFHIR_1_3_005
 	public int? CalendarAgeInYearsAt(CqlDateTime BirthDateTime, CqlDateTime AsOf)
 	{
 		var a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
-		var b_ = context.Operators.Convert<CqlDateTime>(a_);
-		var c_ = context.Operators.ConvertDateTimeToDate(AsOf);
-		var d_ = context.Operators.Convert<CqlDateTime>(c_);
-		var e_ = context.Operators.DurationBetween(b_, d_, "year");
+		var b_ = context.Operators.ConvertDateTimeToDate(AsOf);
+		var c_ = context.Operators.DurationBetween(a_, b_, "year");
 
-		return e_;
+		return c_;
 	}
 
     [CqlDeclaration("ToDate")]

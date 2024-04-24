@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -10,8 +10,12 @@ using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Operators;
+using OneOf;
 
 namespace Hl7.Cql.Compiler;
+
+[GenerateOneOf]
+internal partial class CqlOperatorsMethod : OneOfBase<string, CqlOperator> { }
 
 /// <summary>
 /// Binds <see cref="CqlOperator"/>s to <see cref="Expression"/>s.
@@ -19,30 +23,30 @@ namespace Hl7.Cql.Compiler;
 internal abstract class OperatorsBinder
 {
     /// <summary>
-    /// Binds a <paramref name="methodName"/> on <see cref="ICqlOperators"/> to an <see cref="Expression"/>.
+    /// Binds a <paramref name="method"/> on <see cref="ICqlOperators"/> to an <see cref="Expression"/>.
     /// </summary>
-    /// <param name="methodName">The method to bind to.</param>
+    /// <param name="method">The method to bind to.</param>
     /// <param name="resultTypeHint"></param>
     /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
     /// <returns>A <see cref="MethodCallExpression"/> that binds to a method on <see cref="ICqlOperators"/>.</returns>
     public abstract MethodCallExpression BindToMethod(
-        string methodName,
+        CqlOperatorsMethod method,
         Type? resultTypeHint,
         params Expression[] args
     );
 
-    /// <summary>
-    /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
-    /// </summary>
-    /// <param name="operator">The operator to bind.</param>
-    /// <param name="resultTypeHint"></param>
-    /// <param name="args">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
-    /// <returns>An expression that implements <paramref name="operator"/>. In most cases, this will be a <see cref="MethodCallExpression"/>.</returns>
-    public abstract Expression BindToMethod(
-        CqlOperator @operator,
-        Type? resultTypeHint,
-        params Expression[] args
-    );
+    // /// <summary>
+    // /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
+    // /// </summary>
+    // /// <param name="operator">The operator to bind.</param>
+    // /// <param name="resultTypeHint"></param>
+    // /// <param name="args">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
+    // /// <returns>An expression that implements <paramref name="operator"/>. In most cases, this will be a <see cref="MethodCallExpression"/>.</returns>
+    // public abstract Expression BindToMethod(
+    //     CqlOperator @operator,
+    //     Type? resultTypeHint,
+    //     params Expression[] args
+    // );
 
     /// <summary>
     /// Converts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.

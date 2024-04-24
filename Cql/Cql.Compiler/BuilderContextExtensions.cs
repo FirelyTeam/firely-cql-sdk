@@ -26,20 +26,18 @@ internal static class BuilderContextExtensions
         new ExpressionBuildingError(context, message).ToException(innerException);
 
     public static string GetExpressionPath(this IBuilderContext builder) =>
-        $"\r\n\tExpression Path:{string.Concat(
-            from context in builder.SelfAndAncestorBuilders().Reverse()
-            let info = context.DebuggerInfo
-            where info != null
-            select $"\r\n\t* {info}"
-        )}";
+        $"\r\n\tExpression Path {builder.Hash}:{GetExpressionPathLines(builder)}";
 
     public static string GetDebuggerView(this IBuilderContext builder) =>
-        $"{builder.GetType().Name}\r\n\tExpression Path:{string.Concat(
+        $"{builder.GetType().Name}{GetExpressionPath(builder)}";
+
+    private static string GetExpressionPathLines(IBuilderContext builder) =>
+        string.Concat(
             from context in builder.SelfAndAncestorBuilders().Reverse()
             let info = context.DebuggerInfo
             where info != null
             select $"\r\n\t* {info}"
-        )}";
+        );
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T CatchRethrowExpressionBuildingException<TBuilderContext, T>(

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -35,7 +36,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
     internal Lazy<IEnumerable<Encounter>> __Denominator;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
@@ -66,7 +67,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
         __Denominator = new Lazy<IEnumerable<Encounter>>(this.Denominator_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
@@ -194,18 +195,17 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		bool? b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Patient();
-			var e_ = context.Operators.Convert<CqlDateTime>(d_?.BirthDateElement?.Value);
+			var e_ = context.Operators.Convert<CqlDate>(d_?.BirthDateElement?.Value);
 			var f_ = FHIRHelpers_4_0_001.ToInterval(EncounterInpatient?.Period);
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
-			var i_ = context.Operators.Convert<CqlDateTime>(h_);
-			var j_ = context.Operators.CalculateAgeAt(e_, i_, "year");
-			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
-			var l_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
-			var m_ = context.Operators.Equal(l_, "finished");
-			var n_ = context.Operators.And(k_, m_);
+			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
+			var j_ = context.Operators.GreaterOrEqual(i_, (int?)18);
+			var k_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
+			var l_ = context.Operators.Equal(k_, "finished");
+			var m_ = context.Operators.And(j_, l_);
 
-			return n_;
+			return m_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 
@@ -299,7 +299,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -307,7 +307,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()

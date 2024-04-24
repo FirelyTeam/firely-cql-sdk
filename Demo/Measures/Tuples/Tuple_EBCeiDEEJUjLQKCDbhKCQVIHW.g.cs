@@ -1,4 +1,5 @@
 using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -16,7 +17,7 @@ namespace Tuples
     public class Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW: TupleBaseType
     {
         [CqlDeclaration("EncounterWithHospitalization")]
-        public Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW EncounterWithHospitalization { get; set; }
+        public Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW EncounterWithHospitalization { get; set; }
         [CqlDeclaration("HypoglycemicMedication")]
         public MedicationAdministration HypoglycemicMedication { get; set; }
     }

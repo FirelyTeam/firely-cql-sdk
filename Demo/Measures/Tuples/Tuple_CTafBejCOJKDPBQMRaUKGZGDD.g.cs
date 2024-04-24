@@ -1,4 +1,5 @@
 using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -16,6 +17,6 @@ namespace Tuples
     public class Tuple_CTafBejCOJKDPBQMRaUKGZGDD: TupleBaseType
     {
         [CqlDeclaration("AggregateClaim")]
-        public IEnumerable<Tuples.Tuple_CAKcSTUVVXcPjYRXATiiRAEMg> AggregateClaim { get; set; }
+        public IEnumerable<Tuple_CAKcSTUVVXcPjYRXATiiRAEMg> AggregateClaim { get; set; }
     }
 }

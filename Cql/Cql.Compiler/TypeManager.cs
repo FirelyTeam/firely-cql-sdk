@@ -69,7 +69,7 @@ namespace Hl7.Cql.Compiler
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
             TupleTypeList = [];
-            Hasher = new Hasher();
+            Hasher = Hasher.Instance;
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             TupleTypeNamespace = tupleTypeNamespace;
