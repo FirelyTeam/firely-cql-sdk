@@ -310,6 +310,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private Expression HandleOnOrBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
         {
             var precision = Precision(context.dateTimePrecisionSpecifier());
+            (lhs, rhs) = (lhs.resultTypeSpecifier, rhs.resultTypeSpecifier) switch
+            {
+                (IntervalTypeSpecifier, not IntervalTypeSpecifier) => (lhs, PointInterval(rhs)),
+                (not IntervalTypeSpecifier, IntervalTypeSpecifier) => (PointInterval(lhs), rhs),
+                _ => (lhs, rhs)
+            };
             var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
             var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, args);
             return expression
@@ -342,40 +348,39 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             // These timing phrases have complicated operand setups.
             // Depending on the phrase, setup lhs and rhs operands.
-            if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval)
+            cqlParser.QuantityOffsetContext? offset;
+            if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval
+                && (offset = context.quantityOffset()) != null)
             {
-                var offset = context.quantityOffset();
-                if (offset != null)
+                var quantity = Visit(offset.quantity());
+                // or more | or less
+                var offsetRelative = offset.offsetRelativeQualifier()?.GetText();
+                if (offsetRelative is not null)
                 {
-                    var quantity = Visit(offset.quantity());
-                    // or more | or less
-                    var offsetRelative = offset.offsetRelativeQualifier()?.GetText();
-                    if (offsetRelative is not null)
+                    if (offsetRelative == "or more")
                     {
-                        if (offsetRelative == "or more")
+                        if (rhs.resultTypeSpecifier is IntervalTypeSpecifier rhsInterval)
                         {
-                            if (rhs.resultTypeSpecifier is IntervalTypeSpecifier rhsInterval)
+                            rhs = new Start
                             {
-                                rhs = new Start
-                                {
-                                    operand = rhs
-                                }.WithResultType(rhsInterval.pointType);
-                            }
-                            lhs = new Start { operand = lhs, }
-                                .WithResultType(lhsInterval.pointType);
-
-                            rhs = new Add { operand = new Expression[] { rhs, quantity, } }
-                                .WithResultType(rhs.resultTypeSpecifier);
+                                operand = rhs
+                            }.WithResultType(rhsInterval.pointType);
                         }
-                        else if (offsetRelative == "or less")
+                        lhs = new Start { operand = lhs, }
+                            .WithResultType(lhsInterval.pointType);
+
+                        rhs = new Add { operand = new Expression[] { rhs, quantity, } }
+                            .WithResultType(rhs.resultTypeSpecifier);
+                    }
+                    else if (offsetRelative == "or less")
+                    {
+                        // this case is an exception.
+                        // this mirrors the generation done for this operator by the reference cql-to-elm implementation
+                        // it's weird
+                        var @in = new In
                         {
-                            // this case is an exception.
-                            // this mirrors the generation done for this operator by the reference cql-to-elm implementation
-                            // it's weird
-                            var @in = new In
+                            operand = new Expression[]
                             {
-                                operand = new Expression[]
-                                {
                                     new Start { operand = lhs }.WithResultType(lhsInterval.pointType),
                                     new Elm.Interval
                                     {
@@ -389,41 +394,46 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                             }
                                         }.WithResultType(rhs.resultTypeSpecifier)
                                     }.WithResultType(lhsInterval.resultTypeSpecifier)
-                                }
-                            }.WithResultType(SystemTypes.BooleanType);
-                            if (precision != null)
-                            {
-                                if (Enum.TryParse<DateTimePrecision>(precision.value, out var dtp))
-                                {
-                                    @in.precisionSpecified = true;
-                                    @in.precision = dtp;
-                                }
-                                else @in.AddError($"Unknown precision '{precision.value}'.");
                             }
-                            var not = new Not
+                        }.WithResultType(SystemTypes.BooleanType);
+                        if (precision != null)
+                        {
+                            if (Enum.TryParse<DateTimePrecision>(precision.value, out var dtp))
                             {
-                                operand = new IsNull
-                                {
-                                    operand = rhs
-                                }.WithResultType(SystemTypes.BooleanType)
-                            }.WithResultType(SystemTypes.BooleanType);
-                            var and = new And
-                            {
-                                operand = new Expression[] { @in, not }
-                            }.WithResultType(SystemTypes.BooleanType);
-                            return and
-                                .WithId()
-                                .WithLocator(context.Locator());
+                                @in.precisionSpecified = true;
+                                @in.precision = dtp;
+                            }
+                            else @in.AddError($"Unknown precision '{precision.value}'.");
                         }
-                    }
-                    // less than | more than
-                    var exclusiveRelative = offset.exclusiveRelativeQualifier();
-                    if (exclusiveRelative is not null)
-                    {
-                        throw new NotImplementedException();
+                        var not = new Not
+                        {
+                            operand = new IsNull
+                            {
+                                operand = rhs
+                            }.WithResultType(SystemTypes.BooleanType)
+                        }.WithResultType(SystemTypes.BooleanType);
+                        var and = new And
+                        {
+                            operand = new Expression[] { @in, not }
+                        }.WithResultType(SystemTypes.BooleanType);
+                        return and
+                            .WithId()
+                            .WithLocator(context.Locator());
                     }
                 }
+                // less than | more than
+                var exclusiveRelative = offset.exclusiveRelativeQualifier();
+                if (exclusiveRelative is not null)
+                {
+                    throw new NotImplementedException();
+                }
             }
+            (lhs, rhs) = (lhs.resultTypeSpecifier, rhs.resultTypeSpecifier) switch
+            {
+                (IntervalTypeSpecifier, not IntervalTypeSpecifier) => (lhs, PointInterval(rhs)),
+                (not IntervalTypeSpecifier, IntervalTypeSpecifier) => (PointInterval(lhs), rhs),
+                _ => (lhs, rhs)
+            };
             var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
             var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, args);
             return expression
@@ -658,5 +668,26 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => throw new InvalidOperationException("Cannot happen, we have already checked for all possible values of qualifier.")
             };
         }
+
+        private If PointInterval(Expression point) =>
+                new If
+                {
+                    condition = new IsNull
+                    {
+                        operand = point
+                    }.WithResultType(SystemTypes.BooleanType),
+                    then = new As
+                    {
+                        operand = new Null(),
+                        asTypeSpecifier = point.resultTypeSpecifier.ToIntervalType()
+                    }.WithResultType(point.resultTypeSpecifier.ToIntervalType()),
+                    @else = new Elm.Interval
+                    {
+                        low = point,
+                        high = point,
+                        lowClosed = true,
+                        highClosed = true,
+                    }.WithResultType(point.resultTypeSpecifier.ToIntervalType())
+                }.WithResultType(point.resultTypeSpecifier.ToIntervalType());
     }
 }

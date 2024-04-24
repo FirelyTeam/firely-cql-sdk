@@ -45,5 +45,13 @@ namespace Hl7.Cql.CqlToElm.Test
             dt.Value.OffsetMinute.Should().Be(-15);
             dt.Value.DateTimeOffset.Offset.Should().Be(TimeSpan.FromMinutes(-75));
         }
+
+        [TestMethod]
+        public void Convert_Code_To_Concept()
+        {
+            var library = CreateLibraryForExpression("ToConcept(Code { code: '8480-6' })");
+            var toConcept = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToConcept>();
+            var result = Run<CqlConcept>(toConcept);
+        }
     }
 }

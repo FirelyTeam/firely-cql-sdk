@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class ExpandTest: Base
+    public class ExpandCollapseTest: Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
+        public static void Initialize(TestContext context) => ClassInitialize(co =>
+        {
+            co.AllowNullIntervals = true;
+        });
 #pragma warning restore IDE0060 // Remove unused parameter
 
         [TestMethod]
@@ -37,6 +40,13 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("expand { Interval[10, 10] } per 0.1");
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+        }
+
+        [TestMethod]
+        public void Collapse_List_Null_Intervals()
+        {
+            var lib = CreateLibraryForExpression("collapse { Interval(null, null) }");
+            var collapse = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Collapse>();
         }
 
     }

@@ -159,7 +159,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-
         public void Overlaps()
         {
             var library = CreateLibraryForExpression("Interval[null, null] overlaps Interval[1, 10]");
@@ -170,6 +169,24 @@ namespace Hl7.Cql.CqlToElm.Test
             overlaps.precisionSpecified.Should().BeFalse();
             overlaps.operand[0].Should().HaveType(SystemTypes.IntegerType.ToIntervalType());
             overlaps.operand[1].Should().HaveType(SystemTypes.IntegerType.ToIntervalType());
+        }
+
+        [TestMethod]
+        public void TestOnOrAfterDateTrue()
+        {
+            var library = CreateLibraryForExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
+            var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
+            var result = Run<bool?>(sameOrAfter);
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void TestOnOrBeforeDateTrue()
+        {
+            var library = CreateLibraryForExpression("Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15");
+            var sameOrBefore = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrBefore>();
+            var result = Run<bool?>(sameOrBefore);
+            result.Should().BeTrue();
         }
 
     }

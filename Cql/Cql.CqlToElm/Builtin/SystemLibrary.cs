@@ -218,7 +218,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef GreaterOrEqual = binary<GreaterOrEqual>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
         public static SystemFunction<Last> Last = unary<Last>(T.ToListType(), T);
         public static SystemFunction<LastPositionOf> LastPositionOf = binary<LastPositionOf>(StringType, StringType, IntegerType);
-        public static SystemFunction<Length> Length = unary<Length>(T.ToListType(), IntegerType);
+        public static OverloadedFunctionDef Length = unary<Length>(T.ToListType(), IntegerType)
+            .Combine(unary<Length>(SystemTypes.StringType, IntegerType));
         public static OverloadedFunctionDef Less = binary<Less>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
         public static OverloadedFunctionDef LessOrEqual = binary<LessOrEqual>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
         public static SystemFunction<Ln> Ln = unary<Ln>(DecimalType, DecimalType);
