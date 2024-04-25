@@ -493,7 +493,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					};
 				};
 				var p_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
-				var q_ = context.Operators.IntervalSameOrBefore(o_(), p_, "day");
+				var q_ = context.Operators.SameOrBefore(o_(), p_, "day");
 				var r_ = context.Operators.And(n_, q_);
 
 				return r_;

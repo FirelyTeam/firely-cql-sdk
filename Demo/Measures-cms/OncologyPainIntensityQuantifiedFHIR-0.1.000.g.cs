@@ -258,7 +258,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			var az_ = context.Operators.And(aj_, ay_);
 			var bb_ = QICoreCommon_2_0_000.toInterval(ak_);
 			var bd_ = QICoreCommon_2_0_000.toInterval(u_);
-			var be_ = context.Operators.IntervalSameAs<CqlDateTime>(bb_, bd_, "day");
+			var be_ = context.Operators.SameAs<CqlDateTime>(bb_, bd_, "day");
 			var bf_ = context.Operators.Not(be_);
 			var bg_ = context.Operators.And(az_, bf_);
 			var bh_ = this.Measurement_Period();

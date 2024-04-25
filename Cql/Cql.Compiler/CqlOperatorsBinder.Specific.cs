@@ -307,6 +307,7 @@ partial class CqlOperatorsBinder
 
         throw new ArgumentException("Source is not generic", nameof(source));
     }
+
     private MethodCallExpression Where(
         Expression source,
         Expression lambda)

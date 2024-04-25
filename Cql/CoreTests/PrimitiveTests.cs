@@ -3254,7 +3254,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var sameOrBefore = fcq.IntervalSameOrBefore(thru2022, thru2023, null);
+            var sameOrBefore = fcq.SameOrBefore(thru2022, thru2023, null);
 
             Assert.AreEqual(false, sameOrBefore);
         }
@@ -3270,7 +3270,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var sameOrBefore = fcq.IntervalSameOrBefore(thru2022, thru2023, null);
+            var sameOrBefore = fcq.SameOrBefore(thru2022, thru2023, null);
 
             Assert.IsNotNull(sameOrBefore);
             Assert.IsTrue(sameOrBefore ?? false);

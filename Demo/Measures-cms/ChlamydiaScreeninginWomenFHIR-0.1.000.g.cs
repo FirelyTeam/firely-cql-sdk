@@ -527,7 +527,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					return x_;
 				};
 			};
-			var o_ = context.Operators.IntervalSameOrBefore(m_, n_(), null);
+			var o_ = context.Operators.SameOrBefore(m_, n_(), null);
 			var p_ = context.Operators.And(k_, o_);
 
 			return p_;

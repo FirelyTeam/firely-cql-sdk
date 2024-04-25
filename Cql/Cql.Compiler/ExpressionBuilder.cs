@@ -319,7 +319,10 @@ namespace Hl7.Cql.Compiler
                     DifferenceBetween or
                     DurationBetween or
                     In or
-                    Round => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+                    Round or
+                    SameAs or
+                    SameOrAfter or
+                    SameOrBefore => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
 
                 AllTrue or
                     AnyTrue or
@@ -457,6 +460,9 @@ namespace Hl7.Cql.Compiler
                             Quantity or
                             ReplaceMatches or
                             Round or
+                            SameAs or
+                            SameOrAfter or
+                            SameOrBefore or
                             SingletonFrom or
                             Split or
                             Start or
@@ -541,9 +547,9 @@ namespace Hl7.Cql.Compiler
                         Property e          => Property(e),
                         Query e             => Query(e),
                         Retrieve e          => Retrieve(e),
-                        SameAs e            => SameAs(e),
-                        SameOrAfter e       => SameOrAfter(e),
-                        SameOrBefore e      => SameOrBefore(e),
+                        // SameAs e            => SameAs(e),
+                        // SameOrAfter e       => SameOrAfter(e),
+                        // SameOrBefore e      => SameOrBefore(e),
                         Starts e            => Starts(e),
                         Tuple e             => Tuple(e),
                         Union e             => Union(e),
@@ -1480,49 +1486,6 @@ namespace Hl7.Cql.Compiler
 
     #endregion
 
-    #region DateAndTimeOperators
-
-    partial class ExpressionBuilderContext
-    {
-        protected Expression? SameAs(SameAs e)
-        {
-            var expr = TranslateAll([.. e.operand[..2], ((IGetPrecision)e).precisionOrNull])!;
-            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
-            {
-                (true, true) => CqlOperator.IntervalSameAs,
-                (true, false) => throw this.NewExpressionBuildingException(),
-                _ => CqlOperator.SameAs
-            }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, null, expr);
-        }
-
-        protected Expression SameOrAfter(SameOrAfter e)
-        {
-            var expr = TranslateAll([.. e.operand[..2], ((IGetPrecision)e).precisionOrNull])!;
-            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
-            {
-                (true, true) => CqlOperator.IntervalSameOrAfter,
-                (true, false) => throw this.NewExpressionBuildingException(),
-                _ => CqlOperator.SameOrAfter
-            }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, null, expr);
-        }
-
-        protected Expression SameOrBefore(SameOrBefore e)
-        {
-            var expr = TranslateAll([.. e.operand[..2], ((IGetPrecision)e).precisionOrNull])!;
-            var method = (leftIsCqlInterval: expr[0].Type.IsCqlInterval(out _), rightIsCqlInterval: expr[1].Type.IsCqlInterval(out _)) switch
-            {
-                (true, true) => CqlOperator.IntervalSameOrBefore,
-                (true, false) => throw this.NewExpressionBuildingException(),
-                _ => CqlOperator.SameOrBefore
-            }; // @TODO: Cast - Move to CqlOperatorsBinder
-            return BindCqlOperator(method, null, expr);
-        }
-    }
-
-    #endregion
-
     #region ErrorsAndMessaging
 
     partial class ExpressionBuilderContext
@@ -1644,7 +1607,6 @@ namespace Hl7.Cql.Compiler
             }
             throw new NotImplementedException().WithContext(this);
         }
-
 
         protected Expression? Includes(Includes e)
         {

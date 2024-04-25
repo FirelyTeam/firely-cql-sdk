@@ -1599,7 +1599,7 @@ namespace Hl7.Cql.Runtime
 
         #region Same As
 
-        public bool? IntervalSameAs<T>(CqlInterval<T> @this, CqlInterval<T> other, string? precision)
+        public bool? SameAs<T>(CqlInterval<T> @this, CqlInterval<T> other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1611,16 +1611,16 @@ namespace Hl7.Cql.Runtime
 
         #region On/Same Or After
 
-        public bool? IntervalSameOrAfter(CqlInterval<int?> @this, CqlInterval<int?> other)
+        public bool? SameOrAfter(CqlInterval<int?> @this, CqlInterval<int?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<long?> @this, CqlInterval<long?> other)
+        public bool? SameOrAfter(CqlInterval<long?> @this, CqlInterval<long?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
+        public bool? SameOrAfter(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
+        public bool? SameOrAfter(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1650,7 +1650,7 @@ namespace Hl7.Cql.Runtime
             return After(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1680,7 +1680,7 @@ namespace Hl7.Cql.Runtime
             return After(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1737,15 +1737,15 @@ namespace Hl7.Cql.Runtime
 
         #region On/Same Or Before
 
-        public bool? IntervalSameOrBefore(CqlInterval<int?> @this, CqlInterval<int?> other)
+        public bool? SameOrBefore(CqlInterval<int?> @this, CqlInterval<int?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<long?> @this, CqlInterval<long?> other)
+        public bool? SameOrBefore(CqlInterval<long?> @this, CqlInterval<long?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
+        public bool? SameOrBefore(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
+        public bool? SameOrBefore(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1774,7 +1774,7 @@ namespace Hl7.Cql.Runtime
             return Before(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrBefore(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1803,7 +1803,7 @@ namespace Hl7.Cql.Runtime
             return Before(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrBefore(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;

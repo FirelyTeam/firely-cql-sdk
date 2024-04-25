@@ -651,7 +651,7 @@ public class HIVRetentionFHIR_0_1_000
 						return be_;
 					};
 				};
-				var at_ = context.Operators.IntervalSameOrBefore(ar_(), ap_, "day");
+				var at_ = context.Operators.SameOrBefore(ar_(), ap_, "day");
 				var au_ = context.Operators.And(aq_, at_);
 				var av_ = QICoreCommon_2_0_000.isActive(HIVDiagnosis);
 				var aw_ = context.Operators.And(au_, av_);
