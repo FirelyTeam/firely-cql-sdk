@@ -1,0 +1,1422 @@
+﻿DBUG: TypeConverter has the following conversions defined:
+	* byte[] --> string
+	* Canonical --> string
+	* Code --> string
+	* Code<Account.AccountStatus> --> CqlCode
+	* Code<Account.AccountStatus> --> string
+	* Code<Account.AccountStatus> --> struct Account.AccountStatus?
+	* Code<ActionCardinalityBehavior> --> CqlCode
+	* Code<ActionCardinalityBehavior> --> string
+	* Code<ActionCardinalityBehavior> --> struct ActionCardinalityBehavior?
+	* Code<ActionConditionKind> --> CqlCode
+	* Code<ActionConditionKind> --> string
+	* Code<ActionConditionKind> --> struct ActionConditionKind?
+	* Code<ActionGroupingBehavior> --> CqlCode
+	* Code<ActionGroupingBehavior> --> string
+	* Code<ActionGroupingBehavior> --> struct ActionGroupingBehavior?
+	* Code<ActionParticipantType> --> CqlCode
+	* Code<ActionParticipantType> --> string
+	* Code<ActionParticipantType> --> struct ActionParticipantType?
+	* Code<ActionPrecheckBehavior> --> CqlCode
+	* Code<ActionPrecheckBehavior> --> string
+	* Code<ActionPrecheckBehavior> --> struct ActionPrecheckBehavior?
+	* Code<ActionRelationshipType> --> CqlCode
+	* Code<ActionRelationshipType> --> string
+	* Code<ActionRelationshipType> --> struct ActionRelationshipType?
+	* Code<ActionRequiredBehavior> --> CqlCode
+	* Code<ActionRequiredBehavior> --> string
+	* Code<ActionRequiredBehavior> --> struct ActionRequiredBehavior?
+	* Code<ActionSelectionBehavior> --> CqlCode
+	* Code<ActionSelectionBehavior> --> string
+	* Code<ActionSelectionBehavior> --> struct ActionSelectionBehavior?
+	* Code<ActivityDefinition.RequestResourceType> --> CqlCode
+	* Code<ActivityDefinition.RequestResourceType> --> string
+	* Code<ActivityDefinition.RequestResourceType> --> struct ActivityDefinition.RequestResourceType?
+	* Code<Address.AddressType> --> CqlCode
+	* Code<Address.AddressType> --> string
+	* Code<Address.AddressType> --> struct Address.AddressType?
+	* Code<Address.AddressUse> --> CqlCode
+	* Code<Address.AddressUse> --> string
+	* Code<Address.AddressUse> --> struct Address.AddressUse?
+	* Code<AdministrativeGender> --> CqlCode
+	* Code<AdministrativeGender> --> string
+	* Code<AdministrativeGender> --> struct AdministrativeGender?
+	* Code<AdverseEvent.AdverseEventActuality> --> CqlCode
+	* Code<AdverseEvent.AdverseEventActuality> --> string
+	* Code<AdverseEvent.AdverseEventActuality> --> struct AdverseEvent.AdverseEventActuality?
+	* Code<AdverseEvent.AdverseEventOutcome> --> CqlCode
+	* Code<AdverseEvent.AdverseEventOutcome> --> string
+	* Code<AdverseEvent.AdverseEventOutcome> --> struct AdverseEvent.AdverseEventOutcome?
+	* Code<AdverseEvent.AdverseEventSeverity> --> CqlCode
+	* Code<AdverseEvent.AdverseEventSeverity> --> string
+	* Code<AdverseEvent.AdverseEventSeverity> --> struct AdverseEvent.AdverseEventSeverity?
+	* Code<AllergyIntolerance.AllergyIntoleranceCategory> --> CqlCode
+	* Code<AllergyIntolerance.AllergyIntoleranceCategory> --> string
+	* Code<AllergyIntolerance.AllergyIntoleranceCategory> --> struct AllergyIntolerance.AllergyIntoleranceCategory?
+	* Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes> --> CqlCode
+	* Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes> --> string
+	* Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes> --> struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes?
+	* Code<AllergyIntolerance.AllergyIntoleranceCriticality> --> CqlCode
+	* Code<AllergyIntolerance.AllergyIntoleranceCriticality> --> string
+	* Code<AllergyIntolerance.AllergyIntoleranceCriticality> --> struct AllergyIntolerance.AllergyIntoleranceCriticality?
+	* Code<AllergyIntolerance.AllergyIntoleranceSeverity> --> CqlCode
+	* Code<AllergyIntolerance.AllergyIntoleranceSeverity> --> string
+	* Code<AllergyIntolerance.AllergyIntoleranceSeverity> --> struct AllergyIntolerance.AllergyIntoleranceSeverity?
+	* Code<AllergyIntolerance.AllergyIntoleranceType> --> CqlCode
+	* Code<AllergyIntolerance.AllergyIntoleranceType> --> string
+	* Code<AllergyIntolerance.AllergyIntoleranceType> --> struct AllergyIntolerance.AllergyIntoleranceType?
+	* Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes> --> CqlCode
+	* Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes> --> string
+	* Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes> --> struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes?
+	* Code<Appointment.AppointmentStatus> --> CqlCode
+	* Code<Appointment.AppointmentStatus> --> string
+	* Code<Appointment.AppointmentStatus> --> struct Appointment.AppointmentStatus?
+	* Code<Appointment.ParticipantRequired> --> CqlCode
+	* Code<Appointment.ParticipantRequired> --> string
+	* Code<Appointment.ParticipantRequired> --> struct Appointment.ParticipantRequired?
+	* Code<AuditEvent.AuditEventAction> --> CqlCode
+	* Code<AuditEvent.AuditEventAction> --> string
+	* Code<AuditEvent.AuditEventAction> --> struct AuditEvent.AuditEventAction?
+	* Code<AuditEvent.AuditEventAgentNetworkType> --> CqlCode
+	* Code<AuditEvent.AuditEventAgentNetworkType> --> string
+	* Code<AuditEvent.AuditEventAgentNetworkType> --> struct AuditEvent.AuditEventAgentNetworkType?
+	* Code<AuditEvent.AuditEventOutcome> --> CqlCode
+	* Code<AuditEvent.AuditEventOutcome> --> string
+	* Code<AuditEvent.AuditEventOutcome> --> struct AuditEvent.AuditEventOutcome?
+	* Code<BindingStrength> --> CqlCode
+	* Code<BindingStrength> --> string
+	* Code<BindingStrength> --> struct BindingStrength?
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> --> CqlCode
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> --> string
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> --> struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory?
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> --> CqlCode
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> --> string
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> --> struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus?
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> --> CqlCode
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> --> string
+	* Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> --> struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale?
+	* Code<Bundle.BundleType> --> CqlCode
+	* Code<Bundle.BundleType> --> string
+	* Code<Bundle.BundleType> --> struct Bundle.BundleType?
+	* Code<Bundle.HTTPVerb> --> CqlCode
+	* Code<Bundle.HTTPVerb> --> string
+	* Code<Bundle.HTTPVerb> --> struct Bundle.HTTPVerb?
+	* Code<Bundle.LinkRelationTypes> --> CqlCode
+	* Code<Bundle.LinkRelationTypes> --> string
+	* Code<Bundle.LinkRelationTypes> --> struct Bundle.LinkRelationTypes?
+	* Code<Bundle.SearchEntryMode> --> CqlCode
+	* Code<Bundle.SearchEntryMode> --> string
+	* Code<Bundle.SearchEntryMode> --> struct Bundle.SearchEntryMode?
+	* Code<CapabilityStatement.ConditionalDeleteStatus> --> CqlCode
+	* Code<CapabilityStatement.ConditionalDeleteStatus> --> string
+	* Code<CapabilityStatement.ConditionalDeleteStatus> --> struct CapabilityStatement.ConditionalDeleteStatus?
+	* Code<CapabilityStatement.ConditionalReadStatus> --> CqlCode
+	* Code<CapabilityStatement.ConditionalReadStatus> --> string
+	* Code<CapabilityStatement.ConditionalReadStatus> --> struct CapabilityStatement.ConditionalReadStatus?
+	* Code<CapabilityStatement.DocumentMode> --> CqlCode
+	* Code<CapabilityStatement.DocumentMode> --> string
+	* Code<CapabilityStatement.DocumentMode> --> struct CapabilityStatement.DocumentMode?
+	* Code<CapabilityStatement.EventCapabilityMode> --> CqlCode
+	* Code<CapabilityStatement.EventCapabilityMode> --> string
+	* Code<CapabilityStatement.EventCapabilityMode> --> struct CapabilityStatement.EventCapabilityMode?
+	* Code<CapabilityStatement.ReferenceHandlingPolicy> --> CqlCode
+	* Code<CapabilityStatement.ReferenceHandlingPolicy> --> string
+	* Code<CapabilityStatement.ReferenceHandlingPolicy> --> struct CapabilityStatement.ReferenceHandlingPolicy?
+	* Code<CapabilityStatement.ResourceVersionPolicy> --> CqlCode
+	* Code<CapabilityStatement.ResourceVersionPolicy> --> string
+	* Code<CapabilityStatement.ResourceVersionPolicy> --> struct CapabilityStatement.ResourceVersionPolicy?
+	* Code<CapabilityStatement.RestfulCapabilityMode> --> CqlCode
+	* Code<CapabilityStatement.RestfulCapabilityMode> --> string
+	* Code<CapabilityStatement.RestfulCapabilityMode> --> struct CapabilityStatement.RestfulCapabilityMode?
+	* Code<CapabilityStatement.SystemRestfulInteraction> --> CqlCode
+	* Code<CapabilityStatement.SystemRestfulInteraction> --> string
+	* Code<CapabilityStatement.SystemRestfulInteraction> --> struct CapabilityStatement.SystemRestfulInteraction?
+	* Code<CapabilityStatement.TypeRestfulInteraction> --> CqlCode
+	* Code<CapabilityStatement.TypeRestfulInteraction> --> string
+	* Code<CapabilityStatement.TypeRestfulInteraction> --> struct CapabilityStatement.TypeRestfulInteraction?
+	* Code<CapabilityStatementKind> --> CqlCode
+	* Code<CapabilityStatementKind> --> string
+	* Code<CapabilityStatementKind> --> struct CapabilityStatementKind?
+	* Code<CarePlan.CarePlanActivityKind> --> CqlCode
+	* Code<CarePlan.CarePlanActivityKind> --> string
+	* Code<CarePlan.CarePlanActivityKind> --> struct CarePlan.CarePlanActivityKind?
+	* Code<CarePlan.CarePlanActivityStatus> --> CqlCode
+	* Code<CarePlan.CarePlanActivityStatus> --> string
+	* Code<CarePlan.CarePlanActivityStatus> --> struct CarePlan.CarePlanActivityStatus?
+	* Code<CarePlan.CarePlanIntent> --> CqlCode
+	* Code<CarePlan.CarePlanIntent> --> string
+	* Code<CarePlan.CarePlanIntent> --> struct CarePlan.CarePlanIntent?
+	* Code<CareTeam.CareTeamStatus> --> CqlCode
+	* Code<CareTeam.CareTeamStatus> --> string
+	* Code<CareTeam.CareTeamStatus> --> struct CareTeam.CareTeamStatus?
+	* Code<CatalogEntry.CatalogEntryRelationType> --> CqlCode
+	* Code<CatalogEntry.CatalogEntryRelationType> --> string
+	* Code<CatalogEntry.CatalogEntryRelationType> --> struct CatalogEntry.CatalogEntryRelationType?
+	* Code<ChargeItem.ChargeItemStatus> --> CqlCode
+	* Code<ChargeItem.ChargeItemStatus> --> string
+	* Code<ChargeItem.ChargeItemStatus> --> struct ChargeItem.ChargeItemStatus?
+	* Code<ClaimProcessingCodes> --> CqlCode
+	* Code<ClaimProcessingCodes> --> string
+	* Code<ClaimProcessingCodes> --> struct ClaimProcessingCodes?
+	* Code<ClaimUseCode> --> CqlCode
+	* Code<ClaimUseCode> --> string
+	* Code<ClaimUseCode> --> struct ClaimUseCode?
+	* Code<ClinicalImpression.ClinicalImpressionStatus> --> CqlCode
+	* Code<ClinicalImpression.ClinicalImpressionStatus> --> string
+	* Code<ClinicalImpression.ClinicalImpressionStatus> --> struct ClinicalImpression.ClinicalImpressionStatus?
+	* Code<CodeSystem.CodeSystemHierarchyMeaning> --> CqlCode
+	* Code<CodeSystem.CodeSystemHierarchyMeaning> --> string
+	* Code<CodeSystem.CodeSystemHierarchyMeaning> --> struct CodeSystem.CodeSystemHierarchyMeaning?
+	* Code<CodeSystem.PropertyType> --> CqlCode
+	* Code<CodeSystem.PropertyType> --> string
+	* Code<CodeSystem.PropertyType> --> struct CodeSystem.PropertyType?
+	* Code<CodeSystemContentMode> --> CqlCode
+	* Code<CodeSystemContentMode> --> string
+	* Code<CodeSystemContentMode> --> struct CodeSystemContentMode?
+	* Code<CompartmentType> --> CqlCode
+	* Code<CompartmentType> --> string
+	* Code<CompartmentType> --> struct CompartmentType?
+	* Code<Composition.CompositionAttestationMode> --> CqlCode
+	* Code<Composition.CompositionAttestationMode> --> string
+	* Code<Composition.CompositionAttestationMode> --> struct Composition.CompositionAttestationMode?
+	* Code<Composition.V3ConfidentialityClassification> --> CqlCode
+	* Code<Composition.V3ConfidentialityClassification> --> string
+	* Code<Composition.V3ConfidentialityClassification> --> struct Composition.V3ConfidentialityClassification?
+	* Code<CompositionStatus> --> CqlCode
+	* Code<CompositionStatus> --> string
+	* Code<CompositionStatus> --> struct CompositionStatus?
+	* Code<ConceptMap.ConceptMapGroupUnmappedMode> --> CqlCode
+	* Code<ConceptMap.ConceptMapGroupUnmappedMode> --> string
+	* Code<ConceptMap.ConceptMapGroupUnmappedMode> --> struct ConceptMap.ConceptMapGroupUnmappedMode?
+	* Code<ConceptMapEquivalence> --> CqlCode
+	* Code<ConceptMapEquivalence> --> string
+	* Code<ConceptMapEquivalence> --> struct ConceptMapEquivalence?
+	* Code<Condition.ConditionClinicalStatusCodes> --> CqlCode
+	* Code<Condition.ConditionClinicalStatusCodes> --> string
+	* Code<Condition.ConditionClinicalStatusCodes> --> struct Condition.ConditionClinicalStatusCodes?
+	* Code<Condition.ConditionVerificationStatus> --> CqlCode
+	* Code<Condition.ConditionVerificationStatus> --> string
+	* Code<Condition.ConditionVerificationStatus> --> struct Condition.ConditionVerificationStatus?
+	* Code<Consent.ConsentDataMeaning> --> CqlCode
+	* Code<Consent.ConsentDataMeaning> --> string
+	* Code<Consent.ConsentDataMeaning> --> struct Consent.ConsentDataMeaning?
+	* Code<Consent.ConsentProvisionType> --> CqlCode
+	* Code<Consent.ConsentProvisionType> --> string
+	* Code<Consent.ConsentProvisionType> --> struct Consent.ConsentProvisionType?
+	* Code<Consent.ConsentState> --> CqlCode
+	* Code<Consent.ConsentState> --> string
+	* Code<Consent.ConsentState> --> struct Consent.ConsentState?
+	* Code<ConstraintSeverity> --> CqlCode
+	* Code<ConstraintSeverity> --> string
+	* Code<ConstraintSeverity> --> struct ConstraintSeverity?
+	* Code<ContactPoint.ContactPointSystem> --> CqlCode
+	* Code<ContactPoint.ContactPointSystem> --> string
+	* Code<ContactPoint.ContactPointSystem> --> struct ContactPoint.ContactPointSystem?
+	* Code<ContactPoint.ContactPointUse> --> CqlCode
+	* Code<ContactPoint.ContactPointUse> --> string
+	* Code<ContactPoint.ContactPointUse> --> struct ContactPoint.ContactPointUse?
+	* Code<Contract.ContractResourcePublicationStatusCodes> --> CqlCode
+	* Code<Contract.ContractResourcePublicationStatusCodes> --> string
+	* Code<Contract.ContractResourcePublicationStatusCodes> --> struct Contract.ContractResourcePublicationStatusCodes?
+	* Code<Contract.ContractResourceStatusCodes> --> CqlCode
+	* Code<Contract.ContractResourceStatusCodes> --> string
+	* Code<Contract.ContractResourceStatusCodes> --> struct Contract.ContractResourceStatusCodes?
+	* Code<Contributor.ContributorType> --> CqlCode
+	* Code<Contributor.ContributorType> --> string
+	* Code<Contributor.ContributorType> --> struct Contributor.ContributorType?
+	* Code<CoverageEligibilityRequest.EligibilityRequestPurpose> --> CqlCode
+	* Code<CoverageEligibilityRequest.EligibilityRequestPurpose> --> string
+	* Code<CoverageEligibilityRequest.EligibilityRequestPurpose> --> struct CoverageEligibilityRequest.EligibilityRequestPurpose?
+	* Code<CoverageEligibilityResponse.EligibilityResponsePurpose> --> CqlCode
+	* Code<CoverageEligibilityResponse.EligibilityResponsePurpose> --> string
+	* Code<CoverageEligibilityResponse.EligibilityResponsePurpose> --> struct CoverageEligibilityResponse.EligibilityResponsePurpose?
+	* Code<DataRequirement.SortDirection> --> CqlCode
+	* Code<DataRequirement.SortDirection> --> string
+	* Code<DataRequirement.SortDirection> --> struct DataRequirement.SortDirection?
+	* Code<DaysOfWeek> --> CqlCode
+	* Code<DaysOfWeek> --> string
+	* Code<DaysOfWeek> --> struct DaysOfWeek?
+	* Code<DetectedIssue.DetectedIssueSeverity> --> CqlCode
+	* Code<DetectedIssue.DetectedIssueSeverity> --> string
+	* Code<DetectedIssue.DetectedIssueSeverity> --> struct DetectedIssue.DetectedIssueSeverity?
+	* Code<Device.FHIRDeviceStatus> --> CqlCode
+	* Code<Device.FHIRDeviceStatus> --> string
+	* Code<Device.FHIRDeviceStatus> --> struct Device.FHIRDeviceStatus?
+	* Code<Device.UDIEntryType> --> CqlCode
+	* Code<Device.UDIEntryType> --> string
+	* Code<Device.UDIEntryType> --> struct Device.UDIEntryType?
+	* Code<DeviceMetric.DeviceMetricCalibrationState> --> CqlCode
+	* Code<DeviceMetric.DeviceMetricCalibrationState> --> string
+	* Code<DeviceMetric.DeviceMetricCalibrationState> --> struct DeviceMetric.DeviceMetricCalibrationState?
+	* Code<DeviceMetric.DeviceMetricCalibrationType> --> CqlCode
+	* Code<DeviceMetric.DeviceMetricCalibrationType> --> string
+	* Code<DeviceMetric.DeviceMetricCalibrationType> --> struct DeviceMetric.DeviceMetricCalibrationType?
+	* Code<DeviceMetric.DeviceMetricCategory> --> CqlCode
+	* Code<DeviceMetric.DeviceMetricCategory> --> string
+	* Code<DeviceMetric.DeviceMetricCategory> --> struct DeviceMetric.DeviceMetricCategory?
+	* Code<DeviceMetric.DeviceMetricColor> --> CqlCode
+	* Code<DeviceMetric.DeviceMetricColor> --> string
+	* Code<DeviceMetric.DeviceMetricColor> --> struct DeviceMetric.DeviceMetricColor?
+	* Code<DeviceMetric.DeviceMetricOperationalStatus> --> CqlCode
+	* Code<DeviceMetric.DeviceMetricOperationalStatus> --> string
+	* Code<DeviceMetric.DeviceMetricOperationalStatus> --> struct DeviceMetric.DeviceMetricOperationalStatus?
+	* Code<DeviceNameType> --> CqlCode
+	* Code<DeviceNameType> --> string
+	* Code<DeviceNameType> --> struct DeviceNameType?
+	* Code<DeviceUseStatement.DeviceUseStatementStatus> --> CqlCode
+	* Code<DeviceUseStatement.DeviceUseStatementStatus> --> string
+	* Code<DeviceUseStatement.DeviceUseStatementStatus> --> struct DeviceUseStatement.DeviceUseStatementStatus?
+	* Code<DiagnosticReport.DiagnosticReportStatus> --> CqlCode
+	* Code<DiagnosticReport.DiagnosticReportStatus> --> string
+	* Code<DiagnosticReport.DiagnosticReportStatus> --> struct DiagnosticReport.DiagnosticReportStatus?
+	* Code<DocumentReferenceStatus> --> CqlCode
+	* Code<DocumentReferenceStatus> --> string
+	* Code<DocumentReferenceStatus> --> struct DocumentReferenceStatus?
+	* Code<DocumentRelationshipType> --> CqlCode
+	* Code<DocumentRelationshipType> --> string
+	* Code<DocumentRelationshipType> --> struct DocumentRelationshipType?
+	* Code<EffectEvidenceSynthesis.ExposureStateCode> --> CqlCode
+	* Code<EffectEvidenceSynthesis.ExposureStateCode> --> string
+	* Code<EffectEvidenceSynthesis.ExposureStateCode> --> struct EffectEvidenceSynthesis.ExposureStateCode?
+	* Code<ElementDefinition.AdditionalBindingPurposeVS> --> CqlCode
+	* Code<ElementDefinition.AdditionalBindingPurposeVS> --> string
+	* Code<ElementDefinition.AdditionalBindingPurposeVS> --> struct ElementDefinition.AdditionalBindingPurposeVS?
+	* Code<ElementDefinition.AggregationMode> --> CqlCode
+	* Code<ElementDefinition.AggregationMode> --> string
+	* Code<ElementDefinition.AggregationMode> --> struct ElementDefinition.AggregationMode?
+	* Code<ElementDefinition.DiscriminatorType> --> CqlCode
+	* Code<ElementDefinition.DiscriminatorType> --> string
+	* Code<ElementDefinition.DiscriminatorType> --> struct ElementDefinition.DiscriminatorType?
+	* Code<ElementDefinition.PropertyRepresentation> --> CqlCode
+	* Code<ElementDefinition.PropertyRepresentation> --> string
+	* Code<ElementDefinition.PropertyRepresentation> --> struct ElementDefinition.PropertyRepresentation?
+	* Code<ElementDefinition.ReferenceVersionRules> --> CqlCode
+	* Code<ElementDefinition.ReferenceVersionRules> --> string
+	* Code<ElementDefinition.ReferenceVersionRules> --> struct ElementDefinition.ReferenceVersionRules?
+	* Code<ElementDefinition.SlicingRules> --> CqlCode
+	* Code<ElementDefinition.SlicingRules> --> string
+	* Code<ElementDefinition.SlicingRules> --> struct ElementDefinition.SlicingRules?
+	* Code<Encounter.EncounterLocationStatus> --> CqlCode
+	* Code<Encounter.EncounterLocationStatus> --> string
+	* Code<Encounter.EncounterLocationStatus> --> struct Encounter.EncounterLocationStatus?
+	* Code<Encounter.EncounterStatus> --> CqlCode
+	* Code<Encounter.EncounterStatus> --> string
+	* Code<Encounter.EncounterStatus> --> struct Encounter.EncounterStatus?
+	* Code<Endpoint.EndpointStatus> --> CqlCode
+	* Code<Endpoint.EndpointStatus> --> string
+	* Code<Endpoint.EndpointStatus> --> struct Endpoint.EndpointStatus?
+	* Code<EpisodeOfCare.EpisodeOfCareStatus> --> CqlCode
+	* Code<EpisodeOfCare.EpisodeOfCareStatus> --> string
+	* Code<EpisodeOfCare.EpisodeOfCareStatus> --> struct EpisodeOfCare.EpisodeOfCareStatus?
+	* Code<EventStatus> --> CqlCode
+	* Code<EventStatus> --> string
+	* Code<EventStatus> --> struct EventStatus?
+	* Code<ExampleScenario.ExampleScenarioActorType> --> CqlCode
+	* Code<ExampleScenario.ExampleScenarioActorType> --> string
+	* Code<ExampleScenario.ExampleScenarioActorType> --> struct ExampleScenario.ExampleScenarioActorType?
+	* Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> --> CqlCode
+	* Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> --> string
+	* Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> --> struct ExplanationOfBenefit.ExplanationOfBenefitStatus?
+	* Code<FamilyMemberHistory.FamilyHistoryStatus> --> CqlCode
+	* Code<FamilyMemberHistory.FamilyHistoryStatus> --> string
+	* Code<FamilyMemberHistory.FamilyHistoryStatus> --> struct FamilyMemberHistory.FamilyHistoryStatus?
+	* Code<FHIRAllTypes> --> CqlCode
+	* Code<FHIRAllTypes> --> string
+	* Code<FHIRAllTypes> --> struct FHIRAllTypes?
+	* Code<FHIRDefinedType> --> CqlCode
+	* Code<FHIRDefinedType> --> string
+	* Code<FHIRDefinedType> --> struct FHIRDefinedType?
+	* Code<FHIRVersion> --> CqlCode
+	* Code<FHIRVersion> --> string
+	* Code<FHIRVersion> --> struct FHIRVersion?
+	* Code<FilterOperator> --> CqlCode
+	* Code<FilterOperator> --> string
+	* Code<FilterOperator> --> struct FilterOperator?
+	* Code<FinancialResourceStatusCodes> --> CqlCode
+	* Code<FinancialResourceStatusCodes> --> string
+	* Code<FinancialResourceStatusCodes> --> struct FinancialResourceStatusCodes?
+	* Code<Flag.FlagStatus> --> CqlCode
+	* Code<Flag.FlagStatus> --> string
+	* Code<Flag.FlagStatus> --> struct Flag.FlagStatus?
+	* Code<Goal.GoalLifecycleStatus> --> CqlCode
+	* Code<Goal.GoalLifecycleStatus> --> string
+	* Code<Goal.GoalLifecycleStatus> --> struct Goal.GoalLifecycleStatus?
+	* Code<GraphDefinition.GraphCompartmentRule> --> CqlCode
+	* Code<GraphDefinition.GraphCompartmentRule> --> string
+	* Code<GraphDefinition.GraphCompartmentRule> --> struct GraphDefinition.GraphCompartmentRule?
+	* Code<GraphDefinition.GraphCompartmentUse> --> CqlCode
+	* Code<GraphDefinition.GraphCompartmentUse> --> string
+	* Code<GraphDefinition.GraphCompartmentUse> --> struct GraphDefinition.GraphCompartmentUse?
+	* Code<Group.GroupType> --> CqlCode
+	* Code<Group.GroupType> --> string
+	* Code<Group.GroupType> --> struct Group.GroupType?
+	* Code<GroupMeasureCode> --> CqlCode
+	* Code<GroupMeasureCode> --> string
+	* Code<GroupMeasureCode> --> struct GroupMeasureCode?
+	* Code<GuidanceResponse.GuidanceResponseStatus> --> CqlCode
+	* Code<GuidanceResponse.GuidanceResponseStatus> --> string
+	* Code<GuidanceResponse.GuidanceResponseStatus> --> struct GuidanceResponse.GuidanceResponseStatus?
+	* Code<HumanName.NameUse> --> CqlCode
+	* Code<HumanName.NameUse> --> string
+	* Code<HumanName.NameUse> --> struct HumanName.NameUse?
+	* Code<Identifier.IdentifierUse> --> CqlCode
+	* Code<Identifier.IdentifierUse> --> string
+	* Code<Identifier.IdentifierUse> --> struct Identifier.IdentifierUse?
+	* Code<ImagingStudy.ImagingStudyStatus> --> CqlCode
+	* Code<ImagingStudy.ImagingStudyStatus> --> string
+	* Code<ImagingStudy.ImagingStudyStatus> --> struct ImagingStudy.ImagingStudyStatus?
+	* Code<Immunization.ImmunizationStatusCodes> --> CqlCode
+	* Code<Immunization.ImmunizationStatusCodes> --> string
+	* Code<Immunization.ImmunizationStatusCodes> --> struct Immunization.ImmunizationStatusCodes?
+	* Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> --> CqlCode
+	* Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> --> string
+	* Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> --> struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes?
+	* Code<ImplementationGuide.GuidePageGeneration> --> CqlCode
+	* Code<ImplementationGuide.GuidePageGeneration> --> string
+	* Code<ImplementationGuide.GuidePageGeneration> --> struct ImplementationGuide.GuidePageGeneration?
+	* Code<ImplementationGuide.GuideParameterCode> --> CqlCode
+	* Code<ImplementationGuide.GuideParameterCode> --> string
+	* Code<ImplementationGuide.GuideParameterCode> --> struct ImplementationGuide.GuideParameterCode?
+	* Code<ImplementationGuide.SPDXLicense> --> CqlCode
+	* Code<ImplementationGuide.SPDXLicense> --> string
+	* Code<ImplementationGuide.SPDXLicense> --> struct ImplementationGuide.SPDXLicense?
+	* Code<InsurancePlan.BenefitCostApplicability> --> CqlCode
+	* Code<InsurancePlan.BenefitCostApplicability> --> string
+	* Code<InsurancePlan.BenefitCostApplicability> --> struct InsurancePlan.BenefitCostApplicability?
+	* Code<Invoice.InvoiceStatus> --> CqlCode
+	* Code<Invoice.InvoiceStatus> --> string
+	* Code<Invoice.InvoiceStatus> --> struct Invoice.InvoiceStatus?
+	* Code<InvoicePriceComponentType> --> CqlCode
+	* Code<InvoicePriceComponentType> --> string
+	* Code<InvoicePriceComponentType> --> struct InvoicePriceComponentType?
+	* Code<Linkage.LinkageType> --> CqlCode
+	* Code<Linkage.LinkageType> --> string
+	* Code<Linkage.LinkageType> --> struct Linkage.LinkageType?
+	* Code<List.ListStatus> --> CqlCode
+	* Code<List.ListStatus> --> string
+	* Code<List.ListStatus> --> struct List.ListStatus?
+	* Code<ListMode> --> CqlCode
+	* Code<ListMode> --> string
+	* Code<ListMode> --> struct ListMode?
+	* Code<Location.LocationMode> --> CqlCode
+	* Code<Location.LocationMode> --> string
+	* Code<Location.LocationMode> --> struct Location.LocationMode?
+	* Code<Location.LocationStatus> --> CqlCode
+	* Code<Location.LocationStatus> --> string
+	* Code<Location.LocationStatus> --> struct Location.LocationStatus?
+	* Code<MeasureImprovementNotation> --> CqlCode
+	* Code<MeasureImprovementNotation> --> string
+	* Code<MeasureImprovementNotation> --> struct MeasureImprovementNotation?
+	* Code<MeasureReport.MeasureReportStatus> --> CqlCode
+	* Code<MeasureReport.MeasureReportStatus> --> string
+	* Code<MeasureReport.MeasureReportStatus> --> struct MeasureReport.MeasureReportStatus?
+	* Code<MeasureReport.MeasureReportType> --> CqlCode
+	* Code<MeasureReport.MeasureReportType> --> string
+	* Code<MeasureReport.MeasureReportType> --> struct MeasureReport.MeasureReportType?
+	* Code<Medication.MedicationStatusCodes> --> CqlCode
+	* Code<Medication.MedicationStatusCodes> --> string
+	* Code<Medication.MedicationStatusCodes> --> struct Medication.MedicationStatusCodes?
+	* Code<MedicationAdministration.MedicationAdministrationStatusCodes> --> CqlCode
+	* Code<MedicationAdministration.MedicationAdministrationStatusCodes> --> string
+	* Code<MedicationAdministration.MedicationAdministrationStatusCodes> --> struct MedicationAdministration.MedicationAdministrationStatusCodes?
+	* Code<MedicationDispense.MedicationDispenseStatusCodes> --> CqlCode
+	* Code<MedicationDispense.MedicationDispenseStatusCodes> --> string
+	* Code<MedicationDispense.MedicationDispenseStatusCodes> --> struct MedicationDispense.MedicationDispenseStatusCodes?
+	* Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> --> CqlCode
+	* Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> --> string
+	* Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> --> struct MedicationKnowledge.MedicationKnowledgeStatusCodes?
+	* Code<MedicationRequest.MedicationRequestIntent> --> CqlCode
+	* Code<MedicationRequest.MedicationRequestIntent> --> string
+	* Code<MedicationRequest.MedicationRequestIntent> --> struct MedicationRequest.MedicationRequestIntent?
+	* Code<MedicationRequest.MedicationrequestStatus> --> CqlCode
+	* Code<MedicationRequest.MedicationrequestStatus> --> string
+	* Code<MedicationRequest.MedicationrequestStatus> --> struct MedicationRequest.MedicationrequestStatus?
+	* Code<MedicationStatement.MedicationStatusCodes> --> CqlCode
+	* Code<MedicationStatement.MedicationStatusCodes> --> string
+	* Code<MedicationStatement.MedicationStatusCodes> --> struct MedicationStatement.MedicationStatusCodes?
+	* Code<MessageDefinition.MessageSignificanceCategory> --> CqlCode
+	* Code<MessageDefinition.MessageSignificanceCategory> --> string
+	* Code<MessageDefinition.MessageSignificanceCategory> --> struct MessageDefinition.MessageSignificanceCategory?
+	* Code<MessageHeader.ResponseType> --> CqlCode
+	* Code<MessageHeader.ResponseType> --> string
+	* Code<MessageHeader.ResponseType> --> struct MessageHeader.ResponseType?
+	* Code<MessageheaderResponseRequest> --> CqlCode
+	* Code<MessageheaderResponseRequest> --> string
+	* Code<MessageheaderResponseRequest> --> struct MessageheaderResponseRequest?
+	* Code<MolecularSequence.OrientationType> --> CqlCode
+	* Code<MolecularSequence.OrientationType> --> string
+	* Code<MolecularSequence.OrientationType> --> struct MolecularSequence.OrientationType?
+	* Code<MolecularSequence.QualityType> --> CqlCode
+	* Code<MolecularSequence.QualityType> --> string
+	* Code<MolecularSequence.QualityType> --> struct MolecularSequence.QualityType?
+	* Code<MolecularSequence.RepositoryType> --> CqlCode
+	* Code<MolecularSequence.RepositoryType> --> string
+	* Code<MolecularSequence.RepositoryType> --> struct MolecularSequence.RepositoryType?
+	* Code<MolecularSequence.SequenceType> --> CqlCode
+	* Code<MolecularSequence.SequenceType> --> string
+	* Code<MolecularSequence.SequenceType> --> struct MolecularSequence.SequenceType?
+	* Code<MolecularSequence.StrandType> --> CqlCode
+	* Code<MolecularSequence.StrandType> --> string
+	* Code<MolecularSequence.StrandType> --> struct MolecularSequence.StrandType?
+	* Code<Money.Currencies> --> CqlCode
+	* Code<Money.Currencies> --> string
+	* Code<Money.Currencies> --> struct Money.Currencies?
+	* Code<NamingSystem.NamingSystemIdentifierType> --> CqlCode
+	* Code<NamingSystem.NamingSystemIdentifierType> --> string
+	* Code<NamingSystem.NamingSystemIdentifierType> --> struct NamingSystem.NamingSystemIdentifierType?
+	* Code<NamingSystem.NamingSystemType> --> CqlCode
+	* Code<NamingSystem.NamingSystemType> --> string
+	* Code<NamingSystem.NamingSystemType> --> struct NamingSystem.NamingSystemType?
+	* Code<Narrative.NarrativeStatus> --> CqlCode
+	* Code<Narrative.NarrativeStatus> --> string
+	* Code<Narrative.NarrativeStatus> --> struct Narrative.NarrativeStatus?
+	* Code<NoteType> --> CqlCode
+	* Code<NoteType> --> string
+	* Code<NoteType> --> struct NoteType?
+	* Code<ObservationDefinition.ObservationDataType> --> CqlCode
+	* Code<ObservationDefinition.ObservationDataType> --> string
+	* Code<ObservationDefinition.ObservationDataType> --> struct ObservationDefinition.ObservationDataType?
+	* Code<ObservationDefinition.ObservationRangeCategory> --> CqlCode
+	* Code<ObservationDefinition.ObservationRangeCategory> --> string
+	* Code<ObservationDefinition.ObservationRangeCategory> --> struct ObservationDefinition.ObservationRangeCategory?
+	* Code<ObservationStatus> --> CqlCode
+	* Code<ObservationStatus> --> string
+	* Code<ObservationStatus> --> struct ObservationStatus?
+	* Code<OperationDefinition.OperationKind> --> CqlCode
+	* Code<OperationDefinition.OperationKind> --> string
+	* Code<OperationDefinition.OperationKind> --> struct OperationDefinition.OperationKind?
+	* Code<OperationOutcome.IssueSeverity> --> CqlCode
+	* Code<OperationOutcome.IssueSeverity> --> string
+	* Code<OperationOutcome.IssueSeverity> --> struct OperationOutcome.IssueSeverity?
+	* Code<OperationOutcome.IssueType> --> CqlCode
+	* Code<OperationOutcome.IssueType> --> string
+	* Code<OperationOutcome.IssueType> --> struct OperationOutcome.IssueType?
+	* Code<OperationParameterUse> --> CqlCode
+	* Code<OperationParameterUse> --> string
+	* Code<OperationParameterUse> --> struct OperationParameterUse?
+	* Code<ParticipationStatus> --> CqlCode
+	* Code<ParticipationStatus> --> string
+	* Code<ParticipationStatus> --> struct ParticipationStatus?
+	* Code<Patient.LinkType> --> CqlCode
+	* Code<Patient.LinkType> --> string
+	* Code<Patient.LinkType> --> struct Patient.LinkType?
+	* Code<Person.IdentityAssuranceLevel> --> CqlCode
+	* Code<Person.IdentityAssuranceLevel> --> string
+	* Code<Person.IdentityAssuranceLevel> --> struct Person.IdentityAssuranceLevel?
+	* Code<Provenance.ProvenanceEntityRole> --> CqlCode
+	* Code<Provenance.ProvenanceEntityRole> --> string
+	* Code<Provenance.ProvenanceEntityRole> --> struct Provenance.ProvenanceEntityRole?
+	* Code<PublicationStatus> --> CqlCode
+	* Code<PublicationStatus> --> string
+	* Code<PublicationStatus> --> struct PublicationStatus?
+	* Code<Quantity.QuantityComparator> --> CqlCode
+	* Code<Quantity.QuantityComparator> --> string
+	* Code<Quantity.QuantityComparator> --> struct Quantity.QuantityComparator?
+	* Code<Questionnaire.EnableWhenBehavior> --> CqlCode
+	* Code<Questionnaire.EnableWhenBehavior> --> string
+	* Code<Questionnaire.EnableWhenBehavior> --> struct Questionnaire.EnableWhenBehavior?
+	* Code<Questionnaire.QuestionnaireItemOperator> --> CqlCode
+	* Code<Questionnaire.QuestionnaireItemOperator> --> string
+	* Code<Questionnaire.QuestionnaireItemOperator> --> struct Questionnaire.QuestionnaireItemOperator?
+	* Code<Questionnaire.QuestionnaireItemType> --> CqlCode
+	* Code<Questionnaire.QuestionnaireItemType> --> string
+	* Code<Questionnaire.QuestionnaireItemType> --> struct Questionnaire.QuestionnaireItemType?
+	* Code<QuestionnaireResponse.QuestionnaireResponseStatus> --> CqlCode
+	* Code<QuestionnaireResponse.QuestionnaireResponseStatus> --> string
+	* Code<QuestionnaireResponse.QuestionnaireResponseStatus> --> struct QuestionnaireResponse.QuestionnaireResponseStatus?
+	* Code<RelatedArtifact.RelatedArtifactType> --> CqlCode
+	* Code<RelatedArtifact.RelatedArtifactType> --> string
+	* Code<RelatedArtifact.RelatedArtifactType> --> struct RelatedArtifact.RelatedArtifactType?
+	* Code<RequestIntent> --> CqlCode
+	* Code<RequestIntent> --> string
+	* Code<RequestIntent> --> struct RequestIntent?
+	* Code<RequestPriority> --> CqlCode
+	* Code<RequestPriority> --> string
+	* Code<RequestPriority> --> struct RequestPriority?
+	* Code<RequestStatus> --> CqlCode
+	* Code<RequestStatus> --> string
+	* Code<RequestStatus> --> struct RequestStatus?
+	* Code<ResearchElementDefinition.ResearchElementType> --> CqlCode
+	* Code<ResearchElementDefinition.ResearchElementType> --> string
+	* Code<ResearchElementDefinition.ResearchElementType> --> struct ResearchElementDefinition.ResearchElementType?
+	* Code<ResearchStudy.ResearchStudyStatus> --> CqlCode
+	* Code<ResearchStudy.ResearchStudyStatus> --> string
+	* Code<ResearchStudy.ResearchStudyStatus> --> struct ResearchStudy.ResearchStudyStatus?
+	* Code<ResearchSubject.ResearchSubjectStatus> --> CqlCode
+	* Code<ResearchSubject.ResearchSubjectStatus> --> string
+	* Code<ResearchSubject.ResearchSubjectStatus> --> struct ResearchSubject.ResearchSubjectStatus?
+	* Code<ResourceType> --> CqlCode
+	* Code<ResourceType> --> string
+	* Code<ResourceType> --> struct ResourceType?
+	* Code<SearchParameter.SearchComparator> --> CqlCode
+	* Code<SearchParameter.SearchComparator> --> string
+	* Code<SearchParameter.SearchComparator> --> struct SearchParameter.SearchComparator?
+	* Code<SearchParameter.SearchModifierCode> --> CqlCode
+	* Code<SearchParameter.SearchModifierCode> --> string
+	* Code<SearchParameter.SearchModifierCode> --> struct SearchParameter.SearchModifierCode?
+	* Code<SearchParameter.XPathUsageType> --> CqlCode
+	* Code<SearchParameter.XPathUsageType> --> string
+	* Code<SearchParameter.XPathUsageType> --> struct SearchParameter.XPathUsageType?
+	* Code<SearchParamType> --> CqlCode
+	* Code<SearchParamType> --> string
+	* Code<SearchParamType> --> struct SearchParamType?
+	* Code<Slot.SlotStatus> --> CqlCode
+	* Code<Slot.SlotStatus> --> string
+	* Code<Slot.SlotStatus> --> struct Slot.SlotStatus?
+	* Code<Specimen.SpecimenStatus> --> CqlCode
+	* Code<Specimen.SpecimenStatus> --> string
+	* Code<Specimen.SpecimenStatus> --> struct Specimen.SpecimenStatus?
+	* Code<SpecimenDefinition.SpecimenContainedPreference> --> CqlCode
+	* Code<SpecimenDefinition.SpecimenContainedPreference> --> string
+	* Code<SpecimenDefinition.SpecimenContainedPreference> --> struct SpecimenDefinition.SpecimenContainedPreference?
+	* Code<StructureDefinition.ExtensionContextType> --> CqlCode
+	* Code<StructureDefinition.ExtensionContextType> --> string
+	* Code<StructureDefinition.ExtensionContextType> --> struct StructureDefinition.ExtensionContextType?
+	* Code<StructureDefinition.StructureDefinitionKind> --> CqlCode
+	* Code<StructureDefinition.StructureDefinitionKind> --> string
+	* Code<StructureDefinition.StructureDefinitionKind> --> struct StructureDefinition.StructureDefinitionKind?
+	* Code<StructureDefinition.TypeDerivationRule> --> CqlCode
+	* Code<StructureDefinition.TypeDerivationRule> --> string
+	* Code<StructureDefinition.TypeDerivationRule> --> struct StructureDefinition.TypeDerivationRule?
+	* Code<StructureMap.StructureMapContextType> --> CqlCode
+	* Code<StructureMap.StructureMapContextType> --> string
+	* Code<StructureMap.StructureMapContextType> --> struct StructureMap.StructureMapContextType?
+	* Code<StructureMap.StructureMapGroupTypeMode> --> CqlCode
+	* Code<StructureMap.StructureMapGroupTypeMode> --> string
+	* Code<StructureMap.StructureMapGroupTypeMode> --> struct StructureMap.StructureMapGroupTypeMode?
+	* Code<StructureMap.StructureMapInputMode> --> CqlCode
+	* Code<StructureMap.StructureMapInputMode> --> string
+	* Code<StructureMap.StructureMapInputMode> --> struct StructureMap.StructureMapInputMode?
+	* Code<StructureMap.StructureMapModelMode> --> CqlCode
+	* Code<StructureMap.StructureMapModelMode> --> string
+	* Code<StructureMap.StructureMapModelMode> --> struct StructureMap.StructureMapModelMode?
+	* Code<StructureMap.StructureMapSourceListMode> --> CqlCode
+	* Code<StructureMap.StructureMapSourceListMode> --> string
+	* Code<StructureMap.StructureMapSourceListMode> --> struct StructureMap.StructureMapSourceListMode?
+	* Code<StructureMap.StructureMapTargetListMode> --> CqlCode
+	* Code<StructureMap.StructureMapTargetListMode> --> string
+	* Code<StructureMap.StructureMapTargetListMode> --> struct StructureMap.StructureMapTargetListMode?
+	* Code<StructureMap.StructureMapTransform> --> CqlCode
+	* Code<StructureMap.StructureMapTransform> --> string
+	* Code<StructureMap.StructureMapTransform> --> struct StructureMap.StructureMapTransform?
+	* Code<Subscription.SubscriptionChannelType> --> CqlCode
+	* Code<Subscription.SubscriptionChannelType> --> string
+	* Code<Subscription.SubscriptionChannelType> --> struct Subscription.SubscriptionChannelType?
+	* Code<Subscription.SubscriptionStatus> --> CqlCode
+	* Code<Subscription.SubscriptionStatus> --> string
+	* Code<Subscription.SubscriptionStatus> --> struct Subscription.SubscriptionStatus?
+	* Code<Substance.FHIRSubstanceStatus> --> CqlCode
+	* Code<Substance.FHIRSubstanceStatus> --> string
+	* Code<Substance.FHIRSubstanceStatus> --> struct Substance.FHIRSubstanceStatus?
+	* Code<SupplyDelivery.SupplyDeliveryStatus> --> CqlCode
+	* Code<SupplyDelivery.SupplyDeliveryStatus> --> string
+	* Code<SupplyDelivery.SupplyDeliveryStatus> --> struct SupplyDelivery.SupplyDeliveryStatus?
+	* Code<SupplyDelivery.SupplyItemType> --> CqlCode
+	* Code<SupplyDelivery.SupplyItemType> --> string
+	* Code<SupplyDelivery.SupplyItemType> --> struct SupplyDelivery.SupplyItemType?
+	* Code<SupplyRequest.SupplyRequestStatus> --> CqlCode
+	* Code<SupplyRequest.SupplyRequestStatus> --> string
+	* Code<SupplyRequest.SupplyRequestStatus> --> struct SupplyRequest.SupplyRequestStatus?
+	* Code<Task.TaskIntent> --> CqlCode
+	* Code<Task.TaskIntent> --> string
+	* Code<Task.TaskIntent> --> struct Task.TaskIntent?
+	* Code<Task.TaskStatus> --> CqlCode
+	* Code<Task.TaskStatus> --> string
+	* Code<Task.TaskStatus> --> struct Task.TaskStatus?
+	* Code<TerminologyCapabilities.CodeSearchSupport> --> CqlCode
+	* Code<TerminologyCapabilities.CodeSearchSupport> --> string
+	* Code<TerminologyCapabilities.CodeSearchSupport> --> struct TerminologyCapabilities.CodeSearchSupport?
+	* Code<TestReport.TestReportActionResult> --> CqlCode
+	* Code<TestReport.TestReportActionResult> --> string
+	* Code<TestReport.TestReportActionResult> --> struct TestReport.TestReportActionResult?
+	* Code<TestReport.TestReportParticipantType> --> CqlCode
+	* Code<TestReport.TestReportParticipantType> --> string
+	* Code<TestReport.TestReportParticipantType> --> struct TestReport.TestReportParticipantType?
+	* Code<TestReport.TestReportResult> --> CqlCode
+	* Code<TestReport.TestReportResult> --> string
+	* Code<TestReport.TestReportResult> --> struct TestReport.TestReportResult?
+	* Code<TestReport.TestReportStatus> --> CqlCode
+	* Code<TestReport.TestReportStatus> --> string
+	* Code<TestReport.TestReportStatus> --> struct TestReport.TestReportStatus?
+	* Code<TestScript.AssertionDirectionType> --> CqlCode
+	* Code<TestScript.AssertionDirectionType> --> string
+	* Code<TestScript.AssertionDirectionType> --> struct TestScript.AssertionDirectionType?
+	* Code<TestScript.AssertionOperatorType> --> CqlCode
+	* Code<TestScript.AssertionOperatorType> --> string
+	* Code<TestScript.AssertionOperatorType> --> struct TestScript.AssertionOperatorType?
+	* Code<TestScript.AssertionResponseTypes> --> CqlCode
+	* Code<TestScript.AssertionResponseTypes> --> string
+	* Code<TestScript.AssertionResponseTypes> --> struct TestScript.AssertionResponseTypes?
+	* Code<TestScript.TestScriptRequestMethodCode> --> CqlCode
+	* Code<TestScript.TestScriptRequestMethodCode> --> string
+	* Code<TestScript.TestScriptRequestMethodCode> --> struct TestScript.TestScriptRequestMethodCode?
+	* Code<Timing.EventTiming> --> CqlCode
+	* Code<Timing.EventTiming> --> string
+	* Code<Timing.EventTiming> --> struct Timing.EventTiming?
+	* Code<Timing.UnitsOfTime> --> CqlCode
+	* Code<Timing.UnitsOfTime> --> string
+	* Code<Timing.UnitsOfTime> --> struct Timing.UnitsOfTime?
+	* Code<TriggerDefinition.TriggerType> --> CqlCode
+	* Code<TriggerDefinition.TriggerType> --> string
+	* Code<TriggerDefinition.TriggerType> --> struct TriggerDefinition.TriggerType?
+	* Code<VariableTypeCode> --> CqlCode
+	* Code<VariableTypeCode> --> string
+	* Code<VariableTypeCode> --> struct VariableTypeCode?
+	* Code<VerificationResult.StatusCode> --> CqlCode
+	* Code<VerificationResult.StatusCode> --> string
+	* Code<VerificationResult.StatusCode> --> struct VerificationResult.StatusCode?
+	* Code<VisionPrescription.VisionBase> --> CqlCode
+	* Code<VisionPrescription.VisionBase> --> string
+	* Code<VisionPrescription.VisionBase> --> struct VisionPrescription.VisionBase?
+	* Code<VisionPrescription.VisionEyes> --> CqlCode
+	* Code<VisionPrescription.VisionEyes> --> string
+	* Code<VisionPrescription.VisionEyes> --> struct VisionPrescription.VisionEyes?
+	* CqlDate --> CqlDateTime
+	* CqlDate --> Date
+	* CqlDate --> DateIso8601
+	* CqlDate --> FhirDateTime
+	* CqlDateTime --> DateIso8601
+	* CqlDateTime --> DateTimeIso8601
+	* CqlDateTime --> FhirDateTime
+	* CqlInterval<CqlDate> --> Period
+	* CqlInterval<CqlDateTime> --> Period
+	* CqlInterval<CqlQuantity> --> Range
+	* CqlInterval<decimal?> --> Range
+	* CqlInterval<int?> --> Range
+	* CqlQuantity --> Quantity
+	* CqlRatio --> Ratio
+	* CqlTime --> Time
+	* CqlTime --> TimeIso8601
+	* DataType --> object
+	* DataType --> string
+	* Date --> CqlDate
+	* Date --> CqlDateTime
+	* Date --> string
+	* DateIso8601 --> CqlDate
+	* DateIso8601 --> CqlDateTime
+	* DateTimeIso8601 --> CqlDateTime
+	* FhirBoolean --> struct bool?
+	* FhirDateTime --> CqlDate
+	* FhirDateTime --> CqlDateTime
+	* FhirDateTime --> string
+	* FhirDecimal --> struct decimal?
+	* FhirString --> string
+	* FhirUri --> string
+	* FhirUrl --> string
+	* Id --> string
+	* Instant --> CqlDateTime
+	* Instant --> struct DateTimeOffset?
+	* Integer --> PositiveInt
+	* Integer --> struct int?
+	* Integer --> UnsignedInt
+	* Markdown --> string
+	* Parameters.ParameterComponent --> CqlDate
+	* Parameters.ParameterComponent --> CqlDateTime
+	* Parameters.ParameterComponent --> CqlInterval<CqlDate>
+	* Parameters.ParameterComponent --> CqlInterval<CqlDateTime>
+	* Parameters.ParameterComponent --> CqlInterval<CqlQuantity>
+	* Parameters.ParameterComponent --> CqlInterval<decimal?>
+	* Parameters.ParameterComponent --> CqlInterval<int?>
+	* Parameters.ParameterComponent --> CqlQuantity
+	* Parameters.ParameterComponent --> CqlTime
+	* Parameters.ParameterComponent --> Integer
+	* Parameters.ParameterComponent --> PositiveInt
+	* Parameters.ParameterComponent --> string
+	* Parameters.ParameterComponent --> struct bool?
+	* Parameters.ParameterComponent --> struct DateTimeOffset?
+	* Parameters.ParameterComponent --> struct decimal?
+	* Parameters.ParameterComponent --> struct int?
+	* Parameters.ParameterComponent --> UnsignedInt
+	* Period --> CqlInterval<CqlDate>
+	* Period --> CqlInterval<CqlDateTime>
+	* PositiveInt --> Integer
+	* PositiveInt --> string
+	* Quantity --> Age
+	* Quantity --> CqlQuantity
+	* Quantity --> struct decimal?
+	* Quantity --> struct int?
+	* Range --> CqlInterval<CqlQuantity>
+	* Range --> CqlInterval<decimal?>
+	* Range --> CqlInterval<int?>
+	* string --> CqlDate
+	* string --> CqlDateTime
+	* string --> CqlTime
+	* string --> FhirUri
+	* string --> Uri
+	* struct Account.AccountStatus --> Code<Account.AccountStatus>
+	* struct Account.AccountStatus? --> Code<Account.AccountStatus>
+	* struct Account.AccountStatus? --> string
+	* struct ActionCardinalityBehavior --> Code<ActionCardinalityBehavior>
+	* struct ActionCardinalityBehavior? --> Code<ActionCardinalityBehavior>
+	* struct ActionCardinalityBehavior? --> string
+	* struct ActionConditionKind --> Code<ActionConditionKind>
+	* struct ActionConditionKind? --> Code<ActionConditionKind>
+	* struct ActionConditionKind? --> string
+	* struct ActionGroupingBehavior --> Code<ActionGroupingBehavior>
+	* struct ActionGroupingBehavior? --> Code<ActionGroupingBehavior>
+	* struct ActionGroupingBehavior? --> string
+	* struct ActionParticipantType --> Code<ActionParticipantType>
+	* struct ActionParticipantType? --> Code<ActionParticipantType>
+	* struct ActionParticipantType? --> string
+	* struct ActionPrecheckBehavior --> Code<ActionPrecheckBehavior>
+	* struct ActionPrecheckBehavior? --> Code<ActionPrecheckBehavior>
+	* struct ActionPrecheckBehavior? --> string
+	* struct ActionRelationshipType --> Code<ActionRelationshipType>
+	* struct ActionRelationshipType? --> Code<ActionRelationshipType>
+	* struct ActionRelationshipType? --> string
+	* struct ActionRequiredBehavior --> Code<ActionRequiredBehavior>
+	* struct ActionRequiredBehavior? --> Code<ActionRequiredBehavior>
+	* struct ActionRequiredBehavior? --> string
+	* struct ActionSelectionBehavior --> Code<ActionSelectionBehavior>
+	* struct ActionSelectionBehavior? --> Code<ActionSelectionBehavior>
+	* struct ActionSelectionBehavior? --> string
+	* struct ActivityDefinition.RequestResourceType --> Code<ActivityDefinition.RequestResourceType>
+	* struct ActivityDefinition.RequestResourceType? --> Code<ActivityDefinition.RequestResourceType>
+	* struct ActivityDefinition.RequestResourceType? --> string
+	* struct Address.AddressType --> Code<Address.AddressType>
+	* struct Address.AddressType? --> Code<Address.AddressType>
+	* struct Address.AddressType? --> string
+	* struct Address.AddressUse --> Code<Address.AddressUse>
+	* struct Address.AddressUse? --> Code<Address.AddressUse>
+	* struct Address.AddressUse? --> string
+	* struct AdministrativeGender --> Code<AdministrativeGender>
+	* struct AdministrativeGender? --> Code<AdministrativeGender>
+	* struct AdministrativeGender? --> string
+	* struct AdverseEvent.AdverseEventActuality --> Code<AdverseEvent.AdverseEventActuality>
+	* struct AdverseEvent.AdverseEventActuality? --> Code<AdverseEvent.AdverseEventActuality>
+	* struct AdverseEvent.AdverseEventActuality? --> string
+	* struct AdverseEvent.AdverseEventOutcome --> Code<AdverseEvent.AdverseEventOutcome>
+	* struct AdverseEvent.AdverseEventOutcome? --> Code<AdverseEvent.AdverseEventOutcome>
+	* struct AdverseEvent.AdverseEventOutcome? --> string
+	* struct AdverseEvent.AdverseEventSeverity --> Code<AdverseEvent.AdverseEventSeverity>
+	* struct AdverseEvent.AdverseEventSeverity? --> Code<AdverseEvent.AdverseEventSeverity>
+	* struct AdverseEvent.AdverseEventSeverity? --> string
+	* struct AllergyIntolerance.AllergyIntoleranceCategory --> Code<AllergyIntolerance.AllergyIntoleranceCategory>
+	* struct AllergyIntolerance.AllergyIntoleranceCategory? --> Code<AllergyIntolerance.AllergyIntoleranceCategory>
+	* struct AllergyIntolerance.AllergyIntoleranceCategory? --> string
+	* struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes --> Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes>
+	* struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes? --> Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes>
+	* struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes? --> string
+	* struct AllergyIntolerance.AllergyIntoleranceCriticality --> Code<AllergyIntolerance.AllergyIntoleranceCriticality>
+	* struct AllergyIntolerance.AllergyIntoleranceCriticality? --> Code<AllergyIntolerance.AllergyIntoleranceCriticality>
+	* struct AllergyIntolerance.AllergyIntoleranceCriticality? --> string
+	* struct AllergyIntolerance.AllergyIntoleranceSeverity --> Code<AllergyIntolerance.AllergyIntoleranceSeverity>
+	* struct AllergyIntolerance.AllergyIntoleranceSeverity? --> Code<AllergyIntolerance.AllergyIntoleranceSeverity>
+	* struct AllergyIntolerance.AllergyIntoleranceSeverity? --> string
+	* struct AllergyIntolerance.AllergyIntoleranceType --> Code<AllergyIntolerance.AllergyIntoleranceType>
+	* struct AllergyIntolerance.AllergyIntoleranceType? --> Code<AllergyIntolerance.AllergyIntoleranceType>
+	* struct AllergyIntolerance.AllergyIntoleranceType? --> string
+	* struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes --> Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes>
+	* struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes? --> Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes>
+	* struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes? --> string
+	* struct Appointment.AppointmentStatus --> Code<Appointment.AppointmentStatus>
+	* struct Appointment.AppointmentStatus? --> Code<Appointment.AppointmentStatus>
+	* struct Appointment.AppointmentStatus? --> string
+	* struct Appointment.ParticipantRequired --> Code<Appointment.ParticipantRequired>
+	* struct Appointment.ParticipantRequired? --> Code<Appointment.ParticipantRequired>
+	* struct Appointment.ParticipantRequired? --> string
+	* struct AuditEvent.AuditEventAction --> Code<AuditEvent.AuditEventAction>
+	* struct AuditEvent.AuditEventAction? --> Code<AuditEvent.AuditEventAction>
+	* struct AuditEvent.AuditEventAction? --> string
+	* struct AuditEvent.AuditEventAgentNetworkType --> Code<AuditEvent.AuditEventAgentNetworkType>
+	* struct AuditEvent.AuditEventAgentNetworkType? --> Code<AuditEvent.AuditEventAgentNetworkType>
+	* struct AuditEvent.AuditEventAgentNetworkType? --> string
+	* struct AuditEvent.AuditEventOutcome --> Code<AuditEvent.AuditEventOutcome>
+	* struct AuditEvent.AuditEventOutcome? --> Code<AuditEvent.AuditEventOutcome>
+	* struct AuditEvent.AuditEventOutcome? --> string
+	* struct BindingStrength --> Code<BindingStrength>
+	* struct BindingStrength? --> Code<BindingStrength>
+	* struct BindingStrength? --> string
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory --> Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory>
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? --> Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory>
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? --> string
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus --> Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus>
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? --> Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus>
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? --> string
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale --> Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale>
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? --> Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale>
+	* struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? --> string
+	* struct Bundle.BundleType --> Code<Bundle.BundleType>
+	* struct Bundle.BundleType? --> Code<Bundle.BundleType>
+	* struct Bundle.BundleType? --> string
+	* struct Bundle.HTTPVerb --> Code<Bundle.HTTPVerb>
+	* struct Bundle.HTTPVerb? --> Code<Bundle.HTTPVerb>
+	* struct Bundle.HTTPVerb? --> string
+	* struct Bundle.LinkRelationTypes --> Code<Bundle.LinkRelationTypes>
+	* struct Bundle.LinkRelationTypes? --> Code<Bundle.LinkRelationTypes>
+	* struct Bundle.LinkRelationTypes? --> string
+	* struct Bundle.SearchEntryMode --> Code<Bundle.SearchEntryMode>
+	* struct Bundle.SearchEntryMode? --> Code<Bundle.SearchEntryMode>
+	* struct Bundle.SearchEntryMode? --> string
+	* struct CapabilityStatement.ConditionalDeleteStatus --> Code<CapabilityStatement.ConditionalDeleteStatus>
+	* struct CapabilityStatement.ConditionalDeleteStatus? --> Code<CapabilityStatement.ConditionalDeleteStatus>
+	* struct CapabilityStatement.ConditionalDeleteStatus? --> string
+	* struct CapabilityStatement.ConditionalReadStatus --> Code<CapabilityStatement.ConditionalReadStatus>
+	* struct CapabilityStatement.ConditionalReadStatus? --> Code<CapabilityStatement.ConditionalReadStatus>
+	* struct CapabilityStatement.ConditionalReadStatus? --> string
+	* struct CapabilityStatement.DocumentMode --> Code<CapabilityStatement.DocumentMode>
+	* struct CapabilityStatement.DocumentMode? --> Code<CapabilityStatement.DocumentMode>
+	* struct CapabilityStatement.DocumentMode? --> string
+	* struct CapabilityStatement.EventCapabilityMode --> Code<CapabilityStatement.EventCapabilityMode>
+	* struct CapabilityStatement.EventCapabilityMode? --> Code<CapabilityStatement.EventCapabilityMode>
+	* struct CapabilityStatement.EventCapabilityMode? --> string
+	* struct CapabilityStatement.ReferenceHandlingPolicy --> Code<CapabilityStatement.ReferenceHandlingPolicy>
+	* struct CapabilityStatement.ReferenceHandlingPolicy? --> Code<CapabilityStatement.ReferenceHandlingPolicy>
+	* struct CapabilityStatement.ReferenceHandlingPolicy? --> string
+	* struct CapabilityStatement.ResourceVersionPolicy --> Code<CapabilityStatement.ResourceVersionPolicy>
+	* struct CapabilityStatement.ResourceVersionPolicy? --> Code<CapabilityStatement.ResourceVersionPolicy>
+	* struct CapabilityStatement.ResourceVersionPolicy? --> string
+	* struct CapabilityStatement.RestfulCapabilityMode --> Code<CapabilityStatement.RestfulCapabilityMode>
+	* struct CapabilityStatement.RestfulCapabilityMode? --> Code<CapabilityStatement.RestfulCapabilityMode>
+	* struct CapabilityStatement.RestfulCapabilityMode? --> string
+	* struct CapabilityStatement.SystemRestfulInteraction --> Code<CapabilityStatement.SystemRestfulInteraction>
+	* struct CapabilityStatement.SystemRestfulInteraction? --> Code<CapabilityStatement.SystemRestfulInteraction>
+	* struct CapabilityStatement.SystemRestfulInteraction? --> string
+	* struct CapabilityStatement.TypeRestfulInteraction --> Code<CapabilityStatement.TypeRestfulInteraction>
+	* struct CapabilityStatement.TypeRestfulInteraction? --> Code<CapabilityStatement.TypeRestfulInteraction>
+	* struct CapabilityStatement.TypeRestfulInteraction? --> string
+	* struct CapabilityStatementKind --> Code<CapabilityStatementKind>
+	* struct CapabilityStatementKind? --> Code<CapabilityStatementKind>
+	* struct CapabilityStatementKind? --> string
+	* struct CarePlan.CarePlanActivityKind --> Code<CarePlan.CarePlanActivityKind>
+	* struct CarePlan.CarePlanActivityKind? --> Code<CarePlan.CarePlanActivityKind>
+	* struct CarePlan.CarePlanActivityKind? --> string
+	* struct CarePlan.CarePlanActivityStatus --> Code<CarePlan.CarePlanActivityStatus>
+	* struct CarePlan.CarePlanActivityStatus? --> Code<CarePlan.CarePlanActivityStatus>
+	* struct CarePlan.CarePlanActivityStatus? --> string
+	* struct CarePlan.CarePlanIntent --> Code<CarePlan.CarePlanIntent>
+	* struct CarePlan.CarePlanIntent? --> Code<CarePlan.CarePlanIntent>
+	* struct CarePlan.CarePlanIntent? --> string
+	* struct CareTeam.CareTeamStatus --> Code<CareTeam.CareTeamStatus>
+	* struct CareTeam.CareTeamStatus? --> Code<CareTeam.CareTeamStatus>
+	* struct CareTeam.CareTeamStatus? --> string
+	* struct CatalogEntry.CatalogEntryRelationType --> Code<CatalogEntry.CatalogEntryRelationType>
+	* struct CatalogEntry.CatalogEntryRelationType? --> Code<CatalogEntry.CatalogEntryRelationType>
+	* struct CatalogEntry.CatalogEntryRelationType? --> string
+	* struct ChargeItem.ChargeItemStatus --> Code<ChargeItem.ChargeItemStatus>
+	* struct ChargeItem.ChargeItemStatus? --> Code<ChargeItem.ChargeItemStatus>
+	* struct ChargeItem.ChargeItemStatus? --> string
+	* struct ClaimProcessingCodes --> Code<ClaimProcessingCodes>
+	* struct ClaimProcessingCodes? --> Code<ClaimProcessingCodes>
+	* struct ClaimProcessingCodes? --> string
+	* struct ClaimUseCode --> Code<ClaimUseCode>
+	* struct ClaimUseCode? --> Code<ClaimUseCode>
+	* struct ClaimUseCode? --> string
+	* struct ClinicalImpression.ClinicalImpressionStatus --> Code<ClinicalImpression.ClinicalImpressionStatus>
+	* struct ClinicalImpression.ClinicalImpressionStatus? --> Code<ClinicalImpression.ClinicalImpressionStatus>
+	* struct ClinicalImpression.ClinicalImpressionStatus? --> string
+	* struct CodeSystem.CodeSystemHierarchyMeaning --> Code<CodeSystem.CodeSystemHierarchyMeaning>
+	* struct CodeSystem.CodeSystemHierarchyMeaning? --> Code<CodeSystem.CodeSystemHierarchyMeaning>
+	* struct CodeSystem.CodeSystemHierarchyMeaning? --> string
+	* struct CodeSystem.PropertyType --> Code<CodeSystem.PropertyType>
+	* struct CodeSystem.PropertyType? --> Code<CodeSystem.PropertyType>
+	* struct CodeSystem.PropertyType? --> string
+	* struct CodeSystemContentMode --> Code<CodeSystemContentMode>
+	* struct CodeSystemContentMode? --> Code<CodeSystemContentMode>
+	* struct CodeSystemContentMode? --> string
+	* struct CompartmentType --> Code<CompartmentType>
+	* struct CompartmentType? --> Code<CompartmentType>
+	* struct CompartmentType? --> string
+	* struct Composition.CompositionAttestationMode --> Code<Composition.CompositionAttestationMode>
+	* struct Composition.CompositionAttestationMode? --> Code<Composition.CompositionAttestationMode>
+	* struct Composition.CompositionAttestationMode? --> string
+	* struct Composition.V3ConfidentialityClassification --> Code<Composition.V3ConfidentialityClassification>
+	* struct Composition.V3ConfidentialityClassification? --> Code<Composition.V3ConfidentialityClassification>
+	* struct Composition.V3ConfidentialityClassification? --> string
+	* struct CompositionStatus --> Code<CompositionStatus>
+	* struct CompositionStatus? --> Code<CompositionStatus>
+	* struct CompositionStatus? --> string
+	* struct ConceptMap.ConceptMapGroupUnmappedMode --> Code<ConceptMap.ConceptMapGroupUnmappedMode>
+	* struct ConceptMap.ConceptMapGroupUnmappedMode? --> Code<ConceptMap.ConceptMapGroupUnmappedMode>
+	* struct ConceptMap.ConceptMapGroupUnmappedMode? --> string
+	* struct ConceptMapEquivalence --> Code<ConceptMapEquivalence>
+	* struct ConceptMapEquivalence? --> Code<ConceptMapEquivalence>
+	* struct ConceptMapEquivalence? --> string
+	* struct Condition.ConditionClinicalStatusCodes --> Code<Condition.ConditionClinicalStatusCodes>
+	* struct Condition.ConditionClinicalStatusCodes? --> Code<Condition.ConditionClinicalStatusCodes>
+	* struct Condition.ConditionClinicalStatusCodes? --> string
+	* struct Condition.ConditionVerificationStatus --> Code<Condition.ConditionVerificationStatus>
+	* struct Condition.ConditionVerificationStatus? --> Code<Condition.ConditionVerificationStatus>
+	* struct Condition.ConditionVerificationStatus? --> string
+	* struct Consent.ConsentDataMeaning --> Code<Consent.ConsentDataMeaning>
+	* struct Consent.ConsentDataMeaning? --> Code<Consent.ConsentDataMeaning>
+	* struct Consent.ConsentDataMeaning? --> string
+	* struct Consent.ConsentProvisionType --> Code<Consent.ConsentProvisionType>
+	* struct Consent.ConsentProvisionType? --> Code<Consent.ConsentProvisionType>
+	* struct Consent.ConsentProvisionType? --> string
+	* struct Consent.ConsentState --> Code<Consent.ConsentState>
+	* struct Consent.ConsentState? --> Code<Consent.ConsentState>
+	* struct Consent.ConsentState? --> string
+	* struct ConstraintSeverity --> Code<ConstraintSeverity>
+	* struct ConstraintSeverity? --> Code<ConstraintSeverity>
+	* struct ConstraintSeverity? --> string
+	* struct ContactPoint.ContactPointSystem --> Code<ContactPoint.ContactPointSystem>
+	* struct ContactPoint.ContactPointSystem? --> Code<ContactPoint.ContactPointSystem>
+	* struct ContactPoint.ContactPointSystem? --> string
+	* struct ContactPoint.ContactPointUse --> Code<ContactPoint.ContactPointUse>
+	* struct ContactPoint.ContactPointUse? --> Code<ContactPoint.ContactPointUse>
+	* struct ContactPoint.ContactPointUse? --> string
+	* struct Contract.ContractResourcePublicationStatusCodes --> Code<Contract.ContractResourcePublicationStatusCodes>
+	* struct Contract.ContractResourcePublicationStatusCodes? --> Code<Contract.ContractResourcePublicationStatusCodes>
+	* struct Contract.ContractResourcePublicationStatusCodes? --> string
+	* struct Contract.ContractResourceStatusCodes --> Code<Contract.ContractResourceStatusCodes>
+	* struct Contract.ContractResourceStatusCodes? --> Code<Contract.ContractResourceStatusCodes>
+	* struct Contract.ContractResourceStatusCodes? --> string
+	* struct Contributor.ContributorType --> Code<Contributor.ContributorType>
+	* struct Contributor.ContributorType? --> Code<Contributor.ContributorType>
+	* struct Contributor.ContributorType? --> string
+	* struct CoverageEligibilityRequest.EligibilityRequestPurpose --> Code<CoverageEligibilityRequest.EligibilityRequestPurpose>
+	* struct CoverageEligibilityRequest.EligibilityRequestPurpose? --> Code<CoverageEligibilityRequest.EligibilityRequestPurpose>
+	* struct CoverageEligibilityRequest.EligibilityRequestPurpose? --> string
+	* struct CoverageEligibilityResponse.EligibilityResponsePurpose --> Code<CoverageEligibilityResponse.EligibilityResponsePurpose>
+	* struct CoverageEligibilityResponse.EligibilityResponsePurpose? --> Code<CoverageEligibilityResponse.EligibilityResponsePurpose>
+	* struct CoverageEligibilityResponse.EligibilityResponsePurpose? --> string
+	* struct DataRequirement.SortDirection --> Code<DataRequirement.SortDirection>
+	* struct DataRequirement.SortDirection? --> Code<DataRequirement.SortDirection>
+	* struct DataRequirement.SortDirection? --> string
+	* struct DateTimeOffset --> CqlDateTime
+	* struct DateTimeOffset? --> CqlDateTime
+	* struct DaysOfWeek --> Code<DaysOfWeek>
+	* struct DaysOfWeek? --> Code<DaysOfWeek>
+	* struct DaysOfWeek? --> string
+	* struct DetectedIssue.DetectedIssueSeverity --> Code<DetectedIssue.DetectedIssueSeverity>
+	* struct DetectedIssue.DetectedIssueSeverity? --> Code<DetectedIssue.DetectedIssueSeverity>
+	* struct DetectedIssue.DetectedIssueSeverity? --> string
+	* struct Device.FHIRDeviceStatus --> Code<Device.FHIRDeviceStatus>
+	* struct Device.FHIRDeviceStatus? --> Code<Device.FHIRDeviceStatus>
+	* struct Device.FHIRDeviceStatus? --> string
+	* struct Device.UDIEntryType --> Code<Device.UDIEntryType>
+	* struct Device.UDIEntryType? --> Code<Device.UDIEntryType>
+	* struct Device.UDIEntryType? --> string
+	* struct DeviceMetric.DeviceMetricCalibrationState --> Code<DeviceMetric.DeviceMetricCalibrationState>
+	* struct DeviceMetric.DeviceMetricCalibrationState? --> Code<DeviceMetric.DeviceMetricCalibrationState>
+	* struct DeviceMetric.DeviceMetricCalibrationState? --> string
+	* struct DeviceMetric.DeviceMetricCalibrationType --> Code<DeviceMetric.DeviceMetricCalibrationType>
+	* struct DeviceMetric.DeviceMetricCalibrationType? --> Code<DeviceMetric.DeviceMetricCalibrationType>
+	* struct DeviceMetric.DeviceMetricCalibrationType? --> string
+	* struct DeviceMetric.DeviceMetricCategory --> Code<DeviceMetric.DeviceMetricCategory>
+	* struct DeviceMetric.DeviceMetricCategory? --> Code<DeviceMetric.DeviceMetricCategory>
+	* struct DeviceMetric.DeviceMetricCategory? --> string
+	* struct DeviceMetric.DeviceMetricColor --> Code<DeviceMetric.DeviceMetricColor>
+	* struct DeviceMetric.DeviceMetricColor? --> Code<DeviceMetric.DeviceMetricColor>
+	* struct DeviceMetric.DeviceMetricColor? --> string
+	* struct DeviceMetric.DeviceMetricOperationalStatus --> Code<DeviceMetric.DeviceMetricOperationalStatus>
+	* struct DeviceMetric.DeviceMetricOperationalStatus? --> Code<DeviceMetric.DeviceMetricOperationalStatus>
+	* struct DeviceMetric.DeviceMetricOperationalStatus? --> string
+	* struct DeviceNameType --> Code<DeviceNameType>
+	* struct DeviceNameType? --> Code<DeviceNameType>
+	* struct DeviceNameType? --> string
+	* struct DeviceUseStatement.DeviceUseStatementStatus --> Code<DeviceUseStatement.DeviceUseStatementStatus>
+	* struct DeviceUseStatement.DeviceUseStatementStatus? --> Code<DeviceUseStatement.DeviceUseStatementStatus>
+	* struct DeviceUseStatement.DeviceUseStatementStatus? --> string
+	* struct DiagnosticReport.DiagnosticReportStatus --> Code<DiagnosticReport.DiagnosticReportStatus>
+	* struct DiagnosticReport.DiagnosticReportStatus? --> Code<DiagnosticReport.DiagnosticReportStatus>
+	* struct DiagnosticReport.DiagnosticReportStatus? --> string
+	* struct DocumentReferenceStatus --> Code<DocumentReferenceStatus>
+	* struct DocumentReferenceStatus? --> Code<DocumentReferenceStatus>
+	* struct DocumentReferenceStatus? --> string
+	* struct DocumentRelationshipType --> Code<DocumentRelationshipType>
+	* struct DocumentRelationshipType? --> Code<DocumentRelationshipType>
+	* struct DocumentRelationshipType? --> string
+	* struct EffectEvidenceSynthesis.ExposureStateCode --> Code<EffectEvidenceSynthesis.ExposureStateCode>
+	* struct EffectEvidenceSynthesis.ExposureStateCode? --> Code<EffectEvidenceSynthesis.ExposureStateCode>
+	* struct EffectEvidenceSynthesis.ExposureStateCode? --> string
+	* struct ElementDefinition.AdditionalBindingPurposeVS --> Code<ElementDefinition.AdditionalBindingPurposeVS>
+	* struct ElementDefinition.AdditionalBindingPurposeVS? --> Code<ElementDefinition.AdditionalBindingPurposeVS>
+	* struct ElementDefinition.AdditionalBindingPurposeVS? --> string
+	* struct ElementDefinition.AggregationMode --> Code<ElementDefinition.AggregationMode>
+	* struct ElementDefinition.AggregationMode? --> Code<ElementDefinition.AggregationMode>
+	* struct ElementDefinition.AggregationMode? --> string
+	* struct ElementDefinition.DiscriminatorType --> Code<ElementDefinition.DiscriminatorType>
+	* struct ElementDefinition.DiscriminatorType? --> Code<ElementDefinition.DiscriminatorType>
+	* struct ElementDefinition.DiscriminatorType? --> string
+	* struct ElementDefinition.PropertyRepresentation --> Code<ElementDefinition.PropertyRepresentation>
+	* struct ElementDefinition.PropertyRepresentation? --> Code<ElementDefinition.PropertyRepresentation>
+	* struct ElementDefinition.PropertyRepresentation? --> string
+	* struct ElementDefinition.ReferenceVersionRules --> Code<ElementDefinition.ReferenceVersionRules>
+	* struct ElementDefinition.ReferenceVersionRules? --> Code<ElementDefinition.ReferenceVersionRules>
+	* struct ElementDefinition.ReferenceVersionRules? --> string
+	* struct ElementDefinition.SlicingRules --> Code<ElementDefinition.SlicingRules>
+	* struct ElementDefinition.SlicingRules? --> Code<ElementDefinition.SlicingRules>
+	* struct ElementDefinition.SlicingRules? --> string
+	* struct Encounter.EncounterLocationStatus --> Code<Encounter.EncounterLocationStatus>
+	* struct Encounter.EncounterLocationStatus? --> Code<Encounter.EncounterLocationStatus>
+	* struct Encounter.EncounterLocationStatus? --> string
+	* struct Encounter.EncounterStatus --> Code<Encounter.EncounterStatus>
+	* struct Encounter.EncounterStatus? --> Code<Encounter.EncounterStatus>
+	* struct Encounter.EncounterStatus? --> string
+	* struct Endpoint.EndpointStatus --> Code<Endpoint.EndpointStatus>
+	* struct Endpoint.EndpointStatus? --> Code<Endpoint.EndpointStatus>
+	* struct Endpoint.EndpointStatus? --> string
+	* struct EpisodeOfCare.EpisodeOfCareStatus --> Code<EpisodeOfCare.EpisodeOfCareStatus>
+	* struct EpisodeOfCare.EpisodeOfCareStatus? --> Code<EpisodeOfCare.EpisodeOfCareStatus>
+	* struct EpisodeOfCare.EpisodeOfCareStatus? --> string
+	* struct EventStatus --> Code<EventStatus>
+	* struct EventStatus? --> Code<EventStatus>
+	* struct EventStatus? --> string
+	* struct ExampleScenario.ExampleScenarioActorType --> Code<ExampleScenario.ExampleScenarioActorType>
+	* struct ExampleScenario.ExampleScenarioActorType? --> Code<ExampleScenario.ExampleScenarioActorType>
+	* struct ExampleScenario.ExampleScenarioActorType? --> string
+	* struct ExplanationOfBenefit.ExplanationOfBenefitStatus --> Code<ExplanationOfBenefit.ExplanationOfBenefitStatus>
+	* struct ExplanationOfBenefit.ExplanationOfBenefitStatus? --> Code<ExplanationOfBenefit.ExplanationOfBenefitStatus>
+	* struct ExplanationOfBenefit.ExplanationOfBenefitStatus? --> string
+	* struct FamilyMemberHistory.FamilyHistoryStatus --> Code<FamilyMemberHistory.FamilyHistoryStatus>
+	* struct FamilyMemberHistory.FamilyHistoryStatus? --> Code<FamilyMemberHistory.FamilyHistoryStatus>
+	* struct FamilyMemberHistory.FamilyHistoryStatus? --> string
+	* struct FHIRAllTypes --> Code<FHIRAllTypes>
+	* struct FHIRAllTypes? --> Code<FHIRAllTypes>
+	* struct FHIRAllTypes? --> string
+	* struct FHIRDefinedType --> Code<FHIRDefinedType>
+	* struct FHIRDefinedType? --> Code<FHIRDefinedType>
+	* struct FHIRDefinedType? --> string
+	* struct FHIRVersion --> Code<FHIRVersion>
+	* struct FHIRVersion? --> Code<FHIRVersion>
+	* struct FHIRVersion? --> string
+	* struct FilterOperator --> Code<FilterOperator>
+	* struct FilterOperator? --> Code<FilterOperator>
+	* struct FilterOperator? --> string
+	* struct FinancialResourceStatusCodes --> Code<FinancialResourceStatusCodes>
+	* struct FinancialResourceStatusCodes? --> Code<FinancialResourceStatusCodes>
+	* struct FinancialResourceStatusCodes? --> string
+	* struct Flag.FlagStatus --> Code<Flag.FlagStatus>
+	* struct Flag.FlagStatus? --> Code<Flag.FlagStatus>
+	* struct Flag.FlagStatus? --> string
+	* struct Goal.GoalLifecycleStatus --> Code<Goal.GoalLifecycleStatus>
+	* struct Goal.GoalLifecycleStatus? --> Code<Goal.GoalLifecycleStatus>
+	* struct Goal.GoalLifecycleStatus? --> string
+	* struct GraphDefinition.GraphCompartmentRule --> Code<GraphDefinition.GraphCompartmentRule>
+	* struct GraphDefinition.GraphCompartmentRule? --> Code<GraphDefinition.GraphCompartmentRule>
+	* struct GraphDefinition.GraphCompartmentRule? --> string
+	* struct GraphDefinition.GraphCompartmentUse --> Code<GraphDefinition.GraphCompartmentUse>
+	* struct GraphDefinition.GraphCompartmentUse? --> Code<GraphDefinition.GraphCompartmentUse>
+	* struct GraphDefinition.GraphCompartmentUse? --> string
+	* struct Group.GroupType --> Code<Group.GroupType>
+	* struct Group.GroupType? --> Code<Group.GroupType>
+	* struct Group.GroupType? --> string
+	* struct GroupMeasureCode --> Code<GroupMeasureCode>
+	* struct GroupMeasureCode? --> Code<GroupMeasureCode>
+	* struct GroupMeasureCode? --> string
+	* struct GuidanceResponse.GuidanceResponseStatus --> Code<GuidanceResponse.GuidanceResponseStatus>
+	* struct GuidanceResponse.GuidanceResponseStatus? --> Code<GuidanceResponse.GuidanceResponseStatus>
+	* struct GuidanceResponse.GuidanceResponseStatus? --> string
+	* struct HumanName.NameUse --> Code<HumanName.NameUse>
+	* struct HumanName.NameUse? --> Code<HumanName.NameUse>
+	* struct HumanName.NameUse? --> string
+	* struct Identifier.IdentifierUse --> Code<Identifier.IdentifierUse>
+	* struct Identifier.IdentifierUse? --> Code<Identifier.IdentifierUse>
+	* struct Identifier.IdentifierUse? --> string
+	* struct ImagingStudy.ImagingStudyStatus --> Code<ImagingStudy.ImagingStudyStatus>
+	* struct ImagingStudy.ImagingStudyStatus? --> Code<ImagingStudy.ImagingStudyStatus>
+	* struct ImagingStudy.ImagingStudyStatus? --> string
+	* struct Immunization.ImmunizationStatusCodes --> Code<Immunization.ImmunizationStatusCodes>
+	* struct Immunization.ImmunizationStatusCodes? --> Code<Immunization.ImmunizationStatusCodes>
+	* struct Immunization.ImmunizationStatusCodes? --> string
+	* struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes --> Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes>
+	* struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? --> Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes>
+	* struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? --> string
+	* struct ImplementationGuide.GuidePageGeneration --> Code<ImplementationGuide.GuidePageGeneration>
+	* struct ImplementationGuide.GuidePageGeneration? --> Code<ImplementationGuide.GuidePageGeneration>
+	* struct ImplementationGuide.GuidePageGeneration? --> string
+	* struct ImplementationGuide.GuideParameterCode --> Code<ImplementationGuide.GuideParameterCode>
+	* struct ImplementationGuide.GuideParameterCode? --> Code<ImplementationGuide.GuideParameterCode>
+	* struct ImplementationGuide.GuideParameterCode? --> string
+	* struct ImplementationGuide.SPDXLicense --> Code<ImplementationGuide.SPDXLicense>
+	* struct ImplementationGuide.SPDXLicense? --> Code<ImplementationGuide.SPDXLicense>
+	* struct ImplementationGuide.SPDXLicense? --> string
+	* struct InsurancePlan.BenefitCostApplicability --> Code<InsurancePlan.BenefitCostApplicability>
+	* struct InsurancePlan.BenefitCostApplicability? --> Code<InsurancePlan.BenefitCostApplicability>
+	* struct InsurancePlan.BenefitCostApplicability? --> string
+	* struct Invoice.InvoiceStatus --> Code<Invoice.InvoiceStatus>
+	* struct Invoice.InvoiceStatus? --> Code<Invoice.InvoiceStatus>
+	* struct Invoice.InvoiceStatus? --> string
+	* struct InvoicePriceComponentType --> Code<InvoicePriceComponentType>
+	* struct InvoicePriceComponentType? --> Code<InvoicePriceComponentType>
+	* struct InvoicePriceComponentType? --> string
+	* struct Linkage.LinkageType --> Code<Linkage.LinkageType>
+	* struct Linkage.LinkageType? --> Code<Linkage.LinkageType>
+	* struct Linkage.LinkageType? --> string
+	* struct List.ListStatus --> Code<List.ListStatus>
+	* struct List.ListStatus? --> Code<List.ListStatus>
+	* struct List.ListStatus? --> string
+	* struct ListMode --> Code<ListMode>
+	* struct ListMode? --> Code<ListMode>
+	* struct ListMode? --> string
+	* struct Location.LocationMode --> Code<Location.LocationMode>
+	* struct Location.LocationMode? --> Code<Location.LocationMode>
+	* struct Location.LocationMode? --> string
+	* struct Location.LocationStatus --> Code<Location.LocationStatus>
+	* struct Location.LocationStatus? --> Code<Location.LocationStatus>
+	* struct Location.LocationStatus? --> string
+	* struct MeasureImprovementNotation --> Code<MeasureImprovementNotation>
+	* struct MeasureImprovementNotation? --> Code<MeasureImprovementNotation>
+	* struct MeasureImprovementNotation? --> string
+	* struct MeasureReport.MeasureReportStatus --> Code<MeasureReport.MeasureReportStatus>
+	* struct MeasureReport.MeasureReportStatus? --> Code<MeasureReport.MeasureReportStatus>
+	* struct MeasureReport.MeasureReportStatus? --> string
+	* struct MeasureReport.MeasureReportType --> Code<MeasureReport.MeasureReportType>
+	* struct MeasureReport.MeasureReportType? --> Code<MeasureReport.MeasureReportType>
+	* struct MeasureReport.MeasureReportType? --> string
+	* struct Medication.MedicationStatusCodes --> Code<Medication.MedicationStatusCodes>
+	* struct Medication.MedicationStatusCodes? --> Code<Medication.MedicationStatusCodes>
+	* struct Medication.MedicationStatusCodes? --> string
+	* struct MedicationAdministration.MedicationAdministrationStatusCodes --> Code<MedicationAdministration.MedicationAdministrationStatusCodes>
+	* struct MedicationAdministration.MedicationAdministrationStatusCodes? --> Code<MedicationAdministration.MedicationAdministrationStatusCodes>
+	* struct MedicationAdministration.MedicationAdministrationStatusCodes? --> string
+	* struct MedicationDispense.MedicationDispenseStatusCodes --> Code<MedicationDispense.MedicationDispenseStatusCodes>
+	* struct MedicationDispense.MedicationDispenseStatusCodes? --> Code<MedicationDispense.MedicationDispenseStatusCodes>
+	* struct MedicationDispense.MedicationDispenseStatusCodes? --> string
+	* struct MedicationKnowledge.MedicationKnowledgeStatusCodes --> Code<MedicationKnowledge.MedicationKnowledgeStatusCodes>
+	* struct MedicationKnowledge.MedicationKnowledgeStatusCodes? --> Code<MedicationKnowledge.MedicationKnowledgeStatusCodes>
+	* struct MedicationKnowledge.MedicationKnowledgeStatusCodes? --> string
+	* struct MedicationRequest.MedicationRequestIntent --> Code<MedicationRequest.MedicationRequestIntent>
+	* struct MedicationRequest.MedicationRequestIntent? --> Code<MedicationRequest.MedicationRequestIntent>
+	* struct MedicationRequest.MedicationRequestIntent? --> string
+	* struct MedicationRequest.MedicationrequestStatus --> Code<MedicationRequest.MedicationrequestStatus>
+	* struct MedicationRequest.MedicationrequestStatus? --> Code<MedicationRequest.MedicationrequestStatus>
+	* struct MedicationRequest.MedicationrequestStatus? --> string
+	* struct MedicationStatement.MedicationStatusCodes --> Code<MedicationStatement.MedicationStatusCodes>
+	* struct MedicationStatement.MedicationStatusCodes? --> Code<MedicationStatement.MedicationStatusCodes>
+	* struct MedicationStatement.MedicationStatusCodes? --> string
+	* struct MessageDefinition.MessageSignificanceCategory --> Code<MessageDefinition.MessageSignificanceCategory>
+	* struct MessageDefinition.MessageSignificanceCategory? --> Code<MessageDefinition.MessageSignificanceCategory>
+	* struct MessageDefinition.MessageSignificanceCategory? --> string
+	* struct MessageHeader.ResponseType --> Code<MessageHeader.ResponseType>
+	* struct MessageHeader.ResponseType? --> Code<MessageHeader.ResponseType>
+	* struct MessageHeader.ResponseType? --> string
+	* struct MessageheaderResponseRequest --> Code<MessageheaderResponseRequest>
+	* struct MessageheaderResponseRequest? --> Code<MessageheaderResponseRequest>
+	* struct MessageheaderResponseRequest? --> string
+	* struct MolecularSequence.OrientationType --> Code<MolecularSequence.OrientationType>
+	* struct MolecularSequence.OrientationType? --> Code<MolecularSequence.OrientationType>
+	* struct MolecularSequence.OrientationType? --> string
+	* struct MolecularSequence.QualityType --> Code<MolecularSequence.QualityType>
+	* struct MolecularSequence.QualityType? --> Code<MolecularSequence.QualityType>
+	* struct MolecularSequence.QualityType? --> string
+	* struct MolecularSequence.RepositoryType --> Code<MolecularSequence.RepositoryType>
+	* struct MolecularSequence.RepositoryType? --> Code<MolecularSequence.RepositoryType>
+	* struct MolecularSequence.RepositoryType? --> string
+	* struct MolecularSequence.SequenceType --> Code<MolecularSequence.SequenceType>
+	* struct MolecularSequence.SequenceType? --> Code<MolecularSequence.SequenceType>
+	* struct MolecularSequence.SequenceType? --> string
+	* struct MolecularSequence.StrandType --> Code<MolecularSequence.StrandType>
+	* struct MolecularSequence.StrandType? --> Code<MolecularSequence.StrandType>
+	* struct MolecularSequence.StrandType? --> string
+	* struct Money.Currencies --> Code<Money.Currencies>
+	* struct Money.Currencies? --> Code<Money.Currencies>
+	* struct Money.Currencies? --> string
+	* struct NamingSystem.NamingSystemIdentifierType --> Code<NamingSystem.NamingSystemIdentifierType>
+	* struct NamingSystem.NamingSystemIdentifierType? --> Code<NamingSystem.NamingSystemIdentifierType>
+	* struct NamingSystem.NamingSystemIdentifierType? --> string
+	* struct NamingSystem.NamingSystemType --> Code<NamingSystem.NamingSystemType>
+	* struct NamingSystem.NamingSystemType? --> Code<NamingSystem.NamingSystemType>
+	* struct NamingSystem.NamingSystemType? --> string
+	* struct Narrative.NarrativeStatus --> Code<Narrative.NarrativeStatus>
+	* struct Narrative.NarrativeStatus? --> Code<Narrative.NarrativeStatus>
+	* struct Narrative.NarrativeStatus? --> string
+	* struct NoteType --> Code<NoteType>
+	* struct NoteType? --> Code<NoteType>
+	* struct NoteType? --> string
+	* struct ObservationDefinition.ObservationDataType --> Code<ObservationDefinition.ObservationDataType>
+	* struct ObservationDefinition.ObservationDataType? --> Code<ObservationDefinition.ObservationDataType>
+	* struct ObservationDefinition.ObservationDataType? --> string
+	* struct ObservationDefinition.ObservationRangeCategory --> Code<ObservationDefinition.ObservationRangeCategory>
+	* struct ObservationDefinition.ObservationRangeCategory? --> Code<ObservationDefinition.ObservationRangeCategory>
+	* struct ObservationDefinition.ObservationRangeCategory? --> string
+	* struct ObservationStatus --> Code<ObservationStatus>
+	* struct ObservationStatus? --> Code<ObservationStatus>
+	* struct ObservationStatus? --> string
+	* struct OperationDefinition.OperationKind --> Code<OperationDefinition.OperationKind>
+	* struct OperationDefinition.OperationKind? --> Code<OperationDefinition.OperationKind>
+	* struct OperationDefinition.OperationKind? --> string
+	* struct OperationOutcome.IssueSeverity --> Code<OperationOutcome.IssueSeverity>
+	* struct OperationOutcome.IssueSeverity? --> Code<OperationOutcome.IssueSeverity>
+	* struct OperationOutcome.IssueSeverity? --> string
+	* struct OperationOutcome.IssueType --> Code<OperationOutcome.IssueType>
+	* struct OperationOutcome.IssueType? --> Code<OperationOutcome.IssueType>
+	* struct OperationOutcome.IssueType? --> string
+	* struct OperationParameterUse --> Code<OperationParameterUse>
+	* struct OperationParameterUse? --> Code<OperationParameterUse>
+	* struct OperationParameterUse? --> string
+	* struct ParticipationStatus --> Code<ParticipationStatus>
+	* struct ParticipationStatus? --> Code<ParticipationStatus>
+	* struct ParticipationStatus? --> string
+	* struct Patient.LinkType --> Code<Patient.LinkType>
+	* struct Patient.LinkType? --> Code<Patient.LinkType>
+	* struct Patient.LinkType? --> string
+	* struct Person.IdentityAssuranceLevel --> Code<Person.IdentityAssuranceLevel>
+	* struct Person.IdentityAssuranceLevel? --> Code<Person.IdentityAssuranceLevel>
+	* struct Person.IdentityAssuranceLevel? --> string
+	* struct Provenance.ProvenanceEntityRole --> Code<Provenance.ProvenanceEntityRole>
+	* struct Provenance.ProvenanceEntityRole? --> Code<Provenance.ProvenanceEntityRole>
+	* struct Provenance.ProvenanceEntityRole? --> string
+	* struct PublicationStatus --> Code<PublicationStatus>
+	* struct PublicationStatus? --> Code<PublicationStatus>
+	* struct PublicationStatus? --> string
+	* struct Quantity.QuantityComparator --> Code<Quantity.QuantityComparator>
+	* struct Quantity.QuantityComparator? --> Code<Quantity.QuantityComparator>
+	* struct Quantity.QuantityComparator? --> string
+	* struct Questionnaire.EnableWhenBehavior --> Code<Questionnaire.EnableWhenBehavior>
+	* struct Questionnaire.EnableWhenBehavior? --> Code<Questionnaire.EnableWhenBehavior>
+	* struct Questionnaire.EnableWhenBehavior? --> string
+	* struct Questionnaire.QuestionnaireItemOperator --> Code<Questionnaire.QuestionnaireItemOperator>
+	* struct Questionnaire.QuestionnaireItemOperator? --> Code<Questionnaire.QuestionnaireItemOperator>
+	* struct Questionnaire.QuestionnaireItemOperator? --> string
+	* struct Questionnaire.QuestionnaireItemType --> Code<Questionnaire.QuestionnaireItemType>
+	* struct Questionnaire.QuestionnaireItemType? --> Code<Questionnaire.QuestionnaireItemType>
+	* struct Questionnaire.QuestionnaireItemType? --> string
+	* struct QuestionnaireResponse.QuestionnaireResponseStatus --> Code<QuestionnaireResponse.QuestionnaireResponseStatus>
+	* struct QuestionnaireResponse.QuestionnaireResponseStatus? --> Code<QuestionnaireResponse.QuestionnaireResponseStatus>
+	* struct QuestionnaireResponse.QuestionnaireResponseStatus? --> string
+	* struct RelatedArtifact.RelatedArtifactType --> Code<RelatedArtifact.RelatedArtifactType>
+	* struct RelatedArtifact.RelatedArtifactType? --> Code<RelatedArtifact.RelatedArtifactType>
+	* struct RelatedArtifact.RelatedArtifactType? --> string
+	* struct RequestIntent --> Code<RequestIntent>
+	* struct RequestIntent? --> Code<RequestIntent>
+	* struct RequestIntent? --> string
+	* struct RequestPriority --> Code<RequestPriority>
+	* struct RequestPriority? --> Code<RequestPriority>
+	* struct RequestPriority? --> string
+	* struct RequestStatus --> Code<RequestStatus>
+	* struct RequestStatus? --> Code<RequestStatus>
+	* struct RequestStatus? --> string
+	* struct ResearchElementDefinition.ResearchElementType --> Code<ResearchElementDefinition.ResearchElementType>
+	* struct ResearchElementDefinition.ResearchElementType? --> Code<ResearchElementDefinition.ResearchElementType>
+	* struct ResearchElementDefinition.ResearchElementType? --> string
+	* struct ResearchStudy.ResearchStudyStatus --> Code<ResearchStudy.ResearchStudyStatus>
+	* struct ResearchStudy.ResearchStudyStatus? --> Code<ResearchStudy.ResearchStudyStatus>
+	* struct ResearchStudy.ResearchStudyStatus? --> string
+	* struct ResearchSubject.ResearchSubjectStatus --> Code<ResearchSubject.ResearchSubjectStatus>
+	* struct ResearchSubject.ResearchSubjectStatus? --> Code<ResearchSubject.ResearchSubjectStatus>
+	* struct ResearchSubject.ResearchSubjectStatus? --> string
+	* struct ResourceType --> Code<ResourceType>
+	* struct ResourceType? --> Code<ResourceType>
+	* struct ResourceType? --> string
+	* struct SearchParameter.SearchComparator --> Code<SearchParameter.SearchComparator>
+	* struct SearchParameter.SearchComparator? --> Code<SearchParameter.SearchComparator>
+	* struct SearchParameter.SearchComparator? --> string
+	* struct SearchParameter.SearchModifierCode --> Code<SearchParameter.SearchModifierCode>
+	* struct SearchParameter.SearchModifierCode? --> Code<SearchParameter.SearchModifierCode>
+	* struct SearchParameter.SearchModifierCode? --> string
+	* struct SearchParameter.XPathUsageType --> Code<SearchParameter.XPathUsageType>
+	* struct SearchParameter.XPathUsageType? --> Code<SearchParameter.XPathUsageType>
+	* struct SearchParameter.XPathUsageType? --> string
+	* struct SearchParamType --> Code<SearchParamType>
+	* struct SearchParamType? --> Code<SearchParamType>
+	* struct SearchParamType? --> string
+	* struct Slot.SlotStatus --> Code<Slot.SlotStatus>
+	* struct Slot.SlotStatus? --> Code<Slot.SlotStatus>
+	* struct Slot.SlotStatus? --> string
+	* struct Specimen.SpecimenStatus --> Code<Specimen.SpecimenStatus>
+	* struct Specimen.SpecimenStatus? --> Code<Specimen.SpecimenStatus>
+	* struct Specimen.SpecimenStatus? --> string
+	* struct SpecimenDefinition.SpecimenContainedPreference --> Code<SpecimenDefinition.SpecimenContainedPreference>
+	* struct SpecimenDefinition.SpecimenContainedPreference? --> Code<SpecimenDefinition.SpecimenContainedPreference>
+	* struct SpecimenDefinition.SpecimenContainedPreference? --> string
+	* struct StructureDefinition.ExtensionContextType --> Code<StructureDefinition.ExtensionContextType>
+	* struct StructureDefinition.ExtensionContextType? --> Code<StructureDefinition.ExtensionContextType>
+	* struct StructureDefinition.ExtensionContextType? --> string
+	* struct StructureDefinition.StructureDefinitionKind --> Code<StructureDefinition.StructureDefinitionKind>
+	* struct StructureDefinition.StructureDefinitionKind? --> Code<StructureDefinition.StructureDefinitionKind>
+	* struct StructureDefinition.StructureDefinitionKind? --> string
+	* struct StructureDefinition.TypeDerivationRule --> Code<StructureDefinition.TypeDerivationRule>
+	* struct StructureDefinition.TypeDerivationRule? --> Code<StructureDefinition.TypeDerivationRule>
+	* struct StructureDefinition.TypeDerivationRule? --> string
+	* struct StructureMap.StructureMapContextType --> Code<StructureMap.StructureMapContextType>
+	* struct StructureMap.StructureMapContextType? --> Code<StructureMap.StructureMapContextType>
+	* struct StructureMap.StructureMapContextType? --> string
+	* struct StructureMap.StructureMapGroupTypeMode --> Code<StructureMap.StructureMapGroupTypeMode>
+	* struct StructureMap.StructureMapGroupTypeMode? --> Code<StructureMap.StructureMapGroupTypeMode>
+	* struct StructureMap.StructureMapGroupTypeMode? --> string
+	* struct StructureMap.StructureMapInputMode --> Code<StructureMap.StructureMapInputMode>
+	* struct StructureMap.StructureMapInputMode? --> Code<StructureMap.StructureMapInputMode>
+	* struct StructureMap.StructureMapInputMode? --> string
+	* struct StructureMap.StructureMapModelMode --> Code<StructureMap.StructureMapModelMode>
+	* struct StructureMap.StructureMapModelMode? --> Code<StructureMap.StructureMapModelMode>
+	* struct StructureMap.StructureMapModelMode? --> string
+	* struct StructureMap.StructureMapSourceListMode --> Code<StructureMap.StructureMapSourceListMode>
+	* struct StructureMap.StructureMapSourceListMode? --> Code<StructureMap.StructureMapSourceListMode>
+	* struct StructureMap.StructureMapSourceListMode? --> string
+	* struct StructureMap.StructureMapTargetListMode --> Code<StructureMap.StructureMapTargetListMode>
+	* struct StructureMap.StructureMapTargetListMode? --> Code<StructureMap.StructureMapTargetListMode>
+	* struct StructureMap.StructureMapTargetListMode? --> string
+	* struct StructureMap.StructureMapTransform --> Code<StructureMap.StructureMapTransform>
+	* struct StructureMap.StructureMapTransform? --> Code<StructureMap.StructureMapTransform>
+	* struct StructureMap.StructureMapTransform? --> string
+	* struct Subscription.SubscriptionChannelType --> Code<Subscription.SubscriptionChannelType>
+	* struct Subscription.SubscriptionChannelType? --> Code<Subscription.SubscriptionChannelType>
+	* struct Subscription.SubscriptionChannelType? --> string
+	* struct Subscription.SubscriptionStatus --> Code<Subscription.SubscriptionStatus>
+	* struct Subscription.SubscriptionStatus? --> Code<Subscription.SubscriptionStatus>
+	* struct Subscription.SubscriptionStatus? --> string
+	* struct Substance.FHIRSubstanceStatus --> Code<Substance.FHIRSubstanceStatus>
+	* struct Substance.FHIRSubstanceStatus? --> Code<Substance.FHIRSubstanceStatus>
+	* struct Substance.FHIRSubstanceStatus? --> string
+	* struct SupplyDelivery.SupplyDeliveryStatus --> Code<SupplyDelivery.SupplyDeliveryStatus>
+	* struct SupplyDelivery.SupplyDeliveryStatus? --> Code<SupplyDelivery.SupplyDeliveryStatus>
+	* struct SupplyDelivery.SupplyDeliveryStatus? --> string
+	* struct SupplyDelivery.SupplyItemType --> Code<SupplyDelivery.SupplyItemType>
+	* struct SupplyDelivery.SupplyItemType? --> Code<SupplyDelivery.SupplyItemType>
+	* struct SupplyDelivery.SupplyItemType? --> string
+	* struct SupplyRequest.SupplyRequestStatus --> Code<SupplyRequest.SupplyRequestStatus>
+	* struct SupplyRequest.SupplyRequestStatus? --> Code<SupplyRequest.SupplyRequestStatus>
+	* struct SupplyRequest.SupplyRequestStatus? --> string
+	* struct Task.TaskIntent --> Code<Task.TaskIntent>
+	* struct Task.TaskIntent? --> Code<Task.TaskIntent>
+	* struct Task.TaskIntent? --> string
+	* struct Task.TaskStatus --> Code<Task.TaskStatus>
+	* struct Task.TaskStatus? --> Code<Task.TaskStatus>
+	* struct Task.TaskStatus? --> string
+	* struct TerminologyCapabilities.CodeSearchSupport --> Code<TerminologyCapabilities.CodeSearchSupport>
+	* struct TerminologyCapabilities.CodeSearchSupport? --> Code<TerminologyCapabilities.CodeSearchSupport>
+	* struct TerminologyCapabilities.CodeSearchSupport? --> string
+	* struct TestReport.TestReportActionResult --> Code<TestReport.TestReportActionResult>
+	* struct TestReport.TestReportActionResult? --> Code<TestReport.TestReportActionResult>
+	* struct TestReport.TestReportActionResult? --> string
+	* struct TestReport.TestReportParticipantType --> Code<TestReport.TestReportParticipantType>
+	* struct TestReport.TestReportParticipantType? --> Code<TestReport.TestReportParticipantType>
+	* struct TestReport.TestReportParticipantType? --> string
+	* struct TestReport.TestReportResult --> Code<TestReport.TestReportResult>
+	* struct TestReport.TestReportResult? --> Code<TestReport.TestReportResult>
+	* struct TestReport.TestReportResult? --> string
+	* struct TestReport.TestReportStatus --> Code<TestReport.TestReportStatus>
+	* struct TestReport.TestReportStatus? --> Code<TestReport.TestReportStatus>
+	* struct TestReport.TestReportStatus? --> string
+	* struct TestScript.AssertionDirectionType --> Code<TestScript.AssertionDirectionType>
+	* struct TestScript.AssertionDirectionType? --> Code<TestScript.AssertionDirectionType>
+	* struct TestScript.AssertionDirectionType? --> string
+	* struct TestScript.AssertionOperatorType --> Code<TestScript.AssertionOperatorType>
+	* struct TestScript.AssertionOperatorType? --> Code<TestScript.AssertionOperatorType>
+	* struct TestScript.AssertionOperatorType? --> string
+	* struct TestScript.AssertionResponseTypes --> Code<TestScript.AssertionResponseTypes>
+	* struct TestScript.AssertionResponseTypes? --> Code<TestScript.AssertionResponseTypes>
+	* struct TestScript.AssertionResponseTypes? --> string
+	* struct TestScript.TestScriptRequestMethodCode --> Code<TestScript.TestScriptRequestMethodCode>
+	* struct TestScript.TestScriptRequestMethodCode? --> Code<TestScript.TestScriptRequestMethodCode>
+	* struct TestScript.TestScriptRequestMethodCode? --> string
+	* struct Timing.EventTiming --> Code<Timing.EventTiming>
+	* struct Timing.EventTiming? --> Code<Timing.EventTiming>
+	* struct Timing.EventTiming? --> string
+	* struct Timing.UnitsOfTime --> Code<Timing.UnitsOfTime>
+	* struct Timing.UnitsOfTime? --> Code<Timing.UnitsOfTime>
+	* struct Timing.UnitsOfTime? --> string
+	* struct TriggerDefinition.TriggerType --> Code<TriggerDefinition.TriggerType>
+	* struct TriggerDefinition.TriggerType? --> Code<TriggerDefinition.TriggerType>
+	* struct TriggerDefinition.TriggerType? --> string
+	* struct VariableTypeCode --> Code<VariableTypeCode>
+	* struct VariableTypeCode? --> Code<VariableTypeCode>
+	* struct VariableTypeCode? --> string
+	* struct VerificationResult.StatusCode --> Code<VerificationResult.StatusCode>
+	* struct VerificationResult.StatusCode? --> Code<VerificationResult.StatusCode>
+	* struct VerificationResult.StatusCode? --> string
+	* struct VisionPrescription.VisionBase --> Code<VisionPrescription.VisionBase>
+	* struct VisionPrescription.VisionBase? --> Code<VisionPrescription.VisionBase>
+	* struct VisionPrescription.VisionBase? --> string
+	* struct VisionPrescription.VisionEyes --> Code<VisionPrescription.VisionEyes>
+	* struct VisionPrescription.VisionEyes? --> Code<VisionPrescription.VisionEyes>
+	* struct VisionPrescription.VisionEyes? --> string
+	* Time --> CqlTime
+	* Time --> string
+	* TimeIso8601 --> CqlTime
+	* UnsignedInt --> Integer
+	* UnsignedInt --> string
+	* Uri --> string

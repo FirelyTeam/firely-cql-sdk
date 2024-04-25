@@ -270,6 +270,7 @@ namespace Hl7.Cql.Compiler
                     Ln or
                     Lower or
                     Not or
+                    NotEqual or
                     PointFrom or
                     Precision or
                     Predecessor or
@@ -302,7 +303,6 @@ namespace Hl7.Cql.Compiler
                     Matches or
                     Modulo or
                     Multiply or
-                    NotEqual or
                     Or or
                     Power or
                     ReplaceMatches or
@@ -311,7 +311,7 @@ namespace Hl7.Cql.Compiler
                     TruncatedDivide or
                     Xor => ((IGetOperands)element).operands,
 
-                CalculateAge or
+            CalculateAge or
                     DateTimeComponentFrom or
                     After or
                     Before or
@@ -390,6 +390,7 @@ namespace Hl7.Cql.Compiler
                             Combine or
                             Concatenate or
                             ConvertQuantity or
+                            ConvertsToBoolean or
                             ConvertsToDate or
                             ConvertsToDateTime or
                             ConvertsToDecimal or
@@ -442,6 +443,7 @@ namespace Hl7.Cql.Compiler
                             Modulo or
                             Multiply or
                             Not or
+                            NotEqual or
                             Now or
                             Or or
                             PointFrom or
@@ -476,79 +478,77 @@ namespace Hl7.Cql.Compiler
                             IndexOf or
                             Slice => BindCqlOperator(element.GetType().Name, resultTypeHint, GetBindArgs(element)),
 
-                        NotEqual e => BindCqlOperator(nameof(ICqlOperators.Not), resultTypeHint, BindCqlOperator(CqlOperator.Equal, resultTypeHint, e.operand)),
-                        Expand e  => BindCqlOperator(CqlOperator.Expand, resultTypeHint, e.operand[..2]),
-                        Flatten e => BindCqlOperator(CqlOperator.Flatten, resultTypeHint, e.operand),
-                        MaxValue e => BindCqlOperator(CqlOperator.MaxValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
-                        MinValue e => BindCqlOperator(CqlOperator.MinValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
-                        Ratio e  => BindCqlOperator(CqlOperator.Ratio, resultTypeHint, e.numerator, e.denominator),
-                        ToList e => BindCqlOperator(CqlOperator.ToList, resultTypeHint, e.operand!),
-                        Width e  => BindCqlOperator(CqlOperator.Width, resultTypeHint, e.operand),
-                        Negate e => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(CqlOperator.Negate, resultTypeHint, e.operand), e.resultTypeSpecifier),
-                        ConvertsToBoolean e => throw new NotImplementedException().WithContext(this), //BindCqlOperator(CqlOperator.ConvertsToBoolean, resultTypeHint, e.operand),
-                        As e               => As(e),
-                        Case e             => Case(e),
-                        ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
-                        ToBoolean e        => ChangeType(e.operand!, typeof(bool?)),
-                        ToString e         => ChangeType(e.operand!, typeof(string)),
-                        ToConcept e        => ChangeType(e.operand!, _typeResolver.ConceptType),
-                        ToDate e           => ChangeType(e.operand!, _typeResolver.DateType),
-                        ToDecimal e        => ChangeType(e.operand!, typeof(decimal?)),
-                        ToInteger e        => ChangeType(e.operand!, typeof(int?)),
-                        ToDateTime e       => ChangeType(e.operand!, _typeResolver.DateTimeType),
-                        ToLong e           => ChangeType(e.operand!, typeof(long?)),
-                        ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
-                        Coalesce e         => Coalesce(e),
-                        CodeRef e          => CodeRef(e),
-                        CodeSystemRef e    => CodeSystemRef(e),
-                        Collapse e         => Collapse(e),
-                        ConceptRef e       => ConceptRef(e),
-                        Contains e         => Contains(e),
-                        ExpandValueSet e   => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(e.operand!)),
-                        Ends e             => Ends(e),
-                        Equivalent e       => Equivalent(e),
-                        Except e           => Except(e),
-                        FunctionRef e      => FunctionRef(e),
-                        ExpressionRef e    => ExpressionRef(e),
-                        AliasRef e         => GetScopeExpression(e.name!),
-                        QueryLetRef e      => GetScopeExpression(e.name!),
-                        IdentifierRef e    => IdentifierRef(e),
-                        If e               => If(e),
-                        IncludedIn e       => IncludedIn(e),
-                        Includes e         => Includes(e),
-                        Instance e         => Instance(e),
-                        Intersect e        => Intersect(e),
-                        Is e               => Is(e),
-                        IsNull e           => IsNull(e),
-                        List e             => List(e),
-                        Literal e          => Literal(e),
-                        Meets e            => Meets(e),
-                        MeetsAfter e       => MeetsAfter(e),
-                        MeetsBefore e      => MeetsBefore(e),
-                        Message e          => Message(e),
-                        Null e             => NullExpression.ForType(TypeFor(e)!),
-                        OperandRef e       => OperandRef(e),
-                        Overlaps e         => Overlaps(e),
-                        OverlapsAfter e    => OverlapsAfter(e),
-                        OverlapsBefore e   => OverlapsBefore(e),
-                        ParameterRef e     => ParameterRef(e),
-                        AnyInValueSet e    => ProcessValueSet(e.valueset, e.codes, isList: true),
-                        InValueSet e       => ProcessValueSet(e.valueset!, e.code, isList: false),
-                        ProperContains e   => ProperContains(e),
-                        ProperIn e         => ProperIn(e),
-                        ProperIncludedIn e => ProperIncludedIn(e),
-                        ProperIncludes e   => ProperIncludes(e),
-                        Property e         => Property(e),
-                        Query e            => Query(e),
-                        Retrieve e         => Retrieve(e),
-                        SameAs e           => SameAs(e),
-                        SameOrAfter e      => SameOrAfter(e),
-                        SameOrBefore e     => SameOrBefore(e),
-                        Starts e           => Starts(e),
-                        Tuple e            => Tuple(e),
-                        Union e            => Union(e),
-                        ValueSetRef e      => ValueSetRef(e),
-                        _ => throw this.NewExpressionBuildingException(
+                        Expand e            => BindCqlOperator(CqlOperator.Expand, resultTypeHint, e.operand[..2]),
+                        Flatten e           => BindCqlOperator(CqlOperator.Flatten, resultTypeHint, e.operand),
+                        MaxValue e          => BindCqlOperator(CqlOperator.MaxValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        MinValue e          => BindCqlOperator(CqlOperator.MinValue, resultTypeHint, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        Ratio e             => BindCqlOperator(CqlOperator.Ratio, resultTypeHint, e.numerator, e.denominator),
+                        ToList e            => BindCqlOperator(CqlOperator.ToList, resultTypeHint, e.operand!),
+                        Width e             => BindCqlOperator(CqlOperator.Width, resultTypeHint, e.operand),
+                        Negate e            => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(CqlOperator.Negate, resultTypeHint, e.operand), e.resultTypeSpecifier),
+                        As e                => As(e),
+                        Case e              => Case(e),
+                        ToTime e            => ChangeType(e.operand!, _typeResolver.TimeType),
+                        ToBoolean e         => ChangeType(e.operand!, typeof(bool?)),
+                        ToString e          => ChangeType(e.operand!, typeof(string)),
+                        ToConcept e         => ChangeType(e.operand!, _typeResolver.ConceptType),
+                        ToDate e            => ChangeType(e.operand!, _typeResolver.DateType),
+                        ToDecimal e         => ChangeType(e.operand!, typeof(decimal?)),
+                        ToInteger e         => ChangeType(e.operand!, typeof(int?)),
+                        ToDateTime e        => ChangeType(e.operand!, _typeResolver.DateTimeType),
+                        ToLong e            => ChangeType(e.operand!, typeof(long?)),
+                        ToQuantity e        => ChangeType(e.operand!, _typeResolver.QuantityType),
+                        Coalesce e          => Coalesce(e),
+                        CodeRef e           => CodeRef(e),
+                        CodeSystemRef e     => CodeSystemRef(e),
+                        Collapse e          => Collapse(e),
+                        ConceptRef e        => ConceptRef(e),
+                        Contains e          => Contains(e),
+                        ExpandValueSet e    => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(e.operand!)),
+                        Ends e              => Ends(e),
+                        Equivalent e        => Equivalent(e),
+                        Except e            => Except(e),
+                        FunctionRef e       => FunctionRef(e),
+                        ExpressionRef e     => ExpressionRef(e),
+                        AliasRef e          => GetScopeExpression(e.name!),
+                        QueryLetRef e       => GetScopeExpression(e.name!),
+                        IdentifierRef e     => IdentifierRef(e),
+                        If e                => If(e),
+                        IncludedIn e        => IncludedIn(e),
+                        Includes e          => Includes(e),
+                        Instance e          => Instance(e),
+                        Intersect e         => Intersect(e),
+                        Is e                => Is(e),
+                        IsNull e            => IsNull(e),
+                        List e              => List(e),
+                        Literal e           => Literal(e),
+                        Meets e             => Meets(e),
+                        MeetsAfter e        => MeetsAfter(e),
+                        MeetsBefore e       => MeetsBefore(e),
+                        Message e           => Message(e),
+                        Null e              => NullExpression.ForType(TypeFor(e)!),
+                        OperandRef e        => OperandRef(e),
+                        Overlaps e          => Overlaps(e),
+                        OverlapsAfter e     => OverlapsAfter(e),
+                        OverlapsBefore e    => OverlapsBefore(e),
+                        ParameterRef e      => ParameterRef(e),
+                        AnyInValueSet e     => ProcessValueSet(e.valueset, e.codes, isList: true),
+                        InValueSet e        => ProcessValueSet(e.valueset!, e.code, isList: false),
+                        ProperContains e    => ProperContains(e),
+                        ProperIn e          => ProperIn(e),
+                        ProperIncludedIn e  => ProperIncludedIn(e),
+                        ProperIncludes e    => ProperIncludes(e),
+                        Property e          => Property(e),
+                        Query e             => Query(e),
+                        Retrieve e          => Retrieve(e),
+                        SameAs e            => SameAs(e),
+                        SameOrAfter e       => SameOrAfter(e),
+                        SameOrBefore e      => SameOrBefore(e),
+                        Starts e            => Starts(e),
+                        Tuple e             => Tuple(e),
+                        Union e             => Union(e),
+                        ValueSetRef e       => ValueSetRef(e),
+                        _                   => throw this.NewExpressionBuildingException(
                                  $"Expression {element.GetType().FullName} is not implemented.")
                         //@formatter:on
                     };

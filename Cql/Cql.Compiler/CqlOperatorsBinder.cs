@@ -79,8 +79,8 @@ namespace Hl7.Cql.Compiler
 
                 // Bindings with Argument Conversions
                 CqlOperator.Convert                          => BindConvert(args[0], args[1]),
-                CqlOperator.Aggregate                        => BindToGenericMethod(methodName:nameof(ICqlOperators.AggregateOrNull), genericTypeArguments:[_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
-                CqlOperator.CrossJoin                        => BindToGenericMethod(methodName: nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
+                CqlOperator.Aggregate                        => BindToGenericMethod(nameof(ICqlOperators.AggregateOrNull), genericTypeArguments:[_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
+                CqlOperator.CrossJoin                        => BindToGenericMethod(nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
                 CqlOperator.Message                          => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments:[args[0].Type], args),
                 CqlOperator.ToList                           => BindToGenericMethod(nameof(ICqlOperators.ToList), genericTypeArguments:[args[0].Type], args),
                 CqlOperator.Abs                              or // => BindToMethodConvertArgs(nameof(ICqlOperators.Abs), resultTypeHint, args),
