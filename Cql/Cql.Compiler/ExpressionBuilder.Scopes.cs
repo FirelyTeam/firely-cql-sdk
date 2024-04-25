@@ -13,8 +13,6 @@ using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Expression = System.Linq.Expressions.Expression;
 
-using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
-
 namespace Hl7.Cql.Compiler
 {
     partial class ExpressionBuilderContext

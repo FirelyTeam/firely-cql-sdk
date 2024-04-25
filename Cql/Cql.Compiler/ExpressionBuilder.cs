@@ -34,7 +34,6 @@ using DateTime = Hl7.Cql.Elm.DateTime;
 using Expression = System.Linq.Expressions.Expression;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
-using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using Tuple = Hl7.Cql.Elm.Tuple;
