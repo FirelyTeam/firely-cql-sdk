@@ -289,6 +289,14 @@ public class CSharpFormatterTests
             // Generic
             (typeof(IDictionary<string?, int?>), "IDictionary<string,int?>"),
             (typeof(IDictionary<,>), "IDictionary<,>"),
+            // Generic+Nested
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>), "EmptyStruct.Nested1.GenericNested2<int,int>"),
+            // Generic+Nested+Nullable
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?), "EmptyStruct.Nested1.GenericNested2<int,int>?"),
+            // Generic+Nested+Array
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>[]), "EmptyStruct.Nested1.GenericNested2<int,int>[]"),
+            // Generic+Nested+Array+Nullable
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?[]), "EmptyStruct.Nested1.GenericNested2<int,int>?[]"),
         ];
 
         var typeToCSharpStringOptions = new CSharpWriteTypeOptions(HideNamespaces: true, PreferKeywords: true);
@@ -356,5 +364,7 @@ public readonly record struct EmptyStruct
     public readonly record struct Nested1
     {
         public readonly record struct Nested2 { }
+
+        public readonly record struct GenericNested2<T1,T2> { }
     };
 }

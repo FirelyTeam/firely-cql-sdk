@@ -1,8 +1,10 @@
 ﻿using System.IO;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
@@ -104,65 +106,88 @@ internal record CSharpWriteTypeOptions(
             return textWriter;
         }
 
-        switch (type)
+        var hideNamespaces = HideNamespaces;
+        var isNullableValueType = false;
+
+        // Nested parts first.
+        if (type is {
+                IsNested: true,
+                IsGenericTypeParameter: false, // GenericTypeParameters are nested, but not really.
+                DeclaringType: {} declaringType
+        })
         {
-            case { IsGenericTypeParameter: true }:
-                // Do not remove this, otherwise we go inside the IsNested case and into a recursive loop.
-                if (ShowGenericTypeParameterNames)
-                    WriteName(this);
-                return textWriter;
-
-            case { IsSZArray: true }:
-                type.GetElementType()!.WriteCSharp(this, textWriter);
-                textWriter.Write(OpenArrayBracket);
-                textWriter.Write(CloseArrayBracket);
-                return textWriter;
-
-            case { IsVariableBoundArray: true }:
-                type.GetElementType()!.WriteCSharp(this, textWriter);
-                textWriter.Write(OpenArrayBracket);
-                for (int i = 1; i < type.GetArrayRank(); i++)
-                    textWriter.Write(TypeDelimiter);
-                textWriter.Write(CloseArrayBracket);
-                return textWriter;
-
-            case { IsNested: true }:
-                type.DeclaringType!.WriteCSharp(this, textWriter);
-                textWriter.Write(NestedTypeDelimiter);
-                WriteName(this with { HideNamespaces = true });
-                return textWriter;
-
-            case { IsValueType: true } when type.IsNullableValueType(out var underlyingType):
-                underlyingType.WriteCSharp(this, textWriter);
-                textWriter.Write(NullOperator);
-                return textWriter;
-
-            case { IsGenericType: true } or { IsGenericTypeDefinition: true }:
-                WriteName(this);
-                textWriter.Write(OpenGenericTypeBracket);
-                bool first = true;
-                foreach (var arg in type.GetGenericArguments())
-                {
-                    if (first) first = false;
-                    else textWriter.Write(TypeDelimiter);
-                    arg.WriteCSharp(this, textWriter);
-                }
-                textWriter.Write(CloseGenericTypeBracket);
-                return textWriter;
-
-            case { IsPointer: true }:
-                type.GetElementType()!.WriteCSharp(this, textWriter);
-                textWriter.Write(PointerOperator);
-                return textWriter;
-
-            default:
-                WriteName(this);
-                return textWriter;
+            declaringType!.WriteCSharp(this, textWriter);
+            textWriter.Write(NestedTypeDelimiter);
+            hideNamespaces = true; // Nested types are always in the same namespace.
         }
+
+        // Name
+        if (type.IsGenericTypeParameter)
+        {
+            if (ShowGenericTypeParameterNames)
+                WriteName(this);
+        }
+        else if (type.IsArray)
+        {
+            type.GetElementType()!.WriteCSharp(this, textWriter);
+        }
+        else if (type.IsValueType && type.IsNullableValueType(out var underlyingType))
+        {
+            isNullableValueType = true;
+            underlyingType.WriteCSharp(this, textWriter);
+        }
+        else if (type.IsPointer)
+        {
+            type.GetElementType()!.WriteCSharp(this, textWriter);
+        }
+        else
+        {
+            WriteName(this);
+        }
+
+
+        // Brackets/Operators
+
+        if (type.IsSZArray)
+        {
+            textWriter.Write(OpenArrayBracket);
+            textWriter.Write(CloseArrayBracket);
+        }
+        else if (type.IsVariableBoundArray)
+        {
+            textWriter.Write(OpenArrayBracket);
+            for (int i = 1; i < type.GetArrayRank(); i++)
+                textWriter.Write(TypeDelimiter);
+            textWriter.Write(CloseArrayBracket);
+        }
+
+        // Type Args
+        if (isNullableValueType)
+        {
+            textWriter.Write(NullOperator);
+        }
+        else if (type.IsGenericType && !isNullableValueType)
+        {
+            textWriter.Write(OpenGenericTypeBracket);
+            bool first = true;
+            foreach (var arg in type.GetGenericArguments())
+            {
+                if (first) first = false;
+                else textWriter.Write(TypeDelimiter);
+                arg.WriteCSharp(this, textWriter);
+            }
+            textWriter.Write(CloseGenericTypeBracket);
+        }
+
+        // Pointer
+        if (type.IsPointer)
+            textWriter.Write(PointerOperator);
+
+        return textWriter;
 
         void WriteName(CSharpWriteTypeOptions opt)
         {
-            string name = opt.HideNamespaces ? type.Name : (type.FullName ?? type.Name);
+            string name = hideNamespaces ? type.Name : (type.FullName ?? type.Name);
             if (name.IndexOf('`') is var i and >= 0)
                 textWriter.Write(name[..i]);
             else

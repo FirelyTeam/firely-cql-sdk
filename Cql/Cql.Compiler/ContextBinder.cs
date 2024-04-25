@@ -3,7 +3,7 @@
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// Represents an abstract class for binding context information.
+/// Represents an abstract class for binding to a context information.
 /// </summary>
 internal abstract class ContextBinder
 {
