@@ -22,14 +22,11 @@ internal abstract class OperatorsBinder
     /// Binds a <paramref name="methodName"/> on <see cref="ICqlOperators"/> to an <see cref="Expression"/>.
     /// </summary>
     /// <param name="methodName">The method to bind to.</param>
-    /// <param name="resultTypeHint"></param>
     /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
     /// <returns>A <see cref="MethodCallExpression"/> that binds to a method on <see cref="ICqlOperators"/>.</returns>
     public abstract Expression BindToMethod(
         string methodName,
-        Type? resultTypeHint,
-        params Expression[] args
-    );
+        params Expression[] args);
 
     /// <summary>
     /// Converts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.

@@ -30,13 +30,13 @@ partial class CqlOperatorsBinder
             if (!elementType.IsCqlInterval(out _))
                 throw new ArgumentException($"Expand expects a list element type to be an interval.",
                     nameof(argument));
-            return BindToMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
+            return BindToDirectMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
         }
 
         if (!argument.Type.IsCqlInterval(out _))
             throw new ArgumentException($"Expand allows only a List<Interval<T>> or an Interval<T> as a parameter.", nameof(argument));
 
-        return BindToMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
+        return BindToDirectMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
     }
 
     private Expression SortBy(
@@ -64,11 +64,11 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), rightElementType, left, right);
+                return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), left, right);
             }
         }
 
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.In), null, [left, right], false);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.In), [left, right], false);
         if (methodInfo is null)
             return NullExpression.Object;
 
@@ -84,7 +84,6 @@ partial class CqlOperatorsBinder
         {
             return BindToMethodConvertArgs(
                 nameof(ICqlOperators.ValueSetUnion),
-                null,
                 left.TypeAsExpression<IEnumerable<CqlCode>>(),
                 right.TypeAsExpression<IEnumerable<CqlCode>>());
         }
@@ -94,18 +93,18 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), null, left, right);
+                return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), left, right);
             }
         }
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.ListUnion), leftElementType, left, right);
+        return BindToMethodConvertArgs(nameof(ICqlOperators.ListUnion), left, right);
     }
 
     private Expression ResolveValueSet(Expression expression)
     {
         if (expression is NewExpression @new && @new.Type == typeof(CqlValueSet))
         {
-            var call = BindToMethod(nameof(ICqlOperators.ResolveValueSet), @new);
+            var call = BindToDirectMethod(nameof(ICqlOperators.ResolveValueSet), @new);
             return call;
         }
 
@@ -172,7 +171,7 @@ partial class CqlOperatorsBinder
         if (elementType == typeof(object))
         {
             // This scenario can happen in late-bound property chains
-            var call = BindToMethod(nameof(ICqlOperators.FlattenLateBoundList), operand);
+            var call = BindToDirectMethod(nameof(ICqlOperators.FlattenLateBoundList), operand);
             return call;
         }
 
@@ -185,7 +184,7 @@ partial class CqlOperatorsBinder
         if (operand.Type == typeof(CqlInterval<object>))
             return NullExpression.Int32;
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.Width), null, operand);
+        return BindToMethodConvertArgs(nameof(ICqlOperators.Width), operand);
     }
 
     private MethodCallExpression LateBoundProperty(
@@ -218,7 +217,7 @@ partial class CqlOperatorsBinder
         var methodName = CqlOperators.ConversionFunctionName(source.Type, toType);
         if (methodName != null)
         {
-            var call = BindToMethod(methodName, source);
+            var call = BindToDirectMethod(methodName, source);
             return call;
         }
 
@@ -289,7 +288,7 @@ partial class CqlOperatorsBinder
         else
             throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
 
-        var call = BindToMethod(forType, codes, codeProperty);
+        var call = BindToDirectMethod(forType, codes, codeProperty);
         return call;
     }
 

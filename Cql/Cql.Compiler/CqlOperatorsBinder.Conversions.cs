@@ -91,10 +91,9 @@ partial class CqlOperatorsBinder
 
     private MethodCallExpression BindToMethodConvertArgs(
         string methodName,
-        Type? resultTypeHint,
         params Expression[] arguments)
     {
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, resultTypeHint, arguments);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
         return call;
     }

@@ -57,35 +57,34 @@ namespace Hl7.Cql.Compiler
         /// <inheritdoc />
         public override Expression BindToMethod(
             string methodName,
-            Type? resultTypeHint,
             params Expression[] args)
         {
             var result = methodName switch
             {
                 // @formatter:off
-                "Convert" => BindConvert(args[0], args[1]),
-                "Aggregate" => BindToGenericMethod(nameof(ICqlOperators.Aggregate), genericTypeArguments: [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
-                "CrossJoin" => BindToGenericMethod(nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
-                "Message" => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments: [args[0].Type], args),
-                "ToList" => BindToGenericMethod(nameof(ICqlOperators.ToList), genericTypeArguments: [args[0].Type], args),
-                "Coalesce" => Coalesce(args[0]),
-                "Expand" => Expand(args[0], args[1]),
-                "Flatten" => Flatten(args[0]),
-                "InList" => InList(args[0], args[1]),
-                "LateBoundProperty" => LateBoundProperty(args[0], args[1], args[2]),
-                "ListUnion" => ListUnion(args[0], args[1]),
-                "MaxValue" => MaxValue(args[0]),
-                "MinValue" => MinValue(args[0]),
-                "ResolveValueSet" => ResolveValueSet(args[0]),
-                "Retrieve" => Retrieve(args[0], args[1], args[2]),
-                "Select" => Select(args[0], args[1]),
-                "SelectMany" => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
-                "SelectManyResults" => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
-                "SortBy" => SortBy(args[0], args[1], args[2]),
-                "Where" => Where(args[0], args[1]),
-                "Width" => Width(args[0]),
+                "Convert"                      => BindConvert(args[0], args[1]),
+                "Aggregate"                    => BindToGenericMethod(nameof(ICqlOperators.Aggregate), genericTypeArguments: [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
+                "CrossJoin"                    => BindToGenericMethod(nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
+                "Message"                      => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments: [args[0].Type], args),
+                "ToList"                       => BindToGenericMethod(nameof(ICqlOperators.ToList), genericTypeArguments: [args[0].Type], args),
+                "Coalesce"                     => Coalesce(args[0]),
+                "Expand"                       => Expand(args[0], args[1]),
+                "Flatten"                      => Flatten(args[0]),
+                "InList"                       => InList(args[0], args[1]),
+                "LateBoundProperty"            => LateBoundProperty(args[0], args[1], args[2]),
+                "ListUnion"                    => ListUnion(args[0], args[1]),
+                "MaxValue"                     => MaxValue(args[0]),
+                "MinValue"                     => MinValue(args[0]),
+                "ResolveValueSet"              => ResolveValueSet(args[0]),
+                "Retrieve"                     => Retrieve(args[0], args[1], args[2]),
+                "Select"                       => Select(args[0], args[1]),
+                "SelectMany"                   => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
+                "SelectManyResults"            => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
+                "SortBy"                       => SortBy(args[0], args[1], args[2]),
+                "Where"                        => Where(args[0], args[1]),
+                "Width"                        => Width(args[0]),
                 "Ratio" or "PropertyOrDefault" => throw new NotSupportedException($"Operator {methodName} is not supported by this binding."),
-                _ => BindToMethodConvertArgs(methodName, resultTypeHint, args),
+                _                              => BindToMethodConvertArgs(methodName, args),
                 // @formatter:om
             };
             return result;

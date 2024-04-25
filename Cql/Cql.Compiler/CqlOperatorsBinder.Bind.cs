@@ -40,7 +40,7 @@ internal partial class CqlOperatorsBinder
             typeOptions: CSharpWriteTypeOptions));
 
     ///  <summary>
-    ///
+    /// 
     ///  <para>
     ///  This method tries to match the method name with the arguments against the ICqlOperators methods.
     ///  It also converts the arguments to the correct types if necessary.
@@ -48,27 +48,25 @@ internal partial class CqlOperatorsBinder
     ///  If no method is found, it throws an ArgumentException when <paramref name="throwError"></paramref> is <c>true</c>;
     ///  otherwise , it returns <c>null</c> for method on the resulting tuple.
     ///  </para>
-    ///
+    /// 
     ///  <para>
     ///  The discovery of the correct method is done in two steps:
     ///  The first step tries to match the arguments with the method parameters.
     ///  The second step tries to match the arguments with the method parameters, but without the last argument.
     ///  This last step is useful for methods that have a null argument at the end, which is commonly used for precision cases.
     /// </para>
-    ///
+    /// 
     ///  <para>
     ///  For generic methods, it tries to match the generic type from the first argument, and if it fails, it tries the second argument.
     ///  </para>
-    ///
+    /// 
     ///  </summary>
     ///  <param name="methodName">The exact method name to bind to. When there are overloads, the correct method will be resolved.</param>
-    ///  <param name="resultTypeHint">The hint of what the expected result type should be, which is used to discriminate between more than one bind candidate.</param>
     ///  <param name="arguments">When an overload exists, returns the arguments that can be provided to this method. Conversions may be included to allow this.</param>
     ///  <param name="throwError">Whether to throw an error if no method overload could be found. This is the default behavior. Otherwise, returns the tuple with method as null.</param>
     ///  <exception cref="ArgumentException">If no method overload is discovered, and if <paramref name="throwError"/> is <c>true</c>.</exception>
     private (MethodInfo? method, Expression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
-        Type? resultTypeHint,
         Expression[] arguments,
         bool throwError = true)
     {
@@ -249,19 +247,19 @@ internal partial class CqlOperatorsBinder
         }
     }
 
-    private static MethodCallExpression BindToMethod(
+    private static MethodCallExpression BindToDirectMethod(
         string methodName,
         params Expression[] arguments) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, null, arguments);
+
+    private static MethodCallExpression BindToDirectMethod(
+        MethodInfo method,
+        params Expression[] expressions) =>
+        Expression.Call(CqlExpressions.Operators_PropertyExpression, method, expressions);
 
     private static MethodCallExpression BindToGenericMethod(
         string methodName,
         Type[] genericTypeArguments,
         params Expression[] arguments) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, genericTypeArguments, arguments);
-
-    private static MethodCallExpression BindToMethod(
-        MethodInfo method,
-        params Expression[] expressions) =>
-        Expression.Call(CqlExpressions.Operators_PropertyExpression, method, expressions);
 }
