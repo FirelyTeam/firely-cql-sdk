@@ -204,19 +204,38 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) >= 0;
+            else 
+                return left.CompareTo(right, precision) switch
+                {
+                    null => null,
+                    >= 0 => true,
+                    _ => false
+                };
+
         }
         public bool? SameOrAfter(CqlDateTime? left, CqlDateTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) >= 0;
+            else
+                return left.CompareTo(right, precision) switch
+                {
+                    null => null,
+                    >= 0 => true,
+                    _ => false
+                };
         }
         public bool? SameOrAfter(CqlTime? left, CqlTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) >= 0;
+            else
+                return left.CompareTo(right, precision) switch
+                {
+                    null => null,
+                    >= 0 => true,
+                    _ => false
+                };
         }
 
         #endregion
@@ -226,19 +245,37 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) <= 0;
+            else 
+                return left.CompareTo(right, precision) switch
+                {
+                    null => null,
+                    <= 0 => true,
+                    _ => false
+                };
         }
         public bool? SameOrBefore(CqlDateTime? left, CqlDateTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) <= 0;
+            else
+                return left.CompareTo(right, precision) switch
+                {
+                    null => null,
+                    <= 0 => true,
+                    _ => false
+                };
         }
         public bool? SameOrBefore(CqlTime? left, CqlTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) <= 0;
+            else
+                return left.CompareTo(right, precision) switch
+                {
+                    null => null,
+                    <= 0 => true,
+                    _ => false
+                };
         }
         #endregion
 
@@ -247,19 +284,34 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) == 0;
+            else return left.CompareTo(right, precision) switch
+                {
+                    null => null,
+                    0 => true,
+                    _ => false
+                };
         }
         public bool? SameAs(CqlDateTime? left, CqlDateTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) == 0;
+            else return left.CompareTo(right, precision) switch
+            {
+                null => null,
+                0 => true,
+                _ => false
+            };
         }
         public bool? SameAs(CqlTime? left, CqlTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) == 0;
+            else return left.CompareTo(right, precision) switch
+            {
+                null => null,
+                0 => true,
+                _ => false
+            };
         }
 
         #endregion

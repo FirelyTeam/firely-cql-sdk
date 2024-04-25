@@ -225,7 +225,69 @@ namespace Hl7.Cql.Primitives
             { DateTimePrecision.Month, new CqlQuantity(1m, UCUMUnits.Month) },
             { DateTimePrecision.Second, new CqlQuantity(1m, UCUMUnits.Second) },
             { DateTimePrecision.Year, new CqlQuantity(1m, UCUMUnits.Year) },
-
         };
+
+        /// <summary>
+        /// For datetime addition and subtraction, when quantity is more precise than the datetime, 
+        /// the quantity has to be normalized to the lesser precision and truncated.
+        /// </summary>
+        /// <see href="https://cql.hl7.org/09-b-cqlreference.html#add-1" />
+        internal static CqlQuantity NormalizeTo(this CqlQuantity quantity, DateTimePrecision target)
+        {
+            // using the table found here:
+            // https://cql.hl7.org/09-b-cqlreference.html#equivalent
+            return (quantity.unit, target) switch
+            {
+                (null, _) => quantity,
+                ("mo", DateTimePrecision.Year) => 
+                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 12)!, UCUMUnits.Year),
+                
+                ("d", DateTimePrecision.Year) => 
+                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 365)!, UCUMUnits.Year),
+                ("d", DateTimePrecision.Month) =>
+                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 30)!, UCUMUnits.Month),
+                
+                ("h", DateTimePrecision.Year) => 
+                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 365)!, UCUMUnits.Year),
+                ("h", DateTimePrecision.Month) => 
+                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 30)!, UCUMUnits.Month),
+                ("h", DateTimePrecision.Day) =>
+                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 24)!, UCUMUnits.Day),
+                
+                ("mi", DateTimePrecision.Year) => 
+                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 365)!, UCUMUnits.Year),
+                ("mi", DateTimePrecision.Month) =>
+                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 30)!, UCUMUnits.Month),
+                ("mi", DateTimePrecision.Day) => 
+                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 24)!, UCUMUnits.Day),
+                ("mi", DateTimePrecision.Hour) =>
+                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Hour),
+
+                ("s", DateTimePrecision.Year) =>
+                    new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
+                ("s", DateTimePrecision.Month) =>
+                    new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
+                ("s", DateTimePrecision.Day) =>
+                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 60) / 24)!, UCUMUnits.Day),
+                ("s", DateTimePrecision.Hour) =>
+                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 60)!, UCUMUnits.Hour),
+                ("s", DateTimePrecision.Minute) =>
+                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Minute),
+
+                ("ms", DateTimePrecision.Year) =>
+                    new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
+                ("ms", DateTimePrecision.Month) =>
+                    new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
+                ("ms", DateTimePrecision.Day) =>
+                    new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 1000) / 60) / 60) / 24)!, UCUMUnits.Day),
+                ("ms", DateTimePrecision.Hour) =>
+                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 1000) / 60) / 60)!, UCUMUnits.Hour),
+                ("ms", DateTimePrecision.Minute) =>
+                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 1000) / 60)!, UCUMUnits.Minute),
+                ("ms", DateTimePrecision.Second) =>
+                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 1000)!, UCUMUnits.Second),
+                (_,_) => quantity
+            };
+        }
     }
 }

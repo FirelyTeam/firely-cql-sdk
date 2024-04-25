@@ -48,6 +48,15 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void CqlDate_Subtract_Months_From_Year()
+        {
+            Assert.IsTrue(CqlDateTime.TryParse("2014", out var baseDate));
+            var result = baseDate.Subtract(new CqlQuantity(25m, UCUMUnits.Month));
+            Assert.AreEqual(2012, result.Value.Year);
+            Assert.AreEqual(DateTimePrecision.Year, result.Precision);
+        }
+
+        [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
         {
             Assert.IsTrue(CqlDateTime.TryParse("1960", out var baseDate));

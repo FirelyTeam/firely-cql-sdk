@@ -8,12 +8,9 @@ namespace Hl7.Cql.CqlToElm.Test
 {
     internal static class SkippedTests
     {
-        internal static Dictionary<string, string> Map = new()
+        internal static Dictionary<string, string> DoesNotCompile = new()
         {
             { "EquivEqCM1M01", "Mixed unit equivalence is not supported." },
-            { "Power2ToNeg2", "Power returns integers, not decimals." },
-            { "RoundNeg0D5", "This rounding test doesn't behave like the others." },
-            { "RoundNeg1D5", "This rounding test doesn't behave like the others." },
             { "Multiply1CMBy2CM", "Unit arithmetic is not supported." },
             { "TruncatedDivide10d1ByNeg3D1Quantity", "Unit arithmetic is not supported." },
             { "TestCollapseNull", "Collapse should not be supported for Interval<Any>." },
@@ -29,6 +26,37 @@ namespace Hl7.Cql.CqlToElm.Test
             { "Decimal10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
-        }; 
+        };
+
+        internal static Dictionary<string, string> DoesNotMatchExpectation = new()
+        {
+            { "DecimalMinValue", "Our implementation returns a smaller value." },
+            { "DecimalMaxValue", "Our implementation returns a larger value." },
+            { "Power2ToNeg2", "Power returns integers, not decimals." },
+            { "DecimalOneStep", "Power returns integers, not decimals." },
+            { "DecimalPosOneStep", "Power returns integers, not decimals." },
+            { "DecimalTwoStep", "Power returns integers, not decimals." },
+            { "DecimalPosTwoStep", "Power returns integers, not decimals." },
+            { "DecimalNegTwoStep", "Power returns integers, not decimals." },
+            { "DecimalTenStep", "Power returns integers, not decimals." },
+            { "DecimalPosTenStep", "Power returns integers, not decimals." },
+            { "DecimalNegTenStep", "Power returns integers, not decimals." },
+            { "RoundNeg0D5", "This rounding test doesn't behave like the others." },
+            { "RoundNeg1D5", "This rounding test doesn't behave like the others." },
+
+            { "DateTimeDurationBetweenYear", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenUncertainInterval", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenUncertainInterval2", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenUncertainSubtract", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenUncertainMultiply", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenUncertainDiv", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty." },
+            { "DateTimeUncertain", "We don't support uncertainty." },
+
+
+        };
     }
+
+
 }

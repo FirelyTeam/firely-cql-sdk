@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
@@ -29,35 +30,66 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static CqlContext CqlContext = FhirCqlContext.ForBundle();
+        private static InvocationBuilder InvocationBuilder = Services.GetRequiredService<InvocationBuilder>();
+        private static ElmFactory ElmFactory = Services.GetRequiredService<ElmFactory>();
+
 
         [DynamicData(nameof(GetTests), DynamicDataSourceType.Method,
             DynamicDataDisplayName = nameof(DisplayName))]
         [TestMethod]
         public void Run(TestCase testCase)
         {
-            if (SkippedTests.Map.TryGetValue(testCase.TestName, out var reason))
+            if (SkippedTests.DoesNotCompile.TryGetValue(testCase.TestName, out var reason))
                 Assert.Inconclusive($"Case {testCase.Category}: {testCase.TestName} skipped: {reason}");
             var expression = Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
                 Assert.Fail($"Case {testCase.Category}: {testCase.TestName} expression compiled with errors: {expressionErrors.First().message}");
-            var expressionLambda = ExpressionBuilder.Lambda(expression);
-            var expressionDelegate = expressionLambda.Compile();
-            var expressionResult = expressionDelegate.DynamicInvoke(CqlContext);
+            //var expressionLambda = ExpressionBuilder.Lambda(expression);
+            //var expressionDelegate = expressionLambda.Compile();
+            //var expressionResult = expressionDelegate.DynamicInvoke(CqlContext);
             if (testCase.Expectation is not null)
             {
                 var expectation = Expression(testCase.Expectation);
                 var expectationErrors = expectation.GetErrors();
                 if (expectationErrors.Any())
                     Assert.Fail($"Case {testCase.Category}: {testCase.TestName} expectation compiled with errors: {expressionErrors.First().message}");
-                var expectationLambda = ExpressionBuilder.Lambda(expectation);
-                var expectationDelegate = expectationLambda.Compile();
-                var expectationResult = expectationDelegate.DynamicInvoke(CqlContext);
-                var comparison = CqlContext.Operators.Comparer.Equals(expressionResult, expectationResult, null);
-                //comparison.Should().BeTrue();
+                if (SkippedTests.DoesNotMatchExpectation.TryGetValue(testCase.TestName, out var doesNotMatchReason))
+                    Assert.Inconclusive($"Cannot evaluate case {testCase.Category}: {testCase.TestName}: {doesNotMatchReason}");
+                Elm.Expression equal = Equals(expression, expectation);
+                var equalLambda = ExpressionBuilder.Lambda(equal);
+                var equalDelegate = equalLambda.Compile();
+                var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
+                if (equalResult != true)
+                {
+                    var expressionValue = ExpressionBuilder.Lambda(expression).Compile().DynamicInvoke(CqlContext);
+                    var expectationValue = ExpressionBuilder.Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                    Assert.Fail($"Expected {expectationValue}, but got {expressionValue}");
+
+
+                }
             }
             else
                 Assert.Inconclusive($"Case {testCase.Category}: {testCase.TestName} is inconclusive; no expectation provided.");
+        }
+
+        private static Elm.Expression Equals(Elm.Expression expression, Elm.Expression expectation)
+        {
+            var equal = InvocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
+            var @if = new If
+            {
+                condition = new And
+                {
+                    operand = new[]
+                    {
+                        new IsNull { operand = expression }.WithResultType(SystemTypes.BooleanType),
+                        new IsNull { operand = expectation }.WithResultType(SystemTypes.BooleanType),
+                    }
+                }.WithResultType(SystemTypes.BooleanType),
+                then = ElmFactory.Literal(true),
+                @else = equal,
+            }.WithResultType(SystemTypes.BooleanType);
+            return @if;
         }
 
         public static string DisplayName(MethodInfo method, object[] data)
