@@ -182,7 +182,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return s_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -207,7 +207,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return m_;
 		};
-		var g_ = context.Operators.WhereOrNull<MedicationAdministration>(e_, f_);
+		var g_ = context.Operators.Where<MedicationAdministration>(e_, f_);
 
 		return g_;
 	}
@@ -232,14 +232,14 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 				return m_;
 			};
-			var f_ = context.Operators.WhereOrNull<MedicationAdministration>(d_, e_);
+			var f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
 			Encounter g_(MedicationAdministration HypoglycemicMedication) => 
 				InpatientHospitalization;
-			var h_ = context.Operators.SelectOrNull<MedicationAdministration, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -288,7 +288,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(e_, f_);
+		var g_ = context.Operators.Select<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(e_, f_);
 		bool? h_(Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz)
 		{
 			object m_()
@@ -508,10 +508,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return ao_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(g_, h_);
+		var i_ = context.Operators.Where<Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(g_, h_);
 		Observation j_(Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz) => 
 			tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest;
-		var k_ = context.Operators.SelectOrNull<Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ, Observation>(i_, j_);
+		var k_ = context.Operators.Select<Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ, Observation>(i_, j_);
 
 		return k_;
 	}
@@ -538,7 +538,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation,Observation>, Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(e_, f_);
+		var g_ = context.Operators.Select<ValueTuple<Encounter,Observation,Observation>, Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(e_, f_);
 		bool? h_(Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz)
 		{
 			object m_()
@@ -854,10 +854,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return av_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(g_, h_);
+		var i_ = context.Operators.Where<Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(g_, h_);
 		Observation j_(Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz) => 
 			tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest;
-		var k_ = context.Operators.SelectOrNull<Tuple_CQTbBRGObHbJhTLCMKYTEOihZ, Observation>(i_, j_);
+		var k_ = context.Operators.Select<Tuple_CQTbBRGObHbJhTLCMKYTEOihZ, Observation>(i_, j_);
 
 		return k_;
 	}
@@ -880,18 +880,18 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 				return k_;
 			};
-			var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+			var f_ = context.Operators.Where<Observation>(d_, e_);
 			string g_(Observation @this) => 
 				((@this is Resource)
 	? ((@this as Resource).IdElement)
 	: null)?.Value;
-			var h_ = context.Operators.SelectOrNull<Observation, string>(f_, g_);
+			var h_ = context.Operators.Select<Observation, string>(f_, g_);
 			var i_ = context.Operators.In<string>(LowGlucoseTest?.IdElement?.Value, h_);
 			var j_ = context.Operators.Not(i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -915,7 +915,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(c_, d_);
 		bool? f_(Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs)
 		{
 			object k_()
@@ -970,10 +970,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return n_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(e_, f_);
+		var g_ = context.Operators.Where<Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(e_, f_);
 		Encounter h_(Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs) => 
 			tuple_dkowlzzjeftkbjljexpnieafs.QualifyingEncounter;
-		var i_ = context.Operators.SelectOrNull<Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(g_, h_);
+		var i_ = context.Operators.Select<Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(g_, h_);
 
 		return i_;
 	}

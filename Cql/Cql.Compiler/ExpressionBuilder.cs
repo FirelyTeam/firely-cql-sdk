@@ -206,19 +206,19 @@ namespace Hl7.Cql.Compiler
         }
 
         private Expression BindCqlOperator(
-            CqlOperatorsMethod method,
+            string methodName,
             Type? resultTypeHint,
             params object?[] args)
         {
             //bool stop = ((IBuilderContext)this).Hash == "#EMAEaaYJ";
-            return _operatorsBinder.BindToMethod(method, resultTypeHint, TranslateAll(args));
+            return _operatorsBinder.BindToMethod(methodName, resultTypeHint, TranslateAll(args));
         }
 
         private Expression BindCqlOperator<T>(
-            CqlOperatorsMethod method,
+            string methodName,
             Type? resultTypeHint,
             params T?[] args) =>
-            _operatorsBinder.BindToMethod(method, resultTypeHint, TranslateAll(args));
+            _operatorsBinder.BindToMethod(methodName, resultTypeHint, TranslateAll(args));
 
         private Expression[] TranslateAll(params object?[] args) =>
             TranslateAll<object?>(args);
@@ -491,6 +491,7 @@ namespace Hl7.Cql.Compiler
                         Ratio e             => BindCqlOperator(CqlOperator.Ratio, resultTypeHint, e.numerator, e.denominator),
                         ToList e            => BindCqlOperator(CqlOperator.ToList, resultTypeHint, e.operand!),
                         Width e             => BindCqlOperator(CqlOperator.Width, resultTypeHint, e.operand),
+
                         Negate e            => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(CqlOperator.Negate, resultTypeHint, e.operand), e.resultTypeSpecifier),
                         As e                => As(e),
                         Case e              => Case(e),

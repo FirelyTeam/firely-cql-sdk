@@ -296,7 +296,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -353,7 +353,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 			return ar_;
 		};
-		var ah_ = context.Operators.WhereOrNull<Encounter>(af_, ag_);
+		var ah_ = context.Operators.Where<Encounter>(af_, ag_);
 		var ai_ = context.Operators.Exists<Encounter>(ah_);
 
 		return ai_;
@@ -489,7 +489,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 			return k_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
 			var x_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -498,7 +498,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 			return z_;
 		};
-		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		var f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.Last<Observation>(f_);
 
 		return g_;

@@ -63,7 +63,7 @@ public class NCQAStatus_1_0_0
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<AllergyIntolerance>(Allergy, a_);
+		var b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
 
 		return b_;
 	}
@@ -80,7 +80,7 @@ public class NCQAStatus_1_0_0
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Condition>(Condition, a_);
+		var b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
@@ -95,7 +95,7 @@ public class NCQAStatus_1_0_0
 
 			return d_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter>(Enc, a_);
+		var b_ = context.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
@@ -110,7 +110,7 @@ public class NCQAStatus_1_0_0
 
 			return d_;
 		};
-		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
+		var b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
@@ -125,7 +125,7 @@ public class NCQAStatus_1_0_0
 
 			return d_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationDispense>(Med, a_);
+		var b_ = context.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
@@ -144,7 +144,7 @@ public class NCQAStatus_1_0_0
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationRequest>(Med, a_);
+		var b_ = context.Operators.Where<MedicationRequest>(Med, a_);
 
 		return b_;
 	}
@@ -159,7 +159,7 @@ public class NCQAStatus_1_0_0
 
 			return d_;
 		};
-		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
+		var b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
@@ -179,7 +179,7 @@ public class NCQAStatus_1_0_0
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
+		var b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}

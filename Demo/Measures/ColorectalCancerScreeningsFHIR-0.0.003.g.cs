@@ -542,7 +542,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return m_;
 		};
-		var g_ = context.Operators.WhereOrNull<Encounter>(e_, f_);
+		var g_ = context.Operators.Where<Encounter>(e_, f_);
 
 		return g_;
 	}
@@ -615,7 +615,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
@@ -641,7 +641,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -664,7 +664,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
@@ -724,7 +724,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return o_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW e_(Observation FecalOccult)
 		{
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
@@ -735,41 +735,41 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return aj_;
 			};
-			var s_ = context.Operators.WhereOrNull<Coding>(q_, r_);
+			var s_ = context.Operators.Where<Coding>(q_, r_);
 			FhirString t_(Coding @this) => 
 				@this?.DisplayElement;
-			var u_ = context.Operators.SelectOrNull<Coding, FhirString>(s_, t_);
+			var u_ = context.Operators.Select<Coding, FhirString>(s_, t_);
 			bool? v_(CodeableConcept @this)
 			{
 				var ak_ = context.Operators.Not((bool?)(@this?.Coding is null));
 
 				return ak_;
 			};
-			var w_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), v_);
+			var w_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), v_);
 			List<Coding> x_(CodeableConcept @this) => 
 				@this?.Coding;
-			var y_ = context.Operators.SelectOrNull<CodeableConcept, List<Coding>>(w_, x_);
-			var z_ = context.Operators.FlattenList<Coding>(y_);
+			var y_ = context.Operators.Select<CodeableConcept, List<Coding>>(w_, x_);
+			var z_ = context.Operators.Flatten<Coding>(y_);
 			bool? aa_(Coding @this)
 			{
 				var al_ = context.Operators.Not((bool?)(@this?.CodeElement is null));
 
 				return al_;
 			};
-			var ab_ = context.Operators.WhereOrNull<Coding>(z_, aa_);
+			var ab_ = context.Operators.Where<Coding>(z_, aa_);
 			Code ac_(Coding @this) => 
 				@this?.CodeElement;
-			var ad_ = context.Operators.SelectOrNull<Coding, Code>(ab_, ac_);
+			var ad_ = context.Operators.Select<Coding, Code>(ab_, ac_);
 			bool? ae_(Code @this)
 			{
 				var am_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 				return am_;
 			};
-			var af_ = context.Operators.WhereOrNull<Code>(ad_, ae_);
+			var af_ = context.Operators.Where<Code>(ad_, ae_);
 			string ag_(Code @this) => 
 				@this?.Value;
-			var ah_ = context.Operators.SelectOrNull<Code, string>(af_, ag_);
+			var ah_ = context.Operators.Select<Code, string>(af_, ag_);
 			var ai_ = new Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW
 			{
 				occultDate = p_,
@@ -780,7 +780,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return ai_;
 		};
-		var f_ = context.Operators.SelectOrNull<Observation, Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
+		var f_ = context.Operators.Select<Observation, Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
 
 		return f_;
 	}
@@ -811,20 +811,20 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return ab_;
 				};
-				var s_ = context.Operators.WhereOrNull<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
+				var s_ = context.Operators.Where<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
 				Code t_(Coding @this) => 
 					@this?.CodeElement;
-				var u_ = context.Operators.SelectOrNull<Coding, Code>(s_, t_);
+				var u_ = context.Operators.Select<Coding, Code>(s_, t_);
 				bool? v_(Code @this)
 				{
 					var ac_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 					return ac_;
 				};
-				var w_ = context.Operators.WhereOrNull<Code>(u_, v_);
+				var w_ = context.Operators.Where<Code>(u_, v_);
 				string x_(Code @this) => 
 					@this?.Value;
-				var y_ = context.Operators.SelectOrNull<Code, string>(w_, x_);
+				var y_ = context.Operators.Select<Code, string>(w_, x_);
 				var z_ = new string[]
 				{
 					"laboratory",
@@ -833,7 +833,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return aa_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
@@ -845,7 +845,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return q_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -876,20 +876,20 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return ab_;
 				};
-				var s_ = context.Operators.WhereOrNull<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
+				var s_ = context.Operators.Where<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
 				Code t_(Coding @this) => 
 					@this?.CodeElement;
-				var u_ = context.Operators.SelectOrNull<Coding, Code>(s_, t_);
+				var u_ = context.Operators.Select<Coding, Code>(s_, t_);
 				bool? v_(Code @this)
 				{
 					var ac_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 					return ac_;
 				};
-				var w_ = context.Operators.WhereOrNull<Code>(u_, v_);
+				var w_ = context.Operators.Where<Code>(u_, v_);
 				string x_(Code @this) => 
 					@this?.Value;
-				var y_ = context.Operators.SelectOrNull<Code, string>(w_, x_);
+				var y_ = context.Operators.Select<Code, string>(w_, x_);
 				var z_ = new string[]
 				{
 					"laboratory",
@@ -898,7 +898,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return aa_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
@@ -910,7 +910,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return q_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -933,20 +933,20 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return y_;
 				};
-				var o_ = context.Operators.WhereOrNull<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), n_);
+				var o_ = context.Operators.Where<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), n_);
 				Code p_(Coding @this) => 
 					@this?.CodeElement;
-				var q_ = context.Operators.SelectOrNull<Coding, Code>(o_, p_);
+				var q_ = context.Operators.Select<Coding, Code>(o_, p_);
 				bool? r_(Code @this)
 				{
 					var z_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 					return z_;
 				};
-				var s_ = context.Operators.WhereOrNull<Code>(q_, r_);
+				var s_ = context.Operators.Where<Code>(q_, r_);
 				string t_(Code @this) => 
 					@this?.Value;
-				var u_ = context.Operators.SelectOrNull<Code, string>(s_, t_);
+				var u_ = context.Operators.Select<Code, string>(s_, t_);
 				var v_ = new string[]
 				{
 					"laboratory",
@@ -956,7 +956,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return x_;
 			};
-			var f_ = context.Operators.WhereOrNull<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), e_);
+			var f_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), e_);
 			var g_ = context.Operators.Exists<CodeableConcept>(f_);
 			var h_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
 			var i_ = context.Operators.And(g_, h_);
@@ -967,7 +967,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1000,7 +1000,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return n_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1029,7 +1029,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return s_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW e_(Observation FitDNA)
 		{
 			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
@@ -1040,41 +1040,41 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return an_;
 			};
-			var w_ = context.Operators.WhereOrNull<Coding>(u_, v_);
+			var w_ = context.Operators.Where<Coding>(u_, v_);
 			FhirString x_(Coding @this) => 
 				@this?.DisplayElement;
-			var y_ = context.Operators.SelectOrNull<Coding, FhirString>(w_, x_);
+			var y_ = context.Operators.Select<Coding, FhirString>(w_, x_);
 			bool? z_(CodeableConcept @this)
 			{
 				var ao_ = context.Operators.Not((bool?)(@this?.Coding is null));
 
 				return ao_;
 			};
-			var aa_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), z_);
+			var aa_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), z_);
 			List<Coding> ab_(CodeableConcept @this) => 
 				@this?.Coding;
-			var ac_ = context.Operators.SelectOrNull<CodeableConcept, List<Coding>>(aa_, ab_);
-			var ad_ = context.Operators.FlattenList<Coding>(ac_);
+			var ac_ = context.Operators.Select<CodeableConcept, List<Coding>>(aa_, ab_);
+			var ad_ = context.Operators.Flatten<Coding>(ac_);
 			bool? ae_(Coding @this)
 			{
 				var ap_ = context.Operators.Not((bool?)(@this?.CodeElement is null));
 
 				return ap_;
 			};
-			var af_ = context.Operators.WhereOrNull<Coding>(ad_, ae_);
+			var af_ = context.Operators.Where<Coding>(ad_, ae_);
 			Code ag_(Coding @this) => 
 				@this?.CodeElement;
-			var ah_ = context.Operators.SelectOrNull<Coding, Code>(af_, ag_);
+			var ah_ = context.Operators.Select<Coding, Code>(af_, ag_);
 			bool? ai_(Code @this)
 			{
 				var aq_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 				return aq_;
 			};
-			var aj_ = context.Operators.WhereOrNull<Code>(ah_, ai_);
+			var aj_ = context.Operators.Where<Code>(ah_, ai_);
 			string ak_(Code @this) => 
 				@this?.Value;
-			var al_ = context.Operators.SelectOrNull<Code, string>(aj_, ak_);
+			var al_ = context.Operators.Select<Code, string>(aj_, ak_);
 			var am_ = new Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW
 			{
 				occultDate = t_,
@@ -1085,7 +1085,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return am_;
 		};
-		var f_ = context.Operators.SelectOrNull<Observation, Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
+		var f_ = context.Operators.Select<Observation, Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(d_, e_);
 
 		return f_;
 	}
@@ -1116,20 +1116,20 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return al_;
 				};
-				var ac_ = context.Operators.WhereOrNull<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
+				var ac_ = context.Operators.Where<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
 				Code ad_(Coding @this) => 
 					@this?.CodeElement;
-				var ae_ = context.Operators.SelectOrNull<Coding, Code>(ac_, ad_);
+				var ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
 				bool? af_(Code @this)
 				{
 					var am_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 					return am_;
 				};
-				var ag_ = context.Operators.WhereOrNull<Code>(ae_, af_);
+				var ag_ = context.Operators.Where<Code>(ae_, af_);
 				string ah_(Code @this) => 
 					@this?.Value;
-				var ai_ = context.Operators.SelectOrNull<Code, string>(ag_, ah_);
+				var ai_ = context.Operators.Select<Code, string>(ag_, ah_);
 				var aj_ = new string[]
 				{
 					"laboratory",
@@ -1138,7 +1138,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ak_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
@@ -1158,7 +1158,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return aa_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1189,20 +1189,20 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return al_;
 				};
-				var ac_ = context.Operators.WhereOrNull<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
+				var ac_ = context.Operators.Where<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
 				Code ad_(Coding @this) => 
 					@this?.CodeElement;
-				var ae_ = context.Operators.SelectOrNull<Coding, Code>(ac_, ad_);
+				var ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
 				bool? af_(Code @this)
 				{
 					var am_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 					return am_;
 				};
-				var ag_ = context.Operators.WhereOrNull<Code>(ae_, af_);
+				var ag_ = context.Operators.Where<Code>(ae_, af_);
 				string ah_(Code @this) => 
 					@this?.Value;
-				var ai_ = context.Operators.SelectOrNull<Code, string>(ag_, ah_);
+				var ai_ = context.Operators.Select<Code, string>(ag_, ah_);
 				var aj_ = new string[]
 				{
 					"laboratory",
@@ -1211,7 +1211,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ak_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
@@ -1231,7 +1231,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return aa_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1254,20 +1254,20 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return ai_;
 				};
-				var y_ = context.Operators.WhereOrNull<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), x_);
+				var y_ = context.Operators.Where<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), x_);
 				Code z_(Coding @this) => 
 					@this?.CodeElement;
-				var aa_ = context.Operators.SelectOrNull<Coding, Code>(y_, z_);
+				var aa_ = context.Operators.Select<Coding, Code>(y_, z_);
 				bool? ab_(Code @this)
 				{
 					var aj_ = context.Operators.Not((bool?)(@this?.Value is null));
 
 					return aj_;
 				};
-				var ac_ = context.Operators.WhereOrNull<Code>(aa_, ab_);
+				var ac_ = context.Operators.Where<Code>(aa_, ab_);
 				string ad_(Code @this) => 
 					@this?.Value;
-				var ae_ = context.Operators.SelectOrNull<Code, string>(ac_, ad_);
+				var ae_ = context.Operators.Select<Code, string>(ac_, ad_);
 				var af_ = new string[]
 				{
 					"laboratory",
@@ -1277,7 +1277,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ah_;
 			};
-			var f_ = context.Operators.WhereOrNull<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), e_);
+			var f_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), e_);
 			var g_ = context.Operators.Exists<CodeableConcept>(f_);
 			var h_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
 			var i_ = context.Operators.And(g_, h_);
@@ -1296,7 +1296,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return w_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1337,7 +1337,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return x_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1367,14 +1367,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return t_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		CqlDateTime e_(Observation Colonography)
 		{
 			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(Colonography?.Effective);
 
 			return u_;
 		};
-		var f_ = context.Operators.SelectOrNull<Observation, CqlDateTime>(d_, e_);
+		var f_ = context.Operators.Select<Observation, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
@@ -1414,7 +1414,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return v_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1455,7 +1455,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return w_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -1485,14 +1485,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return t_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 		CqlDateTime e_(Procedure FlexibleSigmoidoscopy)
 		{
 			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FlexibleSigmoidoscopy?.Performed);
 
 			return u_;
 		};
-		var f_ = context.Operators.SelectOrNull<Procedure, CqlDateTime>(d_, e_);
+		var f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
@@ -1525,7 +1525,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return u_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -1559,7 +1559,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return v_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -1589,14 +1589,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return t_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 		CqlDateTime e_(Procedure Colonoscopy)
 		{
 			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(Colonoscopy?.Performed);
 
 			return u_;
 		};
-		var f_ = context.Operators.SelectOrNull<Procedure, CqlDateTime>(d_, e_);
+		var f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
@@ -1629,7 +1629,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return u_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -1663,7 +1663,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 			return v_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}

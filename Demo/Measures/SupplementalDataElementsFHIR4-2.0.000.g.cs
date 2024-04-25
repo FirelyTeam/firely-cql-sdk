@@ -127,11 +127,11 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return q_;
 		};
-		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
+		var c_ = context.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension) => 
 			(Extension?.Extension as IEnumerable<Extension>);
-		var e_ = context.Operators.SelectOrNull<Extension, IEnumerable<Extension>>(c_, d_);
-		var f_ = context.Operators.FlattenList<Extension>(e_);
+		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
+		var f_ = context.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)
 		{
 			var r_ = context.Operators.Convert<FhirUri>(E?.Url);
@@ -143,10 +143,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return x_;
 		};
-		var h_ = context.Operators.WhereOrNull<Extension>(f_, g_);
+		var h_ = context.Operators.Where<Extension>(f_, g_);
 		Coding i_(Extension E) => 
 			(E?.Value as Coding);
-		var j_ = context.Operators.SelectOrNull<Extension, Coding>(h_, i_);
+		var j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
 		return j_;
 	}
@@ -169,7 +169,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return e_;
 		};
-		var d_ = context.Operators.SelectOrNull<Coverage, Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, c_);
+		var d_ = context.Operators.Select<Coverage, Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, c_);
 
 		return d_;
 	}
@@ -208,11 +208,11 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return q_;
 		};
-		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
+		var c_ = context.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension) => 
 			(Extension?.Extension as IEnumerable<Extension>);
-		var e_ = context.Operators.SelectOrNull<Extension, IEnumerable<Extension>>(c_, d_);
-		var f_ = context.Operators.FlattenList<Extension>(e_);
+		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
+		var f_ = context.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)
 		{
 			var r_ = context.Operators.Convert<FhirUri>(E?.Url);
@@ -224,10 +224,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return x_;
 		};
-		var h_ = context.Operators.WhereOrNull<Extension>(f_, g_);
+		var h_ = context.Operators.Where<Extension>(f_, g_);
 		Coding i_(Extension E) => 
 			(E?.Value as Coding);
-		var j_ = context.Operators.SelectOrNull<Extension, Coding>(h_, i_);
+		var j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
 		return j_;
 	}

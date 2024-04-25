@@ -89,7 +89,7 @@ public class VTEFHIR4_4_8_000
 
 				return o_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
@@ -99,7 +99,7 @@ public class VTEFHIR4_4_8_000
 
 			return n_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
 		object c_(Encounter.LocationComponent @this)
 		{
 			var p_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -107,7 +107,7 @@ public class VTEFHIR4_4_8_000
 
 			return q_;
 		};
-		var d_ = context.Operators.ListSortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
+		var d_ = context.Operators.SortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
 		var e_ = context.Operators.First<Encounter.LocationComponent>(d_);
 
 		return e_;

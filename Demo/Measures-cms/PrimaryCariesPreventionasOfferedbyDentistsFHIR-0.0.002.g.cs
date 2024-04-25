@@ -170,7 +170,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 			return h_;
 		};
-		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -237,7 +237,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 			return n_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlDate f_(Procedure FluorideApplication)
 		{
 			var o_ = FHIRHelpers_4_3_000.ToValue(FluorideApplication?.Performed);
@@ -247,7 +247,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 			return r_;
 		};
-		var g_ = context.Operators.SelectOrNull<Procedure, CqlDate>(e_, f_);
+		var g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
 		var h_ = context.Operators.Count<CqlDate>(g_);
 		var i_ = context.Operators.GreaterOrEqual(h_, (int?)2);
 

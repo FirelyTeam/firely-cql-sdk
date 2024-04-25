@@ -525,7 +525,7 @@ public class FHIR347_0_1_021
 
 			return ai_;
 		};
-		var p_ = context.Operators.WhereOrNull<Condition>(n_, o_);
+		var p_ = context.Operators.Where<Condition>(n_, o_);
 		var q_ = this.PCI();
 		var r_ = context.Operators.RetrieveByValueSet<Procedure>(q_, null);
 		var s_ = this.CABG_Surgeries();
@@ -550,7 +550,7 @@ public class FHIR347_0_1_021
 
 			return aq_;
 		};
-		var ac_ = context.Operators.WhereOrNull<Procedure>(aa_, ab_);
+		var ac_ = context.Operators.Where<Procedure>(aa_, ab_);
 		var ad_ = context.Operators.ListUnion<object>((p_ as IEnumerable<object>), (ac_ as IEnumerable<object>));
 
 		return ad_;
@@ -596,7 +596,7 @@ public class FHIR347_0_1_021
 
 			return ae_;
 		};
-		var y_ = context.Operators.WhereOrNull<Encounter>(w_, x_);
+		var y_ = context.Operators.Where<Encounter>(w_, x_);
 
 		return y_;
 	}
@@ -675,7 +675,7 @@ public class FHIR347_0_1_021
 
 			return q_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -698,7 +698,7 @@ public class FHIR347_0_1_021
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
@@ -764,7 +764,7 @@ public class FHIR347_0_1_021
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -888,7 +888,7 @@ public class FHIR347_0_1_021
 
 			return j_;
 		};
-		var d_ = context.Operators.WhereOrNull<AllergyIntolerance>(b_, c_);
+		var d_ = context.Operators.Where<AllergyIntolerance>(b_, c_);
 		var e_ = context.Operators.Exists<AllergyIntolerance>(d_);
 
 		return e_;
@@ -926,7 +926,7 @@ public class FHIR347_0_1_021
 
 			return ai_;
 		};
-		var g_ = context.Operators.WhereOrNull<ServiceRequest>(e_, f_);
+		var g_ = context.Operators.Where<ServiceRequest>(e_, f_);
 		var h_ = context.Operators.Exists<ServiceRequest>(g_);
 		var j_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		var l_ = context.Operators.RetrieveByValueSet<Procedure>(c_, null);
@@ -944,7 +944,7 @@ public class FHIR347_0_1_021
 
 			return aq_;
 		};
-		var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
+		var o_ = context.Operators.Where<Procedure>(m_, n_);
 		var p_ = context.Operators.Exists<Procedure>(o_);
 		var q_ = context.Operators.Or(h_, p_);
 		var r_ = this.Encounter_for_palliative_care();
@@ -963,7 +963,7 @@ public class FHIR347_0_1_021
 
 			return ay_;
 		};
-		var v_ = context.Operators.WhereOrNull<Encounter>(t_, u_);
+		var v_ = context.Operators.Where<Encounter>(t_, u_);
 		var w_ = context.Operators.Exists<Encounter>(v_);
 		var x_ = context.Operators.Or(q_, w_);
 
@@ -992,7 +992,7 @@ public class FHIR347_0_1_021
 
 			return n_;
 		};
-		var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
+		var j_ = context.Operators.Where<Condition>(h_, i_);
 		var k_ = context.Operators.Exists<Condition>(j_);
 
 		return k_;
@@ -1016,7 +1016,7 @@ public class FHIR347_0_1_021
 
 			return j_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -1038,7 +1038,7 @@ public class FHIR347_0_1_021
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -1060,7 +1060,7 @@ public class FHIR347_0_1_021
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<AdverseEvent>(b_, c_);
+		var d_ = context.Operators.Where<AdverseEvent>(b_, c_);
 		var e_ = context.Operators.Exists<AdverseEvent>(d_);
 
 		return e_;
@@ -1109,7 +1109,7 @@ public class FHIR347_0_1_021
 
 			return n_;
 		};
-		var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
+		var j_ = context.Operators.Where<Condition>(h_, i_);
 		var k_ = context.Operators.Exists<Condition>(j_);
 
 		return k_;
@@ -1154,7 +1154,7 @@ public class FHIR347_0_1_021
 
 			return ac_;
 		};
-		var s_ = context.Operators.WhereOrNull<MedicationRequest>(q_, r_);
+		var s_ = context.Operators.Where<MedicationRequest>(q_, r_);
 
 		return s_;
 	}
@@ -1187,10 +1187,10 @@ public class FHIR347_0_1_021
 
 				return ae_;
 			};
-			var u_ = context.Operators.WhereOrNull<Dosage>(ActiveStatin?.DosageInstruction, t_);
+			var u_ = context.Operators.Where<Dosage>(ActiveStatin?.DosageInstruction, t_);
 			Timing v_(Dosage @this) => 
 				@this?.Timing;
-			var w_ = context.Operators.SelectOrNull<Dosage, Timing>(u_, v_);
+			var w_ = context.Operators.Select<Dosage, Timing>(u_, v_);
 			bool? x_(Timing T)
 			{
 				object af_()
@@ -1214,7 +1214,7 @@ public class FHIR347_0_1_021
 
 				return ai_;
 			};
-			var y_ = context.Operators.WhereOrNull<Timing>(w_, x_);
+			var y_ = context.Operators.Where<Timing>(w_, x_);
 			var z_ = context.Operators.Exists<Timing>(y_);
 			var aa_ = context.Operators.Convert<string>(ActiveStatin?.StatusElement);
 			var ab_ = new string[]
@@ -1227,7 +1227,7 @@ public class FHIR347_0_1_021
 
 			return ad_;
 		};
-		var s_ = context.Operators.WhereOrNull<MedicationRequest>(q_, r_);
+		var s_ = context.Operators.Where<MedicationRequest>(q_, r_);
 
 		return s_;
 	}

@@ -481,7 +481,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return ad_;
 		};
-		var z_ = context.Operators.WhereOrNull<Encounter>(x_, y_);
+		var z_ = context.Operators.Where<Encounter>(x_, y_);
 
 		return z_;
 	}
@@ -532,7 +532,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return p_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
 		var g_ = context.Operators.Exists<Observation>(f_);
 
 		return g_;
@@ -560,7 +560,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return n_;
 		};
-		var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
+		var j_ = context.Operators.Where<Condition>(h_, i_);
 		var k_ = context.Operators.Exists<Condition>(j_);
 
 		return k_;
@@ -588,7 +588,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return r_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 
 		return i_;
@@ -614,7 +614,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return m_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 
 		return i_;
@@ -644,7 +644,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.WhereOrNull<ServiceRequest>(i_, j_);
+		var k_ = context.Operators.Where<ServiceRequest>(i_, j_);
 		var l_ = context.Operators.Exists<ServiceRequest>(k_);
 
 		return l_;
@@ -668,7 +668,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return l_;
 		};
-		var e_ = context.Operators.WhereOrNull<ServiceRequest>(c_, d_);
+		var e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		var f_ = context.Operators.Exists<ServiceRequest>(e_);
 		var g_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy();
 		var h_ = context.Operators.Or(f_, g_);
@@ -694,7 +694,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<ServiceRequest>(c_, d_);
+		var e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		var f_ = context.Operators.Exists<ServiceRequest>(e_);
 
 		return f_;
@@ -718,7 +718,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
@@ -811,14 +811,14 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 				return ap_;
 			};
-			var q_ = context.Operators.WhereOrNull<ServiceRequest>(o_, p_);
+			var q_ = context.Operators.Where<ServiceRequest>(o_, p_);
 			ServiceRequest r_(ServiceRequest XrayOrder) => 
 				PregnancyTest;
-			var s_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(q_, r_);
+			var s_ = context.Operators.Select<ServiceRequest, ServiceRequest>(q_, r_);
 
 			return s_;
 		};
-		var e_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(c_, d_);
+		var e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var h_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(g_);
 		IEnumerable<ServiceRequest> i_(ServiceRequest PregnancyTestOrder)
@@ -853,14 +853,14 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 				return bw_;
 			};
-			var ax_ = context.Operators.WhereOrNull<MedicationRequest>(av_, aw_);
+			var ax_ = context.Operators.Where<MedicationRequest>(av_, aw_);
 			ServiceRequest ay_(MedicationRequest AccutaneOrder) => 
 				PregnancyTestOrder;
-			var az_ = context.Operators.SelectOrNull<MedicationRequest, ServiceRequest>(ax_, ay_);
+			var az_ = context.Operators.Select<MedicationRequest, ServiceRequest>(ax_, ay_);
 
 			return az_;
 		};
-		var j_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(h_, i_);
+		var j_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(h_, i_);
 		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
 		var l_ = context.Operators.Exists<ServiceRequest>(k_);
 
@@ -967,7 +967,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return m_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		var f_ = context.Operators.Exists<Observation>(e_);
 
 		return f_;

@@ -193,7 +193,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 			return o_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
@@ -223,7 +223,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 			return o_;
 		};
-		var j_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Procedure,Procedure,Condition>, Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(h_, i_);
+		var j_ = context.Operators.Select<ValueTuple<Encounter,Procedure,Procedure,Condition>, Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(h_, i_);
 		bool? k_(Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt)
 		{
 			var p_ = QICoreCommon_2_0_000.isActive(tuple_hehdgghaahjzgibaaamlgasgt.Cancer);
@@ -267,10 +267,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 			return bk_;
 		};
-		var l_ = context.Operators.WhereOrNull<Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(j_, k_);
+		var l_ = context.Operators.Where<Tuple_HEhDGGHAahjZgibAaAMLGaSGT>(j_, k_);
 		Encounter m_(Tuple_HEhDGGHAahjZgibAaAMLGaSGT tuple_hehdgghaahjzgibaaamlgasgt) => 
 			tuple_hehdgghaahjzgibaaamlgasgt.FaceToFaceOrTelehealthEncounter;
-		var n_ = context.Operators.SelectOrNull<Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Encounter>(l_, m_);
+		var n_ = context.Operators.Select<Tuple_HEhDGGHAahjZgibAaAMLGaSGT, Encounter>(l_, m_);
 
 		return n_;
 	}
@@ -323,14 +323,14 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 				return t_;
 			};
-			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
+			var i_ = context.Operators.Where<Condition>(g_, h_);
 			Encounter j_(Condition Cancer) => 
 				RadiationTreatmentManagement;
-			var k_ = context.Operators.SelectOrNull<Condition, Encounter>(i_, j_);
+			var k_ = context.Operators.Select<Condition, Encounter>(i_, j_);
 
 			return k_;
 		};
-		var e_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.SelectMany<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -383,14 +383,14 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 				return s_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			Encounter h_(Observation PainAssessed) => 
 				FaceToFaceOrTelehealthEncounterWithChemo;
-			var i_ = context.Operators.SelectOrNull<Observation, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -418,7 +418,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 							return w_;
 						};
-						var s_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(RadiationManagementEncounter?.Type, r_);
+						var s_ = context.Operators.Select<CodeableConcept, CqlConcept>(RadiationManagementEncounter?.Type, r_);
 						bool? t_(CqlConcept RadiationManagement)
 						{
 							var x_ = this.Radiation_treatment_management__5_treatments();
@@ -427,7 +427,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 							return z_;
 						};
-						var u_ = context.Operators.WhereOrNull<CqlConcept>(s_, t_);
+						var u_ = context.Operators.Where<CqlConcept>(s_, t_);
 						var v_ = context.Operators.Exists<CqlConcept>(u_);
 
 						return (v_ ?? false);
@@ -469,14 +469,14 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 				return p_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			Encounter h_(Observation PainAssessed) => 
 				RadiationManagementEncounter;
-			var i_ = context.Operators.SelectOrNull<Observation, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}

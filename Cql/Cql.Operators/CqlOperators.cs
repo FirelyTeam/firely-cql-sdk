@@ -153,25 +153,25 @@ namespace Hl7.Cql.Runtime
             return source;
         }
 
-        public IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select) =>
+        public IEnumerable<R>? Select<T, R>(IEnumerable<T?>? source, Func<T?, R> select) =>
             source?.Select(select).ToList();
 
-        public IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source,
+        public IEnumerable<TResult>? SelectMany<TSource, TResult>(IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> collectionSelector) =>
             source?.Where(t => t != null)
                 .SelectMany(t => collectionSelector(t) ?? [])?
                 .ToList();
 
-        public IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source,
+        public IEnumerable<TResult>? SelectManyResults<TSource, TCollection, TResult>(IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector) =>
             source == null ? null : source!.SelectMany(collectionSelector!, resultSelector!).ToList();
 
 
-        public IEnumerable<T>? WhereOrNull<T>(IEnumerable<T>? source, Func<T, bool?> lambda) =>
+        public IEnumerable<T>? Where<T>(IEnumerable<T>? source, Func<T, bool?> lambda) =>
             source == null ? null : source.Where(x => lambda(x) ?? false).ToList();
 
-        public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
+        public TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
         public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);

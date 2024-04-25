@@ -40,7 +40,7 @@ namespace Hl7.Cql.Operators
         bool? After(object? left, object? right, string? precision);
         int? Age(string precision);
         int? AgeAt(CqlDate? asOf, string precision);
-        TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
+        TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
         bool? AllTrue(IEnumerable<bool?> argument);
         bool? AllTrue(IEnumerable<Lazy<bool?>> argument);
         bool? And(bool? left, bool? right);
@@ -166,21 +166,21 @@ namespace Hl7.Cql.Operators
         bool? Equivalent(object? x, object? y);
         bool? Exists<T>(IEnumerable<T> list);
         decimal? Exp(decimal? argument);
-        IEnumerable<CqlInterval<CqlDate?>>? ExpandList(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per);
-        IEnumerable<CqlInterval<CqlDateTime?>>? ExpandList(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per);
-        IEnumerable<CqlInterval<CqlTime?>>? ExpandList(IEnumerable<CqlInterval<CqlTime?>?>? argument, CqlQuantity? per);
-        IEnumerable<CqlInterval<decimal?>>? ExpandList(IEnumerable<CqlInterval<decimal?>?>? argument, CqlQuantity? per);
-        IEnumerable<CqlInterval<int?>>? ExpandList(IEnumerable<CqlInterval<int?>?>? argument, CqlQuantity? per);
-        IEnumerable<CqlInterval<long?>>? ExpandList(IEnumerable<CqlInterval<long?>?>? argument, CqlQuantity? per);
-        IEnumerable<CqlDate>? ExpandInterval(CqlInterval<CqlDate>? argument, CqlQuantity? per);
-        IEnumerable<CqlDateTime>? ExpandInterval(CqlInterval<CqlDateTime>? argument, CqlQuantity? per);
-        IEnumerable<CqlTime>? ExpandInterval(CqlInterval<CqlTime>? argument, CqlQuantity? per);
-        IEnumerable<decimal?>? ExpandInterval(CqlInterval<decimal?>? argument, CqlQuantity? per);
-        IEnumerable<int?>? ExpandInterval(CqlInterval<int?>? argument, CqlQuantity? per);
-        IEnumerable<long?>? ExpandInterval(CqlInterval<long?>? argument, CqlQuantity? per);
+        IEnumerable<CqlInterval<CqlDate?>>? Expand(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per);
+        IEnumerable<CqlInterval<CqlDateTime?>>? Expand(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per);
+        IEnumerable<CqlInterval<CqlTime?>>? Expand(IEnumerable<CqlInterval<CqlTime?>?>? argument, CqlQuantity? per);
+        IEnumerable<CqlInterval<decimal?>>? Expand(IEnumerable<CqlInterval<decimal?>?>? argument, CqlQuantity? per);
+        IEnumerable<CqlInterval<int?>>? Expand(IEnumerable<CqlInterval<int?>?>? argument, CqlQuantity? per);
+        IEnumerable<CqlInterval<long?>>? Expand(IEnumerable<CqlInterval<long?>?>? argument, CqlQuantity? per);
+        IEnumerable<CqlDate>? Expand(CqlInterval<CqlDate>? argument, CqlQuantity? per);
+        IEnumerable<CqlDateTime>? Expand(CqlInterval<CqlDateTime>? argument, CqlQuantity? per);
+        IEnumerable<CqlTime>? Expand(CqlInterval<CqlTime>? argument, CqlQuantity? per);
+        IEnumerable<decimal?>? Expand(CqlInterval<decimal?>? argument, CqlQuantity? per);
+        IEnumerable<int?>? Expand(CqlInterval<int?>? argument, CqlQuantity? per);
+        IEnumerable<long?>? Expand(CqlInterval<long?>? argument, CqlQuantity? per);
         T? First<T>(IEnumerable<T> enumerable);
         IEnumerable<object>? FlattenLateBoundList(IEnumerable<object> argument);
-        IEnumerable<T>? FlattenList<T>(IEnumerable<IEnumerable<T>> argument);
+        IEnumerable<T>? Flatten<T>(IEnumerable<IEnumerable<T>> argument);
         int? Floor(decimal? argument);
         int? Floor(int? argument);
         long? Floor(long? argument);
@@ -316,7 +316,7 @@ namespace Hl7.Cql.Operators
         bool? ListProperlyIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         IEnumerable<T>? ListSkip<T>(IEnumerable<T> argument, int? number);
         IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, ListSortDirection order);
-        IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order);
+        IEnumerable<T>? SortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order);
         IEnumerable<T>? Tail<T>(IEnumerable<T> argument);
         IEnumerable<T>? ListTake<T>(IEnumerable<T> argument, int? number);
         IEnumerable<T>? ListUnion<T>(IEnumerable<T>? left, IEnumerable<T>? right);
@@ -442,8 +442,8 @@ namespace Hl7.Cql.Operators
         bool? SamePrecision(CqlDate? left, CqlDate? right);
         bool? SamePrecision(CqlDateTime? left, CqlDateTime? right);
         bool? SamePrecision(CqlTime? left, CqlTime? right);
-        IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
-        IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
+        IEnumerable<TResult>? SelectMany<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
+        IEnumerable<TResult>? SelectManyResults<TSource, TCollection, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
 
         IEnumerable<(T1, T2)> CrossJoin<T1, T2>(
             IEnumerable<T1>? source1,
@@ -494,7 +494,7 @@ namespace Hl7.Cql.Operators
             IEnumerable<T7>? source7,
             IEnumerable<T8>? source8);
 
-        IEnumerable<TR>? SelectOrNull<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select);
+        IEnumerable<TR>? Select<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select);
         T? SingletonFrom<T>(IEnumerable<T>? source);
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);
         IEnumerable<string>? Split(string stringToSplit, string separator);
@@ -558,7 +558,7 @@ namespace Hl7.Cql.Operators
         IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right);
         CqlQuantity? Variance(IEnumerable<CqlQuantity?>? argument);
         decimal? Variance(IEnumerable<decimal?>? argument);
-        IEnumerable<T>? WhereOrNull<T>(IEnumerable<T>? source, Func<T, bool?> lambda);
+        IEnumerable<T>? Where<T>(IEnumerable<T>? source, Func<T, bool?> lambda);
         CqlQuantity? Width(CqlInterval<CqlQuantity?>? @this);
         decimal? Width(CqlInterval<decimal?>? @this);
         int? Width(CqlInterval<int?>? @this);

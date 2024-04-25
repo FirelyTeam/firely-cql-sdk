@@ -345,7 +345,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 				return ap_;
 			};
-			var ac_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(ValidEncounter?.ReasonCode, ab_);
+			var ac_ = context.Operators.Select<CodeableConcept, CqlConcept>(ValidEncounter?.ReasonCode, ab_);
 			var ad_ = this.Major_Depressive_Disorder_Active();
 			var ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
 			var af_ = CQMCommon_2_0_000.EncounterDiagnosis(ValidEncounter);
@@ -357,7 +357,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 				return as_;
 			};
-			var ah_ = context.Operators.WhereOrNull<Condition>(af_, ag_);
+			var ah_ = context.Operators.Where<Condition>(af_, ag_);
 			var ai_ = context.Operators.Exists<Condition>(ah_);
 			var aj_ = context.Operators.Or(ae_, ai_);
 			var ak_ = context.Operators.And(aa_, aj_);
@@ -368,7 +368,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 			return ao_;
 		};
-		var y_ = context.Operators.WhereOrNull<Encounter>(w_, x_);
+		var y_ = context.Operators.Where<Encounter>(w_, x_);
 
 		return y_;
 	}
@@ -398,7 +398,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 			return r_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -437,14 +437,14 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 				return p_;
 			};
-			var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
+			var h_ = context.Operators.Where<Procedure>(f_, g_);
 			Encounter i_(Procedure SuicideRiskAssessment) => 
 				MDDEncounter;
-			var j_ = context.Operators.SelectOrNull<Procedure, Encounter>(h_, i_);
+			var j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}

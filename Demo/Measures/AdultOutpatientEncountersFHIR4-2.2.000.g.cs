@@ -143,7 +143,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 
 			return v_;
 		};
-		var p_ = context.Operators.WhereOrNull<Encounter>(n_, o_);
+		var p_ = context.Operators.Where<Encounter>(n_, o_);
 
 		return p_;
 	}

@@ -266,7 +266,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return e_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -288,7 +288,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -314,13 +314,13 @@ public class CesareanBirthFHIR_0_2_000
 
 				return n_;
 			};
-			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
+			var i_ = context.Operators.Where<Condition>(g_, h_);
 			var j_ = context.Operators.Exists<Condition>(i_);
 			var k_ = context.Operators.And(f_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -358,12 +358,12 @@ public class CesareanBirthFHIR_0_2_000
 
 				return j_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
+			var f_ = context.Operators.Where<Condition>(d_, e_);
 			var g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -450,7 +450,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -503,7 +503,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
@@ -588,7 +588,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -641,7 +641,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
@@ -726,7 +726,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -779,7 +779,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
@@ -864,7 +864,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -917,7 +917,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
@@ -945,7 +945,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -1029,7 +1029,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return ag_;
 					};
-					var s_ = context.Operators.WhereOrNull<Observation>(q_, r_);
+					var s_ = context.Operators.Where<Observation>(q_, r_);
 					object t_(Observation @this)
 					{
 						object at_()
@@ -1082,7 +1082,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return au_;
 					};
-					var u_ = context.Operators.ListSortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
+					var u_ = context.Operators.SortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
 					var v_ = context.Operators.Last<Observation>(u_);
 					var w_ = FHIRHelpers_4_3_000.ToValue(v_?.Effective);
 					var x_ = w_ is CqlDateTime;
@@ -1157,7 +1157,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return by_;
 					};
-					var bk_ = context.Operators.WhereOrNull<Observation>(bi_, bj_);
+					var bk_ = context.Operators.Where<Observation>(bi_, bj_);
 					object bl_(Observation @this)
 					{
 						object cl_()
@@ -1210,7 +1210,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return cm_;
 					};
-					var bm_ = context.Operators.ListSortBy<Observation>(bk_, bl_, System.ComponentModel.ListSortDirection.Ascending);
+					var bm_ = context.Operators.SortBy<Observation>(bk_, bl_, System.ComponentModel.ListSortDirection.Ascending);
 					var bn_ = context.Operators.Last<Observation>(bm_);
 					var bo_ = FHIRHelpers_4_3_000.ToValue(bn_?.Effective);
 					var bp_ = bo_ is CqlInterval<CqlDateTime>;
@@ -1285,7 +1285,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return dq_;
 					};
-					var dc_ = context.Operators.WhereOrNull<Observation>(da_, db_);
+					var dc_ = context.Operators.Where<Observation>(da_, db_);
 					object dd_(Observation @this)
 					{
 						object ed_()
@@ -1338,7 +1338,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return ee_;
 					};
-					var de_ = context.Operators.ListSortBy<Observation>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
+					var de_ = context.Operators.SortBy<Observation>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
 					var df_ = context.Operators.Last<Observation>(de_);
 					var dg_ = FHIRHelpers_4_3_000.ToValue(df_?.Effective);
 					var dh_ = dg_ is CqlDateTime;
@@ -1413,7 +1413,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return fh_;
 					};
-					var eu_ = context.Operators.WhereOrNull<Observation>(es_, et_);
+					var eu_ = context.Operators.Where<Observation>(es_, et_);
 					object ev_(Observation @this)
 					{
 						object fu_()
@@ -1466,7 +1466,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return fv_;
 					};
-					var ew_ = context.Operators.ListSortBy<Observation>(eu_, ev_, System.ComponentModel.ListSortDirection.Ascending);
+					var ew_ = context.Operators.SortBy<Observation>(eu_, ev_, System.ComponentModel.ListSortDirection.Ascending);
 					var ex_ = context.Operators.Last<Observation>(ew_);
 					var ey_ = FHIRHelpers_4_3_000.ToValue(ex_?.Effective);
 
@@ -1540,7 +1540,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return gy_;
 					};
-					var gl_ = context.Operators.WhereOrNull<Observation>(gj_, gk_);
+					var gl_ = context.Operators.Where<Observation>(gj_, gk_);
 					object gm_(Observation @this)
 					{
 						object hl_()
@@ -1593,7 +1593,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return hm_;
 					};
-					var gn_ = context.Operators.ListSortBy<Observation>(gl_, gm_, System.ComponentModel.ListSortDirection.Ascending);
+					var gn_ = context.Operators.SortBy<Observation>(gl_, gm_, System.ComponentModel.ListSortDirection.Ascending);
 					var go_ = context.Operators.Last<Observation>(gn_);
 					var gp_ = FHIRHelpers_4_3_000.ToValue(go_?.Effective);
 
@@ -1667,7 +1667,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return ip_;
 					};
-					var ic_ = context.Operators.WhereOrNull<Observation>(ia_, ib_);
+					var ic_ = context.Operators.Where<Observation>(ia_, ib_);
 					object id_(Observation @this)
 					{
 						object jc_()
@@ -1720,7 +1720,7 @@ public class CesareanBirthFHIR_0_2_000
 
 						return jd_;
 					};
-					var ie_ = context.Operators.ListSortBy<Observation>(ic_, id_, System.ComponentModel.ListSortDirection.Ascending);
+					var ie_ = context.Operators.SortBy<Observation>(ic_, id_, System.ComponentModel.ListSortDirection.Ascending);
 					var if_ = context.Operators.Last<Observation>(ie_);
 					var ig_ = FHIRHelpers_4_3_000.ToValue(if_?.Effective);
 
@@ -1743,13 +1743,13 @@ public class CesareanBirthFHIR_0_2_000
 
 				return js_;
 			};
-			var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
+			var j_ = context.Operators.Where<Condition>(h_, i_);
 			var k_ = context.Operators.Exists<Condition>(j_);
 			var l_ = context.Operators.Or(g_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1775,12 +1775,12 @@ public class CesareanBirthFHIR_0_2_000
 
 				return n_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
+			var f_ = context.Operators.Where<Condition>(d_, e_);
 			var g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1853,14 +1853,14 @@ public class CesareanBirthFHIR_0_2_000
 
 				return o_;
 			};
-			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
+			var g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure CSection) => 
 				ThirtysevenWeeksPlusEncounter;
-			var i_ = context.Operators.SelectOrNull<Procedure, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}

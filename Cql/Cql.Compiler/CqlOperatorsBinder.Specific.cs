@@ -30,13 +30,13 @@ partial class CqlOperatorsBinder
             if (!elementType.IsCqlInterval(out _))
                 throw new ArgumentException($"Expand expects a list element type to be an interval.",
                     nameof(argument));
-            return BindToMethod(nameof(ICqlOperators.ExpandList), argument, perQuantity);
+            return BindToMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
         }
 
         if (!argument.Type.IsCqlInterval(out _))
             throw new ArgumentException($"Expand allows only a List<Interval<T>> or an Interval<T> as a parameter.", nameof(argument));
 
-        return BindToMethod(nameof(ICqlOperators.ExpandInterval), argument, perQuantity);
+        return BindToMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
     }
 
     private Expression SortBy(
@@ -47,7 +47,7 @@ partial class CqlOperatorsBinder
         if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
         {
             var elementType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
-            var call = BindToGenericMethod(nameof(ICqlOperators.ListSortBy), [elementType], source, lambda, orderConstant);
+            var call = BindToGenericMethod(nameof(ICqlOperators.SortBy), [elementType], source, lambda, orderConstant);
             return call;
 
         }
@@ -165,7 +165,7 @@ partial class CqlOperatorsBinder
         if (_typeResolver.IsListType(elementType))
         {
             var nestedElementType = _typeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
-            var call = BindToGenericMethod(nameof(ICqlOperators.FlattenList), [nestedElementType], operand);
+            var call = BindToGenericMethod(nameof(ICqlOperators.Flatten), [nestedElementType], operand);
             return call;
         }
 
@@ -301,7 +301,7 @@ partial class CqlOperatorsBinder
         {
             var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var resultType = lambdaExpr.ReturnType;
-            var call = BindToGenericMethod(nameof(ICqlOperators.SelectOrNull), [sourceType, resultType], source, lambda);
+            var call = BindToGenericMethod(nameof(ICqlOperators.Select), [sourceType, resultType], source, lambda);
             return call;
         }
 
@@ -315,7 +315,7 @@ partial class CqlOperatorsBinder
         if (lambda is LambdaExpression lamdaExpr)
         {
             var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
-            var call = BindToGenericMethod(nameof(ICqlOperators.WhereOrNull), [sourceType], source, lambda);
+            var call = BindToGenericMethod(nameof(ICqlOperators.Where), [sourceType], source, lambda);
             return call;
         }
 
@@ -332,7 +332,7 @@ partial class CqlOperatorsBinder
             if (_typeResolver.IsListType(collectionSelector.ReturnType))
             {
                 var secondGenericArgument = _typeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
-                var call = BindToGenericMethod(nameof(ICqlOperators.SelectManyOrNull), [firstGenericArgument, secondGenericArgument], source, collectionSelector);
+                var call = BindToGenericMethod(nameof(ICqlOperators.SelectMany), [firstGenericArgument, secondGenericArgument], source, collectionSelector);
                 return call;
             }
 
@@ -364,7 +364,7 @@ partial class CqlOperatorsBinder
             throw new ArgumentException("Result expression is not a lambda", nameof(resultSelectorLambda));
 
         var call = BindToGenericMethod(
-            nameof(ICqlOperators.SelectManyResultsOrNull),
+            nameof(ICqlOperators.SelectManyResults),
             [firstGenericArgument, secondGenericArgument, resultSelector.ReturnType], source,
             collectionSelector, resultSelector);
         return call;

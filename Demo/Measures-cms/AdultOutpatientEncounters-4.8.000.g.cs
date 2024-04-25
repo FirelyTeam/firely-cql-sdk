@@ -170,7 +170,7 @@ public class AdultOutpatientEncounters_4_8_000
 
 			return aa_;
 		};
-		var w_ = context.Operators.WhereOrNull<Encounter>(u_, v_);
+		var w_ = context.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}

@@ -418,7 +418,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 				return be_;
 			};
-			var ba_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, az_);
+			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, az_);
 			bool? bb_(CqlConcept T)
 			{
 				var bf_ = this.Unlisted_preventive_medicine_service();
@@ -427,12 +427,12 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 				return bh_;
 			};
-			var bc_ = context.Operators.WhereOrNull<CqlConcept>(ba_, bb_);
+			var bc_ = context.Operators.Where<CqlConcept>(ba_, bb_);
 			var bd_ = context.Operators.Exists<CqlConcept>(bc_);
 
 			return bd_;
 		};
-		var at_ = context.Operators.WhereOrNull<Encounter>(ar_, as_);
+		var at_ = context.Operators.Where<Encounter>(ar_, as_);
 		var au_ = context.Operators.ListUnion<Encounter>(aq_, at_);
 		var av_ = context.Operators.ListUnion<Encounter>(ao_, au_);
 		var aw_ = Status_1_6_000.Finished_Encounter(av_);
@@ -451,7 +451,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return bs_;
 		};
-		var ay_ = context.Operators.WhereOrNull<Encounter>(aw_, ax_);
+		var ay_ = context.Operators.Where<Encounter>(aw_, ax_);
 
 		return ay_;
 	}
@@ -476,7 +476,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Condition>, Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(d_, e_);
 		bool? g_(Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw)
 		{
 			var l_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_clqrpffcjgifzuvdvediikexw.URI);
@@ -490,10 +490,10 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return u_;
 		};
-		var h_ = context.Operators.WhereOrNull<Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(f_, g_);
+		var h_ = context.Operators.Where<Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW>(f_, g_);
 		Encounter i_(Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW tuple_clqrpffcjgifzuvdvediikexw) => 
 			tuple_clqrpffcjgifzuvdvediikexw.QualifyingEncounters;
-		var j_ = context.Operators.SelectOrNull<Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW, Encounter>(h_, i_);
+		var j_ = context.Operators.Select<Tuple_CLQRPFFCjgiFZUVDVEDIIKeXW, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -517,10 +517,10 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -538,7 +538,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return d_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -612,18 +612,18 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 				return af_;
 			};
-			var n_ = context.Operators.WhereOrNull<MedicationRequest>(l_, m_);
+			var n_ = context.Operators.Where<MedicationRequest>(l_, m_);
 			Encounter o_(MedicationRequest OrderedAntibiotic) => 
 				EncounterWithURI;
-			var p_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(n_, o_);
+			var p_ = context.Operators.Select<MedicationRequest, Encounter>(n_, o_);
 
 			return p_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, c_);
+		var d_ = context.Operators.SelectMany<Encounter, Encounter>(a_, c_);
 		var e_ = context.Operators.ListExcept<Encounter>(a_, d_);
 		Encounter f_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var g_ = context.Operators.SelectOrNull<Encounter, Encounter>(e_, f_);
+		var g_ = context.Operators.Select<Encounter, Encounter>(e_, f_);
 
 		return g_;
 	}
@@ -653,10 +653,10 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return t_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -681,10 +681,10 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return m_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -708,10 +708,10 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
-		var e_ = context.Operators.SelectOrNull<Encounter, Encounter>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}

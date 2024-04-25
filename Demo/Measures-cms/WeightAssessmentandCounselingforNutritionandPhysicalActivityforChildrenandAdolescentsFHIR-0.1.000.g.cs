@@ -508,7 +508,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return aa_;
 		};
-		var w_ = context.Operators.WhereOrNull<Encounter>(u_, v_);
+		var w_ = context.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}
@@ -562,7 +562,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return h_;
 		};
-		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
+		var e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -602,7 +602,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -628,7 +628,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -654,7 +654,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -695,7 +695,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
@@ -719,7 +719,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;

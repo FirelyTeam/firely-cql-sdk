@@ -361,7 +361,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -404,7 +404,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return ac_;
 		};
-		var v_ = context.Operators.WhereOrNull<Encounter>(t_, u_);
+		var v_ = context.Operators.Where<Encounter>(t_, u_);
 		var w_ = context.Operators.Exists<Encounter>(v_);
 
 		return w_;
@@ -467,7 +467,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return o_;
 		};
-		var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
+		var g_ = context.Operators.Where<Condition>(e_, f_);
 
 		return g_;
 	}
@@ -518,7 +518,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return w_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		var e_ = context.Operators.Exists<Observation>(d_);
 		var f_ = this.Urine_Albumin_Creatinine_Ratio();
 		var g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
@@ -544,7 +544,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return ai_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
 		var j_ = context.Operators.Exists<Observation>(i_);
 		var k_ = context.Operators.And(e_, j_);
 

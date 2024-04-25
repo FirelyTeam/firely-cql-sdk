@@ -303,7 +303,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return m_;
 		};
-		var g_ = context.Operators.WhereOrNull<Encounter>(e_, f_);
+		var g_ = context.Operators.Where<Encounter>(e_, f_);
 
 		return g_;
 	}
@@ -379,13 +379,13 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 				return n_;
 			};
-			var k_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
 			var l_ = this.Right();
 			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
 			return m_;
 		};
-		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
+		var f_ = context.Operators.Where<Condition>(d_, e_);
 		var g_ = context.Operators.ListUnion<Condition>(b_, f_);
 		bool? h_(Condition RightMastectomy)
 		{
@@ -397,7 +397,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return s_;
 		};
-		var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
+		var i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
@@ -423,7 +423,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -446,13 +446,13 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 				return n_;
 			};
-			var k_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
 			var l_ = this.Left();
 			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
 			return m_;
 		};
-		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
+		var f_ = context.Operators.Where<Condition>(d_, e_);
 		var g_ = context.Operators.ListUnion<Condition>(b_, f_);
 		bool? h_(Condition LeftMastectomy)
 		{
@@ -464,7 +464,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return s_;
 		};
-		var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
+		var i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
@@ -490,7 +490,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -513,7 +513,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
@@ -539,7 +539,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -622,7 +622,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return w_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		var e_ = context.Operators.Exists<Observation>(d_);
 
 		return e_;
@@ -663,7 +663,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return w_;
 		};
-		var d_ = context.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
+		var d_ = context.Operators.Where<DiagnosticReport>(b_, c_);
 		var e_ = context.Operators.Exists<DiagnosticReport>(d_);
 
 		return e_;
@@ -736,7 +736,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return x_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		var e_ = context.Operators.Exists<Observation>(d_);
 
 		return e_;
@@ -778,7 +778,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return x_;
 		};
-		var d_ = context.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
+		var d_ = context.Operators.Where<DiagnosticReport>(b_, c_);
 		var e_ = context.Operators.Exists<DiagnosticReport>(d_);
 
 		return e_;

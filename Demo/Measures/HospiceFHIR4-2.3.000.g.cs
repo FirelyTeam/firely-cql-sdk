@@ -146,7 +146,7 @@ public class HospiceFHIR4_2_3_000
 
 			return ah_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		var e_ = context.Operators.Exists<Encounter>(d_);
 		var f_ = this.Hospice_care_ambulatory();
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
@@ -169,7 +169,7 @@ public class HospiceFHIR4_2_3_000
 
 			return ar_;
 		};
-		var i_ = context.Operators.WhereOrNull<ServiceRequest>(g_, h_);
+		var i_ = context.Operators.Where<ServiceRequest>(g_, h_);
 		var j_ = context.Operators.Exists<ServiceRequest>(i_);
 		var k_ = context.Operators.Or(e_, j_);
 		var m_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
@@ -184,7 +184,7 @@ public class HospiceFHIR4_2_3_000
 
 			return ax_;
 		};
-		var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
+		var o_ = context.Operators.Where<Procedure>(m_, n_);
 		var p_ = context.Operators.Exists<Procedure>(o_);
 		var q_ = context.Operators.Or(k_, p_);
 

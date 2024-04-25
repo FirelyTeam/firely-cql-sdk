@@ -237,7 +237,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 			return k_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -260,7 +260,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 			return i_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -285,7 +285,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 			return m_;
 		};
-		var g_ = context.Operators.WhereOrNull<MedicationAdministration>(e_, f_);
+		var g_ = context.Operators.Where<MedicationAdministration>(e_, f_);
 
 		return g_;
 	}
@@ -309,14 +309,14 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 				return l_;
 			};
-			var f_ = context.Operators.WhereOrNull<MedicationAdministration>(d_, e_);
+			var f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
 			Encounter g_(MedicationAdministration HypoglycemicMedication) => 
 				QualifyingEncounter;
-			var h_ = context.Operators.SelectOrNull<MedicationAdministration, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -384,14 +384,14 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 					return av_;
 				};
-				var t_ = context.Operators.WhereOrNull<MedicationAdministration>(r_, s_);
+				var t_ = context.Operators.Where<MedicationAdministration>(r_, s_);
 				Observation u_(MedicationAdministration HypoglycemicMeds) => 
 					BloodGlucoseLab;
-				var v_ = context.Operators.SelectOrNull<MedicationAdministration, Observation>(t_, u_);
+				var v_ = context.Operators.Select<MedicationAdministration, Observation>(t_, u_);
 
 				return v_;
 			};
-			var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+			var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 			var i_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
 			IEnumerable<Observation> j_(Observation BloodGlucoseLab)
 			{
@@ -423,14 +423,14 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 					return ca_;
 				};
-				var ay_ = context.Operators.WhereOrNull<MedicationAdministration>(aw_, ax_);
+				var ay_ = context.Operators.Where<MedicationAdministration>(aw_, ax_);
 				Observation az_(MedicationAdministration HypoglycemicMeds) => 
 					BloodGlucoseLab;
-				var ba_ = context.Operators.SelectOrNull<MedicationAdministration, Observation>(ay_, az_);
+				var ba_ = context.Operators.Select<MedicationAdministration, Observation>(ay_, az_);
 
 				return ba_;
 			};
-			var k_ = context.Operators.SelectManyOrNull<Observation, Observation>(i_, j_);
+			var k_ = context.Operators.SelectMany<Observation, Observation>(i_, j_);
 			IEnumerable<Observation> l_(Observation BloodGlucoseLab)
 			{
 				var cb_ = this.Glucose_lab_test();
@@ -466,14 +466,14 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 					return dk_;
 				};
-				var ce_ = context.Operators.WhereOrNull<Observation>(cc_, cd_);
+				var ce_ = context.Operators.Where<Observation>(cc_, cd_);
 				Observation cf_(Observation FollowupBloodGlucoseLab) => 
 					BloodGlucoseLab;
-				var cg_ = context.Operators.SelectOrNull<Observation, Observation>(ce_, cf_);
+				var cg_ = context.Operators.Select<Observation, Observation>(ce_, cf_);
 
 				return cg_;
 			};
-			var m_ = context.Operators.SelectManyOrNull<Observation, Observation>(k_, l_);
+			var m_ = context.Operators.SelectMany<Observation, Observation>(k_, l_);
 			var n_ = context.Operators.ListExcept<Observation>(g_, m_);
 			bool? o_(Observation BloodGlucoseLab)
 			{
@@ -488,12 +488,12 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 				return ds_;
 			};
-			var p_ = context.Operators.WhereOrNull<Observation>(n_, o_);
+			var p_ = context.Operators.Where<Observation>(n_, o_);
 			var q_ = context.Operators.Exists<Observation>(p_);
 
 			return q_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}

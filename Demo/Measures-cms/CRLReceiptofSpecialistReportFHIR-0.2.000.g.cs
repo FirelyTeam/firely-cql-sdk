@@ -199,7 +199,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return z_;
 		};
-		var s_ = context.Operators.WhereOrNull<Encounter>(q_, r_);
+		var s_ = context.Operators.Where<Encounter>(q_, r_);
 		var t_ = context.Operators.Exists<Encounter>(s_);
 
 		return t_;
@@ -239,7 +239,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return aa_;
 		};
-		var d_ = context.Operators.WhereOrNull<ServiceRequest>(b_, c_);
+		var d_ = context.Operators.Where<ServiceRequest>(b_, c_);
 		Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK e_(ServiceRequest ReferralOrder)
 		{
 			var ab_ = context.Operators.Convert<CqlDateTime>(ReferralOrder?.AuthoredOnElement);
@@ -251,10 +251,10 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return ac_;
 		};
-		var f_ = context.Operators.SelectOrNull<ServiceRequest, Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(d_, e_);
+		var f_ = context.Operators.Select<ServiceRequest, Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(d_, e_);
 		object g_(Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK @this) => 
 			@this?.AuthorDate;
-		var h_ = context.Operators.ListSortBy<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.SortBy<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 		var i_ = context.Operators.First<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(h_);
 
 		return i_;
@@ -342,7 +342,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return c_;
 		};
-		var b_ = context.Operators.SelectOrNull<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
+		var b_ = context.Operators.Select<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
 
 		return b_;
 	}
@@ -376,14 +376,14 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 				return y_;
 			};
-			var i_ = context.Operators.WhereOrNull<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(g_, h_);
+			var i_ = context.Operators.Where<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(g_, h_);
 			Task j_(Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK FirstReferral) => 
 				ConsultantReportObtained;
-			var k_ = context.Operators.SelectOrNull<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK, Task>(i_, j_);
+			var k_ = context.Operators.Select<Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK, Task>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Task, Task>(b_, c_);
+		var d_ = context.Operators.SelectMany<Task, Task>(b_, c_);
 		var e_ = context.Operators.Exists<Task>(d_);
 
 		return e_;

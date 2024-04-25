@@ -328,14 +328,14 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return af_;
 			};
-			var k_ = context.Operators.WhereOrNull<Coverage>(i_, j_);
+			var k_ = context.Operators.Where<Coverage>(i_, j_);
 			Encounter l_(Coverage MedicarePayer) => 
 				InpatientEncounter;
-			var m_ = context.Operators.SelectOrNull<Coverage, Encounter>(k_, l_);
+			var m_ = context.Operators.Select<Coverage, Encounter>(k_, l_);
 
 			return m_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(b_, c_);
+		var d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -390,7 +390,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return an_;
 			};
-			var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+			var f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
 				var ao_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -398,7 +398,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ap_;
 			};
-			var h_ = context.Operators.ListSortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+			var h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			var i_ = context.Operators.First<Observation>(h_);
 			var j_ = context.Operators.Convert<Quantity>(i_?.Value);
 			var k_ = FHIRHelpers_4_3_000.ToQuantity(j_);
@@ -431,7 +431,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var n_ = context.Operators.WhereOrNull<Observation>(d_, m_);
+			var n_ = context.Operators.Where<Observation>(d_, m_);
 			object o_(Observation @this)
 			{
 				var bk_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -439,7 +439,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bl_;
 			};
-			var p_ = context.Operators.ListSortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
+			var p_ = context.Operators.SortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
@@ -452,7 +452,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BJTSgXESaFEOLbMHHiDMHCcdP>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BJTSgXESaFEOLbMHHiDMHCcdP>(a_, b_);
 
 		return c_;
 	}
@@ -496,7 +496,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return an_;
 			};
-			var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+			var f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
 				var ao_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -504,7 +504,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ap_;
 			};
-			var h_ = context.Operators.ListSortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+			var h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			var i_ = context.Operators.First<Observation>(h_);
 			var j_ = context.Operators.Convert<Quantity>(i_?.Value);
 			var k_ = FHIRHelpers_4_3_000.ToQuantity(j_);
@@ -537,7 +537,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var n_ = context.Operators.WhereOrNull<Observation>(d_, m_);
+			var n_ = context.Operators.Where<Observation>(d_, m_);
 			object o_(Observation @this)
 			{
 				var bk_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -545,7 +545,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bl_;
 			};
-			var p_ = context.Operators.ListSortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
+			var p_ = context.Operators.SortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
@@ -558,7 +558,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_DPdLURgGeOHhHAcheMAZcWfbT>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_DPdLURgGeOHhHAcheMAZcWfbT>(a_, b_);
 
 		return c_;
 	}
@@ -648,7 +648,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ah_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				object au_()
@@ -701,7 +701,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return av_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			object l_()
@@ -784,7 +784,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return cn_;
 					};
-					var bo_ = context.Operators.WhereOrNull<Observation>(bm_, bn_);
+					var bo_ = context.Operators.Where<Observation>(bm_, bn_);
 					object bp_(Observation @this)
 					{
 						object da_()
@@ -837,7 +837,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return db_;
 					};
-					var bq_ = context.Operators.ListSortBy<Observation>(bo_, bp_, System.ComponentModel.ListSortDirection.Ascending);
+					var bq_ = context.Operators.SortBy<Observation>(bo_, bp_, System.ComponentModel.ListSortDirection.Ascending);
 					var br_ = context.Operators.First<Observation>(bq_);
 					var bs_ = FHIRHelpers_4_3_000.ToValue(br_?.Effective);
 					var bt_ = bs_ is CqlDateTime;
@@ -922,7 +922,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return eq_;
 					};
-					var dr_ = context.Operators.WhereOrNull<Observation>(dp_, dq_);
+					var dr_ = context.Operators.Where<Observation>(dp_, dq_);
 					object ds_(Observation @this)
 					{
 						object fd_()
@@ -975,7 +975,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return fe_;
 					};
-					var dt_ = context.Operators.ListSortBy<Observation>(dr_, ds_, System.ComponentModel.ListSortDirection.Ascending);
+					var dt_ = context.Operators.SortBy<Observation>(dr_, ds_, System.ComponentModel.ListSortDirection.Ascending);
 					var du_ = context.Operators.First<Observation>(dt_);
 					var dv_ = FHIRHelpers_4_3_000.ToValue(du_?.Effective);
 					var dw_ = dv_ is CqlInterval<CqlDateTime>;
@@ -1060,7 +1060,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return gt_;
 					};
-					var fu_ = context.Operators.WhereOrNull<Observation>(fs_, ft_);
+					var fu_ = context.Operators.Where<Observation>(fs_, ft_);
 					object fv_(Observation @this)
 					{
 						object hg_()
@@ -1113,7 +1113,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return hh_;
 					};
-					var fw_ = context.Operators.ListSortBy<Observation>(fu_, fv_, System.ComponentModel.ListSortDirection.Ascending);
+					var fw_ = context.Operators.SortBy<Observation>(fu_, fv_, System.ComponentModel.ListSortDirection.Ascending);
 					var fx_ = context.Operators.First<Observation>(fw_);
 					var fy_ = FHIRHelpers_4_3_000.ToValue(fx_?.Effective);
 					var fz_ = fy_ is CqlDateTime;
@@ -1198,7 +1198,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return iv_;
 					};
-					var hx_ = context.Operators.WhereOrNull<Observation>(hv_, hw_);
+					var hx_ = context.Operators.Where<Observation>(hv_, hw_);
 					object hy_(Observation @this)
 					{
 						object ji_()
@@ -1251,7 +1251,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return jj_;
 					};
-					var hz_ = context.Operators.ListSortBy<Observation>(hx_, hy_, System.ComponentModel.ListSortDirection.Ascending);
+					var hz_ = context.Operators.SortBy<Observation>(hx_, hy_, System.ComponentModel.ListSortDirection.Ascending);
 					var ia_ = context.Operators.First<Observation>(hz_);
 					var ib_ = FHIRHelpers_4_3_000.ToValue(ia_?.Effective);
 
@@ -1335,7 +1335,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return kx_;
 					};
-					var jz_ = context.Operators.WhereOrNull<Observation>(jx_, jy_);
+					var jz_ = context.Operators.Where<Observation>(jx_, jy_);
 					object ka_(Observation @this)
 					{
 						object lk_()
@@ -1388,7 +1388,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return ll_;
 					};
-					var kb_ = context.Operators.ListSortBy<Observation>(jz_, ka_, System.ComponentModel.ListSortDirection.Ascending);
+					var kb_ = context.Operators.SortBy<Observation>(jz_, ka_, System.ComponentModel.ListSortDirection.Ascending);
 					var kc_ = context.Operators.First<Observation>(kb_);
 					var kd_ = FHIRHelpers_4_3_000.ToValue(kc_?.Effective);
 
@@ -1472,7 +1472,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return mz_;
 					};
-					var mb_ = context.Operators.WhereOrNull<Observation>(lz_, ma_);
+					var mb_ = context.Operators.Where<Observation>(lz_, ma_);
 					object mc_(Observation @this)
 					{
 						object nm_()
@@ -1525,7 +1525,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 						return nn_;
 					};
-					var md_ = context.Operators.ListSortBy<Observation>(mb_, mc_, System.ComponentModel.ListSortDirection.Ascending);
+					var md_ = context.Operators.SortBy<Observation>(mb_, mc_, System.ComponentModel.ListSortDirection.Ascending);
 					var me_ = context.Operators.First<Observation>(md_);
 					var mf_ = FHIRHelpers_4_3_000.ToValue(me_?.Effective);
 
@@ -1546,7 +1546,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return n_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO>(a_, b_);
 
 		return c_;
 	}
@@ -1590,7 +1590,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return an_;
 			};
-			var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+			var f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
 				var ao_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -1598,7 +1598,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ap_;
 			};
-			var h_ = context.Operators.ListSortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+			var h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			var i_ = context.Operators.First<Observation>(h_);
 			var j_ = context.Operators.Convert<Quantity>(i_?.Value);
 			var k_ = FHIRHelpers_4_3_000.ToQuantity(j_);
@@ -1631,7 +1631,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var n_ = context.Operators.WhereOrNull<Observation>(d_, m_);
+			var n_ = context.Operators.Where<Observation>(d_, m_);
 			object o_(Observation @this)
 			{
 				var bk_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -1639,7 +1639,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bl_;
 			};
-			var p_ = context.Operators.ListSortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
+			var p_ = context.Operators.SortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
@@ -1652,7 +1652,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_EAccDaIgTNOHbEQUMLJiXWIJO>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_EAccDaIgTNOHbEQUMLJiXWIJO>(a_, b_);
 
 		return c_;
 	}
@@ -1677,7 +1677,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return f_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -1691,7 +1691,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 		var a_ = this.Inpatient_Encounters();
 		string b_(Encounter EncounterInpatient) => 
 			EncounterInpatient?.IdElement?.Value;
-		var c_ = context.Operators.SelectOrNull<Encounter, string>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, string>(a_, b_);
 
 		return c_;
 	}
@@ -1734,7 +1734,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return am_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				var an_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -1742,7 +1742,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ao_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			var m_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1773,7 +1773,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bh_;
 			};
-			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>(m_, n_);
 			object p_(Observation @this)
 			{
 				var bi_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -1781,7 +1781,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var q_ = context.Operators.ListSortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
+			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
@@ -1793,7 +1793,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -1836,7 +1836,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return am_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				var an_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -1844,7 +1844,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ao_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			var m_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1875,7 +1875,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bh_;
 			};
-			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>(m_, n_);
 			object p_(Observation @this)
 			{
 				var bi_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -1883,7 +1883,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var q_ = context.Operators.ListSortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
+			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
@@ -1895,7 +1895,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -1938,7 +1938,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return am_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				var an_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -1946,7 +1946,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ao_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			var m_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1977,7 +1977,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bh_;
 			};
-			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>(m_, n_);
 			object p_(Observation @this)
 			{
 				var bi_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -1985,7 +1985,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var q_ = context.Operators.ListSortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
+			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
@@ -1997,7 +1997,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2040,7 +2040,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return am_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				var an_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2048,7 +2048,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ao_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			var m_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2079,7 +2079,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bh_;
 			};
-			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>(m_, n_);
 			object p_(Observation @this)
 			{
 				var bi_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2087,7 +2087,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var q_ = context.Operators.ListSortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
+			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
@@ -2099,7 +2099,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2142,7 +2142,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return am_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				var an_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2150,7 +2150,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ao_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			var m_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2181,7 +2181,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bh_;
 			};
-			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>(m_, n_);
 			object p_(Observation @this)
 			{
 				var bi_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2189,7 +2189,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var q_ = context.Operators.ListSortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
+			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
@@ -2201,7 +2201,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2244,7 +2244,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return am_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				var an_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2252,7 +2252,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ao_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			var m_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2283,7 +2283,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bh_;
 			};
-			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>(m_, n_);
 			object p_(Observation @this)
 			{
 				var bi_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2291,7 +2291,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var q_ = context.Operators.ListSortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
+			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
@@ -2303,7 +2303,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2346,7 +2346,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return am_;
 			};
-			var g_ = context.Operators.WhereOrNull<Observation>(e_, f_);
+			var g_ = context.Operators.Where<Observation>(e_, f_);
 			object h_(Observation @this)
 			{
 				var an_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2354,7 +2354,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ao_;
 			};
-			var i_ = context.Operators.ListSortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+			var i_ = context.Operators.SortBy<Observation>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 			var j_ = context.Operators.First<Observation>(i_);
 			var k_ = FHIRHelpers_4_3_000.ToValue(j_?.Value);
 			var m_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2385,7 +2385,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bh_;
 			};
-			var o_ = context.Operators.WhereOrNull<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>(m_, n_);
 			object p_(Observation @this)
 			{
 				var bi_ = context.Operators.Convert<CqlDateTime>(@this?.IssuedElement?.Value);
@@ -2393,7 +2393,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return bj_;
 			};
-			var q_ = context.Operators.ListSortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
+			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
@@ -2405,7 +2405,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}
@@ -2442,7 +2442,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return af_;
 			};
-			var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+			var f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
 				var ag_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -2450,7 +2450,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return ah_;
 			};
-			var h_ = context.Operators.ListSortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+			var h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			var i_ = context.Operators.First<Observation>(h_);
 			var j_ = context.Operators.Convert<Quantity>(i_?.Value);
 			var k_ = FHIRHelpers_4_3_000.ToQuantity(j_);
@@ -2476,7 +2476,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return at_;
 			};
-			var n_ = context.Operators.WhereOrNull<Observation>(d_, m_);
+			var n_ = context.Operators.Where<Observation>(d_, m_);
 			object o_(Observation @this)
 			{
 				var au_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -2484,7 +2484,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 				return av_;
 			};
-			var p_ = context.Operators.ListSortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
+			var p_ = context.Operators.SortBy<Observation>(n_, o_, System.ComponentModel.ListSortDirection.Ascending);
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
@@ -2497,7 +2497,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
 
 		return c_;
 	}

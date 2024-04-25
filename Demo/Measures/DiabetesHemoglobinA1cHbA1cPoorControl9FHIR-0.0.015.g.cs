@@ -306,7 +306,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
 			return j_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -340,7 +340,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
 			return v_;
 		};
-		var q_ = context.Operators.WhereOrNull<Condition>(o_, p_);
+		var q_ = context.Operators.Where<Condition>(o_, p_);
 		var r_ = context.Operators.Exists<Condition>(q_);
 		var s_ = context.Operators.And(m_, r_);
 
@@ -383,7 +383,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
 			return n_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
 			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
@@ -391,7 +391,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
 			return p_;
 		};
-		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		var f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.Last<Observation>(f_);
 
 		return g_;
@@ -449,7 +449,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		var e_ = context.Operators.Exists<Observation>(d_);
 		var f_ = context.Operators.Not(e_);
 

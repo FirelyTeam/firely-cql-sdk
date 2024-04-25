@@ -777,7 +777,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 				return ar_;
 			};
-			var an_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, am_);
+			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, am_);
 			bool? ao_(CqlConcept T)
 			{
 				var as_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_();
@@ -786,12 +786,12 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 				return au_;
 			};
-			var ap_ = context.Operators.WhereOrNull<CqlConcept>(an_, ao_);
+			var ap_ = context.Operators.Where<CqlConcept>(an_, ao_);
 			var aq_ = context.Operators.Exists<CqlConcept>(ap_);
 
 			return aq_;
 		};
-		var ah_ = context.Operators.WhereOrNull<Encounter>(af_, ag_);
+		var ah_ = context.Operators.Where<Encounter>(af_, ag_);
 		var ai_ = context.Operators.ListUnion<Encounter>(ae_, ah_);
 		var aj_ = context.Operators.ListUnion<Encounter>(ac_, ai_);
 		bool? ak_(Encounter ValidEncounters)
@@ -802,7 +802,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return ax_;
 		};
-		var al_ = context.Operators.WhereOrNull<Encounter>(aj_, ak_);
+		var al_ = context.Operators.Where<Encounter>(aj_, ak_);
 
 		return al_;
 	}
@@ -907,17 +907,17 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 				return bk_;
 			};
-			var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
+			var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 			MedicationRequest i_(MedicationRequest OrderMedication2) => 
 				OrderMedication1;
-			var j_ = context.Operators.SelectOrNull<MedicationRequest, MedicationRequest>(h_, i_);
+			var j_ = context.Operators.Select<MedicationRequest, MedicationRequest>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<MedicationRequest, MedicationRequest>(a_, b_);
+		var c_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(a_, b_);
 		MedicationRequest d_(MedicationRequest OrderMedication1) => 
 			OrderMedication1;
-		var e_ = context.Operators.SelectOrNull<MedicationRequest, MedicationRequest>(c_, d_);
+		var e_ = context.Operators.Select<MedicationRequest, MedicationRequest>(c_, d_);
 
 		return e_;
 	}
@@ -1060,7 +1060,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return ae_;
 		};
-		var c_ = context.Operators.SelectOrNull<MedicationRequest, decimal?>(a_, b_);
+		var c_ = context.Operators.Select<MedicationRequest, decimal?>(a_, b_);
 		var d_ = context.Operators.SingletonFrom<decimal?>(c_);
 
 		return d_;
@@ -1079,7 +1079,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return l_;
 		};
-		var h_ = context.Operators.SelectOrNull<MedicationRequest, decimal?>(f_, g_);
+		var h_ = context.Operators.Select<MedicationRequest, decimal?>(f_, g_);
 		var i_ = context.Operators.Sum(h_);
 		var j_ = context.Operators.ConvertIntegerToDecimal((int?)90);
 		var k_ = context.Operators.Greater(i_, j_);
@@ -1404,7 +1404,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return e_();
 		};
-		var c_ = context.Operators.SelectOrNull<MedicationRequest, CqlQuantity>(a_, b_);
+		var c_ = context.Operators.Select<MedicationRequest, CqlQuantity>(a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlQuantity>(c_);
 
 		return d_;
@@ -1424,7 +1424,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return af_;
 		};
-		var g_ = context.Operators.WhereOrNull<MedicationRequest>(e_, f_);
+		var g_ = context.Operators.Where<MedicationRequest>(e_, f_);
 		var h_ = this.More_Than_One_Order(g_);
 		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 		var j_ = this.Digoxin();
@@ -1439,7 +1439,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return ai_;
 		};
-		var p_ = context.Operators.WhereOrNull<MedicationRequest>(n_, o_);
+		var p_ = context.Operators.Where<MedicationRequest>(n_, o_);
 		var q_ = this.More_Than_One_Order(p_);
 		var r_ = context.Operators.Exists<MedicationRequest>(q_);
 		var s_ = context.Operators.Or(i_, r_);
@@ -1455,7 +1455,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return al_;
 		};
-		var z_ = context.Operators.WhereOrNull<MedicationRequest>(x_, y_);
+		var z_ = context.Operators.Where<MedicationRequest>(x_, y_);
 		var aa_ = this.More_Than_One_Order(z_);
 		var ab_ = context.Operators.Exists<MedicationRequest>(aa_);
 		var ac_ = context.Operators.Or(s_, ab_);
@@ -1514,14 +1514,14 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return o_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		CqlDateTime i_(MedicationRequest AntipsychoticMedication)
 		{
 			var p_ = context.Operators.Convert<CqlDateTime>(AntipsychoticMedication?.AuthoredOnElement);
 
 			return p_;
 		};
-		var j_ = context.Operators.SelectOrNull<MedicationRequest, CqlDateTime>(h_, i_);
+		var j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
 		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
 		var l_ = context.Operators.First<CqlDateTime>(k_);
 
@@ -1563,14 +1563,14 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return o_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		CqlDateTime i_(MedicationRequest BenzodiazepineMedication)
 		{
 			var p_ = context.Operators.Convert<CqlDateTime>(BenzodiazepineMedication?.AuthoredOnElement);
 
 			return p_;
 		};
-		var j_ = context.Operators.SelectOrNull<MedicationRequest, CqlDateTime>(h_, i_);
+		var j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
 		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
 		var l_ = context.Operators.First<CqlDateTime>(k_);
 
@@ -1602,7 +1602,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return an_;
 		};
-		var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
+		var h_ = context.Operators.Where<Condition>(f_, g_);
 		var i_ = context.Operators.Exists<Condition>(h_);
 		var j_ = context.Operators.Not(i_);
 		var k_ = context.Operators.And(a_, j_);
@@ -1634,7 +1634,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return av_;
 		};
-		var ab_ = context.Operators.WhereOrNull<Condition>(z_, aa_);
+		var ab_ = context.Operators.Where<Condition>(z_, aa_);
 		var ac_ = context.Operators.Exists<Condition>(ab_);
 		var ad_ = context.Operators.Not(ac_);
 		var ae_ = context.Operators.And(l_, ad_);

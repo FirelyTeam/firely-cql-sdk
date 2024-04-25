@@ -188,7 +188,7 @@ namespace Hl7.Cql.Runtime
 
         #region Expand
 
-        public IEnumerable<CqlInterval<CqlDate?>>? ExpandList(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<CqlDate?>>? Expand(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -329,7 +329,7 @@ namespace Hl7.Cql.Runtime
             }
             return expanded;
         }
-        public IEnumerable<CqlInterval<CqlDateTime?>>? ExpandList(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<CqlDateTime?>>? Expand(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -520,7 +520,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<CqlTime?>>? ExpandList(IEnumerable<CqlInterval<CqlTime?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<CqlTime?>>? Expand(IEnumerable<CqlInterval<CqlTime?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -676,7 +676,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<decimal?>>? ExpandList(IEnumerable<CqlInterval<decimal?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<decimal?>>? Expand(IEnumerable<CqlInterval<decimal?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -724,7 +724,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<int?>>? ExpandList(IEnumerable<CqlInterval<int?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<int?>>? Expand(IEnumerable<CqlInterval<int?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -772,7 +772,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<long?>>? ExpandList(IEnumerable<CqlInterval<long?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<long?>>? Expand(IEnumerable<CqlInterval<long?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -831,7 +831,7 @@ namespace Hl7.Cql.Runtime
         /// <typeparam name="T"></typeparam>
         /// <param name="argument"></param>
         /// <returns></returns>
-        public IEnumerable<T>? FlattenList<T>(IEnumerable<IEnumerable<T>> argument)
+        public IEnumerable<T>? Flatten<T>(IEnumerable<IEnumerable<T>> argument)
         {
             if (argument == null) return null;
             else
@@ -1230,7 +1230,7 @@ namespace Hl7.Cql.Runtime
             else throw new NotSupportedException($"Unknown sort order {order}");
         }
 
-        public IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
+        public IEnumerable<T>? SortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
         {
             if (source == null)
                 return null;

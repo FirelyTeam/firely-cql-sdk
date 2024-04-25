@@ -517,7 +517,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return y_;
 			};
-			var l_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(EDEncounter?.ReasonCode, k_);
+			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>(EDEncounter?.ReasonCode, k_);
 			var m_ = this.STEMI();
 			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
 			var o_ = CQMCommon_2_0_000.encounterDiagnosis(EDEncounter);
@@ -529,7 +529,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return ab_;
 			};
-			var q_ = context.Operators.WhereOrNull<Condition>(o_, p_);
+			var q_ = context.Operators.Where<Condition>(o_, p_);
 			var r_ = context.Operators.Exists<Condition>(q_);
 			var s_ = context.Operators.Or(n_, r_);
 			var t_ = context.Operators.And(j_, s_);
@@ -540,7 +540,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 			return x_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -581,14 +581,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return ad_;
 			};
-			var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
+			var h_ = context.Operators.Where<Condition>(f_, g_);
 			Encounter i_(Condition DxSTEMI) => 
 				EDEncounter;
-			var j_ = context.Operators.SelectOrNull<Condition, Encounter>(h_, i_);
+			var j_ = context.Operators.Select<Condition, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(b_, c_);
+		var d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -625,7 +625,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -666,14 +666,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return r_;
 			};
-			var g_ = context.Operators.WhereOrNull<AllergyIntolerance>(e_, f_);
+			var g_ = context.Operators.Where<AllergyIntolerance>(e_, f_);
 			Encounter h_(AllergyIntolerance ThrombolyticAllergy) => 
 				EDwSTEMI;
-			var i_ = context.Operators.SelectOrNull<AllergyIntolerance, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<AllergyIntolerance, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -701,14 +701,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return p_;
 			};
-			var g_ = context.Operators.WhereOrNull<AdverseEvent>(e_, f_);
+			var g_ = context.Operators.Where<AdverseEvent>(e_, f_);
 			Encounter h_(AdverseEvent ThrombolyticAdverseEvent) => 
 				EDwSTEMI;
-			var i_ = context.Operators.SelectOrNull<AdverseEvent, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<AdverseEvent, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -747,14 +747,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return aa_;
 			};
-			var v_ = context.Operators.WhereOrNull<Condition>(t_, u_);
+			var v_ = context.Operators.Where<Condition>(t_, u_);
 			Encounter w_(Condition ActiveExclusionDx) => 
 				EDwithSTEMI;
-			var x_ = context.Operators.SelectOrNull<Condition, Encounter>(v_, w_);
+			var x_ = context.Operators.Select<Condition, Encounter>(v_, w_);
 
 			return x_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -785,14 +785,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return t_;
 			};
-			var j_ = context.Operators.WhereOrNull<MedicationRequest>(h_, i_);
+			var j_ = context.Operators.Where<MedicationRequest>(h_, i_);
 			Encounter k_(MedicationRequest OralAnticoagulant) => 
 				EDwithSTEMI;
-			var l_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(j_, k_);
+			var l_ = context.Operators.Select<MedicationRequest, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -834,14 +834,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return ah_;
 			};
-			var m_ = context.Operators.WhereOrNull<Condition>(k_, l_);
+			var m_ = context.Operators.Where<Condition>(k_, l_);
 			Encounter n_(Condition ExclusionDiagnosis) => 
 				EDwithSTEMI;
-			var o_ = context.Operators.SelectOrNull<Condition, Encounter>(m_, n_);
+			var o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
 
 			return o_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -877,14 +877,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return z_;
 			};
-			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
+			var g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure MajorSurgery) => 
 				EDwithSTEMI;
-			var i_ = context.Operators.SelectOrNull<Procedure, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -927,14 +927,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return ai_;
 			};
-			var j_ = context.Operators.WhereOrNull<Procedure>(h_, i_);
+			var j_ = context.Operators.Where<Procedure>(h_, i_);
 			Encounter k_(Procedure AirwayProcedure) => 
 				EDwithSTEMI;
-			var l_ = context.Operators.SelectOrNull<Procedure, Encounter>(j_, k_);
+			var l_ = context.Operators.Select<Procedure, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -973,14 +973,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return ab_;
 			};
-			var p_ = context.Operators.WhereOrNull<Condition>(n_, o_);
+			var p_ = context.Operators.Where<Condition>(n_, o_);
 			Encounter q_(Condition ExclusionCondition) => 
 				EDwSTEMI;
-			var r_ = context.Operators.SelectOrNull<Condition, Encounter>(p_, q_);
+			var r_ = context.Operators.Select<Condition, Encounter>(p_, q_);
 
 			return r_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1016,14 +1016,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return z_;
 			};
-			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
+			var g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure CranialorSpinalSurgery) => 
 				EDwithSTEMI;
-			var i_ = context.Operators.SelectOrNull<Procedure, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1043,7 +1043,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 			return f_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1094,13 +1094,13 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return k_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
 			var i_ = this.Emergency_Department_Visit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 
 			return j_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
 		var c_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(b_);
 		var d_ = FHIRHelpers_4_3_000.ToInterval(c_?.Period);
 		var e_ = context.Operators.Start(d_);
@@ -1135,14 +1135,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return aa_;
 			};
-			var j_ = context.Operators.WhereOrNull<MedicationAdministration>(h_, i_);
+			var j_ = context.Operators.Where<MedicationAdministration>(h_, i_);
 			Encounter k_(MedicationAdministration Fibrinolytic) => 
 				EDwithSTEMI;
-			var l_ = context.Operators.SelectOrNull<MedicationAdministration, Encounter>(j_, k_);
+			var l_ = context.Operators.Select<MedicationAdministration, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1175,14 +1175,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return w_;
 			};
-			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
+			var g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure PCI) => 
 				EDwithSTEMI;
-			var i_ = context.Operators.SelectOrNull<Procedure, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1214,7 +1214,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 			return u_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}

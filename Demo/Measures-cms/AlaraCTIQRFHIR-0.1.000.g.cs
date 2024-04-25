@@ -163,7 +163,7 @@ public class AlaraCTIQRFHIR_0_1_000
 
 			return o_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -238,14 +238,14 @@ public class AlaraCTIQRFHIR_0_1_000
 
 				return t_;
 			};
-			var h_ = context.Operators.WhereOrNull<Encounter>(f_, g_);
+			var h_ = context.Operators.Where<Encounter>(f_, g_);
 			Observation i_(Encounter InpatientEncounters) => 
 				CTScan;
-			var j_ = context.Operators.SelectOrNull<Encounter, Observation>(h_, i_);
+			var j_ = context.Operators.Select<Encounter, Observation>(h_, i_);
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectManyOrNull<Observation, Observation>(c_, d_);
+		var e_ = context.Operators.SelectMany<Observation, Observation>(c_, d_);
 
 		return e_;
 	}
@@ -269,14 +269,14 @@ public class AlaraCTIQRFHIR_0_1_000
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
@@ -297,14 +297,14 @@ public class AlaraCTIQRFHIR_0_1_000
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
@@ -326,7 +326,7 @@ public class AlaraCTIQRFHIR_0_1_000
 
 			return k_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -345,10 +345,10 @@ public class AlaraCTIQRFHIR_0_1_000
 
 			return m_;
 		};
-		var c_ = context.Operators.WhereOrNull<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
+		var c_ = context.Operators.Where<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
 		string d_(CqlCode @this) => 
 			@this?.code;
-		var e_ = context.Operators.SelectOrNull<CqlCode, string>(c_, d_);
+		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);
 		var f_ = context.Operators.ListContains<string>(e_, code);
 		var g_ = this.Global_Noise_Value(Obs);
 		var h_ = context.Operators.GreaterOrEqual(g_, noiseThreshold);
@@ -434,7 +434,7 @@ public class AlaraCTIQRFHIR_0_1_000
 
 			return d_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -455,15 +455,15 @@ public class AlaraCTIQRFHIR_0_1_000
 
 				return j_;
 			};
-			var f_ = context.Operators.WhereOrNull<CqlCode>(((d_ as CqlConcept)?.codes as IEnumerable<CqlCode>), e_);
+			var f_ = context.Operators.Where<CqlCode>(((d_ as CqlConcept)?.codes as IEnumerable<CqlCode>), e_);
 			string g_(CqlCode @this) => 
 				@this?.code;
-			var h_ = context.Operators.SelectOrNull<CqlCode, string>(f_, g_);
+			var h_ = context.Operators.Select<CqlCode, string>(f_, g_);
 			var i_ = context.Operators.ListContains<string>(h_, "FULLBODY");
 
 			return i_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}

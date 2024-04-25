@@ -353,7 +353,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 			return ay_;
 		};
-		var au_ = context.Operators.WhereOrNull<Encounter>(as_, at_);
+		var au_ = context.Operators.Where<Encounter>(as_, at_);
 
 		return au_;
 	}
@@ -418,7 +418,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		var f_ = context.Operators.Exists<Observation>(e_);
 
 		return f_;

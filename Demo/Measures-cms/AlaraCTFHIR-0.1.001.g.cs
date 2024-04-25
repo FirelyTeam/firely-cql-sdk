@@ -210,7 +210,7 @@ public class AlaraCTFHIR_0_1_001
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -234,14 +234,14 @@ public class AlaraCTFHIR_0_1_001
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
@@ -262,14 +262,14 @@ public class AlaraCTFHIR_0_1_001
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
@@ -291,7 +291,7 @@ public class AlaraCTFHIR_0_1_001
 
 			return k_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -336,15 +336,15 @@ public class AlaraCTFHIR_0_1_001
 
 				return k_;
 			};
-			var g_ = context.Operators.WhereOrNull<CqlCode>(((e_ as CqlConcept)?.codes as IEnumerable<CqlCode>), f_);
+			var g_ = context.Operators.Where<CqlCode>(((e_ as CqlConcept)?.codes as IEnumerable<CqlCode>), f_);
 			string h_(CqlCode @this) => 
 				@this?.code;
-			var i_ = context.Operators.SelectOrNull<CqlCode, string>(g_, h_);
+			var i_ = context.Operators.Select<CqlCode, string>(g_, h_);
 			var j_ = context.Operators.ListContains<string>(i_, "FULLBODY");
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 		var d_ = context.Operators.Exists<Observation>(c_);
 
 		return d_;
@@ -364,10 +364,10 @@ public class AlaraCTFHIR_0_1_001
 
 			return m_;
 		};
-		var c_ = context.Operators.WhereOrNull<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
+		var c_ = context.Operators.Where<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
 		string d_(CqlCode @this) => 
 			@this?.code;
-		var e_ = context.Operators.SelectOrNull<CqlCode, string>(c_, d_);
+		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);
 		var f_ = context.Operators.ListContains<string>(e_, code);
 		var g_ = this.Global_Noise_Value(Obs);
 		var h_ = context.Operators.GreaterOrEqual(g_, noiseThreshold);
@@ -453,7 +453,7 @@ public class AlaraCTFHIR_0_1_001
 
 			return e_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 		var d_ = context.Operators.Exists<Observation>(c_);
 
 		return d_;

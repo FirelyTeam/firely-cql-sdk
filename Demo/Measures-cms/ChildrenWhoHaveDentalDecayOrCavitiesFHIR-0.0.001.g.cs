@@ -234,7 +234,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 			return h_;
 		};
-		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -298,7 +298,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;

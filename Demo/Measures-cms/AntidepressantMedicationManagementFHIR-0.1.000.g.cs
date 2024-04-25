@@ -296,7 +296,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 			return r_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationDispense>(f_, g_);
+		var h_ = context.Operators.Where<MedicationDispense>(f_, g_);
 		Tuple_DicAHhNAXdJZgCSRQIFKiFWQI i_(MedicationDispense Antidepressant)
 		{
 			var s_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
@@ -310,10 +310,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 			return w_;
 		};
-		var j_ = context.Operators.SelectOrNull<MedicationDispense, Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(h_, i_);
+		var j_ = context.Operators.Select<MedicationDispense, Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(h_, i_);
 		object k_(Tuple_DicAHhNAXdJZgCSRQIFKiFWQI @this) => 
 			@this?.AntidepressantDate;
-		var l_ = context.Operators.ListSortBy<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+		var l_ = context.Operators.SortBy<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
 		var m_ = context.Operators.First<Tuple_DicAHhNAXdJZgCSRQIFKiFWQI>(l_);
 
 		return m_?.AntidepressantDate;
@@ -345,7 +345,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 			return v_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -403,7 +403,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 			return at_;
 		};
-		var ae_ = context.Operators.WhereOrNull<Encounter>(ac_, ad_);
+		var ae_ = context.Operators.Where<Encounter>(ac_, ad_);
 
 		return ae_;
 	}
@@ -473,7 +473,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 				return ag_;
 			};
-			var r_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>(p_, q_);
+			var r_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(p_, q_);
 			var s_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(r_);
 			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			var v_ = context.Operators.Quantity((decimal?)105m, "days");
@@ -484,7 +484,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 			return aa_;
 		};
-		var i_ = context.Operators.WhereOrNull<MedicationRequest>(g_, h_);
+		var i_ = context.Operators.Where<MedicationRequest>(g_, h_);
 		var j_ = context.Operators.Exists<MedicationRequest>(i_);
 		var k_ = context.Operators.Or(a_, j_);
 
@@ -513,7 +513,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 			return o_;
 		};
-		var h_ = context.Operators.SelectOrNull<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
+		var h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
 
 		return h_;
 	}
@@ -564,7 +564,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 			return o_;
 		};
-		var h_ = context.Operators.SelectOrNull<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
+		var h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
 
 		return h_;
 	}

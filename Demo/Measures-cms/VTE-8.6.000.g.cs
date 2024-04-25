@@ -120,13 +120,13 @@ public class VTE_8_6_000
 
 				return s_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
+			var f_ = context.Operators.Where<Condition>(d_, e_);
 			var g_ = context.Operators.Exists<Condition>(f_);
 			var h_ = context.Operators.Not(g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -150,7 +150,7 @@ public class VTE_8_6_000
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		var d_ = this.Admission_without_VTE_or_Obstetrical_Conditions();
 		var e_ = context.Operators.ListIntersect<Encounter>(c_, d_);
 

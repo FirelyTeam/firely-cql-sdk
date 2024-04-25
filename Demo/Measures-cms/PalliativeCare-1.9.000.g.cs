@@ -138,7 +138,7 @@ public class PalliativeCare_1_9_000
 
 			return ae_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
 		var g_ = context.Operators.Exists<Observation>(f_);
 		var h_ = this.Palliative_Care_Diagnosis();
 		var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
@@ -150,7 +150,7 @@ public class PalliativeCare_1_9_000
 
 			return ah_;
 		};
-		var k_ = context.Operators.WhereOrNull<Condition>(i_, j_);
+		var k_ = context.Operators.Where<Condition>(i_, j_);
 		var l_ = context.Operators.Exists<Condition>(k_);
 		var m_ = context.Operators.Or(g_, l_);
 		var n_ = this.Palliative_Care_Encounter();
@@ -165,7 +165,7 @@ public class PalliativeCare_1_9_000
 
 			return al_;
 		};
-		var r_ = context.Operators.WhereOrNull<Encounter>(p_, q_);
+		var r_ = context.Operators.Where<Encounter>(p_, q_);
 		var s_ = context.Operators.Exists<Encounter>(r_);
 		var t_ = context.Operators.Or(m_, s_);
 		var u_ = this.Palliative_Care_Intervention();
@@ -180,7 +180,7 @@ public class PalliativeCare_1_9_000
 
 			return ap_;
 		};
-		var y_ = context.Operators.WhereOrNull<Procedure>(w_, x_);
+		var y_ = context.Operators.Where<Procedure>(w_, x_);
 		var z_ = context.Operators.Exists<Procedure>(y_);
 		var aa_ = context.Operators.Or(t_, z_);
 

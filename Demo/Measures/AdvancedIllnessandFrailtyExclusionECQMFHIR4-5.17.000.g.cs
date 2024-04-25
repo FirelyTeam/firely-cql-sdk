@@ -245,7 +245,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return v_;
 		};
-		var g_ = context.Operators.WhereOrNull<MedicationRequest>(e_, f_);
+		var g_ = context.Operators.Where<MedicationRequest>(e_, f_);
 
 		return g_;
 	}
@@ -272,7 +272,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return o_;
 		};
-		var g_ = context.Operators.WhereOrNull<Encounter>(e_, f_);
+		var g_ = context.Operators.Where<Encounter>(e_, f_);
 		CqlInterval<CqlDateTime> h_(Encounter LongTermFacilityEncounter)
 		{
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((LongTermFacilityEncounter?.Period as object));
@@ -281,7 +281,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return r_;
 		};
-		var i_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(g_, h_);
+		var i_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(g_, h_);
 
 		return i_;
 	}
@@ -310,7 +310,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return q_;
 		};
-		var m_ = context.Operators.WhereOrNull<Encounter>(k_, l_);
+		var m_ = context.Operators.Where<Encounter>(k_, l_);
 		IEnumerable<Encounter> n_(Encounter OutpatientEncounter)
 		{
 			var r_ = this.Advanced_Illness();
@@ -335,14 +335,14 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 				return an_;
 			};
-			var u_ = context.Operators.WhereOrNull<Condition>(s_, t_);
+			var u_ = context.Operators.Where<Condition>(s_, t_);
 			Encounter v_(Condition AdvancedIllnessDiagnosis) => 
 				OutpatientEncounter;
-			var w_ = context.Operators.SelectOrNull<Condition, Encounter>(u_, v_);
+			var w_ = context.Operators.Select<Condition, Encounter>(u_, v_);
 
 			return w_;
 		};
-		var o_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(m_, n_);
+		var o_ = context.Operators.SelectMany<Encounter, Encounter>(m_, n_);
 
 		return o_;
 	}
@@ -365,7 +365,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Encounter>, Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
 		bool? f_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var k_ = FHIRHelpers_4_0_001.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
@@ -378,10 +378,10 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return q_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
+		var g_ = context.Operators.Where<Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
 		Encounter h_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		var i_ = context.Operators.SelectOrNull<Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
+		var i_ = context.Operators.Select<Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -416,7 +416,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(c_, d_);
 		bool? f_(Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
 		{
 			var k_ = context.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
@@ -431,7 +431,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return v_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(e_, f_);
+		var g_ = context.Operators.Where<Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(e_, f_);
 		CqlInterval<CqlDateTime> h_(Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
 		{
 			var w_ = context.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
@@ -440,7 +440,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return y_;
 		};
-		var i_ = context.Operators.SelectOrNull<Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(g_, h_);
+		var i_ = context.Operators.Select<Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(g_, h_);
 
 		return i_;
 	}
@@ -463,7 +463,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var f_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, int?>(d_, e_);
+		var f_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(d_, e_);
 		var g_ = context.Operators.Max<int?>(f_);
 
 		return g_;
@@ -484,7 +484,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		IEnumerable<Encounter> e_(Encounter InpatientEncounter)
 		{
 			var i_ = this.Advanced_Illness();
@@ -509,14 +509,14 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 				return ae_;
 			};
-			var l_ = context.Operators.WhereOrNull<Condition>(j_, k_);
+			var l_ = context.Operators.Where<Condition>(j_, k_);
 			Encounter m_(Condition AdvancedIllnessDiagnosis) => 
 				InpatientEncounter;
-			var n_ = context.Operators.SelectOrNull<Condition, Encounter>(l_, m_);
+			var n_ = context.Operators.Select<Condition, Encounter>(l_, m_);
 
 			return n_;
 		};
-		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(d_, e_);
+		var f_ = context.Operators.SelectMany<Encounter, Encounter>(d_, e_);
 
 		return f_;
 	}
@@ -551,7 +551,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.WhereOrNull<DeviceRequest>(e_, f_);
+		var g_ = context.Operators.Where<DeviceRequest>(e_, f_);
 		var h_ = context.Operators.Exists<DeviceRequest>(g_);
 		var j_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? k_(Observation FrailtyDeviceApplied)
@@ -571,7 +571,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return aw_;
 		};
-		var l_ = context.Operators.WhereOrNull<Observation>(j_, k_);
+		var l_ = context.Operators.Where<Observation>(j_, k_);
 		var m_ = context.Operators.Exists<Observation>(l_);
 		var n_ = context.Operators.Or(h_, m_);
 		var o_ = this.Frailty_Diagnosis();
@@ -584,7 +584,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return az_;
 		};
-		var r_ = context.Operators.WhereOrNull<Condition>(p_, q_);
+		var r_ = context.Operators.Where<Condition>(p_, q_);
 		var s_ = context.Operators.Exists<Condition>(r_);
 		var t_ = context.Operators.Or(n_, s_);
 		var u_ = this.Frailty_Encounter();
@@ -600,7 +600,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return bf_;
 		};
-		var x_ = context.Operators.WhereOrNull<Encounter>(v_, w_);
+		var x_ = context.Operators.Where<Encounter>(v_, w_);
 		var y_ = context.Operators.Exists<Encounter>(x_);
 		var z_ = context.Operators.Or(t_, y_);
 		var aa_ = this.Frailty_Symptom();
@@ -623,7 +623,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return bm_;
 		};
-		var ad_ = context.Operators.WhereOrNull<Observation>(ab_, ac_);
+		var ad_ = context.Operators.Where<Observation>(ab_, ac_);
 		var ae_ = context.Operators.Exists<Observation>(ad_);
 		var af_ = context.Operators.Or(z_, ae_);
 

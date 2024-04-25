@@ -521,7 +521,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return o_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -555,7 +555,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return x_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		object e_(Encounter @this)
 		{
 			var y_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -563,7 +563,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return z_;
 		};
-		var f_ = context.Operators.ListSortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		var f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.Last<Encounter>(f_);
 
 		return g_;
@@ -601,7 +601,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
@@ -630,7 +630,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 						(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
 						(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
 					};
-					var h_ = context.Operators.FlattenList<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
+					var h_ = context.Operators.Flatten<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
 					return h_;
 				};
@@ -638,7 +638,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
@@ -682,7 +682,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var c_ = context.Operators.ListSortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
+		var c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		var d_ = context.Operators.First<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_0_001.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
@@ -724,7 +724,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return cd_;
 				};
-				var ag_ = context.Operators.WhereOrNull<Encounter>(ae_, af_);
+				var ag_ = context.Operators.Where<Encounter>(ae_, af_);
 				object ah_(Encounter @this)
 				{
 					var ce_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -732,7 +732,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return cf_;
 				};
-				var ai_ = context.Operators.ListSortBy<Encounter>(ag_, ah_, System.ComponentModel.ListSortDirection.Ascending);
+				var ai_ = context.Operators.SortBy<Encounter>(ag_, ah_, System.ComponentModel.ListSortDirection.Ascending);
 				var aj_ = context.Operators.Last<Encounter>(ai_);
 				var ak_ = FHIRHelpers_4_0_001.ToInterval(aj_?.Period);
 				var al_ = context.Operators.Start(ak_);
@@ -758,7 +758,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return ct_;
 				};
-				var at_ = context.Operators.WhereOrNull<Encounter>(ar_, as_);
+				var at_ = context.Operators.Where<Encounter>(ar_, as_);
 				object au_(Encounter @this)
 				{
 					var cu_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -766,7 +766,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return cv_;
 				};
-				var av_ = context.Operators.ListSortBy<Encounter>(at_, au_, System.ComponentModel.ListSortDirection.Ascending);
+				var av_ = context.Operators.SortBy<Encounter>(at_, au_, System.ComponentModel.ListSortDirection.Ascending);
 				var aw_ = context.Operators.Last<Encounter>(av_);
 				var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
@@ -791,7 +791,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return dj_;
 				};
-				var bg_ = context.Operators.WhereOrNull<Encounter>(be_, bf_);
+				var bg_ = context.Operators.Where<Encounter>(be_, bf_);
 				object bh_(Encounter @this)
 				{
 					var dk_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -799,7 +799,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return dl_;
 				};
-				var bi_ = context.Operators.ListSortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
+				var bi_ = context.Operators.SortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
 				var bj_ = context.Operators.Last<Encounter>(bi_);
 				var bk_ = FHIRHelpers_4_0_001.ToInterval(bj_?.Period);
 				var bl_ = context.Operators.Start(bk_);
@@ -809,7 +809,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 				return bp_;
 			};
-			var h_ = context.Operators.WhereOrNull<Encounter>(f_, g_);
+			var h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
 				var dm_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -817,7 +817,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 				return dn_;
 			};
-			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
+			var j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			var k_ = context.Operators.Last<Encounter>(j_);
 			var l_ = FHIRHelpers_4_0_001.ToInterval(k_?.Period);
 			var m_ = context.Operators.Start(l_);
@@ -840,7 +840,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 				return eb_;
 			};
-			var q_ = context.Operators.WhereOrNull<Encounter>(o_, p_);
+			var q_ = context.Operators.Where<Encounter>(o_, p_);
 			object r_(Encounter @this)
 			{
 				var ec_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -848,7 +848,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 				return ed_;
 			};
-			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
+			var s_ = context.Operators.SortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
 			var t_ = context.Operators.Last<Encounter>(s_);
 			var u_ = FHIRHelpers_4_0_001.ToInterval(t_?.Period);
 			var v_ = context.Operators.Start(u_);
@@ -859,7 +859,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
@@ -1173,12 +1173,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 				return j_;
 			};
-			var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
+			var e_ = context.Operators.Where<Condition>(c_, d_);
 			var f_ = context.Operators.SingletonFrom<Condition>(e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 
 		return b_;
 	}
@@ -1196,7 +1196,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
+		var c_ = context.Operators.Where<Condition>(a_, b_);
 		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 
 		return d_;
@@ -1214,10 +1214,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var b_ = context.Operators.WhereOrNull<Extension>((domainResource?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((domainResource?.Extension as IEnumerable<Extension>), a_);
 		Extension c_(Extension E) => 
 			E;
-		var d_ = context.Operators.SelectOrNull<Extension, Extension>(b_, c_);
+		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);
 
 		return d_;
 	}
@@ -1233,10 +1233,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return g_;
 		};
-		var b_ = context.Operators.WhereOrNull<Extension>((element?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((element?.Extension as IEnumerable<Extension>), a_);
 		Extension c_(Extension E) => 
 			E;
-		var d_ = context.Operators.SelectOrNull<Extension, Extension>(b_, c_);
+		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);
 
 		return d_;
 	}
@@ -1278,7 +1278,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return j_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 		var c_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
@@ -1296,12 +1296,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 				return r_;
 			};
-			var m_ = context.Operators.WhereOrNull<Condition>(k_, l_);
+			var m_ = context.Operators.Where<Condition>(k_, l_);
 			var n_ = context.Operators.SingletonFrom<Condition>(m_);
 
 			return n_;
 		};
-		var f_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>(d_, e_);
+		var f_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(d_, e_);
 		var g_ = context.Operators.SingletonFrom<Condition>(f_);
 
 		return g_;
@@ -1320,7 +1320,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Location>(a_, b_);
+		var c_ = context.Operators.Where<Location>(a_, b_);
 		var d_ = context.Operators.SingletonFrom<Location>(c_);
 
 		return d_;
@@ -1338,10 +1338,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var b_ = context.Operators.WhereOrNull<Extension>((domainResource?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((domainResource?.Extension as IEnumerable<Extension>), a_);
 		Extension c_(Extension E) => 
 			E;
-		var d_ = context.Operators.SelectOrNull<Extension, Extension>(b_, c_);
+		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);
 
 		return d_;
 	}
@@ -1369,10 +1369,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var b_ = context.Operators.WhereOrNull<Extension>((element?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((element?.Extension as IEnumerable<Extension>), a_);
 		Extension c_(Extension E) => 
 			E;
-		var d_ = context.Operators.SelectOrNull<Extension, Extension>(b_, c_);
+		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);
 
 		return d_;
 	}
@@ -1409,7 +1409,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return i_;
 				};
-				var d_ = context.Operators.WhereOrNull<Medication>(b_, c_);
+				var d_ = context.Operators.Where<Medication>(b_, c_);
 				var e_ = context.Operators.SingletonFrom<Medication>(d_);
 
 				return e_?.Code;
@@ -1471,7 +1471,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
@@ -1505,7 +1505,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;

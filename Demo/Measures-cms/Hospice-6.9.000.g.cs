@@ -205,7 +205,7 @@ public class Hospice_6_9_000
 
 			return bd_;
 		};
-		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 		var f_ = context.Operators.Exists<Encounter>(e_);
 		var g_ = this.Hospice_Encounter();
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
@@ -219,7 +219,7 @@ public class Hospice_6_9_000
 
 			return bh_;
 		};
-		var k_ = context.Operators.WhereOrNull<Encounter>(i_, j_);
+		var k_ = context.Operators.Where<Encounter>(i_, j_);
 		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.Or(f_, l_);
 		var n_ = this.Hospice_care__Minimum_Data_Set_();
@@ -240,7 +240,7 @@ public class Hospice_6_9_000
 
 			return bq_;
 		};
-		var s_ = context.Operators.WhereOrNull<Observation>(q_, r_);
+		var s_ = context.Operators.Where<Observation>(q_, r_);
 		var t_ = context.Operators.Exists<Observation>(s_);
 		var u_ = context.Operators.Or(m_, t_);
 		var v_ = this.Hospice_Care_Ambulatory();
@@ -255,7 +255,7 @@ public class Hospice_6_9_000
 
 			return bu_;
 		};
-		var z_ = context.Operators.WhereOrNull<ServiceRequest>(x_, y_);
+		var z_ = context.Operators.Where<ServiceRequest>(x_, y_);
 		var aa_ = context.Operators.Exists<ServiceRequest>(z_);
 		var ab_ = context.Operators.Or(u_, aa_);
 		var ad_ = context.Operators.RetrieveByValueSet<Procedure>(v_, null);
@@ -269,7 +269,7 @@ public class Hospice_6_9_000
 
 			return by_;
 		};
-		var ag_ = context.Operators.WhereOrNull<Procedure>(ae_, af_);
+		var ag_ = context.Operators.Where<Procedure>(ae_, af_);
 		var ah_ = context.Operators.Exists<Procedure>(ag_);
 		var ai_ = context.Operators.Or(ab_, ah_);
 		var aj_ = this.Hospice_Diagnosis();
@@ -282,7 +282,7 @@ public class Hospice_6_9_000
 
 			return cb_;
 		};
-		var am_ = context.Operators.WhereOrNull<Condition>(ak_, al_);
+		var am_ = context.Operators.Where<Condition>(ak_, al_);
 		var an_ = context.Operators.Exists<Condition>(am_);
 		var ao_ = context.Operators.Or(ai_, an_);
 

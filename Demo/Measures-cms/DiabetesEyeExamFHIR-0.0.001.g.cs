@@ -274,7 +274,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 
 			return z_;
 		};
-		var w_ = context.Operators.WhereOrNull<Encounter>(u_, v_);
+		var w_ = context.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}
@@ -306,7 +306,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 
 			return t_;
 		};
-		var o_ = context.Operators.WhereOrNull<Condition>(m_, n_);
+		var o_ = context.Operators.Where<Condition>(m_, n_);
 		var p_ = context.Operators.Exists<Condition>(o_);
 		var q_ = context.Operators.And(k_, p_);
 
@@ -357,7 +357,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -381,7 +381,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 
 			return i_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -409,7 +409,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 
 			return o_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}

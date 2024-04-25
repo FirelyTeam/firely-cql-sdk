@@ -308,7 +308,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return aa_;
 		};
-		var p_ = context.Operators.WhereOrNull<Encounter>(n_, o_);
+		var p_ = context.Operators.Where<Encounter>(n_, o_);
 
 		return p_;
 	}
@@ -348,14 +348,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return ad_;
 			};
-			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
+			var g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition PrimaryOpenAngleGlaucoma) => 
 				ValidQualifyingEncounter;
-			var i_ = context.Operators.SelectOrNull<Condition, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -412,14 +412,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return q_;
 			};
-			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
+			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamNotPerformed;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CupToDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
@@ -428,12 +428,12 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return aa_;
 			};
-			var s_ = context.Operators.WhereOrNull<Extension>(((CupToDiscExamNotPerformed is DomainResource)
+			var s_ = context.Operators.Where<Extension>(((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
+			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
 			var v_ = context.Operators.SingletonFrom<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
@@ -442,7 +442,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return z_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -468,14 +468,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return q_;
 			};
-			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
+			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamNotPerformed;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation OpticDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
@@ -484,12 +484,12 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return aa_;
 			};
-			var s_ = context.Operators.WhereOrNull<Extension>(((OpticDiscExamNotPerformed is DomainResource)
+			var s_ = context.Operators.Where<Extension>(((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
+			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
 			var v_ = context.Operators.SingletonFrom<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
@@ -498,7 +498,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return z_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -538,14 +538,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return o_;
 			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
+			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamPerformed;
-			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
+			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation CupToDiscExamPerformed)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToValue(CupToDiscExamPerformed?.Value);
@@ -563,7 +563,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return v_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}
@@ -588,14 +588,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return o_;
 			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
+			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamPerformed;
-			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
+			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation OpticDiscExamPerformed)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToValue(OpticDiscExamPerformed?.Value);
@@ -613,7 +613,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return v_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}

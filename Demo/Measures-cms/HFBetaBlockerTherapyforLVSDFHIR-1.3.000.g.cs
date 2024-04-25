@@ -368,7 +368,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return q_;
 		};
-		var g_ = context.Operators.WhereOrNull<MedicationRequest>(e_, f_);
+		var g_ = context.Operators.Where<MedicationRequest>(e_, f_);
 		var h_ = context.Operators.Exists<MedicationRequest>(g_);
 
 		return h_;
@@ -390,7 +390,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return i_;
 		};
-		var g_ = context.Operators.WhereOrNull<MedicationRequest>(e_, f_);
+		var g_ = context.Operators.Where<MedicationRequest>(e_, f_);
 		var h_ = context.Operators.Exists<MedicationRequest>(g_);
 
 		return h_;
@@ -428,7 +428,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return k_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Observation,Encounter>, Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Observation,Encounter>, Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(c_, d_);
 		bool? f_(Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_fgydjijbhixdbhjjiisjveojv.ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
@@ -464,7 +464,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return as_;
 			};
-			var aa_ = context.Operators.WhereOrNull<Observation>(y_, z_);
+			var aa_ = context.Operators.Where<Observation>(y_, z_);
 			object ab_(Observation @this)
 			{
 				var at_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -473,7 +473,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return av_;
 			};
-			var ac_ = context.Operators.ListSortBy<Observation>(aa_, ab_, System.ComponentModel.ListSortDirection.Ascending);
+			var ac_ = context.Operators.SortBy<Observation>(aa_, ab_, System.ComponentModel.ListSortDirection.Ascending);
 			var ad_ = context.Operators.Last<Observation>(ac_);
 			var ae_ = context.Operators.Convert<Quantity>(ad_?.Value);
 			var af_ = FHIRHelpers_4_3_000.ToQuantity(ae_);
@@ -482,10 +482,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return ai_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(e_, f_);
+		var g_ = context.Operators.Where<Tuple_FgYDjIJBhiXdBHJjiISjVeOjV>(e_, f_);
 		Observation h_(Tuple_FgYDjIJBhiXdBHJjiISjVeOjV tuple_fgydjijbhixdbhjjiisjveojv) => 
 			tuple_fgydjijbhixdbhjjiisjveojv.HeartRate;
-		var i_ = context.Operators.SelectOrNull<Tuple_FgYDjIJBhiXdBHJjiISjVeOjV, Observation>(g_, h_);
+		var i_ = context.Operators.Select<Tuple_FgYDjIJBhiXdBHJjiISjVeOjV, Observation>(g_, h_);
 		var j_ = context.Operators.Exists<Observation>(i_);
 
 		return j_;
@@ -509,14 +509,14 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return n_;
 			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
+			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			MedicationRequest j_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				NoBetaBlockerOrdered;
-			var k_ = context.Operators.SelectOrNull<Encounter, MedicationRequest>(i_, j_);
+			var k_ = context.Operators.Select<Encounter, MedicationRequest>(i_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<MedicationRequest, MedicationRequest>(a_, b_);
+		var c_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(a_, b_);
 		bool? d_(MedicationRequest NoBetaBlockerOrdered)
 		{
 			var o_ = context.Operators.Convert<CodeableConcept>(NoBetaBlockerOrdered?.Medication);
@@ -529,7 +529,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return ac_;
 			};
-			var t_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(NoBetaBlockerOrdered?.ReasonCode, s_);
+			var t_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoBetaBlockerOrdered?.ReasonCode, s_);
 			var u_ = this.Medical_Reason();
 			var v_ = context.Operators.ConceptsInValueSet(t_, u_);
 			CqlConcept w_(CodeableConcept @this)
@@ -538,7 +538,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return ad_;
 			};
-			var x_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(NoBetaBlockerOrdered?.ReasonCode, w_);
+			var x_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoBetaBlockerOrdered?.ReasonCode, w_);
 			var y_ = this.Patient_Reason();
 			var z_ = context.Operators.ConceptsInValueSet(x_, y_);
 			var aa_ = context.Operators.Or(v_, z_);
@@ -546,7 +546,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<MedicationRequest>(c_, d_);
+		var e_ = context.Operators.Where<MedicationRequest>(c_, d_);
 		var f_ = context.Operators.Exists<MedicationRequest>(e_);
 
 		return f_;
@@ -573,7 +573,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -600,7 +600,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -627,7 +627,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -657,7 +657,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return p_;
 		};
-		var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
+		var g_ = context.Operators.Where<Condition>(e_, f_);
 		var h_ = context.Operators.Exists<Condition>(g_);
 
 		return h_;
@@ -684,7 +684,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -714,7 +714,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return q_;
 		};
-		var h_ = context.Operators.WhereOrNull<AllergyIntolerance>(f_, g_);
+		var h_ = context.Operators.Where<AllergyIntolerance>(f_, g_);
 		var i_ = context.Operators.Exists<AllergyIntolerance>(h_);
 
 		return i_;
@@ -741,7 +741,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -768,7 +768,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
@@ -796,21 +796,21 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return r_;
 			};
-			var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
+			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				ImplantedCardiacPacer;
-			var l_ = context.Operators.SelectOrNull<Encounter, Procedure>(j_, k_);
+			var l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
 			return l_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(b_, c_);
+		var d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure ImplantedCardiacPacer)
 		{
 			var s_ = context.Operators.Equal(ImplantedCardiacPacer?.StatusElement?.Value, "completed");
 
 			return s_;
 		};
-		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
+		var f_ = context.Operators.Where<Procedure>(d_, e_);
 		var g_ = context.Operators.Exists<Procedure>(f_);
 
 		return g_;

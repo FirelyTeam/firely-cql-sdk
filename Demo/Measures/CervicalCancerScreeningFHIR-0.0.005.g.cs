@@ -300,7 +300,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return y_;
 		};
-		var s_ = context.Operators.WhereOrNull<Encounter>(q_, r_);
+		var s_ = context.Operators.Where<Encounter>(q_, r_);
 
 		return s_;
 	}
@@ -361,7 +361,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return q_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 		var e_ = this.Congenital_or_Acquired_Absence_of_Cervix();
 		var f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
 		bool? g_(Condition NoCervixDiagnosis)
@@ -374,7 +374,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return v_;
 		};
-		var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
+		var h_ = context.Operators.Where<Condition>(f_, g_);
 		var i_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
 
 		return i_;
@@ -422,7 +422,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 				return ad_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((CervicalCytology?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((CervicalCytology?.Category as IEnumerable<CodeableConcept>), h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(CervicalCytology?.Effective);
@@ -442,7 +442,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return aa_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -473,7 +473,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 				return al_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((HPVTest?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((HPVTest?.Category as IEnumerable<CodeableConcept>), h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = this.Patient();
@@ -501,7 +501,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return ai_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -551,7 +551,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<CodeableConcept>((observation?.Category as IEnumerable<CodeableConcept>), a_);
+		var b_ = context.Operators.Where<CodeableConcept>((observation?.Category as IEnumerable<CodeableConcept>), a_);
 		var c_ = context.Operators.Exists<CodeableConcept>(b_);
 
 		return c_;
@@ -591,7 +591,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return w_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -642,7 +642,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 			return ae_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}

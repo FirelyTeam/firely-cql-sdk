@@ -353,7 +353,7 @@ namespace Hl7.Cql.Runtime
                 return new CqlInterval<T?>[0];
 
             // need null check on i because i!.low! causes HL7 unit test TestCollapseNull_Test to fail since i is null
-            var queue = ListSortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
+            var queue = SortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
             if (queue is null || queue.Count == 0) return null;
 
             CqlInterval<T?>? TryCombine(CqlInterval<T?>? x, CqlInterval<T?>? y)
@@ -647,7 +647,7 @@ namespace Hl7.Cql.Runtime
 
         #region Expand
 
-        public IEnumerable<CqlDate>? ExpandInterval(CqlInterval<CqlDate>? argument, CqlQuantity? per)
+        public IEnumerable<CqlDate>? Expand(CqlInterval<CqlDate>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -773,7 +773,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlDateTime>? ExpandInterval(CqlInterval<CqlDateTime>? argument, CqlQuantity? per)
+        public IEnumerable<CqlDateTime>? Expand(CqlInterval<CqlDateTime>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -949,7 +949,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlTime>? ExpandInterval(CqlInterval<CqlTime>? argument, CqlQuantity? per)
+        public IEnumerable<CqlTime>? Expand(CqlInterval<CqlTime>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1089,7 +1089,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<decimal?>? ExpandInterval(CqlInterval<decimal?>? argument, CqlQuantity? per)
+        public IEnumerable<decimal?>? Expand(CqlInterval<decimal?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1125,7 +1125,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<int?>? ExpandInterval(CqlInterval<int?>? argument, CqlQuantity? per)
+        public IEnumerable<int?>? Expand(CqlInterval<int?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1163,7 +1163,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<long?>? ExpandInterval(CqlInterval<long?>? argument, CqlQuantity? per)
+        public IEnumerable<long?>? Expand(CqlInterval<long?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;

@@ -329,14 +329,14 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 				return ah_;
 			};
-			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
+			var g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition Dementia) => 
 				EncounterAssessCognition;
-			var i_ = context.Operators.SelectOrNull<Condition, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -362,7 +362,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 			return l_;
 		};
-		var f_ = context.Operators.WhereOrNull<Encounter>(d_, e_);
+		var f_ = context.Operators.Where<Encounter>(d_, e_);
 
 		return f_;
 	}
@@ -426,14 +426,14 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 				return ac_;
 			};
-			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
+			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
 				CognitiveAssessment;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CognitiveAssessment)
 		{
 			var ad_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Value);
@@ -452,7 +452,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 			return aj_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -491,14 +491,14 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 				return q_;
 			};
-			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
+			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
 				NoCognitiveAssessment;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation NoCognitiveAssessment)
 		{
 			bool? r_(Extension @this)
@@ -507,12 +507,12 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 				return aa_;
 			};
-			var s_ = context.Operators.WhereOrNull<Extension>(((NoCognitiveAssessment is DomainResource)
+			var s_ = context.Operators.Where<Extension>(((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
+			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
 			var v_ = context.Operators.SingletonFrom<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
@@ -521,7 +521,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 			return z_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}

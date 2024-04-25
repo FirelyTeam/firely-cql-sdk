@@ -228,7 +228,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return x_;
 		};
-		var t_ = context.Operators.WhereOrNull<Encounter>(r_, s_);
+		var t_ = context.Operators.Where<Encounter>(r_, s_);
 
 		return t_;
 	}
@@ -287,7 +287,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = this.Congenital_or_Acquired_Absence_of_Cervix();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
 		bool? h_(Condition NoCervixDiagnosis)
@@ -300,7 +300,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return u_;
 		};
-		var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
+		var i_ = context.Operators.Where<Condition>(g_, h_);
 		var j_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (i_ as IEnumerable<object>));
 
 		return j_;
@@ -393,7 +393,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return r_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -522,7 +522,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return z_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}

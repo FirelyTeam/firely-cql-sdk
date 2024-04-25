@@ -194,7 +194,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 			return t_;
 		};
-		var o_ = context.Operators.WhereOrNull<Condition>(m_, n_);
+		var o_ = context.Operators.Where<Condition>(m_, n_);
 		var p_ = context.Operators.Exists<Condition>(o_);
 		var q_ = context.Operators.And(k_, p_);
 
@@ -292,7 +292,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 			return l_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			var y_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -301,7 +301,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 			return aa_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
 
 		return h_;
@@ -398,7 +398,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 			return k_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		var f_ = context.Operators.Exists<Observation>(e_);
 		var g_ = context.Operators.Not(f_);
 

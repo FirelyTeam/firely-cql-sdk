@@ -276,7 +276,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
+		var e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -301,7 +301,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return k_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
@@ -395,7 +395,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return l_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -471,7 +471,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return r_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -500,7 +500,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
@@ -529,7 +529,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -558,7 +558,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}

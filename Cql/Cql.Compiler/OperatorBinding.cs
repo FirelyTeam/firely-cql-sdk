@@ -19,14 +19,14 @@ namespace Hl7.Cql.Compiler;
 internal abstract class OperatorsBinder
 {
     /// <summary>
-    /// Binds a <paramref name="method"/> on <see cref="ICqlOperators"/> to an <see cref="Expression"/>.
+    /// Binds a <paramref name="methodName"/> on <see cref="ICqlOperators"/> to an <see cref="Expression"/>.
     /// </summary>
-    /// <param name="method">The method to bind to.</param>
+    /// <param name="methodName">The method to bind to.</param>
     /// <param name="resultTypeHint"></param>
     /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
     /// <returns>A <see cref="MethodCallExpression"/> that binds to a method on <see cref="ICqlOperators"/>.</returns>
     public abstract Expression BindToMethod(
-        CqlOperatorsMethod method,
+        string methodName,
         Type? resultTypeHint,
         params Expression[] args
     );

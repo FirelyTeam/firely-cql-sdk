@@ -149,7 +149,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.survey();
@@ -158,13 +158,13 @@ public class Status_1_6_000
 
 				return p_;
 			};
-			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
+			var j_ = context.Operators.Where<CqlConcept>(h_, i_);
 			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -189,7 +189,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.survey();
@@ -198,13 +198,13 @@ public class Status_1_6_000
 
 				return p_;
 			};
-			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
+			var j_ = context.Operators.Where<CqlConcept>(h_, i_);
 			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -221,7 +221,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Condition>(Condition, a_);
+		var b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
@@ -238,7 +238,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Condition>(Condition, a_);
+		var b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
@@ -262,7 +262,7 @@ public class Status_1_6_000
 
 			return i_;
 		};
-		var b_ = context.Operators.WhereOrNull<DeviceRequest>(DeviceRequest, a_);
+		var b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
 
 		return b_;
 	}
@@ -286,7 +286,7 @@ public class Status_1_6_000
 
 			return i_;
 		};
-		var b_ = context.Operators.WhereOrNull<DeviceRequest>(DeviceRequest, a_);
+		var b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
 
 		return b_;
 	}
@@ -310,7 +310,7 @@ public class Status_1_6_000
 
 			return i_;
 		};
-		var b_ = context.Operators.WhereOrNull<ServiceRequest>(ServiceRequest, a_);
+		var b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
@@ -334,7 +334,7 @@ public class Status_1_6_000
 
 			return i_;
 		};
-		var b_ = context.Operators.WhereOrNull<ServiceRequest>(ServiceRequest, a_);
+		var b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
@@ -358,7 +358,7 @@ public class Status_1_6_000
 
 			return i_;
 		};
-		var b_ = context.Operators.WhereOrNull<ServiceRequest>(ServiceRequest, a_);
+		var b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
@@ -382,7 +382,7 @@ public class Status_1_6_000
 
 			return i_;
 		};
-		var b_ = context.Operators.WhereOrNull<ServiceRequest>(ServiceRequest, a_);
+		var b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
@@ -404,7 +404,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -426,7 +426,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -450,7 +450,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter>(Enc, a_);
+		var b_ = context.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
@@ -474,7 +474,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter>(Enc, a_);
+		var b_ = context.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
@@ -488,7 +488,7 @@ public class Status_1_6_000
 
 			return c_;
 		};
-		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
+		var b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
@@ -502,7 +502,7 @@ public class Status_1_6_000
 
 			return c_;
 		};
-		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
+		var b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
@@ -516,7 +516,7 @@ public class Status_1_6_000
 
 			return c_;
 		};
-		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
+		var b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
@@ -530,7 +530,7 @@ public class Status_1_6_000
 
 			return c_;
 		};
-		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
+		var b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
@@ -544,7 +544,7 @@ public class Status_1_6_000
 
 			return c_;
 		};
-		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
+		var b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
@@ -569,7 +569,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.laboratory();
@@ -578,13 +578,13 @@ public class Status_1_6_000
 
 				return p_;
 			};
-			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
+			var j_ = context.Operators.Where<CqlConcept>(h_, i_);
 			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -609,7 +609,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.laboratory();
@@ -618,13 +618,13 @@ public class Status_1_6_000
 
 				return p_;
 			};
-			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
+			var j_ = context.Operators.Where<CqlConcept>(h_, i_);
 			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -640,7 +640,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
+		var b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
@@ -656,7 +656,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
+		var b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
@@ -678,7 +678,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationDispense>(Med, a_);
+		var b_ = context.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
@@ -700,7 +700,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationDispense>(Med, a_);
+		var b_ = context.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
@@ -722,7 +722,7 @@ public class Status_1_6_000
 
 			return g_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
+		var b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
@@ -744,7 +744,7 @@ public class Status_1_6_000
 
 			return g_;
 		};
-		var b_ = context.Operators.WhereOrNull<MedicationRequest>(MedicationRequest, a_);
+		var b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
@@ -769,7 +769,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.exam();
@@ -778,13 +778,13 @@ public class Status_1_6_000
 
 				return p_;
 			};
-			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
+			var j_ = context.Operators.Where<CqlConcept>(h_, i_);
 			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -809,7 +809,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.exam();
@@ -818,13 +818,13 @@ public class Status_1_6_000
 
 				return p_;
 			};
-			var j_ = context.Operators.WhereOrNull<CqlConcept>(h_, i_);
+			var j_ = context.Operators.Where<CqlConcept>(h_, i_);
 			var k_ = context.Operators.Exists<CqlConcept>(j_);
 			var l_ = context.Operators.And(f_, k_);
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -845,7 +845,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -866,7 +866,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -887,7 +887,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -908,7 +908,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -929,7 +929,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -950,7 +950,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -971,7 +971,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -992,7 +992,7 @@ public class Status_1_6_000
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -1015,7 +1015,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
@@ -1038,7 +1038,7 @@ public class Status_1_6_000
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation>(Obs, a_);
+		var b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
