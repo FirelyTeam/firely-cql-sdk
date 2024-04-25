@@ -208,8 +208,11 @@ namespace Hl7.Cql.Compiler
         private Expression BindCqlOperator(
             CqlOperatorsMethod method,
             Type? resultTypeHint,
-            params object?[] args) =>
-            _operatorsBinder.BindToMethod(method, resultTypeHint, TranslateAll(args));
+            params object?[] args)
+        {
+            //bool stop = ((IBuilderContext)this).Hash == "#EMAEaaYJ";
+            return _operatorsBinder.BindToMethod(method, resultTypeHint, TranslateAll(args));
+        }
 
         private Expression BindCqlOperator<T>(
             CqlOperatorsMethod method,
@@ -315,6 +318,7 @@ namespace Hl7.Cql.Compiler
                     CalculateAgeAt or
                     DifferenceBetween or
                     DurationBetween or
+                    In or
                     Round => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
 
                 AllTrue or
@@ -416,6 +420,7 @@ namespace Hl7.Cql.Compiler
                             GreaterOrEqual or
                             HighBoundary or
                             Implies or
+                            In or
                             Indexer or
                             Interval or
                             IsFalse or
@@ -509,7 +514,6 @@ namespace Hl7.Cql.Compiler
                         QueryLetRef e      => GetScopeExpression(e.name!),
                         IdentifierRef e    => IdentifierRef(e),
                         If e               => If(e),
-                        In e               => In(e),
                         IncludedIn e       => IncludedIn(e),
                         Includes e         => Includes(e),
                         Instance e         => Instance(e),
@@ -1637,25 +1641,6 @@ namespace Hl7.Cql.Compiler
                 }
 
                 throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression In(In e)
-        {
-            var left = Translate(e.operand![0]!);
-            var right = Translate(e.operand![1]!);
-            if (_typeResolver.IsListType(right.Type))
-            {
-                return BindCqlOperator(nameof(ICqlOperators.In), null, left, right);
-            }
-
-            if (right.Type.IsCqlInterval(out var rightElementType))
-            {
-                var precision = ((IGetPrecision)e).precisionOrNull;
-
-                return BindCqlOperator(nameof(ICqlOperators.In), rightElementType, left, right, precision);
-
             }
             throw new NotImplementedException().WithContext(this);
         }

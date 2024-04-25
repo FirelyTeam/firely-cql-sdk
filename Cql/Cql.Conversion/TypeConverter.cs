@@ -9,8 +9,12 @@
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Conversion
 {
@@ -35,9 +39,7 @@ namespace Hl7.Cql.Conversion
     /// </summary>
     public class TypeConverter
     {
-        private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters
-            = new();
-
+        private readonly FromToTypeDictionary<Func<object, object>> _converters;
         private readonly List<ITypeConverterEntry> _customConverters = [];
 
         /// <summary>
@@ -45,6 +47,9 @@ namespace Hl7.Cql.Conversion
         /// </summary>
         internal TypeConverter()
         {
+            _converters = new(
+                () => new ExactTypeDictionary<IBasicDictionary<Type, Func<object, object>>>(),
+                _ => new InheritingTypeDictionary<Func<object, object>>());
         }
 
         /// <summary>
@@ -66,11 +71,8 @@ namespace Hl7.Cql.Conversion
         {
             if (_customConverters.SingleOrDefault(converter => converter.Handles(from, to)) is not null)
                 return true;
-            else if (_converters.TryGetValue(from, out var toDictionary) &&
-                        toDictionary.TryGetValue(to, out _))
-                return true;
-            else
-                return false;
+
+            return _converters.TryGetValue((from, to), out _);
         }
 
         /// <summary>
@@ -98,11 +100,12 @@ namespace Hl7.Cql.Conversion
 
             if(_customConverters.SingleOrDefault(converter => converter.Handles(fromType, to)) is {} subConverter)
                 return subConverter.Convert(from, to);
-            else if (_converters.TryGetValue(fromType, out var toDictionary) &&
-                     toDictionary.TryGetValue(to, out Func<object, object>? convert))
-                    return convert(from);
-            else
-                    throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
+
+
+            if (_converters.TryGetValue((fromType, to), out var convert))
+                return convert(from);
+
+            throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
         }
 
         /// <summary>
@@ -114,15 +117,7 @@ namespace Hl7.Cql.Conversion
         /// <exception cref="ArgumentException">If this conversion is already defined.</exception>
         internal void AddConversion(Type from, Type to, Func<object, object> conversion)
         {
-            if (!_converters.TryGetValue(from, out var toDictionary))
-            {
-                toDictionary = new Dictionary<Type, Func<object, object>>();
-                _converters.Add(from, toDictionary);
-            }
-            if (toDictionary.TryGetValue(to, out _))
-                throw new ArgumentException($"Conversion from {from} to {to} is already defined.");
-            else
-                toDictionary.Add(to, conversion);
+            _converters.Add((from, to), conversion);
         }
 
         /// <summary>
@@ -140,14 +135,7 @@ namespace Hl7.Cql.Conversion
         /// <exception cref="ArgumentException">If this conversion is already defined.</exception>
         internal void AddConversion<TFrom, TTo>(Func<TFrom, TTo> conversion)
         {
-            if (!_converters.TryGetValue(typeof(TFrom), out var toDictionary))
-            {
-                toDictionary = new Dictionary<Type, Func<object, object>>();
-                _converters.Add(typeof(TFrom), toDictionary);
-            }
-            if (toDictionary.TryGetValue(typeof(TTo), out Func<object, object>? existing))
-                throw new ArgumentException($"Conversion from {typeof(TFrom)} to {typeof(TTo)} is already defined.");
-            else toDictionary.Add(typeof(TTo), x => conversion((TFrom)x)!);
+            AddConversion(typeof(TFrom), typeof(TTo), (obj) => conversion((TFrom)obj)!);
         }
 
 
@@ -180,5 +168,178 @@ namespace Hl7.Cql.Conversion
             return this;
         }
 
+        internal virtual void LogAllConverters(ILogger<TypeConverter> logger)
+        {
+            CSharpWriteTypeOptions o = new(
+                HideNamespaces:true,
+                PreferKeywords:true);
+
+            string TypeToString(Type t) =>
+                (t.IsValueType ? "struct ": "") + t.WriteCSharp(o);
+
+            var lines = string.Concat(
+                _converters
+                    .Select(kv => $"\n\t* {TypeToString(kv.Key.From)} --> {TypeToString(kv.Key.To)}")
+                    .Order()
+                );
+            logger.LogDebug("TypeConverter has the following conversions defined:{lines}", lines);
+        }
     }
+}
+
+internal readonly struct FromToTypeDictionary<TValue> : IBasicDictionary<(Type From, Type To), TValue>
+{
+    private readonly Func<Type, IBasicDictionary<Type, TValue>> _newToDictionary;
+    private readonly IBasicDictionary<Type, IBasicDictionary<Type, TValue>> _fromToMap;
+
+    public FromToTypeDictionary(
+        Func<IBasicDictionary<Type, IBasicDictionary<Type, TValue>>>? newFromDictionary = null,
+        Func<Type, IBasicDictionary<Type, TValue>>? newToDictionary = null)
+    {
+        _newToDictionary = newToDictionary ?? (_ => new InheritingTypeDictionary<TValue>());
+        _fromToMap = newFromDictionary?.Invoke() ?? new InheritingTypeDictionary<IBasicDictionary<Type, TValue>>();
+    }
+
+    public IEnumerator<KeyValuePair<(Type From, Type To), TValue>> GetEnumerator() =>
+        _fromToMap
+            .SelectMany(
+                kvFrom => kvFrom.Value,
+                (kvFrom, kvTo) => KeyValuePair.Create((kvFrom.Key, kvTo.Key), kvTo.Value))
+            .ToList()
+            .GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public int Count => _fromToMap.Sum(kv => kv.Value.Count);
+
+    public void Add((Type From, Type To) keyPair, TValue value)
+    {
+        var func = _newToDictionary;
+        _fromToMap.GetOrAddValue(keyPair.From, func).Add(keyPair.To, value);
+    }
+
+    public bool TryGetValue((Type From, Type To) keyPair, [MaybeNullWhen(false)] out TValue value)
+    {
+        value = default;
+        return _fromToMap.TryGetValue(keyPair.From, out var toDictionary)
+               && toDictionary.TryGetValue(keyPair.To, out value);
+    }
+}
+
+internal interface IBasicDictionary<TKey, TValue> :
+    IReadOnlyCollection<KeyValuePair<TKey, TValue>>,
+    IEnumerable<KeyValuePair<TKey, TValue>>,
+    IEnumerable
+{
+    void Add(TKey key, TValue value);
+    bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value);
+}
+
+file static class BasicDictionaryExtensions
+{
+    public static TValue GetOrAddValue<TKey, TValue>(
+        this IBasicDictionary<TKey, TValue> d,
+        TKey key,
+        Func<TKey, TValue> addValue)
+    {
+        if (d.TryGetValue(key, out var value))
+            return value;
+
+        value = addValue(key);
+        d.Add(key, value);
+        return value;
+    }
+}
+
+file readonly struct InheritingTypeDictionary<TValue>() : IBasicDictionary<Type, TValue>
+{
+    private readonly ExactTypeDictionary<TValue> _types = new();
+    private readonly ExactTypeDictionary<TValue> _genTypeDefinitions = new();
+
+    public void Add(Type key, TValue value)
+    {
+        if (!IsTypeAllowed(key))
+            throw new ArgumentException("Cannot add object or ValueType to InheritingTypeDictionary");
+
+        if (key.IsGenericTypeDefinition)
+            _genTypeDefinitions.Add(key, value);
+
+        else
+            _types.Add(key, value);
+    }
+
+    public bool TryGetValue(Type key, [MaybeNullWhen(false)] out TValue value)
+    {
+        if (!IsTypeAllowed(key))
+        {
+            value = default;
+            return false;
+        }
+
+        ExactTypeDictionary<TValue> d = key.IsGenericTypeDefinition
+                                            ? _genTypeDefinitions
+                                            : _types;
+        while (true)
+        {
+            if (d.Count > 0)
+            {
+                // Try exact type first
+                if (d.TryGetValue(key, out value)) return true;
+
+                // Then try base types and interfaces
+                foreach (var t in key.BaseTypesAndInterfaces().Where(t => IsTypeAllowed(t)))
+                    if (d.TryGetValue(t, out value))
+                        return true;
+            }
+
+            // Then try again on the generic type definition if applicable
+            if (key.IsConstructedGenericType)
+            {
+                key = key.GetGenericTypeDefinition();
+                d = _genTypeDefinitions;
+                continue;
+            }
+
+            // No match
+            value = default;
+            return false;
+        }
+    }
+
+    private static bool IsTypeAllowed(Type key)
+    {
+        return true;
+    }
+
+    public IEnumerator<KeyValuePair<Type, TValue>> GetEnumerator()
+    {
+        foreach (var kv in _types)
+            yield return kv;
+
+        foreach (var kv in _genTypeDefinitions)
+            yield return kv;
+    }
+
+    public int Count => _types.Count + _genTypeDefinitions.Count;
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+}
+
+file readonly struct ExactTypeDictionary<TValue>() : IBasicDictionary<Type, TValue>
+{
+    private readonly Dictionary<Type, TValue> _types = new();
+
+    public void Add(Type key, TValue value) =>
+        _types.Add(key, value);
+
+    public bool TryGetValue(Type key, [MaybeNullWhen(false)] out TValue value) =>
+        _types.TryGetValue(key, out value);
+
+    public IEnumerator<KeyValuePair<Type, TValue>> GetEnumerator() =>
+        _types.GetEnumerator();
+
+    public int Count =>
+        _types.Count;
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

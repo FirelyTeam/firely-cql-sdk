@@ -72,50 +72,57 @@ internal partial class CqlOperatorsBinder
         Expression[] arguments,
         bool throwError = true)
     {
-        var candidates = ResolveMethodInfosWithPotentialArgumentConversions(methodName, arguments).ToArray();
+        (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates = ResolveMethodInfosWithPotentialArgumentConversions(methodName, arguments).ToArray();
 
         var candidate = candidates switch
         {
-            []                 => (null, []),
-            [{ } only]         => (only.method, only.arguments),
-            _                  => PickCandidate(candidates)
+            []         => candidates.FirstOrDefault(), // always default
+            [{ } only] => only,
+            _          => PickCandidate(candidates)
         };
 
-        if (candidate.method is null && throwError)
+        if (candidate.method is null)
         {
-            throw new ArgumentException(
-                NoCandidatesErrorMessage(),
-                nameof(methodName));
+            if (throwError)
+            {
+                throw new ArgumentException(
+                    NoCandidatesErrorMessage(),
+                    nameof(methodName));
+            }
+        }
+        else if (candidate.conversionMethods.Any(cm => cm == TypeConversion.SuperType))
+        {
+            var inputText = InputMethodAndParametersToString();
+            var candidateText = candidate.method.WriteCSharp(CSharpWriteMethodOptions);
+
+            _logger?.LogWarning(
+                "Candidate for method {input}\nhas one of the arguments casting to a sub type: {candidateText}",
+                inputText,
+                candidateText);
         }
 
-        return candidate;
+        return (candidate.method, candidate.arguments);
 
-        (MethodInfo? method, Expression[] arguments) PickCandidate(
+        (MethodInfo? method, Expression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
             (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates)
         {
             if (arguments.Length > 0)
             {
                 var scoredCandidates = candidates
-                    .SelectToArray(t => (t.method, t.arguments, score:Score(t)));
+                    .SelectToArray(candidate => (candidate, score:Score(candidate)));
                 Array.Sort(scoredCandidates, (a, b) => a.score.CompareTo(b.score));
 
                 var inputText = InputMethodAndParametersToString();
                 var scoredCandidatesText = string.Concat(
-                    scoredCandidates.Select(t => $"{t.method.WriteCSharp(CSharpWriteMethodOptions)} ({t.score})"));
+                    scoredCandidates.Select(t => $"{t.candidate.method.WriteCSharp(CSharpWriteMethodOptions)} ({t.score})"));
 
                 _logger?.LogDebug(
                     "Multiple candidates found for method {input}\nPicking the top item with lowest score: {candidatesAndScore}",
                     inputText,
                     scoredCandidatesText);
 
-                return (scoredCandidates[0].method, scoredCandidates[0].arguments);
+                return scoredCandidates[0].candidate;
             }
-
-            // if (resultTypeHint is { } t)
-            // {
-            //     // Find best match on return type
-            //     throw new InvalidOperationException("");
-            // }
 
             throw new InvalidOperationException("");
         }
@@ -203,7 +210,7 @@ internal partial class CqlOperatorsBinder
                         {
                             genericMethod = method.MakeGenericMethod(genericTypeArg);
                         }
-                        catch (ArgumentException e) when (e.InnerException is VerificationException) 
+                        catch (ArgumentException e) when (e.InnerException is VerificationException)
                         {
                             // Generic type argument is not valid for this method due to constraints
                             continue;

@@ -112,7 +112,8 @@ internal record CSharpWriteTypeOptions(
         // Nested parts first.
         if (type is {
                 IsNested: true,
-                IsGenericTypeParameter: false, // GenericTypeParameters are nested, but not really.
+                IsGenericParameter: false, // Generic Parameters are nested, but not really.
+                //IsGenericTypeParameter: false,
                 DeclaringType: {} declaringType
         })
         {

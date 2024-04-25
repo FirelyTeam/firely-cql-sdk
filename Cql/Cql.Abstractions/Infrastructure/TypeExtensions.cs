@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -85,5 +86,20 @@ internal static partial class TypeExtensions
             .Select(ifc => ifc.GetGenericTypeDefinition())
             .Any(ifc => ifc == genericTypeDefinition);
         return hasInterfaceImplementing;
+    }
+
+    public static IEnumerable<Type> BaseTypesAndInterfaces(this Type type)
+    {
+        var subType = type.BaseType;
+        while (subType is not null)
+        {
+            yield return subType;
+            subType = subType?.BaseType;
+        }
+
+        foreach (var @interface in type.GetInterfaces())
+        {
+            yield return @interface;
+        }
     }
 }

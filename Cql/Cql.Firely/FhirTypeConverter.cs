@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -29,14 +29,14 @@ namespace Hl7.Cql.Fhir
         private static LRUCache<CqlDateTime>? _dateTimes;
 
         /// <summary>
-        /// Allows for the creation of a converter with the specified model 
+        /// Allows for the creation of a converter with the specified model
         /// </summary>
         /// <param name="model">the model</param>
         /// <param name="cacheSize">the size of the LRU cache</param>
         /// <returns>the type converter</returns>
         public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
         {
-            var lruCacheSize = cacheSize ?? 0;  
+            var lruCacheSize = cacheSize ?? 0;
             if (lruCacheSize > 0 && _dateTimes is null)
             {
                 _dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
@@ -141,13 +141,13 @@ namespace Hl7.Cql.Fhir
                 converter.Convert<CqlDate>(f.StartElement), converter.Convert<CqlDate>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<CqlQuantity>(
                     converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
-            add((M.Range f) => new CqlInterval<decimal?>(converter.Convert<decimal?>(f.Low), converter.Convert<decimal?>(f.High), 
+            add((M.Range f) => new CqlInterval<decimal?>(converter.Convert<decimal?>(f.Low), converter.Convert<decimal?>(f.High),
                 lowClosed: true, highClosed: true));
-            add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High), 
+            add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High),
                 lowClosed: true, highClosed: true));
-            
+
             add((M.Id id) => id.Value);
-            
+
             add((M.PositiveInt pi) => new M.Integer(pi.Value));
             add((M.PositiveInt pi) => pi.ToString());
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));
@@ -177,25 +177,30 @@ namespace Hl7.Cql.Fhir
             // since the ELM->CQL generator does not always insert a ToString() where we would
             // need it (i.e. when it know that a choice type is a string, but we don't).
             string? ConvertChoiceTypeToString(M.DataType dt)
-            { 
+            {
                 return dt switch
                 {
                     M.FhirString fs => fs.Value,
                     M.PrimitiveType { ObjectValue: string os } => os,
                     M.PrimitiveType pt => pt.ObjectValue?.ToString(),
-                    _ => throw new InvalidCastException($"Cannot cast a FHIR value of type {dt.TypeName} to a string")  
+                    _ => throw new InvalidCastException($"Cannot cast a FHIR value of type {dt.TypeName} to a string")
                 };
             }
         }
 
 
+        /*
         private class DataTypeSubTypeConverter(TypeConverter converter) : ITypeConverterEntry
         {
-            public bool Handles(Type from, Type to) => from == typeof(M.DataType);
+            public bool Handles(Type from, Type to)
+            {
+                var handles = from == typeof(M.DataType);
+                return handles;
+            }
 
             public object? Convert(object? instance, Type to)
             {
-                var toIsDataType = to.IsAssignableTo(typeof(M.DataType)); 
+                var toIsDataType = to.IsAssignableTo(typeof(M.DataType));
                 return (instance, toIsDataType) switch
                 {
                     (M.DataType, true) => instance,
@@ -204,10 +209,13 @@ namespace Hl7.Cql.Fhir
                 };
             }
         }
+        */
 
         internal static TypeConverter ConvertDataTypeChoices(this TypeConverter converter)
         {
-            converter.AddConverter(new DataTypeSubTypeConverter(converter));            
+            //converter.AddConverter(new DataTypeSubTypeConverter(converter));
+            converter.AddConversion(typeof(M.DataType), typeof(object),
+                                    instance => throw new NotImplementedException());
             return converter;
         }
 
@@ -373,7 +381,7 @@ namespace Hl7.Cql.Fhir
                     var systemAndCode = (M.ISystemAndCode)code;
                     return new CqlCode(systemAndCode.Code, systemAndCode.System);
                 });
-                converter.AddConversion(codeType, nullableEnumType, (code) => 
+                converter.AddConversion(codeType, nullableEnumType, (code) =>
                     code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
                 converter.AddConversion(enumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
                 converter.AddConversion(nullableEnumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);

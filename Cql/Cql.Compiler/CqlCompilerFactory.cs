@@ -27,7 +27,12 @@ internal class CqlCompilerFactory :
 
 
     public virtual TypeConverter TypeConverter => Singleton(fn: NewTypeConverter);
-    protected virtual TypeConverter NewTypeConverter() => FhirTypeConverter.Create(ModelInspector, CacheSize);
+    protected virtual TypeConverter NewTypeConverter()
+    {
+        var converter = FhirTypeConverter.Create(ModelInspector, CacheSize);
+        converter.LogAllConverters(Logger<TypeConverter>());
+        return converter;
+    }
 
 
     public virtual TypeResolver TypeResolver => Singleton(fn: NewTypeResolver);
