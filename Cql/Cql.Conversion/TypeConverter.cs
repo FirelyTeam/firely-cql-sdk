@@ -48,8 +48,12 @@ namespace Hl7.Cql.Conversion
         internal TypeConverter()
         {
             _converters = new(
-                newFromDictionary: () => new MatchExactTypeDictionary<IBasicDictionary<Type, Func<object, object>>>().HandleNullableValueTypes(),
-                newToDictionary: _ => new MatchDerivedTypesDictionary<Func<object, object>>());
+                newFromDictionary: () =>
+                    new MatchExactTypeDictionary<IBasicDictionary<Type, Func<object, object>>>()
+                        .HandleNullableValueTypes(),
+                newToDictionary: _ =>
+                    new MatchDerivedTypesDictionary<Func<object, object>>()
+                        .HandleNullableValueTypes());
         }
 
         /// <summary>
