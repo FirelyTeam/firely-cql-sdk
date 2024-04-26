@@ -276,7 +276,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private CqlCode[] LOINC_2_69_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 			new CqlCode("8867-4", "http://loinc.org", null, null),
@@ -294,10 +294,10 @@ public class HybridHWRFHIR_1_3_005
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("HybridHWRFHIR-1.3.005", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("HybridHWRFHIR-1.3.005", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -308,8 +308,8 @@ public class HybridHWRFHIR_1_3_005
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -320,7 +320,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private IEnumerable<Coding> SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
+		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -331,7 +331,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
@@ -342,7 +342,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private IEnumerable<Coding> SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
+		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 
 		return a_;
 	}
@@ -353,7 +353,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 
 		return a_;
 	}
@@ -365,174 +365,174 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("HospitalizationWithObservation")]
 	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
 	{
-		var a_ = new Encounter[]
+		Encounter[] a_ = new Encounter[]
 		{
 			TheEncounter,
 		};
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
-			var e_ = this.Emergency_Department_Visit();
-			var f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, null);
+			CqlValueSet e_ = this.Emergency_Department_Visit();
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, null);
 			bool? g_(Encounter LastED)
 			{
-				var ab_ = FHIRHelpers_4_0_001.ToInterval(LastED?.Period);
-				var ac_ = context.Operators.End(ab_);
-				var ad_ = this.Observation_Services();
-				var ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
+				CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_0_001.ToInterval(LastED?.Period);
+				CqlDateTime ac_ = context.Operators.End(ab_);
+				CqlValueSet ad_ = this.Observation_Services();
+				IEnumerable<Encounter> ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? af_(Encounter LastObs)
 				{
-					var bq_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
-					var br_ = context.Operators.End(bq_);
-					var bs_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
-					var bt_ = context.Operators.Start(bs_);
-					var bu_ = context.Operators.Quantity(1m, "hour");
-					var bv_ = context.Operators.Subtract(bt_, bu_);
-					var bx_ = context.Operators.Start(bs_);
-					var by_ = context.Operators.Interval(bv_, bx_, true, true);
-					var bz_ = context.Operators.In<CqlDateTime>(br_, by_, null);
-					var cb_ = context.Operators.Start(bs_);
-					var cc_ = context.Operators.Not((bool?)(cb_ is null));
-					var cd_ = context.Operators.And(bz_, cc_);
+					CqlInterval<CqlDateTime> bq_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+					CqlDateTime br_ = context.Operators.End(bq_);
+					CqlInterval<CqlDateTime> bs_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+					CqlDateTime bt_ = context.Operators.Start(bs_);
+					CqlQuantity bu_ = context.Operators.Quantity(1m, "hour");
+					CqlDateTime bv_ = context.Operators.Subtract(bt_, bu_);
+					CqlDateTime bx_ = context.Operators.Start(bs_);
+					CqlInterval<CqlDateTime> by_ = context.Operators.Interval(bv_, bx_, true, true);
+					bool? bz_ = context.Operators.In<CqlDateTime>(br_, by_, null);
+					CqlDateTime cb_ = context.Operators.Start(bs_);
+					bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+					bool? cd_ = context.Operators.And(bz_, cc_);
 
 					return cd_;
 				};
-				var ag_ = context.Operators.Where<Encounter>(ae_, af_);
+				IEnumerable<Encounter> ag_ = context.Operators.Where<Encounter>(ae_, af_);
 				object ah_(Encounter @this)
 				{
-					var ce_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
-					var cf_ = context.Operators.End(ce_);
+					CqlInterval<CqlDateTime> ce_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+					CqlDateTime cf_ = context.Operators.End(ce_);
 
 					return cf_;
 				};
-				var ai_ = context.Operators.SortBy<Encounter>(ag_, ah_, System.ComponentModel.ListSortDirection.Ascending);
-				var aj_ = context.Operators.Last<Encounter>(ai_);
-				var ak_ = FHIRHelpers_4_0_001.ToInterval(aj_?.Period);
-				var al_ = context.Operators.Start(ak_);
-				var am_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
-				var an_ = context.Operators.Start(am_);
-				var ao_ = context.Operators.Quantity(1m, "hour");
-				var ap_ = context.Operators.Subtract((al_ ?? an_), ao_);
-				var ar_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
+				IEnumerable<Encounter> ai_ = context.Operators.SortBy<Encounter>(ag_, ah_, System.ComponentModel.ListSortDirection.Ascending);
+				Encounter aj_ = context.Operators.Last<Encounter>(ai_);
+				CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_0_001.ToInterval(aj_?.Period);
+				CqlDateTime al_ = context.Operators.Start(ak_);
+				CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+				CqlDateTime an_ = context.Operators.Start(am_);
+				CqlQuantity ao_ = context.Operators.Quantity(1m, "hour");
+				CqlDateTime ap_ = context.Operators.Subtract((al_ ?? an_), ao_);
+				IEnumerable<Encounter> ar_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? as_(Encounter LastObs)
 				{
-					var cg_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
-					var ch_ = context.Operators.End(cg_);
-					var ci_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
-					var cj_ = context.Operators.Start(ci_);
-					var ck_ = context.Operators.Quantity(1m, "hour");
-					var cl_ = context.Operators.Subtract(cj_, ck_);
-					var cn_ = context.Operators.Start(ci_);
-					var co_ = context.Operators.Interval(cl_, cn_, true, true);
-					var cp_ = context.Operators.In<CqlDateTime>(ch_, co_, null);
-					var cr_ = context.Operators.Start(ci_);
-					var cs_ = context.Operators.Not((bool?)(cr_ is null));
-					var ct_ = context.Operators.And(cp_, cs_);
+					CqlInterval<CqlDateTime> cg_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+					CqlDateTime ch_ = context.Operators.End(cg_);
+					CqlInterval<CqlDateTime> ci_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+					CqlDateTime cj_ = context.Operators.Start(ci_);
+					CqlQuantity ck_ = context.Operators.Quantity(1m, "hour");
+					CqlDateTime cl_ = context.Operators.Subtract(cj_, ck_);
+					CqlDateTime cn_ = context.Operators.Start(ci_);
+					CqlInterval<CqlDateTime> co_ = context.Operators.Interval(cl_, cn_, true, true);
+					bool? cp_ = context.Operators.In<CqlDateTime>(ch_, co_, null);
+					CqlDateTime cr_ = context.Operators.Start(ci_);
+					bool? cs_ = context.Operators.Not((bool?)(cr_ is null));
+					bool? ct_ = context.Operators.And(cp_, cs_);
 
 					return ct_;
 				};
-				var at_ = context.Operators.Where<Encounter>(ar_, as_);
+				IEnumerable<Encounter> at_ = context.Operators.Where<Encounter>(ar_, as_);
 				object au_(Encounter @this)
 				{
-					var cu_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
-					var cv_ = context.Operators.End(cu_);
+					CqlInterval<CqlDateTime> cu_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+					CqlDateTime cv_ = context.Operators.End(cu_);
 
 					return cv_;
 				};
-				var av_ = context.Operators.SortBy<Encounter>(at_, au_, System.ComponentModel.ListSortDirection.Ascending);
-				var aw_ = context.Operators.Last<Encounter>(av_);
-				var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
-				var ay_ = context.Operators.Start(ax_);
-				var ba_ = context.Operators.Start(am_);
-				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), true, true);
-				var bc_ = context.Operators.In<CqlDateTime>(ac_, bb_, null);
-				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
+				IEnumerable<Encounter> av_ = context.Operators.SortBy<Encounter>(at_, au_, System.ComponentModel.ListSortDirection.Ascending);
+				Encounter aw_ = context.Operators.Last<Encounter>(av_);
+				CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
+				CqlDateTime ay_ = context.Operators.Start(ax_);
+				CqlDateTime ba_ = context.Operators.Start(am_);
+				CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), true, true);
+				bool? bc_ = context.Operators.In<CqlDateTime>(ac_, bb_, null);
+				IEnumerable<Encounter> be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
 				{
-					var cw_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
-					var cx_ = context.Operators.End(cw_);
-					var cy_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
-					var cz_ = context.Operators.Start(cy_);
-					var da_ = context.Operators.Quantity(1m, "hour");
-					var db_ = context.Operators.Subtract(cz_, da_);
-					var dd_ = context.Operators.Start(cy_);
-					var de_ = context.Operators.Interval(db_, dd_, true, true);
-					var df_ = context.Operators.In<CqlDateTime>(cx_, de_, null);
-					var dh_ = context.Operators.Start(cy_);
-					var di_ = context.Operators.Not((bool?)(dh_ is null));
-					var dj_ = context.Operators.And(df_, di_);
+					CqlInterval<CqlDateTime> cw_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+					CqlDateTime cx_ = context.Operators.End(cw_);
+					CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+					CqlDateTime cz_ = context.Operators.Start(cy_);
+					CqlQuantity da_ = context.Operators.Quantity(1m, "hour");
+					CqlDateTime db_ = context.Operators.Subtract(cz_, da_);
+					CqlDateTime dd_ = context.Operators.Start(cy_);
+					CqlInterval<CqlDateTime> de_ = context.Operators.Interval(db_, dd_, true, true);
+					bool? df_ = context.Operators.In<CqlDateTime>(cx_, de_, null);
+					CqlDateTime dh_ = context.Operators.Start(cy_);
+					bool? di_ = context.Operators.Not((bool?)(dh_ is null));
+					bool? dj_ = context.Operators.And(df_, di_);
 
 					return dj_;
 				};
-				var bg_ = context.Operators.Where<Encounter>(be_, bf_);
+				IEnumerable<Encounter> bg_ = context.Operators.Where<Encounter>(be_, bf_);
 				object bh_(Encounter @this)
 				{
-					var dk_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
-					var dl_ = context.Operators.End(dk_);
+					CqlInterval<CqlDateTime> dk_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+					CqlDateTime dl_ = context.Operators.End(dk_);
 
 					return dl_;
 				};
-				var bi_ = context.Operators.SortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
-				var bj_ = context.Operators.Last<Encounter>(bi_);
-				var bk_ = FHIRHelpers_4_0_001.ToInterval(bj_?.Period);
-				var bl_ = context.Operators.Start(bk_);
-				var bn_ = context.Operators.Start(am_);
-				var bo_ = context.Operators.Not((bool?)((bl_ ?? bn_) is null));
-				var bp_ = context.Operators.And(bc_, bo_);
+				IEnumerable<Encounter> bi_ = context.Operators.SortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
+				Encounter bj_ = context.Operators.Last<Encounter>(bi_);
+				CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_0_001.ToInterval(bj_?.Period);
+				CqlDateTime bl_ = context.Operators.Start(bk_);
+				CqlDateTime bn_ = context.Operators.Start(am_);
+				bool? bo_ = context.Operators.Not((bool?)((bl_ ?? bn_) is null));
+				bool? bp_ = context.Operators.And(bc_, bo_);
 
 				return bp_;
 			};
-			var h_ = context.Operators.Where<Encounter>(f_, g_);
+			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
-				var dm_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
-				var dn_ = context.Operators.End(dm_);
+				CqlInterval<CqlDateTime> dm_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+				CqlDateTime dn_ = context.Operators.End(dm_);
 
 				return dn_;
 			};
-			var j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-			var k_ = context.Operators.Last<Encounter>(j_);
-			var l_ = FHIRHelpers_4_0_001.ToInterval(k_?.Period);
-			var m_ = context.Operators.Start(l_);
-			var n_ = this.Observation_Services();
-			var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+			IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
+			Encounter k_ = context.Operators.Last<Encounter>(j_);
+			CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.ToInterval(k_?.Period);
+			CqlDateTime m_ = context.Operators.Start(l_);
+			CqlValueSet n_ = this.Observation_Services();
+			IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
 			bool? p_(Encounter LastObs)
 			{
-				var do_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
-				var dp_ = context.Operators.End(do_);
-				var dq_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
-				var dr_ = context.Operators.Start(dq_);
-				var ds_ = context.Operators.Quantity(1m, "hour");
-				var dt_ = context.Operators.Subtract(dr_, ds_);
-				var dv_ = context.Operators.Start(dq_);
-				var dw_ = context.Operators.Interval(dt_, dv_, true, true);
-				var dx_ = context.Operators.In<CqlDateTime>(dp_, dw_, null);
-				var dz_ = context.Operators.Start(dq_);
-				var ea_ = context.Operators.Not((bool?)(dz_ is null));
-				var eb_ = context.Operators.And(dx_, ea_);
+				CqlInterval<CqlDateTime> do_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+				CqlDateTime dp_ = context.Operators.End(do_);
+				CqlInterval<CqlDateTime> dq_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+				CqlDateTime dr_ = context.Operators.Start(dq_);
+				CqlQuantity ds_ = context.Operators.Quantity(1m, "hour");
+				CqlDateTime dt_ = context.Operators.Subtract(dr_, ds_);
+				CqlDateTime dv_ = context.Operators.Start(dq_);
+				CqlInterval<CqlDateTime> dw_ = context.Operators.Interval(dt_, dv_, true, true);
+				bool? dx_ = context.Operators.In<CqlDateTime>(dp_, dw_, null);
+				CqlDateTime dz_ = context.Operators.Start(dq_);
+				bool? ea_ = context.Operators.Not((bool?)(dz_ is null));
+				bool? eb_ = context.Operators.And(dx_, ea_);
 
 				return eb_;
 			};
-			var q_ = context.Operators.Where<Encounter>(o_, p_);
+			IEnumerable<Encounter> q_ = context.Operators.Where<Encounter>(o_, p_);
 			object r_(Encounter @this)
 			{
-				var ec_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
-				var ed_ = context.Operators.End(ec_);
+				CqlInterval<CqlDateTime> ec_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+				CqlDateTime ed_ = context.Operators.End(ec_);
 
 				return ed_;
 			};
-			var s_ = context.Operators.SortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
-			var t_ = context.Operators.Last<Encounter>(s_);
-			var u_ = FHIRHelpers_4_0_001.ToInterval(t_?.Period);
-			var v_ = context.Operators.Start(u_);
-			var w_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
-			var x_ = context.Operators.Start(w_);
-			var z_ = context.Operators.End(w_);
-			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
+			IEnumerable<Encounter> s_ = context.Operators.SortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
+			Encounter t_ = context.Operators.Last<Encounter>(s_);
+			CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_0_001.ToInterval(t_?.Period);
+			CqlDateTime v_ = context.Operators.Start(u_);
+			CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+			CqlDateTime x_ = context.Operators.Start(w_);
+			CqlDateTime z_ = context.Operators.End(w_);
+			CqlInterval<CqlDateTime> aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
 
 			return aa_;
 		};
-		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
+		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -540,23 +540,23 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("LengthInDays")]
 	public int? LengthInDays(CqlInterval<CqlDateTime> Value)
 	{
-		var a_ = context.Operators.Start(Value);
-		var b_ = context.Operators.End(Value);
-		var c_ = context.Operators.DifferenceBetween(a_, b_, "day");
+		CqlDateTime a_ = context.Operators.Start(Value);
+		CqlDateTime b_ = context.Operators.End(Value);
+		int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 
 		return c_;
 	}
 
 	private IEnumerable<Encounter> Inpatient_Encounters_Value()
 	{
-		var a_ = this.Encounter_Inpatient();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Medicare_payer();
-		var d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, null);
-		var e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
+		CqlValueSet a_ = this.Encounter_Inpatient();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Medicare_payer();
+		IEnumerable<Coverage> d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, null);
+		IEnumerable<ValueTuple<Encounter,Coverage>> e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
 		Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV f_(ValueTuple<Encounter,Coverage> _valueTuple)
 		{
-			var l_ = new Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV
+			Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV l_ = new Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV
 			{
 				InpatientEncounter = _valueTuple.Item1,
 				Payer = _valueTuple.Item2,
@@ -564,34 +564,34 @@ public class HybridHWRFHIR_1_3_005
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,Coverage>, Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
+		IEnumerable<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV> g_ = context.Operators.Select<ValueTuple<Encounter,Coverage>, Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
 		bool? h_(Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv)
 		{
-			var m_ = context.Operators.Convert<string>(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.StatusElement);
-			var n_ = context.Operators.Equal(m_, "finished");
-			var o_ = this.HospitalizationWithObservation(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter);
-			var p_ = this.LengthInDays(o_);
-			var q_ = context.Operators.Less(p_, 365);
-			var r_ = context.Operators.And(n_, q_);
-			var s_ = FHIRHelpers_4_0_001.ToInterval(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.Period);
-			var t_ = context.Operators.End(s_);
-			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
-			var w_ = context.Operators.And(r_, v_);
-			var x_ = this.Patient();
-			var y_ = context.Operators.Convert<CqlDate>(x_?.BirthDateElement?.Value);
-			var aa_ = context.Operators.Start(s_);
-			var ab_ = context.Operators.DateFrom(aa_);
-			var ac_ = context.Operators.CalculateAgeAt(y_, ab_, "year");
-			var ad_ = context.Operators.GreaterOrEqual(ac_, 65);
-			var ae_ = context.Operators.And(w_, ad_);
+			string m_ = context.Operators.Convert<string>(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.StatusElement);
+			bool? n_ = context.Operators.Equal(m_, "finished");
+			CqlInterval<CqlDateTime> o_ = this.HospitalizationWithObservation(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter);
+			int? p_ = this.LengthInDays(o_);
+			bool? q_ = context.Operators.Less(p_, 365);
+			bool? r_ = context.Operators.And(n_, q_);
+			CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_0_001.ToInterval(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.Period);
+			CqlDateTime t_ = context.Operators.End(s_);
+			CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
+			bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
+			bool? w_ = context.Operators.And(r_, v_);
+			Patient x_ = this.Patient();
+			CqlDate y_ = context.Operators.Convert<CqlDate>(x_?.BirthDateElement?.Value);
+			CqlDateTime aa_ = context.Operators.Start(s_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
+			int? ac_ = context.Operators.CalculateAgeAt(y_, ab_, "year");
+			bool? ad_ = context.Operators.GreaterOrEqual(ac_, 65);
+			bool? ae_ = context.Operators.And(w_, ad_);
 
 			return ae_;
 		};
-		var i_ = context.Operators.Where<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
+		IEnumerable<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV> i_ = context.Operators.Where<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
 		Encounter j_(Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
 			tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter;
-		var k_ = context.Operators.Select<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
+		IEnumerable<Encounter> k_ = context.Operators.Select<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
 
 		return k_;
 	}
@@ -602,7 +602,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private IEnumerable<Encounter> Initial_Population_Value()
 	{
-		var a_ = this.Inpatient_Encounters();
+		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 
 		return a_;
 	}
@@ -614,106 +614,106 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("FirstPhysicalExamWithEncounterId")]
 	public IEnumerable<string> FirstPhysicalExamWithEncounterId(IEnumerable<Observation> ExamList, string CCDE)
 	{
-		var a_ = this.Inpatient_Encounters();
+		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			var d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			var e_ = context.Operators.Concatenate((d_ ?? ""), ",");
-			var f_ = context.Operators.Convert<string>(Encounter?.IdElement);
-			var g_ = context.Operators.Concatenate((e_ ?? ""), (f_ ?? ""));
-			var h_ = context.Operators.Concatenate((g_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
+			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string f_ = context.Operators.Convert<string>(Encounter?.IdElement);
+			string g_ = context.Operators.Concatenate((e_ ?? ""), (f_ ?? ""));
+			string h_ = context.Operators.Concatenate((g_ ?? ""), ",");
 			bool? i_(Observation Exam)
 			{
-				var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
-				var ab_ = context.Operators.Start(aa_);
-				var ac_ = context.Operators.Not((bool?)(ab_ is null));
-				var ae_ = context.Operators.Start(aa_);
-				var af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
-				var ag_ = context.Operators.Start(af_);
-				var ah_ = context.Operators.Quantity(1440m, "minutes");
-				var ai_ = context.Operators.Subtract(ag_, ah_);
-				var ak_ = context.Operators.Start(af_);
-				var al_ = context.Operators.Quantity(120m, "minutes");
-				var am_ = context.Operators.Add(ak_, al_);
-				var an_ = context.Operators.Interval(ai_, am_, true, true);
-				var ao_ = context.Operators.In<CqlDateTime>(ae_, an_, null);
-				var ap_ = context.Operators.And(ac_, ao_);
-				var aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
-				var ar_ = new string[]
+				CqlInterval<CqlDateTime> aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				CqlDateTime ab_ = context.Operators.Start(aa_);
+				bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
+				CqlDateTime ae_ = context.Operators.Start(aa_);
+				CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				CqlDateTime ag_ = context.Operators.Start(af_);
+				CqlQuantity ah_ = context.Operators.Quantity(1440m, "minutes");
+				CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
+				CqlDateTime ak_ = context.Operators.Start(af_);
+				CqlQuantity al_ = context.Operators.Quantity(120m, "minutes");
+				CqlDateTime am_ = context.Operators.Add(ak_, al_);
+				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ai_, am_, true, true);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ae_, an_, null);
+				bool? ap_ = context.Operators.And(ac_, ao_);
+				string aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
+				string[] ar_ = new string[]
 				{
 					"final",
 					"amended",
 					"preliminary",
 				};
-				var as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
-				var at_ = context.Operators.And(ap_, as_);
-				var au_ = context.Operators.Not((bool?)(Exam?.Value is null));
-				var av_ = context.Operators.And(at_, au_);
+				bool? as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
+				bool? at_ = context.Operators.And(ap_, as_);
+				bool? au_ = context.Operators.Not((bool?)(Exam?.Value is null));
+				bool? av_ = context.Operators.And(at_, au_);
 
 				return av_;
 			};
-			var j_ = context.Operators.Where<Observation>(ExamList, i_);
+			IEnumerable<Observation> j_ = context.Operators.Where<Observation>(ExamList, i_);
 			object k_(Observation @this)
 			{
-				var aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
-				var ax_ = context.Operators.Start(aw_);
+				CqlInterval<CqlDateTime> aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				CqlDateTime ax_ = context.Operators.Start(aw_);
 
 				return ax_;
 			};
-			var l_ = context.Operators.SortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-			var m_ = context.Operators.First<Observation>(l_);
-			var n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
-			var o_ = context.Operators.ConvertQuantityToString(n_);
-			var p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
-			var q_ = context.Operators.Concatenate((p_ ?? ""), ",");
+			IEnumerable<Observation> l_ = context.Operators.SortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+			Observation m_ = context.Operators.First<Observation>(l_);
+			CqlQuantity n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
+			string o_ = context.Operators.ConvertQuantityToString(n_);
+			string p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
+			string q_ = context.Operators.Concatenate((p_ ?? ""), ",");
 			bool? r_(Observation Exam)
 			{
-				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
-				var az_ = context.Operators.Start(ay_);
-				var ba_ = context.Operators.Not((bool?)(az_ is null));
-				var bc_ = context.Operators.Start(ay_);
-				var bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
-				var be_ = context.Operators.Start(bd_);
-				var bf_ = context.Operators.Quantity(1440m, "minutes");
-				var bg_ = context.Operators.Subtract(be_, bf_);
-				var bi_ = context.Operators.Start(bd_);
-				var bj_ = context.Operators.Quantity(120m, "minutes");
-				var bk_ = context.Operators.Add(bi_, bj_);
-				var bl_ = context.Operators.Interval(bg_, bk_, true, true);
-				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, null);
-				var bn_ = context.Operators.And(ba_, bm_);
-				var bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
-				var bp_ = new string[]
+				CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				CqlDateTime az_ = context.Operators.Start(ay_);
+				bool? ba_ = context.Operators.Not((bool?)(az_ is null));
+				CqlDateTime bc_ = context.Operators.Start(ay_);
+				CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				CqlDateTime be_ = context.Operators.Start(bd_);
+				CqlQuantity bf_ = context.Operators.Quantity(1440m, "minutes");
+				CqlDateTime bg_ = context.Operators.Subtract(be_, bf_);
+				CqlDateTime bi_ = context.Operators.Start(bd_);
+				CqlQuantity bj_ = context.Operators.Quantity(120m, "minutes");
+				CqlDateTime bk_ = context.Operators.Add(bi_, bj_);
+				CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(bg_, bk_, true, true);
+				bool? bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, null);
+				bool? bn_ = context.Operators.And(ba_, bm_);
+				string bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
+				string[] bp_ = new string[]
 				{
 					"final",
 					"amended",
 					"preliminary",
 				};
-				var bq_ = context.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
-				var br_ = context.Operators.And(bn_, bq_);
-				var bs_ = context.Operators.Not((bool?)(Exam?.Value is null));
-				var bt_ = context.Operators.And(br_, bs_);
+				bool? bq_ = context.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
+				bool? br_ = context.Operators.And(bn_, bq_);
+				bool? bs_ = context.Operators.Not((bool?)(Exam?.Value is null));
+				bool? bt_ = context.Operators.And(br_, bs_);
 
 				return bt_;
 			};
-			var s_ = context.Operators.Where<Observation>(ExamList, r_);
+			IEnumerable<Observation> s_ = context.Operators.Where<Observation>(ExamList, r_);
 			object t_(Observation @this)
 			{
-				var bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
-				var bv_ = context.Operators.Start(bu_);
+				CqlInterval<CqlDateTime> bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				CqlDateTime bv_ = context.Operators.Start(bu_);
 
 				return bv_;
 			};
-			var u_ = context.Operators.SortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
-			var v_ = context.Operators.First<Observation>(u_);
-			var w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(v_?.Effective);
-			var x_ = context.Operators.Start(w_);
-			var y_ = context.Operators.ConvertDateTimeToString(x_);
-			var z_ = context.Operators.Concatenate((q_ ?? ""), (y_ ?? ""));
+			IEnumerable<Observation> u_ = context.Operators.SortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
+			Observation v_ = context.Operators.First<Observation>(u_);
+			CqlInterval<CqlDateTime> w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(v_?.Effective);
+			CqlDateTime x_ = context.Operators.Start(w_);
+			string y_ = context.Operators.ConvertDateTimeToString(x_);
+			string z_ = context.Operators.Concatenate((q_ ?? ""), (y_ ?? ""));
 
 			return z_;
 		};
-		var c_ = context.Operators.Select<Encounter, string>(a_, b_);
+		IEnumerable<string> c_ = context.Operators.Select<Encounter, string>(a_, b_);
 
 		return c_;
 	}
@@ -721,104 +721,104 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("FirstPhysicalExamWithEncounterIdUsingLabTiming")]
 	public IEnumerable<string> FirstPhysicalExamWithEncounterIdUsingLabTiming(IEnumerable<Observation> ExamList, string CCDE)
 	{
-		var a_ = this.Inpatient_Encounters();
+		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			var d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			var e_ = context.Operators.Concatenate((d_ ?? ""), ",");
-			var f_ = context.Operators.Convert<string>(Encounter?.IdElement);
-			var g_ = context.Operators.Concatenate((e_ ?? ""), (f_ ?? ""));
-			var h_ = context.Operators.Concatenate((g_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
+			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string f_ = context.Operators.Convert<string>(Encounter?.IdElement);
+			string g_ = context.Operators.Concatenate((e_ ?? ""), (f_ ?? ""));
+			string h_ = context.Operators.Concatenate((g_ ?? ""), ",");
 			bool? i_(Observation Exam)
 			{
-				var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
-				var ab_ = context.Operators.Start(aa_);
-				var ac_ = context.Operators.Not((bool?)(ab_ is null));
-				var ae_ = context.Operators.Start(aa_);
-				var af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
-				var ag_ = context.Operators.Start(af_);
-				var ah_ = context.Operators.Quantity(1440m, "minutes");
-				var ai_ = context.Operators.Subtract(ag_, ah_);
-				var ak_ = context.Operators.Start(af_);
-				var am_ = context.Operators.Add(ak_, ah_);
-				var an_ = context.Operators.Interval(ai_, am_, true, true);
-				var ao_ = context.Operators.In<CqlDateTime>(ae_, an_, null);
-				var ap_ = context.Operators.And(ac_, ao_);
-				var aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
-				var ar_ = new string[]
+				CqlInterval<CqlDateTime> aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				CqlDateTime ab_ = context.Operators.Start(aa_);
+				bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
+				CqlDateTime ae_ = context.Operators.Start(aa_);
+				CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				CqlDateTime ag_ = context.Operators.Start(af_);
+				CqlQuantity ah_ = context.Operators.Quantity(1440m, "minutes");
+				CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
+				CqlDateTime ak_ = context.Operators.Start(af_);
+				CqlDateTime am_ = context.Operators.Add(ak_, ah_);
+				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ai_, am_, true, true);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ae_, an_, null);
+				bool? ap_ = context.Operators.And(ac_, ao_);
+				string aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
+				string[] ar_ = new string[]
 				{
 					"final",
 					"amended",
 					"preliminary",
 				};
-				var as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
-				var at_ = context.Operators.And(ap_, as_);
-				var au_ = context.Operators.Not((bool?)(Exam?.Value is null));
-				var av_ = context.Operators.And(at_, au_);
+				bool? as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
+				bool? at_ = context.Operators.And(ap_, as_);
+				bool? au_ = context.Operators.Not((bool?)(Exam?.Value is null));
+				bool? av_ = context.Operators.And(at_, au_);
 
 				return av_;
 			};
-			var j_ = context.Operators.Where<Observation>(ExamList, i_);
+			IEnumerable<Observation> j_ = context.Operators.Where<Observation>(ExamList, i_);
 			object k_(Observation @this)
 			{
-				var aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
-				var ax_ = context.Operators.Start(aw_);
+				CqlInterval<CqlDateTime> aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				CqlDateTime ax_ = context.Operators.Start(aw_);
 
 				return ax_;
 			};
-			var l_ = context.Operators.SortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-			var m_ = context.Operators.First<Observation>(l_);
-			var n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
-			var o_ = context.Operators.ConvertQuantityToString(n_);
-			var p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
-			var q_ = context.Operators.Concatenate((p_ ?? ""), ",");
+			IEnumerable<Observation> l_ = context.Operators.SortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+			Observation m_ = context.Operators.First<Observation>(l_);
+			CqlQuantity n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
+			string o_ = context.Operators.ConvertQuantityToString(n_);
+			string p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
+			string q_ = context.Operators.Concatenate((p_ ?? ""), ",");
 			bool? r_(Observation Exam)
 			{
-				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
-				var az_ = context.Operators.Start(ay_);
-				var ba_ = context.Operators.Not((bool?)(az_ is null));
-				var bc_ = context.Operators.Start(ay_);
-				var bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
-				var be_ = context.Operators.Start(bd_);
-				var bf_ = context.Operators.Quantity(1440m, "minutes");
-				var bg_ = context.Operators.Subtract(be_, bf_);
-				var bi_ = context.Operators.Start(bd_);
-				var bk_ = context.Operators.Add(bi_, bf_);
-				var bl_ = context.Operators.Interval(bg_, bk_, true, true);
-				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, null);
-				var bn_ = context.Operators.And(ba_, bm_);
-				var bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
-				var bp_ = new string[]
+				CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				CqlDateTime az_ = context.Operators.Start(ay_);
+				bool? ba_ = context.Operators.Not((bool?)(az_ is null));
+				CqlDateTime bc_ = context.Operators.Start(ay_);
+				CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				CqlDateTime be_ = context.Operators.Start(bd_);
+				CqlQuantity bf_ = context.Operators.Quantity(1440m, "minutes");
+				CqlDateTime bg_ = context.Operators.Subtract(be_, bf_);
+				CqlDateTime bi_ = context.Operators.Start(bd_);
+				CqlDateTime bk_ = context.Operators.Add(bi_, bf_);
+				CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(bg_, bk_, true, true);
+				bool? bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, null);
+				bool? bn_ = context.Operators.And(ba_, bm_);
+				string bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
+				string[] bp_ = new string[]
 				{
 					"final",
 					"amended",
 					"preliminary",
 				};
-				var bq_ = context.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
-				var br_ = context.Operators.And(bn_, bq_);
-				var bs_ = context.Operators.Not((bool?)(Exam?.Value is null));
-				var bt_ = context.Operators.And(br_, bs_);
+				bool? bq_ = context.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
+				bool? br_ = context.Operators.And(bn_, bq_);
+				bool? bs_ = context.Operators.Not((bool?)(Exam?.Value is null));
+				bool? bt_ = context.Operators.And(br_, bs_);
 
 				return bt_;
 			};
-			var s_ = context.Operators.Where<Observation>(ExamList, r_);
+			IEnumerable<Observation> s_ = context.Operators.Where<Observation>(ExamList, r_);
 			object t_(Observation @this)
 			{
-				var bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
-				var bv_ = context.Operators.Start(bu_);
+				CqlInterval<CqlDateTime> bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				CqlDateTime bv_ = context.Operators.Start(bu_);
 
 				return bv_;
 			};
-			var u_ = context.Operators.SortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
-			var v_ = context.Operators.First<Observation>(u_);
-			var w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(v_?.Effective);
-			var x_ = context.Operators.Start(w_);
-			var y_ = context.Operators.ConvertDateTimeToString(x_);
-			var z_ = context.Operators.Concatenate((q_ ?? ""), (y_ ?? ""));
+			IEnumerable<Observation> u_ = context.Operators.SortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
+			Observation v_ = context.Operators.First<Observation>(u_);
+			CqlInterval<CqlDateTime> w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(v_?.Effective);
+			CqlDateTime x_ = context.Operators.Start(w_);
+			string y_ = context.Operators.ConvertDateTimeToString(x_);
+			string z_ = context.Operators.Concatenate((q_ ?? ""), (y_ ?? ""));
 
 			return z_;
 		};
-		var c_ = context.Operators.Select<Encounter, string>(a_, b_);
+		IEnumerable<string> c_ = context.Operators.Select<Encounter, string>(a_, b_);
 
 		return c_;
 	}
@@ -826,137 +826,137 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("FirstLabTestWithEncounterId")]
 	public IEnumerable<string> FirstLabTestWithEncounterId(IEnumerable<Observation> LabList, string CCDE)
 	{
-		var a_ = this.Inpatient_Encounters();
+		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			var d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			var e_ = context.Operators.Concatenate((d_ ?? ""), ",");
-			var f_ = context.Operators.Convert<string>(Encounter?.IdElement);
-			var g_ = context.Operators.Concatenate((e_ ?? ""), (f_ ?? ""));
-			var h_ = context.Operators.Concatenate((g_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
+			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string f_ = context.Operators.Convert<string>(Encounter?.IdElement);
+			string g_ = context.Operators.Concatenate((e_ ?? ""), (f_ ?? ""));
+			string h_ = context.Operators.Concatenate((g_ ?? ""), ",");
 			bool? i_(Observation Lab)
 			{
-				var z_ = context.Operators.Not((bool?)(Lab?.IssuedElement is null));
-				var aa_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
-				var ab_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
-				var ac_ = context.Operators.Start(ab_);
-				var ad_ = context.Operators.Quantity(1440m, "minutes");
-				var ae_ = context.Operators.Subtract(ac_, ad_);
-				var ag_ = context.Operators.Start(ab_);
-				var ai_ = context.Operators.Add(ag_, ad_);
-				var aj_ = context.Operators.Interval(ae_, ai_, true, true);
-				var ak_ = context.Operators.In<CqlDateTime>(aa_, aj_, null);
-				var al_ = context.Operators.And(z_, ak_);
-				var am_ = context.Operators.Convert<string>(Lab?.StatusElement);
-				var an_ = new string[]
+				bool? z_ = context.Operators.Not((bool?)(Lab?.IssuedElement is null));
+				CqlDateTime aa_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
+				CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				CqlDateTime ac_ = context.Operators.Start(ab_);
+				CqlQuantity ad_ = context.Operators.Quantity(1440m, "minutes");
+				CqlDateTime ae_ = context.Operators.Subtract(ac_, ad_);
+				CqlDateTime ag_ = context.Operators.Start(ab_);
+				CqlDateTime ai_ = context.Operators.Add(ag_, ad_);
+				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ae_, ai_, true, true);
+				bool? ak_ = context.Operators.In<CqlDateTime>(aa_, aj_, null);
+				bool? al_ = context.Operators.And(z_, ak_);
+				string am_ = context.Operators.Convert<string>(Lab?.StatusElement);
+				string[] an_ = new string[]
 				{
 					"final",
 					"amended",
 					"preliminary",
 				};
-				var ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
-				var ap_ = context.Operators.And(al_, ao_);
-				var aq_ = context.Operators.Not((bool?)(Lab?.Value is null));
-				var ar_ = context.Operators.And(ap_, aq_);
+				bool? ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
+				bool? ap_ = context.Operators.And(al_, ao_);
+				bool? aq_ = context.Operators.Not((bool?)(Lab?.Value is null));
+				bool? ar_ = context.Operators.And(ap_, aq_);
 
 				return ar_;
 			};
-			var j_ = context.Operators.Where<Observation>(LabList, i_);
+			IEnumerable<Observation> j_ = context.Operators.Where<Observation>(LabList, i_);
 			object k_(Observation @this) => 
 				@this?.IssuedElement;
-			var l_ = context.Operators.SortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-			var m_ = context.Operators.First<Observation>(l_);
-			var n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
-			var o_ = context.Operators.ConvertQuantityToString(n_);
-			var p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
-			var q_ = context.Operators.Concatenate((p_ ?? ""), ",");
+			IEnumerable<Observation> l_ = context.Operators.SortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+			Observation m_ = context.Operators.First<Observation>(l_);
+			CqlQuantity n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
+			string o_ = context.Operators.ConvertQuantityToString(n_);
+			string p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
+			string q_ = context.Operators.Concatenate((p_ ?? ""), ",");
 			bool? r_(Observation Lab)
 			{
-				var as_ = context.Operators.Not((bool?)(Lab?.IssuedElement is null));
-				var at_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
-				var au_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
-				var av_ = context.Operators.Start(au_);
-				var aw_ = context.Operators.Quantity(1440m, "minutes");
-				var ax_ = context.Operators.Subtract(av_, aw_);
-				var az_ = context.Operators.Start(au_);
-				var bb_ = context.Operators.Add(az_, aw_);
-				var bc_ = context.Operators.Interval(ax_, bb_, true, true);
-				var bd_ = context.Operators.In<CqlDateTime>(at_, bc_, null);
-				var be_ = context.Operators.And(as_, bd_);
-				var bf_ = context.Operators.Convert<string>(Lab?.StatusElement);
-				var bg_ = new string[]
+				bool? as_ = context.Operators.Not((bool?)(Lab?.IssuedElement is null));
+				CqlDateTime at_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
+				CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				CqlDateTime av_ = context.Operators.Start(au_);
+				CqlQuantity aw_ = context.Operators.Quantity(1440m, "minutes");
+				CqlDateTime ax_ = context.Operators.Subtract(av_, aw_);
+				CqlDateTime az_ = context.Operators.Start(au_);
+				CqlDateTime bb_ = context.Operators.Add(az_, aw_);
+				CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, bb_, true, true);
+				bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, null);
+				bool? be_ = context.Operators.And(as_, bd_);
+				string bf_ = context.Operators.Convert<string>(Lab?.StatusElement);
+				string[] bg_ = new string[]
 				{
 					"final",
 					"amended",
 					"preliminary",
 				};
-				var bh_ = context.Operators.In<string>(bf_, (bg_ as IEnumerable<string>));
-				var bi_ = context.Operators.And(be_, bh_);
-				var bj_ = context.Operators.Not((bool?)(Lab?.Value is null));
-				var bk_ = context.Operators.And(bi_, bj_);
+				bool? bh_ = context.Operators.In<string>(bf_, (bg_ as IEnumerable<string>));
+				bool? bi_ = context.Operators.And(be_, bh_);
+				bool? bj_ = context.Operators.Not((bool?)(Lab?.Value is null));
+				bool? bk_ = context.Operators.And(bi_, bj_);
 
 				return bk_;
 			};
-			var s_ = context.Operators.Where<Observation>(LabList, r_);
-			var u_ = context.Operators.SortBy<Observation>(s_, k_, System.ComponentModel.ListSortDirection.Ascending);
-			var v_ = context.Operators.First<Observation>(u_);
-			var w_ = FHIRHelpers_4_0_001.ToDateTime(v_?.IssuedElement);
-			var x_ = context.Operators.ConvertDateTimeToString(w_);
-			var y_ = context.Operators.Concatenate((q_ ?? ""), (x_ ?? ""));
+			IEnumerable<Observation> s_ = context.Operators.Where<Observation>(LabList, r_);
+			IEnumerable<Observation> u_ = context.Operators.SortBy<Observation>(s_, k_, System.ComponentModel.ListSortDirection.Ascending);
+			Observation v_ = context.Operators.First<Observation>(u_);
+			CqlDateTime w_ = FHIRHelpers_4_0_001.ToDateTime(v_?.IssuedElement);
+			string x_ = context.Operators.ConvertDateTimeToString(w_);
+			string y_ = context.Operators.Concatenate((q_ ?? ""), (x_ ?? ""));
 
 			return y_;
 		};
-		var c_ = context.Operators.Select<Encounter, string>(a_, b_);
+		IEnumerable<string> c_ = context.Operators.Select<Encounter, string>(a_, b_);
 
 		return c_;
 	}
 
 	private IEnumerable<string> Results_Value()
 	{
-		var a_ = this.Heart_rate();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = this.FirstPhysicalExamWithEncounterId(c_, "FirstHeartRate");
-		var e_ = this.Systolic_blood_pressure();
-		var f_ = context.Operators.ToList<CqlCode>(e_);
-		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
-		var h_ = this.FirstPhysicalExamWithEncounterId(g_, "FirstSystolicBP");
-		var i_ = this.Respiratory_rate();
-		var j_ = context.Operators.ToList<CqlCode>(i_);
-		var k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
-		var l_ = this.FirstPhysicalExamWithEncounterId(k_, "FirstRespRate");
-		var m_ = this.Body_temperature();
-		var n_ = context.Operators.RetrieveByValueSet<Observation>(m_, null);
-		var o_ = this.FirstPhysicalExamWithEncounterId(n_, "FirstTemperature");
-		var p_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry();
-		var q_ = context.Operators.ToList<CqlCode>(p_);
-		var r_ = context.Operators.RetrieveByCodes<Observation>(q_, null);
-		var s_ = this.FirstPhysicalExamWithEncounterId(r_, "FirstO2Saturation");
-		var t_ = this.Body_weight();
-		var u_ = context.Operators.RetrieveByValueSet<Observation>(t_, null);
-		var v_ = this.FirstPhysicalExamWithEncounterIdUsingLabTiming(u_, "FirstWeight");
-		var w_ = this.Hematocrit_lab_test();
-		var x_ = context.Operators.RetrieveByValueSet<Observation>(w_, null);
-		var y_ = this.FirstLabTestWithEncounterId(x_, "FirstHematocrit");
-		var z_ = this.White_blood_cells_count_lab_test();
-		var aa_ = context.Operators.RetrieveByValueSet<Observation>(z_, null);
-		var ab_ = this.FirstLabTestWithEncounterId(aa_, "FirstWhiteBloodCell");
-		var ac_ = this.Potassium_lab_test();
-		var ad_ = context.Operators.RetrieveByValueSet<Observation>(ac_, null);
-		var ae_ = this.FirstLabTestWithEncounterId(ad_, "FirstPotassium");
-		var af_ = this.Sodium_lab_test();
-		var ag_ = context.Operators.RetrieveByValueSet<Observation>(af_, null);
-		var ah_ = this.FirstLabTestWithEncounterId(ag_, "FirstSodium");
-		var ai_ = this.Bicarbonate_lab_test();
-		var aj_ = context.Operators.RetrieveByValueSet<Observation>(ai_, null);
-		var ak_ = this.FirstLabTestWithEncounterId(aj_, "FirstBicarbonate");
-		var al_ = this.Creatinine_lab_test();
-		var am_ = context.Operators.RetrieveByValueSet<Observation>(al_, null);
-		var an_ = this.FirstLabTestWithEncounterId(am_, "FirstCreatinine");
-		var ao_ = this.Glucose_lab_test();
-		var ap_ = context.Operators.RetrieveByValueSet<Observation>(ao_, null);
-		var aq_ = this.FirstLabTestWithEncounterId(ap_, "FirstGlucose");
-		var ar_ = new IEnumerable<string>[]
+		CqlCode a_ = this.Heart_rate();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<string> d_ = this.FirstPhysicalExamWithEncounterId(c_, "FirstHeartRate");
+		CqlCode e_ = this.Systolic_blood_pressure();
+		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<string> h_ = this.FirstPhysicalExamWithEncounterId(g_, "FirstSystolicBP");
+		CqlCode i_ = this.Respiratory_rate();
+		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
+		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
+		IEnumerable<string> l_ = this.FirstPhysicalExamWithEncounterId(k_, "FirstRespRate");
+		CqlValueSet m_ = this.Body_temperature();
+		IEnumerable<Observation> n_ = context.Operators.RetrieveByValueSet<Observation>(m_, null);
+		IEnumerable<string> o_ = this.FirstPhysicalExamWithEncounterId(n_, "FirstTemperature");
+		CqlCode p_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry();
+		IEnumerable<CqlCode> q_ = context.Operators.ToList<CqlCode>(p_);
+		IEnumerable<Observation> r_ = context.Operators.RetrieveByCodes<Observation>(q_, null);
+		IEnumerable<string> s_ = this.FirstPhysicalExamWithEncounterId(r_, "FirstO2Saturation");
+		CqlValueSet t_ = this.Body_weight();
+		IEnumerable<Observation> u_ = context.Operators.RetrieveByValueSet<Observation>(t_, null);
+		IEnumerable<string> v_ = this.FirstPhysicalExamWithEncounterIdUsingLabTiming(u_, "FirstWeight");
+		CqlValueSet w_ = this.Hematocrit_lab_test();
+		IEnumerable<Observation> x_ = context.Operators.RetrieveByValueSet<Observation>(w_, null);
+		IEnumerable<string> y_ = this.FirstLabTestWithEncounterId(x_, "FirstHematocrit");
+		CqlValueSet z_ = this.White_blood_cells_count_lab_test();
+		IEnumerable<Observation> aa_ = context.Operators.RetrieveByValueSet<Observation>(z_, null);
+		IEnumerable<string> ab_ = this.FirstLabTestWithEncounterId(aa_, "FirstWhiteBloodCell");
+		CqlValueSet ac_ = this.Potassium_lab_test();
+		IEnumerable<Observation> ad_ = context.Operators.RetrieveByValueSet<Observation>(ac_, null);
+		IEnumerable<string> ae_ = this.FirstLabTestWithEncounterId(ad_, "FirstPotassium");
+		CqlValueSet af_ = this.Sodium_lab_test();
+		IEnumerable<Observation> ag_ = context.Operators.RetrieveByValueSet<Observation>(af_, null);
+		IEnumerable<string> ah_ = this.FirstLabTestWithEncounterId(ag_, "FirstSodium");
+		CqlValueSet ai_ = this.Bicarbonate_lab_test();
+		IEnumerable<Observation> aj_ = context.Operators.RetrieveByValueSet<Observation>(ai_, null);
+		IEnumerable<string> ak_ = this.FirstLabTestWithEncounterId(aj_, "FirstBicarbonate");
+		CqlValueSet al_ = this.Creatinine_lab_test();
+		IEnumerable<Observation> am_ = context.Operators.RetrieveByValueSet<Observation>(al_, null);
+		IEnumerable<string> an_ = this.FirstLabTestWithEncounterId(am_, "FirstCreatinine");
+		CqlValueSet ao_ = this.Glucose_lab_test();
+		IEnumerable<Observation> ap_ = context.Operators.RetrieveByValueSet<Observation>(ao_, null);
+		IEnumerable<string> aq_ = this.FirstLabTestWithEncounterId(ap_, "FirstGlucose");
+		IEnumerable<string>[] ar_ = new IEnumerable<string>[]
 		{
 			d_,
 			h_,
@@ -972,7 +972,7 @@ public class HybridHWRFHIR_1_3_005
 			an_,
 			aq_,
 		};
-		var as_ = context.Operators.Flatten<string>((ar_ as IEnumerable<IEnumerable<string>>));
+		IEnumerable<string> as_ = context.Operators.Flatten<string>((ar_ as IEnumerable<IEnumerable<string>>));
 
 		return as_;
 	}
@@ -984,9 +984,9 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("CalendarAgeInYearsAt")]
 	public int? CalendarAgeInYearsAt(CqlDateTime BirthDateTime, CqlDateTime AsOf)
 	{
-		var a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
-		var b_ = context.Operators.ConvertDateTimeToDate(AsOf);
-		var c_ = context.Operators.DurationBetween(a_, b_, "year");
+		CqlDate a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
+		CqlDate b_ = context.Operators.ConvertDateTimeToDate(AsOf);
+		int? c_ = context.Operators.DurationBetween(a_, b_, "year");
 
 		return c_;
 	}
@@ -994,11 +994,11 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("ToDate")]
 	public CqlDateTime ToDate(CqlDateTime Value)
 	{
-		var a_ = context.Operators.DateTimeComponentFrom(Value, "year");
-		var b_ = context.Operators.DateTimeComponentFrom(Value, "month");
-		var c_ = context.Operators.DateTimeComponentFrom(Value, "day");
-		var d_ = context.Operators.TimezoneOffsetFrom(Value);
-		var e_ = context.Operators.DateTime(a_, b_, c_, 0, 0, 0, 0, d_);
+		int? a_ = context.Operators.DateTimeComponentFrom(Value, "year");
+		int? b_ = context.Operators.DateTimeComponentFrom(Value, "month");
+		int? c_ = context.Operators.DateTimeComponentFrom(Value, "day");
+		decimal? d_ = context.Operators.TimezoneOffsetFrom(Value);
+		CqlDateTime e_ = context.Operators.DateTime(a_, b_, c_, 0, 0, 0, 0, d_);
 
 		return e_;
 	}
@@ -1006,9 +1006,9 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("LengthOfStay")]
 	public int? LengthOfStay(CqlInterval<CqlDateTime> Stay)
 	{
-		var a_ = context.Operators.Start(Stay);
-		var b_ = context.Operators.End(Stay);
-		var c_ = context.Operators.DifferenceBetween(a_, b_, "day");
+		CqlDateTime a_ = context.Operators.Start(Stay);
+		CqlDateTime b_ = context.Operators.End(Stay);
+		int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 
 		return c_;
 	}
@@ -1016,8 +1016,8 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("HospitalizationWithObservationLengthofStay")]
 	public int? HospitalizationWithObservationLengthofStay(Encounter Encounter)
 	{
-		var a_ = this.HospitalizationWithObservation(Encounter);
-		var b_ = this.LengthInDays(a_);
+		CqlInterval<CqlDateTime> a_ = this.HospitalizationWithObservation(Encounter);
+		int? b_ = this.LengthInDays(a_);
 
 		return b_;
 	}

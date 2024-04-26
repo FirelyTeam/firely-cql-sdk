@@ -7,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -453,7 +454,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] LOINC_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("72095-3", "http://loinc.org", null, null),
 			new CqlCode("45755-6", "http://loinc.org", null, null),
@@ -479,7 +480,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] CPT_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("99024", "http://www.ama-assn.org/go/cpt", null, null),
 		};
@@ -493,7 +494,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] ConditionCategoryCodes_Value()
 	{
-		var a_ = new CqlCode[0]
+		CqlCode[] a_ = new CqlCode[0]
 ;
 
 		return a_;
@@ -505,7 +506,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("419099009", "http://snomed.info/sct", null, null),
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
@@ -523,7 +524,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/v3-ObservationCategory", null, null),
 		};
@@ -537,10 +538,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("FunctionalStatusAssessmentforTotalHipReplacementFHIR-0.0.008", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("FunctionalStatusAssessmentforTotalHipReplacementFHIR-0.0.008", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -551,8 +552,8 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -563,7 +564,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -574,7 +575,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -585,7 +586,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -596,7 +597,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -607,12 +608,12 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlDateTime November_1_Year_Prior_to_the_Measurement_Period_Value()
 	{
-		var a_ = this.Measurement_Period();
-		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, 1);
-		var e_ = context.Operators.ConvertIntegerToDecimal(0);
-		var f_ = context.Operators.DateTime(d_, 11, 1, 0, 0, 0, 0, e_);
+		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
+		CqlDateTime b_ = context.Operators.Start(a_);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? d_ = context.Operators.Subtract(c_, 1);
+		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+		CqlDateTime f_ = context.Operators.DateTime(d_, 11, 1, 0, 0, 0, 0, e_);
 
 		return f_;
 	}
@@ -623,57 +624,57 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_Qualifying_Encounter_Value()
 	{
-		var a_ = this.Outpatient_Consultation();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Office_Visit();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		var f_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
+		CqlValueSet a_ = this.Outpatient_Consultation();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Office_Visit();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? g_(Encounter E)
 		{
 			CqlConcept t_(CodeableConcept @this)
 			{
-				var y_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return y_;
 			};
-			var u_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, t_);
+			IEnumerable<CqlConcept> u_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, t_);
 			bool? v_(CqlConcept T)
 			{
-				var z_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();
-				var aa_ = context.Operators.ConvertCodeToConcept(z_);
-				var ab_ = context.Operators.Equivalent(T, aa_);
+				CqlCode z_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();
+				CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
+				bool? ab_ = context.Operators.Equivalent(T, aa_);
 
 				return ab_;
 			};
-			var w_ = context.Operators.Where<CqlConcept>(u_, v_);
-			var x_ = context.Operators.Exists<CqlConcept>(w_);
+			IEnumerable<CqlConcept> w_ = context.Operators.Where<CqlConcept>(u_, v_);
+			bool? x_ = context.Operators.Exists<CqlConcept>(w_);
 
 			return x_;
 		};
-		var h_ = context.Operators.Where<Encounter>(f_, g_);
-		var i_ = this.Telephone_Visits();
-		var j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = context.Operators.ListUnion<Encounter>(h_, j_);
-		var l_ = context.Operators.ListUnion<Encounter>(e_, k_);
-		var m_ = this.Online_Assessments();
-		var n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
-		var o_ = context.Operators.ListUnion<Encounter>(l_, n_);
-		var p_ = Status_1_6_000.isEncounterPerformed(o_);
+		IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
+		CqlValueSet i_ = this.Telephone_Visits();
+		IEnumerable<Encounter> j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, null);
+		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(h_, j_);
+		IEnumerable<Encounter> l_ = context.Operators.ListUnion<Encounter>(e_, k_);
+		CqlValueSet m_ = this.Online_Assessments();
+		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
+		IEnumerable<Encounter> o_ = context.Operators.ListUnion<Encounter>(l_, n_);
+		IEnumerable<Encounter> p_ = Status_1_6_000.isEncounterPerformed(o_);
 		bool? q_(Encounter ValidEncounters)
 		{
-			var ac_ = this.November_1_Year_Prior_to_the_Measurement_Period();
-			var ad_ = this.Measurement_Period();
-			var ae_ = context.Operators.End(ad_);
-			var af_ = context.Operators.Interval(ac_, ae_, true, true);
-			var ag_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			var ah_ = QICoreCommon_2_0_000.toInterval((ag_ as object));
-			var ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
+			CqlDateTime ac_ = this.November_1_Year_Prior_to_the_Measurement_Period();
+			CqlInterval<CqlDateTime> ad_ = this.Measurement_Period();
+			CqlDateTime ae_ = context.Operators.End(ad_);
+			CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ac_, ae_, true, true);
+			CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
+			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.toInterval((ag_ as object));
+			bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
 
 			return ai_;
 		};
-		var r_ = context.Operators.Where<Encounter>(p_, q_);
-		var s_ = context.Operators.Exists<Encounter>(r_);
+		IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
+		bool? s_ = context.Operators.Exists<Encounter>(r_);
 
 		return s_;
 	}
@@ -684,12 +685,12 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlDateTime November_1_Two_Years_Prior_to_the_Measurement_Period_Value()
 	{
-		var a_ = this.Measurement_Period();
-		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, 2);
-		var e_ = context.Operators.ConvertIntegerToDecimal(0);
-		var f_ = context.Operators.DateTime(d_, 11, 1, 0, 0, 0, 0, e_);
+		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
+		CqlDateTime b_ = context.Operators.Start(a_);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? d_ = context.Operators.Subtract(c_, 2);
+		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+		CqlDateTime f_ = context.Operators.DateTime(d_, 11, 1, 0, 0, 0, 0, e_);
 
 		return f_;
 	}
@@ -700,12 +701,12 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlDateTime October_31_Year_Prior_to_the_Measurement_Period_Value()
 	{
-		var a_ = this.Measurement_Period();
-		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, 1);
-		var e_ = context.Operators.ConvertIntegerToDecimal(0);
-		var f_ = context.Operators.DateTime(d_, 10, 31, 23, 59, 59, 0, e_);
+		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
+		CqlDateTime b_ = context.Operators.Start(a_);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? d_ = context.Operators.Subtract(c_, 1);
+		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+		CqlDateTime f_ = context.Operators.DateTime(d_, 10, 31, 23, 59, 59, 0, e_);
 
 		return f_;
 	}
@@ -716,22 +717,22 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private IEnumerable<Procedure> Total_Hip_Arthroplasty_Procedure_Value()
 	{
-		var a_ = this.Primary_THA_Procedure();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = Status_1_6_000.isProcedurePerformed(b_);
+		CqlValueSet a_ = this.Primary_THA_Procedure();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure THAProcedure)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-			var g_ = QICoreCommon_2_0_000.toInterval(f_);
-			var h_ = context.Operators.Start(g_);
-			var i_ = this.November_1_Two_Years_Prior_to_the_Measurement_Period();
-			var j_ = this.October_31_Year_Prior_to_the_Measurement_Period();
-			var k_ = context.Operators.Interval(i_, j_, true, true);
-			var l_ = context.Operators.In<CqlDateTime>(h_, k_, "day");
+			object f_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.toInterval(f_);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDateTime i_ = this.November_1_Two_Years_Prior_to_the_Measurement_Period();
+			CqlDateTime j_ = this.October_31_Year_Prior_to_the_Measurement_Period();
+			CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_, true, true);
+			bool? l_ = context.Operators.In<CqlDateTime>(h_, k_, "day");
 
 			return l_;
 		};
-		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
@@ -742,18 +743,18 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Has_Qualifying_Encounter();
-		var b_ = this.Total_Hip_Arthroplasty_Procedure();
-		var c_ = context.Operators.Exists<Procedure>(b_);
-		var d_ = context.Operators.And(a_, c_);
-		var e_ = this.Patient();
-		var f_ = context.Operators.Convert<CqlDate>(e_?.BirthDateElement?.Value);
-		var g_ = this.Measurement_Period();
-		var h_ = context.Operators.Start(g_);
-		var i_ = context.Operators.DateFrom(h_);
-		var j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
-		var k_ = context.Operators.GreaterOrEqual(j_, 19);
-		var l_ = context.Operators.And(d_, k_);
+		bool? a_ = this.Has_Qualifying_Encounter();
+		IEnumerable<Procedure> b_ = this.Total_Hip_Arthroplasty_Procedure();
+		bool? c_ = context.Operators.Exists<Procedure>(b_);
+		bool? d_ = context.Operators.And(a_, c_);
+		Patient e_ = this.Patient();
+		CqlDate f_ = context.Operators.Convert<CqlDate>(e_?.BirthDateElement?.Value);
+		CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+		CqlDateTime h_ = context.Operators.Start(g_);
+		CqlDate i_ = context.Operators.DateFrom(h_);
+		int? j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
+		bool? k_ = context.Operators.GreaterOrEqual(j_, 19);
+		bool? l_ = context.Operators.And(d_, k_);
 
 		return l_;
 	}
@@ -764,7 +765,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -775,19 +776,19 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_Severe_Cognitive_Impairment_Value()
 	{
-		var a_ = this.Severe_cognitive_impairment__finding_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		CqlCode a_ = this.Severe_cognitive_impairment__finding_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
 		bool? d_(Condition Dementia)
 		{
-			var g_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Overlaps(g_, h_, null);
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
+			bool? i_ = context.Operators.Overlaps(g_, h_, null);
 
 			return i_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
-		var f_ = context.Operators.Exists<Condition>(e_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+		bool? f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -798,40 +799,40 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
 		{
-			var e_ = this.Lower_Body_Fractures_Excluding_Ankle_and_Foot();
-			var f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
+			CqlValueSet e_ = this.Lower_Body_Fractures_Excluding_Ankle_and_Foot();
+			IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
 			bool? g_(Condition LowerBodyFracture)
 			{
-				var k_ = QICoreCommon_2_0_000.prevalenceInterval(LowerBodyFracture);
-				var l_ = context.Operators.Start(k_);
-				var m_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-				var n_ = QICoreCommon_2_0_000.toInterval(m_);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity(24m, "hours");
-				var q_ = context.Operators.Subtract(o_, p_);
-				var s_ = QICoreCommon_2_0_000.toInterval(m_);
-				var t_ = context.Operators.Start(s_);
-				var u_ = context.Operators.Interval(q_, t_, true, true);
-				var v_ = context.Operators.In<CqlDateTime>(l_, u_, null);
-				var x_ = QICoreCommon_2_0_000.toInterval(m_);
-				var y_ = context.Operators.Start(x_);
-				var z_ = context.Operators.Not((bool?)(y_ is null));
-				var aa_ = context.Operators.And(v_, z_);
+				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.prevalenceInterval(LowerBodyFracture);
+				CqlDateTime l_ = context.Operators.Start(k_);
+				object m_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.toInterval(m_);
+				CqlDateTime o_ = context.Operators.Start(n_);
+				CqlQuantity p_ = context.Operators.Quantity(24m, "hours");
+				CqlDateTime q_ = context.Operators.Subtract(o_, p_);
+				CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.toInterval(m_);
+				CqlDateTime t_ = context.Operators.Start(s_);
+				CqlInterval<CqlDateTime> u_ = context.Operators.Interval(q_, t_, true, true);
+				bool? v_ = context.Operators.In<CqlDateTime>(l_, u_, null);
+				CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(m_);
+				CqlDateTime y_ = context.Operators.Start(x_);
+				bool? z_ = context.Operators.Not((bool?)(y_ is null));
+				bool? aa_ = context.Operators.And(v_, z_);
 
 				return aa_;
 			};
-			var h_ = context.Operators.Where<Condition>(f_, g_);
+			IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
 			Procedure i_(Condition LowerBodyFracture) => 
 				THAProcedure;
-			var j_ = context.Operators.Select<Condition, Procedure>(h_, i_);
+			IEnumerable<Procedure> j_ = context.Operators.Select<Condition, Procedure>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
-		var d_ = context.Operators.Exists<Procedure>(c_);
+		IEnumerable<Procedure> c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
+		bool? d_ = context.Operators.Exists<Procedure>(c_);
 
 		return d_;
 	}
@@ -842,31 +843,31 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_Partial_Hip_Arthroplasty_Procedure_Value()
 	{
-		var a_ = this.Partial_Arthroplasty_of_Hip();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = Status_1_6_000.isProcedurePerformed(b_);
+		CqlValueSet a_ = this.Partial_Arthroplasty_of_Hip();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		IEnumerable<Procedure> d_(Procedure PartialTHAProcedure)
 		{
-			var g_ = this.Total_Hip_Arthroplasty_Procedure();
+			IEnumerable<Procedure> g_ = this.Total_Hip_Arthroplasty_Procedure();
 			bool? h_(Procedure THAProcedure)
 			{
-				var l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-				var m_ = QICoreCommon_2_0_000.toInterval(l_);
-				var n_ = FHIRHelpers_4_3_000.ToValue(PartialTHAProcedure?.Performed);
-				var o_ = QICoreCommon_2_0_000.toInterval(n_);
-				var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, "day");
+				object l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
+				object n_ = FHIRHelpers_4_3_000.ToValue(PartialTHAProcedure?.Performed);
+				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
+				bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, "day");
 
 				return p_;
 			};
-			var i_ = context.Operators.Where<Procedure>(g_, h_);
+			IEnumerable<Procedure> i_ = context.Operators.Where<Procedure>(g_, h_);
 			Procedure j_(Procedure THAProcedure) => 
 				PartialTHAProcedure;
-			var k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
+			IEnumerable<Procedure> k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
 
 			return k_;
 		};
-		var e_ = context.Operators.SelectMany<Procedure, Procedure>(c_, d_);
-		var f_ = context.Operators.Exists<Procedure>(e_);
+		IEnumerable<Procedure> e_ = context.Operators.SelectMany<Procedure, Procedure>(c_, d_);
+		bool? f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -877,31 +878,31 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
 		{
-			var e_ = this.Removal__Revision_and_Supplement_Procedures_of_the_Lower_Body_and_Spine();
-			var f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, null);
-			var g_ = Status_1_6_000.isProcedurePerformed(f_);
+			CqlValueSet e_ = this.Removal__Revision_and_Supplement_Procedures_of_the_Lower_Body_and_Spine();
+			IEnumerable<Procedure> f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, null);
+			IEnumerable<Procedure> g_ = Status_1_6_000.isProcedurePerformed(f_);
 			bool? h_(Procedure RevisionTHAProcedure)
 			{
-				var l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-				var m_ = QICoreCommon_2_0_000.toInterval(l_);
-				var n_ = FHIRHelpers_4_3_000.ToValue(RevisionTHAProcedure?.Performed);
-				var o_ = QICoreCommon_2_0_000.toInterval(n_);
-				var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, "day");
+				object l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
+				object n_ = FHIRHelpers_4_3_000.ToValue(RevisionTHAProcedure?.Performed);
+				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
+				bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, "day");
 
 				return p_;
 			};
-			var i_ = context.Operators.Where<Procedure>(g_, h_);
+			IEnumerable<Procedure> i_ = context.Operators.Where<Procedure>(g_, h_);
 			Procedure j_(Procedure RevisionTHAProcedure) => 
 				THAProcedure;
-			var k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
+			IEnumerable<Procedure> k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
-		var d_ = context.Operators.Exists<Procedure>(c_);
+		IEnumerable<Procedure> c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
+		bool? d_ = context.Operators.Exists<Procedure>(c_);
 
 		return d_;
 	}
@@ -912,29 +913,29 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs_Value()
 	{
-		var a_ = this.Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		IEnumerable<Condition> c_(Condition MalignantNeoplasm)
 		{
-			var f_ = this.Total_Hip_Arthroplasty_Procedure();
+			IEnumerable<Procedure> f_ = this.Total_Hip_Arthroplasty_Procedure();
 			bool? g_(Procedure THAProcedure)
 			{
-				var k_ = QICoreCommon_2_0_000.prevalenceInterval(MalignantNeoplasm);
-				var l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-				var m_ = QICoreCommon_2_0_000.toInterval(l_);
-				var n_ = context.Operators.Overlaps(k_, m_, null);
+				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.prevalenceInterval(MalignantNeoplasm);
+				object l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
+				bool? n_ = context.Operators.Overlaps(k_, m_, null);
 
 				return n_;
 			};
-			var h_ = context.Operators.Where<Procedure>(f_, g_);
+			IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
 			Condition i_(Procedure THAProcedure) => 
 				MalignantNeoplasm;
-			var j_ = context.Operators.Select<Procedure, Condition>(h_, i_);
+			IEnumerable<Condition> j_ = context.Operators.Select<Procedure, Condition>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		IEnumerable<Condition> d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
+		bool? e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -945,29 +946,29 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_Mechanical_Complication_Value()
 	{
-		var a_ = this.Mechanical_Complications_Excluding_Upper_Body();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Mechanical_Complications_Excluding_Upper_Body();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		IEnumerable<Condition> c_(Condition MechanicalComplications)
 		{
-			var f_ = this.Total_Hip_Arthroplasty_Procedure();
+			IEnumerable<Procedure> f_ = this.Total_Hip_Arthroplasty_Procedure();
 			bool? g_(Procedure THAProcedure)
 			{
-				var k_ = QICoreCommon_2_0_000.prevalenceInterval(MechanicalComplications);
-				var l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-				var m_ = QICoreCommon_2_0_000.toInterval(l_);
-				var n_ = context.Operators.Overlaps(k_, m_, null);
+				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.prevalenceInterval(MechanicalComplications);
+				object l_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
+				bool? n_ = context.Operators.Overlaps(k_, m_, null);
 
 				return n_;
 			};
-			var h_ = context.Operators.Where<Procedure>(f_, g_);
+			IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
 			Condition i_(Procedure THAProcedure) => 
 				MechanicalComplications;
-			var j_ = context.Operators.Select<Procedure, Condition>(h_, i_);
+			IEnumerable<Condition> j_ = context.Operators.Select<Procedure, Condition>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		IEnumerable<Condition> d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
+		bool? e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -978,42 +979,42 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
 		{
-			var e_ = this.Primary_THA_Procedure();
-			var f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, null);
-			var g_ = Status_1_6_000.isProcedurePerformed(f_);
+			CqlValueSet e_ = this.Primary_THA_Procedure();
+			IEnumerable<Procedure> f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, null);
+			IEnumerable<Procedure> g_ = Status_1_6_000.isProcedurePerformed(f_);
 			bool? h_(Procedure ElectiveTHAProcedure)
 			{
-				var l_ = context.Operators.Equivalent(THAProcedure?.IdElement?.Value, ElectiveTHAProcedure?.IdElement?.Value);
-				var m_ = context.Operators.Not(l_);
-				var n_ = FHIRHelpers_4_3_000.ToValue(ElectiveTHAProcedure?.Performed);
-				var o_ = QICoreCommon_2_0_000.toInterval(n_);
-				var p_ = context.Operators.Start(o_);
-				var q_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-				var r_ = QICoreCommon_2_0_000.toInterval(q_);
-				var s_ = context.Operators.Start(r_);
-				var t_ = context.Operators.Quantity(1m, "year");
-				var u_ = context.Operators.Subtract(s_, t_);
-				var w_ = QICoreCommon_2_0_000.toInterval(q_);
-				var x_ = context.Operators.Start(w_);
-				var z_ = context.Operators.Add(x_, t_);
-				var aa_ = context.Operators.Interval(u_, z_, true, true);
-				var ab_ = context.Operators.In<CqlDateTime>(p_, aa_, "day");
-				var ac_ = context.Operators.And(m_, ab_);
+				bool? l_ = context.Operators.Equivalent(THAProcedure?.IdElement?.Value, ElectiveTHAProcedure?.IdElement?.Value);
+				bool? m_ = context.Operators.Not(l_);
+				object n_ = FHIRHelpers_4_3_000.ToValue(ElectiveTHAProcedure?.Performed);
+				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
+				CqlDateTime p_ = context.Operators.Start(o_);
+				object q_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+				CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.toInterval(q_);
+				CqlDateTime s_ = context.Operators.Start(r_);
+				CqlQuantity t_ = context.Operators.Quantity(1m, "year");
+				CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+				CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.toInterval(q_);
+				CqlDateTime x_ = context.Operators.Start(w_);
+				CqlDateTime z_ = context.Operators.Add(x_, t_);
+				CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(u_, z_, true, true);
+				bool? ab_ = context.Operators.In<CqlDateTime>(p_, aa_, "day");
+				bool? ac_ = context.Operators.And(m_, ab_);
 
 				return ac_;
 			};
-			var i_ = context.Operators.Where<Procedure>(g_, h_);
+			IEnumerable<Procedure> i_ = context.Operators.Where<Procedure>(g_, h_);
 			Procedure j_(Procedure ElectiveTHAProcedure) => 
 				THAProcedure;
-			var k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
+			IEnumerable<Procedure> k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
-		var d_ = context.Operators.Exists<Procedure>(c_);
+		IEnumerable<Procedure> c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
+		bool? d_ = context.Operators.Exists<Procedure>(c_);
 
 		return d_;
 	}
@@ -1024,28 +1025,28 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Death_Within_300_Days_of_the_THA_Procedure_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		bool? b_(Procedure THAProcedure)
 		{
-			var e_ = this.Patient();
-			var f_ = FHIRHelpers_4_3_000.ToValue(e_?.Deceased);
-			var g_ = context.Operators.DateFrom((f_ as CqlDateTime));
-			var h_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-			var i_ = QICoreCommon_2_0_000.toInterval(h_);
-			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.DateFrom(j_);
-			var m_ = QICoreCommon_2_0_000.toInterval(h_);
-			var n_ = context.Operators.Start(m_);
-			var o_ = context.Operators.DateFrom(n_);
-			var p_ = context.Operators.Quantity(300m, "days");
-			var q_ = context.Operators.Add(o_, p_);
-			var r_ = context.Operators.Interval(k_, q_, true, true);
-			var s_ = context.Operators.In<CqlDate>(g_, r_, "day");
+			Patient e_ = this.Patient();
+			object f_ = FHIRHelpers_4_3_000.ToValue(e_?.Deceased);
+			CqlDate g_ = context.Operators.DateFrom((f_ as CqlDateTime));
+			object h_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.toInterval(h_);
+			CqlDateTime j_ = context.Operators.Start(i_);
+			CqlDate k_ = context.Operators.DateFrom(j_);
+			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(h_);
+			CqlDateTime n_ = context.Operators.Start(m_);
+			CqlDate o_ = context.Operators.DateFrom(n_);
+			CqlQuantity p_ = context.Operators.Quantity(300m, "days");
+			CqlDate q_ = context.Operators.Add(o_, p_);
+			CqlInterval<CqlDate> r_ = context.Operators.Interval(k_, q_, true, true);
+			bool? s_ = context.Operators.In<CqlDate>(g_, r_, "day");
 
 			return s_;
 		};
-		var c_ = context.Operators.Where<Procedure>(a_, b_);
-		var d_ = context.Operators.Exists<Procedure>(c_);
+		IEnumerable<Procedure> c_ = context.Operators.Where<Procedure>(a_, b_);
+		bool? d_ = context.Operators.Exists<Procedure>(c_);
 
 		return d_;
 	}
@@ -1056,23 +1057,23 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
-		var b_ = this.Has_Severe_Cognitive_Impairment();
-		var c_ = context.Operators.Or(a_, b_);
-		var d_ = this.Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures();
-		var e_ = context.Operators.Or(c_, d_);
-		var f_ = this.Has_Partial_Hip_Arthroplasty_Procedure();
-		var g_ = context.Operators.Or(e_, f_);
-		var h_ = this.Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure();
-		var i_ = context.Operators.Or(g_, h_);
-		var j_ = this.Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs();
-		var k_ = context.Operators.Or(i_, j_);
-		var l_ = this.Has_Mechanical_Complication();
-		var m_ = context.Operators.Or(k_, l_);
-		var n_ = this.Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed();
-		var o_ = context.Operators.Or(m_, n_);
-		var p_ = this.Death_Within_300_Days_of_the_THA_Procedure();
-		var q_ = context.Operators.Or(o_, p_);
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		bool? b_ = this.Has_Severe_Cognitive_Impairment();
+		bool? c_ = context.Operators.Or(a_, b_);
+		bool? d_ = this.Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures();
+		bool? e_ = context.Operators.Or(c_, d_);
+		bool? f_ = this.Has_Partial_Hip_Arthroplasty_Procedure();
+		bool? g_ = context.Operators.Or(e_, f_);
+		bool? h_ = this.Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure();
+		bool? i_ = context.Operators.Or(g_, h_);
+		bool? j_ = this.Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs();
+		bool? k_ = context.Operators.Or(i_, j_);
+		bool? l_ = this.Has_Mechanical_Complication();
+		bool? m_ = context.Operators.Or(k_, l_);
+		bool? n_ = this.Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed();
+		bool? o_ = context.Operators.Or(m_, n_);
+		bool? p_ = this.Death_Within_300_Days_of_the_THA_Procedure();
+		bool? q_ = context.Operators.Or(o_, p_);
 
 		return q_;
 	}
@@ -1083,30 +1084,30 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private IEnumerable<CqlDate> Date_HOOS_Total_Assessment_Completed_Value()
 	{
-		var a_ = this.Quality_of_life_score__HOOS_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = Status_1_6_000.isAssessmentPerformed(c_);
-		var e_ = this.Sport_recreation_score__HOOS_();
-		var f_ = context.Operators.ToList<CqlCode>(e_);
-		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
-		var h_ = Status_1_6_000.isAssessmentPerformed(g_);
-		var i_ = this.Activities_of_daily_living_score__HOOS_();
-		var j_ = context.Operators.ToList<CqlCode>(i_);
-		var k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
-		var l_ = Status_1_6_000.isAssessmentPerformed(k_);
-		var m_ = this.Symptoms_score__HOOS_();
-		var n_ = context.Operators.ToList<CqlCode>(m_);
-		var o_ = context.Operators.RetrieveByCodes<Observation>(n_, null);
-		var p_ = Status_1_6_000.isAssessmentPerformed(o_);
-		var q_ = this.Pain_score__HOOS_();
-		var r_ = context.Operators.ToList<CqlCode>(q_);
-		var s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
-		var t_ = Status_1_6_000.isAssessmentPerformed(s_);
-		var u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
+		CqlCode a_ = this.Quality_of_life_score__HOOS_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> d_ = Status_1_6_000.isAssessmentPerformed(c_);
+		CqlCode e_ = this.Sport_recreation_score__HOOS_();
+		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> h_ = Status_1_6_000.isAssessmentPerformed(g_);
+		CqlCode i_ = this.Activities_of_daily_living_score__HOOS_();
+		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
+		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
+		IEnumerable<Observation> l_ = Status_1_6_000.isAssessmentPerformed(k_);
+		CqlCode m_ = this.Symptoms_score__HOOS_();
+		IEnumerable<CqlCode> n_ = context.Operators.ToList<CqlCode>(m_);
+		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, null);
+		IEnumerable<Observation> p_ = Status_1_6_000.isAssessmentPerformed(o_);
+		CqlCode q_ = this.Pain_score__HOOS_();
+		IEnumerable<CqlCode> r_ = context.Operators.ToList<CqlCode>(q_);
+		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
+		IEnumerable<Observation> t_ = Status_1_6_000.isAssessmentPerformed(s_);
+		IEnumerable<ValueTuple<Observation,Observation,Observation,Observation,Observation>> u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
 		Tuple_EPUbUfihDVTJZfYVTHGLFUeUf v_(ValueTuple<Observation,Observation,Observation,Observation,Observation> _valueTuple)
 		{
-			var ab_ = new Tuple_EPUbUfihDVTJZfYVTHGLFUeUf
+			Tuple_EPUbUfihDVTJZfYVTHGLFUeUf ab_ = new Tuple_EPUbUfihDVTJZfYVTHGLFUeUf
 			{
 				HOOSLifeQuality = _valueTuple.Item1,
 				HOOSSport = _valueTuple.Item2,
@@ -1117,87 +1118,87 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return ab_;
 		};
-		var w_ = context.Operators.Select<ValueTuple<Observation,Observation,Observation,Observation,Observation>, Tuple_EPUbUfihDVTJZfYVTHGLFUeUf>(u_, v_);
+		IEnumerable<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf> w_ = context.Operators.Select<ValueTuple<Observation,Observation,Observation,Observation,Observation>, Tuple_EPUbUfihDVTJZfYVTHGLFUeUf>(u_, v_);
 		bool? x_(Tuple_EPUbUfihDVTJZfYVTHGLFUeUf tuple_epubufihdvtjzfyvthglfueuf)
 		{
-			var ac_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Effective);
-			var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var ae_ = context.Operators.Start(ad_);
-			var af_ = context.Operators.DateFrom(ae_);
-			var ag_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Effective);
-			var ah_ = QICoreCommon_2_0_000.toInterval(ag_);
-			var ai_ = context.Operators.Start(ah_);
-			var aj_ = context.Operators.DateFrom(ai_);
-			var ak_ = context.Operators.SameAs(af_, aj_, "day");
-			var al_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Value);
-			var am_ = context.Operators.Not((bool?)(al_ is null));
-			var an_ = context.Operators.And(ak_, am_);
-			var ap_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var aq_ = context.Operators.Start(ap_);
-			var ar_ = context.Operators.DateFrom(aq_);
-			var as_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Effective);
-			var at_ = QICoreCommon_2_0_000.toInterval(as_);
-			var au_ = context.Operators.Start(at_);
-			var av_ = context.Operators.DateFrom(au_);
-			var aw_ = context.Operators.SameAs(ar_, av_, "day");
-			var ax_ = context.Operators.And(an_, aw_);
-			var ay_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Value);
-			var az_ = context.Operators.Not((bool?)(ay_ is null));
-			var ba_ = context.Operators.And(ax_, az_);
-			var bc_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var bd_ = context.Operators.Start(bc_);
-			var be_ = context.Operators.DateFrom(bd_);
-			var bf_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Effective);
-			var bg_ = QICoreCommon_2_0_000.toInterval(bf_);
-			var bh_ = context.Operators.Start(bg_);
-			var bi_ = context.Operators.DateFrom(bh_);
-			var bj_ = context.Operators.SameAs(be_, bi_, "day");
-			var bk_ = context.Operators.And(ba_, bj_);
-			var bl_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Value);
-			var bm_ = context.Operators.Not((bool?)(bl_ is null));
-			var bn_ = context.Operators.And(bk_, bm_);
-			var bp_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var bq_ = context.Operators.Start(bp_);
-			var br_ = context.Operators.DateFrom(bq_);
-			var bs_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Effective);
-			var bt_ = QICoreCommon_2_0_000.toInterval(bs_);
-			var bu_ = context.Operators.Start(bt_);
-			var bv_ = context.Operators.DateFrom(bu_);
-			var bw_ = context.Operators.SameAs(br_, bv_, "day");
-			var bx_ = context.Operators.And(bn_, bw_);
-			var by_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Value);
-			var bz_ = context.Operators.Not((bool?)(by_ is null));
-			var ca_ = context.Operators.And(bx_, bz_);
-			var cb_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Value);
-			var cc_ = context.Operators.Not((bool?)(cb_ is null));
-			var cd_ = context.Operators.And(ca_, cc_);
+			object ac_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Effective);
+			CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.toInterval(ac_);
+			CqlDateTime ae_ = context.Operators.Start(ad_);
+			CqlDate af_ = context.Operators.DateFrom(ae_);
+			object ag_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Effective);
+			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.toInterval(ag_);
+			CqlDateTime ai_ = context.Operators.Start(ah_);
+			CqlDate aj_ = context.Operators.DateFrom(ai_);
+			bool? ak_ = context.Operators.SameAs(af_, aj_, "day");
+			object al_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Value);
+			bool? am_ = context.Operators.Not((bool?)(al_ is null));
+			bool? an_ = context.Operators.And(ak_, am_);
+			CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_0_000.toInterval(ac_);
+			CqlDateTime aq_ = context.Operators.Start(ap_);
+			CqlDate ar_ = context.Operators.DateFrom(aq_);
+			object as_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Effective);
+			CqlInterval<CqlDateTime> at_ = QICoreCommon_2_0_000.toInterval(as_);
+			CqlDateTime au_ = context.Operators.Start(at_);
+			CqlDate av_ = context.Operators.DateFrom(au_);
+			bool? aw_ = context.Operators.SameAs(ar_, av_, "day");
+			bool? ax_ = context.Operators.And(an_, aw_);
+			object ay_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Value);
+			bool? az_ = context.Operators.Not((bool?)(ay_ is null));
+			bool? ba_ = context.Operators.And(ax_, az_);
+			CqlInterval<CqlDateTime> bc_ = QICoreCommon_2_0_000.toInterval(ac_);
+			CqlDateTime bd_ = context.Operators.Start(bc_);
+			CqlDate be_ = context.Operators.DateFrom(bd_);
+			object bf_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Effective);
+			CqlInterval<CqlDateTime> bg_ = QICoreCommon_2_0_000.toInterval(bf_);
+			CqlDateTime bh_ = context.Operators.Start(bg_);
+			CqlDate bi_ = context.Operators.DateFrom(bh_);
+			bool? bj_ = context.Operators.SameAs(be_, bi_, "day");
+			bool? bk_ = context.Operators.And(ba_, bj_);
+			object bl_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Value);
+			bool? bm_ = context.Operators.Not((bool?)(bl_ is null));
+			bool? bn_ = context.Operators.And(bk_, bm_);
+			CqlInterval<CqlDateTime> bp_ = QICoreCommon_2_0_000.toInterval(ac_);
+			CqlDateTime bq_ = context.Operators.Start(bp_);
+			CqlDate br_ = context.Operators.DateFrom(bq_);
+			object bs_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Effective);
+			CqlInterval<CqlDateTime> bt_ = QICoreCommon_2_0_000.toInterval(bs_);
+			CqlDateTime bu_ = context.Operators.Start(bt_);
+			CqlDate bv_ = context.Operators.DateFrom(bu_);
+			bool? bw_ = context.Operators.SameAs(br_, bv_, "day");
+			bool? bx_ = context.Operators.And(bn_, bw_);
+			object by_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Value);
+			bool? bz_ = context.Operators.Not((bool?)(by_ is null));
+			bool? ca_ = context.Operators.And(bx_, bz_);
+			object cb_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Value);
+			bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+			bool? cd_ = context.Operators.And(ca_, cc_);
 
 			return cd_;
 		};
-		var y_ = context.Operators.Where<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf>(w_, x_);
+		IEnumerable<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf> y_ = context.Operators.Where<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf>(w_, x_);
 		CqlDate z_(Tuple_EPUbUfihDVTJZfYVTHGLFUeUf tuple_epubufihdvtjzfyvthglfueuf)
 		{
-			var ce_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Effective);
-			var cf_ = QICoreCommon_2_0_000.toInterval(ce_);
-			var cg_ = context.Operators.Start(cf_);
-			var ch_ = context.Operators.DateFrom(cg_);
-			var ci_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Effective);
-			var cj_ = QICoreCommon_2_0_000.toInterval(ci_);
-			var ck_ = context.Operators.Start(cj_);
-			var cl_ = context.Operators.DateFrom(ck_);
-			var cm_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Effective);
-			var cn_ = QICoreCommon_2_0_000.toInterval(cm_);
-			var co_ = context.Operators.Start(cn_);
-			var cp_ = context.Operators.DateFrom(co_);
-			var cq_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Effective);
-			var cr_ = QICoreCommon_2_0_000.toInterval(cq_);
-			var cs_ = context.Operators.Start(cr_);
-			var ct_ = context.Operators.DateFrom(cs_);
-			var cu_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Effective);
-			var cv_ = QICoreCommon_2_0_000.toInterval(cu_);
-			var cw_ = context.Operators.Start(cv_);
-			var cx_ = context.Operators.DateFrom(cw_);
-			var cy_ = new CqlDate[]
+			object ce_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Effective);
+			CqlInterval<CqlDateTime> cf_ = QICoreCommon_2_0_000.toInterval(ce_);
+			CqlDateTime cg_ = context.Operators.Start(cf_);
+			CqlDate ch_ = context.Operators.DateFrom(cg_);
+			object ci_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Effective);
+			CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_0_000.toInterval(ci_);
+			CqlDateTime ck_ = context.Operators.Start(cj_);
+			CqlDate cl_ = context.Operators.DateFrom(ck_);
+			object cm_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Effective);
+			CqlInterval<CqlDateTime> cn_ = QICoreCommon_2_0_000.toInterval(cm_);
+			CqlDateTime co_ = context.Operators.Start(cn_);
+			CqlDate cp_ = context.Operators.DateFrom(co_);
+			object cq_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Effective);
+			CqlInterval<CqlDateTime> cr_ = QICoreCommon_2_0_000.toInterval(cq_);
+			CqlDateTime cs_ = context.Operators.Start(cr_);
+			CqlDate ct_ = context.Operators.DateFrom(cs_);
+			object cu_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Effective);
+			CqlInterval<CqlDateTime> cv_ = QICoreCommon_2_0_000.toInterval(cu_);
+			CqlDateTime cw_ = context.Operators.Start(cv_);
+			CqlDate cx_ = context.Operators.DateFrom(cw_);
+			CqlDate[] cy_ = new CqlDate[]
 			{
 				ch_,
 				cl_,
@@ -1205,11 +1206,11 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				ct_,
 				cx_,
 			};
-			var cz_ = context.Operators.Max<CqlDate>((cy_ as IEnumerable<CqlDate>));
+			CqlDate cz_ = context.Operators.Max<CqlDate>((cy_ as IEnumerable<CqlDate>));
 
 			return cz_;
 		};
-		var aa_ = context.Operators.Select<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf, CqlDate>(y_, z_);
+		IEnumerable<CqlDate> aa_ = context.Operators.Select<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf, CqlDate>(y_, z_);
 
 		return aa_;
 	}
@@ -1220,75 +1221,75 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
 		{
-			var i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-			var j_ = QICoreCommon_2_0_000.toInterval(i_);
+			object i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
+		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
 		IEnumerable<CqlInterval<CqlDateTime>> d_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var k_ = this.Date_HOOS_Total_Assessment_Completed();
+			IEnumerable<CqlDate> k_ = this.Date_HOOS_Total_Assessment_Completed();
 			bool? l_(CqlDate InitialHipAssessmentHOOS)
 			{
-				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
-				var r_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
-				var s_ = context.Operators.Interval(InitialHipAssessmentHOOS, r_, true, true);
-				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
-				var v_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
-				var w_ = context.Operators.Interval(InitialHipAssessmentHOOS, v_, true, true);
-				var x_ = context.Operators.ConvertDateToDateTime(w_?.high);
-				var z_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
-				var aa_ = context.Operators.Interval(InitialHipAssessmentHOOS, z_, true, true);
-				var ac_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
-				var ad_ = context.Operators.Interval(InitialHipAssessmentHOOS, ac_, true, true);
-				var ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
-				var af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
-				var ag_ = context.Operators.Not((bool?)(InitialHipAssessmentHOOS is null));
-				var ah_ = context.Operators.And(af_, ag_);
+				CqlDateTime p_ = context.Operators.Start(TotalHip);
+				CqlQuantity q_ = context.Operators.Quantity(90m, "days");
+				CqlDate r_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
+				CqlInterval<CqlDate> s_ = context.Operators.Interval(InitialHipAssessmentHOOS, r_, true, true);
+				CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_?.low);
+				CqlDate v_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
+				CqlInterval<CqlDate> w_ = context.Operators.Interval(InitialHipAssessmentHOOS, v_, true, true);
+				CqlDateTime x_ = context.Operators.ConvertDateToDateTime(w_?.high);
+				CqlDate z_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
+				CqlInterval<CqlDate> aa_ = context.Operators.Interval(InitialHipAssessmentHOOS, z_, true, true);
+				CqlDate ac_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
+				CqlInterval<CqlDate> ad_ = context.Operators.Interval(InitialHipAssessmentHOOS, ac_, true, true);
+				CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
+				bool? af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
+				bool? ag_ = context.Operators.Not((bool?)(InitialHipAssessmentHOOS is null));
+				bool? ah_ = context.Operators.And(af_, ag_);
 
 				return ah_;
 			};
-			var m_ = context.Operators.Where<CqlDate>(k_, l_);
+			IEnumerable<CqlDate> m_ = context.Operators.Where<CqlDate>(k_, l_);
 			CqlInterval<CqlDateTime> n_(CqlDate InitialHipAssessmentHOOS) => 
 				TotalHip;
-			var o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
+			IEnumerable<CqlInterval<CqlDateTime>> o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
 
 			return o_;
 		};
-		var e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
+		IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
 		IEnumerable<CqlInterval<CqlDateTime>> f_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var ai_ = this.Date_HOOS_Total_Assessment_Completed();
+			IEnumerable<CqlDate> ai_ = this.Date_HOOS_Total_Assessment_Completed();
 			bool? aj_(CqlDate FollowUpHipAssessmentHOOS)
 			{
-				var an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentHOOS);
-				var ao_ = context.Operators.DateFrom(an_);
-				var ap_ = context.Operators.End(TotalHip);
-				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
-				var as_ = context.Operators.Add(aq_, ar_);
-				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
-				var aw_ = context.Operators.Add(au_, av_);
-				var ax_ = context.Operators.Interval(as_, aw_, true, true);
-				var ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
+				CqlDateTime an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentHOOS);
+				CqlDate ao_ = context.Operators.DateFrom(an_);
+				CqlDateTime ap_ = context.Operators.End(TotalHip);
+				CqlDate aq_ = context.Operators.DateFrom(ap_);
+				CqlQuantity ar_ = context.Operators.Quantity(300m, "days");
+				CqlDate as_ = context.Operators.Add(aq_, ar_);
+				CqlDate au_ = context.Operators.DateFrom(ap_);
+				CqlQuantity av_ = context.Operators.Quantity(425m, "days");
+				CqlDate aw_ = context.Operators.Add(au_, av_);
+				CqlInterval<CqlDate> ax_ = context.Operators.Interval(as_, aw_, true, true);
+				bool? ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
 
 				return ay_;
 			};
-			var ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
+			IEnumerable<CqlDate> ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
 			CqlInterval<CqlDateTime> al_(CqlDate FollowUpHipAssessmentHOOS) => 
 				TotalHip;
-			var am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
+			IEnumerable<CqlInterval<CqlDateTime>> am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
 
 			return am_;
 		};
-		var g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
-		var h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
+		IEnumerable<CqlInterval<CqlDateTime>> g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
+		bool? h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
 
 		return h_;
 	}
@@ -1299,27 +1300,27 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private IEnumerable<CqlDate> Date_HOOSJr_Total_Assessment_Completed_Value()
 	{
-		var a_ = this.Total_interval_score__HOOSJR_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		CqlCode a_ = this.Total_interval_score__HOOSJR_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		bool? d_(Observation HOOSJr)
 		{
-			var h_ = FHIRHelpers_4_3_000.ToValue(HOOSJr?.Value);
-			var i_ = context.Operators.Not((bool?)(h_ is null));
+			object h_ = FHIRHelpers_4_3_000.ToValue(HOOSJr?.Value);
+			bool? i_ = context.Operators.Not((bool?)(h_ is null));
 
 			return i_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
+		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		CqlDate f_(Observation DocumentedHOOSJr)
 		{
-			var j_ = FHIRHelpers_4_3_000.ToValue(DocumentedHOOSJr?.Effective);
-			var k_ = QICoreCommon_2_0_000.toInterval(j_);
-			var l_ = context.Operators.Start(k_);
-			var m_ = context.Operators.DateFrom(l_);
+			object j_ = FHIRHelpers_4_3_000.ToValue(DocumentedHOOSJr?.Effective);
+			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.toInterval(j_);
+			CqlDateTime l_ = context.Operators.Start(k_);
+			CqlDate m_ = context.Operators.DateFrom(l_);
 
 			return m_;
 		};
-		var g_ = context.Operators.Select<Observation, CqlDate>(e_, f_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Observation, CqlDate>(e_, f_);
 
 		return g_;
 	}
@@ -1330,75 +1331,75 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
 		{
-			var i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-			var j_ = QICoreCommon_2_0_000.toInterval(i_);
+			object i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
+		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
 		IEnumerable<CqlInterval<CqlDateTime>> d_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var k_ = this.Date_HOOSJr_Total_Assessment_Completed();
+			IEnumerable<CqlDate> k_ = this.Date_HOOSJr_Total_Assessment_Completed();
 			bool? l_(CqlDate InitialHipAssessment)
 			{
-				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
-				var r_ = context.Operators.Add(InitialHipAssessment, q_);
-				var s_ = context.Operators.Interval(InitialHipAssessment, r_, true, true);
-				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
-				var v_ = context.Operators.Add(InitialHipAssessment, q_);
-				var w_ = context.Operators.Interval(InitialHipAssessment, v_, true, true);
-				var x_ = context.Operators.ConvertDateToDateTime(w_?.high);
-				var z_ = context.Operators.Add(InitialHipAssessment, q_);
-				var aa_ = context.Operators.Interval(InitialHipAssessment, z_, true, true);
-				var ac_ = context.Operators.Add(InitialHipAssessment, q_);
-				var ad_ = context.Operators.Interval(InitialHipAssessment, ac_, true, true);
-				var ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
-				var af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
-				var ag_ = context.Operators.Not((bool?)(InitialHipAssessment is null));
-				var ah_ = context.Operators.And(af_, ag_);
+				CqlDateTime p_ = context.Operators.Start(TotalHip);
+				CqlQuantity q_ = context.Operators.Quantity(90m, "days");
+				CqlDate r_ = context.Operators.Add(InitialHipAssessment, q_);
+				CqlInterval<CqlDate> s_ = context.Operators.Interval(InitialHipAssessment, r_, true, true);
+				CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_?.low);
+				CqlDate v_ = context.Operators.Add(InitialHipAssessment, q_);
+				CqlInterval<CqlDate> w_ = context.Operators.Interval(InitialHipAssessment, v_, true, true);
+				CqlDateTime x_ = context.Operators.ConvertDateToDateTime(w_?.high);
+				CqlDate z_ = context.Operators.Add(InitialHipAssessment, q_);
+				CqlInterval<CqlDate> aa_ = context.Operators.Interval(InitialHipAssessment, z_, true, true);
+				CqlDate ac_ = context.Operators.Add(InitialHipAssessment, q_);
+				CqlInterval<CqlDate> ad_ = context.Operators.Interval(InitialHipAssessment, ac_, true, true);
+				CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
+				bool? af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
+				bool? ag_ = context.Operators.Not((bool?)(InitialHipAssessment is null));
+				bool? ah_ = context.Operators.And(af_, ag_);
 
 				return ah_;
 			};
-			var m_ = context.Operators.Where<CqlDate>(k_, l_);
+			IEnumerable<CqlDate> m_ = context.Operators.Where<CqlDate>(k_, l_);
 			CqlInterval<CqlDateTime> n_(CqlDate InitialHipAssessment) => 
 				TotalHip;
-			var o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
+			IEnumerable<CqlInterval<CqlDateTime>> o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
 
 			return o_;
 		};
-		var e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
+		IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
 		IEnumerable<CqlInterval<CqlDateTime>> f_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var ai_ = this.Date_HOOSJr_Total_Assessment_Completed();
+			IEnumerable<CqlDate> ai_ = this.Date_HOOSJr_Total_Assessment_Completed();
 			bool? aj_(CqlDate FollowUpHipAssessment)
 			{
-				var an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessment);
-				var ao_ = context.Operators.DateFrom(an_);
-				var ap_ = context.Operators.End(TotalHip);
-				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
-				var as_ = context.Operators.Add(aq_, ar_);
-				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
-				var aw_ = context.Operators.Add(au_, av_);
-				var ax_ = context.Operators.Interval(as_, aw_, true, true);
-				var ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
+				CqlDateTime an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessment);
+				CqlDate ao_ = context.Operators.DateFrom(an_);
+				CqlDateTime ap_ = context.Operators.End(TotalHip);
+				CqlDate aq_ = context.Operators.DateFrom(ap_);
+				CqlQuantity ar_ = context.Operators.Quantity(300m, "days");
+				CqlDate as_ = context.Operators.Add(aq_, ar_);
+				CqlDate au_ = context.Operators.DateFrom(ap_);
+				CqlQuantity av_ = context.Operators.Quantity(425m, "days");
+				CqlDate aw_ = context.Operators.Add(au_, av_);
+				CqlInterval<CqlDate> ax_ = context.Operators.Interval(as_, aw_, true, true);
+				bool? ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
 
 				return ay_;
 			};
-			var ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
+			IEnumerable<CqlDate> ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
 			CqlInterval<CqlDateTime> al_(CqlDate FollowUpHipAssessment) => 
 				TotalHip;
-			var am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
+			IEnumerable<CqlInterval<CqlDateTime>> am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
 
 			return am_;
 		};
-		var g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
-		var h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
+		IEnumerable<CqlInterval<CqlDateTime>> g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
+		bool? h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
 
 		return h_;
 	}
@@ -1409,16 +1410,16 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed_Value()
 	{
-		var a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = this.PROMIS_10_Global_Physical_Health__GPH__score_T_score();
-		var e_ = context.Operators.ToList<CqlCode>(d_);
-		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
-		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
+		CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		CqlCode d_ = this.PROMIS_10_Global_Physical_Health__GPH__score_T_score();
+		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
+		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+		IEnumerable<ValueTuple<Observation,Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		Tuple_CSQNXjbdUJCRVLSGAJQOISbPM h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
-			var n_ = new Tuple_CSQNXjbdUJCRVLSGAJQOISbPM
+			Tuple_CSQNXjbdUJCRVLSGAJQOISbPM n_ = new Tuple_CSQNXjbdUJCRVLSGAJQOISbPM
 			{
 				PROMIS10MentalScore = _valueTuple.Item1,
 				PROMIS10PhysicalScore = _valueTuple.Item2,
@@ -1426,48 +1427,48 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(g_, h_);
+		IEnumerable<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM> i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(g_, h_);
 		bool? j_(Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
-			var p_ = QICoreCommon_2_0_000.toInterval(o_);
-			var q_ = context.Operators.Start(p_);
-			var r_ = context.Operators.DateFrom(q_);
-			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Effective);
-			var t_ = QICoreCommon_2_0_000.toInterval(s_);
-			var u_ = context.Operators.Start(t_);
-			var v_ = context.Operators.DateFrom(u_);
-			var w_ = context.Operators.SameAs(r_, v_, "day");
-			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Value);
-			var y_ = context.Operators.Not((bool?)(x_ is null));
-			var z_ = context.Operators.And(w_, y_);
-			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Value);
-			var ab_ = context.Operators.Not((bool?)(aa_ is null));
-			var ac_ = context.Operators.And(z_, ab_);
+			object o_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
+			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
+			CqlDateTime q_ = context.Operators.Start(p_);
+			CqlDate r_ = context.Operators.DateFrom(q_);
+			object s_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Effective);
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
+			CqlDateTime u_ = context.Operators.Start(t_);
+			CqlDate v_ = context.Operators.DateFrom(u_);
+			bool? w_ = context.Operators.SameAs(r_, v_, "day");
+			object x_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Value);
+			bool? y_ = context.Operators.Not((bool?)(x_ is null));
+			bool? z_ = context.Operators.And(w_, y_);
+			object aa_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Value);
+			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
+			bool? ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
 		};
-		var k_ = context.Operators.Where<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(i_, j_);
+		IEnumerable<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM> k_ = context.Operators.Where<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(i_, j_);
 		CqlDate l_(Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
-			var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
-			var af_ = context.Operators.Start(ae_);
-			var ag_ = context.Operators.DateFrom(af_);
-			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Effective);
-			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
-			var aj_ = context.Operators.Start(ai_);
-			var ak_ = context.Operators.DateFrom(aj_);
-			var al_ = new CqlDate[]
+			object ad_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.toInterval(ad_);
+			CqlDateTime af_ = context.Operators.Start(ae_);
+			CqlDate ag_ = context.Operators.DateFrom(af_);
+			object ah_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Effective);
+			CqlInterval<CqlDateTime> ai_ = QICoreCommon_2_0_000.toInterval(ah_);
+			CqlDateTime aj_ = context.Operators.Start(ai_);
+			CqlDate ak_ = context.Operators.DateFrom(aj_);
+			CqlDate[] al_ = new CqlDate[]
 			{
 				ag_,
 				ak_,
 			};
-			var am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
+			CqlDate am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
 
 			return am_;
 		};
-		var m_ = context.Operators.Select<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM, CqlDate>(k_, l_);
+		IEnumerable<CqlDate> m_ = context.Operators.Select<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM, CqlDate>(k_, l_);
 
 		return m_;
 	}
@@ -1478,75 +1479,75 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
 		{
-			var i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-			var j_ = QICoreCommon_2_0_000.toInterval(i_);
+			object i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
+		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
 		IEnumerable<CqlInterval<CqlDateTime>> d_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var k_ = this.Date_PROMIS10_Total_Assessment_Completed();
+			IEnumerable<CqlDate> k_ = this.Date_PROMIS10_Total_Assessment_Completed();
 			bool? l_(CqlDate InitialHipAssessmentPROMIS10)
 			{
-				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
-				var r_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
-				var s_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, r_, true, true);
-				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
-				var v_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
-				var w_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, v_, true, true);
-				var x_ = context.Operators.ConvertDateToDateTime(w_?.high);
-				var z_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
-				var aa_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, z_, true, true);
-				var ac_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
-				var ad_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, ac_, true, true);
-				var ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
-				var af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
-				var ag_ = context.Operators.Not((bool?)(InitialHipAssessmentPROMIS10 is null));
-				var ah_ = context.Operators.And(af_, ag_);
+				CqlDateTime p_ = context.Operators.Start(TotalHip);
+				CqlQuantity q_ = context.Operators.Quantity(90m, "days");
+				CqlDate r_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
+				CqlInterval<CqlDate> s_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, r_, true, true);
+				CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_?.low);
+				CqlDate v_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
+				CqlInterval<CqlDate> w_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, v_, true, true);
+				CqlDateTime x_ = context.Operators.ConvertDateToDateTime(w_?.high);
+				CqlDate z_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
+				CqlInterval<CqlDate> aa_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, z_, true, true);
+				CqlDate ac_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
+				CqlInterval<CqlDate> ad_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, ac_, true, true);
+				CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
+				bool? af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
+				bool? ag_ = context.Operators.Not((bool?)(InitialHipAssessmentPROMIS10 is null));
+				bool? ah_ = context.Operators.And(af_, ag_);
 
 				return ah_;
 			};
-			var m_ = context.Operators.Where<CqlDate>(k_, l_);
+			IEnumerable<CqlDate> m_ = context.Operators.Where<CqlDate>(k_, l_);
 			CqlInterval<CqlDateTime> n_(CqlDate InitialHipAssessmentPROMIS10) => 
 				TotalHip;
-			var o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
+			IEnumerable<CqlInterval<CqlDateTime>> o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
 
 			return o_;
 		};
-		var e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
+		IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
 		IEnumerable<CqlInterval<CqlDateTime>> f_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var ai_ = this.Date_PROMIS10_Total_Assessment_Completed();
+			IEnumerable<CqlDate> ai_ = this.Date_PROMIS10_Total_Assessment_Completed();
 			bool? aj_(CqlDate FollowUpHipAssessmentPROMIS10)
 			{
-				var an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentPROMIS10);
-				var ao_ = context.Operators.DateFrom(an_);
-				var ap_ = context.Operators.End(TotalHip);
-				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
-				var as_ = context.Operators.Add(aq_, ar_);
-				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
-				var aw_ = context.Operators.Add(au_, av_);
-				var ax_ = context.Operators.Interval(as_, aw_, true, true);
-				var ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
+				CqlDateTime an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentPROMIS10);
+				CqlDate ao_ = context.Operators.DateFrom(an_);
+				CqlDateTime ap_ = context.Operators.End(TotalHip);
+				CqlDate aq_ = context.Operators.DateFrom(ap_);
+				CqlQuantity ar_ = context.Operators.Quantity(300m, "days");
+				CqlDate as_ = context.Operators.Add(aq_, ar_);
+				CqlDate au_ = context.Operators.DateFrom(ap_);
+				CqlQuantity av_ = context.Operators.Quantity(425m, "days");
+				CqlDate aw_ = context.Operators.Add(au_, av_);
+				CqlInterval<CqlDate> ax_ = context.Operators.Interval(as_, aw_, true, true);
+				bool? ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
 
 				return ay_;
 			};
-			var ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
+			IEnumerable<CqlDate> ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
 			CqlInterval<CqlDateTime> al_(CqlDate FollowUpHipAssessmentPROMIS10) => 
 				TotalHip;
-			var am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
+			IEnumerable<CqlInterval<CqlDateTime>> am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
 
 			return am_;
 		};
-		var g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
-		var h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
+		IEnumerable<CqlInterval<CqlDateTime>> g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
+		bool? h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
 
 		return h_;
 	}
@@ -1557,16 +1558,16 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed_Value()
 	{
-		var a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = this.VR_12_Physical_component_summary__PCS__score___oblique_method_T_score();
-		var e_ = context.Operators.ToList<CqlCode>(d_);
-		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
-		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
+		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		CqlCode d_ = this.VR_12_Physical_component_summary__PCS__score___oblique_method_T_score();
+		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
+		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+		IEnumerable<ValueTuple<Observation,Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
-			var n_ = new Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
+			Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ n_ = new Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
 				VR12MentalAssessment = _valueTuple.Item1,
 				VR12PhysicalAssessment = _valueTuple.Item2,
@@ -1574,48 +1575,48 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
+		IEnumerable<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ> i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
 		bool? j_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
-			var p_ = QICoreCommon_2_0_000.toInterval(o_);
-			var q_ = context.Operators.Start(p_);
-			var r_ = context.Operators.DateFrom(q_);
-			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
-			var t_ = QICoreCommon_2_0_000.toInterval(s_);
-			var u_ = context.Operators.Start(t_);
-			var v_ = context.Operators.DateFrom(u_);
-			var w_ = context.Operators.SameAs(r_, v_, "day");
-			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Value);
-			var y_ = context.Operators.Not((bool?)(x_ is null));
-			var z_ = context.Operators.And(w_, y_);
-			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Value);
-			var ab_ = context.Operators.Not((bool?)(aa_ is null));
-			var ac_ = context.Operators.And(z_, ab_);
+			object o_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
+			CqlDateTime q_ = context.Operators.Start(p_);
+			CqlDate r_ = context.Operators.DateFrom(q_);
+			object s_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
+			CqlDateTime u_ = context.Operators.Start(t_);
+			CqlDate v_ = context.Operators.DateFrom(u_);
+			bool? w_ = context.Operators.SameAs(r_, v_, "day");
+			object x_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Value);
+			bool? y_ = context.Operators.Not((bool?)(x_ is null));
+			bool? z_ = context.Operators.And(w_, y_);
+			object aa_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Value);
+			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
+			bool? ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
 		};
-		var k_ = context.Operators.Where<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
+		IEnumerable<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ> k_ = context.Operators.Where<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
 		CqlDate l_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
-			var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
-			var af_ = context.Operators.Start(ae_);
-			var ag_ = context.Operators.DateFrom(af_);
-			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
-			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
-			var aj_ = context.Operators.Start(ai_);
-			var ak_ = context.Operators.DateFrom(aj_);
-			var al_ = new CqlDate[]
+			object ad_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.toInterval(ad_);
+			CqlDateTime af_ = context.Operators.Start(ae_);
+			CqlDate ag_ = context.Operators.DateFrom(af_);
+			object ah_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			CqlInterval<CqlDateTime> ai_ = QICoreCommon_2_0_000.toInterval(ah_);
+			CqlDateTime aj_ = context.Operators.Start(ai_);
+			CqlDate ak_ = context.Operators.DateFrom(aj_);
+			CqlDate[] al_ = new CqlDate[]
 			{
 				ag_,
 				ak_,
 			};
-			var am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
+			CqlDate am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
 
 			return am_;
 		};
-		var m_ = context.Operators.Select<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(k_, l_);
+		IEnumerable<CqlDate> m_ = context.Operators.Select<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(k_, l_);
 
 		return m_;
 	}
@@ -1626,75 +1627,75 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
 		{
-			var i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-			var j_ = QICoreCommon_2_0_000.toInterval(i_);
+			object i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
+		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
 		IEnumerable<CqlInterval<CqlDateTime>> d_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var k_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
+			IEnumerable<CqlDate> k_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
 			bool? l_(CqlDate InitialHipAssessmentOblique)
 			{
-				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
-				var r_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
-				var s_ = context.Operators.Interval(InitialHipAssessmentOblique, r_, true, true);
-				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
-				var v_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
-				var w_ = context.Operators.Interval(InitialHipAssessmentOblique, v_, true, true);
-				var x_ = context.Operators.ConvertDateToDateTime(w_?.high);
-				var z_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
-				var aa_ = context.Operators.Interval(InitialHipAssessmentOblique, z_, true, true);
-				var ac_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
-				var ad_ = context.Operators.Interval(InitialHipAssessmentOblique, ac_, true, true);
-				var ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
-				var af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
-				var ag_ = context.Operators.Not((bool?)(InitialHipAssessmentOblique is null));
-				var ah_ = context.Operators.And(af_, ag_);
+				CqlDateTime p_ = context.Operators.Start(TotalHip);
+				CqlQuantity q_ = context.Operators.Quantity(90m, "days");
+				CqlDate r_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
+				CqlInterval<CqlDate> s_ = context.Operators.Interval(InitialHipAssessmentOblique, r_, true, true);
+				CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_?.low);
+				CqlDate v_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
+				CqlInterval<CqlDate> w_ = context.Operators.Interval(InitialHipAssessmentOblique, v_, true, true);
+				CqlDateTime x_ = context.Operators.ConvertDateToDateTime(w_?.high);
+				CqlDate z_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
+				CqlInterval<CqlDate> aa_ = context.Operators.Interval(InitialHipAssessmentOblique, z_, true, true);
+				CqlDate ac_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
+				CqlInterval<CqlDate> ad_ = context.Operators.Interval(InitialHipAssessmentOblique, ac_, true, true);
+				CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
+				bool? af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
+				bool? ag_ = context.Operators.Not((bool?)(InitialHipAssessmentOblique is null));
+				bool? ah_ = context.Operators.And(af_, ag_);
 
 				return ah_;
 			};
-			var m_ = context.Operators.Where<CqlDate>(k_, l_);
+			IEnumerable<CqlDate> m_ = context.Operators.Where<CqlDate>(k_, l_);
 			CqlInterval<CqlDateTime> n_(CqlDate InitialHipAssessmentOblique) => 
 				TotalHip;
-			var o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
+			IEnumerable<CqlInterval<CqlDateTime>> o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
 
 			return o_;
 		};
-		var e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
+		IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
 		IEnumerable<CqlInterval<CqlDateTime>> f_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var ai_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
+			IEnumerable<CqlDate> ai_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
 			bool? aj_(CqlDate FollowUpHipAssessmentOblique)
 			{
-				var an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOblique);
-				var ao_ = context.Operators.DateFrom(an_);
-				var ap_ = context.Operators.End(TotalHip);
-				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
-				var as_ = context.Operators.Add(aq_, ar_);
-				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
-				var aw_ = context.Operators.Add(au_, av_);
-				var ax_ = context.Operators.Interval(as_, aw_, true, true);
-				var ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
+				CqlDateTime an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOblique);
+				CqlDate ao_ = context.Operators.DateFrom(an_);
+				CqlDateTime ap_ = context.Operators.End(TotalHip);
+				CqlDate aq_ = context.Operators.DateFrom(ap_);
+				CqlQuantity ar_ = context.Operators.Quantity(300m, "days");
+				CqlDate as_ = context.Operators.Add(aq_, ar_);
+				CqlDate au_ = context.Operators.DateFrom(ap_);
+				CqlQuantity av_ = context.Operators.Quantity(425m, "days");
+				CqlDate aw_ = context.Operators.Add(au_, av_);
+				CqlInterval<CqlDate> ax_ = context.Operators.Interval(as_, aw_, true, true);
+				bool? ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
 
 				return ay_;
 			};
-			var ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
+			IEnumerable<CqlDate> ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
 			CqlInterval<CqlDateTime> al_(CqlDate FollowUpHipAssessmentOblique) => 
 				TotalHip;
-			var am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
+			IEnumerable<CqlInterval<CqlDateTime>> am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
 
 			return am_;
 		};
-		var g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
-		var h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
+		IEnumerable<CqlInterval<CqlDateTime>> g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
+		bool? h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
 
 		return h_;
 	}
@@ -1705,16 +1706,16 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed_Value()
 	{
-		var a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = this.VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score();
-		var e_ = context.Operators.ToList<CqlCode>(d_);
-		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
-		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
+		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		CqlCode d_ = this.VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score();
+		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
+		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+		IEnumerable<ValueTuple<Observation,Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
-			var n_ = new Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
+			Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ n_ = new Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
 			{
 				VR12MentalAssessment = _valueTuple.Item1,
 				VR12PhysicalAssessment = _valueTuple.Item2,
@@ -1722,48 +1723,48 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
+		IEnumerable<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ> i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
 		bool? j_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
-			var p_ = QICoreCommon_2_0_000.toInterval(o_);
-			var q_ = context.Operators.Start(p_);
-			var r_ = context.Operators.DateFrom(q_);
-			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
-			var t_ = QICoreCommon_2_0_000.toInterval(s_);
-			var u_ = context.Operators.Start(t_);
-			var v_ = context.Operators.DateFrom(u_);
-			var w_ = context.Operators.SameAs(r_, v_, "day");
-			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Value);
-			var y_ = context.Operators.Not((bool?)(x_ is null));
-			var z_ = context.Operators.And(w_, y_);
-			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Value);
-			var ab_ = context.Operators.Not((bool?)(aa_ is null));
-			var ac_ = context.Operators.And(z_, ab_);
+			object o_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
+			CqlDateTime q_ = context.Operators.Start(p_);
+			CqlDate r_ = context.Operators.DateFrom(q_);
+			object s_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
+			CqlDateTime u_ = context.Operators.Start(t_);
+			CqlDate v_ = context.Operators.DateFrom(u_);
+			bool? w_ = context.Operators.SameAs(r_, v_, "day");
+			object x_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Value);
+			bool? y_ = context.Operators.Not((bool?)(x_ is null));
+			bool? z_ = context.Operators.And(w_, y_);
+			object aa_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Value);
+			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
+			bool? ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
 		};
-		var k_ = context.Operators.Where<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
+		IEnumerable<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ> k_ = context.Operators.Where<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
 		CqlDate l_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
-			var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
-			var af_ = context.Operators.Start(ae_);
-			var ag_ = context.Operators.DateFrom(af_);
-			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
-			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
-			var aj_ = context.Operators.Start(ai_);
-			var ak_ = context.Operators.DateFrom(aj_);
-			var al_ = new CqlDate[]
+			object ad_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.toInterval(ad_);
+			CqlDateTime af_ = context.Operators.Start(ae_);
+			CqlDate ag_ = context.Operators.DateFrom(af_);
+			object ah_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			CqlInterval<CqlDateTime> ai_ = QICoreCommon_2_0_000.toInterval(ah_);
+			CqlDateTime aj_ = context.Operators.Start(ai_);
+			CqlDate ak_ = context.Operators.DateFrom(aj_);
+			CqlDate[] al_ = new CqlDate[]
 			{
 				ag_,
 				ak_,
 			};
-			var am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
+			CqlDate am_ = context.Operators.Max<CqlDate>((al_ as IEnumerable<CqlDate>));
 
 			return am_;
 		};
-		var m_ = context.Operators.Select<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(k_, l_);
+		IEnumerable<CqlDate> m_ = context.Operators.Select<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(k_, l_);
 
 		return m_;
 	}
@@ -1774,75 +1775,75 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Value()
 	{
-		var a_ = this.Total_Hip_Arthroplasty_Procedure();
+		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure();
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
 		{
-			var i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
-			var j_ = QICoreCommon_2_0_000.toInterval(i_);
+			object i_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
+		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Procedure, CqlInterval<CqlDateTime>>(a_, b_);
 		IEnumerable<CqlInterval<CqlDateTime>> d_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var k_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
+			IEnumerable<CqlDate> k_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
 			bool? l_(CqlDate InitialHipAssessmentOrthogonal)
 			{
-				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
-				var r_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
-				var s_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, r_, true, true);
-				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
-				var v_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
-				var w_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, v_, true, true);
-				var x_ = context.Operators.ConvertDateToDateTime(w_?.high);
-				var z_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
-				var aa_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, z_, true, true);
-				var ac_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
-				var ad_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, ac_, true, true);
-				var ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
-				var af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
-				var ag_ = context.Operators.Not((bool?)(InitialHipAssessmentOrthogonal is null));
-				var ah_ = context.Operators.And(af_, ag_);
+				CqlDateTime p_ = context.Operators.Start(TotalHip);
+				CqlQuantity q_ = context.Operators.Quantity(90m, "days");
+				CqlDate r_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
+				CqlInterval<CqlDate> s_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, r_, true, true);
+				CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_?.low);
+				CqlDate v_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
+				CqlInterval<CqlDate> w_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, v_, true, true);
+				CqlDateTime x_ = context.Operators.ConvertDateToDateTime(w_?.high);
+				CqlDate z_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
+				CqlInterval<CqlDate> aa_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, z_, true, true);
+				CqlDate ac_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
+				CqlInterval<CqlDate> ad_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, ac_, true, true);
+				CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(t_, x_, aa_?.lowClosed, ad_?.highClosed);
+				bool? af_ = context.Operators.In<CqlDateTime>(p_, ae_, "day");
+				bool? ag_ = context.Operators.Not((bool?)(InitialHipAssessmentOrthogonal is null));
+				bool? ah_ = context.Operators.And(af_, ag_);
 
 				return ah_;
 			};
-			var m_ = context.Operators.Where<CqlDate>(k_, l_);
+			IEnumerable<CqlDate> m_ = context.Operators.Where<CqlDate>(k_, l_);
 			CqlInterval<CqlDateTime> n_(CqlDate InitialHipAssessmentOrthogonal) => 
 				TotalHip;
-			var o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
+			IEnumerable<CqlInterval<CqlDateTime>> o_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(m_, n_);
 
 			return o_;
 		};
-		var e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
+		IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
 		IEnumerable<CqlInterval<CqlDateTime>> f_(CqlInterval<CqlDateTime> TotalHip)
 		{
-			var ai_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
+			IEnumerable<CqlDate> ai_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
 			bool? aj_(CqlDate FollowUpHipAssessmentOrthogonal)
 			{
-				var an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOrthogonal);
-				var ao_ = context.Operators.DateFrom(an_);
-				var ap_ = context.Operators.End(TotalHip);
-				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
-				var as_ = context.Operators.Add(aq_, ar_);
-				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
-				var aw_ = context.Operators.Add(au_, av_);
-				var ax_ = context.Operators.Interval(as_, aw_, true, true);
-				var ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
+				CqlDateTime an_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOrthogonal);
+				CqlDate ao_ = context.Operators.DateFrom(an_);
+				CqlDateTime ap_ = context.Operators.End(TotalHip);
+				CqlDate aq_ = context.Operators.DateFrom(ap_);
+				CqlQuantity ar_ = context.Operators.Quantity(300m, "days");
+				CqlDate as_ = context.Operators.Add(aq_, ar_);
+				CqlDate au_ = context.Operators.DateFrom(ap_);
+				CqlQuantity av_ = context.Operators.Quantity(425m, "days");
+				CqlDate aw_ = context.Operators.Add(au_, av_);
+				CqlInterval<CqlDate> ax_ = context.Operators.Interval(as_, aw_, true, true);
+				bool? ay_ = context.Operators.In<CqlDate>(ao_, ax_, "day");
 
 				return ay_;
 			};
-			var ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
+			IEnumerable<CqlDate> ak_ = context.Operators.Where<CqlDate>(ai_, aj_);
 			CqlInterval<CqlDateTime> al_(CqlDate FollowUpHipAssessmentOrthogonal) => 
 				TotalHip;
-			var am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
+			IEnumerable<CqlInterval<CqlDateTime>> am_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(ak_, al_);
 
 			return am_;
 		};
-		var g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
-		var h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
+		IEnumerable<CqlInterval<CqlDateTime>> g_ = context.Operators.SelectMany<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(e_, f_);
+		bool? h_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(g_);
 
 		return h_;
 	}
@@ -1853,15 +1854,15 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments();
-		var b_ = this.Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments();
-		var c_ = context.Operators.Or(a_, b_);
-		var d_ = this.Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments();
-		var e_ = context.Operators.Or(c_, d_);
-		var f_ = this.Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments();
-		var g_ = context.Operators.Or(e_, f_);
-		var h_ = this.Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments();
-		var i_ = context.Operators.Or(g_, h_);
+		bool? a_ = this.Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments();
+		bool? b_ = this.Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments();
+		bool? c_ = context.Operators.Or(a_, b_);
+		bool? d_ = this.Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments();
+		bool? e_ = context.Operators.Or(c_, d_);
+		bool? f_ = this.Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments();
+		bool? g_ = context.Operators.Or(e_, f_);
+		bool? h_ = this.Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments();
+		bool? i_ = context.Operators.Or(g_, h_);
 
 		return i_;
 	}

@@ -7,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -88,7 +89,7 @@ public class PalliativeCare_1_9_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("71007-9", "http://loinc.org", null, null),
 		};
@@ -102,7 +103,7 @@ public class PalliativeCare_1_9_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.ResolveParameter("PalliativeCare-1.9.000", "Measurement Period", null);
+		object a_ = context.ResolveParameter("PalliativeCare-1.9.000", "Measurement Period", null);
 
 		return (CqlInterval<CqlDateTime>)a_;
 	}
@@ -113,8 +114,8 @@ public class PalliativeCare_1_9_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -125,64 +126,64 @@ public class PalliativeCare_1_9_000
 
 	private bool? Has_Palliative_Care_in_the_Measurement_Period_Value()
 	{
-		var a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = Status_1_6_000.isAssessmentPerformed(c_);
+		CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> d_ = Status_1_6_000.isAssessmentPerformed(c_);
 		bool? e_(Observation PalliativeAssessment)
 		{
-			var ab_ = FHIRHelpers_4_3_000.ToValue(PalliativeAssessment?.Effective);
-			var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
-			var ad_ = this.Measurement_Period();
-			var ae_ = context.Operators.Overlaps(ac_, ad_, "day");
+			object ab_ = FHIRHelpers_4_3_000.ToValue(PalliativeAssessment?.Effective);
+			CqlInterval<CqlDateTime> ac_ = QICoreCommon_2_0_000.toInterval(ab_);
+			CqlInterval<CqlDateTime> ad_ = this.Measurement_Period();
+			bool? ae_ = context.Operators.Overlaps(ac_, ad_, "day");
 
 			return ae_;
 		};
-		var f_ = context.Operators.Where<Observation>(d_, e_);
-		var g_ = context.Operators.Exists<Observation>(f_);
-		var h_ = this.Palliative_Care_Diagnosis();
-		var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
+		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+		bool? g_ = context.Operators.Exists<Observation>(f_);
+		CqlValueSet h_ = this.Palliative_Care_Diagnosis();
+		IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
 		bool? j_(Condition PalliativeDiagnosis)
 		{
-			var af_ = QICoreCommon_2_0_000.prevalenceInterval(PalliativeDiagnosis);
-			var ag_ = this.Measurement_Period();
-			var ah_ = context.Operators.Overlaps(af_, ag_, "day");
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.prevalenceInterval(PalliativeDiagnosis);
+			CqlInterval<CqlDateTime> ag_ = this.Measurement_Period();
+			bool? ah_ = context.Operators.Overlaps(af_, ag_, "day");
 
 			return ah_;
 		};
-		var k_ = context.Operators.Where<Condition>(i_, j_);
-		var l_ = context.Operators.Exists<Condition>(k_);
-		var m_ = context.Operators.Or(g_, l_);
-		var n_ = this.Palliative_Care_Encounter();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = Status_1_6_000.isEncounterPerformed(o_);
+		IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
+		bool? l_ = context.Operators.Exists<Condition>(k_);
+		bool? m_ = context.Operators.Or(g_, l_);
+		CqlValueSet n_ = this.Palliative_Care_Encounter();
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> p_ = Status_1_6_000.isEncounterPerformed(o_);
 		bool? q_(Encounter PalliativeEncounter)
 		{
-			var ai_ = FHIRHelpers_4_3_000.ToInterval(PalliativeEncounter?.Period);
-			var aj_ = QICoreCommon_2_0_000.toInterval((ai_ as object));
-			var ak_ = this.Measurement_Period();
-			var al_ = context.Operators.Overlaps(aj_, ak_, "day");
+			CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_3_000.ToInterval(PalliativeEncounter?.Period);
+			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval((ai_ as object));
+			CqlInterval<CqlDateTime> ak_ = this.Measurement_Period();
+			bool? al_ = context.Operators.Overlaps(aj_, ak_, "day");
 
 			return al_;
 		};
-		var r_ = context.Operators.Where<Encounter>(p_, q_);
-		var s_ = context.Operators.Exists<Encounter>(r_);
-		var t_ = context.Operators.Or(m_, s_);
-		var u_ = this.Palliative_Care_Intervention();
-		var v_ = context.Operators.RetrieveByValueSet<Procedure>(u_, null);
-		var w_ = Status_1_6_000.isInterventionPerformed(v_);
+		IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
+		bool? s_ = context.Operators.Exists<Encounter>(r_);
+		bool? t_ = context.Operators.Or(m_, s_);
+		CqlValueSet u_ = this.Palliative_Care_Intervention();
+		IEnumerable<Procedure> v_ = context.Operators.RetrieveByValueSet<Procedure>(u_, null);
+		IEnumerable<Procedure> w_ = Status_1_6_000.isInterventionPerformed(v_);
 		bool? x_(Procedure PalliativeIntervention)
 		{
-			var am_ = FHIRHelpers_4_3_000.ToValue(PalliativeIntervention?.Performed);
-			var an_ = QICoreCommon_2_0_000.toInterval(am_);
-			var ao_ = this.Measurement_Period();
-			var ap_ = context.Operators.Overlaps(an_, ao_, "day");
+			object am_ = FHIRHelpers_4_3_000.ToValue(PalliativeIntervention?.Performed);
+			CqlInterval<CqlDateTime> an_ = QICoreCommon_2_0_000.toInterval(am_);
+			CqlInterval<CqlDateTime> ao_ = this.Measurement_Period();
+			bool? ap_ = context.Operators.Overlaps(an_, ao_, "day");
 
 			return ap_;
 		};
-		var y_ = context.Operators.Where<Procedure>(w_, x_);
-		var z_ = context.Operators.Exists<Procedure>(y_);
-		var aa_ = context.Operators.Or(t_, z_);
+		IEnumerable<Procedure> y_ = context.Operators.Where<Procedure>(w_, x_);
+		bool? z_ = context.Operators.Exists<Procedure>(y_);
+		bool? aa_ = context.Operators.Or(t_, z_);
 
 		return aa_;
 	}

@@ -7,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -193,7 +194,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
 			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
@@ -208,10 +209,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("POAGOpticNerveEvaluationFHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("POAGOpticNerveEvaluationFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -222,8 +223,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -234,7 +235,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -245,7 +246,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -256,7 +257,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -267,7 +268,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -278,37 +279,37 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Ophthalmological_Services();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		var f_ = this.Outpatient_Consultation();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Nursing_Facility_Visit();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
-		var l_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Ophthalmological_Services();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Outpatient_Consultation();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Nursing_Facility_Visit();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Care_Services_in_Long_Term_Residential_Facility();
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		IEnumerable<Encounter> n_ = context.Operators.ListUnion<Encounter>(k_, m_);
 		bool? o_(Encounter QualifyingEncounter)
 		{
-			var q_ = this.Measurement_Period();
-			var r_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
-			var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, r_, null);
-			var t_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(QualifyingEncounter?.StatusElement?.Value);
-			var u_ = context.Operators.Equal(t_, "finished");
-			var v_ = context.Operators.And(s_, u_);
-			var w_ = FHIRHelpers_4_3_000.ToCode(QualifyingEncounter?.Class);
-			var x_ = this.@virtual();
-			var y_ = context.Operators.Equivalent(w_, x_);
-			var z_ = context.Operators.Not(y_);
-			var aa_ = context.Operators.And(v_, z_);
+			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
+			CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
+			bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, r_, null);
+			Code<Encounter.EncounterStatus> t_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(QualifyingEncounter?.StatusElement?.Value);
+			bool? u_ = context.Operators.Equal(t_, "finished");
+			bool? v_ = context.Operators.And(s_, u_);
+			CqlCode w_ = FHIRHelpers_4_3_000.ToCode(QualifyingEncounter?.Class);
+			CqlCode x_ = this.@virtual();
+			bool? y_ = context.Operators.Equivalent(w_, x_);
+			bool? z_ = context.Operators.Not(y_);
+			bool? aa_ = context.Operators.And(v_, z_);
 
 			return aa_;
 		};
-		var p_ = context.Operators.Where<Encounter>(n_, o_);
+		IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
 
 		return p_;
 	}
@@ -319,43 +320,43 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter_Value()
 	{
-		var a_ = this.Qualifying_Encounter_During_Measurement_Period();
+		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period();
 		IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
 		{
-			var d_ = this.Primary_Open_Angle_Glaucoma();
-			var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+			CqlValueSet d_ = this.Primary_Open_Angle_Glaucoma();
+			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
 			bool? f_(Condition PrimaryOpenAngleGlaucoma)
 			{
-				var j_ = QICoreCommon_2_0_000.prevalenceInterval(PrimaryOpenAngleGlaucoma);
-				var k_ = FHIRHelpers_4_3_000.ToInterval(ValidQualifyingEncounter?.Period);
-				var l_ = context.Operators.Overlaps(j_, k_, null);
-				var m_ = QICoreCommon_2_0_000.isActive(PrimaryOpenAngleGlaucoma);
-				var n_ = context.Operators.And(l_, m_);
-				var o_ = FHIRHelpers_4_3_000.ToConcept(PrimaryOpenAngleGlaucoma?.VerificationStatus);
-				var p_ = QICoreCommon_2_0_000.unconfirmed();
-				var q_ = context.Operators.ConvertCodeToConcept(p_);
-				var r_ = context.Operators.Equivalent(o_, q_);
-				var t_ = QICoreCommon_2_0_000.refuted();
-				var u_ = context.Operators.ConvertCodeToConcept(t_);
-				var v_ = context.Operators.Equivalent(o_, u_);
-				var w_ = context.Operators.Or(r_, v_);
-				var y_ = QICoreCommon_2_0_000.entered_in_error();
-				var z_ = context.Operators.ConvertCodeToConcept(y_);
-				var aa_ = context.Operators.Equivalent(o_, z_);
-				var ab_ = context.Operators.Or(w_, aa_);
-				var ac_ = context.Operators.Not(ab_);
-				var ad_ = context.Operators.And(n_, ac_);
+				CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.prevalenceInterval(PrimaryOpenAngleGlaucoma);
+				CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(ValidQualifyingEncounter?.Period);
+				bool? l_ = context.Operators.Overlaps(j_, k_, null);
+				bool? m_ = QICoreCommon_2_0_000.isActive(PrimaryOpenAngleGlaucoma);
+				bool? n_ = context.Operators.And(l_, m_);
+				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(PrimaryOpenAngleGlaucoma?.VerificationStatus);
+				CqlCode p_ = QICoreCommon_2_0_000.unconfirmed();
+				CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+				bool? r_ = context.Operators.Equivalent(o_, q_);
+				CqlCode t_ = QICoreCommon_2_0_000.refuted();
+				CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
+				bool? v_ = context.Operators.Equivalent(o_, u_);
+				bool? w_ = context.Operators.Or(r_, v_);
+				CqlCode y_ = QICoreCommon_2_0_000.entered_in_error();
+				CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
+				bool? aa_ = context.Operators.Equivalent(o_, z_);
+				bool? ab_ = context.Operators.Or(w_, aa_);
+				bool? ac_ = context.Operators.Not(ab_);
+				bool? ad_ = context.Operators.And(n_, ac_);
 
 				return ad_;
 			};
-			var g_ = context.Operators.Where<Condition>(e_, f_);
+			IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition PrimaryOpenAngleGlaucoma) => 
 				ValidQualifyingEncounter;
-			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
+			IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -366,16 +367,16 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, 18);
-		var h_ = this.Primary_Open_Angle_Glaucoma_Encounter();
-		var i_ = context.Operators.Exists<Encounter>(h_);
-		var j_ = context.Operators.And(g_, i_);
+		Patient a_ = this.Patient();
+		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
+		CqlDateTime d_ = context.Operators.Start(c_);
+		CqlDate e_ = context.Operators.DateFrom(d_);
+		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		bool? g_ = context.Operators.GreaterOrEqual(f_, 18);
+		IEnumerable<Encounter> h_ = this.Primary_Open_Angle_Glaucoma_Encounter();
+		bool? i_ = context.Operators.Exists<Encounter>(h_);
+		bool? j_ = context.Operators.And(g_, i_);
 
 		return j_;
 	}
@@ -386,7 +387,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -397,52 +398,52 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio_Value()
 	{
-		var a_ = this.Cup_to_Disc_Ratio();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> e_ = context.Operators.ListUnion<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CupToDiscExamNotPerformed)
 		{
-			var j_ = this.Primary_Open_Angle_Glaucoma_Encounter();
+			IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter();
 			bool? k_(Encounter EncounterWithPOAG)
 			{
-				var o_ = context.Operators.Convert<CqlDateTime>(CupToDiscExamNotPerformed?.IssuedElement?.Value);
-				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
+				CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(CupToDiscExamNotPerformed?.IssuedElement?.Value);
+				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
+				bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
-			var l_ = context.Operators.Where<Encounter>(j_, k_);
+			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamNotPerformed;
-			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
+		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CupToDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				bool? aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return aa_;
 			};
-			var s_ = context.Operators.Where<Extension>(((CupToDiscExamNotPerformed is DomainResource)
+			IEnumerable<Extension> s_ = context.Operators.Where<Extension>(((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingletonFrom<DataType>(u_);
-			var w_ = context.Operators.Convert<CodeableConcept>(v_);
-			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
-			var y_ = this.Medical_Reason();
-			var z_ = context.Operators.ConceptInValueSet(x_, y_);
+			IEnumerable<DataType> u_ = context.Operators.Select<Extension, DataType>(s_, t_);
+			DataType v_ = context.Operators.SingletonFrom<DataType>(u_);
+			CodeableConcept w_ = context.Operators.Convert<CodeableConcept>(v_);
+			CqlConcept x_ = FHIRHelpers_4_3_000.ToConcept(w_);
+			CqlValueSet y_ = this.Medical_Reason();
+			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 
 			return z_;
 		};
-		var i_ = context.Operators.Where<Observation>(g_, h_);
+		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -453,52 +454,52 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam_Value()
 	{
-		var a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> e_ = context.Operators.ListUnion<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation OpticDiscExamNotPerformed)
 		{
-			var j_ = this.Primary_Open_Angle_Glaucoma_Encounter();
+			IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter();
 			bool? k_(Encounter EncounterWithPOAG)
 			{
-				var o_ = context.Operators.Convert<CqlDateTime>(OpticDiscExamNotPerformed?.IssuedElement?.Value);
-				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
+				CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(OpticDiscExamNotPerformed?.IssuedElement?.Value);
+				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
+				bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
-			var l_ = context.Operators.Where<Encounter>(j_, k_);
+			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamNotPerformed;
-			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
+		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation OpticDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				bool? aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return aa_;
 			};
-			var s_ = context.Operators.Where<Extension>(((OpticDiscExamNotPerformed is DomainResource)
+			IEnumerable<Extension> s_ = context.Operators.Where<Extension>(((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingletonFrom<DataType>(u_);
-			var w_ = context.Operators.Convert<CodeableConcept>(v_);
-			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
-			var y_ = this.Medical_Reason();
-			var z_ = context.Operators.ConceptInValueSet(x_, y_);
+			IEnumerable<DataType> u_ = context.Operators.Select<Extension, DataType>(s_, t_);
+			DataType v_ = context.Operators.SingletonFrom<DataType>(u_);
+			CodeableConcept w_ = context.Operators.Convert<CodeableConcept>(v_);
+			CqlConcept x_ = FHIRHelpers_4_3_000.ToConcept(w_);
+			CqlValueSet y_ = this.Medical_Reason();
+			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 
 			return z_;
 		};
-		var i_ = context.Operators.Where<Observation>(g_, h_);
+		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -509,11 +510,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private bool? Denominator_Exceptions_Value()
 	{
-		var a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio();
-		var b_ = context.Operators.Exists<Observation>(a_);
-		var c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam();
-		var d_ = context.Operators.Exists<Observation>(c_);
-		var e_ = context.Operators.Or(b_, d_);
+		IEnumerable<Observation> a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio();
+		bool? b_ = context.Operators.Exists<Observation>(a_);
+		IEnumerable<Observation> c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam();
+		bool? d_ = context.Operators.Exists<Observation>(c_);
+		bool? e_ = context.Operators.Or(b_, d_);
 
 		return e_;
 	}
@@ -524,46 +525,46 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result_Value()
 	{
-		var a_ = this.Cup_to_Disc_Ratio();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		IEnumerable<Observation> c_(Observation CupToDiscExamPerformed)
 		{
-			var g_ = this.Primary_Open_Angle_Glaucoma_Encounter();
+			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter();
 			bool? h_(Encounter EncounterWithPOAG)
 			{
-				var l_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var m_ = FHIRHelpers_4_3_000.ToValue(CupToDiscExamPerformed?.Effective);
-				var n_ = QICoreCommon_2_0_000.toInterval(m_);
-				var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
+				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
+				object m_ = FHIRHelpers_4_3_000.ToValue(CupToDiscExamPerformed?.Effective);
+				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.toInterval(m_);
+				bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
 
 				return o_;
 			};
-			var i_ = context.Operators.Where<Encounter>(g_, h_);
+			IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamPerformed;
-			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
+			IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
+		IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation CupToDiscExamPerformed)
 		{
-			var p_ = FHIRHelpers_4_3_000.ToValue(CupToDiscExamPerformed?.Value);
-			var q_ = context.Operators.Not((bool?)(p_ is null));
-			var r_ = context.Operators.Convert<Code<ObservationStatus>>(CupToDiscExamPerformed?.StatusElement?.Value);
-			var s_ = context.Operators.Convert<string>(r_);
-			var t_ = new string[]
+			object p_ = FHIRHelpers_4_3_000.ToValue(CupToDiscExamPerformed?.Value);
+			bool? q_ = context.Operators.Not((bool?)(p_ is null));
+			Code<ObservationStatus> r_ = context.Operators.Convert<Code<ObservationStatus>>(CupToDiscExamPerformed?.StatusElement?.Value);
+			string s_ = context.Operators.Convert<string>(r_);
+			string[] t_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
-			var v_ = context.Operators.And(q_, u_);
+			bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
+			bool? v_ = context.Operators.And(q_, u_);
 
 			return v_;
 		};
-		var f_ = context.Operators.Where<Observation>(d_, e_);
+		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}
@@ -574,46 +575,46 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result_Value()
 	{
-		var a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		IEnumerable<Observation> c_(Observation OpticDiscExamPerformed)
 		{
-			var g_ = this.Primary_Open_Angle_Glaucoma_Encounter();
+			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter();
 			bool? h_(Encounter EncounterWithPOAG)
 			{
-				var l_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var m_ = FHIRHelpers_4_3_000.ToValue(OpticDiscExamPerformed?.Effective);
-				var n_ = QICoreCommon_2_0_000.toInterval(m_);
-				var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
+				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
+				object m_ = FHIRHelpers_4_3_000.ToValue(OpticDiscExamPerformed?.Effective);
+				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.toInterval(m_);
+				bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
 
 				return o_;
 			};
-			var i_ = context.Operators.Where<Encounter>(g_, h_);
+			IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamPerformed;
-			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
+			IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
+		IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation OpticDiscExamPerformed)
 		{
-			var p_ = FHIRHelpers_4_3_000.ToValue(OpticDiscExamPerformed?.Value);
-			var q_ = context.Operators.Not((bool?)(p_ is null));
-			var r_ = context.Operators.Convert<Code<ObservationStatus>>(OpticDiscExamPerformed?.StatusElement?.Value);
-			var s_ = context.Operators.Convert<string>(r_);
-			var t_ = new string[]
+			object p_ = FHIRHelpers_4_3_000.ToValue(OpticDiscExamPerformed?.Value);
+			bool? q_ = context.Operators.Not((bool?)(p_ is null));
+			Code<ObservationStatus> r_ = context.Operators.Convert<Code<ObservationStatus>>(OpticDiscExamPerformed?.StatusElement?.Value);
+			string s_ = context.Operators.Convert<string>(r_);
+			string[] t_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
-			var v_ = context.Operators.And(q_, u_);
+			bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
+			bool? v_ = context.Operators.And(q_, u_);
 
 			return v_;
 		};
-		var f_ = context.Operators.Where<Observation>(d_, e_);
+		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}
@@ -624,11 +625,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Cup_to_Disc_Ratio_Performed_with_Result();
-		var b_ = context.Operators.Exists<Observation>(a_);
-		var c_ = this.Optic_Disc_Exam_Performed_with_Result();
-		var d_ = context.Operators.Exists<Observation>(c_);
-		var e_ = context.Operators.And(b_, d_);
+		IEnumerable<Observation> a_ = this.Cup_to_Disc_Ratio_Performed_with_Result();
+		bool? b_ = context.Operators.Exists<Observation>(a_);
+		IEnumerable<Observation> c_ = this.Optic_Disc_Exam_Performed_with_Result();
+		bool? d_ = context.Operators.Exists<Observation>(c_);
+		bool? e_ = context.Operators.And(b_, d_);
 
 		return e_;
 	}

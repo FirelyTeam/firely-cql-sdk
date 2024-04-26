@@ -7,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -381,7 +382,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlCode[] RXNORM_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
 			new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
@@ -396,10 +397,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -410,8 +411,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -422,12 +423,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlDateTime March_1_of_Year_Prior_to_Measurement_Period_Value()
 	{
-		var a_ = this.Measurement_Period();
-		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, 1);
-		var e_ = context.Operators.ConvertIntegerToDecimal(0);
-		var f_ = context.Operators.DateTime(d_, 3, 1, 0, 0, 0, 0, e_);
+		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
+		CqlDateTime b_ = context.Operators.Start(a_);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? d_ = context.Operators.Subtract(c_, 1);
+		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+		CqlDateTime f_ = context.Operators.DateTime(d_, 3, 1, 0, 0, 0, 0, e_);
 
 		return f_;
 	}
@@ -438,13 +439,13 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period_Value()
 	{
-		var a_ = this.Measurement_Period();
-		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.ConvertIntegerToDecimal(0);
-		var e_ = context.Operators.DateTime(c_, 3, 1, 23, 59, 59, 0, d_);
-		var f_ = context.Operators.Quantity(1m, "day");
-		var g_ = context.Operators.Subtract(e_, f_);
+		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
+		CqlDateTime b_ = context.Operators.Start(a_);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		decimal? d_ = context.Operators.ConvertIntegerToDecimal(0);
+		CqlDateTime e_ = context.Operators.DateTime(c_, 3, 1, 23, 59, 59, 0, d_);
+		CqlQuantity f_ = context.Operators.Quantity(1m, "day");
+		CqlDateTime g_ = context.Operators.Subtract(e_, f_);
 
 		return g_;
 	}
@@ -455,9 +456,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Intake_Period_Value()
 	{
-		var a_ = this.March_1_of_Year_Prior_to_Measurement_Period();
-		var b_ = this.Last_Calendar_Day_of_February_of_Measurement_Period();
-		var c_ = context.Operators.Interval(a_, b_, true, true);
+		CqlDateTime a_ = this.March_1_of_Year_Prior_to_Measurement_Period();
+		CqlDateTime b_ = this.Last_Calendar_Day_of_February_of_Measurement_Period();
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
 
 		return c_;
 	}
@@ -468,186 +469,186 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
 	{
-		var a_ = this.Atomoxetine();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		var f_ = this.Clonidine();
-		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
-		var k_ = context.Operators.ListUnion<MedicationRequest>(e_, j_);
-		var l_ = this.Dexmethylphenidate();
-		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var p_ = context.Operators.ListUnion<MedicationRequest>(m_, o_);
-		var q_ = context.Operators.ListUnion<MedicationRequest>(k_, p_);
-		var r_ = this.Dextroamphetamine();
-		var s_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		var u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		var v_ = context.Operators.ListUnion<MedicationRequest>(s_, u_);
-		var w_ = context.Operators.ListUnion<MedicationRequest>(q_, v_);
-		var x_ = this.Lisdexamfetamine();
-		var y_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		var aa_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		var ab_ = context.Operators.ListUnion<MedicationRequest>(y_, aa_);
-		var ac_ = context.Operators.ListUnion<MedicationRequest>(w_, ab_);
-		var ad_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
-		var ae_ = context.Operators.ToList<CqlCode>(ad_);
-		var af_ = context.Operators.RetrieveByCodes<MedicationRequest>(ae_, null);
-		var ah_ = context.Operators.ToList<CqlCode>(ad_);
-		var ai_ = context.Operators.RetrieveByCodes<MedicationRequest>(ah_, null);
-		var aj_ = context.Operators.ListUnion<MedicationRequest>(af_, ai_);
-		var ak_ = context.Operators.ListUnion<MedicationRequest>(ac_, aj_);
-		var al_ = this.Methylphenidate();
-		var am_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		var ao_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		var ap_ = context.Operators.ListUnion<MedicationRequest>(am_, ao_);
-		var aq_ = context.Operators.ListUnion<MedicationRequest>(ak_, ap_);
-		var ar_ = this.Guanfacine();
-		var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var av_ = context.Operators.ListUnion<MedicationRequest>(as_, au_);
-		var aw_ = context.Operators.ListUnion<MedicationRequest>(aq_, av_);
+		CqlValueSet a_ = this.Atomoxetine();
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		CqlValueSet f_ = this.Clonidine();
+		IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
+		IEnumerable<MedicationRequest> k_ = context.Operators.ListUnion<MedicationRequest>(e_, j_);
+		CqlValueSet l_ = this.Dexmethylphenidate();
+		IEnumerable<MedicationRequest> m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		IEnumerable<MedicationRequest> p_ = context.Operators.ListUnion<MedicationRequest>(m_, o_);
+		IEnumerable<MedicationRequest> q_ = context.Operators.ListUnion<MedicationRequest>(k_, p_);
+		CqlValueSet r_ = this.Dextroamphetamine();
+		IEnumerable<MedicationRequest> s_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
+		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
+		IEnumerable<MedicationRequest> v_ = context.Operators.ListUnion<MedicationRequest>(s_, u_);
+		IEnumerable<MedicationRequest> w_ = context.Operators.ListUnion<MedicationRequest>(q_, v_);
+		CqlValueSet x_ = this.Lisdexamfetamine();
+		IEnumerable<MedicationRequest> y_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
+		IEnumerable<MedicationRequest> aa_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
+		IEnumerable<MedicationRequest> ab_ = context.Operators.ListUnion<MedicationRequest>(y_, aa_);
+		IEnumerable<MedicationRequest> ac_ = context.Operators.ListUnion<MedicationRequest>(w_, ab_);
+		CqlCode ad_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
+		IEnumerable<CqlCode> ae_ = context.Operators.ToList<CqlCode>(ad_);
+		IEnumerable<MedicationRequest> af_ = context.Operators.RetrieveByCodes<MedicationRequest>(ae_, null);
+		IEnumerable<CqlCode> ah_ = context.Operators.ToList<CqlCode>(ad_);
+		IEnumerable<MedicationRequest> ai_ = context.Operators.RetrieveByCodes<MedicationRequest>(ah_, null);
+		IEnumerable<MedicationRequest> aj_ = context.Operators.ListUnion<MedicationRequest>(af_, ai_);
+		IEnumerable<MedicationRequest> ak_ = context.Operators.ListUnion<MedicationRequest>(ac_, aj_);
+		CqlValueSet al_ = this.Methylphenidate();
+		IEnumerable<MedicationRequest> am_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
+		IEnumerable<MedicationRequest> ao_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
+		IEnumerable<MedicationRequest> ap_ = context.Operators.ListUnion<MedicationRequest>(am_, ao_);
+		IEnumerable<MedicationRequest> aq_ = context.Operators.ListUnion<MedicationRequest>(ak_, ap_);
+		CqlValueSet ar_ = this.Guanfacine();
+		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> av_ = context.Operators.ListUnion<MedicationRequest>(as_, au_);
+		IEnumerable<MedicationRequest> aw_ = context.Operators.ListUnion<MedicationRequest>(aq_, av_);
 		bool? ax_(MedicationRequest ADHDMedications)
 		{
-			var df_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedications);
-			var dg_ = context.Operators.Start(df_);
-			var dh_ = context.Operators.ConvertDateToDateTime(dg_);
-			var di_ = this.Intake_Period();
-			var dj_ = context.Operators.In<CqlDateTime>(dh_, di_, null);
+			CqlInterval<CqlDate> df_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedications);
+			CqlDate dg_ = context.Operators.Start(df_);
+			CqlDateTime dh_ = context.Operators.ConvertDateToDateTime(dg_);
+			CqlInterval<CqlDateTime> di_ = this.Intake_Period();
+			bool? dj_ = context.Operators.In<CqlDateTime>(dh_, di_, null);
 
 			return dj_;
 		};
-		var ay_ = context.Operators.Where<MedicationRequest>(aw_, ax_);
-		var ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var bd_ = context.Operators.ListUnion<MedicationRequest>(ba_, bc_);
-		var bf_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var bh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var bi_ = context.Operators.ListUnion<MedicationRequest>(bf_, bh_);
-		var bj_ = context.Operators.ListUnion<MedicationRequest>(bd_, bi_);
-		var bl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var bn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var bo_ = context.Operators.ListUnion<MedicationRequest>(bl_, bn_);
-		var bp_ = context.Operators.ListUnion<MedicationRequest>(bj_, bo_);
-		var br_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		var bt_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		var bu_ = context.Operators.ListUnion<MedicationRequest>(br_, bt_);
-		var bv_ = context.Operators.ListUnion<MedicationRequest>(bp_, bu_);
-		var bx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		var bz_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		var ca_ = context.Operators.ListUnion<MedicationRequest>(bx_, bz_);
-		var cb_ = context.Operators.ListUnion<MedicationRequest>(bv_, ca_);
-		var cd_ = context.Operators.ToList<CqlCode>(ad_);
-		var ce_ = context.Operators.RetrieveByCodes<MedicationRequest>(cd_, null);
-		var cg_ = context.Operators.ToList<CqlCode>(ad_);
-		var ch_ = context.Operators.RetrieveByCodes<MedicationRequest>(cg_, null);
-		var ci_ = context.Operators.ListUnion<MedicationRequest>(ce_, ch_);
-		var cj_ = context.Operators.ListUnion<MedicationRequest>(cb_, ci_);
-		var cl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		var cn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		var co_ = context.Operators.ListUnion<MedicationRequest>(cl_, cn_);
-		var cp_ = context.Operators.ListUnion<MedicationRequest>(cj_, co_);
-		var cr_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var ct_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var cu_ = context.Operators.ListUnion<MedicationRequest>(cr_, ct_);
-		var cv_ = context.Operators.ListUnion<MedicationRequest>(cp_, cu_);
+		IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(aw_, ax_);
+		IEnumerable<MedicationRequest> ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> bd_ = context.Operators.ListUnion<MedicationRequest>(ba_, bc_);
+		IEnumerable<MedicationRequest> bf_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> bh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> bi_ = context.Operators.ListUnion<MedicationRequest>(bf_, bh_);
+		IEnumerable<MedicationRequest> bj_ = context.Operators.ListUnion<MedicationRequest>(bd_, bi_);
+		IEnumerable<MedicationRequest> bl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		IEnumerable<MedicationRequest> bn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		IEnumerable<MedicationRequest> bo_ = context.Operators.ListUnion<MedicationRequest>(bl_, bn_);
+		IEnumerable<MedicationRequest> bp_ = context.Operators.ListUnion<MedicationRequest>(bj_, bo_);
+		IEnumerable<MedicationRequest> br_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
+		IEnumerable<MedicationRequest> bt_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
+		IEnumerable<MedicationRequest> bu_ = context.Operators.ListUnion<MedicationRequest>(br_, bt_);
+		IEnumerable<MedicationRequest> bv_ = context.Operators.ListUnion<MedicationRequest>(bp_, bu_);
+		IEnumerable<MedicationRequest> bx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
+		IEnumerable<MedicationRequest> bz_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
+		IEnumerable<MedicationRequest> ca_ = context.Operators.ListUnion<MedicationRequest>(bx_, bz_);
+		IEnumerable<MedicationRequest> cb_ = context.Operators.ListUnion<MedicationRequest>(bv_, ca_);
+		IEnumerable<CqlCode> cd_ = context.Operators.ToList<CqlCode>(ad_);
+		IEnumerable<MedicationRequest> ce_ = context.Operators.RetrieveByCodes<MedicationRequest>(cd_, null);
+		IEnumerable<CqlCode> cg_ = context.Operators.ToList<CqlCode>(ad_);
+		IEnumerable<MedicationRequest> ch_ = context.Operators.RetrieveByCodes<MedicationRequest>(cg_, null);
+		IEnumerable<MedicationRequest> ci_ = context.Operators.ListUnion<MedicationRequest>(ce_, ch_);
+		IEnumerable<MedicationRequest> cj_ = context.Operators.ListUnion<MedicationRequest>(cb_, ci_);
+		IEnumerable<MedicationRequest> cl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
+		IEnumerable<MedicationRequest> cn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
+		IEnumerable<MedicationRequest> co_ = context.Operators.ListUnion<MedicationRequest>(cl_, cn_);
+		IEnumerable<MedicationRequest> cp_ = context.Operators.ListUnion<MedicationRequest>(cj_, co_);
+		IEnumerable<MedicationRequest> cr_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> ct_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> cu_ = context.Operators.ListUnion<MedicationRequest>(cr_, ct_);
+		IEnumerable<MedicationRequest> cv_ = context.Operators.ListUnion<MedicationRequest>(cp_, cu_);
 		bool? cw_(MedicationRequest ADHDMedications)
 		{
-			var dk_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedications);
-			var dl_ = context.Operators.Start(dk_);
-			var dm_ = context.Operators.ConvertDateToDateTime(dl_);
-			var dn_ = this.Intake_Period();
-			var do_ = context.Operators.In<CqlDateTime>(dm_, dn_, null);
+			CqlInterval<CqlDate> dk_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedications);
+			CqlDate dl_ = context.Operators.Start(dk_);
+			CqlDateTime dm_ = context.Operators.ConvertDateToDateTime(dl_);
+			CqlInterval<CqlDateTime> dn_ = this.Intake_Period();
+			bool? do_ = context.Operators.In<CqlDateTime>(dm_, dn_, null);
 
 			return do_;
 		};
-		var cx_ = context.Operators.Where<MedicationRequest>(cv_, cw_);
+		IEnumerable<MedicationRequest> cx_ = context.Operators.Where<MedicationRequest>(cv_, cw_);
 		IEnumerable<MedicationRequest> cy_(MedicationRequest ADHDMedicationOrder)
 		{
-			var dp_ = this.Atomoxetine();
-			var dq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
-			var ds_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
-			var dt_ = context.Operators.ListUnion<MedicationRequest>(dq_, ds_);
-			var du_ = this.Clonidine();
-			var dv_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
-			var dx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
-			var dy_ = context.Operators.ListUnion<MedicationRequest>(dv_, dx_);
-			var dz_ = context.Operators.ListUnion<MedicationRequest>(dt_, dy_);
-			var ea_ = this.Dexmethylphenidate();
-			var eb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
-			var ed_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
-			var ee_ = context.Operators.ListUnion<MedicationRequest>(eb_, ed_);
-			var ef_ = context.Operators.ListUnion<MedicationRequest>(dz_, ee_);
-			var eg_ = this.Dextroamphetamine();
-			var eh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
-			var ej_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
-			var ek_ = context.Operators.ListUnion<MedicationRequest>(eh_, ej_);
-			var el_ = context.Operators.ListUnion<MedicationRequest>(ef_, ek_);
-			var em_ = this.Lisdexamfetamine();
-			var en_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
-			var ep_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
-			var eq_ = context.Operators.ListUnion<MedicationRequest>(en_, ep_);
-			var er_ = context.Operators.ListUnion<MedicationRequest>(el_, eq_);
-			var es_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
-			var et_ = context.Operators.ToList<CqlCode>(es_);
-			var eu_ = context.Operators.RetrieveByCodes<MedicationRequest>(et_, null);
-			var ew_ = context.Operators.ToList<CqlCode>(es_);
-			var ex_ = context.Operators.RetrieveByCodes<MedicationRequest>(ew_, null);
-			var ey_ = context.Operators.ListUnion<MedicationRequest>(eu_, ex_);
-			var ez_ = context.Operators.ListUnion<MedicationRequest>(er_, ey_);
-			var fa_ = this.Methylphenidate();
-			var fb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
-			var fd_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
-			var fe_ = context.Operators.ListUnion<MedicationRequest>(fb_, fd_);
-			var ff_ = context.Operators.ListUnion<MedicationRequest>(ez_, fe_);
-			var fg_ = this.Guanfacine();
-			var fh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
-			var fj_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
-			var fk_ = context.Operators.ListUnion<MedicationRequest>(fh_, fj_);
-			var fl_ = context.Operators.ListUnion<MedicationRequest>(ff_, fk_);
+			CqlValueSet dp_ = this.Atomoxetine();
+			IEnumerable<MedicationRequest> dq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
+			IEnumerable<MedicationRequest> ds_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
+			IEnumerable<MedicationRequest> dt_ = context.Operators.ListUnion<MedicationRequest>(dq_, ds_);
+			CqlValueSet du_ = this.Clonidine();
+			IEnumerable<MedicationRequest> dv_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
+			IEnumerable<MedicationRequest> dx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
+			IEnumerable<MedicationRequest> dy_ = context.Operators.ListUnion<MedicationRequest>(dv_, dx_);
+			IEnumerable<MedicationRequest> dz_ = context.Operators.ListUnion<MedicationRequest>(dt_, dy_);
+			CqlValueSet ea_ = this.Dexmethylphenidate();
+			IEnumerable<MedicationRequest> eb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
+			IEnumerable<MedicationRequest> ed_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
+			IEnumerable<MedicationRequest> ee_ = context.Operators.ListUnion<MedicationRequest>(eb_, ed_);
+			IEnumerable<MedicationRequest> ef_ = context.Operators.ListUnion<MedicationRequest>(dz_, ee_);
+			CqlValueSet eg_ = this.Dextroamphetamine();
+			IEnumerable<MedicationRequest> eh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
+			IEnumerable<MedicationRequest> ej_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
+			IEnumerable<MedicationRequest> ek_ = context.Operators.ListUnion<MedicationRequest>(eh_, ej_);
+			IEnumerable<MedicationRequest> el_ = context.Operators.ListUnion<MedicationRequest>(ef_, ek_);
+			CqlValueSet em_ = this.Lisdexamfetamine();
+			IEnumerable<MedicationRequest> en_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
+			IEnumerable<MedicationRequest> ep_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
+			IEnumerable<MedicationRequest> eq_ = context.Operators.ListUnion<MedicationRequest>(en_, ep_);
+			IEnumerable<MedicationRequest> er_ = context.Operators.ListUnion<MedicationRequest>(el_, eq_);
+			CqlCode es_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
+			IEnumerable<CqlCode> et_ = context.Operators.ToList<CqlCode>(es_);
+			IEnumerable<MedicationRequest> eu_ = context.Operators.RetrieveByCodes<MedicationRequest>(et_, null);
+			IEnumerable<CqlCode> ew_ = context.Operators.ToList<CqlCode>(es_);
+			IEnumerable<MedicationRequest> ex_ = context.Operators.RetrieveByCodes<MedicationRequest>(ew_, null);
+			IEnumerable<MedicationRequest> ey_ = context.Operators.ListUnion<MedicationRequest>(eu_, ex_);
+			IEnumerable<MedicationRequest> ez_ = context.Operators.ListUnion<MedicationRequest>(er_, ey_);
+			CqlValueSet fa_ = this.Methylphenidate();
+			IEnumerable<MedicationRequest> fb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
+			IEnumerable<MedicationRequest> fd_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
+			IEnumerable<MedicationRequest> fe_ = context.Operators.ListUnion<MedicationRequest>(fb_, fd_);
+			IEnumerable<MedicationRequest> ff_ = context.Operators.ListUnion<MedicationRequest>(ez_, fe_);
+			CqlValueSet fg_ = this.Guanfacine();
+			IEnumerable<MedicationRequest> fh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
+			IEnumerable<MedicationRequest> fj_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
+			IEnumerable<MedicationRequest> fk_ = context.Operators.ListUnion<MedicationRequest>(fh_, fj_);
+			IEnumerable<MedicationRequest> fl_ = context.Operators.ListUnion<MedicationRequest>(ff_, fk_);
 			bool? fm_(MedicationRequest ActiveADHDMedication)
 			{
-				var fq_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ActiveADHDMedication);
-				var fr_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedicationOrder);
-				var fs_ = context.Operators.Start(fr_);
-				var ft_ = context.Operators.ConvertDateToDateTime(fs_);
-				var fu_ = context.Operators.DateFrom(ft_);
-				var fv_ = context.Operators.Quantity(120m, "days");
-				var fw_ = context.Operators.Subtract(fu_, fv_);
-				var fy_ = context.Operators.Start(fr_);
-				var fz_ = context.Operators.ConvertDateToDateTime(fy_);
-				var ga_ = context.Operators.DateFrom(fz_);
-				var gb_ = context.Operators.Interval(fw_, ga_, true, false);
-				var gc_ = context.Operators.Overlaps(fq_, gb_, null);
+				CqlInterval<CqlDate> fq_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ActiveADHDMedication);
+				CqlInterval<CqlDate> fr_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedicationOrder);
+				CqlDate fs_ = context.Operators.Start(fr_);
+				CqlDateTime ft_ = context.Operators.ConvertDateToDateTime(fs_);
+				CqlDate fu_ = context.Operators.DateFrom(ft_);
+				CqlQuantity fv_ = context.Operators.Quantity(120m, "days");
+				CqlDate fw_ = context.Operators.Subtract(fu_, fv_);
+				CqlDate fy_ = context.Operators.Start(fr_);
+				CqlDateTime fz_ = context.Operators.ConvertDateToDateTime(fy_);
+				CqlDate ga_ = context.Operators.DateFrom(fz_);
+				CqlInterval<CqlDate> gb_ = context.Operators.Interval(fw_, ga_, true, false);
+				bool? gc_ = context.Operators.Overlaps(fq_, gb_, null);
 
 				return gc_;
 			};
-			var fn_ = context.Operators.Where<MedicationRequest>(fl_, fm_);
+			IEnumerable<MedicationRequest> fn_ = context.Operators.Where<MedicationRequest>(fl_, fm_);
 			MedicationRequest fo_(MedicationRequest ActiveADHDMedication) => 
 				ADHDMedicationOrder;
-			var fp_ = context.Operators.Select<MedicationRequest, MedicationRequest>(fn_, fo_);
+			IEnumerable<MedicationRequest> fp_ = context.Operators.Select<MedicationRequest, MedicationRequest>(fn_, fo_);
 
 			return fp_;
 		};
-		var cz_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(cx_, cy_);
-		var da_ = context.Operators.ListExcept<MedicationRequest>(ay_, cz_);
+		IEnumerable<MedicationRequest> cz_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(cx_, cy_);
+		IEnumerable<MedicationRequest> da_ = context.Operators.ListExcept<MedicationRequest>(ay_, cz_);
 		Tuple_GgbdNTdhNeafRfiEMSgeHDMdE db_(MedicationRequest QualifyingMed)
 		{
-			var gd_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(QualifyingMed);
-			var ge_ = context.Operators.Start(gd_);
-			var gf_ = new Tuple_GgbdNTdhNeafRfiEMSgeHDMdE
+			CqlInterval<CqlDate> gd_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(QualifyingMed);
+			CqlDate ge_ = context.Operators.Start(gd_);
+			Tuple_GgbdNTdhNeafRfiEMSgeHDMdE gf_ = new Tuple_GgbdNTdhNeafRfiEMSgeHDMdE
 			{
 				startDate = ge_,
 			};
 
 			return gf_;
 		};
-		var dc_ = context.Operators.Select<MedicationRequest, Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(da_, db_);
+		IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> dc_ = context.Operators.Select<MedicationRequest, Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(da_, db_);
 		object dd_(Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this) => 
 			@this?.startDate;
-		var de_ = context.Operators.SortBy<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> de_ = context.Operators.SortBy<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
 
 		return de_;
 	}
@@ -658,18 +659,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period_Value()
 	{
-		var a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication();
+		IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication();
 		bool? b_(Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this)
 		{
-			var g_ = context.Operators.Not((bool?)(@this?.startDate is null));
+			bool? g_ = context.Operators.Not((bool?)(@this?.startDate is null));
 
 			return g_;
 		};
-		var c_ = context.Operators.Where<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(a_, b_);
+		IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> c_ = context.Operators.Where<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(a_, b_);
 		CqlDate d_(Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this) => 
 			@this?.startDate;
-		var e_ = context.Operators.Select<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE, CqlDate>(c_, d_);
-		var f_ = context.Operators.First<CqlDate>(e_);
+		IEnumerable<CqlDate> e_ = context.Operators.Select<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE, CqlDate>(c_, d_);
+		CqlDate f_ = context.Operators.First<CqlDate>(e_);
 
 		return f_;
 	}
@@ -680,7 +681,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlDate IPSD_Value()
 	{
-		var a_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
+		CqlDate a_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
 
 		return a_;
 	}
@@ -691,39 +692,39 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Home_Healthcare_Services();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(e_, j_);
 		bool? l_(Encounter ValidEncounters)
 		{
-			var n_ = this.IPSD();
-			var o_ = context.Operators.Quantity(6m, "months");
-			var p_ = context.Operators.Subtract(n_, o_);
-			var r_ = context.Operators.Interval(p_, n_, true, true);
-			var s_ = context.Operators.ConvertDateToDateTime(r_?.low);
-			var v_ = context.Operators.Subtract(n_, o_);
-			var x_ = context.Operators.Interval(v_, n_, true, true);
-			var y_ = context.Operators.ConvertDateToDateTime(x_?.high);
-			var ab_ = context.Operators.Subtract(n_, o_);
-			var ad_ = context.Operators.Interval(ab_, n_, true, true);
-			var ag_ = context.Operators.Subtract(n_, o_);
-			var ai_ = context.Operators.Interval(ag_, n_, true, true);
-			var aj_ = context.Operators.Interval(s_, y_, ad_?.lowClosed, ai_?.highClosed);
-			var ak_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			var al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
-			var am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aj_, al_, "day");
+			CqlDate n_ = this.IPSD();
+			CqlQuantity o_ = context.Operators.Quantity(6m, "months");
+			CqlDate p_ = context.Operators.Subtract(n_, o_);
+			CqlInterval<CqlDate> r_ = context.Operators.Interval(p_, n_, true, true);
+			CqlDateTime s_ = context.Operators.ConvertDateToDateTime(r_?.low);
+			CqlDate v_ = context.Operators.Subtract(n_, o_);
+			CqlInterval<CqlDate> x_ = context.Operators.Interval(v_, n_, true, true);
+			CqlDateTime y_ = context.Operators.ConvertDateToDateTime(x_?.high);
+			CqlDate ab_ = context.Operators.Subtract(n_, o_);
+			CqlInterval<CqlDate> ad_ = context.Operators.Interval(ab_, n_, true, true);
+			CqlDate ag_ = context.Operators.Subtract(n_, o_);
+			CqlInterval<CqlDate> ai_ = context.Operators.Interval(ag_, n_, true, true);
+			CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(s_, y_, ad_?.lowClosed, ai_?.highClosed);
+			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
+			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
+			bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aj_, al_, "day");
 
 			return am_;
 		};
-		var m_ = context.Operators.Where<Encounter>(k_, l_);
+		IEnumerable<Encounter> m_ = context.Operators.Where<Encounter>(k_, l_);
 
 		return m_;
 	}
@@ -737,52 +738,52 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var e_ = context.Operators.Equal(D?.RankElement?.Value, 1);
+			bool? e_ = context.Operators.Equal(D?.RankElement?.Value, 1);
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		IEnumerable<Encounter.DiagnosisComponent> b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 		Condition c_(Encounter.DiagnosisComponent PD)
 		{
-			var f_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+			IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 			bool? g_(Condition C)
 			{
-				var j_ = QICoreCommon_2_0_000.getId(PD?.Condition?.ReferenceElement?.Value);
-				var k_ = context.Operators.Equal(C?.IdElement?.Value, j_);
+				string j_ = QICoreCommon_2_0_000.getId(PD?.Condition?.ReferenceElement?.Value);
+				bool? k_ = context.Operators.Equal(C?.IdElement?.Value, j_);
 
 				return k_;
 			};
-			var h_ = context.Operators.Where<Condition>(f_, g_);
-			var i_ = context.Operators.SingletonFrom<Condition>(h_);
+			IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+			Condition i_ = context.Operators.SingletonFrom<Condition>(h_);
 
 			return i_;
 		};
-		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(b_, c_);
+		IEnumerable<Condition> d_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(b_, c_);
 
 		return d_;
 	}
 
 	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_Value()
 	{
-		var a_ = this.Encounter_Inpatient();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet a_ = this.Encounter_Inpatient();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter InpatientStay)
 		{
-			var e_ = this.PrincipalDiagnosis(InpatientStay);
+			IEnumerable<Condition> e_ = this.PrincipalDiagnosis(InpatientStay);
 			bool? f_(Condition EncounterDiagnosis)
 			{
-				var i_ = FHIRHelpers_4_3_000.ToConcept(EncounterDiagnosis?.Code);
-				var j_ = this.Mental_Behavioral_and_Neurodevelopmental_Disorders();
-				var k_ = context.Operators.ConceptInValueSet(i_, j_);
+				CqlConcept i_ = FHIRHelpers_4_3_000.ToConcept(EncounterDiagnosis?.Code);
+				CqlValueSet j_ = this.Mental_Behavioral_and_Neurodevelopmental_Disorders();
+				bool? k_ = context.Operators.ConceptInValueSet(i_, j_);
 
 				return k_;
 			};
-			var g_ = context.Operators.Where<Condition>(e_, f_);
-			var h_ = context.Operators.Exists<Condition>(g_);
+			IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+			bool? h_ = context.Operators.Exists<Condition>(g_);
 
 			return h_;
 		};
-		var d_ = context.Operators.Where<Encounter>(b_, c_);
+		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -793,23 +794,23 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Value()
 	{
-		var a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
+		IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
 		bool? b_(Encounter InpatientStay)
 		{
-			var d_ = FHIRHelpers_4_3_000.ToInterval(InpatientStay?.Period);
-			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
-			var f_ = context.Operators.Start(e_);
-			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity(30m, "days");
-			var j_ = context.Operators.Add(g_, i_);
-			var k_ = context.Operators.Interval(g_, j_, false, true);
-			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
-			var n_ = context.Operators.Not((bool?)(g_ is null));
-			var o_ = context.Operators.And(l_, n_);
+			CqlInterval<CqlDateTime> d_ = FHIRHelpers_4_3_000.ToInterval(InpatientStay?.Period);
+			CqlInterval<CqlDate> e_ = CQMCommon_2_0_000.ToDateInterval(d_);
+			CqlDate f_ = context.Operators.Start(e_);
+			CqlDate g_ = this.IPSD();
+			CqlQuantity i_ = context.Operators.Quantity(30m, "days");
+			CqlDate j_ = context.Operators.Add(g_, i_);
+			CqlInterval<CqlDate> k_ = context.Operators.Interval(g_, j_, false, true);
+			bool? l_ = context.Operators.In<CqlDate>(f_, k_, "day");
+			bool? n_ = context.Operators.Not((bool?)(g_ is null));
+			bool? o_ = context.Operators.And(l_, n_);
 
 			return o_;
 		};
-		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -820,29 +821,29 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Initial_Population_1_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var c_ = this.Intake_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, 6);
-		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var k_ = context.Operators.End(c_);
-		var l_ = context.Operators.DateFrom(k_);
-		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, 12);
-		var o_ = context.Operators.And(g_, n_);
-		var p_ = this.Qualifying_Encounter();
-		var q_ = context.Operators.Exists<Encounter>(p_);
-		var r_ = context.Operators.And(o_, q_);
-		var s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
-		var t_ = context.Operators.Not((bool?)(s_ is null));
-		var u_ = context.Operators.And(r_, t_);
-		var v_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase();
-		var w_ = context.Operators.Exists<Encounter>(v_);
-		var x_ = context.Operators.Not(w_);
-		var y_ = context.Operators.And(u_, x_);
+		Patient a_ = this.Patient();
+		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		CqlInterval<CqlDateTime> c_ = this.Intake_Period();
+		CqlDateTime d_ = context.Operators.Start(c_);
+		CqlDate e_ = context.Operators.DateFrom(d_);
+		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		bool? g_ = context.Operators.GreaterOrEqual(f_, 6);
+		CqlDate i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		CqlDateTime k_ = context.Operators.End(c_);
+		CqlDate l_ = context.Operators.DateFrom(k_);
+		int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+		bool? n_ = context.Operators.LessOrEqual(m_, 12);
+		bool? o_ = context.Operators.And(g_, n_);
+		IEnumerable<Encounter> p_ = this.Qualifying_Encounter();
+		bool? q_ = context.Operators.Exists<Encounter>(p_);
+		bool? r_ = context.Operators.And(o_, q_);
+		CqlDate s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
+		bool? t_ = context.Operators.Not((bool?)(s_ is null));
+		bool? u_ = context.Operators.And(r_, t_);
+		IEnumerable<Encounter> v_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase();
+		bool? w_ = context.Operators.Exists<Encounter>(v_);
+		bool? x_ = context.Operators.Not(w_);
+		bool? y_ = context.Operators.And(u_, x_);
 
 		return y_;
 	}
@@ -853,7 +854,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Denominator_1_Value()
 	{
-		var a_ = this.Initial_Population_1();
+		bool? a_ = this.Initial_Population_1();
 
 		return a_;
 	}
@@ -864,19 +865,19 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Condition> Narcolepsy_Exclusion_Value()
 	{
-		var a_ = this.Narcolepsy();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Narcolepsy();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition Narcolepsy)
 		{
-			var e_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Narcolepsy);
-			var f_ = context.Operators.Start(e_);
-			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.End(g_);
-			var i_ = context.Operators.SameOrBefore(f_, h_, null);
+			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Narcolepsy);
+			CqlDateTime f_ = context.Operators.Start(e_);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+			CqlDateTime h_ = context.Operators.End(g_);
+			bool? i_ = context.Operators.SameOrBefore(f_, h_, null);
 
 			return i_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
+		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
@@ -887,10 +888,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
-		var b_ = this.Narcolepsy_Exclusion();
-		var c_ = context.Operators.Exists<Condition>(b_);
-		var d_ = context.Operators.Or(a_, c_);
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		IEnumerable<Condition> b_ = this.Narcolepsy_Exclusion();
+		bool? c_ = context.Operators.Exists<Condition>(b_);
+		bool? d_ = context.Operators.Or(a_, c_);
 
 		return d_;
 	}
@@ -901,67 +902,67 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Numerator_Encounter_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Initial_Hospital_Observation_Care();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care_Services_Group_Counseling();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Behavioral_Health_Follow_up_Visit();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
-		var l_ = this.Preventive_Care_Services_Individual_Counseling();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = this.Psychotherapy_and_Pharmacologic_Management();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Initial_Hospital_Observation_Care();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care_Services_Group_Counseling();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Behavioral_Health_Follow_up_Visit();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Preventive_Care_Services_Individual_Counseling();
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		CqlValueSet n_ = this.Psychotherapy_and_Pharmacologic_Management();
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
 		bool? p_(Encounter PsychPharmManagement)
 		{
 			bool? ao_(Encounter.LocationComponent Location)
 			{
-				var ar_ = CQMCommon_2_0_000.GetLocation(Location?.Location);
+				Location ar_ = CQMCommon_2_0_000.GetLocation(Location?.Location);
 				CqlConcept as_(CodeableConcept @this)
 				{
-					var aw_ = FHIRHelpers_4_3_000.ToConcept(@this);
+					CqlConcept aw_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 					return aw_;
 				};
-				var at_ = context.Operators.Select<CodeableConcept, CqlConcept>(ar_?.Type, as_);
-				var au_ = this.Ambulatory();
-				var av_ = context.Operators.ConceptsInValueSet(at_, au_);
+				IEnumerable<CqlConcept> at_ = context.Operators.Select<CodeableConcept, CqlConcept>(ar_?.Type, as_);
+				CqlValueSet au_ = this.Ambulatory();
+				bool? av_ = context.Operators.ConceptsInValueSet(at_, au_);
 
 				return av_;
 			};
-			var ap_ = context.Operators.Where<Encounter.LocationComponent>((PsychPharmManagement?.Location as IEnumerable<Encounter.LocationComponent>), ao_);
-			var aq_ = context.Operators.Exists<Encounter.LocationComponent>(ap_);
+			IEnumerable<Encounter.LocationComponent> ap_ = context.Operators.Where<Encounter.LocationComponent>((PsychPharmManagement?.Location as IEnumerable<Encounter.LocationComponent>), ao_);
+			bool? aq_ = context.Operators.Exists<Encounter.LocationComponent>(ap_);
 
 			return aq_;
 		};
-		var q_ = context.Operators.Where<Encounter>(o_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(m_, q_);
-		var s_ = context.Operators.ListUnion<Encounter>(k_, r_);
-		var t_ = this.Outpatient_Consultation();
-		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = this.Home_Healthcare_Services();
-		var w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
-		var x_ = context.Operators.ListUnion<Encounter>(u_, w_);
-		var y_ = context.Operators.ListUnion<Encounter>(s_, x_);
-		var z_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
-		var ab_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		var ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, null);
-		var ad_ = context.Operators.ListUnion<Encounter>(aa_, ac_);
-		var ae_ = context.Operators.ListUnion<Encounter>(y_, ad_);
-		var af_ = this.Psych_Visit_Diagnostic_Evaluation();
-		var ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
-		var ah_ = this.Psych_Visit_Psychotherapy();
-		var ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, null);
-		var aj_ = context.Operators.ListUnion<Encounter>(ag_, ai_);
-		var ak_ = context.Operators.ListUnion<Encounter>(ae_, aj_);
-		var al_ = this.Telephone_Visits();
-		var am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
-		var an_ = context.Operators.ListUnion<Encounter>(ak_, am_);
+		IEnumerable<Encounter> q_ = context.Operators.Where<Encounter>(o_, p_);
+		IEnumerable<Encounter> r_ = context.Operators.ListUnion<Encounter>(m_, q_);
+		IEnumerable<Encounter> s_ = context.Operators.ListUnion<Encounter>(k_, r_);
+		CqlValueSet t_ = this.Outpatient_Consultation();
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		CqlValueSet v_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
+		IEnumerable<Encounter> x_ = context.Operators.ListUnion<Encounter>(u_, w_);
+		IEnumerable<Encounter> y_ = context.Operators.ListUnion<Encounter>(s_, x_);
+		CqlValueSet z_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
+		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
+		CqlValueSet ab_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
+		IEnumerable<Encounter> ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, null);
+		IEnumerable<Encounter> ad_ = context.Operators.ListUnion<Encounter>(aa_, ac_);
+		IEnumerable<Encounter> ae_ = context.Operators.ListUnion<Encounter>(y_, ad_);
+		CqlValueSet af_ = this.Psych_Visit_Diagnostic_Evaluation();
+		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
+		CqlValueSet ah_ = this.Psych_Visit_Psychotherapy();
+		IEnumerable<Encounter> ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, null);
+		IEnumerable<Encounter> aj_ = context.Operators.ListUnion<Encounter>(ag_, ai_);
+		IEnumerable<Encounter> ak_ = context.Operators.ListUnion<Encounter>(ae_, aj_);
+		CqlValueSet al_ = this.Telephone_Visits();
+		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
+		IEnumerable<Encounter> an_ = context.Operators.ListUnion<Encounter>(ak_, am_);
 
 		return an_;
 	}
@@ -972,23 +973,23 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Encounter> Encounter_During_Initiation_Phase_Value()
 	{
-		var a_ = this.Qualifying_Numerator_Encounter();
+		IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter();
 		bool? b_(Encounter ValidNumeratorEncounter)
 		{
-			var d_ = FHIRHelpers_4_3_000.ToInterval(ValidNumeratorEncounter?.Period);
-			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
-			var f_ = context.Operators.Start(e_);
-			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity(30m, "days");
-			var j_ = context.Operators.Add(g_, i_);
-			var k_ = context.Operators.Interval(g_, j_, false, true);
-			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
-			var n_ = context.Operators.Not((bool?)(g_ is null));
-			var o_ = context.Operators.And(l_, n_);
+			CqlInterval<CqlDateTime> d_ = FHIRHelpers_4_3_000.ToInterval(ValidNumeratorEncounter?.Period);
+			CqlInterval<CqlDate> e_ = CQMCommon_2_0_000.ToDateInterval(d_);
+			CqlDate f_ = context.Operators.Start(e_);
+			CqlDate g_ = this.IPSD();
+			CqlQuantity i_ = context.Operators.Quantity(30m, "days");
+			CqlDate j_ = context.Operators.Add(g_, i_);
+			CqlInterval<CqlDate> k_ = context.Operators.Interval(g_, j_, false, true);
+			bool? l_ = context.Operators.In<CqlDate>(f_, k_, "day");
+			bool? n_ = context.Operators.Not((bool?)(g_ is null));
+			bool? o_ = context.Operators.And(l_, n_);
 
 			return o_;
 		};
-		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -999,8 +1000,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Numerator_1_Value()
 	{
-		var a_ = this.Encounter_During_Initiation_Phase();
-		var b_ = context.Operators.Exists<Encounter>(a_);
+		IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase();
+		bool? b_ = context.Operators.Exists<Encounter>(a_);
 
 		return b_;
 	}
@@ -1011,15 +1012,15 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Value()
 	{
-		var a_ = this.Atomoxetine();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		CqlValueSet a_ = this.Atomoxetine();
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS f_(MedicationRequest AtomoxetineMed)
 		{
-			var dt_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(AtomoxetineMed);
-			var dv_ = context.Operators.Start(dt_);
-			var dw_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> dt_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(AtomoxetineMed);
+			CqlDate dv_ = context.Operators.Start(dt_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS dw_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = dt_,
 				periodStart = dv_,
@@ -1027,30 +1028,30 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return dw_;
 		};
-		var g_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(e_, f_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> g_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(e_, f_);
 		object h_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this) => 
 			@this?.periodStart;
-		var i_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> i_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? j_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var dx_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? dx_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return dx_;
 		};
-		var k_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(i_, j_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> k_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(i_, j_);
 		CqlInterval<CqlDate> l_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this) => 
 			@this?.period;
-		var m_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(k_, l_);
-		var n_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(m_);
-		var o_ = this.Clonidine();
-		var p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
-		var r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
-		var s_ = context.Operators.ListUnion<MedicationRequest>(p_, r_);
+		IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(k_, l_);
+		IEnumerable<CqlInterval<CqlDate>> n_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(m_);
+		CqlValueSet o_ = this.Clonidine();
+		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
+		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
+		IEnumerable<MedicationRequest> s_ = context.Operators.ListUnion<MedicationRequest>(p_, r_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS t_(MedicationRequest ClonidineMed)
 		{
-			var dy_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ClonidineMed);
-			var ea_ = context.Operators.Start(dy_);
-			var eb_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> dy_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ClonidineMed);
+			CqlDate ea_ = context.Operators.Start(dy_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS eb_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = dy_,
 				periodStart = ea_,
@@ -1058,27 +1059,27 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return eb_;
 		};
-		var u_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(s_, t_);
-		var w_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(u_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> u_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(s_, t_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> w_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(u_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? x_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var ec_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? ec_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return ec_;
 		};
-		var y_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(w_, x_);
-		var aa_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(y_, l_);
-		var ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
-		var ac_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(n_, ab_);
-		var ad_ = this.Dexmethylphenidate();
-		var ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
-		var ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
-		var ah_ = context.Operators.ListUnion<MedicationRequest>(ae_, ag_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> y_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(w_, x_);
+		IEnumerable<CqlInterval<CqlDate>> aa_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(y_, l_);
+		IEnumerable<CqlInterval<CqlDate>> ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
+		IEnumerable<CqlInterval<CqlDate>> ac_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(n_, ab_);
+		CqlValueSet ad_ = this.Dexmethylphenidate();
+		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
+		IEnumerable<MedicationRequest> ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
+		IEnumerable<MedicationRequest> ah_ = context.Operators.ListUnion<MedicationRequest>(ae_, ag_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ai_(MedicationRequest DexmethylphenidateMed)
 		{
-			var ed_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DexmethylphenidateMed);
-			var ef_ = context.Operators.Start(ed_);
-			var eg_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> ed_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DexmethylphenidateMed);
+			CqlDate ef_ = context.Operators.Start(ed_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS eg_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = ed_,
 				periodStart = ef_,
@@ -1086,26 +1087,26 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return eg_;
 		};
-		var aj_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ah_, ai_);
-		var al_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(aj_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> aj_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ah_, ai_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> al_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(aj_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? am_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var eh_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? eh_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return eh_;
 		};
-		var an_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(al_, am_);
-		var ap_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(an_, l_);
-		var aq_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ap_);
-		var ar_ = this.Dextroamphetamine();
-		var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var av_ = context.Operators.ListUnion<MedicationRequest>(as_, au_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> an_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(al_, am_);
+		IEnumerable<CqlInterval<CqlDate>> ap_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(an_, l_);
+		IEnumerable<CqlInterval<CqlDate>> aq_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ap_);
+		CqlValueSet ar_ = this.Dextroamphetamine();
+		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> av_ = context.Operators.ListUnion<MedicationRequest>(as_, au_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS aw_(MedicationRequest DextroamphetamineMed)
 		{
-			var ei_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DextroamphetamineMed);
-			var ek_ = context.Operators.Start(ei_);
-			var el_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> ei_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DextroamphetamineMed);
+			CqlDate ek_ = context.Operators.Start(ei_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS el_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = ei_,
 				periodStart = ek_,
@@ -1113,28 +1114,28 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return el_;
 		};
-		var ax_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(av_, aw_);
-		var az_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ax_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> ax_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(av_, aw_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> az_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ax_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? ba_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var em_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? em_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return em_;
 		};
-		var bb_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(az_, ba_);
-		var bd_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(bb_, l_);
-		var be_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bd_);
-		var bf_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(aq_, be_);
-		var bg_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ac_, bf_);
-		var bh_ = this.Lisdexamfetamine();
-		var bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
-		var bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
-		var bl_ = context.Operators.ListUnion<MedicationRequest>(bi_, bk_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> bb_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(az_, ba_);
+		IEnumerable<CqlInterval<CqlDate>> bd_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(bb_, l_);
+		IEnumerable<CqlInterval<CqlDate>> be_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bd_);
+		IEnumerable<CqlInterval<CqlDate>> bf_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(aq_, be_);
+		IEnumerable<CqlInterval<CqlDate>> bg_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ac_, bf_);
+		CqlValueSet bh_ = this.Lisdexamfetamine();
+		IEnumerable<MedicationRequest> bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
+		IEnumerable<MedicationRequest> bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
+		IEnumerable<MedicationRequest> bl_ = context.Operators.ListUnion<MedicationRequest>(bi_, bk_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS bm_(MedicationRequest LisdexamfetamineMed)
 		{
-			var en_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(LisdexamfetamineMed);
-			var ep_ = context.Operators.Start(en_);
-			var eq_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> en_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(LisdexamfetamineMed);
+			CqlDate ep_ = context.Operators.Start(en_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS eq_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = en_,
 				periodStart = ep_,
@@ -1142,26 +1143,26 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return eq_;
 		};
-		var bn_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bl_, bm_);
-		var bp_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bn_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> bn_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bl_, bm_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> bp_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bn_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? bq_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var er_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? er_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return er_;
 		};
-		var br_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bp_, bq_);
-		var bt_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(br_, l_);
-		var bu_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bt_);
-		var bv_ = this.Methylphenidate();
-		var bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
-		var by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
-		var bz_ = context.Operators.ListUnion<MedicationRequest>(bw_, by_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> br_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bp_, bq_);
+		IEnumerable<CqlInterval<CqlDate>> bt_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(br_, l_);
+		IEnumerable<CqlInterval<CqlDate>> bu_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bt_);
+		CqlValueSet bv_ = this.Methylphenidate();
+		IEnumerable<MedicationRequest> bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
+		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
+		IEnumerable<MedicationRequest> bz_ = context.Operators.ListUnion<MedicationRequest>(bw_, by_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ca_(MedicationRequest MethylphenidateMed)
 		{
-			var es_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethylphenidateMed);
-			var eu_ = context.Operators.Start(es_);
-			var ev_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> es_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethylphenidateMed);
+			CqlDate eu_ = context.Operators.Start(es_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ev_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = es_,
 				periodStart = eu_,
@@ -1169,28 +1170,28 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return ev_;
 		};
-		var cb_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bz_, ca_);
-		var cd_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cb_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> cb_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bz_, ca_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> cd_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cb_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? ce_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var ew_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? ew_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return ew_;
 		};
-		var cf_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cd_, ce_);
-		var ch_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cf_, l_);
-		var ci_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ch_);
-		var cj_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bu_, ci_);
-		var ck_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bg_, cj_);
-		var cl_ = this.Guanfacine();
-		var cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
-		var co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
-		var cp_ = context.Operators.ListUnion<MedicationRequest>(cm_, co_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> cf_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cd_, ce_);
+		IEnumerable<CqlInterval<CqlDate>> ch_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cf_, l_);
+		IEnumerable<CqlInterval<CqlDate>> ci_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ch_);
+		IEnumerable<CqlInterval<CqlDate>> cj_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bu_, ci_);
+		IEnumerable<CqlInterval<CqlDate>> ck_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bg_, cj_);
+		CqlValueSet cl_ = this.Guanfacine();
+		IEnumerable<MedicationRequest> cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
+		IEnumerable<MedicationRequest> co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
+		IEnumerable<MedicationRequest> cp_ = context.Operators.ListUnion<MedicationRequest>(cm_, co_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS cq_(MedicationRequest GuanfacineMed)
 		{
-			var ex_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(GuanfacineMed);
-			var ez_ = context.Operators.Start(ex_);
-			var fa_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> ex_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(GuanfacineMed);
+			CqlDate ez_ = context.Operators.Start(ex_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS fa_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = ex_,
 				periodStart = ez_,
@@ -1198,28 +1199,28 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return fa_;
 		};
-		var cr_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cp_, cq_);
-		var ct_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cr_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> cr_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cp_, cq_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> ct_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cr_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? cu_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var fb_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? fb_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return fb_;
 		};
-		var cv_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ct_, cu_);
-		var cx_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cv_, l_);
-		var cy_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(cx_);
-		var cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
-		var da_ = context.Operators.ToList<CqlCode>(cz_);
-		var db_ = context.Operators.RetrieveByCodes<MedicationRequest>(da_, null);
-		var dd_ = context.Operators.ToList<CqlCode>(cz_);
-		var de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, null);
-		var df_ = context.Operators.ListUnion<MedicationRequest>(db_, de_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> cv_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ct_, cu_);
+		IEnumerable<CqlInterval<CqlDate>> cx_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cv_, l_);
+		IEnumerable<CqlInterval<CqlDate>> cy_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(cx_);
+		CqlCode cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
+		IEnumerable<CqlCode> da_ = context.Operators.ToList<CqlCode>(cz_);
+		IEnumerable<MedicationRequest> db_ = context.Operators.RetrieveByCodes<MedicationRequest>(da_, null);
+		IEnumerable<CqlCode> dd_ = context.Operators.ToList<CqlCode>(cz_);
+		IEnumerable<MedicationRequest> de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, null);
+		IEnumerable<MedicationRequest> df_ = context.Operators.ListUnion<MedicationRequest>(db_, de_);
 		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS dg_(MedicationRequest MethamphetamineMed)
 		{
-			var fc_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethamphetamineMed);
-			var fe_ = context.Operators.Start(fc_);
-			var ff_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			CqlInterval<CqlDate> fc_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethamphetamineMed);
+			CqlDate fe_ = context.Operators.Start(fc_);
+			Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ff_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = fc_,
 				periodStart = fe_,
@@ -1227,30 +1228,30 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return ff_;
 		};
-		var dh_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(df_, dg_);
-		var dj_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dh_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> dh_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(df_, dg_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> dj_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dh_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? dk_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
-			var fg_ = context.Operators.Not((bool?)(@this?.period is null));
+			bool? fg_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return fg_;
 		};
-		var dl_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dj_, dk_);
-		var dn_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(dl_, l_);
-		var do_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(dn_);
-		var dp_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(cy_, do_);
-		var dq_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ck_, dp_);
+		IEnumerable<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS> dl_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dj_, dk_);
+		IEnumerable<CqlInterval<CqlDate>> dn_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(dl_, l_);
+		IEnumerable<CqlInterval<CqlDate>> do_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(dn_);
+		IEnumerable<CqlInterval<CqlDate>> dp_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(cy_, do_);
+		IEnumerable<CqlInterval<CqlDate>> dq_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ck_, dp_);
 		CqlInterval<CqlDate> dr_(CqlInterval<CqlDate> ADHDMedication)
 		{
-			var fh_ = this.IPSD();
-			var fj_ = context.Operators.Quantity(300m, "days");
-			var fk_ = context.Operators.Add(fh_, fj_);
-			var fl_ = context.Operators.Interval(fh_, fk_, true, true);
-			var fm_ = context.Operators.IntervalIntersect<CqlDate>(ADHDMedication, fl_);
+			CqlDate fh_ = this.IPSD();
+			CqlQuantity fj_ = context.Operators.Quantity(300m, "days");
+			CqlDate fk_ = context.Operators.Add(fh_, fj_);
+			CqlInterval<CqlDate> fl_ = context.Operators.Interval(fh_, fk_, true, true);
+			CqlInterval<CqlDate> fm_ = context.Operators.IntervalIntersect<CqlDate>(ADHDMedication, fl_);
 
 			return fm_;
 		};
-		var ds_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(dq_, dr_);
+		IEnumerable<CqlInterval<CqlDate>> ds_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(dq_, dr_);
 
 		return ds_;
 	}
@@ -1261,8 +1262,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private int? ADHD_Cumulative_Medication_Duration_Value()
 	{
-		var a_ = this.ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase();
-		var b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
+		IEnumerable<CqlInterval<CqlDate>> a_ = this.ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase();
+		int? b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
 
 		return b_;
 	}
@@ -1273,8 +1274,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Value()
 	{
-		var a_ = this.ADHD_Cumulative_Medication_Duration();
-		var b_ = context.Operators.GreaterOrEqual(a_, 210);
+		int? a_ = this.ADHD_Cumulative_Medication_Duration();
+		bool? b_ = context.Operators.GreaterOrEqual(a_, 210);
 
 		return b_;
 	}
@@ -1285,23 +1286,23 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Value()
 	{
-		var a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
+		IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
 		bool? b_(Encounter InpatientStay)
 		{
-			var d_ = FHIRHelpers_4_3_000.ToInterval(InpatientStay?.Period);
-			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
-			var f_ = context.Operators.Start(e_);
-			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity(300m, "days");
-			var j_ = context.Operators.Add(g_, i_);
-			var k_ = context.Operators.Interval(g_, j_, false, true);
-			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
-			var n_ = context.Operators.Not((bool?)(g_ is null));
-			var o_ = context.Operators.And(l_, n_);
+			CqlInterval<CqlDateTime> d_ = FHIRHelpers_4_3_000.ToInterval(InpatientStay?.Period);
+			CqlInterval<CqlDate> e_ = CQMCommon_2_0_000.ToDateInterval(d_);
+			CqlDate f_ = context.Operators.Start(e_);
+			CqlDate g_ = this.IPSD();
+			CqlQuantity i_ = context.Operators.Quantity(300m, "days");
+			CqlDate j_ = context.Operators.Add(g_, i_);
+			CqlInterval<CqlDate> k_ = context.Operators.Interval(g_, j_, false, true);
+			bool? l_ = context.Operators.In<CqlDate>(f_, k_, "day");
+			bool? n_ = context.Operators.Not((bool?)(g_ is null));
+			bool? o_ = context.Operators.And(l_, n_);
 
 			return o_;
 		};
-		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1312,31 +1313,31 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Initial_Population_2_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var c_ = this.Intake_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, 6);
-		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var k_ = context.Operators.End(c_);
-		var l_ = context.Operators.DateFrom(k_);
-		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, 12);
-		var o_ = context.Operators.And(g_, n_);
-		var p_ = this.Qualifying_Encounter();
-		var q_ = context.Operators.Exists<Encounter>(p_);
-		var r_ = context.Operators.And(o_, q_);
-		var s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
-		var t_ = context.Operators.Not((bool?)(s_ is null));
-		var u_ = context.Operators.And(r_, t_);
-		var v_ = this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days();
-		var w_ = context.Operators.And(u_, v_);
-		var x_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase();
-		var y_ = context.Operators.Exists<Encounter>(x_);
-		var z_ = context.Operators.Not(y_);
-		var aa_ = context.Operators.And(w_, z_);
+		Patient a_ = this.Patient();
+		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		CqlInterval<CqlDateTime> c_ = this.Intake_Period();
+		CqlDateTime d_ = context.Operators.Start(c_);
+		CqlDate e_ = context.Operators.DateFrom(d_);
+		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		bool? g_ = context.Operators.GreaterOrEqual(f_, 6);
+		CqlDate i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		CqlDateTime k_ = context.Operators.End(c_);
+		CqlDate l_ = context.Operators.DateFrom(k_);
+		int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+		bool? n_ = context.Operators.LessOrEqual(m_, 12);
+		bool? o_ = context.Operators.And(g_, n_);
+		IEnumerable<Encounter> p_ = this.Qualifying_Encounter();
+		bool? q_ = context.Operators.Exists<Encounter>(p_);
+		bool? r_ = context.Operators.And(o_, q_);
+		CqlDate s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
+		bool? t_ = context.Operators.Not((bool?)(s_ is null));
+		bool? u_ = context.Operators.And(r_, t_);
+		bool? v_ = this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days();
+		bool? w_ = context.Operators.And(u_, v_);
+		IEnumerable<Encounter> x_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase();
+		bool? y_ = context.Operators.Exists<Encounter>(x_);
+		bool? z_ = context.Operators.Not(y_);
+		bool? aa_ = context.Operators.And(w_, z_);
 
 		return aa_;
 	}
@@ -1347,7 +1348,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Denominator_2_Value()
 	{
-		var a_ = this.Initial_Population_2();
+		bool? a_ = this.Initial_Population_2();
 
 		return a_;
 	}
@@ -1358,32 +1359,32 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
-		var a_ = this.Qualifying_Numerator_Encounter();
+		IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter();
 		bool? b_(Encounter ValidNumeratorEncounter)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToInterval(ValidNumeratorEncounter?.Period);
-			var g_ = CQMCommon_2_0_000.ToDateInterval(f_);
-			var h_ = context.Operators.Start(g_);
-			var i_ = this.IPSD();
-			var j_ = context.Operators.Quantity(31m, "days");
-			var k_ = context.Operators.Add(i_, j_);
-			var m_ = context.Operators.Quantity(300m, "days");
-			var n_ = context.Operators.Add(i_, m_);
-			var o_ = context.Operators.Interval(k_, n_, true, true);
-			var p_ = context.Operators.In<CqlDate>(h_, o_, "day");
+			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.ToInterval(ValidNumeratorEncounter?.Period);
+			CqlInterval<CqlDate> g_ = CQMCommon_2_0_000.ToDateInterval(f_);
+			CqlDate h_ = context.Operators.Start(g_);
+			CqlDate i_ = this.IPSD();
+			CqlQuantity j_ = context.Operators.Quantity(31m, "days");
+			CqlDate k_ = context.Operators.Add(i_, j_);
+			CqlQuantity m_ = context.Operators.Quantity(300m, "days");
+			CqlDate n_ = context.Operators.Add(i_, m_);
+			CqlInterval<CqlDate> o_ = context.Operators.Interval(k_, n_, true, true);
+			bool? p_ = context.Operators.In<CqlDate>(h_, o_, "day");
 
 			return p_;
 		};
-		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		CqlDate d_(Encounter ValidNumeratorEncounter)
 		{
-			var q_ = FHIRHelpers_4_3_000.ToInterval(ValidNumeratorEncounter?.Period);
-			var r_ = context.Operators.Start(q_);
-			var s_ = context.Operators.DateFrom(r_);
+			CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_3_000.ToInterval(ValidNumeratorEncounter?.Period);
+			CqlDateTime r_ = context.Operators.Start(q_);
+			CqlDate s_ = context.Operators.DateFrom(r_);
 
 			return s_;
 		};
-		var e_ = context.Operators.Select<Encounter, CqlDate>(c_, d_);
+		IEnumerable<CqlDate> e_ = context.Operators.Select<Encounter, CqlDate>(c_, d_);
 
 		return e_;
 	}
@@ -1394,9 +1395,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
-		var a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
-		var b_ = context.Operators.Count<CqlDate>(a_);
-		var c_ = context.Operators.GreaterOrEqual(b_, 2);
+		IEnumerable<CqlDate> a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
+		int? b_ = context.Operators.Count<CqlDate>(a_);
+		bool? c_ = context.Operators.GreaterOrEqual(b_, 2);
 
 		return c_;
 	}
@@ -1407,33 +1408,33 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
-		var a_ = this.Online_Assessments();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet a_ = this.Online_Assessments();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter OnlineAssessment)
 		{
-			var g_ = FHIRHelpers_4_3_000.ToInterval(OnlineAssessment?.Period);
-			var h_ = CQMCommon_2_0_000.ToDateInterval(g_);
-			var i_ = context.Operators.Start(h_);
-			var j_ = this.IPSD();
-			var k_ = context.Operators.Quantity(31m, "days");
-			var l_ = context.Operators.Add(j_, k_);
-			var n_ = context.Operators.Quantity(300m, "days");
-			var o_ = context.Operators.Add(j_, n_);
-			var p_ = context.Operators.Interval(l_, o_, true, true);
-			var q_ = context.Operators.In<CqlDate>(i_, p_, "day");
+			CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_3_000.ToInterval(OnlineAssessment?.Period);
+			CqlInterval<CqlDate> h_ = CQMCommon_2_0_000.ToDateInterval(g_);
+			CqlDate i_ = context.Operators.Start(h_);
+			CqlDate j_ = this.IPSD();
+			CqlQuantity k_ = context.Operators.Quantity(31m, "days");
+			CqlDate l_ = context.Operators.Add(j_, k_);
+			CqlQuantity n_ = context.Operators.Quantity(300m, "days");
+			CqlDate o_ = context.Operators.Add(j_, n_);
+			CqlInterval<CqlDate> p_ = context.Operators.Interval(l_, o_, true, true);
+			bool? q_ = context.Operators.In<CqlDate>(i_, p_, "day");
 
 			return q_;
 		};
-		var d_ = context.Operators.Where<Encounter>(b_, c_);
+		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		CqlDate e_(Encounter OnlineAssessment)
 		{
-			var r_ = FHIRHelpers_4_3_000.ToInterval(OnlineAssessment?.Period);
-			var s_ = context.Operators.Start(r_);
-			var t_ = context.Operators.DateFrom(s_);
+			CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(OnlineAssessment?.Period);
+			CqlDateTime s_ = context.Operators.Start(r_);
+			CqlDate t_ = context.Operators.DateFrom(s_);
 
 			return t_;
 		};
-		var f_ = context.Operators.Select<Encounter, CqlDate>(d_, e_);
+		IEnumerable<CqlDate> f_ = context.Operators.Select<Encounter, CqlDate>(d_, e_);
 
 		return f_;
 	}
@@ -1444,35 +1445,35 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private bool? Numerator_2_Value()
 	{
-		var a_ = this.Encounter_During_Initiation_Phase();
-		var b_ = context.Operators.Exists<Encounter>(a_);
-		var c_ = this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
-		var d_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
+		IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase();
+		bool? b_ = context.Operators.Exists<Encounter>(a_);
+		bool? c_ = this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
+		IEnumerable<CqlDate> d_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 		IEnumerable<CqlDate> e_(CqlDate Encounter1)
 		{
-			var j_ = this.Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
+			IEnumerable<CqlDate> j_ = this.Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 			bool? k_(CqlDate Encounter2)
 			{
-				var o_ = context.Operators.Not((bool?)(Encounter1 is null));
-				var p_ = context.Operators.Not((bool?)(Encounter2 is null));
-				var q_ = context.Operators.And(o_, p_);
-				var r_ = context.Operators.Equivalent(Encounter1, Encounter2);
-				var s_ = context.Operators.Not(r_);
-				var t_ = context.Operators.And(q_, s_);
+				bool? o_ = context.Operators.Not((bool?)(Encounter1 is null));
+				bool? p_ = context.Operators.Not((bool?)(Encounter2 is null));
+				bool? q_ = context.Operators.And(o_, p_);
+				bool? r_ = context.Operators.Equivalent(Encounter1, Encounter2);
+				bool? s_ = context.Operators.Not(r_);
+				bool? t_ = context.Operators.And(q_, s_);
 
 				return t_;
 			};
-			var l_ = context.Operators.Where<CqlDate>(j_, k_);
+			IEnumerable<CqlDate> l_ = context.Operators.Where<CqlDate>(j_, k_);
 			CqlDate m_(CqlDate Encounter2) => 
 				Encounter1;
-			var n_ = context.Operators.Select<CqlDate, CqlDate>(l_, m_);
+			IEnumerable<CqlDate> n_ = context.Operators.Select<CqlDate, CqlDate>(l_, m_);
 
 			return n_;
 		};
-		var f_ = context.Operators.SelectMany<CqlDate, CqlDate>(d_, e_);
-		var g_ = context.Operators.Exists<CqlDate>(f_);
-		var h_ = context.Operators.Or(c_, g_);
-		var i_ = context.Operators.And(b_, h_);
+		IEnumerable<CqlDate> f_ = context.Operators.SelectMany<CqlDate, CqlDate>(d_, e_);
+		bool? g_ = context.Operators.Exists<CqlDate>(f_);
+		bool? h_ = context.Operators.Or(c_, g_);
+		bool? i_ = context.Operators.And(b_, h_);
 
 		return i_;
 	}
@@ -1483,7 +1484,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -1494,7 +1495,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -1505,7 +1506,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -1516,7 +1517,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}

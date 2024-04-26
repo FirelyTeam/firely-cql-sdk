@@ -71,6 +71,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(CqlDeclarationAttribute).Namespace!,
                 typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
+                typeof(PropertyInfo).Namespace!,
             };
 
             foreach (var @using in typeResolver.ModelNamespaces)

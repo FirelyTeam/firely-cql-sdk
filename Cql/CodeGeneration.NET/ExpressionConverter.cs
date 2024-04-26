@@ -22,6 +22,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class ExpressionConverter(string libraryName)
     {
+        private static readonly bool PreferVar = false;
+
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
         {
             try
@@ -561,8 +563,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return ConvertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
                 var rightCode = ConvertExpression(indent, right, false);
+
                 string typeDeclaration = "var";
-                if (rightCode is "null" or "default")
+                if (!PreferVar || rightCode is "null" or "default")
                     typeDeclaration = PrettyTypeName(left.Type);
 
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";

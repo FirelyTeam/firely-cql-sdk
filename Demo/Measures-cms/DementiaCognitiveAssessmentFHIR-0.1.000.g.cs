@@ -7,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -223,7 +224,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		var a_ = new CqlCode[0]
+		CqlCode[] a_ = new CqlCode[0]
 ;
 
 		return a_;
@@ -235,10 +236,10 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("DementiaCognitiveAssessmentFHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("DementiaCognitiveAssessmentFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -249,8 +250,8 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -261,32 +262,32 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private IEnumerable<Encounter> Encounter_to_Assess_Cognition_Value()
 	{
-		var a_ = this.Psych_Visit_Diagnostic_Evaluation();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Nursing_Facility_Visit();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		var f_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Home_Healthcare_Services();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
-		var l_ = this.Psych_Visit_Psychotherapy();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = this.Behavioral_Neuropsych_Assessment();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
-		var r_ = this.Occupational_Therapy_Evaluation();
-		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
-		var t_ = this.Office_Visit();
-		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
-		var x_ = this.Outpatient_Consultation();
-		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
-		var z_ = context.Operators.ListUnion<Encounter>(w_, y_);
+		CqlValueSet a_ = this.Psych_Visit_Diagnostic_Evaluation();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Nursing_Facility_Visit();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Care_Services_in_Long_Term_Residential_Facility();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Psych_Visit_Psychotherapy();
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		CqlValueSet n_ = this.Behavioral_Neuropsych_Assessment();
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> p_ = context.Operators.ListUnion<Encounter>(m_, o_);
+		IEnumerable<Encounter> q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		CqlValueSet r_ = this.Occupational_Therapy_Evaluation();
+		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		CqlValueSet t_ = this.Office_Visit();
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		IEnumerable<Encounter> v_ = context.Operators.ListUnion<Encounter>(s_, u_);
+		IEnumerable<Encounter> w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		CqlValueSet x_ = this.Outpatient_Consultation();
+		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
+		IEnumerable<Encounter> z_ = context.Operators.ListUnion<Encounter>(w_, y_);
 
 		return z_;
 	}
@@ -297,46 +298,46 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private IEnumerable<Encounter> Dementia_Encounter_During_Measurement_Period_Value()
 	{
-		var a_ = this.Encounter_to_Assess_Cognition();
+		IEnumerable<Encounter> a_ = this.Encounter_to_Assess_Cognition();
 		IEnumerable<Encounter> b_(Encounter EncounterAssessCognition)
 		{
-			var d_ = this.Dementia_and_Mental_Degenerations();
-			var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+			CqlValueSet d_ = this.Dementia_and_Mental_Degenerations();
+			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
 			bool? f_(Condition Dementia)
 			{
-				var j_ = this.Measurement_Period();
-				var k_ = FHIRHelpers_4_3_000.ToInterval(EncounterAssessCognition?.Period);
-				var l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, k_, null);
-				var m_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
-				var o_ = context.Operators.Overlaps(m_, k_, "day");
-				var p_ = context.Operators.And(l_, o_);
-				var q_ = QICoreCommon_2_0_000.isActive(Dementia);
-				var r_ = context.Operators.And(p_, q_);
-				var s_ = FHIRHelpers_4_3_000.ToConcept(Dementia?.VerificationStatus);
-				var t_ = QICoreCommon_2_0_000.unconfirmed();
-				var u_ = context.Operators.ConvertCodeToConcept(t_);
-				var v_ = context.Operators.Equivalent(s_, u_);
-				var x_ = QICoreCommon_2_0_000.refuted();
-				var y_ = context.Operators.ConvertCodeToConcept(x_);
-				var z_ = context.Operators.Equivalent(s_, y_);
-				var aa_ = context.Operators.Or(v_, z_);
-				var ac_ = QICoreCommon_2_0_000.entered_in_error();
-				var ad_ = context.Operators.ConvertCodeToConcept(ac_);
-				var ae_ = context.Operators.Equivalent(s_, ad_);
-				var af_ = context.Operators.Or(aa_, ae_);
-				var ag_ = context.Operators.Not(af_);
-				var ah_ = context.Operators.And(r_, ag_);
+				CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
+				CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(EncounterAssessCognition?.Period);
+				bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, k_, null);
+				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
+				bool? o_ = context.Operators.Overlaps(m_, k_, "day");
+				bool? p_ = context.Operators.And(l_, o_);
+				bool? q_ = QICoreCommon_2_0_000.isActive(Dementia);
+				bool? r_ = context.Operators.And(p_, q_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(Dementia?.VerificationStatus);
+				CqlCode t_ = QICoreCommon_2_0_000.unconfirmed();
+				CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
+				bool? v_ = context.Operators.Equivalent(s_, u_);
+				CqlCode x_ = QICoreCommon_2_0_000.refuted();
+				CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+				bool? z_ = context.Operators.Equivalent(s_, y_);
+				bool? aa_ = context.Operators.Or(v_, z_);
+				CqlCode ac_ = QICoreCommon_2_0_000.entered_in_error();
+				CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
+				bool? ae_ = context.Operators.Equivalent(s_, ad_);
+				bool? af_ = context.Operators.Or(aa_, ae_);
+				bool? ag_ = context.Operators.Not(af_);
+				bool? ah_ = context.Operators.And(r_, ag_);
 
 				return ah_;
 			};
-			var g_ = context.Operators.Where<Condition>(e_, f_);
+			IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition Dementia) => 
 				EncounterAssessCognition;
-			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
+			IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -347,22 +348,22 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
 	{
-		var a_ = this.Encounter_to_Assess_Cognition();
-		var b_ = this.Patient_Provider_Interaction();
-		var c_ = context.Operators.RetrieveByValueSet<Encounter>(b_, null);
-		var d_ = context.Operators.ListUnion<Encounter>(a_, c_);
+		IEnumerable<Encounter> a_ = this.Encounter_to_Assess_Cognition();
+		CqlValueSet b_ = this.Patient_Provider_Interaction();
+		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(b_, null);
+		IEnumerable<Encounter> d_ = context.Operators.ListUnion<Encounter>(a_, c_);
 		bool? e_(Encounter ValidEncounter)
 		{
-			var g_ = this.Measurement_Period();
-			var h_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, h_, null);
-			var j_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var k_ = context.Operators.Equal(j_, "finished");
-			var l_ = context.Operators.And(i_, k_);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
+			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, h_, null);
+			Code<Encounter.EncounterStatus> j_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
+			bool? k_ = context.Operators.Equal(j_, "finished");
+			bool? l_ = context.Operators.And(i_, k_);
 
 			return l_;
 		};
-		var f_ = context.Operators.Where<Encounter>(d_, e_);
+		IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
 
 		return f_;
 	}
@@ -373,12 +374,12 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Dementia_Encounter_During_Measurement_Period();
-		var b_ = context.Operators.Exists<Encounter>(a_);
-		var c_ = this.Qualifying_Encounter_During_Measurement_Period();
-		var d_ = context.Operators.Count<Encounter>(c_);
-		var e_ = context.Operators.GreaterOrEqual(d_, 2);
-		var f_ = context.Operators.And(b_, e_);
+		IEnumerable<Encounter> a_ = this.Dementia_Encounter_During_Measurement_Period();
+		bool? b_ = context.Operators.Exists<Encounter>(a_);
+		IEnumerable<Encounter> c_ = this.Qualifying_Encounter_During_Measurement_Period();
+		int? d_ = context.Operators.Count<Encounter>(c_);
+		bool? e_ = context.Operators.GreaterOrEqual(d_, 2);
+		bool? f_ = context.Operators.And(b_, e_);
 
 		return f_;
 	}
@@ -389,7 +390,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -400,59 +401,59 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private IEnumerable<Observation> Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Value()
 	{
-		var a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = this.Cognitive_Assessment();
-		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet c_ = this.Cognitive_Assessment();
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		IEnumerable<Observation> e_ = context.Operators.ListUnion<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CognitiveAssessment)
 		{
-			var j_ = this.Dementia_Encounter_During_Measurement_Period();
+			IEnumerable<Encounter> j_ = this.Dementia_Encounter_During_Measurement_Period();
 			bool? k_(Encounter EncounterDementia)
 			{
-				var o_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Effective);
-				var p_ = QICoreCommon_2_0_000.toInterval(o_);
-				var q_ = context.Operators.Start(p_);
-				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
-				var s_ = context.Operators.End(r_);
-				var t_ = context.Operators.Quantity(12m, "months");
-				var u_ = context.Operators.Subtract(s_, t_);
-				var w_ = context.Operators.End(r_);
-				var x_ = context.Operators.Interval(u_, w_, true, true);
-				var y_ = context.Operators.In<CqlDateTime>(q_, x_, "day");
-				var aa_ = context.Operators.End(r_);
-				var ab_ = context.Operators.Not((bool?)(aa_ is null));
-				var ac_ = context.Operators.And(y_, ab_);
+				object o_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Effective);
+				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
+				CqlDateTime q_ = context.Operators.Start(p_);
+				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
+				CqlDateTime s_ = context.Operators.End(r_);
+				CqlQuantity t_ = context.Operators.Quantity(12m, "months");
+				CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+				CqlDateTime w_ = context.Operators.End(r_);
+				CqlInterval<CqlDateTime> x_ = context.Operators.Interval(u_, w_, true, true);
+				bool? y_ = context.Operators.In<CqlDateTime>(q_, x_, "day");
+				CqlDateTime aa_ = context.Operators.End(r_);
+				bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
+				bool? ac_ = context.Operators.And(y_, ab_);
 
 				return ac_;
 			};
-			var l_ = context.Operators.Where<Encounter>(j_, k_);
+			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
 				CognitiveAssessment;
-			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
+		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CognitiveAssessment)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Value);
-			var ae_ = context.Operators.Not((bool?)(ad_ is null));
-			var af_ = context.Operators.Convert<Code<ObservationStatus>>(CognitiveAssessment?.StatusElement?.Value);
-			var ag_ = context.Operators.Convert<string>(af_);
-			var ah_ = new string[]
+			object ad_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Value);
+			bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+			Code<ObservationStatus> af_ = context.Operators.Convert<Code<ObservationStatus>>(CognitiveAssessment?.StatusElement?.Value);
+			string ag_ = context.Operators.Convert<string>(af_);
+			string[] ah_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"preliminary",
 			};
-			var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
-			var aj_ = context.Operators.And(ae_, ai_);
+			bool? ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
+			bool? aj_ = context.Operators.And(ae_, ai_);
 
 			return aj_;
 		};
-		var i_ = context.Operators.Where<Observation>(g_, h_);
+		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -463,8 +464,8 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods();
-		var b_ = context.Operators.Exists<Observation>(a_);
+		IEnumerable<Observation> a_ = this.Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods();
+		bool? b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}
@@ -475,53 +476,53 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private IEnumerable<Observation> Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Value()
 	{
-		var a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = this.Cognitive_Assessment();
-		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet c_ = this.Cognitive_Assessment();
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		IEnumerable<Observation> e_ = context.Operators.ListUnion<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation NoCognitiveAssessment)
 		{
-			var j_ = this.Dementia_Encounter_During_Measurement_Period();
+			IEnumerable<Encounter> j_ = this.Dementia_Encounter_During_Measurement_Period();
 			bool? k_(Encounter EncounterDementia)
 			{
-				var o_ = context.Operators.Convert<CqlDateTime>(NoCognitiveAssessment?.IssuedElement?.Value);
-				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
-				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
+				CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(NoCognitiveAssessment?.IssuedElement?.Value);
+				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
+				bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
-			var l_ = context.Operators.Where<Encounter>(j_, k_);
+			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
 				NoCognitiveAssessment;
-			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
+		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation NoCognitiveAssessment)
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				bool? aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return aa_;
 			};
-			var s_ = context.Operators.Where<Extension>(((NoCognitiveAssessment is DomainResource)
+			IEnumerable<Extension> s_ = context.Operators.Where<Extension>(((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingletonFrom<DataType>(u_);
-			var w_ = context.Operators.Convert<CodeableConcept>(v_);
-			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
-			var y_ = this.Patient_Reason();
-			var z_ = context.Operators.ConceptInValueSet(x_, y_);
+			IEnumerable<DataType> u_ = context.Operators.Select<Extension, DataType>(s_, t_);
+			DataType v_ = context.Operators.SingletonFrom<DataType>(u_);
+			CodeableConcept w_ = context.Operators.Convert<CodeableConcept>(v_);
+			CqlConcept x_ = FHIRHelpers_4_3_000.ToConcept(w_);
+			CqlValueSet y_ = this.Patient_Reason();
+			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 
 			return z_;
 		};
-		var i_ = context.Operators.Where<Observation>(g_, h_);
+		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -532,8 +533,8 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private bool? Denominator_Exceptions_Value()
 	{
-		var a_ = this.Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods();
-		var b_ = context.Operators.Exists<Observation>(a_);
+		IEnumerable<Observation> a_ = this.Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods();
+		bool? b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}
@@ -544,7 +545,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -555,7 +556,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -566,7 +567,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -577,7 +578,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}

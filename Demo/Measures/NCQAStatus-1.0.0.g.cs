@@ -41,8 +41,8 @@ public class NCQAStatus_1_0_0
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -56,14 +56,14 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(AllergyIntolerance A)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToConcept(A?.ClinicalStatus);
-			var d_ = NCQATerminology_1_0_0.allergy_active();
-			var e_ = context.Operators.ConvertCodeToConcept(d_);
-			var f_ = context.Operators.Equal(c_, e_);
+			CqlConcept c_ = FHIRHelpers_4_0_001.ToConcept(A?.ClinicalStatus);
+			CqlCode d_ = NCQATerminology_1_0_0.allergy_active();
+			CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
+			bool? f_ = context.Operators.Equal(c_, e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
+		IEnumerable<AllergyIntolerance> b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
 
 		return b_;
 	}
@@ -73,14 +73,14 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Condition C)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToConcept(C?.ClinicalStatus);
-			var d_ = NCQATerminology_1_0_0.active();
-			var e_ = context.Operators.ConvertCodeToConcept(d_);
-			var f_ = context.Operators.Equal(c_, e_);
+			CqlConcept c_ = FHIRHelpers_4_0_001.ToConcept(C?.ClinicalStatus);
+			CqlCode d_ = NCQATerminology_1_0_0.active();
+			CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
+			bool? f_ = context.Operators.Equal(c_, e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.Where<Condition>(Condition, a_);
+		IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
@@ -90,12 +90,12 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Encounter E)
 		{
-			var c_ = context.Operators.Convert<string>(E?.StatusElement);
-			var d_ = context.Operators.Equal(c_, "finished");
+			string c_ = context.Operators.Convert<string>(E?.StatusElement);
+			bool? d_ = context.Operators.Equal(c_, "finished");
 
 			return d_;
 		};
-		var b_ = context.Operators.Where<Encounter>(Enc, a_);
+		IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
@@ -105,12 +105,12 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Immunization I)
 		{
-			var c_ = context.Operators.Convert<string>(I?.StatusElement);
-			var d_ = context.Operators.Equal(c_, "completed");
+			string c_ = context.Operators.Convert<string>(I?.StatusElement);
+			bool? d_ = context.Operators.Equal(c_, "completed");
 
 			return d_;
 		};
-		var b_ = context.Operators.Where<Immunization>(Immunization, a_);
+		IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
@@ -120,12 +120,12 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationDispense M)
 		{
-			var c_ = context.Operators.Convert<string>(M?.StatusElement);
-			var d_ = context.Operators.Equal(c_, "completed");
+			string c_ = context.Operators.Convert<string>(M?.StatusElement);
+			bool? d_ = context.Operators.Equal(c_, "completed");
 
 			return d_;
 		};
-		var b_ = context.Operators.Where<MedicationDispense>(Med, a_);
+		IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
@@ -135,16 +135,16 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var c_ = context.Operators.Convert<string>(M?.StatusElement);
-			var d_ = new string[]
+			string c_ = context.Operators.Convert<string>(M?.StatusElement);
+			string[] d_ = new string[]
 			{
 				"completed",
 			};
-			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
+			bool? e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<MedicationRequest>(Med, a_);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(Med, a_);
 
 		return b_;
 	}
@@ -154,12 +154,12 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Convert<string>(P?.StatusElement);
-			var d_ = context.Operators.Equal(c_, "completed");
+			string c_ = context.Operators.Convert<string>(P?.StatusElement);
+			bool? d_ = context.Operators.Equal(c_, "completed");
 
 			return d_;
 		};
-		var b_ = context.Operators.Where<Procedure>(Proc, a_);
+		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
@@ -169,17 +169,17 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = context.Operators.Convert<string>(P?.StatusElement);
-			var d_ = new string[]
+			string c_ = context.Operators.Convert<string>(P?.StatusElement);
+			string[] d_ = new string[]
 			{
 				"completed",
 				"in-progress",
 			};
-			var e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
+			bool? e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<Procedure>(Proc, a_);
+		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}

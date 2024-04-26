@@ -7,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -625,7 +626,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("11287-0", "http://loinc.org", null, null),
 			new CqlCode("39156-5", "http://loinc.org", null, null),
@@ -644,7 +645,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] AdministrativeGender_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", null, null),
 		};
@@ -658,7 +659,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("7771000", "http://snomed.info/sct", null, null),
 			new CqlCode("24028007", "http://snomed.info/sct", null, null),
@@ -673,7 +674,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] CPT_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", null, null),
 		};
@@ -687,10 +688,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("AppropriateDXAScansForWomenUnder65FHIR-0.0.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("AppropriateDXAScansForWomenUnder65FHIR-0.0.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -701,8 +702,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -713,7 +714,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -724,7 +725,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -735,7 +736,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -746,7 +747,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -757,58 +758,58 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		var f_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? g_(Encounter E)
 		{
 			CqlConcept x_(CodeableConcept @this)
 			{
-				var ac_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept ac_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return ac_;
 			};
-			var y_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, x_);
+			IEnumerable<CqlConcept> y_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, x_);
 			bool? z_(CqlConcept T)
 			{
-				var ad_ = this.Unlisted_preventive_medicine_service();
-				var ae_ = context.Operators.ConvertCodeToConcept(ad_);
-				var af_ = context.Operators.Equivalent(T, ae_);
+				CqlCode ad_ = this.Unlisted_preventive_medicine_service();
+				CqlConcept ae_ = context.Operators.ConvertCodeToConcept(ad_);
+				bool? af_ = context.Operators.Equivalent(T, ae_);
 
 				return af_;
 			};
-			var aa_ = context.Operators.Where<CqlConcept>(y_, z_);
-			var ab_ = context.Operators.Exists<CqlConcept>(aa_);
+			IEnumerable<CqlConcept> aa_ = context.Operators.Where<CqlConcept>(y_, z_);
+			bool? ab_ = context.Operators.Exists<CqlConcept>(aa_);
 
 			return ab_;
 		};
-		var h_ = context.Operators.Where<Encounter>(f_, g_);
-		var i_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = context.Operators.ListUnion<Encounter>(h_, j_);
-		var l_ = context.Operators.ListUnion<Encounter>(e_, k_);
-		var m_ = this.Outpatient_Consultation();
-		var n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
-		var o_ = this.Online_Assessments();
-		var p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
-		var q_ = context.Operators.ListUnion<Encounter>(n_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(l_, q_);
-		var s_ = this.Telephone_Visits();
-		var t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, null);
-		var u_ = context.Operators.ListUnion<Encounter>(r_, t_);
+		IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
+		CqlValueSet i_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, null);
+		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(h_, j_);
+		IEnumerable<Encounter> l_ = context.Operators.ListUnion<Encounter>(e_, k_);
+		CqlValueSet m_ = this.Outpatient_Consultation();
+		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
+		CqlValueSet o_ = this.Online_Assessments();
+		IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
+		IEnumerable<Encounter> q_ = context.Operators.ListUnion<Encounter>(n_, p_);
+		IEnumerable<Encounter> r_ = context.Operators.ListUnion<Encounter>(l_, q_);
+		CqlValueSet s_ = this.Telephone_Visits();
+		IEnumerable<Encounter> t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, null);
+		IEnumerable<Encounter> u_ = context.Operators.ListUnion<Encounter>(r_, t_);
 		bool? v_(Encounter ValidEncounters)
 		{
-			var ag_ = this.Measurement_Period();
-			var ah_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			var ai_ = QICoreCommon_2_0_000.ToInterval((ah_ as object));
-			var aj_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ag_, ai_, "day");
+			CqlInterval<CqlDateTime> ag_ = this.Measurement_Period();
+			CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
+			CqlInterval<CqlDateTime> ai_ = QICoreCommon_2_0_000.ToInterval((ah_ as object));
+			bool? aj_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ag_, ai_, "day");
 
 			return aj_;
 		};
-		var w_ = context.Operators.Where<Encounter>(u_, v_);
+		IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}
@@ -819,19 +820,19 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(50, 63, true, true);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
-		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Qualifying_Encounter();
-		var m_ = context.Operators.Exists<Encounter>(l_);
-		var n_ = context.Operators.And(k_, m_);
+		Patient a_ = this.Patient();
+		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
+		CqlDateTime d_ = context.Operators.Start(c_);
+		CqlDate e_ = context.Operators.DateFrom(d_);
+		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		CqlInterval<int?> g_ = context.Operators.Interval(50, 63, true, true);
+		bool? h_ = context.Operators.In<int?>(f_, g_, null);
+		bool? j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
+		bool? k_ = context.Operators.And(h_, j_);
+		IEnumerable<Encounter> l_ = this.Qualifying_Encounter();
+		bool? m_ = context.Operators.Exists<Encounter>(l_);
+		bool? n_ = context.Operators.And(k_, m_);
 
 		return n_;
 	}
@@ -842,7 +843,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -853,32 +854,32 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Observation First_BMI_in_Measurement_Period_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
-		var b_ = Status_1_6_000.BMI(a_);
+		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+		IEnumerable<Observation> b_ = Status_1_6_000.BMI(a_);
 		bool? c_(Observation BMIRatio)
 		{
-			var h_ = this.Measurement_Period();
-			var i_ = FHIRHelpers_4_3_000.ToValue(BMIRatio?.Effective);
-			var j_ = QICoreCommon_2_0_000.ToInterval(i_);
-			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, null);
-			var l_ = context.Operators.Convert<Quantity>(BMIRatio?.Value);
-			var m_ = FHIRHelpers_4_3_000.ToQuantity(l_);
-			var n_ = context.Operators.Not((bool?)(m_ is null));
-			var o_ = context.Operators.And(k_, n_);
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
+			object i_ = FHIRHelpers_4_3_000.ToValue(BMIRatio?.Effective);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
+			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, null);
+			Quantity l_ = context.Operators.Convert<Quantity>(BMIRatio?.Value);
+			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity(l_);
+			bool? n_ = context.Operators.Not((bool?)(m_ is null));
+			bool? o_ = context.Operators.And(k_, n_);
 
 			return o_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
+		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			var p_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var q_ = QICoreCommon_2_0_000.ToInterval(p_);
-			var r_ = context.Operators.Start(q_);
+			object p_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.ToInterval(p_);
+			CqlDateTime r_ = context.Operators.Start(q_);
 
 			return r_;
 		};
-		var f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.First<Observation>(f_);
+		IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		Observation g_ = context.Operators.First<Observation>(f_);
 
 		return g_;
 	}
@@ -889,22 +890,22 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Observation First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2_Value()
 	{
-		var a_ = this.First_BMI_in_Measurement_Period();
-		var b_ = new Observation[]
+		Observation a_ = this.First_BMI_in_Measurement_Period();
+		Observation[] b_ = new Observation[]
 		{
 			a_,
 		};
 		bool? c_(Observation FirstBMI)
 		{
-			var f_ = context.Operators.Convert<Quantity>(FirstBMI?.Value);
-			var g_ = FHIRHelpers_4_3_000.ToQuantity(f_);
-			var h_ = context.Operators.Quantity(20m, "kg/m2");
-			var i_ = context.Operators.LessOrEqual(g_, h_);
+			Quantity f_ = context.Operators.Convert<Quantity>(FirstBMI?.Value);
+			CqlQuantity g_ = FHIRHelpers_4_3_000.ToQuantity(f_);
+			CqlQuantity h_ = context.Operators.Quantity(20m, "kg/m2");
+			bool? i_ = context.Operators.LessOrEqual(g_, h_);
 
 			return i_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
-		var e_ = context.Operators.SingletonFrom<Observation>(d_);
+		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
+		Observation e_ = context.Operators.SingletonFrom<Observation>(d_);
 
 		return e_;
 	}
@@ -915,35 +916,35 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Observation First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day_Value()
 	{
-		var a_ = this.Alcoholic_drinks_per_drinking_day___Reported();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
+		CqlCode a_ = this.Alcoholic_drinks_per_drinking_day___Reported();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation AverageDrinks)
 		{
-			var j_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Effective);
-			var k_ = QICoreCommon_2_0_000.ToInterval(j_);
-			var l_ = context.Operators.Start(k_);
-			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
-			var o_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Value);
-			var p_ = context.Operators.Quantity(2m, "{drinks}/d");
-			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
-			var r_ = context.Operators.And(n_, q_);
+			object j_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Effective);
+			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval(j_);
+			CqlDateTime l_ = context.Operators.Start(k_);
+			CqlInterval<CqlDateTime> m_ = this.Measurement_Period();
+			bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
+			object o_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Value);
+			CqlQuantity p_ = context.Operators.Quantity(2m, "{drinks}/d");
+			bool? q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
+			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
 		};
-		var f_ = context.Operators.Where<Observation>(d_, e_);
+		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		object g_(Observation @this)
 		{
-			var s_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var t_ = QICoreCommon_2_0_000.ToInterval(s_);
-			var u_ = context.Operators.Start(t_);
+			object s_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToInterval(s_);
+			CqlDateTime u_ = context.Operators.Start(t_);
 
 			return u_;
 		};
-		var h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-		var i_ = context.Operators.First<Observation>(h_);
+		IEnumerable<Observation> h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+		Observation i_ = context.Operators.First<Observation>(h_);
 
 		return i_;
 	}
@@ -954,11 +955,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_Risk_Factor_Active_During_the_Measurement_Period_Value()
 	{
-		var a_ = this.First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2();
-		var b_ = context.Operators.Not((bool?)(a_ is null));
-		var c_ = this.First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day();
-		var d_ = context.Operators.Not((bool?)(c_ is null));
-		var e_ = context.Operators.Or(b_, d_);
+		Observation a_ = this.First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2();
+		bool? b_ = context.Operators.Not((bool?)(a_ is null));
+		Observation c_ = this.First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day();
+		bool? d_ = context.Operators.Not((bool?)(c_ is null));
+		bool? e_ = context.Operators.Or(b_, d_);
 
 		return e_;
 	}
@@ -969,20 +970,20 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_Osteoporosis_Before_Measurement_Period_Value()
 	{
-		var a_ = this.Osteoporosis();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Osteoporosis();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition OsteoporosisDiagnosis)
 		{
-			var f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(OsteoporosisDiagnosis);
-			var g_ = context.Operators.Start(f_);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Before(g_, i_, null);
+			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(OsteoporosisDiagnosis);
+			CqlDateTime g_ = context.Operators.Start(f_);
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
+			CqlDateTime i_ = context.Operators.Start(h_);
+			bool? j_ = context.Operators.Before(g_, i_, null);
 
 			return j_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+		bool? e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -993,20 +994,20 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_Osteopenia_Before_Measurement_Period_Value()
 	{
-		var a_ = this.Osteopenia();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Osteopenia();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition OsteopeniaDiagnosis)
 		{
-			var f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(OsteopeniaDiagnosis);
-			var g_ = context.Operators.Start(f_);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Before(g_, i_, null);
+			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(OsteopeniaDiagnosis);
+			CqlDateTime g_ = context.Operators.Start(f_);
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
+			CqlDateTime i_ = context.Operators.Start(h_);
+			bool? j_ = context.Operators.Before(g_, i_, null);
 
 			return j_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+		bool? e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -1017,9 +1018,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_Value()
 	{
-		var a_ = this.Has_Osteoporosis_Before_Measurement_Period();
-		var b_ = this.Has_Osteopenia_Before_Measurement_Period();
-		var c_ = context.Operators.Or(a_, b_);
+		bool? a_ = this.Has_Osteoporosis_Before_Measurement_Period();
+		bool? b_ = this.Has_Osteopenia_Before_Measurement_Period();
+		bool? c_ = context.Operators.Or(a_, b_);
 
 		return c_;
 	}
@@ -1030,21 +1031,21 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private IEnumerable<Observation> Parent_History_of_Hip_Fracture_Assessment_Value()
 	{
-		var a_ = this.History_of_hip_fracture_in_parent();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = Status_1_6_000.Final_Survey_Observation(b_);
+		CqlValueSet a_ = this.History_of_hip_fracture_in_parent();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> c_ = Status_1_6_000.Final_Survey_Observation(b_);
 		bool? d_(Observation ParentFractureHistory)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(ParentFractureHistory?.Effective);
-			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			var h_ = context.Operators.Start(g_);
-			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Before(h_, j_, null);
+			object f_ = FHIRHelpers_4_3_000.ToValue(ParentFractureHistory?.Effective);
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToInterval(f_);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
+			CqlDateTime j_ = context.Operators.Start(i_);
+			bool? k_ = context.Operators.Before(h_, j_, null);
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
+		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -1055,53 +1056,53 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period_Value()
 	{
-		var a_ = this.Gastric_Bypass_Surgery();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = Status_1_6_000.Completed_Procedure(b_);
+		CqlValueSet a_ = this.Gastric_Bypass_Surgery();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure GastricBypass)
 		{
-			var aa_ = FHIRHelpers_4_3_000.ToValue(GastricBypass?.Performed);
-			var ab_ = QICoreCommon_2_0_000.ToInterval(aa_);
-			var ac_ = context.Operators.End(ab_);
-			var ad_ = this.Measurement_Period();
-			var ae_ = context.Operators.Start(ad_);
-			var af_ = context.Operators.Before(ac_, ae_, null);
+			object aa_ = FHIRHelpers_4_3_000.ToValue(GastricBypass?.Performed);
+			CqlInterval<CqlDateTime> ab_ = QICoreCommon_2_0_000.ToInterval(aa_);
+			CqlDateTime ac_ = context.Operators.End(ab_);
+			CqlInterval<CqlDateTime> ad_ = this.Measurement_Period();
+			CqlDateTime ae_ = context.Operators.Start(ad_);
+			bool? af_ = context.Operators.Before(ac_, ae_, null);
 
 			return af_;
 		};
-		var e_ = context.Operators.Where<Procedure>(c_, d_);
-		var f_ = this.Aromatase_Inhibitors();
-		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
-		var k_ = Status_1_6_000.Active_Medication(j_);
+		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
+		CqlValueSet f_ = this.Aromatase_Inhibitors();
+		IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
+		IEnumerable<MedicationRequest> k_ = Status_1_6_000.Active_Medication(j_);
 		bool? l_(MedicationRequest AromataseInhibitorActive)
 		{
-			var ag_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(AromataseInhibitorActive);
-			var ah_ = context.Operators.Start(ag_);
-			var ai_ = context.Operators.ConvertDateToDateTime(ah_);
-			var aj_ = this.Measurement_Period();
-			var ak_ = context.Operators.Start(aj_);
-			var al_ = context.Operators.Before(ai_, ak_, null);
+			CqlInterval<CqlDate> ag_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(AromataseInhibitorActive);
+			CqlDate ah_ = context.Operators.Start(ag_);
+			CqlDateTime ai_ = context.Operators.ConvertDateToDateTime(ah_);
+			CqlInterval<CqlDateTime> aj_ = this.Measurement_Period();
+			CqlDateTime ak_ = context.Operators.Start(aj_);
+			bool? al_ = context.Operators.Before(ai_, ak_, null);
 
 			return al_;
 		};
-		var m_ = context.Operators.Where<MedicationRequest>(k_, l_);
-		var n_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (m_ as IEnumerable<object>));
-		var p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var s_ = context.Operators.ListUnion<MedicationRequest>(p_, r_);
-		var t_ = Status_1_6_000.Active_or_Completed_Medication_Request(s_);
+		IEnumerable<MedicationRequest> m_ = context.Operators.Where<MedicationRequest>(k_, l_);
+		IEnumerable<object> n_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (m_ as IEnumerable<object>));
+		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> s_ = context.Operators.ListUnion<MedicationRequest>(p_, r_);
+		IEnumerable<MedicationRequest> t_ = Status_1_6_000.Active_or_Completed_Medication_Request(s_);
 		bool? u_(MedicationRequest AromataseInhibitorOrder)
 		{
-			var am_ = context.Operators.Convert<CqlDateTime>(AromataseInhibitorOrder?.AuthoredOnElement);
-			var an_ = QICoreCommon_2_0_000.ToInterval((am_ as object));
+			CqlDateTime am_ = context.Operators.Convert<CqlDateTime>(AromataseInhibitorOrder?.AuthoredOnElement);
+			CqlInterval<CqlDateTime> an_ = QICoreCommon_2_0_000.ToInterval((am_ as object));
 			CqlInterval<CqlDateTime> ao_()
 			{
 				bool aq_()
 				{
-					var ar_ = this.Measurement_Period();
-					var as_ = context.Operators.Start(ar_);
+					CqlInterval<CqlDateTime> ar_ = this.Measurement_Period();
+					CqlDateTime as_ = context.Operators.Start(ar_);
 
 					return (as_ is null);
 				};
@@ -1111,23 +1112,23 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				}
 				else
 				{
-					var at_ = this.Measurement_Period();
-					var au_ = context.Operators.Start(at_);
-					var aw_ = context.Operators.Start(at_);
-					var ax_ = context.Operators.Interval(au_, aw_, true, true);
+					CqlInterval<CqlDateTime> at_ = this.Measurement_Period();
+					CqlDateTime au_ = context.Operators.Start(at_);
+					CqlDateTime aw_ = context.Operators.Start(at_);
+					CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(au_, aw_, true, true);
 
 					return ax_;
 				};
 			};
-			var ap_ = context.Operators.Before(an_, ao_(), null);
+			bool? ap_ = context.Operators.Before(an_, ao_(), null);
 
 			return ap_;
 		};
-		var v_ = context.Operators.Where<MedicationRequest>(t_, u_);
-		var w_ = context.Operators.ListUnion<object>(n_, (v_ as IEnumerable<object>));
-		var x_ = this.Parent_History_of_Hip_Fracture_Assessment();
-		var y_ = context.Operators.ListUnion<object>(w_, (x_ as IEnumerable<object>));
-		var z_ = context.Operators.Exists<object>(y_);
+		IEnumerable<MedicationRequest> v_ = context.Operators.Where<MedicationRequest>(t_, u_);
+		IEnumerable<object> w_ = context.Operators.ListUnion<object>(n_, (v_ as IEnumerable<object>));
+		IEnumerable<Observation> x_ = this.Parent_History_of_Hip_Fracture_Assessment();
+		IEnumerable<object> y_ = context.Operators.ListUnion<object>(w_, (x_ as IEnumerable<object>));
+		bool? z_ = context.Operators.Exists<object>(y_);
 
 		return z_;
 	}
@@ -1138,38 +1139,38 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private int? Glucocorticoid_Active_Medication_Duration_in_Days_Value()
 	{
-		var a_ = this.Glucocorticoids__oral_only_();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		var f_ = Status_1_6_000.Active_Medication(e_);
+		CqlValueSet a_ = this.Glucocorticoids__oral_only_();
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_Medication(e_);
 		bool? g_(MedicationRequest OralGlucocorticoid)
 		{
-			var l_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OralGlucocorticoid);
-			var m_ = context.Operators.Start(l_);
-			var n_ = context.Operators.ConvertDateToDateTime(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context.Operators.End(o_);
-			var q_ = context.Operators.Before(n_, p_, null);
+			CqlInterval<CqlDate> l_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OralGlucocorticoid);
+			CqlDate m_ = context.Operators.Start(l_);
+			CqlDateTime n_ = context.Operators.ConvertDateToDateTime(m_);
+			CqlInterval<CqlDateTime> o_ = this.Measurement_Period();
+			CqlDateTime p_ = context.Operators.End(o_);
+			bool? q_ = context.Operators.Before(n_, p_, null);
 
 			return q_;
 		};
-		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+		IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		CqlInterval<CqlDate> i_(MedicationRequest Glucocorticoid)
 		{
-			var r_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(Glucocorticoid);
-			var s_ = this.Patient();
-			var t_ = context.Operators.ConvertStringToDate(s_?.BirthDateElement?.Value);
-			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.End(u_);
-			var w_ = context.Operators.DateFrom(v_);
-			var x_ = context.Operators.Interval(t_, w_, true, true);
-			var y_ = context.Operators.IntervalIntersect<CqlDate>(r_, x_);
+			CqlInterval<CqlDate> r_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(Glucocorticoid);
+			Patient s_ = this.Patient();
+			CqlDate t_ = context.Operators.ConvertStringToDate(s_?.BirthDateElement?.Value);
+			CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
+			CqlDateTime v_ = context.Operators.End(u_);
+			CqlDate w_ = context.Operators.DateFrom(v_);
+			CqlInterval<CqlDate> x_ = context.Operators.Interval(t_, w_, true, true);
+			CqlInterval<CqlDate> y_ = context.Operators.IntervalIntersect<CqlDate>(r_, x_);
 
 			return y_;
 		};
-		var j_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>(h_, i_);
-		var k_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(j_);
+		IEnumerable<CqlInterval<CqlDate>> j_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>(h_, i_);
+		int? k_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(j_);
 
 		return k_;
 	}
@@ -1180,7 +1181,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private int? Glucocorticoid_Active_Medication_Days_Value()
 	{
-		var a_ = this.Glucocorticoid_Active_Medication_Duration_in_Days();
+		int? a_ = this.Glucocorticoid_Active_Medication_Duration_in_Days();
 
 		return a_;
 	}
@@ -1191,8 +1192,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_90_or_More_Active_Glucocorticoid_Medication_Days_Value()
 	{
-		var a_ = this.Glucocorticoid_Active_Medication_Days();
-		var b_ = context.Operators.GreaterOrEqual(a_, 90);
+		int? a_ = this.Glucocorticoid_Active_Medication_Days();
+		bool? b_ = context.Operators.GreaterOrEqual(a_, 90);
 
 		return b_;
 	}
@@ -1206,15 +1207,15 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	{
 		bool? a_(Condition Dx)
 		{
-			var c_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Dx);
-			var d_ = context.Operators.Start(c_);
-			var e_ = this.Measurement_Period();
-			var f_ = context.Operators.End(e_);
-			var g_ = context.Operators.SameOrBefore(d_, f_, "day");
+			CqlInterval<CqlDateTime> c_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Dx);
+			CqlDateTime d_ = context.Operators.Start(c_);
+			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+			CqlDateTime f_ = context.Operators.End(e_);
+			bool? g_ = context.Operators.SameOrBefore(d_, f_, "day");
 
 			return g_;
 		};
-		var b_ = context.Operators.Where<Condition>(Condition, a_);
+		IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
@@ -1222,95 +1223,95 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
     [CqlDeclaration("ProcedureInPatientHistory")]
 	public IEnumerable<Procedure> ProcedureInPatientHistory(IEnumerable<Procedure> Procedure)
 	{
-		var a_ = Status_1_6_000.Completed_Procedure(Procedure);
+		IEnumerable<Procedure> a_ = Status_1_6_000.Completed_Procedure(Procedure);
 		bool? b_(Procedure Proc)
 		{
-			var d_ = FHIRHelpers_4_3_000.ToValue(Proc?.Performed);
-			var e_ = QICoreCommon_2_0_000.ToInterval(d_);
-			var f_ = context.Operators.End(e_);
-			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.End(g_);
-			var i_ = context.Operators.SameOrBefore(f_, h_, "day");
+			object d_ = FHIRHelpers_4_3_000.ToValue(Proc?.Performed);
+			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.ToInterval(d_);
+			CqlDateTime f_ = context.Operators.End(e_);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+			CqlDateTime h_ = context.Operators.End(g_);
+			bool? i_ = context.Operators.SameOrBefore(f_, h_, "day");
 
 			return i_;
 		};
-		var c_ = context.Operators.Where<Procedure>(a_, b_);
+		IEnumerable<Procedure> c_ = context.Operators.Where<Procedure>(a_, b_);
 
 		return c_;
 	}
 
 	private bool? Has_Double_or_Bilateral_Oophorectomy_Value()
 	{
-		var a_ = this.Bilateral_Oophorectomy();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = this.ProcedureInPatientHistory(b_);
-		var d_ = context.Operators.Exists<Procedure>(c_);
-		var e_ = this.Evidence_of_Bilateral_Oophorectomy();
-		var f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, null);
-		var g_ = this.ProcedureInPatientHistory(f_);
-		var h_ = context.Operators.Exists<Procedure>(g_);
-		var i_ = context.Operators.Or(d_, h_);
-		var j_ = this.Unilateral_Oophorectomy__Unspecified_Laterality();
-		var k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
+		CqlValueSet a_ = this.Bilateral_Oophorectomy();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> c_ = this.ProcedureInPatientHistory(b_);
+		bool? d_ = context.Operators.Exists<Procedure>(c_);
+		CqlValueSet e_ = this.Evidence_of_Bilateral_Oophorectomy();
+		IEnumerable<Procedure> f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, null);
+		IEnumerable<Procedure> g_ = this.ProcedureInPatientHistory(f_);
+		bool? h_ = context.Operators.Exists<Procedure>(g_);
+		bool? i_ = context.Operators.Or(d_, h_);
+		CqlValueSet j_ = this.Unilateral_Oophorectomy__Unspecified_Laterality();
+		IEnumerable<Procedure> k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		bool? l_(Procedure UnilateralOophorectomy)
 		{
 			CqlConcept ad_(CodeableConcept @this)
 			{
-				var ai_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return ai_;
 			};
-			var ae_ = context.Operators.Select<CodeableConcept, CqlConcept>(UnilateralOophorectomy?.BodySite, ad_);
+			IEnumerable<CqlConcept> ae_ = context.Operators.Select<CodeableConcept, CqlConcept>(UnilateralOophorectomy?.BodySite, ad_);
 			bool? af_(CqlConcept C)
 			{
-				var aj_ = this.Right__qualifier_value_();
-				var ak_ = context.Operators.ConvertCodeToConcept(aj_);
-				var al_ = context.Operators.Equivalent(C, ak_);
+				CqlCode aj_ = this.Right__qualifier_value_();
+				CqlConcept ak_ = context.Operators.ConvertCodeToConcept(aj_);
+				bool? al_ = context.Operators.Equivalent(C, ak_);
 
 				return al_;
 			};
-			var ag_ = context.Operators.Where<CqlConcept>(ae_, af_);
-			var ah_ = context.Operators.Exists<CqlConcept>(ag_);
+			IEnumerable<CqlConcept> ag_ = context.Operators.Where<CqlConcept>(ae_, af_);
+			bool? ah_ = context.Operators.Exists<CqlConcept>(ag_);
 
 			return ah_;
 		};
-		var m_ = context.Operators.Where<Procedure>(k_, l_);
-		var n_ = this.Unilateral_Oophorectomy_Right();
-		var o_ = context.Operators.RetrieveByValueSet<Procedure>(n_, null);
-		var p_ = context.Operators.ListUnion<Procedure>(m_, o_);
-		var q_ = this.ProcedureInPatientHistory(p_);
-		var r_ = context.Operators.Exists<Procedure>(q_);
-		var t_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
+		IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>(k_, l_);
+		CqlValueSet n_ = this.Unilateral_Oophorectomy_Right();
+		IEnumerable<Procedure> o_ = context.Operators.RetrieveByValueSet<Procedure>(n_, null);
+		IEnumerable<Procedure> p_ = context.Operators.ListUnion<Procedure>(m_, o_);
+		IEnumerable<Procedure> q_ = this.ProcedureInPatientHistory(p_);
+		bool? r_ = context.Operators.Exists<Procedure>(q_);
+		IEnumerable<Procedure> t_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		bool? u_(Procedure UnilateralOophorectomy)
 		{
 			CqlConcept am_(CodeableConcept @this)
 			{
-				var ar_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept ar_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return ar_;
 			};
-			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>(UnilateralOophorectomy?.BodySite, am_);
+			IEnumerable<CqlConcept> an_ = context.Operators.Select<CodeableConcept, CqlConcept>(UnilateralOophorectomy?.BodySite, am_);
 			bool? ao_(CqlConcept D)
 			{
-				var as_ = this.Left__qualifier_value_();
-				var at_ = context.Operators.ConvertCodeToConcept(as_);
-				var au_ = context.Operators.Equivalent(D, at_);
+				CqlCode as_ = this.Left__qualifier_value_();
+				CqlConcept at_ = context.Operators.ConvertCodeToConcept(as_);
+				bool? au_ = context.Operators.Equivalent(D, at_);
 
 				return au_;
 			};
-			var ap_ = context.Operators.Where<CqlConcept>(an_, ao_);
-			var aq_ = context.Operators.Exists<CqlConcept>(ap_);
+			IEnumerable<CqlConcept> ap_ = context.Operators.Where<CqlConcept>(an_, ao_);
+			bool? aq_ = context.Operators.Exists<CqlConcept>(ap_);
 
 			return aq_;
 		};
-		var v_ = context.Operators.Where<Procedure>(t_, u_);
-		var w_ = this.Unilateral_Oophorectomy_Left();
-		var x_ = context.Operators.RetrieveByValueSet<Procedure>(w_, null);
-		var y_ = context.Operators.ListUnion<Procedure>(v_, x_);
-		var z_ = this.ProcedureInPatientHistory(y_);
-		var aa_ = context.Operators.Exists<Procedure>(z_);
-		var ab_ = context.Operators.And(r_, aa_);
-		var ac_ = context.Operators.Or(i_, ab_);
+		IEnumerable<Procedure> v_ = context.Operators.Where<Procedure>(t_, u_);
+		CqlValueSet w_ = this.Unilateral_Oophorectomy_Left();
+		IEnumerable<Procedure> x_ = context.Operators.RetrieveByValueSet<Procedure>(w_, null);
+		IEnumerable<Procedure> y_ = context.Operators.ListUnion<Procedure>(v_, x_);
+		IEnumerable<Procedure> z_ = this.ProcedureInPatientHistory(y_);
+		bool? aa_ = context.Operators.Exists<Procedure>(z_);
+		bool? ab_ = context.Operators.And(r_, aa_);
+		bool? ac_ = context.Operators.Or(i_, ab_);
 
 		return ac_;
 	}
@@ -1321,16 +1322,16 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_Organ_Transplants_Value()
 	{
-		var a_ = this.Major_Transplant();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = this.Kidney_Transplant();
-		var d_ = context.Operators.RetrieveByValueSet<Procedure>(c_, null);
-		var e_ = context.Operators.ListUnion<Procedure>(b_, d_);
-		var f_ = this.Bone_Marrow_Transplant();
-		var g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
-		var h_ = context.Operators.ListUnion<Procedure>(e_, g_);
-		var i_ = this.ProcedureInPatientHistory(h_);
-		var j_ = context.Operators.Exists<Procedure>(i_);
+		CqlValueSet a_ = this.Major_Transplant();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		CqlValueSet c_ = this.Kidney_Transplant();
+		IEnumerable<Procedure> d_ = context.Operators.RetrieveByValueSet<Procedure>(c_, null);
+		IEnumerable<Procedure> e_ = context.Operators.ListUnion<Procedure>(b_, d_);
+		CqlValueSet f_ = this.Bone_Marrow_Transplant();
+		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
+		IEnumerable<Procedure> h_ = context.Operators.ListUnion<Procedure>(e_, g_);
+		IEnumerable<Procedure> i_ = this.ProcedureInPatientHistory(h_);
+		bool? j_ = context.Operators.Exists<Procedure>(i_);
 
 		return j_;
 	}
@@ -1341,78 +1342,78 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period_Value()
 	{
-		var a_ = this.Has_90_or_More_Active_Glucocorticoid_Medication_Days();
-		var b_ = this.Osteoporotic_Fractures();
-		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
-		var d_ = this.Malabsorption_Syndromes();
-		var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
-		var f_ = context.Operators.ListUnion<Condition>(c_, e_);
-		var g_ = this.Chronic_Malnutrition();
-		var h_ = context.Operators.RetrieveByValueSet<Condition>(g_, null);
-		var i_ = this.Chronic_Liver_Disease();
-		var j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
-		var k_ = context.Operators.ListUnion<Condition>(h_, j_);
-		var l_ = context.Operators.ListUnion<Condition>(f_, k_);
-		var m_ = this.Rheumatoid_Arthritis();
-		var n_ = context.Operators.RetrieveByValueSet<Condition>(m_, null);
-		var o_ = this.Hyperthyroidism();
-		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
-		var q_ = context.Operators.ListUnion<Condition>(n_, p_);
-		var r_ = context.Operators.ListUnion<Condition>(l_, q_);
-		var s_ = this.Type_1_Diabetes();
-		var t_ = context.Operators.RetrieveByValueSet<Condition>(s_, null);
-		var u_ = this.End_Stage_Renal_Disease();
-		var v_ = context.Operators.RetrieveByValueSet<Condition>(u_, null);
-		var w_ = context.Operators.ListUnion<Condition>(t_, v_);
-		var x_ = context.Operators.ListUnion<Condition>(r_, w_);
-		var y_ = this.Osteogenesis_Imperfecta();
-		var z_ = context.Operators.RetrieveByValueSet<Condition>(y_, null);
-		var aa_ = this.Ankylosing_Spondylitis();
-		var ab_ = context.Operators.RetrieveByValueSet<Condition>(aa_, null);
-		var ac_ = context.Operators.ListUnion<Condition>(z_, ab_);
-		var ad_ = context.Operators.ListUnion<Condition>(x_, ac_);
-		var ae_ = this.Psoriatic_Arthritis();
-		var af_ = context.Operators.RetrieveByValueSet<Condition>(ae_, null);
-		var ag_ = this.Ehlers_Danlos_Syndrome();
-		var ah_ = context.Operators.RetrieveByValueSet<Condition>(ag_, null);
-		var ai_ = context.Operators.ListUnion<Condition>(af_, ah_);
-		var aj_ = context.Operators.ListUnion<Condition>(ad_, ai_);
-		var ak_ = this.Cushings_Syndrome();
-		var al_ = context.Operators.RetrieveByValueSet<Condition>(ak_, null);
-		var am_ = this.Hyperparathyroidism();
-		var an_ = context.Operators.RetrieveByValueSet<Condition>(am_, null);
-		var ao_ = context.Operators.ListUnion<Condition>(al_, an_);
-		var ap_ = context.Operators.ListUnion<Condition>(aj_, ao_);
-		var aq_ = this.Marfans_Syndrome();
-		var ar_ = context.Operators.RetrieveByValueSet<Condition>(aq_, null);
-		var as_ = this.Lupus();
-		var at_ = context.Operators.RetrieveByValueSet<Condition>(as_, null);
-		var au_ = context.Operators.ListUnion<Condition>(ar_, at_);
-		var av_ = context.Operators.ListUnion<Condition>(ap_, au_);
-		var aw_ = this.Multiple_Myeloma();
-		var ax_ = context.Operators.RetrieveByValueSet<Condition>(aw_, null);
-		var ay_ = this.Premature_Menopause();
-		var az_ = context.Operators.RetrieveByValueSet<Condition>(ay_, null);
-		var ba_ = context.Operators.ListUnion<Condition>(ax_, az_);
-		var bb_ = context.Operators.ListUnion<Condition>(av_, ba_);
-		var bc_ = this.Eating_Disorders();
-		var bd_ = context.Operators.RetrieveByValueSet<Condition>(bc_, null);
-		var be_ = this.Amenorrhea();
-		var bf_ = context.Operators.RetrieveByValueSet<Condition>(be_, null);
-		var bg_ = context.Operators.ListUnion<Condition>(bd_, bf_);
-		var bh_ = context.Operators.ListUnion<Condition>(bb_, bg_);
-		var bi_ = this.DiagnosisInPatientHistory(bh_);
-		var bj_ = context.Operators.Exists<Condition>(bi_);
-		var bk_ = context.Operators.Or(a_, bj_);
-		var bl_ = this.Chemotherapy();
-		var bm_ = context.Operators.RetrieveByValueSet<Procedure>(bl_, null);
-		var bn_ = this.ProcedureInPatientHistory(bm_);
-		var bo_ = context.Operators.Exists<Procedure>(bn_);
-		var bp_ = context.Operators.Or(bk_, bo_);
-		var bq_ = this.Has_Double_or_Bilateral_Oophorectomy();
-		var br_ = context.Operators.Or(bp_, bq_);
-		var bs_ = this.Has_Organ_Transplants();
-		var bt_ = context.Operators.Or(br_, bs_);
+		bool? a_ = this.Has_90_or_More_Active_Glucocorticoid_Medication_Days();
+		CqlValueSet b_ = this.Osteoporotic_Fractures();
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
+		CqlValueSet d_ = this.Malabsorption_Syndromes();
+		IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+		IEnumerable<Condition> f_ = context.Operators.ListUnion<Condition>(c_, e_);
+		CqlValueSet g_ = this.Chronic_Malnutrition();
+		IEnumerable<Condition> h_ = context.Operators.RetrieveByValueSet<Condition>(g_, null);
+		CqlValueSet i_ = this.Chronic_Liver_Disease();
+		IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
+		IEnumerable<Condition> k_ = context.Operators.ListUnion<Condition>(h_, j_);
+		IEnumerable<Condition> l_ = context.Operators.ListUnion<Condition>(f_, k_);
+		CqlValueSet m_ = this.Rheumatoid_Arthritis();
+		IEnumerable<Condition> n_ = context.Operators.RetrieveByValueSet<Condition>(m_, null);
+		CqlValueSet o_ = this.Hyperthyroidism();
+		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
+		IEnumerable<Condition> q_ = context.Operators.ListUnion<Condition>(n_, p_);
+		IEnumerable<Condition> r_ = context.Operators.ListUnion<Condition>(l_, q_);
+		CqlValueSet s_ = this.Type_1_Diabetes();
+		IEnumerable<Condition> t_ = context.Operators.RetrieveByValueSet<Condition>(s_, null);
+		CqlValueSet u_ = this.End_Stage_Renal_Disease();
+		IEnumerable<Condition> v_ = context.Operators.RetrieveByValueSet<Condition>(u_, null);
+		IEnumerable<Condition> w_ = context.Operators.ListUnion<Condition>(t_, v_);
+		IEnumerable<Condition> x_ = context.Operators.ListUnion<Condition>(r_, w_);
+		CqlValueSet y_ = this.Osteogenesis_Imperfecta();
+		IEnumerable<Condition> z_ = context.Operators.RetrieveByValueSet<Condition>(y_, null);
+		CqlValueSet aa_ = this.Ankylosing_Spondylitis();
+		IEnumerable<Condition> ab_ = context.Operators.RetrieveByValueSet<Condition>(aa_, null);
+		IEnumerable<Condition> ac_ = context.Operators.ListUnion<Condition>(z_, ab_);
+		IEnumerable<Condition> ad_ = context.Operators.ListUnion<Condition>(x_, ac_);
+		CqlValueSet ae_ = this.Psoriatic_Arthritis();
+		IEnumerable<Condition> af_ = context.Operators.RetrieveByValueSet<Condition>(ae_, null);
+		CqlValueSet ag_ = this.Ehlers_Danlos_Syndrome();
+		IEnumerable<Condition> ah_ = context.Operators.RetrieveByValueSet<Condition>(ag_, null);
+		IEnumerable<Condition> ai_ = context.Operators.ListUnion<Condition>(af_, ah_);
+		IEnumerable<Condition> aj_ = context.Operators.ListUnion<Condition>(ad_, ai_);
+		CqlValueSet ak_ = this.Cushings_Syndrome();
+		IEnumerable<Condition> al_ = context.Operators.RetrieveByValueSet<Condition>(ak_, null);
+		CqlValueSet am_ = this.Hyperparathyroidism();
+		IEnumerable<Condition> an_ = context.Operators.RetrieveByValueSet<Condition>(am_, null);
+		IEnumerable<Condition> ao_ = context.Operators.ListUnion<Condition>(al_, an_);
+		IEnumerable<Condition> ap_ = context.Operators.ListUnion<Condition>(aj_, ao_);
+		CqlValueSet aq_ = this.Marfans_Syndrome();
+		IEnumerable<Condition> ar_ = context.Operators.RetrieveByValueSet<Condition>(aq_, null);
+		CqlValueSet as_ = this.Lupus();
+		IEnumerable<Condition> at_ = context.Operators.RetrieveByValueSet<Condition>(as_, null);
+		IEnumerable<Condition> au_ = context.Operators.ListUnion<Condition>(ar_, at_);
+		IEnumerable<Condition> av_ = context.Operators.ListUnion<Condition>(ap_, au_);
+		CqlValueSet aw_ = this.Multiple_Myeloma();
+		IEnumerable<Condition> ax_ = context.Operators.RetrieveByValueSet<Condition>(aw_, null);
+		CqlValueSet ay_ = this.Premature_Menopause();
+		IEnumerable<Condition> az_ = context.Operators.RetrieveByValueSet<Condition>(ay_, null);
+		IEnumerable<Condition> ba_ = context.Operators.ListUnion<Condition>(ax_, az_);
+		IEnumerable<Condition> bb_ = context.Operators.ListUnion<Condition>(av_, ba_);
+		CqlValueSet bc_ = this.Eating_Disorders();
+		IEnumerable<Condition> bd_ = context.Operators.RetrieveByValueSet<Condition>(bc_, null);
+		CqlValueSet be_ = this.Amenorrhea();
+		IEnumerable<Condition> bf_ = context.Operators.RetrieveByValueSet<Condition>(be_, null);
+		IEnumerable<Condition> bg_ = context.Operators.ListUnion<Condition>(bd_, bf_);
+		IEnumerable<Condition> bh_ = context.Operators.ListUnion<Condition>(bb_, bg_);
+		IEnumerable<Condition> bi_ = this.DiagnosisInPatientHistory(bh_);
+		bool? bj_ = context.Operators.Exists<Condition>(bi_);
+		bool? bk_ = context.Operators.Or(a_, bj_);
+		CqlValueSet bl_ = this.Chemotherapy();
+		IEnumerable<Procedure> bm_ = context.Operators.RetrieveByValueSet<Procedure>(bl_, null);
+		IEnumerable<Procedure> bn_ = this.ProcedureInPatientHistory(bm_);
+		bool? bo_ = context.Operators.Exists<Procedure>(bn_);
+		bool? bp_ = context.Operators.Or(bk_, bo_);
+		bool? bq_ = this.Has_Double_or_Bilateral_Oophorectomy();
+		bool? br_ = context.Operators.Or(bp_, bq_);
+		bool? bs_ = this.Has_Organ_Transplants();
+		bool? bt_ = context.Operators.Or(br_, bs_);
 
 		return bt_;
 	}
@@ -1423,13 +1424,13 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = this.Has_Risk_Factor_Active_During_the_Measurement_Period();
-		var b_ = this.Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period();
-		var c_ = context.Operators.Or(a_, b_);
-		var d_ = this.Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period();
-		var e_ = context.Operators.Or(c_, d_);
-		var f_ = this.Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period();
-		var g_ = context.Operators.Or(e_, f_);
+		bool? a_ = this.Has_Risk_Factor_Active_During_the_Measurement_Period();
+		bool? b_ = this.Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period();
+		bool? c_ = context.Operators.Or(a_, b_);
+		bool? d_ = this.Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period();
+		bool? e_ = context.Operators.Or(c_, d_);
+		bool? f_ = this.Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period();
+		bool? g_ = context.Operators.Or(e_, f_);
 
 		return g_;
 	}
@@ -1440,26 +1441,26 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private IEnumerable<ServiceRequest> DXA_Scan_Order_During_Measurement_Period_Value()
 	{
-		var a_ = this.DXA__Dual_energy_Xray_Absorptiometry__Scan();
-		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
-		var c_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(b_);
+		CqlValueSet a_ = this.DXA__Dual_energy_Xray_Absorptiometry__Scan();
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> c_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(b_);
 		bool? d_(ServiceRequest DXA)
 		{
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Convert<CqlDateTime>(DXA?.AuthoredOnElement);
-			var j_ = QICoreCommon_2_0_000.ToInterval((i_ as object));
-			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, null);
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
+			CqlDateTime i_ = context.Operators.Convert<CqlDateTime>(DXA?.AuthoredOnElement);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval((i_ as object));
+			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, null);
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<ServiceRequest>(c_, d_);
+		IEnumerable<ServiceRequest> e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		object f_(ServiceRequest @this)
 		{
-			var l_ = context.Operators.Convert<CqlDateTime>(@this?.AuthoredOnElement);
+			CqlDateTime l_ = context.Operators.Convert<CqlDateTime>(@this?.AuthoredOnElement);
 
 			return l_;
 		};
-		var g_ = context.Operators.SortBy<ServiceRequest>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<ServiceRequest> g_ = context.Operators.SortBy<ServiceRequest>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 
 		return g_;
 	}
@@ -1470,8 +1471,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.DXA_Scan_Order_During_Measurement_Period();
-		var b_ = context.Operators.Exists<ServiceRequest>(a_);
+		IEnumerable<ServiceRequest> a_ = this.DXA_Scan_Order_During_Measurement_Period();
+		bool? b_ = context.Operators.Exists<ServiceRequest>(a_);
 
 		return b_;
 	}
@@ -1482,73 +1483,73 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private IEnumerable<Observation> Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan_Value()
 	{
-		var a_ = this.Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
+		CqlCode a_ = this.Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation FRAX)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(FRAX?.Value);
-			var ae_ = context.Operators.Quantity(8.4m, "%");
-			var af_ = context.Operators.GreaterOrEqual((ad_ as CqlQuantity), ae_);
+			object ad_ = FHIRHelpers_4_3_000.ToValue(FRAX?.Value);
+			CqlQuantity ae_ = context.Operators.Quantity(8.4m, "%");
+			bool? af_ = context.Operators.GreaterOrEqual((ad_ as CqlQuantity), ae_);
 
 			return af_;
 		};
-		var f_ = context.Operators.Where<Observation>(d_, e_);
-		var g_ = this.Osteoporosis_Risk_Assessment_Instrument();
-		var h_ = context.Operators.ToList<CqlCode>(g_);
-		var i_ = context.Operators.RetrieveByCodes<Observation>(h_, null);
-		var j_ = Status_1_6_000.Final_Survey_Observation(i_);
+		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+		CqlCode g_ = this.Osteoporosis_Risk_Assessment_Instrument();
+		IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(g_);
+		IEnumerable<Observation> i_ = context.Operators.RetrieveByCodes<Observation>(h_, null);
+		IEnumerable<Observation> j_ = Status_1_6_000.Final_Survey_Observation(i_);
 		bool? k_(Observation ORAI)
 		{
-			var ag_ = FHIRHelpers_4_3_000.ToValue(ORAI?.Value);
-			var ah_ = context.Operators.GreaterOrEqual((int?)ag_, 9);
+			object ag_ = FHIRHelpers_4_3_000.ToValue(ORAI?.Value);
+			bool? ah_ = context.Operators.GreaterOrEqual((int?)ag_, 9);
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Observation>(j_, k_);
-		var m_ = context.Operators.ListUnion<Observation>(f_, l_);
-		var n_ = this.Osteoporosis_Index_of_Risk_panel();
-		var o_ = context.Operators.ToList<CqlCode>(n_);
-		var p_ = context.Operators.RetrieveByCodes<Observation>(o_, null);
-		var q_ = Status_1_6_000.Final_Survey_Observation(p_);
+		IEnumerable<Observation> l_ = context.Operators.Where<Observation>(j_, k_);
+		IEnumerable<Observation> m_ = context.Operators.ListUnion<Observation>(f_, l_);
+		CqlCode n_ = this.Osteoporosis_Index_of_Risk_panel();
+		IEnumerable<CqlCode> o_ = context.Operators.ToList<CqlCode>(n_);
+		IEnumerable<Observation> p_ = context.Operators.RetrieveByCodes<Observation>(o_, null);
+		IEnumerable<Observation> q_ = Status_1_6_000.Final_Survey_Observation(p_);
 		bool? r_(Observation OSIRIS)
 		{
-			var ai_ = FHIRHelpers_4_3_000.ToValue(OSIRIS?.Value);
-			var aj_ = context.Operators.ConvertDecimalToQuantity(1.0m);
-			var ak_ = context.Operators.Less((ai_ as CqlQuantity), aj_);
+			object ai_ = FHIRHelpers_4_3_000.ToValue(OSIRIS?.Value);
+			CqlQuantity aj_ = context.Operators.ConvertDecimalToQuantity(1.0m);
+			bool? ak_ = context.Operators.Less((ai_ as CqlQuantity), aj_);
 
 			return ak_;
 		};
-		var s_ = context.Operators.Where<Observation>(q_, r_);
-		var t_ = this.Osteoporosis_Self_Assessment_Tool();
-		var u_ = context.Operators.ToList<CqlCode>(t_);
-		var v_ = context.Operators.RetrieveByCodes<Observation>(u_, null);
-		var w_ = Status_1_6_000.Final_Survey_Observation(v_);
+		IEnumerable<Observation> s_ = context.Operators.Where<Observation>(q_, r_);
+		CqlCode t_ = this.Osteoporosis_Self_Assessment_Tool();
+		IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
+		IEnumerable<Observation> v_ = context.Operators.RetrieveByCodes<Observation>(u_, null);
+		IEnumerable<Observation> w_ = Status_1_6_000.Final_Survey_Observation(v_);
 		bool? x_(Observation OST)
 		{
-			var al_ = FHIRHelpers_4_3_000.ToValue(OST?.Value);
-			var am_ = context.Operators.ConvertDecimalToQuantity(2.0m);
-			var an_ = context.Operators.Less((al_ as CqlQuantity), am_);
+			object al_ = FHIRHelpers_4_3_000.ToValue(OST?.Value);
+			CqlQuantity am_ = context.Operators.ConvertDecimalToQuantity(2.0m);
+			bool? an_ = context.Operators.Less((al_ as CqlQuantity), am_);
 
 			return an_;
 		};
-		var y_ = context.Operators.Where<Observation>(w_, x_);
-		var z_ = context.Operators.ListUnion<Observation>(s_, y_);
-		var aa_ = context.Operators.ListUnion<Observation>(m_, z_);
+		IEnumerable<Observation> y_ = context.Operators.Where<Observation>(w_, x_);
+		IEnumerable<Observation> z_ = context.Operators.ListUnion<Observation>(s_, y_);
+		IEnumerable<Observation> aa_ = context.Operators.ListUnion<Observation>(m_, z_);
 		bool? ab_(Observation RiskAssessment)
 		{
-			var ao_ = FHIRHelpers_4_3_000.ToValue(RiskAssessment?.Effective);
-			var ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
-			var aq_ = context.Operators.Start(ap_);
-			var ar_ = this.DXA_Scan_Order_During_Measurement_Period();
-			var as_ = context.Operators.First<ServiceRequest>(ar_);
-			var at_ = context.Operators.Convert<CqlDateTime>(as_?.AuthoredOnElement);
-			var au_ = context.Operators.Before(aq_, at_, null);
+			object ao_ = FHIRHelpers_4_3_000.ToValue(RiskAssessment?.Effective);
+			CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
+			CqlDateTime aq_ = context.Operators.Start(ap_);
+			IEnumerable<ServiceRequest> ar_ = this.DXA_Scan_Order_During_Measurement_Period();
+			ServiceRequest as_ = context.Operators.First<ServiceRequest>(ar_);
+			CqlDateTime at_ = context.Operators.Convert<CqlDateTime>(as_?.AuthoredOnElement);
+			bool? au_ = context.Operators.Before(aq_, at_, null);
 
 			return au_;
 		};
-		var ac_ = context.Operators.Where<Observation>(aa_, ab_);
+		IEnumerable<Observation> ac_ = context.Operators.Where<Observation>(aa_, ab_);
 
 		return ac_;
 	}
@@ -1559,8 +1560,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private bool? Numerator_Exclusion_Value()
 	{
-		var a_ = this.Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan();
-		var b_ = context.Operators.Exists<Observation>(a_);
+		IEnumerable<Observation> a_ = this.Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan();
+		bool? b_ = context.Operators.Exists<Observation>(a_);
 
 		return b_;
 	}
@@ -1574,28 +1575,28 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	{
 		bool? a_(Observation O)
 		{
-			var c_ = context.Operators.Convert<Code<ObservationStatus>>(O?.StatusElement?.Value);
-			var d_ = context.Operators.Convert<string>(c_);
-			var e_ = new string[]
+			Code<ObservationStatus> c_ = context.Operators.Convert<Code<ObservationStatus>>(O?.StatusElement?.Value);
+			string d_ = context.Operators.Convert<string>(c_);
+			string[] e_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
+			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 			CqlConcept g_(CodeableConcept @this)
 			{
-				var k_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return k_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
-			var i_ = context.Operators.Exists<CqlConcept>(h_);
-			var j_ = context.Operators.And(f_, i_);
+			IEnumerable<CqlConcept> h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			bool? i_ = context.Operators.Exists<CqlConcept>(h_);
+			bool? j_ = context.Operators.And(f_, i_);
 
 			return j_;
 		};
-		var b_ = context.Operators.Where<Observation>(Obs, a_);
+		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}

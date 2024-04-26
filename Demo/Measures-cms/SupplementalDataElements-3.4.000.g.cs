@@ -7,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -87,8 +88,8 @@ public class SupplementalDataElements_3_4_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -103,14 +104,14 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool i_()
 			{
-				var j_ = this.Patient();
-				var k_ = j_ is DomainResource;
+				Patient j_ = this.Patient();
+				bool k_ = j_ is DomainResource;
 
 				return k_;
 			};
 			if (i_())
 			{
-				var l_ = this.Patient();
+				Patient l_ = this.Patient();
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -121,13 +122,13 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			bool? m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return m_;
 		};
-		var c_ = context.Operators.Where<Extension>(a_(), b_);
-		var d_ = context.Operators.SingletonFrom<Extension>(c_);
-		var e_ = new Extension[]
+		IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
+		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
+		Extension[] e_ = new Extension[]
 		{
 			d_,
 		};
@@ -135,55 +136,55 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool? n_(Extension @this)
 			{
-				var aj_ = context.Operators.Equal(@this?.Url, "ombCategory");
+				bool? aj_ = context.Operators.Equal(@this?.Url, "ombCategory");
 
 				return aj_;
 			};
-			var o_ = context.Operators.Where<Extension>(((E is Element)
+			IEnumerable<Extension> o_ = context.Operators.Where<Extension>(((E is Element)
 					? ((E as Element).Extension)
 					: null), n_);
 			DataType p_(Extension @this) => 
 				@this?.Value;
-			var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
-			var r_ = context.Operators.SingletonFrom<DataType>(q_);
-			var s_ = context.Operators.Convert<Coding>(r_);
-			var t_ = FHIRHelpers_4_3_000.ToCode(s_);
-			var u_ = new CqlCode[]
+			IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
+			DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
+			Coding s_ = context.Operators.Convert<Coding>(r_);
+			CqlCode t_ = FHIRHelpers_4_3_000.ToCode(s_);
+			CqlCode[] u_ = new CqlCode[]
 			{
 				t_,
 			};
 			bool? v_(Extension @this)
 			{
-				var ak_ = context.Operators.Equal(@this?.Url, "detailed");
+				bool? ak_ = context.Operators.Equal(@this?.Url, "detailed");
 
 				return ak_;
 			};
-			var w_ = context.Operators.Where<Extension>(((E is Element)
+			IEnumerable<Extension> w_ = context.Operators.Where<Extension>(((E is Element)
 					? ((E as Element).Extension)
 					: null), v_);
-			var y_ = context.Operators.Select<Extension, DataType>(w_, p_);
+			IEnumerable<DataType> y_ = context.Operators.Select<Extension, DataType>(w_, p_);
 			CqlCode z_(DataType @this)
 			{
-				var al_ = context.Operators.Convert<Coding>(@this);
-				var am_ = FHIRHelpers_4_3_000.ToCode(al_);
+				Coding al_ = context.Operators.Convert<Coding>(@this);
+				CqlCode am_ = FHIRHelpers_4_3_000.ToCode(al_);
 
 				return am_;
 			};
-			var aa_ = context.Operators.Select<DataType, CqlCode>(y_, z_);
-			var ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
+			IEnumerable<CqlCode> aa_ = context.Operators.Select<DataType, CqlCode>(y_, z_);
+			IEnumerable<CqlCode> ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
 			bool? ac_(Extension @this)
 			{
-				var an_ = context.Operators.Equal(@this?.Url, "text");
+				bool? an_ = context.Operators.Equal(@this?.Url, "text");
 
 				return an_;
 			};
-			var ad_ = context.Operators.Where<Extension>(((E is Element)
+			IEnumerable<Extension> ad_ = context.Operators.Where<Extension>(((E is Element)
 					? ((E as Element).Extension)
 					: null), ac_);
-			var af_ = context.Operators.Select<Extension, DataType>(ad_, p_);
-			var ag_ = context.Operators.SingletonFrom<DataType>(af_);
-			var ah_ = context.Operators.Convert<string>(ag_);
-			var ai_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			IEnumerable<DataType> af_ = context.Operators.Select<Extension, DataType>(ad_, p_);
+			DataType ag_ = context.Operators.SingletonFrom<DataType>(af_);
+			string ah_ = context.Operators.Convert<string>(ag_);
+			Tuple_DMgHTLENEHBHWJISQgKZGZVMB ai_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
 				codes = ab_,
 				display = ah_,
@@ -191,8 +192,8 @@ public class SupplementalDataElements_3_4_000
 
 			return ai_;
 		};
-		var g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		IEnumerable<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
@@ -203,13 +204,13 @@ public class SupplementalDataElements_3_4_000
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		var a_ = this.Payer_Type();
-		var b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
+		CqlValueSet a_ = this.Payer_Type();
+		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
 		Tuple_GDKRbfOIHhLGieQSVDEMIaDPX c_(Coverage Payer)
 		{
-			var e_ = FHIRHelpers_4_3_000.ToConcept(Payer?.Type);
-			var f_ = FHIRHelpers_4_3_000.ToInterval(Payer?.Period);
-			var g_ = new Tuple_GDKRbfOIHhLGieQSVDEMIaDPX
+			CqlConcept e_ = FHIRHelpers_4_3_000.ToConcept(Payer?.Type);
+			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.ToInterval(Payer?.Period);
+			Tuple_GDKRbfOIHhLGieQSVDEMIaDPX g_ = new Tuple_GDKRbfOIHhLGieQSVDEMIaDPX
 			{
 				code = e_,
 				period = f_,
@@ -217,7 +218,7 @@ public class SupplementalDataElements_3_4_000
 
 			return g_;
 		};
-		var d_ = context.Operators.Select<Coverage, Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>(b_, c_);
+		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> d_ = context.Operators.Select<Coverage, Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>(b_, c_);
 
 		return d_;
 	}
@@ -232,14 +233,14 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool i_()
 			{
-				var j_ = this.Patient();
-				var k_ = j_ is DomainResource;
+				Patient j_ = this.Patient();
+				bool k_ = j_ is DomainResource;
 
 				return k_;
 			};
 			if (i_())
 			{
-				var l_ = this.Patient();
+				Patient l_ = this.Patient();
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -250,13 +251,13 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			bool? m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return m_;
 		};
-		var c_ = context.Operators.Where<Extension>(a_(), b_);
-		var d_ = context.Operators.SingletonFrom<Extension>(c_);
-		var e_ = new Extension[]
+		IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
+		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
+		Extension[] e_ = new Extension[]
 		{
 			d_,
 		};
@@ -264,56 +265,56 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool? n_(Extension @this)
 			{
-				var ah_ = context.Operators.Equal(@this?.Url, "ombCategory");
+				bool? ah_ = context.Operators.Equal(@this?.Url, "ombCategory");
 
 				return ah_;
 			};
-			var o_ = context.Operators.Where<Extension>(((R is Element)
+			IEnumerable<Extension> o_ = context.Operators.Where<Extension>(((R is Element)
 					? ((R as Element).Extension)
 					: null), n_);
 			DataType p_(Extension @this) => 
 				@this?.Value;
-			var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
+			IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 			CqlCode r_(DataType @this)
 			{
-				var ai_ = context.Operators.Convert<Coding>(@this);
-				var aj_ = FHIRHelpers_4_3_000.ToCode(ai_);
+				Coding ai_ = context.Operators.Convert<Coding>(@this);
+				CqlCode aj_ = FHIRHelpers_4_3_000.ToCode(ai_);
 
 				return aj_;
 			};
-			var s_ = context.Operators.Select<DataType, CqlCode>(q_, r_);
+			IEnumerable<CqlCode> s_ = context.Operators.Select<DataType, CqlCode>(q_, r_);
 			bool? t_(Extension @this)
 			{
-				var ak_ = context.Operators.Equal(@this?.Url, "detailed");
+				bool? ak_ = context.Operators.Equal(@this?.Url, "detailed");
 
 				return ak_;
 			};
-			var u_ = context.Operators.Where<Extension>(((R is Element)
+			IEnumerable<Extension> u_ = context.Operators.Where<Extension>(((R is Element)
 					? ((R as Element).Extension)
 					: null), t_);
-			var w_ = context.Operators.Select<Extension, DataType>(u_, p_);
+			IEnumerable<DataType> w_ = context.Operators.Select<Extension, DataType>(u_, p_);
 			CqlCode x_(DataType @this)
 			{
-				var al_ = context.Operators.Convert<Coding>(@this);
-				var am_ = FHIRHelpers_4_3_000.ToCode(al_);
+				Coding al_ = context.Operators.Convert<Coding>(@this);
+				CqlCode am_ = FHIRHelpers_4_3_000.ToCode(al_);
 
 				return am_;
 			};
-			var y_ = context.Operators.Select<DataType, CqlCode>(w_, x_);
-			var z_ = context.Operators.ValueSetUnion(s_, y_);
+			IEnumerable<CqlCode> y_ = context.Operators.Select<DataType, CqlCode>(w_, x_);
+			IEnumerable<CqlCode> z_ = context.Operators.ValueSetUnion(s_, y_);
 			bool? aa_(Extension @this)
 			{
-				var an_ = context.Operators.Equal(@this?.Url, "text");
+				bool? an_ = context.Operators.Equal(@this?.Url, "text");
 
 				return an_;
 			};
-			var ab_ = context.Operators.Where<Extension>(((R is Element)
+			IEnumerable<Extension> ab_ = context.Operators.Where<Extension>(((R is Element)
 					? ((R as Element).Extension)
 					: null), aa_);
-			var ad_ = context.Operators.Select<Extension, DataType>(ab_, p_);
-			var ae_ = context.Operators.SingletonFrom<DataType>(ad_);
-			var af_ = context.Operators.Convert<string>(ae_);
-			var ag_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			IEnumerable<DataType> ad_ = context.Operators.Select<Extension, DataType>(ab_, p_);
+			DataType ae_ = context.Operators.SingletonFrom<DataType>(ad_);
+			string af_ = context.Operators.Convert<string>(ae_);
+			Tuple_DMgHTLENEHBHWJISQgKZGZVMB ag_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
 				codes = z_,
 				display = af_,
@@ -321,8 +322,8 @@ public class SupplementalDataElements_3_4_000
 
 			return ag_;
 		};
-		var g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		IEnumerable<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
@@ -337,15 +338,15 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool b_()
 			{
-				var d_ = this.Patient();
-				var e_ = context.Operators.Equal(d_?.GenderElement?.Value, "male");
+				Patient d_ = this.Patient();
+				bool? e_ = context.Operators.Equal(d_?.GenderElement?.Value, "male");
 
 				return (e_ ?? false);
 			};
 			bool c_()
 			{
-				var f_ = this.Patient();
-				var g_ = context.Operators.Equal(f_?.GenderElement?.Value, "female");
+				Patient f_ = this.Patient();
+				bool? g_ = context.Operators.Equal(f_?.GenderElement?.Value, "female");
 
 				return (g_ ?? false);
 			};
