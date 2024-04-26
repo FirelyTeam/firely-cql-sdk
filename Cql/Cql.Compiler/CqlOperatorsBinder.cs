@@ -19,9 +19,11 @@ using Microsoft.Extensions.Logging;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// Implements <see cref="OperatorsBinder"/> by calling methods in <see cref="CqlOperators"/>.
+    /// Facilitates binding to <see cref="CqlOperator"/> methods,
+    /// by converting the method name and <see cref="Expression"/> arguments
+    /// to the appropriate overload of the method.
     /// </summary>
-    internal partial class CqlOperatorsBinder : OperatorsBinder
+    internal partial class CqlOperatorsBinder
     {
         private readonly ILogger<CqlOperatorsBinder> _logger;
         private readonly TypeConverter? _typeConverter;
@@ -54,8 +56,15 @@ namespace Hl7.Cql.Compiler
             _logger = logger;
         }
 
-        /// <inheritdoc />
-        public override Expression BindToMethod(
+        /// <summary>
+        /// Facilitates binding to <see cref="CqlOperator"/> methods,
+        /// by converting the <param ref="methodName"/> and <see cref="Expression"/> <param ref="args"/>
+        /// to the appropriate overload of the method.
+        /// </summary>
+        /// <param name="methodName">The method to bind to.</param>
+        /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
+        /// <returns>Typically a <see cref="MethodCallExpression"/> that binds to the method.</returns>
+        public virtual Expression BindToMethod(
             string methodName,
             params Expression[] args)
         {
@@ -90,14 +99,24 @@ namespace Hl7.Cql.Compiler
             return result;
         }
 
-        /// <inheritdoc />
-        public override Expression ConvertToType(Expression expression, Type type) =>
+        /// <summary>
+        /// Converts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
+        /// </summary>
+        /// <param name="expression">The expression to convert.</param>
+        /// <param name="type">The type to convert the expression to.</param>
+        /// <returns>The converted expression.</returns>
+        public virtual Expression ConvertToType(Expression expression, Type type) =>
             TryConvert(expression, type, out var t)
                 ? t.arg!
                 : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
 
-        ///// <inheritdoc />
-        public override Expression CastToType(Expression expression, Type type)
+        /// <summary>
+        /// Casts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
+        /// </summary>
+        /// <param name="expression">The expression to cast.</param>
+        /// <param name="type">The type to cast the expression to.</param>
+        /// <returns>The expression that was cast.</returns>
+        public virtual Expression CastToType(Expression expression, Type type)
         {
             if (expression.Type != typeof(object))
                 throw new ArgumentException("Cast only allowed on Object typed expressions.", nameof(expression));

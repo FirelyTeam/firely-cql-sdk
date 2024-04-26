@@ -45,7 +45,7 @@ namespace Hl7.Cql.Compiler
 
     internal class ExpressionBuilder
     {
-        internal readonly OperatorsBinder _operatorsBinder;
+        internal readonly CqlOperatorsBinder _cqlOperatorsBinder;
         internal readonly ContextBinder _contextBinder;
         internal readonly TypeManager _typeManager;
         internal readonly ILogger<ExpressionBuilder> _logger;
@@ -55,7 +55,7 @@ namespace Hl7.Cql.Compiler
 
         internal ExpressionBuilder(
             ILogger<ExpressionBuilder> logger,
-            OperatorsBinder operatorsBinder,
+            CqlOperatorsBinder cqlOperatorsBinder,
             TypeManager typeManager,
             TypeConverter typeConverter,
             TypeResolver typeResolver,
@@ -63,7 +63,7 @@ namespace Hl7.Cql.Compiler
             ExpressionBuilderSettings expressionBuilderSettings)
         {
             _logger = logger;
-            _operatorsBinder = operatorsBinder;
+            _cqlOperatorsBinder = cqlOperatorsBinder;
             _contextBinder = contextBinder;
             _typeManager = typeManager;
             _expressionBuilderSettings = expressionBuilderSettings;
@@ -157,7 +157,7 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     partial class ExpressionBuilderContext
     {
-        private readonly OperatorsBinder _operatorsBinder;
+        private readonly CqlOperatorsBinder _cqlOperatorsBinder;
         private readonly ContextBinder _contextBinder;
         private readonly TypeManager _typeManager;
         private readonly ILogger<ExpressionBuilder> _logger;
@@ -187,7 +187,7 @@ namespace Hl7.Cql.Compiler
         {
             // External Services
             _logger = builder._logger;
-            _operatorsBinder = builder._operatorsBinder;
+            _cqlOperatorsBinder = builder._cqlOperatorsBinder;
             _contextBinder = builder._contextBinder;
             _typeManager = builder._typeManager;
             _expressionBuilderSettings = builder._expressionBuilderSettings;
@@ -209,13 +209,13 @@ namespace Hl7.Cql.Compiler
             params object?[] args)
         {
             //bool stop = ((IBuilderContext)this).Hash == "#EMAEaaYJ";
-            return _operatorsBinder.BindToMethod(methodName, TranslateAll(args));
+            return _cqlOperatorsBinder.BindToMethod(methodName, TranslateAll(args));
         }
 
         private Expression BindCqlOperator<T>(
             string methodName,
             params T?[] args) =>
-            _operatorsBinder.BindToMethod(methodName, TranslateAll(args));
+            _cqlOperatorsBinder.BindToMethod(methodName, TranslateAll(args));
 
         private Expression[] TranslateAll(params object?[] args) =>
             TranslateAll<object?>(args);
@@ -2405,7 +2405,7 @@ namespace Hl7.Cql.Compiler
                                                       KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
                                     {
                                         var sortMemberExpression = Translate(byExpression.expression);
-                                        var lambdaBody = _operatorsBinder.ConvertToType<object>(sortMemberExpression);
+                                        var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
                                         var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                         return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                                     }
@@ -2421,7 +2421,7 @@ namespace Hl7.Cql.Compiler
                                         throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
                                     }
                                     var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
-                                    var lambdaBody = _operatorsBinder.ConvertToType<object>(pathExpression);
+                                    var lambdaBody = _cqlOperatorsBinder.ConvertToType(pathExpression, typeof(object));
                                     var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                     return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                                 }

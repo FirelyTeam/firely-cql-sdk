@@ -39,8 +39,8 @@ internal class CqlCompilerFactory :
     protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);
 
 
-    public virtual OperatorsBinder OperatorsBinder => Singleton(fn: NewOperatorsBinder);
-    protected virtual OperatorsBinder NewOperatorsBinder() =>
+    public virtual CqlOperatorsBinder CqlOperatorsBinder => Singleton(fn: NewOperatorsBinder);
+    protected virtual CqlOperatorsBinder NewOperatorsBinder() =>
         new CqlOperatorsBinder(
             Logger<CqlOperatorsBinder>(),
             TypeResolver,
@@ -74,7 +74,7 @@ internal class CqlCompilerFactory :
 
     protected virtual ExpressionBuilder NewExpressionBuilder() =>
         new(Logger<ExpressionBuilder>(),
-            operatorsBinder: OperatorsBinder,
+            cqlOperatorsBinder: CqlOperatorsBinder,
             typeManager: TypeManager,
             typeConverter: TypeConverter,
             typeResolver: TypeResolver,
