@@ -160,7 +160,7 @@ namespace Hl7.Cql.Fhir
             return converter;
 
             // Add a basic Fhir primitive->Cql primitive conversion
-            void add<I, O>(Func<I, O> tos)
+            void add<I, O>(Func<I, O> tos) where I : class
             {
                 converter.AddConversion(tos);
                 toTypes.Add(typeof(O));
@@ -226,18 +226,18 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion((CqlDate f) => new M.FhirDateTime(f.ToString()));
             converter.AddConversion((CqlTime f) => new M.Time(f.ToString()));
             converter.AddConversion((CqlQuantity f) => f.value is not null ? new M.Quantity(f.value.Value, f.unit ?? "1", Hl7.Fhir.ElementModel.Types.Quantity.UCUM) : null);
-            converter.AddConversion((CqlInterval<CqlQuantity>? interval) =>
+            converter.AddConversion((CqlInterval<CqlQuantity?>? interval) =>
             {
                 if (interval is null)
                     return null;
                 else
                 {
                     var range = new M.Range();
-                    if (interval.low is not null && interval.low.value.HasValue)
+                    if (interval.low?.value != null)
                     {
                         range.Low = new M.Quantity(interval.low.value.Value, interval.low.unit ?? "1");
                     }
-                    if (interval.high is not null && interval.high.value.HasValue)
+                    if (interval.high?.value != null)
                     {
                         range.High = new M.Quantity(interval.high.value.Value, interval.high.unit ?? "1");
 
@@ -245,54 +245,54 @@ namespace Hl7.Cql.Fhir
                     return range;
                 }
             });
-            converter.AddConversion((CqlInterval<decimal?> interval) =>
+            converter.AddConversion((CqlInterval<decimal?>? interval) =>
             {
                 if (interval is null)
                     return null;
                 else
                 {
                     var range = new M.Range();
-                    if (interval.low is not null && interval.low.HasValue)
+                    if (interval.low.HasValue)
                     {
                         range.Low = new M.Quantity(interval.low.Value, "1");
                     }
-                    if (interval.high is not null && interval.high.HasValue)
+                    if (interval.high.HasValue)
                     {
                         range.High = new M.Quantity(interval.high.Value, "1");
                     }
                     return range;
                 }
             });
-            converter.AddConversion((CqlInterval<int?> interval) =>
+            converter.AddConversion((CqlInterval<int?>? interval) =>
             {
                 if (interval is null)
                     return null;
                 else
                 {
                     var range = new M.Range();
-                    if (interval.low is not null && interval.low.HasValue)
+                    if (interval.low.HasValue)
                     {
                         range.Low = new M.Quantity(interval.low.Value, "1");
                     }
-                    if (interval.high is not null && interval.high.HasValue)
+                    if (interval.high.HasValue)
                     {
                         range.High = new M.Quantity(interval.high.Value, "1");
                     }
                     return range;
                 }
             });
-            converter.AddConversion((CqlInterval<CqlDateTime> interval) =>
+            converter.AddConversion((CqlInterval<CqlDateTime?>? interval) =>
             {
                 if (interval is null)
                     return null;
                 else
                 {
                     var period = new M.Period();
-                    if (interval.low is not null && interval.low is not null)
+                    if (interval.low != null)
                     {
                         period.Start = interval.low.ToString();
                     }
-                    if (interval.high is not null && interval.high is not null)
+                    if (interval.high != null)
                     {
                         period.End = interval.high.ToString();
 
@@ -300,18 +300,18 @@ namespace Hl7.Cql.Fhir
                     return period;
                 }
             });
-            converter.AddConversion((CqlInterval<CqlDate> interval) =>
+            converter.AddConversion((CqlInterval<CqlDate?>? interval) =>
             {
                 if (interval is null)
                     return null;
                 else
                 {
                     var period = new M.Period();
-                    if (interval.low is not null && interval.low is not null)
+                    if (interval.low != null)
                     {
                         period.Start = interval.low.ToString();
                     }
-                    if (interval.high is not null && interval.high is not null)
+                    if (interval.high != null)
                     {
                         period.End = interval.high.ToString();
 
@@ -319,8 +319,10 @@ namespace Hl7.Cql.Fhir
                     return period;
                 }
             });
-            converter.AddConversion((CqlRatio f) => (f.denominator is not null && f.numerator is not null) ?
-                new M.Ratio(converter.Convert<M.Quantity>(f.numerator)!, converter.Convert<M.Quantity>(f.denominator)!) : null);
+            converter.AddConversion(
+                (CqlRatio f) => (f.denominator is not null && f.numerator is not null)
+                                    ? new M.Ratio(converter.Convert<M.Quantity>(f.numerator)!, converter.Convert<M.Quantity>(f.denominator)!)
+                                    : null);
 
             return converter;
         }
@@ -329,7 +331,8 @@ namespace Hl7.Cql.Fhir
         internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
             converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
-            converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
+            converter.AddConversion<DateTimeOffset, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
+
             // TODO: this is a performance problem
             converter.AddConversion<string, CqlDate?>(str =>
             {
@@ -349,9 +352,11 @@ namespace Hl7.Cql.Fhir
                     return time;
                 else return null;
             });
-            converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
-            converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
-            converter.AddConversion<M.FhirUri, string>(uri => uri.Value);
+
+            //converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
+            converter.AddConversion<string, M.FhirUri>(
+                str => new M.FhirUri(str),
+                uri => uri.Value);
 
             return converter;
         }
@@ -381,19 +386,17 @@ namespace Hl7.Cql.Fhir
                     var systemAndCode = (M.ISystemAndCode)code;
                     return new CqlCode(systemAndCode.Code, systemAndCode.System);
                 });
-                converter.AddConversion(codeType, nullableEnumType, (code) =>
-                    code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
-                converter.AddConversion(enumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
                 converter.AddConversion(nullableEnumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
+                converter.AddConversion(nullableEnumType, typeof(string), (@enum) => Enum.GetName(nullableEnumType, @enum) ?? throw new InvalidOperationException($"Did not find enum member {@enum} on type {nullableEnumType}."));
+
+                //converter.AddConversion(enumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
 
                 converter.AddConversion(codeType, typeof(string), (code) =>
                 {
                     var systemAndCode = (M.ISystemAndCode)code;
                     return systemAndCode.Code;
                 });
-
-                converter.AddConversion(nullableEnumType, typeof(string), (@enum) =>
-                    Enum.GetName(nullableEnumType, @enum) ?? throw new InvalidOperationException($"Did not find enum member {@enum} on type {nullableEnumType}."));
+                converter.AddConversion(codeType, nullableEnumType, (code) => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
             }
             return converter;
         }

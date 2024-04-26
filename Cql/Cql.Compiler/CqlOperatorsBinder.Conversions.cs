@@ -30,6 +30,16 @@ partial class CqlOperatorsBinder
             return true;
         }
 
+        if (_typeConverter?.CanConvert(from, to) == true)
+        {
+            result = (BindToGenericMethod(
+                             nameof(ICqlOperators.Convert),
+                             [to],
+                             arg.ConvertExpression<object>()
+                         ), TypeConversion.OperatorConvert);
+            return true;
+        }
+
         if (arg is ConstantExpression fromConstant)
         {
             if (fromConstant.Value is null && to.IsNullable(out _))
@@ -56,16 +66,6 @@ partial class CqlOperatorsBinder
                 result = (Expression.Convert(arg, to), TypeConversion.SimpleConvert);
                 return true;
             }
-        }
-
-        if (_typeConverter?.CanConvert(from, to) == true)
-        {
-            result = (BindToGenericMethod(
-                nameof(ICqlOperators.Convert),
-                [to],
-                arg.ConvertExpression<object>()
-                ), TypeConversion.OperatorConvert);
-            return true;
         }
 
         if (from == typeof(object))

@@ -192,7 +192,7 @@ internal record CSharpWriteTypeOptions(
             if (name.IndexOf('`') is var i and >= 0)
                 textWriter.Write(name[..i]);
             else
-                textWriter.Write(name[..]);
+                textWriter.Write(name);
         }
     }
 }

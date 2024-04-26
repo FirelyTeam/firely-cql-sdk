@@ -88,18 +88,35 @@ internal static partial class TypeExtensions
         return hasInterfaceImplementing;
     }
 
-    public static IEnumerable<Type> BaseTypesAndInterfaces(this Type type)
+    /// <summary>
+    /// Enumerates all base types of the specified type.
+    /// Optionally includes the type itself, excludes base types and/or interfaces.
+    /// </summary>
+    public static IEnumerable<Type> BaseTypes(
+        this Type type,
+        bool includeSelf = false,
+        bool excludeBaseTypes = false,
+        bool excludeInterfaces = false)
     {
-        var subType = type.BaseType;
-        while (subType is not null)
+        if (includeSelf)
+            yield return type;
+
+        if (!excludeBaseTypes)
         {
-            yield return subType;
-            subType = subType?.BaseType;
+            var subType = type.BaseType;
+            while (subType is not null)
+            {
+                yield return subType;
+                subType = subType?.BaseType;
+            }
         }
 
-        foreach (var @interface in type.GetInterfaces())
+        if (!excludeInterfaces)
         {
-            yield return @interface;
+            foreach (var @interface in type.GetInterfaces())
+            {
+                yield return @interface;
+            }
         }
     }
 }

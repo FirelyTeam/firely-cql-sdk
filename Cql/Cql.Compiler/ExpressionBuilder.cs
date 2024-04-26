@@ -237,6 +237,92 @@ namespace Hl7.Cql.Compiler
                 var obj               => Expression.Constant(obj),
             };
 
+        private Expression TranslateElement(Element element) =>
+            this.CatchRethrowExpressionBuildingException(_ =>
+            {
+                using (PushElement(element))
+                {
+                    Expression? expression = element switch
+                    {
+                        //@formatter:off
+                        Expand e   => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
+                        Flatten e  => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
+                        MaxValue e => BindCqlOperator(CqlOperator.MaxValue, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        MinValue e => BindCqlOperator(CqlOperator.MinValue, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        Ratio e    => BindCqlOperator(CqlOperator.Ratio, e.numerator, e.denominator),
+                        ToList e   => BindCqlOperator(nameof(ICqlOperators.ToList), e.operand!),
+                        Width e    => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
+
+                        Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
+                        As e               => As(e),
+                        Case e             => Case(e),
+                        ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
+                        ToBoolean e        => ChangeType(e.operand!, typeof(bool?)),
+                        ToString e         => ChangeType(e.operand!, typeof(string)),
+                        ToConcept e        => ChangeType(e.operand!, _typeResolver.ConceptType),
+                        ToDate e           => ChangeType(e.operand!, _typeResolver.DateType),
+                        ToDecimal e        => ChangeType(e.operand!, typeof(decimal?)),
+                        ToInteger e        => ChangeType(e.operand!, typeof(int?)),
+                        ToDateTime e       => ChangeType(e.operand!, _typeResolver.DateTimeType),
+                        ToLong e           => ChangeType(e.operand!, typeof(long?)),
+                        ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
+                        Coalesce e         => Coalesce(e),
+                        CodeRef e          => CodeRef(e),
+                        CodeSystemRef e    => CodeSystemRef(e),
+                        Collapse e         => Collapse(e),
+                        ConceptRef e       => ConceptRef(e),
+                        Contains e         => Contains(e),
+                        ExpandValueSet e   => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(e.operand!)),
+                        Ends e             => Ends(e),
+                        Equivalent e       => Equivalent(e),
+                        Except e           => Except(e),
+                        FunctionRef e      => FunctionRef(e),
+                        ExpressionRef e    => ExpressionRef(e),
+                        AliasRef e         => GetScopeExpression(e.name!),
+                        QueryLetRef e      => GetScopeExpression(e.name!),
+                        IdentifierRef e    => IdentifierRef(e),
+                        If e               => If(e),
+                        IncludedIn e       => IncludedIn(e),
+                        Includes e         => Includes(e),
+                        Instance e         => Instance(e),
+                        Intersect e        => Intersect(e),
+                        Is e               => Is(e),
+                        IsNull e           => IsNull(e),
+                        List e             => List(e),
+                        Literal e          => Literal(e),
+                        Meets e            => Meets(e),
+                        MeetsAfter e       => MeetsAfter(e),
+                        MeetsBefore e      => MeetsBefore(e),
+                        Message e          => Message(e),
+                        Null e             => NullExpression.ForType(TypeFor(e)!),
+                        OperandRef e       => OperandRef(e),
+                        Overlaps e         => Overlaps(e),
+                        OverlapsAfter e    => OverlapsAfter(e),
+                        OverlapsBefore e   => OverlapsBefore(e),
+                        ParameterRef e     => ParameterRef(e),
+                        AnyInValueSet e    => ProcessValueSet(e.valueset, e.codes, isList: true),
+                        InValueSet e       => ProcessValueSet(e.valueset!, e.code, isList: false),
+                        ProperContains e   => ProperContains(e),
+                        ProperIn e         => ProperIn(e),
+                        ProperIncludedIn e => ProperIncludedIn(e),
+                        ProperIncludes e   => ProperIncludes(e),
+                        Property e         => Property(e),
+                        Query e            => Query(e),
+                        Retrieve e         => Retrieve(e),
+                        Starts e           => Starts(e),
+                        Tuple e            => Tuple(e),
+                        Union e            => Union(e),
+                        ValueSetRef e      => ValueSetRef(e),
+
+                        _ => BindCqlOperator(element.GetType().Name, GetBindArgs(element)),
+                        //@formatter:on
+                    };
+
+                    expression = Mutate(element, expression);
+                    return expression!;
+                }
+            });
+
         private object?[] GetBindArgs(Element element)
         {
             // ReSharper disable CoVariantArrayConversion
@@ -308,18 +394,18 @@ namespace Hl7.Cql.Compiler
                     TruncatedDivide or
                     Xor => ((IGetOperands)element).operands,
 
-            CalculateAge or
-                    DateTimeComponentFrom or
-                    After or
-                    Before or
-                    CalculateAgeAt or
-                    DifferenceBetween or
-                    DurationBetween or
-                    In or
-                    Round or
-                    SameAs or
-                    SameOrAfter or
-                    SameOrBefore => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+                CalculateAge or
+                        DateTimeComponentFrom or
+                        After or
+                        Before or
+                        CalculateAgeAt or
+                        DifferenceBetween or
+                        DurationBetween or
+                        In or
+                        Round or
+                        SameAs or
+                        SameOrAfter or
+                        SameOrBefore => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
 
                 AllTrue or
                     AnyTrue or
@@ -344,217 +430,27 @@ namespace Hl7.Cql.Compiler
                     TimeOfDay or
                     Today => [],
 
-                Combine e        => [((IGetSource)element).source, e.separator],
-                IndexOf e        => [((IGetSource)element).source, e.element],
-                Slice e          => [((IGetSource)element).source, e.startIndex, e.endIndex],
-                Date e           => [e.year, e.month, e.day],
-                DateTime e       => [e.year, e.month, e.day, e.hour, e.minute, e.second, e.millisecond, e.timezoneOffset],
-                Interval e       => [e.low, e.high, (object)e.lowClosedExpression ?? e.lowClosed, (object)e.highClosedExpression ?? e.highClosed],
+                Combine e => [((IGetSource)element).source, e.separator],
+                IndexOf e => [((IGetSource)element).source, e.element],
+                Slice e => [((IGetSource)element).source, e.startIndex, e.endIndex],
+                Date e => [e.year, e.month, e.day],
+                DateTime e => [e.year, e.month, e.day, e.hour, e.minute, e.second, e.millisecond, e.timezoneOffset],
+                Interval e => [e.low, e.high, (object)e.lowClosedExpression ?? e.lowClosed, (object)e.highClosedExpression ?? e.highClosed],
                 LastPositionOf e => [e.@string, e.pattern],
-                MaxValue e       => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
-                MinValue e       => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
-                PositionOf e     => [e.pattern, e.@string],
-                Quantity e       => [e.value, e.unit], // http://unitsofmeasure.org
-                Ratio e          => [e.numerator, e.denominator],
-                Split e          => [e.stringToSplit, e.separator],
-                Substring e      => [e.stringToSub, e.startIndex, e.length],
-                Time e           => [e.hour, e.minute, e.second, e.millisecond],
-                _                => throw this.NewExpressionBuildingException($"Gannot get arguments for element {element.GetType().FullName}.")
+                MaxValue e => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
+                MinValue e => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
+                PositionOf e => [e.pattern, e.@string],
+                Quantity e => [e.value, e.unit], // http://unitsofmeasure.org
+                Ratio e => [e.numerator, e.denominator],
+                Split e => [e.stringToSplit, e.separator],
+                Substring e => [e.stringToSub, e.startIndex, e.length],
+                Time e => [e.hour, e.minute, e.second, e.millisecond],
+                _ => throw this.NewExpressionBuildingException($"Gannot get arguments for element {element.GetType().FullName}.")
                 //@formatter:on
             };
             return args;
             // ReSharper restore CoVariantArrayConversion
         }
-
-        private Expression TranslateElement(Element element) =>
-            this.CatchRethrowExpressionBuildingException(_ =>
-            {
-                using (PushElement(element))
-                {
-                    Expression? expression = element switch
-                    {
-                        //@formatter:off
-                        Abs or
-                            Add or
-                            After or
-                            AllTrue or
-                            And or
-                            AnyTrue or
-                            Avg or
-                            Before or
-                            CalculateAge or
-                            CalculateAgeAt or
-                            Ceiling or
-                            Combine or
-                            Concatenate or
-                            ConvertQuantity or
-                            ConvertsToBoolean or
-                            ConvertsToDate or
-                            ConvertsToDateTime or
-                            ConvertsToDecimal or
-                            ConvertsToInteger or
-                            ConvertsToLong or
-                            ConvertsToQuantity or
-                            ConvertsToString or
-                            ConvertsToTime or
-                            Count or
-                            Date or
-                            DateFrom or
-                            Descendents or
-                            DateTime or
-                            DateTimeComponentFrom or
-                            DifferenceBetween or
-                            Distinct or
-                            Divide or
-                            DurationBetween or
-                            End or
-                            EndsWith or
-                            Equal or
-                            Exists or
-                            Exp or
-                            First or
-                            Floor or
-                            GeometricMean or
-                            Greater or
-                            GreaterOrEqual or
-                            HighBoundary or
-                            Implies or
-                            In or
-                            Indexer or
-                            Interval or
-                            IsFalse or
-                            IsTrue or
-                            Last or
-                            LastPositionOf or
-                            Length or
-                            Less or
-                            LessOrEqual or
-                            Ln or
-                            Log or
-                            LowBoundary or
-                            Lower or
-                            Matches or
-                            Max or
-                            Median or
-                            Min or
-                            Mode or
-                            Modulo or
-                            Multiply or
-                            Not or
-                            NotEqual or
-                            Now or
-                            Or or
-                            PointFrom or
-                            PopulationStdDev or
-                            PopulationVariance or
-                            PositionOf or
-                            Power or
-                            Precision or
-                            Predecessor or
-                            Product or
-                            Quantity or
-                            ReplaceMatches or
-                            Round or
-                            SameAs or
-                            SameOrAfter or
-                            SameOrBefore or
-                            SingletonFrom or
-                            Split or
-                            Start or
-                            StartsWith or
-                            StdDev or
-                            Substring or
-                            Subtract or
-                            Successor or
-                            Sum or
-                            Time or
-                            TimeOfDay or
-                            TimezoneOffsetFrom or
-                            Today or
-                            Truncate or
-                            TruncatedDivide or
-                            Upper or
-                            Variance or
-                            Xor or
-                            IndexOf or
-                            Slice => BindCqlOperator(element.GetType().Name, GetBindArgs(element)),
-
-                        Expand e   => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
-                        Flatten e  => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                        MaxValue e => BindCqlOperator(CqlOperator.MaxValue, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
-                        MinValue e => BindCqlOperator(CqlOperator.MinValue, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
-                        Ratio e    => BindCqlOperator(CqlOperator.Ratio, e.numerator, e.denominator),
-                        ToList e   => BindCqlOperator(nameof(ICqlOperators.ToList), e.operand!),
-                        Width e    => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
-
-                        Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
-                        As e               => As(e),
-                        Case e             => Case(e),
-                        ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
-                        ToBoolean e        => ChangeType(e.operand!, typeof(bool?)),
-                        ToString e         => ChangeType(e.operand!, typeof(string)),
-                        ToConcept e        => ChangeType(e.operand!, _typeResolver.ConceptType),
-                        ToDate e           => ChangeType(e.operand!, _typeResolver.DateType),
-                        ToDecimal e        => ChangeType(e.operand!, typeof(decimal?)),
-                        ToInteger e        => ChangeType(e.operand!, typeof(int?)),
-                        ToDateTime e       => ChangeType(e.operand!, _typeResolver.DateTimeType),
-                        ToLong e           => ChangeType(e.operand!, typeof(long?)),
-                        ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
-                        Coalesce e         => Coalesce(e),
-                        CodeRef e          => CodeRef(e),
-                        CodeSystemRef e    => CodeSystemRef(e),
-                        Collapse e         => Collapse(e),
-                        ConceptRef e       => ConceptRef(e),
-                        Contains e         => Contains(e),
-                        ExpandValueSet e   => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(e.operand!)),
-                        Ends e             => Ends(e),
-                        Equivalent e       => Equivalent(e),
-                        Except e           => Except(e),
-                        FunctionRef e      => FunctionRef(e),
-                        ExpressionRef e    => ExpressionRef(e),
-                        AliasRef e         => GetScopeExpression(e.name!),
-                        QueryLetRef e      => GetScopeExpression(e.name!),
-                        IdentifierRef e    => IdentifierRef(e),
-                        If e               => If(e),
-                        IncludedIn e       => IncludedIn(e),
-                        Includes e         => Includes(e),
-                        Instance e         => Instance(e),
-                        Intersect e        => Intersect(e),
-                        Is e               => Is(e),
-                        IsNull e           => IsNull(e),
-                        List e             => List(e),
-                        Literal e          => Literal(e),
-                        Meets e            => Meets(e),
-                        MeetsAfter e       => MeetsAfter(e),
-                        MeetsBefore e      => MeetsBefore(e),
-                        Message e          => Message(e),
-                        Null e             => NullExpression.ForType(TypeFor(e)!),
-                        OperandRef e       => OperandRef(e),
-                        Overlaps e         => Overlaps(e),
-                        OverlapsAfter e    => OverlapsAfter(e),
-                        OverlapsBefore e   => OverlapsBefore(e),
-                        ParameterRef e     => ParameterRef(e),
-                        AnyInValueSet e    => ProcessValueSet(e.valueset, e.codes, isList: true),
-                        InValueSet e       => ProcessValueSet(e.valueset!, e.code, isList: false),
-                        ProperContains e   => ProperContains(e),
-                        ProperIn e         => ProperIn(e),
-                        ProperIncludedIn e => ProperIncludedIn(e),
-                        ProperIncludes e   => ProperIncludes(e),
-                        Property e         => Property(e),
-                        Query e            => Query(e),
-                        Retrieve e         => Retrieve(e),
-                        Starts e           => Starts(e),
-                        Tuple e            => Tuple(e),
-                        Union e            => Union(e),
-                        ValueSetRef e      => ValueSetRef(e),
-                        _                  => throw this.NewExpressionBuildingException($"Expression {element.GetType().FullName} is not implemented.")
-                        //@formatter:on
-                    };
-
-                    expression = Mutate(element, expression);
-                    return expression!;
-                }
-            });
 
         protected Expression? Mutate(Element op, Expression? expression) =>
             _expressionMutators.Aggregate(
