@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -40,6 +41,7 @@ internal static class BuilderContextExtensions
         );
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [DebuggerStepThrough]
     public static T CatchRethrowExpressionBuildingException<TBuilderContext, T>(
         this TBuilderContext builderContext,
         Func<TBuilderContext, T> fn,
@@ -62,6 +64,7 @@ internal static class BuilderContextExtensions
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [DebuggerStepThrough]
     public static void CatchRethrowExpressionBuildingException<TBuilderNode>(
         this TBuilderNode builder,
         Action<TBuilderNode> action,

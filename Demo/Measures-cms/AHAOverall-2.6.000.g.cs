@@ -416,7 +416,7 @@ public class AHAOverall_2_6_000
 			return x_;
 		};
 		var l_ = context.Operators.Where<Condition>(j_, k_);
-		var m_ = context.Operators.ListUnion<object>((g_ as IEnumerable<object>), (l_ as IEnumerable<object>));
+		var m_ = context.Operators.ListUnion<object>(g_, (l_ as IEnumerable<object>));
 
 		return m_;
 	}

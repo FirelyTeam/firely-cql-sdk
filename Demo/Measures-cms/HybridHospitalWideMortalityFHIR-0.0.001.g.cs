@@ -431,7 +431,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			var t_ = new Tuple_BJTSgXESaFEOLbMHHiDMHCcdP
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
-				FirstTemperatureResult = (k_ as CqlQuantity),
+				FirstTemperatureResult = k_,
 				Timing = s_,
 			};
 
@@ -537,7 +537,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			var t_ = new Tuple_DPdLURgGeOHhHAcheMAZcWfbT
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
-				FirstHeartRateResult = (k_ as CqlQuantity),
+				FirstHeartRateResult = k_,
 				Timing = s_,
 			};
 

@@ -199,6 +199,14 @@ public class TypeExtensionsTests
         }
     }
 
+    [TestMethod]
+    public void IsAssignableTo_ShouldReturnCorrectResults()
+    {
+        // Not part of TypeExtensions, but does demonstrate the flexibility of the IsAssignableTo method
+
+        Assert.IsTrue(typeof(MyDerivedClass).IsAssignableTo(typeof(MyClass))); // Sub-Types e.g. MyDerivedClass : MyClass
+        Assert.IsTrue(typeof(int).IsAssignableTo(typeof(int?))); // Lifting Value Types e.g. int to int?
+    }
 
     public enum MyEnum
     {
@@ -236,6 +244,10 @@ public class TypeExtensionsTests
     }
 
     public class MyClass : MyGenericClass<int>
+    {
+    }
+
+    public class MyDerivedClass : MyClass
     {
     }
 }

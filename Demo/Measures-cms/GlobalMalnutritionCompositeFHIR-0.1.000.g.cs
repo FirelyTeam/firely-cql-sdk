@@ -436,7 +436,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_bdofeusqkmfbeyculsqybijjc.HospitalDietitianReferral?.Code);
 			var m_ = this.Hospital_Dietitian_Referral();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<string>(tuple_bdofeusqkmfbeyculsqybijjc.HospitalDietitianReferral?.StatusElement?.Value);
 			var p_ = new string[]
 			{
@@ -487,7 +487,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.Code);
 			var m_ = this.Malnutrition_Risk_Screening();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.StatusElement?.Value);
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
@@ -571,7 +571,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.Code);
 			var m_ = this.Malnutrition_Risk_Screening();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.StatusElement?.Value);
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
@@ -653,7 +653,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.Code);
 			var m_ = this.Malnutrition_Risk_Screening();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_ffuejbaxzfeabrilhfreepdgs.MalnutritionRiskScreening?.StatusElement?.Value);
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
@@ -734,7 +734,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.Code);
 			var m_ = this.Nutrition_Assessment();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.StatusElement?.Value);
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
@@ -796,7 +796,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.Code);
 			var m_ = this.Nutrition_Assessment();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.StatusElement?.Value);
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
@@ -855,7 +855,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.Code);
 			var m_ = this.Nutrition_Assessment();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_fnbckkyclgcbujddfesqqggfh.NutritionAssessment?.StatusElement?.Value);
 			var p_ = context.Operators.Convert<string>(o_);
 			var q_ = new string[]
@@ -911,7 +911,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_dtggaxnybdkagbeeecexhumkb.MalnutritionDiagnosis?.Code);
 			var m_ = this.Malnutrition_Diagnosis();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = QICoreCommon_2_0_000.prevalenceInterval(tuple_dtggaxnybdkagbeeecexhumkb.MalnutritionDiagnosis);
 			var p_ = context.Operators.Start(o_);
 			var q_ = CQMCommon_2_0_000.hospitalizationWithObservation(tuple_dtggaxnybdkagbeeecexhumkb.QualifyingEncounter);
@@ -953,7 +953,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		{
 			var l_ = FHIRHelpers_4_3_000.ToConcept(tuple_ctmbkgnetphcwpstmvcrebeg.NutritionCarePlan?.Code);
 			var m_ = this.Nutrition_Care_Plan();
-			var n_ = context.Operators.ConceptInValueSet((l_ as CqlConcept), m_);
+			var n_ = context.Operators.ConceptInValueSet(l_, m_);
 			var o_ = context.Operators.Convert<string>(tuple_ctmbkgnetphcwpstmvcrebeg.NutritionCarePlan?.StatusElement?.Value);
 			var p_ = new string[]
 			{

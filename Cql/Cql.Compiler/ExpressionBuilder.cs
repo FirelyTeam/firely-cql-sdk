@@ -220,6 +220,7 @@ namespace Hl7.Cql.Compiler
         private Expression[] TranslateAll(params object?[] args) =>
             TranslateAll<object?>(args);
 
+        [DebuggerStepThrough]
         private Expression[] TranslateAll<T>(params T?[] args) =>
             args switch
             {
@@ -229,6 +230,7 @@ namespace Hl7.Cql.Compiler
             };
 
         [return:NotNullIfNotNull(nameof(arg))]
+        [DebuggerStepThrough]
         private Expression? Translate(object? arg) =>
             arg switch
             {

@@ -790,7 +790,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				{
 					CqlInterval<CqlDateTime> v_ = null;
 
-					return (v_ as CqlInterval<CqlDateTime>);
+					return v_;
 				};
 			};
 
@@ -869,7 +869,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
 			return i_;
 		};
-		var c_ = context.Operators.Aggregate<CqlInterval<CqlDateTime>, IEnumerable<CqlInterval<CqlDateTime>>>(intervals, (a_ as IEnumerable<CqlInterval<CqlDateTime>>), b_);
+		var c_ = context.Operators.Aggregate<CqlInterval<CqlDateTime>, IEnumerable<CqlInterval<CqlDateTime>>>(intervals, a_, b_);
 
 		return c_;
 	}
@@ -901,7 +901,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			{
 				CqlInterval<CqlDateTime> e_ = null;
 
-				return (e_ as CqlInterval<CqlDateTime>);
+				return e_;
 			};
 		};
 

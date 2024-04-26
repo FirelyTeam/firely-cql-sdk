@@ -863,7 +863,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, null);
 			var l_ = context.Operators.Convert<Quantity>(BMIRatio?.Value);
 			var m_ = FHIRHelpers_4_3_000.ToQuantity(l_);
-			var n_ = context.Operators.Not((bool?)((m_ as CqlQuantity) is null));
+			var n_ = context.Operators.Not((bool?)(m_ is null));
 			var o_ = context.Operators.And(k_, n_);
 
 			return o_;
@@ -899,7 +899,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var f_ = context.Operators.Convert<Quantity>(FirstBMI?.Value);
 			var g_ = FHIRHelpers_4_3_000.ToQuantity(f_);
 			var h_ = context.Operators.Quantity((decimal?)20m, "kg/m2");
-			var i_ = context.Operators.LessOrEqual((g_ as CqlQuantity), h_);
+			var i_ = context.Operators.LessOrEqual(g_, h_);
 
 			return i_;
 		};
@@ -1124,9 +1124,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return ap_;
 		};
 		var v_ = context.Operators.Where<MedicationRequest>(t_, u_);
-		var w_ = context.Operators.ListUnion<object>((n_ as IEnumerable<object>), (v_ as IEnumerable<object>));
+		var w_ = context.Operators.ListUnion<object>(n_, (v_ as IEnumerable<object>));
 		var x_ = this.Parent_History_of_Hip_Fracture_Assessment();
-		var y_ = context.Operators.ListUnion<object>((w_ as IEnumerable<object>), (x_ as IEnumerable<object>));
+		var y_ = context.Operators.ListUnion<object>(w_, (x_ as IEnumerable<object>));
 		var z_ = context.Operators.Exists<object>(y_);
 
 		return z_;

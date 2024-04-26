@@ -2010,7 +2010,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var t_ = new Tuple_CYVVSdgZbMfXHMiBHjISgejQI
 			{
 				EncounterId = TwentyWeeksPlusEncounter?.IdElement?.Value,
-				FirstHRResult = (k_ as CqlQuantity),
+				FirstHRResult = k_,
 				Timing = s_,
 			};
 

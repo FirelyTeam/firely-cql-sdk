@@ -26,17 +26,19 @@ partial class CqlOperatorsBinder
         if (from.IsAssignableTo(to))
         {
             // 'from' is a subtype of 'to' e.g. string -> object
-            result = (Expression.Convert(arg, to), TypeConversion.SubType);
+            result = (Expression.Convert(arg, to), TypeConversion.AssignableType);
             return true;
         }
 
         if (_typeConverter?.CanConvert(from, to) == true)
         {
-            result = (BindToGenericMethod(
-                             nameof(ICqlOperators.Convert),
-                             [to],
-                             arg.ConvertExpression<object>()
-                         ), TypeConversion.OperatorConvert);
+            var bindToGenericMethod =
+                BindToGenericMethod(
+                    nameof(ICqlOperators.Convert),
+                    [to],
+                    arg.ConvertExpression<object>()
+            );
+            result = (bindToGenericMethod, TypeConversion.OperatorConvert);
             return true;
         }
 
@@ -83,7 +85,12 @@ partial class CqlOperatorsBinder
     {
         NoMatch = 0,
         ExactType = 1,
-        SubType = 2,
+
+        /// <summary>
+        /// e.g. String is assignable to Object, and  'from' is a subtype of 'to' e.g. string -> object
+        /// </summary>
+        AssignableType = 2,
+
         SimpleConvert = 3,
         OperatorConvert = 4,
         SuperType = 5, // Unresolved object

@@ -964,14 +964,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			else if (choice is Timing)
 			{
 				CqlInterval<CqlDateTime> cy_ = null;
-				var cz_ = context.Operators.Message<CqlInterval<CqlDateTime>>((cy_ as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute a single interval from a Timing type");
+				var cz_ = context.Operators.Message<CqlInterval<CqlDateTime>>(cy_, "1", "Error", "Cannot compute a single interval from a Timing type");
 
 				return cz_;
 			}
 			else if (choice is FhirString)
 			{
 				CqlInterval<CqlDateTime> da_ = null;
-				var db_ = context.Operators.Message<CqlInterval<CqlDateTime>>((da_ as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
+				var db_ = context.Operators.Message<CqlInterval<CqlDateTime>>(da_, "1", "Error", "Cannot compute an interval from a String value");
 
 				return db_;
 			}
@@ -979,7 +979,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				CqlInterval<CqlDateTime> dc_ = null;
 
-				return (dc_ as CqlInterval<CqlDateTime>);
+				return dc_;
 			};
 		};
 
@@ -1007,7 +1007,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			else if (condition?.Abatement is FhirString)
 			{
 				CqlInterval<CqlDateTime> f_ = null;
-				var g_ = context.Operators.Message<CqlInterval<CqlDateTime>>((f_ as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
+				var g_ = context.Operators.Message<CqlInterval<CqlDateTime>>(f_, "1", "Error", "Cannot compute an interval from a String value");
 
 				return g_;
 			}
@@ -1095,7 +1095,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				CqlInterval<CqlDateTime> db_ = null;
 
-				return (db_ as CqlInterval<CqlDateTime>);
+				return db_;
 			};
 		};
 

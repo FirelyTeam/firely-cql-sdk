@@ -446,7 +446,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var t_ = new Tuple_BJTSgXESaFEOLbMHHiDMHCcdP
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
-				FirstTemperatureResult = (k_ as CqlQuantity),
+				FirstTemperatureResult = k_,
 				Timing = s_,
 			};
 
@@ -552,7 +552,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var t_ = new Tuple_DPdLURgGeOHhHAcheMAZcWfbT
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
-				FirstHeartRateResult = (k_ as CqlQuantity),
+				FirstHeartRateResult = k_,
 				Timing = s_,
 			};
 
@@ -1646,7 +1646,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var t_ = new Tuple_EAccDaIgTNOHbEQUMLJiXWIJO
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
-				FirstRespRateResult = (k_ as CqlQuantity),
+				FirstRespRateResult = k_,
 				Timing = s_,
 			};
 
@@ -2491,7 +2491,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
-				FirstResult = (k_ as CqlQuantity),
+				FirstResult = k_,
 				Timing = s_,
 			};
 

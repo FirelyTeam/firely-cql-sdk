@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
@@ -83,6 +84,7 @@ internal static class EnumerableExtensions
         return Array.ConvertAll(sourceArray, select.Invoke);
     }
 
+    [DebuggerStepThrough]
     public static bool TryPeek<T>(
         this IImmutableStack<T> stack,
         out T value)

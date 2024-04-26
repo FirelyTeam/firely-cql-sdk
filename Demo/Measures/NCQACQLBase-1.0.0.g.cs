@@ -629,7 +629,7 @@ public class NCQACQLBase_1_0_0
 			{
 				CqlInterval<CqlDate> u_ = null;
 
-				return (u_ as CqlInterval<CqlDate>);
+				return u_;
 			}
 			else
 			{
@@ -1147,7 +1147,7 @@ public class NCQACQLBase_1_0_0
 			{
 				CqlInterval<CqlDateTime> w_ = null;
 
-				return (w_ as CqlInterval<CqlDateTime>);
+				return w_;
 			}
 			else
 			{

@@ -1302,7 +1302,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			{
 				CqlInterval<CqlDateTime> c_ = null;
 
-				return (c_ as CqlInterval<CqlDateTime>);
+				return c_;
 			};
 		};
 

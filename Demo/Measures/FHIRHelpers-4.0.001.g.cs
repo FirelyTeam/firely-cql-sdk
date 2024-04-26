@@ -51,7 +51,7 @@ public class FHIRHelpers_4_0_001
 			{
 				CqlInterval<CqlDateTime> b_ = null;
 
-				return (b_ as CqlInterval<CqlDateTime>);
+				return b_;
 			}
 			else
 			{
@@ -75,7 +75,7 @@ public class FHIRHelpers_4_0_001
 			{
 				CqlInterval<CqlQuantity> b_ = null;
 
-				return (b_ as CqlInterval<CqlQuantity>);
+				return b_;
 			}
 			else
 			{

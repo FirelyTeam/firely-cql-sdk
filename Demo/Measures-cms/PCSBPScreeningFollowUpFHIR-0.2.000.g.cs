@@ -2356,9 +2356,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var t_ = context.Operators.Where<MedicationRequest>(r_, s_);
 		var u_ = context.Operators.ListUnion<object>((m_ as IEnumerable<object>), (t_ as IEnumerable<object>));
 		var v_ = this.Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered();
-		var w_ = context.Operators.ListUnion<object>((u_ as IEnumerable<object>), (v_ as IEnumerable<object>));
+		var w_ = context.Operators.ListUnion<object>(u_, (v_ as IEnumerable<object>));
 		var x_ = this.NonPharmacological_Intervention_Not_Ordered();
-		var y_ = context.Operators.ListUnion<object>((w_ as IEnumerable<object>), (x_ as IEnumerable<object>));
+		var y_ = context.Operators.ListUnion<object>(w_, (x_ as IEnumerable<object>));
 
 		return y_;
 	}

@@ -159,7 +159,7 @@ public class NCQAClaims_1_0_0
 					{
 						IEnumerable<Claim.ItemComponent> u_ = null;
 
-						return (u_ as IEnumerable<Claim.ItemComponent>);
+						return u_;
 					}
 					else
 					{
@@ -236,7 +236,7 @@ public class NCQAClaims_1_0_0
 						{
 							Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA as_ = null;
 
-							return (as_ as Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA);
+							return as_;
 						};
 					};
 
@@ -290,7 +290,7 @@ public class NCQAClaims_1_0_0
 					{
 						IEnumerable<Claim.ItemComponent> s_ = null;
 
-						return (s_ as IEnumerable<Claim.ItemComponent>);
+						return s_;
 					}
 					else
 					{
@@ -393,7 +393,7 @@ public class NCQAClaims_1_0_0
 						{
 							Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA bd_ = null;
 
-							return (bd_ as Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA);
+							return bd_;
 						};
 					};
 
@@ -445,7 +445,7 @@ public class NCQAClaims_1_0_0
 				{
 					IEnumerable<Claim> o_ = null;
 
-					return (o_ as IEnumerable<Claim>);
+					return o_;
 				}
 				else
 				{
@@ -538,7 +538,7 @@ public class NCQAClaims_1_0_0
 					{
 						Tuple_HLLRUdKceDPKeIXGFiiNKjMKI ay_ = null;
 
-						return (ay_ as Tuple_HLLRUdKceDPKeIXGFiiNKjMKI);
+						return ay_;
 					};
 				};
 				var ak_ = new Tuple_HLLRUdKceDPKeIXGFiiNKjMKI[]
@@ -686,7 +686,7 @@ public class NCQAClaims_1_0_0
 								{
 									CqlInterval<CqlDateTime> ch_ = null;
 
-									return (ch_ as CqlInterval<CqlDateTime>);
+									return ch_;
 								};
 							};
 							var ar_ = new Tuple_DadNQNcGichTGjKhdjJicQeTP
@@ -745,7 +745,7 @@ public class NCQAClaims_1_0_0
 								{
 									Tuple_FOLKddIQBPRMYYfjeMUjEIBhC cu_ = null;
 
-									return (cu_ as Tuple_FOLKddIQBPRMYYfjeMUjEIBhC);
+									return cu_;
 								};
 							};
 
@@ -811,7 +811,7 @@ public class NCQAClaims_1_0_0
 				{
 					IEnumerable<Claim> q_ = null;
 
-					return (q_ as IEnumerable<Claim>);
+					return q_;
 				}
 				else
 				{
@@ -993,7 +993,7 @@ public class NCQAClaims_1_0_0
 							{
 								Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA cm_ = null;
 
-								return (cm_ as Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA);
+								return cm_;
 							};
 						};
 
@@ -1240,7 +1240,7 @@ public class NCQAClaims_1_0_0
 								{
 									Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA cp_ = null;
 
-									return (cp_ as Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA);
+									return cp_;
 								};
 							};
 
@@ -1302,7 +1302,7 @@ public class NCQAClaims_1_0_0
 				{
 					IEnumerable<Claim> o_ = null;
 
-					return (o_ as IEnumerable<Claim>);
+					return o_;
 				}
 				else
 				{
@@ -1382,7 +1382,7 @@ public class NCQAClaims_1_0_0
 						{
 							Tuple_HLLRUdKceDPKeIXGFiiNKjMKI as_ = null;
 
-							return (as_ as Tuple_HLLRUdKceDPKeIXGFiiNKjMKI);
+							return as_;
 						};
 					};
 
@@ -1765,7 +1765,7 @@ public class NCQAClaims_1_0_0
 					{
 						Tuple_FbAEUOYETObSHBafYbFNIeSNO bi_ = null;
 
-						return (bi_ as Tuple_FbAEUOYETObSHBafYbFNIeSNO);
+						return bi_;
 					};
 				};
 				var ah_ = new Tuple_FbAEUOYETObSHBafYbFNIeSNO[]
@@ -1810,7 +1810,7 @@ public class NCQAClaims_1_0_0
 				{
 					Tuple_FbAEUOYETObSHBafYbFNIeSNO k_ = null;
 
-					return (k_ as Tuple_FbAEUOYETObSHBafYbFNIeSNO);
+					return k_;
 				}
 				else
 				{
@@ -2124,7 +2124,7 @@ public class NCQAClaims_1_0_0
 					{
 						Tuple_FbAEUOYETObSHBafYbFNIeSNO bi_ = null;
 
-						return (bi_ as Tuple_FbAEUOYETObSHBafYbFNIeSNO);
+						return bi_;
 					};
 				};
 				var ah_ = new Tuple_FbAEUOYETObSHBafYbFNIeSNO[]
@@ -2169,7 +2169,7 @@ public class NCQAClaims_1_0_0
 				{
 					Tuple_FbAEUOYETObSHBafYbFNIeSNO g_ = null;
 
-					return (g_ as Tuple_FbAEUOYETObSHBafYbFNIeSNO);
+					return g_;
 				}
 				else
 				{
@@ -2387,7 +2387,7 @@ public class NCQAClaims_1_0_0
 					{
 						Tuple_FbAEUOYETObSHBafYbFNIeSNO bi_ = null;
 
-						return (bi_ as Tuple_FbAEUOYETObSHBafYbFNIeSNO);
+						return bi_;
 					};
 				};
 				var ah_ = new Tuple_FbAEUOYETObSHBafYbFNIeSNO[]
@@ -2432,7 +2432,7 @@ public class NCQAClaims_1_0_0
 				{
 					Tuple_FbAEUOYETObSHBafYbFNIeSNO g_ = null;
 
-					return (g_ as Tuple_FbAEUOYETObSHBafYbFNIeSNO);
+					return g_;
 				}
 				else
 				{
@@ -2614,7 +2614,7 @@ public class NCQAClaims_1_0_0
 								{
 									CqlInterval<CqlDate> cc_ = null;
 
-									return (cc_ as CqlInterval<CqlDate>);
+									return cc_;
 								};
 							};
 
@@ -2634,7 +2634,7 @@ public class NCQAClaims_1_0_0
 					{
 						Tuple_BOANHMYNiCIfFjRZRMEXCcXTO cd_ = null;
 
-						return (cd_ as Tuple_BOANHMYNiCIfFjRZRMEXCcXTO);
+						return cd_;
 					};
 				};
 				var ah_ = new Tuple_BOANHMYNiCIfFjRZRMEXCcXTO[]
@@ -2679,7 +2679,7 @@ public class NCQAClaims_1_0_0
 				{
 					Tuple_BOANHMYNiCIfFjRZRMEXCcXTO g_ = null;
 
-					return (g_ as Tuple_BOANHMYNiCIfFjRZRMEXCcXTO);
+					return g_;
 				}
 				else
 				{
@@ -2786,7 +2786,7 @@ public class NCQAClaims_1_0_0
 				{
 					IEnumerable<Claim> n_ = null;
 
-					return (n_ as IEnumerable<Claim>);
+					return n_;
 				}
 				else
 				{
@@ -2823,7 +2823,7 @@ public class NCQAClaims_1_0_0
 				{
 					IEnumerable<Claim> z_ = null;
 
-					return (z_ as IEnumerable<Claim>);
+					return z_;
 				}
 				else
 				{
