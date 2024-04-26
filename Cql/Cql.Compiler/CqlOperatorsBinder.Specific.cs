@@ -64,7 +64,7 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), left, right);
+                return BindToBestMethodOverload(nameof(ICqlOperators.CodeInList), left, right);
             }
         }
 
@@ -82,7 +82,7 @@ partial class CqlOperatorsBinder
     {
         if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
         {
-            return BindToMethodConvertArgs(
+            return BindToBestMethodOverload(
                 nameof(ICqlOperators.ValueSetUnion),
                 left.TypeAsExpression<IEnumerable<CqlCode>>(),
                 right.TypeAsExpression<IEnumerable<CqlCode>>());
@@ -93,11 +93,11 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), left, right);
+                return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), left, right);
             }
         }
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.ListUnion), left, right);
+        return BindToBestMethodOverload(nameof(ICqlOperators.ListUnion), left, right);
     }
 
     private Expression ResolveValueSet(Expression expression)
@@ -184,7 +184,7 @@ partial class CqlOperatorsBinder
         if (operand.Type == typeof(CqlInterval<object>))
             return NullExpression.Int32;
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.Width), operand);
+        return BindToBestMethodOverload(nameof(ICqlOperators.Width), operand);
     }
 
     private MethodCallExpression LateBoundProperty(

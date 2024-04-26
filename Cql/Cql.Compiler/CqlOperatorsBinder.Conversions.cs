@@ -89,7 +89,7 @@ partial class CqlOperatorsBinder
         SuperType = 5, // Unresolved object
     }
 
-    private MethodCallExpression BindToMethodConvertArgs(
+    private MethodCallExpression BindToBestMethodOverload(
         string methodName,
         params Expression[] arguments)
     {
