@@ -367,13 +367,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("PCSBPScreeningFollowUpFHIR-0.2.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("PCSBPScreeningFollowUpFHIR-0.2.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -552,7 +551,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var as_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var as_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var at_ = context.Operators.Convert<string>(as_?.SystemElement);
 				var au_ = context.Operators.Equal(at_, "http://loinc.org");
 				var aw_ = context.Operators.Convert<string>(as_?.CodeElement);
@@ -564,8 +563,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(1m, "mm[Hg]");
-			var o_ = context.Operators.Quantity(120m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
+			var o_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
 			var p_ = context.Operators.Interval(n_, o_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
@@ -600,7 +599,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var bl_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bl_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bm_ = context.Operators.Convert<string>(bl_?.SystemElement);
 				var bn_ = context.Operators.Equal(bm_, "http://loinc.org");
 				var bp_ = context.Operators.Convert<string>(bl_?.CodeElement);
@@ -612,7 +611,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
 			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
-			var ac_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(n_, ac_, true, false);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.And(q_, ae_);
@@ -666,7 +665,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var as_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var as_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var at_ = context.Operators.Convert<string>(as_?.SystemElement);
 				var au_ = context.Operators.Equal(at_, "http://loinc.org");
 				var aw_ = context.Operators.Convert<string>(as_?.CodeElement);
@@ -678,8 +677,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(120m, "mm[Hg]");
-			var o_ = context.Operators.Quantity(129m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)120m, "mm[Hg]");
+			var o_ = context.Operators.Quantity((decimal?)129m, "mm[Hg]");
 			var p_ = context.Operators.Interval(n_, o_, true, true);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
@@ -714,7 +713,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var bl_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bl_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bm_ = context.Operators.Convert<string>(bl_?.SystemElement);
 				var bn_ = context.Operators.Equal(bm_, "http://loinc.org");
 				var bp_ = context.Operators.Convert<string>(bl_?.CodeElement);
@@ -726,8 +725,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
 			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
-			var ab_ = context.Operators.Quantity(1m, "mm[Hg]");
-			var ac_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ab_ = context.Operators.Quantity((decimal?)1m, "mm[Hg]");
+			var ac_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(ab_, ac_, true, false);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.And(q_, ae_);
@@ -912,7 +911,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var be_ = context.Operators.End(bd_);
 				var bf_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var bg_ = context.Operators.Start(bf_);
-				var bh_ = context.Operators.Quantity(1m, "year");
+				var bh_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bi_ = context.Operators.Subtract(bg_, bh_);
 				var bk_ = context.Operators.Start(bf_);
 				var bl_ = context.Operators.Interval(bi_, bk_, true, true);
@@ -945,7 +944,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var by_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var by_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bz_ = context.Operators.Convert<string>(by_?.SystemElement);
 				var ca_ = context.Operators.Equal(bz_, "http://loinc.org");
 				var cc_ = context.Operators.Convert<string>(by_?.CodeElement);
@@ -957,7 +956,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
 			bool? q_(Observation BloodPressure)
 			{
@@ -966,7 +965,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var ch_ = context.Operators.End(cg_);
 				var ci_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var cj_ = context.Operators.Start(ci_);
-				var ck_ = context.Operators.Quantity(1m, "year");
+				var ck_ = context.Operators.Quantity((decimal?)1m, "year");
 				var cl_ = context.Operators.Subtract(cj_, ck_);
 				var cn_ = context.Operators.Start(ci_);
 				var co_ = context.Operators.Interval(cl_, cn_, true, true);
@@ -999,7 +998,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var u_ = context.Operators.LastOfList<Observation>(t_);
 			bool? v_(Observation.ComponentComponent @this)
 			{
-				var db_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var db_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dc_ = context.Operators.Convert<string>(db_?.SystemElement);
 				var dd_ = context.Operators.Equal(dc_, "http://loinc.org");
 				var df_ = context.Operators.Convert<string>(db_?.CodeElement);
@@ -1020,7 +1019,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var dk_ = context.Operators.End(dj_);
 				var dl_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var dm_ = context.Operators.Start(dl_);
-				var dn_ = context.Operators.Quantity(1m, "year");
+				var dn_ = context.Operators.Quantity((decimal?)1m, "year");
 				var do_ = context.Operators.Subtract(dm_, dn_);
 				var dq_ = context.Operators.Start(dl_);
 				var dr_ = context.Operators.Interval(do_, dq_, true, true);
@@ -1053,7 +1052,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ah_ = context.Operators.LastOfList<Observation>(ag_);
 			bool? ai_(Observation.ComponentComponent @this)
 			{
-				var ee_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var ee_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var ef_ = context.Operators.Convert<string>(ee_?.SystemElement);
 				var eg_ = context.Operators.Equal(ef_, "http://loinc.org");
 				var ei_ = context.Operators.Convert<string>(ee_?.CodeElement);
@@ -1065,7 +1064,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
 			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
-			var am_ = context.Operators.Quantity(130m, "mm[Hg]");
+			var am_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
 			bool? ap_(Observation BloodPressure)
 			{
@@ -1074,7 +1073,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var en_ = context.Operators.End(em_);
 				var eo_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 				var ep_ = context.Operators.Start(eo_);
-				var eq_ = context.Operators.Quantity(1m, "year");
+				var eq_ = context.Operators.Quantity((decimal?)1m, "year");
 				var er_ = context.Operators.Subtract(ep_, eq_);
 				var et_ = context.Operators.Start(eo_);
 				var eu_ = context.Operators.Interval(er_, et_, true, true);
@@ -1107,7 +1106,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var at_ = context.Operators.LastOfList<Observation>(as_);
 			bool? au_(Observation.ComponentComponent @this)
 			{
-				var fh_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var fh_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var fi_ = context.Operators.Convert<string>(fh_?.SystemElement);
 				var fj_ = context.Operators.Equal(fi_, "http://loinc.org");
 				var fl_ = context.Operators.Convert<string>(fh_?.CodeElement);
@@ -1119,7 +1118,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
 			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
-			var ay_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ay_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
 			var ba_ = context.Operators.Or(an_, az_);
 			var bb_ = context.Operators.And(ab_, ba_);
@@ -1164,7 +1163,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.LastOfList<Observation>(j_);
 			bool? l_(Observation.ComponentComponent @this)
 			{
-				var bm_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bm_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bn_ = context.Operators.Convert<string>(bm_?.SystemElement);
 				var bo_ = context.Operators.Equal(bn_, "http://loinc.org");
 				var bq_ = context.Operators.Convert<string>(bm_?.CodeElement);
@@ -1176,7 +1175,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var m_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(k_?.Component, l_);
 			var n_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(m_);
 			var o_ = FHIRHelpers_4_3_000.ToValue(n_?.Value);
-			var p_ = context.Operators.Quantity(0m, "mm[Hg]");
+			var p_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
 			bool? s_(Observation BloodPressure)
 			{
@@ -1201,7 +1200,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var cb_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var cb_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cc_ = context.Operators.Convert<string>(cb_?.SystemElement);
 				var cd_ = context.Operators.Equal(cc_, "http://loinc.org");
 				var cf_ = context.Operators.Convert<string>(cb_?.CodeElement);
@@ -1238,7 +1237,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aj_ = context.Operators.LastOfList<Observation>(ai_);
 			bool? ak_(Observation.ComponentComponent @this)
 			{
-				var cq_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var cq_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cr_ = context.Operators.Convert<string>(cq_?.SystemElement);
 				var cs_ = context.Operators.Equal(cr_, "http://loinc.org");
 				var cu_ = context.Operators.Convert<string>(cq_?.CodeElement);
@@ -1250,7 +1249,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var al_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(aj_?.Component, ak_);
 			var am_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(al_);
 			var an_ = FHIRHelpers_4_3_000.ToValue(am_?.Value);
-			var ao_ = context.Operators.Quantity(130m, "mm[Hg]");
+			var ao_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
 			var ap_ = context.Operators.GreaterOrEqual((an_ as CqlQuantity), ao_);
 			bool? ar_(Observation BloodPressure)
 			{
@@ -1275,7 +1274,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var av_ = context.Operators.LastOfList<Observation>(au_);
 			bool? aw_(Observation.ComponentComponent @this)
 			{
-				var df_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var df_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dg_ = context.Operators.Convert<string>(df_?.SystemElement);
 				var dh_ = context.Operators.Equal(dg_, "http://loinc.org");
 				var dj_ = context.Operators.Convert<string>(df_?.CodeElement);
@@ -1287,7 +1286,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ax_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(av_?.Component, aw_);
 			var ay_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(ax_);
 			var az_ = FHIRHelpers_4_3_000.ToValue(ay_?.Value);
-			var ba_ = context.Operators.Quantity(80m, "mm[Hg]");
+			var ba_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
 			var bb_ = context.Operators.GreaterOrEqual((az_ as CqlQuantity), ba_);
 			var bc_ = context.Operators.Or(ap_, bb_);
 			var bd_ = context.Operators.And(ad_, bc_);
@@ -1412,7 +1411,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var bw_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var bw_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bx_ = context.Operators.Convert<string>(bw_?.SystemElement);
 				var by_ = context.Operators.Equal(bx_, "http://loinc.org");
 				var ca_ = context.Operators.Convert<string>(bw_?.CodeElement);
@@ -1424,8 +1423,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(130m, "mm[Hg]");
-			var o_ = context.Operators.Quantity(139m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)130m, "mm[Hg]");
+			var o_ = context.Operators.Quantity((decimal?)139m, "mm[Hg]");
 			var p_ = context.Operators.Interval(n_, o_, true, true);
 			var q_ = context.Operators.ElementInInterval<CqlQuantity>((m_ as CqlQuantity), p_, null);
 			bool? s_(Observation BloodPressure)
@@ -1460,7 +1459,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var w_ = context.Operators.LastOfList<Observation>(v_);
 			bool? x_(Observation.ComponentComponent @this)
 			{
-				var cp_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var cp_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cq_ = context.Operators.Convert<string>(cp_?.SystemElement);
 				var cr_ = context.Operators.Equal(cq_, "http://loinc.org");
 				var ct_ = context.Operators.Convert<string>(cp_?.CodeElement);
@@ -1472,8 +1471,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var y_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(w_?.Component, x_);
 			var z_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
-			var ab_ = context.Operators.Quantity(80m, "mm[Hg]");
-			var ac_ = context.Operators.Quantity(89m, "mm[Hg]");
+			var ab_ = context.Operators.Quantity((decimal?)80m, "mm[Hg]");
+			var ac_ = context.Operators.Quantity((decimal?)89m, "mm[Hg]");
 			var ad_ = context.Operators.Interval(ab_, ac_, true, true);
 			var ae_ = context.Operators.ElementInInterval<CqlQuantity>((aa_ as CqlQuantity), ad_, null);
 			var af_ = context.Operators.Or(q_, ae_);
@@ -1509,7 +1508,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var al_ = context.Operators.LastOfList<Observation>(ak_);
 			bool? am_(Observation.ComponentComponent @this)
 			{
-				var di_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var di_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dj_ = context.Operators.Convert<string>(di_?.SystemElement);
 				var dk_ = context.Operators.Equal(dj_, "http://loinc.org");
 				var dm_ = context.Operators.Convert<string>(di_?.CodeElement);
@@ -1521,7 +1520,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var an_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(al_?.Component, am_);
 			var ao_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(an_);
 			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_?.Value);
-			var aq_ = context.Operators.Quantity(140m, "mm[Hg]");
+			var aq_ = context.Operators.Quantity((decimal?)140m, "mm[Hg]");
 			var ar_ = context.Operators.GreaterOrEqual((ap_ as CqlQuantity), aq_);
 			bool? at_(Observation BloodPressure)
 			{
@@ -1555,7 +1554,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ax_ = context.Operators.LastOfList<Observation>(aw_);
 			bool? ay_(Observation.ComponentComponent @this)
 			{
-				var eb_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var eb_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var ec_ = context.Operators.Convert<string>(eb_?.SystemElement);
 				var ed_ = context.Operators.Equal(ec_, "http://loinc.org");
 				var ef_ = context.Operators.Convert<string>(eb_?.CodeElement);
@@ -1567,7 +1566,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var az_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ax_?.Component, ay_);
 			var ba_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(az_);
 			var bb_ = FHIRHelpers_4_3_000.ToValue(ba_?.Value);
-			var bc_ = context.Operators.Quantity(90m, "mm[Hg]");
+			var bc_ = context.Operators.Quantity((decimal?)90m, "mm[Hg]");
 			var bd_ = context.Operators.GreaterOrEqual((bb_ as CqlQuantity), bc_);
 			var be_ = context.Operators.Or(ar_, bd_);
 			var bf_ = context.Operators.Not(be_);
@@ -1755,7 +1754,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var i_ = context.Operators.LastOfList<Observation>(h_);
 			bool? j_(Observation.ComponentComponent @this)
 			{
-				var br_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var br_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var bs_ = context.Operators.Convert<string>(br_?.SystemElement);
 				var bt_ = context.Operators.Equal(bs_, "http://loinc.org");
 				var bv_ = context.Operators.Convert<string>(br_?.CodeElement);
@@ -1767,7 +1766,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var k_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(i_?.Component, j_);
 			var l_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
-			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
+			var n_ = context.Operators.Quantity((decimal?)0m, "mm[Hg]");
 			var o_ = context.Operators.Greater((m_ as CqlQuantity), n_);
 			bool? q_(Observation BloodPressure)
 			{
@@ -1801,7 +1800,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var u_ = context.Operators.LastOfList<Observation>(t_);
 			bool? v_(Observation.ComponentComponent @this)
 			{
-				var ck_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var ck_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var cl_ = context.Operators.Convert<string>(ck_?.SystemElement);
 				var cm_ = context.Operators.Equal(cl_, "http://loinc.org");
 				var co_ = context.Operators.Convert<string>(ck_?.CodeElement);
@@ -1847,7 +1846,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ah_ = context.Operators.LastOfList<Observation>(ag_);
 			bool? ai_(Observation.ComponentComponent @this)
 			{
-				var dd_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var dd_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var de_ = context.Operators.Convert<string>(dd_?.SystemElement);
 				var df_ = context.Operators.Equal(de_, "http://loinc.org");
 				var dh_ = context.Operators.Convert<string>(dd_?.CodeElement);
@@ -1859,7 +1858,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var aj_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(ah_?.Component, ai_);
 			var ak_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
-			var am_ = context.Operators.Quantity(140m, "mm[Hg]");
+			var am_ = context.Operators.Quantity((decimal?)140m, "mm[Hg]");
 			var an_ = context.Operators.GreaterOrEqual((al_ as CqlQuantity), am_);
 			bool? ap_(Observation BloodPressure)
 			{
@@ -1893,7 +1892,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var at_ = context.Operators.LastOfList<Observation>(as_);
 			bool? au_(Observation.ComponentComponent @this)
 			{
-				var dw_ = context.Operators.FirstOfList<Coding>((@this?.Code?.Coding as IEnumerable<Coding>));
+				var dw_ = context.Operators.FirstOfList<Coding>((IEnumerable<Coding>)@this?.Code?.Coding);
 				var dx_ = context.Operators.Convert<string>(dw_?.SystemElement);
 				var dy_ = context.Operators.Equal(dx_, "http://loinc.org");
 				var ea_ = context.Operators.Convert<string>(dw_?.CodeElement);
@@ -1905,7 +1904,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var av_ = context.Operators.WhereOrNull<Observation.ComponentComponent>(at_?.Component, au_);
 			var aw_ = context.Operators.SingleOrNull<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
-			var ay_ = context.Operators.Quantity(90m, "mm[Hg]");
+			var ay_ = context.Operators.Quantity((decimal?)90m, "mm[Hg]");
 			var az_ = context.Operators.GreaterOrEqual((ax_ as CqlQuantity), ay_);
 			var ba_ = context.Operators.Or(an_, az_);
 			var bb_ = context.Operators.And(ab_, ba_);
@@ -1986,10 +1985,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				var ar_ = context.Operators.Convert<CqlDateTime>(Medications?.AuthoredOnElement);
 				var as_ = this.Measurement_Period();
 				var at_ = context.Operators.ElementInInterval<CqlDateTime>(ar_, as_, "day");
-				var au_ = context.Operators.Equivalent(Medications?.StatusElement?.Value, "active");
-				var av_ = context.Operators.And(at_, au_);
+				var au_ = context.Operators.Convert<string>(Medications?.StatusElement?.Value);
+				var av_ = context.Operators.Equivalent(au_, "active");
+				var aw_ = context.Operators.And(at_, av_);
 
-				return av_;
+				return aw_;
 			};
 			var ao_ = context.Operators.WhereOrNull<MedicationRequest>(am_, an_);
 			ServiceRequest ap_(MedicationRequest Medications) => 
@@ -2349,9 +2349,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var r_ = context.Operators.ListUnion<MedicationRequest>(o_, q_);
 		bool? s_(MedicationRequest MedicationRequestNotOrdered)
 		{
-			var am_ = context.Operators.EnumEqualsString(MedicationRequestNotOrdered?.StatusElement?.Value, "completed");
+			var am_ = context.Operators.Convert<string>(MedicationRequestNotOrdered?.StatusElement?.Value);
+			var an_ = context.Operators.Equal(am_, "completed");
 
-			return am_;
+			return an_;
 		};
 		var t_ = context.Operators.WhereOrNull<MedicationRequest>(r_, s_);
 		var u_ = context.Operators.ListUnion<object>((m_ as IEnumerable<object>), (t_ as IEnumerable<object>));

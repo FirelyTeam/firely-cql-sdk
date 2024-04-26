@@ -49,7 +49,7 @@ namespace Hl7.Cql.Runtime
                         nullAdded = true;
                     }
                 }
-                else if (!Enumerable.Contains(result!, item!, EqualityComparer!))
+                else if (!result!.Contains(item!, EqualityComparer!))
                 {
                     result.Add(item!);
                 }

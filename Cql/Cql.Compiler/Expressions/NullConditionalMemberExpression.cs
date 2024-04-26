@@ -47,8 +47,10 @@ namespace Hl7.Cql.Compiler
             var objectVariable = Variable(MemberExpression.Expression!.Type);
             Expression notNull(Expression expression) => NotEqual(expression, Constant(null, MemberExpression.Expression.Type));
 
-            Expression nullableMemberExpression = (MemberExpression.Type != resultType) ?
-                    Convert(MemberExpression, resultType) : MemberExpression;
+            Expression nullableMemberExpression = (MemberExpression.Type != resultType)
+                ? MemberExpression.ConvertExpression(resultType)
+                : MemberExpression;
+
             var block = Block(new[] { objectVariable },
                 Assign(objectVariable, MemberExpression.Expression!),
                 Condition(notNull(objectVariable), nullableMemberExpression, Default(resultType)));
@@ -70,8 +72,7 @@ namespace Hl7.Cql.Compiler
 
             if (expression != MemberExpression.Expression)
                 return new NullConditionalMemberExpression(MemberExpression.Update(expression));
-            else
-                return this;
+            return this;
         }
     }
 }

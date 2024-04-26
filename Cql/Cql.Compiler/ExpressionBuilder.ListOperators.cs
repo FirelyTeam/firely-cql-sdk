@@ -17,27 +17,27 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression IndexOf(Elm.IndexOf e)
         {
-            var source = TranslateExpression(e.source!);
-            var element = TranslateExpression(e.element!);
-            if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
+            var source = Translate(e.source!);
+            var element = Translate(e.element!);
+            if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
-            return _operatorBinding.BindToMethod(CqlOperator.ListIndexOf, source, element);
+            return BindCqlOperator(CqlOperator.ListIndexOf, null, source, element);
         }
 
         private Expression? Slice(Elm.Slice slice)
         {
-            var source = TranslateExpression(slice.source!);
+            var source = Translate(slice.source!);
             var start = slice.startIndex == null || slice.startIndex is Elm.Null
-                ? Expression.Constant(null, typeof(int?))
-                : TranslateExpression(slice.startIndex!);
+                ? NullExpression.Int32
+                : Translate(slice.startIndex!);
             var end = slice.endIndex == null || slice.endIndex is Elm.Null
-                ? Expression.Constant(null, typeof(int?))
-                : TranslateExpression(slice.endIndex!);
-            if (!_typeResolver.ImplementsGenericIEnumerable(source.Type))
+                ? NullExpression.Int32
+                : Translate(slice.endIndex!);
+            if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 
-            return _operatorBinding.BindToMethod(CqlOperator.Slice, source, start, end);
+            return BindCqlOperator(CqlOperator.Slice, null, source, start, end);
         }
     }
 }

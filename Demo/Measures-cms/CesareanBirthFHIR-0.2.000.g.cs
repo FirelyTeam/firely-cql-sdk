@@ -231,13 +231,12 @@ public class CesareanBirthFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("CesareanBirthFHIR-0.2.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("CesareanBirthFHIR-0.2.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -282,7 +281,7 @@ public class CesareanBirthFHIR_0_2_000
 		{
 			var d_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
 			var e_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
-			var f_ = context.Operators.Quantity(37m, "weeks");
+			var f_ = context.Operators.Quantity((decimal?)37m, "weeks");
 			var g_ = context.Operators.GreaterOrEqual(e_, f_);
 			var h_ = context.Operators.And((bool?)(d_ is null), g_);
 
@@ -440,7 +439,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var r_ = QICoreCommon_2_0_000.earliest(q_());
 			var s_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var t_ = context.Operators.Quantity(42m, "weeks");
+			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
 			var w_ = context.Operators.Interval(u_, s_, true, false);
 			var x_ = context.Operators.ElementInInterval<CqlDateTime>(r_, w_, null);
@@ -566,7 +565,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity(42m, "weeks");
+			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
@@ -704,7 +703,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity(42m, "weeks");
+			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
@@ -842,7 +841,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity(42m, "weeks");
+			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
@@ -1848,10 +1847,11 @@ public class CesareanBirthFHIR_0_2_000
 				var k_ = FHIRHelpers_4_3_000.ToValue(CSection?.Performed);
 				var l_ = QICoreCommon_2_0_000.toInterval(k_);
 				var m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
-				var n_ = context.Operators.EnumEqualsString(CSection?.StatusElement?.Value, "completed");
-				var o_ = context.Operators.And(m_, n_);
+				var n_ = context.Operators.Convert<string>(CSection?.StatusElement?.Value);
+				var o_ = context.Operators.Equal(n_, "completed");
+				var p_ = context.Operators.And(m_, o_);
 
-				return o_;
+				return p_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure CSection) => 

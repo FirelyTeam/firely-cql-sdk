@@ -235,7 +235,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			var m_ = CumulativeMedicationDurationFHIR4_1_0_000.MedicationPeriod((DementiaMed as object));
 			var n_ = this.Measurement_Period();
 			var o_ = context.Operators.Start(n_);
-			var p_ = context.Operators.Quantity(1m, "year");
+			var p_ = context.Operators.Quantity((decimal?)1m, "year");
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
 			var t_ = context.Operators.Interval(q_, s_, true, true);
@@ -322,7 +322,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				var aa_ = context.Operators.Start(z_);
 				var ab_ = this.Measurement_Period();
 				var ac_ = context.Operators.End(ab_);
-				var ad_ = context.Operators.Quantity(2m, "years");
+				var ad_ = context.Operators.Quantity((decimal?)2m, "years");
 				var ae_ = context.Operators.Subtract(ac_, ad_);
 				var ag_ = context.Operators.End(ab_);
 				var ah_ = context.Operators.Interval(ae_, ag_, true, true);
@@ -371,7 +371,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			var l_ = context.Operators.End(k_);
 			var m_ = FHIRHelpers_4_0_001.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1?.Period);
 			var n_ = context.Operators.End(m_);
-			var o_ = context.Operators.Quantity(1m, "day");
+			var o_ = context.Operators.Quantity((decimal?)1m, "day");
 			var p_ = context.Operators.Add(n_, o_);
 			var q_ = context.Operators.SameOrAfter(l_, p_, "day");
 
@@ -420,7 +420,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			var k_ = context.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
 			var l_ = context.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod2);
-			var m_ = context.Operators.Quantity(1m, "day");
+			var m_ = context.Operators.Quantity((decimal?)1m, "day");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var q_ = context.Operators.Add(l_, m_);
 			var r_ = context.Operators.Interval(n_, q_, true, true);
@@ -496,7 +496,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				var r_ = context.Operators.Start(q_);
 				var s_ = this.Measurement_Period();
 				var t_ = context.Operators.End(s_);
-				var u_ = context.Operators.Quantity(2m, "years");
+				var u_ = context.Operators.Quantity((decimal?)2m, "years");
 				var v_ = context.Operators.Subtract(t_, u_);
 				var x_ = context.Operators.End(s_);
 				var y_ = context.Operators.Interval(v_, x_, true, true);
@@ -636,13 +636,51 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)65, (int?)79, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)65, (int?)79, true, true);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var j_ = this.Has_Criteria_Indicating_Frailty();
+		var k_ = context.Operators.And(i_, j_);
+		var l_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var m_ = context.Operators.ExistsInList<Encounter>(l_);
+		var n_ = this.Inpatient_Encounter_with_Advanced_Illness();
+		var o_ = context.Operators.ExistsInList<Encounter>(n_);
+		var p_ = context.Operators.Or(m_, o_);
+		var q_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
+		var r_ = context.Operators.ExistsInList<MedicationRequest>(q_);
+		var s_ = context.Operators.Or(p_, r_);
+		var t_ = context.Operators.And(k_, s_);
+		var v_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
+		var x_ = context.Operators.Start(c_);
+		var y_ = context.Operators.DateFrom(x_);
+		var z_ = context.Operators.Convert<CqlDateTime>(y_);
+		var aa_ = context.Operators.CalculateAgeAt(v_, z_, "year");
+		var ab_ = context.Operators.GreaterOrEqual(aa_, (int?)80);
+		var ad_ = context.Operators.And(ab_, j_);
+		var ae_ = context.Operators.Or(t_, ad_);
+
+		return ae_;
+	}
+
+    [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
+	public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80() => 
+		__Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80.Value;
+
+	private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Value()
+	{
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.GreaterOrEqual(g_, (int?)65);
 		var i_ = this.Has_Criteria_Indicating_Frailty();
 		var j_ = context.Operators.And(h_, i_);
 		var k_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
@@ -654,43 +692,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var q_ = context.Operators.ExistsInList<MedicationRequest>(p_);
 		var r_ = context.Operators.Or(o_, q_);
 		var s_ = context.Operators.And(j_, r_);
-		var u_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var w_ = context.Operators.Start(c_);
-		var x_ = context.Operators.DateFrom(w_);
-		var y_ = context.Operators.CalculateAgeAt(u_, x_, "year");
-		var z_ = context.Operators.GreaterOrEqual(y_, (int?)80);
-		var ab_ = context.Operators.And(z_, i_);
-		var ac_ = context.Operators.Or(s_, ab_);
 
-		return ac_;
-	}
-
-    [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
-	public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80() => 
-		__Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80.Value;
-
-	private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Value()
-	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)65);
-		var h_ = this.Has_Criteria_Indicating_Frailty();
-		var i_ = context.Operators.And(g_, h_);
-		var j_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
-		var l_ = this.Inpatient_Encounter_with_Advanced_Illness();
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
-		var n_ = context.Operators.Or(k_, m_);
-		var o_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		var p_ = context.Operators.ExistsInList<MedicationRequest>(o_);
-		var q_ = context.Operators.Or(n_, p_);
-		var r_ = context.Operators.And(i_, q_);
-
-		return r_;
+		return s_;
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]

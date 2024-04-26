@@ -5,11 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Infrastructure;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
-using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
 using Microsoft.CodeAnalysis.CSharp;
 using Expression = System.Linq.Expressions.Expression;
 using F = Hl7.Fhir.Model;
@@ -35,35 +31,6 @@ partial class ExpressionBuilder
     private static bool TryCorrectQiCoreBindingError(Type source, Type to, out Type? correctedTo)
     {
         return KnownErrors.TryGetValue((source, to), out correctedTo);
-    }
-
-    protected static bool IsInterval(Type t, out Type? elementType)
-    {
-        if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(CqlInterval<>))
-        {
-            elementType = t.GetGenericArguments()[0];
-            return true;
-        }
-        elementType = null;
-        return false;
-    }
-
-    internal static MethodCallExpression CallCreateValueSetFacade(Expression operand)
-    {
-        var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, createFacadeMethod, operand);
-
-        return call;
-    }
-
-    protected static ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
-    {
-        if (!precisionSpecified)
-            return CqlContextExpressions.NullString_ConstantExpression;
-
-        var name = Enum.GetName(elmPrecision)!.ToLowerInvariant();
-        var ce = Expression.Constant(name, typeof(string));
-        return ce;
     }
 
     private static LambdaExpression NotImplemented(
@@ -165,7 +132,7 @@ partial class ExpressionBuilder
                 targetNullTypeArg: Nullable.GetUnderlyingType(targetType)) switch
             {
                 // Only targetType is nullable
-                (exprNullTypeArg: null, targetNullTypeArg: not null) => Expression.Convert(expression, targetType),
+                (exprNullTypeArg: null, targetNullTypeArg: not null) => expression.ConvertExpression(targetType),
 
                 // Both are nullable or not nullable
                 ({ } exprNullTypeArg, targetNullTypeArg: null) => Expression.Coalesce(expression, Expression.Default(exprNullTypeArg)),
@@ -180,10 +147,7 @@ partial class ExpressionBuilder
     {
         if (before.Type.IsValueType)
             return before;
-        else
-        {
-            return new NullConditionalMemberExpression(before, member);
-        }
+        return new NullConditionalMemberExpression(before, member);
     }
 
     internal static string TypeNameToIdentifier(Type type, ExpressionBuilder? ctx)
@@ -212,15 +176,6 @@ partial class ExpressionBuilder
         }
 
         return NormalizeIdentifier(typeName!)!;
-    }
-
-    private static bool IsEnum(Type type)
-    {
-        if (type.IsEnum)
-            return true;
-        if (type.IsNullable() && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
-            return true;
-        return false;
     }
 
     protected interface IPopToken : IDisposable

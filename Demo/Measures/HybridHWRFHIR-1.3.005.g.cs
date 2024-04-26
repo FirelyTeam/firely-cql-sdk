@@ -293,13 +293,12 @@ public class HybridHWRFHIR_1_3_005
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("HybridHWRFHIR-1.3.005", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("HybridHWRFHIR-1.3.005", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -385,7 +384,7 @@ public class HybridHWRFHIR_1_3_005
 					var br_ = context.Operators.End(bq_);
 					var bs_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 					var bt_ = context.Operators.Start(bs_);
-					var bu_ = context.Operators.Quantity(1m, "hour");
+					var bu_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var bv_ = context.Operators.Subtract(bt_, bu_);
 					var bx_ = context.Operators.Start(bs_);
 					var by_ = context.Operators.Interval(bv_, bx_, true, true);
@@ -410,7 +409,7 @@ public class HybridHWRFHIR_1_3_005
 				var al_ = context.Operators.Start(ak_);
 				var am_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 				var an_ = context.Operators.Start(am_);
-				var ao_ = context.Operators.Quantity(1m, "hour");
+				var ao_ = context.Operators.Quantity((decimal?)1m, "hour");
 				var ap_ = context.Operators.Subtract((al_ ?? an_), ao_);
 				var ar_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? as_(Encounter LastObs)
@@ -419,7 +418,7 @@ public class HybridHWRFHIR_1_3_005
 					var ch_ = context.Operators.End(cg_);
 					var ci_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 					var cj_ = context.Operators.Start(ci_);
-					var ck_ = context.Operators.Quantity(1m, "hour");
+					var ck_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var cl_ = context.Operators.Subtract(cj_, ck_);
 					var cn_ = context.Operators.Start(ci_);
 					var co_ = context.Operators.Interval(cl_, cn_, true, true);
@@ -452,7 +451,7 @@ public class HybridHWRFHIR_1_3_005
 					var cx_ = context.Operators.End(cw_);
 					var cy_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 					var cz_ = context.Operators.Start(cy_);
-					var da_ = context.Operators.Quantity(1m, "hour");
+					var da_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var db_ = context.Operators.Subtract(cz_, da_);
 					var dd_ = context.Operators.Start(cy_);
 					var de_ = context.Operators.Interval(db_, dd_, true, true);
@@ -501,7 +500,7 @@ public class HybridHWRFHIR_1_3_005
 				var dp_ = context.Operators.End(do_);
 				var dq_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 				var dr_ = context.Operators.Start(dq_);
-				var ds_ = context.Operators.Quantity(1m, "hour");
+				var ds_ = context.Operators.Quantity((decimal?)1m, "hour");
 				var dt_ = context.Operators.Subtract(dr_, ds_);
 				var dv_ = context.Operators.Start(dq_);
 				var dw_ = context.Operators.Interval(dt_, dv_, true, true);
@@ -579,14 +578,15 @@ public class HybridHWRFHIR_1_3_005
 			var v_ = context.Operators.ElementInInterval<CqlDateTime>(t_, u_, "day");
 			var w_ = context.Operators.And(r_, v_);
 			var x_ = this.Patient();
-			var y_ = context.Operators.Convert<CqlDate>(x_?.BirthDateElement?.Value);
+			var y_ = context.Operators.Convert<CqlDateTime>(x_?.BirthDateElement?.Value);
 			var aa_ = context.Operators.Start(s_);
 			var ab_ = context.Operators.DateFrom(aa_);
-			var ac_ = context.Operators.CalculateAgeAt(y_, ab_, "year");
-			var ad_ = context.Operators.GreaterOrEqual(ac_, (int?)65);
-			var ae_ = context.Operators.And(w_, ad_);
+			var ac_ = context.Operators.Convert<CqlDateTime>(ab_);
+			var ad_ = context.Operators.CalculateAgeAt(y_, ac_, "year");
+			var ae_ = context.Operators.GreaterOrEqual(ad_, (int?)65);
+			var af_ = context.Operators.And(w_, ae_);
 
-			return ae_;
+			return af_;
 		};
 		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
 		Encounter j_(Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
@@ -630,10 +630,10 @@ public class HybridHWRFHIR_1_3_005
 				var ae_ = context.Operators.Start(aa_);
 				var af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var ag_ = context.Operators.Start(af_);
-				var ah_ = context.Operators.Quantity(1440m, "minutes");
+				var ah_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ai_ = context.Operators.Subtract(ag_, ah_);
 				var ak_ = context.Operators.Start(af_);
-				var al_ = context.Operators.Quantity(120m, "minutes");
+				var al_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var am_ = context.Operators.Add(ak_, al_);
 				var an_ = context.Operators.Interval(ai_, am_, true, true);
 				var ao_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, an_, null);
@@ -674,10 +674,10 @@ public class HybridHWRFHIR_1_3_005
 				var bc_ = context.Operators.Start(ay_);
 				var bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var be_ = context.Operators.Start(bd_);
-				var bf_ = context.Operators.Quantity(1440m, "minutes");
+				var bf_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var bg_ = context.Operators.Subtract(be_, bf_);
 				var bi_ = context.Operators.Start(bd_);
-				var bj_ = context.Operators.Quantity(120m, "minutes");
+				var bj_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var bk_ = context.Operators.Add(bi_, bj_);
 				var bl_ = context.Operators.Interval(bg_, bk_, true, true);
 				var bm_ = context.Operators.ElementInInterval<CqlDateTime>(bc_, bl_, null);
@@ -737,7 +737,7 @@ public class HybridHWRFHIR_1_3_005
 				var ae_ = context.Operators.Start(aa_);
 				var af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var ag_ = context.Operators.Start(af_);
-				var ah_ = context.Operators.Quantity(1440m, "minutes");
+				var ah_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ai_ = context.Operators.Subtract(ag_, ah_);
 				var ak_ = context.Operators.Start(af_);
 				var am_ = context.Operators.Add(ak_, ah_);
@@ -780,7 +780,7 @@ public class HybridHWRFHIR_1_3_005
 				var bc_ = context.Operators.Start(ay_);
 				var bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var be_ = context.Operators.Start(bd_);
-				var bf_ = context.Operators.Quantity(1440m, "minutes");
+				var bf_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var bg_ = context.Operators.Subtract(be_, bf_);
 				var bi_ = context.Operators.Start(bd_);
 				var bk_ = context.Operators.Add(bi_, bf_);
@@ -840,7 +840,7 @@ public class HybridHWRFHIR_1_3_005
 				var aa_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
 				var ab_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var ac_ = context.Operators.Start(ab_);
-				var ad_ = context.Operators.Quantity(1440m, "minutes");
+				var ad_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ae_ = context.Operators.Subtract(ac_, ad_);
 				var ag_ = context.Operators.Start(ab_);
 				var ai_ = context.Operators.Add(ag_, ad_);
@@ -876,7 +876,7 @@ public class HybridHWRFHIR_1_3_005
 				var at_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
 				var au_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var av_ = context.Operators.Start(au_);
-				var aw_ = context.Operators.Quantity(1440m, "minutes");
+				var aw_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var ax_ = context.Operators.Subtract(av_, aw_);
 				var az_ = context.Operators.Start(au_);
 				var bb_ = context.Operators.Add(az_, aw_);
@@ -985,10 +985,12 @@ public class HybridHWRFHIR_1_3_005
 	public int? CalendarAgeInYearsAt(CqlDateTime BirthDateTime, CqlDateTime AsOf)
 	{
 		var a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
-		var b_ = context.Operators.ConvertDateTimeToDate(AsOf);
-		var c_ = context.Operators.DurationBetween(a_, b_, "year");
+		var b_ = context.Operators.Convert<CqlDateTime>(a_);
+		var c_ = context.Operators.ConvertDateTimeToDate(AsOf);
+		var d_ = context.Operators.Convert<CqlDateTime>(c_);
+		var e_ = context.Operators.DurationBetween(b_, d_, "year");
 
-		return c_;
+		return e_;
 	}
 
     [CqlDeclaration("ToDate")]

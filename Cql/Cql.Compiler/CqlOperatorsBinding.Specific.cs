@@ -5,36 +5,37 @@ using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
-partial class CqlOperatorsBinding
+partial class CqlOperatorsBinder
 {
-
     private Expression Expand(
         Expression argument,
         Expression perQuantity)
     {
         if (perQuantity is ConstantExpression { Value: null })
-            perQuantity = Expression.Constant(null, typeof(CqlQuantity));
+            perQuantity = NullExpression.ForType<CqlQuantity>();
 
-        if (TypeResolver.ImplementsGenericIEnumerable(argument.Type))
+        if (_typeResolver.IsListType(argument.Type))
         {
 
-            var elementType = TypeResolver.GetListElementType(argument.Type)!;
+            var elementType = _typeResolver.GetListElementType(argument.Type)!;
             if (elementType == null)
                 throw new ArgumentException($"Unable to determine element type for Expand argument.", nameof(argument));
 
-            if (!IsInterval(elementType))
+            if (!elementType.IsCqlInterval(out _))
                 throw new ArgumentException($"Expand expects a list element type to be an interval.",
                     nameof(argument));
             return BindToMethod(nameof(ICqlOperators.ExpandList), argument, perQuantity);
         }
 
-        if (!IsInterval(argument.Type))
+        if (!argument.Type.IsCqlInterval(out _))
             throw new ArgumentException($"Expand allows only a List<Interval<T>> or an Interval<T> as a parameter.", nameof(argument));
 
         return BindToMethod(nameof(ICqlOperators.ExpandInterval), argument, perQuantity);
@@ -47,12 +48,13 @@ partial class CqlOperatorsBinding
     {
         if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
         {
-            var elementType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
+            var elementType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var call = BindToGenericMethod(nameof(ICqlOperators.ListSortBy), [elementType], source, lambda, orderConstant);
             return call;
 
         }
-        else throw new ArgumentException("SortBy expects 3 parameters: source, lambda, and SortOrder constant", nameof(by));
+
+        throw new ArgumentException("SortBy expects 3 parameters: source, lambda, and SortOrder constant", nameof(by));
     }
 
     private Expression InList(
@@ -61,18 +63,18 @@ partial class CqlOperatorsBinding
     {
         if (left.Type == typeof(CqlCode))
         {
-            var rightElementType = TypeResolver.GetListElementType(right.Type);
+            var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), left, right);
+                return BindToMethodConvertArgs(nameof(ICqlOperators.CodeInList), rightElementType, left, right);
             }
         }
 
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), [left, right], false);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.InList), null, [left, right], false);
         if (methodInfo is null)
-            return CqlContextExpressions.NullObject_ConstantExpression;
+            return NullExpression.Object;
 
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, methodInfo, convertedArgs);
+        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo, convertedArgs);
         return call;
     }
 
@@ -82,19 +84,23 @@ partial class CqlOperatorsBinding
     {
         if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
         {
-            return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), Expression.TypeAs(left, typeof(IEnumerable<CqlCode>)), Expression.TypeAs(right, typeof(IEnumerable<CqlCode>)));
+            return BindToMethodConvertArgs(
+                nameof(ICqlOperators.ValueSetUnion),
+                null,
+                left.TypeAsExpression<IEnumerable<CqlCode>>(),
+                right.TypeAsExpression<IEnumerable<CqlCode>>());
         }
-        var leftElementType = TypeResolver.GetListElementType(left.Type);
+        var leftElementType = _typeResolver.GetListElementType(left.Type);
         if (leftElementType == typeof(CqlCode))
         {
-            var rightElementType = TypeResolver.GetListElementType(right.Type);
+            var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), left, right);
+                return BindToMethodConvertArgs(nameof(ICqlOperators.ValueSetUnion), null, left, right);
             }
         }
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.ListUnion), left, right);
+        return BindToMethodConvertArgs(nameof(ICqlOperators.ListUnion), leftElementType, left, right);
     }
 
     private Expression ResolveValueSet(Expression expression)
@@ -104,7 +110,8 @@ partial class CqlOperatorsBinding
             var call = BindToMethod(nameof(ICqlOperators.ResolveValueSet), @new);
             return call;
         }
-        else throw new ArgumentException("Expression should be a constant CqlValueSet");
+
+        throw new ArgumentException("Expression should be a constant CqlValueSet");
     }
 
     private Expression Minimum(Expression typeConstant)
@@ -114,7 +121,8 @@ partial class CqlOperatorsBinding
             var call = BindToGenericMethod(nameof(ICqlOperators.Minimum), [t]);
             return call;
         }
-        else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
+
+        throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
     }
 
     private Expression Maximum(Expression typeConstant)
@@ -124,7 +132,8 @@ partial class CqlOperatorsBinding
             var call = BindToGenericMethod(nameof(ICqlOperators.Maximum), [t]);
             return call;
         }
-        else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
+
+        throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
     }
 
     private Expression Coalesce(Expression operand)
@@ -154,10 +163,10 @@ partial class CqlOperatorsBinding
 
     private Expression Flatten(Expression operand)
     {
-        var elementType = TypeResolver.GetListElementType(operand.Type, throwError: true)!;
-        if (TypeResolver.ImplementsGenericIEnumerable(elementType))
+        var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
+        if (_typeResolver.IsListType(elementType))
         {
-            var nestedElementType = TypeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
+            var nestedElementType = _typeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
             var call = BindToGenericMethod(nameof(ICqlOperators.FlattenList), [nestedElementType], operand);
             return call;
         }
@@ -176,9 +185,9 @@ partial class CqlOperatorsBinding
     {
         // This should be disallowed but isn't, so handle it:
         if (operand.Type == typeof(CqlInterval<object>))
-            return Expression.Constant(null, typeof(int?));
+            return NullExpression.Int32;
 
-        return BindToMethodConvertArgs(nameof(ICqlOperators.Width), operand);
+        return BindToMethodConvertArgs(nameof(ICqlOperators.Width), null, operand);
     }
 
     private MethodCallExpression LateBoundProperty(
@@ -189,12 +198,13 @@ partial class CqlOperatorsBinding
         if (typeExpression is ConstantExpression { Value: Type type })
         {
             if (source.Type != typeof(object))
-                source = Expression.TypeAs(source, typeof(object));
+                source = source.TypeAsExpression<object>();
 
             var call = BindToGenericMethod(nameof(ICqlOperators.LateBoundProperty), [type!], source, propertyName);
             return call;
         }
-        else throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
+
+        throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
     }
 
     private Expression Interval(
@@ -208,9 +218,9 @@ partial class CqlOperatorsBinding
             return Expression.Constant(null, low.Type == high.Type ? typeof(CqlInterval<>).MakeGenericType(low.Type) : typeof(CqlInterval<object>));
         }
 
-        var exactMethod = ICqlOperators_MethodInfos_By_Name[nameof(ICqlOperators.Interval)]
-            .FirstOrDefault(m =>
-                m.GetParameters()
+        var (exactMethod, _) = ICqlOperatorsMethodsWithParameters_By_MethodNameAndParameterCount[(nameof(ICqlOperators.Interval), 4)]
+            .SingleOrDefault(t =>
+                t.parameters
                     .Select(p => p.ParameterType)
                     .SequenceEqual([low.Type, high.Type, typeof(bool?), typeof(bool?)]));
 
@@ -240,8 +250,8 @@ partial class CqlOperatorsBinding
             return call;
         }
 
-        return TryConvert(source.Type, toType, source, out var convert)
-            ? convert
+        return TryConvert(source, toType, out var t)
+            ? t.arg!
             : throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
     }
 
@@ -283,9 +293,9 @@ partial class CqlOperatorsBinding
             var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByValueSet))!;
             forType = method.MakeGenericMethod(resourceType);
         }
-        else if (TypeResolver.ImplementsGenericIEnumerable(codes.Type))
+        else if (_typeResolver.IsListType(codes.Type))
         {
-            var elementType = TypeResolver.GetListElementType(codes.Type, true)!;
+            var elementType = _typeResolver.GetListElementType(codes.Type, true)!;
             if (elementType == typeof(CqlCode))
             {
                 var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByCodes))!;
@@ -295,7 +305,7 @@ partial class CqlOperatorsBinding
             // for expressions like:
             // [Source : "Definition returning List<Code>"]
             // this ends up turning the codes expression into a List<List<Code>>
-            else if (TypeResolver.ImplementsGenericIEnumerable(elementType) && TypeResolver.GetListElementType(elementType) == typeof(CqlCode))
+            else if (_typeResolver.IsListType(elementType) && _typeResolver.GetListElementType(elementType) == typeof(CqlCode))
             {
                 // call Flatten.
                 codes = Flatten(codes);
@@ -317,12 +327,13 @@ partial class CqlOperatorsBinding
     {
         if (lambda is LambdaExpression lambdaExpr)
         {
-            var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
+            var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var resultType = lambdaExpr.ReturnType;
             var call = BindToGenericMethod(nameof(ICqlOperators.SelectOrNull), [sourceType, resultType], source, lambda);
             return call;
         }
-        else throw new ArgumentException("Source is not generic", nameof(source));
+
+        throw new ArgumentException("Source is not generic", nameof(source));
     }
     private MethodCallExpression Where(
         Expression source,
@@ -330,11 +341,12 @@ partial class CqlOperatorsBinding
     {
         if (lambda is LambdaExpression lamdaExpr)
         {
-            var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
+            var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var call = BindToGenericMethod(nameof(ICqlOperators.WhereOrNull), [sourceType], source, lambda);
             return call;
         }
-        else throw new ArgumentException("Source is not generic", nameof(source));
+
+        throw new ArgumentException("Source is not generic", nameof(source));
     }
 
     private MethodCallExpression SelectMany(
@@ -343,16 +355,18 @@ partial class CqlOperatorsBinding
     {
         if (collectionSelectorLambda is LambdaExpression collectionSelector)
         {
-            var firstGenericArgument = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
-            if (TypeResolver.ImplementsGenericIEnumerable(collectionSelector.ReturnType))
+            var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+            if (_typeResolver.IsListType(collectionSelector.ReturnType))
             {
-                var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
+                var secondGenericArgument = _typeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
                 var call = BindToGenericMethod(nameof(ICqlOperators.SelectManyOrNull), [firstGenericArgument, secondGenericArgument], source, collectionSelector);
                 return call;
             }
-            else throw new ArgumentException("Collection selector does not return an IEnumerable", nameof(collectionSelectorLambda));
+
+            throw new ArgumentException("Collection selector does not return an IEnumerable", nameof(collectionSelectorLambda));
         }
-        else throw new ArgumentException("Source is not generic", nameof(source));
+
+        throw new ArgumentException("Source is not generic", nameof(source));
     }
 
     private MethodCallExpression SelectManyResults(
@@ -363,14 +377,14 @@ partial class CqlOperatorsBinding
         if (collectionSelectorLambda is not LambdaExpression collectionSelector)
             throw new ArgumentException("Source is not generic", nameof(source));
 
-        var firstGenericArgument = TypeResolver.GetListElementType(source.Type) ??
+        var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ??
                                    throw new InvalidOperationException(
                                        $"{source.Type} was expected to be a list type.");
-        if (!TypeResolver.ImplementsGenericIEnumerable(collectionSelector.ReturnType))
+        if (!_typeResolver.IsListType(collectionSelector.ReturnType))
             throw new ArgumentException("Collection lambda does not return an IEnumerable",
                 nameof(collectionSelectorLambda));
 
-        var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType) ??
+        var secondGenericArgument = _typeResolver.GetListElementType(collectionSelector.ReturnType) ??
                                     throw new InvalidOperationException(
                                         $"{collectionSelector.Type} was expected to be a list type.");
         if (resultSelectorLambda is not LambdaExpression resultSelector)
@@ -381,38 +395,5 @@ partial class CqlOperatorsBinding
             [firstGenericArgument, secondGenericArgument, resultSelector.ReturnType], source,
             collectionSelector, resultSelector);
         return call;
-    }
-
-    private bool TryConvert(
-        Type from, Type to,
-        Expression fromExpr, [NotNullWhen(true)] out Expression? toExpr)
-    {
-        if (from == to)
-        {
-            toExpr = fromExpr;
-            return true;
-        }
-
-        if (to.IsAssignableFrom(from))
-        {
-            toExpr = Expression.TypeAs(fromExpr, to);
-            return true;
-        }
-
-        if (TypeConverter?.CanConvert(from, to) == true)
-        {
-            toExpr = BindToGenericMethod(nameof(ICqlOperators.Convert), [to], Expression.TypeAs(fromExpr, typeof(object)));
-            return true;
-        }
-
-        if (fromExpr is ConstantExpression { Value: null }
-            && Nullable.GetUnderlyingType(to) is not null)
-        {
-            toExpr = Expression.Constant(null, to);
-            return true;
-        }
-
-        toExpr = null;
-        return false;
     }
 }

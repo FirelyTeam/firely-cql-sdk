@@ -653,7 +653,7 @@ public class FHIR347_0_1_021
 		bool? c_(Observation LDL)
 		{
 			var e_ = FHIRHelpers_4_0_001.ToQuantity((LDL?.Value as Quantity));
-			var f_ = context.Operators.Quantity(190m, "mg/dL");
+			var f_ = context.Operators.Quantity((decimal?)190m, "mg/dL");
 			var g_ = context.Operators.GreaterOrEqual(e_, f_);
 			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(LDL?.Effective);
 			var i_ = context.Operators.Start(h_);

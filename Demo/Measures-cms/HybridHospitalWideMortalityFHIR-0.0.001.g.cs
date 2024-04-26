@@ -253,13 +253,12 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("HybridHospitalWideMortalityFHIR-0.0.001", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("HybridHospitalWideMortalityFHIR-0.0.001", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -352,10 +351,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest(u_);
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
-				var ac_ = context.Operators.Quantity(120m, "minutes");
+				var ac_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(z_, ad_, true, true);
 				var af_ = context.Operators.ElementInInterval<CqlDateTime>(v_, ae_, null);
@@ -393,10 +392,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var ar_ = QICoreCommon_2_0_000.earliest(aq_);
 				var as_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var at_ = context.Operators.Start(as_);
-				var au_ = context.Operators.Quantity(1440m, "minutes");
+				var au_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var av_ = context.Operators.Subtract(at_, au_);
 				var ax_ = context.Operators.Start(as_);
-				var ay_ = context.Operators.Quantity(120m, "minutes");
+				var ay_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var az_ = context.Operators.Add(ax_, ay_);
 				var ba_ = context.Operators.Interval(av_, az_, true, true);
 				var bb_ = context.Operators.ElementInInterval<CqlDateTime>(ar_, ba_, null);
@@ -458,10 +457,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest(u_);
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
-				var ac_ = context.Operators.Quantity(120m, "minutes");
+				var ac_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(z_, ad_, true, true);
 				var af_ = context.Operators.ElementInInterval<CqlDateTime>(v_, ae_, null);
@@ -499,10 +498,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var ar_ = QICoreCommon_2_0_000.earliest(aq_);
 				var as_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var at_ = context.Operators.Start(as_);
-				var au_ = context.Operators.Quantity(1440m, "minutes");
+				var au_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var av_ = context.Operators.Subtract(at_, au_);
 				var ax_ = context.Operators.Start(as_);
-				var ay_ = context.Operators.Quantity(120m, "minutes");
+				var ay_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var az_ = context.Operators.Add(ax_, ay_);
 				var ba_ = context.Operators.Interval(av_, az_, true, true);
 				var bb_ = context.Operators.ElementInInterval<CqlDateTime>(ar_, ba_, null);
@@ -610,10 +609,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var p_ = QICoreCommon_2_0_000.earliest(o_());
 				var q_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var r_ = context.Operators.Start(q_);
-				var s_ = context.Operators.Quantity(1440m, "minutes");
+				var s_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var t_ = context.Operators.Subtract(r_, s_);
 				var v_ = context.Operators.Start(q_);
-				var w_ = context.Operators.Quantity(120m, "minutes");
+				var w_ = context.Operators.Quantity((decimal?)120m, "minutes");
 				var x_ = context.Operators.Add(v_, w_);
 				var y_ = context.Operators.Interval(t_, x_, true, true);
 				var z_ = context.Operators.ElementInInterval<CqlDateTime>(p_, y_, null);
@@ -746,10 +745,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						var bv_ = QICoreCommon_2_0_000.earliest(bu_());
 						var bw_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 						var bx_ = context.Operators.Start(bw_);
-						var by_ = context.Operators.Quantity(1440m, "minutes");
+						var by_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 						var bz_ = context.Operators.Subtract(bx_, by_);
 						var cb_ = context.Operators.Start(bw_);
-						var cc_ = context.Operators.Quantity(120m, "minutes");
+						var cc_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var cd_ = context.Operators.Add(cb_, cc_);
 						var ce_ = context.Operators.Interval(bz_, cd_, true, true);
 						var cf_ = context.Operators.ElementInInterval<CqlDateTime>(bv_, ce_, null);
@@ -884,10 +883,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						var dy_ = QICoreCommon_2_0_000.earliest(dx_());
 						var dz_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 						var ea_ = context.Operators.Start(dz_);
-						var eb_ = context.Operators.Quantity(1440m, "minutes");
+						var eb_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 						var ec_ = context.Operators.Subtract(ea_, eb_);
 						var ee_ = context.Operators.Start(dz_);
-						var ef_ = context.Operators.Quantity(120m, "minutes");
+						var ef_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var eg_ = context.Operators.Add(ee_, ef_);
 						var eh_ = context.Operators.Interval(ec_, eg_, true, true);
 						var ei_ = context.Operators.ElementInInterval<CqlDateTime>(dy_, eh_, null);
@@ -1022,10 +1021,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						var gb_ = QICoreCommon_2_0_000.earliest(ga_());
 						var gc_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 						var gd_ = context.Operators.Start(gc_);
-						var ge_ = context.Operators.Quantity(1440m, "minutes");
+						var ge_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 						var gf_ = context.Operators.Subtract(gd_, ge_);
 						var gh_ = context.Operators.Start(gc_);
-						var gi_ = context.Operators.Quantity(120m, "minutes");
+						var gi_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var gj_ = context.Operators.Add(gh_, gi_);
 						var gk_ = context.Operators.Interval(gf_, gj_, true, true);
 						var gl_ = context.Operators.ElementInInterval<CqlDateTime>(gb_, gk_, null);
@@ -1160,10 +1159,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						var id_ = QICoreCommon_2_0_000.earliest(ic_());
 						var ie_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 						var if_ = context.Operators.Start(ie_);
-						var ig_ = context.Operators.Quantity(1440m, "minutes");
+						var ig_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 						var ih_ = context.Operators.Subtract(if_, ig_);
 						var ij_ = context.Operators.Start(ie_);
-						var ik_ = context.Operators.Quantity(120m, "minutes");
+						var ik_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var il_ = context.Operators.Add(ij_, ik_);
 						var im_ = context.Operators.Interval(ih_, il_, true, true);
 						var in_ = context.Operators.ElementInInterval<CqlDateTime>(id_, im_, null);
@@ -1297,10 +1296,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						var kf_ = QICoreCommon_2_0_000.earliest(ke_());
 						var kg_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 						var kh_ = context.Operators.Start(kg_);
-						var ki_ = context.Operators.Quantity(1440m, "minutes");
+						var ki_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 						var kj_ = context.Operators.Subtract(kh_, ki_);
 						var kl_ = context.Operators.Start(kg_);
-						var km_ = context.Operators.Quantity(120m, "minutes");
+						var km_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var kn_ = context.Operators.Add(kl_, km_);
 						var ko_ = context.Operators.Interval(kj_, kn_, true, true);
 						var kp_ = context.Operators.ElementInInterval<CqlDateTime>(kf_, ko_, null);
@@ -1434,10 +1433,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						var mh_ = QICoreCommon_2_0_000.earliest(mg_());
 						var mi_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 						var mj_ = context.Operators.Start(mi_);
-						var mk_ = context.Operators.Quantity(1440m, "minutes");
+						var mk_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 						var ml_ = context.Operators.Subtract(mj_, mk_);
 						var mn_ = context.Operators.Start(mi_);
-						var mo_ = context.Operators.Quantity(120m, "minutes");
+						var mo_ = context.Operators.Quantity((decimal?)120m, "minutes");
 						var mp_ = context.Operators.Add(mn_, mo_);
 						var mq_ = context.Operators.Interval(ml_, mp_, true, true);
 						var mr_ = context.Operators.ElementInInterval<CqlDateTime>(mh_, mq_, null);
@@ -1589,7 +1588,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest((u_ as object));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
@@ -1628,7 +1627,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var aq_ = QICoreCommon_2_0_000.earliest((ap_ as object));
 				var ar_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var as_ = context.Operators.Start(ar_);
-				var at_ = context.Operators.Quantity(1440m, "minutes");
+				var at_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var au_ = context.Operators.Subtract(as_, at_);
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
@@ -1691,7 +1690,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest((u_ as object));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
@@ -1730,7 +1729,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var aq_ = QICoreCommon_2_0_000.earliest((ap_ as object));
 				var ar_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var as_ = context.Operators.Start(ar_);
-				var at_ = context.Operators.Quantity(1440m, "minutes");
+				var at_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var au_ = context.Operators.Subtract(as_, at_);
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
@@ -1793,7 +1792,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest((u_ as object));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
@@ -1832,7 +1831,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var aq_ = QICoreCommon_2_0_000.earliest((ap_ as object));
 				var ar_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var as_ = context.Operators.Start(ar_);
-				var at_ = context.Operators.Quantity(1440m, "minutes");
+				var at_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var au_ = context.Operators.Subtract(as_, at_);
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
@@ -1895,7 +1894,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest((u_ as object));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
@@ -1934,7 +1933,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var aq_ = QICoreCommon_2_0_000.earliest((ap_ as object));
 				var ar_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var as_ = context.Operators.Start(ar_);
-				var at_ = context.Operators.Quantity(1440m, "minutes");
+				var at_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var au_ = context.Operators.Subtract(as_, at_);
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
@@ -1997,7 +1996,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest((u_ as object));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
@@ -2036,7 +2035,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var aq_ = QICoreCommon_2_0_000.earliest((ap_ as object));
 				var ar_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var as_ = context.Operators.Start(ar_);
-				var at_ = context.Operators.Quantity(1440m, "minutes");
+				var at_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var au_ = context.Operators.Subtract(as_, at_);
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);
@@ -2099,7 +2098,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = QICoreCommon_2_0_000.earliest((u_ as object));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Quantity(1440m, "minutes");
+				var y_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var z_ = context.Operators.Subtract(x_, y_);
 				var ab_ = context.Operators.Start(w_);
 				var ad_ = context.Operators.Add(ab_, y_);
@@ -2138,7 +2137,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var aq_ = QICoreCommon_2_0_000.earliest((ap_ as object));
 				var ar_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 				var as_ = context.Operators.Start(ar_);
-				var at_ = context.Operators.Quantity(1440m, "minutes");
+				var at_ = context.Operators.Quantity((decimal?)1440m, "minutes");
 				var au_ = context.Operators.Subtract(as_, at_);
 				var aw_ = context.Operators.Start(ar_);
 				var ay_ = context.Operators.Add(aw_, at_);

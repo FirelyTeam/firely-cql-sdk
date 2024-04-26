@@ -52,13 +52,12 @@ public class VTEFHIR4_4_8_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -135,7 +134,7 @@ public class VTEFHIR4_4_8_000
 	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
 	{
 		var a_ = context.Operators.DateFrom(StartValue);
-		var c_ = context.Operators.Quantity(1m, "day");
+		var c_ = context.Operators.Quantity((decimal?)1m, "day");
 		var d_ = context.Operators.Add(a_, c_);
 		var e_ = context.Operators.Interval(a_, d_, true, true);
 
@@ -151,7 +150,7 @@ public class VTEFHIR4_4_8_000
 		var d_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 		var e_ = context.Operators.Start(d_);
 		var f_ = context.Operators.DateFrom(e_);
-		var g_ = context.Operators.Quantity(1m, "day");
+		var g_ = context.Operators.Quantity((decimal?)1m, "day");
 		var h_ = context.Operators.Add(f_, g_);
 		var i_ = context.Operators.Interval(c_, h_, true, true);
 
@@ -166,7 +165,7 @@ public class VTEFHIR4_4_8_000
 		var c_ = context.Operators.DateFrom(b_);
 		var d_ = this.StartOfFirstICU(Encounter);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.Quantity(1m, "day");
+		var f_ = context.Operators.Quantity((decimal?)1m, "day");
 		var g_ = context.Operators.Add(e_, f_);
 		var h_ = context.Operators.Interval(c_, g_, true, true);
 

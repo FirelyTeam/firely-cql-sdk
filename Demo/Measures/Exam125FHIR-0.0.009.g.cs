@@ -216,13 +216,12 @@ public class Exam125FHIR_0_0_009
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("Exam125FHIR-0.0.009", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("Exam125FHIR-0.0.009", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -315,13 +314,14 @@ public class Exam125FHIR_0_0_009
 	private int? Age_at_start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 
-		return f_;
+		return g_;
 	}
 
     [CqlDeclaration("Age at start of Measurement Period")]
@@ -331,23 +331,24 @@ public class Exam125FHIR_0_0_009
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)51, (int?)74, true, false);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.Convert<string>(a_?.GenderElement);
-		var k_ = context.Operators.Equal(j_, "female");
-		var l_ = context.Operators.And(h_, k_);
-		var m_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var n_ = this.Telehealth_Services();
-		var o_ = context.Operators.ListUnion<Encounter>(m_, n_);
-		var p_ = context.Operators.ExistsInList<Encounter>(o_);
-		var q_ = context.Operators.And(l_, p_);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)51, (int?)74, true, false);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var k_ = context.Operators.Convert<string>(a_?.GenderElement);
+		var l_ = context.Operators.Equal(k_, "female");
+		var m_ = context.Operators.And(i_, l_);
+		var n_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var o_ = this.Telehealth_Services();
+		var p_ = context.Operators.ListUnion<Encounter>(n_, o_);
+		var q_ = context.Operators.ExistsInList<Encounter>(p_);
+		var r_ = context.Operators.And(m_, q_);
 
-		return q_;
+		return r_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -572,19 +573,20 @@ public class Exam125FHIR_0_0_009
 		var t_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var u_ = context.Operators.Or(s_, t_);
 		var v_ = this.Patient();
-		var w_ = context.Operators.Convert<CqlDate>(v_?.BirthDateElement?.Value);
+		var w_ = context.Operators.Convert<CqlDateTime>(v_?.BirthDateElement?.Value);
 		var x_ = this.Measurement_Period();
 		var y_ = context.Operators.Start(x_);
 		var z_ = context.Operators.DateFrom(y_);
-		var aa_ = context.Operators.CalculateAgeAt(w_, z_, "year");
-		var ab_ = context.Operators.GreaterOrEqual(aa_, (int?)65);
-		var ac_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
-		var ad_ = context.Operators.And(ab_, ac_);
-		var ae_ = context.Operators.Or(u_, ad_);
-		var af_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
-		var ag_ = context.Operators.Or(ae_, af_);
+		var aa_ = context.Operators.Convert<CqlDateTime>(z_);
+		var ab_ = context.Operators.CalculateAgeAt(w_, aa_, "year");
+		var ac_ = context.Operators.GreaterOrEqual(ab_, (int?)65);
+		var ad_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
+		var ae_ = context.Operators.And(ac_, ad_);
+		var af_ = context.Operators.Or(u_, ae_);
+		var ag_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+		var ah_ = context.Operators.Or(af_, ag_);
 
-		return ag_;
+		return ah_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -610,7 +612,7 @@ public class Exam125FHIR_0_0_009
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity(27m, "months");
+			var m_ = context.Operators.Quantity((decimal?)27m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
@@ -651,7 +653,7 @@ public class Exam125FHIR_0_0_009
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity(27m, "months");
+			var m_ = context.Operators.Quantity((decimal?)27m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
@@ -724,7 +726,7 @@ public class Exam125FHIR_0_0_009
 			var k_ = context.Operators.End(j_);
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = context.Operators.Quantity(27m, "months");
+			var n_ = context.Operators.Quantity((decimal?)27m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
@@ -766,7 +768,7 @@ public class Exam125FHIR_0_0_009
 			var k_ = context.Operators.End(j_);
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = context.Operators.Quantity(27m, "months");
+			var n_ = context.Operators.Quantity((decimal?)27m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);

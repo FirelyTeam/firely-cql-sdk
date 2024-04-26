@@ -67,7 +67,7 @@ namespace Hl7.Cql.Compiler
             };
 
             var index = MakeIndex(Definitions, itemProperty, indices);
-            var asFunc = TypeAs(index, FunctionType);
+            var asFunc = index.TypeAsExpression(FunctionType);
             var invoke = Invoke(asFunc, Arguments);
 
             return invoke;
@@ -82,10 +82,9 @@ namespace Hl7.Cql.Compiler
 
         public Expression Update(IReadOnlyCollection<Expression> arguments)
         {
-            if (Enumerable.SequenceEqual(Arguments, arguments))
+            if (Arguments.SequenceEqual(arguments))
                 return this;
-            else
-                return new FunctionCallExpression(Definitions, LibraryName, FunctionName, arguments, FunctionType);
+            return new FunctionCallExpression(Definitions, LibraryName, FunctionName, arguments, FunctionType);
         }
 
         public override Type Type => DefinitionCallExpression.GetReturnTypeFromDelegateType(FunctionType);

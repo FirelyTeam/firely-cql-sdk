@@ -381,7 +381,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var u_ = context.Operators.Start(t_);
 			var v_ = this.Measurement_Period();
 			var w_ = context.Operators.Start(v_);
-			var x_ = context.Operators.Quantity(1m, "year");
+			var x_ = context.Operators.Quantity((decimal?)1m, "year");
 			var y_ = context.Operators.Subtract(w_, x_);
 			var aa_ = context.Operators.End(v_);
 			var ab_ = context.Operators.Interval(y_, aa_, true, true);
@@ -420,7 +420,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var m_ = context.Operators.End(l_);
 			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1?.Period);
 			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity(1m, "day");
+			var p_ = context.Operators.Quantity((decimal?)1m, "day");
 			var q_ = context.Operators.Add(o_, p_);
 			var r_ = context.Operators.SameOrAfter(m_, q_, "day");
 
@@ -462,7 +462,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Measurement_Period();
 			var o_ = context.Operators.Start(n_);
-			var p_ = context.Operators.Quantity(1m, "year");
+			var p_ = context.Operators.Quantity((decimal?)1m, "year");
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
 			var t_ = context.Operators.Interval(q_, s_, true, true);
@@ -498,7 +498,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var r_ = context.Operators.Interval(m_, o_, l_?.lowClosed, l_?.highClosed);
 			var s_ = this.Measurement_Period();
 			var t_ = context.Operators.Start(s_);
-			var u_ = context.Operators.Quantity(1m, "year");
+			var u_ = context.Operators.Quantity((decimal?)1m, "year");
 			var v_ = context.Operators.Subtract(t_, u_);
 			var x_ = context.Operators.End(s_);
 			var y_ = context.Operators.Interval(v_, x_, true, true);

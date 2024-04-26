@@ -238,13 +238,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("ProstateCaAvoidanceBoneScanOveruseFHIR-0.2.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("ProstateCaAvoidanceBoneScanOveruseFHIR-0.2.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -389,10 +388,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				var n_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveProstateCancer);
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.After(m_, o_, null);
-				var q_ = context.Operators.EnumEqualsString(SalvageTherapy?.StatusElement?.Value, "completed");
-				var r_ = context.Operators.And(p_, q_);
+				var q_ = context.Operators.Convert<string>(SalvageTherapy?.StatusElement?.Value);
+				var r_ = context.Operators.Equal(q_, "completed");
+				var s_ = context.Operators.And(p_, r_);
 
-				return r_;
+				return s_;
 			};
 			var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
 			Procedure i_(Condition ActiveProstateCancer) => 
@@ -493,19 +493,20 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, "day");
-			var m_ = context.Operators.EnumEqualsString(ProstateCancerTreatment?.StatusElement?.Value, "completed");
-			var n_ = context.Operators.And(l_, m_);
+			var m_ = context.Operators.Convert<string>(ProstateCancerTreatment?.StatusElement?.Value);
+			var n_ = context.Operators.Equal(m_, "completed");
+			var o_ = context.Operators.And(l_, n_);
 
-			return n_;
+			return o_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
 		object e_(Procedure @this)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
-			var p_ = QICoreCommon_2_0_000.toInterval(o_);
-			var q_ = context.Operators.Start(p_);
+			var p_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
+			var q_ = QICoreCommon_2_0_000.toInterval(p_);
+			var r_ = context.Operators.Start(q_);
 
-			return q_;
+			return r_;
 		};
 		var f_ = context.Operators.ListSortBy<Procedure>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.FirstOfList<Procedure>(f_);
@@ -743,7 +744,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				};
 				var s_ = FHIRHelpers_4_3_000.ToValue(MostRecentProstateCancerStaging?.Effective);
 				var t_ = QICoreCommon_2_0_000.toInterval(s_);
-				var u_ = context.Operators.IntervalBeforeInterval(r_(), t_, null);
+				var u_ = context.Operators.Before(r_(), t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(PSATest?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
 				var x_ = new string[]
@@ -782,7 +783,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		bool? i_(Observation LastPSATest)
 		{
 			var ao_ = FHIRHelpers_4_3_000.ToValue(LastPSATest?.Value);
-			var ap_ = context.Operators.Quantity(10m, "ng/mL");
+			var ap_ = context.Operators.Quantity((decimal?)10m, "ng/mL");
 			var aq_ = context.Operators.Less((ao_ as CqlQuantity), ap_);
 
 			return aq_;

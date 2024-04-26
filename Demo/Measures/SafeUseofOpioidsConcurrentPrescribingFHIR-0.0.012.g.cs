@@ -194,17 +194,18 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		bool? b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Patient();
-			var e_ = context.Operators.Convert<CqlDate>(d_?.BirthDateElement?.Value);
+			var e_ = context.Operators.Convert<CqlDateTime>(d_?.BirthDateElement?.Value);
 			var f_ = FHIRHelpers_4_0_001.ToInterval(EncounterInpatient?.Period);
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
-			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, (int?)18);
-			var k_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
-			var l_ = context.Operators.Equal(k_, "finished");
-			var m_ = context.Operators.And(j_, l_);
+			var i_ = context.Operators.Convert<CqlDateTime>(h_);
+			var j_ = context.Operators.CalculateAgeAt(e_, i_, "year");
+			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
+			var l_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
+			var m_ = context.Operators.Equal(l_, "finished");
+			var n_ = context.Operators.And(k_, m_);
 
-			return m_;
+			return n_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 

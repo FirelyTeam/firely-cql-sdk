@@ -234,13 +234,12 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("DementiaCognitiveAssessmentFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("DementiaCognitiveAssessmentFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -415,7 +414,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				var q_ = context.Operators.Start(p_);
 				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
 				var s_ = context.Operators.End(r_);
-				var t_ = context.Operators.Quantity(12m, "months");
+				var t_ = context.Operators.Quantity((decimal?)12m, "months");
 				var u_ = context.Operators.Subtract(s_, t_);
 				var w_ = context.Operators.End(r_);
 				var x_ = context.Operators.Interval(u_, w_, true, true);

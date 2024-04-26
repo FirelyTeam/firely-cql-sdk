@@ -257,13 +257,12 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("HFBetaBlockerTherapyforLVSDFHIR-1.3.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("HFBetaBlockerTherapyforLVSDFHIR-1.3.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -446,7 +445,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			var s_ = context.Operators.And(o_, r_);
 			var t_ = context.Operators.Convert<Quantity>(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Value);
 			var u_ = FHIRHelpers_4_3_000.ToQuantity(t_);
-			var v_ = context.Operators.Quantity(50m, "/min");
+			var v_ = context.Operators.Quantity((decimal?)50m, "/min");
 			var w_ = context.Operators.Less(u_, v_);
 			var x_ = context.Operators.And(s_, w_);
 			var y_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
@@ -459,7 +458,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				var ao_ = QICoreCommon_2_0_000.toInterval(ak_);
 				var ap_ = FHIRHelpers_4_3_000.ToValue(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Effective);
 				var aq_ = QICoreCommon_2_0_000.toInterval(ap_);
-				var ar_ = context.Operators.IntervalBeforeInterval(ao_, aq_, null);
+				var ar_ = context.Operators.Before(ao_, aq_, null);
 				var as_ = context.Operators.And(am_, ar_);
 
 				return as_;
@@ -806,9 +805,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var d_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure ImplantedCardiacPacer)
 		{
-			var s_ = context.Operators.EnumEqualsString(ImplantedCardiacPacer?.StatusElement?.Value, "completed");
+			var s_ = context.Operators.Convert<string>(ImplantedCardiacPacer?.StatusElement?.Value);
+			var t_ = context.Operators.Equal(s_, "completed");
 
-			return s_;
+			return t_;
 		};
 		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
 		var g_ = context.Operators.ExistsInList<Procedure>(f_);

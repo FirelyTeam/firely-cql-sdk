@@ -1,5 +1,5 @@
 ﻿using Hl7.Cql.Abstractions;
-using System.Linq.Expressions;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
@@ -8,32 +8,18 @@ namespace Hl7.Cql.Compiler
         private Expression IntervalExpression(Elm.Interval ie)
         {
             var lowClosed = ie.lowClosedExpression != null
-                ? TranslateExpression(ie.lowClosedExpression)
-                : Expression.Constant(ie.lowClosed, typeof(bool?));
-            var highClosed = ie.highClosedExpression != null
-                ? TranslateExpression(ie.highClosedExpression)
-                : Expression.Constant(ie.highClosed, typeof(bool?));
+                ? Translate(ie.lowClosedExpression)
+                : Expression.Constant(((bool?)ie.lowClosed), typeof(bool?));
             lowClosed = ChangeType(lowClosed, typeof(bool?));
+            var low = Translate(ie.low!);
+
+            var highClosed = ie.highClosedExpression != null
+                ? Translate(ie.highClosedExpression)
+                : Expression.Constant(((bool?)ie.highClosed), typeof(bool?));
             highClosed = ChangeType(highClosed, typeof(bool?));
-            var low = TranslateExpression(ie.low!);
-            var high = TranslateExpression(ie.high!);
-            return _operatorBinding.BindToMethod(CqlOperator.Interval, low, high, lowClosed, highClosed);
-        }
+            var high = Translate(ie.high!);
 
-
-        private Expression Ratio(Elm.Ratio re)
-        {
-            var numExpr = new Elm.Quantity();
-            numExpr.value = re.numerator!.value;
-            numExpr.unit = re.numerator!.unit;
-
-            var denomExpr = new Elm.Quantity();
-            denomExpr.value = re.denominator!.value;
-            denomExpr.unit = re.denominator!.unit;
-
-            var numExprTranslated = TranslateExpression(numExpr);
-            var denomExprTranslated = TranslateExpression(numExpr);
-            return _operatorBinding.BindToMethod(CqlOperator.Ratio, numExprTranslated, denomExprTranslated);
+            return BindCqlOperator(CqlOperator.Interval, null, low, high, lowClosed, highClosed);
         }
     }
 }

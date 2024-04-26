@@ -252,13 +252,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR-1.3.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR-1.3.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -280,9 +279,10 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private bool? Patient_is_Male_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "male");
+		var b_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		var c_ = context.Operators.Equal(b_, "male");
 
-		return b_;
+		return c_;
 	}
 
     [CqlDeclaration("Patient is Male")]
@@ -367,7 +367,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var j_ = context.Operators.Start(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.Start(k_);
-			var m_ = context.Operators.Quantity(6m, "months");
+			var m_ = context.Operators.Quantity((decimal?)6m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
@@ -825,7 +825,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var m_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var n_ = context.Operators.Start(m_);
 				var p_ = context.Operators.Start(m_);
-				var q_ = context.Operators.Quantity(1m, "month");
+				var q_ = context.Operators.Quantity((decimal?)1m, "month");
 				var r_ = context.Operators.Add(p_, q_);
 				var s_ = context.Operators.Interval(n_, r_, true, true);
 				var t_ = context.Operators.ElementInInterval<CqlDateTime>(USSAssessment?.effectiveDatetime, s_, "day");
@@ -945,7 +945,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var o_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var p_ = context.Operators.Start(o_);
 				var r_ = context.Operators.Start(o_);
-				var s_ = context.Operators.Quantity(1m, "year");
+				var s_ = context.Operators.Quantity((decimal?)1m, "year");
 				var t_ = context.Operators.Add(r_, s_);
 				var u_ = context.Operators.Interval(p_, t_, true, true);
 				var v_ = context.Operators.ElementInInterval<CqlDateTime>(n_, u_, "day");
@@ -996,7 +996,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var n_ = FHIRHelpers_4_3_000.ToInterval(InHospitalServices?.Period);
 				var o_ = context.Operators.Start(n_);
 				var q_ = context.Operators.End(n_);
-				var r_ = context.Operators.Quantity(31m, "days");
+				var r_ = context.Operators.Quantity((decimal?)31m, "days");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, true, true);
 				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
@@ -1077,7 +1077,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			{
 				var m_ = context.Operators.Convert<Quantity>(BMIExam?.Value);
 				var n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
-				var o_ = context.Operators.Quantity(40m, "kg/m2");
+				var o_ = context.Operators.Quantity((decimal?)40m, "kg/m2");
 				var p_ = context.Operators.Greater(n_, o_);
 				var q_ = context.Operators.Convert<string>(BMIExam?.StatusElement?.Value);
 				var r_ = new string[]

@@ -174,13 +174,12 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.001", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.001", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -247,13 +246,14 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)24, (int?)64, true, true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Qualifying_Encounters();
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
-		var n_ = context.Operators.And(k_, m_);
+		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		var k_ = context.Operators.Equal(j_, "female");
+		var l_ = context.Operators.And(h_, k_);
+		var m_ = this.Qualifying_Encounters();
+		var n_ = context.Operators.ExistsInList<Encounter>(m_);
+		var o_ = context.Operators.And(l_, n_);
 
-		return n_;
+		return o_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -382,7 +382,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var g_ = QICoreCommon_2_0_000.latest(f_());
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity(2m, "years");
+			var j_ = context.Operators.Quantity((decimal?)2m, "years");
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, true, true);
@@ -510,7 +510,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var n_ = QICoreCommon_2_0_000.latest(m_());
 			var o_ = this.Measurement_Period();
 			var p_ = context.Operators.Start(o_);
-			var q_ = context.Operators.Quantity(4m, "years");
+			var q_ = context.Operators.Quantity((decimal?)4m, "years");
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, true, true);

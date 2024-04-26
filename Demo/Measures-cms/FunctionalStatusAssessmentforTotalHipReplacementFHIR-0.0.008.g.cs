@@ -536,13 +536,12 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("FunctionalStatusAssessmentforTotalHipReplacementFHIR-0.0.008", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("FunctionalStatusAssessmentforTotalHipReplacementFHIR-0.0.008", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -810,7 +809,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				var m_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
 				var n_ = QICoreCommon_2_0_000.toInterval(m_);
 				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity(24m, "hours");
+				var p_ = context.Operators.Quantity((decimal?)24m, "hours");
 				var q_ = context.Operators.Subtract(o_, p_);
 				var s_ = QICoreCommon_2_0_000.toInterval(m_);
 				var t_ = context.Operators.Start(s_);
@@ -994,7 +993,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				var q_ = FHIRHelpers_4_3_000.ToValue(THAProcedure?.Performed);
 				var r_ = QICoreCommon_2_0_000.toInterval(q_);
 				var s_ = context.Operators.Start(r_);
-				var t_ = context.Operators.Quantity(1m, "year");
+				var t_ = context.Operators.Quantity((decimal?)1m, "year");
 				var u_ = context.Operators.Subtract(s_, t_);
 				var w_ = QICoreCommon_2_0_000.toInterval(q_);
 				var x_ = context.Operators.Start(w_);
@@ -1037,7 +1036,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			var m_ = QICoreCommon_2_0_000.toInterval(h_);
 			var n_ = context.Operators.Start(m_);
 			var o_ = context.Operators.DateFrom(n_);
-			var p_ = context.Operators.Quantity(300m, "days");
+			var p_ = context.Operators.Quantity((decimal?)300m, "days");
 			var q_ = context.Operators.Add(o_, p_);
 			var r_ = context.Operators.Interval(k_, q_, true, true);
 			var s_ = context.Operators.ElementInInterval<CqlDate>(g_, r_, "day");
@@ -1235,7 +1234,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			bool? l_(CqlDate InitialHipAssessmentHOOS)
 			{
 				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
+				var q_ = context.Operators.Quantity((decimal?)90m, "days");
 				var r_ = context.Operators.Add(InitialHipAssessmentHOOS, q_);
 				var s_ = context.Operators.Interval(InitialHipAssessmentHOOS, r_, true, true);
 				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
@@ -1270,10 +1269,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				var ao_ = context.Operators.DateFrom(an_);
 				var ap_ = context.Operators.End(TotalHip);
 				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
+				var ar_ = context.Operators.Quantity((decimal?)300m, "days");
 				var as_ = context.Operators.Add(aq_, ar_);
 				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
+				var av_ = context.Operators.Quantity((decimal?)425m, "days");
 				var aw_ = context.Operators.Add(au_, av_);
 				var ax_ = context.Operators.Interval(as_, aw_, true, true);
 				var ay_ = context.Operators.ElementInInterval<CqlDate>(ao_, ax_, "day");
@@ -1345,7 +1344,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			bool? l_(CqlDate InitialHipAssessment)
 			{
 				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
+				var q_ = context.Operators.Quantity((decimal?)90m, "days");
 				var r_ = context.Operators.Add(InitialHipAssessment, q_);
 				var s_ = context.Operators.Interval(InitialHipAssessment, r_, true, true);
 				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
@@ -1380,10 +1379,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				var ao_ = context.Operators.DateFrom(an_);
 				var ap_ = context.Operators.End(TotalHip);
 				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
+				var ar_ = context.Operators.Quantity((decimal?)300m, "days");
 				var as_ = context.Operators.Add(aq_, ar_);
 				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
+				var av_ = context.Operators.Quantity((decimal?)425m, "days");
 				var aw_ = context.Operators.Add(au_, av_);
 				var ax_ = context.Operators.Interval(as_, aw_, true, true);
 				var ay_ = context.Operators.ElementInInterval<CqlDate>(ao_, ax_, "day");
@@ -1493,7 +1492,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			bool? l_(CqlDate InitialHipAssessmentPROMIS10)
 			{
 				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
+				var q_ = context.Operators.Quantity((decimal?)90m, "days");
 				var r_ = context.Operators.Add(InitialHipAssessmentPROMIS10, q_);
 				var s_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, r_, true, true);
 				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
@@ -1528,10 +1527,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				var ao_ = context.Operators.DateFrom(an_);
 				var ap_ = context.Operators.End(TotalHip);
 				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
+				var ar_ = context.Operators.Quantity((decimal?)300m, "days");
 				var as_ = context.Operators.Add(aq_, ar_);
 				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
+				var av_ = context.Operators.Quantity((decimal?)425m, "days");
 				var aw_ = context.Operators.Add(au_, av_);
 				var ax_ = context.Operators.Interval(as_, aw_, true, true);
 				var ay_ = context.Operators.ElementInInterval<CqlDate>(ao_, ax_, "day");
@@ -1641,7 +1640,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			bool? l_(CqlDate InitialHipAssessmentOblique)
 			{
 				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
+				var q_ = context.Operators.Quantity((decimal?)90m, "days");
 				var r_ = context.Operators.Add(InitialHipAssessmentOblique, q_);
 				var s_ = context.Operators.Interval(InitialHipAssessmentOblique, r_, true, true);
 				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
@@ -1676,10 +1675,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				var ao_ = context.Operators.DateFrom(an_);
 				var ap_ = context.Operators.End(TotalHip);
 				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
+				var ar_ = context.Operators.Quantity((decimal?)300m, "days");
 				var as_ = context.Operators.Add(aq_, ar_);
 				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
+				var av_ = context.Operators.Quantity((decimal?)425m, "days");
 				var aw_ = context.Operators.Add(au_, av_);
 				var ax_ = context.Operators.Interval(as_, aw_, true, true);
 				var ay_ = context.Operators.ElementInInterval<CqlDate>(ao_, ax_, "day");
@@ -1789,7 +1788,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			bool? l_(CqlDate InitialHipAssessmentOrthogonal)
 			{
 				var p_ = context.Operators.Start(TotalHip);
-				var q_ = context.Operators.Quantity(90m, "days");
+				var q_ = context.Operators.Quantity((decimal?)90m, "days");
 				var r_ = context.Operators.Add(InitialHipAssessmentOrthogonal, q_);
 				var s_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, r_, true, true);
 				var t_ = context.Operators.ConvertDateToDateTime(s_?.low);
@@ -1824,10 +1823,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				var ao_ = context.Operators.DateFrom(an_);
 				var ap_ = context.Operators.End(TotalHip);
 				var aq_ = context.Operators.DateFrom(ap_);
-				var ar_ = context.Operators.Quantity(300m, "days");
+				var ar_ = context.Operators.Quantity((decimal?)300m, "days");
 				var as_ = context.Operators.Add(aq_, ar_);
 				var au_ = context.Operators.DateFrom(ap_);
-				var av_ = context.Operators.Quantity(425m, "days");
+				var av_ = context.Operators.Quantity((decimal?)425m, "days");
 				var aw_ = context.Operators.Add(au_, av_);
 				var ax_ = context.Operators.Interval(as_, aw_, true, true);
 				var ay_ = context.Operators.ElementInInterval<CqlDate>(ao_, ax_, "day");

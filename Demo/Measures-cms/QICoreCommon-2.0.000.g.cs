@@ -1346,7 +1346,7 @@ public class QICoreCommon_2_0_000
 				var e_ = context.Operators.Add(d_, (choice as CqlQuantity));
 				var g_ = context.Operators.ConvertStringToDate(c_?.BirthDateElement?.Value);
 				var h_ = context.Operators.Add(g_, (choice as CqlQuantity));
-				var i_ = context.Operators.Quantity(1m, "year");
+				var i_ = context.Operators.Quantity((decimal?)1m, "year");
 				var j_ = context.Operators.Add(h_, i_);
 				var k_ = context.Operators.Interval(e_, j_, true, false);
 				var l_ = context.Operators.ConvertDateToDateTime(k_?.low);
@@ -1382,7 +1382,7 @@ public class QICoreCommon_2_0_000
 				var au_ = context.Operators.ConvertStringToDate(ap_?.BirthDateElement?.Value);
 				var av_ = context.Operators.LateBoundProperty<object>(choice, "high");
 				var aw_ = context.Operators.Add(au_, (av_ as CqlQuantity));
-				var ax_ = context.Operators.Quantity(1m, "year");
+				var ax_ = context.Operators.Quantity((decimal?)1m, "year");
 				var ay_ = context.Operators.Add(aw_, ax_);
 				var az_ = context.Operators.Interval(as_, ay_, true, false);
 				var ba_ = context.Operators.ConvertDateToDateTime(az_?.low);
@@ -1450,7 +1450,7 @@ public class QICoreCommon_2_0_000
 				var e_ = context.Operators.Add(d_, (choice as CqlQuantity));
 				var g_ = context.Operators.ConvertStringToDate(c_?.BirthDateElement?.Value);
 				var h_ = context.Operators.Add(g_, (choice as CqlQuantity));
-				var i_ = context.Operators.Quantity(1m, "year");
+				var i_ = context.Operators.Quantity((decimal?)1m, "year");
 				var j_ = context.Operators.Add(h_, i_);
 				var k_ = context.Operators.Interval(e_, j_, true, false);
 				var l_ = context.Operators.ConvertDateToDateTime(k_?.low);
@@ -1486,7 +1486,7 @@ public class QICoreCommon_2_0_000
 				var au_ = context.Operators.ConvertStringToDate(ap_?.BirthDateElement?.Value);
 				var av_ = context.Operators.LateBoundProperty<object>(choice, "high");
 				var aw_ = context.Operators.Add(au_, (av_ as CqlQuantity));
-				var ax_ = context.Operators.Quantity(1m, "year");
+				var ax_ = context.Operators.Quantity((decimal?)1m, "year");
 				var ay_ = context.Operators.Add(aw_, ax_);
 				var az_ = context.Operators.Interval(as_, ay_, true, false);
 				var ba_ = context.Operators.ConvertDateToDateTime(az_?.low);
@@ -1581,7 +1581,7 @@ public class QICoreCommon_2_0_000
 				var t_ = context.Operators.Add(r_, (s_ as CqlQuantity));
 				var v_ = context.Operators.ConvertStringToDate(q_?.BirthDateElement?.Value);
 				var x_ = context.Operators.Add(v_, (s_ as CqlQuantity));
-				var y_ = context.Operators.Quantity(1m, "year");
+				var y_ = context.Operators.Quantity((decimal?)1m, "year");
 				var z_ = context.Operators.Add(x_, y_);
 				var aa_ = context.Operators.Interval(t_, z_, true, false);
 				var ab_ = context.Operators.ConvertDateToDateTime(aa_?.low);
@@ -1618,7 +1618,7 @@ public class QICoreCommon_2_0_000
 				var br_ = context.Operators.ConvertStringToDate(bl_?.BirthDateElement?.Value);
 				var bt_ = context.Operators.LateBoundProperty<object>(bn_, "high");
 				var bu_ = context.Operators.Add(br_, (bt_ as CqlQuantity));
-				var bv_ = context.Operators.Quantity(1m, "year");
+				var bv_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bw_ = context.Operators.Add(bu_, bv_);
 				var bx_ = context.Operators.Interval(bp_, bw_, true, false);
 				var by_ = context.Operators.ConvertDateToDateTime(bx_?.low);
@@ -1721,7 +1721,7 @@ public class QICoreCommon_2_0_000
 				var t_ = context.Operators.Add(r_, (s_ as CqlQuantity));
 				var v_ = context.Operators.ConvertStringToDate(q_?.BirthDateElement?.Value);
 				var x_ = context.Operators.Add(v_, (s_ as CqlQuantity));
-				var y_ = context.Operators.Quantity(1m, "year");
+				var y_ = context.Operators.Quantity((decimal?)1m, "year");
 				var z_ = context.Operators.Add(x_, y_);
 				var aa_ = context.Operators.Interval(t_, z_, true, false);
 				var ab_ = context.Operators.ConvertDateToDateTime(aa_?.low);
@@ -1758,7 +1758,7 @@ public class QICoreCommon_2_0_000
 				var br_ = context.Operators.ConvertStringToDate(bl_?.BirthDateElement?.Value);
 				var bt_ = context.Operators.LateBoundProperty<object>(bn_, "high");
 				var bu_ = context.Operators.Add(br_, (bt_ as CqlQuantity));
-				var bv_ = context.Operators.Quantity(1m, "year");
+				var bv_ = context.Operators.Quantity((decimal?)1m, "year");
 				var bw_ = context.Operators.Add(bu_, bv_);
 				var bx_ = context.Operators.Interval(bp_, bw_, true, false);
 				var by_ = context.Operators.ConvertDateToDateTime(bx_?.low);
@@ -2247,7 +2247,7 @@ public class QICoreCommon_2_0_000
 		Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
 		{
 			var d_ = context.Operators.Start(Period);
-			var e_ = context.Operators.Quantity(24m, "hours");
+			var e_ = context.Operators.Quantity((decimal?)24m, "hours");
 			var f_ = context.Operators.Subtract(DayIndex, (int?)1);
 			var g_ = context.Operators.ConvertIntegerToQuantity(f_);
 			var h_ = context.Operators.Multiply(e_, g_);
@@ -2257,7 +2257,7 @@ public class QICoreCommon_2_0_000
 				bool m_()
 				{
 					var n_ = context.Operators.Start(Period);
-					var o_ = context.Operators.Quantity(24m, "hours");
+					var o_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var p_ = context.Operators.Subtract(DayIndex, (int?)1);
 					var q_ = context.Operators.ConvertIntegerToQuantity(p_);
 					var r_ = context.Operators.Multiply(o_, q_);
@@ -2271,7 +2271,7 @@ public class QICoreCommon_2_0_000
 				if (m_())
 				{
 					var w_ = context.Operators.Start(Period);
-					var x_ = context.Operators.Quantity(24m, "hours");
+					var x_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var y_ = context.Operators.Subtract(DayIndex, (int?)1);
 					var z_ = context.Operators.ConvertIntegerToQuantity(y_);
 					var aa_ = context.Operators.Multiply(x_, z_);
@@ -2282,7 +2282,7 @@ public class QICoreCommon_2_0_000
 				else
 				{
 					var ac_ = context.Operators.Start(Period);
-					var ad_ = context.Operators.Quantity(24m, "hours");
+					var ad_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
 					var af_ = context.Operators.Multiply(ad_, ae_);
 					var ag_ = context.Operators.Add(ac_, af_);
@@ -2312,7 +2312,7 @@ public class QICoreCommon_2_0_000
 		Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
 		{
 			var d_ = context.Operators.Start(Period);
-			var e_ = context.Operators.Quantity(24m, "hours");
+			var e_ = context.Operators.Quantity((decimal?)24m, "hours");
 			var f_ = context.Operators.Subtract(DayIndex, (int?)1);
 			var g_ = context.Operators.ConvertIntegerToQuantity(f_);
 			var h_ = context.Operators.Multiply(e_, g_);
@@ -2322,7 +2322,7 @@ public class QICoreCommon_2_0_000
 				bool m_()
 				{
 					var n_ = context.Operators.Start(Period);
-					var o_ = context.Operators.Quantity(24m, "hours");
+					var o_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var p_ = context.Operators.Subtract(DayIndex, (int?)1);
 					var q_ = context.Operators.ConvertIntegerToQuantity(p_);
 					var r_ = context.Operators.Multiply(o_, q_);
@@ -2336,7 +2336,7 @@ public class QICoreCommon_2_0_000
 				if (m_())
 				{
 					var w_ = context.Operators.Start(Period);
-					var x_ = context.Operators.Quantity(24m, "hours");
+					var x_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var y_ = context.Operators.Subtract(DayIndex, (int?)1);
 					var z_ = context.Operators.ConvertIntegerToQuantity(y_);
 					var aa_ = context.Operators.Multiply(x_, z_);
@@ -2347,7 +2347,7 @@ public class QICoreCommon_2_0_000
 				else
 				{
 					var ac_ = context.Operators.Start(Period);
-					var ad_ = context.Operators.Quantity(24m, "hours");
+					var ad_ = context.Operators.Quantity((decimal?)24m, "hours");
 					var ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
 					var af_ = context.Operators.Multiply(ad_, ae_);
 					var ag_ = context.Operators.Add(ac_, af_);

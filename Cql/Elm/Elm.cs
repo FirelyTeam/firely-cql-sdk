@@ -192,3 +192,56 @@ partial class ValueSetDef: IGetName { }
 partial class ValueSetRef: IGetName { }
 
 #endregion
+
+#region GetDateTimePrecision
+
+/// <summary>
+/// Interface for getting the date tiem precision of an object.
+/// </summary>
+internal interface IGetDateTimePrecision
+{
+    /// <summary>
+    /// Gets the date time precision. Be sure to check <see cref="precisionSpecified"/> before using this property.
+    /// </summary>
+    DateTimePrecision precision { get; }
+
+    /// <summary>
+    /// Gets whether the date time precision is specified.
+    /// </summary>
+    bool precisionSpecified { get; }
+}
+
+internal static class IGetDateTimePrecisionExtensions
+{
+    public static DateTimePrecision? precisionOrNull(this IGetDateTimePrecision elementWithDateTimePrecision) =>
+        elementWithDateTimePrecision.precisionSpecified ? elementWithDateTimePrecision.precision : null;
+}
+
+partial class CalculateAgeAt : IGetDateTimePrecision {}
+partial class Ends : IGetDateTimePrecision {}
+partial class Starts : IGetDateTimePrecision {}
+partial class OverlapsAfter : IGetDateTimePrecision {}
+partial class OverlapsBefore : IGetDateTimePrecision {}
+partial class Overlaps : IGetDateTimePrecision {}
+partial class MeetsAfter : IGetDateTimePrecision {}
+partial class MeetsBefore : IGetDateTimePrecision {}
+partial class Meets : IGetDateTimePrecision {}
+partial class After : IGetDateTimePrecision {}
+partial class Before : IGetDateTimePrecision {}
+partial class ProperIncludedIn : IGetDateTimePrecision {}
+partial class ProperIncludes : IGetDateTimePrecision {}
+partial class IncludedIn : IGetDateTimePrecision {}
+partial class Includes : IGetDateTimePrecision { }
+partial class ProperIn : IGetDateTimePrecision { }
+partial class In : IGetDateTimePrecision { }
+partial class ProperContains : IGetDateTimePrecision { }
+partial class Contains : IGetDateTimePrecision { }
+partial class SameOrAfter : IGetDateTimePrecision { }
+partial class SameOrBefore : IGetDateTimePrecision { }
+partial class SameAs : IGetDateTimePrecision { }
+partial class DifferenceBetween : IGetDateTimePrecision { }
+partial class DurationBetween : IGetDateTimePrecision { }
+partial class CalculateAge : IGetDateTimePrecision { }
+partial class DateTimeComponentFrom : IGetDateTimePrecision { }
+
+#endregion

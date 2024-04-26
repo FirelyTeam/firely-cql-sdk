@@ -213,13 +213,12 @@ public class TJCOverallFHIR_1_8_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("TJCOverallFHIR-1.8.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("TJCOverallFHIR-1.8.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -479,7 +478,7 @@ public class TJCOverallFHIR_1_8_000
 	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
 	{
 		var a_ = context.Operators.DateFrom(StartValue);
-		var b_ = context.Operators.Quantity(1m, "day");
+		var b_ = context.Operators.Quantity((decimal?)1m, "day");
 		var c_ = context.Operators.Add(StartValue, b_);
 		var d_ = context.Operators.DateFrom(c_);
 		var e_ = context.Operators.Interval(a_, d_, true, true);

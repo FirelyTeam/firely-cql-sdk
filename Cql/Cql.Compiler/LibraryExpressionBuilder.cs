@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
@@ -12,23 +11,26 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 partial class LibraryExpressionBuilder
 {
+    private readonly ExpressionBuildingDependencies _dependencies;
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
+
+    public Library Library { get; }
+
+    public string LibraryKey => Library.NameAndVersion()!;
+
+    public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
+
     public LibraryExpressionBuilder(
-        ILoggerFactory loggerFactory,
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        TypeConverter typeConverter,
+        ExpressionBuildingDependencies dependencies,
         Library library,
-        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
         DefinitionDictionary<LambdaExpression> libraryDefinitions,
         LibrarySetExpressionBuilder? libsCtx = null)
     {
         // External Services
-        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
-        _operatorBinding = operatorBinding;
-        _typeManager = typeManager;
-        _loggerFactory = loggerFactory;
-        _typeConverter = typeConverter;
-        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
+        _dependencies = dependencies;
+        _libraryDefinitionBuilderSettings = dependencies.LibraryDefinitionBuilderSettings;
+        _logger = dependencies.LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
 
         // External State
         LibraryDefinitions = libraryDefinitions;
@@ -111,4 +113,5 @@ partial class LibraryExpressionBuilder
             return LibraryDefinitions;
         });
 
+    private ExpressionBuilder CreateExpressionBuilder() => new(_dependencies, this);
 }

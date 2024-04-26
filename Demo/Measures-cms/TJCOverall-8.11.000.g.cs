@@ -426,7 +426,7 @@ public class TJCOverall_8_11_000
 	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
 	{
 		var a_ = context.Operators.DateFrom(StartValue);
-		var c_ = context.Operators.Quantity(1m, "day");
+		var c_ = context.Operators.Quantity((decimal?)1m, "day");
 		var d_ = context.Operators.Add(a_, c_);
 		var e_ = context.Operators.Interval(a_, d_, true, true);
 

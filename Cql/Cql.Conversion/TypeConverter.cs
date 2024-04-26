@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -29,7 +29,7 @@ namespace Hl7.Cql.Conversion
         /// </summary>
         object? Convert(object? instance, Type to);
     }
-    
+
     /// <summary>
     /// Converts CQL model types to .NET types, and vice versa.
     /// </summary>
@@ -37,7 +37,7 @@ namespace Hl7.Cql.Conversion
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters
             = new();
-        
+
         private readonly List<ITypeConverterEntry> _customConverters = [];
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Hl7.Cql.Conversion
         internal TypeConverter()
         {
         }
-        
+
         /// <summary>
         /// Creates a default instance that provides some default conversions.
         /// </summary>
@@ -55,7 +55,7 @@ namespace Hl7.Cql.Conversion
             new TypeConverter()
                 .ConvertNetTypes()
                 .ConvertsIsoToCqlPrimitives();
-        
+
         /// <summary>
         /// Returns <see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -72,7 +72,7 @@ namespace Hl7.Cql.Conversion
             else
                 return false;
         }
-        
+
         /// <summary>
         /// Performs the conversion of <paramref name="from"/> to <typeparamref name="T"/>.
         /// </summary>
@@ -95,7 +95,7 @@ namespace Hl7.Cql.Conversion
         {
             if (from is null) return null;
             var fromType = from.GetType();
-            
+
             if(_customConverters.SingleOrDefault(converter => converter.Handles(fromType, to)) is {} subConverter)
                 return subConverter.Convert(from, to);
             else if (_converters.TryGetValue(fromType, out var toDictionary) &&
@@ -104,7 +104,7 @@ namespace Hl7.Cql.Conversion
             else
                     throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
         }
-        
+
         /// <summary>
         /// Adds a new function for converting <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -121,10 +121,10 @@ namespace Hl7.Cql.Conversion
             }
             if (toDictionary.TryGetValue(to, out _))
                 throw new ArgumentException($"Conversion from {from} to {to} is already defined.");
-            else 
+            else
                 toDictionary.Add(to, conversion);
         }
-        
+
         /// <summary>
         /// Adds a new converter function.
         /// </summary>
@@ -150,7 +150,7 @@ namespace Hl7.Cql.Conversion
             else toDictionary.Add(typeof(TTo), x => conversion((TFrom)x)!);
         }
 
-       
+
         /// <summary>
         /// Provides utility for converting common .NET types that don't have implicit conversions defined, e.g. <see cref="string"/> and <see cref="Uri"/>.
         /// </summary>

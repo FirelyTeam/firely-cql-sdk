@@ -455,13 +455,12 @@ public class Exam130FHIR_0_0_003
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -554,13 +553,14 @@ public class Exam130FHIR_0_0_003
 	private int? Age_at_start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
 
-		return f_;
+		return g_;
 	}
 
     [CqlDeclaration("Age at start of Measurement Period")]
@@ -570,20 +570,21 @@ public class Exam130FHIR_0_0_003
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)51, (int?)75, true, false);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var j_ = this.Telehealth_Services();
-		var k_ = context.Operators.ListUnion<Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
-		var m_ = context.Operators.And(h_, l_);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)51, (int?)75, true, false);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
+		var j_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var k_ = this.Telehealth_Services();
+		var l_ = context.Operators.ListUnion<Encounter>(j_, k_);
+		var m_ = context.Operators.ExistsInList<Encounter>(l_);
+		var n_ = context.Operators.And(i_, m_);
 
-		return m_;
+		return n_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -688,19 +689,20 @@ public class Exam130FHIR_0_0_003
 		var k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var l_ = context.Operators.Or(j_, k_);
 		var m_ = this.Patient();
-		var n_ = context.Operators.Convert<CqlDate>(m_?.BirthDateElement?.Value);
+		var n_ = context.Operators.Convert<CqlDateTime>(m_?.BirthDateElement?.Value);
 		var o_ = this.Measurement_Period();
 		var p_ = context.Operators.Start(o_);
 		var q_ = context.Operators.DateFrom(p_);
-		var r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
-		var s_ = context.Operators.GreaterOrEqual(r_, (int?)65);
-		var t_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
-		var u_ = context.Operators.And(s_, t_);
-		var v_ = context.Operators.Or(l_, u_);
-		var w_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
-		var x_ = context.Operators.Or(v_, w_);
+		var r_ = context.Operators.Convert<CqlDateTime>(q_);
+		var s_ = context.Operators.CalculateAgeAt(n_, r_, "year");
+		var t_ = context.Operators.GreaterOrEqual(s_, (int?)65);
+		var u_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
+		var v_ = context.Operators.And(t_, u_);
+		var w_ = context.Operators.Or(l_, v_);
+		var x_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+		var y_ = context.Operators.Or(w_, x_);
 
-		return x_;
+		return y_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -716,7 +718,7 @@ public class Exam130FHIR_0_0_003
 			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity(1m, "year");
+			var j_ = context.Operators.Quantity((decimal?)1m, "year");
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, false, false);
@@ -1018,7 +1020,7 @@ public class Exam130FHIR_0_0_003
 			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.End(h_);
-			var j_ = context.Operators.Quantity(4m, "years");
+			var j_ = context.Operators.Quantity((decimal?)4m, "years");
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, true, true);
@@ -1146,7 +1148,7 @@ public class Exam130FHIR_0_0_003
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var o_ = this.Measurement_Period();
 			var p_ = context.Operators.End(o_);
-			var q_ = context.Operators.Quantity(3m, "years");
+			var q_ = context.Operators.Quantity((decimal?)3m, "years");
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, true, true);
@@ -1219,7 +1221,7 @@ public class Exam130FHIR_0_0_003
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var o_ = this.Measurement_Period();
 			var p_ = context.Operators.End(o_);
-			var q_ = context.Operators.Quantity(3m, "years");
+			var q_ = context.Operators.Quantity((decimal?)3m, "years");
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, true, true);
@@ -1284,7 +1286,7 @@ public class Exam130FHIR_0_0_003
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity(3m, "years");
+			var m_ = context.Operators.Quantity((decimal?)3m, "years");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
@@ -1325,7 +1327,7 @@ public class Exam130FHIR_0_0_003
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = context.Operators.Quantity(3m, "years");
+			var n_ = context.Operators.Quantity((decimal?)3m, "years");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
@@ -1356,7 +1358,7 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity(6m, "years");
+			var k_ = context.Operators.Quantity((decimal?)6m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -1402,7 +1404,7 @@ public class Exam130FHIR_0_0_003
 			var i_ = context.Operators.End(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.End(j_);
-			var l_ = context.Operators.Quantity(5m, "years");
+			var l_ = context.Operators.Quantity((decimal?)5m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
@@ -1443,7 +1445,7 @@ public class Exam130FHIR_0_0_003
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity(5m, "years");
+			var m_ = context.Operators.Quantity((decimal?)5m, "years");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
@@ -1474,7 +1476,7 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity(6m, "years");
+			var k_ = context.Operators.Quantity((decimal?)6m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -1513,7 +1515,7 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity(5m, "years");
+			var k_ = context.Operators.Quantity((decimal?)5m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -1547,7 +1549,7 @@ public class Exam130FHIR_0_0_003
 			var i_ = context.Operators.End(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.End(j_);
-			var l_ = context.Operators.Quantity(5m, "years");
+			var l_ = context.Operators.Quantity((decimal?)5m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
@@ -1578,7 +1580,7 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity(11m, "years");
+			var k_ = context.Operators.Quantity((decimal?)11m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -1617,7 +1619,7 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity(10m, "years");
+			var k_ = context.Operators.Quantity((decimal?)10m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
@@ -1651,7 +1653,7 @@ public class Exam130FHIR_0_0_003
 			var i_ = context.Operators.End(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.End(j_);
-			var l_ = context.Operators.Quantity(10m, "years");
+			var l_ = context.Operators.Quantity((decimal?)10m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);

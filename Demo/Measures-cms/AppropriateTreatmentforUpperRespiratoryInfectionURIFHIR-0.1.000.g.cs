@@ -295,13 +295,12 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -444,7 +443,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var bl_ = this.Measurement_Period();
 			var bm_ = context.Operators.Start(bl_);
 			var bo_ = context.Operators.End(bl_);
-			var bp_ = context.Operators.Quantity(3m, "days");
+			var bp_ = context.Operators.Quantity((decimal?)3m, "days");
 			var bq_ = context.Operators.Subtract(bo_, bp_);
 			var br_ = context.Operators.Interval(bm_, bq_, true, true);
 			var bs_ = context.Operators.ElementInInterval<CqlDateTime>(bk_, br_, "day");
@@ -601,7 +600,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 				var t_ = context.Operators.Start(s_);
 				var v_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Quantity(3m, "days");
+				var x_ = context.Operators.Quantity((decimal?)3m, "days");
 				var y_ = context.Operators.Add(w_, x_);
 				var z_ = context.Operators.Interval(t_, y_, true, true);
 				var aa_ = context.Operators.ElementInInterval<CqlDateTime>(q_, z_, null);

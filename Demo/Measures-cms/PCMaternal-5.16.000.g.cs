@@ -135,13 +135,12 @@ public class PCMaternal_5_16_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("PCMaternal-5.16.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("PCMaternal-5.16.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -208,7 +207,7 @@ public class PCMaternal_5_16_000
 					var bu_ = context.Operators.End(bt_);
 					var bv_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var bw_ = context.Operators.Start(bv_);
-					var bx_ = context.Operators.Quantity(1m, "hour");
+					var bx_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var by_ = context.Operators.Subtract(bw_, bx_);
 					var ca_ = context.Operators.Start(bv_);
 					var cb_ = context.Operators.Interval(by_, ca_, true, true);
@@ -236,7 +235,7 @@ public class PCMaternal_5_16_000
 				var al_ = context.Operators.Start(ak_);
 				var am_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var an_ = context.Operators.Start(am_);
-				var ao_ = context.Operators.Quantity(1m, "hour");
+				var ao_ = context.Operators.Quantity((decimal?)1m, "hour");
 				var ap_ = context.Operators.Subtract((al_ ?? an_), ao_);
 				var ar_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? as_(Encounter LastObs)
@@ -245,7 +244,7 @@ public class PCMaternal_5_16_000
 					var cn_ = context.Operators.End(cm_);
 					var co_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var cp_ = context.Operators.Start(co_);
-					var cq_ = context.Operators.Quantity(1m, "hour");
+					var cq_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var cr_ = context.Operators.Subtract(cp_, cq_);
 					var ct_ = context.Operators.Start(co_);
 					var cu_ = context.Operators.Interval(cr_, ct_, true, true);
@@ -281,7 +280,7 @@ public class PCMaternal_5_16_000
 					var dg_ = context.Operators.End(df_);
 					var dh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var di_ = context.Operators.Start(dh_);
-					var dj_ = context.Operators.Quantity(1m, "hour");
+					var dj_ = context.Operators.Quantity((decimal?)1m, "hour");
 					var dk_ = context.Operators.Subtract(di_, dj_);
 					var dm_ = context.Operators.Start(dh_);
 					var dn_ = context.Operators.Interval(dk_, dm_, true, true);
@@ -336,7 +335,7 @@ public class PCMaternal_5_16_000
 				var eb_ = context.Operators.End(ea_);
 				var ec_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var ed_ = context.Operators.Start(ec_);
-				var ee_ = context.Operators.Quantity(1m, "hour");
+				var ee_ = context.Operators.Quantity((decimal?)1m, "hour");
 				var ef_ = context.Operators.Subtract(ed_, ee_);
 				var eh_ = context.Operators.Start(ec_);
 				var ei_ = context.Operators.Interval(ef_, eh_, true, true);
@@ -384,15 +383,16 @@ public class PCMaternal_5_16_000
 			var e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, null);
 			bool? f_(Procedure DeliveryProcedure)
 			{
-				var j_ = context.Operators.EnumEqualsString(DeliveryProcedure?.StatusElement?.Value, "completed");
-				var k_ = FHIRHelpers_4_3_000.ToValue(DeliveryProcedure?.Performed);
-				var l_ = QICoreCommon_2_0_000.toInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
-				var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, null);
-				var p_ = context.Operators.And(j_, o_);
+				var j_ = context.Operators.Convert<string>(DeliveryProcedure?.StatusElement?.Value);
+				var k_ = context.Operators.Equal(j_, "completed");
+				var l_ = FHIRHelpers_4_3_000.ToValue(DeliveryProcedure?.Performed);
+				var m_ = QICoreCommon_2_0_000.toInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
+				var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+				var q_ = context.Operators.And(k_, p_);
 
-				return p_;
+				return q_;
 			};
 			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
 			Encounter h_(Procedure DeliveryProcedure) => 
@@ -613,7 +613,7 @@ public class PCMaternal_5_16_000
 			};
 			var r_ = QICoreCommon_2_0_000.earliest(q_());
 			var s_ = this.lastTimeOfDelivery(TheEncounter);
-			var t_ = context.Operators.Quantity(42m, "weeks");
+			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
 			var w_ = context.Operators.Interval(u_, s_, true, true);
 			var x_ = context.Operators.ElementInInterval<CqlDateTime>(r_, w_, null);
@@ -773,7 +773,7 @@ public class PCMaternal_5_16_000
 			};
 			var j_ = QICoreCommon_2_0_000.earliest(i_());
 			var k_ = this.lastTimeOfDelivery(TheEncounter);
-			var l_ = context.Operators.Quantity(24m, "hours");
+			var l_ = context.Operators.Quantity((decimal?)24m, "hours");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.Interval(m_, k_, true, true);
 			var p_ = context.Operators.ElementInInterval<CqlDateTime>(j_, o_, null);

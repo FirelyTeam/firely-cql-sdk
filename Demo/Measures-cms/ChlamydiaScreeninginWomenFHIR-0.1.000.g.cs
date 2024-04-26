@@ -377,13 +377,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("ChlamydiaScreeninginWomenFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("ChlamydiaScreeninginWomenFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -738,27 +737,28 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.Interval((int?)16, (int?)24, true, true);
 		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Qualifying_Encounters();
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
-		var n_ = context.Operators.And(k_, m_);
-		var o_ = this.Has_Assessments_Identifying_Sexual_Activity();
-		var p_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
-		var q_ = context.Operators.Or(o_, p_);
-		var r_ = this.Has_Active_Contraceptive_Medications();
-		var s_ = context.Operators.Or(q_, r_);
-		var t_ = this.Has_Ordered_Contraceptive_Medications();
-		var u_ = context.Operators.Or(s_, t_);
-		var v_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
-		var w_ = context.Operators.Or(u_, v_);
-		var x_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
-		var y_ = context.Operators.Or(w_, x_);
-		var z_ = this.Has_Procedures_Identifying_Sexual_Activity();
-		var aa_ = context.Operators.Or(y_, z_);
-		var ab_ = context.Operators.And(n_, aa_);
+		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		var k_ = context.Operators.Equal(j_, "female");
+		var l_ = context.Operators.And(h_, k_);
+		var m_ = this.Qualifying_Encounters();
+		var n_ = context.Operators.ExistsInList<Encounter>(m_);
+		var o_ = context.Operators.And(l_, n_);
+		var p_ = this.Has_Assessments_Identifying_Sexual_Activity();
+		var q_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
+		var r_ = context.Operators.Or(p_, q_);
+		var s_ = this.Has_Active_Contraceptive_Medications();
+		var t_ = context.Operators.Or(r_, s_);
+		var u_ = this.Has_Ordered_Contraceptive_Medications();
+		var v_ = context.Operators.Or(t_, u_);
+		var w_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
+		var x_ = context.Operators.Or(v_, w_);
+		var y_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
+		var z_ = context.Operators.Or(x_, y_);
+		var aa_ = this.Has_Procedures_Identifying_Sexual_Activity();
+		var ab_ = context.Operators.Or(z_, aa_);
+		var ac_ = context.Operators.And(o_, ab_);
 
-		return ab_;
+		return ac_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -796,7 +796,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var y_ = context.Operators.End(x_);
 				var aa_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 				var ab_ = context.Operators.End(aa_);
-				var ac_ = context.Operators.Quantity(6m, "days");
+				var ac_ = context.Operators.Quantity((decimal?)6m, "days");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(y_, ad_, true, true);
 				var af_ = context.Operators.ElementInInterval<CqlDateTime>(v_, ae_, "day");
@@ -838,7 +838,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var bf_ = context.Operators.End(be_);
 				var bh_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
 				var bi_ = context.Operators.End(bh_);
-				var bj_ = context.Operators.Quantity(6m, "days");
+				var bj_ = context.Operators.Quantity((decimal?)6m, "days");
 				var bk_ = context.Operators.Add(bi_, bj_);
 				var bl_ = context.Operators.Interval(bf_, bk_, true, true);
 				var bm_ = context.Operators.ElementInInterval<CqlDateTime>(bc_, bl_, "day");

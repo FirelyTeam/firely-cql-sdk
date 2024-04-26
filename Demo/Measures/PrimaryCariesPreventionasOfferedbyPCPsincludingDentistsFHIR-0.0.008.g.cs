@@ -298,23 +298,25 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "month");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
-		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var k_ = context.Operators.Start(c_);
-		var l_ = context.Operators.DateFrom(k_);
-		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.Less(m_, (int?)20);
-		var o_ = context.Operators.And(g_, n_);
-		var p_ = this.Qualifying_Encounters();
-		var q_ = context.Operators.ExistsInList<Encounter>(p_);
-		var r_ = context.Operators.And(o_, q_);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "month");
+		var h_ = context.Operators.GreaterOrEqual(g_, (int?)6);
+		var j_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
+		var l_ = context.Operators.Start(c_);
+		var m_ = context.Operators.DateFrom(l_);
+		var n_ = context.Operators.Convert<CqlDateTime>(m_);
+		var o_ = context.Operators.CalculateAgeAt(j_, n_, "year");
+		var p_ = context.Operators.Less(o_, (int?)20);
+		var q_ = context.Operators.And(h_, p_);
+		var r_ = this.Qualifying_Encounters();
+		var s_ = context.Operators.ExistsInList<Encounter>(r_);
+		var t_ = context.Operators.And(q_, s_);
 
-		return r_;
+		return t_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -346,20 +348,22 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Stratification_1_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "month");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
-		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var k_ = context.Operators.Start(c_);
-		var l_ = context.Operators.DateFrom(k_);
-		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, (int?)4);
-		var o_ = context.Operators.And(g_, n_);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "month");
+		var h_ = context.Operators.GreaterOrEqual(g_, (int?)6);
+		var j_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
+		var l_ = context.Operators.Start(c_);
+		var m_ = context.Operators.DateFrom(l_);
+		var n_ = context.Operators.Convert<CqlDateTime>(m_);
+		var o_ = context.Operators.CalculateAgeAt(j_, n_, "year");
+		var p_ = context.Operators.LessOrEqual(o_, (int?)4);
+		var q_ = context.Operators.And(h_, p_);
 
-		return o_;
+		return q_;
 	}
 
     [CqlDeclaration("Stratification 1")]
@@ -369,15 +373,16 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Stratification_2_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)5, (int?)11, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)5, (int?)11, true, true);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
 
-		return h_;
+		return i_;
 	}
 
     [CqlDeclaration("Stratification 2")]
@@ -387,15 +392,16 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Stratification_3_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.Convert<CqlDateTime>(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)12, (int?)20, true, false);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var f_ = context.Operators.Convert<CqlDateTime>(e_);
+		var g_ = context.Operators.CalculateAgeAt(b_, f_, "year");
+		var h_ = context.Operators.Interval((int?)12, (int?)20, true, false);
+		var i_ = context.Operators.ElementInInterval<int?>(g_, h_, null);
 
-		return h_;
+		return i_;
 	}
 
     [CqlDeclaration("Stratification 3")]

@@ -121,13 +121,17 @@ namespace Hl7.Cql.Runtime
             type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
         /// <inheritdoc/>
-        public override Type? ResolveType(string typeSpecifier)
+        public override Type? ResolveType(string typeSpecifier, bool throwError = true)
         {
             var correctedTypeSpecifier = CorrectQiCoreExtensionTypes(typeSpecifier);
 
             if (Types.TryGetValue(correctedTypeSpecifier, out var type))
                 return type;
-            else throw new ArgumentException($"Type {correctedTypeSpecifier} is not bound", nameof(typeSpecifier));
+
+            if (throwError)
+                throw new ArgumentException($"Type {correctedTypeSpecifier} is not bound", nameof(typeSpecifier));
+
+            return null;
         }
 
         private static string CorrectQiCoreExtensionTypes(string typeSpecifier) =>
@@ -137,19 +141,6 @@ namespace Hl7.Cql.Runtime
                 "{http://hl7.org/fhir}EncounterProcedureExtension" => "{http://hl7.org/fhir}Extension",
                 _ => typeSpecifier
             };
-
-        /// <inheritdoc/>
-        public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
-        {
-            if (type == typeof(string))
-                return false;
-
-            return (type.IsGenericType && type.GetGenericTypeDefinition() == genericInterfaceTypeDefinition)
-                || type.GetInterfaces()
-                    .Where(ifc => ifc.IsGenericType)
-                    .Select(ifc => ifc.GetGenericTypeDefinition())
-                    .Any(ifc => ifc == genericInterfaceTypeDefinition);
-        }
 
         /// <inheritdoc/>
         public override Type? GetListElementType(Type type, bool throwError = false)

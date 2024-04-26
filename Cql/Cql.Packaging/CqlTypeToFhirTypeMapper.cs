@@ -11,6 +11,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Packaging
 {
@@ -328,7 +329,7 @@ namespace Hl7.Cql.Packaging
                 _ => element.resultTypeName != null ? TypeEntryFor(element.resultTypeName.Name) : TypeEntryFor(element.resultTypeSpecifier)
             };
         }
-        private bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
+        private bool IsOrImplementsIEnumerableOfT(Type type) => type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>));
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)
         {

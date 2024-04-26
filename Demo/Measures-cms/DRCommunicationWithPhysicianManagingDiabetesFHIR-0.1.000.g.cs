@@ -300,13 +300,12 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -713,11 +712,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((LevelOfSeverityNotCommunicated is DomainResource)
 						? ((LevelOfSeverityNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
+				object s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<DataType>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>(u_);
+				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
+				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
 
@@ -772,11 +771,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((MacularEdemaAbsentNotCommunicated is DomainResource)
 						? ((MacularEdemaAbsentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
+				object s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<DataType>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>(u_);
+				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
+				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
 
@@ -831,11 +830,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				var r_ = context.Operators.WhereOrNull<Extension>(((MacularEdemaPresentNotCommunicated is DomainResource)
 						? ((MacularEdemaPresentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
+				object s_(Extension @this) => 
 					@this?.Value;
-				var t_ = context.Operators.SelectOrNull<Extension, DataType>(r_, s_);
-				var u_ = context.Operators.SingleOrNull<DataType>(t_);
-				var v_ = context.Operators.Convert<CqlDateTime>(u_);
+				var t_ = context.Operators.SelectOrNull<Extension, object>(r_, s_);
+				var u_ = context.Operators.SingleOrNull<object>(t_);
+				var v_ = context.Operators.Convert<CqlDateTime>((u_ as FhirDateTime));
 				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
 				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, null);
 

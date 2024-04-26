@@ -341,13 +341,12 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("AppropriateTestingforPharyngitisFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("AppropriateTestingforPharyngitisFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -542,7 +541,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 				var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 				var p_ = context.Operators.Start(o_);
 				var q_ = context.Operators.Convert<CqlDateTime>(AntibioticOrdered?.AuthoredOnElement);
-				var r_ = context.Operators.Quantity(3m, "days");
+				var r_ = context.Operators.Quantity((decimal?)3m, "days");
 				var s_ = context.Operators.Subtract(q_, r_);
 				var u_ = context.Operators.Interval(s_, q_, true, true);
 				var v_ = context.Operators.ElementInInterval<CqlDateTime>(p_, u_, null);
@@ -747,7 +746,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var m_ = context.Operators.Start(l_);
 			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_ferjikqtqgcpbsywqkeabbeev.EncounterWithPharyngitis?.Period);
 			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity(3m, "days");
+			var p_ = context.Operators.Quantity((decimal?)3m, "days");
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
 			var u_ = context.Operators.Add(s_, p_);

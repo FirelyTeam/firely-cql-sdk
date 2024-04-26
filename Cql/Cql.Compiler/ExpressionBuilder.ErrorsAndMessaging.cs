@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler
 {
@@ -8,19 +8,19 @@ namespace Hl7.Cql.Compiler
     {
         private Expression Message(Elm.Message e)
         {
-            var source = TranslateExpression(e.source!);
-            var condition = TranslateExpression(e.condition!);
-            var code = TranslateExpression(e.code!);
-            var severity = TranslateExpression(e.severity!);
-            var message = TranslateExpression(e.message!);
-            if (source is ConstantExpression constant && constant.Value == null)
+            var source = Translate(e.source!);
+            var condition = Translate(e.condition!);
+            var code = Translate(e.code!);
+            var severity = Translate(e.severity!);
+            var message = Translate(e.message!);
+            if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
-                source = Expression.TypeAs(constant, constant.Type);
+                source = constant.ConvertExpression(constant.Type);
             }
 
-            var call = _operatorBinding.BindToMethod(CqlOperator.Message, source, code, severity, message);
-            if (condition.Type.IsNullable())
+            var call = BindCqlOperator(CqlOperator.Message, null, source, code, severity, message);
+            if (condition.Type.IsNullableValueType(out _))
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));
             }

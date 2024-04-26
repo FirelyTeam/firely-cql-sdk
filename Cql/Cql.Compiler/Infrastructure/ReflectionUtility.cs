@@ -78,11 +78,4 @@ internal static class ReflectionUtility
         (MethodOf(fnToMethodCall, expression)
             ?.GetGenericMethodDefinition())
             ?? throw new InvalidOperationException($"Expression is not a generic method: '{expression}'.");
-
-    /// <summary>
-    /// Checks if the specified type is nullable.
-    /// </summary>
-    /// <param name="type">The type to check.</param>
-    /// <returns>True if the type is nullable, false otherwise.</returns>
-    public static bool IsNullable(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 }

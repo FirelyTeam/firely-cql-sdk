@@ -184,13 +184,12 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -229,16 +228,17 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
-				var q_ = context.Operators.EnumEqualsString(AtrialAblationProcedure?.StatusElement?.Value, "completed");
-				var r_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationProcedure?.Performed);
-				var s_ = QICoreCommon_2_0_000.toInterval(r_);
-				var t_ = context.Operators.Start(s_);
-				var u_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var v_ = context.Operators.Start(u_);
-				var w_ = context.Operators.Before(t_, v_, null);
-				var x_ = context.Operators.And(q_, w_);
+				var q_ = context.Operators.Convert<string>(AtrialAblationProcedure?.StatusElement?.Value);
+				var r_ = context.Operators.Equal(q_, "completed");
+				var s_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationProcedure?.Performed);
+				var t_ = QICoreCommon_2_0_000.toInterval(s_);
+				var u_ = context.Operators.Start(t_);
+				var v_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				var w_ = context.Operators.Start(v_);
+				var x_ = context.Operators.Before(u_, w_, null);
+				var y_ = context.Operators.And(r_, x_);
 
-				return x_;
+				return y_;
 			};
 			var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
 			var p_ = context.Operators.ExistsInList<Procedure>(o_);
@@ -248,110 +248,110 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter IschemicStrokeEncounter)
 		{
-			var y_ = this.History_of_Atrial_Ablation();
-			var z_ = context.Operators.RetrieveByValueSet<Condition>(y_, null);
-			bool? aa_(Condition AtrialAblationDiagnosis)
+			var z_ = this.History_of_Atrial_Ablation();
+			var aa_ = context.Operators.RetrieveByValueSet<Condition>(z_, null);
+			bool? ab_(Condition AtrialAblationDiagnosis)
 			{
-				var ae_ = FHIRHelpers_4_3_000.ToConcept(AtrialAblationDiagnosis?.VerificationStatus);
-				var af_ = context.Operators.Not((bool?)(ae_ is null));
-				var ah_ = QICoreCommon_2_0_000.confirmed();
-				var ai_ = context.Operators.ConvertCodeToConcept(ah_);
-				var aj_ = context.Operators.Equivalent(ae_, ai_);
-				var ak_ = context.Operators.And(af_, aj_);
-				var al_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationDiagnosis?.Onset);
-				var am_ = QICoreCommon_2_0_000.toInterval(al_);
-				var an_ = context.Operators.Start(am_);
-				var ao_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var ap_ = context.Operators.Start(ao_);
-				var aq_ = context.Operators.Before(an_, ap_, null);
-				var ar_ = context.Operators.And(ak_, aq_);
+				var af_ = FHIRHelpers_4_3_000.ToConcept(AtrialAblationDiagnosis?.VerificationStatus);
+				var ag_ = context.Operators.Not((bool?)(af_ is null));
+				var ai_ = QICoreCommon_2_0_000.confirmed();
+				var aj_ = context.Operators.ConvertCodeToConcept(ai_);
+				var ak_ = context.Operators.Equivalent(af_, aj_);
+				var al_ = context.Operators.And(ag_, ak_);
+				var am_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationDiagnosis?.Onset);
+				var an_ = QICoreCommon_2_0_000.toInterval(am_);
+				var ao_ = context.Operators.Start(an_);
+				var ap_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				var aq_ = context.Operators.Start(ap_);
+				var ar_ = context.Operators.Before(ao_, aq_, null);
+				var as_ = context.Operators.And(al_, ar_);
 
-				return ar_;
+				return as_;
 			};
-			var ab_ = context.Operators.WhereOrNull<Condition>(z_, aa_);
-			Encounter ac_(Condition AtrialAblationDiagnosis) => 
+			var ac_ = context.Operators.WhereOrNull<Condition>(aa_, ab_);
+			Encounter ad_(Condition AtrialAblationDiagnosis) => 
 				IschemicStrokeEncounter;
-			var ad_ = context.Operators.SelectOrNull<Condition, Encounter>(ab_, ac_);
+			var ae_ = context.Operators.SelectOrNull<Condition, Encounter>(ac_, ad_);
 
-			return ad_;
+			return ae_;
 		};
 		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, e_);
 		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
-			var as_ = this.History_of_Atrial_Ablation();
-			var at_ = context.Operators.RetrieveByValueSet<Observation>(as_, null);
-			bool? au_(Observation AtrialAblationObservation)
+			var at_ = this.History_of_Atrial_Ablation();
+			var au_ = context.Operators.RetrieveByValueSet<Observation>(at_, null);
+			bool? av_(Observation AtrialAblationObservation)
 			{
-				var ay_ = context.Operators.Convert<Code<ObservationStatus>>(AtrialAblationObservation?.StatusElement?.Value);
-				var az_ = context.Operators.Convert<string>(ay_);
-				var ba_ = new string[]
+				var az_ = context.Operators.Convert<Code<ObservationStatus>>(AtrialAblationObservation?.StatusElement?.Value);
+				var ba_ = context.Operators.Convert<string>(az_);
+				var bb_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var bb_ = context.Operators.InList<string>(az_, (ba_ as IEnumerable<string>));
-				object bc_()
+				var bc_ = context.Operators.InList<string>(ba_, (bb_ as IEnumerable<string>));
+				object bd_()
 				{
-					bool bi_()
-					{
-						var bl_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						var bm_ = bl_ is CqlDateTime;
-
-						return bm_;
-					};
 					bool bj_()
 					{
-						var bn_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						var bo_ = bn_ is CqlInterval<CqlDateTime>;
+						var bm_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bn_ = bm_ is CqlDateTime;
 
-						return bo_;
+						return bn_;
 					};
 					bool bk_()
 					{
-						var bp_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						var bq_ = bp_ is CqlDateTime;
+						var bo_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bp_ = bo_ is CqlInterval<CqlDateTime>;
 
-						return bq_;
+						return bp_;
 					};
-					if (bi_())
+					bool bl_()
 					{
-						var br_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bq_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var br_ = bq_ is CqlDateTime;
 
-						return ((br_ as CqlDateTime) as object);
-					}
-					else if (bj_())
+						return br_;
+					};
+					if (bj_())
 					{
 						var bs_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bs_ as CqlInterval<CqlDateTime>) as object);
+						return ((bs_ as CqlDateTime) as object);
 					}
 					else if (bk_())
 					{
 						var bt_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bt_ as CqlDateTime) as object);
+						return ((bt_ as CqlInterval<CqlDateTime>) as object);
+					}
+					else if (bl_())
+					{
+						var bu_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+
+						return ((bu_ as CqlDateTime) as object);
 					}
 					else
 					{
 						return null;
 					};
 				};
-				var bd_ = QICoreCommon_2_0_000.earliest(bc_());
-				var be_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var bf_ = context.Operators.End(be_);
-				var bg_ = context.Operators.SameOrBefore(bd_, bf_, null);
-				var bh_ = context.Operators.And(bb_, bg_);
+				var be_ = QICoreCommon_2_0_000.earliest(bd_());
+				var bf_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				var bg_ = context.Operators.End(bf_);
+				var bh_ = context.Operators.SameOrBefore(be_, bg_, null);
+				var bi_ = context.Operators.And(bc_, bh_);
 
-				return bh_;
+				return bi_;
 			};
-			var av_ = context.Operators.WhereOrNull<Observation>(at_, au_);
-			Encounter aw_(Observation AtrialAblationObservation) => 
+			var aw_ = context.Operators.WhereOrNull<Observation>(au_, av_);
+			Encounter ax_(Observation AtrialAblationObservation) => 
 				IschemicStrokeEncounter;
-			var ax_ = context.Operators.SelectOrNull<Observation, Encounter>(av_, aw_);
+			var ay_ = context.Operators.SelectOrNull<Observation, Encounter>(aw_, ax_);
 
-			return ax_;
+			return ay_;
 		};
 		var j_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, i_);
 		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);

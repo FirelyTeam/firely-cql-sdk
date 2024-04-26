@@ -241,13 +241,12 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -428,14 +427,15 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			var f_ = context.Operators.RetrieveByCodes<Procedure>(e_, null);
 			bool? g_(Procedure SuicideRiskAssessment)
 			{
-				var k_ = context.Operators.EnumEqualsString(SuicideRiskAssessment?.StatusElement?.Value, "completed");
-				var l_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
-				var m_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
-				var n_ = QICoreCommon_2_0_000.ToInterval(m_);
-				var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
-				var p_ = context.Operators.And(k_, o_);
+				var k_ = context.Operators.Convert<string>(SuicideRiskAssessment?.StatusElement?.Value);
+				var l_ = context.Operators.Equal(k_, "completed");
+				var m_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
+				var n_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
+				var o_ = QICoreCommon_2_0_000.ToInterval(n_);
+				var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, null);
+				var q_ = context.Operators.And(l_, p_);
 
-				return p_;
+				return q_;
 			};
 			var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
 			Encounter i_(Procedure SuicideRiskAssessment) => 

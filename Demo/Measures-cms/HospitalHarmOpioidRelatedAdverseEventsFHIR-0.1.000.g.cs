@@ -179,13 +179,12 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("HospitalHarmOpioidRelatedAdverseEventsFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("HospitalHarmOpioidRelatedAdverseEventsFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -423,7 +422,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var ac_ = context.Operators.End(ab_);
 			var ae_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var af_ = context.Operators.Start(ae_);
-			var ag_ = context.Operators.Quantity(12m, "hours");
+			var ag_ = context.Operators.Quantity((decimal?)12m, "hours");
 			var ah_ = context.Operators.Subtract(af_, ag_);
 			var aj_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var ak_ = context.Operators.Start(aj_);
