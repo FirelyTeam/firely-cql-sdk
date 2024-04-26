@@ -135,9 +135,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -171,7 +171,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
-			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
+			var k_ = context.Operators.GreaterOrEqual(j_, 18);
 			var m_ = context.Operators.End(g_);
 			var n_ = this.Measurement_Period();
 			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
@@ -351,7 +351,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			var u_ = context.Operators.And(p_, t_);
 			var v_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Value);
-			var w_ = context.Operators.Quantity((decimal?)40m, "mg/dL");
+			var w_ = context.Operators.Quantity(40m, "mg/dL");
 			var x_ = context.Operators.Less((v_ as CqlQuantity), w_);
 			var y_ = context.Operators.And(u_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.HypoglycemicMedication?.Effective);
@@ -404,7 +404,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var ad_ = QICoreCommon_2_0_000.Earliest(ac_());
-			var ae_ = context.Operators.Quantity((decimal?)24m, "hours");
+			var ae_ = context.Operators.Quantity(24m, "hours");
 			var af_ = context.Operators.Subtract(ad_, ae_);
 			object ag_()
 			{
@@ -453,7 +453,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var ah_ = QICoreCommon_2_0_000.Earliest(ag_());
-			var ai_ = context.Operators.Interval(af_, ah_, (bool?)true, (bool?)true);
+			var ai_ = context.Operators.Interval(af_, ah_, true, true);
 			var aj_ = context.Operators.In<CqlDateTime>(ab_, ai_, null);
 			object ak_()
 			{
@@ -682,9 +682,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var r_ = QICoreCommon_2_0_000.Earliest(q_());
-			var s_ = context.Operators.Quantity((decimal?)5m, "minutes");
+			var s_ = context.Operators.Quantity(5m, "minutes");
 			var t_ = context.Operators.Add(r_, s_);
-			var u_ = context.Operators.Interval(p_, t_, (bool?)false, (bool?)true);
+			var u_ = context.Operators.Interval(p_, t_, false, true);
 			var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
 			object w_()
 			{
@@ -848,7 +848,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var aq_ = context.Operators.In<string>(ao_, (ap_ as IEnumerable<string>));
 			var ar_ = context.Operators.And(am_, aq_);
 			var as_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Value);
-			var at_ = context.Operators.Quantity((decimal?)80m, "mg/dL");
+			var at_ = context.Operators.Quantity(80m, "mg/dL");
 			var au_ = context.Operators.Greater((as_ as CqlQuantity), at_);
 			var av_ = context.Operators.And(ar_, au_);
 

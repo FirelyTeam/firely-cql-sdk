@@ -219,9 +219,9 @@ public class DiabetesEyeExamFHIR_0_0_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("DiabetesEyeExamFHIR-0.0.001", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -291,7 +291,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)18, (int?)75, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(18, 75, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Qualifying_Encounters();
 		var j_ = context.Operators.Exists<Encounter>(i_);
@@ -399,10 +399,10 @@ public class DiabetesEyeExamFHIR_0_0_001
 		{
 			var f_ = this.Measurement_Period();
 			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.Quantity((decimal?)1m, "year");
+			var h_ = context.Operators.Quantity(1m, "year");
 			var i_ = context.Operators.Subtract(g_, h_);
 			var k_ = context.Operators.End(f_);
-			var l_ = context.Operators.Interval(i_, k_, (bool?)true, (bool?)true);
+			var l_ = context.Operators.Interval(i_, k_, true, true);
 			var m_ = FHIRHelpers_4_3_000.ToValue(RetinalExam?.Effective);
 			var n_ = QICoreCommon_2_0_000.toInterval(m_);
 			var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, "day");

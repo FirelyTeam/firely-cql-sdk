@@ -288,9 +288,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("GlobalMalnutritionCompositeFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -371,12 +371,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var l_ = context.Operators.Start(e_);
 			var m_ = context.Operators.DateFrom(l_);
 			var n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-			var o_ = context.Operators.GreaterOrEqual(n_, (int?)65);
+			var o_ = context.Operators.GreaterOrEqual(n_, 65);
 			var p_ = context.Operators.And(h_, o_);
 			var r_ = context.Operators.Start(e_);
 			var t_ = context.Operators.End(e_);
 			var u_ = context.Operators.DurationBetween(r_, t_, "hour");
-			var v_ = context.Operators.GreaterOrEqual(u_, (int?)24);
+			var v_ = context.Operators.GreaterOrEqual(u_, 24);
 			var w_ = context.Operators.And(p_, v_);
 			var x_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(EncounterInpatient?.StatusElement?.Value);
 			var y_ = context.Operators.Equal(x_, "finished");
@@ -985,8 +985,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
     [CqlDeclaration("Measure Observation 1")]
 	public int? Measure_Observation_1(Encounter MalnutritionRiskScreening) => 
 		((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(), MalnutritionRiskScreening) ?? false)
-			? (int?)1
-			: (int?)0);
+			? 1
+			: 0);
 
     [CqlDeclaration("Measure Observation 2")]
 	public int? Measure_Observation_2(Encounter NutritionAssessment)
@@ -1009,17 +1009,17 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			};
 			if (b_())
 			{
-				return (int?)0;
+				return 0;
 			}
 			else if (c_())
 			{
 				return ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_and_Identified_Status(), NutritionAssessment) ?? false)
-					? (int?)1
-					: (int?)0);
+					? 1
+					: 0);
 			}
 			else
 			{
-				return (int?)0;
+				return 0;
 			};
 		};
 
@@ -1047,7 +1047,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			};
 			if (b_())
 			{
-				return (int?)0;
+				return 0;
 			}
 			else if (c_())
 			{
@@ -1080,15 +1080,15 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							};
 							if (m_())
 							{
-								return (int?)0;
+								return 0;
 							}
 							else if (n_())
 							{
-								return (int?)1;
+								return 1;
 							}
 							else
 							{
-								return (int?)0;
+								return 0;
 							};
 						};
 
@@ -1096,7 +1096,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					}
 					else
 					{
-						return (int?)0;
+						return 0;
 					};
 				};
 
@@ -1104,7 +1104,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			}
 			else
 			{
-				return (int?)0;
+				return 0;
 			};
 		};
 
@@ -1132,7 +1132,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			};
 			if (b_())
 			{
-				return (int?)0;
+				return 0;
 			}
 			else if (c_())
 			{
@@ -1165,15 +1165,15 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							};
 							if (m_())
 							{
-								return (int?)0;
+								return 0;
 							}
 							else if (n_())
 							{
-								return (int?)1;
+								return 1;
 							}
 							else
 							{
-								return (int?)0;
+								return 0;
 							};
 						};
 
@@ -1181,7 +1181,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					}
 					else
 					{
-						return (int?)0;
+						return 0;
 					};
 				};
 
@@ -1189,7 +1189,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			}
 			else
 			{
-				return (int?)0;
+				return 0;
 			};
 		};
 
@@ -1256,15 +1256,15 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			};
 			if (b_())
 			{
-				return (int?)1;
+				return 1;
 			}
 			else if (c_())
 			{
-				return (int?)2;
+				return 2;
 			}
 			else
 			{
-				return (int?)4;
+				return 4;
 			};
 		};
 
@@ -1274,7 +1274,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
     [CqlDeclaration("Measure Observation TotalMalnutritionCompositeScore as Percentage")]
 	public decimal? Measure_Observation_TotalMalnutritionCompositeScore_as_Percentage(Encounter QualifyingEncounter)
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal((int?)100);
+		var a_ = context.Operators.ConvertIntegerToDecimal(100);
 		var b_ = this.Measure_Observation_TotalMalnutritionComponentsScore(QualifyingEncounter);
 		var c_ = context.Operators.ConvertIntegerToDecimal(b_);
 		var d_ = this.TotalMalnutritionCompositeScore_Eligible_Denominators(QualifyingEncounter);

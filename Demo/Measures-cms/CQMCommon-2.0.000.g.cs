@@ -105,9 +105,9 @@ public class CQMCommon_2_0_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("CQMCommon-2.0.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -163,7 +163,7 @@ public class CQMCommon_2_0_000
 		var b_ = context.Operators.DateFrom(a_);
 		var c_ = context.Operators.End(period);
 		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Interval(b_, d_, (bool?)true, (bool?)true);
+		var e_ = context.Operators.Interval(b_, d_, true, true);
 
 		return e_;
 	}
@@ -206,10 +206,10 @@ public class CQMCommon_2_0_000
 			var k_ = context.Operators.End(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(TheEncounter?.Period);
 			var m_ = context.Operators.Start(l_);
-			var n_ = context.Operators.Quantity((decimal?)1m, "hour");
+			var n_ = context.Operators.Quantity(1m, "hour");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
-			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
 			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
@@ -246,10 +246,10 @@ public class CQMCommon_2_0_000
 			var k_ = context.Operators.End(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(TheEncounter?.Period);
 			var m_ = context.Operators.Start(l_);
-			var n_ = context.Operators.Quantity((decimal?)1m, "hour");
+			var n_ = context.Operators.Quantity(1m, "hour");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
-			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
 			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
@@ -298,7 +298,7 @@ public class CQMCommon_2_0_000
 					var i_ = context.Operators.Start(h_);
 					var j_ = FHIRHelpers_4_3_000.ToInterval(TheEncounter?.Period);
 					var k_ = context.Operators.End(j_);
-					var l_ = context.Operators.Interval(i_, k_, (bool?)true, (bool?)false);
+					var l_ = context.Operators.Interval(i_, k_, true, false);
 
 					return l_;
 				};
@@ -337,7 +337,7 @@ public class CQMCommon_2_0_000
 					var i_ = context.Operators.Start(h_);
 					var j_ = FHIRHelpers_4_3_000.ToInterval(TheEncounter?.Period);
 					var k_ = context.Operators.End(j_);
-					var l_ = context.Operators.Interval(i_, k_, (bool?)true, (bool?)true);
+					var l_ = context.Operators.Interval(i_, k_, true, true);
 
 					return l_;
 				};
@@ -683,10 +683,10 @@ public class CQMCommon_2_0_000
 						var ev_ = context.Operators.End(eu_);
 						var ew_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var ex_ = context.Operators.Start(ew_);
-						var ey_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var ey_ = context.Operators.Quantity(1m, "hour");
 						var ez_ = context.Operators.Subtract(ex_, ey_);
 						var fb_ = context.Operators.Start(ew_);
-						var fc_ = context.Operators.Interval(ez_, fb_, (bool?)true, (bool?)true);
+						var fc_ = context.Operators.Interval(ez_, fb_, true, true);
 						var fd_ = context.Operators.In<CqlDateTime>(ev_, fc_, null);
 						var ff_ = context.Operators.Start(ew_);
 						var fg_ = context.Operators.Not((bool?)(ff_ is null));
@@ -709,7 +709,7 @@ public class CQMCommon_2_0_000
 					var dm_ = context.Operators.Start(dl_);
 					var dn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var do_ = context.Operators.Start(dn_);
-					var dp_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var dp_ = context.Operators.Quantity(1m, "hour");
 					var dq_ = context.Operators.Subtract((dm_ ?? do_), dp_);
 					var ds_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? dt_(Encounter LastObs)
@@ -720,10 +720,10 @@ public class CQMCommon_2_0_000
 						var fo_ = context.Operators.End(fn_);
 						var fp_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var fq_ = context.Operators.Start(fp_);
-						var fr_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var fr_ = context.Operators.Quantity(1m, "hour");
 						var fs_ = context.Operators.Subtract(fq_, fr_);
 						var fu_ = context.Operators.Start(fp_);
-						var fv_ = context.Operators.Interval(fs_, fu_, (bool?)true, (bool?)true);
+						var fv_ = context.Operators.Interval(fs_, fu_, true, true);
 						var fw_ = context.Operators.In<CqlDateTime>(fo_, fv_, null);
 						var fy_ = context.Operators.Start(fp_);
 						var fz_ = context.Operators.Not((bool?)(fy_ is null));
@@ -745,7 +745,7 @@ public class CQMCommon_2_0_000
 					var dy_ = FHIRHelpers_4_3_000.ToInterval(dx_?.Period);
 					var dz_ = context.Operators.Start(dy_);
 					var eb_ = context.Operators.Start(dn_);
-					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), (bool?)true, (bool?)true);
+					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), true, true);
 					var ed_ = context.Operators.In<CqlDateTime>(dd_, ec_, null);
 					var ef_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? eg_(Encounter LastObs)
@@ -756,10 +756,10 @@ public class CQMCommon_2_0_000
 						var gh_ = context.Operators.End(gg_);
 						var gi_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var gj_ = context.Operators.Start(gi_);
-						var gk_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var gk_ = context.Operators.Quantity(1m, "hour");
 						var gl_ = context.Operators.Subtract(gj_, gk_);
 						var gn_ = context.Operators.Start(gi_);
-						var go_ = context.Operators.Interval(gl_, gn_, (bool?)true, (bool?)true);
+						var go_ = context.Operators.Interval(gl_, gn_, true, true);
 						var gp_ = context.Operators.In<CqlDateTime>(gh_, go_, null);
 						var gr_ = context.Operators.Start(gi_);
 						var gs_ = context.Operators.Not((bool?)(gr_ is null));
@@ -809,10 +809,10 @@ public class CQMCommon_2_0_000
 					var hc_ = context.Operators.End(hb_);
 					var hd_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var he_ = context.Operators.Start(hd_);
-					var hf_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var hf_ = context.Operators.Quantity(1m, "hour");
 					var hg_ = context.Operators.Subtract(he_, hf_);
 					var hi_ = context.Operators.Start(hd_);
-					var hj_ = context.Operators.Interval(hg_, hi_, (bool?)true, (bool?)true);
+					var hj_ = context.Operators.Interval(hg_, hi_, true, true);
 					var hk_ = context.Operators.In<CqlDateTime>(hc_, hj_, null);
 					var hm_ = context.Operators.Start(hd_);
 					var hn_ = context.Operators.Not((bool?)(hm_ is null));
@@ -835,7 +835,7 @@ public class CQMCommon_2_0_000
 				var bd_ = context.Operators.Start(bc_);
 				var be_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var bf_ = context.Operators.Start(be_);
-				var bg_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var bg_ = context.Operators.Quantity(1m, "hour");
 				var bh_ = context.Operators.Subtract((au_ ?? (bd_ ?? bf_)), bg_);
 				var bj_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? bk_(Encounter LastED)
@@ -854,10 +854,10 @@ public class CQMCommon_2_0_000
 						var jn_ = context.Operators.End(jm_);
 						var jo_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var jp_ = context.Operators.Start(jo_);
-						var jq_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var jq_ = context.Operators.Quantity(1m, "hour");
 						var jr_ = context.Operators.Subtract(jp_, jq_);
 						var jt_ = context.Operators.Start(jo_);
-						var ju_ = context.Operators.Interval(jr_, jt_, (bool?)true, (bool?)true);
+						var ju_ = context.Operators.Interval(jr_, jt_, true, true);
 						var jv_ = context.Operators.In<CqlDateTime>(jn_, ju_, null);
 						var jx_ = context.Operators.Start(jo_);
 						var jy_ = context.Operators.Not((bool?)(jx_ is null));
@@ -880,7 +880,7 @@ public class CQMCommon_2_0_000
 					var ie_ = context.Operators.Start(id_);
 					var if_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var ig_ = context.Operators.Start(if_);
-					var ih_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var ih_ = context.Operators.Quantity(1m, "hour");
 					var ii_ = context.Operators.Subtract((ie_ ?? ig_), ih_);
 					var ik_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? il_(Encounter LastObs)
@@ -891,10 +891,10 @@ public class CQMCommon_2_0_000
 						var kg_ = context.Operators.End(kf_);
 						var kh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var ki_ = context.Operators.Start(kh_);
-						var kj_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var kj_ = context.Operators.Quantity(1m, "hour");
 						var kk_ = context.Operators.Subtract(ki_, kj_);
 						var km_ = context.Operators.Start(kh_);
-						var kn_ = context.Operators.Interval(kk_, km_, (bool?)true, (bool?)true);
+						var kn_ = context.Operators.Interval(kk_, km_, true, true);
 						var ko_ = context.Operators.In<CqlDateTime>(kg_, kn_, null);
 						var kq_ = context.Operators.Start(kh_);
 						var kr_ = context.Operators.Not((bool?)(kq_ is null));
@@ -916,7 +916,7 @@ public class CQMCommon_2_0_000
 					var iq_ = FHIRHelpers_4_3_000.ToInterval(ip_?.Period);
 					var ir_ = context.Operators.Start(iq_);
 					var it_ = context.Operators.Start(if_);
-					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), (bool?)true, (bool?)true);
+					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), true, true);
 					var iv_ = context.Operators.In<CqlDateTime>(hv_, iu_, null);
 					var ix_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? iy_(Encounter LastObs)
@@ -927,10 +927,10 @@ public class CQMCommon_2_0_000
 						var kz_ = context.Operators.End(ky_);
 						var la_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var lb_ = context.Operators.Start(la_);
-						var lc_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var lc_ = context.Operators.Quantity(1m, "hour");
 						var ld_ = context.Operators.Subtract(lb_, lc_);
 						var lf_ = context.Operators.Start(la_);
-						var lg_ = context.Operators.Interval(ld_, lf_, (bool?)true, (bool?)true);
+						var lg_ = context.Operators.Interval(ld_, lf_, true, true);
 						var lh_ = context.Operators.In<CqlDateTime>(kz_, lg_, null);
 						var lj_ = context.Operators.Start(la_);
 						var lk_ = context.Operators.Not((bool?)(lj_ is null));
@@ -979,10 +979,10 @@ public class CQMCommon_2_0_000
 					var lu_ = context.Operators.End(lt_);
 					var lv_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var lw_ = context.Operators.Start(lv_);
-					var lx_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var lx_ = context.Operators.Quantity(1m, "hour");
 					var ly_ = context.Operators.Subtract(lw_, lx_);
 					var ma_ = context.Operators.Start(lv_);
-					var mb_ = context.Operators.Interval(ly_, ma_, (bool?)true, (bool?)true);
+					var mb_ = context.Operators.Interval(ly_, ma_, true, true);
 					var mc_ = context.Operators.In<CqlDateTime>(lu_, mb_, null);
 					var me_ = context.Operators.Start(lv_);
 					var mf_ = context.Operators.Not((bool?)(me_ is null));
@@ -1004,7 +1004,7 @@ public class CQMCommon_2_0_000
 				var by_ = FHIRHelpers_4_3_000.ToInterval(bx_?.Period);
 				var bz_ = context.Operators.Start(by_);
 				var cb_ = context.Operators.Start(be_);
-				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), (bool?)true, (bool?)true);
+				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), true, true);
 				var cd_ = context.Operators.In<CqlDateTime>(al_, cc_, null);
 				var cf_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? cg_(Encounter LastED)
@@ -1023,10 +1023,10 @@ public class CQMCommon_2_0_000
 						var of_ = context.Operators.End(oe_);
 						var og_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var oh_ = context.Operators.Start(og_);
-						var oi_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var oi_ = context.Operators.Quantity(1m, "hour");
 						var oj_ = context.Operators.Subtract(oh_, oi_);
 						var ol_ = context.Operators.Start(og_);
-						var om_ = context.Operators.Interval(oj_, ol_, (bool?)true, (bool?)true);
+						var om_ = context.Operators.Interval(oj_, ol_, true, true);
 						var on_ = context.Operators.In<CqlDateTime>(of_, om_, null);
 						var op_ = context.Operators.Start(og_);
 						var oq_ = context.Operators.Not((bool?)(op_ is null));
@@ -1049,7 +1049,7 @@ public class CQMCommon_2_0_000
 					var mw_ = context.Operators.Start(mv_);
 					var mx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var my_ = context.Operators.Start(mx_);
-					var mz_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var mz_ = context.Operators.Quantity(1m, "hour");
 					var na_ = context.Operators.Subtract((mw_ ?? my_), mz_);
 					var nc_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nd_(Encounter LastObs)
@@ -1060,10 +1060,10 @@ public class CQMCommon_2_0_000
 						var oy_ = context.Operators.End(ox_);
 						var oz_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var pa_ = context.Operators.Start(oz_);
-						var pb_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var pb_ = context.Operators.Quantity(1m, "hour");
 						var pc_ = context.Operators.Subtract(pa_, pb_);
 						var pe_ = context.Operators.Start(oz_);
-						var pf_ = context.Operators.Interval(pc_, pe_, (bool?)true, (bool?)true);
+						var pf_ = context.Operators.Interval(pc_, pe_, true, true);
 						var pg_ = context.Operators.In<CqlDateTime>(oy_, pf_, null);
 						var pi_ = context.Operators.Start(oz_);
 						var pj_ = context.Operators.Not((bool?)(pi_ is null));
@@ -1085,7 +1085,7 @@ public class CQMCommon_2_0_000
 					var ni_ = FHIRHelpers_4_3_000.ToInterval(nh_?.Period);
 					var nj_ = context.Operators.Start(ni_);
 					var nl_ = context.Operators.Start(mx_);
-					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), (bool?)true, (bool?)true);
+					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), true, true);
 					var nn_ = context.Operators.In<CqlDateTime>(mn_, nm_, null);
 					var np_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nq_(Encounter LastObs)
@@ -1096,10 +1096,10 @@ public class CQMCommon_2_0_000
 						var pr_ = context.Operators.End(pq_);
 						var ps_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var pt_ = context.Operators.Start(ps_);
-						var pu_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var pu_ = context.Operators.Quantity(1m, "hour");
 						var pv_ = context.Operators.Subtract(pt_, pu_);
 						var px_ = context.Operators.Start(ps_);
-						var py_ = context.Operators.Interval(pv_, px_, (bool?)true, (bool?)true);
+						var py_ = context.Operators.Interval(pv_, px_, true, true);
 						var pz_ = context.Operators.In<CqlDateTime>(pr_, py_, null);
 						var qb_ = context.Operators.Start(ps_);
 						var qc_ = context.Operators.Not((bool?)(qb_ is null));
@@ -1148,10 +1148,10 @@ public class CQMCommon_2_0_000
 					var qm_ = context.Operators.End(ql_);
 					var qn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var qo_ = context.Operators.Start(qn_);
-					var qp_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var qp_ = context.Operators.Quantity(1m, "hour");
 					var qq_ = context.Operators.Subtract(qo_, qp_);
 					var qs_ = context.Operators.Start(qn_);
-					var qt_ = context.Operators.Interval(qq_, qs_, (bool?)true, (bool?)true);
+					var qt_ = context.Operators.Interval(qq_, qs_, true, true);
 					var qu_ = context.Operators.In<CqlDateTime>(qm_, qt_, null);
 					var qw_ = context.Operators.Start(qn_);
 					var qx_ = context.Operators.Not((bool?)(qw_ is null));
@@ -1208,10 +1208,10 @@ public class CQMCommon_2_0_000
 					var sz_ = context.Operators.End(sy_);
 					var ta_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var tb_ = context.Operators.Start(ta_);
-					var tc_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var tc_ = context.Operators.Quantity(1m, "hour");
 					var td_ = context.Operators.Subtract(tb_, tc_);
 					var tf_ = context.Operators.Start(ta_);
-					var tg_ = context.Operators.Interval(td_, tf_, (bool?)true, (bool?)true);
+					var tg_ = context.Operators.Interval(td_, tf_, true, true);
 					var th_ = context.Operators.In<CqlDateTime>(sz_, tg_, null);
 					var tj_ = context.Operators.Start(ta_);
 					var tk_ = context.Operators.Not((bool?)(tj_ is null));
@@ -1234,7 +1234,7 @@ public class CQMCommon_2_0_000
 				var rq_ = context.Operators.Start(rp_);
 				var rr_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var rs_ = context.Operators.Start(rr_);
-				var rt_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var rt_ = context.Operators.Quantity(1m, "hour");
 				var ru_ = context.Operators.Subtract((rq_ ?? rs_), rt_);
 				var rw_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? rx_(Encounter LastObs)
@@ -1245,10 +1245,10 @@ public class CQMCommon_2_0_000
 					var ts_ = context.Operators.End(tr_);
 					var tt_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var tu_ = context.Operators.Start(tt_);
-					var tv_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var tv_ = context.Operators.Quantity(1m, "hour");
 					var tw_ = context.Operators.Subtract(tu_, tv_);
 					var ty_ = context.Operators.Start(tt_);
-					var tz_ = context.Operators.Interval(tw_, ty_, (bool?)true, (bool?)true);
+					var tz_ = context.Operators.Interval(tw_, ty_, true, true);
 					var ua_ = context.Operators.In<CqlDateTime>(ts_, tz_, null);
 					var uc_ = context.Operators.Start(tt_);
 					var ud_ = context.Operators.Not((bool?)(uc_ is null));
@@ -1270,7 +1270,7 @@ public class CQMCommon_2_0_000
 				var sc_ = FHIRHelpers_4_3_000.ToInterval(sb_?.Period);
 				var sd_ = context.Operators.Start(sc_);
 				var sf_ = context.Operators.Start(rr_);
-				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), (bool?)true, (bool?)true);
+				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), true, true);
 				var sh_ = context.Operators.In<CqlDateTime>(rh_, sg_, null);
 				var sj_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? sk_(Encounter LastObs)
@@ -1281,10 +1281,10 @@ public class CQMCommon_2_0_000
 					var ul_ = context.Operators.End(uk_);
 					var um_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var un_ = context.Operators.Start(um_);
-					var uo_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var uo_ = context.Operators.Quantity(1m, "hour");
 					var up_ = context.Operators.Subtract(un_, uo_);
 					var ur_ = context.Operators.Start(um_);
-					var us_ = context.Operators.Interval(up_, ur_, (bool?)true, (bool?)true);
+					var us_ = context.Operators.Interval(up_, ur_, true, true);
 					var ut_ = context.Operators.In<CqlDateTime>(ul_, us_, null);
 					var uv_ = context.Operators.Start(um_);
 					var uw_ = context.Operators.Not((bool?)(uv_ is null));
@@ -1334,10 +1334,10 @@ public class CQMCommon_2_0_000
 				var vg_ = context.Operators.End(vf_);
 				var vh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var vi_ = context.Operators.Start(vh_);
-				var vj_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var vj_ = context.Operators.Quantity(1m, "hour");
 				var vk_ = context.Operators.Subtract(vi_, vj_);
 				var vm_ = context.Operators.Start(vh_);
-				var vn_ = context.Operators.Interval(vk_, vm_, (bool?)true, (bool?)true);
+				var vn_ = context.Operators.Interval(vk_, vm_, true, true);
 				var vo_ = context.Operators.In<CqlDateTime>(vg_, vn_, null);
 				var vq_ = context.Operators.Start(vh_);
 				var vr_ = context.Operators.Not((bool?)(vq_ is null));
@@ -1361,7 +1361,7 @@ public class CQMCommon_2_0_000
 			var af_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 			var ag_ = context.Operators.Start(af_);
 			var ai_ = context.Operators.End(af_);
-			var aj_ = context.Operators.Interval((m_ ?? (v_ ?? (ae_ ?? ag_))), ai_, (bool?)true, (bool?)true);
+			var aj_ = context.Operators.Interval((m_ ?? (v_ ?? (ae_ ?? ag_))), ai_, true, true);
 
 			return aj_;
 		};
@@ -1405,10 +1405,10 @@ public class CQMCommon_2_0_000
 						var ev_ = context.Operators.End(eu_);
 						var ew_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var ex_ = context.Operators.Start(ew_);
-						var ey_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var ey_ = context.Operators.Quantity(1m, "hour");
 						var ez_ = context.Operators.Subtract(ex_, ey_);
 						var fb_ = context.Operators.Start(ew_);
-						var fc_ = context.Operators.Interval(ez_, fb_, (bool?)true, (bool?)true);
+						var fc_ = context.Operators.Interval(ez_, fb_, true, true);
 						var fd_ = context.Operators.In<CqlDateTime>(ev_, fc_, null);
 						var ff_ = context.Operators.Start(ew_);
 						var fg_ = context.Operators.Not((bool?)(ff_ is null));
@@ -1431,7 +1431,7 @@ public class CQMCommon_2_0_000
 					var dm_ = context.Operators.Start(dl_);
 					var dn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var do_ = context.Operators.Start(dn_);
-					var dp_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var dp_ = context.Operators.Quantity(1m, "hour");
 					var dq_ = context.Operators.Subtract((dm_ ?? do_), dp_);
 					var ds_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? dt_(Encounter LastObs)
@@ -1442,10 +1442,10 @@ public class CQMCommon_2_0_000
 						var fo_ = context.Operators.End(fn_);
 						var fp_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var fq_ = context.Operators.Start(fp_);
-						var fr_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var fr_ = context.Operators.Quantity(1m, "hour");
 						var fs_ = context.Operators.Subtract(fq_, fr_);
 						var fu_ = context.Operators.Start(fp_);
-						var fv_ = context.Operators.Interval(fs_, fu_, (bool?)true, (bool?)true);
+						var fv_ = context.Operators.Interval(fs_, fu_, true, true);
 						var fw_ = context.Operators.In<CqlDateTime>(fo_, fv_, null);
 						var fy_ = context.Operators.Start(fp_);
 						var fz_ = context.Operators.Not((bool?)(fy_ is null));
@@ -1467,7 +1467,7 @@ public class CQMCommon_2_0_000
 					var dy_ = FHIRHelpers_4_3_000.ToInterval(dx_?.Period);
 					var dz_ = context.Operators.Start(dy_);
 					var eb_ = context.Operators.Start(dn_);
-					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), (bool?)true, (bool?)true);
+					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), true, true);
 					var ed_ = context.Operators.In<CqlDateTime>(dd_, ec_, null);
 					var ef_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? eg_(Encounter LastObs)
@@ -1478,10 +1478,10 @@ public class CQMCommon_2_0_000
 						var gh_ = context.Operators.End(gg_);
 						var gi_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var gj_ = context.Operators.Start(gi_);
-						var gk_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var gk_ = context.Operators.Quantity(1m, "hour");
 						var gl_ = context.Operators.Subtract(gj_, gk_);
 						var gn_ = context.Operators.Start(gi_);
-						var go_ = context.Operators.Interval(gl_, gn_, (bool?)true, (bool?)true);
+						var go_ = context.Operators.Interval(gl_, gn_, true, true);
 						var gp_ = context.Operators.In<CqlDateTime>(gh_, go_, null);
 						var gr_ = context.Operators.Start(gi_);
 						var gs_ = context.Operators.Not((bool?)(gr_ is null));
@@ -1531,10 +1531,10 @@ public class CQMCommon_2_0_000
 					var hc_ = context.Operators.End(hb_);
 					var hd_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var he_ = context.Operators.Start(hd_);
-					var hf_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var hf_ = context.Operators.Quantity(1m, "hour");
 					var hg_ = context.Operators.Subtract(he_, hf_);
 					var hi_ = context.Operators.Start(hd_);
-					var hj_ = context.Operators.Interval(hg_, hi_, (bool?)true, (bool?)true);
+					var hj_ = context.Operators.Interval(hg_, hi_, true, true);
 					var hk_ = context.Operators.In<CqlDateTime>(hc_, hj_, null);
 					var hm_ = context.Operators.Start(hd_);
 					var hn_ = context.Operators.Not((bool?)(hm_ is null));
@@ -1557,7 +1557,7 @@ public class CQMCommon_2_0_000
 				var bd_ = context.Operators.Start(bc_);
 				var be_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var bf_ = context.Operators.Start(be_);
-				var bg_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var bg_ = context.Operators.Quantity(1m, "hour");
 				var bh_ = context.Operators.Subtract((au_ ?? (bd_ ?? bf_)), bg_);
 				var bj_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? bk_(Encounter LastED)
@@ -1576,10 +1576,10 @@ public class CQMCommon_2_0_000
 						var jn_ = context.Operators.End(jm_);
 						var jo_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var jp_ = context.Operators.Start(jo_);
-						var jq_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var jq_ = context.Operators.Quantity(1m, "hour");
 						var jr_ = context.Operators.Subtract(jp_, jq_);
 						var jt_ = context.Operators.Start(jo_);
-						var ju_ = context.Operators.Interval(jr_, jt_, (bool?)true, (bool?)true);
+						var ju_ = context.Operators.Interval(jr_, jt_, true, true);
 						var jv_ = context.Operators.In<CqlDateTime>(jn_, ju_, null);
 						var jx_ = context.Operators.Start(jo_);
 						var jy_ = context.Operators.Not((bool?)(jx_ is null));
@@ -1602,7 +1602,7 @@ public class CQMCommon_2_0_000
 					var ie_ = context.Operators.Start(id_);
 					var if_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var ig_ = context.Operators.Start(if_);
-					var ih_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var ih_ = context.Operators.Quantity(1m, "hour");
 					var ii_ = context.Operators.Subtract((ie_ ?? ig_), ih_);
 					var ik_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? il_(Encounter LastObs)
@@ -1613,10 +1613,10 @@ public class CQMCommon_2_0_000
 						var kg_ = context.Operators.End(kf_);
 						var kh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var ki_ = context.Operators.Start(kh_);
-						var kj_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var kj_ = context.Operators.Quantity(1m, "hour");
 						var kk_ = context.Operators.Subtract(ki_, kj_);
 						var km_ = context.Operators.Start(kh_);
-						var kn_ = context.Operators.Interval(kk_, km_, (bool?)true, (bool?)true);
+						var kn_ = context.Operators.Interval(kk_, km_, true, true);
 						var ko_ = context.Operators.In<CqlDateTime>(kg_, kn_, null);
 						var kq_ = context.Operators.Start(kh_);
 						var kr_ = context.Operators.Not((bool?)(kq_ is null));
@@ -1638,7 +1638,7 @@ public class CQMCommon_2_0_000
 					var iq_ = FHIRHelpers_4_3_000.ToInterval(ip_?.Period);
 					var ir_ = context.Operators.Start(iq_);
 					var it_ = context.Operators.Start(if_);
-					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), (bool?)true, (bool?)true);
+					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), true, true);
 					var iv_ = context.Operators.In<CqlDateTime>(hv_, iu_, null);
 					var ix_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? iy_(Encounter LastObs)
@@ -1649,10 +1649,10 @@ public class CQMCommon_2_0_000
 						var kz_ = context.Operators.End(ky_);
 						var la_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var lb_ = context.Operators.Start(la_);
-						var lc_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var lc_ = context.Operators.Quantity(1m, "hour");
 						var ld_ = context.Operators.Subtract(lb_, lc_);
 						var lf_ = context.Operators.Start(la_);
-						var lg_ = context.Operators.Interval(ld_, lf_, (bool?)true, (bool?)true);
+						var lg_ = context.Operators.Interval(ld_, lf_, true, true);
 						var lh_ = context.Operators.In<CqlDateTime>(kz_, lg_, null);
 						var lj_ = context.Operators.Start(la_);
 						var lk_ = context.Operators.Not((bool?)(lj_ is null));
@@ -1701,10 +1701,10 @@ public class CQMCommon_2_0_000
 					var lu_ = context.Operators.End(lt_);
 					var lv_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var lw_ = context.Operators.Start(lv_);
-					var lx_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var lx_ = context.Operators.Quantity(1m, "hour");
 					var ly_ = context.Operators.Subtract(lw_, lx_);
 					var ma_ = context.Operators.Start(lv_);
-					var mb_ = context.Operators.Interval(ly_, ma_, (bool?)true, (bool?)true);
+					var mb_ = context.Operators.Interval(ly_, ma_, true, true);
 					var mc_ = context.Operators.In<CqlDateTime>(lu_, mb_, null);
 					var me_ = context.Operators.Start(lv_);
 					var mf_ = context.Operators.Not((bool?)(me_ is null));
@@ -1726,7 +1726,7 @@ public class CQMCommon_2_0_000
 				var by_ = FHIRHelpers_4_3_000.ToInterval(bx_?.Period);
 				var bz_ = context.Operators.Start(by_);
 				var cb_ = context.Operators.Start(be_);
-				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), (bool?)true, (bool?)true);
+				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), true, true);
 				var cd_ = context.Operators.In<CqlDateTime>(al_, cc_, null);
 				var cf_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? cg_(Encounter LastED)
@@ -1745,10 +1745,10 @@ public class CQMCommon_2_0_000
 						var of_ = context.Operators.End(oe_);
 						var og_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var oh_ = context.Operators.Start(og_);
-						var oi_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var oi_ = context.Operators.Quantity(1m, "hour");
 						var oj_ = context.Operators.Subtract(oh_, oi_);
 						var ol_ = context.Operators.Start(og_);
-						var om_ = context.Operators.Interval(oj_, ol_, (bool?)true, (bool?)true);
+						var om_ = context.Operators.Interval(oj_, ol_, true, true);
 						var on_ = context.Operators.In<CqlDateTime>(of_, om_, null);
 						var op_ = context.Operators.Start(og_);
 						var oq_ = context.Operators.Not((bool?)(op_ is null));
@@ -1771,7 +1771,7 @@ public class CQMCommon_2_0_000
 					var mw_ = context.Operators.Start(mv_);
 					var mx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var my_ = context.Operators.Start(mx_);
-					var mz_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var mz_ = context.Operators.Quantity(1m, "hour");
 					var na_ = context.Operators.Subtract((mw_ ?? my_), mz_);
 					var nc_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nd_(Encounter LastObs)
@@ -1782,10 +1782,10 @@ public class CQMCommon_2_0_000
 						var oy_ = context.Operators.End(ox_);
 						var oz_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var pa_ = context.Operators.Start(oz_);
-						var pb_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var pb_ = context.Operators.Quantity(1m, "hour");
 						var pc_ = context.Operators.Subtract(pa_, pb_);
 						var pe_ = context.Operators.Start(oz_);
-						var pf_ = context.Operators.Interval(pc_, pe_, (bool?)true, (bool?)true);
+						var pf_ = context.Operators.Interval(pc_, pe_, true, true);
 						var pg_ = context.Operators.In<CqlDateTime>(oy_, pf_, null);
 						var pi_ = context.Operators.Start(oz_);
 						var pj_ = context.Operators.Not((bool?)(pi_ is null));
@@ -1807,7 +1807,7 @@ public class CQMCommon_2_0_000
 					var ni_ = FHIRHelpers_4_3_000.ToInterval(nh_?.Period);
 					var nj_ = context.Operators.Start(ni_);
 					var nl_ = context.Operators.Start(mx_);
-					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), (bool?)true, (bool?)true);
+					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), true, true);
 					var nn_ = context.Operators.In<CqlDateTime>(mn_, nm_, null);
 					var np_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nq_(Encounter LastObs)
@@ -1818,10 +1818,10 @@ public class CQMCommon_2_0_000
 						var pr_ = context.Operators.End(pq_);
 						var ps_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 						var pt_ = context.Operators.Start(ps_);
-						var pu_ = context.Operators.Quantity((decimal?)1m, "hour");
+						var pu_ = context.Operators.Quantity(1m, "hour");
 						var pv_ = context.Operators.Subtract(pt_, pu_);
 						var px_ = context.Operators.Start(ps_);
-						var py_ = context.Operators.Interval(pv_, px_, (bool?)true, (bool?)true);
+						var py_ = context.Operators.Interval(pv_, px_, true, true);
 						var pz_ = context.Operators.In<CqlDateTime>(pr_, py_, null);
 						var qb_ = context.Operators.Start(ps_);
 						var qc_ = context.Operators.Not((bool?)(qb_ is null));
@@ -1870,10 +1870,10 @@ public class CQMCommon_2_0_000
 					var qm_ = context.Operators.End(ql_);
 					var qn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var qo_ = context.Operators.Start(qn_);
-					var qp_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var qp_ = context.Operators.Quantity(1m, "hour");
 					var qq_ = context.Operators.Subtract(qo_, qp_);
 					var qs_ = context.Operators.Start(qn_);
-					var qt_ = context.Operators.Interval(qq_, qs_, (bool?)true, (bool?)true);
+					var qt_ = context.Operators.Interval(qq_, qs_, true, true);
 					var qu_ = context.Operators.In<CqlDateTime>(qm_, qt_, null);
 					var qw_ = context.Operators.Start(qn_);
 					var qx_ = context.Operators.Not((bool?)(qw_ is null));
@@ -1930,10 +1930,10 @@ public class CQMCommon_2_0_000
 					var sz_ = context.Operators.End(sy_);
 					var ta_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var tb_ = context.Operators.Start(ta_);
-					var tc_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var tc_ = context.Operators.Quantity(1m, "hour");
 					var td_ = context.Operators.Subtract(tb_, tc_);
 					var tf_ = context.Operators.Start(ta_);
-					var tg_ = context.Operators.Interval(td_, tf_, (bool?)true, (bool?)true);
+					var tg_ = context.Operators.Interval(td_, tf_, true, true);
 					var th_ = context.Operators.In<CqlDateTime>(sz_, tg_, null);
 					var tj_ = context.Operators.Start(ta_);
 					var tk_ = context.Operators.Not((bool?)(tj_ is null));
@@ -1956,7 +1956,7 @@ public class CQMCommon_2_0_000
 				var rq_ = context.Operators.Start(rp_);
 				var rr_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var rs_ = context.Operators.Start(rr_);
-				var rt_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var rt_ = context.Operators.Quantity(1m, "hour");
 				var ru_ = context.Operators.Subtract((rq_ ?? rs_), rt_);
 				var rw_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? rx_(Encounter LastObs)
@@ -1967,10 +1967,10 @@ public class CQMCommon_2_0_000
 					var ts_ = context.Operators.End(tr_);
 					var tt_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var tu_ = context.Operators.Start(tt_);
-					var tv_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var tv_ = context.Operators.Quantity(1m, "hour");
 					var tw_ = context.Operators.Subtract(tu_, tv_);
 					var ty_ = context.Operators.Start(tt_);
-					var tz_ = context.Operators.Interval(tw_, ty_, (bool?)true, (bool?)true);
+					var tz_ = context.Operators.Interval(tw_, ty_, true, true);
 					var ua_ = context.Operators.In<CqlDateTime>(ts_, tz_, null);
 					var uc_ = context.Operators.Start(tt_);
 					var ud_ = context.Operators.Not((bool?)(uc_ is null));
@@ -1992,7 +1992,7 @@ public class CQMCommon_2_0_000
 				var sc_ = FHIRHelpers_4_3_000.ToInterval(sb_?.Period);
 				var sd_ = context.Operators.Start(sc_);
 				var sf_ = context.Operators.Start(rr_);
-				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), (bool?)true, (bool?)true);
+				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), true, true);
 				var sh_ = context.Operators.In<CqlDateTime>(rh_, sg_, null);
 				var sj_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? sk_(Encounter LastObs)
@@ -2003,10 +2003,10 @@ public class CQMCommon_2_0_000
 					var ul_ = context.Operators.End(uk_);
 					var um_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var un_ = context.Operators.Start(um_);
-					var uo_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var uo_ = context.Operators.Quantity(1m, "hour");
 					var up_ = context.Operators.Subtract(un_, uo_);
 					var ur_ = context.Operators.Start(um_);
-					var us_ = context.Operators.Interval(up_, ur_, (bool?)true, (bool?)true);
+					var us_ = context.Operators.Interval(up_, ur_, true, true);
 					var ut_ = context.Operators.In<CqlDateTime>(ul_, us_, null);
 					var uv_ = context.Operators.Start(um_);
 					var uw_ = context.Operators.Not((bool?)(uv_ is null));
@@ -2056,10 +2056,10 @@ public class CQMCommon_2_0_000
 				var vg_ = context.Operators.End(vf_);
 				var vh_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var vi_ = context.Operators.Start(vh_);
-				var vj_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var vj_ = context.Operators.Quantity(1m, "hour");
 				var vk_ = context.Operators.Subtract(vi_, vj_);
 				var vm_ = context.Operators.Start(vh_);
-				var vn_ = context.Operators.Interval(vk_, vm_, (bool?)true, (bool?)true);
+				var vn_ = context.Operators.Interval(vk_, vm_, true, true);
 				var vo_ = context.Operators.In<CqlDateTime>(vg_, vn_, null);
 				var vq_ = context.Operators.Start(vh_);
 				var vr_ = context.Operators.Not((bool?)(vq_ is null));
@@ -2083,7 +2083,7 @@ public class CQMCommon_2_0_000
 			var af_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 			var ag_ = context.Operators.Start(af_);
 			var ai_ = context.Operators.End(af_);
-			var aj_ = context.Operators.Interval((m_ ?? (v_ ?? (ae_ ?? ag_))), ai_, (bool?)true, (bool?)true);
+			var aj_ = context.Operators.Interval((m_ ?? (v_ ?? (ae_ ?? ag_))), ai_, true, true);
 
 			return aj_;
 		};
@@ -2122,10 +2122,10 @@ public class CQMCommon_2_0_000
 					var bw_ = context.Operators.End(bv_);
 					var bx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var by_ = context.Operators.Start(bx_);
-					var bz_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var bz_ = context.Operators.Quantity(1m, "hour");
 					var ca_ = context.Operators.Subtract(by_, bz_);
 					var cc_ = context.Operators.Start(bx_);
-					var cd_ = context.Operators.Interval(ca_, cc_, (bool?)true, (bool?)true);
+					var cd_ = context.Operators.Interval(ca_, cc_, true, true);
 					var ce_ = context.Operators.In<CqlDateTime>(bw_, cd_, null);
 					var cg_ = context.Operators.Start(bx_);
 					var ch_ = context.Operators.Not((bool?)(cg_ is null));
@@ -2148,7 +2148,7 @@ public class CQMCommon_2_0_000
 				var an_ = context.Operators.Start(am_);
 				var ao_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var ap_ = context.Operators.Start(ao_);
-				var aq_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var aq_ = context.Operators.Quantity(1m, "hour");
 				var ar_ = context.Operators.Subtract((an_ ?? ap_), aq_);
 				var at_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? au_(Encounter LastObs)
@@ -2159,10 +2159,10 @@ public class CQMCommon_2_0_000
 					var cp_ = context.Operators.End(co_);
 					var cq_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var cr_ = context.Operators.Start(cq_);
-					var cs_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var cs_ = context.Operators.Quantity(1m, "hour");
 					var ct_ = context.Operators.Subtract(cr_, cs_);
 					var cv_ = context.Operators.Start(cq_);
-					var cw_ = context.Operators.Interval(ct_, cv_, (bool?)true, (bool?)true);
+					var cw_ = context.Operators.Interval(ct_, cv_, true, true);
 					var cx_ = context.Operators.In<CqlDateTime>(cp_, cw_, null);
 					var cz_ = context.Operators.Start(cq_);
 					var da_ = context.Operators.Not((bool?)(cz_ is null));
@@ -2184,7 +2184,7 @@ public class CQMCommon_2_0_000
 				var az_ = FHIRHelpers_4_3_000.ToInterval(ay_?.Period);
 				var ba_ = context.Operators.Start(az_);
 				var bc_ = context.Operators.Start(ao_);
-				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), (bool?)true, (bool?)true);
+				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), true, true);
 				var be_ = context.Operators.In<CqlDateTime>(ae_, bd_, null);
 				var bg_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? bh_(Encounter LastObs)
@@ -2195,10 +2195,10 @@ public class CQMCommon_2_0_000
 					var di_ = context.Operators.End(dh_);
 					var dj_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var dk_ = context.Operators.Start(dj_);
-					var dl_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var dl_ = context.Operators.Quantity(1m, "hour");
 					var dm_ = context.Operators.Subtract(dk_, dl_);
 					var do_ = context.Operators.Start(dj_);
-					var dp_ = context.Operators.Interval(dm_, do_, (bool?)true, (bool?)true);
+					var dp_ = context.Operators.Interval(dm_, do_, true, true);
 					var dq_ = context.Operators.In<CqlDateTime>(di_, dp_, null);
 					var ds_ = context.Operators.Start(dj_);
 					var dt_ = context.Operators.Not((bool?)(ds_ is null));
@@ -2248,10 +2248,10 @@ public class CQMCommon_2_0_000
 				var ed_ = context.Operators.End(ec_);
 				var ee_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var ef_ = context.Operators.Start(ee_);
-				var eg_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var eg_ = context.Operators.Quantity(1m, "hour");
 				var eh_ = context.Operators.Subtract(ef_, eg_);
 				var ej_ = context.Operators.Start(ee_);
-				var ek_ = context.Operators.Interval(eh_, ej_, (bool?)true, (bool?)true);
+				var ek_ = context.Operators.Interval(eh_, ej_, true, true);
 				var el_ = context.Operators.In<CqlDateTime>(ed_, ek_, null);
 				var en_ = context.Operators.Start(ee_);
 				var eo_ = context.Operators.Not((bool?)(en_ is null));
@@ -2275,7 +2275,7 @@ public class CQMCommon_2_0_000
 			var w_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 			var x_ = context.Operators.Start(w_);
 			var z_ = context.Operators.End(w_);
-			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, (bool?)true, (bool?)true);
+			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
 
 			return aa_;
 		};
@@ -2313,10 +2313,10 @@ public class CQMCommon_2_0_000
 					var bw_ = context.Operators.End(bv_);
 					var bx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var by_ = context.Operators.Start(bx_);
-					var bz_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var bz_ = context.Operators.Quantity(1m, "hour");
 					var ca_ = context.Operators.Subtract(by_, bz_);
 					var cc_ = context.Operators.Start(bx_);
-					var cd_ = context.Operators.Interval(ca_, cc_, (bool?)true, (bool?)true);
+					var cd_ = context.Operators.Interval(ca_, cc_, true, true);
 					var ce_ = context.Operators.In<CqlDateTime>(bw_, cd_, null);
 					var cg_ = context.Operators.Start(bx_);
 					var ch_ = context.Operators.Not((bool?)(cg_ is null));
@@ -2339,7 +2339,7 @@ public class CQMCommon_2_0_000
 				var an_ = context.Operators.Start(am_);
 				var ao_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var ap_ = context.Operators.Start(ao_);
-				var aq_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var aq_ = context.Operators.Quantity(1m, "hour");
 				var ar_ = context.Operators.Subtract((an_ ?? ap_), aq_);
 				var at_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? au_(Encounter LastObs)
@@ -2350,10 +2350,10 @@ public class CQMCommon_2_0_000
 					var cp_ = context.Operators.End(co_);
 					var cq_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var cr_ = context.Operators.Start(cq_);
-					var cs_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var cs_ = context.Operators.Quantity(1m, "hour");
 					var ct_ = context.Operators.Subtract(cr_, cs_);
 					var cv_ = context.Operators.Start(cq_);
-					var cw_ = context.Operators.Interval(ct_, cv_, (bool?)true, (bool?)true);
+					var cw_ = context.Operators.Interval(ct_, cv_, true, true);
 					var cx_ = context.Operators.In<CqlDateTime>(cp_, cw_, null);
 					var cz_ = context.Operators.Start(cq_);
 					var da_ = context.Operators.Not((bool?)(cz_ is null));
@@ -2375,7 +2375,7 @@ public class CQMCommon_2_0_000
 				var az_ = FHIRHelpers_4_3_000.ToInterval(ay_?.Period);
 				var ba_ = context.Operators.Start(az_);
 				var bc_ = context.Operators.Start(ao_);
-				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), (bool?)true, (bool?)true);
+				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), true, true);
 				var be_ = context.Operators.In<CqlDateTime>(ae_, bd_, null);
 				var bg_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? bh_(Encounter LastObs)
@@ -2386,10 +2386,10 @@ public class CQMCommon_2_0_000
 					var di_ = context.Operators.End(dh_);
 					var dj_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 					var dk_ = context.Operators.Start(dj_);
-					var dl_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var dl_ = context.Operators.Quantity(1m, "hour");
 					var dm_ = context.Operators.Subtract(dk_, dl_);
 					var do_ = context.Operators.Start(dj_);
-					var dp_ = context.Operators.Interval(dm_, do_, (bool?)true, (bool?)true);
+					var dp_ = context.Operators.Interval(dm_, do_, true, true);
 					var dq_ = context.Operators.In<CqlDateTime>(di_, dp_, null);
 					var ds_ = context.Operators.Start(dj_);
 					var dt_ = context.Operators.Not((bool?)(ds_ is null));
@@ -2439,10 +2439,10 @@ public class CQMCommon_2_0_000
 				var ed_ = context.Operators.End(ec_);
 				var ee_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 				var ef_ = context.Operators.Start(ee_);
-				var eg_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var eg_ = context.Operators.Quantity(1m, "hour");
 				var eh_ = context.Operators.Subtract(ef_, eg_);
 				var ej_ = context.Operators.Start(ee_);
-				var ek_ = context.Operators.Interval(eh_, ej_, (bool?)true, (bool?)true);
+				var ek_ = context.Operators.Interval(eh_, ej_, true, true);
 				var el_ = context.Operators.In<CqlDateTime>(ed_, ek_, null);
 				var en_ = context.Operators.Start(ee_);
 				var eo_ = context.Operators.Not((bool?)(en_ is null));
@@ -2466,7 +2466,7 @@ public class CQMCommon_2_0_000
 			var w_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
 			var x_ = context.Operators.Start(w_);
 			var z_ = context.Operators.End(w_);
-			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, (bool?)true, (bool?)true);
+			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
 
 			return aa_;
 		};
@@ -2665,7 +2665,7 @@ public class CQMCommon_2_0_000
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var f_ = context.Operators.Equal(D?.RankElement?.Value, (int?)1);
+			var f_ = context.Operators.Equal(D?.RankElement?.Value, 1);
 
 			return f_;
 		};
@@ -2697,7 +2697,7 @@ public class CQMCommon_2_0_000
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var f_ = context.Operators.Equal(D?.RankElement?.Value, (int?)1);
+			var f_ = context.Operators.Equal(D?.RankElement?.Value, 1);
 
 			return f_;
 		};

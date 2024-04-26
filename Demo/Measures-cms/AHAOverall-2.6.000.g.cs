@@ -251,9 +251,9 @@ public class AHAOverall_2_6_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("AHAOverall-2.6.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -385,7 +385,7 @@ public class AHAOverall_2_6_000
 		bool? c_(Observation EjectionFraction)
 		{
 			var n_ = FHIRHelpers_4_3_000.ToValue(EjectionFraction?.Value);
-			var o_ = context.Operators.Quantity((decimal?)40m, "%");
+			var o_ = context.Operators.Quantity(40m, "%");
 			var p_ = context.Operators.LessOrEqual((n_ as CqlQuantity), o_);
 			var q_ = context.Operators.Convert<Code<ObservationStatus>>(EjectionFraction?.StatusElement?.Value);
 			var r_ = context.Operators.Convert<string>(q_);
@@ -634,7 +634,7 @@ public class AHAOverall_2_6_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
+		var g_ = context.Operators.GreaterOrEqual(f_, 18);
 		var h_ = this.Qualifying_Outpatient_Encounter_During_Measurement_Period();
 		IEnumerable<Encounter> i_(Encounter Encounter1)
 		{
@@ -804,7 +804,7 @@ public class AHAOverall_2_6_000
 					var r_ = QICoreCommon_2_0_000.toInterval(q_);
 					var s_ = context.Operators.Start(r_);
 					var t_ = context.Operators.Convert<CqlDateTime>((Event as AllergyIntolerance)?.LastOccurrenceElement);
-					var u_ = context.Operators.Interval(s_, t_, (bool?)true, (bool?)true);
+					var u_ = context.Operators.Interval(s_, t_, true, true);
 					var v_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
 					var w_ = context.Operators.OverlapsAfter(u_, v_, "day");
 					var x_ = FHIRHelpers_4_3_000.ToConcept((Event as AllergyIntolerance)?.ClinicalStatus);
@@ -961,7 +961,7 @@ public class AHAOverall_2_6_000
 				}
 				else
 				{
-					return (bool?)false;
+					return false;
 				};
 			};
 

@@ -175,9 +175,9 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.001", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -245,7 +245,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)24, (int?)64, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(24, 64, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
 		var k_ = context.Operators.And(h_, j_);
@@ -382,10 +382,10 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var g_ = QICoreCommon_2_0_000.latest(f_());
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity((decimal?)2m, "years");
+			var j_ = context.Operators.Quantity(2m, "years");
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
-			var n_ = context.Operators.Interval(k_, m_, (bool?)true, (bool?)true);
+			var n_ = context.Operators.Interval(k_, m_, true, true);
 			var o_ = context.Operators.In<CqlDateTime>(g_, n_, "day");
 			var p_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Value);
 			var q_ = context.Operators.Not((bool?)(p_ is null));
@@ -460,7 +460,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var i_ = QICoreCommon_2_0_000.latest(h_());
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)30);
+			var l_ = context.Operators.GreaterOrEqual(k_, 30);
 			object m_()
 			{
 				bool am_()
@@ -510,10 +510,10 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var n_ = QICoreCommon_2_0_000.latest(m_());
 			var o_ = this.Measurement_Period();
 			var p_ = context.Operators.Start(o_);
-			var q_ = context.Operators.Quantity((decimal?)4m, "years");
+			var q_ = context.Operators.Quantity(4m, "years");
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
-			var u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
+			var u_ = context.Operators.Interval(r_, t_, true, true);
 			var v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 			var w_ = context.Operators.And(l_, v_);
 			var x_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Value);

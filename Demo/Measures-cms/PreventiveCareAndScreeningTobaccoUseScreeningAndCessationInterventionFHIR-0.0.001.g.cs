@@ -411,9 +411,9 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR-0.0.001", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -632,10 +632,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)12);
+		var g_ = context.Operators.GreaterOrEqual(f_, 12);
 		var h_ = this.Qualifying_Visit_During_Measurement_Period();
 		var i_ = context.Operators.Count<Encounter>(h_);
-		var j_ = context.Operators.GreaterOrEqual(i_, (int?)2);
+		var j_ = context.Operators.GreaterOrEqual(i_, 2);
 		var k_ = this.Preventive_Visit_During_Measurement_Period();
 		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.Or(j_, l_);
@@ -802,10 +802,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		{
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.Start(l_);
-			var n_ = context.Operators.Quantity((decimal?)6m, "months");
+			var n_ = context.Operators.Quantity(6m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
-			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
 			var s_ = FHIRHelpers_4_3_000.ToValue(TobaccoCessationCounseling?.Performed);
 			var t_ = QICoreCommon_2_0_000.toInterval(s_);
 			var u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, t_, "day");
@@ -822,10 +822,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var w_ = context.Operators.Start(v_);
 			var x_ = this.Measurement_Period();
 			var y_ = context.Operators.Start(x_);
-			var z_ = context.Operators.Quantity((decimal?)6m, "months");
+			var z_ = context.Operators.Quantity(6m, "months");
 			var aa_ = context.Operators.Subtract(y_, z_);
 			var ac_ = context.Operators.End(x_);
-			var ad_ = context.Operators.Interval(aa_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(aa_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(w_, ad_, "day");
 
 			return ae_;
@@ -852,10 +852,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var i_ = context.Operators.Convert<CqlDateTime>(CessationPharmacotherapyOrdered?.AuthoredOnElement);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity((decimal?)6m, "months");
+			var l_ = context.Operators.Quantity(6m, "months");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
 			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
@@ -881,10 +881,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var i_ = context.Operators.Convert<CqlDateTime>(TakingCessationPharmacotherapy?.AuthoredOnElement);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity((decimal?)6m, "months");
+			var l_ = context.Operators.Quantity(6m, "months");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
 			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;

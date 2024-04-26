@@ -45,7 +45,7 @@ public class FHIRHelpers_4_3_000
 			{
 				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
 				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var e_ = context.Operators.Interval(c_, d_, (bool?)false, (bool?)true);
+				var e_ = context.Operators.Interval(c_, d_, false, true);
 
 				return e_;
 			}
@@ -53,7 +53,7 @@ public class FHIRHelpers_4_3_000
 			{
 				var f_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
 				var g_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var h_ = context.Operators.Interval(f_, g_, (bool?)true, (bool?)true);
+				var h_ = context.Operators.Interval(f_, g_, true, true);
 
 				return h_;
 			};
@@ -82,35 +82,35 @@ public class FHIRHelpers_4_3_000
 					if ((context.Operators.Equal(quantity?.ComparatorElement?.Value, "<") ?? false))
 					{
 						var d_ = this.ToQuantityIgnoringComparator(quantity);
-						var e_ = context.Operators.Interval(null, d_, (bool?)true, (bool?)false);
+						var e_ = context.Operators.Interval(null, d_, true, false);
 
 						return e_;
 					}
 					else if ((context.Operators.Equal(quantity?.ComparatorElement?.Value, "<=") ?? false))
 					{
 						var f_ = this.ToQuantityIgnoringComparator(quantity);
-						var g_ = context.Operators.Interval(null, f_, (bool?)true, (bool?)true);
+						var g_ = context.Operators.Interval(null, f_, true, true);
 
 						return g_;
 					}
 					else if ((context.Operators.Equal(quantity?.ComparatorElement?.Value, ">=") ?? false))
 					{
 						var h_ = this.ToQuantityIgnoringComparator(quantity);
-						var i_ = context.Operators.Interval(h_, null, (bool?)true, (bool?)true);
+						var i_ = context.Operators.Interval(h_, null, true, true);
 
 						return i_;
 					}
 					else if ((context.Operators.Equal(quantity?.ComparatorElement?.Value, ">") ?? false))
 					{
 						var j_ = this.ToQuantityIgnoringComparator(quantity);
-						var k_ = context.Operators.Interval(j_, null, (bool?)false, (bool?)true);
+						var k_ = context.Operators.Interval(j_, null, false, true);
 
 						return k_;
 					}
 					else
 					{
 						var l_ = this.ToQuantity(quantity);
-						var n_ = context.Operators.Interval(l_, l_, (bool?)true, (bool?)true);
+						var n_ = context.Operators.Interval(l_, l_, true, true);
 
 						return n_;
 					};
@@ -139,7 +139,7 @@ public class FHIRHelpers_4_3_000
 			{
 				var c_ = this.ToQuantity(range?.Low);
 				var d_ = this.ToQuantity(range?.High);
-				var e_ = context.Operators.Interval(c_, d_, (bool?)true, (bool?)true);
+				var e_ = context.Operators.Interval(c_, d_, true, true);
 
 				return e_;
 			};

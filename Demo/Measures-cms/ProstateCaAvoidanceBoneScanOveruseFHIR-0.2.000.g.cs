@@ -239,9 +239,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("ProstateCaAvoidanceBoneScanOveruseFHIR-0.2.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -588,7 +588,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		bool? j_(Observation LastGleasonScore)
 		{
 			var ah_ = FHIRHelpers_4_3_000.ToValue(LastGleasonScore?.Value);
-			var ai_ = context.Operators.LessOrEqual((int?)ah_, (int?)6);
+			var ai_ = context.Operators.LessOrEqual((int?)ah_, 6);
 
 			return ai_;
 		};
@@ -736,7 +736,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 						var ag_ = context.Operators.Start(af_);
 						var ai_ = QICoreCommon_2_0_000.toInterval(ae_);
 						var aj_ = context.Operators.Start(ai_);
-						var ak_ = context.Operators.Interval(ag_, aj_, (bool?)true, (bool?)true);
+						var ak_ = context.Operators.Interval(ag_, aj_, true, true);
 
 						return ak_;
 					};
@@ -782,7 +782,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		bool? i_(Observation LastPSATest)
 		{
 			var ao_ = FHIRHelpers_4_3_000.ToValue(LastPSATest?.Value);
-			var ap_ = context.Operators.Quantity((decimal?)10m, "ng/mL");
+			var ap_ = context.Operators.Quantity(10m, "ng/mL");
 			var aq_ = context.Operators.Less((ao_ as CqlQuantity), ap_);
 
 			return aq_;

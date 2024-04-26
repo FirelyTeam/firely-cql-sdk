@@ -296,9 +296,9 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -444,9 +444,9 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var bl_ = this.Measurement_Period();
 			var bm_ = context.Operators.Start(bl_);
 			var bo_ = context.Operators.End(bl_);
-			var bp_ = context.Operators.Quantity((decimal?)3m, "days");
+			var bp_ = context.Operators.Quantity(3m, "days");
 			var bq_ = context.Operators.Subtract(bo_, bp_);
-			var br_ = context.Operators.Interval(bm_, bq_, (bool?)true, (bool?)true);
+			var br_ = context.Operators.Interval(bm_, bq_, true, true);
 			var bs_ = context.Operators.In<CqlDateTime>(bk_, br_, "day");
 
 			return bs_;
@@ -513,7 +513,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "month");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)3);
+			var l_ = context.Operators.GreaterOrEqual(k_, 3);
 
 			return l_;
 		};
@@ -601,9 +601,9 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 				var t_ = context.Operators.Start(s_);
 				var v_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Quantity((decimal?)3m, "days");
+				var x_ = context.Operators.Quantity(3m, "days");
 				var y_ = context.Operators.Add(w_, x_);
-				var z_ = context.Operators.Interval(t_, y_, (bool?)true, (bool?)true);
+				var z_ = context.Operators.Interval(t_, y_, true, true);
 				var aa_ = context.Operators.In<CqlDateTime>(q_, z_, null);
 				var ac_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 				var ad_ = context.Operators.Start(ac_);
@@ -643,12 +643,12 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "month");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)3);
+			var l_ = context.Operators.GreaterOrEqual(k_, 3);
 			var n_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
 			var p_ = context.Operators.Start(h_);
 			var q_ = context.Operators.DateFrom(p_);
 			var r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
-			var s_ = context.Operators.LessOrEqual(r_, (int?)17);
+			var s_ = context.Operators.LessOrEqual(r_, 17);
 			var t_ = context.Operators.And(l_, s_);
 
 			return t_;
@@ -676,7 +676,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.Interval((int?)18, (int?)64, (bool?)true, (bool?)true);
+			var l_ = context.Operators.Interval(18, 64, true, true);
 			var m_ = context.Operators.In<int?>(k_, l_, null);
 
 			return m_;
@@ -704,7 +704,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)65);
+			var l_ = context.Operators.GreaterOrEqual(k_, 65);
 
 			return l_;
 		};

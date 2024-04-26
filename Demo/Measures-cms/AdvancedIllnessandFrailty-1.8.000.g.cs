@@ -382,10 +382,10 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var u_ = context.Operators.Start(t_);
 			var v_ = this.Measurement_Period();
 			var w_ = context.Operators.Start(v_);
-			var x_ = context.Operators.Quantity((decimal?)1m, "year");
+			var x_ = context.Operators.Quantity(1m, "year");
 			var y_ = context.Operators.Subtract(w_, x_);
 			var aa_ = context.Operators.End(v_);
-			var ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)true);
+			var ab_ = context.Operators.Interval(y_, aa_, true, true);
 			var ac_ = context.Operators.In<CqlDateTime>(u_, ab_, "day");
 			var ad_ = context.Operators.And(r_, ac_);
 
@@ -421,7 +421,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var m_ = context.Operators.End(l_);
 			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1?.Period);
 			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity((decimal?)1m, "day");
+			var p_ = context.Operators.Quantity(1m, "day");
 			var q_ = context.Operators.Add(o_, p_);
 			var r_ = context.Operators.SameOrAfter(m_, q_, "day");
 
@@ -463,10 +463,10 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Measurement_Period();
 			var o_ = context.Operators.Start(n_);
-			var p_ = context.Operators.Quantity((decimal?)1m, "year");
+			var p_ = context.Operators.Quantity(1m, "year");
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
-			var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
+			var t_ = context.Operators.Interval(q_, s_, true, true);
 			var u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
 			var v_ = context.Operators.And(j_, u_);
 
@@ -499,10 +499,10 @@ public class AdvancedIllnessandFrailty_1_8_000
 			var r_ = context.Operators.Interval(m_, o_, l_?.lowClosed, l_?.highClosed);
 			var s_ = this.Measurement_Period();
 			var t_ = context.Operators.Start(s_);
-			var u_ = context.Operators.Quantity((decimal?)1m, "year");
+			var u_ = context.Operators.Quantity(1m, "year");
 			var v_ = context.Operators.Subtract(t_, u_);
 			var x_ = context.Operators.End(s_);
-			var y_ = context.Operators.Interval(v_, x_, (bool?)true, (bool?)true);
+			var y_ = context.Operators.Interval(v_, x_, true, true);
 			var z_ = context.Operators.Overlaps(r_, y_, "day");
 			var aa_ = context.Operators.And(k_, z_);
 
@@ -526,7 +526,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)66);
+		var g_ = context.Operators.GreaterOrEqual(f_, 66);
 		var h_ = this.Has_Criteria_Indicating_Frailty();
 		var i_ = context.Operators.And(g_, h_);
 		var j_ = this.Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
@@ -551,7 +551,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)66, (int?)80, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(66, 80, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Has_Criteria_Indicating_Frailty();
 		var j_ = context.Operators.And(h_, i_);
@@ -565,7 +565,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var t_ = context.Operators.End(c_);
 		var u_ = context.Operators.DateFrom(t_);
 		var v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
-		var w_ = context.Operators.GreaterOrEqual(v_, (int?)81);
+		var w_ = context.Operators.GreaterOrEqual(v_, 81);
 		var y_ = context.Operators.And(w_, i_);
 		var z_ = context.Operators.Or(p_, y_);
 
@@ -584,7 +584,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)66);
+		var g_ = context.Operators.GreaterOrEqual(f_, 66);
 		var h_ = this.Housing_status();
 		var i_ = context.Operators.ToList<CqlCode>(h_);
 		var j_ = context.Operators.RetrieveByCodes<Observation>(i_, null);

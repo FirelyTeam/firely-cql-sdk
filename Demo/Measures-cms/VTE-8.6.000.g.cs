@@ -146,7 +146,7 @@ public class VTE_8_6_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)18);
+			var l_ = context.Operators.GreaterOrEqual(k_, 18);
 
 			return l_;
 		};
@@ -181,9 +181,9 @@ public class VTE_8_6_000
 		var d_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
 		var e_ = context.Operators.Start(d_);
 		var f_ = context.Operators.DateFrom(e_);
-		var g_ = context.Operators.Quantity((decimal?)1m, "days");
+		var g_ = context.Operators.Quantity(1m, "days");
 		var h_ = context.Operators.Add(f_, g_);
-		var i_ = context.Operators.Interval(c_, h_, (bool?)true, (bool?)true);
+		var i_ = context.Operators.Interval(c_, h_, true, true);
 
 		return i_;
 	}
@@ -206,9 +206,9 @@ public class VTE_8_6_000
 		var c_ = context.Operators.DateFrom(b_);
 		var d_ = this.StartOfFirstICU(Encounter);
 		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.Quantity((decimal?)1m, "day");
+		var f_ = context.Operators.Quantity(1m, "day");
 		var g_ = context.Operators.Add(e_, f_);
-		var h_ = context.Operators.Interval(c_, g_, (bool?)true, (bool?)true);
+		var h_ = context.Operators.Interval(c_, g_, true, true);
 
 		return h_;
 	}

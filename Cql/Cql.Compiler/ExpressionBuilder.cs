@@ -217,6 +217,7 @@ namespace Hl7.Cql.Compiler
             params T?[] args) =>
             _cqlOperatorsBinder.BindToMethod(methodName, TranslateAll(args));
 
+        [DebuggerStepThrough]
         private Expression[] TranslateAll(params object?[] args) =>
             TranslateAll<object?>(args);
 

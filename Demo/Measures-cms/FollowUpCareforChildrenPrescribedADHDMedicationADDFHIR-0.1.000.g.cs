@@ -396,9 +396,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -425,9 +425,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
 		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, (int?)1);
-		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-		var f_ = context.Operators.DateTime(d_, (int?)3, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+		var d_ = context.Operators.Subtract(c_, 1);
+		var e_ = context.Operators.ConvertIntegerToDecimal(0);
+		var f_ = context.Operators.DateTime(d_, 3, 1, 0, 0, 0, 0, e_);
 
 		return f_;
 	}
@@ -441,9 +441,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
 		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-		var e_ = context.Operators.DateTime(c_, (int?)3, (int?)1, (int?)23, (int?)59, (int?)59, (int?)0, d_);
-		var f_ = context.Operators.Quantity((decimal?)1m, "day");
+		var d_ = context.Operators.ConvertIntegerToDecimal(0);
+		var e_ = context.Operators.DateTime(c_, 3, 1, 23, 59, 59, 0, d_);
+		var f_ = context.Operators.Quantity(1m, "day");
 		var g_ = context.Operators.Subtract(e_, f_);
 
 		return g_;
@@ -457,7 +457,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = this.March_1_of_Year_Prior_to_Measurement_Period();
 		var b_ = this.Last_Calendar_Day_of_February_of_Measurement_Period();
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)true);
+		var c_ = context.Operators.Interval(a_, b_, true, true);
 
 		return c_;
 	}
@@ -614,12 +614,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				var fs_ = context.Operators.Start(fr_);
 				var ft_ = context.Operators.ConvertDateToDateTime(fs_);
 				var fu_ = context.Operators.DateFrom(ft_);
-				var fv_ = context.Operators.Quantity((decimal?)120m, "days");
+				var fv_ = context.Operators.Quantity(120m, "days");
 				var fw_ = context.Operators.Subtract(fu_, fv_);
 				var fy_ = context.Operators.Start(fr_);
 				var fz_ = context.Operators.ConvertDateToDateTime(fy_);
 				var ga_ = context.Operators.DateFrom(fz_);
-				var gb_ = context.Operators.Interval(fw_, ga_, (bool?)true, (bool?)false);
+				var gb_ = context.Operators.Interval(fw_, ga_, true, false);
 				var gc_ = context.Operators.Overlaps(fq_, gb_, null);
 
 				return gc_;
@@ -705,17 +705,17 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		bool? l_(Encounter ValidEncounters)
 		{
 			var n_ = this.IPSD();
-			var o_ = context.Operators.Quantity((decimal?)6m, "months");
+			var o_ = context.Operators.Quantity(6m, "months");
 			var p_ = context.Operators.Subtract(n_, o_);
-			var r_ = context.Operators.Interval(p_, n_, (bool?)true, (bool?)true);
+			var r_ = context.Operators.Interval(p_, n_, true, true);
 			var s_ = context.Operators.ConvertDateToDateTime(r_?.low);
 			var v_ = context.Operators.Subtract(n_, o_);
-			var x_ = context.Operators.Interval(v_, n_, (bool?)true, (bool?)true);
+			var x_ = context.Operators.Interval(v_, n_, true, true);
 			var y_ = context.Operators.ConvertDateToDateTime(x_?.high);
 			var ab_ = context.Operators.Subtract(n_, o_);
-			var ad_ = context.Operators.Interval(ab_, n_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(ab_, n_, true, true);
 			var ag_ = context.Operators.Subtract(n_, o_);
-			var ai_ = context.Operators.Interval(ag_, n_, (bool?)true, (bool?)true);
+			var ai_ = context.Operators.Interval(ag_, n_, true, true);
 			var aj_ = context.Operators.Interval(s_, y_, ad_?.lowClosed, ai_?.highClosed);
 			var ak_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
 			var al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
@@ -737,7 +737,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var e_ = context.Operators.Equal(D?.RankElement?.Value, (int?)1);
+			var e_ = context.Operators.Equal(D?.RankElement?.Value, 1);
 
 			return e_;
 		};
@@ -800,9 +800,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
 			var f_ = context.Operators.Start(e_);
 			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity((decimal?)30m, "days");
+			var i_ = context.Operators.Quantity(30m, "days");
 			var j_ = context.Operators.Add(g_, i_);
-			var k_ = context.Operators.Interval(g_, j_, (bool?)false, (bool?)true);
+			var k_ = context.Operators.Interval(g_, j_, false, true);
 			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
@@ -826,12 +826,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
+		var g_ = context.Operators.GreaterOrEqual(f_, 6);
 		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.End(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, (int?)12);
+		var n_ = context.Operators.LessOrEqual(m_, 12);
 		var o_ = context.Operators.And(g_, n_);
 		var p_ = this.Qualifying_Encounter();
 		var q_ = context.Operators.Exists<Encounter>(p_);
@@ -979,9 +979,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
 			var f_ = context.Operators.Start(e_);
 			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity((decimal?)30m, "days");
+			var i_ = context.Operators.Quantity(30m, "days");
 			var j_ = context.Operators.Add(g_, i_);
-			var k_ = context.Operators.Interval(g_, j_, (bool?)false, (bool?)true);
+			var k_ = context.Operators.Interval(g_, j_, false, true);
 			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
@@ -1243,9 +1243,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		CqlInterval<CqlDate> dr_(CqlInterval<CqlDate> ADHDMedication)
 		{
 			var fh_ = this.IPSD();
-			var fj_ = context.Operators.Quantity((decimal?)300m, "days");
+			var fj_ = context.Operators.Quantity(300m, "days");
 			var fk_ = context.Operators.Add(fh_, fj_);
-			var fl_ = context.Operators.Interval(fh_, fk_, (bool?)true, (bool?)true);
+			var fl_ = context.Operators.Interval(fh_, fk_, true, true);
 			var fm_ = context.Operators.IntervalIntersect<CqlDate>(ADHDMedication, fl_);
 
 			return fm_;
@@ -1274,7 +1274,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Value()
 	{
 		var a_ = this.ADHD_Cumulative_Medication_Duration();
-		var b_ = context.Operators.GreaterOrEqual(a_, (int?)210);
+		var b_ = context.Operators.GreaterOrEqual(a_, 210);
 
 		return b_;
 	}
@@ -1292,9 +1292,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
 			var f_ = context.Operators.Start(e_);
 			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity((decimal?)300m, "days");
+			var i_ = context.Operators.Quantity(300m, "days");
 			var j_ = context.Operators.Add(g_, i_);
-			var k_ = context.Operators.Interval(g_, j_, (bool?)false, (bool?)true);
+			var k_ = context.Operators.Interval(g_, j_, false, true);
 			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
@@ -1318,12 +1318,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
+		var g_ = context.Operators.GreaterOrEqual(f_, 6);
 		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.End(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, (int?)12);
+		var n_ = context.Operators.LessOrEqual(m_, 12);
 		var o_ = context.Operators.And(g_, n_);
 		var p_ = this.Qualifying_Encounter();
 		var q_ = context.Operators.Exists<Encounter>(p_);
@@ -1365,11 +1365,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var g_ = CQMCommon_2_0_000.ToDateInterval(f_);
 			var h_ = context.Operators.Start(g_);
 			var i_ = this.IPSD();
-			var j_ = context.Operators.Quantity((decimal?)31m, "days");
+			var j_ = context.Operators.Quantity(31m, "days");
 			var k_ = context.Operators.Add(i_, j_);
-			var m_ = context.Operators.Quantity((decimal?)300m, "days");
+			var m_ = context.Operators.Quantity(300m, "days");
 			var n_ = context.Operators.Add(i_, m_);
-			var o_ = context.Operators.Interval(k_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(k_, n_, true, true);
 			var p_ = context.Operators.In<CqlDate>(h_, o_, "day");
 
 			return p_;
@@ -1396,7 +1396,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 		var b_ = context.Operators.Count<CqlDate>(a_);
-		var c_ = context.Operators.GreaterOrEqual(b_, (int?)2);
+		var c_ = context.Operators.GreaterOrEqual(b_, 2);
 
 		return c_;
 	}
@@ -1415,11 +1415,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var h_ = CQMCommon_2_0_000.ToDateInterval(g_);
 			var i_ = context.Operators.Start(h_);
 			var j_ = this.IPSD();
-			var k_ = context.Operators.Quantity((decimal?)31m, "days");
+			var k_ = context.Operators.Quantity(31m, "days");
 			var l_ = context.Operators.Add(j_, k_);
-			var n_ = context.Operators.Quantity((decimal?)300m, "days");
+			var n_ = context.Operators.Quantity(300m, "days");
 			var o_ = context.Operators.Add(j_, n_);
-			var p_ = context.Operators.Interval(l_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(l_, o_, true, true);
 			var q_ = context.Operators.In<CqlDate>(i_, p_, "day");
 
 			return q_;

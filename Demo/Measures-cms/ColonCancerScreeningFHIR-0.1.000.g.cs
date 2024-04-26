@@ -161,9 +161,9 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("ColonCancerScreeningFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -237,7 +237,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)46, (int?)75, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(46, 75, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
 		var j_ = context.Operators.Exists<Encounter>(i_);
@@ -462,10 +462,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity((decimal?)2m, "years");
+			var l_ = context.Operators.Quantity(2m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
 			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 			var r_ = context.Operators.And(g_, q_);
 
@@ -492,10 +492,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity((decimal?)4m, "years");
+			var k_ = context.Operators.Quantity(4m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
 
 			return p_;
@@ -521,10 +521,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity((decimal?)4m, "years");
+			var k_ = context.Operators.Quantity(4m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
 
 			return p_;
@@ -550,10 +550,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity((decimal?)9m, "years");
+			var k_ = context.Operators.Quantity(9m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
 
 			return p_;
@@ -599,7 +599,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)46, (int?)49, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(46, 49, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
@@ -617,7 +617,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)50, (int?)75, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(50, 75, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;

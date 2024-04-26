@@ -253,9 +253,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR-1.3.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -367,10 +367,10 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var j_ = context.Operators.Start(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.Start(k_);
-			var m_ = context.Operators.Quantity((decimal?)6m, "months");
+			var m_ = context.Operators.Quantity(6m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
-			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
 			var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 			var s_ = this.isConfirmedActiveDiagnosis(NewBPHDiagnosis);
 			var t_ = context.Operators.And(r_, s_);
@@ -825,9 +825,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var m_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var n_ = context.Operators.Start(m_);
 				var p_ = context.Operators.Start(m_);
-				var q_ = context.Operators.Quantity((decimal?)1m, "month");
+				var q_ = context.Operators.Quantity(1m, "month");
 				var r_ = context.Operators.Add(p_, q_);
-				var s_ = context.Operators.Interval(n_, r_, (bool?)true, (bool?)true);
+				var s_ = context.Operators.Interval(n_, r_, true, true);
 				var t_ = context.Operators.In<CqlDateTime>(USSAssessment?.effectiveDatetime, s_, "day");
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
@@ -870,7 +870,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var m_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var n_ = context.Operators.Start(m_);
 				var o_ = context.Operators.DurationBetween(n_, USSAssessment?.effectiveDatetime, "month");
-				var p_ = context.Operators.Interval((int?)6, (int?)12, (bool?)true, (bool?)true);
+				var p_ = context.Operators.Interval(6, 12, true, true);
 				var q_ = context.Operators.In<int?>(o_, p_, null);
 
 				return q_;
@@ -945,9 +945,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var o_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var p_ = context.Operators.Start(o_);
 				var r_ = context.Operators.Start(o_);
-				var s_ = context.Operators.Quantity((decimal?)1m, "year");
+				var s_ = context.Operators.Quantity(1m, "year");
 				var t_ = context.Operators.Add(r_, s_);
-				var u_ = context.Operators.Interval(p_, t_, (bool?)true, (bool?)true);
+				var u_ = context.Operators.Interval(p_, t_, true, true);
 				var v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 				var x_ = context.Operators.Start(o_);
 				var y_ = context.Operators.Not((bool?)(x_ is null));
@@ -996,9 +996,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var n_ = FHIRHelpers_4_3_000.ToInterval(InHospitalServices?.Period);
 				var o_ = context.Operators.Start(n_);
 				var q_ = context.Operators.End(n_);
-				var r_ = context.Operators.Quantity((decimal?)31m, "days");
+				var r_ = context.Operators.Quantity(31m, "days");
 				var s_ = context.Operators.Add(q_, r_);
-				var t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
+				var t_ = context.Operators.Interval(o_, s_, true, true);
 				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InHospitalServices?.StatusElement?.Value);
 				var w_ = context.Operators.Equal(v_, "finished");
@@ -1077,7 +1077,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			{
 				var m_ = context.Operators.Convert<Quantity>(BMIExam?.Value);
 				var n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
-				var o_ = context.Operators.Quantity((decimal?)40m, "kg/m2");
+				var o_ = context.Operators.Quantity(40m, "kg/m2");
 				var p_ = context.Operators.Greater(n_, o_);
 				var q_ = context.Operators.Convert<string>(BMIExam?.StatusElement?.Value);
 				var r_ = new string[]
@@ -1204,7 +1204,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		};
 		bool? c_(int? USSImprovement)
 		{
-			var g_ = context.Operators.GreaterOrEqual(USSImprovement, (int?)3);
+			var g_ = context.Operators.GreaterOrEqual(USSImprovement, 3);
 
 			return g_;
 		};

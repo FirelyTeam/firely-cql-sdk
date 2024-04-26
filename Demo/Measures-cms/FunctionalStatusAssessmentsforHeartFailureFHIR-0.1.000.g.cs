@@ -481,9 +481,9 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("FunctionalStatusAssessmentsforHeartFailureFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -601,7 +601,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_fgyjhhbrrztdgeekjqjiibgue.OfficeVisit1?.Period);
 			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			var p_ = context.Operators.End(o_);
-			var q_ = context.Operators.Quantity((decimal?)1m, "day");
+			var q_ = context.Operators.Quantity(1m, "day");
 			var r_ = context.Operators.Add(p_, q_);
 			var s_ = context.Operators.SameOrAfter(m_, r_, "day");
 
@@ -627,7 +627,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
+		var g_ = context.Operators.GreaterOrEqual(f_, 18);
 		var h_ = this.Heart_Failure();
 		var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
 		bool? j_(Condition HeartFailure)
@@ -783,17 +783,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_bapoxcdqpiefffdprayqhjvmk.InitialPROMIS10Date);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -803,11 +803,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_bapoxcdqpiefffdprayqhjvmk.FollowupPROMIS10Date);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -1031,17 +1031,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_dcgyafmugiitlmlbigqthxaba.InitialPROMIS29Date);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -1051,11 +1051,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_dcgyafmugiitlmlbigqthxaba.FollowupPROMIS29Date);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -1169,17 +1169,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_ehgfqcqtpmavgfjerngbdigou.InitialVR12ObliqueDate);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -1189,11 +1189,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_ehgfqcqtpmavgfjerngbdigou.FollowupVR12ObliqueDate);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -1307,17 +1307,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_dathnxwghivrygrfgdxjyjkrz.InitialVR12OrthogonalDate);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -1327,11 +1327,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_dathnxwghivrygrfgdxjyjkrz.FollowupVR12OrthogonalDate);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -1445,17 +1445,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_hnuzsejfeiqxihxgudxliwidi.InitialVR36ObliqueDate);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -1465,11 +1465,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_hnuzsejfeiqxihxgudxliwidi.FollowupVR36ObliqueDate);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -1583,17 +1583,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_fzfelixhkplafndgwdmescidi.InitialVR36OrthogonalDate);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -1603,11 +1603,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_fzfelixhkplafndgwdmescidi.FollowupVR36OrthogonalDate);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -1721,17 +1721,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_dgnbkfgfrhawdzadfpzkifxli.InitialMLHFQDate);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -1741,11 +1741,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_dgnbkfgfrhawdzadfpzkifxli.FollowupMLHFQDate);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -1859,17 +1859,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_dnzcztnizuqfffijaydwagbfi.InitialKCCQ12Date);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -1879,11 +1879,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_dnzcztnizuqfffijaydwagbfi.FollowupKCCQ12Date);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -2085,17 +2085,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_gechmkfhepfubfjyjevegqtrc.InitialKCCQAssessmentDate);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -2105,11 +2105,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_gechmkfhepfubfjyjevegqtrc.FollowupKCCQAssessmentDate);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 
@@ -2189,17 +2189,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var o_ = context.Operators.End(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity((decimal?)180m, "days");
+			var r_ = context.Operators.Quantity(180m, "days");
 			var s_ = context.Operators.Subtract(q_, r_);
 			var t_ = context.Operators.SameOrBefore(o_, s_, "day");
 			var u_ = context.Operators.ConvertDateToDateTime(tuple_dsdkcfqmumbjegqcvveyhpydf.InitialKCCQTotalScore);
 			var w_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var x_ = context.Operators.End(w_);
-			var y_ = context.Operators.Quantity((decimal?)14m, "days");
+			var y_ = context.Operators.Quantity(14m, "days");
 			var z_ = context.Operators.Subtract(x_, y_);
 			var ab_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ac_ = context.Operators.End(ab_);
-			var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(z_, ac_, true, true);
 			var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, "day");
 			var ag_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var ah_ = context.Operators.End(ag_);
@@ -2209,11 +2209,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			var al_ = context.Operators.ConvertDateToDateTime(tuple_dsdkcfqmumbjegqcvveyhpydf.FollowupKCCQTotalScore);
 			var am_ = context.Operators.DateFrom(al_);
 			var ao_ = context.Operators.DateFrom(u_);
-			var ap_ = context.Operators.Quantity((decimal?)30m, "days");
+			var ap_ = context.Operators.Quantity(30m, "days");
 			var aq_ = context.Operators.Add(ao_, ap_);
 			var as_ = context.Operators.DateFrom(u_);
 			var au_ = context.Operators.Add(as_, r_);
-			var av_ = context.Operators.Interval(aq_, au_, (bool?)true, (bool?)true);
+			var av_ = context.Operators.Interval(aq_, au_, true, true);
 			var aw_ = context.Operators.In<CqlDate>(am_, av_, "day");
 			var ax_ = context.Operators.And(ak_, aw_);
 

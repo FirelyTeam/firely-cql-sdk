@@ -687,9 +687,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("AppropriateDXAScansForWomenUnder65FHIR-0.0.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -825,7 +825,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)50, (int?)63, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(50, 63, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
 		var k_ = context.Operators.And(h_, j_);
@@ -898,7 +898,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			var f_ = context.Operators.Convert<Quantity>(FirstBMI?.Value);
 			var g_ = FHIRHelpers_4_3_000.ToQuantity(f_);
-			var h_ = context.Operators.Quantity((decimal?)20m, "kg/m2");
+			var h_ = context.Operators.Quantity(20m, "kg/m2");
 			var i_ = context.Operators.LessOrEqual(g_, h_);
 
 			return i_;
@@ -927,7 +927,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var m_ = this.Measurement_Period();
 			var n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
 			var o_ = FHIRHelpers_4_3_000.ToValue(AverageDrinks?.Value);
-			var p_ = context.Operators.Quantity((decimal?)2m, "{drinks}/d");
+			var p_ = context.Operators.Quantity(2m, "{drinks}/d");
 			var q_ = context.Operators.Greater((o_ as CqlQuantity), p_);
 			var r_ = context.Operators.And(n_, q_);
 
@@ -1114,7 +1114,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 					var at_ = this.Measurement_Period();
 					var au_ = context.Operators.Start(at_);
 					var aw_ = context.Operators.Start(at_);
-					var ax_ = context.Operators.Interval(au_, aw_, (bool?)true, (bool?)true);
+					var ax_ = context.Operators.Interval(au_, aw_, true, true);
 
 					return ax_;
 				};
@@ -1163,7 +1163,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var u_ = this.Measurement_Period();
 			var v_ = context.Operators.End(u_);
 			var w_ = context.Operators.DateFrom(v_);
-			var x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)true);
+			var x_ = context.Operators.Interval(t_, w_, true, true);
 			var y_ = context.Operators.IntervalIntersect<CqlDate>(r_, x_);
 
 			return y_;
@@ -1192,7 +1192,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Has_90_or_More_Active_Glucocorticoid_Medication_Days_Value()
 	{
 		var a_ = this.Glucocorticoid_Active_Medication_Days();
-		var b_ = context.Operators.GreaterOrEqual(a_, (int?)90);
+		var b_ = context.Operators.GreaterOrEqual(a_, 90);
 
 		return b_;
 	}
@@ -1489,7 +1489,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? e_(Observation FRAX)
 		{
 			var ad_ = FHIRHelpers_4_3_000.ToValue(FRAX?.Value);
-			var ae_ = context.Operators.Quantity((decimal?)8.4m, "%");
+			var ae_ = context.Operators.Quantity(8.4m, "%");
 			var af_ = context.Operators.GreaterOrEqual((ad_ as CqlQuantity), ae_);
 
 			return af_;
@@ -1502,7 +1502,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? k_(Observation ORAI)
 		{
 			var ag_ = FHIRHelpers_4_3_000.ToValue(ORAI?.Value);
-			var ah_ = context.Operators.GreaterOrEqual((int?)ag_, (int?)9);
+			var ah_ = context.Operators.GreaterOrEqual((int?)ag_, 9);
 
 			return ah_;
 		};
@@ -1515,7 +1515,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? r_(Observation OSIRIS)
 		{
 			var ai_ = FHIRHelpers_4_3_000.ToValue(OSIRIS?.Value);
-			var aj_ = context.Operators.ConvertDecimalToQuantity((decimal?)1.0m);
+			var aj_ = context.Operators.ConvertDecimalToQuantity(1.0m);
 			var ak_ = context.Operators.Less((ai_ as CqlQuantity), aj_);
 
 			return ak_;
@@ -1528,7 +1528,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? x_(Observation OST)
 		{
 			var al_ = FHIRHelpers_4_3_000.ToValue(OST?.Value);
-			var am_ = context.Operators.ConvertDecimalToQuantity((decimal?)2.0m);
+			var am_ = context.Operators.ConvertDecimalToQuantity(2.0m);
 			var an_ = context.Operators.Less((al_ as CqlQuantity), am_);
 
 			return an_;

@@ -11,6 +11,21 @@ internal static class ExpressionExtensions
         if (expression.Type == type)
             return expression;
 
+        if (expression is ConstantExpression constant)
+        {
+            if (constant.Value is null)
+            {
+                if (type.IsNullable(out _))
+                    return NullExpression.ForType(type);
+            }
+            else if (
+                constant.Value is not string // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
+                && constant.Value.GetType().IsAssignableTo(type))
+            {
+                return Expression.Constant(constant.Value, type);
+            }
+        }
+
         Expression cast = Expression.Convert(expression, type);
         return cast;
     }

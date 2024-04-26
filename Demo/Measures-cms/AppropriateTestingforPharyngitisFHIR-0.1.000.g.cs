@@ -342,9 +342,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("AppropriateTestingforPharyngitisFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -542,9 +542,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 				var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 				var p_ = context.Operators.Start(o_);
 				var q_ = context.Operators.Convert<CqlDateTime>(AntibioticOrdered?.AuthoredOnElement);
-				var r_ = context.Operators.Quantity((decimal?)3m, "days");
+				var r_ = context.Operators.Quantity(3m, "days");
 				var s_ = context.Operators.Subtract(q_, r_);
-				var u_ = context.Operators.Interval(s_, q_, (bool?)true, (bool?)true);
+				var u_ = context.Operators.Interval(s_, q_, true, true);
 				var v_ = context.Operators.In<CqlDateTime>(p_, u_, null);
 				var x_ = context.Operators.Not((bool?)(q_ is null));
 				var y_ = context.Operators.And(v_, x_);
@@ -632,7 +632,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)3);
+			var l_ = context.Operators.GreaterOrEqual(k_, 3);
 
 			return l_;
 		};
@@ -747,11 +747,11 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var m_ = context.Operators.Start(l_);
 			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_ferjikqtqgcpbsywqkeabbeev.EncounterWithPharyngitis?.Period);
 			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity((decimal?)3m, "days");
+			var p_ = context.Operators.Quantity(3m, "days");
 			var q_ = context.Operators.Subtract(o_, p_);
 			var s_ = context.Operators.End(n_);
 			var u_ = context.Operators.Add(s_, p_);
-			var v_ = context.Operators.Interval(q_, u_, (bool?)true, (bool?)true);
+			var v_ = context.Operators.Interval(q_, u_, true, true);
 			var w_ = context.Operators.In<CqlDateTime>(m_, v_, "day");
 
 			return w_;
@@ -779,7 +779,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.Interval((int?)3, (int?)17, (bool?)true, (bool?)true);
+			var l_ = context.Operators.Interval(3, 17, true, true);
 			var m_ = context.Operators.In<int?>(k_, l_, null);
 
 			return m_;
@@ -807,7 +807,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.Interval((int?)18, (int?)64, (bool?)true, (bool?)true);
+			var l_ = context.Operators.Interval(18, 64, true, true);
 			var m_ = context.Operators.In<int?>(k_, l_, null);
 
 			return m_;
@@ -835,7 +835,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)65);
+			var l_ = context.Operators.GreaterOrEqual(k_, 65);
 
 			return l_;
 		};

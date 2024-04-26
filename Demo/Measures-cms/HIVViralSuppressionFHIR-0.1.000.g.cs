@@ -256,9 +256,9 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HIVViralSuppressionFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -290,7 +290,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity((decimal?)90m, "days");
+			var j_ = context.Operators.Quantity(90m, "days");
 			var k_ = context.Operators.Add(i_, j_);
 			var l_ = context.Operators.Before(g_, k_, "day");
 
@@ -345,9 +345,9 @@ public class HIVViralSuppressionFHIR_0_1_000
 			var aj_ = this.Measurement_Period();
 			var ak_ = context.Operators.Start(aj_);
 			var am_ = context.Operators.Start(aj_);
-			var an_ = context.Operators.Quantity((decimal?)240m, "days");
+			var an_ = context.Operators.Quantity(240m, "days");
 			var ao_ = context.Operators.Add(am_, an_);
-			var ap_ = context.Operators.Interval(ak_, ao_, (bool?)true, (bool?)true);
+			var ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			var aq_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
 			var ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, aq_, "day");
 
@@ -512,7 +512,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 	{
 		var a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period();
 		var b_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
-		var c_ = context.Operators.Quantity((decimal?)200m, "{copies}/mL");
+		var c_ = context.Operators.Quantity(200m, "{copies}/mL");
 		var d_ = context.Operators.Less((b_ as CqlQuantity), c_);
 		var f_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
 		var g_ = this.Below_threshold_level__qualifier_value_();

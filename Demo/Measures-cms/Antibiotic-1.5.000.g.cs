@@ -78,12 +78,12 @@ public class Antibiotic_1_5_000
 				var m_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
 				var n_ = context.Operators.Start(m_);
 				var o_ = context.Operators.DateFrom(n_);
-				var p_ = context.Operators.Quantity((decimal?)1m, "year");
+				var p_ = context.Operators.Quantity(1m, "year");
 				var q_ = context.Operators.Subtract(o_, p_);
 				var s_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
 				var t_ = context.Operators.Start(s_);
 				var u_ = context.Operators.DateFrom(t_);
-				var v_ = context.Operators.Interval(q_, u_, (bool?)true, (bool?)true);
+				var v_ = context.Operators.Interval(q_, u_, true, true);
 				var w_ = context.Operators.In<CqlDate>(k_, v_, null);
 
 				return w_;
@@ -115,9 +115,9 @@ public class Antibiotic_1_5_000
 				var k_ = FHIRHelpers_4_3_000.ToInterval(eDate?.Period);
 				var l_ = context.Operators.Start(k_);
 				var n_ = context.Operators.Start(k_);
-				var o_ = context.Operators.Quantity((decimal?)3m, "days");
+				var o_ = context.Operators.Quantity(3m, "days");
 				var p_ = context.Operators.Add(n_, o_);
-				var q_ = context.Operators.Interval(l_, p_, (bool?)true, (bool?)true);
+				var q_ = context.Operators.Interval(l_, p_, true, true);
 				var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 				var t_ = context.Operators.Start(k_);
 				var u_ = context.Operators.Not((bool?)(t_ is null));
@@ -165,14 +165,14 @@ public class Antibiotic_1_5_000
 					var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var s_ = context.Operators.Start(r_);
 					var t_ = context.Operators.DateFrom(s_);
-					var u_ = context.Operators.Quantity((decimal?)30m, "days");
+					var u_ = context.Operators.Quantity(30m, "days");
 					var v_ = context.Operators.Subtract(t_, u_);
 					var x_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var y_ = context.Operators.Start(x_);
 					var z_ = context.Operators.DateFrom(y_);
-					var aa_ = context.Operators.Quantity((decimal?)1m, "day");
+					var aa_ = context.Operators.Quantity(1m, "day");
 					var ab_ = context.Operators.Subtract(z_, aa_);
-					var ac_ = context.Operators.Interval(v_, ab_, (bool?)true, (bool?)true);
+					var ac_ = context.Operators.Interval(v_, ab_, true, true);
 					var ad_ = context.Operators.ConvertDateToDateTime(ac_?.low);
 					var af_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var ag_ = context.Operators.Start(af_);
@@ -182,7 +182,7 @@ public class Antibiotic_1_5_000
 					var am_ = context.Operators.Start(al_);
 					var an_ = context.Operators.DateFrom(am_);
 					var ap_ = context.Operators.Subtract(an_, aa_);
-					var aq_ = context.Operators.Interval(aj_, ap_, (bool?)true, (bool?)true);
+					var aq_ = context.Operators.Interval(aj_, ap_, true, true);
 					var ar_ = context.Operators.ConvertDateToDateTime(aq_?.high);
 					var at_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var au_ = context.Operators.Start(at_);
@@ -192,7 +192,7 @@ public class Antibiotic_1_5_000
 					var ba_ = context.Operators.Start(az_);
 					var bb_ = context.Operators.DateFrom(ba_);
 					var bd_ = context.Operators.Subtract(bb_, aa_);
-					var be_ = context.Operators.Interval(ax_, bd_, (bool?)true, (bool?)true);
+					var be_ = context.Operators.Interval(ax_, bd_, true, true);
 					var bg_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var bh_ = context.Operators.Start(bg_);
 					var bi_ = context.Operators.DateFrom(bh_);
@@ -201,7 +201,7 @@ public class Antibiotic_1_5_000
 					var bn_ = context.Operators.Start(bm_);
 					var bo_ = context.Operators.DateFrom(bn_);
 					var bq_ = context.Operators.Subtract(bo_, aa_);
-					var br_ = context.Operators.Interval(bk_, bq_, (bool?)true, (bool?)true);
+					var br_ = context.Operators.Interval(bk_, bq_, true, true);
 					var bs_ = context.Operators.Interval(ad_, ar_, be_?.lowClosed, br_?.highClosed);
 					var bt_ = context.Operators.Overlaps(p_, bs_, "day");
 

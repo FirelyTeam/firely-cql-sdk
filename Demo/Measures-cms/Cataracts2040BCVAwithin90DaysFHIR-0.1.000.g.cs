@@ -668,9 +668,9 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("Cataracts2040BCVAwithin90DaysFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -705,7 +705,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var j_ = QICoreCommon_2_0_000.toInterval(f_);
 			var k_ = context.Operators.Start(j_);
 			var m_ = context.Operators.End(e_);
-			var n_ = context.Operators.Quantity((decimal?)92m, "days");
+			var n_ = context.Operators.Quantity(92m, "days");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var p_ = context.Operators.SameOrBefore(k_, o_, null);
 			var q_ = context.Operators.And(h_, p_);
@@ -734,7 +734,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, (int?)18);
+			var j_ = context.Operators.GreaterOrEqual(i_, 18);
 
 			return j_;
 		};
@@ -975,9 +975,9 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				var s_ = context.Operators.End(r_);
 				var u_ = QICoreCommon_2_0_000.toInterval(q_);
 				var v_ = context.Operators.End(u_);
-				var w_ = context.Operators.Quantity((decimal?)90m, "days");
+				var w_ = context.Operators.Quantity(90m, "days");
 				var x_ = context.Operators.Add(v_, w_);
-				var y_ = context.Operators.Interval(s_, x_, (bool?)false, (bool?)true);
+				var y_ = context.Operators.Interval(s_, x_, false, true);
 				var z_ = context.Operators.In<CqlDateTime>(p_, y_, "day");
 				var ab_ = QICoreCommon_2_0_000.toInterval(q_);
 				var ac_ = context.Operators.End(ab_);

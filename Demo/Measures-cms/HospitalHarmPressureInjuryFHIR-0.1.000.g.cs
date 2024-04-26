@@ -216,9 +216,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HospitalHarmPressureInjuryFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -252,7 +252,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
-			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
+			var k_ = context.Operators.GreaterOrEqual(j_, 18);
 			var m_ = context.Operators.End(g_);
 			var n_ = this.Measurement_Period();
 			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
@@ -356,9 +356,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
 				var q_ = context.Operators.Start(n_);
-				var r_ = context.Operators.Quantity((decimal?)72m, "hours");
+				var r_ = context.Operators.Quantity(72m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
-				var t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
+				var t_ = context.Operators.Interval(o_, s_, true, true);
 				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
@@ -468,9 +468,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
 				var q_ = context.Operators.Start(n_);
-				var r_ = context.Operators.Quantity((decimal?)24m, "hours");
+				var r_ = context.Operators.Quantity(24m, "hours");
 				var s_ = context.Operators.Add(q_, r_);
-				var t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
+				var t_ = context.Operators.Interval(o_, s_, true, true);
 				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
@@ -622,10 +622,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var m_ = context.Operators.Start(l_);
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity((decimal?)72m, "hours");
+				var p_ = context.Operators.Quantity(72m, "hours");
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
-				var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
+				var t_ = context.Operators.Interval(q_, s_, true, true);
 				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);
@@ -751,10 +751,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				var m_ = context.Operators.Start(l_);
 				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
 				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity((decimal?)24m, "hours");
+				var p_ = context.Operators.Quantity(24m, "hours");
 				var q_ = context.Operators.Add(o_, p_);
 				var s_ = context.Operators.End(n_);
-				var t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
+				var t_ = context.Operators.Interval(q_, s_, true, true);
 				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
 				var w_ = context.Operators.Convert<string>(v_);

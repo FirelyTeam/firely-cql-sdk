@@ -26,7 +26,7 @@ partial class CqlOperatorsBinder
         if (from.IsAssignableTo(to))
         {
             // 'from' is a subtype of 'to' e.g. string -> object
-            result = (Expression.Convert(arg, to), TypeConversion.AssignableType);
+            result = (arg.ConvertExpression(to), TypeConversion.AssignableType);
             return true;
         }
 

@@ -378,9 +378,9 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("ChlamydiaScreeninginWomenFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -522,7 +522,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					var t_ = this.Measurement_Period();
 					var u_ = context.Operators.End(t_);
 					var w_ = context.Operators.End(t_);
-					var x_ = context.Operators.Interval(u_, w_, (bool?)true, (bool?)true);
+					var x_ = context.Operators.Interval(u_, w_, true, true);
 
 					return x_;
 				};
@@ -736,7 +736,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)16, (int?)24, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(16, 24, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
 		var k_ = context.Operators.And(h_, j_);
@@ -796,9 +796,9 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var y_ = context.Operators.End(x_);
 				var aa_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 				var ab_ = context.Operators.End(aa_);
-				var ac_ = context.Operators.Quantity((decimal?)6m, "days");
+				var ac_ = context.Operators.Quantity(6m, "days");
 				var ad_ = context.Operators.Add(ab_, ac_);
-				var ae_ = context.Operators.Interval(y_, ad_, (bool?)true, (bool?)true);
+				var ae_ = context.Operators.Interval(y_, ad_, true, true);
 				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, "day");
 				var ah_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 				var ai_ = context.Operators.End(ah_);
@@ -838,9 +838,9 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var bf_ = context.Operators.End(be_);
 				var bh_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
 				var bi_ = context.Operators.End(bh_);
-				var bj_ = context.Operators.Quantity((decimal?)6m, "days");
+				var bj_ = context.Operators.Quantity(6m, "days");
 				var bk_ = context.Operators.Add(bi_, bj_);
-				var bl_ = context.Operators.Interval(bf_, bk_, (bool?)true, (bool?)true);
+				var bl_ = context.Operators.Interval(bf_, bk_, true, true);
 				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, "day");
 				var bo_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
 				var bp_ = context.Operators.End(bo_);
@@ -985,7 +985,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)16, (int?)20, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(16, 20, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
@@ -1003,7 +1003,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)21, (int?)24, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(21, 24, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;

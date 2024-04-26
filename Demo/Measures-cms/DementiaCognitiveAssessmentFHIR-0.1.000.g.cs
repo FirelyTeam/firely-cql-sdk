@@ -235,9 +235,9 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("DementiaCognitiveAssessmentFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -377,7 +377,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var b_ = context.Operators.Exists<Encounter>(a_);
 		var c_ = this.Qualifying_Encounter_During_Measurement_Period();
 		var d_ = context.Operators.Count<Encounter>(c_);
-		var e_ = context.Operators.GreaterOrEqual(d_, (int?)2);
+		var e_ = context.Operators.GreaterOrEqual(d_, 2);
 		var f_ = context.Operators.And(b_, e_);
 
 		return f_;
@@ -415,10 +415,10 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				var q_ = context.Operators.Start(p_);
 				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
 				var s_ = context.Operators.End(r_);
-				var t_ = context.Operators.Quantity((decimal?)12m, "months");
+				var t_ = context.Operators.Quantity(12m, "months");
 				var u_ = context.Operators.Subtract(s_, t_);
 				var w_ = context.Operators.End(r_);
-				var x_ = context.Operators.Interval(u_, w_, (bool?)true, (bool?)true);
+				var x_ = context.Operators.Interval(u_, w_, true, true);
 				var y_ = context.Operators.In<CqlDateTime>(q_, x_, "day");
 				var aa_ = context.Operators.End(r_);
 				var ab_ = context.Operators.Not((bool?)(aa_ is null));

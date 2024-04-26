@@ -232,9 +232,9 @@ public class CesareanBirthFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("CesareanBirthFHIR-0.2.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -262,7 +262,7 @@ public class CesareanBirthFHIR_0_2_000
 		bool? b_(Encounter DeliveryEncounter)
 		{
 			var d_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
-			var e_ = context.Operators.GreaterOrEqual(d_, (int?)37);
+			var e_ = context.Operators.GreaterOrEqual(d_, 37);
 
 			return e_;
 		};
@@ -282,7 +282,7 @@ public class CesareanBirthFHIR_0_2_000
 		{
 			var d_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
 			var e_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
-			var f_ = context.Operators.Quantity((decimal?)37m, "weeks");
+			var f_ = context.Operators.Quantity(37m, "weeks");
 			var g_ = context.Operators.GreaterOrEqual(e_, f_);
 			var h_ = context.Operators.And((bool?)(d_ is null), g_);
 
@@ -440,9 +440,9 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var r_ = QICoreCommon_2_0_000.earliest(q_());
 			var s_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var t_ = context.Operators.Quantity(42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
-			var w_ = context.Operators.Interval(u_, s_, (bool?)true, (bool?)false);
+			var w_ = context.Operators.Interval(u_, s_, true, false);
 			var x_ = context.Operators.In<CqlDateTime>(r_, w_, null);
 			var z_ = context.Operators.Not((bool?)(s_ is null));
 			var aa_ = context.Operators.And(x_, z_);
@@ -566,9 +566,9 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var m_ = context.Operators.Quantity(42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
-			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
+			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
@@ -704,9 +704,9 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var m_ = context.Operators.Quantity(42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
-			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
+			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
@@ -842,9 +842,9 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var m_ = context.Operators.Quantity(42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
-			var p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)false);
+			var p_ = context.Operators.Interval(n_, l_, true, false);
 			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
@@ -932,14 +932,14 @@ public class CesareanBirthFHIR_0_2_000
 		bool? d_(Encounter SingletonEncounterGE37Weeks)
 		{
 			var f_ = this.lastGravida(SingletonEncounterGE37Weeks);
-			var g_ = context.Operators.Equal(f_, (int?)1);
+			var g_ = context.Operators.Equal(f_, 1);
 			var h_ = this.lastParity(SingletonEncounterGE37Weeks);
-			var i_ = context.Operators.Equal(h_, (int?)0);
+			var i_ = context.Operators.Equal(h_, 0);
 			var j_ = context.Operators.Or(g_, i_);
 			var k_ = this.lastHistoryPretermBirth(SingletonEncounterGE37Weeks);
-			var l_ = context.Operators.Equal(k_, (int?)0);
+			var l_ = context.Operators.Equal(k_, 0);
 			var m_ = this.lastHistoryTermBirth(SingletonEncounterGE37Weeks);
-			var n_ = context.Operators.Equal(m_, (int?)0);
+			var n_ = context.Operators.Equal(m_, 0);
 			var o_ = context.Operators.And(l_, n_);
 			var p_ = context.Operators.Or(j_, o_);
 

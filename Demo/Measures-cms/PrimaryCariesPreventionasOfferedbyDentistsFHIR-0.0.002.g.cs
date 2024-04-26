@@ -133,9 +133,9 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyDentistsFHIR-0.0.002", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -187,7 +187,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)1, (int?)20, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(1, 20, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Qualifying_Encounters();
 		var j_ = context.Operators.Exists<Encounter>(i_);
@@ -249,7 +249,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		};
 		var g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
 		var h_ = context.Operators.Count<CqlDate>(g_);
-		var i_ = context.Operators.GreaterOrEqual(h_, (int?)2);
+		var i_ = context.Operators.GreaterOrEqual(h_, 2);
 
 		return i_;
 	}
@@ -266,7 +266,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)1, (int?)5, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(1, 5, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
@@ -284,7 +284,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)6, (int?)12, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(6, 12, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
@@ -302,7 +302,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)13, (int?)20, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(13, 20, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;

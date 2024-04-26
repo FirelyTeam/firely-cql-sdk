@@ -258,9 +258,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HFBetaBlockerTherapyforLVSDFHIR-1.3.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -290,10 +290,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
+		var g_ = context.Operators.GreaterOrEqual(f_, 18);
 		var h_ = AHAOverall_2_6_000.Qualifying_Outpatient_Encounter_During_Measurement_Period();
 		var i_ = context.Operators.Count<Encounter>(h_);
-		var j_ = context.Operators.GreaterOrEqual(i_, (int?)2);
+		var j_ = context.Operators.GreaterOrEqual(i_, 2);
 		var k_ = context.Operators.And(g_, j_);
 		var l_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter();
 		var m_ = context.Operators.Exists<Encounter>(l_);
@@ -446,7 +446,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			var s_ = context.Operators.And(o_, r_);
 			var t_ = context.Operators.Convert<Quantity>(tuple_fgydjijbhixdbhjjiisjveojv.HeartRate?.Value);
 			var u_ = FHIRHelpers_4_3_000.ToQuantity(t_);
-			var v_ = context.Operators.Quantity((decimal?)50m, "/min");
+			var v_ = context.Operators.Quantity(50m, "/min");
 			var w_ = context.Operators.Less(u_, v_);
 			var x_ = context.Operators.And(s_, w_);
 			var y_ = context.Operators.RetrieveByValueSet<Observation>(null, null);

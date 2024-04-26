@@ -180,9 +180,9 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HospitalHarmOpioidRelatedAdverseEventsFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -216,7 +216,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
-			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
+			var k_ = context.Operators.GreaterOrEqual(j_, 18);
 			var m_ = context.Operators.End(g_);
 			var n_ = this.Measurement_Period();
 			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
@@ -423,11 +423,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var ac_ = context.Operators.End(ab_);
 			var ae_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var af_ = context.Operators.Start(ae_);
-			var ag_ = context.Operators.Quantity((decimal?)12m, "hours");
+			var ag_ = context.Operators.Quantity(12m, "hours");
 			var ah_ = context.Operators.Subtract(af_, ag_);
 			var aj_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var ak_ = context.Operators.Start(aj_);
-			var al_ = context.Operators.Interval(ah_, ak_, (bool?)true, (bool?)false);
+			var al_ = context.Operators.Interval(ah_, ak_, true, false);
 			var am_ = context.Operators.In<CqlDateTime>(ac_, al_, null);
 			var ao_ = QICoreCommon_2_0_000.ToInterval(p_);
 			var ap_ = context.Operators.Start(ao_);

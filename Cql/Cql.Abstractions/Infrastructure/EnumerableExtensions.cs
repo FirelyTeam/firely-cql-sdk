@@ -31,6 +31,7 @@ internal static class EnumerableExtensions
             ? SelectArrayToArray(sourceArray, source.Count, ConvertFuncExcludeOrdinal(select))
             : SelectEnumerableToArray(source, source.Count, select);
 
+    [DebuggerStepThrough]
     public static T[] SelectToArray<TIn, T>(
         this IReadOnlyCollection<TIn> source,
         Func<TIn, T> select) =>
@@ -38,6 +39,7 @@ internal static class EnumerableExtensions
             ? SelectArrayToArray(sourceArray, source.Count, select)
             : SelectEnumerableToArray(source, source.Count, ConvertFuncIncludeOrdinal(select));
 
+    [DebuggerStepThrough]
     public static T[] SelectToArray<TIn, T>(
         this IEnumerable<TIn> source,
         int sourceLength,
@@ -73,6 +75,7 @@ internal static class EnumerableExtensions
         return array;
     }
 
+    [DebuggerStepThrough]
     private static T[] SelectArrayToArray<TIn, T>(
         TIn[] sourceArray,
         int expectedSourceLength,

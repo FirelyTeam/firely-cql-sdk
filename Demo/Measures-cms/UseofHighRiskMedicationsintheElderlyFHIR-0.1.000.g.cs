@@ -711,9 +711,9 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("UseofHighRiskMedicationsintheElderlyFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -819,7 +819,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)65);
+		var g_ = context.Operators.GreaterOrEqual(f_, 65);
 		var h_ = this.Qualifying_Encounters();
 		var i_ = context.Operators.Exists<Encounter>(h_);
 		var j_ = context.Operators.And(g_, i_);
@@ -867,7 +867,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				var k_ = context.Operators.Convert<CqlDateTime>(OrderMedication1?.AuthoredOnElement);
 				var l_ = this.Measurement_Period();
 				var m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
-				var n_ = context.Operators.GreaterOrEqual(OrderMedication1?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value, (int?)1);
+				var n_ = context.Operators.GreaterOrEqual(OrderMedication1?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value, 1);
 				var o_ = context.Operators.And(m_, n_);
 				var q_ = context.Operators.DateFrom(k_);
 				var r_ = context.Operators.Convert<CqlDateTime>(OrderMedication2?.AuthoredOnElement);
@@ -1052,9 +1052,9 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var x_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(h_?.Timing?.Repeat?.TimeOfDayElement, "value");
 			var y_ = context.Operators.Count<CqlTime>(x_);
 			var z_ = context.Operators.ConvertIntegerToDecimal(y_);
-			var aa_ = context.Operators.Multiply((k_ ?? (n_ as CqlQuantity))?.value, ((v_ ?? z_) ?? (decimal?)1.0m));
+			var aa_ = context.Operators.Multiply((k_ ?? (n_ as CqlQuantity))?.value, ((v_ ?? z_) ?? 1.0m));
 			var ab_ = context.Operators.Divide(g_?.value, aa_);
-			var ac_ = context.Operators.Add((int?)1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? (int?)0));
+			var ac_ = context.Operators.Add(1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? 0));
 			var ad_ = context.Operators.ConvertIntegerToDecimal(ac_);
 			var ae_ = context.Operators.Multiply((f_?.value ?? ab_), ad_);
 
@@ -1081,7 +1081,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		};
 		var h_ = context.Operators.Select<MedicationRequest, decimal?>(f_, g_);
 		var i_ = context.Operators.Sum(h_);
-		var j_ = context.Operators.ConvertIntegerToDecimal((int?)90);
+		var j_ = context.Operators.ConvertIntegerToDecimal(90);
 		var k_ = context.Operators.Greater(i_, j_);
 
 		return k_;
@@ -1242,109 +1242,109 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			if (b_())
 			{
-				var bv_ = context.Operators.Quantity((decimal?)0.1m, "mg");
+				var bv_ = context.Operators.Quantity(0.1m, "mg");
 
 				return bv_;
 			}
 			else if (c_())
 			{
-				var bw_ = context.Operators.Quantity((decimal?)0.25m, "mg");
+				var bw_ = context.Operators.Quantity(0.25m, "mg");
 
 				return bw_;
 			}
 			else if (d_())
 			{
-				var bx_ = context.Operators.Quantity((decimal?)0.05m, "mg/mL");
+				var bx_ = context.Operators.Quantity(0.05m, "mg/mL");
 
 				return bx_;
 			}
 			else if (e_())
 			{
-				var by_ = context.Operators.Quantity((decimal?)0.0625m, "mg");
+				var by_ = context.Operators.Quantity(0.0625m, "mg");
 
 				return by_;
 			}
 			else if (f_())
 			{
-				var bz_ = context.Operators.Quantity((decimal?)0.1m, "mg/mL");
+				var bz_ = context.Operators.Quantity(0.1m, "mg/mL");
 
 				return bz_;
 			}
 			else if (g_())
 			{
-				var ca_ = context.Operators.Quantity((decimal?)0.125m, "mg");
+				var ca_ = context.Operators.Quantity(0.125m, "mg");
 
 				return ca_;
 			}
 			else if (h_())
 			{
-				var cb_ = context.Operators.Quantity((decimal?)0.1875m, "mg");
+				var cb_ = context.Operators.Quantity(0.1875m, "mg");
 
 				return cb_;
 			}
 			else if (i_())
 			{
-				var cc_ = context.Operators.Quantity((decimal?)0.25m, "mg");
+				var cc_ = context.Operators.Quantity(0.25m, "mg");
 
 				return cc_;
 			}
 			else if (j_())
 			{
-				var cd_ = context.Operators.Quantity((decimal?)0.25m, "mg/mL");
+				var cd_ = context.Operators.Quantity(0.25m, "mg/mL");
 
 				return cd_;
 			}
 			else if (k_())
 			{
-				var ce_ = context.Operators.Quantity((decimal?)3m, "mg");
+				var ce_ = context.Operators.Quantity(3m, "mg");
 
 				return ce_;
 			}
 			else if (l_())
 			{
-				var cf_ = context.Operators.Quantity((decimal?)6m, "mg");
+				var cf_ = context.Operators.Quantity(6m, "mg");
 
 				return cf_;
 			}
 			else if (m_())
 			{
-				var cg_ = context.Operators.Quantity((decimal?)10m, "mg");
+				var cg_ = context.Operators.Quantity(10m, "mg");
 
 				return cg_;
 			}
 			else if (n_())
 			{
-				var ch_ = context.Operators.Quantity((decimal?)10m, "mg/mL");
+				var ch_ = context.Operators.Quantity(10m, "mg/mL");
 
 				return ch_;
 			}
 			else if (o_())
 			{
-				var ci_ = context.Operators.Quantity((decimal?)25m, "mg");
+				var ci_ = context.Operators.Quantity(25m, "mg");
 
 				return ci_;
 			}
 			else if (p_())
 			{
-				var cj_ = context.Operators.Quantity((decimal?)50m, "mg");
+				var cj_ = context.Operators.Quantity(50m, "mg");
 
 				return cj_;
 			}
 			else if (q_())
 			{
-				var ck_ = context.Operators.Quantity((decimal?)75m, "mg");
+				var ck_ = context.Operators.Quantity(75m, "mg");
 
 				return ck_;
 			}
 			else if (r_())
 			{
-				var cl_ = context.Operators.Quantity((decimal?)100m, "mg");
+				var cl_ = context.Operators.Quantity(100m, "mg");
 
 				return cl_;
 			}
 			else if (s_())
 			{
-				var cm_ = context.Operators.Quantity((decimal?)150m, "mg");
+				var cm_ = context.Operators.Quantity(150m, "mg");
 
 				return cm_;
 			}
@@ -1419,7 +1419,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		bool? f_(MedicationRequest ReserpineOrdered)
 		{
 			var ad_ = this.Average_Daily_Dose(ReserpineOrdered);
-			var ae_ = context.Operators.Quantity((decimal?)0.1m, "mg/d");
+			var ae_ = context.Operators.Quantity(0.1m, "mg/d");
 			var af_ = context.Operators.Greater(ad_, ae_);
 
 			return af_;
@@ -1434,7 +1434,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		bool? o_(MedicationRequest DigoxinOrdered)
 		{
 			var ag_ = this.Average_Daily_Dose(DigoxinOrdered);
-			var ah_ = context.Operators.Quantity((decimal?)0.125m, "mg/d");
+			var ah_ = context.Operators.Quantity(0.125m, "mg/d");
 			var ai_ = context.Operators.Greater(ag_, ah_);
 
 			return ai_;
@@ -1450,7 +1450,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		bool? y_(MedicationRequest DoxepinOrdered)
 		{
 			var aj_ = this.Average_Daily_Dose(DoxepinOrdered);
-			var ak_ = context.Operators.Quantity((decimal?)6m, "mg/d");
+			var ak_ = context.Operators.Quantity(6m, "mg/d");
 			var al_ = context.Operators.Greater(aj_, ak_);
 
 			return al_;
@@ -1594,10 +1594,10 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var ag_ = QICoreCommon_2_0_000.ToPrevalenceInterval(AntipsychoticTreatedDiagnoses);
 			var ah_ = this.Measurement_Period();
 			var ai_ = context.Operators.Start(ah_);
-			var aj_ = context.Operators.Quantity((decimal?)1m, "year");
+			var aj_ = context.Operators.Quantity(1m, "year");
 			var ak_ = context.Operators.Subtract(ai_, aj_);
 			var al_ = this.Antipsychotic_Index_Prescription_Start_Date();
-			var am_ = context.Operators.Interval(ak_, al_, (bool?)true, (bool?)true);
+			var am_ = context.Operators.Interval(ak_, al_, true, true);
 			var an_ = context.Operators.Overlaps(ag_, am_, null);
 
 			return an_;
@@ -1626,10 +1626,10 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			var ao_ = QICoreCommon_2_0_000.ToPrevalenceInterval(BenzodiazepineTreatedDiagnoses);
 			var ap_ = this.Measurement_Period();
 			var aq_ = context.Operators.Start(ap_);
-			var ar_ = context.Operators.Quantity((decimal?)1m, "year");
+			var ar_ = context.Operators.Quantity(1m, "year");
 			var as_ = context.Operators.Subtract(aq_, ar_);
 			var at_ = this.Benzodiazepine_Index_Prescription_Start_Date();
-			var au_ = context.Operators.Interval(as_, at_, (bool?)true, (bool?)true);
+			var au_ = context.Operators.Interval(as_, at_, true, true);
 			var av_ = context.Operators.Overlaps(ao_, au_, null);
 
 			return av_;
