@@ -1,10 +1,8 @@
 ﻿using System.IO;
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 

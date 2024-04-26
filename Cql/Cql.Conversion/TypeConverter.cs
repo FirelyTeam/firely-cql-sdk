@@ -15,7 +15,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 
 namespace Hl7.Cql.Conversion
 {
