@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// Facilitates binding to <see cref="CqlOperator"/> methods,
+    /// Facilitates binding to <see cref="ICqlOperators"/> methods,
     /// by converting the method name and <see cref="Expression"/> arguments
     /// to the appropriate overload of the method.
     /// </summary>
@@ -57,7 +57,7 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <summary>
-        /// Facilitates binding to <see cref="CqlOperator"/> methods,
+        /// Facilitates binding to <see cref="ICqlOperators"/> methods,
         /// by converting the <param ref="methodName"/> and <see cref="Expression"/> <param ref="args"/>
         /// to the appropriate overload of the method.
         /// </summary>

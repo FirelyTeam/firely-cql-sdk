@@ -47,8 +47,8 @@ internal class CqlCompilerFactory :
             TypeConverter);
 
 
-    public virtual ContextBinder ContextBinder => Singleton(fn: NewContextBinder);
-    protected virtual ContextBinder NewContextBinder() => new CqlContextBinder();
+    public virtual CqlContextBinder CqlContextBinder => Singleton(fn: NewContextBinder);
+    protected virtual CqlContextBinder NewContextBinder() => new CqlContextBinder();
 
 
     public virtual TypeManager TypeManager => Singleton(fn: NewTypeManager);
@@ -78,6 +78,6 @@ internal class CqlCompilerFactory :
             typeManager: TypeManager,
             typeConverter: TypeConverter,
             typeResolver: TypeResolver,
-            contextBinder: ContextBinder,
+            cqlContextBinder: CqlContextBinder,
             expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings));
 }

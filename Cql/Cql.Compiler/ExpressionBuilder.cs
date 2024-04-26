@@ -46,7 +46,7 @@ namespace Hl7.Cql.Compiler
     internal class ExpressionBuilder
     {
         internal readonly CqlOperatorsBinder _cqlOperatorsBinder;
-        internal readonly ContextBinder _contextBinder;
+        internal readonly CqlContextBinder _cqlContextBinder;
         internal readonly TypeManager _typeManager;
         internal readonly ILogger<ExpressionBuilder> _logger;
         internal readonly TypeConverter _typeConverter;
@@ -59,12 +59,12 @@ namespace Hl7.Cql.Compiler
             TypeManager typeManager,
             TypeConverter typeConverter,
             TypeResolver typeResolver,
-            ContextBinder contextBinder,
+            CqlContextBinder cqlContextBinder,
             ExpressionBuilderSettings expressionBuilderSettings)
         {
             _logger = logger;
             _cqlOperatorsBinder = cqlOperatorsBinder;
-            _contextBinder = contextBinder;
+            _cqlContextBinder = cqlContextBinder;
             _typeManager = typeManager;
             _expressionBuilderSettings = expressionBuilderSettings;
             _typeConverter = typeConverter;
@@ -158,7 +158,7 @@ namespace Hl7.Cql.Compiler
     partial class ExpressionBuilderContext
     {
         private readonly CqlOperatorsBinder _cqlOperatorsBinder;
-        private readonly ContextBinder _contextBinder;
+        private readonly CqlContextBinder _contextBinder;
         private readonly TypeManager _typeManager;
         private readonly ILogger<ExpressionBuilder> _logger;
         private readonly TypeConverter _typeConverter;
@@ -188,7 +188,7 @@ namespace Hl7.Cql.Compiler
             // External Services
             _logger = builder._logger;
             _cqlOperatorsBinder = builder._cqlOperatorsBinder;
-            _contextBinder = builder._contextBinder;
+            _contextBinder = builder._cqlContextBinder;
             _typeManager = builder._typeManager;
             _expressionBuilderSettings = builder._expressionBuilderSettings;
             _typeConverter = builder._typeConverter;
