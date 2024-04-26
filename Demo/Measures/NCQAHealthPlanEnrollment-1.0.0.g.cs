@@ -51,10 +51,10 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			var e_ = context.Operators.DateFrom(d_);
 			var g_ = context.Operators.End(c_);
 			var h_ = context.Operators.DateFrom(g_);
-			var i_ = context.Operators.Interval(e_, h_, (bool?)true, (bool?)true);
+			var i_ = context.Operators.Interval(e_, h_, true, true);
 			var j_ = context.Operators.Start(participationPeriod);
 			var k_ = context.Operators.End(participationPeriod);
-			var l_ = context.Operators.Interval(j_, k_, (bool?)true, (bool?)true);
+			var l_ = context.Operators.Interval(j_, k_, true, true);
 			var m_ = context.Operators.IntervalIntersect<CqlDate>(i_, l_);
 
 			return m_;
@@ -91,10 +91,10 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		{
 			var i_ = context.Operators.End(tuple_gdeceaqjofqdgfgxnexuvihlk.Coverage1);
 			var j_ = context.Operators.Start(tuple_gdeceaqjofqdgfgxnexuvihlk.Coverage2);
-			var k_ = context.Operators.Quantity((decimal?)1m, "day");
+			var k_ = context.Operators.Quantity(1m, "day");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var o_ = context.Operators.Add(j_, k_);
-			var p_ = context.Operators.Interval(l_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(l_, o_, true, true);
 			var q_ = context.Operators.In<CqlDate>(i_, p_, null);
 			var s_ = context.Operators.Not((bool?)(j_ is null));
 			var t_ = context.Operators.And(q_, s_);
@@ -106,7 +106,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		{
 			var u_ = context.Operators.Start(tuple_gdeceaqjofqdgfgxnexuvihlk.Coverage1);
 			var v_ = context.Operators.End(tuple_gdeceaqjofqdgfgxnexuvihlk.Coverage2);
-			var w_ = context.Operators.Interval(u_, v_, (bool?)true, (bool?)true);
+			var w_ = context.Operators.Interval(u_, v_, true, true);
 
 			return w_;
 		};
@@ -246,7 +246,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 					var z_ = context.Operators.DateFrom(y_);
 					var ab_ = context.Operators.End(x_);
 					var ac_ = context.Operators.DateFrom(ab_);
-					var ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)true);
+					var ad_ = context.Operators.Interval(z_, ac_, true, true);
 					var ae_ = context.Operators.In<CqlDate>(AnchorDate, ad_, null);
 
 					return ae_;
@@ -258,11 +258,11 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			}
 			else if ((AnchorDate is null))
 			{
-				return (bool?)true;
+				return true;
 			}
 			else
 			{
-				return (bool?)false;
+				return false;
 			};
 		};
 
@@ -292,7 +292,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		};
 		bool? j_(Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD GapsInEnrollment)
 		{
-			var n_ = context.Operators.LessOrEqual(GapsInEnrollment?.Interval_Count, (int?)1);
+			var n_ = context.Operators.LessOrEqual(GapsInEnrollment?.Interval_Count, 1);
 			var o_ = context.Operators.LessOrEqual(GapsInEnrollment?.Total_Days_In_Longest_Interval, AllowedGapDays);
 			var p_ = context.Operators.And(n_, o_);
 			var q_ = this.Anchor_Date_Criteria(Coverage, AnchorDate, participationPeriod);
@@ -359,7 +359,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		};
 		bool? j_(Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD GapsInEnrollment)
 		{
-			var n_ = context.Operators.LessOrEqual(GapsInEnrollment?.Interval_Count, (int?)1);
+			var n_ = context.Operators.LessOrEqual(GapsInEnrollment?.Interval_Count, 1);
 			var o_ = context.Operators.LessOrEqual(GapsInEnrollment?.Total_Days_In_Longest_Interval, AllowedGapDays);
 			var p_ = context.Operators.And(n_, o_);
 			var q_ = this.Anchor_Date_Criteria(PharmCoverage, AnchorDate, participationPeriod);
@@ -426,7 +426,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		};
 		bool? j_(Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD GapsInEnrollment)
 		{
-			var n_ = context.Operators.LessOrEqual(GapsInEnrollment?.Interval_Count, (int?)1);
+			var n_ = context.Operators.LessOrEqual(GapsInEnrollment?.Interval_Count, 1);
 			var o_ = context.Operators.LessOrEqual(GapsInEnrollment?.Total_Days_In_Longest_Interval, AllowedGapDays);
 			var p_ = context.Operators.And(n_, o_);
 			var q_ = this.Anchor_Date_Criteria(MHCoverage, AnchorDate, participationPeriod);

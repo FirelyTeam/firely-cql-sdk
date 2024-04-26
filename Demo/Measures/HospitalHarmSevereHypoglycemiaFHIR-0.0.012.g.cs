@@ -164,9 +164,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -256,7 +256,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(InpatientEncounter);
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.CalculateAgeAt(e_, g_, "year");
-			var i_ = context.Operators.GreaterOrEqual(h_, (int?)18);
+			var i_ = context.Operators.GreaterOrEqual(h_, 18);
 
 			return i_;
 		};
@@ -363,10 +363,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var x_ = context.Operators.Start(w_);
 					var y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(BloodGlucoseLab?.Effective);
 					var z_ = context.Operators.Start(y_);
-					var aa_ = context.Operators.Quantity((decimal?)24m, "hours");
+					var aa_ = context.Operators.Quantity(24m, "hours");
 					var ab_ = context.Operators.Subtract(z_, aa_);
 					var ad_ = context.Operators.Start(y_);
-					var ae_ = context.Operators.Interval(ab_, ad_, (bool?)true, (bool?)true);
+					var ae_ = context.Operators.Interval(ab_, ad_, true, true);
 					var af_ = context.Operators.In<CqlDateTime>(x_, ae_, null);
 					var ah_ = context.Operators.Start(y_);
 					var ai_ = context.Operators.Not((bool?)(ah_ is null));
@@ -402,10 +402,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var bc_ = context.Operators.Start(bb_);
 					var bd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(BloodGlucoseLab?.Effective);
 					var be_ = context.Operators.Start(bd_);
-					var bf_ = context.Operators.Quantity((decimal?)24m, "hours");
+					var bf_ = context.Operators.Quantity(24m, "hours");
 					var bg_ = context.Operators.Subtract(be_, bf_);
 					var bi_ = context.Operators.Start(bd_);
-					var bj_ = context.Operators.Interval(bg_, bi_, (bool?)true, (bool?)true);
+					var bj_ = context.Operators.Interval(bg_, bi_, true, true);
 					var bk_ = context.Operators.In<CqlDateTime>(bc_, bj_, null);
 					var bm_ = context.Operators.Start(bd_);
 					var bn_ = context.Operators.Not((bool?)(bm_ is null));
@@ -445,9 +445,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var cn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(BloodGlucoseLab?.Effective);
 					var co_ = context.Operators.Start(cn_);
 					var cq_ = context.Operators.Start(cn_);
-					var cr_ = context.Operators.Quantity((decimal?)5m, "minutes");
+					var cr_ = context.Operators.Quantity(5m, "minutes");
 					var cs_ = context.Operators.Add(cq_, cr_);
-					var ct_ = context.Operators.Interval(co_, cs_, (bool?)false, (bool?)true);
+					var ct_ = context.Operators.Interval(co_, cs_, false, true);
 					var cu_ = context.Operators.In<CqlDateTime>(cm_, ct_, null);
 					var cw_ = context.Operators.Start(cn_);
 					var cx_ = context.Operators.Not((bool?)(cw_ is null));
@@ -460,7 +460,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					var df_ = context.Operators.Not(de_);
 					var dg_ = context.Operators.And(dc_, df_);
 					var dh_ = FHIRHelpers_4_0_001.ToQuantity((FollowupBloodGlucoseLab?.Value as Quantity));
-					var di_ = context.Operators.Quantity((decimal?)80m, "mg/dL");
+					var di_ = context.Operators.Quantity(80m, "mg/dL");
 					var dj_ = context.Operators.Greater(dh_, di_);
 					var dk_ = context.Operators.And(dg_, dj_);
 
@@ -482,7 +482,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				var dn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
 				var do_ = context.Operators.In<CqlDateTime>(dm_, dn_, null);
 				var dp_ = FHIRHelpers_4_0_001.ToQuantity((BloodGlucoseLab?.Value as Quantity));
-				var dq_ = context.Operators.Quantity((decimal?)40m, "mg/dL");
+				var dq_ = context.Operators.Quantity(40m, "mg/dL");
 				var dr_ = context.Operators.Less(dp_, dq_);
 				var ds_ = context.Operators.And(do_, dr_);
 

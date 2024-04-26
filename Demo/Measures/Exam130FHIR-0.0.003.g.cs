@@ -456,9 +456,9 @@ public class Exam130FHIR_0_0_003
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -575,7 +575,7 @@ public class Exam130FHIR_0_0_003
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)51, (int?)75, (bool?)true, (bool?)false);
+		var g_ = context.Operators.Interval(51, 75, true, false);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var j_ = this.Telehealth_Services();
@@ -693,7 +693,7 @@ public class Exam130FHIR_0_0_003
 		var p_ = context.Operators.Start(o_);
 		var q_ = context.Operators.DateFrom(p_);
 		var r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
-		var s_ = context.Operators.GreaterOrEqual(r_, (int?)65);
+		var s_ = context.Operators.GreaterOrEqual(r_, 65);
 		var t_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
 		var u_ = context.Operators.And(s_, t_);
 		var v_ = context.Operators.Or(l_, u_);
@@ -716,10 +716,10 @@ public class Exam130FHIR_0_0_003
 			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FecalOccult?.Effective);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity((decimal?)1m, "year");
+			var j_ = context.Operators.Quantity(1m, "year");
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
-			var n_ = context.Operators.Interval(k_, m_, (bool?)false, (bool?)false);
+			var n_ = context.Operators.Interval(k_, m_, false, false);
 			var o_ = context.Operators.In<CqlDateTime>(g_, n_, null);
 
 			return o_;
@@ -1018,10 +1018,10 @@ public class Exam130FHIR_0_0_003
 			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.End(h_);
-			var j_ = context.Operators.Quantity((decimal?)4m, "years");
+			var j_ = context.Operators.Quantity(4m, "years");
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
-			var n_ = context.Operators.Interval(k_, m_, (bool?)true, (bool?)true);
+			var n_ = context.Operators.Interval(k_, m_, true, true);
 			var o_ = context.Operators.In<CqlDateTime>(g_, n_, null);
 			var q_ = context.Operators.End(h_);
 			var r_ = context.Operators.Not((bool?)(q_ is null));
@@ -1146,10 +1146,10 @@ public class Exam130FHIR_0_0_003
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var o_ = this.Measurement_Period();
 			var p_ = context.Operators.End(o_);
-			var q_ = context.Operators.Quantity((decimal?)3m, "years");
+			var q_ = context.Operators.Quantity(3m, "years");
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
-			var u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
+			var u_ = context.Operators.Interval(r_, t_, true, true);
 			var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
 			var x_ = context.Operators.End(o_);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
@@ -1219,10 +1219,10 @@ public class Exam130FHIR_0_0_003
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var o_ = this.Measurement_Period();
 			var p_ = context.Operators.End(o_);
-			var q_ = context.Operators.Quantity((decimal?)3m, "years");
+			var q_ = context.Operators.Quantity(3m, "years");
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
-			var u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
+			var u_ = context.Operators.Interval(r_, t_, true, true);
 			var v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 			var x_ = context.Operators.End(o_);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
@@ -1284,10 +1284,10 @@ public class Exam130FHIR_0_0_003
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity((decimal?)3m, "years");
+			var m_ = context.Operators.Quantity(3m, "years");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
-			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
 			var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
@@ -1325,10 +1325,10 @@ public class Exam130FHIR_0_0_003
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(FitDNA?.Effective);
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = context.Operators.Quantity((decimal?)3m, "years");
+			var n_ = context.Operators.Quantity(3m, "years");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
-			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
 			var s_ = context.Operators.In<CqlDateTime>(k_, r_, "day");
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
@@ -1356,10 +1356,10 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity((decimal?)6m, "years");
+			var k_ = context.Operators.Quantity(6m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
@@ -1402,10 +1402,10 @@ public class Exam130FHIR_0_0_003
 			var i_ = context.Operators.End(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.End(j_);
-			var l_ = context.Operators.Quantity((decimal?)5m, "years");
+			var l_ = context.Operators.Quantity(5m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
 			var q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
@@ -1443,10 +1443,10 @@ public class Exam130FHIR_0_0_003
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity((decimal?)5m, "years");
+			var m_ = context.Operators.Quantity(5m, "years");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
-			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
 			var r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
@@ -1474,10 +1474,10 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity((decimal?)6m, "years");
+			var k_ = context.Operators.Quantity(6m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
@@ -1513,10 +1513,10 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity((decimal?)5m, "years");
+			var k_ = context.Operators.Quantity(5m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
@@ -1547,10 +1547,10 @@ public class Exam130FHIR_0_0_003
 			var i_ = context.Operators.End(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.End(j_);
-			var l_ = context.Operators.Quantity((decimal?)5m, "years");
+			var l_ = context.Operators.Quantity(5m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
 			var q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));
@@ -1578,10 +1578,10 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity((decimal?)11m, "years");
+			var k_ = context.Operators.Quantity(11m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
@@ -1617,10 +1617,10 @@ public class Exam130FHIR_0_0_003
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Quantity((decimal?)10m, "years");
+			var k_ = context.Operators.Quantity(10m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, (bool?)true, (bool?)true);
+			var o_ = context.Operators.Interval(l_, n_, true, true);
 			var p_ = context.Operators.In<CqlDateTime>(h_, o_, null);
 			var r_ = context.Operators.End(i_);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
@@ -1651,10 +1651,10 @@ public class Exam130FHIR_0_0_003
 			var i_ = context.Operators.End(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.End(j_);
-			var l_ = context.Operators.Quantity((decimal?)10m, "years");
+			var l_ = context.Operators.Quantity(10m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
 			var q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
 			var s_ = context.Operators.End(j_);
 			var t_ = context.Operators.Not((bool?)(s_ is null));

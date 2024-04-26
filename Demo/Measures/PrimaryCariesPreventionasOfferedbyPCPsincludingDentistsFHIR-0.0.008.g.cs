@@ -304,12 +304,12 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "month");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
+		var g_ = context.Operators.GreaterOrEqual(f_, 6);
 		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.Start(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.Less(m_, (int?)20);
+		var n_ = context.Operators.Less(m_, 20);
 		var o_ = context.Operators.And(g_, n_);
 		var p_ = this.Qualifying_Encounters();
 		var q_ = context.Operators.Exists<Encounter>(p_);
@@ -352,12 +352,12 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "month");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
+		var g_ = context.Operators.GreaterOrEqual(f_, 6);
 		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.Start(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, (int?)4);
+		var n_ = context.Operators.LessOrEqual(m_, 4);
 		var o_ = context.Operators.And(g_, n_);
 
 		return o_;
@@ -375,7 +375,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)5, (int?)11, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(5, 11, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
@@ -393,7 +393,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)12, (int?)20, (bool?)true, (bool?)false);
+		var g_ = context.Operators.Interval(12, 20, true, false);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;

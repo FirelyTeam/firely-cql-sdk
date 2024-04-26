@@ -259,9 +259,9 @@ public class BCSEHEDISMY2022_1_0_0
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
 		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, (int?)2);
-		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-		var f_ = context.Operators.DateTime(d_, (int?)10, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+		var d_ = context.Operators.Subtract(c_, 2);
+		var e_ = context.Operators.ConvertIntegerToDecimal(0);
+		var f_ = context.Operators.DateTime(d_, 10, 1, 0, 0, 0, 0, e_);
 
 		return f_;
 	}
@@ -275,7 +275,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var a_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period();
 		var b_ = this.Measurement_Period();
 		var c_ = context.Operators.End(b_);
-		var d_ = context.Operators.Interval(a_, c_, (bool?)true, (bool?)true);
+		var d_ = context.Operators.Interval(a_, c_, true, true);
 
 		return d_;
 	}
@@ -314,21 +314,21 @@ public class BCSEHEDISMY2022_1_0_0
 		var f_ = context.Operators.DateFrom(e_);
 		var h_ = context.Operators.End(b_);
 		var i_ = context.Operators.DateFrom(h_);
-		var j_ = context.Operators.Quantity((decimal?)2m, "years");
+		var j_ = context.Operators.Quantity(2m, "years");
 		var k_ = context.Operators.Subtract(i_, j_);
-		var l_ = context.Operators.Interval(f_, k_, (bool?)true, (bool?)true);
-		var m_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, d_, l_, (int?)0);
+		var l_ = context.Operators.Interval(f_, k_, true, true);
+		var m_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, d_, l_, 0);
 		var p_ = context.Operators.End(b_);
 		var q_ = context.Operators.DateFrom(p_);
 		var s_ = context.Operators.Start(b_);
 		var t_ = context.Operators.DateFrom(s_);
-		var u_ = context.Operators.Quantity((decimal?)1m, "year");
+		var u_ = context.Operators.Quantity(1m, "year");
 		var v_ = context.Operators.Subtract(t_, u_);
 		var x_ = context.Operators.End(b_);
 		var y_ = context.Operators.DateFrom(x_);
 		var aa_ = context.Operators.Subtract(y_, u_);
-		var ab_ = context.Operators.Interval(v_, aa_, (bool?)true, (bool?)true);
-		var ac_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, q_, ab_, (int?)45);
+		var ab_ = context.Operators.Interval(v_, aa_, true, true);
+		var ac_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, q_, ab_, 45);
 		var ad_ = context.Operators.And(m_, ac_);
 		var ag_ = context.Operators.End(b_);
 		var ah_ = context.Operators.DateFrom(ag_);
@@ -336,8 +336,8 @@ public class BCSEHEDISMY2022_1_0_0
 		var ak_ = context.Operators.DateFrom(aj_);
 		var am_ = context.Operators.End(b_);
 		var an_ = context.Operators.DateFrom(am_);
-		var ao_ = context.Operators.Interval(ak_, an_, (bool?)true, (bool?)true);
-		var ap_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, ah_, ao_, (int?)45);
+		var ao_ = context.Operators.Interval(ak_, an_, true, true);
+		var ap_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, ah_, ao_, 45);
 		var aq_ = context.Operators.And(ad_, ap_);
 
 		return aq_;
@@ -355,7 +355,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)52, (int?)74, (bool?)true, (bool?)true);
+		var g_ = context.Operators.Interval(52, 74, true, true);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
 		var k_ = context.Operators.And(h_, j_);

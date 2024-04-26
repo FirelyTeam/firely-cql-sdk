@@ -638,7 +638,7 @@ public class FHIR347_0_1_021
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.GreaterOrEqual(e_, (int?)20);
+		var f_ = context.Operators.GreaterOrEqual(e_, 20);
 
 		return f_;
 	}
@@ -654,7 +654,7 @@ public class FHIR347_0_1_021
 		bool? c_(Observation LDL)
 		{
 			var e_ = FHIRHelpers_4_0_001.ToQuantity((LDL?.Value as Quantity));
-			var f_ = context.Operators.Quantity((decimal?)190m, "mg/dL");
+			var f_ = context.Operators.Quantity(190m, "mg/dL");
 			var g_ = context.Operators.GreaterOrEqual(e_, f_);
 			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(LDL?.Effective);
 			var i_ = context.Operators.Start(h_);
@@ -781,7 +781,7 @@ public class FHIR347_0_1_021
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.Interval((int?)40, (int?)75, (bool?)true, (bool?)true);
+		var f_ = context.Operators.Interval(40, 75, true, true);
 		var g_ = context.Operators.In<int?>(e_, f_, null);
 		var h_ = this.Has_Diabetes_Diagnosis();
 		var i_ = context.Operators.And(g_, h_);

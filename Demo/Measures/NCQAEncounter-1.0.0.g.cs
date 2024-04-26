@@ -76,7 +76,7 @@ public class NCQAEncounter_1_0_0
 		{
 			var h_ = context.Operators.Convert<Integer>(D?.RankElement);
 			var i_ = FHIRHelpers_4_0_001.ToInteger(h_);
-			var j_ = context.Operators.Equal(i_, (int?)1);
+			var j_ = context.Operators.Equal(i_, 1);
 
 			return j_;
 		};

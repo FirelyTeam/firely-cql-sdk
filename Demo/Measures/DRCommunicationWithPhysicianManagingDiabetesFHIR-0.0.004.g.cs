@@ -639,7 +639,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.GreaterOrEqual(e_, (int?)18);
+		var f_ = context.Operators.GreaterOrEqual(e_, 18);
 		var g_ = this.Diabetic_Retinopathy_Encounter();
 		var h_ = context.Operators.Exists<Encounter>(g_);
 		var i_ = context.Operators.And(f_, h_);

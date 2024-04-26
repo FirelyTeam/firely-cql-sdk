@@ -323,7 +323,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)18, (int?)75, (bool?)true, (bool?)false);
+		var g_ = context.Operators.Interval(18, 75, true, false);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var j_ = this.Telehealth_Services();
@@ -418,7 +418,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		var a_ = this.Most_Recent_HbA1c();
 		var b_ = FHIRHelpers_4_0_001.ToQuantity((a_?.Value as Quantity));
-		var c_ = context.Operators.Quantity((decimal?)9m, "%");
+		var c_ = context.Operators.Quantity(9m, "%");
 		var d_ = context.Operators.Greater(b_, c_);
 
 		return d_;
@@ -486,7 +486,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var g_ = context.Operators.Start(f_);
 		var h_ = context.Operators.DateFrom(g_);
 		var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-		var j_ = context.Operators.GreaterOrEqual(i_, (int?)65);
+		var j_ = context.Operators.GreaterOrEqual(i_, 65);
 		var k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
 		var l_ = context.Operators.And(j_, k_);
 		var m_ = context.Operators.Or(c_, l_);

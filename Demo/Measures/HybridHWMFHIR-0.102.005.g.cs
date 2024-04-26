@@ -264,9 +264,9 @@ public class HybridHWMFHIR_0_102_005
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HybridHWMFHIR-0.102.005", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -366,7 +366,7 @@ public class HybridHWMFHIR_0_102_005
 			var n_ = context.Operators.Equal(m_, "finished");
 			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter);
 			var p_ = this.LengthInDays(o_);
-			var q_ = context.Operators.Less(p_, (int?)365);
+			var q_ = context.Operators.Less(p_, 365);
 			var r_ = context.Operators.And(n_, q_);
 			var s_ = FHIRHelpers_4_0_001.ToInterval(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.Period);
 			var t_ = context.Operators.End(s_);
@@ -378,7 +378,7 @@ public class HybridHWMFHIR_0_102_005
 			var aa_ = context.Operators.Start(s_);
 			var ab_ = context.Operators.DateFrom(aa_);
 			var ac_ = context.Operators.CalculateAgeAt(y_, ab_, "year");
-			var ad_ = context.Operators.Interval((int?)65, (int?)94, (bool?)true, (bool?)true);
+			var ad_ = context.Operators.Interval(65, 94, true, true);
 			var ae_ = context.Operators.In<int?>(ac_, ad_, null);
 			var af_ = context.Operators.And(w_, ae_);
 
@@ -426,12 +426,12 @@ public class HybridHWMFHIR_0_102_005
 				var ae_ = context.Operators.Start(aa_);
 				var af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var ag_ = context.Operators.Start(af_);
-				var ah_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+				var ah_ = context.Operators.Quantity(1440m, "minutes");
 				var ai_ = context.Operators.Subtract(ag_, ah_);
 				var ak_ = context.Operators.Start(af_);
-				var al_ = context.Operators.Quantity((decimal?)120m, "minutes");
+				var al_ = context.Operators.Quantity(120m, "minutes");
 				var am_ = context.Operators.Add(ak_, al_);
-				var an_ = context.Operators.Interval(ai_, am_, (bool?)true, (bool?)true);
+				var an_ = context.Operators.Interval(ai_, am_, true, true);
 				var ao_ = context.Operators.In<CqlDateTime>(ae_, an_, null);
 				var ap_ = context.Operators.And(ac_, ao_);
 				var aq_ = context.Operators.Convert<string>(Exam?.StatusElement);
@@ -470,12 +470,12 @@ public class HybridHWMFHIR_0_102_005
 				var bc_ = context.Operators.Start(ay_);
 				var bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var be_ = context.Operators.Start(bd_);
-				var bf_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+				var bf_ = context.Operators.Quantity(1440m, "minutes");
 				var bg_ = context.Operators.Subtract(be_, bf_);
 				var bi_ = context.Operators.Start(bd_);
-				var bj_ = context.Operators.Quantity((decimal?)120m, "minutes");
+				var bj_ = context.Operators.Quantity(120m, "minutes");
 				var bk_ = context.Operators.Add(bi_, bj_);
-				var bl_ = context.Operators.Interval(bg_, bk_, (bool?)true, (bool?)true);
+				var bl_ = context.Operators.Interval(bg_, bk_, true, true);
 				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, null);
 				var bn_ = context.Operators.And(ba_, bm_);
 				var bo_ = context.Operators.Convert<string>(Exam?.StatusElement);
@@ -531,11 +531,11 @@ public class HybridHWMFHIR_0_102_005
 				var aa_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
 				var ab_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var ac_ = context.Operators.Start(ab_);
-				var ad_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+				var ad_ = context.Operators.Quantity(1440m, "minutes");
 				var ae_ = context.Operators.Subtract(ac_, ad_);
 				var ag_ = context.Operators.Start(ab_);
 				var ai_ = context.Operators.Add(ag_, ad_);
-				var aj_ = context.Operators.Interval(ae_, ai_, (bool?)true, (bool?)true);
+				var aj_ = context.Operators.Interval(ae_, ai_, true, true);
 				var ak_ = context.Operators.In<CqlDateTime>(aa_, aj_, null);
 				var al_ = context.Operators.And(z_, ak_);
 				var am_ = context.Operators.Convert<string>(Lab?.StatusElement);
@@ -567,11 +567,11 @@ public class HybridHWMFHIR_0_102_005
 				var at_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
 				var au_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
 				var av_ = context.Operators.Start(au_);
-				var aw_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+				var aw_ = context.Operators.Quantity(1440m, "minutes");
 				var ax_ = context.Operators.Subtract(av_, aw_);
 				var az_ = context.Operators.Start(au_);
 				var bb_ = context.Operators.Add(az_, aw_);
-				var bc_ = context.Operators.Interval(ax_, bb_, (bool?)true, (bool?)true);
+				var bc_ = context.Operators.Interval(ax_, bb_, true, true);
 				var bd_ = context.Operators.In<CqlDateTime>(at_, bc_, null);
 				var be_ = context.Operators.And(as_, bd_);
 				var bf_ = context.Operators.Convert<string>(Lab?.StatusElement);
@@ -676,7 +676,7 @@ public class HybridHWMFHIR_0_102_005
 		var b_ = context.Operators.DateTimeComponentFrom(Value, "month");
 		var c_ = context.Operators.DateTimeComponentFrom(Value, "day");
 		var d_ = context.Operators.TimezoneOffsetFrom(Value);
-		var e_ = context.Operators.DateTime(a_, b_, c_, (int?)0, (int?)0, (int?)0, (int?)0, d_);
+		var e_ = context.Operators.DateTime(a_, b_, c_, 0, 0, 0, 0, d_);
 
 		return e_;
 	}
@@ -714,10 +714,10 @@ public class HybridHWMFHIR_0_102_005
 					var br_ = context.Operators.End(bq_);
 					var bs_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 					var bt_ = context.Operators.Start(bs_);
-					var bu_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var bu_ = context.Operators.Quantity(1m, "hour");
 					var bv_ = context.Operators.Subtract(bt_, bu_);
 					var bx_ = context.Operators.Start(bs_);
-					var by_ = context.Operators.Interval(bv_, bx_, (bool?)true, (bool?)true);
+					var by_ = context.Operators.Interval(bv_, bx_, true, true);
 					var bz_ = context.Operators.In<CqlDateTime>(br_, by_, null);
 					var cb_ = context.Operators.Start(bs_);
 					var cc_ = context.Operators.Not((bool?)(cb_ is null));
@@ -739,7 +739,7 @@ public class HybridHWMFHIR_0_102_005
 				var al_ = context.Operators.Start(ak_);
 				var am_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 				var an_ = context.Operators.Start(am_);
-				var ao_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var ao_ = context.Operators.Quantity(1m, "hour");
 				var ap_ = context.Operators.Subtract((al_ ?? an_), ao_);
 				var ar_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? as_(Encounter LastObs)
@@ -748,10 +748,10 @@ public class HybridHWMFHIR_0_102_005
 					var ch_ = context.Operators.End(cg_);
 					var ci_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 					var cj_ = context.Operators.Start(ci_);
-					var ck_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var ck_ = context.Operators.Quantity(1m, "hour");
 					var cl_ = context.Operators.Subtract(cj_, ck_);
 					var cn_ = context.Operators.Start(ci_);
-					var co_ = context.Operators.Interval(cl_, cn_, (bool?)true, (bool?)true);
+					var co_ = context.Operators.Interval(cl_, cn_, true, true);
 					var cp_ = context.Operators.In<CqlDateTime>(ch_, co_, null);
 					var cr_ = context.Operators.Start(ci_);
 					var cs_ = context.Operators.Not((bool?)(cr_ is null));
@@ -772,7 +772,7 @@ public class HybridHWMFHIR_0_102_005
 				var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
-				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), (bool?)true, (bool?)true);
+				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), true, true);
 				var bc_ = context.Operators.In<CqlDateTime>(ac_, bb_, null);
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
@@ -781,10 +781,10 @@ public class HybridHWMFHIR_0_102_005
 					var cx_ = context.Operators.End(cw_);
 					var cy_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 					var cz_ = context.Operators.Start(cy_);
-					var da_ = context.Operators.Quantity((decimal?)1m, "hour");
+					var da_ = context.Operators.Quantity(1m, "hour");
 					var db_ = context.Operators.Subtract(cz_, da_);
 					var dd_ = context.Operators.Start(cy_);
-					var de_ = context.Operators.Interval(db_, dd_, (bool?)true, (bool?)true);
+					var de_ = context.Operators.Interval(db_, dd_, true, true);
 					var df_ = context.Operators.In<CqlDateTime>(cx_, de_, null);
 					var dh_ = context.Operators.Start(cy_);
 					var di_ = context.Operators.Not((bool?)(dh_ is null));
@@ -830,10 +830,10 @@ public class HybridHWMFHIR_0_102_005
 				var dp_ = context.Operators.End(do_);
 				var dq_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 				var dr_ = context.Operators.Start(dq_);
-				var ds_ = context.Operators.Quantity((decimal?)1m, "hour");
+				var ds_ = context.Operators.Quantity(1m, "hour");
 				var dt_ = context.Operators.Subtract(dr_, ds_);
 				var dv_ = context.Operators.Start(dq_);
-				var dw_ = context.Operators.Interval(dt_, dv_, (bool?)true, (bool?)true);
+				var dw_ = context.Operators.Interval(dt_, dv_, true, true);
 				var dx_ = context.Operators.In<CqlDateTime>(dp_, dw_, null);
 				var dz_ = context.Operators.Start(dq_);
 				var ea_ = context.Operators.Not((bool?)(dz_ is null));
@@ -856,7 +856,7 @@ public class HybridHWMFHIR_0_102_005
 			var w_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
 			var x_ = context.Operators.Start(w_);
 			var z_ = context.Operators.End(w_);
-			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, (bool?)true, (bool?)true);
+			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
 
 			return aa_;
 		};

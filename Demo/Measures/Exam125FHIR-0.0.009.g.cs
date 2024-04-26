@@ -217,9 +217,9 @@ public class Exam125FHIR_0_0_009
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("Exam125FHIR-0.0.009", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -336,7 +336,7 @@ public class Exam125FHIR_0_0_009
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)51, (int?)74, (bool?)true, (bool?)false);
+		var g_ = context.Operators.Interval(51, 74, true, false);
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement);
 		var k_ = context.Operators.Equal(j_, "female");
@@ -577,7 +577,7 @@ public class Exam125FHIR_0_0_009
 		var y_ = context.Operators.Start(x_);
 		var z_ = context.Operators.DateFrom(y_);
 		var aa_ = context.Operators.CalculateAgeAt(w_, z_, "year");
-		var ab_ = context.Operators.GreaterOrEqual(aa_, (int?)65);
+		var ab_ = context.Operators.GreaterOrEqual(aa_, 65);
 		var ac_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
 		var ad_ = context.Operators.And(ab_, ac_);
 		var ae_ = context.Operators.Or(u_, ad_);
@@ -610,10 +610,10 @@ public class Exam125FHIR_0_0_009
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity((decimal?)27m, "months");
+			var m_ = context.Operators.Quantity(27m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
-			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
 			var r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
@@ -651,10 +651,10 @@ public class Exam125FHIR_0_0_009
 			var j_ = context.Operators.End(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.Quantity((decimal?)27m, "months");
+			var m_ = context.Operators.Quantity(27m, "months");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
-			var q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
 			var r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
 			var t_ = context.Operators.End(k_);
 			var u_ = context.Operators.Not((bool?)(t_ is null));
@@ -724,10 +724,10 @@ public class Exam125FHIR_0_0_009
 			var k_ = context.Operators.End(j_);
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = context.Operators.Quantity((decimal?)27m, "months");
+			var n_ = context.Operators.Quantity(27m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
-			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
 			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
@@ -766,10 +766,10 @@ public class Exam125FHIR_0_0_009
 			var k_ = context.Operators.End(j_);
 			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = context.Operators.Quantity((decimal?)27m, "months");
+			var n_ = context.Operators.Quantity(27m, "months");
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
-			var r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
 			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.End(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));

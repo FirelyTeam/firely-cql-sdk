@@ -649,9 +649,9 @@ public class NCQAClaims_1_0_0
 											var aw_ = context.Operators.Start(at_);
 											var ax_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
 											var ay_ = context.Operators.Add(aw_, new CqlQuantity(ax_, "day"));
-											var az_ = context.Operators.Quantity((decimal?)1m, "day");
+											var az_ = context.Operators.Quantity(1m, "day");
 											var ba_ = context.Operators.Subtract(ay_, az_);
-											var bb_ = context.Operators.Interval(au_, ba_, (bool?)true, (bool?)true);
+											var bb_ = context.Operators.Interval(au_, ba_, true, true);
 
 											return bb_;
 										}
@@ -660,20 +660,20 @@ public class NCQAClaims_1_0_0
 											var bc_ = FHIRHelpers_4_0_001.ToDate((i?.Serviced as Date));
 											var be_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
 											var bf_ = context.Operators.Add(bc_, new CqlQuantity(be_, "day"));
-											var bg_ = context.Operators.Quantity((decimal?)1m, "day");
+											var bg_ = context.Operators.Quantity(1m, "day");
 											var bh_ = context.Operators.Subtract(bf_, bg_);
-											var bi_ = context.Operators.Interval(bc_, bh_, (bool?)true, (bool?)true);
+											var bi_ = context.Operators.Interval(bc_, bh_, true, true);
 											var bj_ = context.Operators.ConvertDateToDateTime(bi_?.low);
 											var bn_ = context.Operators.Add(bc_, new CqlQuantity(be_, "day"));
 											var bp_ = context.Operators.Subtract(bn_, bg_);
-											var bq_ = context.Operators.Interval(bc_, bp_, (bool?)true, (bool?)true);
+											var bq_ = context.Operators.Interval(bc_, bp_, true, true);
 											var br_ = context.Operators.ConvertDateToDateTime(bq_?.high);
 											var bv_ = context.Operators.Add(bc_, new CqlQuantity(be_, "day"));
 											var bx_ = context.Operators.Subtract(bv_, bg_);
-											var by_ = context.Operators.Interval(bc_, bx_, (bool?)true, (bool?)true);
+											var by_ = context.Operators.Interval(bc_, bx_, true, true);
 											var cc_ = context.Operators.Add(bc_, new CqlQuantity(be_, "day"));
 											var ce_ = context.Operators.Subtract(cc_, bg_);
-											var cf_ = context.Operators.Interval(bc_, ce_, (bool?)true, (bool?)true);
+											var cf_ = context.Operators.Interval(bc_, ce_, true, true);
 											var cg_ = context.Operators.Interval(bj_, br_, by_?.lowClosed, cf_?.highClosed);
 
 											return cg_;
@@ -1173,7 +1173,7 @@ public class NCQAClaims_1_0_0
 									{
 										var bx_ = context.Operators.Convert<Integer>(RightDiagnosis?.SequenceElement);
 										var by_ = FHIRHelpers_4_0_001.ToInteger(bx_);
-										var bz_ = context.Operators.Equal(by_, (int?)1);
+										var bz_ = context.Operators.Equal(by_, 1);
 										var ca_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(RightDiagnosis?.Diagnosis, "coding");
 										bool? cb_(Coding DiagnosisCode)
 										{
@@ -1312,7 +1312,7 @@ public class NCQAClaims_1_0_0
 						{
 							var u_ = context.Operators.Convert<Integer>(RightDiagnosis?.SequenceElement);
 							var v_ = FHIRHelpers_4_0_001.ToInteger(u_);
-							var w_ = context.Operators.Equal(v_, (int?)1);
+							var w_ = context.Operators.Equal(v_, 1);
 							var x_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(RightDiagnosis?.Diagnosis, "coding");
 							bool? y_(Coding DiagnosisCode)
 							{
@@ -1498,7 +1498,7 @@ public class NCQAClaims_1_0_0
 					bool? ah_(Money DollarAmount)
 					{
 						var ap_ = FHIRHelpers_4_0_001.ToDecimal(DollarAmount?.ValueElement);
-						var aq_ = context.Operators.ConvertIntegerToDecimal((int?)0);
+						var aq_ = context.Operators.ConvertIntegerToDecimal(0);
 						var ar_ = context.Operators.Greater(ap_, aq_);
 
 						return ar_;
@@ -1971,7 +1971,7 @@ public class NCQAClaims_1_0_0
 					bool? bf_(Claim.ItemComponent ResponseItem)
 					{
 						var bi_ = context.Operators.Convert<Integer>(ResponseItem?.SequenceElement);
-						var bj_ = context.Operators.Equal(bi_?.Value, (int?)1);
+						var bj_ = context.Operators.Equal(bi_?.Value, 1);
 
 						return bj_;
 					};
@@ -2603,10 +2603,10 @@ public class NCQAClaims_1_0_0
 									var bv_ = context.Operators.Start(br_);
 									var bw_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
 									var bx_ = context.Operators.Add(bv_, new CqlQuantity(bw_, "day"));
-									var by_ = context.Operators.Quantity((decimal?)1m, "day");
+									var by_ = context.Operators.Quantity(1m, "day");
 									var bz_ = context.Operators.Subtract(bx_, by_);
 									var ca_ = context.Operators.ConvertDateTimeToDate(bz_);
-									var cb_ = context.Operators.Interval(bt_, ca_, (bool?)true, (bool?)true);
+									var cb_ = context.Operators.Interval(bt_, ca_, true, true);
 
 									return cb_;
 								}
@@ -2937,7 +2937,7 @@ public class NCQAClaims_1_0_0
 			{
 				var w_ = context.Operators.Convert<Integer>(ct?.SequenceElement);
 				var x_ = FHIRHelpers_4_0_001.ToInteger(w_);
-				var y_ = context.Operators.Equal(x_, (int?)1);
+				var y_ = context.Operators.Equal(x_, 1);
 
 				return y_;
 			};
@@ -2956,7 +2956,7 @@ public class NCQAClaims_1_0_0
 			{
 				var aa_ = context.Operators.Convert<Integer>(ct?.SequenceElement);
 				var ab_ = FHIRHelpers_4_0_001.ToInteger(aa_);
-				var ac_ = context.Operators.Equal(ab_, (int?)1);
+				var ac_ = context.Operators.Equal(ab_, 1);
 
 				return ac_;
 			};
@@ -3153,7 +3153,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return (int?)0;
+							return 0;
 						};
 					};
 					var cj_ = new Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY
@@ -3188,7 +3188,7 @@ public class NCQAClaims_1_0_0
 			{
 				var y_ = context.Operators.Convert<Integer>(i?.SequenceElement);
 				var z_ = FHIRHelpers_4_0_001.ToInteger(y_);
-				var aa_ = context.Operators.Equal(z_, (int?)1);
+				var aa_ = context.Operators.Equal(z_, 1);
 
 				return aa_;
 			};
@@ -3210,7 +3210,7 @@ public class NCQAClaims_1_0_0
 			{
 				var ac_ = context.Operators.Convert<Integer>(i?.SequenceElement);
 				var ad_ = FHIRHelpers_4_0_001.ToInteger(ac_);
-				var ae_ = context.Operators.Equal(ad_, (int?)1);
+				var ae_ = context.Operators.Equal(ad_, 1);
 
 				return ae_;
 			};
@@ -3409,7 +3409,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return (int?)0;
+							return 0;
 						};
 					};
 					var cl_ = new Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY

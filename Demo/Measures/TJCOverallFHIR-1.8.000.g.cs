@@ -214,9 +214,9 @@ public class TJCOverallFHIR_1_8_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+		var a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("TJCOverallFHIR-1.8.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
@@ -246,7 +246,7 @@ public class TJCOverallFHIR_1_8_000
 		{
 			var e_ = FHIRHelpers_4_0_001.ToInterval(NonElectiveEncounter?.Period);
 			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(e_);
-			var g_ = context.Operators.LessOrEqual(f_, (int?)120);
+			var g_ = context.Operators.LessOrEqual(f_, 120);
 			var i_ = context.Operators.End(e_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
@@ -301,7 +301,7 @@ public class TJCOverallFHIR_1_8_000
 				var k_ = FHIRHelpers_4_0_001.ToInterval(AllStrokeEncounter?.Period);
 				var l_ = context.Operators.Start(k_);
 				var m_ = context.Operators.CalculateAgeAt(j_, l_, "year");
-				var n_ = context.Operators.GreaterOrEqual(m_, (int?)18);
+				var n_ = context.Operators.GreaterOrEqual(m_, 18);
 
 				return n_;
 			};
@@ -479,10 +479,10 @@ public class TJCOverallFHIR_1_8_000
 	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
 	{
 		var a_ = context.Operators.DateFrom(StartValue);
-		var b_ = context.Operators.Quantity((decimal?)1m, "day");
+		var b_ = context.Operators.Quantity(1m, "day");
 		var c_ = context.Operators.Add(StartValue, b_);
 		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Interval(a_, d_, (bool?)true, (bool?)true);
+		var e_ = context.Operators.Interval(a_, d_, true, true);
 
 		return e_;
 	}

@@ -200,7 +200,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, (int?)18);
+			var j_ = context.Operators.GreaterOrEqual(i_, 18);
 			var k_ = context.Operators.Convert<string>(EncounterInpatient?.StatusElement);
 			var l_ = context.Operators.Equal(k_, "finished");
 			var m_ = context.Operators.And(j_, l_);
@@ -352,7 +352,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				Opioids?.Medication;
 			var o_ = context.Operators.Select<MedicationRequest, object>(m_, n_);
 			var p_ = context.Operators.Count<object>(o_);
-			var q_ = context.Operators.GreaterOrEqual(p_, (int?)2);
+			var q_ = context.Operators.GreaterOrEqual(p_, 2);
 
 			return q_;
 		};
