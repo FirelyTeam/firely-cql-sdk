@@ -6,7 +6,7 @@ namespace Hl7.Cql.Compiler.Expressions;
 
 internal static class ExpressionExtensions
 {
-    public static Expression ConvertExpression(this Expression expression, Type type)
+    public static Expression NewAssignToTypeExpression(this Expression expression, Type type)
     {
         if (expression.Type == type)
             return expression;
@@ -30,11 +30,11 @@ internal static class ExpressionExtensions
         return cast;
     }
 
-    public static Expression ConvertExpression<TType>(this Expression expression) =>
-        expression.ConvertExpression(typeof(TType));
+    public static Expression NewAssignToTypeExpression<TType>(this Expression expression) =>
+        expression.NewAssignToTypeExpression(typeof(TType));
 
 
-    public static Expression TypeAsExpression(this Expression expression, Type type)
+    public static Expression NewTypeAsExpression(this Expression expression, Type type)
     {
         if (expression.Type == type)
             return expression;
@@ -43,10 +43,10 @@ internal static class ExpressionExtensions
         return typeAs;
     }
 
-    public static Expression TypeAsExpression<TType>(this Expression expression) =>
-        expression.TypeAsExpression(typeof(TType));
+    public static Expression NewTypeAsExpression<TType>(this Expression expression) =>
+        expression.NewTypeAsExpression(typeof(TType));
 
-    public static TypeBinaryExpression TypeIsExpression(this Expression expression, Type type)
+    public static TypeBinaryExpression NewTypeIsExpression(this Expression expression, Type type)
     {
         var typeAs = Expression.TypeIs(expression, type);
         return typeAs;

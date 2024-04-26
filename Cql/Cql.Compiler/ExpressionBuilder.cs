@@ -555,7 +555,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (elements[i].Type != elementType)
                     {
-                        elements[i] = elements[i].TypeAsExpression(elementType);
+                        elements[i] = elements[i].NewTypeAsExpression(elementType);
                     }
                 }
                 Expression? array = null;
@@ -567,7 +567,7 @@ namespace Hl7.Cql.Compiler
                 {
                     array = Expression.NewArrayBounds(elementType, Expression.Constant(0));
                 }
-                var asEnumerable = array.TypeAsExpression(typeof(IEnumerable<>).MakeGenericType(elementType));
+                var asEnumerable = array.NewTypeAsExpression(typeof(IEnumerable<>).MakeGenericType(elementType));
                 return asEnumerable;
             }
 
@@ -852,7 +852,7 @@ namespace Hl7.Cql.Compiler
                 return ifThenElse;
             }
 
-            var @false = Expression.Constant(null).ConvertExpression(then.Type);
+            var @false = Expression.Constant(null).NewAssignToTypeExpression(then.Type);
             var ifThen = Expression.Condition(condition, then, @false);
             return ifThen;
         }
@@ -870,7 +870,7 @@ namespace Hl7.Cql.Compiler
             if (type.IsNullableValueType(out _))
             {
                 var changed = Expression.Constant(value!, convertedType);
-                var asNullable = changed.ConvertExpression(type);
+                var asNullable = changed.NewAssignToTypeExpression(type);
                 return asNullable;
             }
             return Expression.Constant(value, convertedType);
@@ -939,7 +939,7 @@ namespace Hl7.Cql.Compiler
                         var caseThen = Translate(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
-                            caseThen = caseThen.ConvertExpression(elseThen.Type);
+                            caseThen = caseThen.NewAssignToTypeExpression(elseThen.Type);
 
                         cases.Add(new(caseWhenEquality, caseThen));
                     }
@@ -952,7 +952,7 @@ namespace Hl7.Cql.Compiler
                         var caseThen = Translate(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
-                            caseThen = caseThen.ConvertExpression(elseThen.Type);
+                            caseThen = caseThen.NewAssignToTypeExpression(elseThen.Type);
 
                         if (caseWhen.Type.IsNullableValueType(out _))
                         {
@@ -1125,8 +1125,8 @@ namespace Hl7.Cql.Compiler
                 }
                 if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
                 {
-                    var isCheck = source.TypeIsExpression(pathMemberInfo.DeclaringType!);
-                    var typeAs = source.TypeAsExpression(pathMemberInfo.DeclaringType!);
+                    var isCheck = source.NewTypeIsExpression(pathMemberInfo.DeclaringType!);
+                    var typeAs = source.NewTypeAsExpression(pathMemberInfo.DeclaringType!);
                     var pathAccess = Expression.MakeMemberAccess(typeAs, pathMemberInfo);
                     Expression? ifIs = pathAccess;
                     Expression elseNull = Expression.Constant(null, property.PropertyType);
@@ -1385,7 +1385,7 @@ namespace Hl7.Cql.Compiler
             if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
-                source = constant.ConvertExpression(constant.Type);
+                source = constant.NewAssignToTypeExpression(constant.Type);
             }
 
             var call = BindCqlOperator(nameof(ICqlOperators.Message), source, code, severity, message);
@@ -1899,7 +1899,7 @@ namespace Hl7.Cql.Compiler
                 return Expression.Constant(false, typeof(bool?));
 
             var compare = Expression.Equal(operand, Expression.Constant(null));
-            var asNullableBool = compare.ConvertExpression<bool?>();
+            var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
             return asNullableBool;
         }
     }
@@ -2514,14 +2514,14 @@ namespace Hl7.Cql.Compiler
                 if (@is.isTypeSpecifier is ChoiceTypeSpecifier choice)
                 {
                     var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
-                    Expression result = op.TypeIsExpression(firstChoiceType);
+                    Expression result = op.NewTypeIsExpression(firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
                         var cti = TypeFor(choice.choice[i]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
-                        var ie = op.TypeIsExpression(cti);
+                        var ie = op.NewTypeIsExpression(cti);
                         result = Expression.Or(result, ie);
                     }
-                    var ta = result.TypeAsExpression<bool?>();
+                    var ta = result.NewTypeAsExpression<bool?>();
                     return ta;
                 }
 
@@ -2535,8 +2535,8 @@ namespace Hl7.Cql.Compiler
             if (type == null)
                 throw this.NewExpressionBuildingException($"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
 
-            var isExpression = op.TypeIsExpression(type);
-            var nullable = isExpression.TypeAsExpression<bool?>();
+            var isExpression = op.NewTypeIsExpression(type);
+            var nullable = isExpression.NewTypeAsExpression<bool?>();
             return nullable;
         }
 
@@ -2570,7 +2570,7 @@ namespace Hl7.Cql.Compiler
                 return input;
 
             if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
-                return input.TypeAsExpression(outputType);
+                return input.NewTypeAsExpression(outputType);
 
             if (_typeResolver.IsListType(input.Type)
                 && _typeResolver.IsListType(outputType))

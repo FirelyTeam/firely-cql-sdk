@@ -26,7 +26,8 @@ partial class CqlOperatorsBinder
         if (from.IsAssignableTo(to))
         {
             // 'from' is a subtype of 'to' e.g. string -> object
-            result = (arg.ConvertExpression(to), TypeConversion.AssignableType);
+            // OR 'from' is a nullable value type and 'to' is the underlying type e.g. int? -> int
+            result = (arg.NewAssignToTypeExpression(to), TypeConversion.AssignableType);
             return true;
         }
 
@@ -36,7 +37,7 @@ partial class CqlOperatorsBinder
                 BindToGenericMethod(
                     nameof(ICqlOperators.Convert),
                     [to],
-                    arg.ConvertExpression<object>()
+                    arg.NewAssignToTypeExpression<object>()
             );
             result = (bindToGenericMethod, TypeConversion.OperatorConvert);
             return true;

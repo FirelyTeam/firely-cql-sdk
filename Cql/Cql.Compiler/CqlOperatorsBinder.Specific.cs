@@ -84,8 +84,8 @@ partial class CqlOperatorsBinder
         {
             return BindToBestMethodOverload(
                 nameof(ICqlOperators.ValueSetUnion),
-                left.TypeAsExpression<IEnumerable<CqlCode>>(),
-                right.TypeAsExpression<IEnumerable<CqlCode>>());
+                left.NewTypeAsExpression<IEnumerable<CqlCode>>(),
+                right.NewTypeAsExpression<IEnumerable<CqlCode>>());
         }
         var leftElementType = _typeResolver.GetListElementType(left.Type);
         if (leftElementType == typeof(CqlCode))
@@ -195,7 +195,7 @@ partial class CqlOperatorsBinder
         if (typeExpression is ConstantExpression { Value: Type type })
         {
             if (source.Type != typeof(object))
-                source = source.TypeAsExpression<object>();
+                source = source.NewTypeAsExpression<object>();
 
             var call = BindToGenericMethod(nameof(ICqlOperators.LateBoundProperty), [type!], source, propertyName);
             return call;
