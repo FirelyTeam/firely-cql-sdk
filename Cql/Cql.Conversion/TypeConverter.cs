@@ -227,13 +227,13 @@ namespace Hl7.Cql.Conversion
 }
 
 internal interface IBasicDictionary<TKey, TValue> :
-    IReadOnlyCollection<KeyValuePair<TKey, TValue>>,
-    IEnumerable<KeyValuePair<TKey, TValue>>,
-    IEnumerable
+    IEnumerable<KeyValuePair<TKey, TValue>>
+    where TKey: notnull
 {
     void Add(TKey key, TValue value);
     bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value);
     bool IsEmpty { get; }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
 
 file static class BasicDictionaryExtensions
@@ -241,7 +241,7 @@ file static class BasicDictionaryExtensions
     public static TValue GetOrAddValue<TKey, TValue>(
         this IBasicDictionary<TKey, TValue> d,
         TKey key,
-        Func<TKey, TValue> addValue)
+        Func<TKey, TValue> addValue) where TKey : notnull
     {
         if (d.TryGetValue(key, out var value))
             return value;
@@ -256,21 +256,16 @@ file static class BasicDictionaryExtensions
         new HandleNullableValueTypesDecorator<TValue>(d);
 }
 
-internal readonly struct FromToTypeDictionary<TValue> : IBasicDictionary<(Type From, Type To), TValue>
+internal readonly struct FromToTypeDictionary<TValue>(
+    Func<IBasicDictionary<Type, IBasicDictionary<Type, TValue>>> newFromDictionary,
+    Func<Type, IBasicDictionary<Type, TValue>> newToDictionary)
+    : IBasicDictionary<(Type From, Type To), TValue>
 {
-    private readonly Func<Type, IBasicDictionary<Type, TValue>> _newToDictionary;
-    private readonly IBasicDictionary<Type, IBasicDictionary<Type, TValue>> _fromToMap;
+    private readonly IBasicDictionary<Type, IBasicDictionary<Type, TValue>> _fromToMap = newFromDictionary();
 
-    public FromToTypeDictionary(
-        Func<IBasicDictionary<Type, IBasicDictionary<Type, TValue>>> newFromDictionary,
-        Func<Type, IBasicDictionary<Type, TValue>> newToDictionary)
-    {
-        _newToDictionary = newToDictionary;
-        _fromToMap = newFromDictionary();
-    }
     public void Add((Type From, Type To) keyPair, TValue value)
     {
-        var func = _newToDictionary;
+        var func = newToDictionary;
         _fromToMap.GetOrAddValue(keyPair.From, func).Add(keyPair.To, value);
     }
 
@@ -281,8 +276,7 @@ internal readonly struct FromToTypeDictionary<TValue> : IBasicDictionary<(Type F
                && toDictionary.TryGetValue(keyPair.To, out value);
     }
 
-    public int Count => _fromToMap.Sum(kv => kv.Value.Count);
-    public bool IsEmpty => _fromToMap.Count == 0;
+    public bool IsEmpty => _fromToMap.IsEmpty;
 
     public IEnumerator<KeyValuePair<(Type From, Type To), TValue>> GetEnumerator() =>
         _fromToMap
@@ -292,11 +286,10 @@ internal readonly struct FromToTypeDictionary<TValue> : IBasicDictionary<(Type F
             .ToList()
             .GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
 }
 
-file readonly struct HandleNullableValueTypesDecorator<TValue>(IBasicDictionary<Type, TValue> Inner) : IBasicDictionary<Type, TValue>
+file readonly struct HandleNullableValueTypesDecorator<TValue>(
+    IBasicDictionary<Type, TValue> inner) : IBasicDictionary<Type, TValue>
 {
     private static Type DeNullifyValueType(Type key)
     {
@@ -306,17 +299,14 @@ file readonly struct HandleNullableValueTypesDecorator<TValue>(IBasicDictionary<
     }
 
     public void Add(Type key, TValue value) =>
-        Inner.Add(DeNullifyValueType(key), value);
+        inner.Add(DeNullifyValueType(key), value);
     public bool TryGetValue(Type key, [MaybeNullWhen(false)] out TValue value) =>
-        Inner.TryGetValue(DeNullifyValueType(key), out value);
+        inner.TryGetValue(DeNullifyValueType(key), out value);
 
-    public int Count => Inner.Count;
-    public bool IsEmpty => Inner.IsEmpty;
+    public bool IsEmpty => inner.IsEmpty;
 
     public IEnumerator<KeyValuePair<Type, TValue>> GetEnumerator() =>
-        Inner.GetEnumerator();
-
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        inner.GetEnumerator();
 }
 
 file readonly struct MatchDerivedTypesDictionary<TValue>() : IBasicDictionary<Type, TValue>
@@ -335,9 +325,9 @@ file readonly struct MatchDerivedTypesDictionary<TValue>() : IBasicDictionary<Ty
 
     public bool TryGetValue(Type key, [MaybeNullWhen(false)] out TValue value)
     {
-        MatchExactTypeDictionary<TValue> d = key.IsGenericTypeDefinition
-                                            ? _genTypeDefinitions
-                                            : _types;
+        var d = key.IsGenericTypeDefinition
+                    ? _genTypeDefinitions
+                    : _types;
         while (true)
         {
             if (!d.IsEmpty)
@@ -361,8 +351,7 @@ file readonly struct MatchDerivedTypesDictionary<TValue>() : IBasicDictionary<Ty
         }
     }
 
-    public int Count => _types.Count + _genTypeDefinitions.Count;
-    public bool IsEmpty => _types.Count == 0 && _genTypeDefinitions.Count == 0;
+    public bool IsEmpty => _types.IsEmpty && _genTypeDefinitions.IsEmpty;
 
     public IEnumerator<KeyValuePair<Type, TValue>> GetEnumerator()
     {
@@ -372,8 +361,6 @@ file readonly struct MatchDerivedTypesDictionary<TValue>() : IBasicDictionary<Ty
         foreach (var kv in _genTypeDefinitions)
             yield return kv;
     }
-
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
 
 file readonly struct MatchExactTypeDictionary<TValue>() : IBasicDictionary<Type, TValue>
@@ -386,11 +373,9 @@ file readonly struct MatchExactTypeDictionary<TValue>() : IBasicDictionary<Type,
     public bool TryGetValue(Type key, [MaybeNullWhen(false)] out TValue value) =>
         _types.TryGetValue(key, out value);
 
-    public int Count => _types.Count;
     public bool IsEmpty => _types.Count == 0;
 
     public IEnumerator<KeyValuePair<Type, TValue>> GetEnumerator() =>
         _types.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
