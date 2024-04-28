@@ -16,7 +16,7 @@ internal static class NullExpression
         => Typed<TType>.Instance;
 
     private static readonly MethodInfo ForType_GenericDefinitionMethodInfo =
-        ReflectionUtility.GenericDefinitionMethodOf(() => ForType<object>());
+        ReflectionUtility.GenericMethodDefinitionOf(() => ForType<object>());
 
     public static ConstantExpression ForType(Type type) =>
         (ConstantExpression)ForType_GenericDefinitionMethodInfo.MakeGenericMethod(type).Invoke(null, [])!;

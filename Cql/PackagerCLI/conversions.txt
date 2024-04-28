@@ -1,5 +1,4 @@
-﻿TypeConverter has the following conversions defined:
-	* cql CqlDate --> cql CqlDateTime
+﻿	* cql CqlDate --> cql CqlDateTime
 	* cql CqlDate --> fhir Date
 	* cql CqlDate --> fhir FhirDateTime
 	* cql CqlDate --> iso8601 DateIso8601
@@ -686,457 +685,233 @@
 	* fhir Code<VisionPrescription.VisionEyes> --> cql CqlCode
 	* fhir Code<VisionPrescription.VisionEyes> --> sys String
 	* fhir Code<VisionPrescription.VisionEyes> --> sys struct VisionPrescription.VisionEyes?
-	* fhir DataType --> sys Object
 	* fhir DataType --> sys String
 	* fhir Date --> cql CqlDate
 	* fhir Date --> cql CqlDateTime
 	* fhir Date --> sys String
 	* fhir enum Account.AccountStatus --> fhir Code<Account.AccountStatus>
-	* fhir enum Account.AccountStatus --> sys String
 	* fhir enum ActionCardinalityBehavior --> fhir Code<ActionCardinalityBehavior>
-	* fhir enum ActionCardinalityBehavior --> sys String
 	* fhir enum ActionConditionKind --> fhir Code<ActionConditionKind>
-	* fhir enum ActionConditionKind --> sys String
 	* fhir enum ActionGroupingBehavior --> fhir Code<ActionGroupingBehavior>
-	* fhir enum ActionGroupingBehavior --> sys String
 	* fhir enum ActionParticipantType --> fhir Code<ActionParticipantType>
-	* fhir enum ActionParticipantType --> sys String
 	* fhir enum ActionPrecheckBehavior --> fhir Code<ActionPrecheckBehavior>
-	* fhir enum ActionPrecheckBehavior --> sys String
 	* fhir enum ActionRelationshipType --> fhir Code<ActionRelationshipType>
-	* fhir enum ActionRelationshipType --> sys String
 	* fhir enum ActionRequiredBehavior --> fhir Code<ActionRequiredBehavior>
-	* fhir enum ActionRequiredBehavior --> sys String
 	* fhir enum ActionSelectionBehavior --> fhir Code<ActionSelectionBehavior>
-	* fhir enum ActionSelectionBehavior --> sys String
 	* fhir enum ActivityDefinition.RequestResourceType --> fhir Code<ActivityDefinition.RequestResourceType>
-	* fhir enum ActivityDefinition.RequestResourceType --> sys String
 	* fhir enum Address.AddressType --> fhir Code<Address.AddressType>
-	* fhir enum Address.AddressType --> sys String
 	* fhir enum Address.AddressUse --> fhir Code<Address.AddressUse>
-	* fhir enum Address.AddressUse --> sys String
 	* fhir enum AdministrativeGender --> fhir Code<AdministrativeGender>
-	* fhir enum AdministrativeGender --> sys String
 	* fhir enum AdverseEvent.AdverseEventActuality --> fhir Code<AdverseEvent.AdverseEventActuality>
-	* fhir enum AdverseEvent.AdverseEventActuality --> sys String
 	* fhir enum AdverseEvent.AdverseEventOutcome --> fhir Code<AdverseEvent.AdverseEventOutcome>
-	* fhir enum AdverseEvent.AdverseEventOutcome --> sys String
 	* fhir enum AdverseEvent.AdverseEventSeverity --> fhir Code<AdverseEvent.AdverseEventSeverity>
-	* fhir enum AdverseEvent.AdverseEventSeverity --> sys String
 	* fhir enum AllergyIntolerance.AllergyIntoleranceCategory --> fhir Code<AllergyIntolerance.AllergyIntoleranceCategory>
-	* fhir enum AllergyIntolerance.AllergyIntoleranceCategory --> sys String
 	* fhir enum AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes --> fhir Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes>
-	* fhir enum AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes --> sys String
 	* fhir enum AllergyIntolerance.AllergyIntoleranceCriticality --> fhir Code<AllergyIntolerance.AllergyIntoleranceCriticality>
-	* fhir enum AllergyIntolerance.AllergyIntoleranceCriticality --> sys String
 	* fhir enum AllergyIntolerance.AllergyIntoleranceSeverity --> fhir Code<AllergyIntolerance.AllergyIntoleranceSeverity>
-	* fhir enum AllergyIntolerance.AllergyIntoleranceSeverity --> sys String
 	* fhir enum AllergyIntolerance.AllergyIntoleranceType --> fhir Code<AllergyIntolerance.AllergyIntoleranceType>
-	* fhir enum AllergyIntolerance.AllergyIntoleranceType --> sys String
 	* fhir enum AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes --> fhir Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes>
-	* fhir enum AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes --> sys String
 	* fhir enum Appointment.AppointmentStatus --> fhir Code<Appointment.AppointmentStatus>
-	* fhir enum Appointment.AppointmentStatus --> sys String
 	* fhir enum Appointment.ParticipantRequired --> fhir Code<Appointment.ParticipantRequired>
-	* fhir enum Appointment.ParticipantRequired --> sys String
 	* fhir enum AuditEvent.AuditEventAction --> fhir Code<AuditEvent.AuditEventAction>
-	* fhir enum AuditEvent.AuditEventAction --> sys String
 	* fhir enum AuditEvent.AuditEventAgentNetworkType --> fhir Code<AuditEvent.AuditEventAgentNetworkType>
-	* fhir enum AuditEvent.AuditEventAgentNetworkType --> sys String
 	* fhir enum AuditEvent.AuditEventOutcome --> fhir Code<AuditEvent.AuditEventOutcome>
-	* fhir enum AuditEvent.AuditEventOutcome --> sys String
 	* fhir enum BindingStrength --> fhir Code<BindingStrength>
-	* fhir enum BindingStrength --> sys String
 	* fhir enum BiologicallyDerivedProduct.BiologicallyDerivedProductCategory --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory>
-	* fhir enum BiologicallyDerivedProduct.BiologicallyDerivedProductCategory --> sys String
 	* fhir enum BiologicallyDerivedProduct.BiologicallyDerivedProductStatus --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus>
-	* fhir enum BiologicallyDerivedProduct.BiologicallyDerivedProductStatus --> sys String
 	* fhir enum BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale>
-	* fhir enum BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale --> sys String
 	* fhir enum Bundle.BundleType --> fhir Code<Bundle.BundleType>
-	* fhir enum Bundle.BundleType --> sys String
 	* fhir enum Bundle.HTTPVerb --> fhir Code<Bundle.HTTPVerb>
-	* fhir enum Bundle.HTTPVerb --> sys String
 	* fhir enum Bundle.LinkRelationTypes --> fhir Code<Bundle.LinkRelationTypes>
-	* fhir enum Bundle.LinkRelationTypes --> sys String
 	* fhir enum Bundle.SearchEntryMode --> fhir Code<Bundle.SearchEntryMode>
-	* fhir enum Bundle.SearchEntryMode --> sys String
 	* fhir enum CapabilityStatement.ConditionalDeleteStatus --> fhir Code<CapabilityStatement.ConditionalDeleteStatus>
-	* fhir enum CapabilityStatement.ConditionalDeleteStatus --> sys String
 	* fhir enum CapabilityStatement.ConditionalReadStatus --> fhir Code<CapabilityStatement.ConditionalReadStatus>
-	* fhir enum CapabilityStatement.ConditionalReadStatus --> sys String
 	* fhir enum CapabilityStatement.DocumentMode --> fhir Code<CapabilityStatement.DocumentMode>
-	* fhir enum CapabilityStatement.DocumentMode --> sys String
 	* fhir enum CapabilityStatement.EventCapabilityMode --> fhir Code<CapabilityStatement.EventCapabilityMode>
-	* fhir enum CapabilityStatement.EventCapabilityMode --> sys String
 	* fhir enum CapabilityStatement.ReferenceHandlingPolicy --> fhir Code<CapabilityStatement.ReferenceHandlingPolicy>
-	* fhir enum CapabilityStatement.ReferenceHandlingPolicy --> sys String
 	* fhir enum CapabilityStatement.ResourceVersionPolicy --> fhir Code<CapabilityStatement.ResourceVersionPolicy>
-	* fhir enum CapabilityStatement.ResourceVersionPolicy --> sys String
 	* fhir enum CapabilityStatement.RestfulCapabilityMode --> fhir Code<CapabilityStatement.RestfulCapabilityMode>
-	* fhir enum CapabilityStatement.RestfulCapabilityMode --> sys String
 	* fhir enum CapabilityStatement.SystemRestfulInteraction --> fhir Code<CapabilityStatement.SystemRestfulInteraction>
-	* fhir enum CapabilityStatement.SystemRestfulInteraction --> sys String
 	* fhir enum CapabilityStatement.TypeRestfulInteraction --> fhir Code<CapabilityStatement.TypeRestfulInteraction>
-	* fhir enum CapabilityStatement.TypeRestfulInteraction --> sys String
 	* fhir enum CapabilityStatementKind --> fhir Code<CapabilityStatementKind>
-	* fhir enum CapabilityStatementKind --> sys String
 	* fhir enum CarePlan.CarePlanActivityKind --> fhir Code<CarePlan.CarePlanActivityKind>
-	* fhir enum CarePlan.CarePlanActivityKind --> sys String
 	* fhir enum CarePlan.CarePlanActivityStatus --> fhir Code<CarePlan.CarePlanActivityStatus>
-	* fhir enum CarePlan.CarePlanActivityStatus --> sys String
 	* fhir enum CarePlan.CarePlanIntent --> fhir Code<CarePlan.CarePlanIntent>
-	* fhir enum CarePlan.CarePlanIntent --> sys String
 	* fhir enum CareTeam.CareTeamStatus --> fhir Code<CareTeam.CareTeamStatus>
-	* fhir enum CareTeam.CareTeamStatus --> sys String
 	* fhir enum CatalogEntry.CatalogEntryRelationType --> fhir Code<CatalogEntry.CatalogEntryRelationType>
-	* fhir enum CatalogEntry.CatalogEntryRelationType --> sys String
 	* fhir enum ChargeItem.ChargeItemStatus --> fhir Code<ChargeItem.ChargeItemStatus>
-	* fhir enum ChargeItem.ChargeItemStatus --> sys String
 	* fhir enum ClaimProcessingCodes --> fhir Code<ClaimProcessingCodes>
-	* fhir enum ClaimProcessingCodes --> sys String
 	* fhir enum ClaimUseCode --> fhir Code<ClaimUseCode>
-	* fhir enum ClaimUseCode --> sys String
 	* fhir enum ClinicalImpression.ClinicalImpressionStatus --> fhir Code<ClinicalImpression.ClinicalImpressionStatus>
-	* fhir enum ClinicalImpression.ClinicalImpressionStatus --> sys String
 	* fhir enum CodeSystem.CodeSystemHierarchyMeaning --> fhir Code<CodeSystem.CodeSystemHierarchyMeaning>
-	* fhir enum CodeSystem.CodeSystemHierarchyMeaning --> sys String
 	* fhir enum CodeSystem.PropertyType --> fhir Code<CodeSystem.PropertyType>
-	* fhir enum CodeSystem.PropertyType --> sys String
 	* fhir enum CodeSystemContentMode --> fhir Code<CodeSystemContentMode>
-	* fhir enum CodeSystemContentMode --> sys String
 	* fhir enum CompartmentType --> fhir Code<CompartmentType>
-	* fhir enum CompartmentType --> sys String
 	* fhir enum Composition.CompositionAttestationMode --> fhir Code<Composition.CompositionAttestationMode>
-	* fhir enum Composition.CompositionAttestationMode --> sys String
 	* fhir enum Composition.V3ConfidentialityClassification --> fhir Code<Composition.V3ConfidentialityClassification>
-	* fhir enum Composition.V3ConfidentialityClassification --> sys String
 	* fhir enum CompositionStatus --> fhir Code<CompositionStatus>
-	* fhir enum CompositionStatus --> sys String
 	* fhir enum ConceptMap.ConceptMapGroupUnmappedMode --> fhir Code<ConceptMap.ConceptMapGroupUnmappedMode>
-	* fhir enum ConceptMap.ConceptMapGroupUnmappedMode --> sys String
 	* fhir enum ConceptMapEquivalence --> fhir Code<ConceptMapEquivalence>
-	* fhir enum ConceptMapEquivalence --> sys String
 	* fhir enum Condition.ConditionClinicalStatusCodes --> fhir Code<Condition.ConditionClinicalStatusCodes>
-	* fhir enum Condition.ConditionClinicalStatusCodes --> sys String
 	* fhir enum Condition.ConditionVerificationStatus --> fhir Code<Condition.ConditionVerificationStatus>
-	* fhir enum Condition.ConditionVerificationStatus --> sys String
 	* fhir enum Consent.ConsentDataMeaning --> fhir Code<Consent.ConsentDataMeaning>
-	* fhir enum Consent.ConsentDataMeaning --> sys String
 	* fhir enum Consent.ConsentProvisionType --> fhir Code<Consent.ConsentProvisionType>
-	* fhir enum Consent.ConsentProvisionType --> sys String
 	* fhir enum Consent.ConsentState --> fhir Code<Consent.ConsentState>
-	* fhir enum Consent.ConsentState --> sys String
 	* fhir enum ConstraintSeverity --> fhir Code<ConstraintSeverity>
-	* fhir enum ConstraintSeverity --> sys String
 	* fhir enum ContactPoint.ContactPointSystem --> fhir Code<ContactPoint.ContactPointSystem>
-	* fhir enum ContactPoint.ContactPointSystem --> sys String
 	* fhir enum ContactPoint.ContactPointUse --> fhir Code<ContactPoint.ContactPointUse>
-	* fhir enum ContactPoint.ContactPointUse --> sys String
 	* fhir enum Contract.ContractResourcePublicationStatusCodes --> fhir Code<Contract.ContractResourcePublicationStatusCodes>
-	* fhir enum Contract.ContractResourcePublicationStatusCodes --> sys String
 	* fhir enum Contract.ContractResourceStatusCodes --> fhir Code<Contract.ContractResourceStatusCodes>
-	* fhir enum Contract.ContractResourceStatusCodes --> sys String
 	* fhir enum Contributor.ContributorType --> fhir Code<Contributor.ContributorType>
-	* fhir enum Contributor.ContributorType --> sys String
 	* fhir enum CoverageEligibilityRequest.EligibilityRequestPurpose --> fhir Code<CoverageEligibilityRequest.EligibilityRequestPurpose>
-	* fhir enum CoverageEligibilityRequest.EligibilityRequestPurpose --> sys String
 	* fhir enum CoverageEligibilityResponse.EligibilityResponsePurpose --> fhir Code<CoverageEligibilityResponse.EligibilityResponsePurpose>
-	* fhir enum CoverageEligibilityResponse.EligibilityResponsePurpose --> sys String
 	* fhir enum DataRequirement.SortDirection --> fhir Code<DataRequirement.SortDirection>
-	* fhir enum DataRequirement.SortDirection --> sys String
 	* fhir enum DaysOfWeek --> fhir Code<DaysOfWeek>
-	* fhir enum DaysOfWeek --> sys String
 	* fhir enum DetectedIssue.DetectedIssueSeverity --> fhir Code<DetectedIssue.DetectedIssueSeverity>
-	* fhir enum DetectedIssue.DetectedIssueSeverity --> sys String
 	* fhir enum Device.FHIRDeviceStatus --> fhir Code<Device.FHIRDeviceStatus>
-	* fhir enum Device.FHIRDeviceStatus --> sys String
 	* fhir enum Device.UDIEntryType --> fhir Code<Device.UDIEntryType>
-	* fhir enum Device.UDIEntryType --> sys String
 	* fhir enum DeviceMetric.DeviceMetricCalibrationState --> fhir Code<DeviceMetric.DeviceMetricCalibrationState>
-	* fhir enum DeviceMetric.DeviceMetricCalibrationState --> sys String
 	* fhir enum DeviceMetric.DeviceMetricCalibrationType --> fhir Code<DeviceMetric.DeviceMetricCalibrationType>
-	* fhir enum DeviceMetric.DeviceMetricCalibrationType --> sys String
 	* fhir enum DeviceMetric.DeviceMetricCategory --> fhir Code<DeviceMetric.DeviceMetricCategory>
-	* fhir enum DeviceMetric.DeviceMetricCategory --> sys String
 	* fhir enum DeviceMetric.DeviceMetricColor --> fhir Code<DeviceMetric.DeviceMetricColor>
-	* fhir enum DeviceMetric.DeviceMetricColor --> sys String
 	* fhir enum DeviceMetric.DeviceMetricOperationalStatus --> fhir Code<DeviceMetric.DeviceMetricOperationalStatus>
-	* fhir enum DeviceMetric.DeviceMetricOperationalStatus --> sys String
 	* fhir enum DeviceNameType --> fhir Code<DeviceNameType>
-	* fhir enum DeviceNameType --> sys String
 	* fhir enum DeviceUseStatement.DeviceUseStatementStatus --> fhir Code<DeviceUseStatement.DeviceUseStatementStatus>
-	* fhir enum DeviceUseStatement.DeviceUseStatementStatus --> sys String
 	* fhir enum DiagnosticReport.DiagnosticReportStatus --> fhir Code<DiagnosticReport.DiagnosticReportStatus>
-	* fhir enum DiagnosticReport.DiagnosticReportStatus --> sys String
 	* fhir enum DocumentReferenceStatus --> fhir Code<DocumentReferenceStatus>
-	* fhir enum DocumentReferenceStatus --> sys String
 	* fhir enum DocumentRelationshipType --> fhir Code<DocumentRelationshipType>
-	* fhir enum DocumentRelationshipType --> sys String
 	* fhir enum EffectEvidenceSynthesis.ExposureStateCode --> fhir Code<EffectEvidenceSynthesis.ExposureStateCode>
-	* fhir enum EffectEvidenceSynthesis.ExposureStateCode --> sys String
 	* fhir enum ElementDefinition.AdditionalBindingPurposeVS --> fhir Code<ElementDefinition.AdditionalBindingPurposeVS>
-	* fhir enum ElementDefinition.AdditionalBindingPurposeVS --> sys String
 	* fhir enum ElementDefinition.AggregationMode --> fhir Code<ElementDefinition.AggregationMode>
-	* fhir enum ElementDefinition.AggregationMode --> sys String
 	* fhir enum ElementDefinition.DiscriminatorType --> fhir Code<ElementDefinition.DiscriminatorType>
-	* fhir enum ElementDefinition.DiscriminatorType --> sys String
 	* fhir enum ElementDefinition.PropertyRepresentation --> fhir Code<ElementDefinition.PropertyRepresentation>
-	* fhir enum ElementDefinition.PropertyRepresentation --> sys String
 	* fhir enum ElementDefinition.ReferenceVersionRules --> fhir Code<ElementDefinition.ReferenceVersionRules>
-	* fhir enum ElementDefinition.ReferenceVersionRules --> sys String
 	* fhir enum ElementDefinition.SlicingRules --> fhir Code<ElementDefinition.SlicingRules>
-	* fhir enum ElementDefinition.SlicingRules --> sys String
 	* fhir enum Encounter.EncounterLocationStatus --> fhir Code<Encounter.EncounterLocationStatus>
-	* fhir enum Encounter.EncounterLocationStatus --> sys String
 	* fhir enum Encounter.EncounterStatus --> fhir Code<Encounter.EncounterStatus>
-	* fhir enum Encounter.EncounterStatus --> sys String
 	* fhir enum Endpoint.EndpointStatus --> fhir Code<Endpoint.EndpointStatus>
-	* fhir enum Endpoint.EndpointStatus --> sys String
 	* fhir enum EpisodeOfCare.EpisodeOfCareStatus --> fhir Code<EpisodeOfCare.EpisodeOfCareStatus>
-	* fhir enum EpisodeOfCare.EpisodeOfCareStatus --> sys String
 	* fhir enum EventStatus --> fhir Code<EventStatus>
-	* fhir enum EventStatus --> sys String
 	* fhir enum ExampleScenario.ExampleScenarioActorType --> fhir Code<ExampleScenario.ExampleScenarioActorType>
-	* fhir enum ExampleScenario.ExampleScenarioActorType --> sys String
 	* fhir enum ExplanationOfBenefit.ExplanationOfBenefitStatus --> fhir Code<ExplanationOfBenefit.ExplanationOfBenefitStatus>
-	* fhir enum ExplanationOfBenefit.ExplanationOfBenefitStatus --> sys String
 	* fhir enum FamilyMemberHistory.FamilyHistoryStatus --> fhir Code<FamilyMemberHistory.FamilyHistoryStatus>
-	* fhir enum FamilyMemberHistory.FamilyHistoryStatus --> sys String
 	* fhir enum FHIRAllTypes --> fhir Code<FHIRAllTypes>
-	* fhir enum FHIRAllTypes --> sys String
 	* fhir enum FHIRDefinedType --> fhir Code<FHIRDefinedType>
-	* fhir enum FHIRDefinedType --> sys String
 	* fhir enum FHIRVersion --> fhir Code<FHIRVersion>
-	* fhir enum FHIRVersion --> sys String
 	* fhir enum FilterOperator --> fhir Code<FilterOperator>
-	* fhir enum FilterOperator --> sys String
 	* fhir enum FinancialResourceStatusCodes --> fhir Code<FinancialResourceStatusCodes>
-	* fhir enum FinancialResourceStatusCodes --> sys String
 	* fhir enum Flag.FlagStatus --> fhir Code<Flag.FlagStatus>
-	* fhir enum Flag.FlagStatus --> sys String
 	* fhir enum Goal.GoalLifecycleStatus --> fhir Code<Goal.GoalLifecycleStatus>
-	* fhir enum Goal.GoalLifecycleStatus --> sys String
 	* fhir enum GraphDefinition.GraphCompartmentRule --> fhir Code<GraphDefinition.GraphCompartmentRule>
-	* fhir enum GraphDefinition.GraphCompartmentRule --> sys String
 	* fhir enum GraphDefinition.GraphCompartmentUse --> fhir Code<GraphDefinition.GraphCompartmentUse>
-	* fhir enum GraphDefinition.GraphCompartmentUse --> sys String
 	* fhir enum Group.GroupType --> fhir Code<Group.GroupType>
-	* fhir enum Group.GroupType --> sys String
 	* fhir enum GroupMeasureCode --> fhir Code<GroupMeasureCode>
-	* fhir enum GroupMeasureCode --> sys String
 	* fhir enum GuidanceResponse.GuidanceResponseStatus --> fhir Code<GuidanceResponse.GuidanceResponseStatus>
-	* fhir enum GuidanceResponse.GuidanceResponseStatus --> sys String
 	* fhir enum HumanName.NameUse --> fhir Code<HumanName.NameUse>
-	* fhir enum HumanName.NameUse --> sys String
 	* fhir enum Identifier.IdentifierUse --> fhir Code<Identifier.IdentifierUse>
-	* fhir enum Identifier.IdentifierUse --> sys String
 	* fhir enum ImagingStudy.ImagingStudyStatus --> fhir Code<ImagingStudy.ImagingStudyStatus>
-	* fhir enum ImagingStudy.ImagingStudyStatus --> sys String
 	* fhir enum Immunization.ImmunizationStatusCodes --> fhir Code<Immunization.ImmunizationStatusCodes>
-	* fhir enum Immunization.ImmunizationStatusCodes --> sys String
 	* fhir enum ImmunizationEvaluation.ImmunizationEvaluationStatusCodes --> fhir Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes>
-	* fhir enum ImmunizationEvaluation.ImmunizationEvaluationStatusCodes --> sys String
 	* fhir enum ImplementationGuide.GuidePageGeneration --> fhir Code<ImplementationGuide.GuidePageGeneration>
-	* fhir enum ImplementationGuide.GuidePageGeneration --> sys String
 	* fhir enum ImplementationGuide.GuideParameterCode --> fhir Code<ImplementationGuide.GuideParameterCode>
-	* fhir enum ImplementationGuide.GuideParameterCode --> sys String
 	* fhir enum ImplementationGuide.SPDXLicense --> fhir Code<ImplementationGuide.SPDXLicense>
-	* fhir enum ImplementationGuide.SPDXLicense --> sys String
 	* fhir enum InsurancePlan.BenefitCostApplicability --> fhir Code<InsurancePlan.BenefitCostApplicability>
-	* fhir enum InsurancePlan.BenefitCostApplicability --> sys String
 	* fhir enum Invoice.InvoiceStatus --> fhir Code<Invoice.InvoiceStatus>
-	* fhir enum Invoice.InvoiceStatus --> sys String
 	* fhir enum InvoicePriceComponentType --> fhir Code<InvoicePriceComponentType>
-	* fhir enum InvoicePriceComponentType --> sys String
 	* fhir enum Linkage.LinkageType --> fhir Code<Linkage.LinkageType>
-	* fhir enum Linkage.LinkageType --> sys String
 	* fhir enum List.ListStatus --> fhir Code<List.ListStatus>
-	* fhir enum List.ListStatus --> sys String
 	* fhir enum ListMode --> fhir Code<ListMode>
-	* fhir enum ListMode --> sys String
 	* fhir enum Location.LocationMode --> fhir Code<Location.LocationMode>
-	* fhir enum Location.LocationMode --> sys String
 	* fhir enum Location.LocationStatus --> fhir Code<Location.LocationStatus>
-	* fhir enum Location.LocationStatus --> sys String
 	* fhir enum MeasureImprovementNotation --> fhir Code<MeasureImprovementNotation>
-	* fhir enum MeasureImprovementNotation --> sys String
 	* fhir enum MeasureReport.MeasureReportStatus --> fhir Code<MeasureReport.MeasureReportStatus>
-	* fhir enum MeasureReport.MeasureReportStatus --> sys String
 	* fhir enum MeasureReport.MeasureReportType --> fhir Code<MeasureReport.MeasureReportType>
-	* fhir enum MeasureReport.MeasureReportType --> sys String
 	* fhir enum Medication.MedicationStatusCodes --> fhir Code<Medication.MedicationStatusCodes>
-	* fhir enum Medication.MedicationStatusCodes --> sys String
 	* fhir enum MedicationAdministration.MedicationAdministrationStatusCodes --> fhir Code<MedicationAdministration.MedicationAdministrationStatusCodes>
-	* fhir enum MedicationAdministration.MedicationAdministrationStatusCodes --> sys String
 	* fhir enum MedicationDispense.MedicationDispenseStatusCodes --> fhir Code<MedicationDispense.MedicationDispenseStatusCodes>
-	* fhir enum MedicationDispense.MedicationDispenseStatusCodes --> sys String
 	* fhir enum MedicationKnowledge.MedicationKnowledgeStatusCodes --> fhir Code<MedicationKnowledge.MedicationKnowledgeStatusCodes>
-	* fhir enum MedicationKnowledge.MedicationKnowledgeStatusCodes --> sys String
 	* fhir enum MedicationRequest.MedicationRequestIntent --> fhir Code<MedicationRequest.MedicationRequestIntent>
-	* fhir enum MedicationRequest.MedicationRequestIntent --> sys String
 	* fhir enum MedicationRequest.MedicationrequestStatus --> fhir Code<MedicationRequest.MedicationrequestStatus>
-	* fhir enum MedicationRequest.MedicationrequestStatus --> sys String
 	* fhir enum MedicationStatement.MedicationStatusCodes --> fhir Code<MedicationStatement.MedicationStatusCodes>
-	* fhir enum MedicationStatement.MedicationStatusCodes --> sys String
 	* fhir enum MessageDefinition.MessageSignificanceCategory --> fhir Code<MessageDefinition.MessageSignificanceCategory>
-	* fhir enum MessageDefinition.MessageSignificanceCategory --> sys String
 	* fhir enum MessageHeader.ResponseType --> fhir Code<MessageHeader.ResponseType>
-	* fhir enum MessageHeader.ResponseType --> sys String
 	* fhir enum MessageheaderResponseRequest --> fhir Code<MessageheaderResponseRequest>
-	* fhir enum MessageheaderResponseRequest --> sys String
 	* fhir enum MolecularSequence.OrientationType --> fhir Code<MolecularSequence.OrientationType>
-	* fhir enum MolecularSequence.OrientationType --> sys String
 	* fhir enum MolecularSequence.QualityType --> fhir Code<MolecularSequence.QualityType>
-	* fhir enum MolecularSequence.QualityType --> sys String
 	* fhir enum MolecularSequence.RepositoryType --> fhir Code<MolecularSequence.RepositoryType>
-	* fhir enum MolecularSequence.RepositoryType --> sys String
 	* fhir enum MolecularSequence.SequenceType --> fhir Code<MolecularSequence.SequenceType>
-	* fhir enum MolecularSequence.SequenceType --> sys String
 	* fhir enum MolecularSequence.StrandType --> fhir Code<MolecularSequence.StrandType>
-	* fhir enum MolecularSequence.StrandType --> sys String
 	* fhir enum Money.Currencies --> fhir Code<Money.Currencies>
-	* fhir enum Money.Currencies --> sys String
 	* fhir enum NamingSystem.NamingSystemIdentifierType --> fhir Code<NamingSystem.NamingSystemIdentifierType>
-	* fhir enum NamingSystem.NamingSystemIdentifierType --> sys String
 	* fhir enum NamingSystem.NamingSystemType --> fhir Code<NamingSystem.NamingSystemType>
-	* fhir enum NamingSystem.NamingSystemType --> sys String
 	* fhir enum Narrative.NarrativeStatus --> fhir Code<Narrative.NarrativeStatus>
-	* fhir enum Narrative.NarrativeStatus --> sys String
 	* fhir enum NoteType --> fhir Code<NoteType>
-	* fhir enum NoteType --> sys String
 	* fhir enum ObservationDefinition.ObservationDataType --> fhir Code<ObservationDefinition.ObservationDataType>
-	* fhir enum ObservationDefinition.ObservationDataType --> sys String
 	* fhir enum ObservationDefinition.ObservationRangeCategory --> fhir Code<ObservationDefinition.ObservationRangeCategory>
-	* fhir enum ObservationDefinition.ObservationRangeCategory --> sys String
 	* fhir enum ObservationStatus --> fhir Code<ObservationStatus>
-	* fhir enum ObservationStatus --> sys String
 	* fhir enum OperationDefinition.OperationKind --> fhir Code<OperationDefinition.OperationKind>
-	* fhir enum OperationDefinition.OperationKind --> sys String
 	* fhir enum OperationOutcome.IssueSeverity --> fhir Code<OperationOutcome.IssueSeverity>
-	* fhir enum OperationOutcome.IssueSeverity --> sys String
 	* fhir enum OperationOutcome.IssueType --> fhir Code<OperationOutcome.IssueType>
-	* fhir enum OperationOutcome.IssueType --> sys String
 	* fhir enum OperationParameterUse --> fhir Code<OperationParameterUse>
-	* fhir enum OperationParameterUse --> sys String
 	* fhir enum ParticipationStatus --> fhir Code<ParticipationStatus>
-	* fhir enum ParticipationStatus --> sys String
 	* fhir enum Patient.LinkType --> fhir Code<Patient.LinkType>
-	* fhir enum Patient.LinkType --> sys String
 	* fhir enum Person.IdentityAssuranceLevel --> fhir Code<Person.IdentityAssuranceLevel>
-	* fhir enum Person.IdentityAssuranceLevel --> sys String
 	* fhir enum Provenance.ProvenanceEntityRole --> fhir Code<Provenance.ProvenanceEntityRole>
-	* fhir enum Provenance.ProvenanceEntityRole --> sys String
 	* fhir enum PublicationStatus --> fhir Code<PublicationStatus>
-	* fhir enum PublicationStatus --> sys String
 	* fhir enum Quantity.QuantityComparator --> fhir Code<Quantity.QuantityComparator>
-	* fhir enum Quantity.QuantityComparator --> sys String
 	* fhir enum Questionnaire.EnableWhenBehavior --> fhir Code<Questionnaire.EnableWhenBehavior>
-	* fhir enum Questionnaire.EnableWhenBehavior --> sys String
 	* fhir enum Questionnaire.QuestionnaireItemOperator --> fhir Code<Questionnaire.QuestionnaireItemOperator>
-	* fhir enum Questionnaire.QuestionnaireItemOperator --> sys String
 	* fhir enum Questionnaire.QuestionnaireItemType --> fhir Code<Questionnaire.QuestionnaireItemType>
-	* fhir enum Questionnaire.QuestionnaireItemType --> sys String
 	* fhir enum QuestionnaireResponse.QuestionnaireResponseStatus --> fhir Code<QuestionnaireResponse.QuestionnaireResponseStatus>
-	* fhir enum QuestionnaireResponse.QuestionnaireResponseStatus --> sys String
 	* fhir enum RelatedArtifact.RelatedArtifactType --> fhir Code<RelatedArtifact.RelatedArtifactType>
-	* fhir enum RelatedArtifact.RelatedArtifactType --> sys String
 	* fhir enum RequestIntent --> fhir Code<RequestIntent>
-	* fhir enum RequestIntent --> sys String
 	* fhir enum RequestPriority --> fhir Code<RequestPriority>
-	* fhir enum RequestPriority --> sys String
 	* fhir enum RequestStatus --> fhir Code<RequestStatus>
-	* fhir enum RequestStatus --> sys String
 	* fhir enum ResearchElementDefinition.ResearchElementType --> fhir Code<ResearchElementDefinition.ResearchElementType>
-	* fhir enum ResearchElementDefinition.ResearchElementType --> sys String
 	* fhir enum ResearchStudy.ResearchStudyStatus --> fhir Code<ResearchStudy.ResearchStudyStatus>
-	* fhir enum ResearchStudy.ResearchStudyStatus --> sys String
 	* fhir enum ResearchSubject.ResearchSubjectStatus --> fhir Code<ResearchSubject.ResearchSubjectStatus>
-	* fhir enum ResearchSubject.ResearchSubjectStatus --> sys String
 	* fhir enum ResourceType --> fhir Code<ResourceType>
-	* fhir enum ResourceType --> sys String
 	* fhir enum SearchParameter.SearchComparator --> fhir Code<SearchParameter.SearchComparator>
-	* fhir enum SearchParameter.SearchComparator --> sys String
 	* fhir enum SearchParameter.SearchModifierCode --> fhir Code<SearchParameter.SearchModifierCode>
-	* fhir enum SearchParameter.SearchModifierCode --> sys String
 	* fhir enum SearchParameter.XPathUsageType --> fhir Code<SearchParameter.XPathUsageType>
-	* fhir enum SearchParameter.XPathUsageType --> sys String
 	* fhir enum SearchParamType --> fhir Code<SearchParamType>
-	* fhir enum SearchParamType --> sys String
 	* fhir enum Slot.SlotStatus --> fhir Code<Slot.SlotStatus>
-	* fhir enum Slot.SlotStatus --> sys String
 	* fhir enum Specimen.SpecimenStatus --> fhir Code<Specimen.SpecimenStatus>
-	* fhir enum Specimen.SpecimenStatus --> sys String
 	* fhir enum SpecimenDefinition.SpecimenContainedPreference --> fhir Code<SpecimenDefinition.SpecimenContainedPreference>
-	* fhir enum SpecimenDefinition.SpecimenContainedPreference --> sys String
 	* fhir enum StructureDefinition.ExtensionContextType --> fhir Code<StructureDefinition.ExtensionContextType>
-	* fhir enum StructureDefinition.ExtensionContextType --> sys String
 	* fhir enum StructureDefinition.StructureDefinitionKind --> fhir Code<StructureDefinition.StructureDefinitionKind>
-	* fhir enum StructureDefinition.StructureDefinitionKind --> sys String
 	* fhir enum StructureDefinition.TypeDerivationRule --> fhir Code<StructureDefinition.TypeDerivationRule>
-	* fhir enum StructureDefinition.TypeDerivationRule --> sys String
 	* fhir enum StructureMap.StructureMapContextType --> fhir Code<StructureMap.StructureMapContextType>
-	* fhir enum StructureMap.StructureMapContextType --> sys String
 	* fhir enum StructureMap.StructureMapGroupTypeMode --> fhir Code<StructureMap.StructureMapGroupTypeMode>
-	* fhir enum StructureMap.StructureMapGroupTypeMode --> sys String
 	* fhir enum StructureMap.StructureMapInputMode --> fhir Code<StructureMap.StructureMapInputMode>
-	* fhir enum StructureMap.StructureMapInputMode --> sys String
 	* fhir enum StructureMap.StructureMapModelMode --> fhir Code<StructureMap.StructureMapModelMode>
-	* fhir enum StructureMap.StructureMapModelMode --> sys String
 	* fhir enum StructureMap.StructureMapSourceListMode --> fhir Code<StructureMap.StructureMapSourceListMode>
-	* fhir enum StructureMap.StructureMapSourceListMode --> sys String
 	* fhir enum StructureMap.StructureMapTargetListMode --> fhir Code<StructureMap.StructureMapTargetListMode>
-	* fhir enum StructureMap.StructureMapTargetListMode --> sys String
 	* fhir enum StructureMap.StructureMapTransform --> fhir Code<StructureMap.StructureMapTransform>
-	* fhir enum StructureMap.StructureMapTransform --> sys String
 	* fhir enum Subscription.SubscriptionChannelType --> fhir Code<Subscription.SubscriptionChannelType>
-	* fhir enum Subscription.SubscriptionChannelType --> sys String
 	* fhir enum Subscription.SubscriptionStatus --> fhir Code<Subscription.SubscriptionStatus>
-	* fhir enum Subscription.SubscriptionStatus --> sys String
 	* fhir enum Substance.FHIRSubstanceStatus --> fhir Code<Substance.FHIRSubstanceStatus>
-	* fhir enum Substance.FHIRSubstanceStatus --> sys String
 	* fhir enum SupplyDelivery.SupplyDeliveryStatus --> fhir Code<SupplyDelivery.SupplyDeliveryStatus>
-	* fhir enum SupplyDelivery.SupplyDeliveryStatus --> sys String
 	* fhir enum SupplyDelivery.SupplyItemType --> fhir Code<SupplyDelivery.SupplyItemType>
-	* fhir enum SupplyDelivery.SupplyItemType --> sys String
 	* fhir enum SupplyRequest.SupplyRequestStatus --> fhir Code<SupplyRequest.SupplyRequestStatus>
-	* fhir enum SupplyRequest.SupplyRequestStatus --> sys String
 	* fhir enum Task.TaskIntent --> fhir Code<Task.TaskIntent>
-	* fhir enum Task.TaskIntent --> sys String
 	* fhir enum Task.TaskStatus --> fhir Code<Task.TaskStatus>
-	* fhir enum Task.TaskStatus --> sys String
 	* fhir enum TerminologyCapabilities.CodeSearchSupport --> fhir Code<TerminologyCapabilities.CodeSearchSupport>
-	* fhir enum TerminologyCapabilities.CodeSearchSupport --> sys String
 	* fhir enum TestReport.TestReportActionResult --> fhir Code<TestReport.TestReportActionResult>
-	* fhir enum TestReport.TestReportActionResult --> sys String
 	* fhir enum TestReport.TestReportParticipantType --> fhir Code<TestReport.TestReportParticipantType>
-	* fhir enum TestReport.TestReportParticipantType --> sys String
 	* fhir enum TestReport.TestReportResult --> fhir Code<TestReport.TestReportResult>
-	* fhir enum TestReport.TestReportResult --> sys String
 	* fhir enum TestReport.TestReportStatus --> fhir Code<TestReport.TestReportStatus>
-	* fhir enum TestReport.TestReportStatus --> sys String
 	* fhir enum TestScript.AssertionDirectionType --> fhir Code<TestScript.AssertionDirectionType>
-	* fhir enum TestScript.AssertionDirectionType --> sys String
 	* fhir enum TestScript.AssertionOperatorType --> fhir Code<TestScript.AssertionOperatorType>
-	* fhir enum TestScript.AssertionOperatorType --> sys String
 	* fhir enum TestScript.AssertionResponseTypes --> fhir Code<TestScript.AssertionResponseTypes>
-	* fhir enum TestScript.AssertionResponseTypes --> sys String
 	* fhir enum TestScript.TestScriptRequestMethodCode --> fhir Code<TestScript.TestScriptRequestMethodCode>
-	* fhir enum TestScript.TestScriptRequestMethodCode --> sys String
 	* fhir enum Timing.EventTiming --> fhir Code<Timing.EventTiming>
-	* fhir enum Timing.EventTiming --> sys String
 	* fhir enum Timing.UnitsOfTime --> fhir Code<Timing.UnitsOfTime>
-	* fhir enum Timing.UnitsOfTime --> sys String
 	* fhir enum TriggerDefinition.TriggerType --> fhir Code<TriggerDefinition.TriggerType>
-	* fhir enum TriggerDefinition.TriggerType --> sys String
 	* fhir enum VariableTypeCode --> fhir Code<VariableTypeCode>
-	* fhir enum VariableTypeCode --> sys String
 	* fhir enum VerificationResult.StatusCode --> fhir Code<VerificationResult.StatusCode>
-	* fhir enum VerificationResult.StatusCode --> sys String
 	* fhir enum VisionPrescription.VisionBase --> fhir Code<VisionPrescription.VisionBase>
-	* fhir enum VisionPrescription.VisionBase --> sys String
 	* fhir enum VisionPrescription.VisionEyes --> fhir Code<VisionPrescription.VisionEyes>
-	* fhir enum VisionPrescription.VisionEyes --> sys String
 	* fhir FhirBoolean --> sys struct Boolean?
 	* fhir FhirDateTime --> cql CqlDate
 	* fhir FhirDateTime --> cql CqlDateTime
@@ -1194,5 +969,451 @@
 	* sys String --> cql CqlTime
 	* sys String --> fhir FhirUri
 	* sys String --> sys Uri
+	* sys struct Account.AccountStatus? --> fhir Code<Account.AccountStatus>
+	* sys struct Account.AccountStatus? --> sys String
+	* sys struct ActionCardinalityBehavior? --> fhir Code<ActionCardinalityBehavior>
+	* sys struct ActionCardinalityBehavior? --> sys String
+	* sys struct ActionConditionKind? --> fhir Code<ActionConditionKind>
+	* sys struct ActionConditionKind? --> sys String
+	* sys struct ActionGroupingBehavior? --> fhir Code<ActionGroupingBehavior>
+	* sys struct ActionGroupingBehavior? --> sys String
+	* sys struct ActionParticipantType? --> fhir Code<ActionParticipantType>
+	* sys struct ActionParticipantType? --> sys String
+	* sys struct ActionPrecheckBehavior? --> fhir Code<ActionPrecheckBehavior>
+	* sys struct ActionPrecheckBehavior? --> sys String
+	* sys struct ActionRelationshipType? --> fhir Code<ActionRelationshipType>
+	* sys struct ActionRelationshipType? --> sys String
+	* sys struct ActionRequiredBehavior? --> fhir Code<ActionRequiredBehavior>
+	* sys struct ActionRequiredBehavior? --> sys String
+	* sys struct ActionSelectionBehavior? --> fhir Code<ActionSelectionBehavior>
+	* sys struct ActionSelectionBehavior? --> sys String
+	* sys struct ActivityDefinition.RequestResourceType? --> fhir Code<ActivityDefinition.RequestResourceType>
+	* sys struct ActivityDefinition.RequestResourceType? --> sys String
+	* sys struct Address.AddressType? --> fhir Code<Address.AddressType>
+	* sys struct Address.AddressType? --> sys String
+	* sys struct Address.AddressUse? --> fhir Code<Address.AddressUse>
+	* sys struct Address.AddressUse? --> sys String
+	* sys struct AdministrativeGender? --> fhir Code<AdministrativeGender>
+	* sys struct AdministrativeGender? --> sys String
+	* sys struct AdverseEvent.AdverseEventActuality? --> fhir Code<AdverseEvent.AdverseEventActuality>
+	* sys struct AdverseEvent.AdverseEventActuality? --> sys String
+	* sys struct AdverseEvent.AdverseEventOutcome? --> fhir Code<AdverseEvent.AdverseEventOutcome>
+	* sys struct AdverseEvent.AdverseEventOutcome? --> sys String
+	* sys struct AdverseEvent.AdverseEventSeverity? --> fhir Code<AdverseEvent.AdverseEventSeverity>
+	* sys struct AdverseEvent.AdverseEventSeverity? --> sys String
+	* sys struct AllergyIntolerance.AllergyIntoleranceCategory? --> fhir Code<AllergyIntolerance.AllergyIntoleranceCategory>
+	* sys struct AllergyIntolerance.AllergyIntoleranceCategory? --> sys String
+	* sys struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes? --> fhir Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes>
+	* sys struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes? --> sys String
+	* sys struct AllergyIntolerance.AllergyIntoleranceCriticality? --> fhir Code<AllergyIntolerance.AllergyIntoleranceCriticality>
+	* sys struct AllergyIntolerance.AllergyIntoleranceCriticality? --> sys String
+	* sys struct AllergyIntolerance.AllergyIntoleranceSeverity? --> fhir Code<AllergyIntolerance.AllergyIntoleranceSeverity>
+	* sys struct AllergyIntolerance.AllergyIntoleranceSeverity? --> sys String
+	* sys struct AllergyIntolerance.AllergyIntoleranceType? --> fhir Code<AllergyIntolerance.AllergyIntoleranceType>
+	* sys struct AllergyIntolerance.AllergyIntoleranceType? --> sys String
+	* sys struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes? --> fhir Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes>
+	* sys struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes? --> sys String
+	* sys struct Appointment.AppointmentStatus? --> fhir Code<Appointment.AppointmentStatus>
+	* sys struct Appointment.AppointmentStatus? --> sys String
+	* sys struct Appointment.ParticipantRequired? --> fhir Code<Appointment.ParticipantRequired>
+	* sys struct Appointment.ParticipantRequired? --> sys String
+	* sys struct AuditEvent.AuditEventAction? --> fhir Code<AuditEvent.AuditEventAction>
+	* sys struct AuditEvent.AuditEventAction? --> sys String
+	* sys struct AuditEvent.AuditEventAgentNetworkType? --> fhir Code<AuditEvent.AuditEventAgentNetworkType>
+	* sys struct AuditEvent.AuditEventAgentNetworkType? --> sys String
+	* sys struct AuditEvent.AuditEventOutcome? --> fhir Code<AuditEvent.AuditEventOutcome>
+	* sys struct AuditEvent.AuditEventOutcome? --> sys String
+	* sys struct BindingStrength? --> fhir Code<BindingStrength>
+	* sys struct BindingStrength? --> sys String
+	* sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory>
+	* sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? --> sys String
+	* sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus>
+	* sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? --> sys String
+	* sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale>
+	* sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? --> sys String
+	* sys struct Bundle.BundleType? --> fhir Code<Bundle.BundleType>
+	* sys struct Bundle.BundleType? --> sys String
+	* sys struct Bundle.HTTPVerb? --> fhir Code<Bundle.HTTPVerb>
+	* sys struct Bundle.HTTPVerb? --> sys String
+	* sys struct Bundle.LinkRelationTypes? --> fhir Code<Bundle.LinkRelationTypes>
+	* sys struct Bundle.LinkRelationTypes? --> sys String
+	* sys struct Bundle.SearchEntryMode? --> fhir Code<Bundle.SearchEntryMode>
+	* sys struct Bundle.SearchEntryMode? --> sys String
+	* sys struct CapabilityStatement.ConditionalDeleteStatus? --> fhir Code<CapabilityStatement.ConditionalDeleteStatus>
+	* sys struct CapabilityStatement.ConditionalDeleteStatus? --> sys String
+	* sys struct CapabilityStatement.ConditionalReadStatus? --> fhir Code<CapabilityStatement.ConditionalReadStatus>
+	* sys struct CapabilityStatement.ConditionalReadStatus? --> sys String
+	* sys struct CapabilityStatement.DocumentMode? --> fhir Code<CapabilityStatement.DocumentMode>
+	* sys struct CapabilityStatement.DocumentMode? --> sys String
+	* sys struct CapabilityStatement.EventCapabilityMode? --> fhir Code<CapabilityStatement.EventCapabilityMode>
+	* sys struct CapabilityStatement.EventCapabilityMode? --> sys String
+	* sys struct CapabilityStatement.ReferenceHandlingPolicy? --> fhir Code<CapabilityStatement.ReferenceHandlingPolicy>
+	* sys struct CapabilityStatement.ReferenceHandlingPolicy? --> sys String
+	* sys struct CapabilityStatement.ResourceVersionPolicy? --> fhir Code<CapabilityStatement.ResourceVersionPolicy>
+	* sys struct CapabilityStatement.ResourceVersionPolicy? --> sys String
+	* sys struct CapabilityStatement.RestfulCapabilityMode? --> fhir Code<CapabilityStatement.RestfulCapabilityMode>
+	* sys struct CapabilityStatement.RestfulCapabilityMode? --> sys String
+	* sys struct CapabilityStatement.SystemRestfulInteraction? --> fhir Code<CapabilityStatement.SystemRestfulInteraction>
+	* sys struct CapabilityStatement.SystemRestfulInteraction? --> sys String
+	* sys struct CapabilityStatement.TypeRestfulInteraction? --> fhir Code<CapabilityStatement.TypeRestfulInteraction>
+	* sys struct CapabilityStatement.TypeRestfulInteraction? --> sys String
+	* sys struct CapabilityStatementKind? --> fhir Code<CapabilityStatementKind>
+	* sys struct CapabilityStatementKind? --> sys String
+	* sys struct CarePlan.CarePlanActivityKind? --> fhir Code<CarePlan.CarePlanActivityKind>
+	* sys struct CarePlan.CarePlanActivityKind? --> sys String
+	* sys struct CarePlan.CarePlanActivityStatus? --> fhir Code<CarePlan.CarePlanActivityStatus>
+	* sys struct CarePlan.CarePlanActivityStatus? --> sys String
+	* sys struct CarePlan.CarePlanIntent? --> fhir Code<CarePlan.CarePlanIntent>
+	* sys struct CarePlan.CarePlanIntent? --> sys String
+	* sys struct CareTeam.CareTeamStatus? --> fhir Code<CareTeam.CareTeamStatus>
+	* sys struct CareTeam.CareTeamStatus? --> sys String
+	* sys struct CatalogEntry.CatalogEntryRelationType? --> fhir Code<CatalogEntry.CatalogEntryRelationType>
+	* sys struct CatalogEntry.CatalogEntryRelationType? --> sys String
+	* sys struct ChargeItem.ChargeItemStatus? --> fhir Code<ChargeItem.ChargeItemStatus>
+	* sys struct ChargeItem.ChargeItemStatus? --> sys String
+	* sys struct ClaimProcessingCodes? --> fhir Code<ClaimProcessingCodes>
+	* sys struct ClaimProcessingCodes? --> sys String
+	* sys struct ClaimUseCode? --> fhir Code<ClaimUseCode>
+	* sys struct ClaimUseCode? --> sys String
+	* sys struct ClinicalImpression.ClinicalImpressionStatus? --> fhir Code<ClinicalImpression.ClinicalImpressionStatus>
+	* sys struct ClinicalImpression.ClinicalImpressionStatus? --> sys String
+	* sys struct CodeSystem.CodeSystemHierarchyMeaning? --> fhir Code<CodeSystem.CodeSystemHierarchyMeaning>
+	* sys struct CodeSystem.CodeSystemHierarchyMeaning? --> sys String
+	* sys struct CodeSystem.PropertyType? --> fhir Code<CodeSystem.PropertyType>
+	* sys struct CodeSystem.PropertyType? --> sys String
+	* sys struct CodeSystemContentMode? --> fhir Code<CodeSystemContentMode>
+	* sys struct CodeSystemContentMode? --> sys String
+	* sys struct CompartmentType? --> fhir Code<CompartmentType>
+	* sys struct CompartmentType? --> sys String
+	* sys struct Composition.CompositionAttestationMode? --> fhir Code<Composition.CompositionAttestationMode>
+	* sys struct Composition.CompositionAttestationMode? --> sys String
+	* sys struct Composition.V3ConfidentialityClassification? --> fhir Code<Composition.V3ConfidentialityClassification>
+	* sys struct Composition.V3ConfidentialityClassification? --> sys String
+	* sys struct CompositionStatus? --> fhir Code<CompositionStatus>
+	* sys struct CompositionStatus? --> sys String
+	* sys struct ConceptMap.ConceptMapGroupUnmappedMode? --> fhir Code<ConceptMap.ConceptMapGroupUnmappedMode>
+	* sys struct ConceptMap.ConceptMapGroupUnmappedMode? --> sys String
+	* sys struct ConceptMapEquivalence? --> fhir Code<ConceptMapEquivalence>
+	* sys struct ConceptMapEquivalence? --> sys String
+	* sys struct Condition.ConditionClinicalStatusCodes? --> fhir Code<Condition.ConditionClinicalStatusCodes>
+	* sys struct Condition.ConditionClinicalStatusCodes? --> sys String
+	* sys struct Condition.ConditionVerificationStatus? --> fhir Code<Condition.ConditionVerificationStatus>
+	* sys struct Condition.ConditionVerificationStatus? --> sys String
+	* sys struct Consent.ConsentDataMeaning? --> fhir Code<Consent.ConsentDataMeaning>
+	* sys struct Consent.ConsentDataMeaning? --> sys String
+	* sys struct Consent.ConsentProvisionType? --> fhir Code<Consent.ConsentProvisionType>
+	* sys struct Consent.ConsentProvisionType? --> sys String
+	* sys struct Consent.ConsentState? --> fhir Code<Consent.ConsentState>
+	* sys struct Consent.ConsentState? --> sys String
+	* sys struct ConstraintSeverity? --> fhir Code<ConstraintSeverity>
+	* sys struct ConstraintSeverity? --> sys String
+	* sys struct ContactPoint.ContactPointSystem? --> fhir Code<ContactPoint.ContactPointSystem>
+	* sys struct ContactPoint.ContactPointSystem? --> sys String
+	* sys struct ContactPoint.ContactPointUse? --> fhir Code<ContactPoint.ContactPointUse>
+	* sys struct ContactPoint.ContactPointUse? --> sys String
+	* sys struct Contract.ContractResourcePublicationStatusCodes? --> fhir Code<Contract.ContractResourcePublicationStatusCodes>
+	* sys struct Contract.ContractResourcePublicationStatusCodes? --> sys String
+	* sys struct Contract.ContractResourceStatusCodes? --> fhir Code<Contract.ContractResourceStatusCodes>
+	* sys struct Contract.ContractResourceStatusCodes? --> sys String
+	* sys struct Contributor.ContributorType? --> fhir Code<Contributor.ContributorType>
+	* sys struct Contributor.ContributorType? --> sys String
+	* sys struct CoverageEligibilityRequest.EligibilityRequestPurpose? --> fhir Code<CoverageEligibilityRequest.EligibilityRequestPurpose>
+	* sys struct CoverageEligibilityRequest.EligibilityRequestPurpose? --> sys String
+	* sys struct CoverageEligibilityResponse.EligibilityResponsePurpose? --> fhir Code<CoverageEligibilityResponse.EligibilityResponsePurpose>
+	* sys struct CoverageEligibilityResponse.EligibilityResponsePurpose? --> sys String
+	* sys struct DataRequirement.SortDirection? --> fhir Code<DataRequirement.SortDirection>
+	* sys struct DataRequirement.SortDirection? --> sys String
 	* sys struct DateTimeOffset --> cql CqlDateTime
-	* sys Uri --> sys String
+	* sys struct DateTimeOffset? --> cql CqlDateTime
+	* sys struct DaysOfWeek? --> fhir Code<DaysOfWeek>
+	* sys struct DaysOfWeek? --> sys String
+	* sys struct DetectedIssue.DetectedIssueSeverity? --> fhir Code<DetectedIssue.DetectedIssueSeverity>
+	* sys struct DetectedIssue.DetectedIssueSeverity? --> sys String
+	* sys struct Device.FHIRDeviceStatus? --> fhir Code<Device.FHIRDeviceStatus>
+	* sys struct Device.FHIRDeviceStatus? --> sys String
+	* sys struct Device.UDIEntryType? --> fhir Code<Device.UDIEntryType>
+	* sys struct Device.UDIEntryType? --> sys String
+	* sys struct DeviceMetric.DeviceMetricCalibrationState? --> fhir Code<DeviceMetric.DeviceMetricCalibrationState>
+	* sys struct DeviceMetric.DeviceMetricCalibrationState? --> sys String
+	* sys struct DeviceMetric.DeviceMetricCalibrationType? --> fhir Code<DeviceMetric.DeviceMetricCalibrationType>
+	* sys struct DeviceMetric.DeviceMetricCalibrationType? --> sys String
+	* sys struct DeviceMetric.DeviceMetricCategory? --> fhir Code<DeviceMetric.DeviceMetricCategory>
+	* sys struct DeviceMetric.DeviceMetricCategory? --> sys String
+	* sys struct DeviceMetric.DeviceMetricColor? --> fhir Code<DeviceMetric.DeviceMetricColor>
+	* sys struct DeviceMetric.DeviceMetricColor? --> sys String
+	* sys struct DeviceMetric.DeviceMetricOperationalStatus? --> fhir Code<DeviceMetric.DeviceMetricOperationalStatus>
+	* sys struct DeviceMetric.DeviceMetricOperationalStatus? --> sys String
+	* sys struct DeviceNameType? --> fhir Code<DeviceNameType>
+	* sys struct DeviceNameType? --> sys String
+	* sys struct DeviceUseStatement.DeviceUseStatementStatus? --> fhir Code<DeviceUseStatement.DeviceUseStatementStatus>
+	* sys struct DeviceUseStatement.DeviceUseStatementStatus? --> sys String
+	* sys struct DiagnosticReport.DiagnosticReportStatus? --> fhir Code<DiagnosticReport.DiagnosticReportStatus>
+	* sys struct DiagnosticReport.DiagnosticReportStatus? --> sys String
+	* sys struct DocumentReferenceStatus? --> fhir Code<DocumentReferenceStatus>
+	* sys struct DocumentReferenceStatus? --> sys String
+	* sys struct DocumentRelationshipType? --> fhir Code<DocumentRelationshipType>
+	* sys struct DocumentRelationshipType? --> sys String
+	* sys struct EffectEvidenceSynthesis.ExposureStateCode? --> fhir Code<EffectEvidenceSynthesis.ExposureStateCode>
+	* sys struct EffectEvidenceSynthesis.ExposureStateCode? --> sys String
+	* sys struct ElementDefinition.AdditionalBindingPurposeVS? --> fhir Code<ElementDefinition.AdditionalBindingPurposeVS>
+	* sys struct ElementDefinition.AdditionalBindingPurposeVS? --> sys String
+	* sys struct ElementDefinition.AggregationMode? --> fhir Code<ElementDefinition.AggregationMode>
+	* sys struct ElementDefinition.AggregationMode? --> sys String
+	* sys struct ElementDefinition.DiscriminatorType? --> fhir Code<ElementDefinition.DiscriminatorType>
+	* sys struct ElementDefinition.DiscriminatorType? --> sys String
+	* sys struct ElementDefinition.PropertyRepresentation? --> fhir Code<ElementDefinition.PropertyRepresentation>
+	* sys struct ElementDefinition.PropertyRepresentation? --> sys String
+	* sys struct ElementDefinition.ReferenceVersionRules? --> fhir Code<ElementDefinition.ReferenceVersionRules>
+	* sys struct ElementDefinition.ReferenceVersionRules? --> sys String
+	* sys struct ElementDefinition.SlicingRules? --> fhir Code<ElementDefinition.SlicingRules>
+	* sys struct ElementDefinition.SlicingRules? --> sys String
+	* sys struct Encounter.EncounterLocationStatus? --> fhir Code<Encounter.EncounterLocationStatus>
+	* sys struct Encounter.EncounterLocationStatus? --> sys String
+	* sys struct Encounter.EncounterStatus? --> fhir Code<Encounter.EncounterStatus>
+	* sys struct Encounter.EncounterStatus? --> sys String
+	* sys struct Endpoint.EndpointStatus? --> fhir Code<Endpoint.EndpointStatus>
+	* sys struct Endpoint.EndpointStatus? --> sys String
+	* sys struct EpisodeOfCare.EpisodeOfCareStatus? --> fhir Code<EpisodeOfCare.EpisodeOfCareStatus>
+	* sys struct EpisodeOfCare.EpisodeOfCareStatus? --> sys String
+	* sys struct EventStatus? --> fhir Code<EventStatus>
+	* sys struct EventStatus? --> sys String
+	* sys struct ExampleScenario.ExampleScenarioActorType? --> fhir Code<ExampleScenario.ExampleScenarioActorType>
+	* sys struct ExampleScenario.ExampleScenarioActorType? --> sys String
+	* sys struct ExplanationOfBenefit.ExplanationOfBenefitStatus? --> fhir Code<ExplanationOfBenefit.ExplanationOfBenefitStatus>
+	* sys struct ExplanationOfBenefit.ExplanationOfBenefitStatus? --> sys String
+	* sys struct FamilyMemberHistory.FamilyHistoryStatus? --> fhir Code<FamilyMemberHistory.FamilyHistoryStatus>
+	* sys struct FamilyMemberHistory.FamilyHistoryStatus? --> sys String
+	* sys struct FHIRAllTypes? --> fhir Code<FHIRAllTypes>
+	* sys struct FHIRAllTypes? --> sys String
+	* sys struct FHIRDefinedType? --> fhir Code<FHIRDefinedType>
+	* sys struct FHIRDefinedType? --> sys String
+	* sys struct FHIRVersion? --> fhir Code<FHIRVersion>
+	* sys struct FHIRVersion? --> sys String
+	* sys struct FilterOperator? --> fhir Code<FilterOperator>
+	* sys struct FilterOperator? --> sys String
+	* sys struct FinancialResourceStatusCodes? --> fhir Code<FinancialResourceStatusCodes>
+	* sys struct FinancialResourceStatusCodes? --> sys String
+	* sys struct Flag.FlagStatus? --> fhir Code<Flag.FlagStatus>
+	* sys struct Flag.FlagStatus? --> sys String
+	* sys struct Goal.GoalLifecycleStatus? --> fhir Code<Goal.GoalLifecycleStatus>
+	* sys struct Goal.GoalLifecycleStatus? --> sys String
+	* sys struct GraphDefinition.GraphCompartmentRule? --> fhir Code<GraphDefinition.GraphCompartmentRule>
+	* sys struct GraphDefinition.GraphCompartmentRule? --> sys String
+	* sys struct GraphDefinition.GraphCompartmentUse? --> fhir Code<GraphDefinition.GraphCompartmentUse>
+	* sys struct GraphDefinition.GraphCompartmentUse? --> sys String
+	* sys struct Group.GroupType? --> fhir Code<Group.GroupType>
+	* sys struct Group.GroupType? --> sys String
+	* sys struct GroupMeasureCode? --> fhir Code<GroupMeasureCode>
+	* sys struct GroupMeasureCode? --> sys String
+	* sys struct GuidanceResponse.GuidanceResponseStatus? --> fhir Code<GuidanceResponse.GuidanceResponseStatus>
+	* sys struct GuidanceResponse.GuidanceResponseStatus? --> sys String
+	* sys struct HumanName.NameUse? --> fhir Code<HumanName.NameUse>
+	* sys struct HumanName.NameUse? --> sys String
+	* sys struct Identifier.IdentifierUse? --> fhir Code<Identifier.IdentifierUse>
+	* sys struct Identifier.IdentifierUse? --> sys String
+	* sys struct ImagingStudy.ImagingStudyStatus? --> fhir Code<ImagingStudy.ImagingStudyStatus>
+	* sys struct ImagingStudy.ImagingStudyStatus? --> sys String
+	* sys struct Immunization.ImmunizationStatusCodes? --> fhir Code<Immunization.ImmunizationStatusCodes>
+	* sys struct Immunization.ImmunizationStatusCodes? --> sys String
+	* sys struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? --> fhir Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes>
+	* sys struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? --> sys String
+	* sys struct ImplementationGuide.GuidePageGeneration? --> fhir Code<ImplementationGuide.GuidePageGeneration>
+	* sys struct ImplementationGuide.GuidePageGeneration? --> sys String
+	* sys struct ImplementationGuide.GuideParameterCode? --> fhir Code<ImplementationGuide.GuideParameterCode>
+	* sys struct ImplementationGuide.GuideParameterCode? --> sys String
+	* sys struct ImplementationGuide.SPDXLicense? --> fhir Code<ImplementationGuide.SPDXLicense>
+	* sys struct ImplementationGuide.SPDXLicense? --> sys String
+	* sys struct InsurancePlan.BenefitCostApplicability? --> fhir Code<InsurancePlan.BenefitCostApplicability>
+	* sys struct InsurancePlan.BenefitCostApplicability? --> sys String
+	* sys struct Invoice.InvoiceStatus? --> fhir Code<Invoice.InvoiceStatus>
+	* sys struct Invoice.InvoiceStatus? --> sys String
+	* sys struct InvoicePriceComponentType? --> fhir Code<InvoicePriceComponentType>
+	* sys struct InvoicePriceComponentType? --> sys String
+	* sys struct Linkage.LinkageType? --> fhir Code<Linkage.LinkageType>
+	* sys struct Linkage.LinkageType? --> sys String
+	* sys struct List.ListStatus? --> fhir Code<List.ListStatus>
+	* sys struct List.ListStatus? --> sys String
+	* sys struct ListMode? --> fhir Code<ListMode>
+	* sys struct ListMode? --> sys String
+	* sys struct Location.LocationMode? --> fhir Code<Location.LocationMode>
+	* sys struct Location.LocationMode? --> sys String
+	* sys struct Location.LocationStatus? --> fhir Code<Location.LocationStatus>
+	* sys struct Location.LocationStatus? --> sys String
+	* sys struct MeasureImprovementNotation? --> fhir Code<MeasureImprovementNotation>
+	* sys struct MeasureImprovementNotation? --> sys String
+	* sys struct MeasureReport.MeasureReportStatus? --> fhir Code<MeasureReport.MeasureReportStatus>
+	* sys struct MeasureReport.MeasureReportStatus? --> sys String
+	* sys struct MeasureReport.MeasureReportType? --> fhir Code<MeasureReport.MeasureReportType>
+	* sys struct MeasureReport.MeasureReportType? --> sys String
+	* sys struct Medication.MedicationStatusCodes? --> fhir Code<Medication.MedicationStatusCodes>
+	* sys struct Medication.MedicationStatusCodes? --> sys String
+	* sys struct MedicationAdministration.MedicationAdministrationStatusCodes? --> fhir Code<MedicationAdministration.MedicationAdministrationStatusCodes>
+	* sys struct MedicationAdministration.MedicationAdministrationStatusCodes? --> sys String
+	* sys struct MedicationDispense.MedicationDispenseStatusCodes? --> fhir Code<MedicationDispense.MedicationDispenseStatusCodes>
+	* sys struct MedicationDispense.MedicationDispenseStatusCodes? --> sys String
+	* sys struct MedicationKnowledge.MedicationKnowledgeStatusCodes? --> fhir Code<MedicationKnowledge.MedicationKnowledgeStatusCodes>
+	* sys struct MedicationKnowledge.MedicationKnowledgeStatusCodes? --> sys String
+	* sys struct MedicationRequest.MedicationRequestIntent? --> fhir Code<MedicationRequest.MedicationRequestIntent>
+	* sys struct MedicationRequest.MedicationRequestIntent? --> sys String
+	* sys struct MedicationRequest.MedicationrequestStatus? --> fhir Code<MedicationRequest.MedicationrequestStatus>
+	* sys struct MedicationRequest.MedicationrequestStatus? --> sys String
+	* sys struct MedicationStatement.MedicationStatusCodes? --> fhir Code<MedicationStatement.MedicationStatusCodes>
+	* sys struct MedicationStatement.MedicationStatusCodes? --> sys String
+	* sys struct MessageDefinition.MessageSignificanceCategory? --> fhir Code<MessageDefinition.MessageSignificanceCategory>
+	* sys struct MessageDefinition.MessageSignificanceCategory? --> sys String
+	* sys struct MessageHeader.ResponseType? --> fhir Code<MessageHeader.ResponseType>
+	* sys struct MessageHeader.ResponseType? --> sys String
+	* sys struct MessageheaderResponseRequest? --> fhir Code<MessageheaderResponseRequest>
+	* sys struct MessageheaderResponseRequest? --> sys String
+	* sys struct MolecularSequence.OrientationType? --> fhir Code<MolecularSequence.OrientationType>
+	* sys struct MolecularSequence.OrientationType? --> sys String
+	* sys struct MolecularSequence.QualityType? --> fhir Code<MolecularSequence.QualityType>
+	* sys struct MolecularSequence.QualityType? --> sys String
+	* sys struct MolecularSequence.RepositoryType? --> fhir Code<MolecularSequence.RepositoryType>
+	* sys struct MolecularSequence.RepositoryType? --> sys String
+	* sys struct MolecularSequence.SequenceType? --> fhir Code<MolecularSequence.SequenceType>
+	* sys struct MolecularSequence.SequenceType? --> sys String
+	* sys struct MolecularSequence.StrandType? --> fhir Code<MolecularSequence.StrandType>
+	* sys struct MolecularSequence.StrandType? --> sys String
+	* sys struct Money.Currencies? --> fhir Code<Money.Currencies>
+	* sys struct Money.Currencies? --> sys String
+	* sys struct NamingSystem.NamingSystemIdentifierType? --> fhir Code<NamingSystem.NamingSystemIdentifierType>
+	* sys struct NamingSystem.NamingSystemIdentifierType? --> sys String
+	* sys struct NamingSystem.NamingSystemType? --> fhir Code<NamingSystem.NamingSystemType>
+	* sys struct NamingSystem.NamingSystemType? --> sys String
+	* sys struct Narrative.NarrativeStatus? --> fhir Code<Narrative.NarrativeStatus>
+	* sys struct Narrative.NarrativeStatus? --> sys String
+	* sys struct NoteType? --> fhir Code<NoteType>
+	* sys struct NoteType? --> sys String
+	* sys struct ObservationDefinition.ObservationDataType? --> fhir Code<ObservationDefinition.ObservationDataType>
+	* sys struct ObservationDefinition.ObservationDataType? --> sys String
+	* sys struct ObservationDefinition.ObservationRangeCategory? --> fhir Code<ObservationDefinition.ObservationRangeCategory>
+	* sys struct ObservationDefinition.ObservationRangeCategory? --> sys String
+	* sys struct ObservationStatus? --> fhir Code<ObservationStatus>
+	* sys struct ObservationStatus? --> sys String
+	* sys struct OperationDefinition.OperationKind? --> fhir Code<OperationDefinition.OperationKind>
+	* sys struct OperationDefinition.OperationKind? --> sys String
+	* sys struct OperationOutcome.IssueSeverity? --> fhir Code<OperationOutcome.IssueSeverity>
+	* sys struct OperationOutcome.IssueSeverity? --> sys String
+	* sys struct OperationOutcome.IssueType? --> fhir Code<OperationOutcome.IssueType>
+	* sys struct OperationOutcome.IssueType? --> sys String
+	* sys struct OperationParameterUse? --> fhir Code<OperationParameterUse>
+	* sys struct OperationParameterUse? --> sys String
+	* sys struct ParticipationStatus? --> fhir Code<ParticipationStatus>
+	* sys struct ParticipationStatus? --> sys String
+	* sys struct Patient.LinkType? --> fhir Code<Patient.LinkType>
+	* sys struct Patient.LinkType? --> sys String
+	* sys struct Person.IdentityAssuranceLevel? --> fhir Code<Person.IdentityAssuranceLevel>
+	* sys struct Person.IdentityAssuranceLevel? --> sys String
+	* sys struct Provenance.ProvenanceEntityRole? --> fhir Code<Provenance.ProvenanceEntityRole>
+	* sys struct Provenance.ProvenanceEntityRole? --> sys String
+	* sys struct PublicationStatus? --> fhir Code<PublicationStatus>
+	* sys struct PublicationStatus? --> sys String
+	* sys struct Quantity.QuantityComparator? --> fhir Code<Quantity.QuantityComparator>
+	* sys struct Quantity.QuantityComparator? --> sys String
+	* sys struct Questionnaire.EnableWhenBehavior? --> fhir Code<Questionnaire.EnableWhenBehavior>
+	* sys struct Questionnaire.EnableWhenBehavior? --> sys String
+	* sys struct Questionnaire.QuestionnaireItemOperator? --> fhir Code<Questionnaire.QuestionnaireItemOperator>
+	* sys struct Questionnaire.QuestionnaireItemOperator? --> sys String
+	* sys struct Questionnaire.QuestionnaireItemType? --> fhir Code<Questionnaire.QuestionnaireItemType>
+	* sys struct Questionnaire.QuestionnaireItemType? --> sys String
+	* sys struct QuestionnaireResponse.QuestionnaireResponseStatus? --> fhir Code<QuestionnaireResponse.QuestionnaireResponseStatus>
+	* sys struct QuestionnaireResponse.QuestionnaireResponseStatus? --> sys String
+	* sys struct RelatedArtifact.RelatedArtifactType? --> fhir Code<RelatedArtifact.RelatedArtifactType>
+	* sys struct RelatedArtifact.RelatedArtifactType? --> sys String
+	* sys struct RequestIntent? --> fhir Code<RequestIntent>
+	* sys struct RequestIntent? --> sys String
+	* sys struct RequestPriority? --> fhir Code<RequestPriority>
+	* sys struct RequestPriority? --> sys String
+	* sys struct RequestStatus? --> fhir Code<RequestStatus>
+	* sys struct RequestStatus? --> sys String
+	* sys struct ResearchElementDefinition.ResearchElementType? --> fhir Code<ResearchElementDefinition.ResearchElementType>
+	* sys struct ResearchElementDefinition.ResearchElementType? --> sys String
+	* sys struct ResearchStudy.ResearchStudyStatus? --> fhir Code<ResearchStudy.ResearchStudyStatus>
+	* sys struct ResearchStudy.ResearchStudyStatus? --> sys String
+	* sys struct ResearchSubject.ResearchSubjectStatus? --> fhir Code<ResearchSubject.ResearchSubjectStatus>
+	* sys struct ResearchSubject.ResearchSubjectStatus? --> sys String
+	* sys struct ResourceType? --> fhir Code<ResourceType>
+	* sys struct ResourceType? --> sys String
+	* sys struct SearchParameter.SearchComparator? --> fhir Code<SearchParameter.SearchComparator>
+	* sys struct SearchParameter.SearchComparator? --> sys String
+	* sys struct SearchParameter.SearchModifierCode? --> fhir Code<SearchParameter.SearchModifierCode>
+	* sys struct SearchParameter.SearchModifierCode? --> sys String
+	* sys struct SearchParameter.XPathUsageType? --> fhir Code<SearchParameter.XPathUsageType>
+	* sys struct SearchParameter.XPathUsageType? --> sys String
+	* sys struct SearchParamType? --> fhir Code<SearchParamType>
+	* sys struct SearchParamType? --> sys String
+	* sys struct Slot.SlotStatus? --> fhir Code<Slot.SlotStatus>
+	* sys struct Slot.SlotStatus? --> sys String
+	* sys struct Specimen.SpecimenStatus? --> fhir Code<Specimen.SpecimenStatus>
+	* sys struct Specimen.SpecimenStatus? --> sys String
+	* sys struct SpecimenDefinition.SpecimenContainedPreference? --> fhir Code<SpecimenDefinition.SpecimenContainedPreference>
+	* sys struct SpecimenDefinition.SpecimenContainedPreference? --> sys String
+	* sys struct StructureDefinition.ExtensionContextType? --> fhir Code<StructureDefinition.ExtensionContextType>
+	* sys struct StructureDefinition.ExtensionContextType? --> sys String
+	* sys struct StructureDefinition.StructureDefinitionKind? --> fhir Code<StructureDefinition.StructureDefinitionKind>
+	* sys struct StructureDefinition.StructureDefinitionKind? --> sys String
+	* sys struct StructureDefinition.TypeDerivationRule? --> fhir Code<StructureDefinition.TypeDerivationRule>
+	* sys struct StructureDefinition.TypeDerivationRule? --> sys String
+	* sys struct StructureMap.StructureMapContextType? --> fhir Code<StructureMap.StructureMapContextType>
+	* sys struct StructureMap.StructureMapContextType? --> sys String
+	* sys struct StructureMap.StructureMapGroupTypeMode? --> fhir Code<StructureMap.StructureMapGroupTypeMode>
+	* sys struct StructureMap.StructureMapGroupTypeMode? --> sys String
+	* sys struct StructureMap.StructureMapInputMode? --> fhir Code<StructureMap.StructureMapInputMode>
+	* sys struct StructureMap.StructureMapInputMode? --> sys String
+	* sys struct StructureMap.StructureMapModelMode? --> fhir Code<StructureMap.StructureMapModelMode>
+	* sys struct StructureMap.StructureMapModelMode? --> sys String
+	* sys struct StructureMap.StructureMapSourceListMode? --> fhir Code<StructureMap.StructureMapSourceListMode>
+	* sys struct StructureMap.StructureMapSourceListMode? --> sys String
+	* sys struct StructureMap.StructureMapTargetListMode? --> fhir Code<StructureMap.StructureMapTargetListMode>
+	* sys struct StructureMap.StructureMapTargetListMode? --> sys String
+	* sys struct StructureMap.StructureMapTransform? --> fhir Code<StructureMap.StructureMapTransform>
+	* sys struct StructureMap.StructureMapTransform? --> sys String
+	* sys struct Subscription.SubscriptionChannelType? --> fhir Code<Subscription.SubscriptionChannelType>
+	* sys struct Subscription.SubscriptionChannelType? --> sys String
+	* sys struct Subscription.SubscriptionStatus? --> fhir Code<Subscription.SubscriptionStatus>
+	* sys struct Subscription.SubscriptionStatus? --> sys String
+	* sys struct Substance.FHIRSubstanceStatus? --> fhir Code<Substance.FHIRSubstanceStatus>
+	* sys struct Substance.FHIRSubstanceStatus? --> sys String
+	* sys struct SupplyDelivery.SupplyDeliveryStatus? --> fhir Code<SupplyDelivery.SupplyDeliveryStatus>
+	* sys struct SupplyDelivery.SupplyDeliveryStatus? --> sys String
+	* sys struct SupplyDelivery.SupplyItemType? --> fhir Code<SupplyDelivery.SupplyItemType>
+	* sys struct SupplyDelivery.SupplyItemType? --> sys String
+	* sys struct SupplyRequest.SupplyRequestStatus? --> fhir Code<SupplyRequest.SupplyRequestStatus>
+	* sys struct SupplyRequest.SupplyRequestStatus? --> sys String
+	* sys struct Task.TaskIntent? --> fhir Code<Task.TaskIntent>
+	* sys struct Task.TaskIntent? --> sys String
+	* sys struct Task.TaskStatus? --> fhir Code<Task.TaskStatus>
+	* sys struct Task.TaskStatus? --> sys String
+	* sys struct TerminologyCapabilities.CodeSearchSupport? --> fhir Code<TerminologyCapabilities.CodeSearchSupport>
+	* sys struct TerminologyCapabilities.CodeSearchSupport? --> sys String
+	* sys struct TestReport.TestReportActionResult? --> fhir Code<TestReport.TestReportActionResult>
+	* sys struct TestReport.TestReportActionResult? --> sys String
+	* sys struct TestReport.TestReportParticipantType? --> fhir Code<TestReport.TestReportParticipantType>
+	* sys struct TestReport.TestReportParticipantType? --> sys String
+	* sys struct TestReport.TestReportResult? --> fhir Code<TestReport.TestReportResult>
+	* sys struct TestReport.TestReportResult? --> sys String
+	* sys struct TestReport.TestReportStatus? --> fhir Code<TestReport.TestReportStatus>
+	* sys struct TestReport.TestReportStatus? --> sys String
+	* sys struct TestScript.AssertionDirectionType? --> fhir Code<TestScript.AssertionDirectionType>
+	* sys struct TestScript.AssertionDirectionType? --> sys String
+	* sys struct TestScript.AssertionOperatorType? --> fhir Code<TestScript.AssertionOperatorType>
+	* sys struct TestScript.AssertionOperatorType? --> sys String
+	* sys struct TestScript.AssertionResponseTypes? --> fhir Code<TestScript.AssertionResponseTypes>
+	* sys struct TestScript.AssertionResponseTypes? --> sys String
+	* sys struct TestScript.TestScriptRequestMethodCode? --> fhir Code<TestScript.TestScriptRequestMethodCode>
+	* sys struct TestScript.TestScriptRequestMethodCode? --> sys String
+	* sys struct Timing.EventTiming? --> fhir Code<Timing.EventTiming>
+	* sys struct Timing.EventTiming? --> sys String
+	* sys struct Timing.UnitsOfTime? --> fhir Code<Timing.UnitsOfTime>
+	* sys struct Timing.UnitsOfTime? --> sys String
+	* sys struct TriggerDefinition.TriggerType? --> fhir Code<TriggerDefinition.TriggerType>
+	* sys struct TriggerDefinition.TriggerType? --> sys String
+	* sys struct VariableTypeCode? --> fhir Code<VariableTypeCode>
+	* sys struct VariableTypeCode? --> sys String
+	* sys struct VerificationResult.StatusCode? --> fhir Code<VerificationResult.StatusCode>
+	* sys struct VerificationResult.StatusCode? --> sys String
+	* sys struct VisionPrescription.VisionBase? --> fhir Code<VisionPrescription.VisionBase>
+	* sys struct VisionPrescription.VisionBase? --> sys String
+	* sys struct VisionPrescription.VisionEyes? --> fhir Code<VisionPrescription.VisionEyes>
+	* sys struct VisionPrescription.VisionEyes? --> sys String

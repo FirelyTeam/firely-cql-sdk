@@ -32,7 +32,7 @@ internal static class ConstructorInfos
         ReflectionUtility.ConstructorOf(() => new List<T>(default(IEnumerable<T>)!));
 
     private static MethodInfo GenericDefinitionMethodListOf { get; } =
-        ReflectionUtility.GenericDefinitionMethodOf(() => ListOf<object>()); // MethodInfo to ListOf<>()
+        ReflectionUtility.GenericMethodDefinitionOf(() => ListOf<object>()); // MethodInfo to ListOf<>()
 
 
     public static ConstructorInfo ListOf(Type elementType) =>
