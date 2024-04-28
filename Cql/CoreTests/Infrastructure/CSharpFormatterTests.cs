@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CoreTests.Infrastructure;
 
 [TestClass]
+[TestCategory("UnitTest")]
 public class CSharpFormatterTests
 {
 

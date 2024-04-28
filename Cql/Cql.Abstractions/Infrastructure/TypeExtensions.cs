@@ -89,6 +89,17 @@ internal static partial class TypeExtensions
     }
 
     /// <summary>
+    /// Gets the base type of the specified type.
+    /// Calling this method instead of <see cref="Type.BaseType"/> fixes the issue
+    /// on getting the base type on a generic type definitions, which becomes a
+    /// constructed generic base type, while it should have remained a generic type definition. 
+    /// </summary>
+    public static Type? BaseTypeFixed(this Type type) =>
+        type.IsGenericTypeDefinition
+            ? type.BaseType?.GetGenericTypeDefinition()
+            : type.BaseType;
+
+    /// <summary>
     /// Enumerates all base types of the specified type.
     /// Optionally includes the type itself, excludes base types and/or interfaces.
     /// </summary>
@@ -103,11 +114,12 @@ internal static partial class TypeExtensions
 
         if (!excludeBaseTypes)
         {
-            var subType = type.BaseType;
+            var subType = type.BaseTypeFixed();
+
             while (subType is not null)
             {
                 yield return subType;
-                subType = subType?.BaseType;
+                subType = subType?.BaseTypeFixed();
             }
         }
 

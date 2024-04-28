@@ -9,6 +9,7 @@ namespace CoreTests.Infrastructure;
 
 
 [TestClass]
+[TestCategory("UnitTest")]
 public class TypeExtensionsTests
 {
     private static readonly Type NullableStructType = typeof(int?);
@@ -30,8 +31,8 @@ public class TypeExtensionsTests
             .ReturnType;
 
     private static readonly Type MyClassType = typeof(MyClass);
-    private static readonly Type MyClassGenericType = typeof(MyGenericClass<int>);
-    private static readonly Type MyClassGenericDefinitionType = typeof(MyGenericClass<>);
+    private static readonly Type MyClassGenericType = typeof(MyGenericClassDerived<int>);
+    private static readonly Type MyClassGenericDefinitionType = typeof(MyGenericClassDerived<>);
 
     [TestMethod]
     public void IsNullableValueType_ShouldReturnCorrectResults()
@@ -206,6 +207,22 @@ public class TypeExtensionsTests
         Assert.IsTrue(typeof(int).IsAssignableTo(typeof(int?))); // Lifting Value Types e.g. int to int?
     }
 
+    [TestMethod]
+    public void BaseTypeFixed_ShouldReturnCorrectResults()
+    {
+        // Shows the quirks when getting base type on a generic type definition. Here we expected to see true, but that turns out to be not the case
+        Assert.IsFalse(typeof(MyGenericClassDerived<>).BaseType == typeof(MyGenericClassBase<>));
+
+        // Why are they not the same? Because BaseType returns the constructed generic base type, while it should have remained a generic type definition.
+        Assert.IsTrue(typeof(MyGenericClassDerived<>).IsGenericTypeDefinition);
+        Assert.IsTrue(typeof(MyGenericClassDerived<>).BaseType!.IsConstructedGenericType);
+        Assert.IsFalse(typeof(MyGenericClassDerived<>).BaseType!.IsGenericTypeDefinition);
+
+        // So, when getting the base type on a type definition, we always have to request the generic type definition of that!
+        Assert.IsTrue(typeof(MyGenericClassDerived<>).BaseType!.GetGenericTypeDefinition() == typeof(MyGenericClassBase<>));
+        Assert.IsTrue(typeof(MyGenericClassDerived<>).BaseTypeFixed() == typeof(MyGenericClassBase<>));
+    }
+
     public enum MyEnum
     {
         Value1,
@@ -234,14 +251,17 @@ public class TypeExtensionsTests
             int c);
     }
 
-    public abstract class MyGenericClass<T> : IGenericInterface<T>
+    public abstract class MyGenericClassBase<T> :  IGenericInterface<T>
     {
         public void Method(T value)
         {
         }
     }
 
-    public class MyClass : MyGenericClass<int>
+    public abstract class MyGenericClassDerived<T> : MyGenericClassBase<T>
+    { }
+
+    public class MyClass : MyGenericClassDerived<int>
     {
     }
 
