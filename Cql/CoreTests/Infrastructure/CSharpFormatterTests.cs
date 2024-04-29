@@ -69,7 +69,7 @@ public class CSharpFormatterTests
             (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?[]), "EmptyStruct.Nested1.GenericNested2<int,int>?[]"),
         ];
 
-        var typeToCSharpStringOptions = new TypeFormatting(HideNamespaces: true, PreferKeywords: true);
+        var typeToCSharpStringOptions = new TypeFormatterOptions(HideNamespaces: true, PreferKeywords: true);
         foreach (var (type, expected) in testCases)
         {
             var actual = type.WriteCSharp(typeFormatOptions: typeToCSharpStringOptions).ToString()!;

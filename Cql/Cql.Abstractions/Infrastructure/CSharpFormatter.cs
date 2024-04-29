@@ -42,45 +42,47 @@ internal static class CSharpFormatter
 
     public static TextWriter WriteCSharp(
         this Type type,
-        TypeFormatting? typeFormatOptions = null,
+        TypeFormatterOptions? typeFormatOptions = null,
         TextWriter? textWriter = null)
     {
-        typeFormatOptions ??= TypeFormatting.Default;
-        var typeFormatContext = new TypeFormattingContext(type, typeFormatOptions);
+        typeFormatOptions ??= TypeFormatterOptions.Default;
+        var typeFormatContext = new TypeFormatterContext(type, typeFormatOptions);
         return typeFormatOptions.TypeFormat(typeFormatContext).WriteToTextWriter(textWriter);
     }
 
     public static TextWriter WriteCSharp(
         this ParameterInfo parameterInfo,
-        ParameterFormatting? parameterFormatOptions = null,
+        ParameterFormatterOptions? parameterFormatOptions = null,
         TextWriter? textWriter = null)
     {
-        parameterFormatOptions ??= ParameterFormatting.Default;
-        var parameterFormatContext = new ParameterFormattingContext(parameterInfo, parameterFormatOptions);
+        parameterFormatOptions ??= ParameterFormatterOptions.Default;
+        var parameterFormatContext = new ParameterFormatterContext(parameterInfo, parameterFormatOptions);
         return parameterFormatOptions.ParameterFormat(parameterFormatContext).WriteToTextWriter(textWriter);
     }
 
     public static TextWriter WriteCSharp(
         this MethodInfo methodInfo,
-        MethodFormatting? methodFormatOptions = null,
+        MethodFormatterOptions? methodFormatOptions = null,
         TextWriter? textWriter = null)
     {
-        methodFormatOptions ??= MethodFormatting.Default;
-        var methodFormatContext = new MethodFormattingContext(methodInfo, methodFormatOptions);
+        methodFormatOptions ??= MethodFormatterOptions.Default;
+        var methodFormatContext = new MethodFormatterContext(methodInfo, methodFormatOptions);
         return methodFormatOptions.MethodFormat(methodFormatContext).WriteToTextWriter(textWriter);
     }
 
     internal static StringWriter NewInvariantCultureStringWriter() => new(CultureInfo.InvariantCulture);
 }
 
-internal record TypeFormatting(
+internal delegate TextWriterFormattableString TypeFormatter(TypeFormatterContext type);
+
+internal record TypeFormatterOptions(
     bool HideNamespaces = false,
     bool PreferKeywords = false,
     bool ShowGenericTypeParameterNames = false, // e.g. IDictionary<TKey,TValue> instead of IDictionary<,>
     string TypeDelimiter = ",", // [int,string] or <TKey,TValue>
     string NestedTypeDelimiter = ".") // A.Nested.Nested
 {
-    public static readonly TypeFormatting Default = new();
+    public static readonly TypeFormatterOptions Default = new();
 
     private const char OpenArrayBracket = '[';
     private const char CloseArrayBracket = ']';
@@ -89,8 +91,8 @@ internal record TypeFormatting(
     private const char CloseGenericTypeBracket = '>';
     private const char PointerOperator = '*';
 
-    public static readonly Func<TypeFormattingContext, TextWriterFormattableString> DefaultTypeFormat = type => $"{type.Type}";
-    public Func<TypeFormattingContext, TextWriterFormattableString> TypeFormat => DefaultTypeFormat;
+    public static readonly TypeFormatter DefaultTypeFormat = type => $"{type.Type}";
+    public TypeFormatter TypeFormat => DefaultTypeFormat;
 
     protected internal virtual TextWriter WriteToTextWriter(
         Type type,
@@ -195,71 +197,76 @@ internal record TypeFormatting(
     }
 }
 
-internal readonly record struct TypeFormattingContext(
+internal readonly record struct TypeFormatterContext(
     Type TypeInfo,
-    TypeFormatting TypeFormatting)
+    TypeFormatterOptions TypeFormatterOptions)
 {
     public Type TypeInfo { get; } = TypeInfo;
 
-    public TextWriterFormattableString Type => $"{TypeFormatting.WriteToTextWriter(TypeInfo).ToString()!}";
+    public TextWriterFormattableString Type => $"{TypeFormatterOptions.WriteToTextWriter(TypeInfo).ToString()!}";
 }
 
-internal class ParameterFormatting(
-    Func<ParameterFormattingContext, TextWriterFormattableString>? parameterFormat = null,
-    TypeFormatting? typeFormatting = null)
+
+internal delegate TextWriterFormattableString ParameterFormatter(ParameterFormatterContext parameter);
+
+internal class ParameterFormatterOptions(
+    ParameterFormatter? parameterFormat = null,
+    TypeFormatterOptions? typeFormatting = null)
 {
-    private static readonly Func<ParameterFormattingContext, TextWriterFormattableString> DefaultParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
-    public Func<ParameterFormattingContext, TextWriterFormattableString> ParameterFormat { get; } = parameterFormat ?? DefaultParameterFormat;
-    public TypeFormatting TypeFormatFormatting { get; } = typeFormatting ?? TypeFormatting.Default;
-    public static ParameterFormatting Default { get; } = new();
+    private static readonly ParameterFormatter DefaultParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
+    public ParameterFormatter ParameterFormat { get; } = parameterFormat ?? DefaultParameterFormat;
+    public TypeFormatterOptions TypeFormatterOptions { get; } = typeFormatting ?? TypeFormatterOptions.Default;
+    public static ParameterFormatterOptions Default { get; } = new();
 }
 
-internal readonly record struct ParameterFormattingContext(
+internal readonly record struct ParameterFormatterContext(
     ParameterInfo ParameterInfo,
-    ParameterFormatting ParameterFormatting)
+    ParameterFormatterOptions ParameterFormatterOptions)
 {
     public ParameterInfo ParameterInfo { get; } = ParameterInfo;
     public string Name => ParameterInfo.Name!;
 
     public TextWriterFormattableString Type =>
-        ParameterFormatting.TypeFormatFormatting.TypeFormat(
-            new TypeFormattingContext(ParameterInfo.ParameterType, ParameterFormatting.TypeFormatFormatting));
+        ParameterFormatterOptions.TypeFormatterOptions.TypeFormat(
+            new TypeFormatterContext(ParameterInfo.ParameterType, ParameterFormatterOptions.TypeFormatterOptions));
 }
 
-internal class MethodFormatting(
-    Func<MethodFormattingContext, TextWriterFormattableString>? methodFormat = null,
-    ParameterFormatting? parameterFormatting = null,
+internal delegate TextWriterFormattableString MethodFormatter(MethodFormatterContext method);
+
+internal class MethodFormatterOptions(
+    MethodFormatter? methodFormat = null,
+    ParameterFormatterOptions? parameterFormatting = null,
     string parameterSeparator = ", ")
 {
-    private static readonly Func<MethodFormattingContext, TextWriterFormattableString> DefaultMethodFormat = (method => $"{method.ReturnType} {method.Name}({method.Parameters})");
-    public Func<MethodFormattingContext, TextWriterFormattableString> MethodFormat { get; } = methodFormat ?? DefaultMethodFormat;
-    public ParameterFormatting ParameterFormatting { get; } = parameterFormatting ?? ParameterFormatting.Default;
+    private static readonly MethodFormatter DefaultMethodFormat = (method => $"{method.ReturnType} {method.Name}({method.Parameters})");
+    public MethodFormatter MethodFormat { get; } = methodFormat ?? DefaultMethodFormat;
+    public ParameterFormatterOptions ParameterFormatterOptions { get; } = parameterFormatting ?? ParameterFormatterOptions.Default;
     public string ParameterSeparator { get; } = parameterSeparator;
-    public static MethodFormatting Default { get; } = new();
+    public static MethodFormatterOptions Default { get; } = new();
 }
 
-internal readonly record struct MethodFormattingContext(
+internal readonly record struct MethodFormatterContext(
     MethodInfo MethodInfo,
-    MethodFormatting MethodFormatting)
+    MethodFormatterOptions MethodFormatterOptions)
 {
     public MethodInfo MethodInfo { get; } = MethodInfo;
 
     public string Name => MethodInfo.Name;
 
     public TextWriterFormattableString ReturnType =>
-        MethodFormatting.ParameterFormatting.TypeFormatFormatting.TypeFormat(
-            new TypeFormattingContext(MethodInfo.ReturnType, MethodFormatting.ParameterFormatting.TypeFormatFormatting));
+        MethodFormatterOptions.ParameterFormatterOptions.TypeFormatterOptions.TypeFormat(
+            new TypeFormatterContext(MethodInfo.ReturnType, MethodFormatterOptions.ParameterFormatterOptions.TypeFormatterOptions));
 
     public TextWriterFormattableString Parameters
     {
         get
         {
-            MethodFormattingContext self = this;
+            MethodFormatterContext self = this;
             IEnumerable<TextWriterFormattableString> formatterParameters =
                 MethodInfo
                     .GetParameters()
-                    .Select(p => self.MethodFormatting.ParameterFormatting.ParameterFormat(new ParameterFormattingContext(p, self.MethodFormatting.ParameterFormatting)));
-            return TextWriterFormattableString.Join(MethodFormatting.ParameterSeparator, formatterParameters);
+                    .Select(p => self.MethodFormatterOptions.ParameterFormatterOptions.ParameterFormat(new ParameterFormatterContext(p, self.MethodFormatterOptions.ParameterFormatterOptions)));
+            return TextWriterFormattableString.Join(MethodFormatterOptions.ParameterSeparator, formatterParameters);
         }
     }
 }

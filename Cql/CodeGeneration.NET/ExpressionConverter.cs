@@ -547,7 +547,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static readonly ObjectIDGenerator Gen = new();
 #pragma warning restore SYSLIB0050 // Type or member is obsolete
 
-        private static readonly TypeFormatting? TypeToCSharpStringOptions = new(PreferKeywords: true, HideNamespaces: true);
+        private static readonly TypeFormatterOptions? TypeToCSharpStringOptions = new(PreferKeywords: true, HideNamespaces: true);
 
         private static string ParamName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
 

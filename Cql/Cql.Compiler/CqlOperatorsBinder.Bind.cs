@@ -31,13 +31,13 @@ internal partial class CqlOperatorsBinder
                          .AsReadOnly())
                 .AsReadOnly();
 
-    private static readonly TypeFormatting TypeFormatting = new(PreferKeywords:true, HideNamespaces:true);
+    private static readonly TypeFormatterOptions TypeFormatterOptions = new(PreferKeywords:true, HideNamespaces:true);
 
-    private static readonly MethodFormatting CSharpWriteMethodOptions = new (
+    private static readonly MethodFormatterOptions CSharpWriteMethodOptions = new (
         methodFormat: t => $"\n\t* {t.Name}({t.Parameters})",
         parameterFormatting: new (
             parameterFormat: t => $"{t.Type}",
-            typeFormatting: TypeFormatting));
+            typeFormatting: TypeFormatterOptions));
 
     ///  <summary>
     ///
@@ -132,7 +132,7 @@ internal partial class CqlOperatorsBinder
         }
 
         string InputMethodAndParametersToString() =>
-            $"{methodName} ({arguments.SelectToArray(a => a.Type.WriteCSharp(CSharpWriteMethodOptions.ParameterFormatting.TypeFormatFormatting))})";
+            $"{methodName} ({arguments.SelectToArray(a => a.Type.WriteCSharp(CSharpWriteMethodOptions.ParameterFormatterOptions.TypeFormatterOptions))})";
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {
