@@ -62,5 +62,5 @@ internal class CqlPackagerFactory : CqlCompilerFactory
 
     public CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => Singleton(NewCqlToResourcePackagingPipeline);
     protected virtual CqlToResourcePackagingPipeline NewCqlToResourcePackagingPipeline() =>
-        new(Options(CqlToResourcePackagingOptions), ResourcePackager, LibraryDefinitionsBuilder, AssemblyCompiler);
+        new(Options(CqlToResourcePackagingOptions), ResourcePackager, LibrarySetExpressionBuilder, AssemblyCompiler);
 }

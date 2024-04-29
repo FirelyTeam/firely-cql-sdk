@@ -7,8 +7,8 @@
  */
 
 using System;
-using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Compiler;
 

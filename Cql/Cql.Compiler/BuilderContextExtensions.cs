@@ -6,60 +6,60 @@ using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Compiler;
 
-internal static class IBuilderNodeExtensions
+internal static class BuilderContextExtensions
 {
 
-    public static IEnumerable<IBuilderNode?> SelfAndAncestorBuilders(this IBuilderNode context)
+    public static IEnumerable<IBuilderContext?> SelfAndAncestorBuilders(this IBuilderContext context)
     {
-        IBuilderNode? currentContext = context;
+        IBuilderContext? currentContext = context;
         while (currentContext != null)
         {
             yield return currentContext;
-            currentContext = currentContext.OuterBuilder;
+            currentContext = currentContext.OuterBuilderContext;
         }
     }
 
     public static CqlException NewExpressionBuildingException(
-        this IBuilderNode context,
+        this IBuilderContext context,
         string? message = null,
         Exception? innerException = null) =>
         new ExpressionBuildingError(context, message).ToException(innerException);
 
-    public static string GetExpressionPath(this IBuilderNode builder) =>
+    public static string GetExpressionPath(this IBuilderContext builder) =>
         $"\r\n\tExpression Path:{string.Concat(
             from context in builder.SelfAndAncestorBuilders().Reverse()
-            let info = context.BuilderDebuggerInfo
+            let info = context.DebuggerInfo
             where info != null
             select $"\r\n\t* {info}"
         )}";
 
-    public static string GetDebuggerView(this IBuilderNode builder) =>
+    public static string GetDebuggerView(this IBuilderContext builder) =>
         $"{builder.GetType().Name}\r\n\tExpression Path:{string.Concat(
             from context in builder.SelfAndAncestorBuilders().Reverse()
-            let info = context.BuilderDebuggerInfo
+            let info = context.DebuggerInfo
             where info != null
             select $"\r\n\t* {info}"
         )}";
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T CatchRethrowExpressionBuildingException<TBuilderNode, T>(
-        this TBuilderNode builder,
-        Func<TBuilderNode, T> fn,
+    public static T CatchRethrowExpressionBuildingException<TBuilderContext, T>(
+        this TBuilderContext builderContext,
+        Func<TBuilderContext, T> fn,
         Func<Exception, string?>? provideErrorMessage = null)
-        where TBuilderNode : IBuilderNode
+        where TBuilderContext : IBuilderContext
     {
         try
         {
-            return fn(builder);
+            return fn(builderContext);
         }
         catch (CqlException<ExpressionBuildingError> e)
         {
-            _ = e.Error.Context!.BuilderDebuggerInfo;
+            _ = e.Error.Context!.DebuggerInfo;
             throw;
         }
         catch (Exception other)
         {
-            throw builder.NewExpressionBuildingException(message: provideErrorMessage?.Invoke(other), innerException: other);
+            throw builderContext.NewExpressionBuildingException(message: provideErrorMessage?.Invoke(other), innerException: other);
         }
     }
 
@@ -68,7 +68,7 @@ internal static class IBuilderNodeExtensions
         this TBuilderNode builder,
         Action<TBuilderNode> action,
         Func<Exception, string?>? provideErrorMessage = null)
-        where TBuilderNode : IBuilderNode
+        where TBuilderNode : IBuilderContext
     {
         try
         {
@@ -76,7 +76,7 @@ internal static class IBuilderNodeExtensions
         }
         catch (CqlException<ExpressionBuildingError> e)
         {
-            _ = e.Error.Context!.BuilderDebuggerInfo;
+            _ = e.Error.Context!.DebuggerInfo;
             throw;
         }
         catch (Exception other)

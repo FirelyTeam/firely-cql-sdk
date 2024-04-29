@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -10,7 +12,7 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 
-partial class ExpressionBuilder
+partial class ExpressionBuilderContext
 {
     public void ProcessCodeSystemDef(
         CodeSystemDef codeSystem) =>
@@ -157,23 +159,16 @@ partial class ExpressionBuilder
                     }
 
                     parameters = [..parameters, .._operands.Values];
-                    if (_customImplementations.TryGetValue(expressionKey, out var factory))
-                    {
-                        var customLambda = factory(parameters);
-                        _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,
-                            functionParameterTypes, customLambda);
-                        return;
-                    }
 
                     if (function?.external ?? false)
                     {
-                        if (_libraryContext.AllowUnresolvedExternals)
+                        if (_expressionBuilderSettings.AllowUnresolvedExternals)
                         {
                             var returnType = TypeFor(expressionDef)!;
                             var paramTypes = new[] { typeof(CqlContext) }
                                 .Concat(functionParameterTypes)
                                 .ToArray();
-                            var notImplemented = NotImplemented(this, expressionKey, paramTypes, returnType);
+                            var notImplemented = NotImplemented(expressionKey, paramTypes, returnType);
                             _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,
                                 paramTypes, notImplemented);
                             _logger.LogWarning(FormatMessage(

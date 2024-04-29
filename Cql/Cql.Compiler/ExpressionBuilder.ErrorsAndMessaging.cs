@@ -1,10 +1,11 @@
-﻿using Hl7.Cql.Abstractions;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         private Expression Message(Elm.Message e)
         {

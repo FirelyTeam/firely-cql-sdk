@@ -1,26 +1,26 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Expressions;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         protected Expression? Combine(Elm.Combine e)
         {
             var source = Translate(e.source!);
             var operand = e.separator == null
-                ? NullExpression.String
-                : Translate(e.separator);
+                              ? NullExpression.String
+                              : Translate(e.separator);
             return BindCqlOperator(CqlOperator.Combine, null, source, operand);
         }
 
@@ -75,8 +75,8 @@ namespace Hl7.Cql.Compiler
             var stringToSub = Translate(e!.stringToSub!);
             var startIndex = Translate(e!.startIndex!);
             var length = e.length == null
-                ? NullExpression.Int32
-                : Translate(e.length);
+                             ? NullExpression.Int32
+                             : Translate(e.length);
             return BindCqlOperator(CqlOperator.Substring, null, stringToSub, startIndex, length);
         }
     }

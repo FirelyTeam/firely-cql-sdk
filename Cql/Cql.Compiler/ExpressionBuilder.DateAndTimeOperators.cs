@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -14,7 +13,7 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         protected Expression? SameAs(Elm.SameAs e)
         {

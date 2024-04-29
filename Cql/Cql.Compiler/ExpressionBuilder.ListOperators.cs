@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -7,13 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Expressions;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         protected Expression IndexOf(Elm.IndexOf e)
         {
@@ -29,11 +29,11 @@ namespace Hl7.Cql.Compiler
         {
             var source = Translate(slice.source!);
             var start = slice.startIndex == null || slice.startIndex is Elm.Null
-                ? NullExpression.Int32
-                : Translate(slice.startIndex!);
+                            ? NullExpression.Int32
+                            : Translate(slice.startIndex!);
             var end = slice.endIndex == null || slice.endIndex is Elm.Null
-                ? NullExpression.Int32
-                : Translate(slice.endIndex!);
+                          ? NullExpression.Int32
+                          : Translate(slice.endIndex!);
             if (!_typeResolver.IsListType(source.Type))
                 throw new NotImplementedException().WithContext(this);
 

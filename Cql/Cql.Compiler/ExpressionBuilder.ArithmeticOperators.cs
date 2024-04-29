@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -7,14 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using System.Globalization;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         private const string Int32MaxPlusOneAsString = "2147483648";
 
@@ -37,4 +36,3 @@ namespace Hl7.Cql.Compiler
         }
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

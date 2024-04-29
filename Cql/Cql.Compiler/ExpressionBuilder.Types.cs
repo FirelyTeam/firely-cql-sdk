@@ -3,19 +3,19 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         private Expression IntervalExpression(Elm.Interval ie)
         {
             var lowClosed = ie.lowClosedExpression != null
-                ? Translate(ie.lowClosedExpression)
-                : Expression.Constant(((bool?)ie.lowClosed), typeof(bool?));
+                                ? Translate(ie.lowClosedExpression)
+                                : Expression.Constant(((bool?)ie.lowClosed), typeof(bool?));
             lowClosed = ChangeType(lowClosed, typeof(bool?));
             var low = Translate(ie.low!);
 
             var highClosed = ie.highClosedExpression != null
-                ? Translate(ie.highClosedExpression)
-                : Expression.Constant(((bool?)ie.highClosed), typeof(bool?));
+                                 ? Translate(ie.highClosedExpression)
+                                 : Expression.Constant(((bool?)ie.highClosed), typeof(bool?));
             highClosed = ChangeType(highClosed, typeof(bool?));
             var high = Translate(ie.high!);
 

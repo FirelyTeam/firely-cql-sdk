@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Expressions;
 
 internal static class ExpressionExtensions
 {
@@ -11,7 +11,7 @@ internal static class ExpressionExtensions
         return cast;
     }
 
-    public static UnaryExpression ConvertExpression<TType>(this Expression expression) => ConvertExpression(expression, typeof(TType));
+    public static UnaryExpression ConvertExpression<TType>(this Expression expression) => expression.ConvertExpression(typeof(TType));
 
 
     public static UnaryExpression TypeAsExpression(this Expression expression, Type type)
@@ -20,7 +20,7 @@ internal static class ExpressionExtensions
         return typeAs;
     }
 
-    public static UnaryExpression TypeAsExpression<TType>(this Expression expression) => TypeAsExpression(expression, typeof(TType));
+    public static UnaryExpression TypeAsExpression<TType>(this Expression expression) => expression.TypeAsExpression(typeof(TType));
 
     public static TypeBinaryExpression TypeIsExpression(this Expression expression, Type type)
     {

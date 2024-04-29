@@ -1,21 +1,21 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
 
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         protected Expression Coalesce(Elm.Coalesce ce)
         {
@@ -24,9 +24,9 @@ namespace Hl7.Cql.Compiler
                 return BindCqlOperator(CqlOperator.Coalesce, null, operands[0]);
 
             var distinctOperandTypes = operands
-                .Select(op => op.Type)
-                .Distinct()
-                .ToArray();
+                                       .Select(op => op.Type)
+                                       .Distinct()
+                                       .ToArray();
             if (distinctOperandTypes.Length != 1)
                 throw this.NewExpressionBuildingException("All operand types should match when using Coalesce");
 

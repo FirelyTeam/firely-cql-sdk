@@ -1,16 +1,15 @@
-﻿using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets;
 
 namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinder
