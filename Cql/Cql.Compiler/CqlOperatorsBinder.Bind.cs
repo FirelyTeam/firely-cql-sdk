@@ -88,16 +88,6 @@ internal partial class CqlOperatorsBinder
                     nameof(methodName));
             }
         }
-        else if (candidate.conversionMethods.Any(cm => cm == TypeConversion.SuperType))
-        {
-            var inputText = InputMethodAndParametersToString();
-            var candidateText = candidate.method.WriteCSharp(CSharpWriteMethodOptions);
-
-            _logger?.LogWarning(
-                "Candidate for method {input}\nhas one of the arguments casting to a sub type: {candidateText}",
-                inputText,
-                candidateText);
-        }
 
         return (candidate.method, candidate.arguments);
 

@@ -62,20 +62,6 @@ partial class CqlOperatorsBinder
                 result = (Expression.Constant(name.ToLowerInvariant()), TypeConversion.SimpleConvert);
                 return true;
             }
-
-            if (fromConstant.Type.IsValueType && to.IsNullableValueType(out var toUnderlyingType) && fromConstant.Type == toUnderlyingType)
-            {
-                // Value type values to nullable type e.g. int -> int?
-                result = (Expression.Convert(arg, to), TypeConversion.SimpleConvert);
-                return true;
-            }
-        }
-
-        if (from == typeof(object))
-        {
-            // Just cast up and hope for the best
-            result = (Expression.Convert(arg, to), TypeConversion.SuperType);
-            return true;
         }
 
         result = default;
@@ -94,7 +80,6 @@ partial class CqlOperatorsBinder
 
         SimpleConvert = 3,
         OperatorConvert = 4,
-        SuperType = 5, // Unresolved object
     }
 
     private MethodCallExpression BindToBestMethodOverload(
