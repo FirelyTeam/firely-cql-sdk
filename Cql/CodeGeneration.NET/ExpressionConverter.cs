@@ -22,7 +22,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class ExpressionConverter(string libraryName)
     {
-        private static readonly bool PreferVar = false;
+        private static readonly bool PreferVar = true;
 
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
         {

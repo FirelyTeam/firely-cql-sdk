@@ -194,7 +194,7 @@ partial class ValueSetRef: IGetName { }
 
 #endregion
 
-#region GetDateTimePrecision
+#region GetPrecision
 
 /// <summary>
 /// Interface for getting the precision of an object.

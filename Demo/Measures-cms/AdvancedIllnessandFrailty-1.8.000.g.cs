@@ -207,7 +207,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("71802-3", "http://loinc.org", null, null),
 			new CqlCode("98181-1", "http://loinc.org", null, null),
@@ -222,7 +222,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("160734000", "http://snomed.info/sct", null, null),
 		};
@@ -236,7 +236,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		object a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.8.000", "Measurement Period", null);
+		var a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.8.000", "Measurement Period", null);
 
 		return (CqlInterval<CqlDateTime>)a_;
 	}
@@ -247,8 +247,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -259,90 +259,90 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private bool? Has_Criteria_Indicating_Frailty_Value()
 	{
-		CqlValueSet a_ = this.Frailty_Device();
-		IEnumerable<DeviceRequest> b_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
-		IEnumerable<DeviceRequest> d_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
-		IEnumerable<DeviceRequest> e_ = context.Operators.ListUnion<DeviceRequest>(b_, d_);
-		IEnumerable<DeviceRequest> f_ = Status_1_6_000.isDeviceOrder(e_);
+		var a_ = this.Frailty_Device();
+		var b_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<DeviceRequest>(b_, d_);
+		var f_ = Status_1_6_000.isDeviceOrder(e_);
 		bool? g_(DeviceRequest FrailtyDeviceOrder)
 		{
-			bool? al_ = QICoreCommon_2_0_000.doNotPerform(FrailtyDeviceOrder);
-			bool? am_ = context.Operators.IsTrue(al_);
-			bool? an_ = context.Operators.Not(am_);
-			CqlInterval<CqlDateTime> ao_ = this.Measurement_Period();
-			CqlDateTime ap_ = context.Operators.Convert<CqlDateTime>(FrailtyDeviceOrder?.AuthoredOnElement);
-			CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_0_000.toInterval((ap_ as object));
-			bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, "day");
-			bool? as_ = context.Operators.And(an_, ar_);
+			var al_ = QICoreCommon_2_0_000.doNotPerform(FrailtyDeviceOrder);
+			var am_ = context.Operators.IsTrue(al_);
+			var an_ = context.Operators.Not(am_);
+			var ao_ = this.Measurement_Period();
+			var ap_ = context.Operators.Convert<CqlDateTime>(FrailtyDeviceOrder?.AuthoredOnElement);
+			var aq_ = QICoreCommon_2_0_000.toInterval((ap_ as object));
+			var ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, "day");
+			var as_ = context.Operators.And(an_, ar_);
 
 			return as_;
 		};
-		IEnumerable<DeviceRequest> h_ = context.Operators.Where<DeviceRequest>(f_, g_);
-		bool? i_ = context.Operators.Exists<DeviceRequest>(h_);
-		CqlCode j_ = this.Medical_equipment_used();
-		IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
-		IEnumerable<Observation> l_ = context.Operators.RetrieveByCodes<Observation>(k_, null);
-		IEnumerable<Observation> m_ = Status_1_6_000.isAssessmentPerformed(l_);
+		var h_ = context.Operators.Where<DeviceRequest>(f_, g_);
+		var i_ = context.Operators.Exists<DeviceRequest>(h_);
+		var j_ = this.Medical_equipment_used();
+		var k_ = context.Operators.ToList<CqlCode>(j_);
+		var l_ = context.Operators.RetrieveByCodes<Observation>(k_, null);
+		var m_ = Status_1_6_000.isAssessmentPerformed(l_);
 		bool? n_(Observation EquipmentUsed)
 		{
-			object at_ = FHIRHelpers_4_3_000.ToValue(EquipmentUsed?.Value);
-			CqlValueSet au_ = this.Frailty_Device();
-			bool? av_ = context.Operators.ConceptInValueSet((at_ as CqlConcept), au_);
-			object aw_ = FHIRHelpers_4_3_000.ToValue(EquipmentUsed?.Effective);
-			CqlInterval<CqlDateTime> ax_ = QICoreCommon_2_0_000.toInterval(aw_);
-			CqlDateTime ay_ = context.Operators.End(ax_);
-			CqlInterval<CqlDateTime> az_ = this.Measurement_Period();
-			bool? ba_ = context.Operators.In<CqlDateTime>(ay_, az_, "day");
-			bool? bb_ = context.Operators.And(av_, ba_);
+			var at_ = FHIRHelpers_4_3_000.ToValue(EquipmentUsed?.Value);
+			var au_ = this.Frailty_Device();
+			var av_ = context.Operators.ConceptInValueSet((at_ as CqlConcept), au_);
+			var aw_ = FHIRHelpers_4_3_000.ToValue(EquipmentUsed?.Effective);
+			var ax_ = QICoreCommon_2_0_000.toInterval(aw_);
+			var ay_ = context.Operators.End(ax_);
+			var az_ = this.Measurement_Period();
+			var ba_ = context.Operators.In<CqlDateTime>(ay_, az_, "day");
+			var bb_ = context.Operators.And(av_, ba_);
 
 			return bb_;
 		};
-		IEnumerable<Observation> o_ = context.Operators.Where<Observation>(m_, n_);
-		bool? p_ = context.Operators.Exists<Observation>(o_);
-		bool? q_ = context.Operators.Or(i_, p_);
-		CqlValueSet r_ = this.Frailty_Diagnosis();
-		IEnumerable<Condition> s_ = context.Operators.RetrieveByValueSet<Condition>(r_, null);
+		var o_ = context.Operators.Where<Observation>(m_, n_);
+		var p_ = context.Operators.Exists<Observation>(o_);
+		var q_ = context.Operators.Or(i_, p_);
+		var r_ = this.Frailty_Diagnosis();
+		var s_ = context.Operators.RetrieveByValueSet<Condition>(r_, null);
 		bool? t_(Condition FrailtyDiagnosis)
 		{
-			CqlInterval<CqlDateTime> bc_ = QICoreCommon_2_0_000.prevalenceInterval(FrailtyDiagnosis);
-			CqlInterval<CqlDateTime> bd_ = this.Measurement_Period();
-			bool? be_ = context.Operators.Overlaps(bc_, bd_, "day");
+			var bc_ = QICoreCommon_2_0_000.prevalenceInterval(FrailtyDiagnosis);
+			var bd_ = this.Measurement_Period();
+			var be_ = context.Operators.Overlaps(bc_, bd_, "day");
 
 			return be_;
 		};
-		IEnumerable<Condition> u_ = context.Operators.Where<Condition>(s_, t_);
-		bool? v_ = context.Operators.Exists<Condition>(u_);
-		bool? w_ = context.Operators.Or(q_, v_);
-		CqlValueSet x_ = this.Frailty_Encounter();
-		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
-		IEnumerable<Encounter> z_ = Status_1_6_000.isEncounterPerformed(y_);
+		var u_ = context.Operators.Where<Condition>(s_, t_);
+		var v_ = context.Operators.Exists<Condition>(u_);
+		var w_ = context.Operators.Or(q_, v_);
+		var x_ = this.Frailty_Encounter();
+		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
+		var z_ = Status_1_6_000.isEncounterPerformed(y_);
 		bool? aa_(Encounter FrailtyEncounter)
 		{
-			CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_3_000.ToInterval(FrailtyEncounter?.Period);
-			CqlInterval<CqlDateTime> bg_ = QICoreCommon_2_0_000.toInterval((bf_ as object));
-			CqlInterval<CqlDateTime> bh_ = this.Measurement_Period();
-			bool? bi_ = context.Operators.Overlaps(bg_, bh_, "day");
+			var bf_ = FHIRHelpers_4_3_000.ToInterval(FrailtyEncounter?.Period);
+			var bg_ = QICoreCommon_2_0_000.toInterval((bf_ as object));
+			var bh_ = this.Measurement_Period();
+			var bi_ = context.Operators.Overlaps(bg_, bh_, "day");
 
 			return bi_;
 		};
-		IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
-		bool? ac_ = context.Operators.Exists<Encounter>(ab_);
-		bool? ad_ = context.Operators.Or(w_, ac_);
-		CqlValueSet ae_ = this.Frailty_Symptom();
-		IEnumerable<Observation> af_ = context.Operators.RetrieveByValueSet<Observation>(ae_, null);
-		IEnumerable<Observation> ag_ = Status_1_6_000.isSymptom(af_);
+		var ab_ = context.Operators.Where<Encounter>(z_, aa_);
+		var ac_ = context.Operators.Exists<Encounter>(ab_);
+		var ad_ = context.Operators.Or(w_, ac_);
+		var ae_ = this.Frailty_Symptom();
+		var af_ = context.Operators.RetrieveByValueSet<Observation>(ae_, null);
+		var ag_ = Status_1_6_000.isSymptom(af_);
 		bool? ah_(Observation FrailtySymptom)
 		{
-			object bj_ = FHIRHelpers_4_3_000.ToValue(FrailtySymptom?.Effective);
-			CqlInterval<CqlDateTime> bk_ = QICoreCommon_2_0_000.toInterval(bj_);
-			CqlInterval<CqlDateTime> bl_ = this.Measurement_Period();
-			bool? bm_ = context.Operators.Overlaps(bk_, bl_, "day");
+			var bj_ = FHIRHelpers_4_3_000.ToValue(FrailtySymptom?.Effective);
+			var bk_ = QICoreCommon_2_0_000.toInterval(bj_);
+			var bl_ = this.Measurement_Period();
+			var bm_ = context.Operators.Overlaps(bk_, bl_, "day");
 
 			return bm_;
 		};
-		IEnumerable<Observation> ai_ = context.Operators.Where<Observation>(ag_, ah_);
-		bool? aj_ = context.Operators.Exists<Observation>(ai_);
-		bool? ak_ = context.Operators.Or(ad_, aj_);
+		var ai_ = context.Operators.Where<Observation>(ag_, ah_);
+		var aj_ = context.Operators.Exists<Observation>(ai_);
+		var ak_ = context.Operators.Or(ad_, aj_);
 
 		return ak_;
 	}
@@ -353,46 +353,46 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness_Value()
 	{
-		CqlValueSet a_ = this.Outpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		CqlValueSet c_ = this.Observation();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		CqlValueSet f_ = this.Emergency_Department_Evaluation_and_Management_Visit();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		CqlValueSet h_ = this.Nonacute_Inpatient();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		IEnumerable<Encounter> j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(e_, j_);
-		IEnumerable<Encounter> l_ = Status_1_6_000.isEncounterPerformed(k_);
+		var a_ = this.Outpatient();
+		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = this.Observation();
+		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var f_ = this.Emergency_Department_Evaluation_and_Management_Visit();
+		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		var h_ = this.Nonacute_Inpatient();
+		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var l_ = Status_1_6_000.isEncounterPerformed(k_);
 		bool? m_(Encounter OutpatientEncounter)
 		{
-			IEnumerable<Condition> o_ = CQMCommon_2_0_000.encounterDiagnosis(OutpatientEncounter);
+			var o_ = CQMCommon_2_0_000.encounterDiagnosis(OutpatientEncounter);
 			bool? p_(Condition Diagnosis)
 			{
-				CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.Code);
-				CqlValueSet af_ = this.Advanced_Illness();
-				bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
+				var ae_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.Code);
+				var af_ = this.Advanced_Illness();
+				var ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 
 				return ag_;
 			};
-			IEnumerable<Condition> q_ = context.Operators.Where<Condition>(o_, p_);
-			bool? r_ = context.Operators.Exists<Condition>(q_);
-			CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(OutpatientEncounter?.Period);
-			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval((s_ as object));
-			CqlDateTime u_ = context.Operators.Start(t_);
-			CqlInterval<CqlDateTime> v_ = this.Measurement_Period();
-			CqlDateTime w_ = context.Operators.Start(v_);
-			CqlQuantity x_ = context.Operators.Quantity(1m, "year");
-			CqlDateTime y_ = context.Operators.Subtract(w_, x_);
-			CqlDateTime aa_ = context.Operators.End(v_);
-			CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(y_, aa_, true, true);
-			bool? ac_ = context.Operators.In<CqlDateTime>(u_, ab_, "day");
-			bool? ad_ = context.Operators.And(r_, ac_);
+			var q_ = context.Operators.Where<Condition>(o_, p_);
+			var r_ = context.Operators.Exists<Condition>(q_);
+			var s_ = FHIRHelpers_4_3_000.ToInterval(OutpatientEncounter?.Period);
+			var t_ = QICoreCommon_2_0_000.toInterval((s_ as object));
+			var u_ = context.Operators.Start(t_);
+			var v_ = this.Measurement_Period();
+			var w_ = context.Operators.Start(v_);
+			var x_ = context.Operators.Quantity(1m, "year");
+			var y_ = context.Operators.Subtract(w_, x_);
+			var aa_ = context.Operators.End(v_);
+			var ab_ = context.Operators.Interval(y_, aa_, true, true);
+			var ac_ = context.Operators.In<CqlDateTime>(u_, ab_, "day");
+			var ad_ = context.Operators.And(r_, ac_);
 
 			return ad_;
 		};
-		IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
+		var n_ = context.Operators.Where<Encounter>(l_, m_);
 
 		return n_;
 	}
@@ -403,11 +403,11 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private bool? Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Value()
 	{
-		IEnumerable<Encounter> a_ = this.Outpatient_Encounters_with_Advanced_Illness();
-		IEnumerable<ValueTuple<Encounter,Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
+		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
+		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
 		Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _valueTuple)
 		{
-			Tuple_EYKUVMTUWTABihhEAdHIGbSFe k_ = new Tuple_EYKUVMTUWTABihhEAdHIGbSFe
+			var k_ = new Tuple_EYKUVMTUWTABihhEAdHIGbSFe
 			{
 				OutpatientEncounter1 = _valueTuple.Item1,
 				OutpatientEncounter2 = _valueTuple.Item2,
@@ -415,24 +415,24 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return k_;
 		};
-		IEnumerable<Tuple_EYKUVMTUWTABihhEAdHIGbSFe> e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
 		bool? f_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
-			CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
-			CqlDateTime m_ = context.Operators.End(l_);
-			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1?.Period);
-			CqlDateTime o_ = context.Operators.End(n_);
-			CqlQuantity p_ = context.Operators.Quantity(1m, "day");
-			CqlDateTime q_ = context.Operators.Add(o_, p_);
-			bool? r_ = context.Operators.SameOrAfter(m_, q_, "day");
+			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
+			var m_ = context.Operators.End(l_);
+			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1?.Period);
+			var o_ = context.Operators.End(n_);
+			var p_ = context.Operators.Quantity(1m, "day");
+			var q_ = context.Operators.Add(o_, p_);
+			var r_ = context.Operators.SameOrAfter(m_, q_, "day");
 
 			return r_;
 		};
-		IEnumerable<Tuple_EYKUVMTUWTABihhEAdHIGbSFe> g_ = context.Operators.Where<Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
+		var g_ = context.Operators.Where<Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
 		Encounter h_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
 			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		IEnumerable<Encounter> i_ = context.Operators.Select<Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
-		bool? j_ = context.Operators.Exists<Encounter>(i_);
+		var i_ = context.Operators.Select<Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 
 		return j_;
 	}
@@ -443,38 +443,38 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private bool? Has_Inpatient_Encounter_with_Advanced_Illness_Value()
 	{
-		CqlValueSet a_ = this.Acute_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
+		var a_ = this.Acute_Inpatient();
+		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
-			IEnumerable<Condition> g_ = CQMCommon_2_0_000.encounterDiagnosis(InpatientEncounter);
+			var g_ = CQMCommon_2_0_000.encounterDiagnosis(InpatientEncounter);
 			bool? h_(Condition Diagnosis)
 			{
-				CqlConcept w_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.Code);
-				CqlValueSet x_ = this.Advanced_Illness();
-				bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+				var w_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.Code);
+				var x_ = this.Advanced_Illness();
+				var y_ = context.Operators.ConceptInValueSet(w_, x_);
 
 				return y_;
 			};
-			IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
-			bool? j_ = context.Operators.Exists<Condition>(i_);
-			CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounter?.Period);
-			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval((k_ as object));
-			CqlDateTime m_ = context.Operators.Start(l_);
-			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
-			CqlDateTime o_ = context.Operators.Start(n_);
-			CqlQuantity p_ = context.Operators.Quantity(1m, "year");
-			CqlDateTime q_ = context.Operators.Subtract(o_, p_);
-			CqlDateTime s_ = context.Operators.End(n_);
-			CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
-			bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
-			bool? v_ = context.Operators.And(j_, u_);
+			var i_ = context.Operators.Where<Condition>(g_, h_);
+			var j_ = context.Operators.Exists<Condition>(i_);
+			var k_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounter?.Period);
+			var l_ = QICoreCommon_2_0_000.toInterval((k_ as object));
+			var m_ = context.Operators.Start(l_);
+			var n_ = this.Measurement_Period();
+			var o_ = context.Operators.Start(n_);
+			var p_ = context.Operators.Quantity(1m, "year");
+			var q_ = context.Operators.Subtract(o_, p_);
+			var s_ = context.Operators.End(n_);
+			var t_ = context.Operators.Interval(q_, s_, true, true);
+			var u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
+			var v_ = context.Operators.And(j_, u_);
 
 			return v_;
 		};
-		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
-		bool? f_ = context.Operators.Exists<Encounter>(e_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
+		var f_ = context.Operators.Exists<Encounter>(e_);
 
 		return f_;
 	}
@@ -485,32 +485,32 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period_Value()
 	{
-		CqlValueSet a_ = this.Dementia_Medications();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationActive(e_);
+		var a_ = this.Dementia_Medications();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest DementiaMedication)
 		{
-			bool? j_ = context.Operators.IsTrue(DementiaMedication?.DoNotPerformElement?.Value);
-			bool? k_ = context.Operators.Not(j_);
-			CqlInterval<CqlDate> l_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DementiaMedication);
-			CqlDateTime m_ = context.Operators.ConvertDateToDateTime(l_?.low);
-			CqlDateTime o_ = context.Operators.ConvertDateToDateTime(l_?.high);
-			CqlInterval<CqlDateTime> r_ = context.Operators.Interval(m_, o_, l_?.lowClosed, l_?.highClosed);
-			CqlInterval<CqlDateTime> s_ = this.Measurement_Period();
-			CqlDateTime t_ = context.Operators.Start(s_);
-			CqlQuantity u_ = context.Operators.Quantity(1m, "year");
-			CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-			CqlDateTime x_ = context.Operators.End(s_);
-			CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, true);
-			bool? z_ = context.Operators.Overlaps(r_, y_, "day");
-			bool? aa_ = context.Operators.And(k_, z_);
+			var j_ = context.Operators.IsTrue(DementiaMedication?.DoNotPerformElement?.Value);
+			var k_ = context.Operators.Not(j_);
+			var l_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DementiaMedication);
+			var m_ = context.Operators.ConvertDateToDateTime(l_?.low);
+			var o_ = context.Operators.ConvertDateToDateTime(l_?.high);
+			var r_ = context.Operators.Interval(m_, o_, l_?.lowClosed, l_?.highClosed);
+			var s_ = this.Measurement_Period();
+			var t_ = context.Operators.Start(s_);
+			var u_ = context.Operators.Quantity(1m, "year");
+			var v_ = context.Operators.Subtract(t_, u_);
+			var x_ = context.Operators.End(s_);
+			var y_ = context.Operators.Interval(v_, x_, true, true);
+			var z_ = context.Operators.Overlaps(r_, y_, "day");
+			var aa_ = context.Operators.And(k_, z_);
 
 			return aa_;
 		};
-		IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
-		bool? i_ = context.Operators.Exists<MedicationRequest>(h_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 
 		return i_;
 	}
@@ -521,21 +521,21 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty_Value()
 	{
-		Patient a_ = this.Patient();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
-		CqlDateTime d_ = context.Operators.End(c_);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		bool? g_ = context.Operators.GreaterOrEqual(f_, 66);
-		bool? h_ = this.Has_Criteria_Indicating_Frailty();
-		bool? i_ = context.Operators.And(g_, h_);
-		bool? j_ = this.Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
-		bool? k_ = this.Has_Inpatient_Encounter_with_Advanced_Illness();
-		bool? l_ = context.Operators.Or(j_, k_);
-		bool? m_ = this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period();
-		bool? n_ = context.Operators.Or(l_, m_);
-		bool? o_ = context.Operators.And(i_, n_);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.End(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.GreaterOrEqual(f_, 66);
+		var h_ = this.Has_Criteria_Indicating_Frailty();
+		var i_ = context.Operators.And(g_, h_);
+		var j_ = this.Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var k_ = this.Has_Inpatient_Encounter_with_Advanced_Illness();
+		var l_ = context.Operators.Or(j_, k_);
+		var m_ = this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period();
+		var n_ = context.Operators.Or(l_, m_);
+		var o_ = context.Operators.And(i_, n_);
 
 		return o_;
 	}
@@ -546,29 +546,29 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty_Value()
 	{
-		Patient a_ = this.Patient();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
-		CqlDateTime d_ = context.Operators.End(c_);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		CqlInterval<int?> g_ = context.Operators.Interval(66, 80, true, true);
-		bool? h_ = context.Operators.In<int?>(f_, g_, null);
-		bool? i_ = this.Has_Criteria_Indicating_Frailty();
-		bool? j_ = context.Operators.And(h_, i_);
-		bool? k_ = this.Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
-		bool? l_ = this.Has_Inpatient_Encounter_with_Advanced_Illness();
-		bool? m_ = context.Operators.Or(k_, l_);
-		bool? n_ = this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period();
-		bool? o_ = context.Operators.Or(m_, n_);
-		bool? p_ = context.Operators.And(j_, o_);
-		CqlDate r_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlDateTime t_ = context.Operators.End(c_);
-		CqlDate u_ = context.Operators.DateFrom(t_);
-		int? v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
-		bool? w_ = context.Operators.GreaterOrEqual(v_, 81);
-		bool? y_ = context.Operators.And(w_, i_);
-		bool? z_ = context.Operators.Or(p_, y_);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.End(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(66, 80, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
+		var i_ = this.Has_Criteria_Indicating_Frailty();
+		var j_ = context.Operators.And(h_, i_);
+		var k_ = this.Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var l_ = this.Has_Inpatient_Encounter_with_Advanced_Illness();
+		var m_ = context.Operators.Or(k_, l_);
+		var n_ = this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period();
+		var o_ = context.Operators.Or(m_, n_);
+		var p_ = context.Operators.And(j_, o_);
+		var r_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var t_ = context.Operators.End(c_);
+		var u_ = context.Operators.DateFrom(t_);
+		var v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
+		var w_ = context.Operators.GreaterOrEqual(v_, 81);
+		var y_ = context.Operators.And(w_, i_);
+		var z_ = context.Operators.Or(p_, y_);
 
 		return z_;
 	}
@@ -579,56 +579,56 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home_Value()
 	{
-		Patient a_ = this.Patient();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
-		CqlDateTime d_ = context.Operators.End(c_);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		bool? g_ = context.Operators.GreaterOrEqual(f_, 66);
-		CqlCode h_ = this.Housing_status();
-		IEnumerable<CqlCode> i_ = context.Operators.ToList<CqlCode>(h_);
-		IEnumerable<Observation> j_ = context.Operators.RetrieveByCodes<Observation>(i_, null);
-		IEnumerable<Observation> k_ = Status_1_6_000.isAssessmentPerformed(j_);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.End(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.GreaterOrEqual(f_, 66);
+		var h_ = this.Housing_status();
+		var i_ = context.Operators.ToList<CqlCode>(h_);
+		var j_ = context.Operators.RetrieveByCodes<Observation>(i_, null);
+		var k_ = Status_1_6_000.isAssessmentPerformed(j_);
 		bool? l_(Observation HousingStatus)
 		{
-			object w_ = FHIRHelpers_4_3_000.ToValue(HousingStatus?.Effective);
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(w_);
-			CqlDateTime y_ = context.Operators.End(x_);
-			CqlInterval<CqlDateTime> z_ = this.Measurement_Period();
-			CqlDateTime aa_ = context.Operators.End(z_);
-			bool? ab_ = context.Operators.SameOrBefore(y_, aa_, "day");
+			var w_ = FHIRHelpers_4_3_000.ToValue(HousingStatus?.Effective);
+			var x_ = QICoreCommon_2_0_000.toInterval(w_);
+			var y_ = context.Operators.End(x_);
+			var z_ = this.Measurement_Period();
+			var aa_ = context.Operators.End(z_);
+			var ab_ = context.Operators.SameOrBefore(y_, aa_, "day");
 
 			return ab_;
 		};
-		IEnumerable<Observation> m_ = context.Operators.Where<Observation>(k_, l_);
+		var m_ = context.Operators.Where<Observation>(k_, l_);
 		object n_(Observation @this)
 		{
-			object ac_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.toInterval(ac_);
-			CqlDateTime ae_ = context.Operators.End(ad_);
+			var ac_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+			var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
+			var ae_ = context.Operators.End(ad_);
 
 			return ae_;
 		};
-		IEnumerable<Observation> o_ = context.Operators.SortBy<Observation>(m_, n_, System.ComponentModel.ListSortDirection.Ascending);
-		Observation p_ = context.Operators.Last<Observation>(o_);
-		Observation[] q_ = new Observation[]
+		var o_ = context.Operators.SortBy<Observation>(m_, n_, System.ComponentModel.ListSortDirection.Ascending);
+		var p_ = context.Operators.Last<Observation>(o_);
+		var q_ = new Observation[]
 		{
 			p_,
 		};
 		bool? r_(Observation LastHousingStatus)
 		{
-			object af_ = FHIRHelpers_4_3_000.ToValue(LastHousingStatus?.Value);
-			CqlCode ag_ = this.Lives_in_a_nursing_home__finding_();
-			CqlConcept ah_ = context.Operators.ConvertCodeToConcept(ag_);
-			bool? ai_ = context.Operators.Equivalent((af_ as CqlConcept), ah_);
+			var af_ = FHIRHelpers_4_3_000.ToValue(LastHousingStatus?.Value);
+			var ag_ = this.Lives_in_a_nursing_home__finding_();
+			var ah_ = context.Operators.ConvertCodeToConcept(ag_);
+			var ai_ = context.Operators.Equivalent((af_ as CqlConcept), ah_);
 
 			return ai_;
 		};
-		IEnumerable<Observation> s_ = context.Operators.Where<Observation>(q_, r_);
-		Observation t_ = context.Operators.SingletonFrom<Observation>(s_);
-		bool? u_ = context.Operators.Not((bool?)(t_ is null));
-		bool? v_ = context.Operators.And(g_, u_);
+		var s_ = context.Operators.Where<Observation>(q_, r_);
+		var t_ = context.Operators.SingletonFrom<Observation>(s_);
+		var u_ = context.Operators.Not((bool?)(t_ is null));
+		var v_ = context.Operators.And(g_, u_);
 
 		return v_;
 	}

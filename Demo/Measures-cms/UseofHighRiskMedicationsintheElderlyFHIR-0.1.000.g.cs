@@ -667,7 +667,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private CqlCode[] RXNORM_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("204504", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
 			new CqlCode("104208", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
@@ -698,7 +698,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("99211", "http://www.ama-assn.org/go/cpt", null, null),
 		};
@@ -712,10 +712,10 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-		object d_ = context.ResolveParameter("UseofHighRiskMedicationsintheElderlyFHIR-0.1.000", "Measurement Period", c_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("UseofHighRiskMedicationsintheElderlyFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -726,8 +726,8 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -738,72 +738,72 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		CqlValueSet c_ = this.Ophthalmologic_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		CqlValueSet h_ = this.Discharge_Services_Nursing_Facility();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		IEnumerable<Encounter> j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(e_, j_);
-		CqlValueSet l_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		CqlValueSet n_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		IEnumerable<Encounter> p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		IEnumerable<Encounter> q_ = context.Operators.ListUnion<Encounter>(k_, p_);
-		CqlValueSet r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
-		CqlValueSet t_ = this.Annual_Wellness_Visit();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		IEnumerable<Encounter> v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		IEnumerable<Encounter> w_ = context.Operators.ListUnion<Encounter>(q_, v_);
-		CqlValueSet x_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
-		CqlValueSet z_ = this.Telephone_Visits();
-		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
-		IEnumerable<Encounter> ab_ = context.Operators.ListUnion<Encounter>(y_, aa_);
-		IEnumerable<Encounter> ac_ = context.Operators.ListUnion<Encounter>(w_, ab_);
-		CqlValueSet ad_ = this.Online_Assessments();
-		IEnumerable<Encounter> ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
-		IEnumerable<Encounter> af_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
+		var a_ = this.Office_Visit();
+		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = this.Ophthalmologic_Services();
+		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
+		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		var h_ = this.Discharge_Services_Nursing_Facility();
+		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var l_ = this.Nursing_Facility_Visit();
+		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		var n_ = this.Care_Services_in_Long_Term_Residential_Facility();
+		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
+		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		var t_ = this.Annual_Wellness_Visit();
+		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
+		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var x_ = this.Home_Healthcare_Services();
+		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
+		var z_ = this.Telephone_Visits();
+		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
+		var ab_ = context.Operators.ListUnion<Encounter>(y_, aa_);
+		var ac_ = context.Operators.ListUnion<Encounter>(w_, ab_);
+		var ad_ = this.Online_Assessments();
+		var ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
+		var af_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? ag_(Encounter E)
 		{
 			CqlConcept am_(CodeableConcept @this)
 			{
-				CqlConcept ar_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var ar_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return ar_;
 			};
-			IEnumerable<CqlConcept> an_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, am_);
+			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, am_);
 			bool? ao_(CqlConcept T)
 			{
-				CqlCode as_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_();
-				CqlConcept at_ = context.Operators.ConvertCodeToConcept(as_);
-				bool? au_ = context.Operators.Equivalent(T, at_);
+				var as_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_();
+				var at_ = context.Operators.ConvertCodeToConcept(as_);
+				var au_ = context.Operators.Equivalent(T, at_);
 
 				return au_;
 			};
-			IEnumerable<CqlConcept> ap_ = context.Operators.Where<CqlConcept>(an_, ao_);
-			bool? aq_ = context.Operators.Exists<CqlConcept>(ap_);
+			var ap_ = context.Operators.Where<CqlConcept>(an_, ao_);
+			var aq_ = context.Operators.Exists<CqlConcept>(ap_);
 
 			return aq_;
 		};
-		IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
-		IEnumerable<Encounter> ai_ = context.Operators.ListUnion<Encounter>(ae_, ah_);
-		IEnumerable<Encounter> aj_ = context.Operators.ListUnion<Encounter>(ac_, ai_);
+		var ah_ = context.Operators.Where<Encounter>(af_, ag_);
+		var ai_ = context.Operators.ListUnion<Encounter>(ae_, ah_);
+		var aj_ = context.Operators.ListUnion<Encounter>(ac_, ai_);
 		bool? ak_(Encounter ValidEncounters)
 		{
-			CqlInterval<CqlDateTime> av_ = this.Measurement_Period();
-			CqlInterval<CqlDateTime> aw_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			bool? ax_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, aw_, null);
+			var av_ = this.Measurement_Period();
+			var aw_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
+			var ax_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, aw_, null);
 
 			return ax_;
 		};
-		IEnumerable<Encounter> al_ = context.Operators.Where<Encounter>(aj_, ak_);
+		var al_ = context.Operators.Where<Encounter>(aj_, ak_);
 
 		return al_;
 	}
@@ -814,16 +814,16 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? Initial_Population_Value()
 	{
-		Patient a_ = this.Patient();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
-		CqlDateTime d_ = context.Operators.End(c_);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		bool? g_ = context.Operators.GreaterOrEqual(f_, 65);
-		IEnumerable<Encounter> h_ = this.Qualifying_Encounters();
-		bool? i_ = context.Operators.Exists<Encounter>(h_);
-		bool? j_ = context.Operators.And(g_, i_);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.End(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.GreaterOrEqual(f_, 65);
+		var h_ = this.Qualifying_Encounters();
+		var i_ = context.Operators.Exists<Encounter>(h_);
+		var j_ = context.Operators.And(g_, i_);
 
 		return j_;
 	}
@@ -834,7 +834,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? Denominator_Value()
 	{
-		bool? a_ = this.Initial_Population();
+		var a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -845,9 +845,9 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
-		bool? b_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
-		bool? c_ = context.Operators.Or(a_, b_);
+		var a_ = Hospice_6_9_000.Has_Hospice_Services();
+		var b_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
+		var c_ = context.Operators.Or(a_, b_);
 
 		return c_;
 	}
@@ -859,167 +859,167 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
     [CqlDeclaration("More Than One Order")]
 	public IEnumerable<MedicationRequest> More_Than_One_Order(IEnumerable<MedicationRequest> Medication)
 	{
-		IEnumerable<MedicationRequest> a_ = Status_1_6_000.Active_or_Completed_Medication_Request(Medication);
+		var a_ = Status_1_6_000.Active_or_Completed_Medication_Request(Medication);
 		IEnumerable<MedicationRequest> b_(MedicationRequest OrderMedication1)
 		{
-			IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_or_Completed_Medication_Request(Medication);
+			var f_ = Status_1_6_000.Active_or_Completed_Medication_Request(Medication);
 			bool? g_(MedicationRequest OrderMedication2)
 			{
-				CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(OrderMedication1?.AuthoredOnElement);
-				CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
-				bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
-				bool? n_ = context.Operators.GreaterOrEqual(OrderMedication1?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value, 1);
-				bool? o_ = context.Operators.And(m_, n_);
-				CqlDate q_ = context.Operators.DateFrom(k_);
-				CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(OrderMedication2?.AuthoredOnElement);
-				CqlDate s_ = context.Operators.DateFrom(r_);
-				bool? t_ = context.Operators.Equivalent(q_, s_);
-				bool? u_ = context.Operators.Not(t_);
-				bool? x_ = context.Operators.In<CqlDateTime>(k_, l_, null);
-				bool? y_ = context.Operators.And(u_, x_);
-				bool? ab_ = context.Operators.In<CqlDateTime>(r_, l_, null);
-				bool? ac_ = context.Operators.And(y_, ab_);
-				bool? ad_ = context.Operators.Or(o_, ac_);
-				CqlDate af_ = context.Operators.DateFrom(k_);
-				CqlDate ah_ = context.Operators.DateFrom(r_);
-				bool? ai_ = context.Operators.Equivalent(af_, ah_);
-				bool? al_ = context.Operators.In<CqlDateTime>(k_, l_, null);
-				bool? am_ = context.Operators.And(ai_, al_);
-				CqlInterval<CqlDate> an_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OrderMedication1);
-				CqlDate ao_ = context.Operators.Start(an_);
-				CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(ao_);
-				CqlDate aq_ = context.Operators.DateFrom(ap_);
-				CqlInterval<CqlDate> ar_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OrderMedication2);
-				CqlDate as_ = context.Operators.Start(ar_);
-				CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
-				CqlDate au_ = context.Operators.DateFrom(at_);
-				bool? av_ = context.Operators.Equivalent(aq_, au_);
-				bool? aw_ = context.Operators.Not(av_);
-				bool? ax_ = context.Operators.And(am_, aw_);
-				CqlDate az_ = context.Operators.Start(an_);
-				CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
-				bool? bc_ = context.Operators.In<CqlDateTime>(ba_, l_, null);
-				bool? bd_ = context.Operators.And(ax_, bc_);
-				CqlDate bf_ = context.Operators.Start(ar_);
-				CqlDateTime bg_ = context.Operators.ConvertDateToDateTime(bf_);
-				bool? bi_ = context.Operators.In<CqlDateTime>(bg_, l_, null);
-				bool? bj_ = context.Operators.And(bd_, bi_);
-				bool? bk_ = context.Operators.Or(ad_, bj_);
+				var k_ = context.Operators.Convert<CqlDateTime>(OrderMedication1?.AuthoredOnElement);
+				var l_ = this.Measurement_Period();
+				var m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
+				var n_ = context.Operators.GreaterOrEqual(OrderMedication1?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value, 1);
+				var o_ = context.Operators.And(m_, n_);
+				var q_ = context.Operators.DateFrom(k_);
+				var r_ = context.Operators.Convert<CqlDateTime>(OrderMedication2?.AuthoredOnElement);
+				var s_ = context.Operators.DateFrom(r_);
+				var t_ = context.Operators.Equivalent(q_, s_);
+				var u_ = context.Operators.Not(t_);
+				var x_ = context.Operators.In<CqlDateTime>(k_, l_, null);
+				var y_ = context.Operators.And(u_, x_);
+				var ab_ = context.Operators.In<CqlDateTime>(r_, l_, null);
+				var ac_ = context.Operators.And(y_, ab_);
+				var ad_ = context.Operators.Or(o_, ac_);
+				var af_ = context.Operators.DateFrom(k_);
+				var ah_ = context.Operators.DateFrom(r_);
+				var ai_ = context.Operators.Equivalent(af_, ah_);
+				var al_ = context.Operators.In<CqlDateTime>(k_, l_, null);
+				var am_ = context.Operators.And(ai_, al_);
+				var an_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OrderMedication1);
+				var ao_ = context.Operators.Start(an_);
+				var ap_ = context.Operators.ConvertDateToDateTime(ao_);
+				var aq_ = context.Operators.DateFrom(ap_);
+				var ar_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(OrderMedication2);
+				var as_ = context.Operators.Start(ar_);
+				var at_ = context.Operators.ConvertDateToDateTime(as_);
+				var au_ = context.Operators.DateFrom(at_);
+				var av_ = context.Operators.Equivalent(aq_, au_);
+				var aw_ = context.Operators.Not(av_);
+				var ax_ = context.Operators.And(am_, aw_);
+				var az_ = context.Operators.Start(an_);
+				var ba_ = context.Operators.ConvertDateToDateTime(az_);
+				var bc_ = context.Operators.In<CqlDateTime>(ba_, l_, null);
+				var bd_ = context.Operators.And(ax_, bc_);
+				var bf_ = context.Operators.Start(ar_);
+				var bg_ = context.Operators.ConvertDateToDateTime(bf_);
+				var bi_ = context.Operators.In<CqlDateTime>(bg_, l_, null);
+				var bj_ = context.Operators.And(bd_, bi_);
+				var bk_ = context.Operators.Or(ad_, bj_);
 
 				return bk_;
 			};
-			IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+			var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 			MedicationRequest i_(MedicationRequest OrderMedication2) => 
 				OrderMedication1;
-			IEnumerable<MedicationRequest> j_ = context.Operators.Select<MedicationRequest, MedicationRequest>(h_, i_);
+			var j_ = context.Operators.Select<MedicationRequest, MedicationRequest>(h_, i_);
 
 			return j_;
 		};
-		IEnumerable<MedicationRequest> c_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(a_, b_);
+		var c_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(a_, b_);
 		MedicationRequest d_(MedicationRequest OrderMedication1) => 
 			OrderMedication1;
-		IEnumerable<MedicationRequest> e_ = context.Operators.Select<MedicationRequest, MedicationRequest>(c_, d_);
+		var e_ = context.Operators.Select<MedicationRequest, MedicationRequest>(c_, d_);
 
 		return e_;
 	}
 
 	private IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days_Value()
 	{
-		CqlValueSet a_ = this.Anticholinergics__first_generation_antihistamines();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(e_);
-		CqlValueSet g_ = this.Anticholinergics__anti_Parkinson_agents();
-		IEnumerable<MedicationRequest> h_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, null);
-		IEnumerable<MedicationRequest> j_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, null);
-		IEnumerable<MedicationRequest> k_ = context.Operators.ListUnion<MedicationRequest>(h_, j_);
-		IEnumerable<MedicationRequest> l_ = this.More_Than_One_Order(k_);
-		IEnumerable<MedicationRequest> m_ = context.Operators.ListUnion<MedicationRequest>(f_, l_);
-		CqlValueSet n_ = this.Antispasmodics();
-		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
-		IEnumerable<MedicationRequest> q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
-		IEnumerable<MedicationRequest> r_ = context.Operators.ListUnion<MedicationRequest>(o_, q_);
-		IEnumerable<MedicationRequest> s_ = this.More_Than_One_Order(r_);
-		CqlValueSet t_ = this.Antithrombotic();
-		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
-		IEnumerable<MedicationRequest> w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
-		IEnumerable<MedicationRequest> x_ = context.Operators.ListUnion<MedicationRequest>(u_, w_);
-		IEnumerable<MedicationRequest> y_ = this.More_Than_One_Order(x_);
-		IEnumerable<MedicationRequest> z_ = context.Operators.ListUnion<MedicationRequest>(s_, y_);
-		IEnumerable<MedicationRequest> aa_ = context.Operators.ListUnion<MedicationRequest>(m_, z_);
-		CqlValueSet ab_ = this.Cardiovascular__alpha_agonists__central();
-		IEnumerable<MedicationRequest> ac_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, null);
-		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, null);
-		IEnumerable<MedicationRequest> af_ = context.Operators.ListUnion<MedicationRequest>(ac_, ae_);
-		IEnumerable<MedicationRequest> ag_ = this.More_Than_One_Order(af_);
-		CqlValueSet ah_ = this.Cardiovascular__other();
-		IEnumerable<MedicationRequest> ai_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, null);
-		IEnumerable<MedicationRequest> ak_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, null);
-		IEnumerable<MedicationRequest> al_ = context.Operators.ListUnion<MedicationRequest>(ai_, ak_);
-		IEnumerable<MedicationRequest> am_ = this.More_Than_One_Order(al_);
-		IEnumerable<MedicationRequest> an_ = context.Operators.ListUnion<MedicationRequest>(ag_, am_);
-		IEnumerable<MedicationRequest> ao_ = context.Operators.ListUnion<MedicationRequest>(aa_, an_);
-		CqlValueSet ap_ = this.Central_nervous_system__antidepressants();
-		IEnumerable<MedicationRequest> aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
-		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
-		IEnumerable<MedicationRequest> at_ = context.Operators.ListUnion<MedicationRequest>(aq_, as_);
-		IEnumerable<MedicationRequest> au_ = this.More_Than_One_Order(at_);
-		CqlValueSet av_ = this.Central_nervous_system__barbiturates();
-		IEnumerable<MedicationRequest> aw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
-		IEnumerable<MedicationRequest> ay_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
-		IEnumerable<MedicationRequest> az_ = context.Operators.ListUnion<MedicationRequest>(aw_, ay_);
-		IEnumerable<MedicationRequest> ba_ = this.More_Than_One_Order(az_);
-		IEnumerable<MedicationRequest> bb_ = context.Operators.ListUnion<MedicationRequest>(au_, ba_);
-		IEnumerable<MedicationRequest> bc_ = context.Operators.ListUnion<MedicationRequest>(ao_, bb_);
-		CqlValueSet bd_ = this.Central_nervous_system__vasodilators();
-		IEnumerable<MedicationRequest> be_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, null);
-		IEnumerable<MedicationRequest> bg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, null);
-		IEnumerable<MedicationRequest> bh_ = context.Operators.ListUnion<MedicationRequest>(be_, bg_);
-		IEnumerable<MedicationRequest> bi_ = this.More_Than_One_Order(bh_);
-		CqlValueSet bj_ = this.Central_nervous_system__other();
-		IEnumerable<MedicationRequest> bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, null);
-		IEnumerable<MedicationRequest> bm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, null);
-		IEnumerable<MedicationRequest> bn_ = context.Operators.ListUnion<MedicationRequest>(bk_, bm_);
-		IEnumerable<MedicationRequest> bo_ = this.More_Than_One_Order(bn_);
-		IEnumerable<MedicationRequest> bp_ = context.Operators.ListUnion<MedicationRequest>(bi_, bo_);
-		IEnumerable<MedicationRequest> bq_ = context.Operators.ListUnion<MedicationRequest>(bc_, bp_);
-		CqlValueSet br_ = this.Endocrine_system__estrogens_with_or_without_progestins();
-		IEnumerable<MedicationRequest> bs_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, null);
-		IEnumerable<MedicationRequest> bu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, null);
-		IEnumerable<MedicationRequest> bv_ = context.Operators.ListUnion<MedicationRequest>(bs_, bu_);
-		IEnumerable<MedicationRequest> bw_ = this.More_Than_One_Order(bv_);
-		CqlValueSet bx_ = this.Endocrine_system__sulfonylureas__long_duration();
-		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, null);
-		IEnumerable<MedicationRequest> ca_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, null);
-		IEnumerable<MedicationRequest> cb_ = context.Operators.ListUnion<MedicationRequest>(by_, ca_);
-		IEnumerable<MedicationRequest> cc_ = this.More_Than_One_Order(cb_);
-		IEnumerable<MedicationRequest> cd_ = context.Operators.ListUnion<MedicationRequest>(bw_, cc_);
-		IEnumerable<MedicationRequest> ce_ = context.Operators.ListUnion<MedicationRequest>(bq_, cd_);
-		CqlValueSet cf_ = this.Endocrine_system__other();
-		IEnumerable<MedicationRequest> cg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, null);
-		IEnumerable<MedicationRequest> ci_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, null);
-		IEnumerable<MedicationRequest> cj_ = context.Operators.ListUnion<MedicationRequest>(cg_, ci_);
-		IEnumerable<MedicationRequest> ck_ = this.More_Than_One_Order(cj_);
-		CqlValueSet cl_ = this.Nonbenzodiazepine_hypnotics();
-		IEnumerable<MedicationRequest> cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
-		IEnumerable<MedicationRequest> co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
-		IEnumerable<MedicationRequest> cp_ = context.Operators.ListUnion<MedicationRequest>(cm_, co_);
-		IEnumerable<MedicationRequest> cq_ = this.More_Than_One_Order(cp_);
-		IEnumerable<MedicationRequest> cr_ = context.Operators.ListUnion<MedicationRequest>(ck_, cq_);
-		IEnumerable<MedicationRequest> cs_ = context.Operators.ListUnion<MedicationRequest>(ce_, cr_);
-		CqlValueSet ct_ = this.Pain_medications__skeletal_muscle_relaxants();
-		IEnumerable<MedicationRequest> cu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, null);
-		IEnumerable<MedicationRequest> cw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, null);
-		IEnumerable<MedicationRequest> cx_ = context.Operators.ListUnion<MedicationRequest>(cu_, cw_);
-		IEnumerable<MedicationRequest> cy_ = this.More_Than_One_Order(cx_);
-		CqlValueSet cz_ = this.Pain_medications__other();
-		IEnumerable<MedicationRequest> da_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, null);
-		IEnumerable<MedicationRequest> dc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, null);
-		IEnumerable<MedicationRequest> dd_ = context.Operators.ListUnion<MedicationRequest>(da_, dc_);
-		IEnumerable<MedicationRequest> de_ = this.More_Than_One_Order(dd_);
-		IEnumerable<MedicationRequest> df_ = context.Operators.ListUnion<MedicationRequest>(cy_, de_);
-		IEnumerable<MedicationRequest> dg_ = context.Operators.ListUnion<MedicationRequest>(cs_, df_);
+		var a_ = this.Anticholinergics__first_generation_antihistamines();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var f_ = this.More_Than_One_Order(e_);
+		var g_ = this.Anticholinergics__anti_Parkinson_agents();
+		var h_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, null);
+		var j_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, null);
+		var k_ = context.Operators.ListUnion<MedicationRequest>(h_, j_);
+		var l_ = this.More_Than_One_Order(k_);
+		var m_ = context.Operators.ListUnion<MedicationRequest>(f_, l_);
+		var n_ = this.Antispasmodics();
+		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
+		var q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
+		var r_ = context.Operators.ListUnion<MedicationRequest>(o_, q_);
+		var s_ = this.More_Than_One_Order(r_);
+		var t_ = this.Antithrombotic();
+		var u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
+		var w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
+		var x_ = context.Operators.ListUnion<MedicationRequest>(u_, w_);
+		var y_ = this.More_Than_One_Order(x_);
+		var z_ = context.Operators.ListUnion<MedicationRequest>(s_, y_);
+		var aa_ = context.Operators.ListUnion<MedicationRequest>(m_, z_);
+		var ab_ = this.Cardiovascular__alpha_agonists__central();
+		var ac_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, null);
+		var ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, null);
+		var af_ = context.Operators.ListUnion<MedicationRequest>(ac_, ae_);
+		var ag_ = this.More_Than_One_Order(af_);
+		var ah_ = this.Cardiovascular__other();
+		var ai_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, null);
+		var ak_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, null);
+		var al_ = context.Operators.ListUnion<MedicationRequest>(ai_, ak_);
+		var am_ = this.More_Than_One_Order(al_);
+		var an_ = context.Operators.ListUnion<MedicationRequest>(ag_, am_);
+		var ao_ = context.Operators.ListUnion<MedicationRequest>(aa_, an_);
+		var ap_ = this.Central_nervous_system__antidepressants();
+		var aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
+		var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
+		var at_ = context.Operators.ListUnion<MedicationRequest>(aq_, as_);
+		var au_ = this.More_Than_One_Order(at_);
+		var av_ = this.Central_nervous_system__barbiturates();
+		var aw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
+		var ay_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
+		var az_ = context.Operators.ListUnion<MedicationRequest>(aw_, ay_);
+		var ba_ = this.More_Than_One_Order(az_);
+		var bb_ = context.Operators.ListUnion<MedicationRequest>(au_, ba_);
+		var bc_ = context.Operators.ListUnion<MedicationRequest>(ao_, bb_);
+		var bd_ = this.Central_nervous_system__vasodilators();
+		var be_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, null);
+		var bg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, null);
+		var bh_ = context.Operators.ListUnion<MedicationRequest>(be_, bg_);
+		var bi_ = this.More_Than_One_Order(bh_);
+		var bj_ = this.Central_nervous_system__other();
+		var bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, null);
+		var bm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, null);
+		var bn_ = context.Operators.ListUnion<MedicationRequest>(bk_, bm_);
+		var bo_ = this.More_Than_One_Order(bn_);
+		var bp_ = context.Operators.ListUnion<MedicationRequest>(bi_, bo_);
+		var bq_ = context.Operators.ListUnion<MedicationRequest>(bc_, bp_);
+		var br_ = this.Endocrine_system__estrogens_with_or_without_progestins();
+		var bs_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, null);
+		var bu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, null);
+		var bv_ = context.Operators.ListUnion<MedicationRequest>(bs_, bu_);
+		var bw_ = this.More_Than_One_Order(bv_);
+		var bx_ = this.Endocrine_system__sulfonylureas__long_duration();
+		var by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, null);
+		var ca_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, null);
+		var cb_ = context.Operators.ListUnion<MedicationRequest>(by_, ca_);
+		var cc_ = this.More_Than_One_Order(cb_);
+		var cd_ = context.Operators.ListUnion<MedicationRequest>(bw_, cc_);
+		var ce_ = context.Operators.ListUnion<MedicationRequest>(bq_, cd_);
+		var cf_ = this.Endocrine_system__other();
+		var cg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, null);
+		var ci_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, null);
+		var cj_ = context.Operators.ListUnion<MedicationRequest>(cg_, ci_);
+		var ck_ = this.More_Than_One_Order(cj_);
+		var cl_ = this.Nonbenzodiazepine_hypnotics();
+		var cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
+		var co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
+		var cp_ = context.Operators.ListUnion<MedicationRequest>(cm_, co_);
+		var cq_ = this.More_Than_One_Order(cp_);
+		var cr_ = context.Operators.ListUnion<MedicationRequest>(ck_, cq_);
+		var cs_ = context.Operators.ListUnion<MedicationRequest>(ce_, cr_);
+		var ct_ = this.Pain_medications__skeletal_muscle_relaxants();
+		var cu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, null);
+		var cw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, null);
+		var cx_ = context.Operators.ListUnion<MedicationRequest>(cu_, cw_);
+		var cy_ = this.More_Than_One_Order(cx_);
+		var cz_ = this.Pain_medications__other();
+		var da_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, null);
+		var dc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, null);
+		var dd_ = context.Operators.ListUnion<MedicationRequest>(da_, dc_);
+		var de_ = this.More_Than_One_Order(dd_);
+		var df_ = context.Operators.ListUnion<MedicationRequest>(cy_, de_);
+		var dg_ = context.Operators.ListUnion<MedicationRequest>(cs_, df_);
 
 		return dg_;
 	}
@@ -1031,59 +1031,59 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
     [CqlDeclaration("MedicationRequestPeriodInDays")]
 	public decimal? MedicationRequestPeriodInDays(MedicationRequest Request)
 	{
-		MedicationRequest[] a_ = new MedicationRequest[]
+		var a_ = new MedicationRequest[]
 		{
 			Request,
 		};
 		decimal? b_(MedicationRequest R)
 		{
-			CqlQuantity e_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
-			CqlQuantity f_ = context.Operators.ConvertQuantity(e_, "d");
-			CqlQuantity g_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
-			Dosage h_ = context.Operators.SingletonFrom<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-			Dosage.DoseAndRateComponent i_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-			object j_ = FHIRHelpers_4_3_000.ToValue(i_?.Dose);
-			CqlQuantity k_ = context.Operators.End((j_ as CqlInterval<CqlQuantity>));
-			Dosage.DoseAndRateComponent m_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
-			object n_ = FHIRHelpers_4_3_000.ToValue(m_?.Dose);
-			Code<Timing.UnitsOfTime> s_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(h_?.Timing?.Repeat?.PeriodUnitElement?.Value);
-			string t_ = context.Operators.Convert<string>(s_);
-			CqlQuantity u_ = CumulativeMedicationDuration_4_0_000.Quantity(h_?.Timing?.Repeat?.PeriodElement?.Value, t_);
-			decimal? v_ = CumulativeMedicationDuration_4_0_000.ToDaily((h_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? h_?.Timing?.Repeat?.FrequencyElement?.Value), u_);
-			IEnumerable<CqlTime> x_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(h_?.Timing?.Repeat?.TimeOfDayElement, "value");
-			int? y_ = context.Operators.Count<CqlTime>(x_);
-			decimal? z_ = context.Operators.ConvertIntegerToDecimal(y_);
-			decimal? aa_ = context.Operators.Multiply((k_ ?? (n_ as CqlQuantity))?.value, ((v_ ?? z_) ?? 1.0m));
-			decimal? ab_ = context.Operators.Divide(g_?.value, aa_);
-			int? ac_ = context.Operators.Add(1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? 0));
-			decimal? ad_ = context.Operators.ConvertIntegerToDecimal(ac_);
-			decimal? ae_ = context.Operators.Multiply((f_?.value ?? ab_), ad_);
+			var e_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
+			var f_ = context.Operators.ConvertQuantity(e_, "d");
+			var g_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
+			var h_ = context.Operators.SingletonFrom<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
+			var i_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var j_ = FHIRHelpers_4_3_000.ToValue(i_?.Dose);
+			var k_ = context.Operators.End((j_ as CqlInterval<CqlQuantity>));
+			var m_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var n_ = FHIRHelpers_4_3_000.ToValue(m_?.Dose);
+			var s_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(h_?.Timing?.Repeat?.PeriodUnitElement?.Value);
+			var t_ = context.Operators.Convert<string>(s_);
+			var u_ = CumulativeMedicationDuration_4_0_000.Quantity(h_?.Timing?.Repeat?.PeriodElement?.Value, t_);
+			var v_ = CumulativeMedicationDuration_4_0_000.ToDaily((h_?.Timing?.Repeat?.FrequencyMaxElement?.Value ?? h_?.Timing?.Repeat?.FrequencyElement?.Value), u_);
+			var x_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(h_?.Timing?.Repeat?.TimeOfDayElement, "value");
+			var y_ = context.Operators.Count<CqlTime>(x_);
+			var z_ = context.Operators.ConvertIntegerToDecimal(y_);
+			var aa_ = context.Operators.Multiply((k_ ?? (n_ as CqlQuantity))?.value, ((v_ ?? z_) ?? 1.0m));
+			var ab_ = context.Operators.Divide(g_?.value, aa_);
+			var ac_ = context.Operators.Add(1, (R?.DispenseRequest?.NumberOfRepeatsAllowedElement?.Value ?? 0));
+			var ad_ = context.Operators.ConvertIntegerToDecimal(ac_);
+			var ae_ = context.Operators.Multiply((f_?.value ?? ab_), ad_);
 
 			return ae_;
 		};
-		IEnumerable<decimal?> c_ = context.Operators.Select<MedicationRequest, decimal?>(a_, b_);
-		decimal? d_ = context.Operators.SingletonFrom<decimal?>(c_);
+		var c_ = context.Operators.Select<MedicationRequest, decimal?>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<decimal?>(c_);
 
 		return d_;
 	}
 
 	private bool? Two_High_Risk_Medications_with_Prolonged_Duration_Value()
 	{
-		CqlValueSet a_ = this.Anti_Infectives__other();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(e_);
+		var a_ = this.Anti_Infectives__other();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var f_ = this.More_Than_One_Order(e_);
 		decimal? g_(MedicationRequest AntiInfectives)
 		{
-			decimal? l_ = this.MedicationRequestPeriodInDays(AntiInfectives);
+			var l_ = this.MedicationRequestPeriodInDays(AntiInfectives);
 
 			return l_;
 		};
-		IEnumerable<decimal?> h_ = context.Operators.Select<MedicationRequest, decimal?>(f_, g_);
-		decimal? i_ = context.Operators.Sum(h_);
-		decimal? j_ = context.Operators.ConvertIntegerToDecimal(90);
-		bool? k_ = context.Operators.Greater(i_, j_);
+		var h_ = context.Operators.Select<MedicationRequest, decimal?>(f_, g_);
+		var i_ = context.Operators.Sum(h_);
+		var j_ = context.Operators.ConvertIntegerToDecimal(90);
+		var k_ = context.Operators.Greater(i_, j_);
 
 		return k_;
 	}
@@ -1099,253 +1099,253 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		{
 			bool b_()
 			{
-				CqlCode t_ = this.reserpine_0_1_MG_Oral_Tablet();
-				CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
-				bool? v_ = context.Operators.Equivalent(Strength, u_);
+				var t_ = this.reserpine_0_1_MG_Oral_Tablet();
+				var u_ = context.Operators.ConvertCodeToConcept(t_);
+				var v_ = context.Operators.Equivalent(Strength, u_);
 
 				return (v_ ?? false);
 			};
 			bool c_()
 			{
-				CqlCode w_ = this.reserpine_0_25_MG_Oral_Tablet();
-				CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
-				bool? y_ = context.Operators.Equivalent(Strength, x_);
+				var w_ = this.reserpine_0_25_MG_Oral_Tablet();
+				var x_ = context.Operators.ConvertCodeToConcept(w_);
+				var y_ = context.Operators.Equivalent(Strength, x_);
 
 				return (y_ ?? false);
 			};
 			bool d_()
 			{
-				CqlCode z_ = this.digoxin_0_05_MG_ML_Oral_Solution();
-				CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
-				bool? ab_ = context.Operators.Equivalent(Strength, aa_);
+				var z_ = this.digoxin_0_05_MG_ML_Oral_Solution();
+				var aa_ = context.Operators.ConvertCodeToConcept(z_);
+				var ab_ = context.Operators.Equivalent(Strength, aa_);
 
 				return (ab_ ?? false);
 			};
 			bool e_()
 			{
-				CqlCode ac_ = this.digoxin_0_0625_MG_Oral_Tablet();
-				CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
-				bool? ae_ = context.Operators.Equivalent(Strength, ad_);
+				var ac_ = this.digoxin_0_0625_MG_Oral_Tablet();
+				var ad_ = context.Operators.ConvertCodeToConcept(ac_);
+				var ae_ = context.Operators.Equivalent(Strength, ad_);
 
 				return (ae_ ?? false);
 			};
 			bool f_()
 			{
-				CqlCode af_ = this._1_ML_digoxin_0_1_MG_ML_Injection();
-				CqlConcept ag_ = context.Operators.ConvertCodeToConcept(af_);
-				bool? ah_ = context.Operators.Equivalent(Strength, ag_);
+				var af_ = this._1_ML_digoxin_0_1_MG_ML_Injection();
+				var ag_ = context.Operators.ConvertCodeToConcept(af_);
+				var ah_ = context.Operators.Equivalent(Strength, ag_);
 
 				return (ah_ ?? false);
 			};
 			bool g_()
 			{
-				CqlCode ai_ = this.digoxin_0_125_MG_Oral_Tablet();
-				CqlConcept aj_ = context.Operators.ConvertCodeToConcept(ai_);
-				bool? ak_ = context.Operators.Equivalent(Strength, aj_);
+				var ai_ = this.digoxin_0_125_MG_Oral_Tablet();
+				var aj_ = context.Operators.ConvertCodeToConcept(ai_);
+				var ak_ = context.Operators.Equivalent(Strength, aj_);
 
 				return (ak_ ?? false);
 			};
 			bool h_()
 			{
-				CqlCode al_ = this.digoxin_0_1875_MG_Oral_Tablet();
-				CqlConcept am_ = context.Operators.ConvertCodeToConcept(al_);
-				bool? an_ = context.Operators.Equivalent(Strength, am_);
+				var al_ = this.digoxin_0_1875_MG_Oral_Tablet();
+				var am_ = context.Operators.ConvertCodeToConcept(al_);
+				var an_ = context.Operators.Equivalent(Strength, am_);
 
 				return (an_ ?? false);
 			};
 			bool i_()
 			{
-				CqlCode ao_ = this.digoxin_0_25_MG_Oral_Tablet();
-				CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
-				bool? aq_ = context.Operators.Equivalent(Strength, ap_);
+				var ao_ = this.digoxin_0_25_MG_Oral_Tablet();
+				var ap_ = context.Operators.ConvertCodeToConcept(ao_);
+				var aq_ = context.Operators.Equivalent(Strength, ap_);
 
 				return (aq_ ?? false);
 			};
 			bool j_()
 			{
-				CqlCode ar_ = this._2_ML_digoxin_0_25_MG_ML_Injection();
-				CqlConcept as_ = context.Operators.ConvertCodeToConcept(ar_);
-				bool? at_ = context.Operators.Equivalent(Strength, as_);
+				var ar_ = this._2_ML_digoxin_0_25_MG_ML_Injection();
+				var as_ = context.Operators.ConvertCodeToConcept(ar_);
+				var at_ = context.Operators.Equivalent(Strength, as_);
 
 				return (at_ ?? false);
 			};
 			bool k_()
 			{
-				CqlCode au_ = this.doxepin_3_MG_Oral_Tablet();
-				CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
-				bool? aw_ = context.Operators.Equivalent(Strength, av_);
+				var au_ = this.doxepin_3_MG_Oral_Tablet();
+				var av_ = context.Operators.ConvertCodeToConcept(au_);
+				var aw_ = context.Operators.Equivalent(Strength, av_);
 
 				return (aw_ ?? false);
 			};
 			bool l_()
 			{
-				CqlCode ax_ = this.doxepin_6_MG_Oral_Tablet();
-				CqlConcept ay_ = context.Operators.ConvertCodeToConcept(ax_);
-				bool? az_ = context.Operators.Equivalent(Strength, ay_);
+				var ax_ = this.doxepin_6_MG_Oral_Tablet();
+				var ay_ = context.Operators.ConvertCodeToConcept(ax_);
+				var az_ = context.Operators.Equivalent(Strength, ay_);
 
 				return (az_ ?? false);
 			};
 			bool m_()
 			{
-				CqlCode ba_ = this.doxepin_hydrochloride_10_MG_Oral_Capsule();
-				CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
-				bool? bc_ = context.Operators.Equivalent(Strength, bb_);
+				var ba_ = this.doxepin_hydrochloride_10_MG_Oral_Capsule();
+				var bb_ = context.Operators.ConvertCodeToConcept(ba_);
+				var bc_ = context.Operators.Equivalent(Strength, bb_);
 
 				return (bc_ ?? false);
 			};
 			bool n_()
 			{
-				CqlCode bd_ = this.doxepin_hydrochloride_10_MG_ML_Oral_Solution();
-				CqlConcept be_ = context.Operators.ConvertCodeToConcept(bd_);
-				bool? bf_ = context.Operators.Equivalent(Strength, be_);
+				var bd_ = this.doxepin_hydrochloride_10_MG_ML_Oral_Solution();
+				var be_ = context.Operators.ConvertCodeToConcept(bd_);
+				var bf_ = context.Operators.Equivalent(Strength, be_);
 
 				return (bf_ ?? false);
 			};
 			bool o_()
 			{
-				CqlCode bg_ = this.doxepin_hydrochloride_25_MG_Oral_Capsule();
-				CqlConcept bh_ = context.Operators.ConvertCodeToConcept(bg_);
-				bool? bi_ = context.Operators.Equivalent(Strength, bh_);
+				var bg_ = this.doxepin_hydrochloride_25_MG_Oral_Capsule();
+				var bh_ = context.Operators.ConvertCodeToConcept(bg_);
+				var bi_ = context.Operators.Equivalent(Strength, bh_);
 
 				return (bi_ ?? false);
 			};
 			bool p_()
 			{
-				CqlCode bj_ = this.doxepin_hydrochloride_50_MG_Oral_Capsule();
-				CqlConcept bk_ = context.Operators.ConvertCodeToConcept(bj_);
-				bool? bl_ = context.Operators.Equivalent(Strength, bk_);
+				var bj_ = this.doxepin_hydrochloride_50_MG_Oral_Capsule();
+				var bk_ = context.Operators.ConvertCodeToConcept(bj_);
+				var bl_ = context.Operators.Equivalent(Strength, bk_);
 
 				return (bl_ ?? false);
 			};
 			bool q_()
 			{
-				CqlCode bm_ = this.doxepin_hydrochloride_75_MG_Oral_Capsule();
-				CqlConcept bn_ = context.Operators.ConvertCodeToConcept(bm_);
-				bool? bo_ = context.Operators.Equivalent(Strength, bn_);
+				var bm_ = this.doxepin_hydrochloride_75_MG_Oral_Capsule();
+				var bn_ = context.Operators.ConvertCodeToConcept(bm_);
+				var bo_ = context.Operators.Equivalent(Strength, bn_);
 
 				return (bo_ ?? false);
 			};
 			bool r_()
 			{
-				CqlCode bp_ = this.doxepin_hydrochloride_100_MG_Oral_Capsule();
-				CqlConcept bq_ = context.Operators.ConvertCodeToConcept(bp_);
-				bool? br_ = context.Operators.Equivalent(Strength, bq_);
+				var bp_ = this.doxepin_hydrochloride_100_MG_Oral_Capsule();
+				var bq_ = context.Operators.ConvertCodeToConcept(bp_);
+				var br_ = context.Operators.Equivalent(Strength, bq_);
 
 				return (br_ ?? false);
 			};
 			bool s_()
 			{
-				CqlCode bs_ = this.doxepin_hydrochloride_150_MG_Oral_Capsule();
-				CqlConcept bt_ = context.Operators.ConvertCodeToConcept(bs_);
-				bool? bu_ = context.Operators.Equivalent(Strength, bt_);
+				var bs_ = this.doxepin_hydrochloride_150_MG_Oral_Capsule();
+				var bt_ = context.Operators.ConvertCodeToConcept(bs_);
+				var bu_ = context.Operators.Equivalent(Strength, bt_);
 
 				return (bu_ ?? false);
 			};
 			if (b_())
 			{
-				CqlQuantity bv_ = context.Operators.Quantity(0.1m, "mg");
+				var bv_ = context.Operators.Quantity(0.1m, "mg");
 
 				return bv_;
 			}
 			else if (c_())
 			{
-				CqlQuantity bw_ = context.Operators.Quantity(0.25m, "mg");
+				var bw_ = context.Operators.Quantity(0.25m, "mg");
 
 				return bw_;
 			}
 			else if (d_())
 			{
-				CqlQuantity bx_ = context.Operators.Quantity(0.05m, "mg/mL");
+				var bx_ = context.Operators.Quantity(0.05m, "mg/mL");
 
 				return bx_;
 			}
 			else if (e_())
 			{
-				CqlQuantity by_ = context.Operators.Quantity(0.0625m, "mg");
+				var by_ = context.Operators.Quantity(0.0625m, "mg");
 
 				return by_;
 			}
 			else if (f_())
 			{
-				CqlQuantity bz_ = context.Operators.Quantity(0.1m, "mg/mL");
+				var bz_ = context.Operators.Quantity(0.1m, "mg/mL");
 
 				return bz_;
 			}
 			else if (g_())
 			{
-				CqlQuantity ca_ = context.Operators.Quantity(0.125m, "mg");
+				var ca_ = context.Operators.Quantity(0.125m, "mg");
 
 				return ca_;
 			}
 			else if (h_())
 			{
-				CqlQuantity cb_ = context.Operators.Quantity(0.1875m, "mg");
+				var cb_ = context.Operators.Quantity(0.1875m, "mg");
 
 				return cb_;
 			}
 			else if (i_())
 			{
-				CqlQuantity cc_ = context.Operators.Quantity(0.25m, "mg");
+				var cc_ = context.Operators.Quantity(0.25m, "mg");
 
 				return cc_;
 			}
 			else if (j_())
 			{
-				CqlQuantity cd_ = context.Operators.Quantity(0.25m, "mg/mL");
+				var cd_ = context.Operators.Quantity(0.25m, "mg/mL");
 
 				return cd_;
 			}
 			else if (k_())
 			{
-				CqlQuantity ce_ = context.Operators.Quantity(3m, "mg");
+				var ce_ = context.Operators.Quantity(3m, "mg");
 
 				return ce_;
 			}
 			else if (l_())
 			{
-				CqlQuantity cf_ = context.Operators.Quantity(6m, "mg");
+				var cf_ = context.Operators.Quantity(6m, "mg");
 
 				return cf_;
 			}
 			else if (m_())
 			{
-				CqlQuantity cg_ = context.Operators.Quantity(10m, "mg");
+				var cg_ = context.Operators.Quantity(10m, "mg");
 
 				return cg_;
 			}
 			else if (n_())
 			{
-				CqlQuantity ch_ = context.Operators.Quantity(10m, "mg/mL");
+				var ch_ = context.Operators.Quantity(10m, "mg/mL");
 
 				return ch_;
 			}
 			else if (o_())
 			{
-				CqlQuantity ci_ = context.Operators.Quantity(25m, "mg");
+				var ci_ = context.Operators.Quantity(25m, "mg");
 
 				return ci_;
 			}
 			else if (p_())
 			{
-				CqlQuantity cj_ = context.Operators.Quantity(50m, "mg");
+				var cj_ = context.Operators.Quantity(50m, "mg");
 
 				return cj_;
 			}
 			else if (q_())
 			{
-				CqlQuantity ck_ = context.Operators.Quantity(75m, "mg");
+				var ck_ = context.Operators.Quantity(75m, "mg");
 
 				return ck_;
 			}
 			else if (r_())
 			{
-				CqlQuantity cl_ = context.Operators.Quantity(100m, "mg");
+				var cl_ = context.Operators.Quantity(100m, "mg");
 
 				return cl_;
 			}
 			else if (s_())
 			{
-				CqlQuantity cm_ = context.Operators.Quantity(150m, "mg");
+				var cm_ = context.Operators.Quantity(150m, "mg");
 
 				return cm_;
 			}
@@ -1361,7 +1361,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
     [CqlDeclaration("Average Daily Dose")]
 	public CqlQuantity Average_Daily_Dose(MedicationRequest MedicationRequest)
 	{
-		MedicationRequest[] a_ = new MedicationRequest[]
+		var a_ = new MedicationRequest[]
 		{
 			MedicationRequest,
 		};
@@ -1371,29 +1371,29 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			{
 				bool f_()
 				{
-					decimal? g_ = this.MedicationRequestPeriodInDays(Order);
-					bool? h_ = context.Operators.Not((bool?)(g_ is null));
-					CqlConcept i_ = CQMCommon_2_0_000.getMedicationCode(Order);
-					CqlQuantity j_ = this.MedicationStrengthPerUnit(i_);
-					bool? k_ = context.Operators.Equal(j_?.unit, "mg");
-					CqlQuantity m_ = this.MedicationStrengthPerUnit(i_);
-					bool? n_ = context.Operators.Equal(m_?.unit, "mg/mL");
-					CqlQuantity o_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
-					bool? p_ = context.Operators.Equal(o_?.unit, "mL");
-					bool? q_ = context.Operators.And(n_, p_);
-					bool? r_ = context.Operators.Or(k_, q_);
-					bool? s_ = context.Operators.And(h_, r_);
+					var g_ = this.MedicationRequestPeriodInDays(Order);
+					var h_ = context.Operators.Not((bool?)(g_ is null));
+					var i_ = CQMCommon_2_0_000.getMedicationCode(Order);
+					var j_ = this.MedicationStrengthPerUnit(i_);
+					var k_ = context.Operators.Equal(j_?.unit, "mg");
+					var m_ = this.MedicationStrengthPerUnit(i_);
+					var n_ = context.Operators.Equal(m_?.unit, "mg/mL");
+					var o_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
+					var p_ = context.Operators.Equal(o_?.unit, "mL");
+					var q_ = context.Operators.And(n_, p_);
+					var r_ = context.Operators.Or(k_, q_);
+					var s_ = context.Operators.And(h_, r_);
 
 					return (s_ ?? false);
 				};
 				if (f_())
 				{
-					CqlQuantity t_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
-					CqlConcept u_ = CQMCommon_2_0_000.getMedicationCode(Order);
-					CqlQuantity v_ = this.MedicationStrengthPerUnit(u_);
-					CqlQuantity w_ = context.Operators.Multiply(t_, v_);
-					decimal? x_ = this.MedicationRequestPeriodInDays(Order);
-					CqlQuantity y_ = context.Operators.Divide(w_, new CqlQuantity(x_, "d"));
+					var t_ = FHIRHelpers_4_3_000.ToQuantity(Order?.DispenseRequest?.Quantity);
+					var u_ = CQMCommon_2_0_000.getMedicationCode(Order);
+					var v_ = this.MedicationStrengthPerUnit(u_);
+					var w_ = context.Operators.Multiply(t_, v_);
+					var x_ = this.MedicationRequestPeriodInDays(Order);
+					var y_ = context.Operators.Divide(w_, new CqlQuantity(x_, "d"));
 
 					return y_;
 				}
@@ -1405,61 +1405,61 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return e_();
 		};
-		IEnumerable<CqlQuantity> c_ = context.Operators.Select<MedicationRequest, CqlQuantity>(a_, b_);
-		CqlQuantity d_ = context.Operators.SingletonFrom<CqlQuantity>(c_);
+		var c_ = context.Operators.Select<MedicationRequest, CqlQuantity>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<CqlQuantity>(c_);
 
 		return d_;
 	}
 
 	private bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria_Value()
 	{
-		CqlValueSet a_ = this.Reserpine();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var a_ = this.Reserpine();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest ReserpineOrdered)
 		{
-			CqlQuantity ad_ = this.Average_Daily_Dose(ReserpineOrdered);
-			CqlQuantity ae_ = context.Operators.Quantity(0.1m, "mg/d");
-			bool? af_ = context.Operators.Greater(ad_, ae_);
+			var ad_ = this.Average_Daily_Dose(ReserpineOrdered);
+			var ae_ = context.Operators.Quantity(0.1m, "mg/d");
+			var af_ = context.Operators.Greater(ad_, ae_);
 
 			return af_;
 		};
-		IEnumerable<MedicationRequest> g_ = context.Operators.Where<MedicationRequest>(e_, f_);
-		IEnumerable<MedicationRequest> h_ = this.More_Than_One_Order(g_);
-		bool? i_ = context.Operators.Exists<MedicationRequest>(h_);
-		CqlValueSet j_ = this.Digoxin();
-		IEnumerable<MedicationRequest> k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
-		IEnumerable<MedicationRequest> m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
-		IEnumerable<MedicationRequest> n_ = context.Operators.ListUnion<MedicationRequest>(k_, m_);
+		var g_ = context.Operators.Where<MedicationRequest>(e_, f_);
+		var h_ = this.More_Than_One_Order(g_);
+		var i_ = context.Operators.Exists<MedicationRequest>(h_);
+		var j_ = this.Digoxin();
+		var k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
+		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
+		var n_ = context.Operators.ListUnion<MedicationRequest>(k_, m_);
 		bool? o_(MedicationRequest DigoxinOrdered)
 		{
-			CqlQuantity ag_ = this.Average_Daily_Dose(DigoxinOrdered);
-			CqlQuantity ah_ = context.Operators.Quantity(0.125m, "mg/d");
-			bool? ai_ = context.Operators.Greater(ag_, ah_);
+			var ag_ = this.Average_Daily_Dose(DigoxinOrdered);
+			var ah_ = context.Operators.Quantity(0.125m, "mg/d");
+			var ai_ = context.Operators.Greater(ag_, ah_);
 
 			return ai_;
 		};
-		IEnumerable<MedicationRequest> p_ = context.Operators.Where<MedicationRequest>(n_, o_);
-		IEnumerable<MedicationRequest> q_ = this.More_Than_One_Order(p_);
-		bool? r_ = context.Operators.Exists<MedicationRequest>(q_);
-		bool? s_ = context.Operators.Or(i_, r_);
-		CqlValueSet t_ = this.Doxepin();
-		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
-		IEnumerable<MedicationRequest> w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
-		IEnumerable<MedicationRequest> x_ = context.Operators.ListUnion<MedicationRequest>(u_, w_);
+		var p_ = context.Operators.Where<MedicationRequest>(n_, o_);
+		var q_ = this.More_Than_One_Order(p_);
+		var r_ = context.Operators.Exists<MedicationRequest>(q_);
+		var s_ = context.Operators.Or(i_, r_);
+		var t_ = this.Doxepin();
+		var u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
+		var w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
+		var x_ = context.Operators.ListUnion<MedicationRequest>(u_, w_);
 		bool? y_(MedicationRequest DoxepinOrdered)
 		{
-			CqlQuantity aj_ = this.Average_Daily_Dose(DoxepinOrdered);
-			CqlQuantity ak_ = context.Operators.Quantity(6m, "mg/d");
-			bool? al_ = context.Operators.Greater(aj_, ak_);
+			var aj_ = this.Average_Daily_Dose(DoxepinOrdered);
+			var ak_ = context.Operators.Quantity(6m, "mg/d");
+			var al_ = context.Operators.Greater(aj_, ak_);
 
 			return al_;
 		};
-		IEnumerable<MedicationRequest> z_ = context.Operators.Where<MedicationRequest>(x_, y_);
-		IEnumerable<MedicationRequest> aa_ = this.More_Than_One_Order(z_);
-		bool? ab_ = context.Operators.Exists<MedicationRequest>(aa_);
-		bool? ac_ = context.Operators.Or(s_, ab_);
+		var z_ = context.Operators.Where<MedicationRequest>(x_, y_);
+		var aa_ = this.More_Than_One_Order(z_);
+		var ab_ = context.Operators.Exists<MedicationRequest>(aa_);
+		var ac_ = context.Operators.Or(s_, ab_);
 
 		return ac_;
 	}
@@ -1470,12 +1470,12 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? Numerator_1_Value()
 	{
-		IEnumerable<MedicationRequest> a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days();
-		bool? b_ = context.Operators.Exists<MedicationRequest>(a_);
-		bool? c_ = this.Two_High_Risk_Medications_with_Prolonged_Duration();
-		bool? d_ = context.Operators.Or(b_, c_);
-		bool? e_ = this.High_Risk_Medications_with_Average_Daily_Dose_Criteria();
-		bool? f_ = context.Operators.Or(d_, e_);
+		var a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days();
+		var b_ = context.Operators.Exists<MedicationRequest>(a_);
+		var c_ = this.Two_High_Risk_Medications_with_Prolonged_Duration();
+		var d_ = context.Operators.Or(b_, c_);
+		var e_ = this.High_Risk_Medications_with_Average_Daily_Dose_Criteria();
+		var f_ = context.Operators.Or(d_, e_);
 
 		return f_;
 	}
@@ -1486,12 +1486,12 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? More_than_One_Antipsychotic_Order_Value()
 	{
-		CqlValueSet a_ = this.Antipsychotic();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(e_);
-		bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
+		var a_ = this.Antipsychotic();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var f_ = this.More_Than_One_Order(e_);
+		var g_ = context.Operators.Exists<MedicationRequest>(f_);
 
 		return g_;
 	}
@@ -1502,29 +1502,29 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private CqlDateTime Antipsychotic_Index_Prescription_Start_Date_Value()
 	{
-		CqlValueSet a_ = this.Antipsychotic();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_or_Completed_Medication_Request(e_);
+		var a_ = this.Antipsychotic();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var f_ = Status_1_6_000.Active_or_Completed_Medication_Request(e_);
 		bool? g_(MedicationRequest AntipsychoticMedication)
 		{
-			CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(AntipsychoticMedication?.AuthoredOnElement);
-			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
-			bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
+			var m_ = context.Operators.Convert<CqlDateTime>(AntipsychoticMedication?.AuthoredOnElement);
+			var n_ = this.Measurement_Period();
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
 
 			return o_;
 		};
-		IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		CqlDateTime i_(MedicationRequest AntipsychoticMedication)
 		{
-			CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(AntipsychoticMedication?.AuthoredOnElement);
+			var p_ = context.Operators.Convert<CqlDateTime>(AntipsychoticMedication?.AuthoredOnElement);
 
 			return p_;
 		};
-		IEnumerable<CqlDateTime> j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
-		IEnumerable<CqlDateTime> k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
-		CqlDateTime l_ = context.Operators.First<CqlDateTime>(k_);
+		var j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
+		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
+		var l_ = context.Operators.First<CqlDateTime>(k_);
 
 		return l_;
 	}
@@ -1535,12 +1535,12 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? More_than_One_Benzodiazepine_Order_Value()
 	{
-		CqlValueSet a_ = this.Benzodiazepine();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(e_);
-		bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
+		var a_ = this.Benzodiazepine();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var f_ = this.More_Than_One_Order(e_);
+		var g_ = context.Operators.Exists<MedicationRequest>(f_);
 
 		return g_;
 	}
@@ -1551,29 +1551,29 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private CqlDateTime Benzodiazepine_Index_Prescription_Start_Date_Value()
 	{
-		CqlValueSet a_ = this.Benzodiazepine();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_or_Completed_Medication_Request(e_);
+		var a_ = this.Benzodiazepine();
+		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var f_ = Status_1_6_000.Active_or_Completed_Medication_Request(e_);
 		bool? g_(MedicationRequest BenzodiazepineMedication)
 		{
-			CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(BenzodiazepineMedication?.AuthoredOnElement);
-			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
-			bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
+			var m_ = context.Operators.Convert<CqlDateTime>(BenzodiazepineMedication?.AuthoredOnElement);
+			var n_ = this.Measurement_Period();
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
 
 			return o_;
 		};
-		IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		CqlDateTime i_(MedicationRequest BenzodiazepineMedication)
 		{
-			CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(BenzodiazepineMedication?.AuthoredOnElement);
+			var p_ = context.Operators.Convert<CqlDateTime>(BenzodiazepineMedication?.AuthoredOnElement);
 
 			return p_;
 		};
-		IEnumerable<CqlDateTime> j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
-		IEnumerable<CqlDateTime> k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
-		CqlDateTime l_ = context.Operators.First<CqlDateTime>(k_);
+		var j_ = context.Operators.Select<MedicationRequest, CqlDateTime>(h_, i_);
+		var k_ = context.Operators.ListSort<CqlDateTime>(j_, System.ComponentModel.ListSortDirection.Ascending);
+		var l_ = context.Operators.First<CqlDateTime>(k_);
 
 		return l_;
 	}
@@ -1584,62 +1584,62 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? Numerator_2_Value()
 	{
-		bool? a_ = this.More_than_One_Antipsychotic_Order();
-		CqlValueSet b_ = this.Schizophrenia();
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
-		CqlValueSet d_ = this.Bipolar_Disorder();
-		IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
-		IEnumerable<Condition> f_ = context.Operators.ListUnion<Condition>(c_, e_);
+		var a_ = this.More_than_One_Antipsychotic_Order();
+		var b_ = this.Schizophrenia();
+		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
+		var d_ = this.Bipolar_Disorder();
+		var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+		var f_ = context.Operators.ListUnion<Condition>(c_, e_);
 		bool? g_(Condition AntipsychoticTreatedDiagnoses)
 		{
-			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToPrevalenceInterval(AntipsychoticTreatedDiagnoses);
-			CqlInterval<CqlDateTime> ah_ = this.Measurement_Period();
-			CqlDateTime ai_ = context.Operators.Start(ah_);
-			CqlQuantity aj_ = context.Operators.Quantity(1m, "year");
-			CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
-			CqlDateTime al_ = this.Antipsychotic_Index_Prescription_Start_Date();
-			CqlInterval<CqlDateTime> am_ = context.Operators.Interval(ak_, al_, true, true);
-			bool? an_ = context.Operators.Overlaps(ag_, am_, null);
+			var ag_ = QICoreCommon_2_0_000.ToPrevalenceInterval(AntipsychoticTreatedDiagnoses);
+			var ah_ = this.Measurement_Period();
+			var ai_ = context.Operators.Start(ah_);
+			var aj_ = context.Operators.Quantity(1m, "year");
+			var ak_ = context.Operators.Subtract(ai_, aj_);
+			var al_ = this.Antipsychotic_Index_Prescription_Start_Date();
+			var am_ = context.Operators.Interval(ak_, al_, true, true);
+			var an_ = context.Operators.Overlaps(ag_, am_, null);
 
 			return an_;
 		};
-		IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-		bool? i_ = context.Operators.Exists<Condition>(h_);
-		bool? j_ = context.Operators.Not(i_);
-		bool? k_ = context.Operators.And(a_, j_);
-		bool? l_ = this.More_than_One_Benzodiazepine_Order();
-		CqlValueSet m_ = this.Seizure_Disorder();
-		IEnumerable<Condition> n_ = context.Operators.RetrieveByValueSet<Condition>(m_, null);
-		CqlValueSet o_ = this.REM_Sleep_Behavior_Disorder();
-		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
-		IEnumerable<Condition> q_ = context.Operators.ListUnion<Condition>(n_, p_);
-		CqlValueSet r_ = this.Benzodiazepine_Withdrawal();
-		IEnumerable<Condition> s_ = context.Operators.RetrieveByValueSet<Condition>(r_, null);
-		CqlValueSet t_ = this.Alcohol_Withdrawal();
-		IEnumerable<Condition> u_ = context.Operators.RetrieveByValueSet<Condition>(t_, null);
-		IEnumerable<Condition> v_ = context.Operators.ListUnion<Condition>(s_, u_);
-		IEnumerable<Condition> w_ = context.Operators.ListUnion<Condition>(q_, v_);
-		CqlValueSet x_ = this.Generalized_Anxiety_Disorder();
-		IEnumerable<Condition> y_ = context.Operators.RetrieveByValueSet<Condition>(x_, null);
-		IEnumerable<Condition> z_ = context.Operators.ListUnion<Condition>(w_, y_);
+		var h_ = context.Operators.Where<Condition>(f_, g_);
+		var i_ = context.Operators.Exists<Condition>(h_);
+		var j_ = context.Operators.Not(i_);
+		var k_ = context.Operators.And(a_, j_);
+		var l_ = this.More_than_One_Benzodiazepine_Order();
+		var m_ = this.Seizure_Disorder();
+		var n_ = context.Operators.RetrieveByValueSet<Condition>(m_, null);
+		var o_ = this.REM_Sleep_Behavior_Disorder();
+		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
+		var q_ = context.Operators.ListUnion<Condition>(n_, p_);
+		var r_ = this.Benzodiazepine_Withdrawal();
+		var s_ = context.Operators.RetrieveByValueSet<Condition>(r_, null);
+		var t_ = this.Alcohol_Withdrawal();
+		var u_ = context.Operators.RetrieveByValueSet<Condition>(t_, null);
+		var v_ = context.Operators.ListUnion<Condition>(s_, u_);
+		var w_ = context.Operators.ListUnion<Condition>(q_, v_);
+		var x_ = this.Generalized_Anxiety_Disorder();
+		var y_ = context.Operators.RetrieveByValueSet<Condition>(x_, null);
+		var z_ = context.Operators.ListUnion<Condition>(w_, y_);
 		bool? aa_(Condition BenzodiazepineTreatedDiagnoses)
 		{
-			CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.ToPrevalenceInterval(BenzodiazepineTreatedDiagnoses);
-			CqlInterval<CqlDateTime> ap_ = this.Measurement_Period();
-			CqlDateTime aq_ = context.Operators.Start(ap_);
-			CqlQuantity ar_ = context.Operators.Quantity(1m, "year");
-			CqlDateTime as_ = context.Operators.Subtract(aq_, ar_);
-			CqlDateTime at_ = this.Benzodiazepine_Index_Prescription_Start_Date();
-			CqlInterval<CqlDateTime> au_ = context.Operators.Interval(as_, at_, true, true);
-			bool? av_ = context.Operators.Overlaps(ao_, au_, null);
+			var ao_ = QICoreCommon_2_0_000.ToPrevalenceInterval(BenzodiazepineTreatedDiagnoses);
+			var ap_ = this.Measurement_Period();
+			var aq_ = context.Operators.Start(ap_);
+			var ar_ = context.Operators.Quantity(1m, "year");
+			var as_ = context.Operators.Subtract(aq_, ar_);
+			var at_ = this.Benzodiazepine_Index_Prescription_Start_Date();
+			var au_ = context.Operators.Interval(as_, at_, true, true);
+			var av_ = context.Operators.Overlaps(ao_, au_, null);
 
 			return av_;
 		};
-		IEnumerable<Condition> ab_ = context.Operators.Where<Condition>(z_, aa_);
-		bool? ac_ = context.Operators.Exists<Condition>(ab_);
-		bool? ad_ = context.Operators.Not(ac_);
-		bool? ae_ = context.Operators.And(l_, ad_);
-		bool? af_ = context.Operators.Or(k_, ae_);
+		var ab_ = context.Operators.Where<Condition>(z_, aa_);
+		var ac_ = context.Operators.Exists<Condition>(ab_);
+		var ad_ = context.Operators.Not(ac_);
+		var ae_ = context.Operators.And(l_, ad_);
+		var af_ = context.Operators.Or(k_, ae_);
 
 		return af_;
 	}
@@ -1650,11 +1650,11 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private bool? Numerator_3_Value()
 	{
-		bool? a_ = this.Numerator_2();
-		bool? b_ = this.Numerator_1();
-		bool? d_ = context.Operators.Not(a_);
-		bool? e_ = context.Operators.And(b_, d_);
-		bool? f_ = context.Operators.Or(a_, e_);
+		var a_ = this.Numerator_2();
+		var b_ = this.Numerator_1();
+		var d_ = context.Operators.Not(a_);
+		var e_ = context.Operators.And(b_, d_);
+		var f_ = context.Operators.Or(a_, e_);
 
 		return f_;
 	}
@@ -1665,7 +1665,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
-		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -1676,7 +1676,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -1687,7 +1687,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
-		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -1698,7 +1698,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}

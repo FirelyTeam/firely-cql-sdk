@@ -68,7 +68,7 @@ public class NCQAHospice_1_0_0
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		object a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
+		var a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
 
 		return (CqlInterval<CqlDateTime>)a_;
 	}
@@ -79,8 +79,8 @@ public class NCQAHospice_1_0_0
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -91,33 +91,33 @@ public class NCQAHospice_1_0_0
 
 	private bool? Hospice_Intervention_or_Encounter_Value()
 	{
-		CqlValueSet a_ = this.Hospice_Intervention();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
+		var a_ = this.Hospice_Intervention();
+		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		var c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
 		bool? d_(Procedure HospiceInt)
 		{
-			CqlInterval<CqlDateTime> n_ = NCQAFHIRBase_1_0_0.Normalize_Interval(HospiceInt?.Performed);
-			CqlInterval<CqlDateTime> o_ = this.Measurement_Period();
-			bool? p_ = context.Operators.Overlaps(n_, o_, null);
+			var n_ = NCQAFHIRBase_1_0_0.Normalize_Interval(HospiceInt?.Performed);
+			var o_ = this.Measurement_Period();
+			var p_ = context.Operators.Overlaps(n_, o_, null);
 
 			return p_;
 		};
-		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
-		bool? f_ = context.Operators.Exists<Procedure>(e_);
-		CqlValueSet g_ = this.Hospice_Encounter();
-		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
-		IEnumerable<Encounter> i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
+		var g_ = this.Hospice_Encounter();
+		var h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
+		var i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
 		bool? j_(Encounter HospiceEnc)
 		{
-			CqlInterval<CqlDateTime> q_ = NCQAFHIRBase_1_0_0.Normalize_Interval((HospiceEnc?.Period as object));
-			CqlInterval<CqlDateTime> r_ = this.Measurement_Period();
-			bool? s_ = context.Operators.Overlaps(q_, r_, null);
+			var q_ = NCQAFHIRBase_1_0_0.Normalize_Interval((HospiceEnc?.Period as object));
+			var r_ = this.Measurement_Period();
+			var s_ = context.Operators.Overlaps(q_, r_, null);
 
 			return s_;
 		};
-		IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
-		bool? l_ = context.Operators.Exists<Encounter>(k_);
-		bool? m_ = context.Operators.Or(f_, l_);
+		var k_ = context.Operators.Where<Encounter>(i_, j_);
+		var l_ = context.Operators.Exists<Encounter>(k_);
+		var m_ = context.Operators.Or(f_, l_);
 
 		return m_;
 	}

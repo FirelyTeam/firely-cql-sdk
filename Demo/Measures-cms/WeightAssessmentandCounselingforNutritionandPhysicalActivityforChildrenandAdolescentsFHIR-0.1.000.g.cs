@@ -359,7 +359,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlCode[] UCUM_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("[in_i]", "http://unitsofmeasure.org", null, null),
 			new CqlCode("[lb_av]", "http://unitsofmeasure.org", null, null),
@@ -377,7 +377,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 			new CqlCode("8302-2", "http://loinc.org", null, null),
@@ -394,7 +394,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 			new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
@@ -409,10 +409,10 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-		object d_ = context.ResolveParameter("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR-0.1.000", "Measurement Period", c_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -423,8 +423,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -435,7 +435,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
-		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -446,7 +446,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -457,7 +457,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
-		Tuple_DMgHTLENEHBHWJISQgKZGZVMB a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -468,7 +468,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlCode SDE_Sex_Value()
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -479,37 +479,37 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
-		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		CqlValueSet c_ = this.Preventive_Care_Services_Individual_Counseling();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		IEnumerable<Encounter> e_ = context.Operators.ListUnion<Encounter>(b_, d_);
-		CqlValueSet f_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		CqlValueSet h_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		IEnumerable<Encounter> j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(e_, j_);
-		CqlValueSet l_ = this.Preventive_Care_Services___Group_Counseling();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		CqlValueSet n_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		IEnumerable<Encounter> p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		IEnumerable<Encounter> q_ = context.Operators.ListUnion<Encounter>(k_, p_);
-		CqlValueSet r_ = this.Telephone_Visits();
-		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
-		IEnumerable<Encounter> t_ = context.Operators.ListUnion<Encounter>(q_, s_);
-		IEnumerable<Encounter> u_ = Status_1_6_000.Finished_Encounter(t_);
+		var a_ = this.Office_Visit();
+		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = this.Preventive_Care_Services_Individual_Counseling();
+		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var f_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
+		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		var h_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
+		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var l_ = this.Preventive_Care_Services___Group_Counseling();
+		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		var n_ = this.Home_Healthcare_Services();
+		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
+		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var r_ = this.Telephone_Visits();
+		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		var t_ = context.Operators.ListUnion<Encounter>(q_, s_);
+		var u_ = Status_1_6_000.Finished_Encounter(t_);
 		bool? v_(Encounter ValidEncounters)
 		{
-			CqlInterval<CqlDateTime> x_ = this.Measurement_Period();
-			CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.ToInterval((y_ as object));
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, null);
+			var x_ = this.Measurement_Period();
+			var y_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
+			var z_ = QICoreCommon_2_0_000.ToInterval((y_ as object));
+			var aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, null);
 
 			return aa_;
 		};
-		IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
+		var w_ = context.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}
@@ -520,17 +520,17 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Initial_Population_Value()
 	{
-		Patient a_ = this.Patient();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
-		CqlDateTime d_ = context.Operators.End(c_);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		CqlInterval<int?> g_ = context.Operators.Interval(3, 17, true, true);
-		bool? h_ = context.Operators.In<int?>(f_, g_, null);
-		IEnumerable<Encounter> i_ = this.Qualifying_Encounter();
-		bool? j_ = context.Operators.Exists<Encounter>(i_);
-		bool? k_ = context.Operators.And(h_, j_);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.End(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(3, 17, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
+		var i_ = this.Qualifying_Encounter();
+		var j_ = context.Operators.Exists<Encounter>(i_);
+		var k_ = context.Operators.And(h_, j_);
 
 		return k_;
 	}
@@ -541,7 +541,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Denominator_Value()
 	{
-		bool? a_ = this.Initial_Population();
+		var a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -552,18 +552,18 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private IEnumerable<Condition> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period_Value()
 	{
-		CqlValueSet a_ = this.Pregnancy();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
+		var a_ = this.Pregnancy();
+		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition Pregnancy)
 		{
-			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Pregnancy);
-			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			bool? h_ = context.Operators.Overlaps(f_, g_, null);
+			var f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Pregnancy);
+			var g_ = this.Measurement_Period();
+			var h_ = context.Operators.Overlaps(f_, g_, null);
 
 			return h_;
 		};
-		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+		var e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -574,10 +574,10 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
-		IEnumerable<Condition> b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period();
-		bool? c_ = context.Operators.Exists<Condition>(b_);
-		bool? d_ = context.Operators.Or(a_, c_);
+		var a_ = Hospice_6_9_000.Has_Hospice_Services();
+		var b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period();
+		var c_ = context.Operators.Exists<Condition>(b_);
+		var d_ = context.Operators.Or(a_, c_);
 
 		return d_;
 	}
@@ -588,22 +588,22 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private IEnumerable<Observation> BMI_Percentile_in_Measurement_Period_Value()
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
-		IEnumerable<Observation> b_ = Status_1_6_000.BMI(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+		var b_ = Status_1_6_000.BMI(a_);
 		bool? c_(Observation BMIPercentile)
 		{
-			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			object f_ = FHIRHelpers_4_3_000.ToValue(BMIPercentile?.Effective);
-			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
-			Quantity i_ = context.Operators.Convert<Quantity>(BMIPercentile?.Value);
-			CqlQuantity j_ = FHIRHelpers_4_3_000.ToQuantity(i_);
-			bool? k_ = context.Operators.Not((bool?)(j_ is null));
-			bool? l_ = context.Operators.And(h_, k_);
+			var e_ = this.Measurement_Period();
+			var f_ = FHIRHelpers_4_3_000.ToValue(BMIPercentile?.Effective);
+			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
+			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
+			var i_ = context.Operators.Convert<Quantity>(BMIPercentile?.Value);
+			var j_ = FHIRHelpers_4_3_000.ToQuantity(i_);
+			var k_ = context.Operators.Not((bool?)(j_ is null));
+			var l_ = context.Operators.And(h_, k_);
 
 			return l_;
 		};
-		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -614,22 +614,22 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private IEnumerable<Observation> Height_in_Measurement_Period_Value()
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
-		IEnumerable<Observation> b_ = Status_1_6_000.BodyHeight(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+		var b_ = Status_1_6_000.BodyHeight(a_);
 		bool? c_(Observation Height)
 		{
-			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			object f_ = FHIRHelpers_4_3_000.ToValue(Height?.Effective);
-			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
-			Quantity i_ = context.Operators.Convert<Quantity>(Height?.Value);
-			CqlQuantity j_ = FHIRHelpers_4_3_000.ToQuantity(i_);
-			bool? k_ = context.Operators.Not((bool?)(j_ is null));
-			bool? l_ = context.Operators.And(h_, k_);
+			var e_ = this.Measurement_Period();
+			var f_ = FHIRHelpers_4_3_000.ToValue(Height?.Effective);
+			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
+			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
+			var i_ = context.Operators.Convert<Quantity>(Height?.Value);
+			var j_ = FHIRHelpers_4_3_000.ToQuantity(i_);
+			var k_ = context.Operators.Not((bool?)(j_ is null));
+			var l_ = context.Operators.And(h_, k_);
 
 			return l_;
 		};
-		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -640,22 +640,22 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private IEnumerable<Observation> Weight_in_Measurement_Period_Value()
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
-		IEnumerable<Observation> b_ = Status_1_6_000.BodyWeight(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+		var b_ = Status_1_6_000.BodyWeight(a_);
 		bool? c_(Observation Weight)
 		{
-			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			object f_ = FHIRHelpers_4_3_000.ToValue(Weight?.Effective);
-			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
-			Quantity i_ = context.Operators.Convert<Quantity>(Weight?.Value);
-			CqlQuantity j_ = FHIRHelpers_4_3_000.ToQuantity(i_);
-			bool? k_ = context.Operators.Not((bool?)(j_ is null));
-			bool? l_ = context.Operators.And(h_, k_);
+			var e_ = this.Measurement_Period();
+			var f_ = FHIRHelpers_4_3_000.ToValue(Weight?.Effective);
+			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
+			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
+			var i_ = context.Operators.Convert<Quantity>(Weight?.Value);
+			var j_ = FHIRHelpers_4_3_000.ToQuantity(i_);
+			var k_ = context.Operators.Not((bool?)(j_ is null));
+			var l_ = context.Operators.And(h_, k_);
 
 			return l_;
 		};
-		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -666,14 +666,14 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Numerator_1_Value()
 	{
-		IEnumerable<Observation> a_ = this.BMI_Percentile_in_Measurement_Period();
-		bool? b_ = context.Operators.Exists<Observation>(a_);
-		IEnumerable<Observation> c_ = this.Height_in_Measurement_Period();
-		bool? d_ = context.Operators.Exists<Observation>(c_);
-		bool? e_ = context.Operators.And(b_, d_);
-		IEnumerable<Observation> f_ = this.Weight_in_Measurement_Period();
-		bool? g_ = context.Operators.Exists<Observation>(f_);
-		bool? h_ = context.Operators.And(e_, g_);
+		var a_ = this.BMI_Percentile_in_Measurement_Period();
+		var b_ = context.Operators.Exists<Observation>(a_);
+		var c_ = this.Height_in_Measurement_Period();
+		var d_ = context.Operators.Exists<Observation>(c_);
+		var e_ = context.Operators.And(b_, d_);
+		var f_ = this.Weight_in_Measurement_Period();
+		var g_ = context.Operators.Exists<Observation>(f_);
+		var h_ = context.Operators.And(e_, g_);
 
 		return h_;
 	}
@@ -684,20 +684,20 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Numerator_2_Value()
 	{
-		CqlValueSet a_ = this.Counseling_for_Nutrition();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
+		var a_ = this.Counseling_for_Nutrition();
+		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		var c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure NutritionCounseling)
 		{
-			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			object h_ = FHIRHelpers_4_3_000.ToValue(NutritionCounseling?.Performed);
-			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToInterval(h_);
-			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
+			var g_ = this.Measurement_Period();
+			var h_ = FHIRHelpers_4_3_000.ToValue(NutritionCounseling?.Performed);
+			var i_ = QICoreCommon_2_0_000.ToInterval(h_);
+			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
 
 			return j_;
 		};
-		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
-		bool? f_ = context.Operators.Exists<Procedure>(e_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -708,20 +708,20 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Numerator_3_Value()
 	{
-		CqlValueSet a_ = this.Counseling_for_Physical_Activity();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
+		var a_ = this.Counseling_for_Physical_Activity();
+		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		var c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure ActivityCounseling)
 		{
-			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			object h_ = FHIRHelpers_4_3_000.ToValue(ActivityCounseling?.Performed);
-			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToInterval(h_);
-			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
+			var g_ = this.Measurement_Period();
+			var h_ = FHIRHelpers_4_3_000.ToValue(ActivityCounseling?.Performed);
+			var i_ = QICoreCommon_2_0_000.ToInterval(h_);
+			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
 
 			return j_;
 		};
-		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
-		bool? f_ = context.Operators.Exists<Procedure>(e_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -732,14 +732,14 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Stratifaction_1_Value()
 	{
-		Patient a_ = this.Patient();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
-		CqlDateTime d_ = context.Operators.End(c_);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		CqlInterval<int?> g_ = context.Operators.Interval(3, 11, true, true);
-		bool? h_ = context.Operators.In<int?>(f_, g_, null);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.End(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(3, 11, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -750,14 +750,14 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private bool? Stratifaction_2_Value()
 	{
-		Patient a_ = this.Patient();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		CqlInterval<CqlDateTime> c_ = this.Measurement_Period();
-		CqlDateTime d_ = context.Operators.End(c_);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		CqlInterval<int?> g_ = context.Operators.Interval(12, 17, true, true);
-		bool? h_ = context.Operators.In<int?>(f_, g_, null);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.End(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(12, 17, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}

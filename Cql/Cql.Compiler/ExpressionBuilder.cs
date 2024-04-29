@@ -448,7 +448,7 @@ namespace Hl7.Cql.Compiler
                 Split e => [e.stringToSplit, e.separator],
                 Substring e => [e.stringToSub, e.startIndex, e.length],
                 Time e => [e.hour, e.minute, e.second, e.millisecond],
-                _ => throw this.NewExpressionBuildingException($"Gannot get arguments for element {element.GetType().FullName}.")
+                _ => throw this.NewExpressionBuildingException($"Cannot get arguments for element {element.GetType().FullName}.")
                 //@formatter:on
             };
             return args;
