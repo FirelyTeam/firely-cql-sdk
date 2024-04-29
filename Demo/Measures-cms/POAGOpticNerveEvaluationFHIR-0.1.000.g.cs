@@ -425,9 +425,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		{
 			bool? r_(Extension @this)
 			{
-				bool? aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				FhirUri aa_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+				bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return aa_;
+				return ac_;
 			};
 			IEnumerable<Extension> s_ = context.Operators.Where<Extension>(((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
@@ -481,9 +483,11 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		{
 			bool? r_(Extension @this)
 			{
-				bool? aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				FhirUri aa_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+				bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return aa_;
+				return ac_;
 			};
 			IEnumerable<Extension> s_ = context.Operators.Where<Extension>(((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)

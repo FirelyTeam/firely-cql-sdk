@@ -13,6 +13,7 @@ partial class LibraryExpressionBuilderContext
 {
     #region Definitions
 
+    /// <inheritdoc />
     public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
 
     private void AddLibraryDefinitionsFromIncludes()
@@ -68,6 +69,7 @@ partial class LibraryExpressionBuilderContext
 
     private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
+    /// <inheritdoc />
     public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
         _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
 
@@ -130,6 +132,7 @@ partial class LibraryExpressionBuilderContext
         }
     }
 
+    /// <inheritdoc />
     public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
     {
         var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);

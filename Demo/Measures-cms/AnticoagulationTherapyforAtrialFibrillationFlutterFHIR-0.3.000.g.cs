@@ -230,16 +230,17 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
-				bool? q_ = context.Operators.Equal(AtrialAblationProcedure?.StatusElement?.Value, "completed");
-				object r_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationProcedure?.Performed);
-				CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.toInterval(r_);
-				CqlDateTime t_ = context.Operators.Start(s_);
-				CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				CqlDateTime v_ = context.Operators.Start(u_);
-				bool? w_ = context.Operators.Before(t_, v_, null);
-				bool? x_ = context.Operators.And(q_, w_);
+				string q_ = context.Operators.Convert<string>(AtrialAblationProcedure?.StatusElement?.Value);
+				bool? r_ = context.Operators.Equal(q_, "completed");
+				object s_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationProcedure?.Performed);
+				CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
+				CqlDateTime u_ = context.Operators.Start(t_);
+				CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				CqlDateTime w_ = context.Operators.Start(v_);
+				bool? x_ = context.Operators.Before(u_, w_, null);
+				bool? y_ = context.Operators.And(r_, x_);
 
-				return x_;
+				return y_;
 			};
 			IEnumerable<Procedure> o_ = context.Operators.Where<Procedure>(m_, n_);
 			bool? p_ = context.Operators.Exists<Procedure>(o_);
@@ -249,110 +250,110 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter IschemicStrokeEncounter)
 		{
-			CqlValueSet y_ = this.History_of_Atrial_Ablation();
-			IEnumerable<Condition> z_ = context.Operators.RetrieveByValueSet<Condition>(y_, null);
-			bool? aa_(Condition AtrialAblationDiagnosis)
+			CqlValueSet z_ = this.History_of_Atrial_Ablation();
+			IEnumerable<Condition> aa_ = context.Operators.RetrieveByValueSet<Condition>(z_, null);
+			bool? ab_(Condition AtrialAblationDiagnosis)
 			{
-				CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(AtrialAblationDiagnosis?.VerificationStatus);
-				bool? af_ = context.Operators.Not((bool?)(ae_ is null));
-				CqlCode ah_ = QICoreCommon_2_0_000.confirmed();
-				CqlConcept ai_ = context.Operators.ConvertCodeToConcept(ah_);
-				bool? aj_ = context.Operators.Equivalent(ae_, ai_);
-				bool? ak_ = context.Operators.And(af_, aj_);
-				object al_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationDiagnosis?.Onset);
-				CqlInterval<CqlDateTime> am_ = QICoreCommon_2_0_000.toInterval(al_);
-				CqlDateTime an_ = context.Operators.Start(am_);
-				CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				CqlDateTime ap_ = context.Operators.Start(ao_);
-				bool? aq_ = context.Operators.Before(an_, ap_, null);
-				bool? ar_ = context.Operators.And(ak_, aq_);
+				CqlConcept af_ = FHIRHelpers_4_3_000.ToConcept(AtrialAblationDiagnosis?.VerificationStatus);
+				bool? ag_ = context.Operators.Not((bool?)(af_ is null));
+				CqlCode ai_ = QICoreCommon_2_0_000.confirmed();
+				CqlConcept aj_ = context.Operators.ConvertCodeToConcept(ai_);
+				bool? ak_ = context.Operators.Equivalent(af_, aj_);
+				bool? al_ = context.Operators.And(ag_, ak_);
+				object am_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationDiagnosis?.Onset);
+				CqlInterval<CqlDateTime> an_ = QICoreCommon_2_0_000.toInterval(am_);
+				CqlDateTime ao_ = context.Operators.Start(an_);
+				CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				CqlDateTime aq_ = context.Operators.Start(ap_);
+				bool? ar_ = context.Operators.Before(ao_, aq_, null);
+				bool? as_ = context.Operators.And(al_, ar_);
 
-				return ar_;
+				return as_;
 			};
-			IEnumerable<Condition> ab_ = context.Operators.Where<Condition>(z_, aa_);
-			Encounter ac_(Condition AtrialAblationDiagnosis) => 
+			IEnumerable<Condition> ac_ = context.Operators.Where<Condition>(aa_, ab_);
+			Encounter ad_(Condition AtrialAblationDiagnosis) => 
 				IschemicStrokeEncounter;
-			IEnumerable<Encounter> ad_ = context.Operators.Select<Condition, Encounter>(ab_, ac_);
+			IEnumerable<Encounter> ae_ = context.Operators.Select<Condition, Encounter>(ac_, ad_);
 
-			return ad_;
+			return ae_;
 		};
 		IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
 		IEnumerable<Encounter> g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
-			CqlValueSet as_ = this.History_of_Atrial_Ablation();
-			IEnumerable<Observation> at_ = context.Operators.RetrieveByValueSet<Observation>(as_, null);
-			bool? au_(Observation AtrialAblationObservation)
+			CqlValueSet at_ = this.History_of_Atrial_Ablation();
+			IEnumerable<Observation> au_ = context.Operators.RetrieveByValueSet<Observation>(at_, null);
+			bool? av_(Observation AtrialAblationObservation)
 			{
-				Code<ObservationStatus> ay_ = context.Operators.Convert<Code<ObservationStatus>>(AtrialAblationObservation?.StatusElement?.Value);
-				string az_ = context.Operators.Convert<string>(ay_);
-				string[] ba_ = new string[]
+				Code<ObservationStatus> az_ = context.Operators.Convert<Code<ObservationStatus>>(AtrialAblationObservation?.StatusElement?.Value);
+				string ba_ = context.Operators.Convert<string>(az_);
+				string[] bb_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				bool? bb_ = context.Operators.In<string>(az_, (ba_ as IEnumerable<string>));
-				object bc_()
+				bool? bc_ = context.Operators.In<string>(ba_, (bb_ as IEnumerable<string>));
+				object bd_()
 				{
-					bool bi_()
-					{
-						object bl_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						bool bm_ = bl_ is CqlDateTime;
-
-						return bm_;
-					};
 					bool bj_()
 					{
-						object bn_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						bool bo_ = bn_ is CqlInterval<CqlDateTime>;
+						object bm_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						bool bn_ = bm_ is CqlDateTime;
 
-						return bo_;
+						return bn_;
 					};
 					bool bk_()
 					{
-						object bp_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						bool bq_ = bp_ is CqlDateTime;
+						object bo_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						bool bp_ = bo_ is CqlInterval<CqlDateTime>;
 
-						return bq_;
+						return bp_;
 					};
-					if (bi_())
+					bool bl_()
 					{
-						object br_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						object bq_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						bool br_ = bq_ is CqlDateTime;
 
-						return ((br_ as CqlDateTime) as object);
-					}
-					else if (bj_())
+						return br_;
+					};
+					if (bj_())
 					{
 						object bs_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bs_ as CqlInterval<CqlDateTime>) as object);
+						return ((bs_ as CqlDateTime) as object);
 					}
 					else if (bk_())
 					{
 						object bt_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bt_ as CqlDateTime) as object);
+						return ((bt_ as CqlInterval<CqlDateTime>) as object);
+					}
+					else if (bl_())
+					{
+						object bu_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+
+						return ((bu_ as CqlDateTime) as object);
 					}
 					else
 					{
 						return null;
 					};
 				};
-				CqlDateTime bd_ = QICoreCommon_2_0_000.earliest(bc_());
-				CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				CqlDateTime bf_ = context.Operators.End(be_);
-				bool? bg_ = context.Operators.SameOrBefore(bd_, bf_, null);
-				bool? bh_ = context.Operators.And(bb_, bg_);
+				CqlDateTime be_ = QICoreCommon_2_0_000.earliest(bd_());
+				CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				CqlDateTime bg_ = context.Operators.End(bf_);
+				bool? bh_ = context.Operators.SameOrBefore(be_, bg_, null);
+				bool? bi_ = context.Operators.And(bc_, bh_);
 
-				return bh_;
+				return bi_;
 			};
-			IEnumerable<Observation> av_ = context.Operators.Where<Observation>(at_, au_);
-			Encounter aw_(Observation AtrialAblationObservation) => 
+			IEnumerable<Observation> aw_ = context.Operators.Where<Observation>(au_, av_);
+			Encounter ax_(Observation AtrialAblationObservation) => 
 				IschemicStrokeEncounter;
-			IEnumerable<Encounter> ax_ = context.Operators.Select<Observation, Encounter>(av_, aw_);
+			IEnumerable<Encounter> ay_ = context.Operators.Select<Observation, Encounter>(aw_, ax_);
 
-			return ax_;
+			return ay_;
 		};
 		IEnumerable<Encounter> j_ = context.Operators.SelectMany<Encounter, Encounter>(a_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.ListUnion<Encounter>(g_, j_);

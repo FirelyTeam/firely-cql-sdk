@@ -485,9 +485,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Immunization I)
 		{
-			bool? c_ = context.Operators.Equivalent(I?.StatusElement?.Value, "completed");
+			string c_ = context.Operators.Convert<string>(I?.StatusElement?.Value);
+			bool? d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
@@ -499,9 +500,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Immunization I)
 		{
-			bool? c_ = context.Operators.Equivalent(I?.StatusElement?.Value, "completed");
+			string c_ = context.Operators.Convert<string>(I?.StatusElement?.Value);
+			bool? d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
@@ -513,9 +515,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			bool? c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
+			string c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
+			bool? d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
@@ -527,9 +530,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			bool? c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
+			string c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
+			bool? d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
@@ -541,9 +545,10 @@ public class Status_1_6_000
 	{
 		bool? a_(Procedure P)
 		{
-			bool? c_ = context.Operators.Equivalent(P?.StatusElement?.Value, "completed");
+			string c_ = context.Operators.Convert<string>(P?.StatusElement?.Value);
+			bool? d_ = context.Operators.Equivalent(c_, "completed");
 
-			return c_;
+			return d_;
 		};
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
@@ -635,11 +640,13 @@ public class Status_1_6_000
 	{
 		bool? a_(MedicationRequest M)
 		{
-			bool? c_ = context.Operators.Equal(M?.StatusElement?.Value, "active");
-			bool? d_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
-			bool? e_ = context.Operators.And(c_, d_);
+			string c_ = context.Operators.Convert<string>(M?.StatusElement?.Value);
+			bool? d_ = context.Operators.Equal(c_, "active");
+			string e_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			bool? f_ = context.Operators.Equal(e_, "order");
+			bool? g_ = context.Operators.And(d_, f_);
 
-			return e_;
+			return g_;
 		};
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
@@ -651,11 +658,13 @@ public class Status_1_6_000
 	{
 		bool? a_(MedicationRequest M)
 		{
-			bool? c_ = context.Operators.Equal(M?.StatusElement?.Value, "active");
-			bool? d_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
-			bool? e_ = context.Operators.And(c_, d_);
+			string c_ = context.Operators.Convert<string>(M?.StatusElement?.Value);
+			bool? d_ = context.Operators.Equal(c_, "active");
+			string e_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			bool? f_ = context.Operators.Equal(e_, "order");
+			bool? g_ = context.Operators.And(d_, f_);
 
-			return e_;
+			return g_;
 		};
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
@@ -718,10 +727,11 @@ public class Status_1_6_000
 				"completed",
 			};
 			bool? e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
-			bool? f_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
-			bool? g_ = context.Operators.And(e_, f_);
+			string f_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			bool? g_ = context.Operators.Equal(f_, "order");
+			bool? h_ = context.Operators.And(e_, g_);
 
-			return g_;
+			return h_;
 		};
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
@@ -740,10 +750,11 @@ public class Status_1_6_000
 				"completed",
 			};
 			bool? e_ = context.Operators.In<string>(c_, (d_ as IEnumerable<string>));
-			bool? f_ = context.Operators.Equal(M?.IntentElement?.Value, "order");
-			bool? g_ = context.Operators.And(e_, f_);
+			string f_ = context.Operators.Convert<string>(M?.IntentElement?.Value);
+			bool? g_ = context.Operators.Equal(f_, "order");
+			bool? h_ = context.Operators.And(e_, g_);
 
-			return g_;
+			return h_;
 		};
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 

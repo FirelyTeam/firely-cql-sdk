@@ -739,27 +739,28 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		CqlInterval<int?> g_ = context.Operators.Interval(16, 24, true, true);
 		bool? h_ = context.Operators.In<int?>(f_, g_, null);
-		bool? j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
-		bool? k_ = context.Operators.And(h_, j_);
-		IEnumerable<Encounter> l_ = this.Qualifying_Encounters();
-		bool? m_ = context.Operators.Exists<Encounter>(l_);
-		bool? n_ = context.Operators.And(k_, m_);
-		bool? o_ = this.Has_Assessments_Identifying_Sexual_Activity();
-		bool? p_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
-		bool? q_ = context.Operators.Or(o_, p_);
-		bool? r_ = this.Has_Active_Contraceptive_Medications();
-		bool? s_ = context.Operators.Or(q_, r_);
-		bool? t_ = this.Has_Ordered_Contraceptive_Medications();
-		bool? u_ = context.Operators.Or(s_, t_);
-		bool? v_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
-		bool? w_ = context.Operators.Or(u_, v_);
-		bool? x_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
-		bool? y_ = context.Operators.Or(w_, x_);
-		bool? z_ = this.Has_Procedures_Identifying_Sexual_Activity();
-		bool? aa_ = context.Operators.Or(y_, z_);
-		bool? ab_ = context.Operators.And(n_, aa_);
+		string j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		bool? k_ = context.Operators.Equal(j_, "female");
+		bool? l_ = context.Operators.And(h_, k_);
+		IEnumerable<Encounter> m_ = this.Qualifying_Encounters();
+		bool? n_ = context.Operators.Exists<Encounter>(m_);
+		bool? o_ = context.Operators.And(l_, n_);
+		bool? p_ = this.Has_Assessments_Identifying_Sexual_Activity();
+		bool? q_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
+		bool? r_ = context.Operators.Or(p_, q_);
+		bool? s_ = this.Has_Active_Contraceptive_Medications();
+		bool? t_ = context.Operators.Or(r_, s_);
+		bool? u_ = this.Has_Ordered_Contraceptive_Medications();
+		bool? v_ = context.Operators.Or(t_, u_);
+		bool? w_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
+		bool? x_ = context.Operators.Or(v_, w_);
+		bool? y_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
+		bool? z_ = context.Operators.Or(x_, y_);
+		bool? aa_ = this.Has_Procedures_Identifying_Sexual_Activity();
+		bool? ab_ = context.Operators.Or(z_, aa_);
+		bool? ac_ = context.Operators.And(o_, ab_);
 
-		return ab_;
+		return ac_;
 	}
 
     [CqlDeclaration("Initial Population")]

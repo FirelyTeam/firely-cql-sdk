@@ -308,9 +308,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					bool? u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirUri u_ = context.Operators.Convert<FhirUri>(@this?.Url);
+					string v_ = FHIRHelpers_4_3_000.ToString(u_);
+					bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return u_;
+					return w_;
 				};
 				IEnumerable<Extension> l_ = context.Operators.Where<Extension>(((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
@@ -420,9 +422,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					bool? u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirUri u_ = context.Operators.Convert<FhirUri>(@this?.Url);
+					string v_ = FHIRHelpers_4_3_000.ToString(u_);
+					bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return u_;
+					return w_;
 				};
 				IEnumerable<Extension> l_ = context.Operators.Where<Extension>(((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
@@ -575,9 +579,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					bool? u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirUri u_ = context.Operators.Convert<FhirUri>(@this?.Url);
+					string v_ = FHIRHelpers_4_3_000.ToString(u_);
+					bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return u_;
+					return w_;
 				};
 				IEnumerable<Extension> l_ = context.Operators.Where<Extension>(((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
@@ -704,9 +710,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? j_ = context.Operators.ConceptInValueSet(h_, i_);
 				bool? k_(Extension @this)
 				{
-					bool? u_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirUri u_ = context.Operators.Convert<FhirUri>(@this?.Url);
+					string v_ = FHIRHelpers_4_3_000.ToString(u_);
+					bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return u_;
+					return w_;
 				};
 				IEnumerable<Extension> l_ = context.Operators.Where<Extension>(((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)

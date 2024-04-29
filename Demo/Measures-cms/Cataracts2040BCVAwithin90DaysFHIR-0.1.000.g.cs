@@ -710,10 +710,11 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			CqlDateTime o_ = context.Operators.Subtract(m_, n_);
 			bool? p_ = context.Operators.SameOrBefore(k_, o_, null);
 			bool? q_ = context.Operators.And(h_, p_);
-			bool? r_ = context.Operators.Equal(CataractSurgery?.StatusElement?.Value, "completed");
-			bool? s_ = context.Operators.And(q_, r_);
+			string r_ = context.Operators.Convert<string>(CataractSurgery?.StatusElement?.Value);
+			bool? s_ = context.Operators.Equal(r_, "completed");
+			bool? t_ = context.Operators.And(q_, s_);
 
-			return s_;
+			return t_;
 		};
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 

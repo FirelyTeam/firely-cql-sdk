@@ -390,10 +390,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveProstateCancer);
 				CqlDateTime o_ = context.Operators.Start(n_);
 				bool? p_ = context.Operators.After(m_, o_, null);
-				bool? q_ = context.Operators.Equal(SalvageTherapy?.StatusElement?.Value, "completed");
-				bool? r_ = context.Operators.And(p_, q_);
+				string q_ = context.Operators.Convert<string>(SalvageTherapy?.StatusElement?.Value);
+				bool? r_ = context.Operators.Equal(q_, "completed");
+				bool? s_ = context.Operators.And(p_, r_);
 
-				return r_;
+				return s_;
 			};
 			IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
 			Procedure i_(Condition ActiveProstateCancer) => 
@@ -494,19 +495,20 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			CqlDateTime j_ = context.Operators.End(i_);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
-			bool? m_ = context.Operators.Equal(ProstateCancerTreatment?.StatusElement?.Value, "completed");
-			bool? n_ = context.Operators.And(l_, m_);
+			string m_ = context.Operators.Convert<string>(ProstateCancerTreatment?.StatusElement?.Value);
+			bool? n_ = context.Operators.Equal(m_, "completed");
+			bool? o_ = context.Operators.And(l_, n_);
 
-			return n_;
+			return o_;
 		};
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 		object e_(Procedure @this)
 		{
-			object o_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
-			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
-			CqlDateTime q_ = context.Operators.Start(p_);
+			object p_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
+			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(p_);
+			CqlDateTime r_ = context.Operators.Start(q_);
 
-			return q_;
+			return r_;
 		};
 		IEnumerable<Procedure> f_ = context.Operators.SortBy<Procedure>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Procedure g_ = context.Operators.First<Procedure>(f_);

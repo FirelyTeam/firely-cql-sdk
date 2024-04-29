@@ -807,9 +807,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<Procedure> d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure ImplantedCardiacPacer)
 		{
-			bool? s_ = context.Operators.Equal(ImplantedCardiacPacer?.StatusElement?.Value, "completed");
+			string s_ = context.Operators.Convert<string>(ImplantedCardiacPacer?.StatusElement?.Value);
+			bool? t_ = context.Operators.Equal(s_, "completed");
 
-			return s_;
+			return t_;
 		};
 		IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
 		bool? g_ = context.Operators.Exists<Procedure>(f_);

@@ -122,9 +122,11 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			bool? m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			FhirUri m_ = context.Operators.Convert<FhirUri>(@this?.Url);
+			string n_ = FHIRHelpers_4_3_000.ToString(m_);
+			bool? o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
-			return m_;
+			return o_;
 		};
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
@@ -134,63 +136,69 @@ public class SupplementalDataElements_3_4_000
 		};
 		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension E)
 		{
-			bool? n_(Extension @this)
+			bool? p_(Extension @this)
 			{
-				bool? aj_ = context.Operators.Equal(@this?.Url, "ombCategory");
-
-				return aj_;
-			};
-			IEnumerable<Extension> o_ = context.Operators.Where<Extension>(((E is Element)
-					? ((E as Element).Extension)
-					: null), n_);
-			DataType p_(Extension @this) => 
-				@this?.Value;
-			IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
-			DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
-			Coding s_ = context.Operators.Convert<Coding>(r_);
-			CqlCode t_ = FHIRHelpers_4_3_000.ToCode(s_);
-			CqlCode[] u_ = new CqlCode[]
-			{
-				t_,
-			};
-			bool? v_(Extension @this)
-			{
-				bool? ak_ = context.Operators.Equal(@this?.Url, "detailed");
-
-				return ak_;
-			};
-			IEnumerable<Extension> w_ = context.Operators.Where<Extension>(((E is Element)
-					? ((E as Element).Extension)
-					: null), v_);
-			IEnumerable<DataType> y_ = context.Operators.Select<Extension, DataType>(w_, p_);
-			CqlCode z_(DataType @this)
-			{
-				Coding al_ = context.Operators.Convert<Coding>(@this);
-				CqlCode am_ = FHIRHelpers_4_3_000.ToCode(al_);
-
-				return am_;
-			};
-			IEnumerable<CqlCode> aa_ = context.Operators.Select<DataType, CqlCode>(y_, z_);
-			IEnumerable<CqlCode> ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
-			bool? ac_(Extension @this)
-			{
-				bool? an_ = context.Operators.Equal(@this?.Url, "text");
+				FhirUri al_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string am_ = FHIRHelpers_4_3_000.ToString(al_);
+				bool? an_ = context.Operators.Equal(am_, "ombCategory");
 
 				return an_;
 			};
-			IEnumerable<Extension> ad_ = context.Operators.Where<Extension>(((E is Element)
+			IEnumerable<Extension> q_ = context.Operators.Where<Extension>(((E is Element)
 					? ((E as Element).Extension)
-					: null), ac_);
-			IEnumerable<DataType> af_ = context.Operators.Select<Extension, DataType>(ad_, p_);
-			DataType ag_ = context.Operators.SingletonFrom<DataType>(af_);
-			string ah_ = context.Operators.Convert<string>(ag_);
-			Tuple_DMgHTLENEHBHWJISQgKZGZVMB ai_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+					: null), p_);
+			DataType r_(Extension @this) => 
+				@this?.Value;
+			IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
+			DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
+			Coding u_ = context.Operators.Convert<Coding>(t_);
+			CqlCode v_ = FHIRHelpers_4_3_000.ToCode(u_);
+			CqlCode[] w_ = new CqlCode[]
 			{
-				codes = ab_,
-				display = ah_,
+				v_,
+			};
+			bool? x_(Extension @this)
+			{
+				FhirUri ao_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string ap_ = FHIRHelpers_4_3_000.ToString(ao_);
+				bool? aq_ = context.Operators.Equal(ap_, "detailed");
+
+				return aq_;
+			};
+			IEnumerable<Extension> y_ = context.Operators.Where<Extension>(((E is Element)
+					? ((E as Element).Extension)
+					: null), x_);
+			IEnumerable<DataType> aa_ = context.Operators.Select<Extension, DataType>(y_, r_);
+			CqlCode ab_(DataType @this)
+			{
+				Coding ar_ = context.Operators.Convert<Coding>(@this);
+				CqlCode as_ = FHIRHelpers_4_3_000.ToCode(ar_);
+
+				return as_;
+			};
+			IEnumerable<CqlCode> ac_ = context.Operators.Select<DataType, CqlCode>(aa_, ab_);
+			IEnumerable<CqlCode> ad_ = context.Operators.ValueSetUnion((w_ as IEnumerable<CqlCode>), ac_);
+			bool? ae_(Extension @this)
+			{
+				FhirUri at_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string au_ = FHIRHelpers_4_3_000.ToString(at_);
+				bool? av_ = context.Operators.Equal(au_, "text");
+
+				return av_;
+			};
+			IEnumerable<Extension> af_ = context.Operators.Where<Extension>(((E is Element)
+					? ((E as Element).Extension)
+					: null), ae_);
+			IEnumerable<DataType> ah_ = context.Operators.Select<Extension, DataType>(af_, r_);
+			DataType ai_ = context.Operators.SingletonFrom<DataType>(ah_);
+			string aj_ = context.Operators.Convert<string>(ai_);
+			Tuple_DMgHTLENEHBHWJISQgKZGZVMB ak_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			{
+				codes = ad_,
+				display = aj_,
 			};
 
-			return ai_;
+			return ak_;
 		};
 		IEnumerable<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
 		Tuple_DMgHTLENEHBHWJISQgKZGZVMB h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
@@ -251,9 +259,11 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			bool? m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			FhirUri m_ = context.Operators.Convert<FhirUri>(@this?.Url);
+			string n_ = FHIRHelpers_4_3_000.ToString(m_);
+			bool? o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
-			return m_;
+			return o_;
 		};
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
@@ -263,64 +273,70 @@ public class SupplementalDataElements_3_4_000
 		};
 		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension R)
 		{
-			bool? n_(Extension @this)
+			bool? p_(Extension @this)
 			{
-				bool? ah_ = context.Operators.Equal(@this?.Url, "ombCategory");
+				FhirUri aj_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string ak_ = FHIRHelpers_4_3_000.ToString(aj_);
+				bool? al_ = context.Operators.Equal(ak_, "ombCategory");
 
-				return ah_;
+				return al_;
 			};
-			IEnumerable<Extension> o_ = context.Operators.Where<Extension>(((R is Element)
+			IEnumerable<Extension> q_ = context.Operators.Where<Extension>(((R is Element)
 					? ((R as Element).Extension)
-					: null), n_);
-			DataType p_(Extension @this) => 
+					: null), p_);
+			DataType r_(Extension @this) => 
 				@this?.Value;
-			IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
-			CqlCode r_(DataType @this)
+			IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
+			CqlCode t_(DataType @this)
 			{
-				Coding ai_ = context.Operators.Convert<Coding>(@this);
-				CqlCode aj_ = FHIRHelpers_4_3_000.ToCode(ai_);
-
-				return aj_;
-			};
-			IEnumerable<CqlCode> s_ = context.Operators.Select<DataType, CqlCode>(q_, r_);
-			bool? t_(Extension @this)
-			{
-				bool? ak_ = context.Operators.Equal(@this?.Url, "detailed");
-
-				return ak_;
-			};
-			IEnumerable<Extension> u_ = context.Operators.Where<Extension>(((R is Element)
-					? ((R as Element).Extension)
-					: null), t_);
-			IEnumerable<DataType> w_ = context.Operators.Select<Extension, DataType>(u_, p_);
-			CqlCode x_(DataType @this)
-			{
-				Coding al_ = context.Operators.Convert<Coding>(@this);
-				CqlCode am_ = FHIRHelpers_4_3_000.ToCode(al_);
-
-				return am_;
-			};
-			IEnumerable<CqlCode> y_ = context.Operators.Select<DataType, CqlCode>(w_, x_);
-			IEnumerable<CqlCode> z_ = context.Operators.ValueSetUnion(s_, y_);
-			bool? aa_(Extension @this)
-			{
-				bool? an_ = context.Operators.Equal(@this?.Url, "text");
+				Coding am_ = context.Operators.Convert<Coding>(@this);
+				CqlCode an_ = FHIRHelpers_4_3_000.ToCode(am_);
 
 				return an_;
 			};
-			IEnumerable<Extension> ab_ = context.Operators.Where<Extension>(((R is Element)
-					? ((R as Element).Extension)
-					: null), aa_);
-			IEnumerable<DataType> ad_ = context.Operators.Select<Extension, DataType>(ab_, p_);
-			DataType ae_ = context.Operators.SingletonFrom<DataType>(ad_);
-			string af_ = context.Operators.Convert<string>(ae_);
-			Tuple_DMgHTLENEHBHWJISQgKZGZVMB ag_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			IEnumerable<CqlCode> u_ = context.Operators.Select<DataType, CqlCode>(s_, t_);
+			bool? v_(Extension @this)
 			{
-				codes = z_,
-				display = af_,
+				FhirUri ao_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string ap_ = FHIRHelpers_4_3_000.ToString(ao_);
+				bool? aq_ = context.Operators.Equal(ap_, "detailed");
+
+				return aq_;
+			};
+			IEnumerable<Extension> w_ = context.Operators.Where<Extension>(((R is Element)
+					? ((R as Element).Extension)
+					: null), v_);
+			IEnumerable<DataType> y_ = context.Operators.Select<Extension, DataType>(w_, r_);
+			CqlCode z_(DataType @this)
+			{
+				Coding ar_ = context.Operators.Convert<Coding>(@this);
+				CqlCode as_ = FHIRHelpers_4_3_000.ToCode(ar_);
+
+				return as_;
+			};
+			IEnumerable<CqlCode> aa_ = context.Operators.Select<DataType, CqlCode>(y_, z_);
+			IEnumerable<CqlCode> ab_ = context.Operators.ValueSetUnion(u_, aa_);
+			bool? ac_(Extension @this)
+			{
+				FhirUri at_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				string au_ = FHIRHelpers_4_3_000.ToString(at_);
+				bool? av_ = context.Operators.Equal(au_, "text");
+
+				return av_;
+			};
+			IEnumerable<Extension> ad_ = context.Operators.Where<Extension>(((R is Element)
+					? ((R as Element).Extension)
+					: null), ac_);
+			IEnumerable<DataType> af_ = context.Operators.Select<Extension, DataType>(ad_, r_);
+			DataType ag_ = context.Operators.SingletonFrom<DataType>(af_);
+			string ah_ = context.Operators.Convert<string>(ag_);
+			Tuple_DMgHTLENEHBHWJISQgKZGZVMB ai_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			{
+				codes = ab_,
+				display = ah_,
 			};
 
-			return ag_;
+			return ai_;
 		};
 		IEnumerable<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
 		Tuple_DMgHTLENEHBHWJISQgKZGZVMB h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
@@ -339,28 +355,30 @@ public class SupplementalDataElements_3_4_000
 			bool b_()
 			{
 				Patient d_ = this.Patient();
-				bool? e_ = context.Operators.Equal(d_?.GenderElement?.Value, "male");
+				string e_ = context.Operators.Convert<string>(d_?.GenderElement?.Value);
+				bool? f_ = context.Operators.Equal(e_, "male");
 
-				return (e_ ?? false);
+				return (f_ ?? false);
 			};
 			bool c_()
 			{
-				Patient f_ = this.Patient();
-				bool? g_ = context.Operators.Equal(f_?.GenderElement?.Value, "female");
+				Patient g_ = this.Patient();
+				string h_ = context.Operators.Convert<string>(g_?.GenderElement?.Value);
+				bool? i_ = context.Operators.Equal(h_, "female");
 
-				return (g_ ?? false);
+				return (i_ ?? false);
 			};
 			if (b_())
 			{
-				string h_ = null;
+				string j_ = null;
 
-				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", h_, "Male");
+				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", j_, "Male");
 			}
 			else if (c_())
 			{
-				string i_ = null;
+				string k_ = null;
 
-				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", i_, "Female");
+				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", k_, "Female");
 			}
 			else
 			{

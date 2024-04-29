@@ -385,15 +385,16 @@ public class PCMaternal_5_16_000
 			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, null);
 			bool? f_(Procedure DeliveryProcedure)
 			{
-				bool? j_ = context.Operators.Equal(DeliveryProcedure?.StatusElement?.Value, "completed");
-				object k_ = FHIRHelpers_4_3_000.ToValue(DeliveryProcedure?.Performed);
-				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
-				CqlDateTime m_ = context.Operators.Start(l_);
-				CqlInterval<CqlDateTime> n_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
-				bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
-				bool? p_ = context.Operators.And(j_, o_);
+				string j_ = context.Operators.Convert<string>(DeliveryProcedure?.StatusElement?.Value);
+				bool? k_ = context.Operators.Equal(j_, "completed");
+				object l_ = FHIRHelpers_4_3_000.ToValue(DeliveryProcedure?.Performed);
+				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
+				CqlDateTime n_ = context.Operators.Start(m_);
+				CqlInterval<CqlDateTime> o_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
+				bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, null);
+				bool? q_ = context.Operators.And(k_, p_);
 
-				return p_;
+				return q_;
 			};
 			IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure DeliveryProcedure) => 

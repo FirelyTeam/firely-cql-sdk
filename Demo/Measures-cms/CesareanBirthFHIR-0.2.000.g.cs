@@ -1849,10 +1849,11 @@ public class CesareanBirthFHIR_0_2_000
 				object k_ = FHIRHelpers_4_3_000.ToValue(CSection?.Performed);
 				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
 				bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
-				bool? n_ = context.Operators.Equal(CSection?.StatusElement?.Value, "completed");
-				bool? o_ = context.Operators.And(m_, n_);
+				string n_ = context.Operators.Convert<string>(CSection?.StatusElement?.Value);
+				bool? o_ = context.Operators.Equal(n_, "completed");
+				bool? p_ = context.Operators.And(m_, o_);
 
-				return o_;
+				return p_;
 			};
 			IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure CSection) => 

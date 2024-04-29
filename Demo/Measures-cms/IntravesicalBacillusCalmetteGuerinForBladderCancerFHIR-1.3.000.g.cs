@@ -474,18 +474,19 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> e_ = context.Operators.SelectMany<Procedure, Procedure>(c_, d_);
 		bool? f_(Procedure BladderCancerStaging)
 		{
-			bool? aa_ = context.Operators.Equal(BladderCancerStaging?.StatusElement?.Value, "completed");
+			string aa_ = context.Operators.Convert<string>(BladderCancerStaging?.StatusElement?.Value);
+			bool? ab_ = context.Operators.Equal(aa_, "completed");
 
-			return aa_;
+			return ab_;
 		};
 		IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
 		object h_(Procedure @this)
 		{
-			object ab_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
-			CqlInterval<CqlDateTime> ac_ = QICoreCommon_2_0_000.toInterval(ab_);
-			CqlDateTime ad_ = context.Operators.Start(ac_);
+			object ac_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
+			CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.toInterval(ac_);
+			CqlDateTime ae_ = context.Operators.Start(ad_);
 
-			return ad_;
+			return ae_;
 		};
 		IEnumerable<Procedure> i_ = context.Operators.SortBy<Procedure>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		Procedure j_ = context.Operators.First<Procedure>(i_);
@@ -734,9 +735,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			{
 				bool? p_(Extension @this)
 				{
-					bool? at_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					FhirUri at_ = context.Operators.Convert<FhirUri>(@this?.Url);
+					string au_ = FHIRHelpers_4_3_000.ToString(at_);
+					bool? av_ = context.Operators.Equal(au_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return at_;
+					return av_;
 				};
 				IEnumerable<Extension> q_ = context.Operators.Where<Extension>(((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
@@ -761,9 +764,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? aj_ = context.Operators.And(ae_, ai_);
 				bool? ak_(Extension @this)
 				{
-					bool? au_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					FhirUri aw_ = context.Operators.Convert<FhirUri>(@this?.Url);
+					string ax_ = FHIRHelpers_4_3_000.ToString(aw_);
+					bool? ay_ = context.Operators.Equal(ax_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return au_;
+					return ay_;
 				};
 				IEnumerable<Extension> al_ = context.Operators.Where<Extension>(((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
@@ -787,17 +792,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCGNotGiven)
 		{
-			CqlConcept av_(CodeableConcept @this)
+			CqlConcept az_(CodeableConcept @this)
 			{
-				CqlConcept az_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept bd_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return az_;
+				return bd_;
 			};
-			IEnumerable<CqlConcept> aw_ = context.Operators.Select<CodeableConcept, CqlConcept>(BCGNotGiven?.StatusReason, av_);
-			CqlValueSet ax_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
-			bool? ay_ = context.Operators.ConceptsInValueSet(aw_, ax_);
+			IEnumerable<CqlConcept> ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(BCGNotGiven?.StatusReason, az_);
+			CqlValueSet bb_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
+			bool? bc_ = context.Operators.ConceptsInValueSet(ba_, bb_);
 
-			return ay_;
+			return bc_;
 		};
 		IEnumerable<MedicationAdministration> i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 
@@ -1081,9 +1086,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure Cystectomy)
 		{
-			bool? ae_ = context.Operators.Equal(Cystectomy?.StatusElement?.Value, "completed");
+			string ae_ = context.Operators.Convert<string>(Cystectomy?.StatusElement?.Value);
+			bool? af_ = context.Operators.Equal(ae_, "completed");
 
-			return ae_;
+			return af_;
 		};
 		IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
 
@@ -1197,13 +1203,14 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				"completed",
 			};
 			bool? as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
-			bool? at_ = context.Operators.Equal(ExclusionMed?.IntentElement?.Value, "order");
-			bool? au_ = context.Operators.And(as_, at_);
-			bool? av_ = context.Operators.IsTrue(ExclusionMed?.DoNotPerformElement?.Value);
-			bool? aw_ = context.Operators.Not(av_);
-			bool? ax_ = context.Operators.And(au_, aw_);
+			string at_ = context.Operators.Convert<string>(ExclusionMed?.IntentElement?.Value);
+			bool? au_ = context.Operators.Equal(at_, "order");
+			bool? av_ = context.Operators.And(as_, au_);
+			bool? aw_ = context.Operators.IsTrue(ExclusionMed?.DoNotPerformElement?.Value);
+			bool? ax_ = context.Operators.Not(aw_);
+			bool? ay_ = context.Operators.And(av_, ax_);
 
-			return ax_;
+			return ay_;
 		};
 		IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
 		CqlCode j_ = this.Combined_radiotherapy__procedure_();
@@ -1211,45 +1218,46 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> l_ = context.Operators.RetrieveByCodes<Procedure>(k_, null);
 		IEnumerable<Procedure> m_(Procedure ExclusionProcedure)
 		{
-			Procedure ay_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] az_ = new Procedure[]
+			Procedure az_ = this.First_Bladder_Cancer_Staging_Procedure();
+			Procedure[] ba_ = new Procedure[]
 			{
-				ay_,
+				az_,
 			};
-			bool? ba_(Procedure FirstBladderCancerStaging)
+			bool? bb_(Procedure FirstBladderCancerStaging)
 			{
-				object be_ = FHIRHelpers_4_3_000.ToValue(ExclusionProcedure?.Performed);
-				CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.toInterval(be_);
-				CqlDateTime bg_ = context.Operators.Start(bf_);
-				object bh_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				CqlInterval<CqlDateTime> bi_ = QICoreCommon_2_0_000.toInterval(bh_);
-				CqlDateTime bj_ = context.Operators.Start(bi_);
-				CqlQuantity bk_ = context.Operators.Quantity(6m, "months");
-				CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
-				CqlInterval<CqlDateTime> bn_ = QICoreCommon_2_0_000.toInterval(bh_);
-				CqlDateTime bo_ = context.Operators.Start(bn_);
-				CqlInterval<CqlDateTime> bp_ = context.Operators.Interval(bl_, bo_, true, false);
-				bool? bq_ = context.Operators.In<CqlDateTime>(bg_, bp_, null);
-				CqlInterval<CqlDateTime> bs_ = QICoreCommon_2_0_000.toInterval(bh_);
-				CqlDateTime bt_ = context.Operators.Start(bs_);
-				bool? bu_ = context.Operators.Not((bool?)(bt_ is null));
-				bool? bv_ = context.Operators.And(bq_, bu_);
+				object bf_ = FHIRHelpers_4_3_000.ToValue(ExclusionProcedure?.Performed);
+				CqlInterval<CqlDateTime> bg_ = QICoreCommon_2_0_000.toInterval(bf_);
+				CqlDateTime bh_ = context.Operators.Start(bg_);
+				object bi_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
+				CqlInterval<CqlDateTime> bj_ = QICoreCommon_2_0_000.toInterval(bi_);
+				CqlDateTime bk_ = context.Operators.Start(bj_);
+				CqlQuantity bl_ = context.Operators.Quantity(6m, "months");
+				CqlDateTime bm_ = context.Operators.Subtract(bk_, bl_);
+				CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval(bi_);
+				CqlDateTime bp_ = context.Operators.Start(bo_);
+				CqlInterval<CqlDateTime> bq_ = context.Operators.Interval(bm_, bp_, true, false);
+				bool? br_ = context.Operators.In<CqlDateTime>(bh_, bq_, null);
+				CqlInterval<CqlDateTime> bt_ = QICoreCommon_2_0_000.toInterval(bi_);
+				CqlDateTime bu_ = context.Operators.Start(bt_);
+				bool? bv_ = context.Operators.Not((bool?)(bu_ is null));
+				bool? bw_ = context.Operators.And(br_, bv_);
 
-				return bv_;
+				return bw_;
 			};
-			IEnumerable<Procedure> bb_ = context.Operators.Where<Procedure>(az_, ba_);
-			Procedure bc_(Procedure FirstBladderCancerStaging) => 
+			IEnumerable<Procedure> bc_ = context.Operators.Where<Procedure>(ba_, bb_);
+			Procedure bd_(Procedure FirstBladderCancerStaging) => 
 				ExclusionProcedure;
-			IEnumerable<Procedure> bd_ = context.Operators.Select<Procedure, Procedure>(bb_, bc_);
+			IEnumerable<Procedure> be_ = context.Operators.Select<Procedure, Procedure>(bc_, bd_);
 
-			return bd_;
+			return be_;
 		};
 		IEnumerable<Procedure> n_ = context.Operators.SelectMany<Procedure, Procedure>(l_, m_);
 		bool? o_(Procedure ExclusionProcedure)
 		{
-			bool? bw_ = context.Operators.Equal(ExclusionProcedure?.StatusElement?.Value, "completed");
+			string bx_ = context.Operators.Convert<string>(ExclusionProcedure?.StatusElement?.Value);
+			bool? by_ = context.Operators.Equal(bx_, "completed");
 
-			return bw_;
+			return by_;
 		};
 		IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>(n_, o_);
 		IEnumerable<object> q_ = context.Operators.ListUnion<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));

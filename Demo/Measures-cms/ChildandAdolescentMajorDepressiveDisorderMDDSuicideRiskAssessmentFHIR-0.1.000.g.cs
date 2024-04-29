@@ -429,14 +429,15 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			IEnumerable<Procedure> f_ = context.Operators.RetrieveByCodes<Procedure>(e_, null);
 			bool? g_(Procedure SuicideRiskAssessment)
 			{
-				bool? k_ = context.Operators.Equal(SuicideRiskAssessment?.StatusElement?.Value, "completed");
-				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
-				object m_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
-				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.ToInterval(m_);
-				bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
-				bool? p_ = context.Operators.And(k_, o_);
+				string k_ = context.Operators.Convert<string>(SuicideRiskAssessment?.StatusElement?.Value);
+				bool? l_ = context.Operators.Equal(k_, "completed");
+				CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
+				object n_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
+				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_);
+				bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, null);
+				bool? q_ = context.Operators.And(l_, p_);
 
-				return p_;
+				return q_;
 			};
 			IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
 			Encounter i_(Procedure SuicideRiskAssessment) => 

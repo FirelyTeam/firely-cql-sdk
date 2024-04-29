@@ -828,13 +828,14 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		int? f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		CqlInterval<int?> g_ = context.Operators.Interval(50, 63, true, true);
 		bool? h_ = context.Operators.In<int?>(f_, g_, null);
-		bool? j_ = context.Operators.Equal(a_?.GenderElement?.Value, "female");
-		bool? k_ = context.Operators.And(h_, j_);
-		IEnumerable<Encounter> l_ = this.Qualifying_Encounter();
-		bool? m_ = context.Operators.Exists<Encounter>(l_);
-		bool? n_ = context.Operators.And(k_, m_);
+		string j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		bool? k_ = context.Operators.Equal(j_, "female");
+		bool? l_ = context.Operators.And(h_, k_);
+		IEnumerable<Encounter> m_ = this.Qualifying_Encounter();
+		bool? n_ = context.Operators.Exists<Encounter>(m_);
+		bool? o_ = context.Operators.And(l_, n_);
 
-		return n_;
+		return o_;
 	}
 
     [CqlDeclaration("Initial Population")]

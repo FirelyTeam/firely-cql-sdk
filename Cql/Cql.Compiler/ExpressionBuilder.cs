@@ -1150,11 +1150,6 @@ namespace Hl7.Cql.Compiler
 
             if (expectedType != null && expectedType != result.Type)
             {
-                if (expectedType == typeof(string))
-                {
-                    if (result.Type.IsEnum())
-                        return result;
-                }
                 result = ChangeType(result, expectedType);
             }
             return result;
