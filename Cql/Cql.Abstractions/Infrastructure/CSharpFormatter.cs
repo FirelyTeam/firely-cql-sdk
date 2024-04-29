@@ -42,32 +42,32 @@ internal static class CSharpFormatter
 
     public static TextWriter WriteCSharp(
         this Type type,
-        TypeFormatterOptions? typeFormatOptions = null,
+        TypeFormatterOptions? typeFormatterOptions = null,
         TextWriter? textWriter = null)
     {
-        typeFormatOptions ??= TypeFormatterOptions.Default;
-        var typeFormatContext = new TypeFormatterContext(type, typeFormatOptions);
-        return typeFormatOptions.TypeFormat(typeFormatContext).WriteToTextWriter(textWriter);
+        typeFormatterOptions ??= TypeFormatterOptions.Default;
+        var typeFormatContext = new TypeFormatterContext(type, typeFormatterOptions);
+        return typeFormatterOptions.TypeFormat(typeFormatContext).WriteToTextWriter(textWriter);
     }
 
     public static TextWriter WriteCSharp(
         this ParameterInfo parameterInfo,
-        ParameterFormatterOptions? parameterFormatOptions = null,
+        ParameterFormatterOptions? parameterFormatterOptions = null,
         TextWriter? textWriter = null)
     {
-        parameterFormatOptions ??= ParameterFormatterOptions.Default;
-        var parameterFormatContext = new ParameterFormatterContext(parameterInfo, parameterFormatOptions);
-        return parameterFormatOptions.ParameterFormat(parameterFormatContext).WriteToTextWriter(textWriter);
+        parameterFormatterOptions ??= ParameterFormatterOptions.Default;
+        var parameterFormatContext = new ParameterFormatterContext(parameterInfo, parameterFormatterOptions);
+        return parameterFormatterOptions.ParameterFormat(parameterFormatContext).WriteToTextWriter(textWriter);
     }
 
     public static TextWriter WriteCSharp(
         this MethodInfo methodInfo,
-        MethodFormatterOptions? methodFormatOptions = null,
+        MethodFormatterOptions? methodFormatterOptions = null,
         TextWriter? textWriter = null)
     {
-        methodFormatOptions ??= MethodFormatterOptions.Default;
-        var methodFormatContext = new MethodFormatterContext(methodInfo, methodFormatOptions);
-        return methodFormatOptions.MethodFormat(methodFormatContext).WriteToTextWriter(textWriter);
+        methodFormatterOptions ??= MethodFormatterOptions.Default;
+        var methodFormatContext = new MethodFormatterContext(methodInfo, methodFormatterOptions);
+        return methodFormatterOptions.MethodFormat(methodFormatContext).WriteToTextWriter(textWriter);
     }
 
     internal static StringWriter NewInvariantCultureStringWriter() => new(CultureInfo.InvariantCulture);

@@ -34,9 +34,9 @@ internal partial class CqlOperatorsBinder
     private static readonly TypeFormatterOptions TypeFormatterOptions = new(PreferKeywords:true, HideNamespaces:true);
 
     private static readonly MethodFormatterOptions CSharpWriteMethodOptions = new (
-        methodFormat: t => $"\n\t* {t.Name}({t.Parameters})",
+        methodFormat: method => $"\n\t* {method.Name}({method.Parameters})",
         parameterFormatting: new (
-            parameterFormat: t => $"{t.Type}",
+            parameterFormat: parameter => $"{parameter.Type}",
             typeFormatting: TypeFormatterOptions));
 
     ///  <summary>
