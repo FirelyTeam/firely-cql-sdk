@@ -47,7 +47,9 @@ internal static class CSharpFormatter
     {
         typeFormatterOptions ??= TypeFormatterOptions.Default;
         var typeFormatContext = new TypeFormatterContext(type, typeFormatterOptions);
-        return typeFormatterOptions.TypeFormat(typeFormatContext).WriteToTextWriter(textWriter);
+        textWriter ??= NewInvariantCultureStringWriter();
+        typeFormatterOptions.TypeFormat(typeFormatContext).WriteToTextWriter(textWriter);
+        return textWriter;
     }
 
     public static TextWriter WriteCSharp(
@@ -57,7 +59,9 @@ internal static class CSharpFormatter
     {
         parameterFormatterOptions ??= ParameterFormatterOptions.Default;
         var parameterFormatContext = new ParameterFormatterContext(parameterInfo, parameterFormatterOptions);
-        return parameterFormatterOptions.ParameterFormat(parameterFormatContext).WriteToTextWriter(textWriter);
+        textWriter ??= NewInvariantCultureStringWriter();
+        parameterFormatterOptions.ParameterFormat(parameterFormatContext).WriteToTextWriter(textWriter);
+        return textWriter;
     }
 
     public static TextWriter WriteCSharp(
@@ -67,7 +71,9 @@ internal static class CSharpFormatter
     {
         methodFormatterOptions ??= MethodFormatterOptions.Default;
         var methodFormatContext = new MethodFormatterContext(methodInfo, methodFormatterOptions);
-        return methodFormatterOptions.MethodFormat(methodFormatContext).WriteToTextWriter(textWriter);
+        textWriter ??= NewInvariantCultureStringWriter();
+        methodFormatterOptions.MethodFormat(methodFormatContext).WriteToTextWriter(textWriter);
+        return textWriter;
     }
 
     internal static StringWriter NewInvariantCultureStringWriter() => new(CultureInfo.InvariantCulture);
@@ -94,16 +100,14 @@ internal record TypeFormatterOptions(
     public static readonly TypeFormatter DefaultTypeFormat = type => $"{type.Type}";
     public TypeFormatter TypeFormat => DefaultTypeFormat;
 
-    protected internal virtual TextWriter WriteToTextWriter(
+    protected internal virtual void WriteToTextWriter(
         Type type,
-        TextWriter? textWriter = null)
+        TextWriter textWriter)
     {
-        textWriter ??= CSharpFormatter.NewInvariantCultureStringWriter();
-
         if (PreferKeywords && type.GetCSharpKeyword() is { } keyword)
         {
             textWriter.Write(keyword);
-            return textWriter;
+            return;
         }
 
         var hideNamespaces = HideNamespaces;
@@ -184,7 +188,7 @@ internal record TypeFormatterOptions(
         if (type.IsPointer)
             textWriter.Write(PointerOperator);
 
-        return textWriter;
+        return;
 
         void WriteName()
         {
@@ -208,7 +212,7 @@ internal readonly record struct TypeFormatterContext(
         get
         {
             var self = this;
-            return $"{tw => self.TypeFormatterOptions.WriteToTextWriter(self.TypeInfo, tw)}";
+            return $"{textWriter => self.TypeFormatterOptions.WriteToTextWriter(self.TypeInfo, textWriter)}";
         }
     }
 }
@@ -232,7 +236,6 @@ internal readonly record struct ParameterFormatterContext(
 {
     public ParameterInfo ParameterInfo { get; } = ParameterInfo;
     public string Name => ParameterInfo.Name!;
-
     public TextWriterFormattableString Type =>
         ParameterFormatterOptions.TypeFormatterOptions.TypeFormat(
             new TypeFormatterContext(ParameterInfo.ParameterType, ParameterFormatterOptions.TypeFormatterOptions));
@@ -287,20 +290,17 @@ internal struct TextWriterFormattableString
     {
     }
 
-    private void Append(Action<TextWriter> a) =>
-        _appender += a;
-
     public void AppendLiteral(string s) =>
-        Append(textWriter => textWriter.Write(s));
+        _appender += textWriter => textWriter.Write(s);
 
     public void AppendFormatted(string s) =>
-        Append(textWriter => textWriter.Write(s));
+        _appender += textWriter => textWriter.Write(s);
 
     public void AppendFormatted(TextWriterFormattableString innerFormatter) =>
-        Append(textWriter => innerFormatter.WriteToTextWriter(textWriter));
+        _appender += innerFormatter.WriteToTextWriter;
 
     public void AppendFormatted(Action<TextWriter> withTextWriter) =>
-        Append(withTextWriter);
+        _appender += withTextWriter;
 
     public static TextWriterFormattableString Join(
         string separator,
@@ -313,17 +313,13 @@ internal struct TextWriterFormattableString
             if (first)
                 first = false;
             else if (separator != "")
-                s.Append(textWriter => textWriter.Write(separator));
+                s._appender += textWriter => textWriter.Write(separator);
 
-            s.Append(textWriter => formatString.WriteToTextWriter(textWriter));
+            s._appender += textWriter => formatString.WriteToTextWriter(textWriter);
         }
         return s;
     }
 
-    public TextWriter WriteToTextWriter(TextWriter? textWriter = null)
-    {
-        textWriter ??= CSharpFormatter.NewInvariantCultureStringWriter();
+    public void WriteToTextWriter(TextWriter textWriter) =>
         _appender?.Invoke(textWriter);
-        return textWriter;
-    }
 }
