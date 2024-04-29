@@ -31,16 +31,16 @@ internal partial class CqlOperatorsBinder
                          .AsReadOnly())
                 .AsReadOnly();
 
-    private static readonly CSharpWriteTypeOptions CSharpWriteTypeOptions = new(PreferKeywords:true, HideNamespaces:true);
+    private static readonly TypeFormatting TypeFormatting = new(PreferKeywords:true, HideNamespaces:true);
 
-    private static readonly CSharpWriteMethodOptions CSharpWriteMethodOptions = new (
-        methodFormat:t => $"\n\t* {t.name}({t.parameters})",
-        parameterOptions:new (
-            parameterFormat:t => $"{t.type}",
-            typeOptions: CSharpWriteTypeOptions));
+    private static readonly MethodFormatting CSharpWriteMethodOptions = new (
+        methodFormat: t => $"\n\t* {t.Name}({t.Parameters})",
+        parameterFormatting: new (
+            parameterFormat: t => $"{t.Type}",
+            typeFormatting: TypeFormatting));
 
     ///  <summary>
-    /// 
+    ///
     ///  <para>
     ///  This method tries to match the method name with the arguments against the ICqlOperators methods.
     ///  It also converts the arguments to the correct types if necessary.
@@ -48,18 +48,18 @@ internal partial class CqlOperatorsBinder
     ///  If no method is found, it throws an ArgumentException when <paramref name="throwError"></paramref> is <c>true</c>;
     ///  otherwise , it returns <c>null</c> for method on the resulting tuple.
     ///  </para>
-    /// 
+    ///
     ///  <para>
     ///  The discovery of the correct method is done in two steps:
     ///  The first step tries to match the arguments with the method parameters.
     ///  The second step tries to match the arguments with the method parameters, but without the last argument.
     ///  This last step is useful for methods that have a null argument at the end, which is commonly used for precision cases.
     /// </para>
-    /// 
+    ///
     ///  <para>
     ///  For generic methods, it tries to match the generic type from the first argument, and if it fails, it tries the second argument.
     ///  </para>
-    /// 
+    ///
     ///  </summary>
     ///  <param name="methodName">The exact method name to bind to. When there are overloads, the correct method will be resolved.</param>
     ///  <param name="arguments">When an overload exists, returns the arguments that can be provided to this method. Conversions may be included to allow this.</param>
@@ -131,16 +131,8 @@ internal partial class CqlOperatorsBinder
                      """;
         }
 
-        string InputMethodAndParametersToString()
-        {
-            return CSharpWriteMethodOptions
-                   .Write(
-                       writer: null,
-                       name: methodName,
-                       parameters: () => arguments.SelectToArray(e => e.Type.WriteCSharp(CSharpWriteTypeOptions).ToString()!),
-                       returnType: null!)
-                   .ToString()!;
-        }
+        string InputMethodAndParametersToString() =>
+            $"{methodName} ({arguments.SelectToArray(a => a.Type.WriteCSharp(CSharpWriteMethodOptions.ParameterFormatting.TypeFormatFormatting))})";
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {

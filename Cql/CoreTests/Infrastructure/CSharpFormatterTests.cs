@@ -69,21 +69,21 @@ public class CSharpFormatterTests
             (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?[]), "EmptyStruct.Nested1.GenericNested2<int,int>?[]"),
         ];
 
-        var typeToCSharpStringOptions = new CSharpWriteTypeOptions(HideNamespaces: true, PreferKeywords: true);
+        var typeToCSharpStringOptions = new TypeFormatting(HideNamespaces: true, PreferKeywords: true);
         foreach (var (type, expected) in testCases)
         {
-            var actual = type.WriteCSharp(typeOptions: typeToCSharpStringOptions).ToString()!;
+            var actual = type.WriteCSharp(typeFormatOptions: typeToCSharpStringOptions).ToString()!;
             Assert.AreEqual(expected: expected, actual: actual);
         }
 
         Assert.AreEqual(
             expected: "System.Collections.Generic.IDictionary<,>",
-            actual: typeof(IDictionary<,>).WriteCSharp(typeOptions: new()).ToString()!);
+            actual: typeof(IDictionary<,>).WriteCSharp(typeFormatOptions: new()).ToString()!);
 
         Assert.AreEqual(
             expected: "IDictionary<TKey,TValue>",
             actual: typeof(IDictionary<,>).WriteCSharp(
-                typeOptions: new(
+                typeFormatOptions: new(
                     HideNamespaces: true,
                     PreferKeywords: true,
                     ShowGenericTypeParameterNames: true)).ToString()!);
@@ -91,7 +91,7 @@ public class CSharpFormatterTests
         Assert.AreEqual(
             expected: "System.Collections.Generic.IDictionary<TKey, TValue>",
             actual: typeof(IDictionary<,>).WriteCSharp(
-                typeOptions: new(
+                typeFormatOptions: new(
                     HideNamespaces: false,
                     PreferKeywords: true,
                     ShowGenericTypeParameterNames: true,
@@ -100,7 +100,7 @@ public class CSharpFormatterTests
         Assert.AreEqual(
             expected: "CoreTests.Infrastructure.EmptyStruct+Nested1+Nested2",
             actual: typeof(EmptyStruct.Nested1.Nested2).WriteCSharp(
-                typeOptions: new(
+                typeFormatOptions: new(
                     NestedTypeDelimiter:"+")).ToString()!);
     }
 
@@ -118,13 +118,14 @@ public class CSharpFormatterTests
         Assert.AreEqual(
             expected: "function Join(a: int; b: int; c: int): IList<int>;",
             actual: m.WriteCSharp(
-                methodOptions: new(
-                    methodFormat: t => $"function {t.name}({t.parameters}): {t.returnType};",
-                    parameterDelimiter: "; ",
-                    parameterOptions: new(
-                        parameterFormat: t => $"{t.name}: {t.type}",
-                        typeOptions: new(
+                methodFormatOptions: new(
+                    methodFormat: t => $"function {t.Name}({t.Parameters}): {t.ReturnType};",
+                    parameterFormatting: new (
+                        parameterFormat: t => $"{t.Name}: {t.Type}",
+                        typeFormatting: new(
                             PreferKeywords:true,
-                            HideNamespaces:true)))).ToString()!);
+                            HideNamespaces:true)),
+                    parameterSeparator: "; "
+                    )).ToString()!);
     }
 }

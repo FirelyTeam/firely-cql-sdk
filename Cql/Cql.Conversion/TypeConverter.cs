@@ -184,7 +184,7 @@ namespace Hl7.Cql.Conversion
 
         internal virtual void LogAllConverters(ILogger<TypeConverter> logger)
         {
-            CSharpWriteTypeOptions o = new(
+            TypeFormatting o = new(
                 HideNamespaces: true,
                 PreferKeywords: false);
 
