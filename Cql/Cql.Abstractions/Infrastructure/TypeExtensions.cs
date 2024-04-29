@@ -91,9 +91,23 @@ internal static partial class TypeExtensions
     /// <summary>
     /// Gets the base type of the specified type.
     /// Calling this method instead of <see cref="Type.BaseType"/> fixes the issue
-    /// on getting the base type on a generic type definitions, which becomes a
-    /// constructed generic base type, while it should have remained a generic type definition.
+    /// when getting the base type for a generic type definition, which becomes a
+    /// constructed generic type, instead of remaining a generic type definition.
     /// </summary>
+    /// <example>
+    /// <code>
+    /// // Shows the quirks when getting base type on a generic type definition. Here we expected to see true, but that turns out to be not the case
+    /// Assert.IsFalse(typeof(MyGenericClassDerived&lt;>).BaseType == typeof(MyGenericClassBase&lt;>));
+    ///
+    /// // Why are they not the same? Because BaseType returns the constructed generic base type, while it should have remained a generic type definition.
+    /// Assert.IsTrue(typeof(MyGenericClassDerived&lt;>).IsGenericTypeDefinition);
+    /// Assert.IsTrue(typeof(MyGenericClassDerived&lt;>).BaseType!.IsConstructedGenericType);
+    /// Assert.IsFalse(typeof(MyGenericClassDerived&lt;>).BaseType!.IsGenericTypeDefinition);
+    ///
+    /// // So, when getting the base type on a type definition, we always have to request the generic type definition of that!
+    /// Assert.IsTrue(typeof(MyGenericClassDerived&lt;>).BaseType!.GetGenericTypeDefinition() == typeof(MyGenericClassBase&lt;>));
+    /// </code>
+    /// </example>
     public static Type? BaseTypeFixed(this Type type) =>
         (type, type.BaseType) switch
         {
