@@ -203,7 +203,14 @@ internal readonly record struct TypeFormatterContext(
 {
     public Type TypeInfo { get; } = TypeInfo;
 
-    public TextWriterFormattableString Type => $"{TypeFormatterOptions.WriteToTextWriter(TypeInfo).ToString()!}";
+    public TextWriterFormattableString Type
+    {
+        get
+        {
+            var self = this;
+            return $"{tw => self.TypeFormatterOptions.WriteToTextWriter(self.TypeInfo, tw)}";
+        }
+    }
 }
 
 
@@ -290,7 +297,10 @@ internal struct TextWriterFormattableString
         Append(textWriter => textWriter.Write(s));
 
     public void AppendFormatted(TextWriterFormattableString innerFormatter) =>
-        Append(t => innerFormatter.WriteToTextWriter(t));
+        Append(textWriter => innerFormatter.WriteToTextWriter(textWriter));
+
+    public void AppendFormatted(Action<TextWriter> withTextWriter) =>
+        Append(withTextWriter);
 
     public static TextWriterFormattableString Join(
         string separator,
