@@ -20,10 +20,10 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal class ExpressionConverter(string libraryName)
+    internal class ExpressionConverter(
+        string libraryName,
+        bool preferVar)
     {
-        private static readonly bool PreferVar = false;
-
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
         {
             try
@@ -565,7 +565,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var rightCode = ConvertExpression(indent, right, false);
 
                 string typeDeclaration = "var";
-                if (!PreferVar || rightCode is "null" or "default")
+                if (!preferVar || rightCode is "null" or "default")
                     typeDeclaration = PrettyTypeName(left.Type);
 
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";

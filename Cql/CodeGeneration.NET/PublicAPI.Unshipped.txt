@@ -3,4 +3,6 @@ Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.CSharpCodeWriterOptions() -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.set -> void
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.PreferVar.get -> bool
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.PreferVar.set -> void
 static Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void

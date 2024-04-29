@@ -21,6 +21,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -31,17 +32,21 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private const string TuplesNamespace = "Tuples";
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
+        private readonly CSharpCodeWriterOptions _options;
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
+        /// <param name="options">The options <see cref="CSharpCodeWriterOptions"/></param>
         /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
+            IOptions<CSharpCodeWriterOptions> options,
             TypeResolver typeResolver)
         {
             _logger = logger;
+            _options = options.Value;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -449,7 +454,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 new LocalVariableDeduper()
             );
 
-            var expressionConverter = new ExpressionConverter(libraryName);
+            var expressionConverter = new ExpressionConverter(libraryName, _options.PreferVar);
 
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);

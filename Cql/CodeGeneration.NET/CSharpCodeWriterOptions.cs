@@ -20,6 +20,12 @@ public class CSharpCodeWriterOptions
     public DirectoryInfo? OutDirectory { get; set; }
 
     internal const string ArgNameOutDirectory = "--cs";
+    internal const string ArgNamePreferVar = "--cs-prefervar";
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to prefer 'var' over explicit types.
+    /// </summary>
+    public bool PreferVar { get; set; }
 
     /// <summary>
     /// Binds the configuration values to the CSharpResourceWriterOptions object.
