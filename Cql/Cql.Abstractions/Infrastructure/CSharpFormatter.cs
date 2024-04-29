@@ -315,7 +315,7 @@ internal struct TextWriterFormattableString
             else if (separator != "")
                 s._appender += textWriter => textWriter.Write(separator);
 
-            s._appender += textWriter => formatString.WriteToTextWriter(textWriter);
+            s._appender += formatString.WriteToTextWriter;
         }
         return s;
     }

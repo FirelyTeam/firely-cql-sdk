@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -109,15 +111,25 @@ public class CSharpFormatterTests
     {
         MethodInfo m = ReflectionUtility.MethodOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.Join(0, 0, 0));
 
+
         // NOTE: We do not show the declaring type name for methods
+        TestTextWriter tw = new TestTextWriter(new StringWriter());
         Assert.AreEqual(
             expected: "System.Collections.Generic.IList<System.Int32> Join(System.Int32 a, System.Int32 b, System.Int32 c)",
-            actual: m.WriteCSharp().ToString()!);
+            actual: m.WriteCSharp(textWriter:tw).ToString()!);
+
+        Assert.AreEqual(
+            """
+            System.Collections.Generic.IList|<|System.Int32|>| |Join|(|System.Int32| |a|, |System.Int32| |b|, |System.Int32| |c|)
+            """,
+            string.Join('|', tw.Tokens));
 
         // Delphi-ish style to demonstrate flexibility
+        tw = new TestTextWriter(new StringWriter());
         Assert.AreEqual(
             expected: "function Join(a: int; b: int; c: int): IList<int>;",
             actual: m.WriteCSharp(
+                textWriter: tw,
                 methodFormatterOptions: new(
                     methodFormat: method => $"function {method.Name}({method.Parameters}): {method.ReturnType};",
                     parameterFormatting: new (
@@ -127,5 +139,35 @@ public class CSharpFormatterTests
                             HideNamespaces:true)),
                     parameterSeparator: "; "
                     )).ToString()!);
+
+        Assert.AreEqual(
+            """
+            function |Join|(|a|: |int|; |b|: |int|; |c|: |int|): |IList|<|int|>|;
+            """,
+            string.Join('|', tw.Tokens));
+    }
+
+    private class TestTextWriter(TextWriter Inner) : TextWriter
+    {
+        public List<string> Tokens { get; } = new();
+
+        public override Encoding Encoding => Inner.Encoding;
+
+        public override void Write(
+            char[] buffer,
+            int index,
+            int count)
+        {
+            Inner.Write(buffer, index, count);
+            Tokens.Add(new string(buffer, index, count));
+        }
+
+        public override void Write(char value)
+        {
+            Inner.Write(value);
+            Tokens.Add(value.ToString());
+        }
+
+        public override string? ToString() => Inner.ToString();
     }
 }
