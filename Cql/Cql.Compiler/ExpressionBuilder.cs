@@ -1158,25 +1158,6 @@ namespace Hl7.Cql.Compiler
         protected Expression FunctionRef(FunctionRef op)
         {
             Expression[] operands = TranslateAll(op.operand);
-
-            // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
-            // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
-            // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
-            if (op.libraryName is { } alias)
-            {
-                string libraryName = _libraryContext.GetNameAndVersionFromAlias(alias, throwError: true)!;
-                if (libraryName.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase)
-                    && op.name!.Equals("tostring", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (operands[0].Type == typeof(string))
-                    {
-                        return operands[0];
-                    }
-
-                    return BindCqlOperator(nameof(ICqlOperators.Convert), operands[0], Expression.Constant(typeof(string), typeof(Type)));
-                }
-            }
-
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands);
             return invoke;
         }

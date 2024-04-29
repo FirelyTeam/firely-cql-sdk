@@ -38,7 +38,7 @@ partial class CqlOperatorsBinder
                     nameof(ICqlOperators.Convert),
                     [to],
                     arg.NewAssignToTypeExpression<object>()
-            );
+                );
             result = (bindToGenericMethod, TypeConversion.OperatorConvert);
             return true;
         }
