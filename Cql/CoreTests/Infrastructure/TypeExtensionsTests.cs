@@ -277,5 +277,8 @@ public readonly record struct EmptyStruct
         public readonly record struct Nested2 { }
 
         public readonly record struct GenericNested2<T1,T2> { }
+
+        public delegate TOut NestedFunc<in TIn, out TOut>(TIn input)
+            where TIn: notnull;
     };
 }

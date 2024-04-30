@@ -247,7 +247,7 @@ internal partial class CqlOperatorsBinder
         params Expression[] expressions) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, method, expressions);
 
-    public static MethodCallExpression BindToGenericMethod(
+    internal static MethodCallExpression BindToGenericMethod(
         string methodName,
         Type[] genericTypeArguments,
         params Expression[] arguments) =>

@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
@@ -138,7 +139,21 @@ internal record TypeFormatterOptions(
         if (type.IsGenericTypeParameter)
         {
             if (!NoGenericTypeParameterNames)
+            {
+                switch (type.GenericParameterAttributes & GenericParameterAttributes.VarianceMask)
+                {
+                    case GenericParameterAttributes.Covariant:
+                        textWriter.Write("out ");
+                        break;
+                    case GenericParameterAttributes.Contravariant:
+                        textWriter.Write("in ");
+                        break;
+                }
+
+                var rest = type.GenericParameterAttributes & ~GenericParameterAttributes.VarianceMask;
+                Debug.Assert(rest == GenericParameterAttributes.None, "Not implemented");
                 WriteName();
+            }
         }
         else if (type.IsArray)
         {
@@ -183,11 +198,11 @@ internal record TypeFormatterOptions(
         {
             textWriter.Write(OpenGenericTypeBracket);
             bool first = true;
-            foreach (var arg in type.GetGenericArguments())
+            foreach (var typeArg in type.GetGenericArguments())
             {
                 if (first) first = false;
                 else textWriter.Write(TypeDelimiter);
-                WriteToTextWriter(arg, textWriter);
+                WriteToTextWriter(typeArg, textWriter);
             }
             textWriter.Write(CloseGenericTypeBracket);
         }

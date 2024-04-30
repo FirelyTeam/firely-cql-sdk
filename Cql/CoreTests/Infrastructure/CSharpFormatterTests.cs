@@ -69,6 +69,9 @@ public class CSharpFormatterTests
             (typeof(EmptyStruct.Nested1.GenericNested2<int, int>[]), "EmptyStruct.Nested1.GenericNested2<int,int>[]"),
             // Generic+Nested+Array+Nullable
             (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?[]), "EmptyStruct.Nested1.GenericNested2<int,int>?[]"),
+            // Generic+Nested+Delegate
+            (typeof(EmptyStruct.Nested1.NestedFunc<int, int>?[]), "EmptyStruct.Nested1.NestedFunc<int,int>[]"),
+            (typeof(EmptyStruct.Nested1.NestedFunc<,>), "EmptyStruct.Nested1.NestedFunc<in TIn,out TOut>")
         ];
 
         var typeToCSharpStringOptions = new TypeFormatterOptions(NoNamespaces: true, UseKeywords: true);

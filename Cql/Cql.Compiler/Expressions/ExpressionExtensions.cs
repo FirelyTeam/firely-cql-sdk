@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
@@ -20,22 +21,28 @@ internal static class ExpressionExtensions
 
         if (expression is ConstantExpression constant)
         {
-            if (constant.Value is null)
+            switch (constant.Value)
             {
-                if (type.IsNullable(out _))
+                case null when type.IsNullable(out _):
                     return NullExpression.ForType(type);
-            }
-            else if (
-                constant.Value is not string // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
-                && constant.Value.GetType().IsAssignableTo(type))
-            {
-                return Expression.Constant(constant.Value, type);
-            } else if (
-                constant.Value is Enum enumValue)
-            {
-                ;
+
+                case { } value and not string when
+                    value.GetType().IsAssignableTo(type): // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
+                    return Expression.Constant(value, type);
+
+                case Enum enumValue when type == typeof(string):
+                    Debug.Assert(false, "Not expecting to get here yet");
+                    var name = Enum.GetName(enumValue.GetType(), enumValue);
+                    if (name is null)
+                        throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
+
+                    return Expression.Constant(name.ToLowerInvariant());
             }
         }
+
+        Debug.Assert(
+            expression.Type == typeof(object) // Choice?
+            || expression.Type.IsAssignableTo(type));
 
         Expression cast = Expression.Convert(expression, type);
         return cast;
