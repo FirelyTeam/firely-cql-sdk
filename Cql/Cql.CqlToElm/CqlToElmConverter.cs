@@ -81,6 +81,7 @@ namespace Hl7.Cql.CqlToElm
                 catch (Exception e)
                 {
                         Logger.LogCritical(e, "Exception while converting CQL to ELM.");
+                        throw;
                 }
 #else
                     catch
