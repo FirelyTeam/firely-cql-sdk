@@ -20,6 +20,12 @@ public class CSharpCodeWriterOptions
     public DirectoryInfo? OutDirectory { get; set; }
 
     internal const string ArgNameOutDirectory = "--cs";
+    internal const string ArgNameTypeFormat = "--cs-typeformat";
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to prefer 'var' over explicit types.
+    /// </summary>
+    public CSharpCodeWriterTypeFormat TypeFormat { get; set; }
 
     /// <summary>
     /// Binds the configuration values to the CSharpResourceWriterOptions object.
@@ -40,4 +46,20 @@ public class CSharpCodeWriterOptions
             return string.IsNullOrWhiteSpace(path) ? null : new DirectoryInfo(Path.GetFullPath(path));
         }
     }
+}
+
+/// <summary>
+/// How to format types in C# output
+/// </summary>
+public enum CSharpCodeWriterTypeFormat
+{
+    /// <summary>
+    /// Use 'var' over explicit types.
+    /// </summary>
+    Var,
+
+    /// <summary>
+    /// Use explicit types.
+    /// </summary>
+    Explicit
 }

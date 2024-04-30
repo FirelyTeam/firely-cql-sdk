@@ -33,13 +33,17 @@ internal class CqlPackagerFactory : CqlCompilerFactory
     protected virtual CqlTypeToFhirTypeMapper NewCqlTypeToFhirTypeMapper() => new(TypeResolver);
 
     public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => Singleton(NewCSharpLibrarySetToStreamsWriter);
-    protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(Logger<CSharpLibrarySetToStreamsWriter>(), TypeResolver);
+    protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(
+        Logger<CSharpLibrarySetToStreamsWriter>(),
+        Options(CSharpCodeWriterOptions ?? throw new ArgumentNullException(nameof(CSharpCodeWriterOptions))),
+        TypeResolver);
 
     public virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
     protected virtual CSharpCodeStreamPostProcessor? NewCSharpCodeStreamPostProcessorOrNull() =>
         CSharpCodeWriterOptions is { OutDirectory: { } } opt
             ? NewWriteToFileCSharpCodeStreamPostProcessor(opt)
             : default(CSharpCodeStreamPostProcessor);
+
     protected virtual WriteToFileCSharpCodeStreamPostProcessor NewWriteToFileCSharpCodeStreamPostProcessor(
         CSharpCodeWriterOptions opt) =>
         new(Options(opt), Logger<WriteToFileCSharpCodeStreamPostProcessor>());
