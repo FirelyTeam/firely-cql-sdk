@@ -7,6 +7,8 @@
  */
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -16,11 +18,14 @@ internal abstract class CqlFactoryBase
 {
     private readonly ConcurrentDictionary<Type, object> _singletons;
 
-    protected CqlFactoryBase(ILoggerFactory loggerFactory)
+    protected CqlFactoryBase(
+	    ILoggerFactory loggerFactory,
+	    CancellationToken cancellationToken = default)
     {
         _singletons = new ConcurrentDictionary<Type, object>();
         LoggerFactory = loggerFactory;
-    }
+        cancellationToken.Register(() => Cleanup());
+	}
 
     protected ILoggerFactory LoggerFactory { get; }
 
@@ -30,5 +35,21 @@ internal abstract class CqlFactoryBase
 
     protected virtual T Transient<T>(Func<T> fn) => fn();
 
-    protected virtual T Singleton<T>(Func<T> fn) => (T)_singletons.GetOrAdd(typeof(T), _ => fn()!);
+    protected virtual T Singleton<T>(Func<T> fn) =>
+	    (T)_singletons.GetOrAdd(typeof(T), _ =>
+	    {
+		    var singleton = fn()!;
+            if (singleton is IDisposable disposable)
+	            _disposableSingletons.Add(disposable);
+
+		    return singleton;
+	    });
+
+    private readonly HashSet<IDisposable> _disposableSingletons = new();
+
+    private void Cleanup()
+    {
+	    foreach (var disposableSingleton in _disposableSingletons)
+		    disposableSingleton.Dispose();
+    }
 }

@@ -34,7 +34,7 @@ internal class ExpressionConverter
 	{
 		Type from = expression.Type;
 
-		if (_typeConverter?.CanConvert(from, to) == true)
+		if (_typeConverter.CanConvert(from, to))
 		{
 			var bindToGenericMethod =
 				CqlOperatorsBinder.BindToGenericMethod(
