@@ -35,6 +35,13 @@ namespace Hl7.Cql.Elm
         /// <param name="libraryName">The qualifier part of the identifier found at the point of reference.</param>
         /// <returns></returns>
         Expression ToRef(string? libraryName);
+
+        /// <summary>
+        /// Adds an error to this element.
+        /// </summary>
+        /// <param name="error">The error.</param>
+        /// <returns><see langword="this" /></returns>
+        IDefinitionElement AddError(CqlToElmError error);
     }
 
     public partial class ValueSetDef : IDefinitionElement
@@ -48,6 +55,8 @@ namespace Hl7.Cql.Elm
             libraryName = libraryName,
             name = name,
         }.WithId().WithResultType(SystemTypes.ValueSetType);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
     }
 
     public partial class CodeSystemDef : IDefinitionElement
@@ -61,6 +70,8 @@ namespace Hl7.Cql.Elm
             libraryName = libraryName,
             name = name,
         }.WithId().WithResultType(SystemTypes.CodeSystemType);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
     }
 
     public partial class ConceptDef : IDefinitionElement
@@ -74,6 +85,9 @@ namespace Hl7.Cql.Elm
             libraryName = libraryName,
             name = name,
         }.WithId().WithResultType(SystemTypes.ConceptType);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class CodeDef : IDefinitionElement
@@ -87,6 +101,9 @@ namespace Hl7.Cql.Elm
             libraryName = libraryName,
             name = name,
         }.WithId().WithResultType(SystemTypes.CodeType);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class ParameterDef : IDefinitionElement
@@ -100,6 +117,9 @@ namespace Hl7.Cql.Elm
             libraryName = libraryName,
             name = name,
         }.WithId().WithResultType(parameterTypeSpecifier);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class ExpressionDef : IDefinitionElement
@@ -113,6 +133,9 @@ namespace Hl7.Cql.Elm
             libraryName = libraryName,
             name = name,
         }.WithId().WithResultType(resultTypeSpecifier);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class FunctionDef : IDefinitionElement
@@ -128,6 +151,9 @@ namespace Hl7.Cql.Elm
             libraryName = libraryName,
             name = name,
         }.WithId().WithResultType(resultTypeSpecifier ?? throw new InvalidOperationException("Missing result type specifier for function ref"));
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class ContextDef : IDefinitionElement
@@ -144,6 +170,9 @@ namespace Hl7.Cql.Elm
         // if we ever try to do that.
         Expression IDefinitionElement.ToRef(string? libraryName) =>
             throw new InvalidOperationException("There is no reference type for a context definition.");
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class OperandDef : IDefinitionElement
@@ -156,6 +185,9 @@ namespace Hl7.Cql.Elm
         {
             name = name,
         }.WithId().WithResultType(operandTypeSpecifier);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class AliasedQuerySource : IDefinitionElement
@@ -176,6 +208,9 @@ namespace Hl7.Cql.Elm
             var aliasRef = new AliasRef { name = alias }.WithResultType(aliasType);
             return aliasRef;
         }
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class LetClause : IDefinitionElement
@@ -188,6 +223,9 @@ namespace Hl7.Cql.Elm
         {
             name = identifier,
         }.WithId().WithResultType(resultTypeSpecifier);
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class UsingDef : IDefinitionElement
@@ -198,6 +236,9 @@ namespace Hl7.Cql.Elm
 
         Expression IDefinitionElement.ToRef(string? _) =>
             throw new InvalidOperationException("There is no reference type for a using statement.");
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     public partial class IncludeDef : IDefinitionElement
@@ -208,6 +249,9 @@ namespace Hl7.Cql.Elm
 
         Expression IDefinitionElement.ToRef(string? _) =>
             throw new InvalidOperationException("There is no reference type for an include statement.");
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
     }
 
     /// <summary>
@@ -264,5 +308,7 @@ namespace Hl7.Cql.Elm
         Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
 
         internal FunctionRef ToRef(string? libraryName) => throw new NotSupportedException($"Refs cannot be created until the overload is resolved.");
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => throw new NotSupportedException("An overloaded def cannot have an error.");
     }
 }

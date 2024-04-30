@@ -20,7 +20,8 @@ namespace Hl7.Cql.CqlToElm
 
         public CultureInfo Culture { get; }
 
-                
+        public string CannotResolveCircularReference() =>
+             Messages.CannotResolveCircularReference;
         public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>
             string.Format(Culture, Messages.CouldNotResolveContextName, contextName, string.Join(", ", modelNames));
         public string CouldNotResolveFunction(string functionName, params Expression[] arguments) =>

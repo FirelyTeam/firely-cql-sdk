@@ -300,7 +300,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // statement : expressionDefinition   | contextDefinition | functionDefinition ;
         public void VisitStatements(cqlParser.StatementContext[] context)
         {
-            var delayedSymbolTable = new DelayedSymbolTable(LibraryBuilder.CurrentScope);
+            var delayedSymbolTable = new DelayedSymbolTable(LibraryBuilder.CurrentScope, Messaging);
 
             IReadOnlyCollection<IDefinitionElement> delayedExpressions;
 
@@ -332,12 +332,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                     if (statementContext.expressionDefinition() is { } edCtx)
                     {
-                        table.TryAddDelayed(edCtx.identifier().Parse()!, activeContext?.name,
+                        table.TryAddDelayed(edCtx.identifier().Parse()!, 
+                            activeContext?.name,
+                            edCtx.Locator(),
                             () => (ExpressionDef)Visit(edCtx));
                     }
                     else if (statementContext.functionDefinition() is { } fdCtx)
                     {
-                        table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!, activeContext?.name,
+                        table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!, 
+                            activeContext?.name,
+                            fdCtx.Locator(),
                             () => (ExpressionDef)Visit(fdCtx));
                     }
                     else if (statementContext.contextDefinition() is { } cdCtx)

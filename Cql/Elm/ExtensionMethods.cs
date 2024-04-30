@@ -73,11 +73,11 @@ namespace Hl7.Cql.Elm
                 if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
                 {
                     // avoid duplicate errors.
-                    foreach(var error in errors)
+                    foreach (var error in errors)
                     {
                         if (!allErrors.Contains(error))
                             allErrors.Add(error);
-                    }    
+                    }
                 }
 
                 // Let the walker visit my children.
@@ -101,11 +101,19 @@ namespace Hl7.Cql.Elm
                 message = errorMessage,
             };
 
-            node.annotation = node.annotation is { } annotations ?
-                annotations.Append(error).ToArray()
-                : new[] { error };
+            return AddError(node, error);
+        }
 
+        /// <summary>
+        /// Adds an error to the given node.
+        /// </summary>
+        public static T AddError<T>(this T node, CqlToElmError error) where T : Element
+        {
+            node.annotation = node.annotation is { } annotations 
+                ? annotations.Append(error).ToArray()
+                : new[] { error };
             return node;
         }
+
     }
 }

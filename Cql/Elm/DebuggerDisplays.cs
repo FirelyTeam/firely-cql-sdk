@@ -13,7 +13,7 @@ namespace Hl7.Cql.Elm
     partial class CqlToElmError
     {
     }
-
+    
     [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
     partial class Interval
     {

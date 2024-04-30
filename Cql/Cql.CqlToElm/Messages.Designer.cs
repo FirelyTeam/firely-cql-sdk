@@ -61,6 +61,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot resolve reference to expression or function a because it results in a circular reference..
+        /// </summary>
+        internal static string CannotResolveCircularReference {
+            get {
+                return ResourceManager.GetString("CannotResolveCircularReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
         /// </summary>
         internal static string CouldNotFindLibrary {

@@ -363,14 +363,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitMemberInvocation([NotNull] cqlParser.MemberInvocationContext context)
         {
             var identifier = context.referentialIdentifier().Parse();
-            if (!LibraryBuilder.CurrentScope.TryResolveIdentifier(null, identifier, out var _))
+            if (!LibraryBuilder.CurrentScope.TryResolveIdentifier(null, identifier, out var def))
             {
                 if (LibraryBuilder.CurrentScope.TryResolveIdentifier(null, "$this", out var @this))
                     return navigateIntoType(@this!.ToRef(null), identifier);
             }
-            return LibraryBuilder.CurrentScope!
+            var @ref = LibraryBuilder.CurrentScope!
                 .Ref(Messaging, null, identifier)
                 .WithLocator(context.Locator());
+            if (def is Element element)
+            {
+                var errors = element.GetErrors()
+                    .OfType<CircularReferenceError>()
+                    .ToArray();
+                foreach (var error in errors)
+                    @ref.AddError(error);
+            }
+            return @ref;
         }
 
         // function  : referentialIdentifier '(' paramList? ')'
