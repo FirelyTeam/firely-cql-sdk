@@ -8,7 +8,6 @@
 
 using System;
 using System.Linq.Expressions;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
@@ -35,21 +34,6 @@ internal class ExpressionConverter
 	{
 		Type from = expression.Type;
 
-		if (from == to)
-		{
-			// Exact match
-			result = (expression, TypeConversion.ExactType);
-			return true;
-		}
-
-		if (from.IsAssignableTo(to))
-		{
-			// 'from' is a subtype of 'to' e.g. string -> object
-			// OR 'from' is a nullable value type and 'to' is the underlying type e.g. int? -> int
-			result = (expression.NewAssignToTypeExpression(to), TypeConversion.AssignableType);
-			return true;
-		}
-
 		if (_typeConverter?.CanConvert(from, to) == true)
 		{
 			var bindToGenericMethod =
@@ -62,29 +46,8 @@ internal class ExpressionConverter
 			return true;
 		}
 
-		if (expression is ConstantExpression fromConstant)
-		{
-			if (fromConstant.Value is null && to.IsNullable(out _))
-			{
-				// Null values to a type that can accept nulls e.g. default(string) or default(int?)
-				result =(fromConstant.NewAssignToTypeExpression(to), TypeConversion.ExactType);
-				return true;
-			}
-
-			if (fromConstant.Value is Enum enumValue && to == typeof(string) )
-			{
-				// Enum values to lowercase string e.g DateTimePrecision.Year -> "year"
-				var name = Enum.GetName(enumValue.GetType(), enumValue);
-				if (name is null)
-					throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
-
-				result = (Expression.Constant(name.ToLowerInvariant()), TypeConversion.SimpleConvert);
-				return true;
-			}
-		}
-
-		result = default;
-		return false;
+		result = expression.TryNewAssignToTypeExpression(to, throwError:false)!;
+		return result.conversion != TypeConversion.NoMatch;
 	}
 
 

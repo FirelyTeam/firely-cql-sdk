@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
-using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
@@ -14,41 +13,55 @@ namespace Hl7.Cql.Compiler.Expressions;
 
 internal static class ExpressionExtensions
 {
-    public static Expression NewAssignToTypeExpression(this Expression expression, Type type)
+    public static Expression NewAssignToTypeExpression(
+        this Expression expression,
+        Type type) =>
+        TryNewAssignToTypeExpression(
+            expression,
+            type).expression!;
+
+    public static (Expression? expression, TypeConversion typeConversion) TryNewAssignToTypeExpression(
+        this Expression expression,
+        Type type,
+        bool throwError = true)
     {
         if (expression.Type == type)
-            return expression;
+            return (expression, TypeConversion.ExactType);
 
         if (expression is ConstantExpression constant)
         {
             switch (constant.Value)
             {
                 case null when type.IsNullable(out _):
-                    return NullExpression.ForType(type);
+                    return (NullExpression.ForType(type), TypeConversion.ExactType);
 
                 case { } value and not string when
                     value.GetType().IsAssignableTo(type): // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
-                    return Expression.Constant(value, type);
+                    return (Expression.Constant(value, type), TypeConversion.SimpleConvert);
 
                 case Enum enumValue when type == typeof(string):
-                    Debug.Assert(false, "Not expecting to get here yet");
                     var name = Enum.GetName(enumValue.GetType(), enumValue);
                     if (name is null)
                         throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
 
-                    return Expression.Constant(name.ToLowerInvariant());
+                    return (Expression.Constant(name.ToLowerInvariant()), TypeConversion.SimpleConvert);
             }
         }
 
-        Debug.Assert(
-            expression.Type == typeof(object) // Choice?
-            || expression.Type.IsAssignableTo(type));
+        var isAssignableTo = expression.Type == typeof(object) // Choice?
+                             || expression.Type.IsAssignableTo(type);
+        if (isAssignableTo || throwError)
+        {
+            Expression cast = Expression.Convert(expression, type);
+            return (cast, TypeConversion.SimpleConvert);
+        }
 
-        Expression cast = Expression.Convert(expression, type);
-        return cast;
+        return (null, TypeConversion.NoMatch);
     }
 
-    public static Expression NewAssignToTypeExpression<TType>(this Expression expression) =>
+    public static Expression NewAssignToTypeExpression<TType>(
+        this Expression expression,
+        bool throwError = true) =>
         expression.NewAssignToTypeExpression(typeof(TType));
 
 

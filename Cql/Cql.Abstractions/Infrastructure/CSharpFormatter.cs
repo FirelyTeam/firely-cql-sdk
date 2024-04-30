@@ -142,11 +142,16 @@ internal record TypeFormatterOptions(
             {
                 switch (type.GenericParameterAttributes & GenericParameterAttributes.VarianceMask)
                 {
+                    case GenericParameterAttributes.None:
+                        break;
                     case GenericParameterAttributes.Covariant:
                         textWriter.Write("out ");
                         break;
                     case GenericParameterAttributes.Contravariant:
                         textWriter.Write("in ");
+                        break;
+                    default:
+                        Debug.Fail("Unexpected variance flag");
                         break;
                 }
 
