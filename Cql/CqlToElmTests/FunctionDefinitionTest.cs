@@ -99,10 +99,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void SignalsUnknownParameters()
         {
-            MakeLibrary(@"
+            _ = MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): b",
-            "Could not resolve identifier b in the current library.");
+                define function Double(a Integer): b", "Unable to resolve identifier 'b'.");
         }
 
         [TestMethod]
@@ -149,12 +148,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DetectsCycle()
         {
-            // This should really not be an exception, but an error in the output.
-            // This is left as an exercise for the reader.
-            Assert.ThrowsException<InvalidOperationException>(() => MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define a: b                
-                define b: a"), "Cycle detected in definition of 'a'.");
+            _ = MakeLibrary(@"
+            library FuncTest version '1.0.0'          
+            define a: b                
+            define b: a", "Circular reference detected in a.");
         }
     }
 }
