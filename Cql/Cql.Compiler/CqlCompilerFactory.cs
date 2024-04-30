@@ -45,7 +45,7 @@ internal class CqlCompilerFactory :
         var converter = FhirTypeConverter
                 .Create(ModelInspector, CacheSize)
                 .UseLogger(Logger<TypeConverter>());
-        converter.LogInitialConverters();
+        converter.CaptureAvailableConverters();
         return converter;
     }
 

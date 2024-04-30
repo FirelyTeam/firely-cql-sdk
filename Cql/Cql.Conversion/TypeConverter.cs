@@ -200,7 +200,7 @@ namespace Hl7.Cql.Conversion
             return this;
         }
 
-        internal virtual void LogInitialConverters()
+        internal virtual void CaptureAvailableConverters()
         {
             if (_logger is null)
                 return;
@@ -209,14 +209,6 @@ namespace Hl7.Cql.Conversion
                 _converters
                     .SelectMany(kv => kv.Value, ((kvFrom, kvTo) => (From: kvFrom.Key, To: kvTo.Key)))
                     .Select(TypesToString));
-
-            var lines = string.Concat(
-                _conversionsAvailable
-                    .Select(line => $"\n\t* {line}")
-                    .Order()
-            );
-
-            _logger.LogDebug("TypeConverter has the following conversions defined:{lines}", lines);
         }
 
         private void LogFinalConverters()
@@ -224,20 +216,21 @@ namespace Hl7.Cql.Conversion
             if (_logger is null)
                 return;
 
-            var usedLines = string.Concat(
-                _conversionsUsed
-                    .Select(line => $"\n\t* {line}")
+            var lines = string.Concat(
+                _conversionsAvailable
                     .Order()
-            );
+                    .Select((line,i) => (line,i:i+1,used: _conversionsUsed.Contains(line)))
+                    .OrderBy(o => o.used).ThenBy(o => o.i)
+                    .Select(t => $"\n\t{t.i,5}. {(t.used ? "[x]" : "[_]")} {t.line}"));
 
-            var unusedLines = string.Concat(
-                _conversionsAvailable.Except(_conversionsUsed)
-                    .Select(line => $"\n\t* {line}")
-                    .Order()
-            );
+            //_conversionsAvailable.Except(_conversionsUsed)
 
-            _logger.LogDebug("TypeConverter used the following conversions:{lines}", usedLines);
-            _logger.LogDebug("TypeConverter did not use these conversions:{lines}", unusedLines);
+            _logger.LogDebug(
+                "TypeConverter conversions usage ({unusedCount} unused, and {usedCount} used. {totalCount} in total):{lines}",
+                _conversionsAvailable.Count - _conversionsUsed.Count,
+                _conversionsUsed.Count,
+                _conversionsAvailable.Count,
+                lines);
         }
 
         private static readonly TypeFormatterOptions TypeFormatterOptions = new(
