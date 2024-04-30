@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Elm;
 
-namespace Hl7.Cql.CqlToElm.Visitors;
+namespace Hl7.Cql.CqlToElm;
 
 internal class DelayedSymbolTable : ISymbolScope
 {
