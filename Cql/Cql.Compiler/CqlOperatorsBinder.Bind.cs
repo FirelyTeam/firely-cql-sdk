@@ -226,7 +226,8 @@ internal partial class CqlOperatorsBinder
 
             for (int i = 0; i < args.Length; i++)
             {
-                if (!TryConvert(args[i], parameters[i].ParameterType, out var t))
+                Type to = parameters[i].ParameterType;
+                if (!_expressionConverter.TryConvert(args[i], to, out var t))
                     return false;
 
                 (bindArgs[i], bindConversions[i]) = t;
@@ -246,7 +247,7 @@ internal partial class CqlOperatorsBinder
         params Expression[] expressions) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, method, expressions);
 
-    private static MethodCallExpression BindToGenericMethod(
+    public static MethodCallExpression BindToGenericMethod(
         string methodName,
         Type[] genericTypeArguments,
         params Expression[] arguments) =>

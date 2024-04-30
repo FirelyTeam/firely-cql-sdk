@@ -228,7 +228,7 @@ partial class CqlOperatorsBinder
             return call;
         }
 
-        return TryConvert(source, toType, out var t)
+        return _expressionConverter.TryConvert(source, toType, out var t)
             ? t.arg!
             : throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
     }

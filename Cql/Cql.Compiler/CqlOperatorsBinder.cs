@@ -11,7 +11,6 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
@@ -26,33 +25,30 @@ namespace Hl7.Cql.Compiler
     internal partial class CqlOperatorsBinder
     {
         private readonly ILogger<CqlOperatorsBinder> _logger;
-        private readonly TypeConverter? _typeConverter;
         private readonly TypeResolver _typeResolver;
+        private readonly ExpressionConverter _expressionConverter;
 
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="logger">
-        /// The logger used in this binding.
+        /// The logger used.
         /// </param>
         /// <param name="typeResolver">
-        /// The type resolver used in this binding.
+        /// The type resolver used.
         /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
         /// </param>
-        /// <param name="typeConverter">
-        /// If provided, this binding will use the supplied instance to determine whether
-        /// a conversion is possible.  Note that if you provide a different instance of this class to <see cref="CqlOperators"/>,
-        /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
-        /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
+        /// <param name="expressionConverter">
+        /// The expression converter used.
         /// </param>
         public CqlOperatorsBinder(
             ILogger<CqlOperatorsBinder> logger,
             TypeResolver typeResolver,
-            TypeConverter? typeConverter = null)
+            ExpressionConverter expressionConverter)
         {
-            _typeConverter = typeConverter;
             _typeResolver = typeResolver;
+            _expressionConverter = expressionConverter;
             _logger = logger;
         }
 
@@ -106,7 +102,7 @@ namespace Hl7.Cql.Compiler
         /// <param name="type">The type to convert the expression to.</param>
         /// <returns>The converted expression.</returns>
         public virtual Expression ConvertToType(Expression expression, Type type) =>
-            TryConvert(expression, type, out var t)
+            _expressionConverter.TryConvert(expression, type, out var t)
                 ? t.arg!
                 : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
 
