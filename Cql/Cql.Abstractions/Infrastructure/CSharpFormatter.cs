@@ -89,9 +89,10 @@ internal static class CSharpFormatter
 internal delegate TextWriterFormattableString TypeFormatter(TypeFormatterContext type);
 
 internal record TypeFormatterOptions(
-    bool HideNamespaces = false,
-    bool PreferKeywords = false,
-    bool ShowGenericTypeParameterNames = false, // e.g. IDictionary<TKey,TValue> instead of IDictionary<,>
+    bool NoNamespaces = false,
+    bool UseKeywords = false,
+    bool NoNullableOperator = false, // e.g. Nullable<int> instead of int?
+    bool NoGenericTypeParameterNames = false, // e.g.IDictionary<,> instead of  IDictionary<TKey,TValue>
     string TypeDelimiter = ",", // [int,string] or <TKey,TValue>
     string NestedTypeDelimiter = ".") // A.Nested.Nested
 {
@@ -111,13 +112,13 @@ internal record TypeFormatterOptions(
         Type type,
         TextWriter textWriter)
     {
-        if (PreferKeywords && type.GetCSharpKeyword() is { } keyword)
+        if (UseKeywords && type.GetCSharpKeyword() is { } keyword)
         {
             textWriter.Write(keyword);
             return;
         }
 
-        var hideNamespaces = HideNamespaces;
+        var hideNamespaces = NoNamespaces;
         var isNullableValueType = false;
 
         // Nested parts first.
@@ -136,14 +137,14 @@ internal record TypeFormatterOptions(
         // Name
         if (type.IsGenericTypeParameter)
         {
-            if (ShowGenericTypeParameterNames)
+            if (!NoGenericTypeParameterNames)
                 WriteName();
         }
         else if (type.IsArray)
         {
             WriteToTextWriter(type.GetElementType()!, textWriter);
         }
-        else if (type.IsValueType && type.IsNullableValueType(out var underlyingType))
+        else if (!NoNullableOperator && type.IsValueType && type.IsNullableValueType(out var underlyingType))
         {
             isNullableValueType = true;
             WriteToTextWriter(underlyingType, textWriter);

@@ -60,7 +60,7 @@ public class CSharpFormatterTests
             (typeof(int?), "int?"),
             // Generic
             (typeof(IDictionary<string?, int?>), "IDictionary<string,int?>"),
-            (typeof(IDictionary<,>), "IDictionary<,>"),
+            (typeof(IDictionary<,>), "IDictionary<TKey,TValue>"),
             // Generic+Nested
             (typeof(EmptyStruct.Nested1.GenericNested2<int, int>), "EmptyStruct.Nested1.GenericNested2<int,int>"),
             // Generic+Nested+Nullable
@@ -71,7 +71,7 @@ public class CSharpFormatterTests
             (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?[]), "EmptyStruct.Nested1.GenericNested2<int,int>?[]"),
         ];
 
-        var typeToCSharpStringOptions = new TypeFormatterOptions(HideNamespaces: true, PreferKeywords: true);
+        var typeToCSharpStringOptions = new TypeFormatterOptions(NoNamespaces: true, UseKeywords: true);
         foreach (var (type, expected) in testCases)
         {
             var actual = type.WriteCSharp(typeFormatterOptions: typeToCSharpStringOptions).ToString()!;
@@ -80,23 +80,21 @@ public class CSharpFormatterTests
 
         Assert.AreEqual(
             expected: "System.Collections.Generic.IDictionary<,>",
-            actual: typeof(IDictionary<,>).WriteCSharp(typeFormatterOptions: new()).ToString()!);
+            actual: typeof(IDictionary<,>).WriteCSharp(typeFormatterOptions: new(NoGenericTypeParameterNames:true)).ToString()!);
 
         Assert.AreEqual(
             expected: "IDictionary<TKey,TValue>",
             actual: typeof(IDictionary<,>).WriteCSharp(
                 typeFormatterOptions: new(
-                    HideNamespaces: true,
-                    PreferKeywords: true,
-                    ShowGenericTypeParameterNames: true)).ToString()!);
+                    NoNamespaces: true,
+                    UseKeywords: true)).ToString()!);
 
         Assert.AreEqual(
             expected: "System.Collections.Generic.IDictionary<TKey, TValue>",
             actual: typeof(IDictionary<,>).WriteCSharp(
                 typeFormatterOptions: new(
-                    HideNamespaces: false,
-                    PreferKeywords: true,
-                    ShowGenericTypeParameterNames: true,
+                    NoNamespaces: false,
+                    UseKeywords: true,
                     TypeDelimiter: ", ")).ToString()!);
 
         Assert.AreEqual(
@@ -104,6 +102,19 @@ public class CSharpFormatterTests
             actual: typeof(EmptyStruct.Nested1.Nested2).WriteCSharp(
                 typeFormatterOptions: new(
                     NestedTypeDelimiter:"+")).ToString()!);
+
+        Assert.AreEqual(
+            expected: "System.Nullable<int>",
+            actual: typeof(int?).WriteCSharp(
+                typeFormatterOptions: new(
+                    NoNullableOperator: true,
+                    UseKeywords: true)).ToString()!);
+
+        Assert.AreEqual(
+            expected: "System.Nullable<System.Int32>",
+            actual: typeof(int?).WriteCSharp(
+                typeFormatterOptions: new(
+                    NoNullableOperator: true)).ToString()!);
     }
 
     [TestMethod]
@@ -135,8 +146,8 @@ public class CSharpFormatterTests
                     parameterFormatting: new (
                         parameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
                         typeFormatting: new(
-                            PreferKeywords:true,
-                            HideNamespaces:true)),
+                            UseKeywords:true,
+                            NoNamespaces:true)),
                     parameterSeparator: "; "
                     )).ToString()!);
 

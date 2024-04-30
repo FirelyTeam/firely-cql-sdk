@@ -2243,10 +2243,10 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("Days In Period")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is. Note that the result will include intervals that are closed at the beginning and open at the end")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `daysInPeriod()` instead")]
-	public IEnumerable<Tuple_BZfjDHYASdKbVKTOeigaYPBVf> Days_In_Period(CqlInterval<CqlDateTime> Period)
+	public IEnumerable<Tuple_ddJhZGNHefSCOAJJFEIEcXie> Days_In_Period(CqlInterval<CqlDateTime> Period)
 	{
 		var a_ = this.Interval_To_Day_Numbers(Period);
-		Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
+		Tuple_ddJhZGNHefSCOAJJFEIEcXie b_(int? DayIndex)
 		{
 			var d_ = context.Operators.Start(Period);
 			var e_ = context.Operators.Quantity(24m, "hours");
@@ -2293,7 +2293,7 @@ public class QICoreCommon_2_0_000
 				};
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);
-			var l_ = new Tuple_BZfjDHYASdKbVKTOeigaYPBVf
+			var l_ = new Tuple_ddJhZGNHefSCOAJJFEIEcXie
 			{
 				dayIndex = DayIndex,
 				dayPeriod = k_,
@@ -2301,17 +2301,17 @@ public class QICoreCommon_2_0_000
 
 			return l_;
 		};
-		var c_ = context.Operators.Select<int?, Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
+		var c_ = context.Operators.Select<int?, Tuple_ddJhZGNHefSCOAJJFEIEcXie>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("daysInPeriod")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is. Note that the result will include intervals that are closed at the beginning and open at the end")]
-	public IEnumerable<Tuple_BZfjDHYASdKbVKTOeigaYPBVf> daysInPeriod(CqlInterval<CqlDateTime> Period)
+	public IEnumerable<Tuple_ddJhZGNHefSCOAJJFEIEcXie> daysInPeriod(CqlInterval<CqlDateTime> Period)
 	{
 		var a_ = this.Interval_To_Day_Numbers(Period);
-		Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
+		Tuple_ddJhZGNHefSCOAJJFEIEcXie b_(int? DayIndex)
 		{
 			var d_ = context.Operators.Start(Period);
 			var e_ = context.Operators.Quantity(24m, "hours");
@@ -2358,7 +2358,7 @@ public class QICoreCommon_2_0_000
 				};
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);
-			var l_ = new Tuple_BZfjDHYASdKbVKTOeigaYPBVf
+			var l_ = new Tuple_ddJhZGNHefSCOAJJFEIEcXie
 			{
 				dayIndex = DayIndex,
 				dayPeriod = k_,
@@ -2366,7 +2366,7 @@ public class QICoreCommon_2_0_000
 
 			return l_;
 		};
-		var c_ = context.Operators.Select<int?, Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
+		var c_ = context.Operators.Select<int?, Tuple_ddJhZGNHefSCOAJJFEIEcXie>(a_, b_);
 
 		return c_;
 	}

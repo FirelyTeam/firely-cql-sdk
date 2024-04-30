@@ -48,9 +48,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
     internal Lazy<CqlCode[]> __CPT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
     internal Lazy<IEnumerable<Encounter>> __Encounter_With_Antibiotic_Ordered_Within_Three_Days;
@@ -106,9 +106,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
         __CPT = new Lazy<CqlCode[]>(this.CPT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
         __Encounter_With_Antibiotic_Ordered_Within_Three_Days = new Lazy<IEnumerable<Encounter>>(this.Encounter_With_Antibiotic_Ordered_Within_Three_Days_Value);
@@ -367,7 +367,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -375,10 +375,10 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -386,10 +386,10 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -397,7 +397,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -589,9 +589,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days();
 		var b_ = this.Pharyngitis_or_Tonsillitis();
 		var c_ = context.Operators.CrossJoin<Encounter, Condition>(a_, b_);
-		Tuple_GCVGMbOiaNAaiRPIPICSbUPeC d_(ValueTuple<Encounter,Condition> _valueTuple)
+		Tuple_YPYXEdbbCQBdAVHXVcKUWMfH d_(ValueTuple<Encounter,Condition> _valueTuple)
 		{
-			var j_ = new Tuple_GCVGMbOiaNAaiRPIPICSbUPeC
+			var j_ = new Tuple_YPYXEdbbCQBdAVHXVcKUWMfH
 			{
 				VisitWithAntibiotic = _valueTuple.Item1,
 				AcutePharyngitisTonsillitis = _valueTuple.Item2,
@@ -599,21 +599,21 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuple_GCVGMbOiaNAaiRPIPICSbUPeC>(c_, d_);
-		bool? f_(Tuple_GCVGMbOiaNAaiRPIPICSbUPeC tuple_gcvgmboianaairpipicsbupec)
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(c_, d_);
+		bool? f_(Tuple_YPYXEdbbCQBdAVHXVcKUWMfH tuple_ypyxedbbcqbdavhxvckuwmfh)
 		{
-			var k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_gcvgmboianaairpipicsbupec.AcutePharyngitisTonsillitis);
+			var k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_ypyxedbbcqbdavhxvckuwmfh.AcutePharyngitisTonsillitis);
 			var l_ = context.Operators.Start(k_);
-			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_gcvgmboianaairpipicsbupec.VisitWithAntibiotic?.Period);
+			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_ypyxedbbcqbdavhxvckuwmfh.VisitWithAntibiotic?.Period);
 			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 			var o_ = context.Operators.In<CqlDateTime>(l_, n_, null);
 
 			return o_;
 		};
-		var g_ = context.Operators.Where<Tuple_GCVGMbOiaNAaiRPIPICSbUPeC>(e_, f_);
-		Encounter h_(Tuple_GCVGMbOiaNAaiRPIPICSbUPeC tuple_gcvgmboianaairpipicsbupec) => 
-			tuple_gcvgmboianaairpipicsbupec.VisitWithAntibiotic;
-		var i_ = context.Operators.Select<Tuple_GCVGMbOiaNAaiRPIPICSbUPeC, Encounter>(g_, h_);
+		var g_ = context.Operators.Where<Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(e_, f_);
+		Encounter h_(Tuple_YPYXEdbbCQBdAVHXVcKUWMfH tuple_ypyxedbbcqbdavhxvckuwmfh) => 
+			tuple_ypyxedbbcqbdavhxvckuwmfh.VisitWithAntibiotic;
+		var i_ = context.Operators.Select<Tuple_YPYXEdbbCQBdAVHXVcKUWMfH, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -730,9 +730,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Group_A_Streptococcus_Lab_Test_With_Result();
 		var b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic();
 		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV d_(ValueTuple<Observation,Encounter> _valueTuple)
+		Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ d_(ValueTuple<Observation,Encounter> _valueTuple)
 		{
-			var j_ = new Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV
+			var j_ = new Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ
 			{
 				GroupAStreptococcusTest = _valueTuple.Item1,
 				EncounterWithPharyngitis = _valueTuple.Item2,
@@ -740,13 +740,13 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Observation,Encounter>, Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV>(c_, d_);
-		bool? f_(Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV tuple_ferjikqtqgcpbsywqkeabbeev)
+		var e_ = context.Operators.Select<ValueTuple<Observation,Encounter>, Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(c_, d_);
+		bool? f_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij)
 		{
-			var k_ = FHIRHelpers_4_3_000.ToValue(tuple_ferjikqtqgcpbsywqkeabbeev.GroupAStreptococcusTest?.Effective);
+			var k_ = FHIRHelpers_4_3_000.ToValue(tuple_ffguysnebcxllexfcmjoehbij.GroupAStreptococcusTest?.Effective);
 			var l_ = QICoreCommon_2_0_000.ToInterval(k_);
 			var m_ = context.Operators.Start(l_);
-			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_ferjikqtqgcpbsywqkeabbeev.EncounterWithPharyngitis?.Period);
+			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_ffguysnebcxllexfcmjoehbij.EncounterWithPharyngitis?.Period);
 			var o_ = context.Operators.End(n_);
 			var p_ = context.Operators.Quantity(3m, "days");
 			var q_ = context.Operators.Subtract(o_, p_);
@@ -757,10 +757,10 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return w_;
 		};
-		var g_ = context.Operators.Where<Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV>(e_, f_);
-		Encounter h_(Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV tuple_ferjikqtqgcpbsywqkeabbeev) => 
-			tuple_ferjikqtqgcpbsywqkeabbeev.EncounterWithPharyngitis;
-		var i_ = context.Operators.Select<Tuple_FeRJiKQTQgCPbSYWQKEAbBEeV, Encounter>(g_, h_);
+		var g_ = context.Operators.Where<Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(e_, f_);
+		Encounter h_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij) => 
+			tuple_ffguysnebcxllexfcmjoehbij.EncounterWithPharyngitis;
+		var i_ = context.Operators.Select<Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ, Encounter>(g_, h_);
 
 		return i_;
 	}

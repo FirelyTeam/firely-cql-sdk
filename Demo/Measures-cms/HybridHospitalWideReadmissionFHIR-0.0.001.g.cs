@@ -42,23 +42,23 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounters;
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
-    internal Lazy<IEnumerable<Tuple_BJTSgXESaFEOLbMHHiDMHCcdP>> __Encounter_with_First_Body_Temperature;
-    internal Lazy<IEnumerable<Tuple_DPdLURgGeOHhHAcheMAZcWfbT>> __Encounter_with_First_Heart_Rate;
-    internal Lazy<IEnumerable<Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO>> __Encounter_with_First_Oxygen_Saturation;
-    internal Lazy<IEnumerable<Tuple_EAccDaIgTNOHbEQUMLJiXWIJO>> __Encounter_with_First_Respiratory_Rate;
+    internal Lazy<IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK>> __Encounter_with_First_Body_Temperature;
+    internal Lazy<IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ>> __Encounter_with_First_Heart_Rate;
+    internal Lazy<IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA>> __Encounter_with_First_Oxygen_Saturation;
+    internal Lazy<IEnumerable<Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM>> __Encounter_with_First_Respiratory_Rate;
     internal Lazy<IEnumerable<Observation>> __Blood_Pressure_Reading;
     internal Lazy<IEnumerable<string>> __Encounter_with_First_Systolic_Blood_Pressure;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_Bicarbonate_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_Creatinine_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_Glucose_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_Hematocrit_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_Potassium_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_Sodium_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_White_Blood_Cells_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>> __Encounter_with_First_Weight_Recorded_During_Stay;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_Bicarbonate_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_Creatinine_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_Glucose_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_Hematocrit_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_Potassium_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_Sodium_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_White_Blood_Cells_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>> __Encounter_with_First_Weight_Recorded_During_Stay;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -92,23 +92,23 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Inpatient_Encounters = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounters_Value);
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
-        __Encounter_with_First_Body_Temperature = new Lazy<IEnumerable<Tuple_BJTSgXESaFEOLbMHHiDMHCcdP>>(this.Encounter_with_First_Body_Temperature_Value);
-        __Encounter_with_First_Heart_Rate = new Lazy<IEnumerable<Tuple_DPdLURgGeOHhHAcheMAZcWfbT>>(this.Encounter_with_First_Heart_Rate_Value);
-        __Encounter_with_First_Oxygen_Saturation = new Lazy<IEnumerable<Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO>>(this.Encounter_with_First_Oxygen_Saturation_Value);
-        __Encounter_with_First_Respiratory_Rate = new Lazy<IEnumerable<Tuple_EAccDaIgTNOHbEQUMLJiXWIJO>>(this.Encounter_with_First_Respiratory_Rate_Value);
+        __Encounter_with_First_Body_Temperature = new Lazy<IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK>>(this.Encounter_with_First_Body_Temperature_Value);
+        __Encounter_with_First_Heart_Rate = new Lazy<IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ>>(this.Encounter_with_First_Heart_Rate_Value);
+        __Encounter_with_First_Oxygen_Saturation = new Lazy<IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA>>(this.Encounter_with_First_Oxygen_Saturation_Value);
+        __Encounter_with_First_Respiratory_Rate = new Lazy<IEnumerable<Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM>>(this.Encounter_with_First_Respiratory_Rate_Value);
         __Blood_Pressure_Reading = new Lazy<IEnumerable<Observation>>(this.Blood_Pressure_Reading_Value);
         __Encounter_with_First_Systolic_Blood_Pressure = new Lazy<IEnumerable<string>>(this.Encounter_with_First_Systolic_Blood_Pressure_Value);
-        __Encounter_with_First_Bicarbonate_Lab_Test = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_Bicarbonate_Lab_Test_Value);
-        __Encounter_with_First_Creatinine_Lab_Test = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_Creatinine_Lab_Test_Value);
-        __Encounter_with_First_Glucose_Lab_Test = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_Glucose_Lab_Test_Value);
-        __Encounter_with_First_Hematocrit_Lab_Test = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_Hematocrit_Lab_Test_Value);
-        __Encounter_with_First_Potassium_Lab_Test = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_Potassium_Lab_Test_Value);
-        __Encounter_with_First_Sodium_Lab_Test = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_Sodium_Lab_Test_Value);
-        __Encounter_with_First_White_Blood_Cells_Lab_Test = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_White_Blood_Cells_Lab_Test_Value);
-        __Encounter_with_First_Weight_Recorded_During_Stay = new Lazy<IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>>(this.Encounter_with_First_Weight_Recorded_During_Stay_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __Encounter_with_First_Bicarbonate_Lab_Test = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_Bicarbonate_Lab_Test_Value);
+        __Encounter_with_First_Creatinine_Lab_Test = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_Creatinine_Lab_Test_Value);
+        __Encounter_with_First_Glucose_Lab_Test = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_Glucose_Lab_Test_Value);
+        __Encounter_with_First_Hematocrit_Lab_Test = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_Hematocrit_Lab_Test_Value);
+        __Encounter_with_First_Potassium_Lab_Test = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_Potassium_Lab_Test_Value);
+        __Encounter_with_First_Sodium_Lab_Test = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_Sodium_Lab_Test_Value);
+        __Encounter_with_First_White_Blood_Cells_Lab_Test = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_White_Blood_Cells_Lab_Test_Value);
+        __Encounter_with_First_Weight_Recorded_During_Stay = new Lazy<IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>>(this.Encounter_with_First_Weight_Recorded_During_Stay_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -356,10 +356,10 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 	public IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Tuple_BJTSgXESaFEOLbMHHiDMHCcdP> Encounter_with_First_Body_Temperature_Value()
+	private IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK> Encounter_with_First_Body_Temperature_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BJTSgXESaFEOLbMHHiDMHCcdP b_(Encounter EncounterInpatient)
+		Tuple_GIbILVAdXLLNYBgcQIEiUiKaK b_(Encounter EncounterInpatient)
 		{
 			var d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation temperature)
@@ -444,7 +444,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
-			var t_ = new Tuple_BJTSgXESaFEOLbMHHiDMHCcdP
+			var t_ = new Tuple_GIbILVAdXLLNYBgcQIEiUiKaK
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstTemperatureResult = k_,
@@ -453,19 +453,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BJTSgXESaFEOLbMHHiDMHCcdP>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_GIbILVAdXLLNYBgcQIEiUiKaK>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Body Temperature")]
-	public IEnumerable<Tuple_BJTSgXESaFEOLbMHHiDMHCcdP> Encounter_with_First_Body_Temperature() => 
+	public IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK> Encounter_with_First_Body_Temperature() => 
 		__Encounter_with_First_Body_Temperature.Value;
 
-	private IEnumerable<Tuple_DPdLURgGeOHhHAcheMAZcWfbT> Encounter_with_First_Heart_Rate_Value()
+	private IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ> Encounter_with_First_Heart_Rate_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_DPdLURgGeOHhHAcheMAZcWfbT b_(Encounter EncounterInpatient)
+		Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ b_(Encounter EncounterInpatient)
 		{
 			var d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation HeartRate)
@@ -550,7 +550,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
-			var t_ = new Tuple_DPdLURgGeOHhHAcheMAZcWfbT
+			var t_ = new Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstHeartRateResult = k_,
@@ -559,19 +559,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_DPdLURgGeOHhHAcheMAZcWfbT>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Heart Rate")]
-	public IEnumerable<Tuple_DPdLURgGeOHhHAcheMAZcWfbT> Encounter_with_First_Heart_Rate() => 
+	public IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ> Encounter_with_First_Heart_Rate() => 
 		__Encounter_with_First_Heart_Rate.Value;
 
-	private IEnumerable<Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO> Encounter_with_First_Oxygen_Saturation_Value()
+	private IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA> Encounter_with_First_Oxygen_Saturation_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO b_(Encounter EncounterInpatient)
+		Tuple_FdREYEdHOZIcMCNYCRFJYJReA b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1538,7 +1538,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				};
 			};
 			var m_ = QICoreCommon_2_0_000.earliest(l_());
-			var n_ = new Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO
+			var n_ = new Tuple_FdREYEdHOZIcMCNYCRFJYJReA
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstOxygenSatResult = (k_ as CqlQuantity),
@@ -1547,19 +1547,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return n_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_FdREYEdHOZIcMCNYCRFJYJReA>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Oxygen Saturation")]
-	public IEnumerable<Tuple_GWOGLWjZWOZYMaEJIOWOEZNOO> Encounter_with_First_Oxygen_Saturation() => 
+	public IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA> Encounter_with_First_Oxygen_Saturation() => 
 		__Encounter_with_First_Oxygen_Saturation.Value;
 
-	private IEnumerable<Tuple_EAccDaIgTNOHbEQUMLJiXWIJO> Encounter_with_First_Respiratory_Rate_Value()
+	private IEnumerable<Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM> Encounter_with_First_Respiratory_Rate_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_EAccDaIgTNOHbEQUMLJiXWIJO b_(Encounter EncounterInpatient)
+		Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM b_(Encounter EncounterInpatient)
 		{
 			var d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation RespRate)
@@ -1644,7 +1644,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
-			var t_ = new Tuple_EAccDaIgTNOHbEQUMLJiXWIJO
+			var t_ = new Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstRespRateResult = k_,
@@ -1653,13 +1653,13 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_EAccDaIgTNOHbEQUMLJiXWIJO>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Respiratory Rate")]
-	public IEnumerable<Tuple_EAccDaIgTNOHbEQUMLJiXWIJO> Encounter_with_First_Respiratory_Rate() => 
+	public IEnumerable<Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM> Encounter_with_First_Respiratory_Rate() => 
 		__Encounter_with_First_Respiratory_Rate.Value;
 
 	private IEnumerable<Observation> Blood_Pressure_Reading_Value()
@@ -1701,10 +1701,10 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 	public IEnumerable<string> Encounter_with_First_Systolic_Blood_Pressure() => 
 		__Encounter_with_First_Systolic_Blood_Pressure.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Bicarbonate_Lab_Test_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Bicarbonate_Lab_Test_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Bicarbonate_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1785,7 +1785,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = (k_ as CqlQuantity),
@@ -1794,19 +1794,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Bicarbonate Lab Test")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Bicarbonate_Lab_Test() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Bicarbonate_Lab_Test() => 
 		__Encounter_with_First_Bicarbonate_Lab_Test.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Creatinine_Lab_Test_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Creatinine_Lab_Test_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Creatinine_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1887,7 +1887,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = (k_ as CqlQuantity),
@@ -1896,19 +1896,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Creatinine Lab Test")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Creatinine_Lab_Test() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Creatinine_Lab_Test() => 
 		__Encounter_with_First_Creatinine_Lab_Test.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Glucose_Lab_Test_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Glucose_Lab_Test_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Glucose_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1989,7 +1989,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = (k_ as CqlQuantity),
@@ -1998,19 +1998,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Glucose Lab Test")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Glucose_Lab_Test() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Glucose_Lab_Test() => 
 		__Encounter_with_First_Glucose_Lab_Test.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Hematocrit_Lab_Test_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Hematocrit_Lab_Test_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Hematocrit_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2091,7 +2091,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = (k_ as CqlQuantity),
@@ -2100,19 +2100,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Hematocrit Lab Test")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Hematocrit_Lab_Test() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Hematocrit_Lab_Test() => 
 		__Encounter_with_First_Hematocrit_Lab_Test.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Potassium_Lab_Test_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Potassium_Lab_Test_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Potassium_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2193,7 +2193,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = (k_ as CqlQuantity),
@@ -2202,19 +2202,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Potassium Lab Test")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Potassium_Lab_Test() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Potassium_Lab_Test() => 
 		__Encounter_with_First_Potassium_Lab_Test.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Sodium_Lab_Test_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Sodium_Lab_Test_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.Sodium_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2295,7 +2295,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = (k_ as CqlQuantity),
@@ -2304,19 +2304,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Sodium Lab Test")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Sodium_Lab_Test() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Sodium_Lab_Test() => 
 		__Encounter_with_First_Sodium_Lab_Test.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_White_Blood_Cells_Lab_Test_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_White_Blood_Cells_Lab_Test_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = this.White_blood_cells_count_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -2397,7 +2397,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = (k_ as CqlQuantity),
@@ -2406,19 +2406,19 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First White Blood Cells Lab Test")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_White_Blood_Cells_Lab_Test() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_White_Blood_Cells_Lab_Test() => 
 		__Encounter_with_First_White_Blood_Cells_Lab_Test.Value;
 
-	private IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Weight_Recorded_During_Stay_Value()
+	private IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Weight_Recorded_During_Stay_Value()
 	{
 		var a_ = this.Inpatient_Encounters();
-		Tuple_BXadXcWUgfMHAjQNVhdOPQXSG b_(Encounter EncounterInpatient)
+		Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd b_(Encounter EncounterInpatient)
 		{
 			var d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation WeightExam)
@@ -2489,7 +2489,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
-			var t_ = new Tuple_BXadXcWUgfMHAjQNVhdOPQXSG
+			var t_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = EncounterInpatient?.IdElement?.Value,
 				FirstResult = k_,
@@ -2498,16 +2498,16 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BXadXcWUgfMHAjQNVhdOPQXSG>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Weight Recorded During Stay")]
-	public IEnumerable<Tuple_BXadXcWUgfMHAjQNVhdOPQXSG> Encounter_with_First_Weight_Recorded_During_Stay() => 
+	public IEnumerable<Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd> Encounter_with_First_Weight_Recorded_During_Stay() => 
 		__Encounter_with_First_Weight_Recorded_During_Stay.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -2515,10 +2515,10 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -2526,10 +2526,10 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -2537,7 +2537,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

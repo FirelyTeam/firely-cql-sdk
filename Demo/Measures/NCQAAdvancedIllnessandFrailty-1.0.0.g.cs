@@ -435,9 +435,9 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	{
 		var a_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness();
 		var c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
-		Tuple_EaBFagdYTZfYEiNNhIYITEIUR d_(ValueTuple<CqlDate,CqlDate> _valueTuple)
+		Tuple_CMSeRgTJgKISKSQUcNZWKegGV d_(ValueTuple<CqlDate,CqlDate> _valueTuple)
 		{
-			var k_ = new Tuple_EaBFagdYTZfYEiNNhIYITEIUR
+			var k_ = new Tuple_CMSeRgTJgKISKSQUcNZWKegGV
 			{
 				OutpatientVisit1 = _valueTuple.Item1,
 				OutpatientVisit2 = _valueTuple.Item2,
@@ -445,19 +445,19 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 			return k_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<CqlDate,CqlDate>, Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(c_, d_);
-		bool? f_(Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur)
+		var e_ = context.Operators.Select<ValueTuple<CqlDate,CqlDate>, Tuple_CMSeRgTJgKISKSQUcNZWKegGV>(c_, d_);
+		bool? f_(Tuple_CMSeRgTJgKISKSQUcNZWKegGV tuple_cmsergtjgkisksqucnzwkeggv)
 		{
 			var l_ = context.Operators.Quantity(1m, "day");
-			var m_ = context.Operators.Add(tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit1, l_);
-			var n_ = context.Operators.SameOrAfter(tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit2, m_, null);
+			var m_ = context.Operators.Add(tuple_cmsergtjgkisksqucnzwkeggv.OutpatientVisit1, l_);
+			var n_ = context.Operators.SameOrAfter(tuple_cmsergtjgkisksqucnzwkeggv.OutpatientVisit2, m_, null);
 
 			return n_;
 		};
-		var g_ = context.Operators.Where<Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(e_, f_);
-		CqlDate h_(Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur) => 
-			tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit1;
-		var i_ = context.Operators.Select<Tuple_EaBFagdYTZfYEiNNhIYITEIUR, CqlDate>(g_, h_);
+		var g_ = context.Operators.Where<Tuple_CMSeRgTJgKISKSQUcNZWKegGV>(e_, f_);
+		CqlDate h_(Tuple_CMSeRgTJgKISKSQUcNZWKegGV tuple_cmsergtjgkisksqucnzwkeggv) => 
+			tuple_cmsergtjgkisksqucnzwkeggv.OutpatientVisit1;
+		var i_ = context.Operators.Select<Tuple_CMSeRgTJgKISKSQUcNZWKegGV, CqlDate>(g_, h_);
 		var j_ = context.Operators.Exists<CqlDate>(i_);
 
 		return j_;

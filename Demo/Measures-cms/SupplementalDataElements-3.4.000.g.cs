@@ -26,9 +26,9 @@ public class SupplementalDataElements_3_4_000
     internal Lazy<CqlValueSet> __Payer_Type;
     internal Lazy<CqlValueSet> __Race;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -43,9 +43,9 @@ public class SupplementalDataElements_3_4_000
         __Payer_Type = new Lazy<CqlValueSet>(this.Payer_Type_Value);
         __Race = new Lazy<CqlValueSet>(this.Race_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -98,7 +98,7 @@ public class SupplementalDataElements_3_4_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		List<Extension> a_()
 		{
@@ -134,7 +134,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			d_,
 		};
-		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension E)
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR f_(Extension E)
 		{
 			bool? p_(Extension @this)
 			{
@@ -192,7 +192,7 @@ public class SupplementalDataElements_3_4_000
 			var ah_ = context.Operators.Select<Extension, DataType>(af_, r_);
 			var ai_ = context.Operators.SingletonFrom<DataType>(ah_);
 			var aj_ = context.Operators.Convert<string>(ai_);
-			var ak_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			var ak_ = new Tuple_HPcCiDPXQfZTXIORThMLfTQDR
 			{
 				codes = ad_,
 				display = aj_,
@@ -200,25 +200,25 @@ public class SupplementalDataElements_3_4_000
 
 			return ak_;
 		};
-		var g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(e_, f_);
+		var h_ = context.Operators.SingletonFrom<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = this.Payer_Type();
 		var b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
-		Tuple_GDKRbfOIHhLGieQSVDEMIaDPX c_(Coverage Payer)
+		Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ c_(Coverage Payer)
 		{
 			var e_ = FHIRHelpers_4_3_000.ToConcept(Payer?.Type);
 			var f_ = FHIRHelpers_4_3_000.ToInterval(Payer?.Period);
-			var g_ = new Tuple_GDKRbfOIHhLGieQSVDEMIaDPX
+			var g_ = new Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ
 			{
 				code = e_,
 				period = f_,
@@ -226,16 +226,16 @@ public class SupplementalDataElements_3_4_000
 
 			return g_;
 		};
-		var d_ = context.Operators.Select<Coverage, Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>(b_, c_);
+		var d_ = context.Operators.Select<Coverage, Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		List<Extension> a_()
 		{
@@ -271,7 +271,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			d_,
 		};
-		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension R)
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR f_(Extension R)
 		{
 			bool? p_(Extension @this)
 			{
@@ -330,7 +330,7 @@ public class SupplementalDataElements_3_4_000
 			var af_ = context.Operators.Select<Extension, DataType>(ad_, r_);
 			var ag_ = context.Operators.SingletonFrom<DataType>(af_);
 			var ah_ = context.Operators.Convert<string>(ag_);
-			var ai_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			var ai_ = new Tuple_HPcCiDPXQfZTXIORThMLfTQDR
 			{
 				codes = ab_,
 				display = ah_,
@@ -338,14 +338,14 @@ public class SupplementalDataElements_3_4_000
 
 			return ai_;
 		};
-		var g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(e_, f_);
+		var h_ = context.Operators.SingletonFrom<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

@@ -38,7 +38,7 @@ internal partial class CqlOperatorsBinder
                          .AsReadOnly())
                 .AsReadOnly();
 
-    private static readonly TypeFormatterOptions TypeFormatterOptions = new(PreferKeywords:true, HideNamespaces:true);
+    private static readonly TypeFormatterOptions TypeFormatterOptions = new(UseKeywords:true, NoNamespaces:true);
 
     private static readonly MethodFormatterOptions CSharpWriteMethodOptions = new (
         methodFormat: method => $"\n\t* {method.Name}({method.Parameters})",

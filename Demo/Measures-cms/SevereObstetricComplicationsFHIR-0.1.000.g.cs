@@ -73,9 +73,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks;
@@ -91,7 +91,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
     internal Lazy<IEnumerable<Encounter>> __Stratification_Encounter;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions;
     internal Lazy<IEnumerable<Encounter>> __Stratum_1;
-    internal Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
+    internal Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>> __Variable_Calculated_Gestational_Age;
     internal Lazy<IEnumerable<Encounter>> __Denominator;
     internal Lazy<IEnumerable<Encounter>> __Risk_Variable_Anemia;
     internal Lazy<IEnumerable<Encounter>> __Risk_Variable_Asthma;
@@ -122,10 +122,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
     internal Lazy<IEnumerable<Encounter>> __Risk_Variable_Thyrotoxicosis;
     internal Lazy<IEnumerable<Encounter>> __Risk_Variable_Other_Preeclampsia;
     internal Lazy<IEnumerable<Encounter>> __Risk_Variable_Preterm_Birth;
-    internal Lazy<IEnumerable<Tuple_BUSccGEhJLedCLcPKRPjDcPjV>> __Risk_Variable_First_Hematocrit_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA>> __Risk_Variable_First_White_Blood_Cell_Count_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_CYVVSdgZbMfXHMiBHjISgejQI>> __Risk_Variable_Heart_Rate;
-    internal Lazy<IEnumerable<Tuple_DBZhWNcHciGGJUSXZKiOPXJYf>> __Risk_Variable_Systolic_Blood_Pressure;
+    internal Lazy<IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS>> __Risk_Variable_First_Hematocrit_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_ESFBYaBAeYMhOBFMjVCbeLhQA>> __Risk_Variable_First_White_Blood_Cell_Count_Lab_Test;
+    internal Lazy<IEnumerable<Tuple_HOiMaDjifIOTXXFShNKiWLBLV>> __Risk_Variable_Heart_Rate;
+    internal Lazy<IEnumerable<Tuple_FjSKXeIESORPNbRGajibMfUaK>> __Risk_Variable_Systolic_Blood_Pressure;
 
     #endregion
     public SevereObstetricComplicationsFHIR_0_1_000(CqlContext context)
@@ -190,9 +190,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks_Value);
         __Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks_Value);
@@ -208,7 +208,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
         __Stratification_Encounter = new Lazy<IEnumerable<Encounter>>(this.Stratification_Encounter_Value);
         __Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Value);
         __Stratum_1 = new Lazy<IEnumerable<Encounter>>(this.Stratum_1_Value);
-        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
+        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>>(this.Variable_Calculated_Gestational_Age_Value);
         __Denominator = new Lazy<IEnumerable<Encounter>>(this.Denominator_Value);
         __Risk_Variable_Anemia = new Lazy<IEnumerable<Encounter>>(this.Risk_Variable_Anemia_Value);
         __Risk_Variable_Asthma = new Lazy<IEnumerable<Encounter>>(this.Risk_Variable_Asthma_Value);
@@ -239,10 +239,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
         __Risk_Variable_Thyrotoxicosis = new Lazy<IEnumerable<Encounter>>(this.Risk_Variable_Thyrotoxicosis_Value);
         __Risk_Variable_Other_Preeclampsia = new Lazy<IEnumerable<Encounter>>(this.Risk_Variable_Other_Preeclampsia_Value);
         __Risk_Variable_Preterm_Birth = new Lazy<IEnumerable<Encounter>>(this.Risk_Variable_Preterm_Birth_Value);
-        __Risk_Variable_First_Hematocrit_Lab_Test = new Lazy<IEnumerable<Tuple_BUSccGEhJLedCLcPKRPjDcPjV>>(this.Risk_Variable_First_Hematocrit_Lab_Test_Value);
-        __Risk_Variable_First_White_Blood_Cell_Count_Lab_Test = new Lazy<IEnumerable<Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA>>(this.Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Value);
-        __Risk_Variable_Heart_Rate = new Lazy<IEnumerable<Tuple_CYVVSdgZbMfXHMiBHjISgejQI>>(this.Risk_Variable_Heart_Rate_Value);
-        __Risk_Variable_Systolic_Blood_Pressure = new Lazy<IEnumerable<Tuple_DBZhWNcHciGGJUSXZKiOPXJYf>>(this.Risk_Variable_Systolic_Blood_Pressure_Value);
+        __Risk_Variable_First_Hematocrit_Lab_Test = new Lazy<IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS>>(this.Risk_Variable_First_Hematocrit_Lab_Test_Value);
+        __Risk_Variable_First_White_Blood_Cell_Count_Lab_Test = new Lazy<IEnumerable<Tuple_ESFBYaBAeYMhOBFMjVCbeLhQA>>(this.Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Value);
+        __Risk_Variable_Heart_Rate = new Lazy<IEnumerable<Tuple_HOiMaDjifIOTXXFShNKiWLBLV>>(this.Risk_Variable_Heart_Rate_Value);
+        __Risk_Variable_Systolic_Blood_Pressure = new Lazy<IEnumerable<Tuple_FjSKXeIESORPNbRGajibMfUaK>>(this.Risk_Variable_Systolic_Blood_Pressure_Value);
     }
     #region Dependencies
 
@@ -692,7 +692,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	public IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -700,10 +700,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -711,10 +711,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -722,7 +722,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -1079,7 +1079,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	public IEnumerable<Encounter> Stratum_1() => 
 		__Stratum_1.Value;
 
-	private IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
+	private IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age_Value()
 	{
 		var a_ = PCMaternal_5_16_000.Variable_Calculated_Gestational_Age();
 
@@ -1087,7 +1087,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
+	public IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
 	private IEnumerable<Encounter> Denominator_Value()
@@ -1743,10 +1743,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	public IEnumerable<Encounter> Risk_Variable_Preterm_Birth() => 
 		__Risk_Variable_Preterm_Birth.Value;
 
-	private IEnumerable<Tuple_BUSccGEhJLedCLcPKRPjDcPjV> Risk_Variable_First_Hematocrit_Lab_Test_Value()
+	private IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS> Risk_Variable_First_Hematocrit_Lab_Test_Value()
 	{
 		var a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
-		Tuple_BUSccGEhJLedCLcPKRPjDcPjV b_(Encounter TwentyWeeksPlusEncounter)
+		Tuple_DIHdhbAJeJTdiAVUAELUHRNdS b_(Encounter TwentyWeeksPlusEncounter)
 		{
 			var d_ = this.Hematocrit_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1823,7 +1823,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_BUSccGEhJLedCLcPKRPjDcPjV
+			var t_ = new Tuple_DIHdhbAJeJTdiAVUAELUHRNdS
 			{
 				EncounterId = TwentyWeeksPlusEncounter?.IdElement?.Value,
 				FirstHematocritResult = (k_ as CqlQuantity),
@@ -1832,19 +1832,19 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_BUSccGEhJLedCLcPKRPjDcPjV>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_DIHdhbAJeJTdiAVUAELUHRNdS>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Risk Variable First Hematocrit Lab Test")]
-	public IEnumerable<Tuple_BUSccGEhJLedCLcPKRPjDcPjV> Risk_Variable_First_Hematocrit_Lab_Test() => 
+	public IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS> Risk_Variable_First_Hematocrit_Lab_Test() => 
 		__Risk_Variable_First_Hematocrit_Lab_Test.Value;
 
-	private IEnumerable<Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Value()
+	private IEnumerable<Tuple_ESFBYaBAeYMhOBFMjVCbeLhQA> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Value()
 	{
 		var a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
-		Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA b_(Encounter TwentyWeeksPlusEncounter)
+		Tuple_ESFBYaBAeYMhOBFMjVCbeLhQA b_(Encounter TwentyWeeksPlusEncounter)
 		{
 			var d_ = this.White_blood_cells_count_lab_test();
 			var e_ = context.Operators.RetrieveByValueSet<Observation>(d_, null);
@@ -1921,7 +1921,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 			var r_ = context.Operators.First<Observation>(q_);
 			var s_ = context.Operators.Convert<CqlDateTime>(r_?.IssuedElement?.Value);
-			var t_ = new Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA
+			var t_ = new Tuple_ESFBYaBAeYMhOBFMjVCbeLhQA
 			{
 				EncounterId = TwentyWeeksPlusEncounter?.IdElement?.Value,
 				FirstWBCResult = (k_ as CqlQuantity),
@@ -1930,19 +1930,19 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_ESFBYaBAeYMhOBFMjVCbeLhQA>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Risk Variable First White Blood Cell Count Lab Test")]
-	public IEnumerable<Tuple_EbcGgjOhJFXiKXEMDPcAXPAhA> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test() => 
+	public IEnumerable<Tuple_ESFBYaBAeYMhOBFMjVCbeLhQA> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test() => 
 		__Risk_Variable_First_White_Blood_Cell_Count_Lab_Test.Value;
 
-	private IEnumerable<Tuple_CYVVSdgZbMfXHMiBHjISgejQI> Risk_Variable_Heart_Rate_Value()
+	private IEnumerable<Tuple_HOiMaDjifIOTXXFShNKiWLBLV> Risk_Variable_Heart_Rate_Value()
 	{
 		var a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
-		Tuple_CYVVSdgZbMfXHMiBHjISgejQI b_(Encounter TwentyWeeksPlusEncounter)
+		Tuple_HOiMaDjifIOTXXFShNKiWLBLV b_(Encounter TwentyWeeksPlusEncounter)
 		{
 			var d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation HeartRate)
@@ -2015,7 +2015,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var q_ = context.Operators.First<Observation>(p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(q_?.Effective);
 			var s_ = QICoreCommon_2_0_000.earliest(r_);
-			var t_ = new Tuple_CYVVSdgZbMfXHMiBHjISgejQI
+			var t_ = new Tuple_HOiMaDjifIOTXXFShNKiWLBLV
 			{
 				EncounterId = TwentyWeeksPlusEncounter?.IdElement?.Value,
 				FirstHRResult = k_,
@@ -2024,19 +2024,19 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return t_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_CYVVSdgZbMfXHMiBHjISgejQI>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_HOiMaDjifIOTXXFShNKiWLBLV>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Risk Variable Heart Rate")]
-	public IEnumerable<Tuple_CYVVSdgZbMfXHMiBHjISgejQI> Risk_Variable_Heart_Rate() => 
+	public IEnumerable<Tuple_HOiMaDjifIOTXXFShNKiWLBLV> Risk_Variable_Heart_Rate() => 
 		__Risk_Variable_Heart_Rate.Value;
 
-	private IEnumerable<Tuple_DBZhWNcHciGGJUSXZKiOPXJYf> Risk_Variable_Systolic_Blood_Pressure_Value()
+	private IEnumerable<Tuple_FjSKXeIESORPNbRGajibMfUaK> Risk_Variable_Systolic_Blood_Pressure_Value()
 	{
 		var a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
-		Tuple_DBZhWNcHciGGJUSXZKiOPXJYf b_(Encounter TwentyWeeksPlusEncounter)
+		Tuple_FjSKXeIESORPNbRGajibMfUaK b_(Encounter TwentyWeeksPlusEncounter)
 		{
 			var d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation BP)
@@ -2124,7 +2124,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var s_ = context.Operators.First<Observation>(r_);
 			var t_ = FHIRHelpers_4_3_000.ToValue(s_?.Effective);
 			var u_ = QICoreCommon_2_0_000.earliest(t_);
-			var v_ = new Tuple_DBZhWNcHciGGJUSXZKiOPXJYf
+			var v_ = new Tuple_FjSKXeIESORPNbRGajibMfUaK
 			{
 				EncounterId = TwentyWeeksPlusEncounter?.IdElement?.Value,
 				FirstSBPResult = m_,
@@ -2133,13 +2133,13 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return v_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_DBZhWNcHciGGJUSXZKiOPXJYf>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_FjSKXeIESORPNbRGajibMfUaK>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Risk Variable Systolic Blood Pressure")]
-	public IEnumerable<Tuple_DBZhWNcHciGGJUSXZKiOPXJYf> Risk_Variable_Systolic_Blood_Pressure() => 
+	public IEnumerable<Tuple_FjSKXeIESORPNbRGajibMfUaK> Risk_Variable_Systolic_Blood_Pressure() => 
 		__Risk_Variable_Systolic_Blood_Pressure.Value;
 
     [CqlDeclaration("pOAIsNoOrUTD")]

@@ -30,6 +30,10 @@ internal static class ExpressionExtensions
                 && constant.Value.GetType().IsAssignableTo(type))
             {
                 return Expression.Constant(constant.Value, type);
+            } else if (
+                constant.Value is Enum enumValue)
+            {
+                ;
             }
         }
 

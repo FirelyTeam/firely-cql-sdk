@@ -185,8 +185,8 @@ namespace Hl7.Cql.Conversion
         internal virtual void LogAllConverters(ILogger<TypeConverter> logger)
         {
             TypeFormatterOptions o = new(
-                HideNamespaces: true,
-                PreferKeywords: false);
+                NoNamespaces: true,
+                UseKeywords: false);
 
             string TypeToString(Type t) =>
                 string.Concat(
