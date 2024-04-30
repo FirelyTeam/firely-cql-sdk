@@ -270,5 +270,6 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private ""{memberName}"": {expression}");
             return lib.statements[0].expression;
         }
+
     }
 }

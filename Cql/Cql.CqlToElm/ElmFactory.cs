@@ -286,8 +286,8 @@ namespace Hl7.Cql.CqlToElm
         }
         internal LastPositionOf Populate(LastPositionOf lpo, Expression[] arguments)
         {
-            lpo.@string = arguments[0];
-            lpo.pattern = arguments[1];
+            lpo.pattern = arguments[0];
+            lpo.@string = arguments[1];
             return lpo;
         }
 
@@ -307,8 +307,8 @@ namespace Hl7.Cql.CqlToElm
         }
         internal PositionOf Populate(PositionOf po, Expression[] arguments)
         {
-            po.@string = arguments[0];
-            po.pattern = arguments[1];
+            po.pattern = arguments[0];
+            po.@string = arguments[1];
             return po;
         }
         internal And Populate(ProperBetween between, Expression[] arguments)
@@ -322,7 +322,6 @@ namespace Hl7.Cql.CqlToElm
             var and = new And { operand = new Expression[] { gt, lt } };
             return and;
         }
-
 
         internal Round Populate(Round round, Expression[] arguments)
         {

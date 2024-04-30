@@ -174,6 +174,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef DifferenceBetween = binaryWithPrecision<DifferenceBetween>(T, T, IntegerType)
             .ValidateWith(Validators.Validate)
             .For(T, DateType, DateTimeType, TimeType);
+        public static SystemFunction<Distinct> Distinct = unary<Distinct>(T.ToListType(), T.ToListType());
         public static OverloadedFunctionDef Divide = binary<Divide>(T, T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef DurationBetween = binaryWithPrecision<DurationBetween>(T, T, IntegerType)
             .ValidateWith(Validators.Validate)
@@ -184,6 +185,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Equal = binary<Equal>(T, T, BooleanType).WithListAndIntervalVariants(T);
         public static OverloadedFunctionDef Equivalent = binary<Equivalent>(T, T, BooleanType).WithListAndIntervalVariants(T);
         public static SystemFunction<Equivalent> ListEquivalent = binary<Equivalent>(T.ToListType(), T.ToListType(), BooleanType);
+        public static OverloadedFunctionDef Except = binary<Except>(T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType()).For(T, IntervalPointTypes.ToArray())
+            .Combine(binary<Except>(T.ToListType(), T.ToListType(), T.ToListType()));
         public static SystemFunction<Exists> Exists = unary<Exists>(T.ToListType(), BooleanType);
         public static SystemFunction<Exp> Exp = unary<Exp>(DecimalType, DecimalType);
         public static OverloadedFunctionDef Expand = OverloadedFunctionDef.Create(
@@ -209,6 +212,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<ToDecimal> IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
         public static SystemFunction<ToLong> IntegerToLong = unary<ToLong>(IntegerType, LongType);
         public static SystemFunction<ToQuantity> IntegerToQuantity = unary<ToQuantity>(IntegerType, QuantityType);
+        public static OverloadedFunctionDef Intersect = binary<Intersect>(T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType()).For(T, IntervalPointTypes.ToArray())
+            .Combine(binary<Intersect>(T.ToListType(), T.ToListType(), T.ToListType()));
         public static OverloadedFunctionDef Interval = nary<Interval>(new TypeSpecifier[] { T, T, BooleanType, BooleanType, }, 4, T.ToIntervalType())
             .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType);
         public static SystemFunction<IsFalse> IsFalse = unary<IsFalse>(BooleanType, BooleanType);
@@ -304,6 +309,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<ToTime> ToTime = unary<ToTime>(StringType, TimeType);
         public static SystemFunction<Truncate> Truncate = unary<Truncate>(DecimalType, IntegerType);
         public static OverloadedFunctionDef TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, NumericTypes);
+        public static OverloadedFunctionDef Union = binary<Union>(T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType()).For(T, IntervalPointTypes.ToArray())
+            .Combine(binary<Union>(T.ToListType(), T.ToListType(), T.ToListType()));
         public static SystemFunction<Upper> Upper = unary<Upper>(StringType, StringType);
         public static OverloadedFunctionDef Variance = aggregate<Variance>(T, T).For(T, DecimalType, QuantityType);
         public static SystemFunction<Width> Width = unary<Width>(T.ToIntervalType(), T);

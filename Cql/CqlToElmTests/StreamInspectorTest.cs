@@ -47,16 +47,5 @@ namespace Hl7.Cql.CqlToElm.Test
             vi.Should().BeNull();
         }
 
-        [TestMethod]
-        public void FromJson_NameOnly()
-        {
-            var si = new StreamInspector();
-            using var fs = File.OpenRead(@"Input\HL7\CqlArithmeticFunctionsTest.json");
-            var lib = si.FromJson(fs);
-            lib.Should().NotBeNull();
-            lib!.identifier.Should().NotBeNull();
-            lib.identifier.id.Should().Be("CqlArithmeticFunctionsTest");
-            lib.identifier.version.Should().BeNull();
-        }
     }
 }

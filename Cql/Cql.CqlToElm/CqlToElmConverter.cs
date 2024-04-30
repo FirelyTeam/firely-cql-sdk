@@ -49,34 +49,6 @@ namespace Hl7.Cql.CqlToElm
         /// <exception cref="ArgumentException">if <paramref name="cql"/> is empty.</exception>
         public Library ConvertLibrary(string cql)
         {
-            //using (var cqlLibrary = new StringReader(cql))
-            //{
-            //    if (cqlLibrary.Peek() < 0)
-            //        throw new ArgumentException("The provided text reader is empty and cannot be read.", nameof(cqlLibrary));
-
-            //    var lexerListener = new ThrowingErrorListener();
-            //    var parserListener = lexerListener;
-
-            //    var antlStream = new AntlrInputStream(cqlLibrary);
-            //    var lexer = new cqlLexer(antlStream);
-            //    lexer.RemoveErrorListeners();
-            //    lexer.AddErrorListener(lexerListener);
-
-            //    var parser = new cqlParser(new CommonTokenStream(lexer));
-            //    parser.RemoveErrorListeners();
-            //    parser.AddErrorListener(parserListener);
-
-            //    var lib = parser.library();
-            //    var statements = lib.statement();
-            //    using (var scope = Services.CreateScope())
-            //    {
-            //        var visitor = scope.ServiceProvider.GetRequiredService<OrderingVisitor>();
-            //        var defRefs = statements
-            //            .Select(visitor.Visit)
-            //            .ToArray();
-            //    }
-            //}
-
             using (var cqlLibrary = new StringReader(cql))
             {
                 if (cqlLibrary.Peek() < 0)

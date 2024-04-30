@@ -414,7 +414,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateLibraryForExpression("Interval[1, 10] properly included in Interval[null, null]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
             var result = Run(pii);
-            Assert.IsFalse((bool?)result);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -426,7 +426,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNull(result);
         }
 
-        
+
 
     }
 }

@@ -35,25 +35,37 @@ namespace Hl7.Cql.CqlToElm
             // Checking the cost also determines the kind of conversion, if any, we can do.
             var cost = GetCoercionCost(expression.resultTypeSpecifier, to);
             // Next we apply the conversion.  
-            return cost switch
+            if (cost != CoercionCost.Incompatible)
             {
-                CoercionCost.ExactMatch => new(expression, cost),
-                // Usually, it is a non-strict As, which has the effect of retyping the expression.
-                CoercionCost.Subtype => new(As(expression, to), cost),
-                CoercionCost.MoreCompatible => new(As(expression, to), cost),
-                CoercionCost.LessCompatible => new(As(expression, to), cost),
-                CoercionCost.Cast => new(As(expression, to), cost),
-                CoercionCost.ImplicitToSimpleType => new(ImplicitCastToSimple(expression, to), cost),
-                CoercionCost.ImplicitToClassType => new(ImplicitCastToClass(expression, to), cost),
-                // For promotions and demotions, it involves constructing other expressions.
-                CoercionCost.IntervalPromotion when to is IntervalTypeSpecifier toInterval => new(ToInterval(expression, toInterval), cost),
-                CoercionCost.ListDemotion => new(FromList(expression, to), cost),
-                CoercionCost.IntervalDemotion => new(FromInterval(expression, to), cost),
-                CoercionCost.ListPromotion when to is ListTypeSpecifier toList => new(ToList(expression, toList), cost),
-                // For incompatible conversions, the expression remains unchanged.
-                CoercionCost.Incompatible => new(expression, cost),
-                _ => throw new InvalidOperationException($"Unexpected cost: {Enum.GetName(cost)}")
-            };
+                return (expression.resultTypeSpecifier, to, cost) switch
+                {
+                    (IntervalTypeSpecifier fi, IntervalTypeSpecifier ti, not CoercionCost.ExactMatch) =>
+                        new(ChangeIntervalType(expression, fi, ti), cost),
+                    (ListTypeSpecifier fl, ListTypeSpecifier tl, not CoercionCost.ExactMatch) =>
+                        new(ChangeListType(expression, fl, tl), cost),
+                    (_,_,_) => cost switch
+                    {
+                        CoercionCost.ExactMatch => new(expression, cost),
+                        // Usually, it is a non-strict As, which has the effect of retyping the expression.
+                        CoercionCost.Subtype => new(As(expression, to), cost),
+                        CoercionCost.MoreCompatible => new(As(expression, to), cost),
+                        CoercionCost.LessCompatible => new(As(expression, to), cost),
+                        CoercionCost.Cast => new(As(expression, to), cost),
+                        CoercionCost.ImplicitToSimpleType => new(ImplicitCastToSimple(expression, to), cost),
+                        CoercionCost.ImplicitToClassType => new(ImplicitCastToClass(expression, to), cost),
+                        // For promotions and demotions, it involves constructing other expressions.
+                        CoercionCost.IntervalPromotion when to is IntervalTypeSpecifier toInterval => new(ToInterval(expression, toInterval), cost),
+                        CoercionCost.ListDemotion => new(FromList(expression, to), cost),
+                        CoercionCost.IntervalDemotion => new(FromInterval(expression, to), cost),
+                        CoercionCost.ListPromotion when to is ListTypeSpecifier toList => new(ToList(expression, toList), cost),
+                        // For incompatible conversions, the expression remains unchanged.
+                        _ => throw new InvalidOperationException($"Unexpected cost: {Enum.GetName(cost)}")
+                    }
+                };
+            }
+            else
+                return new(expression, cost);
+
 
             // These are the conversions.
             Expression As(Expression expression, TypeSpecifier type)
@@ -82,32 +94,6 @@ namespace Hl7.Cql.CqlToElm
                     convert = new ToDecimal { operand = expression };
                 else if (type == SystemTypes.StringType)
                     convert = new ToString { operand = expression };
-                else if (expression.resultTypeSpecifier is ListTypeSpecifier fromList
-                    && to is ListTypeSpecifier toList)
-                {
-                    // T to List<U> => list promotion
-                    // List<T> to U => list demotion
-                    // List<T> to List<U> => select with coerce
-                    var source = new AliasedQuerySource
-                    {
-                        alias = "X",
-                        expression = expression,
-                    }.WithResultType(expression.resultTypeSpecifier);
-                    var aliasRef = new AliasRef
-                    {
-                        name = source.alias,
-                    }.WithResultType(fromList.elementType);
-                    var @return = new ReturnClause
-                    {
-                        distinct = false,
-                        expression = Coerce(aliasRef, toList.elementType).Result,
-                    };
-                    convert = new Query
-                    {
-                        source = new[] { source },
-                        @return = @return
-                    }.WithResultType(toList);
-                }
                 else
                     convert = new As
                     {
@@ -125,18 +111,7 @@ namespace Hl7.Cql.CqlToElm
                 if (expression.resultTypeSpecifier is IntervalTypeSpecifier fromInterval
                     && to is IntervalTypeSpecifier toInterval)
                 {
-                    var low = new Property { source = expression, path = "low" }.WithResultType(fromInterval.pointType);
-                    var lowClosed = new Property { source = expression, path = "lowClosed" }.WithResultType(SystemTypes.BooleanType);
-                    var high = new Property { source = expression, path = "high" }.WithResultType(fromInterval.pointType);
-                    var highClosed = new Property { source = expression, path = "highClosed" }.WithResultType(SystemTypes.BooleanType);
-                    var interval = new Elm.Interval
-                    {
-                        low = Coerce(low, toInterval.pointType).Result,
-                        high = Coerce(high, toInterval.pointType).Result,
-                        lowClosedExpression = lowClosed,
-                        highClosedExpression = highClosed
-                    }.WithResultType(toInterval);
-                    return interval;
+
                 }
 
 
@@ -189,7 +164,54 @@ namespace Hl7.Cql.CqlToElm
 
             Expression ToList(Expression expression, ListTypeSpecifier to) =>
                 new ToList { operand = As(expression, to.elementType) }.WithResultType(to);
+
+            Expression ChangeListType(Expression expression, ListTypeSpecifier fromList, ListTypeSpecifier toList)
+            {
+                Expression convert;
+                // T to List<U> => list promotion
+                // List<T> to U => list demotion
+                // List<T> to List<U> => select with coerce
+                var source = new AliasedQuerySource
+                {
+                    alias = "X",
+                    expression = expression,
+                }.WithResultType(expression.resultTypeSpecifier);
+                var aliasRef = new AliasRef
+                {
+                    name = source.alias,
+                }.WithResultType(fromList.elementType);
+                var @return = new ReturnClause
+                {
+                    distinct = false,
+                    expression = Coerce(aliasRef, toList.elementType).Result,
+                };
+                convert = new Query
+                {
+                    source = new[] { source },
+                    @return = @return
+                }.WithResultType(toList);
+                return convert;
+            }
+
+            Expression ChangeIntervalType(Expression expression, IntervalTypeSpecifier fromInterval, IntervalTypeSpecifier toInterval)
+            {
+                var low = new Property { source = expression, path = "low" }.WithResultType(fromInterval.pointType);
+                var lowClosed = new Property { source = expression, path = "lowClosed" }.WithResultType(SystemTypes.BooleanType);
+                var high = new Property { source = expression, path = "high" }.WithResultType(fromInterval.pointType);
+                var highClosed = new Property { source = expression, path = "highClosed" }.WithResultType(SystemTypes.BooleanType);
+                var interval = new Elm.Interval
+                {
+                    low = Coerce(low, toInterval.pointType).Result,
+                    high = Coerce(high, toInterval.pointType).Result,
+                    lowClosedExpression = lowClosed,
+                    highClosedExpression = highClosed
+                }.WithResultType(toInterval);
+                return interval;
+            }
         }
+
+
+
 
         /// <summary>
         /// Computes the cost of conversion according to the specification's conversion precendence rules.

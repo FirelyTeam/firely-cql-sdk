@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using FluentAssertions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -39,5 +40,17 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void FlattenListNullAndNull()
+        {
+            var lib = CreateLibraryForExpression("Flatten({{null}, {null}})");
+            var flatten = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
+            var result = Run<List<object>>(flatten); // {null, null}
+            result!.Count.Should().Be(2);
+            var equal = CreateLibraryForExpression("Flatten({{null}, {null}}) = {null, null}")
+                .Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var eqr = Run<bool?>(equal); // {null, null}
+            eqr.Should().BeTrue();
+        }
     }
 }

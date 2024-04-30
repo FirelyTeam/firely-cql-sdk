@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -253,6 +254,17 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private EmptyList_Includes_EmptyList: {} includes {}
             ");
         }
+
+
+        [TestMethod]
+        public void NullBoundariesProperlyIncludesIntegerInterval()
+        {
+            var library = CreateLibraryForExpression("Interval[null as Integer, null as Integer] properly includes Interval[1, 10]");
+            var intersect = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludes>();
+            var result = Run<bool?>(intersect);
+            result.Should().BeNull();
+        }
+
 
 
     }

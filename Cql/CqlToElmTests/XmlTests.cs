@@ -45,9 +45,6 @@ namespace Hl7.Cql.CqlToElm.Test
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
                 Assert.Fail($"Case {testCase.Category}: {testCase.TestName} expression compiled with errors: {expressionErrors.First().message}");
-            //var expressionLambda = ExpressionBuilder.Lambda(expression);
-            //var expressionDelegate = expressionLambda.Compile();
-            //var expressionResult = expressionDelegate.DynamicInvoke(CqlContext);
             if (testCase.Expectation is not null)
             {
                 var expectation = Expression(testCase.Expectation);
@@ -65,8 +62,6 @@ namespace Hl7.Cql.CqlToElm.Test
                     var expressionValue = ExpressionBuilder.Lambda(expression).Compile().DynamicInvoke(CqlContext);
                     var expectationValue = ExpressionBuilder.Lambda(expectation).Compile().DynamicInvoke(CqlContext);
                     Assert.Fail($"Expected {expectationValue}, but got {expressionValue}");
-
-
                 }
             }
             else
@@ -95,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public static string DisplayName(MethodInfo method, object[] data)
         {
             var tc = (TestCase)data[0];
-            return $"{tc.Category}: {tc.TestName}";
+            return $"{tc.File}: {tc.Category}/{tc.TestName}";
         }
 
         private static XmlSerializer Serializer = new(typeof(Xml.Tests));
@@ -113,13 +108,13 @@ namespace Hl7.Cql.CqlToElm.Test
                         {
                             if (!test.expression.invalidSpecified)
                             {
-                                yield return new object[] { new TestCase(group.name, test.name, test.expression.Value, test.output?.Single()?.Value) };
+                                yield return new object[] { new TestCase(xml.Name, group.name, test.name, test.expression.Value, test.output?.Single()?.Value) };
                             }
                         }
                 }
             }
         }
 
-        public record TestCase(string Category, string TestName, string Expression, string? Expectation);
+        public record TestCase(string File, string Category, string TestName, string Expression, string? Expectation);
     }
 }
