@@ -260,7 +260,7 @@ partial class ExpressionBuilderContext
                 var resolveParam = _contextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier);
-                var cast = _cqlOperatorsBinder.CastToType(resolveParam, parameterType);
+                var cast = _expressionConverter.CastToType(resolveParam, parameterType);
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
                 var lambda = Expression.Lambda(cast, CqlExpressions.ParameterExpression);
                 _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, parameter.name!, lambda);

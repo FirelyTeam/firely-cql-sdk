@@ -233,6 +233,7 @@ classDiagram
     ContextBinder ..> ExpressionBuilder : injected
     ExpressionBuilderSettings ..> ExpressionBuilder : injected
     ILibraryExpressionBuilderContext ..> ExpressionBuilder : injected
+    ExpressionConverter ..> ExpressionBuilder : injected
     
     LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
 

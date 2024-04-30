@@ -10,7 +10,6 @@ using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
@@ -93,31 +92,6 @@ namespace Hl7.Cql.Compiler
                 // @formatter:om
             };
             return result;
-        }
-
-        /// <summary>
-        /// Converts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
-        /// </summary>
-        /// <param name="expression">The expression to convert.</param>
-        /// <param name="type">The type to convert the expression to.</param>
-        /// <returns>The converted expression.</returns>
-        public virtual Expression ConvertToType(Expression expression, Type type) =>
-            _expressionConverter.TryConvert(expression, type, out var t)
-                ? t.arg!
-                : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
-
-        /// <summary>
-        /// Casts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
-        /// </summary>
-        /// <param name="expression">The expression to cast.</param>
-        /// <param name="type">The type to cast the expression to.</param>
-        /// <returns>The expression that was cast.</returns>
-        public virtual Expression CastToType(Expression expression, Type type)
-        {
-            if (expression.Type != typeof(object))
-                throw new ArgumentException("Cast only allowed on Object typed expressions.", nameof(expression));
-
-            return expression.NewAssignToTypeExpression(type);
         }
     }
 }

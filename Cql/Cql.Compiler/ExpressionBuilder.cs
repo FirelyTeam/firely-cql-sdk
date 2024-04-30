@@ -52,21 +52,25 @@ namespace Hl7.Cql.Compiler
         internal readonly TypeConverter _typeConverter;
         internal readonly TypeResolver _typeResolver;
         internal readonly ExpressionBuilderSettings _expressionBuilderSettings;
+        internal readonly ExpressionConverter _expressionConverter;
+
 
         internal ExpressionBuilder(
             ILogger<ExpressionBuilder> logger,
+            ExpressionBuilderSettings expressionBuilderSettings,
             CqlOperatorsBinder cqlOperatorsBinder,
             TypeManager typeManager,
             TypeConverter typeConverter,
             TypeResolver typeResolver,
             CqlContextBinder cqlContextBinder,
-            ExpressionBuilderSettings expressionBuilderSettings)
+            ExpressionConverter expressionConverter)
         {
             _logger = logger;
             _cqlOperatorsBinder = cqlOperatorsBinder;
             _cqlContextBinder = cqlContextBinder;
             _typeManager = typeManager;
             _expressionBuilderSettings = expressionBuilderSettings;
+            _expressionConverter = expressionConverter;
             _typeConverter = typeConverter;
             _typeResolver = typeResolver;
         }
@@ -165,6 +169,7 @@ namespace Hl7.Cql.Compiler
         private readonly TypeResolver _typeResolver;
         private readonly ExpressionBuilderSettings _expressionBuilderSettings;
         private readonly ILibraryExpressionBuilderContext _libraryContext;
+        private readonly ExpressionConverter _expressionConverter;
 
         private ImmutableStack<Element> _elementStack;
 
@@ -194,6 +199,7 @@ namespace Hl7.Cql.Compiler
             _typeConverter = builder._typeConverter;
             _typeResolver = builder._typeResolver;
             _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
+            _expressionConverter = builder._expressionConverter;
 
             // External State
             _libraryContext = libContext;
@@ -2280,7 +2286,7 @@ namespace Hl7.Cql.Compiler
                                                       KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
                                     {
                                         var sortMemberExpression = Translate(byExpression.expression);
-                                        var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
+                                        var lambdaBody = _expressionConverter.ConvertToType(sortMemberExpression, typeof(object));
                                         var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                         return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                                     }
@@ -2296,7 +2302,7 @@ namespace Hl7.Cql.Compiler
                                         throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
                                     }
                                     var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
-                                    var lambdaBody = _cqlOperatorsBinder.ConvertToType(pathExpression, typeof(object));
+                                    var lambdaBody = _expressionConverter.ConvertToType(pathExpression, typeof(object));
                                     var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                     return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                                 }

@@ -24,17 +24,21 @@ internal class ExpressionConverter
 		_typeConverter = typeConverter;
 	}
 
-	public bool TryConvert(
-		Expression arg,
+	/// <summary>
+	/// Tries to convert the given <paramref name="expression"/> to the specified type <paramref name="to"/>.
+	/// </summary>
+	/// <exception cref="InvalidOperationException"></exception>
+	public virtual bool TryConvert(
+		Expression expression,
 		Type to,
 		out (Expression arg, TypeConversion conversion) result)
 	{
-		Type from = arg.Type;
+		Type from = expression.Type;
 
 		if (from == to)
 		{
 			// Exact match
-			result = (arg, TypeConversion.ExactType);
+			result = (expression, TypeConversion.ExactType);
 			return true;
 		}
 
@@ -42,7 +46,7 @@ internal class ExpressionConverter
 		{
 			// 'from' is a subtype of 'to' e.g. string -> object
 			// OR 'from' is a nullable value type and 'to' is the underlying type e.g. int? -> int
-			result = (arg.NewAssignToTypeExpression(to), TypeConversion.AssignableType);
+			result = (expression.NewAssignToTypeExpression(to), TypeConversion.AssignableType);
 			return true;
 		}
 
@@ -52,13 +56,13 @@ internal class ExpressionConverter
 				CqlOperatorsBinder.BindToGenericMethod(
 					nameof(ICqlOperators.Convert),
 					[to],
-					arg.NewAssignToTypeExpression<object>()
+					expression.NewAssignToTypeExpression<object>()
 				);
 			result = (bindToGenericMethod, TypeConversion.OperatorConvert);
 			return true;
 		}
 
-		if (arg is ConstantExpression fromConstant)
+		if (expression is ConstantExpression fromConstant)
 		{
 			if (fromConstant.Value is null && to.IsNullable(out _))
 			{
@@ -81,6 +85,32 @@ internal class ExpressionConverter
 
 		result = default;
 		return false;
+	}
+
+
+	/// <summary>
+	/// Converts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
+	/// </summary>
+	/// <param name="expression">The expression to convert.</param>
+	/// <param name="type">The type to convert the expression to.</param>
+	/// <returns>The converted expression.</returns>
+	public virtual Expression ConvertToType(Expression expression, Type type) =>
+		TryConvert(expression, type, out var t)
+			? t.arg!
+			: throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
+
+	/// <summary>
+	/// Casts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
+	/// </summary>
+	/// <param name="expression">The expression to cast.</param>
+	/// <param name="type">The type to cast the expression to.</param>
+	/// <returns>The expression that was cast.</returns>
+	public virtual Expression CastToType(Expression expression, Type type)
+	{
+		if (expression.Type != typeof(object))
+			throw new ArgumentException("Cast only allowed on Object typed expressions.", nameof(expression));
+
+		return expression.NewAssignToTypeExpression(type);
 	}
 }
 

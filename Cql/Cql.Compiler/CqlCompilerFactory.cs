@@ -85,11 +85,13 @@ internal class CqlCompilerFactory :
     public virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
 
     protected virtual ExpressionBuilder NewExpressionBuilder() =>
-        new(Logger<ExpressionBuilder>(),
-            cqlOperatorsBinder: CqlOperatorsBinder,
-            typeManager: TypeManager,
-            typeConverter: TypeConverter,
-            typeResolver: TypeResolver,
-            cqlContextBinder: CqlContextBinder,
-            expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings));
+        new ExpressionBuilder(
+            Logger<ExpressionBuilder>(),
+            Singleton(fn: NewLibraryDefinitionBuilderSettings),
+            CqlOperatorsBinder,
+            TypeManager,
+            TypeConverter,
+            TypeResolver,
+            CqlContextBinder,
+            ExpressionConverter);
 }
