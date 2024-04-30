@@ -14,8 +14,8 @@ namespace Hl7.Cql.Packaging;
 internal class CqlPackagerFactory : CqlCompilerFactory
 {
     public CqlToResourcePackagingOptions CqlToResourcePackagingOptions { get; }
-    public CSharpCodeWriterOptions? CSharpCodeWriterOptions { get; }
-    public FhirResourceWriterOptions? FhirResourceWriterOptions { get; }
+    public CSharpCodeWriterOptions CSharpCodeWriterOptions { get; }
+    public FhirResourceWriterOptions FhirResourceWriterOptions { get; }
 
     public CqlPackagerFactory(
         ILoggerFactory loggerFactory,
@@ -25,8 +25,8 @@ internal class CqlPackagerFactory : CqlCompilerFactory
         FhirResourceWriterOptions? fhirResourceWriterOptions = default) : base(loggerFactory, cacheSize)
     {
         CqlToResourcePackagingOptions = cqlToResourcePackagingOptions ?? new();
-        CSharpCodeWriterOptions = cSharpCodeWriterOptions;
-        FhirResourceWriterOptions = fhirResourceWriterOptions;
+        CSharpCodeWriterOptions = cSharpCodeWriterOptions ?? new();
+        FhirResourceWriterOptions = fhirResourceWriterOptions ?? new();
     }
 
     public virtual CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => Singleton(NewCqlTypeToFhirTypeMapper);
@@ -35,7 +35,7 @@ internal class CqlPackagerFactory : CqlCompilerFactory
     public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => Singleton(NewCSharpLibrarySetToStreamsWriter);
     protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(
         Logger<CSharpLibrarySetToStreamsWriter>(),
-        Options(CSharpCodeWriterOptions ?? throw new ArgumentNullException(nameof(CSharpCodeWriterOptions))),
+        Options(CSharpCodeWriterOptions),
         TypeResolver);
 
     public virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
