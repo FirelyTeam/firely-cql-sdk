@@ -12,6 +12,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Elm;
+using BinaryExpression = System.Linq.Expressions.BinaryExpression;
+using Expression = System.Linq.Expressions.Expression;
+using UnaryExpression = System.Linq.Expressions.UnaryExpression;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
@@ -143,7 +147,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return node.NodeType switch
             {
                 // Don't simplify simple converts.
-                ExpressionType.Convert or ExpressionType.TypeAs => base.VisitUnary(node),
+                ExpressionType.Convert or ExpressionType.TypeAs or ExpressionType.Default => base.VisitUnary(node),
 
                 // Don't simplify throw expressions
                 ExpressionType.Throw => base.VisitUnary(node),

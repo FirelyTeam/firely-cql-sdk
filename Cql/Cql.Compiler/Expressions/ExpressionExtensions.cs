@@ -60,8 +60,7 @@ internal static class ExpressionExtensions
     }
 
     public static Expression NewAssignToTypeExpression<TType>(
-        this Expression expression,
-        bool throwError = true) =>
+        this Expression expression) =>
         expression.NewAssignToTypeExpression(typeof(TType));
 
 
@@ -81,5 +80,25 @@ internal static class ExpressionExtensions
     {
         var typeAs = Expression.TypeIs(expression, type);
         return typeAs;
+    }
+
+    public static Expression Coalesce(
+        this Expression expression)
+    {
+        if (expression.Type.IsValueType)
+        {
+            if (expression.Type.IsNullableValueType(out var underlyingType)
+                && underlyingType.IsValueType)
+            {
+                var defaultValue = Activator.CreateInstance(underlyingType)!;
+                var result = Expression.Coalesce(expression, Expression.Constant(defaultValue));
+                return result;
+            }
+
+            return expression;
+        }
+
+        throw new InvalidOperationException(
+            $"Cannot coalesce reference '{expression.Type}'.");
     }
 }

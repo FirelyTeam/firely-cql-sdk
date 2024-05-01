@@ -223,8 +223,6 @@ namespace Hl7.Cql.Conversion
                     .OrderBy(o => o.used).ThenBy(o => o.i)
                     .Select(t => $"\n\t{t.i,5}. {(t.used ? "[x]" : "[_]")} {t.line}"));
 
-            //_conversionsAvailable.Except(_conversionsUsed)
-
             _logger.LogDebug(
                 "TypeConverter conversions usage ({unusedCount} unused, and {usedCount} used. {totalCount} in total):{lines}",
                 _conversionsAvailable.Count - _conversionsUsed.Count,

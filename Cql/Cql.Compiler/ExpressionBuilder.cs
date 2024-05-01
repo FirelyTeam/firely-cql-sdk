@@ -830,7 +830,7 @@ namespace Hl7.Cql.Compiler
         protected Expression If(If @if)
         {
             var rc = Translate(@if.condition!);
-            var condition = Expression.Coalesce(rc, Expression.Constant(false, typeof(bool)));
+            var condition = rc.Coalesce();
             var then = Translate(@if.then!);
             if (@if.@else != null)
             {
@@ -941,7 +941,7 @@ namespace Hl7.Cql.Compiler
                     foreach (var caseItem in ce.caseItem)
                     {
                         var caseWhen = Translate(caseItem.when!);
-                        var caseWhenEquality = Expression.Coalesce(BindCqlOperator(nameof(ICqlOperators.Equal), comparand, caseWhen), Expression.Constant(false));
+                        var caseWhenEquality = BindCqlOperator(nameof(ICqlOperators.Equal), comparand, caseWhen).Coalesce();
                         var caseThen = Translate(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
@@ -962,7 +962,7 @@ namespace Hl7.Cql.Compiler
 
                         if (caseWhen.Type.IsNullableValueType(out _))
                         {
-                            caseWhen = Expression.Coalesce(caseWhen, Expression.Constant(false));
+                            caseWhen = caseWhen.Coalesce();
                         }
 
                         cases.Add(new(caseWhen, caseThen));
@@ -1373,7 +1373,7 @@ namespace Hl7.Cql.Compiler
             var call = BindCqlOperator(nameof(ICqlOperators.Message), source, code, severity, message);
             if (condition.Type.IsNullableValueType(out _))
             {
-                condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));
+                condition = condition.Coalesce();
             }
 
             return Expression.Condition(condition, call, source);
@@ -1849,6 +1849,7 @@ namespace Hl7.Cql.Compiler
         protected Expression Coalesce(Coalesce ce)
         {
             var operands = TranslateAll(ce.operand);
+
             if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
                 return BindCqlOperator(nameof(ICqlOperators.Coalesce), operands[0]);
 
@@ -1878,10 +1879,10 @@ namespace Hl7.Cql.Compiler
         {
             var operand = Translate(isn.operand!);
             if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
-                return Expression.Constant(false, typeof(bool?));
+                return Expression.Constant(false, typeof(bool));
 
             var compare = Expression.Equal(operand, Expression.Constant(null));
-            var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
+            var asNullableBool = compare.NewAssignToTypeExpression<bool>();
             return asNullableBool;
         }
     }
