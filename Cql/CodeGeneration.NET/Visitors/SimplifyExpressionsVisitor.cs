@@ -12,7 +12,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Elm;
 using BinaryExpression = System.Linq.Expressions.BinaryExpression;
 using Expression = System.Linq.Expressions.Expression;
 using UnaryExpression = System.Linq.Expressions.UnaryExpression;
