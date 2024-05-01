@@ -69,6 +69,7 @@ public class Program
             [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
             [CSharpCodeWriterOptions.ArgNameOutDirectory]           = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+            [CSharpCodeWriterOptions.ArgNameTypeFormat]             = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.TypeFormat),
 
             [FhirResourceWriterOptions.ArgNameOutDirectory]         = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
             [FhirResourceWriterOptions.ArgNameOverrideDate]         = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
@@ -76,24 +77,30 @@ public class Program
         };
     }
 
-    private const string Usage =
-        """
-        Packager CLI Usage:
+    private static string Usage { get; }
 
-            -?|-h|-help                                Show this help
+    static Program()
+    {
+        Usage = $"""
+                 Packager CLI Usage:
 
-            --elm                  <directory>         Library root directory
-            --cql                  <directory>         CQL root directory
-            [--fhir]               <file|directory>    Resource location, either file name or directory
-            [--cs]                 <file|directory>    C# output location, either file name or directory
-            [--d]                  <true|false>        Produce as a debug assembly
-            [--f]                  <true|false>        Force an overwrite even if the output file already exists
-            [--canonical-root-url] <url>               The root url used for the resource canonical.
-                                                       If omitted a '#' will be used.
-            [--fhir-override-date] <ISO8601-date-time> The UTC date to override in the generated FHIR resource libraries.
-                                                       (example: 2000-12-31T23:59:59.99Z)
-                                                       If omitted the current date time will be used.
-        """;
+                     {"-?|-h|-help", -26} Show this help
+
+                     {CqlToResourcePackagingOptions.ArgNameElmDirectory,-26} {"<directory>", -19} Library root directory
+                     {CqlToResourcePackagingOptions.ArgNameCqlDirectory,-26} {"<directory>", -19} CQL root directory
+                     {Optional(FhirResourceWriterOptions.ArgNameOutDirectory),-26} {"<file|directory>", -19} Resource location, either file name or directory
+                     {Optional(CSharpCodeWriterOptions.ArgNameOutDirectory),-26} {"<file|directory>",-19} C# output location, either file name or directory
+                     {Optional(CSharpCodeWriterOptions.ArgNameTypeFormat),-26} {"<var|explicit>",-19} Whether to use var or explicit types in the C# output
+                     {Optional(CqlToResourcePackagingOptions.ArgNameDebug),-26} {"<true|false>",-19} Produce as a debug assembly
+                     {Optional(CqlToResourcePackagingOptions.ArgNameForce),-26} {"<true|false>",-19} Force an overwrite even if the output file already exists
+                     {Optional(CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl),-26} {"<url>",-19} The root url used for the resource canonical.
+                     {"", -26-19-1} If omitted a '#' will be used.
+                     {Optional(FhirResourceWriterOptions.ArgNameOverrideDate),-26} {"<ISO8601-date-time>",-19} The UTC date to override in the generated FHIR resource libraries.
+                     {"", -26-19-1} (example: 2000-12-31T23:59:59.99Z)
+                     {"", -26-19-1} If omitted the current date time will be used.
+                 """;
+        static string Optional(string s) => $"[{s}]";
+    }
 
 
     private static void ConfigureAppConfiguration(IConfigurationBuilder config, string[] args)
@@ -106,7 +113,8 @@ public class Program
     {
         logging.ClearProviders();
 
-        var minLogLevel = Debugger.IsAttached ? LogLevel.Trace : LogLevel.Information;
+        var minLogLevel = Debugger.IsAttached ? LogLevel.Trace : LogLevel.Information;// TODO: We should base this on the configuration for the 'Debug' flag
+
         logging.AddFilter(level => level >= minLogLevel);
 
         logging.AddCleanConsole(opt =>
