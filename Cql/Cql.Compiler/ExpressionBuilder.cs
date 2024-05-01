@@ -12,12 +12,12 @@ using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Xml;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
@@ -210,22 +210,43 @@ namespace Hl7.Cql.Compiler
             _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
         }
 
-        private Expression BindCqlOperator<T>(
+        private static Expression[] NoArgs { get; } = [];
+        private static Type[] NoTypes { get; } = [];
+
+        private Expression BindCqlOperator<TArg>(
             string methodName,
-            params T?[] args) =>
-            _cqlOperatorsBinder.BindToMethod(methodName, TranslateAll(args));
+            params TArg?[] args) =>
+            _cqlOperatorsBinder.BindToMethod(methodName, TranslateArgs(args), NoTypes);
 
         [DebuggerStepThrough]
-        private Expression[] TranslateAll<T>(params T?[] args) =>
+        private Type[] TranslateTypes<TType>(params TType?[] args) =>
+            args switch
+            {
+                Type[] types => types,
+                { } objects  => objects.SelectToArray(obj => TranslateType(obj!)),
+                _            => [],
+            };
+
+        [DebuggerStepThrough]
+        private Type TranslateType<TType>(TType? arg) =>
+            arg switch
+            {
+                Type type                         => type,
+                XmlQualifiedName xmlQualifiedName => _typeResolver.ResolveType(xmlQualifiedName.Name)!,
+                _                                 => null!,
+            };
+
+        [DebuggerStepThrough]
+        private Expression[] TranslateArgs<TArg>(params TArg?[] args) =>
             args switch
             {
                 Expression[] expressions => expressions,
-                { } objects              => objects.SelectToArray(obj => Translate(obj!)),
+                { } objects              => objects.SelectToArray(obj => TranslateArg(obj!)),
                 _                        => [],
             };
 
         [DebuggerStepThrough]
-        private Expression Translate<T>(T? arg) =>
+        private Expression TranslateArg<TArg>(TArg? arg) =>
             arg switch
             {
                 Expression expression => expression,
@@ -241,11 +262,9 @@ namespace Hl7.Cql.Compiler
                     Expression? expression = element switch
                     {
                         //@formatter:off
-                        Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."), // BindCqlOperator(CqlOperator.Ratio, e.numerator, e.denominator),
+                        Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
                         Expand e           => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
                         Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                        MaxValue e         => BindCqlOperator(nameof(ICqlOperators.MaxValue), Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
-                        MinValue e         => BindCqlOperator(nameof(ICqlOperators.MinValue), Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
                         ToList e           => BindCqlOperator(nameof(ICqlOperators.ToList), e.operand!),
                         Width e            => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
                         Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
@@ -267,7 +286,7 @@ namespace Hl7.Cql.Compiler
                         Collapse e         => Collapse(e),
                         ConceptRef e       => ConceptRef(e),
                         Contains e         => Contains(e),
-                        ExpandValueSet e   => CqlOperatorsBinder.CallCreateValueSetFacade(Translate(e.operand!)),
+                        ExpandValueSet e   => CqlOperatorsBinder.CallCreateValueSetFacade(TranslateArg(e.operand!)),
                         Ends e             => Ends(e),
                         Equivalent e       => Equivalent(e),
                         Except e           => Except(e),
@@ -309,7 +328,10 @@ namespace Hl7.Cql.Compiler
                         Union e            => Union(e),
                         ValueSetRef e      => ValueSetRef(e),
 
-                        _ => BindCqlOperator(element.GetType().Name, GetBindArgs(element)),
+                        _ => _cqlOperatorsBinder.BindToMethod(
+                            element.GetType().Name,
+                            TranslateArgs(GetBindArgs(element)),
+                            TranslateTypes(GetTypeArgs(element))),
                         //@formatter:on
                     };
 
@@ -317,6 +339,19 @@ namespace Hl7.Cql.Compiler
                     return expression!;
                 }
             });
+
+        private object?[] GetTypeArgs(Element element)
+        {
+            // ReSharper disable CoVariantArrayConversion
+            object[] types = element switch
+            {
+                MinValue e => [e.valueType],
+                MaxValue e => [e.valueType],
+                _          => NoTypes,
+            };
+            // ReSharper restore CoVariantArrayConversion
+            return types;
+        }
 
         private object?[] GetBindArgs(Element element)
         {
@@ -421,7 +456,9 @@ namespace Hl7.Cql.Compiler
                     Sum or
                     Variance => [((IGetSource)element).source],
 
-                Now or
+                MinValue or
+                    MaxValue or
+                    Now or
                     TimeOfDay or
                     Today => [],
 
@@ -432,8 +469,6 @@ namespace Hl7.Cql.Compiler
                 DateTime e => [e.year, e.month, e.day, e.hour, e.minute, e.second, e.millisecond, e.timezoneOffset],
                 Interval e => [e.low, e.high, (object)e.lowClosedExpression ?? e.lowClosed, (object)e.highClosedExpression ?? e.highClosed],
                 LastPositionOf e => [e.@string, e.pattern],
-                MaxValue e => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
-                MinValue e => [Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))],
                 PositionOf e => [e.pattern, e.@string],
                 Quantity e => [e.value, e.unit], // http://unitsofmeasure.org
                 Ratio e => [e.numerator, e.denominator],
@@ -513,7 +548,7 @@ namespace Hl7.Cql.Compiler
                     tuple.element!
                             .SelectToArray(element =>
                             {
-                                var value = Translate(element.value!);
+                                var value = TranslateArg(element.value!);
                                 var propInfo = ExpressionBuilder.GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
                                             ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType)}");
                                 var binding = Binding(value, propInfo);
@@ -534,7 +569,7 @@ namespace Hl7.Cql.Compiler
             {
 
                 var elementType = TypeFor(listTypeSpecifier.elementType);
-                var elements =  TranslateAll(list.element);
+                var elements =  TranslateArgs(list.element);
                 if (!elementType.IsNullableValueType(out _) && elements.Any(exp => exp.Type.IsNullableValueType(out _)))
                 {
                     for (int i = 0; i < elements.Length; i++)
@@ -605,7 +640,7 @@ namespace Hl7.Cql.Compiler
                 // FHIR.RemittanceOutcome maps to an enum type
                 if (ine.element?.Length == 1 && string.Equals(ine.element![0].name, "value", StringComparison.OrdinalIgnoreCase))
                 {
-                    var enumValueValue = Translate(ine.element[0]!.value!);
+                    var enumValueValue = TranslateArg(ine.element[0]!.value!);
 
                     if (enumValueValue.Type == instanceType)
                         return enumValueValue;
@@ -638,7 +673,7 @@ namespace Hl7.Cql.Compiler
             //    }
             //}
 
-            var tuples = ine.element!.SelectToArray(el => (el.name!, Translate(el.value)));
+            var tuples = ine.element!.SelectToArray(el => (el.name!, TranslateArg(el.value)));
 
             // Handle immutable primitives without public setters on their properties.
             if (instanceType == typeof(CqlRatio))
@@ -815,12 +850,12 @@ namespace Hl7.Cql.Compiler
 
         protected Expression If(If @if)
         {
-            var rc = Translate(@if.condition!);
+            var rc = TranslateArg(@if.condition!);
             var condition = rc.Coalesce();
-            var then = Translate(@if.then!);
+            var then = TranslateArg(@if.then!);
             if (@if.@else != null)
             {
-                var @else = Translate(@if.@else!);
+                var @else = TranslateArg(@if.@else!);
                 if (then.Type.IsValueType)
                 {
                     @else = HandleNullable(@else, then.Type);
@@ -917,18 +952,18 @@ namespace Hl7.Cql.Compiler
             // when1 ? then 1 : (when2 ? then 2 : (when3 ? then 3 : else }
             if (ce.caseItem?.Length > 0 && ce.@else != null)
             {
-                var elseThen = Translate(ce.@else!);
+                var elseThen = TranslateArg(ce.@else!);
                 var cases = new List<CaseWhenThenExpression.WhenThenCase>();
 
                 if (ce.comparand != null)
                 {
-                    var comparand = Translate(ce.comparand);
+                    var comparand = TranslateArg(ce.comparand);
 
                     foreach (var caseItem in ce.caseItem)
                     {
-                        var caseWhen = Translate(caseItem.when!);
+                        var caseWhen = TranslateArg(caseItem.when!);
                         var caseWhenEquality = BindCqlOperator(nameof(ICqlOperators.Equal), [comparand, caseWhen]).Coalesce();
-                        var caseThen = Translate(caseItem.then!);
+                        var caseThen = TranslateArg(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
                             caseThen = caseThen.NewAssignToTypeExpression(elseThen.Type);
@@ -940,8 +975,8 @@ namespace Hl7.Cql.Compiler
                 {
                     foreach (var caseItem in ce.caseItem)
                     {
-                        var caseWhen = Translate(caseItem.when!);
-                        var caseThen = Translate(caseItem.then!);
+                        var caseWhen = TranslateArg(caseItem.when!);
+                        var caseThen = TranslateArg(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)
                             caseThen = caseThen.NewAssignToTypeExpression(elseThen.Type);
@@ -1015,7 +1050,7 @@ namespace Hl7.Cql.Compiler
 
                 // In this construct, instead of querying a value set, we're testing resources
                 // against a list of codes, e.g., as defined by the code from or codesystem construct
-                var codes = Translate(retrieve.codes);
+                var codes = TranslateArg(retrieve.codes);
                 return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty);
             }
 
@@ -1065,7 +1100,7 @@ namespace Hl7.Cql.Compiler
 
                 if (op.source != null)
                 {
-                    var source = Translate(op.source);
+                    var source = TranslateArg(op.source);
                     var parts = path.Split('.');
                     if (parts.Length > 1)
                     {
@@ -1149,7 +1184,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression FunctionRef(FunctionRef op)
         {
-            Expression[] operands = TranslateAll(op.operand);
+            Expression[] operands = TranslateArgs(op.operand);
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands);
             return invoke;
         }
@@ -1263,7 +1298,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression ProcessValueSet(ValueSetRef valueSetRef, Elm.Expression valueExpr, bool isList)
         {
-            Expression expr = Translate(valueExpr);
+            Expression expr = TranslateArg(valueExpr);
 
             var codeType = isList ? _typeResolver.GetListElementType(expr.Type, throwError: true)! : expr.Type;
 
@@ -1316,8 +1351,8 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Equivalent(Equivalent eqv)
         {
-            var left = Translate(eqv.operand[0]);
-            var right = Translate(eqv.operand[1]);
+            var left = TranslateArg(eqv.operand[0]);
+            var right = TranslateArg(eqv.operand[1]);
             if (!_typeResolver.IsListType(left.Type))
                 return BindCqlOperator(nameof(ICqlOperators.Equivalent), left, right);
 
@@ -1345,11 +1380,11 @@ namespace Hl7.Cql.Compiler
     {
         private Expression Message(Message e)
         {
-            var source = Translate(e.source!);
-            var condition = Translate(e.condition!);
-            var code = Translate(e.code!);
-            var severity = Translate(e.severity!);
-            var message = Translate(e.message!);
+            var source = TranslateArg(e.source!);
+            var condition = TranslateArg(e.condition!);
+            var code = TranslateArg(e.code!);
+            var severity = TranslateArg(e.severity!);
+            var message = TranslateArg(e.message!);
             if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
@@ -1374,7 +1409,7 @@ namespace Hl7.Cql.Compiler
     {
         private Expression Collapse(Collapse e)
         {
-            var operand = Translate(e.operand![0]!);
+            var operand = TranslateArg(e.operand![0]!);
             if (_typeResolver.IsListType(operand.Type))
             {
                 var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
@@ -1394,8 +1429,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression Contains(Contains e)
         {
-            var left = Translate(e!.operand![0]!);
-            var right = Translate(e.operand[1]!);
+            var left = TranslateArg(e!.operand![0]!);
+            var right = TranslateArg(e.operand[1]!);
             var precision = ((IGetPrecision)e).precisionOrNull;
             if (_typeResolver.IsListType(left.Type))
             {
@@ -1421,8 +1456,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? Ends(Ends e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             var precision = ((IGetPrecision)e).precisionOrNull;
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
@@ -1439,8 +1474,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Except(Except e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (_typeResolver.IsListType(left.Type) && _typeResolver.IsListType(right.Type))
             {
                 return BindCqlOperator(nameof(ICqlOperators.ListExcept), left, right);
@@ -1463,8 +1498,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Includes(Includes e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
@@ -1499,8 +1534,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression IncludedIn(IncludedIn e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
@@ -1536,8 +1571,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Intersect(Intersect e)
         {
-            var left = Translate(e.operand![0]!);
-            var right = Translate(e.operand![1]!);
+            var left = TranslateArg(e.operand![0]!);
+            var right = TranslateArg(e.operand![1]!);
             if (_typeResolver.IsListType(left.Type))
             {
                 return BindCqlOperator(nameof(ICqlOperators.ListIntersect), left, right);
@@ -1557,8 +1592,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Meets(Meets e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1576,8 +1611,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? MeetsAfter(MeetsAfter e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1595,8 +1630,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? MeetsBefore(MeetsBefore e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1615,8 +1650,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Overlaps(Overlaps e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1634,8 +1669,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression OverlapsBefore(OverlapsBefore e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1653,8 +1688,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression OverlapsAfter(OverlapsAfter e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1672,8 +1707,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ProperIncludes(ProperIncludes e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 var precision = ((IGetPrecision)e).precisionOrNull;
@@ -1702,8 +1737,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ProperIncludedIn(ProperIncludedIn e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1733,8 +1768,8 @@ namespace Hl7.Cql.Compiler
 
         private Expression? ProperIn(ProperIn e)
         {
-            var element = Translate(e.operand![0]);
-            var intervalOrList = Translate(e.operand![1]);
+            var element = TranslateArg(e.operand![0]);
+            var intervalOrList = TranslateArg(e.operand![1]);
             if (intervalOrList.Type.IsCqlInterval(out var pointType))
             {
                 var precision = ((IGetPrecision)e).precisionOrNull;
@@ -1750,8 +1785,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? ProperContains(ProperContains e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type);
@@ -1780,8 +1815,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Starts(Starts e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (left.Type.IsCqlInterval(out var leftPointType))
             {
                 if (right.Type.IsCqlInterval(out var rightPointType))
@@ -1799,8 +1834,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Union(Union e)
         {
-            var left = Translate(e.operand![0]);
-            var right = Translate(e.operand![1]);
+            var left = TranslateArg(e.operand![0]);
+            var right = TranslateArg(e.operand![1]);
             if (_typeResolver.IsListType(left.Type))
             {
                 var leftElementType = _typeResolver.GetListElementType(left.Type)!;
@@ -1834,7 +1869,7 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Coalesce(Coalesce ce)
         {
-            var operands = TranslateAll(ce.operand);
+            var operands = TranslateArgs(ce.operand);
 
             if (operands.Length == 1 && _typeResolver.IsListType(operands[0].Type))
                 return BindCqlOperator(nameof(ICqlOperators.Coalesce), operands[0]);
@@ -1863,7 +1898,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression IsNull(IsNull isn)
         {
-            var operand = Translate(isn.operand!);
+            var operand = TranslateArg(isn.operand!);
             if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
                 return Expression.Constant(false, typeof(bool));
 
@@ -1927,7 +1962,7 @@ namespace Hl7.Cql.Compiler
                 {
                     foreach (var let in query.let)
                     {
-                        var expression = Translate(let.expression!);
+                        var expression = TranslateArg(let.expression!);
                         PushScopes(ImpliedAlias, KeyValuePair.Create(let.identifier!, (expression, (Element)let.expression!)));
                     }
                 }
@@ -1969,7 +2004,7 @@ namespace Hl7.Cql.Compiler
                 {
                     using (PushElement(query.@return))
                     {
-                        var selectBody = Translate(query.@return.expression!);
+                        var selectBody = TranslateArg(query.@return.expression!);
                         var selectLambda = Expression.Lambda(selectBody, scopeParameter);
                         var callSelect = BindCqlOperator(nameof(ICqlOperators.Select), @return, selectLambda);
                         @return = callSelect;
@@ -2087,7 +2122,7 @@ namespace Hl7.Cql.Compiler
             (string alias, Type sourceType, bool isEnumerationType)[] ReadSources() => query.source!
                 .SelectToArray(s =>
                 {
-                    var sourceType = Translate(s.expression).Type;
+                    var sourceType = TranslateArg(s.expression).Type;
                     var isEnumerationType = _typeResolver.IsListType(sourceType);
                     if (isEnumerationType) sourceType = _typeResolver.GetListElementType(sourceType, true)!;
                     return (
@@ -2166,7 +2201,7 @@ namespace Hl7.Cql.Compiler
             if (aliases.Any(alias => string.IsNullOrEmpty(alias)))
                 throw this.NewExpressionBuildingException("Query sources must have aliases.");
 
-            var sourceExpressions = TranslateAll(sources.SelectToArray(source => source.expression));
+            var sourceExpressions = TranslateArgs(sources.SelectToArray(source => source.expression));
 
             // Returns a CrossJoin between IEnumerable<> of T1, T2, T3, etc and return into IEnumerable<(T1, T2, T3, etc)>
             // a) If a source is not of a list-type (ie, a singleton), it needs to be promoted to a list type.
@@ -2272,7 +2307,7 @@ namespace Hl7.Cql.Compiler
                                     using (PushScopes(parameterName,
                                                       KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
                                     {
-                                        var sortMemberExpression = Translate(byExpression.expression);
+                                        var sortMemberExpression = TranslateArg(byExpression.expression);
                                         var lambdaBody = _expressionConverter.ConvertToType(sortMemberExpression, typeof(object));
                                         var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                         return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
@@ -2326,7 +2361,7 @@ namespace Hl7.Cql.Compiler
             //        bundle.Entry.ByResourceType<Condition>() // <--
             //            .Where(P => true) // such that goes here
             //            .Select(P => E));
-            var source = Translate(with.expression);
+            var source = TranslateArg(with.expression);
             if (!_typeResolver.IsListType(source.Type))
             {
                 // e.g.:
@@ -2341,7 +2376,7 @@ namespace Hl7.Cql.Compiler
             var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
             using (PushScopes(ImpliedAlias, KeyValuePair.Create(with.alias!, ((Expression)whereLambdaParameter, (Element)with))))
             {
-                var suchThatBody = Translate(with.suchThat);
+                var suchThatBody = TranslateArg(with.suchThat);
 
                 var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
                 var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
@@ -2364,7 +2399,7 @@ namespace Hl7.Cql.Compiler
         {
             using (PushElement(queryWhere))
             {
-                var whereBody = Translate(queryWhere);
+                var whereBody = TranslateArg(queryWhere);
                 var whereLambda = Expression.Lambda(whereBody, sourceParameter);
                 return BindCqlOperator(nameof(ICqlOperators.Where), @return, whereLambda);
             }
@@ -2396,8 +2431,8 @@ namespace Hl7.Cql.Compiler
                 var resultParameter = Expression.Parameter(resultType, resultAlias);
                 using (PushScopes(ImpliedAlias, KeyValuePair.Create(resultAlias!, ((Expression)resultParameter, (Element)queryAggregate))))
                 {
-                    var startingValue = Translate(queryAggregate.starting!);
-                    var lambdaBody = Translate(queryAggregate.expression!);
+                    var startingValue = TranslateArg(queryAggregate.starting!);
+                    var lambdaBody = TranslateArg(queryAggregate.expression!);
                     var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
                     return BindCqlOperator(nameof(ICqlOperators.Aggregate), @return, lambda, startingValue);
                 }
@@ -2448,7 +2483,7 @@ namespace Hl7.Cql.Compiler
                     else
                     {
                         var type = TypeFor(@as.asTypeSpecifier!);
-                        var operand = Translate(@as.operand!);
+                        var operand = TranslateArg(@as.operand!);
                         return new ElmAsExpression(operand, type);
                     }
                 }
@@ -2464,7 +2499,7 @@ namespace Hl7.Cql.Compiler
                 var type = _typeResolver.ResolveType(@as.asType.Name!)
                            ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
-                var operand = Translate(@as.operand);
+                var operand = TranslateArg(@as.operand);
                 if (!type.IsAssignableTo(operand.Type))
                 {
                     _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand));
@@ -2476,7 +2511,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Is(Is @is) // @TODO: Cast
         {
-            var op = Translate(@is.operand!);
+            var op = TranslateArg(@is.operand!);
             Type? type = null;
             if (@is.isTypeSpecifier != null)
             {
@@ -2529,7 +2564,7 @@ namespace Hl7.Cql.Compiler
         private Expression ChangeType(
             Element element,
             Type outputType)
-            => ChangeType(Translate(element), outputType); // @TODO: Cast
+            => ChangeType(TranslateArg(element), outputType); // @TODO: Cast
 
         private Expression ChangeType(
             Expression input,

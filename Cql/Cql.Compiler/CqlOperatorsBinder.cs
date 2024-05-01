@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
@@ -57,10 +58,12 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="methodName">The method to bind to.</param>
         /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
+        /// <param name="typeArgs">Optional types when binding to a specific generic method definition.</param>
         /// <returns>Typically a <see cref="MethodCallExpression"/> that binds to the method.</returns>
         public virtual Expression BindToMethod(
             string methodName,
-            Expression[] args)
+            Expression[] args,
+            Type[] typeArgs)
         {
             var result = methodName switch
             {
@@ -76,8 +79,6 @@ namespace Hl7.Cql.Compiler
                 "InList"                       => InList(args[0], args[1]),
                 "LateBoundProperty"            => LateBoundProperty(args[0], args[1], args[2]),
                 "ListUnion"                    => ListUnion(args[0], args[1]),
-                "MaxValue"                     => MaxValue(args[0]),
-                "MinValue"                     => MinValue(args[0]),
                 "ResolveValueSet"              => ResolveValueSet(args[0]),
                 "Retrieve"                     => Retrieve(args[0], args[1], args[2]),
                 "Select"                       => Select(args[0], args[1]),
@@ -86,7 +87,7 @@ namespace Hl7.Cql.Compiler
                 "SortBy"                       => SortBy(args[0], args[1], args[2]),
                 "Where"                        => Where(args[0], args[1]),
                 "Width"                        => Width(args[0]),
-                _                              => BindToBestMethodOverload(methodName, args),
+                _                              => BindToBestMethodOverload(methodName, args, typeArgs),
                 // @formatter:om
             };
             return result;

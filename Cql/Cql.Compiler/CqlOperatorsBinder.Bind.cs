@@ -69,15 +69,18 @@ internal partial class CqlOperatorsBinder
     ///
     ///  </summary>
     ///  <param name="methodName">The exact method name to bind to. When there are overloads, the correct method will be resolved.</param>
-    ///  <param name="arguments">When an overload exists, returns the arguments that can be provided to this method. Conversions may be included to allow this.</param>
+    ///  <param name="methodArguments">When an overload exists, returns the arguments that can be provided to this method. Conversions may be included to allow this.</param>
+    ///  <param name="genericTypeArguments">When binding to a generic method definition, these are the type arguments.</param>
     ///  <param name="throwError">Whether to throw an error if no method overload could be found. This is the default behavior. Otherwise, returns the tuple with method as null.</param>
     ///  <exception cref="ArgumentException">If no method overload is discovered, and if <paramref name="throwError"/> is <c>true</c>.</exception>
     private (MethodInfo? method, Expression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
-        Expression[] arguments,
+        Expression[] methodArguments,
+        Type[] genericTypeArguments,
         bool throwError = true)
     {
-        (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates = ResolveMethodInfosWithPotentialArgumentConversions(methodName, arguments).ToArray();
+        (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates =
+            ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
 
         var candidate = candidates switch
         {
@@ -101,7 +104,7 @@ internal partial class CqlOperatorsBinder
         (MethodInfo? method, Expression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
             (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates)
         {
-            if (arguments.Length > 0)
+            if (methodArguments.Length > 0)
             {
                 var scoredCandidates = candidates
                     .SelectToArray(candidate => (candidate, score:Score(candidate)));
@@ -139,7 +142,7 @@ internal partial class CqlOperatorsBinder
         }
 
         string InputMethodAndParametersToString() =>
-            $"{methodName} ({arguments.SelectToArray(a => a.Type.WriteCSharp(CSharpWriteMethodOptions.ParameterFormatterOptions.TypeFormatterOptions))})";
+            $"{methodName} ({methodArguments.SelectToArray(a => a.Type.WriteCSharp(CSharpWriteMethodOptions.ParameterFormatterOptions.TypeFormatterOptions))})";
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {
@@ -154,9 +157,27 @@ internal partial class CqlOperatorsBinder
     private IEnumerable<(MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)>
         ResolveMethodInfosWithPotentialArgumentConversions(
             string methodName,
-            Expression[] arguments)
+            Expression[] arguments,
+            Type[] genericTypeArguments)
     {
         Expression[] args = arguments; // So we don't modify the original array
+
+        if (genericTypeArguments.Length > 0)
+        {
+            if (args.Length == 0)
+            {
+                var methods = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, 0);
+                foreach (var (method, _) in methods)
+                {
+                    if (method.IsGenericMethodDefinition
+                        && method.GetGenericArguments().Length == genericTypeArguments.Length)
+                    {
+                        yield return (method.MakeGenericMethod(genericTypeArguments), [], []);
+                    }
+                }
+            }
+            yield break;
+        }
 
         for (int i = 0; i < 2; i++) // Try twice, first with all arguments, then without the last one
         {

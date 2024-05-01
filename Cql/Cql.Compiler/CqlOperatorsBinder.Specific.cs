@@ -71,11 +71,11 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToBestMethodOverload(nameof(ICqlOperators.CodeInList), [left, right]);
+                return BindToBestMethodOverload(nameof(ICqlOperators.CodeInList), [left, right], []);
             }
         }
 
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.In), [left, right], false);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.In), [left, right], [], false);
         if (methodInfo is null)
             return NullExpression.Object;
 
@@ -89,8 +89,10 @@ partial class CqlOperatorsBinder
     {
         if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
         {
-            return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), [left.NewTypeAsExpression<IEnumerable<CqlCode>>(), right.NewTypeAsExpression<IEnumerable<CqlCode>>()
-                                            ]);
+            return BindToBestMethodOverload(
+                nameof(ICqlOperators.ValueSetUnion),
+                [left.NewTypeAsExpression<IEnumerable<CqlCode>>(), right.NewTypeAsExpression<IEnumerable<CqlCode>>()],
+                []);
         }
         var leftElementType = _typeResolver.GetListElementType(left.Type);
         if (leftElementType == typeof(CqlCode))
@@ -98,11 +100,11 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), [left, right]);
+                return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), [left, right], []);
             }
         }
 
-        return BindToBestMethodOverload(nameof(ICqlOperators.ListUnion), [left, right]);
+        return BindToBestMethodOverload(nameof(ICqlOperators.ListUnion), [left, right], []);
     }
 
     private Expression ResolveValueSet(Expression expression)
@@ -114,28 +116,6 @@ partial class CqlOperatorsBinder
         }
 
         throw new ArgumentException("Expression should be a constant CqlValueSet");
-    }
-
-    private Expression MinValue(Expression typeConstant)
-    {
-        if (typeConstant is ConstantExpression { Value: Type t })
-        {
-            var call = BindToGenericMethod(nameof(ICqlOperators.MinValue), [t]);
-            return call;
-        }
-
-        throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
-    }
-
-    private Expression MaxValue(Expression typeConstant)
-    {
-        if (typeConstant is ConstantExpression { Value: Type t })
-        {
-            var call = BindToGenericMethod(nameof(ICqlOperators.MaxValue), [t]);
-            return call;
-        }
-
-        throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
     }
 
     private Expression Coalesce(Expression operand)
@@ -189,7 +169,7 @@ partial class CqlOperatorsBinder
         if (operand.Type == typeof(CqlInterval<object>))
             return NullExpression.Int32;
 
-        return BindToBestMethodOverload(nameof(ICqlOperators.Width), [operand]);
+        return BindToBestMethodOverload(nameof(ICqlOperators.Width), [operand], []);
     }
 
     private MethodCallExpression LateBoundProperty(

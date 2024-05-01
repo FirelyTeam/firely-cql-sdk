@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Operators;
 using Expression = System.Linq.Expressions.Expression;
@@ -16,9 +17,10 @@ partial class CqlOperatorsBinder
 {
     private MethodCallExpression BindToBestMethodOverload(
         string methodName,
-        Expression[] arguments)
+        Expression[] methodArguments,
+        Type[] genericTypeArguments)
     {
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments);
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
         return call;
     }
