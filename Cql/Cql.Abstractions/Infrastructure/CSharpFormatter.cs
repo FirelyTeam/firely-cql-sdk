@@ -48,48 +48,37 @@ internal static class CSharpFormatter
         return result;
     }
 
-    public static TextWriter WriteCSharp(
+    public static string WriteCSharp(
         this Type type,
-        TypeCSharpFormat? typeFormatterOptions = null,
-        TextWriter? textWriter = null)
-    {
-        typeFormatterOptions ??= TypeCSharpFormat.Default;
-        textWriter ??= NewInvariantCultureStringWriter();
-        typeFormatterOptions.WriteToTextWriter(textWriter, type);
-        return textWriter;
-    }
+        TypeCSharpFormat? typeFormatterOptions = null) =>
+        (typeFormatterOptions ?? TypeCSharpFormat.Default).WriteToString(type);
 
-    public static TextWriter WriteCSharp(
+    public static string WriteCSharp(
         this ParameterInfo parameterInfo,
-        ParameterCSharpFormat? parameterFormatterOptions = null,
-        TextWriter? textWriter = null)
-    {
-        parameterFormatterOptions ??= ParameterCSharpFormat.Default;
-        textWriter ??= NewInvariantCultureStringWriter();
-        parameterFormatterOptions.WriteToTextWriter(textWriter, parameterInfo);
-        return textWriter;
-    }
+        ParameterCSharpFormat? parameterFormatterOptions = null) =>
+        (parameterFormatterOptions ?? ParameterCSharpFormat.Default).WriteToString(parameterInfo);
 
-    public static TextWriter WriteCSharp(
+    public static string WriteCSharp(
         this MethodInfo methodInfo,
-        MethodCSharpFormat? methodFormatterOptions = null,
-        TextWriter? textWriter = null)
-    {
-        methodFormatterOptions ??= MethodCSharpFormat.Default;
-        textWriter ??= NewInvariantCultureStringWriter();
-        methodFormatterOptions.WriteToTextWriter(textWriter, methodInfo);
-        return textWriter;
-    }
-
-    private static StringWriter NewInvariantCultureStringWriter() => new(CultureInfo.InvariantCulture);
+        MethodCSharpFormat? methodFormatterOptions = null) =>
+        (methodFormatterOptions ?? MethodCSharpFormat.Default).WriteToString(methodInfo);
 }
 
 internal abstract record CSharpFormat<T>
 {
     public abstract TextWriterFormattableString GetFormattableString(T target);
 
-    public virtual void WriteToTextWriter(TextWriter textWriter, T target) =>
+    public void WriteToTextWriter(TextWriter textWriter, T target) =>
         GetFormattableString(target).WriteToTextWriter(textWriter);
+
+    public string WriteToString(T target)
+    {
+        using var writer = NewInvariantCultureStringWriter();
+        WriteToTextWriter(writer, target);
+        return writer.ToString();
+    }
+
+    private static StringWriter NewInvariantCultureStringWriter() => new(CultureInfo.InvariantCulture);
 }
 
 internal delegate TextWriterFormattableString FormattableStringProvider<in TContext>(TContext context);
@@ -117,9 +106,6 @@ internal record TypeCSharpFormat(
 
     public override TextWriterFormattableString GetFormattableString(Type type) =>
         TypeFormat(new TypeCSharpFormatContext(type, this));
-
-    public override void WriteToTextWriter(TextWriter textWriter, Type type) =>
-        base.WriteToTextWriter(textWriter, type);
 
     protected internal void DirectWriteToTextWriter(
         Type type,
@@ -270,9 +256,6 @@ internal record ParameterCSharpFormat(
 
     public override TextWriterFormattableString GetFormattableString(ParameterInfo parameterInfo) =>
         ParameterFormat(new ParameterCSharpFormatContext(parameterInfo, this));
-
-    public override void WriteToTextWriter(TextWriter textWriter, ParameterInfo parameterInfo) =>
-        base.WriteToTextWriter(textWriter, parameterInfo);
 }
 
 internal readonly record struct ParameterCSharpFormatContext(
@@ -301,9 +284,6 @@ internal record MethodCSharpFormat(
 
     public override TextWriterFormattableString GetFormattableString(MethodInfo methodInfo) =>
         MethodFormat(new MethodCSharpFormatContext(methodInfo, this));
-
-    public override void WriteToTextWriter(TextWriter textWriter, MethodInfo methodInfo) =>
-        base.WriteToTextWriter(textWriter, methodInfo);
 }
 
 internal readonly record struct MethodCSharpFormatContext(

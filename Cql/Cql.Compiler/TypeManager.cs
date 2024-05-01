@@ -136,7 +136,7 @@ namespace Hl7.Cql.Compiler
 
         internal static string PrettyTypeName(Type type)
         {
-            string result = type.WriteCSharp(TypeCSharpFormat).ToString()!;
+            string result = type.WriteCSharp(TypeCSharpFormat);
             return result;
         }
     }

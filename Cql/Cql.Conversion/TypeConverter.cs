@@ -251,7 +251,7 @@ namespace Hl7.Cql.Conversion
                     { IsValueType: true } => "struct ",
                     _                     => ""
                 },
-                t.WriteCSharp(TypeCSharpFormat).ToString()!);
+                t.WriteCSharp(TypeCSharpFormat));
 
         /// <inheritdoc />
         void IDisposable.Dispose()

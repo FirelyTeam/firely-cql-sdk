@@ -146,7 +146,7 @@ internal partial class CqlOperatorsBinder
                 string.Join(
                     ", ",
                     methodArguments
-                        .SelectToArray(a => a.Type.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat).ToString()))
+                        .SelectToArray(a => a.Type.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat)))
             })";
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)

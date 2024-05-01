@@ -77,20 +77,20 @@ public class CSharpFormatterTests
         var typeToCSharpStringOptions = new TypeCSharpFormat(NoNamespaces: true, UseKeywords: true);
         foreach (var (type, expected) in testCases)
         {
-            var actual = type.WriteCSharp(typeFormatterOptions: typeToCSharpStringOptions).ToString()!;
+            var actual = type.WriteCSharp(typeFormatterOptions: typeToCSharpStringOptions);
             Assert.AreEqual(expected: expected, actual: actual);
         }
 
         Assert.AreEqual(
             expected: "System.Collections.Generic.IDictionary<,>",
-            actual: typeof(IDictionary<,>).WriteCSharp(typeFormatterOptions: new(NoGenericTypeParameterNames:true)).ToString()!);
+            actual: typeof(IDictionary<,>).WriteCSharp(typeFormatterOptions: new(NoGenericTypeParameterNames:true)));
 
         Assert.AreEqual(
             expected: "IDictionary<TKey,TValue>",
             actual: typeof(IDictionary<,>).WriteCSharp(
                 typeFormatterOptions: new(
                     NoNamespaces: true,
-                    UseKeywords: true)).ToString()!);
+                    UseKeywords: true)));
 
         Assert.AreEqual(
             expected: "System.Collections.Generic.IDictionary<TKey, TValue>",
@@ -98,26 +98,26 @@ public class CSharpFormatterTests
                 typeFormatterOptions: new(
                     NoNamespaces: false,
                     UseKeywords: true,
-                    TypeDelimiter: ", ")).ToString()!);
+                    TypeDelimiter: ", ")));
 
         Assert.AreEqual(
             expected: "CoreTests.Infrastructure.EmptyStruct+Nested1+Nested2",
             actual: typeof(EmptyStruct.Nested1.Nested2).WriteCSharp(
                 typeFormatterOptions: new(
-                    NestedTypeDelimiter:"+")).ToString()!);
+                    NestedTypeDelimiter:"+")));
 
         Assert.AreEqual(
             expected: "System.Nullable<int>",
             actual: typeof(int?).WriteCSharp(
                 typeFormatterOptions: new(
                     NoNullableOperator: true,
-                    UseKeywords: true)).ToString()!);
+                    UseKeywords: true)));
 
         Assert.AreEqual(
             expected: "System.Nullable<System.Int32>",
             actual: typeof(int?).WriteCSharp(
                 typeFormatterOptions: new(
-                    NoNullableOperator: true)).ToString()!);
+                    NoNullableOperator: true)));
     }
 
     [TestMethod]
@@ -127,7 +127,7 @@ public class CSharpFormatterTests
 
         Assert.AreEqual(
             expected: "IList<T> GenericMethod<T1, T2, T3, T>(T1 a, T2[] b, IEnumerable<T3>[] c)",
-            actual: m.WriteCSharp().ToString()!);
+            actual: m.WriteCSharp());
     }
 
     [TestMethod]
@@ -140,7 +140,7 @@ public class CSharpFormatterTests
         TestTextWriter tw = new TestTextWriter(new StringWriter());
         Assert.AreEqual(
             expected: "System.Collections.Generic.IList<System.Int32> NonGenericMethod(System.Int32 a, System.Int32 b, System.Int32 c)",
-            actual: m.WriteCSharp(textWriter:tw).ToString()!);
+            actual: m.WriteCSharp(textWriter:tw)!);
 
         Assert.AreEqual(
             """
@@ -162,7 +162,7 @@ public class CSharpFormatterTests
                             UseKeywords:true,
                             NoNamespaces:true)),
                     ParameterSeparator: "; "
-                    )).ToString()!);
+                )).ToString());
 
         Assert.AreEqual(
             """
