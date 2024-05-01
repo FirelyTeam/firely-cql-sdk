@@ -209,10 +209,20 @@ internal partial class CqlOperatorsBinder
                          argIndexForGenericMethod
                              ++) // Try to get generic type from argument up to the second one
                     {
-                        if (!args[argIndexForGenericMethod].Type.IsGenericType)
+                        Type? genericTypeArg = null;
+                        var argType = args[argIndexForGenericMethod].Type;
+                        var parameterType = methodParameters[i].ParameterType;
+                        var argIsGeneric = argType.IsGenericType;
+                        var paramIsGeneric = parameterType.IsGenericMethodParameter;
+
+                        if (paramIsGeneric && !argIsGeneric)
+                            genericTypeArg = argType; // Already a generic argument, try again
+                        else if (argIsGeneric)
+                            genericTypeArg = argType.GetGenericArguments().Single();
+
+                        if (genericTypeArg is null)
                             continue; // Not a generic argument, try again
 
-                        var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments().Single();
                         MethodInfo genericMethod;
                         try
                         {

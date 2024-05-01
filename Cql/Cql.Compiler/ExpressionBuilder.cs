@@ -263,10 +263,9 @@ namespace Hl7.Cql.Compiler
                     {
                         //@formatter:off
                         Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
-                        Expand e           => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
+                        // Expand e           => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
                         Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                        ToList e           => BindCqlOperator(nameof(ICqlOperators.ToList), e.operand!),
-                        Width e            => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
+                        // Width e            => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
                         Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
                         As e               => As(e),
                         Case e             => Case(e),
@@ -327,11 +326,7 @@ namespace Hl7.Cql.Compiler
                         Tuple e            => Tuple(e),
                         Union e            => Union(e),
                         ValueSetRef e      => ValueSetRef(e),
-
-                        _ => _cqlOperatorsBinder.BindToMethod(
-                            element.GetType().Name,
-                            TranslateArgs(GetBindArgs(element)),
-                            TranslateTypes(GetTypeArgs(element))),
+                        _ => _cqlOperatorsBinder.BindToMethod(element.GetType().Name, TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
                         //@formatter:on
                     };
 
@@ -421,6 +416,7 @@ namespace Hl7.Cql.Compiler
                     ReplaceMatches or
                     StartsWith or
                     Subtract or
+                    ToList or
                     TruncatedDivide or
                     Xor => ((IGetOperands)element).operands,
 
