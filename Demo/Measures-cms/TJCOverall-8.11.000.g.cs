@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -162,7 +164,7 @@ public class TJCOverall_8_11_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -180,11 +182,11 @@ public class TJCOverall_8_11_000
 			var e_ = FHIRHelpers_4_3_000.ToInterval(NonElectiveEncounter?.Period);
 			var f_ = context.Operators.End(e_);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.ElementInInterval<CqlDateTime>(f_, g_, "day");
+			var h_ = context.Operators.In<CqlDateTime>(f_, g_, "day");
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -209,7 +211,7 @@ public class TJCOverall_8_11_000
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -229,11 +231,11 @@ public class TJCOverall_8_11_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, (int?)18);
+			var j_ = context.Operators.GreaterOrEqual(i_, 18);
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -254,7 +256,7 @@ public class TJCOverall_8_11_000
 
 			return g_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -286,7 +288,7 @@ public class TJCOverall_8_11_000
 
 			return v_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -309,7 +311,7 @@ public class TJCOverall_8_11_000
 				"completed",
 				"on-hold",
 			};
-			var m_ = context.Operators.InList<string>(k_, (l_ as IEnumerable<string>));
+			var m_ = context.Operators.In<string>(k_, (l_ as IEnumerable<string>));
 			var n_ = context.Operators.Convert<Code<RequestIntent>>(SR?.IntentElement?.Value);
 			var o_ = context.Operators.Convert<string>(n_);
 			var p_ = new string[]
@@ -320,7 +322,7 @@ public class TJCOverall_8_11_000
 				"filler-order",
 				"instance-order",
 			};
-			var q_ = context.Operators.InList<string>(o_, (p_ as IEnumerable<string>));
+			var q_ = context.Operators.In<string>(o_, (p_ as IEnumerable<string>));
 			var r_ = context.Operators.And(m_, q_);
 			var s_ = context.Operators.IsTrue(SR?.DoNotPerformElement?.Value);
 			var t_ = context.Operators.Not(s_);
@@ -328,7 +330,7 @@ public class TJCOverall_8_11_000
 
 			return u_;
 		};
-		var d_ = context.Operators.WhereOrNull<ServiceRequest>(b_, c_);
+		var d_ = context.Operators.Where<ServiceRequest>(b_, c_);
 		var f_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? g_(Procedure InterventionPerformed)
 		{
@@ -338,11 +340,11 @@ public class TJCOverall_8_11_000
 				"completed",
 				"in-progress",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 
 			return x_;
 		};
-		var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
+		var h_ = context.Operators.Where<Procedure>(f_, g_);
 		var i_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
 
 		return i_;
@@ -367,18 +369,18 @@ public class TJCOverall_8_11_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(IschemicStrokeEncounter);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
-			var f_ = context.Operators.WhereOrNull<object>(d_, e_);
+			var f_ = context.Operators.Where<object>(d_, e_);
 			Encounter g_(object ComfortMeasure) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.SelectOrNull<object, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -402,18 +404,18 @@ public class TJCOverall_8_11_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(IschemicStrokeEncounter);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
-			var f_ = context.Operators.WhereOrNull<object>(d_, e_);
+			var f_ = context.Operators.Where<object>(d_, e_);
 			Encounter g_(object ComfortMeasure) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.SelectOrNull<object, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -426,7 +428,7 @@ public class TJCOverall_8_11_000
 	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
 	{
 		var a_ = context.Operators.DateFrom(StartValue);
-		var c_ = context.Operators.Quantity((decimal?)1m, "day");
+		var c_ = context.Operators.Quantity(1m, "day");
 		var d_ = context.Operators.Add(a_, c_);
 		var e_ = context.Operators.Interval(a_, d_, true, true);
 

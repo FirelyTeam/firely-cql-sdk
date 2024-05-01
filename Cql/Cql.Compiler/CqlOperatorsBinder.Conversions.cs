@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
@@ -26,13 +27,26 @@ partial class CqlOperatorsBinder
         if (from.IsAssignableTo(to))
         {
             // 'from' is a subtype of 'to' e.g. string -> object
-            result = (Expression.Convert(arg, to), TypeConversion.SubType);
+            // OR 'from' is a nullable value type and 'to' is the underlying type e.g. int? -> int
+            result = (arg.NewAssignToTypeExpression(to), TypeConversion.AssignableType);
+            return true;
+        }
+
+        if (_typeConverter?.CanConvert(from, to) == true)
+        {
+            var bindToGenericMethod =
+                BindToGenericMethod(
+                    nameof(ICqlOperators.Convert),
+                    [to],
+                    arg.NewAssignToTypeExpression<object>()
+                );
+            result = (bindToGenericMethod, TypeConversion.OperatorConvert);
             return true;
         }
 
         if (arg is ConstantExpression fromConstant)
         {
-            if (fromConstant.Value is null && to.IsNullable())
+            if (fromConstant.Value is null && to.IsNullable(out _))
             {
                 // Null values to a type that can accept nulls e.g. default(string) or default(int?)
                 result = (NullExpression.ForType(to), TypeConversion.ExactType);
@@ -49,23 +63,6 @@ partial class CqlOperatorsBinder
                 result = (Expression.Constant(name.ToLowerInvariant()), TypeConversion.SimpleConvert);
                 return true;
             }
-
-            if (fromConstant.Type.IsValueType && to.IsNullableValueType(out var toUnderlyingType) && fromConstant.Type == toUnderlyingType)
-            {
-                // Value type values to nullable type e.g. int -> int?
-                result = (Expression.Convert(arg, to), TypeConversion.SimpleConvert);
-                return true;
-            }
-        }
-
-        if (_typeConverter?.CanConvert(from, to) == true)
-        {
-            result = (BindToGenericMethod(
-                nameof(ICqlOperators.Convert),
-                [to],
-                arg.ConvertExpression<object>()
-                ), TypeConversion.OperatorConvert);
-            return true;
         }
 
         result = default;
@@ -76,17 +73,21 @@ partial class CqlOperatorsBinder
     {
         NoMatch = 0,
         ExactType = 1,
-        SubType = 2,
+
+        /// <summary>
+        /// e.g. String is assignable to Object, and  'from' is a subtype of 'to' e.g. string -> object
+        /// </summary>
+        AssignableType = 2,
+
         SimpleConvert = 3,
         OperatorConvert = 4,
     }
 
-    private MethodCallExpression BindToMethodConvertArgs(
+    private MethodCallExpression BindToBestMethodOverload(
         string methodName,
-        Type? resultTypeHint,
         params Expression[] arguments)
     {
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, resultTypeHint, arguments);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
         return call;
     }

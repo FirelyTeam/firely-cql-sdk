@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -43,9 +45,9 @@ public class HIVViralSuppressionFHIR_0_1_000
     internal Lazy<bool?> __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<Observation> __Most_Recent_Viral_Load_Test_During_Measurement_Period;
     internal Lazy<bool?> __Numerator;
@@ -84,9 +86,9 @@ public class HIVViralSuppressionFHIR_0_1_000
         __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period = new Lazy<bool?>(this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Most_Recent_Viral_Load_Test_During_Measurement_Period = new Lazy<Observation>(this.Most_Recent_Viral_Load_Test_During_Measurement_Period_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
@@ -255,8 +257,8 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HIVViralSuppressionFHIR-0.1.000", "Measurement Period", c_);
 
@@ -270,7 +272,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -289,14 +291,14 @@ public class HIVViralSuppressionFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity((decimal?)90m, "days");
+			var j_ = context.Operators.Quantity(90m, "days");
 			var k_ = context.Operators.Add(i_, j_);
 			var l_ = context.Operators.Before(g_, k_, "day");
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -344,7 +346,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			var aj_ = this.Measurement_Period();
 			var ak_ = context.Operators.Start(aj_);
 			var am_ = context.Operators.Start(aj_);
-			var an_ = context.Operators.Quantity((decimal?)240m, "days");
+			var an_ = context.Operators.Quantity(240m, "days");
 			var ao_ = context.Operators.Add(am_, an_);
 			var ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			var aq_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
@@ -352,8 +354,8 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 			return ar_;
 		};
-		var ah_ = context.Operators.WhereOrNull<Encounter>(af_, ag_);
-		var ai_ = context.Operators.ExistsInList<Encounter>(ah_);
+		var ah_ = context.Operators.Where<Encounter>(af_, ag_);
+		var ai_ = context.Operators.Exists<Encounter>(ah_);
 
 		return ai_;
 	}
@@ -386,7 +388,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 	public bool? Denominator() => 
 		__Denominator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -394,10 +396,10 @@ public class HIVViralSuppressionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -405,10 +407,10 @@ public class HIVViralSuppressionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -416,7 +418,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -484,11 +486,11 @@ public class HIVViralSuppressionFHIR_0_1_000
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 
 			return k_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
 			var x_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -497,8 +499,8 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 			return z_;
 		};
-		var f_ = context.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.LastOfList<Observation>(f_);
+		var f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.Last<Observation>(f_);
 
 		return g_;
 	}
@@ -511,7 +513,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 	{
 		var a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period();
 		var b_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
-		var c_ = context.Operators.Quantity((decimal?)200m, "{copies}/mL");
+		var c_ = context.Operators.Quantity(200m, "{copies}/mL");
 		var d_ = context.Operators.Less((b_ as CqlQuantity), c_);
 		var f_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
 		var g_ = this.Below_threshold_level__qualifier_value_();

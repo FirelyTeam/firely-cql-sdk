@@ -77,7 +77,7 @@ partial class ExpressionBuilderContext
                     }
 
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                    var asEnumerable = arrayOfCodesInitializer.TypeAsExpression<IEnumerable<CqlCode>>();
+                    var asEnumerable = arrayOfCodesInitializer.NewTypeAsExpression<IEnumerable<CqlCode>>();
                     var display = Expression.Constant(conceptDef.display, typeof(string));
                     var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
                     var lambda = Expression.Lambda(newConcept, CqlExpressions.ParameterExpression);
@@ -247,13 +247,13 @@ partial class ExpressionBuilderContext
 
                 Expression? defaultValue = null;
                 if (parameter.@default != null)
-                    defaultValue = Translate(parameter.@default).TypeAsExpression<object>();
+                    defaultValue = Translate(parameter.@default).NewTypeAsExpression<object>();
                 else defaultValue = NullExpression.Object;
 
                 var resolveParam = _contextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier);
-                var cast = _operatorsBinder.CastToType(resolveParam, parameterType);
+                var cast = _cqlOperatorsBinder.CastToType(resolveParam, parameterType);
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
                 var lambda = Expression.Lambda(cast, CqlExpressions.ParameterExpression);
                 _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, parameter.name!, lambda);

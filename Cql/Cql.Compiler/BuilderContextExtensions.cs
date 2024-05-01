@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -26,22 +27,21 @@ internal static class BuilderContextExtensions
         new ExpressionBuildingError(context, message).ToException(innerException);
 
     public static string GetExpressionPath(this IBuilderContext builder) =>
-        $"\r\n\tExpression Path:{string.Concat(
-            from context in builder.SelfAndAncestorBuilders().Reverse()
-            let info = context.DebuggerInfo
-            where info != null
-            select $"\r\n\t* {info}"
-        )}";
+        $"\r\n\tExpression Path {builder.Hash}:{GetExpressionPathLines(builder)}";
 
     public static string GetDebuggerView(this IBuilderContext builder) =>
-        $"{builder.GetType().Name}\r\n\tExpression Path:{string.Concat(
+        $"{builder.GetType().Name}{GetExpressionPath(builder)}";
+
+    private static string GetExpressionPathLines(IBuilderContext builder) =>
+        string.Concat(
             from context in builder.SelfAndAncestorBuilders().Reverse()
             let info = context.DebuggerInfo
             where info != null
             select $"\r\n\t* {info}"
-        )}";
+        );
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [DebuggerStepThrough]
     public static T CatchRethrowExpressionBuildingException<TBuilderContext, T>(
         this TBuilderContext builderContext,
         Func<TBuilderContext, T> fn,
@@ -64,6 +64,7 @@ internal static class BuilderContextExtensions
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [DebuggerStepThrough]
     public static void CatchRethrowExpressionBuildingException<TBuilderNode>(
         this TBuilderNode builder,
         Action<TBuilderNode> action,

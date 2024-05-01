@@ -33,7 +33,7 @@ internal sealed class CleanConsoleFormatter : ConsoleFormatter
             options.NoColor
                 ? ("", "")
                 : (GetForegroundColorEscapeCode(logLevelConsoleColor), DefaultForegroundColor);
-        textWriter.WriteLine($"{escLogLevelForegroundColor}{logLevelText.ToUpperInvariant()}{escDefaultForegroundColor}: {message}");
+        textWriter.WriteLine($"____\n{escLogLevelForegroundColor}{logLevelText.ToUpperInvariant()}{escDefaultForegroundColor}: {message}");
     }
 
     private static (string logLevelText, ConsoleColor logLevelConsoleColor) GetLogLevelString(LogLevel logLevel) =>

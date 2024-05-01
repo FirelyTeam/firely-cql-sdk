@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -28,9 +30,9 @@ public class ColonCancerScreeningFHIR_0_1_000
     internal Lazy<CqlValueSet> __Total_Colectomy;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
@@ -70,9 +72,9 @@ public class ColonCancerScreeningFHIR_0_1_000
         __Total_Colectomy = new Lazy<CqlValueSet>(this.Total_Colectomy_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
@@ -160,8 +162,8 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("ColonCancerScreeningFHIR-0.1.000", "Measurement Period", c_);
 
@@ -175,7 +177,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -184,7 +186,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -192,10 +194,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -203,10 +205,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -214,7 +216,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -236,10 +238,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)46, (int?)75, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(46, 75, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 
 		return k_;
@@ -275,7 +277,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
+		var e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -300,7 +302,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 
 			return k_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
@@ -313,10 +315,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 	{
 		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 		var b_ = this.Malignant_Neoplasm();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 		var e_ = this.Total_Colectomy_Performed();
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 		var g_ = context.Operators.Or(d_, f_);
 		var h_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty();
 		var i_ = context.Operators.Or(g_, h_);
@@ -389,12 +391,12 @@ public class ColonCancerScreeningFHIR_0_1_000
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 			var l_ = context.Operators.And(g_, k_);
 
 			return l_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -461,16 +463,16 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity((decimal?)2m, "years");
+			var l_ = context.Operators.Quantity(2m, "years");
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, "day");
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 			var r_ = context.Operators.And(g_, q_);
 
 			return r_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -491,15 +493,15 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity((decimal?)4m, "years");
+			var k_ = context.Operators.Quantity(4m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, "day");
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
@@ -520,15 +522,15 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity((decimal?)4m, "years");
+			var k_ = context.Operators.Quantity(4m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, "day");
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -549,15 +551,15 @@ public class ColonCancerScreeningFHIR_0_1_000
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity((decimal?)9m, "years");
+			var k_ = context.Operators.Quantity(9m, "years");
 			var l_ = context.Operators.Subtract(j_, k_);
 			var n_ = context.Operators.End(i_);
 			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(h_, o_, "day");
+			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
@@ -569,18 +571,18 @@ public class ColonCancerScreeningFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Fecal_Occult_Blood_Test_Performed();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Stool_DNA_with_FIT_Test_Performed();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Flexible_Sigmoidoscopy_Performed();
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 		var h_ = context.Operators.Or(e_, g_);
 		var i_ = this.CT_Colonography_Performed();
-		var j_ = context.Operators.ExistsInList<Observation>(i_);
+		var j_ = context.Operators.Exists<Observation>(i_);
 		var k_ = context.Operators.Or(h_, j_);
 		var l_ = this.Colonoscopy_Performed();
-		var m_ = context.Operators.ExistsInList<Procedure>(l_);
+		var m_ = context.Operators.Exists<Procedure>(l_);
 		var n_ = context.Operators.Or(k_, m_);
 
 		return n_;
@@ -598,8 +600,8 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)46, (int?)49, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(46, 49, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -616,8 +618,8 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)50, (int?)75, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(50, 75, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}

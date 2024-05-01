@@ -6,6 +6,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -16,6 +17,6 @@ namespace Tuples
     public class Tuple_QDOjYOQaAUWAWKDPBcQCSKDH: TupleBaseType
     {
         [CqlDeclaration("IdentifierTuple")]
-        public IEnumerable<Tuples.Tuple_FNLPNAPOaaMjChWUXdhfgcWIR> IdentifierTuple { get; set; }
+        public IEnumerable<Tuple_FNLPNAPOaaMjChWUXdhfgcWIR> IdentifierTuple { get; set; }
     }
 }

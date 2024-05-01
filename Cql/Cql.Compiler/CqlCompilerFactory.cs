@@ -27,19 +27,28 @@ internal class CqlCompilerFactory :
 
 
     public virtual TypeConverter TypeConverter => Singleton(fn: NewTypeConverter);
-    protected virtual TypeConverter NewTypeConverter() => FhirTypeConverter.Create(ModelInspector, CacheSize);
+    protected virtual TypeConverter NewTypeConverter()
+    {
+        var converter = FhirTypeConverter.Create(ModelInspector, CacheSize);
+        converter.LogAllConverters(Logger<TypeConverter>());
+        return converter;
+    }
 
 
     public virtual TypeResolver TypeResolver => Singleton(fn: NewTypeResolver);
     protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);
 
 
-    public virtual OperatorsBinder OperatorsBinder => Singleton(fn: NewOperatorsBinder);
-    protected virtual OperatorsBinder NewOperatorsBinder() => new CqlOperatorsBinder(TypeResolver, TypeConverter);
+    public virtual CqlOperatorsBinder CqlOperatorsBinder => Singleton(fn: NewOperatorsBinder);
+    protected virtual CqlOperatorsBinder NewOperatorsBinder() =>
+        new CqlOperatorsBinder(
+            Logger<CqlOperatorsBinder>(),
+            TypeResolver,
+            TypeConverter);
 
 
-    public virtual ContextBinder ContextBinder => Singleton(fn: NewContextBinder);
-    protected virtual ContextBinder NewContextBinder() => new CqlContextBinder();
+    public virtual CqlContextBinder CqlContextBinder => Singleton(fn: NewContextBinder);
+    protected virtual CqlContextBinder NewContextBinder() => new CqlContextBinder();
 
 
     public virtual TypeManager TypeManager => Singleton(fn: NewTypeManager);
@@ -55,26 +64,20 @@ internal class CqlCompilerFactory :
 
     protected virtual LibraryExpressionBuilder NewLibraryExpressionBuilder() =>
         new LibraryExpressionBuilder(
-            logger: Singleton(fn: NewLibraryExpressionBuilderLogger),
+            Logger<LibraryExpressionBuilder>(),
             ExpressionBuilder);
 
     protected virtual ExpressionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         ExpressionBuilderSettings.Default;
 
-    protected virtual ILogger<LibraryExpressionBuilder> NewLibraryExpressionBuilderLogger() =>
-        LoggerFactory.CreateLogger<LibraryExpressionBuilder>();
-
     public virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
 
     protected virtual ExpressionBuilder NewExpressionBuilder() =>
-        new(logger: Singleton(fn: NewExpressionBuilderLogger),
-            operatorsBinder: OperatorsBinder,
+        new(Logger<ExpressionBuilder>(),
+            cqlOperatorsBinder: CqlOperatorsBinder,
             typeManager: TypeManager,
             typeConverter: TypeConverter,
             typeResolver: TypeResolver,
-            contextBinder: ContextBinder,
+            cqlContextBinder: CqlContextBinder,
             expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings));
-
-    protected virtual ILogger<ExpressionBuilder> NewExpressionBuilderLogger() =>
-        LoggerFactory.CreateLogger<ExpressionBuilder>();
 }

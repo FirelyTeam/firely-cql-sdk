@@ -23,78 +23,82 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Mapping from CQL typerefs to .NET types.
         /// </summary>
-        protected readonly Dictionary<string, Type> Types = new(StringComparer.OrdinalIgnoreCase) {
-            { "{urn:hl7-org:elm-types:r1}Any", typeof(object) },
-            { "{urn:hl7-org:elm-types:r1}Date", typeof(CqlDate) },
-            { "{urn:hl7-org:elm-types:r1}DateTime", typeof(CqlDateTime) },
-            { "{urn:hl7-org:elm-types:r1}Quantity", typeof(CqlQuantity) },
-            { "{urn:hl7-org:elm-types:r1}Integer", typeof(int?) },
-            { "{urn:hl7-org:elm-types:r1}Long", typeof(long?) },
-            { "{urn:hl7-org:elm-types:r1}Boolean", typeof(bool?) },
-            { "{urn:hl7-org:elm-types:r1}String", typeof(string) },
-            { "{urn:hl7-org:elm-types:r1}Decimal", typeof(decimal?) },
-            { "{urn:hl7-org:elm-types:r1}Ratio", typeof(CqlRatio) },
-            { "{urn:hl7-org:elm-types:r1}Code", typeof(CqlCode) },
-            { "{urn:hl7-org:elm-types:r1}CodeSystem", typeof(CqlCodeSystem) },
-            { "{urn:hl7-org:elm-types:r1}Concept", typeof(CqlConcept) },
-            { "{urn:hl7-org:elm-types:r1}Time", typeof(CqlTime) },
-            { "{urn:hl7-org:elm-types:r1}ValueSet", typeof(CqlValueSet) },
-            { "{urn:hl7-org:elm-types:r1}Vocabulary", typeof(CqlVocabulary) },
-        };
+        protected readonly Dictionary<string, Type> Types;
 
-        /// <inheritdoc/>
-        internal override Type AnyType => Types["{urn:hl7-org:elm-types:r1}Any"];
+        /// <nodoc/>
+        public BaseTypeResolver() =>
+            Types = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase) {
+                { "{urn:hl7-org:elm-types:r1}Any"       , AnyType        },
+                { "{urn:hl7-org:elm-types:r1}Date"      , DateType       },
+                { "{urn:hl7-org:elm-types:r1}DateTime"  , DateTimeType   },
+                { "{urn:hl7-org:elm-types:r1}Quantity"  , QuantityType   },
+                { "{urn:hl7-org:elm-types:r1}Integer"   , IntegerType    },
+                { "{urn:hl7-org:elm-types:r1}Long"      , LongType       },
+                { "{urn:hl7-org:elm-types:r1}Boolean"   , BooleanType    },
+                { "{urn:hl7-org:elm-types:r1}String"    , StringType     },
+                { "{urn:hl7-org:elm-types:r1}Decimal"   , DecimalType    },
+                { "{urn:hl7-org:elm-types:r1}Ratio"     , RatioType      },
+                { "{urn:hl7-org:elm-types:r1}Code"      , CodeType       },
+                { "{urn:hl7-org:elm-types:r1}CodeSystem", CodeSystemType },
+                { "{urn:hl7-org:elm-types:r1}Concept"   , ConceptType    },
+                { "{urn:hl7-org:elm-types:r1}Time"      , TimeType       },
+                { "{urn:hl7-org:elm-types:r1}ValueSet"  , ValueSetType   },
+                { "{urn:hl7-org:elm-types:r1}Vocabulary", VocabularyType },
+            };
 
-        /// <inheritdoc/>
-        internal override Type BooleanType => Types["{urn:hl7-org:elm-types:r1}Boolean"];
+        /// <inheritdoc />
+        internal override Type AnyType => typeof(object);
 
-        /// <inheritdoc/>
-        internal override Type CodeType => Types["{urn:hl7-org:elm-types:r1}Code"];
+        /// <inheritdoc />
+        internal override Type DateType => typeof(CqlDate);
 
-        /// <inheritdoc/>
-        internal override Type CodeSystemType => Types["{urn:hl7-org:elm-types:r1}CodeSystem"];
+        /// <inheritdoc />
+        internal override Type DateTimeType => typeof(CqlDateTime);
 
-        /// <inheritdoc/>
-        internal override Type ConceptType => Types["{urn:hl7-org:elm-types:r1}Concept"];
+        /// <inheritdoc />
+        internal override Type QuantityType => typeof(CqlQuantity);
 
-        /// <inheritdoc/>
-        internal override Type DateType => Types["{urn:hl7-org:elm-types:r1}Date"];
+        /// <inheritdoc />
+        internal override Type IntegerType => typeof(int?);
 
-        /// <inheritdoc/>
-        internal override Type DateTimeType => Types["{urn:hl7-org:elm-types:r1}DateTime"];
+        /// <inheritdoc />
+        internal override Type LongType => typeof(long?);
 
-        /// <inheritdoc/>
-        internal override Type DecimalType => Types["{urn:hl7-org:elm-types:r1}Decimal"];
+        /// <inheritdoc />
+        internal override Type BooleanType => typeof(bool?);
 
-        /// <inheritdoc/>
-        internal override Type LongType => Types["{urn:hl7-org:elm-types:r1}Long"];
+        /// <inheritdoc />
+        internal override Type StringType => typeof(string);
 
-        /// <inheritdoc/>
-        internal override Type IntegerType => Types["{urn:hl7-org:elm-types:r1}Integer"];
+        /// <inheritdoc />
+        internal override Type DecimalType => typeof(decimal?);
+
+        /// <inheritdoc />
+        internal override Type RatioType => typeof(CqlRatio);
+
+        /// <inheritdoc />
+        internal override Type CodeType => typeof(CqlCode);
+
+        /// <inheritdoc />
+        internal override Type CodeSystemType => typeof(CqlCodeSystem);
+
+        /// <inheritdoc />
+        internal override Type ConceptType => typeof(CqlConcept);
+
+        /// <inheritdoc />
+        internal override Type TimeType => typeof(CqlTime);
+
+        /// <inheritdoc />
+        internal override Type ValueSetType => typeof(CqlValueSet);
+
+        /// <inheritdoc />
+        internal override Type VocabularyType => typeof(CqlVocabulary);
 
         /// <inheritdoc/>
         internal override Type IntervalType(Type pointType) =>
             pointType is not null
-            ? typeof(CqlInterval<>).MakeGenericType(pointType)
-            : throw new ArgumentNullException(nameof(pointType));
-
-        /// <inheritdoc/>
-        internal override Type QuantityType => Types["{urn:hl7-org:elm-types:r1}Quantity"];
-
-        /// <inheritdoc/>
-        internal override Type RatioType => Types["{urn:hl7-org:elm-types:r1}Ratio"];
-
-        /// <inheritdoc/>
-        internal override Type StringType => Types["{urn:hl7-org:elm-types:r1}String"];
-
-        /// <inheritdoc/>
-        internal override Type TimeType => Types["{urn:hl7-org:elm-types:r1}Time"];
-
-        /// <inheritdoc/>
-        internal override Type ValueSetType => Types["{urn:hl7-org:elm-types:r1}ValueSet"];
-
-        /// <inheritdoc/>
-        internal override Type VocabularyType => Types["{urn:hl7-org:elm-types:r1}Vocabulary"];
+                ? typeof(CqlInterval<>).MakeGenericType(pointType)
+                : throw new ArgumentNullException(nameof(pointType));
 
         /// <inheritdoc/>
         internal sealed override PropertyInfo? GetProperty(Type type, string propertyName)

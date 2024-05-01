@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -37,9 +39,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
     internal Lazy<IEnumerable<Observation>> __Severe_Hypoglycemic_Harm_Event;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Severe_Hypoglycemic_Harm_Event;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -70,9 +72,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
         __Severe_Hypoglycemic_Harm_Event = new Lazy<IEnumerable<Observation>>(this.Severe_Hypoglycemic_Harm_Event_Value);
         __Encounter_with_Severe_Hypoglycemic_Harm_Event = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Severe_Hypoglycemic_Harm_Event_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -134,8 +136,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.1.000", "Measurement Period", c_);
 
@@ -149,7 +151,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -170,10 +172,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			var h_ = context.Operators.Start(g_);
 			var i_ = context.Operators.DateFrom(h_);
 			var j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
-			var k_ = context.Operators.GreaterOrEqual(j_, (int?)18);
+			var k_ = context.Operators.GreaterOrEqual(j_, 18);
 			var m_ = context.Operators.End(g_);
 			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(m_, n_, "day");
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 			var p_ = context.Operators.And(k_, o_);
 			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
 			var r_ = context.Operators.Equal(q_, "finished");
@@ -181,7 +183,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return s_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -206,7 +208,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return m_;
 		};
-		var g_ = context.Operators.WhereOrNull<MedicationAdministration>(e_, f_);
+		var g_ = context.Operators.Where<MedicationAdministration>(e_, f_);
 
 		return g_;
 	}
@@ -227,18 +229,18 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				var j_ = QICoreCommon_2_0_000.ToInterval(i_);
 				var k_ = context.Operators.Start(j_);
 				var l_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
-				var m_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, null);
+				var m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 
 				return m_;
 			};
-			var f_ = context.Operators.WhereOrNull<MedicationAdministration>(d_, e_);
+			var f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
 			Encounter g_(MedicationAdministration HypoglycemicMedication) => 
 				InpatientHospitalization;
-			var h_ = context.Operators.SelectOrNull<MedicationAdministration, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -276,9 +278,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(a_, b_, d_);
-		Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ f_(ValueTuple<Encounter,MedicationAdministration,Observation> _valueTuple)
+		Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ f_(ValueTuple<Encounter,MedicationAdministration,Observation> _valueTuple)
 		{
-			var l_ = new Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ
+			var l_ = new Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ
 			{
 				QualifyingEncounter = _valueTuple.Item1,
 				HypoglycemicMedication = _valueTuple.Item2,
@@ -287,8 +289,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(e_, f_);
-		bool? h_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz)
+		var g_ = context.Operators.Select<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(e_, f_);
+		bool? h_(Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz)
 		{
 			object m_()
 			{
@@ -338,7 +340,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			var n_ = QICoreCommon_2_0_000.Earliest(m_());
 			var o_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dsfjbilfcbvjwbysgxhdjckiz.QualifyingEncounter);
-			var p_ = context.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+			var p_ = context.Operators.In<CqlDateTime>(n_, o_, null);
 			var q_ = context.Operators.Convert<Code<ObservationStatus>>(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.StatusElement?.Value);
 			var r_ = context.Operators.Convert<string>(q_);
 			var s_ = new string[]
@@ -347,10 +349,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var t_ = context.Operators.InList<string>(r_, (s_ as IEnumerable<string>));
+			var t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			var u_ = context.Operators.And(p_, t_);
 			var v_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest?.Value);
-			var w_ = context.Operators.Quantity((decimal?)40m, "mg/dL");
+			var w_ = context.Operators.Quantity(40m, "mg/dL");
 			var x_ = context.Operators.Less((v_ as CqlQuantity), w_);
 			var y_ = context.Operators.And(u_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(tuple_dsfjbilfcbvjwbysgxhdjckiz.HypoglycemicMedication?.Effective);
@@ -403,7 +405,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var ad_ = QICoreCommon_2_0_000.Earliest(ac_());
-			var ae_ = context.Operators.Quantity((decimal?)24m, "hours");
+			var ae_ = context.Operators.Quantity(24m, "hours");
 			var af_ = context.Operators.Subtract(ad_, ae_);
 			object ag_()
 			{
@@ -453,7 +455,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			var ah_ = QICoreCommon_2_0_000.Earliest(ag_());
 			var ai_ = context.Operators.Interval(af_, ah_, true, true);
-			var aj_ = context.Operators.ElementInInterval<CqlDateTime>(ab_, ai_, null);
+			var aj_ = context.Operators.In<CqlDateTime>(ab_, ai_, null);
 			object ak_()
 			{
 				bool bz_()
@@ -507,10 +509,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return ao_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(g_, h_);
-		Observation j_(Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz) => 
+		var i_ = context.Operators.Where<Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ>(g_, h_);
+		Observation j_(Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ tuple_dsfjbilfcbvjwbysgxhdjckiz) => 
 			tuple_dsfjbilfcbvjwbysgxhdjckiz.GlucoseTest;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ, Observation>(i_, j_);
+		var k_ = context.Operators.Select<Tuple_DSFJBiLfcBVJWbYSgXHdjCKIZ, Observation>(i_, j_);
 
 		return k_;
 	}
@@ -526,9 +528,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(a_, b_, d_);
-		Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ f_(ValueTuple<Encounter,Observation,Observation> _valueTuple)
+		Tuple_CQTbBRGObHbJhTLCMKYTEOihZ f_(ValueTuple<Encounter,Observation,Observation> _valueTuple)
 		{
-			var l_ = new Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ
+			var l_ = new Tuple_CQTbBRGObHbJhTLCMKYTEOihZ
 			{
 				QualifyingEncounter = _valueTuple.Item1,
 				LowGlucoseTest = _valueTuple.Item2,
@@ -537,8 +539,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation,Observation>, Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(e_, f_);
-		bool? h_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz)
+		var g_ = context.Operators.Select<ValueTuple<Encounter,Observation,Observation>, Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(e_, f_);
+		bool? h_(Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz)
 		{
 			object m_()
 			{
@@ -681,10 +683,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var r_ = QICoreCommon_2_0_000.Earliest(q_());
-			var s_ = context.Operators.Quantity((decimal?)5m, "minutes");
+			var s_ = context.Operators.Quantity(5m, "minutes");
 			var t_ = context.Operators.Add(r_, s_);
 			var u_ = context.Operators.Interval(p_, t_, false, true);
-			var v_ = context.Operators.ElementInInterval<CqlDateTime>(n_, u_, null);
+			var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
 			object w_()
 			{
 				bool cg_()
@@ -782,7 +784,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			var ab_ = QICoreCommon_2_0_000.Earliest(aa_());
 			var ac_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_cqtbbrgobhbjhtlcmkyteoihz.QualifyingEncounter);
-			var ad_ = context.Operators.ElementInInterval<CqlDateTime>(ab_, ac_, null);
+			var ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, null);
 			var ae_ = context.Operators.And(z_, ad_);
 			object af_()
 			{
@@ -831,7 +833,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				};
 			};
 			var ag_ = QICoreCommon_2_0_000.Earliest(af_());
-			var ai_ = context.Operators.ElementInInterval<CqlDateTime>(ag_, ac_, null);
+			var ai_ = context.Operators.In<CqlDateTime>(ag_, ac_, null);
 			var aj_ = context.Operators.And(ae_, ai_);
 			var ak_ = context.Operators.Equivalent(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.IdElement?.Value, tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest?.IdElement?.Value);
 			var al_ = context.Operators.Not(ak_);
@@ -844,19 +846,19 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var aq_ = context.Operators.InList<string>(ao_, (ap_ as IEnumerable<string>));
+			var aq_ = context.Operators.In<string>(ao_, (ap_ as IEnumerable<string>));
 			var ar_ = context.Operators.And(am_, aq_);
 			var as_ = FHIRHelpers_4_3_000.ToValue(tuple_cqtbbrgobhbjhtlcmkyteoihz.FollowupGlucoseTest?.Value);
-			var at_ = context.Operators.Quantity((decimal?)80m, "mg/dL");
+			var at_ = context.Operators.Quantity(80m, "mg/dL");
 			var au_ = context.Operators.Greater((as_ as CqlQuantity), at_);
 			var av_ = context.Operators.And(ar_, au_);
 
 			return av_;
 		};
-		var i_ = context.Operators.WhereOrNull<Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(g_, h_);
-		Observation j_(Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz) => 
+		var i_ = context.Operators.Where<Tuple_CQTbBRGObHbJhTLCMKYTEOihZ>(g_, h_);
+		Observation j_(Tuple_CQTbBRGObHbJhTLCMKYTEOihZ tuple_cqtbbrgobhbjhtlcmkyteoihz) => 
 			tuple_cqtbbrgobhbjhtlcmkyteoihz.LowGlucoseTest;
-		var k_ = context.Operators.SelectOrNull<Tuples.Tuple_CQTbBRGObHbJhTLCMKYTEOihZ, Observation>(i_, j_);
+		var k_ = context.Operators.Select<Tuple_CQTbBRGObHbJhTLCMKYTEOihZ, Observation>(i_, j_);
 
 		return k_;
 	}
@@ -879,18 +881,18 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 				return k_;
 			};
-			var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+			var f_ = context.Operators.Where<Observation>(d_, e_);
 			string g_(Observation @this) => 
 				((@this is Resource)
 	? ((@this as Resource).IdElement)
 	: null)?.Value;
-			var h_ = context.Operators.SelectOrNull<Observation, string>(f_, g_);
-			var i_ = context.Operators.InList<string>(LowGlucoseTest?.IdElement?.Value, h_);
+			var h_ = context.Operators.Select<Observation, string>(f_, g_);
+			var i_ = context.Operators.In<string>(LowGlucoseTest?.IdElement?.Value, h_);
 			var j_ = context.Operators.Not(i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -904,9 +906,9 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var a_ = this.Denominator();
 		var b_ = this.Severe_Hypoglycemic_Harm_Event();
 		var c_ = context.Operators.CrossJoin<Encounter, Observation>(a_, b_);
-		Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS d_(ValueTuple<Encounter,Observation> _valueTuple)
+		Tuple_DKOWLZZJefTKbjLjeXPNieaFS d_(ValueTuple<Encounter,Observation> _valueTuple)
 		{
-			var j_ = new Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS
+			var j_ = new Tuple_DKOWLZZJefTKbjLjeXPNieaFS
 			{
 				QualifyingEncounter = _valueTuple.Item1,
 				HypoglycemicEvent = _valueTuple.Item2,
@@ -914,8 +916,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.SelectOrNull<ValueTuple<Encounter,Observation>, Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(c_, d_);
-		bool? f_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs)
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(c_, d_);
+		bool? f_(Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs)
 		{
 			object k_()
 			{
@@ -965,14 +967,14 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			var l_ = QICoreCommon_2_0_000.Earliest(k_());
 			var m_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dkowlzzjeftkbjljexpnieafs.QualifyingEncounter);
-			var n_ = context.Operators.ElementInInterval<CqlDateTime>(l_, m_, null);
+			var n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
 
 			return n_;
 		};
-		var g_ = context.Operators.WhereOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(e_, f_);
-		Encounter h_(Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs) => 
+		var g_ = context.Operators.Where<Tuple_DKOWLZZJefTKbjLjeXPNieaFS>(e_, f_);
+		Encounter h_(Tuple_DKOWLZZJefTKbjLjeXPNieaFS tuple_dkowlzzjeftkbjljexpnieafs) => 
 			tuple_dkowlzzjeftkbjljexpnieafs.QualifyingEncounter;
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(g_, h_);
+		var i_ = context.Operators.Select<Tuple_DKOWLZZJefTKbjLjeXPNieaFS, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -992,7 +994,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	public IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1000,10 +1002,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1011,10 +1013,10 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1022,7 +1024,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

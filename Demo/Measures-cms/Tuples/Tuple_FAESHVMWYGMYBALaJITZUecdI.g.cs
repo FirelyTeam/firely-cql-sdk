@@ -6,6 +6,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -16,8 +17,8 @@ namespace Tuples
     public class Tuple_FAESHVMWYGMYBALaJITZUecdI: TupleBaseType
     {
         [CqlDeclaration("FirstUSSAssessment")]
-        public Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FirstUSSAssessment { get; set; }
+        public Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FirstUSSAssessment { get; set; }
         [CqlDeclaration("FollowUpUSSAssessment")]
-        public Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment { get; set; }
+        public Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment { get; set; }
     }
 }

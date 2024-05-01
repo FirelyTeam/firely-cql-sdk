@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -95,7 +97,7 @@ public class DevDays_2023_0_0
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -117,16 +119,16 @@ public class DevDays_2023_0_0
 
 				return m_;
 			};
-			var e_ = context.Operators.WhereOrNull<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
-			var f_ = context.Operators.ExistsInList<Coding>(e_);
+			var e_ = context.Operators.Where<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
+			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
 			var j_ = context.Operators.And(f_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
+		var c_ = context.Operators.Where<Condition>(a_, b_);
 
 		return c_;
 	}
@@ -148,16 +150,16 @@ public class DevDays_2023_0_0
 
 				return m_;
 			};
-			var e_ = context.Operators.WhereOrNull<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
-			var f_ = context.Operators.ExistsInList<Coding>(e_);
+			var e_ = context.Operators.Where<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
+			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
 			var j_ = context.Operators.And(f_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
+		var c_ = context.Operators.Where<Condition>(a_, b_);
 
 		return c_;
 	}
@@ -169,7 +171,7 @@ public class DevDays_2023_0_0
 	private bool? Initial_population_Value()
 	{
 		var a_ = this.Jet_engine_conditions();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 
 		return b_;
 	}
@@ -181,7 +183,7 @@ public class DevDays_2023_0_0
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Subsequent_encounters();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 
 		return b_;
 	}

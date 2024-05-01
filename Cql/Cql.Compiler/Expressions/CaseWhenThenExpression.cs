@@ -62,9 +62,9 @@ namespace Hl7.Cql.Compiler.Expressions
                 if (then.Type != els.Type)
                 {
                     if (then.Type.IsAssignableFrom(els.Type))
-                        els = els.ConvertExpression(then.Type);
+                        els = els.NewAssignToTypeExpression(then.Type);
                     else if (els.Type.IsAssignableFrom(then.Type))
-                        then = then.ConvertExpression(els.Type);
+                        then = then.NewAssignToTypeExpression(els.Type);
                     // Else: expect Condition factory below to fail.
                 }
 

@@ -4,9 +4,9 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// Represents a binder to <see cref="CqlContext"/>.
+/// Facilitates binding to <see cref="CqlContext"/> methods.
 /// </summary>
-internal class CqlContextBinder : ContextBinder
+internal class CqlContextBinder
 {
     /// <summary>
     /// Creates an expression which resolves a parameter in the CQL context,
@@ -16,7 +16,7 @@ internal class CqlContextBinder : ContextBinder
     /// <param name="parameterName">The name of the parameter.</param>
     /// <param name="defaultValue">The default value of the parameter.</param>
     /// <returns>The resolved parameter expression.</returns>
-    public override Expression ResolveParameter(
+    public virtual Expression ResolveParameter(
         string libraryKey,
         string parameterName,
         Expression defaultValue) =>

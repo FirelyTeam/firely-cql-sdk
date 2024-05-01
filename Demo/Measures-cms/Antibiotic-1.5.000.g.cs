@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -54,7 +56,7 @@ public class Antibiotic_1_5_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -77,27 +79,27 @@ public class Antibiotic_1_5_000
 				var m_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
 				var n_ = context.Operators.Start(m_);
 				var o_ = context.Operators.DateFrom(n_);
-				var p_ = context.Operators.Quantity((decimal?)1m, "year");
+				var p_ = context.Operators.Quantity(1m, "year");
 				var q_ = context.Operators.Subtract(o_, p_);
 				var s_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
 				var t_ = context.Operators.Start(s_);
 				var u_ = context.Operators.DateFrom(t_);
 				var v_ = context.Operators.Interval(q_, u_, true, true);
-				var w_ = context.Operators.ElementInInterval<CqlDate>(k_, v_, null);
+				var w_ = context.Operators.In<CqlDate>(k_, v_, null);
 
 				return w_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(comorbidConditions, e_);
+			var f_ = context.Operators.Where<Condition>(comorbidConditions, e_);
 			Encounter g_(Condition comcondition) => 
 				eDate;
-			var h_ = context.Operators.SelectOrNull<Condition, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var b_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(episodeDate, a_);
+		var b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
 		Encounter c_(Encounter eDate) => 
 			eDate;
-		var d_ = context.Operators.SelectOrNull<Encounter, Encounter>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -114,27 +116,27 @@ public class Antibiotic_1_5_000
 				var k_ = FHIRHelpers_4_3_000.ToInterval(eDate?.Period);
 				var l_ = context.Operators.Start(k_);
 				var n_ = context.Operators.Start(k_);
-				var o_ = context.Operators.Quantity((decimal?)3m, "days");
+				var o_ = context.Operators.Quantity(3m, "days");
 				var p_ = context.Operators.Add(n_, o_);
 				var q_ = context.Operators.Interval(l_, p_, true, true);
-				var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, "day");
+				var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 				var t_ = context.Operators.Start(k_);
 				var u_ = context.Operators.Not((bool?)(t_ is null));
 				var v_ = context.Operators.And(r_, u_);
 
 				return v_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(competingConditions, e_);
+			var f_ = context.Operators.Where<Condition>(competingConditions, e_);
 			Encounter g_(Condition competcondition) => 
 				eDate;
-			var h_ = context.Operators.SelectOrNull<Condition, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var b_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(episodeDate, a_);
+		var b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
 		Encounter c_(Encounter eDate) => 
 			eDate;
-		var d_ = context.Operators.SelectOrNull<Encounter, Encounter>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -152,10 +154,10 @@ public class Antibiotic_1_5_000
 
 					return n_;
 				};
-				var h_ = context.Operators.WhereOrNull<Dosage>(ActiveMedication?.DosageInstruction, g_);
+				var h_ = context.Operators.Where<Dosage>(ActiveMedication?.DosageInstruction, g_);
 				Timing i_(Dosage @this) => 
 					@this?.Timing;
-				var j_ = context.Operators.SelectOrNull<Dosage, Timing>(h_, i_);
+				var j_ = context.Operators.Select<Dosage, Timing>(h_, i_);
 				bool? k_(Timing T)
 				{
 					var o_ = FHIRHelpers_4_3_000.ToValue(T?.Repeat?.Bounds);
@@ -164,12 +166,12 @@ public class Antibiotic_1_5_000
 					var r_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var s_ = context.Operators.Start(r_);
 					var t_ = context.Operators.DateFrom(s_);
-					var u_ = context.Operators.Quantity((decimal?)30m, "days");
+					var u_ = context.Operators.Quantity(30m, "days");
 					var v_ = context.Operators.Subtract(t_, u_);
 					var x_ = QICoreCommon_2_0_000.ToInterval((q_ as object));
 					var y_ = context.Operators.Start(x_);
 					var z_ = context.Operators.DateFrom(y_);
-					var aa_ = context.Operators.Quantity((decimal?)1m, "day");
+					var aa_ = context.Operators.Quantity(1m, "day");
 					var ab_ = context.Operators.Subtract(z_, aa_);
 					var ac_ = context.Operators.Interval(v_, ab_, true, true);
 					var ad_ = context.Operators.ConvertDateToDateTime(ac_?.low);
@@ -206,19 +208,19 @@ public class Antibiotic_1_5_000
 
 					return bt_;
 				};
-				var l_ = context.Operators.WhereOrNull<Timing>(j_, k_);
-				var m_ = context.Operators.ExistsInList<Timing>(l_);
+				var l_ = context.Operators.Where<Timing>(j_, k_);
+				var m_ = context.Operators.Exists<Timing>(l_);
 
 				return m_;
 			};
-			var d_ = context.Operators.WhereOrNull<MedicationRequest>(antibioticMedications, c_);
+			var d_ = context.Operators.Where<MedicationRequest>(antibioticMedications, c_);
 			Encounter e_(MedicationRequest ActiveMedication) => 
 				DateOfEpisode;
-			var f_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(d_, e_);
+			var f_ = context.Operators.Select<MedicationRequest, Encounter>(d_, e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(episodeDate, a_);
+		var b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
 
 		return b_;
 	}

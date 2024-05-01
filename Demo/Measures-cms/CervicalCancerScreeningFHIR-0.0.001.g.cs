@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -39,9 +41,9 @@ public class CervicalCancerScreeningFHIR_0_0_001
     internal Lazy<IEnumerable<Observation>> __Cervical_Cytology_Within_3_Years;
     internal Lazy<IEnumerable<Observation>> __HPV_Test_Within_5_Years_for_Women_Age_30_and_Older;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -76,9 +78,9 @@ public class CervicalCancerScreeningFHIR_0_0_001
         __Cervical_Cytology_Within_3_Years = new Lazy<IEnumerable<Observation>>(this.Cervical_Cytology_Within_3_Years_Value);
         __HPV_Test_Within_5_Years_for_Women_Age_30_and_Older = new Lazy<IEnumerable<Observation>>(this.HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -174,8 +176,8 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.001", "Measurement Period", c_);
 
@@ -189,7 +191,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -227,7 +229,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return x_;
 		};
-		var t_ = context.Operators.WhereOrNull<Encounter>(r_, s_);
+		var t_ = context.Operators.Where<Encounter>(r_, s_);
 
 		return t_;
 	}
@@ -244,13 +246,13 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)24, (int?)64, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(24, 64, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
 		var k_ = context.Operators.Equal(j_, "female");
 		var l_ = context.Operators.And(h_, k_);
 		var m_ = this.Qualifying_Encounters();
-		var n_ = context.Operators.ExistsInList<Encounter>(m_);
+		var n_ = context.Operators.Exists<Encounter>(m_);
 		var o_ = context.Operators.And(l_, n_);
 
 		return o_;
@@ -287,7 +289,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = this.Congenital_or_Acquired_Absence_of_Cervix();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
 		bool? h_(Condition NoCervixDiagnosis)
@@ -300,7 +302,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return u_;
 		};
-		var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
+		var i_ = context.Operators.Where<Condition>(g_, h_);
 		var j_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (i_ as IEnumerable<object>));
 
 		return j_;
@@ -314,7 +316,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	{
 		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 		var b_ = this.Absence_of_Cervix();
-		var c_ = context.Operators.ExistsInList<object>(b_);
+		var c_ = context.Operators.Exists<object>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 		var e_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
 		var f_ = context.Operators.Or(d_, e_);
@@ -382,18 +384,18 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var g_ = QICoreCommon_2_0_000.latest(f_());
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity((decimal?)2m, "years");
+			var j_ = context.Operators.Quantity(2m, "years");
 			var k_ = context.Operators.Subtract(i_, j_);
 			var m_ = context.Operators.End(h_);
 			var n_ = context.Operators.Interval(k_, m_, true, true);
-			var o_ = context.Operators.ElementInInterval<CqlDateTime>(g_, n_, "day");
+			var o_ = context.Operators.In<CqlDateTime>(g_, n_, "day");
 			var p_ = FHIRHelpers_4_3_000.ToValue(CervicalCytology?.Value);
 			var q_ = context.Operators.Not((bool?)(p_ is null));
 			var r_ = context.Operators.And(o_, q_);
 
 			return r_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -460,7 +462,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var i_ = QICoreCommon_2_0_000.latest(h_());
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)30);
+			var l_ = context.Operators.GreaterOrEqual(k_, 30);
 			object m_()
 			{
 				bool am_()
@@ -510,11 +512,11 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var n_ = QICoreCommon_2_0_000.latest(m_());
 			var o_ = this.Measurement_Period();
 			var p_ = context.Operators.Start(o_);
-			var q_ = context.Operators.Quantity((decimal?)4m, "years");
+			var q_ = context.Operators.Quantity(4m, "years");
 			var r_ = context.Operators.Subtract(p_, q_);
 			var t_ = context.Operators.End(o_);
 			var u_ = context.Operators.Interval(r_, t_, true, true);
-			var v_ = context.Operators.ElementInInterval<CqlDateTime>(n_, u_, "day");
+			var v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 			var w_ = context.Operators.And(l_, v_);
 			var x_ = FHIRHelpers_4_3_000.ToValue(HPVTest?.Value);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
@@ -522,7 +524,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 			return z_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -534,9 +536,9 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Cervical_Cytology_Within_3_Years();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.HPV_Test_Within_5_Years_for_Women_Age_30_and_Older();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 
 		return e_;
@@ -546,7 +548,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -554,10 +556,10 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -565,10 +567,10 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -576,7 +578,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

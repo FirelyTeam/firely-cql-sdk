@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -843,7 +845,7 @@ public class QICoreCommon_2_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -882,7 +884,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = context.Operators.ConvertCodeToConcept(category);
@@ -890,8 +892,8 @@ public class QICoreCommon_2_0_000
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -906,7 +908,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = context.Operators.ConvertCodeToConcept(category);
@@ -914,8 +916,8 @@ public class QICoreCommon_2_0_000
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -930,7 +932,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.problem_list_item();
@@ -939,8 +941,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -955,7 +957,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.encounter_diagnosis();
@@ -964,8 +966,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -980,7 +982,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.health_concern();
@@ -989,8 +991,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1005,7 +1007,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.social_history();
@@ -1014,8 +1016,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1030,7 +1032,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.vital_signs();
@@ -1039,8 +1041,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1055,7 +1057,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.imaging();
@@ -1064,8 +1066,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1080,7 +1082,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.laboratory();
@@ -1089,8 +1091,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1105,7 +1107,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.procedure();
@@ -1114,8 +1116,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1130,7 +1132,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.survey();
@@ -1139,8 +1141,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1155,7 +1157,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.exam();
@@ -1164,8 +1166,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1180,7 +1182,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.therapy();
@@ -1189,8 +1191,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1205,7 +1207,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.activity();
@@ -1214,8 +1216,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1230,7 +1232,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.clinical_test();
@@ -1239,8 +1241,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1255,7 +1257,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.Community();
@@ -1264,8 +1266,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1280,7 +1282,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.Discharge();
@@ -1289,8 +1291,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<CqlConcept>(b_, c_);
-		var e_ = context.Operators.ExistsInList<CqlConcept>(d_);
+		var d_ = context.Operators.Where<CqlConcept>(b_, c_);
+		var e_ = context.Operators.Exists<CqlConcept>(d_);
 
 		return e_;
 	}
@@ -1306,7 +1308,7 @@ public class QICoreCommon_2_0_000
 
 			return g_;
 		};
-		var b_ = context.Operators.WhereOrNull<Extension>(((deviceRequest is DomainResource)
+		var b_ = context.Operators.Where<Extension>(((deviceRequest is DomainResource)
 				? ((deviceRequest as DomainResource).ModifierExtension as IEnumerable<Extension>)
 				: (null as IEnumerable<Extension>)), a_);
 		bool? c_(Extension E)
@@ -1315,8 +1317,8 @@ public class QICoreCommon_2_0_000
 
 			return (bool?)h_;
 		};
-		var d_ = context.Operators.SelectOrNull<Extension, bool?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<bool?>(d_);
+		var d_ = context.Operators.Select<Extension, bool?>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<bool?>(d_);
 
 		return e_;
 	}
@@ -1346,7 +1348,7 @@ public class QICoreCommon_2_0_000
 				var e_ = context.Operators.Add(d_, (choice as CqlQuantity));
 				var g_ = context.Operators.ConvertStringToDate(c_?.BirthDateElement?.Value);
 				var h_ = context.Operators.Add(g_, (choice as CqlQuantity));
-				var i_ = context.Operators.Quantity((decimal?)1m, "year");
+				var i_ = context.Operators.Quantity(1m, "year");
 				var j_ = context.Operators.Add(h_, i_);
 				var k_ = context.Operators.Interval(e_, j_, true, false);
 				var l_ = context.Operators.ConvertDateToDateTime(k_?.low);
@@ -1382,7 +1384,7 @@ public class QICoreCommon_2_0_000
 				var au_ = context.Operators.ConvertStringToDate(ap_?.BirthDateElement?.Value);
 				var av_ = context.Operators.LateBoundProperty<object>(choice, "high");
 				var aw_ = context.Operators.Add(au_, (av_ as CqlQuantity));
-				var ax_ = context.Operators.Quantity((decimal?)1m, "year");
+				var ax_ = context.Operators.Quantity(1m, "year");
 				var ay_ = context.Operators.Add(aw_, ax_);
 				var az_ = context.Operators.Interval(as_, ay_, true, false);
 				var ba_ = context.Operators.ConvertDateToDateTime(az_?.low);
@@ -1419,7 +1421,7 @@ public class QICoreCommon_2_0_000
 			{
 				CqlInterval<CqlDateTime> cl_ = null;
 
-				return (cl_ as CqlInterval<CqlDateTime>);
+				return cl_;
 			};
 		};
 
@@ -1450,7 +1452,7 @@ public class QICoreCommon_2_0_000
 				var e_ = context.Operators.Add(d_, (choice as CqlQuantity));
 				var g_ = context.Operators.ConvertStringToDate(c_?.BirthDateElement?.Value);
 				var h_ = context.Operators.Add(g_, (choice as CqlQuantity));
-				var i_ = context.Operators.Quantity((decimal?)1m, "year");
+				var i_ = context.Operators.Quantity(1m, "year");
 				var j_ = context.Operators.Add(h_, i_);
 				var k_ = context.Operators.Interval(e_, j_, true, false);
 				var l_ = context.Operators.ConvertDateToDateTime(k_?.low);
@@ -1486,7 +1488,7 @@ public class QICoreCommon_2_0_000
 				var au_ = context.Operators.ConvertStringToDate(ap_?.BirthDateElement?.Value);
 				var av_ = context.Operators.LateBoundProperty<object>(choice, "high");
 				var aw_ = context.Operators.Add(au_, (av_ as CqlQuantity));
-				var ax_ = context.Operators.Quantity((decimal?)1m, "year");
+				var ax_ = context.Operators.Quantity(1m, "year");
 				var ay_ = context.Operators.Add(aw_, ax_);
 				var az_ = context.Operators.Interval(as_, ay_, true, false);
 				var ba_ = context.Operators.ConvertDateToDateTime(az_?.low);
@@ -1523,7 +1525,7 @@ public class QICoreCommon_2_0_000
 			{
 				CqlInterval<CqlDateTime> cl_ = null;
 
-				return (cl_ as CqlInterval<CqlDateTime>);
+				return cl_;
 			};
 		};
 
@@ -1581,7 +1583,7 @@ public class QICoreCommon_2_0_000
 				var t_ = context.Operators.Add(r_, (s_ as CqlQuantity));
 				var v_ = context.Operators.ConvertStringToDate(q_?.BirthDateElement?.Value);
 				var x_ = context.Operators.Add(v_, (s_ as CqlQuantity));
-				var y_ = context.Operators.Quantity((decimal?)1m, "year");
+				var y_ = context.Operators.Quantity(1m, "year");
 				var z_ = context.Operators.Add(x_, y_);
 				var aa_ = context.Operators.Interval(t_, z_, true, false);
 				var ab_ = context.Operators.ConvertDateToDateTime(aa_?.low);
@@ -1618,7 +1620,7 @@ public class QICoreCommon_2_0_000
 				var br_ = context.Operators.ConvertStringToDate(bl_?.BirthDateElement?.Value);
 				var bt_ = context.Operators.LateBoundProperty<object>(bn_, "high");
 				var bu_ = context.Operators.Add(br_, (bt_ as CqlQuantity));
-				var bv_ = context.Operators.Quantity((decimal?)1m, "year");
+				var bv_ = context.Operators.Quantity(1m, "year");
 				var bw_ = context.Operators.Add(bu_, bv_);
 				var bx_ = context.Operators.Interval(bp_, bw_, true, false);
 				var by_ = context.Operators.ConvertDateToDateTime(bx_?.low);
@@ -1664,7 +1666,7 @@ public class QICoreCommon_2_0_000
 			{
 				CqlInterval<CqlDateTime> dt_ = null;
 
-				return (dt_ as CqlInterval<CqlDateTime>);
+				return dt_;
 			};
 		};
 
@@ -1721,7 +1723,7 @@ public class QICoreCommon_2_0_000
 				var t_ = context.Operators.Add(r_, (s_ as CqlQuantity));
 				var v_ = context.Operators.ConvertStringToDate(q_?.BirthDateElement?.Value);
 				var x_ = context.Operators.Add(v_, (s_ as CqlQuantity));
-				var y_ = context.Operators.Quantity((decimal?)1m, "year");
+				var y_ = context.Operators.Quantity(1m, "year");
 				var z_ = context.Operators.Add(x_, y_);
 				var aa_ = context.Operators.Interval(t_, z_, true, false);
 				var ab_ = context.Operators.ConvertDateToDateTime(aa_?.low);
@@ -1758,7 +1760,7 @@ public class QICoreCommon_2_0_000
 				var br_ = context.Operators.ConvertStringToDate(bl_?.BirthDateElement?.Value);
 				var bt_ = context.Operators.LateBoundProperty<object>(bn_, "high");
 				var bu_ = context.Operators.Add(br_, (bt_ as CqlQuantity));
-				var bv_ = context.Operators.Quantity((decimal?)1m, "year");
+				var bv_ = context.Operators.Quantity(1m, "year");
 				var bw_ = context.Operators.Add(bu_, bv_);
 				var bx_ = context.Operators.Interval(bp_, bw_, true, false);
 				var by_ = context.Operators.ConvertDateToDateTime(bx_?.low);
@@ -1804,7 +1806,7 @@ public class QICoreCommon_2_0_000
 			{
 				CqlInterval<CqlDateTime> dt_ = null;
 
-				return (dt_ as CqlInterval<CqlDateTime>);
+				return dt_;
 			};
 		};
 
@@ -1881,8 +1883,8 @@ public class QICoreCommon_2_0_000
 
 					return ac_();
 				};
-				var aa_ = context.Operators.SelectOrNull<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
-				var ab_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(aa_);
+				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
+				var ab_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(aa_);
 
 				return ab_;
 			};
@@ -1960,8 +1962,8 @@ public class QICoreCommon_2_0_000
 
 					return ac_();
 				};
-				var aa_ = context.Operators.SelectOrNull<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
-				var ab_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(aa_);
+				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
+				var ab_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(aa_);
 
 				return ab_;
 			};
@@ -1977,7 +1979,7 @@ public class QICoreCommon_2_0_000
 	public string GetId(string uri)
 	{
 		var a_ = context.Operators.Split(uri, "/");
-		var b_ = context.Operators.LastOfList<string>(a_);
+		var b_ = context.Operators.Last<string>(a_);
 
 		return b_;
 	}
@@ -1988,7 +1990,7 @@ public class QICoreCommon_2_0_000
 	public string getId(string uri)
 	{
 		var a_ = context.Operators.Split(uri, "/");
-		var b_ = context.Operators.LastOfList<string>(a_);
+		var b_ = context.Operators.Last<string>(a_);
 
 		return b_;
 	}
@@ -2077,8 +2079,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2112,8 +2114,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2148,8 +2150,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2183,8 +2185,8 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlDateTime>(d_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
 	}
@@ -2197,19 +2199,19 @@ public class QICoreCommon_2_0_000
 		var a_ = context.Operators.Start(Period);
 		var b_ = context.Operators.End(Period);
 		var c_ = context.Operators.DurationBetween(a_, b_, "day");
-		var d_ = context.Operators.Interval((int?)1, c_, true, true);
+		var d_ = context.Operators.Interval(1, c_, true, true);
 		var e_ = new CqlInterval<int?>[]
 		{
 			d_,
 		};
-		var f_ = context.Operators.ExpandList((e_ as IEnumerable<CqlInterval<int?>>), null);
+		var f_ = context.Operators.Expand((e_ as IEnumerable<CqlInterval<int?>>), null);
 		int? g_(CqlInterval<int?> DayNumber)
 		{
 			var i_ = context.Operators.End(DayNumber);
 
 			return i_;
 		};
-		var h_ = context.Operators.SelectOrNull<CqlInterval<int?>, int?>(f_, g_);
+		var h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
 
 		return h_;
 	}
@@ -2221,19 +2223,19 @@ public class QICoreCommon_2_0_000
 		var a_ = context.Operators.Start(Period);
 		var b_ = context.Operators.End(Period);
 		var c_ = context.Operators.DurationBetween(a_, b_, "day");
-		var d_ = context.Operators.Interval((int?)1, c_, true, true);
+		var d_ = context.Operators.Interval(1, c_, true, true);
 		var e_ = new CqlInterval<int?>[]
 		{
 			d_,
 		};
-		var f_ = context.Operators.ExpandList((e_ as IEnumerable<CqlInterval<int?>>), null);
+		var f_ = context.Operators.Expand((e_ as IEnumerable<CqlInterval<int?>>), null);
 		int? g_(CqlInterval<int?> DayNumber)
 		{
 			var i_ = context.Operators.End(DayNumber);
 
 			return i_;
 		};
-		var h_ = context.Operators.SelectOrNull<CqlInterval<int?>, int?>(f_, g_);
+		var h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
 
 		return h_;
 	}
@@ -2241,14 +2243,14 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("Days In Period")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is. Note that the result will include intervals that are closed at the beginning and open at the end")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `daysInPeriod()` instead")]
-	public IEnumerable<Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf> Days_In_Period(CqlInterval<CqlDateTime> Period)
+	public IEnumerable<Tuple_BZfjDHYASdKbVKTOeigaYPBVf> Days_In_Period(CqlInterval<CqlDateTime> Period)
 	{
 		var a_ = this.Interval_To_Day_Numbers(Period);
-		Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
+		Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
 		{
 			var d_ = context.Operators.Start(Period);
-			var e_ = context.Operators.Quantity((decimal?)24m, "hours");
-			var f_ = context.Operators.Subtract(DayIndex, (int?)1);
+			var e_ = context.Operators.Quantity(24m, "hours");
+			var f_ = context.Operators.Subtract(DayIndex, 1);
 			var g_ = context.Operators.ConvertIntegerToQuantity(f_);
 			var h_ = context.Operators.Multiply(e_, g_);
 			var i_ = context.Operators.Add(d_, h_);
@@ -2257,22 +2259,22 @@ public class QICoreCommon_2_0_000
 				bool m_()
 				{
 					var n_ = context.Operators.Start(Period);
-					var o_ = context.Operators.Quantity((decimal?)24m, "hours");
-					var p_ = context.Operators.Subtract(DayIndex, (int?)1);
+					var o_ = context.Operators.Quantity(24m, "hours");
+					var p_ = context.Operators.Subtract(DayIndex, 1);
 					var q_ = context.Operators.ConvertIntegerToQuantity(p_);
 					var r_ = context.Operators.Multiply(o_, q_);
 					var s_ = context.Operators.Add(n_, r_);
 					var t_ = context.Operators.End(Period);
 					var u_ = context.Operators.DurationBetween(s_, t_, "hour");
-					var v_ = context.Operators.Less(u_, (int?)24);
+					var v_ = context.Operators.Less(u_, 24);
 
 					return (v_ ?? false);
 				};
 				if (m_())
 				{
 					var w_ = context.Operators.Start(Period);
-					var x_ = context.Operators.Quantity((decimal?)24m, "hours");
-					var y_ = context.Operators.Subtract(DayIndex, (int?)1);
+					var x_ = context.Operators.Quantity(24m, "hours");
+					var y_ = context.Operators.Subtract(DayIndex, 1);
 					var z_ = context.Operators.ConvertIntegerToQuantity(y_);
 					var aa_ = context.Operators.Multiply(x_, z_);
 					var ab_ = context.Operators.Add(w_, aa_);
@@ -2282,7 +2284,7 @@ public class QICoreCommon_2_0_000
 				else
 				{
 					var ac_ = context.Operators.Start(Period);
-					var ad_ = context.Operators.Quantity((decimal?)24m, "hours");
+					var ad_ = context.Operators.Quantity(24m, "hours");
 					var ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
 					var af_ = context.Operators.Multiply(ad_, ae_);
 					var ag_ = context.Operators.Add(ac_, af_);
@@ -2291,7 +2293,7 @@ public class QICoreCommon_2_0_000
 				};
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);
-			var l_ = new Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf
+			var l_ = new Tuple_BZfjDHYASdKbVKTOeigaYPBVf
 			{
 				dayIndex = DayIndex,
 				dayPeriod = k_,
@@ -2299,21 +2301,21 @@ public class QICoreCommon_2_0_000
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectOrNull<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
+		var c_ = context.Operators.Select<int?, Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("daysInPeriod")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is. Note that the result will include intervals that are closed at the beginning and open at the end")]
-	public IEnumerable<Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf> daysInPeriod(CqlInterval<CqlDateTime> Period)
+	public IEnumerable<Tuple_BZfjDHYASdKbVKTOeigaYPBVf> daysInPeriod(CqlInterval<CqlDateTime> Period)
 	{
 		var a_ = this.Interval_To_Day_Numbers(Period);
-		Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
+		Tuple_BZfjDHYASdKbVKTOeigaYPBVf b_(int? DayIndex)
 		{
 			var d_ = context.Operators.Start(Period);
-			var e_ = context.Operators.Quantity((decimal?)24m, "hours");
-			var f_ = context.Operators.Subtract(DayIndex, (int?)1);
+			var e_ = context.Operators.Quantity(24m, "hours");
+			var f_ = context.Operators.Subtract(DayIndex, 1);
 			var g_ = context.Operators.ConvertIntegerToQuantity(f_);
 			var h_ = context.Operators.Multiply(e_, g_);
 			var i_ = context.Operators.Add(d_, h_);
@@ -2322,22 +2324,22 @@ public class QICoreCommon_2_0_000
 				bool m_()
 				{
 					var n_ = context.Operators.Start(Period);
-					var o_ = context.Operators.Quantity((decimal?)24m, "hours");
-					var p_ = context.Operators.Subtract(DayIndex, (int?)1);
+					var o_ = context.Operators.Quantity(24m, "hours");
+					var p_ = context.Operators.Subtract(DayIndex, 1);
 					var q_ = context.Operators.ConvertIntegerToQuantity(p_);
 					var r_ = context.Operators.Multiply(o_, q_);
 					var s_ = context.Operators.Add(n_, r_);
 					var t_ = context.Operators.End(Period);
 					var u_ = context.Operators.DurationBetween(s_, t_, "hour");
-					var v_ = context.Operators.Less(u_, (int?)24);
+					var v_ = context.Operators.Less(u_, 24);
 
 					return (v_ ?? false);
 				};
 				if (m_())
 				{
 					var w_ = context.Operators.Start(Period);
-					var x_ = context.Operators.Quantity((decimal?)24m, "hours");
-					var y_ = context.Operators.Subtract(DayIndex, (int?)1);
+					var x_ = context.Operators.Quantity(24m, "hours");
+					var y_ = context.Operators.Subtract(DayIndex, 1);
 					var z_ = context.Operators.ConvertIntegerToQuantity(y_);
 					var aa_ = context.Operators.Multiply(x_, z_);
 					var ab_ = context.Operators.Add(w_, aa_);
@@ -2347,7 +2349,7 @@ public class QICoreCommon_2_0_000
 				else
 				{
 					var ac_ = context.Operators.Start(Period);
-					var ad_ = context.Operators.Quantity((decimal?)24m, "hours");
+					var ad_ = context.Operators.Quantity(24m, "hours");
 					var ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
 					var af_ = context.Operators.Multiply(ad_, ae_);
 					var ag_ = context.Operators.Add(ac_, af_);
@@ -2356,7 +2358,7 @@ public class QICoreCommon_2_0_000
 				};
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);
-			var l_ = new Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf
+			var l_ = new Tuple_BZfjDHYASdKbVKTOeigaYPBVf
 			{
 				dayIndex = DayIndex,
 				dayPeriod = k_,
@@ -2364,7 +2366,7 @@ public class QICoreCommon_2_0_000
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectOrNull<int?, Tuples.Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
+		var c_ = context.Operators.Select<int?, Tuple_BZfjDHYASdKbVKTOeigaYPBVf>(a_, b_);
 
 		return c_;
 	}

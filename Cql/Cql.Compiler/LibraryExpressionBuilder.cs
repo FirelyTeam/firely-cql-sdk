@@ -37,8 +37,10 @@ internal partial class LibraryExpressionBuilderContext
     private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilder _expressionBuilder;
 
+    /// <inheritdoc />
     public Library Library { get; }
 
+    /// <inheritdoc />
     public string LibraryKey => Library.NameAndVersion()!;
 
     public LibraryExpressionBuilderContext(
@@ -64,7 +66,7 @@ internal partial class LibraryExpressionBuilderContext
     }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
-        this.CatchRethrowExpressionBuildingException<LibraryExpressionBuilderContext, DefinitionDictionary<LambdaExpression>>(_ =>
+        this.CatchRethrowExpressionBuildingException(_ =>
         {
             _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
 

@@ -33,6 +33,7 @@ partial class ExpressionBuilderContext : IBuilderContext
 
     public string DebuggerView => this.GetDebuggerView();
 
+    [DebuggerStepThrough]
     private IPopToken PushElement(Elm.Element element)
     {
         _elementStack.TryPeek(out var previous);
@@ -52,7 +53,7 @@ partial class ExpressionBuilderContext : IBuilderContext
             ? this with { ElementStackPosition = ElementStackPosition + 1 }
             : LibraryExpressionBuilder;
 
-        public BuilderContextDebuggerInfo? DebuggerInfo => ElementStackPosition >= 0
+        public BuilderContextDebuggerInfo? DebuggerInfo => ElementStackPosition >= 0 && ElementStackPosition < ElementStackList.Count
             ? BuilderContextDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
             : null!;
     }
@@ -62,6 +63,7 @@ partial class ExpressionBuilderContext : IBuilderContext
         private readonly ExpressionBuilderContext _owner;
         private readonly Elm.Element? _previousElement;
 
+        [DebuggerStepThrough]
         public PopElementToken(ExpressionBuilderContext owner, Elm.Element? previousElement)
         {
             _owner = owner;

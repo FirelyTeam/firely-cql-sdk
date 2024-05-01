@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -49,11 +51,11 @@ public class CesareanBirthFHIR_0_2_000
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounter_with_Cesarean_Birth;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
-    internal Lazy<IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
+    internal Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
 
     #endregion
     public CesareanBirthFHIR_0_2_000(CqlContext context)
@@ -96,11 +98,11 @@ public class CesareanBirthFHIR_0_2_000
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
         __Delivery_Encounter_with_Cesarean_Birth = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounter_with_Cesarean_Birth_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
-        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
+        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
     }
     #region Dependencies
 
@@ -231,8 +233,8 @@ public class CesareanBirthFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("CesareanBirthFHIR-0.2.000", "Measurement Period", c_);
 
@@ -246,7 +248,7 @@ public class CesareanBirthFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -261,11 +263,11 @@ public class CesareanBirthFHIR_0_2_000
 		bool? b_(Encounter DeliveryEncounter)
 		{
 			var d_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
-			var e_ = context.Operators.GreaterOrEqual(d_, (int?)37);
+			var e_ = context.Operators.GreaterOrEqual(d_, 37);
 
 			return e_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -281,13 +283,13 @@ public class CesareanBirthFHIR_0_2_000
 		{
 			var d_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
 			var e_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
-			var f_ = context.Operators.Quantity((decimal?)37m, "weeks");
+			var f_ = context.Operators.Quantity(37m, "weeks");
 			var g_ = context.Operators.GreaterOrEqual(e_, f_);
 			var h_ = context.Operators.And((bool?)(d_ is null), g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -313,13 +315,13 @@ public class CesareanBirthFHIR_0_2_000
 
 				return n_;
 			};
-			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
-			var j_ = context.Operators.ExistsInList<Condition>(i_);
+			var i_ = context.Operators.Where<Condition>(g_, h_);
+			var j_ = context.Operators.Exists<Condition>(i_);
 			var k_ = context.Operators.And(f_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -357,12 +359,12 @@ public class CesareanBirthFHIR_0_2_000
 
 				return j_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-			var g_ = context.Operators.ExistsInList<Condition>(f_);
+			var f_ = context.Operators.Where<Condition>(d_, e_);
+			var g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -389,7 +391,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var o_ = context.Operators.InList<string>(m_, (n_ as IEnumerable<string>));
+			var o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			var p_ = context.Operators.And(k_, o_);
 			object q_()
 			{
@@ -439,17 +441,17 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var r_ = QICoreCommon_2_0_000.earliest(q_());
 			var s_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var t_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var t_ = context.Operators.Quantity(42m, "weeks");
 			var u_ = context.Operators.Subtract(s_, t_);
 			var w_ = context.Operators.Interval(u_, s_, true, false);
-			var x_ = context.Operators.ElementInInterval<CqlDateTime>(r_, w_, null);
+			var x_ = context.Operators.In<CqlDateTime>(r_, w_, null);
 			var z_ = context.Operators.Not((bool?)(s_ is null));
 			var aa_ = context.Operators.And(x_, z_);
 			var ab_ = context.Operators.And(p_, aa_);
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -502,8 +504,8 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
 		return (int?)i_;
@@ -565,10 +567,10 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var m_ = context.Operators.Quantity(42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
 			var u_ = context.Operators.Convert<Code<ObservationStatus>>(Parity?.StatusElement?.Value);
@@ -579,7 +581,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(Parity?.Value);
 			var aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -587,7 +589,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -640,8 +642,8 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
 		return (int?)i_;
@@ -703,10 +705,10 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var m_ = context.Operators.Quantity(42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
 			var u_ = context.Operators.Convert<Code<ObservationStatus>>(PretermBirth?.StatusElement?.Value);
@@ -717,7 +719,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(PretermBirth?.Value);
 			var aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -725,7 +727,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -778,8 +780,8 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
 		return (int?)i_;
@@ -841,10 +843,10 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
-			var m_ = context.Operators.Quantity((decimal?)42m, "weeks");
+			var m_ = context.Operators.Quantity(42m, "weeks");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.Interval(n_, l_, true, false);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(k_, p_, null);
+			var q_ = context.Operators.In<CqlDateTime>(k_, p_, null);
 			var s_ = context.Operators.Not((bool?)(l_ is null));
 			var t_ = context.Operators.And(q_, s_);
 			var u_ = context.Operators.Convert<Code<ObservationStatus>>(TermBirth?.StatusElement?.Value);
@@ -855,7 +857,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			};
-			var x_ = context.Operators.InList<string>(v_, (w_ as IEnumerable<string>));
+			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
 			var y_ = context.Operators.And(t_, x_);
 			var z_ = FHIRHelpers_4_3_000.ToValue(TermBirth?.Value);
 			var aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -863,7 +865,7 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ab_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			object ao_()
@@ -916,8 +918,8 @@ public class CesareanBirthFHIR_0_2_000
 
 			return ap_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
 		return (int?)i_;
@@ -931,20 +933,20 @@ public class CesareanBirthFHIR_0_2_000
 		bool? d_(Encounter SingletonEncounterGE37Weeks)
 		{
 			var f_ = this.lastGravida(SingletonEncounterGE37Weeks);
-			var g_ = context.Operators.Equal(f_, (int?)1);
+			var g_ = context.Operators.Equal(f_, 1);
 			var h_ = this.lastParity(SingletonEncounterGE37Weeks);
-			var i_ = context.Operators.Equal(h_, (int?)0);
+			var i_ = context.Operators.Equal(h_, 0);
 			var j_ = context.Operators.Or(g_, i_);
 			var k_ = this.lastHistoryPretermBirth(SingletonEncounterGE37Weeks);
-			var l_ = context.Operators.Equal(k_, (int?)0);
+			var l_ = context.Operators.Equal(k_, 0);
 			var m_ = this.lastHistoryTermBirth(SingletonEncounterGE37Weeks);
-			var n_ = context.Operators.Equal(m_, (int?)0);
+			var n_ = context.Operators.Equal(m_, 0);
 			var o_ = context.Operators.And(l_, n_);
 			var p_ = context.Operators.Or(j_, o_);
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -1023,12 +1025,12 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var af_ = context.Operators.InList<string>(ad_, (ae_ as IEnumerable<string>));
+						var af_ = context.Operators.In<string>(ad_, (ae_ as IEnumerable<string>));
 						var ag_ = context.Operators.And(ab_, af_);
 
 						return ag_;
 					};
-					var s_ = context.Operators.WhereOrNull<Observation>(q_, r_);
+					var s_ = context.Operators.Where<Observation>(q_, r_);
 					object t_(Observation @this)
 					{
 						object at_()
@@ -1081,8 +1083,8 @@ public class CesareanBirthFHIR_0_2_000
 
 						return au_;
 					};
-					var u_ = context.Operators.ListSortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
-					var v_ = context.Operators.LastOfList<Observation>(u_);
+					var u_ = context.Operators.SortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
+					var v_ = context.Operators.Last<Observation>(u_);
 					var w_ = FHIRHelpers_4_3_000.ToValue(v_?.Effective);
 					var x_ = w_ is CqlDateTime;
 
@@ -1151,12 +1153,12 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var bx_ = context.Operators.InList<string>(bv_, (bw_ as IEnumerable<string>));
+						var bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 						var by_ = context.Operators.And(bt_, bx_);
 
 						return by_;
 					};
-					var bk_ = context.Operators.WhereOrNull<Observation>(bi_, bj_);
+					var bk_ = context.Operators.Where<Observation>(bi_, bj_);
 					object bl_(Observation @this)
 					{
 						object cl_()
@@ -1209,8 +1211,8 @@ public class CesareanBirthFHIR_0_2_000
 
 						return cm_;
 					};
-					var bm_ = context.Operators.ListSortBy<Observation>(bk_, bl_, System.ComponentModel.ListSortDirection.Ascending);
-					var bn_ = context.Operators.LastOfList<Observation>(bm_);
+					var bm_ = context.Operators.SortBy<Observation>(bk_, bl_, System.ComponentModel.ListSortDirection.Ascending);
+					var bn_ = context.Operators.Last<Observation>(bm_);
 					var bo_ = FHIRHelpers_4_3_000.ToValue(bn_?.Effective);
 					var bp_ = bo_ is CqlInterval<CqlDateTime>;
 
@@ -1279,12 +1281,12 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var dp_ = context.Operators.InList<string>(dn_, (do_ as IEnumerable<string>));
+						var dp_ = context.Operators.In<string>(dn_, (do_ as IEnumerable<string>));
 						var dq_ = context.Operators.And(dl_, dp_);
 
 						return dq_;
 					};
-					var dc_ = context.Operators.WhereOrNull<Observation>(da_, db_);
+					var dc_ = context.Operators.Where<Observation>(da_, db_);
 					object dd_(Observation @this)
 					{
 						object ed_()
@@ -1337,8 +1339,8 @@ public class CesareanBirthFHIR_0_2_000
 
 						return ee_;
 					};
-					var de_ = context.Operators.ListSortBy<Observation>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
-					var df_ = context.Operators.LastOfList<Observation>(de_);
+					var de_ = context.Operators.SortBy<Observation>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
+					var df_ = context.Operators.Last<Observation>(de_);
 					var dg_ = FHIRHelpers_4_3_000.ToValue(df_?.Effective);
 					var dh_ = dg_ is CqlDateTime;
 
@@ -1407,12 +1409,12 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var fg_ = context.Operators.InList<string>(fe_, (ff_ as IEnumerable<string>));
+						var fg_ = context.Operators.In<string>(fe_, (ff_ as IEnumerable<string>));
 						var fh_ = context.Operators.And(fc_, fg_);
 
 						return fh_;
 					};
-					var eu_ = context.Operators.WhereOrNull<Observation>(es_, et_);
+					var eu_ = context.Operators.Where<Observation>(es_, et_);
 					object ev_(Observation @this)
 					{
 						object fu_()
@@ -1465,8 +1467,8 @@ public class CesareanBirthFHIR_0_2_000
 
 						return fv_;
 					};
-					var ew_ = context.Operators.ListSortBy<Observation>(eu_, ev_, System.ComponentModel.ListSortDirection.Ascending);
-					var ex_ = context.Operators.LastOfList<Observation>(ew_);
+					var ew_ = context.Operators.SortBy<Observation>(eu_, ev_, System.ComponentModel.ListSortDirection.Ascending);
+					var ex_ = context.Operators.Last<Observation>(ew_);
 					var ey_ = FHIRHelpers_4_3_000.ToValue(ex_?.Effective);
 
 					return ((ey_ as CqlDateTime) as object);
@@ -1534,12 +1536,12 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var gx_ = context.Operators.InList<string>(gv_, (gw_ as IEnumerable<string>));
+						var gx_ = context.Operators.In<string>(gv_, (gw_ as IEnumerable<string>));
 						var gy_ = context.Operators.And(gt_, gx_);
 
 						return gy_;
 					};
-					var gl_ = context.Operators.WhereOrNull<Observation>(gj_, gk_);
+					var gl_ = context.Operators.Where<Observation>(gj_, gk_);
 					object gm_(Observation @this)
 					{
 						object hl_()
@@ -1592,8 +1594,8 @@ public class CesareanBirthFHIR_0_2_000
 
 						return hm_;
 					};
-					var gn_ = context.Operators.ListSortBy<Observation>(gl_, gm_, System.ComponentModel.ListSortDirection.Ascending);
-					var go_ = context.Operators.LastOfList<Observation>(gn_);
+					var gn_ = context.Operators.SortBy<Observation>(gl_, gm_, System.ComponentModel.ListSortDirection.Ascending);
+					var go_ = context.Operators.Last<Observation>(gn_);
 					var gp_ = FHIRHelpers_4_3_000.ToValue(go_?.Effective);
 
 					return ((gp_ as CqlInterval<CqlDateTime>) as object);
@@ -1661,12 +1663,12 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						};
-						var io_ = context.Operators.InList<string>(im_, (in_ as IEnumerable<string>));
+						var io_ = context.Operators.In<string>(im_, (in_ as IEnumerable<string>));
 						var ip_ = context.Operators.And(ik_, io_);
 
 						return ip_;
 					};
-					var ic_ = context.Operators.WhereOrNull<Observation>(ia_, ib_);
+					var ic_ = context.Operators.Where<Observation>(ia_, ib_);
 					object id_(Observation @this)
 					{
 						object jc_()
@@ -1719,8 +1721,8 @@ public class CesareanBirthFHIR_0_2_000
 
 						return jd_;
 					};
-					var ie_ = context.Operators.ListSortBy<Observation>(ic_, id_, System.ComponentModel.ListSortDirection.Ascending);
-					var if_ = context.Operators.LastOfList<Observation>(ie_);
+					var ie_ = context.Operators.SortBy<Observation>(ic_, id_, System.ComponentModel.ListSortDirection.Ascending);
+					var if_ = context.Operators.Last<Observation>(ie_);
 					var ig_ = FHIRHelpers_4_3_000.ToValue(if_?.Effective);
 
 					return ((ig_ as CqlDateTime) as object);
@@ -1732,7 +1734,7 @@ public class CesareanBirthFHIR_0_2_000
 			};
 			var e_ = QICoreCommon_2_0_000.earliest(d_());
 			var f_ = FHIRHelpers_4_3_000.ToInterval(ThirtysevenWeeksPlusEncounter?.Period);
-			var g_ = context.Operators.ElementInInterval<CqlDateTime>(e_, f_, null);
+			var g_ = context.Operators.In<CqlDateTime>(e_, f_, null);
 			var h_ = CQMCommon_2_0_000.encounterDiagnosis(ThirtysevenWeeksPlusEncounter);
 			bool? i_(Condition EncounterDiagnosis)
 			{
@@ -1742,13 +1744,13 @@ public class CesareanBirthFHIR_0_2_000
 
 				return js_;
 			};
-			var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
-			var k_ = context.Operators.ExistsInList<Condition>(j_);
+			var j_ = context.Operators.Where<Condition>(h_, i_);
+			var k_ = context.Operators.Exists<Condition>(j_);
 			var l_ = context.Operators.Or(g_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1774,12 +1776,12 @@ public class CesareanBirthFHIR_0_2_000
 
 				return n_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-			var g_ = context.Operators.ExistsInList<Condition>(f_);
+			var f_ = context.Operators.Where<Condition>(d_, e_);
+			var g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1853,14 +1855,14 @@ public class CesareanBirthFHIR_0_2_000
 
 				return p_;
 			};
-			var g_ = context.Operators.WhereOrNull<Procedure>(e_, f_);
+			var g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure CSection) => 
 				ThirtysevenWeeksPlusEncounter;
-			var i_ = context.Operators.SelectOrNull<Procedure, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1880,7 +1882,7 @@ public class CesareanBirthFHIR_0_2_000
 	public IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1888,10 +1890,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1899,10 +1901,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1910,7 +1912,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -1924,7 +1926,7 @@ public class CesareanBirthFHIR_0_2_000
 	public CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
+	private IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
 	{
 		var a_ = PCMaternal_5_16_000.Variable_Calculated_Gestational_Age();
 
@@ -1932,7 +1934,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<Tuples.Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
+	public IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
 }

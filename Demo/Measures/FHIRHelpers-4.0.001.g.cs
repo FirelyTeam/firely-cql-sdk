@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -32,7 +34,7 @@ public class FHIRHelpers_4_0_001
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -50,7 +52,7 @@ public class FHIRHelpers_4_0_001
 			{
 				CqlInterval<CqlDateTime> b_ = null;
 
-				return (b_ as CqlInterval<CqlDateTime>);
+				return b_;
 			}
 			else
 			{
@@ -74,7 +76,7 @@ public class FHIRHelpers_4_0_001
 			{
 				CqlInterval<CqlQuantity> b_ = null;
 
-				return (b_ as CqlInterval<CqlQuantity>);
+				return b_;
 			}
 			else
 			{
@@ -139,7 +141,7 @@ public class FHIRHelpers_4_0_001
 
 					return d_;
 				};
-				var c_ = context.Operators.SelectOrNull<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
+				var c_ = context.Operators.Select<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
 
 				return new CqlConcept(c_, concept?.TextElement?.Value);
 			};

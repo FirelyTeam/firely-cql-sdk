@@ -15,6 +15,10 @@ VSWorkspaceState.json
 *.snk
 .idea/
 
+# ReSharper Settings
+*.DotSettings
+*.DotSettings.user
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

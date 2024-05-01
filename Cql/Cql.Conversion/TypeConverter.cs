@@ -11,6 +11,8 @@ using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Conversion
 {
@@ -178,6 +180,36 @@ namespace Hl7.Cql.Conversion
             AddConversion<CqlDateTime, DateIso8601>(cqlDateTime => cqlDateTime.DateOnly.Value);
             AddConversion<CqlTime, TimeIso8601>(cqlTime => cqlTime.Value);
             return this;
+        }
+
+        internal virtual void LogAllConverters(ILogger<TypeConverter> logger)
+        {
+            TypeFormatterOptions o = new(
+                HideNamespaces: true,
+                PreferKeywords: false);
+
+            string TypeToString(Type t) =>
+                string.Concat(
+                    t.Namespace!
+                     .Replace("Hl7.Fhir.Model", "fhir ")
+                     .Replace("Hl7.Cql.Primitives", "cql ")
+                     .Replace("Hl7.Cql.Iso8601", "iso8601 ")
+                     .Replace("System", "sys "),
+                    t switch
+                    {
+                        { IsEnum: true }      => "enum ",
+                        { IsValueType: true } => "struct ",
+                        _                     => ""
+                    },
+                    t.WriteCSharp(o).ToString()!);
+
+            var lines = string.Concat(
+                _converters
+                    .SelectMany(kv => kv.Value, ((kvFrom, kvTo) => (From:kvFrom.Key, To:kvTo.Key)))
+                    .Select(t => $"\n\t* {TypeToString(t.From)} --> {TypeToString(t.To)}")
+                    .Order()
+            );
+            logger.LogDebug("TypeConverter has the following conversions defined:{lines}", lines);
         }
 
     }

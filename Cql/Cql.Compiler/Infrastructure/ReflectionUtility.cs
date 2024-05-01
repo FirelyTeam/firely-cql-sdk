@@ -72,7 +72,7 @@ internal static class ReflectionUtility
     /// <param name="fnToMethodCall">The expression representing the method call.</param>
     /// <param name="expression">The expression string.</param>
     /// <returns>The generic method definition.</returns>
-    public static MethodInfo GenericDefinitionMethodOf(
+    public static MethodInfo GenericMethodDefinitionOf(
         Expression<Action> fnToMethodCall,
         [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "") =>
         (MethodOf(fnToMethodCall, expression)

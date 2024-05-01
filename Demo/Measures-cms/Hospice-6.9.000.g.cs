@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -156,8 +158,8 @@ public class Hospice_6_9_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("Hospice-6.9.000", "Measurement Period", c_);
 
@@ -171,7 +173,7 @@ public class Hospice_6_9_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -199,13 +201,13 @@ public class Hospice_6_9_000
 			var az_ = QICoreCommon_2_0_000.toInterval((ay_ as object));
 			var ba_ = context.Operators.End(az_);
 			var bb_ = this.Measurement_Period();
-			var bc_ = context.Operators.ElementInInterval<CqlDateTime>(ba_, bb_, "day");
+			var bc_ = context.Operators.In<CqlDateTime>(ba_, bb_, "day");
 			var bd_ = context.Operators.And(ax_, bc_);
 
 			return bd_;
 		};
-		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Encounter>(e_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
+		var f_ = context.Operators.Exists<Encounter>(e_);
 		var g_ = this.Hospice_Encounter();
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
 		var i_ = Status_1_6_000.isEncounterPerformed(h_);
@@ -218,8 +220,8 @@ public class Hospice_6_9_000
 
 			return bh_;
 		};
-		var k_ = context.Operators.WhereOrNull<Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var k_ = context.Operators.Where<Encounter>(i_, j_);
+		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.Or(f_, l_);
 		var n_ = this.Hospice_care__Minimum_Data_Set_();
 		var o_ = context.Operators.ToList<CqlCode>(n_);
@@ -239,8 +241,8 @@ public class Hospice_6_9_000
 
 			return bq_;
 		};
-		var s_ = context.Operators.WhereOrNull<Observation>(q_, r_);
-		var t_ = context.Operators.ExistsInList<Observation>(s_);
+		var s_ = context.Operators.Where<Observation>(q_, r_);
+		var t_ = context.Operators.Exists<Observation>(s_);
 		var u_ = context.Operators.Or(m_, t_);
 		var v_ = this.Hospice_Care_Ambulatory();
 		var w_ = context.Operators.RetrieveByValueSet<ServiceRequest>(v_, null);
@@ -254,8 +256,8 @@ public class Hospice_6_9_000
 
 			return bu_;
 		};
-		var z_ = context.Operators.WhereOrNull<ServiceRequest>(x_, y_);
-		var aa_ = context.Operators.ExistsInList<ServiceRequest>(z_);
+		var z_ = context.Operators.Where<ServiceRequest>(x_, y_);
+		var aa_ = context.Operators.Exists<ServiceRequest>(z_);
 		var ab_ = context.Operators.Or(u_, aa_);
 		var ad_ = context.Operators.RetrieveByValueSet<Procedure>(v_, null);
 		var ae_ = Status_1_6_000.isInterventionPerformed(ad_);
@@ -268,8 +270,8 @@ public class Hospice_6_9_000
 
 			return by_;
 		};
-		var ag_ = context.Operators.WhereOrNull<Procedure>(ae_, af_);
-		var ah_ = context.Operators.ExistsInList<Procedure>(ag_);
+		var ag_ = context.Operators.Where<Procedure>(ae_, af_);
+		var ah_ = context.Operators.Exists<Procedure>(ag_);
 		var ai_ = context.Operators.Or(ab_, ah_);
 		var aj_ = this.Hospice_Diagnosis();
 		var ak_ = context.Operators.RetrieveByValueSet<Condition>(aj_, null);
@@ -281,8 +283,8 @@ public class Hospice_6_9_000
 
 			return cb_;
 		};
-		var am_ = context.Operators.WhereOrNull<Condition>(ak_, al_);
-		var an_ = context.Operators.ExistsInList<Condition>(am_);
+		var am_ = context.Operators.Where<Condition>(ak_, al_);
+		var an_ = context.Operators.Exists<Condition>(am_);
 		var ao_ = context.Operators.Or(ai_, an_);
 
 		return ao_;

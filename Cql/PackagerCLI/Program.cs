@@ -121,7 +121,7 @@ public class Program
             .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
             .WriteTo.File(
                 logFile,
-                outputTemplate: "{Level:u4}: {Message:lj}{NewLine}{Exception}",
+                outputTemplate: "____{NewLine}{Level:u4}: {Message:lj}{NewLine}{Exception}",
                 formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
         logging.AddSerilog();

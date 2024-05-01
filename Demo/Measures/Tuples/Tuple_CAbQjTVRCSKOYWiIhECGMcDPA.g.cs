@@ -6,6 +6,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -20,6 +21,6 @@ namespace Tuples
         [CqlDeclaration("relevantPeriod")]
         public CqlInterval<CqlDateTime> relevantPeriod { get; set; }
         [CqlDeclaration("eligibleEventDays")]
-        public IEnumerable<Tuples.Tuple_HBBaLFUhhUfQBEJKjEZegSRLi> eligibleEventDays { get; set; }
+        public IEnumerable<Tuple_HBBaLFUhhUfQBEJKjEZegSRLi> eligibleEventDays { get; set; }
     }
 }

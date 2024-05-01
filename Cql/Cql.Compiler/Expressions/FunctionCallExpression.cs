@@ -67,7 +67,7 @@ namespace Hl7.Cql.Compiler.Expressions
             };
 
             var index = MakeIndex(Definitions, itemProperty, indices);
-            var asFunc = index.TypeAsExpression(FunctionType);
+            var asFunc = index.NewTypeAsExpression(FunctionType);
             var invoke = Invoke(asFunc, Arguments);
 
             return invoke;

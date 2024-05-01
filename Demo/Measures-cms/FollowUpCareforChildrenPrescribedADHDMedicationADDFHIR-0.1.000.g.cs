@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -52,7 +54,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
     internal Lazy<CqlDateTime> __March_1_of_Year_Prior_to_Measurement_Period;
     internal Lazy<CqlDateTime> __Last_Calendar_Day_of_February_of_Measurement_Period;
     internal Lazy<CqlInterval<CqlDateTime>> __Intake_Period;
-    internal Lazy<IEnumerable<Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>> __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication;
+    internal Lazy<IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>> __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication;
     internal Lazy<CqlDate> __First_ADHD_Medication_Prescribed_During_Intake_Period;
     internal Lazy<CqlDate> __IPSD;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
@@ -75,9 +77,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
     internal Lazy<bool?> __Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase;
     internal Lazy<IEnumerable<CqlDate>> __Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase;
     internal Lazy<bool?> __Numerator_2;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -125,7 +127,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
         __March_1_of_Year_Prior_to_Measurement_Period = new Lazy<CqlDateTime>(this.March_1_of_Year_Prior_to_Measurement_Period_Value);
         __Last_Calendar_Day_of_February_of_Measurement_Period = new Lazy<CqlDateTime>(this.Last_Calendar_Day_of_February_of_Measurement_Period_Value);
         __Intake_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Intake_Period_Value);
-        __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication = new Lazy<IEnumerable<Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>>(this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value);
+        __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication = new Lazy<IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>>(this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value);
         __First_ADHD_Medication_Prescribed_During_Intake_Period = new Lazy<CqlDate>(this.First_ADHD_Medication_Prescribed_During_Intake_Period_Value);
         __IPSD = new Lazy<CqlDate>(this.IPSD_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
@@ -148,9 +150,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
         __Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase = new Lazy<bool?>(this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value);
         __Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase = new Lazy<IEnumerable<CqlDate>>(this.Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value);
         __Numerator_2 = new Lazy<bool?>(this.Numerator_2_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -395,8 +397,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR-0.1.000", "Measurement Period", c_);
 
@@ -410,7 +412,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -423,10 +425,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, (int?)1);
-		var e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-		var f_ = context.Operators.DateTime(d_, (int?)3, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		var d_ = context.Operators.Subtract(c_, 1);
+		var e_ = context.Operators.ConvertIntegerToDecimal(0);
+		var f_ = context.Operators.DateTime(d_, 3, 1, 0, 0, 0, 0, e_);
 
 		return f_;
 	}
@@ -439,10 +441,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = this.Measurement_Period();
 		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.ComponentFrom(b_, "year");
-		var d_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-		var e_ = context.Operators.DateTime(c_, (int?)3, (int?)1, (int?)23, (int?)59, (int?)59, (int?)0, d_);
-		var f_ = context.Operators.Quantity((decimal?)1m, "day");
+		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		var d_ = context.Operators.ConvertIntegerToDecimal(0);
+		var e_ = context.Operators.DateTime(c_, 3, 1, 23, 59, 59, 0, d_);
+		var f_ = context.Operators.Quantity(1m, "day");
 		var g_ = context.Operators.Subtract(e_, f_);
 
 		return g_;
@@ -465,7 +467,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	public CqlInterval<CqlDateTime> Intake_Period() => 
 		__Intake_Period.Value;
 
-	private IEnumerable<Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
+	private IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
 	{
 		var a_ = this.Atomoxetine();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
@@ -514,11 +516,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var dg_ = context.Operators.Start(df_);
 			var dh_ = context.Operators.ConvertDateToDateTime(dg_);
 			var di_ = this.Intake_Period();
-			var dj_ = context.Operators.ElementInInterval<CqlDateTime>(dh_, di_, null);
+			var dj_ = context.Operators.In<CqlDateTime>(dh_, di_, null);
 
 			return dj_;
 		};
-		var ay_ = context.Operators.WhereOrNull<MedicationRequest>(aw_, ax_);
+		var ay_ = context.Operators.Where<MedicationRequest>(aw_, ax_);
 		var ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var bd_ = context.Operators.ListUnion<MedicationRequest>(ba_, bc_);
@@ -558,11 +560,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var dl_ = context.Operators.Start(dk_);
 			var dm_ = context.Operators.ConvertDateToDateTime(dl_);
 			var dn_ = this.Intake_Period();
-			var do_ = context.Operators.ElementInInterval<CqlDateTime>(dm_, dn_, null);
+			var do_ = context.Operators.In<CqlDateTime>(dm_, dn_, null);
 
 			return do_;
 		};
-		var cx_ = context.Operators.WhereOrNull<MedicationRequest>(cv_, cw_);
+		var cx_ = context.Operators.Where<MedicationRequest>(cv_, cw_);
 		IEnumerable<MedicationRequest> cy_(MedicationRequest ADHDMedicationOrder)
 		{
 			var dp_ = this.Atomoxetine();
@@ -613,7 +615,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				var fs_ = context.Operators.Start(fr_);
 				var ft_ = context.Operators.ConvertDateToDateTime(fs_);
 				var fu_ = context.Operators.DateFrom(ft_);
-				var fv_ = context.Operators.Quantity((decimal?)120m, "days");
+				var fv_ = context.Operators.Quantity(120m, "days");
 				var fw_ = context.Operators.Subtract(fu_, fv_);
 				var fy_ = context.Operators.Start(fr_);
 				var fz_ = context.Operators.ConvertDateToDateTime(fy_);
@@ -623,52 +625,52 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 				return gc_;
 			};
-			var fn_ = context.Operators.WhereOrNull<MedicationRequest>(fl_, fm_);
+			var fn_ = context.Operators.Where<MedicationRequest>(fl_, fm_);
 			MedicationRequest fo_(MedicationRequest ActiveADHDMedication) => 
 				ADHDMedicationOrder;
-			var fp_ = context.Operators.SelectOrNull<MedicationRequest, MedicationRequest>(fn_, fo_);
+			var fp_ = context.Operators.Select<MedicationRequest, MedicationRequest>(fn_, fo_);
 
 			return fp_;
 		};
-		var cz_ = context.Operators.SelectManyOrNull<MedicationRequest, MedicationRequest>(cx_, cy_);
+		var cz_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(cx_, cy_);
 		var da_ = context.Operators.ListExcept<MedicationRequest>(ay_, cz_);
-		Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE db_(MedicationRequest QualifyingMed)
+		Tuple_GgbdNTdhNeafRfiEMSgeHDMdE db_(MedicationRequest QualifyingMed)
 		{
 			var gd_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(QualifyingMed);
 			var ge_ = context.Operators.Start(gd_);
-			var gf_ = new Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE
+			var gf_ = new Tuple_GgbdNTdhNeafRfiEMSgeHDMdE
 			{
 				startDate = ge_,
 			};
 
 			return gf_;
 		};
-		var dc_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(da_, db_);
-		object dd_(Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this) => 
+		var dc_ = context.Operators.Select<MedicationRequest, Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(da_, db_);
+		object dd_(Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this) => 
 			@this?.startDate;
-		var de_ = context.Operators.ListSortBy<Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
+		var de_ = context.Operators.SortBy<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
 
 		return de_;
 	}
 
     [CqlDeclaration("ADHD Medication Prescribed During Intake Period and Not Previously on ADHD Medication")]
-	public IEnumerable<Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication() => 
+	public IEnumerable<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication() => 
 		__ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication.Value;
 
 	private CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period_Value()
 	{
 		var a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication();
-		bool? b_(Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this)
+		bool? b_(Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this)
 		{
 			var g_ = context.Operators.Not((bool?)(@this?.startDate is null));
 
 			return g_;
 		};
-		var c_ = context.Operators.WhereOrNull<Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(a_, b_);
-		CqlDate d_(Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this) => 
+		var c_ = context.Operators.Where<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE>(a_, b_);
+		CqlDate d_(Tuple_GgbdNTdhNeafRfiEMSgeHDMdE @this) => 
 			@this?.startDate;
-		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_GgbdNTdhNeafRfiEMSgeHDMdE, CqlDate>(c_, d_);
-		var f_ = context.Operators.FirstOfList<CqlDate>(e_);
+		var e_ = context.Operators.Select<Tuple_GgbdNTdhNeafRfiEMSgeHDMdE, CqlDate>(c_, d_);
+		var f_ = context.Operators.First<CqlDate>(e_);
 
 		return f_;
 	}
@@ -704,7 +706,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		bool? l_(Encounter ValidEncounters)
 		{
 			var n_ = this.IPSD();
-			var o_ = context.Operators.Quantity((decimal?)6m, "months");
+			var o_ = context.Operators.Quantity(6m, "months");
 			var p_ = context.Operators.Subtract(n_, o_);
 			var r_ = context.Operators.Interval(p_, n_, true, true);
 			var s_ = context.Operators.ConvertDateToDateTime(r_?.low);
@@ -722,7 +724,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return am_;
 		};
-		var m_ = context.Operators.WhereOrNull<Encounter>(k_, l_);
+		var m_ = context.Operators.Where<Encounter>(k_, l_);
 
 		return m_;
 	}
@@ -736,11 +738,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var e_ = context.Operators.Equal(D?.RankElement?.Value, (int?)1);
+			var e_ = context.Operators.Equal(D?.RankElement?.Value, 1);
 
 			return e_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 		Condition c_(Encounter.DiagnosisComponent PD)
 		{
 			var f_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
@@ -751,12 +753,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 				return k_;
 			};
-			var h_ = context.Operators.WhereOrNull<Condition>(f_, g_);
-			var i_ = context.Operators.SingleOrNull<Condition>(h_);
+			var h_ = context.Operators.Where<Condition>(f_, g_);
+			var i_ = context.Operators.SingletonFrom<Condition>(h_);
 
 			return i_;
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>(b_, c_);
+		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(b_, c_);
 
 		return d_;
 	}
@@ -776,12 +778,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 				return k_;
 			};
-			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
-			var h_ = context.Operators.ExistsInList<Condition>(g_);
+			var g_ = context.Operators.Where<Condition>(e_, f_);
+			var h_ = context.Operators.Exists<Condition>(g_);
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -799,16 +801,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
 			var f_ = context.Operators.Start(e_);
 			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity((decimal?)30m, "days");
+			var i_ = context.Operators.Quantity(30m, "days");
 			var j_ = context.Operators.Add(g_, i_);
 			var k_ = context.Operators.Interval(g_, j_, false, true);
-			var l_ = context.Operators.ElementInInterval<CqlDate>(f_, k_, "day");
+			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
 
 			return o_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -825,21 +827,21 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
+		var g_ = context.Operators.GreaterOrEqual(f_, 6);
 		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.End(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, (int?)12);
+		var n_ = context.Operators.LessOrEqual(m_, 12);
 		var o_ = context.Operators.And(g_, n_);
 		var p_ = this.Qualifying_Encounter();
-		var q_ = context.Operators.ExistsInList<Encounter>(p_);
+		var q_ = context.Operators.Exists<Encounter>(p_);
 		var r_ = context.Operators.And(o_, q_);
 		var s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
 		var t_ = context.Operators.Not((bool?)(s_ is null));
 		var u_ = context.Operators.And(r_, t_);
 		var v_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase();
-		var w_ = context.Operators.ExistsInList<Encounter>(v_);
+		var w_ = context.Operators.Exists<Encounter>(v_);
 		var x_ = context.Operators.Not(w_);
 		var y_ = context.Operators.And(u_, x_);
 
@@ -875,7 +877,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
@@ -888,7 +890,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	{
 		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 		var b_ = this.Narcolepsy_Exclusion();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 
 		return d_;
@@ -926,18 +928,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 					return aw_;
 				};
-				var at_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(ar_?.Type, as_);
+				var at_ = context.Operators.Select<CodeableConcept, CqlConcept>(ar_?.Type, as_);
 				var au_ = this.Ambulatory();
 				var av_ = context.Operators.ConceptsInValueSet(at_, au_);
 
 				return av_;
 			};
-			var ap_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((PsychPharmManagement?.Location as IEnumerable<Encounter.LocationComponent>), ao_);
-			var aq_ = context.Operators.ExistsInList<Encounter.LocationComponent>(ap_);
+			var ap_ = context.Operators.Where<Encounter.LocationComponent>((PsychPharmManagement?.Location as IEnumerable<Encounter.LocationComponent>), ao_);
+			var aq_ = context.Operators.Exists<Encounter.LocationComponent>(ap_);
 
 			return aq_;
 		};
-		var q_ = context.Operators.WhereOrNull<Encounter>(o_, p_);
+		var q_ = context.Operators.Where<Encounter>(o_, p_);
 		var r_ = context.Operators.ListUnion<Encounter>(m_, q_);
 		var s_ = context.Operators.ListUnion<Encounter>(k_, r_);
 		var t_ = this.Outpatient_Consultation();
@@ -978,16 +980,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
 			var f_ = context.Operators.Start(e_);
 			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity((decimal?)30m, "days");
+			var i_ = context.Operators.Quantity(30m, "days");
 			var j_ = context.Operators.Add(g_, i_);
 			var k_ = context.Operators.Interval(g_, j_, false, true);
-			var l_ = context.Operators.ElementInInterval<CqlDate>(f_, k_, "day");
+			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
 
 			return o_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -999,7 +1001,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Numerator_1_Value()
 	{
 		var a_ = this.Encounter_During_Initiation_Phase();
-		var b_ = context.Operators.ExistsInList<Encounter>(a_);
+		var b_ = context.Operators.Exists<Encounter>(a_);
 
 		return b_;
 	}
@@ -1014,11 +1016,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS f_(MedicationRequest AtomoxetineMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS f_(MedicationRequest AtomoxetineMed)
 		{
 			var dt_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(AtomoxetineMed);
 			var dv_ = context.Operators.Start(dt_);
-			var dw_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var dw_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = dt_,
 				periodStart = dv_,
@@ -1026,30 +1028,30 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return dw_;
 		};
-		var g_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(e_, f_);
-		object h_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this) => 
+		var g_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(e_, f_);
+		object h_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this) => 
 			@this?.periodStart;
-		var i_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? j_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var i_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? j_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var dx_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return dx_;
 		};
-		var k_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(i_, j_);
-		CqlInterval<CqlDate> l_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this) => 
+		var k_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(i_, j_);
+		CqlInterval<CqlDate> l_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this) => 
 			@this?.period;
-		var m_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(k_, l_);
+		var m_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(k_, l_);
 		var n_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(m_);
 		var o_ = this.Clonidine();
 		var p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
 		var r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
 		var s_ = context.Operators.ListUnion<MedicationRequest>(p_, r_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS t_(MedicationRequest ClonidineMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS t_(MedicationRequest ClonidineMed)
 		{
 			var dy_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ClonidineMed);
 			var ea_ = context.Operators.Start(dy_);
-			var eb_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var eb_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = dy_,
 				periodStart = ea_,
@@ -1057,27 +1059,27 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return eb_;
 		};
-		var u_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(s_, t_);
-		var w_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(u_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? x_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var u_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(s_, t_);
+		var w_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(u_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? x_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var ec_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return ec_;
 		};
-		var y_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(w_, x_);
-		var aa_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(y_, l_);
+		var y_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(w_, x_);
+		var aa_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(y_, l_);
 		var ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
 		var ac_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(n_, ab_);
 		var ad_ = this.Dexmethylphenidate();
 		var ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
 		var ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
 		var ah_ = context.Operators.ListUnion<MedicationRequest>(ae_, ag_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ai_(MedicationRequest DexmethylphenidateMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ai_(MedicationRequest DexmethylphenidateMed)
 		{
 			var ed_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DexmethylphenidateMed);
 			var ef_ = context.Operators.Start(ed_);
-			var eg_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var eg_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = ed_,
 				periodStart = ef_,
@@ -1085,26 +1087,26 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return eg_;
 		};
-		var aj_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ah_, ai_);
-		var al_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(aj_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? am_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var aj_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ah_, ai_);
+		var al_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(aj_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? am_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var eh_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return eh_;
 		};
-		var an_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(al_, am_);
-		var ap_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(an_, l_);
+		var an_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(al_, am_);
+		var ap_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(an_, l_);
 		var aq_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ap_);
 		var ar_ = this.Dextroamphetamine();
 		var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
 		var au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
 		var av_ = context.Operators.ListUnion<MedicationRequest>(as_, au_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS aw_(MedicationRequest DextroamphetamineMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS aw_(MedicationRequest DextroamphetamineMed)
 		{
 			var ei_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DextroamphetamineMed);
 			var ek_ = context.Operators.Start(ei_);
-			var el_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var el_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = ei_,
 				periodStart = ek_,
@@ -1112,16 +1114,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return el_;
 		};
-		var ax_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(av_, aw_);
-		var az_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ax_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? ba_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var ax_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(av_, aw_);
+		var az_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ax_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? ba_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var em_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return em_;
 		};
-		var bb_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(az_, ba_);
-		var bd_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(bb_, l_);
+		var bb_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(az_, ba_);
+		var bd_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(bb_, l_);
 		var be_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bd_);
 		var bf_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(aq_, be_);
 		var bg_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ac_, bf_);
@@ -1129,11 +1131,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
 		var bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
 		var bl_ = context.Operators.ListUnion<MedicationRequest>(bi_, bk_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS bm_(MedicationRequest LisdexamfetamineMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS bm_(MedicationRequest LisdexamfetamineMed)
 		{
 			var en_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(LisdexamfetamineMed);
 			var ep_ = context.Operators.Start(en_);
-			var eq_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var eq_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = en_,
 				periodStart = ep_,
@@ -1141,26 +1143,26 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return eq_;
 		};
-		var bn_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bl_, bm_);
-		var bp_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bn_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? bq_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var bn_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bl_, bm_);
+		var bp_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bn_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? bq_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var er_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return er_;
 		};
-		var br_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bp_, bq_);
-		var bt_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(br_, l_);
+		var br_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bp_, bq_);
+		var bt_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(br_, l_);
 		var bu_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bt_);
 		var bv_ = this.Methylphenidate();
 		var bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
 		var by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
 		var bz_ = context.Operators.ListUnion<MedicationRequest>(bw_, by_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ca_(MedicationRequest MethylphenidateMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS ca_(MedicationRequest MethylphenidateMed)
 		{
 			var es_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethylphenidateMed);
 			var eu_ = context.Operators.Start(es_);
-			var ev_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var ev_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = es_,
 				periodStart = eu_,
@@ -1168,16 +1170,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return ev_;
 		};
-		var cb_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bz_, ca_);
-		var cd_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cb_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? ce_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var cb_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(bz_, ca_);
+		var cd_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cb_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? ce_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var ew_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return ew_;
 		};
-		var cf_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cd_, ce_);
-		var ch_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cf_, l_);
+		var cf_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cd_, ce_);
+		var ch_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cf_, l_);
 		var ci_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ch_);
 		var cj_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bu_, ci_);
 		var ck_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bg_, cj_);
@@ -1185,11 +1187,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
 		var co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
 		var cp_ = context.Operators.ListUnion<MedicationRequest>(cm_, co_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS cq_(MedicationRequest GuanfacineMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS cq_(MedicationRequest GuanfacineMed)
 		{
 			var ex_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(GuanfacineMed);
 			var ez_ = context.Operators.Start(ex_);
-			var fa_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var fa_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = ex_,
 				periodStart = ez_,
@@ -1197,16 +1199,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return fa_;
 		};
-		var cr_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cp_, cq_);
-		var ct_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cr_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? cu_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var cr_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cp_, cq_);
+		var ct_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(cr_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? cu_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var fb_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return fb_;
 		};
-		var cv_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ct_, cu_);
-		var cx_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cv_, l_);
+		var cv_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(ct_, cu_);
+		var cx_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(cv_, l_);
 		var cy_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(cx_);
 		var cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 		var da_ = context.Operators.ToList<CqlCode>(cz_);
@@ -1214,11 +1216,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var dd_ = context.Operators.ToList<CqlCode>(cz_);
 		var de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, null);
 		var df_ = context.Operators.ListUnion<MedicationRequest>(db_, de_);
-		Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS dg_(MedicationRequest MethamphetamineMed)
+		Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS dg_(MedicationRequest MethamphetamineMed)
 		{
 			var fc_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethamphetamineMed);
 			var fe_ = context.Operators.Start(fc_);
-			var ff_ = new Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
+			var ff_ = new Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS
 			{
 				period = fc_,
 				periodStart = fe_,
@@ -1226,30 +1228,30 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return ff_;
 		};
-		var dh_ = context.Operators.SelectOrNull<MedicationRequest, Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(df_, dg_);
-		var dj_ = context.Operators.ListSortBy<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dh_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? dk_(Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
+		var dh_ = context.Operators.Select<MedicationRequest, Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(df_, dg_);
+		var dj_ = context.Operators.SortBy<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dh_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? dk_(Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS @this)
 		{
 			var fg_ = context.Operators.Not((bool?)(@this?.period is null));
 
 			return fg_;
 		};
-		var dl_ = context.Operators.WhereOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dj_, dk_);
-		var dn_ = context.Operators.SelectOrNull<Tuples.Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(dl_, l_);
+		var dl_ = context.Operators.Where<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS>(dj_, dk_);
+		var dn_ = context.Operators.Select<Tuple_DAGCHJJjDfWYJVbiHKMLJjYRS, CqlInterval<CqlDate>>(dl_, l_);
 		var do_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(dn_);
 		var dp_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(cy_, do_);
 		var dq_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ck_, dp_);
 		CqlInterval<CqlDate> dr_(CqlInterval<CqlDate> ADHDMedication)
 		{
 			var fh_ = this.IPSD();
-			var fj_ = context.Operators.Quantity((decimal?)300m, "days");
+			var fj_ = context.Operators.Quantity(300m, "days");
 			var fk_ = context.Operators.Add(fh_, fj_);
 			var fl_ = context.Operators.Interval(fh_, fk_, true, true);
 			var fm_ = context.Operators.IntervalIntersect<CqlDate>(ADHDMedication, fl_);
 
 			return fm_;
 		};
-		var ds_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(dq_, dr_);
+		var ds_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(dq_, dr_);
 
 		return ds_;
 	}
@@ -1273,7 +1275,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Value()
 	{
 		var a_ = this.ADHD_Cumulative_Medication_Duration();
-		var b_ = context.Operators.GreaterOrEqual(a_, (int?)210);
+		var b_ = context.Operators.GreaterOrEqual(a_, 210);
 
 		return b_;
 	}
@@ -1291,16 +1293,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var e_ = CQMCommon_2_0_000.ToDateInterval(d_);
 			var f_ = context.Operators.Start(e_);
 			var g_ = this.IPSD();
-			var i_ = context.Operators.Quantity((decimal?)300m, "days");
+			var i_ = context.Operators.Quantity(300m, "days");
 			var j_ = context.Operators.Add(g_, i_);
 			var k_ = context.Operators.Interval(g_, j_, false, true);
-			var l_ = context.Operators.ElementInInterval<CqlDate>(f_, k_, "day");
+			var l_ = context.Operators.In<CqlDate>(f_, k_, "day");
 			var n_ = context.Operators.Not((bool?)(g_ is null));
 			var o_ = context.Operators.And(l_, n_);
 
 			return o_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1317,15 +1319,15 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)6);
+		var g_ = context.Operators.GreaterOrEqual(f_, 6);
 		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.End(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-		var n_ = context.Operators.LessOrEqual(m_, (int?)12);
+		var n_ = context.Operators.LessOrEqual(m_, 12);
 		var o_ = context.Operators.And(g_, n_);
 		var p_ = this.Qualifying_Encounter();
-		var q_ = context.Operators.ExistsInList<Encounter>(p_);
+		var q_ = context.Operators.Exists<Encounter>(p_);
 		var r_ = context.Operators.And(o_, q_);
 		var s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
 		var t_ = context.Operators.Not((bool?)(s_ is null));
@@ -1333,7 +1335,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var v_ = this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days();
 		var w_ = context.Operators.And(u_, v_);
 		var x_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase();
-		var y_ = context.Operators.ExistsInList<Encounter>(x_);
+		var y_ = context.Operators.Exists<Encounter>(x_);
 		var z_ = context.Operators.Not(y_);
 		var aa_ = context.Operators.And(w_, z_);
 
@@ -1364,16 +1366,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var g_ = CQMCommon_2_0_000.ToDateInterval(f_);
 			var h_ = context.Operators.Start(g_);
 			var i_ = this.IPSD();
-			var j_ = context.Operators.Quantity((decimal?)31m, "days");
+			var j_ = context.Operators.Quantity(31m, "days");
 			var k_ = context.Operators.Add(i_, j_);
-			var m_ = context.Operators.Quantity((decimal?)300m, "days");
+			var m_ = context.Operators.Quantity(300m, "days");
 			var n_ = context.Operators.Add(i_, m_);
 			var o_ = context.Operators.Interval(k_, n_, true, true);
-			var p_ = context.Operators.ElementInInterval<CqlDate>(h_, o_, "day");
+			var p_ = context.Operators.In<CqlDate>(h_, o_, "day");
 
 			return p_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		CqlDate d_(Encounter ValidNumeratorEncounter)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToInterval(ValidNumeratorEncounter?.Period);
@@ -1382,7 +1384,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return s_;
 		};
-		var e_ = context.Operators.SelectOrNull<Encounter, CqlDate>(c_, d_);
+		var e_ = context.Operators.Select<Encounter, CqlDate>(c_, d_);
 
 		return e_;
 	}
@@ -1394,8 +1396,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
 		var a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
-		var b_ = context.Operators.CountOrNull<CqlDate>(a_);
-		var c_ = context.Operators.GreaterOrEqual(b_, (int?)2);
+		var b_ = context.Operators.Count<CqlDate>(a_);
+		var c_ = context.Operators.GreaterOrEqual(b_, 2);
 
 		return c_;
 	}
@@ -1414,16 +1416,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var h_ = CQMCommon_2_0_000.ToDateInterval(g_);
 			var i_ = context.Operators.Start(h_);
 			var j_ = this.IPSD();
-			var k_ = context.Operators.Quantity((decimal?)31m, "days");
+			var k_ = context.Operators.Quantity(31m, "days");
 			var l_ = context.Operators.Add(j_, k_);
-			var n_ = context.Operators.Quantity((decimal?)300m, "days");
+			var n_ = context.Operators.Quantity(300m, "days");
 			var o_ = context.Operators.Add(j_, n_);
 			var p_ = context.Operators.Interval(l_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDate>(i_, p_, "day");
+			var q_ = context.Operators.In<CqlDate>(i_, p_, "day");
 
 			return q_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		CqlDate e_(Encounter OnlineAssessment)
 		{
 			var r_ = FHIRHelpers_4_3_000.ToInterval(OnlineAssessment?.Period);
@@ -1432,7 +1434,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return t_;
 		};
-		var f_ = context.Operators.SelectOrNull<Encounter, CqlDate>(d_, e_);
+		var f_ = context.Operators.Select<Encounter, CqlDate>(d_, e_);
 
 		return f_;
 	}
@@ -1444,7 +1446,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Numerator_2_Value()
 	{
 		var a_ = this.Encounter_During_Initiation_Phase();
-		var b_ = context.Operators.ExistsInList<Encounter>(a_);
+		var b_ = context.Operators.Exists<Encounter>(a_);
 		var c_ = this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 		var d_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 		IEnumerable<CqlDate> e_(CqlDate Encounter1)
@@ -1461,15 +1463,15 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 				return t_;
 			};
-			var l_ = context.Operators.WhereOrNull<CqlDate>(j_, k_);
+			var l_ = context.Operators.Where<CqlDate>(j_, k_);
 			CqlDate m_(CqlDate Encounter2) => 
 				Encounter1;
-			var n_ = context.Operators.SelectOrNull<CqlDate, CqlDate>(l_, m_);
+			var n_ = context.Operators.Select<CqlDate, CqlDate>(l_, m_);
 
 			return n_;
 		};
-		var f_ = context.Operators.SelectManyOrNull<CqlDate, CqlDate>(d_, e_);
-		var g_ = context.Operators.ExistsInList<CqlDate>(f_);
+		var f_ = context.Operators.SelectMany<CqlDate, CqlDate>(d_, e_);
+		var g_ = context.Operators.Exists<CqlDate>(f_);
 		var h_ = context.Operators.Or(c_, g_);
 		var i_ = context.Operators.And(b_, h_);
 
@@ -1480,7 +1482,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	public bool? Numerator_2() => 
 		__Numerator_2.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1488,10 +1490,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1499,10 +1501,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1510,7 +1512,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

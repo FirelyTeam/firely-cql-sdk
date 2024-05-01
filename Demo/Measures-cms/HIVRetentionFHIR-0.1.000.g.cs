@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -35,9 +37,9 @@ public class HIVRetentionFHIR_0_1_000
     internal Lazy<CqlCode[]> __CPT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period;
     internal Lazy<bool?> __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period;
@@ -76,9 +78,9 @@ public class HIVRetentionFHIR_0_1_000
         __CPT = new Lazy<CqlCode[]>(this.CPT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period = new Lazy<bool?>(this.Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period_Value);
         __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period = new Lazy<bool?>(this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Value);
@@ -218,8 +220,8 @@ public class HIVRetentionFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("HIVRetentionFHIR-0.1.000", "Measurement Period", c_);
 
@@ -233,7 +235,7 @@ public class HIVRetentionFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -242,7 +244,7 @@ public class HIVRetentionFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -250,10 +252,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		List<Extension> a_()
 		{
@@ -277,88 +279,95 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			var m_ = context.Operators.Convert<FhirUri>(@this?.Url);
+			var n_ = FHIRHelpers_4_3_000.ToString(m_);
+			var o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
-			return m_;
+			return o_;
 		};
-		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		var d_ = context.Operators.SingleOrNull<Extension>(c_);
+		var c_ = context.Operators.Where<Extension>(a_(), b_);
+		var d_ = context.Operators.SingletonFrom<Extension>(c_);
 		var e_ = new Extension[]
 		{
 			d_,
 		};
-		Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension E)
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension E)
 		{
-			bool? n_(Extension @this)
+			bool? p_(Extension @this)
 			{
-				var ai_ = context.Operators.Equal(@this?.Url, "ombCategory");
+				var al_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var am_ = FHIRHelpers_4_3_000.ToString(al_);
+				var an_ = context.Operators.Equal(am_, "ombCategory");
 
-				return ai_;
+				return an_;
 			};
-			var o_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+			var q_ = context.Operators.Where<Extension>(((E is Element)
 					? ((E as Element).Extension)
-					: null), n_);
-			DataType p_(Extension @this) => 
+					: null), p_);
+			DataType r_(Extension @this) => 
 				@this?.Value;
-			var q_ = context.Operators.SelectOrNull<Extension, DataType>(o_, p_);
-			var r_ = context.Operators.SingleOrNull<DataType>(q_);
-			var s_ = context.Operators.Convert<Coding>(r_);
-			var t_ = FHIRHelpers_4_3_000.ToCode(s_);
-			var u_ = new CqlCode[]
+			var s_ = context.Operators.Select<Extension, DataType>(q_, r_);
+			var t_ = context.Operators.SingletonFrom<DataType>(s_);
+			var u_ = context.Operators.Convert<Coding>(t_);
+			var v_ = FHIRHelpers_4_3_000.ToCode(u_);
+			var w_ = new CqlCode[]
 			{
-				t_,
+				v_,
 			};
-			bool? v_(Extension @this)
+			bool? x_(Extension @this)
 			{
-				var aj_ = context.Operators.Equal(@this?.Url, "detailed");
+				var ao_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var ap_ = FHIRHelpers_4_3_000.ToString(ao_);
+				var aq_ = context.Operators.Equal(ap_, "detailed");
 
-				return aj_;
+				return aq_;
 			};
-			var w_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+			var y_ = context.Operators.Where<Extension>(((E is Element)
 					? ((E as Element).Extension)
-					: null), v_);
-			var y_ = context.Operators.SelectOrNull<Extension, DataType>(w_, p_);
-			CqlCode z_(DataType @this)
+					: null), x_);
+			var aa_ = context.Operators.Select<Extension, DataType>(y_, r_);
+			CqlCode ab_(DataType @this)
 			{
-				var ak_ = context.Operators.Convert<Coding>(@this);
-				var al_ = FHIRHelpers_4_3_000.ToCode(ak_);
+				var ar_ = context.Operators.Convert<Coding>(@this);
+				var as_ = FHIRHelpers_4_3_000.ToCode(ar_);
 
-				return al_;
+				return as_;
 			};
-			var aa_ = context.Operators.SelectOrNull<DataType, CqlCode>(y_, z_);
-			var ab_ = context.Operators.ValueSetUnion((u_ as IEnumerable<CqlCode>), aa_);
-			bool? ac_(Extension @this)
+			var ac_ = context.Operators.Select<DataType, CqlCode>(aa_, ab_);
+			var ad_ = context.Operators.ValueSetUnion((w_ as IEnumerable<CqlCode>), ac_);
+			bool? ae_(Extension @this)
 			{
-				var am_ = context.Operators.Equal(@this?.Url, "text");
+				var at_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var au_ = FHIRHelpers_4_3_000.ToString(at_);
+				var av_ = context.Operators.Equal(au_, "text");
 
-				return am_;
+				return av_;
 			};
-			var ad_ = context.Operators.WhereOrNull<Extension>(((E is Element)
+			var af_ = context.Operators.Where<Extension>(((E is Element)
 					? ((E as Element).Extension)
-					: null), ac_);
-			object ae_(Extension @this) => 
-				@this?.Value;
-			var af_ = context.Operators.SelectOrNull<Extension, object>(ad_, ae_);
-			var ag_ = context.Operators.SingleOrNull<object>(af_);
-			var ah_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+					: null), ae_);
+			var ah_ = context.Operators.Select<Extension, DataType>(af_, r_);
+			var ai_ = context.Operators.SingletonFrom<DataType>(ah_);
+			var aj_ = context.Operators.Convert<string>(ai_);
+			var ak_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
 			{
-				codes = ab_,
-				display = (ag_ as string),
+				codes = ad_,
+				display = aj_,
 			};
 
-			return ah_;
+			return ak_;
 		};
-		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		List<Extension> a_()
 		{
@@ -382,86 +391,93 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		bool? b_(Extension @this)
 		{
-			var m_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			var m_ = context.Operators.Convert<FhirUri>(@this?.Url);
+			var n_ = FHIRHelpers_4_3_000.ToString(m_);
+			var o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
-			return m_;
+			return o_;
 		};
-		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		var d_ = context.Operators.SingleOrNull<Extension>(c_);
+		var c_ = context.Operators.Where<Extension>(a_(), b_);
+		var d_ = context.Operators.SingletonFrom<Extension>(c_);
 		var e_ = new Extension[]
 		{
 			d_,
 		};
-		Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension R)
+		Tuple_DMgHTLENEHBHWJISQgKZGZVMB f_(Extension R)
 		{
-			bool? n_(Extension @this)
+			bool? p_(Extension @this)
 			{
-				var ag_ = context.Operators.Equal(@this?.Url, "ombCategory");
-
-				return ag_;
-			};
-			var o_ = context.Operators.WhereOrNull<Extension>(((R is Element)
-					? ((R as Element).Extension)
-					: null), n_);
-			DataType p_(Extension @this) => 
-				@this?.Value;
-			var q_ = context.Operators.SelectOrNull<Extension, DataType>(o_, p_);
-			CqlCode r_(DataType @this)
-			{
-				var ah_ = context.Operators.Convert<Coding>(@this);
-				var ai_ = FHIRHelpers_4_3_000.ToCode(ah_);
-
-				return ai_;
-			};
-			var s_ = context.Operators.SelectOrNull<DataType, CqlCode>(q_, r_);
-			bool? t_(Extension @this)
-			{
-				var aj_ = context.Operators.Equal(@this?.Url, "detailed");
-
-				return aj_;
-			};
-			var u_ = context.Operators.WhereOrNull<Extension>(((R is Element)
-					? ((R as Element).Extension)
-					: null), t_);
-			var w_ = context.Operators.SelectOrNull<Extension, DataType>(u_, p_);
-			CqlCode x_(DataType @this)
-			{
-				var ak_ = context.Operators.Convert<Coding>(@this);
-				var al_ = FHIRHelpers_4_3_000.ToCode(ak_);
+				var aj_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var ak_ = FHIRHelpers_4_3_000.ToString(aj_);
+				var al_ = context.Operators.Equal(ak_, "ombCategory");
 
 				return al_;
 			};
-			var y_ = context.Operators.SelectOrNull<DataType, CqlCode>(w_, x_);
-			var z_ = context.Operators.ValueSetUnion(s_, y_);
-			bool? aa_(Extension @this)
-			{
-				var am_ = context.Operators.Equal(@this?.Url, "text");
-
-				return am_;
-			};
-			var ab_ = context.Operators.WhereOrNull<Extension>(((R is Element)
+			var q_ = context.Operators.Where<Extension>(((R is Element)
 					? ((R as Element).Extension)
-					: null), aa_);
-			object ac_(Extension @this) => 
+					: null), p_);
+			DataType r_(Extension @this) => 
 				@this?.Value;
-			var ad_ = context.Operators.SelectOrNull<Extension, object>(ab_, ac_);
-			var ae_ = context.Operators.SingleOrNull<object>(ad_);
-			var af_ = new Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			var s_ = context.Operators.Select<Extension, DataType>(q_, r_);
+			CqlCode t_(DataType @this)
 			{
-				codes = z_,
-				display = (ae_ as string),
+				var am_ = context.Operators.Convert<Coding>(@this);
+				var an_ = FHIRHelpers_4_3_000.ToCode(am_);
+
+				return an_;
+			};
+			var u_ = context.Operators.Select<DataType, CqlCode>(s_, t_);
+			bool? v_(Extension @this)
+			{
+				var ao_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var ap_ = FHIRHelpers_4_3_000.ToString(ao_);
+				var aq_ = context.Operators.Equal(ap_, "detailed");
+
+				return aq_;
+			};
+			var w_ = context.Operators.Where<Extension>(((R is Element)
+					? ((R as Element).Extension)
+					: null), v_);
+			var y_ = context.Operators.Select<Extension, DataType>(w_, r_);
+			CqlCode z_(DataType @this)
+			{
+				var ar_ = context.Operators.Convert<Coding>(@this);
+				var as_ = FHIRHelpers_4_3_000.ToCode(ar_);
+
+				return as_;
+			};
+			var aa_ = context.Operators.Select<DataType, CqlCode>(y_, z_);
+			var ab_ = context.Operators.ValueSetUnion(u_, aa_);
+			bool? ac_(Extension @this)
+			{
+				var at_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var au_ = FHIRHelpers_4_3_000.ToString(at_);
+				var av_ = context.Operators.Equal(au_, "text");
+
+				return av_;
+			};
+			var ad_ = context.Operators.Where<Extension>(((R is Element)
+					? ((R as Element).Extension)
+					: null), ac_);
+			var af_ = context.Operators.Select<Extension, DataType>(ad_, r_);
+			var ag_ = context.Operators.SingletonFrom<DataType>(af_);
+			var ah_ = context.Operators.Convert<string>(ag_);
+			var ai_ = new Tuple_DMgHTLENEHBHWJISQgKZGZVMB
+			{
+				codes = ab_,
+				display = ah_,
 			};
 
-			return af_;
+			return ai_;
 		};
-		var g_ = context.Operators.SelectOrNull<Extension, Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
-		var h_ = context.Operators.SingleOrNull<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
+		var g_ = context.Operators.Select<Extension, Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(e_, f_);
+		var h_ = context.Operators.SingletonFrom<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -485,7 +501,7 @@ public class HIVRetentionFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.Quantity((decimal?)240m, "days");
+			var j_ = context.Operators.Quantity(240m, "days");
 			var k_ = context.Operators.Add(i_, j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = context.Operators.ConvertDateToDateTime(l_);
@@ -495,8 +511,8 @@ public class HIVRetentionFHIR_0_1_000
 
 			return p_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -544,7 +560,7 @@ public class HIVRetentionFHIR_0_1_000
 			var aj_ = this.Measurement_Period();
 			var ak_ = context.Operators.Start(aj_);
 			var am_ = context.Operators.Start(aj_);
-			var an_ = context.Operators.Quantity((decimal?)240m, "days");
+			var an_ = context.Operators.Quantity(240m, "days");
 			var ao_ = context.Operators.Add(am_, an_);
 			var ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			var aq_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
@@ -552,8 +568,8 @@ public class HIVRetentionFHIR_0_1_000
 
 			return ar_;
 		};
-		var ah_ = context.Operators.WhereOrNull<Encounter>(af_, ag_);
-		var ai_ = context.Operators.ExistsInList<Encounter>(ah_);
+		var ah_ = context.Operators.Where<Encounter>(af_, ag_);
+		var ai_ = context.Operators.Exists<Encounter>(ah_);
 
 		return ai_;
 	}
@@ -652,21 +668,21 @@ public class HIVRetentionFHIR_0_1_000
 						return be_;
 					};
 				};
-				var at_ = context.Operators.IntervalSameOrBefore(ar_(), ap_, "day");
+				var at_ = context.Operators.SameOrBefore(ar_(), ap_, "day");
 				var au_ = context.Operators.And(aq_, at_);
 				var av_ = QICoreCommon_2_0_000.isActive(HIVDiagnosis);
 				var aw_ = context.Operators.And(au_, av_);
 
 				return aw_;
 			};
-			var al_ = context.Operators.WhereOrNull<Condition>(aj_, ak_);
+			var al_ = context.Operators.Where<Condition>(aj_, ak_);
 			Encounter am_(Condition HIVDiagnosis) => 
 				ValidEncounter;
-			var an_ = context.Operators.SelectOrNull<Condition, Encounter>(al_, am_);
+			var an_ = context.Operators.Select<Condition, Encounter>(al_, am_);
 
 			return an_;
 		};
-		var ah_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(af_, ag_);
+		var ah_ = context.Operators.SelectMany<Encounter, Encounter>(af_, ag_);
 
 		return ah_;
 	}
@@ -688,8 +704,8 @@ public class HIVRetentionFHIR_0_1_000
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 
 		return e_;
 	}
@@ -715,7 +731,7 @@ public class HIVRetentionFHIR_0_1_000
 				var q_ = context.Operators.Start(p_);
 				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithHIV?.Period);
 				var s_ = context.Operators.End(r_);
-				var t_ = context.Operators.Quantity((decimal?)90m, "days");
+				var t_ = context.Operators.Quantity(90m, "days");
 				var u_ = context.Operators.Add(s_, t_);
 				var v_ = context.Operators.SameOrAfter(q_, u_, "day");
 				var x_ = context.Operators.Start(r_);
@@ -728,15 +744,15 @@ public class HIVRetentionFHIR_0_1_000
 
 				return af_;
 			};
-			var h_ = context.Operators.WhereOrNull<Observation>(f_, g_);
+			var h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation ViralLoadTest) => 
 				EncounterWithHIV;
-			var j_ = context.Operators.SelectOrNull<Observation, Encounter>(h_, i_);
+			var j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}
@@ -759,22 +775,22 @@ public class HIVRetentionFHIR_0_1_000
 				var m_ = context.Operators.Start(l_);
 				var n_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithHIV?.Period);
 				var o_ = context.Operators.End(n_);
-				var p_ = context.Operators.Quantity((decimal?)90m, "days");
+				var p_ = context.Operators.Quantity(90m, "days");
 				var q_ = context.Operators.Add(o_, p_);
 				var r_ = context.Operators.SameOrAfter(m_, q_, "day");
 				var s_ = context.Operators.And(k_, r_);
 
 				return s_;
 			};
-			var g_ = context.Operators.WhereOrNull<Encounter>(e_, f_);
+			var g_ = context.Operators.Where<Encounter>(e_, f_);
 			Encounter h_(Encounter AnotherEncounterWithHIV) => 
 				EncounterWithHIV;
-			var i_ = context.Operators.SelectOrNull<Encounter, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}

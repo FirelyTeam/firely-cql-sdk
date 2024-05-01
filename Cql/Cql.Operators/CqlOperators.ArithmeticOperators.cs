@@ -765,28 +765,28 @@ namespace Hl7.Cql.Runtime
 
         #region Truncated Divide
 
-        public int? TruncateDivide(int? left, int? right)
+        public int? TruncatedDivide(int? left, int? right)
         {
             if (left == null || right == null || right == 0)
                 return null;
             else
                 return left / right;
         }
-        public long? TruncateDivide(long? left, long? right)
+        public long? TruncatedDivide(long? left, long? right)
         {
             if (left == null || right == null || right == 0)
                 return null;
             else
                 return left / right;
         }
-        public decimal? TruncateDivide(decimal? left, decimal? right)
+        public decimal? TruncatedDivide(decimal? left, decimal? right)
         {
             if (left == null || right == null || right == 0m)
                 return null;
             else
                 return Math.Truncate(left.Value / right.Value);
         }
-        public CqlQuantity? TruncateDivide(CqlQuantity? left, CqlQuantity? right)
+        public CqlQuantity? TruncatedDivide(CqlQuantity? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
@@ -795,7 +795,7 @@ namespace Hl7.Cql.Runtime
             else if (left.unit != "1" && right.unit != "1")
                 throw new NotSupportedException("Unit arithmetic is not supported.");
             else
-                return new CqlQuantity(TruncateDivide(left.value, right.value), "1");
+                return new CqlQuantity(TruncatedDivide(left.value, right.value), "1");
         }
         #endregion
     }

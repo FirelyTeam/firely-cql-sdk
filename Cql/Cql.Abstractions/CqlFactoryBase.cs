@@ -17,7 +17,7 @@ internal abstract class CqlFactoryBase
 
     protected ILoggerFactory LoggerFactory { get; }
 
-    protected virtual ILogger<T> Logger<T>() => Transient(LoggerFactory.CreateLogger<T>);
+    protected virtual ILogger<T> Logger<T>() => Singleton(LoggerFactory.CreateLogger<T>);
 
     protected virtual IOptions<T> Options<T>(T options) where T : class => Singleton(() => Microsoft.Extensions.Options.Options.Create(options));
 

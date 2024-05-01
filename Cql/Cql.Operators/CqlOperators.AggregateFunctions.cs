@@ -94,7 +94,7 @@ namespace Hl7.Cql.Runtime
 
         #region Count
 
-        public int? CountOrNull<T>(IEnumerable<T>? source) =>
+        public int? Count<T>(IEnumerable<T>? source) =>
             source == null ? null : source.Where(t => t != null).Count();
 
         #endregion
@@ -129,7 +129,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Max
-        public T MaxOrNull<T>(IEnumerable<T>? items)
+        public T Max<T>(IEnumerable<T>? items)
         {
             if (items == null)
                 return default!;
@@ -154,7 +154,7 @@ namespace Hl7.Cql.Runtime
 
         #region Min
 
-        public T MinOrNull<T>(IEnumerable<T>? items)
+        public T Min<T>(IEnumerable<T>? items)
         {
             if (items == null)
                 return default!;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -23,9 +25,9 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
     internal Lazy<CqlValueSet> __HbA1c_Laboratory_Test;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
+    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
@@ -56,9 +58,9 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
         __HbA1c_Laboratory_Test = new Lazy<CqlValueSet>(this.HbA1c_Laboratory_Test_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
@@ -102,8 +104,8 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-		var b_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		var c_ = context.Operators.Interval(a_, b_, true, false);
 		var d_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.1.000", "Measurement Period", c_);
 
@@ -117,7 +119,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -126,7 +128,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -134,10 +136,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -145,10 +147,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -156,7 +158,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -178,10 +180,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)18, (int?)75, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(18, 75, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 		var l_ = this.Diabetes();
 		var m_ = context.Operators.RetrieveByValueSet<Condition>(l_, null);
@@ -193,8 +195,8 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 			return t_;
 		};
-		var o_ = context.Operators.WhereOrNull<Condition>(m_, n_);
-		var p_ = context.Operators.ExistsInList<Condition>(o_);
+		var o_ = context.Operators.Where<Condition>(m_, n_);
+		var p_ = context.Operators.Exists<Condition>(o_);
 		var q_ = context.Operators.And(k_, p_);
 
 		return q_;
@@ -287,11 +289,11 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			};
 			var j_ = QICoreCommon_2_0_000.Latest(i_());
 			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, "day");
+			var l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
 
 			return l_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			var y_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -300,8 +302,8 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 			return aa_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.Last<Observation>(g_);
 
 		return h_;
 	}
@@ -328,7 +330,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	{
 		var a_ = this.Most_Recent_HbA1c();
 		var b_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
-		var c_ = context.Operators.Quantity((decimal?)9m, "%");
+		var c_ = context.Operators.Quantity(9m, "%");
 		var d_ = context.Operators.Greater((b_ as CqlQuantity), c_);
 
 		return d_;
@@ -393,12 +395,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Observation>(e_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
+		var f_ = context.Operators.Exists<Observation>(e_);
 		var g_ = context.Operators.Not(f_);
 
 		return g_;
