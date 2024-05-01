@@ -63,9 +63,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
     internal Lazy<CqlCode[]> __ObservationCategoryCodes;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<CqlDateTime> __November_1_Year_Prior_to_the_Measurement_Period;
     internal Lazy<bool?> __Has_Qualifying_Encounter;
@@ -149,9 +149,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
         __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __November_1_Year_Prior_to_the_Measurement_Period = new Lazy<CqlDateTime>(this.November_1_Year_Prior_to_the_Measurement_Period_Value);
         __Has_Qualifying_Encounter = new Lazy<bool?>(this.Has_Qualifying_Encounter_Value);
@@ -562,7 +562,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -570,10 +570,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -581,10 +581,10 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -592,7 +592,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -1105,9 +1105,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
 		var t_ = Status_1_6_000.isAssessmentPerformed(s_);
 		var u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
-		Tuple_EPUbUfihDVTJZfYVTHGLFUeUf v_(ValueTuple<Observation,Observation,Observation,Observation,Observation> _valueTuple)
+		Tuple_EIPfMaZVhFScjijaOFHiCPVMb v_(ValueTuple<Observation,Observation,Observation,Observation,Observation> _valueTuple)
 		{
-			var ab_ = new Tuple_EPUbUfihDVTJZfYVTHGLFUeUf
+			var ab_ = new Tuple_EIPfMaZVhFScjijaOFHiCPVMb
 			{
 				HOOSLifeQuality = _valueTuple.Item1,
 				HOOSSport = _valueTuple.Item2,
@@ -1118,83 +1118,83 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return ab_;
 		};
-		var w_ = context.Operators.Select<ValueTuple<Observation,Observation,Observation,Observation,Observation>, Tuple_EPUbUfihDVTJZfYVTHGLFUeUf>(u_, v_);
-		bool? x_(Tuple_EPUbUfihDVTJZfYVTHGLFUeUf tuple_epubufihdvtjzfyvthglfueuf)
+		var w_ = context.Operators.Select<ValueTuple<Observation,Observation,Observation,Observation,Observation>, Tuple_EIPfMaZVhFScjijaOFHiCPVMb>(u_, v_);
+		bool? x_(Tuple_EIPfMaZVhFScjijaOFHiCPVMb tuple_eipfmazvhfscjijaofhicpvmb)
 		{
-			var ac_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Effective);
+			var ac_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSLifeQuality?.Effective);
 			var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
 			var ae_ = context.Operators.Start(ad_);
 			var af_ = context.Operators.DateFrom(ae_);
-			var ag_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Effective);
+			var ag_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSSport?.Effective);
 			var ah_ = QICoreCommon_2_0_000.toInterval(ag_);
 			var ai_ = context.Operators.Start(ah_);
 			var aj_ = context.Operators.DateFrom(ai_);
 			var ak_ = context.Operators.SameAs(af_, aj_, "day");
-			var al_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Value);
+			var al_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSSport?.Value);
 			var am_ = context.Operators.Not((bool?)(al_ is null));
 			var an_ = context.Operators.And(ak_, am_);
 			var ap_ = QICoreCommon_2_0_000.toInterval(ac_);
 			var aq_ = context.Operators.Start(ap_);
 			var ar_ = context.Operators.DateFrom(aq_);
-			var as_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Effective);
+			var as_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSActivityScore?.Effective);
 			var at_ = QICoreCommon_2_0_000.toInterval(as_);
 			var au_ = context.Operators.Start(at_);
 			var av_ = context.Operators.DateFrom(au_);
 			var aw_ = context.Operators.SameAs(ar_, av_, "day");
 			var ax_ = context.Operators.And(an_, aw_);
-			var ay_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Value);
+			var ay_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSActivityScore?.Value);
 			var az_ = context.Operators.Not((bool?)(ay_ is null));
 			var ba_ = context.Operators.And(ax_, az_);
 			var bc_ = QICoreCommon_2_0_000.toInterval(ac_);
 			var bd_ = context.Operators.Start(bc_);
 			var be_ = context.Operators.DateFrom(bd_);
-			var bf_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Effective);
+			var bf_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSSymptoms?.Effective);
 			var bg_ = QICoreCommon_2_0_000.toInterval(bf_);
 			var bh_ = context.Operators.Start(bg_);
 			var bi_ = context.Operators.DateFrom(bh_);
 			var bj_ = context.Operators.SameAs(be_, bi_, "day");
 			var bk_ = context.Operators.And(ba_, bj_);
-			var bl_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Value);
+			var bl_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSSymptoms?.Value);
 			var bm_ = context.Operators.Not((bool?)(bl_ is null));
 			var bn_ = context.Operators.And(bk_, bm_);
 			var bp_ = QICoreCommon_2_0_000.toInterval(ac_);
 			var bq_ = context.Operators.Start(bp_);
 			var br_ = context.Operators.DateFrom(bq_);
-			var bs_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Effective);
+			var bs_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSPain?.Effective);
 			var bt_ = QICoreCommon_2_0_000.toInterval(bs_);
 			var bu_ = context.Operators.Start(bt_);
 			var bv_ = context.Operators.DateFrom(bu_);
 			var bw_ = context.Operators.SameAs(br_, bv_, "day");
 			var bx_ = context.Operators.And(bn_, bw_);
-			var by_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Value);
+			var by_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSPain?.Value);
 			var bz_ = context.Operators.Not((bool?)(by_ is null));
 			var ca_ = context.Operators.And(bx_, bz_);
-			var cb_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Value);
+			var cb_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSLifeQuality?.Value);
 			var cc_ = context.Operators.Not((bool?)(cb_ is null));
 			var cd_ = context.Operators.And(ca_, cc_);
 
 			return cd_;
 		};
-		var y_ = context.Operators.Where<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf>(w_, x_);
-		CqlDate z_(Tuple_EPUbUfihDVTJZfYVTHGLFUeUf tuple_epubufihdvtjzfyvthglfueuf)
+		var y_ = context.Operators.Where<Tuple_EIPfMaZVhFScjijaOFHiCPVMb>(w_, x_);
+		CqlDate z_(Tuple_EIPfMaZVhFScjijaOFHiCPVMb tuple_eipfmazvhfscjijaofhicpvmb)
 		{
-			var ce_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSLifeQuality?.Effective);
+			var ce_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSLifeQuality?.Effective);
 			var cf_ = QICoreCommon_2_0_000.toInterval(ce_);
 			var cg_ = context.Operators.Start(cf_);
 			var ch_ = context.Operators.DateFrom(cg_);
-			var ci_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSport?.Effective);
+			var ci_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSSport?.Effective);
 			var cj_ = QICoreCommon_2_0_000.toInterval(ci_);
 			var ck_ = context.Operators.Start(cj_);
 			var cl_ = context.Operators.DateFrom(ck_);
-			var cm_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSActivityScore?.Effective);
+			var cm_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSActivityScore?.Effective);
 			var cn_ = QICoreCommon_2_0_000.toInterval(cm_);
 			var co_ = context.Operators.Start(cn_);
 			var cp_ = context.Operators.DateFrom(co_);
-			var cq_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSSymptoms?.Effective);
+			var cq_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSSymptoms?.Effective);
 			var cr_ = QICoreCommon_2_0_000.toInterval(cq_);
 			var cs_ = context.Operators.Start(cr_);
 			var ct_ = context.Operators.DateFrom(cs_);
-			var cu_ = FHIRHelpers_4_3_000.ToValue(tuple_epubufihdvtjzfyvthglfueuf.HOOSPain?.Effective);
+			var cu_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSPain?.Effective);
 			var cv_ = QICoreCommon_2_0_000.toInterval(cu_);
 			var cw_ = context.Operators.Start(cv_);
 			var cx_ = context.Operators.DateFrom(cw_);
@@ -1210,7 +1210,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return cz_;
 		};
-		var aa_ = context.Operators.Select<Tuple_EPUbUfihDVTJZfYVTHGLFUeUf, CqlDate>(y_, z_);
+		var aa_ = context.Operators.Select<Tuple_EIPfMaZVhFScjijaOFHiCPVMb, CqlDate>(y_, z_);
 
 		return aa_;
 	}
@@ -1417,9 +1417,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_CSQNXjbdUJCRVLSGAJQOISbPM h_(ValueTuple<Observation,Observation> _valueTuple)
+		Tuple_DDTAOdcFieSJbGgRLLZPYbGQb h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
-			var n_ = new Tuple_CSQNXjbdUJCRVLSGAJQOISbPM
+			var n_ = new Tuple_DDTAOdcFieSJbGgRLLZPYbGQb
 			{
 				PROMIS10MentalScore = _valueTuple.Item1,
 				PROMIS10PhysicalScore = _valueTuple.Item2,
@@ -1427,35 +1427,35 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(g_, h_);
-		bool? j_(Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
+		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_DDTAOdcFieSJbGgRLLZPYbGQb>(g_, h_);
+		bool? j_(Tuple_DDTAOdcFieSJbGgRLLZPYbGQb tuple_ddtaodcfiesjbggrllzpybgqb)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
+			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10MentalScore?.Effective);
 			var p_ = QICoreCommon_2_0_000.toInterval(o_);
 			var q_ = context.Operators.Start(p_);
 			var r_ = context.Operators.DateFrom(q_);
-			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Effective);
+			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10PhysicalScore?.Effective);
 			var t_ = QICoreCommon_2_0_000.toInterval(s_);
 			var u_ = context.Operators.Start(t_);
 			var v_ = context.Operators.DateFrom(u_);
 			var w_ = context.Operators.SameAs(r_, v_, "day");
-			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Value);
+			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10PhysicalScore?.Value);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
 			var z_ = context.Operators.And(w_, y_);
-			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Value);
+			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10MentalScore?.Value);
 			var ab_ = context.Operators.Not((bool?)(aa_ is null));
 			var ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
 		};
-		var k_ = context.Operators.Where<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM>(i_, j_);
-		CqlDate l_(Tuple_CSQNXjbdUJCRVLSGAJQOISbPM tuple_csqnxjbdujcrvlsgajqoisbpm)
+		var k_ = context.Operators.Where<Tuple_DDTAOdcFieSJbGgRLLZPYbGQb>(i_, j_);
+		CqlDate l_(Tuple_DDTAOdcFieSJbGgRLLZPYbGQb tuple_ddtaodcfiesjbggrllzpybgqb)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10MentalScore?.Effective);
+			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10MentalScore?.Effective);
 			var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
 			var af_ = context.Operators.Start(ae_);
 			var ag_ = context.Operators.DateFrom(af_);
-			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_csqnxjbdujcrvlsgajqoisbpm.PROMIS10PhysicalScore?.Effective);
+			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10PhysicalScore?.Effective);
 			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
 			var aj_ = context.Operators.Start(ai_);
 			var ak_ = context.Operators.DateFrom(aj_);
@@ -1468,7 +1468,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return am_;
 		};
-		var m_ = context.Operators.Select<Tuple_CSQNXjbdUJCRVLSGAJQOISbPM, CqlDate>(k_, l_);
+		var m_ = context.Operators.Select<Tuple_DDTAOdcFieSJbGgRLLZPYbGQb, CqlDate>(k_, l_);
 
 		return m_;
 	}
@@ -1565,9 +1565,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _valueTuple)
+		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
-			var n_ = new Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
+			var n_ = new Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH
 			{
 				VR12MentalAssessment = _valueTuple.Item1,
 				VR12PhysicalAssessment = _valueTuple.Item2,
@@ -1575,35 +1575,35 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
-		bool? j_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
+		bool? j_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective);
 			var p_ = QICoreCommon_2_0_000.toInterval(o_);
 			var q_ = context.Operators.Start(p_);
 			var r_ = context.Operators.DateFrom(q_);
-			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective);
 			var t_ = QICoreCommon_2_0_000.toInterval(s_);
 			var u_ = context.Operators.Start(t_);
 			var v_ = context.Operators.DateFrom(u_);
 			var w_ = context.Operators.SameAs(r_, v_, "day");
-			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Value);
+			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Value);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
 			var z_ = context.Operators.And(w_, y_);
-			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Value);
+			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Value);
 			var ab_ = context.Operators.Not((bool?)(aa_ is null));
 			var ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
 		};
-		var k_ = context.Operators.Where<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
-		CqlDate l_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var k_ = context.Operators.Where<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(i_, j_);
+		CqlDate l_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective);
 			var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
 			var af_ = context.Operators.Start(ae_);
 			var ag_ = context.Operators.DateFrom(af_);
-			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective);
 			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
 			var aj_ = context.Operators.Start(ai_);
 			var ak_ = context.Operators.DateFrom(aj_);
@@ -1616,7 +1616,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return am_;
 		};
-		var m_ = context.Operators.Select<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(k_, l_);
+		var m_ = context.Operators.Select<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH, CqlDate>(k_, l_);
 
 		return m_;
 	}
@@ -1713,9 +1713,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ h_(ValueTuple<Observation,Observation> _valueTuple)
+		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation,Observation> _valueTuple)
 		{
-			var n_ = new Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ
+			var n_ = new Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH
 			{
 				VR12MentalAssessment = _valueTuple.Item1,
 				VR12PhysicalAssessment = _valueTuple.Item2,
@@ -1723,35 +1723,35 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(g_, h_);
-		bool? j_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
+		bool? j_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective);
 			var p_ = QICoreCommon_2_0_000.toInterval(o_);
 			var q_ = context.Operators.Start(p_);
 			var r_ = context.Operators.DateFrom(q_);
-			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			var s_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective);
 			var t_ = QICoreCommon_2_0_000.toInterval(s_);
 			var u_ = context.Operators.Start(t_);
 			var v_ = context.Operators.DateFrom(u_);
 			var w_ = context.Operators.SameAs(r_, v_, "day");
-			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Value);
+			var x_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Value);
 			var y_ = context.Operators.Not((bool?)(x_ is null));
 			var z_ = context.Operators.And(w_, y_);
-			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Value);
+			var aa_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Value);
 			var ab_ = context.Operators.Not((bool?)(aa_ is null));
 			var ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
 		};
-		var k_ = context.Operators.Where<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ>(i_, j_);
-		CqlDate l_(Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ tuple_awlefjmgfwigjkoeokkqfqij)
+		var k_ = context.Operators.Where<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(i_, j_);
+		CqlDate l_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12MentalAssessment?.Effective);
+			var ad_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective);
 			var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
 			var af_ = context.Operators.Start(ae_);
 			var ag_ = context.Operators.DateFrom(af_);
-			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_awlefjmgfwigjkoeokkqfqij.VR12PhysicalAssessment?.Effective);
+			var ah_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective);
 			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
 			var aj_ = context.Operators.Start(ai_);
 			var ak_ = context.Operators.DateFrom(aj_);
@@ -1764,7 +1764,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return am_;
 		};
-		var m_ = context.Operators.Select<Tuple_aWLEFJMGFWIGJKOEOKKQfQiJ, CqlDate>(k_, l_);
+		var m_ = context.Operators.Select<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH, CqlDate>(k_, l_);
 
 		return m_;
 	}

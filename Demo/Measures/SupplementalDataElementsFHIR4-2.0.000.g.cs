@@ -27,7 +27,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     internal Lazy<CqlValueSet> __Race;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
@@ -44,7 +44,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
         __Race = new Lazy<CqlValueSet>(this.Race_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
@@ -156,13 +156,13 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
 	{
 		var a_ = this.Payer();
 		var b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
-		Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG c_(Coverage Payer)
+		Tuple_CaKghTfWMNOTHSWhifjFZOVYO c_(Coverage Payer)
 		{
-			var e_ = new Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG
+			var e_ = new Tuple_CaKghTfWMNOTHSWhifjFZOVYO
 			{
 				code = Payer?.Type,
 				period = Payer?.Period,
@@ -170,13 +170,13 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return e_;
 		};
-		var d_ = context.Operators.Select<Coverage, Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, c_);
+		var d_ = context.Operators.Select<Coverage, Tuple_CaKghTfWMNOTHSWhifjFZOVYO>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -259,15 +259,11 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			};
 			if (b_())
 			{
-				string j_ = null;
-
-				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", j_, "Male");
+				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Male");
 			}
 			else if (c_())
 			{
-				string k_ = null;
-
-				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", k_, "Female");
+				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Female");
 			}
 			else
 			{

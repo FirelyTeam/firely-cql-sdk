@@ -33,7 +33,7 @@ public class PCMaternal_5_16_000
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Age_Range;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounter_with_Age_Range;
-    internal Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>> __Variable_Calculated_Gestational_Age;
+    internal Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>> __Variable_Calculated_Gestational_Age;
 
     #endregion
     public PCMaternal_5_16_000(CqlContext context)
@@ -56,7 +56,7 @@ public class PCMaternal_5_16_000
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Encounter_with_Age_Range = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Age_Range_Value);
         __Delivery_Encounter_with_Age_Range = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounter_with_Age_Range_Value);
-        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM>>(this.Variable_Calculated_Gestational_Age_Value);
+        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>>(this.Variable_Calculated_Gestational_Age_Value);
     }
     #region Dependencies
 
@@ -697,13 +697,13 @@ public class PCMaternal_5_16_000
 		return e_;
 	}
 
-	private IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age_Value()
+	private IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age_Value()
 	{
 		var a_ = this.Delivery_Encounter_with_Age_Range();
-		Tuple_CDQdAjUGdePbWTVfePeZUXKFM b_(Encounter DeliveryEncounter)
+		Tuple_QRZgNJCaGQEYIeOSBhjLZNSO b_(Encounter DeliveryEncounter)
 		{
 			var d_ = this.calculatedGestationalAge(DeliveryEncounter);
-			var e_ = new Tuple_CDQdAjUGdePbWTVfePeZUXKFM
+			var e_ = new Tuple_QRZgNJCaGQEYIeOSBhjLZNSO
 			{
 				EncounterID = DeliveryEncounter?.IdElement?.Value,
 				CalculatedCGA = d_,
@@ -711,13 +711,13 @@ public class PCMaternal_5_16_000
 
 			return e_;
 		};
-		var c_ = context.Operators.Select<Encounter, Tuple_CDQdAjUGdePbWTVfePeZUXKFM>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<Tuple_CDQdAjUGdePbWTVfePeZUXKFM> Variable_Calculated_Gestational_Age() => 
+	public IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
     [CqlDeclaration("lastEstimatedGestationalAge")]

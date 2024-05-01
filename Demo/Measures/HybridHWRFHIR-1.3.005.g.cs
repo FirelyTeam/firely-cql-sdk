@@ -47,7 +47,7 @@ public class HybridHWRFHIR_1_3_005
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounters;
@@ -89,7 +89,7 @@ public class HybridHWRFHIR_1_3_005
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Inpatient_Encounters = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounters_Value);
@@ -330,7 +330,7 @@ public class HybridHWRFHIR_1_3_005
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -338,7 +338,7 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -555,9 +555,9 @@ public class HybridHWRFHIR_1_3_005
 		var c_ = this.Medicare_payer();
 		var d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
-		Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV f_(ValueTuple<Encounter,Coverage> _valueTuple)
+		Tuple_EFSKhGUTUCLEXZENTURVLjeND f_(ValueTuple<Encounter,Coverage> _valueTuple)
 		{
-			var l_ = new Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV
+			var l_ = new Tuple_EFSKhGUTUCLEXZENTURVLjeND
 			{
 				InpatientEncounter = _valueTuple.Item1,
 				Payer = _valueTuple.Item2,
@@ -565,16 +565,16 @@ public class HybridHWRFHIR_1_3_005
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,Coverage>, Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(e_, f_);
-		bool? h_(Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv)
+		var g_ = context.Operators.Select<ValueTuple<Encounter,Coverage>, Tuple_EFSKhGUTUCLEXZENTURVLjeND>(e_, f_);
+		bool? h_(Tuple_EFSKhGUTUCLEXZENTURVLjeND tuple_efskhgutuclexzenturvljend)
 		{
-			var m_ = FHIRHelpers_4_0_001.ToString(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.StatusElement);
+			var m_ = FHIRHelpers_4_0_001.ToString(tuple_efskhgutuclexzenturvljend.InpatientEncounter?.StatusElement);
 			var n_ = context.Operators.Equal(m_, "finished");
-			var o_ = this.HospitalizationWithObservation(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter);
+			var o_ = this.HospitalizationWithObservation(tuple_efskhgutuclexzenturvljend.InpatientEncounter);
 			var p_ = this.LengthInDays(o_);
 			var q_ = context.Operators.Less(p_, 365);
 			var r_ = context.Operators.And(n_, q_);
-			var s_ = FHIRHelpers_4_0_001.ToInterval(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.Period);
+			var s_ = FHIRHelpers_4_0_001.ToInterval(tuple_efskhgutuclexzenturvljend.InpatientEncounter?.Period);
 			var t_ = context.Operators.End(s_);
 			var u_ = this.Measurement_Period();
 			var v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
@@ -589,10 +589,10 @@ public class HybridHWRFHIR_1_3_005
 
 			return ae_;
 		};
-		var i_ = context.Operators.Where<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(g_, h_);
-		Encounter j_(Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV tuple_czdryxljaejapsirauhdxvhpv) => 
-			tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter;
-		var k_ = context.Operators.Select<Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(i_, j_);
+		var i_ = context.Operators.Where<Tuple_EFSKhGUTUCLEXZENTURVLjeND>(g_, h_);
+		Encounter j_(Tuple_EFSKhGUTUCLEXZENTURVLjeND tuple_efskhgutuclexzenturvljend) => 
+			tuple_efskhgutuclexzenturvljend.InpatientEncounter;
+		var k_ = context.Operators.Select<Tuple_EFSKhGUTUCLEXZENTURVLjeND, Encounter>(i_, j_);
 
 		return k_;
 	}

@@ -50,17 +50,15 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((period is null))
 			{
-				CqlInterval<CqlDateTime> b_ = null;
-
-				return b_;
+				return null;
 			}
 			else
 			{
-				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
-				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
+				var b_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
+				var c_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
+				var d_ = context.Operators.Interval(b_, c_, true, true);
 
-				return e_;
+				return d_;
 			};
 		};
 
@@ -74,17 +72,15 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((range is null))
 			{
-				CqlInterval<CqlQuantity> b_ = null;
-
-				return b_;
+				return null;
 			}
 			else
 			{
-				var c_ = this.ToQuantity(range?.Low);
-				var d_ = this.ToQuantity(range?.High);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
+				var b_ = this.ToQuantity(range?.Low);
+				var c_ = this.ToQuantity(range?.High);
+				var d_ = context.Operators.Interval(b_, c_, true, true);
 
-				return e_;
+				return d_;
 			};
 		};
 
