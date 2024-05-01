@@ -1424,7 +1424,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public bool? HasStart(CqlInterval<CqlDateTime> period)
 	{
 		var a_ = context.Operators.Start(period);
-		var c_ = context.Operators.Minimum<CqlDateTime>();
+		var c_ = context.Operators.MinValue<CqlDateTime>();
 		var d_ = context.Operators.Equal(a_, c_);
 		var e_ = context.Operators.Or((bool?)(a_ is null), d_);
 		var f_ = context.Operators.Not(e_);
@@ -1436,7 +1436,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public bool? HasEnd(CqlInterval<CqlDateTime> period)
 	{
 		var a_ = context.Operators.End(period);
-		var c_ = context.Operators.Maximum<CqlDateTime>();
+		var c_ = context.Operators.MaxValue<CqlDateTime>();
 		var d_ = context.Operators.Equal(a_, c_);
 		var e_ = context.Operators.Or((bool?)(a_ is null), d_);
 		var f_ = context.Operators.Not(e_);

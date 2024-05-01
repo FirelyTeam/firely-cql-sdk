@@ -63,7 +63,7 @@ public class NCQACQLBase_1_0_0
 					{
 						if ((context.Operators.Start(I) is null))
 						{
-							var o_ = context.Operators.Minimum<CqlDate>();
+							var o_ = context.Operators.MinValue<CqlDate>();
 
 							return o_;
 						}
@@ -131,7 +131,7 @@ public class NCQACQLBase_1_0_0
 					{
 						if ((context.Operators.Start(I) is null))
 						{
-							var o_ = context.Operators.Minimum<CqlDateTime>();
+							var o_ = context.Operators.MinValue<CqlDateTime>();
 
 							return o_;
 						}

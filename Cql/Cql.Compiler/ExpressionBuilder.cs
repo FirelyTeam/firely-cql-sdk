@@ -1881,7 +1881,7 @@ namespace Hl7.Cql.Compiler
                 return Expression.Constant(false, typeof(bool));
 
             var compare = Expression.Equal(operand, Expression.Constant(null));
-            var asNullableBool = compare.NewAssignToTypeExpression<bool>();
+            var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
             return asNullableBool;
         }
     }

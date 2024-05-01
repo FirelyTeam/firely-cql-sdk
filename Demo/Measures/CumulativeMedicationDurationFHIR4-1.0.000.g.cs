@@ -634,7 +634,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					var i_ = context.Operators.End(h_);
 					var k_ = FHIRHelpers_4_0_001.ToInterval((g_?.Timing?.Repeat?.Bounds as Period));
 					var l_ = context.Operators.End(k_);
-					var m_ = context.Operators.Maximum<CqlDateTime>();
+					var m_ = context.Operators.MaxValue<CqlDateTime>();
 					var n_ = context.Operators.Equal(l_, m_);
 					var o_ = context.Operators.Or((bool?)(i_ is null), n_);
 					var p_ = context.Operators.Not(o_);
