@@ -138,9 +138,10 @@ public class CSharpFormatterTests
 
         // NOTE: We do not show the declaring type name for methods
         TestTextWriter tw = new TestTextWriter(new StringWriter());
+        MethodCSharpFormat.Default.WriteToTextWriter(tw, m);
         Assert.AreEqual(
             expected: "System.Collections.Generic.IList<System.Int32> NonGenericMethod(System.Int32 a, System.Int32 b, System.Int32 c)",
-            actual: m.WriteCSharp(textWriter:tw)!);
+            actual: tw.ToString());
 
         Assert.AreEqual(
             """
@@ -150,19 +151,19 @@ public class CSharpFormatterTests
 
         // Delphi-ish style to demonstrate flexibility
         tw = new TestTextWriter(new StringWriter());
+        var methodCSharpFormat = new MethodCSharpFormat(
+            MethodFormat: method => $"function {method.Name}({method.Parameters}): {method.ReturnType};",
+            ParameterFormat: new (
+                ParameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
+                TypeFormat: new(
+                    UseKeywords:true,
+                    NoNamespaces:true)),
+            ParameterSeparator: "; "
+        );
+        methodCSharpFormat.WriteToTextWriter(tw, m);
         Assert.AreEqual(
             expected: "function NonGenericMethod(a: int; b: int; c: int): IList<int>;",
-            actual: m.WriteCSharp(
-                textWriter: tw,
-                methodFormatterOptions: new(
-                    MethodFormat: method => $"function {method.Name}({method.Parameters}): {method.ReturnType};",
-                    ParameterFormat: new (
-                        ParameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
-                        TypeFormat: new(
-                            UseKeywords:true,
-                            NoNamespaces:true)),
-                    ParameterSeparator: "; "
-                )).ToString());
+            actual: tw.ToString());
 
         Assert.AreEqual(
             """
