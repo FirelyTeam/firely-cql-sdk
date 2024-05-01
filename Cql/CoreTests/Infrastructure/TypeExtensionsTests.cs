@@ -245,10 +245,18 @@ public class TypeExtensionsTests
     {
         void Method();
 
-        IList<int> Join(
+        IList<int> NonGenericMethod(
             int a,
             int b,
             int c);
+
+        IList<T> GenericMethod<T1, T2, T3, T>(
+            T1 a,
+            T2[] b,
+            IEnumerable<T3>[] c)
+            where T1: struct, IComparable
+            where T2: notnull, new()
+            where T3: class, new();
     }
 
     public abstract class MyGenericClassBase<T> :  IGenericInterface<T>

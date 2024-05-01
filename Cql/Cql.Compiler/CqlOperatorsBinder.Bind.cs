@@ -38,13 +38,13 @@ internal partial class CqlOperatorsBinder
                          .AsReadOnly())
                 .AsReadOnly();
 
-    private static readonly TypeFormatterOptions TypeFormatterOptions = new(UseKeywords:true, NoNamespaces:true);
+    private static readonly TypeCSharpFormat TypeCSharpFormat = new(UseKeywords:true, NoNamespaces:true);
 
-    private static readonly MethodFormatterOptions CSharpWriteMethodOptions = new (
-        methodFormat: method => $"\n\t* {method.Name}({method.Parameters})",
-        parameterFormatting: new (
-            parameterFormat: parameter => $"{parameter.Type}",
-            typeFormatting: TypeFormatterOptions));
+    private static readonly MethodCSharpFormat MethodCSharpFormat = new (
+        MethodFormat: method => $"\n\t* {method.Name}({method.Parameters})",
+        ParameterFormat: new (
+            ParameterFormat: parameter => $"{parameter.Type}",
+            TypeFormat: TypeCSharpFormat));
 
     ///  <summary>
     ///
@@ -112,7 +112,7 @@ internal partial class CqlOperatorsBinder
 
                 var inputText = InputMethodAndParametersToString();
                 var scoredCandidatesText = string.Concat(
-                    scoredCandidates.Select(t => $"{t.candidate.method.WriteCSharp(CSharpWriteMethodOptions)} ({t.score})"));
+                    scoredCandidates.Select(t => $"{t.candidate.method.WriteCSharp(MethodCSharpFormat)} ({t.score})"));
 
                 _logger?.LogDebug(
                     "Multiple candidates found for method {input}\nPicking the top item with lowest score: {candidatesAndScore}",
@@ -133,7 +133,7 @@ internal partial class CqlOperatorsBinder
                 string.Concat(
                     ICqlOperatorsMethods
                         .GetMethodsByName(methodName)
-                        .Select(t => t.method.WriteCSharp(CSharpWriteMethodOptions))
+                        .Select(t => t.method.WriteCSharp(MethodCSharpFormat))
                 );
             return $$"""
                      Mo suitable method could be bound on:{{inputText}}
@@ -142,7 +142,12 @@ internal partial class CqlOperatorsBinder
         }
 
         string InputMethodAndParametersToString() =>
-            $"{methodName} ({methodArguments.SelectToArray(a => a.Type.WriteCSharp(CSharpWriteMethodOptions.ParameterFormatterOptions.TypeFormatterOptions))})";
+            $"{methodName} ({
+                string.Join(
+                    ", ",
+                    methodArguments
+                        .SelectToArray(a => a.Type.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat).ToString()))
+            })";
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {

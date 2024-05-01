@@ -231,7 +231,7 @@ namespace Hl7.Cql.Conversion
                 lines);
         }
 
-        private static readonly TypeFormatterOptions TypeFormatterOptions = new(
+        private static readonly TypeCSharpFormat TypeCSharpFormat = new(
             NoNamespaces: true,
             UseKeywords: false);
 
@@ -251,7 +251,7 @@ namespace Hl7.Cql.Conversion
                     { IsValueType: true } => "struct ",
                     _                     => ""
                 },
-                t.WriteCSharp(TypeFormatterOptions).ToString()!);
+                t.WriteCSharp(TypeCSharpFormat).ToString()!);
 
         /// <inheritdoc />
         void IDisposable.Dispose()

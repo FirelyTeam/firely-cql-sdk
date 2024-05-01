@@ -74,7 +74,7 @@ public class CSharpFormatterTests
             (typeof(EmptyStruct.Nested1.NestedFunc<,>), "EmptyStruct.Nested1.NestedFunc<in TIn,out TOut>")
         ];
 
-        var typeToCSharpStringOptions = new TypeFormatterOptions(NoNamespaces: true, UseKeywords: true);
+        var typeToCSharpStringOptions = new TypeCSharpFormat(NoNamespaces: true, UseKeywords: true);
         foreach (var (type, expected) in testCases)
         {
             var actual = type.WriteCSharp(typeFormatterOptions: typeToCSharpStringOptions).ToString()!;
@@ -121,42 +121,52 @@ public class CSharpFormatterTests
     }
 
     [TestMethod]
-    public void MethodToCSharpString_ShouldReturnCorrectResults()
+    public void MethodToCSharpString_GenericGenericDefinition_ShouldReturnCorrectResults()
     {
-        MethodInfo m = ReflectionUtility.MethodOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.Join(0, 0, 0));
+        MethodInfo m = ReflectionUtility.GenericMethodDefinitionOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.GenericMethod<decimal,int,TypeExtensionsTests.MyDerivedClass,char>(default!, default!, default!));
+
+        Assert.AreEqual(
+            expected: "IList<T> GenericMethod<T1, T2, T3, T>(T1 a, T2[] b, IEnumerable<T3>[] c)",
+            actual: m.WriteCSharp().ToString()!);
+    }
+
+    [TestMethod]
+    public void MethodToCSharpString_NonGeneric_ShouldReturnCorrectResults()
+    {
+        MethodInfo m = ReflectionUtility.MethodOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.NonGenericMethod(0, 0, 0));
 
 
         // NOTE: We do not show the declaring type name for methods
         TestTextWriter tw = new TestTextWriter(new StringWriter());
         Assert.AreEqual(
-            expected: "System.Collections.Generic.IList<System.Int32> Join(System.Int32 a, System.Int32 b, System.Int32 c)",
+            expected: "System.Collections.Generic.IList<System.Int32> NonGenericMethod(System.Int32 a, System.Int32 b, System.Int32 c)",
             actual: m.WriteCSharp(textWriter:tw).ToString()!);
 
         Assert.AreEqual(
             """
-            System.Collections.Generic.IList|<|System.Int32|>| |Join|(|System.Int32| |a|, |System.Int32| |b|, |System.Int32| |c|)
+            System.Collections.Generic.IList|<|System.Int32|>| |NonGenericMethod|(|System.Int32| |a|, |System.Int32| |b|, |System.Int32| |c|)
             """,
             string.Join('|', tw.Tokens));
 
         // Delphi-ish style to demonstrate flexibility
         tw = new TestTextWriter(new StringWriter());
         Assert.AreEqual(
-            expected: "function Join(a: int; b: int; c: int): IList<int>;",
+            expected: "function NonGenericMethod(a: int; b: int; c: int): IList<int>;",
             actual: m.WriteCSharp(
                 textWriter: tw,
                 methodFormatterOptions: new(
-                    methodFormat: method => $"function {method.Name}({method.Parameters}): {method.ReturnType};",
-                    parameterFormatting: new (
-                        parameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
-                        typeFormatting: new(
+                    MethodFormat: method => $"function {method.Name}({method.Parameters}): {method.ReturnType};",
+                    ParameterFormat: new (
+                        ParameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
+                        TypeFormat: new(
                             UseKeywords:true,
                             NoNamespaces:true)),
-                    parameterSeparator: "; "
+                    ParameterSeparator: "; "
                     )).ToString()!);
 
         Assert.AreEqual(
             """
-            function |Join|(|a|: |int|; |b|: |int|; |c|: |int|): |IList|<|int|>|;
+            function |NonGenericMethod|(|a|: |int|; |b|: |int|; |c|: |int|): |IList|<|int|>|;
             """,
             string.Join('|', tw.Tokens));
     }

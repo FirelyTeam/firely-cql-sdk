@@ -132,11 +132,11 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        private static readonly TypeFormatterOptions TypeToCSharpStringOptions = TypeFormatterOptions.Default;
+        private static readonly TypeCSharpFormat TypeCSharpFormat = TypeCSharpFormat.Default;
 
         internal static string PrettyTypeName(Type type)
         {
-            string result = type.WriteCSharp(TypeToCSharpStringOptions).ToString()!;
+            string result = type.WriteCSharp(TypeCSharpFormat).ToString()!;
             return result;
         }
     }
