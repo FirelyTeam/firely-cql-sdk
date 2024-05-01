@@ -304,7 +304,7 @@ Hl7.Cql.Operators.ICqlOperators.LowBoundary(Hl7.Cql.Primitives.CqlTime? input, i
 Hl7.Cql.Operators.ICqlOperators.Lower(string! argument) -> string?
 Hl7.Cql.Operators.ICqlOperators.Matches(string! source, string! pattern) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Max<T>(System.Collections.Generic.IEnumerable<T>? items) -> T
-Hl7.Cql.Operators.ICqlOperators.Maximum<T>() -> T
+Hl7.Cql.Operators.ICqlOperators.MaxValue<T>() -> T
 Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<decimal?>! source) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<int?>! source) -> int?
 Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<long?>! source) -> long?
@@ -332,7 +332,7 @@ Hl7.Cql.Operators.ICqlOperators.MeetsBefore(Hl7.Cql.Primitives.CqlInterval<long?
 Hl7.Cql.Operators.ICqlOperators.Message<T>(T source, string! code, string! severity, string! message) -> T
 Hl7.Cql.Operators.ICqlOperators.MessageReceived -> System.EventHandler<Hl7.Cql.Operators.MessageEventArgs!>?
 Hl7.Cql.Operators.ICqlOperators.Min<T>(System.Collections.Generic.IEnumerable<T>? items) -> T
-Hl7.Cql.Operators.ICqlOperators.Minimum<T>() -> T
+Hl7.Cql.Operators.ICqlOperators.MinValue<T>() -> T
 Hl7.Cql.Operators.ICqlOperators.Mode<T>(System.Collections.Generic.IEnumerable<T>? typedSource) -> T
 Hl7.Cql.Operators.ICqlOperators.Modulo(decimal? left, decimal? right) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Modulo(Hl7.Cql.Primitives.CqlQuantity! left, Hl7.Cql.Primitives.CqlQuantity! right) -> Hl7.Cql.Primitives.CqlQuantity?

@@ -122,7 +122,7 @@ partial class CqlOperatorsBinder
     {
         if (typeConstant is ConstantExpression { Value: Type t })
         {
-            var call = BindToGenericMethod(nameof(ICqlOperators.Minimum), [t]);
+            var call = BindToGenericMethod(nameof(ICqlOperators.MinValue), [t]);
             return call;
         }
 
@@ -133,7 +133,7 @@ partial class CqlOperatorsBinder
     {
         if (typeConstant is ConstantExpression { Value: Type t })
         {
-            var call = BindToGenericMethod(nameof(ICqlOperators.Maximum), [t]);
+            var call = BindToGenericMethod(nameof(ICqlOperators.MaxValue), [t]);
             return call;
         }
 

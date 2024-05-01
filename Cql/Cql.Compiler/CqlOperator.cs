@@ -14,10 +14,7 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal static class CqlOperator
     {
-        public const string Ratio = nameof(Ratio);
         public const string Retrieve = nameof(Retrieve);
-        public const string MinValue = nameof(MinValue);
-        public const string MaxValue = nameof(MaxValue);
     }
 }
 

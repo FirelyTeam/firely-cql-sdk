@@ -204,7 +204,6 @@ Global
 		{1C19BCFA-9965-49EC-952B-DBC753E219A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C19BCFA-9965-49EC-952B-DBC753E219A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{280C6857-E1CC-4B4A-9552-13B5AA5932E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{280C6857-E1CC-4B4A-9552-13B5AA5932E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{280C6857-E1CC-4B4A-9552-13B5AA5932E0}.FullDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{280C6857-E1CC-4B4A-9552-13B5AA5932E0}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
 		{280C6857-E1CC-4B4A-9552-13B5AA5932E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -279,5 +278,8 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 		FileExplorer = |build\|docs\|LibrarySets\|Demo\Measures\|Demo\Measures-cms\
+	EndGlobalSection
+EndGlobal
+\|LibrarySets\|Demo\Measures\|Demo\Measures-cms\
 	EndGlobalSection
 EndGlobal

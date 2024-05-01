@@ -254,14 +254,13 @@ namespace Hl7.Cql.Compiler
                     Expression? expression = element switch
                     {
                         //@formatter:off
-                        Expand e   => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
-                        Flatten e  => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                        MaxValue e => BindCqlOperator(CqlOperator.MaxValue, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
-                        MinValue e => BindCqlOperator(CqlOperator.MinValue, Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
-                        Ratio e    => BindCqlOperator(CqlOperator.Ratio, e.numerator, e.denominator),
-                        ToList e   => BindCqlOperator(nameof(ICqlOperators.ToList), e.operand!),
-                        Width e    => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
-
+                        Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."), // BindCqlOperator(CqlOperator.Ratio, e.numerator, e.denominator),
+                        Expand e           => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
+                        Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
+                        MaxValue e         => BindCqlOperator(nameof(ICqlOperators.MaxValue), Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        MinValue e         => BindCqlOperator(nameof(ICqlOperators.MinValue), Expression.Constant(_typeResolver.ResolveType(e.valueType!.Name), typeof(Type))),
+                        ToList e           => BindCqlOperator(nameof(ICqlOperators.ToList), e.operand!),
+                        Width e            => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
                         Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
                         As e               => As(e),
                         Case e             => Case(e),

@@ -87,7 +87,6 @@ namespace Hl7.Cql.Compiler
                 "SortBy"                       => SortBy(args[0], args[1], args[2]),
                 "Where"                        => Where(args[0], args[1]),
                 "Width"                        => Width(args[0]),
-                "Ratio" or "PropertyOrDefault" => throw new NotSupportedException($"Operator {methodName} is not supported by this binding."),
                 _                              => BindToBestMethodOverload(methodName, args),
                 // @formatter:om
             };

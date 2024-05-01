@@ -335,7 +335,7 @@ namespace Hl7.Cql.Operators
         decimal? LowBoundary(decimal? input, int? precision);
         string? Lower(string argument);
         bool? Matches(string source, string pattern);
-        T Maximum<T>();
+        T MaxValue<T>();
         T Max<T>(IEnumerable<T>? items);
         decimal? Median(IEnumerable<decimal?> source);
         int? Median(IEnumerable<int?> source);
@@ -365,7 +365,7 @@ namespace Hl7.Cql.Operators
 
         event EventHandler<MessageEventArgs>? MessageReceived;
 
-        T Minimum<T>();
+        T MinValue<T>();
         T Min<T>(IEnumerable<T>? items);
         T Mode<T>(IEnumerable<T>? typedSource);
         CqlQuantity? Modulo(CqlQuantity left, CqlQuantity right);
