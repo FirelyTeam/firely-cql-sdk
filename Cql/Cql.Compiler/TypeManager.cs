@@ -13,7 +13,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 
