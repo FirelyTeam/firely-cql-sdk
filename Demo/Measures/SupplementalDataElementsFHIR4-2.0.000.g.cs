@@ -259,15 +259,11 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			};
 			if (b_())
 			{
-				string j_ = null;
-
-				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", j_, "Male");
+				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Male");
 			}
 			else if (c_())
 			{
-				string k_ = null;
-
-				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", k_, "Female");
+				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Female");
 			}
 			else
 			{

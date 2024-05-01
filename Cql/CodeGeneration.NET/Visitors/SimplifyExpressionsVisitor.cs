@@ -76,6 +76,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 NewExpression or
                 MemberExpression or
                 ElmAsExpression or
+                DefaultExpression or
                 NullConditionalMemberExpression => base.Visit(node),
 
                 // These expressions require special handling
@@ -146,7 +147,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return node.NodeType switch
             {
                 // Don't simplify simple converts.
-                ExpressionType.Convert or ExpressionType.TypeAs or ExpressionType.Default => base.VisitUnary(node),
+                ExpressionType.Convert or ExpressionType.TypeAs => base.VisitUnary(node),
 
                 // Don't simplify throw expressions
                 ExpressionType.Throw => base.VisitUnary(node),

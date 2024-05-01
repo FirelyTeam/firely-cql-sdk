@@ -74,170 +74,161 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (onset is FhirString)
 			{
-				CqlInterval<CqlDateTime> j_ = null;
-				var k_ = context.Operators.Message<CqlInterval<CqlDateTime>>(j_, "1", "Error", "Cannot compute an interval from a String value");
+				var j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
 
-				return k_;
+				return j_;
 			}
 			else
 			{
-				CqlInterval<CqlDate> l_()
+				CqlInterval<CqlDate> k_()
 				{
 					if (onset is Age)
 					{
-						var s_ = this.Patient();
-						var t_ = FHIRHelpers_4_0_001.ToDate(s_?.BirthDateElement);
-						var u_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
-						var v_ = context.Operators.Add(t_, u_);
-						var x_ = FHIRHelpers_4_0_001.ToDate(s_?.BirthDateElement);
-						var z_ = context.Operators.Add(x_, u_);
-						var aa_ = context.Operators.Quantity(1m, "year");
-						var ab_ = context.Operators.Add(z_, aa_);
-						var ac_ = context.Operators.Interval(v_, ab_, true, false);
+						var r_ = this.Patient();
+						var s_ = FHIRHelpers_4_0_001.ToDate(r_?.BirthDateElement);
+						var t_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
+						var u_ = context.Operators.Add(s_, t_);
+						var w_ = FHIRHelpers_4_0_001.ToDate(r_?.BirthDateElement);
+						var y_ = context.Operators.Add(w_, t_);
+						var z_ = context.Operators.Quantity(1m, "year");
+						var aa_ = context.Operators.Add(y_, z_);
+						var ab_ = context.Operators.Interval(u_, aa_, true, false);
 
-						return ac_;
+						return ab_;
 					}
 					else if (onset is Range)
 					{
-						var ad_ = this.Patient();
-						var ae_ = FHIRHelpers_4_0_001.ToDate(ad_?.BirthDateElement);
-						var af_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
-						var ag_ = context.Operators.Add(ae_, af_);
-						var ai_ = FHIRHelpers_4_0_001.ToDate(ad_?.BirthDateElement);
-						var aj_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
-						var ak_ = context.Operators.Add(ai_, aj_);
-						var al_ = context.Operators.Quantity(1m, "year");
-						var am_ = context.Operators.Add(ak_, al_);
-						var an_ = context.Operators.Interval(ag_, am_, true, false);
+						var ac_ = this.Patient();
+						var ad_ = FHIRHelpers_4_0_001.ToDate(ac_?.BirthDateElement);
+						var ae_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
+						var af_ = context.Operators.Add(ad_, ae_);
+						var ah_ = FHIRHelpers_4_0_001.ToDate(ac_?.BirthDateElement);
+						var ai_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
+						var aj_ = context.Operators.Add(ah_, ai_);
+						var ak_ = context.Operators.Quantity(1m, "year");
+						var al_ = context.Operators.Add(aj_, ak_);
+						var am_ = context.Operators.Interval(af_, al_, true, false);
 
-						return an_;
+						return am_;
 					}
 					else
 					{
-						CqlInterval<CqlDate> ao_ = null;
-
-						return ao_;
+						return null;
 					};
 				};
-				var m_ = context.Operators.ConvertDateToDateTime(l_()?.low);
-				CqlInterval<CqlDate> n_()
+				var l_ = context.Operators.ConvertDateToDateTime(k_()?.low);
+				CqlInterval<CqlDate> m_()
 				{
 					if (onset is Age)
 					{
-						var ap_ = this.Patient();
-						var aq_ = FHIRHelpers_4_0_001.ToDate(ap_?.BirthDateElement);
-						var ar_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
-						var as_ = context.Operators.Add(aq_, ar_);
-						var au_ = FHIRHelpers_4_0_001.ToDate(ap_?.BirthDateElement);
-						var aw_ = context.Operators.Add(au_, ar_);
-						var ax_ = context.Operators.Quantity(1m, "year");
-						var ay_ = context.Operators.Add(aw_, ax_);
-						var az_ = context.Operators.Interval(as_, ay_, true, false);
+						var an_ = this.Patient();
+						var ao_ = FHIRHelpers_4_0_001.ToDate(an_?.BirthDateElement);
+						var ap_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
+						var aq_ = context.Operators.Add(ao_, ap_);
+						var as_ = FHIRHelpers_4_0_001.ToDate(an_?.BirthDateElement);
+						var au_ = context.Operators.Add(as_, ap_);
+						var av_ = context.Operators.Quantity(1m, "year");
+						var aw_ = context.Operators.Add(au_, av_);
+						var ax_ = context.Operators.Interval(aq_, aw_, true, false);
 
-						return az_;
+						return ax_;
 					}
 					else if (onset is Range)
 					{
-						var ba_ = this.Patient();
-						var bb_ = FHIRHelpers_4_0_001.ToDate(ba_?.BirthDateElement);
-						var bc_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
-						var bd_ = context.Operators.Add(bb_, bc_);
-						var bf_ = FHIRHelpers_4_0_001.ToDate(ba_?.BirthDateElement);
-						var bg_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
+						var ay_ = this.Patient();
+						var az_ = FHIRHelpers_4_0_001.ToDate(ay_?.BirthDateElement);
+						var ba_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
+						var bb_ = context.Operators.Add(az_, ba_);
+						var bd_ = FHIRHelpers_4_0_001.ToDate(ay_?.BirthDateElement);
+						var be_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
+						var bf_ = context.Operators.Add(bd_, be_);
+						var bg_ = context.Operators.Quantity(1m, "year");
 						var bh_ = context.Operators.Add(bf_, bg_);
-						var bi_ = context.Operators.Quantity(1m, "year");
-						var bj_ = context.Operators.Add(bh_, bi_);
-						var bk_ = context.Operators.Interval(bd_, bj_, true, false);
+						var bi_ = context.Operators.Interval(bb_, bh_, true, false);
 
-						return bk_;
+						return bi_;
 					}
 					else
 					{
-						CqlInterval<CqlDate> bl_ = null;
-
-						return bl_;
+						return null;
 					};
 				};
-				var o_ = context.Operators.ConvertDateToDateTime(n_()?.high);
+				var n_ = context.Operators.ConvertDateToDateTime(m_()?.high);
+				CqlInterval<CqlDate> o_()
+				{
+					if (onset is Age)
+					{
+						var bj_ = this.Patient();
+						var bk_ = FHIRHelpers_4_0_001.ToDate(bj_?.BirthDateElement);
+						var bl_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
+						var bm_ = context.Operators.Add(bk_, bl_);
+						var bo_ = FHIRHelpers_4_0_001.ToDate(bj_?.BirthDateElement);
+						var bq_ = context.Operators.Add(bo_, bl_);
+						var br_ = context.Operators.Quantity(1m, "year");
+						var bs_ = context.Operators.Add(bq_, br_);
+						var bt_ = context.Operators.Interval(bm_, bs_, true, false);
+
+						return bt_;
+					}
+					else if (onset is Range)
+					{
+						var bu_ = this.Patient();
+						var bv_ = FHIRHelpers_4_0_001.ToDate(bu_?.BirthDateElement);
+						var bw_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
+						var bx_ = context.Operators.Add(bv_, bw_);
+						var bz_ = FHIRHelpers_4_0_001.ToDate(bu_?.BirthDateElement);
+						var ca_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
+						var cb_ = context.Operators.Add(bz_, ca_);
+						var cc_ = context.Operators.Quantity(1m, "year");
+						var cd_ = context.Operators.Add(cb_, cc_);
+						var ce_ = context.Operators.Interval(bx_, cd_, true, false);
+
+						return ce_;
+					}
+					else
+					{
+						return null;
+					};
+				};
 				CqlInterval<CqlDate> p_()
 				{
 					if (onset is Age)
 					{
-						var bm_ = this.Patient();
-						var bn_ = FHIRHelpers_4_0_001.ToDate(bm_?.BirthDateElement);
-						var bo_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
-						var bp_ = context.Operators.Add(bn_, bo_);
-						var br_ = FHIRHelpers_4_0_001.ToDate(bm_?.BirthDateElement);
-						var bt_ = context.Operators.Add(br_, bo_);
-						var bu_ = context.Operators.Quantity(1m, "year");
-						var bv_ = context.Operators.Add(bt_, bu_);
-						var bw_ = context.Operators.Interval(bp_, bv_, true, false);
+						var cf_ = this.Patient();
+						var cg_ = FHIRHelpers_4_0_001.ToDate(cf_?.BirthDateElement);
+						var ch_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
+						var ci_ = context.Operators.Add(cg_, ch_);
+						var ck_ = FHIRHelpers_4_0_001.ToDate(cf_?.BirthDateElement);
+						var cm_ = context.Operators.Add(ck_, ch_);
+						var cn_ = context.Operators.Quantity(1m, "year");
+						var co_ = context.Operators.Add(cm_, cn_);
+						var cp_ = context.Operators.Interval(ci_, co_, true, false);
 
-						return bw_;
+						return cp_;
 					}
 					else if (onset is Range)
 					{
-						var bx_ = this.Patient();
-						var by_ = FHIRHelpers_4_0_001.ToDate(bx_?.BirthDateElement);
-						var bz_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
-						var ca_ = context.Operators.Add(by_, bz_);
-						var cc_ = FHIRHelpers_4_0_001.ToDate(bx_?.BirthDateElement);
-						var cd_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
-						var ce_ = context.Operators.Add(cc_, cd_);
-						var cf_ = context.Operators.Quantity(1m, "year");
-						var cg_ = context.Operators.Add(ce_, cf_);
-						var ch_ = context.Operators.Interval(ca_, cg_, true, false);
-
-						return ch_;
-					}
-					else
-					{
-						CqlInterval<CqlDate> ci_ = null;
-
-						return ci_;
-					};
-				};
-				CqlInterval<CqlDate> q_()
-				{
-					if (onset is Age)
-					{
-						var cj_ = this.Patient();
-						var ck_ = FHIRHelpers_4_0_001.ToDate(cj_?.BirthDateElement);
-						var cl_ = FHIRHelpers_4_0_001.ToQuantity(((onset as Age) as Quantity));
-						var cm_ = context.Operators.Add(ck_, cl_);
-						var co_ = FHIRHelpers_4_0_001.ToDate(cj_?.BirthDateElement);
-						var cq_ = context.Operators.Add(co_, cl_);
-						var cr_ = context.Operators.Quantity(1m, "year");
-						var cs_ = context.Operators.Add(cq_, cr_);
-						var ct_ = context.Operators.Interval(cm_, cs_, true, false);
-
-						return ct_;
-					}
-					else if (onset is Range)
-					{
-						var cu_ = this.Patient();
-						var cv_ = FHIRHelpers_4_0_001.ToDate(cu_?.BirthDateElement);
-						var cw_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
+						var cq_ = this.Patient();
+						var cr_ = FHIRHelpers_4_0_001.ToDate(cq_?.BirthDateElement);
+						var cs_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.Low);
+						var ct_ = context.Operators.Add(cr_, cs_);
+						var cv_ = FHIRHelpers_4_0_001.ToDate(cq_?.BirthDateElement);
+						var cw_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
 						var cx_ = context.Operators.Add(cv_, cw_);
-						var cz_ = FHIRHelpers_4_0_001.ToDate(cu_?.BirthDateElement);
-						var da_ = FHIRHelpers_4_0_001.ToQuantity((onset as Range)?.High);
-						var db_ = context.Operators.Add(cz_, da_);
-						var dc_ = context.Operators.Quantity(1m, "year");
-						var dd_ = context.Operators.Add(db_, dc_);
-						var de_ = context.Operators.Interval(cx_, dd_, true, false);
+						var cy_ = context.Operators.Quantity(1m, "year");
+						var cz_ = context.Operators.Add(cx_, cy_);
+						var da_ = context.Operators.Interval(ct_, cz_, true, false);
 
-						return de_;
+						return da_;
 					}
 					else
 					{
-						CqlInterval<CqlDate> df_ = null;
-
-						return df_;
+						return null;
 					};
 				};
-				var r_ = context.Operators.Interval(m_, o_, p_()?.lowClosed, q_()?.highClosed);
+				var q_ = context.Operators.Interval(l_, n_, o_()?.lowClosed, p_()?.highClosed);
 
-				return r_;
+				return q_;
 			};
 		};
 
@@ -268,170 +259,161 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (abatement is FhirString)
 			{
-				CqlInterval<CqlDateTime> j_ = null;
-				var k_ = context.Operators.Message<CqlInterval<CqlDateTime>>(j_, "1", "Error", "Cannot compute an interval from a String value");
+				var j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
 
-				return k_;
+				return j_;
 			}
 			else
 			{
-				CqlInterval<CqlDate> l_()
+				CqlInterval<CqlDate> k_()
 				{
 					if (abatement is Age)
 					{
-						var s_ = this.Patient();
-						var t_ = FHIRHelpers_4_0_001.ToDate(s_?.BirthDateElement);
-						var u_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
-						var v_ = context.Operators.Add(t_, u_);
-						var x_ = FHIRHelpers_4_0_001.ToDate(s_?.BirthDateElement);
-						var z_ = context.Operators.Add(x_, u_);
-						var aa_ = context.Operators.Quantity(1m, "year");
-						var ab_ = context.Operators.Add(z_, aa_);
-						var ac_ = context.Operators.Interval(v_, ab_, true, false);
+						var r_ = this.Patient();
+						var s_ = FHIRHelpers_4_0_001.ToDate(r_?.BirthDateElement);
+						var t_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
+						var u_ = context.Operators.Add(s_, t_);
+						var w_ = FHIRHelpers_4_0_001.ToDate(r_?.BirthDateElement);
+						var y_ = context.Operators.Add(w_, t_);
+						var z_ = context.Operators.Quantity(1m, "year");
+						var aa_ = context.Operators.Add(y_, z_);
+						var ab_ = context.Operators.Interval(u_, aa_, true, false);
 
-						return ac_;
+						return ab_;
 					}
 					else if (abatement is Range)
 					{
-						var ad_ = this.Patient();
-						var ae_ = FHIRHelpers_4_0_001.ToDate(ad_?.BirthDateElement);
-						var af_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
-						var ag_ = context.Operators.Add(ae_, af_);
-						var ai_ = FHIRHelpers_4_0_001.ToDate(ad_?.BirthDateElement);
-						var aj_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
-						var ak_ = context.Operators.Add(ai_, aj_);
-						var al_ = context.Operators.Quantity(1m, "year");
-						var am_ = context.Operators.Add(ak_, al_);
-						var an_ = context.Operators.Interval(ag_, am_, true, false);
+						var ac_ = this.Patient();
+						var ad_ = FHIRHelpers_4_0_001.ToDate(ac_?.BirthDateElement);
+						var ae_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
+						var af_ = context.Operators.Add(ad_, ae_);
+						var ah_ = FHIRHelpers_4_0_001.ToDate(ac_?.BirthDateElement);
+						var ai_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
+						var aj_ = context.Operators.Add(ah_, ai_);
+						var ak_ = context.Operators.Quantity(1m, "year");
+						var al_ = context.Operators.Add(aj_, ak_);
+						var am_ = context.Operators.Interval(af_, al_, true, false);
 
-						return an_;
+						return am_;
 					}
 					else
 					{
-						CqlInterval<CqlDate> ao_ = null;
-
-						return ao_;
+						return null;
 					};
 				};
-				var m_ = context.Operators.ConvertDateToDateTime(l_()?.low);
-				CqlInterval<CqlDate> n_()
+				var l_ = context.Operators.ConvertDateToDateTime(k_()?.low);
+				CqlInterval<CqlDate> m_()
 				{
 					if (abatement is Age)
 					{
-						var ap_ = this.Patient();
-						var aq_ = FHIRHelpers_4_0_001.ToDate(ap_?.BirthDateElement);
-						var ar_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
-						var as_ = context.Operators.Add(aq_, ar_);
-						var au_ = FHIRHelpers_4_0_001.ToDate(ap_?.BirthDateElement);
-						var aw_ = context.Operators.Add(au_, ar_);
-						var ax_ = context.Operators.Quantity(1m, "year");
-						var ay_ = context.Operators.Add(aw_, ax_);
-						var az_ = context.Operators.Interval(as_, ay_, true, false);
+						var an_ = this.Patient();
+						var ao_ = FHIRHelpers_4_0_001.ToDate(an_?.BirthDateElement);
+						var ap_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
+						var aq_ = context.Operators.Add(ao_, ap_);
+						var as_ = FHIRHelpers_4_0_001.ToDate(an_?.BirthDateElement);
+						var au_ = context.Operators.Add(as_, ap_);
+						var av_ = context.Operators.Quantity(1m, "year");
+						var aw_ = context.Operators.Add(au_, av_);
+						var ax_ = context.Operators.Interval(aq_, aw_, true, false);
 
-						return az_;
+						return ax_;
 					}
 					else if (abatement is Range)
 					{
-						var ba_ = this.Patient();
-						var bb_ = FHIRHelpers_4_0_001.ToDate(ba_?.BirthDateElement);
-						var bc_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
-						var bd_ = context.Operators.Add(bb_, bc_);
-						var bf_ = FHIRHelpers_4_0_001.ToDate(ba_?.BirthDateElement);
-						var bg_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
+						var ay_ = this.Patient();
+						var az_ = FHIRHelpers_4_0_001.ToDate(ay_?.BirthDateElement);
+						var ba_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
+						var bb_ = context.Operators.Add(az_, ba_);
+						var bd_ = FHIRHelpers_4_0_001.ToDate(ay_?.BirthDateElement);
+						var be_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
+						var bf_ = context.Operators.Add(bd_, be_);
+						var bg_ = context.Operators.Quantity(1m, "year");
 						var bh_ = context.Operators.Add(bf_, bg_);
-						var bi_ = context.Operators.Quantity(1m, "year");
-						var bj_ = context.Operators.Add(bh_, bi_);
-						var bk_ = context.Operators.Interval(bd_, bj_, true, false);
+						var bi_ = context.Operators.Interval(bb_, bh_, true, false);
 
-						return bk_;
+						return bi_;
 					}
 					else
 					{
-						CqlInterval<CqlDate> bl_ = null;
-
-						return bl_;
+						return null;
 					};
 				};
-				var o_ = context.Operators.ConvertDateToDateTime(n_()?.high);
+				var n_ = context.Operators.ConvertDateToDateTime(m_()?.high);
+				CqlInterval<CqlDate> o_()
+				{
+					if (abatement is Age)
+					{
+						var bj_ = this.Patient();
+						var bk_ = FHIRHelpers_4_0_001.ToDate(bj_?.BirthDateElement);
+						var bl_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
+						var bm_ = context.Operators.Add(bk_, bl_);
+						var bo_ = FHIRHelpers_4_0_001.ToDate(bj_?.BirthDateElement);
+						var bq_ = context.Operators.Add(bo_, bl_);
+						var br_ = context.Operators.Quantity(1m, "year");
+						var bs_ = context.Operators.Add(bq_, br_);
+						var bt_ = context.Operators.Interval(bm_, bs_, true, false);
+
+						return bt_;
+					}
+					else if (abatement is Range)
+					{
+						var bu_ = this.Patient();
+						var bv_ = FHIRHelpers_4_0_001.ToDate(bu_?.BirthDateElement);
+						var bw_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
+						var bx_ = context.Operators.Add(bv_, bw_);
+						var bz_ = FHIRHelpers_4_0_001.ToDate(bu_?.BirthDateElement);
+						var ca_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
+						var cb_ = context.Operators.Add(bz_, ca_);
+						var cc_ = context.Operators.Quantity(1m, "year");
+						var cd_ = context.Operators.Add(cb_, cc_);
+						var ce_ = context.Operators.Interval(bx_, cd_, true, false);
+
+						return ce_;
+					}
+					else
+					{
+						return null;
+					};
+				};
 				CqlInterval<CqlDate> p_()
 				{
 					if (abatement is Age)
 					{
-						var bm_ = this.Patient();
-						var bn_ = FHIRHelpers_4_0_001.ToDate(bm_?.BirthDateElement);
-						var bo_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
-						var bp_ = context.Operators.Add(bn_, bo_);
-						var br_ = FHIRHelpers_4_0_001.ToDate(bm_?.BirthDateElement);
-						var bt_ = context.Operators.Add(br_, bo_);
-						var bu_ = context.Operators.Quantity(1m, "year");
-						var bv_ = context.Operators.Add(bt_, bu_);
-						var bw_ = context.Operators.Interval(bp_, bv_, true, false);
+						var cf_ = this.Patient();
+						var cg_ = FHIRHelpers_4_0_001.ToDate(cf_?.BirthDateElement);
+						var ch_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
+						var ci_ = context.Operators.Add(cg_, ch_);
+						var ck_ = FHIRHelpers_4_0_001.ToDate(cf_?.BirthDateElement);
+						var cm_ = context.Operators.Add(ck_, ch_);
+						var cn_ = context.Operators.Quantity(1m, "year");
+						var co_ = context.Operators.Add(cm_, cn_);
+						var cp_ = context.Operators.Interval(ci_, co_, true, false);
 
-						return bw_;
+						return cp_;
 					}
 					else if (abatement is Range)
 					{
-						var bx_ = this.Patient();
-						var by_ = FHIRHelpers_4_0_001.ToDate(bx_?.BirthDateElement);
-						var bz_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
-						var ca_ = context.Operators.Add(by_, bz_);
-						var cc_ = FHIRHelpers_4_0_001.ToDate(bx_?.BirthDateElement);
-						var cd_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
-						var ce_ = context.Operators.Add(cc_, cd_);
-						var cf_ = context.Operators.Quantity(1m, "year");
-						var cg_ = context.Operators.Add(ce_, cf_);
-						var ch_ = context.Operators.Interval(ca_, cg_, true, false);
-
-						return ch_;
-					}
-					else
-					{
-						CqlInterval<CqlDate> ci_ = null;
-
-						return ci_;
-					};
-				};
-				CqlInterval<CqlDate> q_()
-				{
-					if (abatement is Age)
-					{
-						var cj_ = this.Patient();
-						var ck_ = FHIRHelpers_4_0_001.ToDate(cj_?.BirthDateElement);
-						var cl_ = FHIRHelpers_4_0_001.ToQuantity(((abatement as Age) as Quantity));
-						var cm_ = context.Operators.Add(ck_, cl_);
-						var co_ = FHIRHelpers_4_0_001.ToDate(cj_?.BirthDateElement);
-						var cq_ = context.Operators.Add(co_, cl_);
-						var cr_ = context.Operators.Quantity(1m, "year");
-						var cs_ = context.Operators.Add(cq_, cr_);
-						var ct_ = context.Operators.Interval(cm_, cs_, true, false);
-
-						return ct_;
-					}
-					else if (abatement is Range)
-					{
-						var cu_ = this.Patient();
-						var cv_ = FHIRHelpers_4_0_001.ToDate(cu_?.BirthDateElement);
-						var cw_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
+						var cq_ = this.Patient();
+						var cr_ = FHIRHelpers_4_0_001.ToDate(cq_?.BirthDateElement);
+						var cs_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.Low);
+						var ct_ = context.Operators.Add(cr_, cs_);
+						var cv_ = FHIRHelpers_4_0_001.ToDate(cq_?.BirthDateElement);
+						var cw_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
 						var cx_ = context.Operators.Add(cv_, cw_);
-						var cz_ = FHIRHelpers_4_0_001.ToDate(cu_?.BirthDateElement);
-						var da_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Range)?.High);
-						var db_ = context.Operators.Add(cz_, da_);
-						var dc_ = context.Operators.Quantity(1m, "year");
-						var dd_ = context.Operators.Add(db_, dc_);
-						var de_ = context.Operators.Interval(cx_, dd_, true, false);
+						var cy_ = context.Operators.Quantity(1m, "year");
+						var cz_ = context.Operators.Add(cx_, cy_);
+						var da_ = context.Operators.Interval(ct_, cz_, true, false);
 
-						return de_;
+						return da_;
 					}
 					else
 					{
-						CqlInterval<CqlDate> df_ = null;
-
-						return df_;
+						return null;
 					};
 				};
-				var r_ = context.Operators.Interval(m_, o_, p_()?.lowClosed, q_()?.highClosed);
+				var q_ = context.Operators.Interval(l_, n_, o_()?.lowClosed, p_()?.highClosed);
 
-				return r_;
+				return q_;
 			};
 		};
 
@@ -561,23 +543,19 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (choice is Timing)
 			{
-				CqlInterval<CqlDateTime> dh_ = null;
-				var di_ = context.Operators.Message<CqlInterval<CqlDateTime>>(dh_, "1", "Error", "Cannot compute a single interval from a Timing type");
+				var dh_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute a single interval from a Timing type");
 
-				return di_;
+				return dh_;
 			}
 			else if (choice is FhirString)
 			{
-				CqlInterval<CqlDateTime> dj_ = null;
-				var dk_ = context.Operators.Message<CqlInterval<CqlDateTime>>(dj_, "1", "Error", "Cannot compute an interval from a String value");
+				var di_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
 
-				return dk_;
+				return di_;
 			}
 			else
 			{
-				CqlInterval<CqlDateTime> dl_ = null;
-
-				return dl_;
+				return null;
 			};
 		};
 

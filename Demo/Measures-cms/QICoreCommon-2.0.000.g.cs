@@ -1419,9 +1419,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				CqlInterval<CqlDateTime> cl_ = null;
-
-				return cl_;
+				return null;
 			};
 		};
 
@@ -1523,9 +1521,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				CqlInterval<CqlDateTime> cl_ = null;
-
-				return cl_;
+				return null;
 			};
 		};
 
@@ -1664,9 +1660,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				CqlInterval<CqlDateTime> dt_ = null;
-
-				return dt_;
+				return null;
 			};
 		};
 
@@ -1804,9 +1798,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				CqlInterval<CqlDateTime> dt_ = null;
-
-				return dt_;
+				return null;
 			};
 		};
 
