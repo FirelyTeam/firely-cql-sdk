@@ -82,7 +82,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtime", "Runtime", "{D0F1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{97D67019-21A7-4591-A216-1B76BD0E68A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiPackager", "Cql\MultiPackager\MultiPackager.csproj", "{B574B177-48B2-455B-BEF8-B7D6DB5C3015}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiPackagerCLI", "Cql\MultiPackager\MultiPackagerCLI.csproj", "{B574B177-48B2-455B-BEF8-B7D6DB5C3015}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

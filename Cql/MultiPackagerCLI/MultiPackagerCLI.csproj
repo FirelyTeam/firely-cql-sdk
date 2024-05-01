@@ -8,8 +8,8 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Hl7.Cql.MultiPackager</RootNamespace>
     <AssemblyName>Hl7.Cql.MultiPackager</AssemblyName>
-    <Product>Debugging tool to package all library sets. Not to be released as a tool.</Product>
-    <Description>.NET debugging tool that packages multiple sets of CQL, ELM and build outputs into a FHIR Library resources.</Description>
+    <Product>Developer tool to package all library sets. Not to be released as a tool.</Product>
+    <Description>.NET developer tool that packages multiple sets of CQL, ELM and build outputs into a FHIR Library resources.</Description>
   </PropertyGroup>
 
   <ItemGroup>
