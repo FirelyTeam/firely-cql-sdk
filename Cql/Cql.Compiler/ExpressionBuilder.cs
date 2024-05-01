@@ -210,35 +210,22 @@ namespace Hl7.Cql.Compiler
             _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
         }
 
-        private Expression BindCqlOperator(
-            string methodName,
-            params object?[] args)
-        {
-            //bool stop = ((IBuilderContext)this).Hash == "#EMAEaaYJ";
-            return _cqlOperatorsBinder.BindToMethod(methodName, TranslateAll(args));
-        }
-
         private Expression BindCqlOperator<T>(
             string methodName,
             params T?[] args) =>
             _cqlOperatorsBinder.BindToMethod(methodName, TranslateAll(args));
 
         [DebuggerStepThrough]
-        private Expression[] TranslateAll(params object?[] args) =>
-            TranslateAll<object?>(args);
-
-        [DebuggerStepThrough]
         private Expression[] TranslateAll<T>(params T?[] args) =>
             args switch
             {
                 Expression[] expressions => expressions,
-                object[] objects         => objects.SelectToArray(obj => Translate(obj!)),
+                { } objects              => objects.SelectToArray(obj => Translate(obj!)),
                 _                        => [],
             };
 
-        [return:NotNullIfNotNull(nameof(arg))]
         [DebuggerStepThrough]
-        private Expression? Translate(object? arg) =>
+        private Expression Translate<T>(T? arg) =>
             arg switch
             {
                 Expression expression => expression,
@@ -940,7 +927,7 @@ namespace Hl7.Cql.Compiler
                     foreach (var caseItem in ce.caseItem)
                     {
                         var caseWhen = Translate(caseItem.when!);
-                        var caseWhenEquality = BindCqlOperator(nameof(ICqlOperators.Equal), comparand, caseWhen).Coalesce();
+                        var caseWhenEquality = BindCqlOperator(nameof(ICqlOperators.Equal), [comparand, caseWhen]).Coalesce();
                         var caseThen = Translate(caseItem.then!);
 
                         if (caseThen.Type != elseThen.Type)

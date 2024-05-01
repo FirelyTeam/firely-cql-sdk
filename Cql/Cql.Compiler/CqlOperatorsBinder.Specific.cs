@@ -71,7 +71,7 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToBestMethodOverload(nameof(ICqlOperators.CodeInList), left, right);
+                return BindToBestMethodOverload(nameof(ICqlOperators.CodeInList), [left, right]);
             }
         }
 
@@ -89,10 +89,8 @@ partial class CqlOperatorsBinder
     {
         if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
         {
-            return BindToBestMethodOverload(
-                nameof(ICqlOperators.ValueSetUnion),
-                left.NewTypeAsExpression<IEnumerable<CqlCode>>(),
-                right.NewTypeAsExpression<IEnumerable<CqlCode>>());
+            return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), [left.NewTypeAsExpression<IEnumerable<CqlCode>>(), right.NewTypeAsExpression<IEnumerable<CqlCode>>()
+                                            ]);
         }
         var leftElementType = _typeResolver.GetListElementType(left.Type);
         if (leftElementType == typeof(CqlCode))
@@ -100,11 +98,11 @@ partial class CqlOperatorsBinder
             var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
-                return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), left, right);
+                return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), [left, right]);
             }
         }
 
-        return BindToBestMethodOverload(nameof(ICqlOperators.ListUnion), left, right);
+        return BindToBestMethodOverload(nameof(ICqlOperators.ListUnion), [left, right]);
     }
 
     private Expression ResolveValueSet(Expression expression)
@@ -191,7 +189,7 @@ partial class CqlOperatorsBinder
         if (operand.Type == typeof(CqlInterval<object>))
             return NullExpression.Int32;
 
-        return BindToBestMethodOverload(nameof(ICqlOperators.Width), operand);
+        return BindToBestMethodOverload(nameof(ICqlOperators.Width), [operand]);
     }
 
     private MethodCallExpression LateBoundProperty(

@@ -60,7 +60,7 @@ namespace Hl7.Cql.Compiler
         /// <returns>Typically a <see cref="MethodCallExpression"/> that binds to the method.</returns>
         public virtual Expression BindToMethod(
             string methodName,
-            params Expression[] args)
+            Expression[] args)
         {
             var result = methodName switch
             {

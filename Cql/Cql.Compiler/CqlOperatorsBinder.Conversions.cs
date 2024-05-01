@@ -16,7 +16,7 @@ partial class CqlOperatorsBinder
 {
     private MethodCallExpression BindToBestMethodOverload(
         string methodName,
-        params Expression[] arguments)
+        Expression[] arguments)
     {
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, arguments);
         var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
