@@ -9,9 +9,11 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 
 namespace Hl7.Cql.Compiler
@@ -131,6 +133,8 @@ namespace Hl7.Cql.Compiler
             }
         }
 
+        private static readonly TypeFormatterOptions? TypeToCSharpStringOptions = new(PreferKeywords: true, HideNamespaces: true);
+
         internal static string PrettyTypeName(Type type)
         {
             string typeName = type.Name;
@@ -153,7 +157,10 @@ namespace Hl7.Cql.Compiler
                     }
                 }
             }
-            return typeName;
+
+            string result = type.WriteCSharp(TypeToCSharpStringOptions).ToString()!;
+            Debug.Assert(typeName == result);
+            return result;
         }
     }
 }

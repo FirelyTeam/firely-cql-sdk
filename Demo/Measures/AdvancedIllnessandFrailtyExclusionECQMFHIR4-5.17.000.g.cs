@@ -356,9 +356,9 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
 		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
-		Tuple_EYKUVMTUWTABihhEAdHIGbSFe d_(ValueTuple<Encounter,Encounter> _valueTuple)
+		Tuple_EaLaedgLDgRRYaLbKIIcBTOiA d_(ValueTuple<Encounter,Encounter> _valueTuple)
 		{
-			var j_ = new Tuple_EYKUVMTUWTABihhEAdHIGbSFe
+			var j_ = new Tuple_EaLaedgLDgRRYaLbKIIcBTOiA
 			{
 				OutpatientEncounter1 = _valueTuple.Item1,
 				OutpatientEncounter2 = _valueTuple.Item2,
@@ -366,12 +366,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(c_, d_);
-		bool? f_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
+		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(c_, d_);
+		bool? f_(Tuple_EaLaedgLDgRRYaLbKIIcBTOiA tuple_ealaedgldgrryalbkiicbtoia)
 		{
-			var k_ = FHIRHelpers_4_0_001.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2?.Period);
+			var k_ = FHIRHelpers_4_0_001.ToInterval(tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter2?.Period);
 			var l_ = context.Operators.End(k_);
-			var m_ = FHIRHelpers_4_0_001.ToInterval(tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1?.Period);
+			var m_ = FHIRHelpers_4_0_001.ToInterval(tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter1?.Period);
 			var n_ = context.Operators.End(m_);
 			var o_ = context.Operators.Quantity(1m, "day");
 			var p_ = context.Operators.Add(n_, o_);
@@ -379,10 +379,10 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return q_;
 		};
-		var g_ = context.Operators.Where<Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
-		Encounter h_(Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) => 
-			tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
-		var i_ = context.Operators.Select<Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(g_, h_);
+		var g_ = context.Operators.Where<Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(e_, f_);
+		Encounter h_(Tuple_EaLaedgLDgRRYaLbKIIcBTOiA tuple_ealaedgldgrryalbkiicbtoia) => 
+			tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter1;
+		var i_ = context.Operators.Select<Tuple_EaLaedgLDgRRYaLbKIIcBTOiA, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -407,9 +407,9 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	{
 		var a_ = this.Long_Term_Care_Overlapping_Periods();
 		var c_ = context.Operators.CrossJoin<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, a_);
-		Tuple_IWAGVXGPWIVBAWDaHPGIVVBK d_(ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>> _valueTuple)
+		Tuple_CgaDVOXeQBMgMPCPZOThIIdDb d_(ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>> _valueTuple)
 		{
-			var j_ = new Tuple_IWAGVXGPWIVBAWDaHPGIVVBK
+			var j_ = new Tuple_CgaDVOXeQBMgMPCPZOThIIdDb
 			{
 				LTCPeriod1 = _valueTuple.Item1,
 				LTCPeriod2 = _valueTuple.Item2,
@@ -417,11 +417,11 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(c_, d_);
-		bool? f_(Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
+		var e_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuple_CgaDVOXeQBMgMPCPZOThIIdDb>(c_, d_);
+		bool? f_(Tuple_CgaDVOXeQBMgMPCPZOThIIdDb tuple_cgadvoxeqbmgmpcpzothiiddb)
 		{
-			var k_ = context.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
-			var l_ = context.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod2);
+			var k_ = context.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb.LTCPeriod1);
+			var l_ = context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb.LTCPeriod2);
 			var m_ = context.Operators.Quantity(1m, "day");
 			var n_ = context.Operators.Subtract(l_, m_);
 			var q_ = context.Operators.Add(l_, m_);
@@ -432,16 +432,16 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return v_;
 		};
-		var g_ = context.Operators.Where<Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(e_, f_);
-		CqlInterval<CqlDateTime> h_(Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
+		var g_ = context.Operators.Where<Tuple_CgaDVOXeQBMgMPCPZOThIIdDb>(e_, f_);
+		CqlInterval<CqlDateTime> h_(Tuple_CgaDVOXeQBMgMPCPZOThIIdDb tuple_cgadvoxeqbmgmpcpzothiiddb)
 		{
-			var w_ = context.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1);
-			var x_ = context.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod2);
+			var w_ = context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb.LTCPeriod1);
+			var x_ = context.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb.LTCPeriod2);
 			var y_ = context.Operators.Interval(w_, x_, true, true);
 
 			return y_;
 		};
-		var i_ = context.Operators.Select<Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(g_, h_);
+		var i_ = context.Operators.Select<Tuple_CgaDVOXeQBMgMPCPZOThIIdDb, CqlInterval<CqlDateTime>>(g_, h_);
 
 		return i_;
 	}

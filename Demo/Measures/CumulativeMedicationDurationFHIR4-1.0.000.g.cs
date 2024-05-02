@@ -634,7 +634,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					var i_ = context.Operators.End(h_);
 					var k_ = FHIRHelpers_4_0_001.ToInterval((g_?.Timing?.Repeat?.Bounds as Period));
 					var l_ = context.Operators.End(k_);
-					var m_ = context.Operators.Maximum<CqlDateTime>();
+					var m_ = context.Operators.MaxValue<CqlDateTime>();
 					var n_ = context.Operators.Equal(l_, m_);
 					var o_ = context.Operators.Or((bool?)(i_ is null), n_);
 					var p_ = context.Operators.Not(o_);
@@ -789,9 +789,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				}
 				else
 				{
-					CqlInterval<CqlDateTime> v_ = null;
-
-					return v_;
+					return null;
 				};
 			};
 
@@ -824,55 +822,54 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
     [CqlDeclaration("RolloutIntervals")]
 	public IEnumerable<CqlInterval<CqlDateTime>> RolloutIntervals(IEnumerable<CqlInterval<CqlDateTime>> intervals)
 	{
-		IEnumerable<CqlInterval<CqlDateTime>> a_ = null;
-		IEnumerable<CqlInterval<CqlDateTime>> b_(IEnumerable<CqlInterval<CqlDateTime>> R, CqlInterval<CqlDateTime> I)
+		IEnumerable<CqlInterval<CqlDateTime>> a_(IEnumerable<CqlInterval<CqlDateTime>> R, CqlInterval<CqlDateTime> I)
 		{
-			var d_ = new CqlInterval<CqlDateTime>[]
+			var c_ = new CqlInterval<CqlDateTime>[]
 			{
 				I,
 			};
-			CqlInterval<CqlDateTime> e_(CqlInterval<CqlDateTime> X)
+			CqlInterval<CqlDateTime> d_(CqlInterval<CqlDateTime> X)
 			{
-				var j_ = context.Operators.Last<CqlInterval<CqlDateTime>>(R);
-				var k_ = context.Operators.End(j_);
-				var l_ = context.Operators.Quantity(1m, "day");
-				var m_ = context.Operators.Add(k_, l_);
-				var n_ = context.Operators.Start(X);
-				var o_ = new CqlDateTime[]
+				var i_ = context.Operators.Last<CqlInterval<CqlDateTime>>(R);
+				var j_ = context.Operators.End(i_);
+				var k_ = context.Operators.Quantity(1m, "day");
+				var l_ = context.Operators.Add(j_, k_);
+				var m_ = context.Operators.Start(X);
+				var n_ = new CqlDateTime[]
 				{
+					l_,
 					m_,
-					n_,
 				};
-				var p_ = context.Operators.Max<CqlDateTime>((o_ as IEnumerable<CqlDateTime>));
-				var r_ = context.Operators.End(j_);
-				var t_ = context.Operators.Add(r_, l_);
-				var v_ = new CqlDateTime[]
+				var o_ = context.Operators.Max<CqlDateTime>((n_ as IEnumerable<CqlDateTime>));
+				var q_ = context.Operators.End(i_);
+				var s_ = context.Operators.Add(q_, k_);
+				var u_ = new CqlDateTime[]
 				{
-					t_,
-					n_,
+					s_,
+					m_,
 				};
-				var w_ = context.Operators.Max<CqlDateTime>((v_ as IEnumerable<CqlDateTime>));
-				var y_ = context.Operators.End(X);
-				var z_ = context.Operators.DurationBetween(n_, y_, "day");
-				var aa_ = context.Operators.ConvertIntegerToDecimal((z_ ?? 0));
-				var ab_ = context.Operators.Add(w_, new CqlQuantity(aa_, "day"));
-				var ac_ = context.Operators.Interval(p_, ab_, true, true);
+				var v_ = context.Operators.Max<CqlDateTime>((u_ as IEnumerable<CqlDateTime>));
+				var x_ = context.Operators.End(X);
+				var y_ = context.Operators.DurationBetween(m_, x_, "day");
+				var z_ = context.Operators.ConvertIntegerToDecimal((y_ ?? 0));
+				var aa_ = context.Operators.Add(v_, new CqlQuantity(z_, "day"));
+				var ab_ = context.Operators.Interval(o_, aa_, true, true);
 
-				return ac_;
+				return ab_;
 			};
-			var f_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(d_, e_);
-			var g_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(f_);
-			var h_ = new CqlInterval<CqlDateTime>[]
+			var e_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(c_, d_);
+			var f_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(e_);
+			var g_ = new CqlInterval<CqlDateTime>[]
 			{
-				g_,
+				f_,
 			};
-			var i_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(R, (h_ as IEnumerable<CqlInterval<CqlDateTime>>));
+			var h_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(R, (g_ as IEnumerable<CqlInterval<CqlDateTime>>));
 
-			return i_;
+			return h_;
 		};
-		var c_ = context.Operators.Aggregate<CqlInterval<CqlDateTime>, IEnumerable<CqlInterval<CqlDateTime>>>(intervals, a_, b_);
+		var b_ = context.Operators.Aggregate<CqlInterval<CqlDateTime>, IEnumerable<CqlInterval<CqlDateTime>>>(intervals, null, a_);
 
-		return c_;
+		return b_;
 	}
 
     [CqlDeclaration("MedicationPeriod")]
@@ -900,9 +897,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			}
 			else
 			{
-				CqlInterval<CqlDateTime> e_ = null;
-
-				return e_;
+				return null;
 			};
 		};
 
