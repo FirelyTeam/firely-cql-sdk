@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
@@ -68,17 +69,18 @@ internal abstract record CSharpFormat<T>
 {
     public abstract TextWriterFormattableString GetFormattableString(T target);
 
-    public void WriteToTextWriter(TextWriter textWriter, T target) =>
-        GetFormattableString(target).WriteToTextWriter(textWriter);
+    public void WriteTo(T target, TextWriter textWriter) =>
+        GetFormattableString(target).WriteTo(new TextWriterAdapter(textWriter));
+
+    public void WriteTo(T target, StringBuilder stringBuilder) =>
+        GetFormattableString(target).WriteTo(new StringBuilderAdapter(stringBuilder));
 
     public string WriteToString(T target)
     {
-        using var writer = NewInvariantCultureStringWriter();
-        WriteToTextWriter(writer, target);
-        return writer.ToString();
+        var sb = new StringBuilder();
+        WriteTo(target, sb);
+        return sb.ToString();
     }
-
-    private static StringWriter NewInvariantCultureStringWriter() => new(CultureInfo.InvariantCulture);
 }
 
 internal delegate TextWriterFormattableString FormattableStringProvider<in TContext>(TContext context);
@@ -108,9 +110,9 @@ internal record TypeCSharpFormat(
     public override TextWriterFormattableString GetFormattableString(Type type) =>
         TypeFormat(new TypeCSharpFormatContext(type, this));
 
-    protected internal void DirectWriteToTextWriter(
+    protected internal void WriteTo(
         Type type,
-        TextWriter textWriter)
+        IBasicTextWriter textWriter)
     {
         if (UseKeywords && type.GetCSharpKeyword() is { } keyword)
         {
@@ -129,7 +131,7 @@ internal record TypeCSharpFormat(
                 DeclaringType: {} declaringType
         })
         {
-            DirectWriteToTextWriter(declaringType, textWriter);
+            WriteTo(declaringType, textWriter);
             textWriter.Write(NestedTypeSeparator);
             hideNamespaces = true; // Nested types are always in the same namespace.
         }
@@ -161,16 +163,16 @@ internal record TypeCSharpFormat(
         }
         else if (type.IsArray)
         {
-            DirectWriteToTextWriter(type.GetElementType()!, textWriter);
+            WriteTo(type.GetElementType()!, textWriter);
         }
         else if (!NoNullableOperator && type.IsValueType && type.IsNullableValueType(out var underlyingType))
         {
             isNullableValueType = true;
-            DirectWriteToTextWriter(underlyingType, textWriter);
+            WriteTo(underlyingType, textWriter);
         }
         else if (type.IsPointer)
         {
-            DirectWriteToTextWriter(type.GetElementType()!, textWriter);
+            WriteTo(type.GetElementType()!, textWriter);
         }
         else
         {
@@ -206,7 +208,7 @@ internal record TypeCSharpFormat(
             {
                 if (first) first = false;
                 else textWriter.Write(TypeSeparator);
-                DirectWriteToTextWriter(typeArg, textWriter);
+                WriteTo(typeArg, textWriter);
             }
             textWriter.Write(CloseGenericTypeBracket);
         }
@@ -239,7 +241,7 @@ internal readonly record struct TypeCSharpFormatContext(
         get
         {
             var self = this;
-            return $"{textWriter => self.TypeCSharpFormat.DirectWriteToTextWriter(self.TypeInfo, textWriter)}";
+            return $"{textWriter => self.TypeCSharpFormat.WriteTo(self.TypeInfo, textWriter)}";
         }
     }
 }
@@ -348,23 +350,23 @@ internal readonly record struct MethodCSharpFormatContext(
 [InterpolatedStringHandler]
 internal struct TextWriterFormattableString
 {
-    private Action<TextWriter> _appender = null!;
+    private Action<IBasicTextWriter> _write = null!;
 
     public TextWriterFormattableString(int literalLength = 0, int formattedCount = 0)
     {
     }
 
+    public void AppendFormatted(Action<IBasicTextWriter> s) =>
+        _write += s;
+
     public void AppendLiteral(string s) =>
-        _appender += textWriter => textWriter.Write(s);
+        AppendFormatted(w => w.Write(s));
 
     public void AppendFormatted(string s) =>
-        _appender += textWriter => textWriter.Write(s);
+        AppendFormatted(w => w.Write(s));
 
-    public void AppendFormatted(TextWriterFormattableString innerFormatter) =>
-        _appender += innerFormatter.WriteToTextWriter;
-
-    public void AppendFormatted(Action<TextWriter> withTextWriter) =>
-        _appender += withTextWriter;
+    public void AppendFormatted(TextWriterFormattableString s) =>
+        AppendFormatted(w => s.WriteTo(w));
 
     public static TextWriterFormattableString Join(
         string separator,
@@ -380,22 +382,38 @@ internal struct TextWriterFormattableString
             if (first)
             {
                 if (openBracket.Length>0)
-                    s._appender += textWriter => textWriter.Write(openBracket);
+                    s.AppendFormatted(w => w.Write(openBracket));
                 first = false;
             }
             else if (separator != "")
-                s._appender += textWriter => textWriter.Write(separator);
+                s.AppendFormatted(w => w.Write(separator));
 
-            s._appender += formatString.WriteToTextWriter;
+            s.AppendFormatted(formatString.WriteTo);
         }
 
         if (!noBracketsWhenEmpty && !first && closeBracket.Length > 0)
-            s._appender += textWriter => textWriter.Write(closeBracket);
+            s.AppendFormatted(w => w.Write(closeBracket));
         return s;
     }
 
-    public void WriteToTextWriter(TextWriter textWriter)
-    {
-        _appender?.Invoke(textWriter);
-    }
+    public void WriteTo(IBasicTextWriter textWriter) =>
+        _write?.Invoke(textWriter);
+}
+
+internal interface IBasicTextWriter
+{
+    void Write(string s);
+    void Write(char s);
+}
+
+file readonly record struct TextWriterAdapter(TextWriter Inner) : IBasicTextWriter
+{
+    public void Write(string s) => Inner.Write(s);
+    public void Write(char s) => Inner.Write(s);
+}
+
+file readonly record struct StringBuilderAdapter(StringBuilder Inner) : IBasicTextWriter
+{
+    public void Write(string s) => Inner.Append(s);
+    public void Write(char s) => Inner.Append(s);
 }

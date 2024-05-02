@@ -138,7 +138,7 @@ public class CSharpFormatterTests
 
         // NOTE: We do not show the declaring type name for methods
         TestTextWriter tw = new TestTextWriter(new StringWriter());
-        MethodCSharpFormat.Default.WriteToTextWriter(tw, m);
+        MethodCSharpFormat.Default.WriteTo(m, tw);
         Assert.AreEqual(
             expected: "System.Collections.Generic.IList<System.Int32> NonGenericMethod(System.Int32 a, System.Int32 b, System.Int32 c)",
             actual: tw.ToString());
@@ -160,7 +160,7 @@ public class CSharpFormatterTests
                     NoNamespaces:true)),
             ParameterSeparator: "; "
         );
-        methodCSharpFormat.WriteToTextWriter(tw, m);
+        methodCSharpFormat.WriteTo(m, tw);
         Assert.AreEqual(
             expected: "function NonGenericMethod(a: int; b: int; c: int): IList<int>;",
             actual: tw.ToString());
