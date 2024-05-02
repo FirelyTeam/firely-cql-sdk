@@ -66,8 +66,6 @@ internal partial class CqlOperatorsBinder
         Type[] genericTypeArguments,
         bool throwError = true)
     {
-        string text = NoCandidatesErrorMessage();
-
         (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates =
             ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
 
@@ -82,9 +80,8 @@ internal partial class CqlOperatorsBinder
         {
             if (throwError)
             {
-                throw new ArgumentException(
-                    NoCandidatesErrorMessage(),
-                    nameof(methodName));
+                var noCandidatesErrorMessage = NoCandidatesErrorMessage();
+                throw new ArgumentException(noCandidatesErrorMessage, nameof(methodName));
             }
         }
 

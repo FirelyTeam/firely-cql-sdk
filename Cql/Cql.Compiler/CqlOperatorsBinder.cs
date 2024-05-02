@@ -86,6 +86,7 @@ namespace Hl7.Cql.Compiler
                 "SelectManyResults" => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
                 "SortBy"            => SortBy(args[0], args[1], args[2]),
                 "Where"             => Where(args[0], args[1]),
+                "ToList"            => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs),
                 "Width"             => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs),
                 _                   => BindToBestMethodOverload(methodName, args, typeArgs),
                 // @formatter:om
@@ -95,6 +96,11 @@ namespace Hl7.Cql.Compiler
             Expression? Width(Expression[] args) =>
                 args is [{ Type:{} t }] && t == typeof(CqlInterval<object>)
                     ? NullExpression.Int32// This should be disallowed but isn't, so handle it:
+                    : null;
+
+            Expression? ToList(Expression[] args) =>
+                args is [{ Type:{} t } a] && _typeResolver.IsListType(t)
+                    ? a // Already a list type
                     : null;
         }
     }
