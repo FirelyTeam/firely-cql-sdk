@@ -9,6 +9,21 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks> <!-- Unsafe needed in order to test CSharpFormatter on pointer types -->
 	</PropertyGroup>
 
+	<!-- From develop 1.0 branch
+	<PropertyGroup>
+		<FirelySdkVersion>5.8.1</FirelySdkVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<SignAssembly>True</SignAssembly>
+		<DelaySign>true</DelaySign>
+		<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
+		<IncludeSymbols>True</IncludeSymbols>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+	-->
+
 	<ItemGroup>
 		<PackageReference Include="FluentAssertions" Version="6.12.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
