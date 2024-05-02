@@ -7,7 +7,6 @@
  */
 using System.IO;
 using System;
-using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ using System.Text;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
-internal static class CSharpFormatter
+internal static class CSharpFormatterrExtensions
 {
     public static string? GetCSharpKeyword(this Type t)
     {
@@ -65,34 +64,16 @@ internal static class CSharpFormatter
         (methodFormatterOptions ?? MethodCSharpFormat.Default).WriteToString(methodInfo);
 }
 
-internal abstract record CSharpFormat<T>
-{
-    public abstract TextWriterFormattableString GetFormattableString(T target);
-
-    public void WriteTo(T target, TextWriter textWriter) =>
-        GetFormattableString(target).WriteTo(new TextWriterAdapter(textWriter));
-
-    public void WriteTo(T target, StringBuilder stringBuilder) =>
-        GetFormattableString(target).WriteTo(new StringBuilderAdapter(stringBuilder));
-
-    public string WriteToString(T target)
-    {
-        var sb = new StringBuilder();
-        WriteTo(target, sb);
-        return sb.ToString();
-    }
-}
-
-internal delegate TextWriterFormattableString FormattableStringProvider<in TContext>(TContext context);
+#region C# Formatting (Types)
 
 internal record TypeCSharpFormat(
     FormattableStringProvider<TypeCSharpFormatContext>? TypeFormat = null,
     bool NoNamespaces = false,
     bool UseKeywords = false,
-    bool NoNullableOperator = false, // e.g. Nullable<int> instead of int?
+    bool NoNullableOperator = false,          // e.g. Nullable<int> instead of int?
     bool NoGenericTypeParameterNames = false, // e.g.IDictionary<,> instead of  IDictionary<TKey,TValue>
-    string TypeSeparator = ",", // [int,string] or <TKey,TValue>
-    string NestedTypeSeparator = ".") // A.Nested.Nested
+    string TypeSeparator = ",",               // [int,string] or <TKey,TValue>
+    string NestedTypeSeparator = ".")         // A.Nested.Nested
     : CSharpFormat<Type>
 {
     public static readonly FormattableStringProvider<TypeCSharpFormatContext> DefaultTypeFormat = type => $"{type.Type}";
@@ -129,7 +110,7 @@ internal record TypeCSharpFormat(
                 IsGenericParameter: false, // Generic Parameters are nested, but not really.
                 //IsGenericTypeParameter: false,
                 DeclaringType: {} declaringType
-        })
+            })
         {
             WriteTo(declaringType, textWriter);
             textWriter.Write(NestedTypeSeparator);
@@ -246,6 +227,9 @@ internal readonly record struct TypeCSharpFormatContext(
     }
 }
 
+#endregion
+
+#region C# Formatting (ParameterInfo)
 
 internal record ParameterCSharpFormat(
     FormattableStringProvider<ParameterCSharpFormatContext>? ParameterFormat = null,
@@ -272,6 +256,10 @@ internal readonly record struct ParameterCSharpFormatContext(
             .TypeFormat
             .GetFormattableString(ParameterInfo.ParameterType);
 }
+
+#endregion
+
+#region C# Formatting (MethodInfo)
 
 internal record MethodCSharpFormat(
     FormattableStringProvider<MethodCSharpFormatContext>? MethodFormat = null,
@@ -323,10 +311,8 @@ internal readonly record struct MethodCSharpFormatContext(
             IEnumerable<TextWriterFormattableString> formatterGenericArguments =
                 genericArguments.Select(type => typeFormatterOptions.GetFormattableString(type));
 
-            return TextWriterFormattableString.Join(
-                MethodFormat.GenericArgumentSeparator,
-                formatterGenericArguments,
-                MethodFormat.GenericArgumentsOpenBracket, MethodFormat.GenericArgumentsCloseBracket);
+            return TextWriterFormattableString.Join(formatterGenericArguments,
+                                                    MethodFormat.GenericArgumentSeparator, MethodFormat.GenericArgumentsOpenBracket, MethodFormat.GenericArgumentsCloseBracket);
         }
     }
 
@@ -339,13 +325,15 @@ internal readonly record struct MethodCSharpFormatContext(
                 MethodInfo
                     .GetParameters()
                     .Select(p => parameterFormatterOptions.GetFormattableString(p));
-            return TextWriterFormattableString.Join(
-                MethodFormat.ParameterSeparator,
-                formatterParameters,
-                MethodFormat.ParametersOpenBracket, MethodFormat.ParametersCloseBracket);
+            return TextWriterFormattableString.Join(formatterParameters,
+                                                    MethodFormat.ParameterSeparator, MethodFormat.ParametersOpenBracket, MethodFormat.ParametersCloseBracket);
         }
     }
 }
+
+    #endregion
+
+#region Utils
 
 [InterpolatedStringHandler]
 internal struct TextWriterFormattableString
@@ -369,8 +357,8 @@ internal struct TextWriterFormattableString
         AppendFormatted(w => s.WriteTo(w));
 
     public static TextWriterFormattableString Join(
-        string separator,
         IEnumerable<TextWriterFormattableString> formatStrings,
+        string separator= "",
         string openBracket = "",
         string closeBracket = "",
         bool noBracketsWhenEmpty = false)
@@ -400,6 +388,26 @@ internal struct TextWriterFormattableString
         _write?.Invoke(textWriter);
 }
 
+internal abstract record CSharpFormat<T>
+{
+    public abstract TextWriterFormattableString GetFormattableString(T target);
+
+    public void WriteTo(T target, TextWriter textWriter) =>
+        GetFormattableString(target).WriteTo(new TextWriterAdapter(textWriter));
+
+    public void WriteTo(T target, StringBuilder stringBuilder) =>
+        GetFormattableString(target).WriteTo(new StringBuilderAdapter(stringBuilder));
+
+    public string WriteToString(T target)
+    {
+        var sb = new StringBuilder();
+        WriteTo(target, sb);
+        return sb.ToString();
+    }
+}
+
+internal delegate TextWriterFormattableString FormattableStringProvider<in TContext>(TContext context);
+
 internal interface IBasicTextWriter
 {
     void Write(string s);
@@ -417,3 +425,5 @@ file readonly record struct StringBuilderAdapter(StringBuilder Inner) : IBasicTe
     public void Write(string s) => Inner.Append(s);
     public void Write(char s) => Inner.Append(s);
 }
+
+#endregion
