@@ -311,8 +311,11 @@ internal readonly record struct MethodCSharpFormatContext(
             IEnumerable<TextWriterFormattableString> formatterGenericArguments =
                 genericArguments.Select(type => typeFormatterOptions.GetFormattableString(type));
 
-            return TextWriterFormattableString.Join(formatterGenericArguments,
-                                                    MethodFormat.GenericArgumentSeparator, MethodFormat.GenericArgumentsOpenBracket, MethodFormat.GenericArgumentsCloseBracket);
+            return TextWriterFormattableString.Join(
+                formatterGenericArguments,
+                MethodFormat.GenericArgumentSeparator,
+                MethodFormat.GenericArgumentsOpenBracket,
+                MethodFormat.GenericArgumentsCloseBracket);
         }
     }
 
@@ -325,8 +328,11 @@ internal readonly record struct MethodCSharpFormatContext(
                 MethodInfo
                     .GetParameters()
                     .Select(p => parameterFormatterOptions.GetFormattableString(p));
-            return TextWriterFormattableString.Join(formatterParameters,
-                                                    MethodFormat.ParameterSeparator, MethodFormat.ParametersOpenBracket, MethodFormat.ParametersCloseBracket);
+            return TextWriterFormattableString.Join(
+                formatterParameters,
+                MethodFormat.ParameterSeparator,
+                MethodFormat.ParametersOpenBracket,
+                MethodFormat.ParametersCloseBracket);
         }
     }
 }
@@ -379,8 +385,19 @@ internal struct TextWriterFormattableString
             s.AppendFormatted(formatString.WriteTo);
         }
 
-        if (!noBracketsWhenEmpty && !first && closeBracket.Length > 0)
-            s.AppendFormatted(w => w.Write(closeBracket));
+        if (!noBracketsWhenEmpty)
+        {
+            if (first)
+            {
+                if (openBracket.Length > 0 || closeBracket.Length > 0)
+                    s.AppendFormatted(w => w.Write($"{openBracket}{closeBracket}"));
+            }
+            else if (closeBracket.Length > 0)
+            {
+                s.AppendFormatted(w => w.Write(closeBracket));
+            }
+        }
+
         return s;
     }
 

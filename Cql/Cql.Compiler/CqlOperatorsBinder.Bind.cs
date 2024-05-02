@@ -41,7 +41,7 @@ internal partial class CqlOperatorsBinder
     private static readonly TypeCSharpFormat TypeCSharpFormat = new(UseKeywords:true, NoNamespaces:true);
 
     private static readonly MethodCSharpFormat MethodCSharpFormat = new (
-        MethodFormat: method => $"\n\t* {method.Name}{method.Parameters}",
+        MethodFormat: method => $"\n\t* {method.Name}{method.GenericArguments}{method.Parameters}",
         ParameterFormat: new (
             ParameterFormat: parameter => $"{parameter.Type}",
             TypeFormat: TypeCSharpFormat));
@@ -79,6 +79,8 @@ internal partial class CqlOperatorsBinder
         Type[] genericTypeArguments,
         bool throwError = true)
     {
+        string text = NoCandidatesErrorMessage();
+
         (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates =
             ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
 
@@ -136,18 +138,25 @@ internal partial class CqlOperatorsBinder
                         .Select(t => t.method.WriteCSharp(MethodCSharpFormat))
                 );
             return $$"""
-                     Mo suitable method could be bound on:{{inputText}}
-                     from the following method overloads:{{overloadsText}}
+                     Mo suitable method could be bound from:{{inputText}}
+                     to the following method overloads:{{overloadsText}}
                      """;
         }
 
         string InputMethodAndParametersToString() =>
-            $"{methodName} ({
-                string.Join(
-                    ", ",
-                    methodArguments
-                        .SelectToArray(a => a.Type.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat)))
+            $"\n\t* {methodName}{InputMethodGenericTypeArgumentsToString()}({InputMethodArgumentsToString()
             })";
+
+        string InputMethodGenericTypeArgumentsToString() =>
+            genericTypeArguments.Length > 0
+                ? $"<{string.Join(", ", genericTypeArguments.SelectToArray(t => t.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat)))}>"
+                : "";
+
+        string InputMethodArgumentsToString() =>
+            string.Join(
+                ", ",
+                methodArguments
+                    .SelectToArray(a => a.Type.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat)));
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {

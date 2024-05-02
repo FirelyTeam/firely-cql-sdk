@@ -163,15 +163,6 @@ partial class CqlOperatorsBinder
         return operand; // flatten is being called on a list that is already flat.
     }
 
-    private Expression Width(Expression operand)
-    {
-        // This should be disallowed but isn't, so handle it:
-        if (operand.Type == typeof(CqlInterval<object>))
-            return NullExpression.Int32;
-
-        return BindToBestMethodOverload(nameof(ICqlOperators.Width), [operand], []);
-    }
-
     private MethodCallExpression LateBoundProperty(
         Expression source,
         Expression propertyName,

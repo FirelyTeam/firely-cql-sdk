@@ -10,7 +10,9 @@ using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 
@@ -84,11 +86,16 @@ namespace Hl7.Cql.Compiler
                 "SelectManyResults"            => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
                 "SortBy"                       => SortBy(args[0], args[1], args[2]),
                 "Where"                        => Where(args[0], args[1]),
-                // "Width"                        => Width(args[0]),
+                "Width"                        => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs),
                 _                              => BindToBestMethodOverload(methodName, args, typeArgs),
                 // @formatter:om
             };
             return result;
+
+            Expression? Width(Expression[] args) =>
+                args is [{ Type:{} t }] && t == typeof(CqlInterval<object>)
+                    ? NullExpression.Int32// This should be disallowed but isn't, so handle it:
+                    : null;
         }
     }
 }
