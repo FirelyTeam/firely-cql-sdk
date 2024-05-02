@@ -98,13 +98,13 @@ public class CSharpFormatterTests
                 typeFormatterOptions: new(
                     NoNamespaces: false,
                     UseKeywords: true,
-                    TypeDelimiter: ", ")));
+                    TypeSeparator: ", ")));
 
         Assert.AreEqual(
             expected: "CoreTests.Infrastructure.EmptyStruct+Nested1+Nested2",
             actual: typeof(EmptyStruct.Nested1.Nested2).WriteCSharp(
                 typeFormatterOptions: new(
-                    NestedTypeDelimiter:"+")));
+                    NestedTypeSeparator:"+")));
 
         Assert.AreEqual(
             expected: "System.Nullable<int>",
@@ -152,7 +152,7 @@ public class CSharpFormatterTests
         // Delphi-ish style to demonstrate flexibility
         tw = new TestTextWriter(new StringWriter());
         var methodCSharpFormat = new MethodCSharpFormat(
-            MethodFormat: method => $"function {method.Name}({method.Parameters}): {method.ReturnType};",
+            MethodFormat: method => $"function {method.Name}{method.GenericArguments}{method.Parameters}: {method.ReturnType};",
             ParameterFormat: new (
                 ParameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
                 TypeFormat: new(
@@ -167,7 +167,7 @@ public class CSharpFormatterTests
 
         Assert.AreEqual(
             """
-            function |NonGenericMethod|(|a|: |int|; |b|: |int|; |c|: |int|): |IList|<|int|>|;
+            function |NonGenericMethod|(|a|: |int|; |b|: |int|; |c|: |int|)|: |IList|<|int|>|;
             """,
             string.Join('|', tw.Tokens));
     }

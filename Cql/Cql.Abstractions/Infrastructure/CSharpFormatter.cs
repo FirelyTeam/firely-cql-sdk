@@ -84,14 +84,16 @@ internal abstract record CSharpFormat<T>
 internal delegate TextWriterFormattableString FormattableStringProvider<in TContext>(TContext context);
 
 internal record TypeCSharpFormat(
+    FormattableStringProvider<TypeCSharpFormatContext>? TypeFormat = null,
     bool NoNamespaces = false,
     bool UseKeywords = false,
     bool NoNullableOperator = false, // e.g. Nullable<int> instead of int?
     bool NoGenericTypeParameterNames = false, // e.g.IDictionary<,> instead of  IDictionary<TKey,TValue>
-    string TypeDelimiter = ",", // [int,string] or <TKey,TValue>
-    string NestedTypeDelimiter = ".") // A.Nested.Nested
+    string TypeSeparator = ",", // [int,string] or <TKey,TValue>
+    string NestedTypeSeparator = ".") // A.Nested.Nested
     : CSharpFormat<Type>
 {
+    public static readonly FormattableStringProvider<TypeCSharpFormatContext> DefaultTypeFormat = type => $"{type.Type}";
     public static readonly TypeCSharpFormat Default = new();
 
     private const char OpenArrayBracket = '[';
@@ -101,8 +103,7 @@ internal record TypeCSharpFormat(
     private const char CloseGenericTypeBracket = '>';
     private const char PointerOperator = '*';
 
-    public static readonly FormattableStringProvider<TypeCSharpFormatContext> DefaultTypeFormat = type => $"{type.Type}";
-    public FormattableStringProvider<TypeCSharpFormatContext> TypeFormat => DefaultTypeFormat;
+    public FormattableStringProvider<TypeCSharpFormatContext> TypeFormat { get; } = TypeFormat ?? DefaultTypeFormat;
 
     public override TextWriterFormattableString GetFormattableString(Type type) =>
         TypeFormat(new TypeCSharpFormatContext(type, this));
@@ -129,7 +130,7 @@ internal record TypeCSharpFormat(
         })
         {
             DirectWriteToTextWriter(declaringType, textWriter);
-            textWriter.Write(NestedTypeDelimiter);
+            textWriter.Write(NestedTypeSeparator);
             hideNamespaces = true; // Nested types are always in the same namespace.
         }
 
@@ -188,7 +189,7 @@ internal record TypeCSharpFormat(
         {
             textWriter.Write(OpenArrayBracket);
             for (int i = 1; i < type.GetArrayRank(); i++)
-                textWriter.Write(TypeDelimiter);
+                textWriter.Write(TypeSeparator);
             textWriter.Write(CloseArrayBracket);
         }
 
@@ -204,7 +205,7 @@ internal record TypeCSharpFormat(
             foreach (var typeArg in type.GetGenericArguments())
             {
                 if (first) first = false;
-                else textWriter.Write(TypeDelimiter);
+                else textWriter.Write(TypeSeparator);
                 DirectWriteToTextWriter(typeArg, textWriter);
             }
             textWriter.Write(CloseGenericTypeBracket);
@@ -250,9 +251,9 @@ internal record ParameterCSharpFormat(
     : CSharpFormat<ParameterInfo>
 {
     private static readonly FormattableStringProvider<ParameterCSharpFormatContext> DefaultParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
+    public static ParameterCSharpFormat Default { get; } = new();
     public FormattableStringProvider<ParameterCSharpFormatContext> ParameterFormat { get; } = ParameterFormat ?? DefaultParameterFormat;
     public TypeCSharpFormat TypeFormat { get; } = TypeFormat ?? TypeCSharpFormat.Default;
-    public static ParameterCSharpFormat Default { get; } = new();
 
     public override TextWriterFormattableString GetFormattableString(ParameterInfo parameterInfo) =>
         ParameterFormat(new ParameterCSharpFormatContext(parameterInfo, this));
@@ -273,14 +274,18 @@ internal readonly record struct ParameterCSharpFormatContext(
 internal record MethodCSharpFormat(
     FormattableStringProvider<MethodCSharpFormatContext>? MethodFormat = null,
     ParameterCSharpFormat? ParameterFormat = null,
-    string ParameterSeparator = ", ")
+    string ParameterSeparator = ", ",
+    string ParametersOpenBracket = "(",
+    string ParametersCloseBracket = ")",
+    string GenericArgumentSeparator = ", ",
+    string GenericArgumentsOpenBracket = "<",
+    string GenericArgumentsCloseBracket = ">")
     : CSharpFormat<MethodInfo>
 {
-    private static readonly FormattableStringProvider<MethodCSharpFormatContext> DefaultMethodFormat = (method => $"{method.ReturnType} {method.Name}{method.GenericArguments}({method.Parameters})");
+    private static readonly FormattableStringProvider<MethodCSharpFormatContext> DefaultMethodFormat = (method => $"{method.ReturnType} {method.Name}{method.GenericArguments}{method.Parameters}");
+    public static MethodCSharpFormat Default { get; } = new();
     public FormattableStringProvider<MethodCSharpFormatContext> MethodFormat { get; } = MethodFormat ?? DefaultMethodFormat;
     public ParameterCSharpFormat ParameterFormat { get; } = ParameterFormat ?? ParameterCSharpFormat.Default;
-    public string ParameterSeparator { get; } = ParameterSeparator;
-    public static MethodCSharpFormat Default { get; } = new();
 
     public override TextWriterFormattableString GetFormattableString(MethodInfo methodInfo) =>
         MethodFormat(new MethodCSharpFormatContext(methodInfo, this));
@@ -317,9 +322,9 @@ internal readonly record struct MethodCSharpFormatContext(
                 genericArguments.Select(type => typeFormatterOptions.GetFormattableString(type));
 
             return TextWriterFormattableString.Join(
-                MethodFormat.ParameterSeparator,
+                MethodFormat.GenericArgumentSeparator,
                 formatterGenericArguments,
-                "<", ">");
+                MethodFormat.GenericArgumentsOpenBracket, MethodFormat.GenericArgumentsCloseBracket);
         }
     }
 
@@ -334,7 +339,8 @@ internal readonly record struct MethodCSharpFormatContext(
                     .Select(p => parameterFormatterOptions.GetFormattableString(p));
             return TextWriterFormattableString.Join(
                 MethodFormat.ParameterSeparator,
-                formatterParameters);
+                formatterParameters,
+                MethodFormat.ParametersOpenBracket, MethodFormat.ParametersCloseBracket);
         }
     }
 }

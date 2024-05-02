@@ -41,7 +41,7 @@ internal partial class CqlOperatorsBinder
     private static readonly TypeCSharpFormat TypeCSharpFormat = new(UseKeywords:true, NoNamespaces:true);
 
     private static readonly MethodCSharpFormat MethodCSharpFormat = new (
-        MethodFormat: method => $"\n\t* {method.Name}({method.Parameters})",
+        MethodFormat: method => $"\n\t* {method.Name}{method.Parameters}",
         ParameterFormat: new (
             ParameterFormat: parameter => $"{parameter.Type}",
             TypeFormat: TypeCSharpFormat));
