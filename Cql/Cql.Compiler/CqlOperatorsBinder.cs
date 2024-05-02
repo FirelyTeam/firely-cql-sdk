@@ -70,24 +70,24 @@ namespace Hl7.Cql.Compiler
             var result = methodName switch
             {
                 // @formatter:off
-                "Convert"                      => BindConvert(args[0], args[1]),
-                "Aggregate"                    => BindToGenericMethod(nameof(ICqlOperators.Aggregate), genericTypeArguments: [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
-                "CrossJoin"                    => BindToGenericMethod(nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
-                "Message"                      => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments: [args[0].Type], args),
-                "Coalesce"                     => Coalesce(args[0]),
-                "Flatten"                      => Flatten(args[0]),
-                "InList"                       => InList(args[0], args[1]),
-                "LateBoundProperty"            => LateBoundProperty(args[0], args[1], args[2]),
-                "ListUnion"                    => ListUnion(args[0], args[1]),
-                "ResolveValueSet"              => ResolveValueSet(args[0]),
-                "Retrieve"                     => Retrieve(args[0], args[1], args[2]),
-                "Select"                       => Select(args[0], args[1]),
-                "SelectMany"                   => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
-                "SelectManyResults"            => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
-                "SortBy"                       => SortBy(args[0], args[1], args[2]),
-                "Where"                        => Where(args[0], args[1]),
-                "Width"                        => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs),
-                _                              => BindToBestMethodOverload(methodName, args, typeArgs),
+                "Convert"           => BindConvert(args[0], args[1]),
+                "Aggregate"         => BindToGenericMethod(nameof(ICqlOperators.Aggregate), genericTypeArguments: [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
+                "CrossJoin"         => BindToGenericMethod(nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
+                "Message"           => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments: [args[0].Type], args),
+                "Coalesce"          => Coalesce(args[0]),
+                "Flatten"           => Flatten(args[0]),
+                "InList"            => InList(args[0], args[1]),
+                "LateBoundProperty" => LateBoundProperty(args[0], args[1], args[2]),
+                "ListUnion"         => ListUnion(args[0], args[1]),
+                "ResolveValueSet"   => ResolveValueSet(args[0]),
+                "Retrieve"          => Retrieve(args[0], args[1], args[2]),
+                "Select"            => Select(args[0], args[1]),
+                "SelectMany"        => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
+                "SelectManyResults" => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
+                "SortBy"            => SortBy(args[0], args[1], args[2]),
+                "Where"             => Where(args[0], args[1]),
+                "Width"             => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs),
+                _                   => BindToBestMethodOverload(methodName, args, typeArgs),
                 // @formatter:om
             };
             return result;

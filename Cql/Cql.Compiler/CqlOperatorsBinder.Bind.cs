@@ -7,6 +7,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -14,6 +15,7 @@ using System.Security;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 using Microsoft.Extensions.Logging;
+using static Hl7.Cql.Compiler.CqlOperatorsBinder;
 using Expression = System.Linq.Expressions.Expression;
 
 
@@ -22,22 +24,7 @@ namespace Hl7.Cql.Compiler;
 #pragma warning disable CS1591
 internal partial class CqlOperatorsBinder
 {
-    private static readonly MethodAndParametersByParamCountByName
-        ICqlOperatorsMethods =
-            typeof(ICqlOperators)
-                .GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                .Select(method => (method, parameters:method.GetParameters()))
-                .GroupBy(g => g.method.Name)
-                .ToDictionary(
-                    g => g.Key,
-                    g =>
-                        g.GroupBy(g2 => g2.parameters.Length)
-                         .ToDictionary(
-                             g2 => g2.Key,
-                             g2 => g2.ToArray())
-                         .AsReadOnly())
-                .AsReadOnly();
-
+    private static readonly CqlOperatorsMethodsCache ICqlOperatorsMethods = new();
     private static readonly TypeCSharpFormat TypeCSharpFormat = new(UseKeywords:true, NoNamespaces:true);
 
     private static readonly MethodCSharpFormat MethodCSharpFormat = new (
@@ -135,7 +122,7 @@ internal partial class CqlOperatorsBinder
                 string.Concat(
                     ICqlOperatorsMethods
                         .GetMethodsByName(methodName)
-                        .Select(t => t.method.WriteCSharp(MethodCSharpFormat))
+                        .Select(t => t.WriteCSharp(MethodCSharpFormat))
                 );
             return $$"""
                      Mo suitable method could be bound from:{{inputText}}
@@ -181,7 +168,7 @@ internal partial class CqlOperatorsBinder
             if (args.Length == 0)
             {
                 var methods = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, 0);
-                foreach (var (method, _) in methods)
+                foreach (var method in methods)
                 {
                     if (method.IsGenericMethodDefinition
                         && method.GetGenericArguments().Length == genericTypeArguments.Length)
@@ -195,20 +182,21 @@ internal partial class CqlOperatorsBinder
 
         for (int i = 0; i < 2; i++) // Try twice, first with all arguments, then without the last one
         {
-            var methodsWithParameters = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, args.Length);
+            var methods = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, args.Length);
 
             if (args.Length == 0)
             {
                 // No conversions, find method without parameters
-                foreach (var (method, _) in methodsWithParameters)
+                foreach (var method in methods)
                 {
                     yield return (method, [], []);
                 }
                 break;
             }
 
-            foreach (var (method, methodParameters) in methodsWithParameters)
+            foreach (var method in methods)
             {
+                var methodParameters = method.GetParameters();
                 if (method is not { IsGenericMethodDefinition: true })
                 {
                     // Non-generic method
