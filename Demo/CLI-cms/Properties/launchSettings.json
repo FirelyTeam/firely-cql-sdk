@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CLI-cms": {
+      "commandName": "Project",
+      "commandLineArgs": "-m AlaraCTFHIR -v \"C:\\Repos\\ecqm-content-qicore-2024\\input\\vocabulary\\valueset\\external\""
+    }
+  }
+}
