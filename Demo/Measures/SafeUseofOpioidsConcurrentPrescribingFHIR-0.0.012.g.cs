@@ -241,7 +241,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 
 					return aa_;
 				};
-				var v_ = context.Operators.Where<CodeableConcept>((Medications?.Category as IEnumerable<CodeableConcept>), u_);
+				var v_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)Medications?.Category, u_);
 				var w_ = context.Operators.Exists<CodeableConcept>(v_);
 
 				return w_;

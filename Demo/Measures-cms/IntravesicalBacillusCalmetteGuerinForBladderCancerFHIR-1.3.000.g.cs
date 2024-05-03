@@ -607,7 +607,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 			return g_;
 		};
-		var b_ = context.Operators.Select<ResourceReference, Procedure>((StagingObservation?.PartOf as IEnumerable<ResourceReference>), a_);
+		var b_ = context.Operators.Select<ResourceReference, Procedure>((IEnumerable<ResourceReference>)StagingObservation?.PartOf, a_);
 
 		return b_;
 	}

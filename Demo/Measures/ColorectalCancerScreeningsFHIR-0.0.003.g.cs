@@ -746,7 +746,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ak_;
 			};
-			var w_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), v_);
+			var w_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FecalOccult?.Category, v_);
 			List<Coding> x_(CodeableConcept @this) => 
 				@this?.Coding;
 			var y_ = context.Operators.Select<CodeableConcept, List<Coding>>(w_, x_);
@@ -812,7 +812,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return ab_;
 				};
-				var s_ = context.Operators.Where<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
+				var s_ = context.Operators.Where<Coding>((IEnumerable<Coding>)FecalOccultCategory?.Coding, r_);
 				Code t_(Coding @this) => 
 					@this?.CodeElement;
 				var u_ = context.Operators.Select<Coding, Code>(s_, t_);
@@ -834,7 +834,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return aa_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FecalOccult?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
@@ -877,7 +877,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return ab_;
 				};
-				var s_ = context.Operators.Where<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), r_);
+				var s_ = context.Operators.Where<Coding>((IEnumerable<Coding>)FecalOccultCategory?.Coding, r_);
 				Code t_(Coding @this) => 
 					@this?.CodeElement;
 				var u_ = context.Operators.Select<Coding, Code>(s_, t_);
@@ -899,7 +899,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return aa_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FecalOccult?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
@@ -934,7 +934,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return y_;
 				};
-				var o_ = context.Operators.Where<Coding>((FecalOccultCategory?.Coding as IEnumerable<Coding>), n_);
+				var o_ = context.Operators.Where<Coding>((IEnumerable<Coding>)FecalOccultCategory?.Coding, n_);
 				Code p_(Coding @this) => 
 					@this?.CodeElement;
 				var q_ = context.Operators.Select<Coding, Code>(o_, p_);
@@ -957,7 +957,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return x_;
 			};
-			var f_ = context.Operators.Where<CodeableConcept>((FecalOccult?.Category as IEnumerable<CodeableConcept>), e_);
+			var f_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FecalOccult?.Category, e_);
 			var g_ = context.Operators.Exists<CodeableConcept>(f_);
 			var h_ = context.Operators.Not((bool?)(FecalOccult?.Value is null));
 			var i_ = context.Operators.And(g_, h_);
@@ -1051,7 +1051,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ao_;
 			};
-			var aa_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), z_);
+			var aa_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FitDNA?.Category, z_);
 			List<Coding> ab_(CodeableConcept @this) => 
 				@this?.Coding;
 			var ac_ = context.Operators.Select<CodeableConcept, List<Coding>>(aa_, ab_);
@@ -1117,7 +1117,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return al_;
 				};
-				var ac_ = context.Operators.Where<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
+				var ac_ = context.Operators.Where<Coding>((IEnumerable<Coding>)FitDNACategory?.Coding, ab_);
 				Code ad_(Coding @this) => 
 					@this?.CodeElement;
 				var ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
@@ -1139,7 +1139,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ak_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FitDNA?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
@@ -1190,7 +1190,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return al_;
 				};
-				var ac_ = context.Operators.Where<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), ab_);
+				var ac_ = context.Operators.Where<Coding>((IEnumerable<Coding>)FitDNACategory?.Coding, ab_);
 				Code ad_(Coding @this) => 
 					@this?.CodeElement;
 				var ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
@@ -1212,7 +1212,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ak_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FitDNA?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
@@ -1255,7 +1255,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 					return ai_;
 				};
-				var y_ = context.Operators.Where<Coding>((FitDNACategory?.Coding as IEnumerable<Coding>), x_);
+				var y_ = context.Operators.Where<Coding>((IEnumerable<Coding>)FitDNACategory?.Coding, x_);
 				Code z_(Coding @this) => 
 					@this?.CodeElement;
 				var aa_ = context.Operators.Select<Coding, Code>(y_, z_);
@@ -1278,7 +1278,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 				return ah_;
 			};
-			var f_ = context.Operators.Where<CodeableConcept>((FitDNA?.Category as IEnumerable<CodeableConcept>), e_);
+			var f_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)FitDNA?.Category, e_);
 			var g_ = context.Operators.Exists<CodeableConcept>(f_);
 			var h_ = context.Operators.Not((bool?)(FitDNA?.Value is null));
 			var i_ = context.Operators.And(g_, h_);

@@ -1037,14 +1037,14 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		};
 		decimal? b_(MedicationRequest R)
 		{
-			var e_ = FHIRHelpers_4_3_000.ToQuantity((R?.DispenseRequest?.ExpectedSupplyDuration as Quantity));
+			var e_ = FHIRHelpers_4_3_000.ToQuantity((Quantity)R?.DispenseRequest?.ExpectedSupplyDuration);
 			var f_ = context.Operators.ConvertQuantity(e_, "d");
 			var g_ = FHIRHelpers_4_3_000.ToQuantity(R?.DispenseRequest?.Quantity);
-			var h_ = context.Operators.SingletonFrom<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>));
-			var i_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var h_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)R?.DosageInstruction);
+			var i_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)h_?.DoseAndRate);
 			var j_ = FHIRHelpers_4_3_000.ToValue(i_?.Dose);
 			var k_ = context.Operators.End((j_ as CqlInterval<CqlQuantity>));
-			var m_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((h_?.DoseAndRate as IEnumerable<Dosage.DoseAndRateComponent>));
+			var m_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)h_?.DoseAndRate);
 			var n_ = FHIRHelpers_4_3_000.ToValue(m_?.Dose);
 			var s_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(h_?.Timing?.Repeat?.PeriodUnitElement?.Value);
 			var t_ = context.Operators.Convert<string>(s_);

@@ -1309,8 +1309,8 @@ public class QICoreCommon_2_0_000
 			return g_;
 		};
 		var b_ = context.Operators.Where<Extension>(((deviceRequest is DomainResource)
-				? ((deviceRequest as DomainResource).ModifierExtension as IEnumerable<Extension>)
-				: (null as IEnumerable<Extension>)), a_);
+				? ((IEnumerable<Extension>)(deviceRequest as DomainResource).ModifierExtension)
+				: null), a_);
 		bool? c_(Extension E)
 		{
 			var h_ = FHIRHelpers_4_3_000.ToValue(E?.Value);

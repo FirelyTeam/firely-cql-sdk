@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -27,7 +28,7 @@ namespace Hl7.Cql.Compiler
     {
         private readonly ILogger<CqlOperatorsBinder> _logger;
         private readonly TypeResolver _typeResolver;
-        private readonly ExpressionConverter _expressionConverter;
+        private readonly TypeConverter _typeConverter;
 
 
         /// <summary>
@@ -40,16 +41,16 @@ namespace Hl7.Cql.Compiler
         /// The type resolver used.
         /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
         /// </param>
-        /// <param name="expressionConverter">
-        /// The expression converter used.
+        /// <param name="typeConverter">
+        /// The type converter used.
         /// </param>
         public CqlOperatorsBinder(
             ILogger<CqlOperatorsBinder> logger,
             TypeResolver typeResolver,
-            ExpressionConverter expressionConverter)
+            TypeConverter typeConverter)
         {
             _typeResolver = typeResolver;
-            _expressionConverter = expressionConverter;
+            _typeConverter = typeConverter;
             _logger = logger;
         }
 

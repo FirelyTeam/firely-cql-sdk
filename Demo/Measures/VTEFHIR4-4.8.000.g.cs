@@ -90,7 +90,7 @@ public class VTEFHIR4_4_8_000
 
 				return o_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)f_?.Type, g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
@@ -100,7 +100,7 @@ public class VTEFHIR4_4_8_000
 
 			return n_;
 		};
-		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)Encounter?.Location, a_);
 		object c_(Encounter.LocationComponent @this)
 		{
 			var p_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);

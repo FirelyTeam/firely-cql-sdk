@@ -368,7 +368,7 @@ public class FHIRHelpers_4_3_000
 
 					return d_;
 				};
-				var c_ = context.Operators.Select<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
+				var c_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)concept?.Coding, b_);
 
 				return new CqlConcept(c_, concept?.TextElement?.Value);
 			};
@@ -528,7 +528,7 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Age)
 			{
-				var g_ = this.ToQuantity(((value as Age) as Quantity));
+				var g_ = this.ToQuantity((Quantity)(value as Age));
 
 				return (g_ as object);
 			}
@@ -546,19 +546,19 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Count)
 			{
-				var j_ = this.ToQuantity(((value as Count) as Quantity));
+				var j_ = this.ToQuantity((Quantity)(value as Count));
 
 				return (j_ as object);
 			}
 			else if (value is Distance)
 			{
-				var k_ = this.ToQuantity(((value as Distance) as Quantity));
+				var k_ = this.ToQuantity((Quantity)(value as Distance));
 
 				return (k_ as object);
 			}
 			else if (value is Duration)
 			{
-				var l_ = this.ToQuantity(((value as Duration) as Quantity));
+				var l_ = this.ToQuantity((Quantity)(value as Duration));
 
 				return (l_ as object);
 			}

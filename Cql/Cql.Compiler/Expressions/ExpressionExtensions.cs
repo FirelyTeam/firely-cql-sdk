@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
@@ -25,35 +26,46 @@ internal static class ExpressionExtensions
         Type type,
         bool throwError = true)
     {
+        var isSubclassOf = expression.Type.IsSubclassOf(type);
         if (expression.Type == type)
-            return (expression, TypeConversion.ExactType);
-
-        if (expression is ConstantExpression constant)
         {
-            switch (constant.Value)
+            Debug.Assert(!isSubclassOf);
+            return (expression, TypeConversion.ExactType);
+        }
+
+        if (expression is ConstantExpression { Value: var constantValue })
+        {
+            switch (constantValue)
             {
                 case null when type.IsNullable(out _):
                     return (NullExpression.ForType(type), TypeConversion.ExactType);
 
                 case { } value and not string when
                     value.GetType().IsAssignableTo(type): // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
-                    return (Expression.Constant(value, type), TypeConversion.SimpleConvert);
+                    return (Expression.Constant(value, type), TypeConversion.ExactType);
 
                 case Enum enumValue when type == typeof(string):
                     var name = Enum.GetName(enumValue.GetType(), enumValue);
                     if (name is null)
+                    {
+                        // Still throw an error here, ignoring the `throwError` parameter, because this indicates a bug in the cql.
                         throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
+                    }
 
-                    return (Expression.Constant(name.ToLowerInvariant()), TypeConversion.SimpleConvert);
+                    return (Expression.Constant(name.ToLowerInvariant()), TypeConversion.ExactType);
             }
         }
 
-        var isAssignableTo = expression.Type == typeof(object) // Choice?
-                             || expression.Type.IsAssignableTo(type);
+        var isAssignableTo =
+            expression.Type == typeof(object) // Choice?
+            || expression.Type.IsAssignableTo(type);
         if (isAssignableTo || throwError)
         {
+            // if (isSubclassOf)
+            //     return (expression, TypeConversion.ExactType);
+
             Expression cast = Expression.Convert(expression, type);
-            return (cast, TypeConversion.SimpleConvert);
+            return (cast, TypeConversion.ExpressionConvert);
         }
 
         return (null, TypeConversion.NoMatch);

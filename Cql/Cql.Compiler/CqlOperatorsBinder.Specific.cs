@@ -170,7 +170,7 @@ partial class CqlOperatorsBinder
             return call;
         }
 
-        return _expressionConverter.TryConvert(source, toType, out var t)
+        return TryConvert(source, toType, out var t)
             ? t.arg!
             : throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
     }
@@ -313,8 +313,10 @@ partial class CqlOperatorsBinder
 
         var call = BindToGenericMethod(
             nameof(ICqlOperators.SelectManyResults),
-            [firstGenericArgument, secondGenericArgument, resultSelector.ReturnType], source,
-            collectionSelector, resultSelector);
+            [firstGenericArgument, secondGenericArgument, resultSelector.ReturnType],
+            source,
+            collectionSelector,
+            resultSelector);
         return call;
     }
 }

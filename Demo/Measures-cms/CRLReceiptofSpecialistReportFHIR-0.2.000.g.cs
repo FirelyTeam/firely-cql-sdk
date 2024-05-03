@@ -343,7 +343,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return c_;
 		};
-		var b_ = context.Operators.Select<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
+		var b_ = context.Operators.Select<ResourceReference, string>((IEnumerable<ResourceReference>)task?.BasedOn, a_);
 
 		return b_;
 	}

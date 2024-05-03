@@ -296,7 +296,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 					return ac_;
 				};
-				var o_ = context.Operators.Where<Encounter.LocationComponent>((InpatientEncounter?.Location as IEnumerable<Encounter.LocationComponent>), n_);
+				var o_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)InpatientEncounter?.Location, n_);
 				var p_ = context.Operators.Exists<Encounter.LocationComponent>(o_);
 				var q_ = context.Operators.Not(p_);
 				var r_ = context.Operators.And(m_, q_);
@@ -407,7 +407,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 				return bi_;
 			};
-			var m_ = context.Operators.Where<Encounter.LocationComponent>((tuple_dioqpvxlkifmhgtiyeejrusad.EncounterWithQualifyingAge?.Location as IEnumerable<Encounter.LocationComponent>), l_);
+			var m_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)tuple_dioqpvxlkifmhgtiyeejrusad.EncounterWithQualifyingAge?.Location, l_);
 			var n_ = context.Operators.Exists<Encounter.LocationComponent>(m_);
 			var o_ = context.Operators.Not(n_);
 			var p_ = FHIRHelpers_4_3_000.ToValue(tuple_dioqpvxlkifmhgtiyeejrusad.OpioidAntagonistGiven?.Effective);

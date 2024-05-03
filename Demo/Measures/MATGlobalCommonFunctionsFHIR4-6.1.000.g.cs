@@ -622,14 +622,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				if ((EDEncounter is null))
 				{
-					return (TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>);
+					return (IEnumerable<Encounter.LocationComponent>)TheEncounter?.Location;
 				}
 				else
 				{
 					var g_ = new IEnumerable<Encounter.LocationComponent>[]
 					{
-						(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
-						(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
+						(IEnumerable<Encounter.LocationComponent>)EDEncounter?.Location,
+						(IEnumerable<Encounter.LocationComponent>)TheEncounter?.Location,
 					};
 					var h_ = context.Operators.Flatten<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
@@ -895,7 +895,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				var i_ = this.Patient();
 				var j_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
-				var k_ = FHIRHelpers_4_0_001.ToQuantity(((choice as Age) as Quantity));
+				var k_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(choice as Age));
 				var l_ = context.Operators.Add(j_, k_);
 				var n_ = FHIRHelpers_4_0_001.ToDate(i_?.BirthDateElement);
 				var p_ = context.Operators.Add(n_, k_);
@@ -1011,7 +1011,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				var g_ = this.Patient();
 				var h_ = FHIRHelpers_4_0_001.ToDate(g_?.BirthDateElement);
-				var i_ = FHIRHelpers_4_0_001.ToQuantity(((condition?.Abatement as Age) as Quantity));
+				var i_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(condition?.Abatement as Age));
 				var j_ = context.Operators.Add(h_, i_);
 				var l_ = FHIRHelpers_4_0_001.ToDate(g_?.BirthDateElement);
 				var n_ = context.Operators.Add(l_, i_);
@@ -1172,7 +1172,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 
 		return b_;
 	}
@@ -1208,7 +1208,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var b_ = context.Operators.Where<Extension>((domainResource?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((IEnumerable<Extension>)domainResource?.Extension, a_);
 		Extension c_(Extension E) => 
 			E;
 		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);
@@ -1227,7 +1227,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return g_;
 		};
-		var b_ = context.Operators.Where<Extension>((element?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((IEnumerable<Extension>)element?.Extension, a_);
 		Extension c_(Extension E) => 
 			E;
 		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);
@@ -1272,7 +1272,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return j_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 		var c_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
@@ -1332,7 +1332,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var b_ = context.Operators.Where<Extension>((domainResource?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((IEnumerable<Extension>)domainResource?.Extension, a_);
 		Extension c_(Extension E) => 
 			E;
 		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);
@@ -1363,7 +1363,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 			return h_;
 		};
-		var b_ = context.Operators.Where<Extension>((element?.Extension as IEnumerable<Extension>), a_);
+		var b_ = context.Operators.Where<Extension>((IEnumerable<Extension>)element?.Extension, a_);
 		Extension c_(Extension E) => 
 			E;
 		var d_ = context.Operators.Select<Extension, Extension>(b_, c_);

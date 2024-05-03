@@ -1106,7 +1106,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 			return j_;
 		};
-		var b_ = context.Operators.Where<Encounter.LocationComponent>((EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)EDEncounter?.Location, a_);
 		var c_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(b_);
 		var d_ = FHIRHelpers_4_3_000.ToInterval(c_?.Period);
 		var e_ = context.Operators.Start(d_);

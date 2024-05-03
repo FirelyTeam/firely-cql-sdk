@@ -742,7 +742,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 		Condition c_(Encounter.DiagnosisComponent PD)
 		{
 			var f_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
@@ -934,7 +934,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 				return av_;
 			};
-			var ap_ = context.Operators.Where<Encounter.LocationComponent>((PsychPharmManagement?.Location as IEnumerable<Encounter.LocationComponent>), ao_);
+			var ap_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)PsychPharmManagement?.Location, ao_);
 			var aq_ = context.Operators.Exists<Encounter.LocationComponent>(ap_);
 
 			return aq_;

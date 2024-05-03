@@ -174,7 +174,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 				return r_;
 			};
-			var f_ = context.Operators.Where<Coding>((C?.Type?.Coding as IEnumerable<Coding>), e_);
+			var f_ = context.Operators.Where<Coding>((IEnumerable<Coding>)C?.Type?.Coding, e_);
 			var g_ = context.Operators.Exists<Coding>(f_);
 
 			return g_;
@@ -320,7 +320,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 				return j_;
 			};
-			var f_ = context.Operators.Where<Coding>((C?.Type?.Coding as IEnumerable<Coding>), e_);
+			var f_ = context.Operators.Where<Coding>((IEnumerable<Coding>)C?.Type?.Coding, e_);
 			var g_ = context.Operators.Exists<Coding>(f_);
 
 			return g_;
@@ -387,7 +387,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 				return j_;
 			};
-			var f_ = context.Operators.Where<Coding>((C?.Type?.Coding as IEnumerable<Coding>), e_);
+			var f_ = context.Operators.Where<Coding>((IEnumerable<Coding>)C?.Type?.Coding, e_);
 			var g_ = context.Operators.Exists<Coding>(f_);
 
 			return g_;

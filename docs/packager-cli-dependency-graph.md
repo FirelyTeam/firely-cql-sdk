@@ -26,9 +26,6 @@ classDiagram
     }
 
     namespace Expression_Building {
-        class ExpressionConverter {
-        }
-
         class LibrarySetExpressionBuilder {
             ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
         }
@@ -113,7 +110,7 @@ classDiagram
     CqlToResourcePackagingPipeline ..> PackagerCliProgram : injected
       
     TypeResolver ..> CqlOperatorsBinder : injected
-    ExpressionConverter ..> CqlOperatorsBinder : injected
+    TypeConverter ..> CqlOperatorsBinder : injected
 
     ModelInspector ..> TypeConverter : injected  
 
@@ -123,8 +120,6 @@ classDiagram
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
-
-    TypeConverter ..> ExpressionConverter : injected
 ```
 
 
@@ -138,9 +133,6 @@ classDiagram
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
 %%    namespace Expression_Building {
-        class ExpressionConverter {
-        }
-
         class ILibrarySetExpressionBuilderContext{
         }
 
@@ -233,18 +225,14 @@ classDiagram
     ContextBinder ..> ExpressionBuilder : injected
     ExpressionBuilderSettings ..> ExpressionBuilder : injected
     ILibraryExpressionBuilderContext ..> ExpressionBuilder : injected
-    ExpressionConverter ..> ExpressionBuilder : injected
     
     LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
 
     TypeResolver ..> CqlOperatorsBinder : injected
-    ExpressionConverter ..> CqlOperatorsBinder : injected
+    TypeConverter ..> CqlOperatorsBinder : injected
 
     ModelInspector ..> TypeConverter : injected  
 
     TypeResolver ..> TypeManager : injected
-
-    TypeConverter ..> ExpressionConverter : injected
 ```
-
 

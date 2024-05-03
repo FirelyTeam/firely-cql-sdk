@@ -419,11 +419,11 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			{
 				var ab_ = this.laboratory();
 				var ac_ = FHIRHelpers_4_0_001.ToConcept(CervicalCytologyCategory);
-				var ad_ = context.Operators.In<CqlCode>(ab_, (ac_?.codes as IEnumerable<CqlCode>));
+				var ad_ = context.Operators.In<CqlCode>(ab_, (IEnumerable<CqlCode>)ac_?.codes);
 
 				return ad_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((CervicalCytology?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)CervicalCytology?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(CervicalCytology?.Effective);
@@ -470,11 +470,11 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			{
 				var aj_ = this.laboratory();
 				var ak_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
-				var al_ = context.Operators.In<CqlCode>(aj_, (ak_?.codes as IEnumerable<CqlCode>));
+				var al_ = context.Operators.In<CqlCode>(aj_, (IEnumerable<CqlCode>)ak_?.codes);
 
 				return al_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((HPVTest?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)HPVTest?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = this.Patient();
@@ -548,11 +548,11 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		{
 			var d_ = this.laboratory();
 			var e_ = FHIRHelpers_4_0_001.ToConcept(category);
-			var f_ = context.Operators.In<CqlCode>(d_, (e_?.codes as IEnumerable<CqlCode>));
+			var f_ = context.Operators.In<CqlCode>(d_, (IEnumerable<CqlCode>)e_?.codes);
 
 			return f_;
 		};
-		var b_ = context.Operators.Where<CodeableConcept>((observation?.Category as IEnumerable<CodeableConcept>), a_);
+		var b_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		var c_ = context.Operators.Exists<CodeableConcept>(b_);
 
 		return c_;

@@ -52,7 +52,6 @@ namespace Hl7.Cql.Compiler
         internal readonly TypeConverter _typeConverter;
         internal readonly TypeResolver _typeResolver;
         internal readonly ExpressionBuilderSettings _expressionBuilderSettings;
-        internal readonly ExpressionConverter _expressionConverter;
 
 
         internal ExpressionBuilder(
@@ -62,15 +61,13 @@ namespace Hl7.Cql.Compiler
             TypeManager typeManager,
             TypeConverter typeConverter,
             TypeResolver typeResolver,
-            CqlContextBinder cqlContextBinder,
-            ExpressionConverter expressionConverter)
+            CqlContextBinder cqlContextBinder)
         {
             _logger = logger;
             _cqlOperatorsBinder = cqlOperatorsBinder;
             _cqlContextBinder = cqlContextBinder;
             _typeManager = typeManager;
             _expressionBuilderSettings = expressionBuilderSettings;
-            _expressionConverter = expressionConverter;
             _typeConverter = typeConverter;
             _typeResolver = typeResolver;
         }
@@ -169,7 +166,6 @@ namespace Hl7.Cql.Compiler
         private readonly TypeResolver _typeResolver;
         private readonly ExpressionBuilderSettings _expressionBuilderSettings;
         private readonly ILibraryExpressionBuilderContext _libraryContext;
-        private readonly ExpressionConverter _expressionConverter;
 
         private ImmutableStack<Element> _elementStack;
 
@@ -199,7 +195,6 @@ namespace Hl7.Cql.Compiler
             _typeConverter = builder._typeConverter;
             _typeResolver = builder._typeResolver;
             _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
-            _expressionConverter = builder._expressionConverter;
 
             // External State
             _libraryContext = libContext;
@@ -515,7 +510,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = _typeResolver.GetListElementType(type);
                 if (elementType != typeof(CqlCode))
                 {
-                    throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");
+                    throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {type.ToCSharpString(Defaults.TypeCSharpFormat)}");
                 }
 
                 var @new = CqlOperatorsBinder.CallCreateValueSetFacade(cqlValueSet);
@@ -546,7 +541,7 @@ namespace Hl7.Cql.Compiler
                             {
                                 var value = TranslateArg(element.value!);
                                 var propInfo = ExpressionBuilder.GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
-                                            ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType)}");
+                                            ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                                 var binding = Binding(value, propInfo);
                                 return binding;
                             });
@@ -770,7 +765,7 @@ namespace Hl7.Cql.Compiler
                     var tuple = tuples[i];
                     var element = tuple.Item1;
                     var expression = tuple.Item2;
-                    var memberInfo = ExpressionBuilder.GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType)}");
+                    var memberInfo = ExpressionBuilder.GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                     var binding = Binding(expression, memberInfo);
                     elementBindings[i] = binding;
                 }
@@ -1437,7 +1432,7 @@ namespace Hl7.Cql.Compiler
                     {
                         right = ChangeType(right, elementType);
                     }
-                    else throw this.NewExpressionBuildingException($"Cannot convert Contains target {TypeManager.PrettyTypeName(right.Type)} to {TypeManager.PrettyTypeName(elementType)}");
+                    else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {elementType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                 }
 
                 return BindCqlOperator(nameof(ICqlOperators.ListContains), left, right);
@@ -2304,7 +2299,7 @@ namespace Hl7.Cql.Compiler
                                                       KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
                                     {
                                         var sortMemberExpression = TranslateArg(byExpression.expression);
-                                        var lambdaBody = _expressionConverter.ConvertToType(sortMemberExpression, typeof(object));
+                                        var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
                                         var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                         return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                                     }
@@ -2320,7 +2315,7 @@ namespace Hl7.Cql.Compiler
                                         throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
                                     }
                                     var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
-                                    var lambdaBody = _expressionConverter.ConvertToType(pathExpression, typeof(object));
+                                    var lambdaBody = _cqlOperatorsBinder.ConvertToType(pathExpression, typeof(object));
                                     var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                     return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                                 }
@@ -2498,7 +2493,7 @@ namespace Hl7.Cql.Compiler
                 var operand = TranslateArg(@as.operand);
                 if (!type.IsAssignableTo(operand.Type))
                 {
-                    _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand));
+                    _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to type {type.ToCSharpString(Defaults.TypeCSharpFormat)}", @as.operand));
                 }
 
                 return new ElmAsExpression(operand, type);
@@ -2566,11 +2561,21 @@ namespace Hl7.Cql.Compiler
             Expression input,
             Type outputType) // @TODO: Cast
         {
-            if (input.Type == outputType)
-                return input;
+            var (expression, typeConversion) = input.TryNewAssignToTypeExpression(outputType, false);
+            if (typeConversion != TypeConversion.NoMatch)
+            {
+                return expression!;
+            }
 
-            if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
-                return input.NewTypeAsExpression(outputType);
+            // if (input.Type == outputType)
+            // {
+            //     return input;
+            // }
+            //
+            // if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
+            // {
+            //     return input.NewTypeAsExpression(outputType);
+            // }
 
             if (_typeResolver.IsListType(input.Type)
                 && _typeResolver.IsListType(outputType))

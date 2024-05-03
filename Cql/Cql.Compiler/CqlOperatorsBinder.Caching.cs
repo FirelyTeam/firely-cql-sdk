@@ -31,12 +31,12 @@ internal partial class CqlOperatorsBinder
             }
         }
 
-        public IEnumerable<MethodInfo> GetMethodsByName(string methodName) =>
+        public IReadOnlyCollection<MethodInfo> GetMethodsByName(string methodName) =>
             _methods.TryGetValue((methodName, null), out var methods)
-                ? methods
-                : [];
+        ? methods
+        : [];
 
-        public IEnumerable<MethodInfo> GetMethodsByNameAndParamCount(
+        public IReadOnlyCollection<MethodInfo> GetMethodsByNameAndParamCount(
             string methodName,
             int paramCount) =>
             _methods.TryGetValue((methodName, paramCount), out var methods)

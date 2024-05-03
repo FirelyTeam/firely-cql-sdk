@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -121,37 +120,4 @@ internal static partial class TypeExtensions
             ({ IsGenericTypeDefinition: true }, { IsConstructedGenericType: true } b) => b.GetGenericTypeDefinition(),
             var (_, b)                                                                => b,
         };
-
-    /// <summary>
-    /// Enumerates all base types of the specified type.
-    /// Optionally includes the type itself, excludes base types and/or interfaces.
-    /// </summary>
-    public static IEnumerable<Type> BaseTypes(
-        this Type type,
-        bool includeSelf = false,
-        bool excludeBaseTypes = false,
-        bool excludeInterfaces = false)
-    {
-        if (includeSelf)
-            yield return type;
-
-        if (!excludeBaseTypes)
-        {
-            var subType = type.BaseTypeFixed();
-
-            while (subType is not null)
-            {
-                yield return subType;
-                subType = subType?.BaseTypeFixed();
-            }
-        }
-
-        if (!excludeInterfaces)
-        {
-            foreach (var @interface in type.GetInterfaces())
-            {
-                yield return @interface;
-            }
-        }
-    }
 }

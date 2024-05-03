@@ -48,20 +48,24 @@ internal static class CSharpFormatterrExtensions
         return result;
     }
 
-    public static string WriteCSharp(
+    public static string ToCSharpString(
         this Type type,
         TypeCSharpFormat? typeFormatterOptions = null) =>
         (typeFormatterOptions ?? TypeCSharpFormat.Default).WriteToString(type);
 
-    public static string WriteCSharp(
-        this ParameterInfo parameterInfo,
-        ParameterCSharpFormat? parameterFormatterOptions = null) =>
-        (parameterFormatterOptions ?? ParameterCSharpFormat.Default).WriteToString(parameterInfo);
-
-    public static string WriteCSharp(
+    public static string ToCSharpString(
         this MethodInfo methodInfo,
         MethodCSharpFormat? methodFormatterOptions = null) =>
         (methodFormatterOptions ?? MethodCSharpFormat.Default).WriteToString(methodInfo);
+
+    public static StringBuilder AppendCSharp(
+        this StringBuilder sb,
+        MethodInfo methodInfo,
+        MethodCSharpFormat? methodFormatterOptions = null)
+    {
+        (methodFormatterOptions ?? MethodCSharpFormat.Default).WriteTo(methodInfo, sb);
+        return sb;
+    }
 }
 
 #region C# Formatting (Types)
@@ -232,22 +236,28 @@ internal readonly record struct TypeCSharpFormatContext(
 #region C# Formatting (ParameterInfo)
 
 internal record ParameterCSharpFormat(
-    FormattableStringProvider<ParameterCSharpFormatContext>? ParameterFormat = null,
+    FormattableStringProvider<IParameterCSharpFormatContext>? ParameterFormat = null,
     TypeCSharpFormat? TypeFormat = null)
     : CSharpFormat<ParameterInfo>
 {
-    private static readonly FormattableStringProvider<ParameterCSharpFormatContext> DefaultParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
+    private static readonly FormattableStringProvider<IParameterCSharpFormatContext> DefaultParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
     public static ParameterCSharpFormat Default { get; } = new();
-    public FormattableStringProvider<ParameterCSharpFormatContext> ParameterFormat { get; } = ParameterFormat ?? DefaultParameterFormat;
+    public FormattableStringProvider<IParameterCSharpFormatContext> ParameterFormat { get; } = ParameterFormat ?? DefaultParameterFormat;
     public TypeCSharpFormat TypeFormat { get; } = TypeFormat ?? TypeCSharpFormat.Default;
 
     public override TextWriterFormattableString GetFormattableString(ParameterInfo parameterInfo) =>
         ParameterFormat(new ParameterCSharpFormatContext(parameterInfo, this));
 }
 
+internal interface IParameterCSharpFormatContext
+{
+    string Name { get; }
+    TextWriterFormattableString Type { get; }
+}
+
 internal readonly record struct ParameterCSharpFormatContext(
     ParameterInfo ParameterInfo,
-    ParameterCSharpFormat ParameterFormat)
+    ParameterCSharpFormat ParameterFormat) : IParameterCSharpFormatContext
 {
     public ParameterInfo ParameterInfo { get; } = ParameterInfo;
     public string Name => ParameterInfo.Name!;
@@ -262,7 +272,7 @@ internal readonly record struct ParameterCSharpFormatContext(
 #region C# Formatting (MethodInfo)
 
 internal record MethodCSharpFormat(
-    FormattableStringProvider<MethodCSharpFormatContext>? MethodFormat = null,
+    FormattableStringProvider<IMethodCSharpFormatContext>? MethodFormat = null,
     ParameterCSharpFormat? ParameterFormat = null,
     string ParameterSeparator = ", ",
     string ParametersOpenBracket = "(",
@@ -272,18 +282,26 @@ internal record MethodCSharpFormat(
     string GenericArgumentsCloseBracket = ">")
     : CSharpFormat<MethodInfo>
 {
-    private static readonly FormattableStringProvider<MethodCSharpFormatContext> DefaultMethodFormat = (method => $"{method.ReturnType} {method.Name}{method.GenericArguments}{method.Parameters}");
+    private static readonly FormattableStringProvider<IMethodCSharpFormatContext> DefaultMethodFormat = (method => $"{method.ReturnType} {method.Name}{method.GenericArguments}{method.Parameters}");
     public static MethodCSharpFormat Default { get; } = new();
-    public FormattableStringProvider<MethodCSharpFormatContext> MethodFormat { get; } = MethodFormat ?? DefaultMethodFormat;
+    public FormattableStringProvider<IMethodCSharpFormatContext> MethodFormat { get; } = MethodFormat ?? DefaultMethodFormat;
     public ParameterCSharpFormat ParameterFormat { get; } = ParameterFormat ?? ParameterCSharpFormat.Default;
 
     public override TextWriterFormattableString GetFormattableString(MethodInfo methodInfo) =>
         MethodFormat(new MethodCSharpFormatContext(methodInfo, this));
 }
 
+internal interface IMethodCSharpFormatContext
+{
+    string Name { get; }
+    TextWriterFormattableString ReturnType { get; }
+    TextWriterFormattableString GenericArguments { get; }
+    TextWriterFormattableString Parameters { get; }
+}
+
 internal readonly record struct MethodCSharpFormatContext(
     MethodInfo MethodInfo,
-    MethodCSharpFormat MethodFormat)
+    MethodCSharpFormat MethodFormat) : IMethodCSharpFormatContext
 {
     public MethodInfo MethodInfo { get; } = MethodInfo;
 
@@ -385,17 +403,19 @@ internal struct TextWriterFormattableString
             s.AppendFormatted(formatString.WriteTo);
         }
 
-        if (!noBracketsWhenEmpty)
+        var isEmpty = first;
+        if (isEmpty)
         {
-            if (first)
+            var showBracketsWhenEmpty = !noBracketsWhenEmpty;
+            if (showBracketsWhenEmpty)
             {
                 if (openBracket.Length > 0 || closeBracket.Length > 0)
                     s.AppendFormatted(w => w.Write($"{openBracket}{closeBracket}"));
             }
-            else if (closeBracket.Length > 0)
-            {
-                s.AppendFormatted(w => w.Write(closeBracket));
-            }
+        }
+        else if (closeBracket.Length > 0)
+        {
+            s.AppendFormatted(w => w.Write(closeBracket));
         }
 
         return s;
@@ -410,10 +430,10 @@ internal abstract record CSharpFormat<T>
     public abstract TextWriterFormattableString GetFormattableString(T target);
 
     public void WriteTo(T target, TextWriter textWriter) =>
-        GetFormattableString(target).WriteTo(new TextWriterAdapter(textWriter));
+        GetFormattableString(target).WriteTo(new BasicTextWriterAdapter(textWriter));
 
     public void WriteTo(T target, StringBuilder stringBuilder) =>
-        GetFormattableString(target).WriteTo(new StringBuilderAdapter(stringBuilder));
+        GetFormattableString(target).WriteTo(new BasicStringBuilderAdapter(stringBuilder));
 
     public string WriteToString(T target)
     {
@@ -431,13 +451,13 @@ internal interface IBasicTextWriter
     void Write(char s);
 }
 
-file readonly record struct TextWriterAdapter(TextWriter Inner) : IBasicTextWriter
+internal readonly record struct BasicTextWriterAdapter(TextWriter Inner) : IBasicTextWriter
 {
     public void Write(string s) => Inner.Write(s);
     public void Write(char s) => Inner.Write(s);
 }
 
-file readonly record struct StringBuilderAdapter(StringBuilder Inner) : IBasicTextWriter
+internal readonly record struct BasicStringBuilderAdapter(StringBuilder Inner) : IBasicTextWriter
 {
     public void Write(string s) => Inner.Append(s);
     public void Write(char s) => Inner.Append(s);

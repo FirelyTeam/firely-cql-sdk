@@ -329,7 +329,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 				return t_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
+			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
 			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
@@ -443,7 +443,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 				return t_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
+			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
 			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
@@ -600,7 +600,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 				return t_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
+			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
 			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
@@ -654,7 +654,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return am_;
 				};
-				var ae_ = context.Operators.Where<Observation.ComponentComponent>((SkinExam?.Component as IEnumerable<Observation.ComponentComponent>), ad_);
+				var ae_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)SkinExam?.Component, ad_);
 				CqlConcept af_(Observation.ComponentComponent @this)
 				{
 					var an_ = FHIRHelpers_4_3_000.ToConcept(@this?.Code);
@@ -731,7 +731,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 				return t_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((InpatientHospitalization?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
+			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
 			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 
 			return f_;
@@ -785,7 +785,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return am_;
 				};
-				var ae_ = context.Operators.Where<Observation.ComponentComponent>((SkinExam?.Component as IEnumerable<Observation.ComponentComponent>), ad_);
+				var ae_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)SkinExam?.Component, ad_);
 				CqlConcept af_(Observation.ComponentComponent @this)
 				{
 					var an_ = FHIRHelpers_4_3_000.ToConcept(@this?.Code);

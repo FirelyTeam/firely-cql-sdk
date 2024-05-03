@@ -368,14 +368,14 @@ public class CQMCommon_2_0_000
 			{
 				if ((EDEncounter is null))
 				{
-					return (TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>);
+					return (IEnumerable<Encounter.LocationComponent>)TheEncounter?.Location;
 				}
 				else
 				{
 					var g_ = new IEnumerable<Encounter.LocationComponent>[]
 					{
-						(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
-						(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
+						(IEnumerable<Encounter.LocationComponent>)EDEncounter?.Location,
+						(IEnumerable<Encounter.LocationComponent>)TheEncounter?.Location,
 					};
 					var h_ = context.Operators.Flatten<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
@@ -406,14 +406,14 @@ public class CQMCommon_2_0_000
 			{
 				if ((EDEncounter is null))
 				{
-					return (TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>);
+					return (IEnumerable<Encounter.LocationComponent>)TheEncounter?.Location;
 				}
 				else
 				{
 					var g_ = new IEnumerable<Encounter.LocationComponent>[]
 					{
-						(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
-						(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
+						(IEnumerable<Encounter.LocationComponent>)EDEncounter?.Location,
+						(IEnumerable<Encounter.LocationComponent>)TheEncounter?.Location,
 					};
 					var h_ = context.Operators.Flatten<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
@@ -2522,7 +2522,7 @@ public class CQMCommon_2_0_000
 
 			return n_;
 		};
-		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)Encounter?.Location, a_);
 		object c_(Encounter.LocationComponent @this)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2559,7 +2559,7 @@ public class CQMCommon_2_0_000
 
 			return n_;
 		};
-		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)Encounter?.Location, a_);
 		object c_(Encounter.LocationComponent @this)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2593,7 +2593,7 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 
 		return b_;
 	}
@@ -2617,7 +2617,7 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 
 		return b_;
 	}
@@ -2670,7 +2670,7 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 		Condition c_(Encounter.DiagnosisComponent PD)
 		{
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
@@ -2702,7 +2702,7 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 		Condition c_(Encounter.DiagnosisComponent PD)
 		{
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(null, null);

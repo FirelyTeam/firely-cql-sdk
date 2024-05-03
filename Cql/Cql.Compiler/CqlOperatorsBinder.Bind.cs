@@ -7,15 +7,14 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Security;
+using System.Text;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Operators;
 using Microsoft.Extensions.Logging;
-using static Hl7.Cql.Compiler.CqlOperatorsBinder;
 using Expression = System.Linq.Expressions.Expression;
 
 
@@ -25,13 +24,6 @@ namespace Hl7.Cql.Compiler;
 internal partial class CqlOperatorsBinder
 {
     private static readonly CqlOperatorsMethodsCache ICqlOperatorsMethods = new();
-    private static readonly TypeCSharpFormat TypeCSharpFormat = new(UseKeywords:true, NoNamespaces:true);
-
-    private static readonly MethodCSharpFormat MethodCSharpFormat = new (
-        MethodFormat: method => $"\n\t* {method.Name}{method.GenericArguments}{method.Parameters}",
-        ParameterFormat: new (
-            ParameterFormat: parameter => $"{parameter.Type}",
-            TypeFormat: TypeCSharpFormat));
 
     ///  <summary>
     ///
@@ -80,8 +72,7 @@ internal partial class CqlOperatorsBinder
         {
             if (throwError)
             {
-                var noCandidatesErrorMessage = NoCandidatesErrorMessage();
-                throw new ArgumentException(noCandidatesErrorMessage, nameof(methodName));
+                throw new CannotBindToCqlOperatorError(methodName, methodArguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException();
             }
         }
 
@@ -92,55 +83,33 @@ internal partial class CqlOperatorsBinder
         {
             if (methodArguments.Length > 0)
             {
-                var scoredCandidates = candidates
-                    .SelectToArray(candidate => (candidate, score:Score(candidate)));
+                var scoredCandidates = candidates.SelectToArray(candidate => (candidate, score:Score(candidate)));
                 Array.Sort(scoredCandidates, (a, b) => a.score.CompareTo(b.score));
 
-                var inputText = InputMethodAndParametersToString();
-                var scoredCandidatesText = string.Concat(
-                    scoredCandidates.Select(t => $"{t.candidate.method.WriteCSharp(MethodCSharpFormat)} ({t.score})"));
+                StringBuilder sbInput = new();
+                sbInput.Append(Defaults.NextItem);
+                sbInput.AppendCSharp(methodName, methodArguments, genericTypeArguments);
+
+                StringBuilder sbCandidatesAndScore = new();
+                foreach (var ((method, methodArguments, _), score) in scoredCandidates)
+                {
+                    sbCandidatesAndScore.Append(Defaults.NextItem);
+                    sbCandidatesAndScore.AppendCSharp(method.Name, methodArguments, genericTypeArguments);
+                    sbCandidatesAndScore.Append(" (");
+                    sbCandidatesAndScore.Append(score);
+                    sbCandidatesAndScore.Append(')');
+                }
 
                 _logger?.LogDebug(
-                    "Multiple candidates found for method {input}\nPicking the top item with lowest score: {candidatesAndScore}",
-                    inputText,
-                    scoredCandidatesText);
+                    "Multiple candidates found for method:{input}\nPicking the top item with lowest score: {candidatesAndScore}",
+                    sbInput,
+                    sbCandidatesAndScore);
 
                 return scoredCandidates[0].candidate;
             }
 
             throw new InvalidOperationException("");
         }
-
-        string NoCandidatesErrorMessage()
-        {
-            var inputText = InputMethodAndParametersToString();
-
-            var overloadsText =
-                string.Concat(
-                    ICqlOperatorsMethods
-                        .GetMethodsByName(methodName)
-                        .Select(t => t.WriteCSharp(MethodCSharpFormat))
-                );
-            return $$"""
-                     Mo suitable method could be bound from:{{inputText}}
-                     to the following method overloads:{{overloadsText}}
-                     """;
-        }
-
-        string InputMethodAndParametersToString() =>
-            $"\n\t* {methodName}{InputMethodGenericTypeArgumentsToString()}({InputMethodArgumentsToString()
-            })";
-
-        string InputMethodGenericTypeArgumentsToString() =>
-            genericTypeArguments.Length > 0
-                ? $"<{string.Join(", ", genericTypeArguments.SelectToArray(t => t.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat)))}>"
-                : "";
-
-        string InputMethodArgumentsToString() =>
-            string.Join(
-                ", ",
-                methodArguments
-                    .SelectToArray(a => a.Type.WriteCSharp(MethodCSharpFormat.ParameterFormat.TypeFormat)));
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {
@@ -257,7 +226,7 @@ internal partial class CqlOperatorsBinder
             for (int i = 0; i < args.Length; i++)
             {
                 Type to = parameters[i].ParameterType;
-                if (!_expressionConverter.TryConvert(args[i], to, out var t))
+                if (!TryConvert(args[i], to, out var t))
                     return false;
 
                 (bindArgs[i], bindConversions[i]) = t;
@@ -272,14 +241,23 @@ internal partial class CqlOperatorsBinder
         params Expression[] arguments) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, null, arguments);
 
+    private static MethodCallExpression BindToGenericMethod(
+        string methodName,
+        Type[] genericTypeArguments,
+        params Expression[] arguments)
+    {
+        try
+        {
+            return Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, genericTypeArguments, arguments);
+        }
+        catch (Exception e)
+        {
+            throw new CannotBindToCqlOperatorError(methodName, arguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException(e);
+        }
+    }
+
     private static MethodCallExpression BindToDirectMethod(
         MethodInfo method,
         params Expression[] expressions) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, method, expressions);
-
-    internal static MethodCallExpression BindToGenericMethod(
-        string methodName,
-        Type[] genericTypeArguments,
-        params Expression[] arguments) =>
-        Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, genericTypeArguments, arguments);
 }

@@ -262,7 +262,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return ab_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoAntithromboticDischarge?.ReasonCode, g_);
 			var i_ = this.Medical_Reason();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			CqlConcept k_(CodeableConcept X)
@@ -271,7 +271,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return ac_;
 			};
-			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), k_);
+			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoAntithromboticDischarge?.ReasonCode, k_);
 			var m_ = this.Patient_Refusal();
 			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
 			var o_ = context.Operators.Or(j_, n_);
@@ -289,7 +289,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return al_;
 			};
-			var r_ = context.Operators.Where<CodeableConcept>((NoAntithromboticDischarge?.Category as IEnumerable<CodeableConcept>), q_);
+			var r_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)NoAntithromboticDischarge?.Category, q_);
 			var s_ = context.Operators.Exists<CodeableConcept>(r_);
 			var t_ = context.Operators.And(p_, s_);
 			var u_ = FHIRHelpers_4_0_001.ToString(NoAntithromboticDischarge?.StatusElement);
@@ -367,7 +367,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return aa_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((Pharmacological?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)Pharmacological?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = FHIRHelpers_4_0_001.ToString(Pharmacological?.StatusElement);
@@ -482,7 +482,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return aa_;
 			};
-			var i_ = context.Operators.Where<CodeableConcept>((Antithrombotic?.Category as IEnumerable<CodeableConcept>), h_);
+			var i_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)Antithrombotic?.Category, h_);
 			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = FHIRHelpers_4_0_001.ToString(Antithrombotic?.StatusElement);

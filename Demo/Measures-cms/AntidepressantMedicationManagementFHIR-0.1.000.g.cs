@@ -457,7 +457,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		{
 			var l_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
 			var m_ = context.Operators.Not((bool?)(l_ is null));
-			var n_ = context.Operators.SingletonFrom<Dosage>((ActiveAntidepressant?.DosageInstruction as IEnumerable<Dosage>));
+			var n_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)ActiveAntidepressant?.DosageInstruction);
 			var o_ = FHIRHelpers_4_3_000.ToValue(n_?.Timing?.Repeat?.Bounds);
 			var p_ = new object[]
 			{
