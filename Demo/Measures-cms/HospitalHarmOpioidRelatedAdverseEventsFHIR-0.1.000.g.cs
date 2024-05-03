@@ -372,7 +372,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		var b_ = this.Opioid_Administration();
 		var c_ = this.Denominator();
 		var d_ = context.Operators.CrossJoin<MedicationAdministration, MedicationAdministration, Encounter>(a_, b_, c_);
-		Tuple_DiOQPVXLKifMhgTIYEEjRUSaD e_(ValueTuple<MedicationAdministration,MedicationAdministration,Encounter> _valueTuple)
+		Tuple_DiOQPVXLKifMhgTIYEEjRUSaD e_(ValueTuple<MedicationAdministration, MedicationAdministration, Encounter> _valueTuple)
 		{
 			var k_ = new Tuple_DiOQPVXLKifMhgTIYEEjRUSaD
 			{
@@ -383,7 +383,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<MedicationAdministration,MedicationAdministration,Encounter>, Tuple_DiOQPVXLKifMhgTIYEEjRUSaD>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>, Tuple_DiOQPVXLKifMhgTIYEEjRUSaD>(d_, e_);
 		bool? g_(Tuple_DiOQPVXLKifMhgTIYEEjRUSaD tuple_dioqpvxlkifmhgtiyeejrusad)
 		{
 			bool? l_(Encounter.LocationComponent EncounterLocation)

@@ -77,7 +77,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	public IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Adjacent_Intervals(IEnumerable<CqlInterval<CqlDate>> Intervals)
 	{
 		var a_ = context.Operators.CrossJoin<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(Intervals, Intervals);
-		Tuple_BaNHUZXcQBUKLNgEDWdDHjYV b_(ValueTuple<CqlInterval<CqlDate>,CqlInterval<CqlDate>> _valueTuple)
+		Tuple_BaNHUZXcQBUKLNgEDWdDHjYV b_(ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>> _valueTuple)
 		{
 			var h_ = new Tuple_BaNHUZXcQBUKLNgEDWdDHjYV
 			{
@@ -87,7 +87,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 			return h_;
 		};
-		var c_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDate>,CqlInterval<CqlDate>>, Tuple_BaNHUZXcQBUKLNgEDWdDHjYV>(a_, b_);
+		var c_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>, Tuple_BaNHUZXcQBUKLNgEDWdDHjYV>(a_, b_);
 		bool? d_(Tuple_BaNHUZXcQBUKLNgEDWdDHjYV tuple_banhuzxcqbuklngedwddhjyv)
 		{
 			var i_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv.Coverage1);

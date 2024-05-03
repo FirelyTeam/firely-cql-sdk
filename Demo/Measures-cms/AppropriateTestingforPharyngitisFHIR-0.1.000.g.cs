@@ -589,7 +589,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days();
 		var b_ = this.Pharyngitis_or_Tonsillitis();
 		var c_ = context.Operators.CrossJoin<Encounter, Condition>(a_, b_);
-		Tuple_YPYXEdbbCQBdAVHXVcKUWMfH d_(ValueTuple<Encounter,Condition> _valueTuple)
+		Tuple_YPYXEdbbCQBdAVHXVcKUWMfH d_(ValueTuple<Encounter, Condition> _valueTuple)
 		{
 			var j_ = new Tuple_YPYXEdbbCQBdAVHXVcKUWMfH
 			{
@@ -599,7 +599,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter, Condition>, Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(c_, d_);
 		bool? f_(Tuple_YPYXEdbbCQBdAVHXVcKUWMfH tuple_ypyxedbbcqbdavhxvckuwmfh)
 		{
 			var k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_ypyxedbbcqbdavhxvckuwmfh.AcutePharyngitisTonsillitis);
@@ -730,7 +730,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Group_A_Streptococcus_Lab_Test_With_Result();
 		var b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic();
 		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ d_(ValueTuple<Observation,Encounter> _valueTuple)
+		Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ d_(ValueTuple<Observation, Encounter> _valueTuple)
 		{
 			var j_ = new Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ
 			{
@@ -740,7 +740,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Observation,Encounter>, Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(c_, d_);
 		bool? f_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij)
 		{
 			var k_ = FHIRHelpers_4_3_000.ToValue(tuple_ffguysnebcxllexfcmjoehbij.GroupAStreptococcusTest?.Effective);

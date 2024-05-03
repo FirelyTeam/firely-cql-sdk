@@ -324,7 +324,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var e_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(b_, null);
 		var f_ = context.Operators.ListUnion<MedicationAdministration>(c_, e_);
 		var g_ = context.Operators.CrossJoin<Tuple_GPLfQTPONQabPZigKbYFERDVQ, MedicationAdministration>(a_, f_);
-		Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB h_(ValueTuple<Tuple_GPLfQTPONQabPZigKbYFERDVQ,MedicationAdministration> _valueTuple)
+		Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB h_(ValueTuple<Tuple_GPLfQTPONQabPZigKbYFERDVQ, MedicationAdministration> _valueTuple)
 		{
 			var n_ = new Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB
 			{
@@ -334,7 +334,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Tuple_GPLfQTPONQabPZigKbYFERDVQ,MedicationAdministration>, Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB>(g_, h_);
+		var i_ = context.Operators.Select<ValueTuple<Tuple_GPLfQTPONQabPZigKbYFERDVQ, MedicationAdministration>, Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB>(g_, h_);
 		bool? j_(Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB tuple_clxcrdeespovhrdozoxqzeieb)
 		{
 			var o_ = FHIRHelpers_4_0_001.ToString(tuple_clxcrdeespovhrdozoxqzeieb.HypoglycemicMedication?.StatusElement);

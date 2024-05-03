@@ -18,8 +18,6 @@ internal static class Defaults
     public static readonly TypeCSharpFormat TypeCSharpFormat = new(UseKeywords:true, NoNamespaces:true);
 
     public static readonly MethodCSharpFormat MethodCSharpFormat = new (
-        //MethodFormat: method => $"\n\t* {method.Name}{method.GenericArguments}{method.Parameters}",
         ParameterFormat: new (
-            //ParameterFormat: parameter => $"{parameter.Type}",
             TypeFormat: TypeCSharpFormat));
 }

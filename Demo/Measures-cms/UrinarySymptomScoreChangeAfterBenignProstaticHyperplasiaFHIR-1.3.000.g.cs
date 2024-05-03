@@ -1170,7 +1170,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			c_,
 		};
 		var e_ = context.Operators.CrossJoin<Tuple_GNNDVIQPcTANSdLebhBKYIdga, Tuple_GNNDVIQPcTANSdLebhBKYIdga>((IEnumerable<Tuple_GNNDVIQPcTANSdLebhBKYIdga>)b_, (IEnumerable<Tuple_GNNDVIQPcTANSdLebhBKYIdga>)d_);
-		Tuple_FBHNjYWJgMKheadEZUgcdQGXN f_(ValueTuple<Tuple_GNNDVIQPcTANSdLebhBKYIdga,Tuple_GNNDVIQPcTANSdLebhBKYIdga> _valueTuple)
+		Tuple_FBHNjYWJgMKheadEZUgcdQGXN f_(ValueTuple<Tuple_GNNDVIQPcTANSdLebhBKYIdga, Tuple_GNNDVIQPcTANSdLebhBKYIdga> _valueTuple)
 		{
 			var k_ = new Tuple_FBHNjYWJgMKheadEZUgcdQGXN
 			{
@@ -1180,7 +1180,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return k_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Tuple_GNNDVIQPcTANSdLebhBKYIdga,Tuple_GNNDVIQPcTANSdLebhBKYIdga>, Tuple_FBHNjYWJgMKheadEZUgcdQGXN>(e_, f_);
+		var g_ = context.Operators.Select<ValueTuple<Tuple_GNNDVIQPcTANSdLebhBKYIdga, Tuple_GNNDVIQPcTANSdLebhBKYIdga>, Tuple_FBHNjYWJgMKheadEZUgcdQGXN>(e_, f_);
 		int? h_(Tuple_FBHNjYWJgMKheadEZUgcdQGXN tuple_fbhnjywjgmkheadezugcdqgxn)
 		{
 			var l_ = context.Operators.Subtract(tuple_fbhnjywjgmkheadezugcdqgxn.FirstUSSAssessment?.valueInteger, tuple_fbhnjywjgmkheadezugcdqgxn.FollowUpUSSAssessment?.valueInteger);

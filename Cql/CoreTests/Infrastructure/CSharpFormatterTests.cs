@@ -44,34 +44,34 @@ public class CSharpFormatterTests
             // Arrays
             (typeof(int[]), "int[]"),
             (typeof(int[][]), "int[][]"),
-            (typeof(int[,]), "int[,]"),
-            (typeof(int[][,]), "int[,][]"),
-            (typeof(int[,][]), "int[][,]"),
+            (typeof(int[,]), "int[, ]"),
+            (typeof(int[][,]), "int[, ][]"),
+            (typeof(int[,][]), "int[][, ]"),
             // Pointers
             (typeof(int*), "int*"),
             (typeof(int**), "int**"),
             // Mixed Pointers/Arrays
             (typeof(int*[]*), "int*[]*"),
-            (typeof(int*[,]*), "int*[,]*"),
+            (typeof(int*[,]*), "int*[, ]*"),
             // Nested
             (typeof(EmptyStruct), "EmptyStruct"),
             (typeof(EmptyStruct.Nested1.Nested2), "EmptyStruct.Nested1.Nested2"),
             // Nullable Value Type
             (typeof(int?), "int?"),
             // Generic
-            (typeof(IDictionary<string?, int?>), "IDictionary<string,int?>"),
-            (typeof(IDictionary<,>), "IDictionary<TKey,TValue>"),
+            (typeof(IDictionary<string?, int?>), "IDictionary<string, int?>"),
+            (typeof(IDictionary<,>), "IDictionary<TKey, TValue>"),
             // Generic+Nested
-            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>), "EmptyStruct.Nested1.GenericNested2<int,int>"),
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>), "EmptyStruct.Nested1.GenericNested2<int, int>"),
             // Generic+Nested+Nullable
-            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?), "EmptyStruct.Nested1.GenericNested2<int,int>?"),
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?), "EmptyStruct.Nested1.GenericNested2<int, int>?"),
             // Generic+Nested+Array
-            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>[]), "EmptyStruct.Nested1.GenericNested2<int,int>[]"),
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>[]), "EmptyStruct.Nested1.GenericNested2<int, int>[]"),
             // Generic+Nested+Array+Nullable
-            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?[]), "EmptyStruct.Nested1.GenericNested2<int,int>?[]"),
+            (typeof(EmptyStruct.Nested1.GenericNested2<int, int>?[]), "EmptyStruct.Nested1.GenericNested2<int, int>?[]"),
             // Generic+Nested+Delegate
-            (typeof(EmptyStruct.Nested1.NestedFunc<int, int>?[]), "EmptyStruct.Nested1.NestedFunc<int,int>[]"),
-            (typeof(EmptyStruct.Nested1.NestedFunc<,>), "EmptyStruct.Nested1.NestedFunc<in TIn,out TOut>")
+            (typeof(EmptyStruct.Nested1.NestedFunc<int, int>?[]), "EmptyStruct.Nested1.NestedFunc<int, int>[]"),
+            (typeof(EmptyStruct.Nested1.NestedFunc<,>), "EmptyStruct.Nested1.NestedFunc<in TIn, out TOut>")
         ];
 
         var typeToCSharpStringOptions = new TypeCSharpFormat(NoNamespaces: true, UseKeywords: true);
@@ -82,23 +82,23 @@ public class CSharpFormatterTests
         }
 
         Assert.AreEqual(
-            expected: "System.Collections.Generic.IDictionary<,>",
+            expected: "System.Collections.Generic.IDictionary<, >",
             actual: typeof(IDictionary<,>).ToCSharpString(typeFormatterOptions: new(NoGenericTypeParameterNames:true)));
 
         Assert.AreEqual(
-            expected: "IDictionary<TKey,TValue>",
+            expected: "IDictionary<TKey, TValue>",
             actual: typeof(IDictionary<,>).ToCSharpString(
                 typeFormatterOptions: new(
                     NoNamespaces: true,
                     UseKeywords: true)));
 
         Assert.AreEqual(
-            expected: "System.Collections.Generic.IDictionary<TKey, TValue>",
+            expected: "System.Collections.Generic.IDictionary<TKey,TValue>",
             actual: typeof(IDictionary<,>).ToCSharpString(
                 typeFormatterOptions: new(
-                    NoNamespaces: false,
-                    UseKeywords: true,
-                    TypeSeparator: ", ")));
+                        NoNamespaces: false,
+                        UseKeywords: true,
+                        GenericArgumentTokens: CSharpTokens.GenericArguments with { Separator = ","})));
 
         Assert.AreEqual(
             expected: "CoreTests.Infrastructure.EmptyStruct+Nested1+Nested2",
@@ -158,7 +158,7 @@ public class CSharpFormatterTests
                 TypeFormat: new(
                     UseKeywords:true,
                     NoNamespaces:true)),
-            ParameterSeparator: "; "
+            ParameterTokens: CSharpTokens.Parameters with { Separator = "; "}
         );
         methodCSharpFormat.WriteTo(m, tw);
         Assert.AreEqual(

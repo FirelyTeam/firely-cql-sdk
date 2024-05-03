@@ -56,10 +56,7 @@ internal static class Extensions
                     MethodExpressions
                         .genericTypeArguments
                         .Select(type => typeFormat.GetFormattableString(type)),
-                    MethodFormat.GenericArgumentSeparator,
-                    MethodFormat.GenericArgumentsOpenBracket,
-                    MethodFormat.GenericArgumentsCloseBracket,
-                    noBracketsWhenEmpty: true);
+                    typeFormat.GenericArgumentTokens);
             }
         }
 
@@ -72,9 +69,7 @@ internal static class Extensions
                     MethodExpressions
                         .methodArguments
                         .Select(expression => typeFormat.GetFormattableString(expression.Type)),
-                    MethodFormat.ParameterSeparator,
-                    MethodFormat.ParametersOpenBracket,
-                    MethodFormat.ParametersCloseBracket);
+                    MethodFormat.ParameterTokens);
             }
         }
     }

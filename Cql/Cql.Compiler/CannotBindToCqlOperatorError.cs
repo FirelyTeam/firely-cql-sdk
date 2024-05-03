@@ -15,8 +15,6 @@ using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
-
-#pragma warning disable CS1591
 internal readonly record struct CannotBindToCqlOperatorError(
     string MethodName,
     Expression[] MethodArguments,

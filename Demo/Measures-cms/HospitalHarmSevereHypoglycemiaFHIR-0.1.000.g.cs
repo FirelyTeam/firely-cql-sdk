@@ -278,7 +278,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(a_, b_, d_);
-		Tuple_BTYMMDGaChdRaGRhOfgXBXGHO f_(ValueTuple<Encounter,MedicationAdministration,Observation> _valueTuple)
+		Tuple_BTYMMDGaChdRaGRhOfgXBXGHO f_(ValueTuple<Encounter, MedicationAdministration, Observation> _valueTuple)
 		{
 			var l_ = new Tuple_BTYMMDGaChdRaGRhOfgXBXGHO
 			{
@@ -289,7 +289,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,MedicationAdministration,Observation>, Tuple_BTYMMDGaChdRaGRhOfgXBXGHO>(e_, f_);
+		var g_ = context.Operators.Select<ValueTuple<Encounter, MedicationAdministration, Observation>, Tuple_BTYMMDGaChdRaGRhOfgXBXGHO>(e_, f_);
 		bool? h_(Tuple_BTYMMDGaChdRaGRhOfgXBXGHO tuple_btymmdgachdragrhofgxbxgho)
 		{
 			object m_()
@@ -528,7 +528,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(a_, b_, d_);
-		Tuple_CLLJQcGdEjTDiIeWKZYJPWaPd f_(ValueTuple<Encounter,Observation,Observation> _valueTuple)
+		Tuple_CLLJQcGdEjTDiIeWKZYJPWaPd f_(ValueTuple<Encounter, Observation, Observation> _valueTuple)
 		{
 			var l_ = new Tuple_CLLJQcGdEjTDiIeWKZYJPWaPd
 			{
@@ -539,7 +539,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,Observation,Observation>, Tuple_CLLJQcGdEjTDiIeWKZYJPWaPd>(e_, f_);
+		var g_ = context.Operators.Select<ValueTuple<Encounter, Observation, Observation>, Tuple_CLLJQcGdEjTDiIeWKZYJPWaPd>(e_, f_);
 		bool? h_(Tuple_CLLJQcGdEjTDiIeWKZYJPWaPd tuple_clljqcgdejtdiiewkzyjpwapd)
 		{
 			object m_()
@@ -906,7 +906,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		var a_ = this.Denominator();
 		var b_ = this.Severe_Hypoglycemic_Harm_Event();
 		var c_ = context.Operators.CrossJoin<Encounter, Observation>(a_, b_);
-		Tuple_HFNEMPjQLiOPFNRMYPNYDhFfR d_(ValueTuple<Encounter,Observation> _valueTuple)
+		Tuple_HFNEMPjQLiOPFNRMYPNYDhFfR d_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
 			var j_ = new Tuple_HFNEMPjQLiOPFNRMYPNYDhFfR
 			{
@@ -916,7 +916,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Observation>, Tuple_HFNEMPjQLiOPFNRMYPNYDhFfR>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter, Observation>, Tuple_HFNEMPjQLiOPFNRMYPNYDhFfR>(c_, d_);
 		bool? f_(Tuple_HFNEMPjQLiOPFNRMYPNYDhFfR tuple_hfnempjqliopfnrmypnydhffr)
 		{
 			object k_()

@@ -279,7 +279,6 @@ namespace Hl7.Cql.Compiler
                         Collapse e         => Collapse(e),
                         ConceptRef e       => ConceptRef(e),
                         Contains e         => Contains(e),
-                        ExpandValueSet e   => CqlOperatorsBinder.CallCreateValueSetFacade(TranslateArg(e.operand!)),
                         Ends e             => Ends(e),
                         Equivalent e       => Equivalent(e),
                         Except e           => Except(e),
@@ -393,6 +392,7 @@ namespace Hl7.Cql.Compiler
                     EndsWith or
                     Equal or
                     Expand or
+                    ExpandValueSet or
                     Greater or
                     GreaterOrEqual or
                     HighBoundary or

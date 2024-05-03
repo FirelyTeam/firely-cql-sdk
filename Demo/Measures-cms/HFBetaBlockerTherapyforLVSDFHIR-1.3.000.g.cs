@@ -419,7 +419,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 		var b_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuple_FUFPMQdRaTBgLhghDWfUUBaNF d_(ValueTuple<Observation,Encounter> _valueTuple)
+		Tuple_FUFPMQdRaTBgLhghDWfUUBaNF d_(ValueTuple<Observation, Encounter> _valueTuple)
 		{
 			var k_ = new Tuple_FUFPMQdRaTBgLhghDWfUUBaNF
 			{
@@ -429,7 +429,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return k_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Observation,Encounter>, Tuple_FUFPMQdRaTBgLhghDWfUUBaNF>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, Tuple_FUFPMQdRaTBgLhghDWfUUBaNF>(c_, d_);
 		bool? f_(Tuple_FUFPMQdRaTBgLhghDWfUUBaNF tuple_fufpmqdratbglhghdwfuubanf)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_fufpmqdratbglhghdwfuubanf.ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
