@@ -74,7 +74,7 @@ namespace Hl7.Cql.Runtime
         public int? StringLength(string argument)
         {
             if (argument == null)
-                return 0;
+                return null;
             else
                 return argument.Length;
         }

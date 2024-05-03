@@ -1,0 +1,6 @@
+@Cql.Api_HostAddress = http://localhost:5207
+
+GET {{Cql.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -25,10 +25,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Api" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

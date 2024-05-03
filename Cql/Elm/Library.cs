@@ -1,4 +1,13 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.Elm.Serialization;
 using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
@@ -88,6 +97,22 @@ namespace Hl7.Cql.Elm
                 .Select(p => p!)
                 .ToArray();
             return elmLibraries;
+        }
+
+        /// <summary>
+        /// Writes this library in JSON format to <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream">A writable stream.</param>
+        /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
+        public void WriteJson(Stream stream, bool writeIndented = true)
+        {
+            var options = GetSerializerOptions(false);
+            if (writeIndented)
+                options.WriteIndented = true;
+            else
+                options.WriteIndented = false;
+            JsonSerializer.Serialize(stream, this, options);
+
         }
 
         internal static DirectedGraph GetIncludedLibraries(IEnumerable<Library> libraries)

@@ -26,6 +26,5 @@
 		<ProjectReference Include="..\Elm\Elm.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
 	</ItemGroup>
 </Project>

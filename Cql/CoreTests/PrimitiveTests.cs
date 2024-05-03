@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using FluentAssertions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
@@ -26,6 +27,7 @@ namespace CoreTests
     {
         private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
         private static readonly Hl7.Cql.Conversion.TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        private static readonly ExpressionBuilderOptions ignoreErrors = new ExpressionBuilderOptions { IgnoreElmErrorAnnotations = true };
 
 
         private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
@@ -47,6 +49,15 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void CqlDate_Subtract_Months_From_Year()
+        {
+            Assert.IsTrue(CqlDateTime.TryParse("2014", out var baseDate));
+            var result = baseDate.Subtract(new CqlQuantity(25m, UCUMUnits.Month));
+            Assert.AreEqual(2012, result.Value.Year);
+            Assert.AreEqual(DateTimePrecision.Year, result.Precision);
+        }
+
+        [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
         {
             Assert.IsTrue(CqlDateTime.TryParse("1960", out var baseDate));
@@ -64,7 +75,7 @@ namespace CoreTests
             var plus365days = baseDate.Add(new CqlQuantity(365, "day"));
             Assert.AreEqual(DateTimePrecision.Year, plus365days.Value.Precision);
             Assert.IsNull(plus365days.Value.Month);
-            Assert.AreEqual("1960", plus365days.ToString()); // 1960 is a leap year and has 366 days
+            Assert.AreEqual("1961", plus365days.ToString());
 
             var plus366days = baseDate.Add(new CqlQuantity(366, "day"));
             Assert.AreEqual(DateTimePrecision.Year, plus366days.Value.Precision);
@@ -79,7 +90,7 @@ namespace CoreTests
             var plus365DaysInSeconds = baseDate.Add(new CqlQuantity(365 * 24 * 60 * 60, "seconds"));
             Assert.AreEqual(DateTimePrecision.Year, plus365DaysInSeconds.Value.Precision);
             Assert.IsNull(plus365DaysInSeconds.Value.Month);
-            Assert.AreEqual("1960", plus365DaysInSeconds.ToString());
+            Assert.AreEqual("1961", plus365DaysInSeconds.ToString());
         }
 
         [TestMethod]
@@ -3392,6 +3403,24 @@ namespace CoreTests
                 Assert.AreEqual(actual.high, expect.high);
             }
         }
+
+        [TestMethod]
+        public void Expand_Per_Hour()
+        {
+            var aStart = new CqlTime(10, 0, 0, 0, null, null);
+            var aEnd = new CqlTime(12, 30, 0, 0, null, null);
+
+            var interval = new List<CqlInterval<CqlTime>>
+            {
+                new CqlInterval<CqlTime>(aStart, aEnd, true, true),
+            };
+            var quantity = new CqlQuantity(1, "hour");
+
+            var rc = GetNewContext(); var fcq = rc.Operators;
+
+            var expand = fcq.ExpandList(interval, quantity).ToArray();
+        }
+
         #endregion
 
         #region Interval_Same_Or_Before
@@ -3537,7 +3566,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger, ignoreErrors);
             var expressions = eb.Build();
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())
@@ -3576,6 +3605,95 @@ namespace CoreTests
                 null);
             Assert.IsNotNull(meets);
             Assert.IsFalse(meets ?? false);
+        }
+
+        [TestMethod]
+        public void DateTimeIncludedInNull()
+        {
+            var lhs = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(2017, 9, 1, 0, 0, 0, null, null, null),
+                new CqlDateTime(2017, 9, 1, 0, 0, 0, null, null, null),
+                true,
+                true);
+            var rhs = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(2017, 9, 1, 0, 0, 0, 999, null, null),
+                new CqlDateTime(2017, 12, 30, 23, 59, 59, 999, null, null),
+                true,
+                true);
+            var ops = GetNewContext().Operators;
+            var result = ops.IntervalIncludesInterval(lhs, rhs, null);
+            Assert.IsNull(result);
+        }
+        [TestMethod]
+        public void TestIntersectNull()
+        {
+            var lhs = new CqlInterval<int?>(1, 10, true, true);
+            var rhs = new CqlInterval<int?>(5, null, true, false);
+            var ops = GetNewContext().Operators;
+            var result = ops.IntervalIntersectsInterval(lhs, rhs);
+            Assert.IsNull(result);
+        }
+
+        // { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59
+        [TestMethod]
+        public void ProperContainsTimeNull()
+        {
+            var list = new CqlTime[]
+            {
+                new CqlTime(15,59,59, 999, null, null),
+                new CqlTime(20,59,59, 999, null, null),
+                new CqlTime(20,59,49, 999, null, null),
+            };
+            var element = new CqlTime(15, 59, 59, null, null, null);
+            var ops = GetNewContext().Operators;
+            var result = ops.ListProperlyIncludesElement(list, element);
+            Assert.IsFalse(result);
+        }
+        [TestMethod]
+        public void UnionListNullAndListNull()
+        {
+            var ops = GetNewContext().Operators;
+            var result = ops.ListUnion<object>(new object[] { null }, new object[] { null });
+            var equal = ops.Equal(result, new object[] { null });
+            Assert.IsTrue(equal);
+        }
+
+        [TestMethod]
+        public void TimeProperContainsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            var noon = new CqlTime(12, 0, 0, 0, null, null);
+            var x = new CqlTime(21, 59, 59, 999, null, null);
+            var interval = new CqlInterval<CqlTime>(noon, x, true, true);
+            var result = ops.IntervalProperlyIncludesElement(interval, noon, null);
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void NullBoundariesProperlyIncludesIntegerInterval()
+        {
+            var ops = GetNewContext().Operators;
+            var lhs = new CqlInterval<int?>(null, null, true, true);
+            var rhs = new CqlInterval<int?>(1, 10, true, true);
+            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null);
+            Assert.IsNull(result);
+
+        }
+
+        [TestMethod]
+        public void LastPositionOf1()
+        {
+            var ops = GetNewContext().Operators;
+            var lpo = ops.LastPositionOf("Ohio is the place to be!", "hi");
+            lpo.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void QuantityToString()
+        {
+            var ops = GetNewContext().Operators;
+            var s = ops.ConvertQuantityToString(new CqlQuantity(125, "cm"));
+            s.Should().Be("125 'cm'");
         }
     }
 }

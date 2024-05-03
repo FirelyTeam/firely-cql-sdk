@@ -206,7 +206,8 @@ namespace Hl7.Cql.Iso8601
                                     throw new ArgumentException("Offset hours must between [-14,14]", nameof(osHour));
                                 if (osMinute.HasValue)
                                 {
-                                    if (osMinute.Value < 0 || osMinute.Value > 59)
+                                    var abs = Math.Abs(osMinute.Value);  
+                                    if (abs > 59)
                                         throw new ArgumentException("Offset minutes must between [0,59]", nameof(osMinute));
                                 }
                             }
@@ -278,6 +279,8 @@ namespace Hl7.Cql.Iso8601
                             }
                             // set the timezone if time precision is desired
                             OffsetHour = osHour;
+                            if (osHour < 0 && osMinute > 0)
+                                osMinute *= -1;
                             OffsetMinute = osMinute;
 
                         }

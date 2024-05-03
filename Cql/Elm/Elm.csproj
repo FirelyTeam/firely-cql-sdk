@@ -10,18 +10,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
+		<PackageReference Include="System.Text.Json" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

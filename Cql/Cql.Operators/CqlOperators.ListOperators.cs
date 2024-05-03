@@ -69,15 +69,12 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
 
-            var onlyNull = true;
-            var notEmpty = false;
             var lit = left!.GetEnumerator();
             var rit = right!.GetEnumerator();
             while (lit.MoveNext())
             {
                 if (!rit.MoveNext())
                     return false;
-                notEmpty = true;
                 var lv = lit.Current;
                 var rv = rit.Current;
                 if (lv == null)
@@ -87,18 +84,13 @@ namespace Hl7.Cql.Runtime
                 else if (rv == null) return false;
                 else
                 {
-                    onlyNull = false;
                     if (Compare(lv!, rv!, null) != 0)
                         return false;
                 }
             }
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.
                 return false;
-
-            if (notEmpty && onlyNull)
-                return null;
-            else
-                return true;
+            return true;
         }
 
         #endregion
@@ -711,8 +703,6 @@ namespace Hl7.Cql.Runtime
                     var listItem = interval.low!.Value;
                     do
                     {
-
-
                         var high = decimal.Add(listItem, per.value ?? 1);
                         var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
                         expanded.Add(listInterval);
@@ -1039,7 +1029,7 @@ namespace Hl7.Cql.Runtime
 
         public int? ListLength<T>(IEnumerable<T> list)
         {
-            if (list == null) return null;
+            if (list == null) return 0; // tested by LengthNullList
             if (list is IList<T> l)
                 return l.Count;
             return list.Count();

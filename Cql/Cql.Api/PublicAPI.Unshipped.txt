@@ -1,0 +1,7 @@
+﻿Hl7.Cql.Api.Controllers.CqlController
+Hl7.Cql.Api.Controllers.CqlController.CqlController(Hl7.Cql.Api.CqlExpressionRunner! runner) -> void
+Hl7.Cql.Api.CqlExpressionRunner.CqlExpressionRunner(System.IServiceProvider! serviceProvider) -> void
+Hl7.Cql.Api.CqlExpressionRunner.Expression(string! expression, string! memberName = "func") -> Hl7.Cql.Elm.Expression!
+Hl7.Cql.Api.CqlExpressionRunner.RunExpression(string! cqlExpression) -> Hl7.Fhir.Model.Resource!
+Hl7.Cql.Api.CqlExpressionRunner
+Hl7.Cql.Api.CqlExpressionRunner.ConvertLibrary(string! cql) -> Hl7.Cql.Elm.Library!

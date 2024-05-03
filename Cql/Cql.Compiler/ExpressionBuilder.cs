@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- *
+ * 
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -12,7 +12,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,10 +24,11 @@ using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler
 {
-    internal record ExpressionBuilderOptions(bool EmitStackTraces);
+    internal record ExpressionBuilderOptions(bool EmitStackTraces = false, bool IgnoreElmErrorAnnotations = true);
 
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
@@ -405,7 +405,6 @@ namespace Hl7.Cql.Compiler
         /// <param name="expression">The ELM expression to convert</param>
         /// <param name="lambdas">Existing lambdas, required if <paramref name="expression"/> contains any references to other ELM definitions</param>
         /// <param name="ctx">If <paramref name="expression"/> requires contextual scope, provide it via an <see cref="ExpressionBuilderContext"/>.</param>
-        [Obsolete("This will not be available in future versions of the SDK.")]
         public LambdaExpression Lambda(elm.Expression expression,
             DefinitionDictionary<LambdaExpression>? lambdas = null,
             ExpressionBuilderContext? ctx = null)
@@ -419,7 +418,7 @@ namespace Hl7.Cql.Compiler
             return lambda;
         }
 
-        protected internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
+        protected Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
         {
             ctx = ctx.Deeper(op);
             Expression? expression;
@@ -1186,7 +1185,7 @@ namespace Hl7.Cql.Compiler
             {
                 foreach (var by in query.sort.by)
                 {
-                    ListSortDirection order = ExtensionMethods.ListSortOrder(by.direction);
+                    ListSortDirection order = by.direction.ListSortOrder();
                     if (by is ByExpression byExpression)
                     {
                         var parameterName = "@this";
@@ -1615,8 +1614,9 @@ namespace Hl7.Cql.Compiler
         {
             if (!string.IsNullOrWhiteSpace(cr.name))
             {
-                var type = TypeResolver.CodeType.MakeArrayType();
-                return InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, type!, ctx);
+                var conceptType = TypeManager.TypeFor(cr.resultTypeSpecifier, ctx);
+                var invoke = InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, conceptType, ctx);
+                return invoke;
             }
             else throw new InvalidOperationException($"CodeSystemRef {cr.name} is null");
         }
@@ -2037,7 +2037,7 @@ namespace Hl7.Cql.Compiler
             //Func<Bundle, Context, IEnumerable<Encounter>> x = (bundle, ctx) =>
             //    bundle.Entry.ByResourceType<Encounter>()
             //    .SelectMany(E =>
-            //        bundle.Entry.ByResourceType<Condition>() // <--
+            //        bundle.Entry.ByResourceType<Condition>() // <-- 
             //            .Where(P => true) // such that goes here
             //            .Select(P => E));
             var selectManyParameter = Expression.Parameter(outerElementType, outerScope);
@@ -2099,8 +2099,8 @@ namespace Hl7.Cql.Compiler
             //  IEnumerable<Tuple1> source = <cross join expression>;
             //
             //  source
-            //    .SelectMany(T =>
-            //        bundle.Entry.ByResourceType<Condition>() // <--
+            //    .SelectMany(T => 
+            //        bundle.Entry.ByResourceType<Condition>() // <-- 
             //            .Where(P => true) // such that goes here, in place of "true"
             //            .Select(P => E));
 
@@ -2223,7 +2223,7 @@ namespace Hl7.Cql.Compiler
                     return call;
                 }
                 var propogate = PropogateNull(scopeExpression, pathMemberInfo, ctx);
-                // This is only necessary for Firely b/c it always initializes colleciton members even if they are
+                // This is only necessary for Firely b/c it always initializes colleciton members even if they are 
                 // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
                 //
                 //if (typeof(Resource).IsAssignableFrom(scopeExpression.Type)
@@ -2312,7 +2312,7 @@ namespace Hl7.Cql.Compiler
                 var propogateNull = PropogateNull(source, pathMemberInfo, ctx);
                 result = propogateNull;
             }
-
+                
             if (expectedType != null && expectedType != result.Type)
             {
                 if (expectedType == typeof(string))
@@ -2795,7 +2795,7 @@ namespace Hl7.Cql.Compiler
             //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
             return lambda;
         }
-
+        
         protected static bool IsEnum(Type type)
         {
             if (type.IsEnum)

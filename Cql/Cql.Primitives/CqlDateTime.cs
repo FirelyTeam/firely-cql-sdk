@@ -148,10 +148,10 @@ namespace Hl7.Cql.Primitives
         {
             if (quantity == null || quantity.value == null || quantity.unit == null)
                 return null;
-
-            var value = quantity!.value.Value;
+            quantity = quantity.NormalizeTo(Precision);
+            var value = quantity.value!.Value;
             var dto = Value.DateTimeOffset;
-            switch (quantity.unit[0])
+            switch (quantity.unit![0])
             {
                 case 'a':
                     dto = dto.AddYears((int)value);
@@ -204,10 +204,10 @@ namespace Hl7.Cql.Primitives
         {
             if (quantity == null || quantity.value == null || quantity.unit == null)
                 return null;
-
-            var value = -1 * quantity!.value.Value;
+            quantity = quantity.NormalizeTo(Precision);
+            var value = -1 * quantity.value!.Value;
             var dto = Value.DateTimeOffset;
-            switch (quantity.unit[0])
+            switch (quantity.unit![0])
             {
                 case 'a':
                     dto = dto.AddYears((int)value);

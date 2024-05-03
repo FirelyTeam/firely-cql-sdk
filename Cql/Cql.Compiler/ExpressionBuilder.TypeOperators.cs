@@ -30,13 +30,16 @@ namespace Hl7.Cql.Compiler
                     {
                         var listElementType = TypeResolver.GetListElementType(type) ?? throw new InvalidOperationException($"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
-                        var elmAs = new ElmAsExpression(newArray, type);
+                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
                         return elmAs;
                     }
-                    else
+                    else if (type == TypeResolver.AnyType) // handles untyped empty lists whose type is Any
                     {
-                        throw new InvalidOperationException("Cannot use as operator on a list if the as type is not also a list type.");
+                        var newArray = Expression.NewArrayBounds(TypeResolver.AnyType, Expression.Constant(0));
+                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
+                        return elmAs;
                     }
+                    throw new InvalidOperationException("Cannot use as operator on a list if the as type is not also a list type.");
                 }
             }
 
@@ -47,13 +50,13 @@ namespace Hl7.Cql.Compiler
                 {
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     var defaultExpression = Expression.Default(type);
-                    return new ElmAsExpression(defaultExpression, type);
+                    return new ElmAsExpression(defaultExpression, type, @as.strict);
                 }
                 else
                 {
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     var operand = TranslateExpression(@as.operand!, ctx);
-                    return new ElmAsExpression(operand, type);
+                    return new ElmAsExpression(operand, type, @as.strict);
                 }
             }
             else
@@ -67,7 +70,7 @@ namespace Hl7.Cql.Compiler
                 var operand = TranslateExpression(@as.operand, ctx);
                 if (!type.IsAssignableTo(operand.Type))
                     ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
-                return new ElmAsExpression(operand, type);
+                return new ElmAsExpression(operand, type, @as.strict);
             }
         }
 
@@ -77,7 +80,7 @@ namespace Hl7.Cql.Compiler
         {
             var op = TranslateExpression(@is.operand!, ctx);
             Type? type = null;
-            if (@is.isTypeSpecifier != null) 
+            if (@is.isTypeSpecifier != null)
             {
                 if (@is.isTypeSpecifier is elm.ChoiceTypeSpecifier choice)
                 {
@@ -97,7 +100,7 @@ namespace Hl7.Cql.Compiler
                 type = TypeManager.TypeFor(@is.isTypeSpecifier, ctx)
                     ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
             }
-            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name)) 
+            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
             {
                 type = TypeResolver.ResolveType(@is.isType.Name)
                     ?? throw new InvalidOperationException($"Could not resolve type {@is.isType.Name}");

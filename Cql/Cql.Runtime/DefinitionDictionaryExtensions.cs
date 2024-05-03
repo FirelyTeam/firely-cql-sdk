@@ -47,7 +47,7 @@ namespace Hl7.Cql.Runtime
                                 lambda = (LambdaExpression)visitor.Visit(lambda);
                             }
                         }
-                        var @delegate = debug is not null ? lambda.Compile(debug) : lambda.Compile();
+                        var @delegate = debug is not null ? lambda!.Compile(debug) : lambda!.Compile();
                         delegates.Add(library, kvp.Key, overload.Item1, @delegate);
                     }
                 }

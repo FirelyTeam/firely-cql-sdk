@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\cql-sdk.props" />
+
+	<PropertyGroup>
+		<AssemblyName>Hl7.Cql.CqlToElm</AssemblyName>
+		<RootNamespace>Hl7.Cql.CqlToElm</RootNamespace>
+		<Product>CQL to ELM converter</Product>
+		<Description>Support package for Hl7.Cql. Unit conversion for CQL. Contains functionality to convert CQL to ELM.</Description>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\Elm\Elm.csproj" />
+		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
+		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Api" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Messages.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Messages.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Visitors/BinaryExpressionVisitor.cs">
+			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Visitors/UnaryExpressionVisitor.cs">
+			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Messages.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+</Project>
