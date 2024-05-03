@@ -12,4 +12,10 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
+    <ProjectReference Include="..\..\Cql\Graph\Graph.csproj" />
+    <ProjectReference Include="..\Measures-cms\Measures-cms.csproj" />
+  </ItemGroup>
+
 </Project>
