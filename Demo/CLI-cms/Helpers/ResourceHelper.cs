@@ -62,8 +62,8 @@ internal class ResourceHelper
         using var tupleFs = tupleTypes.OpenRead();
         var binaries = new[]
         {
-                tupleFs.ParseFhir<Binary>()
-            };
+            tupleFs.ParseFhir<Binary>()
+        };
 
         binaries.LoadAssembles(asmContext);
         return asmContext;
