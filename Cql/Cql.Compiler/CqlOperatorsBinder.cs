@@ -75,9 +75,9 @@ namespace Hl7.Cql.Compiler
             {
                 // @formatter:off
                 "Convert"           => BindConvert(args[0], args[1]),
-                "Aggregate"         => BindToGenericMethod(nameof(ICqlOperators.Aggregate), genericTypeArguments: [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
-                "CrossJoin"         => BindToGenericMethod(nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
-                "Message"           => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments: [args[0].Type], args),
+                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type]),
+                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!)),
+                "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type]),
                 "Coalesce"          => Coalesce(args[0]),
                 "Flatten"           => Flatten(args[0]),
                 "InList"            => InList(args[0], args[1]),

@@ -47,7 +47,7 @@ namespace Hl7.Cql.Operators
         bool? After(object? left, object? right, string? precision);
         int? Age(string precision);
         int? AgeAt(CqlDate? asOf, string precision);
-        TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
+        TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, Func<TAccumulate?, TSource?, TAccumulate?> lambda, TAccumulate? seed);
         bool? AllTrue(IEnumerable<bool?> argument);
         bool? AllTrue(IEnumerable<Lazy<bool?>> argument);
         bool? And(bool? left, bool? right);

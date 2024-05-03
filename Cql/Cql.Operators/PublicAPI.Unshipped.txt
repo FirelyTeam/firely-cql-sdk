@@ -40,7 +40,7 @@ Hl7.Cql.Operators.ICqlOperators.After(long? right, Hl7.Cql.Primitives.CqlInterva
 Hl7.Cql.Operators.ICqlOperators.After(object? left, object? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Age(string! precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.AgeAt(Hl7.Cql.Primitives.CqlDate? asOf, string! precision) -> int?
-Hl7.Cql.Operators.ICqlOperators.Aggregate<TSource, TAccumulate>(System.Collections.Generic.IEnumerable<TSource?>? source, TAccumulate? seed, System.Func<TAccumulate?, TSource?, TAccumulate?>! lambda) -> TAccumulate?
+Hl7.Cql.Operators.ICqlOperators.Aggregate<TSource, TAccumulate>(System.Collections.Generic.IEnumerable<TSource?>? source, System.Func<TAccumulate?, TSource?, TAccumulate?>! lambda, TAccumulate? seed) -> TAccumulate?
 Hl7.Cql.Operators.ICqlOperators.AllTrue(System.Collections.Generic.IEnumerable<bool?>! argument) -> bool?
 Hl7.Cql.Operators.ICqlOperators.AllTrue(System.Collections.Generic.IEnumerable<System.Lazy<bool?>!>! argument) -> bool?
 Hl7.Cql.Operators.ICqlOperators.And(bool? left, bool? right) -> bool?

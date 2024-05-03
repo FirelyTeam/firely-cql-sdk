@@ -1754,7 +1754,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return h_;
 		};
-		var b_ = context.Operators.Aggregate<CqlInterval<CqlDate>, IEnumerable<CqlInterval<CqlDate>>>(intervals, null, a_);
+		var b_ = context.Operators.Aggregate<CqlInterval<CqlDate>, IEnumerable<CqlInterval<CqlDate>>>(intervals, a_, null);
 
 		return b_;
 	}
