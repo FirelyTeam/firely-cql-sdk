@@ -57,13 +57,6 @@ partial class CqlOperatorsBinder
         }
     }
 
-    internal static MethodCallExpression CallCreateValueSetFacade(Expression operand)
-    {
-        var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.ExpandValueSet))!;
-        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, createFacadeMethod, operand);
-        return call;
-    }
-
     /// <summary>
     /// Casts the given <paramref name="expression"/> to the specified type <paramref name="type"/>.
     /// </summary>

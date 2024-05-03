@@ -501,20 +501,21 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-            var type = TypeFor(valueSetRef)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet));
 
-            if (_typeResolver.IsListType(type))
-            {
-                var elementType = _typeResolver.GetListElementType(type);
-                if (elementType != typeof(CqlCode))
-                {
-                    throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {type.ToCSharpString(Defaults.TypeCSharpFormat)}");
-                }
-
-                var @new = CqlOperatorsBinder.CallCreateValueSetFacade(cqlValueSet);
-                return @new;
-            }
+            //var type = TypeFor(valueSetRef)!;
+            // if (_typeResolver.IsListType(type))
+            // {
+            //     var elementType = _typeResolver.GetListElementType(type);
+            //     if (elementType != typeof(CqlCode))
+            //     {
+            //         throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {type.ToCSharpString(Defaults.TypeCSharpFormat)}");
+            //     }
+            //
+            //     var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.ExpandValueSet))!;
+            //     var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, method, cqlValueSet);
+            //     return call;
+            // }
             return cqlValueSet;
         }
 
