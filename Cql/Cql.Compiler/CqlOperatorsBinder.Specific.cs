@@ -249,7 +249,7 @@ partial class CqlOperatorsBinder
         {
             var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var resultType = lambdaExpr.ReturnType;
-            var call = BindToBestMethodOverload(nameof(ICqlOperators.Select), [source, lambda], [sourceType, resultType]);
+            var call = BindToGenericMethod(nameof(ICqlOperators.Select), [sourceType, resultType], [source, lambda]);
             return call;
         }
 
