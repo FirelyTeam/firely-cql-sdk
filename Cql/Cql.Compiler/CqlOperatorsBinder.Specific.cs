@@ -11,7 +11,6 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -20,32 +19,6 @@ using Hl7.Cql.ValueSets;
 namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinder
 {
-    private Expression Expand(
-        Expression argument,
-        Expression perQuantity)
-    {
-        if (perQuantity is ConstantExpression { Value: null })
-            perQuantity = NullExpression.ForType<CqlQuantity>();
-
-        if (_typeResolver.IsListType(argument.Type))
-        {
-
-            var elementType = _typeResolver.GetListElementType(argument.Type)!;
-            if (elementType == null)
-                throw new ArgumentException($"Unable to determine element type for Expand argument.", nameof(argument));
-
-            if (!elementType.IsCqlInterval(out _))
-                throw new ArgumentException($"Expand expects a list element type to be an interval.",
-                    nameof(argument));
-            return BindToDirectMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
-        }
-
-        if (!argument.Type.IsCqlInterval(out _))
-            throw new ArgumentException($"Expand allows only a List<Interval<T>> or an Interval<T> as a parameter.", nameof(argument));
-
-        return BindToDirectMethod(nameof(ICqlOperators.Expand), argument, perQuantity);
-    }
-
     private Expression SortBy(
         Expression source,
         Expression by,
@@ -276,7 +249,7 @@ partial class CqlOperatorsBinder
         {
             var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var resultType = lambdaExpr.ReturnType;
-            var call = BindToGenericMethod(nameof(ICqlOperators.Select), [sourceType, resultType], source, lambda);
+            var call = BindToBestMethodOverload(nameof(ICqlOperators.Select), [source, lambda], [sourceType, resultType]);
             return call;
         }
 
