@@ -1054,7 +1054,7 @@ public class NCQAFHIRBase_1_0_0
 
 																																			return hq_();
 																																		};
-																																		var hf_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(hd_, he_);
+																																		var hf_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)hd_, he_);
 																																		var hg_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(hf_);
 
 																																		return hg_;
@@ -1063,7 +1063,7 @@ public class NCQAFHIRBase_1_0_0
 
 																																return gx_();
 																															};
-																															var gm_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(gk_, gl_);
+																															var gm_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)gk_, gl_);
 																															var gn_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(gm_);
 
 																															return gn_;
@@ -1072,7 +1072,7 @@ public class NCQAFHIRBase_1_0_0
 
 																													return ge_();
 																												};
-																												var ft_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(fr_, fs_);
+																												var ft_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)fr_, fs_);
 																												var fu_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ft_);
 
 																												return fu_;
@@ -1081,7 +1081,7 @@ public class NCQAFHIRBase_1_0_0
 
 																										return fl_();
 																									};
-																									var fa_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ey_, ez_);
+																									var fa_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)ey_, ez_);
 																									var fb_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(fa_);
 
 																									return fb_;
@@ -1090,7 +1090,7 @@ public class NCQAFHIRBase_1_0_0
 
 																							return es_();
 																						};
-																						var eh_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ef_, eg_);
+																						var eh_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)ef_, eg_);
 																						var ei_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(eh_);
 
 																						return ei_;
@@ -1099,7 +1099,7 @@ public class NCQAFHIRBase_1_0_0
 
 																				return dz_();
 																			};
-																			var do_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(dm_, dn_);
+																			var do_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)dm_, dn_);
 																			var dp_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(do_);
 
 																			return dp_;
@@ -1108,7 +1108,7 @@ public class NCQAFHIRBase_1_0_0
 
 																	return dg_();
 																};
-																var cv_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ct_, cu_);
+																var cv_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)ct_, cu_);
 																var cw_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(cv_);
 
 																return cw_;
@@ -1117,7 +1117,7 @@ public class NCQAFHIRBase_1_0_0
 
 														return cn_();
 													};
-													var cc_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ca_, cb_);
+													var cc_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)ca_, cb_);
 													var cd_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(cc_);
 
 													return cd_;
@@ -1126,7 +1126,7 @@ public class NCQAFHIRBase_1_0_0
 
 											return bu_();
 										};
-										var bj_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(bh_, bi_);
+										var bj_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)bh_, bi_);
 										var bk_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(bj_);
 
 										return bk_;
@@ -1135,7 +1135,7 @@ public class NCQAFHIRBase_1_0_0
 
 								return bb_();
 							};
-							var aq_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ao_, ap_);
+							var aq_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)ao_, ap_);
 							var ar_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(aq_);
 
 							return ar_;
@@ -1144,17 +1144,17 @@ public class NCQAFHIRBase_1_0_0
 
 					return ai_();
 				};
-				var x_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(v_, w_);
+				var x_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)v_, w_);
 				var y_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(x_);
 
 				return y_;
 			};
-			var o_ = context.Operators.Select<Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(m_, n_);
+			var o_ = context.Operators.Select<Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ>)m_, n_);
 			var p_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(o_);
 
 			return p_;
 		};
-		var i_ = context.Operators.Select<Tuple_CfANiScMYDdVZFgRERKJQEVca, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(g_, h_);
+		var i_ = context.Operators.Select<Tuple_CfANiScMYDdVZFgRERKJQEVca, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_CfANiScMYDdVZFgRERKJQEVca>)g_, h_);
 		var j_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(i_);
 
 		return j_;

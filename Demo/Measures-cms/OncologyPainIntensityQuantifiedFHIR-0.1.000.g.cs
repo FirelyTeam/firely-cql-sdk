@@ -419,7 +419,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 							return w_;
 						};
-						var s_ = context.Operators.Select<CodeableConcept, CqlConcept>(RadiationManagementEncounter?.Type, r_);
+						var s_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)RadiationManagementEncounter?.Type, r_);
 						bool? t_(CqlConcept RadiationManagement)
 						{
 							var x_ = this.Radiation_treatment_management__5_treatments();

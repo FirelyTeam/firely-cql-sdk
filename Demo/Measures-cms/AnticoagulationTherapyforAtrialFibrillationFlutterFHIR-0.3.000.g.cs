@@ -580,7 +580,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return v_;
 			};
-			var f_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, e_);
+			var f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoAnticoagulant?.ReasonCode, e_);
 			var g_ = this.Medical_Reason_For_Not_Providing_Treatment();
 			var h_ = context.Operators.ConceptsInValueSet(f_, g_);
 			CqlConcept i_(CodeableConcept @this)
@@ -589,7 +589,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return w_;
 			};
-			var j_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, i_);
+			var j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoAnticoagulant?.ReasonCode, i_);
 			var k_ = this.Patient_Refusal();
 			var l_ = context.Operators.ConceptsInValueSet(j_, k_);
 			var m_ = context.Operators.Or(h_, l_);

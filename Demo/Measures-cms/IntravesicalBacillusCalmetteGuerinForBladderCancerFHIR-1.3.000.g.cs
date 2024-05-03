@@ -410,7 +410,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 			return y_;
 		};
-		var c_ = context.Operators.Where<Condition>(a_, b_);
+		var c_ = context.Operators.Where<Condition>((IEnumerable<Condition>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 		var e_ = context.Operators.Not((bool?)(d_ is null));
 
@@ -547,7 +547,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 			return k_;
 		};
-		var d_ = context.Operators.Where<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<Procedure>(d_);
 
 		return e_;
@@ -575,7 +575,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 			return k_;
 		};
-		var d_ = context.Operators.Where<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<Procedure>(d_);
 
 		return e_;
@@ -602,7 +602,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return i_;
 			};
-			var f_ = context.Operators.Where<Procedure>(d_, e_);
+			var f_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)d_, e_);
 			var g_ = context.Operators.SingletonFrom<Procedure>(f_);
 
 			return g_;
@@ -741,7 +741,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 					return av_;
 				};
-				var q_ = context.Operators.Where<Extension>(((BCGNotGiven is DomainResource)
+				var q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), p_);
 				DataType r_(Extension @this) => 
@@ -770,7 +770,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 					return ay_;
 				};
-				var al_ = context.Operators.Where<Extension>(((BCGNotGiven is DomainResource)
+				var al_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), ak_);
 				var an_ = context.Operators.Select<Extension, DataType>(al_, r_);
@@ -782,7 +782,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return as_;
 			};
-			var m_ = context.Operators.Where<Procedure>(k_, l_);
+			var m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
 			MedicationAdministration n_(Procedure FirstBladderCancerStaging) => 
 				BCGNotGiven;
 			var o_ = context.Operators.Select<Procedure, MedicationAdministration>(m_, n_);
@@ -798,7 +798,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return bd_;
 			};
-			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(BCGNotGiven?.StatusReason, az_);
+			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)BCGNotGiven?.StatusReason, az_);
 			var bb_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
 			var bc_ = context.Operators.ConceptsInValueSet(ba_, bb_);
 
@@ -864,7 +864,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return ap_;
 			};
-			var p_ = context.Operators.Where<Procedure>(n_, o_);
+			var p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
 			MedicationAdministration q_(Procedure FirstBladderCancerStaging) => 
 				BCG;
 			var r_ = context.Operators.Select<Procedure, MedicationAdministration>(p_, q_);
@@ -980,7 +980,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return p_;
 			};
-			var j_ = context.Operators.Where<Procedure>(h_, i_);
+			var j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
 			Condition k_(Procedure FirstBladderCancerStaging) => 
 				ActiveTuberculosis;
 			var l_ = context.Operators.Select<Procedure, Condition>(j_, k_);
@@ -1028,7 +1028,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return t_;
 			};
-			var k_ = context.Operators.Where<Procedure>(i_, j_);
+			var k_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)i_, j_);
 			MedicationRequest l_(Procedure FirstBladderCancerStaging) => 
 				ImmunosuppressiveDrugs;
 			var m_ = context.Operators.Select<Procedure, MedicationRequest>(k_, l_);
@@ -1076,7 +1076,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return ad_;
 			};
-			var j_ = context.Operators.Where<Procedure>(h_, i_);
+			var j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
 			Procedure k_(Procedure FirstBladderCancerStaging) => 
 				Cystectomy;
 			var l_ = context.Operators.Select<Procedure, Procedure>(j_, k_);
@@ -1128,7 +1128,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return y_;
 			};
-			var q_ = context.Operators.Where<Procedure>(o_, p_);
+			var q_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)o_, p_);
 			Condition r_(Procedure FirstBladderCancerStaging) => 
 				ExclusionDiagnosis;
 			var s_ = context.Operators.Select<Procedure, Condition>(q_, r_);
@@ -1186,7 +1186,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return ap_;
 			};
-			var v_ = context.Operators.Where<Procedure>(t_, u_);
+			var v_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)t_, u_);
 			MedicationRequest w_(Procedure FirstBladderCancerStaging) => 
 				ExclusionMed;
 			var x_ = context.Operators.Select<Procedure, MedicationRequest>(v_, w_);
@@ -1244,7 +1244,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 				return bw_;
 			};
-			var bc_ = context.Operators.Where<Procedure>(ba_, bb_);
+			var bc_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)ba_, bb_);
 			Procedure bd_(Procedure FirstBladderCancerStaging) => 
 				ExclusionProcedure;
 			var be_ = context.Operators.Select<Procedure, Procedure>(bc_, bd_);

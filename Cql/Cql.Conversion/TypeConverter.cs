@@ -256,8 +256,8 @@ namespace Hl7.Cql.Conversion
         /// <inheritdoc />
         void IDisposable.Dispose()
         {
-            if (_logger is not null)
-                LogFinalConverters();
+            // if (_logger is not null)
+            //     LogFinalConverters();
         }
     }
 }

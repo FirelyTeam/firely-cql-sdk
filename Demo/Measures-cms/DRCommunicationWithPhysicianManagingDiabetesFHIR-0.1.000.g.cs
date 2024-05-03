@@ -713,7 +713,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 					return aa_;
 				};
-				var r_ = context.Operators.Where<Extension>(((LevelOfSeverityNotCommunicated is DomainResource)
+				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LevelOfSeverityNotCommunicated is DomainResource)
 						? ((LevelOfSeverityNotCommunicated as DomainResource).Extension)
 						: null), q_);
 				DataType s_(Extension @this) => 
@@ -774,7 +774,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 					return aa_;
 				};
-				var r_ = context.Operators.Where<Extension>(((MacularEdemaAbsentNotCommunicated is DomainResource)
+				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaAbsentNotCommunicated is DomainResource)
 						? ((MacularEdemaAbsentNotCommunicated as DomainResource).Extension)
 						: null), q_);
 				DataType s_(Extension @this) => 
@@ -835,7 +835,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 					return aa_;
 				};
-				var r_ = context.Operators.Where<Extension>(((MacularEdemaPresentNotCommunicated is DomainResource)
+				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaPresentNotCommunicated is DomainResource)
 						? ((MacularEdemaPresentNotCommunicated as DomainResource).Extension)
 						: null), q_);
 				DataType s_(Extension @this) => 

@@ -1188,7 +1188,7 @@ public class FHIR347_0_1_021
 
 				return ae_;
 			};
-			var u_ = context.Operators.Where<Dosage>(ActiveStatin?.DosageInstruction, t_);
+			var u_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)ActiveStatin?.DosageInstruction, t_);
 			Timing v_(Dosage @this) => 
 				@this?.Timing;
 			var w_ = context.Operators.Select<Dosage, Timing>(u_, v_);

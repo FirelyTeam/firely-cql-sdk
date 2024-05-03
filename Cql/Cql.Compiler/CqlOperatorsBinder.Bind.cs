@@ -131,15 +131,22 @@ internal partial class CqlOperatorsBinder
 
         if (genericTypeArguments.Length > 0)
         {
-            if (args.Length == 0)
+            var methods = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, args.Length);
+            foreach (var method in methods)
             {
-                var methods = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, 0);
-                foreach (var method in methods)
+                if (method.IsGenericMethodDefinition
+                    && method.GetGenericArguments().Length == genericTypeArguments.Length)
                 {
-                    if (method.IsGenericMethodDefinition
-                        && method.GetGenericArguments().Length == genericTypeArguments.Length)
+                    var genericMethod = method.MakeGenericMethod(genericTypeArguments);
+                    var parameters = genericMethod.GetParameters();
+
+                    if (TryBindArguments(
+                            parameters,
+                            out var genericMethodArgs,
+                            out var conversions))
                     {
-                        yield return (method.MakeGenericMethod(genericTypeArguments), [], []);
+                        yield return (genericMethod, genericMethodArgs, conversions);
+                        break;
                     }
                 }
             }
@@ -201,9 +208,15 @@ internal partial class CqlOperatorsBinder
                             // Generic type argument is not valid for this method due to constraints
                             continue;
                         }
-                        if (TryBindArguments(genericMethod.GetParameters(), out var genericMethodArgs,
-                                             out var conversions))
+
+                        if (TryBindArguments(
+                                genericMethod.GetParameters(),
+                                out var genericMethodArgs,
+                                out var conversions))
+                        {
                             yield return (genericMethod, genericMethodArgs, conversions);
+                            break;
+                        }
                     }
                 }
             }
@@ -241,20 +254,11 @@ internal partial class CqlOperatorsBinder
         params Expression[] arguments) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, null, arguments);
 
-    private static MethodCallExpression BindToGenericMethod(
+    private MethodCallExpression BindToGenericMethod(
         string methodName,
         Type[] genericTypeArguments,
-        params Expression[] arguments)
-    {
-        try
-        {
-            return Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, genericTypeArguments, arguments);
-        }
-        catch (Exception e)
-        {
-            throw new CannotBindToCqlOperatorError(methodName, arguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException(e);
-        }
-    }
+        params Expression[] arguments) =>
+        BindToBestMethodOverload(methodName, arguments, genericTypeArguments);
 
     private static MethodCallExpression BindToDirectMethod(
         MethodInfo method,

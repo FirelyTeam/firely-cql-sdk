@@ -750,7 +750,7 @@ public class Exam130FHIR_0_0_003
 			List<Coding> x_(CodeableConcept @this) => 
 				@this?.Coding;
 			var y_ = context.Operators.Select<CodeableConcept, List<Coding>>(w_, x_);
-			var z_ = context.Operators.Flatten<Coding>(y_);
+			var z_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)y_);
 			bool? aa_(Coding @this)
 			{
 				var al_ = context.Operators.Not((bool?)(@this?.CodeElement is null));
@@ -1055,7 +1055,7 @@ public class Exam130FHIR_0_0_003
 			List<Coding> ab_(CodeableConcept @this) => 
 				@this?.Coding;
 			var ac_ = context.Operators.Select<CodeableConcept, List<Coding>>(aa_, ab_);
-			var ad_ = context.Operators.Flatten<Coding>(ac_);
+			var ad_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ac_);
 			bool? ae_(Coding @this)
 			{
 				var ap_ = context.Operators.Not((bool?)(@this?.CodeElement is null));

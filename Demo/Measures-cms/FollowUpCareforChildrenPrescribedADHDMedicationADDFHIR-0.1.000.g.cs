@@ -928,7 +928,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 					return aw_;
 				};
-				var at_ = context.Operators.Select<CodeableConcept, CqlConcept>(ar_?.Type, as_);
+				var at_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ar_?.Type, as_);
 				var au_ = this.Ambulatory();
 				var av_ = context.Operators.ConceptsInValueSet(at_, au_);
 

@@ -843,7 +843,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 					return ac_;
 				};
-				var r_ = context.Operators.Where<Extension>(((EncounterDiagnoses is Element)
+				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 						? ((EncounterDiagnoses as Element).Extension)
 						: null), q_);
 				DataType s_(Extension @this) => 
@@ -1114,7 +1114,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return p_;
 			};
-			var f_ = context.Operators.Where<Extension>(((EncounterDiagnoses is Element)
+			var f_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 					? ((EncounterDiagnoses as Element).Extension)
 					: null), e_);
 			DataType g_(Extension @this) => 
@@ -2155,7 +2155,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return p_;
 			};
-			var f_ = context.Operators.Where<Extension>(((EncounterDiagnoses is Element)
+			var f_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 					? ((EncounterDiagnoses as Element).Extension)
 					: null), e_);
 			DataType g_(Extension @this) => 

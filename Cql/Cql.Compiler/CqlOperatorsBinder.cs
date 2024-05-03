@@ -27,8 +27,8 @@ namespace Hl7.Cql.Compiler
     internal partial class CqlOperatorsBinder
     {
         private readonly ILogger<CqlOperatorsBinder> _logger;
-        private readonly TypeResolver _typeResolver;
         private readonly TypeConverter _typeConverter;
+        private readonly TypeResolver _typeResolver;
 
 
         /// <summary>
@@ -42,15 +42,18 @@ namespace Hl7.Cql.Compiler
         /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
         /// </param>
         /// <param name="typeConverter">
-        /// The type converter used.
+        /// If provided, this binding will use the supplied instance to determine whether
+        /// a conversion is possible.  Note that if you provide a different instance of this class to <see cref="CqlOperators"/>,
+        /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
+        /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
         /// </param>
         public CqlOperatorsBinder(
             ILogger<CqlOperatorsBinder> logger,
             TypeResolver typeResolver,
             TypeConverter typeConverter)
         {
-            _typeResolver = typeResolver;
             _typeConverter = typeConverter;
+            _typeResolver = typeResolver;
             _logger = logger;
         }
 

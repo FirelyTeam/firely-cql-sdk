@@ -424,7 +424,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 				return bl_;
 			};
-			var bh_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, bg_);
+			var bh_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, bg_);
 			bool? bi_(CqlConcept T)
 			{
 				var bm_ = this.Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate___();
@@ -479,7 +479,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 				return bu_;
 			};
-			var bq_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, bp_);
+			var bq_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, bp_);
 			bool? br_(CqlConcept T)
 			{
 				var bv_ = this.Unlisted_preventive_medicine_service();

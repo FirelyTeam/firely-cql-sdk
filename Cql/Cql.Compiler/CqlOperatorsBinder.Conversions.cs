@@ -8,6 +8,7 @@
 
 using System;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
 using Expression = System.Linq.Expressions.Expression;
@@ -16,14 +17,44 @@ namespace Hl7.Cql.Compiler;
 
 partial class CqlOperatorsBinder
 {
+
+    /// <summary>
+    /// Tries to convert the given <paramref name="expression"/> to the specified type <paramref name="to"/>.
+    /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
+    public virtual bool TryConvert(
+        Expression expression,
+        Type to,
+        out (Expression arg, TypeConversion conversion) result)
+    {
+        Type from = expression.Type;
+
+        if (_typeConverter.CanConvert(from, to))
+        {
+            var bindToGenericMethod = BindToGenericMethod(nameof(ICqlOperators.Convert), [to], expression.NewAssignToTypeExpression<object>());
+            result = (bindToGenericMethod, TypeConversion.OperatorConvert);
+            return true;
+        }
+
+        result = expression.TryNewAssignToTypeExpression(to, throwError: false)!;
+        return result.conversion != TypeConversion.NoMatch;
+    }
+
     private MethodCallExpression BindToBestMethodOverload(
         string methodName,
         Expression[] methodArguments,
         Type[] genericTypeArguments)
     {
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments);
-        var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
-        return call;
+        try
+        {
+            var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
+            return call;
+        }
+        catch (Exception e)
+        {
+            throw new CannotBindToCqlOperatorError(methodName, methodArguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException(e);
+        }
     }
 
     internal static MethodCallExpression CallCreateValueSetFacade(Expression operand)
@@ -57,26 +88,4 @@ partial class CqlOperatorsBinder
         TryConvert(expression, type, out var t)
             ? t.arg!
             : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
-
-    /// <summary>
-    /// Tries to convert the given <paramref name="expression"/> to the specified type <paramref name="to"/>.
-    /// </summary>
-    /// <exception cref="InvalidOperationException"></exception>
-    public virtual bool TryConvert(
-        Expression expression,
-        Type to,
-        out (Expression arg, TypeConversion conversion) result)
-    {
-        Type from = expression.Type;
-
-        if (_typeConverter.CanConvert(from, to))
-        {
-            var bindToGenericMethod = BindToGenericMethod(nameof(ICqlOperators.Convert), [to], expression.NewAssignToTypeExpression<object>());
-            result = (bindToGenericMethod, TypeConversion.OperatorConvert);
-            return true;
-        }
-
-        result = expression.TryNewAssignToTypeExpression(to, throwError: false)!;
-        return result.conversion != TypeConversion.NoMatch;
-    }
 }

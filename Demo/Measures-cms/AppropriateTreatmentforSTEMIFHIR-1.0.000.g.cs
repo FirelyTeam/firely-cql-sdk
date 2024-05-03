@@ -518,7 +518,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return y_;
 			};
-			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>(EDEncounter?.ReasonCode, k_);
+			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)EDEncounter?.ReasonCode, k_);
 			var m_ = this.STEMI();
 			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
 			var o_ = CQMCommon_2_0_000.encounterDiagnosis(EDEncounter);
@@ -1100,7 +1100,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 				return k_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)f_?.Type, g_);
 			var i_ = this.Emergency_Department_Visit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 

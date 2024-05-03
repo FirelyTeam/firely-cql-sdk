@@ -284,7 +284,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 						return ad_;
 					};
-					var u_ = context.Operators.Select<CodeableConcept, CqlConcept>(s_?.Type, t_);
+					var u_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)s_?.Type, t_);
 					var v_ = this.Operating_Room_Suite();
 					var w_ = context.Operators.ConceptsInValueSet(u_, v_);
 					var x_ = FHIRHelpers_4_3_000.ToValue(OpioidGiven?.Effective);
@@ -395,7 +395,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 					return bj_;
 				};
-				var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(ay_?.Type, az_);
+				var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ay_?.Type, az_);
 				var bb_ = this.Operating_Room_Suite();
 				var bc_ = context.Operators.ConceptsInValueSet(ba_, bb_);
 				var bd_ = FHIRHelpers_4_3_000.ToValue(tuple_dioqpvxlkifmhgtiyeejrusad.OpioidAntagonistGiven?.Effective);

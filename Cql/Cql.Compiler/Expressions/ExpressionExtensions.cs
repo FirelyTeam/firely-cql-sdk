@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
-using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
@@ -26,12 +25,8 @@ internal static class ExpressionExtensions
         Type type,
         bool throwError = true)
     {
-        var isSubclassOf = expression.Type.IsSubclassOf(type);
         if (expression.Type == type)
-        {
-            Debug.Assert(!isSubclassOf);
             return (expression, TypeConversion.ExactType);
-        }
 
         if (expression is ConstantExpression { Value: var constantValue })
         {
@@ -61,11 +56,8 @@ internal static class ExpressionExtensions
             || expression.Type.IsAssignableTo(type);
         if (isAssignableTo || throwError)
         {
-            // if (isSubclassOf)
-            //     return (expression, TypeConversion.ExactType);
-
             Expression cast = Expression.Convert(expression, type);
-            return (cast, TypeConversion.ExpressionConvert);
+            return (cast, TypeConversion.ExpressionCast);
         }
 
         return (null, TypeConversion.NoMatch);

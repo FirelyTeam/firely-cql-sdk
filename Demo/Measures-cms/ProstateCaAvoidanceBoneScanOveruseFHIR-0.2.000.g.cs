@@ -566,7 +566,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 				return ad_;
 			};
-			var p_ = context.Operators.Where<Procedure>(n_, o_);
+			var p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
 			Observation q_(Procedure FirstProstateCancerTreatment) => 
 				GleasonScore;
 			var r_ = context.Operators.Select<Procedure, Observation>(p_, q_);
@@ -595,7 +595,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 			return ai_;
 		};
-		var k_ = context.Operators.Select<Observation, bool?>(i_, j_);
+		var k_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
@@ -639,7 +639,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 				return ad_;
 			};
-			var p_ = context.Operators.Where<Procedure>(n_, o_);
+			var p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
 			Observation q_(Procedure FirstProstateCancerTreatment) => 
 				ProstateCancerStaging;
 			var r_ = context.Operators.Select<Procedure, Observation>(p_, q_);
@@ -682,7 +682,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 			return az_;
 		};
-		var k_ = context.Operators.Where<Observation>(i_, j_);
+		var k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<Observation>(k_);
 
 		return l_;
@@ -760,7 +760,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 				return z_;
 			};
-			var o_ = context.Operators.Where<Observation>(m_, n_);
+			var o_ = context.Operators.Where<Observation>((IEnumerable<Observation>)m_, n_);
 			Observation p_(Observation MostRecentProstateCancerStaging) => 
 				PSATest;
 			var q_ = context.Operators.Select<Observation, Observation>(o_, p_);
@@ -790,7 +790,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 			return aq_;
 		};
-		var j_ = context.Operators.Select<Observation, bool?>(h_, i_);
+		var j_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)h_, i_);
 		var k_ = context.Operators.SingletonFrom<bool?>(j_);
 
 		return k_;

@@ -53,7 +53,6 @@ namespace Hl7.Cql.Compiler
         internal readonly TypeResolver _typeResolver;
         internal readonly ExpressionBuilderSettings _expressionBuilderSettings;
 
-
         internal ExpressionBuilder(
             ILogger<ExpressionBuilder> logger,
             ExpressionBuilderSettings expressionBuilderSettings,

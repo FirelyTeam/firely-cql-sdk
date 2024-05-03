@@ -314,7 +314,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return w_;
 				};
-				var l_ = context.Operators.Where<Extension>(((EncounterDiag is Element)
+				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: null), k_);
 				DataType m_(Extension @this) => 
@@ -428,7 +428,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return w_;
 				};
-				var l_ = context.Operators.Where<Extension>(((Stage234UnstageablePressureInjury is Element)
+				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: null), k_);
 				DataType m_(Extension @this) => 
@@ -585,7 +585,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return w_;
 				};
-				var l_ = context.Operators.Where<Extension>(((EncounterDiag is Element)
+				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: null), k_);
 				DataType m_(Extension @this) => 
@@ -716,7 +716,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return w_;
 				};
-				var l_ = context.Operators.Where<Extension>(((Stage234UnstageablePressureInjury is Element)
+				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: null), k_);
 				DataType m_(Extension @this) => 

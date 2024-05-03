@@ -419,7 +419,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 				return be_;
 			};
-			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, az_);
+			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, az_);
 			bool? bb_(CqlConcept T)
 			{
 				var bf_ = this.Unlisted_preventive_medicine_service();

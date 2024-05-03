@@ -530,7 +530,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return ac_;
 			};
-			var t_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoBetaBlockerOrdered?.ReasonCode, s_);
+			var t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoBetaBlockerOrdered?.ReasonCode, s_);
 			var u_ = this.Medical_Reason();
 			var v_ = context.Operators.ConceptsInValueSet(t_, u_);
 			CqlConcept w_(CodeableConcept @this)
@@ -539,7 +539,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 				return ad_;
 			};
-			var x_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoBetaBlockerOrdered?.ReasonCode, w_);
+			var x_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoBetaBlockerOrdered?.ReasonCode, w_);
 			var y_ = this.Patient_Reason();
 			var z_ = context.Operators.ConceptsInValueSet(x_, y_);
 			var aa_ = context.Operators.Or(v_, z_);

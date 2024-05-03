@@ -778,7 +778,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 				return ar_;
 			};
-			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, am_);
+			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, am_);
 			bool? ao_(CqlConcept T)
 			{
 				var as_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_();
@@ -1061,7 +1061,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return ae_;
 		};
-		var c_ = context.Operators.Select<MedicationRequest, decimal?>(a_, b_);
+		var c_ = context.Operators.Select<MedicationRequest, decimal?>((IEnumerable<MedicationRequest>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<decimal?>(c_);
 
 		return d_;
@@ -1405,7 +1405,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 
 			return e_();
 		};
-		var c_ = context.Operators.Select<MedicationRequest, CqlQuantity>(a_, b_);
+		var c_ = context.Operators.Select<MedicationRequest, CqlQuantity>((IEnumerable<MedicationRequest>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlQuantity>(c_);
 
 		return d_;

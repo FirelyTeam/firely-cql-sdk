@@ -474,7 +474,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 				return ag_;
 			};
-			var r_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(p_, q_);
+			var r_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)p_, q_);
 			var s_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(r_);
 			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			var v_ = context.Operators.Quantity(105m, "days");

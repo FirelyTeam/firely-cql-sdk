@@ -1517,7 +1517,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return e_();
 		};
-		var c_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>(a_, b_);
+		var c_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>((IEnumerable<MedicationRequest>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(c_);
 
 		return d_;
@@ -1606,7 +1606,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return e_();
 		};
-		var c_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(a_, b_);
+		var c_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>((IEnumerable<MedicationDispense>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(c_);
 
 		return d_;
@@ -1668,7 +1668,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return e_();
 		};
-		var c_ = context.Operators.Select<MedicationAdministration, CqlInterval<CqlDate>>(a_, b_);
+		var c_ = context.Operators.Select<MedicationAdministration, CqlInterval<CqlDate>>((IEnumerable<MedicationAdministration>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(c_);
 
 		return d_;
@@ -1744,7 +1744,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 				return ac_;
 			};
-			var e_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(c_, d_);
+			var e_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>((IEnumerable<CqlInterval<CqlDate>>)c_, d_);
 			var f_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(e_);
 			var g_ = new CqlInterval<CqlDate>[]
 			{

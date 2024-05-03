@@ -625,7 +625,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return ai_;
 		};
-		var s_ = context.Operators.Where<Observation>(q_, r_);
+		var s_ = context.Operators.Where<Observation>((IEnumerable<Observation>)q_, r_);
 		var t_ = context.Operators.SingletonFrom<Observation>(s_);
 		var u_ = context.Operators.Not((bool?)(t_ is null));
 		var v_ = context.Operators.And(g_, u_);

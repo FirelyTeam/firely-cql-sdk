@@ -16,7 +16,7 @@ internal enum TypeConversion
     /// <summary>
     /// e.g. String is assignable to Object, and  'from' is a subtype of 'to' e.g. string -> object
     /// </summary>
-    ExpressionConvert = 2,
+    ExpressionCast = 2,
 
     ExpressionTypeAs = 3,
 

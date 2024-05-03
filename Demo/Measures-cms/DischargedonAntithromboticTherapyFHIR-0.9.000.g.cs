@@ -306,7 +306,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 
 				return y_;
 			};
-			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAntithromboticDischarge?.ReasonCode, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoAntithromboticDischarge?.ReasonCode, h_);
 			var j_ = this.Medical_Reason_For_Not_Providing_Treatment();
 			var k_ = context.Operators.ConceptsInValueSet(i_, j_);
 			CqlConcept l_(CodeableConcept @this)
@@ -315,7 +315,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 
 				return z_;
 			};
-			var m_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAntithromboticDischarge?.ReasonCode, l_);
+			var m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)NoAntithromboticDischarge?.ReasonCode, l_);
 			var n_ = this.Patient_Refusal();
 			var o_ = context.Operators.ConceptsInValueSet(m_, n_);
 			var p_ = context.Operators.Or(k_, o_);

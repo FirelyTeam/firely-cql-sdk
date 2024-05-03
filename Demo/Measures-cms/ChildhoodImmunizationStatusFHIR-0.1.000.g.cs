@@ -868,7 +868,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 				return ad_;
 			};
-			var z_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, y_);
+			var z_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, y_);
 			bool? aa_(CqlConcept T)
 			{
 				var ae_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional();

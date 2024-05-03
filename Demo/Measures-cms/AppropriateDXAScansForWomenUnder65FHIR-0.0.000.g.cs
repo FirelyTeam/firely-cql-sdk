@@ -772,7 +772,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 				return ac_;
 			};
-			var y_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, x_);
+			var y_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, x_);
 			bool? z_(CqlConcept T)
 			{
 				var ad_ = this.Unlisted_preventive_medicine_service();
@@ -905,7 +905,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 			return i_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>((IEnumerable<Observation>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<Observation>(d_);
 
 		return e_;
@@ -1262,7 +1262,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 				return ai_;
 			};
-			var ae_ = context.Operators.Select<CodeableConcept, CqlConcept>(UnilateralOophorectomy?.BodySite, ad_);
+			var ae_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)UnilateralOophorectomy?.BodySite, ad_);
 			bool? af_(CqlConcept C)
 			{
 				var aj_ = this.Right__qualifier_value_();
@@ -1291,7 +1291,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 				return ar_;
 			};
-			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>(UnilateralOophorectomy?.BodySite, am_);
+			var an_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)UnilateralOophorectomy?.BodySite, am_);
 			bool? ao_(CqlConcept D)
 			{
 				var as_ = this.Left__qualifier_value_();
@@ -1591,7 +1591,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 				return k_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)O?.Category, g_);
 			var i_ = context.Operators.Exists<CqlConcept>(h_);
 			var j_ = context.Operators.And(f_, i_);
 

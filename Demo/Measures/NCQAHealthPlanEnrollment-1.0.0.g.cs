@@ -301,7 +301,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 			return r_;
 		};
-		var k_ = context.Operators.Select<Tuple_EKheTMICVWAQgjLNCMeFLGUGF, bool?>(i_, j_);
+		var k_ = context.Operators.Select<Tuple_EKheTMICVWAQgjLNCMeFLGUGF, bool?>((IEnumerable<Tuple_EKheTMICVWAQgjLNCMeFLGUGF>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
@@ -368,7 +368,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 			return r_;
 		};
-		var k_ = context.Operators.Select<Tuple_EKheTMICVWAQgjLNCMeFLGUGF, bool?>(i_, j_);
+		var k_ = context.Operators.Select<Tuple_EKheTMICVWAQgjLNCMeFLGUGF, bool?>((IEnumerable<Tuple_EKheTMICVWAQgjLNCMeFLGUGF>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
@@ -435,7 +435,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 			return r_;
 		};
-		var k_ = context.Operators.Select<Tuple_EKheTMICVWAQgjLNCMeFLGUGF, bool?>(i_, j_);
+		var k_ = context.Operators.Select<Tuple_EKheTMICVWAQgjLNCMeFLGUGF, bool?>((IEnumerable<Tuple_EKheTMICVWAQgjLNCMeFLGUGF>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;

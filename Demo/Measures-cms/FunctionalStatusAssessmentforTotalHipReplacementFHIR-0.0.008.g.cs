@@ -638,7 +638,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 				return y_;
 			};
-			var u_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, t_);
+			var u_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, t_);
 			bool? v_(CqlConcept T)
 			{
 				var z_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();

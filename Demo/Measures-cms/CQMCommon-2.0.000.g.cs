@@ -307,7 +307,7 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
@@ -346,7 +346,7 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
@@ -385,7 +385,7 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
@@ -423,7 +423,7 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
+		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
@@ -607,7 +607,7 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(g_?.Type, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_?.Type, h_);
 			var j_ = this.Emergency_Department_Visit();
 			var k_ = context.Operators.ConceptsInValueSet(i_, j_);
 
@@ -635,7 +635,7 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(g_?.Type, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_?.Type, h_);
 			var j_ = this.Emergency_Department_Visit();
 			var k_ = context.Operators.ConceptsInValueSet(i_, j_);
 
@@ -1366,7 +1366,7 @@ public class CQMCommon_2_0_000
 
 			return aj_;
 		};
-		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
@@ -2088,7 +2088,7 @@ public class CQMCommon_2_0_000
 
 			return aj_;
 		};
-		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
@@ -2280,7 +2280,7 @@ public class CQMCommon_2_0_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
@@ -2471,7 +2471,7 @@ public class CQMCommon_2_0_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
@@ -2512,7 +2512,7 @@ public class CQMCommon_2_0_000
 
 				return o_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)f_?.Type, g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
@@ -2549,7 +2549,7 @@ public class CQMCommon_2_0_000
 
 				return o_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)f_?.Type, g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);

@@ -346,7 +346,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 				return ap_;
 			};
-			var ac_ = context.Operators.Select<CodeableConcept, CqlConcept>(ValidEncounter?.ReasonCode, ab_);
+			var ac_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ValidEncounter?.ReasonCode, ab_);
 			var ad_ = this.Major_Depressive_Disorder_Active();
 			var ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
 			var af_ = CQMCommon_2_0_000.EncounterDiagnosis(ValidEncounter);

@@ -431,7 +431,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return ac_;
 			};
-			var s_ = context.Operators.Where<Extension>(((CupToDiscExamNotPerformed is DomainResource)
+			var s_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
@@ -489,7 +489,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return ac_;
 			};
-			var s_ = context.Operators.Where<Extension>(((OpticDiscExamNotPerformed is DomainResource)
+			var s_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 

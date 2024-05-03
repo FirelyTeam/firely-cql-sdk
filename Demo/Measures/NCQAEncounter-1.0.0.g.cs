@@ -103,7 +103,7 @@ public class NCQAEncounter_1_0_0
 
 			return m_;
 		};
-		var f_ = context.Operators.Select<Encounter.DiagnosisComponent, bool?>(d_, e_);
+		var f_ = context.Operators.Select<Encounter.DiagnosisComponent, bool?>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 		var g_ = context.Operators.SingletonFrom<bool?>(f_);
 
 		return g_;
