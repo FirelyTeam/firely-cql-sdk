@@ -2,7 +2,7 @@
   "profiles": {
     "CLI-cms": {
       "commandName": "Project",
-      "commandLineArgs": "-l \"C:\\Repos\\Firely\\firely-cql-sdk\\LibrarySets\\CMS\\Resources\\AlaraCTFHIR-0.1.001.json\" -v \"C:\\Repos\\ecqm-content-qicore-2024\\input\\vocabulary\\valueset\\external\" -b \"C:\\Firely\\Tools\\CQL-CMS\\data\\cms\\AlaraCTFHIR\\1d5593d0-f513-46f6-8c2d-538685a61185\\bundle\\1d5593d0-f513-46f6-8c2d-538685a61185_bundle.json\""
+      "commandLineArgs": "-l AlaraCTFHIR-0.1.001 -t 1d5593d0-f513-46f6-8c2d-538685a61185"
     }
   }
 }
