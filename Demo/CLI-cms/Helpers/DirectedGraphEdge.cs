@@ -7,9 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.Collections.Generic;
-
 namespace Hl7.Cql.Graph
 {
     internal class DirectedGraphEdge

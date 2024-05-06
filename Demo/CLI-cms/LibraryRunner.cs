@@ -1,12 +1,7 @@
 ﻿using CLI_cms.Helpers;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
-using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
-using Newtonsoft.Json.Linq;
-using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;

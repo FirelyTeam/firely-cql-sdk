@@ -1,11 +1,7 @@
-﻿using System.Diagnostics;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Fhir.Model;
-using JetBrains.Annotations;
 using System.Runtime.Loader;
-using Microsoft.CodeAnalysis.Emit;
-using FhirLibrary = Hl7.Fhir.Model.Library;
 
 namespace CLI_cms.Helpers;
 
