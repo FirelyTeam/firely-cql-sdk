@@ -12,6 +12,11 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
 
+  <ItemGroup >
+    <PackageReference Include="Dumpify" Version="0.6.5"  />
+  </ItemGroup>
+
+
   <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />

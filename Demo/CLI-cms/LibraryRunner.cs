@@ -10,6 +10,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using Dumpify;
 
 namespace CLI_cms;
 internal static class LibraryRunner
@@ -63,17 +64,18 @@ internal static class LibraryRunner
                     {
                         var value = method.Invoke(instance, [])!;
                         values.Add(declaration.Name, value);
-                        Console.WriteLine($"{opt.Library}.{method.Name} = {value}");
+                        // Console.WriteLine($"{opt.Library}.{method.Name} = {value}");
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine($"{opt.Library}.{method.Name} = {e}");
+                        // Console.WriteLine($"{opt.Library}.{method.Name} = {e}");
                         values.Add(declaration.Name, e);
                     }
                 }
             }
         }
 
+        values.DumpConsole($"Method/Value or Errors for {opt.Library}");
 
         // var json = JsonSerializer.Serialize(values,
         //     new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
