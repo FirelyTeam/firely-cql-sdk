@@ -14,7 +14,7 @@ internal class Program
                 .WithParsed(RunCommand)
                 .WithNotParsed(HandleErrors);
             Console.WriteLine($"Exit code: {(int)ExitCode.Success}");
-            Environment.Exit((int)ExitCode.Success);
+            //Environment.Exit((int)ExitCode.Success);
         }
         catch (InvalidOperationException invalidOptionException)
         {

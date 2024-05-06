@@ -5,6 +5,7 @@ using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
+using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -42,8 +43,7 @@ internal static class LibraryRunner
 
         //* 2nd try */
         var libraryType = ResolveLibraryType(opt.Library) ?? throw new ArgumentException($"Uknown library: {opt.Library}");
-        var asmContext = ResourceHelper.LoadResources(new DirectoryInfo(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
-
+        //var asmContext = ResourceHelper.LoadResources(new DirectoryInfo(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
         var valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
         var patientBundle = ResourceHelper.LoadBundle(opt.TestCaseBundleFile);
         var inputParameters = LoadInputParameters(opt.TestCaseInputParametersFile);
@@ -59,13 +59,24 @@ internal static class LibraryRunner
                 var valueset = method.GetCustomAttribute<CqlValueSetAttribute>();
                 if (declaration != null && valueset == null)
                 {
-                    var value = method.Invoke(instance, Array.Empty<object?>())!;
-                    values.Add(declaration.Name, value);
+                    try
+                    {
+                        var value = method.Invoke(instance, [])!;
+                        values.Add(declaration.Name, value);
+                        Console.WriteLine($"{opt.Library}.{method.Name} = {value}");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"{opt.Library}.{method.Name} = {e}");
+                        values.Add(declaration.Name, e);
+                    }
                 }
             }
         }
-        var json = JsonSerializer.Serialize(values,
-            new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
+
+
+        // var json = JsonSerializer.Serialize(values,
+        //     new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
 
         /* 2nd try */
         //var asmContext = ResourceHelper.LoadResources(new DirectoryInfo(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
@@ -73,8 +84,8 @@ internal static class LibraryRunner
         //var valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
         //var patientBundle = ResourceHelper.LoadBundle(opt.TestCaseBundleFile);
         //var inputParameters = LoadInputParameters(opt.TestCaseInputParametersFile);
-        var context = FhirCqlContext.ForBundle(patientBundle, inputParameters, valueSets);
-        var results = AssemblyLoadContextExtensions.Run(asmContext, opt.LibraryName, opt.LibraryVersion, context);
+        //var context = FhirCqlContext.ForBundle(patientBundle, inputParameters, valueSets);
+        //var results = AssemblyLoadContextExtensions.Run(asmContext, opt.LibraryName, opt.LibraryVersion, context);
     }
 
     private static Type? ResolveLibraryType(string library)

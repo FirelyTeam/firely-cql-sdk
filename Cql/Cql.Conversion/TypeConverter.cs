@@ -95,6 +95,7 @@ namespace Hl7.Cql.Conversion
         {
             if (from is null) return null;
             var fromType = from.GetType();
+            if (fromType == to) return from;
             
             if(_customConverters.SingleOrDefault(converter => converter.Handles(fromType, to)) is {} subConverter)
                 return subConverter.Convert(from, to);
