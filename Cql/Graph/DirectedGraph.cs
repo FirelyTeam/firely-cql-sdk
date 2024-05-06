@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 namespace Hl7.Cql.Graph
 {
     [DebuggerDisplay("DirectedGraph (Nodes:{Nodes.Count}, Edges:{GetEdgesCount()})")]
-    internal class DirectedGraph
+    public class DirectedGraph
     {
         public DirectedGraph()
         {
@@ -82,14 +82,14 @@ namespace Hl7.Cql.Graph
                     {
                         if (!Nodes.TryGetValue(nodeId, out var to))
                             throw new InvalidOperationException($"The node id {nodeId} does not exist in this graph.");
-                        
+
                         yield return to;
                         break;
                     }
                 }
             }
         }
-        
+
         public IList<DirectedGraphNode> TopologicalSort()
         {
             var sorted = Sort(Nodes.Values, node => GetNodesConnectedTo(node));
@@ -97,7 +97,7 @@ namespace Hl7.Cql.Graph
                 sorted.RemoveAt(0);
             return sorted;
 
-            void Visit<T>(T item, 
+            void Visit<T>(T item,
                 Func<T, IEnumerable<T>> getDependencies,
                 ICollection<T> sorted,
                 IDictionary<T, bool> visited) where T : notnull
@@ -129,7 +129,7 @@ namespace Hl7.Cql.Graph
                     sorted.Add(item);
                 }
             }
-            
+
             IList<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies) where T : notnull
             {
                 var sorted = new List<T>();
@@ -179,7 +179,7 @@ namespace Hl7.Cql.Graph
 
                 return $$"""
                          digraph G {
-                           
+
                              graph [ splines="polyline" rankdir="LR" ];
                              node [ shape="rectangle" ];
                              edge [ color="#22 22 22, arrowtail=dot, arrowhead=open" ];
