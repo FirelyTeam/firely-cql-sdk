@@ -75,7 +75,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DEA0937C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Demo\Test\Test.csproj", "{95F35BF6-1FF1-4A5F-8725-A8EA4F1D43CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI-cms", "Demo\CLI-cms\CLI-cms.csproj", "{7EE380BE-EAF5-4D58-A1CF-C93D2283B2BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLI-cms", "Demo\CLI-cms\CLI-cms.csproj", "{7EE380BE-EAF5-4D58-A1CF-C93D2283B2BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +150,7 @@ Global
 		{3FEBF95F-0C04-4600-ACD8-7495C24A7908}.FullDebug|Any CPU.Build.0 = FullDebug|Any CPU
 		{3FEBF95F-0C04-4600-ACD8-7495C24A7908}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FEBF95F-0C04-4600-ACD8-7495C24A7908}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1161915-FFB0-412A-9C65-2F4E046FA9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFE8FB49-8AC1-4C13-93DF-76F2B79CE034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFE8FB49-8AC1-4C13-93DF-76F2B79CE034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFE8FB49-8AC1-4C13-93DF-76F2B79CE034}.FullDebug|Any CPU.ActiveCfg = FullDebug|Any CPU
