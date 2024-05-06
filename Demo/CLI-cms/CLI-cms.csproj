@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\cql-demo.props" />
-	
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
+    <NoWarn>CS0436</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
-    <ProjectReference Include="..\..\Cql\Graph\Graph.csproj" />
     <ProjectReference Include="..\Measures-cms\Measures-cms.csproj" />
   </ItemGroup>
 

@@ -10,15 +10,23 @@
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Fhir
 {
     public static class StreamExtensions
     {
-        private static readonly JsonSerializerOptions Options = new JsonSerializerOptions()
-            .ForFhir(ModelInfo.ModelInspector);
+        private static readonly JsonSerializerOptions Options = BuildJsonSerializerOptions();
+
+        private static JsonSerializerOptions BuildJsonSerializerOptions()
+        {
+            var o = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
+            o.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            return o;
+        }
+
         public static T ParseFhir<T>(this Stream stream) => JsonSerializer.Deserialize<T>(stream, Options)
-            ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(T).Name}");
+                                                            ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(T).Name}");
         public static ValueTask<T> ParseFhirAsync<T>(this Stream stream) =>
             JsonSerializer.DeserializeAsync<T>(stream, Options)!;
         public static void WriteFhir<T>(this Stream stream, T fhir) =>

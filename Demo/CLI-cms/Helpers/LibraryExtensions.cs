@@ -1,26 +1,30 @@
-﻿using Hl7.Cql.Fhir;
+﻿using System.Diagnostics;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Fhir.Model;
 using JetBrains.Annotations;
 using System.Runtime.Loader;
+using Microsoft.CodeAnalysis.Emit;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 
 namespace CLI_cms.Helpers;
 
 internal static class LibraryExtensions
 {
-    [UsedImplicitly]
-    public static DirectedGraph GetDependencies(
-        this FhirLibrary library,
-        Func<string, FhirLibrary> getLibrary,
-        string libraryProperty = "ElmLibrary")
+
+    public static DirectedGraph GetDependencies(this Library library,
+        Func<string, Library> getLibrary, string libraryProperty = "Library")
     {
         var graph = new DirectedGraph();
-        graph.AddStartNode();
-        Visit(null);
+        graph.Add(graph.StartNode);
+        Visit(graph, graph.StartNode, library, getLibrary, libraryProperty);
         return graph;
 
-        void Visit(DirectedGraphNode? from)
+        void Visit(DirectedGraph graph,
+             DirectedGraphNode from,
+             Library library,
+             Func<string, Library> getLibrary,
+             string libraryProperty = "")
         {
             if (!graph.Nodes.TryGetValue(library.Id, out var thisNode))
             {
@@ -28,45 +32,48 @@ internal static class LibraryExtensions
                 {
                     NodeId = library.Id,
                     Properties = new Dictionary<string, object>
-                    {
-                        { libraryProperty, library }
-                    }
+                        {
+                            { libraryProperty, library }
+                        }
                 };
-                graph.AddNode(thisNode);
-                graph.AddEdge((from, thisNode));
+                graph.Add(thisNode);
+                var edge = new DirectedGraphEdge(from, thisNode);
+                from.ForwardEdges.Add(edge);
+                graph.Add(edge);
             }
             var dependencies = library.RelatedArtifact
                 .Where(ra => ra.Type == RelatedArtifact.RelatedArtifactType.DependsOn)
                 .ToArray();
 
             if (dependencies.Length == 0
-                && !graph.GetForwardNodeIds(thisNode.NodeId).Contains(DirectedGraphNode.EndId))
+                && !thisNode.ForwardEdges.Select(fe => fe.ToId).Contains(graph.EndNode.NodeId))
             {
-                graph.AddEdge((thisNode, null));
+                var toEnd = new DirectedGraphEdge(thisNode, graph.EndNode);
+                thisNode.ForwardEdges.Add(toEnd);
+                graph.Add(toEnd);
             }
             else
             {
-                foreach (var dependency in dependencies)
+                foreach (var relatedArtifiact in dependencies)
                 {
-                    var relatedArtifact = getLibrary(dependency.Resource)
-                        ?? throw new InvalidOperationException($"Could not find related library {dependency.ElementId}");
-                    Visit(thisNode);
+                    var relatedArtifact = getLibrary(relatedArtifiact.Resource)
+                        ?? throw new InvalidOperationException($"Could not find related library {relatedArtifiact.ElementId}");
+                    Visit(graph, thisNode, relatedArtifact, getLibrary, libraryProperty);
                 }
             }
         }
     }
 
-    [UsedImplicitly]
-    public static IEnumerable<FhirLibrary> AllLibraries(this DirectedGraph graph, string libraryProperty = "Library")
+    public static IEnumerable<Library> AllLibraries(this DirectedGraph graph, string libraryProperty = "Library")
     {
-        IEnumerable<FhirLibrary> GetLibraries()
+        IEnumerable<Library> GetLibraries()
         {
             foreach (var node in graph.Nodes)
             {
                 if (node.Value.Properties != null)
                 {
                     if (node.Value.Properties.TryGetValue(libraryProperty, out object? libObject)
-                        && libObject is FhirLibrary library)
+                        && libObject is Library library)
                     {
                         yield return library;
                     }
@@ -79,20 +86,16 @@ internal static class LibraryExtensions
         return libs;
     }
 
-    [UsedImplicitly]
-    public static DirectedGraph GetDependencies(
-        this FhirLibrary library,
-        DirectoryInfo directory) =>
-        library.GetDependencies(id =>
+    public static DirectedGraph GetDependencies(this Library library,
+        DirectoryInfo directory) => library.GetDependencies(id =>
         {
             var file = new FileInfo(Path.Combine(directory.FullName, $"{id}.json"));
             using var fs = file.OpenRead();
-            return fs.ParseFhir<FhirLibrary>();
+            return fs.ParseFhir<Library>();
         });
 
-    [UsedImplicitly]
-    public static AssemblyLoadContext LoadAssemblies(
-        this IEnumerable<FhirLibrary> libraries,
+
+    public static AssemblyLoadContext LoadAssemblies(this IEnumerable<Library> libraries,
         AssemblyLoadContext asmContext)
     {
         foreach (var library in libraries)
@@ -101,14 +104,13 @@ internal static class LibraryExtensions
             if (dll != null)
             {
                 using var ms = new MemoryStream(dll.Data);
-                _ = asmContext.LoadFromStream(ms);
+                var assembly = asmContext.LoadFromStream(ms);
             }
 
         }
         return asmContext;
     }
 
-    [UsedImplicitly]
     public static AssemblyLoadContext LoadAssembles(this IEnumerable<Binary> binaries,
         AssemblyLoadContext asmContext)
     {
@@ -117,7 +119,7 @@ internal static class LibraryExtensions
             if (binary.ContentType == "application/octet-stream")
             {
                 using var ms = new MemoryStream(binary.Data);
-                _ = asmContext.LoadFromStream(ms);
+                var assembly = asmContext.LoadFromStream(ms);
             }
         }
         return asmContext;
