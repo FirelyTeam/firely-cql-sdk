@@ -40,7 +40,7 @@ internal static class LibraryRunner
         var json = JsonSerializer.Serialize(values,
             new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
 
-        ///* 2nd try */
+        /* 2nd try */
         //var asmContext = ResourceHelper.LoadResources(new DirectoryInfo(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
 
         //var valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
