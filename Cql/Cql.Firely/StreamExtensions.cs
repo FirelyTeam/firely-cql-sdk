@@ -13,7 +13,7 @@ using System.Text.Json;
 
 namespace Hl7.Cql.Fhir
 {
-    internal static class StreamExtensions
+    public static class StreamExtensions
     {
         private static readonly JsonSerializerOptions Options = new JsonSerializerOptions()
             .ForFhir(ModelInfo.ModelInspector);

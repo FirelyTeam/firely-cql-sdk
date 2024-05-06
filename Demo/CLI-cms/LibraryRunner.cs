@@ -41,6 +41,7 @@ internal static class LibraryRunner
         //     new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
 
         //* 2nd try */
+        var libraryType = ResolveLibraryType(opt.Library) ?? throw new ArgumentException($"Uknown library: {opt.Library}");
         var asmContext = ResourceHelper.LoadResources(new DirectoryInfo(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
 
         var valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
@@ -72,8 +73,7 @@ internal static class LibraryRunner
         //var valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
         //var patientBundle = ResourceHelper.LoadBundle(opt.TestCaseBundleFile);
         //var inputParameters = LoadInputParameters(opt.TestCaseInputParametersFile);
-        //var context = FhirCqlContext.ForBundle(patientBundle, inputParameters, valueSets);
-
+        var context = FhirCqlContext.ForBundle(patientBundle, inputParameters, valueSets);
         var results = AssemblyLoadContextExtensions.Run(asmContext, opt.LibraryName, opt.LibraryVersion, context);
     }
 
