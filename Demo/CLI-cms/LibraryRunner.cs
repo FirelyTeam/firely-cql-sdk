@@ -46,7 +46,33 @@ internal static class LibraryRunner
         var valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
         var patientBundle = ResourceHelper.LoadBundle(opt.TestCaseBundleFile);
         var inputParameters = LoadInputParameters(opt.TestCaseInputParametersFile);
-        var context = FhirCqlContext.ForBundle(patientBundle, inputParameters, valueSets);
+
+        var setup = FhirCqlContext.ForBundle(patientBundle, inputParameters, valueSets);
+        var instance = Activator.CreateInstance(libraryType, setup);
+        var values = new Dictionary<string, object>();
+        foreach (var method in libraryType.GetMethods())
+        {
+            if (method.GetParameters().Length == 0)
+            {
+                var declaration = method.GetCustomAttribute<CqlDeclarationAttribute>();
+                var valueset = method.GetCustomAttribute<CqlValueSetAttribute>();
+                if (declaration != null && valueset == null)
+                {
+                    var value = method.Invoke(instance, Array.Empty<object?>())!;
+                    values.Add(declaration.Name, value);
+                }
+            }
+        }
+        var json = JsonSerializer.Serialize(values,
+            new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
+
+        /* 2nd try */
+        //var asmContext = ResourceHelper.LoadResources(new DirectoryInfo(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
+
+        //var valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
+        //var patientBundle = ResourceHelper.LoadBundle(opt.TestCaseBundleFile);
+        //var inputParameters = LoadInputParameters(opt.TestCaseInputParametersFile);
+        //var context = FhirCqlContext.ForBundle(patientBundle, inputParameters, valueSets);
 
         var results = AssemblyLoadContextExtensions.Run(asmContext, opt.LibraryName, opt.LibraryVersion, context);
     }
