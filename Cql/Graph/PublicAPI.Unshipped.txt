@@ -6,8 +6,6 @@ Hl7.Cql.Graph.DirectedGraph.AddNode(Hl7.Cql.Graph.DirectedGraphNode node) -> voi
 Hl7.Cql.Graph.DirectedGraph.AddStartNode() -> void
 Hl7.Cql.Graph.DirectedGraph.DirectedGraph() -> void
 Hl7.Cql.Graph.DirectedGraph.GetForwardNodeIds(string! nodeId) -> System.Collections.Generic.IEnumerable<string!>!
-Hl7.Cql.Graph.DirectedGraph.GraphvizDiagram.get -> string!
-Hl7.Cql.Graph.DirectedGraph.GraphvizDiagramUri.get -> string!
 Hl7.Cql.Graph.DirectedGraph.Nodes.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Hl7.Cql.Graph.DirectedGraphNode>!
 Hl7.Cql.Graph.DirectedGraph.TopologicalSort() -> System.Collections.Generic.IList<Hl7.Cql.Graph.DirectedGraphNode>!
 Hl7.Cql.Graph.DirectedGraphNode
