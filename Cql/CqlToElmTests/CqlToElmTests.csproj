@@ -5,7 +5,7 @@
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<NoWarn>CS1591;CS0618</NoWarn>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
