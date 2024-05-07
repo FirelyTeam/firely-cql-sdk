@@ -41,7 +41,7 @@ internal class Program
         CommandLineOptions.EnsureValidOptions(options);
         switch (options.AssemblySource)
         {
-            case AssemblySource.ProjectFile:
+            case AssemblySource.Project:
                 LibraryRunner.RunWithMeasureCmsProject(options);
                 break;
             default:
@@ -53,6 +53,7 @@ internal class Program
 
     static void HandleErrors(IEnumerable<Error> errs)
     {
-        throw new InvalidOperationException("Invalid command line arguments.");
+        //throw new InvalidOperationException("Invalid command line arguments.");
+        Environment.Exit((int)ExitCode.InvalidOptions);
     }
 }

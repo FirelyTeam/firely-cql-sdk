@@ -11,7 +11,7 @@ namespace CLI_cms.Helpers;
 internal class ResourceHelper
 {
     public static readonly IFhirSerializationEngine FirelySerializer =
-     FhirSerializationEngineFactory.Ostrich(ModelInfo.ModelInspector);
+        FhirSerializationEngineFactory.Ostrich(ModelInfo.ModelInspector);
 
     public static readonly JsonSerializerOptions JsonSerializerOptions =
         new JsonSerializerOptions()
@@ -27,7 +27,7 @@ internal class ResourceHelper
         using var sr = new StreamReader(bundleStream);
         var json = sr.ReadToEnd();
         var bundle = FirelySerializer.DeserializeFromJson(json) as Bundle
-            ?? throw new ArgumentException($"Provided stream is not a bundle resource");
+                     ?? throw new ArgumentException($"Provided stream is not a bundle resource");
 
         return bundle;
     }
@@ -44,11 +44,15 @@ internal class ResourceHelper
             else if (resource is ValueSet valueSet)
                 valueSets.Add(valueSet);
         }
+
         var vsd = valueSets.ToValueSetDictionary(false);
         return vsd;
     }
 
-    public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
+    public static AssemblyLoadContext LoadResources(
+        DirectoryInfo dir,
+        string lib,
+        string version)
     {
         var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
         using var fs = libFile.OpenRead();
