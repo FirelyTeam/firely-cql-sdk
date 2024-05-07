@@ -219,11 +219,7 @@ namespace Hl7.Cql.Fhir
         {
             public bool Handles(Type from, Type to)
             {
-                var shouldHandle =
-                    from.IsNullable(out var nonNullableType)
-                    | // Don't change to &&
-                    nonNullableType.IsEnum
-                    && nonNullableType.GetCustomAttribute<FhirEnumerationAttribute>() is {}
+                var shouldHandle = IsFhirEnum(from)
                     && to == typeof(string);
                 return shouldHandle;
             }
@@ -231,6 +227,12 @@ namespace Hl7.Cql.Fhir
             public object? Convert(object? instance, Type to) =>
                 instance is Enum e ? e.GetLiteral() : null;
         }
+
+        internal static bool IsFhirEnum(Type from) =>
+            (from.IsNullable(out var nonNullableType) || true)
+            &&
+            nonNullableType.IsEnum
+            && nonNullableType.GetCustomAttribute<FhirEnumerationAttribute>() is { };
 
         internal static TypeConverter ConvertEnumToStrings(this TypeConverter converter)
         {

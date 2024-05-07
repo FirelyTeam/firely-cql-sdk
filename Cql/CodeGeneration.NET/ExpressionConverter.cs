@@ -131,7 +131,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                     sb.Append(ConvertExpression(indent + 1, childStatement));
                 }
 
-                sb.AppendLine(";");
+                switch (childStatement)
+                {
+                    case CaseWhenThenExpression:
+                        sb.AppendLine("");
+                        break;
+                    default:
+                        sb.AppendLine(";");
+                        break;
+                }
                 isFirstStatement = false;
             }
 

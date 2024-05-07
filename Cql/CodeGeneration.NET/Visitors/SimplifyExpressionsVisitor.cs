@@ -31,10 +31,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
     /// </summary>
     internal class SimplifyExpressionsVisitor : ExpressionVisitor
     {
-        public SimplifyExpressionsVisitor()
-        {
-        }
-
         private readonly List<BinaryExpression> _assignments = [];
         private bool _atRoot = true;
 

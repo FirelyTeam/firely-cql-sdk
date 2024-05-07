@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
@@ -19,22 +20,26 @@ internal static class Defaults
         new(
             UseKeywords:true,
             NoNamespaces:true,
-            TypeFormat:t => $"{t.Type}{GetClassKind(t)}");
+            TypeFormat:t => $"{t.Type}{GetClassKind(t.TypeInfo)}");
 
-    private static string GetClassKind(ITypeCSharpFormatContext t) =>
-        t.TypeInfo switch
+    private static string GetClassKind(Type t) =>
+        t switch
         {
             { IsEnum: true } => ":enum",
             { IsInterface: true } => ":interface",
-            { } type when type.IsNullable(out var nnType)
-                          | // Don't change to &&
+            { } type when (type.IsNullable(out var nnType) || true)
+                          &&
                           nnType.GetCSharpKeyword() is { } => "", // simple type
             { IsValueType: true } => ":struct",
             _                     => ":class",
         };
 
     public static readonly MethodCSharpFormat MethodCSharpFormat =
-        new (
-            ParameterFormat: new (
-                TypeFormat: TypeCSharpFormat));
+        MethodCSharpFormat.Default with
+        {
+            ParameterFormat = ParameterCSharpFormat.Default with
+            {
+                TypeFormat = TypeCSharpFormat
+            }
+        };
 }

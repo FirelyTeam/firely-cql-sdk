@@ -8,6 +8,9 @@
 using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Iso8601;
+using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Compiler.Expressions;
 
@@ -39,15 +42,18 @@ internal static class ExpressionExtensions
                     value.GetType().IsAssignableTo(type): // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
                     return (Expression.Constant(value, type), TypeConversion.ExactType);
 
-                case Enum enumValue when type == typeof(string):
-                    var name = Enum.GetName(enumValue.GetType(), enumValue);
-                    if (name is null)
-                    {
-                        // Still throw an error here, ignoring the `throwError` parameter, because this indicates a bug in the cql.
-                        throw new InvalidOperationException($"Enum value {enumValue} is not defined in enum type {enumValue.GetType()}");
-                    }
+                case Enum enumValue
+                    when type == typeof(string)
+                         && enumValue.GetType() is {} enumType
+                         && FhirTypeConverter.IsFhirEnum(enumType):
 
-                    return (Expression.Constant(name.ToLowerInvariant()), TypeConversion.ExactType);
+                    var enumLiteral = enumValue.GetLiteral();
+                    return (Expression.Constant(enumLiteral), TypeConversion.ExactType);
+
+                case DateTimePrecision dateTimePrecision
+                    when type == typeof(string):
+                    var dateTimeString = dateTimePrecision.ToString().ToLowerInvariant();
+                    return (Expression.Constant(dateTimeString), TypeConversion.ExactType);
             }
         }
 

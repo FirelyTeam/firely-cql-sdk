@@ -88,12 +88,12 @@ internal partial class CqlOperatorsBinder
         if (_logger.IsEnabled(LogLevel.Debug))
         {
             MethodCSharpFormat methodCSharpFormat =
-                MethodCSharpFormat.Default with
+                Defaults.MethodCSharpFormat with
                 {
-                    ParameterFormat = ParameterCSharpFormat.Default with
+                    ParameterFormat = Defaults.MethodCSharpFormat.ParameterFormat with
                     {
                         // Show the parameter type, and conversion method
-                        ParameterFormat = t => $"{t.Type} using {candidate.conversionMethods[t.Position].ToString()}"
+                        ParameterFormat = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
                     }
                 };
 

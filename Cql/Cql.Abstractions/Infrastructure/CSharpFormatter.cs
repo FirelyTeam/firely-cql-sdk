@@ -87,9 +87,9 @@ internal record TypeCSharpFormat(
     private const char NullOperator = '?';
     private const char PointerOperator = '*';
 
-    public FormattableStringProvider<ITypeCSharpFormatContext> TypeFormat { get; } = TypeFormat ?? DefaultTypeFormat;
-    public ListTokens GenericArgumentTokens { get; } = GenericArgumentTokens ?? CSharpTokens.GenericArguments;
-    public ListTokens ArrayTokens { get; } = ArrayTokens ?? CSharpTokens.Arrays;
+    public FormattableStringProvider<ITypeCSharpFormatContext> TypeFormat { get; init;  } = TypeFormat ?? DefaultTypeFormat;
+    public ListTokens GenericArgumentTokens { get; init; } = GenericArgumentTokens ?? CSharpTokens.GenericArguments;
+    public ListTokens ArrayTokens { get; init; } = ArrayTokens ?? CSharpTokens.Arrays;
 
     public override TextWriterFormattableString GetFormattableString(Type type) =>
         TypeFormat(new TypeCSharpFormatContext(type, this));

@@ -57,7 +57,7 @@ public class FHIRHelpers_4_3_000
 				var i_ = context.Operators.Interval(g_, h_, true, true);
 
 				return i_;
-			};
+			}
 		};
 
 		return a_();
@@ -148,11 +148,11 @@ public class FHIRHelpers_4_3_000
 						var ag_ = context.Operators.Interval(ae_, ae_, true, true);
 
 						return ag_;
-					};
+					}
 				};
 
 				return b_();
-			};
+			}
 		};
 
 		return a_();
@@ -175,7 +175,7 @@ public class FHIRHelpers_4_3_000
 				var d_ = context.Operators.Interval(b_, c_, true, true);
 
 				return d_;
-			};
+			}
 		};
 
 		return a_();
@@ -223,7 +223,7 @@ public class FHIRHelpers_4_3_000
 			else
 			{
 				return unit;
-			};
+			}
 		};
 
 		return a_();
@@ -293,7 +293,7 @@ public class FHIRHelpers_4_3_000
 				var ac_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ab_);
 
 				return (ac_ as CqlQuantity);
-			};
+			}
 		};
 
 		return a_();
@@ -350,7 +350,7 @@ public class FHIRHelpers_4_3_000
 				var y_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", x_);
 
 				return (y_ as CqlQuantity);
-			};
+			}
 		};
 
 		return a_();
@@ -372,7 +372,7 @@ public class FHIRHelpers_4_3_000
 				var c_ = this.ToQuantity(ratio?.Denominator);
 
 				return new CqlRatio(b_, c_);
-			};
+			}
 		};
 
 		return a_();
@@ -391,7 +391,7 @@ public class FHIRHelpers_4_3_000
 			else
 			{
 				return new CqlCode(coding?.CodeElement?.Value, coding?.SystemElement?.Value, coding?.VersionElement?.Value, coding?.DisplayElement?.Value);
-			};
+			}
 		};
 
 		return a_();
@@ -418,7 +418,7 @@ public class FHIRHelpers_4_3_000
 				var c_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)concept?.Coding, b_);
 
 				return new CqlConcept(c_, concept?.TextElement?.Value);
-			};
+			}
 		};
 
 		return a_();
@@ -442,7 +442,7 @@ public class FHIRHelpers_4_3_000
 				};
 
 				return b_;
-			};
+			}
 		};
 
 		return a_();
@@ -470,7 +470,7 @@ public class FHIRHelpers_4_3_000
 				};
 
 				return c_;
-			};
+			}
 		};
 
 		return a_();
@@ -668,7 +668,7 @@ public class FHIRHelpers_4_3_000
 			else
 			{
 				return value;
-			};
+			}
 		};
 
 		return a_();
