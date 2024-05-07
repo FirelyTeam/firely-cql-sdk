@@ -360,7 +360,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Null()
         {
-            var library = createLibraryForExpression("1 ~ null");
+            var library = CreateLibraryForExpression("1 ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -368,7 +368,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Integer()
         {
-            var library = createLibraryForExpression("null ~ 1");
+            var library = CreateLibraryForExpression("null ~ 1");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -717,7 +717,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Null()
         {
-            var library = createLibraryForExpression("1L ~ null");
+            var library = CreateLibraryForExpression("1L ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -725,7 +725,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Long()
         {
-            var library = createLibraryForExpression("null ~ 1L");
+            var library = CreateLibraryForExpression("null ~ 1L");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1074,7 +1074,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Null()
         {
-            var library = createLibraryForExpression("1.0 ~ null");
+            var library = CreateLibraryForExpression("1.0 ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1082,7 +1082,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Decimal()
         {
-            var library = createLibraryForExpression("null ~ 1.0");
+            var library = CreateLibraryForExpression("null ~ 1.0");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1375,7 +1375,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Null()
         {
-            var library = createLibraryForExpression("1.0 '1' ~ null");
+            var library = CreateLibraryForExpression("1.0 '1' ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1383,7 +1383,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Quantity()
         {
-            var library = createLibraryForExpression("null ~ 1.0 '1'");
+            var library = CreateLibraryForExpression("null ~ 1.0 '1'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1450,7 +1450,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_EquivalentTo_Null()
         {
-            var library = createLibraryForExpression("'hello' ~ null");
+            var library = CreateLibraryForExpression("'hello' ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1458,7 +1458,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_String()
         {
-            var library = createLibraryForExpression("null ~ 'hello'");
+            var library = CreateLibraryForExpression("null ~ 'hello'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }

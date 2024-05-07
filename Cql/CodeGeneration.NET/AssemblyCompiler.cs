@@ -68,7 +68,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var namespaces = new[]
             {
                 typeof(CqlDeclarationAttribute).Namespace!,
-                typeof(ValueSetFacade).Namespace!,
+                typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
             }
             .Concat(TypeResolver.ModelNamespaces)
@@ -86,7 +86,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new());
+                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new(false));
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Hl7.Cql.Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
 namespace Hl7.Cql.CqlToElm.Builtin
@@ -14,8 +16,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 Add(model);
         }
 
-        private Dictionary<string, Dictionary<string, ModelInfo>> ModelsByUriAndVersion { get; }
-            = new Dictionary<string, Dictionary<string, ModelInfo>>();
+        private Dictionary<string, Dictionary<string, ModelInfo>> ModelsByUriAndVersion { get; } = new();
+
+        private Dictionary<string, Dictionary<string, string>> ConversionFunctions { get; } = new();
 
         public IModelProvider Add(ModelInfo model)
         {
@@ -28,6 +31,17 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 ModelsByUriAndVersion.Add(model.url, modelsByVersion);
             }
             modelsByVersion!.Add(model.version, model);
+            foreach(var conversionInfo in model.conversionInfo ?? Enumerable.Empty<ConversionInfo>())
+            {
+                if (!ConversionFunctions.TryGetValue(conversionInfo.fromType, out var toFunctions))
+                {
+                    toFunctions = new();
+                    ConversionFunctions.Add(conversionInfo.fromType, toFunctions);
+                }
+                if (!toFunctions.ContainsKey(conversionInfo.toType))
+                    toFunctions.Add(conversionInfo.toType, conversionInfo.functionName);
+                else throw new InvalidOperationException($"The conversion from {conversionInfo.fromType} to {conversionInfo.toType} is already defined by {conversionInfo.functionName}");
+            }
             return this;
         }
 
@@ -80,6 +94,30 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 model = eligibleModels.SingleOrDefault();
                 return model is not null;
             }
+        }
+
+        public bool TryGetConversionFunctionName(string fromQualifiedTypeName, string toQualifiedTypeName, [NotNullWhen(true)] out string? conversionFunctionName)
+        {
+            if (ConversionFunctions.TryGetValue(fromQualifiedTypeName, out var toFunctions)
+                && toFunctions.TryGetValue(toQualifiedTypeName, out conversionFunctionName)) {
+                return true;
+            }
+            conversionFunctionName = null;
+            return false;
+        }
+
+        public bool TryGetConversionFunctions(string fromQualifiedTypeName, [NotNullWhen(true)] out (string To, string Function)[]? conversions)
+        {
+            if (ConversionFunctions.TryGetValue(fromQualifiedTypeName, out var toFunctions))
+            {
+                conversions = toFunctions
+                    .Select(kvp => (kvp.Key, kvp.Value))
+                    .ToArray();
+                return true;
+            }
+            conversions = null;
+            return false;
+
         }
     }
 }

@@ -18,6 +18,13 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// Creates an instance.
         /// </summary>
+        public CqlCodeSystem()
+        {
+        }
+
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
         /// <param name="id">The canonical URL of the code system.</param>
         /// <param name="version">The version of the code system.</param>
         public CqlCodeSystem(string? id, string? version) : base(id, version)

@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void BetweenIntTrue()
         {
-            var lib = createLibraryForExpression("4 between 2 and 6");
+            var lib = CreateLibraryForExpression("4 between 2 and 6");
             var and = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>();
             and.operand.Should().HaveCount(2);
             var ge = and.operand[0].Should().BeOfType<GreaterOrEqual>().Subject;
@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ProperBetweenIntFalse()
         {
-            var lib = createLibraryForExpression("2 properly between 2 and 6");
+            var lib = CreateLibraryForExpression("2 properly between 2 and 6");
             var and = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>();
             and.operand.Should().HaveCount(2);
             var ge = and.operand[0].Should().BeOfType<Greater>().Subject;

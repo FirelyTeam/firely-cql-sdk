@@ -289,5 +289,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithId()
                 .WithLocator(context.Locator());
         }
+
+        public override Expression VisitAggregateExpressionTerm([NotNull] cqlParser.AggregateExpressionTermContext context)
+        {
+            var operand = Visit(context.expression());
+            var expression = context.GetChild(0).GetText() switch
+            {
+                "distinct" => InvocationBuilder.Invoke(SystemLibrary.Distinct, operand),
+                "flatten" => InvocationBuilder.Invoke(SystemLibrary.Flatten, operand),
+                _ => throw new NotImplementedException(),
+            };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
+        }
+
     }
 }

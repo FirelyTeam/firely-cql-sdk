@@ -1,10 +1,17 @@
 ﻿using FluentAssertions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Graph;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -133,6 +140,35 @@ namespace Hl7.Cql.CqlToElm.Test
             return (T?)result;
         }
 
+        private static string SourceCode(Library library)
+        {
+            var eb = ExpressionBuilderFor(library);
+            var lambdas = eb.Build();
+            var writerLogger = LoggerFactory
+                 .Create(logging => logging.AddDebug())
+                 .CreateLogger<CSharpSourceCodeWriter>();
+            var csw = new CSharpSourceCodeWriter(writerLogger);
+            var dict = new Dictionary<string, MemoryStream>();
+
+            var graph = new DirectedGraph();
+            var properties = new Dictionary<string, object>();
+            properties.Add(Library.LibraryNodeProperty, library);
+            var packageNode = new DirectedGraphNode
+            {
+                NodeId = library.NameAndVersion!,
+                Properties = properties,
+            };
+            graph.Add(packageNode);
+            var edgeFromStart = new DirectedGraphEdge(graph.StartNode, packageNode);
+            graph.StartNode.ForwardEdges.Add(edgeFromStart);
+            graph.Add(edgeFromStart);
+
+            csw.Write(lambdas, eb.TypeManager.TupleTypes, graph, lib => { var ms = new MemoryStream(); dict[lib] = ms; return ms; });
+            var ms = dict[library.NameAndVersion!];
+            var code = Encoding.UTF8.GetString(ms.ToArray());
+            return code;
+        }
+
         private static void AssertType(Expression expression, NamedTypeSpecifier spec)
         {
             expression.resultTypeName.Should().Be(spec.name);
@@ -240,7 +276,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 parameter x default 'bla'
 
                 define {nameof(InvokeParameter)}: x(4)
-            ", "Could not resolve call to operator x with signature(Integer).");
+            ", "Could not resolve call to operator x with signature (Integer).");
         }
 
         [TestMethod]
@@ -264,7 +300,7 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.Floor(4)
-            ", "Could not find library: Math*", "Could not resolve call to operator*");
+            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve call to operator*");
         }
 
         [TestMethod]
@@ -276,7 +312,9 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math
-            ", "Could not find library: Math*", "A reference to a library is unexpected at this point.");
+            ", 
+            "Unable to resolve library: Math version 'latest'. Are you sure this library version exists and that you have access?",
+            "Identifier Math is a library and cannot be used as an expression.");
         }
 
         [TestMethod]
@@ -288,7 +326,7 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.MaxInt
-            ", "Could not find library: Math*", "Unable to resolve identifier MaxInt in library Math.");
+            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier MaxInt in library Math.");
         }
 
 
@@ -441,7 +479,7 @@ namespace Hl7.Cql.CqlToElm.Test
             include Math
 
              define error: Patient
-            ", "Could not find library: Math*", "Unable to resolve identifier 'Patient'.");
+            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier Patient in the current library.");
         }
 
         [TestMethod]

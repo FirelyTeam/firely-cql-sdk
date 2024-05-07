@@ -68,7 +68,7 @@ namespace Hl7.Cql.Compiler
                 var type = TypeResolver.ResolveType(@as.asType.Name!)
                     ?? throw new InvalidOperationException($"Cannot resolve type {@as.asType.Name}");
                 var operand = TranslateExpression(@as.operand, ctx);
-                if (!type.IsAssignableFrom(operand.Type))
+                if (!type.IsAssignableTo(operand.Type))
                     ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
                 return new ElmAsExpression(operand, type, @as.strict);
             }

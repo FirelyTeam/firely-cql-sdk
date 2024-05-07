@@ -40,5 +40,23 @@ namespace Hl7.Cql.CqlToElm
         /// <exception cref="ArgumentException">If two models with the same name and different versions are available,
         /// and <paramref name="version"/> is <see langword="null" /> or white space.</exception>
         bool TryGetModelFromName(string name, [NotNullWhen(true)] out ModelInfo? model, string? version = null);
+
+        /// <summary>
+        /// Gets the conversion info from one qualified type name to another.
+        /// </summary>
+        /// <param name="fromQualifiedTypeName">The type to convert from</param>
+        /// <param name="toQualifiedTypeName">The type to convert to</param>
+        /// <param name="conversionFunctionName">The resulting function</param>
+        /// <returns>True if a function is defined; otherwise, false.</returns>
+        bool TryGetConversionFunctionName(string fromQualifiedTypeName, string toQualifiedTypeName, [NotNullWhen(true)] out string? conversionFunctionName);
+
+        /// <summary>
+        /// Gets all conversions from <paramref name="fromQualifiedTypeName"/>.
+        /// </summary>
+        /// <param name="fromQualifiedTypeName">The type to convert from</param>
+        /// <param name="conversions">Tuples containing target types and their corresponding conversion functions.</param>
+        /// <returns>True if at least one function is defined; otherwise, false.</returns>
+        bool TryGetConversionFunctions(string fromQualifiedTypeName, [NotNullWhen(true)] out (string To, string Function)[]? conversions);
+
     }
 }

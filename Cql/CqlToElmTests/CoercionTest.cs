@@ -151,7 +151,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Null();
             var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(CoercionCost.Compatible, result.Cost);
+            Assert.AreEqual(CoercionCost.MoreCompatible, result.Cost);
         }
 
         [TestMethod]
@@ -212,7 +212,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = List(SystemTypes.AnyType);
             var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType.ToListType());
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(CoercionCost.Cast, result.Cost);
+            Assert.AreEqual(CoercionCost.MoreCompatible, result.Cost);
         }
         [TestMethod]
         public void ListIsSubtypeOfAny()
@@ -233,5 +233,27 @@ namespace Hl7.Cql.CqlToElm.Test
             CoercionProvider.CanBeCast(SystemTypes.AnyType, SystemTypes.AnyType.ToIntervalType())
                 .Should().BeTrue();
 
+        [TestMethod]
+        public void ListIntervalIntegerToListIntervalDecimal()
+        {
+            var expression = List(SystemTypes.IntegerType.ToIntervalType(), 
+                Interval(Integer(1), Integer(2)));
+            var result = CoercionProvider.Coerce(expression,
+                SystemTypes.DecimalType.ToIntervalType().ToListType());
+            result.Success.Should().BeTrue();
+            result.Cost.Should().Be(CoercionCost.ImplicitToSimpleType);
+            result.Result.Should().BeOfType<Query>();
+        }
+
+
+        [TestMethod]
+        public void IntervalIntegerToIntervalDecimal()
+        {
+            var expression = Interval(Integer(1), Integer(2));
+            var result = CoercionProvider.Coerce(expression,
+                SystemTypes.DecimalType.ToIntervalType());
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.Cost);
+        }
     }
 }

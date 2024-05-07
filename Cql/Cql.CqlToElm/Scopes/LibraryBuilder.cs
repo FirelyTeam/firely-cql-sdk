@@ -59,23 +59,32 @@ namespace Hl7.Cql.CqlToElm
                 errorType = errorType
             });
 
-        public void EnterScope()
-        {
-            var newScope = new SymbolTable(CurrentScope);
-            CurrentScope = newScope;
-        }
+        /// <summary>
+        /// Enters a scope which is exited when the return value of this method is disposed.
+        /// </summary>
+        /// <param name="newScope">The new scope to enter, or <see langword="null"/>.  If null, this builder's current scope will be entered via <see cref="ISymbolScope.EnterScope"/>.</param>
+        /// <returns>An <see cref="IDisposable"/> which upon disposable exits the new scope.</returns>
+        public IDisposable EnterScope(ISymbolScope? newScope = null) => 
+            new DisposableScope(this, newScope ?? CurrentScope.EnterScope());
 
-        public void EnterScope(ISymbolScope newScope)
-        {
-            CurrentScope = newScope;
-        }
-
-        public void ExitScope()
+        private void ExitScope()
         {
             if (CurrentScope.Parent is null)
                 throw new InvalidOperationException("Tried to pop a scope while already at the root scope.");
 
             CurrentScope = CurrentScope.Parent;
+        }
+        private class DisposableScope : IDisposable
+        {
+            public DisposableScope(LibraryBuilder builder, ISymbolScope newScope)
+            {
+                builder.CurrentScope = newScope;
+                Builder = builder;
+            }
+
+            public LibraryBuilder Builder { get; }
+
+            public void Dispose() => Builder.ExitScope();
         }
     }
 }

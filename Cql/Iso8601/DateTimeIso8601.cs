@@ -330,26 +330,9 @@ namespace Hl7.Cql.Iso8601
                 dateTimeValue = null;
                 return false;
             }
-            else
-            {
-                dateTimeValue = stringValue;
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Converts a string to an ISO 8601 date time, or throws.
-        /// </summary>
-        /// <param name="stringValue">The string to convert.</param>
-        /// <exception cref="ArgumentException">When <paramref name="stringValue"/> cannot be parsed.</exception>
-        public static implicit operator DateTimeIso8601(string stringValue)
-        {
-            var parts = Expression.Match(stringValue);
-            if (!parts.Success || parts.Captures.Count != 1 || parts.Captures[0].Length != stringValue.Length)
-                throw new ArgumentException($"Invalid ISO 8601 date time: {stringValue}", nameof(stringValue));
 
 
-            int? year = null, month = null, day = null, hour = null, minute = null, second = null, ms = null, osMinute = null;
+            int? year, month = null, day = null, hour = null, minute = null, second = null, ms = null, osMinute = null;
             int? osHour = null;
 
             var timezone = parts.Groups["timezone"];
@@ -395,7 +378,11 @@ namespace Hl7.Cql.Iso8601
                     }
                 }
             }
-            else throw new ArgumentException($"DateTimes must have at least year specified.", nameof(stringValue));
+            else
+            {
+                dateTimeValue = null;
+                return false;
+            }
 
             var hourGroup = parts.Groups["hour"];
             var minuteGroup = parts.Groups["minute"];
@@ -422,8 +409,8 @@ namespace Hl7.Cql.Iso8601
                 }
             }
 
-            var isoDate = new DateTimeIso8601(stringValue, year!.Value, month, day, hour, minute, second, ms, osHour, osMinute);
-            return isoDate;
+            dateTimeValue = new DateTimeIso8601(stringValue, year!.Value, month, day, hour, minute, second, ms, osHour, osMinute);
+            return true;
         }
 
         private static string Format(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)

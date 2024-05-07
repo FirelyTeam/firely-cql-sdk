@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -188,6 +189,15 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
+        }
+
+        [TestMethod]
+        public void Meets_After_Null()
+        {
+            var library = CreateLibraryForExpression("Interval(null, 5] meets after Interval[11, null)");
+            var meetsAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<MeetsAfter>();
+            var result = Run<bool?>(meetsAfter);
+            result.Should().BeFalse();
         }
     }
 }

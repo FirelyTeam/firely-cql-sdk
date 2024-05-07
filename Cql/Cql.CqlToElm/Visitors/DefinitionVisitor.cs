@@ -5,7 +5,6 @@ using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Antlr4.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -16,8 +15,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public LibraryBuilder LibraryBuilder { get; }
         public ILibraryProvider LibraryProvider { get; }
         public CoercionProvider CoercionProvider { get; }
+        public MessageProvider Messaging { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
-        
+
 
         public DefinitionVisitor(
             LocalIdentifierProvider identifierProvider,
@@ -27,7 +27,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifierVisitor typeSpecifierVisitor,
             LibraryBuilder libraryBuilder,
             ILibraryProvider libraryProvider,
-            CoercionProvider coercionProvider)
+            CoercionProvider coercionProvider,
+            MessageProvider messaging)
             : base(identifierProvider, invocationBuilder)
         {
             ModelProvider = modelProvider;
@@ -35,6 +36,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryBuilder = libraryBuilder;
             LibraryProvider = libraryProvider;
             CoercionProvider = coercionProvider;
+            Messaging = messaging;
             ExpressionVisitor = expressionVisitor;
         }
 
@@ -54,6 +56,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
             {
+
+                error ??= Messaging.UnableToResolveLibrary(libraryName, version);
                 // To be able to continue to parse, create an empty library scope with the name and version
                 // and return that so we can act as if some library was found.
                 var emptyLibrary = new Library { identifier = new VersionedIdentifier { id = libraryName, version = version } };
@@ -245,15 +249,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (functionBody is not null)
             {
                 // Enter a new scope for the function body, so that the operands are visible
-                LibraryBuilder.EnterScope();
-                foreach (var operand in operands)
-                    LibraryBuilder.CurrentScope.TryAdd(operand);
+                using (LibraryBuilder.EnterScope())
+                {
+                    foreach (var operand in operands)
+                        LibraryBuilder.CurrentScope.TryAdd(operand);
 
-                // Visit the function body, which will add the expression to the functionDef
-                functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
-
-                // Exit the scope for the function body
-                LibraryBuilder.ExitScope();
+                    // Visit the function body, which will add the expression to the functionDef
+                    functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
+                }
 
                 // If the function has a return type, make sure the expression is of that type.
                 var expressionType = functionDef.expression.resultTypeSpecifier;
@@ -285,8 +288,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return functionDef;
         }
 
-        // definition : usingDefinition | includeDefinition | codesystemDefinition | valuesetDefinition
-        //   | codeDefinition  | conceptDefinition  | parameterDefinition;
         public void VisitDefinitions(cqlParser.DefinitionContext[] context)
         {
             foreach (var definitionContext in context)
@@ -299,86 +300,78 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // statement : expressionDefinition   | contextDefinition | functionDefinition ;
         public void VisitStatements(cqlParser.StatementContext[] context)
         {
-            var delayedSymbolTable = new DelayedSymbolTable(LibraryBuilder.CurrentScope);
+            var delayedSymbolTable = new DelayedSymbolTable(LibraryBuilder.CurrentScope, Messaging);
 
             IReadOnlyCollection<IDefinitionElement> delayedExpressions;
 
-            try
+            using (LibraryBuilder.EnterScope(delayedSymbolTable))
             {
-                LibraryBuilder.EnterScope(delayedSymbolTable);
                 processStatements(context);
                 delayedExpressions = delayedSymbolTable.Symbols;
-            }
-            finally
-            {
-                LibraryBuilder.ExitScope();
             }
 
             // Now that we have processed all the statements, we can add the delayed symbols to the library.
             foreach (var symbol in delayedExpressions)
                 add(symbol);
-        }
 
-        private void processStatements(cqlParser.StatementContext[] context)
-        {
-            ContextDef? activeContext = null;
-            List<string> definedContexts = new();
-
-            // We *know* this is a delayed symbol table, if not, we'd better throw.
-            DelayedSymbolTable table = (DelayedSymbolTable)LibraryBuilder.CurrentScope;
-
-            // Go over the statements in order, since they can be interleaved
-            // with context statements, which become active immediately.
-            foreach (var statementContext in context)
+            void processStatements(cqlParser.StatementContext[] context)
             {
+                ContextDef? activeContext = null;
+                List<string> definedContexts = new();
+
+                // We *know* this is a delayed symbol table, if not, we'd better throw.
+                DelayedSymbolTable table = (DelayedSymbolTable)LibraryBuilder.CurrentScope;
+
+                // Go over the statements in order, since they can be interleaved
+                // with context statements, which become active immediately.
+                foreach (var statementContext in context)
+                {
 #if DEBUG
-                var statementText = statementContext.GetText();
+                    var statementText = statementContext.GetText();
 #endif
 
-                if (statementContext.expressionDefinition() is { } edCtx)
-                {
-                    table.TryAddDelayed(edCtx.identifier().Parse()!,
-                        () => visitWithContextName(edCtx, activeContext?.name));
-                }
-                else if (statementContext.functionDefinition() is { } fdCtx)
-                {
-                    table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!,
-                        () => visitWithContextName(fdCtx, activeContext?.name));
-                }
-                else if (statementContext.contextDefinition() is { } cdCtx)
-                {
-                    // If we encounter a context statement, it will be applied to all
-                    // subsequent expressions we encounter
-                    var cd = (ContextDef)Visit(cdCtx);
-                    activeContext = cd;
-
-                    // Make sure we create just one ContextDef per model type.
-                    if (!definedContexts.Contains(cd.name))
+                    if (statementContext.expressionDefinition() is { } edCtx)
                     {
-                        add(cd);
-
-                        if (cd.resultTypeSpecifier is not null && !cd.IsUnfiltered)
-                        {
-                            // Build an expression named after the context, which will
-                            // do a retrieve for all data of that type.
-                            ExpressionDef exprDef = buildContextExpression(statementContext, cd);
-                            add(exprDef);
-                        }
-
-                        definedContexts.Add(cd.name);
+                        table.TryAddDelayed(edCtx.identifier().Parse()!, 
+                            activeContext?.name,
+                            edCtx.Locator(),
+                            () => (ExpressionDef)Visit(edCtx));
                     }
-                }
-                else
-                    throw new InvalidOperationException(
-                        "Encountered unknown statement type in statement rule.");
-            }
-        }
+                    else if (statementContext.functionDefinition() is { } fdCtx)
+                    {
+                        table.TryAddDelayed(fdCtx.identifierOrFunctionIdentifier().Parse()!, 
+                            activeContext?.name,
+                            fdCtx.Locator(),
+                            () => (ExpressionDef)Visit(fdCtx));
+                    }
+                    else if (statementContext.contextDefinition() is { } cdCtx)
+                    {
+                        // If we encounter a context statement, it will be applied to all
+                        // subsequent expressions we encounter
+                        var cd = (ContextDef)Visit(cdCtx);
+                        activeContext = cd;
 
-        private ExpressionDef visitWithContextName(ParserRuleContext ctx, string? contextName)
-        {
-            var ed = (ExpressionDef)Visit(ctx);
-            ed.context = contextName!;
-            return ed;
+                        // Make sure we create just one ContextDef per model type.
+                        if (!definedContexts.Contains(cd.name))
+                        {
+                            add(cd);
+
+                            if (cd.resultTypeSpecifier is not null && !cd.IsUnfiltered)
+                            {
+                                // Build an expression named after the context, which will
+                                // do a retrieve for all data of that type.
+                                ExpressionDef exprDef = buildContextExpression(statementContext, cd);
+                                add(exprDef);
+                            }
+
+                            definedContexts.Add(cd.name);
+                        }
+                    }
+                    else
+                        throw new InvalidOperationException(
+                            "Encountered unknown statement type in statement rule.");
+                }
+            }
         }
 
         private void add(IDefinitionElement s)
@@ -421,10 +414,59 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = modelIdentifier is null ? identifier : $"{modelIdentifier}.{identifier}"
             }.WithLocator(context.Locator());
 
+
             if (!cd.IsUnfiltered)
             {
-                _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
-                cd = cd.WithResultType(namedType);
+                string? error = null;
+                TypeSpecifier? resultType = null;
+                if (modelIdentifier is not null) // two terms
+                {
+                    if (LibraryBuilder.SymbolTable.TryResolveSymbol(modelIdentifier, out var symbol))
+                    {
+                        if (symbol is UsingDefSymbol ud)
+                        {
+                            var type = TypeSpecifierVisitor.GetModelType(ud, identifier);
+                            if (type is not null)
+                                resultType = type.ToNamedType();
+                            else
+                            {
+                                // library UsingTeest version '1.0.0'
+                                // using FHIR
+                                // context FHIR.doesnotexist
+                                error = Messaging.CouldNotResolveContextName(identifier, modelIdentifier);
+                            }
+                        }
+                        else
+                        {
+                            // library UsingTeest version '1.0.0'
+                            // define derp: false
+                            // context derp.herp
+                            error = Messaging.CouldNotResolveModel(modelIdentifier);
+                        }
+
+                    }
+                    else
+                    {
+                        // library UsingTeest version '1.0.0'
+                        // context doesnot.exist
+                        error = Messaging.CouldNotResolveModel(modelIdentifier);
+                    }
+                }
+                else
+                {
+                    if (TypeSpecifierVisitor.TryGetMatchingTypes(LibraryBuilder.SymbolTable, identifier, out var modelType, out var _))
+                        resultType = modelType.ToNamedType();
+                    else
+                    {
+                        var models = LibraryBuilder.SymbolTable.Symbols
+                            .OfType<UsingDefSymbol>()
+                            .Select(ud => ud.localIdentifier)
+                            .Where(li => li != "System")
+                            .ToArray();
+                        error = Messaging.CouldNotResolveContextName(identifier, models);
+                    }
+                }
+                cd = cd.WithResultType(resultType);
                 if (error is not null) cd.AddError(error);
             }
 

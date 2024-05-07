@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
@@ -22,29 +23,42 @@ namespace Hl7.Cql.CqlToElm.Test
         protected static IServiceProvider Services;
 
         internal static ExpressionBuilder ExpressionBuilder;
-        
+
         internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
 
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
-        {
-            var services = new ServiceCollection()
-                .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
+        protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null,
+            Action<IModelProvider>? models = null) =>
+            new ServiceCollection()
+                .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
                 .AddVisitors()
-                .AddContext()
+                .AddSystem()
                 .AddLocalIdProvider()
                 .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
                 .AddMessaging()
                 .AddLogging(builder => builder
-                    .AddConsole()
-                    .ThrowOn(LogLevel.Error))
+                    .AddConsole())
                 .AddTransient<InvocationBuilder>()
                 .AddSingleton<CoercionProvider>()
                 .AddSingleton<ElmFactory>()
+                .AddSingleton<ILibraryProvider, MemoryLibraryProvider>()
                 .AddScoped<CqlToElmConverter>();
-            Services = services.BuildServiceProvider();
+
+        private class TestLibraryProvider : ILibraryProvider
+        {
+            public bool TryResolveLibrary(string libraryName, string? version, out Library? library, out string? error)
+            {
+                (library, error) = (null, null);
+                return false;
+            }
+        }
+
+        protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
+        {
+
+            Services = ServiceCollection(options).BuildServiceProvider();
 
             var lib = new Library
             {
@@ -54,12 +68,25 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+        protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+        protected virtual Library ConvertLibrary(IServiceProvider services, string cql) =>
+            services.GetRequiredService<CqlToElmConverter>().ConvertLibrary(cql);
 
-        internal Library MakeLibrary(string cql, params string[] expectedErrors)
+       
+        internal static Library MakeLibrary(string cql, params string[] expectedErrors)
         {
             var library = ConvertLibrary(cql);
 
+            if (expectedErrors.Any())
+                library.ShouldReportError(expectedErrors);
+            else
+                library.ShouldSucceed();
+
+            return library;
+        }
+        internal Library MakeLibrary(IServiceProvider services, string cql, params string[] expectedErrors)
+        {
+            var library = ConvertLibrary(services, cql);
             if (expectedErrors.Any())
                 library.ShouldReportError(expectedErrors);
             else
@@ -157,7 +184,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lts = (IntervalTypeSpecifier)typeSpecifier;
             Assert.IsNotNull(lts.pointType);
             Assert.AreEqual(lts.pointType, pointType);
-           
+
         }
 
         protected void AssertChoiceType(TypeSpecifier specifier, params string[] namedTypes)
@@ -217,12 +244,31 @@ namespace Hl7.Cql.CqlToElm.Test
 
         }
 
-        protected Library createLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        protected Library CreateLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
         {
             return MakeLibrary($@"
-                library AsTest version '1.0.0'
+                library Test version '1.0.0'
 
                 define private ""{memberName}"": {expression}");
         }
+
+        protected Library ExpectErrorsForExpression(string expression, 
+            params string[] expectedErrors)
+        {
+            return MakeLibrary($@"
+                library Test version '1.0.0'
+
+                define private ""Has Errors"": {expression}", expectedErrors);
+        }
+
+        protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        {
+            var lib = ConvertLibrary($@"
+                library Test version '1.0.0'
+
+                define private ""{memberName}"": {expression}");
+            return lib.statements[0].expression;
+        }
+
     }
 }

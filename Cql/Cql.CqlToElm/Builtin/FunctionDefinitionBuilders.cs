@@ -40,15 +40,14 @@ namespace Hl7.Cql.CqlToElm.Builtin
                     var overload = CreateOverload(def, operandCount, genericMap);
                     functions[i] = overload;
                 }
-                var overloaded = new OverloadedFunctionDef(functions, def.name, def.accessLevel);
+                var overloaded = OverloadedFunctionDef.Create(functions);
                 return overloaded;
             }
             else throw new System.ArgumentException($"Function has no operands", nameof(def));
         }
         public static OverloadedFunctionDef WithListAndIntervalVariants<T>(this SystemFunction<T> def, ParameterTypeSpecifier typeArgument)
-             where T : Element =>
-            new OverloadedFunctionDef(For(def, typeArgument, typeArgument.ToIntervalType(), typeArgument.ToListType()).Functions.Append(def).Reverse().ToArray(),
-                def.name, def.accessLevel);
+            where T : Element =>
+            OverloadedFunctionDef.Create(For(def, typeArgument, typeArgument.ToIntervalType(), typeArgument.ToListType()).Functions.Append(def).Reverse().ToArray());
 
         internal static SystemFunction CreateOverload<T>(SystemFunction<T> baseFunctionDef, int operandCount, Dictionary<string, TypeSpecifier> replacements) where T : Element
         {

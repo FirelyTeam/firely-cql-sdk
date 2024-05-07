@@ -30,20 +30,28 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Convert_Integer_to_String()
         {
-            var library = createLibraryForExpression("convert 5 to String");
+            var library = CreateLibraryForExpression("convert 5 to String");
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToString>();
         }
 
         [TestMethod]
         public void Convert_String_to_DateTime()
         {
-            var library = createLibraryForExpression("ToDateTime('2014-01-01T12:05:05.955-01:15')");
+            var library = CreateLibraryForExpression("ToDateTime('2014-01-01T12:05:05.955-01:15')");
             var toDateTime = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToDateTime>();
             var result = Run(toDateTime);
             var dt = result.Should().BeOfType<CqlDateTime>().Subject;
             dt.Value.OffsetHour.Should().Be(-1);
             dt.Value.OffsetMinute.Should().Be(-15);
             dt.Value.DateTimeOffset.Offset.Should().Be(TimeSpan.FromMinutes(-75));
+        }
+
+        [TestMethod]
+        public void Convert_Code_To_Concept()
+        {
+            var library = CreateLibraryForExpression("ToConcept(Code { code: '8480-6' })");
+            var toConcept = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToConcept>();
+            var result = Run<CqlConcept>(toConcept);
         }
     }
 }

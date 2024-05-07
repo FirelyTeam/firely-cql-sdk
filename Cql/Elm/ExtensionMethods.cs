@@ -20,7 +20,7 @@ namespace Hl7.Cql.Elm
         /// </summary>
         internal static bool IsVisible(this IDefinitionElement symbol, AccessModifier access)
         {
-            return access > symbol.Access;
+            return access >= symbol.Access;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static CqlToElmError[] GetErrors(this Element node)
         {
-            var allErrors = new List<CqlToElmError>();
+            var allErrors = new HashSet<CqlToElmError>();
             var visitor = new ElmTreeWalker(nodeHandler);
 
             visitor.Walk(node);
@@ -72,7 +72,12 @@ namespace Hl7.Cql.Elm
             {
                 if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
                 {
-                    allErrors.AddRange(errors);
+                    // avoid duplicate errors.
+                    foreach (var error in errors)
+                    {
+                        if (!allErrors.Contains(error))
+                            allErrors.Add(error);
+                    }
                 }
 
                 // Let the walker visit my children.
@@ -96,23 +101,19 @@ namespace Hl7.Cql.Elm
                 message = errorMessage,
             };
 
-            node.annotation = node.annotation is { } annotations ?
-                annotations.Append(error).ToArray()
-                : new[] { error };
-
-            return node;
+            return AddError(node, error);
         }
 
-        public static string GetUnresolvedOperatorMessage(this FunctionDef function, params TypeSpecifier[] argumentTypes) =>
-             $"Could not resolve call to operator {function.name} with signature({string.Join(", ", argumentTypes.Select(t => t.ToString()))}).";
-        public static string GetUnresolvedOperatorMessage(this FunctionDef function, params Expression[] arguments) =>
-            $"Could not resolve call to operator {function.name} with signature({string.Join(", ", arguments.Select(t => t.resultTypeSpecifier.ToString()))}).";
-
-
-        public static T AddUnresolvedOperatorError<T>(this T node, string name, params TypeSpecifier[] argumentTypes)
-            where T: Element =>
-            AddError(node,
-                $"Could not resolve call to operator {name} with signature({string.Join(", ", argumentTypes.Select(t=>t.ToString()))}).");                
+        /// <summary>
+        /// Adds an error to the given node.
+        /// </summary>
+        public static T AddError<T>(this T node, CqlToElmError error) where T : Element
+        {
+            node.annotation = node.annotation is { } annotations 
+                ? annotations.Append(error).ToArray()
+                : new[] { error };
+            return node;
+        }
 
     }
 }

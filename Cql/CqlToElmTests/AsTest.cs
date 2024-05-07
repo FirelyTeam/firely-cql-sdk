@@ -117,7 +117,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DecimalLiteral_CastAs_Decimal()
         {
-            var library = createLibraryForExpression("cast (1.0 as System.Any) as System.Decimal");
+            var library = CreateLibraryForExpression("cast (1.0 as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
@@ -128,7 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void BooleanLiteral_CastAs_Decimal()
         {
-            var library = createLibraryForExpression("cast (true as System.Any) as System.Decimal");
+            var library = CreateLibraryForExpression("cast (true as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();

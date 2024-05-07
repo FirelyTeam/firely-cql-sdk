@@ -49,7 +49,7 @@ namespace Hl7.Cql.Runtime
                         nullAdded = true;
                     }
                 }
-                else if (!Enumerable.Contains(result!, item!, IEqualityComparer!))
+                else if (!Enumerable.Contains(result!, item!, EqualityComparer!))
                 {
                     result.Add(item!);
                 }
@@ -69,15 +69,12 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
 
-            var onlyNull = true;
-            var notEmpty = false;
             var lit = left!.GetEnumerator();
             var rit = right!.GetEnumerator();
             while (lit.MoveNext())
             {
                 if (!rit.MoveNext())
                     return false;
-                notEmpty = true;
                 var lv = lit.Current;
                 var rv = rit.Current;
                 if (lv == null)
@@ -87,18 +84,13 @@ namespace Hl7.Cql.Runtime
                 else if (rv == null) return false;
                 else
                 {
-                    onlyNull = false;
                     if (Compare(lv!, rv!, null) != 0)
                         return false;
                 }
             }
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.
                 return false;
-
-            if (notEmpty && onlyNull)
-                return null;
-            else
-                return true;
+            return true;
         }
 
         #endregion
@@ -151,7 +143,7 @@ namespace Hl7.Cql.Runtime
             {
                 var except = left
                     .Cast<object>()
-                    .Except(right.Cast<object>(), IEqualityComparer)
+                    .Except(right.Cast<object>(), EqualityComparer)
                     .Cast<T>()
                     .ToList();
                 return except;
@@ -711,8 +703,6 @@ namespace Hl7.Cql.Runtime
                     var listItem = interval.low!.Value;
                     do
                     {
-
-
                         var high = decimal.Add(listItem, per.value ?? 1);
                         var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
                         expanded.Add(listInterval);
@@ -901,20 +891,14 @@ namespace Hl7.Cql.Runtime
 
         public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument)
         {
-            if (element! == null)
-                return null;
-            else if (argument == null)
-                return false;
-            else if (argument is ValueSetFacade facade)
+            if (element is null) return null;
+
+            return argument switch
             {
-                var result = facade.IsCodeInValueSet(element);
-                return result;
-            }
-            else
-            {
-                var result = argument.Any(t => Compare(element, t!, null) == 0);
-                return result;
-            }
+                null => false,
+                IValueSetFacade facade => facade.IsCodeInValueSet(element),
+                _ => argument.Any(t => Compare(element, t, null) == 0)
+            };
         }
 
         #endregion
@@ -930,7 +914,7 @@ namespace Hl7.Cql.Runtime
                 var found = false;
                 foreach (var t in left)
                 {
-                    if (IEqualityComparer.Equals(element!, t!))
+                    if (EqualityComparer.Equals(element!, t!))
                     {
                         found = true;
                         break;
@@ -994,7 +978,7 @@ namespace Hl7.Cql.Runtime
             int i = 0;
             foreach (T t in list)
             {
-                if (IEqualityComparer.Equals(t!, element))
+                if (EqualityComparer.Equals(t!, element))
                     return i;
                 i++;
             }
@@ -1045,7 +1029,7 @@ namespace Hl7.Cql.Runtime
 
         public int? ListLength<T>(IEnumerable<T> list)
         {
-            if (list == null) return null;
+            if (list == null) return 0; // tested by LengthNullList
             if (list is IList<T> l)
                 return l.Count;
             return list.Count();
@@ -1174,54 +1158,20 @@ namespace Hl7.Cql.Runtime
             {
                 var union = left
                     .Cast<object>()
-                    .Union(right.Cast<object>(), IEqualityComparer)
+                    .Union(right.Cast<object>(), EqualityComparer)
                     .Cast<T>()
                     .ToList();
                 return union;
             }
         }
 
-        public IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right)
+		public IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right)
         {
             if (left == null || right == null)
                 return null;
-            else if (left is ValueSetFacade leftFacade)
-            {
-                if (right is ValueSetFacade rightFacade)
-                {
-                    var union = new ValueSetUnion(new[] { leftFacade, rightFacade }, ValueSets, this);
-                    return union;
-                }
-                else if (right is ValueSetUnion rightUnion)
-                {
-                    var all = rightUnion.Facades
-                        .Concat(new[] { leftFacade })
-                        .ToArray();
-                    var union = new ValueSetUnion(all, ValueSets, this);
-                    return union;
-                }
-            }
-            else if (left is ValueSetUnion leftUnion)
-            {
-                if (right is ValueSetFacade rightFacade)
-                {
-                    var all = leftUnion.Facades
-                        .Concat(new[] { rightFacade })
-                        .ToArray();
-                    var union = new ValueSetUnion(all, ValueSets, this);
-                    return union;
-                }
-                else if (right is ValueSetUnion rightUnion)
-                {
-                    var all = leftUnion.Facades
-                        .Concat(rightUnion.Facades)
-                        .ToArray();
-                    var union = new ValueSetUnion(all, ValueSets, this);
-                    return union;
-                }
-            }
-            return ListUnion(left, right);
-        }
+            else
+                return left.Union(right);
+        }            
 
         #endregion
 
@@ -1240,7 +1190,7 @@ namespace Hl7.Cql.Runtime
             {
                 var ordered = nonNullRecords
                     .Cast<object>()
-                    .OrderBy(t => t, IComparer)
+                    .OrderBy(t => t, DataComparer)
                     .Cast<T>()
                     .ToList();
                 return nullRecords.Concat(ordered);
@@ -1249,7 +1199,7 @@ namespace Hl7.Cql.Runtime
             {
                 var ordered = nonNullRecords
                     .Cast<object>()
-                    .OrderBy(t => t, IComparer)
+                    .OrderBy(t => t, DataComparer)
                     .Reverse()
                     .Cast<T>()
                     .ToList();
@@ -1266,7 +1216,7 @@ namespace Hl7.Cql.Runtime
             {
                 var nullRecords = source.Where(s => sortByExpr(s) == null);
                 var nonNullRecords = source.Where(s => sortByExpr(s) != null);
-                var ordered = nonNullRecords.OrderBy(source => sortByExpr(source), IComparer);
+                var ordered = nonNullRecords.OrderBy(source => sortByExpr(source), DataComparer);
                 var result = nullRecords.Concat(ordered);
                 return result;
             }
@@ -1274,7 +1224,7 @@ namespace Hl7.Cql.Runtime
             {
                 var nullRecords = source.Where(s => sortByExpr(s) == null);
                 var nonNullRecords = source.Where(s => sortByExpr(s) != null);
-                var ordered = nonNullRecords.OrderByDescending(source => sortByExpr(source), IComparer);
+                var ordered = nonNullRecords.OrderByDescending(source => sortByExpr(source), DataComparer);
                 var result = ordered.Concat(nullRecords);
                 return result;
             }

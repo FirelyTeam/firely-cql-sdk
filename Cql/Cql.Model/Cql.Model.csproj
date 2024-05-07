@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -26,8 +26,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

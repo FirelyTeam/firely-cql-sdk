@@ -11,15 +11,6 @@ namespace Hl7.Cql.CqlToElm
     public static class ModelProvider
     {
         /// <summary>
-        /// Returns the <see cref="ModelInfo"/> for a model, given the model's uri and version.
-        /// </summary>
-        /// <exception cref="ArgumentException">There is no model with the given uri.</exception>
-        public static Model.ModelInfo GetModelFromUri(this IModelProvider provider, string uri, string? version = null) =>
-            provider.TryGetModelFromUri(uri, out var model, version) ?
-                model!
-                : throw new InvalidOperationException($"Model {uri} {(version is not null ? $"version {version}" : "")} is not available.");
-
-        /// <summary>
         /// Returns the <see cref="ModelInfo"/> for a model, given the model's name and version.
         /// </summary>
         /// <exception cref="ArgumentException">There is no model with the given uri.</exception>
@@ -27,7 +18,6 @@ namespace Hl7.Cql.CqlToElm
             provider.TryGetModelFromName(name, out var model, version) ?
                 model!
                 : throw new InvalidOperationException($"Model {name} {(version is not null ? $"version {version}" : "")} is not available.");
-
 
         /// <summary>
         /// Creates a new <see cref="Elm.TypeSpecifier"/> based on a <see cref="Model.TypeSpecifier"/>.
@@ -176,8 +166,14 @@ namespace Hl7.Cql.CqlToElm
         internal static bool TryFindTypeInfoByName(this IModelProvider provider, string uri,
             string typeName, out TypeInfo? typeInfo, out ModelInfo? model)
         {
-            return provider.TryGetModelFromUri(uri, out model) &
-                    model!.TryGetTypeInfoFor(typeName, out typeInfo);
+            if (provider.TryGetModelFromUri(uri, out model)
+                && model.TryGetTypeInfoFor(typeName, out typeInfo))
+                return true;
+            else
+            {
+                typeInfo = null;
+                return false;
+            }
         }
 
         /// <summary>
@@ -193,8 +189,16 @@ namespace Hl7.Cql.CqlToElm
             return new(model!, typeInfo!);
         }
 
-        internal static TypeInfo? FindTypeInfo(this ModelInfo model, string name) =>
-            model.typeInfo?.SingleOrDefault(t => t.Name() == name);
+        internal static TypeInfo? FindTypeInfo(this ModelInfo model, string name)
+        {
+            var qualified = $"{model.name}.{name}";
+            var type = model.typeInfo?.SingleOrDefault(t =>
+            {
+                var tName = t.Name();
+                return tName == name || tName == qualified;
+            });
+            return type;
+        }
 
         internal static string? Name(this TypeInfo t) => t switch
         {

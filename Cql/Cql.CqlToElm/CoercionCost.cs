@@ -12,7 +12,8 @@
     {
         ExactMatch,
         Subtype,
-        Compatible,
+        MoreCompatible, // null to simple types
+        LessCompatible, // null to intervals or lists
         Cast,
         ImplicitToSimpleType,
         ImplicitToClassType,

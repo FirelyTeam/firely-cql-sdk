@@ -38,5 +38,11 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         /// <returns>A list of symbols found, including the (nested) scope it was found in.</returns>
         bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol);
+
+        /// <summary>
+        /// Creates a child scope for which this scope is its <see cref="Parent"/>.
+        /// </summary>
+        /// <returns>A new scope whose <see cref="Parent"/> is this scope.</returns>
+        ISymbolScope EnterScope();
     }
 }

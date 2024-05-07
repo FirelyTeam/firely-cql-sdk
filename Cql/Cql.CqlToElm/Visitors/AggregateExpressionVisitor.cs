@@ -43,15 +43,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
             {
+                var expression = Visit(expressions[0]);
                 var per = Visit(expressions[1]);
-                if (per is Literal literal)
-                    per = InvocationBuilder.Invoke(SystemLibrary.ToQuantity, per)
-                        .WithLocator(expressions[1].Locator());
-                     
                 return keyword switch
                 {
-                    CqlKeyword.Collapse => HandleCollapse(context, Visit(expressions[0]), per),
-                    CqlKeyword.Expand => HandleExpand(context, Visit(expressions[0]), per),
+                    CqlKeyword.Collapse => HandleCollapse(context, expression, per),
+                    CqlKeyword.Expand => InvocationBuilder
+                        .Invoke(SystemLibrary.Expand, expression, per)
+                        .WithLocator(context.Locator()),
                     _ => throw new NotImplementedException()
                 };
 
@@ -127,22 +126,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         value = 1m,
                         unit = unit,
                     }
-            };
-            return expand
-                .WithResultType(expression.resultTypeSpecifier)
-                .WithLocator(context.Locator());
-        }
-
-        private Expression HandleExpand(cqlParser.SetAggregateExpressionTermContext context, Expression expression, Expression per)
-        {
-            Debug.Assert(per.resultTypeSpecifier == SystemTypes.QuantityType);
-            var expand = new Expand()
-            {
-                operand = new[]
-                {
-                    expression,
-                    per
-                }
             };
             return expand
                 .WithResultType(expression.resultTypeSpecifier)

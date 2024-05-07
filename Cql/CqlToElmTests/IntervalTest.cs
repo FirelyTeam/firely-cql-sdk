@@ -394,13 +394,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private TestIncludesNull: Interval[1, 10] includes null
-            ", "Call to operator Includes(Interval<Integer>, Any) is ambiguous*");
-
-            library = MakeLibrary(@"
-                library IntervalTest version '1.0.0'
-
-                define private TestIncludesNull: Interval[1, 10] includes null as Integer
             ");
+
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -416,22 +411,22 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Properly_Included_in_Interval_Null()
         {
-            var library = createLibraryForExpression("Interval[1, 10] properly included in Interval[null, null]");
+            var library = CreateLibraryForExpression("Interval[1, 10] properly included in Interval[null, null]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
             var result = Run(pii);
-            Assert.IsFalse((bool?)result);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
         public void Interval_Null_Starts_Interval()
         {
-            var library = createLibraryForExpression("Interval[null, null] starts Interval[1, 10]");
+            var library = CreateLibraryForExpression("Interval[null, null] starts Interval[1, 10]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
             var result = Run(pii);
             Assert.IsNull(result);
         }
 
-        
+
 
     }
 }

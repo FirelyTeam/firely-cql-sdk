@@ -61,6 +61,105 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot resolve reference to expression or function a because it results in a circular reference..
+        /// </summary>
+        internal static string CannotResolveCircularReference {
+            get {
+                return ResourceManager.GetString("CannotResolveCircularReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
+        /// </summary>
+        internal static string CouldNotFindLibrary {
+            get {
+                return ResourceManager.GetString("CouldNotFindLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve context name {0} in model {1}..
+        /// </summary>
+        internal static string CouldNotResolveContextName {
+            get {
+                return ResourceManager.GetString("CouldNotResolveContextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve call to operator {0} with signature ({1})..
+        /// </summary>
+        internal static string CouldNotResolveFunction {
+            get {
+                return ResourceManager.GetString("CouldNotResolveFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve identifier {0} in the current library..
+        /// </summary>
+        internal static string CouldNotResolveInCurrent {
+            get {
+                return ResourceManager.GetString("CouldNotResolveInCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve identifier {0} in library {1}..
+        /// </summary>
+        internal static string CouldNotResolveInLibrary {
+            get {
+                return ResourceManager.GetString("CouldNotResolveInLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve model name {0}.
+        /// </summary>
+        internal static string CouldNotResolveModel {
+            get {
+                return ResourceManager.GetString("CouldNotResolveModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifier {0} is a library and cannot be used as an expression..
+        /// </summary>
+        internal static string ExpressionCannotBeLibraryRef {
+            get {
+                return ResourceManager.GetString("ExpressionCannotBeLibraryRef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found multiple libraries with name &apos;{0}&apos;..
+        /// </summary>
+        internal static string FoundMultipleLibraries {
+            get {
+                return ResourceManager.GetString("FoundMultipleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to latest.
+        /// </summary>
+        internal static string Latest {
+            get {
+                return ResourceManager.GetString("Latest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A named type is required in this context..
+        /// </summary>
+        internal static string NamedTypeRequiredInContext {
+            get {
+                return ResourceManager.GetString("NamedTypeRequiredInContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expression of type &apos;{0}&apos; cannot be cast as a value of type &apos;{1}&apos;..
         /// </summary>
         internal static string TypeCannotBeCast {
@@ -75,6 +174,24 @@ namespace Hl7.Cql.CqlToElm {
         internal static string TypeFoundIsNotExpected {
             get {
                 return ResourceManager.GetString("TypeFoundIsNotExpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
+        /// </summary>
+        internal static string UnableToResolveLibrary {
+            get {
+                return ResourceManager.GetString("UnableToResolveLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A reference to a model library is unexpected at this point..
+        /// </summary>
+        internal static string UnexpectedLibraryReference {
+            get {
+                return ResourceManager.GetString("UnexpectedLibraryReference", resourceCulture);
             }
         }
     }

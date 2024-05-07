@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -22,6 +22,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+        <ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
+        <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />

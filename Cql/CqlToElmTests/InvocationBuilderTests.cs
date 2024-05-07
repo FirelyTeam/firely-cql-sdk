@@ -290,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new Expression[] { Integer(), Interval(Null, Null) };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.In, arguments);
             result.Compatible.Should().BeTrue();
-            Assert.AreEqual(CoercionCost.Cast, result.MostExpensive);
+            Assert.AreEqual(CoercionCost.MoreCompatible, result.MostExpensive);
         }
         [TestMethod]
         public void MatchNullContainsIntegerAmibugious()
@@ -318,6 +318,41 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = InvocationBuilder.MatchSignature(SystemLibrary.PointFrom, arguments);
             result.Compatible.Should().BeTrue();
         }
+
+        [TestMethod]
+        public void MatchStartFromFHIRPeriod()
+        {
+            var fpNts = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Period") };
+            var nullAsFhirPeriod = new As
+            {
+                operand = Null,
+                asType = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Period")
+            }.WithResultType(fpNts);
+            var arguments = new Expression[] { nullAsFhirPeriod };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Start, arguments);
+            result.Compatible.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void MatchIncludesIntervalInteger()
+        {
+            var fn = new SystemFunction<Contains>(new TypeSpecifier[] { T.ToIntervalType(), T }, SystemTypes.BooleanType);
+            var args = new Expression[] { Interval(Integer(1), Integer(10)), Null };
+            var result = InvocationBuilder.MatchSignature(fn, args);
+            result.TotalCost.Should().Be((int)CoercionCost.MoreCompatible);
+            var fn2 = new SystemFunction<Contains>(new TypeSpecifier[] { T.ToIntervalType(), T.ToIntervalType() }, SystemTypes.BooleanType);
+            var result2 = InvocationBuilder.MatchSignature(fn2, args);
+            result2.TotalCost.Should().Be((int)CoercionCost.LessCompatible);
+        }
+
+        [TestMethod]
+        public void MatchNullInListNull()
+        {
+            var args = new Expression[] { Null, List(Null) };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
+            result.Compatible.Should().BeTrue();
+        }
+
 
     }
 }

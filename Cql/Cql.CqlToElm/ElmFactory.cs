@@ -1,5 +1,4 @@
-﻿using Fhir.Metrics;
-using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using System;
 using System.Globalization;
@@ -89,22 +88,41 @@ namespace Hl7.Cql.CqlToElm
                 condition = convertCondition.Result;
             else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
 
-            var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
-            var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
             var compatible = true;
-            if (convertThenToElse.Cost < convertElseToThen.Cost)
+            if (then is Null && then.resultTypeSpecifier == SystemTypes.AnyType)
             {
-                if (convertThenToElse.Cost == CoercionCost.Incompatible)
-                    compatible = false;
-                else
-                    then = convertThenToElse.Result;
+                if (@else.resultTypeSpecifier != SystemTypes.AnyType)
+                {
+                    var thenResult = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
+                    then = thenResult.Result;
+                }
+            }
+            else if (@else is Null && @else.resultTypeSpecifier == SystemTypes.AnyType)
+            {
+                if (then.resultTypeSpecifier != SystemTypes.AnyType)
+                {
+                    var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
+                    @else = elseResult.Result;
+                }
             }
             else
             {
-                if (convertElseToThen.Cost == CoercionCost.Incompatible)
-                    compatible = false;
+                var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
+                var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
+                if (convertThenToElse.Cost < convertElseToThen.Cost)
+                {
+                    if (convertThenToElse.Cost == CoercionCost.Incompatible)
+                        compatible = false;
+                    else
+                        then = convertThenToElse.Result;
+                }
                 else
-                    @else = convertElseToThen.Result;
+                {
+                    if (convertElseToThen.Cost == CoercionCost.Incompatible)
+                        compatible = false;
+                    else
+                        @else = convertElseToThen.Result;
+                }
             }
             if (!compatible)
             {
@@ -268,8 +286,8 @@ namespace Hl7.Cql.CqlToElm
         }
         internal LastPositionOf Populate(LastPositionOf lpo, Expression[] arguments)
         {
-            lpo.@string = arguments[0];
-            lpo.pattern = arguments[1];
+            lpo.pattern = arguments[0];
+            lpo.@string = arguments[1];
             return lpo;
         }
 
@@ -289,8 +307,8 @@ namespace Hl7.Cql.CqlToElm
         }
         internal PositionOf Populate(PositionOf po, Expression[] arguments)
         {
-            po.@string = arguments[0];
-            po.pattern = arguments[1];
+            po.pattern = arguments[0];
+            po.@string = arguments[1];
             return po;
         }
         internal And Populate(ProperBetween between, Expression[] arguments)
@@ -304,7 +322,6 @@ namespace Hl7.Cql.CqlToElm
             var and = new And { operand = new Expression[] { gt, lt } };
             return and;
         }
-
 
         internal Round Populate(Round round, Expression[] arguments)
         {

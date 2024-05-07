@@ -22,6 +22,7 @@ namespace Hl7.Cql.Primitives
         /// Creates an instance.
         /// </summary>
         public CqlQuantity() { }
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
@@ -36,12 +37,12 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// The value of this quantity.
         /// </summary>
-        public decimal? value { get; }
+        public decimal? value { get; init; }
 
         /// <summary>
         /// The UCUM units of this quantity.
         /// </summary>
-        public string? unit { get; }
+        public string? unit { get; init;  }
 
         /// <summary>
         /// Gets a string representation of this quantity.
@@ -56,7 +57,7 @@ namespace Hl7.Cql.Primitives
                 unitString = cqlUnit;
             }
 
-            return string.Create(CultureInfo.InvariantCulture, $"{value}{unitString}");
+            return string.Create(CultureInfo.InvariantCulture, $"{value} '{unitString}'");
         }
 
         /// <summary>

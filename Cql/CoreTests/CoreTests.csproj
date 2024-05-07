@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.4.0</FirelySdkVersion>
+		<FirelySdkVersion>5.7.0</FirelySdkVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -20,13 +20,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="FluentAssertions" Version="6.12.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
-		<PackageReference Include="coverlet.collector" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.2.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
+		<PackageReference Include="coverlet.collector" Version="6.0.2" />
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 
@@ -37,6 +37,7 @@
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\ELM\ELM.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
@@ -52,59 +53,8 @@
 		<None Include="Input\ELM\Test\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Include="Input\Xml\*.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="HL7Tests.CqlAggregateFunctionsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlAggregateTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlArithmeticFunctionsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlComparisonOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlConditionalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlDateTimeOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlErrorsAndMessagingOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlIntervalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlListOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlLogicalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlNullologicalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlStringOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlTypeOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlTypesTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.ValueLiteralsAndSelectors.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
 	</ItemGroup>
 </Project>

@@ -222,7 +222,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithLocator(context.Locator());
         }
 
-
+        // expression ('|' | 'union' | 'intersect' | 'except') expression 
+        public override Expression VisitInFixSetExpression([NotNull] cqlParser.InFixSetExpressionContext context)
+        {
+            var expressions = context.expression();
+            var left = Visit(expressions[0]);
+            var right = Visit(expressions[1]);
+            var function = context.GetChild(1).GetText() switch
+            {
+                "|" or "union" => SystemLibrary.Union,
+                "except" => SystemLibrary.Except,
+                "intersect" => SystemLibrary.Intersect,
+                _ => throw new InvalidOperationException($"Expectiong an infix set operator; found {context.GetChild(1).GetText()}")
+            };
+            var result = InvocationBuilder.Invoke(function, left, right);
+            return result
+                .WithId()
+                .WithLocator(context.Locator());
+        }
 
     }
 }

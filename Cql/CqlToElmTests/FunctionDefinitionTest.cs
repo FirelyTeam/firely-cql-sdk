@@ -99,9 +99,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void SignalsUnknownParameters()
         {
-            _ = MakeLibrary(@"
+            MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): b", "Unable to resolve identifier 'b'.");
+                define function Double(a Integer): b", "Could not resolve identifier b in the current library.");
         }
 
         [TestMethod]
@@ -151,7 +151,8 @@ namespace Hl7.Cql.CqlToElm.Test
             _ = MakeLibrary(@"
             library FuncTest version '1.0.0'          
             define a: b                
-            define b: a", "Circular reference detected in a.");
+            define b: a",
+            "Cannot resolve reference to expression or function a because it results in a circular reference.");
         }
     }
 }

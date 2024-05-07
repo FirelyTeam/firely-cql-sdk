@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using FluentAssertions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
@@ -48,9 +49,18 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void CqlDate_Subtract_Months_From_Year()
+        {
+            Assert.IsTrue(CqlDateTime.TryParse("2014", out var baseDate));
+            var result = baseDate.Subtract(new CqlQuantity(25m, UCUMUnits.Month));
+            Assert.AreEqual(2012, result.Value.Year);
+            Assert.AreEqual(DateTimePrecision.Year, result.Precision);
+        }
+
+        [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
         {
-            var baseDate = new CqlDateTime("1960");
+            Assert.IsTrue(CqlDateTime.TryParse("1960", out var baseDate));
             Assert.AreEqual(DateTimePrecision.Year, baseDate.Value.Precision);
             var plusOneYear = baseDate.Add(new CqlQuantity(1m, "year"));
             Assert.AreEqual(DateTimePrecision.Year, plusOneYear.Value.Precision);
@@ -65,7 +75,7 @@ namespace CoreTests
             var plus365days = baseDate.Add(new CqlQuantity(365, "day"));
             Assert.AreEqual(DateTimePrecision.Year, plus365days.Value.Precision);
             Assert.IsNull(plus365days.Value.Month);
-            Assert.AreEqual("1960", plus365days.ToString()); // 1960 is a leap year and has 366 days
+            Assert.AreEqual("1961", plus365days.ToString());
 
             var plus366days = baseDate.Add(new CqlQuantity(366, "day"));
             Assert.AreEqual(DateTimePrecision.Year, plus366days.Value.Precision);
@@ -80,13 +90,13 @@ namespace CoreTests
             var plus365DaysInSeconds = baseDate.Add(new CqlQuantity(365 * 24 * 60 * 60, "seconds"));
             Assert.AreEqual(DateTimePrecision.Year, plus365DaysInSeconds.Value.Precision);
             Assert.IsNull(plus365DaysInSeconds.Value.Month);
-            Assert.AreEqual("1960", plus365DaysInSeconds.ToString());
+            Assert.AreEqual("1961", plus365DaysInSeconds.ToString());
         }
 
         [TestMethod]
         public void CqlDateTime_Add_Month()
         {
-            var baseDate = new CqlDateTime("2022-01-01");
+            Assert.IsTrue(CqlDateTime.TryParse("2022-01-01", out var baseDate));
 
             var plus1Month = baseDate.Add(new CqlQuantity(1m, "month"));
             Assert.AreEqual(DateTimePrecision.Day, plus1Month.Value.Precision);
@@ -108,7 +118,7 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_Subtract_Month()
         {
-            var baseDate = new CqlDateTime("2022-03-01");
+            Assert.IsTrue(CqlDateTime.TryParse("2022-03-01", out var baseDate));
 
             var minus1Month = baseDate.Subtract(new CqlQuantity(1m, "month"));
             Assert.AreEqual(DateTimePrecision.Day, minus1Month.Value.Precision);
@@ -163,68 +173,98 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_BoundariesBetween_Months()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
-            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-04-01"), "month");
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-04-01", out var cqlStartDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-03-31", out var cqlEndDate));
+            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "month");
             Assert.AreEqual(2, boundariesBetween);
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-03-31"), "month");
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlEndDate, "month");
             Assert.AreEqual(1, boundariesBetween);
 
-            startDate = "2020-03-01";
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-04-30"), "month");
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-03-01", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-04-30", out cqlStartDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-03-31", out cqlEndDate));
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "month");
             Assert.AreEqual(1, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-03-31"), "month");
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlEndDate, "month");
             Assert.AreEqual(0, boundariesBetween);
         }
         [TestMethod]
         public void CqlDateTime_BoundariesBetween_Years()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
-            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2021-02-28"), "year");
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out var cqlStartDate));
+            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "year");
             Assert.AreEqual(1, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2022-01-01"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2022-01-01", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "year");
             Assert.AreEqual(2, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-03-31"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2020-03-31", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "year");
             Assert.AreEqual(0, boundariesBetween);
         }
 
         [TestMethod]
         public void CqlDateTime_WholeCalendarPeriodsBetween_Years()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-06-30", out var cqlStartDate));
 
-            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2020-06-30"), "year");
+            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(0, boundariesBetween);
 
-
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-02-28"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(0, boundariesBetween); // 1 full year occurs on mar 1, not feb 28
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-03-01"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-03-01", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(1, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-06-30"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-06-30", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(1, boundariesBetween);
+
+            Assert.IsTrue(DateTimeIso8601.TryParse("2008-04-11", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2024-04-10", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(15, boundariesBetween);
+
+            // leap year
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-04-11", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2023-05-11", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(3, boundariesBetween);
+
+            // leap day
+            Assert.IsTrue(DateTimeIso8601.TryParse("2003-03-01", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2024-02-29", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(20, boundariesBetween);
         }
 
         [TestMethod]
         public void CqlDateTime_WholeCalendarPeriodsBetween_Months()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-06-30", out var cqlStartDate));
 
-            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2020-06-30"), "month");
+            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(4, boundariesBetween);
 
-
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-02-28"), "month");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(11, boundariesBetween); // 1 full year occurs on mar 1, not feb 28
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-03-01"), "month");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-03-01", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(12, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-06-30"), "month");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-06-30", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(16, boundariesBetween);
 
         }
@@ -3363,6 +3403,24 @@ namespace CoreTests
                 Assert.AreEqual(actual.high, expect.high);
             }
         }
+
+        [TestMethod]
+        public void Expand_Per_Hour()
+        {
+            var aStart = new CqlTime(10, 0, 0, 0, null, null);
+            var aEnd = new CqlTime(12, 30, 0, 0, null, null);
+
+            var interval = new List<CqlInterval<CqlTime>>
+            {
+                new CqlInterval<CqlTime>(aStart, aEnd, true, true),
+            };
+            var quantity = new CqlQuantity(1, "hour");
+
+            var rc = GetNewContext(); var fcq = rc.Operators;
+
+            var expand = fcq.ExpandList(interval, quantity).ToArray();
+        }
+
         #endregion
 
         #region Interval_Same_Or_Before
@@ -3547,6 +3605,95 @@ namespace CoreTests
                 null);
             Assert.IsNotNull(meets);
             Assert.IsFalse(meets ?? false);
+        }
+
+        [TestMethod]
+        public void DateTimeIncludedInNull()
+        {
+            var lhs = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(2017, 9, 1, 0, 0, 0, null, null, null),
+                new CqlDateTime(2017, 9, 1, 0, 0, 0, null, null, null),
+                true,
+                true);
+            var rhs = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(2017, 9, 1, 0, 0, 0, 999, null, null),
+                new CqlDateTime(2017, 12, 30, 23, 59, 59, 999, null, null),
+                true,
+                true);
+            var ops = GetNewContext().Operators;
+            var result = ops.IntervalIncludesInterval(lhs, rhs, null);
+            Assert.IsNull(result);
+        }
+        [TestMethod]
+        public void TestIntersectNull()
+        {
+            var lhs = new CqlInterval<int?>(1, 10, true, true);
+            var rhs = new CqlInterval<int?>(5, null, true, false);
+            var ops = GetNewContext().Operators;
+            var result = ops.IntervalIntersectsInterval(lhs, rhs);
+            Assert.IsNull(result);
+        }
+
+        // { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59
+        [TestMethod]
+        public void ProperContainsTimeNull()
+        {
+            var list = new CqlTime[]
+            {
+                new CqlTime(15,59,59, 999, null, null),
+                new CqlTime(20,59,59, 999, null, null),
+                new CqlTime(20,59,49, 999, null, null),
+            };
+            var element = new CqlTime(15, 59, 59, null, null, null);
+            var ops = GetNewContext().Operators;
+            var result = ops.ListProperlyIncludesElement(list, element);
+            Assert.IsFalse(result);
+        }
+        [TestMethod]
+        public void UnionListNullAndListNull()
+        {
+            var ops = GetNewContext().Operators;
+            var result = ops.ListUnion<object>(new object[] { null }, new object[] { null });
+            var equal = ops.Equal(result, new object[] { null });
+            Assert.IsTrue(equal);
+        }
+
+        [TestMethod]
+        public void TimeProperContainsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            var noon = new CqlTime(12, 0, 0, 0, null, null);
+            var x = new CqlTime(21, 59, 59, 999, null, null);
+            var interval = new CqlInterval<CqlTime>(noon, x, true, true);
+            var result = ops.IntervalProperlyIncludesElement(interval, noon, null);
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void NullBoundariesProperlyIncludesIntegerInterval()
+        {
+            var ops = GetNewContext().Operators;
+            var lhs = new CqlInterval<int?>(null, null, true, true);
+            var rhs = new CqlInterval<int?>(1, 10, true, true);
+            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null);
+            Assert.IsNull(result);
+
+        }
+
+        [TestMethod]
+        public void LastPositionOf1()
+        {
+            var ops = GetNewContext().Operators;
+            var lpo = ops.LastPositionOf("Ohio is the place to be!", "hi");
+            lpo.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void QuantityToString()
+        {
+            var ops = GetNewContext().Operators;
+            var s = ops.ConvertQuantityToString(new CqlQuantity(125, "cm"));
+            s.Should().Be("125 'cm'");
         }
     }
 }

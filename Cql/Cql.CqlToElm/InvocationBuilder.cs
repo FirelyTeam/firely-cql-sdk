@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration.Assemblies;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,12 +26,17 @@ namespace Hl7.Cql.CqlToElm
         public IModelProvider Provider { get; }
         public CoercionProvider CoercionProvider { get; }
         public ElmFactory ElmFactory { get; }
+        public MessageProvider Messaging { get; }
 
-        public InvocationBuilder(IModelProvider provider, CoercionProvider coercionProvider, ElmFactory elmFactory)
+        public InvocationBuilder(IModelProvider provider,
+            CoercionProvider coercionProvider,
+            ElmFactory elmFactory,
+            MessageProvider messaging)
         {
             Provider = provider;
             CoercionProvider = coercionProvider;
             ElmFactory = elmFactory;
+            Messaging = messaging;
         }
 
         /// <summary>
@@ -47,11 +53,18 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(systemFunction, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
-            expression = systemFunction.Validate(expression);
-            var newResultType = ReplaceGenericType(systemFunction.resultTypeSpecifier, result.GenericInferences);
-            return expression
-                .WithResultType(newResultType);
+            {
+                return expression
+                    .AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments))
+                    .WithResultType(SystemTypes.AnyType);
+            }
+            else
+            {
+                expression = systemFunction.Validate(expression);
+                var newResultType = ReplaceGenericType(systemFunction.resultTypeSpecifier, result.GenericInferences);
+                return expression
+                    .WithResultType(newResultType);
+            }
         }
 
         /// <summary>
@@ -68,7 +81,7 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(result.Function, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
             if (result.Function is SystemFunction systemFunction)
                 expression = systemFunction.Validate(expression);
             var newResultType = ReplaceGenericType(result.Function.resultTypeSpecifier, result.GenericInferences);
@@ -91,7 +104,7 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(function, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
             var newResultType = ReplaceGenericType(function.resultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
@@ -115,8 +128,7 @@ namespace Hl7.Cql.CqlToElm
                 if (result.Error is not null)
                     expression.AddError(result.Error);
                 else
-                    expression.AddUnresolvedOperatorError(result.Function.name,
-                        result.Arguments.Select(arg => arg.Result.resultTypeSpecifier).ToArray());
+                    expression.AddError(Messaging.CouldNotResolveFunction(result.Function.name, result.Arguments.Select(a => a.Result).ToArray()));
                 return expression;
             }
         }
@@ -148,6 +160,7 @@ namespace Hl7.Cql.CqlToElm
             // doing this to make debugging easier
             CoercionResult<Expression>[]? newOperands = null;
             IDictionary<string, TypeSpecifier>? genericInferences = null;
+            IDictionary<string, TypeSpecifier>? anyInference = null;
             var lowestCost = (int)CoercionCost.Incompatible;
             // For each argument, try to use it for inference.
             // As we go, keep track of which of those inferences results in the cheapest translation cost.
@@ -158,19 +171,31 @@ namespace Hl7.Cql.CqlToElm
                 var inferences = InferGenericArgument(argumentType, operandType);
                 if (inferences.Count > 0)
                 {
-                    var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
-                    var cost = replaced.Sum(operand => (int)operand.Cost);
-                    //var cost = (CoercionCost)replaced.Max(operand => (int)operand.Cost);
-                    if (cost < lowestCost)
+                    if (inferences.All(kvp => kvp.Value == SystemTypes.AnyType))
+                        anyInference = inferences;
+                    else
                     {
-                        lowestCost = cost;
-                        newOperands = replaced;
-                        genericInferences = inferences;
+                        var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
+
+                        var cost = replaced.Sum(operand => (int)operand.Cost);
+                        if (cost < lowestCost)
+                        {
+                            lowestCost = cost;
+                            newOperands = replaced;
+                            genericInferences = inferences;
+                        }
                     }
                 }
             }
             if (newOperands != null && genericInferences != null)
+            {
                 return new SignatureMatchResult(candidate, newOperands, genericInferences, flags);
+            }
+            else if (anyInference != null)
+            {
+                newOperands = ReplaceGenericArguments(operandTypes, arguments, anyInference);
+                return new SignatureMatchResult(candidate, newOperands, anyInference, flags);
+            }
             else
             {
                 newOperands = new CoercionResult<Expression>[arguments.Length];
@@ -180,7 +205,7 @@ namespace Hl7.Cql.CqlToElm
                 }
                 string? error = null;
                 if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))
-                    error = candidate.GetUnresolvedOperatorMessage(arguments.Select(arg => arg.resultTypeSpecifier).ToArray());
+                    error = Messaging.CouldNotResolveFunction(candidate.name, arguments);
                 return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
             }
         }
@@ -189,34 +214,37 @@ namespace Hl7.Cql.CqlToElm
         // We'll leave the type as Dictionary for now for future proofing
         internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier argumentType, TypeSpecifier operandType)
         {
-            // TODO: This feels very wrong.
-            // But if we allow an argument of List<Integer> to be assigned to T, so many tests fail
-            return operandType switch
+            if (operandType is ParameterTypeSpecifier genericOperand)
             {
-                ParameterTypeSpecifier generic
-                    when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.parameterName, argumentType } },
-                ListTypeSpecifier opList
-                    when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
-                ListTypeSpecifier opList
-                    when argumentType is not ListTypeSpecifier => InferGenericArgument(argumentType, opList.elementType),
-                IntervalTypeSpecifier opInt
-                    when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
-                IntervalTypeSpecifier opInt
-                    when argumentType is not IntervalTypeSpecifier => InferGenericArgument(argumentType, opInt.pointType),
-                _ => new()
-            };
-            Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier operandType, TypeSpecifier argumentType) =>
-                operandType switch
+                if (argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier)
+                    return new() { { genericOperand.parameterName, argumentType } };
+            }
+            else if (operandType is ListTypeSpecifier listOperand)
+            {
+                if (argumentType is ListTypeSpecifier listArgument)
+                    return InferNestedGeneric(listArgument.elementType, listOperand.elementType);
+                else
+                    return InferGenericArgument(argumentType, listOperand.elementType);
+            }
+            else if (operandType is IntervalTypeSpecifier intervalOperand)
+            {
+                if (argumentType is IntervalTypeSpecifier intervalArgument)
+                    return InferNestedGeneric(intervalArgument.pointType, intervalOperand.pointType);
+                else if (CoercionProvider.HasConversionToIntervalThroughModel(argumentType, out var pointType))
+                    return InferGenericArgument(pointType, intervalOperand.pointType);
+                else
+                    return InferGenericArgument(argumentType, intervalOperand.pointType);
+            }
+            return new();
+
+            Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier argumentType, TypeSpecifier operandType) =>
+                (operandType, argumentType) switch
                 {
-                    ParameterTypeSpecifier generic => new() { { generic.parameterName, argumentType } },
-                    ListTypeSpecifier opList
-                        when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
-                    ListTypeSpecifier opList
-                        when argumentType is not ListTypeSpecifier => InferNestedGeneric(opList.elementType, argumentType),
-                    IntervalTypeSpecifier opInt
-                        when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
-                    IntervalTypeSpecifier opInt
-                        when argumentType is not IntervalTypeSpecifier => InferNestedGeneric(opInt.pointType, argumentType),
+                    (ParameterTypeSpecifier generic, _) => new() { { generic.parameterName, argumentType } },
+                    (ListTypeSpecifier opList, ListTypeSpecifier argList) => InferNestedGeneric(argList.elementType, opList.elementType),
+                    (ListTypeSpecifier opList, _) => InferNestedGeneric(argumentType, opList.elementType),
+                    (IntervalTypeSpecifier opInt, IntervalTypeSpecifier argInt) => InferNestedGeneric(argInt.pointType, opInt.pointType),
+                    (IntervalTypeSpecifier opInt, _) => InferNestedGeneric(argumentType, opInt.pointType),
                     _ => new()
                 };
         }
@@ -262,45 +290,63 @@ namespace Hl7.Cql.CqlToElm
         internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
             var matches = overloadedFunction.Functions
-                .Select(function => MatchSignature(function, arguments))
-                .ToArray();
-            var byCost = matches
+                .Select(function => MatchSignature(function, arguments));                
+            var compatible = matches
                 .Where(result => result.Compatible)
-                .GroupBy(result => result.TotalCost)
-                .OrderBy(group => group.Key)
                 .ToArray();
-            if (byCost.Length > 0)
-            {
-                var cheapest = byCost[0].ToArray();
-                if (cheapest.Length == 1)
-                {
-                    return cheapest[0];
-                }
-                else if (cheapest.Length > 0)
-                {
-                    var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
-                    // match cql-to-elm reference implementation (Java) error messages
-                    var errorSb = new StringBuilder();
-                    errorSb.AppendLine(CultureInfo.InvariantCulture, $"Call to operator {overloadedFunction.Name}({argTypeString}) is ambiguous with:");
-                    foreach (var match in cheapest)
-                    {
-                        var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
-                        errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {overloadedFunction.Name}({matchTypeString})");
-                    }
-                    return new(cheapest[0].Function,
-                        cheapest[0].Arguments,
-                        cheapest[0].GenericInferences,
-                        cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
-                        errorSb.ToString());
-                }
-            }
-            var firstMatch = matches[0];
+            SignatureMatchResult? candidate;
+            if (match(compatible, out candidate))
+                return candidate;
+            // else, issue could not resolve.
+            var firstMatch = matches.First();
             var result = new SignatureMatchResult(firstMatch.Function,
                 firstMatch.Arguments,
                 firstMatch.GenericInferences,
                 firstMatch.Flags,
-                firstMatch.Function.GetUnresolvedOperatorMessage(arguments.Select(t => t.resultTypeSpecifier).ToArray()));
+                Messaging.CouldNotResolveFunction(firstMatch.Function.name, arguments));
             return result;
+
+            //bool infersAny(SignatureMatchResult result) =>
+            //    result.GenericInferences.Count > 0
+            //    && result.GenericInferences.All(kvp => kvp.Value == SystemTypes.AnyType);
+
+            bool match(SignatureMatchResult[] matches, [NotNullWhen(true)] out SignatureMatchResult? result)
+            {
+                var byCost = matches
+                   .GroupBy(result => result.TotalCost)
+                   .OrderBy(group => group.Key)
+                   .ToArray();
+                if (byCost.Length > 0)
+                {
+                    var cheapest = byCost[0].ToArray();
+                    if (cheapest.Length == 1)
+                    {
+                        result = cheapest[0];
+                        return true;
+                    }
+                    else if (cheapest.Length > 0)
+                    {
+                        var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+                        // match cql-to-elm reference implementation (Java) error messages
+                        var errorSb = new StringBuilder();
+                        errorSb.AppendLine(CultureInfo.InvariantCulture, $"Call to operator {overloadedFunction.Name}({argTypeString}) is ambiguous with:");
+                        foreach (var match in cheapest)
+                        {
+                            var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
+                            errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {overloadedFunction.Name}({matchTypeString})");
+                        }
+                        result = new(cheapest[0].Function,
+                            cheapest[0].Arguments,
+                            cheapest[0].GenericInferences,
+                            cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
+                            errorSb.ToString());
+                        return true;
+                    }
+                }
+                result = null;
+                return false;
+            }
+
         }
 
 
