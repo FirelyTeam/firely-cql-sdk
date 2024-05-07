@@ -7,10 +7,13 @@
  */
 
 using CommandLine;
+using Dumpify;
 
 namespace CLI_cms.Helpers;
 internal class CommandLineOptions
 {
+    private string? _resourceDirectory;
+
     [Option('l', "library", Required = true, HelpText = "The name of a CMS measure Library resource, which contians name and version.")]
     public string Library { get; set; } = "";
 
@@ -21,9 +24,16 @@ internal class CommandLineOptions
     public string LibraryVersion => Library.Split('-')[1];
     public string TestRootDirectory => Path.Join(AppContext.BaseDirectory, "Measures");
     public string ValueSetDirectory => Path.Join(TestRootDirectory, Library, "ValueSet");
-    public string LibraryDirectory => Path.Join(TestRootDirectory, Library, "Library");
-    public string LibraryFile => Path.Join(LibraryDirectory, $"{Library}.json");
-    public string TestCaseDirectory => Path.Join(TestRootDirectory, Library, TestCase);
+
+    [Option('r', "resourceDirectory", HelpText = "The directory where the library resources are stored.")]
+    public string ResourceDirectory
+    {
+        get => _resourceDirectory ?? Path.Join(TestRootDirectory, Library, "Resources");
+        set => _resourceDirectory = value;
+    }
+
+    public string LibraryFile => Path.Join(ResourceDirectory, $"{Library}.json");
+    public string TestCaseDirectory => Path.Join(TestRootDirectory, Library, "TestCases", TestCase);
     public string TestCaseBundleFile => Path.Join(TestCaseDirectory, "Bundle.json");
     public string TestCaseInputParametersFile => Path.Join(TestCaseDirectory, "InputParameters.json");
 
@@ -47,7 +57,7 @@ internal class CommandLineOptions
         foreach (var directory in new string[] {
             options.TestRootDirectory,
             options.ValueSetDirectory,
-            options.LibraryDirectory,
+            options.ResourceDirectory,
             options.TestCaseDirectory })
         {
             if (!Directory.Exists(directory))
@@ -60,7 +70,7 @@ internal class CommandLineOptions
             options.LibraryFile,
             options.TestCaseBundleFile,
             options.TestCaseInputParametersFile,
-            Path.Join(options.LibraryDirectory, "TupleTypes-Binary.json") })
+            Path.Join(options.ResourceDirectory, "TupleTypes-Binary.json") })
         {
             if (!File.Exists(file))
             {
@@ -70,6 +80,19 @@ internal class CommandLineOptions
 
         if (!Enum.IsDefined(options.AssemblySource))
             throw new InvalidOperationException($"AssemblySource '{options.AssemblySource}' is not a valid value. Valid options are Resource or Project.");
+    }
+
+    public void DumpConsole()
+    {
+        new
+        {
+            Library,
+            TestCase,
+            AssemblySource,
+            TestCaseDirectory,
+            ResourceDirectory,
+            ValueSetDirectory
+        }.DumpConsole("Options");
     }
 }
 

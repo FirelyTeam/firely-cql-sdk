@@ -25,7 +25,7 @@ internal static class LibraryRunner
         var libNameAndVersion = $"{opt.Library}";
         Console.WriteLine($"Loading resources for Library: {libNameAndVersion}");
 
-        var resources = ResourceHelper.LoadResources(new(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
+        var resources = ResourceHelper.LoadResources(new(opt.ResourceDirectory), opt.LibraryName, opt.LibraryVersion);
         var assembly = resources.Assemblies.FirstOrDefault(a =>
         {
             var asmName = a.GetName().Name;

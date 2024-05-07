@@ -46,6 +46,7 @@ internal class Program
     private static void RunCommand(CommandLineOptions options)
     {
         CommandLineOptions.EnsureValidOptions(options);
+        options.DumpConsole();
         switch (options.AssemblySource)
         {
             case AssemblySource.Project:
