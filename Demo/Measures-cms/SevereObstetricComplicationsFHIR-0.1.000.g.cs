@@ -843,7 +843,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 					return ac_;
 				};
-				var r_ = context.Operators.Where<Extension>(((EncounterDiagnoses is Element)
+				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 						? ((EncounterDiagnoses as Element).Extension)
 						: null), q_);
 				DataType s_(Extension @this) => 
@@ -858,7 +858,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return z_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((TwentyWeeksPlusEncounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), d_);
+			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)TwentyWeeksPlusEncounter?.Diagnosis, d_);
 			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
 			var g_ = this.Severe_Maternal_Morbidity_Procedures();
 			var h_ = context.Operators.RetrieveByValueSet<Procedure>(g_, null);
@@ -1114,7 +1114,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return p_;
 			};
-			var f_ = context.Operators.Where<Extension>(((EncounterDiagnoses is Element)
+			var f_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 					? ((EncounterDiagnoses as Element).Extension)
 					: null), e_);
 			DataType g_(Extension @this) => 
@@ -1128,7 +1128,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return m_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((TheEncounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)TheEncounter?.Diagnosis, a_);
 		CqlConcept c_(Encounter.DiagnosisComponent EncounterDiagnoses)
 		{
 			var q_ = CQMCommon_2_0_000.getCondition(EncounterDiagnoses?.Condition);
@@ -2081,7 +2081,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return ao_;
 			};
-			var k_ = context.Operators.Where<Observation.ComponentComponent>((i_?.Component as IEnumerable<Observation.ComponentComponent>), j_);
+			var k_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)i_?.Component, j_);
 			CqlQuantity l_(Observation.ComponentComponent C)
 			{
 				var ap_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
@@ -2155,7 +2155,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return p_;
 			};
-			var f_ = context.Operators.Where<Extension>(((EncounterDiagnoses is Element)
+			var f_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 					? ((EncounterDiagnoses as Element).Extension)
 					: null), e_);
 			DataType g_(Extension @this) => 
@@ -2169,7 +2169,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 			return m_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((TheEncounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)TheEncounter?.Diagnosis, a_);
 		CqlConcept c_(Encounter.DiagnosisComponent EncounterDiagnoses)
 		{
 			var q_ = CQMCommon_2_0_000.getCondition(EncounterDiagnoses?.Condition);

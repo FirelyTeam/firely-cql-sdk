@@ -53,18 +53,13 @@ internal class CqlCompilerFactory :
     public virtual TypeResolver TypeResolver => Singleton(fn: NewTypeResolver);
     protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);
 
-    public virtual ExpressionConverter ExpressionConverter => Singleton(fn: NewExpressionConverter);
-    protected virtual ExpressionConverter NewExpressionConverter() =>
-        new ExpressionConverter(
-            TypeConverter);
-
 
     public virtual CqlOperatorsBinder CqlOperatorsBinder => Singleton(fn: NewOperatorsBinder);
     protected virtual CqlOperatorsBinder NewOperatorsBinder() =>
         new CqlOperatorsBinder(
             Logger<CqlOperatorsBinder>(),
             TypeResolver,
-            ExpressionConverter);
+            TypeConverter);
 
 
     public virtual CqlContextBinder CqlContextBinder => Singleton(fn: NewContextBinder);
@@ -100,6 +95,5 @@ internal class CqlCompilerFactory :
             TypeManager,
             TypeConverter,
             TypeResolver,
-            CqlContextBinder,
-            ExpressionConverter);
+            CqlContextBinder);
 }

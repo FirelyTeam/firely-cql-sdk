@@ -356,7 +356,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
 		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
-		Tuple_EaLaedgLDgRRYaLbKIIcBTOiA d_(ValueTuple<Encounter,Encounter> _valueTuple)
+		Tuple_EaLaedgLDgRRYaLbKIIcBTOiA d_(ValueTuple<Encounter, Encounter> _valueTuple)
 		{
 			var j_ = new Tuple_EaLaedgLDgRRYaLbKIIcBTOiA
 			{
@@ -366,7 +366,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter, Encounter>, Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(c_, d_);
 		bool? f_(Tuple_EaLaedgLDgRRYaLbKIIcBTOiA tuple_ealaedgldgrryalbkiicbtoia)
 		{
 			var k_ = FHIRHelpers_4_0_001.ToInterval(tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter2?.Period);
@@ -407,7 +407,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	{
 		var a_ = this.Long_Term_Care_Overlapping_Periods();
 		var c_ = context.Operators.CrossJoin<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, a_);
-		Tuple_CgaDVOXeQBMgMPCPZOThIIdDb d_(ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>> _valueTuple)
+		Tuple_CgaDVOXeQBMgMPCPZOThIIdDb d_(ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>> _valueTuple)
 		{
 			var j_ = new Tuple_CgaDVOXeQBMgMPCPZOThIIdDb
 			{
@@ -417,7 +417,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>,CqlInterval<CqlDateTime>>, Tuple_CgaDVOXeQBMgMPCPZOThIIdDb>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>, Tuple_CgaDVOXeQBMgMPCPZOThIIdDb>(c_, d_);
 		bool? f_(Tuple_CgaDVOXeQBMgMPCPZOThIIdDb tuple_cgadvoxeqbmgmpcpzothiiddb)
 		{
 			var k_ = context.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb.LTCPeriod1);

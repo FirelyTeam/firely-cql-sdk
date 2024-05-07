@@ -36,11 +36,13 @@ internal sealed class CleanConsoleFormatter : ConsoleFormatter
 
         var message = logEntry.Formatter(logEntry.State, logEntry.Exception);
         var (logLevelText, logLevelConsoleColor) = GetLogLevelString(logEntry.LogLevel);
-        var (escLogLevelForegroundColor, escDefaultForegroundColor) = 
+        var (escLogLevelForegroundColor, escDefaultForegroundColor) =
             options.NoColor
                 ? ("", "")
                 : (GetForegroundColorEscapeCode(logLevelConsoleColor), DefaultForegroundColor);
         textWriter.WriteLine($"____\n{escLogLevelForegroundColor}{logLevelText.ToUpperInvariant()}{escDefaultForegroundColor}: {message}");
+        if (logEntry.Exception is not null)
+            textWriter.WriteLine(logEntry.Exception.ToString());
     }
 
     private static (string logLevelText, ConsoleColor logLevelConsoleColor) GetLogLevelString(LogLevel logLevel) =>

@@ -350,7 +350,7 @@ public class HybridHWMFHIR_0_102_005
 		var c_ = this.Medicare_payer();
 		var d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, null);
 		var e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
-		Tuple_EFSKhGUTUCLEXZENTURVLjeND f_(ValueTuple<Encounter,Coverage> _valueTuple)
+		Tuple_EFSKhGUTUCLEXZENTURVLjeND f_(ValueTuple<Encounter, Coverage> _valueTuple)
 		{
 			var l_ = new Tuple_EFSKhGUTUCLEXZENTURVLjeND
 			{
@@ -360,7 +360,7 @@ public class HybridHWMFHIR_0_102_005
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<Encounter,Coverage>, Tuple_EFSKhGUTUCLEXZENTURVLjeND>(e_, f_);
+		var g_ = context.Operators.Select<ValueTuple<Encounter, Coverage>, Tuple_EFSKhGUTUCLEXZENTURVLjeND>(e_, f_);
 		bool? h_(Tuple_EFSKhGUTUCLEXZENTURVLjeND tuple_efskhgutuclexzenturvljend)
 		{
 			var m_ = FHIRHelpers_4_0_001.ToString(tuple_efskhgutuclexzenturvljend.InpatientEncounter?.StatusElement);
@@ -861,7 +861,7 @@ public class HybridHWMFHIR_0_102_005
 
 			return aa_;
 		};
-		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;

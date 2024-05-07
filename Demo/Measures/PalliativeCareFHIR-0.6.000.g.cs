@@ -156,11 +156,11 @@ public class PalliativeCareFHIR_0_6_000
 			{
 				var ad_ = this.survey();
 				var ae_ = FHIRHelpers_4_0_001.ToConcept(PalliativeAssessmentCategory);
-				var af_ = context.Operators.In<CqlCode>(ad_, (ae_?.codes as IEnumerable<CqlCode>));
+				var af_ = context.Operators.In<CqlCode>(ad_, (IEnumerable<CqlCode>)ae_?.codes);
 
 				return af_;
 			};
-			var w_ = context.Operators.Where<CodeableConcept>((PalliativeAssessment?.Category as IEnumerable<CodeableConcept>), v_);
+			var w_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)PalliativeAssessment?.Category, v_);
 			var x_ = context.Operators.Exists<CodeableConcept>(w_);
 			var y_ = context.Operators.And(u_, x_);
 			var z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(PalliativeAssessment?.Effective);

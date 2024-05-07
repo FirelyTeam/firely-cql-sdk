@@ -285,7 +285,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return o_;
 		};
-		var c_ = context.Operators.Where<Extension>(a_(), b_);
+		var c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		var d_ = context.Operators.SingletonFrom<Extension>(c_);
 		var e_ = new Extension[]
 		{
@@ -301,7 +301,7 @@ public class HIVRetentionFHIR_0_1_000
 
 				return an_;
 			};
-			var q_ = context.Operators.Where<Extension>(((E is Element)
+			var q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: null), p_);
 			DataType r_(Extension @this) => 
@@ -322,7 +322,7 @@ public class HIVRetentionFHIR_0_1_000
 
 				return aq_;
 			};
-			var y_ = context.Operators.Where<Extension>(((E is Element)
+			var y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: null), x_);
 			var aa_ = context.Operators.Select<Extension, DataType>(y_, r_);
@@ -343,7 +343,7 @@ public class HIVRetentionFHIR_0_1_000
 
 				return av_;
 			};
-			var af_ = context.Operators.Where<Extension>(((E is Element)
+			var af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: null), ae_);
 			var ah_ = context.Operators.Select<Extension, DataType>(af_, r_);
@@ -357,7 +357,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return ak_;
 		};
-		var g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(e_, f_);
+		var g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>((IEnumerable<Extension>)e_, f_);
 		var h_ = context.Operators.SingletonFrom<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(g_);
 
 		return h_;
@@ -397,7 +397,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return o_;
 		};
-		var c_ = context.Operators.Where<Extension>(a_(), b_);
+		var c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		var d_ = context.Operators.SingletonFrom<Extension>(c_);
 		var e_ = new Extension[]
 		{
@@ -413,7 +413,7 @@ public class HIVRetentionFHIR_0_1_000
 
 				return al_;
 			};
-			var q_ = context.Operators.Where<Extension>(((R is Element)
+			var q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: null), p_);
 			DataType r_(Extension @this) => 
@@ -435,7 +435,7 @@ public class HIVRetentionFHIR_0_1_000
 
 				return aq_;
 			};
-			var w_ = context.Operators.Where<Extension>(((R is Element)
+			var w_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: null), v_);
 			var y_ = context.Operators.Select<Extension, DataType>(w_, r_);
@@ -456,7 +456,7 @@ public class HIVRetentionFHIR_0_1_000
 
 				return av_;
 			};
-			var ad_ = context.Operators.Where<Extension>(((R is Element)
+			var ad_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: null), ac_);
 			var af_ = context.Operators.Select<Extension, DataType>(ad_, r_);
@@ -470,7 +470,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return ai_;
 		};
-		var g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(e_, f_);
+		var g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>((IEnumerable<Extension>)e_, f_);
 		var h_ = context.Operators.SingletonFrom<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(g_);
 
 		return h_;

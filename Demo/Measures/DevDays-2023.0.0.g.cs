@@ -119,7 +119,7 @@ public class DevDays_2023_0_0
 
 				return m_;
 			};
-			var e_ = context.Operators.Where<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
+			var e_ = context.Operators.Where<Coding>((IEnumerable<Coding>)c?.Code?.Coding, d_);
 			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();
@@ -150,7 +150,7 @@ public class DevDays_2023_0_0
 
 				return m_;
 			};
-			var e_ = context.Operators.Where<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
+			var e_ = context.Operators.Where<Coding>((IEnumerable<Coding>)c?.Code?.Coding, d_);
 			var f_ = context.Operators.Exists<Coding>(e_);
 			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
 			var h_ = this.Measurement_Period();

@@ -636,7 +636,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public static string PrettyTypeName(Type type)
         {
-            string result = type.WriteCSharp(TypeToCSharpStringOptions);
+            string result = type.ToCSharpString(TypeToCSharpStringOptions);
             return result;
         }
 

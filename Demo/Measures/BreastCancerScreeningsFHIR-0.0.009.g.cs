@@ -380,7 +380,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 				return n_;
 			};
-			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)UnilateralMastectomyDiagnosis?.BodySite, j_);
 			var l_ = this.Right();
 			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
@@ -447,7 +447,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 				return n_;
 			};
-			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)UnilateralMastectomyDiagnosis?.BodySite, j_);
 			var l_ = this.Left();
 			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 

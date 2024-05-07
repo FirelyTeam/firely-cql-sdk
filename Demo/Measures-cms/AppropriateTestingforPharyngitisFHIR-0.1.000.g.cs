@@ -424,7 +424,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 				return bl_;
 			};
-			var bh_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, bg_);
+			var bh_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, bg_);
 			bool? bi_(CqlConcept T)
 			{
 				var bm_ = this.Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate___();
@@ -479,7 +479,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 				return bu_;
 			};
-			var bq_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, bp_);
+			var bq_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, bp_);
 			bool? br_(CqlConcept T)
 			{
 				var bv_ = this.Unlisted_preventive_medicine_service();
@@ -589,7 +589,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days();
 		var b_ = this.Pharyngitis_or_Tonsillitis();
 		var c_ = context.Operators.CrossJoin<Encounter, Condition>(a_, b_);
-		Tuple_YPYXEdbbCQBdAVHXVcKUWMfH d_(ValueTuple<Encounter,Condition> _valueTuple)
+		Tuple_YPYXEdbbCQBdAVHXVcKUWMfH d_(ValueTuple<Encounter, Condition> _valueTuple)
 		{
 			var j_ = new Tuple_YPYXEdbbCQBdAVHXVcKUWMfH
 			{
@@ -599,7 +599,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter, Condition>, Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(c_, d_);
 		bool? f_(Tuple_YPYXEdbbCQBdAVHXVcKUWMfH tuple_ypyxedbbcqbdavhxvckuwmfh)
 		{
 			var k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_ypyxedbbcqbdavhxvckuwmfh.AcutePharyngitisTonsillitis);
@@ -730,7 +730,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var a_ = this.Group_A_Streptococcus_Lab_Test_With_Result();
 		var b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic();
 		var c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ d_(ValueTuple<Observation,Encounter> _valueTuple)
+		Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ d_(ValueTuple<Observation, Encounter> _valueTuple)
 		{
 			var j_ = new Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ
 			{
@@ -740,7 +740,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Observation,Encounter>, Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(c_, d_);
 		bool? f_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij)
 		{
 			var k_ = FHIRHelpers_4_3_000.ToValue(tuple_ffguysnebcxllexfcmjoehbij.GroupAStreptococcusTest?.Effective);

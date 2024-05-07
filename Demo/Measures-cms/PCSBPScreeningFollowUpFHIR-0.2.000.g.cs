@@ -562,7 +562,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ay_;
 			};
-			var k_ = context.Operators.Where<Observation.ComponentComponent>(i_?.Component, j_);
+			var k_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)i_?.Component, j_);
 			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(1m, "mm[Hg]");
@@ -610,7 +610,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return br_;
 			};
-			var y_ = context.Operators.Where<Observation.ComponentComponent>(w_?.Component, x_);
+			var y_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)w_?.Component, x_);
 			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ac_ = context.Operators.Quantity(80m, "mm[Hg]");
@@ -676,7 +676,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ay_;
 			};
-			var k_ = context.Operators.Where<Observation.ComponentComponent>(i_?.Component, j_);
+			var k_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)i_?.Component, j_);
 			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(120m, "mm[Hg]");
@@ -724,7 +724,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return br_;
 			};
-			var y_ = context.Operators.Where<Observation.ComponentComponent>(w_?.Component, x_);
+			var y_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)w_?.Component, x_);
 			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity(1m, "mm[Hg]");
@@ -813,7 +813,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return l_;
 			};
-			var f_ = context.Operators.Select<CodeableConcept, CqlConcept>(Referral?.ReasonCode, e_);
+			var f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)Referral?.ReasonCode, e_);
 			var g_ = this.Finding_of_Elevated_Blood_Pressure_or_Hypertension();
 			var h_ = context.Operators.ConceptsInValueSet(f_, g_);
 			var i_ = context.Operators.Convert<Code<RequestIntent>>(Referral?.IntentElement?.Value);
@@ -955,7 +955,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ce_;
 			};
-			var k_ = context.Operators.Where<Observation.ComponentComponent>(i_?.Component, j_);
+			var k_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)i_?.Component, j_);
 			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
@@ -1009,7 +1009,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return dh_;
 			};
-			var w_ = context.Operators.Where<Observation.ComponentComponent>(u_?.Component, v_);
+			var w_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)u_?.Component, v_);
 			var x_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(w_);
 			var y_ = FHIRHelpers_4_3_000.ToValue(x_?.Value);
 			var aa_ = context.Operators.Greater((y_ as CqlQuantity), n_);
@@ -1063,7 +1063,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ek_;
 			};
-			var aj_ = context.Operators.Where<Observation.ComponentComponent>(ah_?.Component, ai_);
+			var aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_?.Component, ai_);
 			var ak_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
 			var am_ = context.Operators.Quantity(130m, "mm[Hg]");
@@ -1117,7 +1117,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return fn_;
 			};
-			var av_ = context.Operators.Where<Observation.ComponentComponent>(at_?.Component, au_);
+			var av_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)at_?.Component, au_);
 			var aw_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
 			var ay_ = context.Operators.Quantity(80m, "mm[Hg]");
@@ -1174,7 +1174,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return bs_;
 			};
-			var m_ = context.Operators.Where<Observation.ComponentComponent>(k_?.Component, l_);
+			var m_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)k_?.Component, l_);
 			var n_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(m_);
 			var o_ = FHIRHelpers_4_3_000.ToValue(n_?.Value);
 			var p_ = context.Operators.Quantity(0m, "mm[Hg]");
@@ -1211,7 +1211,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ch_;
 			};
-			var y_ = context.Operators.Where<Observation.ComponentComponent>(w_?.Component, x_);
+			var y_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)w_?.Component, x_);
 			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ac_ = context.Operators.Greater((aa_ as CqlQuantity), p_);
@@ -1248,7 +1248,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return cw_;
 			};
-			var al_ = context.Operators.Where<Observation.ComponentComponent>(aj_?.Component, ak_);
+			var al_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)aj_?.Component, ak_);
 			var am_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(al_);
 			var an_ = FHIRHelpers_4_3_000.ToValue(am_?.Value);
 			var ao_ = context.Operators.Quantity(130m, "mm[Hg]");
@@ -1285,7 +1285,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return dl_;
 			};
-			var ax_ = context.Operators.Where<Observation.ComponentComponent>(av_?.Component, aw_);
+			var ax_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)av_?.Component, aw_);
 			var ay_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ax_);
 			var az_ = FHIRHelpers_4_3_000.ToValue(ay_?.Value);
 			var ba_ = context.Operators.Quantity(80m, "mm[Hg]");
@@ -1422,7 +1422,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return cc_;
 			};
-			var k_ = context.Operators.Where<Observation.ComponentComponent>(i_?.Component, j_);
+			var k_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)i_?.Component, j_);
 			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(130m, "mm[Hg]");
@@ -1470,7 +1470,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return cv_;
 			};
-			var y_ = context.Operators.Where<Observation.ComponentComponent>(w_?.Component, x_);
+			var y_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)w_?.Component, x_);
 			var z_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(y_);
 			var aa_ = FHIRHelpers_4_3_000.ToValue(z_?.Value);
 			var ab_ = context.Operators.Quantity(80m, "mm[Hg]");
@@ -1519,7 +1519,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return do_;
 			};
-			var an_ = context.Operators.Where<Observation.ComponentComponent>(al_?.Component, am_);
+			var an_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)al_?.Component, am_);
 			var ao_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(an_);
 			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_?.Value);
 			var aq_ = context.Operators.Quantity(140m, "mm[Hg]");
@@ -1565,7 +1565,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return eh_;
 			};
-			var az_ = context.Operators.Where<Observation.ComponentComponent>(ax_?.Component, ay_);
+			var az_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ax_?.Component, ay_);
 			var ba_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(az_);
 			var bb_ = FHIRHelpers_4_3_000.ToValue(ba_?.Value);
 			var bc_ = context.Operators.Quantity(90m, "mm[Hg]");
@@ -1765,7 +1765,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return bx_;
 			};
-			var k_ = context.Operators.Where<Observation.ComponentComponent>(i_?.Component, j_);
+			var k_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)i_?.Component, j_);
 			var l_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(k_);
 			var m_ = FHIRHelpers_4_3_000.ToValue(l_?.Value);
 			var n_ = context.Operators.Quantity(0m, "mm[Hg]");
@@ -1811,7 +1811,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return cq_;
 			};
-			var w_ = context.Operators.Where<Observation.ComponentComponent>(u_?.Component, v_);
+			var w_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)u_?.Component, v_);
 			var x_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(w_);
 			var y_ = FHIRHelpers_4_3_000.ToValue(x_?.Value);
 			var aa_ = context.Operators.Greater((y_ as CqlQuantity), n_);
@@ -1857,7 +1857,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return dj_;
 			};
-			var aj_ = context.Operators.Where<Observation.ComponentComponent>(ah_?.Component, ai_);
+			var aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_?.Component, ai_);
 			var ak_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(aj_);
 			var al_ = FHIRHelpers_4_3_000.ToValue(ak_?.Value);
 			var am_ = context.Operators.Quantity(140m, "mm[Hg]");
@@ -1903,7 +1903,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ec_;
 			};
-			var av_ = context.Operators.Where<Observation.ComponentComponent>(at_?.Component, au_);
+			var av_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)at_?.Component, au_);
 			var aw_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(av_);
 			var ax_ = FHIRHelpers_4_3_000.ToValue(aw_?.Value);
 			var ay_ = context.Operators.Quantity(90m, "mm[Hg]");
@@ -2103,7 +2103,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return aq_;
 				};
-				var s_ = context.Operators.Where<Extension>(((NoBPScreen is DomainResource)
+				var s_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
 						: null), r_);
 				DataType t_(Extension @this) => 
@@ -2122,7 +2122,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return at_;
 				};
-				var ab_ = context.Operators.Where<Extension>(((NoBPScreen is DomainResource)
+				var ab_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
 						: null), aa_);
 				var ad_ = context.Operators.Select<Extension, DataType>(ab_, t_);
@@ -2191,7 +2191,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return at_;
 			};
-			var ag_ = context.Operators.Where<Extension>(((NonPharmIntervention is DomainResource)
+			var ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NonPharmIntervention is DomainResource)
 					? ((NonPharmIntervention as DomainResource).Extension)
 					: null), af_);
 			DataType ah_(Extension @this) => 
@@ -2241,7 +2241,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return aa_;
 			};
-			var q_ = context.Operators.Where<Extension>(((LabECGNotDone is DomainResource)
+			var q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LabECGNotDone is DomainResource)
 					? ((LabECGNotDone as DomainResource).Extension)
 					: null), p_);
 			DataType r_(Extension @this) => 
@@ -2288,7 +2288,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ah_;
 			};
-			var u_ = context.Operators.Where<Extension>(((SecondHTNDeclinedReferralAndFollowUp is DomainResource)
+			var u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTNDeclinedReferralAndFollowUp is DomainResource)
 					? ((SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension)
 					: null), t_);
 			DataType v_(Extension @this) => 
@@ -2339,7 +2339,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return an_;
 			};
-			var aa_ = context.Operators.Where<Extension>(((SecondHTN140Over90ReferralFollowUpNotDone is DomainResource)
+			var aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTN140Over90ReferralFollowUpNotDone is DomainResource)
 					? ((SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension)
 					: null), z_);
 			DataType ab_(Extension @this) => 
@@ -2409,7 +2409,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return bg_;
 				};
-				var ap_ = context.Operators.Where<Extension>(((ElevatedBPDeclinedInterventions is DomainResource)
+				var ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((ElevatedBPDeclinedInterventions is DomainResource)
 						? ((ElevatedBPDeclinedInterventions as DomainResource).Extension)
 						: null), ao_);
 				DataType aq_(Extension @this) => 
@@ -2480,7 +2480,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return cw_;
 				};
-				var cf_ = context.Operators.Where<Extension>(((FirstHTNDeclinedInterventions is DomainResource)
+				var cf_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((FirstHTNDeclinedInterventions is DomainResource)
 						? ((FirstHTNDeclinedInterventions as DomainResource).Extension)
 						: null), ce_);
 				DataType cg_(Extension @this) => 

@@ -88,7 +88,7 @@ namespace Hl7.Cql.Compiler
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)
-                .Select(kvp => $"{kvp.Key}:{PrettyTypeName(kvp.Value)}"));
+                .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}"));
             var tupleId = Hasher.Hash(hashInput);
             var ns = TupleTypeNamespace;
             return $"Tuple_{tupleId}";
@@ -130,14 +130,6 @@ namespace Hl7.Cql.Compiler
                 setIL.Emit(OpCodes.Ret);
                 propertyBuilder.SetSetMethod(set);
             }
-        }
-
-        private static readonly TypeCSharpFormat TypeCSharpFormat = TypeCSharpFormat.Default;
-
-        internal static string PrettyTypeName(Type type)
-        {
-            string result = type.WriteCSharp(TypeCSharpFormat);
-            return result;
         }
     }
 }

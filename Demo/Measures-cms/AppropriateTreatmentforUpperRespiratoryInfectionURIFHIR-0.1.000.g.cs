@@ -419,7 +419,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 				return be_;
 			};
-			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, az_);
+			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, az_);
 			bool? bb_(CqlConcept T)
 			{
 				var bf_ = this.Unlisted_preventive_medicine_service();
@@ -467,7 +467,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var b_ = this.Upper_Respiratory_Infection();
 		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
 		var d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
-		Tuple_FiGMIRiNMNcaAVFKbMahDKTce e_(ValueTuple<Encounter,Condition> _valueTuple)
+		Tuple_FiGMIRiNMNcaAVFKbMahDKTce e_(ValueTuple<Encounter, Condition> _valueTuple)
 		{
 			var k_ = new Tuple_FiGMIRiNMNcaAVFKbMahDKTce
 			{
@@ -477,7 +477,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<Encounter,Condition>, Tuple_FiGMIRiNMNcaAVFKbMahDKTce>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<Encounter, Condition>, Tuple_FiGMIRiNMNcaAVFKbMahDKTce>(d_, e_);
 		bool? g_(Tuple_FiGMIRiNMNcaAVFKbMahDKTce tuple_figmirinmncaavfkbmahdktce)
 		{
 			var l_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_figmirinmncaavfkbmahdktce.URI);

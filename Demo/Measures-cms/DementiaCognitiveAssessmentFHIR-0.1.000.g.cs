@@ -510,7 +510,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 				return ac_;
 			};
-			var s_ = context.Operators.Where<Extension>(((NoCognitiveAssessment is DomainResource)
+			var s_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 

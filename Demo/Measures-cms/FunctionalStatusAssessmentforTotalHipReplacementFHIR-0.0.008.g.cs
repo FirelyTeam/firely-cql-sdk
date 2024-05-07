@@ -638,7 +638,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 				return y_;
 			};
-			var u_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, t_);
+			var u_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, t_);
 			bool? v_(CqlConcept T)
 			{
 				var z_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();
@@ -1105,7 +1105,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
 		var t_ = Status_1_6_000.isAssessmentPerformed(s_);
 		var u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
-		Tuple_EIPfMaZVhFScjijaOFHiCPVMb v_(ValueTuple<Observation,Observation,Observation,Observation,Observation> _valueTuple)
+		Tuple_EIPfMaZVhFScjijaOFHiCPVMb v_(ValueTuple<Observation, Observation, Observation, Observation, Observation> _valueTuple)
 		{
 			var ab_ = new Tuple_EIPfMaZVhFScjijaOFHiCPVMb
 			{
@@ -1118,7 +1118,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return ab_;
 		};
-		var w_ = context.Operators.Select<ValueTuple<Observation,Observation,Observation,Observation,Observation>, Tuple_EIPfMaZVhFScjijaOFHiCPVMb>(u_, v_);
+		var w_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation>, Tuple_EIPfMaZVhFScjijaOFHiCPVMb>(u_, v_);
 		bool? x_(Tuple_EIPfMaZVhFScjijaOFHiCPVMb tuple_eipfmazvhfscjijaofhicpvmb)
 		{
 			var ac_ = FHIRHelpers_4_3_000.ToValue(tuple_eipfmazvhfscjijaofhicpvmb.HOOSLifeQuality?.Effective);
@@ -1417,7 +1417,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_DDTAOdcFieSJbGgRLLZPYbGQb h_(ValueTuple<Observation,Observation> _valueTuple)
+		Tuple_DDTAOdcFieSJbGgRLLZPYbGQb h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
 			var n_ = new Tuple_DDTAOdcFieSJbGgRLLZPYbGQb
 			{
@@ -1427,7 +1427,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_DDTAOdcFieSJbGgRLLZPYbGQb>(g_, h_);
+		var i_ = context.Operators.Select<ValueTuple<Observation, Observation>, Tuple_DDTAOdcFieSJbGgRLLZPYbGQb>(g_, h_);
 		bool? j_(Tuple_DDTAOdcFieSJbGgRLLZPYbGQb tuple_ddtaodcfiesjbggrllzpybgqb)
 		{
 			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10MentalScore?.Effective);
@@ -1565,7 +1565,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation,Observation> _valueTuple)
+		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
 			var n_ = new Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH
 			{
@@ -1575,7 +1575,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
+		var i_ = context.Operators.Select<ValueTuple<Observation, Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
 		bool? j_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
 			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective);
@@ -1713,7 +1713,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		var g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation,Observation> _valueTuple)
+		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
 			var n_ = new Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH
 			{
@@ -1723,7 +1723,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 			return n_;
 		};
-		var i_ = context.Operators.Select<ValueTuple<Observation,Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
+		var i_ = context.Operators.Select<ValueTuple<Observation, Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
 		bool? j_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
 			var o_ = FHIRHelpers_4_3_000.ToValue(tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective);

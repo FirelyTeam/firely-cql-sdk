@@ -150,7 +150,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.survey();
@@ -190,7 +190,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.survey();
@@ -575,7 +575,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.laboratory();
@@ -615,7 +615,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.laboratory();
@@ -781,7 +781,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.exam();
@@ -821,7 +821,7 @@ public class Status_1_6_000
 
 				return m_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(O?.Category, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)O?.Category, g_);
 			bool? i_(CqlConcept ObservationCategory)
 			{
 				var n_ = this.exam();

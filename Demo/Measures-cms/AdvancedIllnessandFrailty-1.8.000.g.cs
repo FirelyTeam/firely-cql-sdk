@@ -405,7 +405,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
 		var c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
-		Tuple_EaLaedgLDgRRYaLbKIIcBTOiA d_(ValueTuple<Encounter,Encounter> _valueTuple)
+		Tuple_EaLaedgLDgRRYaLbKIIcBTOiA d_(ValueTuple<Encounter, Encounter> _valueTuple)
 		{
 			var k_ = new Tuple_EaLaedgLDgRRYaLbKIIcBTOiA
 			{
@@ -415,7 +415,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return k_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<Encounter,Encounter>, Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(c_, d_);
+		var e_ = context.Operators.Select<ValueTuple<Encounter, Encounter>, Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(c_, d_);
 		bool? f_(Tuple_EaLaedgLDgRRYaLbKIIcBTOiA tuple_ealaedgldgrryalbkiicbtoia)
 		{
 			var l_ = FHIRHelpers_4_3_000.ToInterval(tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter2?.Period);
@@ -625,7 +625,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return ai_;
 		};
-		var s_ = context.Operators.Where<Observation>(q_, r_);
+		var s_ = context.Operators.Where<Observation>((IEnumerable<Observation>)q_, r_);
 		var t_ = context.Operators.SingletonFrom<Observation>(s_);
 		var u_ = context.Operators.Not((bool?)(t_ is null));
 		var v_ = context.Operators.And(g_, u_);

@@ -253,13 +253,13 @@ namespace Hl7.Cql.Conversion
                     { IsValueType: true } => "struct ",
                     _                     => ""
                 },
-                t.WriteCSharp(TypeCSharpFormat));
+                t.ToCSharpString(TypeCSharpFormat));
 
         /// <inheritdoc />
         void IDisposable.Dispose()
         {
-            if (_logger is not null)
-                LogFinalConverters();
+            // if (_logger is not null)
+            //     LogFinalConverters();
         }
     }
 }

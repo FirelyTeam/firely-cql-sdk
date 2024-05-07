@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
@@ -110,21 +109,5 @@ internal static class EnumerableExtensions
 
         value = stack.Peek();
         return true;
-    }
-}
-
-internal static class DictionaryExtensions
-{
-    public static TValue GetOrAdd<TKey, TValue>(
-        this IDictionary<TKey, TValue> dictionary,
-        TKey key,
-        Func<TKey, TValue> valueFactory)
-    {
-        if (dictionary.TryGetValue(key, out var value))
-            return value;
-
-        value = valueFactory(key);
-        dictionary.Add(key, value);
-        return value;
     }
 }

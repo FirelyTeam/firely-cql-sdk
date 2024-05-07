@@ -284,7 +284,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 						return ad_;
 					};
-					var u_ = context.Operators.Select<CodeableConcept, CqlConcept>(s_?.Type, t_);
+					var u_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)s_?.Type, t_);
 					var v_ = this.Operating_Room_Suite();
 					var w_ = context.Operators.ConceptsInValueSet(u_, v_);
 					var x_ = FHIRHelpers_4_3_000.ToValue(OpioidGiven?.Effective);
@@ -296,7 +296,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 					return ac_;
 				};
-				var o_ = context.Operators.Where<Encounter.LocationComponent>((InpatientEncounter?.Location as IEnumerable<Encounter.LocationComponent>), n_);
+				var o_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)InpatientEncounter?.Location, n_);
 				var p_ = context.Operators.Exists<Encounter.LocationComponent>(o_);
 				var q_ = context.Operators.Not(p_);
 				var r_ = context.Operators.And(m_, q_);
@@ -372,7 +372,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		var b_ = this.Opioid_Administration();
 		var c_ = this.Denominator();
 		var d_ = context.Operators.CrossJoin<MedicationAdministration, MedicationAdministration, Encounter>(a_, b_, c_);
-		Tuple_DiOQPVXLKifMhgTIYEEjRUSaD e_(ValueTuple<MedicationAdministration,MedicationAdministration,Encounter> _valueTuple)
+		Tuple_DiOQPVXLKifMhgTIYEEjRUSaD e_(ValueTuple<MedicationAdministration, MedicationAdministration, Encounter> _valueTuple)
 		{
 			var k_ = new Tuple_DiOQPVXLKifMhgTIYEEjRUSaD
 			{
@@ -383,7 +383,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<MedicationAdministration,MedicationAdministration,Encounter>, Tuple_DiOQPVXLKifMhgTIYEEjRUSaD>(d_, e_);
+		var f_ = context.Operators.Select<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>, Tuple_DiOQPVXLKifMhgTIYEEjRUSaD>(d_, e_);
 		bool? g_(Tuple_DiOQPVXLKifMhgTIYEEjRUSaD tuple_dioqpvxlkifmhgtiyeejrusad)
 		{
 			bool? l_(Encounter.LocationComponent EncounterLocation)
@@ -395,7 +395,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 					return bj_;
 				};
-				var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>(ay_?.Type, az_);
+				var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ay_?.Type, az_);
 				var bb_ = this.Operating_Room_Suite();
 				var bc_ = context.Operators.ConceptsInValueSet(ba_, bb_);
 				var bd_ = FHIRHelpers_4_3_000.ToValue(tuple_dioqpvxlkifmhgtiyeejrusad.OpioidAntagonistGiven?.Effective);
@@ -407,7 +407,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 				return bi_;
 			};
-			var m_ = context.Operators.Where<Encounter.LocationComponent>((tuple_dioqpvxlkifmhgtiyeejrusad.EncounterWithQualifyingAge?.Location as IEnumerable<Encounter.LocationComponent>), l_);
+			var m_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)tuple_dioqpvxlkifmhgtiyeejrusad.EncounterWithQualifyingAge?.Location, l_);
 			var n_ = context.Operators.Exists<Encounter.LocationComponent>(m_);
 			var o_ = context.Operators.Not(n_);
 			var p_ = FHIRHelpers_4_3_000.ToValue(tuple_dioqpvxlkifmhgtiyeejrusad.OpioidAntagonistGiven?.Effective);

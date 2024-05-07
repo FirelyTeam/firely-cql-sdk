@@ -884,7 +884,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = context.Operators.ConvertCodeToConcept(category);
@@ -908,7 +908,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = context.Operators.ConvertCodeToConcept(category);
@@ -932,7 +932,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.problem_list_item();
@@ -957,7 +957,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.encounter_diagnosis();
@@ -982,7 +982,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(condition?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)condition?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.health_concern();
@@ -1007,7 +1007,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.social_history();
@@ -1032,7 +1032,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.vital_signs();
@@ -1057,7 +1057,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.imaging();
@@ -1082,7 +1082,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.laboratory();
@@ -1107,7 +1107,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.procedure();
@@ -1132,7 +1132,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.survey();
@@ -1157,7 +1157,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.exam();
@@ -1182,7 +1182,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.therapy();
@@ -1207,7 +1207,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.activity();
@@ -1232,7 +1232,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(observation?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.clinical_test();
@@ -1257,7 +1257,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)medicationRequest?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.Community();
@@ -1282,7 +1282,7 @@ public class QICoreCommon_2_0_000
 
 			return f_;
 		};
-		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>(medicationRequest?.Category, a_);
+		var b_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)medicationRequest?.Category, a_);
 		bool? c_(CqlConcept C)
 		{
 			var g_ = this.Discharge();
@@ -1309,8 +1309,8 @@ public class QICoreCommon_2_0_000
 			return g_;
 		};
 		var b_ = context.Operators.Where<Extension>(((deviceRequest is DomainResource)
-				? ((deviceRequest as DomainResource).ModifierExtension as IEnumerable<Extension>)
-				: (null as IEnumerable<Extension>)), a_);
+				? ((IEnumerable<Extension>)(deviceRequest as DomainResource).ModifierExtension)
+				: null), a_);
 		bool? c_(Extension E)
 		{
 			var h_ = FHIRHelpers_4_3_000.ToValue(E?.Value);
@@ -1875,7 +1875,7 @@ public class QICoreCommon_2_0_000
 
 					return ac_();
 				};
-				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
+				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)y_, z_);
 				var ab_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(aa_);
 
 				return ab_;
@@ -1954,7 +1954,7 @@ public class QICoreCommon_2_0_000
 
 					return ac_();
 				};
-				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>(y_, z_);
+				var aa_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)y_, z_);
 				var ab_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(aa_);
 
 				return ab_;
@@ -2071,7 +2071,7 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
@@ -2106,7 +2106,7 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
@@ -2142,7 +2142,7 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;
@@ -2177,7 +2177,7 @@ public class QICoreCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>(b_, c_);
+		var d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
 		return e_;

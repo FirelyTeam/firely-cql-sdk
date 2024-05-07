@@ -343,7 +343,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return c_;
 		};
-		var b_ = context.Operators.Select<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
+		var b_ = context.Operators.Select<ResourceReference, string>((IEnumerable<ResourceReference>)task?.BasedOn, a_);
 
 		return b_;
 	}
@@ -377,7 +377,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 				return y_;
 			};
-			var i_ = context.Operators.Where<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(g_, h_);
+			var i_ = context.Operators.Where<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>((IEnumerable<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>)g_, h_);
 			Task j_(Tuple_BLEMZbHGbhMbZiIgCJaASVTUS FirstReferral) => 
 				ConsultantReportObtained;
 			var k_ = context.Operators.Select<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS, Task>(i_, j_);

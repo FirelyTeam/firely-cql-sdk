@@ -235,7 +235,7 @@ public class AlaraCTFHIR_0_1_001
 
 			return l_;
 		};
-		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)Obs?.Component, a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
@@ -263,7 +263,7 @@ public class AlaraCTFHIR_0_1_001
 
 			return l_;
 		};
-		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)Obs?.Component, a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
@@ -337,7 +337,7 @@ public class AlaraCTFHIR_0_1_001
 
 				return k_;
 			};
-			var g_ = context.Operators.Where<CqlCode>(((e_ as CqlConcept)?.codes as IEnumerable<CqlCode>), f_);
+			var g_ = context.Operators.Where<CqlCode>(((IEnumerable<CqlCode>)(e_ as CqlConcept)?.codes), f_);
 			string h_(CqlCode @this) => 
 				@this?.code;
 			var i_ = context.Operators.Select<CqlCode, string>(g_, h_);
@@ -365,7 +365,7 @@ public class AlaraCTFHIR_0_1_001
 
 			return m_;
 		};
-		var c_ = context.Operators.Where<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
+		var c_ = context.Operators.Where<CqlCode>(((IEnumerable<CqlCode>)(a_ as CqlConcept)?.codes), b_);
 		string d_(CqlCode @this) => 
 			@this?.code;
 		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);

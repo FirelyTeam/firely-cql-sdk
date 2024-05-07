@@ -212,7 +212,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 		var f_ = this.Cancer();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
 		var h_ = context.Operators.CrossJoin<Encounter, Procedure, Procedure, Condition>(c_, d_, d_, g_);
-		Tuple_CIBLiGZRIHjLJQMiTHPOROaSe i_(ValueTuple<Encounter,Procedure,Procedure,Condition> _valueTuple)
+		Tuple_CIBLiGZRIHjLJQMiTHPOROaSe i_(ValueTuple<Encounter, Procedure, Procedure, Condition> _valueTuple)
 		{
 			var o_ = new Tuple_CIBLiGZRIHjLJQMiTHPOROaSe
 			{
@@ -224,7 +224,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 			return o_;
 		};
-		var j_ = context.Operators.Select<ValueTuple<Encounter,Procedure,Procedure,Condition>, Tuple_CIBLiGZRIHjLJQMiTHPOROaSe>(h_, i_);
+		var j_ = context.Operators.Select<ValueTuple<Encounter, Procedure, Procedure, Condition>, Tuple_CIBLiGZRIHjLJQMiTHPOROaSe>(h_, i_);
 		bool? k_(Tuple_CIBLiGZRIHjLJQMiTHPOROaSe tuple_cibligzrihjljqmithporoase)
 		{
 			var p_ = QICoreCommon_2_0_000.isActive(tuple_cibligzrihjljqmithporoase.Cancer);
@@ -419,7 +419,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 							return w_;
 						};
-						var s_ = context.Operators.Select<CodeableConcept, CqlConcept>(RadiationManagementEncounter?.Type, r_);
+						var s_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)RadiationManagementEncounter?.Type, r_);
 						bool? t_(CqlConcept RadiationManagement)
 						{
 							var x_ = this.Radiation_treatment_management__5_treatments();

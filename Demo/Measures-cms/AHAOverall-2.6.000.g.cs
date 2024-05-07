@@ -306,7 +306,7 @@ public class AHAOverall_2_6_000
 
 			return y_;
 		};
-		var c_ = context.Operators.Where<Condition>(a_, b_);
+		var c_ = context.Operators.Where<Condition>((IEnumerable<Condition>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 		var e_ = context.Operators.Not((bool?)(d_ is null));
 
@@ -847,7 +847,7 @@ public class AHAOverall_2_6_000
 
 						return ch_;
 					};
-					var aw_ = context.Operators.Where<object>(au_, av_);
+					var aw_ = context.Operators.Where<object>((IEnumerable<object>)au_, av_);
 					object ax_(object @this)
 					{
 						var ci_ = context.Operators.LateBoundProperty<object>(@this, "timing");
@@ -867,7 +867,7 @@ public class AHAOverall_2_6_000
 
 						return ck_;
 					};
-					var bc_ = context.Operators.Where<object>(ba_, bb_);
+					var bc_ = context.Operators.Where<object>((IEnumerable<object>)ba_, bb_);
 					object bd_(object @this)
 					{
 						var cl_ = context.Operators.LateBoundProperty<object>(@this, "repeat");
@@ -888,7 +888,7 @@ public class AHAOverall_2_6_000
 
 						return co_;
 					};
-					var bi_ = context.Operators.Where<object>(bg_, bh_);
+					var bi_ = context.Operators.Where<object>((IEnumerable<object>)bg_, bh_);
 					object bj_(object @this)
 					{
 						var cp_ = context.Operators.LateBoundProperty<object>(@this, "bounds");
@@ -908,7 +908,7 @@ public class AHAOverall_2_6_000
 
 						return cr_;
 					};
-					var bo_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bm_, bn_);
+					var bo_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)bm_, bn_);
 					var bp_ = context.Operators.Collapse(bo_, null);
 					object bq_(CqlInterval<CqlDateTime> @this)
 					{

@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -26,8 +27,8 @@ namespace Hl7.Cql.Compiler
     internal partial class CqlOperatorsBinder
     {
         private readonly ILogger<CqlOperatorsBinder> _logger;
+        private readonly TypeConverter _typeConverter;
         private readonly TypeResolver _typeResolver;
-        private readonly ExpressionConverter _expressionConverter;
 
 
         /// <summary>
@@ -40,16 +41,19 @@ namespace Hl7.Cql.Compiler
         /// The type resolver used.
         /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
         /// </param>
-        /// <param name="expressionConverter">
-        /// The expression converter used.
+        /// <param name="typeConverter">
+        /// If provided, this binding will use the supplied instance to determine whether
+        /// a conversion is possible.  Note that if you provide a different instance of this class to <see cref="CqlOperators"/>,
+        /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
+        /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
         /// </param>
         public CqlOperatorsBinder(
             ILogger<CqlOperatorsBinder> logger,
             TypeResolver typeResolver,
-            ExpressionConverter expressionConverter)
+            TypeConverter typeConverter)
         {
+            _typeConverter = typeConverter;
             _typeResolver = typeResolver;
-            _expressionConverter = expressionConverter;
             _logger = logger;
         }
 
@@ -71,9 +75,9 @@ namespace Hl7.Cql.Compiler
             {
                 // @formatter:off
                 "Convert"           => BindConvert(args[0], args[1]),
-                "Aggregate"         => BindToGenericMethod(nameof(ICqlOperators.Aggregate), genericTypeArguments: [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type], args[0], args[2], args[1]), // NOTE: the order here is 0, 2, 1, maybe change the Aggregate method arguments as well?
-                "CrossJoin"         => BindToGenericMethod(nameof(ICqlOperators.CrossJoin), genericTypeArguments: args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!), args),
-                "Message"           => BindToGenericMethod(nameof(ICqlOperators.Message), genericTypeArguments: [args[0].Type], args),
+                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type]),
+                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!)),
+                "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type]),
                 "Coalesce"          => Coalesce(args[0]),
                 "Flatten"           => Flatten(args[0]),
                 "InList"            => InList(args[0], args[1]),

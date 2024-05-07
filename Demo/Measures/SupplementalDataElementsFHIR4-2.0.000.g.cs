@@ -113,11 +113,11 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			{
 				var n_ = this.Patient();
 
-				return ((n_ as DomainResource).Extension as IEnumerable<Extension>);
+				return ((IEnumerable<Extension>)(n_ as DomainResource).Extension);
 			}
 			else
 			{
-				return (null as IEnumerable<Extension>);
+				return null;
 			};
 		};
 		bool? b_(Extension Extension)
@@ -130,7 +130,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		};
 		var c_ = context.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension) => 
-			(Extension?.Extension as IEnumerable<Extension>);
+			(IEnumerable<Extension>)Extension?.Extension;
 		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
 		var f_ = context.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)
@@ -194,11 +194,11 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			{
 				var n_ = this.Patient();
 
-				return ((n_ as DomainResource).Extension as IEnumerable<Extension>);
+				return ((IEnumerable<Extension>)(n_ as DomainResource).Extension);
 			}
 			else
 			{
-				return (null as IEnumerable<Extension>);
+				return null;
 			};
 		};
 		bool? b_(Extension Extension)
@@ -211,7 +211,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		};
 		var c_ = context.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension) => 
-			(Extension?.Extension as IEnumerable<Extension>);
+			(IEnumerable<Extension>)Extension?.Extension;
 		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
 		var f_ = context.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)

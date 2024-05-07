@@ -154,7 +154,7 @@ public class Antibiotic_1_5_000
 
 					return n_;
 				};
-				var h_ = context.Operators.Where<Dosage>(ActiveMedication?.DosageInstruction, g_);
+				var h_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)ActiveMedication?.DosageInstruction, g_);
 				Timing i_(Dosage @this) => 
 					@this?.Timing;
 				var j_ = context.Operators.Select<Dosage, Timing>(h_, i_);
