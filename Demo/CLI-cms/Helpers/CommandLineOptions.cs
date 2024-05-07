@@ -9,15 +9,15 @@ internal class CommandLineOptions
     [Option('t', "testCase", Required = true, HelpText = "The folder name of a test case.")]
     public string TestCase { get; set; } = "";
 
-    public string LibraryName { get { return Library.Split('-')[0]; } }
-    public string LibraryVersion { get { return Library.Split('-')[1]; } }
-    public string TestRootDirectory { get { return Path.Join(AppContext.BaseDirectory, "Measures"); } }
-    public string ValueSetDirectory { get { return Path.Join(TestRootDirectory, Library, "ValueSet"); } }
-    public string LibraryDirectory { get { return Path.Join(TestRootDirectory, Library, "Library"); } }
-    public string LibraryFile { get { return Path.Join(LibraryDirectory, $"{Library}.json"); } }
-    public string TestCaseDirectory { get { return Path.Join(TestRootDirectory, Library, TestCase); } }
-    public string TestCaseBundleFile { get { return Path.Join(TestCaseDirectory, "Bundle.json"); } }
-    public string TestCaseInputParametersFile { get { return Path.Join(TestCaseDirectory, "InputParameters.json"); } }
+    public string LibraryName => Library.Split('-')[0];
+    public string LibraryVersion => Library.Split('-')[1];
+    public string TestRootDirectory => Path.Join(AppContext.BaseDirectory, "Measures");
+    public string ValueSetDirectory => Path.Join(TestRootDirectory, Library, "ValueSet");
+    public string LibraryDirectory => Path.Join(TestRootDirectory, Library, "Library");
+    public string LibraryFile => Path.Join(LibraryDirectory, $"{Library}.json");
+    public string TestCaseDirectory => Path.Join(TestRootDirectory, Library, TestCase);
+    public string TestCaseBundleFile => Path.Join(TestCaseDirectory, "Bundle.json");
+    public string TestCaseInputParametersFile => Path.Join(TestCaseDirectory, "InputParameters.json");
 
     public static void EnsureValidOptions(CommandLineOptions options)
     {

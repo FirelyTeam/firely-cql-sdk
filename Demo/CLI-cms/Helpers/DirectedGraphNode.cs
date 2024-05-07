@@ -23,7 +23,7 @@ namespace Hl7.Cql.Graph
         [JsonIgnore]
         public IList<DirectedGraphEdge> ForwardEdges { get; } = new List<DirectedGraphEdge>();
 
-        public IEnumerable<string> ForwardEdgeIds { get => ForwardEdges.Select(edge => edge.EdgeId); }
+        public IEnumerable<string> ForwardEdgeIds => ForwardEdges.Select(edge => edge.EdgeId);
 
         public IDictionary<string, object>? Properties { get; set; }
 

@@ -153,13 +153,13 @@ namespace Hl7.Cql.Graph
         private int GetEdgesCount() => _forwardNodesByNodeId.Sum(kvp => kvp.Value.Count);
 
 #if DEBUG
-        public string GraphvizDiagramUri =>
+        internal string GraphvizDiagramUri =>
             new UriBuilder("https://edotor.net/?engine=dot")
             {
                 Fragment = Uri.EscapeDataString(GraphvizDiagram)
             }.Uri.ToString();
 
-        public string GraphvizDiagram
+        internal string GraphvizDiagram
         {
             get
             {
