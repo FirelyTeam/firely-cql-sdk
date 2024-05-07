@@ -49,49 +49,52 @@ namespace Hl7.Cql.CqlToElm
         /// <exception cref="ArgumentException">if <paramref name="cql"/> is empty.</exception>
         public Library ConvertLibrary(string cql)
         {
-            using (var cqlLibrary = new StringReader(cql))
+            using var cqlLibrary = new StringReader(cql);
+            using var scope = Services.CreateScope();
+
+            var visitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
+
+            try
             {
-                if (cqlLibrary.Peek() < 0)
-                    throw new ArgumentException("The provided text reader is empty and cannot be read.", nameof(cqlLibrary));
+                var library = visitor.Visit(ParseLibrary(cqlLibrary));
+                if (library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
+                    Logger.LogWarning("Parsed ELM tree contains errors.");
 
-                var lexerListener = new ThrowingErrorListener();
-                var parserListener = lexerListener;
-
-                var antlStream = new AntlrInputStream(cqlLibrary);
-                var lexer = new cqlLexer(antlStream);
-                lexer.RemoveErrorListeners();
-                lexer.AddErrorListener(lexerListener);
-
-                var parser = new cqlParser(new CommonTokenStream(lexer));
-                parser.RemoveErrorListeners();
-                parser.AddErrorListener(parserListener);
-
-                using (var scope = Services.CreateScope())
-                {
-                    var visitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
-                    try
-                    {
-                        var library = visitor.Visit(parser.library());
-                        if (library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
-                            Logger.LogWarning("Parsed ELM tree contains errors.");
-
-                        return library;
-                    }
-#if !DEBUG
-                catch (Exception e)
-                {
-                        Logger.LogCritical(e, "Exception while converting CQL to ELM.");
-                        throw;
-                }
-#else
-                    catch
-                    {
-                        throw;
-                    }
-#endif
-                }
+                return library;
             }
+#if !DEBUG
+            catch (Exception e)
+            {
+                    Logger.LogCritical(e, "Exception while converting CQL to ELM.");
+                    throw;
+            }
+#else
+            catch
+            {
+                throw;
+            }
+#endif
         }
+
+        internal static cqlParser.LibraryContext ParseLibrary(TextReader cqlLibrary)
+        {
+            if (cqlLibrary.Peek() < 0)
+                throw new ArgumentException(@"The provided text reader is empty and cannot be read.", nameof(cqlLibrary));
+
+            var errorListener = new ThrowingErrorListener();
+
+            var antlStream = new AntlrInputStream(cqlLibrary);
+            var lexer = new cqlLexer(antlStream);
+            lexer.RemoveErrorListeners();
+            lexer.AddErrorListener(errorListener);
+
+            var parser = new cqlParser(new CommonTokenStream(lexer));
+            parser.RemoveErrorListeners();
+            parser.AddErrorListener(errorListener);
+
+            return parser.library();
+        }
+
 
         private class ThrowingErrorListener : IAntlrErrorListener<int>, IAntlrErrorListener<IToken>
         {

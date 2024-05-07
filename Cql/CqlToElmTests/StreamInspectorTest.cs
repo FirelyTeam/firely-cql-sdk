@@ -46,6 +46,5 @@ namespace Hl7.Cql.CqlToElm.Test
             var vi = si.FromCql(ss);
             vi.Should().BeNull();
         }
-
     }
 }

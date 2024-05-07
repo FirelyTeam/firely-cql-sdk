@@ -36,10 +36,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (string.IsNullOrWhiteSpace(systemUri))
                 return null;
 
-            var model = ModelProvider.GetModelFromUri(systemUri, systemVersion);
-            if (model is not null)
-                return new UsingDefSymbol("System", systemVersion, model);
-            else return null;
+            return ModelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
+                new UsingDefSymbol("System", systemVersion, model)
+                : null;
         }
 
         // libraryDefinition? definition* statement* EOF;

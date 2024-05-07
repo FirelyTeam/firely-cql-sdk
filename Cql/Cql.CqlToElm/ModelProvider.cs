@@ -11,15 +11,6 @@ namespace Hl7.Cql.CqlToElm
     public static class ModelProvider
     {
         /// <summary>
-        /// Returns the <see cref="ModelInfo"/> for a model, given the model's uri and version.
-        /// </summary>
-        /// <exception cref="ArgumentException">There is no model with the given uri.</exception>
-        public static Model.ModelInfo? GetModelFromUri(this IModelProvider provider, string uri, string? version = null) =>
-            provider.TryGetModelFromUri(uri, out var model, version) ?
-                model!
-                : null;
-
-        /// <summary>
         /// Returns the <see cref="ModelInfo"/> for a model, given the model's name and version.
         /// </summary>
         /// <exception cref="ArgumentException">There is no model with the given uri.</exception>
@@ -27,7 +18,6 @@ namespace Hl7.Cql.CqlToElm
             provider.TryGetModelFromName(name, out var model, version) ?
                 model!
                 : throw new InvalidOperationException($"Model {name} {(version is not null ? $"version {version}" : "")} is not available.");
-
 
         /// <summary>
         /// Creates a new <see cref="Elm.TypeSpecifier"/> based on a <see cref="Model.TypeSpecifier"/>.
@@ -177,15 +167,13 @@ namespace Hl7.Cql.CqlToElm
             string typeName, out TypeInfo? typeInfo, out ModelInfo? model)
         {
             if (provider.TryGetModelFromUri(uri, out model)
-                && model is not null
-                && model!.TryGetTypeInfoFor(typeName, out typeInfo))
+                && model.TryGetTypeInfoFor(typeName, out typeInfo))
                 return true;
             else
             {
                 typeInfo = null;
                 return false;
             }
-                
         }
 
         /// <summary>
