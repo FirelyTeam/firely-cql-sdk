@@ -102,7 +102,7 @@ internal class ResourcePackager
                 if (library.NameAndVersion() is null)
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, asmData, typeCrosswalk, library);
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, resourceCanonicalRootUrl, asmData, typeCrosswalk, library);
                 librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
                 OnResourceCreated(fhirLibrary);
             }
@@ -137,27 +137,7 @@ internal class ResourcePackager
                     && !string.IsNullOrWhiteSpace(yearAnnotation.value)
                     && int.TryParse(yearAnnotation.value, out var measureYear))
                 {
-                    var measure = new Measure();
-                    measure.Name = measureAnnotation.value;
-                    measure.Id = library.identifier?.id!;
-                    measure.Version = library.identifier?.version!;
-                    measure.Status = PublicationStatus.Active;
-                    measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
-                        .ToString();
-                    measure.EffectivePeriod = new Period
-                    {
-                        Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
-                        End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
-                    };
-                    measure.Group = [];
-                    measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
-                    if (library.NameAndVersion() is null)
-                        throw new InvalidOperationException("Library NameAndVersion should not be null.");
-
-                    if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion()!, out var libForMeasure))
-                        throw new InvalidOperationException(
-                            $"We didn't create a measure for library {libForMeasure}");
-                    measure.Library = new List<string> { libForMeasure!.Url };
+                    Measure measure = CreateMeasureResource(elmFile, resourceCanonicalRootUrl, measureAnnotation, measureYear, librariesByNameAndVersion, library);
                     OnResourceCreated(measure);
                 }
             }
@@ -166,9 +146,42 @@ internal class ResourcePackager
         return resources;
     }
 
+    private static Measure CreateMeasureResource(
+        FileInfo elmFile,
+        string? resourceCanonicalRootUrl,
+        Tag measureAnnotation,
+        int measureYear,
+        Dictionary<string, FhirLibrary> librariesByNameAndVersion,
+        Elm.Library elmLibrary)
+    {
+        var measure = new Measure();
+        measure.Name = measureAnnotation.value;
+        measure.Id = elmLibrary.identifier?.id!;
+        measure.Version = elmLibrary.identifier?.version!;
+        measure.Status = PublicationStatus.Active;
+        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
+            .ToString();
+        measure.EffectivePeriod = new Period
+        {
+            Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
+            End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
+        };
+        measure.Group = [];
+        measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
+        if (elmLibrary.NameAndVersion() is null)
+            throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+        if (!librariesByNameAndVersion.TryGetValue(elmLibrary.NameAndVersion()!, out var libForMeasure))
+            throw new InvalidOperationException(
+                $"We didn't create a measure for library {libForMeasure}");
+        measure.Library = new List<string> { libForMeasure!.Url };
+        return measure;
+    }
+
     private static FhirLibrary CreateLibraryResource(
         FileInfo elmFile,
         FileInfo? cqlFile,
+        string? resourceCanonicalRootUrl,
         AssemblyData assembly,
         CqlTypeToFhirTypeMapper typeCrosswalk,
         Elm.Library? elmLibrary = null)
@@ -199,6 +212,7 @@ internal class ResourcePackager
         library.Name = elmLibrary!.identifier?.id!;
         library.Status = PublicationStatus.Active;
         library.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond).ToString();
+        library.Url = library.CanonicalUri(resourceCanonicalRootUrl);
         var parameters = new List<ParameterDefinition>();
         var inParams = elmLibrary.parameters?
             .Select(pd => ElmParameterToFhir(pd, typeCrosswalk));

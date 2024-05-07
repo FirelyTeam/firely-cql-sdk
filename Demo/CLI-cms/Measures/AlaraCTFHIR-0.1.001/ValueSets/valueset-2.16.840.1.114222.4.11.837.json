@@ -1,0 +1,710 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.114222.4.11.837",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "2.16.840.1.114222.4.11.837"
+  } ],
+  "version": "20121025",
+  "name": "Ethnicity",
+  "title": "Ethnicity",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20230504",
+    "timestamp": "2023-08-02T11:13:51-06:00",
+    "contains": [ {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2135-2",
+      "display": "Hispanic or Latino"
+    }, {
+      "system": "urn:oid:2.16.840.1.113883.6.238",
+      "version": "1.2",
+      "code": "2186-5",
+      "display": "Not Hispanic or Latino"
+    } ]
+  }
+}

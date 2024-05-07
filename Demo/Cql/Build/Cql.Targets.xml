@@ -25,8 +25,8 @@
 	        DependsOnTargets="Download CQL to ELM CLI via Maven"
 	        AfterTargets="Build">
 		<Message Text="Converting CQL to ELM"/>
-		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\Demo\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\Demo\Elm" -locators true -result-types true -signatures All'/>
-		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\CMS\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\CMS\Elm" -locators true -result-types true -signatures All'/>
+		<Exec Command='java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\Demo\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\Demo\Elm" -locators true -result-types true -signatures All'/>
+		<Exec Command='java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\CMS\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\CMS\Elm" -locators true -result-types true -signatures All'/>
 	</Target>
 
 	<Target Name="Delete JAR Dependencies" AfterTargets="Clean">

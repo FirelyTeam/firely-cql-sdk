@@ -1,0 +1,154 @@
+{
+  "resourceType": "Bundle",
+  "id": "AlaraCTFHIR-1d5593d0-f513-46f6-8c2d-538685a61185",
+  "entry": [
+    {
+      "fullUrl": "http://fire.ly/ecqm-content-qicore-2024/measures/AlaraCTFHIR/1d5593d0-f513-46f6-8c2d-538685a61185/Patient/1d5593d0-f513-46f6-8c2d-538685a61185",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "1d5593d0-f513-46f6-8c2d-538685a61185",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient",
+            "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+            "extension": [
+              {
+                "url": "ombCategory",
+                "valueCoding": {
+                  "system": "urn:oid:2.16.840.1.113883.6.238",
+                  "code": "2028-9",
+                  "display": "Asian"
+                }
+              },
+              {
+                "url": "text",
+                "valueString": "Asian"
+              }
+            ]
+          },
+          {
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity",
+            "extension": [
+              {
+                "url": "ombCategory",
+                "valueCoding": {
+                  "system": "urn:oid:2.16.840.1.113883.6.238",
+                  "code": "2135-2",
+                  "display": "Hispanic or Latino"
+                }
+              },
+              {
+                "url": "text",
+                "valueString": "Hispanic or Latino"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "http://hospital.smarthealthit.org",
+            "value": "999999995"
+          }
+        ],
+        "name": [
+          {
+            "family": "ScanOutsideMP",
+            "given": [
+              "IPPFail"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1978-06-12"
+      }
+    },
+    {
+      "fullUrl": "http://fire.ly/ecqm-content-qicore-2024/measures/AlaraCTFHIR/1d5593d0-f513-46f6-8c2d-538685a61185/Observation/ippfail-scanoutsidemp-2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ippfail-scanoutsidemp-2",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "96914-7",
+              "display": "CT dose and image quality category"
+            }
+          ],
+          "text": "CT dose and image quality category"
+        },
+        "subject": {
+          "reference": "Patient/1d5593d0-f513-46f6-8c2d-538685a61185"
+        },
+        "effectiveDateTime": "2026-01-02T00:00:00.000Z",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://alaracare.com",
+              "code": "ABDOPEL RT",
+              "display": "Abdomen or Pelvis Routine Dose"
+            }
+          ]
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "96912-1",
+                  "display": "Calculated CT global noise"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 63,
+              "unit": "[hnsf'U]",
+              "system": "http://unitsofmeasure.org",
+              "code": "[hnsf'U]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "96913-9",
+                  "display": "Calculated CT size-adjusted dose"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 597,
+              "unit": "mGy.cm",
+              "system": "http://unitsofmeasure.org",
+              "code": "mGy.cm"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
