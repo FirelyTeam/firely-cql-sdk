@@ -1072,7 +1072,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			else
 			{
 				return 0;
-			};
+			}
 		};
 
 		return a_();
@@ -1141,7 +1141,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							else
 							{
 								return 0;
-							};
+							}
 						};
 
 						return l_();
@@ -1149,7 +1149,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					else
 					{
 						return 0;
-					};
+					}
 				};
 
 				return h_();
@@ -1157,7 +1157,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			else
 			{
 				return 0;
-			};
+			}
 		};
 
 		return a_();
@@ -1226,7 +1226,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							else
 							{
 								return 0;
-							};
+							}
 						};
 
 						return l_();
@@ -1234,7 +1234,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					else
 					{
 						return 0;
-					};
+					}
 				};
 
 				return h_();
@@ -1242,7 +1242,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			else
 			{
 				return 0;
-			};
+			}
 		};
 
 		return a_();
@@ -1317,7 +1317,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			else
 			{
 				return 4;
-			};
+			}
 		};
 
 		return a_();

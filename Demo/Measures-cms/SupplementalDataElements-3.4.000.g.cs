@@ -118,7 +118,7 @@ public class SupplementalDataElements_3_4_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 		bool? b_(Extension @this)
 		{
@@ -277,7 +277,7 @@ public class SupplementalDataElements_3_4_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 		bool? b_(Extension @this)
 		{
@@ -425,7 +425,7 @@ public class SupplementalDataElements_3_4_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();

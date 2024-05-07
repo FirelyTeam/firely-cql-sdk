@@ -486,7 +486,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 						var bc_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ay_, bb_, "day");
 
 						return bc_;
-					};
+					}
 				};
 				var k_ = PainAssessed?.Value;
 				var l_ = FHIRHelpers_4_3_000.ToValue(k_);

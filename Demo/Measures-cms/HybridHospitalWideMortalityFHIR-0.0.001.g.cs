@@ -656,7 +656,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 					else
 					{
 						return null;
-					};
+					}
 				};
 				var s_ = QICoreCommon_2_0_000.earliest(r_());
 				var t_ = EncounterInpatient?.Period;
@@ -742,7 +742,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 					else
 					{
 						return null;
-					};
+					}
 				};
 				var bj_ = QICoreCommon_2_0_000.earliest(bi_());
 
@@ -810,7 +810,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var cq_ = QICoreCommon_2_0_000.earliest(cp_());
 						var cr_ = EncounterInpatient?.Period;
@@ -896,7 +896,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var eh_ = QICoreCommon_2_0_000.earliest(eg_());
 
@@ -966,7 +966,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var fl_ = QICoreCommon_2_0_000.earliest(fk_());
 						var fm_ = EncounterInpatient?.Period;
@@ -1052,7 +1052,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var hc_ = QICoreCommon_2_0_000.earliest(hb_());
 
@@ -1122,7 +1122,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var ig_ = QICoreCommon_2_0_000.earliest(if_());
 						var ih_ = EncounterInpatient?.Period;
@@ -1208,7 +1208,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var jx_ = QICoreCommon_2_0_000.earliest(jw_());
 
@@ -1278,7 +1278,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var la_ = QICoreCommon_2_0_000.earliest(kz_());
 						var lb_ = EncounterInpatient?.Period;
@@ -1364,7 +1364,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var mr_ = QICoreCommon_2_0_000.earliest(mq_());
 
@@ -1433,7 +1433,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var nu_ = QICoreCommon_2_0_000.earliest(nt_());
 						var nv_ = EncounterInpatient?.Period;
@@ -1519,7 +1519,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var pl_ = QICoreCommon_2_0_000.earliest(pk_());
 
@@ -1588,7 +1588,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var qo_ = QICoreCommon_2_0_000.earliest(qn_());
 						var qp_ = EncounterInpatient?.Period;
@@ -1674,7 +1674,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var sf_ = QICoreCommon_2_0_000.earliest(se_());
 
@@ -1690,7 +1690,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var p_ = QICoreCommon_2_0_000.earliest(o_());
 			var q_ = new Tuple_FdREYEdHOZIcMCNYCRFJYJReA

@@ -1383,7 +1383,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();

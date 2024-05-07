@@ -354,7 +354,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					else
 					{
 						return null;
-					};
+					}
 				};
 				var bo_ = QICoreCommon_2_0_000.earliest(bn_());
 				var bp_ = IschemicStrokeEncounter?.Period;

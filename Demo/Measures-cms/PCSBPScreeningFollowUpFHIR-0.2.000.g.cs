@@ -497,7 +497,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						var aa_ = context.Operators.Interval(x_, z_, true, true);
 
 						return aa_;
-					};
+					}
 				};
 				var p_ = QualifyingEncounter?.Period;
 				var q_ = FHIRHelpers_4_3_000.ToInterval(p_);

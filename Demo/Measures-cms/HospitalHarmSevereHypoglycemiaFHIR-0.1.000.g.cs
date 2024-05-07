@@ -353,7 +353,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var n_ = QICoreCommon_2_0_000.Earliest(m_());
 			var o_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_btymmdgachdragrhofgxbxgho.QualifyingEncounter);
@@ -429,7 +429,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ah_ = QICoreCommon_2_0_000.Earliest(ag_());
 			var ai_ = context.Operators.Quantity(24m, "hours");
@@ -484,7 +484,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var al_ = QICoreCommon_2_0_000.Earliest(ak_());
 			var am_ = context.Operators.Interval(aj_, al_, true, true);
@@ -539,7 +539,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ap_ = QICoreCommon_2_0_000.Earliest(ao_());
 			var aq_ = context.Operators.Not((bool?)(ap_ is null));
@@ -631,7 +631,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var n_ = QICoreCommon_2_0_000.Earliest(m_());
 			object o_()
@@ -684,7 +684,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var p_ = QICoreCommon_2_0_000.Earliest(o_());
 			object q_()
@@ -737,7 +737,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var r_ = QICoreCommon_2_0_000.Earliest(q_());
 			var s_ = context.Operators.Quantity(5m, "minutes");
@@ -794,7 +794,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var x_ = QICoreCommon_2_0_000.Earliest(w_());
 			var y_ = context.Operators.Not((bool?)(x_ is null));
@@ -849,7 +849,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ab_ = QICoreCommon_2_0_000.Earliest(aa_());
 			var ac_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_clljqcgdejtdiiewkzyjpwapd.QualifyingEncounter);
@@ -905,7 +905,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ag_ = QICoreCommon_2_0_000.Earliest(af_());
 			var ai_ = context.Operators.In<CqlDateTime>(ag_, ac_, null);
@@ -1058,7 +1058,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var l_ = QICoreCommon_2_0_000.Earliest(k_());
 			var m_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_hfnempjqliopfnrmypnydhffr.QualifyingEncounter);

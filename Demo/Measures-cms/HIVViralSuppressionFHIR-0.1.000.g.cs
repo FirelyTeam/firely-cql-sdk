@@ -489,7 +489,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();

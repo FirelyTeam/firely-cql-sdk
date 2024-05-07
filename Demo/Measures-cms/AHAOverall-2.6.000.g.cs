@@ -1026,7 +1026,7 @@ public class AHAOverall_2_6_000
 				else
 				{
 					return false;
-				};
+				}
 			};
 
 			return e_();

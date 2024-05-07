@@ -1462,7 +1462,7 @@ public class QICoreCommon_2_0_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();
@@ -1604,7 +1604,7 @@ public class QICoreCommon_2_0_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();
@@ -1807,7 +1807,7 @@ public class QICoreCommon_2_0_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();
@@ -2009,7 +2009,7 @@ public class QICoreCommon_2_0_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();
@@ -2086,7 +2086,7 @@ public class QICoreCommon_2_0_000
 							var aq_ = context.Operators.Interval(ap_, abatementDate, true, true);
 
 							return aq_;
-						};
+						}
 					};
 
 					return ag_();
@@ -2095,7 +2095,7 @@ public class QICoreCommon_2_0_000
 				var af_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ae_);
 
 				return af_;
-			};
+			}
 		};
 
 		return a_();
@@ -2171,7 +2171,7 @@ public class QICoreCommon_2_0_000
 							var aq_ = context.Operators.Interval(ap_, abatementDate, true, true);
 
 							return aq_;
-						};
+						}
 					};
 
 					return ag_();
@@ -2180,7 +2180,7 @@ public class QICoreCommon_2_0_000
 				var af_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ae_);
 
 				return af_;
-			};
+			}
 		};
 
 		return a_();
@@ -2288,7 +2288,7 @@ public class QICoreCommon_2_0_000
 					var h_ = context.Operators.Start(period);
 
 					return h_;
-				};
+				}
 			};
 
 			return f_();
@@ -2323,7 +2323,7 @@ public class QICoreCommon_2_0_000
 					var h_ = context.Operators.Start(period);
 
 					return h_;
-				};
+				}
 			};
 
 			return f_();
@@ -2359,7 +2359,7 @@ public class QICoreCommon_2_0_000
 					var h_ = context.Operators.End(period);
 
 					return h_;
-				};
+				}
 			};
 
 			return f_();
@@ -2394,7 +2394,7 @@ public class QICoreCommon_2_0_000
 					var h_ = context.Operators.End(period);
 
 					return h_;
-				};
+				}
 			};
 
 			return f_();
@@ -2504,7 +2504,7 @@ public class QICoreCommon_2_0_000
 					var ag_ = context.Operators.Add(ac_, af_);
 
 					return ag_;
-				};
+				}
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);
 			var l_ = new Tuple_ddJhZGNHefSCOAJJFEIEcXie
@@ -2569,7 +2569,7 @@ public class QICoreCommon_2_0_000
 					var ag_ = context.Operators.Add(ac_, af_);
 
 					return ag_;
-				};
+				}
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);
 			var l_ = new Tuple_ddJhZGNHefSCOAJJFEIEcXie

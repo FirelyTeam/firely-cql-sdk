@@ -44,16 +44,23 @@ internal static class ExpressionExtensions
 
                 case Enum enumValue
                     when type == typeof(string)
-                         && enumValue.GetType() is {} enumType
+                         && enumValue.GetType() is { } enumType
                          && FhirTypeConverter.IsFhirEnum(enumType):
 
                     var enumLiteral = enumValue.GetLiteral();
                     return (Expression.Constant(enumLiteral), TypeConversion.ExactType);
 
-                case DateTimePrecision dateTimePrecision
+
+                case Hl7.Cql.Elm.DateTimePrecision dateTimePrecision
                     when type == typeof(string):
-                    var dateTimeString = dateTimePrecision.ToString().ToLowerInvariant();
-                    return (Expression.Constant(dateTimeString), TypeConversion.ExactType);
+                    var dateTimeString = Enum.GetName(dateTimePrecision.GetType(), dateTimePrecision);
+                    if (dateTimeString is null)
+                    {
+                        // Still throw an error here, ignoring the `throwError` parameter, because this indicates a bug in the cql.
+                        throw new InvalidOperationException($"Enum value {dateTimeString} is not defined in enum type {typeof(DateTimePrecision)}");
+                    }
+
+                    return (Expression.Constant(dateTimeString.ToLowerInvariant()), TypeConversion.ExactType);
             }
         }
 

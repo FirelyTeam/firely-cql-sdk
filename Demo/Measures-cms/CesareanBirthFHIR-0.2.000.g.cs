@@ -448,7 +448,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var u_ = QICoreCommon_2_0_000.earliest(t_());
 			var v_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
@@ -515,7 +515,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ay_ = QICoreCommon_2_0_000.earliest(ax_());
 
@@ -586,7 +586,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
@@ -668,7 +668,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ay_ = QICoreCommon_2_0_000.earliest(ax_());
 
@@ -739,7 +739,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
@@ -821,7 +821,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ay_ = QICoreCommon_2_0_000.earliest(ax_());
 
@@ -892,7 +892,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var k_ = QICoreCommon_2_0_000.earliest(j_());
 			var l_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
@@ -974,7 +974,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ay_ = QICoreCommon_2_0_000.earliest(ax_());
 
@@ -1080,7 +1080,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var ab_ = QICoreCommon_2_0_000.earliest(aa_());
 						var ac_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
@@ -1153,7 +1153,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var be_ = QICoreCommon_2_0_000.earliest(bd_());
 
@@ -1223,7 +1223,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var ci_ = QICoreCommon_2_0_000.earliest(ch_());
 						var cj_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
@@ -1296,7 +1296,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var dl_ = QICoreCommon_2_0_000.earliest(dk_());
 
@@ -1366,7 +1366,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var ep_ = QICoreCommon_2_0_000.earliest(eo_());
 						var eq_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
@@ -1439,7 +1439,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var fs_ = QICoreCommon_2_0_000.earliest(fr_());
 
@@ -1509,7 +1509,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var gv_ = QICoreCommon_2_0_000.earliest(gu_());
 						var gw_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
@@ -1582,7 +1582,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var hy_ = QICoreCommon_2_0_000.earliest(hx_());
 
@@ -1651,7 +1651,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var jb_ = QICoreCommon_2_0_000.earliest(ja_());
 						var jc_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
@@ -1724,7 +1724,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var ke_ = QICoreCommon_2_0_000.earliest(kd_());
 
@@ -1793,7 +1793,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var lh_ = QICoreCommon_2_0_000.earliest(lg_());
 						var li_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
@@ -1866,7 +1866,7 @@ public class CesareanBirthFHIR_0_2_000
 							else
 							{
 								return null;
-							};
+							}
 						};
 						var mk_ = QICoreCommon_2_0_000.earliest(mj_());
 
@@ -1882,7 +1882,7 @@ public class CesareanBirthFHIR_0_2_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var e_ = QICoreCommon_2_0_000.earliest(d_());
 			var f_ = ThirtysevenWeeksPlusEncounter?.Period;

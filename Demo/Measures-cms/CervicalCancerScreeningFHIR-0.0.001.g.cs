@@ -387,7 +387,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var g_ = QICoreCommon_2_0_000.latest(f_());
 			var h_ = this.Measurement_Period();
@@ -474,7 +474,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var k_ = QICoreCommon_2_0_000.latest(j_());
 			var l_ = context.Operators.DateFrom(k_);
@@ -530,7 +530,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var p_ = QICoreCommon_2_0_000.latest(o_());
 			var q_ = this.Measurement_Period();

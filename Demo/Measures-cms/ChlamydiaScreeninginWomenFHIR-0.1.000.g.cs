@@ -529,7 +529,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					var z_ = context.Operators.Interval(w_, y_, true, true);
 
 					return z_;
-				};
+				}
 			};
 			var q_ = context.Operators.SameOrBefore(o_, p_(), null);
 			var r_ = context.Operators.And(l_, q_);
@@ -986,7 +986,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var h_ = QICoreCommon_2_0_000.Latest(g_());
 			var i_ = this.Measurement_Period();

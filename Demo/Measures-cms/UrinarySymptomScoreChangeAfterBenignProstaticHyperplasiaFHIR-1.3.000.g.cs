@@ -497,7 +497,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var s_ = QICoreCommon_2_0_000.earliest(r_());
 			var t_ = IPSSAssessment?.Value;
@@ -616,7 +616,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var ad_ = QICoreCommon_2_0_000.earliest(ac_());
 			var ae_ = AUASIAssessment?.Value;
@@ -676,7 +676,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					else
 					{
 						return null;
-					};
+					}
 				};
 				var bl_ = QICoreCommon_2_0_000.earliest(bk_());
 				object bm_()
@@ -729,7 +729,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					else
 					{
 						return null;
-					};
+					}
 				};
 				var bn_ = QICoreCommon_2_0_000.earliest(bm_());
 				var bo_ = context.Operators.SameAs(bl_, bn_, "day");
@@ -824,7 +824,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					else
 					{
 						return null;
-					};
+					}
 				};
 				var dw_ = QICoreCommon_2_0_000.earliest(dv_());
 

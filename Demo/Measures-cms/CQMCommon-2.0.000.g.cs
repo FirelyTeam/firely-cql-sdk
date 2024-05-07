@@ -322,7 +322,7 @@ public class CQMCommon_2_0_000
 					var o_ = context.Operators.Interval(k_, n_, true, false);
 
 					return o_;
-				};
+				}
 			};
 
 			return f_();
@@ -364,7 +364,7 @@ public class CQMCommon_2_0_000
 					var o_ = context.Operators.Interval(k_, n_, true, true);
 
 					return o_;
-				};
+				}
 			};
 
 			return f_();
@@ -407,7 +407,7 @@ public class CQMCommon_2_0_000
 					var k_ = context.Operators.Flatten<Encounter.LocationComponent>((j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
 					return k_;
-				};
+				}
 			};
 
 			return f_();
@@ -449,7 +449,7 @@ public class CQMCommon_2_0_000
 					var k_ = context.Operators.Flatten<Encounter.LocationComponent>((j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
 					return k_;
-				};
+				}
 			};
 
 			return f_();
@@ -3294,7 +3294,7 @@ public class CQMCommon_2_0_000
 				var l_ = FHIRHelpers_4_3_000.ToConcept(k_?.Code);
 
 				return l_;
-			};
+			}
 		};
 
 		return a_();
@@ -3342,7 +3342,7 @@ public class CQMCommon_2_0_000
 				var l_ = FHIRHelpers_4_3_000.ToConcept(k_?.Code);
 
 				return l_;
-			};
+			}
 		};
 
 		return a_();

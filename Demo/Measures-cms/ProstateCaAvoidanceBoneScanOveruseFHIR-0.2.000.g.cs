@@ -769,7 +769,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 						var aq_ = context.Operators.Interval(al_, ap_, true, true);
 
 						return aq_;
-					};
+					}
 				};
 				var s_ = MostRecentProstateCancerStaging?.Effective;
 				var t_ = FHIRHelpers_4_3_000.ToValue(s_);

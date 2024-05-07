@@ -949,7 +949,7 @@ public class CumulativeMedicationDuration_4_0_000
 				var gt_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", gr_, gs_);
 
 				return (decimal?)gt_;
-			};
+			}
 		};
 
 		return a_();
@@ -1536,7 +1536,7 @@ public class CumulativeMedicationDuration_4_0_000
 				var fo_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", fm_, fn_);
 
 				return (decimal?)fo_;
-			};
+			}
 		};
 
 		return a_();
@@ -1798,7 +1798,7 @@ public class CumulativeMedicationDuration_4_0_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 
 			return e_();
@@ -1963,7 +1963,7 @@ public class CumulativeMedicationDuration_4_0_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 
 			return e_();
@@ -2030,7 +2030,7 @@ public class CumulativeMedicationDuration_4_0_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 
 			return e_();
@@ -2066,7 +2066,7 @@ public class CumulativeMedicationDuration_4_0_000
 			else
 			{
 				return default;
-			};
+			}
 		};
 
 		return a_();
@@ -2146,7 +2146,7 @@ public class CumulativeMedicationDuration_4_0_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();

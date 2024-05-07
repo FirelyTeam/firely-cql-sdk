@@ -1403,7 +1403,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 
 		return a_();
@@ -1458,7 +1458,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 
 			return e_();

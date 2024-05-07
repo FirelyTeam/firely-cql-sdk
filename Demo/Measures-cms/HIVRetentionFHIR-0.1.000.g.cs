@@ -275,7 +275,7 @@ public class HIVRetentionFHIR_0_1_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 		bool? b_(Extension @this)
 		{
@@ -407,7 +407,7 @@ public class HIVRetentionFHIR_0_1_000
 			else
 			{
 				return null;
-			};
+			}
 		};
 		bool? b_(Extension @this)
 		{
@@ -708,7 +708,7 @@ public class HIVRetentionFHIR_0_1_000
 						var bg_ = context.Operators.Interval(bd_, bf_, true, true);
 
 						return bg_;
-					};
+					}
 				};
 				var au_ = FHIRHelpers_4_3_000.ToInterval(ap_);
 				var av_ = context.Operators.SameOrBefore(as_(), au_, "day");

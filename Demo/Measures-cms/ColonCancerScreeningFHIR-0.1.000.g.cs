@@ -395,7 +395,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var j_ = QICoreCommon_2_0_000.Latest(i_());
 			var k_ = this.Measurement_Period();
@@ -473,7 +473,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var j_ = QICoreCommon_2_0_000.Latest(i_());
 			var k_ = this.Measurement_Period();
