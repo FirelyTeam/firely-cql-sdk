@@ -476,11 +476,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		bool? y_(Encounter ValidEncounters)
 		{
 			var aa_ = this.Measurement_Period();
-			var ab_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			var ac_ = QICoreCommon_2_0_000.ToInterval((ab_ as object));
-			var ad_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ac_, "day");
+			var ab_ = ValidEncounters?.Period;
+			var ac_ = FHIRHelpers_4_3_000.ToInterval(ab_);
+			var ad_ = QICoreCommon_2_0_000.ToInterval((ac_ as object));
+			var ae_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ad_, "day");
 
-			return ad_;
+			return ae_;
 		};
 		var z_ = context.Operators.Where<Encounter>(x_, y_);
 
@@ -499,39 +500,41 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation SexualActivityAssessment)
 		{
-			var h_ = FHIRHelpers_4_3_000.ToValue(SexualActivityAssessment?.Value);
-			var i_ = this.Yes__qualifier_value_();
-			var j_ = context.Operators.ConvertCodeToConcept(i_);
-			var k_ = context.Operators.Equivalent((h_ as CqlConcept), j_);
-			var l_ = FHIRHelpers_4_3_000.ToValue(SexualActivityAssessment?.Effective);
-			var m_ = QICoreCommon_2_0_000.ToInterval(l_);
-			CqlInterval<CqlDateTime> n_()
+			var h_ = SexualActivityAssessment?.Value;
+			var i_ = FHIRHelpers_4_3_000.ToValue(h_);
+			var j_ = this.Yes__qualifier_value_();
+			var k_ = context.Operators.ConvertCodeToConcept(j_);
+			var l_ = context.Operators.Equivalent((i_ as CqlConcept), k_);
+			var m_ = SexualActivityAssessment?.Effective;
+			var n_ = FHIRHelpers_4_3_000.ToValue(m_);
+			var o_ = QICoreCommon_2_0_000.ToInterval(n_);
+			CqlInterval<CqlDateTime> p_()
 			{
-				bool q_()
+				bool s_()
 				{
-					var r_ = this.Measurement_Period();
-					var s_ = context.Operators.End(r_);
+					var t_ = this.Measurement_Period();
+					var u_ = context.Operators.End(t_);
 
-					return (s_ is null);
+					return (u_ is null);
 				};
-				if (q_())
+				if (s_())
 				{
 					return null;
 				}
 				else
 				{
-					var t_ = this.Measurement_Period();
-					var u_ = context.Operators.End(t_);
-					var w_ = context.Operators.End(t_);
-					var x_ = context.Operators.Interval(u_, w_, true, true);
+					var v_ = this.Measurement_Period();
+					var w_ = context.Operators.End(v_);
+					var y_ = context.Operators.End(v_);
+					var z_ = context.Operators.Interval(w_, y_, true, true);
 
-					return x_;
+					return z_;
 				};
 			};
-			var o_ = context.Operators.SameOrBefore(m_, n_(), null);
-			var p_ = context.Operators.And(k_, o_);
+			var q_ = context.Operators.SameOrBefore(o_, p_(), null);
+			var r_ = context.Operators.And(l_, q_);
 
-			return p_;
+			return r_;
 		};
 		var f_ = context.Operators.Where<Observation>(d_, e_);
 		var g_ = context.Operators.Exists<Observation>(f_);
@@ -581,13 +584,17 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		bool? g_(MedicationRequest ActiveContraceptives)
 		{
 			var j_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ActiveContraceptives);
-			var k_ = context.Operators.ConvertDateToDateTime(j_?.low);
-			var m_ = context.Operators.ConvertDateToDateTime(j_?.high);
-			var p_ = context.Operators.Interval(k_, m_, j_?.lowClosed, j_?.highClosed);
-			var q_ = this.Measurement_Period();
-			var r_ = context.Operators.Overlaps(p_, q_, null);
+			var k_ = j_?.low;
+			var l_ = context.Operators.ConvertDateToDateTime(k_);
+			var n_ = j_?.high;
+			var o_ = context.Operators.ConvertDateToDateTime(n_);
+			var q_ = j_?.lowClosed;
+			var s_ = j_?.highClosed;
+			var t_ = context.Operators.Interval(l_, o_, q_, s_);
+			var u_ = this.Measurement_Period();
+			var v_ = context.Operators.Overlaps(t_, u_, null);
 
-			return r_;
+			return v_;
 		};
 		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		var i_ = context.Operators.Exists<MedicationRequest>(h_);
@@ -609,11 +616,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		bool? g_(MedicationRequest OrderedContraceptives)
 		{
 			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.Convert<CqlDateTime>(OrderedContraceptives?.AuthoredOnElement);
-			var l_ = QICoreCommon_2_0_000.ToInterval((k_ as object));
-			var m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
+			var k_ = OrderedContraceptives?.AuthoredOnElement;
+			var l_ = context.Operators.Convert<CqlDateTime>(k_);
+			var m_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
+			var n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, m_, "day");
 
-			return m_;
+			return n_;
 		};
 		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		var i_ = context.Operators.Exists<MedicationRequest>(h_);
@@ -639,11 +647,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		bool? j_(ServiceRequest LabOrders)
 		{
 			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.Convert<CqlDateTime>(LabOrders?.AuthoredOnElement);
-			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, "day");
+			var n_ = LabOrders?.AuthoredOnElement;
+			var o_ = context.Operators.Convert<CqlDateTime>(n_);
+			var p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
+			var q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
-			return p_;
+			return q_;
 		};
 		var k_ = context.Operators.Where<ServiceRequest>(i_, j_);
 		var l_ = context.Operators.Exists<ServiceRequest>(k_);
@@ -663,11 +672,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		bool? d_(ServiceRequest PregnancyTest)
 		{
 			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.Convert<CqlDateTime>(PregnancyTest?.AuthoredOnElement);
-			var k_ = QICoreCommon_2_0_000.ToInterval((j_ as object));
-			var l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, k_, "day");
+			var j_ = PregnancyTest?.AuthoredOnElement;
+			var k_ = context.Operators.Convert<CqlDateTime>(j_);
+			var l_ = QICoreCommon_2_0_000.ToInterval((k_ as object));
+			var m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, l_, "day");
 
-			return l_;
+			return m_;
 		};
 		var e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		var f_ = context.Operators.Exists<ServiceRequest>(e_);
@@ -689,11 +699,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		bool? d_(ServiceRequest SexualActivityDiagnostics)
 		{
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.Convert<CqlDateTime>(SexualActivityDiagnostics?.AuthoredOnElement);
-			var i_ = QICoreCommon_2_0_000.ToInterval((h_ as object));
-			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
+			var h_ = SexualActivityDiagnostics?.AuthoredOnElement;
+			var i_ = context.Operators.Convert<CqlDateTime>(h_);
+			var j_ = QICoreCommon_2_0_000.ToInterval((i_ as object));
+			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
-			return j_;
+			return k_;
 		};
 		var e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		var f_ = context.Operators.Exists<ServiceRequest>(e_);
@@ -713,11 +724,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		bool? d_(Procedure ProceduresForSexualActivity)
 		{
 			var g_ = this.Measurement_Period();
-			var h_ = FHIRHelpers_4_3_000.ToValue(ProceduresForSexualActivity?.Performed);
-			var i_ = QICoreCommon_2_0_000.ToInterval(h_);
-			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
+			var h_ = ProceduresForSexualActivity?.Performed;
+			var i_ = FHIRHelpers_4_3_000.ToValue(h_);
+			var j_ = QICoreCommon_2_0_000.ToInterval(i_);
+			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
-			return j_;
+			return k_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = context.Operators.Exists<Procedure>(e_);
@@ -790,28 +802,33 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			var o_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(n_);
 			bool? p_(ServiceRequest XrayOrder)
 			{
-				var t_ = context.Operators.Convert<CqlDateTime>(XrayOrder?.AuthoredOnElement);
-				var u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
-				var v_ = context.Operators.Start(u_);
-				var w_ = context.Operators.Convert<CqlDateTime>(PregnancyTest?.AuthoredOnElement);
-				var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-				var y_ = context.Operators.End(x_);
-				var aa_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-				var ab_ = context.Operators.End(aa_);
-				var ac_ = context.Operators.Quantity(6m, "days");
-				var ad_ = context.Operators.Add(ab_, ac_);
-				var ae_ = context.Operators.Interval(y_, ad_, true, true);
-				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, "day");
-				var ah_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-				var ai_ = context.Operators.End(ah_);
-				var aj_ = context.Operators.Not((bool?)(ai_ is null));
-				var ak_ = context.Operators.And(af_, aj_);
-				var al_ = this.Measurement_Period();
-				var an_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-				var ao_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(al_, an_, null);
-				var ap_ = context.Operators.And(ak_, ao_);
+				var t_ = XrayOrder?.AuthoredOnElement;
+				var u_ = context.Operators.Convert<CqlDateTime>(t_);
+				var v_ = QICoreCommon_2_0_000.ToInterval((u_ as object));
+				var w_ = context.Operators.Start(v_);
+				var x_ = PregnancyTest?.AuthoredOnElement;
+				var y_ = context.Operators.Convert<CqlDateTime>(x_);
+				var z_ = QICoreCommon_2_0_000.ToInterval((y_ as object));
+				var aa_ = context.Operators.End(z_);
+				var ac_ = context.Operators.Convert<CqlDateTime>(x_);
+				var ad_ = QICoreCommon_2_0_000.ToInterval((ac_ as object));
+				var ae_ = context.Operators.End(ad_);
+				var af_ = context.Operators.Quantity(6m, "days");
+				var ag_ = context.Operators.Add(ae_, af_);
+				var ah_ = context.Operators.Interval(aa_, ag_, true, true);
+				var ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+				var ak_ = context.Operators.Convert<CqlDateTime>(x_);
+				var al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
+				var am_ = context.Operators.End(al_);
+				var an_ = context.Operators.Not((bool?)(am_ is null));
+				var ao_ = context.Operators.And(ai_, an_);
+				var ap_ = this.Measurement_Period();
+				var ar_ = context.Operators.Convert<CqlDateTime>(x_);
+				var as_ = QICoreCommon_2_0_000.ToInterval((ar_ as object));
+				var at_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, as_, null);
+				var au_ = context.Operators.And(ao_, at_);
 
-				return ap_;
+				return au_;
 			};
 			var q_ = context.Operators.Where<ServiceRequest>(o_, p_);
 			ServiceRequest r_(ServiceRequest XrayOrder) => 
@@ -825,42 +842,47 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var h_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(g_);
 		IEnumerable<ServiceRequest> i_(ServiceRequest PregnancyTestOrder)
 		{
-			var aq_ = this.Isotretinoin();
-			var ar_ = context.Operators.RetrieveByValueSet<MedicationRequest>(aq_, null);
-			var at_ = context.Operators.RetrieveByValueSet<MedicationRequest>(aq_, null);
-			var au_ = context.Operators.ListUnion<MedicationRequest>(ar_, at_);
-			var av_ = Status_1_6_000.Active_or_Completed_Medication_Request(au_);
-			bool? aw_(MedicationRequest AccutaneOrder)
+			var av_ = this.Isotretinoin();
+			var aw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
+			var ay_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
+			var az_ = context.Operators.ListUnion<MedicationRequest>(aw_, ay_);
+			var ba_ = Status_1_6_000.Active_or_Completed_Medication_Request(az_);
+			bool? bb_(MedicationRequest AccutaneOrder)
 			{
-				var ba_ = context.Operators.Convert<CqlDateTime>(AccutaneOrder?.AuthoredOnElement);
-				var bb_ = QICoreCommon_2_0_000.ToInterval((ba_ as object));
-				var bc_ = context.Operators.Start(bb_);
-				var bd_ = context.Operators.Convert<CqlDateTime>(PregnancyTestOrder?.AuthoredOnElement);
-				var be_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
-				var bf_ = context.Operators.End(be_);
-				var bh_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
-				var bi_ = context.Operators.End(bh_);
-				var bj_ = context.Operators.Quantity(6m, "days");
-				var bk_ = context.Operators.Add(bi_, bj_);
-				var bl_ = context.Operators.Interval(bf_, bk_, true, true);
-				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, "day");
-				var bo_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
-				var bp_ = context.Operators.End(bo_);
-				var bq_ = context.Operators.Not((bool?)(bp_ is null));
-				var br_ = context.Operators.And(bm_, bq_);
-				var bs_ = this.Measurement_Period();
-				var bu_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
-				var bv_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bs_, bu_, null);
-				var bw_ = context.Operators.And(br_, bv_);
+				var bf_ = AccutaneOrder?.AuthoredOnElement;
+				var bg_ = context.Operators.Convert<CqlDateTime>(bf_);
+				var bh_ = QICoreCommon_2_0_000.ToInterval((bg_ as object));
+				var bi_ = context.Operators.Start(bh_);
+				var bj_ = PregnancyTestOrder?.AuthoredOnElement;
+				var bk_ = context.Operators.Convert<CqlDateTime>(bj_);
+				var bl_ = QICoreCommon_2_0_000.ToInterval((bk_ as object));
+				var bm_ = context.Operators.End(bl_);
+				var bo_ = context.Operators.Convert<CqlDateTime>(bj_);
+				var bp_ = QICoreCommon_2_0_000.ToInterval((bo_ as object));
+				var bq_ = context.Operators.End(bp_);
+				var br_ = context.Operators.Quantity(6m, "days");
+				var bs_ = context.Operators.Add(bq_, br_);
+				var bt_ = context.Operators.Interval(bm_, bs_, true, true);
+				var bu_ = context.Operators.In<CqlDateTime>(bi_, bt_, "day");
+				var bw_ = context.Operators.Convert<CqlDateTime>(bj_);
+				var bx_ = QICoreCommon_2_0_000.ToInterval((bw_ as object));
+				var by_ = context.Operators.End(bx_);
+				var bz_ = context.Operators.Not((bool?)(by_ is null));
+				var ca_ = context.Operators.And(bu_, bz_);
+				var cb_ = this.Measurement_Period();
+				var cd_ = context.Operators.Convert<CqlDateTime>(bj_);
+				var ce_ = QICoreCommon_2_0_000.ToInterval((cd_ as object));
+				var cf_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cb_, ce_, null);
+				var cg_ = context.Operators.And(ca_, cf_);
 
-				return bw_;
+				return cg_;
 			};
-			var ax_ = context.Operators.Where<MedicationRequest>(av_, aw_);
-			ServiceRequest ay_(MedicationRequest AccutaneOrder) => 
+			var bc_ = context.Operators.Where<MedicationRequest>(ba_, bb_);
+			ServiceRequest bd_(MedicationRequest AccutaneOrder) => 
 				PregnancyTestOrder;
-			var az_ = context.Operators.Select<MedicationRequest, ServiceRequest>(ax_, ay_);
+			var be_ = context.Operators.Select<MedicationRequest, ServiceRequest>(bc_, bd_);
 
-			return az_;
+			return be_;
 		};
 		var j_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(h_, i_);
 		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
@@ -916,44 +938,50 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		{
 			object g_()
 			{
-				bool n_()
-				{
-					var q_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
-					var r_ = q_ is CqlDateTime;
-
-					return r_;
-				};
 				bool o_()
 				{
-					var s_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
-					var t_ = s_ is CqlInterval<CqlDateTime>;
+					var r_ = ChlamydiaTest?.Effective;
+					var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+					var t_ = s_ is CqlDateTime;
 
 					return t_;
 				};
 				bool p_()
 				{
-					var u_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
-					var v_ = u_ is CqlDateTime;
+					var u_ = ChlamydiaTest?.Effective;
+					var v_ = FHIRHelpers_4_3_000.ToValue(u_);
+					var w_ = v_ is CqlInterval<CqlDateTime>;
 
-					return v_;
+					return w_;
 				};
-				if (n_())
+				bool q_()
 				{
-					var w_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var x_ = ChlamydiaTest?.Effective;
+					var y_ = FHIRHelpers_4_3_000.ToValue(x_);
+					var z_ = y_ is CqlDateTime;
 
-					return ((w_ as CqlDateTime) as object);
-				}
-				else if (o_())
+					return z_;
+				};
+				if (o_())
 				{
-					var x_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var aa_ = ChlamydiaTest?.Effective;
+					var ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
 
-					return ((x_ as CqlInterval<CqlDateTime>) as object);
+					return ((ab_ as CqlDateTime) as object);
 				}
 				else if (p_())
 				{
-					var y_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Effective);
+					var ac_ = ChlamydiaTest?.Effective;
+					var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 
-					return ((y_ as CqlDateTime) as object);
+					return ((ad_ as CqlInterval<CqlDateTime>) as object);
+				}
+				else if (q_())
+				{
+					var ae_ = ChlamydiaTest?.Effective;
+					var af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+
+					return ((af_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -963,11 +991,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			var h_ = QICoreCommon_2_0_000.Latest(g_());
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.In<CqlDateTime>(h_, i_, "day");
-			var k_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Value);
-			var l_ = context.Operators.Not((bool?)(k_ is null));
-			var m_ = context.Operators.And(j_, l_);
+			var k_ = ChlamydiaTest?.Value;
+			var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+			var m_ = context.Operators.Not((bool?)(l_ is null));
+			var n_ = context.Operators.And(j_, m_);
 
-			return m_;
+			return n_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		var f_ = context.Operators.Exists<Observation>(e_);

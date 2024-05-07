@@ -19,14 +19,15 @@ internal readonly record struct CannotBindToCqlOperatorError(
     string MethodName,
     Expression[] MethodArguments,
     Type[] GenericTypeArguments,
-    IReadOnlyCollection<MethodInfo> AvailableMethods) : ICqlError
+    IReadOnlyCollection<MethodInfo> AvailableMethods,
+    MethodCSharpFormat? MethodCSharpFormat = null) : ICqlError
 {
     public string GetMessage()
     {
         StringBuilder sb = new();
         sb.Append("Mo suitable method could be bound from:");
         sb.Append(Defaults.NextItem);
-        sb.AppendCSharp(MethodName, MethodArguments, GenericTypeArguments);
+        sb.AppendCSharp(MethodName, MethodArguments, GenericTypeArguments, MethodCSharpFormat);
         if (AvailableMethods.Count > 0)
         {
             sb.Append('\n');
@@ -34,7 +35,7 @@ internal readonly record struct CannotBindToCqlOperatorError(
             foreach (var availableMethod in AvailableMethods)
             {
                 sb.Append(Defaults.NextItem);
-                sb.AppendCSharp(availableMethod);
+                sb.AppendCSharp(availableMethod, MethodCSharpFormat);
             }
         }
         var message = sb.ToString();

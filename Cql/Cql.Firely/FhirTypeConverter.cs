@@ -1,4 +1,4 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -12,6 +12,7 @@ using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
 using System.Reflection;
 using System.Text;
+using Hl7.Cql.Abstractions.Infrastructure;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
@@ -42,14 +43,17 @@ namespace Hl7.Cql.Fhir
                 _dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
             }
 
-            return TypeConverter
-                .Create()
-                .ConvertDataTypeChoices()
-                .CreateQuantityConversions()
-                .ConvertSystemTypes()
-                .ConvertFhirToCqlPrimitives()
-                .ConvertCqlPrimitivesToFhir()
-                .ConvertCodeTypes(model);
+            var converter = TypeConverter
+                            .Create()
+                            .ConvertDataTypeChoices()
+                            .CreateQuantityConversions()
+                            .ConvertSystemTypes()
+                            .ConvertFhirToCqlPrimitives()
+                            .ConvertCqlPrimitivesToFhir()
+                            .ConvertCodeTypes(model)
+                            .ConvertEnumToStrings()
+                            ;
+            return converter;
         }
 
         internal static TypeConverter CreateQuantityConversions(this TypeConverter converter)
@@ -211,6 +215,29 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
+        private class EnumToStringTypeConverterEntry : ITypeConverterEntry
+        {
+            public bool Handles(Type from, Type to)
+            {
+                var shouldHandle =
+                    from.IsNullable(out var nonNullableType)
+                    | // Don't change to &&
+                    nonNullableType.IsEnum
+                    && nonNullableType.GetCustomAttribute<FhirEnumerationAttribute>() is {}
+                    && to == typeof(string);
+                return shouldHandle;
+            }
+
+            public object? Convert(object? instance, Type to) =>
+                instance is Enum e ? e.GetLiteral() : null;
+        }
+
+        internal static TypeConverter ConvertEnumToStrings(this TypeConverter converter)
+        {
+            converter.AddConverter(new EnumToStringTypeConverterEntry());
+            return converter;
+        }
+
         internal static TypeConverter ConvertCqlPrimitivesToFhir(this TypeConverter converter)
         {
             converter.AddConversion((CqlDate f) => new M.Date(f.ToString()));
@@ -369,14 +396,12 @@ namespace Hl7.Cql.Fhir
                 var codeType = typeof(M.Code<>).MakeGenericType(enumType);
                 var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
 
-                // converter.AddConversion(codeType, typeof(CqlCode), (code) =>
-                // {
-                //     var systemAndCode = (M.ISystemAndCode)code;
-                //     return new CqlCode(systemAndCode.Code, systemAndCode.System);
-                // });
-
+                //converter.AddConversion(codeType, typeof(CqlCode), (code) =>
+                //{
+                //    var systemAndCode = (M.ISystemAndCode)code;
+                //    return new CqlCode(systemAndCode.Code, systemAndCode.System);
+                //});
                 //converter.AddConversion(codeType, nullableEnumType, (code) => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
-
                 //converter.AddConversion(enumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
 
                 converter.AddConversion(nullableEnumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);

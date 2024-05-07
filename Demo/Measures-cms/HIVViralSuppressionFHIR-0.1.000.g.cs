@@ -349,10 +349,11 @@ public class HIVViralSuppressionFHIR_0_1_000
 			var an_ = context.Operators.Quantity(240m, "days");
 			var ao_ = context.Operators.Add(am_, an_);
 			var ap_ = context.Operators.Interval(ak_, ao_, true, true);
-			var aq_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
-			var ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, aq_, "day");
+			var aq_ = QualifyingEncounter?.Period;
+			var ar_ = FHIRHelpers_4_3_000.ToInterval(aq_);
+			var as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
 
-			return ar_;
+			return as_;
 		};
 		var ah_ = context.Operators.Where<Encounter>(af_, ag_);
 		var ai_ = context.Operators.Exists<Encounter>(ah_);
@@ -442,42 +443,48 @@ public class HIVViralSuppressionFHIR_0_1_000
 			{
 				bool l_()
 				{
-					var o_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
-					var p_ = o_ is CqlDateTime;
+					var o_ = ViralLoad?.Effective;
+					var p_ = FHIRHelpers_4_3_000.ToValue(o_);
+					var q_ = p_ is CqlDateTime;
 
-					return p_;
+					return q_;
 				};
 				bool m_()
 				{
-					var q_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
-					var r_ = q_ is CqlInterval<CqlDateTime>;
-
-					return r_;
-				};
-				bool n_()
-				{
-					var s_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
-					var t_ = s_ is CqlDateTime;
+					var r_ = ViralLoad?.Effective;
+					var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+					var t_ = s_ is CqlInterval<CqlDateTime>;
 
 					return t_;
 				};
+				bool n_()
+				{
+					var u_ = ViralLoad?.Effective;
+					var v_ = FHIRHelpers_4_3_000.ToValue(u_);
+					var w_ = v_ is CqlDateTime;
+
+					return w_;
+				};
 				if (l_())
 				{
-					var u_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var x_ = ViralLoad?.Effective;
+					var y_ = FHIRHelpers_4_3_000.ToValue(x_);
 
-					return ((u_ as CqlDateTime) as object);
+					return ((y_ as CqlDateTime) as object);
 				}
 				else if (m_())
 				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var z_ = ViralLoad?.Effective;
+					var aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
-					return ((v_ as CqlInterval<CqlDateTime>) as object);
+					return ((aa_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (n_())
 				{
-					var w_ = FHIRHelpers_4_3_000.ToValue(ViralLoad?.Effective);
+					var ab_ = ViralLoad?.Effective;
+					var ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return ((w_ as CqlDateTime) as object);
+					return ((ac_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -493,11 +500,12 @@ public class HIVViralSuppressionFHIR_0_1_000
 		var d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			var x_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var y_ = QICoreCommon_2_0_000.ToInterval(x_);
-			var z_ = context.Operators.Start(y_);
+			var ad_ = @this?.Effective;
+			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			var ag_ = context.Operators.Start(af_);
 
-			return z_;
+			return ag_;
 		};
 		var f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.Last<Observation>(f_);

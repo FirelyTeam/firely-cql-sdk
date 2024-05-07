@@ -166,10 +166,11 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		bool? d_(Encounter ValidEncounter)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, g_, "day");
+			var g_ = ValidEncounter?.Period;
+			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
-			return h_;
+			return i_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
@@ -230,23 +231,25 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure FluorideApplication)
 		{
-			var j_ = FHIRHelpers_4_3_000.ToValue(FluorideApplication?.Performed);
-			var k_ = QICoreCommon_2_0_000.toInterval(j_);
-			var l_ = context.Operators.End(k_);
-			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.In<CqlDateTime>(l_, m_, "day");
+			var j_ = FluorideApplication?.Performed;
+			var k_ = FHIRHelpers_4_3_000.ToValue(j_);
+			var l_ = QICoreCommon_2_0_000.toInterval(k_);
+			var m_ = context.Operators.End(l_);
+			var n_ = this.Measurement_Period();
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 
-			return n_;
+			return o_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlDate f_(Procedure FluorideApplication)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(FluorideApplication?.Performed);
-			var p_ = QICoreCommon_2_0_000.toInterval(o_);
-			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.DateFrom(q_);
+			var p_ = FluorideApplication?.Performed;
+			var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+			var r_ = QICoreCommon_2_0_000.toInterval(q_);
+			var s_ = context.Operators.End(r_);
+			var t_ = context.Operators.DateFrom(s_);
 
-			return r_;
+			return t_;
 		};
 		var g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
 		var h_ = context.Operators.Count<CqlDate>(g_);

@@ -389,26 +389,30 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		};
 		bool? b_(Condition Diagnosis)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.ClinicalStatus);
-			var g_ = QICoreCommon_2_0_000.active();
-			var h_ = context.Operators.ConvertCodeToConcept(g_);
-			var i_ = context.Operators.Equivalent(f_, h_);
-			var j_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.VerificationStatus);
-			var k_ = QICoreCommon_2_0_000.unconfirmed();
-			var l_ = context.Operators.ConvertCodeToConcept(k_);
-			var m_ = context.Operators.Equivalent(j_, l_);
-			var o_ = QICoreCommon_2_0_000.refuted();
-			var p_ = context.Operators.ConvertCodeToConcept(o_);
-			var q_ = context.Operators.Equivalent(j_, p_);
-			var r_ = context.Operators.Or(m_, q_);
-			var t_ = QICoreCommon_2_0_000.entered_in_error();
-			var u_ = context.Operators.ConvertCodeToConcept(t_);
-			var v_ = context.Operators.Equivalent(j_, u_);
-			var w_ = context.Operators.Or(r_, v_);
-			var x_ = context.Operators.Not(w_);
-			var y_ = context.Operators.And(i_, x_);
+			var f_ = Diagnosis?.ClinicalStatus;
+			var g_ = FHIRHelpers_4_3_000.ToConcept(f_);
+			var h_ = QICoreCommon_2_0_000.active();
+			var i_ = context.Operators.ConvertCodeToConcept(h_);
+			var j_ = context.Operators.Equivalent(g_, i_);
+			var k_ = Diagnosis?.VerificationStatus;
+			var l_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			var m_ = QICoreCommon_2_0_000.unconfirmed();
+			var n_ = context.Operators.ConvertCodeToConcept(m_);
+			var o_ = context.Operators.Equivalent(l_, n_);
+			var q_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			var r_ = QICoreCommon_2_0_000.refuted();
+			var s_ = context.Operators.ConvertCodeToConcept(r_);
+			var t_ = context.Operators.Equivalent(q_, s_);
+			var u_ = context.Operators.Or(o_, t_);
+			var w_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			var x_ = QICoreCommon_2_0_000.entered_in_error();
+			var y_ = context.Operators.ConvertCodeToConcept(x_);
+			var z_ = context.Operators.Equivalent(w_, y_);
+			var aa_ = context.Operators.Or(u_, z_);
+			var ab_ = context.Operators.Not(aa_);
+			var ac_ = context.Operators.And(j_, ab_);
 
-			return y_;
+			return ac_;
 		};
 		var c_ = context.Operators.Where<Condition>((IEnumerable<Condition>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<Condition>(c_);
@@ -452,17 +456,19 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			var k_ = this.Bladder_Cancer_Diagnosis();
 			bool? l_(Condition BladderCancer)
 			{
-				var p_ = FHIRHelpers_4_3_000.ToValue(BladderCancerStaging?.Performed);
-				var q_ = QICoreCommon_2_0_000.toInterval(p_);
-				var r_ = context.Operators.Start(q_);
-				var s_ = QICoreCommon_2_0_000.prevalenceInterval(BladderCancer);
-				var t_ = context.Operators.Start(s_);
-				var u_ = context.Operators.SameOrBefore(r_, t_, "day");
-				var w_ = QICoreCommon_2_0_000.toInterval(p_);
-				var y_ = context.Operators.Overlaps(w_, s_, "day");
-				var z_ = context.Operators.And(u_, y_);
+				var p_ = BladderCancerStaging?.Performed;
+				var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+				var r_ = QICoreCommon_2_0_000.toInterval(q_);
+				var s_ = context.Operators.Start(r_);
+				var t_ = QICoreCommon_2_0_000.prevalenceInterval(BladderCancer);
+				var u_ = context.Operators.Start(t_);
+				var v_ = context.Operators.SameOrBefore(s_, u_, "day");
+				var x_ = FHIRHelpers_4_3_000.ToValue(p_);
+				var y_ = QICoreCommon_2_0_000.toInterval(x_);
+				var aa_ = context.Operators.Overlaps(y_, t_, "day");
+				var ab_ = context.Operators.And(v_, aa_);
 
-				return z_;
+				return ab_;
 			};
 			var m_ = context.Operators.Where<Condition>(k_, l_);
 			Procedure n_(Condition BladderCancer) => 
@@ -474,19 +480,22 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var e_ = context.Operators.SelectMany<Procedure, Procedure>(c_, d_);
 		bool? f_(Procedure BladderCancerStaging)
 		{
-			var aa_ = context.Operators.Convert<string>(BladderCancerStaging?.StatusElement?.Value);
-			var ab_ = context.Operators.Equal(aa_, "completed");
+			var ac_ = BladderCancerStaging?.StatusElement;
+			var ad_ = ac_?.Value;
+			var ae_ = context.Operators.Convert<string>(ad_);
+			var af_ = context.Operators.Equal(ae_, "completed");
 
-			return ab_;
+			return af_;
 		};
 		var g_ = context.Operators.Where<Procedure>(e_, f_);
 		object h_(Procedure @this)
 		{
-			var ac_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
-			var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
-			var ae_ = context.Operators.Start(ad_);
+			var ag_ = @this?.Performed;
+			var ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
+			var ai_ = QICoreCommon_2_0_000.toInterval(ah_);
+			var aj_ = context.Operators.Start(ai_);
 
-			return ae_;
+			return aj_;
 		};
 		var i_ = context.Operators.SortBy<Procedure>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		var j_ = context.Operators.First<Procedure>(i_);
@@ -541,11 +550,12 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			var f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
 			var g_ = this.June_30_of_the_Measurement_Period();
 			var h_ = context.Operators.Interval(f_, g_, true, true);
-			var i_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-			var j_ = QICoreCommon_2_0_000.toInterval(i_);
-			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, "day");
+			var i_ = FirstBladderCancerStaging?.Performed;
+			var j_ = FHIRHelpers_4_3_000.ToValue(i_);
+			var k_ = QICoreCommon_2_0_000.toInterval(j_);
+			var l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, "day");
 
-			return k_;
+			return l_;
 		};
 		var d_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<Procedure>(d_);
@@ -569,11 +579,12 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			var f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
 			var g_ = this.June_30_of_the_Measurement_Period();
 			var h_ = context.Operators.Interval(f_, g_, true, true);
-			var i_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-			var j_ = QICoreCommon_2_0_000.toInterval(i_);
-			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, "day");
+			var i_ = FirstBladderCancerStaging?.Performed;
+			var j_ = FHIRHelpers_4_3_000.ToValue(i_);
+			var k_ = QICoreCommon_2_0_000.toInterval(j_);
+			var l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, "day");
 
-			return k_;
+			return l_;
 		};
 		var d_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)b_, c_);
 		var e_ = context.Operators.SingletonFrom<Procedure>(d_);
@@ -597,10 +608,14 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			};
 			bool? e_(Procedure FirstBladderCancerStagingMP)
 			{
-				var h_ = QICoreCommon_2_0_000.getId(StagingReference?.ReferenceElement?.Value);
-				var i_ = context.Operators.Equal(FirstBladderCancerStagingMP?.IdElement?.Value, h_);
+				var h_ = FirstBladderCancerStagingMP?.IdElement;
+				var i_ = h_?.Value;
+				var j_ = StagingReference?.ReferenceElement;
+				var k_ = j_?.Value;
+				var l_ = QICoreCommon_2_0_000.getId(k_);
+				var m_ = context.Operators.Equal(i_, l_);
 
-				return i_;
+				return m_;
 			};
 			var f_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)d_, e_);
 			var g_ = context.Operators.SingletonFrom<Procedure>(f_);
@@ -621,35 +636,41 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		{
 			var g_ = this.getStagingProcedure(StagingObservation);
 			var h_ = context.Operators.Not((bool?)(g_ is null));
-			var i_ = FHIRHelpers_4_3_000.ToValue(StagingObservation?.Value);
-			var j_ = this.T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_();
-			var k_ = context.Operators.ConvertCodeToConcept(j_);
-			var l_ = context.Operators.Equivalent((i_ as CqlConcept), k_);
-			var n_ = this.Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_();
-			var o_ = context.Operators.ConvertCodeToConcept(n_);
-			var p_ = context.Operators.Equivalent((i_ as CqlConcept), o_);
-			var q_ = context.Operators.Or(l_, p_);
-			var s_ = this.Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_();
-			var t_ = context.Operators.ConvertCodeToConcept(s_);
-			var u_ = context.Operators.Equivalent((i_ as CqlConcept), t_);
-			var v_ = context.Operators.Or(q_, u_);
-			var x_ = this.Carcinoma_in_situ_of_bladder();
-			var y_ = context.Operators.ConvertCodeToConcept(x_);
-			var z_ = context.Operators.Equivalent((i_ as CqlConcept), y_);
-			var aa_ = context.Operators.Or(v_, z_);
-			var ab_ = context.Operators.And(h_, aa_);
-			var ac_ = context.Operators.Convert<Code<ObservationStatus>>(StagingObservation?.StatusElement?.Value);
-			var ad_ = context.Operators.Convert<string>(ac_);
-			var ae_ = new string[]
+			var i_ = StagingObservation?.Value;
+			var j_ = FHIRHelpers_4_3_000.ToValue(i_);
+			var k_ = this.T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_();
+			var l_ = context.Operators.ConvertCodeToConcept(k_);
+			var m_ = context.Operators.Equivalent((j_ as CqlConcept), l_);
+			var o_ = FHIRHelpers_4_3_000.ToValue(i_);
+			var p_ = this.Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_();
+			var q_ = context.Operators.ConvertCodeToConcept(p_);
+			var r_ = context.Operators.Equivalent((o_ as CqlConcept), q_);
+			var s_ = context.Operators.Or(m_, r_);
+			var u_ = FHIRHelpers_4_3_000.ToValue(i_);
+			var v_ = this.Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_();
+			var w_ = context.Operators.ConvertCodeToConcept(v_);
+			var x_ = context.Operators.Equivalent((u_ as CqlConcept), w_);
+			var y_ = context.Operators.Or(s_, x_);
+			var aa_ = FHIRHelpers_4_3_000.ToValue(i_);
+			var ab_ = this.Carcinoma_in_situ_of_bladder();
+			var ac_ = context.Operators.ConvertCodeToConcept(ab_);
+			var ad_ = context.Operators.Equivalent((aa_ as CqlConcept), ac_);
+			var ae_ = context.Operators.Or(y_, ad_);
+			var af_ = context.Operators.And(h_, ae_);
+			var ag_ = StagingObservation?.StatusElement;
+			var ah_ = ag_?.Value;
+			var ai_ = context.Operators.Convert<Code<ObservationStatus>>(ah_);
+			var aj_ = context.Operators.Convert<string>(ai_);
+			var ak_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var af_ = context.Operators.In<string>(ad_, (ae_ as IEnumerable<string>));
-			var ag_ = context.Operators.And(ab_, af_);
+			var al_ = context.Operators.In<string>(aj_, (ak_ as IEnumerable<string>));
+			var am_ = context.Operators.And(af_, al_);
 
-			return ag_;
+			return am_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		var f_ = context.Operators.Exists<Observation>(e_);
@@ -668,18 +689,22 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		bool? c_(Encounter ValidEncounter)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, g_, null);
-			var i_ = FHIRHelpers_4_3_000.ToCode(ValidEncounter?.Class);
-			var j_ = this.@virtual();
-			var k_ = context.Operators.Equivalent(i_, j_);
-			var l_ = context.Operators.Not(k_);
-			var m_ = context.Operators.And(h_, l_);
-			var n_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var o_ = context.Operators.Equal(n_, "finished");
-			var p_ = context.Operators.And(m_, o_);
+			var g_ = ValidEncounter?.Period;
+			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
+			var j_ = ValidEncounter?.Class;
+			var k_ = FHIRHelpers_4_3_000.ToCode(j_);
+			var l_ = this.@virtual();
+			var m_ = context.Operators.Equivalent(k_, l_);
+			var n_ = context.Operators.Not(m_);
+			var o_ = context.Operators.And(i_, n_);
+			var p_ = ValidEncounter?.StatusElement;
+			var q_ = p_?.Value;
+			var r_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(q_);
+			var s_ = context.Operators.Equal(r_, "finished");
+			var t_ = context.Operators.And(o_, s_);
 
-			return p_;
+			return t_;
 		};
 		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		var e_ = context.Operators.Exists<Encounter>(d_);
@@ -735,52 +760,67 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			{
 				bool? p_(Extension @this)
 				{
-					var at_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var au_ = FHIRHelpers_4_3_000.ToString(at_);
-					var av_ = context.Operators.Equal(au_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var aw_ = @this?.Url;
+					var ax_ = context.Operators.Convert<FhirUri>(aw_);
+					var ay_ = FHIRHelpers_4_3_000.ToString(ax_);
+					var az_ = context.Operators.Equal(ay_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return av_;
+					return az_;
 				};
 				var q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), p_);
-				DataType r_(Extension @this) => 
-					@this?.Value;
+				DataType r_(Extension @this)
+				{
+					var ba_ = @this?.Value;
+
+					return ba_;
+				};
 				var s_ = context.Operators.Select<Extension, DataType>(q_, r_);
 				var t_ = context.Operators.SingletonFrom<DataType>(s_);
 				var u_ = context.Operators.Convert<CqlDateTime>(t_);
-				var v_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var w_ = QICoreCommon_2_0_000.toInterval(v_);
-				var x_ = context.Operators.Start(w_);
-				var z_ = QICoreCommon_2_0_000.toInterval(v_);
-				var aa_ = context.Operators.Start(z_);
-				var ab_ = context.Operators.Quantity(6m, "months");
-				var ac_ = context.Operators.Add(aa_, ab_);
-				var ad_ = context.Operators.Interval(x_, ac_, false, true);
-				var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, null);
-				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
-				var ah_ = context.Operators.Start(ag_);
-				var ai_ = context.Operators.Not((bool?)(ah_ is null));
-				var aj_ = context.Operators.And(ae_, ai_);
-				bool? ak_(Extension @this)
+				var v_ = FirstBladderCancerStaging?.Performed;
+				var w_ = FHIRHelpers_4_3_000.ToValue(v_);
+				var x_ = QICoreCommon_2_0_000.toInterval(w_);
+				var y_ = context.Operators.Start(x_);
+				var aa_ = FHIRHelpers_4_3_000.ToValue(v_);
+				var ab_ = QICoreCommon_2_0_000.toInterval(aa_);
+				var ac_ = context.Operators.Start(ab_);
+				var ad_ = context.Operators.Quantity(6m, "months");
+				var ae_ = context.Operators.Add(ac_, ad_);
+				var af_ = context.Operators.Interval(y_, ae_, false, true);
+				var ag_ = context.Operators.In<CqlDateTime>(u_, af_, null);
+				var ai_ = FHIRHelpers_4_3_000.ToValue(v_);
+				var aj_ = QICoreCommon_2_0_000.toInterval(ai_);
+				var ak_ = context.Operators.Start(aj_);
+				var al_ = context.Operators.Not((bool?)(ak_ is null));
+				var am_ = context.Operators.And(ag_, al_);
+				bool? an_(Extension @this)
 				{
-					var aw_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var ax_ = FHIRHelpers_4_3_000.ToString(aw_);
-					var ay_ = context.Operators.Equal(ax_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var bb_ = @this?.Url;
+					var bc_ = context.Operators.Convert<FhirUri>(bb_);
+					var bd_ = FHIRHelpers_4_3_000.ToString(bc_);
+					var be_ = context.Operators.Equal(bd_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return ay_;
+					return be_;
 				};
-				var al_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
+				var ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
-						: null), ak_);
-				var an_ = context.Operators.Select<Extension, DataType>(al_, r_);
-				var ao_ = context.Operators.SingletonFrom<DataType>(an_);
-				var ap_ = context.Operators.Convert<CqlDateTime>(ao_);
-				var aq_ = this.Measurement_Period();
-				var ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, null);
-				var as_ = context.Operators.And(aj_, ar_);
+						: null), an_);
+				DataType ap_(Extension @this)
+				{
+					var bf_ = @this?.Value;
 
-				return as_;
+					return bf_;
+				};
+				var aq_ = context.Operators.Select<Extension, DataType>(ao_, ap_);
+				var ar_ = context.Operators.SingletonFrom<DataType>(aq_);
+				var as_ = context.Operators.Convert<CqlDateTime>(ar_);
+				var at_ = this.Measurement_Period();
+				var au_ = context.Operators.In<CqlDateTime>(as_, at_, null);
+				var av_ = context.Operators.And(am_, au_);
+
+				return av_;
 			};
 			var m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
 			MedicationAdministration n_(Procedure FirstBladderCancerStaging) => 
@@ -792,17 +832,18 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCGNotGiven)
 		{
-			CqlConcept az_(CodeableConcept @this)
+			var bg_ = BCGNotGiven?.StatusReason;
+			CqlConcept bh_(CodeableConcept @this)
 			{
-				var bd_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var bl_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return bd_;
+				return bl_;
 			};
-			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)BCGNotGiven?.StatusReason, az_);
-			var bb_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
-			var bc_ = context.Operators.ConceptsInValueSet(ba_, bb_);
+			var bi_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bg_, bh_);
+			var bj_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
+			var bk_ = context.Operators.ConceptsInValueSet(bi_, bj_);
 
-			return bc_;
+			return bk_;
 		};
 		var i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 
@@ -840,29 +881,34 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			};
 			bool? o_(Procedure FirstBladderCancerStaging)
 			{
-				var s_ = FHIRHelpers_4_3_000.ToValue(BCG?.Effective);
-				var t_ = QICoreCommon_2_0_000.toInterval(s_);
-				var u_ = context.Operators.Start(t_);
-				var v_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var w_ = QICoreCommon_2_0_000.toInterval(v_);
-				var x_ = context.Operators.Start(w_);
-				var z_ = QICoreCommon_2_0_000.toInterval(v_);
-				var aa_ = context.Operators.Start(z_);
-				var ab_ = context.Operators.Quantity(6m, "months");
-				var ac_ = context.Operators.Add(aa_, ab_);
-				var ad_ = context.Operators.Interval(x_, ac_, false, true);
-				var ae_ = context.Operators.In<CqlDateTime>(u_, ad_, null);
-				var ag_ = QICoreCommon_2_0_000.toInterval(v_);
-				var ah_ = context.Operators.Start(ag_);
-				var ai_ = context.Operators.Not((bool?)(ah_ is null));
-				var aj_ = context.Operators.And(ae_, ai_);
-				var al_ = QICoreCommon_2_0_000.toInterval(s_);
-				var am_ = context.Operators.Start(al_);
-				var an_ = this.Measurement_Period();
-				var ao_ = context.Operators.In<CqlDateTime>(am_, an_, null);
-				var ap_ = context.Operators.And(aj_, ao_);
+				var s_ = BCG?.Effective;
+				var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+				var u_ = QICoreCommon_2_0_000.toInterval(t_);
+				var v_ = context.Operators.Start(u_);
+				var w_ = FirstBladderCancerStaging?.Performed;
+				var x_ = FHIRHelpers_4_3_000.ToValue(w_);
+				var y_ = QICoreCommon_2_0_000.toInterval(x_);
+				var z_ = context.Operators.Start(y_);
+				var ab_ = FHIRHelpers_4_3_000.ToValue(w_);
+				var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
+				var ad_ = context.Operators.Start(ac_);
+				var ae_ = context.Operators.Quantity(6m, "months");
+				var af_ = context.Operators.Add(ad_, ae_);
+				var ag_ = context.Operators.Interval(z_, af_, false, true);
+				var ah_ = context.Operators.In<CqlDateTime>(v_, ag_, null);
+				var aj_ = FHIRHelpers_4_3_000.ToValue(w_);
+				var ak_ = QICoreCommon_2_0_000.toInterval(aj_);
+				var al_ = context.Operators.Start(ak_);
+				var am_ = context.Operators.Not((bool?)(al_ is null));
+				var an_ = context.Operators.And(ah_, am_);
+				var ap_ = FHIRHelpers_4_3_000.ToValue(s_);
+				var aq_ = QICoreCommon_2_0_000.toInterval(ap_);
+				var ar_ = context.Operators.Start(aq_);
+				var as_ = this.Measurement_Period();
+				var at_ = context.Operators.In<CqlDateTime>(ar_, as_, null);
+				var au_ = context.Operators.And(an_, at_);
 
-				return ap_;
+				return au_;
 			};
 			var p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
 			MedicationAdministration q_(Procedure FirstBladderCancerStaging) => 
@@ -874,25 +920,28 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCG)
 		{
-			var aq_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(BCG?.StatusElement?.Value);
-			var ar_ = context.Operators.Convert<string>(aq_);
-			var as_ = new string[]
+			var av_ = BCG?.StatusElement;
+			var aw_ = av_?.Value;
+			var ax_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(aw_);
+			var ay_ = context.Operators.Convert<string>(ax_);
+			var az_ = new string[]
 			{
 				"in-progress",
 				"completed",
 			};
-			var at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
+			var ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
 
-			return at_;
+			return ba_;
 		};
 		var i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 		object j_(MedicationAdministration @this)
 		{
-			var au_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var av_ = QICoreCommon_2_0_000.toInterval(au_);
-			var aw_ = context.Operators.Start(av_);
+			var bb_ = @this?.Effective;
+			var bc_ = FHIRHelpers_4_3_000.ToValue(bb_);
+			var bd_ = QICoreCommon_2_0_000.toInterval(bc_);
+			var be_ = context.Operators.Start(bd_);
 
-			return aw_;
+			return be_;
 		};
 		var k_ = context.Operators.SortBy<MedicationAdministration>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
 		var l_ = context.Operators.First<MedicationAdministration>(k_);
@@ -974,11 +1023,12 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? i_(Procedure FirstBladderCancerStaging)
 			{
 				var m_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveTuberculosis);
-				var n_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var o_ = QICoreCommon_2_0_000.toInterval(n_);
-				var p_ = context.Operators.OverlapsAfter(m_, o_, null);
+				var n_ = FirstBladderCancerStaging?.Performed;
+				var o_ = FHIRHelpers_4_3_000.ToValue(n_);
+				var p_ = QICoreCommon_2_0_000.toInterval(o_);
+				var q_ = context.Operators.OverlapsAfter(m_, p_, null);
 
-				return p_;
+				return q_;
 			};
 			var j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
 			Condition k_(Procedure FirstBladderCancerStaging) => 
@@ -990,9 +1040,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		bool? e_(Condition ActiveTuberculosis)
 		{
-			var q_ = this.isConfirmedActiveDiagnosis(ActiveTuberculosis);
+			var r_ = this.isConfirmedActiveDiagnosis(ActiveTuberculosis);
 
-			return q_;
+			return r_;
 		};
 		var f_ = context.Operators.Where<Condition>(d_, e_);
 
@@ -1021,12 +1071,13 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var n_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ImmunosuppressiveDrugs);
 				var o_ = context.Operators.Start(n_);
 				var p_ = context.Operators.ConvertDateToDateTime(o_);
-				var q_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var r_ = QICoreCommon_2_0_000.toInterval(q_);
-				var s_ = context.Operators.Start(r_);
-				var t_ = context.Operators.SameOrBefore(p_, s_, null);
+				var q_ = FirstBladderCancerStaging?.Performed;
+				var r_ = FHIRHelpers_4_3_000.ToValue(q_);
+				var s_ = QICoreCommon_2_0_000.toInterval(r_);
+				var t_ = context.Operators.Start(s_);
+				var u_ = context.Operators.SameOrBefore(p_, t_, null);
 
-				return t_;
+				return u_;
 			};
 			var k_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)i_, j_);
 			MedicationRequest l_(Procedure FirstBladderCancerStaging) => 
@@ -1057,24 +1108,28 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			};
 			bool? i_(Procedure FirstBladderCancerStaging)
 			{
-				var m_ = FHIRHelpers_4_3_000.ToValue(Cystectomy?.Performed);
-				var n_ = QICoreCommon_2_0_000.toInterval(m_);
-				var o_ = context.Operators.End(n_);
-				var p_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var q_ = QICoreCommon_2_0_000.toInterval(p_);
-				var r_ = context.Operators.Start(q_);
-				var s_ = context.Operators.Quantity(6m, "months");
-				var t_ = context.Operators.Subtract(r_, s_);
-				var v_ = QICoreCommon_2_0_000.toInterval(p_);
-				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Interval(t_, w_, true, false);
-				var y_ = context.Operators.In<CqlDateTime>(o_, x_, null);
-				var aa_ = QICoreCommon_2_0_000.toInterval(p_);
-				var ab_ = context.Operators.Start(aa_);
-				var ac_ = context.Operators.Not((bool?)(ab_ is null));
-				var ad_ = context.Operators.And(y_, ac_);
+				var m_ = Cystectomy?.Performed;
+				var n_ = FHIRHelpers_4_3_000.ToValue(m_);
+				var o_ = QICoreCommon_2_0_000.toInterval(n_);
+				var p_ = context.Operators.End(o_);
+				var q_ = FirstBladderCancerStaging?.Performed;
+				var r_ = FHIRHelpers_4_3_000.ToValue(q_);
+				var s_ = QICoreCommon_2_0_000.toInterval(r_);
+				var t_ = context.Operators.Start(s_);
+				var u_ = context.Operators.Quantity(6m, "months");
+				var v_ = context.Operators.Subtract(t_, u_);
+				var x_ = FHIRHelpers_4_3_000.ToValue(q_);
+				var y_ = QICoreCommon_2_0_000.toInterval(x_);
+				var z_ = context.Operators.Start(y_);
+				var aa_ = context.Operators.Interval(v_, z_, true, false);
+				var ab_ = context.Operators.In<CqlDateTime>(p_, aa_, null);
+				var ad_ = FHIRHelpers_4_3_000.ToValue(q_);
+				var ae_ = QICoreCommon_2_0_000.toInterval(ad_);
+				var af_ = context.Operators.Start(ae_);
+				var ag_ = context.Operators.Not((bool?)(af_ is null));
+				var ah_ = context.Operators.And(ab_, ag_);
 
-				return ad_;
+				return ah_;
 			};
 			var j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
 			Procedure k_(Procedure FirstBladderCancerStaging) => 
@@ -1086,10 +1141,12 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure Cystectomy)
 		{
-			var ae_ = context.Operators.Convert<string>(Cystectomy?.StatusElement?.Value);
-			var af_ = context.Operators.Equal(ae_, "completed");
+			var ai_ = Cystectomy?.StatusElement;
+			var aj_ = ai_?.Value;
+			var ak_ = context.Operators.Convert<string>(aj_);
+			var al_ = context.Operators.Equal(ak_, "completed");
 
-			return af_;
+			return al_;
 		};
 		var f_ = context.Operators.Where<Procedure>(d_, e_);
 
@@ -1121,12 +1178,13 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			{
 				var t_ = QICoreCommon_2_0_000.prevalenceInterval(ExclusionDiagnosis);
 				var u_ = context.Operators.Start(t_);
-				var v_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var w_ = QICoreCommon_2_0_000.toInterval(v_);
-				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.SameOrBefore(u_, x_, null);
+				var v_ = FirstBladderCancerStaging?.Performed;
+				var w_ = FHIRHelpers_4_3_000.ToValue(v_);
+				var x_ = QICoreCommon_2_0_000.toInterval(w_);
+				var y_ = context.Operators.Start(x_);
+				var z_ = context.Operators.SameOrBefore(u_, y_, null);
 
-				return y_;
+				return z_;
 			};
 			var q_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)o_, p_);
 			Condition r_(Procedure FirstBladderCancerStaging) => 
@@ -1138,9 +1196,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var j_ = context.Operators.SelectMany<Condition, Condition>(h_, i_);
 		bool? k_(Condition ExclusionDiagnosis)
 		{
-			var z_ = this.isConfirmedActiveDiagnosis(ExclusionDiagnosis);
+			var aa_ = this.isConfirmedActiveDiagnosis(ExclusionDiagnosis);
 
-			return z_;
+			return aa_;
 		};
 		var l_ = context.Operators.Where<Condition>(j_, k_);
 		var m_ = context.Operators.Exists<Condition>(l_);
@@ -1170,21 +1228,24 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				var y_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ExclusionMed);
 				var z_ = context.Operators.Start(y_);
 				var aa_ = context.Operators.ConvertDateToDateTime(z_);
-				var ab_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
-				var ad_ = context.Operators.Start(ac_);
-				var ae_ = context.Operators.Quantity(6m, "months");
-				var af_ = context.Operators.Subtract(ad_, ae_);
-				var ah_ = QICoreCommon_2_0_000.toInterval(ab_);
-				var ai_ = context.Operators.Start(ah_);
-				var aj_ = context.Operators.Interval(af_, ai_, true, false);
-				var ak_ = context.Operators.In<CqlDateTime>(aa_, aj_, null);
-				var am_ = QICoreCommon_2_0_000.toInterval(ab_);
-				var an_ = context.Operators.Start(am_);
-				var ao_ = context.Operators.Not((bool?)(an_ is null));
-				var ap_ = context.Operators.And(ak_, ao_);
+				var ab_ = FirstBladderCancerStaging?.Performed;
+				var ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
+				var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
+				var ae_ = context.Operators.Start(ad_);
+				var af_ = context.Operators.Quantity(6m, "months");
+				var ag_ = context.Operators.Subtract(ae_, af_);
+				var ai_ = FHIRHelpers_4_3_000.ToValue(ab_);
+				var aj_ = QICoreCommon_2_0_000.toInterval(ai_);
+				var ak_ = context.Operators.Start(aj_);
+				var al_ = context.Operators.Interval(ag_, ak_, true, false);
+				var am_ = context.Operators.In<CqlDateTime>(aa_, al_, null);
+				var ao_ = FHIRHelpers_4_3_000.ToValue(ab_);
+				var ap_ = QICoreCommon_2_0_000.toInterval(ao_);
+				var aq_ = context.Operators.Start(ap_);
+				var ar_ = context.Operators.Not((bool?)(aq_ is null));
+				var as_ = context.Operators.And(am_, ar_);
 
-				return ap_;
+				return as_;
 			};
 			var v_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)t_, u_);
 			MedicationRequest w_(Procedure FirstBladderCancerStaging) => 
@@ -1196,21 +1257,27 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var g_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(e_, f_);
 		bool? h_(MedicationRequest ExclusionMed)
 		{
-			var aq_ = context.Operators.Convert<string>(ExclusionMed?.StatusElement?.Value);
-			var ar_ = new string[]
+			var at_ = ExclusionMed?.StatusElement;
+			var au_ = at_?.Value;
+			var av_ = context.Operators.Convert<string>(au_);
+			var aw_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var as_ = context.Operators.In<string>(aq_, (ar_ as IEnumerable<string>));
-			var at_ = context.Operators.Convert<string>(ExclusionMed?.IntentElement?.Value);
-			var au_ = context.Operators.Equal(at_, "order");
-			var av_ = context.Operators.And(as_, au_);
-			var aw_ = context.Operators.IsTrue(ExclusionMed?.DoNotPerformElement?.Value);
-			var ax_ = context.Operators.Not(aw_);
-			var ay_ = context.Operators.And(av_, ax_);
+			var ax_ = context.Operators.In<string>(av_, (aw_ as IEnumerable<string>));
+			var ay_ = ExclusionMed?.IntentElement;
+			var az_ = ay_?.Value;
+			var ba_ = context.Operators.Convert<string>(az_);
+			var bb_ = context.Operators.Equal(ba_, "order");
+			var bc_ = context.Operators.And(ax_, bb_);
+			var bd_ = ExclusionMed?.DoNotPerformElement;
+			var be_ = bd_?.Value;
+			var bf_ = context.Operators.IsTrue(be_);
+			var bg_ = context.Operators.Not(bf_);
+			var bh_ = context.Operators.And(bc_, bg_);
 
-			return ay_;
+			return bh_;
 		};
 		var i_ = context.Operators.Where<MedicationRequest>(g_, h_);
 		var j_ = this.Combined_radiotherapy__procedure_();
@@ -1218,46 +1285,52 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var l_ = context.Operators.RetrieveByCodes<Procedure>(k_, null);
 		IEnumerable<Procedure> m_(Procedure ExclusionProcedure)
 		{
-			var az_ = this.First_Bladder_Cancer_Staging_Procedure();
-			var ba_ = new Procedure[]
+			var bi_ = this.First_Bladder_Cancer_Staging_Procedure();
+			var bj_ = new Procedure[]
 			{
-				az_,
+				bi_,
 			};
-			bool? bb_(Procedure FirstBladderCancerStaging)
+			bool? bk_(Procedure FirstBladderCancerStaging)
 			{
-				var bf_ = FHIRHelpers_4_3_000.ToValue(ExclusionProcedure?.Performed);
-				var bg_ = QICoreCommon_2_0_000.toInterval(bf_);
-				var bh_ = context.Operators.Start(bg_);
-				var bi_ = FHIRHelpers_4_3_000.ToValue(FirstBladderCancerStaging?.Performed);
-				var bj_ = QICoreCommon_2_0_000.toInterval(bi_);
-				var bk_ = context.Operators.Start(bj_);
-				var bl_ = context.Operators.Quantity(6m, "months");
-				var bm_ = context.Operators.Subtract(bk_, bl_);
-				var bo_ = QICoreCommon_2_0_000.toInterval(bi_);
-				var bp_ = context.Operators.Start(bo_);
-				var bq_ = context.Operators.Interval(bm_, bp_, true, false);
-				var br_ = context.Operators.In<CqlDateTime>(bh_, bq_, null);
-				var bt_ = QICoreCommon_2_0_000.toInterval(bi_);
-				var bu_ = context.Operators.Start(bt_);
-				var bv_ = context.Operators.Not((bool?)(bu_ is null));
-				var bw_ = context.Operators.And(br_, bv_);
+				var bo_ = ExclusionProcedure?.Performed;
+				var bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
+				var bq_ = QICoreCommon_2_0_000.toInterval(bp_);
+				var br_ = context.Operators.Start(bq_);
+				var bs_ = FirstBladderCancerStaging?.Performed;
+				var bt_ = FHIRHelpers_4_3_000.ToValue(bs_);
+				var bu_ = QICoreCommon_2_0_000.toInterval(bt_);
+				var bv_ = context.Operators.Start(bu_);
+				var bw_ = context.Operators.Quantity(6m, "months");
+				var bx_ = context.Operators.Subtract(bv_, bw_);
+				var bz_ = FHIRHelpers_4_3_000.ToValue(bs_);
+				var ca_ = QICoreCommon_2_0_000.toInterval(bz_);
+				var cb_ = context.Operators.Start(ca_);
+				var cc_ = context.Operators.Interval(bx_, cb_, true, false);
+				var cd_ = context.Operators.In<CqlDateTime>(br_, cc_, null);
+				var cf_ = FHIRHelpers_4_3_000.ToValue(bs_);
+				var cg_ = QICoreCommon_2_0_000.toInterval(cf_);
+				var ch_ = context.Operators.Start(cg_);
+				var ci_ = context.Operators.Not((bool?)(ch_ is null));
+				var cj_ = context.Operators.And(cd_, ci_);
 
-				return bw_;
+				return cj_;
 			};
-			var bc_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)ba_, bb_);
-			Procedure bd_(Procedure FirstBladderCancerStaging) => 
+			var bl_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)bj_, bk_);
+			Procedure bm_(Procedure FirstBladderCancerStaging) => 
 				ExclusionProcedure;
-			var be_ = context.Operators.Select<Procedure, Procedure>(bc_, bd_);
+			var bn_ = context.Operators.Select<Procedure, Procedure>(bl_, bm_);
 
-			return be_;
+			return bn_;
 		};
 		var n_ = context.Operators.SelectMany<Procedure, Procedure>(l_, m_);
 		bool? o_(Procedure ExclusionProcedure)
 		{
-			var bx_ = context.Operators.Convert<string>(ExclusionProcedure?.StatusElement?.Value);
-			var by_ = context.Operators.Equal(bx_, "completed");
+			var ck_ = ExclusionProcedure?.StatusElement;
+			var cl_ = ck_?.Value;
+			var cm_ = context.Operators.Convert<string>(cl_);
+			var cn_ = context.Operators.Equal(cm_, "completed");
 
-			return by_;
+			return cn_;
 		};
 		var p_ = context.Operators.Where<Procedure>(n_, o_);
 		var q_ = context.Operators.ListUnion<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));

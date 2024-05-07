@@ -31,6 +31,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
     /// </summary>
     internal class SimplifyExpressionsVisitor : ExpressionVisitor
     {
+        public SimplifyExpressionsVisitor()
+        {
+        }
+
         private readonly List<BinaryExpression> _assignments = [];
         private bool _atRoot = true;
 
@@ -61,6 +65,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return DoVisit(node);
         }
 
+        public bool SimplifyNullConditionalMemberExpression { get; init; }
+
         private Expression DoVisit(Expression node)
         {
             // This visit will, by default, call `simplify()` on every
@@ -76,8 +82,11 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 NewExpression or
                 MemberExpression or
                 ElmAsExpression or
-                DefaultExpression or
-                NullConditionalMemberExpression => base.Visit(node),
+                DefaultExpression
+                => base.Visit(node),
+
+                NullConditionalMemberExpression when SimplifyNullConditionalMemberExpression
+                => base.Visit(node),
 
                 // These expressions require special handling
                 ConditionalExpression cond => VisitConditional(cond),
@@ -227,7 +236,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         protected Expression VisitCaseWhenThenExpression(CaseWhenThenExpression node)
         {
             // The final else case is treated just like the when/then
-            var elseVisitor = new SimplifyExpressionsVisitor();
+            var elseVisitor = Clone();
             var visitedElse = elseVisitor.Visit(node.ElseCase);
 
             var caseStatementBlockVisitor = new SimplifyExpressionsVisitor();
@@ -269,5 +278,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 }
             }
         }
+
+        private SimplifyExpressionsVisitor Clone() => new()
+        {
+            SimplifyNullConditionalMemberExpression = SimplifyNullConditionalMemberExpression
+        };
     }
 }

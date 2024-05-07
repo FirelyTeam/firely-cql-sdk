@@ -248,21 +248,27 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		bool? c_(Encounter InpatientEncounter)
 		{
 			var e_ = this.Patient();
-			var f_ = context.Operators.Convert<CqlDate>(e_?.BirthDateElement?.Value);
-			var g_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounter?.Period);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
-			var k_ = context.Operators.GreaterOrEqual(j_, 18);
-			var m_ = context.Operators.End(g_);
-			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
-			var p_ = context.Operators.And(k_, o_);
-			var q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InpatientEncounter?.StatusElement?.Value);
-			var r_ = context.Operators.Equal(q_, "finished");
-			var s_ = context.Operators.And(p_, r_);
+			var f_ = e_?.BirthDateElement;
+			var g_ = f_?.Value;
+			var h_ = context.Operators.Convert<CqlDate>(g_);
+			var i_ = InpatientEncounter?.Period;
+			var j_ = FHIRHelpers_4_3_000.ToInterval(i_);
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
+			var n_ = context.Operators.GreaterOrEqual(m_, 18);
+			var p_ = FHIRHelpers_4_3_000.ToInterval(i_);
+			var q_ = context.Operators.End(p_);
+			var r_ = this.Measurement_Period();
+			var s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
+			var t_ = context.Operators.And(n_, s_);
+			var u_ = InpatientEncounter?.StatusElement;
+			var v_ = u_?.Value;
+			var w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
+			var x_ = context.Operators.Equal(w_, "finished");
+			var y_ = context.Operators.And(t_, x_);
 
-			return s_;
+			return y_;
 		};
 		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
@@ -300,39 +306,47 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		var a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
 		{
-			bool? d_(Encounter.DiagnosisComponent EncounterDiag)
+			var d_ = InpatientHospitalization?.Diagnosis;
+			bool? e_(Encounter.DiagnosisComponent EncounterDiag)
 			{
-				var g_ = CQMCommon_2_0_000.getCondition(EncounterDiag?.Condition);
-				var h_ = FHIRHelpers_4_3_000.ToConcept(g_?.Code);
-				var i_ = this.Pressure_Injury_Deep_Tissue_Diagnoses();
-				var j_ = context.Operators.ConceptInValueSet(h_, i_);
-				bool? k_(Extension @this)
+				var h_ = EncounterDiag?.Condition;
+				var i_ = CQMCommon_2_0_000.getCondition(h_);
+				var j_ = i_?.Code;
+				var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+				var l_ = this.Pressure_Injury_Deep_Tissue_Diagnoses();
+				var m_ = context.Operators.ConceptInValueSet(k_, l_);
+				bool? n_(Extension @this)
 				{
-					var u_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var v_ = FHIRHelpers_4_3_000.ToString(u_);
-					var w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var x_ = @this?.Url;
+					var y_ = context.Operators.Convert<FhirUri>(x_);
+					var z_ = FHIRHelpers_4_3_000.ToString(y_);
+					var aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return w_;
+					return aa_;
 				};
-				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
+				var o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
-						: null), k_);
-				DataType m_(Extension @this) => 
-					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingletonFrom<DataType>(n_);
-				var p_ = context.Operators.Convert<CodeableConcept>(o_);
-				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
-				var r_ = this.Present_on_Admission_or_Clinically_Undetermined();
-				var s_ = context.Operators.ConceptInValueSet(q_, r_);
-				var t_ = context.Operators.And(j_, s_);
+						: null), n_);
+				DataType p_(Extension @this)
+				{
+					var ab_ = @this?.Value;
 
-				return t_;
+					return ab_;
+				};
+				var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
+				var r_ = context.Operators.SingletonFrom<DataType>(q_);
+				var s_ = context.Operators.Convert<CodeableConcept>(r_);
+				var t_ = FHIRHelpers_4_3_000.ToConcept(s_);
+				var u_ = this.Present_on_Admission_or_Clinically_Undetermined();
+				var v_ = context.Operators.ConceptInValueSet(t_, u_);
+				var w_ = context.Operators.And(m_, v_);
+
+				return w_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
-			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
+			var g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
-			return f_;
+			return g_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -353,32 +367,36 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 			bool? g_(Observation SkinExam)
 			{
-				var k_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Effective);
-				var l_ = QICoreCommon_2_0_000.ToInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
-				var o_ = context.Operators.Start(n_);
-				var q_ = context.Operators.Start(n_);
-				var r_ = context.Operators.Quantity(72m, "hours");
-				var s_ = context.Operators.Add(q_, r_);
-				var t_ = context.Operators.Interval(o_, s_, true, true);
-				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
-				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
-				var w_ = context.Operators.Convert<string>(v_);
-				var x_ = new string[]
+				var k_ = SkinExam?.Effective;
+				var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+				var m_ = QICoreCommon_2_0_000.ToInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
+				var p_ = context.Operators.Start(o_);
+				var r_ = context.Operators.Start(o_);
+				var s_ = context.Operators.Quantity(72m, "hours");
+				var t_ = context.Operators.Add(r_, s_);
+				var u_ = context.Operators.Interval(p_, t_, true, true);
+				var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				var w_ = SkinExam?.StatusElement;
+				var x_ = w_?.Value;
+				var y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
+				var z_ = context.Operators.Convert<string>(y_);
+				var aa_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
-				var z_ = context.Operators.And(u_, y_);
-				var aa_ = FHIRHelpers_4_3_000.ToConcept(SkinExam?.Code);
-				var ab_ = this.Pressure_Injury_Deep_Tissue();
-				var ac_ = context.Operators.ConceptInValueSet(aa_, ab_);
-				var ad_ = context.Operators.And(z_, ac_);
+				var ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				var ac_ = context.Operators.And(v_, ab_);
+				var ad_ = SkinExam?.Code;
+				var ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
+				var af_ = this.Pressure_Injury_Deep_Tissue();
+				var ag_ = context.Operators.ConceptInValueSet(ae_, af_);
+				var ah_ = context.Operators.And(ac_, ag_);
 
-				return ad_;
+				return ah_;
 			};
 			var h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
@@ -414,39 +432,47 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		var a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
 		{
-			bool? d_(Encounter.DiagnosisComponent Stage234UnstageablePressureInjury)
+			var d_ = InpatientHospitalization?.Diagnosis;
+			bool? e_(Encounter.DiagnosisComponent Stage234UnstageablePressureInjury)
 			{
-				var g_ = CQMCommon_2_0_000.getCondition(Stage234UnstageablePressureInjury?.Condition);
-				var h_ = FHIRHelpers_4_3_000.ToConcept(g_?.Code);
-				var i_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses();
-				var j_ = context.Operators.ConceptInValueSet(h_, i_);
-				bool? k_(Extension @this)
+				var h_ = Stage234UnstageablePressureInjury?.Condition;
+				var i_ = CQMCommon_2_0_000.getCondition(h_);
+				var j_ = i_?.Code;
+				var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+				var l_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses();
+				var m_ = context.Operators.ConceptInValueSet(k_, l_);
+				bool? n_(Extension @this)
 				{
-					var u_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var v_ = FHIRHelpers_4_3_000.ToString(u_);
-					var w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var x_ = @this?.Url;
+					var y_ = context.Operators.Convert<FhirUri>(x_);
+					var z_ = FHIRHelpers_4_3_000.ToString(y_);
+					var aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return w_;
+					return aa_;
 				};
-				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
+				var o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
-						: null), k_);
-				DataType m_(Extension @this) => 
-					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingletonFrom<DataType>(n_);
-				var p_ = context.Operators.Convert<CodeableConcept>(o_);
-				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
-				var r_ = this.Present_on_Admission_or_Clinically_Undetermined();
-				var s_ = context.Operators.ConceptInValueSet(q_, r_);
-				var t_ = context.Operators.And(j_, s_);
+						: null), n_);
+				DataType p_(Extension @this)
+				{
+					var ab_ = @this?.Value;
 
-				return t_;
+					return ab_;
+				};
+				var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
+				var r_ = context.Operators.SingletonFrom<DataType>(q_);
+				var s_ = context.Operators.Convert<CodeableConcept>(r_);
+				var t_ = FHIRHelpers_4_3_000.ToConcept(s_);
+				var u_ = this.Present_on_Admission_or_Clinically_Undetermined();
+				var v_ = context.Operators.ConceptInValueSet(t_, u_);
+				var w_ = context.Operators.And(m_, v_);
+
+				return w_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
-			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
+			var g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
-			return f_;
+			return g_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -467,32 +493,36 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 			bool? g_(Observation SkinExam)
 			{
-				var k_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Effective);
-				var l_ = QICoreCommon_2_0_000.ToInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
-				var o_ = context.Operators.Start(n_);
-				var q_ = context.Operators.Start(n_);
-				var r_ = context.Operators.Quantity(24m, "hours");
-				var s_ = context.Operators.Add(q_, r_);
-				var t_ = context.Operators.Interval(o_, s_, true, true);
-				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
-				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
-				var w_ = context.Operators.Convert<string>(v_);
-				var x_ = new string[]
+				var k_ = SkinExam?.Effective;
+				var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+				var m_ = QICoreCommon_2_0_000.ToInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
+				var p_ = context.Operators.Start(o_);
+				var r_ = context.Operators.Start(o_);
+				var s_ = context.Operators.Quantity(24m, "hours");
+				var t_ = context.Operators.Add(r_, s_);
+				var u_ = context.Operators.Interval(p_, t_, true, true);
+				var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				var w_ = SkinExam?.StatusElement;
+				var x_ = w_?.Value;
+				var y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
+				var z_ = context.Operators.Convert<string>(y_);
+				var aa_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
-				var z_ = context.Operators.And(u_, y_);
-				var aa_ = FHIRHelpers_4_3_000.ToConcept(SkinExam?.Code);
-				var ab_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
-				var ac_ = context.Operators.ConceptInValueSet(aa_, ab_);
-				var ad_ = context.Operators.And(z_, ac_);
+				var ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				var ac_ = context.Operators.And(v_, ab_);
+				var ad_ = SkinExam?.Code;
+				var ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
+				var af_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
+				var ag_ = context.Operators.ConceptInValueSet(ae_, af_);
+				var ah_ = context.Operators.And(ac_, ag_);
 
-				return ad_;
+				return ah_;
 			};
 			var h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
@@ -531,11 +561,12 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var d_ = CQMCommon_2_0_000.EncounterDiagnosis(InpatientHospitalization);
 			bool? e_(Condition EncounterDiag)
 			{
-				var h_ = FHIRHelpers_4_3_000.ToConcept(EncounterDiag?.Code);
-				var i_ = this.COVID_19();
-				var j_ = context.Operators.ConceptInValueSet(h_, i_);
+				var h_ = EncounterDiag?.Code;
+				var i_ = FHIRHelpers_4_3_000.ToConcept(h_);
+				var j_ = this.COVID_19();
+				var k_ = context.Operators.ConceptInValueSet(i_, j_);
 
-				return j_;
+				return k_;
 			};
 			var f_ = context.Operators.Where<Condition>(d_, e_);
 			var g_ = context.Operators.Exists<Condition>(f_);
@@ -571,39 +602,47 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		var a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
 		{
-			bool? d_(Encounter.DiagnosisComponent EncounterDiag)
+			var d_ = InpatientHospitalization?.Diagnosis;
+			bool? e_(Encounter.DiagnosisComponent EncounterDiag)
 			{
-				var g_ = CQMCommon_2_0_000.getCondition(EncounterDiag?.Condition);
-				var h_ = FHIRHelpers_4_3_000.ToConcept(g_?.Code);
-				var i_ = this.Pressure_Injury_Deep_Tissue_Diagnoses();
-				var j_ = context.Operators.ConceptInValueSet(h_, i_);
-				bool? k_(Extension @this)
+				var h_ = EncounterDiag?.Condition;
+				var i_ = CQMCommon_2_0_000.getCondition(h_);
+				var j_ = i_?.Code;
+				var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+				var l_ = this.Pressure_Injury_Deep_Tissue_Diagnoses();
+				var m_ = context.Operators.ConceptInValueSet(k_, l_);
+				bool? n_(Extension @this)
 				{
-					var u_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var v_ = FHIRHelpers_4_3_000.ToString(u_);
-					var w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var x_ = @this?.Url;
+					var y_ = context.Operators.Convert<FhirUri>(x_);
+					var z_ = FHIRHelpers_4_3_000.ToString(y_);
+					var aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return w_;
+					return aa_;
 				};
-				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
+				var o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
-						: null), k_);
-				DataType m_(Extension @this) => 
-					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingletonFrom<DataType>(n_);
-				var p_ = context.Operators.Convert<CodeableConcept>(o_);
-				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
-				var r_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
-				var s_ = context.Operators.ConceptInValueSet(q_, r_);
-				var t_ = context.Operators.And(j_, s_);
+						: null), n_);
+				DataType p_(Extension @this)
+				{
+					var ab_ = @this?.Value;
 
-				return t_;
+					return ab_;
+				};
+				var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
+				var r_ = context.Operators.SingletonFrom<DataType>(q_);
+				var s_ = context.Operators.Convert<CodeableConcept>(r_);
+				var t_ = FHIRHelpers_4_3_000.ToConcept(s_);
+				var u_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
+				var v_ = context.Operators.ConceptInValueSet(t_, u_);
+				var w_ = context.Operators.And(m_, v_);
+
+				return w_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
-			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
+			var g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
-			return f_;
+			return g_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -624,49 +663,56 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 			bool? g_(Observation SkinExam)
 			{
-				var k_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Effective);
-				var l_ = QICoreCommon_2_0_000.ToInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity(72m, "hours");
-				var q_ = context.Operators.Add(o_, p_);
-				var s_ = context.Operators.End(n_);
-				var t_ = context.Operators.Interval(q_, s_, true, true);
-				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
-				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
-				var w_ = context.Operators.Convert<string>(v_);
-				var x_ = new string[]
+				var k_ = SkinExam?.Effective;
+				var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+				var m_ = QICoreCommon_2_0_000.ToInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
+				var p_ = context.Operators.Start(o_);
+				var q_ = context.Operators.Quantity(72m, "hours");
+				var r_ = context.Operators.Add(p_, q_);
+				var t_ = context.Operators.End(o_);
+				var u_ = context.Operators.Interval(r_, t_, true, true);
+				var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				var w_ = SkinExam?.StatusElement;
+				var x_ = w_?.Value;
+				var y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
+				var z_ = context.Operators.Convert<string>(y_);
+				var aa_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
-				var z_ = context.Operators.And(u_, y_);
-				var aa_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Value);
-				var ab_ = this.Pressure_Injury_Deep_Tissue();
-				var ac_ = context.Operators.ConceptInValueSet((aa_ as CqlConcept), ab_);
-				bool? ad_(Observation.ComponentComponent @this)
+				var ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				var ac_ = context.Operators.And(v_, ab_);
+				var ad_ = SkinExam?.Value;
+				var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+				var af_ = this.Pressure_Injury_Deep_Tissue();
+				var ag_ = context.Operators.ConceptInValueSet((ae_ as CqlConcept), af_);
+				var ah_ = SkinExam?.Component;
+				bool? ai_(Observation.ComponentComponent @this)
 				{
-					var al_ = FHIRHelpers_4_3_000.ToConcept(@this?.Code);
-					var am_ = context.Operators.Not((bool?)(al_ is null));
+					var aq_ = @this?.Code;
+					var ar_ = FHIRHelpers_4_3_000.ToConcept(aq_);
+					var as_ = context.Operators.Not((bool?)(ar_ is null));
 
-					return am_;
+					return as_;
 				};
-				var ae_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)SkinExam?.Component, ad_);
-				CqlConcept af_(Observation.ComponentComponent @this)
+				var aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_, ai_);
+				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
-					var an_ = FHIRHelpers_4_3_000.ToConcept(@this?.Code);
+					var at_ = @this?.Code;
+					var au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 
-					return an_;
+					return au_;
 				};
-				var ag_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(ae_, af_);
-				var ai_ = context.Operators.ConceptsInValueSet(ag_, ab_);
-				var aj_ = context.Operators.Or(ac_, ai_);
-				var ak_ = context.Operators.And(z_, aj_);
+				var al_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(aj_, ak_);
+				var an_ = context.Operators.ConceptsInValueSet(al_, af_);
+				var ao_ = context.Operators.Or(ag_, an_);
+				var ap_ = context.Operators.And(ac_, ao_);
 
-				return ak_;
+				return ap_;
 			};
 			var h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
@@ -702,39 +748,47 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		var a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
 		{
-			bool? d_(Encounter.DiagnosisComponent Stage234UnstageablePressureInjury)
+			var d_ = InpatientHospitalization?.Diagnosis;
+			bool? e_(Encounter.DiagnosisComponent Stage234UnstageablePressureInjury)
 			{
-				var g_ = CQMCommon_2_0_000.getCondition(Stage234UnstageablePressureInjury?.Condition);
-				var h_ = FHIRHelpers_4_3_000.ToConcept(g_?.Code);
-				var i_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses();
-				var j_ = context.Operators.ConceptInValueSet(h_, i_);
-				bool? k_(Extension @this)
+				var h_ = Stage234UnstageablePressureInjury?.Condition;
+				var i_ = CQMCommon_2_0_000.getCondition(h_);
+				var j_ = i_?.Code;
+				var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+				var l_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses();
+				var m_ = context.Operators.ConceptInValueSet(k_, l_);
+				bool? n_(Extension @this)
 				{
-					var u_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var v_ = FHIRHelpers_4_3_000.ToString(u_);
-					var w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					var x_ = @this?.Url;
+					var y_ = context.Operators.Convert<FhirUri>(x_);
+					var z_ = FHIRHelpers_4_3_000.ToString(y_);
+					var aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return w_;
+					return aa_;
 				};
-				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
+				var o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
-						: null), k_);
-				DataType m_(Extension @this) => 
-					@this?.Value;
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingletonFrom<DataType>(n_);
-				var p_ = context.Operators.Convert<CodeableConcept>(o_);
-				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
-				var r_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
-				var s_ = context.Operators.ConceptInValueSet(q_, r_);
-				var t_ = context.Operators.And(j_, s_);
+						: null), n_);
+				DataType p_(Extension @this)
+				{
+					var ab_ = @this?.Value;
 
-				return t_;
+					return ab_;
+				};
+				var q_ = context.Operators.Select<Extension, DataType>(o_, p_);
+				var r_ = context.Operators.SingletonFrom<DataType>(q_);
+				var s_ = context.Operators.Convert<CodeableConcept>(r_);
+				var t_ = FHIRHelpers_4_3_000.ToConcept(s_);
+				var u_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
+				var v_ = context.Operators.ConceptInValueSet(t_, u_);
+				var w_ = context.Operators.And(m_, v_);
+
+				return w_;
 			};
-			var e_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)InpatientHospitalization?.Diagnosis, d_);
-			var f_ = context.Operators.Exists<Encounter.DiagnosisComponent>(e_);
+			var f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
+			var g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
-			return f_;
+			return g_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -755,49 +809,56 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 			bool? g_(Observation SkinExam)
 			{
-				var k_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Effective);
-				var l_ = QICoreCommon_2_0_000.ToInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.Quantity(24m, "hours");
-				var q_ = context.Operators.Add(o_, p_);
-				var s_ = context.Operators.End(n_);
-				var t_ = context.Operators.Interval(q_, s_, true, true);
-				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
-				var v_ = context.Operators.Convert<Code<ObservationStatus>>(SkinExam?.StatusElement?.Value);
-				var w_ = context.Operators.Convert<string>(v_);
-				var x_ = new string[]
+				var k_ = SkinExam?.Effective;
+				var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+				var m_ = QICoreCommon_2_0_000.ToInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
+				var p_ = context.Operators.Start(o_);
+				var q_ = context.Operators.Quantity(24m, "hours");
+				var r_ = context.Operators.Add(p_, q_);
+				var t_ = context.Operators.End(o_);
+				var u_ = context.Operators.Interval(r_, t_, true, true);
+				var v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				var w_ = SkinExam?.StatusElement;
+				var x_ = w_?.Value;
+				var y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
+				var z_ = context.Operators.Convert<string>(y_);
+				var aa_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
-				var z_ = context.Operators.And(u_, y_);
-				var aa_ = FHIRHelpers_4_3_000.ToValue(SkinExam?.Value);
-				var ab_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
-				var ac_ = context.Operators.ConceptInValueSet((aa_ as CqlConcept), ab_);
-				bool? ad_(Observation.ComponentComponent @this)
+				var ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				var ac_ = context.Operators.And(v_, ab_);
+				var ad_ = SkinExam?.Value;
+				var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+				var af_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
+				var ag_ = context.Operators.ConceptInValueSet((ae_ as CqlConcept), af_);
+				var ah_ = SkinExam?.Component;
+				bool? ai_(Observation.ComponentComponent @this)
 				{
-					var al_ = FHIRHelpers_4_3_000.ToConcept(@this?.Code);
-					var am_ = context.Operators.Not((bool?)(al_ is null));
+					var aq_ = @this?.Code;
+					var ar_ = FHIRHelpers_4_3_000.ToConcept(aq_);
+					var as_ = context.Operators.Not((bool?)(ar_ is null));
 
-					return am_;
+					return as_;
 				};
-				var ae_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)SkinExam?.Component, ad_);
-				CqlConcept af_(Observation.ComponentComponent @this)
+				var aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_, ai_);
+				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
-					var an_ = FHIRHelpers_4_3_000.ToConcept(@this?.Code);
+					var at_ = @this?.Code;
+					var au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 
-					return an_;
+					return au_;
 				};
-				var ag_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(ae_, af_);
-				var ai_ = context.Operators.ConceptsInValueSet(ag_, ab_);
-				var aj_ = context.Operators.Or(ac_, ai_);
-				var ak_ = context.Operators.And(z_, aj_);
+				var al_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(aj_, ak_);
+				var an_ = context.Operators.ConceptsInValueSet(al_, af_);
+				var ao_ = context.Operators.Or(ag_, an_);
+				var ap_ = context.Operators.And(ac_, ao_);
 
-				return ak_;
+				return ap_;
 			};
 			var h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 

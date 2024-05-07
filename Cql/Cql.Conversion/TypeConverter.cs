@@ -113,18 +113,21 @@ namespace Hl7.Cql.Conversion
         /// <exception cref="InvalidOperationException">If no conversion is defined.</exception>
         public object? Convert(object? from, Type to)
         {
-            if (from is null) return null;
+            if (from is null)
+                return null;
+
             var fromType = from.GetType();
             if (fromType.IsAssignableTo(to))
                 return from;
 
             if(_customConverters.SingleOrDefault(converter => converter.Handles(fromType, to)) is {} subConverter)
                 return subConverter.Convert(from, to);
-            else if (_converters.TryGetValue(fromType, out var toDictionary) &&
-                     toDictionary.TryGetValue(to, out Func<object, object>? convert))
-                    return convert(from);
-            else
-                    throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
+
+            if (_converters.TryGetValue(fromType, out var toDictionary) &&
+                toDictionary.TryGetValue(to, out Func<object, object>? convert))
+                return convert(from);
+
+            throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
         }
 
         /// <summary>

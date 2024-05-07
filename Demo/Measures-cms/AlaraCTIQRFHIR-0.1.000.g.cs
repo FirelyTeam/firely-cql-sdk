@@ -151,18 +151,21 @@ public class AlaraCTIQRFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter InpatientEncounter)
 		{
-			var e_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounter?.Period);
-			var f_ = this.Measurement_Period();
-			var g_ = context.Operators.Overlaps(e_, f_, null);
-			var h_ = this.Patient();
-			var i_ = context.Operators.Convert<CqlDate>(h_?.BirthDateElement?.Value);
-			var k_ = context.Operators.Start(f_);
-			var l_ = context.Operators.DateFrom(k_);
-			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-			var n_ = context.Operators.GreaterOrEqual(m_, 18);
-			var o_ = context.Operators.And(g_, n_);
+			var e_ = InpatientEncounter?.Period;
+			var f_ = FHIRHelpers_4_3_000.ToInterval(e_);
+			var g_ = this.Measurement_Period();
+			var h_ = context.Operators.Overlaps(f_, g_, null);
+			var i_ = this.Patient();
+			var j_ = i_?.BirthDateElement;
+			var k_ = j_?.Value;
+			var l_ = context.Operators.Convert<CqlDate>(k_);
+			var n_ = context.Operators.Start(g_);
+			var o_ = context.Operators.DateFrom(n_);
+			var p_ = context.Operators.CalculateAgeAt(l_, o_, "year");
+			var q_ = context.Operators.GreaterOrEqual(p_, 18);
+			var r_ = context.Operators.And(h_, q_);
 
-			return o_;
+			return r_;
 		};
 		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
@@ -227,17 +230,20 @@ public class AlaraCTIQRFHIR_0_1_000
 			var f_ = this.Qualifying_Inpatient_Encounters();
 			bool? g_(Encounter InpatientEncounters)
 			{
-				var k_ = FHIRHelpers_4_3_000.ToValue(CTScan?.Effective);
-				var l_ = QICoreCommon_2_0_000.ToInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounters?.Period);
-				var o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
-				var p_ = this.Measurement_Period();
-				var r_ = QICoreCommon_2_0_000.ToInterval(k_);
-				var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, null);
-				var t_ = context.Operators.And(o_, s_);
+				var k_ = CTScan?.Effective;
+				var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+				var m_ = QICoreCommon_2_0_000.ToInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = InpatientEncounters?.Period;
+				var p_ = FHIRHelpers_4_3_000.ToInterval(o_);
+				var q_ = context.Operators.In<CqlDateTime>(n_, p_, null);
+				var r_ = this.Measurement_Period();
+				var t_ = FHIRHelpers_4_3_000.ToValue(k_);
+				var u_ = QICoreCommon_2_0_000.ToInterval(t_);
+				var v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, null);
+				var w_ = context.Operators.And(q_, v_);
 
-				return t_;
+				return w_;
 			};
 			var h_ = context.Operators.Where<Encounter>(f_, g_);
 			Observation i_(Encounter InpatientEncounters) => 
@@ -260,22 +266,27 @@ public class AlaraCTIQRFHIR_0_1_000
 	{
 		bool? a_(Observation.ComponentComponent C)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToConcept(C?.Code);
-			var g_ = this.Calculated_CT_global_noise();
-			var h_ = context.Operators.ConvertCodeToConcept(g_);
-			var i_ = context.Operators.Equivalent(f_, h_);
-			var j_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
-			var k_ = context.Operators.Equal((j_ as CqlQuantity)?.unit, "[hnsf'U]");
-			var l_ = context.Operators.And(i_, k_);
+			var f_ = C?.Code;
+			var g_ = FHIRHelpers_4_3_000.ToConcept(f_);
+			var h_ = this.Calculated_CT_global_noise();
+			var i_ = context.Operators.ConvertCodeToConcept(h_);
+			var j_ = context.Operators.Equivalent(g_, i_);
+			var k_ = C?.Value;
+			var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+			var m_ = (l_ as CqlQuantity)?.unit;
+			var n_ = context.Operators.Equal(m_, "[hnsf'U]");
+			var o_ = context.Operators.And(j_, n_);
 
-			return l_;
+			return o_;
 		};
 		var b_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)Obs?.Component, a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
-			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
+			var p_ = C?.Value;
+			var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+			var r_ = (q_ as CqlQuantity)?.value;
 
-			return (m_ as CqlQuantity)?.value;
+			return r_;
 		};
 		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
@@ -288,22 +299,27 @@ public class AlaraCTIQRFHIR_0_1_000
 	{
 		bool? a_(Observation.ComponentComponent C)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToConcept(C?.Code);
-			var g_ = this.Calculated_CT_size_adjusted_dose();
-			var h_ = context.Operators.ConvertCodeToConcept(g_);
-			var i_ = context.Operators.Equivalent(f_, h_);
-			var j_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
-			var k_ = context.Operators.Equal((j_ as CqlQuantity)?.unit, "mGy.cm");
-			var l_ = context.Operators.And(i_, k_);
+			var f_ = C?.Code;
+			var g_ = FHIRHelpers_4_3_000.ToConcept(f_);
+			var h_ = this.Calculated_CT_size_adjusted_dose();
+			var i_ = context.Operators.ConvertCodeToConcept(h_);
+			var j_ = context.Operators.Equivalent(g_, i_);
+			var k_ = C?.Value;
+			var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+			var m_ = (l_ as CqlQuantity)?.unit;
+			var n_ = context.Operators.Equal(m_, "mGy.cm");
+			var o_ = context.Operators.And(j_, n_);
 
-			return l_;
+			return o_;
 		};
 		var b_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)Obs?.Component, a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
-			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
+			var p_ = C?.Value;
+			var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+			var r_ = (q_ as CqlQuantity)?.value;
 
-			return (m_ as CqlQuantity)?.value;
+			return r_;
 		};
 		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
@@ -321,11 +337,12 @@ public class AlaraCTIQRFHIR_0_1_000
 			var f_ = this.Size_Adjusted_Value(IP);
 			var g_ = context.Operators.Not((bool?)(f_ is null));
 			var h_ = context.Operators.And(e_, g_);
-			var i_ = FHIRHelpers_4_3_000.ToValue(IP?.Value);
-			var j_ = context.Operators.Not((bool?)(i_ is null));
-			var k_ = context.Operators.And(h_, j_);
+			var i_ = IP?.Value;
+			var j_ = FHIRHelpers_4_3_000.ToValue(i_);
+			var k_ = context.Operators.Not((bool?)(j_ is null));
+			var l_ = context.Operators.And(h_, k_);
 
-			return k_;
+			return l_;
 		};
 		var c_ = context.Operators.Where<Observation>(a_, b_);
 
@@ -342,13 +359,18 @@ public class AlaraCTIQRFHIR_0_1_000
 		var a_ = FHIRHelpers_4_3_000.ToValue(Obs?.Value);
 		bool? b_(CqlCode @this)
 		{
-			var m_ = context.Operators.Not((bool?)(@this?.code is null));
+			var m_ = @this?.code;
+			var n_ = context.Operators.Not((bool?)(m_ is null));
 
-			return m_;
+			return n_;
 		};
 		var c_ = context.Operators.Where<CqlCode>(((IEnumerable<CqlCode>)(a_ as CqlConcept)?.codes), b_);
-		string d_(CqlCode @this) => 
-			@this?.code;
+		string d_(CqlCode @this)
+		{
+			var o_ = @this?.code;
+
+			return o_;
+		};
 		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);
 		var f_ = context.Operators.ListContains<string>(e_, code);
 		var g_ = this.Global_Noise_Value(Obs);
@@ -449,20 +471,27 @@ public class AlaraCTIQRFHIR_0_1_000
 		var a_ = this.Denominator();
 		bool? b_(Observation Denom)
 		{
-			var d_ = FHIRHelpers_4_3_000.ToValue(Denom?.Value);
-			bool? e_(CqlCode @this)
+			var d_ = Denom?.Value;
+			var e_ = FHIRHelpers_4_3_000.ToValue(d_);
+			var f_ = (e_ as CqlConcept)?.codes;
+			bool? g_(CqlCode @this)
 			{
-				var j_ = context.Operators.Not((bool?)(@this?.code is null));
+				var l_ = @this?.code;
+				var m_ = context.Operators.Not((bool?)(l_ is null));
 
-				return j_;
+				return m_;
 			};
-			var f_ = context.Operators.Where<CqlCode>(((IEnumerable<CqlCode>)(d_ as CqlConcept)?.codes), e_);
-			string g_(CqlCode @this) => 
-				@this?.code;
-			var h_ = context.Operators.Select<CqlCode, string>(f_, g_);
-			var i_ = context.Operators.ListContains<string>(h_, "FULLBODY");
+			var h_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)f_, g_);
+			string i_(CqlCode @this)
+			{
+				var n_ = @this?.code;
 
-			return i_;
+				return n_;
+			};
+			var j_ = context.Operators.Select<CqlCode, string>(h_, i_);
+			var k_ = context.Operators.ListContains<string>(j_, "FULLBODY");
+
+			return k_;
 		};
 		var c_ = context.Operators.Where<Observation>(a_, b_);
 

@@ -189,22 +189,27 @@ public class Hospice_6_9_000
 		var c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
-			var ap_ = FHIRHelpers_4_3_000.ToConcept(InpatientEncounter?.Hospitalization?.DischargeDisposition);
-			var aq_ = this.Discharge_to_home_for_hospice_care__procedure_();
-			var ar_ = context.Operators.ConvertCodeToConcept(aq_);
-			var as_ = context.Operators.Equivalent(ap_, ar_);
-			var au_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_();
-			var av_ = context.Operators.ConvertCodeToConcept(au_);
-			var aw_ = context.Operators.Equivalent(ap_, av_);
-			var ax_ = context.Operators.Or(as_, aw_);
-			var ay_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounter?.Period);
-			var az_ = QICoreCommon_2_0_000.toInterval((ay_ as object));
-			var ba_ = context.Operators.End(az_);
-			var bb_ = this.Measurement_Period();
-			var bc_ = context.Operators.In<CqlDateTime>(ba_, bb_, "day");
-			var bd_ = context.Operators.And(ax_, bc_);
+			var ap_ = InpatientEncounter?.Hospitalization;
+			var aq_ = ap_?.DischargeDisposition;
+			var ar_ = FHIRHelpers_4_3_000.ToConcept(aq_);
+			var as_ = this.Discharge_to_home_for_hospice_care__procedure_();
+			var at_ = context.Operators.ConvertCodeToConcept(as_);
+			var au_ = context.Operators.Equivalent(ar_, at_);
+			var aw_ = ap_?.DischargeDisposition;
+			var ax_ = FHIRHelpers_4_3_000.ToConcept(aw_);
+			var ay_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_();
+			var az_ = context.Operators.ConvertCodeToConcept(ay_);
+			var ba_ = context.Operators.Equivalent(ax_, az_);
+			var bb_ = context.Operators.Or(au_, ba_);
+			var bc_ = InpatientEncounter?.Period;
+			var bd_ = FHIRHelpers_4_3_000.ToInterval(bc_);
+			var be_ = QICoreCommon_2_0_000.toInterval((bd_ as object));
+			var bf_ = context.Operators.End(be_);
+			var bg_ = this.Measurement_Period();
+			var bh_ = context.Operators.In<CqlDateTime>(bf_, bg_, "day");
+			var bi_ = context.Operators.And(bb_, bh_);
 
-			return bd_;
+			return bi_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
 		var f_ = context.Operators.Exists<Encounter>(e_);
@@ -213,12 +218,13 @@ public class Hospice_6_9_000
 		var i_ = Status_1_6_000.isEncounterPerformed(h_);
 		bool? j_(Encounter HospiceEncounter)
 		{
-			var be_ = FHIRHelpers_4_3_000.ToInterval(HospiceEncounter?.Period);
-			var bf_ = QICoreCommon_2_0_000.toInterval((be_ as object));
-			var bg_ = this.Measurement_Period();
-			var bh_ = context.Operators.Overlaps(bf_, bg_, "day");
+			var bj_ = HospiceEncounter?.Period;
+			var bk_ = FHIRHelpers_4_3_000.ToInterval(bj_);
+			var bl_ = QICoreCommon_2_0_000.toInterval((bk_ as object));
+			var bm_ = this.Measurement_Period();
+			var bn_ = context.Operators.Overlaps(bl_, bm_, "day");
 
-			return bh_;
+			return bn_;
 		};
 		var k_ = context.Operators.Where<Encounter>(i_, j_);
 		var l_ = context.Operators.Exists<Encounter>(k_);
@@ -229,17 +235,19 @@ public class Hospice_6_9_000
 		var q_ = Status_1_6_000.isAssessmentPerformed(p_);
 		bool? r_(Observation HospiceAssessment)
 		{
-			var bi_ = FHIRHelpers_4_3_000.ToValue(HospiceAssessment?.Value);
-			var bj_ = this.Yes__qualifier_value_();
-			var bk_ = context.Operators.ConvertCodeToConcept(bj_);
-			var bl_ = context.Operators.Equivalent((bi_ as CqlConcept), bk_);
-			var bm_ = FHIRHelpers_4_3_000.ToValue(HospiceAssessment?.Effective);
-			var bn_ = QICoreCommon_2_0_000.toInterval(bm_);
-			var bo_ = this.Measurement_Period();
-			var bp_ = context.Operators.Overlaps(bn_, bo_, "day");
-			var bq_ = context.Operators.And(bl_, bp_);
+			var bo_ = HospiceAssessment?.Value;
+			var bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
+			var bq_ = this.Yes__qualifier_value_();
+			var br_ = context.Operators.ConvertCodeToConcept(bq_);
+			var bs_ = context.Operators.Equivalent((bp_ as CqlConcept), br_);
+			var bt_ = HospiceAssessment?.Effective;
+			var bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
+			var bv_ = QICoreCommon_2_0_000.toInterval(bu_);
+			var bw_ = this.Measurement_Period();
+			var bx_ = context.Operators.Overlaps(bv_, bw_, "day");
+			var by_ = context.Operators.And(bs_, bx_);
 
-			return bq_;
+			return by_;
 		};
 		var s_ = context.Operators.Where<Observation>(q_, r_);
 		var t_ = context.Operators.Exists<Observation>(s_);
@@ -249,12 +257,13 @@ public class Hospice_6_9_000
 		var x_ = Status_1_6_000.isInterventionOrder(w_);
 		bool? y_(ServiceRequest HospiceOrder)
 		{
-			var br_ = this.Measurement_Period();
-			var bs_ = context.Operators.Convert<CqlDateTime>(HospiceOrder?.AuthoredOnElement);
-			var bt_ = QICoreCommon_2_0_000.toInterval((bs_ as object));
-			var bu_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(br_, bt_, "day");
+			var bz_ = this.Measurement_Period();
+			var ca_ = HospiceOrder?.AuthoredOnElement;
+			var cb_ = context.Operators.Convert<CqlDateTime>(ca_);
+			var cc_ = QICoreCommon_2_0_000.toInterval((cb_ as object));
+			var cd_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bz_, cc_, "day");
 
-			return bu_;
+			return cd_;
 		};
 		var z_ = context.Operators.Where<ServiceRequest>(x_, y_);
 		var aa_ = context.Operators.Exists<ServiceRequest>(z_);
@@ -263,12 +272,13 @@ public class Hospice_6_9_000
 		var ae_ = Status_1_6_000.isInterventionPerformed(ad_);
 		bool? af_(Procedure HospicePerformed)
 		{
-			var bv_ = FHIRHelpers_4_3_000.ToValue(HospicePerformed?.Performed);
-			var bw_ = QICoreCommon_2_0_000.toInterval(bv_);
-			var bx_ = this.Measurement_Period();
-			var by_ = context.Operators.Overlaps(bw_, bx_, "day");
+			var ce_ = HospicePerformed?.Performed;
+			var cf_ = FHIRHelpers_4_3_000.ToValue(ce_);
+			var cg_ = QICoreCommon_2_0_000.toInterval(cf_);
+			var ch_ = this.Measurement_Period();
+			var ci_ = context.Operators.Overlaps(cg_, ch_, "day");
 
-			return by_;
+			return ci_;
 		};
 		var ag_ = context.Operators.Where<Procedure>(ae_, af_);
 		var ah_ = context.Operators.Exists<Procedure>(ag_);
@@ -277,11 +287,11 @@ public class Hospice_6_9_000
 		var ak_ = context.Operators.RetrieveByValueSet<Condition>(aj_, null);
 		bool? al_(Condition HospiceCareDiagnosis)
 		{
-			var bz_ = QICoreCommon_2_0_000.prevalenceInterval(HospiceCareDiagnosis);
-			var ca_ = this.Measurement_Period();
-			var cb_ = context.Operators.Overlaps(bz_, ca_, "day");
+			var cj_ = QICoreCommon_2_0_000.prevalenceInterval(HospiceCareDiagnosis);
+			var ck_ = this.Measurement_Period();
+			var cl_ = context.Operators.Overlaps(cj_, ck_, "day");
 
-			return cb_;
+			return cl_;
 		};
 		var am_ = context.Operators.Where<Condition>(ak_, al_);
 		var an_ = context.Operators.Exists<Condition>(am_);

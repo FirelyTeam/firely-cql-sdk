@@ -7,7 +7,7 @@ var solutionDir = new DirectoryInfo(Environment.CurrentDirectory);
 while (!File.Exists(Path.Combine(solutionDir!.FullName, "CqlAndDemo.sln")))
     solutionDir = solutionDir.Parent;
 
-CSharpCodeWriterTypeFormat csTypeFormat = CSharpCodeWriterTypeFormat.Var;
+CSharpCodeWriterTypeFormat csTypeFormat = CSharpCodeWriterTypeFormat.Explicit;
 (string subDir, string measureSubDir)[] iteration = [
     ("Demo", "Measures"),
     ("CMS", "Measures-cms")

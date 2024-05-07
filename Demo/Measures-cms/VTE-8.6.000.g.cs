@@ -109,17 +109,20 @@ public class VTE_8_6_000
 			var d_ = CQMCommon_2_0_000.encounterDiagnosis(InpatientEncounter);
 			bool? e_(Condition EncDx)
 			{
-				var i_ = FHIRHelpers_4_3_000.ToConcept(EncDx?.Code);
-				var j_ = this.Obstetrical_or_Pregnancy_Related_Conditions();
-				var k_ = context.Operators.ConceptInValueSet(i_, j_);
-				var m_ = this.Venous_Thromboembolism();
-				var n_ = context.Operators.ConceptInValueSet(i_, m_);
-				var o_ = context.Operators.Or(k_, n_);
-				var q_ = this.Obstetrics_VTE();
-				var r_ = context.Operators.ConceptInValueSet(i_, q_);
-				var s_ = context.Operators.Or(o_, r_);
+				var i_ = EncDx?.Code;
+				var j_ = FHIRHelpers_4_3_000.ToConcept(i_);
+				var k_ = this.Obstetrical_or_Pregnancy_Related_Conditions();
+				var l_ = context.Operators.ConceptInValueSet(j_, k_);
+				var n_ = FHIRHelpers_4_3_000.ToConcept(i_);
+				var o_ = this.Venous_Thromboembolism();
+				var p_ = context.Operators.ConceptInValueSet(n_, o_);
+				var q_ = context.Operators.Or(l_, p_);
+				var s_ = FHIRHelpers_4_3_000.ToConcept(i_);
+				var t_ = this.Obstetrics_VTE();
+				var u_ = context.Operators.ConceptInValueSet(s_, t_);
+				var v_ = context.Operators.Or(q_, u_);
 
-				return s_;
+				return v_;
 			};
 			var f_ = context.Operators.Where<Condition>(d_, e_);
 			var g_ = context.Operators.Exists<Condition>(f_);
@@ -142,14 +145,17 @@ public class VTE_8_6_000
 		bool? b_(Encounter InpatientEncounter)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = FHIRHelpers_4_3_000.ToInterval(InpatientEncounter?.Period);
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, 18);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = InpatientEncounter?.Period;
+			var k_ = FHIRHelpers_4_3_000.ToInterval(j_);
+			var l_ = context.Operators.Start(k_);
+			var m_ = context.Operators.DateFrom(l_);
+			var n_ = context.Operators.CalculateAgeAt(i_, m_, "year");
+			var o_ = context.Operators.GreaterOrEqual(n_, 18);
 
-			return l_;
+			return o_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		var d_ = this.Admission_without_VTE_or_Obstetrical_Conditions();

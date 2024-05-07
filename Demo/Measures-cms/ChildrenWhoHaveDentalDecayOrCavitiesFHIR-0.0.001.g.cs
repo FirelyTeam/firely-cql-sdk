@@ -230,10 +230,11 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		bool? d_(Encounter ValidEncounter)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, g_, "day");
+			var g_ = ValidEncounter?.Period;
+			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
-			return h_;
+			return i_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
 

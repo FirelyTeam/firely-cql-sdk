@@ -125,9 +125,9 @@ internal static class LibraryRunner
                 object value = method.Invoke(instance, [])!;
                 values.Add(declName, value);
             }
-            catch (Exception e)
+            catch (TargetInvocationException e)
             {
-                errors.Add(declName, e);
+                errors.Add(declName, e.InnerException!);
             }
         }
 

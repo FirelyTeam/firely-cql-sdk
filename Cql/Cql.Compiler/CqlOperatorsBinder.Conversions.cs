@@ -28,16 +28,16 @@ partial class CqlOperatorsBinder
         out (Expression arg, TypeConversion conversion) result)
     {
         Type from = expression.Type;
-
-        if (_typeConverter.CanConvert(from, to))
-        {
-            var bindToGenericMethod = BindToBestMethodOverload(nameof(ICqlOperators.Convert), [expression.NewAssignToTypeExpression<object>()], [to]);
-            result = (bindToGenericMethod, TypeConversion.OperatorConvert);
-            return true;
-        }
-
         result = expression.TryNewAssignToTypeExpression(to, throwError: false)!;
-        return result.conversion != TypeConversion.NoMatch;
+        if (result.conversion != TypeConversion.NoMatch)
+            return true;
+
+        if (!_typeConverter.CanConvert(from, to))
+            return false;
+
+        var bindToGenericMethod = BindToBestMethodOverload(nameof(ICqlOperators.Convert), [expression.NewAssignToTypeExpression<object>()], [to]);
+        result = (bindToGenericMethod, TypeConversion.OperatorConvert);
+        return true;
     }
 
     private MethodCallExpression BindToBestMethodOverload(

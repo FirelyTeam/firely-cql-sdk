@@ -413,25 +413,26 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var ar_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? as_(Encounter E)
 		{
-			CqlConcept az_(CodeableConcept @this)
+			var az_ = E?.Type;
+			CqlConcept ba_(CodeableConcept @this)
 			{
-				var be_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var bf_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return be_;
+				return bf_;
 			};
-			var ba_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, az_);
-			bool? bb_(CqlConcept T)
+			var bb_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)az_, ba_);
+			bool? bc_(CqlConcept T)
 			{
-				var bf_ = this.Unlisted_preventive_medicine_service();
-				var bg_ = context.Operators.ConvertCodeToConcept(bf_);
-				var bh_ = context.Operators.Equivalent(T, bg_);
+				var bg_ = this.Unlisted_preventive_medicine_service();
+				var bh_ = context.Operators.ConvertCodeToConcept(bg_);
+				var bi_ = context.Operators.Equivalent(T, bh_);
 
-				return bh_;
+				return bi_;
 			};
-			var bc_ = context.Operators.Where<CqlConcept>(ba_, bb_);
-			var bd_ = context.Operators.Exists<CqlConcept>(bc_);
+			var bd_ = context.Operators.Where<CqlConcept>(bb_, bc_);
+			var be_ = context.Operators.Exists<CqlConcept>(bd_);
 
-			return bd_;
+			return be_;
 		};
 		var at_ = context.Operators.Where<Encounter>(ar_, as_);
 		var au_ = context.Operators.ListUnion<Encounter>(aq_, at_);
@@ -439,18 +440,19 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var aw_ = Status_1_6_000.Finished_Encounter(av_);
 		bool? ax_(Encounter ValidEncounter)
 		{
-			var bi_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var bj_ = QICoreCommon_2_0_000.ToInterval((bi_ as object));
-			var bk_ = context.Operators.End(bj_);
-			var bl_ = this.Measurement_Period();
-			var bm_ = context.Operators.Start(bl_);
-			var bo_ = context.Operators.End(bl_);
-			var bp_ = context.Operators.Quantity(3m, "days");
-			var bq_ = context.Operators.Subtract(bo_, bp_);
-			var br_ = context.Operators.Interval(bm_, bq_, true, true);
-			var bs_ = context.Operators.In<CqlDateTime>(bk_, br_, "day");
+			var bj_ = ValidEncounter?.Period;
+			var bk_ = FHIRHelpers_4_3_000.ToInterval(bj_);
+			var bl_ = QICoreCommon_2_0_000.ToInterval((bk_ as object));
+			var bm_ = context.Operators.End(bl_);
+			var bn_ = this.Measurement_Period();
+			var bo_ = context.Operators.Start(bn_);
+			var bq_ = context.Operators.End(bn_);
+			var br_ = context.Operators.Quantity(3m, "days");
+			var bs_ = context.Operators.Subtract(bq_, br_);
+			var bt_ = context.Operators.Interval(bo_, bs_, true, true);
+			var bu_ = context.Operators.In<CqlDateTime>(bm_, bt_, "day");
 
-			return bs_;
+			return bu_;
 		};
 		var ay_ = context.Operators.Where<Encounter>(aw_, ax_);
 
@@ -482,14 +484,16 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		{
 			var l_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_figmirinmncaavfkbmahdktce.URI);
 			var m_ = context.Operators.Start(l_);
-			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_figmirinmncaavfkbmahdktce.QualifyingEncounters?.Period);
-			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			var p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
-			var s_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			var t_ = context.Operators.OverlapsBefore(l_, s_, null);
-			var u_ = context.Operators.Or(p_, t_);
+			var n_ = tuple_figmirinmncaavfkbmahdktce.QualifyingEncounters?.Period;
+			var o_ = FHIRHelpers_4_3_000.ToInterval(n_);
+			var p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
+			var q_ = context.Operators.In<CqlDateTime>(m_, p_, "day");
+			var t_ = FHIRHelpers_4_3_000.ToInterval(n_);
+			var u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
+			var v_ = context.Operators.OverlapsBefore(l_, u_, null);
+			var w_ = context.Operators.Or(q_, v_);
 
-			return u_;
+			return w_;
 		};
 		var h_ = context.Operators.Where<Tuple_FiGMIRiNMNcaAVFKbMahDKTce>(f_, g_);
 		Encounter i_(Tuple_FiGMIRiNMNcaAVFKbMahDKTce tuple_figmirinmncaavfkbmahdktce) => 
@@ -509,14 +513,16 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		bool? b_(Encounter EncounterWithURI)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "month");
-			var l_ = context.Operators.GreaterOrEqual(k_, 3);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "month");
+			var n_ = context.Operators.GreaterOrEqual(m_, 3);
 
-			return l_;
+			return n_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
@@ -596,22 +602,26 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var l_ = context.Operators.ListUnion<MedicationRequest>(i_, k_);
 			bool? m_(MedicationRequest OrderedAntibiotic)
 			{
-				var q_ = context.Operators.Convert<CqlDateTime>(OrderedAntibiotic?.AuthoredOnElement);
-				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithURI?.Period);
-				var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-				var t_ = context.Operators.Start(s_);
-				var v_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-				var w_ = context.Operators.Start(v_);
-				var x_ = context.Operators.Quantity(3m, "days");
-				var y_ = context.Operators.Add(w_, x_);
-				var z_ = context.Operators.Interval(t_, y_, true, true);
-				var aa_ = context.Operators.In<CqlDateTime>(q_, z_, null);
-				var ac_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-				var ad_ = context.Operators.Start(ac_);
-				var ae_ = context.Operators.Not((bool?)(ad_ is null));
-				var af_ = context.Operators.And(aa_, ae_);
+				var q_ = OrderedAntibiotic?.AuthoredOnElement;
+				var r_ = context.Operators.Convert<CqlDateTime>(q_);
+				var s_ = EncounterWithURI?.Period;
+				var t_ = FHIRHelpers_4_3_000.ToInterval(s_);
+				var u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
+				var v_ = context.Operators.Start(u_);
+				var x_ = FHIRHelpers_4_3_000.ToInterval(s_);
+				var y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+				var z_ = context.Operators.Start(y_);
+				var aa_ = context.Operators.Quantity(3m, "days");
+				var ab_ = context.Operators.Add(z_, aa_);
+				var ac_ = context.Operators.Interval(v_, ab_, true, true);
+				var ad_ = context.Operators.In<CqlDateTime>(r_, ac_, null);
+				var af_ = FHIRHelpers_4_3_000.ToInterval(s_);
+				var ag_ = QICoreCommon_2_0_000.ToInterval((af_ as object));
+				var ah_ = context.Operators.Start(ag_);
+				var ai_ = context.Operators.Not((bool?)(ah_ is null));
+				var aj_ = context.Operators.And(ad_, ai_);
 
-				return af_;
+				return aj_;
 			};
 			var n_ = context.Operators.Where<MedicationRequest>(l_, m_);
 			Encounter o_(MedicationRequest OrderedAntibiotic) => 
@@ -639,20 +649,24 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		bool? b_(Encounter EncounterWithURI)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "month");
-			var l_ = context.Operators.GreaterOrEqual(k_, 3);
-			var n_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var p_ = context.Operators.Start(h_);
-			var q_ = context.Operators.DateFrom(p_);
-			var r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
-			var s_ = context.Operators.LessOrEqual(r_, 17);
-			var t_ = context.Operators.And(l_, s_);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "month");
+			var n_ = context.Operators.GreaterOrEqual(m_, 3);
+			var p_ = f_?.BirthDateElement;
+			var q_ = p_?.Value;
+			var r_ = context.Operators.Convert<CqlDate>(q_);
+			var t_ = context.Operators.Start(j_);
+			var u_ = context.Operators.DateFrom(t_);
+			var v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
+			var w_ = context.Operators.LessOrEqual(v_, 17);
+			var x_ = context.Operators.And(n_, w_);
 
-			return t_;
+			return x_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
@@ -672,15 +686,17 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		bool? b_(Encounter EncounterWithURI)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.Interval(18, 64, true, true);
-			var m_ = context.Operators.In<int?>(k_, l_, null);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+			var n_ = context.Operators.Interval(18, 64, true, true);
+			var o_ = context.Operators.In<int?>(m_, n_, null);
 
-			return m_;
+			return o_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 
@@ -700,14 +716,16 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		bool? b_(Encounter EncounterWithURI)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, 65);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+			var n_ = context.Operators.GreaterOrEqual(m_, 65);
 
-			return l_;
+			return n_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithURI) => 

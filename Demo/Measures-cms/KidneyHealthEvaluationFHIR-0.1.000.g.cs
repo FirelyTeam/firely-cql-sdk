@@ -354,13 +354,14 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			var f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Diabetes);
 			var g_ = this.Measurement_Period();
 			var h_ = context.Operators.Overlaps(f_, g_, null);
-			var i_ = FHIRHelpers_4_3_000.ToConcept(Diabetes?.ClinicalStatus);
-			var j_ = this.active();
-			var k_ = context.Operators.ConvertCodeToConcept(j_);
-			var l_ = context.Operators.Equivalent(i_, k_);
-			var m_ = context.Operators.And(h_, l_);
+			var i_ = Diabetes?.ClinicalStatus;
+			var j_ = FHIRHelpers_4_3_000.ToConcept(i_);
+			var k_ = this.active();
+			var l_ = context.Operators.ConvertCodeToConcept(k_);
+			var m_ = context.Operators.Equivalent(j_, l_);
+			var n_ = context.Operators.And(h_, m_);
 
-			return m_;
+			return n_;
 		};
 		var d_ = context.Operators.Where<Condition>(b_, c_);
 		var e_ = context.Operators.Exists<Condition>(d_);
@@ -397,13 +398,16 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		bool? u_(Encounter ValidEncounter)
 		{
 			var x_ = this.Measurement_Period();
-			var y_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, y_, null);
-			var aa_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var ab_ = context.Operators.Equal(aa_, "finished");
-			var ac_ = context.Operators.And(z_, ab_);
+			var y_ = ValidEncounter?.Period;
+			var z_ = FHIRHelpers_4_3_000.ToInterval(y_);
+			var aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, null);
+			var ab_ = ValidEncounter?.StatusElement;
+			var ac_ = ab_?.Value;
+			var ad_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ac_);
+			var ae_ = context.Operators.Equal(ad_, "finished");
+			var af_ = context.Operators.And(aa_, ae_);
 
-			return ac_;
+			return af_;
 		};
 		var v_ = context.Operators.Where<Encounter>(t_, u_);
 		var w_ = context.Operators.Exists<Encounter>(v_);
@@ -460,13 +464,14 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			var h_ = QICoreCommon_2_0_000.ToPrevalenceInterval(CKDOrESRD);
 			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.Overlaps(h_, i_, null);
-			var k_ = FHIRHelpers_4_3_000.ToConcept(CKDOrESRD?.ClinicalStatus);
-			var l_ = this.active();
-			var m_ = context.Operators.ConvertCodeToConcept(l_);
-			var n_ = context.Operators.Equivalent(k_, m_);
-			var o_ = context.Operators.And(j_, n_);
+			var k_ = CKDOrESRD?.ClinicalStatus;
+			var l_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			var m_ = this.active();
+			var n_ = context.Operators.ConvertCodeToConcept(m_);
+			var o_ = context.Operators.Equivalent(l_, n_);
+			var p_ = context.Operators.And(j_, o_);
 
-			return o_;
+			return p_;
 		};
 		var g_ = context.Operators.Where<Condition>(e_, f_);
 
@@ -500,24 +505,28 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		bool? c_(Observation eGFRTest)
 		{
 			var l_ = this.Measurement_Period();
-			var m_ = FHIRHelpers_4_3_000.ToValue(eGFRTest?.Effective);
-			var n_ = QICoreCommon_2_0_000.ToInterval(m_);
-			var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
-			var p_ = FHIRHelpers_4_3_000.ToValue(eGFRTest?.Value);
-			var q_ = context.Operators.Not((bool?)(p_ is null));
-			var r_ = context.Operators.And(o_, q_);
-			var s_ = context.Operators.Convert<Code<ObservationStatus>>(eGFRTest?.StatusElement?.Value);
-			var t_ = context.Operators.Convert<string>(s_);
-			var u_ = new string[]
+			var m_ = eGFRTest?.Effective;
+			var n_ = FHIRHelpers_4_3_000.ToValue(m_);
+			var o_ = QICoreCommon_2_0_000.ToInterval(n_);
+			var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, null);
+			var q_ = eGFRTest?.Value;
+			var r_ = FHIRHelpers_4_3_000.ToValue(q_);
+			var s_ = context.Operators.Not((bool?)(r_ is null));
+			var t_ = context.Operators.And(p_, s_);
+			var u_ = eGFRTest?.StatusElement;
+			var v_ = u_?.Value;
+			var w_ = context.Operators.Convert<Code<ObservationStatus>>(v_);
+			var x_ = context.Operators.Convert<string>(w_);
+			var y_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
-			var w_ = context.Operators.And(r_, v_);
+			var z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+			var aa_ = context.Operators.And(t_, z_);
 
-			return w_;
+			return aa_;
 		};
 		var d_ = context.Operators.Where<Observation>(b_, c_);
 		var e_ = context.Operators.Exists<Observation>(d_);
@@ -525,25 +534,29 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		var g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
 		bool? h_(Observation uACRTest)
 		{
-			var x_ = this.Measurement_Period();
-			var y_ = FHIRHelpers_4_3_000.ToValue(uACRTest?.Effective);
-			var z_ = QICoreCommon_2_0_000.ToInterval(y_);
-			var aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, null);
-			var ab_ = FHIRHelpers_4_3_000.ToValue(uACRTest?.Value);
-			var ac_ = context.Operators.Not((bool?)(ab_ is null));
-			var ad_ = context.Operators.And(aa_, ac_);
-			var ae_ = context.Operators.Convert<Code<ObservationStatus>>(uACRTest?.StatusElement?.Value);
-			var af_ = context.Operators.Convert<string>(ae_);
-			var ag_ = new string[]
+			var ab_ = this.Measurement_Period();
+			var ac_ = uACRTest?.Effective;
+			var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+			var ae_ = QICoreCommon_2_0_000.ToInterval(ad_);
+			var af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, ae_, null);
+			var ag_ = uACRTest?.Value;
+			var ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
+			var ai_ = context.Operators.Not((bool?)(ah_ is null));
+			var aj_ = context.Operators.And(af_, ai_);
+			var ak_ = uACRTest?.StatusElement;
+			var al_ = ak_?.Value;
+			var am_ = context.Operators.Convert<Code<ObservationStatus>>(al_);
+			var an_ = context.Operators.Convert<string>(am_);
+			var ao_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var ah_ = context.Operators.In<string>(af_, (ag_ as IEnumerable<string>));
-			var ai_ = context.Operators.And(ad_, ah_);
+			var ap_ = context.Operators.In<string>(an_, (ao_ as IEnumerable<string>));
+			var aq_ = context.Operators.And(aj_, ap_);
 
-			return ai_;
+			return aq_;
 		};
 		var i_ = context.Operators.Where<Observation>(g_, h_);
 		var j_ = context.Operators.Exists<Observation>(i_);

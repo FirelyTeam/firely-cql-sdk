@@ -179,12 +179,13 @@ public class TJCOverall_8_11_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter NonElectiveEncounter)
 		{
-			var e_ = FHIRHelpers_4_3_000.ToInterval(NonElectiveEncounter?.Period);
-			var f_ = context.Operators.End(e_);
-			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.In<CqlDateTime>(f_, g_, "day");
+			var e_ = NonElectiveEncounter?.Period;
+			var f_ = FHIRHelpers_4_3_000.ToInterval(e_);
+			var g_ = context.Operators.End(f_);
+			var h_ = this.Measurement_Period();
+			var i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 
-			return h_;
+			return i_;
 		};
 		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
@@ -201,15 +202,17 @@ public class TJCOverall_8_11_000
 		bool? b_(Encounter NonElectiveEncounter)
 		{
 			var d_ = CQMCommon_2_0_000.principalDiagnosis(NonElectiveEncounter);
-			var e_ = FHIRHelpers_4_3_000.ToConcept(d_?.Code);
-			var f_ = this.Hemorrhagic_Stroke();
-			var g_ = context.Operators.ConceptInValueSet(e_, f_);
-			var i_ = FHIRHelpers_4_3_000.ToConcept(d_?.Code);
-			var j_ = this.Ischemic_Stroke();
-			var k_ = context.Operators.ConceptInValueSet(i_, j_);
-			var l_ = context.Operators.Or(g_, k_);
+			var e_ = d_?.Code;
+			var f_ = FHIRHelpers_4_3_000.ToConcept(e_);
+			var g_ = this.Hemorrhagic_Stroke();
+			var h_ = context.Operators.ConceptInValueSet(f_, g_);
+			var j_ = d_?.Code;
+			var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+			var l_ = this.Ischemic_Stroke();
+			var m_ = context.Operators.ConceptInValueSet(k_, l_);
+			var n_ = context.Operators.Or(h_, m_);
 
-			return l_;
+			return n_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -226,14 +229,17 @@ public class TJCOverall_8_11_000
 		bool? b_(Encounter AllStrokeEncounter)
 		{
 			var d_ = this.Patient();
-			var e_ = context.Operators.Convert<CqlDate>(d_?.BirthDateElement?.Value);
-			var f_ = FHIRHelpers_4_3_000.ToInterval(AllStrokeEncounter?.Period);
-			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.DateFrom(g_);
-			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, 18);
+			var e_ = d_?.BirthDateElement;
+			var f_ = e_?.Value;
+			var g_ = context.Operators.Convert<CqlDate>(f_);
+			var h_ = AllStrokeEncounter?.Period;
+			var i_ = FHIRHelpers_4_3_000.ToInterval(h_);
+			var j_ = context.Operators.Start(i_);
+			var k_ = context.Operators.DateFrom(j_);
+			var l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
+			var m_ = context.Operators.GreaterOrEqual(l_, 18);
 
-			return j_;
+			return m_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -250,11 +256,12 @@ public class TJCOverall_8_11_000
 		bool? b_(Encounter EncounterWithAge)
 		{
 			var d_ = CQMCommon_2_0_000.principalDiagnosis(EncounterWithAge);
-			var e_ = FHIRHelpers_4_3_000.ToConcept(d_?.Code);
-			var f_ = this.Ischemic_Stroke();
-			var g_ = context.Operators.ConceptInValueSet(e_, f_);
+			var e_ = d_?.Code;
+			var f_ = FHIRHelpers_4_3_000.ToConcept(e_);
+			var g_ = this.Ischemic_Stroke();
+			var h_ = context.Operators.ConceptInValueSet(f_, g_);
 
-			return g_;
+			return h_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -270,23 +277,33 @@ public class TJCOverall_8_11_000
 		var a_ = this.Ischemic_Stroke_Encounter();
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
-			var d_ = FHIRHelpers_4_3_000.ToConcept(IschemicStrokeEncounter?.Hospitalization?.DischargeDisposition);
-			var e_ = this.Discharge_To_Acute_Care_Facility();
-			var f_ = context.Operators.ConceptInValueSet(d_, e_);
-			var h_ = this.Left_Against_Medical_Advice();
-			var i_ = context.Operators.ConceptInValueSet(d_, h_);
-			var j_ = context.Operators.Or(f_, i_);
-			var l_ = this.Patient_Expired();
-			var m_ = context.Operators.ConceptInValueSet(d_, l_);
-			var n_ = context.Operators.Or(j_, m_);
-			var p_ = this.Discharged_to_Home_for_Hospice_Care();
-			var q_ = context.Operators.ConceptInValueSet(d_, p_);
-			var r_ = context.Operators.Or(n_, q_);
-			var t_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
-			var u_ = context.Operators.ConceptInValueSet(d_, t_);
-			var v_ = context.Operators.Or(r_, u_);
+			var d_ = IschemicStrokeEncounter?.Hospitalization;
+			var e_ = d_?.DischargeDisposition;
+			var f_ = FHIRHelpers_4_3_000.ToConcept(e_);
+			var g_ = this.Discharge_To_Acute_Care_Facility();
+			var h_ = context.Operators.ConceptInValueSet(f_, g_);
+			var j_ = d_?.DischargeDisposition;
+			var k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+			var l_ = this.Left_Against_Medical_Advice();
+			var m_ = context.Operators.ConceptInValueSet(k_, l_);
+			var n_ = context.Operators.Or(h_, m_);
+			var p_ = d_?.DischargeDisposition;
+			var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
+			var r_ = this.Patient_Expired();
+			var s_ = context.Operators.ConceptInValueSet(q_, r_);
+			var t_ = context.Operators.Or(n_, s_);
+			var v_ = d_?.DischargeDisposition;
+			var w_ = FHIRHelpers_4_3_000.ToConcept(v_);
+			var x_ = this.Discharged_to_Home_for_Hospice_Care();
+			var y_ = context.Operators.ConceptInValueSet(w_, x_);
+			var z_ = context.Operators.Or(t_, y_);
+			var ab_ = d_?.DischargeDisposition;
+			var ac_ = FHIRHelpers_4_3_000.ToConcept(ab_);
+			var ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
+			var ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
+			var af_ = context.Operators.Or(z_, ae_);
 
-			return v_;
+			return af_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -303,18 +320,22 @@ public class TJCOverall_8_11_000
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest SR)
 		{
-			var j_ = context.Operators.Convert<Code<RequestStatus>>(SR?.StatusElement?.Value);
-			var k_ = context.Operators.Convert<string>(j_);
-			var l_ = new string[]
+			var j_ = SR?.StatusElement;
+			var k_ = j_?.Value;
+			var l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
+			var m_ = context.Operators.Convert<string>(l_);
+			var n_ = new string[]
 			{
 				"active",
 				"completed",
 				"on-hold",
 			};
-			var m_ = context.Operators.In<string>(k_, (l_ as IEnumerable<string>));
-			var n_ = context.Operators.Convert<Code<RequestIntent>>(SR?.IntentElement?.Value);
-			var o_ = context.Operators.Convert<string>(n_);
-			var p_ = new string[]
+			var o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
+			var p_ = SR?.IntentElement;
+			var q_ = p_?.Value;
+			var r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
+			var s_ = context.Operators.Convert<string>(r_);
+			var t_ = new string[]
 			{
 				"order",
 				"original-order",
@@ -322,27 +343,31 @@ public class TJCOverall_8_11_000
 				"filler-order",
 				"instance-order",
 			};
-			var q_ = context.Operators.In<string>(o_, (p_ as IEnumerable<string>));
-			var r_ = context.Operators.And(m_, q_);
-			var s_ = context.Operators.IsTrue(SR?.DoNotPerformElement?.Value);
-			var t_ = context.Operators.Not(s_);
-			var u_ = context.Operators.And(r_, t_);
+			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
+			var v_ = context.Operators.And(o_, u_);
+			var w_ = SR?.DoNotPerformElement;
+			var x_ = w_?.Value;
+			var y_ = context.Operators.IsTrue(x_);
+			var z_ = context.Operators.Not(y_);
+			var aa_ = context.Operators.And(v_, z_);
 
-			return u_;
+			return aa_;
 		};
 		var d_ = context.Operators.Where<ServiceRequest>(b_, c_);
 		var f_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? g_(Procedure InterventionPerformed)
 		{
-			var v_ = context.Operators.Convert<string>(InterventionPerformed?.StatusElement?.Value);
-			var w_ = new string[]
+			var ab_ = InterventionPerformed?.StatusElement;
+			var ac_ = ab_?.Value;
+			var ad_ = context.Operators.Convert<string>(ac_);
+			var ae_ = new string[]
 			{
 				"completed",
 				"in-progress",
 			};
-			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
+			var af_ = context.Operators.In<string>(ad_, (ae_ as IEnumerable<string>));
 
-			return x_;
+			return af_;
 		};
 		var h_ = context.Operators.Where<Procedure>(f_, g_);
 		var i_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));

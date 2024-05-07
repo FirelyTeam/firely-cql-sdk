@@ -306,29 +306,34 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			bool? f_(Condition Dementia)
 			{
 				var j_ = this.Measurement_Period();
-				var k_ = FHIRHelpers_4_3_000.ToInterval(EncounterAssessCognition?.Period);
-				var l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, k_, null);
-				var m_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
-				var o_ = context.Operators.Overlaps(m_, k_, "day");
-				var p_ = context.Operators.And(l_, o_);
-				var q_ = QICoreCommon_2_0_000.isActive(Dementia);
-				var r_ = context.Operators.And(p_, q_);
-				var s_ = FHIRHelpers_4_3_000.ToConcept(Dementia?.VerificationStatus);
-				var t_ = QICoreCommon_2_0_000.unconfirmed();
-				var u_ = context.Operators.ConvertCodeToConcept(t_);
-				var v_ = context.Operators.Equivalent(s_, u_);
-				var x_ = QICoreCommon_2_0_000.refuted();
-				var y_ = context.Operators.ConvertCodeToConcept(x_);
-				var z_ = context.Operators.Equivalent(s_, y_);
-				var aa_ = context.Operators.Or(v_, z_);
-				var ac_ = QICoreCommon_2_0_000.entered_in_error();
-				var ad_ = context.Operators.ConvertCodeToConcept(ac_);
-				var ae_ = context.Operators.Equivalent(s_, ad_);
-				var af_ = context.Operators.Or(aa_, ae_);
-				var ag_ = context.Operators.Not(af_);
-				var ah_ = context.Operators.And(r_, ag_);
+				var k_ = EncounterAssessCognition?.Period;
+				var l_ = FHIRHelpers_4_3_000.ToInterval(k_);
+				var m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
+				var n_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
+				var p_ = FHIRHelpers_4_3_000.ToInterval(k_);
+				var q_ = context.Operators.Overlaps(n_, p_, "day");
+				var r_ = context.Operators.And(m_, q_);
+				var s_ = QICoreCommon_2_0_000.isActive(Dementia);
+				var t_ = context.Operators.And(r_, s_);
+				var u_ = Dementia?.VerificationStatus;
+				var v_ = FHIRHelpers_4_3_000.ToConcept(u_);
+				var w_ = QICoreCommon_2_0_000.unconfirmed();
+				var x_ = context.Operators.ConvertCodeToConcept(w_);
+				var y_ = context.Operators.Equivalent(v_, x_);
+				var aa_ = FHIRHelpers_4_3_000.ToConcept(u_);
+				var ab_ = QICoreCommon_2_0_000.refuted();
+				var ac_ = context.Operators.ConvertCodeToConcept(ab_);
+				var ad_ = context.Operators.Equivalent(aa_, ac_);
+				var ae_ = context.Operators.Or(y_, ad_);
+				var ag_ = FHIRHelpers_4_3_000.ToConcept(u_);
+				var ah_ = QICoreCommon_2_0_000.entered_in_error();
+				var ai_ = context.Operators.ConvertCodeToConcept(ah_);
+				var aj_ = context.Operators.Equivalent(ag_, ai_);
+				var ak_ = context.Operators.Or(ae_, aj_);
+				var al_ = context.Operators.Not(ak_);
+				var am_ = context.Operators.And(t_, al_);
 
-				return ah_;
+				return am_;
 			};
 			var g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition Dementia) => 
@@ -355,13 +360,16 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		bool? e_(Encounter ValidEncounter)
 		{
 			var g_ = this.Measurement_Period();
-			var h_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, h_, null);
-			var j_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var k_ = context.Operators.Equal(j_, "finished");
-			var l_ = context.Operators.And(i_, k_);
+			var h_ = ValidEncounter?.Period;
+			var i_ = FHIRHelpers_4_3_000.ToInterval(h_);
+			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, null);
+			var k_ = ValidEncounter?.StatusElement;
+			var l_ = k_?.Value;
+			var m_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(l_);
+			var n_ = context.Operators.Equal(m_, "finished");
+			var o_ = context.Operators.And(j_, n_);
 
-			return l_;
+			return o_;
 		};
 		var f_ = context.Operators.Where<Encounter>(d_, e_);
 
@@ -411,21 +419,25 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			var j_ = this.Dementia_Encounter_During_Measurement_Period();
 			bool? k_(Encounter EncounterDementia)
 			{
-				var o_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Effective);
-				var p_ = QICoreCommon_2_0_000.toInterval(o_);
-				var q_ = context.Operators.Start(p_);
-				var r_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
-				var s_ = context.Operators.End(r_);
-				var t_ = context.Operators.Quantity(12m, "months");
-				var u_ = context.Operators.Subtract(s_, t_);
-				var w_ = context.Operators.End(r_);
-				var x_ = context.Operators.Interval(u_, w_, true, true);
-				var y_ = context.Operators.In<CqlDateTime>(q_, x_, "day");
-				var aa_ = context.Operators.End(r_);
-				var ab_ = context.Operators.Not((bool?)(aa_ is null));
-				var ac_ = context.Operators.And(y_, ab_);
+				var o_ = CognitiveAssessment?.Effective;
+				var p_ = FHIRHelpers_4_3_000.ToValue(o_);
+				var q_ = QICoreCommon_2_0_000.toInterval(p_);
+				var r_ = context.Operators.Start(q_);
+				var s_ = EncounterDementia?.Period;
+				var t_ = FHIRHelpers_4_3_000.ToInterval(s_);
+				var u_ = context.Operators.End(t_);
+				var v_ = context.Operators.Quantity(12m, "months");
+				var w_ = context.Operators.Subtract(u_, v_);
+				var y_ = FHIRHelpers_4_3_000.ToInterval(s_);
+				var z_ = context.Operators.End(y_);
+				var aa_ = context.Operators.Interval(w_, z_, true, true);
+				var ab_ = context.Operators.In<CqlDateTime>(r_, aa_, "day");
+				var ad_ = FHIRHelpers_4_3_000.ToInterval(s_);
+				var ae_ = context.Operators.End(ad_);
+				var af_ = context.Operators.Not((bool?)(ae_ is null));
+				var ag_ = context.Operators.And(ab_, af_);
 
-				return ac_;
+				return ag_;
 			};
 			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
@@ -437,21 +449,24 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CognitiveAssessment)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(CognitiveAssessment?.Value);
-			var ae_ = context.Operators.Not((bool?)(ad_ is null));
-			var af_ = context.Operators.Convert<Code<ObservationStatus>>(CognitiveAssessment?.StatusElement?.Value);
-			var ag_ = context.Operators.Convert<string>(af_);
-			var ah_ = new string[]
+			var ah_ = CognitiveAssessment?.Value;
+			var ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
+			var aj_ = context.Operators.Not((bool?)(ai_ is null));
+			var ak_ = CognitiveAssessment?.StatusElement;
+			var al_ = ak_?.Value;
+			var am_ = context.Operators.Convert<Code<ObservationStatus>>(al_);
+			var an_ = context.Operators.Convert<string>(am_);
+			var ao_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"preliminary",
 			};
-			var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
-			var aj_ = context.Operators.And(ae_, ai_);
+			var ap_ = context.Operators.In<string>(an_, (ao_ as IEnumerable<string>));
+			var aq_ = context.Operators.And(aj_, ap_);
 
-			return aj_;
+			return aq_;
 		};
 		var i_ = context.Operators.Where<Observation>(g_, h_);
 
@@ -486,11 +501,14 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			var j_ = this.Dementia_Encounter_During_Measurement_Period();
 			bool? k_(Encounter EncounterDementia)
 			{
-				var o_ = context.Operators.Convert<CqlDateTime>(NoCognitiveAssessment?.IssuedElement?.Value);
-				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterDementia?.Period);
-				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
+				var o_ = NoCognitiveAssessment?.IssuedElement;
+				var p_ = o_?.Value;
+				var q_ = context.Operators.Convert<CqlDateTime>(p_);
+				var r_ = EncounterDementia?.Period;
+				var s_ = FHIRHelpers_4_3_000.ToInterval(r_);
+				var t_ = context.Operators.In<CqlDateTime>(q_, s_, null);
 
-				return q_;
+				return t_;
 			};
 			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterDementia) => 
@@ -502,27 +520,32 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation NoCognitiveAssessment)
 		{
-			bool? r_(Extension @this)
+			bool? u_(Extension @this)
 			{
-				var aa_ = context.Operators.Convert<FhirUri>(@this?.Url);
-				var ab_ = FHIRHelpers_4_3_000.ToString(aa_);
-				var ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				var ad_ = @this?.Url;
+				var ae_ = context.Operators.Convert<FhirUri>(ad_);
+				var af_ = FHIRHelpers_4_3_000.ToString(ae_);
+				var ag_ = context.Operators.Equal(af_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return ac_;
+				return ag_;
 			};
-			var s_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
+			var v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
-					: null), r_);
-			DataType t_(Extension @this) => 
-				@this?.Value;
-			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingletonFrom<DataType>(u_);
-			var w_ = context.Operators.Convert<CodeableConcept>(v_);
-			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
-			var y_ = this.Patient_Reason();
-			var z_ = context.Operators.ConceptInValueSet(x_, y_);
+					: null), u_);
+			DataType w_(Extension @this)
+			{
+				var ah_ = @this?.Value;
 
-			return z_;
+				return ah_;
+			};
+			var x_ = context.Operators.Select<Extension, DataType>(v_, w_);
+			var y_ = context.Operators.SingletonFrom<DataType>(x_);
+			var z_ = context.Operators.Convert<CodeableConcept>(y_);
+			var aa_ = FHIRHelpers_4_3_000.ToConcept(z_);
+			var ab_ = this.Patient_Reason();
+			var ac_ = context.Operators.ConceptInValueSet(aa_, ab_);
+
+			return ac_;
 		};
 		var i_ = context.Operators.Where<Observation>(g_, h_);
 

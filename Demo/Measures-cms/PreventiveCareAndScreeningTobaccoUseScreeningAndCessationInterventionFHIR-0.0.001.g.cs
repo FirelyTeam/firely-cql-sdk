@@ -443,49 +443,51 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var c_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? d_(Encounter E)
 		{
-			CqlConcept ar_(CodeableConcept @this)
+			var ar_ = E?.Type;
+			CqlConcept as_(CodeableConcept @this)
 			{
-				var aw_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var ax_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return aw_;
+				return ax_;
 			};
-			var as_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, ar_);
-			bool? at_(CqlConcept T)
+			var at_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ar_, as_);
+			bool? au_(CqlConcept T)
 			{
-				var ax_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_();
-				var ay_ = context.Operators.ConvertCodeToConcept(ax_);
-				var az_ = context.Operators.Equivalent(T, ay_);
+				var ay_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_();
+				var az_ = context.Operators.ConvertCodeToConcept(ay_);
+				var ba_ = context.Operators.Equivalent(T, az_);
 
-				return az_;
+				return ba_;
 			};
-			var au_ = context.Operators.Where<CqlConcept>(as_, at_);
-			var av_ = context.Operators.Exists<CqlConcept>(au_);
+			var av_ = context.Operators.Where<CqlConcept>(at_, au_);
+			var aw_ = context.Operators.Exists<CqlConcept>(av_);
 
-			return av_;
+			return aw_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
 		var f_ = context.Operators.ListUnion<Encounter>(b_, e_);
 		bool? h_(Encounter E)
 		{
-			CqlConcept ba_(CodeableConcept @this)
+			var bb_ = E?.Type;
+			CqlConcept bc_(CodeableConcept @this)
 			{
-				var bf_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var bh_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return bf_;
+				return bh_;
 			};
-			var bb_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, ba_);
-			bool? bc_(CqlConcept T)
+			var bd_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bb_, bc_);
+			bool? be_(CqlConcept T)
 			{
-				var bg_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes();
-				var bh_ = context.Operators.ConvertCodeToConcept(bg_);
-				var bi_ = context.Operators.Equivalent(T, bh_);
+				var bi_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes();
+				var bj_ = context.Operators.ConvertCodeToConcept(bi_);
+				var bk_ = context.Operators.Equivalent(T, bj_);
 
-				return bi_;
+				return bk_;
 			};
-			var bd_ = context.Operators.Where<CqlConcept>(bb_, bc_);
-			var be_ = context.Operators.Exists<CqlConcept>(bd_);
+			var bf_ = context.Operators.Where<CqlConcept>(bd_, be_);
+			var bg_ = context.Operators.Exists<CqlConcept>(bf_);
 
-			return be_;
+			return bg_;
 		};
 		var i_ = context.Operators.Where<Encounter>(c_, h_);
 		var j_ = this.Occupational_Therapy_Evaluation();
@@ -522,12 +524,13 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var ao_ = Status_1_6_000.isEncounterPerformed(an_);
 		bool? ap_(Encounter OfficeBasedEncounter)
 		{
-			var bj_ = this.Measurement_Period();
-			var bk_ = FHIRHelpers_4_3_000.ToInterval(OfficeBasedEncounter?.Period);
-			var bl_ = QICoreCommon_2_0_000.toInterval((bk_ as object));
-			var bm_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bj_, bl_, "day");
+			var bl_ = this.Measurement_Period();
+			var bm_ = OfficeBasedEncounter?.Period;
+			var bn_ = FHIRHelpers_4_3_000.ToInterval(bm_);
+			var bo_ = QICoreCommon_2_0_000.toInterval((bn_ as object));
+			var bp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bl_, bo_, "day");
 
-			return bm_;
+			return bp_;
 		};
 		var aq_ = context.Operators.Where<Encounter>(ao_, ap_);
 
@@ -550,25 +553,26 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? i_(Encounter E)
 		{
-			CqlConcept ac_(CodeableConcept @this)
+			var ac_ = E?.Type;
+			CqlConcept ad_(CodeableConcept @this)
 			{
-				var ah_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var ai_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return ah_;
+				return ai_;
 			};
-			var ad_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, ac_);
-			bool? ae_(CqlConcept T)
+			var ae_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ac_, ad_);
+			bool? af_(CqlConcept T)
 			{
-				var ai_ = this.Unlisted_preventive_medicine_service();
-				var aj_ = context.Operators.ConvertCodeToConcept(ai_);
-				var ak_ = context.Operators.Equivalent(T, aj_);
+				var aj_ = this.Unlisted_preventive_medicine_service();
+				var ak_ = context.Operators.ConvertCodeToConcept(aj_);
+				var al_ = context.Operators.Equivalent(T, ak_);
 
-				return ak_;
+				return al_;
 			};
-			var af_ = context.Operators.Where<CqlConcept>(ad_, ae_);
-			var ag_ = context.Operators.Exists<CqlConcept>(af_);
+			var ag_ = context.Operators.Where<CqlConcept>(ae_, af_);
+			var ah_ = context.Operators.Exists<CqlConcept>(ag_);
 
-			return ag_;
+			return ah_;
 		};
 		var j_ = context.Operators.Where<Encounter>(h_, i_);
 		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);
@@ -577,25 +581,26 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
 		bool? p_(Encounter E)
 		{
-			CqlConcept al_(CodeableConcept @this)
+			var am_ = E?.Type;
+			CqlConcept an_(CodeableConcept @this)
 			{
-				var aq_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var as_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return aq_;
+				return as_;
 			};
-			var am_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, al_);
-			bool? an_(CqlConcept T)
+			var ao_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)am_, an_);
+			bool? ap_(CqlConcept T)
 			{
-				var ar_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();
-				var as_ = context.Operators.ConvertCodeToConcept(ar_);
-				var at_ = context.Operators.Equivalent(T, as_);
+				var at_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();
+				var au_ = context.Operators.ConvertCodeToConcept(at_);
+				var av_ = context.Operators.Equivalent(T, au_);
 
-				return at_;
+				return av_;
 			};
-			var ao_ = context.Operators.Where<CqlConcept>(am_, an_);
-			var ap_ = context.Operators.Exists<CqlConcept>(ao_);
+			var aq_ = context.Operators.Where<CqlConcept>(ao_, ap_);
+			var ar_ = context.Operators.Exists<CqlConcept>(aq_);
 
-			return ap_;
+			return ar_;
 		};
 		var q_ = context.Operators.Where<Encounter>(h_, p_);
 		var r_ = context.Operators.ListUnion<Encounter>(n_, q_);
@@ -609,12 +614,13 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var z_ = Status_1_6_000.isEncounterPerformed(y_);
 		bool? aa_(Encounter PreventiveEncounter)
 		{
-			var au_ = this.Measurement_Period();
-			var av_ = FHIRHelpers_4_3_000.ToInterval(PreventiveEncounter?.Period);
-			var aw_ = QICoreCommon_2_0_000.toInterval((av_ as object));
-			var ax_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(au_, aw_, "day");
+			var aw_ = this.Measurement_Period();
+			var ax_ = PreventiveEncounter?.Period;
+			var ay_ = FHIRHelpers_4_3_000.ToInterval(ax_);
+			var az_ = QICoreCommon_2_0_000.toInterval((ay_ as object));
+			var ba_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, az_, "day");
 
-			return ax_;
+			return ba_;
 		};
 		var ab_ = context.Operators.Where<Encounter>(z_, aa_);
 
@@ -668,20 +674,22 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		bool? d_(Observation TobaccoUseScreening)
 		{
 			var m_ = this.Measurement_Period();
-			var n_ = FHIRHelpers_4_3_000.ToValue(TobaccoUseScreening?.Effective);
-			var o_ = QICoreCommon_2_0_000.toInterval(n_);
-			var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, "day");
+			var n_ = TobaccoUseScreening?.Effective;
+			var o_ = FHIRHelpers_4_3_000.ToValue(n_);
+			var p_ = QICoreCommon_2_0_000.toInterval(o_);
+			var q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
-			return p_;
+			return q_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			var q_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var r_ = QICoreCommon_2_0_000.toInterval(q_);
-			var s_ = context.Operators.Start(r_);
+			var r_ = @this?.Effective;
+			var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+			var t_ = QICoreCommon_2_0_000.toInterval(s_);
+			var u_ = context.Operators.Start(t_);
 
-			return s_;
+			return u_;
 		};
 		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
@@ -691,11 +699,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		};
 		bool? j_(Observation MostRecentTobaccoUseScreening)
 		{
-			var t_ = FHIRHelpers_4_3_000.ToValue(MostRecentTobaccoUseScreening?.Value);
-			var u_ = this.Tobacco_User();
-			var v_ = context.Operators.ConceptInValueSet((t_ as CqlConcept), u_);
+			var v_ = MostRecentTobaccoUseScreening?.Value;
+			var w_ = FHIRHelpers_4_3_000.ToValue(v_);
+			var x_ = this.Tobacco_User();
+			var y_ = context.Operators.ConceptInValueSet((w_ as CqlConcept), x_);
 
-			return v_;
+			return y_;
 		};
 		var k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<Observation>(k_);
@@ -740,20 +749,22 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		bool? d_(Observation TobaccoUseScreening)
 		{
 			var m_ = this.Measurement_Period();
-			var n_ = FHIRHelpers_4_3_000.ToValue(TobaccoUseScreening?.Effective);
-			var o_ = QICoreCommon_2_0_000.toInterval(n_);
-			var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, "day");
+			var n_ = TobaccoUseScreening?.Effective;
+			var o_ = FHIRHelpers_4_3_000.ToValue(n_);
+			var p_ = QICoreCommon_2_0_000.toInterval(o_);
+			var q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
-			return p_;
+			return q_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			var q_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var r_ = QICoreCommon_2_0_000.toInterval(q_);
-			var s_ = context.Operators.Start(r_);
+			var r_ = @this?.Effective;
+			var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+			var t_ = QICoreCommon_2_0_000.toInterval(s_);
+			var u_ = context.Operators.Start(t_);
 
-			return s_;
+			return u_;
 		};
 		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
@@ -763,11 +774,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		};
 		bool? j_(Observation MostRecentTobaccoUseScreening)
 		{
-			var t_ = FHIRHelpers_4_3_000.ToValue(MostRecentTobaccoUseScreening?.Value);
-			var u_ = this.Tobacco_Non_User();
-			var v_ = context.Operators.ConceptInValueSet((t_ as CqlConcept), u_);
+			var v_ = MostRecentTobaccoUseScreening?.Value;
+			var w_ = FHIRHelpers_4_3_000.ToValue(v_);
+			var x_ = this.Tobacco_Non_User();
+			var y_ = context.Operators.ConceptInValueSet((w_ as CqlConcept), x_);
 
-			return v_;
+			return y_;
 		};
 		var k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<Observation>(k_);
@@ -807,11 +819,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.End(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
-			var s_ = FHIRHelpers_4_3_000.ToValue(TobaccoCessationCounseling?.Performed);
-			var t_ = QICoreCommon_2_0_000.toInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, t_, "day");
+			var s_ = TobaccoCessationCounseling?.Performed;
+			var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+			var u_ = QICoreCommon_2_0_000.toInterval(t_);
+			var v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, "day");
 
-			return u_;
+			return v_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = this.Tobacco_abuse_counseling();
@@ -819,17 +832,17 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var h_ = context.Operators.RetrieveByCodes<Condition>(g_, null);
 		bool? i_(Condition TobaccoCounseling)
 		{
-			var v_ = QICoreCommon_2_0_000.prevalenceInterval(TobaccoCounseling);
-			var w_ = context.Operators.Start(v_);
-			var x_ = this.Measurement_Period();
-			var y_ = context.Operators.Start(x_);
-			var z_ = context.Operators.Quantity(6m, "months");
-			var aa_ = context.Operators.Subtract(y_, z_);
-			var ac_ = context.Operators.End(x_);
-			var ad_ = context.Operators.Interval(aa_, ac_, true, true);
-			var ae_ = context.Operators.In<CqlDateTime>(w_, ad_, "day");
+			var w_ = QICoreCommon_2_0_000.prevalenceInterval(TobaccoCounseling);
+			var x_ = context.Operators.Start(w_);
+			var y_ = this.Measurement_Period();
+			var z_ = context.Operators.Start(y_);
+			var aa_ = context.Operators.Quantity(6m, "months");
+			var ab_ = context.Operators.Subtract(z_, aa_);
+			var ad_ = context.Operators.End(y_);
+			var ae_ = context.Operators.Interval(ab_, ad_, true, true);
+			var af_ = context.Operators.In<CqlDateTime>(x_, ae_, "day");
 
-			return ae_;
+			return af_;
 		};
 		var j_ = context.Operators.Where<Condition>(h_, i_);
 		var k_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
@@ -850,16 +863,17 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var f_ = Status_1_6_000.isMedicationOrder(e_);
 		bool? g_(MedicationRequest CessationPharmacotherapyOrdered)
 		{
-			var i_ = context.Operators.Convert<CqlDateTime>(CessationPharmacotherapyOrdered?.AuthoredOnElement);
-			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity(6m, "months");
-			var m_ = context.Operators.Subtract(k_, l_);
-			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
+			var i_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
+			var j_ = context.Operators.Convert<CqlDateTime>(i_);
+			var k_ = this.Measurement_Period();
+			var l_ = context.Operators.Start(k_);
+			var m_ = context.Operators.Quantity(6m, "months");
+			var n_ = context.Operators.Subtract(l_, m_);
+			var p_ = context.Operators.End(k_);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 
-			return q_;
+			return r_;
 		};
 		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 
@@ -879,16 +893,17 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest TakingCessationPharmacotherapy)
 		{
-			var i_ = context.Operators.Convert<CqlDateTime>(TakingCessationPharmacotherapy?.AuthoredOnElement);
-			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity(6m, "months");
-			var m_ = context.Operators.Subtract(k_, l_);
-			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
+			var i_ = TakingCessationPharmacotherapy?.AuthoredOnElement;
+			var j_ = context.Operators.Convert<CqlDateTime>(i_);
+			var k_ = this.Measurement_Period();
+			var l_ = context.Operators.Start(k_);
+			var m_ = context.Operators.Quantity(6m, "months");
+			var n_ = context.Operators.Subtract(l_, m_);
+			var p_ = context.Operators.End(k_);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 
-			return q_;
+			return r_;
 		};
 		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 

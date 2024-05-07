@@ -389,18 +389,22 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		bool? o_(Encounter QualifyingEncounter)
 		{
 			var q_ = this.Measurement_Period();
-			var r_ = FHIRHelpers_4_3_000.ToInterval(QualifyingEncounter?.Period);
-			var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, r_, null);
-			var t_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(QualifyingEncounter?.StatusElement?.Value);
-			var u_ = context.Operators.Equal(t_, "finished");
-			var v_ = context.Operators.And(s_, u_);
-			var w_ = FHIRHelpers_4_3_000.ToCode(QualifyingEncounter?.Class);
-			var x_ = this.@virtual();
-			var y_ = context.Operators.Equivalent(w_, x_);
-			var z_ = context.Operators.Not(y_);
-			var aa_ = context.Operators.And(v_, z_);
+			var r_ = QualifyingEncounter?.Period;
+			var s_ = FHIRHelpers_4_3_000.ToInterval(r_);
+			var t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, null);
+			var u_ = QualifyingEncounter?.StatusElement;
+			var v_ = u_?.Value;
+			var w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
+			var x_ = context.Operators.Equal(w_, "finished");
+			var y_ = context.Operators.And(t_, x_);
+			var z_ = QualifyingEncounter?.Class;
+			var aa_ = FHIRHelpers_4_3_000.ToCode(z_);
+			var ab_ = this.@virtual();
+			var ac_ = context.Operators.Equivalent(aa_, ab_);
+			var ad_ = context.Operators.Not(ac_);
+			var ae_ = context.Operators.And(y_, ad_);
 
-			return aa_;
+			return ae_;
 		};
 		var p_ = context.Operators.Where<Encounter>(n_, o_);
 
@@ -421,26 +425,30 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			bool? f_(Condition DiabeticRetinopathy)
 			{
 				var j_ = QICoreCommon_2_0_000.prevalenceInterval(DiabeticRetinopathy);
-				var k_ = FHIRHelpers_4_3_000.ToInterval(ValidQualifyingEncounter?.Period);
-				var l_ = context.Operators.Overlaps(j_, k_, null);
-				var m_ = QICoreCommon_2_0_000.isActive(DiabeticRetinopathy);
-				var n_ = context.Operators.And(l_, m_);
-				var o_ = FHIRHelpers_4_3_000.ToConcept(DiabeticRetinopathy?.VerificationStatus);
-				var p_ = QICoreCommon_2_0_000.unconfirmed();
-				var q_ = context.Operators.ConvertCodeToConcept(p_);
-				var r_ = context.Operators.Equivalent(o_, q_);
-				var t_ = QICoreCommon_2_0_000.refuted();
-				var u_ = context.Operators.ConvertCodeToConcept(t_);
-				var v_ = context.Operators.Equivalent(o_, u_);
-				var w_ = context.Operators.Or(r_, v_);
-				var y_ = QICoreCommon_2_0_000.entered_in_error();
-				var z_ = context.Operators.ConvertCodeToConcept(y_);
-				var aa_ = context.Operators.Equivalent(o_, z_);
-				var ab_ = context.Operators.Or(w_, aa_);
-				var ac_ = context.Operators.Not(ab_);
-				var ad_ = context.Operators.And(n_, ac_);
+				var k_ = ValidQualifyingEncounter?.Period;
+				var l_ = FHIRHelpers_4_3_000.ToInterval(k_);
+				var m_ = context.Operators.Overlaps(j_, l_, null);
+				var n_ = QICoreCommon_2_0_000.isActive(DiabeticRetinopathy);
+				var o_ = context.Operators.And(m_, n_);
+				var p_ = DiabeticRetinopathy?.VerificationStatus;
+				var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
+				var r_ = QICoreCommon_2_0_000.unconfirmed();
+				var s_ = context.Operators.ConvertCodeToConcept(r_);
+				var t_ = context.Operators.Equivalent(q_, s_);
+				var v_ = FHIRHelpers_4_3_000.ToConcept(p_);
+				var w_ = QICoreCommon_2_0_000.refuted();
+				var x_ = context.Operators.ConvertCodeToConcept(w_);
+				var y_ = context.Operators.Equivalent(v_, x_);
+				var z_ = context.Operators.Or(t_, y_);
+				var ab_ = FHIRHelpers_4_3_000.ToConcept(p_);
+				var ac_ = QICoreCommon_2_0_000.entered_in_error();
+				var ad_ = context.Operators.ConvertCodeToConcept(ac_);
+				var ae_ = context.Operators.Equivalent(ab_, ad_);
+				var af_ = context.Operators.Or(z_, ae_);
+				var ag_ = context.Operators.Not(af_);
+				var ah_ = context.Operators.And(o_, ag_);
 
-				return ad_;
+				return ah_;
 			};
 			var g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition DiabeticRetinopathy) => 
@@ -487,12 +495,14 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			var g_ = this.Diabetic_Retinopathy_Encounter();
 			bool? h_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var l_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var m_ = FHIRHelpers_4_3_000.ToValue(MacularExam?.Effective);
-				var n_ = QICoreCommon_2_0_000.toInterval(m_);
-				var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
+				var l_ = EncounterDiabeticRetinopathy?.Period;
+				var m_ = FHIRHelpers_4_3_000.ToInterval(l_);
+				var n_ = MacularExam?.Effective;
+				var o_ = FHIRHelpers_4_3_000.ToValue(n_);
+				var p_ = QICoreCommon_2_0_000.toInterval(o_);
+				var q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
 
-				return o_;
+				return q_;
 			};
 			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterDiabeticRetinopathy) => 
@@ -504,21 +514,24 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation MacularExam)
 		{
-			var p_ = FHIRHelpers_4_3_000.ToValue(MacularExam?.Value);
-			var q_ = context.Operators.Not((bool?)(p_ is null));
-			var r_ = context.Operators.Convert<Code<ObservationStatus>>(MacularExam?.StatusElement?.Value);
-			var s_ = context.Operators.Convert<string>(r_);
-			var t_ = new string[]
+			var r_ = MacularExam?.Value;
+			var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+			var t_ = context.Operators.Not((bool?)(s_ is null));
+			var u_ = MacularExam?.StatusElement;
+			var v_ = u_?.Value;
+			var w_ = context.Operators.Convert<Code<ObservationStatus>>(v_);
+			var x_ = context.Operators.Convert<string>(w_);
+			var y_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"preliminary",
 			};
-			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
-			var v_ = context.Operators.And(q_, u_);
+			var z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+			var aa_ = context.Operators.And(t_, z_);
 
-			return v_;
+			return aa_;
 		};
 		var f_ = context.Operators.Where<Observation>(d_, e_);
 
@@ -553,15 +566,18 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			var h_ = this.Diabetic_Retinopathy_Encounter();
 			bool? i_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var m_ = context.Operators.Convert<CqlDateTime>(LevelOfSeverityCommunicated?.SentElement);
-				var n_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.After(m_, o_, null);
-				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.In<CqlDateTime>(m_, r_, "day");
-				var t_ = context.Operators.And(p_, s_);
+				var m_ = LevelOfSeverityCommunicated?.SentElement;
+				var n_ = context.Operators.Convert<CqlDateTime>(m_);
+				var o_ = EncounterDiabeticRetinopathy?.Period;
+				var p_ = FHIRHelpers_4_3_000.ToInterval(o_);
+				var q_ = context.Operators.Start(p_);
+				var r_ = context.Operators.After(n_, q_, null);
+				var t_ = context.Operators.Convert<CqlDateTime>(m_);
+				var u_ = this.Measurement_Period();
+				var v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
+				var w_ = context.Operators.And(r_, v_);
 
-				return t_;
+				return w_;
 			};
 			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Communication k_(Encounter EncounterDiabeticRetinopathy) => 
@@ -573,10 +589,12 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var e_ = context.Operators.SelectMany<Communication, Communication>(c_, d_);
 		bool? f_(Communication LevelOfSeverityCommunicated)
 		{
-			var u_ = context.Operators.Convert<Code<EventStatus>>(LevelOfSeverityCommunicated?.StatusElement?.Value);
-			var v_ = context.Operators.Equal(u_, "completed");
+			var x_ = LevelOfSeverityCommunicated?.StatusElement;
+			var y_ = x_?.Value;
+			var z_ = context.Operators.Convert<Code<EventStatus>>(y_);
+			var aa_ = context.Operators.Equal(z_, "completed");
 
-			return v_;
+			return aa_;
 		};
 		var g_ = context.Operators.Where<Communication>(e_, f_);
 
@@ -597,15 +615,18 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			var h_ = this.Diabetic_Retinopathy_Encounter();
 			bool? i_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var m_ = context.Operators.Convert<CqlDateTime>(MacularEdemaAbsentCommunicated?.SentElement);
-				var n_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.After(m_, o_, null);
-				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.In<CqlDateTime>(m_, r_, "day");
-				var t_ = context.Operators.And(p_, s_);
+				var m_ = MacularEdemaAbsentCommunicated?.SentElement;
+				var n_ = context.Operators.Convert<CqlDateTime>(m_);
+				var o_ = EncounterDiabeticRetinopathy?.Period;
+				var p_ = FHIRHelpers_4_3_000.ToInterval(o_);
+				var q_ = context.Operators.Start(p_);
+				var r_ = context.Operators.After(n_, q_, null);
+				var t_ = context.Operators.Convert<CqlDateTime>(m_);
+				var u_ = this.Measurement_Period();
+				var v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
+				var w_ = context.Operators.And(r_, v_);
 
-				return t_;
+				return w_;
 			};
 			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Communication k_(Encounter EncounterDiabeticRetinopathy) => 
@@ -617,10 +638,12 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var e_ = context.Operators.SelectMany<Communication, Communication>(c_, d_);
 		bool? f_(Communication MacularEdemaAbsentCommunicated)
 		{
-			var u_ = context.Operators.Convert<Code<EventStatus>>(MacularEdemaAbsentCommunicated?.StatusElement?.Value);
-			var v_ = context.Operators.Equal(u_, "completed");
+			var x_ = MacularEdemaAbsentCommunicated?.StatusElement;
+			var y_ = x_?.Value;
+			var z_ = context.Operators.Convert<Code<EventStatus>>(y_);
+			var aa_ = context.Operators.Equal(z_, "completed");
 
-			return v_;
+			return aa_;
 		};
 		var g_ = context.Operators.Where<Communication>(e_, f_);
 
@@ -641,15 +664,18 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			var h_ = this.Diabetic_Retinopathy_Encounter();
 			bool? i_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var m_ = context.Operators.Convert<CqlDateTime>(MacularEdemaPresentCommunicated?.SentElement);
-				var n_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.After(m_, o_, null);
-				var r_ = this.Measurement_Period();
-				var s_ = context.Operators.In<CqlDateTime>(m_, r_, "day");
-				var t_ = context.Operators.And(p_, s_);
+				var m_ = MacularEdemaPresentCommunicated?.SentElement;
+				var n_ = context.Operators.Convert<CqlDateTime>(m_);
+				var o_ = EncounterDiabeticRetinopathy?.Period;
+				var p_ = FHIRHelpers_4_3_000.ToInterval(o_);
+				var q_ = context.Operators.Start(p_);
+				var r_ = context.Operators.After(n_, q_, null);
+				var t_ = context.Operators.Convert<CqlDateTime>(m_);
+				var u_ = this.Measurement_Period();
+				var v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
+				var w_ = context.Operators.And(r_, v_);
 
-				return t_;
+				return w_;
 			};
 			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Communication k_(Encounter EncounterDiabeticRetinopathy) => 
@@ -661,10 +687,12 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var e_ = context.Operators.SelectMany<Communication, Communication>(c_, d_);
 		bool? f_(Communication MacularEdemaPresentCommunicated)
 		{
-			var u_ = context.Operators.Convert<Code<EventStatus>>(MacularEdemaPresentCommunicated?.StatusElement?.Value);
-			var v_ = context.Operators.Equal(u_, "completed");
+			var x_ = MacularEdemaPresentCommunicated?.StatusElement;
+			var y_ = x_?.Value;
+			var z_ = context.Operators.Convert<Code<EventStatus>>(y_);
+			var aa_ = context.Operators.Equal(z_, "completed");
 
-			return v_;
+			return aa_;
 		};
 		var g_ = context.Operators.Where<Communication>(e_, f_);
 
@@ -707,24 +735,30 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			{
 				bool? q_(Extension @this)
 				{
-					var y_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var z_ = FHIRHelpers_4_3_000.ToString(y_);
-					var aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var z_ = @this?.Url;
+					var aa_ = context.Operators.Convert<FhirUri>(z_);
+					var ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+					var ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return aa_;
+					return ac_;
 				};
 				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LevelOfSeverityNotCommunicated is DomainResource)
 						? ((LevelOfSeverityNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
-					@this?.Value;
+				DataType s_(Extension @this)
+				{
+					var ad_ = @this?.Value;
+
+					return ad_;
+				};
 				var t_ = context.Operators.Select<Extension, DataType>(r_, s_);
 				var u_ = context.Operators.SingletonFrom<DataType>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>(u_);
-				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
+				var w_ = EncounterDiabeticRetinopathy?.Period;
+				var x_ = FHIRHelpers_4_3_000.ToInterval(w_);
+				var y_ = context.Operators.In<CqlDateTime>(v_, x_, null);
 
-				return x_;
+				return y_;
 			};
 			var n_ = context.Operators.Where<Encounter>(l_, m_);
 			Communication o_(Encounter EncounterDiabeticRetinopathy) => 
@@ -736,14 +770,16 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var i_ = context.Operators.SelectMany<Communication, Communication>(g_, h_);
 		bool? j_(Communication LevelOfSeverityNotCommunicated)
 		{
-			var ab_ = FHIRHelpers_4_3_000.ToConcept(LevelOfSeverityNotCommunicated?.StatusReason);
-			var ac_ = this.Medical_Reason();
-			var ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-			var af_ = this.Patient_Reason();
-			var ag_ = context.Operators.ConceptInValueSet(ab_, af_);
-			var ah_ = context.Operators.Or(ad_, ag_);
+			var ae_ = LevelOfSeverityNotCommunicated?.StatusReason;
+			var af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			var ag_ = this.Medical_Reason();
+			var ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+			var aj_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			var ak_ = this.Patient_Reason();
+			var al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+			var am_ = context.Operators.Or(ah_, al_);
 
-			return ah_;
+			return am_;
 		};
 		var k_ = context.Operators.Where<Communication>(i_, j_);
 
@@ -768,24 +804,30 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			{
 				bool? q_(Extension @this)
 				{
-					var y_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var z_ = FHIRHelpers_4_3_000.ToString(y_);
-					var aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var z_ = @this?.Url;
+					var aa_ = context.Operators.Convert<FhirUri>(z_);
+					var ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+					var ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return aa_;
+					return ac_;
 				};
 				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaAbsentNotCommunicated is DomainResource)
 						? ((MacularEdemaAbsentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
-					@this?.Value;
+				DataType s_(Extension @this)
+				{
+					var ad_ = @this?.Value;
+
+					return ad_;
+				};
 				var t_ = context.Operators.Select<Extension, DataType>(r_, s_);
 				var u_ = context.Operators.SingletonFrom<DataType>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>(u_);
-				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
+				var w_ = EncounterDiabeticRetinopathy?.Period;
+				var x_ = FHIRHelpers_4_3_000.ToInterval(w_);
+				var y_ = context.Operators.In<CqlDateTime>(v_, x_, null);
 
-				return x_;
+				return y_;
 			};
 			var n_ = context.Operators.Where<Encounter>(l_, m_);
 			Communication o_(Encounter EncounterDiabeticRetinopathy) => 
@@ -797,14 +839,16 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var i_ = context.Operators.SelectMany<Communication, Communication>(g_, h_);
 		bool? j_(Communication MacularEdemaAbsentNotCommunicated)
 		{
-			var ab_ = FHIRHelpers_4_3_000.ToConcept(MacularEdemaAbsentNotCommunicated?.StatusReason);
-			var ac_ = this.Medical_Reason();
-			var ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-			var af_ = this.Patient_Reason();
-			var ag_ = context.Operators.ConceptInValueSet(ab_, af_);
-			var ah_ = context.Operators.Or(ad_, ag_);
+			var ae_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
+			var af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			var ag_ = this.Medical_Reason();
+			var ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+			var aj_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			var ak_ = this.Patient_Reason();
+			var al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+			var am_ = context.Operators.Or(ah_, al_);
 
-			return ah_;
+			return am_;
 		};
 		var k_ = context.Operators.Where<Communication>(i_, j_);
 
@@ -829,24 +873,30 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 			{
 				bool? q_(Extension @this)
 				{
-					var y_ = context.Operators.Convert<FhirUri>(@this?.Url);
-					var z_ = FHIRHelpers_4_3_000.ToString(y_);
-					var aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var z_ = @this?.Url;
+					var aa_ = context.Operators.Convert<FhirUri>(z_);
+					var ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+					var ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return aa_;
+					return ac_;
 				};
 				var r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaPresentNotCommunicated is DomainResource)
 						? ((MacularEdemaPresentNotCommunicated as DomainResource).Extension)
 						: null), q_);
-				DataType s_(Extension @this) => 
-					@this?.Value;
+				DataType s_(Extension @this)
+				{
+					var ad_ = @this?.Value;
+
+					return ad_;
+				};
 				var t_ = context.Operators.Select<Extension, DataType>(r_, s_);
 				var u_ = context.Operators.SingletonFrom<DataType>(t_);
 				var v_ = context.Operators.Convert<CqlDateTime>(u_);
-				var w_ = FHIRHelpers_4_3_000.ToInterval(EncounterDiabeticRetinopathy?.Period);
-				var x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
+				var w_ = EncounterDiabeticRetinopathy?.Period;
+				var x_ = FHIRHelpers_4_3_000.ToInterval(w_);
+				var y_ = context.Operators.In<CqlDateTime>(v_, x_, null);
 
-				return x_;
+				return y_;
 			};
 			var n_ = context.Operators.Where<Encounter>(l_, m_);
 			Communication o_(Encounter EncounterDiabeticRetinopathy) => 
@@ -858,14 +908,16 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		var i_ = context.Operators.SelectMany<Communication, Communication>(g_, h_);
 		bool? j_(Communication MacularEdemaPresentNotCommunicated)
 		{
-			var ab_ = FHIRHelpers_4_3_000.ToConcept(MacularEdemaPresentNotCommunicated?.StatusReason);
-			var ac_ = this.Medical_Reason();
-			var ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-			var af_ = this.Patient_Reason();
-			var ag_ = context.Operators.ConceptInValueSet(ab_, af_);
-			var ah_ = context.Operators.Or(ad_, ag_);
+			var ae_ = MacularEdemaPresentNotCommunicated?.StatusReason;
+			var af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			var ag_ = this.Medical_Reason();
+			var ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+			var aj_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			var ak_ = this.Patient_Reason();
+			var al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+			var am_ = context.Operators.Or(ah_, al_);
 
-			return ah_;
+			return am_;
 		};
 		var k_ = context.Operators.Where<Communication>(i_, j_);
 

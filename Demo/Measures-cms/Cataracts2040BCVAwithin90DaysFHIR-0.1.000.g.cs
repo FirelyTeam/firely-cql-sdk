@@ -700,21 +700,25 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 		bool? c_(Procedure CataractSurgery)
 		{
 			var e_ = this.Measurement_Period();
-			var f_ = FHIRHelpers_4_3_000.ToValue(CataractSurgery?.Performed);
-			var g_ = QICoreCommon_2_0_000.toInterval(f_);
-			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, null);
-			var j_ = QICoreCommon_2_0_000.toInterval(f_);
-			var k_ = context.Operators.Start(j_);
-			var m_ = context.Operators.End(e_);
-			var n_ = context.Operators.Quantity(92m, "days");
-			var o_ = context.Operators.Subtract(m_, n_);
-			var p_ = context.Operators.SameOrBefore(k_, o_, null);
-			var q_ = context.Operators.And(h_, p_);
-			var r_ = context.Operators.Convert<string>(CataractSurgery?.StatusElement?.Value);
-			var s_ = context.Operators.Equal(r_, "completed");
-			var t_ = context.Operators.And(q_, s_);
+			var f_ = CataractSurgery?.Performed;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = QICoreCommon_2_0_000.toInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
+			var k_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var l_ = QICoreCommon_2_0_000.toInterval(k_);
+			var m_ = context.Operators.Start(l_);
+			var o_ = context.Operators.End(e_);
+			var p_ = context.Operators.Quantity(92m, "days");
+			var q_ = context.Operators.Subtract(o_, p_);
+			var r_ = context.Operators.SameOrBefore(m_, q_, null);
+			var s_ = context.Operators.And(i_, r_);
+			var t_ = CataractSurgery?.StatusElement;
+			var u_ = t_?.Value;
+			var v_ = context.Operators.Convert<string>(u_);
+			var w_ = context.Operators.Equal(v_, "completed");
+			var x_ = context.Operators.And(s_, w_);
 
-			return t_;
+			return x_;
 		};
 		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
@@ -731,14 +735,16 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 		bool? b_(Procedure CataractSurgeryPerformed)
 		{
 			var d_ = this.Patient();
-			var e_ = context.Operators.Convert<CqlDate>(d_?.BirthDateElement?.Value);
-			var f_ = this.Measurement_Period();
-			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.DateFrom(g_);
-			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, 18);
+			var e_ = d_?.BirthDateElement;
+			var f_ = e_?.Value;
+			var g_ = context.Operators.Convert<CqlDate>(f_);
+			var h_ = this.Measurement_Period();
+			var i_ = context.Operators.Start(h_);
+			var j_ = context.Operators.DateFrom(i_);
+			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
+			var l_ = context.Operators.GreaterOrEqual(k_, 18);
 
-			return j_;
+			return l_;
 		};
 		var c_ = context.Operators.Where<Procedure>(a_, b_);
 
@@ -932,13 +938,14 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			bool? fl_(Condition ComorbidDiagnosis)
 			{
 				var fp_ = QICoreCommon_2_0_000.prevalenceInterval(ComorbidDiagnosis);
-				var fq_ = FHIRHelpers_4_3_000.ToValue(CataractSurgeryPerformed?.Performed);
-				var fr_ = QICoreCommon_2_0_000.toInterval(fq_);
-				var fs_ = context.Operators.OverlapsBefore(fp_, fr_, null);
-				var ft_ = QICoreCommon_2_0_000.isActive(ComorbidDiagnosis);
-				var fu_ = context.Operators.And(fs_, ft_);
+				var fq_ = CataractSurgeryPerformed?.Performed;
+				var fr_ = FHIRHelpers_4_3_000.ToValue(fq_);
+				var fs_ = QICoreCommon_2_0_000.toInterval(fr_);
+				var ft_ = context.Operators.OverlapsBefore(fp_, fs_, null);
+				var fu_ = QICoreCommon_2_0_000.isActive(ComorbidDiagnosis);
+				var fv_ = context.Operators.And(ft_, fu_);
 
-				return fu_;
+				return fv_;
 			};
 			var fm_ = context.Operators.Where<Condition>(fk_, fl_);
 			Procedure fn_(Condition ComorbidDiagnosis) => 
@@ -969,39 +976,46 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var i_ = context.Operators.ListUnion<Observation>(f_, h_);
 			bool? j_(Observation VisualAcuityExamPerformed)
 			{
-				var n_ = FHIRHelpers_4_3_000.ToValue(VisualAcuityExamPerformed?.Effective);
-				var o_ = QICoreCommon_2_0_000.toInterval(n_);
-				var p_ = context.Operators.Start(o_);
-				var q_ = FHIRHelpers_4_3_000.ToValue(CataractSurgeryPerformed?.Performed);
-				var r_ = QICoreCommon_2_0_000.toInterval(q_);
-				var s_ = context.Operators.End(r_);
-				var u_ = QICoreCommon_2_0_000.toInterval(q_);
-				var v_ = context.Operators.End(u_);
-				var w_ = context.Operators.Quantity(90m, "days");
-				var x_ = context.Operators.Add(v_, w_);
-				var y_ = context.Operators.Interval(s_, x_, false, true);
-				var z_ = context.Operators.In<CqlDateTime>(p_, y_, "day");
-				var ab_ = QICoreCommon_2_0_000.toInterval(q_);
-				var ac_ = context.Operators.End(ab_);
-				var ad_ = context.Operators.Not((bool?)(ac_ is null));
-				var ae_ = context.Operators.And(z_, ad_);
-				var af_ = context.Operators.Convert<Code<ObservationStatus>>(VisualAcuityExamPerformed?.StatusElement?.Value);
-				var ag_ = context.Operators.Convert<string>(af_);
-				var ah_ = new string[]
+				var n_ = VisualAcuityExamPerformed?.Effective;
+				var o_ = FHIRHelpers_4_3_000.ToValue(n_);
+				var p_ = QICoreCommon_2_0_000.toInterval(o_);
+				var q_ = context.Operators.Start(p_);
+				var r_ = CataractSurgeryPerformed?.Performed;
+				var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+				var t_ = QICoreCommon_2_0_000.toInterval(s_);
+				var u_ = context.Operators.End(t_);
+				var w_ = FHIRHelpers_4_3_000.ToValue(r_);
+				var x_ = QICoreCommon_2_0_000.toInterval(w_);
+				var y_ = context.Operators.End(x_);
+				var z_ = context.Operators.Quantity(90m, "days");
+				var aa_ = context.Operators.Add(y_, z_);
+				var ab_ = context.Operators.Interval(u_, aa_, false, true);
+				var ac_ = context.Operators.In<CqlDateTime>(q_, ab_, "day");
+				var ae_ = FHIRHelpers_4_3_000.ToValue(r_);
+				var af_ = QICoreCommon_2_0_000.toInterval(ae_);
+				var ag_ = context.Operators.End(af_);
+				var ah_ = context.Operators.Not((bool?)(ag_ is null));
+				var ai_ = context.Operators.And(ac_, ah_);
+				var aj_ = VisualAcuityExamPerformed?.StatusElement;
+				var ak_ = aj_?.Value;
+				var al_ = context.Operators.Convert<Code<ObservationStatus>>(ak_);
+				var am_ = context.Operators.Convert<string>(al_);
+				var an_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 					"preliminary",
 				};
-				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
-				var aj_ = context.Operators.And(ae_, ai_);
-				var ak_ = FHIRHelpers_4_3_000.ToValue(VisualAcuityExamPerformed?.Value);
-				var al_ = this.Visual_Acuity_20_40_or_Better();
-				var am_ = context.Operators.ConceptInValueSet((ak_ as CqlConcept), al_);
-				var an_ = context.Operators.And(aj_, am_);
+				var ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
+				var ap_ = context.Operators.And(ai_, ao_);
+				var aq_ = VisualAcuityExamPerformed?.Value;
+				var ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
+				var as_ = this.Visual_Acuity_20_40_or_Better();
+				var at_ = context.Operators.ConceptInValueSet((ar_ as CqlConcept), as_);
+				var au_ = context.Operators.And(ap_, at_);
 
-				return an_;
+				return au_;
 			};
 			var k_ = context.Operators.Where<Observation>(i_, j_);
 			Procedure l_(Observation VisualAcuityExamPerformed) => 

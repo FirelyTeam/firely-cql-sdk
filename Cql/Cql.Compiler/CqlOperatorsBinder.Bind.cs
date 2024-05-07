@@ -58,6 +58,9 @@ internal partial class CqlOperatorsBinder
         Type[] genericTypeArguments,
         bool throwError = true)
     {
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("Resolving method overload for {input}", new StringBuilder().AppendCSharp(methodName, methodArguments, genericTypeArguments, Defaults.MethodCSharpFormat));
+
         (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates =
             ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
 
@@ -72,8 +75,32 @@ internal partial class CqlOperatorsBinder
         {
             if (throwError)
             {
-                throw new CannotBindToCqlOperatorError(methodName, methodArguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException();
+                throw new CannotBindToCqlOperatorError(
+                    methodName,
+                    methodArguments,
+                    genericTypeArguments,
+                    ICqlOperatorsMethods.GetMethodsByName(methodName),
+                    Defaults.MethodCSharpFormat)
+                    .ToException();
             }
+        }
+
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            MethodCSharpFormat methodCSharpFormat =
+                MethodCSharpFormat.Default with
+                {
+                    ParameterFormat = ParameterCSharpFormat.Default with
+                    {
+                        // Show the parameter type, and conversion method
+                        ParameterFormat = t => $"{t.Type} using {candidate.conversionMethods[t.Position].ToString()}"
+                    }
+                };
+
+            _logger.LogDebug(
+                "Resolved with score {score} to method overload {candidate}",
+                Score(candidate!),
+                new StringBuilder().AppendCSharp(candidate.method!, methodCSharpFormat));
         }
 
         return (candidate.method, candidate.arguments);
@@ -113,11 +140,29 @@ internal partial class CqlOperatorsBinder
 
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {
-            var score = candidate.conversionMethods
-                         .Where(cm => cm > TypeConversion.NoMatch)
-                         .Select(cm => (double)cm)
-                         .Average();
+            var score =
+                PadWhenEmpty( // Cannot get average of empty list
+                    candidate
+                        .conversionMethods
+                        .Where(cm => cm > TypeConversion.NoMatch)
+                        .Select(cm => (double)cm),
+                    padWhenEmpty: (double)TypeConversion.ExactType)
+                    .Average();
             return score;
+        }
+
+        static IEnumerable<T> PadWhenEmpty<T>(IEnumerable<T> source, T padWhenEmpty)
+        {
+            using var enumerator = source.GetEnumerator();
+            if (!enumerator.MoveNext())
+                yield return padWhenEmpty;
+            else
+            {
+                do
+                {
+                    yield return enumerator.Current;
+                } while (enumerator.MoveNext());
+            }
         }
     }
 

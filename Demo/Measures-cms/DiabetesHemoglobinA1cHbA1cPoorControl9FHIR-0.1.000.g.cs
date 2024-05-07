@@ -245,42 +245,48 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			{
 				bool m_()
 				{
-					var p_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
-					var q_ = p_ is CqlDateTime;
+					var p_ = RecentHbA1c?.Effective;
+					var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+					var r_ = q_ is CqlDateTime;
 
-					return q_;
+					return r_;
 				};
 				bool n_()
 				{
-					var r_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
-					var s_ = r_ is CqlInterval<CqlDateTime>;
-
-					return s_;
-				};
-				bool o_()
-				{
-					var t_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
-					var u_ = t_ is CqlDateTime;
+					var s_ = RecentHbA1c?.Effective;
+					var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+					var u_ = t_ is CqlInterval<CqlDateTime>;
 
 					return u_;
 				};
+				bool o_()
+				{
+					var v_ = RecentHbA1c?.Effective;
+					var w_ = FHIRHelpers_4_3_000.ToValue(v_);
+					var x_ = w_ is CqlDateTime;
+
+					return x_;
+				};
 				if (m_())
 				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
+					var y_ = RecentHbA1c?.Effective;
+					var z_ = FHIRHelpers_4_3_000.ToValue(y_);
 
-					return ((v_ as CqlDateTime) as object);
+					return ((z_ as CqlDateTime) as object);
 				}
 				else if (n_())
 				{
-					var w_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
+					var aa_ = RecentHbA1c?.Effective;
+					var ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
 
-					return ((w_ as CqlInterval<CqlDateTime>) as object);
+					return ((ab_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (o_())
 				{
-					var x_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
+					var ac_ = RecentHbA1c?.Effective;
+					var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 
-					return ((x_ as CqlDateTime) as object);
+					return ((ad_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -296,11 +302,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			var y_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var z_ = QICoreCommon_2_0_000.ToInterval(y_);
-			var aa_ = context.Operators.Start(z_);
+			var ae_ = @this?.Effective;
+			var af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
+			var ah_ = context.Operators.Start(ag_);
 
-			return aa_;
+			return ah_;
 		};
 		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
@@ -351,42 +358,48 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			{
 				bool l_()
 				{
-					var o_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
-					var p_ = o_ is CqlDateTime;
+					var o_ = NoHbA1c?.Effective;
+					var p_ = FHIRHelpers_4_3_000.ToValue(o_);
+					var q_ = p_ is CqlDateTime;
 
-					return p_;
+					return q_;
 				};
 				bool m_()
 				{
-					var q_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
-					var r_ = q_ is CqlInterval<CqlDateTime>;
-
-					return r_;
-				};
-				bool n_()
-				{
-					var s_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
-					var t_ = s_ is CqlDateTime;
+					var r_ = NoHbA1c?.Effective;
+					var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+					var t_ = s_ is CqlInterval<CqlDateTime>;
 
 					return t_;
 				};
+				bool n_()
+				{
+					var u_ = NoHbA1c?.Effective;
+					var v_ = FHIRHelpers_4_3_000.ToValue(u_);
+					var w_ = v_ is CqlDateTime;
+
+					return w_;
+				};
 				if (l_())
 				{
-					var u_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
+					var x_ = NoHbA1c?.Effective;
+					var y_ = FHIRHelpers_4_3_000.ToValue(x_);
 
-					return ((u_ as CqlDateTime) as object);
+					return ((y_ as CqlDateTime) as object);
 				}
 				else if (m_())
 				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
+					var z_ = NoHbA1c?.Effective;
+					var aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
-					return ((v_ as CqlInterval<CqlDateTime>) as object);
+					return ((aa_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (n_())
 				{
-					var w_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
+					var ab_ = NoHbA1c?.Effective;
+					var ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return ((w_ as CqlDateTime) as object);
+					return ((ac_ as CqlDateTime) as object);
 				}
 				else
 				{

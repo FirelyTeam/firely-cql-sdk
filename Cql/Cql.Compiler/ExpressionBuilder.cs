@@ -122,6 +122,9 @@ namespace Hl7.Cql.Compiler
         public void ProcessExpressionDef(ILibraryExpressionBuilderContext libCtx, ExpressionDef expressionDef)
         {
             ExpressionBuilderContext context = new ExpressionBuilderContext(this, libCtx, new());
+            bool b0 = libCtx.LibraryKey == "SupplementalDataElements-3.4.000";
+            bool b1 = expressionDef.name == "SDE Sex";
+            _ = b0 && b1;
             context.ProcessExpressionDef(expressionDef);
         }
 

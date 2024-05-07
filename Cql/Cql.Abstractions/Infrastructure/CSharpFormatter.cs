@@ -71,7 +71,7 @@ internal static class CSharpFormatterrExtensions
 #region C# Formatting (Types)
 
 internal record TypeCSharpFormat(
-    FormattableStringProvider<TypeCSharpFormatContext>? TypeFormat = null,
+    FormattableStringProvider<ITypeCSharpFormatContext>? TypeFormat = null,
     bool NoNamespaces = false,
     bool UseKeywords = false,
     bool NoNullableOperator = false,          // e.g. Nullable<int> instead of int?
@@ -81,13 +81,13 @@ internal record TypeCSharpFormat(
     string NestedTypeSeparator = ".")         // A.Nested.Nested
     : CSharpFormat<Type>
 {
-    public static readonly FormattableStringProvider<TypeCSharpFormatContext> DefaultTypeFormat = type => $"{type.Type}";
+    public static readonly FormattableStringProvider<ITypeCSharpFormatContext> DefaultTypeFormat = type => $"{type.Type}";
     public static readonly TypeCSharpFormat Default = new();
 
     private const char NullOperator = '?';
     private const char PointerOperator = '*';
 
-    public FormattableStringProvider<TypeCSharpFormatContext> TypeFormat { get; } = TypeFormat ?? DefaultTypeFormat;
+    public FormattableStringProvider<ITypeCSharpFormatContext> TypeFormat { get; } = TypeFormat ?? DefaultTypeFormat;
     public ListTokens GenericArgumentTokens { get; } = GenericArgumentTokens ?? CSharpTokens.GenericArguments;
     public ListTokens ArrayTokens { get; } = ArrayTokens ?? CSharpTokens.Arrays;
 
@@ -235,9 +235,15 @@ internal record TypeCSharpFormat(
     }
 }
 
+internal interface ITypeCSharpFormatContext
+{
+    Type TypeInfo { get; }
+    TextWriterFormattableString Type { get; }
+}
+
 internal readonly record struct TypeCSharpFormatContext(
     Type TypeInfo,
-    TypeCSharpFormat TypeCSharpFormat)
+    TypeCSharpFormat TypeCSharpFormat) : ITypeCSharpFormatContext
 {
     public Type TypeInfo { get; } = TypeInfo;
 
@@ -262,8 +268,8 @@ internal record ParameterCSharpFormat(
 {
     private static readonly FormattableStringProvider<IParameterCSharpFormatContext> DefaultParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
     public static ParameterCSharpFormat Default { get; } = new();
-    public FormattableStringProvider<IParameterCSharpFormatContext> ParameterFormat { get; } = ParameterFormat ?? DefaultParameterFormat;
-    public TypeCSharpFormat TypeFormat { get; } = TypeFormat ?? TypeCSharpFormat.Default;
+    public FormattableStringProvider<IParameterCSharpFormatContext> ParameterFormat { get; init;  } = ParameterFormat ?? DefaultParameterFormat;
+    public TypeCSharpFormat TypeFormat { get; init;  } = TypeFormat ?? TypeCSharpFormat.Default;
 
     public override TextWriterFormattableString GetFormattableString(ParameterInfo parameterInfo) =>
         ParameterFormat(new ParameterCSharpFormatContext(parameterInfo, this));
@@ -271,6 +277,7 @@ internal record ParameterCSharpFormat(
 
 internal interface IParameterCSharpFormatContext
 {
+    int Position { get; }
     string Name { get; }
     TextWriterFormattableString Type { get; }
 }
@@ -280,6 +287,7 @@ internal readonly record struct ParameterCSharpFormatContext(
     ParameterCSharpFormat ParameterFormat) : IParameterCSharpFormatContext
 {
     public ParameterInfo ParameterInfo { get; } = ParameterInfo;
+    public int Position => ParameterInfo.Position;
     public string Name => ParameterInfo.Name!;
     public TextWriterFormattableString Type =>
         ParameterFormat
@@ -299,9 +307,9 @@ internal record MethodCSharpFormat(
 {
     private static readonly FormattableStringProvider<IMethodCSharpFormatContext> DefaultMethodFormat = (method => $"{method.ReturnType} {method.Name}{method.GenericArguments}{method.Parameters}");
     public static MethodCSharpFormat Default { get; } = new();
-    public FormattableStringProvider<IMethodCSharpFormatContext> MethodFormat { get; } = MethodFormat ?? DefaultMethodFormat;
-    public ParameterCSharpFormat ParameterFormat { get; } = ParameterFormat ?? ParameterCSharpFormat.Default;
-    public ListTokens ParameterTokens { get; } = ParameterTokens ?? CSharpTokens.Parameters;
+    public FormattableStringProvider<IMethodCSharpFormatContext> MethodFormat { get; init; } = MethodFormat ?? DefaultMethodFormat;
+    public ParameterCSharpFormat ParameterFormat { get; init; } = ParameterFormat ?? ParameterCSharpFormat.Default;
+    public ListTokens ParameterTokens { get; init;  } = ParameterTokens ?? CSharpTokens.Parameters;
 
     public override TextWriterFormattableString GetFormattableString(MethodInfo methodInfo) =>
         MethodFormat(new MethodCSharpFormatContext(methodInfo, this));

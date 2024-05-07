@@ -270,10 +270,11 @@ public class DiabetesEyeExamFHIR_0_0_001
 		bool? v_(Encounter ValidEncounters)
 		{
 			var x_ = this.Measurement_Period();
-			var y_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			var z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, y_, "day");
+			var y_ = ValidEncounters?.Period;
+			var z_ = FHIRHelpers_4_3_000.ToInterval(y_);
+			var aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
 
-			return z_;
+			return aa_;
 		};
 		var w_ = context.Operators.Where<Encounter>(u_, v_);
 
@@ -376,11 +377,12 @@ public class DiabetesEyeExamFHIR_0_0_001
 		bool? d_(Observation RetinalExam)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToValue(RetinalExam?.Effective);
-			var h_ = QICoreCommon_2_0_000.toInterval(g_);
-			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			var g_ = RetinalExam?.Effective;
+			var h_ = FHIRHelpers_4_3_000.ToValue(g_);
+			var i_ = QICoreCommon_2_0_000.toInterval(h_);
+			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
 
-			return i_;
+			return j_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 
@@ -404,11 +406,12 @@ public class DiabetesEyeExamFHIR_0_0_001
 			var i_ = context.Operators.Subtract(g_, h_);
 			var k_ = context.Operators.End(f_);
 			var l_ = context.Operators.Interval(i_, k_, true, true);
-			var m_ = FHIRHelpers_4_3_000.ToValue(RetinalExam?.Effective);
-			var n_ = QICoreCommon_2_0_000.toInterval(m_);
-			var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, "day");
+			var m_ = RetinalExam?.Effective;
+			var n_ = FHIRHelpers_4_3_000.ToValue(m_);
+			var o_ = QICoreCommon_2_0_000.toInterval(n_);
+			var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
 
-			return o_;
+			return p_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 

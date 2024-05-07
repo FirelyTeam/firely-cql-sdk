@@ -418,25 +418,26 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var c_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? d_(Encounter E)
 		{
-			CqlConcept bg_(CodeableConcept @this)
+			var bg_ = E?.Type;
+			CqlConcept bh_(CodeableConcept @this)
 			{
-				var bl_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var bm_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return bl_;
+				return bm_;
 			};
-			var bh_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, bg_);
-			bool? bi_(CqlConcept T)
+			var bi_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bg_, bh_);
+			bool? bj_(CqlConcept T)
 			{
-				var bm_ = this.Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate___();
-				var bn_ = context.Operators.ConvertCodeToConcept(bm_);
-				var bo_ = context.Operators.Equivalent(T, bn_);
+				var bn_ = this.Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate___();
+				var bo_ = context.Operators.ConvertCodeToConcept(bn_);
+				var bp_ = context.Operators.Equivalent(T, bo_);
 
-				return bo_;
+				return bp_;
 			};
-			var bj_ = context.Operators.Where<CqlConcept>(bh_, bi_);
-			var bk_ = context.Operators.Exists<CqlConcept>(bj_);
+			var bk_ = context.Operators.Where<CqlConcept>(bi_, bj_);
+			var bl_ = context.Operators.Exists<CqlConcept>(bk_);
 
-			return bk_;
+			return bl_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
 		var f_ = context.Operators.ListUnion<Encounter>(b_, e_);
@@ -473,25 +474,26 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var al_ = context.Operators.RetrieveByValueSet<Encounter>(ak_, null);
 		bool? an_(Encounter E)
 		{
-			CqlConcept bp_(CodeableConcept @this)
+			var bq_ = E?.Type;
+			CqlConcept br_(CodeableConcept @this)
 			{
-				var bu_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var bw_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return bu_;
+				return bw_;
 			};
-			var bq_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)E?.Type, bp_);
-			bool? br_(CqlConcept T)
+			var bs_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bq_, br_);
+			bool? bt_(CqlConcept T)
 			{
-				var bv_ = this.Unlisted_preventive_medicine_service();
-				var bw_ = context.Operators.ConvertCodeToConcept(bv_);
-				var bx_ = context.Operators.Equivalent(T, bw_);
+				var bx_ = this.Unlisted_preventive_medicine_service();
+				var by_ = context.Operators.ConvertCodeToConcept(bx_);
+				var bz_ = context.Operators.Equivalent(T, by_);
 
-				return bx_;
+				return bz_;
 			};
-			var bs_ = context.Operators.Where<CqlConcept>(bq_, br_);
-			var bt_ = context.Operators.Exists<CqlConcept>(bs_);
+			var bu_ = context.Operators.Where<CqlConcept>(bs_, bt_);
+			var bv_ = context.Operators.Exists<CqlConcept>(bu_);
 
-			return bt_;
+			return bv_;
 		};
 		var ao_ = context.Operators.Where<Encounter>(c_, an_);
 		var ap_ = context.Operators.ListUnion<Encounter>(al_, ao_);
@@ -511,12 +513,13 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var bd_ = Status_1_6_000.Finished_Encounter(bc_);
 		bool? be_(Encounter ValidEncounter)
 		{
-			var by_ = this.Measurement_Period();
-			var bz_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var ca_ = QICoreCommon_2_0_000.ToInterval((bz_ as object));
-			var cb_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(by_, ca_, null);
+			var ca_ = this.Measurement_Period();
+			var cb_ = ValidEncounter?.Period;
+			var cc_ = FHIRHelpers_4_3_000.ToInterval(cb_);
+			var cd_ = QICoreCommon_2_0_000.ToInterval((cc_ as object));
+			var ce_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ca_, cd_, null);
 
-			return cb_;
+			return ce_;
 		};
 		var bf_ = context.Operators.Where<Encounter>(bd_, be_);
 
@@ -539,18 +542,22 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var i_ = Status_1_6_000.Active_Medication(h_);
 			bool? j_(MedicationRequest AntibioticOrdered)
 			{
-				var n_ = FHIRHelpers_4_3_000.ToInterval(EDOrAmbulatoryVisit?.Period);
-				var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-				var p_ = context.Operators.Start(o_);
-				var q_ = context.Operators.Convert<CqlDateTime>(AntibioticOrdered?.AuthoredOnElement);
-				var r_ = context.Operators.Quantity(3m, "days");
-				var s_ = context.Operators.Subtract(q_, r_);
-				var u_ = context.Operators.Interval(s_, q_, true, true);
-				var v_ = context.Operators.In<CqlDateTime>(p_, u_, null);
-				var x_ = context.Operators.Not((bool?)(q_ is null));
-				var y_ = context.Operators.And(v_, x_);
+				var n_ = EDOrAmbulatoryVisit?.Period;
+				var o_ = FHIRHelpers_4_3_000.ToInterval(n_);
+				var p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
+				var q_ = context.Operators.Start(p_);
+				var r_ = AntibioticOrdered?.AuthoredOnElement;
+				var s_ = context.Operators.Convert<CqlDateTime>(r_);
+				var t_ = context.Operators.Quantity(3m, "days");
+				var u_ = context.Operators.Subtract(s_, t_);
+				var w_ = context.Operators.Convert<CqlDateTime>(r_);
+				var x_ = context.Operators.Interval(u_, w_, true, true);
+				var y_ = context.Operators.In<CqlDateTime>(q_, x_, null);
+				var aa_ = context.Operators.Convert<CqlDateTime>(r_);
+				var ab_ = context.Operators.Not((bool?)(aa_ is null));
+				var ac_ = context.Operators.And(y_, ab_);
 
-				return y_;
+				return ac_;
 			};
 			var k_ = context.Operators.Where<MedicationRequest>(i_, j_);
 			Encounter l_(MedicationRequest AntibioticOrdered) => 
@@ -604,11 +611,12 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		{
 			var k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_ypyxedbbcqbdavhxvckuwmfh.AcutePharyngitisTonsillitis);
 			var l_ = context.Operators.Start(k_);
-			var m_ = FHIRHelpers_4_3_000.ToInterval(tuple_ypyxedbbcqbdavhxvckuwmfh.VisitWithAntibiotic?.Period);
-			var n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
-			var o_ = context.Operators.In<CqlDateTime>(l_, n_, null);
+			var m_ = tuple_ypyxedbbcqbdavhxvckuwmfh.VisitWithAntibiotic?.Period;
+			var n_ = FHIRHelpers_4_3_000.ToInterval(m_);
+			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			var p_ = context.Operators.In<CqlDateTime>(l_, o_, null);
 
-			return o_;
+			return p_;
 		};
 		var g_ = context.Operators.Where<Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(e_, f_);
 		Encounter h_(Tuple_YPYXEdbbCQBdAVHXVcKUWMfH tuple_ypyxedbbcqbdavhxvckuwmfh) => 
@@ -628,14 +636,16 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, 3);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+			var n_ = context.Operators.GreaterOrEqual(m_, 3);
 
-			return l_;
+			return n_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 
@@ -711,10 +721,11 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation GroupAStreptococcusTest)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(GroupAStreptococcusTest?.Value);
-			var g_ = context.Operators.Not((bool?)(f_ is null));
+			var f_ = GroupAStreptococcusTest?.Value;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = context.Operators.Not((bool?)(g_ is null));
 
-			return g_;
+			return h_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 
@@ -743,19 +754,22 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(c_, d_);
 		bool? f_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij)
 		{
-			var k_ = FHIRHelpers_4_3_000.ToValue(tuple_ffguysnebcxllexfcmjoehbij.GroupAStreptococcusTest?.Effective);
-			var l_ = QICoreCommon_2_0_000.ToInterval(k_);
-			var m_ = context.Operators.Start(l_);
-			var n_ = FHIRHelpers_4_3_000.ToInterval(tuple_ffguysnebcxllexfcmjoehbij.EncounterWithPharyngitis?.Period);
-			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity(3m, "days");
-			var q_ = context.Operators.Subtract(o_, p_);
-			var s_ = context.Operators.End(n_);
-			var u_ = context.Operators.Add(s_, p_);
-			var v_ = context.Operators.Interval(q_, u_, true, true);
-			var w_ = context.Operators.In<CqlDateTime>(m_, v_, "day");
+			var k_ = tuple_ffguysnebcxllexfcmjoehbij.GroupAStreptococcusTest?.Effective;
+			var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+			var m_ = QICoreCommon_2_0_000.ToInterval(l_);
+			var n_ = context.Operators.Start(m_);
+			var o_ = tuple_ffguysnebcxllexfcmjoehbij.EncounterWithPharyngitis?.Period;
+			var p_ = FHIRHelpers_4_3_000.ToInterval(o_);
+			var q_ = context.Operators.End(p_);
+			var r_ = context.Operators.Quantity(3m, "days");
+			var s_ = context.Operators.Subtract(q_, r_);
+			var u_ = FHIRHelpers_4_3_000.ToInterval(o_);
+			var v_ = context.Operators.End(u_);
+			var x_ = context.Operators.Add(v_, r_);
+			var y_ = context.Operators.Interval(s_, x_, true, true);
+			var z_ = context.Operators.In<CqlDateTime>(n_, y_, "day");
 
-			return w_;
+			return z_;
 		};
 		var g_ = context.Operators.Where<Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(e_, f_);
 		Encounter h_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij) => 
@@ -775,15 +789,17 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.Interval(3, 17, true, true);
-			var m_ = context.Operators.In<int?>(k_, l_, null);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+			var n_ = context.Operators.Interval(3, 17, true, true);
+			var o_ = context.Operators.In<int?>(m_, n_, null);
 
-			return m_;
+			return o_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 
@@ -803,15 +819,17 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.Interval(18, 64, true, true);
-			var m_ = context.Operators.In<int?>(k_, l_, null);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+			var n_ = context.Operators.Interval(18, 64, true, true);
+			var o_ = context.Operators.In<int?>(m_, n_, null);
 
-			return m_;
+			return o_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 
@@ -831,14 +849,16 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			var f_ = this.Patient();
-			var g_ = context.Operators.Convert<CqlDate>(f_?.BirthDateElement?.Value);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, 65);
+			var g_ = f_?.BirthDateElement;
+			var h_ = g_?.Value;
+			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.DateFrom(k_);
+			var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+			var n_ = context.Operators.GreaterOrEqual(m_, 65);
 
-			return l_;
+			return n_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter EncounterWithPharyngitis) => 

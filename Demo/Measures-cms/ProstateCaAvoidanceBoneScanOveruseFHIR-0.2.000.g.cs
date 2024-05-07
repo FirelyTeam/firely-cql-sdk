@@ -384,17 +384,20 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var f_ = this.Prostate_Cancer_Diagnosis();
 			bool? g_(Condition ActiveProstateCancer)
 			{
-				var k_ = FHIRHelpers_4_3_000.ToValue(SalvageTherapy?.Performed);
-				var l_ = QICoreCommon_2_0_000.toInterval(k_);
-				var m_ = context.Operators.Start(l_);
-				var n_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveProstateCancer);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.After(m_, o_, null);
-				var q_ = context.Operators.Convert<string>(SalvageTherapy?.StatusElement?.Value);
-				var r_ = context.Operators.Equal(q_, "completed");
-				var s_ = context.Operators.And(p_, r_);
+				var k_ = SalvageTherapy?.Performed;
+				var l_ = FHIRHelpers_4_3_000.ToValue(k_);
+				var m_ = QICoreCommon_2_0_000.toInterval(l_);
+				var n_ = context.Operators.Start(m_);
+				var o_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveProstateCancer);
+				var p_ = context.Operators.Start(o_);
+				var q_ = context.Operators.After(n_, p_, null);
+				var r_ = SalvageTherapy?.StatusElement;
+				var s_ = r_?.Value;
+				var t_ = context.Operators.Convert<string>(s_);
+				var u_ = context.Operators.Equal(t_, "completed");
+				var v_ = context.Operators.And(q_, u_);
 
-				return s_;
+				return v_;
 			};
 			var h_ = context.Operators.Where<Condition>(f_, g_);
 			Procedure i_(Condition ActiveProstateCancer) => 
@@ -422,14 +425,15 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			var e_ = this.Prostate_Cancer_Diagnosis();
 			bool? f_(Condition ActiveProstateCancer)
 			{
-				var j_ = FHIRHelpers_4_3_000.ToValue(BoneScan?.Effective);
-				var k_ = QICoreCommon_2_0_000.toInterval(j_);
-				var l_ = context.Operators.Start(k_);
-				var m_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveProstateCancer);
-				var n_ = context.Operators.Start(m_);
-				var o_ = context.Operators.After(l_, n_, null);
+				var j_ = BoneScan?.Effective;
+				var k_ = FHIRHelpers_4_3_000.ToValue(j_);
+				var l_ = QICoreCommon_2_0_000.toInterval(k_);
+				var m_ = context.Operators.Start(l_);
+				var n_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveProstateCancer);
+				var o_ = context.Operators.Start(n_);
+				var p_ = context.Operators.After(m_, o_, null);
 
-				return o_;
+				return p_;
 			};
 			var g_ = context.Operators.Where<Condition>(e_, f_);
 			Observation h_(Condition ActiveProstateCancer) => 
@@ -452,12 +456,13 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		var a_ = this.Bone_Scan_Study_Performed();
 		bool? b_(Observation BoneScanAfterDiagnosis)
 		{
-			var e_ = FHIRHelpers_4_3_000.ToValue(BoneScanAfterDiagnosis?.Value);
-			var f_ = this.Procedure_reason_record__record_artifact_();
-			var g_ = context.Operators.ConvertCodeToConcept(f_);
-			var h_ = context.Operators.Equivalent((e_ as CqlConcept), g_);
+			var e_ = BoneScanAfterDiagnosis?.Value;
+			var f_ = FHIRHelpers_4_3_000.ToValue(e_);
+			var g_ = this.Procedure_reason_record__record_artifact_();
+			var h_ = context.Operators.ConvertCodeToConcept(g_);
+			var i_ = context.Operators.Equivalent((f_ as CqlConcept), h_);
 
-			return h_;
+			return i_;
 		};
 		var c_ = context.Operators.Where<Observation>(a_, b_);
 		var d_ = context.Operators.Exists<Observation>(c_);
@@ -490,25 +495,29 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? c_(Procedure ProstateCancerTreatment)
 		{
-			var h_ = FHIRHelpers_4_3_000.ToValue(ProstateCancerTreatment?.Performed);
-			var i_ = QICoreCommon_2_0_000.toInterval(h_);
-			var j_ = context.Operators.End(i_);
-			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
-			var m_ = context.Operators.Convert<string>(ProstateCancerTreatment?.StatusElement?.Value);
-			var n_ = context.Operators.Equal(m_, "completed");
-			var o_ = context.Operators.And(l_, n_);
+			var h_ = ProstateCancerTreatment?.Performed;
+			var i_ = FHIRHelpers_4_3_000.ToValue(h_);
+			var j_ = QICoreCommon_2_0_000.toInterval(i_);
+			var k_ = context.Operators.End(j_);
+			var l_ = this.Measurement_Period();
+			var m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+			var n_ = ProstateCancerTreatment?.StatusElement;
+			var o_ = n_?.Value;
+			var p_ = context.Operators.Convert<string>(o_);
+			var q_ = context.Operators.Equal(p_, "completed");
+			var r_ = context.Operators.And(m_, q_);
 
-			return o_;
+			return r_;
 		};
 		var d_ = context.Operators.Where<Procedure>(b_, c_);
 		object e_(Procedure @this)
 		{
-			var p_ = FHIRHelpers_4_3_000.ToValue(@this?.Performed);
-			var q_ = QICoreCommon_2_0_000.toInterval(p_);
-			var r_ = context.Operators.Start(q_);
+			var s_ = @this?.Performed;
+			var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+			var u_ = QICoreCommon_2_0_000.toInterval(t_);
+			var v_ = context.Operators.Start(u_);
 
-			return r_;
+			return v_;
 		};
 		var f_ = context.Operators.SortBy<Procedure>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.First<Procedure>(f_);
@@ -546,25 +555,29 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			};
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
-				var s_ = FHIRHelpers_4_3_000.ToValue(GleasonScore?.Effective);
-				var t_ = QICoreCommon_2_0_000.toInterval(s_);
-				var u_ = context.Operators.Start(t_);
-				var v_ = FHIRHelpers_4_3_000.ToValue(FirstProstateCancerTreatment?.Performed);
-				var w_ = QICoreCommon_2_0_000.toInterval(v_);
-				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Before(u_, x_, null);
-				var z_ = context.Operators.Convert<Code<ObservationStatus>>(GleasonScore?.StatusElement?.Value);
-				var aa_ = context.Operators.Convert<string>(z_);
-				var ab_ = new string[]
+				var s_ = GleasonScore?.Effective;
+				var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+				var u_ = QICoreCommon_2_0_000.toInterval(t_);
+				var v_ = context.Operators.Start(u_);
+				var w_ = FirstProstateCancerTreatment?.Performed;
+				var x_ = FHIRHelpers_4_3_000.ToValue(w_);
+				var y_ = QICoreCommon_2_0_000.toInterval(x_);
+				var z_ = context.Operators.Start(y_);
+				var aa_ = context.Operators.Before(v_, z_, null);
+				var ab_ = GleasonScore?.StatusElement;
+				var ac_ = ab_?.Value;
+				var ad_ = context.Operators.Convert<Code<ObservationStatus>>(ac_);
+				var ae_ = context.Operators.Convert<string>(ad_);
+				var af_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var ac_ = context.Operators.In<string>(aa_, (ab_ as IEnumerable<string>));
-				var ad_ = context.Operators.And(y_, ac_);
+				var ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
+				var ah_ = context.Operators.And(aa_, ag_);
 
-				return ad_;
+				return ah_;
 			};
 			var p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
 			Observation q_(Procedure FirstProstateCancerTreatment) => 
@@ -576,11 +589,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		var e_ = context.Operators.SelectMany<Observation, Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			var ae_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var af_ = QICoreCommon_2_0_000.toInterval(ae_);
-			var ag_ = context.Operators.Start(af_);
+			var ai_ = @this?.Effective;
+			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			var ak_ = QICoreCommon_2_0_000.toInterval(aj_);
+			var al_ = context.Operators.Start(ak_);
 
-			return ag_;
+			return al_;
 		};
 		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
@@ -590,10 +604,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		bool? j_(Observation LastGleasonScore)
 		{
-			var ah_ = FHIRHelpers_4_3_000.ToValue(LastGleasonScore?.Value);
-			var ai_ = context.Operators.LessOrEqual((int?)ah_, 6);
+			var am_ = LastGleasonScore?.Value;
+			var an_ = FHIRHelpers_4_3_000.ToValue(am_);
+			var ao_ = context.Operators.LessOrEqual((int?)an_, 6);
 
-			return ai_;
+			return ao_;
 		};
 		var k_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<bool?>(k_);
@@ -619,25 +634,29 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			};
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
-				var s_ = FHIRHelpers_4_3_000.ToValue(ProstateCancerStaging?.Effective);
-				var t_ = QICoreCommon_2_0_000.toInterval(s_);
-				var u_ = context.Operators.Start(t_);
-				var v_ = FHIRHelpers_4_3_000.ToValue(FirstProstateCancerTreatment?.Performed);
-				var w_ = QICoreCommon_2_0_000.toInterval(v_);
-				var x_ = context.Operators.Start(w_);
-				var y_ = context.Operators.Before(u_, x_, null);
-				var z_ = context.Operators.Convert<Code<ObservationStatus>>(ProstateCancerStaging?.StatusElement?.Value);
-				var aa_ = context.Operators.Convert<string>(z_);
-				var ab_ = new string[]
+				var s_ = ProstateCancerStaging?.Effective;
+				var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+				var u_ = QICoreCommon_2_0_000.toInterval(t_);
+				var v_ = context.Operators.Start(u_);
+				var w_ = FirstProstateCancerTreatment?.Performed;
+				var x_ = FHIRHelpers_4_3_000.ToValue(w_);
+				var y_ = QICoreCommon_2_0_000.toInterval(x_);
+				var z_ = context.Operators.Start(y_);
+				var aa_ = context.Operators.Before(v_, z_, null);
+				var ab_ = ProstateCancerStaging?.StatusElement;
+				var ac_ = ab_?.Value;
+				var ad_ = context.Operators.Convert<Code<ObservationStatus>>(ac_);
+				var ae_ = context.Operators.Convert<string>(ad_);
+				var af_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var ac_ = context.Operators.In<string>(aa_, (ab_ as IEnumerable<string>));
-				var ad_ = context.Operators.And(y_, ac_);
+				var ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
+				var ah_ = context.Operators.And(aa_, ag_);
 
-				return ad_;
+				return ah_;
 			};
 			var p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
 			Observation q_(Procedure FirstProstateCancerTreatment) => 
@@ -649,11 +668,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		var e_ = context.Operators.SelectMany<Observation, Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			var ae_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var af_ = QICoreCommon_2_0_000.toInterval(ae_);
-			var ag_ = context.Operators.Start(af_);
+			var ai_ = @this?.Effective;
+			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			var ak_ = QICoreCommon_2_0_000.toInterval(aj_);
+			var al_ = context.Operators.Start(ak_);
 
-			return ag_;
+			return al_;
 		};
 		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
@@ -663,24 +683,28 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		bool? j_(Observation LastProstateCancerStaging)
 		{
-			var ah_ = FHIRHelpers_4_3_000.ToValue(LastProstateCancerStaging?.Value);
-			var ai_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_();
-			var aj_ = context.Operators.ConvertCodeToConcept(ai_);
-			var ak_ = context.Operators.Equivalent((ah_ as CqlConcept), aj_);
-			var am_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_();
-			var an_ = context.Operators.ConvertCodeToConcept(am_);
-			var ao_ = context.Operators.Equivalent((ah_ as CqlConcept), an_);
-			var ap_ = context.Operators.Or(ak_, ao_);
-			var ar_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_();
-			var as_ = context.Operators.ConvertCodeToConcept(ar_);
-			var at_ = context.Operators.Equivalent((ah_ as CqlConcept), as_);
-			var au_ = context.Operators.Or(ap_, at_);
-			var aw_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_();
-			var ax_ = context.Operators.ConvertCodeToConcept(aw_);
-			var ay_ = context.Operators.Equivalent((ah_ as CqlConcept), ax_);
-			var az_ = context.Operators.Or(au_, ay_);
+			var am_ = LastProstateCancerStaging?.Value;
+			var an_ = FHIRHelpers_4_3_000.ToValue(am_);
+			var ao_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_();
+			var ap_ = context.Operators.ConvertCodeToConcept(ao_);
+			var aq_ = context.Operators.Equivalent((an_ as CqlConcept), ap_);
+			var as_ = FHIRHelpers_4_3_000.ToValue(am_);
+			var at_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_();
+			var au_ = context.Operators.ConvertCodeToConcept(at_);
+			var av_ = context.Operators.Equivalent((as_ as CqlConcept), au_);
+			var aw_ = context.Operators.Or(aq_, av_);
+			var ay_ = FHIRHelpers_4_3_000.ToValue(am_);
+			var az_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_();
+			var ba_ = context.Operators.ConvertCodeToConcept(az_);
+			var bb_ = context.Operators.Equivalent((ay_ as CqlConcept), ba_);
+			var bc_ = context.Operators.Or(aw_, bb_);
+			var be_ = FHIRHelpers_4_3_000.ToValue(am_);
+			var bf_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_();
+			var bg_ = context.Operators.ConvertCodeToConcept(bf_);
+			var bh_ = context.Operators.Equivalent((be_ as CqlConcept), bg_);
+			var bi_ = context.Operators.Or(bc_, bh_);
 
-			return az_;
+			return bi_;
 		};
 		var k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
 		var l_ = context.Operators.SingletonFrom<Observation>(k_);
@@ -720,45 +744,51 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			{
 				CqlInterval<CqlDateTime> r_()
 				{
-					bool aa_()
+					bool ad_()
 					{
-						var ab_ = FHIRHelpers_4_3_000.ToValue(PSATest?.Effective);
-						var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
-						var ad_ = context.Operators.Start(ac_);
+						var ae_ = PSATest?.Effective;
+						var af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+						var ag_ = QICoreCommon_2_0_000.toInterval(af_);
+						var ah_ = context.Operators.Start(ag_);
 
-						return (ad_ is null);
+						return (ah_ is null);
 					};
-					if (aa_())
+					if (ad_())
 					{
 						return null;
 					}
 					else
 					{
-						var ae_ = FHIRHelpers_4_3_000.ToValue(PSATest?.Effective);
-						var af_ = QICoreCommon_2_0_000.toInterval(ae_);
-						var ag_ = context.Operators.Start(af_);
-						var ai_ = QICoreCommon_2_0_000.toInterval(ae_);
-						var aj_ = context.Operators.Start(ai_);
-						var ak_ = context.Operators.Interval(ag_, aj_, true, true);
+						var ai_ = PSATest?.Effective;
+						var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+						var ak_ = QICoreCommon_2_0_000.toInterval(aj_);
+						var al_ = context.Operators.Start(ak_);
+						var an_ = FHIRHelpers_4_3_000.ToValue(ai_);
+						var ao_ = QICoreCommon_2_0_000.toInterval(an_);
+						var ap_ = context.Operators.Start(ao_);
+						var aq_ = context.Operators.Interval(al_, ap_, true, true);
 
-						return ak_;
+						return aq_;
 					};
 				};
-				var s_ = FHIRHelpers_4_3_000.ToValue(MostRecentProstateCancerStaging?.Effective);
-				var t_ = QICoreCommon_2_0_000.toInterval(s_);
-				var u_ = context.Operators.Before(r_(), t_, null);
-				var v_ = context.Operators.Convert<Code<ObservationStatus>>(PSATest?.StatusElement?.Value);
-				var w_ = context.Operators.Convert<string>(v_);
-				var x_ = new string[]
+				var s_ = MostRecentProstateCancerStaging?.Effective;
+				var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+				var u_ = QICoreCommon_2_0_000.toInterval(t_);
+				var v_ = context.Operators.Before(r_(), u_, null);
+				var w_ = PSATest?.StatusElement;
+				var x_ = w_?.Value;
+				var y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
+				var z_ = context.Operators.Convert<string>(y_);
+				var aa_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
-				var z_ = context.Operators.And(u_, y_);
+				var ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				var ac_ = context.Operators.And(v_, ab_);
 
-				return z_;
+				return ac_;
 			};
 			var o_ = context.Operators.Where<Observation>((IEnumerable<Observation>)m_, n_);
 			Observation p_(Observation MostRecentProstateCancerStaging) => 
@@ -770,11 +800,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			var al_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var am_ = QICoreCommon_2_0_000.toInterval(al_);
-			var an_ = context.Operators.Start(am_);
+			var ar_ = @this?.Effective;
+			var as_ = FHIRHelpers_4_3_000.ToValue(ar_);
+			var at_ = QICoreCommon_2_0_000.toInterval(as_);
+			var au_ = context.Operators.Start(at_);
 
-			return an_;
+			return au_;
 		};
 		var f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		var g_ = context.Operators.Last<Observation>(f_);
@@ -784,11 +815,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		bool? i_(Observation LastPSATest)
 		{
-			var ao_ = FHIRHelpers_4_3_000.ToValue(LastPSATest?.Value);
-			var ap_ = context.Operators.Quantity(10m, "ng/mL");
-			var aq_ = context.Operators.Less((ao_ as CqlQuantity), ap_);
+			var av_ = LastPSATest?.Value;
+			var aw_ = FHIRHelpers_4_3_000.ToValue(av_);
+			var ax_ = context.Operators.Quantity(10m, "ng/mL");
+			var ay_ = context.Operators.Less((aw_ as CqlQuantity), ax_);
 
-			return aq_;
+			return ay_;
 		};
 		var j_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)h_, i_);
 		var k_ = context.Operators.SingletonFrom<bool?>(j_);

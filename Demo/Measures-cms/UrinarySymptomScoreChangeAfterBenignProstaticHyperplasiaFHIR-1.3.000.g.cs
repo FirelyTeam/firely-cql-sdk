@@ -298,18 +298,22 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		bool? c_(Encounter ValidEncounter)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, g_, "day");
-			var i_ = FHIRHelpers_4_3_000.ToCode(ValidEncounter?.Class);
-			var j_ = this.@virtual();
-			var k_ = context.Operators.Equivalent(i_, j_);
-			var l_ = context.Operators.Not(k_);
-			var m_ = context.Operators.And(h_, l_);
-			var n_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ValidEncounter?.StatusElement?.Value);
-			var o_ = context.Operators.Equal(n_, "finished");
-			var p_ = context.Operators.And(m_, o_);
+			var g_ = ValidEncounter?.Period;
+			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			var j_ = ValidEncounter?.Class;
+			var k_ = FHIRHelpers_4_3_000.ToCode(j_);
+			var l_ = this.@virtual();
+			var m_ = context.Operators.Equivalent(k_, l_);
+			var n_ = context.Operators.Not(m_);
+			var o_ = context.Operators.And(i_, n_);
+			var p_ = ValidEncounter?.StatusElement;
+			var q_ = p_?.Value;
+			var r_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(q_);
+			var s_ = context.Operators.Equal(r_, "finished");
+			var t_ = context.Operators.And(o_, s_);
 
-			return p_;
+			return t_;
 		};
 		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		var e_ = context.Operators.Exists<Encounter>(d_);
@@ -330,26 +334,30 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		};
 		bool? b_(Condition Diagnosis)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.ClinicalStatus);
-			var g_ = QICoreCommon_2_0_000.active();
-			var h_ = context.Operators.ConvertCodeToConcept(g_);
-			var i_ = context.Operators.Equivalent(f_, h_);
-			var j_ = FHIRHelpers_4_3_000.ToConcept(Diagnosis?.VerificationStatus);
-			var k_ = QICoreCommon_2_0_000.unconfirmed();
-			var l_ = context.Operators.ConvertCodeToConcept(k_);
-			var m_ = context.Operators.Equivalent(j_, l_);
-			var o_ = QICoreCommon_2_0_000.refuted();
-			var p_ = context.Operators.ConvertCodeToConcept(o_);
-			var q_ = context.Operators.Equivalent(j_, p_);
-			var r_ = context.Operators.Or(m_, q_);
-			var t_ = QICoreCommon_2_0_000.entered_in_error();
-			var u_ = context.Operators.ConvertCodeToConcept(t_);
-			var v_ = context.Operators.Equivalent(j_, u_);
-			var w_ = context.Operators.Or(r_, v_);
-			var x_ = context.Operators.Not(w_);
-			var y_ = context.Operators.And(i_, x_);
+			var f_ = Diagnosis?.ClinicalStatus;
+			var g_ = FHIRHelpers_4_3_000.ToConcept(f_);
+			var h_ = QICoreCommon_2_0_000.active();
+			var i_ = context.Operators.ConvertCodeToConcept(h_);
+			var j_ = context.Operators.Equivalent(g_, i_);
+			var k_ = Diagnosis?.VerificationStatus;
+			var l_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			var m_ = QICoreCommon_2_0_000.unconfirmed();
+			var n_ = context.Operators.ConvertCodeToConcept(m_);
+			var o_ = context.Operators.Equivalent(l_, n_);
+			var q_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			var r_ = QICoreCommon_2_0_000.refuted();
+			var s_ = context.Operators.ConvertCodeToConcept(r_);
+			var t_ = context.Operators.Equivalent(q_, s_);
+			var u_ = context.Operators.Or(o_, t_);
+			var w_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			var x_ = QICoreCommon_2_0_000.entered_in_error();
+			var y_ = context.Operators.ConvertCodeToConcept(x_);
+			var z_ = context.Operators.Equivalent(w_, y_);
+			var aa_ = context.Operators.Or(u_, z_);
+			var ab_ = context.Operators.Not(aa_);
+			var ac_ = context.Operators.And(j_, ab_);
 
-			return y_;
+			return ac_;
 		};
 		var c_ = context.Operators.Where<Condition>((IEnumerable<Condition>)a_, b_);
 		var d_ = context.Operators.SingletonFrom<Condition>(c_);
@@ -382,11 +390,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		var e_ = context.Operators.Where<Condition>(c_, d_);
 		object f_(Condition @this)
 		{
-			var u_ = FHIRHelpers_4_3_000.ToValue(@this?.Onset);
-			var v_ = QICoreCommon_2_0_000.toInterval(u_);
-			var w_ = context.Operators.Start(v_);
+			var u_ = @this?.Onset;
+			var v_ = FHIRHelpers_4_3_000.ToValue(u_);
+			var w_ = QICoreCommon_2_0_000.toInterval(v_);
+			var x_ = context.Operators.Start(w_);
 
-			return w_;
+			return x_;
 		};
 		var g_ = context.Operators.SortBy<Condition>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.First<Condition>(g_);
@@ -417,79 +426,89 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		bool? d_(Observation IPSSAssessment)
 		{
-			var h_ = context.Operators.Convert<Code<ObservationStatus>>(IPSSAssessment?.StatusElement?.Value);
-			var i_ = context.Operators.Convert<string>(h_);
-			var j_ = new string[]
+			var h_ = IPSSAssessment?.StatusElement;
+			var i_ = h_?.Value;
+			var j_ = context.Operators.Convert<Code<ObservationStatus>>(i_);
+			var k_ = context.Operators.Convert<string>(j_);
+			var l_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var k_ = context.Operators.In<string>(i_, (j_ as IEnumerable<string>));
-			var l_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Value);
-			var m_ = context.Operators.Not((bool?)(l_ is null));
-			var n_ = context.Operators.And(k_, m_);
+			var m_ = context.Operators.In<string>(k_, (l_ as IEnumerable<string>));
+			var n_ = IPSSAssessment?.Value;
+			var o_ = FHIRHelpers_4_3_000.ToValue(n_);
+			var p_ = context.Operators.Not((bool?)(o_ is null));
+			var q_ = context.Operators.And(m_, p_);
 
-			return n_;
+			return q_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		Tuple_GNNDVIQPcTANSdLebhBKYIdga f_(Observation IPSSAssessment)
 		{
-			object o_()
+			object r_()
 			{
-				bool s_()
+				bool w_()
 				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Effective);
-					var w_ = v_ is CqlDateTime;
+					var z_ = IPSSAssessment?.Effective;
+					var aa_ = FHIRHelpers_4_3_000.ToValue(z_);
+					var ab_ = aa_ is CqlDateTime;
 
-					return w_;
+					return ab_;
 				};
-				bool t_()
+				bool x_()
 				{
-					var x_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Effective);
-					var y_ = x_ is CqlInterval<CqlDateTime>;
+					var ac_ = IPSSAssessment?.Effective;
+					var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+					var ae_ = ad_ is CqlInterval<CqlDateTime>;
 
-					return y_;
+					return ae_;
 				};
-				bool u_()
+				bool y_()
 				{
-					var z_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Effective);
-					var aa_ = z_ is CqlDateTime;
+					var af_ = IPSSAssessment?.Effective;
+					var ag_ = FHIRHelpers_4_3_000.ToValue(af_);
+					var ah_ = ag_ is CqlDateTime;
 
-					return aa_;
+					return ah_;
 				};
-				if (s_())
+				if (w_())
 				{
-					var ab_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Effective);
+					var ai_ = IPSSAssessment?.Effective;
+					var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
 
-					return ((ab_ as CqlDateTime) as object);
+					return ((aj_ as CqlDateTime) as object);
 				}
-				else if (t_())
+				else if (x_())
 				{
-					var ac_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Effective);
+					var ak_ = IPSSAssessment?.Effective;
+					var al_ = FHIRHelpers_4_3_000.ToValue(ak_);
 
-					return ((ac_ as CqlInterval<CqlDateTime>) as object);
+					return ((al_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (u_())
+				else if (y_())
 				{
-					var ad_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Effective);
+					var am_ = IPSSAssessment?.Effective;
+					var an_ = FHIRHelpers_4_3_000.ToValue(am_);
 
-					return ((ad_ as CqlDateTime) as object);
+					return ((an_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
 				};
 			};
-			var p_ = QICoreCommon_2_0_000.earliest(o_());
-			var q_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Value);
-			var r_ = new Tuple_GNNDVIQPcTANSdLebhBKYIdga
+			var s_ = QICoreCommon_2_0_000.earliest(r_());
+			var t_ = IPSSAssessment?.Value;
+			var u_ = FHIRHelpers_4_3_000.ToValue(t_);
+			var v_ = new Tuple_GNNDVIQPcTANSdLebhBKYIdga
 			{
-				effectiveDatetime = p_,
-				valueInteger = (int?)q_,
+				effectiveDatetime = s_,
+				valueInteger = (int?)u_,
 			};
 
-			return r_;
+			return v_;
 		};
 		var g_ = context.Operators.Select<Observation, Tuple_GNNDVIQPcTANSdLebhBKYIdga>(e_, f_);
 
@@ -507,288 +526,322 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		bool? d_(Observation AUASIAssessment)
 		{
-			CqlConcept h_(CodeableConcept @this)
+			var h_ = AUASIAssessment?.Category;
+			CqlConcept i_(CodeableConcept @this)
 			{
-				var u_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				var y_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return u_;
+				return y_;
 			};
-			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)AUASIAssessment?.Category, h_);
-			bool? j_(CqlConcept AUASIAssessmentCategory)
+			var j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_);
+			bool? k_(CqlConcept AUASIAssessmentCategory)
 			{
-				var v_ = this.survey();
-				var w_ = context.Operators.ConvertCodeToConcept(v_);
-				var x_ = context.Operators.Equivalent(AUASIAssessmentCategory, w_);
+				var z_ = this.survey();
+				var aa_ = context.Operators.ConvertCodeToConcept(z_);
+				var ab_ = context.Operators.Equivalent(AUASIAssessmentCategory, aa_);
 
-				return x_;
+				return ab_;
 			};
-			var k_ = context.Operators.Where<CqlConcept>(i_, j_);
-			var l_ = context.Operators.Exists<CqlConcept>(k_);
-			var m_ = context.Operators.Convert<Code<ObservationStatus>>(AUASIAssessment?.StatusElement?.Value);
-			var n_ = context.Operators.Convert<string>(m_);
-			var o_ = new string[]
+			var l_ = context.Operators.Where<CqlConcept>(j_, k_);
+			var m_ = context.Operators.Exists<CqlConcept>(l_);
+			var n_ = AUASIAssessment?.StatusElement;
+			var o_ = n_?.Value;
+			var p_ = context.Operators.Convert<Code<ObservationStatus>>(o_);
+			var q_ = context.Operators.Convert<string>(p_);
+			var r_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
-			var q_ = context.Operators.And(l_, p_);
-			var r_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Value);
-			var s_ = context.Operators.Not((bool?)(r_ is null));
-			var t_ = context.Operators.And(q_, s_);
+			var s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
+			var t_ = context.Operators.And(m_, s_);
+			var u_ = AUASIAssessment?.Value;
+			var v_ = FHIRHelpers_4_3_000.ToValue(u_);
+			var w_ = context.Operators.Not((bool?)(v_ is null));
+			var x_ = context.Operators.And(t_, w_);
 
-			return t_;
+			return x_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		Tuple_GNNDVIQPcTANSdLebhBKYIdga f_(Observation AUASIAssessment)
 		{
-			object y_()
+			object ac_()
 			{
-				bool am_()
+				bool as_()
 				{
-					var ap_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Effective);
-					var aq_ = ap_ is CqlDateTime;
+					var av_ = AUASIAssessment?.Effective;
+					var aw_ = FHIRHelpers_4_3_000.ToValue(av_);
+					var ax_ = aw_ is CqlDateTime;
 
-					return aq_;
+					return ax_;
 				};
-				bool an_()
+				bool at_()
 				{
-					var ar_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Effective);
-					var as_ = ar_ is CqlInterval<CqlDateTime>;
+					var ay_ = AUASIAssessment?.Effective;
+					var az_ = FHIRHelpers_4_3_000.ToValue(ay_);
+					var ba_ = az_ is CqlInterval<CqlDateTime>;
 
-					return as_;
+					return ba_;
 				};
-				bool ao_()
+				bool au_()
 				{
-					var at_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Effective);
-					var au_ = at_ is CqlDateTime;
+					var bb_ = AUASIAssessment?.Effective;
+					var bc_ = FHIRHelpers_4_3_000.ToValue(bb_);
+					var bd_ = bc_ is CqlDateTime;
 
-					return au_;
+					return bd_;
 				};
-				if (am_())
+				if (as_())
 				{
-					var av_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Effective);
+					var be_ = AUASIAssessment?.Effective;
+					var bf_ = FHIRHelpers_4_3_000.ToValue(be_);
 
-					return ((av_ as CqlDateTime) as object);
+					return ((bf_ as CqlDateTime) as object);
 				}
-				else if (an_())
+				else if (at_())
 				{
-					var aw_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Effective);
+					var bg_ = AUASIAssessment?.Effective;
+					var bh_ = FHIRHelpers_4_3_000.ToValue(bg_);
 
-					return ((aw_ as CqlInterval<CqlDateTime>) as object);
+					return ((bh_ as CqlInterval<CqlDateTime>) as object);
 				}
-				else if (ao_())
+				else if (au_())
 				{
-					var ax_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Effective);
+					var bi_ = AUASIAssessment?.Effective;
+					var bj_ = FHIRHelpers_4_3_000.ToValue(bi_);
 
-					return ((ax_ as CqlDateTime) as object);
+					return ((bj_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
 				};
 			};
-			var z_ = QICoreCommon_2_0_000.earliest(y_());
-			var aa_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Value);
-			var ab_ = this.If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_();
-			var ac_ = context.Operators.ToList<CqlCode>(ab_);
-			var ad_ = context.Operators.RetrieveByCodes<Observation>(ac_, null);
-			bool? ae_(Observation QOLAssessment)
+			var ad_ = QICoreCommon_2_0_000.earliest(ac_());
+			var ae_ = AUASIAssessment?.Value;
+			var af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+			var ag_ = this.If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_();
+			var ah_ = context.Operators.ToList<CqlCode>(ag_);
+			var ai_ = context.Operators.RetrieveByCodes<Observation>(ah_, null);
+			bool? aj_(Observation QOLAssessment)
 			{
-				object ay_()
+				object bk_()
 				{
-					bool br_()
+					bool ch_()
 					{
-						var bu_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
-						var bv_ = bu_ is CqlDateTime;
+						var ck_ = QOLAssessment?.Effective;
+						var cl_ = FHIRHelpers_4_3_000.ToValue(ck_);
+						var cm_ = cl_ is CqlDateTime;
 
-						return bv_;
+						return cm_;
 					};
-					bool bs_()
+					bool ci_()
 					{
-						var bw_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
-						var bx_ = bw_ is CqlInterval<CqlDateTime>;
+						var cn_ = QOLAssessment?.Effective;
+						var co_ = FHIRHelpers_4_3_000.ToValue(cn_);
+						var cp_ = co_ is CqlInterval<CqlDateTime>;
 
-						return bx_;
+						return cp_;
 					};
-					bool bt_()
+					bool cj_()
 					{
-						var by_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
-						var bz_ = by_ is CqlDateTime;
+						var cq_ = QOLAssessment?.Effective;
+						var cr_ = FHIRHelpers_4_3_000.ToValue(cq_);
+						var cs_ = cr_ is CqlDateTime;
 
-						return bz_;
+						return cs_;
 					};
-					if (br_())
+					if (ch_())
 					{
-						var ca_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
+						var ct_ = QOLAssessment?.Effective;
+						var cu_ = FHIRHelpers_4_3_000.ToValue(ct_);
 
-						return ((ca_ as CqlDateTime) as object);
+						return ((cu_ as CqlDateTime) as object);
 					}
-					else if (bs_())
+					else if (ci_())
 					{
-						var cb_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
+						var cv_ = QOLAssessment?.Effective;
+						var cw_ = FHIRHelpers_4_3_000.ToValue(cv_);
 
-						return ((cb_ as CqlInterval<CqlDateTime>) as object);
+						return ((cw_ as CqlInterval<CqlDateTime>) as object);
 					}
-					else if (bt_())
+					else if (cj_())
 					{
-						var cc_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
+						var cx_ = QOLAssessment?.Effective;
+						var cy_ = FHIRHelpers_4_3_000.ToValue(cx_);
 
-						return ((cc_ as CqlDateTime) as object);
+						return ((cy_ as CqlDateTime) as object);
 					}
 					else
 					{
 						return null;
 					};
 				};
-				var az_ = QICoreCommon_2_0_000.earliest(ay_());
-				object ba_()
+				var bl_ = QICoreCommon_2_0_000.earliest(bk_());
+				object bm_()
 				{
-					bool cd_()
+					bool cz_()
 					{
-						var cg_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
-						var ch_ = cg_ is CqlDateTime;
+						var dc_ = QOLAssessment?.Effective;
+						var dd_ = FHIRHelpers_4_3_000.ToValue(dc_);
+						var de_ = dd_ is CqlDateTime;
 
-						return ch_;
+						return de_;
 					};
-					bool ce_()
+					bool da_()
 					{
-						var ci_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
-						var cj_ = ci_ is CqlInterval<CqlDateTime>;
+						var df_ = QOLAssessment?.Effective;
+						var dg_ = FHIRHelpers_4_3_000.ToValue(df_);
+						var dh_ = dg_ is CqlInterval<CqlDateTime>;
 
-						return cj_;
+						return dh_;
 					};
-					bool cf_()
+					bool db_()
 					{
-						var ck_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
-						var cl_ = ck_ is CqlDateTime;
+						var di_ = QOLAssessment?.Effective;
+						var dj_ = FHIRHelpers_4_3_000.ToValue(di_);
+						var dk_ = dj_ is CqlDateTime;
 
-						return cl_;
+						return dk_;
 					};
-					if (cd_())
+					if (cz_())
 					{
-						var cm_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
+						var dl_ = QOLAssessment?.Effective;
+						var dm_ = FHIRHelpers_4_3_000.ToValue(dl_);
 
-						return ((cm_ as CqlDateTime) as object);
+						return ((dm_ as CqlDateTime) as object);
 					}
-					else if (ce_())
+					else if (da_())
 					{
-						var cn_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
+						var dn_ = QOLAssessment?.Effective;
+						var do_ = FHIRHelpers_4_3_000.ToValue(dn_);
 
-						return ((cn_ as CqlInterval<CqlDateTime>) as object);
+						return ((do_ as CqlInterval<CqlDateTime>) as object);
 					}
-					else if (cf_())
+					else if (db_())
 					{
-						var co_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Effective);
+						var dp_ = QOLAssessment?.Effective;
+						var dq_ = FHIRHelpers_4_3_000.ToValue(dp_);
 
-						return ((co_ as CqlDateTime) as object);
+						return ((dq_ as CqlDateTime) as object);
 					}
 					else
 					{
 						return null;
 					};
 				};
-				var bb_ = QICoreCommon_2_0_000.earliest(ba_());
-				var bc_ = context.Operators.SameAs(az_, bb_, "day");
-				CqlConcept bd_(CodeableConcept @this)
+				var bn_ = QICoreCommon_2_0_000.earliest(bm_());
+				var bo_ = context.Operators.SameAs(bl_, bn_, "day");
+				var bp_ = QOLAssessment?.Category;
+				CqlConcept bq_(CodeableConcept @this)
 				{
-					var cp_ = FHIRHelpers_4_3_000.ToConcept(@this);
+					var dr_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-					return cp_;
+					return dr_;
 				};
-				var be_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)QOLAssessment?.Category, bd_);
-				bool? bf_(CqlConcept QOLAssessmentCategory)
+				var br_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bp_, bq_);
+				bool? bs_(CqlConcept QOLAssessmentCategory)
 				{
-					var cq_ = this.survey();
-					var cr_ = context.Operators.ConvertCodeToConcept(cq_);
-					var cs_ = context.Operators.Equivalent(QOLAssessmentCategory, cr_);
+					var ds_ = this.survey();
+					var dt_ = context.Operators.ConvertCodeToConcept(ds_);
+					var du_ = context.Operators.Equivalent(QOLAssessmentCategory, dt_);
 
-					return cs_;
+					return du_;
 				};
-				var bg_ = context.Operators.Where<CqlConcept>(be_, bf_);
-				var bh_ = context.Operators.Exists<CqlConcept>(bg_);
-				var bi_ = context.Operators.And(bc_, bh_);
-				var bj_ = context.Operators.Convert<Code<ObservationStatus>>(QOLAssessment?.StatusElement?.Value);
-				var bk_ = context.Operators.Convert<string>(bj_);
-				var bl_ = new string[]
+				var bt_ = context.Operators.Where<CqlConcept>(br_, bs_);
+				var bu_ = context.Operators.Exists<CqlConcept>(bt_);
+				var bv_ = context.Operators.And(bo_, bu_);
+				var bw_ = QOLAssessment?.StatusElement;
+				var bx_ = bw_?.Value;
+				var by_ = context.Operators.Convert<Code<ObservationStatus>>(bx_);
+				var bz_ = context.Operators.Convert<string>(by_);
+				var ca_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var bm_ = context.Operators.In<string>(bk_, (bl_ as IEnumerable<string>));
-				var bn_ = context.Operators.And(bi_, bm_);
-				var bo_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Value);
-				var bp_ = context.Operators.Not((bool?)(bo_ is null));
-				var bq_ = context.Operators.And(bn_, bp_);
+				var cb_ = context.Operators.In<string>(bz_, (ca_ as IEnumerable<string>));
+				var cc_ = context.Operators.And(bv_, cb_);
+				var cd_ = QOLAssessment?.Value;
+				var ce_ = FHIRHelpers_4_3_000.ToValue(cd_);
+				var cf_ = context.Operators.Not((bool?)(ce_ is null));
+				var cg_ = context.Operators.And(cc_, cf_);
 
-				return bq_;
+				return cg_;
 			};
-			var af_ = context.Operators.Where<Observation>(ad_, ae_);
-			object ag_(Observation @this)
+			var ak_ = context.Operators.Where<Observation>(ai_, aj_);
+			object al_(Observation @this)
 			{
-				object ct_()
+				object dv_()
 				{
-					bool cv_()
+					bool dx_()
 					{
-						var cy_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-						var cz_ = cy_ is CqlDateTime;
+						var ea_ = @this?.Effective;
+						var eb_ = FHIRHelpers_4_3_000.ToValue(ea_);
+						var ec_ = eb_ is CqlDateTime;
 
-						return cz_;
+						return ec_;
 					};
-					bool cw_()
+					bool dy_()
 					{
-						var da_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-						var db_ = da_ is CqlInterval<CqlDateTime>;
+						var ed_ = @this?.Effective;
+						var ee_ = FHIRHelpers_4_3_000.ToValue(ed_);
+						var ef_ = ee_ is CqlInterval<CqlDateTime>;
 
-						return db_;
+						return ef_;
 					};
-					bool cx_()
+					bool dz_()
 					{
-						var dc_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-						var dd_ = dc_ is CqlDateTime;
+						var eg_ = @this?.Effective;
+						var eh_ = FHIRHelpers_4_3_000.ToValue(eg_);
+						var ei_ = eh_ is CqlDateTime;
 
-						return dd_;
+						return ei_;
 					};
-					if (cv_())
+					if (dx_())
 					{
-						var de_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+						var ej_ = @this?.Effective;
+						var ek_ = FHIRHelpers_4_3_000.ToValue(ej_);
 
-						return ((de_ as CqlDateTime) as object);
+						return ((ek_ as CqlDateTime) as object);
 					}
-					else if (cw_())
+					else if (dy_())
 					{
-						var df_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+						var el_ = @this?.Effective;
+						var em_ = FHIRHelpers_4_3_000.ToValue(el_);
 
-						return ((df_ as CqlInterval<CqlDateTime>) as object);
+						return ((em_ as CqlInterval<CqlDateTime>) as object);
 					}
-					else if (cx_())
+					else if (dz_())
 					{
-						var dg_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
+						var en_ = @this?.Effective;
+						var eo_ = FHIRHelpers_4_3_000.ToValue(en_);
 
-						return ((dg_ as CqlDateTime) as object);
+						return ((eo_ as CqlDateTime) as object);
 					}
 					else
 					{
 						return null;
 					};
 				};
-				var cu_ = QICoreCommon_2_0_000.earliest(ct_());
+				var dw_ = QICoreCommon_2_0_000.earliest(dv_());
 
-				return cu_;
+				return dw_;
 			};
-			var ah_ = context.Operators.SortBy<Observation>(af_, ag_, System.ComponentModel.ListSortDirection.Ascending);
-			var ai_ = context.Operators.Last<Observation>(ah_);
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_?.Value);
-			var ak_ = context.Operators.Add((int?)aa_, (int?)aj_);
-			var al_ = new Tuple_GNNDVIQPcTANSdLebhBKYIdga
+			var am_ = context.Operators.SortBy<Observation>(ak_, al_, System.ComponentModel.ListSortDirection.Ascending);
+			var an_ = context.Operators.Last<Observation>(am_);
+			var ao_ = an_?.Value;
+			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
+			var aq_ = context.Operators.Add((int?)af_, (int?)ap_);
+			var ar_ = new Tuple_GNNDVIQPcTANSdLebhBKYIdga
 			{
-				effectiveDatetime = z_,
-				valueInteger = ak_,
+				effectiveDatetime = ad_,
+				valueInteger = aq_,
 			};
 
-			return al_;
+			return ar_;
 		};
 		var g_ = context.Operators.Select<Observation, Tuple_GNNDVIQPcTANSdLebhBKYIdga>(e_, f_);
 
@@ -824,18 +877,19 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			};
 			bool? i_(Condition InitialBPHDiagnosis)
 			{
-				var m_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
-				var n_ = context.Operators.Start(m_);
-				var p_ = context.Operators.Start(m_);
-				var q_ = context.Operators.Quantity(1m, "month");
-				var r_ = context.Operators.Add(p_, q_);
-				var s_ = context.Operators.Interval(n_, r_, true, true);
-				var t_ = context.Operators.In<CqlDateTime>(USSAssessment?.effectiveDatetime, s_, "day");
-				var v_ = context.Operators.Start(m_);
-				var w_ = context.Operators.Not((bool?)(v_ is null));
-				var x_ = context.Operators.And(t_, w_);
+				var m_ = USSAssessment?.effectiveDatetime;
+				var n_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
+				var o_ = context.Operators.Start(n_);
+				var q_ = context.Operators.Start(n_);
+				var r_ = context.Operators.Quantity(1m, "month");
+				var s_ = context.Operators.Add(q_, r_);
+				var t_ = context.Operators.Interval(o_, s_, true, true);
+				var u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
+				var w_ = context.Operators.Start(n_);
+				var x_ = context.Operators.Not((bool?)(w_ is null));
+				var y_ = context.Operators.And(u_, x_);
 
-				return x_;
+				return y_;
 			};
 			var j_ = context.Operators.Where<Condition>((IEnumerable<Condition>)h_, i_);
 			Tuple_GNNDVIQPcTANSdLebhBKYIdga k_(Condition InitialBPHDiagnosis) => 
@@ -845,8 +899,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			return l_;
 		};
 		var c_ = context.Operators.SelectMany<Tuple_GNNDVIQPcTANSdLebhBKYIdga, Tuple_GNNDVIQPcTANSdLebhBKYIdga>(a_, b_);
-		object d_(Tuple_GNNDVIQPcTANSdLebhBKYIdga @this) => 
-			@this?.effectiveDatetime;
+		object d_(Tuple_GNNDVIQPcTANSdLebhBKYIdga @this)
+		{
+			var z_ = @this?.effectiveDatetime;
+
+			return z_;
+		};
 		var e_ = context.Operators.SortBy<Tuple_GNNDVIQPcTANSdLebhBKYIdga>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
 		var f_ = context.Operators.First<Tuple_GNNDVIQPcTANSdLebhBKYIdga>(e_);
 
@@ -871,11 +929,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			{
 				var m_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var n_ = context.Operators.Start(m_);
-				var o_ = context.Operators.DurationBetween(n_, USSAssessment?.effectiveDatetime, "month");
-				var p_ = context.Operators.Interval(6, 12, true, true);
-				var q_ = context.Operators.In<int?>(o_, p_, null);
+				var o_ = USSAssessment?.effectiveDatetime;
+				var p_ = context.Operators.DurationBetween(n_, o_, "month");
+				var q_ = context.Operators.Interval(6, 12, true, true);
+				var r_ = context.Operators.In<int?>(p_, q_, null);
 
-				return q_;
+				return r_;
 			};
 			var j_ = context.Operators.Where<Condition>((IEnumerable<Condition>)h_, i_);
 			Tuple_GNNDVIQPcTANSdLebhBKYIdga k_(Condition InitialBPHDiagnosis) => 
@@ -885,8 +944,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			return l_;
 		};
 		var c_ = context.Operators.SelectMany<Tuple_GNNDVIQPcTANSdLebhBKYIdga, Tuple_GNNDVIQPcTANSdLebhBKYIdga>(a_, b_);
-		object d_(Tuple_GNNDVIQPcTANSdLebhBKYIdga @this) => 
-			@this?.effectiveDatetime;
+		object d_(Tuple_GNNDVIQPcTANSdLebhBKYIdga @this)
+		{
+			var s_ = @this?.effectiveDatetime;
+
+			return s_;
+		};
 		var e_ = context.Operators.SortBy<Tuple_GNNDVIQPcTANSdLebhBKYIdga>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
 		var f_ = context.Operators.Last<Tuple_GNNDVIQPcTANSdLebhBKYIdga>(e_);
 
@@ -995,18 +1058,22 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			{
 				var l_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var m_ = context.Operators.Start(l_);
-				var n_ = FHIRHelpers_4_3_000.ToInterval(InHospitalServices?.Period);
-				var o_ = context.Operators.Start(n_);
-				var q_ = context.Operators.End(n_);
-				var r_ = context.Operators.Quantity(31m, "days");
-				var s_ = context.Operators.Add(q_, r_);
-				var t_ = context.Operators.Interval(o_, s_, true, true);
-				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
-				var v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InHospitalServices?.StatusElement?.Value);
-				var w_ = context.Operators.Equal(v_, "finished");
-				var x_ = context.Operators.And(u_, w_);
+				var n_ = InHospitalServices?.Period;
+				var o_ = FHIRHelpers_4_3_000.ToInterval(n_);
+				var p_ = context.Operators.Start(o_);
+				var r_ = FHIRHelpers_4_3_000.ToInterval(n_);
+				var s_ = context.Operators.End(r_);
+				var t_ = context.Operators.Quantity(31m, "days");
+				var u_ = context.Operators.Add(s_, t_);
+				var v_ = context.Operators.Interval(p_, u_, true, true);
+				var w_ = context.Operators.In<CqlDateTime>(m_, v_, null);
+				var x_ = InHospitalServices?.StatusElement;
+				var y_ = x_?.Value;
+				var z_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(y_);
+				var aa_ = context.Operators.Equal(z_, "finished");
+				var ab_ = context.Operators.And(w_, aa_);
 
-				return x_;
+				return ab_;
 			};
 			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Condition j_(Encounter InHospitalServices) => 
@@ -1042,12 +1109,13 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var l_ = this.Measurement_Period();
 				var m_ = context.Operators.Overlaps(k_, l_, null);
 				var o_ = context.Operators.Start(k_);
-				var p_ = context.Operators.SameOrBefore(o_, FollowUpUSSAssessment?.effectiveDatetime, null);
-				var q_ = context.Operators.And(m_, p_);
-				var r_ = this.isConfirmedActiveDiagnosis(MorbidObesity);
-				var s_ = context.Operators.And(q_, r_);
+				var p_ = FollowUpUSSAssessment?.effectiveDatetime;
+				var q_ = context.Operators.SameOrBefore(o_, p_, null);
+				var r_ = context.Operators.And(m_, q_);
+				var s_ = this.isConfirmedActiveDiagnosis(MorbidObesity);
+				var t_ = context.Operators.And(r_, s_);
 
-				return s_;
+				return t_;
 			};
 			var h_ = context.Operators.Where<Tuple_GNNDVIQPcTANSdLebhBKYIdga>((IEnumerable<Tuple_GNNDVIQPcTANSdLebhBKYIdga>)f_, g_);
 			Condition i_(Tuple_GNNDVIQPcTANSdLebhBKYIdga FollowUpUSSAssessment) => 
@@ -1077,29 +1145,35 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			};
 			bool? i_(Tuple_GNNDVIQPcTANSdLebhBKYIdga FollowUpUSSAssessment)
 			{
-				var m_ = context.Operators.Convert<Quantity>(BMIExam?.Value);
-				var n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
-				var o_ = context.Operators.Quantity(40m, "kg/m2");
-				var p_ = context.Operators.Greater(n_, o_);
-				var q_ = context.Operators.Convert<string>(BMIExam?.StatusElement?.Value);
-				var r_ = new string[]
+				var m_ = BMIExam?.Value;
+				var n_ = context.Operators.Convert<Quantity>(m_);
+				var o_ = FHIRHelpers_4_3_000.ToQuantity(n_);
+				var p_ = context.Operators.Quantity(40m, "kg/m2");
+				var q_ = context.Operators.Greater(o_, p_);
+				var r_ = BMIExam?.StatusElement;
+				var s_ = r_?.Value;
+				var t_ = context.Operators.Convert<string>(s_);
+				var u_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
-				var t_ = context.Operators.And(p_, s_);
-				var u_ = FHIRHelpers_4_3_000.ToValue(BMIExam?.Effective);
-				var v_ = QICoreCommon_2_0_000.earliest(u_);
-				var w_ = this.Measurement_Period();
-				var x_ = context.Operators.In<CqlDateTime>(v_, w_, "day");
-				var y_ = context.Operators.And(t_, x_);
-				var aa_ = QICoreCommon_2_0_000.earliest(u_);
-				var ab_ = context.Operators.SameOrBefore(aa_, FollowUpUSSAssessment?.effectiveDatetime, null);
-				var ac_ = context.Operators.And(y_, ab_);
+				var v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
+				var w_ = context.Operators.And(q_, v_);
+				var x_ = BMIExam?.Effective;
+				var y_ = FHIRHelpers_4_3_000.ToValue(x_);
+				var z_ = QICoreCommon_2_0_000.earliest(y_);
+				var aa_ = this.Measurement_Period();
+				var ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
+				var ac_ = context.Operators.And(w_, ab_);
+				var ae_ = FHIRHelpers_4_3_000.ToValue(x_);
+				var af_ = QICoreCommon_2_0_000.earliest(ae_);
+				var ag_ = FollowUpUSSAssessment?.effectiveDatetime;
+				var ah_ = context.Operators.SameOrBefore(af_, ag_, null);
+				var ai_ = context.Operators.And(ac_, ah_);
 
-				return ac_;
+				return ai_;
 			};
 			var j_ = context.Operators.Where<Tuple_GNNDVIQPcTANSdLebhBKYIdga>((IEnumerable<Tuple_GNNDVIQPcTANSdLebhBKYIdga>)h_, i_);
 			Observation k_(Tuple_GNNDVIQPcTANSdLebhBKYIdga FollowUpUSSAssessment) => 
@@ -1111,10 +1185,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		var c_ = context.Operators.SelectMany<Observation, Observation>(a_, b_);
 		CqlDateTime d_(Observation BMIExam)
 		{
-			var ad_ = FHIRHelpers_4_3_000.ToValue(BMIExam?.Effective);
-			var ae_ = QICoreCommon_2_0_000.earliest(ad_);
+			var aj_ = BMIExam?.Effective;
+			var ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
+			var al_ = QICoreCommon_2_0_000.earliest(ak_);
 
-			return ae_;
+			return al_;
 		};
 		var e_ = context.Operators.Select<Observation, CqlDateTime>(c_, d_);
 		var f_ = context.Operators.Exists<CqlDateTime>(e_);
@@ -1183,9 +1258,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		var g_ = context.Operators.Select<ValueTuple<Tuple_GNNDVIQPcTANSdLebhBKYIdga, Tuple_GNNDVIQPcTANSdLebhBKYIdga>, Tuple_FBHNjYWJgMKheadEZUgcdQGXN>(e_, f_);
 		int? h_(Tuple_FBHNjYWJgMKheadEZUgcdQGXN tuple_fbhnjywjgmkheadezugcdqgxn)
 		{
-			var l_ = context.Operators.Subtract(tuple_fbhnjywjgmkheadezugcdqgxn.FirstUSSAssessment?.valueInteger, tuple_fbhnjywjgmkheadezugcdqgxn.FollowUpUSSAssessment?.valueInteger);
+			var l_ = tuple_fbhnjywjgmkheadezugcdqgxn.FirstUSSAssessment?.valueInteger;
+			var m_ = tuple_fbhnjywjgmkheadezugcdqgxn.FollowUpUSSAssessment?.valueInteger;
+			var n_ = context.Operators.Subtract(l_, m_);
 
-			return l_;
+			return n_;
 		};
 		var i_ = context.Operators.Select<Tuple_FBHNjYWJgMKheadEZUgcdQGXN, int?>(g_, h_);
 		var j_ = context.Operators.SingletonFrom<int?>(i_);

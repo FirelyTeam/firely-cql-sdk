@@ -447,9 +447,14 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
-            var visitedBody = Transform(overload.Body,
+            var simplifyNullConditionalMemberExpression = _options.TypeFormat == CSharpCodeWriterTypeFormat.Var;
+            var visitedBody = Transform(
+                overload.Body,
                 new RedundantCastsTransformer(),
-                new SimplifyExpressionsVisitor(),
+                new SimplifyExpressionsVisitor()
+                {
+                    SimplifyNullConditionalMemberExpression = simplifyNullConditionalMemberExpression
+                },
                 new RenameVariablesVisitor(vng),
                 new LocalVariableDeduper()
             );

@@ -348,11 +348,12 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 		bool? at_(Encounter ValidEncounter)
 		{
 			var av_ = this.Measurement_Period();
-			var aw_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var ax_ = QICoreCommon_2_0_000.ToInterval((aw_ as object));
-			var ay_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ax_, "day");
+			var aw_ = ValidEncounter?.Period;
+			var ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
+			var ay_ = QICoreCommon_2_0_000.ToInterval((ax_ as object));
+			var az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, "day");
 
-			return ay_;
+			return az_;
 		};
 		var au_ = context.Operators.Where<Encounter>(as_, at_);
 
@@ -413,11 +414,12 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 		bool? d_(Observation FallsScreening)
 		{
 			var g_ = this.Measurement_Period();
-			var h_ = FHIRHelpers_4_3_000.ToValue(FallsScreening?.Effective);
-			var i_ = QICoreCommon_2_0_000.ToInterval(h_);
-			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
+			var h_ = FallsScreening?.Effective;
+			var i_ = FHIRHelpers_4_3_000.ToValue(h_);
+			var j_ = QICoreCommon_2_0_000.ToInterval(i_);
+			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
-			return j_;
+			return k_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		var f_ = context.Operators.Exists<Observation>(e_);

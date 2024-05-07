@@ -7,12 +7,11 @@
  */
 using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
-internal static partial class TypeExtensions
+internal static class TypeExtensions
 {
     /// <summary>
     /// Checks if the specified type is nullable and returns it via <paramref name="underlyingType"/>
@@ -20,10 +19,12 @@ internal static partial class TypeExtensions
     /// <param name="type">The type to check.</param>
     /// <param name="underlyingType">The underlying type for nullable.</param>
     /// <returns>True if the type is nullable, false otherwise.</returns>
-    public static bool IsNullableValueType(this Type type, [NotNullWhen(true)] out Type? underlyingType)
+    public static bool IsNullableValueType(this Type type, out Type underlyingType)
     {
-        underlyingType = Nullable.GetUnderlyingType(type);
-        return underlyingType != null;
+        var nullableUnderlying = Nullable.GetUnderlyingType(type);
+        var isNullableValueType = nullableUnderlying != null;
+        underlyingType = nullableUnderlying ?? type;
+        return isNullableValueType;
     }
 
     /// <summary>
