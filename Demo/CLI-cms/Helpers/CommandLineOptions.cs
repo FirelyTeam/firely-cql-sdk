@@ -19,6 +19,9 @@ internal class CommandLineOptions
     public string TestCaseBundleFile => Path.Join(TestCaseDirectory, "Bundle.json");
     public string TestCaseInputParametersFile => Path.Join(TestCaseDirectory, "InputParameters.json");
 
+    [Option('a', "assemblySource", Default = AssemblySource.ProjectFile, HelpText = "The source of the assembly.")]
+    public AssemblySource AssemblySource { get; set; } = AssemblySource.Resource;
+
     public static void EnsureValidOptions(CommandLineOptions options)
     {
         // Check if the name of Library contains a single "-"
@@ -56,5 +59,15 @@ internal class CommandLineOptions
                 throw new InvalidOperationException($"File '{file}' must exist.");
             }
         }
+
+        if (!Enum.IsDefined(options.AssemblySource))
+            throw new InvalidOperationException($"AssemblySource '{options.AssemblySource}' is not a valid value. Valid options are Resource or ProjectFile.");
     }
+}
+
+internal enum AssemblySource
+{
+    Unspecified = 0,
+    Resource = 1,
+    ProjectFile = 2,
 }

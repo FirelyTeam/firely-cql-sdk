@@ -39,8 +39,16 @@ internal class Program
     private static void RunCommand(CommandLineOptions options)
     {
         CommandLineOptions.EnsureValidOptions(options);
-        LibraryRunner.RunWithResources(options);
-        //LibraryRunner.RunWithMeasureCmsProject(options);
+        switch (options.AssemblySource)
+        {
+            case AssemblySource.ProjectFile:
+                LibraryRunner.RunWithMeasureCmsProject(options);
+                break;
+            default:
+            case AssemblySource.Resource:
+                LibraryRunner.RunWithResources(options);
+                break;
+        }
     }
 
     static void HandleErrors(IEnumerable<Error> errs)
