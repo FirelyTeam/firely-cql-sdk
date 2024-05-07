@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\cql-demo.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <NoWarn>CS0436</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Dumpify" Version="0.6.5"  />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
+    <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
+    <ProjectReference Include="..\Measures-cms\Measures-cms.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Measures\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

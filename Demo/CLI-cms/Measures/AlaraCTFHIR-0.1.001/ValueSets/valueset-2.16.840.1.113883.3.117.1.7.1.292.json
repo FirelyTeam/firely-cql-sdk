@@ -1,0 +1,95 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.117.1.7.1.292",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "2.16.840.1.113883.3.117.1.7.1.292"
+  } ],
+  "version": "20210611",
+  "name": "EmergencyDepartmentVisit",
+  "title": "Emergency Department Visit",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20230504",
+    "timestamp": "2023-08-02T11:13:52-06:00",
+    "contains": [ {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    } ]
+  }
+}

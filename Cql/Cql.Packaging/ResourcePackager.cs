@@ -9,7 +9,6 @@ using Hl7.Fhir.Model;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using Annotation = Hl7.Cql.Elm.Annotation;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packaging;
 

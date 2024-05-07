@@ -1,0 +1,23 @@
+﻿const Hl7.Cql.Graph.DirectedGraphNode.EndId = "End" -> string!
+const Hl7.Cql.Graph.DirectedGraphNode.StartId = "Start" -> string!
+Hl7.Cql.Graph.DirectedGraph
+Hl7.Cql.Graph.DirectedGraph.AddEdge((Hl7.Cql.Graph.DirectedGraphNode? FromNode, Hl7.Cql.Graph.DirectedGraphNode? ToNode) edge) -> void
+Hl7.Cql.Graph.DirectedGraph.AddNode(Hl7.Cql.Graph.DirectedGraphNode node) -> void
+Hl7.Cql.Graph.DirectedGraph.AddStartNode() -> void
+Hl7.Cql.Graph.DirectedGraph.DirectedGraph() -> void
+Hl7.Cql.Graph.DirectedGraph.GetForwardNodeIds(string! nodeId) -> System.Collections.Generic.IEnumerable<string!>!
+Hl7.Cql.Graph.DirectedGraph.Nodes.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Hl7.Cql.Graph.DirectedGraphNode>!
+Hl7.Cql.Graph.DirectedGraph.TopologicalSort() -> System.Collections.Generic.IList<Hl7.Cql.Graph.DirectedGraphNode>!
+Hl7.Cql.Graph.DirectedGraphNode
+Hl7.Cql.Graph.DirectedGraphNode.Clone() -> Hl7.Cql.Graph.DirectedGraphNode
+Hl7.Cql.Graph.DirectedGraphNode.DirectedGraphNode() -> void
+Hl7.Cql.Graph.DirectedGraphNode.IsEndNode.get -> bool
+Hl7.Cql.Graph.DirectedGraphNode.IsStartNode.get -> bool
+Hl7.Cql.Graph.DirectedGraphNode.Label.get -> string?
+Hl7.Cql.Graph.DirectedGraphNode.Label.init -> void
+Hl7.Cql.Graph.DirectedGraphNode.NodeId.get -> string!
+Hl7.Cql.Graph.DirectedGraphNode.NodeId.init -> void
+Hl7.Cql.Graph.DirectedGraphNode.Properties.get -> System.Collections.Generic.IDictionary<string!, object!>?
+Hl7.Cql.Graph.DirectedGraphNode.Properties.init -> void
+override Hl7.Cql.Graph.DirectedGraphNode.GetHashCode() -> int
+override Hl7.Cql.Graph.DirectedGraphNode.ToString() -> string!
