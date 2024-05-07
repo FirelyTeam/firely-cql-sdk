@@ -280,13 +280,15 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		bool? x_(Encounter ValidEncounter)
 		{
 			var z_ = this.Measurement_Period();
-			var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ValidEncounter?.Period as object));
-			var ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, aa_, null);
-			var ac_ = FHIRHelpers_4_0_001.ToString(ValidEncounter?.StatusElement);
-			var ad_ = context.Operators.Equal(ac_, "finished");
-			var ae_ = context.Operators.And(ab_, ad_);
+			var aa_ = ValidEncounter?.Period;
+			var ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((aa_ as object));
+			var ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, null);
+			var ad_ = ValidEncounter?.StatusElement;
+			var ae_ = FHIRHelpers_4_0_001.ToString(ad_);
+			var af_ = context.Operators.Equal(ae_, "finished");
+			var ag_ = context.Operators.And(ac_, af_);
 
-			return ae_;
+			return ag_;
 		};
 		var y_ = context.Operators.Where<Encounter>(w_, x_);
 
@@ -411,13 +413,15 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		bool? c_(Procedure FluorideApplication)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(FluorideApplication?.Performed);
-			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, g_, null);
-			var i_ = FHIRHelpers_4_0_001.ToString(FluorideApplication?.StatusElement);
-			var j_ = context.Operators.Equal(i_, "completed");
-			var k_ = context.Operators.And(h_, j_);
+			var g_ = FluorideApplication?.Performed;
+			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
+			var j_ = FluorideApplication?.StatusElement;
+			var k_ = FHIRHelpers_4_0_001.ToString(j_);
+			var l_ = context.Operators.Equal(k_, "completed");
+			var m_ = context.Operators.And(i_, l_);
 
-			return k_;
+			return m_;
 		};
 		var d_ = context.Operators.Where<Procedure>(b_, c_);
 		var e_ = context.Operators.Exists<Procedure>(d_);

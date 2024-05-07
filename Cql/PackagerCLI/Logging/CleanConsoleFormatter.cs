@@ -8,10 +8,10 @@
 
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Fhir.Utility;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
@@ -74,7 +74,7 @@ internal sealed partial class CleanConsoleFormatter : ConsoleFormatter
             return originalFormat; // Nothing to format, return as is
 
         var colorFormat = GetOrdinalStringFormat(state, originalFormat);
-        var colorMessage = colorFormat.FormatWith(state.SelectToArray(s => s.Value));
+        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, state.SelectToArray(s => s.Value));
         return colorMessage;
     }
 

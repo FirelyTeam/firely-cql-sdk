@@ -96,11 +96,12 @@ public class NCQAHospice_1_0_0
 		var c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
 		bool? d_(Procedure HospiceInt)
 		{
-			var n_ = NCQAFHIRBase_1_0_0.Normalize_Interval(HospiceInt?.Performed);
-			var o_ = this.Measurement_Period();
-			var p_ = context.Operators.Overlaps(n_, o_, null);
+			var n_ = HospiceInt?.Performed;
+			var o_ = NCQAFHIRBase_1_0_0.Normalize_Interval(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context.Operators.Overlaps(o_, p_, null);
 
-			return p_;
+			return q_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = context.Operators.Exists<Procedure>(e_);
@@ -109,11 +110,12 @@ public class NCQAHospice_1_0_0
 		var i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
 		bool? j_(Encounter HospiceEnc)
 		{
-			var q_ = NCQAFHIRBase_1_0_0.Normalize_Interval((HospiceEnc?.Period as object));
-			var r_ = this.Measurement_Period();
-			var s_ = context.Operators.Overlaps(q_, r_, null);
+			var r_ = HospiceEnc?.Period;
+			var s_ = NCQAFHIRBase_1_0_0.Normalize_Interval((r_ as object));
+			var t_ = this.Measurement_Period();
+			var u_ = context.Operators.Overlaps(s_, t_, null);
 
-			return s_;
+			return u_;
 		};
 		var k_ = context.Operators.Where<Encounter>(i_, j_);
 		var l_ = context.Operators.Exists<Encounter>(k_);

@@ -236,13 +236,15 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		bool? b_(Encounter InpatientEncounter)
 		{
 			var d_ = this.Patient();
-			var e_ = context.Operators.ConvertStringToDateTime(d_?.BirthDateElement?.Value);
-			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(InpatientEncounter);
-			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.CalculateAgeAt(e_, g_, "year");
-			var i_ = context.Operators.GreaterOrEqual(h_, 18);
+			var e_ = d_?.BirthDateElement;
+			var f_ = e_?.Value;
+			var g_ = context.Operators.ConvertStringToDateTime(f_);
+			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(InpatientEncounter);
+			var i_ = context.Operators.Start(h_);
+			var j_ = context.Operators.CalculateAgeAt(g_, i_, "year");
+			var k_ = context.Operators.GreaterOrEqual(j_, 18);
 
-			return i_;
+			return k_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -285,17 +287,19 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
 			bool? h_(Condition DiabetesDiagnosis)
 			{
-				var l_ = FHIRHelpers_4_0_001.ToConcept(DiabetesDiagnosis?.VerificationStatus);
-				var m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.confirmed();
-				var n_ = context.Operators.ConvertCodeToConcept(m_);
-				var o_ = context.Operators.Equivalent(l_, n_);
-				var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(DiabetesDiagnosis);
-				var q_ = context.Operators.Start(p_);
-				var r_ = context.Operators.End(EncounterWithHospitalization?.hospitalizationPeriod);
-				var s_ = context.Operators.Before(q_, r_, null);
-				var t_ = context.Operators.And(o_, s_);
+				var l_ = DiabetesDiagnosis?.VerificationStatus;
+				var m_ = FHIRHelpers_4_0_001.ToConcept(l_);
+				var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.confirmed();
+				var o_ = context.Operators.ConvertCodeToConcept(n_);
+				var p_ = context.Operators.Equivalent(m_, o_);
+				var q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(DiabetesDiagnosis);
+				var r_ = context.Operators.Start(q_);
+				var s_ = EncounterWithHospitalization?.hospitalizationPeriod;
+				var t_ = context.Operators.End(s_);
+				var u_ = context.Operators.Before(r_, t_, null);
+				var v_ = context.Operators.And(p_, u_);
 
-				return t_;
+				return v_;
 			};
 			var i_ = context.Operators.Where<Condition>(g_, h_);
 			Tuple_GPLfQTPONQabPZigKbYFERDVQ j_(Condition DiabetesDiagnosis) => 
@@ -305,8 +309,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			return k_;
 		};
 		var c_ = context.Operators.SelectMany<Tuple_GPLfQTPONQabPZigKbYFERDVQ, Tuple_GPLfQTPONQabPZigKbYFERDVQ>(a_, b_);
-		Encounter d_(Tuple_GPLfQTPONQabPZigKbYFERDVQ EncounterWithHospitalization) => 
-			EncounterWithHospitalization?.encounter;
+		Encounter d_(Tuple_GPLfQTPONQabPZigKbYFERDVQ EncounterWithHospitalization)
+		{
+			var w_ = EncounterWithHospitalization?.encounter;
+
+			return w_;
+		};
 		var e_ = context.Operators.Select<Tuple_GPLfQTPONQabPZigKbYFERDVQ, Encounter>(c_, d_);
 
 		return e_;
@@ -337,17 +345,24 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var i_ = context.Operators.Select<ValueTuple<Tuple_GPLfQTPONQabPZigKbYFERDVQ, MedicationAdministration>, Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB>(g_, h_);
 		bool? j_(Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB tuple_clxcrdeespovhrdozoxqzeieb)
 		{
-			var o_ = FHIRHelpers_4_0_001.ToString(tuple_clxcrdeespovhrdozoxqzeieb.HypoglycemicMedication?.StatusElement);
-			var p_ = context.Operators.Equal(o_, "completed");
-			var q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(tuple_clxcrdeespovhrdozoxqzeieb.HypoglycemicMedication?.Effective);
-			var r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(tuple_clxcrdeespovhrdozoxqzeieb.EncounterWithHospitalization?.hospitalizationPeriod, q_, null);
-			var s_ = context.Operators.And(p_, r_);
+			var o_ = tuple_clxcrdeespovhrdozoxqzeieb.HypoglycemicMedication?.StatusElement;
+			var p_ = FHIRHelpers_4_0_001.ToString(o_);
+			var q_ = context.Operators.Equal(p_, "completed");
+			var r_ = tuple_clxcrdeespovhrdozoxqzeieb.EncounterWithHospitalization?.hospitalizationPeriod;
+			var s_ = tuple_clxcrdeespovhrdozoxqzeieb.HypoglycemicMedication?.Effective;
+			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(s_);
+			var u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, t_, null);
+			var v_ = context.Operators.And(q_, u_);
 
-			return s_;
+			return v_;
 		};
 		var k_ = context.Operators.Where<Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB>(i_, j_);
-		Encounter l_(Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB tuple_clxcrdeespovhrdozoxqzeieb) => 
-			tuple_clxcrdeespovhrdozoxqzeieb.EncounterWithHospitalization?.encounter;
+		Encounter l_(Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB tuple_clxcrdeespovhrdozoxqzeieb)
+		{
+			var w_ = tuple_clxcrdeespovhrdozoxqzeieb.EncounterWithHospitalization?.encounter;
+
+			return w_;
+		};
 		var m_ = context.Operators.Select<Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB, Encounter>(k_, l_);
 
 		return m_;
@@ -366,17 +381,21 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			var g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
 			bool? h_(Observation BloodGlucoseLab)
 			{
-				var l_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab?.Effective as FhirDateTime));
-				var m_ = context.Operators.In<CqlDateTime>(l_, EncounterWithHospitalization?.hospitalizationPeriod, null);
-				var n_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab?.StatusElement);
-				var o_ = context.Operators.Equal(n_, "final");
-				var p_ = context.Operators.And(m_, o_);
-				var q_ = FHIRHelpers_4_0_001.ToQuantity((BloodGlucoseLab?.Value as Quantity));
-				var r_ = context.Operators.Quantity(200m, "mg/dL");
-				var s_ = context.Operators.GreaterOrEqual(q_, r_);
-				var t_ = context.Operators.And(p_, s_);
+				var l_ = BloodGlucoseLab?.Effective;
+				var m_ = FHIRHelpers_4_0_001.ToDateTime((l_ as FhirDateTime));
+				var n_ = EncounterWithHospitalization?.hospitalizationPeriod;
+				var o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
+				var p_ = BloodGlucoseLab?.StatusElement;
+				var q_ = FHIRHelpers_4_0_001.ToString(p_);
+				var r_ = context.Operators.Equal(q_, "final");
+				var s_ = context.Operators.And(o_, r_);
+				var t_ = BloodGlucoseLab?.Value;
+				var u_ = FHIRHelpers_4_0_001.ToQuantity((t_ as Quantity));
+				var v_ = context.Operators.Quantity(200m, "mg/dL");
+				var w_ = context.Operators.GreaterOrEqual(u_, v_);
+				var x_ = context.Operators.And(s_, w_);
 
-				return t_;
+				return x_;
 			};
 			var i_ = context.Operators.Where<Observation>(g_, h_);
 			Tuple_GPLfQTPONQabPZigKbYFERDVQ j_(Observation BloodGlucoseLab) => 
@@ -386,8 +405,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			return k_;
 		};
 		var c_ = context.Operators.SelectMany<Tuple_GPLfQTPONQabPZigKbYFERDVQ, Tuple_GPLfQTPONQabPZigKbYFERDVQ>(a_, b_);
-		Encounter d_(Tuple_GPLfQTPONQabPZigKbYFERDVQ EncounterWithHospitalization) => 
-			EncounterWithHospitalization?.encounter;
+		Encounter d_(Tuple_GPLfQTPONQabPZigKbYFERDVQ EncounterWithHospitalization)
+		{
+			var y_ = EncounterWithHospitalization?.encounter;
+
+			return y_;
+		};
 		var e_ = context.Operators.Select<Tuple_GPLfQTPONQabPZigKbYFERDVQ, Encounter>(c_, d_);
 
 		return e_;
@@ -512,7 +535,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					var ag_ = context.Operators.Add(ac_, af_);
 
 					return ag_;
-				};
+				}
 			};
 			var k_ = context.Operators.Interval(i_, j_(), true, false);
 			var l_ = new Tuple_ddJhZGNHefSCOAJJFEIEcXie
@@ -561,77 +584,93 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var a_ = this.Pertinent_Encounters_With_Days();
 		Tuple_BVGhTTBTiPLQVGZRfJbXRNFfF b_(Tuple_BFFMVKRWdCJDYTgBWYHeLPiha PertinentEncounterDays)
 		{
-			Tuple_HDgChhdKHffMeLJEWdDUjFSFd d_(Tuple_ddJhZGNHefSCOAJJFEIEcXie EncounterDay)
+			var d_ = PertinentEncounterDays?.encounter;
+			var e_ = PertinentEncounterDays?.relevantPeriod;
+			var f_ = PertinentEncounterDays?.relevantDays;
+			Tuple_HDgChhdKHffMeLJEWdDUjFSFd g_(Tuple_ddJhZGNHefSCOAJJFEIEcXie EncounterDay)
 			{
-				var g_ = this.Glucose_lab_test();
-				var h_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
-				bool? i_(Observation BloodGlucoseLab1)
+				var j_ = EncounterDay?.dayIndex;
+				var k_ = EncounterDay?.dayPeriod;
+				var l_ = this.Glucose_lab_test();
+				var m_ = context.Operators.RetrieveByValueSet<Observation>(l_, null);
+				bool? n_(Observation BloodGlucoseLab1)
 				{
-					var x_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab1?.StatusElement);
-					var y_ = context.Operators.Equal(x_, "final");
-					var z_ = FHIRHelpers_4_0_001.ToQuantity((BloodGlucoseLab1?.Value as Quantity));
-					var aa_ = context.Operators.Quantity(300m, "mg/dL");
-					var ab_ = context.Operators.Greater(z_, aa_);
-					var ac_ = context.Operators.And(y_, ab_);
-					var ad_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab1?.Effective as FhirDateTime));
-					var ae_ = context.Operators.In<CqlDateTime>(ad_, EncounterDay?.dayPeriod, null);
-					var af_ = context.Operators.And(ac_, ae_);
-
-					return af_;
-				};
-				var j_ = context.Operators.Where<Observation>(h_, i_);
-				var k_ = context.Operators.Exists<Observation>(j_);
-				var m_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
-				bool? n_(Observation BloodGlucoseLab2)
-				{
-					var ag_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab2?.StatusElement);
-					var ah_ = context.Operators.Equal(ag_, "final");
-					var ai_ = FHIRHelpers_4_0_001.ToQuantity((BloodGlucoseLab2?.Value as Quantity));
-					var aj_ = context.Operators.Quantity(200m, "mg/dL");
-					var ak_ = context.Operators.GreaterOrEqual(ai_, aj_);
-					var al_ = context.Operators.And(ah_, ak_);
-					var am_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab2?.Effective as FhirDateTime));
-					var an_ = context.Operators.In<CqlDateTime>(am_, EncounterDay?.dayPeriod, null);
-					var ao_ = context.Operators.And(al_, an_);
+					var ac_ = BloodGlucoseLab1?.StatusElement;
+					var ad_ = FHIRHelpers_4_0_001.ToString(ac_);
+					var ae_ = context.Operators.Equal(ad_, "final");
+					var af_ = BloodGlucoseLab1?.Value;
+					var ag_ = FHIRHelpers_4_0_001.ToQuantity((af_ as Quantity));
+					var ah_ = context.Operators.Quantity(300m, "mg/dL");
+					var ai_ = context.Operators.Greater(ag_, ah_);
+					var aj_ = context.Operators.And(ae_, ai_);
+					var ak_ = BloodGlucoseLab1?.Effective;
+					var al_ = FHIRHelpers_4_0_001.ToDateTime((ak_ as FhirDateTime));
+					var am_ = EncounterDay?.dayPeriod;
+					var an_ = context.Operators.In<CqlDateTime>(al_, am_, null);
+					var ao_ = context.Operators.And(aj_, an_);
 
 					return ao_;
 				};
 				var o_ = context.Operators.Where<Observation>(m_, n_);
 				var p_ = context.Operators.Exists<Observation>(o_);
-				var r_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
-				bool? s_(Observation BloodGlucoseLab3)
+				var r_ = context.Operators.RetrieveByValueSet<Observation>(l_, null);
+				bool? s_(Observation BloodGlucoseLab2)
 				{
-					var ap_ = FHIRHelpers_4_0_001.ToString(BloodGlucoseLab3?.StatusElement);
-					var aq_ = context.Operators.Equal(ap_, "final");
-					var ar_ = FHIRHelpers_4_0_001.ToDateTime((BloodGlucoseLab3?.Effective as FhirDateTime));
-					var as_ = context.Operators.In<CqlDateTime>(ar_, EncounterDay?.dayPeriod, null);
-					var at_ = context.Operators.And(aq_, as_);
+					var ap_ = BloodGlucoseLab2?.StatusElement;
+					var aq_ = FHIRHelpers_4_0_001.ToString(ap_);
+					var ar_ = context.Operators.Equal(aq_, "final");
+					var as_ = BloodGlucoseLab2?.Value;
+					var at_ = FHIRHelpers_4_0_001.ToQuantity((as_ as Quantity));
+					var au_ = context.Operators.Quantity(200m, "mg/dL");
+					var av_ = context.Operators.GreaterOrEqual(at_, au_);
+					var aw_ = context.Operators.And(ar_, av_);
+					var ax_ = BloodGlucoseLab2?.Effective;
+					var ay_ = FHIRHelpers_4_0_001.ToDateTime((ax_ as FhirDateTime));
+					var az_ = EncounterDay?.dayPeriod;
+					var ba_ = context.Operators.In<CqlDateTime>(ay_, az_, null);
+					var bb_ = context.Operators.And(aw_, ba_);
 
-					return at_;
+					return bb_;
 				};
 				var t_ = context.Operators.Where<Observation>(r_, s_);
 				var u_ = context.Operators.Exists<Observation>(t_);
-				var v_ = context.Operators.Not(u_);
-				var w_ = new Tuple_HDgChhdKHffMeLJEWdDUjFSFd
+				var w_ = context.Operators.RetrieveByValueSet<Observation>(l_, null);
+				bool? x_(Observation BloodGlucoseLab3)
 				{
-					dayIndex = EncounterDay?.dayIndex,
-					dayPeriod = EncounterDay?.dayPeriod,
-					hasSevereResult = k_,
-					hasElevatedResult = p_,
-					hasNoResult = v_,
+					var bc_ = BloodGlucoseLab3?.StatusElement;
+					var bd_ = FHIRHelpers_4_0_001.ToString(bc_);
+					var be_ = context.Operators.Equal(bd_, "final");
+					var bf_ = BloodGlucoseLab3?.Effective;
+					var bg_ = FHIRHelpers_4_0_001.ToDateTime((bf_ as FhirDateTime));
+					var bh_ = EncounterDay?.dayPeriod;
+					var bi_ = context.Operators.In<CqlDateTime>(bg_, bh_, null);
+					var bj_ = context.Operators.And(be_, bi_);
+
+					return bj_;
+				};
+				var y_ = context.Operators.Where<Observation>(w_, x_);
+				var z_ = context.Operators.Exists<Observation>(y_);
+				var aa_ = context.Operators.Not(z_);
+				var ab_ = new Tuple_HDgChhdKHffMeLJEWdDUjFSFd
+				{
+					dayIndex = j_,
+					dayPeriod = k_,
+					hasSevereResult = p_,
+					hasElevatedResult = u_,
+					hasNoResult = aa_,
 				};
 
-				return w_;
+				return ab_;
 			};
-			var e_ = context.Operators.Select<Tuple_ddJhZGNHefSCOAJJFEIEcXie, Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(PertinentEncounterDays?.relevantDays, d_);
-			var f_ = new Tuple_BVGhTTBTiPLQVGZRfJbXRNFfF
+			var h_ = context.Operators.Select<Tuple_ddJhZGNHefSCOAJJFEIEcXie, Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(f_, g_);
+			var i_ = new Tuple_BVGhTTBTiPLQVGZRfJbXRNFfF
 			{
-				encounter = PertinentEncounterDays?.encounter,
-				relevantPeriod = PertinentEncounterDays?.relevantPeriod,
-				relevantDays = e_,
+				encounter = d_,
+				relevantPeriod = e_,
+				relevantDays = h_,
 			};
 
-			return f_;
+			return i_;
 		};
 		var c_ = context.Operators.Select<Tuple_BFFMVKRWdCJDYTgBWYHeLPiha, Tuple_BVGhTTBTiPLQVGZRfJbXRNFfF>(a_, b_);
 
@@ -647,40 +686,51 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var a_ = this.Pertinent_Encounters_With_Glucose_Result_Days();
 		Tuple_DNEVNMCYfTaYQDAThWFVOgQaT b_(Tuple_BVGhTTBTiPLQVGZRfJbXRNFfF EncounterWithResultDays)
 		{
-			bool? d_(Tuple_HDgChhdKHffMeLJEWdDUjFSFd EncounterDay)
+			var d_ = EncounterWithResultDays?.encounter;
+			var e_ = EncounterWithResultDays?.relevantPeriod;
+			var f_ = EncounterWithResultDays?.relevantDays;
+			bool? g_(Tuple_HDgChhdKHffMeLJEWdDUjFSFd EncounterDay)
 			{
-				var i_ = context.Operators.Greater(EncounterDay?.dayIndex, 1);
+				var l_ = EncounterDay?.dayIndex;
+				var m_ = context.Operators.Greater(l_, 1);
 
-				return i_;
+				return m_;
 			};
-			var e_ = context.Operators.Where<Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(EncounterWithResultDays?.relevantDays, d_);
-			Tuple_FNeERNKXWKJeEjWXREHDLePdY f_(Tuple_HDgChhdKHffMeLJEWdDUjFSFd EncounterDay)
+			var h_ = context.Operators.Where<Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(f_, g_);
+			Tuple_FNeERNKXWKJeEjWXREHDLePdY i_(Tuple_HDgChhdKHffMeLJEWdDUjFSFd EncounterDay)
 			{
-				var j_ = context.Operators.Subtract(EncounterDay?.dayIndex, 2);
-				var k_ = context.Operators.Indexer<Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(EncounterWithResultDays?.relevantDays, j_);
-				var l_ = context.Operators.And(EncounterDay?.hasNoResult, k_?.hasElevatedResult);
-				var m_ = context.Operators.Subtract(EncounterDay?.dayIndex, 3);
-				var n_ = context.Operators.Indexer<Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(EncounterWithResultDays?.relevantDays, m_);
-				var o_ = context.Operators.And(l_, n_?.hasElevatedResult);
-				var p_ = context.Operators.Or(EncounterDay?.hasSevereResult, o_);
-				var q_ = new Tuple_FNeERNKXWKJeEjWXREHDLePdY
+				var n_ = EncounterDay?.dayIndex;
+				var o_ = EncounterDay?.dayPeriod;
+				var p_ = EncounterDay?.hasSevereResult;
+				var q_ = EncounterDay?.hasNoResult;
+				var r_ = EncounterWithResultDays?.relevantDays;
+				var t_ = context.Operators.Subtract(n_, 2);
+				var u_ = context.Operators.Indexer<Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(r_, t_);
+				var v_ = u_?.hasElevatedResult;
+				var w_ = context.Operators.And(q_, v_);
+				var z_ = context.Operators.Subtract(n_, 3);
+				var aa_ = context.Operators.Indexer<Tuple_HDgChhdKHffMeLJEWdDUjFSFd>(r_, z_);
+				var ab_ = aa_?.hasElevatedResult;
+				var ac_ = context.Operators.And(w_, ab_);
+				var ad_ = context.Operators.Or(p_, ac_);
+				var ae_ = new Tuple_FNeERNKXWKJeEjWXREHDLePdY
 				{
-					dayIndex = EncounterDay?.dayIndex,
-					dayPeriod = EncounterDay?.dayPeriod,
-					hasHyperglycemicEvent = p_,
+					dayIndex = n_,
+					dayPeriod = o_,
+					hasHyperglycemicEvent = ad_,
 				};
 
-				return q_;
+				return ae_;
 			};
-			var g_ = context.Operators.Select<Tuple_HDgChhdKHffMeLJEWdDUjFSFd, Tuple_FNeERNKXWKJeEjWXREHDLePdY>(e_, f_);
-			var h_ = new Tuple_DNEVNMCYfTaYQDAThWFVOgQaT
+			var j_ = context.Operators.Select<Tuple_HDgChhdKHffMeLJEWdDUjFSFd, Tuple_FNeERNKXWKJeEjWXREHDLePdY>(h_, i_);
+			var k_ = new Tuple_DNEVNMCYfTaYQDAThWFVOgQaT
 			{
-				encounter = EncounterWithResultDays?.encounter,
-				relevantPeriod = EncounterWithResultDays?.relevantPeriod,
-				eligibleEventDays = g_,
+				encounter = d_,
+				relevantPeriod = e_,
+				eligibleEventDays = j_,
 			};
 
-			return h_;
+			return k_;
 		};
 		var c_ = context.Operators.Select<Tuple_BVGhTTBTiPLQVGZRfJbXRNFfF, Tuple_DNEVNMCYfTaYQDAThWFVOgQaT>(a_, b_);
 
@@ -696,16 +746,25 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var a_ = this.Pertinent_Encounters_With_Hyperglycemic_Event_Days();
 		bool? b_(Tuple_DNEVNMCYfTaYQDAThWFVOgQaT EncounterWithEventDays)
 		{
-			bool? f_(Tuple_FNeERNKXWKJeEjWXREHDLePdY EligibleEventDay) => 
-				EligibleEventDay?.hasHyperglycemicEvent;
-			var g_ = context.Operators.Where<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(EncounterWithEventDays?.eligibleEventDays, f_);
-			var h_ = context.Operators.Exists<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(g_);
+			var f_ = EncounterWithEventDays?.eligibleEventDays;
+			bool? g_(Tuple_FNeERNKXWKJeEjWXREHDLePdY EligibleEventDay)
+			{
+				var j_ = EligibleEventDay?.hasHyperglycemicEvent;
 
-			return h_;
+				return j_;
+			};
+			var h_ = context.Operators.Where<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(f_, g_);
+			var i_ = context.Operators.Exists<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(h_);
+
+			return i_;
 		};
 		var c_ = context.Operators.Where<Tuple_DNEVNMCYfTaYQDAThWFVOgQaT>(a_, b_);
-		Encounter d_(Tuple_DNEVNMCYfTaYQDAThWFVOgQaT EncounterWithEventDays) => 
-			EncounterWithEventDays?.encounter;
+		Encounter d_(Tuple_DNEVNMCYfTaYQDAThWFVOgQaT EncounterWithEventDays)
+		{
+			var k_ = EncounterWithEventDays?.encounter;
+
+			return k_;
+		};
 		var e_ = context.Operators.Select<Tuple_DNEVNMCYfTaYQDAThWFVOgQaT, Encounter>(c_, d_);
 
 		return e_;
@@ -721,16 +780,18 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var a_ = this.Pertinent_Encounters_With_Hyperglycemic_Event_Days();
 		bool? b_(Tuple_DNEVNMCYfTaYQDAThWFVOgQaT EncounterWithEventDays)
 		{
-			var g_ = context.Operators.Equal(EncounterWithEventDays?.encounter, QualifyingEncounter);
+			var g_ = EncounterWithEventDays?.encounter;
+			var h_ = context.Operators.Equal(g_, QualifyingEncounter);
 
-			return g_;
+			return h_;
 		};
 		var c_ = context.Operators.Where<Tuple_DNEVNMCYfTaYQDAThWFVOgQaT>(a_, b_);
 		int? d_(Tuple_DNEVNMCYfTaYQDAThWFVOgQaT EncounterWithEventDays)
 		{
-			var h_ = context.Operators.Count<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(EncounterWithEventDays?.eligibleEventDays);
+			var i_ = EncounterWithEventDays?.eligibleEventDays;
+			var j_ = context.Operators.Count<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(i_);
 
-			return h_;
+			return j_;
 		};
 		var e_ = context.Operators.Select<Tuple_DNEVNMCYfTaYQDAThWFVOgQaT, int?>(c_, d_);
 		var f_ = context.Operators.SingletonFrom<int?>(e_);
@@ -744,19 +805,25 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var a_ = this.Pertinent_Encounters_With_Hyperglycemic_Event_Days();
 		bool? b_(Tuple_DNEVNMCYfTaYQDAThWFVOgQaT EncounterWithEventDays)
 		{
-			var g_ = context.Operators.Equal(EncounterWithEventDays?.encounter, QualifyingEncounter);
+			var g_ = EncounterWithEventDays?.encounter;
+			var h_ = context.Operators.Equal(g_, QualifyingEncounter);
 
-			return g_;
+			return h_;
 		};
 		var c_ = context.Operators.Where<Tuple_DNEVNMCYfTaYQDAThWFVOgQaT>(a_, b_);
 		int? d_(Tuple_DNEVNMCYfTaYQDAThWFVOgQaT EncounterWithEventDays)
 		{
-			bool? h_(Tuple_FNeERNKXWKJeEjWXREHDLePdY EligibleEventDay) => 
-				EligibleEventDay?.hasHyperglycemicEvent;
-			var i_ = context.Operators.Where<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(EncounterWithEventDays?.eligibleEventDays, h_);
-			var j_ = context.Operators.Count<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(i_);
+			var i_ = EncounterWithEventDays?.eligibleEventDays;
+			bool? j_(Tuple_FNeERNKXWKJeEjWXREHDLePdY EligibleEventDay)
+			{
+				var m_ = EligibleEventDay?.hasHyperglycemicEvent;
 
-			return j_;
+				return m_;
+			};
+			var k_ = context.Operators.Where<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(i_, j_);
+			var l_ = context.Operators.Count<Tuple_FNeERNKXWKJeEjWXREHDLePdY>(k_);
+
+			return l_;
 		};
 		var e_ = context.Operators.Select<Tuple_DNEVNMCYfTaYQDAThWFVOgQaT, int?>(c_, d_);
 		var f_ = context.Operators.SingletonFrom<int?>(e_);
