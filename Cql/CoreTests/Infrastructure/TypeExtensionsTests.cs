@@ -47,11 +47,11 @@ public class TypeExtensionsTests
 
         Assert.AreEqual(
             expected: (StructType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, StructType));
 
         Assert.AreEqual(
             expected: (ReferenceType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, ReferenceType));
 
         Assert.AreEqual(
             expected: (NullableEnumType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
@@ -59,15 +59,15 @@ public class TypeExtensionsTests
 
         Assert.AreEqual(
             expected: (EnumType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, EnumType));
 
         Assert.AreEqual(
             expected: (GenericDefinitionType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, GenericDefinitionType));
 
         Assert.AreEqual(
             expected: (GenericStructTypeDefinition.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, GenericStructTypeDefinition));
 
         Assert.AreEqual(
             expected: (NullableGenericStructTypeDefinition.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
