@@ -6,6 +6,7 @@
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
 		<NoWarn>CS1591;CS0618</NoWarn>
+		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>

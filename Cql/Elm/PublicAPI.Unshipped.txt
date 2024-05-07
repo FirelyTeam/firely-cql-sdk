@@ -290,6 +290,7 @@ Hl7.Cql.Elm.HighBoundary
 Hl7.Cql.Elm.HighBoundary.HighBoundary() -> void
 Hl7.Cql.Elm.IDefinitionElement
 Hl7.Cql.Elm.IDefinitionElement.Access.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.IDefinitionElement.AddError(Hl7.Cql.Elm.CqlToElmError! error) -> Hl7.Cql.Elm.IDefinitionElement!
 Hl7.Cql.Elm.IDefinitionElement.Name.get -> string!
 Hl7.Cql.Elm.IDefinitionElement.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.IdentifierRef
@@ -759,6 +760,7 @@ override Hl7.Cql.Elm.TypeSpecifier.Equals(object? obj) -> bool
 override Hl7.Cql.Elm.TypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.VersionedIdentifier.Equals(object? obj) -> bool
 override Hl7.Cql.Elm.VersionedIdentifier.GetHashCode() -> int
+static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, Hl7.Cql.Elm.CqlToElmError! error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType = Hl7.Cql.Elm.ErrorType.semantic, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! node) -> Hl7.Cql.Elm.CqlToElmError![]!
 static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! include) -> string?
