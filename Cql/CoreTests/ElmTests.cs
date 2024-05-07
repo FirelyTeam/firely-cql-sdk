@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CoreTests
@@ -88,7 +89,13 @@ namespace CoreTests
         {
             var fi = new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json");
             using var fs = fi.OpenRead();
-            var lib = JsonSerializer.Deserialize<Library>(fs, Library.JsonSerializerOptions);
+
+            var options = Library.JsonSerializerOptions;
+            options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+
+            Library lib = JsonSerializer.Deserialize<Library>(fs, options);
+
+            var elm = JsonSerializer.Serialize(lib, options);
         }
     }
 }

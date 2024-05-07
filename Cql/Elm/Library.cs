@@ -64,9 +64,11 @@ namespace Hl7.Cql.Elm
             var options = new JsonSerializerOptions()
             {
                 MaxDepth = int.MaxValue
-            }
-            .AddLibraryConverters()
-            .AddPolymorphicConverters(strict);
+            };
+
+            options.Converters.Add(new LibraryJsonConverter());
+            options.Converters.Add(new TopLevelDefinitionConverterFactory());
+        //    options.AddPolymorphicConverters(strict);
             options.Converters.Add(new XmlQualifiedNameConverter());
             options.Converters.Add(new JsonStringEnumConverter());
             return options;

@@ -16,11 +16,6 @@ namespace Hl7.Cql.Elm.Serialization
 {
     internal class XmlQualifiedNameConverter : JsonConverter<XmlQualifiedName>
     {
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return base.CanConvert(typeToConvert);
-        }
-
         public override XmlQualifiedName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
