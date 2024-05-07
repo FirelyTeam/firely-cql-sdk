@@ -14,7 +14,7 @@ internal class CommandLineOptions
 {
     private string? _resourceDirectory;
 
-    [Option('l', "library", Required = true, HelpText = "The name of a CMS measure Library resource, which contians name and version.")]
+    [Option('l', "library", Required = true, HelpText = "The name of a CMS measure Library resource, which contains name and version.")]
     public string Library { get; set; } = "";
 
     [Option('t', "testCase", Required = true, HelpText = "The folder name of a test case.")]
