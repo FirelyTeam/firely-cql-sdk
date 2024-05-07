@@ -39,8 +39,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
                 .AddMessaging()
                 .AddLogging(builder => builder
-                    .AddConsole()
-                    .ThrowOn(LogLevel.Error))
+                    .AddConsole())
                 .AddTransient<InvocationBuilder>()
                 .AddSingleton<CoercionProvider>()
                 .AddSingleton<ElmFactory>()

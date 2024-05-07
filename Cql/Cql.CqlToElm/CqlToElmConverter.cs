@@ -62,18 +62,11 @@ namespace Hl7.Cql.CqlToElm
 
                 return library;
             }
-#if !DEBUG
             catch (Exception e)
             {
-                    Logger.LogCritical(e, "Exception while converting CQL to ELM.");
-                    throw;
-            }
-#else
-            catch
-            {
+                Logger.LogCritical(e, "Exception while converting CQL to ELM.");
                 throw;
             }
-#endif
         }
 
         internal static cqlParser.LibraryContext ParseLibrary(TextReader cqlLibrary)

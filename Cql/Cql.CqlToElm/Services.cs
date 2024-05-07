@@ -80,11 +80,6 @@ namespace Hl7.Cql.CqlToElm
                 .AddScoped<LibraryBuilder>()
                 .AddTransient<InvocationBuilder>();
 
-
-
-        public static ILoggingBuilder ThrowOn(this ILoggingBuilder builder, LogLevel threshold) =>
-            builder.AddProvider(new ThrowingLoggerProvider(threshold));
-
         public static IServiceCollection AddMessaging(this IServiceCollection services, CultureInfo? culture = null) =>
             services.AddSingleton(new MessageProvider(culture ?? CultureInfo.InvariantCulture));
     }

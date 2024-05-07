@@ -22,10 +22,8 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Empty()
         {
             Assert.ThrowsException<ArgumentException>(() => MakeLibrary(string.Empty));
-            using var cql = new FileStream(@"Input\LibraryTest\Empty.cql",
-                FileMode.Open, FileAccess.Read, FileShare.Read);
-
-            Assert.ThrowsException<ArgumentException>(() => DefaultConverter.ConvertLibrary(cql));
+            var ms = new MemoryStream();
+            Assert.ThrowsException<ArgumentException>(() => DefaultConverter.ConvertLibrary(ms));
         }
 
         #region Identifier
