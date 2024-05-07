@@ -15,7 +15,9 @@ internal static class ResourceExtensions
     {
         if (string.IsNullOrWhiteSpace(resource.Id))
             throw new ArgumentException("Resource must have an id", nameof(resource));
-        var path = $"{resourceCanonicalRootUrl ?? "#"}/{resource.TypeName}/{resource.Id}";
+
+        string root = resourceCanonicalRootUrl ?? "#";
+        var path = $"{root}{(root.EndsWith('/') ? "" : "/")}{resource.TypeName}/{resource.Id}";
         return path;
     }
 }

@@ -137,29 +137,7 @@ namespace Hl7.Cql.Compiler
 
         internal static string PrettyTypeName(Type type)
         {
-            string typeName = type.Name;
-            if (type.IsGenericType)
-            {
-                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    typeName = Nullable.GetUnderlyingType(type)!.Name;
-                }
-                else
-                {
-                    if (type.IsGenericType)
-                    {
-                        var tildeIndex = type.Name.IndexOf('`');
-                        var rootName = type.Name.Substring(0, tildeIndex);
-                        var genericArgumentNames = type.GetGenericArguments()
-                            .Select(PrettyTypeName);
-                        var prettyName = $"{rootName}{string.Join("", genericArgumentNames)}";
-                        typeName = prettyName;
-                    }
-                }
-            }
-
             string result = type.WriteCSharp(TypeToCSharpStringOptions).ToString()!;
-            Debug.Assert(typeName == result);
             return result;
         }
     }
