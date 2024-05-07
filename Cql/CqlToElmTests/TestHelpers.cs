@@ -40,7 +40,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public static void BeLiteralBool(this ObjectAssertions l, bool b)
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
-            literal.value.Should().Be(b.ToString().ToLower());
+            literal.value.Should().Be(b.ToString().ToLower(CultureInfo.InvariantCulture));
             literal.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
         }
 
@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public static void BeLiteralInteger(this ObjectAssertions l, int i)
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
-            literal.value.Should().Be(i.ToString());
+            literal.value.Should().Be(i.ToString(CultureInfo.InvariantCulture));
             literal.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
         }
 

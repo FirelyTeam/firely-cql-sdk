@@ -59,8 +59,8 @@ public class FHIRHelpers_4_0_001
 			}
 			else
 			{
-				var c_ = context.Operators.ConvertStringToDateTime(period?.StartElement?.Value);
-				var d_ = context.Operators.ConvertStringToDateTime(period?.EndElement?.Value);
+				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
+				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
 				var e_ = context.Operators.Interval(c_, d_, true, true);
 
 				return e_;
@@ -1044,7 +1044,7 @@ public class FHIRHelpers_4_0_001
     [CqlDeclaration("ToDateTime")]
 	public CqlDateTime ToDateTime(FhirDateTime value)
 	{
-		var a_ = context.Operators.ConvertStringToDateTime(value?.Value);
+		var a_ = context.Operators.Convert<CqlDateTime>(value);
 
 		return a_;
 	}

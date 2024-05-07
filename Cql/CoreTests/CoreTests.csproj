@@ -1,21 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>false</IsPackable>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<FirelySdkVersion>5.7.0</FirelySdkVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<SignAssembly>True</SignAssembly>
-		<DelaySign>true</DelaySign>
-		<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
-		<IncludeSymbols>True</IncludeSymbols>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Nullable>disable</Nullable>
+		<NoWarn>CS1591;CS0618</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,7 +19,7 @@
 		<PackageReference Include="coverlet.collector" Version="6.0.2" />
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
-
+		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
 	</ItemGroup>
 
 	<ItemGroup>
