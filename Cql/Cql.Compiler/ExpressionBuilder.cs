@@ -421,7 +421,7 @@ namespace Hl7.Cql.Compiler
                     CalculateAgeAt or
                     DifferenceBetween or
                     DurationBetween or
-                    //Elm.Ends or
+                    Elm.Ends or
                     In or
                     Round or
                     SameAs or
