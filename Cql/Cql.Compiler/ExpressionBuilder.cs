@@ -314,7 +314,6 @@ namespace Hl7.Cql.Compiler
                         Property e         => Property(e),
                         Query e            => Query(e),
                         Retrieve e         => Retrieve(e),
-                        Starts e           => Starts(e),
                         Tuple e            => Tuple(e),
                         Union e            => Union(e),
                         ValueSetRef e      => ValueSetRef(e),
@@ -421,12 +420,13 @@ namespace Hl7.Cql.Compiler
                     CalculateAgeAt or
                     DifferenceBetween or
                     DurationBetween or
-                    Elm.Ends or
+                    Ends or
                     In or
                     Round or
                     SameAs or
                     SameOrAfter or
-                    SameOrBefore => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+                    SameOrBefore or
+                    Elm.Starts => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
 
                 AllTrue or
                     AnyTrue or
@@ -1761,24 +1761,6 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException();
                 var precision = ((IGetPrecision)e).precisionOrNull;
                 return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), left, right, precision);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression? Starts(Starts e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.Starts), left, right, precision);
-
-                }
             }
             throw new NotImplementedException().WithContext(this);
         }
