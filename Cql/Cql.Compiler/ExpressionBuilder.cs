@@ -260,9 +260,7 @@ namespace Hl7.Cql.Compiler
                     {
                         //@formatter:off
                         Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
-                        // Expand e           => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
                         Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                        // Width e            => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
                         Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
                         As e               => As(e),
                         Case e             => Case(e),
@@ -282,7 +280,6 @@ namespace Hl7.Cql.Compiler
                         Collapse e         => Collapse(e),
                         ConceptRef e       => ConceptRef(e),
                         Contains e         => Contains(e),
-                        Ends e             => Ends(e),
                         Equivalent e       => Equivalent(e),
                         FunctionRef e      => FunctionRef(e),
                         ExpressionRef e    => ExpressionRef(e),
@@ -371,6 +368,7 @@ namespace Hl7.Cql.Compiler
                     EndsWith or
                     Equal or
                     Exists or
+                    Except or
                     Exp or
                     Expand or
                     ExpandValueSet or
@@ -417,17 +415,18 @@ namespace Hl7.Cql.Compiler
                     Xor => ((IGetOperands)element).operands,
 
                 CalculateAge or
-                        DateTimeComponentFrom or
-                        After or
-                        Before or
-                        CalculateAgeAt or
-                        DifferenceBetween or
-                        DurationBetween or
-                        In or
-                        Round or
-                        SameAs or
-                        SameOrAfter or
-                        SameOrBefore => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+                    DateTimeComponentFrom or
+                    After or
+                    Before or
+                    CalculateAgeAt or
+                    DifferenceBetween or
+                    DurationBetween or
+                    //Elm.Ends or
+                    In or
+                    Round or
+                    SameAs or
+                    SameOrAfter or
+                    SameOrBefore => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
 
                 AllTrue or
                     AnyTrue or
@@ -1445,24 +1444,6 @@ namespace Hl7.Cql.Compiler
             if (left.Type.IsCqlInterval(out var pointType))
             {
                 return BindCqlOperator(nameof(ICqlOperators.IntervalContains), left, right, precision);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression? Ends(Ends e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            var precision = ((IGetPrecision)e).precisionOrNull;
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    return BindCqlOperator(nameof(ICqlOperators.Ends), left, right, precision);
-
-                }
             }
             throw new NotImplementedException().WithContext(this);
         }
