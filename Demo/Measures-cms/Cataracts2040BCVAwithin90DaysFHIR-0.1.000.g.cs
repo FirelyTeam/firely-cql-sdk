@@ -655,7 +655,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("419775003", "http://snomed.info/sct", null, null),
 		};
@@ -669,10 +669,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("Cataracts2040BCVAwithin90DaysFHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("Cataracts2040BCVAwithin90DaysFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -683,8 +683,8 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -695,32 +695,32 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Value()
 	{
-		var a_ = this.Cataract_Surgery();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		CqlValueSet a_ = this.Cataract_Surgery();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? c_(Procedure CataractSurgery)
 		{
-			var e_ = this.Measurement_Period();
-			var f_ = CataractSurgery?.Performed;
-			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
-			var h_ = QICoreCommon_2_0_000.toInterval(g_);
-			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
-			var k_ = FHIRHelpers_4_3_000.ToValue(f_);
-			var l_ = QICoreCommon_2_0_000.toInterval(k_);
-			var m_ = context.Operators.Start(l_);
-			var o_ = context.Operators.End(e_);
-			var p_ = context.Operators.Quantity(92m, "days");
-			var q_ = context.Operators.Subtract(o_, p_);
-			var r_ = context.Operators.SameOrBefore(m_, q_, null);
-			var s_ = context.Operators.And(i_, r_);
-			var t_ = CataractSurgery?.StatusElement;
-			var u_ = t_?.Value;
-			var v_ = context.Operators.Convert<string>(u_);
-			var w_ = context.Operators.Equal(v_, "completed");
-			var x_ = context.Operators.And(s_, w_);
+			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+			DataType f_ = CataractSurgery?.Performed;
+			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.toInterval(g_);
+			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
+			object k_ = FHIRHelpers_4_3_000.ToValue(f_);
+			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
+			CqlDateTime m_ = context.Operators.Start(l_);
+			CqlDateTime o_ = context.Operators.End(e_);
+			CqlQuantity p_ = context.Operators.Quantity(92m, "days");
+			CqlDateTime q_ = context.Operators.Subtract(o_, p_);
+			bool? r_ = context.Operators.SameOrBefore(m_, q_, null);
+			bool? s_ = context.Operators.And(i_, r_);
+			Code<EventStatus> t_ = CataractSurgery?.StatusElement;
+			EventStatus? u_ = t_?.Value;
+			string v_ = context.Operators.Convert<string>(u_);
+			bool? w_ = context.Operators.Equal(v_, "completed");
+			bool? x_ = context.Operators.And(s_, w_);
 
 			return x_;
 		};
-		var d_ = context.Operators.Where<Procedure>(b_, c_);
+		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -731,22 +731,22 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private IEnumerable<Procedure> Initial_Population_Value()
 	{
-		var a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
+		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
 		bool? b_(Procedure CataractSurgeryPerformed)
 		{
-			var d_ = this.Patient();
-			var e_ = d_?.BirthDateElement;
-			var f_ = e_?.Value;
-			var g_ = context.Operators.Convert<CqlDate>(f_);
-			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, 18);
+			Patient d_ = this.Patient();
+			Date e_ = d_?.BirthDateElement;
+			string f_ = e_?.Value;
+			CqlDate g_ = context.Operators.Convert<CqlDate>(f_);
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
+			CqlDateTime i_ = context.Operators.Start(h_);
+			CqlDate j_ = context.Operators.DateFrom(i_);
+			int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
+			bool? l_ = context.Operators.GreaterOrEqual(k_, 18);
 
 			return l_;
 		};
-		var c_ = context.Operators.Where<Procedure>(a_, b_);
+		IEnumerable<Procedure> c_ = context.Operators.Where<Procedure>(a_, b_);
 
 		return c_;
 	}
@@ -757,7 +757,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private IEnumerable<Procedure> Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		IEnumerable<Procedure> a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -768,193 +768,193 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private IEnumerable<Procedure> Denominator_Exclusions_Value()
 	{
-		var a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
+		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
 		IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed)
 		{
-			var d_ = this.Acute_and_Subacute_Iridocyclitis();
-			var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
-			var f_ = this.Amblyopia();
-			var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-			var h_ = context.Operators.ListUnion<Condition>(e_, g_);
-			var i_ = this.Burn_Confined_to_Eye_and_Adnexa();
-			var j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
-			var k_ = this.Cataract_Secondary_to_Ocular_Disorders();
-			var l_ = context.Operators.RetrieveByValueSet<Condition>(k_, null);
-			var m_ = context.Operators.ListUnion<Condition>(j_, l_);
-			var n_ = context.Operators.ListUnion<Condition>(h_, m_);
-			var o_ = this.Cataract_Congenital();
-			var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
-			var q_ = this.Cataract_Mature_or_Hypermature();
-			var r_ = context.Operators.RetrieveByValueSet<Condition>(q_, null);
-			var s_ = context.Operators.ListUnion<Condition>(p_, r_);
-			var t_ = context.Operators.ListUnion<Condition>(n_, s_);
-			var u_ = this.Cataract_Posterior_Polar();
-			var v_ = context.Operators.RetrieveByValueSet<Condition>(u_, null);
-			var w_ = this.Central_Corneal_Ulcer();
-			var x_ = context.Operators.RetrieveByValueSet<Condition>(w_, null);
-			var y_ = context.Operators.ListUnion<Condition>(v_, x_);
-			var z_ = context.Operators.ListUnion<Condition>(t_, y_);
-			var aa_ = this.Certain_Types_of_Iridocyclitis();
-			var ab_ = context.Operators.RetrieveByValueSet<Condition>(aa_, null);
-			var ac_ = this.Choroidal_Degenerations();
-			var ad_ = context.Operators.RetrieveByValueSet<Condition>(ac_, null);
-			var ae_ = context.Operators.ListUnion<Condition>(ab_, ad_);
-			var af_ = context.Operators.ListUnion<Condition>(z_, ae_);
-			var ag_ = this.Choroidal_Detachment();
-			var ah_ = context.Operators.RetrieveByValueSet<Condition>(ag_, null);
-			var ai_ = this.Choroidal_Hemorrhage_and_Rupture();
-			var aj_ = context.Operators.RetrieveByValueSet<Condition>(ai_, null);
-			var ak_ = context.Operators.ListUnion<Condition>(ah_, aj_);
-			var al_ = context.Operators.ListUnion<Condition>(af_, ak_);
-			var am_ = this.Chronic_Iridocyclitis();
-			var an_ = context.Operators.RetrieveByValueSet<Condition>(am_, null);
-			var ao_ = this.Cloudy_Cornea();
-			var ap_ = context.Operators.RetrieveByValueSet<Condition>(ao_, null);
-			var aq_ = context.Operators.ListUnion<Condition>(an_, ap_);
-			var ar_ = context.Operators.ListUnion<Condition>(al_, aq_);
-			var as_ = this.Corneal_Edema();
-			var at_ = context.Operators.RetrieveByValueSet<Condition>(as_, null);
-			var au_ = this.Disorders_of_Cornea_Including_Corneal_Opacity();
-			var av_ = context.Operators.RetrieveByValueSet<Condition>(au_, null);
-			var aw_ = context.Operators.ListUnion<Condition>(at_, av_);
-			var ax_ = context.Operators.ListUnion<Condition>(ar_, aw_);
-			var ay_ = this.Degeneration_of_Macula_and_Posterior_Pole();
-			var az_ = context.Operators.RetrieveByValueSet<Condition>(ay_, null);
-			var ba_ = this.Degenerative_Disorders_of_Globe();
-			var bb_ = context.Operators.RetrieveByValueSet<Condition>(ba_, null);
-			var bc_ = context.Operators.ListUnion<Condition>(az_, bb_);
-			var bd_ = context.Operators.ListUnion<Condition>(ax_, bc_);
-			var be_ = this.Diabetic_Macular_Edema();
-			var bf_ = context.Operators.RetrieveByValueSet<Condition>(be_, null);
-			var bg_ = this.Diabetic_Retinopathy();
-			var bh_ = context.Operators.RetrieveByValueSet<Condition>(bg_, null);
-			var bi_ = context.Operators.ListUnion<Condition>(bf_, bh_);
-			var bj_ = context.Operators.ListUnion<Condition>(bd_, bi_);
-			var bk_ = this.Disorders_of_Optic_Chiasm();
-			var bl_ = context.Operators.RetrieveByValueSet<Condition>(bk_, null);
-			var bm_ = this.Disorders_of_Visual_Cortex();
-			var bn_ = context.Operators.RetrieveByValueSet<Condition>(bm_, null);
-			var bo_ = context.Operators.ListUnion<Condition>(bl_, bn_);
-			var bp_ = context.Operators.ListUnion<Condition>(bj_, bo_);
-			var bq_ = this.Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis();
-			var br_ = context.Operators.RetrieveByValueSet<Condition>(bq_, null);
-			var bs_ = this.Focal_Chorioretinitis_and_Focal_Retinochoroiditis();
-			var bt_ = context.Operators.RetrieveByValueSet<Condition>(bs_, null);
-			var bu_ = context.Operators.ListUnion<Condition>(br_, bt_);
-			var bv_ = context.Operators.ListUnion<Condition>(bp_, bu_);
-			var bw_ = this.Glaucoma();
-			var bx_ = context.Operators.RetrieveByValueSet<Condition>(bw_, null);
-			var by_ = this.Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes();
-			var bz_ = context.Operators.RetrieveByValueSet<Condition>(by_, null);
-			var ca_ = context.Operators.ListUnion<Condition>(bx_, bz_);
-			var cb_ = context.Operators.ListUnion<Condition>(bv_, ca_);
-			var cc_ = this.Hereditary_Choroidal_Dystrophies();
-			var cd_ = context.Operators.RetrieveByValueSet<Condition>(cc_, null);
-			var ce_ = this.Hereditary_Corneal_Dystrophies();
-			var cf_ = context.Operators.RetrieveByValueSet<Condition>(ce_, null);
-			var cg_ = context.Operators.ListUnion<Condition>(cd_, cf_);
-			var ch_ = context.Operators.ListUnion<Condition>(cb_, cg_);
-			var ci_ = this.Hereditary_Retinal_Dystrophies();
-			var cj_ = context.Operators.RetrieveByValueSet<Condition>(ci_, null);
-			var ck_ = this.Hypotony_of_Eye();
-			var cl_ = context.Operators.RetrieveByValueSet<Condition>(ck_, null);
-			var cm_ = context.Operators.ListUnion<Condition>(cj_, cl_);
-			var cn_ = context.Operators.ListUnion<Condition>(ch_, cm_);
-			var co_ = this.Injury_to_Optic_Nerve_and_Pathways();
-			var cp_ = context.Operators.RetrieveByValueSet<Condition>(co_, null);
-			var cq_ = this.Macular_Scar_of_Posterior_Polar();
-			var cr_ = context.Operators.RetrieveByValueSet<Condition>(cq_, null);
-			var cs_ = context.Operators.ListUnion<Condition>(cp_, cr_);
-			var ct_ = context.Operators.ListUnion<Condition>(cn_, cs_);
-			var cu_ = this.Morgagnian_Cataract();
-			var cv_ = context.Operators.RetrieveByValueSet<Condition>(cu_, null);
-			var cw_ = this.Nystagmus_and_Other_Irregular_Eye_Movements();
-			var cx_ = context.Operators.RetrieveByValueSet<Condition>(cw_, null);
-			var cy_ = context.Operators.ListUnion<Condition>(cv_, cx_);
-			var cz_ = context.Operators.ListUnion<Condition>(ct_, cy_);
-			var da_ = this.Open_Wound_of_Eyeball();
-			var db_ = context.Operators.RetrieveByValueSet<Condition>(da_, null);
-			var dc_ = this.Optic_Atrophy();
-			var dd_ = context.Operators.RetrieveByValueSet<Condition>(dc_, null);
-			var de_ = context.Operators.ListUnion<Condition>(db_, dd_);
-			var df_ = context.Operators.ListUnion<Condition>(cz_, de_);
-			var dg_ = this.Optic_Neuritis();
-			var dh_ = context.Operators.RetrieveByValueSet<Condition>(dg_, null);
-			var di_ = this.Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis();
-			var dj_ = context.Operators.RetrieveByValueSet<Condition>(di_, null);
-			var dk_ = context.Operators.ListUnion<Condition>(dh_, dj_);
-			var dl_ = context.Operators.ListUnion<Condition>(df_, dk_);
-			var dm_ = this.Other_Background_Retinopathy_and_Retinal_Vascular_Changes();
-			var dn_ = context.Operators.RetrieveByValueSet<Condition>(dm_, null);
-			var do_ = this.Other_Disorders_of_Optic_Nerve();
-			var dp_ = context.Operators.RetrieveByValueSet<Condition>(do_, null);
-			var dq_ = context.Operators.ListUnion<Condition>(dn_, dp_);
-			var dr_ = context.Operators.ListUnion<Condition>(dl_, dq_);
-			var ds_ = this.Other_Endophthalmitis();
-			var dt_ = context.Operators.RetrieveByValueSet<Condition>(ds_, null);
-			var du_ = this.Other_Proliferative_Retinopathy();
-			var dv_ = context.Operators.RetrieveByValueSet<Condition>(du_, null);
-			var dw_ = context.Operators.ListUnion<Condition>(dt_, dv_);
-			var dx_ = context.Operators.ListUnion<Condition>(dr_, dw_);
-			var dy_ = this.Pathologic_Myopia();
-			var dz_ = context.Operators.RetrieveByValueSet<Condition>(dy_, null);
-			var ea_ = this.Posterior_Lenticonus();
-			var eb_ = context.Operators.RetrieveByValueSet<Condition>(ea_, null);
-			var ec_ = context.Operators.ListUnion<Condition>(dz_, eb_);
-			var ed_ = context.Operators.ListUnion<Condition>(dx_, ec_);
-			var ee_ = this.Prior_Penetrating_Keratoplasty();
-			var ef_ = context.Operators.RetrieveByValueSet<Condition>(ee_, null);
-			var eg_ = this.Purulent_Endophthalmitis();
-			var eh_ = context.Operators.RetrieveByValueSet<Condition>(eg_, null);
-			var ei_ = context.Operators.ListUnion<Condition>(ef_, eh_);
-			var ej_ = context.Operators.ListUnion<Condition>(ed_, ei_);
-			var ek_ = this.Retinal_Detachment_with_Retinal_Defect();
-			var el_ = context.Operators.RetrieveByValueSet<Condition>(ek_, null);
-			var em_ = this.Retinal_Vascular_Occlusion();
-			var en_ = context.Operators.RetrieveByValueSet<Condition>(em_, null);
-			var eo_ = context.Operators.ListUnion<Condition>(el_, en_);
-			var ep_ = context.Operators.ListUnion<Condition>(ej_, eo_);
-			var eq_ = this.Retrolental_Fibroplasias();
-			var er_ = context.Operators.RetrieveByValueSet<Condition>(eq_, null);
-			var es_ = this.Scleritis();
-			var et_ = context.Operators.RetrieveByValueSet<Condition>(es_, null);
-			var eu_ = context.Operators.ListUnion<Condition>(er_, et_);
-			var ev_ = context.Operators.ListUnion<Condition>(ep_, eu_);
-			var ew_ = this.Separation_of_Retinal_Layers();
-			var ex_ = context.Operators.RetrieveByValueSet<Condition>(ew_, null);
-			var ey_ = this.Traumatic_Cataract();
-			var ez_ = context.Operators.RetrieveByValueSet<Condition>(ey_, null);
-			var fa_ = context.Operators.ListUnion<Condition>(ex_, ez_);
-			var fb_ = context.Operators.ListUnion<Condition>(ev_, fa_);
-			var fc_ = this.Uveitis();
-			var fd_ = context.Operators.RetrieveByValueSet<Condition>(fc_, null);
-			var fe_ = this.Vascular_Disorders_of_Iris_and_Ciliary_Body();
-			var ff_ = context.Operators.RetrieveByValueSet<Condition>(fe_, null);
-			var fg_ = context.Operators.ListUnion<Condition>(fd_, ff_);
-			var fh_ = context.Operators.ListUnion<Condition>(fb_, fg_);
-			var fi_ = this.Visual_Field_Defects();
-			var fj_ = context.Operators.RetrieveByValueSet<Condition>(fi_, null);
-			var fk_ = context.Operators.ListUnion<Condition>(fh_, fj_);
+			CqlValueSet d_ = this.Acute_and_Subacute_Iridocyclitis();
+			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+			CqlValueSet f_ = this.Amblyopia();
+			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
+			IEnumerable<Condition> h_ = context.Operators.ListUnion<Condition>(e_, g_);
+			CqlValueSet i_ = this.Burn_Confined_to_Eye_and_Adnexa();
+			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
+			CqlValueSet k_ = this.Cataract_Secondary_to_Ocular_Disorders();
+			IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, null);
+			IEnumerable<Condition> m_ = context.Operators.ListUnion<Condition>(j_, l_);
+			IEnumerable<Condition> n_ = context.Operators.ListUnion<Condition>(h_, m_);
+			CqlValueSet o_ = this.Cataract_Congenital();
+			IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
+			CqlValueSet q_ = this.Cataract_Mature_or_Hypermature();
+			IEnumerable<Condition> r_ = context.Operators.RetrieveByValueSet<Condition>(q_, null);
+			IEnumerable<Condition> s_ = context.Operators.ListUnion<Condition>(p_, r_);
+			IEnumerable<Condition> t_ = context.Operators.ListUnion<Condition>(n_, s_);
+			CqlValueSet u_ = this.Cataract_Posterior_Polar();
+			IEnumerable<Condition> v_ = context.Operators.RetrieveByValueSet<Condition>(u_, null);
+			CqlValueSet w_ = this.Central_Corneal_Ulcer();
+			IEnumerable<Condition> x_ = context.Operators.RetrieveByValueSet<Condition>(w_, null);
+			IEnumerable<Condition> y_ = context.Operators.ListUnion<Condition>(v_, x_);
+			IEnumerable<Condition> z_ = context.Operators.ListUnion<Condition>(t_, y_);
+			CqlValueSet aa_ = this.Certain_Types_of_Iridocyclitis();
+			IEnumerable<Condition> ab_ = context.Operators.RetrieveByValueSet<Condition>(aa_, null);
+			CqlValueSet ac_ = this.Choroidal_Degenerations();
+			IEnumerable<Condition> ad_ = context.Operators.RetrieveByValueSet<Condition>(ac_, null);
+			IEnumerable<Condition> ae_ = context.Operators.ListUnion<Condition>(ab_, ad_);
+			IEnumerable<Condition> af_ = context.Operators.ListUnion<Condition>(z_, ae_);
+			CqlValueSet ag_ = this.Choroidal_Detachment();
+			IEnumerable<Condition> ah_ = context.Operators.RetrieveByValueSet<Condition>(ag_, null);
+			CqlValueSet ai_ = this.Choroidal_Hemorrhage_and_Rupture();
+			IEnumerable<Condition> aj_ = context.Operators.RetrieveByValueSet<Condition>(ai_, null);
+			IEnumerable<Condition> ak_ = context.Operators.ListUnion<Condition>(ah_, aj_);
+			IEnumerable<Condition> al_ = context.Operators.ListUnion<Condition>(af_, ak_);
+			CqlValueSet am_ = this.Chronic_Iridocyclitis();
+			IEnumerable<Condition> an_ = context.Operators.RetrieveByValueSet<Condition>(am_, null);
+			CqlValueSet ao_ = this.Cloudy_Cornea();
+			IEnumerable<Condition> ap_ = context.Operators.RetrieveByValueSet<Condition>(ao_, null);
+			IEnumerable<Condition> aq_ = context.Operators.ListUnion<Condition>(an_, ap_);
+			IEnumerable<Condition> ar_ = context.Operators.ListUnion<Condition>(al_, aq_);
+			CqlValueSet as_ = this.Corneal_Edema();
+			IEnumerable<Condition> at_ = context.Operators.RetrieveByValueSet<Condition>(as_, null);
+			CqlValueSet au_ = this.Disorders_of_Cornea_Including_Corneal_Opacity();
+			IEnumerable<Condition> av_ = context.Operators.RetrieveByValueSet<Condition>(au_, null);
+			IEnumerable<Condition> aw_ = context.Operators.ListUnion<Condition>(at_, av_);
+			IEnumerable<Condition> ax_ = context.Operators.ListUnion<Condition>(ar_, aw_);
+			CqlValueSet ay_ = this.Degeneration_of_Macula_and_Posterior_Pole();
+			IEnumerable<Condition> az_ = context.Operators.RetrieveByValueSet<Condition>(ay_, null);
+			CqlValueSet ba_ = this.Degenerative_Disorders_of_Globe();
+			IEnumerable<Condition> bb_ = context.Operators.RetrieveByValueSet<Condition>(ba_, null);
+			IEnumerable<Condition> bc_ = context.Operators.ListUnion<Condition>(az_, bb_);
+			IEnumerable<Condition> bd_ = context.Operators.ListUnion<Condition>(ax_, bc_);
+			CqlValueSet be_ = this.Diabetic_Macular_Edema();
+			IEnumerable<Condition> bf_ = context.Operators.RetrieveByValueSet<Condition>(be_, null);
+			CqlValueSet bg_ = this.Diabetic_Retinopathy();
+			IEnumerable<Condition> bh_ = context.Operators.RetrieveByValueSet<Condition>(bg_, null);
+			IEnumerable<Condition> bi_ = context.Operators.ListUnion<Condition>(bf_, bh_);
+			IEnumerable<Condition> bj_ = context.Operators.ListUnion<Condition>(bd_, bi_);
+			CqlValueSet bk_ = this.Disorders_of_Optic_Chiasm();
+			IEnumerable<Condition> bl_ = context.Operators.RetrieveByValueSet<Condition>(bk_, null);
+			CqlValueSet bm_ = this.Disorders_of_Visual_Cortex();
+			IEnumerable<Condition> bn_ = context.Operators.RetrieveByValueSet<Condition>(bm_, null);
+			IEnumerable<Condition> bo_ = context.Operators.ListUnion<Condition>(bl_, bn_);
+			IEnumerable<Condition> bp_ = context.Operators.ListUnion<Condition>(bj_, bo_);
+			CqlValueSet bq_ = this.Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis();
+			IEnumerable<Condition> br_ = context.Operators.RetrieveByValueSet<Condition>(bq_, null);
+			CqlValueSet bs_ = this.Focal_Chorioretinitis_and_Focal_Retinochoroiditis();
+			IEnumerable<Condition> bt_ = context.Operators.RetrieveByValueSet<Condition>(bs_, null);
+			IEnumerable<Condition> bu_ = context.Operators.ListUnion<Condition>(br_, bt_);
+			IEnumerable<Condition> bv_ = context.Operators.ListUnion<Condition>(bp_, bu_);
+			CqlValueSet bw_ = this.Glaucoma();
+			IEnumerable<Condition> bx_ = context.Operators.RetrieveByValueSet<Condition>(bw_, null);
+			CqlValueSet by_ = this.Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes();
+			IEnumerable<Condition> bz_ = context.Operators.RetrieveByValueSet<Condition>(by_, null);
+			IEnumerable<Condition> ca_ = context.Operators.ListUnion<Condition>(bx_, bz_);
+			IEnumerable<Condition> cb_ = context.Operators.ListUnion<Condition>(bv_, ca_);
+			CqlValueSet cc_ = this.Hereditary_Choroidal_Dystrophies();
+			IEnumerable<Condition> cd_ = context.Operators.RetrieveByValueSet<Condition>(cc_, null);
+			CqlValueSet ce_ = this.Hereditary_Corneal_Dystrophies();
+			IEnumerable<Condition> cf_ = context.Operators.RetrieveByValueSet<Condition>(ce_, null);
+			IEnumerable<Condition> cg_ = context.Operators.ListUnion<Condition>(cd_, cf_);
+			IEnumerable<Condition> ch_ = context.Operators.ListUnion<Condition>(cb_, cg_);
+			CqlValueSet ci_ = this.Hereditary_Retinal_Dystrophies();
+			IEnumerable<Condition> cj_ = context.Operators.RetrieveByValueSet<Condition>(ci_, null);
+			CqlValueSet ck_ = this.Hypotony_of_Eye();
+			IEnumerable<Condition> cl_ = context.Operators.RetrieveByValueSet<Condition>(ck_, null);
+			IEnumerable<Condition> cm_ = context.Operators.ListUnion<Condition>(cj_, cl_);
+			IEnumerable<Condition> cn_ = context.Operators.ListUnion<Condition>(ch_, cm_);
+			CqlValueSet co_ = this.Injury_to_Optic_Nerve_and_Pathways();
+			IEnumerable<Condition> cp_ = context.Operators.RetrieveByValueSet<Condition>(co_, null);
+			CqlValueSet cq_ = this.Macular_Scar_of_Posterior_Polar();
+			IEnumerable<Condition> cr_ = context.Operators.RetrieveByValueSet<Condition>(cq_, null);
+			IEnumerable<Condition> cs_ = context.Operators.ListUnion<Condition>(cp_, cr_);
+			IEnumerable<Condition> ct_ = context.Operators.ListUnion<Condition>(cn_, cs_);
+			CqlValueSet cu_ = this.Morgagnian_Cataract();
+			IEnumerable<Condition> cv_ = context.Operators.RetrieveByValueSet<Condition>(cu_, null);
+			CqlValueSet cw_ = this.Nystagmus_and_Other_Irregular_Eye_Movements();
+			IEnumerable<Condition> cx_ = context.Operators.RetrieveByValueSet<Condition>(cw_, null);
+			IEnumerable<Condition> cy_ = context.Operators.ListUnion<Condition>(cv_, cx_);
+			IEnumerable<Condition> cz_ = context.Operators.ListUnion<Condition>(ct_, cy_);
+			CqlValueSet da_ = this.Open_Wound_of_Eyeball();
+			IEnumerable<Condition> db_ = context.Operators.RetrieveByValueSet<Condition>(da_, null);
+			CqlValueSet dc_ = this.Optic_Atrophy();
+			IEnumerable<Condition> dd_ = context.Operators.RetrieveByValueSet<Condition>(dc_, null);
+			IEnumerable<Condition> de_ = context.Operators.ListUnion<Condition>(db_, dd_);
+			IEnumerable<Condition> df_ = context.Operators.ListUnion<Condition>(cz_, de_);
+			CqlValueSet dg_ = this.Optic_Neuritis();
+			IEnumerable<Condition> dh_ = context.Operators.RetrieveByValueSet<Condition>(dg_, null);
+			CqlValueSet di_ = this.Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis();
+			IEnumerable<Condition> dj_ = context.Operators.RetrieveByValueSet<Condition>(di_, null);
+			IEnumerable<Condition> dk_ = context.Operators.ListUnion<Condition>(dh_, dj_);
+			IEnumerable<Condition> dl_ = context.Operators.ListUnion<Condition>(df_, dk_);
+			CqlValueSet dm_ = this.Other_Background_Retinopathy_and_Retinal_Vascular_Changes();
+			IEnumerable<Condition> dn_ = context.Operators.RetrieveByValueSet<Condition>(dm_, null);
+			CqlValueSet do_ = this.Other_Disorders_of_Optic_Nerve();
+			IEnumerable<Condition> dp_ = context.Operators.RetrieveByValueSet<Condition>(do_, null);
+			IEnumerable<Condition> dq_ = context.Operators.ListUnion<Condition>(dn_, dp_);
+			IEnumerable<Condition> dr_ = context.Operators.ListUnion<Condition>(dl_, dq_);
+			CqlValueSet ds_ = this.Other_Endophthalmitis();
+			IEnumerable<Condition> dt_ = context.Operators.RetrieveByValueSet<Condition>(ds_, null);
+			CqlValueSet du_ = this.Other_Proliferative_Retinopathy();
+			IEnumerable<Condition> dv_ = context.Operators.RetrieveByValueSet<Condition>(du_, null);
+			IEnumerable<Condition> dw_ = context.Operators.ListUnion<Condition>(dt_, dv_);
+			IEnumerable<Condition> dx_ = context.Operators.ListUnion<Condition>(dr_, dw_);
+			CqlValueSet dy_ = this.Pathologic_Myopia();
+			IEnumerable<Condition> dz_ = context.Operators.RetrieveByValueSet<Condition>(dy_, null);
+			CqlValueSet ea_ = this.Posterior_Lenticonus();
+			IEnumerable<Condition> eb_ = context.Operators.RetrieveByValueSet<Condition>(ea_, null);
+			IEnumerable<Condition> ec_ = context.Operators.ListUnion<Condition>(dz_, eb_);
+			IEnumerable<Condition> ed_ = context.Operators.ListUnion<Condition>(dx_, ec_);
+			CqlValueSet ee_ = this.Prior_Penetrating_Keratoplasty();
+			IEnumerable<Condition> ef_ = context.Operators.RetrieveByValueSet<Condition>(ee_, null);
+			CqlValueSet eg_ = this.Purulent_Endophthalmitis();
+			IEnumerable<Condition> eh_ = context.Operators.RetrieveByValueSet<Condition>(eg_, null);
+			IEnumerable<Condition> ei_ = context.Operators.ListUnion<Condition>(ef_, eh_);
+			IEnumerable<Condition> ej_ = context.Operators.ListUnion<Condition>(ed_, ei_);
+			CqlValueSet ek_ = this.Retinal_Detachment_with_Retinal_Defect();
+			IEnumerable<Condition> el_ = context.Operators.RetrieveByValueSet<Condition>(ek_, null);
+			CqlValueSet em_ = this.Retinal_Vascular_Occlusion();
+			IEnumerable<Condition> en_ = context.Operators.RetrieveByValueSet<Condition>(em_, null);
+			IEnumerable<Condition> eo_ = context.Operators.ListUnion<Condition>(el_, en_);
+			IEnumerable<Condition> ep_ = context.Operators.ListUnion<Condition>(ej_, eo_);
+			CqlValueSet eq_ = this.Retrolental_Fibroplasias();
+			IEnumerable<Condition> er_ = context.Operators.RetrieveByValueSet<Condition>(eq_, null);
+			CqlValueSet es_ = this.Scleritis();
+			IEnumerable<Condition> et_ = context.Operators.RetrieveByValueSet<Condition>(es_, null);
+			IEnumerable<Condition> eu_ = context.Operators.ListUnion<Condition>(er_, et_);
+			IEnumerable<Condition> ev_ = context.Operators.ListUnion<Condition>(ep_, eu_);
+			CqlValueSet ew_ = this.Separation_of_Retinal_Layers();
+			IEnumerable<Condition> ex_ = context.Operators.RetrieveByValueSet<Condition>(ew_, null);
+			CqlValueSet ey_ = this.Traumatic_Cataract();
+			IEnumerable<Condition> ez_ = context.Operators.RetrieveByValueSet<Condition>(ey_, null);
+			IEnumerable<Condition> fa_ = context.Operators.ListUnion<Condition>(ex_, ez_);
+			IEnumerable<Condition> fb_ = context.Operators.ListUnion<Condition>(ev_, fa_);
+			CqlValueSet fc_ = this.Uveitis();
+			IEnumerable<Condition> fd_ = context.Operators.RetrieveByValueSet<Condition>(fc_, null);
+			CqlValueSet fe_ = this.Vascular_Disorders_of_Iris_and_Ciliary_Body();
+			IEnumerable<Condition> ff_ = context.Operators.RetrieveByValueSet<Condition>(fe_, null);
+			IEnumerable<Condition> fg_ = context.Operators.ListUnion<Condition>(fd_, ff_);
+			IEnumerable<Condition> fh_ = context.Operators.ListUnion<Condition>(fb_, fg_);
+			CqlValueSet fi_ = this.Visual_Field_Defects();
+			IEnumerable<Condition> fj_ = context.Operators.RetrieveByValueSet<Condition>(fi_, null);
+			IEnumerable<Condition> fk_ = context.Operators.ListUnion<Condition>(fh_, fj_);
 			bool? fl_(Condition ComorbidDiagnosis)
 			{
-				var fp_ = QICoreCommon_2_0_000.prevalenceInterval(ComorbidDiagnosis);
-				var fq_ = CataractSurgeryPerformed?.Performed;
-				var fr_ = FHIRHelpers_4_3_000.ToValue(fq_);
-				var fs_ = QICoreCommon_2_0_000.toInterval(fr_);
-				var ft_ = context.Operators.OverlapsBefore(fp_, fs_, null);
-				var fu_ = QICoreCommon_2_0_000.isActive(ComorbidDiagnosis);
-				var fv_ = context.Operators.And(ft_, fu_);
+				CqlInterval<CqlDateTime> fp_ = QICoreCommon_2_0_000.prevalenceInterval(ComorbidDiagnosis);
+				DataType fq_ = CataractSurgeryPerformed?.Performed;
+				object fr_ = FHIRHelpers_4_3_000.ToValue(fq_);
+				CqlInterval<CqlDateTime> fs_ = QICoreCommon_2_0_000.toInterval(fr_);
+				bool? ft_ = context.Operators.OverlapsBefore(fp_, fs_, null);
+				bool? fu_ = QICoreCommon_2_0_000.isActive(ComorbidDiagnosis);
+				bool? fv_ = context.Operators.And(ft_, fu_);
 
 				return fv_;
 			};
-			var fm_ = context.Operators.Where<Condition>(fk_, fl_);
+			IEnumerable<Condition> fm_ = context.Operators.Where<Condition>(fk_, fl_);
 			Procedure fn_(Condition ComorbidDiagnosis) => 
 				CataractSurgeryPerformed;
-			var fo_ = context.Operators.Select<Condition, Procedure>(fm_, fn_);
+			IEnumerable<Procedure> fo_ = context.Operators.Select<Condition, Procedure>(fm_, fn_);
 
 			return fo_;
 		};
-		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
+		IEnumerable<Procedure> c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}
@@ -965,66 +965,66 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private IEnumerable<Procedure> Numerator_Value()
 	{
-		var a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
+		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
 		IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed)
 		{
-			var d_ = this.Best_corrected_visual_acuity__observable_entity_();
-			var e_ = context.Operators.ToList<CqlCode>(d_);
-			var f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
-			var g_ = this.Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart();
-			var h_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
-			var i_ = context.Operators.ListUnion<Observation>(f_, h_);
+			CqlCode d_ = this.Best_corrected_visual_acuity__observable_entity_();
+			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+			CqlValueSet g_ = this.Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart();
+			IEnumerable<Observation> h_ = context.Operators.RetrieveByValueSet<Observation>(g_, null);
+			IEnumerable<Observation> i_ = context.Operators.ListUnion<Observation>(f_, h_);
 			bool? j_(Observation VisualAcuityExamPerformed)
 			{
-				var n_ = VisualAcuityExamPerformed?.Effective;
-				var o_ = FHIRHelpers_4_3_000.ToValue(n_);
-				var p_ = QICoreCommon_2_0_000.toInterval(o_);
-				var q_ = context.Operators.Start(p_);
-				var r_ = CataractSurgeryPerformed?.Performed;
-				var s_ = FHIRHelpers_4_3_000.ToValue(r_);
-				var t_ = QICoreCommon_2_0_000.toInterval(s_);
-				var u_ = context.Operators.End(t_);
-				var w_ = FHIRHelpers_4_3_000.ToValue(r_);
-				var x_ = QICoreCommon_2_0_000.toInterval(w_);
-				var y_ = context.Operators.End(x_);
-				var z_ = context.Operators.Quantity(90m, "days");
-				var aa_ = context.Operators.Add(y_, z_);
-				var ab_ = context.Operators.Interval(u_, aa_, false, true);
-				var ac_ = context.Operators.In<CqlDateTime>(q_, ab_, "day");
-				var ae_ = FHIRHelpers_4_3_000.ToValue(r_);
-				var af_ = QICoreCommon_2_0_000.toInterval(ae_);
-				var ag_ = context.Operators.End(af_);
-				var ah_ = context.Operators.Not((bool?)(ag_ is null));
-				var ai_ = context.Operators.And(ac_, ah_);
-				var aj_ = VisualAcuityExamPerformed?.StatusElement;
-				var ak_ = aj_?.Value;
-				var al_ = context.Operators.Convert<Code<ObservationStatus>>(ak_);
-				var am_ = context.Operators.Convert<string>(al_);
-				var an_ = new string[]
+				DataType n_ = VisualAcuityExamPerformed?.Effective;
+				object o_ = FHIRHelpers_4_3_000.ToValue(n_);
+				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
+				CqlDateTime q_ = context.Operators.Start(p_);
+				DataType r_ = CataractSurgeryPerformed?.Performed;
+				object s_ = FHIRHelpers_4_3_000.ToValue(r_);
+				CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
+				CqlDateTime u_ = context.Operators.End(t_);
+				object w_ = FHIRHelpers_4_3_000.ToValue(r_);
+				CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(w_);
+				CqlDateTime y_ = context.Operators.End(x_);
+				CqlQuantity z_ = context.Operators.Quantity(90m, "days");
+				CqlDateTime aa_ = context.Operators.Add(y_, z_);
+				CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(u_, aa_, false, true);
+				bool? ac_ = context.Operators.In<CqlDateTime>(q_, ab_, "day");
+				object ae_ = FHIRHelpers_4_3_000.ToValue(r_);
+				CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.toInterval(ae_);
+				CqlDateTime ag_ = context.Operators.End(af_);
+				bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
+				bool? ai_ = context.Operators.And(ac_, ah_);
+				Code<ObservationStatus> aj_ = VisualAcuityExamPerformed?.StatusElement;
+				ObservationStatus? ak_ = aj_?.Value;
+				Code<ObservationStatus> al_ = context.Operators.Convert<Code<ObservationStatus>>(ak_);
+				string am_ = context.Operators.Convert<string>(al_);
+				string[] an_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 					"preliminary",
 				};
-				var ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
-				var ap_ = context.Operators.And(ai_, ao_);
-				var aq_ = VisualAcuityExamPerformed?.Value;
-				var ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
-				var as_ = this.Visual_Acuity_20_40_or_Better();
-				var at_ = context.Operators.ConceptInValueSet((ar_ as CqlConcept), as_);
-				var au_ = context.Operators.And(ap_, at_);
+				bool? ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
+				bool? ap_ = context.Operators.And(ai_, ao_);
+				DataType aq_ = VisualAcuityExamPerformed?.Value;
+				object ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
+				CqlValueSet as_ = this.Visual_Acuity_20_40_or_Better();
+				bool? at_ = context.Operators.ConceptInValueSet((ar_ as CqlConcept), as_);
+				bool? au_ = context.Operators.And(ap_, at_);
 
 				return au_;
 			};
-			var k_ = context.Operators.Where<Observation>(i_, j_);
+			IEnumerable<Observation> k_ = context.Operators.Where<Observation>(i_, j_);
 			Procedure l_(Observation VisualAcuityExamPerformed) => 
 				CataractSurgeryPerformed;
-			var m_ = context.Operators.Select<Observation, Procedure>(k_, l_);
+			IEnumerable<Procedure> m_ = context.Operators.Select<Observation, Procedure>(k_, l_);
 
 			return m_;
 		};
-		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
+		IEnumerable<Procedure> c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}
@@ -1035,7 +1035,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -1046,7 +1046,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -1057,7 +1057,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -1068,7 +1068,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}

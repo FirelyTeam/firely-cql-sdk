@@ -104,10 +104,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -118,8 +118,8 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -130,7 +130,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -141,7 +141,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -152,7 +152,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -163,7 +163,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -174,32 +174,34 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(18, 75, true, true);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
-		var i_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
-		var j_ = context.Operators.Exists<Encounter>(i_);
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Diabetes();
-		var m_ = context.Operators.RetrieveByValueSet<Condition>(l_, null);
-		bool? n_(Condition Diabetes)
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.Convert<CqlDate>(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
+		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		IEnumerable<Encounter> k_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
+		bool? l_ = context.Operators.Exists<Encounter>(k_);
+		bool? m_ = context.Operators.And(j_, l_);
+		CqlValueSet n_ = this.Diabetes();
+		IEnumerable<Condition> o_ = context.Operators.RetrieveByValueSet<Condition>(n_, null);
+		bool? p_(Condition Diabetes)
 		{
-			var r_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Diabetes);
-			var s_ = this.Measurement_Period();
-			var t_ = context.Operators.Overlaps(r_, s_, null);
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Diabetes);
+			CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
+			bool? v_ = context.Operators.Overlaps(t_, u_, null);
 
-			return t_;
+			return v_;
 		};
-		var o_ = context.Operators.Where<Condition>(m_, n_);
-		var p_ = context.Operators.Exists<Condition>(o_);
-		var q_ = context.Operators.And(k_, p_);
+		IEnumerable<Condition> q_ = context.Operators.Where<Condition>(o_, p_);
+		bool? r_ = context.Operators.Exists<Condition>(q_);
+		bool? s_ = context.Operators.And(m_, r_);
 
-		return q_;
+		return s_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -208,7 +210,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -219,13 +221,13 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
-		var b_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty();
-		var c_ = context.Operators.Or(a_, b_);
-		var d_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home();
-		var e_ = context.Operators.Or(c_, d_);
-		var f_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
-		var g_ = context.Operators.Or(e_, f_);
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		bool? b_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty();
+		bool? c_ = context.Operators.Or(a_, b_);
+		bool? d_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home();
+		bool? e_ = context.Operators.Or(c_, d_);
+		bool? f_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
+		bool? g_ = context.Operators.Or(e_, f_);
 
 		return g_;
 	}
@@ -236,55 +238,55 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private Observation Most_Recent_HbA1c_Value()
 	{
-		var a_ = this.HbA1c_Laboratory_Test();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = Status_1_6_000.isLaboratoryTestPerformed(b_);
+		CqlValueSet a_ = this.HbA1c_Laboratory_Test();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> c_ = Status_1_6_000.isLaboratoryTestPerformed(b_);
 		bool? d_(Observation RecentHbA1c)
 		{
 			object i_()
 			{
 				bool m_()
 				{
-					var p_ = RecentHbA1c?.Effective;
-					var q_ = FHIRHelpers_4_3_000.ToValue(p_);
-					var r_ = q_ is CqlDateTime;
+					DataType p_ = RecentHbA1c?.Effective;
+					object q_ = FHIRHelpers_4_3_000.ToValue(p_);
+					bool r_ = q_ is CqlDateTime;
 
 					return r_;
 				};
 				bool n_()
 				{
-					var s_ = RecentHbA1c?.Effective;
-					var t_ = FHIRHelpers_4_3_000.ToValue(s_);
-					var u_ = t_ is CqlInterval<CqlDateTime>;
+					DataType s_ = RecentHbA1c?.Effective;
+					object t_ = FHIRHelpers_4_3_000.ToValue(s_);
+					bool u_ = t_ is CqlInterval<CqlDateTime>;
 
 					return u_;
 				};
 				bool o_()
 				{
-					var v_ = RecentHbA1c?.Effective;
-					var w_ = FHIRHelpers_4_3_000.ToValue(v_);
-					var x_ = w_ is CqlDateTime;
+					DataType v_ = RecentHbA1c?.Effective;
+					object w_ = FHIRHelpers_4_3_000.ToValue(v_);
+					bool x_ = w_ is CqlDateTime;
 
 					return x_;
 				};
 				if (m_())
 				{
-					var y_ = RecentHbA1c?.Effective;
-					var z_ = FHIRHelpers_4_3_000.ToValue(y_);
+					DataType y_ = RecentHbA1c?.Effective;
+					object z_ = FHIRHelpers_4_3_000.ToValue(y_);
 
 					return ((z_ as CqlDateTime) as object);
 				}
 				else if (n_())
 				{
-					var aa_ = RecentHbA1c?.Effective;
-					var ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
+					DataType aa_ = RecentHbA1c?.Effective;
+					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
 
 					return ((ab_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (o_())
 				{
-					var ac_ = RecentHbA1c?.Effective;
-					var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+					DataType ac_ = RecentHbA1c?.Effective;
+					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 
 					return ((ad_ as CqlDateTime) as object);
 				}
@@ -293,24 +295,24 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 					return null;
 				}
 			};
-			var j_ = QICoreCommon_2_0_000.Latest(i_());
-			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
+			CqlDateTime j_ = QICoreCommon_2_0_000.Latest(i_());
+			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
+			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
 
 			return l_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
+		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			var ae_ = @this?.Effective;
-			var af_ = FHIRHelpers_4_3_000.ToValue(ae_);
-			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
-			var ah_ = context.Operators.Start(ag_);
+			DataType ae_ = @this?.Effective;
+			object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToInterval(af_);
+			CqlDateTime ah_ = context.Operators.Start(ag_);
 
 			return ah_;
 		};
-		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.Last<Observation>(g_);
+		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		Observation h_ = context.Operators.Last<Observation>(g_);
 
 		return h_;
 	}
@@ -321,12 +323,13 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private bool? Has_Most_Recent_HbA1c_Without_Result_Value()
 	{
-		var a_ = this.Most_Recent_HbA1c();
-		var b_ = context.Operators.Not((bool?)(a_ is null));
-		var d_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
-		var e_ = context.Operators.And(b_, (bool?)(d_ is null));
+		Observation a_ = this.Most_Recent_HbA1c();
+		bool? b_ = context.Operators.Not((bool?)(a_ is null));
+		DataType d_ = a_?.Value;
+		object e_ = FHIRHelpers_4_3_000.ToValue(d_);
+		bool? f_ = context.Operators.And(b_, (bool?)(e_ is null));
 
-		return e_;
+		return f_;
 	}
 
     [CqlDeclaration("Has Most Recent HbA1c Without Result")]
@@ -335,12 +338,13 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private bool? Has_Most_Recent_Elevated_HbA1c_Value()
 	{
-		var a_ = this.Most_Recent_HbA1c();
-		var b_ = FHIRHelpers_4_3_000.ToValue(a_?.Value);
-		var c_ = context.Operators.Quantity(9m, "%");
-		var d_ = context.Operators.Greater((b_ as CqlQuantity), c_);
+		Observation a_ = this.Most_Recent_HbA1c();
+		DataType b_ = a_?.Value;
+		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
+		CqlQuantity d_ = context.Operators.Quantity(9m, "%");
+		bool? e_ = context.Operators.Greater((c_ as CqlQuantity), d_);
 
-		return d_;
+		return e_;
 	}
 
     [CqlDeclaration("Has Most Recent Elevated HbA1c")]
@@ -349,55 +353,55 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private bool? Has_No_Record_Of_HbA1c_Value()
 	{
-		var a_ = this.HbA1c_Laboratory_Test();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = Status_1_6_000.isLaboratoryTestPerformed(b_);
+		CqlValueSet a_ = this.HbA1c_Laboratory_Test();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> c_ = Status_1_6_000.isLaboratoryTestPerformed(b_);
 		bool? d_(Observation NoHbA1c)
 		{
 			object h_()
 			{
 				bool l_()
 				{
-					var o_ = NoHbA1c?.Effective;
-					var p_ = FHIRHelpers_4_3_000.ToValue(o_);
-					var q_ = p_ is CqlDateTime;
+					DataType o_ = NoHbA1c?.Effective;
+					object p_ = FHIRHelpers_4_3_000.ToValue(o_);
+					bool q_ = p_ is CqlDateTime;
 
 					return q_;
 				};
 				bool m_()
 				{
-					var r_ = NoHbA1c?.Effective;
-					var s_ = FHIRHelpers_4_3_000.ToValue(r_);
-					var t_ = s_ is CqlInterval<CqlDateTime>;
+					DataType r_ = NoHbA1c?.Effective;
+					object s_ = FHIRHelpers_4_3_000.ToValue(r_);
+					bool t_ = s_ is CqlInterval<CqlDateTime>;
 
 					return t_;
 				};
 				bool n_()
 				{
-					var u_ = NoHbA1c?.Effective;
-					var v_ = FHIRHelpers_4_3_000.ToValue(u_);
-					var w_ = v_ is CqlDateTime;
+					DataType u_ = NoHbA1c?.Effective;
+					object v_ = FHIRHelpers_4_3_000.ToValue(u_);
+					bool w_ = v_ is CqlDateTime;
 
 					return w_;
 				};
 				if (l_())
 				{
-					var x_ = NoHbA1c?.Effective;
-					var y_ = FHIRHelpers_4_3_000.ToValue(x_);
+					DataType x_ = NoHbA1c?.Effective;
+					object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 
 					return ((y_ as CqlDateTime) as object);
 				}
 				else if (m_())
 				{
-					var z_ = NoHbA1c?.Effective;
-					var aa_ = FHIRHelpers_4_3_000.ToValue(z_);
+					DataType z_ = NoHbA1c?.Effective;
+					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
 					return ((aa_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (n_())
 				{
-					var ab_ = NoHbA1c?.Effective;
-					var ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
+					DataType ab_ = NoHbA1c?.Effective;
+					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
 					return ((ac_ as CqlDateTime) as object);
 				}
@@ -406,15 +410,15 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 					return null;
 				}
 			};
-			var i_ = QICoreCommon_2_0_000.Latest(h_());
-			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
+			CqlDateTime i_ = QICoreCommon_2_0_000.Latest(h_());
+			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
+			bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
-		var f_ = context.Operators.Exists<Observation>(e_);
-		var g_ = context.Operators.Not(f_);
+		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+		bool? f_ = context.Operators.Exists<Observation>(e_);
+		bool? g_ = context.Operators.Not(f_);
 
 		return g_;
 	}
@@ -425,11 +429,11 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Has_Most_Recent_HbA1c_Without_Result();
-		var b_ = this.Has_Most_Recent_Elevated_HbA1c();
-		var c_ = context.Operators.Or(a_, b_);
-		var d_ = this.Has_No_Record_Of_HbA1c();
-		var e_ = context.Operators.Or(c_, d_);
+		bool? a_ = this.Has_Most_Recent_HbA1c_Without_Result();
+		bool? b_ = this.Has_Most_Recent_Elevated_HbA1c();
+		bool? c_ = context.Operators.Or(a_, b_);
+		bool? d_ = this.Has_No_Record_Of_HbA1c();
+		bool? e_ = context.Operators.Or(c_, d_);
 
 		return e_;
 	}

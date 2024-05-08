@@ -65,20 +65,20 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim MedicalClaim)
 		{
-			var c_ = MedicalClaim?.Type;
-			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			var e_ = d_?.codes;
-			var f_ = NCQATerminology_1_0_0.Professional();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
-			var i_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			var j_ = i_?.codes;
-			var k_ = NCQATerminology_1_0_0.Institutional();
-			var l_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
-			var m_ = context.Operators.Or(g_, l_);
+			CodeableConcept c_ = MedicalClaim?.Type;
+			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			CqlCode[] e_ = d_?.codes;
+			CqlCode f_ = NCQATerminology_1_0_0.Professional();
+			bool? g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			CqlConcept i_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			CqlCode[] j_ = i_?.codes;
+			CqlCode k_ = NCQATerminology_1_0_0.Institutional();
+			bool? l_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
+			bool? m_ = context.Operators.Or(g_, l_);
 
 			return m_;
 		};
-		var b_ = context.Operators.Where<Claim>(claim, a_);
+		IEnumerable<Claim> b_ = context.Operators.Where<Claim>(claim, a_);
 
 		return b_;
 	}
@@ -88,15 +88,15 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim PharmacyClaim)
 		{
-			var c_ = PharmacyClaim?.Type;
-			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			var e_ = d_?.codes;
-			var f_ = NCQATerminology_1_0_0.Pharmacy();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			CodeableConcept c_ = PharmacyClaim?.Type;
+			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			CqlCode[] e_ = d_?.codes;
+			CqlCode f_ = NCQATerminology_1_0_0.Pharmacy();
+			bool? g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
 			return g_;
 		};
-		var b_ = context.Operators.Where<Claim>(claim, a_);
+		IEnumerable<Claim> b_ = context.Operators.Where<Claim>(claim, a_);
 
 		return b_;
 	}
@@ -106,20 +106,20 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(ClaimResponse MedicalResponse)
 		{
-			var c_ = MedicalResponse?.Type;
-			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			var e_ = d_?.codes;
-			var f_ = NCQATerminology_1_0_0.Professional();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
-			var i_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			var j_ = i_?.codes;
-			var k_ = NCQATerminology_1_0_0.Institutional();
-			var l_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
-			var m_ = context.Operators.Or(g_, l_);
+			CodeableConcept c_ = MedicalResponse?.Type;
+			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			CqlCode[] e_ = d_?.codes;
+			CqlCode f_ = NCQATerminology_1_0_0.Professional();
+			bool? g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			CqlConcept i_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			CqlCode[] j_ = i_?.codes;
+			CqlCode k_ = NCQATerminology_1_0_0.Institutional();
+			bool? l_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
+			bool? m_ = context.Operators.Or(g_, l_);
 
 			return m_;
 		};
-		var b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
+		IEnumerable<ClaimResponse> b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
 
 		return b_;
 	}
@@ -129,15 +129,15 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(ClaimResponse PharmacyResponse)
 		{
-			var c_ = PharmacyResponse?.Type;
-			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			var e_ = d_?.codes;
-			var f_ = NCQATerminology_1_0_0.Pharmacy();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			CodeableConcept c_ = PharmacyResponse?.Type;
+			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			CqlCode[] e_ = d_?.codes;
+			CqlCode f_ = NCQATerminology_1_0_0.Pharmacy();
+			bool? g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
 			return g_;
 		};
-		var b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
+		IEnumerable<ClaimResponse> b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
 
 		return b_;
 	}
@@ -145,34 +145,34 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Medical Claims With Procedure and POS")]
 	public IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> Medical_Claims_With_Procedure_and_POS(IEnumerable<Claim> claim, IEnumerable<CqlCode> posCodes, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode p)
 		{
-			var k_ = p?.code;
+			string k_ = p?.code;
 
 			return k_;
 		};
-		var c_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, b_);
+		IEnumerable<string> c_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, b_);
 		string d_(CqlCode pos)
 		{
-			var l_ = pos?.code;
+			string l_ = pos?.code;
 
 			return l_;
 		};
-		var e_ = context.Operators.Select<CqlCode, string>(posCodes, d_);
-		var f_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX
+		IEnumerable<string> e_ = context.Operators.Select<CqlCode, string>(posCodes, d_);
+		Tuple_FXYEMgTMOeKcIebiZCTUajHVX f_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX
 		{
 			MedicalClaim = a_,
 			ProceduresAsStrings = c_,
 			POSAsString = e_,
 		};
-		var g_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX[]
+		Tuple_FXYEMgTMOeKcIebiZCTUajHVX[] g_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX[]
 		{
 			f_,
 		};
 		IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> h_(Tuple_FXYEMgTMOeKcIebiZCTUajHVX ClaimWithPosCode)
 		{
-			var m_ = ClaimWithPosCode?.MedicalClaim;
+			IEnumerable<Claim> m_ = ClaimWithPosCode?.MedicalClaim;
 			Tuple_GDUUTAIXZafehWFjcGfNKBcTd n_(Claim ClaimofInterest)
 			{
 				IEnumerable<Claim.ItemComponent> r_()
@@ -183,50 +183,50 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						var x_ = ClaimofInterest?.Item;
+						List<Claim.ItemComponent> x_ = ClaimofInterest?.Item;
 						bool? y_(Claim.ItemComponent ItemOnLine)
 						{
-							var aa_ = ItemOnLine?.ProductOrService;
-							var ab_ = FHIRHelpers_4_0_001.ToConcept(aa_);
-							var ac_ = ab_?.codes;
+							CodeableConcept aa_ = ItemOnLine?.ProductOrService;
+							CqlConcept ab_ = FHIRHelpers_4_0_001.ToConcept(aa_);
+							CqlCode[] ac_ = ab_?.codes;
 							bool? ad_(CqlCode LineCode)
 							{
-								var an_ = LineCode?.code;
-								var ao_ = ClaimWithPosCode?.ProceduresAsStrings;
-								var ap_ = context.Operators.In<string>(an_, ao_);
+								string an_ = LineCode?.code;
+								IEnumerable<string> ao_ = ClaimWithPosCode?.ProceduresAsStrings;
+								bool? ap_ = context.Operators.In<string>(an_, ao_);
 
 								return ap_;
 							};
-							var ae_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ac_, ad_);
-							var af_ = context.Operators.Exists<CqlCode>(ae_);
-							var ag_ = ItemOnLine?.Location;
-							var ah_ = FHIRHelpers_4_0_001.ToConcept((ag_ as CodeableConcept));
-							var ai_ = ah_?.codes;
+							IEnumerable<CqlCode> ae_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ac_, ad_);
+							bool? af_ = context.Operators.Exists<CqlCode>(ae_);
+							DataType ag_ = ItemOnLine?.Location;
+							CqlConcept ah_ = FHIRHelpers_4_0_001.ToConcept((ag_ as CodeableConcept));
+							CqlCode[] ai_ = ah_?.codes;
 							bool? aj_(CqlCode PosCode)
 							{
-								var aq_ = PosCode?.code;
-								var ar_ = ClaimWithPosCode?.POSAsString;
-								var as_ = context.Operators.In<string>(aq_, ar_);
+								string aq_ = PosCode?.code;
+								IEnumerable<string> ar_ = ClaimWithPosCode?.POSAsString;
+								bool? as_ = context.Operators.In<string>(aq_, ar_);
 
 								return as_;
 							};
-							var ak_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ai_, aj_);
-							var al_ = context.Operators.Exists<CqlCode>(ak_);
-							var am_ = context.Operators.And(af_, al_);
+							IEnumerable<CqlCode> ak_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ai_, aj_);
+							bool? al_ = context.Operators.Exists<CqlCode>(ak_);
+							bool? am_ = context.Operators.And(af_, al_);
 
 							return am_;
 						};
-						var z_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)x_, y_);
+						IEnumerable<Claim.ItemComponent> z_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)x_, y_);
 
 						return z_;
 					}
 				};
-				var s_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP
+				Tuple_HSdidNdfHCNCFSUTgBiYLcgXP s_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP
 				{
 					Claim = ClaimofInterest,
 					LineItems = r_(),
 				};
-				var t_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[]
+				Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[] t_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[]
 				{
 					s_,
 				};
@@ -236,38 +236,38 @@ public class NCQAClaims_1_0_0
 					{
 						bool au_()
 						{
-							var av_ = LineItemDefinition?.LineItems;
-							var aw_ = context.Operators.Exists<Claim.ItemComponent>(av_);
+							IEnumerable<Claim.ItemComponent> av_ = LineItemDefinition?.LineItems;
+							bool? aw_ = context.Operators.Exists<Claim.ItemComponent>(av_);
 
 							return (aw_ ?? false);
 						};
 						if (au_())
 						{
-							var ax_ = LineItemDefinition?.Claim;
-							var ay_ = LineItemDefinition?.LineItems;
+							Claim ax_ = LineItemDefinition?.Claim;
+							IEnumerable<Claim.ItemComponent> ay_ = LineItemDefinition?.LineItems;
 							bool? az_(Claim.ItemComponent @this)
 							{
-								var bg_ = @this?.Serviced;
-								var bh_ = context.Operators.Not((bool?)(bg_ is null));
+								DataType bg_ = @this?.Serviced;
+								bool? bh_ = context.Operators.Not((bool?)(bg_ is null));
 
 								return bh_;
 							};
-							var ba_ = context.Operators.Where<Claim.ItemComponent>(ay_, az_);
+							IEnumerable<Claim.ItemComponent> ba_ = context.Operators.Where<Claim.ItemComponent>(ay_, az_);
 							DataType bb_(Claim.ItemComponent @this)
 							{
-								var bi_ = @this?.Serviced;
+								DataType bi_ = @this?.Serviced;
 
 								return bi_;
 							};
-							var bc_ = context.Operators.Select<Claim.ItemComponent, DataType>(ba_, bb_);
+							IEnumerable<DataType> bc_ = context.Operators.Select<Claim.ItemComponent, DataType>(ba_, bb_);
 							CqlInterval<CqlDateTime> bd_(DataType NormalDate)
 							{
-								var bj_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
+								CqlInterval<CqlDateTime> bj_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return bj_;
 							};
-							var be_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(bc_, bd_);
-							var bf_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
+							IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(bc_, bd_);
+							Tuple_GDUUTAIXZafehWFjcGfNKBcTd bf_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
 							{
 								Claim = ax_,
 								ServicePeriod = be_,
@@ -283,24 +283,24 @@ public class NCQAClaims_1_0_0
 
 					return at_();
 				};
-				var v_ = context.Operators.Select<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP>)t_, u_);
-				var w_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(v_);
+				IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> v_ = context.Operators.Select<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP>)t_, u_);
+				Tuple_GDUUTAIXZafehWFjcGfNKBcTd w_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(v_);
 
 				return w_;
 			};
-			var o_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(m_, n_);
+			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> o_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(m_, n_);
 			bool? p_(Tuple_GDUUTAIXZafehWFjcGfNKBcTd FinalList)
 			{
-				var bk_ = context.Operators.Not((bool?)(FinalList is null));
+				bool? bk_ = context.Operators.Not((bool?)(FinalList is null));
 
 				return bk_;
 			};
-			var q_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(o_, p_);
+			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> q_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(o_, p_);
 
 			return q_;
 		};
-		var i_ = context.Operators.Select<Tuple_FXYEMgTMOeKcIebiZCTUajHVX, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_FXYEMgTMOeKcIebiZCTUajHVX>)g_, h_);
-		var j_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(i_);
+		IEnumerable<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>> i_ = context.Operators.Select<Tuple_FXYEMgTMOeKcIebiZCTUajHVX, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_FXYEMgTMOeKcIebiZCTUajHVX>)g_, h_);
+		IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> j_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(i_);
 
 		return j_;
 	}
@@ -308,26 +308,26 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Medical Claims With Procedure in Header or on Line Item")]
 	public IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> Medical_Claims_With_Procedure_in_Header_or_on_Line_Item(IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode p)
 		{
-			var i_ = p?.code;
+			string i_ = p?.code;
 
 			return i_;
 		};
-		var c_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, b_);
-		var d_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX
+		IEnumerable<string> c_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, b_);
+		Tuple_FXYEMgTMOeKcIebiZCTUajHVX d_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX
 		{
 			MedicalClaim = a_,
 			ProceduresAsStrings = c_,
 		};
-		var e_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX[]
+		Tuple_FXYEMgTMOeKcIebiZCTUajHVX[] e_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX[]
 		{
 			d_,
 		};
 		IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> f_(Tuple_FXYEMgTMOeKcIebiZCTUajHVX ClaimWithProcedure)
 		{
-			var j_ = ClaimWithProcedure?.MedicalClaim;
+			IEnumerable<Claim> j_ = ClaimWithProcedure?.MedicalClaim;
 			Tuple_GDUUTAIXZafehWFjcGfNKBcTd k_(Claim ClaimofInterest)
 			{
 				IEnumerable<Claim.ItemComponent> o_()
@@ -338,80 +338,80 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						var u_ = ClaimofInterest?.Item;
+						List<Claim.ItemComponent> u_ = ClaimofInterest?.Item;
 						bool? v_(Claim.ItemComponent ItemOnLine)
 						{
-							var x_ = ItemOnLine?.ProductOrService;
-							var y_ = FHIRHelpers_4_0_001.ToConcept(x_);
-							var z_ = y_?.codes;
+							CodeableConcept x_ = ItemOnLine?.ProductOrService;
+							CqlConcept y_ = FHIRHelpers_4_0_001.ToConcept(x_);
+							CqlCode[] z_ = y_?.codes;
 							bool? aa_(CqlCode LineCode)
 							{
-								var ar_ = LineCode?.code;
-								var as_ = ClaimWithProcedure?.ProceduresAsStrings;
-								var at_ = context.Operators.In<string>(ar_, as_);
+								string ar_ = LineCode?.code;
+								IEnumerable<string> as_ = ClaimWithProcedure?.ProceduresAsStrings;
+								bool? at_ = context.Operators.In<string>(ar_, as_);
 
 								return at_;
 							};
-							var ab_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)z_, aa_);
-							var ac_ = context.Operators.Exists<CqlCode>(ab_);
-							var ad_ = ClaimofInterest?.Procedure;
+							IEnumerable<CqlCode> ab_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)z_, aa_);
+							bool? ac_ = context.Operators.Exists<CqlCode>(ab_);
+							List<Claim.ProcedureComponent> ad_ = ClaimofInterest?.Procedure;
 							bool? ae_(Claim.ProcedureComponent @this)
 							{
-								var au_ = @this?.Procedure;
-								var av_ = context.Operators.Not((bool?)(au_ is null));
+								DataType au_ = @this?.Procedure;
+								bool? av_ = context.Operators.Not((bool?)(au_ is null));
 
 								return av_;
 							};
-							var af_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ad_, ae_);
+							IEnumerable<Claim.ProcedureComponent> af_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ad_, ae_);
 							DataType ag_(Claim.ProcedureComponent @this)
 							{
-								var aw_ = @this?.Procedure;
+								DataType aw_ = @this?.Procedure;
 
 								return aw_;
 							};
-							var ah_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(af_, ag_);
+							IEnumerable<DataType> ah_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(af_, ag_);
 							bool? ai_(DataType @this)
 							{
-								var ax_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-								var ay_ = context.Operators.Not((bool?)(ax_ is null));
+								object ax_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+								bool? ay_ = context.Operators.Not((bool?)(ax_ is null));
 
 								return ay_;
 							};
-							var aj_ = context.Operators.Where<DataType>(ah_, ai_);
+							IEnumerable<DataType> aj_ = context.Operators.Where<DataType>(ah_, ai_);
 							object ak_(DataType @this)
 							{
-								var az_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+								object az_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 								return az_;
 							};
-							var al_ = context.Operators.Select<DataType, object>(aj_, ak_);
-							var am_ = context.Operators.FlattenLateBoundList(al_);
+							IEnumerable<object> al_ = context.Operators.Select<DataType, object>(aj_, ak_);
+							IEnumerable<object> am_ = context.Operators.FlattenLateBoundList(al_);
 							bool? an_(object HeaderCode)
 							{
-								var ba_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-								var bb_ = ba_?.Value;
-								var bc_ = ClaimWithProcedure?.ProceduresAsStrings;
-								var bd_ = context.Operators.In<string>(bb_, bc_);
+								Code ba_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
+								string bb_ = ba_?.Value;
+								IEnumerable<string> bc_ = ClaimWithProcedure?.ProceduresAsStrings;
+								bool? bd_ = context.Operators.In<string>(bb_, bc_);
 
 								return bd_;
 							};
-							var ao_ = context.Operators.Where<object>(am_, an_);
-							var ap_ = context.Operators.Exists<object>(ao_);
-							var aq_ = context.Operators.Or(ac_, ap_);
+							IEnumerable<object> ao_ = context.Operators.Where<object>(am_, an_);
+							bool? ap_ = context.Operators.Exists<object>(ao_);
+							bool? aq_ = context.Operators.Or(ac_, ap_);
 
 							return aq_;
 						};
-						var w_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)u_, v_);
+						IEnumerable<Claim.ItemComponent> w_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)u_, v_);
 
 						return w_;
 					}
 				};
-				var p_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP
+				Tuple_HSdidNdfHCNCFSUTgBiYLcgXP p_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP
 				{
 					Claim = ClaimofInterest,
 					LineItems = o_(),
 				};
-				var q_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[]
+				Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[] q_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[]
 				{
 					p_,
 				};
@@ -421,38 +421,38 @@ public class NCQAClaims_1_0_0
 					{
 						bool bf_()
 						{
-							var bg_ = LineItemDefinition?.LineItems;
-							var bh_ = context.Operators.Exists<Claim.ItemComponent>(bg_);
+							IEnumerable<Claim.ItemComponent> bg_ = LineItemDefinition?.LineItems;
+							bool? bh_ = context.Operators.Exists<Claim.ItemComponent>(bg_);
 
 							return (bh_ ?? false);
 						};
 						if (bf_())
 						{
-							var bi_ = LineItemDefinition?.Claim;
-							var bj_ = LineItemDefinition?.LineItems;
+							Claim bi_ = LineItemDefinition?.Claim;
+							IEnumerable<Claim.ItemComponent> bj_ = LineItemDefinition?.LineItems;
 							bool? bk_(Claim.ItemComponent @this)
 							{
-								var br_ = @this?.Serviced;
-								var bs_ = context.Operators.Not((bool?)(br_ is null));
+								DataType br_ = @this?.Serviced;
+								bool? bs_ = context.Operators.Not((bool?)(br_ is null));
 
 								return bs_;
 							};
-							var bl_ = context.Operators.Where<Claim.ItemComponent>(bj_, bk_);
+							IEnumerable<Claim.ItemComponent> bl_ = context.Operators.Where<Claim.ItemComponent>(bj_, bk_);
 							DataType bm_(Claim.ItemComponent @this)
 							{
-								var bt_ = @this?.Serviced;
+								DataType bt_ = @this?.Serviced;
 
 								return bt_;
 							};
-							var bn_ = context.Operators.Select<Claim.ItemComponent, DataType>(bl_, bm_);
+							IEnumerable<DataType> bn_ = context.Operators.Select<Claim.ItemComponent, DataType>(bl_, bm_);
 							CqlInterval<CqlDateTime> bo_(DataType NormalDate)
 							{
-								var bu_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
+								CqlInterval<CqlDateTime> bu_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return bu_;
 							};
-							var bp_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(bn_, bo_);
-							var bq_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
+							IEnumerable<CqlInterval<CqlDateTime>> bp_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(bn_, bo_);
+							Tuple_GDUUTAIXZafehWFjcGfNKBcTd bq_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
 							{
 								Claim = bi_,
 								ServicePeriod = bp_,
@@ -468,24 +468,24 @@ public class NCQAClaims_1_0_0
 
 					return be_();
 				};
-				var s_ = context.Operators.Select<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP>)q_, r_);
-				var t_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(s_);
+				IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> s_ = context.Operators.Select<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP>)q_, r_);
+				Tuple_GDUUTAIXZafehWFjcGfNKBcTd t_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(s_);
 
 				return t_;
 			};
-			var l_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(j_, k_);
+			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> l_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(j_, k_);
 			bool? m_(Tuple_GDUUTAIXZafehWFjcGfNKBcTd FinalList)
 			{
-				var bv_ = context.Operators.Not((bool?)(FinalList is null));
+				bool? bv_ = context.Operators.Not((bool?)(FinalList is null));
 
 				return bv_;
 			};
-			var n_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(l_, m_);
+			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> n_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.Select<Tuple_FXYEMgTMOeKcIebiZCTUajHVX, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_FXYEMgTMOeKcIebiZCTUajHVX>)e_, f_);
-		var h_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(g_);
+		IEnumerable<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>> g_ = context.Operators.Select<Tuple_FXYEMgTMOeKcIebiZCTUajHVX, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_FXYEMgTMOeKcIebiZCTUajHVX>)e_, f_);
+		IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> h_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(g_);
 
 		return h_;
 	}
@@ -493,20 +493,20 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Medical Claims With Diagnosis")]
 	public Tuple_CWDDWHRXGADEbdaKXCdKbgEfg Medical_Claims_With_Diagnosis(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			var i_ = d?.code;
+			string i_ = d?.code;
 
 			return i_;
 		};
-		var c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
-		var d_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF
+		IEnumerable<string> c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
+		Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF d_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF
 		{
 			MedicalClaim = a_,
 			DiagnosesAsStrings = c_,
 		};
-		var e_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF[]
+		Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF[] e_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF[]
 		{
 			d_,
 		};
@@ -520,65 +520,65 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var p_ = ClaimWithDiagnosis?.MedicalClaim;
+					IEnumerable<Claim> p_ = ClaimWithDiagnosis?.MedicalClaim;
 					bool? q_(Claim DiagnosisLine)
 					{
-						var s_ = DiagnosisLine?.Diagnosis;
+						List<Claim.DiagnosisComponent> s_ = DiagnosisLine?.Diagnosis;
 						bool? t_(Claim.DiagnosisComponent @this)
 						{
-							var af_ = @this?.Diagnosis;
-							var ag_ = context.Operators.Not((bool?)(af_ is null));
+							DataType af_ = @this?.Diagnosis;
+							bool? ag_ = context.Operators.Not((bool?)(af_ is null));
 
 							return ag_;
 						};
-						var u_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
+						IEnumerable<Claim.DiagnosisComponent> u_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
 						DataType v_(Claim.DiagnosisComponent @this)
 						{
-							var ah_ = @this?.Diagnosis;
+							DataType ah_ = @this?.Diagnosis;
 
 							return ah_;
 						};
-						var w_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(u_, v_);
+						IEnumerable<DataType> w_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(u_, v_);
 						bool? x_(DataType @this)
 						{
-							var ai_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-							var aj_ = context.Operators.Not((bool?)(ai_ is null));
+							object ai_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+							bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
 
 							return aj_;
 						};
-						var y_ = context.Operators.Where<DataType>(w_, x_);
+						IEnumerable<DataType> y_ = context.Operators.Where<DataType>(w_, x_);
 						object z_(DataType @this)
 						{
-							var ak_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+							object ak_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 							return ak_;
 						};
-						var aa_ = context.Operators.Select<DataType, object>(y_, z_);
-						var ab_ = context.Operators.FlattenLateBoundList(aa_);
+						IEnumerable<object> aa_ = context.Operators.Select<DataType, object>(y_, z_);
+						IEnumerable<object> ab_ = context.Operators.FlattenLateBoundList(aa_);
 						bool? ac_(object HeaderCode)
 						{
-							var al_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-							var am_ = al_?.Value;
-							var an_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
-							var ao_ = context.Operators.In<string>(am_, an_);
+							Code al_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
+							string am_ = al_?.Value;
+							IEnumerable<string> an_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
+							bool? ao_ = context.Operators.In<string>(am_, an_);
 
 							return ao_;
 						};
-						var ad_ = context.Operators.Where<object>(ab_, ac_);
-						var ae_ = context.Operators.Exists<object>(ad_);
+						IEnumerable<object> ad_ = context.Operators.Where<object>(ab_, ac_);
+						bool? ae_ = context.Operators.Exists<object>(ad_);
 
 						return ae_;
 					};
-					var r_ = context.Operators.Where<Claim>(p_, q_);
+					IEnumerable<Claim> r_ = context.Operators.Where<Claim>(p_, q_);
 
 					return r_;
 				}
 			};
-			var k_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV
+			Tuple_GDVcejYEWXWNHUIODacaMaBhV k_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV
 			{
 				DiagnosisItems = j_(),
 			};
-			var l_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV[]
+			Tuple_GDVcejYEWXWNHUIODacaMaBhV[] l_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV[]
 			{
 				k_,
 			};
@@ -588,39 +588,39 @@ public class NCQAClaims_1_0_0
 				{
 					bool au_()
 					{
-						var av_ = HeaderDefinition?.DiagnosisItems;
-						var aw_ = context.Operators.Exists<Claim>(av_);
+						IEnumerable<Claim> av_ = HeaderDefinition?.DiagnosisItems;
+						bool? aw_ = context.Operators.Exists<Claim>(av_);
 
 						return (aw_ ?? false);
 					};
 					if (au_())
 					{
-						var ax_ = HeaderDefinition?.DiagnosisItems;
+						IEnumerable<Claim> ax_ = HeaderDefinition?.DiagnosisItems;
 						bool? az_(Claim @this)
 						{
-							var bh_ = @this?.Item;
-							var bi_ = context.Operators.Not((bool?)(bh_ is null));
+							List<Claim.ItemComponent> bh_ = @this?.Item;
+							bool? bi_ = context.Operators.Not((bool?)(bh_ is null));
 
 							return bi_;
 						};
-						var ba_ = context.Operators.Where<Claim>(ax_, az_);
+						IEnumerable<Claim> ba_ = context.Operators.Where<Claim>(ax_, az_);
 						List<Claim.ItemComponent> bb_(Claim @this)
 						{
-							var bj_ = @this?.Item;
+							List<Claim.ItemComponent> bj_ = @this?.Item;
 
 							return bj_;
 						};
-						var bc_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(ba_, bb_);
-						var bd_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)bc_);
+						IEnumerable<List<Claim.ItemComponent>> bc_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(ba_, bb_);
+						IEnumerable<Claim.ItemComponent> bd_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)bc_);
 						CqlInterval<CqlDateTime> be_(Claim.ItemComponent NormalDate)
 						{
-							var bk_ = NormalDate?.Serviced;
-							var bl_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bk_);
+							DataType bk_ = NormalDate?.Serviced;
+							CqlInterval<CqlDateTime> bl_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bk_);
 
 							return bl_;
 						};
-						var bf_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bd_, be_);
-						var bg_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg
+						IEnumerable<CqlInterval<CqlDateTime>> bf_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bd_, be_);
+						Tuple_CWDDWHRXGADEbdaKXCdKbgEfg bg_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg
 						{
 							Claim = ax_,
 							ServicePeriod = bf_,
@@ -633,28 +633,28 @@ public class NCQAClaims_1_0_0
 						return null;
 					}
 				};
-				var aq_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg[]
+				Tuple_CWDDWHRXGADEbdaKXCdKbgEfg[] aq_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg[]
 				{
 					ap_(),
 				};
 				bool? ar_(Tuple_CWDDWHRXGADEbdaKXCdKbgEfg FinalList)
 				{
-					var bm_ = context.Operators.Not((bool?)(FinalList is null));
+					bool? bm_ = context.Operators.Not((bool?)(FinalList is null));
 
 					return bm_;
 				};
-				var as_ = context.Operators.Where<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>((IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>)aq_, ar_);
-				var at_ = context.Operators.SingletonFrom<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(as_);
+				IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> as_ = context.Operators.Where<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>((IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>)aq_, ar_);
+				Tuple_CWDDWHRXGADEbdaKXCdKbgEfg at_ = context.Operators.SingletonFrom<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(as_);
 
 				return at_;
 			};
-			var n_ = context.Operators.Select<Tuple_GDVcejYEWXWNHUIODacaMaBhV, Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>((IEnumerable<Tuple_GDVcejYEWXWNHUIODacaMaBhV>)l_, m_);
-			var o_ = context.Operators.SingletonFrom<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(n_);
+			IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> n_ = context.Operators.Select<Tuple_GDVcejYEWXWNHUIODacaMaBhV, Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>((IEnumerable<Tuple_GDVcejYEWXWNHUIODacaMaBhV>)l_, m_);
+			Tuple_CWDDWHRXGADEbdaKXCdKbgEfg o_ = context.Operators.SingletonFrom<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(n_);
 
 			return o_;
 		};
-		var g_ = context.Operators.Select<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF, Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>((IEnumerable<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF>)e_, f_);
-		var h_ = context.Operators.SingletonFrom<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(g_);
+		IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> g_ = context.Operators.Select<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF, Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>((IEnumerable<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF>)e_, f_);
+		Tuple_CWDDWHRXGADEbdaKXCdKbgEfg h_ = context.Operators.SingletonFrom<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(g_);
 
 		return h_;
 	}
@@ -662,94 +662,94 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Pharmacy Claim With Medication")]
 	public IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> Pharmacy_Claim_With_Medication(IEnumerable<Claim> claim, IEnumerable<CqlCode> MedicationCodes)
 	{
-		var a_ = this.Pharmacy_Claims(claim);
+		IEnumerable<Claim> a_ = this.Pharmacy_Claims(claim);
 		string b_(CqlCode p)
 		{
-			var i_ = p?.code;
+			string i_ = p?.code;
 
 			return i_;
 		};
-		var c_ = context.Operators.Select<CqlCode, string>(MedicationCodes, b_);
-		var d_ = new Tuple_FKhUcAPjDECbaDReYbaiLXOHd
+		IEnumerable<string> c_ = context.Operators.Select<CqlCode, string>(MedicationCodes, b_);
+		Tuple_FKhUcAPjDECbaDReYbaiLXOHd d_ = new Tuple_FKhUcAPjDECbaDReYbaiLXOHd
 		{
 			PharmacyClaim = a_,
 			MedicationsAsStrings = c_,
 		};
-		var e_ = new Tuple_FKhUcAPjDECbaDReYbaiLXOHd[]
+		Tuple_FKhUcAPjDECbaDReYbaiLXOHd[] e_ = new Tuple_FKhUcAPjDECbaDReYbaiLXOHd[]
 		{
 			d_,
 		};
 		IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> f_(Tuple_FKhUcAPjDECbaDReYbaiLXOHd ClaimWithMedication)
 		{
-			var j_ = ClaimWithMedication?.PharmacyClaim;
+			IEnumerable<Claim> j_ = ClaimWithMedication?.PharmacyClaim;
 			Tuple_GGLURZZjYLMjhaMLVbjKOcMAY k_(Claim Pharmacy)
 			{
-				var o_ = Pharmacy?.Item;
+				List<Claim.ItemComponent> o_ = Pharmacy?.Item;
 				bool? p_(Claim.ItemComponent ItemOnLine)
 				{
-					var w_ = ItemOnLine?.ProductOrService;
-					var x_ = FHIRHelpers_4_0_001.ToConcept(w_);
-					var y_ = x_?.codes;
+					CodeableConcept w_ = ItemOnLine?.ProductOrService;
+					CqlConcept x_ = FHIRHelpers_4_0_001.ToConcept(w_);
+					CqlCode[] y_ = x_?.codes;
 					bool? z_(CqlCode LineCode)
 					{
-						var ac_ = LineCode?.code;
-						var ad_ = ClaimWithMedication?.MedicationsAsStrings;
-						var ae_ = context.Operators.In<string>(ac_, ad_);
+						string ac_ = LineCode?.code;
+						IEnumerable<string> ad_ = ClaimWithMedication?.MedicationsAsStrings;
+						bool? ae_ = context.Operators.In<string>(ac_, ad_);
 
 						return ae_;
 					};
-					var aa_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)y_, z_);
-					var ab_ = context.Operators.Exists<CqlCode>(aa_);
+					IEnumerable<CqlCode> aa_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)y_, z_);
+					bool? ab_ = context.Operators.Exists<CqlCode>(aa_);
 
 					return ab_;
 				};
-				var q_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)o_, p_);
-				var r_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP
+				IEnumerable<Claim.ItemComponent> q_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)o_, p_);
+				Tuple_HSdidNdfHCNCFSUTgBiYLcgXP r_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP
 				{
 					Claim = Pharmacy,
 					LineItems = q_,
 				};
-				var s_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[]
+				Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[] s_ = new Tuple_HSdidNdfHCNCFSUTgBiYLcgXP[]
 				{
 					r_,
 				};
 				Tuple_GGLURZZjYLMjhaMLVbjKOcMAY t_(Tuple_HSdidNdfHCNCFSUTgBiYLcgXP LineItemDefinition)
 				{
-					var af_ = LineItemDefinition?.Claim;
-					var ag_ = new Claim[]
+					Claim af_ = LineItemDefinition?.Claim;
+					Claim[] ag_ = new Claim[]
 					{
 						af_,
 					};
 					Tuple_GGLURZZjYLMjhaMLVbjKOcMAY ah_(Claim ClaimLines)
 					{
-						var ak_ = ClaimLines?.Item;
+						List<Claim.ItemComponent> ak_ = ClaimLines?.Item;
 						bool? al_(Claim.ItemComponent i)
 						{
-							var au_ = i?.ProductOrService;
-							var av_ = FHIRHelpers_4_0_001.ToConcept(au_);
-							var aw_ = av_?.codes;
+							CodeableConcept au_ = i?.ProductOrService;
+							CqlConcept av_ = FHIRHelpers_4_0_001.ToConcept(au_);
+							CqlCode[] aw_ = av_?.codes;
 							bool? ax_(CqlCode LineCode)
 							{
-								var ba_ = LineCode?.code;
-								var bb_ = ClaimWithMedication?.MedicationsAsStrings;
-								var bc_ = context.Operators.In<string>(ba_, bb_);
+								string ba_ = LineCode?.code;
+								IEnumerable<string> bb_ = ClaimWithMedication?.MedicationsAsStrings;
+								bool? bc_ = context.Operators.In<string>(ba_, bb_);
 
 								return bc_;
 							};
-							var ay_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)aw_, ax_);
-							var az_ = context.Operators.Exists<CqlCode>(ay_);
+							IEnumerable<CqlCode> ay_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)aw_, ax_);
+							bool? az_ = context.Operators.Exists<CqlCode>(ay_);
 
 							return az_;
 						};
-						var am_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ak_, al_);
+						IEnumerable<Claim.ItemComponent> am_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ak_, al_);
 						Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN an_(Claim.ItemComponent i)
 						{
 							CqlInterval<CqlDateTime> bd_()
 							{
 								bool bf_()
 								{
-									var bg_ = i?.Quantity;
-									var bh_ = context.Operators.Not((bool?)(bg_ is null));
+									Quantity bg_ = i?.Quantity;
+									bool? bh_ = context.Operators.Not((bool?)(bg_ is null));
 
 									return (bh_ ?? false);
 								};
@@ -759,68 +759,68 @@ public class NCQAClaims_1_0_0
 									{
 										bool bj_()
 										{
-											var bk_ = i?.Serviced;
-											var bl_ = bk_ is Period;
+											DataType bk_ = i?.Serviced;
+											bool bl_ = bk_ is Period;
 
 											return bl_;
 										};
 										if (bj_())
 										{
-											var bm_ = i?.Serviced;
-											var bn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bm_);
-											var bo_ = context.Operators.Start(bn_);
-											var bq_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bm_);
-											var br_ = context.Operators.Start(bq_);
-											var bs_ = i?.Quantity;
-											var bt_ = bs_?.ValueElement;
-											var bu_ = FHIRHelpers_4_0_001.ToDecimal(bt_);
-											var bv_ = context.Operators.Add(br_, new CqlQuantity(bu_, "day"));
-											var bw_ = context.Operators.Quantity(1m, "day");
-											var bx_ = context.Operators.Subtract(bv_, bw_);
-											var by_ = context.Operators.Interval(bo_, bx_, true, true);
+											DataType bm_ = i?.Serviced;
+											CqlInterval<CqlDateTime> bn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bm_);
+											CqlDateTime bo_ = context.Operators.Start(bn_);
+											CqlInterval<CqlDateTime> bq_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bm_);
+											CqlDateTime br_ = context.Operators.Start(bq_);
+											Quantity bs_ = i?.Quantity;
+											FhirDecimal bt_ = bs_?.ValueElement;
+											decimal? bu_ = FHIRHelpers_4_0_001.ToDecimal(bt_);
+											CqlDateTime bv_ = context.Operators.Add(br_, new CqlQuantity(bu_, "day"));
+											CqlQuantity bw_ = context.Operators.Quantity(1m, "day");
+											CqlDateTime bx_ = context.Operators.Subtract(bv_, bw_);
+											CqlInterval<CqlDateTime> by_ = context.Operators.Interval(bo_, bx_, true, true);
 
 											return by_;
 										}
 										else
 										{
-											var bz_ = i?.Serviced;
-											var ca_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var cc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var cd_ = i?.Quantity;
-											var ce_ = cd_?.ValueElement;
-											var cf_ = FHIRHelpers_4_0_001.ToDecimal(ce_);
-											var cg_ = context.Operators.Add(cc_, new CqlQuantity(cf_, "day"));
-											var ch_ = context.Operators.Quantity(1m, "day");
-											var ci_ = context.Operators.Subtract(cg_, ch_);
-											var cj_ = context.Operators.Interval(ca_, ci_, true, true);
-											var ck_ = cj_?.low;
-											var cl_ = context.Operators.ConvertDateToDateTime(ck_);
-											var cn_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var cp_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var cr_ = cd_?.ValueElement;
-											var cs_ = FHIRHelpers_4_0_001.ToDecimal(cr_);
-											var ct_ = context.Operators.Add(cp_, new CqlQuantity(cs_, "day"));
-											var cv_ = context.Operators.Subtract(ct_, ch_);
-											var cw_ = context.Operators.Interval(cn_, cv_, true, true);
-											var cx_ = cw_?.high;
-											var cy_ = context.Operators.ConvertDateToDateTime(cx_);
-											var da_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var dc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var de_ = cd_?.ValueElement;
-											var df_ = FHIRHelpers_4_0_001.ToDecimal(de_);
-											var dg_ = context.Operators.Add(dc_, new CqlQuantity(df_, "day"));
-											var di_ = context.Operators.Subtract(dg_, ch_);
-											var dj_ = context.Operators.Interval(da_, di_, true, true);
-											var dk_ = dj_?.lowClosed;
-											var dm_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var do_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											var dq_ = cd_?.ValueElement;
-											var dr_ = FHIRHelpers_4_0_001.ToDecimal(dq_);
-											var ds_ = context.Operators.Add(do_, new CqlQuantity(dr_, "day"));
-											var du_ = context.Operators.Subtract(ds_, ch_);
-											var dv_ = context.Operators.Interval(dm_, du_, true, true);
-											var dw_ = dv_?.highClosed;
-											var dx_ = context.Operators.Interval(cl_, cy_, dk_, dw_);
+											DataType bz_ = i?.Serviced;
+											CqlDate ca_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate cc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											Quantity cd_ = i?.Quantity;
+											FhirDecimal ce_ = cd_?.ValueElement;
+											decimal? cf_ = FHIRHelpers_4_0_001.ToDecimal(ce_);
+											CqlDate cg_ = context.Operators.Add(cc_, new CqlQuantity(cf_, "day"));
+											CqlQuantity ch_ = context.Operators.Quantity(1m, "day");
+											CqlDate ci_ = context.Operators.Subtract(cg_, ch_);
+											CqlInterval<CqlDate> cj_ = context.Operators.Interval(ca_, ci_, true, true);
+											CqlDate ck_ = cj_?.low;
+											CqlDateTime cl_ = context.Operators.ConvertDateToDateTime(ck_);
+											CqlDate cn_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate cp_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											FhirDecimal cr_ = cd_?.ValueElement;
+											decimal? cs_ = FHIRHelpers_4_0_001.ToDecimal(cr_);
+											CqlDate ct_ = context.Operators.Add(cp_, new CqlQuantity(cs_, "day"));
+											CqlDate cv_ = context.Operators.Subtract(ct_, ch_);
+											CqlInterval<CqlDate> cw_ = context.Operators.Interval(cn_, cv_, true, true);
+											CqlDate cx_ = cw_?.high;
+											CqlDateTime cy_ = context.Operators.ConvertDateToDateTime(cx_);
+											CqlDate da_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate dc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											FhirDecimal de_ = cd_?.ValueElement;
+											decimal? df_ = FHIRHelpers_4_0_001.ToDecimal(de_);
+											CqlDate dg_ = context.Operators.Add(dc_, new CqlQuantity(df_, "day"));
+											CqlDate di_ = context.Operators.Subtract(dg_, ch_);
+											CqlInterval<CqlDate> dj_ = context.Operators.Interval(da_, di_, true, true);
+											bool? dk_ = dj_?.lowClosed;
+											CqlDate dm_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate do_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											FhirDecimal dq_ = cd_?.ValueElement;
+											decimal? dr_ = FHIRHelpers_4_0_001.ToDecimal(dq_);
+											CqlDate ds_ = context.Operators.Add(do_, new CqlQuantity(dr_, "day"));
+											CqlDate du_ = context.Operators.Subtract(ds_, ch_);
+											CqlInterval<CqlDate> dv_ = context.Operators.Interval(dm_, du_, true, true);
+											bool? dw_ = dv_?.highClosed;
+											CqlInterval<CqlDateTime> dx_ = context.Operators.Interval(cl_, cy_, dk_, dw_);
 
 											return dx_;
 										}
@@ -833,19 +833,19 @@ public class NCQAClaims_1_0_0
 									return null;
 								}
 							};
-							var be_ = new Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN
+							Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN be_ = new Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN
 							{
 								DaysSupplyInterval = bd_(),
 							};
 
 							return be_;
 						};
-						var ao_ = context.Operators.Select<Claim.ItemComponent, Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN>(am_, an_);
-						var ap_ = new Tuple_fQfNOLePNSNdOZROKRAfMQPE
+						IEnumerable<Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN> ao_ = context.Operators.Select<Claim.ItemComponent, Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN>(am_, an_);
+						Tuple_fQfNOLePNSNdOZROKRAfMQPE ap_ = new Tuple_fQfNOLePNSNdOZROKRAfMQPE
 						{
 							CoveredDays = ao_,
 						};
-						var aq_ = new Tuple_fQfNOLePNSNdOZROKRAfMQPE[]
+						Tuple_fQfNOLePNSNdOZROKRAfMQPE[] aq_ = new Tuple_fQfNOLePNSNdOZROKRAfMQPE[]
 						{
 							ap_,
 						};
@@ -855,46 +855,46 @@ public class NCQAClaims_1_0_0
 							{
 								bool dz_()
 								{
-									var ea_ = LineItemDefinition?.LineItems;
-									var eb_ = context.Operators.Exists<Claim.ItemComponent>(ea_);
+									IEnumerable<Claim.ItemComponent> ea_ = LineItemDefinition?.LineItems;
+									bool? eb_ = context.Operators.Exists<Claim.ItemComponent>(ea_);
 
 									return (eb_ ?? false);
 								};
 								if (dz_())
 								{
-									var ec_ = LineItemDefinition?.Claim;
-									var ed_ = LineItemDefinition?.LineItems;
+									Claim ec_ = LineItemDefinition?.Claim;
+									IEnumerable<Claim.ItemComponent> ed_ = LineItemDefinition?.LineItems;
 									bool? ef_(Claim.ItemComponent @this)
 									{
-										var ep_ = @this?.Serviced;
-										var eq_ = context.Operators.Not((bool?)(ep_ is null));
+										DataType ep_ = @this?.Serviced;
+										bool? eq_ = context.Operators.Not((bool?)(ep_ is null));
 
 										return eq_;
 									};
-									var eg_ = context.Operators.Where<Claim.ItemComponent>(ed_, ef_);
+									IEnumerable<Claim.ItemComponent> eg_ = context.Operators.Where<Claim.ItemComponent>(ed_, ef_);
 									DataType eh_(Claim.ItemComponent @this)
 									{
-										var er_ = @this?.Serviced;
+										DataType er_ = @this?.Serviced;
 
 										return er_;
 									};
-									var ei_ = context.Operators.Select<Claim.ItemComponent, DataType>(eg_, eh_);
+									IEnumerable<DataType> ei_ = context.Operators.Select<Claim.ItemComponent, DataType>(eg_, eh_);
 									CqlInterval<CqlDateTime> ej_(DataType NormalDate)
 									{
-										var es_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
+										CqlInterval<CqlDateTime> es_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 										return es_;
 									};
-									var ek_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(ei_, ej_);
-									var el_ = ItemCalculation?.CoveredDays;
+									IEnumerable<CqlInterval<CqlDateTime>> ek_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(ei_, ej_);
+									IEnumerable<Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN> el_ = ItemCalculation?.CoveredDays;
 									CqlInterval<CqlDateTime> em_(Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN d)
 									{
-										var et_ = d?.DaysSupplyInterval;
+										CqlInterval<CqlDateTime> et_ = d?.DaysSupplyInterval;
 
 										return et_;
 									};
-									var en_ = context.Operators.Select<Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN, CqlInterval<CqlDateTime>>(el_, em_);
-									var eo_ = new Tuple_GGLURZZjYLMjhaMLVbjKOcMAY
+									IEnumerable<CqlInterval<CqlDateTime>> en_ = context.Operators.Select<Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN, CqlInterval<CqlDateTime>>(el_, em_);
+									Tuple_GGLURZZjYLMjhaMLVbjKOcMAY eo_ = new Tuple_GGLURZZjYLMjhaMLVbjKOcMAY
 									{
 										Claim = ec_,
 										LineItem = ed_,
@@ -912,34 +912,34 @@ public class NCQAClaims_1_0_0
 
 							return dy_();
 						};
-						var as_ = context.Operators.Select<Tuple_fQfNOLePNSNdOZROKRAfMQPE, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>((IEnumerable<Tuple_fQfNOLePNSNdOZROKRAfMQPE>)aq_, ar_);
-						var at_ = context.Operators.SingletonFrom<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(as_);
+						IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> as_ = context.Operators.Select<Tuple_fQfNOLePNSNdOZROKRAfMQPE, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>((IEnumerable<Tuple_fQfNOLePNSNdOZROKRAfMQPE>)aq_, ar_);
+						Tuple_GGLURZZjYLMjhaMLVbjKOcMAY at_ = context.Operators.SingletonFrom<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(as_);
 
 						return at_;
 					};
-					var ai_ = context.Operators.Select<Claim, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>((IEnumerable<Claim>)ag_, ah_);
-					var aj_ = context.Operators.SingletonFrom<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(ai_);
+					IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> ai_ = context.Operators.Select<Claim, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>((IEnumerable<Claim>)ag_, ah_);
+					Tuple_GGLURZZjYLMjhaMLVbjKOcMAY aj_ = context.Operators.SingletonFrom<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(ai_);
 
 					return aj_;
 				};
-				var u_ = context.Operators.Select<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>((IEnumerable<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP>)s_, t_);
-				var v_ = context.Operators.SingletonFrom<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(u_);
+				IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> u_ = context.Operators.Select<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>((IEnumerable<Tuple_HSdidNdfHCNCFSUTgBiYLcgXP>)s_, t_);
+				Tuple_GGLURZZjYLMjhaMLVbjKOcMAY v_ = context.Operators.SingletonFrom<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(u_);
 
 				return v_;
 			};
-			var l_ = context.Operators.Select<Claim, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(j_, k_);
+			IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> l_ = context.Operators.Select<Claim, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(j_, k_);
 			bool? m_(Tuple_GGLURZZjYLMjhaMLVbjKOcMAY FinalList)
 			{
-				var eu_ = context.Operators.Not((bool?)(FinalList is null));
+				bool? eu_ = context.Operators.Not((bool?)(FinalList is null));
 
 				return eu_;
 			};
-			var n_ = context.Operators.Where<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(l_, m_);
+			IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> n_ = context.Operators.Where<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.Select<Tuple_FKhUcAPjDECbaDReYbaiLXOHd, IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>>((IEnumerable<Tuple_FKhUcAPjDECbaDReYbaiLXOHd>)e_, f_);
-		var h_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>>(g_);
+		IEnumerable<IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>> g_ = context.Operators.Select<Tuple_FKhUcAPjDECbaDReYbaiLXOHd, IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>>((IEnumerable<Tuple_FKhUcAPjDECbaDReYbaiLXOHd>)e_, f_);
+		IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> h_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>>(g_);
 
 		return h_;
 	}
@@ -947,28 +947,28 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Medical Claims With Diagnosis and Procedure")]
 	public IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> Medical_Claims_With_Diagnosis_and_Procedure(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			var k_ = d?.code;
+			string k_ = d?.code;
 
 			return k_;
 		};
-		var c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
+		IEnumerable<string> c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
 		string d_(CqlCode p)
 		{
-			var l_ = p?.code;
+			string l_ = p?.code;
 
 			return l_;
 		};
-		var e_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, d_);
-		var f_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca
+		IEnumerable<string> e_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, d_);
+		Tuple_YMFSFZNbUOGiNXDVNeBOchca f_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca
 		{
 			MedicalClaim = a_,
 			DiagnosesAsStrings = c_,
 			ProceduresAsStrings = e_,
 		};
-		var g_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca[]
+		Tuple_YMFSFZNbUOGiNXDVNeBOchca[] g_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca[]
 		{
 			f_,
 		};
@@ -982,71 +982,71 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var s_ = ClaimWithDiagnosis?.MedicalClaim;
+					IEnumerable<Claim> s_ = ClaimWithDiagnosis?.MedicalClaim;
 					bool? t_(Claim DiagnosisLine)
 					{
-						var v_ = DiagnosisLine?.Diagnosis;
+						List<Claim.DiagnosisComponent> v_ = DiagnosisLine?.Diagnosis;
 						bool? w_(Claim.DiagnosisComponent @this)
 						{
-							var ai_ = @this?.Diagnosis;
-							var aj_ = context.Operators.Not((bool?)(ai_ is null));
+							DataType ai_ = @this?.Diagnosis;
+							bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
 
 							return aj_;
 						};
-						var x_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)v_, w_);
+						IEnumerable<Claim.DiagnosisComponent> x_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)v_, w_);
 						DataType y_(Claim.DiagnosisComponent @this)
 						{
-							var ak_ = @this?.Diagnosis;
+							DataType ak_ = @this?.Diagnosis;
 
 							return ak_;
 						};
-						var z_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(x_, y_);
+						IEnumerable<DataType> z_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(x_, y_);
 						bool? aa_(DataType @this)
 						{
-							var al_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-							var am_ = context.Operators.Not((bool?)(al_ is null));
+							object al_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+							bool? am_ = context.Operators.Not((bool?)(al_ is null));
 
 							return am_;
 						};
-						var ab_ = context.Operators.Where<DataType>(z_, aa_);
+						IEnumerable<DataType> ab_ = context.Operators.Where<DataType>(z_, aa_);
 						object ac_(DataType @this)
 						{
-							var an_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+							object an_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 							return an_;
 						};
-						var ad_ = context.Operators.Select<DataType, object>(ab_, ac_);
-						var ae_ = context.Operators.FlattenLateBoundList(ad_);
+						IEnumerable<object> ad_ = context.Operators.Select<DataType, object>(ab_, ac_);
+						IEnumerable<object> ae_ = context.Operators.FlattenLateBoundList(ad_);
 						bool? af_(object HeaderCode)
 						{
-							var ao_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-							var ap_ = ao_?.Value;
-							var aq_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
-							var ar_ = context.Operators.In<string>(ap_, aq_);
+							Code ao_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
+							string ap_ = ao_?.Value;
+							IEnumerable<string> aq_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
+							bool? ar_ = context.Operators.In<string>(ap_, aq_);
 
 							return ar_;
 						};
-						var ag_ = context.Operators.Where<object>(ae_, af_);
-						var ah_ = context.Operators.Exists<object>(ag_);
+						IEnumerable<object> ag_ = context.Operators.Where<object>(ae_, af_);
+						bool? ah_ = context.Operators.Exists<object>(ag_);
 
 						return ah_;
 					};
-					var u_ = context.Operators.Where<Claim>(s_, t_);
+					IEnumerable<Claim> u_ = context.Operators.Where<Claim>(s_, t_);
 
 					return u_;
 				}
 			};
-			var n_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV
+			Tuple_GDVcejYEWXWNHUIODacaMaBhV n_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV
 			{
 				DiagnosisItems = m_(),
 			};
-			var o_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV[]
+			Tuple_GDVcejYEWXWNHUIODacaMaBhV[] o_ = new Tuple_GDVcejYEWXWNHUIODacaMaBhV[]
 			{
 				n_,
 			};
 			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> p_(Tuple_GDVcejYEWXWNHUIODacaMaBhV ClaimWithProcedure)
 			{
-				var as_ = ClaimWithProcedure?.DiagnosisItems;
+				IEnumerable<Claim> as_ = ClaimWithProcedure?.DiagnosisItems;
 				Tuple_GDUUTAIXZafehWFjcGfNKBcTd at_(Claim ClaimofInterest)
 				{
 					Claim ax_()
@@ -1057,113 +1057,113 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							var bd_ = new Claim[]
+							Claim[] bd_ = new Claim[]
 							{
 								ClaimofInterest,
 							};
 							bool? be_(Claim ItemOnLine)
 							{
-								var bh_ = ItemOnLine?.Procedure;
+								List<Claim.ProcedureComponent> bh_ = ItemOnLine?.Procedure;
 								bool? bi_(Claim.ProcedureComponent @this)
 								{
-									var ci_ = @this?.Procedure;
-									var cj_ = context.Operators.Not((bool?)(ci_ is null));
+									DataType ci_ = @this?.Procedure;
+									bool? cj_ = context.Operators.Not((bool?)(ci_ is null));
 
 									return cj_;
 								};
-								var bj_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)bh_, bi_);
+								IEnumerable<Claim.ProcedureComponent> bj_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)bh_, bi_);
 								DataType bk_(Claim.ProcedureComponent @this)
 								{
-									var ck_ = @this?.Procedure;
+									DataType ck_ = @this?.Procedure;
 
 									return ck_;
 								};
-								var bl_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(bj_, bk_);
+								IEnumerable<DataType> bl_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(bj_, bk_);
 								bool? bm_(DataType @this)
 								{
-									var cl_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-									var cm_ = context.Operators.Not((bool?)(cl_ is null));
+									object cl_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+									bool? cm_ = context.Operators.Not((bool?)(cl_ is null));
 
 									return cm_;
 								};
-								var bn_ = context.Operators.Where<DataType>(bl_, bm_);
+								IEnumerable<DataType> bn_ = context.Operators.Where<DataType>(bl_, bm_);
 								object bo_(DataType @this)
 								{
-									var cn_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+									object cn_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 									return cn_;
 								};
-								var bp_ = context.Operators.Select<DataType, object>(bn_, bo_);
-								var bq_ = context.Operators.FlattenLateBoundList(bp_);
+								IEnumerable<object> bp_ = context.Operators.Select<DataType, object>(bn_, bo_);
+								IEnumerable<object> bq_ = context.Operators.FlattenLateBoundList(bp_);
 								bool? br_(object ProcedureHeaderCode)
 								{
-									var co_ = context.Operators.LateBoundProperty<Code>(ProcedureHeaderCode, "code");
-									var cp_ = co_?.Value;
-									var cq_ = ClaimWithDiagnosis?.ProceduresAsStrings;
-									var cr_ = context.Operators.In<string>(cp_, cq_);
+									Code co_ = context.Operators.LateBoundProperty<Code>(ProcedureHeaderCode, "code");
+									string cp_ = co_?.Value;
+									IEnumerable<string> cq_ = ClaimWithDiagnosis?.ProceduresAsStrings;
+									bool? cr_ = context.Operators.In<string>(cp_, cq_);
 
 									return cr_;
 								};
-								var bs_ = context.Operators.Where<object>(bq_, br_);
-								var bt_ = context.Operators.Exists<object>(bs_);
-								var bu_ = ItemOnLine?.Item;
+								IEnumerable<object> bs_ = context.Operators.Where<object>(bq_, br_);
+								bool? bt_ = context.Operators.Exists<object>(bs_);
+								List<Claim.ItemComponent> bu_ = ItemOnLine?.Item;
 								bool? bv_(Claim.ItemComponent @this)
 								{
-									var cs_ = @this?.ProductOrService;
-									var ct_ = context.Operators.Not((bool?)(cs_ is null));
+									CodeableConcept cs_ = @this?.ProductOrService;
+									bool? ct_ = context.Operators.Not((bool?)(cs_ is null));
 
 									return ct_;
 								};
-								var bw_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bu_, bv_);
+								IEnumerable<Claim.ItemComponent> bw_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bu_, bv_);
 								CodeableConcept bx_(Claim.ItemComponent @this)
 								{
-									var cu_ = @this?.ProductOrService;
+									CodeableConcept cu_ = @this?.ProductOrService;
 
 									return cu_;
 								};
-								var by_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(bw_, bx_);
+								IEnumerable<CodeableConcept> by_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(bw_, bx_);
 								bool? bz_(CodeableConcept @this)
 								{
-									var cv_ = @this?.Coding;
-									var cw_ = context.Operators.Not((bool?)(cv_ is null));
+									List<Coding> cv_ = @this?.Coding;
+									bool? cw_ = context.Operators.Not((bool?)(cv_ is null));
 
 									return cw_;
 								};
-								var ca_ = context.Operators.Where<CodeableConcept>(by_, bz_);
+								IEnumerable<CodeableConcept> ca_ = context.Operators.Where<CodeableConcept>(by_, bz_);
 								List<Coding> cb_(CodeableConcept @this)
 								{
-									var cx_ = @this?.Coding;
+									List<Coding> cx_ = @this?.Coding;
 
 									return cx_;
 								};
-								var cc_ = context.Operators.Select<CodeableConcept, List<Coding>>(ca_, cb_);
-								var cd_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)cc_);
+								IEnumerable<List<Coding>> cc_ = context.Operators.Select<CodeableConcept, List<Coding>>(ca_, cb_);
+								IEnumerable<Coding> cd_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)cc_);
 								bool? ce_(Coding LineCode)
 								{
-									var cy_ = LineCode?.CodeElement;
-									var cz_ = cy_?.Value;
-									var da_ = ClaimWithDiagnosis?.ProceduresAsStrings;
-									var db_ = context.Operators.In<string>(cz_, da_);
+									Code cy_ = LineCode?.CodeElement;
+									string cz_ = cy_?.Value;
+									IEnumerable<string> da_ = ClaimWithDiagnosis?.ProceduresAsStrings;
+									bool? db_ = context.Operators.In<string>(cz_, da_);
 
 									return db_;
 								};
-								var cf_ = context.Operators.Where<Coding>(cd_, ce_);
-								var cg_ = context.Operators.Exists<Coding>(cf_);
-								var ch_ = context.Operators.Or(bt_, cg_);
+								IEnumerable<Coding> cf_ = context.Operators.Where<Coding>(cd_, ce_);
+								bool? cg_ = context.Operators.Exists<Coding>(cf_);
+								bool? ch_ = context.Operators.Or(bt_, cg_);
 
 								return ch_;
 							};
-							var bf_ = context.Operators.Where<Claim>((IEnumerable<Claim>)bd_, be_);
-							var bg_ = context.Operators.SingletonFrom<Claim>(bf_);
+							IEnumerable<Claim> bf_ = context.Operators.Where<Claim>((IEnumerable<Claim>)bd_, be_);
+							Claim bg_ = context.Operators.SingletonFrom<Claim>(bf_);
 
 							return bg_;
 						}
 					};
-					var ay_ = new Tuple_CXESjjTOQIGKICAEMDgcfPdJG
+					Tuple_CXESjjTOQIGKICAEMDgcfPdJG ay_ = new Tuple_CXESjjTOQIGKICAEMDgcfPdJG
 					{
 						ProcedureItems = ax_(),
 					};
-					var az_ = new Tuple_CXESjjTOQIGKICAEMDgcfPdJG[]
+					Tuple_CXESjjTOQIGKICAEMDgcfPdJG[] az_ = new Tuple_CXESjjTOQIGKICAEMDgcfPdJG[]
 					{
 						ay_,
 					};
@@ -1173,24 +1173,24 @@ public class NCQAClaims_1_0_0
 						{
 							bool dd_()
 							{
-								var de_ = HeaderDefinition?.ProcedureItems;
-								var df_ = context.Operators.Not((bool?)(de_ is null));
+								Claim de_ = HeaderDefinition?.ProcedureItems;
+								bool? df_ = context.Operators.Not((bool?)(de_ is null));
 
 								return (df_ ?? false);
 							};
 							if (dd_())
 							{
-								var dg_ = HeaderDefinition?.ProcedureItems;
-								var di_ = dg_?.Item;
+								Claim dg_ = HeaderDefinition?.ProcedureItems;
+								List<Claim.ItemComponent> di_ = dg_?.Item;
 								CqlInterval<CqlDateTime> dj_(Claim.ItemComponent NormalDate)
 								{
-									var dm_ = NormalDate?.Serviced;
-									var dn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(dm_);
+									DataType dm_ = NormalDate?.Serviced;
+									CqlInterval<CqlDateTime> dn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(dm_);
 
 									return dn_;
 								};
-								var dk_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)di_, dj_);
-								var dl_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
+								IEnumerable<CqlInterval<CqlDateTime>> dk_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)di_, dj_);
+								Tuple_GDUUTAIXZafehWFjcGfNKBcTd dl_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
 								{
 									Claim = dg_,
 									ServicePeriod = dk_,
@@ -1206,29 +1206,29 @@ public class NCQAClaims_1_0_0
 
 						return dc_();
 					};
-					var bb_ = context.Operators.Select<Tuple_CXESjjTOQIGKICAEMDgcfPdJG, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_CXESjjTOQIGKICAEMDgcfPdJG>)az_, ba_);
-					var bc_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(bb_);
+					IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> bb_ = context.Operators.Select<Tuple_CXESjjTOQIGKICAEMDgcfPdJG, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_CXESjjTOQIGKICAEMDgcfPdJG>)az_, ba_);
+					Tuple_GDUUTAIXZafehWFjcGfNKBcTd bc_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(bb_);
 
 					return bc_;
 				};
-				var au_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(as_, at_);
+				IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> au_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(as_, at_);
 				bool? av_(Tuple_GDUUTAIXZafehWFjcGfNKBcTd FinalList)
 				{
-					var do_ = context.Operators.Not((bool?)(FinalList is null));
+					bool? do_ = context.Operators.Not((bool?)(FinalList is null));
 
 					return do_;
 				};
-				var aw_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(au_, av_);
+				IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> aw_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(au_, av_);
 
 				return aw_;
 			};
-			var q_ = context.Operators.Select<Tuple_GDVcejYEWXWNHUIODacaMaBhV, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_GDVcejYEWXWNHUIODacaMaBhV>)o_, p_);
-			var r_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(q_);
+			IEnumerable<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>> q_ = context.Operators.Select<Tuple_GDVcejYEWXWNHUIODacaMaBhV, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_GDVcejYEWXWNHUIODacaMaBhV>)o_, p_);
+			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> r_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(q_);
 
 			return r_;
 		};
-		var i_ = context.Operators.Select<Tuple_YMFSFZNbUOGiNXDVNeBOchca, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_YMFSFZNbUOGiNXDVNeBOchca>)g_, h_);
-		var j_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(i_);
+		IEnumerable<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>> i_ = context.Operators.Select<Tuple_YMFSFZNbUOGiNXDVNeBOchca, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_YMFSFZNbUOGiNXDVNeBOchca>)g_, h_);
+		IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> j_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(i_);
 
 		return j_;
 	}
@@ -1236,34 +1236,34 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Medical Claims With Principal Diagnosis and Procedure")]
 	public IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> Medical_Claims_With_Principal_Diagnosis_and_Procedure(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			var k_ = d?.code;
+			string k_ = d?.code;
 
 			return k_;
 		};
-		var c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
+		IEnumerable<string> c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
 		string d_(CqlCode p)
 		{
-			var l_ = p?.code;
+			string l_ = p?.code;
 
 			return l_;
 		};
-		var e_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, d_);
-		var f_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca
+		IEnumerable<string> e_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, d_);
+		Tuple_YMFSFZNbUOGiNXDVNeBOchca f_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca
 		{
 			MedicalClaim = a_,
 			DiagnosesAsStrings = c_,
 			ProceduresAsStrings = e_,
 		};
-		var g_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca[]
+		Tuple_YMFSFZNbUOGiNXDVNeBOchca[] g_ = new Tuple_YMFSFZNbUOGiNXDVNeBOchca[]
 		{
 			f_,
 		};
 		IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> h_(Tuple_YMFSFZNbUOGiNXDVNeBOchca ClaimWithProcedure)
 		{
-			var m_ = ClaimWithProcedure?.MedicalClaim;
+			IEnumerable<Claim> m_ = ClaimWithProcedure?.MedicalClaim;
 			Tuple_GDUUTAIXZafehWFjcGfNKBcTd n_(Claim ClaimofInterest)
 			{
 				Claim r_()
@@ -1274,127 +1274,127 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						var x_ = new Claim[]
+						Claim[] x_ = new Claim[]
 						{
 							ClaimofInterest,
 						};
 						bool? y_(Claim ItemOnLine)
 						{
-							var ab_ = ItemOnLine?.Item;
+							List<Claim.ItemComponent> ab_ = ItemOnLine?.Item;
 							bool? ac_(Claim.ItemComponent @this)
 							{
-								var bc_ = @this?.ProductOrService;
-								var bd_ = context.Operators.Not((bool?)(bc_ is null));
+								CodeableConcept bc_ = @this?.ProductOrService;
+								bool? bd_ = context.Operators.Not((bool?)(bc_ is null));
 
 								return bd_;
 							};
-							var ad_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ab_, ac_);
+							IEnumerable<Claim.ItemComponent> ad_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ab_, ac_);
 							CodeableConcept ae_(Claim.ItemComponent @this)
 							{
-								var be_ = @this?.ProductOrService;
+								CodeableConcept be_ = @this?.ProductOrService;
 
 								return be_;
 							};
-							var af_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(ad_, ae_);
+							IEnumerable<CodeableConcept> af_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(ad_, ae_);
 							bool? ag_(CodeableConcept @this)
 							{
-								var bf_ = @this?.Coding;
-								var bg_ = context.Operators.Not((bool?)(bf_ is null));
+								List<Coding> bf_ = @this?.Coding;
+								bool? bg_ = context.Operators.Not((bool?)(bf_ is null));
 
 								return bg_;
 							};
-							var ah_ = context.Operators.Where<CodeableConcept>(af_, ag_);
+							IEnumerable<CodeableConcept> ah_ = context.Operators.Where<CodeableConcept>(af_, ag_);
 							List<Coding> ai_(CodeableConcept @this)
 							{
-								var bh_ = @this?.Coding;
+								List<Coding> bh_ = @this?.Coding;
 
 								return bh_;
 							};
-							var aj_ = context.Operators.Select<CodeableConcept, List<Coding>>(ah_, ai_);
-							var ak_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)aj_);
+							IEnumerable<List<Coding>> aj_ = context.Operators.Select<CodeableConcept, List<Coding>>(ah_, ai_);
+							IEnumerable<Coding> ak_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)aj_);
 							bool? al_(Coding LineCode)
 							{
-								var bi_ = LineCode?.CodeElement;
-								var bj_ = bi_?.Value;
-								var bk_ = ClaimWithProcedure?.ProceduresAsStrings;
-								var bl_ = context.Operators.In<string>(bj_, bk_);
+								Code bi_ = LineCode?.CodeElement;
+								string bj_ = bi_?.Value;
+								IEnumerable<string> bk_ = ClaimWithProcedure?.ProceduresAsStrings;
+								bool? bl_ = context.Operators.In<string>(bj_, bk_);
 
 								return bl_;
 							};
-							var am_ = context.Operators.Where<Coding>(ak_, al_);
-							var an_ = context.Operators.Exists<Coding>(am_);
-							var ao_ = ItemOnLine?.Procedure;
+							IEnumerable<Coding> am_ = context.Operators.Where<Coding>(ak_, al_);
+							bool? an_ = context.Operators.Exists<Coding>(am_);
+							List<Claim.ProcedureComponent> ao_ = ItemOnLine?.Procedure;
 							bool? ap_(Claim.ProcedureComponent @this)
 							{
-								var bm_ = @this?.Procedure;
-								var bn_ = context.Operators.Not((bool?)(bm_ is null));
+								DataType bm_ = @this?.Procedure;
+								bool? bn_ = context.Operators.Not((bool?)(bm_ is null));
 
 								return bn_;
 							};
-							var aq_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ao_, ap_);
+							IEnumerable<Claim.ProcedureComponent> aq_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ao_, ap_);
 							DataType ar_(Claim.ProcedureComponent @this)
 							{
-								var bo_ = @this?.Procedure;
+								DataType bo_ = @this?.Procedure;
 
 								return bo_;
 							};
-							var as_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(aq_, ar_);
+							IEnumerable<DataType> as_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(aq_, ar_);
 							bool? at_(DataType @this)
 							{
-								var bp_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-								var bq_ = context.Operators.Not((bool?)(bp_ is null));
+								object bp_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+								bool? bq_ = context.Operators.Not((bool?)(bp_ is null));
 
 								return bq_;
 							};
-							var au_ = context.Operators.Where<DataType>(as_, at_);
+							IEnumerable<DataType> au_ = context.Operators.Where<DataType>(as_, at_);
 							object av_(DataType @this)
 							{
-								var br_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+								object br_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 								return br_;
 							};
-							var aw_ = context.Operators.Select<DataType, object>(au_, av_);
-							var ax_ = context.Operators.FlattenLateBoundList(aw_);
+							IEnumerable<object> aw_ = context.Operators.Select<DataType, object>(au_, av_);
+							IEnumerable<object> ax_ = context.Operators.FlattenLateBoundList(aw_);
 							bool? ay_(object HeaderCode)
 							{
-								var bs_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-								var bt_ = bs_?.Value;
-								var bu_ = ClaimWithProcedure?.ProceduresAsStrings;
-								var bv_ = context.Operators.In<string>(bt_, bu_);
+								Code bs_ = context.Operators.LateBoundProperty<Code>(HeaderCode, "code");
+								string bt_ = bs_?.Value;
+								IEnumerable<string> bu_ = ClaimWithProcedure?.ProceduresAsStrings;
+								bool? bv_ = context.Operators.In<string>(bt_, bu_);
 
 								return bv_;
 							};
-							var az_ = context.Operators.Where<object>(ax_, ay_);
-							var ba_ = context.Operators.Exists<object>(az_);
-							var bb_ = context.Operators.Or(an_, ba_);
+							IEnumerable<object> az_ = context.Operators.Where<object>(ax_, ay_);
+							bool? ba_ = context.Operators.Exists<object>(az_);
+							bool? bb_ = context.Operators.Or(an_, ba_);
 
 							return bb_;
 						};
-						var z_ = context.Operators.Where<Claim>((IEnumerable<Claim>)x_, y_);
-						var aa_ = context.Operators.SingletonFrom<Claim>(z_);
+						IEnumerable<Claim> z_ = context.Operators.Where<Claim>((IEnumerable<Claim>)x_, y_);
+						Claim aa_ = context.Operators.SingletonFrom<Claim>(z_);
 
 						return aa_;
 					}
 				};
-				var s_ = new Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX
+				Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX s_ = new Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX
 				{
 					Claim = ClaimofInterest,
 					ProcedureItems = r_(),
 				};
-				var t_ = new Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX[]
+				Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX[] t_ = new Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX[]
 				{
 					s_,
 				};
 				Tuple_GDUUTAIXZafehWFjcGfNKBcTd u_(Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX DiagnosisCheck)
 				{
-					var bw_ = DiagnosisCheck?.ProcedureItems;
-					var bx_ = new Claim[]
+					Claim bw_ = DiagnosisCheck?.ProcedureItems;
+					Claim[] bx_ = new Claim[]
 					{
 						bw_,
 					};
 					Tuple_GDUUTAIXZafehWFjcGfNKBcTd by_(Claim ClaimforDiagnosis)
 					{
-						var cb_ = ClaimforDiagnosis?.Item;
+						List<Claim.ItemComponent> cb_ = ClaimforDiagnosis?.Item;
 						Claim cc_()
 						{
 							if ((ClaimforDiagnosis is null))
@@ -1403,53 +1403,53 @@ public class NCQAClaims_1_0_0
 							}
 							else
 							{
-								var ci_ = new Claim[]
+								Claim[] ci_ = new Claim[]
 								{
 									ClaimforDiagnosis,
 								};
 								bool? cj_(Claim RightClaim)
 								{
-									var cm_ = RightClaim?.Diagnosis;
+									List<Claim.DiagnosisComponent> cm_ = RightClaim?.Diagnosis;
 									bool? cn_(Claim.DiagnosisComponent RightDiagnosis)
 									{
-										var cq_ = RightDiagnosis?.SequenceElement;
-										var cr_ = context.Operators.Convert<Integer>(cq_);
-										var cs_ = FHIRHelpers_4_0_001.ToInteger(cr_);
-										var ct_ = context.Operators.Equal(cs_, 1);
-										var cu_ = RightDiagnosis?.Diagnosis;
-										var cv_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(cu_, "coding");
+										PositiveInt cq_ = RightDiagnosis?.SequenceElement;
+										Integer cr_ = context.Operators.Convert<Integer>(cq_);
+										int? cs_ = FHIRHelpers_4_0_001.ToInteger(cr_);
+										bool? ct_ = context.Operators.Equal(cs_, 1);
+										DataType cu_ = RightDiagnosis?.Diagnosis;
+										IEnumerable<Coding> cv_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(cu_, "coding");
 										bool? cw_(Coding DiagnosisCode)
 										{
-											var da_ = DiagnosisCode?.CodeElement;
-											var db_ = da_?.Value;
-											var dc_ = ClaimWithProcedure?.DiagnosesAsStrings;
-											var dd_ = context.Operators.In<string>(db_, dc_);
+											Code da_ = DiagnosisCode?.CodeElement;
+											string db_ = da_?.Value;
+											IEnumerable<string> dc_ = ClaimWithProcedure?.DiagnosesAsStrings;
+											bool? dd_ = context.Operators.In<string>(db_, dc_);
 
 											return dd_;
 										};
-										var cx_ = context.Operators.Where<Coding>(cv_, cw_);
-										var cy_ = context.Operators.Exists<Coding>(cx_);
-										var cz_ = context.Operators.And(ct_, cy_);
+										IEnumerable<Coding> cx_ = context.Operators.Where<Coding>(cv_, cw_);
+										bool? cy_ = context.Operators.Exists<Coding>(cx_);
+										bool? cz_ = context.Operators.And(ct_, cy_);
 
 										return cz_;
 									};
-									var co_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)cm_, cn_);
-									var cp_ = context.Operators.Exists<Claim.DiagnosisComponent>(co_);
+									IEnumerable<Claim.DiagnosisComponent> co_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)cm_, cn_);
+									bool? cp_ = context.Operators.Exists<Claim.DiagnosisComponent>(co_);
 
 									return cp_;
 								};
-								var ck_ = context.Operators.Where<Claim>((IEnumerable<Claim>)ci_, cj_);
-								var cl_ = context.Operators.SingletonFrom<Claim>(ck_);
+								IEnumerable<Claim> ck_ = context.Operators.Where<Claim>((IEnumerable<Claim>)ci_, cj_);
+								Claim cl_ = context.Operators.SingletonFrom<Claim>(ck_);
 
 								return cl_;
 							}
 						};
-						var cd_ = new Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA
+						Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA cd_ = new Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA
 						{
 							Procedure = (IEnumerable<Claim.ItemComponent>)cb_,
 							LineItems = cc_(),
 						};
-						var ce_ = new Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA[]
+						Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA[] ce_ = new Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA[]
 						{
 							cd_,
 						};
@@ -1459,26 +1459,26 @@ public class NCQAClaims_1_0_0
 							{
 								bool df_()
 								{
-									var dg_ = context.Operators.Not((bool?)(LineItemDefinition is null));
-									var dh_ = LineItemDefinition?.LineItems;
-									var di_ = context.Operators.Not((bool?)(dh_ is null));
-									var dj_ = context.Operators.And(dg_, di_);
+									bool? dg_ = context.Operators.Not((bool?)(LineItemDefinition is null));
+									Claim dh_ = LineItemDefinition?.LineItems;
+									bool? di_ = context.Operators.Not((bool?)(dh_ is null));
+									bool? dj_ = context.Operators.And(dg_, di_);
 
 									return (dj_ ?? false);
 								};
 								if (df_())
 								{
-									var dk_ = LineItemDefinition?.LineItems;
-									var dm_ = dk_?.Item;
+									Claim dk_ = LineItemDefinition?.LineItems;
+									List<Claim.ItemComponent> dm_ = dk_?.Item;
 									CqlInterval<CqlDateTime> dn_(Claim.ItemComponent NormalDate)
 									{
-										var dq_ = NormalDate?.Serviced;
-										var dr_ = NCQAFHIRBase_1_0_0.Normalize_Interval(dq_);
+										DataType dq_ = NormalDate?.Serviced;
+										CqlInterval<CqlDateTime> dr_ = NCQAFHIRBase_1_0_0.Normalize_Interval(dq_);
 
 										return dr_;
 									};
-									var do_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)dm_, dn_);
-									var dp_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
+									IEnumerable<CqlInterval<CqlDateTime>> do_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)dm_, dn_);
+									Tuple_GDUUTAIXZafehWFjcGfNKBcTd dp_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
 									{
 										Claim = dk_,
 										ServicePeriod = do_,
@@ -1494,34 +1494,34 @@ public class NCQAClaims_1_0_0
 
 							return de_();
 						};
-						var cg_ = context.Operators.Select<Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA>)ce_, cf_);
-						var ch_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(cg_);
+						IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> cg_ = context.Operators.Select<Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_GQgIaRFaPGOSKbMdfSGVEWcNA>)ce_, cf_);
+						Tuple_GDUUTAIXZafehWFjcGfNKBcTd ch_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(cg_);
 
 						return ch_;
 					};
-					var bz_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Claim>)bx_, by_);
-					var ca_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(bz_);
+					IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> bz_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Claim>)bx_, by_);
+					Tuple_GDUUTAIXZafehWFjcGfNKBcTd ca_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(bz_);
 
 					return ca_;
 				};
-				var v_ = context.Operators.Select<Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX>)t_, u_);
-				var w_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(v_);
+				IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> v_ = context.Operators.Select<Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>((IEnumerable<Tuple_FYaKYiIDIQCIRBfhZCGRDYQLX>)t_, u_);
+				Tuple_GDUUTAIXZafehWFjcGfNKBcTd w_ = context.Operators.SingletonFrom<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(v_);
 
 				return w_;
 			};
-			var o_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(m_, n_);
+			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> o_ = context.Operators.Select<Claim, Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(m_, n_);
 			bool? p_(Tuple_GDUUTAIXZafehWFjcGfNKBcTd FinalList)
 			{
-				var ds_ = context.Operators.Not((bool?)(FinalList is null));
+				bool? ds_ = context.Operators.Not((bool?)(FinalList is null));
 
 				return ds_;
 			};
-			var q_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(o_, p_);
+			IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> q_ = context.Operators.Where<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>(o_, p_);
 
 			return q_;
 		};
-		var i_ = context.Operators.Select<Tuple_YMFSFZNbUOGiNXDVNeBOchca, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_YMFSFZNbUOGiNXDVNeBOchca>)g_, h_);
-		var j_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(i_);
+		IEnumerable<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>> i_ = context.Operators.Select<Tuple_YMFSFZNbUOGiNXDVNeBOchca, IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>((IEnumerable<Tuple_YMFSFZNbUOGiNXDVNeBOchca>)g_, h_);
+		IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd> j_ = context.Operators.SingletonFrom<IEnumerable<Tuple_GDUUTAIXZafehWFjcGfNKBcTd>>(i_);
 
 		return j_;
 	}
@@ -1529,20 +1529,20 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Medical Claims With Principal Diagnosis")]
 	public IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> Medical_Claims_With_Principal_Diagnosis(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			var i_ = d?.code;
+			string i_ = d?.code;
 
 			return i_;
 		};
-		var c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
-		var d_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF
+		IEnumerable<string> c_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
+		Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF d_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF
 		{
 			MedicalClaim = a_,
 			DiagnosesAsStrings = c_,
 		};
-		var e_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF[]
+		Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF[] e_ = new Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF[]
 		{
 			d_,
 		};
@@ -1556,86 +1556,86 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var p_ = ClaimWithDiagnosis?.MedicalClaim;
+					IEnumerable<Claim> p_ = ClaimWithDiagnosis?.MedicalClaim;
 					bool? q_(Claim RightClaim)
 					{
-						var s_ = RightClaim?.Diagnosis;
+						List<Claim.DiagnosisComponent> s_ = RightClaim?.Diagnosis;
 						bool? t_(Claim.DiagnosisComponent RightDiagnosis)
 						{
-							var w_ = RightDiagnosis?.SequenceElement;
-							var x_ = context.Operators.Convert<Integer>(w_);
-							var y_ = FHIRHelpers_4_0_001.ToInteger(x_);
-							var z_ = context.Operators.Equal(y_, 1);
-							var aa_ = RightDiagnosis?.Diagnosis;
-							var ab_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(aa_, "coding");
+							PositiveInt w_ = RightDiagnosis?.SequenceElement;
+							Integer x_ = context.Operators.Convert<Integer>(w_);
+							int? y_ = FHIRHelpers_4_0_001.ToInteger(x_);
+							bool? z_ = context.Operators.Equal(y_, 1);
+							DataType aa_ = RightDiagnosis?.Diagnosis;
+							IEnumerable<Coding> ab_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(aa_, "coding");
 							bool? ac_(Coding DiagnosisCode)
 							{
-								var ag_ = DiagnosisCode?.CodeElement;
-								var ah_ = ag_?.Value;
-								var ai_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
-								var aj_ = context.Operators.In<string>(ah_, ai_);
+								Code ag_ = DiagnosisCode?.CodeElement;
+								string ah_ = ag_?.Value;
+								IEnumerable<string> ai_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
+								bool? aj_ = context.Operators.In<string>(ah_, ai_);
 
 								return aj_;
 							};
-							var ad_ = context.Operators.Where<Coding>(ab_, ac_);
-							var ae_ = context.Operators.Exists<Coding>(ad_);
-							var af_ = context.Operators.And(z_, ae_);
+							IEnumerable<Coding> ad_ = context.Operators.Where<Coding>(ab_, ac_);
+							bool? ae_ = context.Operators.Exists<Coding>(ad_);
+							bool? af_ = context.Operators.And(z_, ae_);
 
 							return af_;
 						};
-						var u_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
-						var v_ = context.Operators.Exists<Claim.DiagnosisComponent>(u_);
+						IEnumerable<Claim.DiagnosisComponent> u_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
+						bool? v_ = context.Operators.Exists<Claim.DiagnosisComponent>(u_);
 
 						return v_;
 					};
-					var r_ = context.Operators.Where<Claim>(p_, q_);
+					IEnumerable<Claim> r_ = context.Operators.Where<Claim>(p_, q_);
 
 					return r_;
 				}
 			};
-			var k_ = new Tuple_DBEDLLOihLKGPWLHVWXRKfGdL
+			Tuple_DBEDLLOihLKGPWLHVWXRKfGdL k_ = new Tuple_DBEDLLOihLKGPWLHVWXRKfGdL
 			{
 				LineItems = j_(),
 			};
-			var l_ = new Tuple_DBEDLLOihLKGPWLHVWXRKfGdL[]
+			Tuple_DBEDLLOihLKGPWLHVWXRKfGdL[] l_ = new Tuple_DBEDLLOihLKGPWLHVWXRKfGdL[]
 			{
 				k_,
 			};
 			IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> m_(Tuple_DBEDLLOihLKGPWLHVWXRKfGdL LineItemDefinition)
 			{
-				var ak_ = LineItemDefinition?.LineItems;
+				IEnumerable<Claim> ak_ = LineItemDefinition?.LineItems;
 				Tuple_CWDDWHRXGADEbdaKXCdKbgEfg al_(Claim ClaimWithDiagnosis)
 				{
 					Tuple_CWDDWHRXGADEbdaKXCdKbgEfg ap_()
 					{
 						if ((context.Operators.Not((bool?)(ClaimWithDiagnosis is null)) ?? false))
 						{
-							var aq_ = LineItemDefinition?.LineItems;
+							IEnumerable<Claim> aq_ = LineItemDefinition?.LineItems;
 							bool? as_(Claim @this)
 							{
-								var ba_ = @this?.Item;
-								var bb_ = context.Operators.Not((bool?)(ba_ is null));
+								List<Claim.ItemComponent> ba_ = @this?.Item;
+								bool? bb_ = context.Operators.Not((bool?)(ba_ is null));
 
 								return bb_;
 							};
-							var at_ = context.Operators.Where<Claim>(aq_, as_);
+							IEnumerable<Claim> at_ = context.Operators.Where<Claim>(aq_, as_);
 							List<Claim.ItemComponent> au_(Claim @this)
 							{
-								var bc_ = @this?.Item;
+								List<Claim.ItemComponent> bc_ = @this?.Item;
 
 								return bc_;
 							};
-							var av_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(at_, au_);
-							var aw_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)av_);
+							IEnumerable<List<Claim.ItemComponent>> av_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(at_, au_);
+							IEnumerable<Claim.ItemComponent> aw_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)av_);
 							CqlInterval<CqlDateTime> ax_(Claim.ItemComponent NormalDate)
 							{
-								var bd_ = NormalDate?.Serviced;
-								var be_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bd_);
+								DataType bd_ = NormalDate?.Serviced;
+								CqlInterval<CqlDateTime> be_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bd_);
 
 								return be_;
 							};
-							var ay_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(aw_, ax_);
-							var az_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg
+							IEnumerable<CqlInterval<CqlDateTime>> ay_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(aw_, ax_);
+							Tuple_CWDDWHRXGADEbdaKXCdKbgEfg az_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg
 							{
 								Claim = aq_,
 								ServicePeriod = ay_,
@@ -1651,24 +1651,24 @@ public class NCQAClaims_1_0_0
 
 					return ap_();
 				};
-				var am_ = context.Operators.Select<Claim, Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(ak_, al_);
+				IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> am_ = context.Operators.Select<Claim, Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(ak_, al_);
 				bool? an_(Tuple_CWDDWHRXGADEbdaKXCdKbgEfg FinalList)
 				{
-					var bf_ = context.Operators.Not((bool?)(FinalList is null));
+					bool? bf_ = context.Operators.Not((bool?)(FinalList is null));
 
 					return bf_;
 				};
-				var ao_ = context.Operators.Where<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(am_, an_);
+				IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> ao_ = context.Operators.Where<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>(am_, an_);
 
 				return ao_;
 			};
-			var n_ = context.Operators.Select<Tuple_DBEDLLOihLKGPWLHVWXRKfGdL, IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>((IEnumerable<Tuple_DBEDLLOihLKGPWLHVWXRKfGdL>)l_, m_);
-			var o_ = context.Operators.SingletonFrom<IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>(n_);
+			IEnumerable<IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>> n_ = context.Operators.Select<Tuple_DBEDLLOihLKGPWLHVWXRKfGdL, IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>((IEnumerable<Tuple_DBEDLLOihLKGPWLHVWXRKfGdL>)l_, m_);
+			IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> o_ = context.Operators.SingletonFrom<IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>(n_);
 
 			return o_;
 		};
-		var g_ = context.Operators.Select<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF, IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>((IEnumerable<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF>)e_, f_);
-		var h_ = context.Operators.SingletonFrom<IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>(g_);
+		IEnumerable<IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>> g_ = context.Operators.Select<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF, IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>((IEnumerable<Tuple_DKCCfPXSWPMBNeFXdjEFGiRcF>)e_, f_);
+		IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg> h_ = context.Operators.SingletonFrom<IEnumerable<Tuple_CWDDWHRXGADEbdaKXCdKbgEfg>>(g_);
 
 		return h_;
 	}
@@ -1676,9 +1676,9 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get All Professional and Institutional Claims and Claim Responses")]
 	public Tuple_BPLeiOPPLaJQZIggaPXFWcaBO Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
-		var a_ = this.Professional_or_Institutional_Claims_Response(claimResponse);
-		var b_ = this.Professional_or_Institutional_Claims(claim);
-		var c_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO
+		IEnumerable<ClaimResponse> a_ = this.Professional_or_Institutional_Claims_Response(claimResponse);
+		IEnumerable<Claim> b_ = this.Professional_or_Institutional_Claims(claim);
+		Tuple_BPLeiOPPLaJQZIggaPXFWcaBO c_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO
 		{
 			MedicalClaimResponse = a_,
 			MedicalClaim = b_,
@@ -1692,112 +1692,112 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(ClaimResponse ResponseItem)
 		{
-			var h_ = ResponseItem?.OutcomeElement;
-			var i_ = FHIRHelpers_4_0_001.ToString(h_);
-			var j_ = new string[]
+			Code<ClaimProcessingCodes> h_ = ResponseItem?.OutcomeElement;
+			string i_ = FHIRHelpers_4_0_001.ToString(h_);
+			string[] j_ = new string[]
 			{
 				"complete",
 				"partial",
 			};
-			var k_ = context.Operators.In<string>(i_, (j_ as IEnumerable<string>));
+			bool? k_ = context.Operators.In<string>(i_, (j_ as IEnumerable<string>));
 
 			return k_;
 		};
-		var b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
-		var c_ = new Tuple_DbDPVOODdCjASWRZfBTBPUJKR
+		IEnumerable<ClaimResponse> b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
+		Tuple_DbDPVOODdCjASWRZfBTBPUJKR c_ = new Tuple_DbDPVOODdCjASWRZfBTBPUJKR
 		{
 			PaidResponse = b_,
 		};
-		var d_ = new Tuple_DbDPVOODdCjASWRZfBTBPUJKR[]
+		Tuple_DbDPVOODdCjASWRZfBTBPUJKR[] d_ = new Tuple_DbDPVOODdCjASWRZfBTBPUJKR[]
 		{
 			c_,
 		};
 		IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> e_(Tuple_DbDPVOODdCjASWRZfBTBPUJKR ClaimResponse)
 		{
-			var l_ = ClaimResponse?.PaidResponse;
+			IEnumerable<ClaimResponse> l_ = ClaimResponse?.PaidResponse;
 			Tuple_BYXPfHJAafYUZgPBifWFNjLXc m_(ClaimResponse ClmResp)
 			{
-				var o_ = ClmResp?.Request;
-				var p_ = o_?.ReferenceElement;
-				var q_ = FHIRHelpers_4_0_001.ToString(p_);
-				var r_ = NCQAFHIRBase_1_0_0.GetId(q_);
-				var s_ = ClmResp?.Item;
+				ResourceReference o_ = ClmResp?.Request;
+				FhirString p_ = o_?.ReferenceElement;
+				string q_ = FHIRHelpers_4_0_001.ToString(p_);
+				string r_ = NCQAFHIRBase_1_0_0.GetId(q_);
+				List<ClaimResponse.ItemComponent> s_ = ClmResp?.Item;
 				bool? t_(ClaimResponse.ItemComponent ResponseItem)
 				{
-					var w_ = ResponseItem?.Adjudication;
+					List<ClaimResponse.AdjudicationComponent> w_ = ResponseItem?.Adjudication;
 					bool? x_(ClaimResponse.AdjudicationComponent @this)
 					{
-						var as_ = @this?.Category;
-						var at_ = context.Operators.Not((bool?)(as_ is null));
+						CodeableConcept as_ = @this?.Category;
+						bool? at_ = context.Operators.Not((bool?)(as_ is null));
 
 						return at_;
 					};
-					var y_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)w_, x_);
+					IEnumerable<ClaimResponse.AdjudicationComponent> y_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)w_, x_);
 					CodeableConcept z_(ClaimResponse.AdjudicationComponent @this)
 					{
-						var au_ = @this?.Category;
+						CodeableConcept au_ = @this?.Category;
 
 						return au_;
 					};
-					var aa_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, CodeableConcept>(y_, z_);
+					IEnumerable<CodeableConcept> aa_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, CodeableConcept>(y_, z_);
 					bool? ab_(CodeableConcept @this)
 					{
-						var av_ = @this?.Coding;
-						var aw_ = context.Operators.Not((bool?)(av_ is null));
+						List<Coding> av_ = @this?.Coding;
+						bool? aw_ = context.Operators.Not((bool?)(av_ is null));
 
 						return aw_;
 					};
-					var ac_ = context.Operators.Where<CodeableConcept>(aa_, ab_);
+					IEnumerable<CodeableConcept> ac_ = context.Operators.Where<CodeableConcept>(aa_, ab_);
 					List<Coding> ad_(CodeableConcept @this)
 					{
-						var ax_ = @this?.Coding;
+						List<Coding> ax_ = @this?.Coding;
 
 						return ax_;
 					};
-					var ae_ = context.Operators.Select<CodeableConcept, List<Coding>>(ac_, ad_);
-					var af_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ae_);
+					IEnumerable<List<Coding>> ae_ = context.Operators.Select<CodeableConcept, List<Coding>>(ac_, ad_);
+					IEnumerable<Coding> af_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ae_);
 					bool? ag_(Coding CategoryItem)
 					{
-						var ay_ = CategoryItem?.CodeElement;
-						var az_ = ay_?.Value;
-						var ba_ = context.Operators.Equal(az_, "benefit");
+						Code ay_ = CategoryItem?.CodeElement;
+						string az_ = ay_?.Value;
+						bool? ba_ = context.Operators.Equal(az_, "benefit");
 
 						return ba_;
 					};
-					var ah_ = context.Operators.Where<Coding>(af_, ag_);
-					var ai_ = context.Operators.Exists<Coding>(ah_);
+					IEnumerable<Coding> ah_ = context.Operators.Where<Coding>(af_, ag_);
+					bool? ai_ = context.Operators.Exists<Coding>(ah_);
 					bool? ak_(ClaimResponse.AdjudicationComponent @this)
 					{
-						var bb_ = @this?.Amount;
-						var bc_ = context.Operators.Not((bool?)(bb_ is null));
+						Money bb_ = @this?.Amount;
+						bool? bc_ = context.Operators.Not((bool?)(bb_ is null));
 
 						return bc_;
 					};
-					var al_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)w_, ak_);
+					IEnumerable<ClaimResponse.AdjudicationComponent> al_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)w_, ak_);
 					Money am_(ClaimResponse.AdjudicationComponent @this)
 					{
-						var bd_ = @this?.Amount;
+						Money bd_ = @this?.Amount;
 
 						return bd_;
 					};
-					var an_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, Money>(al_, am_);
+					IEnumerable<Money> an_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, Money>(al_, am_);
 					bool? ao_(Money DollarAmount)
 					{
-						var be_ = DollarAmount?.ValueElement;
-						var bf_ = FHIRHelpers_4_0_001.ToDecimal(be_);
-						var bg_ = context.Operators.ConvertIntegerToDecimal(0);
-						var bh_ = context.Operators.Greater(bf_, bg_);
+						FhirDecimal be_ = DollarAmount?.ValueElement;
+						decimal? bf_ = FHIRHelpers_4_0_001.ToDecimal(be_);
+						decimal? bg_ = context.Operators.ConvertIntegerToDecimal(0);
+						bool? bh_ = context.Operators.Greater(bf_, bg_);
 
 						return bh_;
 					};
-					var ap_ = context.Operators.Where<Money>(an_, ao_);
-					var aq_ = context.Operators.Exists<Money>(ap_);
-					var ar_ = context.Operators.And(ai_, aq_);
+					IEnumerable<Money> ap_ = context.Operators.Where<Money>(an_, ao_);
+					bool? aq_ = context.Operators.Exists<Money>(ap_);
+					bool? ar_ = context.Operators.And(ai_, aq_);
 
 					return ar_;
 				};
-				var u_ = context.Operators.Where<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)s_, t_);
-				var v_ = new Tuple_BYXPfHJAafYUZgPBifWFNjLXc
+				IEnumerable<ClaimResponse.ItemComponent> u_ = context.Operators.Where<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)s_, t_);
+				Tuple_BYXPfHJAafYUZgPBifWFNjLXc v_ = new Tuple_BYXPfHJAafYUZgPBifWFNjLXc
 				{
 					Response = ClmResp,
 					ResponseID = r_,
@@ -1806,12 +1806,12 @@ public class NCQAClaims_1_0_0
 
 				return v_;
 			};
-			var n_ = context.Operators.Select<ClaimResponse, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(l_, m_);
+			IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> n_ = context.Operators.Select<ClaimResponse, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(l_, m_);
 
 			return n_;
 		};
-		var f_ = context.Operators.Select<Tuple_DbDPVOODdCjASWRZfBTBPUJKR, IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>>((IEnumerable<Tuple_DbDPVOODdCjASWRZfBTBPUJKR>)d_, e_);
-		var g_ = context.Operators.SingletonFrom<IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>>(f_);
+		IEnumerable<IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>> f_ = context.Operators.Select<Tuple_DbDPVOODdCjASWRZfBTBPUJKR, IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>>((IEnumerable<Tuple_DbDPVOODdCjASWRZfBTBPUJKR>)d_, e_);
+		IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> g_ = context.Operators.SingletonFrom<IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>>(f_);
 
 		return g_;
 	}
@@ -1821,115 +1821,115 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim AllClaims)
 		{
-			var e_ = AllClaims?.Item;
+			List<Claim.ItemComponent> e_ = AllClaims?.Item;
 			bool? f_(Claim.ItemComponent @this)
 			{
-				var af_ = @this?.ProductOrService;
-				var ag_ = context.Operators.Not((bool?)(af_ is null));
+				CodeableConcept af_ = @this?.ProductOrService;
+				bool? ag_ = context.Operators.Not((bool?)(af_ is null));
 
 				return ag_;
 			};
-			var g_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
+			IEnumerable<Claim.ItemComponent> g_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
 			CodeableConcept h_(Claim.ItemComponent @this)
 			{
-				var ah_ = @this?.ProductOrService;
+				CodeableConcept ah_ = @this?.ProductOrService;
 
 				return ah_;
 			};
-			var i_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
+			IEnumerable<CodeableConcept> i_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
 			bool? j_(CodeableConcept @this)
 			{
-				var ai_ = @this?.Coding;
-				var aj_ = context.Operators.Not((bool?)(ai_ is null));
+				List<Coding> ai_ = @this?.Coding;
+				bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
 
 				return aj_;
 			};
-			var k_ = context.Operators.Where<CodeableConcept>(i_, j_);
+			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>(i_, j_);
 			List<Coding> l_(CodeableConcept @this)
 			{
-				var ak_ = @this?.Coding;
+				List<Coding> ak_ = @this?.Coding;
 
 				return ak_;
 			};
-			var m_ = context.Operators.Select<CodeableConcept, List<Coding>>(k_, l_);
-			var n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
+			IEnumerable<List<Coding>> m_ = context.Operators.Select<CodeableConcept, List<Coding>>(k_, l_);
+			IEnumerable<Coding> n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
 			bool? o_(Coding ProductOrServiceCode)
 			{
-				var al_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-				var am_ = context.Operators.In<CqlCode>(al_, ProductOrServiceValueSet);
+				CqlCode al_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+				bool? am_ = context.Operators.In<CqlCode>(al_, ProductOrServiceValueSet);
 
 				return am_;
 			};
-			var p_ = context.Operators.Where<Coding>(n_, o_);
-			var q_ = context.Operators.Exists<Coding>(p_);
-			var r_ = AllClaims?.Diagnosis;
+			IEnumerable<Coding> p_ = context.Operators.Where<Coding>(n_, o_);
+			bool? q_ = context.Operators.Exists<Coding>(p_);
+			List<Claim.DiagnosisComponent> r_ = AllClaims?.Diagnosis;
 			bool? s_(Claim.DiagnosisComponent @this)
 			{
-				var an_ = @this?.Diagnosis;
-				var ao_ = context.Operators.Not((bool?)(an_ is null));
+				DataType an_ = @this?.Diagnosis;
+				bool? ao_ = context.Operators.Not((bool?)(an_ is null));
 
 				return ao_;
 			};
-			var t_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
+			IEnumerable<Claim.DiagnosisComponent> t_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
 			DataType u_(Claim.DiagnosisComponent @this)
 			{
-				var ap_ = @this?.Diagnosis;
+				DataType ap_ = @this?.Diagnosis;
 
 				return ap_;
 			};
-			var v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
+			IEnumerable<DataType> v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
 			bool? w_(DataType @this)
 			{
-				var aq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-				var ar_ = context.Operators.Not((bool?)(aq_ is null));
+				object aq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+				bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
 
 				return ar_;
 			};
-			var x_ = context.Operators.Where<DataType>(v_, w_);
+			IEnumerable<DataType> x_ = context.Operators.Where<DataType>(v_, w_);
 			object y_(DataType @this)
 			{
-				var as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+				object as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 				return as_;
 			};
-			var z_ = context.Operators.Select<DataType, object>(x_, y_);
-			var aa_ = context.Operators.FlattenLateBoundList(z_);
+			IEnumerable<object> z_ = context.Operators.Select<DataType, object>(x_, y_);
+			IEnumerable<object> aa_ = context.Operators.FlattenLateBoundList(z_);
 			bool? ab_(object DiagnosisCode)
 			{
-				var at_ = FHIRHelpers_4_0_001.ToCode((Coding)DiagnosisCode);
-				var au_ = context.Operators.In<CqlCode>(at_, DiagnosisValueSet);
+				CqlCode at_ = FHIRHelpers_4_0_001.ToCode((Coding)DiagnosisCode);
+				bool? au_ = context.Operators.In<CqlCode>(at_, DiagnosisValueSet);
 
 				return au_;
 			};
-			var ac_ = context.Operators.Where<object>(aa_, ab_);
-			var ad_ = context.Operators.Exists<object>(ac_);
-			var ae_ = context.Operators.And(q_, ad_);
+			IEnumerable<object> ac_ = context.Operators.Where<object>(aa_, ab_);
+			bool? ad_ = context.Operators.Exists<object>(ac_);
+			bool? ae_ = context.Operators.And(q_, ad_);
 
 			return ae_;
 		};
-		var b_ = context.Operators.Where<Claim>(claim, a_);
+		IEnumerable<Claim> b_ = context.Operators.Where<Claim>(claim, a_);
 		Tuple_EFDOJaOgOPCDJDhPijASNAPMd c_(Claim ProcedureClaims)
 		{
-			var av_ = ProcedureClaims?.IdElement;
-			var aw_ = ProcedureClaims?.Item;
+			Id av_ = ProcedureClaims?.IdElement;
+			List<Claim.ItemComponent> aw_ = ProcedureClaims?.Item;
 			bool? ax_(Claim.ItemComponent ResponseItem)
 			{
-				var ba_ = ResponseItem?.ProductOrService;
-				var bb_ = ba_?.Coding;
+				CodeableConcept ba_ = ResponseItem?.ProductOrService;
+				List<Coding> bb_ = ba_?.Coding;
 				bool? bc_(Coding ProductOrServiceCode)
 				{
-					var bf_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-					var bg_ = context.Operators.In<CqlCode>(bf_, ProductOrServiceValueSet);
+					CqlCode bf_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+					bool? bg_ = context.Operators.In<CqlCode>(bf_, ProductOrServiceValueSet);
 
 					return bg_;
 				};
-				var bd_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bb_, bc_);
-				var be_ = context.Operators.Exists<Coding>(bd_);
+				IEnumerable<Coding> bd_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bb_, bc_);
+				bool? be_ = context.Operators.Exists<Coding>(bd_);
 
 				return be_;
 			};
-			var ay_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)aw_, ax_);
-			var az_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
+			IEnumerable<Claim.ItemComponent> ay_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)aw_, ax_);
+			Tuple_EFDOJaOgOPCDJDhPijASNAPMd az_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
 			{
 				ClaimofInterest = ProcedureClaims,
 				ClaimID = av_,
@@ -1938,7 +1938,7 @@ public class NCQAClaims_1_0_0
 
 			return az_;
 		};
-		var d_ = context.Operators.Select<Claim, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(b_, c_);
+		IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> d_ = context.Operators.Select<Claim, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(b_, c_);
 
 		return d_;
 	}
@@ -1946,43 +1946,43 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Corresponding Claim for Services and Conditions")]
 	public Tuple_FCOUVKRRWVHcKiBDUdGgLciKR Get_Corresponding_Claim_for_Services_and_Conditions(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Get_All_Claims_With_Procedure_and_Diagnosis(claim, ProductOrServiceValueSet, DiagnosisValueSet);
-		var c_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE
+		IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
+		IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> b_ = this.Get_All_Claims_With_Procedure_and_Diagnosis(claim, ProductOrServiceValueSet, DiagnosisValueSet);
+		Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE c_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE
 		{
 			PaidMedicalClaimResponse = a_,
 			MedicalClaim = b_,
 		};
-		var d_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[]
+		Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[] d_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[]
 		{
 			c_,
 		};
 		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR e_(Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE ClaimAndResponse)
 		{
-			var h_ = ClaimAndResponse?.MedicalClaim;
+			IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> h_ = ClaimAndResponse?.MedicalClaim;
 			Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT i_(Tuple_EFDOJaOgOPCDJDhPijASNAPMd medClaim)
 			{
-				var p_ = medClaim?.LineItems;
+				IEnumerable<Claim.ItemComponent> p_ = medClaim?.LineItems;
 				bool? q_(Claim.ItemComponent medClaimLineItem)
 				{
-					var t_ = ClaimAndResponse?.PaidMedicalClaimResponse;
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> t_ = ClaimAndResponse?.PaidMedicalClaimResponse;
 					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> u_(Tuple_BYXPfHJAafYUZgPBifWFNjLXc pClaim)
 					{
-						var x_ = pClaim?.LineItems;
+						IEnumerable<ClaimResponse.ItemComponent> x_ = pClaim?.LineItems;
 						bool? y_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
 							Id ac_()
 							{
 								bool aq_()
 								{
-									var ar_ = medClaim?.ClaimofInterest;
-									var as_ = ar_ is Resource;
+									Claim ar_ = medClaim?.ClaimofInterest;
+									bool as_ = ar_ is Resource;
 
 									return as_;
 								};
 								if (aq_())
 								{
-									var at_ = medClaim?.ClaimofInterest;
+									Claim at_ = medClaim?.ClaimofInterest;
 
 									return (at_ as Resource).IdElement;
 								}
@@ -1991,36 +1991,36 @@ public class NCQAClaims_1_0_0
 									return null;
 								}
 							};
-							var ad_ = FHIRHelpers_4_0_001.ToString(ac_());
-							var ae_ = pClaim?.Response;
-							var af_ = ae_?.Request;
-							var ag_ = af_?.ReferenceElement;
-							var ah_ = FHIRHelpers_4_0_001.ToString(ag_);
-							var ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
-							var aj_ = context.Operators.Equal(ad_, ai_);
-							var ak_ = medClaimLineItem?.SequenceElement;
-							var al_ = context.Operators.Convert<Integer>(ak_);
-							var am_ = pClaimLineItem?.ItemSequenceElement;
-							var an_ = context.Operators.Convert<Integer>(am_);
-							var ao_ = context.Operators.Equal(al_, an_);
-							var ap_ = context.Operators.And(aj_, ao_);
+							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
+							ClaimResponse ae_ = pClaim?.Response;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
+							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
+							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
+							bool? aj_ = context.Operators.Equal(ad_, ai_);
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
+							Integer al_ = context.Operators.Convert<Integer>(ak_);
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
+							Integer an_ = context.Operators.Convert<Integer>(am_);
+							bool? ao_ = context.Operators.Equal(al_, an_);
+							bool? ap_ = context.Operators.And(aj_, ao_);
 
 							return ap_;
 						};
-						var z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
+						IEnumerable<ClaimResponse.ItemComponent> z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
 						Tuple_BYXPfHJAafYUZgPBifWFNjLXc aa_(ClaimResponse.ItemComponent pClaimLineItem) => 
 							pClaim;
-						var ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
+						IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
 
 						return ab_;
 					};
-					var v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
-					var w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
+					bool? w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
 
 					return w_;
 				};
-				var r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
-				var s_ = new Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT
+				IEnumerable<Claim.ItemComponent> r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
+				Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT s_ = new Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT
 				{
 					PaidClaim = medClaim,
 					ClaimItem = r_,
@@ -2028,12 +2028,12 @@ public class NCQAClaims_1_0_0
 
 				return s_;
 			};
-			var j_ = context.Operators.Select<Tuple_EFDOJaOgOPCDJDhPijASNAPMd, Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(h_, i_);
-			var k_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC
+			IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> j_ = context.Operators.Select<Tuple_EFDOJaOgOPCDJDhPijASNAPMd, Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(h_, i_);
+			Tuple_GUibhjYMgjAQISFDJORUOccJC k_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC
 			{
 				AggregateClaim = j_,
 			};
-			var l_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC[]
+			Tuple_GUibhjYMgjAQISFDJORUOccJC[] l_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC[]
 			{
 				k_,
 			};
@@ -2043,70 +2043,70 @@ public class NCQAClaims_1_0_0
 				{
 					bool az_()
 					{
-						var ba_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> ba_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bb_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var bh_ = @this?.ClaimItem;
-							var bi_ = context.Operators.Not((bool?)(bh_ is null));
+							IEnumerable<Claim.ItemComponent> bh_ = @this?.ClaimItem;
+							bool? bi_ = context.Operators.Not((bool?)(bh_ is null));
 
 							return bi_;
 						};
-						var bc_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(ba_, bb_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bc_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(ba_, bb_);
 						IEnumerable<Claim.ItemComponent> bd_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var bj_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
 
 							return bj_;
 						};
-						var be_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
-						var bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
-						var bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> be_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
+						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
+						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
 						return (bg_ ?? false);
 					};
 					if (az_())
 					{
-						var bk_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bk_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bl_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var by_ = @this?.PaidClaim;
-							var bz_ = context.Operators.Not((bool?)(by_ is null));
+							Tuple_EFDOJaOgOPCDJDhPijASNAPMd by_ = @this?.PaidClaim;
+							bool? bz_ = context.Operators.Not((bool?)(by_ is null));
 
 							return bz_;
 						};
-						var bm_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bl_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bm_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bl_);
 						Tuple_EFDOJaOgOPCDJDhPijASNAPMd bn_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var ca_ = @this?.PaidClaim;
+							Tuple_EFDOJaOgOPCDJDhPijASNAPMd ca_ = @this?.PaidClaim;
 
 							return ca_;
 						};
-						var bo_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(bm_, bn_);
+						IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> bo_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(bm_, bn_);
 						bool? bq_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var cb_ = @this?.ClaimItem;
-							var cc_ = context.Operators.Not((bool?)(cb_ is null));
+							IEnumerable<Claim.ItemComponent> cb_ = @this?.ClaimItem;
+							bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
 
 							return cc_;
 						};
-						var br_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bq_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> br_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bq_);
 						IEnumerable<Claim.ItemComponent> bs_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var cd_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> cd_ = @this?.ClaimItem;
 
 							return cd_;
 						};
-						var bt_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(br_, bs_);
-						var bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> bt_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(br_, bs_);
+						IEnumerable<Claim.ItemComponent> bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							var ce_ = PaidItem?.Serviced;
-							var cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
+							DataType ce_ = PaidItem?.Serviced;
+							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
 
 							return cf_;
 						};
-						var bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
-						var bx_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR
+						IEnumerable<CqlInterval<CqlDateTime>> bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
+						Tuple_FCOUVKRRWVHcKiBDUdGgLciKR bx_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR
 						{
 							originalClaim = bo_,
 							ServicePeriod = bw_,
@@ -2119,28 +2119,28 @@ public class NCQAClaims_1_0_0
 						return null;
 					}
 				};
-				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
+				Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[] av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
 				{
 					au_(),
 				};
 				bool? aw_(Tuple_FCOUVKRRWVHcKiBDUdGgLciKR FinalList)
 				{
-					var cg_ = context.Operators.Not((bool?)(FinalList is null));
+					bool? cg_ = context.Operators.Not((bool?)(FinalList is null));
 
 					return cg_;
 				};
-				var ax_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)av_, aw_);
-				var ay_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(ax_);
+				IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> ax_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)av_, aw_);
+				Tuple_FCOUVKRRWVHcKiBDUdGgLciKR ay_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(ax_);
 
 				return ay_;
 			};
-			var n_ = context.Operators.Select<Tuple_GUibhjYMgjAQISFDJORUOccJC, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GUibhjYMgjAQISFDJORUOccJC>)l_, m_);
-			var o_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(n_);
+			IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> n_ = context.Operators.Select<Tuple_GUibhjYMgjAQISFDJORUOccJC, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GUibhjYMgjAQISFDJORUOccJC>)l_, m_);
+			Tuple_FCOUVKRRWVHcKiBDUdGgLciKR o_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(n_);
 
 			return o_;
 		};
-		var f_ = context.Operators.Select<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE>)d_, e_);
-		var g_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(f_);
+		IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> f_ = context.Operators.Select<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE>)d_, e_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR g_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(f_);
 
 		return g_;
 	}
@@ -2148,8 +2148,8 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Paid Claims for Provided Service and Condition")]
 	public Tuple_FCOUVKRRWVHcKiBDUdGgLciKR Get_Paid_Claims_for_Provided_Service_and_Condition(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
-		var b_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[]
+		Tuple_BPLeiOPPLaJQZIggaPXFWcaBO a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
+		Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[] b_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[]
 		{
 			a_,
 		};
@@ -2159,9 +2159,9 @@ public class NCQAClaims_1_0_0
 			{
 				bool k_()
 				{
-					var l_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-					var m_ = MedicalClaimAndResponse?.MedicalClaim;
-					var n_ = context.Operators.And((bool?)(l_ is null), (bool?)(m_ is null));
+					IEnumerable<ClaimResponse> l_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+					IEnumerable<Claim> m_ = MedicalClaimAndResponse?.MedicalClaim;
+					bool? n_ = context.Operators.And((bool?)(l_ is null), (bool?)(m_ is null));
 
 					return (n_ ?? false);
 				};
@@ -2171,9 +2171,9 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var o_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-					var p_ = MedicalClaimAndResponse?.MedicalClaim;
-					var q_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(o_, p_, ProductOrServiceValueSet, DiagnosisValueSet);
+					IEnumerable<ClaimResponse> o_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+					IEnumerable<Claim> p_ = MedicalClaimAndResponse?.MedicalClaim;
+					Tuple_FCOUVKRRWVHcKiBDUdGgLciKR q_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(o_, p_, ProductOrServiceValueSet, DiagnosisValueSet);
 
 					return q_;
 				}
@@ -2181,20 +2181,20 @@ public class NCQAClaims_1_0_0
 
 			return j_();
 		};
-		var d_ = context.Operators.Select<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO>)b_, c_);
-		var e_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(d_);
-		var f_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
+		IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> d_ = context.Operators.Select<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO>)b_, c_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR e_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(d_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[] f_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
 		{
 			e_,
 		};
 		bool? g_(Tuple_FCOUVKRRWVHcKiBDUdGgLciKR FinalList)
 		{
-			var r_ = context.Operators.Not((bool?)(FinalList is null));
+			bool? r_ = context.Operators.Not((bool?)(FinalList is null));
 
 			return r_;
 		};
-		var h_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)f_, g_);
-		var i_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(h_);
+		IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> h_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)f_, g_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR i_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(h_);
 
 		return i_;
 	}
@@ -2204,143 +2204,143 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim AllClaims)
 		{
-			var e_ = AllClaims?.Item;
+			List<Claim.ItemComponent> e_ = AllClaims?.Item;
 			bool? f_(Claim.ItemComponent @this)
 			{
-				var af_ = @this?.ProductOrService;
-				var ag_ = context.Operators.Not((bool?)(af_ is null));
+				CodeableConcept af_ = @this?.ProductOrService;
+				bool? ag_ = context.Operators.Not((bool?)(af_ is null));
 
 				return ag_;
 			};
-			var g_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
+			IEnumerable<Claim.ItemComponent> g_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
 			CodeableConcept h_(Claim.ItemComponent @this)
 			{
-				var ah_ = @this?.ProductOrService;
+				CodeableConcept ah_ = @this?.ProductOrService;
 
 				return ah_;
 			};
-			var i_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
+			IEnumerable<CodeableConcept> i_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
 			bool? j_(CodeableConcept @this)
 			{
-				var ai_ = @this?.Coding;
-				var aj_ = context.Operators.Not((bool?)(ai_ is null));
+				List<Coding> ai_ = @this?.Coding;
+				bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
 
 				return aj_;
 			};
-			var k_ = context.Operators.Where<CodeableConcept>(i_, j_);
+			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>(i_, j_);
 			List<Coding> l_(CodeableConcept @this)
 			{
-				var ak_ = @this?.Coding;
+				List<Coding> ak_ = @this?.Coding;
 
 				return ak_;
 			};
-			var m_ = context.Operators.Select<CodeableConcept, List<Coding>>(k_, l_);
-			var n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
+			IEnumerable<List<Coding>> m_ = context.Operators.Select<CodeableConcept, List<Coding>>(k_, l_);
+			IEnumerable<Coding> n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
 			bool? o_(Coding ProductOrServiceCode)
 			{
-				var al_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-				var am_ = context.Operators.In<CqlCode>(al_, ProductOrServiceValueSet);
+				CqlCode al_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+				bool? am_ = context.Operators.In<CqlCode>(al_, ProductOrServiceValueSet);
 
 				return am_;
 			};
-			var p_ = context.Operators.Where<Coding>(n_, o_);
-			var q_ = context.Operators.Exists<Coding>(p_);
-			var r_ = AllClaims?.Diagnosis;
+			IEnumerable<Coding> p_ = context.Operators.Where<Coding>(n_, o_);
+			bool? q_ = context.Operators.Exists<Coding>(p_);
+			List<Claim.DiagnosisComponent> r_ = AllClaims?.Diagnosis;
 			bool? s_(Claim.DiagnosisComponent @this)
 			{
-				var an_ = @this?.Diagnosis;
-				var ao_ = context.Operators.Not((bool?)(an_ is null));
+				DataType an_ = @this?.Diagnosis;
+				bool? ao_ = context.Operators.Not((bool?)(an_ is null));
 
 				return ao_;
 			};
-			var t_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
+			IEnumerable<Claim.DiagnosisComponent> t_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
 			DataType u_(Claim.DiagnosisComponent @this)
 			{
-				var ap_ = @this?.Diagnosis;
+				DataType ap_ = @this?.Diagnosis;
 
 				return ap_;
 			};
-			var v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
+			IEnumerable<DataType> v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
 			bool? w_(DataType @this)
 			{
-				var aq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-				var ar_ = context.Operators.Not((bool?)(aq_ is null));
+				object aq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+				bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
 
 				return ar_;
 			};
-			var x_ = context.Operators.Where<DataType>(v_, w_);
+			IEnumerable<DataType> x_ = context.Operators.Where<DataType>(v_, w_);
 			object y_(DataType @this)
 			{
-				var as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+				object as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 				return as_;
 			};
-			var z_ = context.Operators.Select<DataType, object>(x_, y_);
-			var aa_ = context.Operators.FlattenLateBoundList(z_);
+			IEnumerable<object> z_ = context.Operators.Select<DataType, object>(x_, y_);
+			IEnumerable<object> aa_ = context.Operators.FlattenLateBoundList(z_);
 			bool? ab_(object DiagnosisCode)
 			{
-				var at_ = FHIRHelpers_4_0_001.ToCode((Coding)DiagnosisCode);
-				var au_ = context.Operators.In<CqlCode>(at_, DiagnosisValueSet);
+				CqlCode at_ = FHIRHelpers_4_0_001.ToCode((Coding)DiagnosisCode);
+				bool? au_ = context.Operators.In<CqlCode>(at_, DiagnosisValueSet);
 
 				return au_;
 			};
-			var ac_ = context.Operators.Where<object>(aa_, ab_);
-			var ad_ = context.Operators.Exists<object>(ac_);
-			var ae_ = context.Operators.Or(q_, ad_);
+			IEnumerable<object> ac_ = context.Operators.Where<object>(aa_, ab_);
+			bool? ad_ = context.Operators.Exists<object>(ac_);
+			bool? ae_ = context.Operators.Or(q_, ad_);
 
 			return ae_;
 		};
-		var b_ = context.Operators.Where<Claim>(claim, a_);
+		IEnumerable<Claim> b_ = context.Operators.Where<Claim>(claim, a_);
 		Tuple_EFDOJaOgOPCDJDhPijASNAPMd c_(Claim ProcedureClaims)
 		{
 			Tuple_EFDOJaOgOPCDJDhPijASNAPMd av_()
 			{
 				bool aw_()
 				{
-					var ax_ = ProcedureClaims?.Item;
+					List<Claim.ItemComponent> ax_ = ProcedureClaims?.Item;
 					bool? ay_(Claim.ItemComponent ResponseItem)
 					{
-						var bb_ = ResponseItem?.ProductOrService;
-						var bc_ = bb_?.Coding;
+						CodeableConcept bb_ = ResponseItem?.ProductOrService;
+						List<Coding> bc_ = bb_?.Coding;
 						bool? bd_(Coding ProductOrServiceCode)
 						{
-							var bg_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-							var bh_ = context.Operators.In<CqlCode>(bg_, ProductOrServiceValueSet);
+							CqlCode bg_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+							bool? bh_ = context.Operators.In<CqlCode>(bg_, ProductOrServiceValueSet);
 
 							return bh_;
 						};
-						var be_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bc_, bd_);
-						var bf_ = context.Operators.Exists<Coding>(be_);
+						IEnumerable<Coding> be_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bc_, bd_);
+						bool? bf_ = context.Operators.Exists<Coding>(be_);
 
 						return bf_;
 					};
-					var az_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ax_, ay_);
-					var ba_ = context.Operators.Exists<Claim.ItemComponent>(az_);
+					IEnumerable<Claim.ItemComponent> az_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ax_, ay_);
+					bool? ba_ = context.Operators.Exists<Claim.ItemComponent>(az_);
 
 					return (ba_ ?? false);
 				};
 				if (aw_())
 				{
-					var bi_ = ProcedureClaims?.IdElement;
-					var bj_ = ProcedureClaims?.Item;
+					Id bi_ = ProcedureClaims?.IdElement;
+					List<Claim.ItemComponent> bj_ = ProcedureClaims?.Item;
 					bool? bk_(Claim.ItemComponent ResponseItem)
 					{
-						var bn_ = ResponseItem?.ProductOrService;
-						var bo_ = bn_?.Coding;
+						CodeableConcept bn_ = ResponseItem?.ProductOrService;
+						List<Coding> bo_ = bn_?.Coding;
 						bool? bp_(Coding ProductOrServiceCode)
 						{
-							var bs_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-							var bt_ = context.Operators.In<CqlCode>(bs_, ProductOrServiceValueSet);
+							CqlCode bs_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+							bool? bt_ = context.Operators.In<CqlCode>(bs_, ProductOrServiceValueSet);
 
 							return bt_;
 						};
-						var bq_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bo_, bp_);
-						var br_ = context.Operators.Exists<Coding>(bq_);
+						IEnumerable<Coding> bq_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bo_, bp_);
+						bool? br_ = context.Operators.Exists<Coding>(bq_);
 
 						return br_;
 					};
-					var bl_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bj_, bk_);
-					var bm_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
+					IEnumerable<Claim.ItemComponent> bl_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bj_, bk_);
+					Tuple_EFDOJaOgOPCDJDhPijASNAPMd bm_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
 					{
 						ClaimofInterest = ProcedureClaims,
 						ClaimID = bi_,
@@ -2351,19 +2351,19 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var bu_ = ProcedureClaims?.IdElement;
-					var bv_ = ProcedureClaims?.Item;
+					Id bu_ = ProcedureClaims?.IdElement;
+					List<Claim.ItemComponent> bv_ = ProcedureClaims?.Item;
 					bool? bw_(Claim.ItemComponent ResponseItem)
 					{
-						var bz_ = ResponseItem?.SequenceElement;
-						var ca_ = context.Operators.Convert<Integer>(bz_);
-						var cb_ = ca_?.Value;
-						var cc_ = context.Operators.Equal(cb_, 1);
+						PositiveInt bz_ = ResponseItem?.SequenceElement;
+						Integer ca_ = context.Operators.Convert<Integer>(bz_);
+						int? cb_ = ca_?.Value;
+						bool? cc_ = context.Operators.Equal(cb_, 1);
 
 						return cc_;
 					};
-					var bx_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bv_, bw_);
-					var by_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
+					IEnumerable<Claim.ItemComponent> bx_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bv_, bw_);
+					Tuple_EFDOJaOgOPCDJDhPijASNAPMd by_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
 					{
 						ClaimofInterest = ProcedureClaims,
 						ClaimID = bu_,
@@ -2376,7 +2376,7 @@ public class NCQAClaims_1_0_0
 
 			return av_();
 		};
-		var d_ = context.Operators.Select<Claim, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(b_, c_);
+		IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> d_ = context.Operators.Select<Claim, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(b_, c_);
 
 		return d_;
 	}
@@ -2384,43 +2384,43 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Corresponding Claim for Services or Conditions")]
 	public Tuple_FCOUVKRRWVHcKiBDUdGgLciKR Get_Corresponding_Claim_for_Services_or_Conditions(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Get_All_Claims_With_Procedure_or_Diagnosis(claim, ProductOrServiceValueSet, DiagnosisValueSet);
-		var c_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE
+		IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
+		IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> b_ = this.Get_All_Claims_With_Procedure_or_Diagnosis(claim, ProductOrServiceValueSet, DiagnosisValueSet);
+		Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE c_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE
 		{
 			PaidMedicalClaimResponse = a_,
 			MedicalClaim = b_,
 		};
-		var d_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[]
+		Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[] d_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[]
 		{
 			c_,
 		};
 		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR e_(Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE ClaimAndResponse)
 		{
-			var h_ = ClaimAndResponse?.MedicalClaim;
+			IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> h_ = ClaimAndResponse?.MedicalClaim;
 			Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT i_(Tuple_EFDOJaOgOPCDJDhPijASNAPMd medClaim)
 			{
-				var p_ = medClaim?.LineItems;
+				IEnumerable<Claim.ItemComponent> p_ = medClaim?.LineItems;
 				bool? q_(Claim.ItemComponent medClaimLineItem)
 				{
-					var t_ = ClaimAndResponse?.PaidMedicalClaimResponse;
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> t_ = ClaimAndResponse?.PaidMedicalClaimResponse;
 					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> u_(Tuple_BYXPfHJAafYUZgPBifWFNjLXc pClaim)
 					{
-						var x_ = pClaim?.LineItems;
+						IEnumerable<ClaimResponse.ItemComponent> x_ = pClaim?.LineItems;
 						bool? y_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
 							Id ac_()
 							{
 								bool aq_()
 								{
-									var ar_ = medClaim?.ClaimofInterest;
-									var as_ = ar_ is Resource;
+									Claim ar_ = medClaim?.ClaimofInterest;
+									bool as_ = ar_ is Resource;
 
 									return as_;
 								};
 								if (aq_())
 								{
-									var at_ = medClaim?.ClaimofInterest;
+									Claim at_ = medClaim?.ClaimofInterest;
 
 									return (at_ as Resource).IdElement;
 								}
@@ -2429,36 +2429,36 @@ public class NCQAClaims_1_0_0
 									return null;
 								}
 							};
-							var ad_ = FHIRHelpers_4_0_001.ToString(ac_());
-							var ae_ = pClaim?.Response;
-							var af_ = ae_?.Request;
-							var ag_ = af_?.ReferenceElement;
-							var ah_ = FHIRHelpers_4_0_001.ToString(ag_);
-							var ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
-							var aj_ = context.Operators.Equal(ad_, ai_);
-							var ak_ = medClaimLineItem?.SequenceElement;
-							var al_ = context.Operators.Convert<Integer>(ak_);
-							var am_ = pClaimLineItem?.ItemSequenceElement;
-							var an_ = context.Operators.Convert<Integer>(am_);
-							var ao_ = context.Operators.Equal(al_, an_);
-							var ap_ = context.Operators.And(aj_, ao_);
+							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
+							ClaimResponse ae_ = pClaim?.Response;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
+							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
+							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
+							bool? aj_ = context.Operators.Equal(ad_, ai_);
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
+							Integer al_ = context.Operators.Convert<Integer>(ak_);
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
+							Integer an_ = context.Operators.Convert<Integer>(am_);
+							bool? ao_ = context.Operators.Equal(al_, an_);
+							bool? ap_ = context.Operators.And(aj_, ao_);
 
 							return ap_;
 						};
-						var z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
+						IEnumerable<ClaimResponse.ItemComponent> z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
 						Tuple_BYXPfHJAafYUZgPBifWFNjLXc aa_(ClaimResponse.ItemComponent pClaimLineItem) => 
 							pClaim;
-						var ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
+						IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
 
 						return ab_;
 					};
-					var v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
-					var w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
+					bool? w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
 
 					return w_;
 				};
-				var r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
-				var s_ = new Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT
+				IEnumerable<Claim.ItemComponent> r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
+				Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT s_ = new Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT
 				{
 					PaidClaim = medClaim,
 					ClaimItem = r_,
@@ -2466,12 +2466,12 @@ public class NCQAClaims_1_0_0
 
 				return s_;
 			};
-			var j_ = context.Operators.Select<Tuple_EFDOJaOgOPCDJDhPijASNAPMd, Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(h_, i_);
-			var k_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC
+			IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> j_ = context.Operators.Select<Tuple_EFDOJaOgOPCDJDhPijASNAPMd, Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(h_, i_);
+			Tuple_GUibhjYMgjAQISFDJORUOccJC k_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC
 			{
 				AggregateClaim = j_,
 			};
-			var l_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC[]
+			Tuple_GUibhjYMgjAQISFDJORUOccJC[] l_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC[]
 			{
 				k_,
 			};
@@ -2481,70 +2481,70 @@ public class NCQAClaims_1_0_0
 				{
 					bool az_()
 					{
-						var ba_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> ba_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bb_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var bh_ = @this?.ClaimItem;
-							var bi_ = context.Operators.Not((bool?)(bh_ is null));
+							IEnumerable<Claim.ItemComponent> bh_ = @this?.ClaimItem;
+							bool? bi_ = context.Operators.Not((bool?)(bh_ is null));
 
 							return bi_;
 						};
-						var bc_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(ba_, bb_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bc_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(ba_, bb_);
 						IEnumerable<Claim.ItemComponent> bd_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var bj_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
 
 							return bj_;
 						};
-						var be_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
-						var bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
-						var bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> be_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
+						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
+						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
 						return (bg_ ?? false);
 					};
 					if (az_())
 					{
-						var bk_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bk_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bl_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var by_ = @this?.PaidClaim;
-							var bz_ = context.Operators.Not((bool?)(by_ is null));
+							Tuple_EFDOJaOgOPCDJDhPijASNAPMd by_ = @this?.PaidClaim;
+							bool? bz_ = context.Operators.Not((bool?)(by_ is null));
 
 							return bz_;
 						};
-						var bm_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bl_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bm_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bl_);
 						Tuple_EFDOJaOgOPCDJDhPijASNAPMd bn_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var ca_ = @this?.PaidClaim;
+							Tuple_EFDOJaOgOPCDJDhPijASNAPMd ca_ = @this?.PaidClaim;
 
 							return ca_;
 						};
-						var bo_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(bm_, bn_);
+						IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> bo_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(bm_, bn_);
 						bool? bq_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var cb_ = @this?.ClaimItem;
-							var cc_ = context.Operators.Not((bool?)(cb_ is null));
+							IEnumerable<Claim.ItemComponent> cb_ = @this?.ClaimItem;
+							bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
 
 							return cc_;
 						};
-						var br_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bq_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> br_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bq_);
 						IEnumerable<Claim.ItemComponent> bs_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var cd_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> cd_ = @this?.ClaimItem;
 
 							return cd_;
 						};
-						var bt_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(br_, bs_);
-						var bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> bt_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(br_, bs_);
+						IEnumerable<Claim.ItemComponent> bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							var ce_ = PaidItem?.Serviced;
-							var cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
+							DataType ce_ = PaidItem?.Serviced;
+							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
 
 							return cf_;
 						};
-						var bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
-						var bx_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR
+						IEnumerable<CqlInterval<CqlDateTime>> bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
+						Tuple_FCOUVKRRWVHcKiBDUdGgLciKR bx_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR
 						{
 							originalClaim = bo_,
 							ServicePeriod = bw_,
@@ -2557,28 +2557,28 @@ public class NCQAClaims_1_0_0
 						return null;
 					}
 				};
-				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
+				Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[] av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
 				{
 					au_(),
 				};
 				bool? aw_(Tuple_FCOUVKRRWVHcKiBDUdGgLciKR FinalList)
 				{
-					var cg_ = context.Operators.Not((bool?)(FinalList is null));
+					bool? cg_ = context.Operators.Not((bool?)(FinalList is null));
 
 					return cg_;
 				};
-				var ax_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)av_, aw_);
-				var ay_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(ax_);
+				IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> ax_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)av_, aw_);
+				Tuple_FCOUVKRRWVHcKiBDUdGgLciKR ay_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(ax_);
 
 				return ay_;
 			};
-			var n_ = context.Operators.Select<Tuple_GUibhjYMgjAQISFDJORUOccJC, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GUibhjYMgjAQISFDJORUOccJC>)l_, m_);
-			var o_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(n_);
+			IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> n_ = context.Operators.Select<Tuple_GUibhjYMgjAQISFDJORUOccJC, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GUibhjYMgjAQISFDJORUOccJC>)l_, m_);
+			Tuple_FCOUVKRRWVHcKiBDUdGgLciKR o_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(n_);
 
 			return o_;
 		};
-		var f_ = context.Operators.Select<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE>)d_, e_);
-		var g_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(f_);
+		IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> f_ = context.Operators.Select<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE>)d_, e_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR g_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(f_);
 
 		return g_;
 	}
@@ -2586,8 +2586,8 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Paid Claims for Provided Services or Conditions")]
 	public Tuple_FCOUVKRRWVHcKiBDUdGgLciKR Get_Paid_Claims_for_Provided_Services_or_Conditions(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
-		var b_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[]
+		Tuple_BPLeiOPPLaJQZIggaPXFWcaBO a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
+		Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[] b_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[]
 		{
 			a_,
 		};
@@ -2597,9 +2597,9 @@ public class NCQAClaims_1_0_0
 			{
 				bool g_()
 				{
-					var h_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-					var i_ = MedicalClaimAndResponse?.MedicalClaim;
-					var j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
+					IEnumerable<ClaimResponse> h_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+					IEnumerable<Claim> i_ = MedicalClaimAndResponse?.MedicalClaim;
+					bool? j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
 
 					return (j_ ?? false);
 				};
@@ -2609,9 +2609,9 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var k_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-					var l_ = MedicalClaimAndResponse?.MedicalClaim;
-					var m_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(k_, l_, ProductOrServiceValueSet, DiagnosisValueSet);
+					IEnumerable<ClaimResponse> k_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+					IEnumerable<Claim> l_ = MedicalClaimAndResponse?.MedicalClaim;
+					Tuple_FCOUVKRRWVHcKiBDUdGgLciKR m_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(k_, l_, ProductOrServiceValueSet, DiagnosisValueSet);
 
 					return m_;
 				}
@@ -2619,8 +2619,8 @@ public class NCQAClaims_1_0_0
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO>)b_, c_);
-		var e_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(d_);
+		IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> d_ = context.Operators.Select<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO>)b_, c_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR e_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(d_);
 
 		return e_;
 	}
@@ -2630,73 +2630,73 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim AllClaims)
 		{
-			var e_ = AllClaims?.Item;
+			List<Claim.ItemComponent> e_ = AllClaims?.Item;
 			bool? f_(Claim.ItemComponent @this)
 			{
-				var r_ = @this?.ProductOrService;
-				var s_ = context.Operators.Not((bool?)(r_ is null));
+				CodeableConcept r_ = @this?.ProductOrService;
+				bool? s_ = context.Operators.Not((bool?)(r_ is null));
 
 				return s_;
 			};
-			var g_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
+			IEnumerable<Claim.ItemComponent> g_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
 			CodeableConcept h_(Claim.ItemComponent @this)
 			{
-				var t_ = @this?.ProductOrService;
+				CodeableConcept t_ = @this?.ProductOrService;
 
 				return t_;
 			};
-			var i_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
+			IEnumerable<CodeableConcept> i_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
 			bool? j_(CodeableConcept @this)
 			{
-				var u_ = @this?.Coding;
-				var v_ = context.Operators.Not((bool?)(u_ is null));
+				List<Coding> u_ = @this?.Coding;
+				bool? v_ = context.Operators.Not((bool?)(u_ is null));
 
 				return v_;
 			};
-			var k_ = context.Operators.Where<CodeableConcept>(i_, j_);
+			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>(i_, j_);
 			List<Coding> l_(CodeableConcept @this)
 			{
-				var w_ = @this?.Coding;
+				List<Coding> w_ = @this?.Coding;
 
 				return w_;
 			};
-			var m_ = context.Operators.Select<CodeableConcept, List<Coding>>(k_, l_);
-			var n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
+			IEnumerable<List<Coding>> m_ = context.Operators.Select<CodeableConcept, List<Coding>>(k_, l_);
+			IEnumerable<Coding> n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
 			bool? o_(Coding ProductOrServiceCode)
 			{
-				var x_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-				var y_ = context.Operators.In<CqlCode>(x_, ProductOrServiceValueSet);
+				CqlCode x_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+				bool? y_ = context.Operators.In<CqlCode>(x_, ProductOrServiceValueSet);
 
 				return y_;
 			};
-			var p_ = context.Operators.Where<Coding>(n_, o_);
-			var q_ = context.Operators.Exists<Coding>(p_);
+			IEnumerable<Coding> p_ = context.Operators.Where<Coding>(n_, o_);
+			bool? q_ = context.Operators.Exists<Coding>(p_);
 
 			return q_;
 		};
-		var b_ = context.Operators.Where<Claim>(claim, a_);
+		IEnumerable<Claim> b_ = context.Operators.Where<Claim>(claim, a_);
 		Tuple_EFDOJaOgOPCDJDhPijASNAPMd c_(Claim AllClaims)
 		{
-			var z_ = AllClaims?.IdElement;
-			var aa_ = AllClaims?.Item;
+			Id z_ = AllClaims?.IdElement;
+			List<Claim.ItemComponent> aa_ = AllClaims?.Item;
 			bool? ab_(Claim.ItemComponent ResponseItem)
 			{
-				var ae_ = ResponseItem?.ProductOrService;
-				var af_ = ae_?.Coding;
+				CodeableConcept ae_ = ResponseItem?.ProductOrService;
+				List<Coding> af_ = ae_?.Coding;
 				bool? ag_(Coding ProductOrServiceCode)
 				{
-					var aj_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
-					var ak_ = context.Operators.In<CqlCode>(aj_, ProductOrServiceValueSet);
+					CqlCode aj_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+					bool? ak_ = context.Operators.In<CqlCode>(aj_, ProductOrServiceValueSet);
 
 					return ak_;
 				};
-				var ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
-				var ai_ = context.Operators.Exists<Coding>(ah_);
+				IEnumerable<Coding> ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
+				bool? ai_ = context.Operators.Exists<Coding>(ah_);
 
 				return ai_;
 			};
-			var ac_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)aa_, ab_);
-			var ad_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
+			IEnumerable<Claim.ItemComponent> ac_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)aa_, ab_);
+			Tuple_EFDOJaOgOPCDJDhPijASNAPMd ad_ = new Tuple_EFDOJaOgOPCDJDhPijASNAPMd
 			{
 				ClaimofInterest = AllClaims,
 				ClaimID = z_,
@@ -2705,7 +2705,7 @@ public class NCQAClaims_1_0_0
 
 			return ad_;
 		};
-		var d_ = context.Operators.Select<Claim, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(b_, c_);
+		IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> d_ = context.Operators.Select<Claim, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(b_, c_);
 
 		return d_;
 	}
@@ -2713,43 +2713,43 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Corresponding Claim for Services Only")]
 	public Tuple_FCOUVKRRWVHcKiBDUdGgLciKR Get_Corresponding_Claim_for_Services_Only(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Get_All_Claims_With_Procedure_Only(claim, ProductOrServiceValueSet);
-		var c_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE
+		IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
+		IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> b_ = this.Get_All_Claims_With_Procedure_Only(claim, ProductOrServiceValueSet);
+		Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE c_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE
 		{
 			PaidMedicalClaimResponse = a_,
 			MedicalClaim = b_,
 		};
-		var d_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[]
+		Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[] d_ = new Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE[]
 		{
 			c_,
 		};
 		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR e_(Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE ClaimAndResponse)
 		{
-			var h_ = ClaimAndResponse?.MedicalClaim;
+			IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> h_ = ClaimAndResponse?.MedicalClaim;
 			Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT i_(Tuple_EFDOJaOgOPCDJDhPijASNAPMd medClaim)
 			{
-				var p_ = medClaim?.LineItems;
+				IEnumerable<Claim.ItemComponent> p_ = medClaim?.LineItems;
 				bool? q_(Claim.ItemComponent medClaimLineItem)
 				{
-					var t_ = ClaimAndResponse?.PaidMedicalClaimResponse;
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> t_ = ClaimAndResponse?.PaidMedicalClaimResponse;
 					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> u_(Tuple_BYXPfHJAafYUZgPBifWFNjLXc pClaim)
 					{
-						var x_ = pClaim?.LineItems;
+						IEnumerable<ClaimResponse.ItemComponent> x_ = pClaim?.LineItems;
 						bool? y_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
 							Id ac_()
 							{
 								bool aq_()
 								{
-									var ar_ = medClaim?.ClaimofInterest;
-									var as_ = ar_ is Resource;
+									Claim ar_ = medClaim?.ClaimofInterest;
+									bool as_ = ar_ is Resource;
 
 									return as_;
 								};
 								if (aq_())
 								{
-									var at_ = medClaim?.ClaimofInterest;
+									Claim at_ = medClaim?.ClaimofInterest;
 
 									return (at_ as Resource).IdElement;
 								}
@@ -2758,36 +2758,36 @@ public class NCQAClaims_1_0_0
 									return null;
 								}
 							};
-							var ad_ = FHIRHelpers_4_0_001.ToString(ac_());
-							var ae_ = pClaim?.Response;
-							var af_ = ae_?.Request;
-							var ag_ = af_?.ReferenceElement;
-							var ah_ = FHIRHelpers_4_0_001.ToString(ag_);
-							var ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
-							var aj_ = context.Operators.Equal(ad_, ai_);
-							var ak_ = medClaimLineItem?.SequenceElement;
-							var al_ = context.Operators.Convert<Integer>(ak_);
-							var am_ = pClaimLineItem?.ItemSequenceElement;
-							var an_ = context.Operators.Convert<Integer>(am_);
-							var ao_ = context.Operators.Equal(al_, an_);
-							var ap_ = context.Operators.And(aj_, ao_);
+							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
+							ClaimResponse ae_ = pClaim?.Response;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
+							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
+							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
+							bool? aj_ = context.Operators.Equal(ad_, ai_);
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
+							Integer al_ = context.Operators.Convert<Integer>(ak_);
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
+							Integer an_ = context.Operators.Convert<Integer>(am_);
+							bool? ao_ = context.Operators.Equal(al_, an_);
+							bool? ap_ = context.Operators.And(aj_, ao_);
 
 							return ap_;
 						};
-						var z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
+						IEnumerable<ClaimResponse.ItemComponent> z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
 						Tuple_BYXPfHJAafYUZgPBifWFNjLXc aa_(ClaimResponse.ItemComponent pClaimLineItem) => 
 							pClaim;
-						var ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
+						IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
 
 						return ab_;
 					};
-					var v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
-					var w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
+					bool? w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
 
 					return w_;
 				};
-				var r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
-				var s_ = new Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT
+				IEnumerable<Claim.ItemComponent> r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
+				Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT s_ = new Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT
 				{
 					PaidClaim = medClaim,
 					ClaimItem = r_,
@@ -2795,12 +2795,12 @@ public class NCQAClaims_1_0_0
 
 				return s_;
 			};
-			var j_ = context.Operators.Select<Tuple_EFDOJaOgOPCDJDhPijASNAPMd, Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(h_, i_);
-			var k_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC
+			IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> j_ = context.Operators.Select<Tuple_EFDOJaOgOPCDJDhPijASNAPMd, Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(h_, i_);
+			Tuple_GUibhjYMgjAQISFDJORUOccJC k_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC
 			{
 				AggregateClaim = j_,
 			};
-			var l_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC[]
+			Tuple_GUibhjYMgjAQISFDJORUOccJC[] l_ = new Tuple_GUibhjYMgjAQISFDJORUOccJC[]
 			{
 				k_,
 			};
@@ -2810,70 +2810,70 @@ public class NCQAClaims_1_0_0
 				{
 					bool az_()
 					{
-						var ba_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> ba_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bb_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var bh_ = @this?.ClaimItem;
-							var bi_ = context.Operators.Not((bool?)(bh_ is null));
+							IEnumerable<Claim.ItemComponent> bh_ = @this?.ClaimItem;
+							bool? bi_ = context.Operators.Not((bool?)(bh_ is null));
 
 							return bi_;
 						};
-						var bc_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(ba_, bb_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bc_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(ba_, bb_);
 						IEnumerable<Claim.ItemComponent> bd_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var bj_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
 
 							return bj_;
 						};
-						var be_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
-						var bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
-						var bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> be_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
+						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
+						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
 						return (bg_ ?? false);
 					};
 					if (az_())
 					{
-						var bk_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bk_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bl_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var by_ = @this?.PaidClaim;
-							var bz_ = context.Operators.Not((bool?)(by_ is null));
+							Tuple_EFDOJaOgOPCDJDhPijASNAPMd by_ = @this?.PaidClaim;
+							bool? bz_ = context.Operators.Not((bool?)(by_ is null));
 
 							return bz_;
 						};
-						var bm_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bl_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> bm_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bl_);
 						Tuple_EFDOJaOgOPCDJDhPijASNAPMd bn_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var ca_ = @this?.PaidClaim;
+							Tuple_EFDOJaOgOPCDJDhPijASNAPMd ca_ = @this?.PaidClaim;
 
 							return ca_;
 						};
-						var bo_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(bm_, bn_);
+						IEnumerable<Tuple_EFDOJaOgOPCDJDhPijASNAPMd> bo_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, Tuple_EFDOJaOgOPCDJDhPijASNAPMd>(bm_, bn_);
 						bool? bq_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var cb_ = @this?.ClaimItem;
-							var cc_ = context.Operators.Not((bool?)(cb_ is null));
+							IEnumerable<Claim.ItemComponent> cb_ = @this?.ClaimItem;
+							bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
 
 							return cc_;
 						};
-						var br_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bq_);
+						IEnumerable<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT> br_ = context.Operators.Where<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT>(bk_, bq_);
 						IEnumerable<Claim.ItemComponent> bs_(Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT @this)
 						{
-							var cd_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> cd_ = @this?.ClaimItem;
 
 							return cd_;
 						};
-						var bt_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(br_, bs_);
-						var bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> bt_ = context.Operators.Select<Tuple_EZGbLgjaMDjCRGbAgCTPUZZcT, IEnumerable<Claim.ItemComponent>>(br_, bs_);
+						IEnumerable<Claim.ItemComponent> bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							var ce_ = PaidItem?.Serviced;
-							var cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
+							DataType ce_ = PaidItem?.Serviced;
+							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
 
 							return cf_;
 						};
-						var bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
-						var bx_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR
+						IEnumerable<CqlInterval<CqlDateTime>> bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
+						Tuple_FCOUVKRRWVHcKiBDUdGgLciKR bx_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR
 						{
 							originalClaim = bo_,
 							ServicePeriod = bw_,
@@ -2886,28 +2886,28 @@ public class NCQAClaims_1_0_0
 						return null;
 					}
 				};
-				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
+				Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[] av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
 				{
 					au_(),
 				};
 				bool? aw_(Tuple_FCOUVKRRWVHcKiBDUdGgLciKR FinalList)
 				{
-					var cg_ = context.Operators.Not((bool?)(FinalList is null));
+					bool? cg_ = context.Operators.Not((bool?)(FinalList is null));
 
 					return cg_;
 				};
-				var ax_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)av_, aw_);
-				var ay_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(ax_);
+				IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> ax_ = context.Operators.Where<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>)av_, aw_);
+				Tuple_FCOUVKRRWVHcKiBDUdGgLciKR ay_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(ax_);
 
 				return ay_;
 			};
-			var n_ = context.Operators.Select<Tuple_GUibhjYMgjAQISFDJORUOccJC, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GUibhjYMgjAQISFDJORUOccJC>)l_, m_);
-			var o_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(n_);
+			IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> n_ = context.Operators.Select<Tuple_GUibhjYMgjAQISFDJORUOccJC, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GUibhjYMgjAQISFDJORUOccJC>)l_, m_);
+			Tuple_FCOUVKRRWVHcKiBDUdGgLciKR o_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(n_);
 
 			return o_;
 		};
-		var f_ = context.Operators.Select<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE>)d_, e_);
-		var g_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(f_);
+		IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> f_ = context.Operators.Select<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_GJOKWWTjFYRgcgdOSKQMPiKIE>)d_, e_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR g_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(f_);
 
 		return g_;
 	}
@@ -2915,8 +2915,8 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Paid Claims for Provided Services Only")]
 	public Tuple_FCOUVKRRWVHcKiBDUdGgLciKR Get_Paid_Claims_for_Provided_Services_Only(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
-		var b_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[]
+		Tuple_BPLeiOPPLaJQZIggaPXFWcaBO a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
+		Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[] b_ = new Tuple_BPLeiOPPLaJQZIggaPXFWcaBO[]
 		{
 			a_,
 		};
@@ -2926,9 +2926,9 @@ public class NCQAClaims_1_0_0
 			{
 				bool g_()
 				{
-					var h_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-					var i_ = MedicalClaimAndResponse?.MedicalClaim;
-					var j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
+					IEnumerable<ClaimResponse> h_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+					IEnumerable<Claim> i_ = MedicalClaimAndResponse?.MedicalClaim;
+					bool? j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
 
 					return (j_ ?? false);
 				};
@@ -2938,9 +2938,9 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var k_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-					var l_ = MedicalClaimAndResponse?.MedicalClaim;
-					var m_ = this.Get_Corresponding_Claim_for_Services_Only(k_, l_, ProductOrServiceValueSet);
+					IEnumerable<ClaimResponse> k_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+					IEnumerable<Claim> l_ = MedicalClaimAndResponse?.MedicalClaim;
+					Tuple_FCOUVKRRWVHcKiBDUdGgLciKR m_ = this.Get_Corresponding_Claim_for_Services_Only(k_, l_, ProductOrServiceValueSet);
 
 					return m_;
 				}
@@ -2948,8 +2948,8 @@ public class NCQAClaims_1_0_0
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO>)b_, c_);
-		var e_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(d_);
+		IEnumerable<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR> d_ = context.Operators.Select<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO, Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>((IEnumerable<Tuple_BPLeiOPPLaJQZIggaPXFWcaBO>)b_, c_);
+		Tuple_FCOUVKRRWVHcKiBDUdGgLciKR e_ = context.Operators.SingletonFrom<Tuple_FCOUVKRRWVHcKiBDUdGgLciKR>(d_);
 
 		return e_;
 	}
@@ -2957,9 +2957,9 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get All Pharmacy Claims and Claim Responses")]
 	public Tuple_EGPWWEihGWWSCCiZLgdcFLIcD Get_All_Pharmacy_Claims_and_Claim_Responses(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
-		var a_ = this.Pharmacy_Claims_Response(claimResponse);
-		var b_ = this.Pharmacy_Claims(claim);
-		var c_ = new Tuple_EGPWWEihGWWSCCiZLgdcFLIcD
+		IEnumerable<ClaimResponse> a_ = this.Pharmacy_Claims_Response(claimResponse);
+		IEnumerable<Claim> b_ = this.Pharmacy_Claims(claim);
+		Tuple_EGPWWEihGWWSCCiZLgdcFLIcD c_ = new Tuple_EGPWWEihGWWSCCiZLgdcFLIcD
 		{
 			PharmacyClaimResponse = a_,
 			PharmacyClaim = b_,
@@ -2971,43 +2971,43 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Corresponding Claim for Pharmacy Services")]
 	public Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV Get_Corresponding_Claim_for_Pharmacy_Services(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Pharmacy_Claim_With_Medication(claim, ProductOrServiceValueSet);
-		var c_ = new Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj
+		IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
+		IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> b_ = this.Pharmacy_Claim_With_Medication(claim, ProductOrServiceValueSet);
+		Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj c_ = new Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj
 		{
 			PaidPharmacyClaimResponse = a_,
 			MedicalClaim = b_,
 		};
-		var d_ = new Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj[]
+		Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj[] d_ = new Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj[]
 		{
 			c_,
 		};
 		Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV e_(Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj ClaimAndResponse)
 		{
-			var h_ = ClaimAndResponse?.MedicalClaim;
+			IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> h_ = ClaimAndResponse?.MedicalClaim;
 			Tuple_FNLZPXZWGLChDNZjQJNigGGGN i_(Tuple_GGLURZZjYLMjhaMLVbjKOcMAY medClaim)
 			{
-				var p_ = medClaim?.LineItem;
+				IEnumerable<Claim.ItemComponent> p_ = medClaim?.LineItem;
 				bool? q_(Claim.ItemComponent medClaimLineItem)
 				{
-					var t_ = ClaimAndResponse?.PaidPharmacyClaimResponse;
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> t_ = ClaimAndResponse?.PaidPharmacyClaimResponse;
 					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> u_(Tuple_BYXPfHJAafYUZgPBifWFNjLXc pClaim)
 					{
-						var x_ = pClaim?.LineItems;
+						IEnumerable<ClaimResponse.ItemComponent> x_ = pClaim?.LineItems;
 						bool? y_(ClaimResponse.ItemComponent pClaimLineItem)
 						{
 							Id ac_()
 							{
 								bool aq_()
 								{
-									var ar_ = medClaim?.Claim;
-									var as_ = ar_ is Resource;
+									Claim ar_ = medClaim?.Claim;
+									bool as_ = ar_ is Resource;
 
 									return as_;
 								};
 								if (aq_())
 								{
-									var at_ = medClaim?.Claim;
+									Claim at_ = medClaim?.Claim;
 
 									return (at_ as Resource).IdElement;
 								}
@@ -3016,36 +3016,36 @@ public class NCQAClaims_1_0_0
 									return null;
 								}
 							};
-							var ad_ = FHIRHelpers_4_0_001.ToString(ac_());
-							var ae_ = pClaim?.Response;
-							var af_ = ae_?.Request;
-							var ag_ = af_?.ReferenceElement;
-							var ah_ = FHIRHelpers_4_0_001.ToString(ag_);
-							var ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
-							var aj_ = context.Operators.Equal(ad_, ai_);
-							var ak_ = medClaimLineItem?.SequenceElement;
-							var al_ = context.Operators.Convert<Integer>(ak_);
-							var am_ = pClaimLineItem?.ItemSequenceElement;
-							var an_ = context.Operators.Convert<Integer>(am_);
-							var ao_ = context.Operators.Equal(al_, an_);
-							var ap_ = context.Operators.And(aj_, ao_);
+							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
+							ClaimResponse ae_ = pClaim?.Response;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
+							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
+							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
+							bool? aj_ = context.Operators.Equal(ad_, ai_);
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
+							Integer al_ = context.Operators.Convert<Integer>(ak_);
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
+							Integer an_ = context.Operators.Convert<Integer>(am_);
+							bool? ao_ = context.Operators.Equal(al_, an_);
+							bool? ap_ = context.Operators.And(aj_, ao_);
 
 							return ap_;
 						};
-						var z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
+						IEnumerable<ClaimResponse.ItemComponent> z_ = context.Operators.Where<ClaimResponse.ItemComponent>(x_, y_);
 						Tuple_BYXPfHJAafYUZgPBifWFNjLXc aa_(ClaimResponse.ItemComponent pClaimLineItem) => 
 							pClaim;
-						var ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
+						IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> ab_ = context.Operators.Select<ClaimResponse.ItemComponent, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(z_, aa_);
 
 						return ab_;
 					};
-					var v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
-					var w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
+					IEnumerable<Tuple_BYXPfHJAafYUZgPBifWFNjLXc> v_ = context.Operators.SelectMany<Tuple_BYXPfHJAafYUZgPBifWFNjLXc, Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(t_, u_);
+					bool? w_ = context.Operators.Exists<Tuple_BYXPfHJAafYUZgPBifWFNjLXc>(v_);
 
 					return w_;
 				};
-				var r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
-				var s_ = new Tuple_FNLZPXZWGLChDNZjQJNigGGGN
+				IEnumerable<Claim.ItemComponent> r_ = context.Operators.Where<Claim.ItemComponent>(p_, q_);
+				Tuple_FNLZPXZWGLChDNZjQJNigGGGN s_ = new Tuple_FNLZPXZWGLChDNZjQJNigGGGN
 				{
 					PaidClaim = medClaim,
 					ClaimItem = r_,
@@ -3053,12 +3053,12 @@ public class NCQAClaims_1_0_0
 
 				return s_;
 			};
-			var j_ = context.Operators.Select<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY, Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(h_, i_);
-			var k_ = new Tuple_EMbbXAAHNDcXYSgLIhAhQCWON
+			IEnumerable<Tuple_FNLZPXZWGLChDNZjQJNigGGGN> j_ = context.Operators.Select<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY, Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(h_, i_);
+			Tuple_EMbbXAAHNDcXYSgLIhAhQCWON k_ = new Tuple_EMbbXAAHNDcXYSgLIhAhQCWON
 			{
 				AggregateClaim = j_,
 			};
-			var l_ = new Tuple_EMbbXAAHNDcXYSgLIhAhQCWON[]
+			Tuple_EMbbXAAHNDcXYSgLIhAhQCWON[] l_ = new Tuple_EMbbXAAHNDcXYSgLIhAhQCWON[]
 			{
 				k_,
 			};
@@ -3068,112 +3068,112 @@ public class NCQAClaims_1_0_0
 				{
 					bool az_()
 					{
-						var ba_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_FNLZPXZWGLChDNZjQJNigGGGN> ba_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bb_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var bh_ = @this?.ClaimItem;
-							var bi_ = context.Operators.Not((bool?)(bh_ is null));
+							IEnumerable<Claim.ItemComponent> bh_ = @this?.ClaimItem;
+							bool? bi_ = context.Operators.Not((bool?)(bh_ is null));
 
 							return bi_;
 						};
-						var bc_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(ba_, bb_);
+						IEnumerable<Tuple_FNLZPXZWGLChDNZjQJNigGGGN> bc_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(ba_, bb_);
 						IEnumerable<Claim.ItemComponent> bd_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var bj_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
 
 							return bj_;
 						};
-						var be_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
-						var bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
-						var bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> be_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, IEnumerable<Claim.ItemComponent>>(bc_, bd_);
+						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
+						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
 						return (bg_ ?? false);
 					};
 					if (az_())
 					{
-						var bk_ = ClaimWithPaidResponse?.AggregateClaim;
+						IEnumerable<Tuple_FNLZPXZWGLChDNZjQJNigGGGN> bk_ = ClaimWithPaidResponse?.AggregateClaim;
 						bool? bl_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var cg_ = @this?.PaidClaim;
-							var ch_ = context.Operators.Not((bool?)(cg_ is null));
+							Tuple_GGLURZZjYLMjhaMLVbjKOcMAY cg_ = @this?.PaidClaim;
+							bool? ch_ = context.Operators.Not((bool?)(cg_ is null));
 
 							return ch_;
 						};
-						var bm_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(bk_, bl_);
+						IEnumerable<Tuple_FNLZPXZWGLChDNZjQJNigGGGN> bm_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(bk_, bl_);
 						Tuple_GGLURZZjYLMjhaMLVbjKOcMAY bn_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var ci_ = @this?.PaidClaim;
+							Tuple_GGLURZZjYLMjhaMLVbjKOcMAY ci_ = @this?.PaidClaim;
 
 							return ci_;
 						};
-						var bo_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(bm_, bn_);
+						IEnumerable<Tuple_GGLURZZjYLMjhaMLVbjKOcMAY> bo_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, Tuple_GGLURZZjYLMjhaMLVbjKOcMAY>(bm_, bn_);
 						bool? bq_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var cj_ = @this?.ClaimItem;
-							var ck_ = context.Operators.Not((bool?)(cj_ is null));
+							IEnumerable<Claim.ItemComponent> cj_ = @this?.ClaimItem;
+							bool? ck_ = context.Operators.Not((bool?)(cj_ is null));
 
 							return ck_;
 						};
-						var br_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(bk_, bq_);
+						IEnumerable<Tuple_FNLZPXZWGLChDNZjQJNigGGGN> br_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(bk_, bq_);
 						IEnumerable<Claim.ItemComponent> bs_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var cl_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> cl_ = @this?.ClaimItem;
 
 							return cl_;
 						};
-						var bt_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, IEnumerable<Claim.ItemComponent>>(br_, bs_);
-						var bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> bt_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, IEnumerable<Claim.ItemComponent>>(br_, bs_);
+						IEnumerable<Claim.ItemComponent> bu_ = context.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							var cm_ = PaidItem?.Serviced;
-							var cn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cm_);
+							DataType cm_ = PaidItem?.Serviced;
+							CqlInterval<CqlDateTime> cn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cm_);
 
 							return cn_;
 						};
-						var bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
+						IEnumerable<CqlInterval<CqlDateTime>> bw_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bu_, bv_);
 						bool? by_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var co_ = @this?.ClaimItem;
-							var cp_ = context.Operators.Not((bool?)(co_ is null));
+							IEnumerable<Claim.ItemComponent> co_ = @this?.ClaimItem;
+							bool? cp_ = context.Operators.Not((bool?)(co_ is null));
 
 							return cp_;
 						};
-						var bz_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(bk_, by_);
+						IEnumerable<Tuple_FNLZPXZWGLChDNZjQJNigGGGN> bz_ = context.Operators.Where<Tuple_FNLZPXZWGLChDNZjQJNigGGGN>(bk_, by_);
 						IEnumerable<Claim.ItemComponent> ca_(Tuple_FNLZPXZWGLChDNZjQJNigGGGN @this)
 						{
-							var cq_ = @this?.ClaimItem;
+							IEnumerable<Claim.ItemComponent> cq_ = @this?.ClaimItem;
 
 							return cq_;
 						};
-						var cb_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, IEnumerable<Claim.ItemComponent>>(bz_, ca_);
-						var cc_ = context.Operators.Flatten<Claim.ItemComponent>(cb_);
+						IEnumerable<IEnumerable<Claim.ItemComponent>> cb_ = context.Operators.Select<Tuple_FNLZPXZWGLChDNZjQJNigGGGN, IEnumerable<Claim.ItemComponent>>(bz_, ca_);
+						IEnumerable<Claim.ItemComponent> cc_ = context.Operators.Flatten<Claim.ItemComponent>(cb_);
 						CqlInterval<CqlDate> cd_(Claim.ItemComponent i)
 						{
 							CqlInterval<CqlDate> cr_()
 							{
 								bool cs_()
 								{
-									var ct_ = i?.Quantity;
-									var cu_ = context.Operators.Not((bool?)(ct_ is null));
+									Quantity ct_ = i?.Quantity;
+									bool? cu_ = context.Operators.Not((bool?)(ct_ is null));
 
 									return (cu_ ?? false);
 								};
 								if (cs_())
 								{
-									var cv_ = i?.Serviced;
-									var cw_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cv_);
-									var cx_ = context.Operators.Start(cw_);
-									var cy_ = context.Operators.ConvertDateTimeToDate(cx_);
-									var da_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cv_);
-									var db_ = context.Operators.Start(da_);
-									var dc_ = i?.Quantity;
-									var dd_ = dc_?.ValueElement;
-									var de_ = FHIRHelpers_4_0_001.ToDecimal(dd_);
-									var df_ = context.Operators.Add(db_, new CqlQuantity(de_, "day"));
-									var dg_ = context.Operators.Quantity(1m, "day");
-									var dh_ = context.Operators.Subtract(df_, dg_);
-									var di_ = context.Operators.ConvertDateTimeToDate(dh_);
-									var dj_ = context.Operators.Interval(cy_, di_, true, true);
+									DataType cv_ = i?.Serviced;
+									CqlInterval<CqlDateTime> cw_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cv_);
+									CqlDateTime cx_ = context.Operators.Start(cw_);
+									CqlDate cy_ = context.Operators.ConvertDateTimeToDate(cx_);
+									CqlInterval<CqlDateTime> da_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cv_);
+									CqlDateTime db_ = context.Operators.Start(da_);
+									Quantity dc_ = i?.Quantity;
+									FhirDecimal dd_ = dc_?.ValueElement;
+									decimal? de_ = FHIRHelpers_4_0_001.ToDecimal(dd_);
+									CqlDateTime df_ = context.Operators.Add(db_, new CqlQuantity(de_, "day"));
+									CqlQuantity dg_ = context.Operators.Quantity(1m, "day");
+									CqlDateTime dh_ = context.Operators.Subtract(df_, dg_);
+									CqlDate di_ = context.Operators.ConvertDateTimeToDate(dh_);
+									CqlInterval<CqlDate> dj_ = context.Operators.Interval(cy_, di_, true, true);
 
 									return dj_;
 								}
@@ -3185,8 +3185,8 @@ public class NCQAClaims_1_0_0
 
 							return cr_();
 						};
-						var ce_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDate>>(cc_, cd_);
-						var cf_ = new Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV
+						IEnumerable<CqlInterval<CqlDate>> ce_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDate>>(cc_, cd_);
+						Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV cf_ = new Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV
 						{
 							originalClaim = bo_,
 							ServicePeriod = bw_,
@@ -3200,28 +3200,28 @@ public class NCQAClaims_1_0_0
 						return null;
 					}
 				};
-				var av_ = new Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV[]
+				Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV[] av_ = new Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV[]
 				{
 					au_(),
 				};
 				bool? aw_(Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV FinalList)
 				{
-					var dk_ = context.Operators.Not((bool?)(FinalList is null));
+					bool? dk_ = context.Operators.Not((bool?)(FinalList is null));
 
 					return dk_;
 				};
-				var ax_ = context.Operators.Where<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>)av_, aw_);
-				var ay_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(ax_);
+				IEnumerable<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV> ax_ = context.Operators.Where<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>)av_, aw_);
+				Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV ay_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(ax_);
 
 				return ay_;
 			};
-			var n_ = context.Operators.Select<Tuple_EMbbXAAHNDcXYSgLIhAhQCWON, Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_EMbbXAAHNDcXYSgLIhAhQCWON>)l_, m_);
-			var o_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(n_);
+			IEnumerable<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV> n_ = context.Operators.Select<Tuple_EMbbXAAHNDcXYSgLIhAhQCWON, Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_EMbbXAAHNDcXYSgLIhAhQCWON>)l_, m_);
+			Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV o_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(n_);
 
 			return o_;
 		};
-		var f_ = context.Operators.Select<Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj, Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj>)d_, e_);
-		var g_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(f_);
+		IEnumerable<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV> f_ = context.Operators.Select<Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj, Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_ETbUUAbGJFCcYLGFaEAgMaiBj>)d_, e_);
+		Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV g_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(f_);
 
 		return g_;
 	}
@@ -3229,8 +3229,8 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Get Paid Claims for Pharmacy Services")]
 	public Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV Get_Paid_Claims_for_Pharmacy_Services(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(claimResponse, claim);
-		var b_ = new Tuple_EGPWWEihGWWSCCiZLgdcFLIcD[]
+		Tuple_EGPWWEihGWWSCCiZLgdcFLIcD a_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(claimResponse, claim);
+		Tuple_EGPWWEihGWWSCCiZLgdcFLIcD[] b_ = new Tuple_EGPWWEihGWWSCCiZLgdcFLIcD[]
 		{
 			a_,
 		};
@@ -3240,9 +3240,9 @@ public class NCQAClaims_1_0_0
 			{
 				bool g_()
 				{
-					var h_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
-					var i_ = PharmacyClaimAndResponse?.PharmacyClaim;
-					var j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
+					IEnumerable<ClaimResponse> h_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
+					IEnumerable<Claim> i_ = PharmacyClaimAndResponse?.PharmacyClaim;
+					bool? j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
 
 					return (j_ ?? false);
 				};
@@ -3252,9 +3252,9 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var k_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
-					var l_ = PharmacyClaimAndResponse?.PharmacyClaim;
-					var m_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(k_, l_, ProductOrServiceValueSet);
+					IEnumerable<ClaimResponse> k_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
+					IEnumerable<Claim> l_ = PharmacyClaimAndResponse?.PharmacyClaim;
+					Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV m_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(k_, l_, ProductOrServiceValueSet);
 
 					return m_;
 				}
@@ -3262,8 +3262,8 @@ public class NCQAClaims_1_0_0
 
 			return f_();
 		};
-		var d_ = context.Operators.Select<Tuple_EGPWWEihGWWSCCiZLgdcFLIcD, Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_EGPWWEihGWWSCCiZLgdcFLIcD>)b_, c_);
-		var e_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(d_);
+		IEnumerable<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV> d_ = context.Operators.Select<Tuple_EGPWWEihGWWSCCiZLgdcFLIcD, Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>((IEnumerable<Tuple_EGPWWEihGWWSCCiZLgdcFLIcD>)b_, c_);
+		Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV e_ = context.Operators.SingletonFrom<Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV>(d_);
 
 		return e_;
 	}
@@ -3275,73 +3275,73 @@ public class NCQAClaims_1_0_0
 		{
 			bool? c_(ClaimResponse CR)
 			{
-				var h_ = Claim?.IdElement;
-				var i_ = FHIRHelpers_4_0_001.ToString(h_);
-				var j_ = CR?.Request;
-				var k_ = j_?.ReferenceElement;
-				var l_ = FHIRHelpers_4_0_001.ToString(k_);
-				var m_ = NCQAFHIRBase_1_0_0.GetId(l_);
-				var n_ = context.Operators.Equal(i_, m_);
+				Id h_ = Claim?.IdElement;
+				string i_ = FHIRHelpers_4_0_001.ToString(h_);
+				ResourceReference j_ = CR?.Request;
+				FhirString k_ = j_?.ReferenceElement;
+				string l_ = FHIRHelpers_4_0_001.ToString(k_);
+				string m_ = NCQAFHIRBase_1_0_0.GetId(l_);
+				bool? n_ = context.Operators.Equal(i_, m_);
 
 				return n_;
 			};
-			var d_ = context.Operators.Where<ClaimResponse>(claimResponse, c_);
+			IEnumerable<ClaimResponse> d_ = context.Operators.Where<ClaimResponse>(claimResponse, c_);
 			bool? e_(Claim C)
 			{
-				var o_ = Claim?.IdElement;
-				var p_ = FHIRHelpers_4_0_001.ToString(o_);
+				Id o_ = Claim?.IdElement;
+				string p_ = FHIRHelpers_4_0_001.ToString(o_);
 				bool? q_(ClaimResponse CR)
 				{
-					var ae_ = Claim?.IdElement;
-					var af_ = FHIRHelpers_4_0_001.ToString(ae_);
-					var ag_ = CR?.Request;
-					var ah_ = ag_?.ReferenceElement;
-					var ai_ = FHIRHelpers_4_0_001.ToString(ah_);
-					var aj_ = NCQAFHIRBase_1_0_0.GetId(ai_);
-					var ak_ = context.Operators.Equal(af_, aj_);
+					Id ae_ = Claim?.IdElement;
+					string af_ = FHIRHelpers_4_0_001.ToString(ae_);
+					ResourceReference ag_ = CR?.Request;
+					FhirString ah_ = ag_?.ReferenceElement;
+					string ai_ = FHIRHelpers_4_0_001.ToString(ah_);
+					string aj_ = NCQAFHIRBase_1_0_0.GetId(ai_);
+					bool? ak_ = context.Operators.Equal(af_, aj_);
 
 					return ak_;
 				};
-				var r_ = context.Operators.Where<ClaimResponse>(claimResponse, q_);
+				IEnumerable<ClaimResponse> r_ = context.Operators.Where<ClaimResponse>(claimResponse, q_);
 				bool? s_(ClaimResponse @this)
 				{
-					var al_ = @this?.Request;
-					var am_ = context.Operators.Not((bool?)(al_ is null));
+					ResourceReference al_ = @this?.Request;
+					bool? am_ = context.Operators.Not((bool?)(al_ is null));
 
 					return am_;
 				};
-				var t_ = context.Operators.Where<ClaimResponse>(r_, s_);
+				IEnumerable<ClaimResponse> t_ = context.Operators.Where<ClaimResponse>(r_, s_);
 				ResourceReference u_(ClaimResponse @this)
 				{
-					var an_ = @this?.Request;
+					ResourceReference an_ = @this?.Request;
 
 					return an_;
 				};
-				var v_ = context.Operators.Select<ClaimResponse, ResourceReference>(t_, u_);
+				IEnumerable<ResourceReference> v_ = context.Operators.Select<ClaimResponse, ResourceReference>(t_, u_);
 				bool? w_(ResourceReference @this)
 				{
-					var ao_ = @this?.ReferenceElement;
-					var ap_ = context.Operators.Not((bool?)(ao_ is null));
+					FhirString ao_ = @this?.ReferenceElement;
+					bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
 
 					return ap_;
 				};
-				var x_ = context.Operators.Where<ResourceReference>(v_, w_);
+				IEnumerable<ResourceReference> x_ = context.Operators.Where<ResourceReference>(v_, w_);
 				FhirString y_(ResourceReference @this)
 				{
-					var aq_ = @this?.ReferenceElement;
+					FhirString aq_ = @this?.ReferenceElement;
 
 					return aq_;
 				};
-				var z_ = context.Operators.Select<ResourceReference, FhirString>(x_, y_);
-				var aa_ = context.Operators.SingletonFrom<FhirString>(z_);
-				var ab_ = FHIRHelpers_4_0_001.ToString(aa_);
-				var ac_ = NCQAFHIRBase_1_0_0.GetId(ab_);
-				var ad_ = context.Operators.Equal(p_, ac_);
+				IEnumerable<FhirString> z_ = context.Operators.Select<ResourceReference, FhirString>(x_, y_);
+				FhirString aa_ = context.Operators.SingletonFrom<FhirString>(z_);
+				string ab_ = FHIRHelpers_4_0_001.ToString(aa_);
+				string ac_ = NCQAFHIRBase_1_0_0.GetId(ab_);
+				bool? ad_ = context.Operators.Equal(p_, ac_);
 
 				return ad_;
 			};
-			var f_ = context.Operators.Where<Claim>(claim, e_);
-			var g_ = new Tuple_CZThYJbgajVLdhIZdgZiXBFQK
+			IEnumerable<Claim> f_ = context.Operators.Where<Claim>(claim, e_);
+			Tuple_CZThYJbgajVLdhIZdgZiXBFQK g_ = new Tuple_CZThYJbgajVLdhIZdgZiXBFQK
 			{
 				ClaimResponse = d_,
 				OriginalClaim = f_,
@@ -3349,7 +3349,7 @@ public class NCQAClaims_1_0_0
 
 			return g_;
 		};
-		var b_ = context.Operators.Select<Claim, Tuple_CZThYJbgajVLdhIZdgZiXBFQK>(claim, a_);
+		IEnumerable<Tuple_CZThYJbgajVLdhIZdgZiXBFQK> b_ = context.Operators.Select<Claim, Tuple_CZThYJbgajVLdhIZdgZiXBFQK>(claim, a_);
 
 		return b_;
 	}
@@ -3357,12 +3357,12 @@ public class NCQAClaims_1_0_0
     [CqlDeclaration("Medical Claims With Nonacute or Acute Inpatient Discharge")]
 	public Tuple_eaabEEMNTgcTCVVWQFDOgRNO Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(IEnumerable<Claim> claim)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
-		var b_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
+		Tuple_FXYEMgTMOeKcIebiZCTUajHVX b_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX
 		{
 			MedicalClaim = a_,
 		};
-		var c_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX[]
+		Tuple_FXYEMgTMOeKcIebiZCTUajHVX[] c_ = new Tuple_FXYEMgTMOeKcIebiZCTUajHVX[]
 		{
 			b_,
 		};
@@ -3376,34 +3376,34 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var n_ = ClaimWithInpatientStay?.MedicalClaim;
+					IEnumerable<Claim> n_ = ClaimWithInpatientStay?.MedicalClaim;
 					bool? o_(Claim c)
 					{
-						var q_ = c?.Item;
+						List<Claim.ItemComponent> q_ = c?.Item;
 						bool? r_(Claim.ItemComponent i)
 						{
-							var u_ = i?.Revenue;
-							var v_ = FHIRHelpers_4_0_001.ToConcept(u_);
-							var w_ = v_?.codes;
+							CodeableConcept u_ = i?.Revenue;
+							CqlConcept v_ = FHIRHelpers_4_0_001.ToConcept(u_);
+							CqlCode[] w_ = v_?.codes;
 							bool? x_(CqlCode rev)
 							{
-								var aa_ = rev?.code;
-								var ab_ = this.Inpatient_Stay();
-								var ac_ = context.Operators.StringInValueSet(aa_, ab_);
+								string aa_ = rev?.code;
+								CqlValueSet ab_ = this.Inpatient_Stay();
+								bool? ac_ = context.Operators.StringInValueSet(aa_, ab_);
 
 								return ac_;
 							};
-							var y_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)w_, x_);
-							var z_ = context.Operators.Exists<CqlCode>(y_);
+							IEnumerable<CqlCode> y_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)w_, x_);
+							bool? z_ = context.Operators.Exists<CqlCode>(y_);
 
 							return z_;
 						};
-						var s_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)q_, r_);
-						var t_ = context.Operators.Exists<Claim.ItemComponent>(s_);
+						IEnumerable<Claim.ItemComponent> s_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)q_, r_);
+						bool? t_ = context.Operators.Exists<Claim.ItemComponent>(s_);
 
 						return t_;
 					};
-					var p_ = context.Operators.Where<Claim>(n_, o_);
+					IEnumerable<Claim> p_ = context.Operators.Where<Claim>(n_, o_);
 
 					return p_;
 				}
@@ -3416,105 +3416,105 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var ad_ = ClaimWithInpatientStay?.MedicalClaim;
+					IEnumerable<Claim> ad_ = ClaimWithInpatientStay?.MedicalClaim;
 					bool? ae_(Claim c)
 					{
-						var ag_ = c?.Item;
+						List<Claim.ItemComponent> ag_ = c?.Item;
 						bool? ah_(Claim.ItemComponent i)
 						{
-							var aq_ = i?.Revenue;
-							var ar_ = FHIRHelpers_4_0_001.ToConcept(aq_);
-							var as_ = ar_?.codes;
+							CodeableConcept aq_ = i?.Revenue;
+							CqlConcept ar_ = FHIRHelpers_4_0_001.ToConcept(aq_);
+							CqlCode[] as_ = ar_?.codes;
 							bool? at_(CqlCode rev)
 							{
-								var aw_ = rev?.code;
-								var ax_ = this.Nonacute_Inpatient_Stay();
-								var ay_ = context.Operators.StringInValueSet(aw_, ax_);
+								string aw_ = rev?.code;
+								CqlValueSet ax_ = this.Nonacute_Inpatient_Stay();
+								bool? ay_ = context.Operators.StringInValueSet(aw_, ax_);
 
 								return ay_;
 							};
-							var au_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)as_, at_);
-							var av_ = context.Operators.Exists<CqlCode>(au_);
+							IEnumerable<CqlCode> au_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)as_, at_);
+							bool? av_ = context.Operators.Exists<CqlCode>(au_);
 
 							return av_;
 						};
-						var ai_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ag_, ah_);
-						var aj_ = context.Operators.Exists<Claim.ItemComponent>(ai_);
-						var ak_ = c?.SubType;
-						var al_ = ak_?.Coding;
+						IEnumerable<Claim.ItemComponent> ai_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ag_, ah_);
+						bool? aj_ = context.Operators.Exists<Claim.ItemComponent>(ai_);
+						CodeableConcept ak_ = c?.SubType;
+						List<Coding> al_ = ak_?.Coding;
 						bool? am_(Coding tob)
 						{
-							var az_ = tob?.CodeElement;
-							var ba_ = az_?.Value;
-							var bb_ = this.Nonacute_Inpatient_Stay();
-							var bc_ = context.Operators.StringInValueSet(ba_, bb_);
+							Code az_ = tob?.CodeElement;
+							string ba_ = az_?.Value;
+							CqlValueSet bb_ = this.Nonacute_Inpatient_Stay();
+							bool? bc_ = context.Operators.StringInValueSet(ba_, bb_);
 
 							return bc_;
 						};
-						var an_ = context.Operators.Where<Coding>((IEnumerable<Coding>)al_, am_);
-						var ao_ = context.Operators.Exists<Coding>(an_);
-						var ap_ = context.Operators.Or(aj_, ao_);
+						IEnumerable<Coding> an_ = context.Operators.Where<Coding>((IEnumerable<Coding>)al_, am_);
+						bool? ao_ = context.Operators.Exists<Coding>(an_);
+						bool? ap_ = context.Operators.Or(aj_, ao_);
 
 						return ap_;
 					};
-					var af_ = context.Operators.Where<Claim>(ad_, ae_);
+					IEnumerable<Claim> af_ = context.Operators.Where<Claim>(ad_, ae_);
 
 					return af_;
 				}
 			};
-			var i_ = new Tuple_GFUjSKcYaHagAZIhSUhffHjHP
+			Tuple_GFUjSKcYaHagAZIhSUhffHjHP i_ = new Tuple_GFUjSKcYaHagAZIhSUhffHjHP
 			{
 				InpatientStayLineItems = g_(),
 				NonacuteInpatientLineItems = h_(),
 			};
-			var j_ = new Tuple_GFUjSKcYaHagAZIhSUhffHjHP[]
+			Tuple_GFUjSKcYaHagAZIhSUhffHjHP[] j_ = new Tuple_GFUjSKcYaHagAZIhSUhffHjHP[]
 			{
 				i_,
 			};
 			Tuple_eaabEEMNTgcTCVVWQFDOgRNO k_(Tuple_GFUjSKcYaHagAZIhSUhffHjHP LineItemDefinition)
 			{
-				var bd_ = LineItemDefinition?.InpatientStayLineItems;
-				var be_ = LineItemDefinition?.NonacuteInpatientLineItems;
+				IEnumerable<Claim> bd_ = LineItemDefinition?.InpatientStayLineItems;
+				IEnumerable<Claim> be_ = LineItemDefinition?.NonacuteInpatientLineItems;
 				IEnumerable<Claim> bf_(Claim nonAcuteInpatientStay)
 				{
-					var bn_ = LineItemDefinition?.InpatientStayLineItems;
+					IEnumerable<Claim> bn_ = LineItemDefinition?.InpatientStayLineItems;
 					bool? bo_(Claim inpatientStay)
 					{
-						var bs_ = nonAcuteInpatientStay?.IdElement;
-						var bt_ = inpatientStay?.IdElement;
-						var bu_ = context.Operators.Equal(bs_, bt_);
+						Id bs_ = nonAcuteInpatientStay?.IdElement;
+						Id bt_ = inpatientStay?.IdElement;
+						bool? bu_ = context.Operators.Equal(bs_, bt_);
 
 						return bu_;
 					};
-					var bp_ = context.Operators.Where<Claim>(bn_, bo_);
+					IEnumerable<Claim> bp_ = context.Operators.Where<Claim>(bn_, bo_);
 					Claim bq_(Claim inpatientStay) => 
 						nonAcuteInpatientStay;
-					var br_ = context.Operators.Select<Claim, Claim>(bp_, bq_);
+					IEnumerable<Claim> br_ = context.Operators.Select<Claim, Claim>(bp_, bq_);
 
 					return br_;
 				};
-				var bg_ = context.Operators.SelectMany<Claim, Claim>(be_, bf_);
+				IEnumerable<Claim> bg_ = context.Operators.SelectMany<Claim, Claim>(be_, bf_);
 				IEnumerable<Claim> bj_(Claim inpatientStay)
 				{
-					var bv_ = LineItemDefinition?.NonacuteInpatientLineItems;
+					IEnumerable<Claim> bv_ = LineItemDefinition?.NonacuteInpatientLineItems;
 					bool? bw_(Claim nonAcuteInpatientStay)
 					{
-						var ca_ = inpatientStay?.IdElement;
-						var cb_ = nonAcuteInpatientStay?.IdElement;
-						var cc_ = context.Operators.Equal(ca_, cb_);
+						Id ca_ = inpatientStay?.IdElement;
+						Id cb_ = nonAcuteInpatientStay?.IdElement;
+						bool? cc_ = context.Operators.Equal(ca_, cb_);
 
 						return cc_;
 					};
-					var bx_ = context.Operators.Where<Claim>(bv_, bw_);
+					IEnumerable<Claim> bx_ = context.Operators.Where<Claim>(bv_, bw_);
 					Claim by_(Claim nonAcuteInpatientStay) => 
 						inpatientStay;
-					var bz_ = context.Operators.Select<Claim, Claim>(bx_, by_);
+					IEnumerable<Claim> bz_ = context.Operators.Select<Claim, Claim>(bx_, by_);
 
 					return bz_;
 				};
-				var bk_ = context.Operators.SelectMany<Claim, Claim>(bd_, bj_);
-				var bl_ = context.Operators.ListExcept<Claim>(bd_, bk_);
-				var bm_ = new Tuple_eaabEEMNTgcTCVVWQFDOgRNO
+				IEnumerable<Claim> bk_ = context.Operators.SelectMany<Claim, Claim>(bd_, bj_);
+				IEnumerable<Claim> bl_ = context.Operators.ListExcept<Claim>(bd_, bk_);
+				Tuple_eaabEEMNTgcTCVVWQFDOgRNO bm_ = new Tuple_eaabEEMNTgcTCVVWQFDOgRNO
 				{
 					InpatientDischarge = bd_,
 					NonacuteInpatientDischarge = bg_,
@@ -3523,13 +3523,13 @@ public class NCQAClaims_1_0_0
 
 				return bm_;
 			};
-			var l_ = context.Operators.Select<Tuple_GFUjSKcYaHagAZIhSUhffHjHP, Tuple_eaabEEMNTgcTCVVWQFDOgRNO>((IEnumerable<Tuple_GFUjSKcYaHagAZIhSUhffHjHP>)j_, k_);
-			var m_ = context.Operators.SingletonFrom<Tuple_eaabEEMNTgcTCVVWQFDOgRNO>(l_);
+			IEnumerable<Tuple_eaabEEMNTgcTCVVWQFDOgRNO> l_ = context.Operators.Select<Tuple_GFUjSKcYaHagAZIhSUhffHjHP, Tuple_eaabEEMNTgcTCVVWQFDOgRNO>((IEnumerable<Tuple_GFUjSKcYaHagAZIhSUhffHjHP>)j_, k_);
+			Tuple_eaabEEMNTgcTCVVWQFDOgRNO m_ = context.Operators.SingletonFrom<Tuple_eaabEEMNTgcTCVVWQFDOgRNO>(l_);
 
 			return m_;
 		};
-		var e_ = context.Operators.Select<Tuple_FXYEMgTMOeKcIebiZCTUajHVX, Tuple_eaabEEMNTgcTCVVWQFDOgRNO>((IEnumerable<Tuple_FXYEMgTMOeKcIebiZCTUajHVX>)c_, d_);
-		var f_ = context.Operators.SingletonFrom<Tuple_eaabEEMNTgcTCVVWQFDOgRNO>(e_);
+		IEnumerable<Tuple_eaabEEMNTgcTCVVWQFDOgRNO> e_ = context.Operators.Select<Tuple_FXYEMgTMOeKcIebiZCTUajHVX, Tuple_eaabEEMNTgcTCVVWQFDOgRNO>((IEnumerable<Tuple_FXYEMgTMOeKcIebiZCTUajHVX>)c_, d_);
+		Tuple_eaabEEMNTgcTCVVWQFDOgRNO f_ = context.Operators.SingletonFrom<Tuple_eaabEEMNTgcTCVVWQFDOgRNO>(e_);
 
 		return f_;
 	}
@@ -3539,78 +3539,78 @@ public class NCQAClaims_1_0_0
 	{
 		Tuple_CGBhZZbICOjJSOiHTigebRWSH a_(Claim C)
 		{
-			var h_ = C?.CareTeam;
+			List<Claim.CareTeamComponent> h_ = C?.CareTeam;
 			bool? i_(Claim.CareTeamComponent ct)
 			{
-				var y_ = ct?.SequenceElement;
-				var z_ = context.Operators.Convert<Integer>(y_);
-				var aa_ = FHIRHelpers_4_0_001.ToInteger(z_);
-				var ab_ = context.Operators.Equal(aa_, 1);
+				PositiveInt y_ = ct?.SequenceElement;
+				Integer z_ = context.Operators.Convert<Integer>(y_);
+				int? aa_ = FHIRHelpers_4_0_001.ToInteger(z_);
+				bool? ab_ = context.Operators.Equal(aa_, 1);
 
 				return ab_;
 			};
-			var j_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)h_, i_);
+			IEnumerable<Claim.CareTeamComponent> j_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)h_, i_);
 			bool? k_(Claim.CareTeamComponent @this)
 			{
-				var ac_ = @this?.Provider;
-				var ad_ = context.Operators.Not((bool?)(ac_ is null));
+				ResourceReference ac_ = @this?.Provider;
+				bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
 
 				return ad_;
 			};
-			var l_ = context.Operators.Where<Claim.CareTeamComponent>(j_, k_);
+			IEnumerable<Claim.CareTeamComponent> l_ = context.Operators.Where<Claim.CareTeamComponent>(j_, k_);
 			ResourceReference m_(Claim.CareTeamComponent @this)
 			{
-				var ae_ = @this?.Provider;
+				ResourceReference ae_ = @this?.Provider;
 
 				return ae_;
 			};
-			var n_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(l_, m_);
+			IEnumerable<ResourceReference> n_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(l_, m_);
 			bool? p_(Claim.CareTeamComponent ct)
 			{
-				var af_ = ct?.SequenceElement;
-				var ag_ = context.Operators.Convert<Integer>(af_);
-				var ah_ = FHIRHelpers_4_0_001.ToInteger(ag_);
-				var ai_ = context.Operators.Equal(ah_, 1);
+				PositiveInt af_ = ct?.SequenceElement;
+				Integer ag_ = context.Operators.Convert<Integer>(af_);
+				int? ah_ = FHIRHelpers_4_0_001.ToInteger(ag_);
+				bool? ai_ = context.Operators.Equal(ah_, 1);
 
 				return ai_;
 			};
-			var q_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)h_, p_);
+			IEnumerable<Claim.CareTeamComponent> q_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)h_, p_);
 			bool? r_(Claim.CareTeamComponent @this)
 			{
-				var aj_ = @this?.Provider;
-				var ak_ = context.Operators.Not((bool?)(aj_ is null));
+				ResourceReference aj_ = @this?.Provider;
+				bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
 
 				return ak_;
 			};
-			var s_ = context.Operators.Where<Claim.CareTeamComponent>(q_, r_);
+			IEnumerable<Claim.CareTeamComponent> s_ = context.Operators.Where<Claim.CareTeamComponent>(q_, r_);
 			ResourceReference t_(Claim.CareTeamComponent @this)
 			{
-				var al_ = @this?.Provider;
+				ResourceReference al_ = @this?.Provider;
 
 				return al_;
 			};
-			var u_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(s_, t_);
+			IEnumerable<ResourceReference> u_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(s_, t_);
 			string v_(ResourceReference p)
 			{
-				var am_ = p?.ReferenceElement;
-				var an_ = new FhirString[]
+				FhirString am_ = p?.ReferenceElement;
+				FhirString[] an_ = new FhirString[]
 				{
 					am_,
 				};
 				string ao_(FhirString r)
 				{
-					var ar_ = FHIRHelpers_4_0_001.ToString(r);
-					var as_ = NCQAFHIRBase_1_0_0.GetId(ar_);
+					string ar_ = FHIRHelpers_4_0_001.ToString(r);
+					string as_ = NCQAFHIRBase_1_0_0.GetId(ar_);
 
 					return as_;
 				};
-				var ap_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)an_, ao_);
-				var aq_ = context.Operators.SingletonFrom<string>(ap_);
+				IEnumerable<string> ap_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)an_, ao_);
+				string aq_ = context.Operators.SingletonFrom<string>(ap_);
 
 				return aq_;
 			};
-			var w_ = context.Operators.Select<ResourceReference, string>(u_, v_);
-			var x_ = new Tuple_CGBhZZbICOjJSOiHTigebRWSH
+			IEnumerable<string> w_ = context.Operators.Select<ResourceReference, string>(u_, v_);
+			Tuple_CGBhZZbICOjJSOiHTigebRWSH x_ = new Tuple_CGBhZZbICOjJSOiHTigebRWSH
 			{
 				SingleCareTeam = C,
 				CareTeamsProvider = n_,
@@ -3619,113 +3619,113 @@ public class NCQAClaims_1_0_0
 
 			return x_;
 		};
-		var b_ = context.Operators.Select<Claim, Tuple_CGBhZZbICOjJSOiHTigebRWSH>(claim, a_);
-		var c_ = new Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH
+		IEnumerable<Tuple_CGBhZZbICOjJSOiHTigebRWSH> b_ = context.Operators.Select<Claim, Tuple_CGBhZZbICOjJSOiHTigebRWSH>(claim, a_);
+		Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH c_ = new Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH
 		{
 			CareTeams = b_,
 		};
-		var d_ = new Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH[]
+		Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH[] d_ = new Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH[]
 		{
 			c_,
 		};
 		Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS e_(Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH ClaimProperties)
 		{
-			var at_ = context.Operators.RetrieveByValueSet<Practitioner>(null, null);
+			IEnumerable<Practitioner> at_ = context.Operators.RetrieveByValueSet<Practitioner>(null, null);
 			bool? au_(Practitioner p)
 			{
-				var bb_ = p?.IdElement;
-				var bc_ = FHIRHelpers_4_0_001.ToString(bb_);
-				var bd_ = ClaimProperties?.CareTeams;
+				Id bb_ = p?.IdElement;
+				string bc_ = FHIRHelpers_4_0_001.ToString(bb_);
+				IEnumerable<Tuple_CGBhZZbICOjJSOiHTigebRWSH> bd_ = ClaimProperties?.CareTeams;
 				bool? be_(Tuple_CGBhZZbICOjJSOiHTigebRWSH @this)
 				{
-					var bk_ = @this?.CareTeamsProviderID;
-					var bl_ = context.Operators.Not((bool?)(bk_ is null));
+					IEnumerable<string> bk_ = @this?.CareTeamsProviderID;
+					bool? bl_ = context.Operators.Not((bool?)(bk_ is null));
 
 					return bl_;
 				};
-				var bf_ = context.Operators.Where<Tuple_CGBhZZbICOjJSOiHTigebRWSH>(bd_, be_);
+				IEnumerable<Tuple_CGBhZZbICOjJSOiHTigebRWSH> bf_ = context.Operators.Where<Tuple_CGBhZZbICOjJSOiHTigebRWSH>(bd_, be_);
 				IEnumerable<string> bg_(Tuple_CGBhZZbICOjJSOiHTigebRWSH @this)
 				{
-					var bm_ = @this?.CareTeamsProviderID;
+					IEnumerable<string> bm_ = @this?.CareTeamsProviderID;
 
 					return bm_;
 				};
-				var bh_ = context.Operators.Select<Tuple_CGBhZZbICOjJSOiHTigebRWSH, IEnumerable<string>>(bf_, bg_);
-				var bi_ = context.Operators.Flatten<string>(bh_);
-				var bj_ = context.Operators.In<string>(bc_, bi_);
+				IEnumerable<IEnumerable<string>> bh_ = context.Operators.Select<Tuple_CGBhZZbICOjJSOiHTigebRWSH, IEnumerable<string>>(bf_, bg_);
+				IEnumerable<string> bi_ = context.Operators.Flatten<string>(bh_);
+				bool? bj_ = context.Operators.In<string>(bc_, bi_);
 
 				return bj_;
 			};
-			var av_ = context.Operators.Where<Practitioner>(at_, au_);
-			var aw_ = new Tuple_FPVdJEEOUKFVhQPTfKhShUNO
+			IEnumerable<Practitioner> av_ = context.Operators.Where<Practitioner>(at_, au_);
+			Tuple_FPVdJEEOUKFVhQPTfKhShUNO aw_ = new Tuple_FPVdJEEOUKFVhQPTfKhShUNO
 			{
 				Practitioners = av_,
 			};
-			var ax_ = new Tuple_FPVdJEEOUKFVhQPTfKhShUNO[]
+			Tuple_FPVdJEEOUKFVhQPTfKhShUNO[] ax_ = new Tuple_FPVdJEEOUKFVhQPTfKhShUNO[]
 			{
 				aw_,
 			};
 			Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS ay_(Tuple_FPVdJEEOUKFVhQPTfKhShUNO PractitionerMatch)
 			{
-				var bn_ = PractitionerMatch?.Practitioners;
+				IEnumerable<Practitioner> bn_ = PractitionerMatch?.Practitioners;
 				bool? bo_(Practitioner P)
 				{
-					var bx_ = context.Operators.Not((bool?)(P is null));
+					bool? bx_ = context.Operators.Not((bool?)(P is null));
 
 					return bx_;
 				};
-				var bp_ = context.Operators.Where<Practitioner>(bn_, bo_);
+				IEnumerable<Practitioner> bp_ = context.Operators.Where<Practitioner>(bn_, bo_);
 				Tuple_EheHUARRFfQdCcHKeSEhfYZMj bq_(Practitioner P)
 				{
-					var by_ = P?.Identifier;
+					List<Identifier> by_ = P?.Identifier;
 					bool? bz_(Identifier l)
 					{
-						var cj_ = l?.SystemElement;
-						var ck_ = cj_?.Value;
-						var cl_ = context.Operators.Equal(ck_, "http://hl7.org/fhir/sid/us-npi");
-						var cm_ = l?.Type;
-						var cn_ = FHIRHelpers_4_0_001.ToConcept(cm_);
-						var co_ = NCQATerminology_1_0_0.Provider_number();
-						var cp_ = context.Operators.ConvertCodeToConcept(co_);
-						var cq_ = context.Operators.Equivalent(cn_, cp_);
-						var cr_ = context.Operators.And(cl_, cq_);
-						var cs_ = l?.ValueElement;
-						var ct_ = cs_?.Value;
-						var cu_ = context.Operators.Not((bool?)(ct_ is null));
-						var cv_ = context.Operators.And(cr_, cu_);
+						FhirUri cj_ = l?.SystemElement;
+						string ck_ = cj_?.Value;
+						bool? cl_ = context.Operators.Equal(ck_, "http://hl7.org/fhir/sid/us-npi");
+						CodeableConcept cm_ = l?.Type;
+						CqlConcept cn_ = FHIRHelpers_4_0_001.ToConcept(cm_);
+						CqlCode co_ = NCQATerminology_1_0_0.Provider_number();
+						CqlConcept cp_ = context.Operators.ConvertCodeToConcept(co_);
+						bool? cq_ = context.Operators.Equivalent(cn_, cp_);
+						bool? cr_ = context.Operators.And(cl_, cq_);
+						FhirString cs_ = l?.ValueElement;
+						string ct_ = cs_?.Value;
+						bool? cu_ = context.Operators.Not((bool?)(ct_ is null));
+						bool? cv_ = context.Operators.And(cr_, cu_);
 
 						return cv_;
 					};
-					var ca_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)by_, bz_);
+					IEnumerable<Identifier> ca_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)by_, bz_);
 					FhirString cb_(Identifier l)
 					{
-						var cw_ = l?.ValueElement;
+						FhirString cw_ = l?.ValueElement;
 
 						return cw_;
 					};
-					var cc_ = context.Operators.Select<Identifier, FhirString>(ca_, cb_);
+					IEnumerable<FhirString> cc_ = context.Operators.Select<Identifier, FhirString>(ca_, cb_);
 					bool? ce_(Identifier l)
 					{
-						var cx_ = l?.SystemElement;
-						var cy_ = cx_?.Value;
-						var cz_ = context.Operators.Equal(cy_, "http://hl7.org/fhir/sid/us-npi");
-						var da_ = l?.Type;
-						var db_ = FHIRHelpers_4_0_001.ToConcept(da_);
-						var dc_ = NCQATerminology_1_0_0.Provider_number();
-						var dd_ = context.Operators.ConvertCodeToConcept(dc_);
-						var de_ = context.Operators.Equivalent(db_, dd_);
-						var df_ = context.Operators.And(cz_, de_);
-						var dg_ = l?.ValueElement;
-						var dh_ = dg_?.Value;
-						var di_ = context.Operators.And(df_, (bool?)(dh_ is null));
+						FhirUri cx_ = l?.SystemElement;
+						string cy_ = cx_?.Value;
+						bool? cz_ = context.Operators.Equal(cy_, "http://hl7.org/fhir/sid/us-npi");
+						CodeableConcept da_ = l?.Type;
+						CqlConcept db_ = FHIRHelpers_4_0_001.ToConcept(da_);
+						CqlCode dc_ = NCQATerminology_1_0_0.Provider_number();
+						CqlConcept dd_ = context.Operators.ConvertCodeToConcept(dc_);
+						bool? de_ = context.Operators.Equivalent(db_, dd_);
+						bool? df_ = context.Operators.And(cz_, de_);
+						FhirString dg_ = l?.ValueElement;
+						string dh_ = dg_?.Value;
+						bool? di_ = context.Operators.And(df_, (bool?)(dh_ is null));
 
 						return di_;
 					};
-					var cf_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)by_, ce_);
+					IEnumerable<Identifier> cf_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)by_, ce_);
 					Identifier cg_(Identifier l) => 
 						l;
-					var ch_ = context.Operators.Select<Identifier, Identifier>(cf_, cg_);
-					var ci_ = new Tuple_EheHUARRFfQdCcHKeSEhfYZMj
+					IEnumerable<Identifier> ch_ = context.Operators.Select<Identifier, Identifier>(cf_, cg_);
+					Tuple_EheHUARRFfQdCcHKeSEhfYZMj ci_ = new Tuple_EheHUARRFfQdCcHKeSEhfYZMj
 					{
 						AllIdentifiers = cc_,
 						NullIdentifiers = ch_,
@@ -3733,12 +3733,12 @@ public class NCQAClaims_1_0_0
 
 					return ci_;
 				};
-				var br_ = context.Operators.Select<Practitioner, Tuple_EheHUARRFfQdCcHKeSEhfYZMj>(bp_, bq_);
-				var bs_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE
+				IEnumerable<Tuple_EheHUARRFfQdCcHKeSEhfYZMj> br_ = context.Operators.Select<Practitioner, Tuple_EheHUARRFfQdCcHKeSEhfYZMj>(bp_, bq_);
+				Tuple_EZUSISLPSZWTXahaQjXaSAJBE bs_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE
 				{
 					IdentifierTuple = br_,
 				};
-				var bt_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE[]
+				Tuple_EZUSISLPSZWTXahaQjXaSAJBE[] bt_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE[]
 				{
 					bs_,
 				};
@@ -3748,76 +3748,76 @@ public class NCQAClaims_1_0_0
 					{
 						bool dl_()
 						{
-							var dm_ = ClaimProperties?.CareTeams;
+							IEnumerable<Tuple_CGBhZZbICOjJSOiHTigebRWSH> dm_ = ClaimProperties?.CareTeams;
 							bool? dn_(Tuple_CGBhZZbICOjJSOiHTigebRWSH @this)
 							{
-								var ds_ = @this?.SingleCareTeam;
-								var dt_ = context.Operators.Not((bool?)(ds_ is null));
+								Claim ds_ = @this?.SingleCareTeam;
+								bool? dt_ = context.Operators.Not((bool?)(ds_ is null));
 
 								return dt_;
 							};
-							var do_ = context.Operators.Where<Tuple_CGBhZZbICOjJSOiHTigebRWSH>(dm_, dn_);
+							IEnumerable<Tuple_CGBhZZbICOjJSOiHTigebRWSH> do_ = context.Operators.Where<Tuple_CGBhZZbICOjJSOiHTigebRWSH>(dm_, dn_);
 							Claim dp_(Tuple_CGBhZZbICOjJSOiHTigebRWSH @this)
 							{
-								var du_ = @this?.SingleCareTeam;
+								Claim du_ = @this?.SingleCareTeam;
 
 								return du_;
 							};
-							var dq_ = context.Operators.Select<Tuple_CGBhZZbICOjJSOiHTigebRWSH, Claim>(do_, dp_);
-							var dr_ = context.Operators.Exists<Claim>(dq_);
+							IEnumerable<Claim> dq_ = context.Operators.Select<Tuple_CGBhZZbICOjJSOiHTigebRWSH, Claim>(do_, dp_);
+							bool? dr_ = context.Operators.Exists<Claim>(dq_);
 
 							return (dr_ ?? false);
 						};
 						if (dl_())
 						{
-							var dv_ = ClaimProperties?.CareTeams;
+							IEnumerable<Tuple_CGBhZZbICOjJSOiHTigebRWSH> dv_ = ClaimProperties?.CareTeams;
 							bool? dw_(Tuple_CGBhZZbICOjJSOiHTigebRWSH @this)
 							{
-								var er_ = @this?.SingleCareTeam;
-								var es_ = context.Operators.Not((bool?)(er_ is null));
+								Claim er_ = @this?.SingleCareTeam;
+								bool? es_ = context.Operators.Not((bool?)(er_ is null));
 
 								return es_;
 							};
-							var dx_ = context.Operators.Where<Tuple_CGBhZZbICOjJSOiHTigebRWSH>(dv_, dw_);
+							IEnumerable<Tuple_CGBhZZbICOjJSOiHTigebRWSH> dx_ = context.Operators.Where<Tuple_CGBhZZbICOjJSOiHTigebRWSH>(dv_, dw_);
 							Claim dy_(Tuple_CGBhZZbICOjJSOiHTigebRWSH @this)
 							{
-								var et_ = @this?.SingleCareTeam;
+								Claim et_ = @this?.SingleCareTeam;
 
 								return et_;
 							};
-							var dz_ = context.Operators.Select<Tuple_CGBhZZbICOjJSOiHTigebRWSH, Claim>(dx_, dy_);
+							IEnumerable<Claim> dz_ = context.Operators.Select<Tuple_CGBhZZbICOjJSOiHTigebRWSH, Claim>(dx_, dy_);
 							bool? ea_(Claim X)
 							{
-								var eu_ = X?.CareTeam;
+								List<Claim.CareTeamComponent> eu_ = X?.CareTeam;
 
 								return (bool?)((IEnumerable<Claim.CareTeamComponent>)eu_ is null);
 							};
-							var eb_ = context.Operators.Where<Claim>(dz_, ea_);
-							var ec_ = context.Operators.Count<Claim>(eb_);
-							var ed_ = GetIdentifiers?.IdentifierTuple;
+							IEnumerable<Claim> eb_ = context.Operators.Where<Claim>(dz_, ea_);
+							int? ec_ = context.Operators.Count<Claim>(eb_);
+							IEnumerable<Tuple_EheHUARRFfQdCcHKeSEhfYZMj> ed_ = GetIdentifiers?.IdentifierTuple;
 							IEnumerable<FhirString> ee_(Tuple_EheHUARRFfQdCcHKeSEhfYZMj X)
 							{
-								var ev_ = X?.AllIdentifiers;
+								IEnumerable<FhirString> ev_ = X?.AllIdentifiers;
 
 								return ev_;
 							};
-							var ef_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<FhirString>>(ed_, ee_);
-							var eg_ = context.Operators.Flatten<FhirString>(ef_);
+							IEnumerable<IEnumerable<FhirString>> ef_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<FhirString>>(ed_, ee_);
+							IEnumerable<FhirString> eg_ = context.Operators.Flatten<FhirString>(ef_);
 							FhirString eh_(FhirString X) => 
 								X;
-							var ei_ = context.Operators.Select<FhirString, FhirString>(eg_, eh_);
-							var ej_ = context.Operators.Count<FhirString>(ei_);
-							var ek_ = context.Operators.Add(ec_, ej_);
+							IEnumerable<FhirString> ei_ = context.Operators.Select<FhirString, FhirString>(eg_, eh_);
+							int? ej_ = context.Operators.Count<FhirString>(ei_);
+							int? ek_ = context.Operators.Add(ec_, ej_);
 							IEnumerable<Identifier> em_(Tuple_EheHUARRFfQdCcHKeSEhfYZMj X)
 							{
-								var ew_ = X?.NullIdentifiers;
+								IEnumerable<Identifier> ew_ = X?.NullIdentifiers;
 
 								return ew_;
 							};
-							var en_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<Identifier>>(ed_, em_);
-							var eo_ = context.Operators.Flatten<Identifier>(en_);
-							var ep_ = context.Operators.Count<Identifier>(eo_);
-							var eq_ = context.Operators.Add(ek_, ep_);
+							IEnumerable<IEnumerable<Identifier>> en_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<Identifier>>(ed_, em_);
+							IEnumerable<Identifier> eo_ = context.Operators.Flatten<Identifier>(en_);
+							int? ep_ = context.Operators.Count<Identifier>(eo_);
+							int? eq_ = context.Operators.Add(ek_, ep_);
 
 							return eq_;
 						}
@@ -3826,25 +3826,25 @@ public class NCQAClaims_1_0_0
 							return 0;
 						}
 					};
-					var dk_ = new Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS
+					Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS dk_ = new Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS
 					{
 						IdentifierCount = dj_(),
 					};
 
 					return dk_;
 				};
-				var bv_ = context.Operators.Select<Tuple_EZUSISLPSZWTXahaQjXaSAJBE, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_EZUSISLPSZWTXahaQjXaSAJBE>)bt_, bu_);
-				var bw_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(bv_);
+				IEnumerable<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS> bv_ = context.Operators.Select<Tuple_EZUSISLPSZWTXahaQjXaSAJBE, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_EZUSISLPSZWTXahaQjXaSAJBE>)bt_, bu_);
+				Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS bw_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(bv_);
 
 				return bw_;
 			};
-			var az_ = context.Operators.Select<Tuple_FPVdJEEOUKFVhQPTfKhShUNO, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_FPVdJEEOUKFVhQPTfKhShUNO>)ax_, ay_);
-			var ba_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(az_);
+			IEnumerable<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS> az_ = context.Operators.Select<Tuple_FPVdJEEOUKFVhQPTfKhShUNO, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_FPVdJEEOUKFVhQPTfKhShUNO>)ax_, ay_);
+			Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS ba_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(az_);
 
 			return ba_;
 		};
-		var f_ = context.Operators.Select<Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH>)d_, e_);
-		var g_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(f_);
+		IEnumerable<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS> f_ = context.Operators.Select<Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_HFNJUcNhcbGBLBgHAJMMSPfQH>)d_, e_);
+		Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS g_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(f_);
 
 		return g_;
 	}
@@ -3854,81 +3854,81 @@ public class NCQAClaims_1_0_0
 	{
 		Tuple_GJMDOdSNREDHVIihMZIJLUYXV a_(Claim C)
 		{
-			var h_ = C?.Item;
+			List<Claim.ItemComponent> h_ = C?.Item;
 			bool? j_(Claim.ItemComponent i)
 			{
-				var ab_ = i?.SequenceElement;
-				var ac_ = context.Operators.Convert<Integer>(ab_);
-				var ad_ = FHIRHelpers_4_0_001.ToInteger(ac_);
-				var ae_ = context.Operators.Equal(ad_, 1);
+				PositiveInt ab_ = i?.SequenceElement;
+				Integer ac_ = context.Operators.Convert<Integer>(ab_);
+				int? ad_ = FHIRHelpers_4_0_001.ToInteger(ac_);
+				bool? ae_ = context.Operators.Equal(ad_, 1);
 
 				return ae_;
 			};
-			var k_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)h_, j_);
+			IEnumerable<Claim.ItemComponent> k_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)h_, j_);
 			bool? l_(Claim.ItemComponent @this)
 			{
-				var af_ = @this?.Location;
-				var ag_ = context.Operators.Not((bool?)(af_ is null));
+				DataType af_ = @this?.Location;
+				bool? ag_ = context.Operators.Not((bool?)(af_ is null));
 
 				return ag_;
 			};
-			var m_ = context.Operators.Where<Claim.ItemComponent>(k_, l_);
+			IEnumerable<Claim.ItemComponent> m_ = context.Operators.Where<Claim.ItemComponent>(k_, l_);
 			DataType n_(Claim.ItemComponent @this)
 			{
-				var ah_ = @this?.Location;
+				DataType ah_ = @this?.Location;
 
 				return ah_;
 			};
-			var o_ = context.Operators.Select<Claim.ItemComponent, DataType>(m_, n_);
+			IEnumerable<DataType> o_ = context.Operators.Select<Claim.ItemComponent, DataType>(m_, n_);
 			ResourceReference p_(DataType l) => 
 				(l as ResourceReference);
-			var q_ = context.Operators.Select<DataType, ResourceReference>(o_, p_);
+			IEnumerable<ResourceReference> q_ = context.Operators.Select<DataType, ResourceReference>(o_, p_);
 			bool? s_(Claim.ItemComponent i)
 			{
-				var ai_ = i?.SequenceElement;
-				var aj_ = context.Operators.Convert<Integer>(ai_);
-				var ak_ = FHIRHelpers_4_0_001.ToInteger(aj_);
-				var al_ = context.Operators.Equal(ak_, 1);
+				PositiveInt ai_ = i?.SequenceElement;
+				Integer aj_ = context.Operators.Convert<Integer>(ai_);
+				int? ak_ = FHIRHelpers_4_0_001.ToInteger(aj_);
+				bool? al_ = context.Operators.Equal(ak_, 1);
 
 				return al_;
 			};
-			var t_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)h_, s_);
+			IEnumerable<Claim.ItemComponent> t_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)h_, s_);
 			bool? u_(Claim.ItemComponent @this)
 			{
-				var am_ = @this?.Location;
-				var an_ = context.Operators.Not((bool?)(am_ is null));
+				DataType am_ = @this?.Location;
+				bool? an_ = context.Operators.Not((bool?)(am_ is null));
 
 				return an_;
 			};
-			var v_ = context.Operators.Where<Claim.ItemComponent>(t_, u_);
+			IEnumerable<Claim.ItemComponent> v_ = context.Operators.Where<Claim.ItemComponent>(t_, u_);
 			DataType w_(Claim.ItemComponent @this)
 			{
-				var ao_ = @this?.Location;
+				DataType ao_ = @this?.Location;
 
 				return ao_;
 			};
-			var x_ = context.Operators.Select<Claim.ItemComponent, DataType>(v_, w_);
+			IEnumerable<DataType> x_ = context.Operators.Select<Claim.ItemComponent, DataType>(v_, w_);
 			string y_(DataType l)
 			{
-				var ap_ = (l as ResourceReference)?.ReferenceElement;
-				var aq_ = new FhirString[]
+				FhirString ap_ = (l as ResourceReference)?.ReferenceElement;
+				FhirString[] aq_ = new FhirString[]
 				{
 					ap_,
 				};
 				string ar_(FhirString r)
 				{
-					var au_ = FHIRHelpers_4_0_001.ToString(r);
-					var av_ = NCQAFHIRBase_1_0_0.GetId(au_);
+					string au_ = FHIRHelpers_4_0_001.ToString(r);
+					string av_ = NCQAFHIRBase_1_0_0.GetId(au_);
 
 					return av_;
 				};
-				var as_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)aq_, ar_);
-				var at_ = context.Operators.SingletonFrom<string>(as_);
+				IEnumerable<string> as_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)aq_, ar_);
+				string at_ = context.Operators.SingletonFrom<string>(as_);
 
 				return at_;
 			};
-			var z_ = context.Operators.Select<DataType, string>(x_, y_);
-			var aa_ = new Tuple_GJMDOdSNREDHVIihMZIJLUYXV
+			IEnumerable<string> z_ = context.Operators.Select<DataType, string>(x_, y_);
+			Tuple_GJMDOdSNREDHVIihMZIJLUYXV aa_ = new Tuple_GJMDOdSNREDHVIihMZIJLUYXV
 			{
 				SingleItem = (IEnumerable<Claim.ItemComponent>)h_,
 				ItemLocation = q_,
@@ -3937,113 +3937,113 @@ public class NCQAClaims_1_0_0
 
 			return aa_;
 		};
-		var b_ = context.Operators.Select<Claim, Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(claim, a_);
-		var c_ = new Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX
+		IEnumerable<Tuple_GJMDOdSNREDHVIihMZIJLUYXV> b_ = context.Operators.Select<Claim, Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(claim, a_);
+		Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX c_ = new Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX
 		{
 			ItemsLocationReferences = b_,
 		};
-		var d_ = new Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX[]
+		Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX[] d_ = new Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX[]
 		{
 			c_,
 		};
 		Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS e_(Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX ClaimProperties)
 		{
-			var aw_ = context.Operators.RetrieveByValueSet<Location>(null, null);
+			IEnumerable<Location> aw_ = context.Operators.RetrieveByValueSet<Location>(null, null);
 			bool? ax_(Location l)
 			{
-				var be_ = l?.IdElement;
-				var bf_ = FHIRHelpers_4_0_001.ToString(be_);
-				var bg_ = ClaimProperties?.ItemsLocationReferences;
+				Id be_ = l?.IdElement;
+				string bf_ = FHIRHelpers_4_0_001.ToString(be_);
+				IEnumerable<Tuple_GJMDOdSNREDHVIihMZIJLUYXV> bg_ = ClaimProperties?.ItemsLocationReferences;
 				bool? bh_(Tuple_GJMDOdSNREDHVIihMZIJLUYXV @this)
 				{
-					var bn_ = @this?.ItemLocationID;
-					var bo_ = context.Operators.Not((bool?)(bn_ is null));
+					IEnumerable<string> bn_ = @this?.ItemLocationID;
+					bool? bo_ = context.Operators.Not((bool?)(bn_ is null));
 
 					return bo_;
 				};
-				var bi_ = context.Operators.Where<Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(bg_, bh_);
+				IEnumerable<Tuple_GJMDOdSNREDHVIihMZIJLUYXV> bi_ = context.Operators.Where<Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(bg_, bh_);
 				IEnumerable<string> bj_(Tuple_GJMDOdSNREDHVIihMZIJLUYXV @this)
 				{
-					var bp_ = @this?.ItemLocationID;
+					IEnumerable<string> bp_ = @this?.ItemLocationID;
 
 					return bp_;
 				};
-				var bk_ = context.Operators.Select<Tuple_GJMDOdSNREDHVIihMZIJLUYXV, IEnumerable<string>>(bi_, bj_);
-				var bl_ = context.Operators.Flatten<string>(bk_);
-				var bm_ = context.Operators.In<string>(bf_, bl_);
+				IEnumerable<IEnumerable<string>> bk_ = context.Operators.Select<Tuple_GJMDOdSNREDHVIihMZIJLUYXV, IEnumerable<string>>(bi_, bj_);
+				IEnumerable<string> bl_ = context.Operators.Flatten<string>(bk_);
+				bool? bm_ = context.Operators.In<string>(bf_, bl_);
 
 				return bm_;
 			};
-			var ay_ = context.Operators.Where<Location>(aw_, ax_);
-			var az_ = new Tuple_GWYcfjEGjPEdPbTNdfROfTUAf
+			IEnumerable<Location> ay_ = context.Operators.Where<Location>(aw_, ax_);
+			Tuple_GWYcfjEGjPEdPbTNdfROfTUAf az_ = new Tuple_GWYcfjEGjPEdPbTNdfROfTUAf
 			{
 				CorrespondingLocations = ay_,
 			};
-			var ba_ = new Tuple_GWYcfjEGjPEdPbTNdfROfTUAf[]
+			Tuple_GWYcfjEGjPEdPbTNdfROfTUAf[] ba_ = new Tuple_GWYcfjEGjPEdPbTNdfROfTUAf[]
 			{
 				az_,
 			};
 			Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS bb_(Tuple_GWYcfjEGjPEdPbTNdfROfTUAf GetLocation)
 			{
-				var bq_ = GetLocation?.CorrespondingLocations;
+				IEnumerable<Location> bq_ = GetLocation?.CorrespondingLocations;
 				bool? br_(Location C)
 				{
-					var ca_ = context.Operators.Not((bool?)(C is null));
+					bool? ca_ = context.Operators.Not((bool?)(C is null));
 
 					return ca_;
 				};
-				var bs_ = context.Operators.Where<Location>(bq_, br_);
+				IEnumerable<Location> bs_ = context.Operators.Where<Location>(bq_, br_);
 				Tuple_EheHUARRFfQdCcHKeSEhfYZMj bt_(Location C)
 				{
-					var cb_ = C?.Identifier;
+					List<Identifier> cb_ = C?.Identifier;
 					bool? cc_(Identifier l)
 					{
-						var cm_ = l?.SystemElement;
-						var cn_ = cm_?.Value;
-						var co_ = context.Operators.Equal(cn_, "http://hl7.org/fhir/sid/us-npi");
-						var cp_ = l?.Type;
-						var cq_ = FHIRHelpers_4_0_001.ToConcept(cp_);
-						var cr_ = NCQATerminology_1_0_0.Provider_number();
-						var cs_ = context.Operators.ConvertCodeToConcept(cr_);
-						var ct_ = context.Operators.Equivalent(cq_, cs_);
-						var cu_ = context.Operators.And(co_, ct_);
-						var cv_ = l?.ValueElement;
-						var cw_ = cv_?.Value;
-						var cx_ = context.Operators.Not((bool?)(cw_ is null));
-						var cy_ = context.Operators.And(cu_, cx_);
+						FhirUri cm_ = l?.SystemElement;
+						string cn_ = cm_?.Value;
+						bool? co_ = context.Operators.Equal(cn_, "http://hl7.org/fhir/sid/us-npi");
+						CodeableConcept cp_ = l?.Type;
+						CqlConcept cq_ = FHIRHelpers_4_0_001.ToConcept(cp_);
+						CqlCode cr_ = NCQATerminology_1_0_0.Provider_number();
+						CqlConcept cs_ = context.Operators.ConvertCodeToConcept(cr_);
+						bool? ct_ = context.Operators.Equivalent(cq_, cs_);
+						bool? cu_ = context.Operators.And(co_, ct_);
+						FhirString cv_ = l?.ValueElement;
+						string cw_ = cv_?.Value;
+						bool? cx_ = context.Operators.Not((bool?)(cw_ is null));
+						bool? cy_ = context.Operators.And(cu_, cx_);
 
 						return cy_;
 					};
-					var cd_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cb_, cc_);
+					IEnumerable<Identifier> cd_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cb_, cc_);
 					FhirString ce_(Identifier l)
 					{
-						var cz_ = l?.ValueElement;
+						FhirString cz_ = l?.ValueElement;
 
 						return cz_;
 					};
-					var cf_ = context.Operators.Select<Identifier, FhirString>(cd_, ce_);
+					IEnumerable<FhirString> cf_ = context.Operators.Select<Identifier, FhirString>(cd_, ce_);
 					bool? ch_(Identifier l)
 					{
-						var da_ = l?.SystemElement;
-						var db_ = da_?.Value;
-						var dc_ = context.Operators.Equal(db_, "http://hl7.org/fhir/sid/us-npi");
-						var dd_ = l?.Type;
-						var de_ = FHIRHelpers_4_0_001.ToConcept(dd_);
-						var df_ = NCQATerminology_1_0_0.Provider_number();
-						var dg_ = context.Operators.ConvertCodeToConcept(df_);
-						var dh_ = context.Operators.Equivalent(de_, dg_);
-						var di_ = context.Operators.And(dc_, dh_);
-						var dj_ = l?.ValueElement;
-						var dk_ = dj_?.Value;
-						var dl_ = context.Operators.And(di_, (bool?)(dk_ is null));
+						FhirUri da_ = l?.SystemElement;
+						string db_ = da_?.Value;
+						bool? dc_ = context.Operators.Equal(db_, "http://hl7.org/fhir/sid/us-npi");
+						CodeableConcept dd_ = l?.Type;
+						CqlConcept de_ = FHIRHelpers_4_0_001.ToConcept(dd_);
+						CqlCode df_ = NCQATerminology_1_0_0.Provider_number();
+						CqlConcept dg_ = context.Operators.ConvertCodeToConcept(df_);
+						bool? dh_ = context.Operators.Equivalent(de_, dg_);
+						bool? di_ = context.Operators.And(dc_, dh_);
+						FhirString dj_ = l?.ValueElement;
+						string dk_ = dj_?.Value;
+						bool? dl_ = context.Operators.And(di_, (bool?)(dk_ is null));
 
 						return dl_;
 					};
-					var ci_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cb_, ch_);
+					IEnumerable<Identifier> ci_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cb_, ch_);
 					Identifier cj_(Identifier l) => 
 						l;
-					var ck_ = context.Operators.Select<Identifier, Identifier>(ci_, cj_);
-					var cl_ = new Tuple_EheHUARRFfQdCcHKeSEhfYZMj
+					IEnumerable<Identifier> ck_ = context.Operators.Select<Identifier, Identifier>(ci_, cj_);
+					Tuple_EheHUARRFfQdCcHKeSEhfYZMj cl_ = new Tuple_EheHUARRFfQdCcHKeSEhfYZMj
 					{
 						AllIdentifiers = cf_,
 						NullIdentifiers = ck_,
@@ -4051,12 +4051,12 @@ public class NCQAClaims_1_0_0
 
 					return cl_;
 				};
-				var bu_ = context.Operators.Select<Location, Tuple_EheHUARRFfQdCcHKeSEhfYZMj>(bs_, bt_);
-				var bv_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE
+				IEnumerable<Tuple_EheHUARRFfQdCcHKeSEhfYZMj> bu_ = context.Operators.Select<Location, Tuple_EheHUARRFfQdCcHKeSEhfYZMj>(bs_, bt_);
+				Tuple_EZUSISLPSZWTXahaQjXaSAJBE bv_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE
 				{
 					IdentifierTuple = bu_,
 				};
-				var bw_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE[]
+				Tuple_EZUSISLPSZWTXahaQjXaSAJBE[] bw_ = new Tuple_EZUSISLPSZWTXahaQjXaSAJBE[]
 				{
 					bv_,
 				};
@@ -4066,79 +4066,79 @@ public class NCQAClaims_1_0_0
 					{
 						bool do_()
 						{
-							var dp_ = ClaimProperties?.ItemsLocationReferences;
+							IEnumerable<Tuple_GJMDOdSNREDHVIihMZIJLUYXV> dp_ = ClaimProperties?.ItemsLocationReferences;
 							bool? dq_(Tuple_GJMDOdSNREDHVIihMZIJLUYXV @this)
 							{
-								var dw_ = @this?.SingleItem;
-								var dx_ = context.Operators.Not((bool?)(dw_ is null));
+								IEnumerable<Claim.ItemComponent> dw_ = @this?.SingleItem;
+								bool? dx_ = context.Operators.Not((bool?)(dw_ is null));
 
 								return dx_;
 							};
-							var dr_ = context.Operators.Where<Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(dp_, dq_);
+							IEnumerable<Tuple_GJMDOdSNREDHVIihMZIJLUYXV> dr_ = context.Operators.Where<Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(dp_, dq_);
 							IEnumerable<Claim.ItemComponent> ds_(Tuple_GJMDOdSNREDHVIihMZIJLUYXV @this)
 							{
-								var dy_ = @this?.SingleItem;
+								IEnumerable<Claim.ItemComponent> dy_ = @this?.SingleItem;
 
 								return dy_;
 							};
-							var dt_ = context.Operators.Select<Tuple_GJMDOdSNREDHVIihMZIJLUYXV, IEnumerable<Claim.ItemComponent>>(dr_, ds_);
-							var du_ = context.Operators.Flatten<Claim.ItemComponent>(dt_);
-							var dv_ = context.Operators.Exists<Claim.ItemComponent>(du_);
+							IEnumerable<IEnumerable<Claim.ItemComponent>> dt_ = context.Operators.Select<Tuple_GJMDOdSNREDHVIihMZIJLUYXV, IEnumerable<Claim.ItemComponent>>(dr_, ds_);
+							IEnumerable<Claim.ItemComponent> du_ = context.Operators.Flatten<Claim.ItemComponent>(dt_);
+							bool? dv_ = context.Operators.Exists<Claim.ItemComponent>(du_);
 
 							return (dv_ ?? false);
 						};
 						if (do_())
 						{
-							var dz_ = ClaimProperties?.ItemsLocationReferences;
+							IEnumerable<Tuple_GJMDOdSNREDHVIihMZIJLUYXV> dz_ = ClaimProperties?.ItemsLocationReferences;
 							bool? ea_(Tuple_GJMDOdSNREDHVIihMZIJLUYXV @this)
 							{
-								var ew_ = @this?.ItemLocation;
-								var ex_ = context.Operators.Not((bool?)(ew_ is null));
+								IEnumerable<ResourceReference> ew_ = @this?.ItemLocation;
+								bool? ex_ = context.Operators.Not((bool?)(ew_ is null));
 
 								return ex_;
 							};
-							var eb_ = context.Operators.Where<Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(dz_, ea_);
+							IEnumerable<Tuple_GJMDOdSNREDHVIihMZIJLUYXV> eb_ = context.Operators.Where<Tuple_GJMDOdSNREDHVIihMZIJLUYXV>(dz_, ea_);
 							IEnumerable<ResourceReference> ec_(Tuple_GJMDOdSNREDHVIihMZIJLUYXV @this)
 							{
-								var ey_ = @this?.ItemLocation;
+								IEnumerable<ResourceReference> ey_ = @this?.ItemLocation;
 
 								return ey_;
 							};
-							var ed_ = context.Operators.Select<Tuple_GJMDOdSNREDHVIihMZIJLUYXV, IEnumerable<ResourceReference>>(eb_, ec_);
-							var ee_ = context.Operators.Flatten<ResourceReference>(ed_);
+							IEnumerable<IEnumerable<ResourceReference>> ed_ = context.Operators.Select<Tuple_GJMDOdSNREDHVIihMZIJLUYXV, IEnumerable<ResourceReference>>(eb_, ec_);
+							IEnumerable<ResourceReference> ee_ = context.Operators.Flatten<ResourceReference>(ed_);
 							bool? ef_(ResourceReference X)
 							{
-								var ez_ = X?.ReferenceElement;
-								var fa_ = ez_?.Value;
+								FhirString ez_ = X?.ReferenceElement;
+								string fa_ = ez_?.Value;
 
 								return (bool?)(fa_ is null);
 							};
-							var eg_ = context.Operators.Where<ResourceReference>(ee_, ef_);
-							var eh_ = context.Operators.Count<ResourceReference>(eg_);
-							var ei_ = GetIdentifiers?.IdentifierTuple;
+							IEnumerable<ResourceReference> eg_ = context.Operators.Where<ResourceReference>(ee_, ef_);
+							int? eh_ = context.Operators.Count<ResourceReference>(eg_);
+							IEnumerable<Tuple_EheHUARRFfQdCcHKeSEhfYZMj> ei_ = GetIdentifiers?.IdentifierTuple;
 							IEnumerable<FhirString> ej_(Tuple_EheHUARRFfQdCcHKeSEhfYZMj X)
 							{
-								var fb_ = X?.AllIdentifiers;
+								IEnumerable<FhirString> fb_ = X?.AllIdentifiers;
 
 								return fb_;
 							};
-							var ek_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<FhirString>>(ei_, ej_);
-							var el_ = context.Operators.Flatten<FhirString>(ek_);
+							IEnumerable<IEnumerable<FhirString>> ek_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<FhirString>>(ei_, ej_);
+							IEnumerable<FhirString> el_ = context.Operators.Flatten<FhirString>(ek_);
 							FhirString em_(FhirString X) => 
 								X;
-							var en_ = context.Operators.Select<FhirString, FhirString>(el_, em_);
-							var eo_ = context.Operators.Count<FhirString>(en_);
-							var ep_ = context.Operators.Add(eh_, eo_);
+							IEnumerable<FhirString> en_ = context.Operators.Select<FhirString, FhirString>(el_, em_);
+							int? eo_ = context.Operators.Count<FhirString>(en_);
+							int? ep_ = context.Operators.Add(eh_, eo_);
 							IEnumerable<Identifier> er_(Tuple_EheHUARRFfQdCcHKeSEhfYZMj X)
 							{
-								var fc_ = X?.NullIdentifiers;
+								IEnumerable<Identifier> fc_ = X?.NullIdentifiers;
 
 								return fc_;
 							};
-							var es_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<Identifier>>(ei_, er_);
-							var et_ = context.Operators.Flatten<Identifier>(es_);
-							var eu_ = context.Operators.Count<Identifier>(et_);
-							var ev_ = context.Operators.Add(ep_, eu_);
+							IEnumerable<IEnumerable<Identifier>> es_ = context.Operators.Select<Tuple_EheHUARRFfQdCcHKeSEhfYZMj, IEnumerable<Identifier>>(ei_, er_);
+							IEnumerable<Identifier> et_ = context.Operators.Flatten<Identifier>(es_);
+							int? eu_ = context.Operators.Count<Identifier>(et_);
+							int? ev_ = context.Operators.Add(ep_, eu_);
 
 							return ev_;
 						}
@@ -4147,25 +4147,25 @@ public class NCQAClaims_1_0_0
 							return 0;
 						}
 					};
-					var dn_ = new Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS
+					Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS dn_ = new Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS
 					{
 						IdentifierCount = dm_(),
 					};
 
 					return dn_;
 				};
-				var by_ = context.Operators.Select<Tuple_EZUSISLPSZWTXahaQjXaSAJBE, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_EZUSISLPSZWTXahaQjXaSAJBE>)bw_, bx_);
-				var bz_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(by_);
+				IEnumerable<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS> by_ = context.Operators.Select<Tuple_EZUSISLPSZWTXahaQjXaSAJBE, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_EZUSISLPSZWTXahaQjXaSAJBE>)bw_, bx_);
+				Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS bz_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(by_);
 
 				return bz_;
 			};
-			var bc_ = context.Operators.Select<Tuple_GWYcfjEGjPEdPbTNdfROfTUAf, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_GWYcfjEGjPEdPbTNdfROfTUAf>)ba_, bb_);
-			var bd_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(bc_);
+			IEnumerable<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS> bc_ = context.Operators.Select<Tuple_GWYcfjEGjPEdPbTNdfROfTUAf, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_GWYcfjEGjPEdPbTNdfROfTUAf>)ba_, bb_);
+			Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS bd_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(bc_);
 
 			return bd_;
 		};
-		var f_ = context.Operators.Select<Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX>)d_, e_);
-		var g_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(f_);
+		IEnumerable<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS> f_ = context.Operators.Select<Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX, Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>((IEnumerable<Tuple_ESTVjUCCVhLEXJGPZBeEcQDHX>)d_, e_);
+		Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS g_ = context.Operators.SingletonFrom<Tuple_FBUdWLSDMgYFFiVXYhKEiUNQS>(f_);
 
 		return g_;
 	}

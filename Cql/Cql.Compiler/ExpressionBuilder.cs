@@ -639,7 +639,7 @@ namespace Hl7.Cql.Compiler
                     if (enumValueValue.Type == instanceType)
                         return enumValueValue;
 
-                    if (enumValueValue.Type == typeof(string)) //@ TODO: Cast
+                    if (enumValueValue.Type == typeof(string)) //@ TODO: Cast - Instance
                     {
                         var parseMethod = typeof(Enum)
                                             .GetMethods()
@@ -883,6 +883,8 @@ namespace Hl7.Cql.Compiler
             var type = _typeResolver.ResolveType(lit.valueType.Name) ?? throw this.NewExpressionBuildingException($"Cannot resolve type for {lit.valueType}");
 
 
+
+
             var (value, convertedType) = ConvertLiteral(lit, type);
 
             // var result = _operatorBinding.ConvertToType(Expression.Constant(value), convertedType);
@@ -897,7 +899,7 @@ namespace Hl7.Cql.Compiler
             return Expression.Constant(value, convertedType);
         }
 
-        protected (object?, Type) ConvertLiteral(Literal lit, Type? type) //@ TODO: Cast
+        protected (object?, Type) ConvertLiteral(Literal lit, Type? type) //@ TODO: Cast - ConvertLiteral
         {
             if (type == null)
                 throw new NotImplementedException().WithContext(this);
@@ -912,7 +914,7 @@ namespace Hl7.Cql.Compiler
 
                 try
                 {
-                    var converted = Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture); //@ TODO: Cast
+                    var converted = Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture); //@ TODO: Cast - ConvertLiteral
                     return (converted, underlyingType);
                 }
                 catch (OverflowException)
@@ -926,7 +928,7 @@ namespace Hl7.Cql.Compiler
 
             if (typeof(IConvertible).IsAssignableFrom(type))
             {
-                var converted = Convert.ChangeType(lit.value, type, CultureInfo.InvariantCulture); //@ TODO: Cast
+                var converted = Convert.ChangeType(lit.value, type, CultureInfo.InvariantCulture); //@ TODO: Cast - ConvertLiteral
                 return (converted, type);
             }
 
@@ -2440,7 +2442,7 @@ namespace Hl7.Cql.Compiler
 
     partial class ExpressionBuilderContext
     {
-        protected Expression As(As @as) // @TODO: Cast
+        protected Expression As(As @as) //@ TODO: Cast - As
         {
             if (@as.operand is List list)
             {
@@ -2503,7 +2505,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Is(Is @is) // @TODO: Cast
+        protected Expression Is(Is @is) // @TODO: Cast - Is
         {
             var op = TranslateArg(@is.operand!);
             Type? type = null;
@@ -2540,7 +2542,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression ChangeType(
             Expression expr,
-            TypeSpecifier? typeSpecifier) // @TODO: Cast
+            TypeSpecifier? typeSpecifier) // @TODO: Cast - ChangeType
         {
             if (typeSpecifier is null)
                 return expr;
@@ -2558,11 +2560,11 @@ namespace Hl7.Cql.Compiler
         private Expression ChangeType(
             Element element,
             Type outputType)
-            => ChangeType(TranslateArg(element), outputType); // @TODO: Cast
+            => ChangeType(TranslateArg(element), outputType); // @TODO: Cast - ChangeType
 
         private Expression ChangeType(
             Expression input,
-            Type outputType) // @TODO: Cast
+            Type outputType) // @TODO: Cast - ChangeType
         {
             var (expression, typeConversion) = input.TryNewAssignToTypeExpression(outputType, false);
             if (typeConversion != TypeConversion.NoMatch)
