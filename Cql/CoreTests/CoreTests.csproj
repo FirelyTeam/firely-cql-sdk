@@ -47,5 +47,8 @@
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Input\ELM\Libs\FHIRHelpers-scratch.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>

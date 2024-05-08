@@ -68,9 +68,12 @@ namespace Hl7.Cql.Elm
 
             options.Converters.Add(new LibraryJsonConverter());
             options.Converters.Add(new TopLevelDefinitionConverterFactory());
-        //    options.AddPolymorphicConverters(strict);
+            //options.Converters.Add(new AbstractClassConverterFactory());
+            //options.AddPolymorphicConverters(strict);
             options.Converters.Add(new XmlQualifiedNameConverter());
             options.Converters.Add(new JsonStringEnumConverter());
+
+            options.TypeInfoResolver = new PolymorphicTypeResolver();
             return options;
         }
 
