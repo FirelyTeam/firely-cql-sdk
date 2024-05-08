@@ -504,7 +504,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				return cu_;
 			};
 			IEnumerable<Observation> m_ = context.Operators.SelectMany<Observation, Observation>(k_, l_);
-			IEnumerable<Observation> n_ = context.Operators.ListExcept<Observation>(g_, m_);
+			IEnumerable<Observation> n_ = context.Operators.Except<Observation>(g_, m_);
 			bool? o_(Observation BloodGlucoseLab)
 			{
 				DataType eh_ = BloodGlucoseLab?.Effective;

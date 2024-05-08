@@ -633,7 +633,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			return fp_;
 		};
 		IEnumerable<MedicationRequest> cz_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(cx_, cy_);
-		IEnumerable<MedicationRequest> da_ = context.Operators.ListExcept<MedicationRequest>(ay_, cz_);
+		IEnumerable<MedicationRequest> da_ = context.Operators.Except<MedicationRequest>(ay_, cz_);
 		Tuple_CVELXTjiMTaGQEjMfJXBdUHjW db_(MedicationRequest QualifyingMed)
 		{
 			CqlInterval<CqlDate> gd_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(QualifyingMed);

@@ -284,7 +284,6 @@ namespace Hl7.Cql.Compiler
                         Contains e         => Contains(e),
                         Ends e             => Ends(e),
                         Equivalent e       => Equivalent(e),
-                        Except e           => Except(e),
                         FunctionRef e      => FunctionRef(e),
                         ExpressionRef e    => ExpressionRef(e),
                         AliasRef e         => GetScopeExpression(e.name!),
@@ -351,7 +350,11 @@ namespace Hl7.Cql.Compiler
             {
                 //@formatter:off
                 Abs or
+                    Add or
+                    And or
                     Ceiling or
+                    Concatenate or
+                    ConvertQuantity or
                     ConvertsToBoolean or
                     ConvertsToDate or
                     ConvertsToDateTime or
@@ -363,58 +366,54 @@ namespace Hl7.Cql.Compiler
                     ConvertsToTime or
                     DateFrom or
                     Distinct or
-                    End or
-                    Exists or
-                    Exp or
-                    Flatten or
-                    Floor or
-                    IsFalse or
-                    IsTrue or
-                    Length or
-                    Ln or
-                    Lower or
-                    Not or
-                    NotEqual or
-                    PointFrom or
-                    Precision or
-                    Predecessor or
-                    SingletonFrom or
-                    Start or
-                    Successor or
-                    TimezoneOffsetFrom or
-                    ToList or
-                    Truncate or
-                    Upper or
-                    Width or
-                    Negate or
-                    Add or
-                    And or
-                    Concatenate or
-                    ConvertQuantity or
                     Divide or
+                    End or
                     EndsWith or
                     Equal or
+                    Exists or
+                    Exp or
                     Expand or
                     ExpandValueSet or
+                    Flatten or
+                    Floor or
                     Greater or
                     GreaterOrEqual or
                     HighBoundary or
                     Implies or
                     Indexer or
+                    IsFalse or
+                    IsTrue or
+                    Length or
                     Less or
                     LessOrEqual or
+                    Ln or
                     Log or
                     LowBoundary or
+                    Lower or
                     Matches or
                     Modulo or
                     Multiply or
+                    Negate or
+                    Not or
+                    NotEqual or
                     Or or
+                    PointFrom or
                     Power or
+                    Precision or
+                    Predecessor or
                     ReplaceMatches or
+                    SingletonFrom or
+                    Start or
                     StartsWith or
                     Subtract or
+                    Successor or
+                    TimezoneOffsetFrom or
                     ToList or
+                    ToList or
+                    Truncate or
                     TruncatedDivide or
+                    Upper or
+                    Width or
                     Xor => ((IGetOperands)element).operands,
 
                 CalculateAge or
@@ -1468,30 +1467,6 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException().WithContext(this);
         }
 
-        protected Expression Except(Except e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (_typeResolver.IsListType(left.Type) && _typeResolver.IsListType(right.Type))
-            {
-                return BindCqlOperator(nameof(ICqlOperators.ListExcept), left, right);
-            }
-
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    return BindCqlOperator(nameof(ICqlOperators.IntervalExcept), left, right);
-
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
         protected Expression? Includes(Includes e)
         {
             var left = TranslateArg(e.operand![0]);
@@ -1975,7 +1950,7 @@ namespace Hl7.Cql.Compiler
                             var selectManyCall = BindCqlOperator(nameof(ICqlOperators.SelectMany), @return, selectManyLambda);
                             if (relationship is Without)
                             {
-                                var callExcept = BindCqlOperator(nameof(ICqlOperators.ListExcept), @return, selectManyCall);
+                                var callExcept = BindCqlOperator(nameof(ICqlOperators.Except), @return, selectManyCall);
                                 @return = callExcept;
                             }
                             else

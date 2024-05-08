@@ -3513,7 +3513,7 @@ public class NCQAClaims_1_0_0
 					return bz_;
 				};
 				IEnumerable<Claim> bk_ = context.Operators.SelectMany<Claim, Claim>(bd_, bj_);
-				IEnumerable<Claim> bl_ = context.Operators.ListExcept<Claim>(bd_, bk_);
+				IEnumerable<Claim> bl_ = context.Operators.Except<Claim>(bd_, bk_);
 				Tuple_eaabEEMNTgcTCVVWQFDOgRNO bm_ = new Tuple_eaabEEMNTgcTCVVWQFDOgRNO
 				{
 					InpatientDischarge = bd_,

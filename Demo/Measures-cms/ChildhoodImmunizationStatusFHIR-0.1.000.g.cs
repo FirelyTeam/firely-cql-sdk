@@ -1751,7 +1751,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return j_;
 		};
 		IEnumerable<CqlDate> d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
-		IEnumerable<CqlDate> e_ = context.Operators.ListExcept<CqlDate>(a_, d_);
+		IEnumerable<CqlDate> e_ = context.Operators.Except<CqlDate>(a_, d_);
 
 		return e_;
 	}
@@ -2494,7 +2494,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return j_;
 		};
 		IEnumerable<CqlDate> d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
-		IEnumerable<CqlDate> e_ = context.Operators.ListExcept<CqlDate>(a_, d_);
+		IEnumerable<CqlDate> e_ = context.Operators.Except<CqlDate>(a_, d_);
 
 		return e_;
 	}

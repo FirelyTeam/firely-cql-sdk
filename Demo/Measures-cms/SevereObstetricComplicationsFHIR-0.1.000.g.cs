@@ -1066,7 +1066,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Numerator();
 		IEnumerable<Encounter> b_ = this.Denominator_Exclusion();
-		IEnumerable<Encounter> c_ = context.Operators.ListExcept<Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context.Operators.Except<Encounter>(a_, b_);
 
 		return c_;
 	}

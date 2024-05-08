@@ -631,7 +631,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			return p_;
 		};
 		IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(a_, c_);
-		IEnumerable<Encounter> e_ = context.Operators.ListExcept<Encounter>(a_, d_);
+		IEnumerable<Encounter> e_ = context.Operators.Except<Encounter>(a_, d_);
 		Encounter f_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
 		IEnumerable<Encounter> g_ = context.Operators.Select<Encounter, Encounter>(e_, f_);

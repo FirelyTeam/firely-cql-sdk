@@ -141,7 +141,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Except
-        public IEnumerable<T>? ListExcept<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public IEnumerable<T>? Except<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null)
                 return right;

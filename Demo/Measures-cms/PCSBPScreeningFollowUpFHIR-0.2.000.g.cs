@@ -1473,7 +1473,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		};
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		IEnumerable<Encounter> d_ = this.Encounter_with_Hypertensive_Reading_Within_Year_Prior();
-		IEnumerable<Encounter> e_ = context.Operators.ListExcept<Encounter>(c_, d_);
+		IEnumerable<Encounter> e_ = context.Operators.Except<Encounter>(c_, d_);
 
 		return e_;
 	}

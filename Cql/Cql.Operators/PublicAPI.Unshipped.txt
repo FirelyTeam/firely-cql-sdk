@@ -194,6 +194,14 @@ Hl7.Cql.Operators.ICqlOperators.EndsWith(string! argument, string! suffix) -> bo
 Hl7.Cql.Operators.ICqlOperators.EnumEqualsString(object? enum, string? value) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Equal(object? x, object? y) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Equivalent(object? x, object? y) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, Hl7.Cql.Primitives.CqlInterval<decimal?>? right) -> Hl7.Cql.Primitives.CqlInterval<decimal?>?
+Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>?
+Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>?
+Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>?
+Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>?
+Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<int?>? left, Hl7.Cql.Primitives.CqlInterval<int?>? right) -> Hl7.Cql.Primitives.CqlInterval<int?>?
+Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<long?>? left, Hl7.Cql.Primitives.CqlInterval<long?>? right) -> Hl7.Cql.Primitives.CqlInterval<long?>?
+Hl7.Cql.Operators.ICqlOperators.Except<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.Exists<T>(System.Collections.Generic.IEnumerable<T>! list) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Exp(decimal? argument) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Expand(Hl7.Cql.Primitives.CqlInterval<decimal?>? argument, Hl7.Cql.Primitives.CqlQuantity? per) -> System.Collections.Generic.IEnumerable<decimal?>?
@@ -246,13 +254,6 @@ Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<
 Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlTime? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<int?>? left, int? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<long?>? left, long? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, Hl7.Cql.Primitives.CqlInterval<decimal?>? right) -> Hl7.Cql.Primitives.CqlInterval<decimal?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<int?>? left, Hl7.Cql.Primitives.CqlInterval<int?>? right) -> Hl7.Cql.Primitives.CqlInterval<int?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalExcept(Hl7.Cql.Primitives.CqlInterval<long?>? left, Hl7.Cql.Primitives.CqlInterval<long?>? right) -> Hl7.Cql.Primitives.CqlInterval<long?>?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludedIn<T>(Hl7.Cql.Primitives.CqlInterval<T>? smaller, Hl7.Cql.Primitives.CqlInterval<T>? larger, string! precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludesElement<T>(Hl7.Cql.Primitives.CqlInterval<T>? interval, T t, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludesInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? larger, Hl7.Cql.Primitives.CqlInterval<T>? smaller, string! precision) -> bool?
@@ -281,7 +282,6 @@ Hl7.Cql.Operators.ICqlOperators.LessOrEqual(object? left, object? right) -> bool
 Hl7.Cql.Operators.ICqlOperators.ListContains<T>(System.Collections.Generic.IEnumerable<T>! list, T item) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListEqual<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListEquivalent<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ListExcept<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.ListIncludedInList<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>! right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListIncludesElement<T>(System.Collections.Generic.IEnumerable<T>? left, T right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListIncludesList<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>! right) -> bool?

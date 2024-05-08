@@ -203,7 +203,7 @@ public class ALARACTOQRFHIR_0_1_001
 			return k_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(a_, c_);
-		IEnumerable<Observation> e_ = context.Operators.ListExcept<Observation>(a_, d_);
+		IEnumerable<Observation> e_ = context.Operators.Except<Observation>(a_, d_);
 
 		return e_;
 	}
